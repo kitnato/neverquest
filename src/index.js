@@ -6,7 +6,7 @@ import { RecoilRoot } from "recoil";
 import App from "pages/App";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "index.css";
+import "bootstrap-overrides.css";
 
 ReactDOM.render(
   <React.StrictMode>

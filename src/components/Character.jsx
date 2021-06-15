@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import Card from "react-bootstrap/Card";
 import FormControl from "react-bootstrap/FormControl";
-import ProgressBar from "react-bootstrap/ProgressBar";
 
-import damageIcon from "icons/damage.svg";
+import Progress from "components/Progress";
 import { name } from "state/character/atoms";
 import { damagePerHit, hitpoints, maxHP } from "state/character/selectors";
+import damageIcon from "icons/damage.svg";
 
 export default function Character() {
   const dphValue = useRecoilValue(damagePerHit);
@@ -29,11 +29,10 @@ export default function Character() {
           className="mb-2"
         />
 
-        <ProgressBar
+        <Progress
           variant="danger"
-          now={(hpValue / maxHPValue) * 100}
+          value={(hpValue / maxHPValue) * 100}
           label={`${hpValue}/${maxHPValue}`}
-          className="my-3"
         />
 
         <div className="flex">

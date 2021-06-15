@@ -15,9 +15,15 @@ export default function App() {
       <Header />
 
       <Container>
-        <Location />
+        <Row>
+          <Col>
+            <Location />
+          </Col>
 
-        <Progress />
+          <Col>
+            <Progress />
+          </Col>
+        </Row>
 
         <Row>
           <Col>

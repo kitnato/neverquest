@@ -9,7 +9,7 @@ export default function Location() {
 
   return (
     <div className="d-flex my-3">
-      <img src={compassIcon} alt="Location" height={25} width={25} />
+      <img src={compassIcon} alt="Location" className="nq-icon" />
       <span className="ml-2">{locationValue}</span>
     </div>
   );

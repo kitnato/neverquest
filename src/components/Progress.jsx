@@ -10,7 +10,7 @@ export default function Progress() {
 
   return (
     <ProgressBar
-      now={progressValue}
+      now={(progressValue / progressMaximumValue) * 100}
       label={`${progressValue}/${progressMaximumValue}`}
       className="my-3"
     />

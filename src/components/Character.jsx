@@ -3,15 +3,15 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import Card from "react-bootstrap/Card";
 import FormControl from "react-bootstrap/FormControl";
 
+import Attack from "components/Attack";
 import Progress from "components/Progress";
-import { name } from "state/character/atoms";
-import { damagePerHit, hitpoints, maxHP } from "state/character/selectors";
+import { name, health } from "state/character/atoms";
+import { damagePerHit } from "state/character/selectors";
 import damageIcon from "icons/damage.svg";
 
 export default function Character() {
   const dphValue = useRecoilValue(damagePerHit);
-  const hpValue = useRecoilValue(hitpoints);
-  const maxHPValue = useRecoilValue(maxHP);
+  const healthValue = useRecoilValue(health);
   const nameValue = useRecoilValue(name);
   const setName = useSetRecoilState(name);
   const [isEditing, setEditing] = useState(false);
@@ -31,13 +31,18 @@ export default function Character() {
 
         <Progress
           variant="danger"
-          value={(hpValue / maxHPValue) * 100}
-          label={`${hpValue}/${maxHPValue}`}
+          value={(healthValue.current / healthValue.maximum) * 100}
+          label={`${healthValue.current}/${healthValue.maximum}`}
+          className="mb-3"
         />
 
-        <div className="flex">
-          <img src={damageIcon} alt="Damage" className="mr-2 nq-icon" />
-          {dphValue.min}-{dphValue.max}
+        <div className="d-flex align-items-center justify-content-between">
+          <div>
+            <img src={damageIcon} alt="Damage" className="mr-2 nq-icon" />
+            {dphValue.min}-{dphValue.max}
+          </div>
+
+          <Attack />
         </div>
       </Card.Body>
     </Card>

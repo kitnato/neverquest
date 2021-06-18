@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 export const location = atom({
   key: "location",
-  default: "Unknown",
+  default: "???",
 });
 
 export const progress = atom({

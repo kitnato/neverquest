@@ -1,5 +1,6 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
+import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -20,7 +21,7 @@ export default function App() {
       <Header />
 
       <Container>
-        <Row>
+        <Row className="align-items-center">
           <Col>
             <Location />
           </Col>
@@ -30,6 +31,12 @@ export default function App() {
               value={(progressValue / progressMaximumValue) * 100}
               label={`${progressValue}/${progressMaximumValue}`}
             />
+          </Col>
+
+          <Col className="text-center">
+            <Button variant="primary" disabled>
+              Go to Caravan
+            </Button>
           </Col>
         </Row>
 

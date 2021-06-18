@@ -1,9 +1,14 @@
 import React from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
 
-export default function Progress({ value, label, variant = "primary" }) {
+export default function Progress({
+  value,
+  label,
+  variant = "primary",
+  className = "",
+}) {
   return (
-    <div className="my-3 position-relative">
+    <div className={`position-relative ${className}`}>
       <ProgressBar now={value} variant={variant} />
 
       <small

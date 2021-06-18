@@ -1,40 +1,30 @@
 import { selector } from "recoil";
 
 import {
-  damageTaken,
-  endurance,
-  strength,
+  baseDamage,
+  attackSpeedReduction,
   weapon,
 } from "state/character/atoms";
 
-export const maxHP = selector({
-  key: "maxHP",
+export const attackSpeed = selector({
+  key: "attackSpeed",
   get: ({ get }) => {
-    const enduranceValue = get(endurance);
+    const attackSpeedReductionValue = get(attackSpeedReduction);
+    const weaponValue = get(weapon);
 
-    return enduranceValue.value * 2;
-  },
-});
-
-export const hitpoints = selector({
-  key: "hitpoints",
-  get: ({ get }) => {
-    const maxHPValue = get(maxHP);
-    const damageTakenValue = get(damageTaken);
-
-    return maxHPValue - damageTakenValue;
+    return weaponValue.speed * (1 + attackSpeedReductionValue.current);
   },
 });
 
 export const damagePerHit = selector({
   key: "damagePerHit",
   get: ({ get }) => {
-    const strengthValue = get(strength);
+    const baseDamageValue = get(baseDamage);
     const weaponValue = get(weapon);
 
     return {
-      min: weaponValue.damage.min + strengthValue.value,
-      max: weaponValue.damage.max + strengthValue.value,
+      min: weaponValue.damage.minimum + baseDamageValue.current,
+      max: weaponValue.damage.maximum + baseDamageValue.current,
     };
   },
 });

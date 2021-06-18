@@ -23,6 +23,7 @@ export default function Attack() {
   return (
     <div>
       <Progress
+        variant="warning"
         value={(displayAttack / attackSpeedValue) * 100}
         label={
           elapsedAttack > -1
@@ -31,10 +32,12 @@ export default function Attack() {
         }
         className="mb-2"
       />
+
       <Button
         variant="primary"
         disabled={displayAttack < attackSpeedValue}
         onClick={() => setAttacked(0)}
+        block
       >
         Attack
       </Button>

@@ -8,7 +8,7 @@ export default function Progress({
   className = "",
 }) {
   return (
-    <div className={`position-relative ${className}`}>
+    <div className={`position-relative ${className}`} style={{ width: "100%" }}>
       <ProgressBar now={value} variant={variant} />
 
       <small

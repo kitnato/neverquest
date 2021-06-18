@@ -65,7 +65,7 @@ export const weapon = atom({
     name: "Fists",
     type: "light",
     speed: 1000,
-    damage: { minimum: 1, maximum: 2 },
+    damage: { minimum: 0, maximum: 1 },
   },
 });
 

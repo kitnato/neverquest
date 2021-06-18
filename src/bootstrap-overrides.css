@@ -1,8 +1,13 @@
 img.nq-icon {
- width: 25px;
+ width: 40px;
  height: auto;
 }
 
 .progress  {
   height: 1.25rem;
+}
+
+input.form-control-plaintext {
+  cursor: pointer;
+  outline: none;
 }

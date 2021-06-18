@@ -10,7 +10,10 @@ import Location from "components/Location";
 import Progress from "components/Progress";
 import Character from "components/Character";
 import Encounter from "components/Encounter";
+import WithIcon from "components/WithIcon";
 import { progress, progressMaximum } from "state/atoms";
+
+import progressIcon from "icons/stairs.svg";
 
 export default function App() {
   const progressValue = useRecoilValue(progress);
@@ -22,20 +25,22 @@ export default function App() {
 
       <Container>
         <Row className="align-items-center">
-          <Col>
+          <Col xs={12} md={6}>
             <Location />
           </Col>
 
-          <Col>
-            <Progress
-              value={(progressValue / progressMaximumValue) * 100}
-              label={`${progressValue}/${progressMaximumValue}`}
-            />
+          <Col xs={6} md={4}>
+            <WithIcon icon={progressIcon} alt="Progress">
+              <Progress
+                value={(progressValue / progressMaximumValue) * 100}
+                label={`${progressValue}/${progressMaximumValue}`}
+              />
+            </WithIcon>
           </Col>
 
-          <Col className="text-center">
-            <Button variant="primary" disabled>
-              Go to Caravan
+          <Col xs={6} md={2}>
+            <Button variant="primary" block disabled>
+              Go to ???
             </Button>
           </Col>
         </Row>

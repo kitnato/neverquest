@@ -1,5 +1,5 @@
 export default function formatCountdown(ms) {
-  if (ms < 0 || Number.isNaN(ms)) {
+  if (ms <= 0 || Number.isNaN(ms)) {
     return "--";
   }
 

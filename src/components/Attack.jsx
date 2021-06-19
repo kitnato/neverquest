@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { useRecoilValue } from "recoil";
-import Button from "react-bootstrap/Button";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
+import AttackButton from "components/AttackButton";
 import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
-import { attackSpeed } from "state/character/selectors";
+import { weapon } from "state/character/atoms";
+import { attackSpeed, currentStamina } from "state/character/selectors";
 import formatCountdown from "utilities/formatCountdown";
 
 export default function Attack() {
   const attackSpeedValue = useRecoilValue(attackSpeed);
+  const weaponValue = useRecoilValue(weapon);
+  const setStamina = useSetRecoilState(currentStamina);
   const [elapsedAttack, setAttacked] = useState(-1);
   const displayAttack = elapsedAttack > -1 ? elapsedAttack : attackSpeedValue;
 
@@ -21,26 +24,21 @@ export default function Attack() {
   }, elapsedAttack === -1);
 
   return (
-    <div>
+    <>
       <Progress
         variant="warning"
         value={(displayAttack / attackSpeedValue) * 100}
-        label={
-          elapsedAttack > -1
-            ? formatCountdown(attackSpeedValue - displayAttack)
-            : "Ready"
-        }
+        label={formatCountdown(attackSpeedValue - displayAttack)}
         className="mb-2"
       />
 
-      <Button
-        variant="primary"
-        disabled={displayAttack < attackSpeedValue}
-        onClick={() => setAttacked(0)}
-        block
-      >
-        Attack
-      </Button>
-    </div>
+      <AttackButton
+        isRecharging={displayAttack < attackSpeedValue}
+        onClick={() => {
+          setStamina(-weaponValue.cost);
+          setAttacked(0);
+        }}
+      />
+    </>
   );
 }

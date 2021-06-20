@@ -1,5 +1,6 @@
 import { selector } from "recoil";
 
+import { gameOver } from "state/atoms";
 import {
   attackSpeedReduction,
   damage,
@@ -25,8 +26,8 @@ export const damagePerHit = selector({
     const weaponValue = get(weapon);
 
     return {
-      min: weaponValue.damage.minimum + damageValue.current,
-      max: weaponValue.damage.maximum + damageValue.current,
+      min: weaponValue.damage.min + damageValue.current,
+      max: weaponValue.damage.max + damageValue.current,
     };
   },
 });
@@ -40,10 +41,11 @@ export const currentHealth = selector({
 
     if (newValue < 0) {
       newValue = 0;
+      set(gameOver, true);
     }
 
-    if (newValue > healthValue.maximum) {
-      newValue = healthValue.maximum;
+    if (newValue > healthValue.max) {
+      newValue = healthValue.max;
     }
 
     set(health, { ...healthValue, current: healthValue.current + change });
@@ -68,8 +70,8 @@ export const currentStamina = selector({
       newValue = 0;
     }
 
-    if (newValue > staminaValue.maximum) {
-      newValue = staminaValue.maximum;
+    if (newValue > staminaValue.max) {
+      newValue = staminaValue.max;
     }
 
     set(stamina, { ...staminaValue, current: newValue });

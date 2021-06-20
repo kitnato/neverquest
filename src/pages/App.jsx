@@ -1,24 +1,16 @@
 import React from "react";
-import { useRecoilValue } from "recoil";
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-import Header from "components/Header";
-import Location from "components/Location";
-import Progress from "components/Progress";
 import Character from "components/Character";
 import Encounter from "components/Encounter";
-import WithIcon from "components/WithIcon";
-import { progress, progressMaximum } from "state/atoms";
-
-import progressIcon from "icons/stairs.svg";
+import Header from "components/Header";
+import LevelProgress from "components/LevelProgress";
+import Location from "components/Location";
+import Travel from "components/Travel";
 
 export default function App() {
-  const progressValue = useRecoilValue(progress);
-  const progressMaximumValue = useRecoilValue(progressMaximum);
-
   return (
     <>
       <Header />
@@ -30,18 +22,11 @@ export default function App() {
           </Col>
 
           <Col xs={6} md={4}>
-            <WithIcon icon={progressIcon} alt="Progress">
-              <Progress
-                value={(progressValue / progressMaximumValue) * 100}
-                label={`${progressValue}/${progressMaximumValue}`}
-              />
-            </WithIcon>
+            <LevelProgress />
           </Col>
 
           <Col xs={6} md={2}>
-            <Button variant="primary" block disabled>
-              Go to ???
-            </Button>
+            <Travel />
           </Col>
         </Row>
 

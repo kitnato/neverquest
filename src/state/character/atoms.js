@@ -9,7 +9,7 @@ export const health = atom({
   key: "health",
   default: {
     current: 8,
-    maximum: 8,
+    max: 8,
     increment: 2,
   },
 });
@@ -17,9 +17,9 @@ export const health = atom({
 export const healthRegen = atom({
   key: "healthRegen",
   default: {
-    rate: 1000,
+    rate: 5000,
     amount: 1,
-    increment: 0.5,
+    increment: 1,
   },
 });
 
@@ -34,8 +34,8 @@ export const damage = atom({
 export const stamina = atom({
   key: "stamina",
   default: {
-    current: 5,
-    maximum: 5,
+    current: 4,
+    max: 4,
     increment: 1,
   },
 });
@@ -43,7 +43,7 @@ export const stamina = atom({
 export const staminaRegen = atom({
   key: "staminaRegen",
   default: {
-    rate: 1000,
+    rate: 1500,
     amount: 1,
     increment: 1,
   },
@@ -63,13 +63,18 @@ export const weapon = atom({
   default: {
     name: "Fists",
     type: "light",
-    speed: 1000,
-    cost: 2,
-    damage: { minimum: 0, maximum: 1 },
+    speed: 1200,
+    cost: 1,
+    damage: { min: 0, max: 1 },
   },
+});
+
+export const damageDealt = atom({
+  key: "damageDealt",
+  default: null,
 });
 
 export const damageTaken = atom({
   key: "damageTaken",
-  default: 0,
+  default: null,
 });

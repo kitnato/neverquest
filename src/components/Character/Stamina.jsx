@@ -8,12 +8,12 @@ import WithIcon from "components/WithIcon";
 import useAnimation from "hooks/useAnimation";
 import { stamina, staminaRegen } from "state/character/atoms";
 import { currentStamina } from "state/character/selectors";
-import staminaIcon from "icons/fist.svg";
+import staminaIcon from "icons/lungs.svg";
 import formatCountdown from "utilities/formatCountdown";
 
 export default function Stamina() {
   const staminaValue = useRecoilValue(stamina);
-  const recovering = staminaValue.current < staminaValue.maximum;
+  const recovering = staminaValue.current < staminaValue.max;
   const setStamina = useSetRecoilState(currentStamina);
   const { rate: staminaRegenRate, amount: staminaRegenAmount } =
     useRecoilValue(staminaRegen);
@@ -32,13 +32,13 @@ export default function Stamina() {
   }, !recovering);
 
   return (
-    <Row className="align-items-center" noGutters>
+    <Row className="align-items-center mb-2" noGutters>
       <Col xs={8}>
         <WithIcon icon={staminaIcon} alt="Stamina" className="mr-2">
           <Progress
             variant="success"
-            value={(staminaValue.current / staminaValue.maximum) * 100}
-            label={`${staminaValue.current}/${staminaValue.maximum}`}
+            value={(staminaValue.current / staminaValue.max) * 100}
+            label={`${staminaValue.current}/${staminaValue.max}`}
           />
         </WithIcon>
       </Col>

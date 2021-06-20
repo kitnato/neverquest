@@ -5,14 +5,14 @@ import Col from "react-bootstrap/Col";
 import FormControl from "react-bootstrap/FormControl";
 import Row from "react-bootstrap/Row";
 
-import Attack from "components/Attack";
-import Health from "components/Health";
-import Stamina from "components/Stamina";
+import Attack from "components/Character/Attack";
+import Health from "components/Character/Health";
+import Stamina from "components/Character/Stamina";
 import WithIcon from "components/WithIcon";
 import { name } from "state/character/atoms";
 import { damagePerHit } from "state/character/selectors";
 
-import damageIcon from "icons/power-lightning.svg";
+import damageIcon from "icons/fist.svg";
 import nameIcon from "icons/domino-mask.svg";
 
 export default function Character() {
@@ -40,7 +40,7 @@ export default function Character() {
 
         <Stamina />
 
-        <Row className="align-items-center mt-2" noGutters>
+        <Row className="mt-3" noGutters>
           <Col xs={8}>
             <WithIcon icon={damageIcon} alt="Damage">
               {dphValue.min}-{dphValue.max}

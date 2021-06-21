@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import FormControl from "react-bootstrap/FormControl";
@@ -17,8 +17,7 @@ import nameIcon from "icons/domino-mask.svg";
 
 export default function Character() {
   const dphValue = useRecoilValue(damagePerHit);
-  const nameValue = useRecoilValue(name);
-  const setName = useSetRecoilState(name);
+  const [nameValue, setName] = useRecoilState(name);
   const [isEditing, setEditing] = useState(false);
 
   return (
@@ -28,7 +27,7 @@ export default function Character() {
           <FormControl
             plaintext={!isEditing}
             readOnly={!isEditing}
-            defaultValue={nameValue}
+            value={nameValue}
             onChange={(event) => setName(event.target.value)}
             onClick={() => setEditing(true)}
             onKeyPress={({ charCode }) => charCode === 13 && setEditing(false)}

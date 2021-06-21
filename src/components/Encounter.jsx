@@ -25,7 +25,7 @@ export default function Encounter() {
 
   return (
     <>
-      {modeValue === "exploration" &&
+      {modeValue === "wilderness" &&
         monsterQueue.map(({ id }, index) => (
           <Monster
             key={id}

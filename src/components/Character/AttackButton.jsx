@@ -2,24 +2,23 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import Button from "react-bootstrap/Button";
 
-import { progress } from "state/atoms";
-import { progressMax } from "state/selectors";
+import { engaged } from "state/atoms";
+import { levelCompleted } from "state/selectors";
 import { currentStamina } from "state/character/selectors";
 
 export default function AttackButton({ onClick, isRecharging }) {
   const { canAttack } = useRecoilValue(currentStamina);
-  const progressValue = useRecoilValue(progress);
-  const progressMaxValue = useRecoilValue(progressMax);
-  const levelComplete = progressValue === progressMaxValue;
+  const engagedValue = useRecoilValue(engaged);
+  const levelCompletedValue = useRecoilValue(levelCompleted);
 
   return (
     <Button
       variant="primary"
-      disabled={!canAttack || isRecharging || levelComplete}
+      disabled={!canAttack || isRecharging || levelCompletedValue}
       onClick={onClick}
       block
     >
-      Attack
+      {engagedValue ? "Attack" : "Engage"}
     </Button>
   );
 }

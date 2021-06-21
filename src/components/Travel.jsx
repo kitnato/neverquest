@@ -15,7 +15,7 @@ export default function Travel() {
       return "Go to ???";
     }
 
-    if (modeValue === "exploration") {
+    if (modeValue === "wilderness") {
       return "Go to Caravan";
     }
 

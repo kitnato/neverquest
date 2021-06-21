@@ -32,7 +32,6 @@ export default function Monster({ activeIndex, onDeath }) {
 
   useEffect(() => {
     if (isActive && damageDealtValue !== null) {
-      // eslint-disable-next-line prettier/prettier
       setHealth((h) => {
         let newHealth = h.current - damageDealtValue;
 
@@ -81,9 +80,7 @@ export default function Monster({ activeIndex, onDeath }) {
                   </Col>
 
                   <Col>
-                    <Attack
-                      isAttacking={health.current < health.max && !isDead}
-                    />
+                    <Attack />
                   </Col>
                 </Row>
               </>

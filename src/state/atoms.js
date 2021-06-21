@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import { atom } from "recoil";
 
 export const activeMonster = atom({
@@ -22,10 +23,20 @@ export const progress = atom({
 
 export const mode = atom({
   key: "mode",
-  default: "exploration",
+  default: "wilderness",
 });
 
 export const gameOver = atom({
   key: "gameOver",
   default: false,
+});
+
+export const engaged = atom({
+  key: "engaged",
+  default: false,
+});
+
+export const seed = atom({
+  key: "seed",
+  default: uuidv4(),
 });

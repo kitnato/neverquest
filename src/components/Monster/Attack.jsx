@@ -3,13 +3,14 @@ import { useSetRecoilState, useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
-import { level } from "state/atoms";
+import { engaged, level } from "state/atoms";
 import { damageTaken } from "state/character/atoms";
 import formatCountdown from "utilities/formatCountdown";
 import getDamage from "utilities/getDamage";
 
-export default function Attack({ isAttacking }) {
+export default function Attack() {
   const levelValue = useRecoilValue(level);
+  const engagedValue = useRecoilValue(engaged);
   const setDamageTaken = useSetRecoilState(damageTaken);
   const damagePerHit = { min: levelValue, max: levelValue + 1 };
   const attackSpeedValue = 2000 - 50 * levelValue;
@@ -23,7 +24,7 @@ export default function Attack({ isAttacking }) {
     } else {
       setDeltaAttack(deltaAttack + deltaTime);
     }
-  }, !canAttack || !isAttacking);
+  }, !canAttack || !engagedValue);
 
   useEffect(() => () => setCanAttack(false), []);
 
@@ -32,7 +33,7 @@ export default function Attack({ isAttacking }) {
       variant="warning"
       value={(deltaAttack / attackSpeedValue) * 100}
       label={
-        isAttacking
+        engagedValue
           ? formatCountdown(attackSpeedValue - deltaAttack)
           : "Lurking"
       }

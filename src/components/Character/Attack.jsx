@@ -4,6 +4,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import AttackButton from "components/Character/AttackButton";
 import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
+import { engaged } from "state/atoms";
 import { damageDealt, weapon } from "state/character/atoms";
 import {
   attackSpeed,
@@ -18,6 +19,7 @@ export default function Attack() {
   const weaponValue = useRecoilValue(weapon);
   const dphValue = useRecoilValue(damagePerHit);
   const setStamina = useSetRecoilState(currentStamina);
+  const setEngaged = useSetRecoilState(engaged);
   const setDamageDealt = useSetRecoilState(damageDealt);
   const [deltaAttack, setDeltaAttack] = useState(-1);
   const displayAttack = deltaAttack > -1 ? deltaAttack : attackSpeedValue;
@@ -42,6 +44,7 @@ export default function Attack() {
       <AttackButton
         isRecharging={displayAttack < attackSpeedValue}
         onClick={() => {
+          setEngaged(true);
           setStamina(-weaponValue.cost);
           setDamageDealt(getDamage(dphValue));
           setDeltaAttack(0);

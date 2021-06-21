@@ -1,8 +1,12 @@
 import { useCallback, useEffect, useRef } from "react";
+import { useRecoilValue } from "recoil";
+
+import { gameOver } from "state/atoms";
 
 export default function useAnimation(callback, stop) {
   const requestRef = useRef();
   const previousTimeRef = useRef();
+  const gameOverValue = useRecoilValue(gameOver);
 
   const animate = useCallback(
     (time) => {
@@ -14,7 +18,7 @@ export default function useAnimation(callback, stop) {
   );
 
   useEffect(() => {
-    if (stop) {
+    if (gameOverValue || stop) {
       previousTimeRef.current = null;
       cancelAnimationFrame(requestRef.current);
     } else {
@@ -22,5 +26,5 @@ export default function useAnimation(callback, stop) {
     }
 
     return () => cancelAnimationFrame(requestRef.current);
-  }, [stop, animate]);
+  }, [gameOverValue, stop, animate]);
 }

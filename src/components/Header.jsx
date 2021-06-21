@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -7,12 +7,12 @@ import Navbar from "react-bootstrap/Navbar";
 import { Github } from "react-bootstrap-icons";
 
 import About from "components/About";
+import Reset from "components/Reset";
 import Settings from "components/Settings";
 import { version } from "../../package.json";
 
 export default function Header() {
-  // TODO
-  const handleReset = () => {};
+  const [resetShow, setResetShow] = useState(false);
 
   return (
     <Navbar
@@ -48,9 +48,16 @@ export default function Header() {
               <Github className="mr-1" /> Source
             </Button>
 
-            <Button variant="danger" onClick={handleReset}>
+            <Button variant="danger" onClick={() => setResetShow(true)}>
               Reset
             </Button>
+
+            <Reset
+              show={resetShow}
+              setShow={setResetShow}
+              title="Reset the game?"
+              message="This will wipe all data and restart from the beginning."
+            />
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -1,6 +1,5 @@
 import { selector } from "recoil";
 
-import { gameOver } from "state/atoms";
 import {
   attackSpeedReduction,
   damage,
@@ -41,7 +40,6 @@ export const currentHealth = selector({
 
     if (newValue < 0) {
       newValue = 0;
-      set(gameOver, true);
     }
 
     if (newValue > healthValue.max) {

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import AttackButton from "components/Character/AttackButton";
 import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
-import { engaged } from "state/atoms";
+import { attacking } from "state/atoms";
 import { damageDealt, weapon } from "state/character/atoms";
 import {
   attackSpeed,
@@ -18,38 +18,35 @@ export default function Attack() {
   const attackSpeedValue = useRecoilValue(attackSpeed);
   const weaponValue = useRecoilValue(weapon);
   const dphValue = useRecoilValue(damagePerHit);
-  const setStamina = useSetRecoilState(currentStamina);
-  const setEngaged = useSetRecoilState(engaged);
   const setDamageDealt = useSetRecoilState(damageDealt);
-  const [deltaAttack, setDeltaAttack] = useState(-1);
-  const displayAttack = deltaAttack > -1 ? deltaAttack : attackSpeedValue;
+  const [{ canAttack }, setStamina] = useRecoilState(currentStamina);
+  const [isAttacking, setAttacking] = useRecoilState(attacking);
+  const [deltaAttack, setDeltaAttack] = useState(0);
 
   useAnimation((deltaTime) => {
     if (deltaAttack >= attackSpeedValue) {
-      setDeltaAttack(-1);
-    } else if (deltaAttack > -1) {
+      setDeltaAttack(0);
+      if (canAttack) {
+        setStamina(-weaponValue.cost);
+        setDamageDealt(getDamage(dphValue));
+      } else {
+        setAttacking(false);
+      }
+    } else {
       setDeltaAttack(deltaAttack + deltaTime);
     }
-  }, deltaAttack === -1);
+  }, !isAttacking);
 
   return (
     <>
       <Progress
         variant="warning"
-        value={(displayAttack / attackSpeedValue) * 100}
-        label={formatCountdown(attackSpeedValue - displayAttack)}
+        value={(deltaAttack / attackSpeedValue) * 100}
+        label={formatCountdown(attackSpeedValue - deltaAttack)}
         className="mb-2"
       />
 
-      <AttackButton
-        isRecharging={displayAttack < attackSpeedValue}
-        onClick={() => {
-          setEngaged(true);
-          setStamina(-weaponValue.cost);
-          setDamageDealt(getDamage(dphValue));
-          setDeltaAttack(0);
-        }}
-      />
+      <AttackButton />
     </>
   );
 }

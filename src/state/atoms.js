@@ -31,8 +31,8 @@ export const gameOver = atom({
   default: false,
 });
 
-export const engaged = atom({
-  key: "engaged",
+export const attacking = atom({
+  key: "attacking",
   default: false,
 });
 

@@ -6,7 +6,7 @@ import Modal from "react-bootstrap/Modal";
 
 import {
   activeMonster,
-  engaged,
+  attacking,
   gameOver,
   level,
   location,
@@ -29,7 +29,7 @@ import {
 
 export default function Reset({ title, message, show, setShow }) {
   const resetActiveMonster = useResetRecoilState(activeMonster);
-  const resetEngaged = useResetRecoilState(engaged);
+  const resetEngaged = useResetRecoilState(attacking);
   const resetGameOver = useResetRecoilState(gameOver);
   const resetLevel = useResetRecoilState(level);
   const resetLocation = useResetRecoilState(location);

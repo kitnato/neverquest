@@ -1,24 +1,30 @@
-import React from "react";
-import { useRecoilValue } from "recoil";
+import React, { useEffect } from "react";
+import { useRecoilValue, useRecoilState } from "recoil";
 import Button from "react-bootstrap/Button";
 
-import { engaged } from "state/atoms";
+import { attacking } from "state/atoms";
 import { levelCompleted } from "state/selectors";
-import { currentStamina } from "state/character/selectors";
 
-export default function AttackButton({ onClick, isRecharging }) {
-  const { canAttack } = useRecoilValue(currentStamina);
-  const engagedValue = useRecoilValue(engaged);
-  const levelCompletedValue = useRecoilValue(levelCompleted);
+export default function AttackButton() {
+  const [isAttacking, setAttacking] = useRecoilState(attacking);
+  const isLevelCompleted = useRecoilValue(levelCompleted);
+
+  useEffect(() => {
+    if (isLevelCompleted && isAttacking) {
+      setAttacking(false);
+    }
+  }, [isAttacking, isLevelCompleted, setAttacking]);
 
   return (
     <Button
       variant="primary"
-      disabled={!canAttack || isRecharging || levelCompletedValue}
-      onClick={onClick}
+      disabled={isAttacking || isLevelCompleted}
+      onClick={() => setAttacking(!isAttacking)}
       block
     >
-      {engagedValue ? "Attack" : "Engage"}
+      {!isAttacking && !isLevelCompleted && "Attack"}
+      {isAttacking && "Attacking"}
+      {isLevelCompleted && "Resting"}
     </Button>
   );
 }

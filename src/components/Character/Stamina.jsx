@@ -1,35 +1,16 @@
-import React, { useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import React from "react";
+import { useRecoilValue } from "recoil";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 import Progress from "components/Progress";
 import WithIcon from "components/WithIcon";
-import useAnimation from "hooks/useAnimation";
-import { stamina, staminaRegen } from "state/character/atoms";
-import { currentStamina } from "state/character/selectors";
+import StaminaRegen from "components/Character/StaminaRegen";
+import { stamina } from "state/character/atoms";
 import staminaIcon from "icons/lungs.svg";
-import formatCountdown from "utilities/formatCountdown";
 
 export default function Stamina() {
   const staminaValue = useRecoilValue(stamina);
-  const recovering = staminaValue.current < staminaValue.max;
-  const setStamina = useSetRecoilState(currentStamina);
-  const { rate: staminaRegenRate, amount: staminaRegenAmount } =
-    useRecoilValue(staminaRegen);
-  const [elapsedStaminaRegen, setStaminaRegen] = useState(0);
-  const displayStaminaRegen = recovering
-    ? elapsedStaminaRegen
-    : staminaRegenRate;
-
-  useAnimation((deltaTime) => {
-    if (elapsedStaminaRegen >= staminaRegenRate) {
-      setStamina(staminaRegenAmount);
-      setStaminaRegen(0);
-    } else if (recovering) {
-      setStaminaRegen(elapsedStaminaRegen + deltaTime);
-    }
-  }, !recovering);
 
   return (
     <Row className="align-items-center mb-2" noGutters>
@@ -44,11 +25,7 @@ export default function Stamina() {
       </Col>
 
       <Col xs={4}>
-        <Progress
-          variant="warning"
-          value={(displayStaminaRegen / staminaRegenRate) * 100}
-          label={formatCountdown(staminaRegenRate - displayStaminaRegen)}
-        />
+        <StaminaRegen />
       </Col>
     </Row>
   );

@@ -15,8 +15,8 @@ export default function WithIcon({
         alt={alt}
         className="mr-2"
         style={{
-          width: icon === TRANSPARENT_PIXEL ? 0 : 40,
-          height: 40,
+          width: icon === TRANSPARENT_PIXEL ? 0 : "auto",
+          height: 35,
         }}
       />
 

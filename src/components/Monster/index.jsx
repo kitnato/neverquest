@@ -1,91 +1,43 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useRecoilValue, useRecoilState } from "recoil";
-import { v4 as uuidv4 } from "uuid";
+import React from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { useRecoilValue } from "recoil";
 
 import Attack from "components/Monster/Attack";
-import Loot from "components/Monster/Loot";
-import Progress from "components/Progress";
-import WithIcon from "components/WithIcon";
+import Damage from "components/Monster/Damage";
+import Health from "components/Monster/Health";
+import Name from "components/Monster/Name";
+
 import { activeMonster, level } from "state/atoms";
-import { damageDealt } from "state/character/atoms";
 
-import damageIcon from "icons/wolverine-claws.svg";
-import deadIcon from "icons/crossed-bones.svg";
-import healthIcon from "icons/hospital-cross.svg";
-import monsterIcon from "icons/carnivore-mouth.svg";
-
-export default function Monster({ activeIndex, onDeath }) {
+export default function Monster({ id }) {
+  const activeMonsterId = useRecoilValue(activeMonster);
   const levelValue = useRecoilValue(level);
-  const activeMonsterValue = useRecoilValue(activeMonster);
-  const [damageDealtValue, setDamageDealt] = useRecoilState(damageDealt);
+
+  if (id !== activeMonsterId) {
+    return null;
+  }
+
   const damagePerHit = { min: levelValue, max: levelValue + 1 };
-  const name = useRef(uuidv4());
-  const [health, setHealth] = useState({
-    current: levelValue + 4,
-    max: levelValue + 4,
-  });
-  const isDead = health.current === 0;
-  const isActive = activeIndex === activeMonsterValue;
-
-  useEffect(() => {
-    if (isActive && damageDealtValue !== null) {
-      setHealth((h) => {
-        let newHealth = h.current - damageDealtValue;
-
-        if (newHealth < 0) {
-          newHealth = 0;
-        }
-
-        return { ...h, current: newHealth };
-      });
-      setDamageDealt(null);
-    }
-  }, [damageDealtValue, isActive, setDamageDealt]);
-
-  useEffect(() => {
-    if (isDead) {
-      onDeath();
-    }
-  }, [health, isDead, onDeath]);
 
   return (
-    <Card className="mb-2">
+    <Card>
       <Card.Body>
-        <WithIcon icon={isDead ? deadIcon : monsterIcon} alt="Monster">
-          {name.current}
-        </WithIcon>
+        <Name />
 
         <div className="mt-3">
-          <>
-            {isDead && <Loot />}
+          <Health />
 
-            {isActive && !isDead && (
-              <>
-                <WithIcon icon={healthIcon} alt="Monster health">
-                  <Progress
-                    variant="danger"
-                    value={(health.current / health.max) * 100}
-                    label={`${health.current}/${health.max}`}
-                  />
-                </WithIcon>
+          <Row className="align-items-center mt-2">
+            <Col>
+              <Damage damagePerHit={damagePerHit} />
+            </Col>
 
-                <Row className="align-items-center mt-2">
-                  <Col>
-                    <WithIcon icon={damageIcon} alt="Monster damage">
-                      {damagePerHit.min}-{damagePerHit.max}
-                    </WithIcon>
-                  </Col>
-
-                  <Col>
-                    <Attack />
-                  </Col>
-                </Row>
-              </>
-            )}
-          </>
+            <Col>
+              <Attack damagePerHit={damagePerHit} />
+            </Col>
+          </Row>
         </div>
       </Card.Body>
     </Card>

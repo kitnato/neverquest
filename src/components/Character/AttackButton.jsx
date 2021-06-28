@@ -22,9 +22,7 @@ export default function AttackButton() {
       onClick={() => setAttacking(!isAttacking)}
       block
     >
-      {!isAttacking && !isLevelCompleted && "Attack"}
-      {isAttacking && "Attacking"}
-      {isLevelCompleted && "Resting"}
+      {isAttacking ? "Attacking" : "Attack"}
     </Button>
   );
 }

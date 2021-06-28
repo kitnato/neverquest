@@ -1,9 +1,108 @@
 import { v4 as uuidv4 } from "uuid";
 import { atom } from "recoil";
 
+// CHARACTER
+
+export const name = atom({
+  key: "name",
+  default: "???",
+});
+
+export const health = atom({
+  key: "health",
+  default: {
+    current: 8,
+    max: 8,
+    increment: 2,
+  },
+});
+
+export const healthRegen = atom({
+  key: "healthRegen",
+  default: {
+    rate: 5000,
+    current: 1,
+    increment: 1,
+  },
+});
+
+export const damage = atom({
+  key: "damage",
+  default: {
+    current: 1,
+    increment: 1,
+  },
+});
+
+export const stamina = atom({
+  key: "stamina",
+  default: {
+    current: 4,
+    max: 4,
+    increment: 1,
+  },
+});
+
+export const staminaRegen = atom({
+  key: "staminaRegen",
+  default: {
+    rate: 1750,
+    current: 1,
+    increment: 1,
+  },
+});
+
+export const dodge = atom({
+  key: "dodge",
+  default: {
+    current: 0,
+    increment: 0.01,
+  },
+});
+
+export const attackSpeedReduction = atom({
+  key: "attackSpeedReduction",
+  default: {
+    current: 0,
+    // Percentage
+    increment: 0.01,
+  },
+});
+
+export const weapon = atom({
+  key: "weapon",
+  default: {
+    name: "Fists",
+    type: "light",
+    speed: 1200,
+    cost: 1,
+    damage: { min: 0, max: 1 },
+  },
+});
+
+export const armor = atom({
+  key: "armor",
+  default: {
+    name: null,
+    value: 0,
+  },
+});
+
+export const shield = atom({
+  key: "shield",
+  default: {
+    name: null,
+    block: 0,
+    armor: 0,
+    stagger: 0,
+  },
+});
+
+// WORLD
+
 export const activeMonster = atom({
   key: "activeMonster",
-  default: 0,
+  default: null,
 });
 
 export const level = atom({
@@ -39,4 +138,14 @@ export const attacking = atom({
 export const seed = atom({
   key: "seed",
   default: uuidv4(),
+});
+
+export const damageDealt = atom({
+  key: "damageDealt",
+  default: null,
+});
+
+export const damageTaken = atom({
+  key: "damageTaken",
+  default: null,
 });

@@ -1,29 +1,30 @@
 import React, { useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
-import { health, healthRegen } from "state/character/atoms";
-import { currentHealth } from "state/character/selectors";
+import { health, healthRegen } from "state/atoms";
 import formatCountdown from "utilities/formatCountdown";
 
-export default function Health() {
-  const healthValue = useRecoilValue(health);
-  const setHealth = useSetRecoilState(currentHealth);
-  const { rate: healthRegenRate, amount: healthRegenAmount } =
+export default function HealthRegen() {
+  const [healthValue, setHealth] = useRecoilState(health);
+  const { rate: healthRegenRate, current: healthRegenAmount } =
     useRecoilValue(healthRegen);
   const [deltaHealthRegen, setDeltaHealthRegen] = useState(0);
-  const recovering = healthValue.current < healthValue.max;
-  const displayHealthRegen = recovering ? deltaHealthRegen : healthRegenRate;
+  const isRecovering = healthValue.current < healthValue.max;
+  const displayHealthRegen = isRecovering ? deltaHealthRegen : healthRegenRate;
 
   useAnimation((deltaTime) => {
     if (deltaHealthRegen >= healthRegenRate) {
-      setHealth(healthRegenAmount);
+      setHealth({
+        ...healthValue,
+        current: healthValue.current + healthRegenAmount,
+      });
       setDeltaHealthRegen(0);
-    } else if (recovering) {
+    } else {
       setDeltaHealthRegen(deltaHealthRegen + deltaTime);
     }
-  }, !recovering);
+  }, !isRecovering);
 
   return (
     <Progress

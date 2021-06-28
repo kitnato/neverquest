@@ -1,53 +1,69 @@
-import React, { useState } from "react";
-import { useRecoilValue, useRecoilState } from "recoil";
+import React from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
-import FormControl from "react-bootstrap/FormControl";
 import Row from "react-bootstrap/Row";
 
+import Armor from "components/Character/Armor";
 import Attack from "components/Character/Attack";
+import AttackButton from "components/Character/AttackButton";
+import Block from "components/Character/Block";
+import Damage from "components/Character/Damage";
+import Dodge from "components/Character/Dodge";
 import Health from "components/Character/Health";
+import HealthRegen from "components/Character/HealthRegen";
+import Name from "components/Character/Name";
 import Stamina from "components/Character/Stamina";
-import WithIcon from "components/WithIcon";
-import { name } from "state/character/atoms";
-import { damagePerHit } from "state/character/selectors";
-
-import damageIcon from "icons/fist.svg";
-import nameIcon from "icons/domino-mask.svg";
+import StaminaRegen from "components/Character/StaminaRegen";
 
 export default function Character() {
-  const dphValue = useRecoilValue(damagePerHit);
-  const [nameValue, setName] = useRecoilState(name);
-  const [isEditing, setEditing] = useState(false);
-
   return (
     <Card>
       <Card.Body>
-        <WithIcon icon={nameIcon} alt="Name" className="mb-3">
-          <FormControl
-            plaintext={!isEditing}
-            readOnly={!isEditing}
-            value={nameValue}
-            onChange={(event) => setName(event.target.value)}
-            onClick={() => setEditing(true)}
-            onKeyPress={({ charCode }) => charCode === 13 && setEditing(false)}
-            onBlur={() => setEditing(false)}
-          />
-        </WithIcon>
+        <div className="mb-3">
+          <Name />
+        </div>
 
-        <Health />
-
-        <Stamina />
-
-        <Row className="mt-3" noGutters>
+        <Row className="align-items-center mb-3" noGutters>
           <Col xs={8}>
-            <WithIcon icon={damageIcon} alt="Damage">
-              {dphValue.min}-{dphValue.max}
-            </WithIcon>
+            <Health />
+          </Col>
+
+          <Col xs={4}>
+            <HealthRegen />
+          </Col>
+        </Row>
+
+        <Row className="align-items-center mb-3" noGutters>
+          <Col xs={8}>
+            <Stamina />
+          </Col>
+
+          <Col xs={4}>
+            <StaminaRegen />
+          </Col>
+        </Row>
+
+        <Row noGutters>
+          <Col xs={2}>
+            <Damage />
+          </Col>
+
+          <Col xs={2}>
+            <Armor />
+          </Col>
+
+          <Col xs={2}>
+            <Block />
+          </Col>
+
+          <Col xs={2}>
+            <Dodge />
           </Col>
 
           <Col xs={4}>
             <Attack />
+
+            <AttackButton />
           </Col>
         </Row>
       </Card.Body>

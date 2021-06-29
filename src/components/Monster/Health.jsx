@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
 import WithIcon from "components/WithIcon";
-import { activeMonster, damageDealt, level, progress } from "state/atoms";
+import { damageDealt, level } from "state/atoms";
 
 import healthIcon from "icons/hospital-cross.svg";
 
-export default function MonsterHealth() {
+export default function MonsterHealth({ onDeath }) {
   const levelValue = useRecoilValue(level);
   const [damageDealtValue, setDamageDealt] = useRecoilState(damageDealt);
-  const setActiveMonster = useSetRecoilState(activeMonster);
-  const setProgress = useSetRecoilState(progress);
   const [health, setHealth] = useState({
     current: levelValue + 4,
     max: levelValue + 4,
@@ -35,10 +33,9 @@ export default function MonsterHealth() {
 
   useEffect(() => {
     if (isDead) {
-      setProgress((progressValue) => progressValue + 1);
-      setActiveMonster(null);
+      onDeath();
     }
-  }, [isDead, setActiveMonster, setProgress]);
+  }, [isDead, onDeath]);
 
   return (
     <WithIcon icon={healthIcon} alt="Monster health">

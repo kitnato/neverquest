@@ -1,15 +1,21 @@
 import { selector } from "recoil";
 
 import {
+  aether,
+  aetherLoot,
   armor,
   attacking,
   attackSpeedReduction,
+  coins,
+  coinsLoot,
   damage,
   damageDealt,
   health,
   gameOver,
   level,
   progress,
+  scrap,
+  scrapLoot,
   shield,
   stamina,
   weapon,
@@ -106,5 +112,33 @@ export const levelCompleted = selector({
     const progressMaxValue = get(progressMax);
 
     return progressValue === progressMaxValue;
+  },
+});
+
+export const looting = selector({
+  key: "looting",
+  get: ({ get }) => {
+    const aetherLootValue = get(aetherLoot);
+    const coinsLootValue = get(coinsLoot);
+    const scrapLootValue = get(scrapLoot);
+
+    return !(
+      aetherLootValue === null &&
+      coinsLootValue === null &&
+      scrapLootValue === null
+    );
+  },
+  set: ({ get, set }) => {
+    const aetherLootValue = get(aetherLoot);
+    const coinsLootValue = get(coinsLoot);
+    const scrapLootValue = get(scrapLoot);
+
+    set(aether, (currentAether) => (currentAether || 0) + aetherLootValue);
+    set(coins, (currentCoins) => (currentCoins || 0) + coinsLootValue);
+    set(scrap, (currentScrap) => (currentScrap || 0) + scrapLootValue);
+
+    set(aetherLoot, null);
+    set(coinsLoot, null);
+    set(scrapLoot, null);
   },
 });

@@ -98,6 +98,31 @@ export const shield = atom({
   },
 });
 
+export const aether = atom({
+  key: "aether",
+  default: 0,
+});
+
+export const coins = atom({
+  key: "coins",
+  default: 0,
+});
+
+export const experience = atom({
+  key: "experience",
+  default: 0,
+});
+
+export const looted = atom({
+  key: "looted",
+  default: false,
+});
+
+export const scrap = atom({
+  key: "scrap",
+  default: 0,
+});
+
 // WORLD
 
 export const activeMonster = atom({
@@ -147,5 +172,22 @@ export const damageDealt = atom({
 
 export const damageTaken = atom({
   key: "damageTaken",
+  default: null,
+});
+
+// LOOT
+
+export const aetherLoot = atom({
+  key: "aetherLoot",
+  default: null,
+});
+
+export const coinsLoot = atom({
+  key: "coinsLoot",
+  default: null,
+});
+
+export const scrapLoot = atom({
+  key: "scrapLoot",
   default: null,
 });

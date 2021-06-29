@@ -9,9 +9,11 @@ import AttackButton from "components/Character/AttackButton";
 import Block from "components/Character/Block";
 import Damage from "components/Character/Damage";
 import Dodge from "components/Character/Dodge";
+import Experience from "components/Character/Experience";
 import Health from "components/Character/Health";
 import HealthRegen from "components/Character/HealthRegen";
 import Name from "components/Character/Name";
+import Resources from "components/Character/Resources";
 import Stamina from "components/Character/Stamina";
 import StaminaRegen from "components/Character/StaminaRegen";
 
@@ -23,7 +25,7 @@ export default function Character() {
           <Name />
         </div>
 
-        <Row className="align-items-center mb-3" noGutters>
+        <Row className="mb-3" noGutters>
           <Col xs={8}>
             <Health />
           </Col>
@@ -33,7 +35,7 @@ export default function Character() {
           </Col>
         </Row>
 
-        <Row className="align-items-center mb-3" noGutters>
+        <Row className="mb-3" noGutters>
           <Col xs={8}>
             <Stamina />
           </Col>
@@ -43,7 +45,7 @@ export default function Character() {
           </Col>
         </Row>
 
-        <Row noGutters>
+        <Row className="mb-3" noGutters>
           <Col xs={2}>
             <Damage />
           </Col>
@@ -65,6 +67,14 @@ export default function Character() {
 
             <AttackButton />
           </Col>
+        </Row>
+
+        <Row>
+          <Col>
+            <Experience />
+          </Col>
+
+          <Resources />
         </Row>
       </Card.Body>
     </Card>

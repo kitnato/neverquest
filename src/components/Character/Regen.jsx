@@ -8,27 +8,28 @@ import formatCountdown from "utilities/formatCountdown";
 export default function Regen({ resource, regen }) {
   const [resourceValue, setResource] = useRecoilState(resource);
   const { rate, current: regenValue } = useRecoilValue(regen);
-  const [elapsedRegen, setRegen] = useState(0);
+  const [deltaRegen, setRegen] = useState(rate);
   const isRecovering = resourceValue.current < resourceValue.max;
-  const displayRegen = isRecovering ? elapsedRegen : rate;
 
   useAnimation((deltaTime) => {
-    if (elapsedRegen >= rate) {
+    if (deltaRegen >= rate) {
+      const newResourceValue = resourceValue.current + regenValue;
+
       setResource({
         ...resourceValue,
-        current: resourceValue.current + regenValue,
+        current: newResourceValue,
       });
       setRegen(0);
     } else {
-      setRegen(elapsedRegen + deltaTime);
+      setRegen(deltaRegen + deltaTime);
     }
   }, !isRecovering);
 
   return (
     <Progress
       variant="warning"
-      value={(displayRegen / rate) * 100}
-      label={formatCountdown(rate - displayRegen)}
+      value={((isRecovering ? deltaRegen : rate) / rate) * 100}
+      label={isRecovering ? formatCountdown(rate - deltaRegen) : "Rested"}
     />
   );
 }

@@ -17,17 +17,17 @@ export default function Encounter() {
         <>
           <Wilderness />
 
-          <div className="mt-3">
-            <Loot />
-          </div>
+          <Loot />
         </>
       )}
 
-      {modeValue === "caravan" && <Caravan />}
+      {modeValue === "caravan" && (
+        <div className="mb-3">
+          <Caravan />
+        </div>
+      )}
 
-      <div className="mt-3">
-        <Travel />
-      </div>
+      <Travel />
     </>
   );
 }

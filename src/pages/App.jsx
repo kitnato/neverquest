@@ -23,7 +23,7 @@ export default function App() {
       <Header />
 
       <Container>
-        <Row className="align-items-center">
+        <Row className="align-items-center mb-3">
           <Col>
             <Location />
           </Col>

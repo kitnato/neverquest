@@ -11,8 +11,8 @@ export default function Attack() {
   const attackSpeedValue = useRecoilValue(attackSpeed);
   const setAttack = useSetRecoilState(attack);
   const isAttacking = useRecoilValue(attacking);
-  const [deltaAttack, setDeltaAttack] = useState(0);
-  const displayAttackRate = deltaAttack > 0 ? deltaAttack : attackSpeedValue;
+  const [deltaAttack, setDeltaAttack] = useState(attackSpeedValue);
+  const isRecovering = isAttacking || deltaAttack < attackSpeedValue;
 
   useAnimation((deltaTime) => {
     if (deltaAttack >= attackSpeedValue) {
@@ -21,14 +21,15 @@ export default function Attack() {
     } else {
       setDeltaAttack(deltaAttack + deltaTime);
     }
-  }, !isAttacking);
+  }, !isRecovering);
 
   return (
     <Progress
       variant="warning"
-      value={(displayAttackRate / attackSpeedValue) * 100}
-      label={formatCountdown(attackSpeedValue - displayAttackRate)}
-      className="mb-2"
+      value={(deltaAttack / attackSpeedValue) * 100}
+      label={
+        isRecovering ? formatCountdown(attackSpeedValue - deltaAttack) : "Ready"
+      }
     />
   );
 }

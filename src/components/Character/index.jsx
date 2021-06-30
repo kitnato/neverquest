@@ -60,7 +60,9 @@ export default function Character() {
         </Row>
 
         <div className="mt-3">
-          <Attack />
+          <div className="mb-2">
+            <Attack />
+          </div>
 
           <AttackButton />
         </div>

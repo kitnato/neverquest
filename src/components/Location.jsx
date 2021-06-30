@@ -9,7 +9,7 @@ export default function Location() {
   const locationValue = useRecoilValue(location);
 
   return (
-    <WithIcon icon={compassIcon} alt="Location" className="my-3">
+    <WithIcon icon={compassIcon} alt="Location">
       <span>{locationValue}</span>
     </WithIcon>
   );

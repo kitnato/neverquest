@@ -8,10 +8,11 @@ import { levelCompleted } from "state/selectors";
 export default function Travel() {
   const levelValue = useRecoilValue(level);
   const modeValue = useRecoilValue(mode);
-  const destination = (() => (levelValue === 1 ? "???" : modeValue))();
+  const isLevelCompleted = useRecoilValue(levelCompleted);
+  const destination = levelValue === 1 ? "???" : modeValue;
 
   return (
-    <Button variant="primary" disabled={!levelCompleted} block>
+    <Button className={!isLevelCompleted && "d-none"} variant="primary" block>
       Go to {destination}
     </Button>
   );

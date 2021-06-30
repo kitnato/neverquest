@@ -10,15 +10,7 @@ export default function WithIcon({
 }) {
   return (
     <div className={`d-flex align-items-center ${className}`}>
-      <img
-        src={icon}
-        alt={alt}
-        className="mr-2"
-        style={{
-          width: icon === TRANSPARENT_PIXEL ? 0 : "auto",
-          height: 35,
-        }}
-      />
+      <img src={icon} alt={alt} className="mr-2" style={{ height: 35 }} />
 
       {children}
     </div>

@@ -10,7 +10,7 @@ export default function Health() {
   const healthValue = useRecoilValue(health);
 
   return (
-    <WithIcon icon={healthIcon} alt="Health" className="mr-2">
+    <WithIcon icon={healthIcon} alt="Health">
       <Progress
         variant="danger"
         value={(healthValue.current / healthValue.max) * 100}

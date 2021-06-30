@@ -10,7 +10,6 @@ import Header from "components/Header";
 import LevelProgress from "components/LevelProgress";
 import Location from "components/Location";
 import Reset from "components/Reset";
-import Travel from "components/Travel";
 
 import { gameOver, seed } from "state/atoms";
 
@@ -25,16 +24,12 @@ export default function App() {
 
       <Container>
         <Row className="align-items-center">
-          <Col xs={12} md={6}>
+          <Col>
             <Location />
           </Col>
 
-          <Col xs={6} md={4}>
+          <Col>
             <LevelProgress />
-          </Col>
-
-          <Col xs={6} md={2}>
-            <Travel />
           </Col>
         </Row>
 

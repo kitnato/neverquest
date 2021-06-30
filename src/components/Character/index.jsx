@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
+import WithIcon from "components/WithIcon";
 import Armor from "components/Character/Armor";
 import Attack from "components/Character/Attack";
 import AttackButton from "components/Character/AttackButton";
@@ -11,65 +12,60 @@ import Damage from "components/Character/Damage";
 import Dodge from "components/Character/Dodge";
 import Experience from "components/Character/Experience";
 import Health from "components/Character/Health";
-import HealthRegen from "components/Character/HealthRegen";
 import Name from "components/Character/Name";
+import Regen from "components/Character/Regen";
 import Resources from "components/Character/Resources";
 import Stamina from "components/Character/Stamina";
-import StaminaRegen from "components/Character/StaminaRegen";
+
+import { health, healthRegen, stamina, staminaRegen } from "state/atoms";
 
 export default function Character() {
   return (
     <Card>
       <Card.Body>
-        <div className="mb-3">
-          <Name />
+        <Name />
+
+        <div className="mt-3">
+          <Health />
+
+          <WithIcon>
+            <Regen resource={health} regen={healthRegen} />
+          </WithIcon>
         </div>
 
-        <Row className="mb-3" noGutters>
-          <Col xs={8}>
-            <Health />
-          </Col>
+        <div className="mt-3">
+          <Stamina />
 
-          <Col xs={4}>
-            <HealthRegen />
-          </Col>
-        </Row>
+          <WithIcon>
+            <Regen resource={stamina} regen={staminaRegen} />
+          </WithIcon>
+        </div>
 
-        <Row className="mb-3" noGutters>
-          <Col xs={8}>
-            <Stamina />
-          </Col>
-
-          <Col xs={4}>
-            <StaminaRegen />
-          </Col>
-        </Row>
-
-        <Row className="mb-3" noGutters>
-          <Col xs={2}>
+        <Row className="mt-3">
+          <Col>
             <Damage />
           </Col>
 
-          <Col xs={2}>
+          <Col>
             <Armor />
           </Col>
 
-          <Col xs={2}>
+          <Col>
             <Block />
           </Col>
 
-          <Col xs={2}>
+          <Col>
             <Dodge />
-          </Col>
-
-          <Col xs={4}>
-            <Attack />
-
-            <AttackButton />
           </Col>
         </Row>
 
-        <Row>
+        <div className="mt-3">
+          <Attack />
+
+          <AttackButton />
+        </div>
+
+        <Row className="mt-3">
           <Col>
             <Experience />
           </Col>

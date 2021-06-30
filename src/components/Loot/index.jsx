@@ -7,11 +7,11 @@ import Row from "react-bootstrap/Row";
 
 import Display from "components/Loot/Display";
 
-import { attacking, looted } from "state/atoms";
-import { looting } from "state/selectors";
+import { looted } from "state/atoms";
+import { levelCompleted, looting } from "state/selectors";
 
 export default function Loot() {
-  const isAttacking = useRecoilValue(attacking);
+  const isLevelCompleted = useRecoilValue(levelCompleted);
   const [isLootPresent, setLooting] = useRecoilState(looting);
   const setLooted = useSetRecoilState(looted);
 
@@ -29,8 +29,8 @@ export default function Loot() {
 
             <Col>
               <Button
+                className={!isLevelCompleted && "d-none"}
                 variant="outline-primary"
-                disabled={isAttacking}
                 onClick={() => handleCollect()}
               >
                 Collect

@@ -6,7 +6,7 @@ import Monster from "components/Monster";
 import { activeMonster, progress } from "state/atoms";
 import { progressMax } from "state/selectors";
 
-export default function Wilderness({ className }) {
+export default function Wilderness() {
   const [activeMonsterId, setActiveMonster] = useRecoilState(activeMonster);
   const progressMaxValue = useRecoilValue(progressMax);
   const progressValue = useRecoilValue(progress);
@@ -24,9 +24,5 @@ export default function Wilderness({ className }) {
     }
   }, [activeMonsterId, monster.id, setActiveMonster]);
 
-  return monster.id ? (
-    <div className={className}>
-      <monster.Component id={monster.id} />
-    </div>
-  ) : null;
+  return monster.id ? <monster.Component id={monster.id} /> : null;
 }

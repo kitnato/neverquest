@@ -10,7 +10,7 @@ export default function Stamina() {
   const staminaValue = useRecoilValue(stamina);
 
   return (
-    <WithIcon icon={staminaIcon} alt="Stamina" className="mr-2">
+    <WithIcon icon={staminaIcon} alt="Stamina">
       <Progress
         variant="success"
         value={(staminaValue.current / staminaValue.max) * 100}

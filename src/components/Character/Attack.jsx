@@ -25,11 +25,13 @@ export default function Attack() {
 
   return (
     <Progress
-      variant="warning"
-      value={(deltaAttack / attackSpeedValue) * 100}
+      attached="above"
       label={
         isRecovering ? formatCountdown(attackSpeedValue - deltaAttack) : "Ready"
       }
+      size="tiny"
+      value={(deltaAttack / attackSpeedValue) * 100}
+      variant="warning"
     />
   );
 }

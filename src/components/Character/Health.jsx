@@ -2,8 +2,10 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
+import Regen from "components/Character/Regen";
 import WithIcon from "components/WithIcon";
-import { health } from "state/atoms";
+import { health, healthRegen } from "state/atoms";
+
 import healthIcon from "icons/hospital-cross.svg";
 
 export default function Health() {
@@ -11,11 +13,16 @@ export default function Health() {
 
   return (
     <WithIcon icon={healthIcon} alt="Health">
-      <Progress
-        variant="danger"
-        value={(healthValue.current / healthValue.max) * 100}
-        label={`${healthValue.current}/${healthValue.max}`}
-      />
+      <div style={{ width: "100%" }}>
+        <Progress
+          attached="below"
+          label={`${healthValue.current}/${healthValue.max}`}
+          value={(healthValue.current / healthValue.max) * 100}
+          variant="danger"
+        />
+
+        <Regen resource={health} regen={healthRegen} />
+      </div>
     </WithIcon>
   );
 }

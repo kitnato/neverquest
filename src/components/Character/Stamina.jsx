@@ -2,8 +2,10 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
+import Regen from "components/Character/Regen";
 import WithIcon from "components/WithIcon";
-import { stamina } from "state/atoms";
+import { stamina, staminaRegen } from "state/atoms";
+
 import staminaIcon from "icons/lungs.svg";
 
 export default function Stamina() {
@@ -11,11 +13,16 @@ export default function Stamina() {
 
   return (
     <WithIcon icon={staminaIcon} alt="Stamina">
-      <Progress
-        variant="success"
-        value={(staminaValue.current / staminaValue.max) * 100}
-        label={`${staminaValue.current}/${staminaValue.max}`}
-      />
+      <div style={{ width: "100%" }}>
+        <Progress
+          attached="below"
+          label={`${staminaValue.current}/${staminaValue.max}`}
+          value={(staminaValue.current / staminaValue.max) * 100}
+          variant="success"
+        />
+
+        <Regen resource={stamina} regen={staminaRegen} />
+      </div>
     </WithIcon>
   );
 }

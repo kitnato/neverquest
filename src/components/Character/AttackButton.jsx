@@ -17,10 +17,11 @@ export default function AttackButton() {
 
   return (
     <Button
-      variant="primary"
+      block
       disabled={isAttacking || isLevelCompleted}
       onClick={() => setAttacking(!isAttacking)}
-      block
+      style={{ borderBottomLeftRadius: 0, borderBottomRightRadius: 0 }}
+      variant="primary"
     >
       {isAttacking ? "Attacking" : "Attack"}
     </Button>

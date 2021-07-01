@@ -27,9 +27,11 @@ export default function Regen({ resource, regen }) {
 
   return (
     <Progress
-      variant="warning"
-      value={((isRecovering ? deltaRegen : rate) / rate) * 100}
+      attached="above"
       label={isRecovering ? formatCountdown(rate - deltaRegen) : "Rested"}
+      value={((isRecovering ? deltaRegen : rate) / rate) * 100}
+      size="tiny"
+      variant="warning"
     />
   );
 }

@@ -17,8 +17,9 @@ export default function LevelProgress() {
       <span className="mr-3">{levelValue}</span>
 
       <Progress
-        value={(progressValue / progressMaxValue) * 100}
         label={`${progressValue}/${progressMaxValue}`}
+        value={(progressValue / progressMaxValue) * 100}
+        variant="secondary"
       />
     </WithIcon>
   );

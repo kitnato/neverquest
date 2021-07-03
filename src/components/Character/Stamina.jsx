@@ -18,7 +18,7 @@ export default function Stamina() {
           attached="below"
           label={`${staminaValue.current}/${staminaValue.max}`}
           value={(staminaValue.current / staminaValue.max) * 100}
-          variant="success"
+          variant="secondary"
         />
 
         <Regen resource={stamina} regen={staminaRegen} />

@@ -48,7 +48,7 @@ export default function Header() {
               <Github className="mr-1" /> Source
             </Button>
 
-            <Button variant="danger" onClick={() => setResetShow(true)}>
+            <Button variant="outline-danger" onClick={() => setResetShow(true)}>
               Reset
             </Button>
 

@@ -12,7 +12,11 @@ export default function Travel() {
   const destination = levelValue === 1 ? "???" : modeValue;
 
   return (
-    <Button className={!isLevelCompleted && "d-none"} variant="primary" block>
+    <Button
+      block
+      className={!isLevelCompleted && "d-none"}
+      variant="outline-dark"
+    >
       Go to {destination}
     </Button>
   );

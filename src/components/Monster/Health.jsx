@@ -40,9 +40,9 @@ export default function MonsterHealth({ onDeath }) {
   return (
     <WithIcon icon={healthIcon} alt="Monster health">
       <Progress
-        variant="danger"
-        value={(health.current / health.max) * 100}
         label={isDead ? "Dead" : `${health.current}/${health.max}`}
+        value={(health.current / health.max) * 100}
+        variant="secondary"
       />
     </WithIcon>
   );

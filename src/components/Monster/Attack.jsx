@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSetRecoilState, useRecoilValue } from "recoil";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
@@ -9,11 +11,12 @@ import formatCountdown from "utilities/formatCountdown";
 import getDamage from "utilities/getDamage";
 
 export default function MonsterAttack({ damagePerHit }) {
-  const levelValue = useRecoilValue(level);
   const isAttacking = useRecoilValue(attacking);
+  const levelValue = useRecoilValue(level);
   const setDefend = useSetRecoilState(defend);
-  const [deltaAttack, setDeltaAttack] = useState(0);
   const [canAttack, setCanAttack] = useState(true);
+  const [deltaAttack, setDeltaAttack] = useState(0);
+
   const attackSpeedValue = 2000 - 10 * levelValue;
 
   useAnimation((deltaTime) => {
@@ -28,14 +31,19 @@ export default function MonsterAttack({ damagePerHit }) {
   useEffect(() => () => setCanAttack(false), []);
 
   return (
-    <Progress
-      variant="warning"
-      value={(deltaAttack / attackSpeedValue) * 100}
-      label={
-        isAttacking
-          ? formatCountdown(attackSpeedValue - deltaAttack)
-          : "Lurking"
-      }
-    />
+    <OverlayTrigger
+      placement="top"
+      overlay={<Tooltip>Monster attack rate</Tooltip>}
+    >
+      <Progress
+        label={
+          isAttacking
+            ? formatCountdown(attackSpeedValue - deltaAttack)
+            : "Lurking"
+        }
+        value={(deltaAttack / attackSpeedValue) * 100}
+        variant="dark"
+      />
+    </OverlayTrigger>
   );
 }

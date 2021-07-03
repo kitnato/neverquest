@@ -31,7 +31,7 @@ export default function Attack() {
       }
       size="tiny"
       value={(deltaAttack / attackSpeedValue) * 100}
-      variant="warning"
+      variant="info"
     />
   );
 }

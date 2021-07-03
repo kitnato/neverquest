@@ -18,7 +18,7 @@ export default function Health() {
           attached="below"
           label={`${healthValue.current}/${healthValue.max}`}
           value={(healthValue.current / healthValue.max) * 100}
-          variant="danger"
+          variant="secondary"
         />
 
         <Regen resource={health} regen={healthRegen} />

@@ -1,4 +1,6 @@
 import React from "react";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 import { TRANSPARENT_PIXEL } from "utilities/constants";
 
@@ -10,7 +12,9 @@ export default function WithIcon({
 }) {
   return (
     <div className={`d-flex align-items-center ${className}`}>
-      <img src={icon} alt={alt} className="mr-2" style={{ height: 35 }} />
+      <OverlayTrigger placement="top" overlay={<Tooltip>{alt}</Tooltip>}>
+        <img src={icon} alt={alt} className="mr-2" style={{ height: 35 }} />
+      </OverlayTrigger>
 
       {children}
     </div>

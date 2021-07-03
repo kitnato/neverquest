@@ -30,8 +30,8 @@ export default function Loot() {
             <Col>
               <Button
                 className={!isLevelCompleted && "d-none"}
-                variant="outline-primary"
-                onClick={() => handleCollect()}
+                variant="outline-dark"
+                onClick={handleCollect}
               >
                 Collect
               </Button>

@@ -21,9 +21,10 @@ export default function AttackButton() {
       disabled={isAttacking || isLevelCompleted}
       onClick={() => setAttacking(!isAttacking)}
       style={{ borderBottomLeftRadius: 0, borderBottomRightRadius: 0 }}
-      variant="primary"
+      variant="outline-dark"
     >
-      {isAttacking ? "Attacking" : "Attack"}
+      {/* eslint-disable-next-line no-nested-ternary */}
+      {isLevelCompleted ? "Resting" : isAttacking ? "Attacking" : "Attack"}
     </Button>
   );
 }

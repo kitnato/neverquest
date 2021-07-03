@@ -85,7 +85,7 @@ export default function Reset({ title, message, show, setShow }) {
 
       <Modal.Footer>
         <Button
-          variant="primary"
+          variant="outline-dark"
           onClick={() => {
             resetAtoms();
             setShow(false);

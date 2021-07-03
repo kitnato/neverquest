@@ -31,7 +31,7 @@ export default function Regen({ resource, regen }) {
       label={isRecovering ? formatCountdown(rate - deltaRegen) : "Rested"}
       value={((isRecovering ? deltaRegen : rate) / rate) * 100}
       size="tiny"
-      variant="warning"
+      variant="info"
     />
   );
 }

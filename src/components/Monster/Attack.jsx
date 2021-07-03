@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 
 import Progress from "components/Progress";
+import WithIcon from "components/WithIcon";
 import useAnimation from "hooks/useAnimation";
+import attackIcon from "icons/tron-arrow.svg";
 import { attacking, level } from "state/atoms";
 import { defend } from "state/selectors";
 import formatCountdown from "utilities/formatCountdown";
@@ -16,10 +16,10 @@ export default function MonsterAttack({ damagePerHit }) {
   const setDefend = useSetRecoilState(defend);
   const [canAttack, setCanAttack] = useState(true);
   const [deltaAttack, setDeltaAttack] = useState(0);
-  // Need this in case character stops attacking due to no stamina.
+  // Need this in case character stops attacking due to 0 stamina.
   const [isEngaged, setEngaged] = useState(false);
 
-  const attackSpeedValue = 2000 - 10 * levelValue;
+  const attackSpeedValue = 3010 - 10 * levelValue;
 
   useAnimation((deltaTime) => {
     if (deltaAttack >= attackSpeedValue) {
@@ -39,21 +39,14 @@ export default function MonsterAttack({ damagePerHit }) {
   useEffect(() => () => setCanAttack(false), []);
 
   return (
-    <OverlayTrigger
-      placement="top"
-      overlay={<Tooltip>Monster attack rate</Tooltip>}
-    >
-      <div>
+    <WithIcon icon={attackIcon} alt="Monster attack rate">
+      <div style={{ width: "100%" }}>
         <Progress
-          label={
-            isEngaged
-              ? formatCountdown(attackSpeedValue - deltaAttack)
-              : "Lurking"
-          }
+          label={formatCountdown(attackSpeedValue - deltaAttack)}
           value={(deltaAttack / attackSpeedValue) * 100}
           variant="info"
         />
       </div>
-    </OverlayTrigger>
+    </WithIcon>
   );
 }

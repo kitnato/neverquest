@@ -8,7 +8,7 @@ export default function MonsterName() {
   const name = "???";
 
   return (
-    <WithIcon icon={monsterIcon} alt="Monster">
+    <WithIcon icon={monsterIcon} alt="Monster name">
       {name}
     </WithIcon>
   );

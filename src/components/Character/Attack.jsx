@@ -5,14 +5,12 @@ import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
 import { attacking } from "state/atoms";
 import { attack, attackSpeed } from "state/selectors";
-import formatCountdown from "utilities/formatCountdown";
 
 export default function Attack() {
   const attackSpeedValue = useRecoilValue(attackSpeed);
   const setAttack = useSetRecoilState(attack);
   const isAttacking = useRecoilValue(attacking);
-  const [deltaAttack, setDeltaAttack] = useState(attackSpeedValue);
-  const isRecovering = isAttacking || deltaAttack < attackSpeedValue;
+  const [deltaAttack, setDeltaAttack] = useState(0);
 
   useAnimation((deltaTime) => {
     if (deltaAttack >= attackSpeedValue) {
@@ -21,14 +19,11 @@ export default function Attack() {
     } else {
       setDeltaAttack(deltaAttack + deltaTime);
     }
-  }, !isRecovering);
+  }, !isAttacking);
 
   return (
     <Progress
       attached="above"
-      label={
-        isRecovering ? formatCountdown(attackSpeedValue - deltaAttack) : "Ready"
-      }
       size="tiny"
       value={(deltaAttack / attackSpeedValue) * 100}
       variant="info"

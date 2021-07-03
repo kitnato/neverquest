@@ -19,7 +19,7 @@ export const health = atom({
 export const healthRegen = atom({
   key: "healthRegen",
   default: {
-    rate: 5000,
+    rate: 6000,
     current: 1,
     increment: 1,
   },
@@ -45,7 +45,7 @@ export const stamina = atom({
 export const staminaRegen = atom({
   key: "staminaRegen",
   default: {
-    rate: 1750,
+    rate: 2500,
     current: 1,
     increment: 1,
   },
@@ -73,7 +73,7 @@ export const weapon = atom({
   default: {
     name: "Fists",
     type: "light",
-    speed: 1200,
+    speed: 2000,
     cost: 1,
     damage: { min: 0, max: 1 },
   },

@@ -3,12 +3,11 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
-import formatCountdown from "utilities/formatCountdown";
 
 export default function Regen({ resource, regen }) {
   const [resourceValue, setResource] = useRecoilState(resource);
   const { rate, current: regenValue } = useRecoilValue(regen);
-  const [deltaRegen, setRegen] = useState(rate);
+  const [deltaRegen, setRegen] = useState(0);
   const isRecovering = resourceValue.current < resourceValue.max;
 
   useAnimation((deltaTime) => {
@@ -28,9 +27,8 @@ export default function Regen({ resource, regen }) {
   return (
     <Progress
       attached="above"
-      label={isRecovering ? formatCountdown(rate - deltaRegen) : "Rested"}
-      value={((isRecovering ? deltaRegen : rate) / rate) * 100}
       size="tiny"
+      value={(deltaRegen / rate) * 100}
       variant="info"
     />
   );

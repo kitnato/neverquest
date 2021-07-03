@@ -1,18 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { RecoilRoot } from "recoil";
-// import reportWebVitals from "./reportWebVitals";
 
-import App from "pages/App";
+import App from "App";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-overrides.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <RecoilRoot>
-      <App />
-    </RecoilRoot>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

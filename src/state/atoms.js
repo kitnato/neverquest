@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
 import { atom } from "recoil";
 
 // CHARACTER
@@ -158,11 +157,6 @@ export const gameOver = atom({
 export const attacking = atom({
   key: "attacking",
   default: false,
-});
-
-export const seed = atom({
-  key: "seed",
-  default: uuidv4(),
 });
 
 export const damageDealt = atom({

@@ -11,7 +11,7 @@ import Reset from "components/Reset";
 import Settings from "components/Settings";
 import { version } from "../../package.json";
 
-export default function Header() {
+export default function Header({ resetSeed }) {
   const [resetShow, setResetShow] = useState(false);
 
   return (
@@ -54,7 +54,8 @@ export default function Header() {
 
             <Reset
               show={resetShow}
-              setShow={setResetShow}
+              setHide={() => setResetShow(false)}
+              resetSeed={resetSeed}
               title="Reset the game?"
               message="This will wipe all data and restart from the beginning."
             />

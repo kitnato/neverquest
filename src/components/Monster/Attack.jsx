@@ -16,6 +16,8 @@ export default function MonsterAttack({ damagePerHit }) {
   const setDefend = useSetRecoilState(defend);
   const [canAttack, setCanAttack] = useState(true);
   const [deltaAttack, setDeltaAttack] = useState(0);
+  // Need this in case character stops attacking due to no stamina.
+  const [isEngaged, setEngaged] = useState(false);
 
   const attackSpeedValue = 2000 - 10 * levelValue;
 
@@ -26,7 +28,13 @@ export default function MonsterAttack({ damagePerHit }) {
     } else {
       setDeltaAttack(deltaAttack + deltaTime);
     }
-  }, !canAttack || !isAttacking);
+  }, !canAttack || !isEngaged);
+
+  useEffect(() => {
+    if (isAttacking && !isEngaged) {
+      setEngaged(true);
+    }
+  }, [isAttacking, isEngaged]);
 
   useEffect(() => () => setCanAttack(false), []);
 
@@ -35,15 +43,17 @@ export default function MonsterAttack({ damagePerHit }) {
       placement="top"
       overlay={<Tooltip>Monster attack rate</Tooltip>}
     >
-      <Progress
-        label={
-          isAttacking
-            ? formatCountdown(attackSpeedValue - deltaAttack)
-            : "Lurking"
-        }
-        value={(deltaAttack / attackSpeedValue) * 100}
-        variant="dark"
-      />
+      <div>
+        <Progress
+          label={
+            isEngaged
+              ? formatCountdown(attackSpeedValue - deltaAttack)
+              : "Lurking"
+          }
+          value={(deltaAttack / attackSpeedValue) * 100}
+          variant="info"
+        />
+      </div>
     </OverlayTrigger>
   );
 }

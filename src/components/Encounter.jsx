@@ -13,7 +13,7 @@ export default function Encounter() {
 
   return (
     <>
-      {modeValue === "wilderness" && (
+      {modeValue === 0 && (
         <>
           <Wilderness />
 
@@ -21,7 +21,7 @@ export default function Encounter() {
         </>
       )}
 
-      {modeValue === "caravan" && (
+      {modeValue === 1 && (
         <div className="mb-3">
           <Caravan />
         </div>

@@ -10,8 +10,8 @@ export const name = atom({
 export const health = atom({
   key: "health",
   default: {
-    current: 8,
-    max: 8,
+    current: 10,
+    max: 10,
     increment: 2,
   },
 });
@@ -19,7 +19,7 @@ export const health = atom({
 export const healthRegen = atom({
   key: "healthRegen",
   default: {
-    rate: 6000,
+    rate: 7000,
     current: 1,
     increment: 1,
   },
@@ -36,8 +36,8 @@ export const damage = atom({
 export const stamina = atom({
   key: "stamina",
   default: {
-    current: 4,
-    max: 4,
+    current: 5,
+    max: 5,
     increment: 1,
   },
 });
@@ -134,11 +134,6 @@ export const level = atom({
   default: 1,
 });
 
-export const location = atom({
-  key: "location",
-  default: "???",
-});
-
 export const progress = atom({
   key: "progress",
   default: 0,
@@ -146,7 +141,7 @@ export const progress = atom({
 
 export const mode = atom({
   key: "mode",
-  default: "wilderness",
+  default: 0,
 });
 
 export const gameOver = atom({

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import Progress from "components/Progress";
+import WithIcon from "components/WithIcon";
 import useAnimation from "hooks/useAnimation";
+import attackIcon from "icons/tron-arrow.svg";
 import { attacking } from "state/atoms";
 import { attack, attackSpeed } from "state/selectors";
+import formatCountdown from "utilities/formatCountdown";
 
 export default function Attack() {
   const attackSpeedValue = useRecoilValue(attackSpeed);
@@ -21,12 +24,21 @@ export default function Attack() {
     }
   }, !isAttacking);
 
+  useEffect(() => {
+    if (!isAttacking) {
+      setDeltaAttack(0);
+    }
+  }, [isAttacking]);
+
   return (
-    <Progress
-      attached="above"
-      size="tiny"
-      value={(deltaAttack / attackSpeedValue) * 100}
-      variant="info"
-    />
+    <WithIcon icon={attackIcon} alt="Attack rate">
+      <div style={{ width: "100%" }}>
+        <Progress
+          label={formatCountdown(attackSpeedValue - deltaAttack)}
+          value={(deltaAttack / attackSpeedValue) * 100}
+          variant="info"
+        />
+      </div>
+    </WithIcon>
   );
 }

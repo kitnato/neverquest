@@ -47,11 +47,15 @@ export default function Character() {
           </Col>
         </Row>
 
-        <div className="mt-3">
-          <AttackButton />
+        <Row className="mt-3">
+          <Col>
+            <Attack />
+          </Col>
 
-          <Attack />
-        </div>
+          <Col>
+            <AttackButton />
+          </Col>
+        </Row>
 
         <Row className="mt-3">
           <Col>

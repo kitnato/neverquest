@@ -8,6 +8,17 @@ import { levelCompleted } from "state/selectors";
 export default function AttackButton() {
   const [isAttacking, setAttacking] = useRecoilState(attacking);
   const isLevelCompleted = useRecoilValue(levelCompleted);
+  const label = (() => {
+    if (isLevelCompleted) {
+      return "Resting";
+    }
+
+    if (isAttacking) {
+      return "Attacking";
+    }
+
+    return "Attack";
+  })();
 
   useEffect(() => {
     if (isLevelCompleted && isAttacking) {
@@ -20,11 +31,9 @@ export default function AttackButton() {
       block
       disabled={isAttacking || isLevelCompleted}
       onClick={() => setAttacking(!isAttacking)}
-      style={{ borderBottomLeftRadius: 0, borderBottomRightRadius: 0 }}
       variant="outline-dark"
     >
-      {/* eslint-disable-next-line no-nested-ternary */}
-      {isLevelCompleted ? "Resting" : isAttacking ? "Attacking" : "Attack"}
+      {label}
     </Button>
   );
 }

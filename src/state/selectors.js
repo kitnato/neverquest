@@ -13,6 +13,7 @@ import {
   health,
   gameOver,
   level,
+  mode,
   progress,
   scrap,
   scrapLoot,
@@ -101,7 +102,7 @@ export const progressMax = selector({
   get: ({ get }) => {
     const levelValue = get(level);
 
-    return levelValue * 2 + 1;
+    return levelValue + 2;
   },
 });
 
@@ -112,6 +113,38 @@ export const levelCompleted = selector({
     const progressMaxValue = get(progressMax);
 
     return progressValue === progressMaxValue;
+  },
+});
+
+export const location = selector({
+  key: "location",
+  get: ({ get }) => {
+    const levelValue = get(level);
+    const modeValue = get(mode);
+    const generatedLocation = (() => {
+      if (modeValue === 0) {
+        if (levelValue === 1) {
+          return "???";
+        }
+        // TODO - SLIM
+        return "Wilderness";
+      }
+      return "Caravan";
+    })();
+
+    return generatedLocation;
+  },
+  set: ({ get, set }) => {
+    const levelValue = get(level);
+    const isWilderness = get(mode) === 0;
+
+    if (isWilderness) {
+      set(mode, 1);
+    } else {
+      set(mode, 0);
+      set(level, levelValue + 1);
+      set(progress, 0);
+    }
   },
 });
 

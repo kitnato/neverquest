@@ -16,8 +16,8 @@ export default function Contents({ resetSeed }) {
   const [resetShow, setGameOverShow] = useState(true);
 
   return (
-    <>
-      <Row className="align-items-center mb-3">
+    <div className="spaced">
+      <Row className="align-items-center">
         <Col>
           <Location />
         </Col>
@@ -44,6 +44,6 @@ export default function Contents({ resetSeed }) {
         title="You are dead."
         message="Try again?"
       />
-    </>
+    </div>
   );
 }

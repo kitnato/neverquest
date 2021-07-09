@@ -22,7 +22,7 @@ export default function Loot() {
 
   return (
     isLootPresent && (
-      <Card className="mb-3">
+      <Card>
         <Card.Body>
           <Row>
             <Display />

@@ -18,18 +18,14 @@ import Stamina from "components/Character/Stamina";
 export default function Character() {
   return (
     <Card>
-      <Card.Body>
+      <Card.Body className="spaced">
         <Name />
 
-        <div className="mt-3">
-          <Health />
-        </div>
+        <Health />
 
-        <div className="mt-3">
-          <Stamina />
-        </div>
+        <Stamina />
 
-        <Row className="mt-3">
+        <Row>
           <Col>
             <Damage />
           </Col>
@@ -47,7 +43,7 @@ export default function Character() {
           </Col>
         </Row>
 
-        <Row className="mt-3">
+        <Row>
           <Col>
             <Attack />
           </Col>
@@ -57,7 +53,7 @@ export default function Character() {
           </Col>
         </Row>
 
-        <Row className="mt-3">
+        <Row>
           <Col>
             <Experience />
           </Col>

@@ -46,22 +46,20 @@ export default function Monster({ id }) {
 
   return (
     <Card>
-      <Card.Body>
+      <Card.Body className="spaced">
         <Name />
 
-        <div className="mt-3">
-          <Health onDeath={onDeath} />
+        <Health onDeath={onDeath} />
 
-          <Row className="align-items-center mt-2">
-            <Col>
-              <Damage damagePerHit={damagePerHit} />
-            </Col>
+        <Row className="align-items-center">
+          <Col>
+            <Damage damagePerHit={damagePerHit} />
+          </Col>
 
-            <Col>
-              <Attack damagePerHit={damagePerHit} />
-            </Col>
-          </Row>
-        </div>
+          <Col>
+            <Attack damagePerHit={damagePerHit} />
+          </Col>
+        </Row>
       </Card.Body>
     </Card>
   );

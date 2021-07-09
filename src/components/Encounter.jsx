@@ -12,7 +12,7 @@ export default function Encounter() {
   const modeValue = useRecoilValue(mode);
 
   return (
-    <>
+    <div className="spaced">
       {modeValue === 0 && (
         <>
           <Wilderness />
@@ -21,13 +21,9 @@ export default function Encounter() {
         </>
       )}
 
-      {modeValue === 1 && (
-        <div className="mb-3">
-          <Caravan />
-        </div>
-      )}
+      {modeValue === 1 && <Caravan />}
 
       <Travel />
-    </>
+    </div>
   );
 }

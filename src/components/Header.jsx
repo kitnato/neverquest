@@ -20,7 +20,7 @@ export default function Header({ resetSeed }) {
       expand="lg"
       bg="dark"
       variant="dark"
-      className="mb-2"
+      className="mb-4"
     >
       <Container>
         <Navbar.Brand>

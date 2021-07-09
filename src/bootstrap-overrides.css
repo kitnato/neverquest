@@ -6,3 +6,7 @@ input.form-control-plaintext {
   cursor: pointer;
   outline: none;
 }
+
+.spaced > *:not(:last-child) {
+  margin-bottom: 24px;
+}

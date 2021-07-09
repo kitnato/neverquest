@@ -24,9 +24,5 @@ export default function Wilderness() {
     }
   }, [activeMonsterId, monster.id, setActiveMonster]);
 
-  return monster.id ? (
-    <div className="mb-3">
-      <monster.Component id={monster.id} />
-    </div>
-  ) : null;
+  return monster.id ? <monster.Component id={monster.id} /> : null;
 }

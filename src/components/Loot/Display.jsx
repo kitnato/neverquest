@@ -1,10 +1,8 @@
-import React from "react";
 import Col from "react-bootstrap/Col";
 
 import Aether from "components/Loot/Aether";
 import Coins from "components/Loot/Coins";
 import Scrap from "components/Loot/Scrap";
-
 import {
   aether,
   aetherLoot,
@@ -12,7 +10,7 @@ import {
   coinsLoot,
   scrap,
   scrapLoot,
-} from "state/atoms";
+} from "state/loot";
 
 export default function LootDisplay({ isInventory }) {
   return (

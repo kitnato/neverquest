@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";

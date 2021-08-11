@@ -1,5 +1,3 @@
-import React from "react";
-
 import WithIcon from "components/WithIcon";
 import damageIcon from "icons/wolverine-claws.svg";
 

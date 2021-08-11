@@ -1,10 +1,8 @@
-import React from "react";
 import { useRecoilValue } from "recoil";
 
 import WithIcon from "components/WithIcon";
-import { dodge } from "state/atoms";
-
 import dodgeIcon from "icons/wingfoot.svg";
+import { dodge } from "state/stats";
 
 export default function Dodge() {
   const dodgeValue = useRecoilValue(dodge);

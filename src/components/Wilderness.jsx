@@ -1,10 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 
 import Monster from "components/Monster";
-import { activeMonster, progress } from "state/atoms";
-import { progressMax } from "state/selectors";
+import { activeMonster, progress, progressMax } from "state/global";
 
 export default function Wilderness() {
   const [activeMonsterId, setActiveMonster] = useRecoilState(activeMonster);

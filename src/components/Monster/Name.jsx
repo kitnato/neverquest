@@ -1,7 +1,4 @@
-import React from "react";
-
 import WithIcon from "components/WithIcon";
-
 import monsterIcon from "icons/carnivore-mouth.svg";
 
 export default function MonsterName() {

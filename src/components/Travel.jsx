@@ -1,9 +1,7 @@
-import React from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import Button from "react-bootstrap/Button";
 
-import { level, mode } from "state/atoms";
-import { levelCompleted, location } from "state/selectors";
+import { level, levelCompleted, location, mode } from "state/global";
 
 export default function Travel() {
   const levelValue = useRecoilValue(level);

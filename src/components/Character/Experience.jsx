@@ -1,8 +1,7 @@
-import React from "react";
 import { useRecoilValue } from "recoil";
 
 import WithIcon from "components/WithIcon";
-import { experience } from "state/atoms";
+import { experience } from "state/character";
 
 import experienceIcon from "icons/barbed-sun.svg";
 

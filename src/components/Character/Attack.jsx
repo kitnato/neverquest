@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import Progress from "components/Progress";
 import WithIcon from "components/WithIcon";
 import useAnimation from "hooks/useAnimation";
 import attackIcon from "icons/tron-arrow.svg";
-import { attacking } from "state/atoms";
-import { attack, attackSpeed } from "state/selectors";
+import { attacking, attack, attackSpeed } from "state/character";
 import formatCountdown from "utilities/formatCountdown";
 
 export default function Attack() {

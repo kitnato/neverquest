@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
 import WithIcon from "components/WithIcon";
 import useAnimation from "hooks/useAnimation";
 import attackIcon from "icons/tron-arrow.svg";
-import { attacking, level } from "state/atoms";
-import { defend } from "state/selectors";
+import { attacking, defend } from "state/character";
+import { level } from "state/global";
 import formatCountdown from "utilities/formatCountdown";
 import getDamage from "utilities/getDamage";
 

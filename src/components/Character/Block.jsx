@@ -1,8 +1,7 @@
-import React from "react";
 import { useRecoilValue } from "recoil";
 
 import WithIcon from "components/WithIcon";
-import { shield } from "state/atoms";
+import { shield } from "state/equipment";
 
 import blockIcon from "icons/round-shield.svg";
 

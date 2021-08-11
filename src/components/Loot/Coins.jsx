@@ -1,8 +1,6 @@
-import React from "react";
 import { useRecoilValue } from "recoil";
 
 import WithIcon from "components/WithIcon";
-
 import coinsIcon from "icons/two-coins.svg";
 
 export default function Coins({ atom }) {

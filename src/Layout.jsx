@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-import Character from "components/Character";
-import Encounter from "components/Encounter";
-import LevelProgress from "components/LevelProgress";
-import Location from "components/Location";
-import Reset from "components/Reset";
+import Character from "./components/Character";
+import Encounter from "./components/Encounter";
+import LevelProgress from "./components/LevelProgress";
+import Location from "./components/Location";
+import Reset from "./components/Reset";
+import { gameOver } from "./state/global";
 
-import { gameOver } from "state/atoms";
-
-export default function Contents({ resetSeed }) {
+export default function Layout({ resetSeed }) {
   const gameOverValue = useRecoilValue(gameOver);
   const [resetShow, setGameOverShow] = useState(true);
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -6,9 +5,9 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 import Display from "components/Loot/Display";
-
-import { looted } from "state/atoms";
-import { levelCompleted, looting } from "state/selectors";
+import { looted } from "state/character";
+import { looting } from "state/loot";
+import { levelCompleted } from "state/global";
 
 export default function Loot() {
   const isLevelCompleted = useRecoilValue(levelCompleted);

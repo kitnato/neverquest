@@ -1,9 +1,8 @@
-import React from "react";
 import { useRecoilValue } from "recoil";
 
 import WithIcon from "components/WithIcon";
-import { location } from "state/selectors";
 import compassIcon from "icons/compass.svg";
+import { location } from "state/global";
 
 export default function Location() {
   const locationValue = useRecoilValue(location);

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useRecoilValue } from "recoil";
 
-import { gameOver } from "state/atoms";
+import { gameOver } from "state/global";
 
 export default function useAnimation(callback, stop) {
   const requestRef = useRef();

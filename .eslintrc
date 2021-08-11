@@ -7,14 +7,17 @@
   "plugins": ["prettier", "react-hooks"],
   "extends": ["airbnb", "airbnb/hooks", "prettier"],
   "rules": {
+    "no-use-before-define": ["error", { "variables": false }],
     "prettier/prettier": ["warn", { "printWidth": 80 }],
-    "react/prop-types": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react-hooks/exhaustive-deps": [
       "warn", {
         "additionalHooks": "useRecoilCallback"
       }
-    ]
+    ],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off"
   },
   "globals": {
     "Atomics": "readonly",

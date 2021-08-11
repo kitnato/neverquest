@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 import Button from "react-bootstrap/Button";
 
-import { attacking } from "state/atoms";
-import { levelCompleted } from "state/selectors";
+import { attacking } from "state/character";
+import { levelCompleted } from "state/global";
 
 export default function AttackButton() {
   const [isAttacking, setAttacking] = useRecoilState(attacking);

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 import FormControl from "react-bootstrap/FormControl";
 
 import WithIcon from "components/WithIcon";
-import { name } from "state/atoms";
+import { name } from "state/character";
 
 import nameIcon from "icons/domino-mask.svg";
 

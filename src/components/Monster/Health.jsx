@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
 import WithIcon from "components/WithIcon";
-import { damageDealt, level } from "state/atoms";
+import { damageDealt } from "state/character";
+import { level } from "state/global";
 
 import healthIcon from "icons/hospital-cross.svg";
 

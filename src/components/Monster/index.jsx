@@ -1,4 +1,3 @@
-import React from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -9,15 +8,9 @@ import Damage from "components/Monster/Damage";
 import Health from "components/Monster/Health";
 import Name from "components/Monster/Name";
 
-import {
-  activeMonster,
-  aetherLoot,
-  coinsLoot,
-  experience,
-  level,
-  progress,
-  scrapLoot,
-} from "state/atoms";
+import { experience } from "state/character";
+import { activeMonster, level, progress } from "state/global";
+import { aetherLoot, coinsLoot, scrapLoot } from "state/loot";
 
 export default function Monster({ id }) {
   const setAetherLoot = useSetRecoilState(aetherLoot);

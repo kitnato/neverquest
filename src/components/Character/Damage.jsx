@@ -1,8 +1,7 @@
-import React from "react";
 import { useRecoilValue } from "recoil";
 
 import WithIcon from "components/WithIcon";
-import { damagePerHit } from "state/selectors";
+import { damagePerHit } from "state/character";
 
 import damageIcon from "icons/fist.svg";
 

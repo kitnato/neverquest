@@ -1,11 +1,10 @@
-import React from "react";
 import { useRecoilValue } from "recoil";
 
 import Card from "react-bootstrap/Card";
 
 import Merchant from "components/Caravan/Merchant";
 import Mercenary from "components/Caravan/Mercenary";
-import { crew } from "state/atoms";
+import { crew } from "state/caravan";
 
 export default function Caravan() {
   const members = useRecoilValue(crew);

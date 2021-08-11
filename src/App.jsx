@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { RecoilRoot } from "recoil";
 import Container from "react-bootstrap/Container";
 
-import Contents from "Contents";
+import Layout from "Layout";
 import Header from "components/Header";
 
 export default function App() {
@@ -17,7 +17,7 @@ export default function App() {
 
       <Container>
         <RecoilRoot key={seed}>
-          <Contents resetSeed={resetSeed} />
+          <Layout resetSeed={resetSeed} />
         </RecoilRoot>
       </Container>
     </div>

@@ -11,9 +11,9 @@ export default function Dodge() {
 
   return (
     <WithIcon
+      alt="Dodge"
       className={`${dodgeValue.current === 0 ? "invisible" : ""}`}
       icon={dodgeIcon}
-      alt="Dodge"
     >
       {dodgeValue.current * 100}%
     </WithIcon>

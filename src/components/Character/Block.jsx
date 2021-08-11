@@ -11,9 +11,9 @@ export default function Block() {
 
   return (
     <WithIcon
+      alt="Block"
       className={`${shieldValue.name === null ? "invisible" : ""}`}
       icon={blockIcon}
-      alt="Block"
     >
       {shieldValue.block * 100}
     </WithIcon>

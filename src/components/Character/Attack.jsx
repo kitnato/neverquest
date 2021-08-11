@@ -31,7 +31,7 @@ export default function Attack() {
   }, [isAttacking]);
 
   return (
-    <WithIcon icon={attackIcon} alt="Attack rate">
+    <WithIcon alt="Attack rate" icon={attackIcon}>
       <div style={{ width: "100%" }}>
         <Progress
           label={formatCountdown(attackSpeedValue - deltaAttack)}

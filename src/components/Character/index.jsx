@@ -3,15 +3,13 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-import Armor from "components/Character/Armor";
 import Attack from "components/Character/Attack";
 import AttackButton from "components/Character/AttackButton";
-import Block from "components/Character/Block";
-import Damage from "components/Character/Damage";
-import Dodge from "components/Character/Dodge";
+import Defense from "components/Character/Defense";
 import Experience from "components/Character/Experience";
 import Health from "components/Character/Health";
 import Name from "components/Character/Name";
+import Offense from "components/Character/Offense";
 import Resources from "components/Character/Resources";
 import Stamina from "components/Character/Stamina";
 
@@ -25,23 +23,9 @@ export default function Character() {
 
         <Stamina />
 
-        <Row>
-          <Col>
-            <Damage />
-          </Col>
+        <Offense />
 
-          <Col>
-            <Armor />
-          </Col>
-
-          <Col>
-            <Block />
-          </Col>
-
-          <Col>
-            <Dodge />
-          </Col>
-        </Row>
+        <Defense />
 
         <Row>
           <Col>

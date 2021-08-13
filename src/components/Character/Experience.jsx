@@ -9,7 +9,7 @@ export default function Experience() {
   const experienceValue = useRecoilValue(experience);
 
   return (
-    <WithIcon icon={experienceIcon} alt="Experience">
+    <WithIcon alt="Experience" icon={experienceIcon}>
       {experienceValue}
     </WithIcon>
   );

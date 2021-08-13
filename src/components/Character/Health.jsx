@@ -11,7 +11,7 @@ export default function Health() {
   const healthValue = useRecoilValue(health);
 
   return (
-    <WithIcon icon={healthIcon} alt="Health">
+    <WithIcon alt="Health" icon={healthIcon}>
       <div style={{ width: "100%" }}>
         <Progress
           attached="below"

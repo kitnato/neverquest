@@ -9,6 +9,24 @@ export const attackSpeedBonus = atom({
   },
 });
 
+export const criticalChance = atom({
+  key: "criticalChance",
+  default: {
+    current: 0,
+    increment: 0.01,
+    max: 0,
+  },
+});
+
+export const criticalDamage = atom({
+  key: "criticalDamage",
+  default: {
+    current: 1,
+    increment: 0.1,
+    max: 0,
+  },
+});
+
 export const damage = atom({
   key: "damage",
   default: {
@@ -30,9 +48,9 @@ export const dodge = atom({
 export const health = atom({
   key: "health",
   default: {
-    current: 10,
+    current: 8,
     increment: 2,
-    max: 10,
+    max: 8,
   },
 });
 
@@ -48,9 +66,9 @@ export const healthRegenAmount = atom({
 export const healthRegenRate = atom({
   key: "healthRegenRate",
   default: {
-    current: 7000,
+    current: 8000,
     increment: -50,
-    max: 7000,
+    max: 8000,
   },
 });
 
@@ -75,8 +93,8 @@ export const staminaRegenAmount = atom({
 export const staminaRegenRate = atom({
   key: "staminaRegenRate",
   default: {
-    current: 2500,
+    current: 3000,
     increment: -50,
-    max: 2500,
+    max: 3000,
   },
 });

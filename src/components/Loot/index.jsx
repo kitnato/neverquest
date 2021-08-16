@@ -1,21 +1,20 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-import Display from "components/Loot/Display";
-import { looted } from "state/character";
-import { looting } from "state/loot";
-import { levelCompleted } from "state/global";
+import LootDisplay from "components/Loot/LootDisplay";
+import { isLooting } from "state/resources";
+import { levelCompleted, show } from "state/global";
 
 export default function Loot() {
   const isLevelCompleted = useRecoilValue(levelCompleted);
-  const [isLootPresent, setLooting] = useRecoilState(looting);
-  const setLooted = useSetRecoilState(looted);
+  const [isLootPresent, setLooting] = useRecoilState(isLooting);
+  const [showValue, setShow] = useRecoilState(show);
 
   const handleCollect = () => {
-    setLooted(true);
+    setShow({ ...showValue, resources: true });
     setLooting();
   };
 
@@ -24,7 +23,7 @@ export default function Loot() {
       <Card>
         <Card.Body>
           <Row>
-            <Display />
+            <LootDisplay />
 
             <Col>
               <Button

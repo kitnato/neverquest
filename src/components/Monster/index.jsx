@@ -10,7 +10,7 @@ import Name from "components/Monster/Name";
 
 import { experience } from "state/character";
 import { activeMonster, level, progress } from "state/global";
-import { aetherLoot, coinsLoot, scrapLoot } from "state/loot";
+import { aetherLoot, coinsLoot, scrapLoot } from "state/resources";
 
 export default function Monster({ id }) {
   const setAetherLoot = useSetRecoilState(aetherLoot);

@@ -7,8 +7,8 @@ import getDamage from "utilities/getDamage";
 
 // ATOMS
 
-export const attacking = atom({
-  key: "attacking",
+export const isAttacking = atom({
+  key: "isAttacking",
   default: false,
 });
 
@@ -27,9 +27,9 @@ export const experience = atom({
   default: 0,
 });
 
-export const looted = atom({
-  key: "looted",
-  default: false,
+export const characterLevel = atom({
+  key: "characterLevel",
+  default: 0,
 });
 
 export const name = atom({
@@ -52,7 +52,7 @@ export const attack = selector({
 
     if (newStamina < 0) {
       newStamina = 0;
-      set(attacking, false);
+      set(isAttacking, false);
     }
 
     if (newStamina > staminaValue.max) {

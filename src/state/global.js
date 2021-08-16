@@ -27,6 +27,15 @@ export const progress = atom({
   default: 0,
 });
 
+export const show = atom({
+  key: "show",
+  default: {
+    defense: false,
+    resources: false,
+    stats: false,
+  },
+});
+
 // SELECTORS
 
 export const levelCompleted = selector({

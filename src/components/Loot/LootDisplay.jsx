@@ -1,4 +1,5 @@
 import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 import Aether from "components/Loot/Aether";
 import Coins from "components/Loot/Coins";
@@ -10,11 +11,11 @@ import {
   coinsLoot,
   scrap,
   scrapLoot,
-} from "state/loot";
+} from "state/resources";
 
 export default function LootDisplay({ isInventory }) {
   return (
-    <>
+    <Row>
       <Col>
         <Coins atom={isInventory ? coins : coinsLoot} />
       </Col>
@@ -26,6 +27,6 @@ export default function LootDisplay({ isInventory }) {
       <Col>
         <Aether atom={isInventory ? aether : aetherLoot} />
       </Col>
-    </>
+    </Row>
   );
 }

@@ -5,13 +5,13 @@ import Progress from "components/Progress";
 import WithIcon from "components/WithIcon";
 import useAnimation from "hooks/useAnimation";
 import attackIcon from "icons/tron-arrow.svg";
-import { attacking, defend } from "state/character";
+import { isAttacking, defend } from "state/character";
 import { level } from "state/global";
 import formatCountdown from "utilities/formatCountdown";
 import getDamage from "utilities/getDamage";
 
 export default function MonsterAttack({ damagePerHit }) {
-  const isAttacking = useRecoilValue(attacking);
+  const isAttackingValue = useRecoilValue(isAttacking);
   const levelValue = useRecoilValue(level);
   const setDefend = useSetRecoilState(defend);
   const [canAttack, setCanAttack] = useState(true);
@@ -31,10 +31,10 @@ export default function MonsterAttack({ damagePerHit }) {
   }, !canAttack || !isEngaged);
 
   useEffect(() => {
-    if (isAttacking && !isEngaged) {
+    if (isAttackingValue && !isEngaged) {
       setEngaged(true);
     }
-  }, [isAttacking, isEngaged]);
+  }, [isAttackingValue, isEngaged]);
 
   useEffect(() => () => setCanAttack(false), []);
 

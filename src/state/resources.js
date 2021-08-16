@@ -34,8 +34,8 @@ export const scrapLoot = atom({
 
 // SELECTORS
 
-export const looting = selector({
-  key: "looting",
+export const isLooting = selector({
+  key: "isLooting",
   get: ({ get }) => {
     const aetherLootValue = get(aetherLoot);
     const coinsLootValue = get(coinsLoot);

@@ -9,7 +9,7 @@ export default function Damage() {
   const dphValue = useRecoilValue(damagePerHit);
 
   return (
-    <WithIcon alt="Damage" icon={damageIcon}>
+    <WithIcon alt="Total damage" icon={damageIcon}>
       {dphValue.min}-{dphValue.max}
     </WithIcon>
   );

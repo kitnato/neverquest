@@ -1,18 +1,30 @@
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 import { useRecoilValue } from "recoil";
 
-import WithIcon from "components/WithIcon";
-import { weapon } from "state/equipment";
-
+import ImageIcon from "components/ImageIcon";
 import icon from "icons/axe-sword.svg";
+import { weapon } from "state/equipment";
 
 export default function Weapon() {
   const weaponValue = useRecoilValue(weapon);
 
   return (
-    <WithIcon alt="Weapon" icon={icon}>
-      {weaponValue.name}
+    <div className="align-items-center d-flex spaced-horizontal">
+      <ImageIcon icon={icon} tooltip="Weapon" />
 
-      {` (${weaponValue.damage.min} - ${weaponValue.damage.max})`}
-    </WithIcon>
+      <OverlayTrigger
+        overlay={
+          <Tooltip>
+            {`Damage: ${weaponValue.damage.min} - ${weaponValue.damage.max}`}
+            <br />
+            {`Type: ${weaponValue.type}`}
+          </Tooltip>
+        }
+        placement="top"
+      >
+        <span>{weaponValue.name}</span>
+      </OverlayTrigger>
+    </div>
   );
 }

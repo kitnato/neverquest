@@ -1,42 +1,52 @@
-import { useRecoilState, useRecoilValue } from "recoil";
-import Button from "react-bootstrap/Button";
+import { useRecoilValue } from "recoil";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
+import CollectLoot from "components/Loot/CollectLoot";
 import LootDisplay from "components/Loot/LootDisplay";
-import { isLooting } from "state/resources";
-import { levelCompleted, show } from "state/global";
+import ImageIcon from "components/ImageIcon";
+import lootIcon from "icons/locked-chest.svg";
+import lootedIcon from "icons/open-chest.svg";
+import { isLevelCompleted } from "state/global";
+import { aetherLoot, coinsLoot, hasLooted, scrapLoot } from "state/resources";
 
 export default function Loot() {
-  const isLevelCompleted = useRecoilValue(levelCompleted);
-  const [isLootPresent, setLooting] = useRecoilState(isLooting);
-  const [showValue, setShow] = useRecoilState(show);
-
-  const handleCollect = () => {
-    setShow({ ...showValue, resources: true });
-    setLooting();
-  };
+  const aetherLootValue = useRecoilValue(aetherLoot);
+  const coinsLootValue = useRecoilValue(coinsLoot);
+  const scrapLootValue = useRecoilValue(scrapLoot);
+  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
+  const hasLootedValue = useRecoilValue(hasLooted);
 
   return (
-    isLootPresent && (
-      <Card>
-        <Card.Body>
-          <Row>
-            <LootDisplay />
+    isLevelCompletedValue && (
+      <>
+        <hr />
 
-            <Col>
-              <Button
-                className={!isLevelCompleted && "d-none"}
-                variant="outline-dark"
-                onClick={handleCollect}
-              >
-                Collect
-              </Button>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
+        <Card>
+          <Card.Body>
+            <Row>
+              <Col xs={4}>
+                <ImageIcon icon={hasLootedValue ? lootedIcon : lootIcon} />
+
+                <span className="ml-3">Loot</span>
+              </Col>
+
+              {!hasLootedValue && (
+                <Col>
+                  <LootDisplay
+                    aether={aetherLootValue}
+                    coins={coinsLootValue}
+                    scrap={scrapLootValue}
+                  />
+                </Col>
+              )}
+            </Row>
+          </Card.Body>
+        </Card>
+
+        <CollectLoot />
+      </>
     )
   );
 }

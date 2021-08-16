@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
 
-import WithIcon from "components/WithIcon";
+import ImageIcon from "components/ImageIcon";
 import { shield } from "state/equipment";
 
 import icon from "icons/round-shield.svg";
@@ -8,11 +8,15 @@ import icon from "icons/round-shield.svg";
 export default function Shield() {
   const shieldValue = useRecoilValue(shield);
 
+  if (shieldValue.name === null) {
+    return null;
+  }
+
   return (
-    shieldValue.name !== null && (
-      <WithIcon alt="Armor" icon={icon}>
-        {shieldValue.name}
-      </WithIcon>
-    )
+    <div className="align-items-center d-flex spaced-horizontal">
+      <ImageIcon icon={icon} tooltip="Armor" />
+
+      <span>{shieldValue.name}</span>
+    </div>
   );
 }

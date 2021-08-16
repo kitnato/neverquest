@@ -38,8 +38,8 @@ export const show = atom({
 
 // SELECTORS
 
-export const levelCompleted = selector({
-  key: "levelCompleted",
+export const isLevelCompleted = selector({
+  key: "isLevelCompleted",
   get: ({ get }) => {
     const progressValue = get(progress);
     const progressMaxValue = get(progressMax);

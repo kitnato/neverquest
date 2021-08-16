@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
 
-import WithIcon from "components/WithIcon";
+import ImageIcon from "components/ImageIcon";
 import { criticalChance, criticalDamage } from "state/stats";
 
 import icon from "icons/striking-splinter.svg";
@@ -9,13 +9,15 @@ export default function CritDamage() {
   const critChanceValue = useRecoilValue(criticalChance);
   const critDamageValue = useRecoilValue(criticalDamage);
 
+  if (critChanceValue.max === 0) {
+    return null;
+  }
+
   return (
-    <WithIcon
-      alt="Critical damage bonus"
-      className={`${critChanceValue.max === 0 ? "invisible" : ""}`}
-      icon={icon}
-    >
-      {critDamageValue.current * 100}%
-    </WithIcon>
+    <div className="align-items-center d-flex spaced-horizontal">
+      <ImageIcon icon={icon} tooltip="Critical damage bonus" />
+
+      <span>{critDamageValue.current * 100}%</span>
+    </div>
   );
 }

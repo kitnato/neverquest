@@ -12,11 +12,11 @@ import { gameOver } from "./state/global";
 
 export default function Layout({ resetSeed }) {
   const gameOverValue = useRecoilValue(gameOver);
-  const [resetShow, setGameOverShow] = useState(true);
+  const [showReset, setGameOverShow] = useState(true);
 
   return (
-    <div className="spaced">
-      <Row className="align-items-center">
+    <div className="spaced-vertical">
+      <Row>
         <Col>
           <Location />
         </Col>
@@ -37,7 +37,7 @@ export default function Layout({ resetSeed }) {
       </Row>
 
       <Reset
-        show={resetShow && gameOverValue}
+        show={showReset && gameOverValue}
         setHide={() => setGameOverShow(false)}
         resetSeed={resetSeed}
         title="You are dead."

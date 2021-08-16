@@ -1,13 +1,14 @@
 import Button from "react-bootstrap/Button";
 
-import WithIcon from "components/WithIcon";
-
+import ImageIcon from "components/ImageIcon";
 import crewIcon from "icons/hood.svg";
 
 export default function Mercenary() {
   return (
-    <WithIcon icon={crewIcon} alt="Mercenary">
+    <div className="align-items-center d-flex spaced-horizontal">
+      <ImageIcon icon={crewIcon} tooltip="Mercenary" />
+
       <Button variant="outline-dark">Train</Button>
-    </WithIcon>
+    </div>
   );
 }

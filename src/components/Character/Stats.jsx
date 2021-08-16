@@ -22,7 +22,7 @@ export default function Stats() {
   return (
     showValue.stats && (
       <Card>
-        <Card.Body className="spaced">
+        <Card.Body className="spaced-vertical">
           <Row>
             <Col>
               <Experience />

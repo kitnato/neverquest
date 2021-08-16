@@ -1,5 +1,7 @@
 import { atom, selector } from "recoil";
 
+import { isLevelCompleted } from "state/global";
+
 // ATOMS
 
 export const aether = atom({
@@ -34,16 +36,18 @@ export const scrapLoot = atom({
 
 // SELECTORS
 
-export const isLooting = selector({
-  key: "isLooting",
+export const hasLooted = selector({
+  key: "hasLooted",
   get: ({ get }) => {
     const aetherLootValue = get(aetherLoot);
     const coinsLootValue = get(coinsLoot);
     const scrapLootValue = get(scrapLoot);
+    const isLevelCompletedValue = get(isLevelCompleted);
 
-    return !(
+    return (
       aetherLootValue === null &&
       coinsLootValue === null &&
+      isLevelCompletedValue &&
       scrapLootValue === null
     );
   },

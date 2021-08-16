@@ -7,6 +7,10 @@ input.form-control-plaintext {
   outline: none;
 }
 
-.spaced > *:not(:last-child) {
-  margin-bottom: 24px;
+.spaced-horizontal > *:not(:last-child) {
+  margin-right: 1.5rem;
+}
+
+.spaced-vertical > *:not(:last-child) {
+  margin-bottom: 1.25rem;
 }

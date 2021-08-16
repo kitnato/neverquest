@@ -1,12 +1,13 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import Button from "react-bootstrap/Button";
 
-import { level, levelCompleted, location, mode } from "state/global";
+import { level, location, mode } from "state/global";
+import { hasLooted } from "state/resources";
 
 export default function Travel() {
+  const hasLootedValue = useRecoilValue(hasLooted);
   const levelValue = useRecoilValue(level);
   const modeValue = useRecoilValue(mode);
-  const isLevelCompleted = useRecoilValue(levelCompleted);
   const changeLocation = useSetRecoilState(location);
   const isWilderness = modeValue === 0;
   const destination = (() => {
@@ -23,7 +24,7 @@ export default function Travel() {
   return (
     <Button
       block
-      className={!isLevelCompleted && "d-none"}
+      className={!hasLootedValue && "d-none"}
       onClick={changeLocation}
       variant="outline-dark"
     >

@@ -1,20 +1,21 @@
 import { useRecoilValue } from "recoil";
 
-import WithIcon from "components/WithIcon";
+import ImageIcon from "components/ImageIcon";
+import icon from "icons/round-shield.svg";
 import { shield } from "state/equipment";
-
-import blockIcon from "icons/round-shield.svg";
 
 export default function Block() {
   const shieldValue = useRecoilValue(shield);
 
+  if (shieldValue.name === null) {
+    return null;
+  }
+
   return (
-    <WithIcon
-      alt="Block"
-      className={`${shieldValue.name === null ? "invisible" : ""}`}
-      icon={blockIcon}
-    >
-      {shieldValue.block * 100}
-    </WithIcon>
+    <div className="align-items-center d-flex spaced-horizontal">
+      <ImageIcon icon={icon} tooltip="Block" />
+
+      <span>{shieldValue.block * 100}</span>
+    </div>
   );
 }

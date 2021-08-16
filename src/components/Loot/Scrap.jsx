@@ -1,17 +1,16 @@
-import { useRecoilValue } from "recoil";
+import ImageIcon from "components/ImageIcon";
+import icon from "icons/shattered-sword.svg";
 
-import WithIcon from "components/WithIcon";
-
-import scrapIcon from "icons/shattered-sword.svg";
-
-export default function Scrap({ atom }) {
-  const scrapValue = useRecoilValue(atom);
+export default function Scrap({ value }) {
+  if (!value) {
+    return null;
+  }
 
   return (
-    scrapValue > 0 && (
-      <WithIcon icon={scrapIcon} alt="Scrap">
-        {scrapValue}
-      </WithIcon>
-    )
+    <div className="align-items-center d-flex spaced-horizontal">
+      <ImageIcon icon={icon} tooltip="Scrap" />
+
+      <span>{value}</span>
+    </div>
   );
 }

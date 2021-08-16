@@ -4,28 +4,20 @@ import Row from "react-bootstrap/Row";
 import Aether from "components/Loot/Aether";
 import Coins from "components/Loot/Coins";
 import Scrap from "components/Loot/Scrap";
-import {
-  aether,
-  aetherLoot,
-  coins,
-  coinsLoot,
-  scrap,
-  scrapLoot,
-} from "state/resources";
 
-export default function LootDisplay({ isInventory }) {
+export default function LootDisplay({ aether, coins, scrap }) {
   return (
     <Row>
       <Col>
-        <Coins atom={isInventory ? coins : coinsLoot} />
+        <Coins value={coins} />
       </Col>
 
       <Col>
-        <Scrap atom={isInventory ? scrap : scrapLoot} />
+        <Scrap value={scrap} />
       </Col>
 
       <Col>
-        <Aether atom={isInventory ? aether : aetherLoot} />
+        <Aether value={aether} />
       </Col>
     </Row>
   );

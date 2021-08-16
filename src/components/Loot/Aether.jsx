@@ -1,17 +1,16 @@
-import { useRecoilValue } from "recoil";
-
-import WithIcon from "components/WithIcon";
-
+import ImageIcon from "components/ImageIcon";
 import aetherIcon from "icons/incense.svg";
 
-export default function Aether({ atom }) {
-  const aetherValue = useRecoilValue(atom);
+export default function Aether({ value }) {
+  if (!value) {
+    return null;
+  }
 
   return (
-    aetherValue > 0 && (
-      <WithIcon icon={aetherIcon} alt="Aether">
-        {aetherValue}
-      </WithIcon>
-    )
+    <div className="align-items-center d-flex spaced-horizontal">
+      <ImageIcon icon={aetherIcon} tooltip="Aether" />
+
+      <span>{value}</span>
+    </div>
   );
 }

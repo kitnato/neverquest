@@ -13,7 +13,7 @@ import Stamina from "components/Character/Stamina";
 export default function Status() {
   return (
     <Card>
-      <Card.Body className="spaced">
+      <Card.Body className="spaced-vertical">
         <Name />
 
         <Health />

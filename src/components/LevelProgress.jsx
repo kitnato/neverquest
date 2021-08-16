@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 
+import ImageIcon from "components/ImageIcon";
 import Progress from "components/Progress";
-import WithIcon from "components/WithIcon";
 import progressIcon from "icons/stairs.svg";
 import { level, progress, progressMax } from "state/global";
 
@@ -11,14 +11,16 @@ export default function LevelProgress() {
   const progressMaxValue = useRecoilValue(progressMax);
 
   return (
-    <WithIcon icon={progressIcon} alt="Progress">
-      <span className="mr-3">{levelValue}</span>
+    <div className="align-items-center d-flex spaced-horizontal">
+      <ImageIcon icon={progressIcon} tooltip="Progress" />
+
+      <span>{levelValue}</span>
 
       <Progress
         label={`${progressValue}/${progressMaxValue}`}
         value={(progressValue / progressMaxValue) * 100}
         variant="secondary"
       />
-    </WithIcon>
+    </div>
   );
 }

@@ -6,7 +6,7 @@ import Resources from "components/Inventory/Resources";
 export default function Inventory() {
   return (
     <Card>
-      <Card.Body className="spaced">
+      <Card.Body className="spaced-vertical">
         <Resources />
 
         <Equipment />

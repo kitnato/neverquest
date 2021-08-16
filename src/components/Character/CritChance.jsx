@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
 
-import WithIcon from "components/WithIcon";
+import ImageIcon from "components/ImageIcon";
 import { criticalChance } from "state/stats";
 
 import icon from "icons/spiky-eclipse.svg";
@@ -8,13 +8,15 @@ import icon from "icons/spiky-eclipse.svg";
 export default function CritChance() {
   const critChanceValue = useRecoilValue(criticalChance);
 
+  if (critChanceValue.max === 0) {
+    return null;
+  }
+
   return (
-    <WithIcon
-      alt="Critical hit chance"
-      className={`${critChanceValue.max === 0 ? "invisible" : ""}`}
-      icon={icon}
-    >
-      {critChanceValue.current * 100}%
-    </WithIcon>
+    <div className="align-items-center d-flex spaced-horizontal">
+      <ImageIcon icon={icon} tooltip="Critical hit chance" />
+
+      <span>{critChanceValue.current * 100}%</span>
+    </div>
   );
 }

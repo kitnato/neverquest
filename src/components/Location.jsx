@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
 
-import WithIcon from "components/WithIcon";
+import ImageIcon from "components/ImageIcon";
 import compassIcon from "icons/compass.svg";
 import { location } from "state/global";
 
@@ -8,8 +8,10 @@ export default function Location() {
   const locationValue = useRecoilValue(location);
 
   return (
-    <WithIcon icon={compassIcon} alt="Location">
+    <div className="align-items-center d-flex spaced-horizontal">
+      <ImageIcon icon={compassIcon} tooltip="Location" />
+
       <span>{locationValue}</span>
-    </WithIcon>
+    </div>
   );
 }

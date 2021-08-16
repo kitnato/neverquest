@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
+import ImageIcon from "components/ImageIcon";
 import Progress from "components/Progress";
-import WithIcon from "components/WithIcon";
 import useAnimation from "hooks/useAnimation";
 import attackIcon from "icons/tron-arrow.svg";
 import { isAttacking, attack, attackSpeed } from "state/character";
@@ -30,14 +30,14 @@ export default function Attack() {
   }, [isAttackingValue]);
 
   return (
-    <WithIcon alt="Attack rate" icon={attackIcon}>
-      <div style={{ width: "100%" }}>
-        <Progress
-          label={formatCountdown(attackSpeedValue - deltaAttack)}
-          value={(deltaAttack / attackSpeedValue) * 100}
-          variant="info"
-        />
-      </div>
-    </WithIcon>
+    <div className="align-items-center d-flex spaced-horizontal">
+      <ImageIcon icon={attackIcon} tooltip="Attack rate" />
+
+      <Progress
+        label={formatCountdown(attackSpeedValue - deltaAttack)}
+        value={(deltaAttack / attackSpeedValue) * 100}
+        variant="info"
+      />
+    </div>
   );
 }

@@ -22,9 +22,9 @@ export default function Caravan() {
   return (
     <Card>
       <Card.Body>
-        <div className="spaced">
+        <div className="spaced-vertical">
           {memberOrder.map(
-            ({ name, Component }) => members[name] && <Component />
+            ({ name, Component }) => members[name] && <Component key={name} />
           )}
         </div>
       </Card.Body>

@@ -3,13 +3,13 @@ import { atom, selector } from "recoil";
 import { armor, shield, weapon } from "state/equipment";
 import { gameOver } from "state/global";
 import { attackSpeedBonus, damage, health, stamina } from "state/stats";
-import getDamage from "utilities/getDamage";
+import getFromRange from "utilities/getFromRange";
 
 // ATOMS
 
-export const isAttacking = atom({
-  key: "isAttacking",
-  default: false,
+export const characterLevel = atom({
+  key: "characterLevel",
+  default: 0,
 });
 
 export const damageDealt = atom({
@@ -27,9 +27,9 @@ export const experience = atom({
   default: 0,
 });
 
-export const characterLevel = atom({
-  key: "characterLevel",
-  default: 0,
+export const isAttacking = atom({
+  key: "isAttacking",
+  default: false,
 });
 
 export const name = atom({
@@ -47,7 +47,7 @@ export const attack = selector({
     let newStamina = staminaValue.current - get(weapon).cost;
 
     if (newStamina >= 0) {
-      set(damageDealt, getDamage(dphValue));
+      set(damageDealt, getFromRange(dphValue));
     }
 
     if (newStamina < 0) {

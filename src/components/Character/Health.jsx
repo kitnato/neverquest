@@ -1,8 +1,8 @@
 import { useRecoilValue } from "recoil";
 
-import Progress from "components/Progress";
 import Regen from "components/Character/Regen";
-import WithIcon from "components/WithIcon";
+import ImageIcon from "components/ImageIcon";
+import Progress from "components/Progress";
 import { health, healthRegenAmount, healthRegenRate } from "state/stats";
 
 import healthIcon from "icons/hospital-cross.svg";
@@ -11,7 +11,9 @@ export default function Health() {
   const healthValue = useRecoilValue(health);
 
   return (
-    <WithIcon alt="Health" icon={healthIcon}>
+    <div className="align-items-center d-flex spaced-horizontal">
+      <ImageIcon icon={healthIcon} tooltip="Health" />
+
       <div style={{ width: "100%" }}>
         <Progress
           attached="below"
@@ -26,6 +28,6 @@ export default function Health() {
           resource={health}
         />
       </div>
-    </WithIcon>
+    </div>
   );
 }

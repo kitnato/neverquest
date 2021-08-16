@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
-import WithIcon from "components/WithIcon";
+import ImageIcon from "components/ImageIcon";
 import { damageDealt } from "state/character";
 import { level } from "state/global";
 
-import healthIcon from "icons/hospital-cross.svg";
+import icon from "icons/hospital-cross.svg";
 
 export default function MonsterHealth({ onDeath }) {
   const levelValue = useRecoilValue(level);
@@ -15,7 +15,6 @@ export default function MonsterHealth({ onDeath }) {
     current: levelValue + 4,
     max: levelValue + 4,
   });
-  const isDead = health.current === 0;
 
   useEffect(() => {
     if (damageDealtValue !== null) {
@@ -33,18 +32,20 @@ export default function MonsterHealth({ onDeath }) {
   }, [damageDealtValue, setDamageDealt]);
 
   useEffect(() => {
-    if (isDead) {
+    if (health.current === 0) {
       onDeath();
     }
-  }, [isDead, onDeath]);
+  }, [health, onDeath]);
 
   return (
-    <WithIcon icon={healthIcon} alt="Monster health">
+    <div className="align-items-center d-flex spaced-horizontal">
+      <ImageIcon icon={icon} tooltip="Monster health" />
+
       <Progress
-        label={isDead ? "Dead" : `${health.current}/${health.max}`}
+        label={`${health.current}/${health.max}`}
         value={(health.current / health.max) * 100}
         variant="secondary"
       />
-    </WithIcon>
+    </div>
   );
 }

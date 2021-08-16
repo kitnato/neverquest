@@ -2,15 +2,17 @@ import { useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
 import Regen from "components/Character/Regen";
-import WithIcon from "components/WithIcon";
-import staminaIcon from "icons/lungs.svg";
+import ImageIcon from "components/ImageIcon";
+import icon from "icons/lungs.svg";
 import { stamina, staminaRegenAmount, staminaRegenRate } from "state/stats";
 
 export default function Stamina() {
   const staminaValue = useRecoilValue(stamina);
 
   return (
-    <WithIcon icon={staminaIcon} alt="Stamina">
+    <div className="align-items-center d-flex spaced-horizontal">
+      <ImageIcon icon={icon} tooltip="Stamina" />
+
       <div style={{ width: "100%" }}>
         <Progress
           attached="below"
@@ -25,6 +27,6 @@ export default function Stamina() {
           resource={stamina}
         />
       </div>
-    </WithIcon>
+    </div>
   );
 }

@@ -6,22 +6,26 @@ import Monster from "components/Monster";
 import { activeMonster, progress, progressMax } from "state/global";
 
 export default function Wilderness() {
-  const [activeMonsterId, setActiveMonster] = useRecoilState(activeMonster);
+  const [activeMonsterValue, setActiveMonster] = useRecoilState(activeMonster);
   const progressMaxValue = useRecoilValue(progressMax);
   const progressValue = useRecoilValue(progress);
   const monsterQueue = useRef(
-    new Array(progressMaxValue).fill({
-      id: uuidv4(),
-      Component: Monster,
-    })
+    Array.from(new Array(progressMaxValue), () => uuidv4())
   );
-  const monster = monsterQueue.current[progressValue] || {};
 
   useEffect(() => {
-    if (activeMonsterId === null && monster.id) {
-      setActiveMonster(monster.id);
-    }
-  }, [activeMonsterId, monster.id, setActiveMonster]);
+    const monsterId = monsterQueue.current[progressValue];
 
-  return monster.id ? <monster.Component id={monster.id} /> : null;
+    if (activeMonsterValue === null && monsterId) {
+      setActiveMonster(monsterId);
+    }
+  }, [activeMonsterValue, progressValue, setActiveMonster]);
+
+  return (
+    <div className="spaced-vertical">
+      {monsterQueue.current.map((id) => (
+        <Monster id={id} key={id} />
+      ))}
+    </div>
+  );
 }

@@ -4,7 +4,7 @@ import Stats from "components/Character/Stats";
 
 export default function Character() {
   return (
-    <div className="spaced">
+    <div className="spaced-vertical">
       <Status />
 
       <Inventory />

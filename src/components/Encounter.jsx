@@ -11,7 +11,7 @@ export default function Encounter() {
   const modeValue = useRecoilValue(mode);
 
   return (
-    <div className="spaced">
+    <div className="spaced-vertical">
       {modeValue === 0 && (
         <>
           <Wilderness />

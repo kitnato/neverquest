@@ -2,13 +2,17 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { useRecoilValue } from "recoil";
 
-import MonsterAttack from "components/Monster/MonsterAttack";
+import ImageIcon from "components/ImageIcon";
+import MonsterAttackMeter from "components/Monster/MonsterAttackMeter";
 import MonsterDamage from "components/Monster/MonsterDamage";
+import attackIcon from "icons/tron-arrow.svg";
 import { level } from "state/global";
+import getFromRange from "utilities/getFromRange";
 
 export default function MonsterOffense() {
   const levelValue = useRecoilValue(level);
 
+  const attackSpeed = 3010 - 10 * getFromRange(levelValue - 1, levelValue);
   const damagePerHit = { min: levelValue, max: levelValue + 1 };
 
   return (
@@ -18,7 +22,14 @@ export default function MonsterOffense() {
       </Col>
 
       <Col>
-        <MonsterAttack damagePerHit={damagePerHit} />
+        <div className="align-items-center d-flex spaced-horizontal">
+          <ImageIcon icon={attackIcon} tooltip="Monster attack rate" />
+
+          <MonsterAttackMeter
+            attackSpeed={attackSpeed}
+            damagePerHit={damagePerHit}
+          />
+        </div>
       </Col>
     </Row>
   );

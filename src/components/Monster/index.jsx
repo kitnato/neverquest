@@ -5,12 +5,13 @@ import Row from "react-bootstrap/Row";
 import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
 
 import LootDisplay from "components/Loot/LootDisplay";
-import MonsterHealth from "components/Monster/MonsterHealth";
+import MonsterHealthMeter from "components/Monster/MonsterHealthMeter";
 import MonsterName from "components/Monster/MonsterName";
 import MonsterOffense from "components/Monster/MonsterOffense";
 import ImageIcon from "components/ImageIcon";
 import deadIcon from "icons/crossed-bones.svg";
 import lurkingIcon from "icons/evil-eyes.svg";
+import healthIcon from "icons/hospital-cross.svg";
 import { experience } from "state/character";
 import { activeMonster, level, progress } from "state/global";
 import { aetherLoot, coinsLoot, hasLooted, scrapLoot } from "state/resources";
@@ -86,7 +87,11 @@ export default function Monster({ id }) {
               <>
                 <MonsterName />
 
-                <MonsterHealth onDeath={onDeath} />
+                <div className="align-items-center d-flex spaced-horizontal">
+                  <ImageIcon icon={healthIcon} tooltip="Monster health" />
+
+                  <MonsterHealthMeter onDeath={onDeath} />
+                </div>
 
                 <MonsterOffense />
               </>

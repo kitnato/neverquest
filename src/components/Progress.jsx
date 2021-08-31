@@ -24,16 +24,16 @@ export default function Progress({
 
   return (
     <div className="position-relative" style={{ width: "100%" }}>
-      <ProgressBar now={value} variant={variant} style={style} />
+      <ProgressBar now={value} style={style} variant={variant} />
 
       {size === "normal" && (
         <small
           className="position-absolute text-light"
           style={{
+            right: "50%",
             textShadow:
               "-1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000",
             top: 0,
-            right: "50%",
             transform: "translateX(50%)",
           }}
         >

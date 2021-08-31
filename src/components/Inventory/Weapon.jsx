@@ -16,7 +16,7 @@ export default function Weapon() {
       <OverlayTrigger
         overlay={
           <Tooltip>
-            {`Damage: ${weaponValue.damage.min} - ${weaponValue.damage.max}`}
+            {`Damage: ${weaponValue.damage.min}-${weaponValue.damage.max}`}
             <br />
             {`Type: ${weaponValue.type}`}
           </Tooltip>

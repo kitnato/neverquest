@@ -1,22 +1,16 @@
-import { render, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { RecoilRoot } from "recoil";
 
-import App from "pages/App";
+import App from "App";
 
 describe("<App />", () => {
-  test("Adding todo works", () => {
-    const { getByText, getByPlaceholderText } = render(
+  test("App doesn't crash", () => {
+    const { getByText } = render(
       <RecoilRoot>
         <App />
       </RecoilRoot>
     );
 
-    fireEvent.input(getByPlaceholderText("Enter TODO"), {
-      target: { value: "Fake TODO" },
-    });
-
-    fireEvent.click(getByText(/Add/i));
-
-    expect(getByText(/Fake TODO/i)).toBeInTheDocument();
+    expect(getByText(/neverquest/i)).toBeInTheDocument();
   });
 });

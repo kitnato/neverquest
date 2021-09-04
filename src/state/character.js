@@ -3,7 +3,7 @@ import { atom, selector } from "recoil";
 import { armor, shield, weapon } from "state/equipment";
 import { gameOver } from "state/global";
 import { attackSpeedBonus, damage, health, stamina } from "state/stats";
-import getFromRange from "utilities/getFromRange";
+import { getFromRange } from "utilities/helpers";
 
 // ATOMS
 

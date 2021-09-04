@@ -1,18 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
 import { isAttacking, defend } from "state/character";
 import formatCountdown from "utilities/formatCountdown";
-import getFromRange from "utilities/getFromRange";
+import { getFromRange } from "utilities/helpers";
 
 export default function MonsterAttackMeter({ attackSpeed, damagePerHit }) {
   const isAttackingValue = useRecoilValue(isAttacking);
   const setDefend = useSetRecoilState(defend);
   const [deltaAttack, setDeltaAttack] = useState(0);
-  // Need this in case character stops attacking due to 0 stamina.
-  const [isEngaged, setEngaged] = useState(false);
 
   useAnimation((deltaTime) => {
     if (deltaAttack >= attackSpeed) {
@@ -21,13 +19,7 @@ export default function MonsterAttackMeter({ attackSpeed, damagePerHit }) {
     } else {
       setDeltaAttack(deltaAttack + deltaTime);
     }
-  }, !isEngaged);
-
-  useEffect(() => {
-    if (isAttackingValue && !isEngaged) {
-      setEngaged(true);
-    }
-  }, [isAttackingValue, isEngaged]);
+  }, !isAttackingValue);
 
   return (
     <Progress

@@ -7,12 +7,13 @@ import MonsterAttackMeter from "components/Monster/MonsterAttackMeter";
 import MonsterDamage from "components/Monster/MonsterDamage";
 import attackIcon from "icons/tron-arrow.svg";
 import { level } from "state/global";
-import getFromRange from "utilities/getFromRange";
+import { getFromRange } from "utilities/helpers";
 
 export default function MonsterOffense() {
   const levelValue = useRecoilValue(level);
 
-  const attackSpeed = 3010 - 10 * getFromRange(levelValue - 1, levelValue);
+  const attackSpeed =
+    3010 - 10 * getFromRange({ min: levelValue - 1, max: levelValue });
   const damagePerHit = { min: levelValue, max: levelValue + 1 };
 
   return (

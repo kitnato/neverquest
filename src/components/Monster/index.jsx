@@ -15,7 +15,7 @@ import healthIcon from "icons/hospital-cross.svg";
 import { experience } from "state/character";
 import { activeMonster, level, progress } from "state/global";
 import { aetherLoot, coinsLoot, hasLooted, scrapLoot } from "state/resources";
-import getFromRange from "utilities/getFromRange";
+import { getFromRange } from "utilities/helpers";
 
 export default function Monster({ id }) {
   const [activeMonsterValue, setActiveMonster] = useRecoilState(activeMonster);

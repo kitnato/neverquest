@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 
 import ImageIcon from "components/ImageIcon";
-import crewIcon from "icons/hood.svg";
+import crewIcon from "icons/cowled.svg";
 
 export default function Mercenary() {
   return (

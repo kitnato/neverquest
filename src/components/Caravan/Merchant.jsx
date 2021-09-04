@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 
 import ImageIcon from "components/ImageIcon";
-import icon from "icons/hood.svg";
+import icon from "icons/cowled.svg";
 
 export default function Merchant() {
   return (

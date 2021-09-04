@@ -8,6 +8,7 @@ import { isLevelCompleted } from "state/global";
 export default function AttackButton() {
   const [isAttackingValue, setAttacking] = useRecoilState(isAttacking);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
+
   const label = (() => {
     if (isLevelCompletedValue) {
       return "Resting";

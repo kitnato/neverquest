@@ -66,9 +66,11 @@ export default function Monster({ id }) {
         {isDead ? (
           <Row>
             <Col xs={4}>
-              <ImageIcon icon={deadIcon} />
+              <div className="align-items-center d-flex spaced-horizontal">
+                <ImageIcon icon={deadIcon} />
 
-              <span className="ml-3">Remains</span>
+                <span>Remains</span>
+              </div>
             </Col>
 
             {!hasLootedValue && (

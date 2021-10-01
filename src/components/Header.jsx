@@ -24,43 +24,43 @@ export default function Header({ resetSeed }) {
     >
       <Container>
         <Navbar.Brand>
-          <span className="mr-2">neverquest</span>
-          <Settings className="mx-3" />
-          <About />
+          <div className="spaced-horizontal">
+            <span>neverquest</span>
+
+            <Settings />
+
+            <About />
+          </div>
         </Navbar.Brand>
 
         <Nav className="d-none d-sm-block ml-auto mr-auto" />
 
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-
-        <Navbar.Collapse id="responsive-navbar-nav" style={{ flexGrow: 0 }}>
-          <Nav style={{ flexDirection: "row" }}>
-            <Badge variant="light" className="mr-2 align-self-center">
+        <Nav>
+          <div className="d-flex spaced-horizontal">
+            <Badge className="align-self-center" variant="light">
               v{version}
             </Badge>
 
             <Button
-              variant="outline-light"
               href="https://www.github.com/cneuro/neverquest"
-              className="d-flex mr-3"
-              style={{ alignItems: "center" }}
+              variant="outline-light"
             >
-              <Github className="mr-1" /> Source
+              <Github /> Source
             </Button>
 
-            <Button variant="outline-danger" onClick={() => setResetShow(true)}>
+            <Button onClick={() => setResetShow(true)} variant="outline-danger">
               Reset
             </Button>
 
             <Reset
+              message="This will wipe all data and restart from the beginning."
+              resetSeed={resetSeed}
               show={resetShow}
               setHide={() => setResetShow(false)}
-              resetSeed={resetSeed}
               title="Reset the game?"
-              message="This will wipe all data and restart from the beginning."
             />
-          </Nav>
-        </Navbar.Collapse>
+          </div>
+        </Nav>
       </Container>
     </Navbar>
   );

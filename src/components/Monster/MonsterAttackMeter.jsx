@@ -25,7 +25,7 @@ export default function MonsterAttackMeter({ attackSpeed, damagePerHit }) {
     <Progress
       label={formatCountdown(attackSpeed - deltaAttack)}
       value={(deltaAttack / attackSpeed) * 100}
-      variant="info"
+      variant="warning"
     />
   );
 }

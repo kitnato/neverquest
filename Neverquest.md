@@ -251,6 +251,10 @@ Dodge chance.
 
 Attack speed.
 
+#### Resilience
+
+Recovery time after being hit.
+
 #### Acumen
 
 Casting speed.

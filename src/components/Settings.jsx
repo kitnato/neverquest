@@ -8,7 +8,7 @@ export default function Settings() {
   const handleShow = (state) => setShow(state);
 
   return (
-    <span className="mx-2">
+    <span>
       <Gear style={{ cursor: "pointer" }} onClick={() => handleShow(true)} />
 
       <Modal show={show} onHide={() => handleShow(false)}>

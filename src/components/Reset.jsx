@@ -12,11 +12,11 @@ export default function Reset({ title, message, resetSeed, show, setHide }) {
 
       <Modal.Footer>
         <Button
-          variant="outline-dark"
           onClick={() => {
             resetSeed();
             setHide();
           }}
+          variant="outline-dark"
         >
           Reset
         </Button>

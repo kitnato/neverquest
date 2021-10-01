@@ -30,7 +30,7 @@ export default function Regen({ resource, regenRate, regenAmount }) {
       attached="above"
       size="tiny"
       value={(deltaRegen / rate) * 100}
-      variant="info"
+      variant="warning"
     />
   );
 }

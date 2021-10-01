@@ -31,7 +31,7 @@ export default function AttackMeter() {
     <Progress
       label={formatCountdown(attackSpeedValue - deltaAttack)}
       value={(deltaAttack / attackSpeedValue) * 100}
-      variant="info"
+      variant="warning"
     />
   );
 }

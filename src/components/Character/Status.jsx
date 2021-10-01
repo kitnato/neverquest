@@ -3,7 +3,6 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 import Attack from "components/Character/Attack";
-import AttackButton from "components/Character/AttackButton";
 import Defense from "components/Character/Defense";
 import Health from "components/Character/Health";
 import Name from "components/Character/Name";
@@ -21,12 +20,12 @@ export default function Status() {
         <Stamina />
 
         <Row>
-          <Col>
+          <Col xs={8}>
             <Attack />
           </Col>
 
           <Col>
-            <AttackButton />
+            RECOVERY
           </Col>
         </Row>
 

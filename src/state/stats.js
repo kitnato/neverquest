@@ -72,6 +72,15 @@ export const healthRegenRate = atom({
   },
 });
 
+export const recoveryTime = atom({
+  key: "recoveryTime",
+  default: {
+    current: 1000,
+    increment: -10,
+    max: 1000,
+  },
+});
+
 export const stamina = atom({
   key: "stamina",
   default: {

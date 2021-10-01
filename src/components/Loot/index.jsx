@@ -27,9 +27,11 @@ export default function Loot() {
           <Card.Body>
             <Row>
               <Col xs={4}>
-                <ImageIcon icon={hasLootedValue ? lootedIcon : lootIcon} />
+                <div className="align-items-center d-flex spaced-horizontal">
+                  <ImageIcon icon={hasLootedValue ? lootedIcon : lootIcon} />
 
-                <span className="ml-3">Loot</span>
+                  <span>Loot</span>
+                </div>
               </Col>
 
               {!hasLootedValue && (

@@ -8,7 +8,7 @@ input.form-control-plaintext {
 }
 
 .spaced-horizontal > *:not(:last-child) {
-  margin-right: 1.5rem;
+  margin-right: 1.25rem;
 }
 
 .spaced-vertical > *:not(:last-child) {

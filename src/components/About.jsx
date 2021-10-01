@@ -8,7 +8,7 @@ export default function About() {
   const handleShow = (state) => setShow(state);
 
   return (
-    <span className="mx-2">
+    <span>
       <QuestionSquare
         style={{ cursor: "pointer" }}
         onClick={() => handleShow(true)}

@@ -1,22 +1,27 @@
 import Regen from "components/Character/Regen";
 import ResourceMeter from "components/Character/ResourceMeter";
 import ImageIcon from "components/ImageIcon";
-import { health, healthRegenAmount, healthRegenRate } from "state/stats";
-
-import healthIcon from "icons/hospital-cross.svg";
+import icon from "icons/hospital-cross.svg";
+import { totalHealthRegenAmount, totalHealthRegenRate } from "state/character";
+import { currentHealth, maxHealth } from "state/resources";
 
 export default function Health() {
   return (
     <div className="align-items-center d-flex spaced-horizontal">
-      <ImageIcon icon={healthIcon} tooltip="Health" />
+      <ImageIcon icon={icon} tooltip="Health" />
 
       <div style={{ width: "100%" }}>
-        <ResourceMeter attached="below" resource={health} />
+        <ResourceMeter
+          attached="below"
+          resourceCurrent={currentHealth}
+          resourceMax={maxHealth}
+        />
 
         <Regen
-          regenAmount={healthRegenAmount}
-          regenRate={healthRegenRate}
-          resource={health}
+          regenAmount={totalHealthRegenAmount}
+          regenRate={totalHealthRegenRate}
+          resourceCurrent={currentHealth}
+          resourceMax={maxHealth}
         />
       </div>
     </div>

@@ -2,7 +2,11 @@ import Regen from "components/Character/Regen";
 import ResourceMeter from "components/Character/ResourceMeter";
 import ImageIcon from "components/ImageIcon";
 import icon from "icons/lungs.svg";
-import { stamina, staminaRegenAmount, staminaRegenRate } from "state/stats";
+import {
+  totalStaminaRegenAmount,
+  totalStaminaRegenRate,
+} from "state/character";
+import { currentStamina, maxStamina } from "state/resources";
 
 export default function Stamina() {
   return (
@@ -10,12 +14,17 @@ export default function Stamina() {
       <ImageIcon icon={icon} tooltip="Stamina" />
 
       <div style={{ width: "100%" }}>
-        <ResourceMeter attached="below" resource={stamina} />
+        <ResourceMeter
+          attached="below"
+          resourceCurrent={currentStamina}
+          resourceMax={maxStamina}
+        />
 
         <Regen
-          regenAmount={staminaRegenAmount}
-          regenRate={staminaRegenRate}
-          resource={stamina}
+          regenAmount={totalStaminaRegenAmount}
+          regenRate={totalStaminaRegenRate}
+          resourceCurrent={currentStamina}
+          resourceMax={maxStamina}
         />
       </div>
     </div>

@@ -9,7 +9,7 @@ import ImageIcon from "components/ImageIcon";
 import lootIcon from "icons/locked-chest.svg";
 import lootedIcon from "icons/open-chest.svg";
 import { isLevelCompleted } from "state/global";
-import { aetherLoot, coinsLoot, hasLooted, scrapLoot } from "state/resources";
+import { aetherLoot, coinsLoot, hasLooted, scrapLoot } from "state/loot";
 
 export default function Loot() {
   const aetherLootValue = useRecoilValue(aetherLoot);

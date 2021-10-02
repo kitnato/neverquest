@@ -10,7 +10,7 @@ export default function InventoryButton() {
   const showValue = useRecoilValue(show);
 
   return (
-    showValue.inventory && (
+    showValue.inventoryButton && (
       <Button
         block
         disabled={isInventoryOpen}

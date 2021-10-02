@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil";
 
 import LootDisplay from "components/Loot/LootDisplay";
 import { show } from "state/global";
-import { aether, coins, scrap } from "state/resources";
+import { aether, coins, scrap } from "state/loot";
 
 export default function Resources() {
   const aetherValue = useRecoilValue(aether);
@@ -11,7 +11,7 @@ export default function Resources() {
   const showValue = useRecoilValue(show);
 
   return (
-    showValue.resources && (
+    showValue.loot && (
       <LootDisplay aether={aetherValue} coins={coinsValue} scrap={scrapValue} />
     )
   );

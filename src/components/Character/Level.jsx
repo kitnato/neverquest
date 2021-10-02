@@ -1,9 +1,8 @@
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
-import { characterLevel } from "state/character";
-
 import icon from "icons/level-four-advanced.svg";
+import { characterLevel } from "state/character";
 
 export default function Level() {
   const characterLevelValue = useRecoilValue(characterLevel);

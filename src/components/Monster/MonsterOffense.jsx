@@ -12,8 +12,8 @@ import { getFromRange } from "utilities/helpers";
 export default function MonsterOffense() {
   const levelValue = useRecoilValue(level);
 
-  const attackSpeed =
-    3010 - 10 * getFromRange({ min: levelValue - 1, max: levelValue });
+  const attackRate =
+    4510 - 10 * getFromRange({ min: levelValue - 1, max: levelValue });
   const damagePerHit = { min: levelValue, max: levelValue + 1 };
 
   return (
@@ -27,7 +27,7 @@ export default function MonsterOffense() {
           <ImageIcon icon={attackIcon} tooltip="Monster attack rate" />
 
           <MonsterAttackMeter
-            attackSpeed={attackSpeed}
+            attackRate={attackRate}
             damagePerHit={damagePerHit}
           />
         </div>

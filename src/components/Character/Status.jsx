@@ -7,6 +7,7 @@ import Defense from "components/Character/Defense";
 import Health from "components/Character/Health";
 import Name from "components/Character/Name";
 import Offense from "components/Character/Offense";
+import Recovery from "components/Character/Recovery";
 import Stamina from "components/Character/Stamina";
 
 export default function Status() {
@@ -25,7 +26,7 @@ export default function Status() {
           </Col>
 
           <Col>
-            RECOVERY
+            <Recovery />
           </Col>
         </Row>
 

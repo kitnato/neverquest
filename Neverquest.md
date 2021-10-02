@@ -130,13 +130,15 @@ Manage equipment. Manage skills. View buffs and debuffs.
 
 #### Health
 
+Total amount of damage the player can take befor game over at 0 health.
+
 #### Stamina
 
-Used when attacking.
+Consumed with every attack.
 
 #### Energy
 
-Used for skills.
+Consumed when activating skills and spells.
 
 #### XP
 
@@ -166,19 +168,19 @@ Gained from selling scrap, aether and equipment. Dropped from monsters. Used to 
 
 ##### Balanced
 
-1 slot. Medium damage, medium attack speed.
+1 slot. Medium damage, medium attack rate.
 
 ##### Heavy
 
-1 slot. High damage, low attack speed.
+1 slot. High damage, low attack rate.
 
 ##### Light
 
-1 slot. Low damage, high attack speed.
+1 slot. Low damage, high attack rate.
 
 ##### Two-handed
 
-2 slots. Highest damage, low attack speed.
+2 slots. Highest damage, low attack rate.
 
 #### Armor
 
@@ -191,7 +193,7 @@ Each subsequent type increases the armor.
 - None
 - Light: low -% dodge, +% critical chance
 - Sturdy: medium -% dodge, *???*
-- Heavy: high -% dodge, -% attack speed, +% block, +% chance to deflect spells
+- Heavy: high -% dodge, -% attack rate, +% block, +% chance to deflect spells
 
 ##### Shield
 
@@ -223,13 +225,29 @@ Grants inventory slots and potion slots.
 
 ### Stat
 
-#### Endurance
+#### Health
 
-Total health.
+Maximum total health resource.
 
 #### Vitality
 
-Health regeneration per second.
+Health regeneration amount per rate tick.
+
+#### Vigor
+
+Health regeneration rate.
+
+#### Stamina
+
+Maximum total stamina resource.
+
+#### Fortitude
+
+Stamina regeneration amount.
+
+#### Endurance
+
+Stamina regeneration rate.
 
 #### Wisdom
 
@@ -237,36 +255,40 @@ Total energy.
 
 #### Intellect
 
-Energy regeneration per second.
+Energy regeneration amount.
+
+#### Intuition
+
+Energy regeneration rate.
 
 #### Strength
 
-Damage with melee weapons.
+Increases total damage of an attack.
 
 #### Agility
 
-Dodge chance.
+Chance to dodge a monster's attack.
 
 #### Speed
 
-Attack speed.
+Increases rate of attack.
 
 #### Resilience
 
-Recovery time after being hit.
+Rate of recovery after being hit.
 
 #### Acumen
 
-Casting speed.
+Casting rate.
 
 #### Dexterity
 
-Critical chance.
+Chance of landing a critical hit.
 
 #### Perception
 
-Critical damage.
+Damage multiplier of a critical hit.
 
 #### Luck
 
-Chance for extra coins, scrap and aether.
+Increases the amount of loot dropped by monsters.

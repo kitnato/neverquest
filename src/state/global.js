@@ -31,8 +31,11 @@ export const show = atom({
   key: "show",
   default: {
     defense: false,
+    critical: false,
+    dodgeChance: false,
     inventory: false,
-    resources: false,
+    inventoryButton: false,
+    loot: false,
     stats: false,
   },
 });

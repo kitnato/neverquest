@@ -2,14 +2,19 @@ import { useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
 
-export default function ResourceMeter({ attached, resource }) {
-  const value = useRecoilValue(resource);
+export default function ResourceMeter({
+  attached,
+  resourceCurrent,
+  resourceMax,
+}) {
+  const resourceCurrentValue = useRecoilValue(resourceCurrent);
+  const resourceMaxValue = useRecoilValue(resourceMax);
 
   return (
     <Progress
       attached={attached}
-      label={`${value.current}/${value.max}`}
-      value={(value.current / value.max) * 100}
+      label={`${resourceCurrentValue}/${resourceMaxValue}`}
+      value={(resourceCurrentValue / resourceMaxValue) * 100}
       variant="secondary"
     />
   );

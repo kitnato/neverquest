@@ -1,21 +1,23 @@
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
-import dodgeIcon from "icons/wingfoot.svg";
-import { dodge } from "state/stats";
+import icon from "icons/wingfoot.svg";
+import { totalDodgeChance } from "state/character";
+import { show } from "state/global";
 
 export default function Dodge() {
-  const dodgeValue = useRecoilValue(dodge);
+  const dodgeChanceValue = useRecoilValue(totalDodgeChance);
+  const showValue = useRecoilValue(show);
 
-  if (dodgeValue.max === 0) {
+  if (!showValue.dodgeChance) {
     return null;
   }
 
   return (
     <div className="align-items-center d-flex spaced-horizontal">
-      <ImageIcon icon={dodgeIcon} tooltip="Dodge" />
+      <ImageIcon icon={icon} tooltip="Dodge" />
 
-      <span>{dodgeValue.current * 100}%</span>
+      <span>{dodgeChanceValue * 100}%</span>
     </div>
   );
 }

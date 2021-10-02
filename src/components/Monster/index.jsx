@@ -14,7 +14,7 @@ import lurkingIcon from "icons/evil-eyes.svg";
 import healthIcon from "icons/hospital-cross.svg";
 import { experience } from "state/character";
 import { activeMonster, level, progress } from "state/global";
-import { aetherLoot, coinsLoot, hasLooted, scrapLoot } from "state/resources";
+import { aetherLoot, coinsLoot, hasLooted, scrapLoot } from "state/loot";
 import { getFromRange } from "utilities/helpers";
 
 export default function Monster({ id }) {

@@ -7,13 +7,13 @@ import { isAttacking, defend } from "state/character";
 import formatCountdown from "utilities/formatCountdown";
 import { getFromRange } from "utilities/helpers";
 
-export default function MonsterAttackMeter({ attackSpeed, damagePerHit }) {
+export default function MonsterAttackMeter({ attackRate, damagePerHit }) {
   const isAttackingValue = useRecoilValue(isAttacking);
   const setDefend = useSetRecoilState(defend);
   const [deltaAttack, setDeltaAttack] = useState(0);
 
   useAnimation((deltaTime) => {
-    if (deltaAttack >= attackSpeed) {
+    if (deltaAttack >= attackRate) {
       setDefend(getFromRange(damagePerHit));
       setDeltaAttack(0);
     } else {
@@ -23,8 +23,8 @@ export default function MonsterAttackMeter({ attackSpeed, damagePerHit }) {
 
   return (
     <Progress
-      label={formatCountdown(attackSpeed - deltaAttack)}
-      value={(deltaAttack / attackSpeed) * 100}
+      label={formatCountdown(attackRate - deltaAttack)}
+      value={(deltaAttack / attackRate) * 100}
       variant="warning"
     />
   );

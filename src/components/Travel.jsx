@@ -2,7 +2,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import Button from "react-bootstrap/Button";
 
 import { level, location, mode } from "state/global";
-import { hasLooted } from "state/resources";
+import { hasLooted } from "state/loot";
 
 export default function Travel() {
   const hasLootedValue = useRecoilValue(hasLooted);

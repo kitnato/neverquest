@@ -3,33 +3,38 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
+import { isRecovering } from "state/character";
 
-export default function Regen({ resource, regenRate, regenAmount }) {
-  const [resourceValue, setResource] = useRecoilState(resource);
-  const { current: rate } = useRecoilValue(regenRate);
-  const { current: amount } = useRecoilValue(regenAmount);
+export default function Regen({
+  regenRate,
+  regenAmount,
+  resourceCurrent,
+  resourceMax,
+}) {
+  const [resourceCurrentValue, setResource] = useRecoilState(resourceCurrent);
+  const isRecoveringValue = useRecoilValue(isRecovering);
+  const regenRateValue = useRecoilValue(regenRate);
+  const resourceMaxValue = useRecoilValue(resourceMax);
+  const regenAmountValue = useRecoilValue(regenAmount);
   const [deltaRegen, setRegen] = useState(0);
-  const isRecovering = resourceValue.current < resourceValue.max;
+  const canRecover = resourceCurrentValue < resourceMaxValue;
 
   useAnimation((deltaTime) => {
-    if (deltaRegen >= rate) {
-      const newResourceValue = resourceValue.current + amount;
+    if (deltaRegen >= regenRateValue) {
+      const newResourceValue = resourceCurrentValue + regenAmountValue;
 
-      setResource({
-        ...resourceValue,
-        current: newResourceValue,
-      });
+      setResource(newResourceValue);
       setRegen(0);
     } else {
       setRegen(deltaRegen + deltaTime);
     }
-  }, !isRecovering);
+  }, !canRecover || isRecoveringValue);
 
   return (
     <Progress
       attached="above"
       size="tiny"
-      value={(deltaRegen / rate) * 100}
+      value={(deltaRegen / regenRateValue) * 100}
       variant="warning"
     />
   );

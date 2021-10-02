@@ -1,109 +1,146 @@
 import { atom } from "recoil";
 
-export const attackSpeedBonus = atom({
-  key: "attackSpeedBonus",
+export const attackRateBonus = atom({
+  key: "attackRateBonus",
   default: {
-    current: 0,
+    base: 0,
+    description: "Increases rate of attack.",
     increment: 0.01,
-    max: 0,
+    name: "Speed",
+    points: 0,
   },
 });
 
 export const criticalChance = atom({
   key: "criticalChance",
   default: {
-    current: 0,
+    base: 0,
+    description: "Chance of landing a critical hit.",
     increment: 0.01,
-    max: 0,
+    name: "Dexterity",
+    points: 0,
   },
 });
 
 export const criticalDamage = atom({
   key: "criticalDamage",
   default: {
-    current: 1,
+    base: 1,
+    description: "Damage multiplier of a critical hit.",
     increment: 0.1,
-    max: 0,
+    name: "Perception",
+    points: 0,
   },
 });
 
 export const damage = atom({
   key: "damage",
   default: {
-    current: 1,
+    base: 0,
+    description: "Increases total damage of an attack.",
     increment: 1,
-    max: 1,
+    name: "Strength",
+    points: 0,
   },
 });
 
-export const dodge = atom({
-  key: "dodge",
+export const dodgeChance = atom({
+  key: "dodgeChance",
   default: {
-    current: 0,
+    base: 0,
+    description: "Chance to dodge a monster's attack.",
     increment: 0.01,
-    max: 0,
+    name: "Agility",
+    points: 0,
   },
 });
 
 export const health = atom({
   key: "health",
   default: {
-    current: 8,
+    base: 10,
+    description: "Maximum total health.",
     increment: 2,
-    max: 8,
+    name: "Endurance",
+    points: 0,
   },
 });
 
 export const healthRegenAmount = atom({
   key: "healthRegenAmount",
   default: {
-    current: 1,
+    base: 1,
+    costModifier: 1.5,
+    description: "Health regeneration amount per rate tick.",
     increment: 1,
-    max: 1,
+    name: "Vitality",
+    points: 0,
   },
 });
 
 export const healthRegenRate = atom({
   key: "healthRegenRate",
   default: {
-    current: 8000,
+    base: 9000,
+    description: "Health regeneration rate.",
     increment: -50,
-    max: 8000,
+    name: "Vigor",
+    points: 0,
   },
 });
 
-export const recoveryTime = atom({
-  key: "recoveryTime",
+export const lootBonus = atom({
+  key: "lootBonus",
   default: {
-    current: 1000,
+    base: 0,
+    description: "Increases the amount of loot dropped by monsters.",
+    increment: 0.02,
+    name: "Luck",
+    points: 0,
+  },
+});
+
+export const recoveryRate = atom({
+  key: "recoveryRate",
+  default: {
+    base: 1000,
+    description: "Rate of recovery after being hit.",
     increment: -10,
-    max: 1000,
+    name: "Resilience",
+    points: 0,
   },
 });
 
 export const stamina = atom({
   key: "stamina",
   default: {
-    current: 5,
+    base: 5,
+    description: "Maximum total stamina.",
     increment: 1,
-    max: 5,
+    name: "Stamina",
+    points: 0,
   },
 });
 
 export const staminaRegenAmount = atom({
   key: "staminaRegenAmount",
   default: {
-    current: 1,
+    base: 1,
+    costModifier: 1.5,
+    description: "Stamina regeneration amount.",
     increment: 1,
-    max: 1,
+    name: "Fortitude",
+    points: 0,
   },
 });
 
 export const staminaRegenRate = atom({
   key: "staminaRegenRate",
   default: {
-    current: 3000,
+    base: 3500,
+    description: "Stamina regeneration rate.",
     increment: -50,
-    max: 3000,
+    name: "Endurance",
+    points: 0,
   },
 });

@@ -21,7 +21,7 @@ export default function Status() {
         <Stamina />
 
         <Row>
-          <Col xs={8}>
+          <Col>
             <Attack />
           </Col>
 

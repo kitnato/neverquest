@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 
 import Progress from "components/Progress";
@@ -19,6 +19,12 @@ export default function RecoveryMeter() {
       setDeltaRecovery(deltaRecovery + deltaTime);
     }
   }, !isRecoveringValue);
+
+  useEffect(() => {
+    if (!isRecoveringValue && deltaRecovery > 0) {
+      setDeltaRecovery(0);
+    }
+  }, [deltaRecovery, isRecoveringValue]);
 
   return (
     <Progress

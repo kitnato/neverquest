@@ -4,9 +4,9 @@ import { useRecoilValue } from "recoil";
 import { gameOver } from "state/global";
 
 export default function useAnimation(callback, stop) {
+  const gameOverValue = useRecoilValue(gameOver);
   const requestRef = useRef();
   const previousTimeRef = useRef();
-  const gameOverValue = useRecoilValue(gameOver);
 
   const animate = useCallback(
     (time) => {

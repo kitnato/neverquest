@@ -28,10 +28,10 @@ export default function AttackMeter() {
   }, !isAttackingValue || isRecoveringValue);
 
   useEffect(() => {
-    if (!isAttackingValue) {
+    if (!isAttackingValue && deltaAttack > 0) {
       setDeltaAttack(0);
     }
-  }, [isAttackingValue]);
+  }, [deltaAttack, isAttackingValue]);
 
   return (
     <Progress

@@ -22,7 +22,7 @@ export default function MonsterOffense() {
         <MonsterDamage damagePerHit={damagePerHit} />
       </Col>
 
-      <Col xs={8}>
+      <Col>
         <div className="align-items-center d-flex spaced-horizontal">
           <ImageIcon icon={attackIcon} tooltip="Monster attack rate" />
 

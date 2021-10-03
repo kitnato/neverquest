@@ -5,9 +5,15 @@ import { useRecoilValue } from "recoil";
 import ImageIcon from "components/ImageIcon";
 import icon from "icons/axe-sword.svg";
 import { weapon } from "state/equipment";
+import { show } from "state/global";
 
 export default function Weapon() {
   const weaponValue = useRecoilValue(weapon);
+  const showValue = useRecoilValue(show);
+
+  if (!showValue.weapon) {
+    return null;
+  }
 
   return (
     <div className="align-items-center d-flex spaced-horizontal">

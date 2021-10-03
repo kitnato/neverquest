@@ -30,13 +30,17 @@ export const progress = atom({
 export const show = atom({
   key: "show",
   default: {
-    defense: false,
+    armor: false,
     critical: false,
+    defense: false,
     dodgeChance: false,
     inventory: false,
     inventoryButton: false,
+    levelProgress: false,
     loot: false,
+    shield: false,
     stats: false,
+    weapon: false,
   },
 });
 
@@ -89,6 +93,7 @@ export const progressMax = selector({
   get: ({ get }) => {
     const levelValue = get(level);
 
-    return levelValue + 2;
+    // 3 Monsters until level 3, then 4 until 6 etc.
+    return Math.floor(levelValue / 3) + 3;
   },
 });

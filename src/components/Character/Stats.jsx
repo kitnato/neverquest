@@ -19,21 +19,23 @@ export default function Stats() {
     }
   }, [experienceValue, setShow, showValue]);
 
-  return (
-    showValue.stats && (
-      <Card>
-        <Card.Body className="spaced-vertical">
-          <Row>
-            <Col>
-              <Experience />
-            </Col>
+  if (!showValue.stats) {
+    return null;
+  }
 
-            <Col>
-              <Level />
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
-    )
+  return (
+    <Card>
+      <Card.Body className="spaced-vertical">
+        <Row>
+          <Col>
+            <Experience />
+          </Col>
+
+          <Col>
+            <Level />
+          </Col>
+        </Row>
+      </Card.Body>
+    </Card>
   );
 }

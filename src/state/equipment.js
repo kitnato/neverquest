@@ -1,30 +1,18 @@
 import { atom } from "recoil";
 
+import { NO_ARMOR, NO_SHIELD, NO_WEAPON } from "utilities/constants";
+
 export const armor = atom({
   key: "armor",
-  default: {
-    name: null,
-    value: 0,
-  },
+  default: NO_ARMOR,
 });
 
 export const shield = atom({
   key: "shield",
-  default: {
-    armor: 0,
-    block: 0,
-    name: null,
-    stagger: 0,
-  },
+  default: NO_SHIELD,
 });
 
 export const weapon = atom({
   key: "weapon",
-  default: {
-    cost: 1,
-    damage: { min: 1, max: 2 },
-    name: "Fists",
-    rate: 3000,
-    type: "light",
-  },
+  default: NO_WEAPON,
 });

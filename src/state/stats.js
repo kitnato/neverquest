@@ -103,7 +103,7 @@ export const lootBonus = atom({
 export const recoveryRate = atom({
   key: "recoveryRate",
   default: {
-    base: 1000,
+    base: 1500,
     description: "Rate of recovery after being hit.",
     increment: -10,
     name: "Resilience",
@@ -114,7 +114,7 @@ export const recoveryRate = atom({
 export const stamina = atom({
   key: "stamina",
   default: {
-    base: 5,
+    base: 4,
     description: "Maximum total stamina.",
     increment: 1,
     name: "Stamina",

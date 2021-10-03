@@ -19,7 +19,9 @@ export default function About() {
           <Modal.Title>About</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>The dark is stirring with hostile intentions.</Modal.Body>
+        <Modal.Body>
+          The darkness is stirring with hostile intentions.
+        </Modal.Body>
       </Modal>
     </span>
   );

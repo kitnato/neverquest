@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { useSetRecoilState, useRecoilValue } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
-import { isAttacking, defend } from "state/character";
+import { defend } from "state/character";
 import formatCountdown from "utilities/formatCountdown";
 import { getFromRange } from "utilities/helpers";
 
 export default function MonsterAttackMeter({ attackRate, damagePerHit }) {
-  const isAttackingValue = useRecoilValue(isAttacking);
   const setDefend = useSetRecoilState(defend);
   const [deltaAttack, setDeltaAttack] = useState(0);
 
@@ -19,7 +18,7 @@ export default function MonsterAttackMeter({ attackRate, damagePerHit }) {
     } else {
       setDeltaAttack(deltaAttack + deltaTime);
     }
-  }, !isAttackingValue);
+  });
 
   return (
     <Progress

@@ -37,11 +37,11 @@ export default function Layout({ resetSeed }) {
       </Row>
 
       <Reset
+        message="Try again?"
+        resetSeed={resetSeed}
         show={showReset && gameOverValue}
         setHide={() => setGameOverShow(false)}
-        resetSeed={resetSeed}
         title="You are dead."
-        message="Try again?"
       />
     </div>
   );

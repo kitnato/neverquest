@@ -10,21 +10,23 @@ import { show } from "state/global";
 export default function Defense() {
   const showValue = useRecoilValue(show);
 
+  if (!showValue.defense) {
+    return null;
+  }
+
   return (
-    showValue.defense && (
-      <Row>
-        <Col>
-          <TotalArmor />
-        </Col>
+    <Row>
+      <Col>
+        <TotalArmor />
+      </Col>
 
-        <Col>
-          <Block />
-        </Col>
+      <Col>
+        <Block />
+      </Col>
 
-        <Col>
-          <Dodge />
-        </Col>
-      </Row>
-    )
+      <Col>
+        <Dodge />
+      </Col>
+    </Row>
   );
 }

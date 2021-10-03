@@ -3,12 +3,19 @@ import Button from "react-bootstrap/Button";
 import { useRecoilValue, useRecoilState } from "recoil";
 
 import { isAttacking, isRecovering } from "state/character";
-import { isLevelCompleted } from "state/global";
+import { isLevelCompleted, show } from "state/global";
 
 export default function AttackButton() {
   const [isAttackingValue, setAttacking] = useRecoilState(isAttacking);
+  const [showValue, setShow] = useRecoilState(show);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const isRecoveringValue = useRecoilValue(isRecovering);
+
+  useEffect(() => {
+    if (isLevelCompletedValue && isAttacking) {
+      setAttacking(false);
+    }
+  }, [isAttackingValue, isLevelCompletedValue, setAttacking]);
 
   const label = (() => {
     if (isLevelCompletedValue) {
@@ -26,17 +33,19 @@ export default function AttackButton() {
     return "Attack";
   })();
 
-  useEffect(() => {
-    if (isLevelCompletedValue && isAttacking) {
-      setAttacking(false);
+  const onAttack = () => {
+    setAttacking(true);
+
+    if (!showValue.levelProgress) {
+      setShow({ ...show, levelProgress: true });
     }
-  }, [isAttackingValue, isLevelCompletedValue, setAttacking]);
+  };
 
   return (
     <Button
       block
       disabled={isAttackingValue || isLevelCompletedValue}
-      onClick={() => setAttacking(!isAttackingValue)}
+      onClick={onAttack}
       variant="outline-dark"
     >
       {label}

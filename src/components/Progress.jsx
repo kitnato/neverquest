@@ -30,6 +30,7 @@ export default function Progress({
         <small
           className="position-absolute text-light"
           style={{
+            letterSpacing: 1,
             right: "50%",
             textShadow:
               "-1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000",

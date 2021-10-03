@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -12,22 +12,30 @@ import ImageIcon from "components/ImageIcon";
 import deadIcon from "icons/crossed-bones.svg";
 import lurkingIcon from "icons/evil-eyes.svg";
 import healthIcon from "icons/hospital-cross.svg";
-import { experience } from "state/character";
+import { experience, isAttacking } from "state/character";
 import { activeMonster, level, progress } from "state/global";
 import { aetherLoot, coinsLoot, hasLooted, scrapLoot } from "state/loot";
 import { getFromRange } from "utilities/helpers";
 
 export default function Monster({ id }) {
   const [activeMonsterValue, setActiveMonster] = useRecoilState(activeMonster);
-  const hasLootedValue = useRecoilValue(hasLooted);
-  const levelValue = useRecoilValue(level);
   const setAetherLoot = useSetRecoilState(aetherLoot);
   const setCoinsLoot = useSetRecoilState(coinsLoot);
   const setExperience = useSetRecoilState(experience);
   const setProgress = useSetRecoilState(progress);
   const setScrapLoot = useSetRecoilState(scrapLoot);
+  const hasLootedValue = useRecoilValue(hasLooted);
+  const isAttackingValue = useRecoilValue(isAttacking);
+  const levelValue = useRecoilValue(level);
+  const [isEngaged, setEngaged] = useState(false);
   const [isDead, setDead] = useState(false);
   const [loot, setLoot] = useState({});
+
+  useEffect(() => {
+    if (isAttackingValue && !isEngaged) {
+      setEngaged(true);
+    }
+  }, [isAttackingValue, isEngaged]);
 
   const onDeath = () => {
     const range = Math.floor(levelValue / 2);
@@ -66,11 +74,10 @@ export default function Monster({ id }) {
         {isDead ? (
           <Row>
             <Col xs={4}>
-              <div className="align-items-center d-flex spaced-horizontal">
-                <ImageIcon icon={deadIcon} />
-
-                <span>Remains</span>
-              </div>
+              <ImageIcon
+                icon={deadIcon}
+                tooltip={`${hasLootedValue ? "Looted remains" : "Remains"}`}
+              />
             </Col>
 
             {!hasLootedValue && (
@@ -85,7 +92,7 @@ export default function Monster({ id }) {
           </Row>
         ) : (
           <>
-            {id === activeMonsterValue ? (
+            {id === activeMonsterValue && isEngaged ? (
               <>
                 <MonsterName />
 

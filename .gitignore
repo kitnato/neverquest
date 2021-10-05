@@ -6,5 +6,6 @@ build
 
 # local
 .vscode
-notes.txt
 .DS_Store
+dependencygraph.svg
+notes.txt

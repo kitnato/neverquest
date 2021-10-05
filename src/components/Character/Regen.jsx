@@ -17,14 +17,13 @@ export default function Regen({
   const resourceMaxValue = useRecoilValue(resourceMax);
   const regenAmountValue = useRecoilValue(regenAmount);
   const [deltaRegen, setRegen] = useState(0);
+
   const canRecover = resourceCurrentValue < resourceMaxValue;
 
   useAnimation((deltaTime) => {
     if (deltaRegen >= regenRateValue) {
-      const newResourceValue = resourceCurrentValue + regenAmountValue;
-
-      setResource(newResourceValue);
       setRegen(0);
+      setResource(resourceCurrentValue + regenAmountValue);
     } else {
       setRegen(deltaRegen + deltaTime);
     }

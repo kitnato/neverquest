@@ -142,7 +142,7 @@ Consumed when activating skills and spells.
 
 #### XP
 
-Gained from killing monsters. Spent on stats and to learn new skills. Costs increase for every allocation.
+Gained from killing monsters. Spent on attributes and to learn new skills. Costs increase for every allocation.
 
 #### Level
 

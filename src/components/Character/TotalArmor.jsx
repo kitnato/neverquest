@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
 import icon from "icons/barbute.svg";
-import { totalArmor } from "state/character";
+import { totalArmor } from "state/stats";
 
 export default function TotalArmor() {
   const totalArmorValue = useRecoilValue(totalArmor);

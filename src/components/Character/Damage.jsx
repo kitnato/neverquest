@@ -1,9 +1,8 @@
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
-import { totalDamage } from "state/character";
-
 import icon from "icons/fist.svg";
+import { totalDamage } from "state/stats";
 
 export default function Damage() {
   const dphValue = useRecoilValue(totalDamage);

@@ -38,34 +38,37 @@ export default function Monster({ id }) {
   }, [isAttackingValue, isEngaged]);
 
   const onDeath = () => {
-    const range = Math.floor(levelValue / 2);
+    const range = Math.ceil(levelValue / 2);
     const rewards = {
       aether: getFromRange({
         min: levelValue > 5 ? levelValue - range : 0,
         max: levelValue > 5 ? levelValue + range - 2 : 0,
       }),
       coins: getFromRange({
-        min: levelValue - range,
-        max: levelValue + range + 1,
+        min: levelValue - range + 1,
+        max: levelValue + 1 + Math.ceil(range * 1.5),
       }),
       experience: getFromRange({
-        min: levelValue * 2,
-        max: levelValue * 2 + range,
+        min: (levelValue + 1) * 2,
+        max: (levelValue + 1) * 2 + Math.ceil(range * 2),
       }),
       scrap: getFromRange({
         min: levelValue - range + 1,
-        max: levelValue + range,
+        max: levelValue + Math.ceil(range * 1.5),
       }),
     };
 
-    setDead(true);
-    setProgress((progressValue) => progressValue + 1);
     setActiveMonster(null);
-    setAetherLoot((current) => current + rewards.aether);
-    setCoinsLoot((current) => current + rewards.coins);
-    setExperience((current) => current + rewards.experience);
+    setAetherLoot((currentAetherLoot) => currentAetherLoot + rewards.aether);
+    setCoinsLoot((currentCoinsLoot) => currentCoinsLoot + rewards.coins);
+    setDead(true);
+    setExperience((currentExperience) => ({
+      ...currentExperience,
+      total: currentExperience.total + rewards.experience,
+    }));
     setLoot({ ...rewards });
-    setScrapLoot((current) => current + rewards.scrap);
+    setProgress((currentProgress) => currentProgress + 1);
+    setScrapLoot((currentScrapLoot) => currentScrapLoot + rewards.scrap);
   };
 
   return (

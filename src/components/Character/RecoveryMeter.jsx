@@ -3,7 +3,8 @@ import { useRecoilValue, useRecoilState } from "recoil";
 
 import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
-import { isRecovering, totalRecoveryRate } from "state/character";
+import { isRecovering } from "state/character";
+import { totalRecoveryRate } from "state/stats";
 import formatCountdown from "utilities/formatCountdown";
 
 export default function RecoveryMeter() {

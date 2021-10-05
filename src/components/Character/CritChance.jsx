@@ -2,8 +2,8 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
 import icon from "icons/spiky-eclipse.svg";
-import { totalCriticalChance } from "state/character";
 import { show } from "state/global";
+import { totalCriticalChance } from "state/stats";
 
 export default function CritChance() {
   const criticalChanceValue = useRecoilValue(totalCriticalChance);

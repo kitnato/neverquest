@@ -14,7 +14,7 @@ export const gameOver = atom({
 
 export const level = atom({
   key: "level",
-  default: 1,
+  default: 0,
 });
 
 export const mode = atom({
@@ -31,6 +31,7 @@ export const show = atom({
   key: "show",
   default: {
     armor: false,
+    attributes: false,
     critical: false,
     defense: false,
     dodgeChance: false,
@@ -39,7 +40,6 @@ export const show = atom({
     levelProgress: false,
     loot: false,
     shield: false,
-    stats: false,
     weapon: false,
   },
 });
@@ -63,7 +63,7 @@ export const location = selector({
     const modeValue = get(mode);
     const generatedLocation = (() => {
       if (modeValue === 0) {
-        if (levelValue === 1) {
+        if (levelValue === 0) {
           return "???";
         }
         // TODO - SLIM

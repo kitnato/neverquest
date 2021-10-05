@@ -3,12 +3,8 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
-import {
-  attack,
-  isAttacking,
-  isRecovering,
-  totalAttackRate,
-} from "state/character";
+import { attack, isAttacking, isRecovering } from "state/character";
+import { totalAttackRate } from "state/stats";
 import formatCountdown from "utilities/formatCountdown";
 
 export default function AttackMeter() {

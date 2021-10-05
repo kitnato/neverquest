@@ -9,20 +9,20 @@ export default function MonsterHealthMeter({ onDeath }) {
   const levelValue = useRecoilValue(level);
   const [damageDealtValue, setDamageDealt] = useRecoilState(damageDealt);
   const [health, setHealth] = useState({
-    current: levelValue + 4,
-    max: levelValue + 4,
+    current: levelValue + 5,
+    max: levelValue + 5,
   });
 
   useEffect(() => {
     if (damageDealtValue !== null) {
-      setHealth((h) => {
-        let newHealth = h.current - damageDealtValue;
+      setHealth((currentHealth) => {
+        let newHealth = currentHealth.current - damageDealtValue;
 
         if (newHealth < 0) {
           newHealth = 0;
         }
 
-        return { ...h, current: newHealth };
+        return { ...currentHealth, current: newHealth };
       });
       setDamageDealt(null);
     }

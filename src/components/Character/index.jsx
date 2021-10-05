@@ -1,9 +1,9 @@
 import AttackButton from "components/Character/AttackButton";
-import CharacterButton from "components/Character/CharacterButton";
+import Attributes from "components/Character/Attributes";
+import AttributesButton from "components/Character/AttributesButton";
+import Status from "components/Character/Status";
 import Inventory from "components/Inventory";
 import InventoryButton from "components/Inventory/InventoryButton";
-import Status from "components/Character/Status";
-import Stats from "components/Character/Stats";
 
 export default function Character() {
   return (
@@ -16,9 +16,9 @@ export default function Character() {
 
       <InventoryButton />
 
-      <Stats />
+      <Attributes />
 
-      <CharacterButton />
+      <AttributesButton />
     </div>
   );
 }

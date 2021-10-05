@@ -4,22 +4,23 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { useRecoilState, useRecoilValue } from "recoil";
 
+import AttributesAvailable from "components/Attributes/AttributesAvailable";
 import Experience from "components/Character/Experience";
 import Level from "components/Character/Level";
 import { experience } from "state/character";
 import { show } from "state/global";
 
-export default function Stats() {
+export default function Attributes() {
   const [showValue, setShow] = useRecoilState(show);
   const experienceValue = useRecoilValue(experience);
 
   useEffect(() => {
-    if (experienceValue > 0 && !showValue.stats) {
-      setShow({ ...showValue, stats: true });
+    if (experienceValue.total > 0 && !showValue.attributes) {
+      setShow({ ...showValue, attributes: true });
     }
   }, [experienceValue, setShow, showValue]);
 
-  if (!showValue.stats) {
+  if (!showValue.attributes) {
     return null;
   }
 
@@ -33,6 +34,10 @@ export default function Stats() {
 
           <Col>
             <Level />
+          </Col>
+
+          <Col>
+            <AttributesAvailable />
           </Col>
         </Row>
       </Card.Body>

@@ -1,20 +1,9 @@
 import { atom, selector } from "recoil";
 
-import { armor, shield, weapon } from "state/equipment";
+import { weapon } from "state/equipment";
 import { gameOver } from "state/global";
 import { currentStamina, currentHealth, maxStamina } from "state/resources";
-import {
-  attackRateBonus,
-  criticalChance,
-  criticalDamage,
-  damage,
-  dodgeChance,
-  healthRegenAmount,
-  healthRegenRate,
-  recoveryRate,
-  staminaRegenAmount,
-  staminaRegenRate,
-} from "state/stats";
+import { totalArmor, totalDamage } from "state/stats";
 import { getFromRange } from "utilities/helpers";
 
 // ATOMS
@@ -36,7 +25,10 @@ export const damageTaken = atom({
 
 export const experience = atom({
   key: "experience",
-  default: 0,
+  default: {
+    spent: 0,
+    total: 0,
+  },
 });
 
 export const isAttacking = atom({
@@ -56,136 +48,7 @@ export const name = atom({
 
 // SELECTORS
 
-/// Totals
-
-export const totalArmor = selector({
-  key: "totalArmor",
-  get: ({ get }) => {
-    const armorValue = get(armor);
-    const shieldValue = get(shield);
-
-    return armorValue.value + shieldValue.armor;
-  },
-});
-
-export const totalAttackRate = selector({
-  key: "totalAttackRate",
-  get: ({ get }) => {
-    const attackRateBonusValue = get(attackRateBonus);
-    const weaponValue = get(weapon);
-
-    const { base, increment, points } = attackRateBonusValue;
-    const bonus = base + increment * points;
-
-    return weaponValue.rate * (1 - bonus);
-  },
-});
-
-export const totalCriticalChance = selector({
-  key: "totalCriticalChance",
-  get: ({ get }) => {
-    const criticalChanceValue = get(criticalChance);
-
-    const { base, increment, points } = criticalChanceValue;
-
-    return base + increment * points;
-  },
-});
-
-export const totalCriticalDamage = selector({
-  key: "totalCriticalDamage",
-  get: ({ get }) => {
-    const criticalDamageValue = get(criticalDamage);
-
-    const { base, increment, points } = criticalDamageValue;
-
-    return base + increment * points;
-  },
-});
-
-export const totalDamage = selector({
-  key: "totalDamage",
-  get: ({ get }) => {
-    const damageValue = get(damage);
-    const weaponValue = get(weapon);
-
-    const { base, increment, points } = damageValue;
-    const bonus = base + increment * points;
-
-    return {
-      min: weaponValue.damage.min + bonus,
-      max: weaponValue.damage.max + bonus,
-    };
-  },
-});
-
-export const totalDodgeChance = selector({
-  key: "totalDodgeChance",
-  get: ({ get }) => {
-    const dodgeChanceValue = get(dodgeChance);
-
-    const { base, increment, points } = dodgeChanceValue;
-
-    return base + increment * points;
-  },
-});
-
-export const totalHealthRegenAmount = selector({
-  key: "totalHealthRegenAmount",
-  get: ({ get }) => {
-    const healthRegenAmountValue = get(healthRegenAmount);
-
-    const { base, increment, points } = healthRegenAmountValue;
-
-    return base + increment * points;
-  },
-});
-
-export const totalHealthRegenRate = selector({
-  key: "totalHealthRegenRate",
-  get: ({ get }) => {
-    const healthRegenRateValue = get(healthRegenRate);
-
-    const { base, increment, points } = healthRegenRateValue;
-
-    return base + increment * points;
-  },
-});
-
-export const totalRecoveryRate = selector({
-  key: "totalRecoveryRate",
-  get: ({ get }) => {
-    const recoveryRateValue = get(recoveryRate);
-
-    const { base, increment, points } = recoveryRateValue;
-
-    return base + increment * points;
-  },
-});
-
-export const totalStaminaRegenAmount = selector({
-  key: "totalStaminaRegenAmount",
-  get: ({ get }) => {
-    const staminaRegenAmountValue = get(staminaRegenAmount);
-
-    const { base, increment, points } = staminaRegenAmountValue;
-
-    return base + increment * points;
-  },
-});
-
-export const totalStaminaRegenRate = selector({
-  key: "totalStaminaRegenRate",
-  get: ({ get }) => {
-    const staminaRegenRateValue = get(staminaRegenRate);
-
-    const { base, increment, points } = staminaRegenRateValue;
-
-    return base + increment * points;
-  },
-});
-
-/// Actions
+// Actions
 
 export const attack = selector({
   key: "attack",
@@ -230,5 +93,36 @@ export const defend = selector({
     }
 
     set(currentHealth, newHealth);
+  },
+});
+
+// QUERIES
+
+export const attributesAvailable = selector({
+  key: "attributesAvailable",
+  get: ({ get }) => {
+    const attributeCostValue = get(attributeCost);
+    const characterLevelValue = get(characterLevel);
+    const experienceValue = get(experience);
+    let available = 0;
+    let cumulativeCost = attributeCostValue;
+    let potentialLevel = characterLevelValue + 1;
+
+    while (cumulativeCost <= experienceValue.total - experienceValue.spent) {
+      cumulativeCost += 1 + potentialLevel;
+      available += 1;
+      potentialLevel += 1;
+    }
+
+    return available;
+  },
+});
+
+export const attributeCost = selector({
+  key: "attributeCost",
+  get: ({ get }) => {
+    const characterLevelValue = get(characterLevel);
+
+    return 1 + characterLevelValue;
   },
 });

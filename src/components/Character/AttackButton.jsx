@@ -12,7 +12,7 @@ export default function AttackButton() {
   const isRecoveringValue = useRecoilValue(isRecovering);
 
   useEffect(() => {
-    if (isLevelCompletedValue && isAttacking) {
+    if (isAttackingValue && isLevelCompletedValue) {
       setAttacking(false);
     }
   }, [isAttackingValue, isLevelCompletedValue, setAttacking]);

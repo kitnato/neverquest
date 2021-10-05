@@ -9,7 +9,7 @@ export default function CollectLoot() {
   const setShow = useSetRecoilState(show);
 
   const handleCollect = () => {
-    setShow((currentShow) => ({ ...currentShow, inventory: true }));
+    setShow((currentLoot) => ({ ...currentLoot, inventory: true }));
     setHasLooted();
   };
 

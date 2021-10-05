@@ -2,8 +2,8 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
 import icon from "icons/striking-splinter.svg";
-import { totalCriticalDamage } from "state/character";
 import { show } from "state/global";
+import { totalCriticalDamage } from "state/stats";
 
 export default function CritDamage() {
   const criticalDamageValue = useRecoilValue(totalCriticalDamage);

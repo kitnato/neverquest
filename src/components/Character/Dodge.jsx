@@ -2,8 +2,8 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
 import icon from "icons/wingfoot.svg";
-import { totalDodgeChance } from "state/character";
 import { show } from "state/global";
+import { totalDodgeChance } from "state/stats";
 
 export default function Dodge() {
   const dodgeChanceValue = useRecoilValue(totalDodgeChance);

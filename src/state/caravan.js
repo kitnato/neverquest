@@ -6,14 +6,14 @@ import { atom } from "recoil";
 export const crew = atom({
   key: "crew",
   default: {
-    merchant: true,
-    mercenary: true,
-    cook: false,
-    blacksmith: false,
     alchemist: false,
-    witch: false,
-    tailor: false,
-    wizard: false,
+    blacksmith: false,
+    cook: false,
     medic: false,
+    mercenary: true,
+    merchant: true,
+    tailor: false,
+    witch: false,
+    wizard: false,
   },
 });

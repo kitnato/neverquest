@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 
-import { health, stamina } from "state/stats";
+import { health, stamina } from "state/attributes";
 
 // SELECTORS
 

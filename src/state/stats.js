@@ -1,146 +1,142 @@
-import { atom } from "recoil";
+import { selector } from "recoil";
 
-export const attackRateBonus = atom({
-  key: "attackRateBonus",
-  default: {
-    base: 0,
-    description: "Increases rate of attack.",
-    increment: 0.01,
-    name: "Speed",
-    points: 0,
+import {
+  attackRateBonus,
+  criticalChance,
+  criticalDamage,
+  damage,
+  dodgeChance,
+  healthRegenAmount,
+  healthRegenRate,
+  recoveryRate,
+  staminaRegenAmount,
+  staminaRegenRate,
+} from "state/attributes";
+import { armor, shield, weapon } from "state/equipment";
+
+export const totalArmor = selector({
+  key: "totalArmor",
+  get: ({ get }) => {
+    const armorValue = get(armor);
+    const shieldValue = get(shield);
+
+    return armorValue.value + shieldValue.armor;
   },
 });
 
-export const criticalChance = atom({
-  key: "criticalChance",
-  default: {
-    base: 0,
-    description: "Chance of landing a critical hit.",
-    increment: 0.01,
-    name: "Dexterity",
-    points: 0,
+export const totalAttackRate = selector({
+  key: "totalAttackRate",
+  get: ({ get }) => {
+    const attackRateBonusValue = get(attackRateBonus);
+    const weaponValue = get(weapon);
+
+    const { base, increment, points } = attackRateBonusValue;
+    const bonus = base + increment * points;
+
+    return weaponValue.rate * (1 - bonus);
   },
 });
 
-export const criticalDamage = atom({
-  key: "criticalDamage",
-  default: {
-    base: 1,
-    description: "Damage multiplier of a critical hit.",
-    increment: 0.1,
-    name: "Perception",
-    points: 0,
+export const totalCriticalChance = selector({
+  key: "totalCriticalChance",
+  get: ({ get }) => {
+    const criticalChanceValue = get(criticalChance);
+
+    const { base, increment, points } = criticalChanceValue;
+
+    return base + increment * points;
   },
 });
 
-export const damage = atom({
-  key: "damage",
-  default: {
-    base: 0,
-    description: "Increases total damage of an attack.",
-    increment: 1,
-    name: "Strength",
-    points: 0,
+export const totalCriticalDamage = selector({
+  key: "totalCriticalDamage",
+  get: ({ get }) => {
+    const criticalDamageValue = get(criticalDamage);
+
+    const { base, increment, points } = criticalDamageValue;
+
+    return base + increment * points;
   },
 });
 
-export const dodgeChance = atom({
-  key: "dodgeChance",
-  default: {
-    base: 0,
-    description: "Chance to dodge a monster's attack.",
-    increment: 0.01,
-    name: "Agility",
-    points: 0,
+export const totalDamage = selector({
+  key: "totalDamage",
+  get: ({ get }) => {
+    const damageValue = get(damage);
+    const weaponValue = get(weapon);
+
+    const { base, increment, points } = damageValue;
+    const bonus = base + increment * points;
+
+    return {
+      min: weaponValue.damage.min + bonus,
+      max: weaponValue.damage.max + bonus,
+    };
   },
 });
 
-export const health = atom({
-  key: "health",
-  default: {
-    base: 10,
-    description: "Maximum total health.",
-    increment: 2,
-    name: "Endurance",
-    points: 0,
+export const totalDodgeChance = selector({
+  key: "totalDodgeChance",
+  get: ({ get }) => {
+    const dodgeChanceValue = get(dodgeChance);
+
+    const { base, increment, points } = dodgeChanceValue;
+
+    return base + increment * points;
   },
 });
 
-export const healthRegenAmount = atom({
-  key: "healthRegenAmount",
-  default: {
-    base: 1,
-    costModifier: 1.5,
-    description: "Health regeneration amount per rate tick.",
-    increment: 1,
-    name: "Vitality",
-    points: 0,
+export const totalHealthRegenAmount = selector({
+  key: "totalHealthRegenAmount",
+  get: ({ get }) => {
+    const healthRegenAmountValue = get(healthRegenAmount);
+
+    const { base, increment, points } = healthRegenAmountValue;
+
+    return base + increment * points;
   },
 });
 
-export const healthRegenRate = atom({
-  key: "healthRegenRate",
-  default: {
-    base: 9000,
-    description: "Health regeneration rate.",
-    increment: -50,
-    name: "Vigor",
-    points: 0,
+export const totalHealthRegenRate = selector({
+  key: "totalHealthRegenRate",
+  get: ({ get }) => {
+    const healthRegenRateValue = get(healthRegenRate);
+
+    const { base, increment, points } = healthRegenRateValue;
+
+    return base + increment * points;
   },
 });
 
-export const lootBonus = atom({
-  key: "lootBonus",
-  default: {
-    base: 0,
-    description: "Increases the amount of loot dropped by monsters.",
-    increment: 0.02,
-    name: "Luck",
-    points: 0,
+export const totalRecoveryRate = selector({
+  key: "totalRecoveryRate",
+  get: ({ get }) => {
+    const recoveryRateValue = get(recoveryRate);
+
+    const { base, increment, points } = recoveryRateValue;
+
+    return base + increment * points;
   },
 });
 
-export const recoveryRate = atom({
-  key: "recoveryRate",
-  default: {
-    base: 1500,
-    description: "Rate of recovery after being hit.",
-    increment: -10,
-    name: "Resilience",
-    points: 0,
+export const totalStaminaRegenAmount = selector({
+  key: "totalStaminaRegenAmount",
+  get: ({ get }) => {
+    const staminaRegenAmountValue = get(staminaRegenAmount);
+
+    const { base, increment, points } = staminaRegenAmountValue;
+
+    return base + increment * points;
   },
 });
 
-export const stamina = atom({
-  key: "stamina",
-  default: {
-    base: 4,
-    description: "Maximum total stamina.",
-    increment: 1,
-    name: "Stamina",
-    points: 0,
-  },
-});
+export const totalStaminaRegenRate = selector({
+  key: "totalStaminaRegenRate",
+  get: ({ get }) => {
+    const staminaRegenRateValue = get(staminaRegenRate);
 
-export const staminaRegenAmount = atom({
-  key: "staminaRegenAmount",
-  default: {
-    base: 1,
-    costModifier: 1.5,
-    description: "Stamina regeneration amount.",
-    increment: 1,
-    name: "Fortitude",
-    points: 0,
-  },
-});
+    const { base, increment, points } = staminaRegenRateValue;
 
-export const staminaRegenRate = atom({
-  key: "staminaRegenRate",
-  default: {
-    base: 3500,
-    description: "Stamina regeneration rate.",
-    increment: -50,
-    name: "Endurance",
-    points: 0,
+    return base + increment * points;
   },
 });

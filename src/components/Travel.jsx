@@ -11,7 +11,7 @@ export default function Travel() {
   const changeLocation = useSetRecoilState(location);
   const isWilderness = modeValue === 0;
   const destination = (() => {
-    if (levelValue > 1) {
+    if (levelValue > 0) {
       if (isWilderness) {
         return "caravan";
       }

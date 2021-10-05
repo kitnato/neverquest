@@ -13,8 +13,8 @@ export default function MonsterOffense() {
   const levelValue = useRecoilValue(level);
 
   const attackRate =
-    4510 - 10 * getFromRange({ min: levelValue - 1, max: levelValue });
-  const damagePerHit = { min: levelValue, max: levelValue + 1 };
+    4510 - 10 * getFromRange({ min: levelValue, max: levelValue * 2 });
+  const damagePerHit = { min: levelValue + 1, max: levelValue + 2 };
 
   return (
     <Row>

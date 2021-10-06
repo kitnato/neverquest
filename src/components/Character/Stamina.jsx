@@ -2,7 +2,7 @@ import Regen from "components/Character/Regen";
 import ResourceMeter from "components/Character/ResourceMeter";
 import ImageIcon from "components/ImageIcon";
 import icon from "icons/lungs.svg";
-import { currentStamina, maxStamina } from "state/resources";
+import { currentStamina, isStaminaMaxedOut, maxStamina } from "state/resources";
 import { totalStaminaRegenAmount, totalStaminaRegenRate } from "state/stats";
 
 export default function Stamina() {
@@ -18,6 +18,7 @@ export default function Stamina() {
         />
 
         <Regen
+          isResourceMaxedOut={isStaminaMaxedOut}
           regenAmount={totalStaminaRegenAmount}
           regenRate={totalStaminaRegenRate}
           resourceCurrent={currentStamina}

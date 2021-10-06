@@ -3,7 +3,7 @@ import { atom, selector } from "recoil";
 import { weapon } from "state/equipment";
 import { gameOver } from "state/global";
 import { currentStamina, currentHealth, maxStamina } from "state/resources";
-import { totalArmor, totalDamage } from "state/stats";
+import { totalArmor, totalDamage, totalPhysicalResistance } from "state/stats";
 import { getFromRange } from "utilities/helpers";
 
 // ATOMS
@@ -80,15 +80,16 @@ export const defend = selector({
   set: ({ get, set }, incomingDamage) => {
     const healthValue = get(currentHealth);
     const totalArmorValue = get(totalArmor);
-    const healthDamage = totalArmorValue - incomingDamage;
-    let newHealth = healthValue + healthDamage;
+    const totalPhysicalResistanceValue = get(totalPhysicalResistance);
+    const healthDamage = Math.abs(totalArmorValue - incomingDamage);
+    let newHealth = healthValue - healthDamage;
 
     if (newHealth <= 0) {
       newHealth = 0;
       set(gameOver, true);
     }
 
-    if (healthDamage < 0) {
+    if (healthDamage > totalPhysicalResistanceValue) {
       set(isRecovering, true);
     }
 

@@ -8,6 +8,7 @@ import {
   dodgeChance,
   healthRegenAmount,
   healthRegenRate,
+  physicalResistance,
   recoveryRate,
   staminaRegenAmount,
   staminaRegenRate,
@@ -103,6 +104,17 @@ export const totalHealthRegenRate = selector({
     const healthRegenRateValue = get(healthRegenRate);
 
     const { base, increment, points } = healthRegenRateValue;
+
+    return base + increment * points;
+  },
+});
+
+export const totalPhysicalResistance = selector({
+  key: "totalPhysicalResistance",
+  get: ({ get }) => {
+    const physicalResistanceValue = get(physicalResistance);
+
+    const { base, increment, points } = physicalResistanceValue;
 
     return base + increment * points;
   },

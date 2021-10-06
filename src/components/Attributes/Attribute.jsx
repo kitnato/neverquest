@@ -17,7 +17,11 @@ export default function Attribute({ atom }) {
   const [attributeValue, setAttribute] = useRecoilState(atom);
   const attributesAvailableValue = useRecoilValue(attributesAvailable);
   const attributeCostValue = useRecoilValue(attributeCost);
-  const { description, name, points } = attributeValue;
+  const { canAssign, description, name, points } = attributeValue;
+
+  if (!canAssign) {
+    return null;
+  }
 
   const onLevelUp = () => {
     setAttribute((currentAttribute) => ({
@@ -35,7 +39,7 @@ export default function Attribute({ atom }) {
     <div className="align-items-center d-flex spaced-horizontal">
       <ImageIcon icon={placeholderIcon} tooltip={name} />
 
-      <span style={{ width: 250 }}>{description}</span>
+      <span>{description}</span>
 
       <span>{points}</span>
 

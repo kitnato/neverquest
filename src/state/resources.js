@@ -4,6 +4,26 @@ import { health, stamina } from "state/attributes";
 
 // SELECTORS
 
+export const isHealthMaxedOut = selector({
+  key: "isHealthMaxedOut",
+  get: ({ get }) => {
+    const currentHealthValue = get(currentHealth);
+    const maxHealthValue = get(maxHealth);
+
+    return currentHealthValue >= maxHealthValue;
+  },
+});
+
+export const isStaminaMaxedOut = selector({
+  key: "isStaminaMaxedOut",
+  get: ({ get }) => {
+    const currentStaminaValue = get(currentStamina);
+    const maxStaminaValue = get(maxStamina);
+
+    return currentStaminaValue >= maxStaminaValue;
+  },
+});
+
 export const maxHealth = selector({
   key: "maxHealth",
   get: ({ get }) => {

@@ -11,11 +11,13 @@ import {
   healthRegenAmount,
   healthRegenRate,
   lootBonus,
+  physicalResistance,
   recoveryRate,
   stamina,
   staminaRegenAmount,
   staminaRegenRate,
 } from "state/attributes";
+import React from "react";
 
 const attributesOrder = [
   health,
@@ -27,9 +29,10 @@ const attributesOrder = [
   damage,
   attackRateBonus,
   dodgeChance,
-  recoveryRate,
   criticalChance,
   criticalDamage,
+  recoveryRate,
+  physicalResistance,
   lootBonus,
 ];
 
@@ -38,7 +41,9 @@ export default function AttributesList() {
     <Container>
       <div className="justify-content-center spaced-vertical">
         {attributesOrder.map((attribute) => (
-          <Attribute atom={attribute} />
+          <React.Fragment key={attribute.key}>
+            <Attribute atom={attribute} />
+          </React.Fragment>
         ))}
       </div>
     </Container>

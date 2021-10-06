@@ -4,13 +4,18 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import Progress from "components/Progress";
 import { damageDealt } from "state/character";
 import { level } from "state/global";
+import { getFromRange } from "utilities/helpers";
 
 export default function MonsterHealthMeter({ onDeath }) {
   const levelValue = useRecoilValue(level);
   const [damageDealtValue, setDamageDealt] = useRecoilState(damageDealt);
+  const startingHealth =
+    levelValue +
+    1 +
+    2 * getFromRange({ min: levelValue + 1, max: (levelValue + 1) * 2 });
   const [health, setHealth] = useState({
-    current: levelValue + 5,
-    max: levelValue + 5,
+    current: startingHealth,
+    max: startingHealth,
   });
 
   useEffect(() => {

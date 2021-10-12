@@ -39,7 +39,10 @@ const attributesOrder = [
 export default function AttributesList() {
   return (
     <Container>
-      <div className="justify-content-center spaced-vertical">
+      <div
+        className="spaced-vertical"
+        style={{ margin: "auto", width: "fit-content" }}
+      >
         {attributesOrder.map((attribute) => (
           <React.Fragment key={attribute.key}>
             <Attribute atom={attribute} />

@@ -146,7 +146,7 @@ Gained from killing monsters. Spent on attributes and to learn new skills. Costs
 
 #### Level
 
-+1 level for each stat allocation and skill acquisition. The character level in combination with the global level determines the monster level.
++1 level for each attribute allocation and skill acquisition. The character level in combination with the global level determines the monster level.
 
 #### Scrap
 
@@ -223,7 +223,7 @@ Grants inventory slots and potion slots.
 
 #### Aura
 
-### Stat
+### Attributes
 
 #### Health
 

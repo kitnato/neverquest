@@ -1,11 +1,16 @@
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 import Attributes from "components/Attributes";
 
-export default function AttributesModal({ isShowing, onHide }) {
+// TODO - refactor with Bootstrap 5 Offcanvas
+export default function AttributesModal({ isShowing, onClose }) {
   return (
-    <Modal centered onHide={onHide} show={isShowing} size="lg">
+    <Modal
+      backdrop={false}
+      dialogClassName="modal-offcanvas"
+      onHide={onClose}
+      show={isShowing}
+    >
       <Modal.Header closeButton>
         <Modal.Title>Attributes</Modal.Title>
       </Modal.Header>
@@ -13,12 +18,6 @@ export default function AttributesModal({ isShowing, onHide }) {
       <Modal.Body>
         <Attributes />
       </Modal.Body>
-
-      <Modal.Footer>
-        <Button onClick={onHide} variant="outline-dark">
-          Done
-        </Button>
-      </Modal.Footer>
     </Modal>
   );
 }

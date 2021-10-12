@@ -69,7 +69,7 @@ export const health = atom({
     canAssign: true,
     description: "Maximum total health",
     increment: 2,
-    name: "Endurance",
+    name: "Health",
     points: 0,
   },
 });

@@ -29,7 +29,7 @@ export default function AttributesButton() {
 
       <AttributesModal
         isShowing={isModalOpen}
-        onHide={() => setModalOpen(false)}
+        onClose={() => setModalOpen(false)}
       />
     </>
   );

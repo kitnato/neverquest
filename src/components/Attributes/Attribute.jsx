@@ -39,7 +39,7 @@ export default function Attribute({ atom }) {
     <div className="align-items-center d-flex spaced-horizontal">
       <ImageIcon icon={placeholderIcon} tooltip={name} />
 
-      <span>{description}</span>
+      <span style={{ width: 200 }}>{description}</span>
 
       <span>{points}</span>
 

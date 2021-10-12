@@ -3,14 +3,15 @@ import { useRecoilValue } from "recoil";
 
 import Button from "react-bootstrap/Button";
 
-import AttributesModal from "components/Character/AttributesModal";
+import Attributes from "components/Attributes";
+import DismissableScreen from "components/DismissableScreen";
 import { isAttacking } from "state/character";
 import { show } from "state/global";
 
 export default function AttributesButton() {
   const isAttackingValue = useRecoilValue(isAttacking);
   const showValue = useRecoilValue(show);
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isScreenShowing, setScreenShowing] = useState(false);
 
   if (!showValue.attributes) {
     return null;
@@ -20,16 +21,18 @@ export default function AttributesButton() {
     <>
       <Button
         block
-        disabled={isModalOpen || isAttackingValue}
-        onClick={() => setModalOpen(!isModalOpen)}
+        disabled={isScreenShowing || isAttackingValue}
+        onClick={() => setScreenShowing(!isScreenShowing)}
         variant="outline-dark"
       >
         Attributes
       </Button>
 
-      <AttributesModal
-        isShowing={isModalOpen}
-        onClose={() => setModalOpen(false)}
+      <DismissableScreen
+        content={<Attributes />}
+        isShowing={isScreenShowing}
+        onClose={() => setScreenShowing(false)}
+        title="Attributes"
       />
     </>
   );

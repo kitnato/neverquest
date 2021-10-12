@@ -1,5 +1,5 @@
 import AttackButton from "components/Character/AttackButton";
-import Attributes from "components/Character/Attributes";
+import AttributesSummary from "components/Character/AttributesSummary";
 import AttributesButton from "components/Character/AttributesButton";
 import Status from "components/Character/Status";
 import Inventory from "components/Inventory";
@@ -16,7 +16,7 @@ export default function Character() {
 
       <InventoryButton />
 
-      <Attributes />
+      <AttributesSummary />
 
       <AttributesButton />
     </div>

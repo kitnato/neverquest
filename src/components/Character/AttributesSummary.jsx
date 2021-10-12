@@ -10,7 +10,7 @@ import Level from "components/Character/Level";
 import { experience } from "state/character";
 import { show } from "state/global";
 
-export default function Attributes() {
+export default function AttributesSummary() {
   const [showValue, setShow] = useRecoilState(show);
   const experienceValue = useRecoilValue(experience);
 

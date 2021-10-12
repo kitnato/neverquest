@@ -1,33 +1,65 @@
+import { useState } from "react";
 import { useRecoilValue } from "recoil";
 
 import Card from "react-bootstrap/Card";
 
-import Merchant from "components/Caravan/Merchant";
+import DismissableScreen from "components/DismissableScreen";
+import Member from "components/Caravan/Member";
 import Mercenary from "components/Caravan/Mercenary";
+import Merchant from "components/Caravan/Merchant";
 import { crew } from "state/caravan";
 
 export default function Caravan() {
   const members = useRecoilValue(crew);
+  const [currentMember, setCurrentMember] = useState({});
+  const [isScreenShowing, setScreenShowing] = useState(false);
+
   const memberOrder = [
     {
-      name: "merchant",
-      Component: Merchant,
+      name: "Merchant",
+      content: Merchant,
+      label: "Purchase",
+      key: "merchant",
     },
     {
-      name: "mercenary",
-      Component: Mercenary,
+      name: "Mercenary",
+      content: Mercenary,
+      label: "Train",
+      key: "mercenary",
     },
   ];
 
+  const onActivate = (isShowing, member = {}) => {
+    setScreenShowing(isShowing);
+    setCurrentMember(member);
+  };
+
   return (
-    <Card>
-      <Card.Body>
-        <div className="spaced-vertical">
-          {memberOrder.map(
-            ({ name, Component }) => members[name] && <Component key={name} />
-          )}
-        </div>
-      </Card.Body>
-    </Card>
+    <>
+      <Card>
+        <Card.Body>
+          <div className="spaced-vertical">
+            {memberOrder.map(
+              ({ key, label, name }, index) =>
+                members[key] && (
+                  <Member
+                    key={key}
+                    label={label}
+                    name={name}
+                    setActive={() => onActivate(true, memberOrder[index])}
+                  />
+                )
+            )}
+          </div>
+        </Card.Body>
+      </Card>
+
+      <DismissableScreen
+        content={currentMember.content}
+        isShowing={isScreenShowing}
+        onClose={() => onActivate(false)}
+        title={currentMember.name}
+      />
+    </>
   );
 }

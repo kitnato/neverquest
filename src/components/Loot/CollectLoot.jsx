@@ -14,13 +14,14 @@ export default function CollectLoot() {
   };
 
   return (
-    <Button
-      block
-      className={hasLootedValue && "d-none"}
-      onClick={handleCollect}
-      variant="outline-dark"
-    >
-      Collect loot
-    </Button>
+    <div className="d-grid">
+      <Button
+        className={hasLootedValue && "d-none"}
+        onClick={handleCollect}
+        variant="outline-dark"
+      >
+        Collect loot
+      </Button>
+    </div>
   );
 }

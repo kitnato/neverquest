@@ -1,34 +1,34 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import Button from "react-bootstrap/Button";
 
-import { level, location, mode } from "state/global";
+import { isWilderness, level, location } from "state/global";
 import { hasLooted } from "state/loot";
 
 export default function Travel() {
   const hasLootedValue = useRecoilValue(hasLooted);
   const levelValue = useRecoilValue(level);
-  const modeValue = useRecoilValue(mode);
+  const isWildernessValue = useRecoilValue(isWilderness);
   const changeLocation = useSetRecoilState(location);
-  const isWilderness = modeValue === 0;
   const destination = (() => {
     if (levelValue > 0) {
-      if (isWilderness) {
+      if (isWildernessValue) {
         return "caravan";
       }
       return "wilderness";
     }
 
-    return isWilderness ? "???" : "wilderness";
+    return isWildernessValue ? "???" : "wilderness";
   })();
 
   return (
-    <Button
-      block
-      className={!hasLootedValue && "d-none"}
-      onClick={changeLocation}
-      variant="outline-dark"
-    >
-      {`${isWilderness ? "Go to" : "Return to"} ${destination}`}
-    </Button>
+    <div className="d-grid">
+      <Button
+        className={!hasLootedValue && "d-none"}
+        onClick={changeLocation}
+        variant="outline-dark"
+      >
+        {`${isWildernessValue ? "Go to" : "Return to"} ${destination}`}
+      </Button>
+    </div>
   );
 }

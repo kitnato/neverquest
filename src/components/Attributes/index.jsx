@@ -1,5 +1,6 @@
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Stack from "react-bootstrap/Stack";
 
 import AttributesAvailable from "components/Attributes/AttributesAvailable";
 import AttributeCost from "components/Attributes/AttributeCost";
@@ -9,7 +10,7 @@ import Level from "components/Character/Level";
 
 export default function Attributes() {
   return (
-    <div className="spaced-vertical">
+    <Stack gap={3}>
       <Row>
         <Col>
           <Experience />
@@ -29,6 +30,6 @@ export default function Attributes() {
       </Row>
 
       <AttributesList />
-    </div>
+    </Stack>
   );
 }

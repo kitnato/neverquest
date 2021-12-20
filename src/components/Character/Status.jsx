@@ -1,6 +1,7 @@
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Stack from "react-bootstrap/Stack";
 
 import Attack from "components/Character/Attack";
 import Defense from "components/Character/Defense";
@@ -13,26 +14,28 @@ import Stamina from "components/Character/Stamina";
 export default function Status() {
   return (
     <Card>
-      <Card.Body className="spaced-vertical">
-        <Name />
+      <Card.Body>
+        <Stack gap={3}>
+          <Name />
 
-        <Health />
+          <Health />
 
-        <Stamina />
+          <Stamina />
 
-        <Row>
-          <Col>
-            <Attack />
-          </Col>
+          <Row>
+            <Col>
+              <Attack />
+            </Col>
 
-          <Col>
-            <Recovery />
-          </Col>
-        </Row>
+            <Col>
+              <Recovery />
+            </Col>
+          </Row>
 
-        <Offense />
+          <Offense />
 
-        <Defense />
+          <Defense />
+        </Stack>
       </Card.Body>
     </Card>
   );

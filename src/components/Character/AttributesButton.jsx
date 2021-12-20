@@ -19,14 +19,15 @@ export default function AttributesButton() {
 
   return (
     <>
-      <Button
-        block
-        disabled={isScreenShowing || isAttackingValue}
-        onClick={() => setScreenShowing(!isScreenShowing)}
-        variant="outline-dark"
-      >
-        Attributes
-      </Button>
+      <div className="d-grid">
+        <Button
+          disabled={isScreenShowing || isAttackingValue}
+          onClick={() => setScreenShowing(!isScreenShowing)}
+          variant="outline-dark"
+        >
+          Attributes
+        </Button>
+      </div>
 
       <DismissableScreen
         content={<Attributes />}

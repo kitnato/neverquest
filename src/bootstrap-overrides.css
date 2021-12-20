@@ -13,11 +13,3 @@ input.form-control-plaintext {
   -moz-box-shadow: 0px 10px 30px 10px rgba(0, 0, 0, 0.75);
   margin-right: 15%;
 }
-
-.spaced-horizontal > *:not(:last-child) {
-  margin-right: 1rem;
-}
-
-.spaced-vertical > *:not(:last-child) {
-  margin-bottom: 1.25rem;
-}

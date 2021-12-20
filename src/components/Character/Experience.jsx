@@ -1,3 +1,4 @@
+import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
@@ -9,7 +10,7 @@ export default function Experience() {
   const showSpent = experienceValue.spent > 0;
 
   return (
-    <div className="align-items-center d-flex spaced-horizontal">
+    <Stack direction="horizontal" gap={3}>
       <ImageIcon
         icon={icon}
         tooltip={`Experience${showSpent ? " (spent)" : ""}`}
@@ -20,6 +21,6 @@ export default function Experience() {
           showSpent ? ` (${experienceValue.spent})` : ""
         }`}
       </span>
-    </div>
+    </Stack>
   );
 }

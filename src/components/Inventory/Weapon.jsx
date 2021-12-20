@@ -1,5 +1,6 @@
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
@@ -16,7 +17,7 @@ export default function Weapon() {
   }
 
   return (
-    <div className="align-items-center d-flex spaced-horizontal">
+    <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Weapon" />
 
       <OverlayTrigger
@@ -31,6 +32,6 @@ export default function Weapon() {
       >
         <span>{weaponValue.name}</span>
       </OverlayTrigger>
-    </div>
+    </Stack>
   );
 }

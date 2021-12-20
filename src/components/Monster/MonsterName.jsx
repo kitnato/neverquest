@@ -1,3 +1,5 @@
+import Stack from "react-bootstrap/Stack";
+
 import ImageIcon from "components/ImageIcon";
 import icon from "icons/carnivore-mouth.svg";
 
@@ -6,10 +8,10 @@ export default function MonsterName() {
   const name = "???";
 
   return (
-    <div className="align-items-center d-flex spaced-horizontal">
+    <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Monster" />
 
       <span>{name}</span>
-    </div>
+    </Stack>
   );
 }

@@ -1,4 +1,5 @@
 import { useRecoilValue } from "recoil";
+import Stack from "react-bootstrap/Stack";
 
 import ImageIcon from "components/ImageIcon";
 import compassIcon from "icons/compass.svg";
@@ -8,10 +9,10 @@ export default function Location() {
   const locationValue = useRecoilValue(location);
 
   return (
-    <div className="align-items-center d-flex spaced-horizontal">
+    <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={compassIcon} tooltip="Location" />
 
       <span>{locationValue}</span>
-    </div>
+    </Stack>
   );
 }

@@ -1,3 +1,5 @@
+import Stack from "react-bootstrap/Stack";
+
 import ImageIcon from "components/ImageIcon";
 import coinsIcon from "icons/two-coins.svg";
 
@@ -7,10 +9,10 @@ export default function Coins({ value }) {
   }
 
   return (
-    <div className="align-items-center d-flex spaced-horizontal">
+    <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={coinsIcon} tooltip="Coins" />
 
       <span>{value}</span>
-    </div>
+    </Stack>
   );
 }

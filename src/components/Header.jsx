@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import Stack from "react-bootstrap/Stack";
 import { Github } from "react-bootstrap-icons";
 
 import About from "components/About";
@@ -25,20 +26,20 @@ export default function Header({ resetSeed }) {
     >
       <Container>
         <Navbar.Brand>
-          <div className="spaced-horizontal">
+          <Stack direction="horizontal" gap={3}>
             <span>neverquest</span>
 
             <Settings />
 
             <About />
-          </div>
+          </Stack>
         </Navbar.Brand>
 
         <Nav className="d-none d-sm-block ml-auto mr-auto" />
 
         <Nav>
-          <div className="d-flex spaced-horizontal">
-            <Badge className="align-self-center" variant="light">
+          <Stack direction="horizontal" gap={3}>
+            <Badge bg="light" text="dark">
               v{version}
             </Badge>
 
@@ -60,7 +61,7 @@ export default function Header({ resetSeed }) {
               setHide={() => setResetShow(false)}
               title="Reset the game?"
             />
-          </div>
+          </Stack>
         </Nav>
       </Container>
     </Navbar>

@@ -1,3 +1,5 @@
+import Stack from "react-bootstrap/Stack";
+
 import Regen from "components/Character/Regen";
 import ResourceMeter from "components/Character/ResourceMeter";
 import ImageIcon from "components/ImageIcon";
@@ -7,10 +9,10 @@ import { totalStaminaRegenAmount, totalStaminaRegenRate } from "state/stats";
 
 export default function Stamina() {
   return (
-    <div className="align-items-center d-flex spaced-horizontal">
+    <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Stamina" />
 
-      <div style={{ width: "100%" }}>
+      <Stack>
         <ResourceMeter
           attached="below"
           resourceCurrent={currentStamina}
@@ -24,7 +26,7 @@ export default function Stamina() {
           resourceCurrent={currentStamina}
           resourceMax={maxStamina}
         />
-      </div>
-    </div>
+      </Stack>
+    </Stack>
   );
 }

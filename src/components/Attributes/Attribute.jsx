@@ -1,4 +1,5 @@
 import Button from "react-bootstrap/Button";
+import Stack from "react-bootstrap/Stack";
 import { Plus } from "react-bootstrap-icons";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
@@ -36,7 +37,7 @@ export default function Attribute({ atom }) {
   };
 
   return (
-    <div className="align-items-center d-flex spaced-horizontal">
+    <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={placeholderIcon} tooltip={name} />
 
       <span style={{ width: 200 }}>{description}</span>
@@ -48,6 +49,6 @@ export default function Attribute({ atom }) {
           <Plus />
         </Button>
       )}
-    </div>
+    </Stack>
   );
 }

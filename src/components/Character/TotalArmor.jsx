@@ -1,3 +1,4 @@
+import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
@@ -8,10 +9,10 @@ export default function TotalArmor() {
   const totalArmorValue = useRecoilValue(totalArmor);
 
   return (
-    <div className="align-items-center d-flex spaced-horizontal">
+    <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Total armor" />
 
       <span>{totalArmorValue}</span>
-    </div>
+    </Stack>
   );
 }

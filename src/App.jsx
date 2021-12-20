@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { RecoilRoot } from "recoil";
 import Container from "react-bootstrap/Container";
+import { RecoilRoot } from "recoil";
+import { v4 as uuidv4 } from "uuid";
 
-import Layout from "Layout";
 import Header from "components/Header";
+import Layout from "components/Layout";
 
 export default function App() {
   const [seed, setSeed] = useState(uuidv4());
@@ -12,7 +12,7 @@ export default function App() {
   const resetSeed = () => setSeed(uuidv4());
 
   return (
-    <div>
+    <>
       <Header resetSeed={resetSeed} />
 
       <Container>
@@ -20,6 +20,6 @@ export default function App() {
           <Layout resetSeed={resetSeed} />
         </RecoilRoot>
       </Container>
-    </div>
+    </>
   );
 }

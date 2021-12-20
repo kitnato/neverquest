@@ -1,13 +1,15 @@
+import Stack from "react-bootstrap/Stack";
+
 import ImageIcon from "components/ImageIcon";
 import AttackMeter from "components/Character/AttackMeter";
 import icon from "icons/tron-arrow.svg";
 
 export default function Attack() {
   return (
-    <div className="align-items-center d-flex spaced-horizontal">
+    <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Attack rate" />
 
       <AttackMeter />
-    </div>
+    </Stack>
   );
 }

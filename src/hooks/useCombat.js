@@ -8,9 +8,9 @@ import { totalArmor, totalDamage, totalPhysicalResistance } from "state/stats";
 import { getFromRange } from "utilities/helpers";
 
 export default function useCombat() {
+  const [currentHealthValue, setCurrentHealth] = useRecoilState(currentHealth);
   const [currentStaminaValue, setCurrentStamina] =
     useRecoilState(currentStamina);
-  const [currentHealthValue, setCurrentHealth] = useRecoilState(currentHealth);
 
   const dphValue = useRecoilValue(totalDamage);
   const maxStaminaValue = useRecoilValue(maxStamina);
@@ -57,5 +57,5 @@ export default function useCombat() {
     setCurrentHealth(newHealth);
   };
 
-  return [attack, defend];
+  return { attack, defend };
 }

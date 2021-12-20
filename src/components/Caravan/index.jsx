@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import Card from "react-bootstrap/Card";
@@ -38,7 +39,7 @@ export default function Caravan() {
     <>
       <Card>
         <Card.Body>
-          <div className="spaced-vertical">
+          <Stack gap={3}>
             {memberOrder.map(
               ({ key, label, name }, index) =>
                 members[key] && (
@@ -50,7 +51,7 @@ export default function Caravan() {
                   />
                 )
             )}
-          </div>
+          </Stack>
         </Card.Body>
       </Card>
 

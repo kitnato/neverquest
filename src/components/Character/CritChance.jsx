@@ -1,3 +1,4 @@
+import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
@@ -14,10 +15,10 @@ export default function CritChance() {
   }
 
   return (
-    <div className="align-items-center d-flex spaced-horizontal">
+    <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Critical hit chance" />
 
       <span>{criticalChanceValue * 100}%</span>
-    </div>
+    </Stack>
   );
 }

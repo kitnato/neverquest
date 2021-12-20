@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Stack from "react-bootstrap/Stack";
 import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
 
 import LootDisplay from "components/Loot/LootDisplay";
@@ -73,7 +74,7 @@ export default function Monster({ id }) {
 
   return (
     <Card>
-      <Card.Body className="spaced-vertical">
+      <Card.Body>
         {isDead && (
           <Row>
             <Col xs={4}>
@@ -95,21 +96,22 @@ export default function Monster({ id }) {
           </Row>
         )}
 
-        {id === activeMonsterValue && isEngaged ? (
-          <>
-            <MonsterName />
+        {!isDead &&
+          (id === activeMonsterValue && isEngaged ? (
+            <>
+              <MonsterName />
 
-            <div className="align-items-center d-flex spaced-horizontal">
-              <ImageIcon icon={healthIcon} tooltip="Monster health" />
+              <Stack direction="horizontal" gap={3}>
+                <ImageIcon icon={healthIcon} tooltip="Monster health" />
 
-              <MonsterHealthMeter onDeath={onDeath} />
-            </div>
+                <MonsterHealthMeter onDeath={onDeath} />
+              </Stack>
 
-            <MonsterOffense />
-          </>
-        ) : (
-          <ImageIcon icon={lurkingIcon} tooltip="???" />
-        )}
+              <MonsterOffense />
+            </>
+          ) : (
+            <ImageIcon icon={lurkingIcon} tooltip="???" />
+          ))}
       </Card.Body>
     </Card>
   );

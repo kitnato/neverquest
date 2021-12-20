@@ -26,7 +26,7 @@ export default function AttributesSummary() {
 
   return (
     <Card>
-      <Card.Body className="spaced-vertical">
+      <Card.Body>
         <Row>
           <Col>
             <Experience />

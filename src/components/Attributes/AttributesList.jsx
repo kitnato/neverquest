@@ -1,4 +1,4 @@
-import Container from "react-bootstrap/Container";
+import Stack from "react-bootstrap/Stack";
 
 import Attribute from "components/Attributes/Attribute";
 import {
@@ -38,17 +38,12 @@ const attributesOrder = [
 
 export default function AttributesList() {
   return (
-    <Container>
-      <div
-        className="spaced-vertical"
-        style={{ margin: "auto", width: "fit-content" }}
-      >
-        {attributesOrder.map((attribute) => (
-          <React.Fragment key={attribute.key}>
-            <Attribute atom={attribute} />
-          </React.Fragment>
-        ))}
-      </div>
-    </Container>
+    <Stack gap={3}>
+      {attributesOrder.map((attribute) => (
+        <React.Fragment key={attribute.key}>
+          <Attribute atom={attribute} />
+        </React.Fragment>
+      ))}
+    </Stack>
   );
 }

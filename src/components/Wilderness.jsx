@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import Stack from "react-bootstrap/Stack";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 
@@ -22,10 +23,10 @@ export default function Wilderness() {
   }, [activeMonsterValue, progressValue, setActiveMonster]);
 
   return (
-    <div className="spaced-vertical">
+    <Stack gap={3}>
       {monsterQueue.current.map((id) => (
         <Monster id={id} key={id} />
       ))}
-    </div>
+    </Stack>
   );
 }

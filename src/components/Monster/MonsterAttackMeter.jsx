@@ -9,7 +9,7 @@ import { getFromRange } from "utilities/helpers";
 export default function MonsterAttackMeter({ attackRate, damagePerHit }) {
   const [deltaAttack, setDeltaAttack] = useState(0);
 
-  const [, defend] = useCombat();
+  const { defend } = useCombat();
 
   useAnimation((deltaTime) => {
     if (deltaAttack >= attackRate) {

@@ -56,29 +56,36 @@ export const isLevelCompleted = selector({
   },
 });
 
+export const isWilderness = selector({
+  key: "isWilderness",
+  get: ({ get }) => {
+    const modeValue = get(mode);
+
+    return modeValue === 0;
+  },
+});
+
 export const location = selector({
   key: "location",
   get: ({ get }) => {
+    const isWildernessValue = get(isWilderness);
     const levelValue = get(level);
-    const modeValue = get(mode);
-    const generatedLocation = (() => {
-      if (modeValue === 0) {
-        if (levelValue === 0) {
-          return "???";
-        }
-        // TODO - SLIM
-        return "Wilderness";
-      }
-      return "Caravan";
-    })();
 
-    return generatedLocation;
+    if (isWildernessValue) {
+      if (levelValue === 0) {
+        return "???";
+      }
+      // TODO - SLIM
+      return "Wilderness";
+    }
+
+    return "Caravan";
   },
   set: ({ get, set }) => {
     const levelValue = get(level);
-    const isWilderness = get(mode) === 0;
+    const isWildernessValue = get(isWilderness);
 
-    if (isWilderness) {
+    if (isWildernessValue) {
       set(mode, 1);
     } else {
       set(mode, 0);

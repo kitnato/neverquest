@@ -1,3 +1,5 @@
+import Stack from "react-bootstrap/Stack";
+
 import ImageIcon from "components/ImageIcon";
 import icon from "icons/shattered-sword.svg";
 
@@ -7,10 +9,10 @@ export default function Scrap({ value }) {
   }
 
   return (
-    <div className="align-items-center d-flex spaced-horizontal">
+    <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Scrap" />
 
       <span>{value}</span>
-    </div>
+    </Stack>
   );
 }

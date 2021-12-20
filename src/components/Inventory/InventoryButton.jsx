@@ -16,13 +16,14 @@ export default function InventoryButton() {
   }
 
   return (
-    <Button
-      block
-      disabled={isInventoryOpen || isAttackingValue}
-      onClick={() => setInventoryOpen(!isInventoryOpen)}
-      variant="outline-dark"
-    >
-      Inventory
-    </Button>
+    <div className="d-grid">
+      <Button
+        disabled={isInventoryOpen || isAttackingValue}
+        onClick={() => setInventoryOpen(!isInventoryOpen)}
+        variant="outline-dark"
+      >
+        Inventory
+      </Button>
+    </div>
   );
 }

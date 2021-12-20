@@ -14,7 +14,7 @@ export default function AttackMeter() {
   const isRecoveringValue = useRecoilValue(isRecovering);
   const [deltaAttack, setDeltaAttack] = useState(0);
 
-  const [attack] = useCombat();
+  const { attack } = useCombat();
 
   useAnimation((deltaTime) => {
     if (deltaAttack >= attackRateValue) {

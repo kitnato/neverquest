@@ -43,7 +43,7 @@ export const damage = atom({
   default: {
     base: 0,
     canAssign: true,
-    description: "Total damage of an attack",
+    description: "Base damage of an attack",
     increment: 1,
     name: "Strength",
     points: 0,

@@ -1,5 +1,7 @@
 import { atom, selector } from "recoil";
 
+import { totalAttackRate, totalDamage } from "state/stats";
+
 // ATOMS
 
 export const characterLevel = atom({
@@ -68,5 +70,15 @@ export const attributeCost = selector({
     const characterLevelValue = get(characterLevel);
 
     return 1 + characterLevelValue;
+  },
+});
+
+export const damagePerSecond = selector({
+  key: "damagePerSecond",
+  get: ({ get }) => {
+    const totalAttackRateValue = get(totalAttackRate);
+    const { min, max } = get(totalDamage);
+
+    return ((max - min) / (totalAttackRateValue / 1000)).toFixed(2);
   },
 });

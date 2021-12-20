@@ -1,5 +1,6 @@
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
@@ -23,14 +24,14 @@ export default function MonsterOffense() {
       </Col>
 
       <Col>
-        <div className="align-items-center d-flex spaced-horizontal">
+        <Stack direction="horizontal" gap={3}>
           <ImageIcon icon={attackIcon} tooltip="Monster attack rate" />
 
           <MonsterAttackMeter
             attackRate={attackRate}
             damagePerHit={damagePerHit}
           />
-        </div>
+        </Stack>
       </Col>
     </Row>
   );

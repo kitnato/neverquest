@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useRecoilState } from "recoil";
 import FormControl from "react-bootstrap/FormControl";
+import Stack from "react-bootstrap/Stack";
+import { useRecoilState } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
 import icon from "icons/domino-mask.svg";
@@ -11,7 +12,7 @@ export default function Character() {
   const [isEditing, setEditing] = useState(false);
 
   return (
-    <div className="align-items-center d-flex spaced-horizontal">
+    <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Name" />
 
       <FormControl
@@ -23,6 +24,6 @@ export default function Character() {
         onKeyPress={({ charCode }) => charCode === 13 && setEditing(false)}
         onBlur={() => setEditing(false)}
       />
-    </div>
+    </Stack>
   );
 }

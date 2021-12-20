@@ -42,13 +42,14 @@ export default function AttackButton() {
   };
 
   return (
-    <Button
-      block
-      disabled={isAttackingValue || isLevelCompletedValue}
-      onClick={onAttack}
-      variant="outline-dark"
-    >
-      {label}
-    </Button>
+    <div className="d-grid">
+      <Button
+        disabled={isAttackingValue || isLevelCompletedValue}
+        onClick={onAttack}
+        variant="outline-dark"
+      >
+        {label}
+      </Button>
+    </div>
   );
 }

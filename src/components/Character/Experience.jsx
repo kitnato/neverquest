@@ -16,7 +16,7 @@ export default function Experience() {
         tooltip={`Experience${showSpent ? " (spent)" : ""}`}
       />
 
-      <span>
+      <span style={{ whiteSpace: "no-wrap" }}>
         {`${experienceValue.total} ${
           showSpent ? ` (${experienceValue.spent})` : ""
         }`}

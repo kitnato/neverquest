@@ -3,7 +3,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { damageDealt, isAttacking, isRecovering } from "state/character";
 import { weapon } from "state/equipment";
 import { gameOver } from "state/global";
-import { currentStamina, currentHealth, maxStamina } from "state/resources";
+import { currentStamina, currentHealth } from "state/resources";
 import { totalArmor, totalDamage, totalPhysicalResistance } from "state/stats";
 import { getFromRange } from "utilities/helpers";
 
@@ -13,7 +13,6 @@ export default function useCombat() {
     useRecoilState(currentStamina);
 
   const dphValue = useRecoilValue(totalDamage);
-  const maxStaminaValue = useRecoilValue(maxStamina);
   const totalArmorValue = useRecoilValue(totalArmor);
   const totalPhysicalResistanceValue = useRecoilValue(totalPhysicalResistance);
   const weaponValue = useRecoilValue(weapon);
@@ -33,10 +32,6 @@ export default function useCombat() {
     if (newStamina < 0) {
       newStamina = 0;
       setAttacking(false);
-    }
-
-    if (newStamina > maxStaminaValue) {
-      newStamina = maxStaminaValue;
     }
 
     setCurrentStamina(newStamina);

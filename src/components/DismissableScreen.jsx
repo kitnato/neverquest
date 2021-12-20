@@ -1,24 +1,23 @@
-import Modal from "react-bootstrap/Modal";
+import Offcanvas from "react-bootstrap/Offcanvas";
 
-// TODO - refactor as right-aligned Bootstrap 5 Offcanvas
 export default function DismissableScreen({
   content,
   isShowing,
   onClose,
+  placement = "end",
   title,
 }) {
   return (
-    <Modal
-      backdrop={false}
-      dialogClassName="modal-offcanvas"
+    <Offcanvas
       onHide={onClose}
+      placement={placement}
       show={isShowing}
+      style={{ minWidth: 450, width: "33%" }}
     >
-      <Modal.Header closeButton>
-        <Modal.Title>{title}</Modal.Title>
-      </Modal.Header>
-
-      <Modal.Body>{content}</Modal.Body>
-    </Modal>
+      <Offcanvas.Header closeButton>
+        <Offcanvas.Title>{title}</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Body>{content}</Offcanvas.Body>
+    </Offcanvas>
   );
 }

@@ -1,13 +1,11 @@
 import { atom } from "recoil";
 
-// ATOMS
-
 export const attackRateBonus = atom({
   key: "attackRateBonus",
   default: {
     base: 0,
     canAssign: true,
-    description: "Rate of attack",
+    description: "Attack rate",
     increment: 0.01,
     name: "Speed",
     points: 0,
@@ -43,7 +41,7 @@ export const damage = atom({
   default: {
     base: 0,
     canAssign: true,
-    description: "Base damage of an attack",
+    description: "Base attack damage",
     increment: 1,
     name: "Strength",
     points: 0,
@@ -55,7 +53,7 @@ export const dodgeChance = atom({
   default: {
     base: 0,
     canAssign: true,
-    description: "Chance to dodge a monster's attack",
+    description: "Chance to dodge an attack",
     increment: 0.01,
     name: "Agility",
     points: 0,
@@ -116,8 +114,7 @@ export const physicalResistance = atom({
   default: {
     base: 0,
     canAssign: false,
-    description:
-      "Amount of damage per hit that can be taken needing to recover",
+    description: "Amount of damage taken without needing to recover",
     increment: 2,
     name: "Stoicism",
     points: 0,
@@ -128,7 +125,7 @@ export const recoveryRate = atom({
   key: "recoveryRate",
   default: {
     base: 1500,
-    description: "Rate of recovery after being hit",
+    description: "Recovery rate",
     increment: -10,
     name: "Resilience",
     points: 0,

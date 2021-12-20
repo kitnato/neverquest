@@ -1,5 +1,5 @@
-import { useRecoilValue } from "recoil";
 import Stack from "react-bootstrap/Stack";
+import { useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
 import Progress from "components/Progress";

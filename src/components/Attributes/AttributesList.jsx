@@ -38,7 +38,7 @@ const attributesOrder = [
 
 export default function AttributesList() {
   return (
-    <Stack gap={3}>
+    <Stack className="mx-auto" gap={3}>
       {attributesOrder.map((attribute) => (
         <React.Fragment key={attribute.key}>
           <Attribute atom={attribute} />

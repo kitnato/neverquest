@@ -79,6 +79,6 @@ export const damagePerSecond = selector({
     const totalAttackRateValue = get(totalAttackRate);
     const { min, max } = get(totalDamage);
 
-    return ((max - min) / (totalAttackRateValue / 1000)).toFixed(2);
+    return ((max + min) / 2 / (totalAttackRateValue / 1000)).toFixed(2);
   },
 });

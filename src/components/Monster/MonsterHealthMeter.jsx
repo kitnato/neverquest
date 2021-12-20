@@ -20,6 +20,7 @@ export default function MonsterHealthMeter({ onDeath }) {
 
   useEffect(() => {
     if (damageDealtValue !== null) {
+      setDamageDealt(null);
       setHealth((currentHealth) => {
         let newHealth = currentHealth.current - damageDealtValue;
 
@@ -29,7 +30,6 @@ export default function MonsterHealthMeter({ onDeath }) {
 
         return { ...currentHealth, current: newHealth };
       });
-      setDamageDealt(null);
     }
   }, [damageDealtValue, setDamageDealt]);
 

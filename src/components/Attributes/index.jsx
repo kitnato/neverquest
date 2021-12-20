@@ -10,7 +10,7 @@ import Level from "components/Character/Level";
 
 export default function Attributes() {
   return (
-    <Stack gap={3}>
+    <Stack gap={5}>
       <Row>
         <Col>
           <Experience />

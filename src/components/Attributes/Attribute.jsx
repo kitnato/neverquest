@@ -42,7 +42,7 @@ export default function Attribute({ atom }) {
 
       <span style={{ width: 200 }}>{description}</span>
 
-      <span>{points}</span>
+      <span style={{ width: 20 }}>{points}</span>
 
       {attributesAvailableValue > 0 && (
         <Button onClick={onLevelUp} variant="outline-dark">

@@ -9,18 +9,19 @@ import { Github } from "react-bootstrap-icons";
 import About from "components/About";
 import Reset from "components/Reset";
 import Settings from "components/Settings";
-import { version } from "../../package.json";
+import * as packageInfo from "../../package.json";
 
 export default function Header({ resetSeed }) {
   const [resetShow, setResetShow] = useState(false);
+  const { version } = packageInfo;
 
   return (
     <Navbar
-      collapseOnSelect
-      expand="lg"
       bg="dark"
-      variant="dark"
+      collapseOnSelect
       className="mb-4"
+      expand="lg"
+      variant="dark"
     >
       <Container>
         <Navbar.Brand>

@@ -74,7 +74,7 @@ export default function Monster({ id }) {
   return (
     <Card>
       <Card.Body className="spaced-vertical">
-        {isDead ? (
+        {isDead && (
           <Row>
             <Col xs={4}>
               <ImageIcon
@@ -93,24 +93,22 @@ export default function Monster({ id }) {
               </Col>
             )}
           </Row>
-        ) : (
+        )}
+
+        {id === activeMonsterValue && isEngaged ? (
           <>
-            {id === activeMonsterValue && isEngaged ? (
-              <>
-                <MonsterName />
+            <MonsterName />
 
-                <div className="align-items-center d-flex spaced-horizontal">
-                  <ImageIcon icon={healthIcon} tooltip="Monster health" />
+            <div className="align-items-center d-flex spaced-horizontal">
+              <ImageIcon icon={healthIcon} tooltip="Monster health" />
 
-                  <MonsterHealthMeter onDeath={onDeath} />
-                </div>
+              <MonsterHealthMeter onDeath={onDeath} />
+            </div>
 
-                <MonsterOffense />
-              </>
-            ) : (
-              <ImageIcon icon={lurkingIcon} tooltip="???" />
-            )}
+            <MonsterOffense />
           </>
+        ) : (
+          <ImageIcon icon={lurkingIcon} tooltip="???" />
         )}
       </Card.Body>
     </Card>

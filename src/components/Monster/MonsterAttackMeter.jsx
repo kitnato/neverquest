@@ -1,19 +1,19 @@
 import { useState } from "react";
-import { useSetRecoilState } from "recoil";
 
 import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
-import { defend } from "state/character";
+import useCombat from "hooks/useCombat";
 import formatCountdown from "utilities/formatCountdown";
 import { getFromRange } from "utilities/helpers";
 
 export default function MonsterAttackMeter({ attackRate, damagePerHit }) {
-  const setDefend = useSetRecoilState(defend);
   const [deltaAttack, setDeltaAttack] = useState(0);
+
+  const [, defend] = useCombat();
 
   useAnimation((deltaTime) => {
     if (deltaAttack >= attackRate) {
-      setDefend(getFromRange(damagePerHit));
+      defend(getFromRange(damagePerHit));
       setDeltaAttack(0);
     } else {
       setDeltaAttack(deltaAttack + deltaTime);

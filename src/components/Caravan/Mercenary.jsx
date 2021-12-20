@@ -1,4 +1,4 @@
 // TODO
-export default function MerchantInventory() {
+export default function Mercenary() {
   return null;
 }

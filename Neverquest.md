@@ -19,32 +19,32 @@ The SLIM system generates a pseudo-random variety of names for different fantasy
 ### Spector 6+2+1
 
 1. What’s the core idea? Can you describe the core of the game in 2-3 sentences?
-    - An incremental game with Action RPG, focusing on player interaction. No long waits, cliffs or walls. No obligatory resets for incremental gains.
+   - An incremental game with Action RPG, focusing on player interaction. No long waits, cliffs or walls. No obligatory resets for incremental gains.
 1. Why do this game?
-    - I want to play it, I can’t find anything like it
+   - I want to play it, I can’t find anything like it
 1. What are the development challenges?
-    - Free time, i.e. funding
+   - Free time, i.e. funding
 1. How well-suited to video games is the idea?
-    - It is unique to games since it requires lots of number work
+   - It is unique to games since it requires lots of number work
 1. What’s the player fantasy?
-    - Ever increasing power and challenge
+   - Ever increasing power and challenge
 1. What does the player do? (What are the “verbs” of the game?)
-    - Explore
-    - Fight
-    - Loot
-    - Level up
-    - Encounter
+   - Explore
+   - Fight
+   - Loot
+   - Level up
+   - Encounter
 1. Has anyone done this before?
-    - Trimps
-    - NGU Idle
-    - Candybox 1 & 2
-    - Crank
-    - Antimatter
-    - Swarm Simulator
+   - Trimps
+   - NGU Idle
+   - Candybox 1 & 2
+   - Crank
+   - Antimatter
+   - Swarm Simulator
 1. What’s the one new thing?
-    - Influence every aspect of your character without the need for tropes and archetypes
+   - Influence every aspect of your character without the need for tropes and archetypes
 1. Do you have something to say?
-    - Browser games with only UI and no graphics can be as engaging as bigger games.
+   - Browser games with only UI and no graphics can be as engaging as bigger games.
 
 ## SLIM
 
@@ -192,7 +192,7 @@ Each subsequent type increases the armor.
 
 - None
 - Light: low -% dodge, +% critical chance
-- Sturdy: medium -% dodge, *???*
+- Sturdy: medium -% dodge, _???_
 - Heavy: high -% dodge, -% attack rate, +% block, +% chance to deflect spells
 
 ##### Shield

@@ -1,11 +1,5 @@
 import { atom, selector } from "recoil";
 
-import { weapon } from "state/equipment";
-import { gameOver } from "state/global";
-import { currentStamina, currentHealth, maxStamina } from "state/resources";
-import { totalArmor, totalDamage, totalPhysicalResistance } from "state/stats";
-import { getFromRange } from "utilities/helpers";
-
 // ATOMS
 
 export const characterLevel = atom({
@@ -47,57 +41,6 @@ export const name = atom({
 });
 
 // SELECTORS
-
-// Actions
-
-export const attack = selector({
-  key: "attack",
-  set: ({ get, set }) => {
-    const currentStaminaValue = get(currentStamina);
-    const maxStaminaValue = get(maxStamina);
-    const dphValue = get(totalDamage);
-    let newStamina = currentStaminaValue - get(weapon).cost;
-
-    if (newStamina >= 0) {
-      set(damageDealt, getFromRange(dphValue));
-    }
-
-    if (newStamina < 0) {
-      newStamina = 0;
-      set(isAttacking, false);
-    }
-
-    if (newStamina > maxStaminaValue) {
-      newStamina = maxStaminaValue;
-    }
-
-    set(currentStamina, newStamina);
-  },
-});
-
-export const defend = selector({
-  key: "defend",
-  set: ({ get, set }, incomingDamage) => {
-    const healthValue = get(currentHealth);
-    const totalArmorValue = get(totalArmor);
-    const totalPhysicalResistanceValue = get(totalPhysicalResistance);
-    const healthDamage = Math.abs(totalArmorValue - incomingDamage);
-    let newHealth = healthValue - healthDamage;
-
-    if (newHealth <= 0) {
-      newHealth = 0;
-      set(gameOver, true);
-    }
-
-    if (healthDamage > totalPhysicalResistanceValue) {
-      set(isRecovering, true);
-    }
-
-    set(currentHealth, newHealth);
-  },
-});
-
-// QUERIES
 
 export const attributesAvailable = selector({
   key: "attributesAvailable",

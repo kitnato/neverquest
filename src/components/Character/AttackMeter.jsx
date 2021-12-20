@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
-import { attack, isAttacking, isRecovering } from "state/character";
+import useCombat from "hooks/useCombat";
+import { isAttacking, isRecovering } from "state/character";
 import { totalAttackRate } from "state/stats";
 import formatCountdown from "utilities/formatCountdown";
 
@@ -11,12 +12,13 @@ export default function AttackMeter() {
   const attackRateValue = useRecoilValue(totalAttackRate);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isRecoveringValue = useRecoilValue(isRecovering);
-  const setAttack = useSetRecoilState(attack);
   const [deltaAttack, setDeltaAttack] = useState(0);
+
+  const [attack] = useCombat();
 
   useAnimation((deltaTime) => {
     if (deltaAttack >= attackRateValue) {
-      setAttack();
+      attack();
       setDeltaAttack(0);
     } else {
       setDeltaAttack(deltaAttack + deltaTime);

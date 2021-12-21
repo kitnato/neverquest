@@ -21,10 +21,7 @@ export const damageTaken = atom({
 
 export const experience = atom({
   key: "experience",
-  default: {
-    spent: 0,
-    total: 0,
-  },
+  default: 0,
 });
 
 export const isAttacking = atom({
@@ -50,17 +47,21 @@ export const attributesAvailable = selector({
     const attributeCostValue = get(attributeCost);
     const characterLevelValue = get(characterLevel);
     const experienceValue = get(experience);
-    let available = 0;
+    const experienceSpentValue = get(experienceSpent);
+
+    const availableExperience = experienceValue - experienceSpentValue;
+    let availableAttributePoints = 0;
     let cumulativeCost = attributeCostValue;
     let potentialLevel = characterLevelValue + 1;
 
-    while (cumulativeCost <= experienceValue.total - experienceValue.spent) {
+    // Alternatively: https://en.wikipedia.org/wiki/Triangular_number#Triangular_roots_and_tests_for_triangular_numbers
+    while (cumulativeCost <= availableExperience) {
+      availableAttributePoints += 1;
       cumulativeCost += 1 + potentialLevel;
-      available += 1;
       potentialLevel += 1;
     }
 
-    return available;
+    return availableAttributePoints;
   },
 });
 
@@ -80,5 +81,15 @@ export const damagePerSecond = selector({
     const { min, max } = get(totalDamage);
 
     return ((max + min) / 2 / (totalAttackRateValue / 1000)).toFixed(2);
+  },
+});
+
+export const experienceSpent = selector({
+  key: "experienceSpent",
+  get: ({ get }) => {
+    const characterLevelValue = get(characterLevel);
+
+    // https://en.wikipedia.org/wiki/Triangular_number
+    return (characterLevelValue * (characterLevelValue + 1)) / 2;
   },
 });

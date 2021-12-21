@@ -29,7 +29,7 @@ export default function Loot() {
               <Col xs={4}>
                 <ImageIcon
                   icon={hasLootedValue ? lootedIcon : lootIcon}
-                  tooltip={!hasLootedValue && "Loot"}
+                  tooltip={!hasLootedValue && "Total loot"}
                 />
               </Col>
 

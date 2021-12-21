@@ -10,7 +10,7 @@ export default function AttributesAvailable() {
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip="Attribute points" />
+      <ImageIcon icon={icon} tooltip="Available attribute points" />
 
       <span>{attributesAvailableValue}</span>
     </Stack>

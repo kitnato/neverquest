@@ -63,10 +63,9 @@ export default function Monster({ id }) {
     setAetherLoot((currentAetherLoot) => currentAetherLoot + rewards.aether);
     setCoinsLoot((currentCoinsLoot) => currentCoinsLoot + rewards.coins);
     setDead(true);
-    setExperience((currentExperience) => ({
-      ...currentExperience,
-      total: currentExperience.total + rewards.experience,
-    }));
+    setExperience(
+      (currentExperience) => currentExperience + rewards.experience
+    );
     setLoot({ ...rewards });
     setProgress((currentProgress) => currentProgress + 1);
     setScrapLoot((currentScrapLoot) => currentScrapLoot + rewards.scrap);

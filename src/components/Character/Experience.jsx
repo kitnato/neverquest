@@ -7,20 +7,12 @@ import { experience } from "state/character";
 
 export default function Experience() {
   const experienceValue = useRecoilValue(experience);
-  const showSpent = experienceValue.spent > 0;
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon
-        icon={icon}
-        tooltip={`Experience${showSpent ? " (spent)" : ""}`}
-      />
+      <ImageIcon icon={icon} tooltip="Total experience" />
 
-      <span style={{ whiteSpace: "no-wrap" }}>
-        {`${experienceValue.total} ${
-          showSpent ? ` (${experienceValue.spent})` : ""
-        }`}
-      </span>
+      <span>{experienceValue}</span>
     </Stack>
   );
 }

@@ -6,6 +6,7 @@ import AttributesAvailable from "components/Attributes/AttributesAvailable";
 import AttributeCost from "components/Attributes/AttributeCost";
 import AttributesList from "components/Attributes/AttributesList";
 import Experience from "components/Character/Experience";
+import ExperienceSpent from "components/Character/ExperienceSpent";
 import Level from "components/Character/Level";
 
 export default function Attributes() {
@@ -13,11 +14,15 @@ export default function Attributes() {
     <Stack gap={5}>
       <Row>
         <Col>
+          <Level />
+        </Col>
+
+        <Col>
           <Experience />
         </Col>
 
         <Col>
-          <Level />
+          <ExperienceSpent />
         </Col>
 
         <Col>

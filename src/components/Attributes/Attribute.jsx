@@ -5,19 +5,12 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
 import placeholderIcon from "icons/abstract-049.svg";
-import {
-  attributesAvailable,
-  attributeCost,
-  characterLevel,
-  experience,
-} from "state/character";
+import { attributesAvailable, characterLevel } from "state/character";
 
 export default function Attribute({ atom }) {
   const setCharacterLevel = useSetRecoilState(characterLevel);
-  const setExperience = useSetRecoilState(experience);
   const [attributeValue, setAttribute] = useRecoilState(atom);
   const attributesAvailableValue = useRecoilValue(attributesAvailable);
-  const attributeCostValue = useRecoilValue(attributeCost);
   const { canAssign, description, name, points } = attributeValue;
 
   if (!canAssign) {
@@ -30,10 +23,6 @@ export default function Attribute({ atom }) {
       points: currentAttribute.points + 1,
     }));
     setCharacterLevel((currentCharacterLevel) => currentCharacterLevel + 1);
-    setExperience((currentExperience) => ({
-      ...currentExperience,
-      spent: currentExperience.spent + attributeCostValue,
-    }));
   };
 
   return (

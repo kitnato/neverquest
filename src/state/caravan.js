@@ -10,7 +10,7 @@ export const crew = atom({
     blacksmith: false,
     cook: false,
     medic: false,
-    mercenary: true,
+    mercenary: false,
     merchant: true,
     tailor: false,
     witch: false,

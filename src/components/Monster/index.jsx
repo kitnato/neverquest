@@ -97,7 +97,7 @@ export default function Monster({ id }) {
 
         {!isDead &&
           (id === activeMonsterValue && isEngaged ? (
-            <>
+            <Stack gap={3}>
               <MonsterName />
 
               <Stack direction="horizontal" gap={3}>
@@ -107,7 +107,7 @@ export default function Monster({ id }) {
               </Stack>
 
               <MonsterOffense />
-            </>
+            </Stack>
           ) : (
             <ImageIcon icon={lurkingIcon} tooltip="???" />
           ))}

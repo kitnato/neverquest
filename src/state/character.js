@@ -54,10 +54,9 @@ export const attributesAvailable = selector({
     let cumulativeCost = attributeCostValue;
     let potentialLevel = characterLevelValue + 1;
 
-    // Alternatively: https://en.wikipedia.org/wiki/Triangular_number#Triangular_roots_and_tests_for_triangular_numbers
     while (cumulativeCost <= availableExperience) {
       availableAttributePoints += 1;
-      cumulativeCost += 1 + potentialLevel;
+      cumulativeCost += (1 + potentialLevel) ** 2;
       potentialLevel += 1;
     }
 
@@ -70,7 +69,7 @@ export const attributeCost = selector({
   get: ({ get }) => {
     const characterLevelValue = get(characterLevel);
 
-    return 1 + characterLevelValue;
+    return (1 + characterLevelValue) ** 2;
   },
 });
 
@@ -78,7 +77,7 @@ export const damagePerSecond = selector({
   key: "damagePerSecond",
   get: ({ get }) => {
     const totalAttackRateValue = get(totalAttackRate);
-    const { min, max } = get(totalDamage);
+    const { max, min } = get(totalDamage);
 
     return ((max + min) / 2 / (totalAttackRateValue / 1000)).toFixed(2);
   },
@@ -89,7 +88,6 @@ export const experienceSpent = selector({
   get: ({ get }) => {
     const characterLevelValue = get(characterLevel);
 
-    // https://en.wikipedia.org/wiki/Triangular_number
-    return (characterLevelValue * (characterLevelValue + 1)) / 2;
+    return characterLevelValue ** 2;
   },
 });

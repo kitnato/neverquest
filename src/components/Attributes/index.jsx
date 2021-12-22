@@ -8,31 +8,40 @@ import AttributesList from "components/Attributes/AttributesList";
 import Experience from "components/Character/Experience";
 import ExperienceSpent from "components/Character/ExperienceSpent";
 import Level from "components/Character/Level";
+import NextAttributePoint from "components/Character/NextAttributePoint";
 
 export default function Attributes() {
   return (
     <Stack gap={5}>
-      <Row>
-        <Col>
-          <Level />
-        </Col>
+      <Stack gap={3}>
+        <Row>
+          <Col>
+            <Level />
+          </Col>
 
-        <Col>
-          <Experience />
-        </Col>
+          <Col>
+            <Experience />
+          </Col>
 
-        <Col>
-          <ExperienceSpent />
-        </Col>
+          <Col>
+            <ExperienceSpent />
+          </Col>
 
-        <Col>
-          <AttributeCost />
-        </Col>
+          <Col>
+            <AttributeCost />
+          </Col>
 
-        <Col>
-          <AttributesAvailable />
-        </Col>
-      </Row>
+          <Col>
+            <AttributesAvailable />
+          </Col>
+        </Row>
+
+        <Row>
+          <Col>
+            <NextAttributePoint />
+          </Col>
+        </Row>
+      </Stack>
 
       <AttributesList />
     </Stack>

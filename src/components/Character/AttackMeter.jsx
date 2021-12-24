@@ -3,38 +3,38 @@ import { useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
-import useCombat from "hooks/useCombat";
+import useAttack from "hooks/useAttack";
 import { isAttacking, isRecovering } from "state/character";
 import { totalAttackRate } from "state/stats";
 import formatCountdown from "utilities/formatCountdown";
 
 export default function AttackMeter() {
-  const attackRateValue = useRecoilValue(totalAttackRate);
+  const attack = useAttack();
+  const totalAttackRateValue = useRecoilValue(totalAttackRate);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isRecoveringValue = useRecoilValue(isRecovering);
   const [deltaAttack, setDeltaAttack] = useState(0);
 
-  const { attack } = useCombat();
-
   useAnimation((deltaTime) => {
-    if (deltaAttack >= attackRateValue) {
-      attack();
+    if (deltaAttack >= totalAttackRateValue) {
       setDeltaAttack(0);
+      attack();
     } else {
       setDeltaAttack(deltaAttack + deltaTime);
     }
   }, !isAttackingValue || isRecoveringValue);
 
   useEffect(() => {
-    if (!isAttackingValue && deltaAttack > 0) {
+    // Reset meter if attacks stop for whatever reason.
+    if (deltaAttack > 0 && !isAttackingValue) {
       setDeltaAttack(0);
     }
   }, [deltaAttack, isAttackingValue]);
 
   return (
     <Progress
-      label={formatCountdown(attackRateValue - deltaAttack)}
-      value={(deltaAttack / attackRateValue) * 100}
+      label={formatCountdown(totalAttackRateValue - deltaAttack)}
+      value={(deltaAttack / totalAttackRateValue) * 100}
       variant="warning"
     />
   );

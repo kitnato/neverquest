@@ -13,14 +13,14 @@ export default function NextAttributePointMeter() {
   const experienceValue = useRecoilValue(experience);
 
   const totalAttributePoints = attributesAvailableValue + characterLevelValue;
-  const baseExperience = totalAttributePoints ** 2;
-  const requiredExperience = (1 + totalAttributePoints) ** 2;
-  const currentDifference = experienceValue - baseExperience;
+  const base = totalAttributePoints ** 2;
+  const current = experienceValue - base;
+  const required = (1 + totalAttributePoints) ** 2 - base;
 
   return (
     <Progress
-      label={`${currentDifference}/${requiredExperience}`}
-      value={(currentDifference / requiredExperience) * 100}
+      label={`${current}/${required}`}
+      value={(current / required) * 100}
       variant="secondary"
     />
   );

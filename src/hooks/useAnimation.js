@@ -5,26 +5,26 @@ import { gameOver } from "state/global";
 
 export default function useAnimation(callback, stop) {
   const gameOverValue = useRecoilValue(gameOver);
-  const requestRef = useRef();
+  const frameRef = useRef();
   const previousTimeRef = useRef();
 
   const animate = useCallback(
     (time) => {
       callback(time - (previousTimeRef.current || time));
       previousTimeRef.current = time;
-      requestRef.current = requestAnimationFrame(animate);
+      frameRef.current = requestAnimationFrame(animate);
     },
     [callback]
   );
 
   useEffect(() => {
     if (gameOverValue || stop) {
+      cancelAnimationFrame(frameRef.current);
       previousTimeRef.current = null;
-      cancelAnimationFrame(requestRef.current);
     } else {
-      requestRef.current = requestAnimationFrame(animate);
+      frameRef.current = requestAnimationFrame(animate);
     }
 
-    return () => cancelAnimationFrame(requestRef.current);
-  }, [gameOverValue, stop, animate]);
+    return () => cancelAnimationFrame(frameRef.current);
+  }, [animate, gameOverValue, stop]);
 }

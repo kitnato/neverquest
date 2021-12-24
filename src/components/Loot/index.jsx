@@ -1,25 +1,27 @@
-import { useRecoilValue } from "recoil";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Stack from "react-bootstrap/Stack";
+import { useRecoilValue } from "recoil";
 
 import CollectLoot from "components/Loot/CollectLoot";
 import LootDisplay from "components/Loot/LootDisplay";
 import ImageIcon from "components/ImageIcon";
 import lootIcon from "icons/locked-chest.svg";
 import lootedIcon from "icons/open-chest.svg";
-import { isLevelCompleted } from "state/global";
+import { isLevelCompleted, progress } from "state/global";
 import { aetherLoot, coinsLoot, hasLooted, scrapLoot } from "state/loot";
 
 export default function Loot() {
   const aetherLootValue = useRecoilValue(aetherLoot);
   const coinsLootValue = useRecoilValue(coinsLoot);
-  const scrapLootValue = useRecoilValue(scrapLoot);
-  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const hasLootedValue = useRecoilValue(hasLooted);
+  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
+  const progressValue = useRecoilValue(progress);
+  const scrapLootValue = useRecoilValue(scrapLoot);
 
   return (
-    isLevelCompletedValue && (
+    progressValue > 0 && (
       <>
         <hr />
 
@@ -27,10 +29,14 @@ export default function Loot() {
           <Card.Body>
             <Row>
               <Col xs={4}>
-                <ImageIcon
-                  icon={hasLootedValue ? lootedIcon : lootIcon}
-                  tooltip={!hasLootedValue && "Total loot"}
-                />
+                <Stack direction="horizontal" gap={3}>
+                  <ImageIcon
+                    icon={hasLootedValue ? lootedIcon : lootIcon}
+                    tooltip="Loot"
+                  />
+
+                  {hasLootedValue && <span>Looted.</span>}
+                </Stack>
               </Col>
 
               {!hasLootedValue && (
@@ -46,7 +52,7 @@ export default function Loot() {
           </Card.Body>
         </Card>
 
-        <CollectLoot />
+        {isLevelCompletedValue && <CollectLoot />}
       </>
     )
   );

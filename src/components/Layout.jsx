@@ -13,7 +13,7 @@ import { gameOver } from "state/global";
 
 export default function Layout({ resetSeed }) {
   const gameOverValue = useRecoilValue(gameOver);
-  const [showReset, setGameOverShow] = useState(true);
+  const [isGameOverShowing, setGameOverShowing] = useState(true);
 
   return (
     <Stack gap={3}>
@@ -40,8 +40,8 @@ export default function Layout({ resetSeed }) {
       <Reset
         message="Try again?"
         resetSeed={resetSeed}
-        show={showReset && gameOverValue}
-        setHide={() => setGameOverShow(false)}
+        setHide={() => setGameOverShowing(false)}
+        show={isGameOverShowing && gameOverValue}
         title="You are dead."
       />
     </Stack>

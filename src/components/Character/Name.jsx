@@ -16,13 +16,13 @@ export default function Character() {
       <ImageIcon icon={icon} tooltip="Name" />
 
       <FormControl
+        onBlur={() => setEditing(false)}
+        onChange={(event) => setName(event.target.value)}
+        onClick={() => setEditing(true)}
+        onKeyPress={({ key }) => key === "Enter" && setEditing(false)}
         plaintext={!isEditing}
         readOnly={!isEditing}
         value={nameValue}
-        onChange={(event) => setName(event.target.value)}
-        onClick={() => setEditing(true)}
-        onKeyPress={({ charCode }) => charCode === 13 && setEditing(false)}
-        onBlur={() => setEditing(false)}
       />
     </Stack>
   );

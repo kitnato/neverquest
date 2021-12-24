@@ -1,8 +1,8 @@
 import Stack from "react-bootstrap/Stack";
 
 import Regen from "components/Character/Regen";
-import ResourceMeter from "components/Character/ResourceMeter";
 import ImageIcon from "components/ImageIcon";
+import ResourceMeter from "components/ResourceMeter";
 import icon from "icons/hospital-cross.svg";
 import { currentHealth, isHealthMaxedOut, maxHealth } from "state/resources";
 import { totalHealthRegenAmount, totalHealthRegenRate } from "state/stats";

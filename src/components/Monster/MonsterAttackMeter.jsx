@@ -1,29 +1,31 @@
 import { useState } from "react";
+import { useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
-import useCombat from "hooks/useCombat";
+import useDefend from "hooks/useDefend";
+import { isEngaged, totalAttackRateMonster } from "state/monster";
 import formatCountdown from "utilities/formatCountdown";
-import { getFromRange } from "utilities/helpers";
 
-export default function MonsterAttackMeter({ attackRate, damagePerHit }) {
+export default function MonsterAttackMeter() {
+  const defend = useDefend();
+  const isEngagedValue = useRecoilValue(isEngaged);
+  const totalAttackRateMonsterValue = useRecoilValue(totalAttackRateMonster);
   const [deltaAttack, setDeltaAttack] = useState(0);
 
-  const { defend } = useCombat();
-
   useAnimation((deltaTime) => {
-    if (deltaAttack >= attackRate) {
-      defend(getFromRange(damagePerHit));
+    if (deltaAttack >= totalAttackRateMonsterValue) {
       setDeltaAttack(0);
+      defend();
     } else {
       setDeltaAttack(deltaAttack + deltaTime);
     }
-  });
+  }, !isEngagedValue);
 
   return (
     <Progress
-      label={formatCountdown(attackRate - deltaAttack)}
-      value={(deltaAttack / attackRate) * 100}
+      label={formatCountdown(totalAttackRateMonsterValue - deltaAttack)}
+      value={(deltaAttack / totalAttackRateMonsterValue) * 100}
       variant="warning"
     />
   );

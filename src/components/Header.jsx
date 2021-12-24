@@ -13,7 +13,8 @@ import Settings from "components/Settings";
 import * as packageInfo from "../../package.json";
 
 export default function Header({ resetSeed }) {
-  const [resetShow, setResetShow] = useState(false);
+  const [isResetShowing, setResetShowing] = useState(false);
+
   const { version } = packageInfo;
 
   return (
@@ -50,15 +51,18 @@ export default function Header({ resetSeed }) {
               <Github /> Source
             </Button>
 
-            <Button onClick={() => setResetShow(true)} variant="outline-danger">
+            <Button
+              onClick={() => setResetShowing(true)}
+              variant="outline-danger"
+            >
               Reset
             </Button>
 
             <Reset
               message="This will wipe all data and restart from the beginning."
               resetSeed={resetSeed}
-              show={resetShow}
-              setHide={() => setResetShow(false)}
+              show={isResetShowing}
+              setHide={() => setResetShowing(false)}
               title="Reset the game?"
             />
           </Stack>

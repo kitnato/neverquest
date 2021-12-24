@@ -114,7 +114,7 @@ export const physicalResistance = atom({
   default: {
     base: 0,
     canAssign: false,
-    description: "Amount of damage taken without needing to recover",
+    description: "Damage taken without needing to recover",
     increment: 2,
     name: "Stoicism",
     points: 0,

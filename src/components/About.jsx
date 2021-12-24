@@ -3,9 +3,9 @@ import Modal from "react-bootstrap/Modal";
 import { QuestionSquare } from "react-bootstrap-icons";
 
 export default function About() {
-  const [show, setShow] = useState(false);
+  const [isShowing, setShowing] = useState(false);
 
-  const handleShow = (state) => setShow(state);
+  const handleShow = (state) => setShowing(state);
 
   return (
     <span>
@@ -14,14 +14,12 @@ export default function About() {
         onClick={() => handleShow(true)}
       />
 
-      <Modal show={show} onHide={() => handleShow(false)}>
+      <Modal show={isShowing} onHide={() => handleShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>About</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>
-          The darkness is stirring with hostile intentions.
-        </Modal.Body>
+        <Modal.Body>???</Modal.Body>
       </Modal>
     </span>
   );

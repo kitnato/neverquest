@@ -20,10 +20,10 @@ export default function Regen({
 
   useAnimation((deltaTime) => {
     if (deltaRegen >= regenRateValue) {
+      setRegen(0);
       setCurrentResource(
         (currentResource) => currentResource + regenAmountValue
       );
-      setRegen(0);
     } else {
       setRegen(deltaRegen + deltaTime);
     }

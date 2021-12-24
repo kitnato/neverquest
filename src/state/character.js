@@ -9,16 +9,6 @@ export const characterLevel = atom({
   default: 0,
 });
 
-export const damageDealt = atom({
-  key: "damageDealt",
-  default: 0,
-});
-
-export const damageTaken = atom({
-  key: "damageTaken",
-  default: 0,
-});
-
 export const experience = atom({
   key: "experience",
   default: 0,
@@ -44,23 +34,10 @@ export const name = atom({
 export const attributesAvailable = selector({
   key: "attributesAvailable",
   get: ({ get }) => {
-    const attributeCostValue = get(attributeCost);
     const characterLevelValue = get(characterLevel);
     const experienceValue = get(experience);
-    const experienceSpentValue = get(experienceSpent);
 
-    const availableExperience = experienceValue - experienceSpentValue;
-    let availableAttributePoints = 0;
-    let cumulativeCost = attributeCostValue;
-    let potentialLevel = characterLevelValue + 1;
-
-    while (cumulativeCost <= availableExperience) {
-      availableAttributePoints += 1;
-      cumulativeCost += (1 + potentialLevel) ** 2;
-      potentialLevel += 1;
-    }
-
-    return availableAttributePoints;
+    return Math.floor(Math.sqrt(experienceValue)) - characterLevelValue;
   },
 });
 

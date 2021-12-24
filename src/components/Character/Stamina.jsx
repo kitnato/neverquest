@@ -1,8 +1,8 @@
 import Stack from "react-bootstrap/Stack";
 
 import Regen from "components/Character/Regen";
-import ResourceMeter from "components/Character/ResourceMeter";
 import ImageIcon from "components/ImageIcon";
+import ResourceMeter from "components/ResourceMeter";
 import icon from "icons/lungs.svg";
 import { currentStamina, isStaminaMaxedOut, maxStamina } from "state/resources";
 import { totalStaminaRegenAmount, totalStaminaRegenRate } from "state/stats";

@@ -3,15 +3,15 @@ import Modal from "react-bootstrap/Modal";
 import { Gear } from "react-bootstrap-icons";
 
 export default function Settings() {
-  const [show, setShow] = useState(false);
+  const [isShowing, setShowing] = useState(false);
 
-  const handleShow = (state) => setShow(state);
+  const handleShow = (state) => setShowing(state);
 
   return (
     <span>
       <Gear style={{ cursor: "pointer" }} onClick={() => handleShow(true)} />
 
-      <Modal show={show} onHide={() => handleShow(false)}>
+      <Modal show={isShowing} onHide={() => handleShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Settings</Modal.Title>
         </Modal.Header>

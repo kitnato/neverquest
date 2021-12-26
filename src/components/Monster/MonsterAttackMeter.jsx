@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
@@ -13,13 +13,15 @@ export default function MonsterAttackMeter() {
   const totalAttackRateMonsterValue = useRecoilValue(totalAttackRateMonster);
   const [deltaAttack, setDeltaAttack] = useState(0);
 
-  useAnimation((deltaTime) => {
+  useEffect(() => {
     if (deltaAttack >= totalAttackRateMonsterValue) {
       setDeltaAttack(0);
       defend();
-    } else {
-      setDeltaAttack(deltaAttack + deltaTime);
     }
+  }, [defend, deltaAttack, totalAttackRateMonsterValue]);
+
+  useAnimation((deltaTime) => {
+    setDeltaAttack((currentDelta) => currentDelta + deltaTime);
   }, !isEngagedValue);
 
   return (

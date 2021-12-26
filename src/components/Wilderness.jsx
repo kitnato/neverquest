@@ -18,7 +18,7 @@ export default function Wilderness() {
             <Stack direction="horizontal" gap={3}>
               <ImageIcon icon={icon} tooltip="Remains" />
 
-              <span>Everything is dead.</span>
+              <span style={{ fontStyle: "italic" }}>Everything is dead.</span>
             </Stack>
           </Card.Body>
         </Card>

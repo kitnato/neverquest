@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 
 import Progress from "components/Progress";
@@ -16,17 +16,19 @@ export default function Regen({
   const regenAmountValue = useRecoilValue(regenAmount);
   const isResourceMaxedOutValue = useRecoilValue(isResourceMaxedOut);
   const setCurrentResource = useSetRecoilState(resourceCurrent);
-  const [deltaRegen, setRegen] = useState(0);
+  const [deltaRegen, setDeltaRegen] = useState(0);
 
-  useAnimation((deltaTime) => {
+  useEffect(() => {
     if (deltaRegen >= regenRateValue) {
-      setRegen(0);
+      setDeltaRegen(0);
       setCurrentResource(
         (currentResource) => currentResource + regenAmountValue
       );
-    } else {
-      setRegen(deltaRegen + deltaTime);
     }
+  }, [deltaRegen, regenAmountValue, regenRateValue, setCurrentResource]);
+
+  useAnimation((deltaTime) => {
+    setDeltaRegen((currentDelta) => currentDelta + deltaTime);
   }, isResourceMaxedOutValue || isRecoveringValue);
 
   return (

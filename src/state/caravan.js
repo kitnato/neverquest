@@ -1,7 +1,5 @@
-import { atom } from "recoil";
-
-// TODO
 /* eslint-disable import/prefer-default-export */
+import { atom } from "recoil";
 
 export const crew = atom({
   key: "crew",

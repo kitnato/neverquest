@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { isRecovering } from "state/character";
 import { gameOver } from "state/global";

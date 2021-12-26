@@ -15,21 +15,16 @@ export default function AttackMeter() {
   const isRecoveringValue = useRecoilValue(isRecovering);
   const [deltaAttack, setDeltaAttack] = useState(0);
 
-  useAnimation((deltaTime) => {
+  useEffect(() => {
     if (deltaAttack >= totalAttackRateValue) {
       setDeltaAttack(0);
       attack();
-    } else {
-      setDeltaAttack(deltaAttack + deltaTime);
     }
-  }, !isAttackingValue || isRecoveringValue);
+  }, [attack, deltaAttack, totalAttackRateValue]);
 
-  useEffect(() => {
-    // Reset meter if attacks stop for whatever reason.
-    if (deltaAttack > 0 && !isAttackingValue) {
-      setDeltaAttack(0);
-    }
-  }, [deltaAttack, isAttackingValue]);
+  useAnimation((deltaTime) => {
+    setDeltaAttack((currentDelta) => currentDelta + deltaTime);
+  }, !isAttackingValue || isRecoveringValue);
 
   return (
     <Progress

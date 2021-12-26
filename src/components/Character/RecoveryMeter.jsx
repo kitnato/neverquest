@@ -12,20 +12,16 @@ export default function RecoveryMeter() {
   const recoveryRateValue = useRecoilValue(totalRecoveryRate);
   const [deltaRecovery, setDeltaRecovery] = useState(0);
 
-  useAnimation((deltaTime) => {
+  useEffect(() => {
     if (deltaRecovery >= recoveryRateValue) {
       setDeltaRecovery(0);
       setRecovering(false);
-    } else {
-      setDeltaRecovery(deltaRecovery + deltaTime);
     }
-  }, !isRecoveringValue);
+  }, [deltaRecovery, recoveryRateValue, setRecovering]);
 
-  useEffect(() => {
-    if (!isRecoveringValue && deltaRecovery > 0) {
-      setDeltaRecovery(0);
-    }
-  }, [deltaRecovery, isRecoveringValue]);
+  useAnimation((deltaTime) => {
+    setDeltaRecovery((currentDelta) => currentDelta + deltaTime);
+  }, !isRecoveringValue);
 
   return (
     <Progress

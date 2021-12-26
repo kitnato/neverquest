@@ -36,7 +36,7 @@ export default function Monster() {
           <Stack direction="horizontal" gap={3}>
             <ImageIcon icon={icon} tooltip="???" />
 
-            <span>The darkness is stirring with hostile intentions.</span>
+            <span style={{ fontStyle: "italic" }}>The darkness stirs.</span>
           </Stack>
         )}
       </Card.Body>

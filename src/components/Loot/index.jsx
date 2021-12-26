@@ -35,7 +35,9 @@ export default function Loot() {
                     tooltip="Loot"
                   />
 
-                  {hasLootedValue && <span>Looted.</span>}
+                  {hasLootedValue && (
+                    <span style={{ fontStyle: "italic" }}>Looted.</span>
+                  )}
                 </Stack>
               </Col>
 

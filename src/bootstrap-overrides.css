@@ -1,5 +1,5 @@
-.progress {
-  height: 1.25rem;
+button.btn-outline-dark:hover img {
+  filter: invert(1);
 }
 
 input.form-control-plaintext {
@@ -12,4 +12,8 @@ input.form-control-plaintext {
   -webkit-box-shadow: 0px 10px 30px 10px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 10px 30px 10px rgba(0, 0, 0, 0.75);
   margin-right: 15%;
+}
+
+.progress {
+  height: 1.25rem;
 }

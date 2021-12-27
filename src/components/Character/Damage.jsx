@@ -4,11 +4,11 @@ import Tooltip from "react-bootstrap/Tooltip";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
-import icon from "icons/fist.svg";
+import icon from "icons/wolverine-claws.svg";
 import { damagePerSecond } from "state/character";
 import { totalDamage } from "state/stats";
 
-export default function DamagePerSecond() {
+export default function Damage() {
   const dpsValue = useRecoilValue(damagePerSecond);
   const { min, max } = useRecoilValue(totalDamage);
 

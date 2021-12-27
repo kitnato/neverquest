@@ -13,7 +13,7 @@ import NextAttributePoint from "components/Character/NextAttributePoint";
 export default function Attributes() {
   return (
     <Stack gap={5}>
-      <Stack gap={3}>
+      <Stack gap={3} style={{ position: "sticky" }}>
         <Row>
           <Col>
             <Level />

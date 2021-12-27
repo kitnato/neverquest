@@ -5,6 +5,7 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import Character from "components/Character";
+import Control from "components/Control";
 import Encounter from "components/Encounter";
 import LevelProgress from "components/LevelProgress";
 import Location from "components/Location";
@@ -30,6 +31,10 @@ export default function Layout({ resetSeed }) {
       <Row>
         <Col>
           <Character />
+        </Col>
+
+        <Col xs="auto">
+          <Control />
         </Col>
 
         <Col>

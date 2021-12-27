@@ -1,7 +1,7 @@
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-import DamagePerSecond from "components/Character/DamagePerSecond";
+import Damage from "components/Character/Damage";
 import CritChance from "components/Character/CritChance";
 import CritDamage from "components/Character/CritDamage";
 
@@ -9,7 +9,7 @@ export default function Offense() {
   return (
     <Row>
       <Col>
-        <DamagePerSecond />
+        <Damage />
       </Col>
 
       <Col>

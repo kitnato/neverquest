@@ -1,7 +1,11 @@
 import { useEffect } from "react";
 import Button from "react-bootstrap/Button";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 import { useRecoilValue, useRecoilState } from "recoil";
 
+import ImageIcon from "components/ImageIcon";
+import icon from "icons/fist.svg";
 import { isAttacking, isRecovering } from "state/character";
 import { isLevelCompleted, show } from "state/global";
 
@@ -42,14 +46,14 @@ export default function AttackButton() {
   };
 
   return (
-    <div className="d-grid">
+    <OverlayTrigger overlay={<Tooltip>{label}</Tooltip>} placement="top">
       <Button
         disabled={isAttackingValue || isLevelCompletedValue}
         onClick={onAttack}
         variant="outline-dark"
       >
-        {label}
+        <ImageIcon icon={icon} />
       </Button>
-    </div>
+    </OverlayTrigger>
   );
 }

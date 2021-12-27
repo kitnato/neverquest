@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { useRecoilValue } from "recoil";
-
 import Button from "react-bootstrap/Button";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import { useRecoilValue } from "recoil";
 
 import Attributes from "components/Attributes";
 import DismissableScreen from "components/DismissableScreen";
+import ImageIcon from "components/ImageIcon";
+import icon from "icons/skills.svg";
 import { isAttacking } from "state/character";
 import { show } from "state/global";
 
@@ -19,15 +22,15 @@ export default function AttributesButton() {
 
   return (
     <>
-      <div className="d-grid">
+      <OverlayTrigger overlay={<Tooltip>Attributes</Tooltip>} placement="top">
         <Button
           disabled={isScreenShowing || isAttackingValue}
           onClick={() => setScreenShowing(!isScreenShowing)}
           variant="outline-dark"
         >
-          Attributes
+          <ImageIcon icon={icon} />
         </Button>
-      </div>
+      </OverlayTrigger>
 
       <DismissableScreen
         content={<Attributes />}

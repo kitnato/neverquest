@@ -17,6 +17,7 @@ export default function DismissableScreen({
       <Offcanvas.Header closeButton>
         <Offcanvas.Title>{title}</Offcanvas.Title>
       </Offcanvas.Header>
+
       <Offcanvas.Body>{content}</Offcanvas.Body>
     </Offcanvas>
   );

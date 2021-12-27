@@ -1,14 +1,19 @@
-import { useRecoilValue, useSetRecoilState } from "recoil";
 import Button from "react-bootstrap/Button";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
+import ImageIcon from "components/ImageIcon";
+import icon from "icons/journey.svg";
 import { isWilderness, level, location } from "state/global";
 import { hasLooted } from "state/loot";
 
-export default function Travel() {
+export default function TravelButton() {
   const hasLootedValue = useRecoilValue(hasLooted);
   const levelValue = useRecoilValue(level);
   const isWildernessValue = useRecoilValue(isWilderness);
   const changeLocation = useSetRecoilState(location);
+
   const destination = (() => {
     if (levelValue > 0) {
       if (isWildernessValue) {
@@ -21,14 +26,21 @@ export default function Travel() {
   })();
 
   return (
-    <div className="d-grid">
+    <OverlayTrigger
+      overlay={
+        <Tooltip>
+          {`${isWildernessValue ? "Go to" : "Return to"} ${destination}`}
+        </Tooltip>
+      }
+      placement="top"
+    >
       <Button
         className={!hasLootedValue && "d-none"}
         onClick={changeLocation}
         variant="outline-dark"
       >
-        {`${isWildernessValue ? "Go to" : "Return to"} ${destination}`}
+        <ImageIcon icon={icon} />
       </Button>
-    </div>
+    </OverlayTrigger>
   );
 }

@@ -39,6 +39,7 @@ export const show = atom({
     inventoryButton: false,
     levelProgress: false,
     loot: false,
+    recovery: false,
     shield: false,
     weapon: false,
   },

@@ -52,7 +52,7 @@ export const monsterLoot = selector({
         max: levelValue >= 10 ? levelValue + range - 2 : 0,
       }),
       coins: getFromRange({
-        min: levelValue - range,
+        min: levelValue,
         max: levelValue + Math.ceil(range * 1.5),
       }),
       experience: getFromRange({
@@ -60,7 +60,7 @@ export const monsterLoot = selector({
         max: levelValue * 2 + Math.ceil(range * 2),
       }),
       scrap: getFromRange({
-        min: levelValue - range,
+        min: levelValue,
         max: levelValue + Math.ceil(range * 1.5),
       }),
     };

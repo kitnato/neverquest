@@ -1,6 +1,6 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { isRecovering } from "state/character";
-import { gameOver } from "state/global";
+import { gameOver, show } from "state/global";
 import { totalDamageMonster } from "state/monster";
 import { currentHealth } from "state/resources";
 import { totalArmor, totalPhysicalResistance } from "state/stats";
@@ -14,6 +14,7 @@ export default function useDefend() {
 
   const setGameOver = useSetRecoilState(gameOver);
   const setRecovering = useSetRecoilState(isRecovering);
+  const [showValue, setShow] = useRecoilState(show);
 
   return () => {
     const healthDamage =
@@ -22,14 +23,21 @@ export default function useDefend() {
 
     if (health <= 0) {
       health = 0;
-      setGameOver(true);
     }
 
     if (health !== currentHealthValue) {
       setCurrentHealth(health);
 
-      if (Math.abs(healthDamage) > totalPhysicalResistanceValue) {
-        setRecovering(true);
+      if (health === 0) {
+        setGameOver(true);
+      } else {
+        if (!showValue.recovery) {
+          setShow({ ...showValue, recovery: true });
+        }
+
+        if (Math.abs(healthDamage) > totalPhysicalResistanceValue) {
+          setRecovering(true);
+        }
       }
     }
   };

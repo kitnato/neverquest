@@ -22,6 +22,12 @@ export default function AttackMeter() {
     }
   }, [attack, deltaAttack, totalAttackRateValue]);
 
+  useEffect(() => {
+    if (!isAttackingValue) {
+      setDeltaAttack(0);
+    }
+  }, [isAttackingValue]);
+
   useAnimation((deltaTime) => {
     setDeltaAttack((currentDelta) => currentDelta + deltaTime);
   }, !isAttackingValue || isRecoveringValue);

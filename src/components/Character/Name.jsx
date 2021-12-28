@@ -18,7 +18,10 @@ export default function Character() {
       <FormControl
         onBlur={() => setEditing(false)}
         onChange={(event) => setName(event.target.value)}
-        onClick={() => setEditing(true)}
+        onClick={(event) => {
+          setEditing(true);
+          event.target.select();
+        }}
         onKeyPress={({ key }) => key === "Enter" && setEditing(false)}
         plaintext={!isEditing}
         readOnly={!isEditing}

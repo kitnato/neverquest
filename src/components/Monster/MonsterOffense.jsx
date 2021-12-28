@@ -9,18 +9,22 @@ import icon from "icons/tron-arrow.svg";
 
 export default function MonsterOffense() {
   return (
-    <Row>
-      <Col>
-        <Stack direction="horizontal" gap={3}>
-          <ImageIcon icon={icon} tooltip="Monster attack rate" />
+    <>
+      <Row>
+        <Col>
+          <Stack direction="horizontal" gap={3}>
+            <ImageIcon icon={icon} tooltip="Monster attack rate" />
 
-          <MonsterAttackMeter />
-        </Stack>
-      </Col>
+            <MonsterAttackMeter />
+          </Stack>
+        </Col>
+      </Row>
 
-      <Col>
-        <MonsterDamage />
-      </Col>
-    </Row>
+      <Row>
+        <Col>
+          <MonsterDamage />
+        </Col>
+      </Row>
+    </>
   );
 }

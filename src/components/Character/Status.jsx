@@ -24,11 +24,11 @@ export default function Status() {
 
           <Row>
             <Col>
-              <Recovery />
+              <Attack />
             </Col>
 
             <Col>
-              <Attack />
+              <Recovery />
             </Col>
           </Row>
 

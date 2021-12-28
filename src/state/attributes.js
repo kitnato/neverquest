@@ -6,7 +6,7 @@ export const attackRateBonus = atom({
     base: 0,
     canAssign: true,
     description: "Attack rate",
-    increment: 0.01,
+    increment: 0.02,
     name: "Speed",
     points: 0,
   },

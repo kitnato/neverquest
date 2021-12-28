@@ -8,16 +8,16 @@ import TravelButton from "components/Control/TravelButton";
 
 export default function Control() {
   return (
-    <Stack gap={3}>
+    <Stack gap={4}>
       <AttackButton />
-
-      <CollectLootButton />
-
-      <TravelButton />
 
       <AttributesButton />
 
       <InventoryButton />
+
+      <CollectLootButton />
+
+      <TravelButton />
     </Stack>
   );
 }

@@ -5,6 +5,7 @@ export const attackRateBonus = atom({
   default: {
     base: 0,
     canAssign: true,
+    cost: 1,
     description: "Attack rate",
     increment: 0.02,
     name: "Speed",
@@ -17,6 +18,7 @@ export const criticalChance = atom({
   default: {
     base: 0,
     canAssign: false,
+    cost: 1,
     description: "Chance of landing a critical hit",
     increment: 0.01,
     name: "Dexterity",
@@ -29,6 +31,7 @@ export const criticalDamage = atom({
   default: {
     base: 1,
     canAssign: false,
+    cost: 1,
     description: "Damage multiplier of a critical hit",
     increment: 0.1,
     name: "Perception",
@@ -41,6 +44,7 @@ export const damage = atom({
   default: {
     base: 0,
     canAssign: true,
+    cost: 1,
     description: "Base attack damage",
     increment: 1,
     name: "Strength",
@@ -53,6 +57,7 @@ export const dodgeChance = atom({
   default: {
     base: 0,
     canAssign: true,
+    cost: 1,
     description: "Chance to dodge an attack",
     increment: 0.01,
     name: "Agility",
@@ -65,22 +70,10 @@ export const health = atom({
   default: {
     base: 10,
     canAssign: true,
+    cost: 1,
     description: "Maximum total health",
     increment: 2,
     name: "Health",
-    points: 0,
-  },
-});
-
-export const healthRegenAmount = atom({
-  key: "healthRegenAmount",
-  default: {
-    base: 1,
-    canAssign: false,
-    costModifier: 1.5,
-    description: "Health regeneration amount",
-    increment: 1,
-    name: "Vitality",
     points: 0,
   },
 });
@@ -90,6 +83,7 @@ export const healthRegenRate = atom({
   default: {
     base: 9000,
     canAssign: true,
+    cost: 1,
     description: "Health regeneration rate",
     increment: -50,
     name: "Vigor",
@@ -102,6 +96,7 @@ export const lootBonus = atom({
   default: {
     base: 0,
     canAssign: false,
+    cost: 1,
     description: "Amount of loot dropped by monsters",
     increment: 0.02,
     name: "Luck",
@@ -114,6 +109,7 @@ export const physicalResistance = atom({
   default: {
     base: 0,
     canAssign: false,
+    cost: 1,
     description: "Damage taken without needing to recover",
     increment: 2,
     name: "Stoicism",
@@ -125,11 +121,12 @@ export const recoveryRate = atom({
   key: "recoveryRate",
   default: {
     base: 1500,
+    canAssign: true,
+    cost: 1,
     description: "Recovery rate",
     increment: -10,
     name: "Resilience",
     points: 0,
-    canAssign: true,
   },
 });
 
@@ -138,22 +135,10 @@ export const stamina = atom({
   default: {
     base: 4,
     canAssign: true,
+    cost: 1,
     description: "Maximum total stamina",
     increment: 1,
     name: "Stamina",
-    points: 0,
-  },
-});
-
-export const staminaRegenAmount = atom({
-  key: "staminaRegenAmount",
-  default: {
-    base: 1,
-    canAssign: false,
-    costModifier: 1.5,
-    description: "Stamina regeneration amount",
-    increment: 1,
-    name: "Fortitude",
     points: 0,
   },
 });
@@ -163,6 +148,7 @@ export const staminaRegenRate = atom({
   default: {
     base: 3500,
     canAssign: true,
+    cost: 1,
     description: "Stamina regeneration rate",
     increment: -50,
     name: "Endurance",

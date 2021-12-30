@@ -3,10 +3,8 @@ import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import AttributesAvailable from "components/Attributes/AttributesAvailable";
 import Experience from "components/Character/Experience";
 import Level from "components/Character/Level";
-import NextAttributePoint from "components/Character/NextAttributePoint";
 import { experience } from "state/character";
 import { show } from "state/global";
 
@@ -31,12 +29,6 @@ export default function AttributesSummary() {
           <Level />
 
           <Experience />
-
-          <div className="me-auto" style={{ width: "100%" }}>
-            <NextAttributePoint />
-          </div>
-
-          <AttributesAvailable />
         </Stack>
       </Card.Body>
     </Card>

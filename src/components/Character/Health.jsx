@@ -5,7 +5,7 @@ import ImageIcon from "components/ImageIcon";
 import ResourceMeter from "components/ResourceMeter";
 import icon from "icons/hospital-cross.svg";
 import { currentHealth, isHealthMaxedOut, maxHealth } from "state/resources";
-import { totalHealthRegenAmount, totalHealthRegenRate } from "state/stats";
+import { totalHealthRegenRate } from "state/stats";
 
 export default function Health() {
   return (
@@ -21,7 +21,6 @@ export default function Health() {
 
         <Regen
           isResourceMaxedOut={isHealthMaxedOut}
-          regenAmount={totalHealthRegenAmount}
           regenRate={totalHealthRegenRate}
           resourceCurrent={currentHealth}
           resourceMax={maxHealth}

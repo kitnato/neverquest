@@ -1,28 +1,46 @@
 import Button from "react-bootstrap/Button";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Stack from "react-bootstrap/Stack";
+import Tooltip from "react-bootstrap/Tooltip";
 import { Plus } from "react-bootstrap-icons";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
 import placeholderIcon from "icons/abstract-049.svg";
-import { attributesAvailable, characterLevel } from "state/character";
+import {
+  characterLevel,
+  experienceAvailable,
+  experienceSpent,
+} from "state/character";
+import { getAttributeCost } from "utilities/helpers";
 
 export default function Attribute({ atom }) {
   const setCharacterLevel = useSetRecoilState(characterLevel);
+  const setExperienceSpent = useSetRecoilState(experienceSpent);
   const [attributeValue, setAttribute] = useRecoilState(atom);
-  const attributesAvailableValue = useRecoilValue(attributesAvailable);
-  const { canAssign, description, name, points } = attributeValue;
+  const experienceAvailableValue = useRecoilValue(experienceAvailable);
+
+  const { canAssign, cost, description, name, points } = attributeValue;
+  const canIncrease = cost <= experienceAvailableValue;
 
   if (!canAssign) {
     return null;
   }
 
   const onLevelUp = () => {
-    setAttribute((currentAttribute) => ({
-      ...currentAttribute,
-      points: currentAttribute.points + 1,
-    }));
+    setAttribute((currentAttribute) => {
+      const newPoints = currentAttribute.points + 1;
+
+      return {
+        ...currentAttribute,
+        cost: getAttributeCost(newPoints + 1),
+        points: newPoints,
+      };
+    });
     setCharacterLevel((currentCharacterLevel) => currentCharacterLevel + 1);
+    setExperienceSpent(
+      (currentExperienceSpent) => currentExperienceSpent + cost
+    );
   };
 
   return (
@@ -33,11 +51,20 @@ export default function Attribute({ atom }) {
 
       <span style={{ width: 20 }}>{points}</span>
 
-      {attributesAvailableValue > 0 && (
-        <Button onClick={onLevelUp} variant="outline-dark">
-          <Plus />
-        </Button>
-      )}
+      <OverlayTrigger
+        overlay={<Tooltip>{`Cost: ${cost} experience`}</Tooltip>}
+        placement="top"
+      >
+        <span className="d-inline-block">
+          <Button
+            disabled={!canIncrease}
+            onClick={onLevelUp}
+            variant="outline-dark"
+          >
+            {canIncrease ? <Plus size={32} /> : <ImageIcon />}
+          </Button>
+        </span>
+      </OverlayTrigger>
     </Stack>
   );
 }

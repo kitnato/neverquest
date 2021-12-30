@@ -6,11 +6,9 @@ import {
   criticalDamage,
   damage,
   dodgeChance,
-  healthRegenAmount,
   healthRegenRate,
   physicalResistance,
   recoveryRate,
-  staminaRegenAmount,
   staminaRegenRate,
 } from "state/attributes";
 import { armor, shield, weapon } from "state/equipment";
@@ -87,17 +85,6 @@ export const totalDodgeChance = selector({
   },
 });
 
-export const totalHealthRegenAmount = selector({
-  key: "totalHealthRegenAmount",
-  get: ({ get }) => {
-    const healthRegenAmountValue = get(healthRegenAmount);
-
-    const { base, increment, points } = healthRegenAmountValue;
-
-    return base + increment * points;
-  },
-});
-
 export const totalHealthRegenRate = selector({
   key: "totalHealthRegenRate",
   get: ({ get }) => {
@@ -126,17 +113,6 @@ export const totalRecoveryRate = selector({
     const recoveryRateValue = get(recoveryRate);
 
     const { base, increment, points } = recoveryRateValue;
-
-    return base + increment * points;
-  },
-});
-
-export const totalStaminaRegenAmount = selector({
-  key: "totalStaminaRegenAmount",
-  get: ({ get }) => {
-    const staminaRegenAmountValue = get(staminaRegenAmount);
-
-    const { base, increment, points } = staminaRegenAmountValue;
 
     return base + increment * points;
   },

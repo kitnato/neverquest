@@ -14,6 +14,11 @@ export const experience = atom({
   default: 0,
 });
 
+export const experienceSpent = atom({
+  key: "experienceSpent",
+  default: 0,
+});
+
 export const isAttacking = atom({
   key: "isAttacking",
   default: false,
@@ -31,25 +36,6 @@ export const name = atom({
 
 // SELECTORS
 
-export const attributesAvailable = selector({
-  key: "attributesAvailable",
-  get: ({ get }) => {
-    const characterLevelValue = get(characterLevel);
-    const experienceValue = get(experience);
-
-    return Math.floor(Math.sqrt(experienceValue)) - characterLevelValue;
-  },
-});
-
-export const attributeCost = selector({
-  key: "attributeCost",
-  get: ({ get }) => {
-    const characterLevelValue = get(characterLevel);
-
-    return (1 + characterLevelValue) ** 2;
-  },
-});
-
 export const damagePerSecond = selector({
   key: "damagePerSecond",
   get: ({ get }) => {
@@ -60,11 +46,12 @@ export const damagePerSecond = selector({
   },
 });
 
-export const experienceSpent = selector({
-  key: "experienceSpent",
+export const experienceAvailable = selector({
+  key: "experienceAvailable",
   get: ({ get }) => {
-    const characterLevelValue = get(characterLevel);
+    const experienceValue = get(experience);
+    const experienceSpentValue = get(experienceSpent);
 
-    return characterLevelValue ** 2;
+    return experienceValue - experienceSpentValue;
   },
 });

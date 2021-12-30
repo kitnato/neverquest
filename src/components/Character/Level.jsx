@@ -2,7 +2,7 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
-import icon from "icons/level-four-advanced.svg";
+import icon from "icons/level-four.svg";
 import { characterLevel } from "state/character";
 
 export default function Level() {

@@ -1,6 +1,6 @@
 // https://en.wikipedia.org/wiki/Triangular_number
-export function getAttributeCost(points) {
-  return (points * (points + 1)) / 2;
+export function getTriangularNumber(number) {
+  return (number * (number + 1)) / 2;
 }
 
 export function getFromRange({ max, min }) {

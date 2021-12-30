@@ -5,17 +5,12 @@ import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
 import useDefend from "hooks/useDefend";
 import { isAttacking } from "state/character";
-import {
-  currentHealthMonster,
-  isEngaged,
-  totalAttackRateMonster,
-} from "state/monster";
+import { currentHealthMonster, totalAttackRateMonster } from "state/monster";
 import formatCountdown from "utilities/formatCountdown";
 
-export default function MonsterAttackMeter() {
+export default function MonsterAttackMeter({ isEngaged }) {
   const defend = useDefend();
   const isAttackingValue = useRecoilValue(isAttacking);
-  const isEngagedValue = useRecoilValue(isEngaged);
   const totalAttackRateMonsterValue = useRecoilValue(totalAttackRateMonster);
   const resetCurrentHealthMonster = useResetRecoilState(currentHealthMonster);
 
@@ -37,7 +32,7 @@ export default function MonsterAttackMeter() {
 
   useAnimation((deltaTime) => {
     setDeltaAttack((currentDelta) => currentDelta + deltaTime);
-  }, !isAttackingValue || !isEngagedValue);
+  }, !isAttackingValue || !isEngaged);
 
   return (
     <Progress

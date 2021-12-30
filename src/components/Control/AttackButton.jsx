@@ -5,7 +5,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import { useRecoilValue, useRecoilState } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
-import attackIcon from "icons/fist.svg";
+import attackIcon from "icons/tron-arrow.svg";
 import restingIcon from "icons/tired-eye.svg";
 import retreatIcon from "icons/return-arrow.svg";
 import { isAttacking } from "state/character";

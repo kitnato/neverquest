@@ -2,7 +2,7 @@ import Stack from "react-bootstrap/Stack";
 
 import ImageIcon from "components/ImageIcon";
 import AttackMeter from "components/Character/AttackMeter";
-import icon from "icons/tron-arrow.svg";
+import icon from "icons/striking-splinter.svg";
 
 export default function Attack() {
   return (

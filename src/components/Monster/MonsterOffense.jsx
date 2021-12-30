@@ -5,9 +5,9 @@ import Stack from "react-bootstrap/Stack";
 import ImageIcon from "components/ImageIcon";
 import MonsterAttackMeter from "components/Monster/MonsterAttackMeter";
 import MonsterDamage from "components/Monster/MonsterDamage";
-import icon from "icons/tron-arrow.svg";
+import icon from "icons/striking-splinter.svg";
 
-export default function MonsterOffense() {
+export default function MonsterOffense({ isEngaged }) {
   return (
     <>
       <Row>
@@ -15,7 +15,7 @@ export default function MonsterOffense() {
           <Stack direction="horizontal" gap={3}>
             <ImageIcon icon={icon} tooltip="Monster attack rate" />
 
-            <MonsterAttackMeter />
+            <MonsterAttackMeter isEngaged={isEngaged} />
           </Stack>
         </Col>
       </Row>

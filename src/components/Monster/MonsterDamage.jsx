@@ -1,4 +1,6 @@
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Stack from "react-bootstrap/Stack";
+import Tooltip from "react-bootstrap/Tooltip";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
@@ -17,9 +19,18 @@ export default function MonsterDamage() {
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip="Monster damage (DPS)" />
+      <ImageIcon icon={icon} tooltip="Monster damage" />
 
-      <span>{`${min}-${max} (${damagePerSecond})`}</span>
+      <div>
+        <span>{`${min}-${max}`}</span>
+
+        <OverlayTrigger
+          overlay={<Tooltip>Damage per second (DPS)</Tooltip>}
+          placement="top"
+        >
+          <span>{` (${damagePerSecond})`}</span>
+        </OverlayTrigger>
+      </div>
     </Stack>
   );
 }

@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Stack from "react-bootstrap/Stack";
 import Tooltip from "react-bootstrap/Tooltip";
-import { Plus } from "react-bootstrap-icons";
+import { Clock, Plus } from "react-bootstrap-icons";
 import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
@@ -12,7 +12,7 @@ import {
   experienceAvailable,
   experienceSpent,
 } from "state/character";
-import { getAttributeCost } from "utilities/helpers";
+import { getTriangularNumber } from "utilities/helpers";
 
 export default function Attribute({ atom }) {
   const setCharacterLevel = useSetRecoilState(characterLevel);
@@ -33,7 +33,7 @@ export default function Attribute({ atom }) {
 
       return {
         ...currentAttribute,
-        cost: getAttributeCost(newPoints + 1),
+        cost: getTriangularNumber(newPoints + 1),
         points: newPoints,
       };
     });
@@ -61,7 +61,7 @@ export default function Attribute({ atom }) {
             onClick={onLevelUp}
             variant="outline-dark"
           >
-            {canIncrease ? <Plus size={32} /> : <ImageIcon />}
+            {canIncrease ? <Plus size={24} /> : <Clock size={24} />}
           </Button>
         </span>
       </OverlayTrigger>

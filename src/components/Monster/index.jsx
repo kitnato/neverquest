@@ -8,17 +8,24 @@ import MonsterName from "components/Monster/MonsterName";
 import MonsterOffense from "components/Monster/MonsterOffense";
 import ImageIcon from "components/ImageIcon";
 import icon from "icons/evil-eyes.svg";
+import useTimeout from "hooks/useTimeout";
+import useKill from "hooks/useKill";
 import { isAttacking } from "state/character";
+import { isMonsterDead } from "state/monster";
 
 export default function Monster() {
   const isAttackingValue = useRecoilValue(isAttacking);
+  const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const [isEngaged, setEngaged] = useState(false);
+  const kill = useKill();
 
   useEffect(() => {
-    if (isAttackingValue && !isEngaged) {
+    if (isAttackingValue && !isEngaged && !isMonsterDeadValue) {
       setEngaged(true);
     }
-  }, [isAttackingValue, isEngaged]);
+  }, [isAttackingValue, isEngaged, isMonsterDeadValue]);
+
+  useTimeout(kill, isMonsterDeadValue ? 2000 : null);
 
   return (
     <Card>

@@ -1,9 +1,19 @@
 import { atom, selector } from "recoil";
+import SLIM from "slim";
 
 import { level, progress } from "state/global";
 import { getFromRange } from "utilities/helpers";
 
 // SELECTORS
+
+export const isMonsterDead = selector({
+  key: "isMonsterDead",
+  get: ({ get }) => {
+    const currentHealthMonsterValue = get(currentHealthMonster);
+
+    return currentHealthMonsterValue === 0;
+  },
+});
 
 export const maxHealthMonster = selector({
   key: "maxHealthMonster",
@@ -87,4 +97,9 @@ export const deltaHealthMonster = atom({
 export const isEngaged = atom({
   key: "isEngaged",
   default: false,
+});
+
+export const monsterName = atom({
+  key: "monsterName",
+  default: new SLIM().generate("monster"),
 });

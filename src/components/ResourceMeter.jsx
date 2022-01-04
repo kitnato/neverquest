@@ -1,4 +1,3 @@
-import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import FloatingText from "components/FloatingText";
@@ -14,7 +13,7 @@ export default function ResourceMeter({
   const resourceMaxValue = useRecoilValue(resourceMax);
 
   return (
-    <Stack direction="horizontal" style={{ width: "100%" }}>
+    <>
       <Progress
         attached={attached}
         label={`${resourceCurrentValue}/${resourceMaxValue}`}
@@ -23,6 +22,6 @@ export default function ResourceMeter({
       />
 
       <FloatingText delta={resourceDelta} />
-    </Stack>
+    </>
   );
 }

@@ -28,6 +28,8 @@ export default function FloatingText({ delta }) {
         return {
           bottom: currentDelta.bottom + 0.5,
           opacity: newOpacity,
+          right: 0,
+          fontWeight: "bold",
           value: currentDelta.value,
         };
       });
@@ -43,6 +45,7 @@ export default function FloatingText({ delta }) {
           className={`position-absolute ${
             value > 0 ? "text-success" : "text-danger"
           }`}
+          key={style.opacity}
           style={style}
         >
           {value > 0 ? `+${value}` : value}

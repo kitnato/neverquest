@@ -5,6 +5,7 @@ import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
 import useAttack from "hooks/useAttack";
 import { isAttacking, isRecovering } from "state/character";
+import { isMonsterDead } from "state/monster";
 import { totalAttackRate } from "state/stats";
 import formatCountdown from "utilities/formatCountdown";
 
@@ -12,15 +13,16 @@ export default function AttackMeter() {
   const attack = useAttack();
   const totalAttackRateValue = useRecoilValue(totalAttackRate);
   const isAttackingValue = useRecoilValue(isAttacking);
+  const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isRecoveringValue = useRecoilValue(isRecovering);
   const [deltaAttack, setDeltaAttack] = useState(0);
 
   useEffect(() => {
-    if (deltaAttack >= totalAttackRateValue) {
+    if (deltaAttack >= totalAttackRateValue && !isMonsterDeadValue) {
       setDeltaAttack(0);
       attack();
     }
-  }, [attack, deltaAttack, totalAttackRateValue]);
+  }, [attack, deltaAttack, isMonsterDeadValue, totalAttackRateValue]);
 
   useEffect(() => {
     if (!isAttackingValue) {

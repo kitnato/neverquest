@@ -1,6 +1,5 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
-import useKill from "hooks/useKill";
 import { isAttacking } from "state/character";
 import { weapon } from "state/equipment";
 import { currentHealthMonster, deltaHealthMonster } from "state/monster";
@@ -13,7 +12,6 @@ export default function useAttack() {
     useRecoilState(currentHealthMonster);
   const [currentStaminaValue, setCurrentStamina] =
     useRecoilState(currentStamina);
-  const kill = useKill();
   const setDeltaHealthMonster = useSetRecoilState(deltaHealthMonster);
   const setDeltaStamina = useSetRecoilState(deltaStamina);
   const setAttacking = useSetRecoilState(isAttacking);
@@ -33,10 +31,6 @@ export default function useAttack() {
 
       setDeltaHealthMonster(-damage);
       setCurrentHealthMonster(monsterHealth);
-
-      if (monsterHealth === 0) {
-        kill();
-      }
     }
 
     if (stamina < 0) {

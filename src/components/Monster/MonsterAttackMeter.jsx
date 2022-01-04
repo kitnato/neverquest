@@ -5,34 +5,39 @@ import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
 import useDefend from "hooks/useDefend";
 import { isAttacking } from "state/character";
-import { currentHealthMonster, totalAttackRateMonster } from "state/monster";
+import {
+  currentHealthMonster,
+  isMonsterDead,
+  totalAttackRateMonster,
+} from "state/monster";
 import formatCountdown from "utilities/formatCountdown";
 
 export default function MonsterAttackMeter({ isEngaged }) {
   const defend = useDefend();
   const isAttackingValue = useRecoilValue(isAttacking);
+  const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const totalAttackRateMonsterValue = useRecoilValue(totalAttackRateMonster);
   const resetCurrentHealthMonster = useResetRecoilState(currentHealthMonster);
 
   const [deltaAttack, setDeltaAttack] = useState(0);
 
   useEffect(() => {
-    if (deltaAttack >= totalAttackRateMonsterValue) {
+    if (!isMonsterDeadValue && deltaAttack >= totalAttackRateMonsterValue) {
       setDeltaAttack(0);
       defend();
     }
-  }, [defend, deltaAttack, totalAttackRateMonsterValue]);
+  }, [defend, deltaAttack, isMonsterDeadValue, totalAttackRateMonsterValue]);
 
   useEffect(() => {
-    if (!isAttackingValue) {
+    if (!isMonsterDeadValue && !isAttackingValue) {
       resetCurrentHealthMonster();
       setDeltaAttack(0);
     }
-  }, [isAttackingValue, resetCurrentHealthMonster]);
+  }, [isAttackingValue, isMonsterDeadValue, resetCurrentHealthMonster]);
 
   useAnimation((deltaTime) => {
     setDeltaAttack((currentDelta) => currentDelta + deltaTime);
-  }, !isAttackingValue || !isEngaged);
+  }, isMonsterDeadValue || !isAttackingValue || !isEngaged);
 
   return (
     <Progress

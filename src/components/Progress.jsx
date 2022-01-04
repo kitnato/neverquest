@@ -23,7 +23,7 @@ export default function Progress({
   }
 
   return (
-    <div className="position-relative" style={{ width: "100%" }}>
+    <div className="position-relative w-100">
       <ProgressBar now={value} style={style} variant={variant} />
 
       {size === "normal" && (

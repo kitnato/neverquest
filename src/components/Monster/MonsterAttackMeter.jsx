@@ -35,6 +35,12 @@ export default function MonsterAttackMeter({ isEngaged }) {
     }
   }, [isAttackingValue, isMonsterDeadValue, resetCurrentHealthMonster]);
 
+  useEffect(() => {
+    if (isMonsterDeadValue) {
+      setDeltaAttack(0);
+    }
+  }, [isMonsterDeadValue]);
+
   useAnimation((deltaTime) => {
     setDeltaAttack((currentDelta) => currentDelta + deltaTime);
   }, isMonsterDeadValue || !isAttackingValue || !isEngaged);

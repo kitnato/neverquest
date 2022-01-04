@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
+import { v4 as uuidv4 } from "uuid";
 
 import useAnimation from "hooks/useAnimation";
 
@@ -10,7 +11,14 @@ export default function FloatingText({ delta }) {
   useEffect(() => {
     if (deltaValue !== null) {
       setDeltaQueue((currentDeltaQueue) => [
-        { bottom: 0, opacity: 1, value: deltaValue },
+        {
+          bottom: 0,
+          fontWeight: "bold",
+          id: uuidv4(),
+          opacity: 1,
+          right: 0,
+          value: deltaValue,
+        },
         ...currentDeltaQueue,
       ]);
     }
@@ -26,11 +34,9 @@ export default function FloatingText({ delta }) {
         }
 
         return {
+          ...currentDelta,
           bottom: currentDelta.bottom + 0.5,
           opacity: newOpacity,
-          right: 0,
-          fontWeight: "bold",
-          value: currentDelta.value,
         };
       });
 
@@ -40,12 +46,12 @@ export default function FloatingText({ delta }) {
 
   return (
     <div className="position-relative">
-      {deltaQueue.map(({ value, ...style }) => (
+      {deltaQueue.map(({ id, value, ...style }) => (
         <small
           className={`position-absolute ${
             value > 0 ? "text-success" : "text-danger"
           }`}
-          key={style.opacity}
+          key={id}
           style={style}
         >
           {value > 0 ? `+${value}` : value}

@@ -1,11 +1,11 @@
 import ProgressBar from "react-bootstrap/ProgressBar";
 
 export default function Progress({
+  attached,
   label,
   size = "normal",
   value,
   variant,
-  attached,
 }) {
   const style = size === "tiny" ? { height: 10 } : {};
 

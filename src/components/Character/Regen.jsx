@@ -8,20 +8,23 @@ import { isRecovering } from "state/character";
 export default function Regen({
   regenRate,
   resourceCurrent,
+  resourceDelta,
   isResourceMaxedOut,
 }) {
   const isRecoveringValue = useRecoilValue(isRecovering);
   const regenRateValue = useRecoilValue(regenRate);
   const isResourceMaxedOutValue = useRecoilValue(isResourceMaxedOut);
   const setCurrentResource = useSetRecoilState(resourceCurrent);
+  const setDeltaResource = useSetRecoilState(resourceDelta);
   const [deltaRegen, setDeltaRegen] = useState(0);
 
   useEffect(() => {
     if (deltaRegen >= regenRateValue) {
       setDeltaRegen(0);
       setCurrentResource((currentResource) => currentResource + 1);
+      setDeltaResource(1);
     }
-  }, [deltaRegen, regenRateValue, setCurrentResource]);
+  }, [deltaRegen, regenRateValue, setCurrentResource, setDeltaResource]);
 
   useAnimation((deltaTime) => {
     setDeltaRegen((currentDelta) => currentDelta + deltaTime);

@@ -3,7 +3,11 @@ import Stack from "react-bootstrap/Stack";
 import ImageIcon from "components/ImageIcon";
 import ResourceMeter from "components/ResourceMeter";
 import icon from "icons/hospital-cross.svg";
-import { currentHealthMonster, maxHealthMonster } from "state/monster";
+import {
+  currentHealthMonster,
+  deltaHealthMonster,
+  maxHealthMonster,
+} from "state/monster";
 
 export default function MonsterHealth() {
   return (
@@ -12,6 +16,7 @@ export default function MonsterHealth() {
 
       <ResourceMeter
         resourceCurrent={currentHealthMonster}
+        resourceDelta={deltaHealthMonster}
         resourceMax={maxHealthMonster}
       />
     </Stack>

@@ -79,6 +79,11 @@ export const currentHealthMonster = atom({
   default: maxHealthMonster,
 });
 
+export const deltaHealthMonster = atom({
+  key: "deltaHealthMonster",
+  default: null,
+});
+
 export const isEngaged = atom({
   key: "isEngaged",
   default: false,

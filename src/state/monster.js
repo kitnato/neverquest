@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
-import SLIM from "slim";
 
+import SLIM from "slim";
 import { level, progress } from "state/global";
 import { getFromRange } from "utilities/helpers";
 
@@ -101,5 +101,5 @@ export const isEngaged = atom({
 
 export const monsterName = atom({
   key: "monsterName",
-  default: new SLIM().generate("monster"),
+  default: SLIM.generate("monster"),
 });

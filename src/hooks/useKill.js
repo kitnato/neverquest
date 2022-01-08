@@ -1,6 +1,6 @@
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
-import SLIM from "slim";
 
+import SLIM from "slim";
 import { experience } from "state/character";
 import { progress } from "state/global";
 import { aetherLoot, coinsLoot, scrapLoot } from "state/loot";
@@ -25,6 +25,6 @@ export default function useKill() {
     setProgress((currentProgress) => currentProgress + 1);
 
     resetCurrentMonsterHealth();
-    setMonsterName(new SLIM().generate("monster"));
+    setMonsterName(SLIM.generate("monster"));
   };
 }

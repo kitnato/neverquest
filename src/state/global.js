@@ -1,5 +1,7 @@
 import { atom, selector } from "recoil";
 
+import SLIM from "slim";
+
 // ATOMS
 
 export const activeMonster = atom({
@@ -76,8 +78,7 @@ export const location = selector({
       if (levelValue === 0) {
         return "???";
       }
-      // TODO - SLIM
-      return "Wilderness";
+      return SLIM.generate("location");
     }
 
     return "Caravan";

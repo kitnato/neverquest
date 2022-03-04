@@ -10,7 +10,7 @@ export default function ExperienceSpent() {
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip="Spent experience" />
+      <ImageIcon icon={icon} tooltip="Spent XP" />
 
       <span>{experienceSpentValue}</span>
     </Stack>

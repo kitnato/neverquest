@@ -4,6 +4,7 @@ import Stack from "react-bootstrap/Stack";
 
 import AttributesList from "components/Attributes/AttributesList";
 import Experience from "components/Character/Experience";
+import ExperienceAvailable from "components/Character/ExperienceAvailable";
 import ExperienceSpent from "components/Character/ExperienceSpent";
 import Level from "components/Character/Level";
 
@@ -22,6 +23,10 @@ export default function Attributes() {
 
           <Col>
             <ExperienceSpent />
+          </Col>
+
+          <Col>
+            <ExperienceAvailable />
           </Col>
         </Row>
       </Stack>

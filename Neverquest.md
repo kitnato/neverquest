@@ -80,19 +80,19 @@ Encountered after finishing every wilderness level. Can be upgraded to add more 
 
 #### Default crew
 
-These two are part of every game start.
+The following two members are always present at game start.
 
 ##### Merchant
 
-Sell and buy equipment. Has a limited amount of coin to spare. Amount of coin and discounts of selling and buying can be upgraded.
+Sell and buy items. The only source of coins for the player by selling their items. Has a limited amount of coin to spare. Amount of coins and discounts of selling and buying can be upgraded.
 
 ##### Mercenary
 
-Acquire physical skills and passives.
+Acquire new physical skills, attributes and passives.
 
 #### Purchasable crew
 
-Purchasing a caravan crew makes them available in the next encounter.
+Purchasing a caravan crew member makes them available in the next encounter.
 
 ##### Cook
 
@@ -100,7 +100,7 @@ Restores all health. Grants a Well Fed buff.
 
 ##### Blacksmith
 
-Repair, dismantle and upgrade equipment.
+Repair, dismantle, craft and upgrade equipment. Requires coins as well as scrap and aether.
 
 ##### Alchemist
 
@@ -108,19 +108,19 @@ Buy potions and poisons.
 
 ##### Witch
 
-Enchant and disenchant equipment.
+Enchant and disenchant equipment. Acquire attributes.
 
 ##### Tailor
 
 Upgrade backpack.
 
-##### Wizard
+##### Sorcerer
 
-Acquire sorceries, auras and passives.
+Acquire sorceries and auras. Acquire attributes.
 
 ##### Medic
 
-Saves the character from death (no restart necessary).
+Saves the character from death (no restart necessary) in return for a percentage of all coins, scrap and aether.
 
 ## Character
 
@@ -130,7 +130,7 @@ Manage equipment. Manage skills. View buffs and debuffs.
 
 #### Health
 
-Total amount of damage the player can take befor game over at 0 health.
+Total amount of damage the player can take before game over at 0 health.
 
 #### Stamina
 
@@ -138,7 +138,7 @@ Consumed with every attack.
 
 #### Energy
 
-Consumed when activating skills and spells.
+Consumed when activating skills and sorceries.
 
 #### XP
 
@@ -158,7 +158,7 @@ Gained from disenchanting equipment and dropped from monsters. Used to enchant e
 
 #### Coin
 
-Gained from selling scrap, aether and equipment. Dropped from monsters. Used to buy equipment and pay for services and items from stranger.
+Gained from selling scrap, aether and items to Merchant. Used to pay for services and items from caravan crew.
 
 ### Equipment
 
@@ -166,42 +166,38 @@ Gained from selling scrap, aether and equipment. Dropped from monsters. Used to 
 
 2 slots, 1 for each hand.
 
+##### Light
+
+1 slot. Low damage, high attack rate. Chance to bleed.
+
 ##### Balanced
 
 1 slot. Medium damage, medium attack rate.
 
 ##### Heavy
 
-1 slot. High damage, low attack rate.
-
-##### Light
-
-1 slot. Low damage, high attack rate.
+1 slot. High damage, low attack rate. Chance to stun.
 
 ##### Two-handed
 
-2 slots. Highest damage, low attack rate.
+2 slots. Highest damage, lowest attack rate, chance for execution (instant monster death).
 
-#### Armor
+### Armor
 
-3 different slots. Armor value is subtracted from total damage received.
+Each subsequent type increases the armor value. Armor value is subtracted from total damage received.
 
-##### Chest
+- None: no modifiers
+- Light: lowest armor, low -% dodge, +% critical chance
+- Reinforced: medium armor, medium -% dodge, +% damage
+- Heavy: high armor, high -% dodge, -% attack rate, +% block, +% chance to deflect spells
 
-Each subsequent type increases the armor.
-
-- None
-- Light: low -% dodge, +% critical chance
-- Sturdy: medium -% dodge, _???_
-- Heavy: high -% dodge, -% attack rate, +% block, +% chance to deflect spells
-
-##### Shield
+#### Shield
 
 Adds armor and +% block.
 
-##### Jewelry
+#### Jewelry
 
-Various buffs and boni.
+Various buffs and bonuses.
 
 #### Potion
 
@@ -215,15 +211,29 @@ Grants inventory slots and potion slots.
 
 #### Physical
 
+#### Passive
+
+Permanent effects that once acquired always provide their benefits.
+
 ##### Dual wielding
 
-#### Passive
+Allows the use of a 1-handed weapon in main hand as well as offhand.
+
+##### Shieldcraft
+
+Allows the use of a shield in offhand.
 
 #### Sorcery
 
+Cast spells with immediate and/or over-time effects.
+
 #### Aura
 
+Cast spells that remain active until dispelled. Provides buffs and other positive status effects in return for reserving a percentage of energy.
+
 ### Attributes
+
+Named attributes each provide a direct effect for each point assigned.
 
 #### Health
 

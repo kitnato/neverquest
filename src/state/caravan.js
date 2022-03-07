@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { atom } from "recoil";
 
 export const crew = atom({
@@ -14,4 +13,14 @@ export const crew = atom({
     witch: false,
     wizard: false,
   },
+});
+
+export const exchangeCoin = atom({
+  key: "exchangeCoin",
+  default: 1,
+});
+
+export const exchangeScrap = atom({
+  key: "exchangeScrap",
+  default: 3,
 });

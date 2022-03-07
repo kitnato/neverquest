@@ -9,11 +9,11 @@ export default function LootDisplay({ aether, coins, scrap }) {
   return (
     <Row>
       <Col>
-        <Coins value={coins} />
+        <Scrap value={scrap} />
       </Col>
 
       <Col>
-        <Scrap value={scrap} />
+        <Coins value={coins} />
       </Col>
 
       <Col>

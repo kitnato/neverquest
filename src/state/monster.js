@@ -32,6 +32,7 @@ export const maxHealthMonster = selector({
 export const monsterLoot = selector({
   key: "monsterLoot",
   get: ({ get }) => {
+    const hasTreasureValue = get(hasTreasure);
     const levelValue = get(level) + 1;
     const progressValue = get(progress);
     const range = Math.ceil(levelValue + progressValue / 2);
@@ -41,17 +42,19 @@ export const monsterLoot = selector({
         min: levelValue >= 10 ? levelValue - range : 0,
         max: levelValue >= 10 ? levelValue + range - 2 : 0,
       }),
-      coins: getFromRange({
-        min: levelValue,
-        max: levelValue + Math.ceil(range * 1.5),
-      }),
+      coins: hasTreasureValue
+        ? getFromRange({
+            min: levelValue,
+            max: levelValue + Math.ceil(range * 1.5),
+          })
+        : 0,
       experience: getFromRange({
         min: levelValue,
         max: levelValue + Math.ceil(range * 2),
       }),
       scrap: getFromRange({
-        min: levelValue,
-        max: levelValue + Math.ceil(range * 1.5),
+        min: levelValue * 2,
+        max: levelValue * 2 + Math.ceil(range * 2),
       }),
     };
   },
@@ -96,6 +99,12 @@ export const deltaHealthMonster = atom({
 
 export const isEngaged = atom({
   key: "isEngaged",
+  default: false,
+});
+
+// TODO
+export const hasTreasure = atom({
+  key: "hasTreasure",
   default: false,
 });
 

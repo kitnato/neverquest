@@ -18,13 +18,13 @@ export default function Caravan() {
   const memberOrder = [
     {
       name: "Merchant",
-      content: Merchant,
-      label: "Purchase",
+      content: <Merchant />,
+      label: "Trade",
       key: "merchant",
     },
     {
       name: "Mercenary",
-      content: Mercenary,
+      content: <Mercenary />,
       label: "Train",
       key: "mercenary",
     },

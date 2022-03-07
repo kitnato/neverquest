@@ -8,7 +8,7 @@ The SLIM system generates a pseudo-random variety of names for different fantasy
 
 - Player always has something to do
 - No explicit, arbitrary timeouts or countdowns
-- No resets for incremental boni
+- No resets for incremental bonuses
 - Every run can be different
 - More like Crank, less like Trimps
 - No carpal tunnel
@@ -182,7 +182,7 @@ Gained from selling scrap, aether and items to Merchant. Used to pay for service
 
 2 slots. Highest damage, lowest attack rate, chance for execution (instant monster death).
 
-### Armor
+#### Armor
 
 Each subsequent type increases the armor value. Armor value is subtracted from total damage received.
 
@@ -206,6 +206,12 @@ Grants temporary buff. Cures ailment. Adds poison damage to weapons.
 #### Backpack
 
 Grants inventory slots and potion slots.
+
+### Mastery
+
+Using a particular weapon or armor type increases its associated mastery. Weapon type mastery increases when attacking and armor when being hit. Leveling up mastery confers bonuses on the weapon types.
+
+Certain weapons require mastery levels before they can be used effectively.
 
 ### Skills
 
@@ -302,3 +308,33 @@ Damage multiplier of a critical hit.
 #### Luck
 
 Increases the amount of loot dropped by monsters.
+
+## Achievements
+
+Meta progression. Grant bonuses when completed.
+
+### Combat
+
+- Kill first monster
+- Kill 5/10/25/50/100/1000 monsters _(5 achievements)_
+- Kill a monster in one hit
+- Kill a monster with bleed damage
+- Dodge 1/5/10/25/50/100 hits
+- Dodge 3 hits in a row
+- Reflect damage
+
+### Caravan
+
+- Purchase an item
+- Hire first new crew member
+- Hire X _(X = crew member)_
+
+### Equipment
+
+- Equip a weapon
+- Equip armor
+- Equip a shield
+
+### Meta
+
+- Achieve 5/10/25/50/100/all achievements (lol)

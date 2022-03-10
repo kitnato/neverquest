@@ -24,3 +24,8 @@ export const exchangeScrap = atom({
   key: "exchangeScrap",
   default: 3,
 });
+
+export const merchantInventory = atom({
+  key: "merchantInventory",
+  default: [],
+});

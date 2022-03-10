@@ -15,6 +15,7 @@ import {
   staminaRegenRate,
 } from "state/attributes";
 import { totalAttackRate, totalDamage } from "state/stats";
+import { getDamagePerSecond } from "utilities/helpers";
 
 // ATOMS
 
@@ -97,9 +98,12 @@ export const damagePerSecond = selector({
   key: "damagePerSecond",
   get: ({ get }) => {
     const totalAttackRateValue = get(totalAttackRate);
-    const { max, min } = get(totalDamage);
+    const totalDamageValue = get(totalDamage);
 
-    return ((max + min) / 2 / (totalAttackRateValue / 1000)).toFixed(2);
+    return getDamagePerSecond({
+      range: totalDamageValue,
+      rate: totalAttackRateValue,
+    });
   },
 });
 

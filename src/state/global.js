@@ -16,7 +16,7 @@ export const gameOver = atom({
 
 export const level = atom({
   key: "level",
-  default: 0,
+  default: 1,
 });
 
 export const mode = atom({
@@ -75,7 +75,7 @@ export const location = selector({
     const levelValue = get(level);
 
     if (isWildernessValue) {
-      if (levelValue === 0) {
+      if (levelValue === 1) {
         return "???";
       }
       return SLIM.generate("location");
@@ -91,7 +91,7 @@ export const location = selector({
       set(mode, 1);
     } else {
       set(mode, 0);
-      set(level, levelValue + 1);
+      set(level, levelValue);
       set(progress, 0);
     }
   },

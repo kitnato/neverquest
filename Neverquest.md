@@ -309,6 +309,10 @@ Damage multiplier of a critical hit.
 
 Increases the amount of loot dropped by monsters.
 
+### Traits
+
+Traits are permanent passive abilities that are unlocked when reaching certain Mastery levels as well as on certain Attributes.
+
 ## Achievements
 
 Meta progression. Grant bonuses when completed.

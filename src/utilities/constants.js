@@ -24,3 +24,26 @@ export const NO_WEAPON = {
 
 export const TRANSPARENT_PIXEL =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
+
+export const WEAPON_TYPE = {
+  light: {
+    damageModifier: 1.25,
+    cost: 1,
+    rateRange: { min: 2900, max: 3500 },
+  },
+  balanced: {
+    damageModifier: 1.5,
+    cost: 1,
+    rateRange: { min: 3200, max: 4000 },
+  },
+  heavy: {
+    damageModifier: 2,
+    cost: 2,
+    rateRange: { min: 3900, max: 5000 },
+  },
+  twoHanded: {
+    damageModifier: 3,
+    cost: 3,
+    rateRange: { min: 4000, max: 6000 },
+  },
+};

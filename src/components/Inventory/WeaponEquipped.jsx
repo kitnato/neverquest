@@ -7,9 +7,10 @@ import ImageIcon from "components/ImageIcon";
 import icon from "icons/axe-sword.svg";
 import { weapon } from "state/equipment";
 import { show } from "state/global";
+import { getDamagePerSecond } from "utilities/helpers";
 
-export default function Weapon() {
-  const weaponValue = useRecoilValue(weapon);
+export default function WeaponEquipped() {
+  const { cost, damage, name, rate, type } = useRecoilValue(weapon);
   const showValue = useRecoilValue(show);
 
   if (!showValue.weapon) {
@@ -23,14 +24,19 @@ export default function Weapon() {
       <OverlayTrigger
         overlay={
           <Tooltip>
-            {`Damage: ${weaponValue.damage.min}-${weaponValue.damage.max}`}
+            {`Damage: ${damage.min}-${damage.max} (${getDamagePerSecond({
+              range: damage,
+              rate,
+            })} DPS)`}
             <br />
-            {`Type: ${weaponValue.type}`}
+            {`Stamina cost: ${cost}`}
+            <br />
+            {`Type: ${type}`}
           </Tooltip>
         }
         placement="top"
       >
-        <span>{weaponValue.name}</span>
+        <span>{name}</span>
       </OverlayTrigger>
     </Stack>
   );

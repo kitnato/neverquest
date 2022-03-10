@@ -4,6 +4,7 @@ import ImageIcon from "components/ImageIcon";
 import icon from "icons/two-coins.svg";
 
 export default function Coins({ value }) {
+  // TODO - showValue for coins
   if (!value) {
     return null;
   }

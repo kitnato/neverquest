@@ -2,7 +2,7 @@ import { atom, selector } from "recoil";
 
 import SLIM from "slim";
 import { level, progress } from "state/global";
-import { getFromRange } from "utilities/helpers";
+import { getDamagePerSecond, getFromRange } from "utilities/helpers";
 
 // SELECTORS
 
@@ -15,10 +15,23 @@ export const isMonsterDead = selector({
   },
 });
 
+export const damagePerSecondMonster = selector({
+  key: "damagePerSecondMonster",
+  get: ({ get }) => {
+    const totalAttackRateMonsterValue = get(totalAttackRateMonster);
+    const totalDamageMonsterValue = get(totalDamageMonster);
+
+    return getDamagePerSecond({
+      range: totalDamageMonsterValue,
+      rate: totalAttackRateMonsterValue,
+    });
+  },
+});
+
 export const maxHealthMonster = selector({
   key: "maxHealthMonster",
   get: ({ get }) => {
-    const levelValue = get(level) + 1;
+    const levelValue = get(level);
     const progressValue = get(progress);
 
     return (
@@ -33,7 +46,7 @@ export const monsterLoot = selector({
   key: "monsterLoot",
   get: ({ get }) => {
     const hasTreasureValue = get(hasTreasure);
-    const levelValue = get(level) + 1;
+    const levelValue = get(level);
     const progressValue = get(progress);
     const range = Math.ceil(levelValue + progressValue / 2);
 
@@ -63,7 +76,7 @@ export const monsterLoot = selector({
 export const totalAttackRateMonster = selector({
   key: "totalAttackRateMonster",
   get: ({ get }) => {
-    const levelValue = get(level) + 1;
+    const levelValue = get(level);
     const progressValue = get(progress);
 
     return (
@@ -77,7 +90,7 @@ export const totalAttackRateMonster = selector({
 export const totalDamageMonster = selector({
   key: "totalDamageMonster",
   get: ({ get }) => {
-    const levelValue = get(level) + 1;
+    const levelValue = get(level);
     const progressValue = get(progress);
     const base = Math.floor(levelValue + progressValue / 3);
 

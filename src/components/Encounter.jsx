@@ -1,5 +1,4 @@
 import Stack from "react-bootstrap/Stack";
-
 import { useRecoilValue } from "recoil";
 
 import Caravan from "components/Caravan";

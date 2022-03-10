@@ -26,7 +26,7 @@ export default function Loot() {
         <Card>
           <Card.Body>
             <Row>
-              <Col xs={4}>
+              <Col>
                 <Stack direction="horizontal" gap={3}>
                   <ImageIcon
                     icon={hasLootedValue ? lootedIcon : lootIcon}

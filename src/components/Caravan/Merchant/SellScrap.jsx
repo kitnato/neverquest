@@ -8,7 +8,7 @@ import Scrap from "components/Loot/Scrap";
 import { exchangeCoin, exchangeScrap } from "state/caravan";
 import { coins, scrap } from "state/loot";
 
-export default function Merchant() {
+export default function SellScrap() {
   const [scrapValue, setScrap] = useRecoilState(scrap);
   const exchangeScrapValue = useRecoilValue(exchangeScrap);
   const exchangeCoinValue = useRecoilValue(exchangeCoin);
@@ -20,8 +20,8 @@ export default function Merchant() {
   };
 
   return (
-    <>
-      <h6>Sell resources for coins</h6>
+    <div>
+      <h6>Sell resources</h6>
 
       <Stack direction="horizontal" gap={5}>
         <Stack direction="horizontal" gap={3}>
@@ -40,6 +40,6 @@ export default function Merchant() {
           Sell
         </Button>
       </Stack>
-    </>
+    </div>
   );
 }

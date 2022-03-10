@@ -50,7 +50,7 @@ export const monsterLoot = selector({
         : 0,
       experience: getFromRange({
         min: levelValue,
-        max: levelValue + Math.ceil(range * 2),
+        max: levelValue + range,
       }),
       scrap: getFromRange({
         min: levelValue * 2,

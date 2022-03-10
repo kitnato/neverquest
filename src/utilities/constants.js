@@ -3,6 +3,10 @@ export const NO_ARMOR = {
   value: 0,
 };
 
+export const NO_JEWELRY = {
+  name: "None",
+};
+
 export const NO_SHIELD = {
   armor: 0,
   block: 0,

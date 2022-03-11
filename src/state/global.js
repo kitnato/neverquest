@@ -1,12 +1,18 @@
 import { atom, selector } from "recoil";
 
 import SLIM from "slim";
+import { MODE_CARAVAN, MODE_WILDERNESS } from "utilities/constants";
 
 // ATOMS
 
 export const activeMonster = atom({
   key: "activeMonster",
   default: null,
+});
+
+export const autoEquip = atom({
+  key: "autoEquip",
+  default: true,
 });
 
 export const gameOver = atom({
@@ -21,7 +27,7 @@ export const level = atom({
 
 export const mode = atom({
   key: "mode",
-  default: 0,
+  default: MODE_WILDERNESS,
 });
 
 export const progress = atom({
@@ -32,16 +38,20 @@ export const progress = atom({
 export const show = atom({
   key: "show",
   default: {
+    aether: false,
     armor: false,
     attributes: false,
+    attributesButton: false,
+    coins: false,
     critical: false,
-    defense: false,
+    defence: false,
     dodgeChance: false,
     inventory: false,
     inventoryButton: false,
     levelProgress: false,
     loot: false,
     recovery: false,
+    scrap: false,
     shield: false,
     weapon: false,
   },
@@ -64,7 +74,7 @@ export const isWilderness = selector({
   get: ({ get }) => {
     const modeValue = get(mode);
 
-    return modeValue === 0;
+    return modeValue === MODE_WILDERNESS;
   },
 });
 
@@ -88,9 +98,9 @@ export const location = selector({
     const isWildernessValue = get(isWilderness);
 
     if (isWildernessValue) {
-      set(mode, 1);
+      set(mode, MODE_CARAVAN);
     } else {
-      set(mode, 0);
+      set(mode, MODE_WILDERNESS);
       set(level, levelValue);
       set(progress, 0);
     }

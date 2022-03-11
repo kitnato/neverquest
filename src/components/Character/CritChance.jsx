@@ -8,9 +8,9 @@ import { totalCriticalChance } from "state/stats";
 
 export default function CritChance() {
   const criticalChanceValue = useRecoilValue(totalCriticalChance);
-  const showValue = useRecoilValue(show);
+  const { critical } = useRecoilValue(show);
 
-  if (!showValue.critical) {
+  if (!critical) {
     return null;
   }
 

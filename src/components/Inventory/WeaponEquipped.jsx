@@ -1,17 +1,25 @@
+import { useEffect } from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import ImageIcon from "components/ImageIcon";
 import icon from "icons/axe-sword.svg";
 import { weapon } from "state/equipment";
 import { show } from "state/global";
+import { NO_WEAPON } from "utilities/constants";
 import { getDamagePerSecond } from "utilities/helpers";
 
 export default function WeaponEquipped() {
-  const { cost, damage, name, rate, type } = useRecoilValue(weapon);
-  const showValue = useRecoilValue(show);
+  const [showValue, setShow] = useRecoilState(show);
+  const { damage, name, rate, staminaCost, type } = useRecoilValue(weapon);
+
+  useEffect(() => {
+    if (name !== NO_WEAPON.name && !showValue.weapon) {
+      setShow({ ...showValue, weapon: true });
+    }
+  }, [name, setShow, showValue]);
 
   if (!showValue.weapon) {
     return null;
@@ -24,12 +32,14 @@ export default function WeaponEquipped() {
       <OverlayTrigger
         overlay={
           <Tooltip>
-            {`Damage: ${damage.min}-${damage.max} (${getDamagePerSecond({
-              range: damage,
-              rate,
-            })} DPS)`}
+            {`Damage: ${damage.minimum}-${damage.maximum} (${getDamagePerSecond(
+              {
+                range: damage,
+                rate,
+              }
+            )} DPS)`}
             <br />
-            {`Stamina cost: ${cost}`}
+            {`Stamina cost: ${staminaCost}`}
             <br />
             {`Type: ${type}`}
           </Tooltip>

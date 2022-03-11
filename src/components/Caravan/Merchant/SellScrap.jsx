@@ -20,26 +20,22 @@ export default function SellScrap() {
   };
 
   return (
-    <div>
-      <h6>Sell resources</h6>
+    <Stack direction="horizontal" gap={5}>
+      <Stack direction="horizontal" gap={3}>
+        <Scrap tooltip="Scrap (give)" value={`${exchangeScrapValue}`} />
 
-      <Stack direction="horizontal" gap={5}>
-        <Stack direction="horizontal" gap={3}>
-          <Scrap value={`${exchangeScrapValue}`} />
+        <ArrowRight />
 
-          <ArrowRight />
-
-          <Coins value={exchangeCoinValue} />
-        </Stack>
-
-        <Button
-          disabled={scrapValue < exchangeScrapValue}
-          onClick={sellScrap}
-          variant="outline-dark"
-        >
-          Sell
-        </Button>
+        <Coins tooltip="Coins (receive)" value={exchangeCoinValue} />
       </Stack>
-    </div>
+
+      <Button
+        disabled={scrapValue < exchangeScrapValue}
+        onClick={sellScrap}
+        variant="outline-dark"
+      >
+        Sell
+      </Button>
+    </Stack>
   );
 }

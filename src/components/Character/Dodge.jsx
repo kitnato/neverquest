@@ -8,9 +8,9 @@ import { totalDodgeChance } from "state/stats";
 
 export default function Dodge() {
   const dodgeChanceValue = useRecoilValue(totalDodgeChance);
-  const showValue = useRecoilValue(show);
+  const { dodgeChance } = useRecoilValue(show);
 
-  if (!showValue.dodgeChance) {
+  if (!dodgeChance) {
     return null;
   }
 

@@ -9,14 +9,14 @@ import { damagePerSecondMonster, totalDamageMonster } from "state/monster";
 
 export default function MonsterDamage() {
   const damagePerSecondValue = useRecoilValue(damagePerSecondMonster);
-  const { max, min } = useRecoilValue(totalDamageMonster);
+  const { maximum, minimum } = useRecoilValue(totalDamageMonster);
 
   return (
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Monster damage" />
 
       <div>
-        <span>{`${min}-${max}`}</span>
+        <span>{`${minimum}-${maximum}`}</span>
 
         <OverlayTrigger
           overlay={<Tooltip>Damage per second (DPS)</Tooltip>}

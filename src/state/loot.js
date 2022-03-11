@@ -41,8 +41,8 @@ export const hasLooted = selector({
   get: ({ get }) => {
     const aetherLootValue = get(aetherLoot);
     const coinsLootValue = get(coinsLoot);
-    const scrapLootValue = get(scrapLoot);
     const isLevelCompletedValue = get(isLevelCompleted);
+    const scrapLootValue = get(scrapLoot);
 
     return (
       aetherLootValue === null &&
@@ -56,9 +56,9 @@ export const hasLooted = selector({
     const coinsLootValue = get(coinsLoot);
     const scrapLootValue = get(scrapLoot);
 
-    set(aether, (currentAether) => (currentAether || 0) + aetherLootValue);
-    set(coins, (currentCoins) => (currentCoins || 0) + coinsLootValue);
-    set(scrap, (currentScrap) => (currentScrap || 0) + scrapLootValue);
+    set(aether, (currentAether) => currentAether + aetherLootValue);
+    set(coins, (currentCoins) => currentCoins + coinsLootValue);
+    set(scrap, (currentScrap) => currentScrap + scrapLootValue);
 
     set(aetherLoot, null);
     set(coinsLoot, null);

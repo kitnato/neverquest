@@ -5,36 +5,41 @@ import Progress from "components/Progress";
 import useAnimation from "hooks/useAnimation";
 import { isRecovering } from "state/character";
 
-export default function Regen({
-  regenRate,
+export default function Regeneration({
+  regenerationRate,
   resourceCurrent,
   resourceDelta,
   isResourceMaxedOut,
 }) {
   const isRecoveringValue = useRecoilValue(isRecovering);
-  const regenRateValue = useRecoilValue(regenRate);
+  const regenerationRateValue = useRecoilValue(regenerationRate);
   const isResourceMaxedOutValue = useRecoilValue(isResourceMaxedOut);
   const setCurrentResource = useSetRecoilState(resourceCurrent);
   const setDeltaResource = useSetRecoilState(resourceDelta);
-  const [deltaRegen, setDeltaRegen] = useState(0);
+  const [deltaRegeneration, setDeltaRegeneration] = useState(0);
 
   useEffect(() => {
-    if (deltaRegen >= regenRateValue) {
-      setDeltaRegen(0);
+    if (deltaRegeneration >= regenerationRateValue) {
+      setDeltaRegeneration(0);
       setCurrentResource((currentResource) => currentResource + 1);
       setDeltaResource(1);
     }
-  }, [deltaRegen, regenRateValue, setCurrentResource, setDeltaResource]);
+  }, [
+    deltaRegeneration,
+    regenerationRateValue,
+    setCurrentResource,
+    setDeltaResource,
+  ]);
 
   useAnimation((deltaTime) => {
-    setDeltaRegen((currentDelta) => currentDelta + deltaTime);
+    setDeltaRegeneration((currentDelta) => currentDelta + deltaTime);
   }, isResourceMaxedOutValue || isRecoveringValue);
 
   return (
     <Progress
       attached="above"
       size="tiny"
-      value={(deltaRegen / regenRateValue) * 100}
+      value={(deltaRegeneration / regenerationRateValue) * 100}
       variant="warning"
     />
   );

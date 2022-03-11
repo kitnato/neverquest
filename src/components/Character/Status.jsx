@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
 
 import Attack from "components/Character/Attack";
-import Defense from "components/Character/Defense";
+import Defence from "components/Character/Defence";
 import Health from "components/Character/Health";
 import Name from "components/Character/Name";
 import Offense from "components/Character/Offense";
@@ -34,7 +34,7 @@ export default function Status() {
 
           <Offense />
 
-          <Defense />
+          <Defence />
         </Stack>
       </Card.Body>
     </Card>

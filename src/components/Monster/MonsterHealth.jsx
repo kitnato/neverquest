@@ -6,7 +6,7 @@ import icon from "icons/hospital-cross.svg";
 import {
   currentHealthMonster,
   deltaHealthMonster,
-  maxHealthMonster,
+  maximumHealthMonster,
 } from "state/monster";
 
 export default function MonsterHealth() {
@@ -17,7 +17,7 @@ export default function MonsterHealth() {
       <ResourceMeter
         resourceCurrent={currentHealthMonster}
         resourceDelta={deltaHealthMonster}
-        resourceMax={maxHealthMonster}
+        resourceMaximum={maximumHealthMonster}
       />
     </Stack>
   );

@@ -1,6 +1,6 @@
 import Stack from "react-bootstrap/Stack";
 
-import Regen from "components/Character/Regen";
+import Regeneration from "components/Character/Regeneration";
 import ImageIcon from "components/ImageIcon";
 import ResourceMeter from "components/ResourceMeter";
 import icon from "icons/lungs.svg";
@@ -8,9 +8,9 @@ import {
   currentStamina,
   deltaStamina,
   isStaminaMaxedOut,
-  maxStamina,
+  maximumStamina,
 } from "state/resources";
-import { totalStaminaRegenRate } from "state/stats";
+import { totalStaminaRegenerationRate } from "state/stats";
 
 export default function Stamina() {
   return (
@@ -22,15 +22,15 @@ export default function Stamina() {
           attached="below"
           resourceCurrent={currentStamina}
           resourceDelta={deltaStamina}
-          resourceMax={maxStamina}
+          resourceMaximum={maximumStamina}
         />
 
-        <Regen
+        <Regeneration
           isResourceMaxedOut={isStaminaMaxedOut}
-          regenRate={totalStaminaRegenRate}
+          regenerationRate={totalStaminaRegenerationRate}
           resourceCurrent={currentStamina}
           resourceDelta={deltaStamina}
-          resourceMax={maxStamina}
+          resourceMaximum={maximumStamina}
         />
       </Stack>
     </Stack>

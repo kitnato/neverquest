@@ -7,22 +7,20 @@ import ImageIcon from "components/ImageIcon";
 import icon from "icons/journey.svg";
 import { isWilderness, level, location } from "state/global";
 import { hasLooted } from "state/loot";
+import { MODE_CARAVAN, MODE_WILDERNESS } from "utilities/constants";
 
 export default function TravelButton() {
+  const isWildernessValue = useRecoilValue(isWilderness);
   const hasLootedValue = useRecoilValue(hasLooted);
   const levelValue = useRecoilValue(level);
-  const isWildernessValue = useRecoilValue(isWilderness);
   const changeLocation = useSetRecoilState(location);
 
   const destination = (() => {
-    if (levelValue > 0) {
-      if (isWildernessValue) {
-        return "caravan";
-      }
-      return "wilderness";
+    if (levelValue === 1 && isWildernessValue) {
+      return "???";
     }
 
-    return isWildernessValue ? "???" : "wilderness";
+    return isWildernessValue ? MODE_CARAVAN : MODE_WILDERNESS;
   })();
 
   return (

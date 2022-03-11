@@ -6,20 +6,20 @@ import {
   criticalDamage,
   damage,
   dodgeChance,
-  healthRegenRate,
+  healthRegenerationRate,
   physicalResistance,
   recoveryRate,
-  staminaRegenRate,
+  staminaRegenerationRate,
 } from "state/attributes";
-import { armor, shield, weapon } from "state/equipment";
+import { armor, weapon } from "state/equipment";
 
 export const totalArmor = selector({
   key: "totalArmor",
   get: ({ get }) => {
+    // TODO
     const armorValue = get(armor);
-    const shieldValue = get(shield);
 
-    return armorValue.value + shieldValue.armor;
+    return armorValue.value;
   },
 });
 
@@ -68,8 +68,8 @@ export const totalDamage = selector({
     const bonus = base + increment * points;
 
     return {
-      min: weaponValue.damage.min + bonus,
-      max: weaponValue.damage.max + bonus,
+      minimum: weaponValue.damage.minimum + bonus,
+      maximum: weaponValue.damage.maximum + bonus,
     };
   },
 });
@@ -85,12 +85,12 @@ export const totalDodgeChance = selector({
   },
 });
 
-export const totalHealthRegenRate = selector({
-  key: "totalHealthRegenRate",
+export const totalHealthRegenerationRate = selector({
+  key: "totalHealthRegenerationRate",
   get: ({ get }) => {
-    const healthRegenRateValue = get(healthRegenRate);
+    const healthRegenerationRateValue = get(healthRegenerationRate);
 
-    const { base, increment, points } = healthRegenRateValue;
+    const { base, increment, points } = healthRegenerationRateValue;
 
     return base + increment * points;
   },
@@ -118,12 +118,12 @@ export const totalRecoveryRate = selector({
   },
 });
 
-export const totalStaminaRegenRate = selector({
-  key: "totalStaminaRegenRate",
+export const totalStaminaRegenerationRate = selector({
+  key: "totalStaminaRegenerationRate",
   get: ({ get }) => {
-    const staminaRegenRateValue = get(staminaRegenRate);
+    const staminaRegenerationRateValue = get(staminaRegenerationRate);
 
-    const { base, increment, points } = staminaRegenRateValue;
+    const { base, increment, points } = staminaRegenerationRateValue;
 
     return base + increment * points;
   },

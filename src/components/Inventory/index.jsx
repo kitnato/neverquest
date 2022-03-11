@@ -1,10 +1,9 @@
 import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
+import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import Equipment from "components/Inventory/Equipment";
-import Resources from "components/Inventory/Resources";
+import LootDisplay from "components/Loot/LootDisplay";
 import { show } from "state/global";
 
 export default function Inventory() {
@@ -17,15 +16,11 @@ export default function Inventory() {
   return (
     <Card>
       <Card.Body>
-        <Row>
-          <Col>
-            <Resources />
-          </Col>
+        <Stack gap={3}>
+          <LootDisplay />
 
-          <Col>
-            <Equipment />
-          </Col>
-        </Row>
+          <Equipment />
+        </Stack>
       </Card.Body>
     </Card>
   );

@@ -7,9 +7,9 @@ import icon from "icons/knockout.svg";
 import { show } from "state/global";
 
 export default function Recovery() {
-  const showValue = useRecoilValue(show);
+  const { recovery } = useRecoilValue(show);
 
-  if (!showValue.recovery) {
+  if (!recovery) {
     return null;
   }
 

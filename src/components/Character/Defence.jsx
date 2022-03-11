@@ -7,10 +7,10 @@ import Dodge from "components/Character/Dodge";
 import TotalArmor from "components/Character/TotalArmor";
 import { show } from "state/global";
 
-export default function Defense() {
-  const showValue = useRecoilValue(show);
+export default function Defence() {
+  const { defence } = useRecoilValue(show);
 
-  if (!showValue.defense) {
+  if (!defence) {
     return null;
   }
 

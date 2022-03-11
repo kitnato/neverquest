@@ -10,14 +10,14 @@ import { totalDamage } from "state/stats";
 
 export default function Damage() {
   const damagePerSecondValue = useRecoilValue(damagePerSecond);
-  const { min, max } = useRecoilValue(totalDamage);
+  const { minimum, maximum } = useRecoilValue(totalDamage);
 
   return (
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Total damage" />
 
       <div>
-        <span>{`${min}-${max}`}</span>
+        <span>{`${minimum}-${maximum}`}</span>
 
         <OverlayTrigger
           overlay={<Tooltip>Damage per second (DPS)</Tooltip>}

@@ -5,7 +5,7 @@ import icon from "icons/axe-sword.svg";
 import { getDamagePerSecond } from "utilities/helpers";
 
 export default function WeaponInventory({ separateName, weapon }) {
-  const { cost, damage, name, rate, type } = weapon;
+  const { damage, name, rate, staminaCost, type } = weapon;
 
   return (
     <Stack direction="horizontal" gap={3}>
@@ -19,12 +19,14 @@ export default function WeaponInventory({ separateName, weapon }) {
                 <br />
               </>
             )}
-            {`Damage: ${damage.min}-${damage.max} (${getDamagePerSecond({
-              range: damage,
-              rate,
-            })} DPS)`}
+            {`Damage: ${damage.minimum}-${damage.maximum} (${getDamagePerSecond(
+              {
+                range: damage,
+                rate,
+              }
+            )} DPS)`}
             <br />
-            {`Stamina cost: ${cost}`}
+            {`Stamina cost: ${staminaCost}`}
             <br />
             {`Type: ${type}`}
           </>

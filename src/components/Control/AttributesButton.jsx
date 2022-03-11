@@ -1,26 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import Attributes from "components/Attributes";
 import DismissableScreen from "components/DismissableScreen";
 import ImageIcon from "components/ImageIcon";
 import icon from "icons/skills.svg";
 import { attributesIncreasable, isAttacking } from "state/character";
-import { show } from "state/global";
+import { isLevelCompleted, show } from "state/global";
 import { isEngaged } from "state/monster";
 
 export default function AttributesButton() {
   const attributesIncreasableValue = useRecoilValue(attributesIncreasable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isEngagedValue = useRecoilValue(isEngaged);
-  const showValue = useRecoilValue(show);
+  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
+  const [showValue, setShow] = useRecoilState(show);
   const [isScreenShowing, setScreenShowing] = useState(false);
 
-  if (!showValue.attributes) {
+  useEffect(() => {
+    if (!showValue.attributesButton && isLevelCompletedValue) {
+      setShow({ ...showValue, attributesButton: true });
+    }
+  });
+
+  if (!showValue.attributesButton) {
     return null;
   }
 

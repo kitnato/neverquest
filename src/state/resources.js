@@ -8,9 +8,9 @@ export const isHealthMaxedOut = selector({
   key: "isHealthMaxedOut",
   get: ({ get }) => {
     const currentHealthValue = get(currentHealth);
-    const maxHealthValue = get(maxHealth);
+    const maximumHealthValue = get(maximumHealth);
 
-    return currentHealthValue >= maxHealthValue;
+    return currentHealthValue >= maximumHealthValue;
   },
 });
 
@@ -18,14 +18,14 @@ export const isStaminaMaxedOut = selector({
   key: "isStaminaMaxedOut",
   get: ({ get }) => {
     const currentStaminaValue = get(currentStamina);
-    const maxStaminaValue = get(maxStamina);
+    const maximumStaminaValue = get(maximumStamina);
 
-    return currentStaminaValue >= maxStaminaValue;
+    return currentStaminaValue >= maximumStaminaValue;
   },
 });
 
-export const maxHealth = selector({
-  key: "maxHealth",
+export const maximumHealth = selector({
+  key: "maximumHealth",
   get: ({ get }) => {
     const healthValue = get(health);
 
@@ -35,8 +35,8 @@ export const maxHealth = selector({
   },
 });
 
-export const maxStamina = selector({
-  key: "maxStamina",
+export const maximumStamina = selector({
+  key: "maximumStamina",
   get: ({ get }) => {
     const staminaValue = get(stamina);
 
@@ -50,12 +50,12 @@ export const maxStamina = selector({
 
 export const currentHealth = atom({
   key: "currentHealth",
-  default: maxHealth,
+  default: maximumHealth,
 });
 
 export const currentStamina = atom({
   key: "currentStamina",
-  default: maxStamina,
+  default: maximumStamina,
 });
 
 export const deltaHealth = atom({

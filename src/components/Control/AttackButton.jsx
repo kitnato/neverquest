@@ -38,7 +38,7 @@ export default function AttackButton() {
     setAttacking((currentAttack) => !currentAttack);
 
     if (!showValue.levelProgress) {
-      setShow({ ...show, levelProgress: true });
+      setShow({ ...showValue, levelProgress: true });
     }
   };
 

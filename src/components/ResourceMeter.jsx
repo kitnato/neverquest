@@ -7,17 +7,17 @@ export default function ResourceMeter({
   attached,
   resourceCurrent,
   resourceDelta,
-  resourceMax,
+  resourceMaximum,
 }) {
   const resourceCurrentValue = useRecoilValue(resourceCurrent);
-  const resourceMaxValue = useRecoilValue(resourceMax);
+  const resourceMaximumValue = useRecoilValue(resourceMaximum);
 
   return (
     <>
       <Progress
         attached={attached}
-        label={`${resourceCurrentValue}/${resourceMaxValue}`}
-        value={(resourceCurrentValue / resourceMaxValue) * 100}
+        label={`${resourceCurrentValue}/${resourceMaximumValue}`}
+        value={(resourceCurrentValue / resourceMaximumValue) * 100}
         variant="secondary"
       />
 

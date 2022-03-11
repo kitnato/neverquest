@@ -8,20 +8,20 @@ import {
   damage,
   dodgeChance,
   health,
-  healthRegenRate,
+  healthRegenerationRate,
   lootBonus,
   physicalResistance,
   recoveryRate,
   stamina,
-  staminaRegenRate,
+  staminaRegenerationRate,
 } from "state/attributes";
 import React from "react";
 
 const attributesOrder = [
   health,
-  healthRegenRate,
+  healthRegenerationRate,
   stamina,
-  staminaRegenRate,
+  staminaRegenerationRate,
   damage,
   attackRateBonus,
   dodgeChance,

@@ -78,8 +78,8 @@ export const health = atom({
   },
 });
 
-export const healthRegenRate = atom({
-  key: "healthRegenRate",
+export const healthRegenerationRate = atom({
+  key: "healthRegenerationRate",
   default: {
     base: 9000,
     canAssign: true,
@@ -143,8 +143,8 @@ export const stamina = atom({
   },
 });
 
-export const staminaRegenRate = atom({
-  key: "staminaRegenRate",
+export const staminaRegenerationRate = atom({
+  key: "staminaRegenerationRate",
   default: {
     base: 3500,
     canAssign: true,

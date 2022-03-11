@@ -28,8 +28,8 @@ export const damagePerSecondMonster = selector({
   },
 });
 
-export const maxHealthMonster = selector({
-  key: "maxHealthMonster",
+export const maximumHealthMonster = selector({
+  key: "maximumHealthMonster",
   get: ({ get }) => {
     const levelValue = get(level);
     const progressValue = get(progress);
@@ -37,7 +37,7 @@ export const maxHealthMonster = selector({
     return (
       levelValue +
       progressValue +
-      getFromRange({ min: levelValue, max: levelValue * 2 })
+      getFromRange({ minimum: levelValue, maximum: levelValue * 2 })
     );
   },
 });
@@ -52,22 +52,22 @@ export const monsterLoot = selector({
 
     return {
       aether: getFromRange({
-        min: levelValue >= 10 ? levelValue - range : 0,
-        max: levelValue >= 10 ? levelValue + range - 2 : 0,
+        minimum: levelValue >= 10 ? levelValue - range : 0,
+        maximum: levelValue >= 10 ? levelValue + range - 2 : 0,
       }),
       coins: hasTreasureValue
         ? getFromRange({
-            min: levelValue,
-            max: levelValue + Math.ceil(range * 1.5),
+            minimum: levelValue,
+            maximum: levelValue + Math.ceil(range * 1.5),
           })
         : 0,
       experience: getFromRange({
-        min: levelValue,
-        max: levelValue + range,
+        minimum: levelValue,
+        maximum: levelValue + range,
       }),
       scrap: getFromRange({
-        min: levelValue * 2,
-        max: levelValue * 2 + Math.ceil(range * 2),
+        minimum: levelValue * 2,
+        maximum: levelValue * 2 + Math.ceil(range * 2),
       }),
     };
   },
@@ -82,7 +82,7 @@ export const totalAttackRateMonster = selector({
     return (
       4510 -
       progressValue -
-      10 * getFromRange({ min: levelValue, max: levelValue * 2 })
+      10 * getFromRange({ minimum: levelValue, maximum: levelValue * 2 })
     );
   },
 });
@@ -94,7 +94,7 @@ export const totalDamageMonster = selector({
     const progressValue = get(progress);
     const base = Math.floor(levelValue + progressValue / 3);
 
-    return { min: base, max: base + levelValue };
+    return { minimum: base, maximum: base + levelValue };
   },
 });
 
@@ -102,7 +102,7 @@ export const totalDamageMonster = selector({
 
 export const currentHealthMonster = atom({
   key: "currentHealthMonster",
-  default: maxHealthMonster,
+  default: maximumHealthMonster,
 });
 
 export const deltaHealthMonster = atom({

@@ -19,7 +19,7 @@ export default function useAttack() {
   const weaponValue = useRecoilValue(weapon);
 
   return () => {
-    let stamina = currentStaminaValue - weaponValue.cost;
+    let stamina = currentStaminaValue - weaponValue.staminaCost;
 
     if (stamina >= 0) {
       const damage = getFromRange(totalDamageValue);
@@ -38,7 +38,7 @@ export default function useAttack() {
       setAttacking(false);
     }
 
-    setDeltaStamina(-weaponValue.cost);
+    setDeltaStamina(-weaponValue.staminaCost);
     setCurrentStamina(stamina);
   };
 }

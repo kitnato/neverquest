@@ -158,7 +158,6 @@ export default class SLIM {
           if (["location", "item"].includes(categoryName) && isType) {
             result[index] += "'s";
           }
-
           break;
 
         case "suffix":
@@ -178,7 +177,6 @@ export default class SLIM {
 
             result.splice(index, 0, "of");
           }
-
           break;
 
         // if there's a first suffix ... (always an item)
@@ -206,7 +204,6 @@ export default class SLIM {
               result.push("One");
             }
           }
-
           break;
 
         default:

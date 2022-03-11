@@ -1,24 +1,49 @@
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-import Aether from "components/Loot/Aether";
-import Coins from "components/Loot/Coins";
-import Scrap from "components/Loot/Scrap";
+import LootedResource from "components/Loot/LootedResource";
+import UnlootedResource from "components/Loot/UnlootedResource";
+import {
+  aether,
+  aetherLoot,
+  coins,
+  coinsLoot,
+  scrap,
+  scrapLoot,
+} from "state/loot";
 
-export default function LootDisplay({ aether, coins, scrap }) {
+export default function LootDisplay({ isLoot }) {
   return (
     <Row>
-      <Col>
-        <Scrap value={scrap} />
-      </Col>
+      {isLoot ? (
+        <>
+          <Col>
+            <UnlootedResource atom={scrapLoot} name="scrap" />
+          </Col>
 
-      <Col>
-        <Coins value={coins} />
-      </Col>
+          <Col>
+            <UnlootedResource atom={coinsLoot} name="coins" />
+          </Col>
 
-      <Col>
-        <Aether value={aether} />
-      </Col>
+          <Col>
+            <UnlootedResource atom={aetherLoot} name="aether" />
+          </Col>
+        </>
+      ) : (
+        <>
+          <Col>
+            <LootedResource atom={scrap} name="scrap" />
+          </Col>
+
+          <Col>
+            <LootedResource atom={coins} name="coins" />
+          </Col>
+
+          <Col>
+            <LootedResource atom={aether} name="aether" />
+          </Col>
+        </>
+      )}
     </Row>
   );
 }

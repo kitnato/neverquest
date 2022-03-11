@@ -7,12 +7,12 @@ import {
   damage,
   dodgeChance,
   health,
-  healthRegenRate,
+  healthRegenerationRate,
   lootBonus,
   physicalResistance,
   recoveryRate,
   stamina,
-  staminaRegenRate,
+  staminaRegenerationRate,
 } from "state/attributes";
 import { totalAttackRate, totalDamage } from "state/stats";
 import { getDamagePerSecond } from "utilities/helpers";
@@ -61,12 +61,12 @@ export const attributesIncreasable = selector({
     const dodgeChanceValue = get(dodgeChance);
     const experienceAvailableValue = get(experienceAvailable);
     const healthValue = get(health);
-    const healthRegenRateValue = get(healthRegenRate);
+    const healthRegenerationRateValue = get(healthRegenerationRate);
     const lootBonusValue = get(lootBonus);
     const physicalResistanceValue = get(physicalResistance);
     const recoveryRateValue = get(recoveryRate);
     const staminaValue = get(stamina);
-    const staminaRegenRateValue = get(staminaRegenRate);
+    const staminaRegenerationRateValue = get(staminaRegenerationRate);
 
     const allAttributes = [
       attackRateBonusValue,
@@ -75,12 +75,12 @@ export const attributesIncreasable = selector({
       damageValue,
       dodgeChanceValue,
       healthValue,
-      healthRegenRateValue,
+      healthRegenerationRateValue,
       lootBonusValue,
       physicalResistanceValue,
       recoveryRateValue,
       staminaValue,
-      staminaRegenRateValue,
+      staminaRegenerationRateValue,
     ];
     let increasableCount = 0;
 

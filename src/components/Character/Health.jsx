@@ -1,6 +1,6 @@
 import Stack from "react-bootstrap/Stack";
 
-import Regen from "components/Character/Regen";
+import Regeneration from "components/Character/Regeneration";
 import ImageIcon from "components/ImageIcon";
 import ResourceMeter from "components/ResourceMeter";
 import icon from "icons/hospital-cross.svg";
@@ -8,9 +8,9 @@ import {
   currentHealth,
   deltaHealth,
   isHealthMaxedOut,
-  maxHealth,
+  maximumHealth,
 } from "state/resources";
-import { totalHealthRegenRate } from "state/stats";
+import { totalHealthRegenerationRate } from "state/stats";
 
 export default function Health() {
   return (
@@ -22,15 +22,15 @@ export default function Health() {
           attached="below"
           resourceCurrent={currentHealth}
           resourceDelta={deltaHealth}
-          resourceMax={maxHealth}
+          resourceMaximum={maximumHealth}
         />
 
-        <Regen
+        <Regeneration
           isResourceMaxedOut={isHealthMaxedOut}
-          regenRate={totalHealthRegenRate}
+          regenerationRate={totalHealthRegenerationRate}
           resourceCurrent={currentHealth}
           resourceDelta={deltaHealth}
-          resourceMax={maxHealth}
+          resourceMaximum={maximumHealth}
           type="health"
         />
       </Stack>

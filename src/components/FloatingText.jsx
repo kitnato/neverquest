@@ -37,6 +37,7 @@ export default function FloatingText({ delta }) {
           ...currentDelta,
           bottom: currentDelta.bottom + 0.5,
           opacity: newOpacity,
+          right: currentDelta.right - 0.25,
         };
       });
 

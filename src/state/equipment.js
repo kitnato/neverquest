@@ -17,7 +17,7 @@ export const armor = atom({
 export const inventory = atom({
   key: "inventory",
   default: {
-    contents: [],
+    contents: {},
     size: 3,
   },
 });

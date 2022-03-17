@@ -1,41 +1,17 @@
 {
-  "env": {
-    "browser": true,
-    "jest": true,
-    "es6": true
-  },
-  "plugins": ["prettier", "react-hooks"],
-  "extends": ["airbnb", "airbnb/hooks", "prettier"],
-  "rules": {
-    "no-use-before-define": ["error", { "variables": false }],
-    "prettier/prettier": ["warn", { "printWidth": 80 }],
-    "react-hooks/exhaustive-deps": [
-      "warn", {
-        "additionalHooks": "useRecoilCallback"
-      }
-    ],
-    "react/function-component-definition": [2, { "namedComponents": "function-declaration" }],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off"
-  },
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
-  },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true,
-      "modules": true
-    },
+    "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "moduleDirectory": ["node_modules", "src/"]
-      }
-    }
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "es2021": true
   }
 }

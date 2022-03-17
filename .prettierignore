@@ -1,0 +1,8 @@
+# Ignore everything
+/*
+
+# Except these files
+!src
+!*.json
+!*.js
+!*.md

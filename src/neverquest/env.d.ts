@@ -34,7 +34,7 @@ export enum LocationType {
 
 export type Inventory =
   | {
-      [key: string]: Armor | Jewelry | Shield | Weapon;
+      [key: string]: Armor | Accessory | Shield | Weapon;
     }
   | Record<string, never>;
 
@@ -44,14 +44,14 @@ export enum InventoryItemStatus {
   Stored = "stored",
 }
 
-export enum ItemType {
+export enum EquipmentType {
   Armor = "armor",
-  Jewelry = "jewelry",
+  Accessory = "accessory",
   Shield = "shield",
   Weapon = "weapon",
 }
 
-export interface Jewelry {
+export interface Accessory {
   name: string;
 }
 
@@ -63,8 +63,8 @@ export enum LootType {
 
 export interface MerchantInventoryContents {
   cost: number;
-  item: Armor | Jewelry | Shield | Weapon;
-  type: ItemType;
+  item: Armor | Accessory | Shield | Weapon;
+  type: EquipmentType;
 }
 
 export type MerchantInventory =

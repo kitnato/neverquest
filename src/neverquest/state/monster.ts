@@ -2,8 +2,8 @@ import { atom, selector } from "recoil";
 
 import { level, progress } from "neverquest/state/global";
 import { getDamagePerSecond, getFromRange } from "neverquest/utilities/helpers";
-import SLIM from "slim";
-import { SLIMCategory } from "slim/env";
+import SLIM from "locra";
+import { SLIMCategory } from "locra/env";
 
 // SELECTORS
 

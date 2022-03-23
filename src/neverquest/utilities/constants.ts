@@ -1,11 +1,11 @@
-import { Armor, Jewelry, Shield, Weapon, WeaponType } from "neverquest/env.d";
+import { Armor, Accessory, Shield, Weapon, WeaponType } from "neverquest/env.d";
 
 export const NO_ARMOR: Armor = {
   name: "Skin",
   value: 0,
 };
 
-export const NO_JEWELRY: Jewelry = {
+export const NO_ACCESSORY: Accessory = {
   name: "None",
 };
 

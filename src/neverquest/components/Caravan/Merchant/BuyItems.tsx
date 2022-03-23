@@ -6,7 +6,7 @@ import WeaponInventory from "neverquest/components/Inventory/WeaponInventory";
 import Coins from "neverquest/components/Loot/Coins";
 import {
   InventoryItemStatus,
-  ItemType,
+  EquipmentType,
   MerchantInventoryContents,
   UIVariant,
   Weapon,
@@ -47,7 +47,7 @@ export default function BuyItems() {
 
           // TODO - all types
           switch (type) {
-            case ItemType.Weapon:
+            case EquipmentType.Weapon:
               Item = <WeaponInventory separateName weapon={item as Weapon} />;
               break;
             default:

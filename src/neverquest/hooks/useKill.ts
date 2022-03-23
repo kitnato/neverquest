@@ -1,11 +1,11 @@
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
-import SLIM from "slim";
+import SLIM from "locra";
 import { experience } from "neverquest/state/character";
 import { progress } from "neverquest/state/global";
 import { aetherLoot, coinsLoot, scrapLoot } from "neverquest/state/loot";
 import { currentHealthMonster, monsterLoot, monsterName } from "neverquest/state/monster";
-import { SLIMCategory } from "slim/env";
+import { SLIMCategory } from "locra/env";
 
 export default function useKill() {
   const { aether, coins, experience: xp, scrap } = useRecoilValue(monsterLoot);

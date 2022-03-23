@@ -1,8 +1,8 @@
 import { atom, selector } from "recoil";
 
 import { LocationType } from "neverquest/env.d";
-import SLIM from "slim";
-import { SLIMCategory } from "slim/env";
+import SLIM from "locra";
+import { SLIMCategory } from "locra/env";
 
 // ATOMS
 

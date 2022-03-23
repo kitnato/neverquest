@@ -1,8 +1,8 @@
 import { Weapon, WeaponType } from "neverquest/env.d";
 import { WEAPON_SPECIFICATIONS } from "neverquest/utilities/constants";
 import { getFromRange } from "neverquest/utilities/helpers";
-import SLIM from "slim";
-import { SLIMCategory } from "slim/env";
+import SLIM from "locra";
+import { SLIMCategory } from "locra/env";
 
 export function generateWeapon({
   level,

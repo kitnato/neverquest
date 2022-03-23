@@ -214,7 +214,7 @@ Each subsequent type increases the armor value. When hit, armor value is subtrac
 
 Adds a percentage of block chance that prevents a certain percentage of damage before armor value. Stagger percentage determines the chance to stun the attacker when blocking.
 
-#### Jewelry
+#### Accessory
 
 Various buffs and bonuses.
 

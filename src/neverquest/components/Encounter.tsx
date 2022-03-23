@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import Caravan from "neverquest/components/Caravan";
 import Loot from "neverquest/components/Loot";
 import Wilderness from "neverquest/components/Wilderness";
-import { ItemType, MerchantInventory, WeaponType } from "neverquest/env.d";
+import { EquipmentType, MerchantInventory, WeaponType } from "neverquest/env.d";
 import { merchantInventory } from "neverquest/state/caravan";
 import { isWilderness, level } from "neverquest/state/global";
 import { generateWeapon } from "neverquest/utilities/generateWeapon";
@@ -30,12 +30,12 @@ export default function Encounter() {
               level: levelValue,
               type: WeaponType.Light,
             }),
-            type: ItemType.Weapon,
+            type: EquipmentType.Weapon,
           };
           break;
         case 2: // Armor
         case 3: // Shield
-        case 4: // Jewelry
+        case 4: // Accessory
         default:
           break;
       }

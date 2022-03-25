@@ -20,6 +20,8 @@ export default function BuyItems() {
   const [merchantInventoryValue, setMerchantInventory] = useRecoilState(merchantInventory);
   const receiveItem = useReceiveItem();
 
+  const inventoryEntries = Object.entries(merchantInventoryValue);
+
   const buyItem =
     ({ cost, item, key, type }: MerchantInventoryContents & { key: string }) =>
     () => {
@@ -42,34 +44,38 @@ export default function BuyItems() {
       <h6>Buy items</h6>
 
       <Stack gap={3}>
-        {Object.entries(merchantInventoryValue).map(([key, { cost, item, type }]) => {
-          let Item = null;
+        {inventoryEntries.length === 0 ? (
+          <span style={{ fontStyle: "italic" }}>Nothing available.</span>
+        ) : (
+          inventoryEntries.map(([key, { cost, item, type }]) => {
+            let Item = null;
 
-          // TODO - all types
-          switch (type) {
-            case EquipmentType.Weapon:
-              Item = <WeaponInventory separateName weapon={item as Weapon} />;
-              break;
-            default:
-              break;
-          }
+            // TODO - all types
+            switch (type) {
+              case EquipmentType.Weapon:
+                Item = <WeaponInventory separateName weapon={item as Weapon} />;
+                break;
+              default:
+                break;
+            }
 
-          return (
-            <Stack direction="horizontal" gap={3} key={key}>
-              {Item}
+            return (
+              <Stack direction="horizontal" gap={3} key={key}>
+                {Item}
 
-              <Coins tooltip="Cost (coins)" value={cost} />
+                <Coins tooltip="Cost (coins)" value={cost} />
 
-              <Button
-                disabled={cost > coinsValue}
-                onClick={buyItem({ cost, item, key, type })}
-                variant={UIVariant.Outline}
-              >
-                Buy
-              </Button>
-            </Stack>
-          );
-        })}
+                <Button
+                  disabled={cost > coinsValue}
+                  onClick={buyItem({ cost, item, key, type })}
+                  variant={UIVariant.Outline}
+                >
+                  Buy
+                </Button>
+              </Stack>
+            );
+          })
+        )}
       </Stack>
     </div>
   );

@@ -1,5 +1,7 @@
 // MAIN
 
+import { WeaponType } from "locra/env.d";
+
 export interface Armor {
   name: string;
   value: number;
@@ -85,10 +87,11 @@ export interface Weapon {
   name: string;
   rate: number;
   staminaCost: number;
-  type: string;
+  type: WeaponType;
+  weight: WeaponWeight;
 }
 
-export enum WeaponType {
+export enum WeaponWeight {
   Balanced = "balanced",
   Heavy = "heavy",
   Light = "light",

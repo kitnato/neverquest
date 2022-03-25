@@ -6,14 +6,16 @@ import { v4 as uuidv4 } from "uuid";
 import Caravan from "neverquest/components/Caravan";
 import Loot from "neverquest/components/Loot";
 import Wilderness from "neverquest/components/Wilderness";
-import { EquipmentType, MerchantInventory, WeaponType } from "neverquest/env.d";
+import { EquipmentType, MerchantInventory, WeaponWeight } from "neverquest/env.d";
 import { merchantInventory } from "neverquest/state/caravan";
-import { isWilderness, level } from "neverquest/state/global";
+import { isWilderness, level, nsfw } from "neverquest/state/global";
 import { generateWeapon } from "neverquest/utilities/generateWeapon";
+import { AffixTag, WeaponType } from "locra/env.d";
 
 export default function Encounter() {
   const isWildernessValue = useRecoilValue(isWilderness);
   const levelValue = useRecoilValue(level);
+  const nsfwValue = useRecoilValue(nsfw);
   const setMerchantInventory = useSetRecoilState(merchantInventory);
 
   useEffect(() => {
@@ -27,8 +29,12 @@ export default function Encounter() {
           newInventory[uuidv4()] = {
             cost: levelValue * 2,
             item: generateWeapon({
+              hasPrefix: true,
+              isNSFW: nsfwValue,
               level: levelValue,
-              type: WeaponType.Light,
+              tags: [AffixTag.LowQuality],
+              type: WeaponType.Melee,
+              weight: WeaponWeight.Light,
             }),
             type: EquipmentType.Weapon,
           };

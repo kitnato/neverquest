@@ -9,23 +9,26 @@ import MonsterOffense from "neverquest/components/Monster/MonsterOffense";
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/evil-eyes.svg";
 import useTimeout from "neverquest/hooks/useTimeout";
-import useKill from "neverquest/hooks/useKill";
+import useRewardKill from "neverquest/hooks/useRewardKill";
 import { isAttacking } from "neverquest/state/character";
 import { isMonsterDead } from "neverquest/state/monster";
+import useNewMonster from "neverquest/hooks/useNewMonster";
 
 export default function Monster() {
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const [isEngaged, setEngaged] = useState(false);
-  const kill = useKill();
+  const newMonster = useNewMonster();
+  const rewardKill = useRewardKill();
 
   useEffect(() => {
     if (isAttackingValue && !isEngaged && !isMonsterDeadValue) {
+      newMonster();
       setEngaged(true);
     }
   }, [isAttackingValue, isEngaged, isMonsterDeadValue]);
 
-  useTimeout(kill, isMonsterDeadValue ? 2000 : null);
+  useTimeout(rewardKill, isMonsterDeadValue ? 2000 : null);
 
   return (
     <Card>

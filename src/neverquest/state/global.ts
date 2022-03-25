@@ -1,8 +1,7 @@
 import { atom, selector } from "recoil";
 
+import LOCRA from "locra";
 import { LocationType } from "neverquest/env.d";
-import SLIM from "locra";
-import { SLIMCategory } from "locra/env";
 
 // ATOMS
 
@@ -31,6 +30,12 @@ export const mode = atom({
   default: LocationType.Wilderness,
 });
 
+// TODO - toggle
+export const nsfw = atom({
+  key: "nsfw",
+  default: true,
+});
+
 export const progress = atom({
   key: "progress",
   default: 0,
@@ -40,6 +45,7 @@ export const show = atom({
   key: "show",
   default: {
     aether: false,
+    accessory: false,
     armor: false,
     attributes: false,
     attributesButton: false,
@@ -47,7 +53,6 @@ export const show = atom({
     critical: false,
     defence: false,
     dodgeChance: false,
-    inventory: false,
     inventoryButton: false,
     levelProgress: false,
     loot: false,
@@ -84,12 +89,19 @@ export const location = selector({
   get: ({ get }) => {
     const isWildernessValue = get(isWilderness);
     const levelValue = get(level);
+    const nsfwValue = get(nsfw);
 
     if (isWildernessValue) {
       if (levelValue === 1) {
         return "???";
       }
-      return SLIM.generate(SLIMCategory.Location);
+
+      return LOCRA.generateLocation({
+        isNSFW: nsfwValue,
+        // TODO - affix probabilities
+        hasPrefix: Math.random() < 0.8,
+        hasSuffix: Math.random() < 0.1 * Math.ceil(levelValue / 2),
+      });
     }
 
     return "Caravan";

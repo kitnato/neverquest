@@ -8,11 +8,11 @@ import { useSetRecoilState, useRecoilState, useRecoilValue, RecoilState } from "
 import ImageIcon from "neverquest/components/ImageIcon";
 import { UIVariant } from "neverquest/env.d";
 import placeholderIcon from "neverquest/icons/abstract-049.svg";
-import { Attribute } from "neverquest/env.d";
+import { Attribute as AttributeType } from "neverquest/env.d";
 import { characterLevel, experienceAvailable, experienceSpent } from "neverquest/state/character";
 import { getTriangularNumber } from "neverquest/utilities/helpers";
 
-export default function Attribute({ atom }: { atom: RecoilState<Attribute> }) {
+export default function Attribute({ atom }: { atom: RecoilState<AttributeType> }) {
   const setCharacterLevel = useSetRecoilState(characterLevel);
   const setExperienceSpent = useSetRecoilState(experienceSpent);
   const [attributeValue, setAttribute] = useRecoilState(atom);

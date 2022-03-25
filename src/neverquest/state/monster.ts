@@ -2,8 +2,34 @@ import { atom, selector } from "recoil";
 
 import { level, progress } from "neverquest/state/global";
 import { getDamagePerSecond, getFromRange } from "neverquest/utilities/helpers";
-import SLIM from "locra";
-import { SLIMCategory } from "locra/env";
+
+// ATOMS
+
+export const currentHealthMonster = atom({
+  key: "currentHealthMonster",
+  default: -1,
+});
+
+export const deltaHealthMonster = atom({
+  key: "deltaHealthMonster",
+  default: 0,
+});
+
+export const isEngaged = atom({
+  key: "isEngaged",
+  default: false,
+});
+
+// TODO - determines whether Monster has Coins as loot
+export const hasTreasure = atom({
+  key: "hasTreasure",
+  default: false,
+});
+
+export const monsterName = atom({
+  key: "monsterName",
+  default: "",
+});
 
 // SELECTORS
 
@@ -36,7 +62,9 @@ export const maximumHealthMonster = selector({
     const progressValue = get(progress);
 
     return (
-      levelValue + progressValue + getFromRange({ minimum: levelValue, maximum: levelValue * 2 })
+      levelValue +
+      progressValue +
+      getFromRange({ minimum: levelValue * 2, maximum: Math.ceil(levelValue * 2.5) })
     );
   },
 });
@@ -93,32 +121,4 @@ export const totalDamageMonster = selector({
 
     return { minimum: base, maximum: base + levelValue };
   },
-});
-
-// ATOMS
-
-export const currentHealthMonster = atom({
-  key: "currentHealthMonster",
-  default: maximumHealthMonster,
-});
-
-export const deltaHealthMonster = atom({
-  key: "deltaHealthMonster",
-  default: 0,
-});
-
-export const isEngaged = atom({
-  key: "isEngaged",
-  default: false,
-});
-
-// TODO
-export const hasTreasure = atom({
-  key: "hasTreasure",
-  default: false,
-});
-
-export const monsterName = atom({
-  key: "monsterName",
-  default: SLIM.generate(SLIMCategory.Monster),
 });

@@ -13,7 +13,29 @@ export enum ArmorType {
   Waist = "waist",
 }
 
-export type AffixTags = "elemental" | "highQuality" | "lowQuality";
+export enum AffixTag {
+  Elemental = "elemental",
+  HighQuality = "highQuality",
+  LowQuality = "lowQuality",
+}
+
+export type ArtifactQuery =
+  | {
+      subtype: null;
+      type: ArtifactType.Accessory;
+    }
+  | {
+      subtype: ArmorType;
+      type: ArtifactType.Armor;
+    }
+  | {
+      subtype: ShieldType;
+      type: ArtifactType.Shield;
+    }
+  | {
+      subtype: WeaponType;
+      type: ArtifactType.Weapon;
+    };
 
 export enum ArtifactType {
   Accessory = "accessory",
@@ -34,32 +56,13 @@ export enum CreatureType {
   Name = "name",
 }
 
-// export type DBAffix = { nsfw: boolean } & Partial<{
-//   artifact: AffixType;
-//   creature: AffixType;
-//   location: AffixType;
-//   tags: DBAffixTags[];
-// }>;
-
-// export type DBArtifact = { nsfw: boolean } & (
-//   | {
-//       type: ArtifactType.Accessory;
-//     }
-//   | {
-//       type: ArtifactType.Armor;
-//       subtype: ArmorType;
-//     }
-//   | {
-//       type: ArtifactType.Shield;
-//       subtype: ShieldType;
-//     }
-//   | {
-//       type: ArtifactType.Weapon;
-//       subtype: WeaponType;
-//     }
-// );
-
-// export type DBCreature = { nsfw: boolean } & { type: CreatureType };
+export interface GeneratorParameters {
+  hasPrefix: boolean;
+  hasSuffix: boolean;
+  isNSFW: boolean;
+  prefixTags: AffixTag[];
+  suffixTags: AffixTag[];
+}
 
 export enum ShieldType {
   Small = "small",

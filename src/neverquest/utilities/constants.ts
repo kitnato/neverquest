@@ -1,4 +1,5 @@
-import { Armor, Accessory, Shield, Weapon, WeaponType } from "neverquest/env.d";
+import { WeaponType } from "locra/env.d";
+import { Armor, Accessory, Shield, Weapon, WeaponWeight } from "neverquest/env.d";
 
 export const NO_ARMOR: Armor = {
   name: "Skin",
@@ -21,35 +22,36 @@ export const NO_WEAPON: Weapon = {
   name: "Hands",
   rate: 3000,
   staminaCost: 1,
-  type: WeaponType.Light,
+  type: WeaponType.Melee,
+  weight: WeaponWeight.Light,
 };
 
 export const TRANSPARENT_PIXEL =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
 
 export const WEAPON_SPECIFICATIONS = {
-  [WeaponType.Light]: {
+  [WeaponWeight.Light]: {
     damageModifier: 1.25,
     rateRange: { minimum: 2900, maximum: 3500 },
     staminaCost: 1,
-    type: "Light",
+    weight: "Light",
   },
-  [WeaponType.Balanced]: {
+  [WeaponWeight.Balanced]: {
     damageModifier: 2,
     rateRange: { minimum: 3200, maximum: 4000 },
     staminaCost: 2,
-    type: "Balanced",
+    weight: "Balanced",
   },
-  [WeaponType.Heavy]: {
+  [WeaponWeight.Heavy]: {
     damageModifier: 3,
     rateRange: { minimum: 3900, maximum: 5000 },
     staminaCost: 3,
-    type: "Heavy",
+    weight: "Heavy",
   },
-  [WeaponType.TwoHanded]: {
+  [WeaponWeight.TwoHanded]: {
     damageModifier: 4,
     rateRange: { minimum: 4000, maximum: 6000 },
     staminaCost: 4,
-    type: "Two-handed",
+    weight: "Two-handed",
   },
 };

@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 
-import { isLevelCompleted } from "neverquest/state/global";
+import { isLevelCompleted, show } from "neverquest/state/global";
 
 // ATOMS
 
@@ -52,13 +52,33 @@ export const hasLooted = selector({
     const aetherLootValue = get(aetherLoot);
     const coinsLootValue = get(coinsLoot);
     const scrapLootValue = get(scrapLoot);
+    const showValue = get(show);
 
-    set(aether, (currentAether) => currentAether + aetherLootValue);
-    set(coins, (currentCoins) => currentCoins + coinsLootValue);
-    set(scrap, (currentScrap) => currentScrap + scrapLootValue);
+    if (aetherLootValue > 0) {
+      set(aether, (currentAether) => currentAether + aetherLootValue);
+      set(aetherLoot, 0);
 
-    set(aetherLoot, 0);
-    set(coinsLoot, 0);
-    set(scrapLoot, 0);
+      if (!showValue.aether) {
+        set(show, { ...showValue, aether: true });
+      }
+    }
+
+    if (coinsLootValue > 0) {
+      set(coins, (currentCoins) => currentCoins + coinsLootValue);
+      set(coinsLoot, 0);
+
+      if (!showValue.coins) {
+        set(show, { ...showValue, coins: true });
+      }
+    }
+
+    if (scrapLootValue > 0) {
+      set(scrap, (currentScrap) => currentScrap + scrapLootValue);
+      set(scrapLoot, 0);
+
+      if (!showValue.scrap) {
+        set(show, { ...showValue, scrap: true });
+      }
+    }
   },
 });

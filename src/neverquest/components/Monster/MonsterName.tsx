@@ -13,21 +13,21 @@ export default function MonsterName() {
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const monsterNameValue = useRecoilValue(monsterName);
 
-  const icon = (() => {
+  const { icon, tooltip } = (() => {
     if (isMonsterDeadValue) {
-      return deadIcon;
+      return { icon: deadIcon, tooltip: "Dead monster" };
     }
 
     if (isAttackingValue) {
-      return attackingIcon;
+      return { icon: attackingIcon, tooltip: "Monster" };
     }
 
-    return lurkingIcon;
+    return { icon: lurkingIcon, tooltip: "Lurking monster" };
   })();
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip="Monster" />
+      <ImageIcon icon={icon} tooltip={tooltip} />
 
       <span>{monsterNameValue}</span>
     </Stack>

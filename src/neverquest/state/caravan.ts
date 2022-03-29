@@ -1,6 +1,7 @@
 import { atom } from "recoil";
 
 import { CrewType, MerchantInventory } from "neverquest/env.d";
+import { UNKNOWN } from "neverquest/utilities/constants";
 
 export const crew = atom({
   key: "crew",
@@ -14,6 +15,25 @@ export const crew = atom({
     [CrewType.Tailor]: false,
     [CrewType.Witch]: false,
     [CrewType.Wizard]: false,
+  },
+});
+
+export const crewMonologues = atom({
+  key: "crewMonologues",
+  default: {
+    [CrewType.Alchemist]: [() => ""],
+    [CrewType.Blacksmith]: [() => ""],
+    [CrewType.Cook]: [() => ""],
+    [CrewType.Medic]: [() => ""],
+    [CrewType.Mercenary]: [() => ""],
+    [CrewType.Merchant]: [
+      () => "Greetings, stranger. I have what you're looking for.",
+      (name: string) =>
+        `Welcome ${name !== UNKNOWN ? "back" : name}. Let me help you find what you need.`,
+    ],
+    [CrewType.Tailor]: [() => ""],
+    [CrewType.Witch]: [() => ""],
+    [CrewType.Wizard]: [() => ""],
   },
 });
 

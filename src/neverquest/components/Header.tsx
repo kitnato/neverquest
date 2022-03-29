@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Stack from "react-bootstrap/Stack";
-import { Github } from "react-bootstrap-icons";
+import { ExclamationTriangle, Github } from "react-bootstrap-icons";
 
 import About from "neverquest/components/About";
 import Reset from "neverquest/components/Reset";
@@ -39,8 +39,8 @@ export default function Header({ resetSeed }: { resetSeed: () => void }) {
               <Github /> Source
             </Button>
 
-            <Button onClick={() => setResetShowing(true)} variant="outline-danger">
-              Reset
+            <Button onClick={() => setResetShowing(true)} variant="outline-light">
+              <ExclamationTriangle /> Reset
             </Button>
 
             <Reset

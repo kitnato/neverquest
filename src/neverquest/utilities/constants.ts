@@ -29,6 +29,8 @@ export const NO_WEAPON: Weapon = {
 export const TRANSPARENT_PIXEL =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
 
+export const UNKNOWN = "???";
+
 export const WEAPON_SPECIFICATIONS = {
   [WeaponWeight.Light]: {
     damageModifier: 1.25,

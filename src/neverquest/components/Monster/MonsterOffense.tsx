@@ -11,7 +11,7 @@ export default function MonsterOffense({ isEngaged }: { isEngaged: boolean }) {
   return (
     <>
       <Row>
-        <Col>
+        <Col xs={6}>
           <Stack direction="horizontal" gap={3}>
             <ImageIcon icon={icon} tooltip="Monster attack rate" />
 

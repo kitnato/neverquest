@@ -2,6 +2,8 @@ import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Gear } from "react-bootstrap-icons";
 
+import { UNKNOWN } from "neverquest/utilities/constants";
+
 export default function Settings() {
   const [isShowing, setShowing] = useState(false);
 
@@ -16,7 +18,7 @@ export default function Settings() {
           <Modal.Title>Settings</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>???</Modal.Body>
+        <Modal.Body>{UNKNOWN}</Modal.Body>
       </Modal>
     </span>
   );

@@ -15,13 +15,13 @@ export default function Progress({
   value: number;
   variant: UIVariant;
 }) {
-  const style: {
-    borderTopLeftRadius?: number;
-    borderTopRightRadius?: number;
-    borderBottomLeftRadius?: number;
-    borderBottomRightRadius?: number;
-    height?: number;
-  } = size === UISize.Tiny ? { height: 10 } : {};
+  const style: Partial<{
+    borderTopLeftRadius: number;
+    borderTopRightRadius: number;
+    borderBottomLeftRadius: number;
+    borderBottomRightRadius: number;
+    height: number;
+  }> = size === UISize.Tiny ? { height: 10 } : {};
 
   switch (attached) {
     case UIAttachment.Above:
@@ -46,7 +46,8 @@ export default function Progress({
           style={{
             letterSpacing: 1,
             right: "50%",
-            textShadow: "-1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000",
+            textShadow:
+              "-1px 1px 1px #212529, 1px 1px 1px #212529, 1px -1px 1px #212529, -1px -1px 1px #212529",
             top: 0,
             transform: "translateX(50%)",
           }}

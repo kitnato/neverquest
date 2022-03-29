@@ -8,6 +8,7 @@ import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/journey.svg";
 import { isWilderness, level, location } from "neverquest/state/global";
 import { hasLooted } from "neverquest/state/loot";
+import { UNKNOWN } from "neverquest/utilities/constants";
 
 export default function TravelButton() {
   const isWildernessValue = useRecoilValue(isWilderness);
@@ -17,7 +18,7 @@ export default function TravelButton() {
 
   const destination = (() => {
     if (levelValue === 1 && isWildernessValue) {
-      return "???";
+      return UNKNOWN;
     }
 
     return isWildernessValue ? LocationType.Caravan : LocationType.Wilderness;

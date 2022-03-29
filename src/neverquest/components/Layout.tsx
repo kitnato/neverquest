@@ -23,6 +23,8 @@ export default function Layout({ resetSeed }: { resetSeed: () => void }) {
           <Location />
         </Col>
 
+        <Col style={{ width: 80 }} xs="auto" />
+
         <Col>
           <LevelProgress />
         </Col>

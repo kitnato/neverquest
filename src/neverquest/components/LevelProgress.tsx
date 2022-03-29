@@ -12,9 +12,9 @@ export default function LevelProgress() {
   const levelValue = useRecoilValue(level);
   const progressValue = useRecoilValue(progress);
   const progressMaxValue = useRecoilValue(progressMax);
-  const { levelProgress } = useRecoilValue(show);
+  const showValue = useRecoilValue(show);
 
-  if (!levelProgress) {
+  if (!showValue.levelProgress) {
     return null;
   }
 

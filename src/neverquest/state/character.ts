@@ -15,6 +15,7 @@ import {
   staminaRegenerationRate,
 } from "neverquest/state/attributes";
 import { totalAttackRate, totalDamage } from "neverquest/state/stats";
+import { UNKNOWN } from "neverquest/utilities/constants";
 import { getDamagePerSecond } from "neverquest/utilities/helpers";
 
 // ATOMS
@@ -46,7 +47,7 @@ export const isRecovering = atom({
 
 export const name = atom({
   key: "name",
-  default: "???",
+  default: UNKNOWN,
 });
 
 // SELECTORS

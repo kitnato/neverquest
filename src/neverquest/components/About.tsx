@@ -2,6 +2,8 @@ import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { QuestionSquare } from "react-bootstrap-icons";
 
+import { UNKNOWN } from "neverquest/utilities/constants";
+
 export default function About() {
   const [isShowing, setShowing] = useState(false);
 
@@ -16,7 +18,7 @@ export default function About() {
           <Modal.Title>About</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>???</Modal.Body>
+        <Modal.Body>{UNKNOWN}</Modal.Body>
       </Modal>
     </span>
   );

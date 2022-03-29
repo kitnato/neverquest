@@ -113,6 +113,6 @@ export enum UISize {
 // Using Bootstrap 5 variants.
 export enum UIVariant {
   Outline = "outline-dark",
-  Primary = "secondary",
-  Secondary = "warning",
+  Primary = "dark",
+  Secondary = "secondary",
 }

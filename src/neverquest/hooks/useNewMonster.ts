@@ -12,15 +12,18 @@ export default function useNewMonster() {
   const maximumHealthMonsterValue = useRecoilValue(maximumHealthMonster);
   const nsfwValue = useRecoilValue(nsfw);
 
-  return () => {
+  return (onlyRegenerate = false) => {
     setCurrentMonsterHealth(maximumHealthMonsterValue);
-    setMonsterName(
-      LOCRA.generateCreature({
-        isNSFW: nsfwValue,
-        hasPrefix: Math.random() < 0.9,
-        hasSuffix: Math.random() < 0.2 * Math.ceil(levelValue / 2),
-        type: CreatureType.Monster,
-      })
-    );
+
+    if (!onlyRegenerate) {
+      setMonsterName(
+        LOCRA.generateCreature({
+          isNSFW: nsfwValue,
+          hasPrefix: Math.random() < 0.9,
+          hasSuffix: Math.random() < 0.2 * Math.ceil(levelValue / 2),
+          type: CreatureType.Monster,
+        })
+      );
+    }
   };
 }

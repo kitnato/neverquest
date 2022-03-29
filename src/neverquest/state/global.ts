@@ -2,6 +2,7 @@ import { atom, selector } from "recoil";
 
 import LOCRA from "locra";
 import { LocationType } from "neverquest/env.d";
+import { UNKNOWN } from "neverquest/utilities/constants";
 
 // ATOMS
 
@@ -93,7 +94,7 @@ export const location = selector({
 
     if (isWildernessValue) {
       if (levelValue === 1) {
-        return "???";
+        return UNKNOWN;
       }
 
       return LOCRA.generateLocation({
@@ -114,7 +115,7 @@ export const location = selector({
       set(mode, LocationType.Caravan);
     } else {
       set(mode, LocationType.Wilderness);
-      set(level, levelValue);
+      set(level, levelValue + 1);
       set(progress, 0);
     }
   },
@@ -125,7 +126,6 @@ export const progressMax = selector({
   get: ({ get }) => {
     const levelValue = get(level);
 
-    // 3 Monsters until level 3, then 4 until 6 etc.
-    return Math.floor(levelValue / 3) + 3;
+    return levelValue + 2;
   },
 });

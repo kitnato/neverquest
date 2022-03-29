@@ -8,11 +8,12 @@ import MonsterName from "neverquest/components/Monster/MonsterName";
 import MonsterOffense from "neverquest/components/Monster/MonsterOffense";
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/evil-eyes.svg";
-import useTimeout from "neverquest/hooks/useTimeout";
+import useNewMonster from "neverquest/hooks/useNewMonster";
 import useRewardKill from "neverquest/hooks/useRewardKill";
+import useTimeout from "neverquest/hooks/useTimeout";
 import { isAttacking } from "neverquest/state/character";
 import { isMonsterDead } from "neverquest/state/monster";
-import useNewMonster from "neverquest/hooks/useNewMonster";
+import { UNKNOWN } from "neverquest/utilities/constants";
 
 export default function Monster() {
   const isAttackingValue = useRecoilValue(isAttacking);
@@ -22,9 +23,15 @@ export default function Monster() {
   const rewardKill = useRewardKill();
 
   useEffect(() => {
+    // If player is attacking, engage the monster, if not already done so.
     if (isAttackingValue && !isEngaged && !isMonsterDeadValue) {
       newMonster();
       setEngaged(true);
+    }
+
+    // If player stops attacking but Monster is still alive, regenerate it,
+    if (!isAttackingValue && isEngaged && !isMonsterDeadValue) {
+      newMonster(true);
     }
   }, [isAttackingValue, isEngaged, isMonsterDeadValue]);
 
@@ -43,7 +50,7 @@ export default function Monster() {
           </Stack>
         ) : (
           <Stack direction="horizontal" gap={3}>
-            <ImageIcon icon={icon} tooltip="???" />
+            <ImageIcon icon={icon} tooltip={UNKNOWN} />
 
             <span style={{ fontStyle: "italic" }}>The darkness stirs.</span>
           </Stack>

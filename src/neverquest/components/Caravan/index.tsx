@@ -9,7 +9,8 @@ import Member from "neverquest/components/Caravan/Member";
 import Mercenary from "neverquest/components/Caravan/Mercenary";
 import Merchant from "neverquest/components/Caravan/Merchant";
 import { CrewType } from "neverquest/env.d";
-import { crew } from "neverquest/state/caravan";
+import { crew, crewMonologues } from "neverquest/state/caravan";
+import { name } from "neverquest/state/character";
 
 interface CrewMember {
   name: string;
@@ -19,7 +20,9 @@ interface CrewMember {
 }
 
 export default function Caravan() {
-  const members = useRecoilValue(crew);
+  const crewValue = useRecoilValue(crew);
+  const crewMonologueValue = useRecoilValue(crewMonologues);
+  const nameValue = useRecoilValue(name);
   const [currentMember, setCurrentMember] = useState<CrewMember>();
   const [isScreenShowing, setScreenShowing] = useState(false);
 
@@ -27,14 +30,18 @@ export default function Caravan() {
     {
       name: "Merchant",
       content: <Merchant />,
-      label: "Trade",
       key: CrewType.Merchant,
+      label: "Trade",
+      // TODO - change up monologue
+      monologue: crewMonologueValue[CrewType.Merchant][0](nameValue),
     },
     {
       name: "Mercenary",
       content: <Mercenary />,
-      label: "Train",
       key: CrewType.Mercenary,
+      label: "Train",
+      // TODO - change up monologue
+      monologue: crewMonologueValue[CrewType.Mercenary][0](),
     },
   ];
 
@@ -52,12 +59,11 @@ export default function Caravan() {
         <Card.Body>
           <Stack gap={3}>
             {memberOrder.map(
-              ({ key, label, name }, index) =>
-                members[key] && (
+              ({ key, ...member }, index) =>
+                crewValue[key] && (
                   <Member
+                    {...member}
                     key={key}
-                    label={label}
-                    name={name}
                     setActive={() => onActivate(true, memberOrder[index])}
                   />
                 )

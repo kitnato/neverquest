@@ -15,8 +15,8 @@ export const deltaHealthMonster = atom({
   default: 0,
 });
 
-export const isEngaged = atom({
-  key: "isEngaged",
+export const isMonsterEngaged = atom({
+  key: "isMonsterEngaged",
   default: false,
 });
 
@@ -63,7 +63,7 @@ export const maximumHealthMonster = selector({
 
     return (
       levelValue +
-      progressValue +
+      Math.floor(progressValue / 2) +
       getFromRange({ minimum: levelValue + 1, maximum: Math.floor(levelValue * 1.5) + 1 })
     );
   },
@@ -117,7 +117,7 @@ export const totalDamageMonster = selector({
   get: ({ get }) => {
     const levelValue = get(level);
     const progressValue = get(progress);
-    const base = Math.floor(levelValue + progressValue / 3);
+    const base = levelValue + Math.floor(progressValue / 3);
 
     return { minimum: base, maximum: base + Math.ceil(levelValue / 2) };
   },

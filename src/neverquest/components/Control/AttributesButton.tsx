@@ -12,12 +12,12 @@ import { UIVariant } from "neverquest/env.d";
 import icon from "neverquest/icons/skills.svg";
 import { attributesIncreasable, isAttacking } from "neverquest/state/character";
 import { isLevelCompleted, show } from "neverquest/state/global";
-import { isEngaged } from "neverquest/state/monster";
+import { isMonsterEngaged } from "neverquest/state/monster";
 
 export default function AttributesButton() {
   const attributesIncreasableValue = useRecoilValue(attributesIncreasable);
   const isAttackingValue = useRecoilValue(isAttacking);
-  const isEngagedValue = useRecoilValue(isEngaged);
+  const isMonsterEngagedValue = useRecoilValue(isMonsterEngaged);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const [showValue, setShow] = useRecoilState(show);
   const [isScreenShowing, setScreenShowing] = useState(false);
@@ -37,7 +37,7 @@ export default function AttributesButton() {
       <OverlayTrigger overlay={<Tooltip>Attributes</Tooltip>} placement="top">
         <span className="d-inline-block">
           <Button
-            disabled={isAttackingValue || isEngagedValue}
+            disabled={isAttackingValue || isMonsterEngagedValue}
             onClick={() => setScreenShowing(!isScreenShowing)}
             style={{ position: "relative" }}
             variant={UIVariant.Outline}

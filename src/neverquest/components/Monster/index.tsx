@@ -1,62 +1,71 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
+import MonsterAttack from "neverquest/components/Monster/MonsterAttack";
 import MonsterHealth from "neverquest/components/Monster/MonsterHealth";
+import MonsterDamage from "neverquest/components/Monster/MonsterDamage";
 import MonsterName from "neverquest/components/Monster/MonsterName";
-import MonsterOffense from "neverquest/components/Monster/MonsterOffense";
+import Looting from "neverquest/components/Monster/Looting";
 import ImageIcon from "neverquest/components/ImageIcon";
-import icon from "neverquest/icons/evil-eyes.svg";
 import useNewMonster from "neverquest/hooks/useNewMonster";
-import useRewardKill from "neverquest/hooks/useRewardKill";
-import useTimeout from "neverquest/hooks/useTimeout";
-import { isAttacking } from "neverquest/state/character";
-import { isMonsterDead } from "neverquest/state/monster";
+import unknownIcon from "neverquest/icons/evil-eyes.svg";
+import { isAttacking, isLooting } from "neverquest/state/character";
+import { isMonsterDead, isMonsterEngaged } from "neverquest/state/monster";
 import { UNKNOWN } from "neverquest/utilities/constants";
 
 export default function Monster() {
+  const setLooting = useSetRecoilState(isLooting);
+  const [isMonsterEngagedValue, setMonsterEngaged] = useRecoilState(isMonsterEngaged);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
-  const [isEngaged, setEngaged] = useState(false);
+
   const newMonster = useNewMonster();
-  const rewardKill = useRewardKill();
 
   useEffect(() => {
-    // If player is attacking, engage the monster at the start of the Wilderness.
-    if (isAttackingValue && !isEngaged && !isMonsterDeadValue) {
+    // If player is attacking, engage the monster.
+    if (isAttackingValue && !isMonsterEngagedValue && !isMonsterDeadValue) {
       newMonster();
-      setEngaged(true);
+      setMonsterEngaged(true);
     }
 
-    // If player stops attacking but Monster is still alive, regenerate it,
-    if (!isAttackingValue && isEngaged && !isMonsterDeadValue) {
+    // If player stops attacking but the monster is still alive, regenerate it,
+    if (!isAttackingValue && isMonsterEngagedValue && !isMonsterDeadValue) {
       newMonster(true);
     }
-  }, [isAttackingValue, isEngaged, isMonsterDeadValue]);
 
-  useTimeout(
-    () => {
-      rewardKill();
-      newMonster();
-    },
-    isMonsterDeadValue ? 2000 : null
-  );
+    if (isMonsterDeadValue) {
+      setLooting(true);
+    }
+  }, [isAttackingValue, isMonsterEngagedValue, isMonsterDeadValue]);
 
   return (
     <Card>
       <Card.Body>
-        {isEngaged ? (
+        {isMonsterEngagedValue ? (
           <Stack gap={3}>
             <MonsterName />
 
             <MonsterHealth />
 
-            <MonsterOffense isEngaged={isEngaged} />
+            <Row>
+              <Col>
+                <MonsterAttack />
+              </Col>
+
+              <Col>
+                <Looting />
+              </Col>
+            </Row>
+
+            <MonsterDamage />
           </Stack>
         ) : (
           <Stack direction="horizontal" gap={3}>
-            <ImageIcon icon={icon} tooltip={UNKNOWN} />
+            <ImageIcon icon={unknownIcon} tooltip={UNKNOWN} />
 
             <span style={{ fontStyle: "italic" }}>The darkness stirs.</span>
           </Stack>

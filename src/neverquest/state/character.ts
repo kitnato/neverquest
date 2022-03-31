@@ -40,9 +40,19 @@ export const isAttacking = atom({
   default: false,
 });
 
+export const isLooting = atom({
+  key: "isLooting",
+  default: false,
+});
+
 export const isRecovering = atom({
   key: "isRecovering",
   default: false,
+});
+
+export const lootingRate = atom({
+  key: "lootingRate",
+  default: 2500,
 });
 
 export const name = atom({

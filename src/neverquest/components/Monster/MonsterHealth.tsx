@@ -14,11 +14,13 @@ export default function MonsterHealth() {
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Monster health" />
 
-      <ResourceMeter
-        resourceCurrent={currentHealthMonster}
-        resourceDelta={deltaHealthMonster}
-        resourceMaximum={maximumHealthMonster}
-      />
+      <Stack>
+        <ResourceMeter
+          resourceCurrent={currentHealthMonster}
+          resourceDelta={deltaHealthMonster}
+          resourceMaximum={maximumHealthMonster}
+        />
+      </Stack>
     </Stack>
   );
 }

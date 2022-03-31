@@ -35,19 +35,19 @@ export const WEAPON_SPECIFICATIONS = {
   [WeaponWeight.Light]: {
     damageModifier: 1.25,
     rateRange: { minimum: 2900, maximum: 3500 },
-    staminaCost: 1,
+    staminaCost: 2,
     weight: "Light",
   },
   [WeaponWeight.Balanced]: {
     damageModifier: 2,
     rateRange: { minimum: 3200, maximum: 4000 },
-    staminaCost: 2,
+    staminaCost: 3,
     weight: "Balanced",
   },
   [WeaponWeight.Heavy]: {
     damageModifier: 3,
     rateRange: { minimum: 3900, maximum: 5000 },
-    staminaCost: 3,
+    staminaCost: 4,
     weight: "Heavy",
   },
   [WeaponWeight.TwoHanded]: {

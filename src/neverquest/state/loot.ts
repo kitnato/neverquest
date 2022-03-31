@@ -45,7 +45,7 @@ export const hasLooted = selector({
     const scrapLootValue = get(scrapLoot);
 
     return (
-      aetherLootValue === 0 && coinsLootValue === 0 && isLevelCompletedValue && scrapLootValue === 0
+      aetherLootValue === 0 && coinsLootValue === 0 && scrapLootValue === 0 && isLevelCompletedValue
     );
   },
   set: ({ get, set }) => {

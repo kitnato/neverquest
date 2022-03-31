@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RecoilValue, useRecoilValue } from "recoil";
+import { RecoilState, useRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 
 import useAnimation from "neverquest/hooks/useAnimation";
@@ -13,13 +13,13 @@ type FloatingTextStyle = {
   value: number;
 } | null;
 
-export default function FloatingText({ atom }: { atom: RecoilValue<number> }) {
-  const deltaValue = useRecoilValue(atom);
+export default function FloatingText({ atom }: { atom: RecoilState<number> }) {
+  const [deltaValue, setDeltaValue] = useRecoilState(atom);
   const [deltaQueue, setDeltaQueue] = useState<FloatingTextStyle[]>([]);
 
   useEffect(() => {
     if (deltaValue !== 0) {
-      setDeltaQueue((currentDeltaQueue) => [
+      setDeltaQueue([
         {
           bottom: 0,
           fontWeight: "bold",
@@ -28,34 +28,35 @@ export default function FloatingText({ atom }: { atom: RecoilValue<number> }) {
           right: 0,
           value: deltaValue,
         },
-        ...currentDeltaQueue,
+        ...deltaQueue,
       ]);
     }
+
+    return () => setDeltaQueue([]);
   }, [deltaValue]);
 
   useAnimation(() => {
-    setDeltaQueue((currentDeltaQueue) => {
-      const newQueue = currentDeltaQueue.map((currentDelta) => {
-        if (currentDelta === null) {
-          return null;
-        }
+    const newQueue = deltaQueue.map((currentDelta) => {
+      if (currentDelta === null) {
+        return null;
+      }
 
-        const newOpacity = currentDelta.opacity - 0.01;
+      const newOpacity = currentDelta.opacity - 0.01;
 
-        if (newOpacity <= 0) {
-          return null;
-        }
+      if (newOpacity <= 0) {
+        setDeltaValue(0);
+        return null;
+      }
 
-        return {
-          ...currentDelta,
-          bottom: currentDelta.bottom + 0.5,
-          opacity: newOpacity,
-          right: currentDelta.right - 0.25,
-        };
-      });
-
-      return newQueue.filter((currentDelta) => currentDelta !== null);
+      return {
+        ...currentDelta,
+        bottom: currentDelta.bottom + 0.5,
+        opacity: newOpacity,
+        right: currentDelta.right - 0.25,
+      };
     });
+
+    setDeltaQueue(newQueue.filter((currentDelta) => currentDelta !== null));
   }, deltaQueue.length === 0);
 
   return (

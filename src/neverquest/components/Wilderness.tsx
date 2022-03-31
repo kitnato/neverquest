@@ -15,7 +15,7 @@ export default function Wilderness() {
       {isLevelCompletedValue ? (
         <Card>
           <Card.Body>
-            <Stack direction="horizontal" gap={3}>
+            <Stack direction="horizontal" gap={5}>
               <ImageIcon icon={icon} tooltip="Remains" />
 
               <span style={{ fontStyle: "italic" }}>Everything is dead.</span>

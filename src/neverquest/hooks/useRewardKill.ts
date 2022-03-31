@@ -1,13 +1,11 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import useNewMonster from "neverquest/hooks/useNewMonster";
 import { experience } from "neverquest/state/character";
 import { progress } from "neverquest/state/global";
 import { aetherLoot, coinsLoot, scrapLoot } from "neverquest/state/loot";
 import { monsterLoot } from "neverquest/state/monster";
 
 export default function useRewardKill() {
-  const newMonster = useNewMonster();
   const setAetherLoot = useSetRecoilState(aetherLoot);
   const setCoinsLoot = useSetRecoilState(coinsLoot);
   const setExperience = useSetRecoilState(experience);
@@ -30,7 +28,5 @@ export default function useRewardKill() {
 
     setExperience((currentExperience) => currentExperience + xp);
     setProgress((currentProgress) => currentProgress + 1);
-
-    newMonster();
   };
 }

@@ -135,7 +135,7 @@ export const recoveryRate = atom<Attribute>({
 export const stamina = atom<Attribute>({
   key: "stamina",
   default: {
-    base: 4,
+    base: 5,
     canAssign: true,
     cost: 1,
     description: "Maximum total stamina",

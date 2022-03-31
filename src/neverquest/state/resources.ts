@@ -1,6 +1,7 @@
 import { atom, selector } from "recoil";
 
 import { health, stamina } from "neverquest/state/attributes";
+import { weapon } from "neverquest/state/equipment";
 
 // SELECTORS
 
@@ -21,6 +22,16 @@ export const isStaminaMaxedOut = selector({
     const maximumStaminaValue = get(maximumStamina);
 
     return currentStaminaValue >= maximumStaminaValue;
+  },
+});
+
+export const isStaminaSufficient = selector({
+  key: "isStaminaSufficient",
+  get: ({ get }) => {
+    const currentStaminaValue = get(currentStamina);
+    const weaponValue = get(weapon);
+
+    return currentStaminaValue >= weaponValue.staminaCost;
   },
 });
 

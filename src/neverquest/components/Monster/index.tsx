@@ -23,7 +23,7 @@ export default function Monster() {
   const rewardKill = useRewardKill();
 
   useEffect(() => {
-    // If player is attacking, engage the monster, if not already done so.
+    // If player is attacking, engage the monster at the start of the Wilderness.
     if (isAttackingValue && !isEngaged && !isMonsterDeadValue) {
       newMonster();
       setEngaged(true);
@@ -35,7 +35,13 @@ export default function Monster() {
     }
   }, [isAttackingValue, isEngaged, isMonsterDeadValue]);
 
-  useTimeout(rewardKill, isMonsterDeadValue ? 2000 : null);
+  useTimeout(
+    () => {
+      rewardKill();
+      newMonster();
+    },
+    isMonsterDeadValue ? 2000 : null
+  );
 
   return (
     <Card>

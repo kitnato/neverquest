@@ -64,7 +64,7 @@ export const maximumHealthMonster = selector({
     return (
       levelValue +
       progressValue +
-      getFromRange({ minimum: levelValue * 2, maximum: Math.ceil(levelValue * 2.5) })
+      getFromRange({ minimum: levelValue + 1, maximum: Math.floor(levelValue * 1.5) + 1 })
     );
   },
 });
@@ -119,6 +119,6 @@ export const totalDamageMonster = selector({
     const progressValue = get(progress);
     const base = Math.floor(levelValue + progressValue / 3);
 
-    return { minimum: base, maximum: base + levelValue };
+    return { minimum: base, maximum: base + Math.ceil(levelValue / 2) };
   },
 });

@@ -1,6 +1,5 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
-import { isAttacking } from "neverquest/state/character";
 import { weapon } from "neverquest/state/equipment";
 import { currentHealthMonster, deltaHealthMonster } from "neverquest/state/monster";
 import { currentStamina, deltaStamina } from "neverquest/state/resources";
@@ -12,12 +11,11 @@ export default function useAttack() {
   const [currentStaminaValue, setCurrentStamina] = useRecoilState(currentStamina);
   const setDeltaHealthMonster = useSetRecoilState(deltaHealthMonster);
   const setDeltaStamina = useSetRecoilState(deltaStamina);
-  const setAttacking = useSetRecoilState(isAttacking);
   const totalDamageValue = useRecoilValue(totalDamage);
   const weaponValue = useRecoilValue(weapon);
 
   return () => {
-    let stamina = currentStaminaValue - weaponValue.staminaCost;
+    const stamina = currentStaminaValue - weaponValue.staminaCost;
 
     if (stamina >= 0) {
       const damage = getFromRange(totalDamageValue);
@@ -27,16 +25,17 @@ export default function useAttack() {
         monsterHealth = 0;
       }
 
+      setDeltaStamina(-weaponValue.staminaCost);
+      setCurrentStamina(stamina);
+
       setDeltaHealthMonster(-damage);
       setCurrentHealthMonster(monsterHealth);
     }
 
     if (stamina < 0) {
-      stamina = 0;
-      setAttacking(false);
+      return false;
     }
 
-    setDeltaStamina(-weaponValue.staminaCost);
-    setCurrentStamina(stamina);
+    return true;
   };
 }

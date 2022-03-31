@@ -7,6 +7,7 @@ import useAnimation from "neverquest/hooks/useAnimation";
 import useAttack from "neverquest/hooks/useAttack";
 import { isAttacking, isRecovering } from "neverquest/state/character";
 import { isMonsterDead } from "neverquest/state/monster";
+import { isStaminaSufficient } from "neverquest/state/resources";
 import { totalAttackRate } from "neverquest/state/stats";
 import formatCountdown from "neverquest/utilities/formatCountdown";
 
@@ -16,28 +17,31 @@ export default function AttackMeter() {
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isRecoveringValue = useRecoilValue(isRecovering);
+  const isStaminaSufficientValue = useRecoilValue(isStaminaSufficient);
   const [deltaAttack, setDeltaAttack] = useState(0);
 
   useEffect(() => {
     if (deltaAttack >= totalAttackRateValue && !isMonsterDeadValue) {
-      setDeltaAttack(0);
       attack();
+      setDeltaAttack(0);
     }
   }, [attack, deltaAttack, isMonsterDeadValue, totalAttackRateValue]);
 
-  useEffect(() => {
-    if (!isAttackingValue) {
-      setDeltaAttack(0);
-    }
-  }, [isAttackingValue]);
-
   useAnimation((deltaTime) => {
     setDeltaAttack((currentDelta) => currentDelta + deltaTime);
-  }, !isAttackingValue || isRecoveringValue);
+  }, !isAttackingValue || isRecoveringValue || !isStaminaSufficientValue);
+
+  useEffect(() => {
+    if (!isAttackingValue || isMonsterDeadValue) {
+      setDeltaAttack(0);
+    }
+  }, [isAttackingValue, isMonsterDeadValue]);
 
   return (
     <Progress
-      label={formatCountdown(totalAttackRateValue - deltaAttack)}
+      label={
+        isStaminaSufficientValue ? formatCountdown(totalAttackRateValue - deltaAttack) : "EXHAUSTED"
+      }
       value={(deltaAttack / totalAttackRateValue) * 100}
       variant={UIVariant.Secondary}
     />

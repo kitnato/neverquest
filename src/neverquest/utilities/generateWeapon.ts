@@ -5,6 +5,7 @@ import { WEAPON_SPECIFICATIONS } from "neverquest/utilities/constants";
 import { getFromRange } from "neverquest/utilities/helpers";
 
 export function generateWeapon({
+  cost,
   hasPrefix,
   hasSuffix,
   isNSFW,
@@ -14,6 +15,7 @@ export function generateWeapon({
   type,
   weight,
 }: {
+  cost: number;
   hasPrefix?: boolean;
   hasSuffix?: boolean;
   isNSFW: boolean;
@@ -27,6 +29,7 @@ export function generateWeapon({
   const baseDamage = Math.ceil(level * damageModifier);
 
   return {
+    cost,
     damage: { minimum: baseDamage, maximum: baseDamage + level },
     name:
       name ||

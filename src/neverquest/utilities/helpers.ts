@@ -18,6 +18,10 @@ export function getDamagePerSecond({
   return ((maximum + minimum) / 2 / (rate / 1000)).toFixed(2);
 }
 
+export function getSellPrice({ cost }: { cost: number }) {
+  return Math.floor(cost / 2);
+}
+
 // https://en.wikipedia.org/wiki/Triangular_number
 export function getTriangularNumber(number: number) {
   return (number * (number + 1)) / 2;

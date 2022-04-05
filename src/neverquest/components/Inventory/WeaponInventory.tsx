@@ -6,10 +6,10 @@ import icon from "neverquest/icons/axe-sword.svg";
 import { capitalizeAll, getDamagePerSecond } from "neverquest/utilities/helpers";
 
 export default function WeaponInventory({
-  separateName,
+  showName,
   weapon,
 }: {
-  separateName?: boolean;
+  showName?: boolean;
   weapon: Weapon;
 }) {
   const { damage, name, rate, staminaCost, type, weight } = weapon;
@@ -20,27 +20,34 @@ export default function WeaponInventory({
         icon={icon}
         tooltip={
           <>
-            {!separateName && (
+            {!showName && (
               <>
                 {name}
                 <br />
               </>
             )}
+
             {`Damage: ${damage.minimum}-${damage.maximum} (${getDamagePerSecond({
               range: damage,
               rate,
             })} DPS)`}
+
             <br />
+
             {`Stamina cost: ${staminaCost}`}
+
             <br />
+
             {`Type: ${capitalizeAll(type)}`}
+
             <br />
+
             {`Weight: ${capitalizeAll(weight)}`}
           </>
         }
       />
 
-      {separateName && <span>{name}</span>}
+      {showName && <span>{name}</span>}
     </Stack>
   );
 }

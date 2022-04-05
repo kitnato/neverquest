@@ -27,8 +27,8 @@ export default function Encounter() {
       switch (levelValue) {
         case 1:
           newInventory[uuidv4()] = {
-            cost: levelValue * 2,
             item: generateWeapon({
+              cost: levelValue * 2 + Math.floor(levelValue / 2),
               hasPrefix: true,
               isNSFW: nsfwValue,
               level: levelValue,

@@ -2,15 +2,18 @@ import { WeaponType } from "locra/env.d";
 import { Armor, Accessory, Shield, Weapon, WeaponWeight } from "neverquest/env.d";
 
 export const NO_ARMOR: Armor = {
+  cost: 0,
   name: "Skin",
   value: 0,
 };
 
 export const NO_ACCESSORY: Accessory = {
+  cost: 0,
   name: "None",
 };
 
 export const NO_SHIELD: Shield = {
+  cost: 0,
   block: 0,
   name: "None",
   stagger: 0,
@@ -18,6 +21,7 @@ export const NO_SHIELD: Shield = {
 };
 
 export const NO_WEAPON: Weapon = {
+  cost: 0,
   damage: { minimum: 1, maximum: 2 },
   name: "Hands",
   rate: 3000,

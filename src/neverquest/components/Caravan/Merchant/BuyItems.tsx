@@ -23,12 +23,12 @@ export default function BuyItems() {
   const inventoryEntries = Object.entries(merchantInventoryValue);
 
   const buyItem =
-    ({ cost, item, key, type }: MerchantInventoryContents & { key: string }) =>
+    ({ item, key, type }: MerchantInventoryContents & { key: string }) =>
     () => {
       const itemReceived = receiveItem({ item, type });
 
       if (itemReceived !== InventoryItemStatus.Rejected) {
-        setCoins((currentCoins) => currentCoins - cost);
+        setCoins((currentCoins) => currentCoins - item.cost);
         setMerchantInventory((currentMerchantInventory) => {
           const newMerchantInventory = { ...currentMerchantInventory };
 
@@ -47,13 +47,14 @@ export default function BuyItems() {
         {inventoryEntries.length === 0 ? (
           <span style={{ fontStyle: "italic" }}>Nothing available.</span>
         ) : (
-          inventoryEntries.map(([key, { cost, item, type }]) => {
+          inventoryEntries.map(([key, { item, type }]) => {
+            const { cost } = item;
             let Item = null;
 
             // TODO - all types
             switch (type) {
               case EquipmentType.Weapon:
-                Item = <WeaponInventory separateName weapon={item as Weapon} />;
+                Item = <WeaponInventory showName weapon={item as Weapon} />;
                 break;
               default:
                 break;
@@ -67,7 +68,7 @@ export default function BuyItems() {
 
                 <Button
                   disabled={cost > coinsValue}
-                  onClick={buyItem({ cost, item, key, type })}
+                  onClick={buyItem({ item, key, type })}
                   variant={UIVariant.Outline}
                 >
                   Buy

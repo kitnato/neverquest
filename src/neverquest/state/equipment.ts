@@ -1,6 +1,7 @@
 import { atom, selector } from "recoil";
+import { v4 as uuidv4 } from "uuid";
 
-import { Armor, Inventory, Accessory, Shield, Weapon } from "neverquest/env.d";
+import { Armor, Inventory, Accessory, Shield, Weapon, EquipmentType } from "neverquest/env.d";
 import { NO_ARMOR, NO_ACCESSORY, NO_SHIELD, NO_WEAPON } from "neverquest/utilities/constants";
 
 // ATOMS
@@ -35,8 +36,8 @@ export const weapon = atom<Weapon>({
 
 // SELECTORS
 
-export const isCarryingItems = selector({
-  key: "isCarryingItems",
+export const fullInventory = selector({
+  key: "fullInventory",
   get: ({ get }) => {
     const armorValue = get(armor);
     const { contents } = get(inventory);
@@ -44,12 +45,40 @@ export const isCarryingItems = selector({
     const shieldValue = get(shield);
     const weaponValue = get(weapon);
 
-    return (
-      Object.keys(contents).length > 0 ||
-      armorValue.name !== NO_ARMOR.name ||
-      accessoryValue.name !== NO_ACCESSORY.name ||
-      shieldValue.name !== NO_SHIELD.name ||
-      weaponValue.name !== NO_WEAPON.name
-    );
+    const equippedItems: Inventory = {};
+
+    if (weaponValue.name !== NO_WEAPON.name) {
+      equippedItems[uuidv4()] = {
+        isEquipped: true,
+        item: weaponValue,
+        type: EquipmentType.Weapon,
+      };
+    }
+
+    if (armorValue.name !== NO_ARMOR.name) {
+      equippedItems[uuidv4()] = {
+        isEquipped: true,
+        item: armorValue,
+        type: EquipmentType.Armor,
+      };
+    }
+
+    if (shieldValue.name !== NO_SHIELD.name) {
+      equippedItems[uuidv4()] = {
+        isEquipped: true,
+        item: shieldValue,
+        type: EquipmentType.Shield,
+      };
+    }
+
+    if (accessoryValue.name !== NO_ACCESSORY.name) {
+      equippedItems[uuidv4()] = {
+        isEquipped: true,
+        item: accessoryValue,
+        type: EquipmentType.Accessory,
+      };
+    }
+
+    return { ...equippedItems, ...contents };
   },
 });

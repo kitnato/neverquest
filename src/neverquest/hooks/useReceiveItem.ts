@@ -1,4 +1,5 @@
 import { useRecoilState, useRecoilValue } from "recoil";
+import { v4 as uuidv4 } from "uuid";
 
 import {
   Armor,
@@ -8,9 +9,9 @@ import {
   EquipmentType,
   Weapon,
 } from "neverquest/env.d";
-import { armor, inventory, accessory, shield, weapon } from "neverquest/state/equipment";
+import { accessory, armor, inventory, shield, weapon } from "neverquest/state/equipment";
 import { autoEquip, show } from "neverquest/state/global";
-import { NO_ARMOR, NO_ACCESSORY, NO_SHIELD, NO_WEAPON } from "neverquest/utilities/constants";
+import { NO_ACCESSORY, NO_ARMOR, NO_SHIELD, NO_WEAPON } from "neverquest/utilities/constants";
 
 export default function useReceiveItem() {
   const [armorValue, setArmor] = useRecoilState(armor);
@@ -64,7 +65,10 @@ export default function useReceiveItem() {
     if (Object.keys(inventoryValue).length < inventoryValue.size) {
       setInventory({
         ...inventoryValue,
-        contents: { item, ...inventoryValue.contents },
+        contents: {
+          ...inventoryValue.contents,
+          [uuidv4()]: { item, type },
+        },
       });
       return InventoryItemStatus.Stored;
     }

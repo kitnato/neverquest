@@ -2,10 +2,14 @@
 
 import { WeaponType } from "locra/env.d";
 
-export interface Armor {
+export type Accessory = EquipmentBase & {
+  name: string;
+};
+
+export type Armor = EquipmentBase & {
   name: string;
   value: number;
-}
+};
 
 export interface Attribute {
   base: number;
@@ -29,21 +33,27 @@ export enum CrewType {
   Wizard = "wizard",
 }
 
-export enum LocationType {
-  Caravan = "caravan",
-  Wilderness = "wilderness",
-}
-
 export type Inventory =
   | {
-      [key: string]: Armor | Accessory | Shield | Weapon;
+      [key: string]: InventoryContents;
     }
   | Record<string, never>;
+
+export interface InventoryContents {
+  item: Armor | Accessory | Shield | Weapon;
+  isEquipped?: boolean;
+  type: EquipmentType;
+}
 
 export enum InventoryItemStatus {
   Equipped = "equipped",
   Rejected = "rejected",
   Stored = "stored",
+}
+
+export interface EquipmentBase {
+  cost: number;
+  name: string;
 }
 
 export enum EquipmentType {
@@ -53,8 +63,9 @@ export enum EquipmentType {
   Weapon = "weapon",
 }
 
-export interface Accessory {
-  name: string;
+export enum LocationType {
+  Caravan = "caravan",
+  Wilderness = "wilderness",
 }
 
 export enum LootType {
@@ -64,7 +75,6 @@ export enum LootType {
 }
 
 export interface MerchantInventoryContents {
-  cost: number;
   item: Armor | Accessory | Shield | Weapon;
   type: EquipmentType;
 }
@@ -75,21 +85,19 @@ export type MerchantInventory =
     }
   | Record<string, never>;
 
-export interface Shield {
+export type Shield = EquipmentBase & {
   block: number;
-  name: string;
   stagger: number;
   value: number;
-}
+};
 
-export interface Weapon {
+export type Weapon = EquipmentBase & {
   damage: { minimum: number; maximum: number };
-  name: string;
   rate: number;
   staminaCost: number;
   type: WeaponType;
   weight: WeaponWeight;
-}
+};
 
 export enum WeaponWeight {
   Balanced = "balanced",

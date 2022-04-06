@@ -8,25 +8,19 @@ export function capitalizeAll(string: string) {
   return string.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
 }
 
-export function getDamagePerSecond({
-  range: { maximum, minimum },
-  rate,
-}: {
-  range: { maximum: number; minimum: number };
-  rate: number;
-}) {
-  return ((maximum + minimum) / 2 / (rate / 1000)).toFixed(2);
+export function getDamagePerSecond({ damage, rate }: { damage: number; rate: number }) {
+  return (damage / 2 / (rate / 1000)).toFixed(2);
 }
 
-export function getSellPrice({ cost }: { cost: number }) {
-  return Math.floor(cost / 2);
+export function getFromRange({ maximum, minimum }: { maximum: number; minimum: number }) {
+  return Math.floor(Math.random() * (maximum - minimum + 1) + minimum);
+}
+
+export function getSellPrice({ price }: { price: number }) {
+  return Math.floor(price / 2);
 }
 
 // https://en.wikipedia.org/wiki/Triangular_number
 export function getTriangularNumber(number: number) {
   return (number * (number + 1)) / 2;
-}
-
-export function getFromRange({ maximum, minimum }: { maximum: number; minimum: number }) {
-  return Math.floor(Math.random() * (maximum - minimum + 1) + minimum);
 }

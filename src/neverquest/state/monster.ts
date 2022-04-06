@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil";
 
 import { level, progress } from "neverquest/state/global";
-import { getDamagePerSecond, getFromRange } from "neverquest/utilities/helpers";
+import { getDamagePerSecond } from "neverquest/utilities/helpers";
 
 // ATOMS
 
@@ -49,7 +49,7 @@ export const damagePerSecondMonster = selector({
     const totalDamageMonsterValue = get(totalDamageMonster);
 
     return getDamagePerSecond({
-      range: totalDamageMonsterValue,
+      damage: totalDamageMonsterValue,
       rate: totalAttackRateMonsterValue,
     });
   },
@@ -61,11 +61,7 @@ export const maximumHealthMonster = selector({
     const levelValue = get(level);
     const progressValue = get(progress);
 
-    return (
-      levelValue +
-      Math.floor(progressValue / 2) +
-      getFromRange({ minimum: levelValue + 1, maximum: Math.floor(levelValue * 1.5) + 1 })
-    );
+    return Math.ceil(levelValue * 2) + Math.floor(progressValue / 2) + 1;
   },
 });
 
@@ -75,27 +71,12 @@ export const monsterLoot = selector({
     const hasTreasureValue = get(hasTreasure);
     const levelValue = get(level);
     const progressValue = get(progress);
-    const range = Math.ceil(levelValue + progressValue / 2);
 
     return {
-      aether: getFromRange({
-        minimum: levelValue >= 10 ? levelValue - range : 0,
-        maximum: levelValue >= 10 ? levelValue + range - 2 : 0,
-      }),
-      coins: hasTreasureValue
-        ? getFromRange({
-            minimum: levelValue,
-            maximum: levelValue + Math.ceil(range * 1.5),
-          })
-        : 0,
-      experience: getFromRange({
-        minimum: levelValue,
-        maximum: levelValue + range,
-      }),
-      scrap: getFromRange({
-        minimum: levelValue * 2,
-        maximum: levelValue * 2 + Math.ceil(range * 2),
-      }),
+      aether: levelValue >= 10 ? Math.ceil(levelValue + progressValue / 3) : 0,
+      coins: hasTreasureValue ? progressValue + Math.ceil(levelValue * 1.5) : 0,
+      experience: Math.floor(progressValue + levelValue * 1.5),
+      scrap: Math.floor(progressValue + levelValue * 1.5),
     };
   },
 });
@@ -106,9 +87,7 @@ export const totalAttackRateMonster = selector({
     const levelValue = get(level);
     const progressValue = get(progress);
 
-    return (
-      4510 - progressValue - 10 * getFromRange({ minimum: levelValue, maximum: levelValue * 2 })
-    );
+    return 4510 - progressValue - 10 * levelValue * 2;
   },
 });
 
@@ -117,8 +96,7 @@ export const totalDamageMonster = selector({
   get: ({ get }) => {
     const levelValue = get(level);
     const progressValue = get(progress);
-    const base = levelValue + Math.floor(progressValue / 3);
 
-    return { minimum: base, maximum: base + Math.ceil(levelValue / 2) };
+    return levelValue + Math.floor(progressValue / 3);
   },
 });

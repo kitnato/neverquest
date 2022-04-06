@@ -112,7 +112,7 @@ export const damagePerSecond = selector({
     const totalDamageValue = get(totalDamage);
 
     return getDamagePerSecond({
-      range: totalDamageValue,
+      damage: totalDamageValue,
       rate: totalAttackRateValue,
     });
   },

@@ -5,32 +5,30 @@ import { WEAPON_SPECIFICATIONS } from "neverquest/utilities/constants";
 import { getFromRange } from "neverquest/utilities/helpers";
 
 export function generateWeapon({
-  cost,
   hasPrefix,
   hasSuffix,
   isNSFW,
   level,
   name,
+  price,
   tags,
   type,
   weight,
 }: {
-  cost: number;
   hasPrefix?: boolean;
   hasSuffix?: boolean;
   isNSFW: boolean;
   level: number;
   name?: string;
+  price: number;
   tags?: AffixTag[];
   type: WeaponType;
   weight: WeaponWeight;
 }): Weapon {
   const { damageModifier, rateRange, staminaCost } = WEAPON_SPECIFICATIONS[weight];
-  const baseDamage = Math.ceil(level * damageModifier);
 
   return {
-    cost,
-    damage: { minimum: baseDamage, maximum: baseDamage + level },
+    damage: Math.ceil(level * damageModifier),
     name:
       name ||
       LOCRA.generateArtifact({
@@ -43,6 +41,7 @@ export function generateWeapon({
           type: ArtifactType.Weapon,
         },
       }),
+    price,
     rate: getFromRange(rateRange),
     staminaCost,
     type,

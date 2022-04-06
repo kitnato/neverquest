@@ -24,15 +24,21 @@ export default function WeaponEquipped() {
       <OverlayTrigger
         overlay={
           <Tooltip>
-            {`Damage: ${damage.minimum}-${damage.maximum} (${getDamagePerSecond({
-              range: damage,
+            {`Damage: ${damage} (${getDamagePerSecond({
+              damage,
               rate,
             })} DPS)`}
+
             <br />
+
             {`Stamina cost: ${staminaCost}`}
+
             <br />
+
             {`Type: ${capitalizeAll(type)}`}
+
             <br />
+
             {`Weight: ${capitalizeAll(weight)}`}
           </Tooltip>
         }

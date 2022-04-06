@@ -22,7 +22,7 @@ export const criticalChance = atom<Attribute>({
     canAssign: false,
     cost: 1,
     description: "Chance of landing a critical hit",
-    increment: 0.01,
+    increment: 0.02,
     name: "Dexterity",
     points: 0,
   },
@@ -31,7 +31,7 @@ export const criticalChance = atom<Attribute>({
 export const criticalDamage = atom<Attribute>({
   key: "criticalDamage",
   default: {
-    base: 1,
+    base: 1.5,
     canAssign: false,
     cost: 1,
     description: "Damage multiplier of a critical hit",
@@ -61,7 +61,7 @@ export const dodgeChance = atom<Attribute>({
     canAssign: true,
     cost: 1,
     description: "Chance to dodge an attack",
-    increment: 0.01,
+    increment: 0.02,
     name: "Agility",
     points: 0,
   },
@@ -70,7 +70,7 @@ export const dodgeChance = atom<Attribute>({
 export const health = atom<Attribute>({
   key: "health",
   default: {
-    base: 10,
+    base: 8,
     canAssign: true,
     cost: 1,
     description: "Maximum total health",
@@ -135,7 +135,7 @@ export const recoveryRate = atom<Attribute>({
 export const stamina = atom<Attribute>({
   key: "stamina",
   default: {
-    base: 8,
+    base: 4,
     canAssign: true,
     cost: 1,
     description: "Maximum total stamina",

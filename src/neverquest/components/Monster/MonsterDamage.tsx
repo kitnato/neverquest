@@ -9,14 +9,14 @@ import { damagePerSecondMonster, totalDamageMonster } from "neverquest/state/mon
 
 export default function MonsterDamage() {
   const damagePerSecondValue = useRecoilValue(damagePerSecondMonster);
-  const { maximum, minimum } = useRecoilValue(totalDamageMonster);
+  const totalDamageMonsterValue = useRecoilValue(totalDamageMonster);
 
   return (
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Monster damage" />
 
       <div>
-        <span>{`${minimum}-${maximum}`}</span>
+        <span>{totalDamageMonsterValue}</span>
 
         <OverlayTrigger overlay={<Tooltip>Damage per second (DPS)</Tooltip>} placement="top">
           <span>{` (${damagePerSecondValue})`}</span>

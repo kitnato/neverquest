@@ -28,10 +28,10 @@ export default function Encounter() {
         case 1:
           newInventory[uuidv4()] = {
             item: generateWeapon({
-              cost: levelValue * 2 + Math.floor(levelValue / 2),
               hasPrefix: true,
               isNSFW: nsfwValue,
               level: levelValue,
+              price: levelValue * 2 + Math.floor(levelValue / 2),
               tags: [AffixTag.LowQuality],
               type: WeaponType.Melee,
               weight: WeaponWeight.Light,

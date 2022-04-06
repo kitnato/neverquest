@@ -34,7 +34,7 @@ export default function TravelButton() {
         onClick={() => switchLocation("")}
         variant={UIVariant.Outline}
       >
-        <ImageIcon icon={icon} />
+        <ImageIcon icon={icon} flipped={!isWildernessValue} />
       </Button>
     </OverlayTrigger>
   );

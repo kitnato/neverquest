@@ -52,8 +52,8 @@ export enum InventoryItemStatus {
 }
 
 export interface EquipmentBase {
-  cost: number;
   name: string;
+  price: number;
 }
 
 export enum EquipmentType {
@@ -92,7 +92,7 @@ export type Shield = EquipmentBase & {
 };
 
 export type Weapon = EquipmentBase & {
-  damage: { minimum: number; maximum: number };
+  damage: number;
   rate: number;
   staminaCost: number;
   type: WeaponType;

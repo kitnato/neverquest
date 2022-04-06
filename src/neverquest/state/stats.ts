@@ -65,12 +65,8 @@ export const totalDamage = selector({
     const weaponValue = get(weapon);
 
     const { base, increment, points } = damageValue;
-    const bonus = base + increment * points;
 
-    return {
-      minimum: weaponValue.damage.minimum + bonus,
-      maximum: weaponValue.damage.maximum + bonus,
-    };
+    return weaponValue.damage + base + increment * points;
   },
 });
 

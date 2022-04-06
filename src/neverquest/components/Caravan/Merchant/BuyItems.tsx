@@ -28,7 +28,7 @@ export default function BuyItems() {
       const itemReceived = receiveItem({ item, type });
 
       if (itemReceived !== InventoryItemStatus.Rejected) {
-        setCoins((currentCoins) => currentCoins - item.cost);
+        setCoins((currentCoins) => currentCoins - item.price);
         setMerchantInventory((currentMerchantInventory) => {
           const newMerchantInventory = { ...currentMerchantInventory };
 
@@ -48,7 +48,7 @@ export default function BuyItems() {
           <span style={{ fontStyle: "italic" }}>Nothing available.</span>
         ) : (
           inventoryEntries.map(([key, { item, type }]) => {
-            const { cost } = item;
+            const { price } = item;
             let Item = null;
 
             // TODO - all types
@@ -64,10 +64,10 @@ export default function BuyItems() {
               <Stack direction="horizontal" gap={3} key={key}>
                 {Item}
 
-                <Coins tooltip="Cost (coins)" value={cost} />
+                <Coins tooltip="Price (coins)" value={price} />
 
                 <Button
-                  disabled={cost > coinsValue}
+                  disabled={price > coinsValue}
                   onClick={buyItem({ item, key, type })}
                   variant={UIVariant.Outline}
                 >

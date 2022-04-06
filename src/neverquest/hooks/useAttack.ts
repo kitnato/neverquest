@@ -4,7 +4,6 @@ import { weapon } from "neverquest/state/equipment";
 import { currentHealthMonster, deltaHealthMonster } from "neverquest/state/monster";
 import { currentStamina, deltaStamina } from "neverquest/state/resources";
 import { totalDamage } from "neverquest/state/stats";
-import { getFromRange } from "neverquest/utilities/helpers";
 
 export default function useAttack() {
   const [currentHealthMonsterValue, setCurrentHealthMonster] = useRecoilState(currentHealthMonster);
@@ -18,8 +17,7 @@ export default function useAttack() {
     const stamina = currentStaminaValue - weaponValue.staminaCost;
 
     if (stamina >= 0) {
-      const damage = getFromRange(totalDamageValue);
-      let monsterHealth = currentHealthMonsterValue - damage;
+      let monsterHealth = currentHealthMonsterValue - totalDamageValue;
 
       if (monsterHealth < 0) {
         monsterHealth = 0;
@@ -28,7 +26,7 @@ export default function useAttack() {
       setDeltaStamina(-weaponValue.staminaCost);
       setCurrentStamina(stamina);
 
-      setDeltaHealthMonster(-damage);
+      setDeltaHealthMonster(-totalDamageValue);
       setCurrentHealthMonster(monsterHealth);
     }
 

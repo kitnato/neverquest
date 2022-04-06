@@ -27,8 +27,8 @@ export default function WeaponInventory({
               </>
             )}
 
-            {`Damage: ${damage.minimum}-${damage.maximum} (${getDamagePerSecond({
-              range: damage,
+            {`Damage: ${damage} (${getDamagePerSecond({
+              damage,
               rate,
             })} DPS)`}
 

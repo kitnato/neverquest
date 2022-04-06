@@ -10,14 +10,14 @@ import { totalDamage } from "neverquest/state/stats";
 
 export default function Damage() {
   const damagePerSecondValue = useRecoilValue(damagePerSecond);
-  const { minimum, maximum } = useRecoilValue(totalDamage);
+  const totalDamageValue = useRecoilValue(totalDamage);
 
   return (
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Total damage" />
 
       <div>
-        <span>{`${minimum}-${maximum}`}</span>
+        <span>{totalDamageValue}</span>
 
         <OverlayTrigger overlay={<Tooltip>Damage per second (DPS)</Tooltip>} placement="top">
           <span>{` (${damagePerSecondValue})`}</span>

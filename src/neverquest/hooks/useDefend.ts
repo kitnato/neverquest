@@ -4,7 +4,6 @@ import { gameOver, show } from "neverquest/state/global";
 import { totalDamageMonster } from "neverquest/state/monster";
 import { currentHealth, deltaHealth } from "neverquest/state/resources";
 import { totalArmor, totalPhysicalResistance } from "neverquest/state/stats";
-import { getFromRange } from "neverquest/utilities/helpers";
 
 export default function useDefend() {
   const [currentHealthValue, setCurrentHealth] = useRecoilState(currentHealth);
@@ -18,7 +17,7 @@ export default function useDefend() {
 
   return () => {
     const healthDamage = (() => {
-      const damage = totalArmorValue - getFromRange(totalDamageMonsterValue);
+      const damage = totalArmorValue - totalDamageMonsterValue;
 
       return damage < 0 ? damage : 0;
     })();

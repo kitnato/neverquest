@@ -7,10 +7,10 @@ import Dodge from "neverquest/components/Character/Dodge";
 import TotalArmor from "neverquest/components/Character/TotalArmor";
 import { show } from "neverquest/state/global";
 
-export default function Defence() {
-  const { defence } = useRecoilValue(show);
+export default function Defense() {
+  const { defense } = useRecoilValue(show);
 
-  if (!defence) {
+  if (!defense) {
     return null;
   }
 

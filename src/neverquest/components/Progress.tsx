@@ -34,8 +34,6 @@ export default function Progress({
       style.borderBottomLeftRadius = 0;
       style.borderBottomRightRadius = 0;
       break;
-    default:
-      break;
   }
 
   return (

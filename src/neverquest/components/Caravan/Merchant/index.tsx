@@ -6,7 +6,7 @@ import SellItems from "neverquest/components/Caravan/Merchant/SellItems";
 
 export default function Merchant() {
   return (
-    <Stack gap={4}>
+    <Stack gap={5}>
       <div>
         <h6>Sell resources</h6>
 

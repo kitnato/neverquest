@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
 
 import Attack from "neverquest/components/Character/Attack";
-import Defence from "neverquest/components/Character/Defence";
+import Defense from "neverquest/components/Character/Defense";
 import Health from "neverquest/components/Character/Health";
 import Name from "neverquest/components/Character/Name";
 import Offense from "neverquest/components/Character/Offense";
@@ -34,7 +34,7 @@ export default function Status() {
 
           <Offense />
 
-          <Defence />
+          <Defense />
         </Stack>
       </Card.Body>
     </Card>

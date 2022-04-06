@@ -42,8 +42,6 @@ export default function Encounter() {
         case 2: // Armor
         case 3: // Shield
         case 4: // Accessory
-        default:
-          break;
       }
 
       setMerchantInventory((currentMerchantInventory) => ({

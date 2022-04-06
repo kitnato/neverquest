@@ -4,7 +4,8 @@ import { useRecoilValue } from "recoil";
 import ImageIcon from "neverquest/components/ImageIcon";
 import Progress from "neverquest/components/Progress";
 import { UIVariant } from "neverquest/env.d";
-import icon from "neverquest/icons/stairs.svg";
+import levelIcon from "neverquest/icons/flying-flag.svg";
+import progressIcon from "neverquest/icons/stairs.svg";
 import { isWilderness, level, progress, progressMax, show } from "neverquest/state/global";
 
 export default function LevelProgress() {
@@ -19,17 +20,23 @@ export default function LevelProgress() {
   }
 
   return (
-    <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip="Progress" />
+    <Stack direction="horizontal" gap={5}>
+      <Stack direction="horizontal" gap={3}>
+        <ImageIcon icon={levelIcon} tooltip="Level" />
 
-      <span>{levelValue}</span>
+        <span>{levelValue}</span>
+      </Stack>
 
       {isWildernessValue && (
-        <Progress
-          label={`${progressValue}/${progressMaxValue}`}
-          value={(progressValue / progressMaxValue) * 100}
-          variant={UIVariant.Primary}
-        />
+        <Stack direction="horizontal" gap={3} style={{ width: "100%" }}>
+          <ImageIcon icon={progressIcon} tooltip="Progress" />
+
+          <Progress
+            label={`${progressValue}/${progressMaxValue}`}
+            value={(progressValue / progressMaxValue) * 100}
+            variant={UIVariant.Primary}
+          />
+        </Stack>
       )}
     </Stack>
   );

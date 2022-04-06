@@ -8,6 +8,18 @@ export function capitalizeAll(string: string) {
   return string.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
 }
 
+export function getComputedStat({
+  base,
+  increment,
+  points,
+}: {
+  base: number;
+  increment: number;
+  points: number;
+}) {
+  return base + increment * points;
+}
+
 export function getDamagePerSecond({ damage, rate }: { damage: number; rate: number }) {
   return (damage / 2 / (rate / 1000)).toFixed(2);
 }

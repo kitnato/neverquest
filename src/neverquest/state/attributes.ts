@@ -58,7 +58,7 @@ export const dodgeChance = atom<Attribute>({
   key: "dodgeChance",
   default: {
     base: 0,
-    canAssign: true,
+    canAssign: false,
     cost: 1,
     description: "Chance to dodge an attack",
     increment: 0.02,
@@ -136,7 +136,7 @@ export const stamina = atom<Attribute>({
   key: "stamina",
   default: {
     base: 4,
-    canAssign: true,
+    canAssign: false,
     cost: 1,
     description: "Maximum total stamina",
     increment: 1,
@@ -149,7 +149,7 @@ export const staminaRegenerationRate = atom<Attribute>({
   key: "staminaRegenerationRate",
   default: {
     base: 4000,
-    canAssign: true,
+    canAssign: false,
     cost: 1,
     description: "Stamina regeneration rate",
     increment: -50,

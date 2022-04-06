@@ -11,14 +11,14 @@ import {
   UIVariant,
   Weapon,
 } from "neverquest/env.d";
-import useReceiveItem from "neverquest/hooks/useReceiveItem";
+import useAcquireItem from "neverquest/hooks/useAcquireItem";
 import { merchantInventory } from "neverquest/state/caravan";
 import { coins } from "neverquest/state/loot";
 
 export default function BuyItems() {
   const [coinsValue, setCoins] = useRecoilState(coins);
   const [merchantInventoryValue, setMerchantInventory] = useRecoilState(merchantInventory);
-  const receiveItem = useReceiveItem();
+  const receiveItem = useAcquireItem();
 
   const inventoryEntries = Object.entries(merchantInventoryValue);
 
@@ -54,9 +54,7 @@ export default function BuyItems() {
             // TODO - all types
             switch (type) {
               case EquipmentType.Weapon:
-                Item = <WeaponInventory showName weapon={item as Weapon} />;
-                break;
-              default:
+                Item = <WeaponInventory weapon={item as Weapon} />;
                 break;
             }
 

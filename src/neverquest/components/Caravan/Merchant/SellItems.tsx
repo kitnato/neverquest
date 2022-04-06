@@ -1,4 +1,6 @@
 import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
@@ -26,8 +28,6 @@ export default function SellItems() {
           case EquipmentType.Weapon:
             resetWeapon();
             break;
-          default:
-            break;
         }
       } else {
         setInventory((currentInventory) => {
@@ -49,35 +49,43 @@ export default function SellItems() {
       {fullInventoryEntries.length === 0 ? (
         <span style={{ fontStyle: "italic" }}>Nothing to sell.</span>
       ) : (
-        fullInventoryEntries.map(([key, { isEquipped, item, type }]) => {
-          let Item = null;
+        <Stack gap={3}>
+          {fullInventoryEntries.map(([key, { isEquipped, item, type }]) => {
+            let Item = null;
 
-          // TODO - all types
-          switch (type) {
-            case EquipmentType.Weapon:
-              Item = <WeaponInventory showName weapon={item as Weapon} />;
-              break;
-            default:
-              break;
-          }
+            // TODO - all types
+            switch (type) {
+              case EquipmentType.Weapon:
+                Item = <WeaponInventory weapon={item as Weapon} />;
+                break;
+            }
 
-          return (
-            <Stack direction="horizontal" gap={3} key={key}>
-              {Item}
+            return (
+              <Row key={key}>
+                <Col xs={7}>
+                  <Stack direction="horizontal">
+                    {Item}
 
-              {isEquipped && <span style={{ fontStyle: "italic" }}>(Equipped)</span>}
+                    {isEquipped && <span style={{ fontStyle: "italic" }}>&nbsp;(Equipped)</span>}
+                  </Stack>
+                </Col>
 
-              <Coins tooltip="Price (coins)" value={getSellPrice(item)} />
+                <Col>
+                  <Coins tooltip="Price (coins)" value={getSellPrice(item)} />
+                </Col>
 
-              <Button
-                onClick={sellItem({ isEquipped, item, key, type })}
-                variant={UIVariant.Outline}
-              >
-                Sell
-              </Button>
-            </Stack>
-          );
-        })
+                <Col>
+                  <Button
+                    onClick={sellItem({ isEquipped, item, key, type })}
+                    variant={UIVariant.Outline}
+                  >
+                    Sell
+                  </Button>
+                </Col>
+              </Row>
+            );
+          })}
+        </Stack>
       )}
     </div>
   );

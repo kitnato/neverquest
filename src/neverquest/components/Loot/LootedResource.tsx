@@ -34,7 +34,5 @@ export default function LootedResource({
       return <Coins value={lootedResourceValue} />;
     case LootType.Scrap:
       return <Scrap value={lootedResourceValue} />;
-    default:
-      return null;
   }
 }

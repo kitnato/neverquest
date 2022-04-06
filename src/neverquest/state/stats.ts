@@ -12,6 +12,20 @@ import {
   staminaRegenerationRate,
 } from "neverquest/state/attributes";
 import { armor, weapon } from "neverquest/state/equipment";
+import { getComputedStat, getDamagePerSecond } from "neverquest/utilities/helpers";
+
+export const damagePerSecond = selector({
+  key: "damagePerSecond",
+  get: ({ get }) => {
+    const totalAttackRateValue = get(totalAttackRate);
+    const totalDamageValue = get(totalDamage);
+
+    return getDamagePerSecond({
+      damage: totalDamageValue,
+      rate: totalAttackRateValue,
+    });
+  },
+});
 
 export const totalArmor = selector({
   key: "totalArmor",
@@ -29,8 +43,7 @@ export const totalAttackRate = selector({
     const attackRateBonusValue = get(attackRateBonus);
     const weaponValue = get(weapon);
 
-    const { base, increment, points } = attackRateBonusValue;
-    const bonus = base + increment * points;
+    const bonus = getComputedStat(attackRateBonusValue);
 
     return weaponValue.rate * (1 - bonus);
   },
@@ -41,9 +54,7 @@ export const totalCriticalChance = selector({
   get: ({ get }) => {
     const criticalChanceValue = get(criticalChance);
 
-    const { base, increment, points } = criticalChanceValue;
-
-    return base + increment * points;
+    return getComputedStat(criticalChanceValue);
   },
 });
 
@@ -52,9 +63,7 @@ export const totalCriticalDamage = selector({
   get: ({ get }) => {
     const criticalDamageValue = get(criticalDamage);
 
-    const { base, increment, points } = criticalDamageValue;
-
-    return base + increment * points;
+    return getComputedStat(criticalDamageValue);
   },
 });
 
@@ -64,9 +73,7 @@ export const totalDamage = selector({
     const damageValue = get(damage);
     const weaponValue = get(weapon);
 
-    const { base, increment, points } = damageValue;
-
-    return weaponValue.damage + base + increment * points;
+    return weaponValue.damage + getComputedStat(damageValue);
   },
 });
 
@@ -75,9 +82,7 @@ export const totalDodgeChance = selector({
   get: ({ get }) => {
     const dodgeChanceValue = get(dodgeChance);
 
-    const { base, increment, points } = dodgeChanceValue;
-
-    return base + increment * points;
+    return getComputedStat(dodgeChanceValue);
   },
 });
 
@@ -86,9 +91,7 @@ export const totalHealthRegenerationRate = selector({
   get: ({ get }) => {
     const healthRegenerationRateValue = get(healthRegenerationRate);
 
-    const { base, increment, points } = healthRegenerationRateValue;
-
-    return base + increment * points;
+    return getComputedStat(healthRegenerationRateValue);
   },
 });
 
@@ -97,9 +100,7 @@ export const totalPhysicalResistance = selector({
   get: ({ get }) => {
     const physicalResistanceValue = get(physicalResistance);
 
-    const { base, increment, points } = physicalResistanceValue;
-
-    return base + increment * points;
+    return getComputedStat(physicalResistanceValue);
   },
 });
 
@@ -108,9 +109,7 @@ export const totalRecoveryRate = selector({
   get: ({ get }) => {
     const recoveryRateValue = get(recoveryRate);
 
-    const { base, increment, points } = recoveryRateValue;
-
-    return base + increment * points;
+    return getComputedStat(recoveryRateValue);
   },
 });
 
@@ -119,8 +118,6 @@ export const totalStaminaRegenerationRate = selector({
   get: ({ get }) => {
     const staminaRegenerationRateValue = get(staminaRegenerationRate);
 
-    const { base, increment, points } = staminaRegenerationRateValue;
-
-    return base + increment * points;
+    return getComputedStat(staminaRegenerationRateValue);
   },
 });

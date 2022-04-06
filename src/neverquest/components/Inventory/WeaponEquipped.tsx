@@ -1,17 +1,15 @@
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
+import WeaponName from "neverquest/components/Inventory/WeaponName";
 import icon from "neverquest/icons/axe-sword.svg";
 import { weapon } from "neverquest/state/equipment";
 import { show } from "neverquest/state/global";
-import { capitalizeAll, getDamagePerSecond } from "neverquest/utilities/helpers";
 
 export default function WeaponEquipped() {
   const showValue = useRecoilValue(show);
-  const { damage, name, rate, staminaCost, type, weight } = useRecoilValue(weapon);
+  const weaponValue = useRecoilValue(weapon);
 
   if (!showValue.weapon) {
     return null;
@@ -19,33 +17,9 @@ export default function WeaponEquipped() {
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip="Weapon" />
+      <ImageIcon icon={icon} tooltip="Equipped weapon" />
 
-      <OverlayTrigger
-        overlay={
-          <Tooltip>
-            {`Damage: ${damage} (${getDamagePerSecond({
-              damage,
-              rate,
-            })} DPS)`}
-
-            <br />
-
-            {`Stamina cost: ${staminaCost}`}
-
-            <br />
-
-            {`Type: ${capitalizeAll(type)}`}
-
-            <br />
-
-            {`Weight: ${capitalizeAll(weight)}`}
-          </Tooltip>
-        }
-        placement="top"
-      >
-        <span>{name}</span>
-      </OverlayTrigger>
+      <WeaponName weapon={weaponValue} />
     </Stack>
   );
 }

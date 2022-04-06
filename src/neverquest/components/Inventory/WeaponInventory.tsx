@@ -1,53 +1,16 @@
 import Stack from "react-bootstrap/Stack";
 
 import ImageIcon from "neverquest/components/ImageIcon";
+import WeaponName from "neverquest/components/Inventory/WeaponName";
 import { Weapon } from "neverquest/env.d";
 import icon from "neverquest/icons/axe-sword.svg";
-import { capitalizeAll, getDamagePerSecond } from "neverquest/utilities/helpers";
 
-export default function WeaponInventory({
-  showName,
-  weapon,
-}: {
-  showName?: boolean;
-  weapon: Weapon;
-}) {
-  const { damage, name, rate, staminaCost, type, weight } = weapon;
-
+export default function WeaponInventory({ weapon }: { weapon: Weapon }) {
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon
-        icon={icon}
-        tooltip={
-          <>
-            {!showName && (
-              <>
-                {name}
-                <br />
-              </>
-            )}
+      <ImageIcon icon={icon} tooltip="Weapon" />
 
-            {`Damage: ${damage} (${getDamagePerSecond({
-              damage,
-              rate,
-            })} DPS)`}
-
-            <br />
-
-            {`Stamina cost: ${staminaCost}`}
-
-            <br />
-
-            {`Type: ${capitalizeAll(type)}`}
-
-            <br />
-
-            {`Weight: ${capitalizeAll(weight)}`}
-          </>
-        }
-      />
-
-      {showName && <span>{name}</span>}
+      <WeaponName weapon={weapon} />
     </Stack>
   );
 }

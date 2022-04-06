@@ -7,6 +7,7 @@ import { useSetRecoilState, useRecoilState, useRecoilValue, RecoilState } from "
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import { UIVariant } from "neverquest/env.d";
+// TODO - every attribute needs its own icon
 import placeholderIcon from "neverquest/icons/abstract-049.svg";
 import { Attribute as AttributeType } from "neverquest/env.d";
 import { characterLevel, experienceAvailable, experienceSpent } from "neverquest/state/character";
@@ -47,7 +48,7 @@ export default function Attribute({ atom }: { atom: RecoilState<AttributeType> }
 
       <span style={{ width: 20 }}>{points}</span>
 
-      <OverlayTrigger overlay={<Tooltip>{`Cost: ${cost} experience`}</Tooltip>} placement="top">
+      <OverlayTrigger overlay={<Tooltip>{`Cost: ${cost} XP`}</Tooltip>} placement="top">
         <span className="d-inline-block">
           <Button disabled={!canIncrease} onClick={onLevelUp} variant={UIVariant.Outline}>
             {canIncrease ? <Plus size={24} /> : <Clock size={24} />}

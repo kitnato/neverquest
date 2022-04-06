@@ -14,9 +14,7 @@ import {
   stamina,
   staminaRegenerationRate,
 } from "neverquest/state/attributes";
-import { totalAttackRate, totalDamage } from "neverquest/state/stats";
 import { UNKNOWN } from "neverquest/utilities/constants";
-import { getDamagePerSecond } from "neverquest/utilities/helpers";
 
 // ATOMS
 
@@ -102,19 +100,6 @@ export const attributesIncreasable = selector({
     });
 
     return increasableCount;
-  },
-});
-
-export const damagePerSecond = selector({
-  key: "damagePerSecond",
-  get: ({ get }) => {
-    const totalAttackRateValue = get(totalAttackRate);
-    const totalDamageValue = get(totalDamage);
-
-    return getDamagePerSecond({
-      damage: totalDamageValue,
-      rate: totalAttackRateValue,
-    });
   },
 });
 

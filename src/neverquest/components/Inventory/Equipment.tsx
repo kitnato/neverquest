@@ -6,12 +6,14 @@ import { useRecoilValue } from "recoil";
 import Armor from "neverquest/components/Inventory/Armor";
 import Shield from "neverquest/components/Inventory/Shield";
 import WeaponEquipped from "neverquest/components/Inventory/WeaponEquipped";
-import { show } from "neverquest/state/global";
+import { showArmor, showShield, showWeapon } from "neverquest/state/show";
 
 export default function Equipment() {
-  const { armor, shield, weapon } = useRecoilValue(show);
+  const showArmorValue = useRecoilValue(showArmor);
+  const showShieldValue = useRecoilValue(showShield);
+  const showWeaponValue = useRecoilValue(showWeapon);
 
-  if (!armor && !shield && !weapon) {
+  if (!showArmorValue && !showShieldValue && !showWeaponValue) {
     return null;
   }
 

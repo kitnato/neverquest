@@ -6,19 +6,19 @@ import ImageIcon from "neverquest/components/ImageIcon";
 import ResourceMeter from "neverquest/components/ResourceMeter";
 import { UIAttachment } from "neverquest/env.d";
 import icon from "neverquest/icons/lungs.svg";
-import { show } from "neverquest/state/global";
 import {
   currentStamina,
   deltaStamina,
   isStaminaMaxedOut,
   maximumStamina,
 } from "neverquest/state/resources";
+import { showStamina } from "neverquest/state/show";
 import { totalStaminaRegenerationRate } from "neverquest/state/stats";
 
 export default function Stamina() {
-  const showValue = useRecoilValue(show);
+  const showStaminaValue = useRecoilValue(showStamina);
 
-  if (!showValue.stamina) {
+  if (!showStaminaValue) {
     return null;
   }
 

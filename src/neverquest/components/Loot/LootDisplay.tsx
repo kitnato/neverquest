@@ -5,6 +5,7 @@ import LootedResource from "neverquest/components/Loot/LootedResource";
 import UnlootedResource from "neverquest/components/Loot/UnlootedResource";
 import { LootType } from "neverquest/env.d";
 import { aether, aetherLoot, coins, coinsLoot, scrap, scrapLoot } from "neverquest/state/loot";
+import { showAether, showCoins, showScrap } from "neverquest/state/show";
 
 export default function LootDisplay({ isLoot }: { isLoot?: boolean }) {
   return (
@@ -26,15 +27,15 @@ export default function LootDisplay({ isLoot }: { isLoot?: boolean }) {
       ) : (
         <>
           <Col>
-            <LootedResource atom={scrap} name={LootType.Scrap} />
+            <LootedResource atom={scrap} name={LootType.Scrap} showAtom={showScrap} />
           </Col>
 
           <Col>
-            <LootedResource atom={coins} name={LootType.Coins} />
+            <LootedResource atom={coins} name={LootType.Coins} showAtom={showCoins} />
           </Col>
 
           <Col>
-            <LootedResource atom={aether} name={LootType.Aether} />
+            <LootedResource atom={aether} name={LootType.Aether} showAtom={showAether} />
           </Col>
         </>
       )}

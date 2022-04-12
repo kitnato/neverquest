@@ -31,7 +31,6 @@ export const mode = atom({
   default: LocationType.Wilderness,
 });
 
-// TODO - toggle
 export const nsfw = atom({
   key: "nsfw",
   default: true,
@@ -40,31 +39,6 @@ export const nsfw = atom({
 export const progress = atom({
   key: "progress",
   default: 0,
-});
-
-export const show = atom({
-  key: "show",
-  default: {
-    aether: false,
-    accessory: false,
-    armor: false,
-    attributes: false,
-    attributesButton: false,
-    coins: false,
-    critical: false,
-    defense: false,
-    dodgeChance: false,
-    damagePerSecond: false,
-    inventoryButton: false,
-    levelProgress: false,
-    loot: false,
-    recovery: false,
-    scrap: false,
-    shield: false,
-    stamina: false,
-    totalDamageSummary: false,
-    weapon: false,
-  },
 });
 
 // SELECTORS

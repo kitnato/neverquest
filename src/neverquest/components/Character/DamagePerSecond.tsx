@@ -3,14 +3,14 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/heavy-timer.svg";
-import { show } from "neverquest/state/global";
+import { showDamagePerSecond } from "neverquest/state/show";
 import { damagePerSecond } from "neverquest/state/stats";
 
 export default function DamagePerSecond() {
   const damagePerSecondValue = useRecoilValue(damagePerSecond);
-  const showValue = useRecoilValue(show);
+  const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
 
-  if (!showValue.damagePerSecond) {
+  if (!showDamagePerSecondValue) {
     return null;
   }
 

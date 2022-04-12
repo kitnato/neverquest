@@ -3,14 +3,14 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/wingfoot.svg";
-import { show } from "neverquest/state/global";
+import { showDodgeChance } from "neverquest/state/show";
 import { totalDodgeChance } from "neverquest/state/stats";
 
 export default function Dodge() {
   const dodgeChanceValue = useRecoilValue(totalDodgeChance);
-  const { dodgeChance } = useRecoilValue(show);
+  const showDodgeChanceValue = useRecoilValue(showDodgeChance);
 
-  if (!dodgeChance) {
+  if (!showDodgeChanceValue) {
     return null;
   }
 

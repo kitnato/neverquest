@@ -9,10 +9,23 @@ import {
   Weapon,
 } from "neverquest/env.d";
 import { accessory, armor, shield, weapon } from "neverquest/state/equipment";
-import { show } from "neverquest/state/global";
+import {
+  showAccessory,
+  showArmor,
+  showShield,
+  showStamina,
+  showTotalDamageSummary,
+  showWeapon,
+} from "neverquest/state/show";
 
 export default function useEquipItem() {
-  const [showValue, setShow] = useRecoilState(show);
+  const [showAccessoryValue, setShowAccessory] = useRecoilState(showAccessory);
+  const [showArmorValue, setShowArmor] = useRecoilState(showArmor);
+  const [showShieldValue, setShowShield] = useRecoilState(showShield);
+  const [showStaminaValue, setShowStamina] = useRecoilState(showStamina);
+  const [showTotalDamageSummaryValue, setShowTotalDamageSummary] =
+    useRecoilState(showTotalDamageSummary);
+  const [showWeaponValue, setShowWeapon] = useRecoilState(showWeapon);
   const setArmor = useSetRecoilState(armor);
   const setAccessory = useSetRecoilState(accessory);
   const setShield = useSetRecoilState(shield);
@@ -23,40 +36,40 @@ export default function useEquipItem() {
       case EquipmentType.Accessory:
         setAccessory(item as Accessory);
 
-        if (!showValue.accessory) {
-          setShow({ ...showValue, accessory: true });
+        if (!showAccessoryValue) {
+          setShowAccessory(true);
         }
 
         return InventoryItemStatus.Equipped;
       case EquipmentType.Armor:
         setArmor(item as Armor);
 
-        if (!showValue.armor) {
-          setShow({ ...showValue, armor: true });
+        if (!showArmorValue) {
+          setShowArmor(true);
         }
 
         return InventoryItemStatus.Equipped;
       case EquipmentType.Shield:
         setShield(item as Shield);
 
-        if (!showValue.shield) {
-          setShow({ ...showValue, shield: true });
+        if (!showShieldValue) {
+          setShowShield(true);
         }
 
         return InventoryItemStatus.Equipped;
       case EquipmentType.Weapon:
         setWeapon(item as Weapon);
 
-        if (!showValue.stamina && (item as Weapon).staminaCost > 0) {
-          setShow({ ...showValue, stamina: true });
+        if (!showStaminaValue && (item as Weapon).staminaCost > 0) {
+          setShowStamina(true);
         }
 
-        if (!showValue.totalDamageSummary) {
-          setShow((currentShow) => ({ ...currentShow, totalDamageSummary: true }));
+        if (!showTotalDamageSummaryValue) {
+          setShowTotalDamageSummary(true);
         }
 
-        if (!showValue.weapon) {
-          setShow((currentShow) => ({ ...currentShow, weapon: true }));
+        if (!showWeaponValue) {
+          setShowWeapon(true);
         }
 
         return InventoryItemStatus.Equipped;

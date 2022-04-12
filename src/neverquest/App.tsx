@@ -12,14 +12,12 @@ export default function App() {
   const resetSeed = () => setSeed(uuidv4());
 
   return (
-    <>
+    <RecoilRoot key={seed}>
       <Header resetSeed={resetSeed} />
 
       <Container>
-        <RecoilRoot key={seed}>
-          <Layout resetSeed={resetSeed} />
-        </RecoilRoot>
+        <Layout resetSeed={resetSeed} />
       </Container>
-    </>
+    </RecoilRoot>
   );
 }

@@ -4,9 +4,8 @@ import Stack from "react-bootstrap/Stack";
 
 import AttributesList from "neverquest/components/Attributes/AttributesList";
 import Experience from "neverquest/components/Character/Experience";
-import ExperienceAvailable from "neverquest/components/Character/ExperienceAvailable";
 import ExperienceSpent from "neverquest/components/Character/ExperienceSpent";
-import Level from "neverquest/components/Character/Level";
+import CharacterLevel from "neverquest/components/Character/CharacterLevel";
 
 export default function Attributes() {
   return (
@@ -14,19 +13,15 @@ export default function Attributes() {
       <Stack gap={3} style={{ position: "sticky" }}>
         <Row>
           <Col>
-            <Level />
+            <CharacterLevel />
           </Col>
 
           <Col>
             <Experience />
           </Col>
 
-          <Col>
+          <Col xs={6}>
             <ExperienceSpent />
-          </Col>
-
-          <Col>
-            <ExperienceAvailable />
           </Col>
         </Row>
       </Stack>

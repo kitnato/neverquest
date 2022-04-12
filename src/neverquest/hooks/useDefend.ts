@@ -1,13 +1,14 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { isRecovering } from "neverquest/state/character";
-import { gameOver, show } from "neverquest/state/global";
+import { gameOver } from "neverquest/state/global";
 import { totalDamageMonster } from "neverquest/state/monster";
 import { currentHealth, deltaHealth } from "neverquest/state/resources";
+import { showRecovery } from "neverquest/state/show";
 import { totalArmor, totalPhysicalResistance } from "neverquest/state/stats";
 
 export default function useDefend() {
   const [currentHealthValue, setCurrentHealth] = useRecoilState(currentHealth);
-  const [showValue, setShow] = useRecoilState(show);
+  const [showRecoveryValue, setShowRecovery] = useRecoilState(showRecovery);
   const setDeltaHealth = useSetRecoilState(deltaHealth);
   const setGameOver = useSetRecoilState(gameOver);
   const setRecovering = useSetRecoilState(isRecovering);
@@ -34,8 +35,8 @@ export default function useDefend() {
       if (health === 0) {
         setGameOver(true);
       } else {
-        if (!showValue.recovery) {
-          setShow({ ...showValue, recovery: true });
+        if (!showRecoveryValue) {
+          setShowRecovery(true);
         }
 
         if (Math.abs(healthDamage) > totalPhysicalResistanceValue) {

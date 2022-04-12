@@ -5,6 +5,7 @@ import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/abstract-016.svg";
 import { experienceAvailable } from "neverquest/state/character";
 
+// TODO - obsolete?
 export default function ExperienceAvailable() {
   const experienceAvailableValue = useRecoilValue(experienceAvailable);
 

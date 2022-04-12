@@ -3,22 +3,22 @@ import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
 import { useRecoilState, useRecoilValue } from "recoil";
 
+import CharacterLevel from "neverquest/components/Character/CharacterLevel";
 import Experience from "neverquest/components/Character/Experience";
-import Level from "neverquest/components/Character/Level";
 import { experience } from "neverquest/state/character";
-import { show } from "neverquest/state/global";
+import { showAttributes } from "neverquest/state/show";
 
 export default function AttributesSummary() {
-  const [showValue, setShow] = useRecoilState(show);
+  const [showAttributesValue, setShowAttributes] = useRecoilState(showAttributes);
   const experienceValue = useRecoilValue(experience);
 
   useEffect(() => {
-    if (experienceValue > 0 && !showValue.attributes) {
-      setShow({ ...showValue, attributes: true });
+    if (experienceValue > 0 && !showAttributesValue) {
+      setShowAttributes(true);
     }
-  }, [experienceValue, setShow, showValue]);
+  }, [experienceValue, showAttributesValue]);
 
-  if (!showValue.attributes) {
+  if (!showAttributesValue) {
     return null;
   }
 
@@ -26,7 +26,7 @@ export default function AttributesSummary() {
     <Card>
       <Card.Body>
         <Stack direction="horizontal" gap={5}>
-          <Level />
+          <CharacterLevel />
 
           <Experience />
         </Stack>

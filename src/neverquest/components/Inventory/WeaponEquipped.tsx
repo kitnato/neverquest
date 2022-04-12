@@ -5,13 +5,13 @@ import ImageIcon from "neverquest/components/ImageIcon";
 import WeaponName from "neverquest/components/Inventory/WeaponName";
 import icon from "neverquest/icons/axe-sword.svg";
 import { weapon } from "neverquest/state/equipment";
-import { show } from "neverquest/state/global";
+import { showWeapon } from "neverquest/state/show";
 
 export default function WeaponEquipped() {
-  const showValue = useRecoilValue(show);
+  const showWeaponValue = useRecoilValue(showWeapon);
   const weaponValue = useRecoilValue(weapon);
 
-  if (!showValue.weapon) {
+  if (!showWeaponValue) {
     return null;
   }
 

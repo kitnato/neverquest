@@ -2,12 +2,14 @@ import Card from "react-bootstrap/Card";
 import { useRecoilValue } from "recoil";
 
 import LootDisplay from "neverquest/components/Loot/LootDisplay";
-import { show } from "neverquest/state/global";
+import { showAether, showCoins, showScrap } from "neverquest/state/show";
 
 export default function Resources() {
-  const { aether, coins, scrap } = useRecoilValue(show);
+  const showAetherValue = useRecoilValue(showAether);
+  const showCoinsValue = useRecoilValue(showCoins);
+  const showScrapValue = useRecoilValue(showScrap);
 
-  if (!aether && !coins && !scrap) {
+  if (!showAetherValue && !showCoinsValue && !showScrapValue) {
     return null;
   }
 

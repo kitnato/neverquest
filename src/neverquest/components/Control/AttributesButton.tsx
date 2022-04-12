@@ -11,24 +11,25 @@ import ImageIcon from "neverquest/components/ImageIcon";
 import { UIVariant } from "neverquest/env.d";
 import icon from "neverquest/icons/skills.svg";
 import { attributesIncreasable, isAttacking } from "neverquest/state/character";
-import { isLevelCompleted, show } from "neverquest/state/global";
+import { isLevelCompleted } from "neverquest/state/global";
 import { isMonsterEngaged } from "neverquest/state/monster";
+import { showAttributesButton } from "neverquest/state/show";
 
 export default function AttributesButton() {
   const attributesIncreasableValue = useRecoilValue(attributesIncreasable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterEngagedValue = useRecoilValue(isMonsterEngaged);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
-  const [showValue, setShow] = useRecoilState(show);
+  const [showAttributesButtonValue, setShowAttributesButton] = useRecoilState(showAttributesButton);
   const [isScreenShowing, setScreenShowing] = useState(false);
 
   useEffect(() => {
-    if (!showValue.attributesButton && isLevelCompletedValue) {
-      setShow({ ...showValue, attributesButton: true });
+    if (!showAttributesButtonValue && isLevelCompletedValue) {
+      setShowAttributesButton(true);
     }
-  });
+  }, [isLevelCompletedValue, showAttributesButtonValue]);
 
-  if (!showValue.attributesButton) {
+  if (!showAttributesButtonValue) {
     return null;
   }
 

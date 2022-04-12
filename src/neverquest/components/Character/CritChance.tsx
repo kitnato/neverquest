@@ -3,14 +3,14 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/spiky-eclipse.svg";
-import { show } from "neverquest/state/global";
+import { showCritical } from "neverquest/state/show";
 import { totalCriticalChance } from "neverquest/state/stats";
 
 export default function CritChance() {
   const criticalChanceValue = useRecoilValue(totalCriticalChance);
-  const { critical } = useRecoilValue(show);
+  const showCriticalValue = useRecoilValue(showCritical);
 
-  if (!critical) {
+  if (!showCriticalValue) {
     return null;
   }
 

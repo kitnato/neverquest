@@ -12,7 +12,7 @@ export default function ResourceMeter({
 }: {
   attached?: UIAttachment;
   resourceCurrent: RecoilState<number>;
-  resourceDelta: RecoilState<number>;
+  resourceDelta?: RecoilState<number>;
   resourceMaximum: RecoilValueReadOnly<number>;
 }) {
   const resourceCurrentValue = useRecoilValue(resourceCurrent);
@@ -27,7 +27,7 @@ export default function ResourceMeter({
         variant={UIVariant.Primary}
       />
 
-      <FloatingText atom={resourceDelta} />
+      {resourceDelta && <FloatingText atom={resourceDelta} />}
     </>
   );
 }

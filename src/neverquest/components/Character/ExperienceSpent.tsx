@@ -1,18 +1,16 @@
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
+import ResourceMeter from "neverquest/components/ResourceMeter";
 import icon from "neverquest/icons/abstract-013.svg";
-import { experienceSpent } from "neverquest/state/character";
+import { experience, experienceSpent } from "neverquest/state/character";
 
-export default function ExperienceSpent() {
-  const experienceSpentValue = useRecoilValue(experienceSpent);
-
+export default function ExperienceStatus() {
   return (
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Spent XP" />
 
-      <span>{experienceSpentValue}</span>
+      <ResourceMeter resourceCurrent={experienceSpent} resourceMaximum={experience} />
     </Stack>
   );
 }

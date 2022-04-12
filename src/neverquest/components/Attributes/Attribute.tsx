@@ -11,12 +11,14 @@ import { UIVariant } from "neverquest/env.d";
 import placeholderIcon from "neverquest/icons/abstract-049.svg";
 import { Attribute as AttributeType } from "neverquest/env.d";
 import { characterLevel, experienceAvailable, experienceSpent } from "neverquest/state/character";
+import { showCharacterLevel } from "neverquest/state/show";
 import { getTriangularNumber } from "neverquest/utilities/helpers";
 
 export default function Attribute({ atom }: { atom: RecoilState<AttributeType> }) {
   const setCharacterLevel = useSetRecoilState(characterLevel);
   const setExperienceSpent = useSetRecoilState(experienceSpent);
   const [attributeValue, setAttribute] = useRecoilState(atom);
+  const [showCharacterLevelValue, setShowCharacterLevel] = useRecoilState(showCharacterLevel);
   const experienceAvailableValue = useRecoilValue(experienceAvailable);
 
   const { canAssign, cost, description, name, points } = attributeValue;
@@ -38,6 +40,10 @@ export default function Attribute({ atom }: { atom: RecoilState<AttributeType> }
     });
     setCharacterLevel((currentCharacterLevel) => currentCharacterLevel + 1);
     setExperienceSpent((currentExperienceSpent) => currentExperienceSpent + cost);
+
+    if (!showCharacterLevelValue) {
+      setShowCharacterLevel(true);
+    }
   };
 
   return (

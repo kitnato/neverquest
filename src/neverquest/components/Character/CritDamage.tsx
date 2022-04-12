@@ -3,14 +3,14 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/striking-splinter.svg";
-import { show } from "neverquest/state/global";
+import { showCritical } from "neverquest/state/show";
 import { totalCriticalDamage } from "neverquest/state/stats";
 
 export default function CritDamage() {
   const criticalDamageValue = useRecoilValue(totalCriticalDamage);
-  const { critical } = useRecoilValue(show);
+  const showCriticalValue = useRecoilValue(showCritical);
 
-  if (!critical) {
+  if (!showCriticalValue) {
     return null;
   }
 

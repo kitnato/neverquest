@@ -4,12 +4,12 @@ import { useRecoilValue } from "recoil";
 import ImageIcon from "neverquest/components/ImageIcon";
 import RecoveryMeter from "neverquest/components/Character/RecoveryMeter";
 import icon from "neverquest/icons/knockout.svg";
-import { show } from "neverquest/state/global";
+import { showRecovery } from "neverquest/state/show";
 
 export default function Recovery() {
-  const { recovery } = useRecoilValue(show);
+  const showRecoveryValue = useRecoilValue(showRecovery);
 
-  if (!recovery) {
+  if (!showRecoveryValue) {
     return null;
   }
 

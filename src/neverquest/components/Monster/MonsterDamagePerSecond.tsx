@@ -3,14 +3,14 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/wolverine-claws.svg";
-import { show } from "neverquest/state/global";
 import { damagePerSecondMonster } from "neverquest/state/monster";
+import { showDamagePerSecond } from "neverquest/state/show";
 
 export default function MonsterDamagePerSecond() {
-  const damagePerSecondValue = useRecoilValue(damagePerSecondMonster);
-  const showValue = useRecoilValue(show);
+  const damagePerSecondMonsterValue = useRecoilValue(damagePerSecondMonster);
+  const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
 
-  if (!showValue.damagePerSecond) {
+  if (!showDamagePerSecondValue) {
     return null;
   }
 
@@ -18,7 +18,7 @@ export default function MonsterDamagePerSecond() {
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Monster damage per second (DPS)" />
 
-      <span>{damagePerSecondValue}</span>
+      <span>{damagePerSecondMonsterValue}</span>
     </Stack>
   );
 }

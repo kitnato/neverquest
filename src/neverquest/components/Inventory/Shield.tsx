@@ -4,14 +4,14 @@ import { useRecoilValue } from "recoil";
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/round-shield.svg";
 import { shield } from "neverquest/state/equipment";
-import { show } from "neverquest/state/global";
+import { showShield } from "neverquest/state/show";
 
 // TODO
 export default function Shield() {
   const shieldValue = useRecoilValue(shield);
-  const showValue = useRecoilValue(show);
+  const showShieldValue = useRecoilValue(showShield);
 
-  if (!showValue.shield) {
+  if (!showShieldValue) {
     return null;
   }
 

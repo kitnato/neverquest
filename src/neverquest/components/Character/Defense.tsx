@@ -5,12 +5,12 @@ import { useRecoilValue } from "recoil";
 import Block from "neverquest/components/Character/Block";
 import Dodge from "neverquest/components/Character/Dodge";
 import TotalArmor from "neverquest/components/Character/TotalArmor";
-import { show } from "neverquest/state/global";
+import { showDefense } from "neverquest/state/show";
 
 export default function Defense() {
-  const { defense } = useRecoilValue(show);
+  const showDefenseValue = useRecoilValue(showDefense);
 
-  if (!defense) {
+  if (!showDefenseValue) {
     return null;
   }
 

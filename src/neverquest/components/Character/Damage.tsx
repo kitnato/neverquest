@@ -7,13 +7,13 @@ import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/wolverine-claws.svg";
 import { damage } from "neverquest/state/attributes";
 import { weapon } from "neverquest/state/equipment";
-import { show } from "neverquest/state/global";
+import { showTotalDamageSummary } from "neverquest/state/show";
 import { totalDamage } from "neverquest/state/stats";
 import { getComputedStat } from "neverquest/utilities/helpers";
 
 export default function Damage() {
   const damageValue = useRecoilValue(damage);
-  const { totalDamageSummary } = useRecoilValue(show);
+  const showTotalDamageSummaryValue = useRecoilValue(showTotalDamageSummary);
   const totalDamageValue = useRecoilValue(totalDamage);
   const weaponValue = useRecoilValue(weapon);
 
@@ -21,7 +21,7 @@ export default function Damage() {
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Total damage" />
 
-      {totalDamageSummary ? (
+      {showTotalDamageSummaryValue ? (
         <OverlayTrigger
           overlay={
             <Tooltip>

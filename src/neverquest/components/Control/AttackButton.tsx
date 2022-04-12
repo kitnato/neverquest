@@ -10,11 +10,12 @@ import attackIcon from "neverquest/icons/tron-arrow.svg";
 import restingIcon from "neverquest/icons/tired-eye.svg";
 import retreatIcon from "neverquest/icons/return-arrow.svg";
 import { isAttacking } from "neverquest/state/character";
-import { isLevelCompleted, show } from "neverquest/state/global";
+import { isLevelCompleted } from "neverquest/state/global";
+import { showLevelProgress } from "neverquest/state/show";
 
 export default function AttackButton() {
   const [isAttackingValue, setAttacking] = useRecoilState(isAttacking);
-  const [showValue, setShow] = useRecoilState(show);
+  const [showLevelProgressValue, setShowLevelProgressValue] = useRecoilState(showLevelProgress);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
 
   useEffect(() => {
@@ -38,8 +39,8 @@ export default function AttackButton() {
   const onEngage = () => {
     setAttacking((currentAttack) => !currentAttack);
 
-    if (!showValue.levelProgress) {
-      setShow({ ...showValue, levelProgress: true });
+    if (!showLevelProgressValue) {
+      setShowLevelProgressValue(true);
     }
   };
 

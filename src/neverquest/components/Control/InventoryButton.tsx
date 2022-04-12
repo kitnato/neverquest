@@ -4,15 +4,15 @@ import { useRecoilValue } from "recoil";
 
 import { UIVariant } from "neverquest/env.d";
 import { isAttacking } from "neverquest/state/character";
-import { show } from "neverquest/state/global";
+import { showInventoryButton } from "neverquest/state/show";
 
 // TODO
 export default function InventoryButton() {
   const isAttackingValue = useRecoilValue(isAttacking);
-  const showValue = useRecoilValue(show);
+  const showInventoryButtonValue = useRecoilValue(showInventoryButton);
   const [isInventoryOpen, setInventoryOpen] = useState(false);
 
-  if (!showValue.inventoryButton) {
+  if (!showInventoryButtonValue) {
     return null;
   }
 

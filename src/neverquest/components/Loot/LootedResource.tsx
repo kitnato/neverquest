@@ -5,25 +5,26 @@ import Aether from "neverquest/components/Loot/Aether";
 import Coins from "neverquest/components/Loot/Coins";
 import Scrap from "neverquest/components/Loot/Scrap";
 import { LootType } from "neverquest/env.d";
-import { show } from "neverquest/state/global";
 
 export default function LootedResource({
   atom,
   name,
+  showAtom,
 }: {
   atom: RecoilState<number>;
   name: LootType;
+  showAtom: RecoilState<boolean>;
 }) {
-  const [showValue, setShow] = useRecoilState(show);
+  const [showValue, setShow] = useRecoilState(showAtom);
   const lootedResourceValue = useRecoilValue(atom);
 
   useEffect(() => {
-    if (lootedResourceValue > 0 && !showValue[name]) {
-      setShow({ ...showValue, [name]: true });
+    if (lootedResourceValue > 0 && !showValue) {
+      setShow(true);
     }
-  }, [lootedResourceValue, name, setShow, showValue]);
+  }, [lootedResourceValue, showValue]);
 
-  if (!showValue[name]) {
+  if (!showValue) {
     return null;
   }
 

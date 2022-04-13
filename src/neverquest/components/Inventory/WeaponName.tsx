@@ -1,33 +1,58 @@
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
+import Popover from "react-bootstrap/Popover";
+import Table from "react-bootstrap/Table";
+import { useRecoilValue } from "recoil";
 
 import { Weapon } from "neverquest/env.d";
+import { showDamagePerSecond } from "neverquest/state/show";
 import { capitalizeAll, getDamagePerSecond } from "neverquest/utilities/helpers";
 
 export default function WeaponName({ weapon }: { weapon: Weapon }) {
+  const showDPSValue = useRecoilValue(showDamagePerSecond);
   const { damage, name, rate, staminaCost, type, weight } = weapon;
 
   return (
     <OverlayTrigger
       overlay={
-        <Tooltip>
-          {`Damage: ${damage} (${getDamagePerSecond({
-            damage,
-            rate,
-          })} DPS)`}
+        <Popover>
+          <Popover.Header className="text-center">{name}</Popover.Header>
 
-          <br />
+          <Popover.Body>
+            <Table borderless size="sm">
+              <tbody>
+                <tr>
+                  <td className="text-end">Damage:</td>
+                  <td>{`${damage}${
+                    showDPSValue
+                      ? ` (${getDamagePerSecond({
+                          damage,
+                          rate,
+                        })} DPS)`
+                      : ""
+                  }`}</td>
+                </tr>
 
-          {`Stamina cost: ${staminaCost}`}
+                <tr>
+                  <td className="text-end">Stamina cost:</td>
 
-          <br />
+                  <td>{staminaCost}</td>
+                </tr>
 
-          {`Type: ${capitalizeAll(type)}`}
+                <tr>
+                  <td className="text-end">Type:</td>
 
-          <br />
+                  <td>{capitalizeAll(type)}</td>
+                </tr>
 
-          {`Weight: ${capitalizeAll(weight)}`}
-        </Tooltip>
+                <tr>
+                  <td className="text-end">Weight:</td>
+
+                  <td>{capitalizeAll(weight)}</td>
+                </tr>
+              </tbody>
+            </Table>
+          </Popover.Body>
+        </Popover>
       }
       placement="top"
     >

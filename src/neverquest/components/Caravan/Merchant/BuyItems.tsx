@@ -1,4 +1,6 @@
 import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
 import { useRecoilState } from "recoil";
 
@@ -40,12 +42,12 @@ export default function BuyItems() {
     };
 
   return (
-    <div>
+    <Stack gap={3}>
       <h6>Buy items</h6>
 
       <Stack gap={3}>
         {inventoryEntries.length === 0 ? (
-          <span style={{ fontStyle: "italic" }}>Nothing available.</span>
+          <span className="fst-italic">Nothing available.</span>
         ) : (
           inventoryEntries.map(([key, { item, type }]) => {
             const { price } = item;
@@ -59,23 +61,27 @@ export default function BuyItems() {
             }
 
             return (
-              <Stack direction="horizontal" gap={3} key={key}>
-                {Item}
+              <Row key={key}>
+                <Col xs={7}>{Item}</Col>
 
-                <Coins tooltip="Price (coins)" value={price} />
+                <Col>
+                  <Coins tooltip="Price (coins)" value={price} />
+                </Col>
 
-                <Button
-                  disabled={price > coinsValue}
-                  onClick={buyItem({ item, key, type })}
-                  variant={UIVariant.Outline}
-                >
-                  Buy
-                </Button>
-              </Stack>
+                <Col>
+                  <Button
+                    disabled={price > coinsValue}
+                    onClick={buyItem({ item, key, type })}
+                    variant={UIVariant.Outline}
+                  >
+                    Buy
+                  </Button>
+                </Col>
+              </Row>
             );
           })
         )}
       </Stack>
-    </div>
+    </Stack>
   );
 }

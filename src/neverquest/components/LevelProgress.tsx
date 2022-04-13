@@ -29,7 +29,7 @@ export default function LevelProgress() {
       </Stack>
 
       {isWildernessValue && (
-        <Stack direction="horizontal" gap={3} style={{ width: "100%" }}>
+        <Stack className="w-100" direction="horizontal" gap={3}>
           <ImageIcon icon={progressIcon} tooltip="Progress" />
 
           <Progress

@@ -43,11 +43,11 @@ export default function SellItems() {
     };
 
   return (
-    <div>
+    <Stack gap={3}>
       <h6>Sell items</h6>
 
       {fullInventoryEntries.length === 0 ? (
-        <span style={{ fontStyle: "italic" }}>Nothing to sell.</span>
+        <span className="fst-italic">Nothing to sell.</span>
       ) : (
         <Stack gap={3}>
           {fullInventoryEntries.map(([key, { isEquipped, item, type }]) => {
@@ -66,7 +66,7 @@ export default function SellItems() {
                   <Stack direction="horizontal">
                     {Item}
 
-                    {isEquipped && <span style={{ fontStyle: "italic" }}>&nbsp;(Equipped)</span>}
+                    {isEquipped && <span className="fst-italic">&nbsp;(Equipped)</span>}
                   </Stack>
                 </Col>
 
@@ -87,6 +87,6 @@ export default function SellItems() {
           })}
         </Stack>
       )}
-    </div>
+    </Stack>
   );
 }

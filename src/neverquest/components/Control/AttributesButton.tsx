@@ -39,14 +39,14 @@ export default function AttributesButton() {
         <span className="d-inline-block">
           <Button
             disabled={isAttackingValue || isMonsterEngagedValue}
+            className="position-relative"
             onClick={() => setScreenShowing(!isScreenShowing)}
-            style={{ position: "relative" }}
             variant={UIVariant.Outline}
           >
             <ImageIcon icon={icon} />
 
             {attributesIncreasableValue > 0 && (
-              <Badge bg="secondary" style={{ position: "absolute", top: 12 }}>
+              <Badge bg="secondary" className="position-absolute" style={{ top: 12 }}>
                 &#43;
               </Badge>
             )}

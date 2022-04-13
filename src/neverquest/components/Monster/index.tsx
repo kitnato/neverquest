@@ -70,7 +70,7 @@ export default function Monster() {
           <Stack direction="horizontal" gap={3}>
             <ImageIcon icon={unknownIcon} tooltip={UNKNOWN} />
 
-            <span style={{ fontStyle: "italic" }}>The darkness stirs.</span>
+            <span className="fst-italic">The darkness stirs.</span>
           </Stack>
         )}
       </Card.Body>

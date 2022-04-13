@@ -1,6 +1,7 @@
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
 import Stack from "react-bootstrap/Stack";
-import Tooltip from "react-bootstrap/Tooltip";
+import Table from "react-bootstrap/Table";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
@@ -24,17 +25,26 @@ export default function Damage() {
       {showTotalDamageSummaryValue ? (
         <OverlayTrigger
           overlay={
-            <Tooltip>
-              {
-                <>
-                  <span>{`Weapon: ${weaponValue.damage}`}</span>
+            <Popover>
+              <Popover.Header as="h4">Damage breakdown</Popover.Header>
 
-                  <br />
+              <Popover.Body>
+                <Table borderless size="sm">
+                  <tbody>
+                    <tr>
+                      <td className="text-end">Weapon:</td>
+                      <td>{weaponValue.damage}</td>
+                    </tr>
 
-                  <span>{`${damageValue.name} attribute: ${getComputedStat(damageValue)}`}</span>
-                </>
-              }
-            </Tooltip>
+                    <tr>
+                      <td>{`${damageValue.name} attribute:`}</td>
+
+                      <td>{getComputedStat(damageValue)}</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Popover.Body>
+            </Popover>
           }
           placement="top"
         >

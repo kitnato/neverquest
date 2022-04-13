@@ -26,7 +26,7 @@ export default function RecoveryMeter() {
 
   return (
     <Progress
-      label={isRecoveringValue ? formatCountdown(recoveryRateValue - deltaRecovery) : "--"}
+      label={isRecoveringValue ? formatCountdown(recoveryRateValue - deltaRecovery) : "RECOVERED"}
       value={(deltaRecovery / recoveryRateValue) * 100}
       variant={UIVariant.Secondary}
     />

@@ -1,6 +1,4 @@
 import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
 import { ArrowRight } from "react-bootstrap-icons";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
@@ -23,26 +21,22 @@ export default function SellScrap() {
   };
 
   return (
-    <Row>
-      <Col>
-        <Stack direction="horizontal" gap={3}>
-          <Scrap tooltip="Scrap (give)" value={exchangeScrapValue} />
+    <Stack direction="horizontal" gap={5}>
+      <Stack direction="horizontal" gap={3}>
+        <Scrap tooltip="Scrap (give)" value={exchangeScrapValue} />
 
-          <ArrowRight />
+        <ArrowRight />
 
-          <Coins tooltip="Coins (receive)" value={exchangeCoinValue} />
-        </Stack>
-      </Col>
+        <Coins tooltip="Coins (receive)" value={exchangeCoinValue} />
+      </Stack>
 
-      <Col>
-        <Button
-          disabled={scrapValue < exchangeScrapValue}
-          onClick={sellScrap}
-          variant={UIVariant.Outline}
-        >
-          Sell
-        </Button>
-      </Col>
-    </Row>
+      <Button
+        disabled={scrapValue < exchangeScrapValue}
+        onClick={sellScrap}
+        variant={UIVariant.Outline}
+      >
+        Sell
+      </Button>
+    </Stack>
   );
 }

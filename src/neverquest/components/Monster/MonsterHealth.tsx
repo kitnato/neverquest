@@ -14,7 +14,7 @@ export default function MonsterHealth() {
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Monster health" />
 
-      <Stack style={{ alignSelf: "center" }}>
+      <Stack className="align-self-center">
         <ResourceMeter
           resourceCurrent={currentHealthMonster}
           resourceDelta={deltaHealthMonster}

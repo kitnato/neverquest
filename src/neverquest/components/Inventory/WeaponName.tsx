@@ -22,6 +22,7 @@ export default function WeaponName({ weapon }: { weapon: Weapon }) {
               <tbody>
                 <tr>
                   <td className="text-end">Damage:</td>
+
                   <td>{`${damage}${
                     showDPSValue
                       ? ` (${getDamagePerSecond({

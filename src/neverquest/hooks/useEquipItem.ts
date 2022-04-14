@@ -8,6 +8,7 @@ import {
   EquipmentType,
   Weapon,
 } from "neverquest/env.d";
+import { stamina, staminaRegenerationRate } from "neverquest/state/attributes";
 import { accessory, armor, shield, weapon } from "neverquest/state/equipment";
 import {
   showAccessory,
@@ -26,6 +27,9 @@ export default function useEquipItem() {
   const [showTotalDamageSummaryValue, setShowTotalDamageSummary] =
     useRecoilState(showTotalDamageSummary);
   const [showWeaponValue, setShowWeapon] = useRecoilState(showWeapon);
+  const [staminaValue, setStamina] = useRecoilState(stamina);
+  const [staminaRegenerationRateValue, setStaminaRegenerationRate] =
+    useRecoilState(staminaRegenerationRate);
   const setArmor = useSetRecoilState(armor);
   const setAccessory = useSetRecoilState(accessory);
   const setShield = useSetRecoilState(shield);
@@ -62,6 +66,17 @@ export default function useEquipItem() {
 
         if (!showStaminaValue && (item as Weapon).staminaCost > 0) {
           setShowStamina(true);
+
+          if (!staminaValue.canAssign) {
+            setStamina((currentStamina) => ({ ...currentStamina, canAssign: true }));
+          }
+
+          if (!staminaRegenerationRateValue.canAssign) {
+            setStaminaRegenerationRate((currentStaminaRegenerationRate) => ({
+              ...currentStaminaRegenerationRate,
+              canAssign: true,
+            }));
+          }
         }
 
         if (!showTotalDamageSummaryValue) {

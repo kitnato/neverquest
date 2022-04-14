@@ -137,7 +137,6 @@
   { "name": "lemon", "type": "monster" },
   { "name": "liberator", "type": "human" },
   { "name": "licker", "isNSFW": true, "type": "monster" },
-  { "name": "limb", "type": "monster" },
   { "name": "limpet", "type": "monster" },
   { "name": "llama", "type": "monster" },
   { "name": "luke", "type": "name" },

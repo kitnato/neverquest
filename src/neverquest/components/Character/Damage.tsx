@@ -33,6 +33,7 @@ export default function Damage() {
                   <tbody>
                     <tr>
                       <td className="text-end">Weapon:</td>
+
                       <td>{weaponValue.damage}</td>
                     </tr>
 

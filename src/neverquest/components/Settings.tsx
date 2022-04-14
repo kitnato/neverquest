@@ -1,22 +1,23 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import Stack from "react-bootstrap/Stack";
 import { Gear } from "react-bootstrap-icons";
-import { useRecoilState } from "recoil";
+import { SetterOrUpdater, useRecoilState } from "recoil";
 
-import { nsfw } from "neverquest/state/global";
+import { autoEquip, nsfw } from "neverquest/state/global";
 import { showDamagePerSecond } from "neverquest/state/show";
 
 export default function Settings() {
-  const [nsfwValue, setNSFWValue] = useRecoilState(nsfw);
-  const [showDPSValue, setShowDPSValue] = useRecoilState(showDamagePerSecond);
+  const [autoEquipValue, setAutoEquip] = useRecoilState(autoEquip);
+  const [nsfwValue, setNSFW] = useRecoilState(nsfw);
+  const [showDPSValue, setShowDPS] = useRecoilState(showDamagePerSecond);
   const [isShowing, setShowing] = useState(false);
 
-  const changeNSFWMode = ({ target: { checked } }: { target: { checked: boolean } }) =>
-    setNSFWValue(checked);
-
-  const changeShowDPS = ({ target: { checked } }: { target: { checked: boolean } }) =>
-    setShowDPSValue(checked);
+  const changeSetting =
+    (setter: SetterOrUpdater<boolean>) =>
+    ({ target: { checked } }: { target: { checked: boolean } }) =>
+      setter(checked);
 
   return (
     <span>
@@ -29,13 +30,25 @@ export default function Settings() {
 
         <Modal.Body>
           <Form>
-            <Form.Switch
-              defaultChecked={showDPSValue}
-              label="Show damage per second (DPS)"
-              onChange={changeShowDPS}
-            />
+            <Stack gap={3}>
+              <Form.Switch
+                defaultChecked={nsfwValue}
+                label="NSFW mode"
+                onChange={changeSetting(setNSFW)}
+              />
 
-            <Form.Switch defaultChecked={nsfwValue} label="NSFW mode" onChange={changeNSFWMode} />
+              <Form.Switch
+                defaultChecked={showDPSValue}
+                label="Show damage per second (DPS)"
+                onChange={changeSetting(setShowDPS)}
+              />
+
+              <Form.Switch
+                defaultChecked={autoEquipValue}
+                label="Auto-equip new items"
+                onChange={changeSetting(setAutoEquip)}
+              />
+            </Stack>
           </Form>
         </Modal.Body>
       </Modal>

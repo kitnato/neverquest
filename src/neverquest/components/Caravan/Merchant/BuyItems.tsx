@@ -4,9 +4,11 @@ import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
 import { useRecoilState } from "recoil";
 
-import WeaponInventory from "neverquest/components/Inventory/WeaponInventory";
+import ArmorInventory from "neverquest/components/Inventory/Armor/ArmorInventory";
+import WeaponInventory from "neverquest/components/Inventory/Weapon/WeaponInventory";
 import Coins from "neverquest/components/Loot/Coins";
 import {
+  Armor,
   InventoryItemStatus,
   EquipmentType,
   MerchantInventoryContents,
@@ -55,6 +57,9 @@ export default function BuyItems() {
 
             // TODO - all types
             switch (type) {
+              case EquipmentType.Armor:
+                Item = <ArmorInventory armor={item as Armor} />;
+                break;
               case EquipmentType.Weapon:
                 Item = <WeaponInventory weapon={item as Weapon} />;
                 break;

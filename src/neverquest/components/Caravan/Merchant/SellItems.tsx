@@ -4,20 +4,22 @@ import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
-import WeaponInventory from "neverquest/components/Inventory/WeaponInventory";
+import ArmorInventory from "neverquest/components/Inventory/Armor/ArmorInventory";
+import WeaponInventory from "neverquest/components/Inventory/Weapon/WeaponInventory";
 import Coins from "neverquest/components/Loot/Coins";
-import { EquipmentType, InventoryContents, UIVariant, Weapon } from "neverquest/env.d";
-import { fullInventory, inventory, weapon } from "neverquest/state/equipment";
+import { Armor, EquipmentType, InventoryContents, UIVariant, Weapon } from "neverquest/env.d";
+import { armor, isInventoryFull, inventory, weapon } from "neverquest/state/equipment";
 import { coins } from "neverquest/state/loot";
 import { getSellPrice } from "neverquest/utilities/helpers";
 
 export default function SellItems() {
   const setCoins = useSetRecoilState(coins);
-  const fullInventoryValue = useRecoilValue(fullInventory);
+  const isInventoryFullValue = useRecoilValue(isInventoryFull);
   const setInventory = useSetRecoilState(inventory);
+  const resetArmor = useResetRecoilState(armor);
   const resetWeapon = useResetRecoilState(weapon);
 
-  const fullInventoryEntries = Object.entries(fullInventoryValue);
+  const isInventoryFullEntries = Object.entries(isInventoryFullValue);
 
   const sellItem =
     ({ isEquipped, item, key, type }: InventoryContents & { key: string }) =>
@@ -25,6 +27,9 @@ export default function SellItems() {
       if (isEquipped) {
         // TODO - other types
         switch (type) {
+          case EquipmentType.Armor:
+            resetArmor();
+            break;
           case EquipmentType.Weapon:
             resetWeapon();
             break;
@@ -46,15 +51,18 @@ export default function SellItems() {
     <Stack gap={3}>
       <h6>Sell items</h6>
 
-      {fullInventoryEntries.length === 0 ? (
+      {isInventoryFullEntries.length === 0 ? (
         <span className="fst-italic">Nothing to sell.</span>
       ) : (
         <Stack gap={3}>
-          {fullInventoryEntries.map(([key, { isEquipped, item, type }]) => {
+          {isInventoryFullEntries.map(([key, { isEquipped, item, type }]) => {
             let Item = null;
 
             // TODO - all types
             switch (type) {
+              case EquipmentType.Armor:
+                Item = <ArmorInventory armor={item as Armor} />;
+                break;
               case EquipmentType.Weapon:
                 Item = <WeaponInventory weapon={item as Weapon} />;
                 break;

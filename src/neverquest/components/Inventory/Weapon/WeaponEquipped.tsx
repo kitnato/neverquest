@@ -2,7 +2,7 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import WeaponName from "neverquest/components/Inventory/WeaponName";
+import WeaponName from "neverquest/components/Inventory/Weapon/WeaponName";
 import icon from "neverquest/icons/axe-sword.svg";
 import { weapon } from "neverquest/state/equipment";
 import { showWeapon } from "neverquest/state/show";

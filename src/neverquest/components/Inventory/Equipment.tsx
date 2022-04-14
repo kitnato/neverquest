@@ -3,9 +3,9 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { useRecoilValue } from "recoil";
 
-import Armor from "neverquest/components/Inventory/Armor";
+import ArmorEquipped from "neverquest/components/Inventory/Armor/ArmorEquipped";
 import Shield from "neverquest/components/Inventory/Shield";
-import WeaponEquipped from "neverquest/components/Inventory/WeaponEquipped";
+import WeaponEquipped from "neverquest/components/Inventory/Weapon/WeaponEquipped";
 import { showArmor, showShield, showWeapon } from "neverquest/state/show";
 
 export default function Equipment() {
@@ -26,7 +26,7 @@ export default function Equipment() {
           </Col>
 
           <Col>
-            <Armor />
+            <ArmorEquipped />
           </Col>
 
           <Col>

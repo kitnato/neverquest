@@ -9,7 +9,7 @@ import { isAttacking, isLooting, isRecovering } from "neverquest/state/character
 import { isMonsterDead } from "neverquest/state/monster";
 import { isStaminaSufficient } from "neverquest/state/resources";
 import { totalAttackRate } from "neverquest/state/stats";
-import formatCountdown from "neverquest/utilities/formatCountdown";
+import { formatCountdown } from "neverquest/utilities/helpers";
 
 export default function AttackMeter() {
   const attack = useAttack();

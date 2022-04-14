@@ -2,12 +2,9 @@
 
 import { WeaponType } from "locra/env.d";
 
-export type Accessory = EquipmentBase & {
-  name: string;
-};
+export type Accessory = EquipmentBase;
 
 export type Armor = EquipmentBase & {
-  name: string;
   value: number;
 };
 

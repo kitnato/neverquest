@@ -9,7 +9,7 @@ import Wilderness from "neverquest/components/Wilderness";
 import { EquipmentType, MerchantInventory, WeaponWeight } from "neverquest/env.d";
 import { merchantInventory } from "neverquest/state/caravan";
 import { isWilderness, level, nsfw } from "neverquest/state/global";
-import { generateWeapon } from "neverquest/utilities/generateWeapon";
+import { generateArmor, generateWeapon } from "neverquest/utilities/generators";
 import { AffixTag, WeaponType } from "locra/env.d";
 
 export default function Encounter() {
@@ -31,7 +31,6 @@ export default function Encounter() {
               hasPrefix: true,
               isNSFW: nsfwValue,
               level: levelValue,
-              price: levelValue * 2 + Math.floor(levelValue / 2),
               tags: [AffixTag.LowQuality],
               type: WeaponType.Melee,
               weight: WeaponWeight.Light,
@@ -39,7 +38,17 @@ export default function Encounter() {
             type: EquipmentType.Weapon,
           };
           break;
-        case 2: // Armor
+        case 2:
+          newInventory[uuidv4()] = {
+            item: generateArmor({
+              hasPrefix: true,
+              isNSFW: nsfwValue,
+              level: levelValue,
+              tags: [AffixTag.LowQuality],
+            }),
+            type: EquipmentType.Armor,
+          };
+          break;
         case 3: // Shield
         case 4: // Accessory
       }

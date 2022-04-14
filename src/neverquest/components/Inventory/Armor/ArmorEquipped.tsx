@@ -2,12 +2,12 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import { armor } from "neverquest/state/equipment";
+import ArmorName from "neverquest/components/Inventory/Armor/ArmorName";
 import icon from "neverquest/icons/shoulder-armor.svg";
+import { armor } from "neverquest/state/equipment";
 import { showArmor } from "neverquest/state/show";
 
-// TODO
-export default function Armor() {
+export default function ArmorEquipped() {
   const armorValue = useRecoilValue(armor);
   const showArmorValue = useRecoilValue(showArmor);
 
@@ -19,7 +19,7 @@ export default function Armor() {
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Armor" />
 
-      <span>{armorValue.name}</span>
+      <ArmorName armor={armorValue} />
     </Stack>
   );
 }

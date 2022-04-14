@@ -1,3 +1,7 @@
+body {
+  user-select: none;
+}
+
 button.btn-outline-dark:hover img {
   filter: invert(1);
 }

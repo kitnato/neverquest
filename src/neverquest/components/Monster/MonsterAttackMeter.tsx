@@ -12,7 +12,7 @@ import {
   isMonsterEngaged,
   totalAttackRateMonster,
 } from "neverquest/state/monster";
-import formatCountdown from "neverquest/utilities/formatCountdown";
+import { formatCountdown } from "neverquest/utilities/helpers";
 
 export default function MonsterAttackMeter() {
   const isAttackingValue = useRecoilValue(isAttacking);

@@ -97,6 +97,6 @@ export const totalDamageMonster = selector({
     const levelValue = get(level);
     const progressValue = get(progress);
 
-    return levelValue + Math.floor(progressValue / 3);
+    return levelValue + Math.floor(levelValue / 2.5) + Math.floor(progressValue / 3);
   },
 });

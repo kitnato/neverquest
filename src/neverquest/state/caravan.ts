@@ -21,6 +21,7 @@ export const crew = atom({
 export const crewMonologues = atom({
   key: "crewMonologues",
   default: {
+    // TODO - move to JSON with addressable objects based on states/events
     [CrewType.Alchemist]: [() => ""],
     [CrewType.Blacksmith]: [() => ""],
     [CrewType.Cook]: [() => ""],

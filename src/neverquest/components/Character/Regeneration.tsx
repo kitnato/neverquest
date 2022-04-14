@@ -5,7 +5,7 @@ import Progress from "neverquest/components/Progress";
 import { UIAttachment, UISize, UIVariant } from "neverquest/env.d";
 import useAnimation from "neverquest/hooks/useAnimation";
 import { isRecovering } from "neverquest/state/character";
-import formatCountdown from "neverquest/utilities/formatCountdown";
+import { formatCountdown } from "neverquest/utilities/helpers";
 
 export default function Regeneration({
   regenerationRate,

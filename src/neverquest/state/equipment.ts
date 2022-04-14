@@ -36,8 +36,8 @@ export const weapon = atom<Weapon>({
 
 // SELECTORS
 
-export const fullInventory = selector({
-  key: "fullInventory",
+export const isInventoryFull = selector({
+  key: "isInventoryFull",
   get: ({ get }) => {
     const armorValue = get(armor);
     const { contents } = get(inventory);

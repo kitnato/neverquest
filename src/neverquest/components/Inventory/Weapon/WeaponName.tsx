@@ -18,7 +18,7 @@ export default function WeaponName({ weapon }: { weapon: Weapon }) {
           <Popover.Header className="text-center">{name}</Popover.Header>
 
           <Popover.Body>
-            <Table borderless size="sm">
+            <Table borderless size="sm" style={{ margin: 0 }}>
               <tbody>
                 <tr>
                   <td className="text-end">Damage:</td>

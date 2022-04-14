@@ -6,7 +6,7 @@ import { UIVariant } from "neverquest/env.d";
 import useAnimation from "neverquest/hooks/useAnimation";
 import { isRecovering } from "neverquest/state/character";
 import { totalRecoveryRate } from "neverquest/state/stats";
-import formatCountdown from "neverquest/utilities/formatCountdown";
+import { formatCountdown } from "neverquest/utilities/helpers";
 
 export default function RecoveryMeter() {
   const [isRecoveringValue, setRecovering] = useRecoilState(isRecovering);

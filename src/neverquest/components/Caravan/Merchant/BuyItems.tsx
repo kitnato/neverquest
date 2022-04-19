@@ -22,14 +22,14 @@ import { coins } from "neverquest/state/loot";
 export default function BuyItems() {
   const [coinsValue, setCoins] = useRecoilState(coins);
   const [merchantInventoryValue, setMerchantInventory] = useRecoilState(merchantInventory);
-  const receiveItem = useAcquireItem();
+  const acquireItem = useAcquireItem();
 
   const inventoryEntries = Object.entries(merchantInventoryValue);
 
   const buyItem =
     ({ item, key, type }: MerchantInventoryContents & { key: string }) =>
     () => {
-      const itemReceived = receiveItem({ item, type });
+      const itemReceived = acquireItem({ item, type });
 
       if (itemReceived !== InventoryItemStatus.Rejected) {
         setCoins((currentCoins) => currentCoins - item.price);

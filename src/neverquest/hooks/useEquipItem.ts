@@ -9,7 +9,7 @@ import {
   Weapon,
 } from "neverquest/env.d";
 import { stamina, staminaRegenerationRate } from "neverquest/state/attributes";
-import { accessory, armor, shield, weapon } from "neverquest/state/equipment";
+import { accessory, armor, shield, weapon } from "neverquest/state/inventory";
 import {
   showAccessory,
   showArmor,

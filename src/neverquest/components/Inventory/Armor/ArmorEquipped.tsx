@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import ImageIcon from "neverquest/components/ImageIcon";
 import ArmorName from "neverquest/components/Inventory/Armor/ArmorName";
 import icon from "neverquest/icons/shoulder-armor.svg";
-import { armor } from "neverquest/state/equipment";
+import { armor } from "neverquest/state/inventory";
 import { showArmor } from "neverquest/state/show";
 
 export default function ArmorEquipped() {

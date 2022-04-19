@@ -10,7 +10,7 @@ import CharacterLevel from "neverquest/components/Character/CharacterLevel";
 export default function Attributes() {
   return (
     <Stack gap={5}>
-      <Stack className="position-sticky" gap={3}>
+      <div className="position-sticky">
         <Row>
           <Col>
             <CharacterLevel show />
@@ -24,7 +24,7 @@ export default function Attributes() {
             <ExperienceSpent />
           </Col>
         </Row>
-      </Stack>
+      </div>
 
       <AttributesList />
     </Stack>

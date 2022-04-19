@@ -11,7 +11,7 @@ export default function ResourceMeter({
   resourceMaximum,
 }: {
   attached?: UIAttachment;
-  resourceCurrent: RecoilState<number>;
+  resourceCurrent: RecoilValueReadOnly<number>;
   resourceDelta?: RecoilState<number>;
   resourceMaximum: RecoilValueReadOnly<number>;
 }) {

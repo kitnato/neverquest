@@ -6,27 +6,29 @@ import { NO_ARMOR, NO_ACCESSORY, NO_SHIELD, NO_WEAPON } from "neverquest/utiliti
 
 // ATOMS
 
-export const armor = atom<Armor>({
-  key: "armor",
-  default: NO_ARMOR,
-});
-
-export const inventory = atom<{ contents: Inventory; size: number }>({
-  key: "inventory",
-  default: {
-    contents: {},
-    size: 3,
-  },
-});
-
 export const accessory = atom<Accessory>({
   key: "accessory",
   default: NO_ACCESSORY,
 });
 
+export const armor = atom<Armor>({
+  key: "armor",
+  default: NO_ARMOR,
+});
+
+export const inventorySize = atom({
+  key: "inventorySize",
+  default: 5,
+});
+
 export const shield = atom<Shield>({
   key: "shield",
   default: NO_SHIELD,
+});
+
+export const storedInventory = atom<Inventory>({
+  key: "storedInventory",
+  default: {},
 });
 
 export const weapon = atom<Weapon>({
@@ -36,11 +38,20 @@ export const weapon = atom<Weapon>({
 
 // SELECTORS
 
-export const isInventoryFull = selector({
-  key: "isInventoryFull",
+export const encumbrance = selector({
+  key: "encumbrance",
+  get: ({ get }) => {
+    const equippedInventoryValue = get(equippedInventory);
+    const storedInventoryValue = get(storedInventory);
+
+    return Object.keys(equippedInventoryValue).length + Object.keys(storedInventoryValue).length;
+  },
+});
+
+export const equippedInventory = selector({
+  key: "equippedInventory",
   get: ({ get }) => {
     const armorValue = get(armor);
-    const { contents } = get(inventory);
     const accessoryValue = get(accessory);
     const shieldValue = get(shield);
     const weaponValue = get(weapon);
@@ -79,6 +90,16 @@ export const isInventoryFull = selector({
       };
     }
 
-    return { ...equippedItems, ...contents };
+    return { ...equippedItems };
+  },
+});
+
+export const isInventoryFull = selector({
+  key: "isInventoryFull",
+  get: ({ get }) => {
+    const encumbranceValue = get(encumbrance);
+    const inventorySizeValue = get(inventorySize);
+
+    return encumbranceValue === inventorySizeValue;
   },
 });

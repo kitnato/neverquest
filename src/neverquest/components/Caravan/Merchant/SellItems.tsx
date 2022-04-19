@@ -2,24 +2,27 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 import ArmorInventory from "neverquest/components/Inventory/Armor/ArmorInventory";
 import WeaponInventory from "neverquest/components/Inventory/Weapon/WeaponInventory";
 import Coins from "neverquest/components/Loot/Coins";
 import { Armor, EquipmentType, InventoryContents, UIVariant, Weapon } from "neverquest/env.d";
-import { armor, isInventoryFull, inventory, weapon } from "neverquest/state/equipment";
+import { armor, equippedInventory, storedInventory, weapon } from "neverquest/state/inventory";
 import { coins } from "neverquest/state/loot";
 import { getSellPrice } from "neverquest/utilities/helpers";
 
 export default function SellItems() {
-  const setCoins = useSetRecoilState(coins);
-  const isInventoryFullValue = useRecoilValue(isInventoryFull);
-  const setInventory = useSetRecoilState(inventory);
+  const [storedInventoryValue, setStoredInventory] = useRecoilState(storedInventory);
   const resetArmor = useResetRecoilState(armor);
   const resetWeapon = useResetRecoilState(weapon);
+  const equippedInventoryValue = useRecoilValue(equippedInventory);
+  const setCoins = useSetRecoilState(coins);
 
-  const isInventoryFullEntries = Object.entries(isInventoryFullValue);
+  const entireInventoryEntries = [
+    ...Object.entries(equippedInventoryValue),
+    ...Object.entries(storedInventoryValue),
+  ];
 
   const sellItem =
     ({ isEquipped, item, key, type }: InventoryContents & { key: string }) =>
@@ -35,12 +38,12 @@ export default function SellItems() {
             break;
         }
       } else {
-        setInventory((currentInventory) => {
-          const newInventoryContents = { ...currentInventory.contents };
+        setStoredInventory((currentInventory) => {
+          const newInventoryContents = { ...currentInventory };
 
           delete newInventoryContents[key];
 
-          return { ...currentInventory, contents: newInventoryContents };
+          return newInventoryContents;
         });
       }
 
@@ -51,11 +54,11 @@ export default function SellItems() {
     <Stack gap={3}>
       <h6>Sell items</h6>
 
-      {isInventoryFullEntries.length === 0 ? (
+      {entireInventoryEntries.length === 0 ? (
         <span className="fst-italic">Nothing to sell.</span>
       ) : (
         <Stack gap={3}>
-          {isInventoryFullEntries.map(([key, { isEquipped, item, type }]) => {
+          {entireInventoryEntries.map(([key, { isEquipped, item, type }]) => {
             let Item = null;
 
             // TODO - all types

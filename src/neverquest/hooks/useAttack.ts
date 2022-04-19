@@ -1,6 +1,6 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
-import { weapon } from "neverquest/state/equipment";
+import { weapon } from "neverquest/state/inventory";
 import { currentHealthMonster, deltaHealthMonster } from "neverquest/state/monster";
 import { currentStamina, deltaStamina } from "neverquest/state/resources";
 import { totalDamage } from "neverquest/state/stats";

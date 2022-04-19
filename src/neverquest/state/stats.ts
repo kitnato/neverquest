@@ -11,7 +11,7 @@ import {
   recoveryRate,
   staminaRegenerationRate,
 } from "neverquest/state/attributes";
-import { armor, weapon } from "neverquest/state/equipment";
+import { armor, weapon } from "neverquest/state/inventory";
 import { getComputedStat, getDamagePerSecond } from "neverquest/utilities/helpers";
 
 export const damagePerSecond = selector({

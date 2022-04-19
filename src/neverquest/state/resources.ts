@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil";
 
 import { health, stamina } from "neverquest/state/attributes";
-import { weapon } from "neverquest/state/equipment";
+import { weapon } from "neverquest/state/inventory";
 
 // SELECTORS
 

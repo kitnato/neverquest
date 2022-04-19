@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import ImageIcon from "neverquest/components/ImageIcon";
 import WeaponName from "neverquest/components/Inventory/Weapon/WeaponName";
 import icon from "neverquest/icons/axe-sword.svg";
-import { weapon } from "neverquest/state/equipment";
+import { weapon } from "neverquest/state/inventory";
 import { showWeapon } from "neverquest/state/show";
 
 export default function WeaponEquipped() {

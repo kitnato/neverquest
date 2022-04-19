@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/round-shield.svg";
-import { shield } from "neverquest/state/equipment";
+import { shield } from "neverquest/state/inventory";
 import { showShield } from "neverquest/state/show";
 
 // TODO

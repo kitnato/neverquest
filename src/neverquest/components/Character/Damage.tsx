@@ -7,7 +7,7 @@ import { useRecoilValue } from "recoil";
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/wolverine-claws.svg";
 import { damage } from "neverquest/state/attributes";
-import { weapon } from "neverquest/state/equipment";
+import { weapon } from "neverquest/state/inventory";
 import { showTotalDamageSummary } from "neverquest/state/show";
 import { totalDamage } from "neverquest/state/stats";
 import { getComputedStat } from "neverquest/utilities/helpers";

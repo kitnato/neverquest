@@ -40,7 +40,7 @@ export default function AttributesButton() {
           <Button
             disabled={isAttackingValue || isMonsterEngagedValue}
             className="position-relative"
-            onClick={() => setScreenShowing(!isScreenShowing)}
+            onClick={() => setScreenShowing(true)}
             variant={UIVariant.Outline}
           >
             <ImageIcon icon={icon} />

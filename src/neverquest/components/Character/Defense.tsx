@@ -4,20 +4,22 @@ import { useRecoilValue } from "recoil";
 
 import Block from "neverquest/components/Character/Block";
 import Dodge from "neverquest/components/Character/Dodge";
-import TotalArmor from "neverquest/components/Character/TotalArmor";
-import { showDefense } from "neverquest/state/show";
+import TotalProtection from "neverquest/components/Character/TotalProtection";
+import { showBlockChance, showDodgeChance, showTotalProtection } from "neverquest/state/show";
 
 export default function Defense() {
-  const showDefenseValue = useRecoilValue(showDefense);
+  const showBlockChanceValue = useRecoilValue(showBlockChance);
+  const showDodgeChanceValue = useRecoilValue(showDodgeChance);
+  const showTotalProtectionValue = useRecoilValue(showTotalProtection);
 
-  if (!showDefenseValue) {
+  if (!showBlockChanceValue && !showDodgeChanceValue && !showTotalProtectionValue) {
     return null;
   }
 
   return (
     <Row>
       <Col>
-        <TotalArmor />
+        <TotalProtection />
       </Col>
 
       <Col>

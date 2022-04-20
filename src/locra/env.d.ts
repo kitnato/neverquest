@@ -21,19 +21,19 @@ export enum AffixTag {
 
 export type ArtifactQuery =
   | {
-      subtype: null;
+      subtype: undefined;
       type: ArtifactType.Accessory;
     }
   | {
-      subtype: ArmorType;
+      subtype?: ArmorType;
       type: ArtifactType.Armor;
     }
   | {
-      subtype: ShieldType;
+      subtype?: ShieldType;
       type: ArtifactType.Shield;
     }
   | {
-      subtype: WeaponType;
+      subtype?: WeaponType;
       type: ArtifactType.Weapon;
     };
 

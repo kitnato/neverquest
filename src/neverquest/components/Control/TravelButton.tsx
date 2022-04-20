@@ -3,7 +3,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import { LocationType, UIVariant } from "neverquest/env.d";
+import { UIVariant } from "neverquest/env.d";
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/journey.svg";
 import { isWilderness, level, location } from "neverquest/state/global";
@@ -21,7 +21,7 @@ export default function TravelButton() {
       return UNKNOWN;
     }
 
-    return isWildernessValue ? LocationType.Caravan : LocationType.Wilderness;
+    return isWildernessValue ? "Caravan" : "Wilderness";
   })();
 
   return (

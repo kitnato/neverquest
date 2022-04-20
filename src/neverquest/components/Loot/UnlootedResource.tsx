@@ -26,4 +26,6 @@ export default function UnlootedResource({
     case LootType.Scrap:
       return <Scrap value={unlootedResourceValue} />;
   }
+
+  return null;
 }

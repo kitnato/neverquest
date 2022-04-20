@@ -1,7 +1,7 @@
 import LOCRA from "locra";
-import { AffixTag, ArmorType, ArtifactType, WeaponType } from "locra/env.d";
-import { Armor, Weapon, WeaponWeight } from "neverquest/env.d";
-import { WEAPON_SPECIFICATIONS } from "neverquest/utilities/constants";
+import { AffixTag, ArtifactType, WeaponType } from "locra/env.d";
+import { Armor, ArmorWeight, Weapon, WeaponWeight } from "neverquest/env.d";
+import { ARMOR_SPECIFICATIONS, WEAPON_SPECIFICATIONS } from "neverquest/utilities/constants";
 import { getFromRange } from "neverquest/utilities/helpers";
 
 export function generateArmor({
@@ -10,18 +10,18 @@ export function generateArmor({
   isNSFW,
   level,
   name,
-  subtype,
   tags,
+  weight,
 }: {
   hasPrefix?: boolean;
   hasSuffix?: boolean;
   isNSFW: boolean;
   level: number;
   name?: string;
-  subtype?: ArmorType;
   tags?: AffixTag[];
+  weight: Exclude<ArmorWeight, ArmorWeight.None>;
 }): Armor {
-  const armorTypes = Object.values(ArmorType);
+  const { protectionModifier } = ARMOR_SPECIFICATIONS[weight];
 
   return {
     name:
@@ -32,12 +32,12 @@ export function generateArmor({
         isNSFW,
         tags,
         query: {
-          subtype: subtype || armorTypes[Math.floor(Math.random() * armorTypes.length)],
           type: ArtifactType.Armor,
         },
       }),
     price: level * 2 + Math.floor(level / 2),
-    value: level + 1,
+    protection: Math.floor(level * protectionModifier),
+    weight,
   };
 }
 
@@ -58,7 +58,7 @@ export function generateWeapon({
   name?: string;
   tags?: AffixTag[];
   type: WeaponType;
-  weight: WeaponWeight;
+  weight: Exclude<WeaponWeight, WeaponWeight.None>;
 }): Weapon {
   const { damageModifier, rateRange, staminaCost } = WEAPON_SPECIFICATIONS[weight];
 

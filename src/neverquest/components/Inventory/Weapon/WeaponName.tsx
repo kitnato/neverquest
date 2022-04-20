@@ -48,7 +48,7 @@ export default function WeaponName({ weapon }: { weapon: Weapon }) {
                 <tr>
                   <td className="text-end">Weight:</td>
 
-                  <td>{capitalizeAll(weight)}</td>
+                  <td>{weight}</td>
                 </tr>
               </tbody>
             </Table>

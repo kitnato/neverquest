@@ -27,13 +27,12 @@ export const damagePerSecond = selector({
   },
 });
 
-export const totalArmor = selector({
-  key: "totalArmor",
+export const totalProtection = selector({
+  key: "totalProtection",
   get: ({ get }) => {
-    // TODO
     const armorValue = get(armor);
 
-    return armorValue.value;
+    return armorValue.protection;
   },
 });
 

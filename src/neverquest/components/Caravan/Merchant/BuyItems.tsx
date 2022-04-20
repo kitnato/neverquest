@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import ArmorInventory from "neverquest/components/Inventory/Armor/ArmorInventory";
 import WeaponInventory from "neverquest/components/Inventory/Weapon/WeaponInventory";
@@ -17,12 +17,14 @@ import {
 } from "neverquest/env.d";
 import useAcquireItem from "neverquest/hooks/useAcquireItem";
 import { merchantInventory } from "neverquest/state/caravan";
+import { isInventoryFull } from "neverquest/state/inventory";
 import { coins } from "neverquest/state/loot";
 
 export default function BuyItems() {
+  const acquireItem = useAcquireItem();
   const [coinsValue, setCoins] = useRecoilState(coins);
   const [merchantInventoryValue, setMerchantInventory] = useRecoilState(merchantInventory);
-  const acquireItem = useAcquireItem();
+  const isInventoryFullValue = useRecoilValue(isInventoryFull);
 
   const inventoryEntries = Object.entries(merchantInventoryValue);
 
@@ -75,7 +77,7 @@ export default function BuyItems() {
 
                 <Col>
                   <Button
-                    disabled={price > coinsValue}
+                    disabled={price > coinsValue || isInventoryFullValue}
                     onClick={buyItem({ item, key, type })}
                     variant={UIVariant.Outline}
                   >

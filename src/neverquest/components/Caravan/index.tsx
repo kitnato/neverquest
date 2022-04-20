@@ -41,7 +41,7 @@ export default function Caravan() {
       key: CrewType.Mercenary,
       label: "Train",
       // TODO - change up monologue
-      monologue: crewMonologueValue[CrewType.Mercenary][0](),
+      monologue: crewMonologueValue[CrewType.Mercenary][0](nameValue),
     },
   ];
 

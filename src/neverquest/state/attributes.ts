@@ -75,7 +75,7 @@ export const health = atom<Attribute>({
     cost: 1,
     description: "Maximum total health",
     increment: 2,
-    name: "Health",
+    name: "Vitality",
     points: 0,
   },
 });
@@ -114,7 +114,7 @@ export const physicalResistance = atom<Attribute>({
     cost: 1,
     description: "Damage taken without needing to recover",
     increment: 2,
-    name: "Stoicism",
+    name: "Tenacity",
     points: 0,
   },
 });
@@ -140,7 +140,7 @@ export const stamina = atom<Attribute>({
     cost: 1,
     description: "Maximum total stamina",
     increment: 1,
-    name: "Stamina",
+    name: "Endurance",
     points: 0,
   },
 });
@@ -153,7 +153,7 @@ export const staminaRegenerationRate = atom<Attribute>({
     cost: 1,
     description: "Stamina regeneration rate",
     increment: -50,
-    name: "Endurance",
+    name: "Fortitude",
     points: 0,
   },
 });

@@ -5,8 +5,16 @@ import { WeaponType } from "locra/env.d";
 export type Accessory = EquipmentBase;
 
 export type Armor = EquipmentBase & {
-  value: number;
+  protection: number;
+  weight: ArmorWeight;
 };
+
+export enum ArmorWeight {
+  Light = "Light",
+  None = "None",
+  Plate = "Plate",
+  Reinforced = "Reinforced",
+}
 
 export interface Attribute {
   base: number;
@@ -19,15 +27,15 @@ export interface Attribute {
 }
 
 export enum CrewType {
-  Alchemist = "alchemist",
-  Blacksmith = "blacksmith",
-  Cook = "cook",
-  Medic = "medic",
-  Mercenary = "mercenary",
-  Merchant = "merchant",
-  Tailor = "tailor",
-  Witch = "witch",
-  Wizard = "wizard",
+  Alchemist,
+  Blacksmith,
+  Cook,
+  Medic,
+  Mercenary,
+  Merchant,
+  Tailor,
+  Witch,
+  Wizard,
 }
 
 export type Inventory =
@@ -43,9 +51,9 @@ export interface InventoryContents {
 }
 
 export enum InventoryItemStatus {
-  Equipped = "equipped",
-  Rejected = "rejected",
-  Stored = "stored",
+  Equipped,
+  Rejected,
+  Stored,
 }
 
 export interface EquipmentBase {
@@ -54,21 +62,21 @@ export interface EquipmentBase {
 }
 
 export enum EquipmentType {
-  Armor = "armor",
-  Accessory = "accessory",
-  Shield = "shield",
-  Weapon = "weapon",
+  Armor,
+  Accessory,
+  Shield,
+  Weapon,
 }
 
 export enum LocationType {
-  Caravan = "caravan",
-  Wilderness = "wilderness",
+  Caravan,
+  Wilderness,
 }
 
 export enum LootType {
-  Aether = "aether",
-  Coins = "coins",
-  Scrap = "scrap",
+  Aether,
+  Coins,
+  Scrap,
 }
 
 export interface MerchantInventoryContents {
@@ -83,9 +91,8 @@ export type MerchantInventory =
   | Record<string, never>;
 
 export type Shield = EquipmentBase & {
-  block: number;
+  protection: number;
   stagger: number;
-  value: number;
 };
 
 export type Weapon = EquipmentBase & {
@@ -97,22 +104,23 @@ export type Weapon = EquipmentBase & {
 };
 
 export enum WeaponWeight {
-  Balanced = "balanced",
-  Heavy = "heavy",
-  Light = "light",
-  TwoHanded = "twoHanded",
+  Balanced = "Balanced",
+  Heavy = "Heavy",
+  Light = "Light",
+  None = "None",
+  TwoHanded = "Two-handed",
 }
 
 // UI
 
 export enum UIAttachment {
-  Above = "above",
-  Below = "below",
+  Above,
+  Below,
 }
 
 export enum UISize {
-  Normal = "normal",
-  Tiny = "tiny",
+  Normal,
+  Tiny,
 }
 
 // Using Bootstrap 5 variants.

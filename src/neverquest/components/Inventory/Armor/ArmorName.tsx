@@ -1,12 +1,11 @@
-import Col from "react-bootstrap/Col";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
-import Row from "react-bootstrap/Row";
+import Table from "react-bootstrap/Table";
 
 import { Armor } from "neverquest/env.d";
 
 export default function ArmorName({ armor }: { armor: Armor }) {
-  const { name, value } = armor;
+  const { name, protection, weight } = armor;
 
   return (
     <OverlayTrigger
@@ -15,11 +14,21 @@ export default function ArmorName({ armor }: { armor: Armor }) {
           <Popover.Header className="text-center">{name}</Popover.Header>
 
           <Popover.Body>
-            <Row>
-              <Col className="text-end">Value:</Col>
+            <Table borderless size="sm" style={{ margin: 0 }}>
+              <tbody>
+                <tr>
+                  <td className="text-end">Protection:</td>
 
-              <Col>{value}</Col>
-            </Row>
+                  <td>{protection}</td>
+                </tr>
+
+                <tr>
+                  <td className="text-end">Weight:</td>
+
+                  <td>{weight}</td>
+                </tr>
+              </tbody>
+            </Table>
           </Popover.Body>
         </Popover>
       }

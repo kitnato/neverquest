@@ -25,6 +25,11 @@ export const showAttributesButton = atom({
   default: false,
 });
 
+export const showBlockChance = atom({
+  key: "showBlockChance",
+  default: false,
+});
+
 export const showCharacterLevel = atom({
   key: "showCharacterLevel",
   default: false,
@@ -92,6 +97,11 @@ export const showStamina = atom({
 
 export const showTotalDamageSummary = atom({
   key: "showTotalDamageSummary",
+  default: false,
+});
+
+export const showTotalProtection = atom({
+  key: "showTotalProtection",
   default: false,
 });
 

@@ -16,6 +16,7 @@ import {
   showShield,
   showStamina,
   showTotalDamageSummary,
+  showTotalProtection,
   showWeapon,
 } from "neverquest/state/show";
 
@@ -26,6 +27,7 @@ export default function useEquipItem() {
   const [showStaminaValue, setShowStamina] = useRecoilState(showStamina);
   const [showTotalDamageSummaryValue, setShowTotalDamageSummary] =
     useRecoilState(showTotalDamageSummary);
+  const [showTotalProtectionValue, setShowTotalProtection] = useRecoilState(showTotalProtection);
   const [showWeaponValue, setShowWeapon] = useRecoilState(showWeapon);
   const [staminaValue, setStamina] = useRecoilState(stamina);
   const [staminaRegenerationRateValue, setStaminaRegenerationRate] =
@@ -52,12 +54,20 @@ export default function useEquipItem() {
           setShowArmor(true);
         }
 
+        if (!showTotalProtectionValue) {
+          setShowTotalProtection(true);
+        }
+
         return InventoryItemStatus.Equipped;
       case EquipmentType.Shield:
         setShield(item as Shield);
 
         if (!showShieldValue) {
           setShowShield(true);
+        }
+
+        if (!showTotalProtectionValue) {
+          setShowTotalProtection(true);
         }
 
         return InventoryItemStatus.Equipped;

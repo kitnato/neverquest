@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import Caravan from "neverquest/components/Caravan";
 import Loot from "neverquest/components/Loot";
 import Wilderness from "neverquest/components/Wilderness";
-import { EquipmentType, MerchantInventory, WeaponWeight } from "neverquest/env.d";
+import { ArmorWeight, EquipmentType, MerchantInventory, WeaponWeight } from "neverquest/env.d";
 import { merchantInventory } from "neverquest/state/caravan";
 import { isWilderness, level, nsfw } from "neverquest/state/global";
 import { generateArmor, generateWeapon } from "neverquest/utilities/generators";
@@ -45,6 +45,7 @@ export default function Encounter() {
               isNSFW: nsfwValue,
               level: levelValue,
               tags: [AffixTag.LowQuality],
+              weight: ArmorWeight.Light,
             }),
             type: EquipmentType.Armor,
           };

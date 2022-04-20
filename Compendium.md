@@ -46,27 +46,9 @@ The SLIM system generates a pseudo-random variety of names for different fantasy
 1. Do you have something to say?
    - Browser games with only UI and no graphics can be as engaging as bigger games.
 
-## SLIM
+## LOCRA
 
-Generator of random names for Stranger, Location, Item and Monster. They are generated from a database of words based on probabilities.
-
-“[the]” is only added if the part in question is also a Type.
-
-### Stranger
-
-Prefix (70%) + Type (100%) + [the] Suffix (50%)
-
-### Location
-
-Prefix (80%) + Type (100%) + [the] Suffix (33%)
-
-### Item
-
-Prefix (80%) [‘s] + Type (100%) + Suffix 1 (70%) + [the] Suffix 2 (90%)
-
-### Monster
-
-Prefix (80%) + Type (100%) + [the] Suffix (60%)
+TODO
 
 ## Gameplay
 
@@ -160,7 +142,7 @@ Gained from dismantling equipment at the blacksmith and dropped from monsters. U
 
 Gained from disenchanting equipment and dropped from monsters. Used to enchant equipment.
 
-#### Coin
+#### Coins
 
 Gained from selling scrap, aether and items to Merchant. Used to pay for services and items from caravan crew.
 
@@ -170,7 +152,11 @@ Gained from selling scrap, aether and items to Merchant. Used to pay for service
 
 2 slots total, 1 for each hand.
 
-##### Light
+##### No weapon
+
+No modifiers.
+
+##### Light weapon
 
 - 1 slot
 - Low damage
@@ -178,14 +164,14 @@ Gained from selling scrap, aether and items to Merchant. Used to pay for service
 - Low stamina requirement
 - Chance to bleed on hit
 
-##### Balanced
+##### Balanced weapon
 
 - 1 slot
 - Medium damage
 - Medium attack rate.
 - Low stamina requirement
 
-##### Heavy
+##### Heavy weapon
 
 - 1 slot
 - High damage
@@ -193,7 +179,7 @@ Gained from selling scrap, aether and items to Merchant. Used to pay for service
 - Medium stamina requirement
 - Chance to stun
 
-##### Two-handed
+##### Two-handed weapon
 
 - 2 slots
 - Highest damage
@@ -203,16 +189,34 @@ Gained from selling scrap, aether and items to Merchant. Used to pay for service
 
 #### Armor
 
-Each subsequent type increases the armor value. When hit, armor value is subtracted from total damage received.
+Armor basically provides Protection. When hit by an attack, the Protection value is subtracted from total damage received. Each subsequent type increases the Protection value.
 
-- None: no modifiers
-- Light: low armor, low -% dodge, +% critical chance
-- Reinforced: medium armor, medium -% dodge, +% damage
-- Heavy: high armor, high -% dodge, -% attack rate, +% block, +% chance to deflect spells
+##### No armor
+
+No modifiers.
+
+##### Light armor
+
+- Low Protection
+- Low -% dodge
+- +% critical chance
+
+##### Reinforced armor
+
+- Medium Protection
+- Medium -% dodge
+- +% damage
+
+##### Plate armor
+
+- High Protection
+- High -% dodge
+- -% attack rate
+- +% chance to deflect spells
 
 #### Shield
 
-Adds a percentage of block chance that prevents a certain percentage of damage before armor value. Stagger percentage determines the chance to stun the attacker when blocking.
+Adds Protection. Grants Stagger percentage which determines the chance to stun the attacker temporarily when successfully blocking.
 
 #### Accessory
 
@@ -228,7 +232,7 @@ Grants inventory slots and potion slots.
 
 ### Mastery
 
-Using a particular weapon or armor type increases its associated mastery. Weapon type mastery increases when attacking and armor when being hit. Leveling up mastery confers bonuses on the weapon types.
+Using a particular weapon or armor type increases its associated mastery. Weapon mastery increases when attacking and armor mastery increases when being hit. Leveling up mastery confers bonuses on the respective armor and weapon types.
 
 Certain weapons require mastery levels before they can be used effectively.
 
@@ -260,73 +264,69 @@ Cast spells that remain active until dispelled. Provides buffs and other positiv
 
 Named attributes each provide a direct effect for each point assigned.
 
-#### Health (attribute)
+#### Acumen
 
-Maximum total health resource.
-
-#### Vitality
-
-Health regeneration amount per rate tick.
-
-#### Vigor
-
-Health regeneration rate.
-
-#### Stamina (attribute)
-
-Maximum total stamina resource.
-
-#### Fortitude
-
-Stamina regeneration amount.
-
-#### Endurance
-
-Stamina regeneration rate.
-
-#### Wisdom
-
-Total energy.
-
-#### Intellect
-
-Energy regeneration amount.
-
-#### Intuition
-
-Energy regeneration rate.
-
-#### Strength
-
-Increases total damage of an attack.
+Spell casting rate.
 
 #### Agility
 
 Chance to dodge a monster's attack.
 
-#### Speed
-
-Increases rate of attack.
-
-#### Resilience
-
-Rate of recovery after being hit.
-
-#### Acumen
-
-Casting rate.
-
 #### Dexterity
 
 Chance of landing a critical hit.
+
+#### Endurance
+
+Maximum total stamina resource.
+
+#### Fortitude
+
+Stamina regeneration rate.
+
+#### Intellect
+
+Energy regeneration amount.
+
+#### Luck
+
+Amount of loot dropped by monsters.
 
 #### Perception
 
 Damage multiplier of a critical hit.
 
-#### Luck
+#### Resilience
 
-Increases the amount of loot dropped by monsters.
+Rate of recovery after being hit.
+
+#### Speed
+
+Rate of attack.
+
+#### Strength
+
+Total damage of an attack.
+
+#### Tenacity
+
+Amount of damage taken without needing to recover.
+
+#### Vigor
+
+Health regeneration rate.
+
+#### Vitality
+
+Maximum total health resource.
+
+#### Wisdom
+
+Total energy.
+
+### Ailments
+
+Temporary or permanent debuffs granted by Monsters.
 
 ### Traits
 

@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 
-import { Armor, Inventory, Accessory, Shield, Weapon, EquipmentType } from "neverquest/env.d";
+import { Armor, Inventory, Accessory, Shield, Weapon, EquipmentType } from "neverquest/env";
 import { NO_ARMOR, NO_ACCESSORY, NO_SHIELD, NO_WEAPON } from "neverquest/utilities/constants";
 
 // ATOMS

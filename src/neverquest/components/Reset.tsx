@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-import { UIVariant } from "neverquest/env.d";
+import { UIVariant } from "neverquest/env";
 
 export default function Reset({
   title,

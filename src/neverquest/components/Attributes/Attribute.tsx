@@ -6,10 +6,10 @@ import { Clock, Plus } from "react-bootstrap-icons";
 import { useSetRecoilState, useRecoilState, useRecoilValue, RecoilState } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import { UIVariant } from "neverquest/env.d";
+import { UIVariant } from "neverquest/env";
 // TODO - every attribute needs its own icon
 import placeholderIcon from "neverquest/icons/abstract-049.svg";
-import { Attribute as AttributeType } from "neverquest/env.d";
+import { Attribute as AttributeType } from "neverquest/env";
 import { characterLevel, experienceAvailable, experienceSpent } from "neverquest/state/character";
 import { showCharacterLevel } from "neverquest/state/show";
 import { getTriangularNumber } from "neverquest/utilities/helpers";

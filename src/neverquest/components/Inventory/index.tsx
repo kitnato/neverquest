@@ -7,7 +7,7 @@ import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import ArmorInventory from "neverquest/components/Inventory/Armor/ArmorInventory";
 import WeaponInventory from "neverquest/components/Inventory/Weapon/WeaponInventory";
 import Encumbrance from "neverquest/components/Inventory/Encumbrance";
-import { Armor, EquipmentType, InventoryContents, UIVariant, Weapon } from "neverquest/env.d";
+import { Armor, EquipmentType, InventoryContents, UIVariant, Weapon } from "neverquest/env";
 import useAcquireItem from "neverquest/hooks/useAcquireItem";
 import useEquipItem from "neverquest/hooks/useEquipItem";
 import { armor, equippedInventory, storedInventory, weapon } from "neverquest/state/inventory";

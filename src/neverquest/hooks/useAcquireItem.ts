@@ -8,7 +8,7 @@ import {
   Shield,
   EquipmentType,
   Weapon,
-} from "neverquest/env.d";
+} from "neverquest/env";
 import useEquipItem from "neverquest/hooks/useEquipItem";
 import {
   accessory,

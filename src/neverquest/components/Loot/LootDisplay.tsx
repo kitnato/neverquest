@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 
 import LootedResource from "neverquest/components/Loot/LootedResource";
 import UnlootedResource from "neverquest/components/Loot/UnlootedResource";
-import { LootType } from "neverquest/env.d";
+import { LootType } from "neverquest/env";
 import { aether, aetherLoot, coins, coinsLoot, scrap, scrapLoot } from "neverquest/state/loot";
 import { showAether, showCoins, showScrap } from "neverquest/state/show";
 

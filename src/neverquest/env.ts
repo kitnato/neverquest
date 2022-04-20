@@ -1,6 +1,6 @@
 // MAIN
 
-import { WeaponType } from "locra/env.d";
+import { WeaponType } from "locra/env";
 
 export type Accessory = EquipmentBase;
 
@@ -36,6 +36,11 @@ export enum CrewType {
   Tailor,
   Witch,
   Wizard,
+}
+
+export interface DeltaDisplay {
+  color: UIFloatingTextType | null;
+  value: string;
 }
 
 export type Inventory =
@@ -116,6 +121,12 @@ export enum WeaponWeight {
 export enum UIAttachment {
   Above,
   Below,
+}
+
+export enum UIFloatingTextType {
+  Negative = "text-danger",
+  Neutral = "text-muted",
+  Positive = "text-success",
 }
 
 export enum UISize {

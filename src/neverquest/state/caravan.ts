@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-import { CrewType, MerchantInventory } from "neverquest/env.d";
+import { CrewType, MerchantInventory } from "neverquest/env";
 import { UNKNOWN } from "neverquest/utilities/constants";
 
 export const crew = atom({

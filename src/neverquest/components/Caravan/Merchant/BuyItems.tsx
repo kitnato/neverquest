@@ -14,7 +14,7 @@ import {
   MerchantInventoryContents,
   UIVariant,
   Weapon,
-} from "neverquest/env.d";
+} from "neverquest/env";
 import useAcquireItem from "neverquest/hooks/useAcquireItem";
 import { merchantInventory } from "neverquest/state/caravan";
 import { isInventoryFull } from "neverquest/state/inventory";

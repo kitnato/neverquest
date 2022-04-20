@@ -1,8 +1,10 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
+import { UIFloatingTextType } from "neverquest/env";
 import { weapon } from "neverquest/state/inventory";
-import { currentHealthMonster, deltaHealthMonster } from "neverquest/state/monster";
-import { currentStamina, deltaStamina } from "neverquest/state/resources";
+import { deltaHealthMonster, deltaStamina } from "neverquest/state/deltas";
+import { currentHealthMonster } from "neverquest/state/monster";
+import { currentStamina } from "neverquest/state/resources";
 import { totalDamage } from "neverquest/state/stats";
 
 export default function useAttack() {
@@ -23,10 +25,16 @@ export default function useAttack() {
         monsterHealth = 0;
       }
 
-      setDeltaStamina(-weaponValue.staminaCost);
+      setDeltaStamina({
+        color: UIFloatingTextType.Negative,
+        value: `${-weaponValue.staminaCost}`,
+      });
       setCurrentStamina(stamina);
 
-      setDeltaHealthMonster(-totalDamageValue);
+      setDeltaHealthMonster({
+        color: UIFloatingTextType.Negative,
+        value: `${-totalDamageValue}`,
+      });
       setCurrentHealthMonster(monsterHealth);
     }
 

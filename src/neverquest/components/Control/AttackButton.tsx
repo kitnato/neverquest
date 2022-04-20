@@ -5,7 +5,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import { useRecoilValue, useRecoilState } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import { UIVariant } from "neverquest/env.d";
+import { UIVariant } from "neverquest/env";
 import attackIcon from "neverquest/icons/tron-arrow.svg";
 import restingIcon from "neverquest/icons/tired-eye.svg";
 import retreatIcon from "neverquest/icons/return-arrow.svg";

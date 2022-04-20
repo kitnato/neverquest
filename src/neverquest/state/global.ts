@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil";
 
 import LOCRA from "locra";
-import { LocationType } from "neverquest/env.d";
+import { LocationType } from "neverquest/env";
 import { UNKNOWN } from "neverquest/utilities/constants";
 
 // ATOMS

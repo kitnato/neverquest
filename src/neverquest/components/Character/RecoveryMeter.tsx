@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 
 import Progress from "neverquest/components/Progress";
-import { UIVariant } from "neverquest/env.d";
+import { UIVariant } from "neverquest/env";
 import useAnimation from "neverquest/hooks/useAnimation";
 import { isRecovering } from "neverquest/state/character";
 import { totalRecoveryRate } from "neverquest/state/stats";

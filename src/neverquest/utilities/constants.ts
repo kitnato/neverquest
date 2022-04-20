@@ -1,5 +1,5 @@
-import { WeaponType } from "locra/env.d";
-import { Armor, ArmorWeight, Accessory, Shield, Weapon, WeaponWeight } from "neverquest/env.d";
+import { WeaponType } from "locra/env";
+import { Armor, ArmorWeight, Accessory, Shield, Weapon, WeaponWeight } from "neverquest/env";
 
 export const ARMOR_SPECIFICATIONS = {
   [ArmorWeight.Light]: {
@@ -11,6 +11,11 @@ export const ARMOR_SPECIFICATIONS = {
   [ArmorWeight.Plate]: {
     protectionModifier: 3,
   },
+};
+
+export const DELTA_DEFAULT = {
+  color: null,
+  value: "",
 };
 
 export const NO_ARMOR: Armor = {

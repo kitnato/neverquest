@@ -68,13 +68,3 @@ export const currentStamina = atom({
   key: "currentStamina",
   default: maximumStamina,
 });
-
-export const deltaHealth = atom({
-  key: "deltaHealth",
-  default: 0,
-});
-
-export const deltaStamina = atom({
-  key: "deltaStamina",
-  default: 0,
-});

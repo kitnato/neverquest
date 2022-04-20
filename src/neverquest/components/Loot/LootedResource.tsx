@@ -4,7 +4,7 @@ import { RecoilState, useRecoilState, useRecoilValue } from "recoil";
 import Aether from "neverquest/components/Loot/Aether";
 import Coins from "neverquest/components/Loot/Coins";
 import Scrap from "neverquest/components/Loot/Scrap";
-import { LootType } from "neverquest/env.d";
+import { LootType } from "neverquest/env";
 
 export default function LootedResource({
   atom,

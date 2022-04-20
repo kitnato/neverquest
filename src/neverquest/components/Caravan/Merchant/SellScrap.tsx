@@ -5,7 +5,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import Coins from "neverquest/components/Loot/Coins";
 import Scrap from "neverquest/components/Loot/Scrap";
-import { UIVariant } from "neverquest/env.d";
+import { UIVariant } from "neverquest/env";
 import { exchangeCoin, exchangeScrap } from "neverquest/state/caravan";
 import { coins, scrap } from "neverquest/state/loot";
 

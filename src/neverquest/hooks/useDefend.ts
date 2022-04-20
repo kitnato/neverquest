@@ -1,8 +1,11 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+
+import { UIFloatingTextType } from "neverquest/env";
 import { isRecovering } from "neverquest/state/character";
 import { gameOver } from "neverquest/state/global";
+import { deltaHealth } from "neverquest/state/deltas";
 import { totalDamageMonster } from "neverquest/state/monster";
-import { currentHealth, deltaHealth } from "neverquest/state/resources";
+import { currentHealth } from "neverquest/state/resources";
 import { showRecovery } from "neverquest/state/show";
 import { totalProtection, totalPhysicalResistance } from "neverquest/state/stats";
 
@@ -29,7 +32,10 @@ export default function useDefend() {
     }
 
     if (health !== currentHealthValue) {
-      setDeltaHealth(healthDamage);
+      setDeltaHealth({
+        color: UIFloatingTextType.Negative,
+        value: `${healthDamage}`,
+      });
       setCurrentHealth(health);
 
       if (health === 0) {

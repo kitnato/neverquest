@@ -1,6 +1,6 @@
 import LOCRA from "locra";
-import { AffixTag, ArtifactType, WeaponType } from "locra/env.d";
-import { Armor, ArmorWeight, Weapon, WeaponWeight } from "neverquest/env.d";
+import { AffixTag, ArtifactType, WeaponType } from "locra/env";
+import { Armor, ArmorWeight, Weapon, WeaponWeight } from "neverquest/env";
 import { ARMOR_SPECIFICATIONS, WEAPON_SPECIFICATIONS } from "neverquest/utilities/constants";
 import { getFromRange } from "neverquest/utilities/helpers";
 

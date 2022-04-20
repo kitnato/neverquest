@@ -8,7 +8,7 @@ import DismissableScreen from "neverquest/components/DismissableScreen";
 import Member from "neverquest/components/Caravan/Member";
 import Mercenary from "neverquest/components/Caravan/Mercenary";
 import Merchant from "neverquest/components/Caravan/Merchant";
-import { CrewType } from "neverquest/env.d";
+import { CrewType } from "neverquest/env";
 import { crew, crewMonologues } from "neverquest/state/caravan";
 import { name } from "neverquest/state/character";
 
@@ -41,7 +41,7 @@ export default function Caravan() {
       key: CrewType.Mercenary,
       label: "Train",
       // TODO - change up monologue
-      monologue: crewMonologueValue[CrewType.Mercenary][0](nameValue),
+      monologue: crewMonologueValue[CrewType.Mercenary][0](),
     },
   ];
 

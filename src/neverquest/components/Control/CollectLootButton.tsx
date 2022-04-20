@@ -4,7 +4,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import { UIVariant } from "neverquest/env.d";
+import { UIVariant } from "neverquest/env";
 import icon from "neverquest/icons/open-treasure-chest.svg";
 import { isLevelCompleted } from "neverquest/state/global";
 import { hasLooted } from "neverquest/state/loot";

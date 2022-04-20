@@ -7,7 +7,7 @@ import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState 
 import ArmorInventory from "neverquest/components/Inventory/Armor/ArmorInventory";
 import WeaponInventory from "neverquest/components/Inventory/Weapon/WeaponInventory";
 import Coins from "neverquest/components/Loot/Coins";
-import { Armor, EquipmentType, InventoryContents, UIVariant, Weapon } from "neverquest/env.d";
+import { Armor, EquipmentType, InventoryContents, UIVariant, Weapon } from "neverquest/env";
 import { armor, equippedInventory, storedInventory, weapon } from "neverquest/state/inventory";
 import { coins } from "neverquest/state/loot";
 import { getSellPrice } from "neverquest/utilities/helpers";

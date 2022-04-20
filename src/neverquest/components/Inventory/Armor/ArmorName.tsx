@@ -2,7 +2,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import Table from "react-bootstrap/Table";
 
-import { Armor } from "neverquest/env.d";
+import { Armor } from "neverquest/env";
 
 export default function ArmorName({ armor }: { armor: Armor }) {
   const { name, protection, weight } = armor;

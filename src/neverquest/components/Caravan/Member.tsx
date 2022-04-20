@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import { UIVariant } from "neverquest/env.d";
+import { UIVariant } from "neverquest/env";
 import icon from "neverquest/icons/cowled.svg";
 
 export default function Member({

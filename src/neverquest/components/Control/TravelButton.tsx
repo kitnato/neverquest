@@ -3,7 +3,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import { UIVariant } from "neverquest/env.d";
+import { UIVariant } from "neverquest/env";
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/journey.svg";
 import { isWilderness, level, location } from "neverquest/state/global";

@@ -2,7 +2,7 @@ import { RecoilState, RecoilValueReadOnly, useRecoilValue } from "recoil";
 
 import FloatingText from "neverquest/components/FloatingText";
 import Progress from "neverquest/components/Progress";
-import { UIAttachment, UIVariant } from "neverquest/env.d";
+import { DeltaDisplay, UIAttachment, UIVariant } from "neverquest/env";
 
 export default function ResourceMeter({
   attached,
@@ -12,7 +12,7 @@ export default function ResourceMeter({
 }: {
   attached?: UIAttachment;
   resourceCurrent: RecoilValueReadOnly<number>;
-  resourceDelta?: RecoilState<number>;
+  resourceDelta?: RecoilState<DeltaDisplay>;
   resourceMaximum: RecoilValueReadOnly<number>;
 }) {
   const resourceCurrentValue = useRecoilValue(resourceCurrent);

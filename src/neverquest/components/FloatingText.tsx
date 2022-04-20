@@ -2,38 +2,40 @@ import { useEffect, useState } from "react";
 import { RecoilState, useRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 
+import { DeltaDisplay, UIFloatingTextType } from "neverquest/env";
 import useAnimation from "neverquest/hooks/useAnimation";
+import { DELTA_DEFAULT } from "neverquest/utilities/constants";
 
 type FloatingTextStyle = {
   bottom: number;
-  fontWeight: string;
+  color: UIFloatingTextType;
   id: string;
   opacity: number;
   right: number;
-  value: number;
+  value: string;
 } | null;
 
-export default function FloatingText({ atom }: { atom: RecoilState<number> }) {
-  const [deltaValue, setDeltaValue] = useRecoilState(atom);
+export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay> }) {
+  const [{ color, value }, setDeltaValue] = useRecoilState(atom);
   const [deltaQueue, setDeltaQueue] = useState<FloatingTextStyle[]>([]);
 
   useEffect(() => {
-    if (deltaValue !== 0) {
+    if (color !== null && value !== "") {
       setDeltaQueue([
         {
           bottom: 0,
-          fontWeight: "bold",
+          color,
           id: uuidv4(),
           opacity: 1,
           right: 0,
-          value: deltaValue,
+          value,
         },
         ...deltaQueue,
       ]);
     }
 
     return () => setDeltaQueue([]);
-  }, [deltaValue]);
+  }, [color, value]);
 
   useAnimation(() => {
     const newQueue = deltaQueue.map((currentDelta) => {
@@ -44,7 +46,7 @@ export default function FloatingText({ atom }: { atom: RecoilState<number> }) {
       const newOpacity = currentDelta.opacity - 0.01;
 
       if (newOpacity <= 0) {
-        setDeltaValue(0);
+        setDeltaValue(DELTA_DEFAULT);
         return null;
       }
 
@@ -69,12 +71,8 @@ export default function FloatingText({ atom }: { atom: RecoilState<number> }) {
         const { id, value, ...style } = delta;
 
         return (
-          <small
-            className={`position-absolute ${value > 0 ? "text-success" : "text-danger"}`}
-            key={id}
-            style={style}
-          >
-            {value > 0 ? `+${value}` : value}
+          <small className={`position-absolute ${color}`} key={id} style={style}>
+            <strong>{value}</strong>
           </small>
         );
       })}

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSetRecoilState, useRecoilValue, RecoilState, RecoilValueReadOnly } from "recoil";
 
 import Progress from "neverquest/components/Progress";
-import { UIAttachment, UISize, UIVariant } from "neverquest/env.d";
+import { DeltaDisplay, UIAttachment, UIFloatingTextType, UISize, UIVariant } from "neverquest/env";
 import useAnimation from "neverquest/hooks/useAnimation";
 import { isRecovering } from "neverquest/state/character";
 import { formatCountdown } from "neverquest/utilities/helpers";
@@ -15,7 +15,7 @@ export default function Regeneration({
 }: {
   regenerationRate: RecoilValueReadOnly<number>;
   resourceCurrent: RecoilState<number>;
-  resourceDelta: RecoilState<number>;
+  resourceDelta: RecoilState<DeltaDisplay>;
   isResourceMaxedOut: RecoilValueReadOnly<boolean>;
 }) {
   const isRecoveringValue = useRecoilValue(isRecovering);
@@ -33,7 +33,10 @@ export default function Regeneration({
     if (deltaRegeneration >= regenerationRateValue) {
       setDeltaRegeneration(0);
       setCurrentResource((currentResource) => currentResource + 1);
-      setDeltaResource(1);
+      setDeltaResource({
+        color: UIFloatingTextType.Positive,
+        value: "+1",
+      });
     }
   }, [deltaRegeneration, regenerationRateValue]);
 

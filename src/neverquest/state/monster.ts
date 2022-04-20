@@ -10,11 +10,6 @@ export const currentHealthMonster = atom({
   default: -1,
 });
 
-export const deltaHealthMonster = atom({
-  key: "deltaHealthMonster",
-  default: 0,
-});
-
 export const isMonsterEngaged = atom({
   key: "isMonsterEngaged",
   default: false,

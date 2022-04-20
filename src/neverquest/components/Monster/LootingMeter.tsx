@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import Progress from "neverquest/components/Progress";
-import { UIVariant } from "neverquest/env.d";
+import { UIVariant } from "neverquest/env";
 import useAnimation from "neverquest/hooks/useAnimation";
 import useNewMonster from "neverquest/hooks/useNewMonster";
 import useRewardKill from "neverquest/hooks/useRewardKill";

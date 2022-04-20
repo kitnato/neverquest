@@ -4,14 +4,10 @@ import { useRecoilValue } from "recoil";
 import Regeneration from "neverquest/components/Character/Regeneration";
 import ImageIcon from "neverquest/components/ImageIcon";
 import ResourceMeter from "neverquest/components/ResourceMeter";
-import { UIAttachment } from "neverquest/env.d";
+import { UIAttachment } from "neverquest/env";
 import icon from "neverquest/icons/lungs.svg";
-import {
-  currentStamina,
-  deltaStamina,
-  isStaminaMaxedOut,
-  maximumStamina,
-} from "neverquest/state/resources";
+import { deltaStamina } from "neverquest/state/deltas";
+import { currentStamina, isStaminaMaxedOut, maximumStamina } from "neverquest/state/resources";
 import { showStamina } from "neverquest/state/show";
 import { totalStaminaRegenerationRate } from "neverquest/state/stats";
 

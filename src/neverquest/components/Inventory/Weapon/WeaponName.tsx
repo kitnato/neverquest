@@ -3,7 +3,7 @@ import Popover from "react-bootstrap/Popover";
 import Table from "react-bootstrap/Table";
 import { useRecoilValue } from "recoil";
 
-import { Weapon } from "neverquest/env.d";
+import { Weapon } from "neverquest/env";
 import { showDamagePerSecond } from "neverquest/state/show";
 import { capitalizeAll, getDamagePerSecond } from "neverquest/utilities/helpers";
 

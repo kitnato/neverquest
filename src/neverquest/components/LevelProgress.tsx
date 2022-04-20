@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import Progress from "neverquest/components/Progress";
-import { UIVariant } from "neverquest/env.d";
+import { UIVariant } from "neverquest/env";
 import levelIcon from "neverquest/icons/flying-flag.svg";
 import progressIcon from "neverquest/icons/stairs.svg";
 import { isWilderness, level, progress, progressMax } from "neverquest/state/global";

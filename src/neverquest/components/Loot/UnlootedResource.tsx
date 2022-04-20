@@ -1,6 +1,6 @@
 import { RecoilState, useRecoilValue } from "recoil";
 
-import { LootType } from "neverquest/env.d";
+import { LootType } from "neverquest/env";
 import Aether from "neverquest/components/Loot/Aether";
 import Coins from "neverquest/components/Loot/Coins";
 import Scrap from "neverquest/components/Loot/Scrap";

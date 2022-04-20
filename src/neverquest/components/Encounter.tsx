@@ -6,11 +6,11 @@ import { v4 as uuidv4 } from "uuid";
 import Caravan from "neverquest/components/Caravan";
 import Loot from "neverquest/components/Loot";
 import Wilderness from "neverquest/components/Wilderness";
-import { ArmorWeight, EquipmentType, MerchantInventory, WeaponWeight } from "neverquest/env.d";
+import { ArmorWeight, EquipmentType, MerchantInventory, WeaponWeight } from "neverquest/env";
 import { merchantInventory } from "neverquest/state/caravan";
 import { isWilderness, level, nsfw } from "neverquest/state/global";
 import { generateArmor, generateWeapon } from "neverquest/utilities/generators";
-import { AffixTag, WeaponType } from "locra/env.d";
+import { AffixTag, WeaponType } from "locra/env";
 
 export default function Encounter() {
   const isWildernessValue = useRecoilValue(isWilderness);

@@ -8,7 +8,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import Attributes from "neverquest/components/Attributes";
 import DismissableScreen from "neverquest/components/DismissableScreen";
 import ImageIcon from "neverquest/components/ImageIcon";
-import { UIVariant } from "neverquest/env.d";
+import { UIVariant } from "neverquest/env";
 import icon from "neverquest/icons/skills.svg";
 import { attributesIncreasable, isAttacking } from "neverquest/state/character";
 import { isLevelCompleted } from "neverquest/state/global";

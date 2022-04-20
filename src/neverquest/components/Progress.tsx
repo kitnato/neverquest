@@ -2,7 +2,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import Tooltip from "react-bootstrap/Tooltip";
 
-import { UIAttachment, UISize, UIVariant } from "neverquest/env.d";
+import { UIAttachment, UISize, UIVariant } from "neverquest/env";
 
 export default function Progress({
   attached,

@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import LootDisplay from "neverquest/components/Loot/LootDisplay";
 import { showAether, showCoins, showScrap } from "neverquest/state/show";
 
-export default function Resources() {
+export default function StoredLoot() {
   const showAetherValue = useRecoilValue(showAether);
   const showCoinsValue = useRecoilValue(showCoins);
   const showScrapValue = useRecoilValue(showScrap);

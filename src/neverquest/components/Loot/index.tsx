@@ -26,9 +26,11 @@ export default function Loot() {
           <Stack direction="horizontal" gap={5}>
             <ImageIcon icon={hasLootedValue ? lootedIcon : lootIcon} tooltip="Loot" />
 
-            {hasLootedValue && <span className="fst-italic">Nothing remains.</span>}
-
-            {!hasLootedValue && <LootDisplay isLoot />}
+            {hasLootedValue ? (
+              <span className="fst-italic">Nothing remains.</span>
+            ) : (
+              <LootDisplay isLoot />
+            )}
           </Stack>
         </Card.Body>
       </Card>

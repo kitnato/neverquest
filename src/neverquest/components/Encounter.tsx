@@ -18,6 +18,7 @@ export default function Encounter() {
   const nsfwValue = useRecoilValue(nsfw);
   const setMerchantInventory = useSetRecoilState(merchantInventory);
 
+  // TODO - move into hook or selector?
   useEffect(() => {
     // When encountering the Caravan,
     // generate the merchant's inventory (once per level)

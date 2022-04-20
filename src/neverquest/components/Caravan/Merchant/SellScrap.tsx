@@ -1,23 +1,23 @@
 import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
 import { ArrowRight } from "react-bootstrap-icons";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import Coins from "neverquest/components/Loot/Coins";
 import Scrap from "neverquest/components/Loot/Scrap";
 import { UIVariant } from "neverquest/env";
+import useLoot from "neverquest/hooks/useLoot";
 import { exchangeCoin, exchangeScrap } from "neverquest/state/caravan";
-import { coins, scrap } from "neverquest/state/loot";
+import { scrap } from "neverquest/state/loot";
 
 export default function SellScrap() {
-  const [scrapValue, setScrap] = useRecoilState(scrap);
+  const loot = useLoot();
+  const scrapValue = useRecoilValue(scrap);
   const exchangeScrapValue = useRecoilValue(exchangeScrap);
   const exchangeCoinValue = useRecoilValue(exchangeCoin);
-  const setCoins = useSetRecoilState(coins);
 
   const sellScrap = () => {
-    setScrap((currentScrap) => currentScrap - exchangeScrapValue);
-    setCoins((currentCoins) => currentCoins + exchangeCoinValue);
+    loot({ coinsDifference: exchangeCoinValue, scrapDifference: -exchangeScrapValue });
   };
 
   return (

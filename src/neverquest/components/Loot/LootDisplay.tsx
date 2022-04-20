@@ -1,8 +1,8 @@
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-import LootedResource from "neverquest/components/Loot/LootedResource";
-import UnlootedResource from "neverquest/components/Loot/UnlootedResource";
+import Looted from "neverquest/components/Loot/Looted";
+import Lootable from "neverquest/components/Loot/Lootable";
 import { LootType } from "neverquest/env";
 import { aether, aetherLoot, coins, coinsLoot, scrap, scrapLoot } from "neverquest/state/loot";
 import { showAether, showCoins, showScrap } from "neverquest/state/show";
@@ -13,29 +13,29 @@ export default function LootDisplay({ isLoot }: { isLoot?: boolean }) {
       {isLoot ? (
         <>
           <Col>
-            <UnlootedResource atom={scrapLoot} name={LootType.Scrap} />
+            <Lootable atom={scrapLoot} name={LootType.Scrap} />
           </Col>
 
           <Col>
-            <UnlootedResource atom={coinsLoot} name={LootType.Coins} />
+            <Lootable atom={coinsLoot} name={LootType.Coins} />
           </Col>
 
           <Col>
-            <UnlootedResource atom={aetherLoot} name={LootType.Aether} />
+            <Lootable atom={aetherLoot} name={LootType.Aether} />
           </Col>
         </>
       ) : (
         <>
           <Col>
-            <LootedResource atom={scrap} name={LootType.Scrap} showAtom={showScrap} />
+            <Looted atom={scrap} name={LootType.Scrap} showAtom={showScrap} />
           </Col>
 
           <Col>
-            <LootedResource atom={coins} name={LootType.Coins} showAtom={showCoins} />
+            <Looted atom={coins} name={LootType.Coins} showAtom={showCoins} />
           </Col>
 
           <Col>
-            <LootedResource atom={aether} name={LootType.Aether} showAtom={showAether} />
+            <Looted atom={aether} name={LootType.Aether} showAtom={showAether} />
           </Col>
         </>
       )}

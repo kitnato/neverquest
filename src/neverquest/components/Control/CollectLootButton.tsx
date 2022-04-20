@@ -1,19 +1,19 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import { UIVariant } from "neverquest/env";
+import useLoot from "neverquest/hooks/useLoot";
 import icon from "neverquest/icons/open-treasure-chest.svg";
 import { isLevelCompleted } from "neverquest/state/global";
 import { hasLooted } from "neverquest/state/loot";
 
 export default function CollectLootButton() {
-  const [hasLootedValue, loot] = useRecoilState(hasLooted);
+  const loot = useLoot();
+  const hasLootedValue = useRecoilValue(hasLooted);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
-
-  const handleCollect = () => loot(true);
 
   if (!isLevelCompletedValue) {
     return null;
@@ -23,7 +23,7 @@ export default function CollectLootButton() {
     <OverlayTrigger overlay={<Tooltip>Collect loot</Tooltip>} placement="top">
       <Button
         className={hasLootedValue ? "d-none" : undefined}
-        onClick={handleCollect}
+        onClick={() => loot({})}
         variant={UIVariant.Outline}
       >
         <ImageIcon icon={icon} />

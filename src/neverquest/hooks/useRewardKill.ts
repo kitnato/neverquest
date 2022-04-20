@@ -1,9 +1,10 @@
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { experience } from "neverquest/state/character";
 import { progress } from "neverquest/state/global";
 import { aetherLoot, coinsLoot, scrapLoot } from "neverquest/state/loot";
 import { monsterLoot } from "neverquest/state/monster";
+import { showAttributes } from "neverquest/state/show";
 
 export default function useRewardKill() {
   const setAetherLoot = useSetRecoilState(aetherLoot);
@@ -11,6 +12,7 @@ export default function useRewardKill() {
   const setExperience = useSetRecoilState(experience);
   const setProgress = useSetRecoilState(progress);
   const setScrapLoot = useSetRecoilState(scrapLoot);
+  const [showAttributesValue, setShowAttributes] = useRecoilState(showAttributes);
   const { aether, coins, experience: xp, scrap } = useRecoilValue(monsterLoot);
 
   return () => {
@@ -28,5 +30,9 @@ export default function useRewardKill() {
 
     setExperience((currentExperience) => currentExperience + xp);
     setProgress((currentProgress) => currentProgress + 1);
+
+    if (xp > 0 && !showAttributesValue) {
+      setShowAttributes(true);
+    }
   };
 }

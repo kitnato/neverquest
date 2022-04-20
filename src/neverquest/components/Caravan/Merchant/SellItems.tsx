@@ -2,22 +2,22 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
-import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import ArmorInventory from "neverquest/components/Inventory/Armor/ArmorInventory";
 import WeaponInventory from "neverquest/components/Inventory/Weapon/WeaponInventory";
 import Coins from "neverquest/components/Loot/Coins";
 import { Armor, EquipmentType, InventoryContents, UIVariant, Weapon } from "neverquest/env";
+import useLoot from "neverquest/hooks/useLoot";
 import { armor, equippedInventory, storedInventory, weapon } from "neverquest/state/inventory";
-import { coins } from "neverquest/state/loot";
 import { getSellPrice } from "neverquest/utilities/helpers";
 
 export default function SellItems() {
+  const loot = useLoot();
   const [storedInventoryValue, setStoredInventory] = useRecoilState(storedInventory);
   const resetArmor = useResetRecoilState(armor);
   const resetWeapon = useResetRecoilState(weapon);
   const equippedInventoryValue = useRecoilValue(equippedInventory);
-  const setCoins = useSetRecoilState(coins);
 
   const entireInventoryEntries = [
     ...Object.entries(equippedInventoryValue),
@@ -47,7 +47,7 @@ export default function SellItems() {
         });
       }
 
-      setCoins((currentCoins) => currentCoins + getSellPrice(item));
+      loot({ coinsDifference: getSellPrice(item) });
     };
 
   return (

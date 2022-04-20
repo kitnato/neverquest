@@ -5,27 +5,21 @@ import Aether from "neverquest/components/Loot/Aether";
 import Coins from "neverquest/components/Loot/Coins";
 import Scrap from "neverquest/components/Loot/Scrap";
 
-export default function UnlootedResource({
-  atom,
-  name,
-}: {
-  atom: RecoilState<number>;
-  name: LootType;
-}) {
-  const unlootedResourceValue = useRecoilValue(atom);
+export default function Lootable({ atom, name }: { atom: RecoilState<number>; name: LootType }) {
+  const resourceValue = useRecoilValue(atom);
 
-  if (unlootedResourceValue === 0) {
+  if (resourceValue === 0) {
     return null;
   }
 
   switch (name) {
     case LootType.Aether:
-      return <Aether value={unlootedResourceValue} />;
+      return <Aether value={resourceValue} />;
     case LootType.Coins:
-      return <Coins value={unlootedResourceValue} />;
+      return <Coins value={resourceValue} />;
     case LootType.Scrap:
-      return <Scrap value={unlootedResourceValue} />;
+      return <Scrap value={resourceValue} />;
+    default:
+      return null;
   }
-
-  return null;
 }

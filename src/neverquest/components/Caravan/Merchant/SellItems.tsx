@@ -8,12 +8,12 @@ import ArmorInventory from "neverquest/components/Inventory/Armor/ArmorInventory
 import WeaponInventory from "neverquest/components/Inventory/Weapon/WeaponInventory";
 import Coins from "neverquest/components/Loot/Coins";
 import { Armor, EquipmentType, InventoryContents, UIVariant, Weapon } from "neverquest/env";
-import useLoot from "neverquest/hooks/useLoot";
+import useReserve from "neverquest/hooks/useReserve";
 import { armor, equippedInventory, storedInventory, weapon } from "neverquest/state/inventory";
 import { getSellPrice } from "neverquest/utilities/helpers";
 
 export default function SellItems() {
-  const loot = useLoot();
+  const setReserve = useReserve();
   const [storedInventoryValue, setStoredInventory] = useRecoilState(storedInventory);
   const resetArmor = useResetRecoilState(armor);
   const resetWeapon = useResetRecoilState(weapon);
@@ -47,7 +47,7 @@ export default function SellItems() {
         });
       }
 
-      loot({ coinsDifference: getSellPrice(item) });
+      setReserve({ coinsDifference: getSellPrice(item) });
     };
 
   return (

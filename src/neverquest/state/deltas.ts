@@ -3,6 +3,11 @@ import { atom } from "recoil";
 import { DeltaDisplay } from "neverquest/env";
 import { DELTA_DEFAULT } from "neverquest/utilities/constants";
 
+export const deltaAether = atom<DeltaDisplay>({
+  key: "deltaAether",
+  default: DELTA_DEFAULT,
+});
+
 export const deltaCoins = atom<DeltaDisplay>({
   key: "deltaCoins",
   default: DELTA_DEFAULT,

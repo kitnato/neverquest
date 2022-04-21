@@ -25,16 +25,16 @@ export default function Stamina() {
       <Stack>
         <ResourceMeter
           attached={UIAttachment.Below}
-          resourceCurrent={currentStamina}
-          resourceDelta={deltaStamina}
-          resourceMaximum={maximumStamina}
+          atom={currentStamina}
+          atomDelta={deltaStamina}
+          atomMaximum={maximumStamina}
         />
 
         <Regeneration
           isResourceMaxedOut={isStaminaMaxedOut}
           regenerationRate={totalStaminaRegenerationRate}
-          resourceCurrent={currentStamina}
-          resourceDelta={deltaStamina}
+          atom={currentStamina}
+          atomDelta={deltaStamina}
         />
       </Stack>
     </Stack>

@@ -5,13 +5,13 @@ import Tooltip from "react-bootstrap/Tooltip";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import { UIVariant } from "neverquest/env";
-import useLoot from "neverquest/hooks/useLoot";
+import useReserve from "neverquest/hooks/useReserve";
 import icon from "neverquest/icons/open-treasure-chest.svg";
 import { isLevelCompleted } from "neverquest/state/global";
 import { hasLooted } from "neverquest/state/loot";
 
 export default function CollectLootButton() {
-  const loot = useLoot();
+  const loot = useReserve();
   const hasLootedValue = useRecoilValue(hasLooted);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
 

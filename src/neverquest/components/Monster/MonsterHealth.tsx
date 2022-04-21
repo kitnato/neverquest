@@ -13,9 +13,9 @@ export default function MonsterHealth() {
 
       <Stack className="align-self-center">
         <ResourceMeter
-          resourceCurrent={currentHealthMonster}
-          resourceDelta={deltaHealthMonster}
-          resourceMaximum={maximumHealthMonster}
+          atom={currentHealthMonster}
+          atomDelta={deltaHealthMonster}
+          atomMaximum={maximumHealthMonster}
         />
       </Stack>
     </Stack>

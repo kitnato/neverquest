@@ -6,28 +6,28 @@ import { DeltaDisplay, UIAttachment, UIVariant } from "neverquest/env";
 
 export default function ResourceMeter({
   attached,
-  resourceCurrent,
-  resourceDelta,
-  resourceMaximum,
+  atom,
+  atomDelta,
+  atomMaximum,
 }: {
   attached?: UIAttachment;
-  resourceCurrent: RecoilValueReadOnly<number>;
-  resourceDelta?: RecoilState<DeltaDisplay>;
-  resourceMaximum: RecoilValueReadOnly<number>;
+  atom: RecoilValueReadOnly<number>;
+  atomDelta?: RecoilState<DeltaDisplay>;
+  atomMaximum: RecoilValueReadOnly<number>;
 }) {
-  const resourceCurrentValue = useRecoilValue(resourceCurrent);
-  const resourceMaximumValue = useRecoilValue(resourceMaximum);
+  const atomValue = useRecoilValue(atom);
+  const atomMaximumValue = useRecoilValue(atomMaximum);
 
   return (
     <>
       <Progress
         attached={attached}
-        label={`${resourceCurrentValue}/${resourceMaximumValue}`}
-        value={(resourceCurrentValue / resourceMaximumValue) * 100}
+        label={`${atomValue}/${atomMaximumValue}`}
+        value={(atomValue / atomMaximumValue) * 100}
         variant={UIVariant.Primary}
       />
 
-      {resourceDelta && <FloatingText atom={resourceDelta} />}
+      {atomDelta && <FloatingText atom={atomDelta} />}
     </>
   );
 }

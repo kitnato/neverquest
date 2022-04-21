@@ -116,6 +116,13 @@ export enum WeaponWeight {
   TwoHanded = "Two-handed",
 }
 
+// PROPS
+
+export interface LootProps {
+  tooltip?: string | undefined;
+  value: number;
+}
+
 // UI
 
 export enum UIAttachment {

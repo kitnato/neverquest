@@ -1,9 +1,12 @@
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-import Looted from "neverquest/components/Loot/Looted";
+import Aether from "neverquest/components/Loot/Aether";
+import Coins from "neverquest/components/Loot/Coins";
+import Reserve from "neverquest/components/Loot/Reserve";
 import Lootable from "neverquest/components/Loot/Lootable";
-import { LootType } from "neverquest/env";
+import Scrap from "neverquest/components/Loot/Scrap";
+import { deltaAether, deltaCoins, deltaScrap } from "neverquest/state/deltas";
 import { aether, aetherLoot, coins, coinsLoot, scrap, scrapLoot } from "neverquest/state/loot";
 import { showAether, showCoins, showScrap } from "neverquest/state/show";
 
@@ -13,29 +16,34 @@ export default function LootDisplay({ isLoot }: { isLoot?: boolean }) {
       {isLoot ? (
         <>
           <Col>
-            <Lootable atom={scrapLoot} name={LootType.Scrap} />
+            <Lootable atom={scrapLoot} Component={Scrap} />
           </Col>
 
           <Col>
-            <Lootable atom={coinsLoot} name={LootType.Coins} />
+            <Lootable atom={coinsLoot} Component={Coins} />
           </Col>
 
           <Col>
-            <Lootable atom={aetherLoot} name={LootType.Aether} />
+            <Lootable atom={aetherLoot} Component={Aether} />
           </Col>
         </>
       ) : (
         <>
           <Col>
-            <Looted atom={scrap} name={LootType.Scrap} showAtom={showScrap} />
+            <Reserve atom={scrap} Component={Scrap} deltaAtom={deltaScrap} showAtom={showScrap} />
           </Col>
 
           <Col>
-            <Looted atom={coins} name={LootType.Coins} showAtom={showCoins} />
+            <Reserve atom={coins} Component={Coins} deltaAtom={deltaCoins} showAtom={showCoins} />
           </Col>
 
           <Col>
-            <Looted atom={aether} name={LootType.Aether} showAtom={showAether} />
+            <Reserve
+              atom={aether}
+              Component={Aether}
+              deltaAtom={deltaAether}
+              showAtom={showAether}
+            />
           </Col>
         </>
       )}

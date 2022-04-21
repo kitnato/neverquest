@@ -9,20 +9,20 @@ import { formatCountdown } from "neverquest/utilities/helpers";
 
 export default function Regeneration({
   regenerationRate,
-  resourceCurrent,
-  resourceDelta,
+  atom,
+  atomDelta,
   isResourceMaxedOut,
 }: {
   regenerationRate: RecoilValueReadOnly<number>;
-  resourceCurrent: RecoilState<number>;
-  resourceDelta: RecoilState<DeltaDisplay>;
+  atom: RecoilState<number>;
+  atomDelta: RecoilState<DeltaDisplay>;
   isResourceMaxedOut: RecoilValueReadOnly<boolean>;
 }) {
   const isRecoveringValue = useRecoilValue(isRecovering);
   const regenerationRateValue = useRecoilValue(regenerationRate);
   const isResourceMaxedOutValue = useRecoilValue(isResourceMaxedOut);
-  const setCurrentResource = useSetRecoilState(resourceCurrent);
-  const setDeltaResource = useSetRecoilState(resourceDelta);
+  const setCurrentResource = useSetRecoilState(atom);
+  const setDeltaResource = useSetRecoilState(atomDelta);
   const [deltaRegeneration, setDeltaRegeneration] = useState(0);
 
   useAnimation((deltaTime) => {

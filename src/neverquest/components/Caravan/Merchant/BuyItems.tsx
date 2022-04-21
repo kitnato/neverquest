@@ -16,14 +16,14 @@ import {
   Weapon,
 } from "neverquest/env";
 import useAcquireItem from "neverquest/hooks/useAcquireItem";
-import useLoot from "neverquest/hooks/useLoot";
+import useReserve from "neverquest/hooks/useReserve";
 import { merchantInventory } from "neverquest/state/caravan";
 import { isInventoryFull } from "neverquest/state/inventory";
 import { coins } from "neverquest/state/loot";
 
 export default function BuyItems() {
   const acquireItem = useAcquireItem();
-  const loot = useLoot();
+  const setReserve = useReserve();
   const coinsValue = useRecoilValue(coins);
   const [merchantInventoryValue, setMerchantInventory] = useRecoilState(merchantInventory);
   const isInventoryFullValue = useRecoilValue(isInventoryFull);
@@ -36,7 +36,7 @@ export default function BuyItems() {
       const itemReceived = acquireItem({ item, type });
 
       if (itemReceived !== InventoryItemStatus.Rejected) {
-        loot({ coinsDifference: -item.price });
+        setReserve({ coinsDifference: -item.price });
         setMerchantInventory((currentMerchantInventory) => {
           const newMerchantInventory = { ...currentMerchantInventory };
 

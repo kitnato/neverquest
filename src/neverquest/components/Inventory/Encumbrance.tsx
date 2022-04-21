@@ -10,7 +10,7 @@ export default function Encumbrance() {
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Encumbrance" />
 
-      <ResourceMeter resourceCurrent={encumbrance} resourceMaximum={inventorySize} />
+      <ResourceMeter atom={encumbrance} atomMaximum={inventorySize} />
     </Stack>
   );
 }

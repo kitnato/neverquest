@@ -31,7 +31,7 @@ export default function Layout({ resetSeed }: { resetSeed: () => void }) {
       </Row>
 
       <Row>
-        <Col>
+        <Col style={{ zIndex: 1050 }}>
           <Character />
         </Col>
 

@@ -17,16 +17,16 @@ export default function Health() {
       <Stack>
         <ResourceMeter
           attached={UIAttachment.Below}
-          resourceCurrent={currentHealth}
-          resourceDelta={deltaHealth}
-          resourceMaximum={maximumHealth}
+          atom={currentHealth}
+          atomDelta={deltaHealth}
+          atomMaximum={maximumHealth}
         />
 
         <Regeneration
           isResourceMaxedOut={isHealthMaxedOut}
           regenerationRate={totalHealthRegenerationRate}
-          resourceCurrent={currentHealth}
-          resourceDelta={deltaHealth}
+          atom={currentHealth}
+          atomDelta={deltaHealth}
         />
       </Stack>
     </Stack>

@@ -6,18 +6,18 @@ import { useRecoilValue } from "recoil";
 import Coins from "neverquest/components/Loot/Coins";
 import Scrap from "neverquest/components/Loot/Scrap";
 import { UIVariant } from "neverquest/env";
-import useLoot from "neverquest/hooks/useLoot";
+import useReserve from "neverquest/hooks/useReserve";
 import { exchangeCoin, exchangeScrap } from "neverquest/state/caravan";
 import { scrap } from "neverquest/state/loot";
 
 export default function SellScrap() {
-  const loot = useLoot();
+  const setReserve = useReserve();
   const scrapValue = useRecoilValue(scrap);
   const exchangeScrapValue = useRecoilValue(exchangeScrap);
   const exchangeCoinValue = useRecoilValue(exchangeCoin);
 
   const sellScrap = () => {
-    loot({ coinsDifference: exchangeCoinValue, scrapDifference: -exchangeScrapValue });
+    setReserve({ coinsDifference: exchangeCoinValue, scrapDifference: -exchangeScrapValue });
   };
 
   return (

@@ -1,14 +1,17 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { experience } from "neverquest/state/character";
+import { deltaExperience } from "neverquest/state/deltas";
 import { progress } from "neverquest/state/global";
 import { aetherLoot, coinsLoot, scrapLoot } from "neverquest/state/loot";
 import { monsterLoot } from "neverquest/state/monster";
 import { showAttributes } from "neverquest/state/show";
+import { UIFloatingTextType } from "neverquest/env";
 
 export default function useRewardKill() {
   const setAetherLoot = useSetRecoilState(aetherLoot);
   const setCoinsLoot = useSetRecoilState(coinsLoot);
+  const setDeltaExperience = useSetRecoilState(deltaExperience);
   const setExperience = useSetRecoilState(experience);
   const setProgress = useSetRecoilState(progress);
   const setScrapLoot = useSetRecoilState(scrapLoot);
@@ -29,6 +32,7 @@ export default function useRewardKill() {
     }
 
     setExperience((currentExperience) => currentExperience + xp);
+    setDeltaExperience({ color: UIFloatingTextType.Positive, value: `+${xp}` });
     setProgress((currentProgress) => currentProgress + 1);
 
     if (xp > 0 && !showAttributesValue) {

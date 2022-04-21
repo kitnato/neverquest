@@ -6,17 +6,20 @@ import { Clock, Plus } from "react-bootstrap-icons";
 import { useSetRecoilState, useRecoilState, useRecoilValue, RecoilState } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import { UIVariant } from "neverquest/env";
+import { UIFloatingTextType, UIVariant } from "neverquest/env";
 // TODO - every attribute needs its own icon
 import placeholderIcon from "neverquest/icons/abstract-049.svg";
 import { Attribute as AttributeType } from "neverquest/env";
 import { characterLevel, experienceAvailable, experienceSpent } from "neverquest/state/character";
+import { deltaCharacterLevel, deltaExperienceSpent } from "neverquest/state/deltas";
 import { showCharacterLevel } from "neverquest/state/show";
 import { getTriangularNumber } from "neverquest/utilities/helpers";
 
 export default function Attribute({ atom }: { atom: RecoilState<AttributeType> }) {
   const setCharacterLevel = useSetRecoilState(characterLevel);
+  const setDeltaCharacterLevel = useSetRecoilState(deltaCharacterLevel);
   const setExperienceSpent = useSetRecoilState(experienceSpent);
+  const setDeltaExperienceSpent = useSetRecoilState(deltaExperienceSpent);
   const [attributeValue, setAttribute] = useRecoilState(atom);
   const [showCharacterLevelValue, setShowCharacterLevel] = useRecoilState(showCharacterLevel);
   const experienceAvailableValue = useRecoilValue(experienceAvailable);
@@ -28,6 +31,7 @@ export default function Attribute({ atom }: { atom: RecoilState<AttributeType> }
     return null;
   }
 
+  // TODO - make into a hook?
   const onLevelUp = () => {
     setAttribute((currentAttribute) => {
       const newPoints = currentAttribute.points + 1;
@@ -39,7 +43,9 @@ export default function Attribute({ atom }: { atom: RecoilState<AttributeType> }
       };
     });
     setCharacterLevel((currentCharacterLevel) => currentCharacterLevel + 1);
+    setDeltaCharacterLevel({ color: UIFloatingTextType.Positive, value: "+1" });
     setExperienceSpent((currentExperienceSpent) => currentExperienceSpent + cost);
+    setDeltaExperienceSpent({ color: UIFloatingTextType.Positive, value: `+${cost}` });
 
     if (!showCharacterLevelValue) {
       setShowCharacterLevel(true);

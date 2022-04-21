@@ -20,7 +20,6 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
 
   useEffect(() => {
     if (deltaValue === DELTA_DEFAULT) {
-      console.log("void");
       return;
     }
 
@@ -64,7 +63,7 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
         return null;
       }
 
-      const newOpacity = currentDelta.opacity - 0.015;
+      const newOpacity = currentDelta.opacity - 0.01;
 
       if (newOpacity <= 0) {
         return null;

@@ -13,8 +13,23 @@ export const deltaCoins = atom<DeltaDisplay>({
   default: DELTA_DEFAULT,
 });
 
+export const deltaDamage = atom<DeltaDisplay>({
+  key: "deltaDamage",
+  default: DELTA_DEFAULT,
+});
+
+export const deltaDamagePerSecond = atom<DeltaDisplay>({
+  key: "deltaDamagePerSecond",
+  default: DELTA_DEFAULT,
+});
+
 export const deltaExperience = atom<DeltaDisplay>({
   key: "deltaExperience",
+  default: DELTA_DEFAULT,
+});
+
+export const deltaExperienceSpent = atom<DeltaDisplay>({
+  key: "deltaExperienceSpent",
   default: DELTA_DEFAULT,
 });
 
@@ -25,6 +40,16 @@ export const deltaHealth = atom<DeltaDisplay>({
 
 export const deltaHealthMonster = atom<DeltaDisplay>({
   key: "deltaHealthMonster",
+  default: DELTA_DEFAULT,
+});
+
+export const deltaCharacterLevel = atom<DeltaDisplay>({
+  key: "deltaCharacterLevel",
+  default: DELTA_DEFAULT,
+});
+
+export const deltaProtection = atom<DeltaDisplay>({
+  key: "deltaProtection",
   default: DELTA_DEFAULT,
 });
 

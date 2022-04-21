@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import Block from "neverquest/components/Character/Block";
 import Dodge from "neverquest/components/Character/Dodge";
-import TotalProtection from "neverquest/components/Character/TotalProtection";
+import Protection from "neverquest/components/Character/Protection";
 import { showBlockChance, showDodgeChance, showTotalProtection } from "neverquest/state/show";
 
 export default function Defense() {
@@ -19,7 +19,7 @@ export default function Defense() {
   return (
     <Row>
       <Col>
-        <TotalProtection />
+        <Protection />
       </Col>
 
       <Col>

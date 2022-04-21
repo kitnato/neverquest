@@ -2,40 +2,61 @@ import { useEffect, useState } from "react";
 import { RecoilState, useRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 
-import { DeltaDisplay, UIFloatingTextType } from "neverquest/env";
+import { DeltaDisplay } from "neverquest/env";
 import useAnimation from "neverquest/hooks/useAnimation";
 import { DELTA_DEFAULT } from "neverquest/utilities/constants";
 
 type FloatingTextStyle = {
   bottom: number;
-  color: UIFloatingTextType;
+  contents: JSX.Element;
   id: string;
   opacity: number;
   right: number;
-  value: string;
 } | null;
 
 export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay> }) {
-  const [{ color, value }, setDeltaValue] = useRecoilState(atom);
+  const [deltaValue, setDeltaValue] = useRecoilState(atom);
   const [deltaQueue, setDeltaQueue] = useState<FloatingTextStyle[]>([]);
 
   useEffect(() => {
-    if (color !== null && value !== "") {
+    if (deltaValue === DELTA_DEFAULT) {
+      console.log("void");
+      return;
+    }
+
+    let contents = null;
+
+    if (Array.isArray(deltaValue)) {
+      contents = (
+        <>
+          {deltaValue.map(({ color, value }) => (
+            <span className={color || ""} key={value}>
+              {value}
+            </span>
+          ))}
+        </>
+      );
+    } else {
+      const { color, value } = deltaValue;
+
+      contents = <span className={color || ""}>{value}</span>;
+    }
+
+    if (contents) {
       setDeltaQueue([
         {
-          bottom: 0,
-          color,
+          bottom: 5,
+          contents,
           id: uuidv4(),
           opacity: 1,
-          right: 0,
-          value,
+          right: 5,
         },
         ...deltaQueue,
       ]);
-    }
 
-    return () => setDeltaQueue([]);
-  }, [color, value]);
+      setDeltaValue(DELTA_DEFAULT);
+    }
+  }, [deltaValue]);
 
   useAnimation(() => {
     const newQueue = deltaQueue.map((currentDelta) => {
@@ -43,10 +64,9 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
         return null;
       }
 
-      const newOpacity = currentDelta.opacity - 0.01;
+      const newOpacity = currentDelta.opacity - 0.015;
 
       if (newOpacity <= 0) {
-        setDeltaValue(DELTA_DEFAULT);
         return null;
       }
 
@@ -68,11 +88,11 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
           return;
         }
 
-        const { id, value, ...style } = delta;
+        const { id, contents, ...style } = delta;
 
         return (
-          <small className={`position-absolute ${color}`} key={id} style={style}>
-            <strong>{value}</strong>
+          <small className="position-absolute" key={id} style={style}>
+            <strong>{contents}</strong>
           </small>
         );
       })}

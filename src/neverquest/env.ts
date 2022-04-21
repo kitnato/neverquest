@@ -38,7 +38,9 @@ export enum CrewType {
   Wizard,
 }
 
-export interface DeltaDisplay {
+export type DeltaDisplay = DeltaDisplayContents | DeltaDisplayContents[];
+
+export interface DeltaDisplayContents {
   color: UIFloatingTextType | null;
   value: string;
 }

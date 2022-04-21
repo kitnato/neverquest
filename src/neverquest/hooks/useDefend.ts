@@ -1,6 +1,6 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
-import { UIFloatingTextType } from "neverquest/env";
+import { DeltaDisplay, UIFloatingTextType } from "neverquest/env";
 import { isRecovering } from "neverquest/state/character";
 import { gameOver } from "neverquest/state/global";
 import { deltaHealth } from "neverquest/state/deltas";
@@ -32,10 +32,22 @@ export default function useDefend() {
     }
 
     if (health !== currentHealthValue) {
-      setDeltaHealth({
+      let deltaContents: DeltaDisplay = {
         color: UIFloatingTextType.Negative,
         value: `${healthDamage}`,
-      });
+      };
+
+      if (totalProtectionValue > 0) {
+        deltaContents = [
+          deltaContents,
+          {
+            color: UIFloatingTextType.Neutral,
+            value: ` (${totalProtectionValue})`,
+          },
+        ];
+      }
+
+      setDeltaHealth(deltaContents);
       setCurrentHealth(health);
 
       if (health === 0) {

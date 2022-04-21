@@ -23,10 +23,10 @@ export default function Health() {
         />
 
         <Regeneration
-          isResourceMaxedOut={isHealthMaxedOut}
-          regenerationRate={totalHealthRegenerationRate}
           atom={currentHealth}
           atomDelta={deltaHealth}
+          isResourceMaxedOut={isHealthMaxedOut}
+          regenerationRate={totalHealthRegenerationRate}
         />
       </Stack>
     </Stack>

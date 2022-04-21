@@ -30,7 +30,7 @@ export default function LevelProgress() {
 
       {isWildernessValue && (
         <Stack className="w-100" direction="horizontal" gap={3}>
-          <ImageIcon icon={progressIcon} tooltip="Progress" />
+          <ImageIcon icon={progressIcon} tooltip="Level progress" />
 
           <Progress
             label={`${progressValue}/${progressMaxValue}`}

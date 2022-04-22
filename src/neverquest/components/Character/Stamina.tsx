@@ -2,6 +2,7 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import Regeneration from "neverquest/components/Character/Regeneration";
+import FloatingText from "neverquest/components/FloatingText";
 import ImageIcon from "neverquest/components/ImageIcon";
 import ResourceMeter from "neverquest/components/ResourceMeter";
 import { UIAttachment } from "neverquest/env";
@@ -23,12 +24,15 @@ export default function Stamina() {
       <ImageIcon icon={icon} tooltip="Stamina" />
 
       <Stack>
-        <ResourceMeter
-          attached={UIAttachment.Below}
-          atom={currentStamina}
-          atomDelta={deltaStamina}
-          atomMaximum={maximumStamina}
-        />
+        <Stack direction="horizontal" className="w-100">
+          <ResourceMeter
+            attached={UIAttachment.Below}
+            atom={currentStamina}
+            atomMaximum={maximumStamina}
+          />
+
+          <FloatingText atom={deltaStamina} />
+        </Stack>
 
         <Regeneration
           isResourceMaxedOut={isStaminaMaxedOut}

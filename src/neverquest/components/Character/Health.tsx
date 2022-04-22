@@ -1,6 +1,7 @@
 import Stack from "react-bootstrap/Stack";
 
 import Regeneration from "neverquest/components/Character/Regeneration";
+import FloatingText from "neverquest/components/FloatingText";
 import ImageIcon from "neverquest/components/ImageIcon";
 import ResourceMeter from "neverquest/components/ResourceMeter";
 import { UIAttachment } from "neverquest/env";
@@ -15,12 +16,15 @@ export default function Health() {
       <ImageIcon icon={icon} tooltip="Health" />
 
       <Stack>
-        <ResourceMeter
-          attached={UIAttachment.Below}
-          atom={currentHealth}
-          atomDelta={deltaHealth}
-          atomMaximum={maximumHealth}
-        />
+        <Stack direction="horizontal" className="w-100">
+          <ResourceMeter
+            attached={UIAttachment.Below}
+            atom={currentHealth}
+            atomMaximum={maximumHealth}
+          />
+
+          <FloatingText atom={deltaHealth} />
+        </Stack>
 
         <Regeneration
           atom={currentHealth}

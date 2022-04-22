@@ -44,11 +44,11 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
     if (contents) {
       setDeltaQueue([
         {
-          bottom: 5,
+          bottom: -8,
           contents,
           id: uuidv4(),
           opacity: 1,
-          right: 5,
+          right: -4,
         },
         ...deltaQueue,
       ]);
@@ -63,17 +63,28 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
         return null;
       }
 
-      const newOpacity = currentDelta.opacity - 0.01;
+      const { bottom, opacity, right } = currentDelta;
+      let newBottom = bottom;
+      let newOpacity = opacity;
+      let newRight = right;
 
-      if (newOpacity <= 0) {
-        return null;
+      // Rise a bit, then fade away towards the right.
+      if (bottom >= 10) {
+        newOpacity -= 0.1;
+        newRight -= 1;
+
+        if (newOpacity <= 0) {
+          return null;
+        }
+      } else {
+        newBottom += 0.5;
       }
 
       return {
         ...currentDelta,
-        bottom: currentDelta.bottom + 0.5,
+        bottom: newBottom,
         opacity: newOpacity,
-        right: currentDelta.right - 0.25,
+        right: newRight,
       };
     });
 

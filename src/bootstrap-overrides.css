@@ -15,6 +15,10 @@ h6 {
   font-variant: all-petite-caps;
 }
 
+small {
+  letter-spacing: 1px;
+}
+
 .modal-dialog.modal-offcanvas {
   box-shadow: 0 10px 30px 10px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 0 10px 30px 10px rgba(0, 0, 0, 0.75);

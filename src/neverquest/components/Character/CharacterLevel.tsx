@@ -8,11 +8,11 @@ import { characterLevel } from "neverquest/state/character";
 import { deltaCharacterLevel } from "neverquest/state/deltas";
 import { showCharacterLevel } from "neverquest/state/show";
 
-export default function CharacterLevel({ show = false }: { show?: boolean }) {
+export default function CharacterLevel() {
   const characterLevelValue = useRecoilValue(characterLevel);
   const showCharacterLevelValue = useRecoilValue(showCharacterLevel);
 
-  if (!show && !showCharacterLevelValue) {
+  if (!showCharacterLevelValue) {
     return null;
   }
 

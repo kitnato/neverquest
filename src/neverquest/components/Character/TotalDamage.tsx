@@ -11,7 +11,7 @@ import { UIFloatingTextType } from "neverquest/env";
 import usePreviousValue from "neverquest/hooks/usePreviousValue";
 import icon from "neverquest/icons/wolverine-claws.svg";
 import { damage } from "neverquest/state/attributes";
-import { deltaDamage } from "neverquest/state/deltas";
+import { deltaTotalDamage } from "neverquest/state/deltas";
 import { weapon } from "neverquest/state/inventory";
 import { showTotalDamageSummary } from "neverquest/state/show";
 import { totalDamage } from "neverquest/state/stats";
@@ -22,19 +22,24 @@ export default function TotalDamage() {
   const showTotalDamageBreakdownValue = useRecoilValue(showTotalDamageSummary);
   const totalDamageValue = useRecoilValue(totalDamage);
   const weaponValue = useRecoilValue(weapon);
-  const setDeltaDamage = useSetRecoilState(deltaDamage);
+  const setDeltaDamage = useSetRecoilState(deltaTotalDamage);
 
-  const previousTotalDamageValue = usePreviousValue(totalDamageValue);
+  const previousTotalDamage = usePreviousValue(totalDamageValue);
 
   useEffect(() => {
-    const difference = totalDamageValue - previousTotalDamageValue;
+    const difference = totalDamageValue - previousTotalDamage;
+
+    if (difference === 0) {
+      return;
+    }
+
     const isPositive = difference > 0;
 
     setDeltaDamage({
       color: isPositive ? UIFloatingTextType.Positive : UIFloatingTextType.Negative,
       value: `${isPositive ? "+" : ""}${difference}`,
     });
-  }, [previousTotalDamageValue, totalDamageValue]);
+  }, [previousTotalDamage, totalDamageValue]);
 
   return (
     <Stack direction="horizontal" gap={3}>
@@ -73,7 +78,7 @@ export default function TotalDamage() {
         <span>{totalDamageValue}</span>
       )}
 
-      <FloatingText atom={deltaDamage} />
+      <FloatingText atom={deltaTotalDamage} />
     </Stack>
   );
 }

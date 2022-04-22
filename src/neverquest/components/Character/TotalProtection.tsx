@@ -16,17 +16,22 @@ export default function TotalProtection() {
   const totalProtectionValue = useRecoilValue(totalProtection);
   const setDeltaProtection = useSetRecoilState(deltaProtection);
 
-  const previousTotalProtectionValue = usePreviousValue(totalProtectionValue);
+  const previousTotalProtection = usePreviousValue(totalProtectionValue);
 
   useEffect(() => {
-    const difference = totalProtectionValue - previousTotalProtectionValue;
+    const difference = totalProtectionValue - previousTotalProtection;
+
+    if (difference === 0) {
+      return;
+    }
+
     const isPositive = difference > 0;
 
     setDeltaProtection({
       color: isPositive ? UIFloatingTextType.Positive : UIFloatingTextType.Negative,
       value: `${isPositive ? "+" : ""}${difference}`,
     });
-  }, [previousTotalProtectionValue, totalProtectionValue]);
+  }, [previousTotalProtection, totalProtectionValue]);
 
   if (!showTotalProtectionValue) {
     return null;

@@ -31,7 +31,10 @@ export default function TravelButton() {
     >
       <Button
         className={hasLootedValue ? undefined : "d-none"}
-        onClick={() => switchLocation("")}
+        onClick={(event) => {
+          switchLocation("");
+          event.currentTarget.blur();
+        }}
         variant={UIVariant.Outline}
       >
         <ImageIcon icon={icon} flipped={!isWildernessValue} />

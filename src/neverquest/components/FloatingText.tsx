@@ -77,7 +77,7 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
           return null;
         }
       } else {
-        newBottom += 0.5;
+        newBottom += 0.4;
       }
 
       return {

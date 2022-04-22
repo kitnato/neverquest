@@ -9,7 +9,7 @@
   { "name": "aether", "artifact": "prefix", "creature": "prefix", "location": "prefix" },
   { "name": "aether", "creature": "prefix", "location": "prefix" },
   { "name": "aetherial", "artifact": "prefix", "creature": "prefix", "location": "prefix" },
-  { "name": "agonizing", "tags": ["lowQuality"], "artifact": "prefix", "location": "prefix" },
+  { "name": "agonizing", "artifact": "prefix", "location": "prefix" },
   { "name": "agony", "artifact": "suffix", "location": "suffix" },
   { "name": "alchemical", "artifact": "prefix" },
   { "name": "alchemy", "artifact": "suffix" },

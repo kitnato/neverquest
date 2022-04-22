@@ -27,7 +27,10 @@ export default function InventoryButton() {
         <span className="d-inline-block">
           <Button
             disabled={isAttackingValue}
-            onClick={() => setScreenShowing(true)}
+            onClick={(event) => {
+              setScreenShowing(true);
+              event.currentTarget.blur();
+            }}
             variant={UIVariant.Outline}
           >
             <ImageIcon icon={icon} />

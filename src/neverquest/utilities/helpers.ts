@@ -8,7 +8,7 @@ export function capitalizeAll(string: string) {
   return string.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
 }
 
-export function formatCountdown(ms: number) {
+export function formatMilliseconds(ms: number) {
   if (ms <= 0 || Number.isNaN(ms)) {
     return "--";
   }
@@ -39,7 +39,15 @@ export function formatCountdown(ms: number) {
     return `${secondsDisplay}s`;
   }
 
-  return `${(ms / 1000).toFixed(2)}s`;
+  return `${formatToFixed(ms / 1000)}s`;
+}
+
+// Correctly does the rounding as opposed to .toFixed().
+export function formatToFixed(number: number, digits = 2) {
+  const multiplier = Math.pow(10, digits);
+  const result = parseFloat((number * multiplier).toFixed(11));
+
+  return (Math.round(result) / multiplier).toFixed(digits);
 }
 
 export function getComputedStat({
@@ -55,7 +63,7 @@ export function getComputedStat({
 }
 
 export function getDamagePerSecond({ damage, rate }: { damage: number; rate: number }) {
-  return (damage / 2 / (rate / 1000)).toFixed(2);
+  return formatToFixed(damage / 2 / (rate / 1000));
 }
 
 export function getFromRange({ maximum, minimum }: { maximum: number; minimum: number }) {

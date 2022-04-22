@@ -95,6 +95,11 @@ export const showStamina = atom({
   default: false,
 });
 
+export const showTotalAttackRateSummary = atom({
+  key: "showTotalAttackRateSummary",
+  default: false,
+});
+
 export const showTotalDamageSummary = atom({
   key: "showTotalDamageSummary",
   default: false,

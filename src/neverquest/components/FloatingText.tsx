@@ -48,7 +48,7 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
           contents,
           id: uuidv4(),
           opacity: 1,
-          right: -4,
+          right: -6,
         },
         ...deltaQueue,
       ]);

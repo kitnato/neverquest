@@ -6,7 +6,7 @@ import { UIVariant } from "neverquest/env";
 import useAnimation from "neverquest/hooks/useAnimation";
 import { isRecovering } from "neverquest/state/character";
 import { totalRecoveryRate } from "neverquest/state/stats";
-import { formatCountdown } from "neverquest/utilities/helpers";
+import { formatMilliseconds } from "neverquest/utilities/helpers";
 
 export default function RecoveryMeter() {
   const [isRecoveringValue, setRecovering] = useRecoilState(isRecovering);
@@ -26,7 +26,7 @@ export default function RecoveryMeter() {
 
   return (
     <Progress
-      label={formatCountdown(recoveryRateValue - deltaRecovery)}
+      label={formatMilliseconds(recoveryRateValue - deltaRecovery)}
       value={(deltaRecovery / recoveryRateValue) * 100}
       variant={UIVariant.Secondary}
     />

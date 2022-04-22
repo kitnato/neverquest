@@ -1,16 +1,16 @@
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-import Damage from "neverquest/components/Character/Damage";
 import CritChance from "neverquest/components/Character/CritChance";
 import CritDamage from "neverquest/components/Character/CritDamage";
 import DamagePerSecond from "neverquest/components/Character/DamagePerSecond";
+import TotalDamage from "neverquest/components/Character/TotalDamage";
 
 export default function Offense() {
   return (
     <Row>
       <Col>
-        <Damage />
+        <TotalDamage />
       </Col>
 
       <Col>

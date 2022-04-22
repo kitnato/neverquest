@@ -1,7 +1,7 @@
 import Stack from "react-bootstrap/Stack";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import AttackMeter from "neverquest/components/Character/AttackMeter";
+import AttackMeterDisplay from "neverquest/components/Character/AttackMeterDisplay";
 import icon from "neverquest/icons/striking-splinter.svg";
 
 export default function Attack() {
@@ -9,7 +9,7 @@ export default function Attack() {
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Attack rate" />
 
-      <AttackMeter />
+      <AttackMeterDisplay />
     </Stack>
   );
 }

@@ -5,7 +5,7 @@ import Progress from "neverquest/components/Progress";
 import { DeltaDisplay, UIAttachment, UIFloatingTextType, UISize, UIVariant } from "neverquest/env";
 import useAnimation from "neverquest/hooks/useAnimation";
 import { isRecovering } from "neverquest/state/character";
-import { formatCountdown } from "neverquest/utilities/helpers";
+import { formatMilliseconds } from "neverquest/utilities/helpers";
 
 export default function Regeneration({
   regenerationRate,
@@ -52,7 +52,7 @@ export default function Regeneration({
       return "Recovering ...";
     }
 
-    return `${deltaRegeneration === 0 ? "Regeneration" : "Regenerating"} ${formatCountdown(
+    return `${deltaRegeneration === 0 ? "Regeneration" : "Regenerating"} ${formatMilliseconds(
       regenerationRateValue - deltaRegeneration
     )}`;
   })();

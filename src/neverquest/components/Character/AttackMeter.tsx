@@ -9,16 +9,16 @@ import { isAttacking, isLooting, isRecovering } from "neverquest/state/character
 import { isMonsterDead } from "neverquest/state/monster";
 import { isStaminaSufficient } from "neverquest/state/resources";
 import { totalAttackRate } from "neverquest/state/stats";
-import { formatCountdown } from "neverquest/utilities/helpers";
+import { formatMilliseconds } from "neverquest/utilities/helpers";
 
 export default function AttackMeter() {
   const attack = useAttack();
-  const totalAttackRateValue = useRecoilValue(totalAttackRate);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isLootingValue = useRecoilValue(isLooting);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isRecoveringValue = useRecoilValue(isRecovering);
   const isStaminaSufficientValue = useRecoilValue(isStaminaSufficient);
+  const totalAttackRateValue = useRecoilValue(totalAttackRate);
   const [deltaAttack, setDeltaAttack] = useState(0);
 
   useAnimation((deltaTime) => {
@@ -47,7 +47,7 @@ export default function AttackMeter() {
       return "EXHAUSTED";
     }
 
-    return formatCountdown(totalAttackRateValue - deltaAttack);
+    return formatMilliseconds(totalAttackRateValue - deltaAttack);
   })();
 
   return (

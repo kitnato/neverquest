@@ -12,7 +12,7 @@ import {
   isMonsterEngaged,
   totalAttackRateMonster,
 } from "neverquest/state/monster";
-import { formatCountdown } from "neverquest/utilities/helpers";
+import { formatMilliseconds } from "neverquest/utilities/helpers";
 
 export default function MonsterAttackMeter() {
   const isAttackingValue = useRecoilValue(isAttacking);
@@ -50,7 +50,7 @@ export default function MonsterAttackMeter() {
 
   return (
     <Progress
-      label={formatCountdown(totalAttackRateMonsterValue - deltaAttack)}
+      label={formatMilliseconds(totalAttackRateMonsterValue - deltaAttack)}
       value={(deltaAttack / totalAttackRateMonsterValue) * 100}
       variant={UIVariant.Secondary}
     />

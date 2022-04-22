@@ -11,7 +11,7 @@ import { deltaProtection } from "neverquest/state/deltas";
 import { showTotalProtection } from "neverquest/state/show";
 import { totalProtection } from "neverquest/state/stats";
 
-export default function Protection() {
+export default function TotalProtection() {
   const showTotalProtectionValue = useRecoilValue(showTotalProtection);
   const totalProtectionValue = useRecoilValue(totalProtection);
   const setDeltaProtection = useSetRecoilState(deltaProtection);

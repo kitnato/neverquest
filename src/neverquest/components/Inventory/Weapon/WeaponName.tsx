@@ -5,7 +5,11 @@ import { useRecoilValue } from "recoil";
 
 import { Weapon } from "neverquest/env";
 import { showDamagePerSecond } from "neverquest/state/show";
-import { capitalizeAll, getDamagePerSecond } from "neverquest/utilities/helpers";
+import {
+  capitalizeAll,
+  formatMilliseconds,
+  getDamagePerSecond,
+} from "neverquest/utilities/helpers";
 
 export default function WeaponName({ weapon }: { weapon: Weapon }) {
   const showDPSValue = useRecoilValue(showDamagePerSecond);
@@ -31,6 +35,12 @@ export default function WeaponName({ weapon }: { weapon: Weapon }) {
                         })} DPS)`
                       : ""
                   }`}</td>
+                </tr>
+
+                <tr>
+                  <td className="text-end">Attack rate:</td>
+
+                  <td>{formatMilliseconds(rate)}</td>
                 </tr>
 
                 <tr>

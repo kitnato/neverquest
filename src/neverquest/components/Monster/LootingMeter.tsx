@@ -7,7 +7,7 @@ import useAnimation from "neverquest/hooks/useAnimation";
 import useNewMonster from "neverquest/hooks/useNewMonster";
 import useRewardKill from "neverquest/hooks/useRewardKill";
 import { isLooting, lootingRate } from "neverquest/state/character";
-import { formatCountdown } from "neverquest/utilities/helpers";
+import { formatMilliseconds } from "neverquest/utilities/helpers";
 
 export default function LootingMeter() {
   const [isLootingValue, setLooting] = useRecoilState(isLooting);
@@ -31,7 +31,7 @@ export default function LootingMeter() {
 
   return (
     <Progress
-      label={formatCountdown(lootingRateValue - deltaLooting)}
+      label={formatMilliseconds(lootingRateValue - deltaLooting)}
       value={(deltaLooting / lootingRateValue) * 100}
       variant={UIVariant.Secondary}
     />

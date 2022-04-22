@@ -17,9 +17,9 @@ import { showTotalDamageSummary } from "neverquest/state/show";
 import { totalDamage } from "neverquest/state/stats";
 import { getComputedStat } from "neverquest/utilities/helpers";
 
-export default function Damage() {
+export default function TotalDamage() {
   const damageValue = useRecoilValue(damage);
-  const showTotalDamageSummaryValue = useRecoilValue(showTotalDamageSummary);
+  const showTotalDamageBreakdownValue = useRecoilValue(showTotalDamageSummary);
   const totalDamageValue = useRecoilValue(totalDamage);
   const weaponValue = useRecoilValue(weapon);
   const setDeltaDamage = useSetRecoilState(deltaDamage);
@@ -40,7 +40,7 @@ export default function Damage() {
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Total damage" />
 
-      {showTotalDamageSummaryValue ? (
+      {showTotalDamageBreakdownValue ? (
         <OverlayTrigger
           overlay={
             <Popover>

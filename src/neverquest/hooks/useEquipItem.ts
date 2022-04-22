@@ -15,6 +15,7 @@ import {
   showArmor,
   showShield,
   showStamina,
+  showTotalAttackRateSummary,
   showTotalDamageSummary,
   showTotalProtection,
   showWeapon,
@@ -25,7 +26,10 @@ export default function useEquipItem() {
   const [showArmorValue, setShowArmor] = useRecoilState(showArmor);
   const [showShieldValue, setShowShield] = useRecoilState(showShield);
   const [showStaminaValue, setShowStamina] = useRecoilState(showStamina);
-  const [showTotalDamageSummaryValue, setShowTotalDamageSummary] =
+  const [showTotalAttackRateBreakdownValue, setShowTotalAttackRateSummary] = useRecoilState(
+    showTotalAttackRateSummary
+  );
+  const [showTotalDamageBreakdownValue, setShowTotalDamageSummary] =
     useRecoilState(showTotalDamageSummary);
   const [showTotalProtectionValue, setShowTotalProtection] = useRecoilState(showTotalProtection);
   const [showWeaponValue, setShowWeapon] = useRecoilState(showWeapon);
@@ -89,7 +93,11 @@ export default function useEquipItem() {
           }
         }
 
-        if (!showTotalDamageSummaryValue) {
+        if (!showTotalAttackRateBreakdownValue) {
+          setShowTotalAttackRateSummary(true);
+        }
+
+        if (!showTotalDamageBreakdownValue) {
           setShowTotalDamageSummary(true);
         }
 

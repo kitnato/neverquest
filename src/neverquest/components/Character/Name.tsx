@@ -16,15 +16,16 @@ export default function Character() {
       <ImageIcon icon={icon} tooltip="Name" />
 
       <FormControl
+        className="hover-grow"
         onBlur={() => setEditing(false)}
-        onChange={(event) => setName(event.target.value)}
-        onClick={(event) => {
+        onChange={({ target }) => setName(target.value)}
+        onClick={({ currentTarget }) => {
           setEditing(true);
-          event.currentTarget.select();
+          currentTarget.setSelectionRange(0, 0);
+          currentTarget.select();
         }}
         onKeyPress={({ key }) => key === "Enter" && setEditing(false)}
         plaintext={!isEditing}
-        readOnly={!isEditing}
         value={nameValue}
       />
     </Stack>

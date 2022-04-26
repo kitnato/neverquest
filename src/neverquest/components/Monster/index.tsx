@@ -1,17 +1,10 @@
 import { useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
-import MonsterAttack from "neverquest/components/Monster/MonsterAttack";
-import MonsterHealth from "neverquest/components/Monster/MonsterHealth";
-import MonsterDamage from "neverquest/components/Monster/MonsterDamage";
-import MonsterDamagePerSecond from "neverquest/components/Monster/MonsterDamagePerSecond";
-import MonsterName from "neverquest/components/Monster/MonsterName";
-import Looting from "neverquest/components/Monster/Looting";
 import ImageIcon from "neverquest/components/ImageIcon";
+import MonsterStatus from "neverquest/components/Monster/MonsterStatus";
 import useNewMonster from "neverquest/hooks/useNewMonster";
 import unknownIcon from "neverquest/icons/evil-eyes.svg";
 import { isAttacking, isLooting } from "neverquest/state/character";
@@ -43,36 +36,18 @@ export default function Monster() {
     }
   }, [isAttackingValue, isMonsterEngagedValue, isMonsterDeadValue]);
 
+  if (isMonsterEngagedValue) {
+    return <MonsterStatus />;
+  }
+
   return (
     <Card className="animate__animated animate__flipInX">
       <Card.Body>
-        {isMonsterEngagedValue ? (
-          <Stack gap={3}>
-            <MonsterName />
+        <Stack direction="horizontal" gap={3}>
+          <ImageIcon icon={unknownIcon} tooltip={UNKNOWN} />
 
-            <MonsterHealth />
-
-            <Row>
-              <Col>
-                <MonsterAttack />
-              </Col>
-
-              <Col>
-                <Looting />
-              </Col>
-            </Row>
-
-            <MonsterDamage />
-
-            <MonsterDamagePerSecond />
-          </Stack>
-        ) : (
-          <Stack direction="horizontal" gap={3}>
-            <ImageIcon icon={unknownIcon} tooltip={UNKNOWN} />
-
-            <span className="fst-italic">The darkness stirs.</span>
-          </Stack>
-        )}
+          <span className="fst-italic">The darkness stirs.</span>
+        </Stack>
       </Card.Body>
     </Card>
   );

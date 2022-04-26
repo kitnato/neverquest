@@ -30,13 +30,13 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
 
     if (Array.isArray(deltaValue)) {
       contents = (
-        <>
+        <div>
           {deltaValue.map(({ color, value }) => (
             <span className={color || ""} key={value}>
               {value}
             </span>
           ))}
-        </>
+        </div>
       );
     } else {
       const { color, value } = deltaValue;
@@ -77,7 +77,7 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
       let newScale = scale;
 
       // First swell, then shrink quickly while rising to a set height, finally fade away towards the right.
-      if (!hasGrown && scale < 1.3) {
+      if (!hasGrown && scale < 1.4) {
         newScale += 0.06;
       } else {
         newHasGrown = true;
@@ -87,7 +87,7 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
         }
       }
 
-      if (bottom >= 10) {
+      if (bottom >= 12) {
         newOpacity -= 0.1;
         newRight -= 1;
 
@@ -95,7 +95,7 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
           return null;
         }
       } else {
-        newBottom += 0.4;
+        newBottom += 0.5;
       }
 
       return {

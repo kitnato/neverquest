@@ -10,7 +10,7 @@ import { formatMilliseconds } from "neverquest/utilities/helpers";
 
 export default function RecoveryMeter() {
   const [isRecoveringValue, setRecovering] = useRecoilState(isRecovering);
-  const recoveryRateValue = useRecoilValue(totalRecoveryRate);
+  const totalRecoveryRateValue = useRecoilValue(totalRecoveryRate);
   const [deltaRecovery, setDeltaRecovery] = useState(0);
 
   useAnimation((deltaTime) => {
@@ -18,17 +18,17 @@ export default function RecoveryMeter() {
   }, !isRecoveringValue);
 
   useEffect(() => {
-    if (deltaRecovery >= recoveryRateValue) {
+    if (deltaRecovery >= totalRecoveryRateValue) {
       setDeltaRecovery(0);
       setRecovering(false);
     }
-  }, [deltaRecovery, recoveryRateValue, setRecovering]);
+  }, [deltaRecovery, totalRecoveryRateValue, setRecovering]);
 
   return (
     <Progress
       disableTransitions
-      label={formatMilliseconds(recoveryRateValue - deltaRecovery)}
-      value={(deltaRecovery / recoveryRateValue) * 100}
+      label={formatMilliseconds(totalRecoveryRateValue - deltaRecovery)}
+      value={(deltaRecovery / totalRecoveryRateValue) * 100}
       variant={UIVariant.Secondary}
     />
   );

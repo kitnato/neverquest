@@ -58,6 +58,11 @@ export const name = atom({
   default: UNKNOWN,
 });
 
+export const statusElement = atom<HTMLDivElement | null>({
+  key: "statusElement",
+  default: null,
+});
+
 // SELECTORS
 
 export const attributesIncreasable = selector({

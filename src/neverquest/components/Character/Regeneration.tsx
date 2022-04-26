@@ -1,70 +1,59 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSetRecoilState, useRecoilValue, RecoilState, RecoilValueReadOnly } from "recoil";
 
-import Progress from "neverquest/components/Progress";
-import { DeltaDisplay, UIAttachment, UIFloatingTextType, UISize, UIVariant } from "neverquest/env";
-import useAnimation from "neverquest/hooks/useAnimation";
-import { isRecovering } from "neverquest/state/character";
+import RegenerationMeter from "neverquest/components/Character/RegenerationMeter";
+import { DeltaDisplay, UIFloatingTextType } from "neverquest/env";
 import { formatMilliseconds } from "neverquest/utilities/helpers";
+import usePreviousValue from "neverquest/hooks/usePreviousValue";
+import FloatingText from "../FloatingText";
 
 export default function Regeneration({
   regenerationRate,
-  atom,
-  atomDelta,
+  atomResource,
+  atomResourceDelta,
+  atomDeltaRegenerationRate,
   isResourceMaxedOut,
 }: {
   regenerationRate: RecoilValueReadOnly<number>;
-  atom: RecoilState<number>;
-  atomDelta: RecoilState<DeltaDisplay>;
+  atomResource: RecoilState<number>;
+  atomResourceDelta: RecoilState<DeltaDisplay>;
+  atomDeltaRegenerationRate: RecoilState<DeltaDisplay>;
   isResourceMaxedOut: RecoilValueReadOnly<boolean>;
 }) {
-  const isRecoveringValue = useRecoilValue(isRecovering);
   const regenerationRateValue = useRecoilValue(regenerationRate);
-  const isResourceMaxedOutValue = useRecoilValue(isResourceMaxedOut);
-  const setCurrentResource = useSetRecoilState(atom);
-  const setDeltaResource = useSetRecoilState(atomDelta);
-  const [deltaRegeneration, setDeltaRegeneration] = useState(0);
+  const setDeltaRegenerationRate = useSetRecoilState(atomDeltaRegenerationRate);
 
-  useAnimation((deltaTime) => {
-    setDeltaRegeneration((currentDelta) => currentDelta + deltaTime);
-  }, isResourceMaxedOutValue || isRecoveringValue);
+  const previousRegenerationRateValue = usePreviousValue(regenerationRateValue);
 
   useEffect(() => {
-    if (deltaRegeneration >= regenerationRateValue) {
-      setDeltaRegeneration(0);
-      setCurrentResource((currentResource) => currentResource + 1);
-      setDeltaResource({
-        color: UIFloatingTextType.Positive,
-        value: "+1",
-      });
-    }
-  }, [deltaRegeneration, regenerationRateValue]);
-
-  // Catches any leftover increments after regeneration is complete.
-  useEffect(() => {
-    if (deltaRegeneration > 0 && isResourceMaxedOutValue) {
-      setDeltaRegeneration(0);
-    }
-  }, [deltaRegeneration, isResourceMaxedOutValue]);
-
-  const label = (() => {
-    if (isRecoveringValue) {
-      return "Recovering ...";
+    if (previousRegenerationRateValue === null) {
+      return;
     }
 
-    return `${deltaRegeneration === 0 ? "Regeneration" : "Regenerating"} ${formatMilliseconds(
-      regenerationRateValue - deltaRegeneration
-    )}`;
-  })();
+    const difference = regenerationRateValue - previousRegenerationRateValue;
+
+    if (difference === 0) {
+      return;
+    }
+
+    const isPositive = difference > 0;
+
+    setDeltaRegenerationRate({
+      color: isPositive ? UIFloatingTextType.Negative : UIFloatingTextType.Positive,
+      value: `${isPositive ? "+" : "-"}${formatMilliseconds(Math.abs(difference))}`,
+    });
+  }, [previousRegenerationRateValue, regenerationRateValue]);
 
   return (
-    <Progress
-      attached={UIAttachment.Above}
-      disableTransitions
-      label={label}
-      size={UISize.Tiny}
-      value={(deltaRegeneration / regenerationRateValue) * 100}
-      variant={UIVariant.Secondary}
-    />
+    <>
+      <RegenerationMeter
+        regenerationRate={regenerationRate}
+        atomResource={atomResource}
+        atomResourceDelta={atomResourceDelta}
+        isResourceMaxedOut={isResourceMaxedOut}
+      />
+
+      <FloatingText atom={atomDeltaRegenerationRate} />
+    </>
   );
 }

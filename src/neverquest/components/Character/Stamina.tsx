@@ -7,7 +7,7 @@ import ImageIcon from "neverquest/components/ImageIcon";
 import ResourceMeter from "neverquest/components/ResourceMeter";
 import { UIAttachment } from "neverquest/env";
 import icon from "neverquest/icons/lungs.svg";
-import { deltaStamina } from "neverquest/state/deltas";
+import { deltaStamina, deltaTotalStaminaRegenerationRate } from "neverquest/state/deltas";
 import { currentStamina, isStaminaMaxedOut, maximumStamina } from "neverquest/state/resources";
 import { showStamina } from "neverquest/state/show";
 import { totalStaminaRegenerationRate } from "neverquest/state/stats";
@@ -20,11 +20,7 @@ export default function Stamina() {
   }
 
   return (
-    <Stack
-      className="animate__animated animate__flipInX"
-      direction="horizontal"
-      gap={3}
-    >
+    <Stack className="animate__animated animate__flipInX" direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Stamina" />
 
       <Stack>
@@ -39,10 +35,11 @@ export default function Stamina() {
         </Stack>
 
         <Regeneration
+          atomResource={currentStamina}
+          atomResourceDelta={deltaStamina}
+          atomDeltaRegenerationRate={deltaTotalStaminaRegenerationRate}
           isResourceMaxedOut={isStaminaMaxedOut}
           regenerationRate={totalStaminaRegenerationRate}
-          atom={currentStamina}
-          atomDelta={deltaStamina}
         />
       </Stack>
     </Stack>

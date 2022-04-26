@@ -27,6 +27,10 @@ export default function TotalDamage() {
   const previousTotalDamage = usePreviousValue(totalDamageValue);
 
   useEffect(() => {
+    if (previousTotalDamage === null) {
+      return;
+    }
+
     const difference = totalDamageValue - previousTotalDamage;
 
     if (difference === 0) {

@@ -26,6 +26,11 @@ export const monsterName = atom({
   default: "",
 });
 
+export const monsterStatusElement = atom<HTMLDivElement | null>({
+  key: "monsterStatusElement",
+  default: null,
+});
+
 // SELECTORS
 
 export const isMonsterDead = selector({

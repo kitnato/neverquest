@@ -19,6 +19,10 @@ export default function TotalProtection() {
   const previousTotalProtection = usePreviousValue(totalProtectionValue);
 
   useEffect(() => {
+    if (previousTotalProtection === null) {
+      return;
+    }
+
     const difference = totalProtectionValue - previousTotalProtection;
 
     if (difference === 0) {
@@ -38,11 +42,7 @@ export default function TotalProtection() {
   }
 
   return (
-    <Stack
-      className="animate__animated animate__flipInX"
-      direction="horizontal"
-      gap={3}
-    >
+    <Stack className="animate__animated animate__flipInX" direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Total protection" />
 
       <span>{totalProtectionValue}</span>

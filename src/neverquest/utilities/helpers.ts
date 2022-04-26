@@ -1,3 +1,36 @@
+// Animates an element once according to its Animate.css type.
+export function animateElement(element: HTMLDivElement | null, animation: string, speed?: string) {
+  if (element === null) {
+    return;
+  }
+
+  const { addEventListener, classList } = element;
+
+  const PREFIX = "animate__";
+  const animationClass = `${PREFIX}animated`;
+  const animationName = `${PREFIX}${animation}`;
+  const animationSpeed = speed ? `${PREFIX}${speed}` : null;
+
+  classList.add(animationClass, animationName);
+
+  if (animationSpeed) {
+    classList.add(animationSpeed);
+  }
+
+  addEventListener(
+    "animationend",
+    (event: AnimationEvent) => {
+      event.stopPropagation();
+      classList.remove(animationClass, animationName);
+
+      if (animationSpeed) {
+        classList.remove(animationSpeed);
+      }
+    },
+    { once: true }
+  );
+}
+
 export function capitalizeAll(string: string) {
   // ^ matches the beginning of the string.
   // \w matches any word character.

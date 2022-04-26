@@ -19,6 +19,12 @@ small {
   letter-spacing: 1px;
 }
 
+.hover-grow:hover:not(:focus) {
+  transform: scale(1.2);
+  transform-origin: center left;
+  transition: transform 0.5s;
+}
+
 .modal-dialog.modal-offcanvas {
   box-shadow: 0 10px 30px 10px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 0 10px 30px 10px rgba(0, 0, 0, 0.75);

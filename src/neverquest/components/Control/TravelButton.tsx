@@ -24,13 +24,17 @@ export default function TravelButton() {
     return isWildernessValue ? "Caravan" : "Wilderness";
   })();
 
+  if (!hasLootedValue) {
+    return null;
+  }
+
   return (
     <OverlayTrigger
       overlay={<Tooltip>{`${isWildernessValue ? "Go to" : "Return to"} ${destination}`}</Tooltip>}
       placement="top"
     >
       <Button
-        className={hasLootedValue ? undefined : "d-none"}
+        className={isWildernessValue ? "animate__animated animate__pulse animate__infinite" : ""}
         onClick={(event) => {
           switchLocation("");
           event.currentTarget.blur();

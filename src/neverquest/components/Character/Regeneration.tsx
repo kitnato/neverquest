@@ -60,6 +60,7 @@ export default function Regeneration({
   return (
     <Progress
       attached={UIAttachment.Above}
+      disableTransitions
       label={label}
       size={UISize.Tiny}
       value={(deltaRegeneration / regenerationRateValue) * 100}

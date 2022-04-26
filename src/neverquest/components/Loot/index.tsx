@@ -21,7 +21,7 @@ export default function Loot() {
     <>
       <hr />
 
-      <Card>
+      <Card className="animate__animated animate__flipInX">
         <Card.Body>
           <Stack direction="horizontal" gap={5}>
             <ImageIcon icon={hasLootedValue ? lootedIcon : lootIcon} tooltip="Loot" />

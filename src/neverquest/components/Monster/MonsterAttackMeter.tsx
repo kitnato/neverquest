@@ -50,6 +50,7 @@ export default function MonsterAttackMeter() {
 
   return (
     <Progress
+      disableTransitions
       label={formatMilliseconds(totalAttackRateMonsterValue - deltaAttack)}
       value={(deltaAttack / totalAttackRateMonsterValue) * 100}
       variant={UIVariant.Secondary}

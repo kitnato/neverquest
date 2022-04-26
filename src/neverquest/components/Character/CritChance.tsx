@@ -15,7 +15,11 @@ export default function CritChance() {
   }
 
   return (
-    <Stack direction="horizontal" gap={3}>
+    <Stack
+      className="animate__animated animate__flipInX"
+      direction="horizontal"
+      gap={3}
+    >
       <ImageIcon icon={icon} tooltip="Critical hit chance" />
 
       <span>{criticalChanceValue * 100}%</span>

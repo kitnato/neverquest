@@ -26,6 +26,7 @@ export default function RecoveryMeter() {
 
   return (
     <Progress
+      disableTransitions
       label={formatMilliseconds(recoveryRateValue - deltaRecovery)}
       value={(deltaRecovery / recoveryRateValue) * 100}
       variant={UIVariant.Secondary}

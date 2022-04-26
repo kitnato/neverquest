@@ -17,7 +17,7 @@ export default function Defense() {
   }
 
   return (
-    <Row>
+    <Row className="animate__animated animate__flipInX">
       <Col>
         <TotalProtection />
       </Col>

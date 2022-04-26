@@ -44,7 +44,7 @@ export default function Monster() {
   }, [isAttackingValue, isMonsterEngagedValue, isMonsterDeadValue]);
 
   return (
-    <Card>
+    <Card className="animate__animated animate__flipInX">
       <Card.Body>
         {isMonsterEngagedValue ? (
           <Stack gap={3}>

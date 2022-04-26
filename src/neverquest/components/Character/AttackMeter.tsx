@@ -52,6 +52,7 @@ export default function AttackMeter() {
 
   return (
     <Progress
+      disableTransitions
       label={label}
       value={(deltaAttack / totalAttackRateValue) * 100}
       variant={UIVariant.Secondary}

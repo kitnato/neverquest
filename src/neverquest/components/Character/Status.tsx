@@ -13,7 +13,7 @@ import Stamina from "neverquest/components/Character/Stamina";
 
 export default function Status() {
   return (
-    <Card>
+    <Card className="animate__animated animate__flipInX">
       <Card.Body>
         <Stack gap={3}>
           <Name />

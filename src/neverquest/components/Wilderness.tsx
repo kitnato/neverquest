@@ -13,7 +13,7 @@ export default function Wilderness() {
   return (
     <Stack gap={3}>
       {isLevelCompletedValue ? (
-        <Card>
+        <Card className="animate__animated animate__flipInX">
           <Card.Body>
             <Stack direction="horizontal" gap={5}>
               <ImageIcon icon={icon} tooltip="Monster remains" />

@@ -15,7 +15,11 @@ export default function DamagePerSecond() {
   }
 
   return (
-    <Stack direction="horizontal" gap={3}>
+    <Stack
+      className="animate__animated animate__flipInX"
+      direction="horizontal"
+      gap={3}
+    >
       <ImageIcon icon={icon} tooltip="Damage per second (DPS)" />
 
       <span>{damagePerSecondValue}</span>

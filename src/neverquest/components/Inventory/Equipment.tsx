@@ -18,7 +18,7 @@ export default function Equipment() {
   }
 
   return (
-    <Card>
+    <Card className="animate__animated animate__flipInX">
       <Card.Body>
         <Row>
           <Col>

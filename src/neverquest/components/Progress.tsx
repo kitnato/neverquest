@@ -6,12 +6,14 @@ import { UIAttachment, UISize, UIVariant } from "neverquest/env";
 
 export default function Progress({
   attached,
+  disableTransitions = false,
   label,
   size = UISize.Normal,
   value,
   variant,
 }: {
   attached?: UIAttachment;
+  disableTransitions?: boolean;
   label: string;
   size?: UISize;
   value: number;
@@ -37,7 +39,7 @@ export default function Progress({
   }
 
   return (
-    <div className="position-relative w-100">
+    <div className={`position-relative w-100 ${disableTransitions ? "no-transitions" : ""}`}>
       {size === UISize.Normal && (
         <>
           <ProgressBar now={value} style={style} variant={variant} />

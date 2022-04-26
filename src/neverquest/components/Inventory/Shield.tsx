@@ -16,7 +16,7 @@ export default function Shield() {
   }
 
   return (
-    <Stack direction="horizontal" gap={3}>
+    <Stack className="animate__animated animate__flipInX" direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Shield" />
 
       <span>{shieldValue.name}</span>

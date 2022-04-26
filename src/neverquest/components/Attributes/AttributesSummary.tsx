@@ -14,7 +14,7 @@ export default function AttributesSummary() {
   }
 
   return (
-    <Card>
+    <Card className="animate__animated animate__flipInX">
       <Card.Body>
         <Stack direction="horizontal" gap={5}>
           <CharacterLevel />

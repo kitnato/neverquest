@@ -15,14 +15,14 @@ export default function CollectLootButton() {
   const hasLootedValue = useRecoilValue(hasLooted);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
 
-  if (!isLevelCompletedValue) {
+  if (hasLootedValue || !isLevelCompletedValue) {
     return null;
   }
 
   return (
     <OverlayTrigger overlay={<Tooltip>Collect loot</Tooltip>} placement="top">
       <Button
-        className={hasLootedValue ? "d-none" : undefined}
+        className="animate__animated animate__flipInX"
         onClick={() => loot({})}
         variant={UIVariant.Outline}
       >

@@ -15,7 +15,11 @@ export default function Dodge() {
   }
 
   return (
-    <Stack direction="horizontal" gap={3}>
+    <Stack
+      className="animate__animated animate__flipInX"
+      direction="horizontal"
+      gap={3}
+    >
       <ImageIcon icon={icon} tooltip="Dodge" />
 
       <span>{dodgeChanceValue * 100}%</span>

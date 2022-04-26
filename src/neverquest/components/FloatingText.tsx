@@ -9,9 +9,12 @@ import { DELTA_DEFAULT } from "neverquest/utilities/constants";
 type FloatingTextStyle = {
   bottom: number;
   contents: JSX.Element;
+  hasGrown: boolean;
   id: string;
   opacity: number;
   right: number;
+  scale: number;
+  transform: string;
 } | null;
 
 export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay> }) {
@@ -46,9 +49,12 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
         {
           bottom: -8,
           contents,
+          hasGrown: false,
           id: uuidv4(),
           opacity: 1,
           right: -6,
+          scale: 1,
+          transform: "scale(0.9)",
         },
         ...deltaQueue,
       ]);
@@ -63,12 +69,24 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
         return null;
       }
 
-      const { bottom, opacity, right } = currentDelta;
+      const { bottom, hasGrown, opacity, right, scale } = currentDelta;
       let newBottom = bottom;
+      let newHasGrown = hasGrown;
       let newOpacity = opacity;
       let newRight = right;
+      let newScale = scale;
 
-      // Rise a bit, then fade away towards the right.
+      // First swell, then shrink quickly while rising to a set height, finally fade away towards the right.
+      if (!hasGrown && scale < 1.3) {
+        newScale += 0.06;
+      } else {
+        newHasGrown = true;
+
+        if (scale > 1) {
+          newScale -= 0.03;
+        }
+      }
+
       if (bottom >= 10) {
         newOpacity -= 0.1;
         newRight -= 1;
@@ -83,8 +101,11 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
       return {
         ...currentDelta,
         bottom: newBottom,
+        hasGrown: newHasGrown,
         opacity: newOpacity,
         right: newRight,
+        scale: newScale,
+        transform: `scale(${scale})`,
       };
     });
 
@@ -98,10 +119,14 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
           return;
         }
 
-        const { id, contents, ...style } = delta;
+        const { bottom, contents, id, opacity, right, transform } = delta;
 
         return (
-          <small className="position-absolute" key={id} style={style}>
+          <small
+            className="position-absolute"
+            key={id}
+            style={{ bottom, opacity, right, transform }}
+          >
             <strong>{contents}</strong>
           </small>
         );

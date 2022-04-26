@@ -14,7 +14,7 @@ export default function StoredLoot() {
   }
 
   return (
-    <Card>
+    <Card className="animate__animated animate__flipInX">
       <Card.Body>
         <LootDisplay />
       </Card.Body>

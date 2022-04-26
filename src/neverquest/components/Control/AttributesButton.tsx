@@ -36,7 +36,7 @@ export default function AttributesButton() {
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>Attributes</Tooltip>} placement="top">
-        <span className="d-inline-block">
+        <span className="animate__animated animate__flipInX d-inline-block">
           <Button
             disabled={isAttackingValue || isMonsterEngagedValue}
             className="position-relative"

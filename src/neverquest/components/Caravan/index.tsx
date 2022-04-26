@@ -55,7 +55,7 @@ export default function Caravan() {
 
   return (
     <>
-      <Card>
+      <Card className="animate__animated animate__flipInX">
         <Card.Body>
           <Stack gap={3}>
             {memberOrder.map(

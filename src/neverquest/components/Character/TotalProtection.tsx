@@ -38,7 +38,11 @@ export default function TotalProtection() {
   }
 
   return (
-    <Stack direction="horizontal" gap={3}>
+    <Stack
+      className="animate__animated animate__flipInX"
+      direction="horizontal"
+      gap={3}
+    >
       <ImageIcon icon={icon} tooltip="Total protection" />
 
       <span>{totalProtectionValue}</span>

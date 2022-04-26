@@ -13,5 +13,7 @@ export default function Lootable({
     return null;
   }
 
-  return <Component value={resourceValue} />;
+  return (
+    <Component className="animate__animated animate__flipInX" value={resourceValue} />
+  );
 }

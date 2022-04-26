@@ -31,6 +31,7 @@ export default function LootingMeter() {
 
   return (
     <Progress
+      disableTransitions
       label={formatMilliseconds(lootingRateValue - deltaLooting)}
       value={(deltaLooting / lootingRateValue) * 100}
       variant={UIVariant.Secondary}

@@ -1,14 +1,12 @@
-import { useEffect } from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import Stack from "react-bootstrap/Stack";
 import Table from "react-bootstrap/Table";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import FloatingText from "neverquest/components/FloatingText";
 import ImageIcon from "neverquest/components/ImageIcon";
-import { UIFloatingTextType } from "neverquest/env";
-import usePreviousValue from "neverquest/hooks/usePreviousValue";
+import useDeltaText from "neverquest/hooks/useDeltaText";
 import icon from "neverquest/icons/wolverine-claws.svg";
 import { damage } from "neverquest/state/attributes";
 import { deltaTotalDamage } from "neverquest/state/deltas";
@@ -22,28 +20,11 @@ export default function TotalDamage() {
   const showTotalDamageBreakdownValue = useRecoilValue(showTotalDamageSummary);
   const totalDamageValue = useRecoilValue(totalDamage);
   const weaponValue = useRecoilValue(weapon);
-  const setDeltaDamage = useSetRecoilState(deltaTotalDamage);
 
-  const previousTotalDamage = usePreviousValue(totalDamageValue);
-
-  useEffect(() => {
-    if (previousTotalDamage === null) {
-      return;
-    }
-
-    const difference = totalDamageValue - previousTotalDamage;
-
-    if (difference === 0) {
-      return;
-    }
-
-    const isPositive = difference > 0;
-
-    setDeltaDamage({
-      color: isPositive ? UIFloatingTextType.Positive : UIFloatingTextType.Negative,
-      value: `${isPositive ? "+" : ""}${difference}`,
-    });
-  }, [previousTotalDamage, totalDamageValue]);
+  useDeltaText({
+    deltaAtom: deltaTotalDamage,
+    valueAtom: totalDamage,
+  });
 
   return (
     <Stack direction="horizontal" gap={3}>

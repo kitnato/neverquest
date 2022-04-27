@@ -43,11 +43,6 @@ export const deltaCharacterLevel = atom<DeltaDisplay>({
   default: DELTA_DEFAULT,
 });
 
-export const deltaProtection = atom<DeltaDisplay>({
-  key: "deltaProtection",
-  default: DELTA_DEFAULT,
-});
-
 export const deltaScrap = atom<DeltaDisplay>({
   key: "deltaScrap",
   default: DELTA_DEFAULT,
@@ -73,12 +68,17 @@ export const deltaTotalHealthRegenerationRate = atom<DeltaDisplay>({
   default: DELTA_DEFAULT,
 });
 
-export const deltaTotalStaminaRegenerationRate = atom<DeltaDisplay>({
-  key: "deltaTotalStaminaRegenerationRate",
+export const deltaTotalProtection = atom<DeltaDisplay>({
+  key: "deltaTotalProtection",
   default: DELTA_DEFAULT,
 });
 
 export const deltaTotalRecoveryRate = atom<DeltaDisplay>({
   key: "deltaTotalRecoveryRate",
+  default: DELTA_DEFAULT,
+});
+
+export const deltaTotalStaminaRegenerationRate = atom<DeltaDisplay>({
+  key: "deltaTotalStaminaRegenerationRate",
   default: DELTA_DEFAULT,
 });

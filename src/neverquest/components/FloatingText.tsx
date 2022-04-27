@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Stack } from "react-bootstrap";
 import { RecoilState, useRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 
@@ -30,13 +31,13 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
 
     if (Array.isArray(deltaValue)) {
       contents = (
-        <div>
+        <Stack direction="horizontal" gap={1}>
           {deltaValue.map(({ color, value }) => (
             <span className={color || ""} key={value}>
               {value}
             </span>
           ))}
-        </div>
+        </Stack>
       );
     } else {
       const { color, value } = deltaValue;
@@ -88,7 +89,7 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
       }
 
       if (bottom >= 12) {
-        newOpacity -= 0.1;
+        newOpacity -= 0.05;
         newRight -= 1;
 
         if (newOpacity <= 0) {

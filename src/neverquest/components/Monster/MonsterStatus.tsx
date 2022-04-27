@@ -21,7 +21,7 @@ export default function MonsterStatus() {
   useEffect(() => {
     const { current } = element;
 
-    animateElement(current, "flipInX");
+    animateElement(current, "fadeInRight", "fast");
     setMonsterStatusElement(current);
   }, []);
 

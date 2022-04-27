@@ -1,16 +1,14 @@
-import { useEffect } from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import Stack from "react-bootstrap/Stack";
 import Table from "react-bootstrap/Table";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import AttackMeter from "neverquest/components/Character/AttackMeter";
 import FloatingText from "neverquest/components/FloatingText";
 import ImageIcon from "neverquest/components/ImageIcon";
-import { UIFloatingTextType } from "neverquest/env";
-import usePreviousValue from "neverquest/hooks/usePreviousValue";
 import icon from "neverquest/icons/striking-splinter.svg";
+import useDeltaText from "neverquest/hooks/useDeltaText";
 import { attackRateBonus } from "neverquest/state/attributes";
 import { deltaTotalAttackRate } from "neverquest/state/deltas";
 import { weapon } from "neverquest/state/inventory";
@@ -19,13 +17,15 @@ import { totalAttackRate } from "neverquest/state/stats";
 import { formatMilliseconds, formatToFixed, getComputedStat } from "neverquest/utilities/helpers";
 
 export default function Attack() {
-  const setDeltaTotalAttackRate = useSetRecoilState(deltaTotalAttackRate);
   const attackRateBonusValue = useRecoilValue(attackRateBonus);
   const showTotalAttackRateBreakdownValue = useRecoilValue(showTotalAttackRateSummary);
-  const totalAttackRateValue = useRecoilValue(totalAttackRate);
   const weaponValue = useRecoilValue(weapon);
 
-  const previousTotalAttackRate = usePreviousValue(totalAttackRateValue);
+  useDeltaText({
+    deltaAtom: deltaTotalAttackRate,
+    isTime: true,
+    valueAtom: totalAttackRate,
+  });
 
   const MeterWithDelta = () => (
     <Stack direction="horizontal" className="w-100">
@@ -34,25 +34,6 @@ export default function Attack() {
       <FloatingText atom={deltaTotalAttackRate} />
     </Stack>
   );
-
-  useEffect(() => {
-    if (previousTotalAttackRate === null) {
-      return;
-    }
-
-    const difference = totalAttackRateValue - previousTotalAttackRate;
-
-    if (difference === 0) {
-      return;
-    }
-
-    const isPositive = difference > 0;
-
-    setDeltaTotalAttackRate({
-      color: isPositive ? UIFloatingTextType.Negative : UIFloatingTextType.Positive,
-      value: `${isPositive ? "+" : "-"}${formatMilliseconds(Math.abs(difference))}`,
-    });
-  }, [previousTotalAttackRate, totalAttackRateValue]);
 
   return (
     <Stack direction="horizontal" gap={3}>

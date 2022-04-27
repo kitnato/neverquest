@@ -23,11 +23,7 @@ export default function Reserve({
   }
 
   return (
-    <Stack
-      className="animate__animated animate__flipInX"
-      direction="horizontal"
-      gap={3}
-    >
+    <Stack className="animate__animated animate__flipInX" direction="horizontal" gap={3}>
       <Component value={lootValue} />
 
       <FloatingText atom={deltaAtom} />

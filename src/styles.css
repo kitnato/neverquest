@@ -20,7 +20,7 @@ small {
 }
 
 .hover-grow:hover:not(:focus) {
-  transform: scale(1.2);
+  transform: scale(1.1);
   transform-origin: center left;
   transition: transform 0.5s;
 }

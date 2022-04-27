@@ -12,7 +12,7 @@ export default function ExperienceStatus() {
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Spent XP" />
 
-      <Stack direction="horizontal" className="w-100">
+      <Stack className="w-100" direction="horizontal">
         <ResourceMeter atom={experienceSpent} atomMaximum={experience} />
 
         <FloatingText atom={deltaExperienceSpent} />

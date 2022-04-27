@@ -2,23 +2,23 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
-import ArmorInventory from "neverquest/components/Inventory/Armor/ArmorInventory";
-import WeaponInventory from "neverquest/components/Inventory/Weapon/WeaponInventory";
+import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Encumbrance from "neverquest/components/Inventory/Encumbrance";
-import { Armor, EquipmentType, InventoryContents, UIVariant, Weapon } from "neverquest/env";
+import { InventoryContents, UIVariant } from "neverquest/env";
 import useAcquireItem from "neverquest/hooks/useAcquireItem";
 import useEquipItem from "neverquest/hooks/useEquipItem";
-import { armor, equippedInventory, storedInventory, weapon } from "neverquest/state/inventory";
+import useUnequipItem from "neverquest/hooks/useUnequipItem";
+import { equippedInventory, storedInventory } from "neverquest/state/inventory";
 
 export default function Inventory() {
   const [storedInventoryValue, setStoredInventory] = useRecoilState(storedInventory);
+  const equippedInventoryValue = useRecoilValue(equippedInventory);
+
   const acquireItem = useAcquireItem();
   const equipItem = useEquipItem();
-  const equippedInventoryValue = useRecoilValue(equippedInventory);
-  const resetArmor = useResetRecoilState(armor);
-  const resetWeapon = useResetRecoilState(weapon);
+  const unequipItem = useUnequipItem();
 
   const equippedInventoryEntries = Object.entries(equippedInventoryValue);
   const storedInventoryValueEntries = Object.entries(storedInventoryValue);
@@ -37,19 +37,10 @@ export default function Inventory() {
       });
     };
 
-  const unequipItem =
+  const onUnequipItem =
     ({ item, type }: InventoryContents) =>
     () => {
-      // TODO - all types
-      switch (type) {
-        case EquipmentType.Armor:
-          resetArmor();
-          break;
-        case EquipmentType.Weapon:
-          resetWeapon();
-          break;
-      }
-
+      unequipItem(type);
       acquireItem({ isUnequipping: true, item, type });
     };
 
@@ -66,33 +57,21 @@ export default function Inventory() {
           <span className="fst-italic">Nothing equipped.</span>
         )}
 
-        {equippedInventoryEntries.map(([key, { item, type }]) => {
-          let Item = null;
+        {equippedInventoryEntries.map(([key, { item, type }]) => (
+          <Row key={key}>
+            <Col xs={7}>
+              <Stack direction="horizontal">
+                <InventoryElement item={item} type={type} />
+              </Stack>
+            </Col>
 
-          // TODO - all types
-          switch (type) {
-            case EquipmentType.Armor:
-              Item = <ArmorInventory armor={item as Armor} />;
-              break;
-            case EquipmentType.Weapon:
-              Item = <WeaponInventory weapon={item as Weapon} />;
-              break;
-          }
-
-          return (
-            <Row key={key}>
-              <Col xs={7}>
-                <Stack direction="horizontal">{Item}</Stack>
-              </Col>
-
-              <Col>
-                <Button onClick={unequipItem({ item, type })} variant={UIVariant.Outline}>
-                  Unequip
-                </Button>
-              </Col>
-            </Row>
-          );
-        })}
+            <Col>
+              <Button onClick={onUnequipItem({ item, type })} variant={UIVariant.Outline}>
+                Unequip
+              </Button>
+            </Col>
+          </Row>
+        ))}
       </Stack>
 
       <Stack gap={3}>
@@ -103,25 +82,13 @@ export default function Inventory() {
         )}
 
         {storedInventoryValueEntries.map(([key, { item, type }]) => {
-          let Item = null;
-          let isEquippable = false;
-
-          // TODO - all types
-          switch (type) {
-            case EquipmentType.Armor:
-              Item = <ArmorInventory armor={item as Armor} />;
-              isEquippable = true;
-              break;
-            case EquipmentType.Weapon:
-              Item = <WeaponInventory weapon={item as Weapon} />;
-              isEquippable = true;
-              break;
-          }
+          // TODO - check if isEquippable
+          const isEquippable = true;
 
           return (
             <Row key={key}>
               <Col xs={7}>
-                <Stack direction="horizontal">{Item}</Stack>
+                <InventoryElement item={item} type={type} />
               </Col>
 
               {isEquippable && (

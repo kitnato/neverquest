@@ -1,7 +1,11 @@
 import LOCRA from "locra";
-import { AffixTag, ArtifactType, WeaponType } from "locra/env";
-import { Armor, ArmorWeight, Weapon, WeaponWeight } from "neverquest/env";
-import { ARMOR_SPECIFICATIONS, WEAPON_SPECIFICATIONS } from "neverquest/utilities/constants";
+import { AffixTag, ArtifactType, ShieldType, WeaponType } from "locra/env";
+import { Armor, ArmorWeight, Shield, Weapon, WeaponWeight } from "neverquest/env";
+import {
+  ARMOR_SPECIFICATIONS,
+  SHIELD_SPECIFICATIONS,
+  WEAPON_SPECIFICATIONS,
+} from "neverquest/utilities/constants";
 import { getFromRange } from "neverquest/utilities/helpers";
 
 export function generateArmor({
@@ -19,11 +23,12 @@ export function generateArmor({
   level: number;
   name?: string;
   tags?: AffixTag[];
-  weight: Exclude<ArmorWeight, ArmorWeight.None>;
+  weight: ArmorWeight;
 }): Armor {
-  const { protectionModifier } = ARMOR_SPECIFICATIONS[weight];
+  const { encumbrance, protectionModifier } = ARMOR_SPECIFICATIONS[weight];
 
   return {
+    encumbrance,
     name:
       name ||
       LOCRA.generateArtifact({
@@ -38,6 +43,46 @@ export function generateArmor({
     price: level * 2 + Math.floor(level / 2),
     protection: Math.floor(level * protectionModifier),
     weight,
+  };
+}
+
+export function generateShield({
+  hasPrefix,
+  hasSuffix,
+  isNSFW,
+  level,
+  name,
+  tags,
+  type,
+}: {
+  hasPrefix?: boolean;
+  hasSuffix?: boolean;
+  isNSFW: boolean;
+  level: number;
+  name?: string;
+  tags?: AffixTag[];
+  type: ShieldType;
+}): Shield {
+  const { blockRange, encumbrance, staggerModifier } = SHIELD_SPECIFICATIONS[type];
+
+  return {
+    block: getFromRange(blockRange),
+    encumbrance,
+    name:
+      name ||
+      LOCRA.generateArtifact({
+        hasPrefix,
+        hasSuffix,
+        isNSFW,
+        tags,
+        query: {
+          subtype: type,
+          type: ArtifactType.Shield,
+        },
+      }),
+    price: level * 2 + Math.ceil(level / 1.5),
+    stagger: (500 + Math.floor(level * 10)) * staggerModifier,
+    type,
   };
 }
 
@@ -58,12 +103,13 @@ export function generateWeapon({
   name?: string;
   tags?: AffixTag[];
   type: WeaponType;
-  weight: Exclude<WeaponWeight, WeaponWeight.None>;
+  weight: WeaponWeight;
 }): Weapon {
-  const { damageModifier, rateRange, staminaCost } = WEAPON_SPECIFICATIONS[weight];
+  const { damageModifier, encumbrance, rateRange, staminaCost } = WEAPON_SPECIFICATIONS[weight];
 
   return {
     damage: Math.ceil(level * damageModifier),
+    encumbrance,
     name:
       name ||
       LOCRA.generateArtifact({

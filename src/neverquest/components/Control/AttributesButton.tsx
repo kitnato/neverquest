@@ -8,12 +8,13 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import Attributes from "neverquest/components/Attributes";
 import DismissableScreen from "neverquest/components/DismissableScreen";
 import ImageIcon from "neverquest/components/ImageIcon";
-import { UIVariant } from "neverquest/env";
+import { UIAnimationType, UIVariant } from "neverquest/env";
 import icon from "neverquest/icons/skills.svg";
 import { attributesIncreasable, isAttacking } from "neverquest/state/character";
 import { isLevelCompleted } from "neverquest/state/global";
 import { isMonsterEngaged } from "neverquest/state/monster";
 import { showAttributesButton } from "neverquest/state/show";
+import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function AttributesButton() {
   const attributesIncreasableValue = useRecoilValue(attributesIncreasable);
@@ -36,7 +37,7 @@ export default function AttributesButton() {
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>Attributes</Tooltip>} placement="top">
-        <span className="animate__animated animate__flipInX d-inline-block">
+        <span className={`${getAnimationClass(UIAnimationType.FlipInX)} d-inline-block`}>
           <Button
             disabled={isAttackingValue || isMonsterEngagedValue}
             className="position-relative"

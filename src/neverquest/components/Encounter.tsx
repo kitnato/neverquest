@@ -9,8 +9,8 @@ import Wilderness from "neverquest/components/Wilderness";
 import { ArmorWeight, EquipmentType, MerchantInventory, WeaponWeight } from "neverquest/env";
 import { merchantInventory } from "neverquest/state/caravan";
 import { isWilderness, level, nsfw } from "neverquest/state/global";
-import { generateArmor, generateWeapon } from "neverquest/utilities/generators";
-import { AffixTag, WeaponType } from "locra/env";
+import { generateArmor, generateShield, generateWeapon } from "neverquest/utilities/generators";
+import { AffixTag, ShieldType, WeaponType } from "locra/env";
 
 export default function Encounter() {
   const isWildernessValue = useRecoilValue(isWilderness);
@@ -51,7 +51,18 @@ export default function Encounter() {
             type: EquipmentType.Armor,
           };
           break;
-        case 3: // Shield
+        case 3:
+          newInventory[uuidv4()] = {
+            item: generateShield({
+              hasPrefix: true,
+              isNSFW: nsfwValue,
+              level: levelValue,
+              tags: [AffixTag.LowQuality],
+              type: ShieldType.Small,
+            }),
+            type: EquipmentType.Shield,
+          };
+          break;
         case 4: // Accessory
       }
 

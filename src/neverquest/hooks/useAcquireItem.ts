@@ -1,14 +1,7 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 
-import {
-  Armor,
-  InventoryItemStatus,
-  Accessory,
-  Shield,
-  EquipmentType,
-  Weapon,
-} from "neverquest/env";
+import { InventoryItemStatus, EquipmentObject, EquipmentType } from "neverquest/env";
 import useEquipItem from "neverquest/hooks/useEquipItem";
 import {
   accessory,
@@ -39,9 +32,13 @@ export default function useAcquireItem() {
     type,
   }: {
     isUnequipping?: boolean;
-    item: Armor | Accessory | Shield | Weapon;
+    item: EquipmentObject;
     type: EquipmentType;
   }) => {
+    if (isInventoryFullValue) {
+      return InventoryItemStatus.Rejected;
+    }
+
     if (!showInventoryButtonValue) {
       setShowInventoryButton(true);
     }
@@ -55,15 +52,13 @@ export default function useAcquireItem() {
         (weaponValue.name === NO_WEAPON.name && type === EquipmentType.Weapon))
     ) {
       return equipItem({ item, type });
-    } else if (!isInventoryFullValue) {
-      setStoredInventory((currentInventory) => ({
-        ...currentInventory,
-        [uuidv4()]: { item, type },
-      }));
-
-      return InventoryItemStatus.Stored;
     }
 
-    return InventoryItemStatus.Rejected;
+    setStoredInventory((currentInventory) => ({
+      ...currentInventory,
+      [uuidv4()]: { item, type },
+    }));
+
+    return InventoryItemStatus.Stored;
   };
 }

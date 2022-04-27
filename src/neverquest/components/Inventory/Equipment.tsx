@@ -4,9 +4,11 @@ import Row from "react-bootstrap/Row";
 import { useRecoilValue } from "recoil";
 
 import ArmorEquipped from "neverquest/components/Inventory/Armor/ArmorEquipped";
-import Shield from "neverquest/components/Inventory/Shield";
+import ShieldEquipped from "neverquest/components/Inventory/Shield/ShieldEquipped";
 import WeaponEquipped from "neverquest/components/Inventory/Weapon/WeaponEquipped";
+import { UIAnimationType } from "neverquest/env";
 import { showArmor, showShield, showWeapon } from "neverquest/state/show";
+import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function Equipment() {
   const showArmorValue = useRecoilValue(showArmor);
@@ -18,7 +20,7 @@ export default function Equipment() {
   }
 
   return (
-    <Card className="animate__animated animate__flipInX">
+    <Card className={getAnimationClass(UIAnimationType.FlipInX)}>
       <Card.Body>
         <Row>
           <Col>
@@ -30,7 +32,7 @@ export default function Equipment() {
           </Col>
 
           <Col>
-            <Shield />
+            <ShieldEquipped />
           </Col>
         </Row>
       </Card.Body>

@@ -4,10 +4,12 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import LootDisplay from "neverquest/components/Loot/LootDisplay";
+import { UIAnimationType } from "neverquest/env";
 import lootIcon from "neverquest/icons/locked-chest.svg";
 import lootedIcon from "neverquest/icons/open-chest.svg";
 import { progress } from "neverquest/state/global";
 import { hasLooted } from "neverquest/state/loot";
+import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function Loot() {
   const hasLootedValue = useRecoilValue(hasLooted);
@@ -21,7 +23,7 @@ export default function Loot() {
     <>
       <hr />
 
-      <Card className="animate__animated animate__flipInX">
+      <Card className={getAnimationClass(UIAnimationType.FlipInX)}>
         <Card.Body>
           <Stack direction="horizontal" gap={5}>
             <ImageIcon icon={hasLootedValue ? lootedIcon : lootIcon} tooltip="Loot" />

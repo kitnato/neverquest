@@ -12,7 +12,7 @@ import { damage } from "neverquest/state/attributes";
 import { deltaTotalDamage } from "neverquest/state/deltas";
 import { weapon } from "neverquest/state/inventory";
 import { showTotalDamageSummary } from "neverquest/state/show";
-import { totalDamage } from "neverquest/state/stats";
+import { totalDamage } from "neverquest/state/statistics";
 import { getComputedStat } from "neverquest/utilities/helpers";
 
 export default function TotalDamage() {

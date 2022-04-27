@@ -12,6 +12,7 @@ import Name from "neverquest/components/Character/Name";
 import Offense from "neverquest/components/Character/Offense";
 import Recovery from "neverquest/components/Character/Recovery";
 import Stamina from "neverquest/components/Character/Stamina";
+import { UIAnimationType } from "neverquest/env";
 import { statusElement } from "neverquest/state/character";
 import { animateElement } from "neverquest/utilities/helpers";
 
@@ -22,7 +23,7 @@ export default function Status() {
   useEffect(() => {
     const { current } = element;
 
-    animateElement(current, "flipInX");
+    animateElement(current, UIAnimationType.FlipInX);
     setStatusElement(current);
   }, []);
 

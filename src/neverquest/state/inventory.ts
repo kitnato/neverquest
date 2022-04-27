@@ -18,7 +18,7 @@ export const armor = atom<Armor>({
 
 export const inventorySize = atom({
   key: "inventorySize",
-  default: 5,
+  default: 3,
 });
 
 export const shield = atom<Shield>({
@@ -44,11 +44,20 @@ export const encumbrance = selector({
     const equippedInventoryValue = get(equippedInventory);
     const storedInventoryValue = get(storedInventory);
 
-    return Object.keys(equippedInventoryValue).length + Object.keys(storedInventoryValue).length;
+    return (
+      Object.values(equippedInventoryValue).reduce(
+        (totalEncumbrance, { item: { encumbrance } }) => totalEncumbrance + encumbrance,
+        0
+      ) +
+      Object.values(storedInventoryValue).reduce(
+        (totalEncumbrance, { item: { encumbrance } }) => totalEncumbrance + encumbrance,
+        0
+      )
+    );
   },
 });
 
-export const equippedInventory = selector({
+export const equippedInventory = selector<Inventory>({
   key: "equippedInventory",
   get: ({ get }) => {
     const armorValue = get(armor);

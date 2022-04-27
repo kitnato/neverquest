@@ -1,5 +1,8 @@
 import { RecoilState, useRecoilValue } from "recoil";
 
+import { UIAnimationType } from "neverquest/env";
+import { getAnimationClass } from "neverquest/utilities/helpers";
+
 export default function Lootable({
   atom,
   Component,
@@ -13,7 +16,5 @@ export default function Lootable({
     return null;
   }
 
-  return (
-    <Component className="animate__animated animate__flipInX" value={resourceValue} />
-  );
+  return <Component className={getAnimationClass(UIAnimationType.FlipInX)} value={resourceValue} />;
 }

@@ -2,14 +2,14 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
+import ShieldName from "neverquest/components/Inventory/Shield/ShieldName";
 import { UIAnimationType } from "neverquest/env";
 import icon from "neverquest/icons/round-shield.svg";
 import { shield } from "neverquest/state/inventory";
 import { showShield } from "neverquest/state/show";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
-// TODO
-export default function Shield() {
+export default function ShieldEquipped() {
   const shieldValue = useRecoilValue(shield);
   const showShieldValue = useRecoilValue(showShield);
 
@@ -19,9 +19,9 @@ export default function Shield() {
 
   return (
     <Stack className={getAnimationClass(UIAnimationType.FlipInX)} direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip="Shield" />
+      <ImageIcon icon={icon} tooltip="Equipped shield" />
 
-      <span>{shieldValue.name}</span>
+      <ShieldName shield={shieldValue} />
     </Stack>
   );
 }

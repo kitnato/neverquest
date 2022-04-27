@@ -3,8 +3,10 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/wolverine-claws.svg";
+import { UIAnimationType } from "neverquest/env";
 import { damagePerSecondMonster } from "neverquest/state/monster";
 import { showDamagePerSecond } from "neverquest/state/show";
+import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function MonsterDamagePerSecond() {
   const damagePerSecondMonsterValue = useRecoilValue(damagePerSecondMonster);
@@ -15,11 +17,7 @@ export default function MonsterDamagePerSecond() {
   }
 
   return (
-    <Stack
-      className="animate__animated animate__flipInX"
-      direction="horizontal"
-      gap={3}
-    >
+    <Stack className={getAnimationClass(UIAnimationType.FlipInX)} direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Monster damage per second (DPS)" />
 
       <span>{damagePerSecondMonsterValue}</span>

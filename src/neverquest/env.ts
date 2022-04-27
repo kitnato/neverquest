@@ -1,17 +1,16 @@
 // MAIN
 
-import { WeaponType } from "locra/env";
+import { ShieldType, WeaponType } from "locra/env";
 
 export type Accessory = EquipmentBase;
 
 export type Armor = EquipmentBase & {
   protection: number;
-  weight: ArmorWeight;
+  weight?: ArmorWeight;
 };
 
 export enum ArmorWeight {
   Light = "Light",
-  None = "None",
   Plate = "Plate",
   Reinforced = "Reinforced",
 }
@@ -52,7 +51,7 @@ export type Inventory =
   | Record<string, never>;
 
 export interface InventoryContents {
-  item: Armor | Accessory | Shield | Weapon;
+  item: EquipmentObject;
   isEquipped?: boolean;
   type: EquipmentType;
 }
@@ -64,13 +63,16 @@ export enum InventoryItemStatus {
 }
 
 export interface EquipmentBase {
+  encumbrance: number;
   name: string;
   price: number;
 }
 
+export type EquipmentObject = Armor | Accessory | Shield | Weapon;
+
 export enum EquipmentType {
-  Armor,
   Accessory,
+  Armor,
   Shield,
   Weapon,
 }
@@ -87,7 +89,7 @@ export enum LootType {
 }
 
 export interface MerchantInventoryContents {
-  item: Armor | Accessory | Shield | Weapon;
+  item: EquipmentObject;
   type: EquipmentType;
 }
 
@@ -98,8 +100,9 @@ export type MerchantInventory =
   | Record<string, never>;
 
 export type Shield = EquipmentBase & {
-  protection: number;
+  block: number;
   stagger: number;
+  type?: ShieldType;
 };
 
 export type Weapon = EquipmentBase & {
@@ -107,14 +110,13 @@ export type Weapon = EquipmentBase & {
   rate: number;
   staminaCost: number;
   type: WeaponType;
-  weight: WeaponWeight;
+  weight?: WeaponWeight;
 };
 
 export enum WeaponWeight {
   Balanced = "Balanced",
   Heavy = "Heavy",
   Light = "Light",
-  None = "None",
   TwoHanded = "Two-handed",
 }
 
@@ -125,7 +127,27 @@ export interface LootProps {
   value: number;
 }
 
+export interface RandomizedRange {
+  maximum: number;
+  minimum: number;
+}
+
 // UI
+
+export enum UIAnimationSpeed {
+  Fast = "fast",
+  Faster = "faster",
+  Slow = "slow",
+  Slower = "Slower",
+}
+
+export enum UIAnimationType {
+  HeadShake = "headShake",
+  FadeInRight = "fadeInRight",
+  FlipInX = "flipInX",
+  Pulse = "pulse",
+  ZoomInRight = "zoomInRight",
+}
 
 export enum UIAttachment {
   Above,

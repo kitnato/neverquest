@@ -13,6 +13,7 @@ import MonsterName from "neverquest/components/Monster/MonsterName";
 import Looting from "neverquest/components/Monster/Looting";
 import { monsterStatusElement } from "neverquest/state/monster";
 import { animateElement } from "neverquest/utilities/helpers";
+import { UIAnimationSpeed, UIAnimationType } from "neverquest/env";
 
 export default function MonsterStatus() {
   const element = useRef(null);
@@ -21,7 +22,7 @@ export default function MonsterStatus() {
   useEffect(() => {
     const { current } = element;
 
-    animateElement(current, "fadeInRight", "fast");
+    animateElement(current, UIAnimationType.ZoomInRight, UIAnimationSpeed.Faster);
     setMonsterStatusElement(current);
   }, []);
 

@@ -41,5 +41,5 @@ export default function useDeltaText({
         isTime ? formatMilliseconds(Math.abs(difference)) : difference
       }`,
     });
-  }, [previousValue, currentValue]);
+  }, [currentValue, previousValue]);
 }

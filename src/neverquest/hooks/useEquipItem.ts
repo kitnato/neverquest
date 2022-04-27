@@ -5,6 +5,7 @@ import {
   InventoryItemStatus,
   Accessory,
   Shield,
+  EquipmentObject,
   EquipmentType,
   Weapon,
 } from "neverquest/env";
@@ -41,7 +42,7 @@ export default function useEquipItem() {
   const setShield = useSetRecoilState(shield);
   const setWeapon = useSetRecoilState(weapon);
 
-  return ({ item, type }: { item: Armor | Accessory | Shield | Weapon; type: EquipmentType }) => {
+  return ({ item, type }: { item: EquipmentObject; type: EquipmentType }) => {
     switch (type) {
       case EquipmentType.Accessory:
         setAccessory(item as Accessory);
@@ -70,9 +71,7 @@ export default function useEquipItem() {
           setShowShield(true);
         }
 
-        if (!showTotalProtectionValue) {
-          setShowTotalProtection(true);
-        }
+        // TODO - show block
 
         return InventoryItemStatus.Equipped;
       case EquipmentType.Weapon:

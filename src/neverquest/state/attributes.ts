@@ -148,7 +148,7 @@ export const stamina = atom<Attribute>({
 export const staminaRegenerationRate = atom<Attribute>({
   key: "staminaRegenerationRate",
   default: {
-    base: 4000,
+    base: 5000,
     canAssign: false,
     cost: 1,
     description: "Increase stamina regeneration rate",

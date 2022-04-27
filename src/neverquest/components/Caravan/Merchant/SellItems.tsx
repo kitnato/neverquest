@@ -2,21 +2,20 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
-import ArmorInventory from "neverquest/components/Inventory/Armor/ArmorInventory";
-import WeaponInventory from "neverquest/components/Inventory/Weapon/WeaponInventory";
+import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Coins from "neverquest/components/Loot/Coins";
-import { Armor, EquipmentType, InventoryContents, UIVariant, Weapon } from "neverquest/env";
+import { InventoryContents, UIVariant } from "neverquest/env";
 import useReserve from "neverquest/hooks/useReserve";
-import { armor, equippedInventory, storedInventory, weapon } from "neverquest/state/inventory";
+import useUnequipItem from "neverquest/hooks/useUnequipItem";
+import { equippedInventory, storedInventory } from "neverquest/state/inventory";
 import { getSellPrice } from "neverquest/utilities/helpers";
 
 export default function SellItems() {
   const setReserve = useReserve();
+  const unequipItem = useUnequipItem();
   const [storedInventoryValue, setStoredInventory] = useRecoilState(storedInventory);
-  const resetArmor = useResetRecoilState(armor);
-  const resetWeapon = useResetRecoilState(weapon);
   const equippedInventoryValue = useRecoilValue(equippedInventory);
 
   const entireInventoryEntries = [
@@ -28,15 +27,7 @@ export default function SellItems() {
     ({ isEquipped, item, key, type }: InventoryContents & { key: string }) =>
     () => {
       if (isEquipped) {
-        // TODO - other types
-        switch (type) {
-          case EquipmentType.Armor:
-            resetArmor();
-            break;
-          case EquipmentType.Weapon:
-            resetWeapon();
-            break;
-        }
+        unequipItem(type);
       } else {
         setStoredInventory((currentInventory) => {
           const newInventoryContents = { ...currentInventory };
@@ -58,44 +49,30 @@ export default function SellItems() {
         <span className="fst-italic">Nothing to sell.</span>
       ) : (
         <Stack gap={3}>
-          {entireInventoryEntries.map(([key, { isEquipped, item, type }]) => {
-            let Item = null;
+          {entireInventoryEntries.map(([key, { isEquipped, item, type }]) => (
+            <Row key={key}>
+              <Col xs={7}>
+                <Stack direction="horizontal" gap={1}>
+                  <InventoryElement item={item} type={type} />
 
-            // TODO - all types
-            switch (type) {
-              case EquipmentType.Armor:
-                Item = <ArmorInventory armor={item as Armor} />;
-                break;
-              case EquipmentType.Weapon:
-                Item = <WeaponInventory weapon={item as Weapon} />;
-                break;
-            }
+                  {isEquipped && <span className="fst-italic">(Equipped)</span>}
+                </Stack>
+              </Col>
 
-            return (
-              <Row key={key}>
-                <Col xs={7}>
-                  <Stack direction="horizontal">
-                    {Item}
+              <Col>
+                <Coins tooltip="Price (coins)" value={getSellPrice(item)} />
+              </Col>
 
-                    {isEquipped && <span className="fst-italic">&nbsp;(Equipped)</span>}
-                  </Stack>
-                </Col>
-
-                <Col>
-                  <Coins tooltip="Price (coins)" value={getSellPrice(item)} />
-                </Col>
-
-                <Col>
-                  <Button
-                    onClick={sellItem({ isEquipped, item, key, type })}
-                    variant={UIVariant.Outline}
-                  >
-                    Sell
-                  </Button>
-                </Col>
-              </Row>
-            );
-          })}
+              <Col>
+                <Button
+                  onClick={sellItem({ isEquipped, item, key, type })}
+                  variant={UIVariant.Outline}
+                >
+                  Sell
+                </Button>
+              </Col>
+            </Row>
+          ))}
         </Stack>
       )}
     </Stack>

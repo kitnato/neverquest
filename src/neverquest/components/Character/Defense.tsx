@@ -5,7 +5,9 @@ import { useRecoilValue } from "recoil";
 import Block from "neverquest/components/Character/Block";
 import Dodge from "neverquest/components/Character/Dodge";
 import TotalProtection from "neverquest/components/Character/TotalProtection";
+import { UIAnimationType } from "neverquest/env";
 import { showBlockChance, showDodgeChance, showTotalProtection } from "neverquest/state/show";
+import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function Defense() {
   const showBlockChanceValue = useRecoilValue(showBlockChance);
@@ -17,7 +19,7 @@ export default function Defense() {
   }
 
   return (
-    <Row className="animate__animated animate__flipInX">
+    <Row className={getAnimationClass(UIAnimationType.FlipInX)}>
       <Col>
         <TotalProtection />
       </Col>

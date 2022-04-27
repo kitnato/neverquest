@@ -13,8 +13,12 @@ import { attackRateBonus } from "neverquest/state/attributes";
 import { deltaTotalAttackRate } from "neverquest/state/deltas";
 import { weapon } from "neverquest/state/inventory";
 import { showTotalAttackRateSummary } from "neverquest/state/show";
-import { totalAttackRate } from "neverquest/state/stats";
-import { formatMilliseconds, formatToFixed, getComputedStat } from "neverquest/utilities/helpers";
+import { totalAttackRate } from "neverquest/state/statistics";
+import {
+  formatMilliseconds,
+  formatPercentage,
+  getComputedStat,
+} from "neverquest/utilities/helpers";
 
 export default function Attack() {
   const attackRateBonusValue = useRecoilValue(attackRateBonus);
@@ -28,7 +32,7 @@ export default function Attack() {
   });
 
   const MeterWithDelta = () => (
-    <Stack direction="horizontal" className="w-100">
+    <Stack className="w-100" direction="horizontal">
       <AttackMeter />
 
       <FloatingText atom={deltaTotalAttackRate} />
@@ -57,7 +61,7 @@ export default function Attack() {
                     <tr>
                       <td>{`${attackRateBonusValue.name} attribute:`}</td>
 
-                      <td>{`-${formatToFixed(getComputedStat(attackRateBonusValue) * 100)}%`}</td>
+                      <td>{`-${formatPercentage(getComputedStat(attackRateBonusValue))}`}</td>
                     </tr>
                   </tbody>
                 </Table>

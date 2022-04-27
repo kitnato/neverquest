@@ -56,7 +56,7 @@ export default function Attribute({ atom }: { atom: RecoilState<AttributeType> }
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={placeholderIcon} tooltip={name} />
 
-      <span style={{ width: 200 }}>{description}</span>
+      <span style={{ width: 260 }}>{description}</span>
 
       <span style={{ width: 20 }}>{points}</span>
 

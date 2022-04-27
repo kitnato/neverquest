@@ -1,13 +1,18 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
-import { DeltaDisplay, UIFloatingTextType } from "neverquest/env";
+import {
+  DeltaDisplay,
+  UIAnimationSpeed,
+  UIAnimationType,
+  UIFloatingTextType,
+} from "neverquest/env";
 import { isRecovering, statusElement } from "neverquest/state/character";
 import { gameOver } from "neverquest/state/global";
 import { deltaHealth } from "neverquest/state/deltas";
 import { totalDamageMonster } from "neverquest/state/monster";
 import { currentHealth } from "neverquest/state/resources";
 import { showRecovery } from "neverquest/state/show";
-import { totalProtection, totalPhysicalResistance } from "neverquest/state/stats";
+import { totalProtection, totalPhysicalResistance } from "neverquest/state/statistics";
 import { animateElement } from "neverquest/utilities/helpers";
 
 export default function useDefend() {
@@ -52,7 +57,7 @@ export default function useDefend() {
       setDeltaHealth(deltaContents);
       setCurrentHealth(health);
 
-      animateElement(statusElementValue, "headShake", "fast");
+      animateElement(statusElementValue, UIAnimationType.HeadShake, UIAnimationSpeed.Fast);
 
       if (health === 0) {
         setGameOver(true);

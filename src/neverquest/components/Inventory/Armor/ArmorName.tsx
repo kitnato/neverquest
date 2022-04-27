@@ -5,7 +5,7 @@ import Table from "react-bootstrap/Table";
 import { Armor } from "neverquest/env";
 
 export default function ArmorName({ armor }: { armor: Armor }) {
-  const { name, protection, weight } = armor;
+  const { encumbrance, name, protection, weight } = armor;
 
   return (
     <OverlayTrigger
@@ -22,11 +22,15 @@ export default function ArmorName({ armor }: { armor: Armor }) {
                   <td>{protection}</td>
                 </tr>
 
-                <tr>
-                  <td className="text-end">Weight:</td>
+                {encumbrance > 0 && weight && (
+                  <tr>
+                    <td className="text-end">Weight:</td>
 
-                  <td>{weight}</td>
-                </tr>
+                    <td>
+                      {weight} ({encumbrance})
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </Table>
           </Popover.Body>

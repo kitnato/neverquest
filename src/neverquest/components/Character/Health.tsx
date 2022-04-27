@@ -8,7 +8,7 @@ import { UIAttachment } from "neverquest/env";
 import icon from "neverquest/icons/hospital-cross.svg";
 import { deltaHealth, deltaTotalHealthRegenerationRate } from "neverquest/state/deltas";
 import { currentHealth, isHealthMaxedOut, maximumHealth } from "neverquest/state/resources";
-import { totalHealthRegenerationRate } from "neverquest/state/stats";
+import { totalHealthRegenerationRate } from "neverquest/state/statistics";
 
 export default function Health() {
   return (

@@ -1,17 +1,22 @@
-// Animates an element once according to its Animate.css type.
-export function animateElement(element: HTMLDivElement | null, animation: string, speed?: string) {
+import { RandomizedRange, UIAnimationSpeed, UIAnimationType } from "neverquest/env";
+import { ANIMATED_CLASS, ANIMATE_PREFIX } from "neverquest/utilities/constants";
+
+// Animates an element once according to its Animate.css type with optional speed parameter.
+export function animateElement(
+  element: HTMLDivElement | null,
+  animation: UIAnimationType,
+  speed?: UIAnimationSpeed
+) {
   if (element === null) {
     return;
   }
 
   const { addEventListener, classList } = element;
 
-  const PREFIX = "animate__";
-  const animationClass = `${PREFIX}animated`;
-  const animationName = `${PREFIX}${animation}`;
-  const animationSpeed = speed ? `${PREFIX}${speed}` : null;
+  const animationName = `${ANIMATE_PREFIX}${animation}`;
+  const animationSpeed = speed ? `${ANIMATE_PREFIX}${speed}` : null;
 
-  classList.add(animationClass, animationName);
+  classList.add(ANIMATED_CLASS, animationName);
 
   if (animationSpeed) {
     classList.add(animationSpeed);
@@ -21,7 +26,7 @@ export function animateElement(element: HTMLDivElement | null, animation: string
     "animationend",
     (event: AnimationEvent) => {
       event.stopPropagation();
-      classList.remove(animationClass, animationName);
+      classList.remove(ANIMATED_CLASS, animationName);
 
       if (animationSpeed) {
         classList.remove(animationSpeed);
@@ -75,12 +80,22 @@ export function formatMilliseconds(ms: number) {
   return `${formatToFixed(ms / 1000)}s`;
 }
 
+export function formatPercentage(number: number) {
+  return `${formatToFixed(number * 100)}%`;
+}
+
 // Correctly does the rounding as opposed to .toFixed().
-export function formatToFixed(number: number, digits = 2) {
-  const multiplier = Math.pow(10, digits);
+export function formatToFixed(number: number, decimals = 2) {
+  const multiplier = Math.pow(10, decimals);
   const result = parseFloat((number * multiplier).toFixed(11));
 
-  return (Math.round(result) / multiplier).toFixed(digits);
+  return (Math.round(result) / multiplier).toFixed(decimals);
+}
+
+export function getAnimationClass(type: UIAnimationType, isInfinite?: boolean) {
+  return `${ANIMATED_CLASS} ${ANIMATE_PREFIX}${type}${
+    isInfinite ? ` ${ANIMATE_PREFIX}infinite` : ""
+  }`;
 }
 
 export function getComputedStat({
@@ -99,8 +114,10 @@ export function getDamagePerSecond({ damage, rate }: { damage: number; rate: num
   return formatToFixed(damage / 2 / (rate / 1000));
 }
 
-export function getFromRange({ maximum, minimum }: { maximum: number; minimum: number }) {
-  return Math.floor(Math.random() * (maximum - minimum + 1) + minimum);
+export function getFromRange({ maximum, minimum }: RandomizedRange) {
+  const result = Math.random() * (maximum - minimum) + minimum;
+
+  return Number.isInteger(maximum) && Number.isInteger(minimum) ? Math.round(result) : result;
 }
 
 export function getSellPrice({ price }: { price: number }) {

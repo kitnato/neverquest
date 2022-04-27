@@ -27,15 +27,6 @@ export const damagePerSecond = selector({
   },
 });
 
-export const totalProtection = selector({
-  key: "totalProtection",
-  get: ({ get }) => {
-    const armorValue = get(armor);
-
-    return armorValue.protection;
-  },
-});
-
 export const totalAttackRate = selector({
   key: "totalAttackRate",
   get: ({ get }) => {
@@ -100,6 +91,15 @@ export const totalPhysicalResistance = selector({
     const physicalResistanceValue = get(physicalResistance);
 
     return getComputedStat(physicalResistanceValue);
+  },
+});
+
+export const totalProtection = selector({
+  key: "totalProtection",
+  get: ({ get }) => {
+    const armorValue = get(armor);
+
+    return armorValue.protection;
   },
 });
 

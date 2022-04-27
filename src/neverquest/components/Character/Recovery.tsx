@@ -4,11 +4,13 @@ import { useRecoilValue } from "recoil";
 import FloatingText from "neverquest/components/FloatingText";
 import ImageIcon from "neverquest/components/ImageIcon";
 import RecoveryMeter from "neverquest/components/Character/RecoveryMeter";
+import { UIAnimationType } from "neverquest/env";
 import useDeltaText from "neverquest/hooks/useDeltaText";
 import icon from "neverquest/icons/knockout.svg";
 import { deltaTotalRecoveryRate } from "neverquest/state/deltas";
 import { showRecovery } from "neverquest/state/show";
-import { totalRecoveryRate } from "neverquest/state/stats";
+import { totalRecoveryRate } from "neverquest/state/statistics";
+import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function Recovery() {
   const showRecoveryValue = useRecoilValue(showRecovery);
@@ -24,12 +26,14 @@ export default function Recovery() {
   }
 
   return (
-    <Stack className="animate__animated animate__flipInX" direction="horizontal" gap={3}>
+    <Stack className={getAnimationClass(UIAnimationType.FlipInX)} direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Recovery rate" />
 
-      <RecoveryMeter />
+      <Stack className="w-100" direction="horizontal">
+        <RecoveryMeter />
 
-      <FloatingText atom={deltaTotalRecoveryRate} />
+        <FloatingText atom={deltaTotalRecoveryRate} />
+      </Stack>
     </Stack>
   );
 }

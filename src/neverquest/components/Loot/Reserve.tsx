@@ -2,7 +2,8 @@ import { RecoilState, useRecoilValue } from "recoil";
 import Stack from "react-bootstrap/Stack";
 
 import FloatingText from "neverquest/components/FloatingText";
-import { DeltaDisplay } from "neverquest/env";
+import { DeltaDisplay, UIAnimationType } from "neverquest/env";
+import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function Reserve({
   atom,
@@ -23,7 +24,7 @@ export default function Reserve({
   }
 
   return (
-    <Stack className="animate__animated animate__flipInX" direction="horizontal" gap={3}>
+    <Stack className={getAnimationClass(UIAnimationType.FlipInX)} direction="horizontal" gap={3}>
       <Component value={lootValue} />
 
       <FloatingText atom={deltaAtom} />

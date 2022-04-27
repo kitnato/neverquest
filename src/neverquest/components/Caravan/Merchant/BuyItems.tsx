@@ -4,17 +4,9 @@ import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import ArmorInventory from "neverquest/components/Inventory/Armor/ArmorInventory";
-import WeaponInventory from "neverquest/components/Inventory/Weapon/WeaponInventory";
+import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Coins from "neverquest/components/Loot/Coins";
-import {
-  Armor,
-  InventoryItemStatus,
-  EquipmentType,
-  MerchantInventoryContents,
-  UIVariant,
-  Weapon,
-} from "neverquest/env";
+import { InventoryItemStatus, MerchantInventoryContents, UIVariant } from "neverquest/env";
 import useAcquireItem from "neverquest/hooks/useAcquireItem";
 import useReserve from "neverquest/hooks/useReserve";
 import { merchantInventory } from "neverquest/state/caravan";
@@ -57,21 +49,12 @@ export default function BuyItems() {
         ) : (
           inventoryEntries.map(([key, { item, type }]) => {
             const { price } = item;
-            let Item = null;
-
-            // TODO - all types
-            switch (type) {
-              case EquipmentType.Armor:
-                Item = <ArmorInventory armor={item as Armor} />;
-                break;
-              case EquipmentType.Weapon:
-                Item = <WeaponInventory weapon={item as Weapon} />;
-                break;
-            }
 
             return (
               <Row key={key}>
-                <Col xs={7}>{Item}</Col>
+                <Col xs={7}>
+                  <InventoryElement item={item} type={type} />
+                </Col>
 
                 <Col>
                   <Coins tooltip="Price (coins)" value={price} />

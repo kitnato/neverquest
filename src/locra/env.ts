@@ -65,9 +65,9 @@ export interface GeneratorParameters {
 }
 
 export enum ShieldType {
-  Small = "small",
   Medium = "medium",
-  Large = "large",
+  Small = "small",
+  Tower = "tower",
 }
 
 export enum WeaponType {

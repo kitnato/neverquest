@@ -5,7 +5,7 @@ import Progress from "neverquest/components/Progress";
 import { UIVariant } from "neverquest/env";
 import useAnimation from "neverquest/hooks/useAnimation";
 import { isRecovering } from "neverquest/state/character";
-import { totalRecoveryRate } from "neverquest/state/stats";
+import { totalRecoveryRate } from "neverquest/state/statistics";
 import { formatMilliseconds } from "neverquest/utilities/helpers";
 
 export default function RecoveryMeter() {

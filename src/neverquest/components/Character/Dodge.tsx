@@ -2,9 +2,12 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
+import { UIAnimationType } from "neverquest/env";
 import icon from "neverquest/icons/wingfoot.svg";
 import { showDodgeChance } from "neverquest/state/show";
-import { totalDodgeChance } from "neverquest/state/stats";
+import { totalDodgeChance } from "neverquest/state/statistics";
+import { formatPercentage } from "neverquest/utilities/helpers";
+import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function Dodge() {
   const dodgeChanceValue = useRecoilValue(totalDodgeChance);
@@ -15,14 +18,10 @@ export default function Dodge() {
   }
 
   return (
-    <Stack
-      className="animate__animated animate__flipInX"
-      direction="horizontal"
-      gap={3}
-    >
+    <Stack className={getAnimationClass(UIAnimationType.FlipInX)} direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Dodge" />
 
-      <span>{dodgeChanceValue * 100}%</span>
+      <span>{formatPercentage(dodgeChanceValue)}</span>
     </Stack>
   );
 }

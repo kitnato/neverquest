@@ -1,11 +1,11 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
-import { UIFloatingTextType } from "neverquest/env";
+import { UIAnimationSpeed, UIAnimationType, UIFloatingTextType } from "neverquest/env";
 import { weapon } from "neverquest/state/inventory";
 import { deltaHealthMonster, deltaStamina } from "neverquest/state/deltas";
 import { currentHealthMonster, monsterStatusElement } from "neverquest/state/monster";
 import { currentStamina } from "neverquest/state/resources";
-import { totalDamage } from "neverquest/state/stats";
+import { totalDamage } from "neverquest/state/statistics";
 import { animateElement } from "neverquest/utilities/helpers";
 
 export default function useAttack() {
@@ -39,7 +39,7 @@ export default function useAttack() {
       });
       setCurrentHealthMonster(monsterHealth);
 
-      animateElement(monsterStatusElementValue, "headShake", "fast");
+      animateElement(monsterStatusElementValue, UIAnimationType.HeadShake, UIAnimationSpeed.Fast);
 
       return true;
     }

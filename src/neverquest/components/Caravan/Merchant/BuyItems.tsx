@@ -1,7 +1,9 @@
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Stack from "react-bootstrap/Stack";
+import Tooltip from "react-bootstrap/Tooltip";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";
@@ -49,6 +51,9 @@ export default function BuyItems() {
         ) : (
           inventoryEntries.map(([key, { item, type }]) => {
             const { price, weight } = item;
+            const isAffordable = price <= coinsValue;
+            const isFitting = checkEncumbrance({ weight });
+            const isPurchasable = isAffordable && isFitting;
 
             return (
               <Row key={key}>
@@ -61,13 +66,26 @@ export default function BuyItems() {
                 </Col>
 
                 <Col>
-                  <Button
-                    disabled={price > coinsValue || !checkEncumbrance({ weight })}
-                    onClick={buyItem({ item, key, type })}
-                    variant={UIVariant.Outline}
+                  <OverlayTrigger
+                    overlay={
+                      <Tooltip>
+                        {!isAffordable && <div>Not enough coins!</div>}
+                        {!isFitting && <div>Over-encumbered!</div>}
+                      </Tooltip>
+                    }
+                    placement="top"
+                    trigger={isPurchasable ? [] : ["hover", "focus"]}
                   >
-                    Buy
-                  </Button>
+                    <span className="d-inline-block">
+                      <Button
+                        disabled={!isPurchasable}
+                        onClick={buyItem({ item, key, type })}
+                        variant={UIVariant.Outline}
+                      >
+                        Buy
+                      </Button>
+                    </span>
+                  </OverlayTrigger>
                 </Col>
               </Row>
             );

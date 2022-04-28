@@ -25,10 +25,14 @@ export default function useNewMonster() {
     setCurrentMonsterHealth(maximumHealthMonsterValue);
 
     if (onlyRegenerate) {
-      setDeltaHealthMonster({
-        color: UIFloatingTextType.Positive,
-        value: `+${maximumHealthMonsterValue - currentMonsterHeathValue}`,
-      });
+      const difference = maximumHealthMonsterValue - currentMonsterHeathValue;
+
+      if (difference > 0) {
+        setDeltaHealthMonster({
+          color: UIFloatingTextType.Positive,
+          value: `+${difference}`,
+        });
+      }
     } else {
       setMonsterName(
         LOCRA.generateCreature({

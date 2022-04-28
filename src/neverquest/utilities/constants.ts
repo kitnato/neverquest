@@ -6,7 +6,7 @@ import {
   Shield,
   Weapon,
   WeaponClass,
-  RandomizedRange,
+  RangeProps,
 } from "neverquest/env";
 
 export const ANIMATE_PREFIX = "animate__";
@@ -29,6 +29,8 @@ export const ARMOR_SPECIFICATIONS: Record<
     weight: 2,
   },
 };
+
+export const BLOCKED = "BLOCKED";
 
 export const DELTA_DEFAULT = {
   color: null,
@@ -53,6 +55,7 @@ export const NO_SHIELD: Shield = {
   name: "None",
   price: 0,
   stagger: 0,
+  staminaCost: 0,
   weight: 0,
 };
 
@@ -68,21 +71,24 @@ export const NO_WEAPON: Weapon = {
 
 export const SHIELD_SPECIFICATIONS: Record<
   ShieldType,
-  { blockRange: RandomizedRange; staggerModifier: number; weight: number }
+  { blockRange: RangeProps; staggerModifier: number; staminaCost: number; weight: number }
 > = {
   [ShieldType.Medium]: {
     blockRange: { minimum: 0.25, maximum: 0.5 },
     staggerModifier: 1.75,
+    staminaCost: 2,
     weight: 2,
   },
   [ShieldType.Small]: {
     blockRange: { minimum: 0.1, maximum: 0.25 },
     staggerModifier: 1.25,
+    staminaCost: 1,
     weight: 1,
   },
   [ShieldType.Tower]: {
     blockRange: { minimum: 0.5, maximum: 0.75 },
     staggerModifier: 2.5,
+    staminaCost: 3,
     weight: 3,
   },
 };
@@ -94,7 +100,7 @@ export const UNKNOWN = "???";
 
 export const WEAPON_SPECIFICATIONS: Record<
   WeaponClass,
-  { damageModifier: number; rateRange: RandomizedRange; staminaCost: number; weight: number }
+  { damageModifier: number; rateRange: RangeProps; staminaCost: number; weight: number }
 > = {
   [WeaponClass.Balanced]: {
     damageModifier: 2,

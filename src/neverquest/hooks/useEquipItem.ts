@@ -1,19 +1,12 @@
 import { useSetRecoilState, useRecoilState } from "recoil";
 
-import {
-  Armor,
-  InventoryItemStatus,
-  Accessory,
-  Shield,
-  EquipmentObject,
-  EquipmentType,
-  Weapon,
-} from "neverquest/env";
+import { InventoryContentProps } from "neverquest/env";
 import { stamina, staminaRegenerationRate } from "neverquest/state/attributes";
-import { accessory, armor, shield, weapon } from "neverquest/state/inventory";
+import { accessory, armor, inventory, shield, weapon } from "neverquest/state/inventory";
 import {
   showAccessory,
   showArmor,
+  showBlockChance,
   showShield,
   showStamina,
   showTotalAttackRateSummary,
@@ -21,10 +14,12 @@ import {
   showTotalProtection,
   showWeapon,
 } from "neverquest/state/show";
+import { isAccessory, isArmor, isShield, isWeapon } from "neverquest/utilities/type-guards";
 
 export default function useEquipItem() {
   const [showAccessoryValue, setShowAccessory] = useRecoilState(showAccessory);
   const [showArmorValue, setShowArmor] = useRecoilState(showArmor);
+  const [showBlockChanceValue, setShowBlockChance] = useRecoilState(showBlockChance);
   const [showShieldValue, setShowShield] = useRecoilState(showShield);
   const [showStaminaValue, setShowStamina] = useRecoilState(showStamina);
   const [showTotalAttackRateBreakdownValue, setShowTotalAttackRateSummary] = useRecoilState(
@@ -40,71 +35,76 @@ export default function useEquipItem() {
   const setArmor = useSetRecoilState(armor);
   const setAccessory = useSetRecoilState(accessory);
   const setShield = useSetRecoilState(shield);
+  const setInventory = useSetRecoilState(inventory);
   const setWeapon = useSetRecoilState(weapon);
 
-  return ({ item, type }: { item: EquipmentObject; type: EquipmentType }) => {
-    switch (type) {
-      case EquipmentType.Accessory:
-        setAccessory(item as Accessory);
+  return ({ key, item }: InventoryContentProps) => {
+    if (isAccessory(item)) {
+      setAccessory(item);
 
-        if (!showAccessoryValue) {
-          setShowAccessory(true);
-        }
-
-        return InventoryItemStatus.Equipped;
-      case EquipmentType.Armor:
-        setArmor(item as Armor);
-
-        if (!showArmorValue) {
-          setShowArmor(true);
-        }
-
-        if (!showTotalProtectionValue) {
-          setShowTotalProtection(true);
-        }
-
-        return InventoryItemStatus.Equipped;
-      case EquipmentType.Shield:
-        setShield(item as Shield);
-
-        if (!showShieldValue) {
-          setShowShield(true);
-        }
-
-        // TODO - show block
-
-        return InventoryItemStatus.Equipped;
-      case EquipmentType.Weapon:
-        setWeapon(item as Weapon);
-
-        if (!showStaminaValue && (item as Weapon).staminaCost > 0) {
-          setShowStamina(true);
-
-          if (!staminaValue.canAssign) {
-            setStamina((currentStamina) => ({ ...currentStamina, canAssign: true }));
-          }
-
-          if (!staminaRegenerationRateValue.canAssign) {
-            setStaminaRegenerationRate((currentStaminaRegenerationRate) => ({
-              ...currentStaminaRegenerationRate,
-              canAssign: true,
-            }));
-          }
-        }
-
-        if (!showTotalAttackRateBreakdownValue) {
-          setShowTotalAttackRateSummary(true);
-        }
-
-        if (!showTotalDamageBreakdownValue) {
-          setShowTotalDamageSummary(true);
-        }
-
-        if (!showWeaponValue) {
-          setShowWeapon(true);
-        }
-
-        return InventoryItemStatus.Equipped;
+      if (!showAccessoryValue) {
+        setShowAccessory(true);
+      }
     }
+
+    if (isArmor(item)) {
+      setArmor(item);
+
+      if (!showArmorValue) {
+        setShowArmor(true);
+      }
+
+      if (!showTotalProtectionValue) {
+        setShowTotalProtection(true);
+      }
+    }
+
+    if (isShield(item)) {
+      setShield(item);
+
+      if (!showShieldValue) {
+        setShowShield(true);
+      }
+
+      if (!showBlockChanceValue) {
+        setShowBlockChance(true);
+      }
+    }
+
+    if (isWeapon(item)) {
+      setWeapon(item);
+
+      if (!showStaminaValue && item.staminaCost > 0) {
+        setShowStamina(true);
+
+        if (!staminaValue.canAssign) {
+          setStamina((currentStamina) => ({ ...currentStamina, canAssign: true }));
+        }
+
+        if (!staminaRegenerationRateValue.canAssign) {
+          setStaminaRegenerationRate((currentStaminaRegenerationRate) => ({
+            ...currentStaminaRegenerationRate,
+            canAssign: true,
+          }));
+        }
+      }
+
+      if (!showTotalAttackRateBreakdownValue) {
+        setShowTotalAttackRateSummary(true);
+      }
+
+      if (!showTotalDamageBreakdownValue) {
+        setShowTotalDamageSummary(true);
+      }
+
+      if (!showWeaponValue) {
+        setShowWeapon(true);
+      }
+    }
+
+    setInventory((currentInventory) => ({
+      ...currentInventory,
+      [key]: { ...currentInventory[key], isEquipped: true },
+    }));
   };
 }

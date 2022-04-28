@@ -4,40 +4,39 @@ import { UIAnimationSpeed, UIAnimationType, UIFloatingTextType } from "neverques
 import { weapon } from "neverquest/state/inventory";
 import { deltaHealthMonster, deltaStamina } from "neverquest/state/deltas";
 import { currentHealthMonster, monsterStatusElement } from "neverquest/state/monster";
-import { currentStamina } from "neverquest/state/resources";
+import { canAttack, currentStamina } from "neverquest/state/resources";
 import { totalDamage } from "neverquest/state/statistics";
 import { animateElement } from "neverquest/utilities/helpers";
 
 export default function useAttack() {
   const [currentHealthMonsterValue, setCurrentHealthMonster] = useRecoilState(currentHealthMonster);
-  const [currentStaminaValue, setCurrentStamina] = useRecoilState(currentStamina);
+  const setCurrentStamina = useSetRecoilState(currentStamina);
   const setDeltaHealthMonster = useSetRecoilState(deltaHealthMonster);
   const setDeltaStamina = useSetRecoilState(deltaStamina);
+  const canAttackValue = useRecoilValue(canAttack);
   const monsterStatusElementValue = useRecoilValue(monsterStatusElement);
   const totalDamageValue = useRecoilValue(totalDamage);
-  const weaponValue = useRecoilValue(weapon);
+  const { staminaCost } = useRecoilValue(weapon);
 
   return () => {
-    const stamina = currentStaminaValue - weaponValue.staminaCost;
-
-    if (stamina >= 0) {
+    if (canAttackValue) {
       let monsterHealth = currentHealthMonsterValue - totalDamageValue;
 
       if (monsterHealth < 0) {
         monsterHealth = 0;
       }
 
+      setCurrentStamina((currentStamina) => currentStamina - staminaCost);
       setDeltaStamina({
         color: UIFloatingTextType.Negative,
-        value: `${-weaponValue.staminaCost}`,
+        value: `${-staminaCost}`,
       });
-      setCurrentStamina(stamina);
 
+      setCurrentHealthMonster(monsterHealth);
       setDeltaHealthMonster({
         color: UIFloatingTextType.Negative,
         value: `${-totalDamageValue}`,
       });
-      setCurrentHealthMonster(monsterHealth);
 
       animateElement(monsterStatusElementValue, UIAnimationType.HeadShake, UIAnimationSpeed.Fast);
 

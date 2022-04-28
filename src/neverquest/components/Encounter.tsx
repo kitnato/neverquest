@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import Caravan from "neverquest/components/Caravan";
 import Loot from "neverquest/components/Loot";
 import Wilderness from "neverquest/components/Wilderness";
-import { ArmorClass, EquipmentType, MerchantInventory, WeaponClass } from "neverquest/env";
+import { ArmorClass, Inventory, WeaponClass } from "neverquest/env";
 import { merchantInventory } from "neverquest/state/caravan";
 import { isWilderness, level, nsfw } from "neverquest/state/global";
 import { generateArmor, generateShield, generateWeapon } from "neverquest/utilities/generators";
@@ -23,7 +23,7 @@ export default function Encounter() {
     // When encountering the Caravan,
     // generate the merchant's inventory (once per level)
     if (!isWildernessValue) {
-      const newInventory: MerchantInventory = {};
+      const newInventory: Inventory = {};
 
       switch (levelValue) {
         case 1:
@@ -36,7 +36,6 @@ export default function Encounter() {
               type: WeaponType.Melee,
               weaponClass: WeaponClass.Light,
             }),
-            type: EquipmentType.Weapon,
           };
           break;
         case 2:
@@ -48,7 +47,6 @@ export default function Encounter() {
               level: levelValue,
               tags: [AffixTag.LowQuality],
             }),
-            type: EquipmentType.Armor,
           };
           break;
         case 3:
@@ -60,7 +58,6 @@ export default function Encounter() {
               tags: [AffixTag.LowQuality],
               type: ShieldType.Small,
             }),
-            type: EquipmentType.Shield,
           };
           break;
         case 4: // Accessory

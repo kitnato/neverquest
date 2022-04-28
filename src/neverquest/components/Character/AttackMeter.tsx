@@ -7,7 +7,7 @@ import useAnimation from "neverquest/hooks/useAnimation";
 import useAttack from "neverquest/hooks/useAttack";
 import { isAttacking, isLooting, isRecovering } from "neverquest/state/character";
 import { isMonsterDead } from "neverquest/state/monster";
-import { isStaminaSufficient } from "neverquest/state/resources";
+import { canAttack } from "neverquest/state/resources";
 import { totalAttackRate } from "neverquest/state/statistics";
 import { formatMilliseconds } from "neverquest/utilities/helpers";
 
@@ -17,33 +17,33 @@ export default function AttackMeter() {
   const isLootingValue = useRecoilValue(isLooting);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isRecoveringValue = useRecoilValue(isRecovering);
-  const isStaminaSufficientValue = useRecoilValue(isStaminaSufficient);
+  const canAttackValue = useRecoilValue(canAttack);
   const totalAttackRateValue = useRecoilValue(totalAttackRate);
   const [deltaAttack, setDeltaAttack] = useState(0);
 
   useAnimation((deltaTime) => {
     setDeltaAttack((currentDelta) => currentDelta + deltaTime);
-  }, !isAttackingValue || isLootingValue || isRecoveringValue || !isStaminaSufficientValue);
+  }, !isAttackingValue || isLootingValue || isRecoveringValue || !canAttackValue);
 
   useEffect(() => {
-    if (deltaAttack >= totalAttackRateValue && !isMonsterDeadValue) {
+    if (deltaAttack >= totalAttackRateValue) {
       attack();
       setDeltaAttack(0);
     }
-  }, [attack, deltaAttack, isMonsterDeadValue, totalAttackRateValue]);
+  }, [deltaAttack, totalAttackRateValue]);
 
   useEffect(() => {
-    if (!isAttackingValue || isLootingValue || isMonsterDeadValue) {
+    if (!isAttackingValue || isLootingValue || isMonsterDeadValue || !canAttackValue) {
       setDeltaAttack(0);
     }
-  }, [isAttackingValue, isMonsterDeadValue]);
+  }, [isAttackingValue, isLootingValue, isMonsterDeadValue, canAttackValue]);
 
   const label = (() => {
     if (isLootingValue) {
       return "LOOTING";
     }
 
-    if (!isStaminaSufficientValue) {
+    if (!canAttackValue) {
       return "EXHAUSTED";
     }
 

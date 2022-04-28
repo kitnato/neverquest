@@ -3,6 +3,7 @@ import Popover from "react-bootstrap/Popover";
 import Table from "react-bootstrap/Table";
 
 import { Armor } from "neverquest/env";
+import { NO_ARMOR } from "neverquest/utilities/constants";
 
 export default function ArmorName({ armor }: { armor: Armor }) {
   const { armorClass, name, protection, weight } = armor;
@@ -22,20 +23,20 @@ export default function ArmorName({ armor }: { armor: Armor }) {
                   <td>{protection}</td>
                 </tr>
 
-                {armorClass && (
-                  <tr>
-                    <td className="text-end">Class:</td>
+                {armor !== NO_ARMOR && (
+                  <>
+                    <tr>
+                      <td className="text-end">Class:</td>
 
-                    <td>{armorClass}</td>
-                  </tr>
-                )}
+                      <td>{armorClass}</td>
+                    </tr>
 
-                {weight > 0 && (
-                  <tr>
-                    <td className="text-end">Weight:</td>
+                    <tr>
+                      <td className="text-end">Weight:</td>
 
-                    <td>{weight}</td>
-                  </tr>
+                      <td>{weight}</td>
+                    </tr>
+                  </>
                 )}
               </tbody>
             </Table>

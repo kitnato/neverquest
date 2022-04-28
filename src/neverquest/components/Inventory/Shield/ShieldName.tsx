@@ -4,9 +4,10 @@ import Table from "react-bootstrap/Table";
 
 import { Shield } from "neverquest/env";
 import { capitalizeAll, formatMilliseconds, formatPercentage } from "neverquest/utilities/helpers";
+import { NO_SHIELD } from "neverquest/utilities/constants";
 
 export default function ShieldName({ shield }: { shield: Shield }) {
-  const { block, name, stagger, type, weight } = shield;
+  const { block, name, stagger, staminaCost, type, weight } = shield;
 
   return (
     <OverlayTrigger
@@ -29,20 +30,26 @@ export default function ShieldName({ shield }: { shield: Shield }) {
                   <td>{formatMilliseconds(stagger)}</td>
                 </tr>
 
-                {type && (
-                  <tr>
-                    <td className="text-end">Type:</td>
+                {shield !== NO_SHIELD && (
+                  <>
+                    <tr>
+                      <td className="text-end">Stamina cost:</td>
 
-                    <td>{capitalizeAll(type)}</td>
-                  </tr>
-                )}
+                      <td>{staminaCost}</td>
+                    </tr>
 
-                {weight > 0 && (
-                  <tr>
-                    <td className="text-end">Weight:</td>
+                    <tr>
+                      <td className="text-end">Type:</td>
 
-                    <td>{weight}</td>
-                  </tr>
+                      <td>{capitalizeAll(type)}</td>
+                    </tr>
+
+                    <tr>
+                      <td className="text-end">Weight:</td>
+
+                      <td>{weight}</td>
+                    </tr>
+                  </>
                 )}
               </tbody>
             </Table>

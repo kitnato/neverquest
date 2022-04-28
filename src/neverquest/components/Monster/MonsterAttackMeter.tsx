@@ -20,6 +20,7 @@ export default function MonsterAttackMeter() {
   const isMonsterEngagedValue = useRecoilValue(isMonsterEngaged);
   const totalAttackRateMonsterValue = useRecoilValue(totalAttackRateMonster);
   const resetCurrentHealthMonster = useResetRecoilState(currentHealthMonster);
+
   const [deltaAttack, setDeltaAttack] = useState(0);
 
   const defend = useDefend();
@@ -33,14 +34,14 @@ export default function MonsterAttackMeter() {
       setDeltaAttack(0);
       defend();
     }
-  }, [defend, deltaAttack, isMonsterDeadValue, totalAttackRateMonsterValue]);
+  }, [deltaAttack, isMonsterDeadValue, totalAttackRateMonsterValue]);
 
   useEffect(() => {
-    if (!isMonsterDeadValue && !isAttackingValue) {
+    if (!isAttackingValue && !isMonsterDeadValue) {
       setDeltaAttack(0);
       resetCurrentHealthMonster();
     }
-  }, [isAttackingValue, isMonsterDeadValue, resetCurrentHealthMonster]);
+  }, [isAttackingValue, isMonsterDeadValue]);
 
   useEffect(() => {
     if (isMonsterDeadValue) {

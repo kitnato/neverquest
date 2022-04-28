@@ -1,23 +1,21 @@
 import ArmorInventory from "neverquest/components/Inventory/Armor/ArmorInventory";
 import ShieldInventory from "neverquest/components/Inventory/Shield/ShieldInventory";
 import WeaponInventory from "neverquest/components/Inventory/Weapon/WeaponInventory";
-import { Armor, EquipmentObject, EquipmentType, Shield, Weapon } from "neverquest/env";
+import { Equipment } from "neverquest/env";
+import { isArmor, isShield, isWeapon } from "neverquest/utilities/type-guards";
 
-export default function InventoryElement({
-  item,
-  type,
-}: {
-  item: EquipmentObject;
-  type: EquipmentType;
-}) {
+export default function InventoryElement({ item }: { item: Equipment }) {
   // TODO - all types
-  switch (type) {
-    case EquipmentType.Armor:
-      return <ArmorInventory armor={item as Armor} />;
-    case EquipmentType.Shield:
-      return <ShieldInventory shield={item as Shield} />;
-    case EquipmentType.Weapon:
-      return <WeaponInventory weapon={item as Weapon} />;
+  if (isArmor(item)) {
+    return <ArmorInventory armor={item} />;
+  }
+
+  if (isShield(item)) {
+    return <ShieldInventory shield={item} />;
+  }
+
+  if (isWeapon(item)) {
+    return <WeaponInventory weapon={item} />;
   }
 
   return null;

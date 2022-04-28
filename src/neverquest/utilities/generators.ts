@@ -63,7 +63,7 @@ export function generateShield({
   tags?: AffixTag[];
   type: ShieldType;
 }): Shield {
-  const { blockRange, staggerModifier, weight } = SHIELD_SPECIFICATIONS[type];
+  const { blockRange, staggerModifier, staminaCost, weight } = SHIELD_SPECIFICATIONS[type];
 
   return {
     block: getFromRange(blockRange),
@@ -81,6 +81,7 @@ export function generateShield({
       }),
     price: level * 2 + Math.ceil(level / 1.5),
     stagger: (500 + Math.floor(level * 10)) * staggerModifier,
+    staminaCost,
     type,
     weight,
   };

@@ -1,13 +1,14 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 
-import { InventoryItemStatus, EquipmentObject, EquipmentType } from "neverquest/env";
+import { Equipment } from "neverquest/env";
 import useCheckEncumbrance from "neverquest/hooks/useCheckEncumbrance";
 import useEquipItem from "neverquest/hooks/useEquipItem";
-import { accessory, armor, shield, storedInventory, weapon } from "neverquest/state/inventory";
+import { accessory, armor, inventory, shield, weapon } from "neverquest/state/inventory";
 import { autoEquip } from "neverquest/state/global";
 import { showInventoryButton } from "neverquest/state/show";
 import { NO_ACCESSORY, NO_ARMOR, NO_SHIELD, NO_WEAPON } from "neverquest/utilities/constants";
+import { isAccessory, isArmor, isShield, isWeapon } from "neverquest/utilities/type-guards";
 
 export default function useAcquireItem() {
   const checkEncumbrance = useCheckEncumbrance();
@@ -18,41 +19,34 @@ export default function useAcquireItem() {
   const shieldValue = useRecoilValue(shield);
   const weaponValue = useRecoilValue(weapon);
   const autoEquipValue = useRecoilValue(autoEquip);
-  const setStoredInventory = useSetRecoilState(storedInventory);
+  const setInventory = useSetRecoilState(inventory);
 
-  return ({
-    isUnequipping = false,
-    item,
-    type,
-  }: {
-    isUnequipping?: boolean;
-    item: EquipmentObject;
-    type: EquipmentType;
-  }) => {
+  return ({ item }: { item: Equipment }) => {
     if (!checkEncumbrance({ weight: item.weight })) {
-      return InventoryItemStatus.Rejected;
+      return false;
+    }
+
+    const key = uuidv4();
+
+    setInventory((currentInventory) => ({
+      ...currentInventory,
+      [key]: { item },
+    }));
+
+    if (
+      autoEquipValue &&
+      ((accessoryValue === NO_ACCESSORY && isAccessory(item)) ||
+        (armorValue === NO_ARMOR && isArmor(item)) ||
+        (shieldValue === NO_SHIELD && isShield(item)) ||
+        (weaponValue === NO_WEAPON && isWeapon(item)))
+    ) {
+      equipItem({ item, key });
     }
 
     if (!showInventoryButtonValue) {
       setShowInventoryButton(true);
     }
 
-    if (
-      !isUnequipping &&
-      autoEquipValue &&
-      ((accessoryValue.name === NO_ACCESSORY.name && type === EquipmentType.Accessory) ||
-        (armorValue.name === NO_ARMOR.name && type === EquipmentType.Armor) ||
-        (shieldValue.name === NO_SHIELD.name && type === EquipmentType.Shield) ||
-        (weaponValue.name === NO_WEAPON.name && type === EquipmentType.Weapon))
-    ) {
-      return equipItem({ item, type });
-    }
-
-    setStoredInventory((currentInventory) => ({
-      ...currentInventory,
-      [uuidv4()]: { item, type },
-    }));
-
-    return InventoryItemStatus.Stored;
+    return true;
   };
 }

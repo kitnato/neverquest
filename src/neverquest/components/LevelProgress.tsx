@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import Progress from "neverquest/components/Progress";
-import { UIAnimationType, UIVariant } from "neverquest/env";
+import { UIAnimationType, UIOverlayPlacement, UIVariant } from "neverquest/env";
 import levelIcon from "neverquest/icons/flying-flag.svg";
 import progressIcon from "neverquest/icons/stairs.svg";
 import { isWilderness, level, progress, progressMax } from "neverquest/state/global";
@@ -24,14 +24,18 @@ export default function LevelProgress() {
   return (
     <Stack className={getAnimationClass(UIAnimationType.FlipInX)} direction="horizontal" gap={5}>
       <Stack direction="horizontal" gap={3}>
-        <ImageIcon icon={levelIcon} tooltip="Level" />
+        <ImageIcon icon={levelIcon} placement={UIOverlayPlacement.Bottom} tooltip="Level" />
 
         <span>{levelValue}</span>
       </Stack>
 
       {isWildernessValue && (
         <Stack className="w-100" direction="horizontal" gap={3}>
-          <ImageIcon icon={progressIcon} tooltip="Level progress" />
+          <ImageIcon
+            icon={progressIcon}
+            placement={UIOverlayPlacement.Bottom}
+            tooltip="Level progress"
+          />
 
           <Progress
             label={`${progressValue}/${progressMaxValue}`}

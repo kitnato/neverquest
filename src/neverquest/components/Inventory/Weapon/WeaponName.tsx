@@ -10,6 +10,7 @@ import {
   formatMilliseconds,
   getDamagePerSecond,
 } from "neverquest/utilities/helpers";
+import { NO_WEAPON } from "neverquest/utilities/constants";
 
 export default function WeaponName({ weapon }: { weapon: Weapon }) {
   const showDPSValue = useRecoilValue(showDamagePerSecond);
@@ -45,31 +46,31 @@ export default function WeaponName({ weapon }: { weapon: Weapon }) {
                 </tr>
 
                 <tr>
-                  <td className="text-end">Stamina cost:</td>
-
-                  <td>{staminaCost}</td>
-                </tr>
-
-                <tr>
                   <td className="text-end">Type:</td>
 
                   <td>{capitalizeAll(type)}</td>
                 </tr>
 
-                {weaponClass && (
-                  <tr>
-                    <td className="text-end">Class:</td>
+                {weapon !== NO_WEAPON && (
+                  <>
+                    <tr>
+                      <td className="text-end">Stamina cost:</td>
 
-                    <td>{weaponClass}</td>
-                  </tr>
-                )}
+                      <td>{staminaCost}</td>
+                    </tr>
 
-                {weight > 0 && (
-                  <tr>
-                    <td className="text-end">Weight:</td>
+                    <tr>
+                      <td className="text-end">Class:</td>
 
-                    <td>{weight}</td>
-                  </tr>
+                      <td>{weaponClass}</td>
+                    </tr>
+
+                    <tr>
+                      <td className="text-end">Weight:</td>
+
+                      <td>{weight}</td>
+                    </tr>
+                  </>
                 )}
               </tbody>
             </Table>

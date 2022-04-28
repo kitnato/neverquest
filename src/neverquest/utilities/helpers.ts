@@ -1,4 +1,4 @@
-import { RandomizedRange, UIAnimationSpeed, UIAnimationType } from "neverquest/env";
+import { RangeProps, UIAnimationSpeed, UIAnimationType } from "neverquest/env";
 import { ANIMATED_CLASS, ANIMATE_PREFIX } from "neverquest/utilities/constants";
 
 // Animates an element once according to its Animate.css type with optional speed parameter.
@@ -36,7 +36,10 @@ export function animateElement(
   );
 }
 
-export function capitalizeAll(string: string) {
+export function capitalizeAll(string: null | string | undefined) {
+  if (!string) {
+    return "";
+  }
   // ^ matches the beginning of the string.
   // \w matches any word character.
   // {1} takes only the first character.
@@ -114,7 +117,7 @@ export function getDamagePerSecond({ damage, rate }: { damage: number; rate: num
   return formatToFixed(damage / 2 / (rate / 1000));
 }
 
-export function getFromRange({ maximum, minimum }: RandomizedRange) {
+export function getFromRange({ maximum, minimum }: RangeProps) {
   const result = Math.random() * (maximum - minimum) + minimum;
 
   return Number.isInteger(maximum) && Number.isInteger(minimum) ? Math.round(result) : result;

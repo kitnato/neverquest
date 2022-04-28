@@ -8,7 +8,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Coins from "neverquest/components/Loot/Coins";
-import { InventoryItemStatus, MerchantInventoryContents, UIVariant } from "neverquest/env";
+import { InventoryContentProps, UIVariant } from "neverquest/env";
 import useAcquireItem from "neverquest/hooks/useAcquireItem";
 import useReserve from "neverquest/hooks/useReserve";
 import useCheckEncumbrance from "neverquest/hooks/useCheckEncumbrance";
@@ -25,11 +25,11 @@ export default function BuyItems() {
   const inventoryEntries = Object.entries(merchantInventoryValue);
 
   const buyItem =
-    ({ item, key, type }: MerchantInventoryContents & { key: string }) =>
+    ({ item, key }: InventoryContentProps) =>
     () => {
-      const itemReceived = acquireItem({ item, type });
+      const itemReceived = acquireItem({ item });
 
-      if (itemReceived !== InventoryItemStatus.Rejected) {
+      if (itemReceived) {
         setReserve({ coinsDifference: -item.price });
         setMerchantInventory((currentMerchantInventory) => {
           const newMerchantInventory = { ...currentMerchantInventory };
@@ -49,7 +49,7 @@ export default function BuyItems() {
         {inventoryEntries.length === 0 ? (
           <span className="fst-italic">Nothing available.</span>
         ) : (
-          inventoryEntries.map(([key, { item, type }]) => {
+          inventoryEntries.map(([key, { item }]) => {
             const { price, weight } = item;
             const isAffordable = price <= coinsValue;
             const isFitting = checkEncumbrance({ weight });
@@ -58,7 +58,7 @@ export default function BuyItems() {
             return (
               <Row key={key}>
                 <Col xs={7}>
-                  <InventoryElement item={item} type={type} />
+                  <InventoryElement item={item} />
                 </Col>
 
                 <Col>
@@ -79,7 +79,7 @@ export default function BuyItems() {
                     <span className="d-inline-block">
                       <Button
                         disabled={!isPurchasable}
-                        onClick={buyItem({ item, key, type })}
+                        onClick={buyItem({ item, key })}
                         variant={UIVariant.Outline}
                       >
                         Buy

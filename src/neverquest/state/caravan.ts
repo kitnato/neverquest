@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-import { CrewType, MerchantInventory } from "neverquest/env";
+import { CrewType, Inventory } from "neverquest/env";
 import { UNKNOWN } from "neverquest/utilities/constants";
 
 export const crew = atom({
@@ -48,7 +48,7 @@ export const exchangeScrap = atom({
   default: 3,
 });
 
-export const merchantInventory = atom<MerchantInventory>({
+export const merchantInventory = atom<Inventory>({
   key: "merchantInventory",
   default: {},
 });

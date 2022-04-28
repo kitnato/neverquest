@@ -11,7 +11,7 @@ import {
   recoveryRate,
   staminaRegenerationRate,
 } from "neverquest/state/attributes";
-import { armor, weapon } from "neverquest/state/inventory";
+import { armor, shield, weapon } from "neverquest/state/inventory";
 import { getComputedStat, getDamagePerSecond } from "neverquest/utilities/helpers";
 
 export const damagePerSecond = selector({
@@ -31,11 +31,20 @@ export const totalAttackRate = selector({
   key: "totalAttackRate",
   get: ({ get }) => {
     const attackRateBonusValue = get(attackRateBonus);
-    const weaponValue = get(weapon);
+    const { rate } = get(weapon);
 
     const bonus = getComputedStat(attackRateBonusValue);
 
-    return weaponValue.rate * (1 - bonus);
+    return rate * (1 - bonus);
+  },
+});
+
+export const totalBlockChance = selector({
+  key: "totalBlockChance",
+  get: ({ get }) => {
+    const { block } = get(shield);
+
+    return block;
   },
 });
 

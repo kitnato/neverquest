@@ -3,13 +3,13 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import { UIAnimationType } from "neverquest/env";
-import icon from "neverquest/icons/round-shield.svg";
+import icon from "neverquest/icons/shield-reflect.svg";
 import { shield } from "neverquest/state/inventory";
 import { showBlockChance } from "neverquest/state/show";
-import { getAnimationClass } from "neverquest/utilities/helpers";
+import { formatPercentage, getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function Block() {
-  const shieldValue = useRecoilValue(shield);
+  const { block } = useRecoilValue(shield);
   const showBlockChanceValue = useRecoilValue(showBlockChance);
 
   if (!showBlockChanceValue) {
@@ -20,7 +20,7 @@ export default function Block() {
     <Stack className={getAnimationClass(UIAnimationType.FlipInX)} direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Block chance" />
 
-      <span>{shieldValue.stagger * 100}</span>
+      <span>{formatPercentage(block)}</span>
     </Stack>
   );
 }

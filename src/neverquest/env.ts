@@ -46,20 +46,13 @@ export interface DeltaDisplayContents {
 
 export type Inventory =
   | {
-      [key: string]: InventoryContents;
+      [key: string]: InventoryContent;
     }
   | Record<string, never>;
 
-export interface InventoryContents {
-  item: EquipmentObject;
+export interface InventoryContent {
   isEquipped?: boolean;
-  type: EquipmentType;
-}
-
-export enum InventoryItemStatus {
-  Equipped,
-  Rejected,
-  Stored,
+  item: Equipment;
 }
 
 export interface EquipmentBase {
@@ -68,14 +61,7 @@ export interface EquipmentBase {
   weight: number;
 }
 
-export type EquipmentObject = Armor | Accessory | Shield | Weapon;
-
-export enum EquipmentType {
-  Accessory,
-  Armor,
-  Shield,
-  Weapon,
-}
+export type Equipment = Armor | Accessory | Shield | Weapon;
 
 export enum LocationType {
   Caravan,
@@ -88,20 +74,10 @@ export enum LootType {
   Scrap,
 }
 
-export interface MerchantInventoryContents {
-  item: EquipmentObject;
-  type: EquipmentType;
-}
-
-export type MerchantInventory =
-  | {
-      [key: string]: MerchantInventoryContents;
-    }
-  | Record<string, never>;
-
 export type Shield = EquipmentBase & {
   block: number;
   stagger: number;
+  staminaCost: number;
   type?: ShieldType;
 };
 
@@ -122,12 +98,16 @@ export enum WeaponClass {
 
 // PROPS
 
+export type InventoryContentProps = InventoryContent & {
+  key: string;
+};
+
 export interface LootProps {
   tooltip?: string | undefined;
   value: number;
 }
 
-export interface RandomizedRange {
+export interface RangeProps {
   maximum: number;
   minimum: number;
 }
@@ -158,6 +138,11 @@ export enum UIFloatingTextType {
   Negative = "text-danger",
   Neutral = "text-muted",
   Positive = "text-success",
+}
+
+export enum UIOverlayPlacement {
+  Bottom = "bottom",
+  Top = "top",
 }
 
 export enum UISize {

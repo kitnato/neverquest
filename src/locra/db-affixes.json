@@ -47,7 +47,7 @@
   { "name": "banality", "tags": ["lowQuality"], "artifact": "suffix" },
   { "name": "bandaged", "creature": "prefix" },
   { "name": "bandit", "location": "prefix" },
-  { "name": "banditry", "artifact": "suffix", "location": "prefix" },
+  { "name": "banditry", "artifact": "suffix", "location": "suffix" },
   { "name": "barfing", "tags": ["lowQuality"], "artifact": "prefix", "creature": "prefix" },
   { "name": "barking", "creature": "prefix" },
   { "name": "battered", "tags": ["lowQuality"], "artifact": "prefix", "creature": "prefix", "location": "prefix" },

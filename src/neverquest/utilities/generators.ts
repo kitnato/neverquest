@@ -1,6 +1,6 @@
 import LOCRA from "locra";
 import { AffixTag, ArtifactType, ShieldType, WeaponType } from "locra/env";
-import { Armor, ArmorWeight, Shield, Weapon, WeaponWeight } from "neverquest/env";
+import { Armor, ArmorClass, Shield, Weapon, WeaponClass } from "neverquest/env";
 import {
   ARMOR_SPECIFICATIONS,
   SHIELD_SPECIFICATIONS,
@@ -9,26 +9,26 @@ import {
 import { getFromRange } from "neverquest/utilities/helpers";
 
 export function generateArmor({
+  armorClass,
   hasPrefix,
   hasSuffix,
   isNSFW,
   level,
   name,
   tags,
-  weight,
 }: {
+  armorClass: ArmorClass;
   hasPrefix?: boolean;
   hasSuffix?: boolean;
   isNSFW: boolean;
   level: number;
   name?: string;
   tags?: AffixTag[];
-  weight: ArmorWeight;
 }): Armor {
-  const { encumbrance, protectionModifier } = ARMOR_SPECIFICATIONS[weight];
+  const { protectionModifier, weight } = ARMOR_SPECIFICATIONS[armorClass];
 
   return {
-    encumbrance,
+    armorClass,
     name:
       name ||
       LOCRA.generateArtifact({
@@ -63,11 +63,10 @@ export function generateShield({
   tags?: AffixTag[];
   type: ShieldType;
 }): Shield {
-  const { blockRange, encumbrance, staggerModifier } = SHIELD_SPECIFICATIONS[type];
+  const { blockRange, staggerModifier, weight } = SHIELD_SPECIFICATIONS[type];
 
   return {
     block: getFromRange(blockRange),
-    encumbrance,
     name:
       name ||
       LOCRA.generateArtifact({
@@ -83,6 +82,7 @@ export function generateShield({
     price: level * 2 + Math.ceil(level / 1.5),
     stagger: (500 + Math.floor(level * 10)) * staggerModifier,
     type,
+    weight,
   };
 }
 
@@ -94,7 +94,7 @@ export function generateWeapon({
   name,
   tags,
   type,
-  weight,
+  weaponClass,
 }: {
   hasPrefix?: boolean;
   hasSuffix?: boolean;
@@ -103,13 +103,12 @@ export function generateWeapon({
   name?: string;
   tags?: AffixTag[];
   type: WeaponType;
-  weight: WeaponWeight;
+  weaponClass: WeaponClass;
 }): Weapon {
-  const { damageModifier, encumbrance, rateRange, staminaCost } = WEAPON_SPECIFICATIONS[weight];
+  const { damageModifier, rateRange, staminaCost, weight } = WEAPON_SPECIFICATIONS[weaponClass];
 
   return {
     damage: Math.ceil(level * damageModifier),
-    encumbrance,
     name:
       name ||
       LOCRA.generateArtifact({
@@ -126,6 +125,7 @@ export function generateWeapon({
     rate: getFromRange(rateRange),
     staminaCost,
     type,
+    weaponClass,
     weight,
   };
 }

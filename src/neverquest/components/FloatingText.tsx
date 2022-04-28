@@ -88,7 +88,7 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
         }
       }
 
-      if (bottom >= 12) {
+      if (bottom >= 10) {
         newOpacity -= 0.05;
         newRight -= 1;
 

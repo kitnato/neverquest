@@ -5,11 +5,11 @@ import { ShieldType, WeaponType } from "locra/env";
 export type Accessory = EquipmentBase;
 
 export type Armor = EquipmentBase & {
+  armorClass?: ArmorClass;
   protection: number;
-  weight?: ArmorWeight;
 };
 
-export enum ArmorWeight {
+export enum ArmorClass {
   Light = "Light",
   Plate = "Plate",
   Reinforced = "Reinforced",
@@ -63,9 +63,9 @@ export enum InventoryItemStatus {
 }
 
 export interface EquipmentBase {
-  encumbrance: number;
   name: string;
   price: number;
+  weight: number;
 }
 
 export type EquipmentObject = Armor | Accessory | Shield | Weapon;
@@ -110,10 +110,10 @@ export type Weapon = EquipmentBase & {
   rate: number;
   staminaCost: number;
   type: WeaponType;
-  weight?: WeaponWeight;
+  weaponClass?: WeaponClass;
 };
 
-export enum WeaponWeight {
+export enum WeaponClass {
   Balanced = "Balanced",
   Heavy = "Heavy",
   Light = "Light",

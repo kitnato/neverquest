@@ -6,7 +6,7 @@ import { Shield } from "neverquest/env";
 import { capitalizeAll, formatMilliseconds, formatPercentage } from "neverquest/utilities/helpers";
 
 export default function ShieldName({ shield }: { shield: Shield }) {
-  const { block, encumbrance, name, stagger, type } = shield;
+  const { block, name, stagger, type, weight } = shield;
 
   return (
     <OverlayTrigger
@@ -37,11 +37,11 @@ export default function ShieldName({ shield }: { shield: Shield }) {
                   </tr>
                 )}
 
-                {encumbrance > 0 && (
+                {weight > 0 && (
                   <tr>
                     <td className="text-end">Weight:</td>
 
-                    <td>{encumbrance}</td>
+                    <td>{weight}</td>
                   </tr>
                 )}
               </tbody>

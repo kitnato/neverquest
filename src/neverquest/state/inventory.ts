@@ -46,11 +46,11 @@ export const encumbrance = selector({
 
     return (
       Object.values(equippedInventoryValue).reduce(
-        (totalEncumbrance, { item: { encumbrance } }) => totalEncumbrance + encumbrance,
+        (totalEncumbrance, { item: { weight } }) => totalEncumbrance + weight,
         0
       ) +
       Object.values(storedInventoryValue).reduce(
-        (totalEncumbrance, { item: { encumbrance } }) => totalEncumbrance + encumbrance,
+        (totalEncumbrance, { item: { weight } }) => totalEncumbrance + weight,
         0
       )
     );
@@ -103,6 +103,7 @@ export const equippedInventory = selector<Inventory>({
   },
 });
 
+// TODO - needed?
 export const isInventoryFull = selector({
   key: "isInventoryFull",
   get: ({ get }) => {

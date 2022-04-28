@@ -13,7 +13,8 @@ import {
 
 export default function WeaponName({ weapon }: { weapon: Weapon }) {
   const showDPSValue = useRecoilValue(showDamagePerSecond);
-  const { damage, encumbrance, name, rate, staminaCost, type, weight } = weapon;
+
+  const { damage, name, rate, staminaCost, type, weaponClass, weight } = weapon;
 
   return (
     <OverlayTrigger
@@ -55,13 +56,19 @@ export default function WeaponName({ weapon }: { weapon: Weapon }) {
                   <td>{capitalizeAll(type)}</td>
                 </tr>
 
-                {encumbrance > 0 && weight && (
+                {weaponClass && (
+                  <tr>
+                    <td className="text-end">Class:</td>
+
+                    <td>{weaponClass}</td>
+                  </tr>
+                )}
+
+                {weight > 0 && (
                   <tr>
                     <td className="text-end">Weight:</td>
 
-                    <td>
-                      {weight} ({encumbrance})
-                    </td>
+                    <td>{weight}</td>
                   </tr>
                 )}
               </tbody>

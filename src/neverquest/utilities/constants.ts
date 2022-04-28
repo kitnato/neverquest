@@ -1,11 +1,11 @@
 import { ShieldType, WeaponType } from "locra/env";
 import {
   Armor,
-  ArmorWeight,
+  ArmorClass,
   Accessory,
   Shield,
   Weapon,
-  WeaponWeight,
+  WeaponClass,
   RandomizedRange,
 } from "neverquest/env";
 
@@ -13,20 +13,20 @@ export const ANIMATE_PREFIX = "animate__";
 export const ANIMATED_CLASS = `${ANIMATE_PREFIX}animated`;
 
 export const ARMOR_SPECIFICATIONS: Record<
-  ArmorWeight,
-  { encumbrance: number; protectionModifier: number }
+  ArmorClass,
+  { protectionModifier: number; weight: number }
 > = {
-  [ArmorWeight.Light]: {
-    encumbrance: 1,
+  [ArmorClass.Light]: {
     protectionModifier: 1.25,
+    weight: 1,
   },
-  [ArmorWeight.Reinforced]: {
-    encumbrance: 2,
-    protectionModifier: 2,
-  },
-  [ArmorWeight.Plate]: {
-    encumbrance: 3,
+  [ArmorClass.Plate]: {
     protectionModifier: 3,
+    weight: 3,
+  },
+  [ArmorClass.Reinforced]: {
+    protectionModifier: 2,
+    weight: 2,
   },
 };
 
@@ -36,54 +36,54 @@ export const DELTA_DEFAULT = {
 };
 
 export const NO_ACCESSORY: Accessory = {
-  encumbrance: 0,
   name: "None",
   price: 0,
+  weight: 0,
 };
 
 export const NO_ARMOR: Armor = {
-  encumbrance: 0,
   name: "Unarmored",
   price: 0,
   protection: 0,
+  weight: 0,
 };
 
 export const NO_SHIELD: Shield = {
   block: 0,
-  encumbrance: 0,
   name: "None",
   price: 0,
   stagger: 0,
+  weight: 0,
 };
 
 export const NO_WEAPON: Weapon = {
   damage: 1,
-  encumbrance: 0,
   name: "Unarmed",
   price: 0,
   rate: 3000,
   staminaCost: 0,
   type: WeaponType.Melee,
+  weight: 0,
 };
 
 export const SHIELD_SPECIFICATIONS: Record<
   ShieldType,
-  { blockRange: RandomizedRange; encumbrance: number; staggerModifier: number }
+  { blockRange: RandomizedRange; staggerModifier: number; weight: number }
 > = {
-  [ShieldType.Small]: {
-    blockRange: { minimum: 0.1, maximum: 0.25 },
-    encumbrance: 1,
-    staggerModifier: 1.25,
-  },
   [ShieldType.Medium]: {
     blockRange: { minimum: 0.25, maximum: 0.5 },
-    encumbrance: 2,
     staggerModifier: 1.75,
+    weight: 2,
+  },
+  [ShieldType.Small]: {
+    blockRange: { minimum: 0.1, maximum: 0.25 },
+    staggerModifier: 1.25,
+    weight: 1,
   },
   [ShieldType.Tower]: {
     blockRange: { minimum: 0.5, maximum: 0.75 },
-    encumbrance: 3,
     staggerModifier: 2.5,
+    weight: 3,
   },
 };
 
@@ -93,31 +93,31 @@ export const TRANSPARENT_PIXEL =
 export const UNKNOWN = "???";
 
 export const WEAPON_SPECIFICATIONS: Record<
-  WeaponWeight,
-  { damageModifier: number; encumbrance: number; rateRange: RandomizedRange; staminaCost: number }
+  WeaponClass,
+  { damageModifier: number; rateRange: RandomizedRange; staminaCost: number; weight: number }
 > = {
-  [WeaponWeight.Light]: {
-    damageModifier: 1.25,
-    encumbrance: 1,
-    rateRange: { minimum: 3000, maximum: 3500 },
-    staminaCost: 1,
-  },
-  [WeaponWeight.Balanced]: {
+  [WeaponClass.Balanced]: {
     damageModifier: 2,
-    encumbrance: 2,
     rateRange: { minimum: 3400, maximum: 4000 },
     staminaCost: 2,
+    weight: 2,
   },
-  [WeaponWeight.Heavy]: {
+  [WeaponClass.Heavy]: {
     damageModifier: 3,
-    encumbrance: 3,
     rateRange: { minimum: 3900, maximum: 4500 },
     staminaCost: 3,
+    weight: 3,
   },
-  [WeaponWeight.TwoHanded]: {
+  [WeaponClass.Light]: {
+    damageModifier: 1.25,
+    rateRange: { minimum: 3000, maximum: 3500 },
+    staminaCost: 1,
+    weight: 1,
+  },
+  [WeaponClass.TwoHanded]: {
     damageModifier: 4,
-    encumbrance: 4,
     rateRange: { minimum: 4000, maximum: 5000 },
     staminaCost: 3,
+    weight: 4,
   },
 };

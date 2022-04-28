@@ -2,25 +2,19 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 
 import { InventoryItemStatus, EquipmentObject, EquipmentType } from "neverquest/env";
+import useCheckEncumbrance from "neverquest/hooks/useCheckEncumbrance";
 import useEquipItem from "neverquest/hooks/useEquipItem";
-import {
-  accessory,
-  armor,
-  isInventoryFull,
-  shield,
-  storedInventory,
-  weapon,
-} from "neverquest/state/inventory";
+import { accessory, armor, shield, storedInventory, weapon } from "neverquest/state/inventory";
 import { autoEquip } from "neverquest/state/global";
 import { showInventoryButton } from "neverquest/state/show";
 import { NO_ACCESSORY, NO_ARMOR, NO_SHIELD, NO_WEAPON } from "neverquest/utilities/constants";
 
 export default function useAcquireItem() {
+  const checkEncumbrance = useCheckEncumbrance();
   const equipItem = useEquipItem();
   const [showInventoryButtonValue, setShowInventoryButton] = useRecoilState(showInventoryButton);
   const armorValue = useRecoilValue(armor);
   const accessoryValue = useRecoilValue(accessory);
-  const isInventoryFullValue = useRecoilValue(isInventoryFull);
   const shieldValue = useRecoilValue(shield);
   const weaponValue = useRecoilValue(weapon);
   const autoEquipValue = useRecoilValue(autoEquip);
@@ -35,7 +29,7 @@ export default function useAcquireItem() {
     item: EquipmentObject;
     type: EquipmentType;
   }) => {
-    if (isInventoryFullValue) {
+    if (!checkEncumbrance({ weight: item.weight })) {
       return InventoryItemStatus.Rejected;
     }
 

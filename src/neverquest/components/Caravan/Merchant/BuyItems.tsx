@@ -9,16 +9,16 @@ import Coins from "neverquest/components/Loot/Coins";
 import { InventoryItemStatus, MerchantInventoryContents, UIVariant } from "neverquest/env";
 import useAcquireItem from "neverquest/hooks/useAcquireItem";
 import useReserve from "neverquest/hooks/useReserve";
+import useCheckEncumbrance from "neverquest/hooks/useCheckEncumbrance";
 import { merchantInventory } from "neverquest/state/caravan";
-import { isInventoryFull } from "neverquest/state/inventory";
 import { coins } from "neverquest/state/loot";
 
 export default function BuyItems() {
   const acquireItem = useAcquireItem();
+  const checkEncumbrance = useCheckEncumbrance();
   const setReserve = useReserve();
   const coinsValue = useRecoilValue(coins);
   const [merchantInventoryValue, setMerchantInventory] = useRecoilState(merchantInventory);
-  const isInventoryFullValue = useRecoilValue(isInventoryFull);
 
   const inventoryEntries = Object.entries(merchantInventoryValue);
 
@@ -48,7 +48,7 @@ export default function BuyItems() {
           <span className="fst-italic">Nothing available.</span>
         ) : (
           inventoryEntries.map(([key, { item, type }]) => {
-            const { price } = item;
+            const { price, weight } = item;
 
             return (
               <Row key={key}>
@@ -62,7 +62,7 @@ export default function BuyItems() {
 
                 <Col>
                   <Button
-                    disabled={price > coinsValue || isInventoryFullValue}
+                    disabled={price > coinsValue || !checkEncumbrance({ weight })}
                     onClick={buyItem({ item, key, type })}
                     variant={UIVariant.Outline}
                   >

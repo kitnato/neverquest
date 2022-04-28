@@ -8,8 +8,18 @@ export const deltaAether = atom<DeltaDisplay>({
   default: DELTA_DEFAULT,
 });
 
+export const deltaAetherLoot = atom<DeltaDisplay>({
+  key: "deltaAetherLoot",
+  default: DELTA_DEFAULT,
+});
+
 export const deltaCoins = atom<DeltaDisplay>({
   key: "deltaCoins",
+  default: DELTA_DEFAULT,
+});
+
+export const deltaCoinsLoot = atom<DeltaDisplay>({
+  key: "deltaCoinsLoot",
   default: DELTA_DEFAULT,
 });
 
@@ -45,6 +55,11 @@ export const deltaCharacterLevel = atom<DeltaDisplay>({
 
 export const deltaScrap = atom<DeltaDisplay>({
   key: "deltaScrap",
+  default: DELTA_DEFAULT,
+});
+
+export const deltaScrapLoot = atom<DeltaDisplay>({
+  key: "deltaScrapLoot",
   default: DELTA_DEFAULT,
 });
 

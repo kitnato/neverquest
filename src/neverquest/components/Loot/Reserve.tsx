@@ -1,5 +1,5 @@
-import { RecoilState, useRecoilValue } from "recoil";
 import Stack from "react-bootstrap/Stack";
+import { RecoilState, useRecoilValue } from "recoil";
 
 import FloatingText from "neverquest/components/FloatingText";
 import { DeltaDisplay, UIAnimationType } from "neverquest/env";

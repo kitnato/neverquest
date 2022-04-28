@@ -1,7 +1,12 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { experience } from "neverquest/state/character";
-import { deltaExperience } from "neverquest/state/deltas";
+import {
+  deltaAetherLoot,
+  deltaCoinsLoot,
+  deltaExperience,
+  deltaScrapLoot,
+} from "neverquest/state/deltas";
 import { progress } from "neverquest/state/global";
 import { aetherLoot, coinsLoot, scrapLoot } from "neverquest/state/loot";
 import { monsterLoot } from "neverquest/state/monster";
@@ -11,7 +16,10 @@ import { UIFloatingTextType } from "neverquest/env";
 export default function useRewardKill() {
   const setAetherLoot = useSetRecoilState(aetherLoot);
   const setCoinsLoot = useSetRecoilState(coinsLoot);
+  const setDeltaAetherLoot = useSetRecoilState(deltaAetherLoot);
+  const setDeltaCoinsLoot = useSetRecoilState(deltaCoinsLoot);
   const setDeltaExperience = useSetRecoilState(deltaExperience);
+  const setDeltaScrapLoot = useSetRecoilState(deltaScrapLoot);
   const setExperience = useSetRecoilState(experience);
   const setProgress = useSetRecoilState(progress);
   const setScrapLoot = useSetRecoilState(scrapLoot);
@@ -21,14 +29,26 @@ export default function useRewardKill() {
   return () => {
     if (aether > 0) {
       setAetherLoot((currentAetherLoot) => currentAetherLoot + aether);
+      setDeltaAetherLoot({
+        color: UIFloatingTextType.Positive,
+        value: `+${aether}`,
+      });
     }
 
     if (coins > 0) {
       setCoinsLoot((currentCoinsLoot) => currentCoinsLoot + coins);
+      setDeltaCoinsLoot({
+        color: UIFloatingTextType.Positive,
+        value: `+${coins}`,
+      });
     }
 
     if (scrap > 0) {
       setScrapLoot((currentScrapLoot) => currentScrapLoot + scrap);
+      setDeltaScrapLoot({
+        color: UIFloatingTextType.Positive,
+        value: `+${scrap}`,
+      });
     }
 
     setExperience((currentExperience) => currentExperience + xp);

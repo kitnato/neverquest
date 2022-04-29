@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import LootDisplay from "neverquest/components/Loot/LootDisplay";
+import Looting from "neverquest/components/Loot/Looting";
 import { UIAnimationType } from "neverquest/env";
 import lootIcon from "neverquest/icons/locked-chest.svg";
 import lootedIcon from "neverquest/icons/open-chest.svg";
@@ -15,27 +16,25 @@ export default function Loot() {
   const hasLootedValue = useRecoilValue(hasLooted);
   const progressValue = useRecoilValue(progress);
 
-  if (progressValue === 0) {
-    return null;
-  }
-
   return (
-    <>
-      <hr />
+    <Stack gap={3}>
+      <Looting />
 
-      <Card className={getAnimationClass(UIAnimationType.FlipInX)}>
-        <Card.Body>
-          <Stack direction="horizontal" gap={5}>
-            <ImageIcon icon={hasLootedValue ? lootedIcon : lootIcon} tooltip="Loot" />
+      {progressValue > 0 && (
+        <Card className={getAnimationClass(UIAnimationType.FlipInX)}>
+          <Card.Body>
+            <Stack direction="horizontal" gap={5}>
+              <ImageIcon icon={hasLootedValue ? lootedIcon : lootIcon} tooltip="Loot" />
 
-            {hasLootedValue ? (
-              <span className="fst-italic">Nothing remains.</span>
-            ) : (
-              <LootDisplay isLoot />
-            )}
-          </Stack>
-        </Card.Body>
-      </Card>
-    </>
+              {hasLootedValue ? (
+                <span className="fst-italic">Nothing remains.</span>
+              ) : (
+                <LootDisplay isLoot />
+              )}
+            </Stack>
+          </Card.Body>
+        </Card>
+      )}
+    </Stack>
   );
 }

@@ -57,7 +57,7 @@ export default function BuyItems() {
 
             return (
               <Row key={key}>
-                <Col xs={7}>
+                <Col xs={8}>
                   <InventoryElement item={item} />
                 </Col>
 

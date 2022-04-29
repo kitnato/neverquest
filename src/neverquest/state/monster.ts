@@ -15,6 +15,11 @@ export const isMonsterEngaged = atom({
   default: false,
 });
 
+export const isMonsterStaggered = atom({
+  key: "isMonsterStaggered",
+  default: false,
+});
+
 // TODO - determines whether Monster has Coins as loot
 export const hasTreasure = atom({
   key: "hasTreasure",

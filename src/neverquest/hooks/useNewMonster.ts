@@ -1,7 +1,7 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import LOCRA from "locra";
-import { CreatureType } from "locra/env";
+import { CreatureType } from "locra/types";
 import { deltaHealthMonster } from "neverquest/state/deltas";
 import { level, nsfw } from "neverquest/state/global";
 import {

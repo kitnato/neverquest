@@ -47,7 +47,7 @@ export default function SellItems() {
         <Stack gap={3}>
           {inventoryContents.map(([key, { isEquipped, item }]) => (
             <Row key={key}>
-              <Col xs={7}>
+              <Col xs={8}>
                 <Stack direction="horizontal" gap={1}>
                   <InventoryElement item={item} />
 

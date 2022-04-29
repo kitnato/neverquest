@@ -9,7 +9,7 @@ import {
   Category,
   CreatureType,
   GeneratorParameters,
-} from "locra/env";
+} from "locra/types";
 import { capitalizeAll } from "neverquest/utilities/helpers";
 
 export default class LOCRA {

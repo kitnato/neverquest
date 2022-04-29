@@ -10,7 +10,7 @@ import { isRecovering, statusElement } from "neverquest/state/character";
 import { gameOver } from "neverquest/state/global";
 import { deltaHealth, deltaStamina } from "neverquest/state/deltas";
 import { shield } from "neverquest/state/inventory";
-import { totalDamageMonster } from "neverquest/state/monster";
+import { isMonsterStaggered, totalDamageMonster } from "neverquest/state/monster";
 import { canBlock, currentHealth, currentStamina } from "neverquest/state/resources";
 import { showRecovery } from "neverquest/state/show";
 import {
@@ -29,6 +29,7 @@ export default function useDefend() {
   const setDeltaStamina = useSetRecoilState(deltaStamina);
   const setGameOver = useSetRecoilState(gameOver);
   const setRecovering = useSetRecoilState(isRecovering);
+  const setStaggered = useSetRecoilState(isMonsterStaggered);
   const canBlockValue = useRecoilValue(canBlock);
   const { staminaCost } = useRecoilValue(shield);
   const statusElementValue = useRecoilValue(statusElement);
@@ -50,6 +51,7 @@ export default function useDefend() {
         color: UIFloatingTextType.Negative,
         value: `${-staminaCost}`,
       });
+      setStaggered(true);
 
       return;
     }

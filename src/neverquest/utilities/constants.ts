@@ -1,4 +1,4 @@
-import { ShieldType, WeaponType } from "locra/env";
+import { ShieldType, WeaponType } from "locra/types";
 import {
   Armor,
   ArmorClass,

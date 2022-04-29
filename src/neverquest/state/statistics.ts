@@ -42,9 +42,9 @@ export const totalAttackRate = selector({
 export const totalBlockChance = selector({
   key: "totalBlockChance",
   get: ({ get }) => {
-    const { block } = get(shield);
+    const shieldValue = get(shield);
 
-    return block;
+    return shieldValue.block;
   },
 });
 
@@ -118,6 +118,15 @@ export const totalRecoveryRate = selector({
     const recoveryRateValue = get(recoveryRate);
 
     return getComputedStat(recoveryRateValue);
+  },
+});
+
+export const totalStaggerRate = selector({
+  key: "totalStaggerRate",
+  get: ({ get }) => {
+    const shieldValue = get(shield);
+
+    return shieldValue.stagger;
   },
 });
 

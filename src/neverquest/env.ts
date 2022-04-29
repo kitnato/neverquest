@@ -1,6 +1,6 @@
 // MAIN
 
-import { ShieldType, WeaponType } from "locra/env";
+import { ShieldType, WeaponType } from "locra/types";
 
 export type Accessory = EquipmentBase;
 

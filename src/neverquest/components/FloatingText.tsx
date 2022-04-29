@@ -20,10 +20,10 @@ type FloatingTextStyle = {
 
 export default function FloatingText({
   atom,
-  fadeToRight = false,
+  exitToLeft = false,
 }: {
   atom: RecoilState<DeltaDisplay>;
-  fadeToRight?: boolean;
+  exitToLeft?: boolean;
 }) {
   const [deltaValue, setDeltaValue] = useRecoilState(atom);
   const [deltaQueue, setDeltaQueue] = useState<FloatingTextStyle[]>([]);
@@ -96,7 +96,7 @@ export default function FloatingText({
 
       if (bottom >= 10) {
         newOpacity -= 0.05;
-        newRight += fadeToRight ? 1 : -1;
+        newRight += exitToLeft ? 1 : -1;
 
         if (newOpacity <= 0) {
           return null;

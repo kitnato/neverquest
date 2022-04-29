@@ -10,6 +10,7 @@ import {
   currentHealthMonster,
   isMonsterDead,
   isMonsterEngaged,
+  isMonsterStaggered,
   totalAttackRateMonster,
 } from "neverquest/state/monster";
 import { formatMilliseconds } from "neverquest/utilities/helpers";
@@ -18,6 +19,7 @@ export default function MonsterAttackMeter() {
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isMonsterEngagedValue = useRecoilValue(isMonsterEngaged);
+  const isMonsterStaggeredValue = useRecoilValue(isMonsterStaggered);
   const totalAttackRateMonsterValue = useRecoilValue(totalAttackRateMonster);
   const resetCurrentHealthMonster = useResetRecoilState(currentHealthMonster);
 
@@ -27,7 +29,7 @@ export default function MonsterAttackMeter() {
 
   useAnimation((deltaTime) => {
     setDeltaAttack((currentDelta) => currentDelta + deltaTime);
-  }, !isAttackingValue || isMonsterDeadValue || !isMonsterEngagedValue);
+  }, !isAttackingValue || isMonsterDeadValue || !isMonsterEngagedValue || isMonsterStaggeredValue);
 
   useEffect(() => {
     if (!isMonsterDeadValue && deltaAttack >= totalAttackRateMonsterValue) {

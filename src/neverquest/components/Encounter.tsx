@@ -10,7 +10,7 @@ import { ArmorClass, Inventory, WeaponClass } from "neverquest/env";
 import { merchantInventory } from "neverquest/state/caravan";
 import { isWilderness, level, nsfw } from "neverquest/state/global";
 import { generateArmor, generateShield, generateWeapon } from "neverquest/utilities/generators";
-import { AffixTag, ShieldType, WeaponType } from "locra/env";
+import { AffixTag, ShieldType, WeaponType } from "locra/types";
 
 export default function Encounter() {
   const isWildernessValue = useRecoilValue(isWilderness);

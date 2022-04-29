@@ -1,5 +1,7 @@
 import Button from "react-bootstrap/Button";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Stack from "react-bootstrap/Stack";
+import Tooltip from "react-bootstrap/Tooltip";
 import { ArrowRight } from "react-bootstrap-icons";
 import { useRecoilValue } from "recoil";
 
@@ -16,6 +18,8 @@ export default function SellScrap() {
   const exchangeScrapValue = useRecoilValue(exchangeScrap);
   const exchangeCoinValue = useRecoilValue(exchangeCoin);
 
+  const canSell = scrapValue >= exchangeScrapValue;
+
   const sellScrap = () => {
     setReserve({ coinsDifference: exchangeCoinValue, scrapDifference: -exchangeScrapValue });
   };
@@ -30,13 +34,17 @@ export default function SellScrap() {
         <Coins tooltip="Coins (receive)" value={exchangeCoinValue} />
       </Stack>
 
-      <Button
-        disabled={scrapValue < exchangeScrapValue}
-        onClick={sellScrap}
-        variant={UIVariant.Outline}
+      <OverlayTrigger
+        overlay={<Tooltip>Not enough scrap!</Tooltip>}
+        placement="top"
+        trigger={canSell ? [] : ["hover", "focus"]}
       >
-        Sell
-      </Button>
+        <span className="d-inline-block">
+          <Button disabled={!canSell} onClick={sellScrap} variant={UIVariant.Outline}>
+            Sell
+          </Button>
+        </span>
+      </OverlayTrigger>
     </Stack>
   );
 }

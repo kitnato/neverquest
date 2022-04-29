@@ -91,7 +91,7 @@
   { "name": "bondage", "isNSFW": true, "artifact": "suffix", "creature": "prefix", "location": "suffix" },
   { "name": "bone", "artifact": "prefix", "creature": "prefix", "location": "suffix" },
   { "name": "bony", "artifact": "prefix", "creature": "prefix", "location": "prefix" },
-  { "name": "boobytrapped", "tags": ["lowQuality"], "artifact": "prefix", "location": "prefix" },
+  { "name": "boobytrapped", "artifact": "prefix", "location": "prefix" },
   { "name": "bored", "creature": "prefix" },
   { "name": "boring", "tags": ["lowQuality"], "artifact": "prefix", "location": "prefix" },
   { "name": "brass", "artifact": "prefix", "creature": "prefix" },

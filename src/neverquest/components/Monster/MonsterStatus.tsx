@@ -10,7 +10,7 @@ import MonsterHealth from "neverquest/components/Monster/MonsterHealth";
 import MonsterDamage from "neverquest/components/Monster/MonsterDamage";
 import MonsterDamagePerSecond from "neverquest/components/Monster/MonsterDamagePerSecond";
 import MonsterName from "neverquest/components/Monster/MonsterName";
-import Looting from "neverquest/components/Monster/Looting";
+import MonsterStagger from "neverquest/components/Monster/MonsterStagger";
 import { monsterStatusElement } from "neverquest/state/monster";
 import { animateElement } from "neverquest/utilities/helpers";
 import { UIAnimationSpeed, UIAnimationType } from "neverquest/env";
@@ -40,7 +40,7 @@ export default function MonsterStatus() {
             </Col>
 
             <Col>
-              <Looting />
+              <MonsterStagger />
             </Col>
           </Row>
 

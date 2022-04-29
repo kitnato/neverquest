@@ -49,7 +49,7 @@ export default function Inventory() {
 
         {equippedInventoryEntries.map(([key, { item }]) => (
           <Row key={key}>
-            <Col xs={7}>
+            <Col xs={8}>
               <Stack direction="horizontal">
                 <InventoryElement item={item} />
               </Stack>

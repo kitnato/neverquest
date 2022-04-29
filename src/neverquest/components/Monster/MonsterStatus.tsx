@@ -22,7 +22,11 @@ export default function MonsterStatus() {
   useEffect(() => {
     const { current } = element;
 
-    animateElement(current, AnimationType.ZoomInRight, AnimationSpeed.Faster);
+    animateElement({
+      element: current,
+      animation: AnimationType.ZoomInRight,
+      speed: AnimationSpeed.Faster,
+    });
     setMonsterStatusElement(current);
   }, []);
 

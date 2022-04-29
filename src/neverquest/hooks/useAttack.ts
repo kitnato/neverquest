@@ -38,7 +38,11 @@ export default function useAttack() {
         value: `${-totalDamageValue}`,
       });
 
-      animateElement(monsterStatusElementValue, AnimationType.HeadShake, AnimationSpeed.Fast);
+      animateElement({
+        element: monsterStatusElementValue,
+        animation: AnimationType.HeadShake,
+        speed: AnimationSpeed.Fast,
+      });
 
       return true;
     }

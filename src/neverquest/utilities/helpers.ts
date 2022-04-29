@@ -3,11 +3,15 @@ import { AnimationSpeed, AnimationType } from "neverquest/types/ui";
 import { ANIMATED_CLASS, ANIMATE_PREFIX } from "neverquest/utilities/constants";
 
 // Animates an element once according to its Animate.css type with optional speed parameter.
-export function animateElement(
-  element: HTMLDivElement | null,
-  animation: AnimationType,
-  speed?: AnimationSpeed
-) {
+export function animateElement({
+  element,
+  animation,
+  speed,
+}: {
+  element: HTMLDivElement | null;
+  animation: AnimationType;
+  speed?: AnimationSpeed;
+}) {
   if (element === null) {
     return;
   }

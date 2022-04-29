@@ -23,7 +23,7 @@ export default function Status() {
   useEffect(() => {
     const { current } = element;
 
-    animateElement(current, AnimationType.FlipInX);
+    animateElement({ element: current, animation: AnimationType.FlipInX });
     setStatusElement(current);
   }, []);
 

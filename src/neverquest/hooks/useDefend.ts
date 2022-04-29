@@ -34,7 +34,11 @@ export default function useDefend() {
   const totalPhysicalResistanceValue = useRecoilValue(totalPhysicalResistance);
 
   return () => {
-    animateElement(statusElementValue, AnimationType.HeadShake, AnimationSpeed.Fast);
+    animateElement({
+      element: statusElementValue,
+      animation: AnimationType.HeadShake,
+      speed: AnimationSpeed.Fast,
+    });
 
     if (canBlockValue && Math.random() <= totalBlockChanceValue) {
       setDeltaHealth({

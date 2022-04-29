@@ -15,7 +15,7 @@ export default function ExperienceStatus() {
       <Stack className="w-100" direction="horizontal">
         <ResourceMeter atom={experienceSpent} atomMaximum={experience} />
 
-        <FloatingText atom={deltaExperienceSpent} />
+        <FloatingText atom={deltaExperienceSpent} fadeToRight />
       </Stack>
     </Stack>
   );

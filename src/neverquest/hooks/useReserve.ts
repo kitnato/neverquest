@@ -1,9 +1,9 @@
 import { useSetRecoilState, useRecoilState } from "recoil";
 
-import { UIFloatingTextType } from "neverquest/env";
 import { aether, aetherLoot, coins, coinsLoot, scrap, scrapLoot } from "neverquest/state/loot";
 import { showAether, showCoins, showScrap } from "neverquest/state/show";
 import { deltaAether, deltaCoins, deltaScrap } from "neverquest/state/deltas";
+import { FloatingTextType } from "neverquest/types/ui";
 
 export default function useReserve() {
   const [aetherLootValue, setAetherLoot] = useRecoilState(aetherLoot);
@@ -37,7 +37,7 @@ export default function useReserve() {
 
       setAether((currentAether) => currentAether + aetherValue);
       setDeltaAether({
-        color: isPositive ? UIFloatingTextType.Positive : UIFloatingTextType.Negative,
+        color: isPositive ? FloatingTextType.Positive : FloatingTextType.Negative,
         value: `${isPositive ? "+" : ""}${aetherValue}`,
       });
 
@@ -55,7 +55,7 @@ export default function useReserve() {
 
       setCoins((currentCoins) => currentCoins + coinsValue);
       setDeltaCoins({
-        color: isPositive ? UIFloatingTextType.Positive : UIFloatingTextType.Negative,
+        color: isPositive ? FloatingTextType.Positive : FloatingTextType.Negative,
         value: `${isPositive ? "+" : ""}${coinsValue}`,
       });
 
@@ -73,7 +73,7 @@ export default function useReserve() {
 
       setScrap((currentScrap) => currentScrap + scrapValue);
       setDeltaScrap({
-        color: isPositive ? UIFloatingTextType.Positive : UIFloatingTextType.Negative,
+        color: isPositive ? FloatingTextType.Positive : FloatingTextType.Negative,
         value: `${isPositive ? "+" : ""}${scrapValue}`,
       });
 

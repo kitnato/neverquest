@@ -6,10 +6,11 @@ import { useRecoilState } from "recoil";
 
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Coins from "neverquest/components/Loot/Coins";
-import { InventoryContentProps, UIVariant } from "neverquest/env";
 import useReserve from "neverquest/hooks/useReserve";
 import useUnequipItem from "neverquest/hooks/useUnequipItem";
 import { inventory } from "neverquest/state/inventory";
+import { InventoryContentProps } from "neverquest/types/props";
+import { UIVariant } from "neverquest/types/ui";
 import { getSellPrice } from "neverquest/utilities/helpers";
 
 export default function SellItems() {

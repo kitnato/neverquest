@@ -1,11 +1,12 @@
-import { RangeProps, UIAnimationSpeed, UIAnimationType } from "neverquest/env";
+import { RangeProps } from "neverquest/types/props";
+import { AnimationSpeed, AnimationType } from "neverquest/types/ui";
 import { ANIMATED_CLASS, ANIMATE_PREFIX } from "neverquest/utilities/constants";
 
 // Animates an element once according to its Animate.css type with optional speed parameter.
 export function animateElement(
   element: HTMLDivElement | null,
-  animation: UIAnimationType,
-  speed?: UIAnimationSpeed
+  animation: AnimationType,
+  speed?: AnimationSpeed
 ) {
   if (element === null) {
     return;
@@ -95,7 +96,7 @@ export function formatToFixed(number: number, decimals = 2) {
   return (Math.round(result) / multiplier).toFixed(decimals);
 }
 
-export function getAnimationClass(type: UIAnimationType, isInfinite?: boolean) {
+export function getAnimationClass(type: AnimationType, isInfinite?: boolean) {
   return `${ANIMATED_CLASS} ${ANIMATE_PREFIX}${type}${
     isInfinite ? ` ${ANIMATE_PREFIX}infinite` : ""
   }`;

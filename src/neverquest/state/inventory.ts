@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 
-import { Armor, Inventory, Accessory, Shield, Weapon } from "neverquest/env";
+import { Armor, Inventory, Accessory, Shield, Weapon } from "neverquest/types/core";
 import { NO_ARMOR, NO_ACCESSORY, NO_SHIELD, NO_WEAPON } from "neverquest/utilities/constants";
 
 // ATOMS

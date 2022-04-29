@@ -4,11 +4,11 @@ import Regeneration from "neverquest/components/Character/Regeneration";
 import FloatingText from "neverquest/components/FloatingText";
 import ImageIcon from "neverquest/components/ImageIcon";
 import ResourceMeter from "neverquest/components/ResourceMeter";
-import { UIAttachment } from "neverquest/env";
 import icon from "neverquest/icons/hospital-cross.svg";
 import { deltaHealth, deltaTotalHealthRegenerationRate } from "neverquest/state/deltas";
 import { currentHealth, isHealthMaxedOut, maximumHealth } from "neverquest/state/resources";
 import { totalHealthRegenerationRate } from "neverquest/state/statistics";
+import { UIAttachment } from "neverquest/types/ui";
 
 export default function Health() {
   return (

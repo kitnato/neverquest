@@ -2,8 +2,8 @@ import Card from "react-bootstrap/Card";
 import { useRecoilValue } from "recoil";
 
 import LootDisplay from "neverquest/components/Loot/LootDisplay";
-import { UIAnimationType } from "neverquest/env";
 import { showAether, showCoins, showScrap } from "neverquest/state/show";
+import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function StoredLoot() {
@@ -16,7 +16,7 @@ export default function StoredLoot() {
   }
 
   return (
-    <Card className={getAnimationClass(UIAnimationType.FlipInX)}>
+    <Card className={getAnimationClass(AnimationType.FlipInX)}>
       <Card.Body>
         <LootDisplay />
       </Card.Body>

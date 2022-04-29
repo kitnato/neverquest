@@ -1,8 +1,8 @@
 import Stack from "react-bootstrap/Stack";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import { LootProps } from "neverquest/env";
 import aetherIcon from "neverquest/icons/incense.svg";
+import { LootProps } from "neverquest/types/props";
 
 export default function Aether({ tooltip, value }: LootProps) {
   return (

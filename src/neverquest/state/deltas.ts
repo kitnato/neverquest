@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-import { DeltaDisplay } from "neverquest/env";
+import { DeltaDisplay } from "neverquest/types/ui";
 import { DELTA_DEFAULT } from "neverquest/utilities/constants";
 
 export const deltaAether = atom<DeltaDisplay>({

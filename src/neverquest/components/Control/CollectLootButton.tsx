@@ -4,11 +4,11 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import { UIAnimationType, UIVariant } from "neverquest/env";
 import useReserve from "neverquest/hooks/useReserve";
 import icon from "neverquest/icons/open-treasure-chest.svg";
 import { isLevelCompleted } from "neverquest/state/global";
 import { hasLooted } from "neverquest/state/loot";
+import { AnimationType, UIVariant } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function CollectLootButton() {
@@ -23,7 +23,7 @@ export default function CollectLootButton() {
   return (
     <OverlayTrigger overlay={<Tooltip>Collect loot</Tooltip>} placement="top">
       <Button
-        className={getAnimationClass(UIAnimationType.FlipInX)}
+        className={getAnimationClass(AnimationType.FlipInX)}
         onClick={() => loot({})}
         variant={UIVariant.Outline}
       >

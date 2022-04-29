@@ -1,4 +1,4 @@
-import { Accessory, Armor, Shield, Weapon } from "neverquest/env";
+import { Accessory, Armor, Shield, Weapon } from "neverquest/types/core";
 
 function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;

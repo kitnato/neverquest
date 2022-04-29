@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 
 import Progress from "neverquest/components/Progress";
-import { UIVariant } from "neverquest/env";
 import useAnimation from "neverquest/hooks/useAnimation";
 import useAttack from "neverquest/hooks/useAttack";
 import { isAttacking, isLooting, isRecovering } from "neverquest/state/character";
 import { isMonsterDead } from "neverquest/state/monster";
 import { canAttack } from "neverquest/state/resources";
 import { totalAttackRate } from "neverquest/state/statistics";
+import { UIVariant } from "neverquest/types/ui";
 import { formatMilliseconds } from "neverquest/utilities/helpers";
 
 export default function AttackMeter() {

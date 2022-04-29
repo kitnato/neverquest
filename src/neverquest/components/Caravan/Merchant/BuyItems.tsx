@@ -8,12 +8,13 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Coins from "neverquest/components/Loot/Coins";
-import { InventoryContentProps, UIVariant } from "neverquest/env";
 import useAcquireItem from "neverquest/hooks/useAcquireItem";
 import useReserve from "neverquest/hooks/useReserve";
 import useCheckEncumbrance from "neverquest/hooks/useCheckEncumbrance";
 import { merchantInventory } from "neverquest/state/caravan";
 import { coins } from "neverquest/state/loot";
+import { InventoryContentProps } from "neverquest/types/props";
+import { UIVariant } from "neverquest/types/ui";
 
 export default function BuyItems() {
   const acquireItem = useAcquireItem();

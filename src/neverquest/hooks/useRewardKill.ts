@@ -11,7 +11,7 @@ import { progress } from "neverquest/state/global";
 import { aetherLoot, coinsLoot, scrapLoot } from "neverquest/state/loot";
 import { monsterLoot } from "neverquest/state/monster";
 import { showAttributes } from "neverquest/state/show";
-import { UIFloatingTextType } from "neverquest/env";
+import { FloatingTextType } from "neverquest/types/ui";
 
 export default function useRewardKill() {
   const setAetherLoot = useSetRecoilState(aetherLoot);
@@ -30,7 +30,7 @@ export default function useRewardKill() {
     if (aether > 0) {
       setAetherLoot((currentAetherLoot) => currentAetherLoot + aether);
       setDeltaAetherLoot({
-        color: UIFloatingTextType.Positive,
+        color: FloatingTextType.Positive,
         value: `+${aether}`,
       });
     }
@@ -38,7 +38,7 @@ export default function useRewardKill() {
     if (coins > 0) {
       setCoinsLoot((currentCoinsLoot) => currentCoinsLoot + coins);
       setDeltaCoinsLoot({
-        color: UIFloatingTextType.Positive,
+        color: FloatingTextType.Positive,
         value: `+${coins}`,
       });
     }
@@ -46,13 +46,13 @@ export default function useRewardKill() {
     if (scrap > 0) {
       setScrapLoot((currentScrapLoot) => currentScrapLoot + scrap);
       setDeltaScrapLoot({
-        color: UIFloatingTextType.Positive,
+        color: FloatingTextType.Positive,
         value: `+${scrap}`,
       });
     }
 
     setExperience((currentExperience) => currentExperience + xp);
-    setDeltaExperience({ color: UIFloatingTextType.Positive, value: `+${xp}` });
+    setDeltaExperience({ color: FloatingTextType.Positive, value: `+${xp}` });
     setProgress((currentProgress) => currentProgress + 1);
 
     if (xp > 0 && !showAttributesValue) {

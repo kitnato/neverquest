@@ -1,7 +1,7 @@
 import { RecoilValueReadOnly, useRecoilValue } from "recoil";
 
 import Progress from "neverquest/components/Progress";
-import { UIAttachment, UIVariant } from "neverquest/env";
+import { UIAttachment, UIVariant } from "neverquest/types/ui";
 
 export default function ResourceMeter({
   attached,

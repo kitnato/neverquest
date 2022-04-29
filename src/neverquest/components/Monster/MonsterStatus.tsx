@@ -12,8 +12,8 @@ import MonsterDamagePerSecond from "neverquest/components/Monster/MonsterDamageP
 import MonsterName from "neverquest/components/Monster/MonsterName";
 import MonsterStagger from "neverquest/components/Monster/MonsterStagger";
 import { monsterStatusElement } from "neverquest/state/monster";
+import { AnimationSpeed, AnimationType } from "neverquest/types/ui";
 import { animateElement } from "neverquest/utilities/helpers";
-import { UIAnimationSpeed, UIAnimationType } from "neverquest/env";
 
 export default function MonsterStatus() {
   const element = useRef(null);
@@ -22,7 +22,7 @@ export default function MonsterStatus() {
   useEffect(() => {
     const { current } = element;
 
-    animateElement(current, UIAnimationType.ZoomInRight, UIAnimationSpeed.Faster);
+    animateElement(current, AnimationType.ZoomInRight, AnimationSpeed.Faster);
     setMonsterStatusElement(current);
   }, []);
 

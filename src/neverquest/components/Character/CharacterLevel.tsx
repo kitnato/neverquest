@@ -3,11 +3,11 @@ import { useRecoilValue } from "recoil";
 
 import FloatingText from "neverquest/components/FloatingText";
 import ImageIcon from "neverquest/components/ImageIcon";
-import { UIAnimationType } from "neverquest/env";
 import icon from "neverquest/icons/level-four.svg";
 import { characterLevel } from "neverquest/state/character";
 import { deltaCharacterLevel } from "neverquest/state/deltas";
 import { showCharacterLevel } from "neverquest/state/show";
+import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function CharacterLevel() {
@@ -19,7 +19,7 @@ export default function CharacterLevel() {
   }
 
   return (
-    <Stack className={getAnimationClass(UIAnimationType.FlipInX)} direction="horizontal" gap={3}>
+    <Stack className={getAnimationClass(AnimationType.FlipInX)} direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Level" />
 
       <span>{characterLevelValue}</span>

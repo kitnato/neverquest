@@ -1,7 +1,7 @@
 import { useResetRecoilState, useSetRecoilState } from "recoil";
 
-import { InventoryContentProps } from "neverquest/env";
 import { accessory, armor, inventory, shield, weapon } from "neverquest/state/inventory";
+import { InventoryContentProps } from "neverquest/types/props";
 import { isAccessory, isArmor, isShield, isWeapon } from "neverquest/utilities/type-guards";
 
 export default function useUnequipItem() {

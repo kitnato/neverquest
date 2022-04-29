@@ -6,10 +6,11 @@ import { useRecoilValue } from "recoil";
 
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Encumbrance from "neverquest/components/Inventory/Encumbrance";
-import { InventoryContentProps, UIVariant } from "neverquest/env";
 import useEquipItem from "neverquest/hooks/useEquipItem";
 import useUnequipItem from "neverquest/hooks/useUnequipItem";
 import { inventory } from "neverquest/state/inventory";
+import { InventoryContentProps } from "neverquest/types/props";
+import { UIVariant } from "neverquest/types/ui";
 
 export default function Inventory() {
   const inventoryValue = useRecoilValue(inventory);

@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import Caravan from "neverquest/components/Caravan";
 import Loot from "neverquest/components/Loot";
 import Wilderness from "neverquest/components/Wilderness";
-import { ArmorClass, Inventory, WeaponClass } from "neverquest/env";
+import { ArmorClass, Inventory, WeaponClass } from "neverquest/types/core";
 import { merchantInventory } from "neverquest/state/caravan";
 import { isWilderness, level, nsfw } from "neverquest/state/global";
 import { generateArmor, generateShield, generateWeapon } from "neverquest/utilities/generators";

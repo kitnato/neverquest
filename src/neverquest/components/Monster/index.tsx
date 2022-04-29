@@ -5,11 +5,11 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import MonsterStatus from "neverquest/components/Monster/MonsterStatus";
-import { UIAnimationType } from "neverquest/env";
 import useNewMonster from "neverquest/hooks/useNewMonster";
 import unknownIcon from "neverquest/icons/evil-eyes.svg";
 import { isAttacking, isLooting } from "neverquest/state/character";
 import { isMonsterDead, isMonsterEngaged } from "neverquest/state/monster";
+import { AnimationType } from "neverquest/types/ui";
 import { UNKNOWN } from "neverquest/utilities/constants";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
@@ -43,7 +43,7 @@ export default function Monster() {
   }
 
   return (
-    <Card className={getAnimationClass(UIAnimationType.FlipInX)}>
+    <Card className={getAnimationClass(AnimationType.FlipInX)}>
       <Card.Body>
         <Stack direction="horizontal" gap={3}>
           <ImageIcon icon={unknownIcon} tooltip={UNKNOWN} />

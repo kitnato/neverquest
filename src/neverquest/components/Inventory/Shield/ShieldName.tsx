@@ -2,7 +2,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import Table from "react-bootstrap/Table";
 
-import { Shield } from "neverquest/env";
+import { Shield } from "neverquest/types/core";
 import { capitalizeAll, formatMilliseconds, formatPercentage } from "neverquest/utilities/helpers";
 import { NO_SHIELD } from "neverquest/utilities/constants";
 

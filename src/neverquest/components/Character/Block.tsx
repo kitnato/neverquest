@@ -2,10 +2,10 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import { UIAnimationType } from "neverquest/env";
 import icon from "neverquest/icons/shield-reflect.svg";
 import { shield } from "neverquest/state/inventory";
 import { showBlockChance } from "neverquest/state/show";
+import { AnimationType } from "neverquest/types/ui";
 import { formatPercentage, getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function Block() {
@@ -17,7 +17,7 @@ export default function Block() {
   }
 
   return (
-    <Stack className={getAnimationClass(UIAnimationType.FlipInX)} direction="horizontal" gap={3}>
+    <Stack className={getAnimationClass(AnimationType.FlipInX)} direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Block chance" />
 
       <span>{formatPercentage(block)}</span>

@@ -10,7 +10,7 @@ import {
   maximumHealthMonster,
   monsterName,
 } from "neverquest/state/monster";
-import { UIFloatingTextType } from "neverquest/env";
+import { FloatingTextType } from "neverquest/types/ui";
 
 export default function useNewMonster() {
   const [currentMonsterHeathValue, setCurrentMonsterHealth] = useRecoilState(currentHealthMonster);
@@ -29,7 +29,7 @@ export default function useNewMonster() {
 
       if (difference > 0) {
         setDeltaHealthMonster({
-          color: UIFloatingTextType.Positive,
+          color: FloatingTextType.Positive,
           value: `+${difference}`,
         });
       }

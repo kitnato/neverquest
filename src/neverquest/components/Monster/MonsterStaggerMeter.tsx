@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import Progress from "neverquest/components/Progress";
-import { UIVariant } from "neverquest/env";
 import useAnimation from "neverquest/hooks/useAnimation";
 import { isMonsterStaggered } from "neverquest/state/monster";
 import { totalStaggerRate } from "neverquest/state/statistics";
+import { UIVariant } from "neverquest/types/ui";
 import { formatMilliseconds } from "neverquest/utilities/helpers";
 
 export default function MonsterStaggerMeter() {

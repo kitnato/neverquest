@@ -6,13 +6,13 @@ import { Clock, Plus } from "react-bootstrap-icons";
 import { useSetRecoilState, useRecoilState, useRecoilValue, RecoilState } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import { UIFloatingTextType, UIVariant } from "neverquest/env";
 // TODO - every attribute needs its own icon
 import placeholderIcon from "neverquest/icons/abstract-049.svg";
-import { Attribute as AttributeType } from "neverquest/env";
+import { Attribute as AttributeType } from "neverquest/types/core";
 import { characterLevel, experienceAvailable, experienceSpent } from "neverquest/state/character";
 import { deltaCharacterLevel, deltaExperienceSpent } from "neverquest/state/deltas";
 import { showCharacterLevel } from "neverquest/state/show";
+import { FloatingTextType, UIVariant } from "neverquest/types/ui";
 import { getTriangularNumber } from "neverquest/utilities/helpers";
 
 export default function Attribute({ atom }: { atom: RecoilState<AttributeType> }) {
@@ -43,9 +43,9 @@ export default function Attribute({ atom }: { atom: RecoilState<AttributeType> }
       };
     });
     setCharacterLevel((currentCharacterLevel) => currentCharacterLevel + 1);
-    setDeltaCharacterLevel({ color: UIFloatingTextType.Positive, value: "+1" });
+    setDeltaCharacterLevel({ color: FloatingTextType.Positive, value: "+1" });
     setExperienceSpent((currentExperienceSpent) => currentExperienceSpent + cost);
-    setDeltaExperienceSpent({ color: UIFloatingTextType.Positive, value: `+${cost}` });
+    setDeltaExperienceSpent({ color: FloatingTextType.Positive, value: `+${cost}` });
 
     if (!showCharacterLevelValue) {
       setShowCharacterLevel(true);

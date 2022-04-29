@@ -5,13 +5,13 @@ import Tooltip from "react-bootstrap/Tooltip";
 import { useRecoilValue, useRecoilState } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import { UIAnimationType, UIVariant } from "neverquest/env";
 import attackIcon from "neverquest/icons/tron-arrow.svg";
 import restingIcon from "neverquest/icons/tired-eye.svg";
 import retreatIcon from "neverquest/icons/return-arrow.svg";
 import { isAttacking } from "neverquest/state/character";
 import { isLevelCompleted } from "neverquest/state/global";
 import { showLevelProgress } from "neverquest/state/show";
+import { AnimationType, UIVariant } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function AttackButton() {
@@ -35,7 +35,7 @@ export default function AttackButton() {
     }
 
     return {
-      animation: getAnimationClass(UIAnimationType.Pulse, true),
+      animation: getAnimationClass(AnimationType.Pulse, true),
       icon: attackIcon,
       tooltip: "Attack",
     };

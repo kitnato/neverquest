@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-import { Attribute } from "neverquest/env";
+import { Attribute } from "neverquest/types/core";
 
 export const attackRateBonus = atom<Attribute>({
   key: "attackRateBonus",

@@ -1,13 +1,6 @@
 import { ShieldType, WeaponType } from "locra/types";
-import {
-  Armor,
-  ArmorClass,
-  Accessory,
-  Shield,
-  Weapon,
-  WeaponClass,
-  RangeProps,
-} from "neverquest/env";
+import { Armor, ArmorClass, Accessory, Shield, Weapon, WeaponClass } from "neverquest/types/core";
+import { RangeProps } from "neverquest/types/props";
 
 export const ANIMATE_PREFIX = "animate__";
 export const ANIMATED_CLASS = `${ANIMATE_PREFIX}animated`;

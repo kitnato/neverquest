@@ -6,8 +6,8 @@ import { useRecoilValue } from "recoil";
 import ArmorEquipped from "neverquest/components/Inventory/Armor/ArmorEquipped";
 import ShieldEquipped from "neverquest/components/Inventory/Shield/ShieldEquipped";
 import WeaponEquipped from "neverquest/components/Inventory/Weapon/WeaponEquipped";
-import { UIAnimationType } from "neverquest/env";
 import { showArmor, showShield, showWeapon } from "neverquest/state/show";
+import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function Equipment() {
@@ -20,7 +20,7 @@ export default function Equipment() {
   }
 
   return (
-    <Card className={getAnimationClass(UIAnimationType.FlipInX)}>
+    <Card className={getAnimationClass(AnimationType.FlipInX)}>
       <Card.Body>
         <Row>
           <Col>

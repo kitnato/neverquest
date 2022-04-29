@@ -3,8 +3,8 @@ import { Stack } from "react-bootstrap";
 import { RecoilState, useRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 
-import { DeltaDisplay } from "neverquest/env";
 import useAnimation from "neverquest/hooks/useAnimation";
+import { DeltaDisplay } from "neverquest/types/ui";
 import { DELTA_DEFAULT } from "neverquest/utilities/constants";
 
 type FloatingTextStyle = {

@@ -1,6 +1,5 @@
 import { useSetRecoilState, useRecoilState } from "recoil";
 
-import { InventoryContentProps } from "neverquest/env";
 import { stamina, staminaRegenerationRate } from "neverquest/state/attributes";
 import { accessory, armor, inventory, shield, weapon } from "neverquest/state/inventory";
 import {
@@ -14,6 +13,7 @@ import {
   showTotalProtection,
   showWeapon,
 } from "neverquest/state/show";
+import { InventoryContentProps } from "neverquest/types/props";
 import { isAccessory, isArmor, isShield, isWeapon } from "neverquest/utilities/type-guards";
 
 export default function useEquipItem() {

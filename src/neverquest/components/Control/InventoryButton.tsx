@@ -7,10 +7,10 @@ import { useRecoilValue } from "recoil";
 import DismissableScreen from "neverquest/components/DismissableScreen";
 import ImageIcon from "neverquest/components/ImageIcon";
 import Inventory from "neverquest/components/Inventory";
-import { UIAnimationType, UIVariant } from "neverquest/env";
 import icon from "neverquest/icons/knapsack.svg";
 import { isAttacking } from "neverquest/state/character";
 import { showInventoryButton } from "neverquest/state/show";
+import { AnimationType, UIVariant } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function InventoryButton() {
@@ -25,7 +25,7 @@ export default function InventoryButton() {
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>Inventory</Tooltip>} placement="top">
-        <span className={`${getAnimationClass(UIAnimationType.FlipInX)} d-inline-block`}>
+        <span className={`${getAnimationClass(AnimationType.FlipInX)} d-inline-block`}>
           <Button
             disabled={isAttackingValue}
             onClick={(event) => {

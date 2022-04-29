@@ -8,9 +8,10 @@ import DismissableScreen from "neverquest/components/DismissableScreen";
 import Member from "neverquest/components/Caravan/Member";
 import Mercenary from "neverquest/components/Caravan/Mercenary";
 import Merchant from "neverquest/components/Caravan/Merchant";
-import { CrewType, UIAnimationType } from "neverquest/env";
 import { crew, crewMonologues } from "neverquest/state/caravan";
 import { name } from "neverquest/state/character";
+import { CrewType } from "neverquest/types/core";
+import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 interface CrewMember {
@@ -56,7 +57,7 @@ export default function Caravan() {
 
   return (
     <>
-      <Card className={getAnimationClass(UIAnimationType.FlipInX)}>
+      <Card className={getAnimationClass(AnimationType.FlipInX)}>
         <Card.Body>
           <Stack gap={3}>
             {memberOrder.map(

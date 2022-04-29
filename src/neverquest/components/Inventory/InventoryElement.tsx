@@ -1,7 +1,7 @@
 import ArmorInventory from "neverquest/components/Inventory/Armor/ArmorInventory";
 import ShieldInventory from "neverquest/components/Inventory/Shield/ShieldInventory";
 import WeaponInventory from "neverquest/components/Inventory/Weapon/WeaponInventory";
-import { Equipment } from "neverquest/env";
+import { Equipment } from "neverquest/types/core";
 import { isArmor, isShield, isWeapon } from "neverquest/utilities/type-guards";
 
 export default function InventoryElement({ item }: { item: Equipment }) {

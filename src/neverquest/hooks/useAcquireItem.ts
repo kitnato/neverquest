@@ -1,7 +1,7 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 
-import { Equipment } from "neverquest/env";
+import { Equipment } from "neverquest/types/core";
 import useCheckEncumbrance from "neverquest/hooks/useCheckEncumbrance";
 import useEquipItem from "neverquest/hooks/useEquipItem";
 import { accessory, armor, inventory, shield, weapon } from "neverquest/state/inventory";

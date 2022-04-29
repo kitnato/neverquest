@@ -4,8 +4,8 @@ import { useRecoilValue } from "recoil";
 
 import CharacterLevel from "neverquest/components/Character/CharacterLevel";
 import Experience from "neverquest/components/Character/Experience";
-import { UIAnimationType } from "neverquest/env";
 import { showAttributes } from "neverquest/state/show";
+import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function AttributesSummary() {
@@ -16,7 +16,7 @@ export default function AttributesSummary() {
   }
 
   return (
-    <Card className={getAnimationClass(UIAnimationType.FlipInX)}>
+    <Card className={getAnimationClass(AnimationType.FlipInX)}>
       <Card.Body>
         <Stack direction="horizontal" gap={5}>
           <CharacterLevel />

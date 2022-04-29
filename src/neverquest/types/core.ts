@@ -1,5 +1,3 @@
-// MAIN
-
 import { ShieldType, WeaponType } from "locra/types";
 
 export type Accessory = EquipmentBase;
@@ -35,13 +33,6 @@ export enum CrewType {
   Tailor,
   Witch,
   Wizard,
-}
-
-export type DeltaDisplay = DeltaDisplayContents | DeltaDisplayContents[];
-
-export interface DeltaDisplayContents {
-  color: UIFloatingTextType | null;
-  value: string;
 }
 
 export type Inventory =
@@ -94,65 +85,4 @@ export enum WeaponClass {
   Heavy = "Heavy",
   Light = "Light",
   TwoHanded = "Two-handed",
-}
-
-// PROPS
-
-export type InventoryContentProps = InventoryContent & {
-  key: string;
-};
-
-export interface LootProps {
-  tooltip?: string | undefined;
-  value: number;
-}
-
-export interface RangeProps {
-  maximum: number;
-  minimum: number;
-}
-
-// UI
-
-export enum UIAnimationSpeed {
-  Fast = "fast",
-  Faster = "faster",
-  Slow = "slow",
-  Slower = "Slower",
-}
-
-export enum UIAnimationType {
-  HeadShake = "headShake",
-  FadeInRight = "fadeInRight",
-  FlipInX = "flipInX",
-  Pulse = "pulse",
-  ZoomInRight = "zoomInRight",
-}
-
-export enum UIAttachment {
-  Above,
-  Below,
-}
-
-export enum UIFloatingTextType {
-  Negative = "text-danger",
-  Neutral = "text-muted",
-  Positive = "text-success",
-}
-
-export enum UIOverlayPlacement {
-  Bottom = "bottom",
-  Top = "top",
-}
-
-export enum UISize {
-  Normal,
-  Tiny,
-}
-
-// Using Bootstrap 5 variants.
-export enum UIVariant {
-  Outline = "outline-dark",
-  Primary = "dark",
-  Secondary = "secondary",
 }

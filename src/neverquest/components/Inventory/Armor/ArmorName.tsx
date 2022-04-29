@@ -2,7 +2,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import Table from "react-bootstrap/Table";
 
-import { Armor } from "neverquest/env";
+import { Armor } from "neverquest/types/core";
 import { NO_ARMOR } from "neverquest/utilities/constants";
 
 export default function ArmorName({ armor }: { armor: Armor }) {

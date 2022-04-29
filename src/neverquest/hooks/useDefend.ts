@@ -1,11 +1,5 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
-import {
-  DeltaDisplay,
-  UIAnimationSpeed,
-  UIAnimationType,
-  UIFloatingTextType,
-} from "neverquest/env";
 import { isRecovering, statusElement } from "neverquest/state/character";
 import { gameOver } from "neverquest/state/global";
 import { deltaHealth, deltaStamina } from "neverquest/state/deltas";
@@ -18,6 +12,7 @@ import {
   totalProtection,
   totalPhysicalResistance,
 } from "neverquest/state/statistics";
+import { DeltaDisplay, AnimationSpeed, AnimationType, FloatingTextType } from "neverquest/types/ui";
 import { BLOCKED } from "neverquest/utilities/constants";
 import { animateElement } from "neverquest/utilities/helpers";
 
@@ -39,16 +34,16 @@ export default function useDefend() {
   const totalPhysicalResistanceValue = useRecoilValue(totalPhysicalResistance);
 
   return () => {
-    animateElement(statusElementValue, UIAnimationType.HeadShake, UIAnimationSpeed.Fast);
+    animateElement(statusElementValue, AnimationType.HeadShake, AnimationSpeed.Fast);
 
     if (canBlockValue && Math.random() <= totalBlockChanceValue) {
       setDeltaHealth({
-        color: UIFloatingTextType.Neutral,
+        color: FloatingTextType.Neutral,
         value: BLOCKED,
       });
       setCurrentStamina((currentStamina) => currentStamina - staminaCost);
       setDeltaStamina({
-        color: UIFloatingTextType.Negative,
+        color: FloatingTextType.Negative,
         value: `${-staminaCost}`,
       });
       setStaggered(true);
@@ -69,7 +64,7 @@ export default function useDefend() {
 
     if (health !== currentHealthValue) {
       let deltaContents: DeltaDisplay = {
-        color: UIFloatingTextType.Negative,
+        color: FloatingTextType.Negative,
         value: `${healthDamage}`,
       };
 
@@ -77,7 +72,7 @@ export default function useDefend() {
         deltaContents = [
           deltaContents,
           {
-            color: UIFloatingTextType.Neutral,
+            color: FloatingTextType.Neutral,
             value: ` (${totalProtectionValue})`,
           },
         ];

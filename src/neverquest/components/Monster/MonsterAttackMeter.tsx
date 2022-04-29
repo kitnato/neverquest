@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 
 import Progress from "neverquest/components/Progress";
-import { UIVariant } from "neverquest/env";
 import useAnimation from "neverquest/hooks/useAnimation";
 import useDefend from "neverquest/hooks/useDefend";
 import { isAttacking } from "neverquest/state/character";
@@ -13,6 +12,7 @@ import {
   isMonsterStaggered,
   totalAttackRateMonster,
 } from "neverquest/state/monster";
+import { UIVariant } from "neverquest/types/ui";
 import { formatMilliseconds } from "neverquest/utilities/helpers";
 
 export default function MonsterAttackMeter() {

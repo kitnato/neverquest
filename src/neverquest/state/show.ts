@@ -1,5 +1,7 @@
 import { atom } from "recoil";
 
+// TODO - refactor using atomFamily?
+
 export const showAether = atom({
   key: "showAether",
   default: false,

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 
-import Progress from "neverquest/components/Progress";
+import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 import useAnimation from "neverquest/hooks/useAnimation";
 import useDefend from "neverquest/hooks/useDefend";
 import { isAttacking } from "neverquest/state/character";
@@ -52,7 +52,7 @@ export default function MonsterAttackMeter() {
   }, [isMonsterDeadValue]);
 
   return (
-    <Progress
+    <LabelledProgressBar
       disableTransitions
       label={formatMilliseconds(totalAttackRateMonsterValue - deltaAttack)}
       value={(deltaAttack / totalAttackRateMonsterValue) * 100}

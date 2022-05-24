@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import Progress from "neverquest/components/Progress";
+import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 import useAnimation from "neverquest/hooks/useAnimation";
 import { isMonsterStaggered } from "neverquest/state/monster";
 import { totalStaggerRate } from "neverquest/state/statistics";
@@ -31,7 +31,7 @@ export default function MonsterStaggerMeter() {
   }, [isStaggeredValue]);
 
   return (
-    <Progress
+    <LabelledProgressBar
       disableTransitions
       label={formatMilliseconds(totalStaggerRateValue - deltaStagger)}
       value={(deltaStagger / totalStaggerRateValue) * 100}

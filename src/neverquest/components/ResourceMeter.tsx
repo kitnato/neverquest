@@ -1,6 +1,6 @@
 import { RecoilValueReadOnly, useRecoilValue } from "recoil";
 
-import Progress from "neverquest/components/Progress";
+import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 import { UIAttachment, UIVariant } from "neverquest/types/ui";
 
 export default function ResourceMeter({
@@ -16,7 +16,7 @@ export default function ResourceMeter({
   const atomMaximumValue = useRecoilValue(atomMaximum);
 
   return (
-    <Progress
+    <LabelledProgressBar
       attached={attached}
       label={`${atomValue}/${atomMaximumValue}`}
       value={(atomValue / atomMaximumValue) * 100}

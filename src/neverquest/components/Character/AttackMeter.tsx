@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 
-import Progress from "neverquest/components/Progress";
+import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 import useAnimation from "neverquest/hooks/useAnimation";
 import useAttack from "neverquest/hooks/useAttack";
 import { isAttacking, isLooting, isRecovering } from "neverquest/state/character";
@@ -51,7 +51,7 @@ export default function AttackMeter() {
   })();
 
   return (
-    <Progress
+    <LabelledProgressBar
       disableTransitions
       label={label}
       value={(deltaAttack / totalAttackRateValue) * 100}

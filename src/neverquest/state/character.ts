@@ -9,7 +9,6 @@ import {
   health,
   healthRegenerationRate,
   lootBonus,
-  physicalResistance,
   recoveryRate,
   stamina,
   staminaRegenerationRate,
@@ -77,7 +76,6 @@ export const attributesIncreasable = selector({
     const healthValue = get(health);
     const healthRegenerationRateValue = get(healthRegenerationRate);
     const lootBonusValue = get(lootBonus);
-    const physicalResistanceValue = get(physicalResistance);
     const recoveryRateValue = get(recoveryRate);
     const staminaValue = get(stamina);
     const staminaRegenerationRateValue = get(staminaRegenerationRate);
@@ -92,7 +90,6 @@ export const attributesIncreasable = selector({
       healthValue,
       healthRegenerationRateValue,
       lootBonusValue,
-      physicalResistanceValue,
       recoveryRateValue,
       staminaValue,
       staminaRegenerationRateValue,

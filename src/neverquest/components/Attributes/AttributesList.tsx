@@ -11,7 +11,6 @@ import {
   health,
   healthRegenerationRate,
   lootBonus,
-  physicalResistance,
   recoveryRate,
   stamina,
   staminaRegenerationRate,
@@ -28,7 +27,6 @@ const attributesOrder = [
   criticalChance,
   criticalDamage,
   recoveryRate,
-  physicalResistance,
   lootBonus,
 ];
 

@@ -4,7 +4,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 
 import { UIAttachment, UISize, UIVariant } from "neverquest/types/ui";
 
-export default function Progress({
+export default function LabelledProgressBar({
   attached,
   disableTransitions = false,
   label,

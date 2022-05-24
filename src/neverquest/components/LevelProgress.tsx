@@ -2,7 +2,7 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import Progress from "neverquest/components/Progress";
+import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 import levelIcon from "neverquest/icons/flying-flag.svg";
 import progressIcon from "neverquest/icons/stairs.svg";
 import { isWilderness, level, progress, progressMax } from "neverquest/state/global";
@@ -37,7 +37,7 @@ export default function LevelProgress() {
             tooltip="Level progress"
           />
 
-          <Progress
+          <LabelledProgressBar
             label={`${progressValue}/${progressMaxValue}`}
             value={(progressValue / progressMaxValue) * 100}
             variant={UIVariant.Primary}

@@ -106,6 +106,7 @@ export const lootBonus = atom<Attribute>({
   },
 });
 
+// TODO - unused. remove?
 export const physicalResistance = atom<Attribute>({
   key: "physicalResistance",
   default: {

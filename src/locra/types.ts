@@ -71,7 +71,6 @@ export enum ShieldType {
 }
 
 export enum WeaponType {
-  Magic = "magic",
   Melee = "melee",
   Ranged = "ranged",
 }

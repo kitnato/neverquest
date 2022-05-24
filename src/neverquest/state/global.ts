@@ -62,6 +62,7 @@ export const isWilderness = selector({
   },
 });
 
+// TODO - move set to new useLocation hooks
 export const location = selector({
   key: "location",
   get: ({ get }) => {

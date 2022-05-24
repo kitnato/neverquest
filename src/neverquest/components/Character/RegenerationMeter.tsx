@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSetRecoilState, useRecoilValue, RecoilState, RecoilValueReadOnly } from "recoil";
 
-import Progress from "neverquest/components/Progress";
+import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 
 import useAnimation from "neverquest/hooks/useAnimation";
 import { isRecovering } from "neverquest/state/character";
@@ -67,7 +67,7 @@ export default function RegenerationMeter({
   })();
 
   return (
-    <Progress
+    <LabelledProgressBar
       attached={UIAttachment.Above}
       disableTransitions
       label={label}

@@ -1,11 +1,27 @@
-# dependencies
+# Dependencies
 node_modules
 
-# production
-build
+# Deployment
+.env*
+!.env.example
 
-# local
+# IDE
 .vscode
-.DS_Store
-dependencygraph.svg
+*.code-workspace
+
+# Linter
+.eslintcache
+
+# Logging
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Miscellaneous
 notes.txt
+
+# MacOS
+.DS_Store
+
+# Production
+build

@@ -49,7 +49,6 @@ export const encumbrance = selector({
   },
 });
 
-// TODO - needed?
 export const isInventoryFull = selector({
   key: "isInventoryFull",
   get: ({ get }) => {

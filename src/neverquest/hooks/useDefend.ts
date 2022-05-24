@@ -7,11 +7,7 @@ import { shield } from "neverquest/state/inventory";
 import { isMonsterStaggered, totalDamageMonster } from "neverquest/state/monster";
 import { canBlock, currentHealth, currentStamina } from "neverquest/state/resources";
 import { showRecovery } from "neverquest/state/show";
-import {
-  totalBlockChance,
-  totalProtection,
-  totalPhysicalResistance,
-} from "neverquest/state/statistics";
+import { totalBlockChance, totalProtection } from "neverquest/state/statistics";
 import { DeltaDisplay, AnimationSpeed, AnimationType, FloatingTextType } from "neverquest/types/ui";
 import { BLOCKED } from "neverquest/utilities/constants";
 import { animateElement } from "neverquest/utilities/helpers";
@@ -31,7 +27,6 @@ export default function useDefend() {
   const totalBlockChanceValue = useRecoilValue(totalBlockChance);
   const totalProtectionValue = useRecoilValue(totalProtection);
   const totalDamageMonsterValue = useRecoilValue(totalDamageMonster);
-  const totalPhysicalResistanceValue = useRecoilValue(totalPhysicalResistance);
 
   return () => {
     animateElement({
@@ -92,9 +87,7 @@ export default function useDefend() {
           setShowRecovery(true);
         }
 
-        if (Math.abs(healthDamage) > totalPhysicalResistanceValue) {
-          setRecovering(true);
-        }
+        setRecovering(true);
       }
     }
   };

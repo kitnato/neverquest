@@ -7,7 +7,6 @@ import {
   damage,
   dodgeChance,
   healthRegenerationRate,
-  physicalResistance,
   recoveryRate,
   staminaRegenerationRate,
 } from "neverquest/state/attributes";
@@ -91,15 +90,6 @@ export const totalHealthRegenerationRate = selector({
     const healthRegenerationRateValue = get(healthRegenerationRate);
 
     return getComputedStat(healthRegenerationRateValue);
-  },
-});
-
-export const totalPhysicalResistance = selector({
-  key: "totalPhysicalResistance",
-  get: ({ get }) => {
-    const physicalResistanceValue = get(physicalResistance);
-
-    return getComputedStat(physicalResistanceValue);
   },
 });
 

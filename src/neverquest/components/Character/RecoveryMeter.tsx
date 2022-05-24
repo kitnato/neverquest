@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 
-import Progress from "neverquest/components/Progress";
+import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 import useAnimation from "neverquest/hooks/useAnimation";
 import { isRecovering } from "neverquest/state/character";
 import { totalRecoveryRate } from "neverquest/state/statistics";
@@ -25,7 +25,7 @@ export default function RecoveryMeter() {
   }, [deltaRecovery, totalRecoveryRateValue, setRecovering]);
 
   return (
-    <Progress
+    <LabelledProgressBar
       disableTransitions
       label={formatMilliseconds(totalRecoveryRateValue - deltaRecovery)}
       value={(deltaRecovery / totalRecoveryRateValue) * 100}

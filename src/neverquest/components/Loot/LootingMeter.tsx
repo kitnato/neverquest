@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import Progress from "neverquest/components/Progress";
+import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 import useAnimation from "neverquest/hooks/useAnimation";
 import useNewMonster from "neverquest/hooks/useNewMonster";
 import useRewardKill from "neverquest/hooks/useRewardKill";
@@ -30,7 +30,7 @@ export default function LootingMeter() {
   }, [deltaLooting, lootingRateValue]);
 
   return (
-    <Progress
+    <LabelledProgressBar
       disableTransitions
       label={formatMilliseconds(lootingRateValue - deltaLooting)}
       value={(deltaLooting / lootingRateValue) * 100}

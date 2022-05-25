@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
-import { useSetRecoilState } from "recoil";
+import { useSetAtom } from "jotai";
 
 import Attack from "neverquest/components/Character/Attack";
 import Defense from "neverquest/components/Character/Defense";
@@ -18,7 +18,7 @@ import { animateElement } from "neverquest/utilities/helpers";
 
 export default function Status() {
   const element = useRef(null);
-  const setStatusElement = useSetRecoilState(statusElement);
+  const setStatusElement = useSetAtom(statusElement);
 
   useEffect(() => {
     const { current } = element;

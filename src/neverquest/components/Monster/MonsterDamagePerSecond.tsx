@@ -1,5 +1,5 @@
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/wolverine-claws.svg";
@@ -9,8 +9,8 @@ import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function MonsterDamagePerSecond() {
-  const damagePerSecondMonsterValue = useRecoilValue(damagePerSecondMonster);
-  const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
+  const damagePerSecondMonsterValue = useAtomValue(damagePerSecondMonster);
+  const showDamagePerSecondValue = useAtomValue(showDamagePerSecond);
 
   if (!showDamagePerSecondValue) {
     return null;

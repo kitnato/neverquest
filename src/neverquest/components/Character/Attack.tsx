@@ -2,7 +2,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import Stack from "react-bootstrap/Stack";
 import Table from "react-bootstrap/Table";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import AttackMeter from "neverquest/components/Character/AttackMeter";
 import FloatingText from "neverquest/components/FloatingText";
@@ -21,9 +21,9 @@ import {
 } from "neverquest/utilities/helpers";
 
 export default function Attack() {
-  const attackRateBonusValue = useRecoilValue(attackRateBonus);
-  const showTotalAttackRateBreakdownValue = useRecoilValue(showTotalAttackRateSummary);
-  const weaponValue = useRecoilValue(weapon);
+  const attackRateBonusValue = useAtomValue(attackRateBonus);
+  const showTotalAttackRateBreakdownValue = useAtomValue(showTotalAttackRateSummary);
+  const weaponValue = useAtomValue(weapon);
 
   useDeltaText({
     deltaAtom: deltaTotalAttackRate,

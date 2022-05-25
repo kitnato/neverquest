@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { RecoilState, RecoilValueReadOnly, useRecoilValue, useSetRecoilState } from "recoil";
+import { Atom, useAtomValue, useSetAtom, WritableAtom } from "jotai";
 
 import usePreviousValue from "neverquest/hooks/usePreviousValue";
 import { DeltaDisplay, FloatingTextType } from "neverquest/types/ui";
@@ -10,12 +10,12 @@ export default function useDeltaText({
   isTime = false,
   valueAtom,
 }: {
-  deltaAtom: RecoilState<DeltaDisplay>;
+  deltaAtom: WritableAtom<DeltaDisplay, DeltaDisplay>;
   isTime?: boolean;
-  valueAtom: RecoilValueReadOnly<number>;
+  valueAtom: Atom<number>;
 }) {
-  const setDeltaValue = useSetRecoilState(deltaAtom);
-  const currentValue = useRecoilValue(valueAtom);
+  const setDeltaValue = useSetAtom(deltaAtom);
+  const currentValue = useAtomValue(valueAtom);
 
   const previousValue = usePreviousValue(currentValue);
 

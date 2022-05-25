@@ -1,5 +1,5 @@
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/striking-splinter.svg";
@@ -10,8 +10,8 @@ import { formatPercentage } from "neverquest/utilities/helpers";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function CritDamage() {
-  const criticalDamageValue = useRecoilValue(totalCriticalDamage);
-  const showCriticalValue = useRecoilValue(showCritical);
+  const criticalDamageValue = useAtomValue(totalCriticalDamage);
+  const showCriticalValue = useAtomValue(showCritical);
 
   if (!showCriticalValue) {
     return null;

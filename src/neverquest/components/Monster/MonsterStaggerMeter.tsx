@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useAtom, useAtomValue } from "jotai";
 
 import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 import useAnimation from "neverquest/hooks/useAnimation";
@@ -9,12 +9,12 @@ import { UIVariant } from "neverquest/types/ui";
 import { formatMilliseconds } from "neverquest/utilities/helpers";
 
 export default function MonsterStaggerMeter() {
-  const [isStaggeredValue, setStaggered] = useRecoilState(isMonsterStaggered);
-  const totalStaggerRateValue = useRecoilValue(totalStaggerRate);
+  const [isStaggeredValue, setStaggered] = useAtom(isMonsterStaggered);
+  const totalStaggerRateValue = useAtomValue(totalStaggerRate);
   const [deltaStagger, setDeltaStagger] = useState(0);
 
-  useAnimation((deltaTime) => {
-    setDeltaStagger((currentDelta) => currentDelta + deltaTime);
+  useAnimation((delta) => {
+    setDeltaStagger((current) => current + delta);
   }, !isStaggeredValue);
 
   useEffect(() => {

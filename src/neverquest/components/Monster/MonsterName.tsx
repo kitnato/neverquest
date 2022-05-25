@@ -1,5 +1,5 @@
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import attackingIcon from "neverquest/icons/carnivore-mouth.svg";
@@ -9,9 +9,9 @@ import { isAttacking } from "neverquest/state/character";
 import { isMonsterDead, monsterName } from "neverquest/state/monster";
 
 export default function MonsterName() {
-  const isAttackingValue = useRecoilValue(isAttacking);
-  const isMonsterDeadValue = useRecoilValue(isMonsterDead);
-  const monsterNameValue = useRecoilValue(monsterName);
+  const isAttackingValue = useAtomValue(isAttacking);
+  const isMonsterDeadValue = useAtomValue(isMonsterDead);
+  const monsterNameValue = useAtomValue(monsterName);
 
   const { icon, tooltip } = (() => {
     if (isMonsterDeadValue) {

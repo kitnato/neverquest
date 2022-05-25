@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSetRecoilState, useRecoilValue, RecoilState, RecoilValueReadOnly } from "recoil";
+import { Atom, useSetAtom, useAtomValue, WritableAtom, PrimitiveAtom } from "jotai";
 
 import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 
@@ -20,26 +20,27 @@ export default function RegenerationMeter({
   atomResourceDelta,
   isResourceMaxedOut,
 }: {
-  regenerationRate: RecoilValueReadOnly<number>;
-  atomResource: RecoilState<number>;
-  atomResourceDelta: RecoilState<DeltaDisplay>;
-  isResourceMaxedOut: RecoilValueReadOnly<boolean>;
+  regenerationRate: Atom<number>;
+  atomResource: PrimitiveAtom<number>;
+  atomResourceDelta: WritableAtom<DeltaDisplay, DeltaDisplay>;
+  isResourceMaxedOut: Atom<boolean>;
 }) {
-  const isRecoveringValue = useRecoilValue(isRecovering);
-  const regenerationRateValue = useRecoilValue(regenerationRate);
-  const isResourceMaxedOutValue = useRecoilValue(isResourceMaxedOut);
-  const setCurrentResource = useSetRecoilState(atomResource);
-  const setDeltaResource = useSetRecoilState(atomResourceDelta);
+  const isRecoveringValue = useAtomValue(isRecovering);
+  const regenerationRateValue = useAtomValue(regenerationRate);
+  const isResourceMaxedOutValue = useAtomValue(isResourceMaxedOut);
+  const setCurrentResource = useSetAtom(atomResource);
+  const setDeltaResource = useSetAtom(atomResourceDelta);
   const [deltaRegeneration, setDeltaRegeneration] = useState(0);
 
-  useAnimation((deltaTime) => {
-    setDeltaRegeneration((currentDelta) => currentDelta + deltaTime);
+  useAnimation((delta) => {
+    setDeltaRegeneration((current) => current + delta);
   }, isResourceMaxedOutValue || isRecoveringValue);
 
   useEffect(() => {
     if (deltaRegeneration >= regenerationRateValue) {
       setDeltaRegeneration(0);
-      setCurrentResource((currentResource) => currentResource + 1);
+      // TODO - make health regeneration amount either a constant or an atom if it could be variable
+      setCurrentResource((current) => current + 1);
       setDeltaResource({
         color: FloatingTextType.Positive,
         value: "+1",

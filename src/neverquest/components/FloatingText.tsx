@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Stack } from "react-bootstrap";
-import { RecoilState, useRecoilState } from "recoil";
+import { PrimitiveAtom, useAtom } from "jotai";
 import { v4 as uuidv4 } from "uuid";
 
 import useAnimation from "neverquest/hooks/useAnimation";
@@ -22,10 +22,10 @@ export default function FloatingText({
   atom,
   exitToLeft = false,
 }: {
-  atom: RecoilState<DeltaDisplay>;
+  atom: PrimitiveAtom<DeltaDisplay>;
   exitToLeft?: boolean;
 }) {
-  const [deltaValue, setDeltaValue] = useRecoilState(atom);
+  const [deltaValue, setDeltaValue] = useAtom(atom);
   const [deltaQueue, setDeltaQueue] = useState<FloatingTextStyle[]>([]);
 
   useEffect(() => {
@@ -71,12 +71,12 @@ export default function FloatingText({
   }, [deltaValue]);
 
   useAnimation(() => {
-    const newQueue = deltaQueue.map((currentDelta) => {
-      if (currentDelta === null) {
+    const newQueue = deltaQueue.map((current) => {
+      if (current === null) {
         return null;
       }
 
-      const { bottom, hasGrown, opacity, right, scale } = currentDelta;
+      const { bottom, hasGrown, opacity, right, scale } = current;
       let newBottom = bottom;
       let newHasGrown = hasGrown;
       let newOpacity = opacity;
@@ -106,7 +106,7 @@ export default function FloatingText({
       }
 
       return {
-        ...currentDelta,
+        ...current,
         bottom: newBottom,
         hasGrown: newHasGrown,
         opacity: newOpacity,
@@ -116,7 +116,7 @@ export default function FloatingText({
       };
     });
 
-    setDeltaQueue(newQueue.filter((currentDelta) => currentDelta !== null));
+    setDeltaQueue(newQueue.filter((current) => current !== null));
   }, deltaQueue.length === 0);
 
   return (

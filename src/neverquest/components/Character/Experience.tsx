@@ -1,5 +1,5 @@
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import FloatingText from "neverquest/components/FloatingText";
 import ImageIcon from "neverquest/components/ImageIcon";
@@ -8,7 +8,7 @@ import { experience } from "neverquest/state/character";
 import { deltaExperience } from "neverquest/state/deltas";
 
 export default function Experience() {
-  const experienceValue = useRecoilValue(experience);
+  const experienceValue = useAtomValue(experience);
 
   return (
     <Stack direction="horizontal" gap={3}>

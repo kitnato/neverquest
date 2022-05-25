@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Stack from "react-bootstrap/Stack";
 import Tooltip from "react-bootstrap/Tooltip";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useAtom, useAtomValue } from "jotai";
 
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Coins from "neverquest/components/Loot/Coins";
@@ -20,8 +20,8 @@ export default function BuyItems() {
   const acquireItem = useAcquireItem();
   const checkEncumbrance = useCheckEncumbrance();
   const setReserve = useReserve();
-  const coinsValue = useRecoilValue(coins);
-  const [merchantInventoryValue, setMerchantInventory] = useRecoilState(merchantInventory);
+  const [merchantInventoryValue, setMerchantInventory] = useAtom(merchantInventory);
+  const coinsValue = useAtomValue(coins);
 
   const inventoryEntries = Object.entries(merchantInventoryValue);
 
@@ -32,8 +32,8 @@ export default function BuyItems() {
 
       if (itemReceived) {
         setReserve({ coinsDifference: -item.price });
-        setMerchantInventory((currentMerchantInventory) => {
-          const newMerchantInventory = { ...currentMerchantInventory };
+        setMerchantInventory((current) => {
+          const newMerchantInventory = { ...current };
 
           delete newMerchantInventory[key];
 

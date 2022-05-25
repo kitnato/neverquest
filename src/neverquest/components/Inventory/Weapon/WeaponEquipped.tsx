@@ -1,5 +1,5 @@
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import WeaponName from "neverquest/components/Inventory/Weapon/WeaponName";
@@ -10,8 +10,8 @@ import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function WeaponEquipped() {
-  const showWeaponValue = useRecoilValue(showWeapon);
-  const weaponValue = useRecoilValue(weapon);
+  const showWeaponValue = useAtomValue(showWeapon);
+  const weaponValue = useAtomValue(weapon);
 
   if (!showWeaponValue) {
     return null;

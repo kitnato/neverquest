@@ -1,71 +1,48 @@
-import { atom, selector } from "recoil";
+import { atom } from "jotai";
 
 import LOCRA from "locra";
 import { LocationType } from "neverquest/types/core";
 import { UNKNOWN } from "neverquest/utilities/constants";
 
-// ATOMS
+// PRIMITIVES
 
-export const activeMonster = atom({
-  key: "activeMonster",
-  default: null,
+export const autoEquip = atom(true);
+
+export const gameOver = atom(false);
+
+export const level = atom(1);
+
+export const mode = atom<LocationType>(LocationType.Wilderness);
+
+export const nsfw = atom(true);
+
+export const progress = atom(0);
+
+// READERS
+
+export const isLevelCompleted = atom((get) => {
+  const progressValue = get(progress);
+  const progressMaxValue = get(progressMax);
+
+  return progressValue === progressMaxValue;
 });
 
-export const autoEquip = atom({
-  key: "autoEquip",
-  default: true,
+export const isWilderness = atom((get) => {
+  const modeValue = get(mode);
+
+  return modeValue === LocationType.Wilderness;
 });
 
-export const gameOver = atom({
-  key: "gameOver",
-  default: false,
+export const progressMax = atom((get) => {
+  const levelValue = get(level);
+
+  return levelValue + 2;
 });
 
-export const level = atom({
-  key: "level",
-  default: 1,
-});
+// DERIVED
 
-export const mode = atom({
-  key: "mode",
-  default: LocationType.Wilderness,
-});
-
-export const nsfw = atom({
-  key: "nsfw",
-  default: true,
-});
-
-export const progress = atom({
-  key: "progress",
-  default: 0,
-});
-
-// SELECTORS
-
-export const isLevelCompleted = selector({
-  key: "isLevelCompleted",
-  get: ({ get }) => {
-    const progressValue = get(progress);
-    const progressMaxValue = get(progressMax);
-
-    return progressValue === progressMaxValue;
-  },
-});
-
-export const isWilderness = selector({
-  key: "isWilderness",
-  get: ({ get }) => {
-    const modeValue = get(mode);
-
-    return modeValue === LocationType.Wilderness;
-  },
-});
-
-// TODO - move set to new useLocation hooks
-export const location = selector({
-  key: "location",
-  get: ({ get }) => {
+export const location = atom(
+  (get) => {
     const isWildernessValue = get(isWilderness);
     const levelValue = get(level);
     const nsfwValue = get(nsfw);
@@ -85,7 +62,7 @@ export const location = selector({
 
     return "Caravan";
   },
-  set: ({ get, set }) => {
+  (get, set) => {
     const levelValue = get(level);
     const isWildernessValue = get(isWilderness);
 
@@ -96,14 +73,5 @@ export const location = selector({
       set(level, levelValue + 1);
       set(progress, 0);
     }
-  },
-});
-
-export const progressMax = selector({
-  key: "progressMax",
-  get: ({ get }) => {
-    const levelValue = get(level);
-
-    return levelValue + 2;
-  },
-});
+  }
+);

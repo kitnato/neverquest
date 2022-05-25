@@ -1,118 +1,49 @@
-import { atom } from "recoil";
+import { atom } from "jotai";
 
 // TODO - refactor using atomFamily?
 
-export const showAether = atom({
-  key: "showAether",
-  default: false,
-});
+export const showAether = atom(false);
 
-export const showAccessory = atom({
-  key: "showAccessory",
-  default: false,
-});
+export const showAccessory = atom(false);
 
-export const showArmor = atom({
-  key: "showArmor",
-  default: false,
-});
+export const showArmor = atom(false);
 
-export const showAttributes = atom({
-  key: "showAttributes",
-  default: false,
-});
+export const showAttributes = atom(false);
 
-export const showAttributesButton = atom({
-  key: "showAttributesButton",
-  default: false,
-});
+export const showAttributesButton = atom(false);
 
-export const showBlockChance = atom({
-  key: "showBlockChance",
-  default: false,
-});
+export const showBlockChance = atom(false);
 
-export const showCharacterLevel = atom({
-  key: "showCharacterLevel",
-  default: false,
-});
+export const showCharacterLevel = atom(false);
 
-export const showCoins = atom({
-  key: "showCoins",
-  default: false,
-});
+export const showCoins = atom(false);
 
-export const showCritical = atom({
-  key: "showCritical",
-  default: false,
-});
+export const showCritical = atom(false);
 
-export const showDamagePerSecond = atom({
-  key: "showDamagePerSecond",
-  default: false,
-});
+export const showDamagePerSecond = atom(false);
 
-export const showDefense = atom({
-  key: "showDefense",
-  default: false,
-});
+export const showDefense = atom(false);
 
-export const showDodgeChance = atom({
-  key: "showDodgeChance",
-  default: false,
-});
+export const showDodgeChance = atom(false);
 
-export const showInventoryButton = atom({
-  key: "showInventoryButton",
-  default: false,
-});
+export const showInventoryButton = atom(false);
 
-export const showLevelProgress = atom({
-  key: "showLevelProgress",
-  default: false,
-});
+export const showLevelProgress = atom(false);
 
-export const showLoot = atom({
-  key: "showLoot",
-  default: false,
-});
+export const showLoot = atom(false);
 
-export const showRecovery = atom({
-  key: "showRecovery",
-  default: false,
-});
+export const showRecovery = atom(false);
 
-export const showScrap = atom({
-  key: "showScrap",
-  default: false,
-});
+export const showScrap = atom(false);
 
-export const showShield = atom({
-  key: "showShield",
-  default: false,
-});
+export const showShield = atom(false);
 
-export const showStamina = atom({
-  key: "showStamina",
-  default: false,
-});
+export const showStamina = atom(false);
 
-export const showTotalAttackRateSummary = atom({
-  key: "showTotalAttackRateSummary",
-  default: false,
-});
+export const showTotalAttackRateSummary = atom(false);
 
-export const showTotalDamageSummary = atom({
-  key: "showTotalDamageSummary",
-  default: false,
-});
+export const showTotalDamageSummary = atom(false);
 
-export const showTotalProtection = atom({
-  key: "showTotalProtection",
-  default: false,
-});
+export const showTotalProtection = atom(false);
 
-export const showWeapon = atom({
-  key: "showWeapon",
-  default: false,
-});
+export const showWeapon = atom(false);

@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { v4 as uuidv4 } from "uuid";
 
 import { Equipment } from "neverquest/types/core";
@@ -13,13 +13,13 @@ import { isAccessory, isArmor, isShield, isWeapon } from "neverquest/utilities/t
 export default function useAcquireItem() {
   const checkEncumbrance = useCheckEncumbrance();
   const equipItem = useEquipItem();
-  const [showInventoryButtonValue, setShowInventoryButton] = useRecoilState(showInventoryButton);
-  const armorValue = useRecoilValue(armor);
-  const accessoryValue = useRecoilValue(accessory);
-  const shieldValue = useRecoilValue(shield);
-  const weaponValue = useRecoilValue(weapon);
-  const autoEquipValue = useRecoilValue(autoEquip);
-  const setInventory = useSetRecoilState(inventory);
+  const [showInventoryButtonValue, setShowInventoryButton] = useAtom(showInventoryButton);
+  const armorValue = useAtomValue(armor);
+  const accessoryValue = useAtomValue(accessory);
+  const shieldValue = useAtomValue(shield);
+  const weaponValue = useAtomValue(weapon);
+  const autoEquipValue = useAtomValue(autoEquip);
+  const setInventory = useSetAtom(inventory);
 
   return ({ item }: { item: Equipment }) => {
     if (!checkEncumbrance({ weight: item.weight })) {
@@ -28,8 +28,8 @@ export default function useAcquireItem() {
 
     const key = uuidv4();
 
-    setInventory((currentInventory) => ({
-      ...currentInventory,
+    setInventory((current) => ({
+      ...current,
       [key]: { item },
     }));
 

@@ -1,4 +1,4 @@
-import { selector } from "recoil";
+import { atom } from "jotai";
 
 import {
   attackRateBonus,
@@ -13,118 +13,82 @@ import {
 import { armor, shield, weapon } from "neverquest/state/inventory";
 import { getComputedStat, getDamagePerSecond } from "neverquest/utilities/helpers";
 
-export const damagePerSecond = selector({
-  key: "damagePerSecond",
-  get: ({ get }) => {
-    const totalAttackRateValue = get(totalAttackRate);
-    const totalDamageValue = get(totalDamage);
+export const damagePerSecond = atom((get) => {
+  const totalAttackRateValue = get(totalAttackRate);
+  const totalDamageValue = get(totalDamage);
 
-    return getDamagePerSecond({
-      damage: totalDamageValue,
-      rate: totalAttackRateValue,
-    });
-  },
+  return getDamagePerSecond({
+    damage: totalDamageValue,
+    rate: totalAttackRateValue,
+  });
 });
 
-export const totalAttackRate = selector({
-  key: "totalAttackRate",
-  get: ({ get }) => {
-    const attackRateBonusValue = get(attackRateBonus);
-    const { rate } = get(weapon);
+export const totalAttackRate = atom((get) => {
+  const attackRateBonusValue = get(attackRateBonus);
+  const { rate } = get(weapon);
 
-    const bonus = getComputedStat(attackRateBonusValue);
+  const bonus = getComputedStat(attackRateBonusValue);
 
-    return rate * (1 - bonus);
-  },
+  return rate * (1 - bonus);
 });
 
-export const totalBlockChance = selector({
-  key: "totalBlockChance",
-  get: ({ get }) => {
-    const shieldValue = get(shield);
+export const totalBlockChance = atom((get) => {
+  const shieldValue = get(shield);
 
-    return shieldValue.block;
-  },
+  return shieldValue.block;
 });
 
-export const totalCriticalChance = selector({
-  key: "totalCriticalChance",
-  get: ({ get }) => {
-    const criticalChanceValue = get(criticalChance);
+export const totalCriticalChance = atom((get) => {
+  const criticalChanceValue = get(criticalChance);
 
-    return getComputedStat(criticalChanceValue);
-  },
+  return getComputedStat(criticalChanceValue);
 });
 
-export const totalCriticalDamage = selector({
-  key: "totalCriticalDamage",
-  get: ({ get }) => {
-    const criticalDamageValue = get(criticalDamage);
+export const totalCriticalDamage = atom((get) => {
+  const criticalDamageValue = get(criticalDamage);
 
-    return getComputedStat(criticalDamageValue);
-  },
+  return getComputedStat(criticalDamageValue);
 });
 
-export const totalDamage = selector({
-  key: "totalDamage",
-  get: ({ get }) => {
-    const damageValue = get(damage);
-    const weaponValue = get(weapon);
+export const totalDamage = atom((get) => {
+  const damageValue = get(damage);
+  const weaponValue = get(weapon);
 
-    return weaponValue.damage + getComputedStat(damageValue);
-  },
+  return weaponValue.damage + getComputedStat(damageValue);
 });
 
-export const totalDodgeChance = selector({
-  key: "totalDodgeChance",
-  get: ({ get }) => {
-    const dodgeChanceValue = get(dodgeChance);
+export const totalDodgeChance = atom((get) => {
+  const dodgeChanceValue = get(dodgeChance);
 
-    return getComputedStat(dodgeChanceValue);
-  },
+  return getComputedStat(dodgeChanceValue);
 });
 
-export const totalHealthRegenerationRate = selector({
-  key: "totalHealthRegenerationRate",
-  get: ({ get }) => {
-    const healthRegenerationRateValue = get(healthRegenerationRate);
+export const totalHealthRegenerationRate = atom((get) => {
+  const healthRegenerationRateValue = get(healthRegenerationRate);
 
-    return getComputedStat(healthRegenerationRateValue);
-  },
+  return getComputedStat(healthRegenerationRateValue);
 });
 
-export const totalProtection = selector({
-  key: "totalProtection",
-  get: ({ get }) => {
-    const armorValue = get(armor);
+export const totalProtection = atom((get) => {
+  const armorValue = get(armor);
 
-    return armorValue.protection;
-  },
+  return armorValue.protection;
 });
 
-export const totalRecoveryRate = selector({
-  key: "totalRecoveryRate",
-  get: ({ get }) => {
-    const recoveryRateValue = get(recoveryRate);
+export const totalRecoveryRate = atom((get) => {
+  const recoveryRateValue = get(recoveryRate);
 
-    return getComputedStat(recoveryRateValue);
-  },
+  return getComputedStat(recoveryRateValue);
 });
 
-export const totalStaggerRate = selector({
-  key: "totalStaggerRate",
-  get: ({ get }) => {
-    const shieldValue = get(shield);
+export const totalStaggerRate = atom((get) => {
+  const shieldValue = get(shield);
 
-    return shieldValue.stagger;
-  },
+  return shieldValue.stagger;
 });
 
-export const totalStaminaRegenerationRate = selector({
-  key: "totalStaminaRegenerationRate",
-  get: ({ get }) => {
-    const staminaRegenerationRateValue = get(staminaRegenerationRate);
+export const totalStaminaRegenerationRate = atom((get) => {
+  const staminaRegenerationRateValue = get(staminaRegenerationRate);
 
-    return getComputedStat(staminaRegenerationRateValue);
-  },
+  return getComputedStat(staminaRegenerationRateValue);
 });

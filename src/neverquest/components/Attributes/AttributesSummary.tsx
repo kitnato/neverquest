@@ -1,6 +1,6 @@
 import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import CharacterLevel from "neverquest/components/Character/CharacterLevel";
 import Experience from "neverquest/components/Character/Experience";
@@ -9,7 +9,7 @@ import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function AttributesSummary() {
-  const showAttributesValue = useRecoilValue(showAttributes);
+  const showAttributesValue = useAtomValue(showAttributes);
 
   if (!showAttributesValue) {
     return null;

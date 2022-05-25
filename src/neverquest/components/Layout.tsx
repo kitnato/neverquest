@@ -2,7 +2,7 @@ import { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import Character from "neverquest/components/Character";
 import Control from "neverquest/components/Control";
@@ -13,7 +13,7 @@ import Reset from "neverquest/components/Reset";
 import { gameOver } from "neverquest/state/global";
 
 export default function Layout({ resetSeed }: { resetSeed: () => void }) {
-  const gameOverValue = useRecoilValue(gameOver);
+  const gameOverValue = useAtomValue(gameOver);
   const [isGameOverShowing, setGameOverShowing] = useState(true);
 
   return (

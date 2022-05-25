@@ -2,7 +2,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import Stack from "react-bootstrap/Stack";
 import Table from "react-bootstrap/Table";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import FloatingText from "neverquest/components/FloatingText";
 import ImageIcon from "neverquest/components/ImageIcon";
@@ -16,10 +16,10 @@ import { totalDamage } from "neverquest/state/statistics";
 import { getComputedStat } from "neverquest/utilities/helpers";
 
 export default function TotalDamage() {
-  const damageValue = useRecoilValue(damage);
-  const showTotalDamageBreakdownValue = useRecoilValue(showTotalDamageSummary);
-  const totalDamageValue = useRecoilValue(totalDamage);
-  const weaponValue = useRecoilValue(weapon);
+  const damageValue = useAtomValue(damage);
+  const showTotalDamageBreakdownValue = useAtomValue(showTotalDamageSummary);
+  const totalDamageValue = useAtomValue(totalDamage);
+  const weaponValue = useAtomValue(weapon);
 
   useDeltaText({
     deltaAtom: deltaTotalDamage,

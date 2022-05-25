@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
-import { useRecoilState } from "recoil";
+import { useAtom } from "jotai";
 
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Coins from "neverquest/components/Loot/Coins";
@@ -16,7 +16,7 @@ import { getSellPrice } from "neverquest/utilities/helpers";
 export default function SellItems() {
   const setReserve = useReserve();
   const unequipItem = useUnequipItem();
-  const [inventoryValue, setInventory] = useRecoilState(inventory);
+  const [inventoryValue, setInventory] = useAtom(inventory);
 
   const inventoryContents = Object.entries(inventoryValue);
 
@@ -27,8 +27,8 @@ export default function SellItems() {
         unequipItem({ item, key });
       }
 
-      setInventory((currentInventory) => {
-        const newInventoryContents = { ...currentInventory };
+      setInventory((current) => {
+        const newInventoryContents = { ...current };
 
         delete newInventoryContents[key];
 

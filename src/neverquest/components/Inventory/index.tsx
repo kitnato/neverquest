@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Encumbrance from "neverquest/components/Inventory/Encumbrance";
@@ -13,7 +13,7 @@ import { InventoryContentProps } from "neverquest/types/props";
 import { UIVariant } from "neverquest/types/ui";
 
 export default function Inventory() {
-  const inventoryValue = useRecoilValue(inventory);
+  const inventoryValue = useAtomValue(inventory);
 
   const equipItem = useEquipItem();
   const unequipItem = useUnequipItem();

@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import DismissableScreen from "neverquest/components/DismissableScreen";
 import ImageIcon from "neverquest/components/ImageIcon";
@@ -14,8 +14,8 @@ import { AnimationType, UIVariant } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function InventoryButton() {
-  const isAttackingValue = useRecoilValue(isAttacking);
-  const showInventoryButtonValue = useRecoilValue(showInventoryButton);
+  const isAttackingValue = useAtomValue(isAttacking);
+  const showInventoryButtonValue = useAtomValue(showInventoryButton);
   const [isScreenShowing, setScreenShowing] = useState(false);
 
   if (!showInventoryButtonValue) {

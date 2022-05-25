@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
-import { useSetRecoilState } from "recoil";
+import { useSetAtom } from "jotai";
 
 import MonsterAttack from "neverquest/components/Monster/MonsterAttack";
 import MonsterHealth from "neverquest/components/Monster/MonsterHealth";
@@ -17,7 +17,7 @@ import { animateElement } from "neverquest/utilities/helpers";
 
 export default function MonsterStatus() {
   const element = useRef(null);
-  const setMonsterStatusElement = useSetRecoilState(monsterStatusElement);
+  const setMonsterStatusElement = useSetAtom(monsterStatusElement);
 
   useEffect(() => {
     const { current } = element;

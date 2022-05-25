@@ -1,5 +1,5 @@
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/abstract-016.svg";
@@ -7,7 +7,7 @@ import { experienceAvailable } from "neverquest/state/character";
 
 // TODO - obsolete?
 export default function ExperienceAvailable() {
-  const experienceAvailableValue = useRecoilValue(experienceAvailable);
+  const experienceAvailableValue = useAtomValue(experienceAvailable);
 
   return (
     <Stack direction="horizontal" gap={3}>

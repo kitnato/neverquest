@@ -1,4 +1,4 @@
-import { RecoilValueReadOnly, useRecoilValue } from "recoil";
+import { Atom, useAtomValue } from "jotai";
 
 import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 import { UIAttachment, UIVariant } from "neverquest/types/ui";
@@ -9,11 +9,11 @@ export default function ResourceMeter({
   atomMaximum,
 }: {
   attached?: UIAttachment;
-  atom: RecoilValueReadOnly<number>;
-  atomMaximum: RecoilValueReadOnly<number>;
+  atom: Atom<number>;
+  atomMaximum: Atom<number>;
 }) {
-  const atomValue = useRecoilValue(atom);
-  const atomMaximumValue = useRecoilValue(atomMaximum);
+  const atomValue = useAtomValue(atom);
+  const atomMaximumValue = useAtomValue(atomMaximum);
 
   return (
     <LabelledProgressBar

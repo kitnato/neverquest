@@ -1,6 +1,6 @@
 import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import LootDisplay from "neverquest/components/Loot/LootDisplay";
@@ -13,8 +13,8 @@ import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function Loot() {
-  const hasLootedValue = useRecoilValue(hasLooted);
-  const progressValue = useRecoilValue(progress);
+  const hasLootedValue = useAtomValue(hasLooted);
+  const progressValue = useAtomValue(progress);
 
   return (
     <Stack gap={3}>

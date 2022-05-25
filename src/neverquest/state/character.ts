@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { atom } from "jotai";
 
 import {
   attackRateBonus,
@@ -15,102 +15,69 @@ import {
 } from "neverquest/state/attributes";
 import { UNKNOWN } from "neverquest/utilities/constants";
 
-// ATOMS
+// PRIMITIVES
 
-export const characterLevel = atom({
-  key: "characterLevel",
-  default: 0,
+export const characterLevel = atom(0);
+
+export const experience = atom(0);
+
+export const experienceSpent = atom(0);
+
+export const isAttacking = atom(false);
+
+export const isLooting = atom(false);
+
+export const isRecovering = atom(false);
+
+export const lootingRate = atom(2500);
+
+export const name = atom(UNKNOWN);
+
+export const statusElement = atom<HTMLDivElement | null>(null);
+
+// READ-ONLY
+
+export const attributesIncreasable = atom((get) => {
+  const attackRateBonusValue = get(attackRateBonus);
+  const criticalChanceValue = get(criticalChance);
+  const criticalDamageValue = get(criticalDamage);
+  const damageValue = get(damage);
+  const dodgeChanceValue = get(dodgeChance);
+  const experienceAvailableValue = get(experienceAvailable);
+  const healthValue = get(health);
+  const healthRegenerationRateValue = get(healthRegenerationRate);
+  const lootBonusValue = get(lootBonus);
+  const recoveryRateValue = get(recoveryRate);
+  const staminaValue = get(stamina);
+  const staminaRegenerationRateValue = get(staminaRegenerationRate);
+  let increasableCount = 0;
+
+  const allAttributes = [
+    attackRateBonusValue,
+    criticalChanceValue,
+    criticalDamageValue,
+    damageValue,
+    dodgeChanceValue,
+    healthValue,
+    healthRegenerationRateValue,
+    lootBonusValue,
+    recoveryRateValue,
+    staminaValue,
+    staminaRegenerationRateValue,
+  ];
+
+  allAttributes.forEach(({ cost }) => {
+    if (cost <= experienceAvailableValue) {
+      increasableCount += 1;
+    }
+  });
+
+  return increasableCount;
 });
 
-export const experience = atom({
-  key: "experience",
-  default: 0,
-});
+export const experienceAvailable = atom((get) => {
+  const experienceValue = get(experience);
+  const experienceSpentValue = get(experienceSpent);
 
-export const experienceSpent = atom({
-  key: "experienceSpent",
-  default: 0,
-});
-
-export const isAttacking = atom({
-  key: "isAttacking",
-  default: false,
-});
-
-export const isLooting = atom({
-  key: "isLooting",
-  default: false,
-});
-
-export const isRecovering = atom({
-  key: "isRecovering",
-  default: false,
-});
-
-export const lootingRate = atom({
-  key: "lootingRate",
-  default: 2500,
-});
-
-export const name = atom({
-  key: "name",
-  default: UNKNOWN,
-});
-
-export const statusElement = atom<HTMLDivElement | null>({
-  key: "statusElement",
-  default: null,
-});
-
-// SELECTORS
-
-export const attributesIncreasable = selector({
-  key: "attributesIncreasable",
-  get: ({ get }) => {
-    const attackRateBonusValue = get(attackRateBonus);
-    const criticalChanceValue = get(criticalChance);
-    const criticalDamageValue = get(criticalDamage);
-    const damageValue = get(damage);
-    const dodgeChanceValue = get(dodgeChance);
-    const experienceAvailableValue = get(experienceAvailable);
-    const healthValue = get(health);
-    const healthRegenerationRateValue = get(healthRegenerationRate);
-    const lootBonusValue = get(lootBonus);
-    const recoveryRateValue = get(recoveryRate);
-    const staminaValue = get(stamina);
-    const staminaRegenerationRateValue = get(staminaRegenerationRate);
-    let increasableCount = 0;
-
-    const allAttributes = [
-      attackRateBonusValue,
-      criticalChanceValue,
-      criticalDamageValue,
-      damageValue,
-      dodgeChanceValue,
-      healthValue,
-      healthRegenerationRateValue,
-      lootBonusValue,
-      recoveryRateValue,
-      staminaValue,
-      staminaRegenerationRateValue,
-    ];
-
-    allAttributes.forEach(({ cost }) => {
-      if (cost <= experienceAvailableValue) {
-        increasableCount += 1;
-      }
-    });
-
-    return increasableCount;
-  },
-});
-
-export const experienceAvailable = selector({
-  key: "experienceAvailable",
-  get: ({ get }) => {
-    const experienceValue = get(experience);
-    const experienceSpentValue = get(experienceSpent);
-
-    return experienceValue - experienceSpentValue;
-  },
+  return experienceValue - experienceSpentValue;
 });

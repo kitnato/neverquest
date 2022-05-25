@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useAtomValue, useSetAtom } from "jotai";
 import { v4 as uuidv4 } from "uuid";
 
 import Caravan from "neverquest/components/Caravan";
@@ -13,10 +13,10 @@ import { generateArmor, generateShield, generateWeapon } from "neverquest/utilit
 import { AffixTag, ShieldType, WeaponType } from "locra/types";
 
 export default function Encounter() {
-  const isWildernessValue = useRecoilValue(isWilderness);
-  const levelValue = useRecoilValue(level);
-  const nsfwValue = useRecoilValue(nsfw);
-  const setMerchantInventory = useSetRecoilState(merchantInventory);
+  const isWildernessValue = useAtomValue(isWilderness);
+  const levelValue = useAtomValue(level);
+  const nsfwValue = useAtomValue(nsfw);
+  const setMerchantInventory = useSetAtom(merchantInventory);
 
   // TODO - move into hook or selector?
   useEffect(() => {
@@ -63,8 +63,8 @@ export default function Encounter() {
         case 4: // Accessory
       }
 
-      setMerchantInventory((currentMerchantInventory) => ({
-        ...currentMerchantInventory,
+      setMerchantInventory((current) => ({
+        ...current,
         ...newInventory,
       }));
     }

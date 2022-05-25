@@ -1,5 +1,5 @@
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import ShieldName from "neverquest/components/Inventory/Shield/ShieldName";
@@ -10,8 +10,8 @@ import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function ShieldEquipped() {
-  const shieldValue = useRecoilValue(shield);
-  const showShieldValue = useRecoilValue(showShield);
+  const shieldValue = useAtomValue(shield);
+  const showShieldValue = useAtomValue(showShield);
 
   if (!showShieldValue) {
     return null;

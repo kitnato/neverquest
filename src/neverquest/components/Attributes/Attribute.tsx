@@ -3,7 +3,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Stack from "react-bootstrap/Stack";
 import Tooltip from "react-bootstrap/Tooltip";
 import { Clock, Plus } from "react-bootstrap-icons";
-import { useSetRecoilState, useRecoilState, useRecoilValue, RecoilState } from "recoil";
+import { PrimitiveAtom, useSetAtom, useAtom, useAtomValue } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 // TODO - every attribute needs its own icon
@@ -15,14 +15,14 @@ import { showCharacterLevel } from "neverquest/state/show";
 import { FloatingTextType, UIVariant } from "neverquest/types/ui";
 import { getTriangularNumber } from "neverquest/utilities/helpers";
 
-export default function Attribute({ atom }: { atom: RecoilState<AttributeType> }) {
-  const setCharacterLevel = useSetRecoilState(characterLevel);
-  const setDeltaCharacterLevel = useSetRecoilState(deltaCharacterLevel);
-  const setExperienceSpent = useSetRecoilState(experienceSpent);
-  const setDeltaExperienceSpent = useSetRecoilState(deltaExperienceSpent);
-  const [attributeValue, setAttribute] = useRecoilState(atom);
-  const [showCharacterLevelValue, setShowCharacterLevel] = useRecoilState(showCharacterLevel);
-  const experienceAvailableValue = useRecoilValue(experienceAvailable);
+export default function Attribute({ atom }: { atom: PrimitiveAtom<AttributeType> }) {
+  const setCharacterLevel = useSetAtom(characterLevel);
+  const setDeltaCharacterLevel = useSetAtom(deltaCharacterLevel);
+  const setExperienceSpent = useSetAtom(experienceSpent);
+  const setDeltaExperienceSpent = useSetAtom(deltaExperienceSpent);
+  const [attributeValue, setAttribute] = useAtom(atom);
+  const [showCharacterLevelValue, setShowCharacterLevel] = useAtom(showCharacterLevel);
+  const experienceAvailableValue = useAtomValue(experienceAvailable);
 
   const { canAssign, cost, description, name, points } = attributeValue;
   const canIncrease = cost <= experienceAvailableValue;
@@ -33,18 +33,18 @@ export default function Attribute({ atom }: { atom: RecoilState<AttributeType> }
 
   // TODO - make into a hook?
   const onLevelUp = () => {
-    setAttribute((currentAttribute) => {
-      const newPoints = currentAttribute.points + 1;
+    setAttribute((current) => {
+      const newPoints = current.points + 1;
 
       return {
-        ...currentAttribute,
+        ...current,
         cost: getTriangularNumber(newPoints + 1),
         points: newPoints,
       };
     });
-    setCharacterLevel((currentCharacterLevel) => currentCharacterLevel + 1);
+    setCharacterLevel((current) => current + 1);
     setDeltaCharacterLevel({ color: FloatingTextType.Positive, value: "+1" });
-    setExperienceSpent((currentExperienceSpent) => currentExperienceSpent + cost);
+    setExperienceSpent((current) => current + cost);
     setDeltaExperienceSpent({ color: FloatingTextType.Positive, value: `+${cost}` });
 
     if (!showCharacterLevelValue) {

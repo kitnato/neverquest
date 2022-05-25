@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 
 import LOCRA from "locra";
 import { CreatureType } from "locra/types";
@@ -13,13 +13,13 @@ import {
 import { FloatingTextType } from "neverquest/types/ui";
 
 export default function useNewMonster() {
-  const [currentMonsterHeathValue, setCurrentMonsterHealth] = useRecoilState(currentHealthMonster);
-  const levelValue = useRecoilValue(level);
-  const maximumHealthMonsterValue = useRecoilValue(maximumHealthMonster);
-  const nsfwValue = useRecoilValue(nsfw);
-  const setMonsterEngaged = useSetRecoilState(isMonsterEngaged);
-  const setMonsterName = useSetRecoilState(monsterName);
-  const setDeltaHealthMonster = useSetRecoilState(deltaHealthMonster);
+  const [currentMonsterHeathValue, setCurrentMonsterHealth] = useAtom(currentHealthMonster);
+  const levelValue = useAtomValue(level);
+  const maximumHealthMonsterValue = useAtomValue(maximumHealthMonster);
+  const nsfwValue = useAtomValue(nsfw);
+  const setMonsterEngaged = useSetAtom(isMonsterEngaged);
+  const setMonsterName = useSetAtom(monsterName);
+  const setDeltaHealthMonster = useSetAtom(deltaHealthMonster);
 
   return (onlyRegenerate = false) => {
     setCurrentMonsterHealth(maximumHealthMonsterValue);

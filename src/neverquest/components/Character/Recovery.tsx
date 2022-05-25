@@ -1,5 +1,5 @@
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import FloatingText from "neverquest/components/FloatingText";
 import ImageIcon from "neverquest/components/ImageIcon";
@@ -13,7 +13,7 @@ import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function Recovery() {
-  const showRecoveryValue = useRecoilValue(showRecovery);
+  const showRecoveryValue = useAtomValue(showRecovery);
 
   useDeltaText({
     deltaAtom: deltaTotalRecoveryRate,

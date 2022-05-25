@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 
 import { isRecovering, statusElement } from "neverquest/state/character";
 import { gameOver } from "neverquest/state/global";
@@ -13,20 +13,20 @@ import { BLOCKED } from "neverquest/utilities/constants";
 import { animateElement } from "neverquest/utilities/helpers";
 
 export default function useDefend() {
-  const [currentHealthValue, setCurrentHealth] = useRecoilState(currentHealth);
-  const [showRecoveryValue, setShowRecovery] = useRecoilState(showRecovery);
-  const setCurrentStamina = useSetRecoilState(currentStamina);
-  const setDeltaHealth = useSetRecoilState(deltaHealth);
-  const setDeltaStamina = useSetRecoilState(deltaStamina);
-  const setGameOver = useSetRecoilState(gameOver);
-  const setRecovering = useSetRecoilState(isRecovering);
-  const setStaggered = useSetRecoilState(isMonsterStaggered);
-  const canBlockValue = useRecoilValue(canBlock);
-  const { staminaCost } = useRecoilValue(shield);
-  const statusElementValue = useRecoilValue(statusElement);
-  const totalBlockChanceValue = useRecoilValue(totalBlockChance);
-  const totalProtectionValue = useRecoilValue(totalProtection);
-  const totalDamageMonsterValue = useRecoilValue(totalDamageMonster);
+  const [currentHealthValue, setCurrentHealth] = useAtom(currentHealth);
+  const [showRecoveryValue, setShowRecovery] = useAtom(showRecovery);
+  const setCurrentStamina = useSetAtom(currentStamina);
+  const setDeltaHealth = useSetAtom(deltaHealth);
+  const setDeltaStamina = useSetAtom(deltaStamina);
+  const setGameOver = useSetAtom(gameOver);
+  const setRecovering = useSetAtom(isRecovering);
+  const setStaggered = useSetAtom(isMonsterStaggered);
+  const canBlockValue = useAtomValue(canBlock);
+  const { staminaCost } = useAtomValue(shield);
+  const statusElementValue = useAtomValue(statusElement);
+  const totalBlockChanceValue = useAtomValue(totalBlockChance);
+  const totalProtectionValue = useAtomValue(totalProtection);
+  const totalDamageMonsterValue = useAtomValue(totalDamageMonster);
 
   return () => {
     animateElement({
@@ -40,7 +40,7 @@ export default function useDefend() {
         color: FloatingTextType.Neutral,
         value: BLOCKED,
       });
-      setCurrentStamina((currentStamina) => currentStamina - staminaCost);
+      setCurrentStamina((current) => current - staminaCost);
       setDeltaStamina({
         color: FloatingTextType.Negative,
         value: `${-staminaCost}`,

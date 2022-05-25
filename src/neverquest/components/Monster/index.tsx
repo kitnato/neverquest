@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import MonsterStatus from "neverquest/components/Monster/MonsterStatus";
@@ -14,10 +14,10 @@ import { UNKNOWN } from "neverquest/utilities/constants";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function Monster() {
-  const setLooting = useSetRecoilState(isLooting);
-  const [isMonsterEngagedValue, setMonsterEngaged] = useRecoilState(isMonsterEngaged);
-  const isAttackingValue = useRecoilValue(isAttacking);
-  const isMonsterDeadValue = useRecoilValue(isMonsterDead);
+  const setLooting = useSetAtom(isLooting);
+  const [isMonsterEngagedValue, setMonsterEngaged] = useAtom(isMonsterEngaged);
+  const isAttackingValue = useAtomValue(isAttacking);
+  const isMonsterDeadValue = useAtomValue(isMonsterDead);
 
   const newMonster = useNewMonster();
 

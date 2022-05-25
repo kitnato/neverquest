@@ -1,5 +1,5 @@
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import FloatingText from "neverquest/components/FloatingText";
 import ImageIcon from "neverquest/components/ImageIcon";
@@ -12,8 +12,8 @@ import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function TotalProtection() {
-  const showTotalProtectionValue = useRecoilValue(showTotalProtection);
-  const totalProtectionValue = useRecoilValue(totalProtection);
+  const showTotalProtectionValue = useAtomValue(showTotalProtection);
+  const totalProtectionValue = useAtomValue(totalProtection);
 
   useDeltaText({
     deltaAtom: deltaTotalProtection,

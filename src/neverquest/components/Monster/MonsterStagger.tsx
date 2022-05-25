@@ -1,4 +1,4 @@
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import Stack from "react-bootstrap/Stack";
 
 import ImageIcon from "neverquest/components/ImageIcon";
@@ -7,7 +7,7 @@ import icon from "neverquest/icons/star-swirl.svg";
 import { totalStaggerRate } from "neverquest/state/statistics";
 
 export default function MonsterStagger() {
-  const totalStaggerRateValue = useRecoilValue(totalStaggerRate);
+  const totalStaggerRateValue = useAtomValue(totalStaggerRate);
 
   if (totalStaggerRateValue === 0) {
     return null;

@@ -1,21 +1,21 @@
+import { SetStateAction, useAtom } from "jotai";
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Stack from "react-bootstrap/Stack";
 import { Gear } from "react-bootstrap-icons";
-import { SetterOrUpdater, useRecoilState } from "recoil";
 
 import { autoEquip, nsfw } from "neverquest/state/global";
 import { showDamagePerSecond } from "neverquest/state/show";
 
 export default function Settings() {
-  const [autoEquipValue, setAutoEquip] = useRecoilState(autoEquip);
-  const [nsfwValue, setNSFW] = useRecoilState(nsfw);
-  const [showDPSValue, setShowDPS] = useRecoilState(showDamagePerSecond);
+  const [autoEquipValue, setAutoEquip] = useAtom(autoEquip);
+  const [nsfwValue, setNSFW] = useAtom(nsfw);
+  const [showDPSValue, setShowDPS] = useAtom(showDamagePerSecond);
   const [isShowing, setShowing] = useState(false);
 
   const changeSetting =
-    (setter: SetterOrUpdater<boolean>) =>
+    (setter: (update: SetStateAction<boolean>) => void) =>
     ({ target: { checked } }: { target: { checked: boolean } }) =>
       setter(checked);
 

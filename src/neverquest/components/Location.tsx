@@ -1,4 +1,4 @@
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import Stack from "react-bootstrap/Stack";
 
 import ImageIcon from "neverquest/components/ImageIcon";
@@ -7,7 +7,7 @@ import { location } from "neverquest/state/global";
 import { OverlayPlacement } from "neverquest/types/ui";
 
 export default function Location() {
-  const locationValue = useRecoilValue(location);
+  const locationValue = useAtomValue(location);
 
   return (
     <Stack direction="horizontal" gap={3}>

@@ -1,4 +1,4 @@
-import { useSetRecoilState, useRecoilState } from "recoil";
+import { useSetAtom, useAtom } from "jotai";
 
 import { aether, aetherLoot, coins, coinsLoot, scrap, scrapLoot } from "neverquest/state/loot";
 import { showAether, showCoins, showScrap } from "neverquest/state/show";
@@ -6,18 +6,18 @@ import { deltaAether, deltaCoins, deltaScrap } from "neverquest/state/deltas";
 import { FloatingTextType } from "neverquest/types/ui";
 
 export default function useReserve() {
-  const [aetherLootValue, setAetherLoot] = useRecoilState(aetherLoot);
-  const [coinsLootValue, setCoinsLoot] = useRecoilState(coinsLoot);
-  const [scrapLootValue, setScrapLoot] = useRecoilState(scrapLoot);
-  const [showAetherValue, setShowAether] = useRecoilState(showAether);
-  const [showCoinsValue, setShowCoins] = useRecoilState(showCoins);
-  const [showScrapValue, setShowScrap] = useRecoilState(showScrap);
-  const setAether = useSetRecoilState(aether);
-  const setDeltaAether = useSetRecoilState(deltaAether);
-  const setCoins = useSetRecoilState(coins);
-  const setDeltaCoins = useSetRecoilState(deltaCoins);
-  const setScrap = useSetRecoilState(scrap);
-  const setDeltaScrap = useSetRecoilState(deltaScrap);
+  const [aetherLootValue, setAetherLoot] = useAtom(aetherLoot);
+  const [coinsLootValue, setCoinsLoot] = useAtom(coinsLoot);
+  const [scrapLootValue, setScrapLoot] = useAtom(scrapLoot);
+  const [showAetherValue, setShowAether] = useAtom(showAether);
+  const [showCoinsValue, setShowCoins] = useAtom(showCoins);
+  const [showScrapValue, setShowScrap] = useAtom(showScrap);
+  const setAether = useSetAtom(aether);
+  const setDeltaAether = useSetAtom(deltaAether);
+  const setCoins = useSetAtom(coins);
+  const setDeltaCoins = useSetAtom(deltaCoins);
+  const setScrap = useSetAtom(scrap);
+  const setDeltaScrap = useSetAtom(deltaScrap);
 
   return ({
     aetherDifference,
@@ -35,7 +35,7 @@ export default function useReserve() {
     if (aetherValue !== 0) {
       const isPositive = aetherValue > 0;
 
-      setAether((currentAether) => currentAether + aetherValue);
+      setAether((current) => current + aetherValue);
       setDeltaAether({
         color: isPositive ? FloatingTextType.Positive : FloatingTextType.Negative,
         value: `${isPositive ? "+" : ""}${aetherValue}`,
@@ -53,7 +53,7 @@ export default function useReserve() {
     if (coinsValue !== 0) {
       const isPositive = coinsValue > 0;
 
-      setCoins((currentCoins) => currentCoins + coinsValue);
+      setCoins((current) => current + coinsValue);
       setDeltaCoins({
         color: isPositive ? FloatingTextType.Positive : FloatingTextType.Negative,
         value: `${isPositive ? "+" : ""}${coinsValue}`,
@@ -71,7 +71,7 @@ export default function useReserve() {
     if (scrapValue !== 0) {
       const isPositive = scrapValue > 0;
 
-      setScrap((currentScrap) => currentScrap + scrapValue);
+      setScrap((current) => current + scrapValue);
       setDeltaScrap({
         color: isPositive ? FloatingTextType.Positive : FloatingTextType.Negative,
         value: `${isPositive ? "+" : ""}${scrapValue}`,

@@ -1,5 +1,5 @@
 import Stack from "react-bootstrap/Stack";
-import { RecoilState, useRecoilValue } from "recoil";
+import { Atom, PrimitiveAtom, useAtomValue } from "jotai";
 
 import FloatingText from "neverquest/components/FloatingText";
 import { DeltaDisplay, AnimationType } from "neverquest/types/ui";
@@ -10,11 +10,11 @@ export default function Lootable({
   Component,
   deltaAtom,
 }: {
-  atom: RecoilState<number>;
+  atom: Atom<number>;
   Component: React.ElementType;
-  deltaAtom: RecoilState<DeltaDisplay>;
+  deltaAtom: PrimitiveAtom<DeltaDisplay>;
 }) {
-  const resourceValue = useRecoilValue(atom);
+  const resourceValue = useAtomValue(atom);
 
   if (resourceValue === 0) {
     return null;

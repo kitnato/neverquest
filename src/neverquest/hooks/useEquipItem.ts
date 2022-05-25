@@ -1,4 +1,4 @@
-import { useSetRecoilState, useRecoilState } from "recoil";
+import { useSetAtom, useAtom } from "jotai";
 
 import { stamina, staminaRegenerationRate } from "neverquest/state/attributes";
 import { accessory, armor, inventory, shield, weapon } from "neverquest/state/inventory";
@@ -17,26 +17,26 @@ import { InventoryContentProps } from "neverquest/types/props";
 import { isAccessory, isArmor, isShield, isWeapon } from "neverquest/utilities/type-guards";
 
 export default function useEquipItem() {
-  const [showAccessoryValue, setShowAccessory] = useRecoilState(showAccessory);
-  const [showArmorValue, setShowArmor] = useRecoilState(showArmor);
-  const [showBlockChanceValue, setShowBlockChance] = useRecoilState(showBlockChance);
-  const [showShieldValue, setShowShield] = useRecoilState(showShield);
-  const [showStaminaValue, setShowStamina] = useRecoilState(showStamina);
-  const [showTotalAttackRateBreakdownValue, setShowTotalAttackRateSummary] = useRecoilState(
+  const [showAccessoryValue, setShowAccessory] = useAtom(showAccessory);
+  const [showArmorValue, setShowArmor] = useAtom(showArmor);
+  const [showBlockChanceValue, setShowBlockChance] = useAtom(showBlockChance);
+  const [showShieldValue, setShowShield] = useAtom(showShield);
+  const [showStaminaValue, setShowStamina] = useAtom(showStamina);
+  const [showTotalAttackRateBreakdownValue, setShowTotalAttackRateSummary] = useAtom(
     showTotalAttackRateSummary
   );
   const [showTotalDamageBreakdownValue, setShowTotalDamageSummary] =
-    useRecoilState(showTotalDamageSummary);
-  const [showTotalProtectionValue, setShowTotalProtection] = useRecoilState(showTotalProtection);
-  const [showWeaponValue, setShowWeapon] = useRecoilState(showWeapon);
-  const [staminaValue, setStamina] = useRecoilState(stamina);
+    useAtom(showTotalDamageSummary);
+  const [showTotalProtectionValue, setShowTotalProtection] = useAtom(showTotalProtection);
+  const [showWeaponValue, setShowWeapon] = useAtom(showWeapon);
+  const [staminaValue, setStamina] = useAtom(stamina);
   const [staminaRegenerationRateValue, setStaminaRegenerationRate] =
-    useRecoilState(staminaRegenerationRate);
-  const setArmor = useSetRecoilState(armor);
-  const setAccessory = useSetRecoilState(accessory);
-  const setShield = useSetRecoilState(shield);
-  const setInventory = useSetRecoilState(inventory);
-  const setWeapon = useSetRecoilState(weapon);
+    useAtom(staminaRegenerationRate);
+  const setArmor = useSetAtom(armor);
+  const setAccessory = useSetAtom(accessory);
+  const setShield = useSetAtom(shield);
+  const setInventory = useSetAtom(inventory);
+  const setWeapon = useSetAtom(weapon);
 
   return ({ key, item }: InventoryContentProps) => {
     if (isAccessory(item)) {
@@ -78,12 +78,12 @@ export default function useEquipItem() {
         setShowStamina(true);
 
         if (!staminaValue.canAssign) {
-          setStamina((currentStamina) => ({ ...currentStamina, canAssign: true }));
+          setStamina((current) => ({ ...current, canAssign: true }));
         }
 
         if (!staminaRegenerationRateValue.canAssign) {
-          setStaminaRegenerationRate((currentStaminaRegenerationRate) => ({
-            ...currentStaminaRegenerationRate,
+          setStaminaRegenerationRate((current) => ({
+            ...current,
             canAssign: true,
           }));
         }
@@ -102,9 +102,9 @@ export default function useEquipItem() {
       }
     }
 
-    setInventory((currentInventory) => ({
-      ...currentInventory,
-      [key]: { ...currentInventory[key], isEquipped: true },
+    setInventory((current) => ({
+      ...current,
+      [key]: { ...current[key], isEquipped: true },
     }));
   };
 }

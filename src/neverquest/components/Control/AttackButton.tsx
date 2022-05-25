@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useAtomValue, useAtom } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import attackIcon from "neverquest/icons/tron-arrow.svg";
@@ -15,9 +15,9 @@ import { AnimationType, UIVariant } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function AttackButton() {
-  const [isAttackingValue, setAttacking] = useRecoilState(isAttacking);
-  const [showLevelProgressValue, setShowLevelProgressValue] = useRecoilState(showLevelProgress);
-  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
+  const [isAttackingValue, setAttacking] = useAtom(isAttacking);
+  const [showLevelProgressValue, setShowLevelProgressValue] = useAtom(showLevelProgress);
+  const isLevelCompletedValue = useAtomValue(isLevelCompleted);
 
   useEffect(() => {
     if (isAttackingValue && isLevelCompletedValue) {
@@ -42,7 +42,7 @@ export default function AttackButton() {
   })();
 
   const onEngage = () => {
-    setAttacking((currentAttack) => !currentAttack);
+    setAttacking((current) => !current);
 
     if (!showLevelProgressValue) {
       setShowLevelProgressValue(true);

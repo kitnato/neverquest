@@ -1,4 +1,4 @@
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -13,8 +13,8 @@ import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function CollectLootButton() {
   const loot = useReserve();
-  const hasLootedValue = useRecoilValue(hasLooted);
-  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
+  const hasLootedValue = useAtomValue(hasLooted);
+  const isLevelCompletedValue = useAtomValue(isLevelCompleted);
 
   if (hasLootedValue || !isLevelCompletedValue) {
     return null;

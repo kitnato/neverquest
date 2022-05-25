@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useAtomValue, useSetAtom } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/journey.svg";
@@ -12,10 +12,10 @@ import { UNKNOWN } from "neverquest/utilities/constants";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function TravelButton() {
-  const isWildernessValue = useRecoilValue(isWilderness);
-  const hasLootedValue = useRecoilValue(hasLooted);
-  const levelValue = useRecoilValue(level);
-  const switchLocation = useSetRecoilState(location);
+  const isWildernessValue = useAtomValue(isWilderness);
+  const hasLootedValue = useAtomValue(hasLooted);
+  const levelValue = useAtomValue(level);
+  const switchLocation = useSetAtom(location);
 
   const destination = (() => {
     if (levelValue === 1 && isWildernessValue) {

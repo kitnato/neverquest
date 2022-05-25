@@ -1,6 +1,6 @@
+import { Provider } from "jotai";
 import { useState } from "react";
 import Container from "react-bootstrap/Container";
-import { RecoilRoot } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 
 import Header from "neverquest/components/Header";
@@ -12,12 +12,12 @@ export default function App() {
   const resetSeed = () => setSeed(uuidv4());
 
   return (
-    <RecoilRoot key={seed}>
+    <Provider key={seed}>
       <Header resetSeed={resetSeed} />
 
       <Container>
         <Layout resetSeed={resetSeed} />
       </Container>
-    </RecoilRoot>
+    </Provider>
   );
 }

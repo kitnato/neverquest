@@ -1,7 +1,7 @@
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import ArmorEquipped from "neverquest/components/Inventory/Armor/ArmorEquipped";
 import ShieldEquipped from "neverquest/components/Inventory/Shield/ShieldEquipped";
@@ -11,9 +11,9 @@ import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function Equipment() {
-  const showArmorValue = useRecoilValue(showArmor);
-  const showShieldValue = useRecoilValue(showShield);
-  const showWeaponValue = useRecoilValue(showWeapon);
+  const showArmorValue = useAtomValue(showArmor);
+  const showShieldValue = useAtomValue(showShield);
+  const showWeaponValue = useAtomValue(showWeapon);
 
   if (!showArmorValue && !showShieldValue && !showWeaponValue) {
     return null;

@@ -1,5 +1,5 @@
 import Stack from "react-bootstrap/Stack";
-import { RecoilState, useRecoilValue } from "recoil";
+import { Atom, PrimitiveAtom, useAtomValue } from "jotai";
 
 import FloatingText from "neverquest/components/FloatingText";
 import { DeltaDisplay, AnimationType } from "neverquest/types/ui";
@@ -11,13 +11,13 @@ export default function Reserve({
   deltaAtom,
   showAtom,
 }: {
-  atom: RecoilState<number>;
+  atom: Atom<number>;
   Component: React.ElementType;
-  deltaAtom: RecoilState<DeltaDisplay>;
-  showAtom: RecoilState<boolean>;
+  deltaAtom: PrimitiveAtom<DeltaDisplay>;
+  showAtom: Atom<boolean>;
 }) {
-  const lootValue = useRecoilValue(atom);
-  const showValue = useRecoilValue(showAtom);
+  const lootValue = useAtomValue(atom);
+  const showValue = useAtomValue(showAtom);
 
   if (!showValue) {
     return null;

@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 
 import { experience } from "neverquest/state/character";
 import {
@@ -14,21 +14,21 @@ import { showAttributes } from "neverquest/state/show";
 import { FloatingTextType } from "neverquest/types/ui";
 
 export default function useRewardKill() {
-  const setAetherLoot = useSetRecoilState(aetherLoot);
-  const setCoinsLoot = useSetRecoilState(coinsLoot);
-  const setDeltaAetherLoot = useSetRecoilState(deltaAetherLoot);
-  const setDeltaCoinsLoot = useSetRecoilState(deltaCoinsLoot);
-  const setDeltaExperience = useSetRecoilState(deltaExperience);
-  const setDeltaScrapLoot = useSetRecoilState(deltaScrapLoot);
-  const setExperience = useSetRecoilState(experience);
-  const setProgress = useSetRecoilState(progress);
-  const setScrapLoot = useSetRecoilState(scrapLoot);
-  const [showAttributesValue, setShowAttributes] = useRecoilState(showAttributes);
-  const { aether, coins, experience: xp, scrap } = useRecoilValue(monsterLoot);
+  const setAetherLoot = useSetAtom(aetherLoot);
+  const setCoinsLoot = useSetAtom(coinsLoot);
+  const setDeltaAetherLoot = useSetAtom(deltaAetherLoot);
+  const setDeltaCoinsLoot = useSetAtom(deltaCoinsLoot);
+  const setDeltaExperience = useSetAtom(deltaExperience);
+  const setDeltaScrapLoot = useSetAtom(deltaScrapLoot);
+  const setExperience = useSetAtom(experience);
+  const setProgress = useSetAtom(progress);
+  const setScrapLoot = useSetAtom(scrapLoot);
+  const [showAttributesValue, setShowAttributes] = useAtom(showAttributes);
+  const { aether, coins, experience: xp, scrap } = useAtomValue(monsterLoot);
 
   return () => {
     if (aether > 0) {
-      setAetherLoot((currentAetherLoot) => currentAetherLoot + aether);
+      setAetherLoot((current) => current + aether);
       setDeltaAetherLoot({
         color: FloatingTextType.Positive,
         value: `+${aether}`,
@@ -36,7 +36,7 @@ export default function useRewardKill() {
     }
 
     if (coins > 0) {
-      setCoinsLoot((currentCoinsLoot) => currentCoinsLoot + coins);
+      setCoinsLoot((current) => current + coins);
       setDeltaCoinsLoot({
         color: FloatingTextType.Positive,
         value: `+${coins}`,
@@ -44,16 +44,16 @@ export default function useRewardKill() {
     }
 
     if (scrap > 0) {
-      setScrapLoot((currentScrapLoot) => currentScrapLoot + scrap);
+      setScrapLoot((current) => current + scrap);
       setDeltaScrapLoot({
         color: FloatingTextType.Positive,
         value: `+${scrap}`,
       });
     }
 
-    setExperience((currentExperience) => currentExperience + xp);
+    setExperience((currentHealthMonster) => currentHealthMonster + xp);
     setDeltaExperience({ color: FloatingTextType.Positive, value: `+${xp}` });
-    setProgress((currentProgress) => currentProgress + 1);
+    setProgress((current) => current + 1);
 
     if (xp > 0 && !showAttributesValue) {
       setShowAttributes(true);

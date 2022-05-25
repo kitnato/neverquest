@@ -1,5 +1,5 @@
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/shield-reflect.svg";
@@ -9,8 +9,8 @@ import { AnimationType } from "neverquest/types/ui";
 import { formatPercentage, getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function Block() {
-  const { block } = useRecoilValue(shield);
-  const showBlockChanceValue = useRecoilValue(showBlockChance);
+  const { block } = useAtomValue(shield);
+  const showBlockChanceValue = useAtomValue(showBlockChance);
 
   if (!showBlockChanceValue) {
     return null;

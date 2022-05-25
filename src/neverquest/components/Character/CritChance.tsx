@@ -1,5 +1,5 @@
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/spiky-eclipse.svg";
@@ -10,8 +10,8 @@ import { formatPercentage } from "neverquest/utilities/helpers";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function CritChance() {
-  const criticalChanceValue = useRecoilValue(totalCriticalChance);
-  const showCriticalValue = useRecoilValue(showCritical);
+  const criticalChanceValue = useAtomValue(totalCriticalChance);
+  const showCriticalValue = useAtomValue(showCritical);
 
   if (!showCriticalValue) {
     return null;

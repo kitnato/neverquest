@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 
 import { weapon } from "neverquest/state/inventory";
 import { deltaHealthMonster, deltaStamina } from "neverquest/state/deltas";
@@ -9,14 +9,14 @@ import { AnimationSpeed, AnimationType, FloatingTextType } from "neverquest/type
 import { animateElement } from "neverquest/utilities/helpers";
 
 export default function useAttack() {
-  const [currentHealthMonsterValue, setCurrentHealthMonster] = useRecoilState(currentHealthMonster);
-  const setCurrentStamina = useSetRecoilState(currentStamina);
-  const setDeltaHealthMonster = useSetRecoilState(deltaHealthMonster);
-  const setDeltaStamina = useSetRecoilState(deltaStamina);
-  const canAttackValue = useRecoilValue(canAttack);
-  const monsterStatusElementValue = useRecoilValue(monsterStatusElement);
-  const totalDamageValue = useRecoilValue(totalDamage);
-  const { staminaCost } = useRecoilValue(weapon);
+  const [currentHealthMonsterValue, setCurrentHealthMonster] = useAtom(currentHealthMonster);
+  const setCurrentStamina = useSetAtom(currentStamina);
+  const setDeltaHealthMonster = useSetAtom(deltaHealthMonster);
+  const setDeltaStamina = useSetAtom(deltaStamina);
+  const canAttackValue = useAtomValue(canAttack);
+  const monsterStatusElementValue = useAtomValue(monsterStatusElement);
+  const totalDamageValue = useAtomValue(totalDamage);
+  const { staminaCost } = useAtomValue(weapon);
 
   return () => {
     if (canAttackValue) {
@@ -26,7 +26,7 @@ export default function useAttack() {
         monsterHealth = 0;
       }
 
-      setCurrentStamina((currentStamina) => currentStamina - staminaCost);
+      setCurrentStamina((current) => current - staminaCost);
       setDeltaStamina({
         color: FloatingTextType.Negative,
         value: `${-staminaCost}`,

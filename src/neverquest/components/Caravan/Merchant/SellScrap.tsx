@@ -3,7 +3,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Stack from "react-bootstrap/Stack";
 import Tooltip from "react-bootstrap/Tooltip";
 import { ArrowRight } from "react-bootstrap-icons";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import Coins from "neverquest/components/Loot/Coins";
 import Scrap from "neverquest/components/Loot/Scrap";
@@ -14,9 +14,9 @@ import { UIVariant } from "neverquest/types/ui";
 
 export default function SellScrap() {
   const setReserve = useReserve();
-  const scrapValue = useRecoilValue(scrap);
-  const exchangeScrapValue = useRecoilValue(exchangeScrap);
-  const exchangeCoinValue = useRecoilValue(exchangeCoin);
+  const scrapValue = useAtomValue(scrap);
+  const exchangeScrapValue = useAtomValue(exchangeScrap);
+  const exchangeCoinValue = useAtomValue(exchangeCoin);
 
   const canSell = scrapValue >= exchangeScrapValue;
 

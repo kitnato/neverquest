@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef } from "react";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import { gameOver } from "neverquest/state/global";
 
 export default function useAnimation(callback: (time: number) => void, stop: boolean) {
-  const gameOverValue = useRecoilValue(gameOver);
+  const gameOverValue = useAtomValue(gameOver);
   const frameRef = useRef(-1);
   const previousTimeRef = useRef(0);
 

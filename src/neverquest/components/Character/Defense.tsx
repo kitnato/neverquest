@@ -1,6 +1,6 @@
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import Block from "neverquest/components/Character/Block";
 import Dodge from "neverquest/components/Character/Dodge";
@@ -10,9 +10,9 @@ import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function Defense() {
-  const showBlockChanceValue = useRecoilValue(showBlockChance);
-  const showDodgeChanceValue = useRecoilValue(showDodgeChance);
-  const showTotalProtectionValue = useRecoilValue(showTotalProtection);
+  const showBlockChanceValue = useAtomValue(showBlockChance);
+  const showDodgeChanceValue = useAtomValue(showDodgeChance);
+  const showTotalProtectionValue = useAtomValue(showTotalProtection);
 
   if (!showBlockChanceValue && !showDodgeChanceValue && !showTotalProtectionValue) {
     return null;

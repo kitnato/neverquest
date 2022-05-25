@@ -1,5 +1,5 @@
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import Regeneration from "neverquest/components/Character/Regeneration";
 import FloatingText from "neverquest/components/FloatingText";
@@ -14,7 +14,7 @@ import { AnimationType, UIAttachment } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function Stamina() {
-  const showStaminaValue = useRecoilValue(showStamina);
+  const showStaminaValue = useAtomValue(showStamina);
 
   if (!showStaminaValue) {
     return null;

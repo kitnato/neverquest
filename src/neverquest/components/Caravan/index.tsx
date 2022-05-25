@@ -1,15 +1,13 @@
+import { useAtomValue } from "jotai";
 import { useState } from "react";
-import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
-
 import Card from "react-bootstrap/Card";
+import Stack from "react-bootstrap/Stack";
 
 import DismissableScreen from "neverquest/components/DismissableScreen";
 import Member from "neverquest/components/Caravan/Member";
 import Mercenary from "neverquest/components/Caravan/Mercenary";
 import Merchant from "neverquest/components/Caravan/Merchant";
 import { crew, crewMonologues } from "neverquest/state/caravan";
-import { name } from "neverquest/state/character";
 import { CrewType } from "neverquest/types/core";
 import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
@@ -22,9 +20,8 @@ interface CrewMember {
 }
 
 export default function Caravan() {
-  const crewValue = useRecoilValue(crew);
-  const crewMonologueValue = useRecoilValue(crewMonologues);
-  const nameValue = useRecoilValue(name);
+  const crewValue = useAtomValue(crew);
+  const crewMonologueValue = useAtomValue(crewMonologues);
   const [currentMember, setCurrentMember] = useState<CrewMember>();
   const [isScreenShowing, setScreenShowing] = useState(false);
 
@@ -35,7 +32,7 @@ export default function Caravan() {
       key: CrewType.Merchant,
       label: "Trade",
       // TODO - change up monologue
-      monologue: crewMonologueValue[CrewType.Merchant][0](nameValue),
+      monologue: crewMonologueValue[CrewType.Merchant][0],
     },
     {
       name: "Mercenary",
@@ -43,7 +40,7 @@ export default function Caravan() {
       key: CrewType.Mercenary,
       label: "Train",
       // TODO - change up monologue
-      monologue: crewMonologueValue[CrewType.Mercenary][0](),
+      monologue: crewMonologueValue[CrewType.Mercenary][0],
     },
   ];
 

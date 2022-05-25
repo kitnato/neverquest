@@ -1,7 +1,7 @@
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import Table from "react-bootstrap/Table";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import { Weapon } from "neverquest/types/core";
 import { showDamagePerSecond } from "neverquest/state/show";
@@ -13,7 +13,7 @@ import {
 import { NO_WEAPON } from "neverquest/utilities/constants";
 
 export default function WeaponName({ weapon }: { weapon: Weapon }) {
-  const showDPSValue = useRecoilValue(showDamagePerSecond);
+  const showDPSValue = useAtomValue(showDamagePerSecond);
 
   const { damage, name, rate, staminaCost, type, weaponClass, weight } = weapon;
 

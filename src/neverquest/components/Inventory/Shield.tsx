@@ -1,5 +1,5 @@
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/round-shield.svg";
@@ -10,8 +10,8 @@ import { getAnimationClass } from "neverquest/utilities/helpers";
 
 // TODO
 export default function Shield() {
-  const shieldValue = useRecoilValue(shield);
-  const showShieldValue = useRecoilValue(showShield);
+  const shieldValue = useAtomValue(shield);
+  const showShieldValue = useAtomValue(showShield);
 
   if (!showShieldValue) {
     return null;

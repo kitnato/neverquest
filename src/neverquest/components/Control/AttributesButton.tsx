@@ -3,7 +3,7 @@ import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useAtom, useAtomValue } from "jotai";
 
 import Attributes from "neverquest/components/Attributes";
 import DismissableScreen from "neverquest/components/DismissableScreen";
@@ -17,11 +17,11 @@ import { AnimationType, UIVariant } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function AttributesButton() {
-  const attributesIncreasableValue = useRecoilValue(attributesIncreasable);
-  const isAttackingValue = useRecoilValue(isAttacking);
-  const isMonsterEngagedValue = useRecoilValue(isMonsterEngaged);
-  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
-  const [showAttributesButtonValue, setShowAttributesButton] = useRecoilState(showAttributesButton);
+  const attributesIncreasableValue = useAtomValue(attributesIncreasable);
+  const isAttackingValue = useAtomValue(isAttacking);
+  const isMonsterEngagedValue = useAtomValue(isMonsterEngaged);
+  const isLevelCompletedValue = useAtomValue(isLevelCompleted);
+  const [showAttributesButtonValue, setShowAttributesButton] = useAtom(showAttributesButton);
   const [isScreenShowing, setScreenShowing] = useState(false);
 
   useEffect(() => {

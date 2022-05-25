@@ -1,51 +1,30 @@
-import { atom, selector } from "recoil";
+import { atom } from "jotai";
 
 import { isLevelCompleted } from "neverquest/state/global";
 
-// ATOMS
+// PRIMITIVES
 
-export const aether = atom({
-  key: "aether",
-  default: 0,
-});
+export const aether = atom(0);
 
-export const aetherLoot = atom({
-  key: "aetherLoot",
-  default: 0,
-});
+export const aetherLoot = atom(0);
 
-export const coins = atom({
-  key: "coins",
-  default: 0,
-});
+export const coins = atom(0);
 
-export const coinsLoot = atom({
-  key: "coinsLoot",
-  default: 0,
-});
+export const coinsLoot = atom(0);
 
-export const scrap = atom({
-  key: "scrap",
-  default: 0,
-});
+export const scrap = atom(0);
 
-export const scrapLoot = atom({
-  key: "scrapLoot",
-  default: 0,
-});
+export const scrapLoot = atom(0);
 
-// SELECTORS
+// READERS
 
-export const hasLooted = selector({
-  key: "hasLooted",
-  get: ({ get }) => {
-    const aetherLootValue = get(aetherLoot);
-    const coinsLootValue = get(coinsLoot);
-    const isLevelCompletedValue = get(isLevelCompleted);
-    const scrapLootValue = get(scrapLoot);
+export const hasLooted = atom((get) => {
+  const aetherLootValue = get(aetherLoot);
+  const coinsLootValue = get(coinsLoot);
+  const isLevelCompletedValue = get(isLevelCompleted);
+  const scrapLootValue = get(scrapLoot);
 
-    return (
-      aetherLootValue === 0 && coinsLootValue === 0 && scrapLootValue === 0 && isLevelCompletedValue
-    );
-  },
+  return (
+    aetherLootValue === 0 && coinsLootValue === 0 && scrapLootValue === 0 && isLevelCompletedValue
+  );
 });

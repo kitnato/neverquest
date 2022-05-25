@@ -1,10 +1,10 @@
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import { encumbrance, inventorySize } from "neverquest/state/inventory";
 
 export default function useCheckEncumbrance() {
-  const encumbranceValue = useRecoilValue(encumbrance);
-  const inventorySizeValue = useRecoilValue(inventorySize);
+  const encumbranceValue = useAtomValue(encumbrance);
+  const inventorySizeValue = useAtomValue(inventorySize);
 
   return ({ weight }: { weight: number }) => {
     if (encumbranceValue + weight > inventorySizeValue) {

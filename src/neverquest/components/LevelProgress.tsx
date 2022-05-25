@@ -1,5 +1,5 @@
 import Stack from "react-bootstrap/Stack";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
@@ -11,11 +11,11 @@ import { AnimationType, OverlayPlacement, UIVariant } from "neverquest/types/ui"
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function LevelProgress() {
-  const isWildernessValue = useRecoilValue(isWilderness);
-  const levelValue = useRecoilValue(level);
-  const progressValue = useRecoilValue(progress);
-  const progressMaxValue = useRecoilValue(progressMax);
-  const showLevelProgressValue = useRecoilValue(showLevelProgress);
+  const isWildernessValue = useAtomValue(isWilderness);
+  const levelValue = useAtomValue(level);
+  const progressValue = useAtomValue(progress);
+  const progressMaxValue = useAtomValue(progressMax);
+  const showLevelProgressValue = useAtomValue(showLevelProgress);
 
   if (!showLevelProgressValue) {
     return null;

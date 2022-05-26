@@ -1,6 +1,6 @@
+import { useAtomValue } from "jotai";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { useAtomValue } from "jotai";
 
 import Block from "neverquest/components/Character/Block";
 import Dodge from "neverquest/components/Character/Dodge";

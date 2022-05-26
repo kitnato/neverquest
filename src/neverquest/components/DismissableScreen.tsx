@@ -1,13 +1,13 @@
 import Offcanvas, { OffcanvasPlacement } from "react-bootstrap/Offcanvas";
 
 export default function DismissableScreen({
-  content,
+  contents,
   isShowing,
   onClose,
   placement = "end",
   title,
 }: {
-  content: JSX.Element;
+  contents: JSX.Element;
   isShowing: boolean;
   onClose: () => void;
   placement?: OffcanvasPlacement;
@@ -24,7 +24,7 @@ export default function DismissableScreen({
         <Offcanvas.Title>{title}</Offcanvas.Title>
       </Offcanvas.Header>
 
-      <Offcanvas.Body>{content}</Offcanvas.Body>
+      <Offcanvas.Body>{contents}</Offcanvas.Body>
     </Offcanvas>
   );
 }

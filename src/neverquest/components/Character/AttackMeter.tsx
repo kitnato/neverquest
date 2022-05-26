@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { useAtomValue } from "jotai";
+import { useEffect, useState } from "react";
 
 import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 import useAnimation from "neverquest/hooks/useAnimation";

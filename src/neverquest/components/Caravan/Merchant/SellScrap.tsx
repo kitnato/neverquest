@@ -1,9 +1,9 @@
+import { useAtomValue } from "jotai";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Stack from "react-bootstrap/Stack";
 import Tooltip from "react-bootstrap/Tooltip";
 import { ArrowRight } from "react-bootstrap-icons";
-import { useAtomValue } from "jotai";
 
 import Coins from "neverquest/components/Loot/Coins";
 import Scrap from "neverquest/components/Loot/Scrap";

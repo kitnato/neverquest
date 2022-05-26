@@ -1,4 +1,3 @@
-import { useAtomValue } from "jotai";
 import { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
@@ -7,40 +6,33 @@ import DismissableScreen from "neverquest/components/DismissableScreen";
 import Member from "neverquest/components/Caravan/Member";
 import Mercenary from "neverquest/components/Caravan/Mercenary";
 import Merchant from "neverquest/components/Caravan/Merchant";
-import { crew, crewMonologues } from "neverquest/state/caravan";
 import { CrewType } from "neverquest/types/core";
 import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 interface CrewMember {
-  name: string;
-  content: JSX.Element;
+  Component: JSX.Element;
   label: string;
-  key: CrewType;
+  name: string;
+  type: CrewType;
 }
 
 export default function Caravan() {
-  const crewValue = useAtomValue(crew);
-  const crewMonologueValue = useAtomValue(crewMonologues);
   const [currentMember, setCurrentMember] = useState<CrewMember>();
   const [isScreenShowing, setScreenShowing] = useState(false);
 
   const memberOrder = [
     {
-      name: "Merchant",
-      content: <Merchant />,
-      key: CrewType.Merchant,
+      Component: <Merchant />,
       label: "Trade",
-      // TODO - change up monologue
-      monologue: crewMonologueValue[CrewType.Merchant],
+      name: "Merchant",
+      type: CrewType.Merchant,
     },
     {
-      name: "Mercenary",
-      content: <Mercenary />,
-      key: CrewType.Mercenary,
+      Component: <Mercenary />,
       label: "Train",
-      // TODO - change up monologue
-      monologue: crewMonologueValue[CrewType.Mercenary],
+      name: "Mercenary",
+      type: CrewType.Mercenary,
     },
   ];
 
@@ -57,23 +49,21 @@ export default function Caravan() {
       <Card className={getAnimationClass(AnimationType.FlipInX)}>
         <Card.Body>
           <Stack gap={3}>
-            {memberOrder.map(
-              ({ key, ...member }, index) =>
-                crewValue[key] && (
-                  <Member
-                    {...member}
-                    key={key}
-                    setActive={() => onActivate(true, memberOrder[index])}
-                  />
-                )
-            )}
+            {memberOrder.map(({ label, name, type }, index) => (
+              <Member
+                label={label}
+                name={name}
+                setActive={() => onActivate(true, memberOrder[index])}
+                type={type}
+              />
+            ))}
           </Stack>
         </Card.Body>
       </Card>
 
       {currentMember && (
         <DismissableScreen
-          content={currentMember.content}
+          contents={currentMember.Component}
           isShowing={isScreenShowing}
           onClose={() => onActivate(false)}
           title={currentMember.name}

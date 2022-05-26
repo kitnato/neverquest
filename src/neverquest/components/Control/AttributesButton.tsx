@@ -1,9 +1,9 @@
+import { useAtom, useAtomValue } from "jotai";
 import { MouseEvent, useEffect, useState } from "react";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { useAtom, useAtomValue } from "jotai";
 
 import Attributes from "neverquest/components/Attributes";
 import DismissableScreen from "neverquest/components/DismissableScreen";
@@ -59,7 +59,7 @@ export default function AttributesButton() {
       </OverlayTrigger>
 
       <DismissableScreen
-        content={<Attributes />}
+        contents={<Attributes />}
         isShowing={isScreenShowing}
         onClose={() => setScreenShowing(false)}
         title="Attributes"

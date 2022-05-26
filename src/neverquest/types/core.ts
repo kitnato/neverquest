@@ -36,7 +36,7 @@ export enum CrewType {
 }
 
 export interface Inventory {
-  [key: symbol]: InventoryContents;
+  [id: symbol]: InventoryContents;
 }
 
 export interface InventoryContents {

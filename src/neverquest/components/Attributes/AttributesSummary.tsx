@@ -1,6 +1,6 @@
+import { useAtomValue } from "jotai";
 import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
-import { useAtomValue } from "jotai";
 
 import CharacterLevel from "neverquest/components/Character/CharacterLevel";
 import Experience from "neverquest/components/Character/Experience";

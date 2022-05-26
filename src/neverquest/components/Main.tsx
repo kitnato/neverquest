@@ -1,8 +1,8 @@
+import { useAtomValue } from "jotai";
 import { useEffect, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
-import { useAtomValue } from "jotai";
 
 import Character from "neverquest/components/Character";
 import Control from "neverquest/components/Control";

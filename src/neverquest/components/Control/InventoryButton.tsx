@@ -1,8 +1,8 @@
+import { useAtomValue } from "jotai";
 import { MouseEvent, useState } from "react";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { useAtomValue } from "jotai";
 
 import DismissableScreen from "neverquest/components/DismissableScreen";
 import ImageIcon from "neverquest/components/ImageIcon";
@@ -25,7 +25,7 @@ export default function InventoryButton() {
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>Inventory</Tooltip>} placement="top">
-        <span className={`${getAnimationClass(AnimationType.FlipInX)} d-inline-block`}>
+        <span className={`d-inline-block ${getAnimationClass(AnimationType.FlipInX)}`}>
           <Button
             disabled={isAttackingValue}
             onClick={(event: MouseEvent<HTMLButtonElement>) => {
@@ -40,7 +40,7 @@ export default function InventoryButton() {
       </OverlayTrigger>
 
       <DismissableScreen
-        content={<Inventory />}
+        contents={<Inventory />}
         isShowing={isScreenShowing}
         onClose={() => setScreenShowing(false)}
         title="Inventory"

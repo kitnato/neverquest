@@ -1,7 +1,7 @@
+import { useAtomValue } from "jotai";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { useAtomValue } from "jotai";
 
 import ArmorEquipped from "neverquest/components/Inventory/Armor/ArmorEquipped";
 import ShieldEquipped from "neverquest/components/Inventory/Shield/ShieldEquipped";

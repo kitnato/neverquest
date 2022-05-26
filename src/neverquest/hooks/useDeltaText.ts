@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { Atom, useAtomValue, useSetAtom, WritableAtom } from "jotai";
+import { useEffect } from "react";
 
 import usePreviousValue from "neverquest/hooks/usePreviousValue";
 import { DeltaDisplay, FloatingTextType } from "neverquest/types/ui";

@@ -1,5 +1,5 @@
-import Stack from "react-bootstrap/Stack";
 import { Atom, PrimitiveAtom, useAtomValue } from "jotai";
+import Stack from "react-bootstrap/Stack";
 
 import FloatingText from "neverquest/components/FloatingText";
 import { DeltaDisplay, AnimationType } from "neverquest/types/ui";

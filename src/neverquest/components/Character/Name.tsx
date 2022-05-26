@@ -1,7 +1,7 @@
+import { useAtom } from "jotai";
 import { useState } from "react";
 import FormControl from "react-bootstrap/FormControl";
 import Stack from "react-bootstrap/Stack";
-import { useAtom } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/domino-mask.svg";

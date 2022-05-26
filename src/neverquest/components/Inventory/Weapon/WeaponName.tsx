@@ -1,7 +1,7 @@
+import { useAtomValue } from "jotai";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import Table from "react-bootstrap/Table";
-import { useAtomValue } from "jotai";
 
 import { Weapon } from "neverquest/types/core";
 import { showDamagePerSecond } from "neverquest/state/show";

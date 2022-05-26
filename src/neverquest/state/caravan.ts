@@ -17,12 +17,12 @@ export const crew = atomWithReset<Record<CrewType, boolean>>({
 });
 
 export const crewMonologues = atomWithReset<Record<CrewType, string>>({
-  // TODO - move to JSON with addressable objects based on states/events
+  // TODO - improve and diversify.
   [CrewType.Alchemist]: "",
-  [CrewType.Blacksmith]: "",
+  [CrewType.Blacksmith]: "Care for some new shiny gear?",
   [CrewType.Cook]: "",
   [CrewType.Medic]: "",
-  [CrewType.Mercenary]: "",
+  [CrewType.Mercenary]: "Perhaps I can teach you something.",
   [CrewType.Merchant]: "Greetings, stranger. I have what you're looking for.",
   [CrewType.Tailor]: "",
   [CrewType.Witch]: "",

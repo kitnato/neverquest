@@ -1,5 +1,5 @@
-import Stack from "react-bootstrap/Stack";
 import { useAtomValue } from "jotai";
+import Stack from "react-bootstrap/Stack";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/round-shield.svg";

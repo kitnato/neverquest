@@ -1,6 +1,6 @@
+import { useAtomValue } from "jotai";
 import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
-import { useAtomValue } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/crossed-bones.svg";

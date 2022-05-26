@@ -1,49 +1,49 @@
-import { atom } from "jotai";
+import { atomWithReset } from "jotai/utils";
 
 // TODO - refactor using atomFamily?
 
-export const showAether = atom(false);
+export const showAether = atomWithReset(false);
 
-export const showAccessory = atom(false);
+export const showAccessory = atomWithReset(false);
 
-export const showArmor = atom(false);
+export const showArmor = atomWithReset(false);
 
-export const showAttributes = atom(false);
+export const showAttributes = atomWithReset(false);
 
-export const showAttributesButton = atom(false);
+export const showAttributesButton = atomWithReset(false);
 
-export const showBlockChance = atom(false);
+export const showBlockChance = atomWithReset(false);
 
-export const showCharacterLevel = atom(false);
+export const showCharacterLevel = atomWithReset(false);
 
-export const showCoins = atom(false);
+export const showCoins = atomWithReset(false);
 
-export const showCritical = atom(false);
+export const showCritical = atomWithReset(false);
 
-export const showDamagePerSecond = atom(false);
+export const showDamagePerSecond = atomWithReset(false);
 
-export const showDefense = atom(false);
+export const showDefense = atomWithReset(false);
 
-export const showDodgeChance = atom(false);
+export const showDodgeChance = atomWithReset(false);
 
-export const showInventoryButton = atom(false);
+export const showInventoryButton = atomWithReset(false);
 
-export const showLevelProgress = atom(false);
+export const showLevelProgress = atomWithReset(false);
 
-export const showLoot = atom(false);
+export const showLoot = atomWithReset(false);
 
-export const showRecovery = atom(false);
+export const showRecovery = atomWithReset(false);
 
-export const showScrap = atom(false);
+export const showScrap = atomWithReset(false);
 
-export const showShield = atom(false);
+export const showShield = atomWithReset(false);
 
-export const showStamina = atom(false);
+export const showStamina = atomWithReset(false);
 
-export const showTotalAttackRateSummary = atom(false);
+export const showTotalAttackRateSummary = atomWithReset(false);
 
-export const showTotalDamageSummary = atom(false);
+export const showTotalDamageSummary = atomWithReset(false);
 
-export const showTotalProtection = atom(false);
+export const showTotalProtection = atomWithReset(false);
 
-export const showWeapon = atom(false);
+export const showWeapon = atomWithReset(false);

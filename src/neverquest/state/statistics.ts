@@ -13,6 +13,8 @@ import {
 import { armor, shield, weapon } from "neverquest/state/inventory";
 import { getComputedStat, getDamagePerSecond } from "neverquest/utilities/helpers";
 
+// READERS
+
 export const damagePerSecond = atom((get) => {
   const totalAttackRateValue = get(totalAttackRate);
   const totalDamageValue = get(totalDamage);

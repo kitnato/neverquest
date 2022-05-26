@@ -1,13 +1,14 @@
 import { atom } from "jotai";
+import { atomWithReset } from "jotai/utils";
 
 import { health, stamina } from "neverquest/state/attributes";
 import { shield, weapon } from "neverquest/state/inventory";
 
 // PRIMITIVES
 
-export const currentHealth = atom(-1);
+export const currentHealth = atomWithReset(0);
 
-export const currentStamina = atom(-1);
+export const currentStamina = atomWithReset(0);
 
 // READERS
 

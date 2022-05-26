@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
@@ -10,11 +10,17 @@ import Encounter from "neverquest/components/Encounter";
 import LevelProgress from "neverquest/components/LevelProgress";
 import Location from "neverquest/components/Location";
 import Reset from "neverquest/components/Reset";
+import useReset from "neverquest/hooks/useReset";
 import { gameOver } from "neverquest/state/global";
 
-export default function Layout({ resetSeed }: { resetSeed: () => void }) {
+export default function Main() {
   const gameOverValue = useAtomValue(gameOver);
   const [isGameOverShowing, setGameOverShowing] = useState(true);
+  const reset = useReset();
+
+  useEffect(() => {
+    reset();
+  }, []);
 
   return (
     <Stack gap={3}>
@@ -46,7 +52,6 @@ export default function Layout({ resetSeed }: { resetSeed: () => void }) {
 
       <Reset
         message="Try again?"
-        resetSeed={resetSeed}
         setHide={() => setGameOverShowing(false)}
         show={isGameOverShowing && gameOverValue}
         title="You are dead."

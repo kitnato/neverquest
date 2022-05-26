@@ -13,7 +13,7 @@ import {
   showTotalProtection,
   showWeapon,
 } from "neverquest/state/show";
-import { InventoryContentProps } from "neverquest/types/props";
+import { InventoryProps } from "neverquest/types/props";
 import { isAccessory, isArmor, isShield, isWeapon } from "neverquest/utilities/type-guards";
 
 export default function useEquipItem() {
@@ -38,7 +38,7 @@ export default function useEquipItem() {
   const setInventory = useSetAtom(inventory);
   const setWeapon = useSetAtom(weapon);
 
-  return ({ key, item }: InventoryContentProps) => {
+  return ({ id, item }: InventoryProps) => {
     if (isAccessory(item)) {
       setAccessory(item);
 
@@ -104,7 +104,7 @@ export default function useEquipItem() {
 
     setInventory((current) => ({
       ...current,
-      [key]: { ...current[key], isEquipped: true },
+      [id]: { ...current[id], isEquipped: true },
     }));
   };
 }

@@ -1,23 +1,24 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
+import useReset from "neverquest/hooks/useReset";
 import { UIVariant } from "neverquest/types/ui";
 
 export default function Reset({
   title,
   message,
-  resetSeed,
   show,
   setHide,
 }: {
   title: string;
   message: string;
-  resetSeed: () => void;
   show: boolean;
   setHide: () => void;
 }) {
+  const reset = useReset();
+
   return (
-    <Modal show={show} onHide={() => setHide()}>
+    <Modal show={show} onHide={setHide}>
       <Modal.Header closeButton>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
@@ -27,7 +28,7 @@ export default function Reset({
       <Modal.Footer>
         <Button
           onClick={() => {
-            resetSeed();
+            reset();
             setHide();
           }}
           variant={UIVariant.Outline}

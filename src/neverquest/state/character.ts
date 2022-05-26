@@ -1,4 +1,5 @@
 import { atom } from "jotai";
+import { atomWithReset } from "jotai/utils";
 
 import {
   attackRateBonus,
@@ -17,23 +18,23 @@ import { UNKNOWN } from "neverquest/utilities/constants";
 
 // PRIMITIVES
 
-export const characterLevel = atom(0);
+export const characterLevel = atomWithReset(0);
 
-export const experience = atom(0);
+export const experience = atomWithReset(0);
 
-export const experienceSpent = atom(0);
+export const experienceSpent = atomWithReset(0);
 
-export const isAttacking = atom(false);
+export const isAttacking = atomWithReset(false);
 
-export const isLooting = atom(false);
+export const isLooting = atomWithReset(false);
 
-export const isRecovering = atom(false);
+export const isRecovering = atomWithReset(false);
 
-export const lootingRate = atom(2500);
+export const lootingRate = atomWithReset(2500);
 
-export const name = atom(UNKNOWN);
+export const name = atomWithReset(UNKNOWN);
 
-export const statusElement = atom<HTMLDivElement | null>(null);
+export const statusElement = atomWithReset<HTMLDivElement | null>(null);
 
 // READ-ONLY
 

@@ -1,4 +1,5 @@
 import { atom } from "jotai";
+import { atomWithReset } from "jotai/utils";
 
 import LOCRA from "locra";
 import { LocationType } from "neverquest/types/core";
@@ -6,17 +7,17 @@ import { UNKNOWN } from "neverquest/utilities/constants";
 
 // PRIMITIVES
 
-export const autoEquip = atom(true);
+export const autoEquip = atomWithReset(true);
 
-export const gameOver = atom(false);
+export const gameOver = atomWithReset(false);
 
-export const level = atom(1);
+export const level = atomWithReset(1);
 
-export const mode = atom<LocationType>(LocationType.Wilderness);
+export const mode = atomWithReset<LocationType>(LocationType.Wilderness);
 
-export const nsfw = atom(true);
+export const nsfw = atomWithReset(true);
 
-export const progress = atom(0);
+export const progress = atomWithReset(0);
 
 // READERS
 

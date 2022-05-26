@@ -8,16 +8,13 @@ import { getDamagePerSecond } from "neverquest/utilities/helpers";
 
 export const currentHealthMonster = atomWithReset(-1);
 
-export const isMonsterEngaged = atom(false);
+export const isMonsterEngaged = atomWithReset(false);
 
-export const isMonsterStaggered = atom(false);
+export const isMonsterStaggered = atomWithReset(false);
 
-// TODO - determines whether Monster has Coins as loot
-export const hasTreasure = atom(false);
+export const monsterName = atomWithReset("");
 
-export const monsterName = atom("");
-
-export const monsterStatusElement = atom<HTMLDivElement | null>(null);
+export const monsterStatusElement = atomWithReset<HTMLDivElement | null>(null);
 
 // READERS
 
@@ -45,13 +42,11 @@ export const maximumHealthMonster = atom((get) => {
 });
 
 export const monsterLoot = atom((get) => {
-  const hasTreasureValue = get(hasTreasure);
   const levelValue = get(level);
   const progressValue = get(progress);
 
   return {
     aether: levelValue >= 10 ? Math.ceil(levelValue + progressValue / 3) : 0,
-    coins: hasTreasureValue ? progressValue + Math.ceil(levelValue * 1.5) : 0,
     experience: Math.floor(progressValue + levelValue * 1.5),
     scrap: Math.floor(progressValue + levelValue * 1.5),
   };

@@ -1,7 +1,8 @@
-import { InventoryContent } from "neverquest/types/core";
+import { Equipment } from "neverquest/types/core";
 
-export type InventoryContentProps = InventoryContent & {
-  key: string;
+export type InventoryProps = {
+  id: symbol;
+  item: Equipment;
 };
 
 export interface LootProps {

@@ -28,7 +28,7 @@ export default function Monster() {
       setMonsterEngaged(true);
     }
 
-    // If player stops attacking but the monster is still alive, regenerate it,
+    // If player stops attacking but the monster is still alive, regenerate it.
     if (!isAttackingValue && isMonsterEngagedValue && !isMonsterDeadValue) {
       newMonster(true);
     }
@@ -36,7 +36,7 @@ export default function Monster() {
     if (isMonsterDeadValue) {
       setLooting(true);
     }
-  }, [isAttackingValue, isMonsterEngagedValue, isMonsterDeadValue]);
+  }, [isAttackingValue, isMonsterDeadValue, isMonsterEngagedValue]);
 
   if (isMonsterEngagedValue) {
     return <MonsterStatus />;

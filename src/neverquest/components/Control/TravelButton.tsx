@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -36,7 +37,7 @@ export default function TravelButton() {
     >
       <Button
         className={isWildernessValue ? getAnimationClass(AnimationType.Pulse, true) : ""}
-        onClick={(event) => {
+        onClick={(event: MouseEvent<HTMLButtonElement>) => {
           switchLocation("");
           event.currentTarget.blur();
         }}

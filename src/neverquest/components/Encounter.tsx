@@ -1,7 +1,7 @@
+import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect } from "react";
 import Stack from "react-bootstrap/Stack";
-import { useAtomValue, useSetAtom } from "jotai";
-import { v4 as uuidv4 } from "uuid";
+import { nanoid } from "nanoid";
 
 import Caravan from "neverquest/components/Caravan";
 import Loot from "neverquest/components/Loot";
@@ -24,10 +24,12 @@ export default function Encounter() {
     // generate the merchant's inventory (once per level)
     if (!isWildernessValue) {
       const newInventory: Inventory = {};
+      const id = Symbol();
+      const key = nanoid();
 
       switch (levelValue) {
         case 1:
-          newInventory[uuidv4()] = {
+          newInventory[id] = {
             item: generateWeapon({
               hasPrefix: true,
               isNSFW: nsfwValue,
@@ -36,10 +38,11 @@ export default function Encounter() {
               type: WeaponType.Melee,
               weaponClass: WeaponClass.Light,
             }),
+            key,
           };
           break;
         case 2:
-          newInventory[uuidv4()] = {
+          newInventory[id] = {
             item: generateArmor({
               armorClass: ArmorClass.Light,
               hasPrefix: true,
@@ -47,10 +50,11 @@ export default function Encounter() {
               level: levelValue,
               tags: [AffixTag.LowQuality],
             }),
+            key,
           };
           break;
         case 3:
-          newInventory[uuidv4()] = {
+          newInventory[id] = {
             item: generateShield({
               hasPrefix: true,
               isNSFW: nsfwValue,
@@ -58,6 +62,7 @@ export default function Encounter() {
               tags: [AffixTag.LowQuality],
               type: ShieldType.Small,
             }),
+            key,
           };
           break;
         case 4: // Accessory

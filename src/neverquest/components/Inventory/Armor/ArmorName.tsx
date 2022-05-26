@@ -18,7 +18,7 @@ export default function ArmorName({ armor }: { armor: Armor }) {
             <Table borderless size="sm" style={{ margin: 0 }}>
               <tbody>
                 <tr>
-                  <td className="text-end">Protection:</td>
+                  <td className="fst-italic text-end">Protection:</td>
 
                   <td>{protection}</td>
                 </tr>
@@ -26,13 +26,13 @@ export default function ArmorName({ armor }: { armor: Armor }) {
                 {armor !== NO_ARMOR && (
                   <>
                     <tr>
-                      <td className="text-end">Class:</td>
+                      <td className="fst-italic text-end">Class:</td>
 
                       <td>{armorClass}</td>
                     </tr>
 
                     <tr>
-                      <td className="text-end">Weight:</td>
+                      <td className="fst-italic text-end">Weight:</td>
 
                       <td>{weight}</td>
                     </tr>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
@@ -41,7 +41,7 @@ export default function AttributesButton() {
           <Button
             disabled={isAttackingValue || isMonsterEngagedValue}
             className="position-relative"
-            onClick={(event) => {
+            onClick={(event: MouseEvent<HTMLButtonElement>) => {
               setScreenShowing(true);
               event.currentTarget.blur();
             }}

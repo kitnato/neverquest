@@ -1,20 +1,21 @@
 import { atom } from "jotai";
+import { atomWithReset } from "jotai/utils";
 
 import { isLevelCompleted } from "neverquest/state/global";
 
 // PRIMITIVES
 
-export const aether = atom(0);
+export const aether = atomWithReset(0);
 
-export const aetherLoot = atom(0);
+export const aetherLoot = atomWithReset(0);
 
-export const coins = atom(0);
+export const coins = atomWithReset(0);
 
-export const coinsLoot = atom(0);
+export const coinsLoot = atomWithReset(0);
 
-export const scrap = atom(0);
+export const scrap = atomWithReset(0);
 
-export const scrapLoot = atom(0);
+export const scrapLoot = atomWithReset(0);
 
 // READERS
 

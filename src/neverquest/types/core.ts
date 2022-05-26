@@ -35,15 +35,15 @@ export enum CrewType {
   Wizard,
 }
 
-export type Inventory =
-  | {
-      [key: string]: InventoryContent;
-    }
-  | Record<string, never>;
+export interface Inventory {
+  [key: symbol]: InventoryContents;
+}
 
-export interface InventoryContent {
+export interface InventoryContents {
+  // Optional, because while in Merchant's inventory, it can't be equipped.
   isEquipped?: boolean;
   item: Equipment;
+  key: string;
 }
 
 export interface EquipmentBase {

@@ -9,7 +9,7 @@ import Coins from "neverquest/components/Loot/Coins";
 import useReserve from "neverquest/hooks/useReserve";
 import useUnequipItem from "neverquest/hooks/useUnequipItem";
 import { inventory } from "neverquest/state/inventory";
-import { InventoryContentProps } from "neverquest/types/props";
+import { InventoryProps } from "neverquest/types/props";
 import { UIVariant } from "neverquest/types/ui";
 import { getSellPrice } from "neverquest/utilities/helpers";
 
@@ -18,19 +18,20 @@ export default function SellItems() {
   const unequipItem = useUnequipItem();
   const [inventoryValue, setInventory] = useAtom(inventory);
 
-  const inventoryContents = Object.entries(inventoryValue);
+  const inventoryIDs = Object.getOwnPropertySymbols(inventoryValue);
 
   const sellItem =
-    ({ isEquipped, item, key }: InventoryContentProps) =>
+    ({ id, isEquipped, item }: InventoryProps & { isEquipped: boolean | undefined }) =>
     () => {
+      // TODO - make equipment slots dependent on inventory, remove isEquipped requirement.
       if (isEquipped) {
-        unequipItem({ item, key });
+        unequipItem({ id, item });
       }
 
       setInventory((current) => {
         const newInventoryContents = { ...current };
 
-        delete newInventoryContents[key];
+        delete newInventoryContents[id];
 
         return newInventoryContents;
       });
@@ -42,31 +43,35 @@ export default function SellItems() {
     <Stack gap={3}>
       <h6>Sell items</h6>
 
-      {inventoryContents.length === 0 ? (
+      {inventoryIDs.length === 0 ? (
         <span className="fst-italic">Nothing to sell.</span>
       ) : (
         <Stack gap={3}>
-          {inventoryContents.map(([key, { isEquipped, item }]) => (
-            <Row key={key}>
-              <Col xs={8}>
-                <Stack direction="horizontal" gap={1}>
-                  <InventoryElement item={item} />
+          {inventoryIDs.map((id) => {
+            const { isEquipped, item, key } = inventoryValue[id];
 
-                  {isEquipped && <span className="fst-italic">(Equipped)</span>}
-                </Stack>
-              </Col>
+            return (
+              <Row key={key}>
+                <Col xs={8}>
+                  <Stack direction="horizontal" gap={1}>
+                    <InventoryElement item={item} />
 
-              <Col>
-                <Coins tooltip="Price (coins)" value={getSellPrice(item)} />
-              </Col>
+                    {isEquipped && <span className="fst-italic">(Equipped)</span>}
+                  </Stack>
+                </Col>
 
-              <Col>
-                <Button onClick={sellItem({ isEquipped, item, key })} variant={UIVariant.Outline}>
-                  Sell
-                </Button>
-              </Col>
-            </Row>
-          ))}
+                <Col>
+                  <Coins tooltip="Price (coins)" value={getSellPrice(item)} />
+                </Col>
+
+                <Col>
+                  <Button onClick={sellItem({ id, isEquipped, item })} variant={UIVariant.Outline}>
+                    Sell
+                  </Button>
+                </Col>
+              </Row>
+            );
+          })}
         </Stack>
       )}
     </Stack>

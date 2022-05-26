@@ -27,7 +27,7 @@ export default function WeaponName({ weapon }: { weapon: Weapon }) {
             <Table borderless size="sm" style={{ margin: 0 }}>
               <tbody>
                 <tr>
-                  <td className="text-end">Damage:</td>
+                  <td className="fst-italic text-end">Damage:</td>
 
                   <td>{`${damage}${
                     showDPSValue
@@ -40,13 +40,13 @@ export default function WeaponName({ weapon }: { weapon: Weapon }) {
                 </tr>
 
                 <tr>
-                  <td className="text-end">Attack rate:</td>
+                  <td className="fst-italic text-end">Attack rate:</td>
 
                   <td>{formatMilliseconds(rate)}</td>
                 </tr>
 
                 <tr>
-                  <td className="text-end">Type:</td>
+                  <td className="fst-italic text-end">Type:</td>
 
                   <td>{capitalizeAll(type)}</td>
                 </tr>
@@ -54,19 +54,19 @@ export default function WeaponName({ weapon }: { weapon: Weapon }) {
                 {weapon !== NO_WEAPON && (
                   <>
                     <tr>
-                      <td className="text-end">Stamina cost:</td>
+                      <td className="fst-italic text-end">Stamina cost:</td>
 
                       <td>{staminaCost}</td>
                     </tr>
 
                     <tr>
-                      <td className="text-end">Class:</td>
+                      <td className="fst-italic text-end">Class:</td>
 
                       <td>{weaponClass}</td>
                     </tr>
 
                     <tr>
-                      <td className="text-end">Weight:</td>
+                      <td className="fst-italic text-end">Weight:</td>
 
                       <td>{weight}</td>
                     </tr>

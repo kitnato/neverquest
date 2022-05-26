@@ -1,8 +1,10 @@
-import { atom } from "jotai";
+import { atomWithReset } from "jotai/utils";
 
 import { CrewType, Inventory } from "neverquest/types/core";
 
-export const crew = atom<Record<CrewType, boolean>>({
+// PRIMITIVES
+
+export const crew = atomWithReset<Record<CrewType, boolean>>({
   [CrewType.Alchemist]: false,
   [CrewType.Blacksmith]: false,
   [CrewType.Cook]: false,
@@ -14,7 +16,7 @@ export const crew = atom<Record<CrewType, boolean>>({
   [CrewType.Wizard]: false,
 });
 
-export const crewMonologues = atom<Record<CrewType, string>>({
+export const crewMonologues = atomWithReset<Record<CrewType, string>>({
   // TODO - move to JSON with addressable objects based on states/events
   [CrewType.Alchemist]: "",
   [CrewType.Blacksmith]: "",
@@ -27,8 +29,8 @@ export const crewMonologues = atom<Record<CrewType, string>>({
   [CrewType.Wizard]: "",
 });
 
-export const exchangeCoin = atom(1);
+export const exchangeCoin = atomWithReset(1);
 
-export const exchangeScrap = atom(3);
+export const exchangeScrap = atomWithReset(3);
 
-export const merchantInventory = atom<Inventory>({});
+export const merchantInventory = atomWithReset<Inventory>({});

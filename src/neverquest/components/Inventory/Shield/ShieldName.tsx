@@ -19,13 +19,13 @@ export default function ShieldName({ shield }: { shield: Shield }) {
             <Table borderless size="sm" style={{ margin: 0 }}>
               <tbody>
                 <tr>
-                  <td className="text-end">Block chance:</td>
+                  <td className="fst-italic text-end">Block chance:</td>
 
                   <td>{formatPercentage(block)}</td>
                 </tr>
 
                 <tr>
-                  <td className="text-end">Stagger duration:</td>
+                  <td className="fst-italic text-end">Stagger duration:</td>
 
                   <td>{formatMilliseconds(stagger)}</td>
                 </tr>
@@ -33,19 +33,19 @@ export default function ShieldName({ shield }: { shield: Shield }) {
                 {shield !== NO_SHIELD && (
                   <>
                     <tr>
-                      <td className="text-end">Stamina cost:</td>
+                      <td className="fst-italic text-end">Stamina cost:</td>
 
                       <td>{staminaCost}</td>
                     </tr>
 
                     <tr>
-                      <td className="text-end">Type:</td>
+                      <td className="fst-italic text-end">Type:</td>
 
                       <td>{capitalizeAll(type)}</td>
                     </tr>
 
                     <tr>
-                      <td className="text-end">Weight:</td>
+                      <td className="fst-italic text-end">Weight:</td>
 
                       <td>{weight}</td>
                     </tr>

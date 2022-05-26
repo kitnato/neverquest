@@ -9,7 +9,7 @@ import Encumbrance from "neverquest/components/Inventory/Encumbrance";
 import useEquipItem from "neverquest/hooks/useEquipItem";
 import useUnequipItem from "neverquest/hooks/useUnequipItem";
 import { inventory } from "neverquest/state/inventory";
-import { InventoryContentProps } from "neverquest/types/props";
+import { InventoryProps } from "neverquest/types/props";
 import { UIVariant } from "neverquest/types/ui";
 
 export default function Inventory() {
@@ -18,22 +18,22 @@ export default function Inventory() {
   const equipItem = useEquipItem();
   const unequipItem = useUnequipItem();
 
-  const equippedInventoryEntries = Object.entries(inventoryValue).filter(
-    ([, { isEquipped }]) => isEquipped
+  const equippedInventoryIDs = Object.getOwnPropertySymbols(inventoryValue).filter(
+    (id) => inventoryValue[id].isEquipped
   );
-  const storedInventoryValueEntries = Object.entries(inventoryValue).filter(
-    ([, { isEquipped }]) => !isEquipped
+  const storedInventoryValueIDs = Object.getOwnPropertySymbols(inventoryValue).filter(
+    (id) => !inventoryValue[id].isEquipped
   );
 
   const onEquipItem =
-    ({ item, key }: InventoryContentProps) =>
+    ({ id, item }: InventoryProps) =>
     () =>
-      equipItem({ item, key });
+      equipItem({ id, item });
 
   const onUnequipItem =
-    ({ item, key }: InventoryContentProps) =>
+    ({ id, item }: InventoryProps) =>
     () =>
-      unequipItem({ item, key });
+      unequipItem({ id, item });
 
   return (
     <Stack gap={5}>
@@ -44,35 +44,38 @@ export default function Inventory() {
       <Stack gap={3}>
         <h6>Equipped</h6>
 
-        {equippedInventoryEntries.length === 0 && (
-          <span className="fst-italic">Nothing equipped.</span>
-        )}
+        {equippedInventoryIDs.length === 0 && <span className="fst-italic">Nothing equipped.</span>}
 
-        {equippedInventoryEntries.map(([key, { item }]) => (
-          <Row key={key}>
-            <Col xs={8}>
-              <Stack direction="horizontal">
-                <InventoryElement item={item} />
-              </Stack>
-            </Col>
+        {equippedInventoryIDs.map((id) => {
+          const { item, key } = inventoryValue[id];
 
-            <Col>
-              <Button onClick={onUnequipItem({ item, key })} variant={UIVariant.Outline}>
-                Unequip
-              </Button>
-            </Col>
-          </Row>
-        ))}
+          return (
+            <Row key={key}>
+              <Col xs={8}>
+                <Stack direction="horizontal">
+                  <InventoryElement item={item} />
+                </Stack>
+              </Col>
+
+              <Col>
+                <Button onClick={onUnequipItem({ id, item })} variant={UIVariant.Outline}>
+                  Unequip
+                </Button>
+              </Col>
+            </Row>
+          );
+        })}
       </Stack>
 
       <Stack gap={3}>
         <h6>Stored</h6>
 
-        {storedInventoryValueEntries.length === 0 && (
+        {storedInventoryValueIDs.length === 0 && (
           <span className="fst-italic">Nothing stored.</span>
         )}
 
-        {storedInventoryValueEntries.map(([key, { item }]) => {
+        {storedInventoryValueIDs.map((id) => {
+          const { item, key } = inventoryValue[id];
           // TODO - check if isEquippable
           const isEquippable = true;
 
@@ -84,7 +87,7 @@ export default function Inventory() {
 
               {isEquippable && (
                 <Col>
-                  <Button onClick={onEquipItem({ item, key })} variant={UIVariant.Outline}>
+                  <Button onClick={onEquipItem({ id, item })} variant={UIVariant.Outline}>
                     Equip
                   </Button>
                 </Col>

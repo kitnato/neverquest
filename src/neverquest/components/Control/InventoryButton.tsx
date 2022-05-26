@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -28,7 +28,7 @@ export default function InventoryButton() {
         <span className={`${getAnimationClass(AnimationType.FlipInX)} d-inline-block`}>
           <Button
             disabled={isAttackingValue}
-            onClick={(event) => {
+            onClick={(event: MouseEvent<HTMLButtonElement>) => {
               setScreenShowing(true);
               event.currentTarget.blur();
             }}

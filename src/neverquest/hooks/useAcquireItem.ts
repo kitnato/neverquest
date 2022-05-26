@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { v4 as uuidv4 } from "uuid";
+import { nanoid } from "nanoid";
 
 import { Equipment } from "neverquest/types/core";
 import useCheckEncumbrance from "neverquest/hooks/useCheckEncumbrance";
@@ -26,11 +26,12 @@ export default function useAcquireItem() {
       return false;
     }
 
-    const key = uuidv4();
+    const id = Symbol();
+    const key = nanoid();
 
     setInventory((current) => ({
       ...current,
-      [key]: { item },
+      [id]: { item, key },
     }));
 
     if (
@@ -40,7 +41,7 @@ export default function useAcquireItem() {
         (shieldValue === NO_SHIELD && isShield(item)) ||
         (weaponValue === NO_WEAPON && isWeapon(item)))
     ) {
-      equipItem({ item, key });
+      equipItem({ id, item });
     }
 
     if (!showInventoryButtonValue) {

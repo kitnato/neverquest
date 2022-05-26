@@ -1,8 +1,10 @@
-import { atom } from "jotai";
+import { atomWithReset } from "jotai/utils";
 
 import { Attribute } from "neverquest/types/core";
 
-export const attackRateBonus = atom<Attribute>({
+// PRIMITIVES
+
+export const attackRateBonus = atomWithReset<Attribute>({
   base: 0,
   canAssign: true,
   cost: 1,
@@ -12,7 +14,7 @@ export const attackRateBonus = atom<Attribute>({
   points: 0,
 });
 
-export const criticalChance = atom<Attribute>({
+export const criticalChance = atomWithReset<Attribute>({
   base: 0,
   canAssign: false,
   cost: 1,
@@ -22,7 +24,7 @@ export const criticalChance = atom<Attribute>({
   points: 0,
 });
 
-export const criticalDamage = atom<Attribute>({
+export const criticalDamage = atomWithReset<Attribute>({
   base: 1.5,
   canAssign: false,
   cost: 1,
@@ -32,7 +34,7 @@ export const criticalDamage = atom<Attribute>({
   points: 0,
 });
 
-export const damage = atom<Attribute>({
+export const damage = atomWithReset<Attribute>({
   base: 0,
   canAssign: true,
   cost: 1,
@@ -42,7 +44,7 @@ export const damage = atom<Attribute>({
   points: 0,
 });
 
-export const dodgeChance = atom<Attribute>({
+export const dodgeChance = atomWithReset<Attribute>({
   base: 0,
   canAssign: false,
   cost: 1,
@@ -52,7 +54,7 @@ export const dodgeChance = atom<Attribute>({
   points: 0,
 });
 
-export const health = atom<Attribute>({
+export const health = atomWithReset<Attribute>({
   base: 8,
   canAssign: true,
   cost: 1,
@@ -62,7 +64,7 @@ export const health = atom<Attribute>({
   points: 0,
 });
 
-export const healthRegenerationRate = atom<Attribute>({
+export const healthRegenerationRate = atomWithReset<Attribute>({
   base: 9000,
   canAssign: true,
   cost: 1,
@@ -72,7 +74,7 @@ export const healthRegenerationRate = atom<Attribute>({
   points: 0,
 });
 
-export const lootBonus = atom<Attribute>({
+export const lootBonus = atomWithReset<Attribute>({
   base: 0,
   canAssign: false,
   cost: 1,
@@ -82,7 +84,7 @@ export const lootBonus = atom<Attribute>({
   points: 0,
 });
 
-export const recoveryRate = atom<Attribute>({
+export const recoveryRate = atomWithReset<Attribute>({
   base: 1500,
   canAssign: true,
   cost: 1,
@@ -92,7 +94,7 @@ export const recoveryRate = atom<Attribute>({
   points: 0,
 });
 
-export const stamina = atom<Attribute>({
+export const stamina = atomWithReset<Attribute>({
   base: 4,
   canAssign: false,
   cost: 1,
@@ -102,7 +104,7 @@ export const stamina = atom<Attribute>({
   points: 0,
 });
 
-export const staminaRegenerationRate = atom<Attribute>({
+export const staminaRegenerationRate = atomWithReset<Attribute>({
   base: 5000,
   canAssign: false,
   cost: 1,

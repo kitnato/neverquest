@@ -11,7 +11,7 @@ import About from "neverquest/components/About";
 import Reset from "neverquest/components/Reset";
 import Settings from "neverquest/components/Settings";
 
-export default function Header({ resetSeed }: { resetSeed: () => void }) {
+export default function Header() {
   const [isResetShowing, setResetShowing] = useState(false);
 
   return (
@@ -45,7 +45,6 @@ export default function Header({ resetSeed }: { resetSeed: () => void }) {
 
             <Reset
               message="This will wipe all data and restart from the beginning."
-              resetSeed={resetSeed}
               show={isResetShowing}
               setHide={() => setResetShowing(false)}
               title="Reset the game?"

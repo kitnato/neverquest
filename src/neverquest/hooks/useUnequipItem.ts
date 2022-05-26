@@ -2,7 +2,7 @@ import { useSetAtom } from "jotai";
 import { useResetAtom } from "jotai/utils";
 
 import { accessory, armor, inventory, shield, weapon } from "neverquest/state/inventory";
-import { InventoryContentProps } from "neverquest/types/props";
+import { InventoryProps } from "neverquest/types/props";
 import { isAccessory, isArmor, isShield, isWeapon } from "neverquest/utilities/type-guards";
 
 export default function useUnequipItem() {
@@ -12,7 +12,7 @@ export default function useUnequipItem() {
   const resetWeapon = useResetAtom(weapon);
   const setInventory = useSetAtom(inventory);
 
-  return ({ item, key }: InventoryContentProps) => {
+  return ({ id, item }: InventoryProps) => {
     if (isAccessory(item)) {
       resetAccessory();
     }
@@ -31,7 +31,7 @@ export default function useUnequipItem() {
 
     setInventory((current) => ({
       ...current,
-      [key]: { ...current[key], isEquipped: false },
+      [id]: { ...current[id], isEquipped: false },
     }));
   };
 }

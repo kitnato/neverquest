@@ -1,7 +1,7 @@
+import { PrimitiveAtom, useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { Stack } from "react-bootstrap";
-import { PrimitiveAtom, useAtom } from "jotai";
-import { v4 as uuidv4 } from "uuid";
+import { nanoid } from "nanoid";
 
 import useAnimation from "neverquest/hooks/useAnimation";
 import { DeltaDisplay } from "neverquest/types/ui";
@@ -11,7 +11,8 @@ type FloatingTextStyle = {
   bottom: number;
   contents: JSX.Element;
   hasGrown: boolean;
-  id: string;
+  id: symbol;
+  key: string;
   opacity: number;
   right: number;
   scale: number;
@@ -57,7 +58,8 @@ export default function FloatingText({
           bottom: -8,
           contents,
           hasGrown: false,
-          id: uuidv4(),
+          id: Symbol(),
+          key: nanoid(),
           opacity: 1,
           right: -6,
           scale: 1,
@@ -126,12 +128,12 @@ export default function FloatingText({
           return;
         }
 
-        const { bottom, contents, id, opacity, right, transform } = delta;
+        const { bottom, contents, key, opacity, right, transform } = delta;
 
         return (
           <small
             className="position-absolute"
-            key={id}
+            key={key}
             style={{ bottom, opacity, right, transform }}
           >
             <strong>{contents}</strong>

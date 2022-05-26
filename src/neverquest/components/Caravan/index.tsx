@@ -32,7 +32,7 @@ export default function Caravan() {
       key: CrewType.Merchant,
       label: "Trade",
       // TODO - change up monologue
-      monologue: crewMonologueValue[CrewType.Merchant][0],
+      monologue: crewMonologueValue[CrewType.Merchant],
     },
     {
       name: "Mercenary",
@@ -40,7 +40,7 @@ export default function Caravan() {
       key: CrewType.Mercenary,
       label: "Train",
       // TODO - change up monologue
-      monologue: crewMonologueValue[CrewType.Mercenary][0],
+      monologue: crewMonologueValue[CrewType.Mercenary],
     },
   ];
 

@@ -10,9 +10,9 @@ export const accessory = atomWithReset<Accessory>(NO_ACCESSORY);
 
 export const armor = atomWithReset<Armor>(NO_ARMOR);
 
-export const inventory = atom<Inventory>({});
+export const inventory = atomWithReset<Inventory>({});
 
-export const inventorySize = atom(3);
+export const inventorySize = atomWithReset(3);
 
 export const shield = atomWithReset<Shield>(NO_SHIELD);
 

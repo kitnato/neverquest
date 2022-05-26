@@ -16,32 +16,32 @@ import { formatMilliseconds } from "neverquest/utilities/helpers";
 
 export default function RegenerationMeter({
   regenerationRate,
-  atomResource,
-  atomResourceDelta,
-  isResourceMaxedOut,
+  atomReserve,
+  atomReserveDelta,
+  isReserveMaxedOut,
 }: {
   regenerationRate: Atom<number>;
-  atomResource: PrimitiveAtom<number>;
-  atomResourceDelta: WritableAtom<DeltaDisplay, DeltaDisplay>;
-  isResourceMaxedOut: Atom<boolean>;
+  atomReserve: PrimitiveAtom<number>;
+  atomReserveDelta: WritableAtom<DeltaDisplay, DeltaDisplay>;
+  isReserveMaxedOut: Atom<boolean>;
 }) {
   const isRecoveringValue = useAtomValue(isRecovering);
   const regenerationRateValue = useAtomValue(regenerationRate);
-  const isResourceMaxedOutValue = useAtomValue(isResourceMaxedOut);
-  const setCurrentResource = useSetAtom(atomResource);
-  const setDeltaResource = useSetAtom(atomResourceDelta);
+  const isReserveMaxedOutValue = useAtomValue(isReserveMaxedOut);
+  const setCurrentReserve = useSetAtom(atomReserve);
+  const setDeltaReserve = useSetAtom(atomReserveDelta);
   const [deltaRegeneration, setDeltaRegeneration] = useState(0);
 
   useAnimation((delta) => {
     setDeltaRegeneration((current) => current + delta);
-  }, isResourceMaxedOutValue || isRecoveringValue);
+  }, isReserveMaxedOutValue || isRecoveringValue);
 
   useEffect(() => {
     if (deltaRegeneration >= regenerationRateValue) {
       setDeltaRegeneration(0);
       // TODO - make health regeneration amount either a constant or an atom if it could be variable
-      setCurrentResource((current) => current + 1);
-      setDeltaResource({
+      setCurrentReserve((current) => current + 1);
+      setDeltaReserve({
         color: FloatingTextType.Positive,
         value: "+1",
       });
@@ -50,10 +50,10 @@ export default function RegenerationMeter({
 
   // Catches any leftover increments after regeneration is complete.
   useEffect(() => {
-    if (deltaRegeneration > 0 && isResourceMaxedOutValue) {
+    if (deltaRegeneration > 0 && isReserveMaxedOutValue) {
       setDeltaRegeneration(0);
     }
-  }, [deltaRegeneration, isResourceMaxedOutValue]);
+  }, [deltaRegeneration, isReserveMaxedOutValue]);
 
   const label = (() => {
     if (isRecoveringValue) {

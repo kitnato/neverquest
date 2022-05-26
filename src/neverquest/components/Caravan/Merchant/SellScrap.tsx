@@ -5,15 +5,15 @@ import Stack from "react-bootstrap/Stack";
 import Tooltip from "react-bootstrap/Tooltip";
 import { ArrowRight } from "react-bootstrap-icons";
 
-import Coins from "neverquest/components/Loot/Coins";
-import Scrap from "neverquest/components/Loot/Scrap";
-import useReserve from "neverquest/hooks/useReserve";
+import Coins from "neverquest/components/Resource/Coins";
+import Scrap from "neverquest/components/Resource/Scrap";
+import useResource from "neverquest/hooks/useResource";
 import { exchangeCoin, exchangeScrap } from "neverquest/state/caravan";
-import { scrap } from "neverquest/state/loot";
+import { scrap } from "neverquest/state/resources";
 import { UIVariant } from "neverquest/types/ui";
 
 export default function SellScrap() {
-  const setReserve = useReserve();
+  const setResource = useResource();
   const scrapValue = useAtomValue(scrap);
   const exchangeScrapValue = useAtomValue(exchangeScrap);
   const exchangeCoinValue = useAtomValue(exchangeCoin);
@@ -21,7 +21,7 @@ export default function SellScrap() {
   const canSell = scrapValue >= exchangeScrapValue;
 
   const sellScrap = () => {
-    setReserve({ coinsDifference: exchangeCoinValue, scrapDifference: -exchangeScrapValue });
+    setResource({ coinsDifference: exchangeCoinValue, scrapDifference: -exchangeScrapValue });
   };
 
   return (

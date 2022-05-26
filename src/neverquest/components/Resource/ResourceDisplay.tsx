@@ -1,11 +1,11 @@
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-import Aether from "neverquest/components/Loot/Aether";
-import Coins from "neverquest/components/Loot/Coins";
-import Reserve from "neverquest/components/Loot/Reserve";
-import Lootable from "neverquest/components/Loot/Lootable";
-import Scrap from "neverquest/components/Loot/Scrap";
+import Aether from "neverquest/components/Resource/Aether";
+import Coins from "neverquest/components/Resource/Coins";
+import Resource from "neverquest/components/Resource";
+import Lootable from "neverquest/components/Resource/Lootable";
+import Scrap from "neverquest/components/Resource/Scrap";
 import {
   deltaAether,
   deltaAetherLoot,
@@ -14,10 +14,10 @@ import {
   deltaScrap,
   deltaScrapLoot,
 } from "neverquest/state/deltas";
-import { aether, aetherLoot, coins, coinsLoot, scrap, scrapLoot } from "neverquest/state/loot";
+import { aether, aetherLoot, coins, coinsLoot, scrap, scrapLoot } from "neverquest/state/resources";
 import { showAether, showCoins, showScrap } from "neverquest/state/show";
 
-export default function LootDisplay({ isLoot }: { isLoot?: boolean }) {
+export default function ResourceDisplay({ isLoot }: { isLoot?: boolean }) {
   return (
     <Row>
       {isLoot ? (
@@ -37,15 +37,15 @@ export default function LootDisplay({ isLoot }: { isLoot?: boolean }) {
       ) : (
         <>
           <Col>
-            <Reserve atom={scrap} Component={Scrap} deltaAtom={deltaScrap} showAtom={showScrap} />
+            <Resource atom={scrap} Component={Scrap} deltaAtom={deltaScrap} showAtom={showScrap} />
           </Col>
 
           <Col>
-            <Reserve atom={coins} Component={Coins} deltaAtom={deltaCoins} showAtom={showCoins} />
+            <Resource atom={coins} Component={Coins} deltaAtom={deltaCoins} showAtom={showCoins} />
           </Col>
 
           <Col>
-            <Reserve
+            <Resource
               atom={aether}
               Component={Aether}
               deltaAtom={deltaAether}

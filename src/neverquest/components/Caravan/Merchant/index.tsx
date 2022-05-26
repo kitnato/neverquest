@@ -8,7 +8,7 @@ export default function Merchant() {
   return (
     <Stack gap={5}>
       <Stack gap={3}>
-        <h6>Sell resources</h6>
+        <h6>Sell reserves</h6>
 
         <SellScrap />
       </Stack>

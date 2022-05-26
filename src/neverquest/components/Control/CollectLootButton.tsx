@@ -4,15 +4,15 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import useReserve from "neverquest/hooks/useReserve";
+import useResource from "neverquest/hooks/useResource";
 import icon from "neverquest/icons/open-treasure-chest.svg";
 import { isLevelCompleted } from "neverquest/state/global";
-import { hasLooted } from "neverquest/state/loot";
+import { hasLooted } from "neverquest/state/resources";
 import { AnimationType, UIVariant } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function CollectLootButton() {
-  const loot = useReserve();
+  const loot = useResource();
   const hasLootedValue = useAtomValue(hasLooted);
   const isLevelCompletedValue = useAtomValue(isLevelCompleted);
 

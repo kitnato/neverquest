@@ -3,7 +3,7 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { weapon } from "neverquest/state/inventory";
 import { deltaHealthMonster, deltaStamina } from "neverquest/state/deltas";
 import { currentHealthMonster, monsterStatusElement } from "neverquest/state/monster";
-import { canAttack, currentStamina } from "neverquest/state/resources";
+import { canAttack, currentStamina } from "neverquest/state/reserves";
 import { totalDamage } from "neverquest/state/statistics";
 import { AnimationSpeed, AnimationType, FloatingTextType } from "neverquest/types/ui";
 import { animateElement } from "neverquest/utilities/helpers";

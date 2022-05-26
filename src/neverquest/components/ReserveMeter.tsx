@@ -3,7 +3,7 @@ import { Atom, useAtomValue } from "jotai";
 import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 import { UIAttachment, UIVariant } from "neverquest/types/ui";
 
-export default function ResourceMeter({
+export default function ReserveMeter({
   attached,
   atom,
   atomMaximum,

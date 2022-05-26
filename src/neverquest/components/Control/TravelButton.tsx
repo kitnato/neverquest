@@ -7,7 +7,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/journey.svg";
 import { isWilderness, level, location } from "neverquest/state/global";
-import { hasLooted } from "neverquest/state/loot";
+import { hasLooted } from "neverquest/state/resources";
 import { AnimationType, UIVariant } from "neverquest/types/ui";
 import { UNKNOWN } from "neverquest/utilities/constants";
 import { getAnimationClass } from "neverquest/utilities/helpers";

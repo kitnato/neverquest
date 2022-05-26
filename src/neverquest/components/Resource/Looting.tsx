@@ -2,7 +2,7 @@ import { useAtomValue } from "jotai";
 import Stack from "react-bootstrap/Stack";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import LootingMeter from "neverquest/components/Loot/LootingMeter";
+import LootingMeter from "neverquest/components/Resource/LootingMeter";
 import icon from "neverquest/icons/vulture.svg";
 import { isLooting } from "neverquest/state/character";
 import { progress } from "neverquest/state/global";

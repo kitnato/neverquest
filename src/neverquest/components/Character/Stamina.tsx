@@ -4,10 +4,10 @@ import { useAtomValue } from "jotai";
 import Regeneration from "neverquest/components/Character/Regeneration";
 import FloatingText from "neverquest/components/FloatingText";
 import ImageIcon from "neverquest/components/ImageIcon";
-import ResourceMeter from "neverquest/components/ResourceMeter";
+import ReserveMeter from "neverquest/components/ReserveMeter";
 import icon from "neverquest/icons/lungs.svg";
 import { deltaStamina, deltaTotalStaminaRegenerationRate } from "neverquest/state/deltas";
-import { currentStamina, isStaminaMaxedOut, maximumStamina } from "neverquest/state/resources";
+import { currentStamina, isStaminaMaxedOut, maximumStamina } from "neverquest/state/reserves";
 import { showStamina } from "neverquest/state/show";
 import { totalStaminaRegenerationRate } from "neverquest/state/statistics";
 import { AnimationType, UIAttachment } from "neverquest/types/ui";
@@ -26,7 +26,7 @@ export default function Stamina() {
 
       <Stack>
         <Stack className="w-100" direction="horizontal">
-          <ResourceMeter
+          <ReserveMeter
             attached={UIAttachment.Below}
             atom={currentStamina}
             atomMaximum={maximumStamina}
@@ -36,10 +36,10 @@ export default function Stamina() {
         </Stack>
 
         <Regeneration
-          atomResource={currentStamina}
-          atomResourceDelta={deltaStamina}
+          atomReserve={currentStamina}
+          atomReserveDelta={deltaStamina}
           atomDeltaRegenerationRate={deltaTotalStaminaRegenerationRate}
-          isResourceMaxedOut={isStaminaMaxedOut}
+          isReserveMaxedOut={isStaminaMaxedOut}
           regenerationRate={totalStaminaRegenerationRate}
         />
       </Stack>

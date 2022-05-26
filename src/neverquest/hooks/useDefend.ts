@@ -5,7 +5,7 @@ import { gameOver } from "neverquest/state/global";
 import { deltaHealth, deltaStamina } from "neverquest/state/deltas";
 import { shield } from "neverquest/state/inventory";
 import { isMonsterStaggered, totalDamageMonster } from "neverquest/state/monster";
-import { canBlock, currentHealth, currentStamina } from "neverquest/state/resources";
+import { canBlock, currentHealth, currentStamina } from "neverquest/state/reserves";
 import { showRecovery } from "neverquest/state/show";
 import { totalBlockChance, totalProtection } from "neverquest/state/statistics";
 import { DeltaDisplay, AnimationSpeed, AnimationType, FloatingTextType } from "neverquest/types/ui";

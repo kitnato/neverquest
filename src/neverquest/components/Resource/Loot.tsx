@@ -3,12 +3,12 @@ import Stack from "react-bootstrap/Stack";
 import { useAtomValue } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import LootDisplay from "neverquest/components/Loot/LootDisplay";
-import Looting from "neverquest/components/Loot/Looting";
+import ResourceDisplay from "neverquest/components/Resource/ResourceDisplay";
+import Looting from "neverquest/components/Resource/Looting";
 import lootIcon from "neverquest/icons/locked-chest.svg";
 import lootedIcon from "neverquest/icons/open-chest.svg";
 import { progress } from "neverquest/state/global";
-import { hasLooted } from "neverquest/state/loot";
+import { hasLooted } from "neverquest/state/resources";
 import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
@@ -29,7 +29,7 @@ export default function Loot() {
               {hasLootedValue ? (
                 <span className="fst-italic">Nothing remains.</span>
               ) : (
-                <LootDisplay isLoot />
+                <ResourceDisplay isLoot />
               )}
             </Stack>
           </Card.Body>

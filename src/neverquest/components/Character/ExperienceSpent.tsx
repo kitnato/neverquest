@@ -2,7 +2,7 @@ import Stack from "react-bootstrap/Stack";
 
 import FloatingText from "neverquest/components/FloatingText";
 import ImageIcon from "neverquest/components/ImageIcon";
-import ResourceMeter from "neverquest/components/ResourceMeter";
+import ReserveMeter from "neverquest/components/ReserveMeter";
 import icon from "neverquest/icons/abstract-013.svg";
 import { experience, experienceSpent } from "neverquest/state/character";
 import { deltaExperienceSpent } from "neverquest/state/deltas";
@@ -13,7 +13,7 @@ export default function ExperienceStatus() {
       <ImageIcon icon={icon} tooltip="Spent XP" />
 
       <Stack className="w-100" direction="horizontal">
-        <ResourceMeter atom={experienceSpent} atomMaximum={experience} />
+        <ReserveMeter atom={experienceSpent} atomMaximum={experience} />
 
         <FloatingText atom={deltaExperienceSpent} exitToLeft />
       </Stack>

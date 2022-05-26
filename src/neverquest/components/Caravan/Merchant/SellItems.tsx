@@ -5,8 +5,8 @@ import Stack from "react-bootstrap/Stack";
 import { useAtom } from "jotai";
 
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";
-import Coins from "neverquest/components/Loot/Coins";
-import useReserve from "neverquest/hooks/useReserve";
+import Coins from "neverquest/components/Resource/Coins";
+import useResource from "neverquest/hooks/useResource";
 import useUnequipItem from "neverquest/hooks/useUnequipItem";
 import { inventory } from "neverquest/state/inventory";
 import { InventoryProps } from "neverquest/types/props";
@@ -14,7 +14,7 @@ import { UIVariant } from "neverquest/types/ui";
 import { getSellPrice } from "neverquest/utilities/helpers";
 
 export default function SellItems() {
-  const setReserve = useReserve();
+  const setResource = useResource();
   const unequipItem = useUnequipItem();
   const [inventoryValue, setInventory] = useAtom(inventory);
 
@@ -36,7 +36,7 @@ export default function SellItems() {
         return newInventoryContents;
       });
 
-      setReserve({ coinsDifference: getSellPrice(item) });
+      setResource({ coinsDifference: getSellPrice(item) });
     };
 
   return (

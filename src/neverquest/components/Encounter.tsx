@@ -4,7 +4,7 @@ import Stack from "react-bootstrap/Stack";
 import { nanoid } from "nanoid";
 
 import Caravan from "neverquest/components/Caravan";
-import Loot from "neverquest/components/Loot";
+import Loot from "neverquest/components/Resource/Loot";
 import Wilderness from "neverquest/components/Wilderness";
 import { ArmorClass, Inventory, WeaponClass } from "neverquest/types/core";
 import { merchantInventory } from "neverquest/state/caravan";

@@ -1,7 +1,7 @@
 import Stack from "react-bootstrap/Stack";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import ResourceMeter from "neverquest/components/ResourceMeter";
+import ReserveMeter from "neverquest/components/ReserveMeter";
 import icon from "neverquest/icons/weight-crush.svg";
 import { encumbrance, inventorySize } from "neverquest/state/inventory";
 
@@ -10,7 +10,7 @@ export default function Encumbrance() {
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Encumbrance" />
 
-      <ResourceMeter atom={encumbrance} atomMaximum={inventorySize} />
+      <ReserveMeter atom={encumbrance} atomMaximum={inventorySize} />
     </Stack>
   );
 }

@@ -62,7 +62,7 @@ import {
   shield,
   weapon,
 } from "neverquest/state/inventory";
-import { aether, aetherLoot, coins, coinsLoot, scrap, scrapLoot } from "neverquest/state/loot";
+import { aether, aetherLoot, coins, coinsLoot, scrap, scrapLoot } from "neverquest/state/resources";
 import {
   currentHealthMonster,
   isMonsterEngaged,
@@ -70,7 +70,7 @@ import {
   monsterName,
   monsterStatusElement,
 } from "neverquest/state/monster";
-import { currentHealth, currentStamina, initializeReserves } from "neverquest/state/resources";
+import { currentHealth, currentStamina, initializeReserves } from "neverquest/state/reserves";
 import {
   showAether,
   showAccessory,

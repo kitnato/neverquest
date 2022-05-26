@@ -3,7 +3,7 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { experience } from "neverquest/state/character";
 import { deltaAetherLoot, deltaExperience, deltaScrapLoot } from "neverquest/state/deltas";
 import { progress } from "neverquest/state/global";
-import { aetherLoot, scrapLoot } from "neverquest/state/loot";
+import { aetherLoot, scrapLoot } from "neverquest/state/resources";
 import { monsterLoot } from "neverquest/state/monster";
 import { showAttributes } from "neverquest/state/show";
 import { FloatingTextType } from "neverquest/types/ui";

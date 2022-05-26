@@ -1,11 +1,11 @@
 import { useSetAtom, useAtom } from "jotai";
 
-import { aether, aetherLoot, coins, coinsLoot, scrap, scrapLoot } from "neverquest/state/loot";
+import { aether, aetherLoot, coins, coinsLoot, scrap, scrapLoot } from "neverquest/state/resources";
 import { showAether, showCoins, showScrap } from "neverquest/state/show";
 import { deltaAether, deltaCoins, deltaScrap } from "neverquest/state/deltas";
 import { FloatingTextType } from "neverquest/types/ui";
 
-export default function useReserve() {
+export default function useResource() {
   const [aetherLootValue, setAetherLoot] = useAtom(aetherLoot);
   const [coinsLootValue, setCoinsLoot] = useAtom(coinsLoot);
   const [scrapLootValue, setScrapLoot] = useAtom(scrapLoot);

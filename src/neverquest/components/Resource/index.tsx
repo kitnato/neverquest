@@ -5,7 +5,7 @@ import FloatingText from "neverquest/components/FloatingText";
 import { DeltaDisplay, AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
-export default function Reserve({
+export default function Resource({
   atom,
   Component,
   deltaAtom,

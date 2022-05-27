@@ -4,8 +4,6 @@ import { atomWithReset } from "jotai/utils";
 
 export const showAether = atomWithReset(false);
 
-export const showAccessory = atomWithReset(false);
-
 export const showArmor = atomWithReset(false);
 
 export const showAttributes = atomWithReset(false);
@@ -45,5 +43,7 @@ export const showTotalAttackRateSummary = atomWithReset(false);
 export const showTotalDamageSummary = atomWithReset(false);
 
 export const showTotalProtection = atomWithReset(false);
+
+export const showTrinket = atomWithReset(false);
 
 export const showWeapon = atomWithReset(false);

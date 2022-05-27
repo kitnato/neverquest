@@ -1,12 +1,10 @@
 import { atom } from "jotai";
 import { atomWithReset } from "jotai/utils";
 
-import { Armor, Inventory, Accessory, Shield, Weapon } from "neverquest/types/core";
-import { NO_ARMOR, NO_ACCESSORY, NO_SHIELD, NO_WEAPON } from "neverquest/utilities/constants";
+import { Armor, Inventory, Shield, Trinket, Weapon } from "neverquest/types/core";
+import { NO_ARMOR, NO_TRINKET, NO_SHIELD, NO_WEAPON } from "neverquest/utilities/constants";
 
 // PRIMITIVES
-
-export const accessory = atomWithReset<Accessory>(NO_ACCESSORY);
 
 export const armor = atomWithReset<Armor>(NO_ARMOR);
 
@@ -15,6 +13,8 @@ export const inventory = atomWithReset<Inventory>({});
 export const inventorySize = atomWithReset(3);
 
 export const shield = atomWithReset<Shield>(NO_SHIELD);
+
+export const trinket = atomWithReset<Trinket>(NO_TRINKET);
 
 export const weapon = atomWithReset<Weapon>(NO_WEAPON);
 

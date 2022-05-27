@@ -156,7 +156,7 @@ Restores all [health](#-health), [stamina](#-stamina) and [energy](#-energy). Gr
 
 #### Tailor
 
-Increase maximum [encumbrance](#-inventory) and add [potion](#-potion) slots [TODO].
+Increase maximum [encumbrance](#-inventory), add extra trinkets slots and add extra [potion](#-potion) slots [TODO].
 
 #### Blacksmith
 
@@ -188,29 +188,19 @@ Enchant and disenchant [equipment](#-equipment), requiring essence. Acquire cert
 
 ## Inventory
 
-The inventory is accessible as soon as the character acquires their first item. An item can either be;
+The inventory is accessible as soon as the character acquires the [knapsack](#-knapsack) from the merchant. An item can either be;
 
 a) a piece of [equipment](#-equipment) that can be worn, or
 b) a consumable like an [elixir](#-elixir), or
-c) a [trinket](#-trinket) that grants specific effects when held in the inventory.
+c) a [trinket](#-trinket) that grants specific effects when equipped.
+
+### Knapsack
+
+Allows for the storing of items. Allows equipping and un-equipping [equipment](#-equipment).
 
 ### Encumbrance
 
 The inventory size is constrained by encumbrance, to which each item adds a certain amount. No further items can be acquired until the remaining encumbrance allows for it.
-
-### Trinket
-
-Remains in the inventory and grant certain bonus(es). A trinket typically adds encumbrance.
-
-There are more to find than the ones listed here ...
-
-#### Compass
-
-Allows the character to re-start the current wilderness level upon completion rather than only being able to go to the caravan.
-
-#### Hearthstone
-
-Allows the character to go to the caravan regardless of if the current wilderness level's wave is cleared or not. Cannot be engaged in combat while using it.
 
 ## Equipment
 
@@ -308,11 +298,19 @@ This slot allows the wielding of shields, [two-handed weapons](##-two-handed) or
 
 Grants block chance, providing a percentage [chance to block](#-block-chance) all incoming damage. Also grants a stagger rate, determining the length of time the monster would be incapacitated upon the character successfully blocking.
 
-### Accessory
+### Trinket
 
-[TODO]
+Can grant various buffs and effects while equipped. Initially, only one trinket can be equipped at a time, but more slots can be acquired via the [tailor](#-tailor).
 
-Can grant various buffs and other bonuses.
+Here are some of the early items available from the merchant.
+
+#### Compass
+
+Allows the character to re-start the current wilderness level upon completion rather than only being able to go to the caravan.
+
+#### Hearthstone
+
+Allows the character to go to the caravan regardless of if the current wilderness level's wave is cleared or not. Cannot be engaged in combat while using it.
 
 ## Potion
 

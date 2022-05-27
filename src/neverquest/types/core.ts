@@ -1,7 +1,5 @@
 import { ShieldType, WeaponType } from "locra/types";
 
-export type Accessory = EquipmentBase;
-
 export type Armor = EquipmentBase & {
   armorClass?: ArmorClass;
   protection: number;
@@ -52,7 +50,7 @@ export interface EquipmentBase {
   weight: number;
 }
 
-export type Equipment = Armor | Accessory | Shield | Weapon;
+export type Equipment = Armor | Shield | Trinket | Weapon;
 
 export enum LocationType {
   Caravan,
@@ -71,6 +69,8 @@ export type Shield = EquipmentBase & {
   staminaCost: number;
   type?: ShieldType;
 };
+
+export type Trinket = EquipmentBase;
 
 export type Weapon = EquipmentBase & {
   damage: number;

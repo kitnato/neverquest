@@ -65,7 +65,7 @@ export default function Encounter() {
             key,
           };
           break;
-        case 4: // Accessory
+        case 4: // Trinket & Knapsack
       }
 
       setMerchantInventory((current) => ({

@@ -1,5 +1,5 @@
 import { ShieldType, WeaponType } from "locra/types";
-import { Armor, ArmorClass, Accessory, Shield, Weapon, WeaponClass } from "neverquest/types/core";
+import { Armor, ArmorClass, Shield, Trinket, Weapon, WeaponClass } from "neverquest/types/core";
 import { RangeProps } from "neverquest/types/props";
 
 export const ANIMATE_PREFIX = "animate__";
@@ -23,17 +23,9 @@ export const ARMOR_SPECIFICATIONS: Record<
   },
 };
 
-export const BLOCKED = "BLOCKED";
-
 export const DELTA_DEFAULT = {
   color: null,
   value: "",
-};
-
-export const NO_ACCESSORY: Accessory = {
-  name: "None",
-  price: 0,
-  weight: 0,
 };
 
 export const NO_ARMOR: Armor = {
@@ -49,6 +41,12 @@ export const NO_SHIELD: Shield = {
   price: 0,
   stagger: 0,
   staminaCost: 0,
+  weight: 0,
+};
+
+export const NO_TRINKET: Trinket = {
+  name: "None",
+  price: 0,
   weight: 0,
 };
 

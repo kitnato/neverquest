@@ -55,11 +55,11 @@ import {
 } from "neverquest/state/deltas";
 import { gameOver, level, mode, progress } from "neverquest/state/global";
 import {
-  accessory,
   armor,
   inventory,
   inventorySize,
   shield,
+  trinket,
   weapon,
 } from "neverquest/state/inventory";
 import { aether, aetherLoot, coins, coinsLoot, scrap, scrapLoot } from "neverquest/state/resources";
@@ -73,7 +73,6 @@ import {
 import { currentHealth, currentStamina, initializeReserves } from "neverquest/state/reserves";
 import {
   showAether,
-  showAccessory,
   showArmor,
   showAttributes,
   showAttributesButton,
@@ -94,12 +93,12 @@ import {
   showTotalAttackRateSummary,
   showTotalDamageSummary,
   showTotalProtection,
+  showTrinket,
   showWeapon,
 } from "neverquest/state/show";
 
 // (ﾉ☉ヮ⚆)ﾉ ⌒*:･ﾟ✧
 export default function useReset() {
-  const resetAccessory = useResetAtom(accessory);
   const resetAether = useResetAtom(aether);
   const resetAetherLoot = useResetAtom(aetherLoot);
   const resetArmor = useResetAtom(armor);
@@ -162,7 +161,7 @@ export default function useReset() {
   const resetScrap = useResetAtom(scrap);
   const resetScrapLoot = useResetAtom(scrapLoot);
   const resetShield = useResetAtom(shield);
-  const resetShowAccessory = useResetAtom(showAccessory);
+  const resetShowTrinket = useResetAtom(showTrinket);
   const resetShowAether = useResetAtom(showAether);
   const resetShowArmor = useResetAtom(showArmor);
   const resetShowAttributes = useResetAtom(showAttributes);
@@ -188,11 +187,11 @@ export default function useReset() {
   const resetStamina = useResetAtom(stamina);
   const resetStaminaRegenerationRate = useResetAtom(staminaRegenerationRate);
   const resetStatusElement = useResetAtom(statusElement);
+  const resetTrinket = useResetAtom(trinket);
   const resetWeapon = useResetAtom(weapon);
   const setInitialReserves = useSetAtom(initializeReserves);
 
   return () => {
-    resetAccessory();
     resetAether();
     resetAetherLoot();
     resetArmor();
@@ -255,7 +254,6 @@ export default function useReset() {
     resetScrap();
     resetScrapLoot();
     resetShield();
-    resetShowAccessory();
     resetShowAether();
     resetShowArmor();
     resetShowAttributes();
@@ -277,10 +275,12 @@ export default function useReset() {
     resetShowTotalAttackRateSummary();
     resetShowTotalDamageSummary();
     resetShowTotalProtection();
+    resetShowTrinket();
     resetShowWeapon();
     resetStamina();
     resetStaminaRegenerationRate();
     resetStatusElement();
+    resetTrinket();
     resetWeapon();
     setInitialReserves();
   };

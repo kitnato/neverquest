@@ -21,10 +21,6 @@ export enum AffixTag {
 
 export type ArtifactQuery =
   | {
-      subtype: undefined;
-      type: ArtifactType.Accessory;
-    }
-  | {
       subtype?: ArmorType;
       type: ArtifactType.Armor;
     }
@@ -33,14 +29,18 @@ export type ArtifactQuery =
       type: ArtifactType.Shield;
     }
   | {
+      subtype: undefined;
+      type: ArtifactType.Trinket;
+    }
+  | {
       subtype?: WeaponType;
       type: ArtifactType.Weapon;
     };
 
 export enum ArtifactType {
-  Accessory = "accessory",
   Armor = "armor",
   Shield = "shield",
+  Trinket = "trinket",
   Weapon = "weapon",
 }
 

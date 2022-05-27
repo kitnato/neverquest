@@ -1,9 +1,8 @@
 import { useSetAtom, useAtom } from "jotai";
 
 import { stamina, staminaRegenerationRate } from "neverquest/state/attributes";
-import { accessory, armor, inventory, shield, weapon } from "neverquest/state/inventory";
+import { armor, inventory, shield, trinket, weapon } from "neverquest/state/inventory";
 import {
-  showAccessory,
   showArmor,
   showBlockChance,
   showShield,
@@ -11,17 +10,18 @@ import {
   showTotalAttackRateSummary,
   showTotalDamageSummary,
   showTotalProtection,
+  showTrinket,
   showWeapon,
 } from "neverquest/state/show";
 import { InventoryProps } from "neverquest/types/props";
-import { isAccessory, isArmor, isShield, isWeapon } from "neverquest/utilities/type-guards";
+import { isArmor, isShield, isTrinket, isWeapon } from "neverquest/utilities/type-guards";
 
 export default function useEquipItem() {
-  const [showAccessoryValue, setShowAccessory] = useAtom(showAccessory);
   const [showArmorValue, setShowArmor] = useAtom(showArmor);
   const [showBlockChanceValue, setShowBlockChance] = useAtom(showBlockChance);
   const [showShieldValue, setShowShield] = useAtom(showShield);
   const [showStaminaValue, setShowStamina] = useAtom(showStamina);
+  const [showTrinketValue, setShowTrinket] = useAtom(showTrinket);
   const [showTotalAttackRateBreakdownValue, setShowTotalAttackRateSummary] = useAtom(
     showTotalAttackRateSummary
   );
@@ -33,20 +33,12 @@ export default function useEquipItem() {
   const [staminaRegenerationRateValue, setStaminaRegenerationRate] =
     useAtom(staminaRegenerationRate);
   const setArmor = useSetAtom(armor);
-  const setAccessory = useSetAtom(accessory);
-  const setShield = useSetAtom(shield);
   const setInventory = useSetAtom(inventory);
+  const setShield = useSetAtom(shield);
+  const setTrinket = useSetAtom(trinket);
   const setWeapon = useSetAtom(weapon);
 
   return ({ id, item }: InventoryProps) => {
-    if (isAccessory(item)) {
-      setAccessory(item);
-
-      if (!showAccessoryValue) {
-        setShowAccessory(true);
-      }
-    }
-
     if (isArmor(item)) {
       setArmor(item);
 
@@ -68,6 +60,14 @@ export default function useEquipItem() {
 
       if (!showBlockChanceValue) {
         setShowBlockChance(true);
+      }
+    }
+
+    if (isTrinket(item)) {
+      setTrinket(item);
+
+      if (!showTrinketValue) {
+        setShowTrinket(true);
       }
     }
 

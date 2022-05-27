@@ -9,7 +9,6 @@ import { canBlock, currentHealth, currentStamina } from "neverquest/state/reserv
 import { showRecovery } from "neverquest/state/show";
 import { totalBlockChance, totalProtection } from "neverquest/state/statistics";
 import { DeltaDisplay, AnimationSpeed, AnimationType, FloatingTextType } from "neverquest/types/ui";
-import { BLOCKED } from "neverquest/utilities/constants";
 import { animateElement } from "neverquest/utilities/helpers";
 
 export default function useDefend() {
@@ -38,7 +37,7 @@ export default function useDefend() {
     if (canBlockValue && Math.random() <= totalBlockChanceValue) {
       setDeltaHealth({
         color: FloatingTextType.Neutral,
-        value: BLOCKED,
+        value: "BLOCKED",
       });
       setCurrentStamina((current) => current - staminaCost);
       setDeltaStamina({

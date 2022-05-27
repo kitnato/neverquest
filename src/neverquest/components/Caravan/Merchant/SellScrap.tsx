@@ -1,4 +1,4 @@
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Stack from "react-bootstrap/Stack";
@@ -7,21 +7,20 @@ import { ArrowRight } from "react-bootstrap-icons";
 
 import Coins from "neverquest/components/Resource/Coins";
 import Scrap from "neverquest/components/Resource/Scrap";
-import useResource from "neverquest/hooks/useResource";
 import { exchangeCoin, exchangeScrap } from "neverquest/state/caravan";
-import { scrap } from "neverquest/state/resources";
+import { resourcesBalance, scrap } from "neverquest/state/resources";
 import { UIVariant } from "neverquest/types/ui";
 
 export default function SellScrap() {
-  const setResource = useResource();
   const scrapValue = useAtomValue(scrap);
   const exchangeScrapValue = useAtomValue(exchangeScrap);
   const exchangeCoinValue = useAtomValue(exchangeCoin);
+  const balanceResources = useSetAtom(resourcesBalance);
 
   const canSell = scrapValue >= exchangeScrapValue;
 
   const sellScrap = () => {
-    setResource({ coinsDifference: exchangeCoinValue, scrapDifference: -exchangeScrapValue });
+    balanceResources({ coinsDifference: exchangeCoinValue, scrapDifference: -exchangeScrapValue });
   };
 
   return (

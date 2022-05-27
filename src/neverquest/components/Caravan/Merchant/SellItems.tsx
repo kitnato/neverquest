@@ -1,21 +1,20 @@
+import { useAtom, useSetAtom } from "jotai";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
-import { useAtom } from "jotai";
 
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Coins from "neverquest/components/Resource/Coins";
-import useResource from "neverquest/hooks/useResource";
-import useUnequipItem from "neverquest/hooks/useUnequipItem";
-import { inventory } from "neverquest/state/inventory";
+import { inventory, itemUnequip } from "neverquest/state/inventory";
+import { resourcesBalance } from "neverquest/state/resources";
 import { InventoryProps } from "neverquest/types/props";
 import { UIVariant } from "neverquest/types/ui";
 import { getSellPrice } from "neverquest/utilities/helpers";
 
 export default function SellItems() {
-  const setResource = useResource();
-  const unequipItem = useUnequipItem();
+  const balanceResources = useSetAtom(resourcesBalance);
+  const unequipItem = useSetAtom(itemUnequip);
   const [inventoryValue, setInventory] = useAtom(inventory);
 
   const inventoryIDs = Object.getOwnPropertySymbols(inventoryValue);
@@ -36,7 +35,7 @@ export default function SellItems() {
         return newInventoryContents;
       });
 
-      setResource({ coinsDifference: getSellPrice(item) });
+      balanceResources({ coinsDifference: getSellPrice(item) });
     };
 
   return (

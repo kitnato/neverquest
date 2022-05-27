@@ -4,11 +4,11 @@ import Stack from "react-bootstrap/Stack";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/cowled.svg";
-import { crewMonologues } from "neverquest/state/caravan";
+import { crew, crewMonologues } from "neverquest/state/caravan";
 import { CrewType } from "neverquest/types/core";
 import { UIVariant } from "neverquest/types/ui";
 
-export default function Member({
+export default function Crew({
   label,
   name,
   setActive,
@@ -19,7 +19,12 @@ export default function Member({
   setActive: () => void;
   type: CrewType;
 }) {
+  const crewValue = useAtomValue(crew);
   const crewMonologueValue = useAtomValue(crewMonologues);
+
+  if (!crewValue[type]) {
+    return null;
+  }
 
   return (
     <Stack direction="horizontal" gap={3}>

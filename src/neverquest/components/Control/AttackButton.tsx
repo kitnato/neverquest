@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { MouseEvent, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -41,21 +41,20 @@ export default function AttackButton() {
     };
   })();
 
-  const onEngage = () => {
-    setAttacking((current) => !current);
-
-    if (!showLevelProgressValue) {
-      setShowLevelProgressValue(true);
-    }
-  };
-
   return (
     <OverlayTrigger overlay={<Tooltip>{tooltip}</Tooltip>} placement="top">
       <span className="d-inline-block">
         <Button
           className={animation}
           disabled={isLevelCompletedValue}
-          onClick={onEngage}
+          onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+            currentTarget.blur();
+            setAttacking((current) => !current);
+
+            if (!showLevelProgressValue) {
+              setShowLevelProgressValue(true);
+            }
+          }}
           variant={UIVariant.Outline}
         >
           <ImageIcon icon={icon} />

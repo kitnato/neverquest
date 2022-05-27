@@ -1,22 +1,20 @@
+import { useAtomValue, useSetAtom } from "jotai";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
-import { useAtomValue } from "jotai";
 
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Encumbrance from "neverquest/components/Inventory/Encumbrance";
-import useEquipItem from "neverquest/hooks/useEquipItem";
-import useUnequipItem from "neverquest/hooks/useUnequipItem";
-import { inventory } from "neverquest/state/inventory";
+import { inventory, itemEquip, itemUnequip } from "neverquest/state/inventory";
 import { InventoryProps } from "neverquest/types/props";
 import { UIVariant } from "neverquest/types/ui";
 
 export default function Inventory() {
   const inventoryValue = useAtomValue(inventory);
 
-  const equipItem = useEquipItem();
-  const unequipItem = useUnequipItem();
+  const equipItem = useSetAtom(itemEquip);
+  const unequipItem = useSetAtom(itemUnequip);
 
   const equippedInventoryIDs = Object.getOwnPropertySymbols(inventoryValue).filter(
     (id) => inventoryValue[id].isEquipped

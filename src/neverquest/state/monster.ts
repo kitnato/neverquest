@@ -1,7 +1,11 @@
 import { atom } from "jotai";
 import { atomWithReset } from "jotai/utils";
 
-import { level, progress } from "neverquest/state/global";
+import LOCRA from "locra";
+import { CreatureType } from "locra/types";
+import { deltaHealthMonster } from "neverquest/state/deltas";
+import { level, nsfw, progress } from "neverquest/state/global";
+import { FloatingTextType } from "neverquest/types/ui";
 import { getDamagePerSecond } from "neverquest/utilities/helpers";
 
 // PRIMITIVES
@@ -64,4 +68,35 @@ export const totalDamageMonster = atom((get) => {
   const progressValue = get(progress);
 
   return levelValue + Math.floor(levelValue / 2.5) + Math.floor(progressValue / 3);
+});
+
+// WRITERS
+
+export const monsterCreate = atom(null, (get, set) => {
+  set(
+    monsterName,
+    LOCRA.generateCreature({
+      isNSFW: get(nsfw),
+      hasPrefix: Math.random() < 0.8,
+      hasSuffix: Math.random() < 0.1 * Math.ceil(get(level) / 2),
+      type: CreatureType.Monster,
+    })
+  );
+
+  set(isMonsterEngaged, false);
+  set(currentHealthMonster, get(maximumHealthMonster));
+});
+
+export const monsterRegenerate = atom(null, (get, set) => {
+  const maximumHealthMonsterValue = get(maximumHealthMonster);
+  const difference = maximumHealthMonsterValue - get(currentHealthMonster);
+
+  if (difference > 0) {
+    set(deltaHealthMonster, {
+      color: FloatingTextType.Positive,
+      value: `+${difference}`,
+    });
+  }
+
+  set(currentHealthMonster, maximumHealthMonsterValue);
 });

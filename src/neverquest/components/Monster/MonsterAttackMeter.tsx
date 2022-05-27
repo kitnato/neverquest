@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { useResetAtom } from "jotai/utils";
 
 import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 import useAnimation from "neverquest/hooks/useAnimation";
-import useDefend from "neverquest/hooks/useDefend";
 import { isAttacking } from "neverquest/state/character";
+import { defense } from "neverquest/state/combat";
 import {
   currentHealthMonster,
   isMonsterDead,
@@ -23,10 +23,9 @@ export default function MonsterAttackMeter() {
   const isMonsterStaggeredValue = useAtomValue(isMonsterStaggered);
   const totalAttackRateMonsterValue = useAtomValue(totalAttackRateMonster);
   const resetCurrentHealthMonster = useResetAtom(currentHealthMonster);
+  const defend = useSetAtom(defense);
 
   const [deltaAttack, setDeltaAttack] = useState(0);
-
-  const defend = useDefend();
 
   useAnimation((delta) => {
     setDeltaAttack((current) => current + delta);

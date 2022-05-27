@@ -41,9 +41,9 @@ export default function AttributesButton() {
           <Button
             disabled={isAttackingValue || isMonsterEngagedValue}
             className="position-relative"
-            onClick={(event: MouseEvent<HTMLButtonElement>) => {
+            onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+              currentTarget.blur();
               setScreenShowing(true);
-              event.currentTarget.blur();
             }}
             variant={UIVariant.Outline}
           >

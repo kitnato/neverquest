@@ -5,10 +5,14 @@ import Stack from "react-bootstrap/Stack";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import MonsterStatus from "neverquest/components/Monster/MonsterStatus";
-import useNewMonster from "neverquest/hooks/useNewMonster";
 import unknownIcon from "neverquest/icons/evil-eyes.svg";
 import { isAttacking, isLooting } from "neverquest/state/character";
-import { isMonsterDead, isMonsterEngaged } from "neverquest/state/monster";
+import {
+  isMonsterDead,
+  isMonsterEngaged,
+  monsterCreate,
+  monsterRegenerate,
+} from "neverquest/state/monster";
 import { AnimationType } from "neverquest/types/ui";
 import { UNKNOWN } from "neverquest/utilities/constants";
 import { getAnimationClass } from "neverquest/utilities/helpers";
@@ -18,19 +22,19 @@ export default function Monster() {
   const [isMonsterEngagedValue, setMonsterEngaged] = useAtom(isMonsterEngaged);
   const isAttackingValue = useAtomValue(isAttacking);
   const isMonsterDeadValue = useAtomValue(isMonsterDead);
-
-  const newMonster = useNewMonster();
+  const createMonster = useSetAtom(monsterCreate);
+  const regenerateMonster = useSetAtom(monsterRegenerate);
 
   useEffect(() => {
     // If player is attacking, engage the monster.
     if (isAttackingValue && !isMonsterEngagedValue && !isMonsterDeadValue) {
-      newMonster();
+      createMonster();
       setMonsterEngaged(true);
     }
 
     // If player stops attacking but the monster is still alive, regenerate it.
     if (!isAttackingValue && isMonsterEngagedValue && !isMonsterDeadValue) {
-      newMonster(true);
+      regenerateMonster();
     }
 
     if (isMonsterDeadValue) {

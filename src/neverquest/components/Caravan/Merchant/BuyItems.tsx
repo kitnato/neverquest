@@ -1,4 +1,4 @@
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -9,17 +9,16 @@ import Tooltip from "react-bootstrap/Tooltip";
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Coins from "neverquest/components/Resource/Coins";
 import useAcquireItem from "neverquest/hooks/useAcquireItem";
-import useResource from "neverquest/hooks/useResource";
 import useCheckEncumbrance from "neverquest/hooks/useCheckEncumbrance";
 import { merchantInventory } from "neverquest/state/caravan";
-import { coins } from "neverquest/state/resources";
+import { resourcesBalance, coins } from "neverquest/state/resources";
 import { InventoryProps } from "neverquest/types/props";
 import { UIVariant } from "neverquest/types/ui";
 
 export default function BuyItems() {
   const acquireItem = useAcquireItem();
   const checkEncumbrance = useCheckEncumbrance();
-  const setResource = useResource();
+  const balanceResources = useSetAtom(resourcesBalance);
   const [merchantInventoryValue, setMerchantInventory] = useAtom(merchantInventory);
   const coinsValue = useAtomValue(coins);
 
@@ -31,7 +30,7 @@ export default function BuyItems() {
       const itemReceived = acquireItem({ item });
 
       if (itemReceived) {
-        setResource({ coinsDifference: -item.price });
+        balanceResources({ coinsDifference: -item.price });
         setMerchantInventory((current) => {
           const newMerchantInventory = { ...current };
 

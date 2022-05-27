@@ -28,9 +28,9 @@ export default function InventoryButton() {
         <span className={`d-inline-block ${getAnimationClass(AnimationType.FlipInX)}`}>
           <Button
             disabled={isAttackingValue}
-            onClick={(event: MouseEvent<HTMLButtonElement>) => {
+            onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+              currentTarget.blur();
               setScreenShowing(true);
-              event.currentTarget.blur();
             }}
             variant={UIVariant.Outline}
           >

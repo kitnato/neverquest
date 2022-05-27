@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { nanoid } from "nanoid";
+import { Fragment, useMemo, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
 
 import DismissableScreen from "neverquest/components/DismissableScreen";
-import Member from "neverquest/components/Caravan/Member";
+import Crew from "neverquest/components/Caravan/Crew";
 import Mercenary from "neverquest/components/Caravan/Mercenary";
 import Merchant from "neverquest/components/Caravan/Merchant";
 import { CrewType } from "neverquest/types/core";
@@ -21,20 +22,25 @@ export default function Caravan() {
   const [currentMember, setCurrentMember] = useState<CrewMember>();
   const [isScreenShowing, setScreenShowing] = useState(false);
 
-  const memberOrder = [
-    {
-      Component: <Merchant />,
-      label: "Trade",
-      name: "Merchant",
-      type: CrewType.Merchant,
-    },
-    {
-      Component: <Mercenary />,
-      label: "Train",
-      name: "Mercenary",
-      type: CrewType.Mercenary,
-    },
-  ];
+  const crewOrder = useMemo(
+    () => [
+      {
+        Component: <Merchant />,
+        key: nanoid(),
+        label: "Trade",
+        name: "Merchant",
+        type: CrewType.Merchant,
+      },
+      {
+        Component: <Mercenary />,
+        key: nanoid(),
+        label: "Train",
+        name: "Mercenary",
+        type: CrewType.Mercenary,
+      },
+    ],
+    []
+  );
 
   const onActivate = (isShowing: boolean, member?: CrewMember) => {
     setScreenShowing(isShowing);
@@ -49,13 +55,15 @@ export default function Caravan() {
       <Card className={getAnimationClass(AnimationType.FlipInX)}>
         <Card.Body>
           <Stack gap={3}>
-            {memberOrder.map(({ label, name, type }, index) => (
-              <Member
-                label={label}
-                name={name}
-                setActive={() => onActivate(true, memberOrder[index])}
-                type={type}
-              />
+            {crewOrder.map(({ key, label, name, type }, index) => (
+              <Fragment key={key}>
+                <Crew
+                  label={label}
+                  name={name}
+                  setActive={() => onActivate(true, crewOrder[index])}
+                  type={type}
+                />
+              </Fragment>
             ))}
           </Stack>
         </Card.Body>

@@ -37,9 +37,9 @@ export default function TravelButton() {
     >
       <Button
         className={isWildernessValue ? getAnimationClass(AnimationType.Pulse, true) : ""}
-        onClick={(event: MouseEvent<HTMLButtonElement>) => {
-          switchLocation("");
-          event.currentTarget.blur();
+        onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+          currentTarget.blur();
+          switchLocation();
         }}
         variant={UIVariant.Outline}
       >

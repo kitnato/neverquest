@@ -1,21 +1,21 @@
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 
 import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 import useAnimation from "neverquest/hooks/useAnimation";
-import useNewMonster from "neverquest/hooks/useNewMonster";
-import useRewardKill from "neverquest/hooks/useRewardKill";
 import { isLooting, lootingRate } from "neverquest/state/character";
+import { monsterCreate } from "neverquest/state/monster";
+import { lootDrop } from "neverquest/state/resources";
 import { UIVariant } from "neverquest/types/ui";
 import { formatMilliseconds } from "neverquest/utilities/helpers";
 
 export default function LootingMeter() {
   const [isLootingValue, setLooting] = useAtom(isLooting);
   const lootingRateValue = useAtomValue(lootingRate);
-  const [deltaLooting, setDeltaLooting] = useState(0);
+  const createMonster = useSetAtom(monsterCreate);
+  const dropLoot = useSetAtom(lootDrop);
 
-  const newMonster = useNewMonster();
-  const rewardKill = useRewardKill();
+  const [deltaLooting, setDeltaLooting] = useState(0);
 
   useAnimation((delta) => {
     setDeltaLooting((current) => current + delta);
@@ -23,8 +23,8 @@ export default function LootingMeter() {
 
   useEffect(() => {
     if (deltaLooting >= lootingRateValue) {
-      rewardKill();
-      newMonster();
+      dropLoot();
+      createMonster();
       setLooting(false);
     }
   }, [deltaLooting, lootingRateValue]);

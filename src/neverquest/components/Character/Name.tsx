@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { useState } from "react";
+import { ChangeEvent, KeyboardEvent, MouseEvent, useState } from "react";
 import FormControl from "react-bootstrap/FormControl";
 import Stack from "react-bootstrap/Stack";
 
@@ -18,13 +18,15 @@ export default function Character() {
       <FormControl
         className="hover-grow"
         onBlur={() => setEditing(false)}
-        onChange={({ target }) => setName(target.value)}
-        onClick={({ currentTarget }) => {
+        onChange={({ target }: ChangeEvent<HTMLInputElement>) => setName(target.value)}
+        onClick={({ currentTarget }: MouseEvent<HTMLInputElement>) => {
           setEditing(true);
           currentTarget.setSelectionRange(0, 0);
           currentTarget.select();
         }}
-        onKeyPress={({ key }) => key === "Enter" && setEditing(false)}
+        onKeyPress={({ key }: KeyboardEvent<HTMLInputElement>) =>
+          key === "Enter" && setEditing(false)
+        }
         plaintext={!isEditing}
         value={nameValue}
       />

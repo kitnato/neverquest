@@ -54,14 +54,7 @@ import {
   deltaTotalStaminaRegenerationRate,
 } from "neverquest/state/deltas";
 import { gameOver, level, mode, progress } from "neverquest/state/global";
-import {
-  armor,
-  inventory,
-  inventorySize,
-  shield,
-  trinket,
-  weapon,
-} from "neverquest/state/inventory";
+import { inventory, inventorySize } from "neverquest/state/inventory";
 import { aether, aetherLoot, coins, coinsLoot, scrap, scrapLoot } from "neverquest/state/resources";
 import {
   currentHealthMonster,
@@ -101,7 +94,6 @@ import {
 export default function useReset() {
   const resetAether = useResetAtom(aether);
   const resetAetherLoot = useResetAtom(aetherLoot);
-  const resetArmor = useResetAtom(armor);
   const resetAttackRateBonus = useResetAtom(attackRateBonus);
   const resetCharacterLevel = useResetAtom(characterLevel);
   const resetCoins = useResetAtom(coins);
@@ -160,7 +152,6 @@ export default function useReset() {
   const resetRecoveryRate = useResetAtom(recoveryRate);
   const resetScrap = useResetAtom(scrap);
   const resetScrapLoot = useResetAtom(scrapLoot);
-  const resetShield = useResetAtom(shield);
   const resetShowTrinket = useResetAtom(showTrinket);
   const resetShowAether = useResetAtom(showAether);
   const resetShowArmor = useResetAtom(showArmor);
@@ -187,14 +178,11 @@ export default function useReset() {
   const resetStamina = useResetAtom(stamina);
   const resetStaminaRegenerationRate = useResetAtom(staminaRegenerationRate);
   const resetStatusElement = useResetAtom(statusElement);
-  const resetTrinket = useResetAtom(trinket);
-  const resetWeapon = useResetAtom(weapon);
   const setInitialReserves = useSetAtom(initializeReserves);
 
   return () => {
     resetAether();
     resetAetherLoot();
-    resetArmor();
     resetAttackRateBonus();
     resetCharacterLevel();
     resetCoins();
@@ -253,7 +241,6 @@ export default function useReset() {
     resetRecoveryRate();
     resetScrap();
     resetScrapLoot();
-    resetShield();
     resetShowAether();
     resetShowArmor();
     resetShowAttributes();
@@ -280,8 +267,6 @@ export default function useReset() {
     resetStamina();
     resetStaminaRegenerationRate();
     resetStatusElement();
-    resetTrinket();
-    resetWeapon();
     setInitialReserves();
   };
 }

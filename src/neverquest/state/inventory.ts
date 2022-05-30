@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { atomWithReset, RESET } from "jotai/utils";
+import { atomWithReset } from "jotai/utils";
 
 import { stamina, staminaRegenerationRate } from "neverquest/state/attributes";
 import {
@@ -14,23 +14,74 @@ import {
   showWeapon,
 } from "neverquest/state/show";
 import { Armor, Inventory, Shield, Trinket, Weapon } from "neverquest/types/core";
-import { InventoryProps } from "neverquest/types/props";
 import { NO_ARMOR, NO_TRINKET, NO_SHIELD, NO_WEAPON } from "neverquest/utilities/constants";
 import { isArmor, isShield, isTrinket, isWeapon } from "neverquest/utilities/type-guards";
 
 // PRIMITIVES
 
-export const armor = atomWithReset<Armor>(NO_ARMOR);
+export const armor = atom<Armor>((get) => {
+  const currentInventory = get(inventory);
+  const equippedArmorID = Object.getOwnPropertySymbols(currentInventory).filter((id) => {
+    const { isEquipped, item } = currentInventory[id];
+
+    return isEquipped && isArmor(item);
+  })[0];
+
+  if (equippedArmorID) {
+    return currentInventory[equippedArmorID].item as Armor;
+  }
+
+  return NO_ARMOR;
+});
+
+export const shield = atom<Shield>((get) => {
+  const currentInventory = get(inventory);
+  const equippedShieldID = Object.getOwnPropertySymbols(currentInventory).filter((id) => {
+    const { isEquipped, item } = currentInventory[id];
+
+    return isEquipped && isShield(item);
+  })[0];
+
+  if (equippedShieldID) {
+    return currentInventory[equippedShieldID].item as Shield;
+  }
+
+  return NO_SHIELD;
+});
+
+export const trinket = atom<Trinket>((get) => {
+  const currentInventory = get(inventory);
+  const equippedTrinketID = Object.getOwnPropertySymbols(currentInventory).filter((id) => {
+    const { isEquipped, item } = currentInventory[id];
+
+    return isEquipped && isTrinket(item);
+  })[0];
+
+  if (equippedTrinketID) {
+    return currentInventory[equippedTrinketID].item as Trinket;
+  }
+
+  return NO_TRINKET;
+});
+
+export const weapon = atom<Weapon>((get) => {
+  const currentInventory = get(inventory);
+  const equippedWeaponID = Object.getOwnPropertySymbols(currentInventory).filter((id) => {
+    const { isEquipped, item } = currentInventory[id];
+
+    return isEquipped && isWeapon(item);
+  })[0];
+
+  if (equippedWeaponID) {
+    return currentInventory[equippedWeaponID].item as Weapon;
+  }
+
+  return NO_WEAPON;
+});
 
 export const inventory = atomWithReset<Inventory>({});
 
 export const inventorySize = atomWithReset(3);
-
-export const shield = atomWithReset<Shield>(NO_SHIELD);
-
-export const trinket = atomWithReset<Trinket>(NO_TRINKET);
-
-export const weapon = atomWithReset<Weapon>(NO_WEAPON);
 
 // READERS
 
@@ -52,10 +103,14 @@ export const isInventoryFull = atom((get) => {
 
 // WRITERS
 
-export const itemEquip = atom(null, (get, set, { id, item }: InventoryProps) => {
-  if (isArmor(item)) {
-    set(armor, item);
+export const itemEquip = atom(null, (get, set, id: symbol) => {
+  const { item } = get(inventory)[id];
 
+  if (!item) {
+    return;
+  }
+
+  if (isArmor(item)) {
     if (!get(showArmor)) {
       set(showArmor, true);
     }
@@ -66,8 +121,6 @@ export const itemEquip = atom(null, (get, set, { id, item }: InventoryProps) => 
   }
 
   if (isShield(item)) {
-    set(shield, item);
-
     if (!get(showShield)) {
       set(showShield, true);
     }
@@ -78,16 +131,12 @@ export const itemEquip = atom(null, (get, set, { id, item }: InventoryProps) => 
   }
 
   if (isTrinket(item)) {
-    set(trinket, item);
-
     if (!get(showTrinket)) {
       set(showTrinket, true);
     }
   }
 
   if (isWeapon(item)) {
-    set(weapon, item);
-
     if (!get(showStamina) && item.staminaCost > 0) {
       set(showStamina, true);
 
@@ -122,23 +171,7 @@ export const itemEquip = atom(null, (get, set, { id, item }: InventoryProps) => 
   }));
 });
 
-export const itemUnequip = atom(null, (get, set, { id, item }: InventoryProps) => {
-  if (isArmor(item)) {
-    set(armor, RESET);
-  }
-
-  if (isShield(item)) {
-    set(shield, RESET);
-  }
-
-  if (isTrinket(item)) {
-    set(trinket, RESET);
-  }
-
-  if (isWeapon(item)) {
-    set(weapon, RESET);
-  }
-
+export const itemUnequip = atom(null, (get, set, id: symbol) => {
   set(inventory, (current) => ({
     ...current,
     [id]: { ...current[id], isEquipped: false },

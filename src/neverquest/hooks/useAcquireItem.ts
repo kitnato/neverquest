@@ -40,7 +40,7 @@ export default function useAcquireItem() {
         (weaponValue === NO_WEAPON && isWeapon(item)) ||
         (trinketValue === NO_TRINKET && isTrinket(item)))
     ) {
-      equipItem({ id, item });
+      equipItem(id);
     }
 
     if (!showInventoryButtonValue) {

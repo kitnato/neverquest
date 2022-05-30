@@ -7,12 +7,11 @@ import Stack from "react-bootstrap/Stack";
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Encumbrance from "neverquest/components/Inventory/Encumbrance";
 import { inventory, itemEquip, itemUnequip } from "neverquest/state/inventory";
-import { InventoryProps } from "neverquest/types/props";
+import { isEquipment } from "neverquest/utilities/type-guards";
 import { UIVariant } from "neverquest/types/ui";
 
 export default function Inventory() {
   const inventoryValue = useAtomValue(inventory);
-
   const equipItem = useSetAtom(itemEquip);
   const unequipItem = useSetAtom(itemUnequip);
 
@@ -23,15 +22,8 @@ export default function Inventory() {
     (id) => !inventoryValue[id].isEquipped
   );
 
-  const onEquipItem =
-    ({ id, item }: InventoryProps) =>
-    () =>
-      equipItem({ id, item });
-
-  const onUnequipItem =
-    ({ id, item }: InventoryProps) =>
-    () =>
-      unequipItem({ id, item });
+  const onEquipItem = (id: symbol) => () => equipItem(id);
+  const onUnequipItem = (id: symbol) => () => unequipItem(id);
 
   return (
     <Stack gap={5}>
@@ -56,7 +48,7 @@ export default function Inventory() {
               </Col>
 
               <Col>
-                <Button onClick={onUnequipItem({ id, item })} variant={UIVariant.Outline}>
+                <Button onClick={onUnequipItem(id)} variant={UIVariant.Outline}>
                   Unequip
                 </Button>
               </Col>
@@ -74,8 +66,6 @@ export default function Inventory() {
 
         {storedInventoryValueIDs.map((id) => {
           const { item, key } = inventoryValue[id];
-          // TODO - check if isEquippable
-          const isEquippable = true;
 
           return (
             <Row key={key}>
@@ -83,9 +73,9 @@ export default function Inventory() {
                 <InventoryElement item={item} />
               </Col>
 
-              {isEquippable && (
+              {isEquipment(item) && (
                 <Col>
-                  <Button onClick={onEquipItem({ id, item })} variant={UIVariant.Outline}>
+                  <Button onClick={onEquipItem(id)} variant={UIVariant.Outline}>
                     Equip
                   </Button>
                 </Col>

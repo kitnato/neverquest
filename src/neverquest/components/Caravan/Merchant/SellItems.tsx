@@ -6,7 +6,7 @@ import Stack from "react-bootstrap/Stack";
 
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Coins from "neverquest/components/Resource/Coins";
-import { inventory, itemUnequip } from "neverquest/state/inventory";
+import { inventory } from "neverquest/state/inventory";
 import { resourcesBalance } from "neverquest/state/resources";
 import { InventoryProps } from "neverquest/types/props";
 import { UIVariant } from "neverquest/types/ui";
@@ -14,19 +14,13 @@ import { getSellPrice } from "neverquest/utilities/helpers";
 
 export default function SellItems() {
   const balanceResources = useSetAtom(resourcesBalance);
-  const unequipItem = useSetAtom(itemUnequip);
   const [inventoryValue, setInventory] = useAtom(inventory);
 
   const inventoryIDs = Object.getOwnPropertySymbols(inventoryValue);
 
   const sellItem =
-    ({ id, isEquipped, item }: InventoryProps & { isEquipped: boolean | undefined }) =>
+    ({ id, item }: InventoryProps) =>
     () => {
-      // TODO - make equipment slots dependent on inventory, remove isEquipped requirement.
-      if (isEquipped) {
-        unequipItem({ id, item });
-      }
-
       setInventory((current) => {
         const newInventoryContents = { ...current };
 
@@ -64,7 +58,7 @@ export default function SellItems() {
                 </Col>
 
                 <Col>
-                  <Button onClick={sellItem({ id, isEquipped, item })} variant={UIVariant.Outline}>
+                  <Button onClick={sellItem({ id, item })} variant={UIVariant.Outline}>
                     Sell
                   </Button>
                 </Col>

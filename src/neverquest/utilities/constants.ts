@@ -9,7 +9,7 @@ export const ARMOR_SPECIFICATIONS: Record<
   ArmorClass,
   { protectionModifier: number; weight: number }
 > = {
-  [ArmorClass.Light]: {
+  [ArmorClass.Hide]: {
     protectionModifier: 1.25,
     weight: 1,
   },

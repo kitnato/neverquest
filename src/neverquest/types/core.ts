@@ -1,12 +1,12 @@
 import { ShieldType, WeaponType } from "locra/types";
 
-export type Armor = EquipmentBase & {
+export type Armor = Item & {
   armorClass?: ArmorClass;
   protection: number;
 };
 
 export enum ArmorClass {
-  Light = "Light",
+  Hide = "Hide",
   Plate = "Plate",
   Reinforced = "Reinforced",
 }
@@ -40,16 +40,15 @@ export interface Inventory {
 export interface InventoryContents {
   // Optional, because while in Merchant's inventory, it can't be equipped.
   isEquipped?: boolean;
-  item: Equipment;
+  item: Item;
   key: string;
 }
 
-export interface EquipmentBase {
+export interface Item {
   name: string;
   price: number;
   weight: number;
 }
-
 export type Equipment = Armor | Shield | Trinket | Weapon;
 
 export enum LocationType {
@@ -63,16 +62,16 @@ export enum LootType {
   Scrap,
 }
 
-export type Shield = EquipmentBase & {
+export type Shield = Item & {
   block: number;
   stagger: number;
   staminaCost: number;
   type?: ShieldType;
 };
 
-export type Trinket = EquipmentBase;
+export type Trinket = Item;
 
-export type Weapon = EquipmentBase & {
+export type Weapon = Item & {
   damage: number;
   rate: number;
   staminaCost: number;

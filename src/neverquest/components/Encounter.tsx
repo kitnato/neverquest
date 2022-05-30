@@ -44,7 +44,7 @@ export default function Encounter() {
         case 2:
           newInventory[id] = {
             item: generateArmor({
-              armorClass: ArmorClass.Light,
+              armorClass: ArmorClass.Hide,
               hasPrefix: true,
               isNSFW: nsfwValue,
               level: levelValue,

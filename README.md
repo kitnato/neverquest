@@ -265,7 +265,9 @@ No initial modifiers.
 
 ### Armor
 
-Armor provides Protection. When hit by an attack, the Protection value is subtracted from total damage received. Each subsequent type increases the Protection value.
+Armor provides protection. When hit by an attack, the protection value is subtracted from total damage received.
+
+Each of the following armor classes increases the protection value and adds certain modifiers.
 
 #### No armor
 
@@ -605,11 +607,11 @@ Neverquest &copy; 2022 is licensed under [CC BY-NC-SA 4.0](https://creativecommo
   Not quite in the same way. Clear influences are:
    - Progress Quest (the progenitor of all text-heavy UI-based incremental games, also with a swords & sorcery fantasy theme)
    - Trimps (complex idle/incremental all about building )
-   - NGU Idle (incremental irreverent UI-based fantasy adventure)
-   - Candybox 1 & 2 (irreverent fantasy adventure with 2D world elements heavy on player interaction and with player death)
-   - Crank (user-interaction-driven adventure/mystery game with gradually unlocking and expanding storyline and gameplay)
-   - Antimatter (incremental idler all about big numbers and ascension mechanics)
+   - Kingdom of Loathing (one of the first purely browser-based UI-focused adventure RPGs with an irreverent sense of humor)
+   - Candybox 1 & 2 (another irreverent UI-heavy fantasy adventure with 2D world elements heavy on player interaction and with player death)
+   - Crank (user-interaction-driven adventure/mystery game with gradually expanding storyline and gameplay)
    - Swarm Simulator (the premier Bootstrapped-based incremental/idle browser game all about ever-increasing numbers and progress bars)
+   - NGU Idle (incremental irreverent UI-based fantasy adventure)
    - Hero Simulator (light-hearted fantasy setting with many upgrades)
 1. What’s the one new thing?
    - Influence every aspect of your character without the need for tropes and archetypes.

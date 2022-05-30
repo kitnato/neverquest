@@ -1,3 +1,5 @@
+/* ELEMENTS */
+
 body {
   user-select: none;
 }
@@ -18,6 +20,8 @@ h6 {
 small {
   letter-spacing: 1px;
 }
+
+/* BOOTSTRAP */
 
 .hover-grow:hover:not(:focus) {
   transform: scale(1.1);
@@ -46,4 +50,23 @@ small {
 
 .tooltip.show {
   opacity: 1;
+}
+
+/* CUSTOM */
+
+@keyframes blurOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    filter: blur(8px);
+    opacity: 0.6;
+    transform: scale3d(0.8, 0.8, 0.8);
+  }
+}
+
+.animate__blurOut {
+  animation-name: blurOut;
+  animation-timing-function: linear;
 }

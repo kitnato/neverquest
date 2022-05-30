@@ -1,4 +1,4 @@
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -10,16 +10,16 @@ import Encounter from "neverquest/components/Encounter";
 import LevelProgress from "neverquest/components/LevelProgress";
 import Location from "neverquest/components/Location";
 import Reset from "neverquest/components/Reset";
-import useReset from "neverquest/hooks/useReset";
 import { gameOver } from "neverquest/state/global";
+import { reservesInitial } from "neverquest/state/reserves";
 
 export default function Main() {
   const gameOverValue = useAtomValue(gameOver);
   const [isGameOverShowing, setGameOverShowing] = useState(true);
-  const reset = useReset();
+  const initializeReserves = useSetAtom(reservesInitial);
 
   useEffect(() => {
-    reset();
+    initializeReserves();
   }, []);
 
   return (

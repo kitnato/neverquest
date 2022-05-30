@@ -1,44 +1,65 @@
 import { RangeProps } from "neverquest/types/props";
 import { AnimationSpeed, AnimationType } from "neverquest/types/ui";
-import { ANIMATED_CLASS, ANIMATE_PREFIX } from "neverquest/utilities/constants";
+import {
+  ANIMATED_CLASS,
+  ANIMATE_DURATION_PROPERTY,
+  ANIMATE_PREFIX,
+} from "neverquest/utilities/constants";
+import { isEnum } from "neverquest/utilities/type-guards";
 
-// Animates an element once according to its Animate.css type with optional speed parameter.
+// TODO - this is brittle.
 export function animateElement({
-  element,
   animation,
+  element,
   speed,
 }: {
-  element: HTMLDivElement | null;
   animation: AnimationType;
-  speed?: AnimationSpeed;
+  element: HTMLDivElement | null;
+  speed?: AnimationSpeed | number;
 }) {
   if (element === null) {
     return;
   }
 
-  const { addEventListener, classList } = element;
+  const { addEventListener, classList, style } = element;
+
+  classList.forEach((className) => {
+    if (className.startsWith(ANIMATE_PREFIX)) {
+      classList.remove(className);
+    }
+  });
 
   const animationName = `${ANIMATE_PREFIX}${animation}`;
-  const animationSpeed = speed ? `${ANIMATE_PREFIX}${speed}` : null;
+  const animationSpeedClass = isEnum(speed, AnimationSpeed) ? `${ANIMATE_PREFIX}${speed}` : null;
 
-  classList.add(ANIMATED_CLASS, animationName);
-
-  if (animationSpeed) {
-    classList.add(animationSpeed);
+  if (classList.contains("d-none")) {
+    classList.remove("d-none");
   }
 
-  addEventListener(
-    "animationend",
-    (event: AnimationEvent) => {
-      event.stopPropagation();
-      classList.remove(ANIMATED_CLASS, animationName);
+  classList.add(animationName);
 
-      if (animationSpeed) {
-        classList.remove(animationSpeed);
-      }
-    },
-    { once: true }
-  );
+  if (animationSpeedClass) {
+    classList.add(animationSpeedClass);
+  }
+
+  if (typeof speed === "number") {
+    style.setProperty(ANIMATE_DURATION_PROPERTY, formatMilliseconds(speed));
+  } else {
+    classList.add(ANIMATED_CLASS);
+
+    addEventListener(
+      "animationend",
+      (event: AnimationEvent) => {
+        event.stopPropagation();
+        classList.remove(ANIMATED_CLASS, animationName);
+
+        if (animationSpeedClass) {
+          classList.remove(animationSpeedClass);
+        }
+      },
+      { once: true }
+    );
+  }
 }
 
 export function capitalizeAll(string: null | string | undefined) {

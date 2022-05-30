@@ -4,6 +4,10 @@ export function isArmor(equipment: unknown): equipment is Armor {
   return isObject(equipment) && equipment.protection !== undefined;
 }
 
+export function isEnum<T>(token: unknown, type: T): token is T {
+  return Object.values(type).includes(token as T);
+}
+
 export function isEquipment(equipment: unknown): equipment is Equipment {
   return (
     isObject(equipment) &&

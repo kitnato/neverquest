@@ -63,7 +63,7 @@ import {
   monsterName,
   monsterStatusElement,
 } from "neverquest/state/monster";
-import { currentHealth, currentStamina, initializeReserves } from "neverquest/state/reserves";
+import { currentHealth, currentStamina, reservesInitial } from "neverquest/state/reserves";
 import {
   showAether,
   showArmor,
@@ -178,7 +178,7 @@ export default function useReset() {
   const resetStamina = useResetAtom(stamina);
   const resetStaminaRegenerationRate = useResetAtom(staminaRegenerationRate);
   const resetStatusElement = useResetAtom(statusElement);
-  const setInitialReserves = useSetAtom(initializeReserves);
+  const setInitialReserves = useSetAtom(reservesInitial);
 
   return () => {
     resetAether();

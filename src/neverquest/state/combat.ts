@@ -20,8 +20,8 @@ import { animateElement } from "neverquest/utilities/helpers";
 
 export const defense = atom(null, (get, set) => {
   animateElement({
-    element: get(statusElement),
     animation: AnimationType.HeadShake,
+    element: get(statusElement),
     speed: AnimationSpeed.Fast,
   });
 

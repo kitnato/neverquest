@@ -58,7 +58,7 @@ export const maximumStamina = atom((get) => {
 
 // WRITERS
 
-export const initializeReserves = atom(null, (get, set) => {
+export const reservesInitial = atom(null, (get, set) => {
   set(currentHealth, get(maximumHealth));
   set(currentStamina, get(maximumStamina));
 });

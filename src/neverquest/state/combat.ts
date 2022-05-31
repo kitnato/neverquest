@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 
-import { isRecovering, statusElement } from "neverquest/state/character";
+import { isRecovering, lootingRate, statusElement } from "neverquest/state/character";
 import { gameOver } from "neverquest/state/global";
 import { shield, weapon } from "neverquest/state/inventory";
 import { deltaHealth, deltaHealthMonster, deltaStamina } from "neverquest/state/deltas";
@@ -84,10 +84,11 @@ export const defense = atom(null, (get, set) => {
   }
 });
 
-export const offense = atom(null, (get, set) => {
+export const offense = atom(null, async (get, set) => {
   const { staminaCost } = get(weapon);
 
   if (get(canAttack)) {
+    const element = get(monsterStatusElement);
     const totalDamageValue = get(totalDamage);
     let monsterHealth = get(currentHealthMonster) - totalDamageValue;
 
@@ -107,10 +108,18 @@ export const offense = atom(null, (get, set) => {
       value: `${-totalDamageValue}`,
     });
 
-    animateElement({
-      element: get(monsterStatusElement),
+    await animateElement({
       animation: AnimationType.HeadShake,
+      element,
       speed: AnimationSpeed.Fast,
     });
+
+    if (monsterHealth === 0) {
+      animateElement({
+        animation: AnimationType.BlurOut,
+        element,
+        speed: get(lootingRate) - 800,
+      });
+    }
   }
 });

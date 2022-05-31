@@ -60,13 +60,13 @@ small {
   }
 
   to {
-    filter: blur(8px);
-    opacity: 0.6;
+    filter: blur(12px);
+    opacity: 0.75;
     transform: scale3d(0.8, 0.8, 0.8);
   }
 }
 
 .animate__blurOut {
   animation-name: blurOut;
-  animation-timing-function: linear;
+  animation-timing-function: ease-in;
 }

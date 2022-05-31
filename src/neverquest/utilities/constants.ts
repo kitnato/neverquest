@@ -2,7 +2,7 @@ import { ShieldType, WeaponType } from "locra/types";
 import { Armor, ArmorClass, Shield, Trinket, Weapon, WeaponClass } from "neverquest/types/core";
 import { RangeProps } from "neverquest/types/props";
 
-export const ANIMATE_DURATION_PROPERTY = "animation-duration";
+export const ANIMATE_DURATION_PROPERTY = "--animate-duration";
 export const ANIMATE_PREFIX = "animate__";
 export const ANIMATED_CLASS = `${ANIMATE_PREFIX}animated`;
 

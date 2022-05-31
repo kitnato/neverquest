@@ -7,7 +7,6 @@ import {
 } from "neverquest/utilities/constants";
 import { isEnum } from "neverquest/utilities/type-guards";
 
-// TODO - this is brittle.
 export function animateElement({
   animation,
   element,
@@ -16,50 +15,46 @@ export function animateElement({
   animation: AnimationType;
   element: HTMLDivElement | null;
   speed?: AnimationSpeed | number;
-}) {
-  if (element === null) {
-    return;
-  }
+}): Promise<void> {
+  return new Promise((resolve) => {
+    if (element === null) {
+      return;
+    }
 
-  const { addEventListener, classList, style } = element;
+    const { addEventListener, classList, style } = element;
+    const animationName = `${ANIMATE_PREFIX}${animation}`;
+    const animationSpeedClass = isEnum(speed, AnimationSpeed) ? `${ANIMATE_PREFIX}${speed}` : null;
 
-  classList.forEach((className) => {
-    if (className.startsWith(ANIMATE_PREFIX)) {
-      classList.remove(className);
+    if (classList.contains("d-none")) {
+      classList.remove("d-none");
+    }
+
+    classList.add(ANIMATED_CLASS, animationName);
+
+    if (animationSpeedClass) {
+      classList.add(animationSpeedClass);
+    }
+
+    if (typeof speed === "number") {
+      style.setProperty(ANIMATE_DURATION_PROPERTY, formatMilliseconds(speed));
+    } else {
+      // TODO - figure out why animationend triggers immediately after then() again, effectively cancelling any subsequent animation(s).
+      addEventListener(
+        "animationend",
+        (event: AnimationEvent) => {
+          event.stopPropagation();
+          classList.remove(ANIMATED_CLASS, animationName);
+
+          if (animationSpeedClass) {
+            classList.remove(animationSpeedClass);
+          }
+
+          resolve();
+        },
+        { once: true }
+      );
     }
   });
-
-  const animationName = `${ANIMATE_PREFIX}${animation}`;
-  const animationSpeedClass = isEnum(speed, AnimationSpeed) ? `${ANIMATE_PREFIX}${speed}` : null;
-
-  if (classList.contains("d-none")) {
-    classList.remove("d-none");
-  }
-
-  classList.add(animationName);
-
-  if (animationSpeedClass) {
-    classList.add(animationSpeedClass);
-  }
-
-  if (typeof speed === "number") {
-    style.setProperty(ANIMATE_DURATION_PROPERTY, formatMilliseconds(speed));
-  } else {
-    classList.add(ANIMATED_CLASS);
-
-    addEventListener(
-      "animationend",
-      (event: AnimationEvent) => {
-        event.stopPropagation();
-        classList.remove(ANIMATED_CLASS, animationName);
-
-        if (animationSpeedClass) {
-          classList.remove(animationSpeedClass);
-        }
-      },
-      { once: true }
-    );
-  }
 }
 
 export function capitalizeAll(string: null | string | undefined) {

@@ -6,18 +6,18 @@ import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 import levelIcon from "neverquest/icons/flying-flag.svg";
 import progressIcon from "neverquest/icons/stairs.svg";
 import { isWilderness, level, progress, progressMax } from "neverquest/state/global";
-import { showLevelProgress } from "neverquest/state/show";
+import { showWildernessProgress } from "neverquest/state/show";
 import { AnimationType, OverlayPlacement, UIVariant } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
-export default function LevelProgress() {
+export default function WildernessProgress() {
   const isWildernessValue = useAtomValue(isWilderness);
   const levelValue = useAtomValue(level);
   const progressValue = useAtomValue(progress);
   const progressMaxValue = useAtomValue(progressMax);
-  const showLevelProgressValue = useAtomValue(showLevelProgress);
+  const showWildernessProgressValue = useAtomValue(showWildernessProgress);
 
-  if (!showLevelProgressValue) {
+  if (!showWildernessProgressValue) {
     return null;
   }
 
@@ -31,11 +31,7 @@ export default function LevelProgress() {
 
       {isWildernessValue && (
         <Stack className="w-100" direction="horizontal" gap={3}>
-          <ImageIcon
-            icon={progressIcon}
-            placement={OverlayPlacement.Bottom}
-            tooltip="Level progress"
-          />
+          <ImageIcon icon={progressIcon} placement={OverlayPlacement.Bottom} tooltip="Progress" />
 
           <LabelledProgressBar
             label={`${progressValue}/${progressMaxValue}`}

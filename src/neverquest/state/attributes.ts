@@ -1,13 +1,16 @@
+import { atom } from "jotai";
 import { atomWithReset } from "jotai/utils";
 
+import { characterLevel } from "neverquest/state/character";
+import { essence } from "neverquest/state/resources";
 import { Attribute } from "neverquest/types/core";
+import { getTriangularNumber } from "neverquest/utilities/helpers";
 
 // PRIMITIVES
 
 export const attackRateBonus = atomWithReset<Attribute>({
   base: 0,
   canAssign: true,
-  cost: 1,
   description: "Reduce attack rate",
   increment: 0.02,
   name: "Speed",
@@ -17,7 +20,6 @@ export const attackRateBonus = atomWithReset<Attribute>({
 export const criticalChance = atomWithReset<Attribute>({
   base: 0,
   canAssign: false,
-  cost: 1,
   description: "Increase critical hit chance",
   increment: 0.02,
   name: "Dexterity",
@@ -27,7 +29,6 @@ export const criticalChance = atomWithReset<Attribute>({
 export const criticalDamage = atomWithReset<Attribute>({
   base: 1.5,
   canAssign: false,
-  cost: 1,
   description: "Increase critical hit damage",
   increment: 0.1,
   name: "Perception",
@@ -37,7 +38,6 @@ export const criticalDamage = atomWithReset<Attribute>({
 export const damage = atomWithReset<Attribute>({
   base: 0,
   canAssign: true,
-  cost: 1,
   description: "Increase base attack damage",
   increment: 1,
   name: "Strength",
@@ -47,7 +47,6 @@ export const damage = atomWithReset<Attribute>({
 export const dodgeChance = atomWithReset<Attribute>({
   base: 0,
   canAssign: false,
-  cost: 1,
   description: "Increase chance to dodge an attack",
   increment: 0.02,
   name: "Agility",
@@ -57,7 +56,6 @@ export const dodgeChance = atomWithReset<Attribute>({
 export const health = atomWithReset<Attribute>({
   base: 8,
   canAssign: true,
-  cost: 1,
   description: "Increase maximum total health",
   increment: 2,
   name: "Vitality",
@@ -67,7 +65,6 @@ export const health = atomWithReset<Attribute>({
 export const healthRegenerationRate = atomWithReset<Attribute>({
   base: 9000,
   canAssign: true,
-  cost: 1,
   description: "Increase health regeneration rate",
   increment: -50,
   name: "Vigor",
@@ -77,7 +74,6 @@ export const healthRegenerationRate = atomWithReset<Attribute>({
 export const lootBonus = atomWithReset<Attribute>({
   base: 0,
   canAssign: false,
-  cost: 1,
   description: "Increase amount of loot dropped by monsters",
   increment: 0.02,
   name: "Luck",
@@ -87,7 +83,6 @@ export const lootBonus = atomWithReset<Attribute>({
 export const recoveryRate = atomWithReset<Attribute>({
   base: 1500,
   canAssign: true,
-  cost: 1,
   description: "Reduce recovery rate",
   increment: -10,
   name: "Resilience",
@@ -97,7 +92,6 @@ export const recoveryRate = atomWithReset<Attribute>({
 export const stamina = atomWithReset<Attribute>({
   base: 4,
   canAssign: false,
-  cost: 1,
   description: "Increase maximum total stamina",
   increment: 1,
   name: "Endurance",
@@ -107,9 +101,14 @@ export const stamina = atomWithReset<Attribute>({
 export const staminaRegenerationRate = atomWithReset<Attribute>({
   base: 5000,
   canAssign: false,
-  cost: 1,
   description: "Increase stamina regeneration rate",
   increment: -50,
   name: "Fortitude",
   points: 0,
 });
+
+// READERS
+
+export const attributeCost = atom((get) => getTriangularNumber(get(characterLevel) + 1));
+
+export const attributesIncreasable = atom((get) => get(attributeCost) <= get(essence));

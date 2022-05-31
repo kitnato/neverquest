@@ -10,13 +10,14 @@ import restingIcon from "neverquest/icons/tired-eye.svg";
 import retreatIcon from "neverquest/icons/return-arrow.svg";
 import { isAttacking } from "neverquest/state/character";
 import { isLevelCompleted } from "neverquest/state/global";
-import { showLevelProgress } from "neverquest/state/show";
+import { showWildernessProgress } from "neverquest/state/show";
 import { AnimationType, UIVariant } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function AttackButton() {
   const [isAttackingValue, setAttacking] = useAtom(isAttacking);
-  const [showLevelProgressValue, setShowLevelProgressValue] = useAtom(showLevelProgress);
+  const [showWildernessProgressValue, setShowWildernessProgressValue] =
+    useAtom(showWildernessProgress);
   const isLevelCompletedValue = useAtomValue(isLevelCompleted);
 
   useEffect(() => {
@@ -51,8 +52,8 @@ export default function AttackButton() {
             currentTarget.blur();
             setAttacking((current) => !current);
 
-            if (!showLevelProgressValue) {
-              setShowLevelProgressValue(true);
+            if (!showWildernessProgressValue) {
+              setShowWildernessProgressValue(true);
             }
           }}
           variant={UIVariant.Outline}

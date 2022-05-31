@@ -50,9 +50,8 @@ export const monsterLoot = atom((get) => {
   const progressValue = get(progress);
 
   return {
-    aether: levelValue >= 10 ? Math.ceil(levelValue + progressValue / 3) : 0,
-    experience: Math.floor(progressValue + levelValue * 1.5),
-    scrap: Math.floor(progressValue + levelValue * 1.5),
+    essence: Math.floor(progressValue * 1.33 + levelValue * 1.5),
+    scrap: Math.floor(progressValue * 1.25 + levelValue * 2),
   };
 });
 

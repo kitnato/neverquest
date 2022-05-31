@@ -40,13 +40,13 @@ export default function TotalDamage() {
                 <Table borderless size="sm">
                   <tbody>
                     <tr>
-                      <td className="text-end">Weapon:</td>
+                      <td className="fst-italic text-end">Weapon:</td>
 
                       <td>{weaponValue.damage}</td>
                     </tr>
 
                     <tr>
-                      <td>{`${damageValue.name} attribute:`}</td>
+                      <td className="fst-italic text-end">{`${damageValue.name} attribute:`}</td>
 
                       <td>{getComputedStat(damageValue)}</td>
                     </tr>

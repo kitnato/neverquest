@@ -1,24 +1,17 @@
 import { atom } from "jotai";
 import { atomWithReset } from "jotai/utils";
 
-import { experience } from "neverquest/state/character";
-import {
-  deltaAether,
-  deltaCoins,
-  deltaExperience,
-  deltaScrap,
-  deltaScrapLoot,
-} from "neverquest/state/deltas";
+import { deltaEssence, deltaCoins, deltaScrap, deltaScrapLoot } from "neverquest/state/deltas";
 import { isLevelCompleted, progress } from "neverquest/state/global";
 import { monsterLoot } from "neverquest/state/monster";
-import { showAether, showAttributes, showCoins, showScrap } from "neverquest/state/show";
+import { showEssence, showAttributes, showCoins, showScrap } from "neverquest/state/show";
 import { FloatingTextType } from "neverquest/types/ui";
 
 // PRIMITIVES
 
-export const aether = atomWithReset(0);
+export const essence = atomWithReset(0);
 
-export const aetherLoot = atomWithReset(0);
+export const essenceLoot = atomWithReset(0);
 
 export const coins = atomWithReset(0);
 
@@ -32,10 +25,36 @@ export const scrapLoot = atomWithReset(0);
 
 export const hasLooted = atom(
   (get) =>
-    get(aetherLoot) === 0 && get(coinsLoot) === 0 && get(scrapLoot) === 0 && get(isLevelCompleted)
+    get(essenceLoot) === 0 && get(coinsLoot) === 0 && get(scrapLoot) === 0 && get(isLevelCompleted)
 );
 
 // WRITERS
+
+export const lootDrop = atom(null, (get, set) => {
+  const { essence, scrap } = get(monsterLoot);
+
+  if (essence > 0) {
+    set(essenceLoot, (current) => current + essence);
+    set(deltaEssence, {
+      color: FloatingTextType.Positive,
+      value: `+${essence}`,
+    });
+  }
+
+  if (scrap > 0) {
+    set(scrapLoot, (current) => current + scrap);
+    set(deltaScrapLoot, {
+      color: FloatingTextType.Positive,
+      value: `+${scrap}`,
+    });
+  }
+
+  set(progress, (current) => current + 1);
+
+  if (!get(showAttributes)) {
+    set(showAttributes, true);
+  }
+});
 
 export const resourcesBalance = atom(
   null,
@@ -43,36 +62,18 @@ export const resourcesBalance = atom(
     get,
     set,
     {
-      aetherDifference,
       coinsDifference,
+      essenceDifference,
       scrapDifference,
-    }: Partial<{ aetherDifference: number; coinsDifference: number; scrapDifference: number }>
+    }: Partial<{ coinsDifference: number; essenceDifference: number; scrapDifference: number }>
   ) => {
-    const aetherValue = aetherDifference || get(aetherLoot);
     const coinsValue = coinsDifference || get(coinsLoot);
+    const essenceValue = essenceDifference || get(essenceLoot);
     const scrapValue = scrapDifference || get(scrapLoot);
     const isLooting =
-      aetherDifference === undefined &&
       coinsDifference === undefined &&
+      essenceDifference === undefined &&
       scrapDifference === undefined;
-
-    if (aetherValue !== 0) {
-      const isPositive = aetherValue > 0;
-
-      set(aether, (current) => current + aetherValue);
-      set(deltaAether, {
-        color: isPositive ? FloatingTextType.Positive : FloatingTextType.Negative,
-        value: `${isPositive ? "+" : ""}${aetherValue}`,
-      });
-
-      if (!get(showAether)) {
-        set(showAether, true);
-      }
-
-      if (isLooting) {
-        set(aetherLoot, 0);
-      }
-    }
 
     if (coinsValue !== 0) {
       const isPositive = coinsValue > 0;
@@ -89,6 +90,24 @@ export const resourcesBalance = atom(
 
       if (isLooting) {
         set(coinsLoot, 0);
+      }
+    }
+
+    if (essenceValue !== 0) {
+      const isPositive = essenceValue > 0;
+
+      set(essence, (current) => current + essenceValue);
+      set(deltaEssence, {
+        color: isPositive ? FloatingTextType.Positive : FloatingTextType.Negative,
+        value: `${isPositive ? "+" : ""}${essenceValue}`,
+      });
+
+      if (!get(showEssence)) {
+        set(showEssence, true);
+      }
+
+      if (isLooting) {
+        set(essenceLoot, 0);
       }
     }
 
@@ -111,31 +130,3 @@ export const resourcesBalance = atom(
     }
   }
 );
-
-export const lootDrop = atom(null, (get, set) => {
-  const { aether, experience: xp, scrap } = get(monsterLoot);
-
-  if (aether > 0) {
-    set(aetherLoot, (current) => current + aether);
-    set(deltaAether, {
-      color: FloatingTextType.Positive,
-      value: `+${aether}`,
-    });
-  }
-
-  if (scrap > 0) {
-    set(scrapLoot, (current) => current + scrap);
-    set(deltaScrapLoot, {
-      color: FloatingTextType.Positive,
-      value: `+${scrap}`,
-    });
-  }
-
-  set(experience, (current) => current + xp);
-  set(deltaExperience, { color: FloatingTextType.Positive, value: `+${xp}` });
-  set(progress, (current) => current + 1);
-
-  if (xp > 0 && !get(showAttributes)) {
-    set(showAttributes, true);
-  }
-});

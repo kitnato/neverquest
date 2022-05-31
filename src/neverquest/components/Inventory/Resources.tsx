@@ -2,16 +2,16 @@ import Card from "react-bootstrap/Card";
 import { useAtomValue } from "jotai";
 
 import ResourceDisplay from "neverquest/components/Resource/ResourceDisplay";
-import { showAether, showCoins, showScrap } from "neverquest/state/show";
+import { showCoins, showEssence, showScrap } from "neverquest/state/show";
 import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
-export default function StoredLoot() {
-  const showAetherValue = useAtomValue(showAether);
+export default function Resources() {
   const showCoinsValue = useAtomValue(showCoins);
+  const showEssenceValue = useAtomValue(showEssence);
   const showScrapValue = useAtomValue(showScrap);
 
-  if (!showAetherValue && !showCoinsValue && !showScrapValue) {
+  if (!showEssenceValue && !showCoinsValue && !showScrapValue) {
     return null;
   }
 

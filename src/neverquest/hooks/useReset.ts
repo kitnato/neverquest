@@ -23,8 +23,6 @@ import {
 } from "neverquest/state/caravan";
 import {
   characterLevel,
-  experience,
-  experienceSpent,
   isAttacking,
   isLooting,
   isRecovering,
@@ -32,30 +30,16 @@ import {
   name,
   statusElement,
 } from "neverquest/state/character";
-import {
-  deltaAether,
-  deltaAetherLoot,
-  deltaCoins,
-  deltaCoinsLoot,
-  deltaDamagePerSecond,
-  deltaExperience,
-  deltaExperienceSpent,
-  deltaHealth,
-  deltaHealthMonster,
-  deltaCharacterLevel,
-  deltaScrap,
-  deltaScrapLoot,
-  deltaStamina,
-  deltaTotalAttackRate,
-  deltaTotalDamage,
-  deltaTotalHealthRegenerationRate,
-  deltaTotalProtection,
-  deltaTotalRecoveryRate,
-  deltaTotalStaminaRegenerationRate,
-} from "neverquest/state/deltas";
 import { gameOver, level, mode, progress } from "neverquest/state/global";
 import { inventory, inventorySize } from "neverquest/state/inventory";
-import { aether, aetherLoot, coins, coinsLoot, scrap, scrapLoot } from "neverquest/state/resources";
+import {
+  essence,
+  essenceLoot,
+  coins,
+  coinsLoot,
+  scrap,
+  scrapLoot,
+} from "neverquest/state/resources";
 import {
   currentHealthMonster,
   isMonsterEngaged,
@@ -65,19 +49,18 @@ import {
 } from "neverquest/state/monster";
 import { currentHealth, currentStamina, reservesInitial } from "neverquest/state/reserves";
 import {
-  showAether,
+  showEssence,
   showArmor,
   showAttributes,
   showAttributesButton,
   showBlockChance,
-  showCharacterLevel,
   showCoins,
   showCritical,
   showDamagePerSecond,
   showDefense,
   showDodgeChance,
   showInventoryButton,
-  showLevelProgress,
+  showWildernessProgress,
   showLoot,
   showRecovery,
   showScrap,
@@ -92,8 +75,8 @@ import {
 
 // (ﾉ☉ヮ⚆)ﾉ ⌒*:･ﾟ✧
 export default function useReset() {
-  const resetAether = useResetAtom(aether);
-  const resetAetherLoot = useResetAtom(aetherLoot);
+  const resetEssence = useResetAtom(essence);
+  const resetEssenceLoot = useResetAtom(essenceLoot);
   const resetAttackRateBonus = useResetAtom(attackRateBonus);
   const resetCharacterLevel = useResetAtom(characterLevel);
   const resetCoins = useResetAtom(coins);
@@ -106,30 +89,9 @@ export default function useReset() {
   const resetCurrentHealthMonster = useResetAtom(currentHealthMonster);
   const resetCurrentStamina = useResetAtom(currentStamina);
   const resetDamage = useResetAtom(damage);
-  const resetDeltaAether = useResetAtom(deltaAether);
-  const resetDeltaAetherLoot = useResetAtom(deltaAetherLoot);
-  const resetDeltaCharacterLevel = useResetAtom(deltaCharacterLevel);
-  const resetDeltaCoins = useResetAtom(deltaCoins);
-  const resetDeltaCoinsLoot = useResetAtom(deltaCoinsLoot);
-  const resetDeltaDamagePerSecond = useResetAtom(deltaDamagePerSecond);
-  const resetDeltaExperience = useResetAtom(deltaExperience);
-  const resetDeltaExperienceSpent = useResetAtom(deltaExperienceSpent);
-  const resetDeltaHealth = useResetAtom(deltaHealth);
-  const resetDeltaHealthMonster = useResetAtom(deltaHealthMonster);
-  const resetDeltaScrap = useResetAtom(deltaScrap);
-  const resetDeltaScrapLoot = useResetAtom(deltaScrapLoot);
-  const resetDeltaStamina = useResetAtom(deltaStamina);
-  const resetDeltaTotalAttackRate = useResetAtom(deltaTotalAttackRate);
-  const resetDeltaTotalDamage = useResetAtom(deltaTotalDamage);
-  const resetDeltaTotalHealthRegenerationRate = useResetAtom(deltaTotalHealthRegenerationRate);
-  const resetDeltaTotalProtection = useResetAtom(deltaTotalProtection);
-  const resetDeltaTotalRecoveryRate = useResetAtom(deltaTotalRecoveryRate);
-  const resetDeltaTotalStaminaRegenerationRate = useResetAtom(deltaTotalStaminaRegenerationRate);
   const resetDodgeChance = useResetAtom(dodgeChance);
   const resetExchangeCoin = useResetAtom(exchangeCoin);
   const resetExchangeScrap = useResetAtom(exchangeScrap);
-  const resetExperience = useResetAtom(experience);
-  const resetExperienceSpent = useResetAtom(experienceSpent);
   const resetGameOver = useResetAtom(gameOver);
   const resetHealth = useResetAtom(health);
   const resetHealthRegenerationRate = useResetAtom(healthRegenerationRate);
@@ -153,19 +115,18 @@ export default function useReset() {
   const resetScrap = useResetAtom(scrap);
   const resetScrapLoot = useResetAtom(scrapLoot);
   const resetShowTrinket = useResetAtom(showTrinket);
-  const resetShowAether = useResetAtom(showAether);
+  const resetShowEssence = useResetAtom(showEssence);
   const resetShowArmor = useResetAtom(showArmor);
   const resetShowAttributes = useResetAtom(showAttributes);
   const resetShowAttributesButton = useResetAtom(showAttributesButton);
   const resetShowBlockChance = useResetAtom(showBlockChance);
-  const resetShowCharacterLevel = useResetAtom(showCharacterLevel);
   const resetShowCoins = useResetAtom(showCoins);
   const resetShowCritical = useResetAtom(showCritical);
   const resetShowDamagePerSecond = useResetAtom(showDamagePerSecond);
   const resetShowDefense = useResetAtom(showDefense);
   const resetShowDodgeChance = useResetAtom(showDodgeChance);
   const resetShowInventoryButton = useResetAtom(showInventoryButton);
-  const resetShowLevelProgress = useResetAtom(showLevelProgress);
+  const resetShowWildernessProgress = useResetAtom(showWildernessProgress);
   const resetShowLoot = useResetAtom(showLoot);
   const resetShowRecovery = useResetAtom(showRecovery);
   const resetShowScrap = useResetAtom(showScrap);
@@ -181,8 +142,8 @@ export default function useReset() {
   const setInitialReserves = useSetAtom(reservesInitial);
 
   return () => {
-    resetAether();
-    resetAetherLoot();
+    resetEssence();
+    resetEssenceLoot();
     resetAttackRateBonus();
     resetCharacterLevel();
     resetCoins();
@@ -195,30 +156,9 @@ export default function useReset() {
     resetCurrentHealthMonster();
     resetCurrentStamina();
     resetDamage();
-    resetDeltaAether();
-    resetDeltaAetherLoot();
-    resetDeltaCharacterLevel();
-    resetDeltaCoins();
-    resetDeltaCoinsLoot();
-    resetDeltaDamagePerSecond();
-    resetDeltaExperience();
-    resetDeltaExperienceSpent();
-    resetDeltaHealth();
-    resetDeltaHealthMonster();
-    resetDeltaScrap();
-    resetDeltaScrapLoot();
-    resetDeltaStamina();
-    resetDeltaTotalAttackRate();
-    resetDeltaTotalDamage();
-    resetDeltaTotalHealthRegenerationRate();
-    resetDeltaTotalProtection();
-    resetDeltaTotalRecoveryRate();
-    resetDeltaTotalStaminaRegenerationRate();
     resetDodgeChance();
     resetExchangeCoin();
     resetExchangeScrap();
-    resetExperience();
-    resetExperienceSpent();
     resetGameOver();
     resetHealth();
     resetHealthRegenerationRate();
@@ -241,19 +181,18 @@ export default function useReset() {
     resetRecoveryRate();
     resetScrap();
     resetScrapLoot();
-    resetShowAether();
+    resetShowEssence();
     resetShowArmor();
     resetShowAttributes();
     resetShowAttributesButton();
     resetShowBlockChance();
-    resetShowCharacterLevel();
     resetShowCoins();
     resetShowCritical();
     resetShowDamagePerSecond();
     resetShowDefense();
     resetShowDodgeChance();
     resetShowInventoryButton();
-    resetShowLevelProgress();
+    resetShowWildernessProgress();
     resetShowLoot();
     resetShowRecovery();
     resetShowScrap();

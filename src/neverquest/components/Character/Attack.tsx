@@ -53,13 +53,13 @@ export default function Attack() {
                 <Table borderless size="sm">
                   <tbody>
                     <tr>
-                      <td className="text-end">Weapon:</td>
+                      <td className="fst-italic text-end">Weapon:</td>
 
                       <td>{formatMilliseconds(weaponValue.rate)}</td>
                     </tr>
 
                     <tr>
-                      <td>{`${attackRateBonusValue.name} attribute:`}</td>
+                      <td className="fst-italic text-end">{`${attackRateBonusValue.name} attribute:`}</td>
 
                       <td>{`-${formatPercentage(getComputedStat(attackRateBonusValue))}`}</td>
                     </tr>

@@ -14,7 +14,6 @@ export enum ArmorClass {
 export interface Attribute {
   base: number;
   canAssign: boolean;
-  cost: number;
   description: string;
   increment: number;
   name: string;
@@ -57,7 +56,7 @@ export enum LocationType {
 }
 
 export enum LootType {
-  Aether,
+  Essence,
   Coins,
   Scrap,
 }

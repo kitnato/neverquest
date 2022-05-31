@@ -9,7 +9,8 @@ import Attributes from "neverquest/components/Attributes";
 import DismissableScreen from "neverquest/components/DismissableScreen";
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/skills.svg";
-import { attributesIncreasable, isAttacking } from "neverquest/state/character";
+import { attributesIncreasable } from "neverquest/state/attributes";
+import { isAttacking } from "neverquest/state/character";
 import { isLevelCompleted } from "neverquest/state/global";
 import { isMonsterEngaged } from "neverquest/state/monster";
 import { showAttributesButton } from "neverquest/state/show";
@@ -49,7 +50,7 @@ export default function AttributesButton() {
           >
             <ImageIcon icon={icon} />
 
-            {attributesIncreasableValue > 0 && (
+            {attributesIncreasableValue && (
               <Badge bg="secondary" className="position-absolute" style={{ top: 12 }}>
                 &#43;
               </Badge>

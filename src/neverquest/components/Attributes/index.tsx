@@ -1,14 +1,17 @@
 import Stack from "react-bootstrap/Stack";
 
 import AttributesList from "neverquest/components/Attributes/AttributesList";
-import ExperienceSpent from "neverquest/components/Character/ExperienceSpent";
+import CharacterLevel from "neverquest/components/Character/CharacterLevel";
+import EssenceAbsorbed from "neverquest/components/Character/EssenceAbsorbed";
 
 export default function Attributes() {
   return (
     <Stack gap={5}>
-      <div className="position-sticky">
-        <ExperienceSpent />
-      </div>
+      <Stack className="position-sticky" direction="horizontal" gap={3}>
+        <CharacterLevel />
+
+        <EssenceAbsorbed />
+      </Stack>
 
       <AttributesList />
     </Stack>

@@ -27,9 +27,9 @@ export default function Inventory() {
 
   return (
     <Stack gap={5}>
-      <Stack className="position-sticky">
+      <div className="position-sticky">
         <Encumbrance />
-      </Stack>
+      </div>
 
       <Stack gap={3}>
         <h6>Equipped</h6>

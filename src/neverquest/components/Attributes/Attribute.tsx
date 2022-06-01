@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Stack from "react-bootstrap/Stack";
@@ -30,19 +31,6 @@ export default function Attribute({ atom }: { atom: PrimitiveAtom<AttributeType>
     return null;
   }
 
-  const onLevelUp = () => {
-    setAttribute((current) => ({
-      ...current,
-      points: current.points + 1,
-    }));
-
-    balanceResources({ essenceDifference: -attributeCostValue });
-    setDeltaEssenceAbsorbed({ color: FloatingTextType.Positive, value: `+${attributeCostValue}` });
-
-    setCharacterLevel((current) => current + 1);
-    setDeltaCharacterLevel({ color: FloatingTextType.Positive, value: "+1" });
-  };
-
   return (
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={placeholderIcon} tooltip={name} />
@@ -52,13 +40,29 @@ export default function Attribute({ atom }: { atom: PrimitiveAtom<AttributeType>
       <span style={{ width: 20 }}>{points}</span>
 
       <OverlayTrigger
-        overlay={<Tooltip>{`Cost: ${attributeCostValue} Essence`}</Tooltip>}
+        overlay={<Tooltip>{`Cost: ${attributeCostValue} essence`}</Tooltip>}
         placement="top"
       >
         <span className="d-inline-block">
           <Button
             disabled={!attributesIncreasableValue}
-            onClick={onLevelUp}
+            onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+              currentTarget.blur();
+
+              setAttribute((current) => ({
+                ...current,
+                points: current.points + 1,
+              }));
+
+              balanceResources({ essenceDifference: -attributeCostValue });
+              setDeltaEssenceAbsorbed({
+                color: FloatingTextType.Positive,
+                value: `+${attributeCostValue}`,
+              });
+
+              setCharacterLevel((current) => current + 1);
+              setDeltaCharacterLevel({ color: FloatingTextType.Positive, value: "+1" });
+            }}
             variant={UIVariant.Outline}
           >
             {attributesIncreasableValue ? <Plus /> : <Clock />}

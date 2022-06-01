@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import { useAtom, useSetAtom } from "jotai";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -8,7 +9,6 @@ import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Coins from "neverquest/components/Resource/Coins";
 import { inventory } from "neverquest/state/inventory";
 import { resourcesBalance } from "neverquest/state/resources";
-import { InventoryProps } from "neverquest/types/props";
 import { UIVariant } from "neverquest/types/ui";
 import { getSellPrice } from "neverquest/utilities/helpers";
 
@@ -17,20 +17,6 @@ export default function SellItems() {
   const [inventoryValue, setInventory] = useAtom(inventory);
 
   const inventoryIDs = Object.getOwnPropertySymbols(inventoryValue);
-
-  const sellItem =
-    ({ id, item }: InventoryProps) =>
-    () => {
-      setInventory((current) => {
-        const newInventoryContents = { ...current };
-
-        delete newInventoryContents[id];
-
-        return newInventoryContents;
-      });
-
-      balanceResources({ coinsDifference: getSellPrice(item) });
-    };
 
   return (
     <Stack gap={3}>
@@ -58,7 +44,22 @@ export default function SellItems() {
                 </Col>
 
                 <Col>
-                  <Button onClick={sellItem({ id, item })} variant={UIVariant.Outline}>
+                  <Button
+                    onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+                      currentTarget.blur();
+
+                      setInventory((current) => {
+                        const newInventoryContents = { ...current };
+
+                        delete newInventoryContents[id];
+
+                        return newInventoryContents;
+                      });
+
+                      balanceResources({ coinsDifference: getSellPrice(item) });
+                    }}
+                    variant={UIVariant.Outline}
+                  >
                     Sell
                   </Button>
                 </Col>

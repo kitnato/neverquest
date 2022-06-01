@@ -1,28 +1,39 @@
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { nanoid } from "nanoid";
 
-import { Equipment } from "neverquest/types/core";
 import useCheckEncumbrance from "neverquest/hooks/useCheckEncumbrance";
+import { hasKnapsack } from "neverquest/state/character";
 import { armor, inventory, itemEquip, shield, trinket, weapon } from "neverquest/state/inventory";
 import { autoEquip } from "neverquest/state/global";
-import { showInventoryButton } from "neverquest/state/show";
-import { NO_ARMOR, NO_SHIELD, NO_TRINKET, NO_WEAPON } from "neverquest/utilities/constants";
+import { Equipment, Item } from "neverquest/types/core";
+import {
+  ITEM_KNAPSACK,
+  NO_ARMOR,
+  NO_SHIELD,
+  NO_TRINKET,
+  NO_WEAPON,
+} from "neverquest/utilities/constants";
 import { isTrinket, isArmor, isShield, isWeapon } from "neverquest/utilities/type-guards";
 
 export default function useAcquireItem() {
   const checkEncumbrance = useCheckEncumbrance();
-  const [showInventoryButtonValue, setShowInventoryButton] = useAtom(showInventoryButton);
   const armorValue = useAtomValue(armor);
   const autoEquipValue = useAtomValue(autoEquip);
   const shieldValue = useAtomValue(shield);
   const trinketValue = useAtomValue(trinket);
   const weaponValue = useAtomValue(weapon);
+  const setHasKnapsack = useSetAtom(hasKnapsack);
   const setInventory = useSetAtom(inventory);
   const equipItem = useSetAtom(itemEquip);
 
-  return ({ item }: { item: Equipment }) => {
+  return ({ item }: { item: Equipment | Item }) => {
     if (!checkEncumbrance({ weight: item.weight })) {
       return false;
+    }
+
+    if (item.name === ITEM_KNAPSACK.name) {
+      setHasKnapsack(true);
+      return true;
     }
 
     const id = Symbol();
@@ -41,10 +52,6 @@ export default function useAcquireItem() {
         (trinketValue === NO_TRINKET && isTrinket(item)))
     ) {
       equipItem(id);
-    }
-
-    if (!showInventoryButtonValue) {
-      setShowInventoryButton(true);
     }
 
     return true;

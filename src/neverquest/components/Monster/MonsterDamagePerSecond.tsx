@@ -2,7 +2,7 @@ import Stack from "react-bootstrap/Stack";
 import { useAtomValue } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import icon from "neverquest/icons/wolverine-claws.svg";
+import icon from "neverquest/icons/heavy-timer.svg";
 import { damagePerSecondMonster } from "neverquest/state/monster";
 import { showDamagePerSecond } from "neverquest/state/show";
 import { AnimationType } from "neverquest/types/ui";

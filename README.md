@@ -392,7 +392,7 @@ Cast spells that remain active until dispelled. Provides buffs and other positiv
 
 ## Attributes
 
-Attributes each provide a direct increasing effect for each rank. Each rank allocation raises the character level by 1.
+Attributes each provide a direct increasing effect for each rank. Each rank allocation raises the character's power level by 1.
 
 [Essence](#-essence) is used to allocate ranks. The cost of allocation is increased for every rank.
 

@@ -42,7 +42,7 @@ export const maximumHealthMonster = atom((get) => {
   const levelValue = get(level);
   const progressValue = get(progress);
 
-  return Math.ceil(levelValue * 2) + Math.floor(progressValue / 2) + 1;
+  return Math.ceil(levelValue * 1.75) + Math.floor(progressValue / 2);
 });
 
 export const monsterLoot = atom((get) => {
@@ -50,8 +50,8 @@ export const monsterLoot = atom((get) => {
   const progressValue = get(progress);
 
   return {
-    essence: Math.floor(progressValue * 1.33 + levelValue * 1.5),
-    scrap: Math.floor(progressValue * 1.25 + levelValue * 2),
+    essence: Math.floor(progressValue * 0.5 + levelValue * 2.5),
+    scrap: Math.floor(progressValue * 1.2 + levelValue * 1.75),
   };
 });
 

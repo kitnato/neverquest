@@ -30,15 +30,30 @@ export default function ResourceDisplay({ isLoot }: { isLoot?: boolean }) {
       {isLoot ? (
         <>
           <Col>
-            <Lootable atom={essenceLoot} Component={Essence} deltaAtom={deltaEssenceLoot} />
+            <Lootable
+              atom={essenceLoot}
+              Component={Essence}
+              deltaAtom={deltaEssenceLoot}
+              tooltip={"Looted essence"}
+            />
           </Col>
 
           <Col>
-            <Lootable atom={scrapLoot} Component={Scrap} deltaAtom={deltaScrapLoot} />
+            <Lootable
+              atom={scrapLoot}
+              Component={Scrap}
+              deltaAtom={deltaScrapLoot}
+              tooltip={"Looted scrap"}
+            />
           </Col>
 
           <Col>
-            <Lootable atom={coinsLoot} Component={Coins} deltaAtom={deltaCoinsLoot} />
+            <Lootable
+              atom={coinsLoot}
+              Component={Coins}
+              deltaAtom={deltaCoinsLoot}
+              tooltip={"Looted coins"}
+            />
           </Col>
         </>
       ) : (

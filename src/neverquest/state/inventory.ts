@@ -88,18 +88,13 @@ export const inventorySize = atomWithReset(3);
 export const encumbrance = atom((get) => {
   const inventoryValue = get(inventory);
 
-  return Object.values(inventoryValue).reduce(
-    (totalEncumbrance, { item: { weight } }) => totalEncumbrance + weight,
+  return Object.getOwnPropertySymbols(inventoryValue).reduce(
+    (totalEncumbrance, id) => totalEncumbrance + inventoryValue[id].item.weight,
     0
   );
 });
 
-export const isInventoryFull = atom((get) => {
-  const encumbranceValue = get(encumbrance);
-  const inventorySizeValue = get(inventorySize);
-
-  return encumbranceValue === inventorySizeValue;
-});
+export const isInventoryFull = atom((get) => get(encumbrance) === get(inventorySize));
 
 // WRITERS
 
@@ -109,6 +104,11 @@ export const itemEquip = atom(null, (get, set, id: symbol) => {
   if (!item) {
     return;
   }
+
+  set(inventory, (current) => ({
+    ...current,
+    [id]: { ...current[id], isEquipped: true },
+  }));
 
   if (isArmor(item)) {
     if (!get(showArmor)) {
@@ -164,11 +164,6 @@ export const itemEquip = atom(null, (get, set, id: symbol) => {
       set(showWeapon, true);
     }
   }
-
-  set(inventory, (current) => ({
-    ...current,
-    [id]: { ...current[id], isEquipped: true },
-  }));
 });
 
 export const itemUnequip = atom(null, (get, set, id: symbol) => {

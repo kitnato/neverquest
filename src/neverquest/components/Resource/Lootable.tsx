@@ -9,10 +9,12 @@ export default function Lootable({
   atom,
   Component,
   deltaAtom,
+  tooltip,
 }: {
   atom: Atom<number>;
   Component: React.ElementType;
   deltaAtom: PrimitiveAtom<DeltaDisplay>;
+  tooltip: string;
 }) {
   const resourceValue = useAtomValue(atom);
 
@@ -22,7 +24,7 @@ export default function Lootable({
 
   return (
     <Stack className={getAnimationClass(AnimationType.FlipInX)} direction="horizontal" gap={3}>
-      <Component value={resourceValue} />
+      <Component tooltip={tooltip} value={resourceValue} />
 
       <FloatingText atom={deltaAtom} />
     </Stack>

@@ -15,7 +15,7 @@ export default function MonsterStagger() {
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip="Staggered" />
+      <ImageIcon icon={icon} tooltip="Staggered duration" />
 
       <MonsterStaggerMeter />
     </Stack>

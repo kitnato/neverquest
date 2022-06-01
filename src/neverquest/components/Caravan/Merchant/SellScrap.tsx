@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
@@ -19,10 +20,6 @@ export default function SellScrap() {
 
   const canSell = scrapValue >= exchangeScrapValue;
 
-  const sellScrap = () => {
-    balanceResources({ coinsDifference: exchangeCoinValue, scrapDifference: -exchangeScrapValue });
-  };
-
   return (
     <Stack direction="horizontal" gap={5}>
       <Stack direction="horizontal" gap={3}>
@@ -39,7 +36,18 @@ export default function SellScrap() {
         trigger={canSell ? [] : ["hover", "focus"]}
       >
         <span className="d-inline-block">
-          <Button disabled={!canSell} onClick={sellScrap} variant={UIVariant.Outline}>
+          <Button
+            disabled={!canSell}
+            onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+              currentTarget.blur();
+
+              balanceResources({
+                coinsDifference: exchangeCoinValue,
+                scrapDifference: -exchangeScrapValue,
+              });
+            }}
+            variant={UIVariant.Outline}
+          >
             Sell
           </Button>
         </span>

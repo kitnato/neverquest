@@ -1,7 +1,13 @@
 import { atom } from "jotai";
 import { atomWithReset } from "jotai/utils";
 
-import { deltaEssence, deltaCoins, deltaScrap, deltaScrapLoot } from "neverquest/state/deltas";
+import {
+  deltaEssence,
+  deltaEssenceLoot,
+  deltaCoins,
+  deltaScrap,
+  deltaScrapLoot,
+} from "neverquest/state/deltas";
 import { isLevelCompleted, progress } from "neverquest/state/global";
 import { monsterLoot } from "neverquest/state/monster";
 import { showEssence, showAttributes, showCoins, showScrap } from "neverquest/state/show";
@@ -35,7 +41,7 @@ export const lootDrop = atom(null, (get, set) => {
 
   if (essence > 0) {
     set(essenceLoot, (current) => current + essence);
-    set(deltaEssence, {
+    set(deltaEssenceLoot, {
       color: FloatingTextType.Positive,
       value: `+${essence}`,
     });

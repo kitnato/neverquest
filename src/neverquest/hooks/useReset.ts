@@ -20,9 +20,11 @@ import {
   exchangeCoin,
   exchangeScrap,
   merchantInventory,
+  merchantInventoryGenerated,
 } from "neverquest/state/caravan";
 import {
   characterLevel,
+  hasKnapsack,
   isAttacking,
   isLooting,
   isRecovering,
@@ -59,7 +61,6 @@ import {
   showDamagePerSecond,
   showDefense,
   showDodgeChance,
-  showInventoryButton,
   showWildernessProgress,
   showLoot,
   showRecovery,
@@ -93,6 +94,7 @@ export default function useReset() {
   const resetExchangeCoin = useResetAtom(exchangeCoin);
   const resetExchangeScrap = useResetAtom(exchangeScrap);
   const resetGameOver = useResetAtom(gameOver);
+  const resetHasKnapsack = useResetAtom(hasKnapsack);
   const resetHealth = useResetAtom(health);
   const resetHealthRegenerationRate = useResetAtom(healthRegenerationRate);
   const resetInventory = useResetAtom(inventory);
@@ -106,6 +108,7 @@ export default function useReset() {
   const resetLootBonus = useResetAtom(lootBonus);
   const resetLootingRate = useResetAtom(lootingRate);
   const resetMerchantInventory = useResetAtom(merchantInventory);
+  const resetMerchantInventoryGenerated = useResetAtom(merchantInventoryGenerated);
   const resetMode = useResetAtom(mode);
   const resetMonsterName = useResetAtom(monsterName);
   const resetMonsterStatusElement = useResetAtom(monsterStatusElement);
@@ -125,7 +128,6 @@ export default function useReset() {
   const resetShowDamagePerSecond = useResetAtom(showDamagePerSecond);
   const resetShowDefense = useResetAtom(showDefense);
   const resetShowDodgeChance = useResetAtom(showDodgeChance);
-  const resetShowInventoryButton = useResetAtom(showInventoryButton);
   const resetShowWildernessProgress = useResetAtom(showWildernessProgress);
   const resetShowLoot = useResetAtom(showLoot);
   const resetShowRecovery = useResetAtom(showRecovery);
@@ -160,6 +162,7 @@ export default function useReset() {
     resetExchangeCoin();
     resetExchangeScrap();
     resetGameOver();
+    resetHasKnapsack();
     resetHealth();
     resetHealthRegenerationRate();
     resetInventory();
@@ -173,6 +176,7 @@ export default function useReset() {
     resetLootBonus();
     resetLootingRate();
     resetMerchantInventory();
+    resetMerchantInventoryGenerated();
     resetMode();
     resetMonsterName();
     resetMonsterStatusElement();
@@ -191,7 +195,6 @@ export default function useReset() {
     resetShowDamagePerSecond();
     resetShowDefense();
     resetShowDodgeChance();
-    resetShowInventoryButton();
     resetShowWildernessProgress();
     resetShowLoot();
     resetShowRecovery();

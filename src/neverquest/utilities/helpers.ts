@@ -37,23 +37,22 @@ export function animateElement({
 
     if (typeof speed === "number") {
       style.setProperty(ANIMATE_DURATION_PROPERTY, formatMilliseconds(speed));
-    } else {
-      // TODO - figure out why animationend triggers immediately after then() again, effectively cancelling any subsequent animation(s).
-      addEventListener(
-        "animationend",
-        (event: AnimationEvent) => {
-          event.stopPropagation();
-          classList.remove(ANIMATED_CLASS, animationName);
-
-          if (animationSpeedClass) {
-            classList.remove(animationSpeedClass);
-          }
-
-          resolve();
-        },
-        { once: true }
-      );
     }
+
+    addEventListener(
+      "animationend",
+      (event: AnimationEvent) => {
+        event.stopPropagation();
+        classList.remove(ANIMATED_CLASS, animationName);
+
+        if (animationSpeedClass) {
+          classList.remove(animationSpeedClass);
+        }
+
+        resolve();
+      },
+      { once: true }
+    );
   });
 }
 

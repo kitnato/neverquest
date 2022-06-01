@@ -12,7 +12,7 @@ export default function CharacterLevel() {
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip="Character level" />
+      <ImageIcon icon={icon} tooltip="Power level" />
 
       <span>{characterLevelValue}</span>
 

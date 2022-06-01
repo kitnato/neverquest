@@ -4,7 +4,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import icon from "neverquest/icons/open-treasure-chest.svg";
+import icon from "neverquest/icons/locked-chest.svg";
 import { isLevelCompleted } from "neverquest/state/global";
 import { hasLooted, resourcesBalance } from "neverquest/state/resources";
 import { AnimationType, UIVariant } from "neverquest/types/ui";

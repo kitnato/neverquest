@@ -48,9 +48,11 @@ export default function MonsterStatus() {
             </Col>
           </Row>
 
-          <MonsterDamage />
+          <Stack direction="horizontal" gap={5}>
+            <MonsterDamage />
 
-          <MonsterDamagePerSecond />
+            <MonsterDamagePerSecond />
+          </Stack>
         </Stack>
       </Card.Body>
     </Card>

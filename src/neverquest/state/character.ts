@@ -8,6 +8,8 @@ import { getTriangularNumber } from "neverquest/utilities/helpers";
 
 export const characterLevel = atomWithReset(0);
 
+export const hasKnapsack = atomWithReset(false);
+
 export const isAttacking = atomWithReset(false);
 
 export const isLooting = atomWithReset(false);

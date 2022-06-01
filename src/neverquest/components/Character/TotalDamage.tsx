@@ -48,7 +48,7 @@ export default function TotalDamage() {
                     <tr>
                       <td className="fst-italic text-end">{`${damageValue.name} attribute:`}</td>
 
-                      <td>{getComputedStat(damageValue)}</td>
+                      <td>{`+${getComputedStat(damageValue)}`}</td>
                     </tr>
                   </tbody>
                 </Table>

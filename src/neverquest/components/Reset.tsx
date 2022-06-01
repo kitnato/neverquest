@@ -5,15 +5,15 @@ import useReset from "neverquest/hooks/useReset";
 import { UIVariant } from "neverquest/types/ui";
 
 export default function Reset({
-  title,
   message,
-  show,
   setHide,
+  show,
+  title,
 }: {
-  title: string;
   message: string;
-  show: boolean;
   setHide: () => void;
+  show: boolean;
+  title: string;
 }) {
   const reset = useReset();
 

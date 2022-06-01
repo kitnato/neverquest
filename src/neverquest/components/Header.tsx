@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -39,7 +39,14 @@ export default function Header() {
               <Github /> Source
             </Button>
 
-            <Button onClick={() => setResetShowing(true)} variant="outline-light">
+            <Button
+              onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+                currentTarget.blur();
+
+                setResetShowing(true);
+              }}
+              variant="outline-light"
+            >
               <ExclamationTriangle /> Reset
             </Button>
 

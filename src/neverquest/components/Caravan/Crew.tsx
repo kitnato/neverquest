@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import { useAtomValue } from "jotai";
 import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
@@ -32,7 +33,14 @@ export default function Crew({
 
       <span>{`"${crewMonologueValue[type]}"`}</span>
 
-      <Button onClick={setActive} variant={UIVariant.Outline}>
+      <Button
+        onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+          currentTarget.blur();
+
+          setActive();
+        }}
+        variant={UIVariant.Outline}
+      >
         {label}
       </Button>
     </Stack>

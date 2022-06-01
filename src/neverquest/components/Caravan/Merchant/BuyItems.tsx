@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -12,7 +13,6 @@ import useAcquireItem from "neverquest/hooks/useAcquireItem";
 import useCheckEncumbrance from "neverquest/hooks/useCheckEncumbrance";
 import { merchantInventory } from "neverquest/state/caravan";
 import { resourcesBalance, coins } from "neverquest/state/resources";
-import { InventoryProps } from "neverquest/types/props";
 import { UIVariant } from "neverquest/types/ui";
 
 export default function BuyItems() {
@@ -23,23 +23,6 @@ export default function BuyItems() {
   const coinsValue = useAtomValue(coins);
 
   const inventoryIDs = Object.getOwnPropertySymbols(merchantInventoryValue);
-
-  const buyItem =
-    ({ id, item }: InventoryProps) =>
-    () => {
-      const itemReceived = acquireItem({ item });
-
-      if (itemReceived) {
-        balanceResources({ coinsDifference: -item.price });
-        setMerchantInventory((current) => {
-          const newMerchantInventory = { ...current };
-
-          delete newMerchantInventory[id];
-
-          return newMerchantInventory;
-        });
-      }
-    };
 
   return (
     <Stack gap={3}>
@@ -80,7 +63,22 @@ export default function BuyItems() {
                     <span className="d-inline-block">
                       <Button
                         disabled={!isPurchasable}
-                        onClick={buyItem({ id, item })}
+                        onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+                          currentTarget.blur();
+
+                          const itemReceived = acquireItem({ item });
+
+                          if (itemReceived) {
+                            balanceResources({ coinsDifference: -item.price });
+                            setMerchantInventory((current) => {
+                              const newMerchantInventory = { ...current };
+
+                              delete newMerchantInventory[id];
+
+                              return newMerchantInventory;
+                            });
+                          }
+                        }}
                         variant={UIVariant.Outline}
                       >
                         Buy

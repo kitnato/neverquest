@@ -2,8 +2,8 @@ import Stack from "react-bootstrap/Stack";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import WeaponName from "neverquest/components/Inventory/Weapon/WeaponName";
-import { Weapon } from "neverquest/types/core";
 import icon from "neverquest/icons/axe-sword.svg";
+import { Weapon } from "neverquest/types/core";
 
 export default function WeaponInventory({ weapon }: { weapon: Weapon }) {
   return (

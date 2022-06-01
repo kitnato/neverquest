@@ -22,8 +22,6 @@ export const showDodgeChance = atomWithReset(false);
 
 export const showEssence = atomWithReset(false);
 
-export const showInventoryButton = atomWithReset(false);
-
 export const showWildernessProgress = atomWithReset(false);
 
 export const showLoot = atomWithReset(false);

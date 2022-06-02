@@ -8,6 +8,7 @@ import Stack from "react-bootstrap/Stack";
 import ConfirmationDialog from "neverquest/components/ConfirmationDialog";
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Coins from "neverquest/components/Resource/Coins";
+import { merchantInventory } from "neverquest/state/caravan";
 import { inventory } from "neverquest/state/inventory";
 import { resourcesBalance } from "neverquest/state/resources";
 import { UIVariant } from "neverquest/types/ui";
@@ -15,6 +16,7 @@ import { getSellPrice } from "neverquest/utilities/helpers";
 
 export default function SellItems() {
   const [inventoryValue, setInventory] = useAtom(inventory);
+  const setMerchantInventory = useSetAtom(merchantInventory);
   const balanceResources = useSetAtom(resourcesBalance);
 
   const [sellConfirmation, setSellConfirmation] = useState<symbol | null>(null);
@@ -22,7 +24,7 @@ export default function SellItems() {
   const inventoryIDs = Object.getOwnPropertySymbols(inventoryValue);
 
   const sellItem = (id: symbol) => {
-    const { item } = inventoryValue[id];
+    const { item, key } = inventoryValue[id];
 
     setInventory((current) => {
       const newInventoryContents = { ...current };
@@ -31,8 +33,11 @@ export default function SellItems() {
 
       return newInventoryContents;
     });
-
     balanceResources({ coinsDifference: getSellPrice(item) });
+    setMerchantInventory((current) => ({
+      ...current,
+      [Symbol()]: { isReturned: true, item, key },
+    }));
   };
 
   return (
@@ -84,7 +89,10 @@ export default function SellItems() {
             <ConfirmationDialog
               confirmationLabel="Sell"
               onConfirm={() => sellItem(sellConfirmation)}
-              message={`This will remove ${inventoryValue[sellConfirmation].item.name}.`}
+              message={`
+                You can buy it back at the original purchase price
+                but it will be gone forever once you leave the caravan.
+              `}
               setHide={() => setSellConfirmation(null)}
               show={sellConfirmation !== null}
               title="Sell equipped item?"

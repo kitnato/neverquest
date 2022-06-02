@@ -22,9 +22,9 @@ export default function Merchant() {
         <SellScrap />
       </Stack>
 
-      <SellItems />
-
       <BuyItems />
+
+      <SellItems />
     </Stack>
   );
 }

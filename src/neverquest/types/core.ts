@@ -32,12 +32,20 @@ export enum CrewType {
   Wizard,
 }
 
+interface InventoryBase {
+  item: Equipment | Item;
+  key: string;
+}
+
 export interface Inventory {
-  [id: symbol]: {
-    // Optional, because while in Merchant's inventory, it can't be equipped.
-    isEquipped?: boolean;
-    item: Equipment | Item;
-    key: string;
+  [id: symbol]: InventoryBase & {
+    isEquipped: boolean;
+  };
+}
+
+export interface InventoryMerchant {
+  [id: symbol]: InventoryBase & {
+    isReturned: boolean;
   };
 }
 
@@ -46,7 +54,7 @@ export type Item = ItemBase & {
   icon: string;
 };
 
-export interface ItemBase {
+interface ItemBase {
   name: string;
   price: number;
   weight: number;

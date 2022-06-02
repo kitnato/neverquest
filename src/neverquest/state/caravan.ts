@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 
 import { AffixTag, ShieldType, WeaponType } from "locra/types";
 import { level, nsfw } from "neverquest/state/global";
-import { ArmorClass, CrewType, Inventory, WeaponClass } from "neverquest/types/core";
+import { ArmorClass, CrewType, InventoryMerchant, WeaponClass } from "neverquest/types/core";
 import { generateArmor, generateShield, generateWeapon } from "neverquest/utilities/generators";
 import { ITEM_KNAPSACK } from "neverquest/utilities/constants";
 
@@ -39,14 +39,14 @@ export const exchangeCoin = atomWithReset(1);
 
 export const exchangeScrap = atomWithReset(3);
 
-export const merchantInventory = atomWithReset<Inventory>({});
+export const merchantInventory = atomWithReset<InventoryMerchant>({});
 
 export const merchantInventoryGenerated = atomWithReset(0);
 
 // WRITERS
 
 export const merchantInventoryGeneration = atom(null, (get, set) => {
-  const newInventory: Inventory = {};
+  const newInventory = get(merchantInventory);
 
   const levelValue = get(level);
   const nsfwValue = get(nsfw);
@@ -55,9 +55,15 @@ export const merchantInventoryGeneration = atom(null, (get, set) => {
     return;
   }
 
+  // Remove all previously returned items, so they no longer appear under buy back.
+  Object.getOwnPropertySymbols(newInventory)
+    .filter((id) => newInventory[id].isReturned)
+    .forEach((id) => delete newInventory[id]);
+
   switch (levelValue) {
     case 1:
       newInventory[Symbol()] = {
+        isReturned: false,
         item: generateWeapon({
           hasPrefix: true,
           isNSFW: nsfwValue,
@@ -71,6 +77,7 @@ export const merchantInventoryGeneration = atom(null, (get, set) => {
       break;
     case 2:
       newInventory[Symbol()] = {
+        isReturned: false,
         item: generateArmor({
           armorClass: ArmorClass.Hide,
           hasPrefix: true,
@@ -83,6 +90,7 @@ export const merchantInventoryGeneration = atom(null, (get, set) => {
       break;
     case 3:
       newInventory[Symbol()] = {
+        isReturned: false,
         item: generateShield({
           hasPrefix: true,
           isNSFW: nsfwValue,
@@ -95,15 +103,13 @@ export const merchantInventoryGeneration = atom(null, (get, set) => {
       break;
     case 4:
       newInventory[Symbol()] = {
+        isReturned: false,
         item: ITEM_KNAPSACK,
         key: nanoid(),
       };
       break;
   }
 
-  set(merchantInventory, (current) => ({
-    ...current,
-    ...newInventory,
-  }));
+  set(merchantInventory, { ...newInventory });
   set(merchantInventoryGenerated, levelValue);
 });

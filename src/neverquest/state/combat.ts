@@ -96,11 +96,13 @@ export const offense = atom(null, async (get, set) => {
       monsterHealth = 0;
     }
 
-    set(currentStamina, (current) => current - staminaCost);
-    set(deltaStamina, {
-      color: FloatingTextType.Negative,
-      value: `${-staminaCost}`,
-    });
+    if (staminaCost > 0) {
+      set(currentStamina, (current) => current - staminaCost);
+      set(deltaStamina, {
+        color: FloatingTextType.Negative,
+        value: `${-staminaCost}`,
+      });
+    }
 
     set(currentHealthMonster, monsterHealth);
     set(deltaHealthMonster, {

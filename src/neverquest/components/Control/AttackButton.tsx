@@ -12,6 +12,7 @@ import retreatIcon from "neverquest/icons/return-arrow.svg";
 import { attributesIncreasable } from "neverquest/state/attributes";
 import { isAttacking } from "neverquest/state/character";
 import { isLevelCompleted } from "neverquest/state/global";
+import { isMonsterEngaged } from "neverquest/state/monster";
 import { showWildernessProgress } from "neverquest/state/show";
 import { AnimationType, UIVariant } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
@@ -22,10 +23,11 @@ export default function AttackButton() {
     useAtom(showWildernessProgress);
   const attributesIncreasableValue = useAtomValue(attributesIncreasable);
   const isLevelCompletedValue = useAtomValue(isLevelCompleted);
+  const isMonsterEngagedValue = useAtomValue(isMonsterEngaged);
 
   const [showAttackConfirmation, setShowAttackConfirmation] = useState(false);
 
-  const attack = () => {
+  const toggleAttack = () => {
     setAttacking((current) => !current);
 
     if (!showWildernessProgressValue) {
@@ -65,10 +67,10 @@ export default function AttackButton() {
             onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
               currentTarget.blur();
 
-              if (attributesIncreasableValue) {
+              if (attributesIncreasableValue && !isMonsterEngagedValue) {
                 setShowAttackConfirmation(true);
               } else {
-                attack();
+                toggleAttack();
               }
             }}
             variant={UIVariant.Outline}
@@ -80,11 +82,11 @@ export default function AttackButton() {
 
       <ConfirmationDialog
         confirmationLabel="Attack"
-        onConfirm={attack}
-        message="You will have to kill all monsters until you'll next be able to increase your attributes."
+        onConfirm={toggleAttack}
+        message="If you attack before increasing your attributes, you will have to kill all monsters before you get another chance."
         setHide={() => setShowAttackConfirmation(false)}
         show={showAttackConfirmation}
-        title="Unspent attribute points"
+        title="Unspent attribute points!"
       />
     </>
   );

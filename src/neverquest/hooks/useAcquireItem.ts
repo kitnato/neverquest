@@ -41,7 +41,7 @@ export default function useAcquireItem() {
 
     setInventory((current) => ({
       ...current,
-      [id]: { item, key },
+      [id]: { isEquipped: false, item, key },
     }));
 
     if (

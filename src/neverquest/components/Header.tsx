@@ -50,16 +50,16 @@ export default function Header() {
               }}
               variant="outline-light"
             >
-              <ExclamationTriangle /> Reset
+              <ExclamationTriangle /> Restart
             </Button>
 
             <ConfirmationDialog
-              confirmationLabel="Reset"
+              confirmationLabel="Restart"
               onConfirm={reset}
               message="This will reset all progress and restart from the beginning."
               setHide={() => setResetShowing(false)}
               show={isResetShowing}
-              title="Reset the game?"
+              title="Start a new quest?"
             />
           </Stack>
         </Nav>

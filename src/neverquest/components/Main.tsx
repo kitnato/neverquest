@@ -55,7 +55,7 @@ export default function Main() {
       </Row>
 
       <ConfirmationDialog
-        confirmationLabel="Reset"
+        confirmationLabel="Restart"
         onConfirm={reset}
         message="Start a new quest?"
         setHide={() => setShowGameOver(false)}

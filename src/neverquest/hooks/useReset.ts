@@ -33,7 +33,7 @@ import {
   statusElement,
 } from "neverquest/state/character";
 import { gameOver, level, mode, progress } from "neverquest/state/global";
-import { inventory, inventorySize } from "neverquest/state/inventory";
+import { inventory, encumbranceMaximum } from "neverquest/state/inventory";
 import {
   essence,
   essenceLoot,
@@ -98,7 +98,7 @@ export default function useReset() {
   const resetHealth = useResetAtom(health);
   const resetHealthRegenerationRate = useResetAtom(healthRegenerationRate);
   const resetInventory = useResetAtom(inventory);
-  const resetInventorySize = useResetAtom(inventorySize);
+  const resetEncumbranceMaximum = useResetAtom(encumbranceMaximum);
   const resetIsAttacking = useResetAtom(isAttacking);
   const resetIsLooting = useResetAtom(isLooting);
   const resetIsMonsterEngaged = useResetAtom(isMonsterEngaged);
@@ -166,7 +166,7 @@ export default function useReset() {
     resetHealth();
     resetHealthRegenerationRate();
     resetInventory();
-    resetInventorySize();
+    resetEncumbranceMaximum();
     resetIsAttacking();
     resetIsLooting();
     resetIsMonsterEngaged();

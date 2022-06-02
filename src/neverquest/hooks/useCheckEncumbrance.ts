@@ -1,13 +1,13 @@
 import { useAtomValue } from "jotai";
 
-import { encumbrance, inventorySize } from "neverquest/state/inventory";
+import { encumbrance, encumbranceMaximum } from "neverquest/state/inventory";
 
 export default function useCheckEncumbrance() {
   const encumbranceValue = useAtomValue(encumbrance);
-  const inventorySizeValue = useAtomValue(inventorySize);
+  const encumbranceMaximumValue = useAtomValue(encumbranceMaximum);
 
   return ({ weight }: { weight: number }) => {
-    if (encumbranceValue + weight > inventorySizeValue) {
+    if (encumbranceValue + weight > encumbranceMaximumValue) {
       return false;
     }
 

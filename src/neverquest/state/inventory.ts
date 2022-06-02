@@ -19,6 +19,12 @@ import { isArmor, isShield, isTrinket, isWeapon } from "neverquest/utilities/typ
 
 // PRIMITIVES
 
+export const encumbranceMaximum = atomWithReset(3);
+
+export const inventory = atomWithReset<Inventory>({});
+
+// READERS
+
 export const armor = atom<Armor>((get) => {
   const currentInventory = get(inventory);
   const equippedArmorID = Object.getOwnPropertySymbols(currentInventory).filter((id) => {
@@ -33,6 +39,17 @@ export const armor = atom<Armor>((get) => {
 
   return NO_ARMOR;
 });
+
+export const encumbrance = atom((get) => {
+  const inventoryValue = get(inventory);
+
+  return Object.getOwnPropertySymbols(inventoryValue).reduce(
+    (totalEncumbrance, id) => totalEncumbrance + inventoryValue[id].item.weight,
+    0
+  );
+});
+
+export const isInventoryFull = atom((get) => get(encumbrance) === get(encumbranceMaximum));
 
 export const shield = atom<Shield>((get) => {
   const currentInventory = get(inventory);
@@ -78,23 +95,6 @@ export const weapon = atom<Weapon>((get) => {
 
   return NO_WEAPON;
 });
-
-export const inventory = atomWithReset<Inventory>({});
-
-export const inventorySize = atomWithReset(3);
-
-// READERS
-
-export const encumbrance = atom((get) => {
-  const inventoryValue = get(inventory);
-
-  return Object.getOwnPropertySymbols(inventoryValue).reduce(
-    (totalEncumbrance, id) => totalEncumbrance + inventoryValue[id].item.weight,
-    0
-  );
-});
-
-export const isInventoryFull = atom((get) => get(encumbrance) === get(inventorySize));
 
 // WRITERS
 

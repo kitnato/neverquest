@@ -25,6 +25,8 @@ export default function AttributesButton() {
   const [showAttributesButtonValue, setShowAttributesButton] = useAtom(showAttributesButton);
   const [isScreenShowing, setScreenShowing] = useState(false);
 
+  const isDisabled = isAttackingValue || isMonsterEngagedValue;
+
   useEffect(() => {
     if (!showAttributesButtonValue && isLevelCompletedValue) {
       setShowAttributesButton(true);
@@ -40,8 +42,12 @@ export default function AttributesButton() {
       <OverlayTrigger overlay={<Tooltip>Attributes</Tooltip>} placement="top">
         <span className={`${getAnimationClass(AnimationType.FlipInX)} d-inline-block`}>
           <Button
-            disabled={isAttackingValue || isMonsterEngagedValue}
-            className="position-relative"
+            disabled={isDisabled}
+            className={`position-relative${
+              attributesIncreasableValue && !isDisabled
+                ? ` ${getAnimationClass(AnimationType.Pulse, true)}`
+                : ""
+            }`}
             onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
               currentTarget.blur();
               setScreenShowing(true);

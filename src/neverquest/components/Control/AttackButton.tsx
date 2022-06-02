@@ -1,13 +1,15 @@
-import { MouseEvent, useEffect } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { useAtomValue, useAtom } from "jotai";
 
+import ConfirmationDialog from "neverquest/components/ConfirmationDialog";
 import ImageIcon from "neverquest/components/ImageIcon";
 import attackIcon from "neverquest/icons/tron-arrow.svg";
 import restingIcon from "neverquest/icons/tired-eye.svg";
 import retreatIcon from "neverquest/icons/return-arrow.svg";
+import { attributesIncreasable } from "neverquest/state/attributes";
 import { isAttacking } from "neverquest/state/character";
 import { isLevelCompleted } from "neverquest/state/global";
 import { showWildernessProgress } from "neverquest/state/show";
@@ -18,7 +20,18 @@ export default function AttackButton() {
   const [isAttackingValue, setAttacking] = useAtom(isAttacking);
   const [showWildernessProgressValue, setShowWildernessProgressValue] =
     useAtom(showWildernessProgress);
+  const attributesIncreasableValue = useAtomValue(attributesIncreasable);
   const isLevelCompletedValue = useAtomValue(isLevelCompleted);
+
+  const [showAttackConfirmation, setShowAttackConfirmation] = useState(false);
+
+  const attack = () => {
+    setAttacking((current) => !current);
+
+    if (!showWildernessProgressValue) {
+      setShowWildernessProgressValue(true);
+    }
+  };
 
   useEffect(() => {
     if (isAttackingValue && isLevelCompletedValue) {
@@ -36,31 +49,43 @@ export default function AttackButton() {
     }
 
     return {
-      animation: getAnimationClass(AnimationType.Pulse, true),
+      animation: attributesIncreasableValue ? "" : getAnimationClass(AnimationType.Pulse, true),
       icon: attackIcon,
       tooltip: "Attack",
     };
   })();
 
   return (
-    <OverlayTrigger overlay={<Tooltip>{tooltip}</Tooltip>} placement="top">
-      <span className="d-inline-block">
-        <Button
-          className={animation}
-          disabled={isLevelCompletedValue}
-          onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-            currentTarget.blur();
-            setAttacking((current) => !current);
+    <>
+      <OverlayTrigger overlay={<Tooltip>{tooltip}</Tooltip>} placement="top">
+        <span className="d-inline-block">
+          <Button
+            className={animation}
+            disabled={isLevelCompletedValue}
+            onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+              currentTarget.blur();
 
-            if (!showWildernessProgressValue) {
-              setShowWildernessProgressValue(true);
-            }
-          }}
-          variant={UIVariant.Outline}
-        >
-          <ImageIcon icon={icon} />
-        </Button>
-      </span>
-    </OverlayTrigger>
+              if (attributesIncreasableValue) {
+                setShowAttackConfirmation(true);
+              } else {
+                attack();
+              }
+            }}
+            variant={UIVariant.Outline}
+          >
+            <ImageIcon icon={icon} />
+          </Button>
+        </span>
+      </OverlayTrigger>
+
+      <ConfirmationDialog
+        confirmationLabel="Attack"
+        onConfirm={attack}
+        message="You will have to kill all monsters until you'll next be able to increase your attributes."
+        setHide={() => setShowAttackConfirmation(false)}
+        show={showAttackConfirmation}
+        title="Unspent attribute points"
+      />
+    </>
   );
 }

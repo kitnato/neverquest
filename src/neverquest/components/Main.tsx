@@ -18,7 +18,7 @@ export default function Main() {
   const gameOverValue = useAtomValue(gameOver);
   const initializeReserves = useSetAtom(reservesInitial);
 
-  const [isGameOverShowing, setGameOverShowing] = useState(true);
+  const [showGameOver, setShowGameOver] = useState(true);
 
   const reset = useReset();
 
@@ -57,9 +57,9 @@ export default function Main() {
       <ConfirmationDialog
         confirmationLabel="Reset"
         onConfirm={reset}
-        message="Try again?"
-        setHide={() => setGameOverShowing(false)}
-        show={isGameOverShowing && gameOverValue}
+        message="Start a new quest?"
+        setHide={() => setShowGameOver(false)}
+        show={showGameOver && gameOverValue}
         title="You are dead."
       />
     </Stack>

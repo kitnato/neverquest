@@ -8,11 +8,14 @@ import Stack from "react-bootstrap/Stack";
 import { ExclamationTriangle, Github } from "react-bootstrap-icons";
 
 import About from "neverquest/components/About";
-import Reset from "neverquest/components/Reset";
+import ConfirmationDialog from "neverquest/components/ConfirmationDialog";
 import Settings from "neverquest/components/Settings";
+import useReset from "neverquest/hooks/useReset";
 
 export default function Header() {
   const [isResetShowing, setResetShowing] = useState(false);
+
+  const reset = useReset();
 
   return (
     <Navbar bg="dark" collapseOnSelect className="mb-4" expand="lg" variant="dark">
@@ -50,10 +53,12 @@ export default function Header() {
               <ExclamationTriangle /> Reset
             </Button>
 
-            <Reset
-              message="This will wipe all data and restart from the beginning."
-              show={isResetShowing}
+            <ConfirmationDialog
+              confirmationLabel="Reset"
+              onConfirm={reset}
+              message="This will reset all progress and restart from the beginning."
               setHide={() => setResetShowing(false)}
+              show={isResetShowing}
               title="Reset the game?"
             />
           </Stack>

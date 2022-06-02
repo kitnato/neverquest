@@ -1,24 +1,25 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-import useReset from "neverquest/hooks/useReset";
 import { UIVariant } from "neverquest/types/ui";
 
-export default function Reset({
+export default function ConfirmationDialog({
+  confirmationLabel,
+  onConfirm,
   message,
   setHide,
   show,
   title,
 }: {
+  confirmationLabel: string;
+  onConfirm: () => void;
   message: string;
   setHide: () => void;
   show: boolean;
   title: string;
 }) {
-  const reset = useReset();
-
   return (
-    <Modal show={show} onHide={setHide}>
+    <Modal backdrop="static" onHide={setHide} show={show}>
       <Modal.Header closeButton>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
@@ -28,12 +29,12 @@ export default function Reset({
       <Modal.Footer>
         <Button
           onClick={() => {
-            reset();
+            onConfirm();
             setHide();
           }}
           variant={UIVariant.Outline}
         >
-          Reset
+          {confirmationLabel}
         </Button>
       </Modal.Footer>
     </Modal>

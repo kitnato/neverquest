@@ -5,18 +5,22 @@ import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
 
 import Character from "neverquest/components/Character";
+import ConfirmationDialog from "neverquest/components/ConfirmationDialog";
 import Control from "neverquest/components/Control";
 import Encounter from "neverquest/components/Encounter";
 import Location from "neverquest/components/Location";
-import Reset from "neverquest/components/Reset";
 import WildernessProgress from "neverquest/components/Wilderness/WildernessProgress";
+import useReset from "neverquest/hooks/useReset";
 import { gameOver } from "neverquest/state/global";
 import { reservesInitial } from "neverquest/state/reserves";
 
 export default function Main() {
   const gameOverValue = useAtomValue(gameOver);
-  const [isGameOverShowing, setGameOverShowing] = useState(true);
   const initializeReserves = useSetAtom(reservesInitial);
+
+  const [isGameOverShowing, setGameOverShowing] = useState(true);
+
+  const reset = useReset();
 
   useEffect(() => {
     initializeReserves();
@@ -50,7 +54,9 @@ export default function Main() {
         </Col>
       </Row>
 
-      <Reset
+      <ConfirmationDialog
+        confirmationLabel="Reset"
+        onConfirm={reset}
         message="Try again?"
         setHide={() => setGameOverShowing(false)}
         show={isGameOverShowing && gameOverValue}

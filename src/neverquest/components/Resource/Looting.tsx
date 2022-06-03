@@ -5,7 +5,7 @@ import ImageIcon from "neverquest/components/ImageIcon";
 import LootingMeter from "neverquest/components/Resource/LootingMeter";
 import icon from "neverquest/icons/vulture.svg";
 import { isLooting } from "neverquest/state/character";
-import { progress } from "neverquest/state/global";
+import { progress } from "neverquest/state/encounter";
 import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 

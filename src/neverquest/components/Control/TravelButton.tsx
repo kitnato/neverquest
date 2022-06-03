@@ -6,7 +6,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/journey.svg";
-import { isWilderness, level, location } from "neverquest/state/global";
+import { isWilderness, level, location } from "neverquest/state/encounter";
 import { hasLooted } from "neverquest/state/resources";
 import { AnimationType, UIVariant } from "neverquest/types/ui";
 import { UNKNOWN } from "neverquest/utilities/constants";
@@ -39,6 +39,7 @@ export default function TravelButton() {
         className={isWildernessValue ? getAnimationClass(AnimationType.Pulse, true) : ""}
         onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
           currentTarget.blur();
+
           switchLocation();
         }}
         variant={UIVariant.Outline}

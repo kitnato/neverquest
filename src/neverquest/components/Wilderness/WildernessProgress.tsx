@@ -5,7 +5,7 @@ import ImageIcon from "neverquest/components/ImageIcon";
 import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 import levelIcon from "neverquest/icons/flying-flag.svg";
 import progressIcon from "neverquest/icons/stairs.svg";
-import { isWilderness, level, progress, progressMax } from "neverquest/state/global";
+import { isWilderness, level, progress, progressMax } from "neverquest/state/encounter";
 import { showWildernessProgress } from "neverquest/state/show";
 import { AnimationType, OverlayPlacement, UIVariant } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";

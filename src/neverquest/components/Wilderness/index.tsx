@@ -5,7 +5,7 @@ import Stack from "react-bootstrap/Stack";
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/crossed-bones.svg";
 import Monster from "neverquest/components/Monster";
-import { isLevelCompleted } from "neverquest/state/global";
+import { isLevelCompleted } from "neverquest/state/encounter";
 import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 

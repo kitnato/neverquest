@@ -525,7 +525,11 @@ Default: off. Toggles DPS information for the character, equipment and monster.
 
 ### Auto-equip new items
 
-Default: on. Toggles the automatic equipping of weapons, armor, shields and potions once they are acquired.
+Default: on. Toggles the automatic equipping of weapons, armor, shields and potions once they are acquired. Cannot be set to off until the [knapsack](#-knapsack) is acquired.
+
+### Low health warning
+
+Default: on. Toggles a popover warning to prompt a retreat when the character's health drops below 33% of its maximum.
 
 ### Show all elements
 

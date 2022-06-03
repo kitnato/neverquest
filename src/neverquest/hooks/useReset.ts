@@ -32,7 +32,8 @@ import {
   name,
   statusElement,
 } from "neverquest/state/character";
-import { gameOver, level, mode, progress } from "neverquest/state/global";
+import { level, mode, progress } from "neverquest/state/encounter";
+import { gameOver } from "neverquest/state/global";
 import { inventory, encumbranceMaximum } from "neverquest/state/inventory";
 import {
   essence,
@@ -63,6 +64,7 @@ import {
   showDodgeChance,
   showWildernessProgress,
   showLoot,
+  showLowHealthWarning,
   showRecovery,
   showScrap,
   showShield,
@@ -107,6 +109,7 @@ export default function useReset() {
   const resetLevel = useResetAtom(level);
   const resetLootBonus = useResetAtom(lootBonus);
   const resetLootingRate = useResetAtom(lootingRate);
+  const resetShowLowHealthWarning = useResetAtom(showLowHealthWarning);
   const resetMerchantInventory = useResetAtom(merchantInventory);
   const resetMerchantInventoryGenerated = useResetAtom(merchantInventoryGenerated);
   const resetMode = useResetAtom(mode);
@@ -197,6 +200,7 @@ export default function useReset() {
     resetShowDodgeChance();
     resetShowWildernessProgress();
     resetShowLoot();
+    resetShowLowHealthWarning();
     resetShowRecovery();
     resetShowScrap();
     resetShowShield();

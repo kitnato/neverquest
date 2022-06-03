@@ -4,7 +4,8 @@ import { atomWithReset } from "jotai/utils";
 import LOCRA from "locra";
 import { CreatureType } from "locra/types";
 import { deltaHealthMonster } from "neverquest/state/deltas";
-import { level, nsfw, progress } from "neverquest/state/global";
+import { level, progress } from "neverquest/state/encounter";
+import { nsfw } from "neverquest/state/global";
 import { FloatingTextType } from "neverquest/types/ui";
 import { getDamagePerSecond } from "neverquest/utilities/helpers";
 

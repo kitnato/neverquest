@@ -1,6 +1,9 @@
 import { MouseEvent, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
+import PopoverBody from "react-bootstrap/PopoverBody";
+import PopoverHeader from "react-bootstrap/PopoverHeader";
 import Tooltip from "react-bootstrap/Tooltip";
 import { useAtomValue, useAtom } from "jotai";
 
@@ -11,9 +14,10 @@ import restingIcon from "neverquest/icons/tired-eye.svg";
 import retreatIcon from "neverquest/icons/return-arrow.svg";
 import { attributesIncreasable } from "neverquest/state/attributes";
 import { isAttacking } from "neverquest/state/character";
-import { isLevelCompleted } from "neverquest/state/global";
+import { isLevelCompleted } from "neverquest/state/encounter";
 import { isMonsterEngaged } from "neverquest/state/monster";
-import { showWildernessProgress } from "neverquest/state/show";
+import { isHealthLow } from "neverquest/state/reserves";
+import { showLowHealthWarning, showWildernessProgress } from "neverquest/state/show";
 import { AnimationType, UIVariant } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
@@ -22,10 +26,15 @@ export default function AttackButton() {
   const [showWildernessProgressValue, setShowWildernessProgressValue] =
     useAtom(showWildernessProgress);
   const attributesIncreasableValue = useAtomValue(attributesIncreasable);
+  const isHealthLowValue = useAtomValue(isHealthLow);
   const isLevelCompletedValue = useAtomValue(isLevelCompleted);
   const isMonsterEngagedValue = useAtomValue(isMonsterEngaged);
+  const showLowHealthWarningValue = useAtomValue(showLowHealthWarning);
 
   const [showAttackConfirmation, setShowAttackConfirmation] = useState(false);
+
+  const pulseAnimation = getAnimationClass(AnimationType.Pulse, true);
+  const showWarning = isAttackingValue && showLowHealthWarningValue && isHealthLowValue;
 
   const toggleAttack = () => {
     setAttacking((current) => !current);
@@ -47,11 +56,15 @@ export default function AttackButton() {
     }
 
     if (isAttackingValue) {
-      return { animation: "", icon: retreatIcon, tooltip: "Retreat" };
+      return {
+        animation: showWarning ? pulseAnimation : "",
+        icon: retreatIcon,
+        tooltip: "Retreat",
+      };
     }
 
     return {
-      animation: attributesIncreasableValue ? "" : getAnimationClass(AnimationType.Pulse, true),
+      animation: attributesIncreasableValue ? "" : pulseAnimation,
       icon: attackIcon,
       tooltip: "Attack",
     };
@@ -59,7 +72,23 @@ export default function AttackButton() {
 
   return (
     <>
-      <OverlayTrigger overlay={<Tooltip>{tooltip}</Tooltip>} placement="top">
+      <OverlayTrigger
+        overlay={
+          showWarning ? (
+            <Popover>
+              <PopoverHeader>
+                <strong>Low health</strong>
+              </PopoverHeader>
+
+              <PopoverBody>Retreat now!</PopoverBody>
+            </Popover>
+          ) : (
+            <Tooltip>{tooltip}</Tooltip>
+          )
+        }
+        placement="top"
+        show={showWarning || undefined}
+      >
         <span className="d-inline-block">
           <Button
             className={animation}

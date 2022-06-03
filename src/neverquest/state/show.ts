@@ -26,6 +26,8 @@ export const showWildernessProgress = atomWithReset(false);
 
 export const showLoot = atomWithReset(false);
 
+export const showLowHealthWarning = atomWithReset(true);
+
 export const showRecovery = atomWithReset(false);
 
 export const showScrap = atomWithReset(false);

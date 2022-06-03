@@ -8,7 +8,7 @@ import {
   deltaScrap,
   deltaScrapLoot,
 } from "neverquest/state/deltas";
-import { isLevelCompleted, progress } from "neverquest/state/global";
+import { isLevelCompleted, progress } from "neverquest/state/encounter";
 import { monsterLoot } from "neverquest/state/monster";
 import { showEssence, showAttributes, showCoins, showScrap } from "neverquest/state/show";
 import { FloatingTextType } from "neverquest/types/ui";

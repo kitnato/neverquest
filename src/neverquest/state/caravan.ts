@@ -3,7 +3,8 @@ import { atomWithReset } from "jotai/utils";
 import { nanoid } from "nanoid";
 
 import { AffixTag, ShieldType, WeaponType } from "locra/types";
-import { level, nsfw } from "neverquest/state/global";
+import { level } from "neverquest/state/encounter";
+import { nsfw } from "neverquest/state/global";
 import { ArmorClass, CrewType, InventoryMerchant, WeaponClass } from "neverquest/types/core";
 import { generateArmor, generateShield, generateWeapon } from "neverquest/utilities/generators";
 import { ITEM_KNAPSACK } from "neverquest/utilities/constants";

@@ -12,33 +12,17 @@ export const currentStamina = atomWithReset(0);
 
 // READERS
 
-export const canAttack = atom((get) => {
-  const currentStaminaValue = get(currentStamina);
-  const { staminaCost } = get(weapon);
+export const canAttack = atom((get) => get(currentStamina) >= get(weapon).staminaCost);
 
-  return currentStaminaValue >= staminaCost;
-});
+export const canBlock = atom((get) => get(currentStamina) >= get(shield).staminaCost);
 
-export const canBlock = atom((get) => {
-  const currentStaminaValue = get(currentStamina);
-  const { staminaCost } = get(shield);
+export const isHealthLow = atom(
+  (get) => get(currentHealth) <= Math.ceil(get(maximumHealth) * 0.33)
+);
 
-  return currentStaminaValue >= staminaCost;
-});
+export const isHealthMaxedOut = atom((get) => get(currentHealth) >= get(maximumHealth));
 
-export const isHealthMaxedOut = atom((get) => {
-  const currentHealthValue = get(currentHealth);
-  const maximumHealthValue = get(maximumHealth);
-
-  return currentHealthValue >= maximumHealthValue;
-});
-
-export const isStaminaMaxedOut = atom((get) => {
-  const currentStaminaValue = get(currentStamina);
-  const maximumStaminaValue = get(maximumStamina);
-
-  return currentStaminaValue >= maximumStaminaValue;
-});
+export const isStaminaMaxedOut = atom((get) => get(currentStamina) >= get(maximumStamina));
 
 export const maximumHealth = atom((get) => {
   const healthValue = get(health);

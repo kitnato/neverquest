@@ -11,7 +11,7 @@ import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/skills.svg";
 import { attributesIncreasable } from "neverquest/state/attributes";
 import { isAttacking } from "neverquest/state/character";
-import { isLevelCompleted } from "neverquest/state/global";
+import { isLevelCompleted } from "neverquest/state/encounter";
 import { isMonsterEngaged } from "neverquest/state/monster";
 import { showAttributesButton } from "neverquest/state/show";
 import { AnimationType, UIVariant } from "neverquest/types/ui";
@@ -50,6 +50,7 @@ export default function AttributesButton() {
             }`}
             onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
               currentTarget.blur();
+
               setScreenShowing(true);
             }}
             variant={UIVariant.Outline}

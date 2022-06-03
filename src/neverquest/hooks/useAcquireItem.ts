@@ -3,8 +3,8 @@ import { nanoid } from "nanoid";
 
 import useCheckEncumbrance from "neverquest/hooks/useCheckEncumbrance";
 import { hasKnapsack } from "neverquest/state/character";
-import { armor, inventory, itemEquip, shield, trinket, weapon } from "neverquest/state/inventory";
 import { autoEquip } from "neverquest/state/global";
+import { armor, inventory, itemEquip, shield, trinket, weapon } from "neverquest/state/inventory";
 import { Equipment, Item } from "neverquest/types/core";
 import {
   ITEM_KNAPSACK,

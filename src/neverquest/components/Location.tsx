@@ -3,7 +3,7 @@ import Stack from "react-bootstrap/Stack";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/compass.svg";
-import { location } from "neverquest/state/global";
+import { location } from "neverquest/state/encounter";
 import { OverlayPlacement } from "neverquest/types/ui";
 
 export default function Location() {

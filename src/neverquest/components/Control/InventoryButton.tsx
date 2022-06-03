@@ -29,6 +29,7 @@ export default function InventoryButton() {
             disabled={isAttackingValue}
             onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
               currentTarget.blur();
+
               setScreenShowing(true);
             }}
             variant={UIVariant.Outline}

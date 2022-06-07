@@ -10,7 +10,7 @@ import { hasKnapsack, isAttacking } from "neverquest/state/character";
 import { AnimationType, UIVariant } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
-export default function InventoryButton() {
+export default function InventoryButton({ isDisabled }: { isDisabled: boolean }) {
   const hasKnapsackValue = useAtomValue(hasKnapsack);
   const isAttackingValue = useAtomValue(isAttacking);
   const [isScreenShowing, setScreenShowing] = useState(false);
@@ -24,7 +24,7 @@ export default function InventoryButton() {
       <OverlayTrigger overlay={<Tooltip>Inventory</Tooltip>} placement="top">
         <span className={`d-inline-block ${getAnimationClass(AnimationType.FlipInX)}`}>
           <Button
-            disabled={isAttackingValue}
+            disabled={isAttackingValue || isDisabled}
             onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
               currentTarget.blur();
 

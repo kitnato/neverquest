@@ -13,7 +13,7 @@ export default function Regeneration({
   isReserveMaxedOut,
 }: {
   regenerationRate: Atom<number>;
-  atomReserve: PrimitiveAtom<number>;
+  atomReserve: WritableAtom<null, number>;
   atomReserveDelta: WritableAtom<DeltaDisplay, DeltaDisplay>;
   atomDeltaRegenerationRate: PrimitiveAtom<DeltaDisplay>;
   isReserveMaxedOut: Atom<boolean>;

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Form, Modal, Stack } from "react-bootstrap";
 import { Gear } from "react-bootstrap-icons";
 
-import SettingsSwitch from "neverquest/components/Settings/SettingsSwitch";
+import SettingsSwitch from "neverquest/components/Header/SettingsSwitch";
 import { hasKnapsack } from "neverquest/state/character";
 import { autoEquip, nsfw } from "neverquest/state/global";
 import { showDamagePerSecond, showLowHealthWarning } from "neverquest/state/show";

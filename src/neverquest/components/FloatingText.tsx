@@ -27,6 +27,7 @@ export default function FloatingText({
   exitToLeft?: boolean;
 }) {
   const [deltaValue, setDeltaValue] = useAtom(atom);
+
   const [deltaQueue, setDeltaQueue] = useState<FloatingTextStyle[]>([]);
 
   useEffect(() => {

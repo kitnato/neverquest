@@ -6,7 +6,12 @@ import ImageIcon from "neverquest/components/ImageIcon";
 import ReserveMeter from "neverquest/components/ReserveMeter";
 import icon from "neverquest/icons/hospital-cross.svg";
 import { deltaHealth, deltaTotalHealthRegenerationRate } from "neverquest/state/deltas";
-import { currentHealth, isHealthMaxedOut, maximumHealth } from "neverquest/state/reserves";
+import {
+  currentHealth,
+  healthChange,
+  isHealthMaxedOut,
+  maximumHealth,
+} from "neverquest/state/reserves";
 import { totalHealthRegenerationRate } from "neverquest/state/statistics";
 import { UIAttachment } from "neverquest/types/ui";
 
@@ -27,7 +32,7 @@ export default function Health() {
         </Stack>
 
         <Regeneration
-          atomReserve={currentHealth}
+          atomReserve={healthChange}
           atomReserveDelta={deltaHealth}
           atomDeltaRegenerationRate={deltaTotalHealthRegenerationRate}
           isReserveMaxedOut={isHealthMaxedOut}

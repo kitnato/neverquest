@@ -109,7 +109,7 @@ export function formatPercentage(number: number) {
 
 // Correctly does the rounding as opposed to .toFixed().
 export function formatToFixed(number: number, decimals = 2) {
-  const multiplier = Math.pow(10, decimals);
+  const multiplier = 10 ** decimals;
   const result = parseFloat((number * multiplier).toFixed(11));
 
   return (Math.round(result) / multiplier).toFixed(decimals);

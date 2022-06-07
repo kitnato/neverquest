@@ -62,7 +62,7 @@ import {
   showDamagePerSecond,
   showDefense,
   showDodgeChance,
-  showWildernessProgress,
+  showGameOver,
   showLoot,
   showLowHealthWarning,
   showRecovery,
@@ -74,6 +74,7 @@ import {
   showTotalProtection,
   showTrinket,
   showWeapon,
+  showWildernessProgress,
 } from "neverquest/state/show";
 
 // (ﾉ☉ヮ⚆)ﾉ ⌒*:･ﾟ✧
@@ -131,8 +132,8 @@ export default function useReset() {
   const resetShowDamagePerSecond = useResetAtom(showDamagePerSecond);
   const resetShowDefense = useResetAtom(showDefense);
   const resetShowDodgeChance = useResetAtom(showDodgeChance);
-  const resetShowWildernessProgress = useResetAtom(showWildernessProgress);
   const resetShowLoot = useResetAtom(showLoot);
+  const resetShowGameOver = useResetAtom(showGameOver);
   const resetShowRecovery = useResetAtom(showRecovery);
   const resetShowScrap = useResetAtom(showScrap);
   const resetShowShield = useResetAtom(showShield);
@@ -141,6 +142,7 @@ export default function useReset() {
   const resetShowTotalDamageSummary = useResetAtom(showTotalDamageSummary);
   const resetShowTotalProtection = useResetAtom(showTotalProtection);
   const resetShowWeapon = useResetAtom(showWeapon);
+  const resetShowWildernessProgress = useResetAtom(showWildernessProgress);
   const resetStamina = useResetAtom(stamina);
   const resetStaminaRegenerationRate = useResetAtom(staminaRegenerationRate);
   const resetStatusElement = useResetAtom(statusElement);
@@ -198,7 +200,7 @@ export default function useReset() {
     resetShowDamagePerSecond();
     resetShowDefense();
     resetShowDodgeChance();
-    resetShowWildernessProgress();
+    resetShowGameOver();
     resetShowLoot();
     resetShowLowHealthWarning();
     resetShowRecovery();
@@ -210,6 +212,7 @@ export default function useReset() {
     resetShowTotalProtection();
     resetShowTrinket();
     resetShowWeapon();
+    resetShowWildernessProgress();
     resetStamina();
     resetStaminaRegenerationRate();
     resetStatusElement();

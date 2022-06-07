@@ -1,5 +1,5 @@
-import { useAtomValue, useSetAtom } from "jotai";
-import { useEffect, useState } from "react";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useEffect } from "react";
 import { Col, Row, Stack } from "react-bootstrap";
 
 import Character from "neverquest/components/Character";
@@ -11,12 +11,12 @@ import WildernessProgress from "neverquest/components/Wilderness/WildernessProgr
 import useReset from "neverquest/hooks/useReset";
 import { gameOver } from "neverquest/state/global";
 import { reservesInitial } from "neverquest/state/reserves";
+import { showGameOver } from "neverquest/state/show";
 
 export default function Main() {
-  const gameOverValue = useAtomValue(gameOver);
+  const [showGameOverValue, setShowGameOver] = useAtom(showGameOver);
+  const isGameOver = useAtomValue(gameOver);
   const initializeReserves = useSetAtom(reservesInitial);
-
-  const [showGameOver, setShowGameOver] = useState(true);
 
   const reset = useReset();
 
@@ -57,7 +57,7 @@ export default function Main() {
         onConfirm={reset}
         message="Start a new quest?"
         setHide={() => setShowGameOver(false)}
-        show={showGameOver && gameOverValue}
+        show={isGameOver && showGameOverValue}
         title="You are dead."
       />
     </Stack>

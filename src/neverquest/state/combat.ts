@@ -1,16 +1,15 @@
 import { atom } from "jotai";
 
 import { isRecovering, lootingRate, statusElement } from "neverquest/state/character";
-import { gameOver } from "neverquest/state/global";
 import { shield, weapon } from "neverquest/state/inventory";
-import { deltaHealth, deltaHealthMonster, deltaStamina } from "neverquest/state/deltas";
+import { deltaHealth, deltaHealthMonster } from "neverquest/state/deltas";
 import {
   currentHealthMonster,
   isMonsterStaggered,
   monsterStatusElement,
   totalDamageMonster,
 } from "neverquest/state/monster";
-import { canAttack, canBlock, currentHealth, currentStamina } from "neverquest/state/reserves";
+import { canAttack, canBlock, healthChange, staminaChange } from "neverquest/state/reserves";
 import { showRecovery } from "neverquest/state/show";
 import { totalBlockChance, totalDamage, totalProtection } from "neverquest/state/statistics";
 import { AnimationSpeed, AnimationType, DeltaDisplay, FloatingTextType } from "neverquest/types/ui";
@@ -32,11 +31,7 @@ export const defense = atom(null, (get, set) => {
       color: FloatingTextType.Neutral,
       value: "BLOCKED",
     });
-    set(currentStamina, (current) => current - staminaCost);
-    set(deltaStamina, {
-      color: FloatingTextType.Negative,
-      value: `${-staminaCost}`,
-    });
+    set(staminaChange, -staminaCost);
     set(isMonsterStaggered, true);
   } else {
     const totalProtectionValue = get(totalProtection);
@@ -45,14 +40,8 @@ export const defense = atom(null, (get, set) => {
 
       return damage < 0 ? damage : 0;
     })();
-    const currentHealthValue = get(currentHealth);
-    let health = currentHealthValue + healthDamage;
 
-    if (health <= 0) {
-      health = 0;
-    }
-
-    if (health !== currentHealthValue) {
+    if (healthDamage < 0) {
       let deltaContents: DeltaDisplay = {
         color: FloatingTextType.Negative,
         value: `${healthDamage}`,
@@ -69,17 +58,13 @@ export const defense = atom(null, (get, set) => {
       }
 
       set(deltaHealth, deltaContents);
-      set(currentHealth, health);
+      set(healthChange, healthDamage);
 
-      if (health === 0) {
-        set(gameOver, true);
-      } else {
-        if (!get(showRecovery)) {
-          set(showRecovery, true);
-        }
-
-        set(isRecovering, true);
+      if (!get(showRecovery)) {
+        set(showRecovery, true);
       }
+
+      set(isRecovering, true);
     }
   }
 });
@@ -97,11 +82,7 @@ export const offense = atom(null, async (get, set) => {
     }
 
     if (staminaCost > 0) {
-      set(currentStamina, (current) => current - staminaCost);
-      set(deltaStamina, {
-        color: FloatingTextType.Negative,
-        value: `${-staminaCost}`,
-      });
+      set(staminaChange, -staminaCost);
     }
 
     set(currentHealthMonster, monsterHealth);

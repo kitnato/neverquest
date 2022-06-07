@@ -2,7 +2,10 @@ import { atom } from "jotai";
 import { atomWithReset } from "jotai/utils";
 
 import { health, stamina } from "neverquest/state/attributes";
+import { deltaStamina } from "neverquest/state/deltas";
+import { gameOver } from "neverquest/state/global";
 import { shield, weapon } from "neverquest/state/inventory";
+import { FloatingTextType } from "neverquest/types/ui";
 
 // PRIMITIVES
 
@@ -25,22 +28,58 @@ export const isHealthMaxedOut = atom((get) => get(currentHealth) >= get(maximumH
 export const isStaminaMaxedOut = atom((get) => get(currentStamina) >= get(maximumStamina));
 
 export const maximumHealth = atom((get) => {
-  const healthValue = get(health);
-
-  const { base, increment, points } = healthValue;
+  const { base, increment, points } = get(health);
 
   return base + increment * points;
 });
 
 export const maximumStamina = atom((get) => {
-  const staminaValue = get(stamina);
-
-  const { base, increment, points } = staminaValue;
+  const { base, increment, points } = get(stamina);
 
   return base + increment * points;
 });
 
 // WRITERS
+
+export const healthChange = atom(null, (get, set, delta: number) => {
+  const max = get(maximumHealth);
+  const newHealth = get(currentHealth) + delta;
+
+  if (newHealth <= 0) {
+    set(currentHealth, 0);
+    set(gameOver, true);
+    return;
+  }
+
+  if (newHealth > max) {
+    set(currentHealth, max);
+    return;
+  }
+
+  set(currentHealth, newHealth);
+});
+
+export const staminaChange = atom(null, (get, set, delta: number) => {
+  const max = get(maximumStamina);
+  const newStamina = get(currentStamina) + delta;
+
+  set(deltaStamina, {
+    color: FloatingTextType.Negative,
+    value: `${delta > 0 ? delta : -delta}`,
+  });
+
+  if (newStamina < 0) {
+    set(currentStamina, 0);
+    return;
+  }
+
+  if (newStamina > max) {
+    set(currentStamina, max);
+    return;
+  }
+
+  set(currentStamina, newStamina);
+});
 
 export const reservesInitial = atom(null, (get, set) => {
   set(currentHealth, get(maximumHealth));

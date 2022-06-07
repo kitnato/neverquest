@@ -22,7 +22,7 @@ export const showDodgeChance = atomWithReset(false);
 
 export const showEssence = atomWithReset(false);
 
-export const showWildernessProgress = atomWithReset(false);
+export const showGameOver = atomWithReset(true);
 
 export const showLoot = atomWithReset(false);
 
@@ -45,3 +45,5 @@ export const showTotalProtection = atomWithReset(false);
 export const showTrinket = atomWithReset(false);
 
 export const showWeapon = atomWithReset(false);
+
+export const showWildernessProgress = atomWithReset(false);

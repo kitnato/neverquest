@@ -1,4 +1,4 @@
-import { Atom, useSetAtom, useAtomValue, WritableAtom, PrimitiveAtom } from "jotai";
+import { Atom, useSetAtom, useAtomValue, WritableAtom } from "jotai";
 import { useEffect, useState } from "react";
 
 import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
@@ -21,14 +21,14 @@ export default function RegenerationMeter({
   isReserveMaxedOut,
 }: {
   regenerationRate: Atom<number>;
-  atomReserve: PrimitiveAtom<number>;
+  atomReserve: WritableAtom<null, number>;
   atomReserveDelta: WritableAtom<DeltaDisplay, DeltaDisplay>;
   isReserveMaxedOut: Atom<boolean>;
 }) {
   const isRecoveringValue = useAtomValue(isRecovering);
   const regenerationRateValue = useAtomValue(regenerationRate);
   const isReserveMaxedOutValue = useAtomValue(isReserveMaxedOut);
-  const setCurrentReserve = useSetAtom(atomReserve);
+  const changeCurrentReserve = useSetAtom(atomReserve);
   const setDeltaReserve = useSetAtom(atomReserveDelta);
   const [deltaRegeneration, setDeltaRegeneration] = useState(0);
 
@@ -40,7 +40,7 @@ export default function RegenerationMeter({
     if (deltaRegeneration >= regenerationRateValue) {
       setDeltaRegeneration(0);
       // TODO - make health regeneration amount either a constant or an atom if it could be variable
-      setCurrentReserve((current) => current + 1);
+      changeCurrentReserve(1);
       setDeltaReserve({
         color: FloatingTextType.Positive,
         value: "+1",

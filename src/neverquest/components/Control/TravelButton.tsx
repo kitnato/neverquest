@@ -10,7 +10,7 @@ import { AnimationType, UIVariant } from "neverquest/types/ui";
 import { UNKNOWN } from "neverquest/utilities/constants";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
-export default function TravelButton() {
+export default function TravelButton({ isDisabled }: { isDisabled: boolean }) {
   const isWildernessValue = useAtomValue(isWilderness);
   const hasLootedValue = useAtomValue(hasLooted);
   const levelValue = useAtomValue(level);
@@ -35,6 +35,7 @@ export default function TravelButton() {
     >
       <Button
         className={isWildernessValue ? getAnimationClass(AnimationType.Pulse, true) : ""}
+        disabled={isDisabled}
         onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
           currentTarget.blur();
 

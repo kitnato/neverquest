@@ -1,18 +1,21 @@
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { ChangeEvent, KeyboardEvent, MouseEvent, useState } from "react";
 import { FormControl, Stack } from "react-bootstrap";
 
 import ImageIcon from "neverquest/components/ImageIcon";
-import icon from "neverquest/icons/domino-mask.svg";
+import aliveIcon from "neverquest/icons/domino-mask.svg";
+import deadIcon from "neverquest/icons/skull-crossed-bones.svg";
 import { name } from "neverquest/state/character";
+import { gameOver } from "neverquest/state/global";
 
-export default function Character() {
+export default function Name() {
   const [nameValue, setName] = useAtom(name);
+  const isGameOver = useAtomValue(gameOver);
   const [isEditing, setEditing] = useState(false);
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip="Name" />
+      <ImageIcon icon={isGameOver ? deadIcon : aliveIcon} tooltip="Name" />
 
       <FormControl
         className="hover-grow"

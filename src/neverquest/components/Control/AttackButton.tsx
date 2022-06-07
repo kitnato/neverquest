@@ -16,7 +16,7 @@ import { showLowHealthWarning, showWildernessProgress } from "neverquest/state/s
 import { AnimationType, UIVariant } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
-export default function AttackButton() {
+export default function AttackButton({ isDisabled }: { isDisabled: boolean }) {
   const [isAttackingValue, setAttacking] = useAtom(isAttacking);
   const [showWildernessProgressValue, setShowWildernessProgressValue] =
     useAtom(showWildernessProgress);
@@ -29,7 +29,8 @@ export default function AttackButton() {
   const [showAttackConfirmation, setShowAttackConfirmation] = useState(false);
 
   const pulseAnimation = getAnimationClass(AnimationType.Pulse, true);
-  const showWarning = isAttackingValue && showLowHealthWarningValue && isHealthLowValue;
+  const showWarning =
+    isAttackingValue && !isDisabled && showLowHealthWarningValue && isHealthLowValue;
 
   const toggleAttack = () => {
     setAttacking((current) => !current);
@@ -87,7 +88,7 @@ export default function AttackButton() {
         <span className="d-inline-block">
           <Button
             className={animation}
-            disabled={isLevelCompletedValue}
+            disabled={isDisabled || isLevelCompletedValue}
             onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
               currentTarget.blur();
 

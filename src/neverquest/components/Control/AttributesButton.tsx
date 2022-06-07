@@ -14,7 +14,7 @@ import { showAttributesButton } from "neverquest/state/show";
 import { AnimationType, UIVariant } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
-export default function AttributesButton() {
+export default function AttributesButton({ isDisabled }: { isDisabled: boolean }) {
   const attributesIncreasableValue = useAtomValue(attributesIncreasable);
   const isAttackingValue = useAtomValue(isAttacking);
   const isMonsterEngagedValue = useAtomValue(isMonsterEngaged);
@@ -22,7 +22,7 @@ export default function AttributesButton() {
   const [showAttributesButtonValue, setShowAttributesButton] = useAtom(showAttributesButton);
   const [isScreenShowing, setScreenShowing] = useState(false);
 
-  const isDisabled = isAttackingValue || isMonsterEngagedValue;
+  const isButtonDisabled = isAttackingValue || isDisabled || isMonsterEngagedValue;
 
   useEffect(() => {
     if (!showAttributesButtonValue && isLevelCompletedValue) {
@@ -39,9 +39,9 @@ export default function AttributesButton() {
       <OverlayTrigger overlay={<Tooltip>Attributes</Tooltip>} placement="top">
         <span className={`${getAnimationClass(AnimationType.FlipInX)} d-inline-block`}>
           <Button
-            disabled={isDisabled}
+            disabled={isButtonDisabled}
             className={`position-relative${
-              attributesIncreasableValue && !isDisabled
+              attributesIncreasableValue && !isButtonDisabled
                 ? ` ${getAnimationClass(AnimationType.Pulse, true)}`
                 : ""
             }`}

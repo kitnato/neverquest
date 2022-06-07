@@ -26,11 +26,11 @@ export const crew = atomWithReset<Record<CrewType, boolean>>({
 export const crewMonologues = atomWithReset<Record<CrewType, string>>({
   // TODO - improve and diversify.
   [CrewType.Alchemist]: "",
-  [CrewType.Blacksmith]: "Care for some new shiny gear?",
+  [CrewType.Blacksmith]: "Care for some new gear?",
   [CrewType.Cook]: "",
   [CrewType.Medic]: "",
   [CrewType.Mercenary]: "Perhaps I can teach you something.",
-  [CrewType.Merchant]: "Greetings, stranger. I have what you're looking for.",
+  [CrewType.Merchant]: "Greetings. I have what you're looking for.",
   [CrewType.Tailor]: "",
   [CrewType.Witch]: "",
   [CrewType.Wizard]: "",

@@ -9,11 +9,12 @@ import { resourcesBalance, coins } from "neverquest/state/resources";
 import { UIVariant } from "neverquest/types/ui";
 
 export default function BuyItemButton({ id }: { id: symbol }) {
-  const acquireItem = useAcquireItem();
-  const checkEncumbrance = useCheckEncumbrance();
-  const balanceResources = useSetAtom(resourcesBalance);
   const [merchantInventoryValue, setMerchantInventory] = useAtom(merchantInventory);
   const coinsValue = useAtomValue(coins);
+  const balanceResources = useSetAtom(resourcesBalance);
+
+  const acquireItem = useAcquireItem();
+  const checkEncumbrance = useCheckEncumbrance();
 
   const { item } = merchantInventoryValue[id];
   const { price, weight } = item;

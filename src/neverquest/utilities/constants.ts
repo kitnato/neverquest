@@ -41,6 +41,7 @@ export const DELTA_DEFAULT = {
 export const ITEM_KNAPSACK: Item = {
   description: "Carry more items and manage equipment.",
   icon: knapsackIcon,
+  isCarriable: false,
   name: "Knapsack",
   price: 12,
   weight: 0,

@@ -13,10 +13,9 @@ import {
   NO_TRINKET,
   NO_WEAPON,
 } from "neverquest/utilities/constants";
-import { isTrinket, isArmor, isShield, isWeapon } from "neverquest/utilities/type-guards";
+import { isArmor, isItem, isShield, isTrinket, isWeapon } from "neverquest/utilities/type-guards";
 
 export default function useAcquireItem() {
-  const checkEncumbrance = useCheckEncumbrance();
   const armorValue = useAtomValue(armor);
   const autoEquipValue = useAtomValue(autoEquip);
   const shieldValue = useAtomValue(shield);
@@ -26,6 +25,8 @@ export default function useAcquireItem() {
   const setInventory = useSetAtom(inventory);
   const equipItem = useSetAtom(itemEquip);
 
+  const checkEncumbrance = useCheckEncumbrance();
+
   return ({ item }: { item: Equipment | Item }) => {
     if (!checkEncumbrance({ weight: item.weight })) {
       return false;
@@ -33,6 +34,9 @@ export default function useAcquireItem() {
 
     if (item.name === ITEM_KNAPSACK.name) {
       setHasKnapsack(true);
+    }
+
+    if (isItem(item) && !item.isCarriable) {
       return true;
     }
 

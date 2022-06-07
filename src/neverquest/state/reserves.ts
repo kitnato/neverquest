@@ -43,17 +43,15 @@ export const maximumStamina = atom((get) => {
 
 export const healthChange = atom(null, (get, set, delta: number) => {
   const max = get(maximumHealth);
-  const newHealth = get(currentHealth) + delta;
+  let newHealth = get(currentHealth) + delta;
 
   if (newHealth <= 0) {
-    set(currentHealth, 0);
+    newHealth = 0;
     set(gameOver, true);
-    return;
   }
 
   if (newHealth > max) {
-    set(currentHealth, max);
-    return;
+    newHealth = max;
   }
 
   set(currentHealth, newHealth);
@@ -61,7 +59,7 @@ export const healthChange = atom(null, (get, set, delta: number) => {
 
 export const staminaChange = atom(null, (get, set, delta: number) => {
   const max = get(maximumStamina);
-  const newStamina = get(currentStamina) + delta;
+  let newStamina = get(currentStamina) + delta;
 
   set(deltaStamina, {
     color: FloatingTextType.Negative,
@@ -69,13 +67,11 @@ export const staminaChange = atom(null, (get, set, delta: number) => {
   });
 
   if (newStamina < 0) {
-    set(currentStamina, 0);
-    return;
+    newStamina = 0;
   }
 
   if (newStamina > max) {
-    set(currentStamina, max);
-    return;
+    newStamina = max;
   }
 
   set(currentStamina, newStamina);

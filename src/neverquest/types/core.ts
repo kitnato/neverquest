@@ -52,6 +52,7 @@ export interface InventoryMerchant {
 export type Item = ItemBase & {
   description: string;
   icon: string;
+  isCarriable: boolean;
 };
 
 interface ItemBase {

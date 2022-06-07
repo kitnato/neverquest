@@ -1,4 +1,4 @@
-import { Armor, Equipment, Shield, Trinket, Weapon } from "neverquest/types/core";
+import { Armor, Equipment, Item, Shield, Trinket, Weapon } from "neverquest/types/core";
 
 export function isArmor(equipment: unknown): equipment is Armor {
   return isObject(equipment) && equipment.protection !== undefined;
@@ -13,6 +13,10 @@ export function isEquipment(equipment: unknown): equipment is Equipment {
     isObject(equipment) &&
     (isArmor(equipment) || isShield(equipment) || isTrinket(equipment) || isWeapon(equipment))
   );
+}
+
+export function isItem(item: unknown): item is Item {
+  return isObject(item) && item.isCarriable !== undefined;
 }
 
 function isObject(value: unknown): value is Record<string, unknown> {

@@ -13,6 +13,8 @@ import { getDamagePerSecond } from "neverquest/utilities/helpers";
 
 export const currentHealthMonster = atomWithReset(-1);
 
+export const isMonsterNew = atomWithReset(false);
+
 export const isMonsterEngaged = atomWithReset(false);
 
 export const isMonsterStaggered = atomWithReset(false);
@@ -85,6 +87,7 @@ export const monsterCreate = atom(null, (get, set) => {
 
   set(isMonsterEngaged, false);
   set(currentHealthMonster, get(maximumHealthMonster));
+  set(isMonsterNew, true);
 });
 
 export const monsterRegenerate = atom(null, (get, set) => {

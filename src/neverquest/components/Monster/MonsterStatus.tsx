@@ -1,4 +1,4 @@
-import { useSetAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { useEffect, useRef } from "react";
 import { Card, Col, Row, Stack } from "react-bootstrap";
 
@@ -8,24 +8,30 @@ import MonsterDamage from "neverquest/components/Monster/MonsterDamage";
 import MonsterDamagePerSecond from "neverquest/components/Monster/MonsterDamagePerSecond";
 import MonsterName from "neverquest/components/Monster/MonsterName";
 import MonsterStagger from "neverquest/components/Monster/MonsterStagger";
-import { monsterStatusElement } from "neverquest/state/monster";
+import { isMonsterNew, monsterStatusElement } from "neverquest/state/monster";
 import { AnimationSpeed, AnimationType } from "neverquest/types/ui";
 import { animateElement } from "neverquest/utilities/helpers";
 
 export default function MonsterStatus() {
-  const element = useRef(null);
+  const [isMonsterNewValue, setIsMonsterNew] = useAtom(isMonsterNew);
   const setMonsterStatusElement = useSetAtom(monsterStatusElement);
 
-  useEffect(() => {
-    const { current } = element;
+  const element = useRef(null);
 
-    setMonsterStatusElement(current);
-    animateElement({
-      animation: AnimationType.ZoomInRight,
-      element: current,
-      speed: AnimationSpeed.Faster,
-    });
+  useEffect(() => {
+    setMonsterStatusElement(element.current);
   }, [element]);
+
+  useEffect(() => {
+    if (isMonsterNewValue) {
+      animateElement({
+        animation: AnimationType.ZoomInRight,
+        element: element.current,
+        speed: AnimationSpeed.Faster,
+      });
+      setIsMonsterNew(false);
+    }
+  }, [element, isMonsterNewValue]);
 
   return (
     <Card className="d-none" ref={element}>

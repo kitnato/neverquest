@@ -46,6 +46,7 @@ import {
 import {
   currentHealthMonster,
   isMonsterEngaged,
+  isMonsterNew,
   isMonsterStaggered,
   monsterName,
   monsterStatusElement,
@@ -105,6 +106,7 @@ export default function useReset() {
   const resetIsAttacking = useResetAtom(isAttacking);
   const resetIsLooting = useResetAtom(isLooting);
   const resetIsMonsterEngaged = useResetAtom(isMonsterEngaged);
+  const resetIsMonsterNew = useResetAtom(isMonsterNew);
   const resetIsMonsterStaggered = useResetAtom(isMonsterStaggered);
   const resetIsRecovering = useResetAtom(isRecovering);
   const resetLevel = useResetAtom(level);
@@ -175,6 +177,7 @@ export default function useReset() {
     resetIsAttacking();
     resetIsLooting();
     resetIsMonsterEngaged();
+    resetIsMonsterNew();
     resetIsMonsterStaggered();
     resetIsRecovering();
     resetLevel();

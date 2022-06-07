@@ -5,7 +5,6 @@ import {
   ANIMATE_DURATION_PROPERTY,
   ANIMATE_PREFIX,
 } from "neverquest/utilities/constants";
-import { isEnum } from "neverquest/utilities/type-guards";
 
 export function animateElement({
   animation,
@@ -14,7 +13,7 @@ export function animateElement({
 }: {
   animation: AnimationType;
   element: HTMLDivElement | null;
-  speed?: AnimationSpeed | number;
+  speed?: AnimationSpeed;
 }): Promise<void> {
   return new Promise((resolve) => {
     if (element === null) {
@@ -23,7 +22,7 @@ export function animateElement({
 
     const { addEventListener, classList, style } = element;
     const animationName = `${ANIMATE_PREFIX}${animation}`;
-    const animationSpeedClass = isEnum(speed, AnimationSpeed) ? `${ANIMATE_PREFIX}${speed}` : null;
+    const animationSpeedClass = speed ? `${ANIMATE_PREFIX}${speed}` : null;
 
     if (classList.contains("d-none")) {
       classList.remove("d-none");

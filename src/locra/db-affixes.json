@@ -618,7 +618,7 @@
   { "name": "regurgitation", "artifact": "prefix", "creature": "prefix", "location": "prefix" },
   { "name": "repugnant", "tags": ["lowQuality"], "artifact": "prefix", "creature": "prefix", "location": "prefix" },
   { "name": "resistance", "artifact": "suffix" },
-  { "name": "resistant", "artifact": "prefix", "location": "prefix" },
+  { "name": "resistant", "artifact": "prefix" },
   { "name": "restraining", "artifact": "prefix", "location": "prefix" },
   { "name": "restraint", "artifact": "suffix", "creature": "suffix", "location": "suffix" },
   { "name": "revered", "tags": ["highQuality"], "artifact": "prefix", "creature": "prefix", "location": "prefix" },

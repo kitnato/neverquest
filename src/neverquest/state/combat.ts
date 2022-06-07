@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 
-import { isRecovering, lootingRate, statusElement } from "neverquest/state/character";
+import { isRecovering, statusElement } from "neverquest/state/character";
 import { shield, weapon } from "neverquest/state/inventory";
 import { deltaHealth, deltaHealthMonster } from "neverquest/state/deltas";
 import {
@@ -96,13 +96,5 @@ export const offense = atom(null, async (get, set) => {
       element,
       speed: AnimationSpeed.Fast,
     });
-
-    if (monsterHealth === 0) {
-      animateElement({
-        animation: AnimationType.BlurOut,
-        element,
-        speed: get(lootingRate) - 800,
-      });
-    }
   }
 });

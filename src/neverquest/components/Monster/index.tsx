@@ -25,9 +25,12 @@ export default function Monster() {
   const regenerateMonster = useSetAtom(monsterRegenerate);
 
   useEffect(() => {
-    // If player is attacking, engage the monster.
+    createMonster();
+  }, []);
+
+  useEffect(() => {
+    // If player is attacking a new monster, engage it.
     if (isAttackingValue && !isMonsterEngagedValue && !isMonsterDeadValue) {
-      createMonster();
       setMonsterEngaged(true);
     }
 
@@ -41,7 +44,7 @@ export default function Monster() {
     }
   }, [isAttackingValue, isMonsterDeadValue, isMonsterEngagedValue]);
 
-  if (isMonsterEngagedValue) {
+  if (isAttackingValue || isMonsterEngagedValue) {
     return <MonsterStatus />;
   }
 

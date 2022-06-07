@@ -6,10 +6,9 @@ export enum AnimationSpeed {
 }
 
 export enum AnimationType {
-  BlurOut = "blurOut",
-  HeadShake = "headShake",
   FadeInRight = "fadeInRight",
   FlipInX = "flipInX",
+  HeadShake = "headShake",
   Pulse = "pulse",
   ZoomInRight = "zoomInRight",
 }

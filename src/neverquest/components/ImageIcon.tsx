@@ -1,5 +1,4 @@
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import { OverlayPlacement } from "neverquest/types/ui";
 import { TRANSPARENT_PIXEL } from "neverquest/utilities/constants";

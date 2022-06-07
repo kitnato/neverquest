@@ -1,8 +1,5 @@
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
-import Stack from "react-bootstrap/Stack";
-import Table from "react-bootstrap/Table";
 import { useAtomValue } from "jotai";
+import { OverlayTrigger, Popover, Stack, Table } from "react-bootstrap";
 
 import FloatingText from "neverquest/components/FloatingText";
 import ImageIcon from "neverquest/components/ImageIcon";

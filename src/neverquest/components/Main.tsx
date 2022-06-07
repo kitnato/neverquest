@@ -1,8 +1,6 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Stack from "react-bootstrap/Stack";
+import { Col, Row, Stack } from "react-bootstrap";
 
 import Character from "neverquest/components/Character";
 import ConfirmationDialog from "neverquest/components/ConfirmationDialog";

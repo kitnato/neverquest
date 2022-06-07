@@ -1,6 +1,5 @@
-import Card from "react-bootstrap/Card";
-import Stack from "react-bootstrap/Stack";
 import { useAtomValue } from "jotai";
+import { Card, Stack } from "react-bootstrap";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import ResourceDisplay from "neverquest/components/Resource/ResourceDisplay";

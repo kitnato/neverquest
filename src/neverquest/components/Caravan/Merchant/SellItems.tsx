@@ -1,9 +1,6 @@
 import { MouseEvent, useState } from "react";
 import { useAtom, useSetAtom } from "jotai";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Stack from "react-bootstrap/Stack";
+import { Button, Col, Row, Stack } from "react-bootstrap";
 
 import ConfirmationDialog from "neverquest/components/ConfirmationDialog";
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";

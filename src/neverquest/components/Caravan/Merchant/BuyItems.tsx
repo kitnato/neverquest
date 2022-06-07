@@ -1,7 +1,5 @@
 import { useAtomValue } from "jotai";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Stack from "react-bootstrap/Stack";
+import { Col, Row, Stack } from "react-bootstrap";
 
 import BuyItemButton from "neverquest/components/Caravan/Merchant/BuyItemButton";
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";

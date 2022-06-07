@@ -1,5 +1,5 @@
-import Card from "react-bootstrap/Card";
 import { useAtomValue } from "jotai";
+import Card from "react-bootstrap/Card";
 
 import ResourceDisplay from "neverquest/components/Resource/ResourceDisplay";
 import { showCoins, showEssence, showScrap } from "neverquest/state/show";

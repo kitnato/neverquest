@@ -1,8 +1,5 @@
 import { MouseEvent } from "react";
-import Button from "react-bootstrap/Button";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Stack from "react-bootstrap/Stack";
-import Tooltip from "react-bootstrap/Tooltip";
+import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { Clock, Plus } from "react-bootstrap-icons";
 import { PrimitiveAtom, useSetAtom, useAtom, useAtomValue } from "jotai";
 

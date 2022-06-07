@@ -1,9 +1,6 @@
-import { useEffect, useRef } from "react";
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Stack from "react-bootstrap/Stack";
 import { useSetAtom } from "jotai";
+import { useEffect, useRef } from "react";
+import { Card, Col, Row, Stack } from "react-bootstrap";
 
 import MonsterAttack from "neverquest/components/Monster/MonsterAttack";
 import MonsterHealth from "neverquest/components/Monster/MonsterHealth";

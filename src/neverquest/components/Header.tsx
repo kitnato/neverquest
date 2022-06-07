@@ -1,10 +1,5 @@
 import { MouseEvent, useState } from "react";
-import Badge from "react-bootstrap/Badge";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Stack from "react-bootstrap/Stack";
+import { Badge, Button, Container, Nav, Navbar, Stack } from "react-bootstrap";
 import { ExclamationTriangle, Github } from "react-bootstrap-icons";
 
 import About from "neverquest/components/About";

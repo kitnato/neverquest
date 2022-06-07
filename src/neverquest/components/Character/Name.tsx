@@ -1,7 +1,6 @@
 import { useAtom } from "jotai";
 import { ChangeEvent, KeyboardEvent, MouseEvent, useState } from "react";
-import FormControl from "react-bootstrap/FormControl";
-import Stack from "react-bootstrap/Stack";
+import { FormControl, Stack } from "react-bootstrap";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/domino-mask.svg";

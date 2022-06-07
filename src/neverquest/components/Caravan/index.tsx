@@ -1,7 +1,6 @@
 import { nanoid } from "nanoid";
 import { Fragment, useMemo, useState } from "react";
-import Card from "react-bootstrap/Card";
-import Stack from "react-bootstrap/Stack";
+import { Card, Stack } from "react-bootstrap";
 
 import DismissableScreen from "neverquest/components/DismissableScreen";
 import Crew from "neverquest/components/Caravan/Crew";

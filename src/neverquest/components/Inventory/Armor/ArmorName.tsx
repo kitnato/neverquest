@@ -1,6 +1,4 @@
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
-import Table from "react-bootstrap/Table";
+import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 
 import { Armor } from "neverquest/types/core";
 import { NO_ARMOR } from "neverquest/utilities/constants";

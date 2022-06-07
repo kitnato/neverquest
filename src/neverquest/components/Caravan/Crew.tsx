@@ -1,7 +1,6 @@
 import { MouseEvent } from "react";
 import { useAtomValue } from "jotai";
-import Button from "react-bootstrap/Button";
-import Stack from "react-bootstrap/Stack";
+import { Button, Stack } from "react-bootstrap";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/cowled.svg";

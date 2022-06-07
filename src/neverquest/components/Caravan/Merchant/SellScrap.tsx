@@ -1,9 +1,6 @@
 import { MouseEvent } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
-import Button from "react-bootstrap/Button";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Stack from "react-bootstrap/Stack";
-import Tooltip from "react-bootstrap/Tooltip";
+import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { ArrowRight } from "react-bootstrap-icons";
 
 import Coins from "neverquest/components/Resource/Coins";

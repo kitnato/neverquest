@@ -1,8 +1,6 @@
 import { MouseEvent } from "react";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import Button from "react-bootstrap/Button";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import useAcquireItem from "neverquest/hooks/useAcquireItem";
 import useCheckEncumbrance from "neverquest/hooks/useCheckEncumbrance";

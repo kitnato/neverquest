@@ -1,7 +1,6 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect } from "react";
-import Card from "react-bootstrap/Card";
-import Stack from "react-bootstrap/Stack";
+import { Card, Stack } from "react-bootstrap";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import MonsterStatus from "neverquest/components/Monster/MonsterStatus";

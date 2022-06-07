@@ -1,8 +1,6 @@
 import { useAtomValue } from "jotai";
 import { MouseEvent, useState } from "react";
-import Button from "react-bootstrap/Button";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import DismissableScreen from "neverquest/components/DismissableScreen";
 import ImageIcon from "neverquest/components/ImageIcon";

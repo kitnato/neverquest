@@ -1,7 +1,4 @@
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
-import Stack from "react-bootstrap/Stack";
-import Table from "react-bootstrap/Table";
+import { OverlayTrigger, Popover, Stack, Table } from "react-bootstrap";
 import { useAtomValue } from "jotai";
 
 import AttackMeter from "neverquest/components/Character/AttackMeter";

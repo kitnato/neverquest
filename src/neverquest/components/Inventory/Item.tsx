@@ -1,6 +1,4 @@
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
-import Stack from "react-bootstrap/Stack";
+import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import { Item as ItemType } from "neverquest/types/core";

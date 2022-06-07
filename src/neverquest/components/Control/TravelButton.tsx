@@ -1,8 +1,6 @@
-import { MouseEvent } from "react";
-import Button from "react-bootstrap/Button";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 import { useAtomValue, useSetAtom } from "jotai";
+import { MouseEvent } from "react";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/journey.svg";

@@ -1,7 +1,7 @@
 import { PrimitiveAtom, useAtom } from "jotai";
+import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 import { Stack } from "react-bootstrap";
-import { nanoid } from "nanoid";
 
 import useAnimation from "neverquest/hooks/useAnimation";
 import { DeltaDisplay } from "neverquest/types/ui";

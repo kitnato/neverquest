@@ -1,7 +1,5 @@
 import { useAtomValue, useSetAtom } from "jotai";
-import Button from "react-bootstrap/Button";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/locked-chest.svg";

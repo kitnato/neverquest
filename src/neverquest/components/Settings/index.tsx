@@ -1,8 +1,6 @@
 import { useAtomValue } from "jotai";
 import { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Modal from "react-bootstrap/Modal";
-import Stack from "react-bootstrap/Stack";
+import { Form, Modal, Stack } from "react-bootstrap";
 import { Gear } from "react-bootstrap-icons";
 
 import SettingsSwitch from "neverquest/components/Settings/SettingsSwitch";

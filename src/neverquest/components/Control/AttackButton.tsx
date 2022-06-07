@@ -1,11 +1,6 @@
-import { MouseEvent, useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
-import PopoverBody from "react-bootstrap/PopoverBody";
-import PopoverHeader from "react-bootstrap/PopoverHeader";
-import Tooltip from "react-bootstrap/Tooltip";
 import { useAtomValue, useAtom } from "jotai";
+import { MouseEvent, useEffect, useState } from "react";
+import { Button, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";
 
 import ConfirmationDialog from "neverquest/components/ConfirmationDialog";
 import ImageIcon from "neverquest/components/ImageIcon";
@@ -76,11 +71,11 @@ export default function AttackButton() {
         overlay={
           showWarning ? (
             <Popover>
-              <PopoverHeader>
+              <Popover.Header>
                 <strong>Low health</strong>
-              </PopoverHeader>
+              </Popover.Header>
 
-              <PopoverBody>Retreat now!</PopoverBody>
+              <Popover.Body>Retreat now!</Popover.Body>
             </Popover>
           ) : (
             <Tooltip>{tooltip}</Tooltip>

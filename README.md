@@ -8,7 +8,7 @@ The UI is split up into the character and the encounter panels, with most intera
 
 ## Character
 
-The main panel on the left of the UI. View the character's, [reserves](#-reserves), [statistics](#-statistics), [resources](#-resources), buffs and debuffs, and set their name.
+The main panel on the left of the UI. View the character's, [reserves](#reserves), [statistics](#statistics), [resources](#resources), buffs and debuffs, and set their name.
 
 ### Reserves
 
@@ -22,7 +22,7 @@ It is regenerated over time.
 
 #### Stamina
 
-If the character is wielding a [weapon](#-weapon) with a stamina cost, this cost is paid with every attack. If there isn't enough stamina in reserve when attacking, no attacks can take place.
+If the character is wielding a [weapon](#weapon) with a stamina cost, this cost is paid with every attack. If there isn't enough stamina in reserve when attacking, no attacks can take place.
 
 It is regenerated over time, at a faster initial pace than health.
 
@@ -48,15 +48,15 @@ Essence can also be used to enchant equipment. [TODO]
 
 #### Scrap
 
-Gained from dismantling [equipment](#-equipment) at the blacksmith and dropped from monsters. Used to craft equipment and trade for coins.
+Gained from dismantling [equipment](#equipment) at the blacksmith and dropped from monsters. Used to craft equipment and trade for coins.
 
 ### Statistics
 
-These are derived from the character's attributes, equipment, any current buffs and debuffs.
+These are derived from the character's attributes, equipment, and any current buffs and debuffs.
 
 #### Damage per second
 
-Requires toggling on in the global [settings](#-settings). If on, shows the expected damage per second the character can deal if [attack rate](#-attack-rate) and current [total damage](#-total-damage) remain stable.
+Requires toggling on in the global [settings](#settings). If on, shows the expected damage per second the character can deal if [attack rate](#attack-rate) and current [total damage](#total-damage) remain stable.
 
 #### Attack rate
 
@@ -68,11 +68,11 @@ Percentage chance that when defending, all incoming non-protected damage is bloc
 
 #### Critical chance
 
-Percentage chance that when attacking, critical damage is dealt, adding to [total damage](#-total-damage).
+Percentage chance that when attacking, critical damage is dealt, adding to [total damage](#total-damage).
 
 #### Critical damage
 
-Percentage increase of total damage dealt when attacking in case of a [critical hit](#-critical-chance).
+Percentage increase of total damage dealt when attacking in case of a [critical hit](#critical-chance).
 
 #### Dodge chance
 
@@ -80,7 +80,7 @@ Percentage determining the chance of when defending, the character avoids all da
 
 #### Health regeneration rate
 
-Time duration until [health](#-health) is restored by one.
+Time duration until [health](#health) is restored by one.
 
 #### Protection
 
@@ -88,55 +88,71 @@ Amount of damage that is discarded when defending.
 
 #### Recovery rate
 
-Time duration until the character continues to regenerate [reserves](#-reserves) and readies their next attack.
-
-#### Stagger rate
-
-Time duration of the monster unable to ready their next attack if the character has successfully blocked.
+Time duration until the character continues to regenerate [reserves](#reserves) and readies their next attack.
 
 #### Stamina regeneration rate
 
-Time duration until [stamina](#-stamina) is restored by one.
+Time duration until [stamina](#stamina) is restored by one.
 
 #### Total damage
 
-Damage from [strength](#-strength) in addition to [weapon](#-weapon) damage with any other bonuses.
+Damage from [strength](#strength) in addition to [weapon](#weapon) damage with any other bonuses.
 
 ## Encounter
 
-The main panel to the right of the screen. It changes based on one of the two possible locations of the character, [wilderness](#-wilderness) and [caravan](#-caravan).
+The main panel to the right of the screen. It changes based on one of the two possible locations of the character, [wilderness](#wilderness) and [caravan](#caravan).
 
 ### Wilderness
 
-Engage and fight monsters. Every wilderness level is different by name and has a certain amount of monsters (a wave) of a certain power. Killing all monsters allows progression to the [caravan](#-caravan).
+Engage and fight monsters. Every wilderness level is different by name and has a certain amount of monsters (a wave) of a certain power. Killing all monsters allows progression to the [caravan](#caravan).
 
-The character must reach the end of the wave again to gain access to the loot and the ability to travel to the caravan. With the acquisition of the [compass](#-compass), a completed wilderness level can be restarted to gain more [loot](#-reserves).
+The character must reach the end of the wave again to gain access to the loot and the ability to travel to the caravan. With the acquisition of the [compass](#compass), a completed wilderness level can be restarted to gain more [loot](#reserves).
 
-The name of the wilderness level is randomly generated by [LOCRA](#-locra).
+The name of the wilderness level is randomly generated by [LOCRA](#locra).
 
-#### Combat
+The wilderness level is considered completed when the wave progress is at its maximum. At this point, [loot](#reserves) can be collected.
 
-The wilderness initially always has a lurking [monster](#-monster). When ready, the character can choose to attack continuously at their current [attack rate](#-attack-rate), engaging the monster in the process. While engaged, the monster will also attack continuously, triggering the character to defend themselves. When the monster hits the character, [recovery](#-recovery-rate) is triggered. While recovering, the character won't be able to attack or regenerate their [reserves](#-reserves).
+### Combat
+
+The wilderness initially always has a lurking [monster](#monster). When ready, the character can choose to attack continuously at their current [attack rate](#attack-rate), engaging the monster in the process. While engaged, the monster will also attack continuously, triggering the character to defend themselves. When the monster hits the character, [recovery](#recovery-rate) is triggered. While recovering, the character won't be able to attack or regenerate their [reserves](#reserves).
 
 Both the character and monster will keep attacking each other until either the character retreats, upon which the monster's health instantly regenerates to its maximum, or if the monster or character is dead (health reaches zero). Upon a monster's death, the wave progress is incremented and the next monster is attacked automatically, unless the character retreats.
 
-The wilderness level is considered completed when the wave progress is at its maximum. At this point, [loot](#-reserves) can be collected.
+#### Combat effects
+
+There are several special mechanics that can occur during combat. These effects are usually intrinsic to equipment and can't be controlled directly the way [attributes](#attributes) are. Some also don't appear as part of [statistics](#statistics), as they become apparent in the character and monster status screens.
+
+##### Bleed
+
+Certain successful attacks by a monster or the character can inflict a damage over time effect constrained by a total amount of damage inflicted regularly over a certain period of time. Bleed effects can be stemmed by a [first aid kit](#medic) or certain [salves](#salve).
+
+##### Block
+
+When having a [shield](#shield) equipped, a successful block by the character upon a monster's attack will negate all damage done and will also inflict a certain [stagger](#stagger) duration on the monster. The chance to block an attack is determined by the [block chance](#block-chance).
+
+##### Parry
+
+A successful parry will return 50% of the total damage inflicted back to the attacker.
+
+##### Stagger
+
+When staggered, the monster will not be able to attack for a certain duration.
 
 #### Monster
 
-A creature with a randomly generated name that will continuously attack the character as soon as it's engaged. It has health and a certain attack rate based on the wilderness level.
+A creature with a randomly generated name that will continuously attack the character as soon as it's engaged (when the character attacks it for the first time). It has health and a certain attack rate based on the wilderness level.
 
-The character can deal damage, as well as stagger it when blocking and debuff it using various skills and weapon effects.
+The character can deal damage, as well as debuff it using various skills and weapon effects.
 
 ### Caravan
 
-Encountered after completed a [wilderness](#-wilderness) level. It can be upgraded to add more crew that offer goods and services.
+Encountered after completed a [wilderness](#wilderness) level. It can be upgraded to add more crew that offer goods and services.
 
-All goods and services offered by the caravan crew are purchasable with [coins](#-coins), [scrap](#-scrap) or [essence](#-essence), granting various different upgrades.
+All goods and services offered by the caravan crew are purchasable with [coins](#coins), [scrap](#scrap) or [essence](#essence), granting various different upgrades.
 
 Once at the caravan, the only other option apart from interacting with the crew is to go back to the wilderness, which will be generated at a higher level (thereby being more challenging) than the previous time.
 
-The [merchant](#-merchant) is always present from the start.
+The [merchant](#merchant) is always present from the start.
 
 Other crew members can be acquired at a cost of coins. Some have additional requirements before they are unlocked for purchase.
 
@@ -148,19 +164,19 @@ The merchant's inventory of items will grow and diversify progressively.
 
 #### Mercenary
 
-Acquire new physical [skills](#-skills) and [attributes](#-attributes).
+Acquire new physical [skills](#skills) and [attributes](#attributes).
 
 #### Cook
 
-Restores all [health](#-health), [stamina](#-stamina) and [energy](#-energy). Grants a Well Fed buff for the first wave (+10% [mastery](#-mastery) gain).
+Restores all [health](#health), [stamina](#stamina) and [energy](#energy). Grants a Well Fed buff for the first wave (+10% [mastery](#mastery) gain).
 
 #### Tailor
 
-Increase maximum [encumbrance](#-inventory), add extra trinkets slots and add extra [potion](#-potion) slots [TODO].
+Increase maximum [encumbrance](#inventory), add extra trinkets slots and add extra [potion](#potions) slots [TODO].
 
 #### Blacksmith
 
-Repair, dismantle, craft and upgrade [weapons](#-weapon) and [armor](#-armor). Requires coins as well as scrap.
+Repair, dismantle, craft and upgrade [weapons](#weapon) and [armor](#armor). Requires coins as well as scrap.
 
 #### Medic
 
@@ -168,35 +184,37 @@ Repair, dismantle, craft and upgrade [weapons](#-weapon) and [armor](#-armor). R
 
 Their presence saves the character from death (no restart necessary) once per wilderness level in return for a percentage of all coins, scrap and essence. Upgrades to the medic's supplies, paid in coins and/or scrap, reduce this death payment.
 
+Also sells first aid kits that can cure a bleed effect and restore a certain amount of health over time.
+
 #### Alchemist
 
 [TODO]
 
-Buy [elixirs](##-elixir), [salves](##-salve) and [poisons](##-poison).
+Buy [elixirs](##elixir), [salves](##salve) and [poisons](##poison).
 
 #### Sorcerer
 
 [TODO]
 
-Acquire [sorceries](#-sorcery) and [auras](#-aura). Acquire certain attributes.
+Acquire [sorceries](#sorcery) and [auras](#aura). Acquire certain attributes.
 
 #### Witch
 
 [TODO]
 
-Enchant and disenchant [equipment](#-equipment), requiring essence. Acquire certain attributes.
+Enchant and disenchant [equipment](#equipment), requiring essence. Acquire certain attributes.
 
 ## Inventory
 
-The inventory is accessible as soon as the character acquires the [knapsack](#-knapsack) from the merchant. An item can either be;
+The inventory is accessible as soon as the character acquires the [knapsack](#knapsack) from the merchant. An item can either be;
 
-a) a piece of [equipment](#-equipment) that can be worn, or
-b) a consumable like an [elixir](#-elixir), or
-c) a [trinket](#-trinket) that grants specific effects when equipped.
+a) a piece of [equipment](#equipment) that can be worn, or
+b) a consumable like an [elixir](#elixir), or
+c) a [trinket](#trinket) that grants specific effects when equipped.
 
 ### Knapsack
 
-Allows for the storing of items. Allows equipping and un-equipping [equipment](#-equipment).
+Allows for the storing of items. Allows equipping and un-equipping [equipment](#equipment).
 
 ### Encumbrance
 
@@ -224,7 +242,7 @@ Standard type that has no special features.
 
 #### Weapon class
 
-Whatever its [type](#-weapon-type), a weapon falls into one of several classes that intrinsically grant certain modifiers.
+Whatever its [type](#weapon-type), a weapon falls into one of several classes that intrinsically grant certain modifiers.
 
 ##### Unarmed
 
@@ -235,23 +253,26 @@ No initial modifiers.
 - 1 slot
 - Low damage
 - High attack rate
-- Low stamina requirement
+- Low stamina cost
 - Chance to bleed on hit
+- Low cost
 
 ##### Balanced
 
 - 1 slot
 - Medium damage
-- Medium attack rate.
-- Low stamina requirement
+- Medium attack rate
+- Low stamina cost
+- Medium cost
 
 ##### Heavy
 
 - 1 slot
 - High damage
 - Low attack rate
-- Medium stamina requirement
-- Chance to stun
+- Medium stamina cost
+- Chance to stagger for 1.5s on hit
+- High cost
 
 ##### Two-handed
 
@@ -261,7 +282,8 @@ No initial modifiers.
 - Highest damage
 - Lowest attack rate
 - High stamina requirement
-- Chance for execution (instant monster death)
+- Chance for execution on hit
+- Medium cost
 
 ### Armor
 
@@ -275,34 +297,58 @@ No modifiers.
 
 #### Hide
 
-- Low Protection
-- Low -% dodge
+- Low protection
 - +% critical chance
+- Low cost
 
 #### Reinforced
 
-- Medium Protection
-- Medium -% dodge
+- Medium protection
+- Low -% dodge
 - +% damage
+- Medium cost
 
 #### Plate
 
-- High Protection
+[TODO]
+
+- High protection
 - High -% dodge
 - -% attack rate
-- +% chance to deflect spells
+- Chance to deflect spells
+- High cost
 
 ### Off-hand
 
-This slot allows the wielding of shields, [two-handed weapons](##-two-handed) or other off-hand items [TODO].
+This slot allows the wielding of shields, [two-handed weapons](##two-handed) [TODO] or other off-hand items [TODO].
 
 #### Shield
 
-Grants block chance, providing a percentage [chance to block](#-block-chance) all incoming damage. Also grants a stagger rate, determining the length of time the monster would be incapacitated upon the character successfully blocking.
+Grants block chance, providing a percentage [chance to block](#block-chance) all incoming damage. Also grants a [stagger](#stagger) rate, determining the length of time the monster would be incapacitated upon the character successfully blocking.
+
+##### Small
+
+- Low chance to block
+- Low stagger duration
+- Chance to [parry](#parry)
+- Low cost
+
+##### Medium
+
+- Medium chance to block
+- High stagger duration
+- Medium cost
+
+##### Tower
+
+- High chance to block
+- Medium stagger duration
+- +% protection
+- High cost
 
 ### Trinket
 
-Can grant various buffs and effects while equipped. Initially, only one trinket can be equipped at a time, but more slots can be acquired via the [tailor](#-tailor).
+Can grant various buffs and effects while equipped. Initially, only one trinket can be equipped at a time, but more slots can be acquired via the [tailor](#tailor).
 
 Here are some of the early items available from the merchant.
 
@@ -314,17 +360,17 @@ Allows the character to re-start the current wilderness level upon completion ra
 
 Allows the character to go to the caravan regardless of if the current wilderness level's wave is cleared or not. Cannot be engaged in combat while using it.
 
-## Potion
+## Potions
 
 [TODO]
 
 One of three types that take up the potion slot(s).
 
-Further slots can be added by the [tailor](#-tailor).
+Further slots can be added by the [tailor](#tailor).
 
 ### Elixir
 
-Restores health, stamina or both. Purchased from the [alchemist](#-alchemist).
+Restores health, stamina or both. Purchased from the [alchemist](#alchemist).
 
 ### Salve
 
@@ -376,7 +422,7 @@ Allows the use of a 1-handed weapon in main hand as well as offhand.
 
 [TODO]
 
-Once acquired, activating a skill requires [energy](#-energy).
+Once acquired, activating a skill requires [energy](#energy).
 
 #### Physical
 
@@ -394,7 +440,7 @@ Cast spells that remain active until dispelled. Provides buffs and other positiv
 
 Attributes each provide a direct increasing effect for each rank. Each rank allocation raises the character's power level by 1.
 
-[Essence](#-essence) is used to allocate ranks. The cost of allocation is increased for every rank.
+[Essence](#essence) is used to allocate ranks. The cost of allocation is increased for every rank.
 
 ### Agility
 
@@ -468,7 +514,7 @@ Total energy.
 
 [TODO]
 
-Temporary or permanent debuffs caused by Monsters. Can be treated by [potions].
+Temporary or permanent debuffs caused by Monsters. Can be treated by [potions](#potions) and other items.
 
 ## Traits
 
@@ -476,8 +522,9 @@ Temporary or permanent debuffs caused by Monsters. Can be treated by [potions].
 
 Traits are permanent passive abilities that are unlocked when reaching certain Mastery levels as well as certain Attributes.
 
-- Bruiser: current stamina adds unarmed bonus damage
-- Scrounger: double looting rate
+- Bruiser: current stamina adds unarmed bonus damage.
+- Nudist: double dodge rate when not wearing any armor.
+- Scrounger: double looting rate.
 
 ## Achievements
 
@@ -517,7 +564,7 @@ These are accessible via the "?" menu on the page header. They allow the activat
 
 ### NSFW mode
 
-Default: off. Toggles the generation of not-safe-for-work words in [LOCRA](#-locra).
+Default: off. Toggles the generation of not-safe-for-work words in [LOCRA](#locra).
 
 ### Show damage per second (DPS)
 
@@ -525,7 +572,7 @@ Default: off. Toggles DPS information for the character, equipment and monster.
 
 ### Auto-equip new items
 
-Default: on. Toggles the automatic equipping of weapons, armor, shields and potions once they are acquired. Cannot be set to off until the [knapsack](#-knapsack) is acquired.
+Default: on. Toggles the automatic equipping of weapons, armor, shields and potions once they are acquired. Cannot be set to off until the [knapsack](#knapsack) is acquired.
 
 ### Low health warning
 

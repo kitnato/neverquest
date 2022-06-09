@@ -13,15 +13,15 @@ export default function Offense() {
       </Col>
 
       <Col>
-        <DamagePerSecond />
-      </Col>
-
-      <Col>
         <CritChance />
       </Col>
 
       <Col>
         <CritDamage />
+      </Col>
+
+      <Col>
+        <DamagePerSecond />
       </Col>
     </Row>
   );

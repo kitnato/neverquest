@@ -2,13 +2,13 @@
 
 _An irreverent UI-based incremental action role-playing game for web browsers._
 
-This README serves as a gameplay guide, technical manual and glossary of terms. For all "[TODO]" tags, see the roadmap.
+This README serves as a gameplay guide, technical manual and glossary of terms. For anything prefaced with a "[TODO]" tag, see the [roadmap](#roadmap).
 
-The UI is split up into the character and the encounter panels, with most interactions between the two taking place via a column of gameplay control buttons in between them.
+The game is split up into the [character](#character) and the [encounter](#encounter) panels, with most interactions between the two taking place via a column of gameplay [control](#control) buttons in between them.
 
 ## Character
 
-The main panel on the left of the UI. View the character's, [reserves](#reserves), [statistics](#statistics), [resources](#resources), buffs and debuffs, and set their name.
+The main panel on the left of the UI. View the character's [reserves](#reserves), [statistics](#statistics), [resources](#resources), buffs and debuffs, and set their name.
 
 ### Reserves
 
@@ -18,33 +18,33 @@ Determine the basic status of the character.
 
 Total amount of damage the character can take before game over at 0 health.
 
-It is regenerated over time.
+It is [regenerated](#health-regeneration-rate) over time.
 
 #### Stamina
 
-If the character is wielding a [weapon](#weapon) with a stamina cost, this cost is paid with every attack. If there isn't enough stamina in reserve when attacking, no attacks can take place.
+If the character is wielding a [weapon](#weapon) with a stamina cost, this cost is paid with every attack. If there isn't enough stamina in reserve when attacking, the character is considered [exhausted](#exhaustion) and no attacks or blocks can take place.
 
-It is regenerated over time, at a faster initial pace than health.
+It is [regenerated](#stamina-regeneration-rate) over time, at a faster initial pace than health.
 
 #### Energy
 
 [TODO]
 
-Consumed when activating skills and sorceries, regenerated over time.
+Consumed when activating [skills](#skills) and [sorceries](#sorcery), regenerated over time.
 
 ### Resources
 
-Collected by looting dead monsters
+Collected by [looting](#looting) dead monsters and selling or dismantling items at the [caravan](#caravan).
 
 #### Coins
 
-Gained from selling scrap and items to the merchant and dropped by certain rare monsters. Used to pay for crew, some of their services and any item purchases.
+Gained from selling scrap and items to the [merchant](#merchant) and dropped by certain rare monsters. Used to pay for crew, some of their services and item purchases.
 
 #### Essence
 
 Gained from killing monsters and disenchanting equipment. Primarily spent on attribute ranks. Essence cost increases for every rank allocation.
 
-Essence can also be used to enchant equipment. [TODO]
+[TODO] Essence can also be used to enchant equipment.
 
 #### Scrap
 
@@ -52,15 +52,15 @@ Gained from dismantling [equipment](#equipment) at the blacksmith and dropped fr
 
 ### Statistics
 
-These are derived from the character's attributes, equipment, and any current buffs and debuffs.
+These are derived from the character's [attributes](#attributes), equipment, and any current buffs and debuffs.
 
 #### Damage per second
 
-Requires toggling on in the global [settings](#settings). If on, shows the expected damage per second the character can deal if [attack rate](#attack-rate) and current [total damage](#total-damage) remain stable.
+Requires toggling on in the global [settings](#settings). If on, shows the expected damage per second the character can deal, taking into account [attack rate](#attack-rate), current [total damage](#total-damage) and [critical hits](#critical-chance).
 
 #### Attack rate
 
-Time duration between attacks, not considering any interruptions.
+Time duration between attacks, not considering any interruptions such as [recovery](#recovery-rate).
 
 #### Block chance
 
@@ -68,7 +68,7 @@ Percentage chance that when defending, all incoming non-protected damage is bloc
 
 #### Critical chance
 
-Percentage chance that when attacking, critical damage is dealt, adding to [total damage](#total-damage).
+Percentage chance that when attacking, critical damage is dealt, which multiplies [total damage](#total-damage).
 
 #### Critical damage
 
@@ -80,19 +80,19 @@ Percentage determining the chance of when defending, the character avoids all da
 
 #### Health regeneration rate
 
-Time duration until [health](#health) is restored by one.
+Time duration until [health](#health) is restored by one point.
 
 #### Protection
 
-Amount of damage that is discarded when defending.
+Amount of damage that is discarded from the total when defending.
 
 #### Recovery rate
 
-Time duration until the character continues to regenerate [reserves](#reserves) and readies their next attack.
+Recovery occurs when the character is dealt damage, halting regeneration of [reserves](#reserves) and the [attack meter](#attack-rate). It is bounded by a certain duration.
 
 #### Stamina regeneration rate
 
-Time duration until [stamina](#stamina) is restored by one.
+Time duration until [stamina](#stamina) is restored by one point.
 
 #### Total damage
 
@@ -104,63 +104,63 @@ The main panel to the right of the screen. It changes based on one of the two po
 
 ### Wilderness
 
-Engage and fight monsters. Every wilderness level is different by name and has a certain amount of monsters (a wave) of a certain power. Killing all monsters allows progression to the [caravan](#caravan).
+Engage and fight monsters. Every wilderness level has a certain amount of monsters (a wave) of a certain power determined by the level and current wave progress. The name of the wilderness level is randomly generated by [LOCRA](#locra).
 
-The character must reach the end of the wave again to gain access to the loot and the ability to travel to the caravan. With the acquisition of the [compass](#compass), a completed wilderness level can be restarted to gain more [loot](#reserves).
-
-The name of the wilderness level is randomly generated by [LOCRA](#locra).
-
-The wilderness level is considered completed when the wave progress is at its maximum. At this point, [loot](#reserves) can be collected.
+The level is considered completed when the wave progress is at its maximum after having killed all the monsters. At this point, any [loot](#looting) can be collected and the character can progress to the [caravan](#caravan).
 
 ### Combat
 
 The wilderness initially always has a lurking [monster](#monster). When ready, the character can choose to attack continuously at their current [attack rate](#attack-rate), engaging the monster in the process. While engaged, the monster will also attack continuously, triggering the character to defend themselves. When the monster hits the character, [recovery](#recovery-rate) is triggered. While recovering, the character won't be able to attack or regenerate their [reserves](#reserves).
 
-Both the character and monster will keep attacking each other until either the character retreats, upon which the monster's health instantly regenerates to its maximum, or if the monster or character is dead (health reaches zero). Upon a monster's death, the wave progress is incremented and the next monster is attacked automatically, unless the character retreats.
+Both the character and monster will keep attacking each other until either the character retreats, upon which the monster's health instantly regenerates to its maximum, or if the monster or character is dead (its health reaches zero). Upon a monster's death, the wave progress is incremented, its remains are looted and the next monster is engaged automatically, unless the character retreats.
 
-#### Combat effects
+#### Combat mechanics
 
-There are several special mechanics that can occur during combat. These effects are usually intrinsic to equipment and can't be controlled directly the way [attributes](#attributes) are. Some also don't appear as part of [statistics](#statistics), as they become apparent in the character and monster status screens.
+There are several mechanics that occur during combat. These effects are usually intrinsic to equipment and can't be controlled directly the way [attributes](#attributes) are. Some also don't appear as part of [statistics](#statistics), as they become apparent in the character and monster status screens.
 
 ##### Bleed
 
-Certain successful attacks by a monster or the character can inflict a damage over time effect constrained by a total amount of damage inflicted regularly over a certain period of time. Bleed effects can be stemmed by a [first aid kit](#medic) or certain [salves](#salve).
+Certain successful attacks by a monster or the character can inflict bleed, a damage over time effect constrained by a total amount of damage inflicted regularly over a certain period of time. Bleed effects can be stemmed by a [first aid kit](#medic) or certain [salves](#salve).
 
 ##### Block
 
-When having a [shield](#shield) equipped, a successful block by the character upon a monster's attack will negate all damage done and will also inflict a certain [stagger](#stagger) duration on the monster. The chance to block an attack is determined by the [block chance](#block-chance).
+A successful block by the character upon a monster's attack will negate all damage done. Blocking may also inflict a certain [stagger](#stagger) duration on the monster. The overall chance to block an attack is determined by the [block chance](#block-chance).
+
+##### Exhaustion
+
+When there is no [stamina](#stamina) to attack or block, the character must wait for it to [regenerate](#stamina-regeneration-rate) first before being able to do either.
+
+##### Looting
+
+After the monster is defeated, its remains are looted automatically for any [resources](#-resources). This takes a few seconds, but can be shortened with certain [traits](#traits) or [items](#inventory).
+
+The looted resources can only be collected once the [wave](#wilderness) is completed.
 
 ##### Parry
 
-A successful parry will return 50% of the total damage inflicted back to the attacker.
+A successful parry will deal 50% of the total damage inflicted and reflect the other 50% back to the attacker.
 
 ##### Stagger
 
-When staggered, the monster will not be able to attack for a certain duration.
+When staggered, the monster will not be able to attack for a certain duration. The character is considered staggered when they are [recovering](#recovery-rate).
 
 #### Monster
 
-A creature with a randomly generated name that will continuously attack the character as soon as it's engaged (when the character attacks it for the first time). It has health and a certain attack rate based on the wilderness level.
-
-The character can deal damage, as well as debuff it using various skills and weapon effects.
+A creature with a randomly generated name that will continuously attack the character as soon as it's engaged (when the character attacks it for the first time). It has health and a certain attack rate both determined by the wilderness level.
 
 ### Caravan
 
-Encountered after completed a [wilderness](#wilderness) level. It can be upgraded to add more crew that offer goods and services.
+Encountered after completing a [wilderness](#wilderness) level. The caravan can be upgraded to add more crew that offer goods and services.
 
-All goods and services offered by the caravan crew are purchasable with [coins](#coins), [scrap](#scrap) or [essence](#essence), granting various different upgrades.
+All goods and services offered by the caravan crew are purchasable with [coins](#coins), [scrap](#scrap) or [essence](#essence), granting various different upgrades. Once at the caravan, the only other option apart from interacting with the crew is to go back to the next level of the wilderness.
 
-Once at the caravan, the only other option apart from interacting with the crew is to go back to the wilderness, which will be generated at a higher level (thereby being more challenging) than the previous time.
-
-The [merchant](#merchant) is always present from the start.
-
-Other crew members can be acquired at a cost of coins. Some have additional requirements before they are unlocked for purchase.
+The [merchant](#merchant) is always present from the start. Other crew members can be acquired at a cost of coins. Some have additional requirements before they are unlocked for purchase.
 
 #### Merchant
 
 Sell and buy items. Exchange scrap for coins. Coins can then be used to purchase whatever the merchant has available and used for other goods and services of the caravan.
 
-The merchant's inventory of items will grow and diversify progressively.
+The merchant's inventory of items will grow and diversify after each wilderness level.
 
 #### Mercenary
 
@@ -168,11 +168,15 @@ Acquire new physical [skills](#skills) and [attributes](#attributes).
 
 #### Cook
 
-Restores all [health](#health), [stamina](#stamina) and [energy](#energy). Grants a Well Fed buff for the first wave (+10% [mastery](#mastery) gain).
+Restores all [health](#health), [stamina](#stamina) and [energy](#energy) when purchasing a hot meal.
+
+[TODO] Grants a Well Fed buff for the first wave (+10% [mastery](#mastery) gain).
 
 #### Tailor
 
-Increase maximum [encumbrance](#inventory), add extra trinkets slots and add extra [potion](#potions) slots [TODO].
+Increase maximum [encumbrance](#inventory), add extra trinkets slots.
+
+[TODO] Also allows adding extra [potion](#potions) slots.
 
 #### Blacksmith
 
@@ -180,9 +184,7 @@ Repair, dismantle, craft and upgrade [weapons](#weapon) and [armor](#armor). Req
 
 #### Medic
 
-[TODO]
-
-Their presence saves the character from death (no restart necessary) once per wilderness level in return for a percentage of all coins, scrap and essence. Upgrades to the medic's supplies, paid in coins and/or scrap, reduce this death payment.
+Their presence saves the character from death (no restart necessary) once per wilderness level in return for a percentage of all of the character's current [resources](#resources). Upgrades to the medic's supplies, paid in coins and/or scrap, reduce this death payment.
 
 Also sells first aid kits that can cure a bleed effect and restore a certain amount of health over time.
 
@@ -218,11 +220,11 @@ Allows for the storing of items. Allows equipping and un-equipping [equipment](#
 
 ### Encumbrance
 
-The inventory size is constrained by encumbrance, to which each item adds a certain amount. No further items can be acquired until the remaining encumbrance allows for it.
+Once the knapsack is acquired, the inventory size is constrained by encumbrance, to which each carried or equipped item adds a certain amount. No further items can be acquired until the remaining encumbrance allows for it.
 
 ## Equipment
 
-Slots that can be equipped and unequipped from the inventory. If the particular.
+Slots that can be equipped and unequipped from the inventory.
 
 ### Weapons
 
@@ -320,9 +322,11 @@ No modifiers.
 
 ### Off-hand
 
-This slot allows the wielding of shields, [two-handed weapons](##two-handed) [TODO] or other off-hand items [TODO].
+This slot allows the wielding of [shields](#shields)
 
-#### Shield
+[TODO] Is taken up by [two-handed weapons](##two-handed) and any other off-hand items.
+
+#### Shields
 
 Grants block chance, providing a percentage [chance to block](#block-chance) all incoming damage. Also grants a [stagger](#stagger) rate, determining the length of time the monster would be incapacitated upon the character successfully blocking.
 
@@ -354,7 +358,7 @@ Here are some of the early items available from the merchant.
 
 #### Compass
 
-Allows the character to re-start the current wilderness level upon completion rather than only being able to go to the caravan.
+Allows the character to re-run the current wilderness level upon completion rather than only being able to go to the caravan. This increases the amount of collectable [loot](#resources) at that level.
 
 #### Hearthstone
 
@@ -374,7 +378,7 @@ Restores health, stamina or both. Purchased from the [alchemist](#alchemist).
 
 ### Salve
 
-Grants temporary buff or immunizes against ailment
+Grants temporary buff or immunizes against [ailment](#ailment).
 
 ### Poison
 
@@ -618,6 +622,8 @@ To run the app locally, you will need a command-line interface (CLI) on any oper
 - The UI framework is provided by [Bootstrap](https://react-bootstrap.github.io).
 
 - The app state management library is [Jotai](https://jotai.org).
+
+- Animations are provided by [Animate.css](https://animate.style/).
 
 ## License
 

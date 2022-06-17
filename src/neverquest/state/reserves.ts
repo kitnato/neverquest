@@ -2,10 +2,10 @@ import { atom } from "jotai";
 import { atomWithReset } from "jotai/utils";
 
 import { health, stamina } from "neverquest/state/attributes";
-import { deltaStamina } from "neverquest/state/deltas";
+import { deltaHealth, deltaStamina } from "neverquest/state/deltas";
 import { gameOver } from "neverquest/state/global";
 import { shield, weapon } from "neverquest/state/inventory";
-import { FloatingTextType } from "neverquest/types/ui";
+import { DeltaDisplay, FloatingTextType } from "neverquest/types/ui";
 
 // PRIMITIVES
 
@@ -41,29 +41,46 @@ export const maximumStamina = atom((get) => {
 
 // WRITERS
 
-export const healthChange = atom(null, (get, set, delta: number) => {
-  const max = get(maximumHealth);
-  let newHealth = get(currentHealth) + delta;
+export const healthChange = atom(
+  null,
+  (get, set, change: number | { delta: number; deltaContents: DeltaDisplay }) => {
+    const max = get(maximumHealth);
+    const isSimpleDelta = typeof change === "number";
+    const healthChange = isSimpleDelta ? change : change.delta;
 
-  if (newHealth <= 0) {
-    newHealth = 0;
-    set(gameOver, true);
+    let newHealth = get(currentHealth) + healthChange;
+
+    if (isSimpleDelta) {
+      const isPositive = healthChange > 0;
+
+      set(deltaHealth, {
+        color: isPositive ? FloatingTextType.Positive : FloatingTextType.Negative,
+        value: `${isPositive ? `+${healthChange}` : healthChange}`,
+      });
+    } else {
+      set(deltaHealth, change.deltaContents);
+    }
+
+    if (newHealth <= 0) {
+      newHealth = 0;
+      set(gameOver, true);
+    }
+
+    if (newHealth > max) {
+      newHealth = max;
+    }
+
+    set(currentHealth, newHealth);
   }
-
-  if (newHealth > max) {
-    newHealth = max;
-  }
-
-  set(currentHealth, newHealth);
-});
+);
 
 export const staminaChange = atom(null, (get, set, delta: number) => {
   const max = get(maximumStamina);
   let newStamina = get(currentStamina) + delta;
 
   set(deltaStamina, {
-    color: FloatingTextType.Negative,
-    value: `${delta > 0 ? delta : -delta}`,
+    color: delta > 0 ? FloatingTextType.Positive : FloatingTextType.Negative,
+    value: `${delta > 0 ? `+${delta}` : delta}`,
   });
 
   if (newStamina < 0) {

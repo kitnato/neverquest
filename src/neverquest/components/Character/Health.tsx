@@ -33,7 +33,6 @@ export default function Health() {
 
         <Regeneration
           atomReserve={healthChange}
-          atomReserveDelta={deltaHealth}
           atomDeltaRegenerationRate={deltaTotalHealthRegenerationRate}
           isReserveMaxedOut={isHealthMaxedOut}
           regenerationRate={totalHealthRegenerationRate}

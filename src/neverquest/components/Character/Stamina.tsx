@@ -42,7 +42,6 @@ export default function Stamina() {
 
         <Regeneration
           atomReserve={staminaChange}
-          atomReserveDelta={deltaStamina}
           atomDeltaRegenerationRate={deltaTotalStaminaRegenerationRate}
           isReserveMaxedOut={isStaminaMaxedOut}
           regenerationRate={totalStaminaRegenerationRate}

@@ -5,31 +5,22 @@ import LabelledProgressBar from "neverquest/components/LabelledProgressBar";
 
 import useAnimation from "neverquest/hooks/useAnimation";
 import { isRecovering } from "neverquest/state/character";
-import {
-  DeltaDisplay,
-  UIAttachment,
-  FloatingTextType,
-  UISize,
-  UIVariant,
-} from "neverquest/types/ui";
+import { UIAttachment, UISize, UIVariant } from "neverquest/types/ui";
 import { formatMilliseconds } from "neverquest/utilities/helpers";
 
 export default function RegenerationMeter({
-  regenerationRate,
   atomReserve,
-  atomReserveDelta,
   isReserveMaxedOut,
+  regenerationRate,
 }: {
-  regenerationRate: Atom<number>;
   atomReserve: WritableAtom<null, number>;
-  atomReserveDelta: WritableAtom<DeltaDisplay, DeltaDisplay>;
   isReserveMaxedOut: Atom<boolean>;
+  regenerationRate: Atom<number>;
 }) {
   const isRecoveringValue = useAtomValue(isRecovering);
   const regenerationRateValue = useAtomValue(regenerationRate);
   const isReserveMaxedOutValue = useAtomValue(isReserveMaxedOut);
   const changeCurrentReserve = useSetAtom(atomReserve);
-  const setDeltaReserve = useSetAtom(atomReserveDelta);
   const [deltaRegeneration, setDeltaRegeneration] = useState(0);
 
   useAnimation((delta) => {
@@ -39,12 +30,7 @@ export default function RegenerationMeter({
   useEffect(() => {
     if (deltaRegeneration >= regenerationRateValue) {
       setDeltaRegeneration(0);
-      // TODO - make health regeneration amount either a constant or an atom if it could be variable
       changeCurrentReserve(1);
-      setDeltaReserve({
-        color: FloatingTextType.Positive,
-        value: "+1",
-      });
     }
   }, [deltaRegeneration, regenerationRateValue]);
 

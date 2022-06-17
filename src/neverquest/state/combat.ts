@@ -2,7 +2,7 @@ import { atom } from "jotai";
 
 import { isRecovering, statusElement } from "neverquest/state/character";
 import { shield, weapon } from "neverquest/state/inventory";
-import { deltaHealth, deltaHealthMonster } from "neverquest/state/deltas";
+import { deltaHealth, deltaHealthMonster, deltaStamina } from "neverquest/state/deltas";
 import {
   currentHealthMonster,
   isMonsterStaggered,
@@ -18,30 +18,51 @@ import { animateElement } from "neverquest/utilities/helpers";
 // WRITERS
 
 export const defense = atom(null, (get, set) => {
+  const totalProtectionValue = get(totalProtection);
+  const healthDamage = (() => {
+    const damage = totalProtectionValue - get(totalDamageMonster);
+
+    return damage < 0 ? damage : 0;
+  })();
+
   animateElement({
     animation: AnimationType.HeadShake,
     element: get(statusElement),
     speed: AnimationSpeed.Fast,
   });
 
-  if (get(canBlock) && Math.random() <= get(totalBlockChance)) {
-    const { staminaCost } = get(shield);
-
+  if (healthDamage === 0) {
     set(deltaHealth, {
       color: FloatingTextType.Neutral,
-      value: "BLOCKED",
+      value: "0",
     });
-    set(staminaChange, -staminaCost);
-    set(isMonsterStaggered, true);
   } else {
-    const totalProtectionValue = get(totalProtection);
-    const healthDamage = (() => {
-      const damage = totalProtectionValue - get(totalDamageMonster);
+    const canBlockValue = get(canBlock);
+    const hasBlocked = Math.random() <= get(totalBlockChance);
 
-      return damage < 0 ? damage : 0;
-    })();
+    if (hasBlocked) {
+      const { staminaCost } = get(shield);
 
-    if (healthDamage < 0) {
+      if (canBlockValue) {
+        set(deltaHealth, {
+          color: FloatingTextType.Neutral,
+          value: "BLOCKED",
+        });
+        set(staminaChange, -staminaCost);
+        set(isMonsterStaggered, true);
+      } else {
+        set(deltaStamina, [
+          {
+            color: FloatingTextType.Neutral,
+            value: "CANNOT BLOCK",
+          },
+          {
+            color: FloatingTextType.Negative,
+            value: ` (${staminaCost})`,
+          },
+        ]);
+      }
+    } else {
       let deltaContents: DeltaDisplay = {
         color: FloatingTextType.Negative,
         value: `${healthDamage}`,
@@ -57,8 +78,7 @@ export const defense = atom(null, (get, set) => {
         ];
       }
 
-      set(deltaHealth, deltaContents);
-      set(healthChange, healthDamage);
+      set(healthChange, { delta: healthDamage, deltaContents });
 
       if (!get(showRecovery)) {
         set(showRecovery, true);
@@ -96,5 +116,16 @@ export const offense = atom(null, async (get, set) => {
       element,
       speed: AnimationSpeed.Fast,
     });
+  } else {
+    set(deltaStamina, [
+      {
+        color: FloatingTextType.Neutral,
+        value: "CANNOT ATTACK",
+      },
+      {
+        color: FloatingTextType.Negative,
+        value: ` (${staminaCost})`,
+      },
+    ]);
   }
 });

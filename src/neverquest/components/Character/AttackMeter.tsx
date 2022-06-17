@@ -38,22 +38,10 @@ export default function AttackMeter() {
     }
   }, [isAttackingValue, isLootingValue, isMonsterDeadValue, canAttackValue]);
 
-  const label = (() => {
-    if (isLootingValue) {
-      return "LOOTING";
-    }
-
-    if (!canAttackValue) {
-      return "EXHAUSTED";
-    }
-
-    return formatMilliseconds(totalAttackRateValue - deltaAttack);
-  })();
-
   return (
     <LabelledProgressBar
       disableTransitions
-      label={label}
+      label={canAttackValue ? formatMilliseconds(totalAttackRateValue - deltaAttack) : "EXHAUSTED"}
       value={(deltaAttack / totalAttackRateValue) * 100}
       variant={UIVariant.Secondary}
     />

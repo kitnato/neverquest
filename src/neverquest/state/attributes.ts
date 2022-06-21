@@ -64,7 +64,7 @@ export const health = atomWithReset<Attribute>({
 
 export const healthRegenerationRate = atomWithReset<Attribute>({
   base: 8000,
-  canAssign: true,
+  canAssign: false,
   description: "Increase health regeneration rate",
   increment: -200,
   name: "Vigor",

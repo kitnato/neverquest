@@ -550,6 +550,10 @@ Unlocks [dexterity](#dexterity) and [perception](#perception) attributes, as wel
 
 Unlocks the ability to [execute](#execution), as well as its modifiers on equipment.
 
+#### Calisthenics
+
+Unlocks the [fortitude](#fortitude) and [vigor](#vigor) attributes.
+
 #### Escrime
 
 Unlocks the ability to [parry](#parry), as well as its modifiers on equipment.

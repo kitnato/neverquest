@@ -2,12 +2,13 @@ import { atom } from "jotai";
 import { atomWithReset } from "jotai/utils";
 import { nanoid } from "nanoid";
 
-import { AffixTag, ShieldType, WeaponType } from "locra/types";
+import { AffixTag } from "locra/types";
 import { level } from "neverquest/state/encounter";
 import { nsfw } from "neverquest/state/global";
-import { ArmorClass, CrewType, InventoryMerchant, WeaponClass } from "neverquest/types/core";
+import { CrewType, InventoryMerchant } from "neverquest/types/core";
 import { generateArmor, generateShield, generateWeapon } from "neverquest/utilities/generators";
-import { ITEM_KNAPSACK } from "neverquest/utilities/constants";
+import { isItem } from "neverquest/utilities/type-guards";
+import { MERCHANT_OFFERS } from "neverquest/utilities/constants";
 
 // PRIMITIVES
 
@@ -47,70 +48,70 @@ export const merchantInventoryGenerated = atomWithReset(0);
 // WRITERS
 
 export const merchantInventoryGeneration = atom(null, (get, set) => {
-  const newInventory = get(merchantInventory);
-
   const levelValue = get(level);
-  const nsfwValue = get(nsfw);
 
   if (get(merchantInventoryGenerated) >= levelValue) {
     return;
   }
 
+  const inventory = get(merchantInventory);
+  const nsfwValue = get(nsfw);
+
   // Remove all previously returned items, so they no longer appear under buy back.
-  Object.getOwnPropertySymbols(newInventory)
-    .filter((id) => newInventory[id].isReturned)
-    .forEach((id) => delete newInventory[id]);
+  Object.getOwnPropertySymbols(inventory)
+    .filter((id) => inventory[id].isReturned)
+    .forEach((id) => delete inventory[id]);
 
-  switch (levelValue) {
-    case 1:
-      newInventory[Symbol()] = {
-        isReturned: false,
-        item: generateWeapon({
-          hasPrefix: true,
-          isNSFW: nsfwValue,
-          level: levelValue,
-          tags: [AffixTag.LowQuality],
-          type: WeaponType.Melee,
-          weaponClass: WeaponClass.Light,
-        }),
-        key: nanoid(),
-      };
-      break;
-    case 2:
-      newInventory[Symbol()] = {
-        isReturned: false,
-        item: generateArmor({
-          armorClass: ArmorClass.Hide,
-          hasPrefix: true,
-          isNSFW: nsfwValue,
-          level: levelValue,
-          tags: [AffixTag.LowQuality],
-        }),
-        key: nanoid(),
-      };
-      break;
-    case 3:
-      newInventory[Symbol()] = {
-        isReturned: false,
-        item: generateShield({
-          hasPrefix: true,
-          isNSFW: nsfwValue,
-          level: levelValue,
-          tags: [AffixTag.LowQuality],
-          type: ShieldType.Small,
-        }),
-        key: nanoid(),
-      };
-      break;
-    case 4:
-      newInventory[Symbol()] = {
-        isReturned: false,
-        item: ITEM_KNAPSACK,
-        key: nanoid(),
-      };
-      break;
-  }
+  // Merchant always offers one of each (low quality) equipment at the current level, even if previously sold.
+  // Level 5 and beyond only apply if the knapsack was bought (unique purchase).
+  const equipmentSettings = {
+    hasPrefix: true,
+    isNSFW: nsfwValue,
+    level: levelValue,
+    tags: [AffixTag.LowQuality],
+  };
 
-  set(merchantInventory, { ...newInventory });
+  MERCHANT_OFFERS[levelValue].forEach((item) => {
+    const symbol = Symbol();
+    const inventoryContentsBase = {
+      isReturned: false,
+      key: nanoid(),
+    };
+
+    if (isItem(item)) {
+      inventory[symbol] = {
+        ...inventoryContentsBase,
+        item,
+      };
+    } else {
+      const equipment = (() => {
+        if ("armorClass" in item) {
+          return generateArmor({
+            ...equipmentSettings,
+            ...item,
+          });
+        }
+
+        if ("weaponClass" in item) {
+          return generateWeapon({
+            ...equipmentSettings,
+            ...item,
+          });
+        }
+
+        return generateShield({
+          ...equipmentSettings,
+          ...item,
+        });
+      })();
+
+      inventory[symbol] = {
+        ...inventoryContentsBase,
+        item: equipment,
+      };
+    }
+  });
+
+  set(merchantInventory, { ...inventory });
   set(merchantInventoryGenerated, levelValue);
 });

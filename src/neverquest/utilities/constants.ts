@@ -1,139 +1,72 @@
 import { ShieldType, WeaponType } from "locra/types";
-import knapsackIcon from "neverquest/icons/knapsack.svg";
 import {
-  Armor,
-  ArmorClass,
-  Item,
-  Shield,
-  Trinket,
-  Weapon,
-  WeaponClass,
-} from "neverquest/types/core";
-import { RangeProps } from "neverquest/types/props";
+  ITEM_COMPASS,
+  ITEM_HEARTHSTONE,
+  ITEM_KNAPSACK,
+} from "neverquest/utilities/constants-items";
+import { ArmorClass, Item, WeaponClass } from "neverquest/types/core";
 
 export const ANIMATE_DURATION_PROPERTY = "--animate-duration";
 export const ANIMATE_PREFIX = "animate__";
 export const ANIMATED_CLASS = `${ANIMATE_PREFIX}animated`;
-
-export const ARMOR_SPECIFICATIONS: Record<
-  ArmorClass,
-  { protectionModifier: number; weight: number }
-> = {
-  [ArmorClass.Hide]: {
-    protectionModifier: 1.25,
-    weight: 1,
-  },
-  [ArmorClass.Plate]: {
-    protectionModifier: 3,
-    weight: 3,
-  },
-  [ArmorClass.Reinforced]: {
-    protectionModifier: 2,
-    weight: 2,
-  },
-};
 
 export const DELTA_DEFAULT = {
   color: null,
   value: "",
 };
 
-export const ITEM_KNAPSACK: Item = {
-  description: "Carry more items and manage equipment.",
-  icon: knapsackIcon,
-  isCarriable: false,
-  name: "Knapsack",
-  price: 12,
-  weight: 0,
-};
-
-export const NO_ARMOR: Armor = {
-  name: "Unarmored",
-  price: 0,
-  protection: 0,
-  weight: 0,
-};
-
-export const NO_SHIELD: Shield = {
-  block: 0,
-  name: "None",
-  price: 0,
-  stagger: 0,
-  staminaCost: 0,
-  weight: 0,
-};
-
-export const NO_TRINKET: Trinket = {
-  name: "None",
-  price: 0,
-  weight: 0,
-};
-
-export const NO_WEAPON: Weapon = {
-  damage: 1,
-  name: "Unarmed",
-  price: 0,
-  rate: 3000,
-  staminaCost: 0,
-  type: WeaponType.Melee,
-  weight: 0,
-};
-
-export const SHIELD_SPECIFICATIONS: Record<
-  ShieldType,
-  { blockRange: RangeProps; staggerModifier: number; staminaCost: number; weight: number }
+export const MERCHANT_OFFERS: Record<
+  number,
+  (
+    | Item
+    | { type: WeaponType; weaponClass: WeaponClass }
+    | { armorClass: ArmorClass }
+    | { type: ShieldType }
+  )[]
 > = {
-  [ShieldType.Medium]: {
-    blockRange: { minimum: 0.33, maximum: 0.59 },
-    staggerModifier: 1.75,
-    staminaCost: 2,
-    weight: 2,
-  },
-  [ShieldType.Small]: {
-    blockRange: { minimum: 0.2, maximum: 0.33 },
-    staggerModifier: 1.2,
-    staminaCost: 1,
-    weight: 1,
-  },
-  [ShieldType.Tower]: {
-    blockRange: { minimum: 0.6, maximum: 0.8 },
-    staggerModifier: 2.5,
-    staminaCost: 3,
-    weight: 3,
-  },
+  1: [
+    {
+      type: WeaponType.Melee,
+      weaponClass: WeaponClass.Light,
+    },
+  ],
+  2: [
+    {
+      armorClass: ArmorClass.Hide,
+    },
+  ],
+  3: [
+    {
+      type: ShieldType.Small,
+    },
+  ],
+  4: [ITEM_KNAPSACK],
+  5: [
+    {
+      type: WeaponType.Melee,
+      weaponClass: WeaponClass.Balanced,
+    },
+    {
+      armorClass: ArmorClass.Reinforced,
+    },
+    {
+      type: ShieldType.Medium,
+    },
+  ],
+  6: [ITEM_COMPASS],
+  7: [
+    {
+      type: WeaponType.Melee,
+      weaponClass: WeaponClass.Heavy,
+    },
+    {
+      type: ShieldType.Tower,
+    },
+  ],
+  8: [ITEM_HEARTHSTONE],
 };
 
 export const TRANSPARENT_PIXEL =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
 
 export const UNKNOWN = "???";
-
-export const WEAPON_SPECIFICATIONS: Record<
-  WeaponClass,
-  { damageModifier: number; rateRange: RangeProps; staminaCost: number; weight: number }
-> = {
-  [WeaponClass.Balanced]: {
-    damageModifier: 2,
-    rateRange: { minimum: 3400, maximum: 4000 },
-    staminaCost: 2,
-    weight: 2,
-  },
-  [WeaponClass.Heavy]: {
-    damageModifier: 3,
-    rateRange: { minimum: 3900, maximum: 4500 },
-    staminaCost: 3,
-    weight: 3,
-  },
-  [WeaponClass.Light]: {
-    damageModifier: 1.25,
-    rateRange: { minimum: 3000, maximum: 3500 },
-    staminaCost: 1,
-    weight: 1,
-  },
-  [WeaponClass.TwoHanded]: {
-    damageModifier: 4,
-    rateRange: { minimum: 4000, maximum: 5000 },
-    staminaCost: 3,
-    weight: 4,
-  },
-};

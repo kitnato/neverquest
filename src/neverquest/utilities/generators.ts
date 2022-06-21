@@ -5,7 +5,7 @@ import {
   ARMOR_SPECIFICATIONS,
   SHIELD_SPECIFICATIONS,
   WEAPON_SPECIFICATIONS,
-} from "neverquest/utilities/constants";
+} from "neverquest/utilities/constants-equipment";
 import { getFromRange } from "neverquest/utilities/helpers";
 
 export function generateArmor({

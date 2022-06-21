@@ -12,7 +12,7 @@ import {
   NO_SHIELD,
   NO_TRINKET,
   NO_WEAPON,
-} from "neverquest/utilities/constants";
+} from "neverquest/utilities/constants-equipment";
 import { isArmor, isItem, isShield, isTrinket, isWeapon } from "neverquest/utilities/type-guards";
 
 export default function useAcquireItem() {

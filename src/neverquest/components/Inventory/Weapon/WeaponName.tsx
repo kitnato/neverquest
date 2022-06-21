@@ -8,7 +8,7 @@ import {
   formatMilliseconds,
   getDamagePerSecond,
 } from "neverquest/utilities/helpers";
-import { NO_WEAPON } from "neverquest/utilities/constants";
+import { NO_WEAPON } from "neverquest/utilities/constants-equipment";
 
 export default function WeaponName({ weapon }: { weapon: Weapon }) {
   const showDPSValue = useAtomValue(showDamagePerSecond);

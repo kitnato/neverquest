@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { atomWithReset } from "jotai/utils";
 
-import { stamina, staminaRegenerationRate } from "neverquest/state/attributes";
+import { stamina } from "neverquest/state/attributes";
 import {
   showArmor,
   showBlockChance,
@@ -14,7 +14,12 @@ import {
   showWeapon,
 } from "neverquest/state/show";
 import { Armor, Inventory, Shield, Trinket, Weapon } from "neverquest/types/core";
-import { NO_ARMOR, NO_TRINKET, NO_SHIELD, NO_WEAPON } from "neverquest/utilities/constants";
+import {
+  NO_ARMOR,
+  NO_TRINKET,
+  NO_SHIELD,
+  NO_WEAPON,
+} from "neverquest/utilities/constants-equipment";
 import { isArmor, isShield, isTrinket, isWeapon } from "neverquest/utilities/type-guards";
 
 // PRIMITIVES
@@ -142,13 +147,6 @@ export const itemEquip = atom(null, (get, set, id: symbol) => {
 
       if (!get(stamina).canAssign) {
         set(stamina, (current) => ({ ...current, canAssign: true }));
-      }
-
-      if (!get(staminaRegenerationRate).canAssign) {
-        set(staminaRegenerationRate, (current) => ({
-          ...current,
-          canAssign: true,
-        }));
       }
     }
 

@@ -1,7 +1,7 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 
 import { Armor } from "neverquest/types/core";
-import { NO_ARMOR } from "neverquest/utilities/constants-equipment";
+import { NO_ARMOR } from "neverquest/utilities/constants-gear";
 
 export default function ArmorName({ armor }: { armor: Armor }) {
   const { armorClass, name, protection, weight } = armor;

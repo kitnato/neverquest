@@ -4,7 +4,7 @@ import { Button, Col, Row, Stack } from "react-bootstrap";
 import InventoryElement from "neverquest/components/Inventory/InventoryElement";
 import Encumbrance from "neverquest/components/Inventory/Encumbrance";
 import { inventory, itemEquip, itemUnequip } from "neverquest/state/inventory";
-import { isEquipment } from "neverquest/utilities/type-guards";
+import { isGear } from "neverquest/utilities/type-guards";
 import { UIVariant } from "neverquest/types/ui";
 
 export default function Inventory() {
@@ -70,7 +70,7 @@ export default function Inventory() {
                 <InventoryElement item={item} />
               </Col>
 
-              {isEquipment(item) && (
+              {isGear(item) && (
                 <Col>
                   <Button onClick={onEquipItem(id)} variant={UIVariant.Outline}>
                     Equip

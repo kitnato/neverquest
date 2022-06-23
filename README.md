@@ -46,13 +46,13 @@ Gained from selling scrap and items to the [merchant](#merchant) and dropped by 
 
 #### Essence
 
-Gained from killing monsters and disenchanting equipment. Primarily spent on attribute ranks. Essence cost increases for every such rank allocation.
+Gained from killing monsters and disenchanting gear. Primarily spent on attribute ranks. Essence cost increases for every such rank allocation.
 
-`[TODO]` Essence can also be used to enchant equipment.
+`[TODO]` Essence can also be used to enchant gear.
 
 #### Scrap
 
-Gained from dismantling [equipment](#equipment) at the blacksmith and dropped from monsters. Used to craft equipment and trade for coins.
+Gained from dismantling [gear](#gear) at the blacksmith and dropped from monsters. Used to craft gear and trade for coins.
 
 ### Attributes
 
@@ -130,7 +130,7 @@ Total [energy](#energy).
 
 ### Statistics
 
-Derived from the character's [attributes](#attributes), [equipment](#equipment), and any current [ailments](#ailments).
+Derived from the character's [attributes](#attributes), [gear](#gear), and any current [ailments](#ailments).
 
 #### Damage per second
 
@@ -194,7 +194,7 @@ The character will enter a **resting** state once the wave is complete and there
 
 Apart from attacking, retreating and defending, there are several mechanics that occur during combat.
 
-Some of the following effects are intrinsic to equipment and can't be controlled directly the way [attributes](#attributes) are. Others also don't appear as part of [statistics](#statistics), as they become apparent in the character and monster status screens.
+Some of the following effects are intrinsic to gear and can't be controlled directly the way [attributes](#attributes) are. Others also don't appear as part of [statistics](#statistics), as they become apparent in the character and monster status screens.
 
 #### Block
 
@@ -264,7 +264,7 @@ The [merchant](#merchant) is always present from the start. Other crew members c
 
 `[TODO]`
 
-Buy [elixirs](##elixir), [salves](##salve) and [poisons](##poison).
+Buy [elixirs](#elixirs), [salves](#salves) and [poisons](#poisons).
 
 #### Blacksmith
 
@@ -302,27 +302,29 @@ Acquire [sorceries](#sorceries) and [auras](#auras). Acquire certain attributes.
 
 Sells upgrades for increasing maximum [encumbrance](#encumbrance.
 
-`[TODO]` Also allows adding extra [potion](#potions) slots, as well as extra [trinket](#trinket) slots.
+`[TODO]` Also allows adding extra [potion](#potions) slots, as well as extra [trinket](#trinkets) slots.
 
 #### Witch
 
 `[TODO]`
 
-Enchant and disenchant [equipment](#equipment), requiring essence. Acquire certain attributes.
+Enchant and disenchant [gear](#gear), requiring essence. Acquire certain attributes.
 
 ## Inventory
 
-The inventory is accessible as soon as the character acquires the [knapsack](#knapsack) from the merchant. Before acquiring the knapsack, all equippable items are automatically equipped if possible and all consumables are immediately consumed.
+The inventory is accessible as soon as the character acquires the [knapsack](#knapsack) from the merchant.
+
+Before acquiring the knapsack, all equippable items are automatically equipped if possible and all consumables are immediately consumed. Additionally, [encumbrance](#encumbrance) can't be extended.
 
 An item can either be;
 
-a) a piece of [equipment](#equipment), or
-b) a consumable like an [elixir](#elixir), or
-c) a [trinket](#trinket) that grants special effects when equipped.
+a) a piece of [gear](#gear), or
+b) a consumable like an [elixir](#elixirs), or
+c) a [trinket](#trinkets) that grants special effects when equipped.
 
 ### Knapsack
 
-Allows for the storage of items. Allows equipping and un-equipping [equipment](#equipment). Purchasable from the [merchant](#merchant).
+Allows for the storage of items. Allows equipping and un-equipping [gear](#gear). Purchasable from the [merchant](#merchant).
 
 ### Encumbrance
 
@@ -330,11 +332,11 @@ The inventory size is constrained by encumbrance, to which each carried or equip
 
 Viewing encumbrance and managing it can only be accomplished once the [knapsack](#knapsack) is acquired.
 
-### Equipment
+### Gear
 
-Slots that can be equipped and unequipped from the inventory.
+Items that can be equipped and unequipped from the inventory.
 
-The [merchant](#merchant) sells low quality versions of all types at various levels, which lack the property marked with a `[HQ]` tag. To acquire equipment with the `[HQ]` property, they need to be crafted by the [blacksmith](#blacksmith).
+The [merchant](#merchant) sells low quality versions of all gear types at various levels, which lack the property marked with a `[HQ]` tag. To acquire gear with the `[HQ]` property, they need to be crafted by the [blacksmith](#blacksmith).
 
 #### Weapons
 
@@ -470,7 +472,7 @@ Grants block chance, providing a percentage [chance to block](#block-chance) all
 - `[HQ]` +% [protection](#protection)
 - High cost
 
-#### Trinket
+#### Trinkets
 
 Can grant various [buffs](#buffs) and other effects while equipped. Initially, only one trinket can be equipped at a time, but more slots can be acquired via the [tailor](#tailor).
 
@@ -492,15 +494,15 @@ One of three types that take up the potion slot(s).
 
 Further slots can be added by the [tailor](#tailor).
 
-#### Elixir
+#### Elixirs
 
 Restores health, stamina or both. Purchased from the [alchemist](#alchemist).
 
-#### Poison
+#### Poisons
 
 Adds poison to weapons automatically with each hit, applying damage-over-time effects and potentially other ailments. Has a certain number of charges before it is used up.
 
-#### Salve
+#### Salves
 
 Grants a temporary [buff](#buffs), or cures or temporarily immunizes against [ailments](#ailments).
 
@@ -544,11 +546,11 @@ Allows the use of [reinforced](#reinforced-armor) and [plate](#plate-armor) armo
 
 #### Assassination
 
-Unlocks [dexterity](#dexterity) and [perception](#perception) attributes, as well as [critical chance](#critical-chance) and [critical damage](#critical-damage) modifiers on [equipment](#equipment).
+Unlocks [dexterity](#dexterity) and [perception](#perception) attributes, as well as [critical chance](#critical-chance) and [critical damage](#critical-damage) modifiers on [gear](#gear).
 
 #### Butchery
 
-Unlocks the ability to [execute](#execution), as well as its modifiers on equipment.
+Unlocks the ability to [execute](#execution), as well as its modifiers on gear.
 
 #### Calisthenics
 
@@ -556,7 +558,7 @@ Unlocks the [fortitude](#fortitude) and [vigor](#vigor) attributes.
 
 #### Escrime
 
-Unlocks the ability to [parry](#parry), as well as its modifiers on equipment.
+Unlocks the ability to [parry](#parry), as well as its modifiers on gear.
 
 #### Siegecraft
 
@@ -568,7 +570,7 @@ Allows the use of [medium](#medium-shield) and [tower](#tower-shield) shields.
 
 #### Quick reflexes
 
-Unlocks [agility](#agility) attribute and [dodge chance](#dodge-chance) modifiers on equipment.
+Unlocks [agility](#agility) attribute and [dodge chance](#dodge-chance) modifiers on gear.
 
 #### Dual wielding
 
@@ -586,7 +588,7 @@ Negative status effects that dampen the character or monster. For the character,
 
 #### Bleed
 
-Certain successful attacks by a monster or the character can inflict bleed, a damage over time effect constrained by a total amount of damage inflicted regularly over a certain period of time. Bleed effects can be stemmed by a [first aid kit](#medic) or certain [salves](#salve).
+Certain successful attacks by a monster or the character can inflict bleed, a damage over time effect constrained by a total amount of damage inflicted regularly over a certain period of time. Bleed effects can be stemmed by a [first aid kit](#medic) or certain [salves](#salves).
 
 #### Diseased
 
@@ -632,7 +634,7 @@ Meta progression. Grant bonuses when completed.
 - Hire first new crew member
 - Hire X _(X = crew member)_
 
-### Equipment achievements
+### Gear achievements
 
 - Equip a weapon
 - Equip armor
@@ -652,7 +654,7 @@ Default: off. Toggles the generation of not-safe-for-work words in [LOCRA](#locr
 
 ### Show damage per second (DPS)
 
-Default: off. Toggles DPS information for the character, equipment and monster.
+Default: off. Toggles DPS information for the character, gear and monster.
 
 ### Auto-equip new items
 

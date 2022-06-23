@@ -62,9 +62,9 @@ export const merchantInventoryGeneration = atom(null, (get, set) => {
     .filter((id) => inventory[id].isReturned)
     .forEach((id) => delete inventory[id]);
 
-  // Merchant always offers one of each (low quality) equipment at the current level, even if previously sold.
+  // Merchant always offers one of each (low quality) gear at the current level, even if previously sold.
   // Level 5 and beyond only apply if the knapsack was bought (unique purchase).
-  const equipmentSettings = {
+  const gearSettings = {
     hasPrefix: true,
     isNSFW: nsfwValue,
     level: levelValue,
@@ -84,30 +84,30 @@ export const merchantInventoryGeneration = atom(null, (get, set) => {
         item,
       };
     } else {
-      const equipment = (() => {
+      const gear = (() => {
         if ("armorClass" in item) {
           return generateArmor({
-            ...equipmentSettings,
+            ...gearSettings,
             ...item,
           });
         }
 
         if ("weaponClass" in item) {
           return generateWeapon({
-            ...equipmentSettings,
+            ...gearSettings,
             ...item,
           });
         }
 
         return generateShield({
-          ...equipmentSettings,
+          ...gearSettings,
           ...item,
         });
       })();
 
       inventory[symbol] = {
         ...inventoryContentsBase,
-        item: equipment,
+        item: gear,
       };
     }
   });

@@ -1,19 +1,27 @@
 import { useAtomValue } from "jotai";
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 
-import { Weapon } from "neverquest/types/core";
 import { showDamagePerSecond } from "neverquest/state/show";
+import { Weapon } from "neverquest/types/core";
+import { NO_WEAPON } from "neverquest/utilities/constants-gear";
 import {
   capitalizeAll,
   formatMilliseconds,
   getDamagePerSecond,
 } from "neverquest/utilities/helpers";
-import { NO_WEAPON } from "neverquest/utilities/constants-equipment";
 
 export default function WeaponName({ weapon }: { weapon: Weapon }) {
   const showDPSValue = useAtomValue(showDamagePerSecond);
 
   const { damage, name, rate, staminaCost, type, weaponClass, weight } = weapon;
+
+  const WeaponType = () => (
+    <tr>
+      <td className="fst-italic text-end">Type:</td>
+
+      <td>{capitalizeAll(type)}</td>
+    </tr>
+  );
 
   return (
     <OverlayTrigger
@@ -43,19 +51,15 @@ export default function WeaponName({ weapon }: { weapon: Weapon }) {
                   <td>{formatMilliseconds(rate)}</td>
                 </tr>
 
-                <tr>
-                  <td className="fst-italic text-end">Type:</td>
-
-                  <td>{capitalizeAll(type)}</td>
-                </tr>
-
-                {weapon !== NO_WEAPON && (
+                {weapon !== NO_WEAPON ? (
                   <>
                     <tr>
                       <td className="fst-italic text-end">Stamina cost:</td>
 
                       <td>{staminaCost}</td>
                     </tr>
+
+                    <WeaponType />
 
                     <tr>
                       <td className="fst-italic text-end">Class:</td>
@@ -69,6 +73,8 @@ export default function WeaponName({ weapon }: { weapon: Weapon }) {
                       <td>{weight}</td>
                     </tr>
                   </>
+                ) : (
+                  <WeaponType />
                 )}
               </tbody>
             </Table>

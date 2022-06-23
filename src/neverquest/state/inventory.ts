@@ -14,12 +14,7 @@ import {
   showWeapon,
 } from "neverquest/state/show";
 import { Armor, Inventory, Shield, Trinket, Weapon } from "neverquest/types/core";
-import {
-  NO_ARMOR,
-  NO_TRINKET,
-  NO_SHIELD,
-  NO_WEAPON,
-} from "neverquest/utilities/constants-equipment";
+import { NO_ARMOR, NO_TRINKET, NO_SHIELD, NO_WEAPON } from "neverquest/utilities/constants-gear";
 import { isArmor, isShield, isTrinket, isWeapon } from "neverquest/utilities/type-guards";
 
 // PRIMITIVES

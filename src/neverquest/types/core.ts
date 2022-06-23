@@ -33,7 +33,7 @@ export enum CrewType {
 }
 
 interface InventoryBase {
-  item: Equipment | Item;
+  item: Gear | Item;
   key: string;
 }
 
@@ -62,7 +62,7 @@ interface ItemBase {
 }
 
 // TODO - add Trinket
-export type Equipment = Armor | Shield | Weapon;
+export type Gear = Armor | Shield | Weapon;
 
 export enum LocationType {
   Caravan,

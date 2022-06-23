@@ -8,7 +8,7 @@ import { showArmor, showShield, showWeapon } from "neverquest/state/show";
 import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
-export default function Equipment() {
+export default function Gear() {
   const showArmorValue = useAtomValue(showArmor);
   const showShieldValue = useAtomValue(showShield);
   const showWeaponValue = useAtomValue(showWeapon);

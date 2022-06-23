@@ -5,14 +5,14 @@ import useCheckEncumbrance from "neverquest/hooks/useCheckEncumbrance";
 import { hasKnapsack } from "neverquest/state/character";
 import { autoEquip } from "neverquest/state/global";
 import { armor, inventory, itemEquip, shield, trinket, weapon } from "neverquest/state/inventory";
-import { Equipment, Item } from "neverquest/types/core";
+import { Gear, Item } from "neverquest/types/core";
 import {
   ITEM_KNAPSACK,
   NO_ARMOR,
   NO_SHIELD,
   NO_TRINKET,
   NO_WEAPON,
-} from "neverquest/utilities/constants-equipment";
+} from "neverquest/utilities/constants-gear";
 import { isArmor, isItem, isShield, isTrinket, isWeapon } from "neverquest/utilities/type-guards";
 
 export default function useAcquireItem() {
@@ -27,7 +27,7 @@ export default function useAcquireItem() {
 
   const checkEncumbrance = useCheckEncumbrance();
 
-  return ({ item }: { item: Equipment | Item }) => {
+  return ({ item }: { item: Gear | Item }) => {
     if (!checkEncumbrance({ weight: item.weight })) {
       return false;
     }

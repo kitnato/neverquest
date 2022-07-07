@@ -9,7 +9,7 @@ export function isGear(gear: unknown): gear is Gear {
 }
 
 export function isItem(item: unknown): item is Item {
-  return isObject(item) && item.isCarriable !== undefined;
+  return isObject(item) && item.isPortable !== undefined;
 }
 
 function isObject(value: unknown): value is Record<string, unknown> {

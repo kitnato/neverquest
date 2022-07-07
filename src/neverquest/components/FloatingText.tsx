@@ -27,8 +27,8 @@ export default function FloatingText({ atom }: { atom: PrimitiveAtom<DeltaDispla
       return;
     }
 
-    const onAnimationEnd = () => {
-      setTextQueue(textQueue.filter((current) => current.key !== key));
+    const onAnimationEnd = (id: string) => () => {
+      setTextQueue((current) => current.filter(({ key }) => key !== id));
     };
     const key = nanoid();
 
@@ -41,7 +41,7 @@ export default function FloatingText({ atom }: { atom: PrimitiveAtom<DeltaDispla
               className={animationClass}
               direction="horizontal"
               gap={1}
-              onAnimationEnd={onAnimationEnd}
+              onAnimationEnd={onAnimationEnd(key)}
             >
               {deltaValue.map(({ color, value }) => (
                 <span className={color || ""} key={value}>
@@ -62,7 +62,7 @@ export default function FloatingText({ atom }: { atom: PrimitiveAtom<DeltaDispla
           contents: (
             <div
               className={`${animationClass}${color ? ` ${color}` : ""}`}
-              onAnimationEnd={onAnimationEnd}
+              onAnimationEnd={onAnimationEnd(key)}
             >
               {value}
             </div>
@@ -81,7 +81,7 @@ export default function FloatingText({ atom }: { atom: PrimitiveAtom<DeltaDispla
         const { contents, key } = delta;
 
         return (
-          <small className="position-absolute" key={key} style={{ bottom: -6, right: -6 }}>
+          <small className="position-absolute" key={key} style={{ bottom: -6, left: -8 }}>
             <strong>{contents}</strong>
           </small>
         );

@@ -32,7 +32,7 @@ export const ARMOR_SPECIFICATIONS: Record<
 export const ITEM_KNAPSACK: Item = {
   description: "Carry more items and manage gear.",
   icon: knapsackIcon,
-  isCarriable: false,
+  isPortable: false,
   name: "Knapsack",
   price: 12,
   weight: 0,

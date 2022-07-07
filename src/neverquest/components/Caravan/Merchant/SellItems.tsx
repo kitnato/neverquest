@@ -50,7 +50,7 @@ export default function SellItems() {
 
             return (
               <Row key={key}>
-                <Col xs={8}>
+                <Col>
                   <Stack direction="horizontal" gap={1}>
                     <InventoryElement item={item} />
 

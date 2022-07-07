@@ -1,11 +1,13 @@
+import compassIcon from "neverquest/icons/compass.svg";
 import knapsackIcon from "neverquest/icons/knapsack.svg";
+import stoneIcon from "neverquest/icons/stone-wheel.svg";
 import { Item } from "neverquest/types/core";
 
 // TODO
 export const ITEM_COMPASS: Item = {
   description: "Seek out more monsters in the wilderness.",
-  icon: knapsackIcon,
-  isCarriable: true,
+  icon: compassIcon,
+  isPortable: true,
   name: "Compass",
   price: 30,
   weight: 1,
@@ -14,8 +16,8 @@ export const ITEM_COMPASS: Item = {
 // TODO
 export const ITEM_HEARTHSTONE: Item = {
   description: "Travel back to the caravan even if there are still lurking monsters.",
-  icon: knapsackIcon,
-  isCarriable: true,
+  icon: stoneIcon,
+  isPortable: true,
   name: "Hearthstone",
   price: 55,
   weight: 1,
@@ -24,7 +26,7 @@ export const ITEM_HEARTHSTONE: Item = {
 export const ITEM_KNAPSACK: Item = {
   description: "Carry more items and manage gear.",
   icon: knapsackIcon,
-  isCarriable: false,
+  isPortable: false,
   name: "Knapsack",
   price: 12,
   weight: 0,

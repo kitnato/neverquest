@@ -73,13 +73,13 @@ export const resourcesBalance = atom(
       scrapDifference,
     }: Partial<{ coinsDifference: number; essenceDifference: number; scrapDifference: number }>
   ) => {
-    const coinsValue = coinsDifference || get(coinsLoot);
-    const essenceValue = essenceDifference || get(essenceLoot);
-    const scrapValue = scrapDifference || get(scrapLoot);
     const isLooting =
       coinsDifference === undefined &&
       essenceDifference === undefined &&
       scrapDifference === undefined;
+    const coinsValue = isLooting ? get(coinsLoot) : coinsDifference || 0;
+    const essenceValue = isLooting ? get(essenceLoot) : essenceDifference || 0;
+    const scrapValue = isLooting ? get(scrapLoot) : scrapDifference || 0;
 
     if (coinsValue !== 0) {
       const isPositive = coinsValue > 0;

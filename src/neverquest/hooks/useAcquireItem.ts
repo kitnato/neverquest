@@ -36,7 +36,7 @@ export default function useAcquireItem() {
       setHasKnapsack(true);
     }
 
-    if (isItem(item) && !item.isCarriable) {
+    if (isItem(item) && !item.isPortable) {
       return true;
     }
 

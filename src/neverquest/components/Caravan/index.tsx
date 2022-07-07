@@ -1,3 +1,4 @@
+import { useAtomValue } from "jotai";
 import { nanoid } from "nanoid";
 import { Fragment, useMemo, useState } from "react";
 import { Card, Stack } from "react-bootstrap";
@@ -6,6 +7,7 @@ import DismissableScreen from "neverquest/components/DismissableScreen";
 import Crew from "neverquest/components/Caravan/Crew";
 import Mercenary from "neverquest/components/Caravan/Mercenary";
 import Merchant from "neverquest/components/Caravan/Merchant";
+import { crew } from "neverquest/state/caravan";
 import { CrewType } from "neverquest/types/core";
 import { AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
@@ -18,6 +20,7 @@ interface CrewMember {
 }
 
 export default function Caravan() {
+  const crewValue = useAtomValue(crew);
   const [currentMember, setCurrentMember] = useState<CrewMember>();
   const [isScreenShowing, setScreenShowing] = useState(false);
 
@@ -54,16 +57,19 @@ export default function Caravan() {
       <Card className={getAnimationClass(AnimationType.FlipInX)}>
         <Card.Body>
           <Stack gap={3}>
-            {crewOrder.map(({ key, label, name, type }, index) => (
-              <Fragment key={key}>
-                <Crew
-                  label={label}
-                  name={name}
-                  setActive={() => onActivate(true, crewOrder[index])}
-                  type={type}
-                />
-              </Fragment>
-            ))}
+            {crewOrder.map(
+              ({ key, label, name, type }, index) =>
+                crewValue[type] && (
+                  <Fragment key={key}>
+                    <Crew
+                      label={label}
+                      name={name}
+                      setActive={() => onActivate(true, crewOrder[index])}
+                      type={type}
+                    />
+                  </Fragment>
+                )
+            )}
           </Stack>
         </Card.Body>
       </Card>

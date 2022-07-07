@@ -24,17 +24,24 @@ export const crew = atomWithReset<Record<CrewType, boolean>>({
   [CrewType.Wizard]: false,
 });
 
-export const crewMonologues = atomWithReset<Record<CrewType, string>>({
+export const crewMonologues = atomWithReset<Record<CrewType, string[]>>({
   // TODO - improve and diversify.
-  [CrewType.Alchemist]: "",
-  [CrewType.Blacksmith]: "Care for some new gear?",
-  [CrewType.Cook]: "",
-  [CrewType.Medic]: "",
-  [CrewType.Mercenary]: "Perhaps I can teach you something.",
-  [CrewType.Merchant]: "Greetings. I have what you're looking for.",
-  [CrewType.Tailor]: "",
-  [CrewType.Witch]: "",
-  [CrewType.Wizard]: "",
+  [CrewType.Alchemist]: [""],
+  [CrewType.Blacksmith]: ["Care for some new gear?"],
+  [CrewType.Cook]: [""],
+  [CrewType.Medic]: [""],
+  [CrewType.Mercenary]: ["Perhaps I can teach you something."],
+  [CrewType.Merchant]: [
+    "Greetings. I have what you're looking for.",
+    "Hello again. Some threads, perhaps?",
+    "Ah, you're back. Care for more protection?",
+    "You must be over-burdened. I have just the thing.",
+    "My acquisitions carry great risk. Could you help?",
+    "Welcome back. Always a sight for sore eyes.",
+  ],
+  [CrewType.Tailor]: [""],
+  [CrewType.Witch]: [""],
+  [CrewType.Wizard]: [""],
 });
 
 export const exchangeCoin = atomWithReset(1);

@@ -4,7 +4,8 @@ import { Button, Stack } from "react-bootstrap";
 
 import ImageIcon from "neverquest/components/ImageIcon";
 import icon from "neverquest/icons/cowled.svg";
-import { crew, crewMonologues } from "neverquest/state/caravan";
+import { crewMonologues } from "neverquest/state/caravan";
+import { level } from "neverquest/state/encounter";
 import { CrewType } from "neverquest/types/core";
 import { UIVariant } from "neverquest/types/ui";
 
@@ -19,18 +20,17 @@ export default function Crew({
   setActive: () => void;
   type: CrewType;
 }) {
-  const crewValue = useAtomValue(crew);
   const crewMonologueValue = useAtomValue(crewMonologues);
+  const levelValue = useAtomValue(level);
 
-  if (!crewValue[type]) {
-    return null;
-  }
+  const monologues = crewMonologueValue[type];
+  const monologue = monologues[levelValue - 1] || monologues[monologues.length - 1];
 
   return (
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip={name} />
 
-      <span>{`"${crewMonologueValue[type]}"`}</span>
+      <span>{`"${monologue}"`}</span>
 
       <Button
         onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {

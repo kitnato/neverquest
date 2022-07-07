@@ -21,7 +21,7 @@ export default function Status() {
     const { current } = element;
 
     setStatusElement(current);
-    animateElement({ animation: AnimationType.FlipInX, element: current });
+    animateElement({ type: AnimationType.FlipInX, element: current });
   }, []);
 
   return (

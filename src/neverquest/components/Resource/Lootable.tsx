@@ -23,7 +23,11 @@ export default function Lootable({
   }
 
   return (
-    <Stack className={getAnimationClass(AnimationType.FlipInX)} direction="horizontal" gap={3}>
+    <Stack
+      className={getAnimationClass({ type: AnimationType.FlipInX })}
+      direction="horizontal"
+      gap={3}
+    >
       <Component tooltip={tooltip} value={resourceValue} />
 
       <FloatingText atom={deltaAtom} />

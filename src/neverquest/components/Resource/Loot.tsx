@@ -19,7 +19,7 @@ export default function Loot() {
       <Looting />
 
       {progressValue > 0 && (
-        <Card className={getAnimationClass(AnimationType.FlipInX)}>
+        <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
           <Card.Body>
             {hasLootedValue ? (
               <Stack direction="horizontal" gap={5}>

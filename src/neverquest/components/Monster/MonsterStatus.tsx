@@ -25,7 +25,7 @@ export default function MonsterStatus() {
   useEffect(() => {
     if (isMonsterNewValue) {
       animateElement({
-        animation: AnimationType.ZoomInRight,
+        type: AnimationType.ZoomInRight,
         element: element.current,
         speed: AnimationSpeed.Faster,
       });

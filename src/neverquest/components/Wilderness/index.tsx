@@ -14,7 +14,7 @@ export default function Wilderness() {
   return (
     <Stack gap={3}>
       {isLevelCompletedValue ? (
-        <Card className={getAnimationClass(AnimationType.FlipInX)}>
+        <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
           <Card.Body>
             <Stack direction="horizontal" gap={5}>
               <ImageIcon icon={icon} tooltip="Monster remains" />

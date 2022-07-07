@@ -16,7 +16,7 @@ export default function Resources() {
   }
 
   return (
-    <Card className={getAnimationClass(AnimationType.FlipInX)}>
+    <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
       <Card.Body>
         <ResourceDisplay />
       </Card.Body>

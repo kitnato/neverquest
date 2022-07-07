@@ -26,7 +26,7 @@ export const defense = atom(null, (get, set) => {
   })();
 
   animateElement({
-    animation: AnimationType.HeadShake,
+    type: AnimationType.HeadShake,
     element: get(statusElement),
     speed: AnimationSpeed.Fast,
   });
@@ -112,7 +112,7 @@ export const offense = atom(null, async (get, set) => {
     });
 
     await animateElement({
-      animation: AnimationType.HeadShake,
+      type: AnimationType.HeadShake,
       element,
       speed: AnimationSpeed.Fast,
     });

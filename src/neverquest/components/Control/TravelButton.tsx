@@ -34,7 +34,11 @@ export default function TravelButton({ isDisabled }: { isDisabled: boolean }) {
       placement="top"
     >
       <Button
-        className={isWildernessValue ? getAnimationClass(AnimationType.Pulse, true) : ""}
+        className={
+          isWildernessValue
+            ? getAnimationClass({ isInfinite: true, type: AnimationType.Pulse })
+            : ""
+        }
         disabled={isDisabled}
         onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
           currentTarget.blur();

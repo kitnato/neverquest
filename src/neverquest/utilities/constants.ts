@@ -6,7 +6,6 @@ import {
 } from "neverquest/utilities/constants-items";
 import { ArmorClass, Item, WeaponClass } from "neverquest/types/core";
 
-export const ANIMATE_DURATION_PROPERTY = "--animate-duration";
 export const ANIMATE_PREFIX = "animate__";
 export const ANIMATED_CLASS = `${ANIMATE_PREFIX}animated`;
 

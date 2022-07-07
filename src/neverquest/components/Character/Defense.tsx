@@ -18,7 +18,7 @@ export default function Defense() {
   }
 
   return (
-    <Row className={getAnimationClass(AnimationType.FlipInX)}>
+    <Row className={getAnimationClass({ type: AnimationType.FlipInX })}>
       <Col>
         <TotalProtection />
       </Col>

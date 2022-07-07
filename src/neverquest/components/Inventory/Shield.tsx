@@ -18,7 +18,7 @@ export default function Shield() {
   }
 
   return (
-    <Stack className={getAnimationClass(AnimationType.FlipInX)} direction="horizontal" gap={3}>
+    <Stack className={getAnimationClass({ type: AnimationType.FlipInX })} direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Shield" />
 
       <span>{shieldValue.name}</span>

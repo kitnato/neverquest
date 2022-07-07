@@ -49,7 +49,7 @@ export default function Monster() {
   }
 
   return (
-    <Card className={getAnimationClass(AnimationType.FlipInX)}>
+    <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
       <Card.Body>
         <Stack direction="horizontal" gap={3}>
           <ImageIcon icon={unknownIcon} tooltip={UNKNOWN} />

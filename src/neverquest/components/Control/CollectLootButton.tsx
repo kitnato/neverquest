@@ -20,7 +20,7 @@ export default function CollectLootButton({ isDisabled }: { isDisabled: boolean 
   return (
     <OverlayTrigger overlay={<Tooltip>Collect loot</Tooltip>} placement="top">
       <Button
-        className={getAnimationClass(AnimationType.FlipInX)}
+        className={getAnimationClass({ type: AnimationType.FlipInX })}
         disabled={isDisabled}
         onClick={() => balanceResources({})}
         variant={UIVariant.Outline}

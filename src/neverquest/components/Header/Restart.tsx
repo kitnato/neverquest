@@ -22,7 +22,7 @@ export default function Restart() {
       <Button
         className={
           isGameOver && !isResetShowing && !showGameOverValue
-            ? getAnimationClass(AnimationType.Pulse, true)
+            ? getAnimationClass({ isInfinite: true, type: AnimationType.Pulse })
             : undefined
         }
         onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {

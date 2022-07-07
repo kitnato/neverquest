@@ -26,7 +26,11 @@ export default function Stamina() {
   }
 
   return (
-    <Stack className={getAnimationClass(AnimationType.FlipInX)} direction="horizontal" gap={3}>
+    <Stack
+      className={getAnimationClass({ type: AnimationType.FlipInX })}
+      direction="horizontal"
+      gap={3}
+    >
       <ImageIcon icon={icon} tooltip="Stamina" />
 
       <Stack>

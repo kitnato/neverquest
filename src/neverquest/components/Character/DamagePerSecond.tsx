@@ -17,7 +17,11 @@ export default function DamagePerSecond() {
   }
 
   return (
-    <Stack className={getAnimationClass(AnimationType.FlipInX)} direction="horizontal" gap={3}>
+    <Stack
+      className={getAnimationClass({ type: AnimationType.FlipInX })}
+      direction="horizontal"
+      gap={3}
+    >
       <ImageIcon icon={icon} tooltip="Damage per second (DPS)" />
 
       <span>{damagePerSecondValue}</span>

@@ -24,7 +24,11 @@ export default function Resource({
   }
 
   return (
-    <Stack className={getAnimationClass(AnimationType.FlipInX)} direction="horizontal" gap={3}>
+    <Stack
+      className={getAnimationClass({ type: AnimationType.FlipInX })}
+      direction="horizontal"
+      gap={3}
+    >
       <Component value={lootValue} />
 
       <FloatingText atom={deltaAtom} />

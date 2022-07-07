@@ -22,7 +22,11 @@ export default function WildernessProgress() {
   }
 
   return (
-    <Stack className={getAnimationClass(AnimationType.FlipInX)} direction="horizontal" gap={5}>
+    <Stack
+      className={getAnimationClass({ type: AnimationType.FlipInX })}
+      direction="horizontal"
+      gap={5}
+    >
       <Stack direction="horizontal" gap={3}>
         <ImageIcon icon={levelIcon} placement={OverlayPlacement.Bottom} tooltip="Level" />
 

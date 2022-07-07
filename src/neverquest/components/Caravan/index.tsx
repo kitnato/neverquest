@@ -54,7 +54,7 @@ export default function Caravan() {
 
   return (
     <>
-      <Card className={getAnimationClass(AnimationType.FlipInX)}>
+      <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
         <Card.Body>
           <Stack gap={3}>
             {crewOrder.map(

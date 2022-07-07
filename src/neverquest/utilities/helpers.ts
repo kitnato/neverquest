@@ -1,27 +1,23 @@
 import { RangeProps } from "neverquest/types/props";
 import { AnimationSpeed, AnimationType } from "neverquest/types/ui";
-import {
-  ANIMATED_CLASS,
-  ANIMATE_DURATION_PROPERTY,
-  ANIMATE_PREFIX,
-} from "neverquest/utilities/constants";
+import { ANIMATED_CLASS, ANIMATE_PREFIX } from "neverquest/utilities/constants";
 
 export function animateElement({
-  animation,
   element,
   speed,
+  type,
 }: {
-  animation: AnimationType;
-  element: HTMLDivElement | null;
+  element: HTMLElement | null;
   speed?: AnimationSpeed;
+  type: AnimationType;
 }): Promise<void> {
   return new Promise((resolve) => {
     if (element === null) {
       return;
     }
 
-    const { addEventListener, classList, style } = element;
-    const animationName = `${ANIMATE_PREFIX}${animation}`;
+    const { addEventListener, classList } = element;
+    const animationName = `${ANIMATE_PREFIX}${type}`;
     const animationSpeedClass = speed ? `${ANIMATE_PREFIX}${speed}` : null;
 
     if (classList.contains("d-none")) {
@@ -32,10 +28,6 @@ export function animateElement({
 
     if (animationSpeedClass) {
       classList.add(animationSpeedClass);
-    }
-
-    if (typeof speed === "number") {
-      style.setProperty(ANIMATE_DURATION_PROPERTY, formatMilliseconds(speed));
     }
 
     addEventListener(
@@ -114,10 +106,18 @@ export function formatToFixed(number: number, decimals = 2) {
   return (Math.round(result) / multiplier).toFixed(decimals);
 }
 
-export function getAnimationClass(type: AnimationType, isInfinite?: boolean) {
+export function getAnimationClass({
+  isInfinite,
+  speed,
+  type,
+}: {
+  isInfinite?: boolean;
+  speed?: AnimationSpeed;
+  type: AnimationType;
+}) {
   return `${ANIMATED_CLASS} ${ANIMATE_PREFIX}${type}${
     isInfinite ? ` ${ANIMATE_PREFIX}infinite` : ""
-  }`;
+  }${speed ? ` ${ANIMATE_PREFIX}${speed}` : ""}`;
 }
 
 export function getComputedStat({

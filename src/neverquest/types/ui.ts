@@ -2,11 +2,12 @@ export enum AnimationSpeed {
   Fast = "fast",
   Faster = "faster",
   Slow = "slow",
-  Slower = "Slower",
+  Slower = "slower",
 }
 
 export enum AnimationType {
   FadeInRight = "fadeInRight",
+  FadeOutUp = "fadeOutUp",
   FlipInX = "flipInX",
   HeadShake = "headShake",
   Pulse = "pulse",

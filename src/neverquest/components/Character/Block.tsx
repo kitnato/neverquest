@@ -17,7 +17,11 @@ export default function Block() {
   }
 
   return (
-    <Stack className={getAnimationClass(AnimationType.FlipInX)} direction="horizontal" gap={3}>
+    <Stack
+      className={getAnimationClass({ type: AnimationType.FlipInX })}
+      direction="horizontal"
+      gap={3}
+    >
       <ImageIcon icon={icon} tooltip="Block chance" />
 
       <span>{formatPercentage(block)}</span>

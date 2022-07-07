@@ -37,12 +37,12 @@ export default function AttributesButton({ isDisabled }: { isDisabled: boolean }
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>Attributes</Tooltip>} placement="top">
-        <span className={`${getAnimationClass(AnimationType.FlipInX)} d-inline-block`}>
+        <span className={`${getAnimationClass({ type: AnimationType.FlipInX })} d-inline-block`}>
           <Button
             disabled={isButtonDisabled}
             className={`position-relative${
               attributesIncreasableValue && !isButtonDisabled
-                ? ` ${getAnimationClass(AnimationType.Pulse, true)}`
+                ? ` ${getAnimationClass({ isInfinite: true, type: AnimationType.Pulse })}`
                 : ""
             }`}
             onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {

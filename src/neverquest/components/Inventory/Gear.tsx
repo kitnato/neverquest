@@ -18,7 +18,7 @@ export default function Gear() {
   }
 
   return (
-    <Card className={getAnimationClass(AnimationType.FlipInX)}>
+    <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
       <Card.Body>
         <Row>
           <Col>

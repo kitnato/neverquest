@@ -82,7 +82,14 @@ export default function FloatingText({ atom }: { atom: PrimitiveAtom<DeltaDispla
 
         return (
           <small className="position-absolute" key={key} style={{ bottom: -6, left: -8 }}>
-            <strong>{contents}</strong>
+            <strong
+              style={{
+                textShadow:
+                  "-1px 1px 1px #fff, 1px 1px 1px #fff, 1px -1px 1px #fff, -1px -1px 1px #fff",
+              }}
+            >
+              {contents}
+            </strong>
           </small>
         );
       })}

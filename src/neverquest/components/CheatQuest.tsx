@@ -19,27 +19,32 @@ export default function CheatQuest() {
   useEffect(() => {
     window.cheatQuest = (state, value) => {
       switch (state) {
-        case "coinsDifference":
+        // Age of Empires
+        case "COINAGE":
           if (typeof value === "number") {
             balanceResources({ coinsDifference: value });
           }
           break;
-        case "completeLevel":
+        // Source engine
+        case "noclip":
           setProgress(progressMaxValue);
           break;
-        case "essenceDifference":
+        // The Sims
+        case "rosebud":
+          if (typeof value === "number") {
+            balanceResources({ scrapDifference: value });
+          }
+          break;
+        // Starcraft
+        case "something for nothing":
           if (typeof value === "number") {
             balanceResources({ essenceDifference: value });
           }
           break;
-        case "level":
+        // Thief
+        case "starting_mission":
           if (typeof value === "number" && value && value >= 1) {
             setLevel(value);
-          }
-          break;
-        case "scrapDifference":
-          if (typeof value === "number") {
-            balanceResources({ scrapDifference: value });
           }
           break;
         default:

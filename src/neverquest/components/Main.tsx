@@ -1,4 +1,4 @@
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { useEffect } from "react";
 import { Col, Row, Stack } from "react-bootstrap";
 
@@ -10,19 +10,15 @@ import Location from "neverquest/components/Location";
 import WildernessProgress from "neverquest/components/Wilderness/WildernessProgress";
 import useReset from "neverquest/hooks/useReset";
 import { gameOver } from "neverquest/state/global";
-import { reservesInitial } from "neverquest/state/reserves";
 import { showGameOver } from "neverquest/state/show";
 
 export default function Main() {
   const [showGameOverValue, setShowGameOver] = useAtom(showGameOver);
   const isGameOver = useAtomValue(gameOver);
-  const initializeReserves = useSetAtom(reservesInitial);
 
   const reset = useReset();
 
-  useEffect(() => {
-    initializeReserves();
-  }, []);
+  useEffect(reset, []);
 
   return (
     <Stack gap={3}>

@@ -93,8 +93,3 @@ export const staminaChange = atom(null, (get, set, delta: number) => {
 
   set(currentStamina, newStamina);
 });
-
-export const reservesInitial = atom(null, (get, set) => {
-  set(currentHealth, get(maximumHealth));
-  set(currentStamina, get(maximumStamina));
-});

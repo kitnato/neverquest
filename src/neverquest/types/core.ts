@@ -20,16 +20,29 @@ export interface Attribute {
   points: number;
 }
 
+export enum CrewHireStatus {
+  Hirable,
+  Hired,
+  Unavailable,
+}
+
+export interface CrewMember {
+  Component: () => JSX.Element;
+  cost: number;
+  description: string;
+  interaction: string;
+  hirableLevel: number;
+  monologues: string[];
+  name: string;
+}
+
 export enum CrewType {
-  Alchemist,
   Blacksmith,
   Cook,
   Medic,
   Mercenary,
   Merchant,
   Tailor,
-  Witch,
-  Wizard,
 }
 
 interface InventoryBase {

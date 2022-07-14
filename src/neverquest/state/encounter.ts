@@ -2,9 +2,11 @@ import { atom } from "jotai";
 import { atomWithReset } from "jotai/utils";
 
 import LOCRA from "locra";
+import { crew, merchantInventoryGeneration } from "neverquest/state/caravan";
 import { nsfw } from "neverquest/state/global";
-import { LocationType } from "neverquest/types/core";
+import { CrewHireStatus, LocationType } from "neverquest/types/core";
 import { UNKNOWN } from "neverquest/utilities/constants";
+import { CREW_MEMBERS, CREW_ORDER } from "neverquest/utilities/constants-caravan";
 
 // PRIMITIVES
 
@@ -59,15 +61,43 @@ export const location = atom(
     return "Caravan";
   },
   (get, set) => {
-    const levelValue = get(level);
     const isWildernessValue = get(isWilderness);
 
     if (isWildernessValue) {
       set(mode, LocationType.Caravan);
     } else {
+      set(levelUp);
       set(mode, LocationType.Wilderness);
-      set(level, levelValue + 1);
-      set(progress, 0);
     }
   }
 );
+
+// WRITERS
+
+export const levelUp = atom(null, (get, set) => {
+  const crewValue = get(crew);
+  const levelValue = get(level);
+  const nextLevel = levelValue + 1;
+
+  const newCrew = { ...crewValue };
+
+  CREW_ORDER.forEach((type) => {
+    const { hireStatus, monologueProgress } = crewValue[type];
+    const { hirableLevel, monologues } = CREW_MEMBERS[type];
+
+    // Progress the monologue for all hired crew members.
+    if (hireStatus === CrewHireStatus.Hired && monologueProgress < monologues.length - 1) {
+      newCrew[type].monologueProgress += 1;
+    }
+
+    // Make crew member hirable if the appropriate level has been reached.
+    if (nextLevel >= hirableLevel && crewValue[type].hireStatus === CrewHireStatus.Unavailable) {
+      newCrew[type].hireStatus = CrewHireStatus.Hirable;
+    }
+  });
+
+  set(level, nextLevel);
+  set(progress, 0);
+  set(crew, newCrew);
+  set(merchantInventoryGeneration);
+});

@@ -42,3 +42,5 @@ export const deltaTotalProtection = atom<DeltaDisplay>(DELTA_DEFAULT);
 export const deltaTotalRecoveryRate = atom<DeltaDisplay>(DELTA_DEFAULT);
 
 export const deltaTotalStaminaRegenerationRate = atom<DeltaDisplay>(DELTA_DEFAULT);
+
+export const deltaWildernessLevel = atom<DeltaDisplay>(DELTA_DEFAULT);

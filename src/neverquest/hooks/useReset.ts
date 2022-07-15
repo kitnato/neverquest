@@ -66,7 +66,7 @@ import {
   showTotalProtection,
   showTrinket,
   showWeapon,
-  showWildernessProgress,
+  showWildernessStatus,
 } from "neverquest/state/show";
 
 // (ﾉ☉ヮ⚆)ﾉ ⌒*:･ﾟ✧
@@ -132,7 +132,7 @@ export default function useReset() {
   const resetShowTotalDamageSummary = useResetAtom(showTotalDamageSummary);
   const resetShowTotalProtection = useResetAtom(showTotalProtection);
   const resetShowWeapon = useResetAtom(showWeapon);
-  const resetShowWildernessProgress = useResetAtom(showWildernessProgress);
+  const resetShowWildernessStatus = useResetAtom(showWildernessStatus);
   const resetStamina = useResetAtom(stamina);
   const resetStaminaRegenerationRate = useResetAtom(staminaRegenerationRate);
   const resetStatusElement = useResetAtom(statusElement);
@@ -200,7 +200,7 @@ export default function useReset() {
     resetShowTotalProtection();
     resetShowTrinket();
     resetShowWeapon();
-    resetShowWildernessProgress();
+    resetShowWildernessStatus();
     resetStamina();
     resetStaminaRegenerationRate();
     resetStatusElement();

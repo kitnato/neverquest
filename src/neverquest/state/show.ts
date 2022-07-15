@@ -46,4 +46,4 @@ export const showTrinket = atomWithReset(false);
 
 export const showWeapon = atomWithReset(false);
 
-export const showWildernessProgress = atomWithReset(false);
+export const showWildernessStatus = atomWithReset(false);

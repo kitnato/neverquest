@@ -12,14 +12,13 @@ import { isAttacking } from "neverquest/state/character";
 import { isLevelCompleted } from "neverquest/state/encounter";
 import { isMonsterEngaged } from "neverquest/state/monster";
 import { isHealthLow } from "neverquest/state/reserves";
-import { showLowHealthWarning, showWildernessProgress } from "neverquest/state/show";
+import { showLowHealthWarning, showWildernessStatus } from "neverquest/state/show";
 import { AnimationType, UIVariant } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
 
 export default function AttackButton({ isDisabled }: { isDisabled: boolean }) {
   const [isAttackingValue, setAttacking] = useAtom(isAttacking);
-  const [showWildernessProgressValue, setShowWildernessProgressValue] =
-    useAtom(showWildernessProgress);
+  const [showWildernessStatusValue, setShowWildernessStatusValue] = useAtom(showWildernessStatus);
   const attributesIncreasableValue = useAtomValue(attributesIncreasable);
   const isHealthLowValue = useAtomValue(isHealthLow);
   const isLevelCompletedValue = useAtomValue(isLevelCompleted);
@@ -35,8 +34,8 @@ export default function AttackButton({ isDisabled }: { isDisabled: boolean }) {
   const toggleAttack = () => {
     setAttacking((current) => !current);
 
-    if (!showWildernessProgressValue) {
-      setShowWildernessProgressValue(true);
+    if (!showWildernessStatusValue) {
+      setShowWildernessStatusValue(true);
     }
   };
 

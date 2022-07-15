@@ -7,7 +7,7 @@ import ConfirmationDialog from "neverquest/components/ConfirmationDialog";
 import Control from "neverquest/components/Control";
 import Encounter from "neverquest/components/Encounter";
 import Location from "neverquest/components/Location";
-import WildernessProgress from "neverquest/components/Wilderness/WildernessProgress";
+import WildernessStatus from "neverquest/components/Wilderness/WildernessStatus";
 import useReset from "neverquest/hooks/useReset";
 import { gameOver } from "neverquest/state/global";
 import { showGameOver } from "neverquest/state/show";
@@ -30,7 +30,7 @@ export default function Main() {
         <Col style={{ width: 80 }} xs="auto" />
 
         <Col>
-          <WildernessProgress />
+          <WildernessStatus />
         </Col>
       </Row>
 

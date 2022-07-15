@@ -1,17 +1,9 @@
 import { atom } from "jotai";
 import { atomWithReset } from "jotai/utils";
 
-import {
-  deltaEssence,
-  deltaEssenceLoot,
-  deltaCoins,
-  deltaScrap,
-  deltaScrapLoot,
-} from "neverquest/state/deltas";
 import { isLevelCompleted, progress } from "neverquest/state/encounter";
 import { monsterLoot } from "neverquest/state/monster";
 import { showEssence, showAttributes, showCoins, showScrap } from "neverquest/state/show";
-import { FloatingTextType } from "neverquest/types/ui";
 
 // PRIMITIVES
 
@@ -41,18 +33,10 @@ export const lootDrop = atom(null, (get, set) => {
 
   if (essence > 0) {
     set(essenceLoot, (current) => current + essence);
-    set(deltaEssenceLoot, {
-      color: FloatingTextType.Positive,
-      value: `+${essence}`,
-    });
   }
 
   if (scrap > 0) {
     set(scrapLoot, (current) => current + scrap);
-    set(deltaScrapLoot, {
-      color: FloatingTextType.Positive,
-      value: `+${scrap}`,
-    });
   }
 
   set(progress, (current) => current + 1);
@@ -82,13 +66,7 @@ export const resourcesBalance = atom(
     const scrapValue = isLooting ? get(scrapLoot) : scrapDifference || 0;
 
     if (coinsValue !== 0) {
-      const isPositive = coinsValue > 0;
-
       set(coins, (current) => current + coinsValue);
-      set(deltaCoins, {
-        color: isPositive ? FloatingTextType.Positive : FloatingTextType.Negative,
-        value: `${isPositive ? "+" : ""}${coinsValue}`,
-      });
 
       if (!get(showCoins)) {
         set(showCoins, true);
@@ -100,13 +78,7 @@ export const resourcesBalance = atom(
     }
 
     if (essenceValue !== 0) {
-      const isPositive = essenceValue > 0;
-
       set(essence, (current) => current + essenceValue);
-      set(deltaEssence, {
-        color: isPositive ? FloatingTextType.Positive : FloatingTextType.Negative,
-        value: `${isPositive ? "+" : ""}${essenceValue}`,
-      });
 
       if (!get(showEssence)) {
         set(showEssence, true);
@@ -118,13 +90,7 @@ export const resourcesBalance = atom(
     }
 
     if (scrapValue !== 0) {
-      const isPositive = scrapValue > 0;
-
       set(scrap, (current) => current + scrapValue);
-      set(deltaScrap, {
-        color: isPositive ? FloatingTextType.Positive : FloatingTextType.Negative,
-        value: `${isPositive ? "+" : ""}${scrapValue}`,
-      });
 
       if (!get(showScrap)) {
         set(showScrap, true);

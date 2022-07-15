@@ -6,10 +6,12 @@ import { DeltaDisplay, FloatingTextType } from "neverquest/types/ui";
 import { formatMilliseconds } from "neverquest/utilities/helpers";
 
 export default function useDeltaText({
+  countInitial = false,
   deltaAtom,
   isTime = false,
   valueAtom,
 }: {
+  countInitial?: boolean;
   deltaAtom: WritableAtom<DeltaDisplay, DeltaDisplay>;
   isTime?: boolean;
   valueAtom: Atom<number>;
@@ -23,11 +25,11 @@ export default function useDeltaText({
   const positiveColor = isTime ? FloatingTextType.Negative : FloatingTextType.Positive;
 
   useEffect(() => {
-    if (previousValue === null) {
+    if (!countInitial && previousValue === null) {
       return;
     }
 
-    const difference = currentValue - previousValue;
+    const difference = currentValue - (previousValue ?? 0);
 
     if (difference === 0) {
       return;

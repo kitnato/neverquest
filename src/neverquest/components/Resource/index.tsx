@@ -4,6 +4,7 @@ import Stack from "react-bootstrap/Stack";
 import FloatingText from "neverquest/components/FloatingText";
 import { DeltaDisplay, AnimationType } from "neverquest/types/ui";
 import { getAnimationClass } from "neverquest/utilities/helpers";
+import useDeltaText from "neverquest/hooks/useDeltaText";
 
 export default function Resource({
   atom,
@@ -18,6 +19,12 @@ export default function Resource({
 }) {
   const lootValue = useAtomValue(atom);
   const showValue = useAtomValue(showAtom);
+
+  useDeltaText({
+    countInitial: true,
+    deltaAtom,
+    valueAtom: atom,
+  });
 
   if (!showValue) {
     return null;

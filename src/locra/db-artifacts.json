@@ -169,7 +169,7 @@
   { "name": "sickle", "subtype": "melee", "type": "weapon" },
   { "name": "skull shield", "subtype": "medium", "type": "shield" },
   { "name": "skull", "subtype": "melee", "type": "weapon" },
-  { "name": "slingshot","sff": true, "subtype": "ranged", "type": "weapon" },
+  { "name": "slingshot", "sff": true, "subtype": "ranged", "type": "weapon" },
   { "name": "sollerets", "subtype": "feet", "type": "armor" },
   { "name": "spaulders", "subtype": "shoulders", "type": "armor" },
   { "name": "spear", "subtype": "melee", "type": "weapon" },

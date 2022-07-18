@@ -12,7 +12,12 @@ import {
 import { canAttack, canBlock, healthChange, staminaChange } from "@neverquest/state/reserves";
 import { showRecovery } from "@neverquest/state/show";
 import { totalBlockChance, totalDamage, totalProtection } from "@neverquest/state/statistics";
-import { AnimationSpeed, AnimationType, DeltaDisplay, FloatingTextType } from "@neverquest/types/ui";
+import {
+  AnimationSpeed,
+  AnimationType,
+  DeltaDisplay,
+  FloatingTextType,
+} from "@neverquest/types/ui";
 import { animateElement } from "@neverquest/utilities/helpers";
 
 // WRITERS

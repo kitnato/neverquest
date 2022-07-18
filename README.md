@@ -701,7 +701,7 @@ To run the app locally from source, you will need to use a command-line interfac
 
 Before doing any changes, please do the following to set up the automatic linting process:
 
-1. Go to the project folder
+1. In the CLI, go to the project folder
 1. Run `npm run prepare`
 
 Now, every time you commit any changes, all the relevant code, markup and style linters & formatters will apply any changes automatically.

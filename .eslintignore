@@ -1,4 +1,3 @@
 .vscode
-config-overrides.js
 node_modules
 package-lock.json

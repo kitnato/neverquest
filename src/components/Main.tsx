@@ -18,7 +18,12 @@ export default function Main() {
 
   const reset = useReset();
 
-  useEffect(reset, []);
+  useEffect(() => {
+    // Remove any route or parameter pollution in URL.
+    window.history.replaceState({}, document.title, "/");
+
+    reset();
+  }, []);
 
   return (
     <Stack gap={3}>

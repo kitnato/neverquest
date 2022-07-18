@@ -14,18 +14,20 @@ export default function CrewHirable({ type }: { type: CrewType }) {
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip={name} />
 
-      <span>{description}</span>
+      <div className="align-items-center d-flex justify-content-between w-100">
+        <span>{description}</span>
 
-      <Button
-        onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-          currentTarget.blur();
+        <Button
+          onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+            currentTarget.blur();
 
-          // TODO
-        }}
-        variant={UIVariant.Outline}
-      >
-        Hire
-      </Button>
+            // TODO
+          }}
+          variant={UIVariant.Outline}
+        >
+          Hire
+        </Button>
+      </div>
     </Stack>
   );
 }

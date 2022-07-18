@@ -1,6 +1,6 @@
 import { MouseEvent, useState } from "react";
 import { useAtom, useSetAtom } from "jotai";
-import { Button, Col, Row, Stack } from "react-bootstrap";
+import { Button, Stack } from "react-bootstrap";
 
 import ConfirmationDialog from "@neverquest/components/ConfirmationDialog";
 import InventoryElement from "@neverquest/components/Inventory/InventoryElement";
@@ -49,36 +49,32 @@ export default function SellItems() {
             const { isEquipped, item, key } = inventoryValue[id];
 
             return (
-              <Row key={key}>
-                <Col>
-                  <Stack direction="horizontal" gap={1}>
+              <div className="align-items-center d-flex justify-content-between w-100" key={key}>
+                <Stack direction="horizontal" gap={5}>
+                  <Stack direction="horizontal">
                     <InventoryElement item={item} />
 
-                    {isEquipped && <span className="fst-italic">(Equipped)</span>}
+                    {isEquipped && <span className="fst-italic">&nbsp;(Equipped)</span>}
                   </Stack>
-                </Col>
 
-                <Col>
                   <Coins tooltip="Price (coins)" value={getSellPrice(item)} />
-                </Col>
+                </Stack>
 
-                <Col>
-                  <Button
-                    onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-                      currentTarget.blur();
+                <Button
+                  onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+                    currentTarget.blur();
 
-                      if (isEquipped) {
-                        setSellConfirmation(id);
-                      } else {
-                        sellItem(id);
-                      }
-                    }}
-                    variant={UIVariant.Outline}
-                  >
-                    Sell
-                  </Button>
-                </Col>
-              </Row>
+                    if (isEquipped) {
+                      setSellConfirmation(id);
+                    } else {
+                      sellItem(id);
+                    }
+                  }}
+                  variant={UIVariant.Outline}
+                >
+                  Sell
+                </Button>
+              </div>
             );
           })}
 

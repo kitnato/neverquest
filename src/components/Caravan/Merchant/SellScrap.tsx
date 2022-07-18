@@ -18,7 +18,7 @@ export default function SellScrap() {
   const canSell = scrapValue >= exchangeScrapValue;
 
   return (
-    <Stack direction="horizontal" gap={5}>
+    <div className="align-items-center d-flex justify-content-between w-100">
       <Stack direction="horizontal" gap={3}>
         <Scrap tooltip="Scrap (give)" value={exchangeScrapValue} />
 
@@ -49,6 +49,6 @@ export default function SellScrap() {
           </Button>
         </span>
       </OverlayTrigger>
-    </Stack>
+    </div>
   );
 }

@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { Col, Row, Stack } from "react-bootstrap";
+import { Stack } from "react-bootstrap";
 
 import BuyItemButton from "@neverquest/components/Caravan/Merchant/BuyItemButton";
 import InventoryElement from "@neverquest/components/Inventory/InventoryElement";
@@ -22,19 +22,15 @@ export default function BuyItems() {
         const { item, key } = merchantInventoryValue[id];
 
         return (
-          <Row key={key}>
-            <Col>
+          <div className="align-items-center d-flex justify-content-between w-100" key={key}>
+            <Stack direction="horizontal" gap={5}>
               <InventoryElement item={item} />
-            </Col>
 
-            <Col>
               <Coins tooltip="Price (coins)" value={item.price} />
-            </Col>
+            </Stack>
 
-            <Col>
-              <BuyItemButton id={id} />
-            </Col>
-          </Row>
+            <BuyItemButton id={id} />
+          </div>
         );
       })}
     </>

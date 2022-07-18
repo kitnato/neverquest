@@ -23,18 +23,20 @@ export default function CrewHirable({
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip={name} />
 
-      <span>{`"${monologues[crewValue[type].monologueProgress]}"`}</span>
+      <div className="align-items-center d-flex justify-content-between w-100">
+        <span>{`"${monologues[crewValue[type].monologueProgress]}"`}</span>
 
-      <Button
-        onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-          currentTarget.blur();
+        <Button
+          onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+            currentTarget.blur();
 
-          setActive();
-        }}
-        variant={UIVariant.Outline}
-      >
-        {interaction}
-      </Button>
+            setActive();
+          }}
+          variant={UIVariant.Outline}
+        >
+          {interaction}
+        </Button>
+      </div>
     </Stack>
   );
 }

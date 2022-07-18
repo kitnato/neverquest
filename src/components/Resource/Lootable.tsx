@@ -20,8 +20,8 @@ export default function Lootable({
   const resourceValue = useAtomValue(atom);
 
   useDeltaText({
-    countInitial: true,
     deltaAtom,
+    stop: () => false,
     valueAtom: atom,
   });
 

@@ -12,7 +12,7 @@ export default function MonsterHealth() {
     <Stack direction="horizontal" gap={3}>
       <ImageIcon icon={icon} tooltip="Monster health" />
 
-      <Stack className="align-self-center w-100" direction="horizontal">
+      <Stack className="w-100" direction="horizontal">
         <ReserveMeter atom={currentHealthMonster} atomMaximum={maximumHealthMonster} />
 
         <FloatingText atom={deltaHealthMonster} />

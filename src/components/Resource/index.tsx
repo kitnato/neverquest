@@ -21,8 +21,8 @@ export default function Resource({
   const showValue = useAtomValue(showAtom);
 
   useDeltaText({
-    countInitial: true,
     deltaAtom,
+    stop: () => false,
     valueAtom: atom,
   });
 

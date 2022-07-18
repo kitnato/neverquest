@@ -1,7 +1,7 @@
-import affixes from "locra/db-affixes.json";
-import artifacts from "locra/db-artifacts.json";
-import creatures from "locra/db-creatures.json";
-import locations from "locra/db-locations.json";
+import affixes from "@neverquest/locra/db-affixes.json";
+import artifacts from "@neverquest/locra/db-artifacts.json";
+import creatures from "@neverquest/locra/db-creatures.json";
+import locations from "@neverquest/locra/db-locations.json";
 import {
   AffixTag,
   AffixType,
@@ -9,8 +9,8 @@ import {
   Category,
   CreatureType,
   GeneratorParameters,
-} from "locra/types";
-import { capitalizeAll } from "neverquest/utilities/helpers";
+} from "@neverquest/locra/types";
+import { capitalizeAll } from "@neverquest/utilities/helpers";
 
 export default class LOCRA {
   static generate({

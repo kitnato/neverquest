@@ -688,12 +688,23 @@ Neverquest is a work-in-progress. Several features marked with `[TODO]` are pend
 
 To run the app locally from source, you will need to use a command-line interface (CLI), as well as have [git](https://git-scm.com/downloads) and [NPM](https://docs.npmjs.com/cli/v8/configuring-npm/install) installed globally.
 
+### Run the app
+
 1. Open the CLI and change into a suitable directory (e.g. "My Documents" folder)
 1. Run `git clone git@github.com:cneuro/neverquest.git`
 1. Run `cd neverquest`
 1. Run `npm install`
 1. Run `npm start`
 1. Open [http://localhost:3000](http://localhost:3000) in a web browser.
+
+### Local development
+
+Before doing any changes, please do the following to set up the automatic linting process:
+
+1. Go to the project folder
+1. Run `npm run prepare`
+
+Now, every time you commit any changes, all the relevant code, markup and style linters & formatters will apply any changes automatically.
 
 ## Implementation
 
@@ -743,7 +754,7 @@ Neverquest &copy; 2022 is licensed under [CC BY-NC-SA 4.0](https://creativecommo
    - Encounter
    - Trade
 1. Has anyone done this before?
-  Not quite in the same way. Clear influences are:
+   Not quite in the same way. Clear influences are:
    - Progress Quest (the progenitor of all text-heavy UI-based incremental games, also with a swords & sorcery fantasy theme)
    - Trimps (complex idle/incremental all about building )
    - Kingdom of Loathing (one of the first purely browser-based UI-focused adventure RPGs with an irreverent sense of humor)

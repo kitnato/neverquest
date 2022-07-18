@@ -23,15 +23,36 @@
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
+    "stylelint": "^14.9.1",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^26.0.0",
+    "stylelint-prettier": "^2.0.0",
     "typescript": "^4.7.4",
     "vite": "^3.0.1",
     "vite-tsconfig-paths": "^3.5.0"
+  },
+  "lint-staged": {
+    "*.css": [
+      "npm run lint-styles",
+      "npm run format"
+    ],
+    "*.{json,md}": [
+      "npm run format"
+    ],
+    "*.{ts,tsx}": [
+      "npm run lint-code",
+      "npm run format"
+    ]
   },
   "scripts": {
     "build": "tsc && vite build",
     "format": "prettier --write .",
     "lint-code": "eslint --fix --ext .ts,.tsx .",
+    "lint-styles": "stylelint '**/*.css'",
+    "prepare": "husky install",
     "start": "cross-env BROWSER=none vite"
   },
   "browserslist": {

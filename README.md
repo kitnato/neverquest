@@ -1,6 +1,6 @@
 # Neverquest
 
-_An irreverent UI-based incremental action role-playing game for web browsers._
+_An irreverent UI-based incremental action role-playing game._
 
 This README serves as a gameplay guide, technical manual and glossary of terms. For anything prefaced with a `[TODO]` tag, see the [roadmap](#roadmap).
 
@@ -695,28 +695,28 @@ To run the app locally from source, you will need to use a command-line interfac
 1. Run `cd neverquest`
 1. Run `npm install`
 1. Run `npm start`
-1. Open [http://localhost:3000](http://localhost:3000) in a web browser.
+1. Open [http://localhost:5173](http://localhost:5173) in a web browser.
 
 ### Local development
 
-Before doing any changes, please do the following to set up the automatic linting process:
+Before doing any changes, please do the following:
 
-1. In the CLI, go to the project folder
+1. In the CLI, go to the project folder.
 1. Run `npm run prepare`
 
 Now, every time you commit any changes, all the relevant code, markup and style linters & formatters will apply any changes automatically.
 
 ## Implementation
 
-- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- This project is bootstrapped with [Vite](https://vitejs.dev).
 
-- Written in [TypeScript](https://www.typescriptlang.org/).
+- Written in [TypeScript](https://www.typescriptlang.org).
 
 - The UI framework is provided by [Bootstrap](https://react-bootstrap.github.io).
 
 - The app state management library is [Jotai](https://jotai.org).
 
-- Animations are provided by [Animate.css](https://animate.style/).
+- Animations are provided by [Animate.css](https://animate.style).
 
 ## License
 

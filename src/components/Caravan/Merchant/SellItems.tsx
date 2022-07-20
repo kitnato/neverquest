@@ -50,30 +50,34 @@ export default function SellItems() {
 
             return (
               <div className="align-items-center d-flex justify-content-between w-100" key={key}>
-                <Stack direction="horizontal" gap={5}>
-                  <Stack direction="horizontal">
-                    <InventoryElement item={item} />
+                <Stack direction="horizontal">
+                  <InventoryElement item={item} />
 
-                    {isEquipped && <span className="fst-italic">&nbsp;(Equipped)</span>}
-                  </Stack>
-
-                  <Coins tooltip="Price (coins)" value={getSellPrice(item)} />
+                  {isEquipped && (
+                    <span className="fst-italic" style={{ width: "max-content" }}>
+                      &nbsp;(Equipped)
+                    </span>
+                  )}
                 </Stack>
 
-                <Button
-                  onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-                    currentTarget.blur();
+                <Stack direction="horizontal" gap={3}>
+                  <Coins tooltip="Price (coins)" value={getSellPrice(item)} />
 
-                    if (isEquipped) {
-                      setSellConfirmation(id);
-                    } else {
-                      sellItem(id);
-                    }
-                  }}
-                  variant={UIVariant.Outline}
-                >
-                  Sell
-                </Button>
+                  <Button
+                    onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+                      currentTarget.blur();
+
+                      if (isEquipped) {
+                        setSellConfirmation(id);
+                      } else {
+                        sellItem(id);
+                      }
+                    }}
+                    variant={UIVariant.Outline}
+                  >
+                    Sell
+                  </Button>
+                </Stack>
               </div>
             );
           })}

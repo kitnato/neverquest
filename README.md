@@ -606,7 +606,7 @@ Positive status effects that boost or improve the character or monster.
 
 `[TODO]`
 
-Traits are permanent passive abilities that are unlocked when reaching certain Mastery levels as well as certain Attributes.
+Traits are permanent passive abilities that are unlocked when reaching certain mastery levels or a certain attribute value.
 
 - Bruiser: current stamina adds unarmed bonus damage.
 - Nudist: double dodge rate when not wearing any armor.

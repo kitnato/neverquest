@@ -22,7 +22,7 @@ import { animateElement } from "@neverquest/utilities/helpers";
 
 // WRITERS
 
-export const defense = atom(null, (get, set) => {
+export const defense = atom(null, async (get, set) => {
   const totalProtectionValue = get(totalProtection);
   const healthDamage = (() => {
     const damage = totalProtectionValue - get(totalDamageMonster);
@@ -30,10 +30,10 @@ export const defense = atom(null, (get, set) => {
     return damage < 0 ? damage : 0;
   })();
 
-  animateElement({
-    type: AnimationType.HeadShake,
+  await animateElement({
     element: get(statusElement),
     speed: AnimationSpeed.Fast,
+    type: AnimationType.HeadShake,
   });
 
   if (healthDamage === 0) {
@@ -117,9 +117,9 @@ export const offense = atom(null, async (get, set) => {
     });
 
     await animateElement({
-      type: AnimationType.HeadShake,
       element,
       speed: AnimationSpeed.Fast,
+      type: AnimationType.HeadShake,
     });
   } else {
     set(deltaStamina, [

@@ -1,33 +1,62 @@
+import { useAtomValue, useSetAtom } from "jotai";
 import { MouseEvent } from "react";
-import { Button, Stack } from "react-bootstrap";
+import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
+import Coins from "@neverquest/components/Resource/Coins";
 import icon from "@neverquest/icons/cowled.svg";
-import { CrewType } from "@neverquest/types/core";
+import { crew } from "@neverquest/state/caravan";
+import { coins, resourcesBalance } from "@neverquest/state/resources";
+import { CrewHireStatus, CrewType } from "@neverquest/types/core";
 import { UIVariant } from "@neverquest/types/ui";
 import { CREW_MEMBERS } from "@neverquest/utilities/constants-caravan";
 
 export default function CrewHirable({ type }: { type: CrewType }) {
-  const { description, name } = CREW_MEMBERS[type];
+  const coinsValue = useAtomValue(coins);
+  const setCrew = useSetAtom(crew);
+  const balanceResources = useSetAtom(resourcesBalance);
+
+  const { description, name, price } = CREW_MEMBERS[type];
+  const isAffordable = price <= coinsValue;
 
   return (
-    <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip={name} />
+    <div className="align-items-center d-flex justify-content-between w-100">
+      <Stack direction="horizontal" gap={3}>
+        <ImageIcon icon={icon} tooltip={name} />
 
-      <div className="align-items-center d-flex justify-content-between w-100">
         <span>{description}</span>
+      </Stack>
 
-        <Button
-          onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-            currentTarget.blur();
+      <Stack direction="horizontal" gap={3}>
+        <Coins tooltip="Price (coins)" value={price} />
 
-            // TODO
-          }}
-          variant={UIVariant.Outline}
+        <OverlayTrigger
+          overlay={<Tooltip>{!isAffordable && <>Not enough coins!</>}</Tooltip>}
+          placement="top"
+          trigger={isAffordable ? [] : ["hover", "focus"]}
         >
-          Hire
-        </Button>
-      </div>
-    </Stack>
+          <span className="d-inline-block">
+            <Button
+              disabled={!isAffordable}
+              onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+                currentTarget.blur();
+
+                setCrew((current) => ({
+                  ...current,
+                  [type]: {
+                    ...current[type],
+                    hireStatus: CrewHireStatus.Hired,
+                  },
+                }));
+                balanceResources({ coinsDifference: -price });
+              }}
+              variant={UIVariant.Outline}
+            >
+              Hire
+            </Button>
+          </span>
+        </OverlayTrigger>
+      </Stack>
+    </div>
   );
 }

@@ -105,7 +105,7 @@ export default function AttackButton({ isDisabled }: { isDisabled: boolean }) {
       </OverlayTrigger>
 
       <ConfirmationDialog
-        confirmationLabel="Attack"
+        confirmationLabel="Attack anyway"
         onConfirm={toggleAttack}
         message="If you attack before increasing your attributes, you will have to kill all monsters before you get another chance."
         setHide={() => setShowAttackConfirmation(false)}

@@ -18,7 +18,7 @@ export default function DismissableScreen({
       onHide={onClose}
       placement={placement}
       show={isShowing}
-      style={{ minWidth: 450, width: "33%" }}
+      style={{ minWidth: 500, width: "33%" }}
     >
       <Offcanvas.Header closeButton>
         <Offcanvas.Title>{title}</Offcanvas.Title>

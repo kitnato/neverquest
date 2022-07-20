@@ -55,7 +55,7 @@ export default function CheatQuest() {
           return;
       }
     };
-  }, []);
+  }, [levelValue, progressMaxValue]);
 
   return <></>;
 }

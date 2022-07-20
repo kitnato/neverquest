@@ -28,12 +28,12 @@ export enum CrewHireStatus {
 
 export interface CrewMember {
   Component: () => JSX.Element;
-  cost: number;
   description: string;
   interaction: string;
   hirableLevel: number;
   monologues: string[];
   name: string;
+  price: number;
 }
 
 export enum CrewType {
@@ -94,6 +94,19 @@ export type Shield = ItemBase & {
   staminaCost: number;
   type?: ShieldType;
 };
+
+export interface Skill {
+  description: string;
+  icon: string;
+  name: string;
+  price: number;
+}
+
+export enum SkillType {
+  Criticals,
+  Dodging,
+  Parrying,
+}
 
 // TODO
 export type Trinket = ItemBase;

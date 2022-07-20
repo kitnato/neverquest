@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+import { nanoid } from "nanoid";
+import { Fragment, useMemo } from "react";
 import Stack from "react-bootstrap/Stack";
 
 import Attribute from "@neverquest/components/Attributes/Attribute";
@@ -16,21 +17,24 @@ import {
   staminaRegenerationRate,
 } from "@neverquest/state/attributes";
 
-const attributesOrder = [
-  { atom: health, key: "health" },
-  { atom: healthRegenerationRate, key: "healthRegenerationRate" },
-  { atom: stamina, key: "stamina" },
-  { atom: staminaRegenerationRate, key: "staminaRegenerationRate" },
-  { atom: damage, key: "damage" },
-  { atom: attackRateBonus, key: "attackRateBonus" },
-  { atom: dodgeChance, key: "dodgeChance" },
-  { atom: criticalChance, key: "criticalChance" },
-  { atom: criticalDamage, key: "criticalDamage" },
-  { atom: recoveryRate, key: "recoveryRate" },
-  { atom: lootBonus, key: "lootBonus" },
-];
-
 export default function AttributesList() {
+  const attributesOrder = useMemo(
+    () => [
+      { atom: health, key: nanoid() },
+      { atom: healthRegenerationRate, key: nanoid() },
+      { atom: stamina, key: nanoid() },
+      { atom: staminaRegenerationRate, key: nanoid() },
+      { atom: damage, key: nanoid() },
+      { atom: attackRateBonus, key: nanoid() },
+      { atom: dodgeChance, key: nanoid() },
+      { atom: criticalChance, key: nanoid() },
+      { atom: criticalDamage, key: nanoid() },
+      { atom: recoveryRate, key: nanoid() },
+      { atom: lootBonus, key: nanoid() },
+    ],
+    []
+  );
+
   return (
     <Stack gap={3}>
       {attributesOrder.map(({ atom, key }) => (

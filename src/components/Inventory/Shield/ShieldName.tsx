@@ -31,7 +31,7 @@ export default function ShieldName({ shield }: { shield: Shield }) {
                 {shield !== NO_SHIELD && (
                   <>
                     <tr>
-                      <td className="fst-italic text-end">Stamina cost:</td>
+                      <td className="fst-italic text-end">Stamina price:</td>
 
                       <td>{staminaCost}</td>
                     </tr>

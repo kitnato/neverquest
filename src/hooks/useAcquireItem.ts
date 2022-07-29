@@ -4,7 +4,15 @@ import { nanoid } from "nanoid";
 import useCheckEncumbrance from "@neverquest/hooks/useCheckEncumbrance";
 import { hasKnapsack } from "@neverquest/state/character";
 import { autoEquip } from "@neverquest/state/global";
-import { armor, inventory, itemEquip, shield, trinket, weapon } from "@neverquest/state/inventory";
+import {
+  armor,
+  encumbranceMaximum,
+  inventory,
+  itemEquip,
+  shield,
+  trinket,
+  weapon,
+} from "@neverquest/state/inventory";
 import { Gear, Item } from "@neverquest/types";
 import {
   ITEM_KNAPSACK,
@@ -21,6 +29,7 @@ export default function useAcquireItem() {
   const shieldValue = useAtomValue(shield);
   const trinketValue = useAtomValue(trinket);
   const weaponValue = useAtomValue(weapon);
+  const setEncumbranceMaximum = useSetAtom(encumbranceMaximum);
   const setHasKnapsack = useSetAtom(hasKnapsack);
   const setInventory = useSetAtom(inventory);
   const equipItem = useSetAtom(itemEquip);
@@ -33,6 +42,7 @@ export default function useAcquireItem() {
     }
 
     if (item.name === ITEM_KNAPSACK.name) {
+      setEncumbranceMaximum((current) => current + 1);
       setHasKnapsack(true);
     }
 

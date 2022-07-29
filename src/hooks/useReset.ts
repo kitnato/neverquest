@@ -54,6 +54,7 @@ import {
   showWeapon,
   showWildernessStatus,
 } from "@neverquest/state/show";
+import { skills } from "@neverquest/state/skills";
 
 // (ﾉ☉ヮ⚆)ﾉ ⌒*:･ﾟ✧
 export default function useReset() {
@@ -110,6 +111,7 @@ export default function useReset() {
   const resetShowTotalProtection = useResetAtom(showTotalProtection);
   const resetShowWeapon = useResetAtom(showWeapon);
   const resetShowWildernessStatus = useResetAtom(showWildernessStatus);
+  const resetSkills = useResetAtom(skills);
   const initialize = useSetAtom(initialization);
 
   return () => {
@@ -166,6 +168,7 @@ export default function useReset() {
     resetShowTrinket();
     resetShowWeapon();
     resetShowWildernessStatus();
+    resetSkills();
 
     initialize();
   };

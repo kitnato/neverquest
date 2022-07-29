@@ -1,15 +1,10 @@
 import { ShieldType, WeaponType } from "@neverquest/locra/types";
+import { ArmorClass, WeaponClass } from "@neverquest/types/enums";
 
 export type Armor = ItemBase & {
   armorClass?: ArmorClass;
   protection: number;
 };
-
-export enum ArmorClass {
-  Hide = "Hide",
-  Plate = "Plate",
-  Reinforced = "Reinforced",
-}
 
 export interface Attribute {
   base: number;
@@ -20,12 +15,6 @@ export interface Attribute {
   points: number;
 }
 
-export enum CrewHireStatus {
-  Hirable,
-  Hired,
-  Unavailable,
-}
-
 export interface CrewMember {
   Component: () => JSX.Element;
   description: string;
@@ -34,15 +23,6 @@ export interface CrewMember {
   monologues: string[];
   name: string;
   price: number;
-}
-
-export enum CrewType {
-  Blacksmith,
-  Cook,
-  Medic,
-  Mercenary,
-  Merchant,
-  Tailor,
 }
 
 interface InventoryBase {
@@ -77,17 +57,6 @@ interface ItemBase {
 // TODO - add Trinket
 export type Gear = Armor | Shield | Weapon;
 
-export enum LocationType {
-  Caravan,
-  Wilderness,
-}
-
-export enum LootType {
-  Essence,
-  Coins,
-  Scrap,
-}
-
 export type Shield = ItemBase & {
   block: number;
   stagger: number;
@@ -102,12 +71,6 @@ export interface Skill {
   price: number;
 }
 
-export enum SkillType {
-  Criticals,
-  Dodging,
-  Parrying,
-}
-
 // TODO
 export type Trinket = ItemBase;
 
@@ -118,10 +81,3 @@ export type Weapon = ItemBase & {
   type: WeaponType;
   weaponClass?: WeaponClass;
 };
-
-export enum WeaponClass {
-  Balanced = "Balanced",
-  Heavy = "Heavy",
-  Light = "Light",
-  TwoHanded = "Two-handed",
-}

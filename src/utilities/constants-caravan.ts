@@ -10,7 +10,8 @@ import {
   ITEM_HEARTHSTONE,
   ITEM_KNAPSACK,
 } from "@neverquest/utilities/constants-items";
-import { ArmorClass, CrewMember, CrewType, Item, WeaponClass } from "@neverquest/types/core";
+import { CrewMember, Item } from "@neverquest/types";
+import { ArmorClass, CrewType, WeaponClass } from "@neverquest/types/enums";
 
 export const CREW_MEMBERS: Record<CrewType, CrewMember> = {
   [CrewType.Blacksmith]: {

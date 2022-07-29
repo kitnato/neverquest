@@ -1,14 +1,7 @@
 import { ShieldType, WeaponType } from "@neverquest/locra/types";
 import knapsackIcon from "@neverquest/icons/knapsack.svg";
-import {
-  Armor,
-  ArmorClass,
-  Item,
-  Shield,
-  Trinket,
-  Weapon,
-  WeaponClass,
-} from "@neverquest/types/core";
+import { Armor, Item, Shield, Trinket, Weapon } from "@neverquest/types";
+import { ArmorClass, WeaponClass } from "@neverquest/types/enums";
 import { RangeProps } from "@neverquest/types/props";
 
 export const ARMOR_SPECIFICATIONS: Record<

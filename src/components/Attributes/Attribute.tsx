@@ -6,7 +6,7 @@ import { PrimitiveAtom, useSetAtom, useAtom, useAtomValue } from "jotai";
 import ImageIcon from "@neverquest/components/ImageIcon";
 // TODO - every attribute needs its own icon
 import placeholderIcon from "@neverquest/icons/abstract-049.svg";
-import { Attribute as AttributeType } from "@neverquest/types/core";
+import { Attribute as AttributeType } from "@neverquest/types";
 import { attributeCost, attributesIncreasable } from "@neverquest/state/attributes";
 import { characterLevel } from "@neverquest/state/character";
 import { deltaCharacterLevel, deltaEssenceAbsorbed } from "@neverquest/state/deltas";

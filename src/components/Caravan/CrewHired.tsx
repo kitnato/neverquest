@@ -5,7 +5,7 @@ import { Button, Stack } from "react-bootstrap";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import icon from "@neverquest/icons/cowled.svg";
 import { crew } from "@neverquest/state/caravan";
-import { CrewType } from "@neverquest/types/core";
+import { CrewType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 import { CREW_MEMBERS } from "@neverquest/utilities/constants-caravan";
 

@@ -1,6 +1,7 @@
 import LOCRA from "@neverquest/locra";
 import { AffixTag, ArtifactType, ShieldType, WeaponType } from "@neverquest/locra/types";
-import { Armor, ArmorClass, Shield, Weapon, WeaponClass } from "@neverquest/types/core";
+import { Armor, Shield, Weapon } from "@neverquest/types";
+import { ArmorClass, WeaponClass } from "@neverquest/types/enums";
 import {
   ARMOR_SPECIFICATIONS,
   SHIELD_SPECIFICATIONS,

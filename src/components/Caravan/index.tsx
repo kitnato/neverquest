@@ -7,7 +7,7 @@ import DismissableScreen from "@neverquest/components/DismissableScreen";
 import CrewHirable from "@neverquest/components/Caravan/CrewHirable";
 import CrewHired from "@neverquest/components/Caravan/CrewHired";
 import { crew } from "@neverquest/state/caravan";
-import { CrewHireStatus, CrewType } from "@neverquest/types/core";
+import { CrewHireStatus, CrewType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/utilities/constants-caravan";

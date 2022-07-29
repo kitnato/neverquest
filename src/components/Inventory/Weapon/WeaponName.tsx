@@ -2,7 +2,7 @@ import { useAtomValue } from "jotai";
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 
 import { showDamagePerSecond } from "@neverquest/state/show";
-import { Weapon } from "@neverquest/types/core";
+import { Weapon } from "@neverquest/types";
 import { NO_WEAPON } from "@neverquest/utilities/constants-gear";
 import {
   capitalizeAll,

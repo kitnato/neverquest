@@ -7,7 +7,7 @@ import Coins from "@neverquest/components/Resource/Coins";
 import icon from "@neverquest/icons/cowled.svg";
 import { crew } from "@neverquest/state/caravan";
 import { coins, resourcesBalance } from "@neverquest/state/resources";
-import { CrewHireStatus, CrewType } from "@neverquest/types/core";
+import { CrewHireStatus, CrewType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 import { CREW_MEMBERS } from "@neverquest/utilities/constants-caravan";
 

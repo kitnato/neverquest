@@ -3,9 +3,9 @@ import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import { resourcesBalance, coins } from "@neverquest/state/resources";
-import { SkillType } from "@neverquest/types/core";
-import { UIVariant } from "@neverquest/types/ui";
 import { skills } from "@neverquest/state/skills";
+import { SkillType } from "@neverquest/types/enums";
+import { UIVariant } from "@neverquest/types/ui";
 import { SKILLS } from "@neverquest/utilities/constants-skills";
 
 export default function TrainSkillButton({ type }: { type: SkillType }) {

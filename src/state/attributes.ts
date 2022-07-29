@@ -3,7 +3,7 @@ import { atomWithReset } from "jotai/utils";
 
 import { characterLevel } from "@neverquest/state/character";
 import { essence } from "@neverquest/state/resources";
-import { Attribute } from "@neverquest/types/core";
+import { Attribute } from "@neverquest/types";
 import { getTriangularNumber } from "@neverquest/utilities/helpers";
 
 // PRIMITIVES

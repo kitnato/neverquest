@@ -1,7 +1,7 @@
 import compassIcon from "@neverquest/icons/compass.svg";
 import knapsackIcon from "@neverquest/icons/knapsack.svg";
 import stoneIcon from "@neverquest/icons/stone-wheel.svg";
-import { Item } from "@neverquest/types/core";
+import { Item } from "@neverquest/types";
 
 // TODO
 export const ITEM_COMPASS: Item = {

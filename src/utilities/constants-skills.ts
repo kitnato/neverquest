@@ -1,6 +1,7 @@
 // TODO - diversify icons.
 import icon from "@neverquest/icons/abstract-053.svg";
-import { Skill, SkillType } from "@neverquest/types/core";
+import { Skill } from "@neverquest/types";
+import { SkillType } from "@neverquest/types/enums";
 
 export const SKILLS: Record<SkillType, Skill> = {
   [SkillType.Criticals]: {

@@ -5,7 +5,7 @@ import LOCRA from "@neverquest/locra";
 import { crew, merchantInventoryGeneration } from "@neverquest/state/caravan";
 import { nsfw } from "@neverquest/state/global";
 import { monsterCreate } from "@neverquest/state/monster";
-import { CrewHireStatus, LocationType } from "@neverquest/types/core";
+import { CrewHireStatus, LocationType } from "@neverquest/types/enums";
 import { UNKNOWN } from "@neverquest/utilities/constants";
 import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/utilities/constants-caravan";
 

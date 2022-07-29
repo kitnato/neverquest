@@ -1,6 +1,6 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 
-import { Shield } from "@neverquest/types/core";
+import { Shield } from "@neverquest/types";
 import { capitalizeAll, formatMilliseconds, formatPercentage } from "@neverquest/utilities/helpers";
 import { NO_SHIELD } from "@neverquest/utilities/constants-gear";
 

@@ -1,4 +1,4 @@
-import { SkillType } from "@neverquest/types/core";
+import { SkillType } from "@neverquest/types/enums";
 import { atomWithReset } from "jotai/utils";
 
 export const skills = atomWithReset<

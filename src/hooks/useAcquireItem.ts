@@ -5,7 +5,7 @@ import useCheckEncumbrance from "@neverquest/hooks/useCheckEncumbrance";
 import { hasKnapsack } from "@neverquest/state/character";
 import { autoEquip } from "@neverquest/state/global";
 import { armor, inventory, itemEquip, shield, trinket, weapon } from "@neverquest/state/inventory";
-import { Gear, Item } from "@neverquest/types/core";
+import { Gear, Item } from "@neverquest/types";
 import {
   ITEM_KNAPSACK,
   NO_ARMOR,

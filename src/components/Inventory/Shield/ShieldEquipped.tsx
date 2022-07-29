@@ -3,10 +3,12 @@ import Stack from "react-bootstrap/Stack";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import ShieldName from "@neverquest/components/Inventory/Shield/ShieldName";
-import icon from "@neverquest/icons/round-shield.svg";
+import iconUnequipped from "@neverquest/icons/fist.svg";
+import iconEquipped from "@neverquest/icons/round-shield.svg";
 import { shield } from "@neverquest/state/inventory";
 import { showShield } from "@neverquest/state/show";
 import { AnimationType } from "@neverquest/types/ui";
+import { NO_SHIELD } from "@neverquest/utilities/constants-gear";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function ShieldEquipped() {
@@ -23,7 +25,10 @@ export default function ShieldEquipped() {
       direction="horizontal"
       gap={3}
     >
-      <ImageIcon icon={icon} tooltip="Equipped shield" />
+      <ImageIcon
+        icon={shieldValue === NO_SHIELD ? iconUnequipped : iconEquipped}
+        tooltip="Equipped shield"
+      />
 
       <ShieldName shield={shieldValue} />
     </Stack>

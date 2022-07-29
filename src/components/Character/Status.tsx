@@ -22,6 +22,8 @@ export default function Status() {
 
     setStatusElement(current);
     animateElement({ type: AnimationType.FlipInX, element: current });
+
+    return () => setStatusElement(null);
   }, []);
 
   return (

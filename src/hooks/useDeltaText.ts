@@ -13,7 +13,7 @@ export default function useDeltaText({
 }: {
   deltaAtom: WritableAtom<DeltaDisplay, DeltaDisplay>;
   isTime?: boolean;
-  stop: (previous: null | number, current: number) => boolean;
+  stop?: (previous: null | number, current: number) => boolean;
   valueAtom: Atom<number>;
 }) {
   const setDeltaValue = useSetAtom(deltaAtom);

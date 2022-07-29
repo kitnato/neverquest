@@ -10,41 +10,37 @@ export function animateElement({
   element: HTMLElement | null;
   speed?: AnimationSpeed;
   type: AnimationType;
-}): Promise<void> {
-  return new Promise((resolve) => {
-    if (element === null) {
-      return;
-    }
+}) {
+  if (element === null) {
+    return;
+  }
 
-    const { addEventListener, classList } = element;
-    const animationName = `${ANIMATE_PREFIX}${type}`;
-    const animationSpeedClass = speed ? `${ANIMATE_PREFIX}${speed}` : null;
+  const { addEventListener, classList } = element;
+  const animationName = `${ANIMATE_PREFIX}${type}`;
+  const animationSpeedClass = speed ? `${ANIMATE_PREFIX}${speed}` : null;
 
-    if (classList.contains("d-none")) {
-      classList.remove("d-none");
-    }
+  if (classList.contains("d-none")) {
+    classList.remove("d-none");
+  }
 
-    classList.add(ANIMATED_CLASS, animationName);
+  classList.add(ANIMATED_CLASS, animationName);
 
-    if (animationSpeedClass) {
-      classList.add(animationSpeedClass);
-    }
+  if (animationSpeedClass) {
+    classList.add(animationSpeedClass);
+  }
 
-    addEventListener(
-      "animationend",
-      (event: AnimationEvent) => {
-        event.stopPropagation();
-        classList.remove(ANIMATED_CLASS, animationName);
+  addEventListener(
+    "animationend",
+    (event: AnimationEvent) => {
+      event.stopPropagation();
+      classList.remove(ANIMATED_CLASS, animationName);
 
-        if (animationSpeedClass) {
-          classList.remove(animationSpeedClass);
-        }
-
-        resolve();
-      },
-      { once: true }
-    );
-  });
+      if (animationSpeedClass) {
+        classList.remove(animationSpeedClass);
+      }
+    },
+    { once: true }
+  );
 }
 
 export function capitalizeAll(string: null | string | undefined) {

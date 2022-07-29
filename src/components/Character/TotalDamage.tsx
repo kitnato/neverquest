@@ -5,18 +5,22 @@ import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import icon from "@neverquest/icons/wolverine-claws.svg";
-import { damage } from "@neverquest/state/attributes";
+import { attributes } from "@neverquest/state/attributes";
 import { deltaTotalDamage } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { showTotalDamageSummary } from "@neverquest/state/show";
 import { totalDamage } from "@neverquest/state/statistics";
+import { AttributeType } from "@neverquest/types/enums";
 import { getComputedStat } from "@neverquest/utilities/helpers";
+import { ATTRIBUTES } from "@neverquest/utilities/constants-attributes";
 
 export default function TotalDamage() {
-  const damageValue = useAtomValue(damage);
+  const { points } = useAtomValue(attributes)[AttributeType.Damage];
   const showTotalDamageBreakdownValue = useAtomValue(showTotalDamageSummary);
   const totalDamageValue = useAtomValue(totalDamage);
   const weaponValue = useAtomValue(weapon);
+
+  const { base, increment, name } = ATTRIBUTES[AttributeType.Damage];
 
   useDeltaText({
     deltaAtom: deltaTotalDamage,
@@ -43,9 +47,9 @@ export default function TotalDamage() {
                     </tr>
 
                     <tr>
-                      <td className="fst-italic text-end">{`${damageValue.name} attribute:`}</td>
+                      <td className="fst-italic text-end">{`${name} attribute:`}</td>
 
-                      <td>{`+${getComputedStat(damageValue)}`}</td>
+                      <td>{`+${getComputedStat({ base, increment, points })}`}</td>
                     </tr>
                   </tbody>
                 </Table>

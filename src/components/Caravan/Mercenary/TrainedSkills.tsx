@@ -1,5 +1,4 @@
 import { useAtomValue } from "jotai";
-import { Fragment } from "react";
 import { Stack } from "react-bootstrap";
 
 import { skills } from "@neverquest/state/skills";
@@ -24,9 +23,7 @@ export default function TrainedSkills() {
       <h6>Trained skills</h6>
 
       {trainedSkills.map((type, key) => (
-        <Fragment key={key}>
-          <SkillDisplay type={type} />
-        </Fragment>
+        <SkillDisplay key={key} type={type} />
       ))}
     </Stack>
   );

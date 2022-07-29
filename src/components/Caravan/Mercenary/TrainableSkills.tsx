@@ -23,8 +23,8 @@ export default function TrainableSkills() {
       {trainableSkills.length === 0 ? (
         <span className="fst-italic">None available.</span>
       ) : (
-        trainableSkills.map((type, key) => (
-          <div className="align-items-center d-flex justify-content-between w-100" key={key}>
+        trainableSkills.map((type, index) => (
+          <div className="align-items-center d-flex justify-content-between w-100" key={index}>
             <SkillDisplay type={type} />
 
             <Stack direction="horizontal" gap={3}>

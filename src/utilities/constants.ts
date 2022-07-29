@@ -1,4 +1,5 @@
 export const ANIMATE_PREFIX = "animate__";
+
 export const ANIMATED_CLASS = `${ANIMATE_PREFIX}animated`;
 
 export const DELTA_DEFAULT = {

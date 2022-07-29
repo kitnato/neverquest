@@ -1,6 +1,5 @@
 import { useAtomValue } from "jotai";
-import { nanoid } from "nanoid";
-import { Fragment, useMemo, useState } from "react";
+import { useState } from "react";
 import { Card, Stack } from "react-bootstrap";
 
 import DismissableScreen from "@neverquest/components/DismissableScreen";
@@ -17,7 +16,6 @@ export default function Caravan() {
   const [currentMember, setCurrentMember] = useState<CrewType | null>(null);
   const [isScreenShowing, setScreenShowing] = useState(false);
 
-  const crewOrder = useMemo(() => CREW_ORDER.map((type) => ({ key: nanoid(), type })), []);
   const hirableCrew = CREW_ORDER.filter(
     (type) => crewValue[type].hireStatus === CrewHireStatus.Hirable
   );
@@ -37,14 +35,12 @@ export default function Caravan() {
       <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
         <Card.Body>
           <Stack gap={3}>
-            {crewOrder.map(({ key, type }) => {
+            {CREW_ORDER.map((type, index) => {
               const member = crewValue[type];
 
               if (member.hireStatus === CrewHireStatus.Hired) {
                 return (
-                  <Fragment key={key}>
-                    <CrewHired setActive={() => onActivate(true, type)} type={type} />
-                  </Fragment>
+                  <CrewHired key={index} setActive={() => onActivate(true, type)} type={type} />
                 );
               }
 
@@ -57,19 +53,9 @@ export default function Caravan() {
               <hr />
 
               <Stack gap={3}>
-                {crewOrder.map(({ key, type }) => {
-                  const member = crewValue[type];
-
-                  if (member.hireStatus === CrewHireStatus.Hirable) {
-                    return (
-                      <Fragment key={key}>
-                        <CrewHirable type={type} />
-                      </Fragment>
-                    );
-                  }
-
-                  return null;
-                })}
+                {hirableCrew.map((type, index) => (
+                  <CrewHirable key={index} type={type} />
+                ))}
               </Stack>
             </>
           )}

@@ -8,11 +8,10 @@ export type Armor = ItemBase & {
 
 export interface Attribute {
   base: number;
-  canAssign: boolean;
   description: string;
+  icon: string;
   increment: number;
   name: string;
-  points: number;
 }
 
 export interface CrewMember {

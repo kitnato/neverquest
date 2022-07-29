@@ -1,20 +1,19 @@
 import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { Clock, Plus } from "react-bootstrap-icons";
-import { PrimitiveAtom, useSetAtom, useAtom, useAtomValue } from "jotai";
+import { useSetAtom, useAtom, useAtomValue } from "jotai";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
-// TODO - every attribute needs its own icon
-import placeholderIcon from "@neverquest/icons/abstract-049.svg";
-import { Attribute as AttributeType } from "@neverquest/types";
-import { attributeCost, attributesIncreasable } from "@neverquest/state/attributes";
+import { AttributeType } from "@neverquest/types/enums";
+import { attributeCost, attributes, attributesIncreasable } from "@neverquest/state/attributes";
 import { characterLevel } from "@neverquest/state/character";
 import { deltaCharacterLevel, deltaEssenceAbsorbed } from "@neverquest/state/deltas";
 import { resourcesBalance } from "@neverquest/state/resources";
 import { FloatingTextType, UIVariant } from "@neverquest/types/ui";
+import { ATTRIBUTES } from "@neverquest/utilities/constants-attributes";
 
-export default function Attribute({ atom }: { atom: PrimitiveAtom<AttributeType> }) {
-  const [attributeValue, setAttribute] = useAtom(atom);
+export default function Attribute({ type }: { type: AttributeType }) {
+  const [attributesValue, setAttributes] = useAtom(attributes);
   const attributeCostValue = useAtomValue(attributeCost);
   const attributesIncreasableValue = useAtomValue(attributesIncreasable);
   const setCharacterLevel = useSetAtom(characterLevel);
@@ -22,7 +21,8 @@ export default function Attribute({ atom }: { atom: PrimitiveAtom<AttributeType>
   const setDeltaEssenceAbsorbed = useSetAtom(deltaEssenceAbsorbed);
   const balanceResources = useSetAtom(resourcesBalance);
 
-  const { canAssign, description, name, points } = attributeValue;
+  const { description, icon, name } = ATTRIBUTES[type];
+  const { canAssign, points } = attributesValue[type];
 
   if (!canAssign) {
     return null;
@@ -30,7 +30,7 @@ export default function Attribute({ atom }: { atom: PrimitiveAtom<AttributeType>
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={placeholderIcon} tooltip={name} />
+      <ImageIcon icon={icon} tooltip={name} />
 
       <span style={{ width: 260 }}>{description}</span>
 
@@ -46,9 +46,12 @@ export default function Attribute({ atom }: { atom: PrimitiveAtom<AttributeType>
             onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
               currentTarget.blur();
 
-              setAttribute((current) => ({
+              setAttributes((current) => ({
                 ...current,
-                points: current.points + 1,
+                [type]: {
+                  ...current[type],
+                  points: current[type].points + 1,
+                },
               }));
 
               balanceResources({ essenceDifference: -attributeCostValue });

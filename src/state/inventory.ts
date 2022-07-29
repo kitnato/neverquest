@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { atomWithReset } from "jotai/utils";
 
-import { stamina } from "@neverquest/state/attributes";
+import { attributes } from "@neverquest/state/attributes";
 import {
   showArmor,
   showBlockChance,
@@ -16,6 +16,7 @@ import {
 import { Armor, Inventory, Shield, Trinket, Weapon } from "@neverquest/types";
 import { NO_ARMOR, NO_TRINKET, NO_SHIELD, NO_WEAPON } from "@neverquest/utilities/constants-gear";
 import { isArmor, isShield, isTrinket, isWeapon } from "@neverquest/utilities/type-guards";
+import { AttributeType } from "@neverquest/types/enums";
 
 // PRIMITIVES
 
@@ -140,8 +141,11 @@ export const itemEquip = atom(null, (get, set, id: symbol) => {
     if (!get(showStamina) && item.staminaCost > 0) {
       set(showStamina, true);
 
-      if (!get(stamina).canAssign) {
-        set(stamina, (current) => ({ ...current, canAssign: true }));
+      if (!get(attributes)[AttributeType.Stamina].canAssign) {
+        set(attributes, (current) => ({
+          ...current,
+          [AttributeType.Stamina]: { ...current[AttributeType.Stamina], canAssign: true },
+        }));
       }
     }
 
@@ -159,7 +163,7 @@ export const itemEquip = atom(null, (get, set, id: symbol) => {
   }
 });
 
-export const itemUnequip = atom(null, (get, set, id: symbol) => {
+export const itemUnequip = atom(null, (_, set, id: symbol) => {
   set(inventory, (current) => ({
     ...current,
     [id]: { ...current[id], isEquipped: false },

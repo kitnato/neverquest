@@ -6,7 +6,7 @@ import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import icon from "@neverquest/icons/striking-splinter.svg";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
-import { attackRateBonus } from "@neverquest/state/attributes";
+import { attributes } from "@neverquest/state/attributes";
 import { deltaTotalAttackRate } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { showTotalAttackRateSummary } from "@neverquest/state/show";
@@ -16,11 +16,15 @@ import {
   formatPercentage,
   getComputedStat,
 } from "@neverquest/utilities/helpers";
+import { AttributeType } from "@neverquest/types/enums";
+import { ATTRIBUTES } from "@neverquest/utilities/constants-attributes";
 
 export default function Attack() {
-  const attackRateBonusValue = useAtomValue(attackRateBonus);
+  const { points } = useAtomValue(attributes)[AttributeType.AttackRateBonus];
   const showTotalAttackRateBreakdownValue = useAtomValue(showTotalAttackRateSummary);
   const weaponValue = useAtomValue(weapon);
+
+  const { base, increment, name } = ATTRIBUTES[AttributeType.AttackRateBonus];
 
   useDeltaText({
     deltaAtom: deltaTotalAttackRate,
@@ -56,9 +60,11 @@ export default function Attack() {
                     </tr>
 
                     <tr>
-                      <td className="fst-italic text-end">{`${attackRateBonusValue.name} attribute:`}</td>
+                      <td className="fst-italic text-end">{`${name} attribute:`}</td>
 
-                      <td>{`-${formatPercentage(getComputedStat(attackRateBonusValue))}`}</td>
+                      <td>{`-${formatPercentage(
+                        getComputedStat({ base, increment, points })
+                      )}`}</td>
                     </tr>
                   </tbody>
                 </Table>

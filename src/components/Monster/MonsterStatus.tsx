@@ -20,6 +20,8 @@ export default function MonsterStatus() {
 
   useEffect(() => {
     setMonsterStatusElement(element.current);
+
+    return () => setMonsterStatusElement(null);
   }, [element]);
 
   useEffect(() => {

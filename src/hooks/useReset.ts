@@ -1,19 +1,7 @@
 import { useSetAtom } from "jotai";
 import { useResetAtom } from "jotai/utils";
 
-import {
-  attackRateBonus,
-  criticalChance,
-  criticalDamage,
-  damage,
-  dodgeChance,
-  health,
-  healthRegenerationRate,
-  lootBonus,
-  recoveryRate,
-  stamina,
-  staminaRegenerationRate,
-} from "@neverquest/state/attributes";
+import { attributes } from "@neverquest/state/attributes";
 import { crew, exchangeCoin, exchangeScrap, merchantInventory } from "@neverquest/state/caravan";
 import {
   characterLevel,
@@ -23,7 +11,6 @@ import {
   isRecovering,
   lootingRate,
   name,
-  statusElement,
 } from "@neverquest/state/character";
 import { level, mode, progress } from "@neverquest/state/encounter";
 import { autoEquip, gameOver, initialization } from "@neverquest/state/global";
@@ -34,7 +21,6 @@ import {
   isMonsterNew,
   isMonsterStaggered,
   monsterName,
-  monsterStatusElement,
 } from "@neverquest/state/monster";
 import { currentHealth, currentStamina } from "@neverquest/state/reserves";
 import {
@@ -71,27 +57,21 @@ import {
 
 // (ﾉ☉ヮ⚆)ﾉ ⌒*:･ﾟ✧
 export default function useReset() {
+  const resetAttributes = useResetAtom(attributes);
   const resetAutoEquip = useResetAtom(autoEquip);
   const resetEssence = useResetAtom(essence);
   const resetEssenceLoot = useResetAtom(essenceLoot);
-  const resetAttackRateBonus = useResetAtom(attackRateBonus);
   const resetCharacterLevel = useResetAtom(characterLevel);
   const resetCoins = useResetAtom(coins);
   const resetCoinsLoot = useResetAtom(coinsLoot);
   const resetCrew = useResetAtom(crew);
-  const resetCriticalChance = useResetAtom(criticalChance);
-  const resetCriticalDamage = useResetAtom(criticalDamage);
   const resetCurrentHealth = useResetAtom(currentHealth);
   const resetCurrentHealthMonster = useResetAtom(currentHealthMonster);
   const resetCurrentStamina = useResetAtom(currentStamina);
-  const resetDamage = useResetAtom(damage);
-  const resetDodgeChance = useResetAtom(dodgeChance);
   const resetExchangeCoin = useResetAtom(exchangeCoin);
   const resetExchangeScrap = useResetAtom(exchangeScrap);
   const resetGameOver = useResetAtom(gameOver);
   const resetHasKnapsack = useResetAtom(hasKnapsack);
-  const resetHealth = useResetAtom(health);
-  const resetHealthRegenerationRate = useResetAtom(healthRegenerationRate);
   const resetInventory = useResetAtom(inventory);
   const resetEncumbranceMaximum = useResetAtom(encumbranceMaximum);
   const resetIsAttacking = useResetAtom(isAttacking);
@@ -101,15 +81,12 @@ export default function useReset() {
   const resetIsMonsterStaggered = useResetAtom(isMonsterStaggered);
   const resetIsRecovering = useResetAtom(isRecovering);
   const resetLevel = useResetAtom(level);
-  const resetLootBonus = useResetAtom(lootBonus);
   const resetLootingRate = useResetAtom(lootingRate);
   const resetMerchantInventory = useResetAtom(merchantInventory);
   const resetMode = useResetAtom(mode);
   const resetMonsterName = useResetAtom(monsterName);
-  const resetMonsterStatusElement = useResetAtom(monsterStatusElement);
   const resetName = useResetAtom(name);
   const resetProgress = useResetAtom(progress);
-  const resetRecoveryRate = useResetAtom(recoveryRate);
   const resetScrap = useResetAtom(scrap);
   const resetScrapLoot = useResetAtom(scrapLoot);
   const resetShowTrinket = useResetAtom(showTrinket);
@@ -133,33 +110,24 @@ export default function useReset() {
   const resetShowTotalProtection = useResetAtom(showTotalProtection);
   const resetShowWeapon = useResetAtom(showWeapon);
   const resetShowWildernessStatus = useResetAtom(showWildernessStatus);
-  const resetStamina = useResetAtom(stamina);
-  const resetStaminaRegenerationRate = useResetAtom(staminaRegenerationRate);
-  const resetStatusElement = useResetAtom(statusElement);
   const initialize = useSetAtom(initialization);
 
   return () => {
+    resetAttributes();
     resetAutoEquip();
     resetEssence();
     resetEssenceLoot();
-    resetAttackRateBonus();
     resetCharacterLevel();
     resetCoins();
     resetCoinsLoot();
     resetCrew();
-    resetCriticalChance();
-    resetCriticalDamage();
     resetCurrentHealth();
     resetCurrentHealthMonster();
     resetCurrentStamina();
-    resetDamage();
-    resetDodgeChance();
     resetExchangeCoin();
     resetExchangeScrap();
     resetGameOver();
     resetHasKnapsack();
-    resetHealth();
-    resetHealthRegenerationRate();
     resetInventory();
     resetEncumbranceMaximum();
     resetIsAttacking();
@@ -169,15 +137,12 @@ export default function useReset() {
     resetIsMonsterStaggered();
     resetIsRecovering();
     resetLevel();
-    resetLootBonus();
     resetLootingRate();
     resetMerchantInventory();
     resetMode();
     resetMonsterName();
-    resetMonsterStatusElement();
     resetName();
     resetProgress();
-    resetRecoveryRate();
     resetScrap();
     resetScrapLoot();
     resetShowEssence();
@@ -201,9 +166,6 @@ export default function useReset() {
     resetShowTrinket();
     resetShowWeapon();
     resetShowWildernessStatus();
-    resetStamina();
-    resetStaminaRegenerationRate();
-    resetStatusElement();
 
     initialize();
   };

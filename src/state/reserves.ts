@@ -1,11 +1,13 @@
 import { atom } from "jotai";
 import { atomWithReset } from "jotai/utils";
 
-import { health, stamina } from "@neverquest/state/attributes";
+import { attributes } from "@neverquest/state/attributes";
 import { deltaHealth, deltaStamina } from "@neverquest/state/deltas";
 import { gameOver } from "@neverquest/state/global";
 import { shield, weapon } from "@neverquest/state/inventory";
+import { AttributeType } from "@neverquest/types/enums";
 import { DeltaDisplay, FloatingTextType } from "@neverquest/types/ui";
+import { ATTRIBUTES } from "@neverquest/utilities/constants-attributes";
 
 // PRIMITIVES
 
@@ -28,13 +30,17 @@ export const isHealthMaxedOut = atom((get) => get(currentHealth) >= get(maximumH
 export const isStaminaMaxedOut = atom((get) => get(currentStamina) >= get(maximumStamina));
 
 export const maximumHealth = atom((get) => {
-  const { base, increment, points } = get(health);
+  const { points } = get(attributes)[AttributeType.Health];
+
+  const { base, increment } = ATTRIBUTES[AttributeType.Health];
 
   return base + increment * points;
 });
 
 export const maximumStamina = atom((get) => {
-  const { base, increment, points } = get(stamina);
+  const { points } = get(attributes)[AttributeType.Stamina];
+
+  const { base, increment } = ATTRIBUTES[AttributeType.Stamina];
 
   return base + increment * points;
 });

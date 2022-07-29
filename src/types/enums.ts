@@ -4,6 +4,20 @@ export enum ArmorClass {
   Reinforced = "Reinforced",
 }
 
+export enum AttributeType {
+  AttackRateBonus,
+  CriticalChance,
+  CriticalDamage,
+  Damage,
+  DodgeChance,
+  Health,
+  HealthRegenerationRate,
+  LootBonus,
+  RecoveryRate,
+  Stamina,
+  StaminaRegenerationRate,
+}
+
 export enum CrewHireStatus {
   Hirable,
   Hired,

@@ -1,5 +1,5 @@
-import { useAtom, useAtomValue } from "jotai";
-import { MouseEvent, useEffect, useState } from "react";
+import { useAtomValue } from "jotai";
+import { MouseEvent, useState } from "react";
 import { Badge, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import Attributes from "@neverquest/components/Attributes";
@@ -8,7 +8,6 @@ import ImageIcon from "@neverquest/components/ImageIcon";
 import icon from "@neverquest/icons/skills.svg";
 import { attributesIncreasable } from "@neverquest/state/attributes";
 import { isAttacking } from "@neverquest/state/character";
-import { isLevelCompleted } from "@neverquest/state/encounter";
 import { isMonsterEngaged } from "@neverquest/state/monster";
 import { showAttributesButton } from "@neverquest/state/show";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
@@ -18,17 +17,10 @@ export default function AttributesButton({ isDisabled }: { isDisabled: boolean }
   const attributesIncreasableValue = useAtomValue(attributesIncreasable);
   const isAttackingValue = useAtomValue(isAttacking);
   const isMonsterEngagedValue = useAtomValue(isMonsterEngaged);
-  const isLevelCompletedValue = useAtomValue(isLevelCompleted);
-  const [showAttributesButtonValue, setShowAttributesButton] = useAtom(showAttributesButton);
+  const showAttributesButtonValue = useAtomValue(showAttributesButton);
   const [isScreenShowing, setScreenShowing] = useState(false);
 
   const isButtonDisabled = isAttackingValue || isDisabled || isMonsterEngagedValue;
-
-  useEffect(() => {
-    if (!showAttributesButtonValue && isLevelCompletedValue) {
-      setShowAttributesButton(true);
-    }
-  }, [isLevelCompletedValue, showAttributesButtonValue]);
 
   if (!showAttributesButtonValue) {
     return null;

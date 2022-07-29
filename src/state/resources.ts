@@ -3,7 +3,13 @@ import { atomWithReset } from "jotai/utils";
 
 import { isLevelCompleted, progress } from "@neverquest/state/encounter";
 import { monsterLoot } from "@neverquest/state/monster";
-import { showEssence, showAttributes, showCoins, showScrap } from "@neverquest/state/show";
+import {
+  showAttributesButton,
+  showEssence,
+  showAttributes,
+  showCoins,
+  showScrap,
+} from "@neverquest/state/show";
 
 // PRIMITIVES
 
@@ -82,6 +88,10 @@ export const resourcesBalance = atom(
 
       if (!get(showEssence)) {
         set(showEssence, true);
+      }
+
+      if (!get(showAttributesButton)) {
+        set(showAttributesButton, true);
       }
 
       if (isLooting) {

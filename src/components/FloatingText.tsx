@@ -27,10 +27,11 @@ export default function FloatingText({ atom }: { atom: PrimitiveAtom<DeltaDispla
       return;
     }
 
+    const key = nanoid();
+
     const onAnimationEnd = (id: string) => () => {
       setTextQueue((current) => current.filter(({ key }) => key !== id));
     };
-    const key = nanoid();
 
     if (Array.isArray(deltaValue)) {
       setTextQueue((current) => [

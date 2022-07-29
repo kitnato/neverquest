@@ -29,46 +29,50 @@ export default function Attribute({ type }: { type: AttributeType }) {
   }
 
   return (
-    <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip={name} />
+    <div className="align-items-center d-flex justify-content-between w-100">
+      <Stack direction="horizontal" gap={3}>
+        <ImageIcon icon={icon} tooltip={name} />
 
-      <span style={{ width: 260 }}>{description}</span>
+        <span>{description}</span>
+      </Stack>
 
-      <span style={{ width: 20 }}>{points}</span>
+      <Stack direction="horizontal" gap={3}>
+        <span>{points}</span>
 
-      <OverlayTrigger
-        overlay={<Tooltip>{`Cost: ${attributeCostValue} essence`}</Tooltip>}
-        placement="top"
-      >
-        <span className="d-inline-block">
-          <Button
-            disabled={!attributesIncreasableValue}
-            onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-              currentTarget.blur();
+        <OverlayTrigger
+          overlay={<Tooltip>{`Cost: ${attributeCostValue} essence`}</Tooltip>}
+          placement="top"
+        >
+          <span className="d-inline-block">
+            <Button
+              disabled={!attributesIncreasableValue}
+              onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+                currentTarget.blur();
 
-              setAttributes((current) => ({
-                ...current,
-                [type]: {
-                  ...current[type],
-                  points: current[type].points + 1,
-                },
-              }));
+                setAttributes((current) => ({
+                  ...current,
+                  [type]: {
+                    ...current[type],
+                    points: current[type].points + 1,
+                  },
+                }));
 
-              balanceResources({ essenceDifference: -attributeCostValue });
-              setDeltaEssenceAbsorbed({
-                color: FloatingTextType.Positive,
-                value: `+${attributeCostValue}`,
-              });
+                balanceResources({ essenceDifference: -attributeCostValue });
+                setDeltaEssenceAbsorbed({
+                  color: FloatingTextType.Positive,
+                  value: `+${attributeCostValue}`,
+                });
 
-              setCharacterLevel((current) => current + 1);
-              setDeltaCharacterLevel({ color: FloatingTextType.Positive, value: "+1" });
-            }}
-            variant={UIVariant.Outline}
-          >
-            {attributesIncreasableValue ? <Plus /> : <Clock />}
-          </Button>
-        </span>
-      </OverlayTrigger>
-    </Stack>
+                setCharacterLevel((current) => current + 1);
+                setDeltaCharacterLevel({ color: FloatingTextType.Positive, value: "+1" });
+              }}
+              variant={UIVariant.Outline}
+            >
+              {attributesIncreasableValue ? <Plus /> : <Clock />}
+            </Button>
+          </span>
+        </OverlayTrigger>
+      </Stack>
+    </div>
   );
 }

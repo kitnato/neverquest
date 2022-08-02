@@ -1,10 +1,10 @@
-import { useAtomValue } from "jotai";
 import { useCallback, useEffect, useRef } from "react";
+import { useRecoilValue } from "recoil";
 
-import { gameOver } from "@neverquest/state/global";
+import { isGameOver } from "@neverquest/state/global";
 
 export default function useAnimation(callback: (time: number) => void, stop: boolean) {
-  const gameOverValue = useAtomValue(gameOver);
+  const isGameOverValue = useRecoilValue(isGameOver);
   const frameRef = useRef(-1);
   const previousTimeRef = useRef(0);
 
@@ -18,7 +18,7 @@ export default function useAnimation(callback: (time: number) => void, stop: boo
   );
 
   useEffect(() => {
-    if (gameOverValue || stop) {
+    if (isGameOverValue || stop) {
       cancelAnimationFrame(frameRef.current);
       previousTimeRef.current = 0;
     } else {
@@ -26,5 +26,5 @@ export default function useAnimation(callback: (time: number) => void, stop: boo
     }
 
     return () => cancelAnimationFrame(frameRef.current);
-  }, [animate, gameOverValue, stop]);
+  }, [animate, isGameOverValue, stop]);
 }

@@ -1,7 +1,7 @@
-import { PrimitiveAtom, useAtom } from "jotai";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 import { Stack } from "react-bootstrap";
+import { RecoilState, useRecoilState } from "recoil";
 
 import { AnimationSpeed, AnimationType, DeltaDisplay } from "@neverquest/types/ui";
 import { DELTA_DEFAULT } from "@neverquest/utilities/constants";
@@ -12,8 +12,8 @@ type FloatingText = {
   key: string;
 };
 
-export default function FloatingText({ atom }: { atom: PrimitiveAtom<DeltaDisplay> }) {
-  const [deltaValue, setDeltaValue] = useAtom(atom);
+export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay> }) {
+  const [deltaValue, setDeltaValue] = useRecoilState(atom);
 
   const [textQueue, setTextQueue] = useState<FloatingText[]>([]);
 

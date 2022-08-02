@@ -1,5 +1,5 @@
-import { useAtomValue, useAtom } from "jotai";
 import { useEffect, useState } from "react";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import useAnimation from "@neverquest/hooks/useAnimation";
@@ -9,8 +9,8 @@ import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
 export default function RecoveryMeter() {
-  const [isRecoveringValue, setRecovering] = useAtom(isRecovering);
-  const totalRecoveryRateValue = useAtomValue(totalRecoveryRate);
+  const [isRecoveringValue, setRecovering] = useRecoilState(isRecovering);
+  const totalRecoveryRateValue = useRecoilValue(totalRecoveryRate);
   const [deltaRecovery, setDeltaRecovery] = useState(0);
 
   useAnimation((delta) => {

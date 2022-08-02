@@ -1,17 +1,18 @@
-import { useAtomValue } from "jotai";
 import Stack from "react-bootstrap/Stack";
+import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import icon from "@neverquest/icons/wingfoot.svg";
-import { showDodgeChance } from "@neverquest/state/show";
+import { isShowing } from "@neverquest/state/isShowing";
 import { totalDodgeChance } from "@neverquest/state/statistics";
+import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { formatPercentage } from "@neverquest/utilities/helpers";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function Dodge() {
-  const dodgeChanceValue = useAtomValue(totalDodgeChance);
-  const showDodgeChanceValue = useAtomValue(showDodgeChance);
+  const dodgeChanceValue = useRecoilValue(totalDodgeChance);
+  const showDodgeChanceValue = useRecoilValue(isShowing(ShowingType.DodgeChance));
 
   if (!showDodgeChanceValue) {
     return null;

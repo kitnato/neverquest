@@ -1,19 +1,20 @@
-import { useAtomValue } from "jotai";
 import Stack from "react-bootstrap/Stack";
+import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import ShieldName from "@neverquest/components/Inventory/Shield/ShieldName";
 import iconUnequipped from "@neverquest/icons/fist.svg";
 import iconEquipped from "@neverquest/icons/round-shield.svg";
 import { shield } from "@neverquest/state/inventory";
-import { showShield } from "@neverquest/state/show";
+import { isShowing } from "@neverquest/state/isShowing";
 import { AnimationType } from "@neverquest/types/ui";
 import { NO_SHIELD } from "@neverquest/utilities/constants-gear";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
+import { ShowingType } from "@neverquest/types/enums";
 
 export default function ShieldEquipped() {
-  const shieldValue = useAtomValue(shield);
-  const showShieldValue = useAtomValue(showShield);
+  const shieldValue = useRecoilValue(shield);
+  const showShieldValue = useRecoilValue(isShowing(ShowingType.Shield));
 
   if (!showShieldValue) {
     return null;

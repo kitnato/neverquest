@@ -1,16 +1,19 @@
-import { useAtomValue } from "jotai";
 import Stack from "react-bootstrap/Stack";
+import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import FloatingText from "@neverquest/components/FloatingText";
 import icon from "@neverquest/icons/flying-flag.svg";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { level } from "@neverquest/state/encounter";
-import { deltaWildernessLevel } from "@neverquest/state/deltas";
+import { deltas } from "@neverquest/state/deltas";
 import { OverlayPlacement } from "@neverquest/types/ui";
+import { DeltaType } from "@neverquest/types/enums";
 
 export default function WildernessLevel() {
-  const levelValue = useAtomValue(level);
+  const levelValue = useRecoilValue(level);
+
+  const deltaWildernessLevel = deltas(DeltaType.WildernessLevel);
 
   useDeltaText({
     deltaAtom: deltaWildernessLevel,

@@ -1,6 +1,6 @@
-import { useSetAtom } from "jotai";
 import { useEffect, useRef } from "react";
 import { Card, Col, Row, Stack } from "react-bootstrap";
+import { useSetRecoilState } from "recoil";
 
 import Attack from "@neverquest/components/Character/Attack";
 import Defense from "@neverquest/components/Character/Defense";
@@ -15,7 +15,7 @@ import { animateElement } from "@neverquest/utilities/helpers";
 
 export default function Status() {
   const element = useRef(null);
-  const setStatusElement = useSetAtom(statusElement);
+  const setStatusElement = useSetRecoilState(statusElement);
 
   useEffect(() => {
     const { current } = element;

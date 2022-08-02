@@ -1,8 +1,9 @@
-import { useAtomValue } from "jotai";
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
+import { useRecoilValue } from "recoil";
 
-import { showDamagePerSecond } from "@neverquest/state/show";
+import { isShowing } from "@neverquest/state/isShowing";
 import { Weapon } from "@neverquest/types";
+import { ShowingType } from "@neverquest/types/enums";
 import { NO_WEAPON } from "@neverquest/utilities/constants-gear";
 import {
   capitalizeAll,
@@ -11,7 +12,7 @@ import {
 } from "@neverquest/utilities/helpers";
 
 export default function WeaponName({ weapon }: { weapon: Weapon }) {
-  const showDPSValue = useAtomValue(showDamagePerSecond);
+  const showDPSValue = useRecoilValue(isShowing(ShowingType.DamagePerSecond));
 
   const { damage, name, rate, staminaCost, type, weaponClass, weight } = weapon;
 

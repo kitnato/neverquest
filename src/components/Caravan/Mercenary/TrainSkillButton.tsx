@@ -1,6 +1,6 @@
-import { useAtomValue, useSetAtom } from "jotai";
 import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { resourcesBalance, coins } from "@neverquest/state/resources";
 import { skills } from "@neverquest/state/skills";
@@ -9,9 +9,9 @@ import { UIVariant } from "@neverquest/types/ui";
 import { SKILLS } from "@neverquest/utilities/constants-skills";
 
 export default function TrainSkillButton({ type }: { type: SkillType }) {
-  const coinsValue = useAtomValue(coins);
-  const balanceResources = useSetAtom(resourcesBalance);
-  const setSkills = useSetAtom(skills);
+  const coinsValue = useRecoilValue(coins);
+  const balanceResources = useSetRecoilState(resourcesBalance);
+  const setSkill = useSetRecoilState(skills(type));
 
   const { price } = SKILLS[type];
   const isAffordable = price <= coinsValue;
@@ -28,12 +28,9 @@ export default function TrainSkillButton({ type }: { type: SkillType }) {
           onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
             currentTarget.blur();
 
-            setSkills((current) => ({
+            setSkill((current) => ({
               ...current,
-              [type]: {
-                ...current[type],
-                isAcquired: true,
-              },
+              isAcquired: true,
             }));
             balanceResources({ coinsDifference: -price });
           }}

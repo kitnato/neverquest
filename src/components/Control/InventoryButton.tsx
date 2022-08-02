@@ -1,4 +1,4 @@
-import { useAtomValue } from "jotai";
+import { useRecoilValue } from "recoil";
 import { MouseEvent, useState } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 
@@ -11,8 +11,8 @@ import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function InventoryButton({ isDisabled }: { isDisabled: boolean }) {
-  const hasKnapsackValue = useAtomValue(hasKnapsack);
-  const isAttackingValue = useAtomValue(isAttacking);
+  const hasKnapsackValue = useRecoilValue(hasKnapsack);
+  const isAttackingValue = useRecoilValue(isAttacking);
   const [isScreenShowing, setScreenShowing] = useState(false);
 
   if (!hasKnapsackValue) {

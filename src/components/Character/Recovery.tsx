@@ -1,19 +1,22 @@
-import { useAtomValue } from "jotai";
 import Stack from "react-bootstrap/Stack";
+import { useRecoilValue } from "recoil";
 
 import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import RecoveryMeter from "@neverquest/components/Character/RecoveryMeter";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import icon from "@neverquest/icons/knockout.svg";
-import { deltaTotalRecoveryRate } from "@neverquest/state/deltas";
-import { showRecovery } from "@neverquest/state/show";
+import { deltas } from "@neverquest/state/deltas";
+import { isShowing } from "@neverquest/state/isShowing";
 import { totalRecoveryRate } from "@neverquest/state/statistics";
+import { DeltaType, ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function Recovery() {
-  const showRecoveryValue = useAtomValue(showRecovery);
+  const showRecoveryValue = useRecoilValue(isShowing(ShowingType.Recovery));
+
+  const deltaTotalRecoveryRate = deltas(DeltaType.TotalRecoveryRate);
 
   useDeltaText({
     deltaAtom: deltaTotalRecoveryRate,

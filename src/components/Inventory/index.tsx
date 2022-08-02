@@ -1,5 +1,5 @@
-import { useAtomValue, useSetAtom } from "jotai";
 import { Button, Col, Row, Stack } from "react-bootstrap";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import InventoryElement from "@neverquest/components/Inventory/InventoryElement";
 import Encumbrance from "@neverquest/components/Inventory/Encumbrance";
@@ -8,9 +8,9 @@ import { isGear } from "@neverquest/utilities/type-guards";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function Inventory() {
-  const inventoryValue = useAtomValue(inventory);
-  const equipItem = useSetAtom(itemEquip);
-  const unequipItem = useSetAtom(itemUnequip);
+  const inventoryValue = useRecoilValue(inventory);
+  const equipItem = useSetRecoilState(itemEquip);
+  const unequipItem = useSetRecoilState(itemUnequip);
 
   const equippedInventoryIDs = Object.getOwnPropertySymbols(inventoryValue).filter(
     (id) => inventoryValue[id].isEquipped

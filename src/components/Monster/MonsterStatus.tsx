@@ -1,6 +1,6 @@
-import { useAtom, useSetAtom } from "jotai";
 import { useEffect, useRef } from "react";
 import { Card, Col, Row, Stack } from "react-bootstrap";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 import MonsterAttack from "@neverquest/components/Monster/MonsterAttack";
 import MonsterHealth from "@neverquest/components/Monster/MonsterHealth";
@@ -13,8 +13,8 @@ import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
 import { animateElement } from "@neverquest/utilities/helpers";
 
 export default function MonsterStatus() {
-  const [isMonsterNewValue, setIsMonsterNew] = useAtom(isMonsterNew);
-  const setMonsterStatusElement = useSetAtom(monsterStatusElement);
+  const [isMonsterNewValue, setIsMonsterNew] = useRecoilState(isMonsterNew);
+  const setMonsterStatusElement = useSetRecoilState(monsterStatusElement);
 
   const element = useRef(null);
 

@@ -1,28 +1,27 @@
 import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { Clock, Plus } from "react-bootstrap-icons";
-import { useSetAtom, useAtom, useAtomValue } from "jotai";
+import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
-import { AttributeType } from "@neverquest/types/enums";
+import { AttributeType, DeltaType } from "@neverquest/types/enums";
 import { attributeCost, attributes, attributesIncreasable } from "@neverquest/state/attributes";
 import { characterLevel } from "@neverquest/state/character";
-import { deltaCharacterLevel, deltaEssenceAbsorbed } from "@neverquest/state/deltas";
+import { deltas } from "@neverquest/state/deltas";
 import { resourcesBalance } from "@neverquest/state/resources";
 import { FloatingTextType, UIVariant } from "@neverquest/types/ui";
 import { ATTRIBUTES } from "@neverquest/utilities/constants-attributes";
 
 export default function Attribute({ type }: { type: AttributeType }) {
-  const [attributesValue, setAttributes] = useAtom(attributes);
-  const attributeCostValue = useAtomValue(attributeCost);
-  const attributesIncreasableValue = useAtomValue(attributesIncreasable);
-  const setCharacterLevel = useSetAtom(characterLevel);
-  const setDeltaCharacterLevel = useSetAtom(deltaCharacterLevel);
-  const setDeltaEssenceAbsorbed = useSetAtom(deltaEssenceAbsorbed);
-  const balanceResources = useSetAtom(resourcesBalance);
+  const [{ canAssign, points }, setAttribute] = useRecoilState(attributes(type));
+  const attributeCostValue = useRecoilValue(attributeCost);
+  const attributesIncreasableValue = useRecoilValue(attributesIncreasable);
+  const setCharacterLevel = useSetRecoilState(characterLevel);
+  const setDeltaCharacterLevel = useSetRecoilState(deltas(DeltaType.CharacterLevel));
+  const setDeltaEssenceAbsorbed = useSetRecoilState(deltas(DeltaType.EssenceAbsorbed));
+  const balanceResources = useSetRecoilState(resourcesBalance);
 
   const { description, icon, name } = ATTRIBUTES[type];
-  const { canAssign, points } = attributesValue[type];
 
   if (!canAssign) {
     return null;
@@ -49,12 +48,9 @@ export default function Attribute({ type }: { type: AttributeType }) {
               onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
                 currentTarget.blur();
 
-                setAttributes((current) => ({
+                setAttribute((current) => ({
                   ...current,
-                  [type]: {
-                    ...current[type],
-                    points: current[type].points + 1,
-                  },
+                  points: current.points + 1,
                 }));
 
                 balanceResources({ essenceDifference: -attributeCostValue });

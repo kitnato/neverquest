@@ -1,5 +1,5 @@
-import { useAtomValue } from "jotai";
 import Stack from "react-bootstrap/Stack";
+import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import LootingMeter from "@neverquest/components/Resource/LootingMeter";
@@ -10,8 +10,8 @@ import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function Looting() {
-  const isLootingValue = useAtomValue(isLooting);
-  const progressValue = useAtomValue(progress);
+  const isLootingValue = useRecoilValue(isLooting);
+  const progressValue = useRecoilValue(progress);
 
   if (!isLootingValue) {
     return progressValue === 0 ? null : <hr />;

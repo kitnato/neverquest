@@ -1,26 +1,27 @@
-import { useAtomValue } from "jotai";
 import { OverlayTrigger, Popover, Stack, Table } from "react-bootstrap";
+import { useRecoilValue } from "recoil";
 
 import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import icon from "@neverquest/icons/wolverine-claws.svg";
 import { attributes } from "@neverquest/state/attributes";
-import { deltaTotalDamage } from "@neverquest/state/deltas";
+import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
-import { showTotalDamageSummary } from "@neverquest/state/show";
+import { isShowing } from "@neverquest/state/isShowing";
 import { totalDamage } from "@neverquest/state/statistics";
-import { AttributeType } from "@neverquest/types/enums";
+import { AttributeType, DeltaType, ShowingType } from "@neverquest/types/enums";
 import { getComputedStat } from "@neverquest/utilities/helpers";
 import { ATTRIBUTES } from "@neverquest/utilities/constants-attributes";
 
 export default function TotalDamage() {
-  const { points } = useAtomValue(attributes)[AttributeType.Damage];
-  const showTotalDamageBreakdownValue = useAtomValue(showTotalDamageSummary);
-  const totalDamageValue = useAtomValue(totalDamage);
-  const weaponValue = useAtomValue(weapon);
+  const { points } = useRecoilValue(attributes(AttributeType.Damage));
+  const showTotalDamageBreakdownValue = useRecoilValue(isShowing(ShowingType.TotalDamageSummary));
+  const totalDamageValue = useRecoilValue(totalDamage);
+  const weaponValue = useRecoilValue(weapon);
 
   const { base, increment, name } = ATTRIBUTES[AttributeType.Damage];
+  const deltaTotalDamage = deltas(DeltaType.TotalDamage);
 
   useDeltaText({
     deltaAtom: deltaTotalDamage,

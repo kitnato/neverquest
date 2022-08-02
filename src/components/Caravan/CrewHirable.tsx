@@ -1,20 +1,24 @@
-import { useAtomValue, useSetAtom } from "jotai";
 import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import Coins from "@neverquest/components/Resource/Coins";
 import icon from "@neverquest/icons/cowled.svg";
 import { crew } from "@neverquest/state/caravan";
 import { coins, resourcesBalance } from "@neverquest/state/resources";
-import { CrewHireStatus, CrewType } from "@neverquest/types/enums";
+import { CrewStatus, CrewType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 import { CREW_MEMBERS } from "@neverquest/utilities/constants-caravan";
 
 export default function CrewHirable({ type }: { type: CrewType }) {
-  const coinsValue = useAtomValue(coins);
-  const setCrew = useSetAtom(crew);
-  const balanceResources = useSetAtom(resourcesBalance);
+  const [{ hireStatus }, setCrewMember] = useRecoilState(crew(type));
+  const coinsValue = useRecoilValue(coins);
+  const balanceResources = useSetRecoilState(resourcesBalance);
+
+  if (hireStatus !== CrewStatus.Hirable) {
+    return null;
+  }
 
   const { description, name, price } = CREW_MEMBERS[type];
   const isAffordable = price <= coinsValue;
@@ -41,12 +45,9 @@ export default function CrewHirable({ type }: { type: CrewType }) {
               onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
                 currentTarget.blur();
 
-                setCrew((current) => ({
+                setCrewMember((current) => ({
                   ...current,
-                  [type]: {
-                    ...current[type],
-                    hireStatus: CrewHireStatus.Hired,
-                  },
+                  hireStatus: CrewStatus.Hired,
                 }));
                 balanceResources({ coinsDifference: -price });
               }}

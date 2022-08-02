@@ -1,17 +1,18 @@
-import { useAtomValue } from "jotai";
 import { Card, Col, Row } from "react-bootstrap";
+import { useRecoilValue } from "recoil";
 
 import ArmorEquipped from "@neverquest/components/Inventory/Armor/ArmorEquipped";
 import ShieldEquipped from "@neverquest/components/Inventory/Shield/ShieldEquipped";
 import WeaponEquipped from "@neverquest/components/Inventory/Weapon/WeaponEquipped";
-import { showArmor, showShield, showWeapon } from "@neverquest/state/show";
+import { isShowing } from "@neverquest/state/isShowing";
+import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function Gear() {
-  const showArmorValue = useAtomValue(showArmor);
-  const showShieldValue = useAtomValue(showShield);
-  const showWeaponValue = useAtomValue(showWeapon);
+  const showArmorValue = useRecoilValue(isShowing(ShowingType.Armor));
+  const showShieldValue = useRecoilValue(isShowing(ShowingType.Shield));
+  const showWeaponValue = useRecoilValue(isShowing(ShowingType.Weapon));
 
   if (!showArmorValue && !showShieldValue && !showWeaponValue) {
     return null;

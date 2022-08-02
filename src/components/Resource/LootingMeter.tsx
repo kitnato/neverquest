@@ -1,5 +1,5 @@
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import useAnimation from "@neverquest/hooks/useAnimation";
@@ -11,11 +11,11 @@ import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
 export default function LootingMeter() {
-  const [isLootingValue, setLooting] = useAtom(isLooting);
-  const isLevelCompletedValue = useAtomValue(isLevelCompleted);
-  const lootingRateValue = useAtomValue(lootingRate);
-  const createMonster = useSetAtom(monsterCreate);
-  const dropLoot = useSetAtom(lootDrop);
+  const [isLootingValue, setLooting] = useRecoilState(isLooting);
+  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
+  const lootingRateValue = useRecoilValue(lootingRate);
+  const createMonster = useSetRecoilState(monsterCreate);
+  const dropLoot = useSetRecoilState(lootDrop);
 
   const [deltaLooting, setDeltaLooting] = useState(0);
 
@@ -25,11 +25,11 @@ export default function LootingMeter() {
 
   useEffect(() => {
     if (deltaLooting >= lootingRateValue) {
-      dropLoot();
+      dropLoot(null);
       setLooting(false);
 
       if (!isLevelCompletedValue) {
-        createMonster();
+        createMonster(null);
       }
     }
   }, [deltaLooting, isLevelCompletedValue, lootingRateValue]);

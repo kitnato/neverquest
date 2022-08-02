@@ -87,6 +87,8 @@ export const CREW_ORDER = [
   CrewType.Tailor,
 ];
 
+export const CREW_INITIAL = [CrewType.Merchant];
+
 export const MERCHANT_OFFERS: Record<
   number,
   (

@@ -1,47 +1,47 @@
-import { atom } from "jotai";
-import { atomWithReset } from "jotai/utils";
+import { atom, selector } from "recoil";
 
 import LOCRA from "@neverquest/locra";
 import { crew, merchantInventoryGeneration } from "@neverquest/state/caravan";
 import { nsfw } from "@neverquest/state/global";
+import { isShowing } from "@neverquest/state/isShowing";
 import { monsterCreate } from "@neverquest/state/monster";
-import { CrewHireStatus, LocationType } from "@neverquest/types/enums";
+import { CrewStatus, LocationType, ShowingType } from "@neverquest/types/enums";
 import { UNKNOWN } from "@neverquest/utilities/constants";
 import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/utilities/constants-caravan";
 
-// PRIMITIVES
-
-export const level = atomWithReset(1);
-
-export const mode = atomWithReset<LocationType>(LocationType.Wilderness);
-
-export const progress = atomWithReset(0);
-
-// READERS
-
-export const isLevelCompleted = atom((get) => {
-  const progressValue = get(progress);
-  const progressMaxValue = get(progressMax);
-
-  return progressValue === progressMaxValue;
+export const level = atom({
+  default: 1,
+  key: "level",
 });
 
-export const isWilderness = atom((get) => {
-  const modeValue = get(mode);
-
-  return modeValue === LocationType.Wilderness;
+export const mode = atom({
+  default: LocationType.Wilderness,
+  key: "mode",
 });
 
-export const progressMax = atom((get) => {
-  const levelValue = get(level);
-
-  return levelValue + 2;
+export const progress = atom({
+  default: 0,
+  key: "progress",
 });
 
-// DERIVED
+export const isLevelCompleted = selector({
+  key: "isLevelCompleted",
+  get: ({ get }) => get(progress) === get(progressMax),
+});
 
-export const location = atom(
-  (get) => {
+export const isWilderness = selector({
+  key: "isWilderness",
+  get: ({ get }) => get(mode) === LocationType.Wilderness,
+});
+
+export const progressMax = selector({
+  key: "progressMax",
+  get: ({ get }) => get(level) + 2,
+});
+
+export const location = selector({
+  key: "location",
+  get: ({ get }) => {
     const isWildernessValue = get(isWilderness);
     const levelValue = get(level);
     const nsfwValue = get(nsfw);
@@ -61,45 +61,57 @@ export const location = atom(
 
     return "Caravan";
   },
-  (get, set) => {
+  set: ({ get, set }) => {
     const isWildernessValue = get(isWilderness);
 
     if (isWildernessValue) {
       set(mode, LocationType.Caravan);
     } else {
-      set(levelUp);
+      set(levelUp, null);
       set(mode, LocationType.Wilderness);
     }
-  }
-);
+  },
+});
 
-// WRITERS
+// TODO: refactor as useRecoilTransaction(), as soon as it can handle selectors too
 
-export const levelUp = atom(null, (get, set) => {
-  const crewValue = get(crew);
-  const levelValue = get(level);
-  const nextLevel = levelValue + 1;
+export const levelUp = selector({
+  get: () => null,
+  key: "levelUp",
+  set: ({ get, set }) => {
+    const levelValue = get(level);
+    const nextLevel = levelValue + 1;
 
-  const newCrew = { ...crewValue };
+    CREW_ORDER.forEach((type) => {
+      const { hireStatus, monologueProgress } = get(crew(type));
+      const isShowingCrewHiring = isShowing(ShowingType.CrewHiring);
 
-  CREW_ORDER.forEach((type) => {
-    const { hireStatus, monologueProgress } = crewValue[type];
-    const { hirableLevel, monologues } = CREW_MEMBERS[type];
+      const { hirableLevel, monologues } = CREW_MEMBERS[type];
 
-    // Progress the monologue for all hired crew members.
-    if (hireStatus === CrewHireStatus.Hired && monologueProgress < monologues.length - 1) {
-      newCrew[type].monologueProgress += 1;
-    }
+      // Progress the monologue for all hired crew members.
+      if (hireStatus === CrewStatus.Hired && monologueProgress < monologues.length - 1) {
+        set(crew(type), (current) => ({
+          ...current,
+          monologueProgress: current.monologueProgress + 1,
+        }));
+      }
 
-    // Make crew member hirable if the appropriate level has been reached.
-    if (nextLevel >= hirableLevel && crewValue[type].hireStatus === CrewHireStatus.Unavailable) {
-      newCrew[type].hireStatus = CrewHireStatus.Hirable;
-    }
-  });
+      // Make crew member hirable if the appropriate level has been reached.
+      if (hireStatus === CrewStatus.Unavailable && nextLevel >= hirableLevel) {
+        set(crew(type), (current) => ({
+          ...current,
+          hireStatus: CrewStatus.Hirable,
+        }));
 
-  set(level, nextLevel);
-  set(progress, 0);
-  set(crew, newCrew);
-  set(merchantInventoryGeneration);
-  set(monsterCreate);
+        if (!get(isShowingCrewHiring)) {
+          set(isShowingCrewHiring, true);
+        }
+      }
+    });
+
+    set(level, nextLevel);
+    set(progress, 0);
+    set(merchantInventoryGeneration, null);
+    set(monsterCreate, null);
+  },
 });

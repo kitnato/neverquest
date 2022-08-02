@@ -1,19 +1,20 @@
-import { useAtomValue } from "jotai";
 import Stack from "react-bootstrap/Stack";
+import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import ArmorName from "@neverquest/components/Inventory/Armor/ArmorName";
 import iconUnequipped from "@neverquest/icons/ribcage.svg";
 import iconEquipped from "@neverquest/icons/shoulder-armor.svg";
 import { armor } from "@neverquest/state/inventory";
-import { showArmor } from "@neverquest/state/show";
+import { isShowing } from "@neverquest/state/isShowing";
+import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 import { NO_ARMOR } from "@neverquest/utilities/constants-gear";
 
 export default function ArmorEquipped() {
-  const armorValue = useAtomValue(armor);
-  const showArmorValue = useAtomValue(showArmor);
+  const armorValue = useRecoilValue(armor);
+  const showArmorValue = useRecoilValue(isShowing(ShowingType.Armor));
 
   if (!showArmorValue) {
     return null;

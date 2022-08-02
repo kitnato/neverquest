@@ -4,8 +4,9 @@ import ImageIcon from "@neverquest/components/ImageIcon";
 import FloatingText from "@neverquest/components/FloatingText";
 import ReserveMeter from "@neverquest/components/ReserveMeter";
 import icon from "@neverquest/icons/hospital-cross.svg";
-import { deltaHealthMonster } from "@neverquest/state/deltas";
+import { deltas } from "@neverquest/state/deltas";
 import { currentHealthMonster, maximumHealthMonster } from "@neverquest/state/monster";
+import { DeltaType } from "@neverquest/types/enums";
 
 export default function MonsterHealth() {
   return (
@@ -15,7 +16,7 @@ export default function MonsterHealth() {
       <Stack className="w-100" direction="horizontal">
         <ReserveMeter atom={currentHealthMonster} atomMaximum={maximumHealthMonster} />
 
-        <FloatingText atom={deltaHealthMonster} />
+        <FloatingText atom={deltas(DeltaType.HealthMonster)} />
       </Stack>
     </Stack>
   );

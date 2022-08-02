@@ -1,10 +1,11 @@
-import { Atom, useSetAtom, useAtomValue, WritableAtom } from "jotai";
 import { useEffect, useState } from "react";
+import { useSetRecoilState, useRecoilValue, RecoilState, RecoilValueReadOnly } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { isRecovering } from "@neverquest/state/character";
+import { HealthChangeProps } from "@neverquest/types/props";
 import { UIAttachment, UISize, UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
@@ -13,14 +14,14 @@ export default function RegenerationMeter({
   isReserveMaxedOut,
   regenerationRate,
 }: {
-  atomReserve: WritableAtom<null, number>;
-  isReserveMaxedOut: Atom<boolean>;
-  regenerationRate: Atom<number>;
+  atomReserve: RecoilState<HealthChangeProps>;
+  isReserveMaxedOut: RecoilValueReadOnly<boolean>;
+  regenerationRate: RecoilValueReadOnly<number>;
 }) {
-  const isRecoveringValue = useAtomValue(isRecovering);
-  const regenerationRateValue = useAtomValue(regenerationRate);
-  const isReserveMaxedOutValue = useAtomValue(isReserveMaxedOut);
-  const changeCurrentReserve = useSetAtom(atomReserve);
+  const isRecoveringValue = useRecoilValue(isRecovering);
+  const regenerationRateValue = useRecoilValue(regenerationRate);
+  const isReserveMaxedOutValue = useRecoilValue(isReserveMaxedOut);
+  const changeCurrentReserve = useSetRecoilState(atomReserve);
   const [deltaRegeneration, setDeltaRegeneration] = useState(0);
 
   useAnimation((delta) => {

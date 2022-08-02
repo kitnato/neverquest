@@ -1,4 +1,4 @@
-import { atom } from "jotai";
+import { selector } from "recoil";
 
 import { attributes } from "@neverquest/state/attributes";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
@@ -6,100 +6,115 @@ import { getComputedStat, getDamagePerSecond } from "@neverquest/utilities/helpe
 import { AttributeType } from "@neverquest/types/enums";
 import { ATTRIBUTES } from "@neverquest/utilities/constants-attributes";
 
-// READERS
-
-export const damagePerSecond = atom((get) => {
-  const totalAttackRateValue = get(totalAttackRate);
-  const totalDamageValue = get(totalDamage);
-
-  return getDamagePerSecond({
-    damage: totalDamageValue,
-    rate: totalAttackRateValue,
-  });
+export const damagePerSecond = selector({
+  key: "damagePerSecond",
+  get: ({ get }) =>
+    getDamagePerSecond({
+      damage: get(totalDamage),
+      rate: get(totalAttackRate),
+    }),
 });
 
-export const totalAttackRate = atom((get) => {
-  const { points } = get(attributes)[AttributeType.AttackRateBonus];
-  const { rate } = get(weapon);
+export const totalAttackRate = selector({
+  key: "totalAttackRate",
+  get: ({ get }) => {
+    const { points } = get(attributes(AttributeType.AttackRateBonus));
+    const { rate } = get(weapon);
 
-  const { base, increment } = ATTRIBUTES[AttributeType.AttackRateBonus];
+    const { base, increment } = ATTRIBUTES[AttributeType.AttackRateBonus];
 
-  const bonus = getComputedStat({ base, increment, points });
-
-  return rate * (1 - bonus);
+    return rate * (1 - getComputedStat({ base, increment, points }));
+  },
 });
 
-export const totalBlockChance = atom((get) => {
-  const shieldValue = get(shield);
-
-  return shieldValue.block;
+export const totalBlockChance = selector({
+  key: "totalBlockChance",
+  get: ({ get }) => get(shield).block,
 });
 
-export const totalCriticalChance = atom((get) => {
-  const { points } = get(attributes)[AttributeType.CriticalChance];
+export const totalCriticalChance = selector({
+  key: "totalCriticalChance",
+  get: ({ get }) => {
+    const { points } = get(attributes(AttributeType.CriticalChance));
 
-  const { base, increment } = ATTRIBUTES[AttributeType.CriticalChance];
+    const { base, increment } = ATTRIBUTES[AttributeType.CriticalChance];
 
-  return getComputedStat({ base, increment, points });
+    return getComputedStat({ base, increment, points });
+  },
 });
 
-export const totalCriticalDamage = atom((get) => {
-  const { points } = get(attributes)[AttributeType.CriticalDamage];
+export const totalCriticalDamage = selector({
+  key: "totalCriticalDamage",
+  get: ({ get }) => {
+    const { points } = get(attributes(AttributeType.CriticalDamage));
 
-  const { base, increment } = ATTRIBUTES[AttributeType.CriticalDamage];
+    const { base, increment } = ATTRIBUTES[AttributeType.CriticalDamage];
 
-  return getComputedStat({ base, increment, points });
+    return getComputedStat({ base, increment, points });
+  },
 });
 
-export const totalDamage = atom((get) => {
-  const { points } = get(attributes)[AttributeType.Damage];
-  const weaponValue = get(weapon);
+export const totalDamage = selector({
+  key: "totalDamage",
+  get: ({ get }) => {
+    const { points } = get(attributes(AttributeType.Damage));
 
-  const { base, increment } = ATTRIBUTES[AttributeType.Damage];
+    const { base, increment } = ATTRIBUTES[AttributeType.Damage];
 
-  return weaponValue.damage + getComputedStat({ base, increment, points });
+    return get(weapon).damage + getComputedStat({ base, increment, points });
+  },
 });
 
-export const totalDodgeChance = atom((get) => {
-  const { points } = get(attributes)[AttributeType.DodgeChance];
+export const totalDodgeChance = selector({
+  key: "totalDodgeChance",
+  get: ({ get }) => {
+    const { points } = get(attributes(AttributeType.DodgeChance));
 
-  const { base, increment } = ATTRIBUTES[AttributeType.DodgeChance];
+    const { base, increment } = ATTRIBUTES[AttributeType.DodgeChance];
 
-  return getComputedStat({ base, increment, points });
+    return getComputedStat({ base, increment, points });
+  },
 });
 
-export const totalHealthRegenerationRate = atom((get) => {
-  const { points } = get(attributes)[AttributeType.HealthRegenerationRate];
+export const totalHealthRegenerationRate = selector({
+  key: "totalHealthRegenerationRate",
+  get: ({ get }) => {
+    const { points } = get(attributes(AttributeType.HealthRegenerationRate));
 
-  const { base, increment } = ATTRIBUTES[AttributeType.HealthRegenerationRate];
+    const { base, increment } = ATTRIBUTES[AttributeType.HealthRegenerationRate];
 
-  return getComputedStat({ base, increment, points });
+    return getComputedStat({ base, increment, points });
+  },
 });
 
-export const totalProtection = atom((get) => {
-  const armorValue = get(armor);
-
-  return armorValue.protection;
+export const totalProtection = selector({
+  key: "totalProtection",
+  get: ({ get }) => get(armor).protection,
 });
 
-export const totalRecoveryRate = atom((get) => {
-  const { points } = get(attributes)[AttributeType.RecoveryRate];
+export const totalRecoveryRate = selector({
+  key: "totalRecoveryRate",
+  get: ({ get }) => {
+    const { points } = get(attributes(AttributeType.RecoveryRate));
 
-  const { base, increment } = ATTRIBUTES[AttributeType.RecoveryRate];
+    const { base, increment } = ATTRIBUTES[AttributeType.RecoveryRate];
 
-  return getComputedStat({ base, increment, points });
+    return getComputedStat({ base, increment, points });
+  },
 });
 
-export const totalStaggerRate = atom((get) => {
-  const shieldValue = get(shield);
-
-  return shieldValue.stagger;
+export const totalStaggerRate = selector({
+  key: "totalStaggerRate",
+  get: ({ get }) => get(shield).stagger,
 });
 
-export const totalStaminaRegenerationRate = atom((get) => {
-  const { points } = get(attributes)[AttributeType.StaminaRegenerationRate];
+export const totalStaminaRegenerationRate = selector({
+  key: "totalStaminaRegenerationRate",
+  get: ({ get }) => {
+    const { points } = get(attributes(AttributeType.StaminaRegenerationRate));
 
-  const { base, increment } = ATTRIBUTES[AttributeType.StaminaRegenerationRate];
+    const { base, increment } = ATTRIBUTES[AttributeType.StaminaRegenerationRate];
 
-  return getComputedStat({ base, increment, points });
+    return getComputedStat({ base, increment, points });
+  },
 });

@@ -1,15 +1,16 @@
-import { useAtomValue } from "jotai";
 import { useState } from "react";
 import { Form, Modal, Stack } from "react-bootstrap";
 import { Gear } from "react-bootstrap-icons";
+import { useRecoilValue } from "recoil";
 
 import SettingsSwitch from "@neverquest/components/Header/SettingsSwitch";
 import { hasKnapsack } from "@neverquest/state/character";
-import { autoEquip, nsfw } from "@neverquest/state/global";
-import { showDamagePerSecond, showLowHealthWarning } from "@neverquest/state/show";
+import { autoEquip, lowHealthWarning, nsfw } from "@neverquest/state/global";
+import { isShowing as isShowingAtom } from "@neverquest/state/isShowing";
+import { ShowingType } from "@neverquest/types/enums";
 
 export default function Settings() {
-  const hasKnapsackValue = useAtomValue(hasKnapsack);
+  const hasKnapsackValue = useRecoilValue(hasKnapsack);
 
   const [isShowing, setShowing] = useState(false);
 
@@ -27,9 +28,12 @@ export default function Settings() {
             <Stack gap={3}>
               <SettingsSwitch atom={nsfw} label="NSFW mode (profanity)" />
 
-              <SettingsSwitch atom={showDamagePerSecond} label="Show damage per second (DPS)" />
+              <SettingsSwitch
+                atom={isShowingAtom(ShowingType.DamagePerSecond)}
+                label="Show damage per second (DPS)"
+              />
 
-              <SettingsSwitch atom={showLowHealthWarning} label="Show low-health warning" />
+              <SettingsSwitch atom={lowHealthWarning} label="Show low-health warning" />
 
               <SettingsSwitch
                 atom={autoEquip}

@@ -1,6 +1,6 @@
 import { MouseEvent, useState } from "react";
-import { useAtom, useSetAtom } from "jotai";
 import { Button, Stack } from "react-bootstrap";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 import ConfirmationDialog from "@neverquest/components/ConfirmationDialog";
 import InventoryElement from "@neverquest/components/Inventory/InventoryElement";
@@ -12,9 +12,9 @@ import { UIVariant } from "@neverquest/types/ui";
 import { getSellPrice } from "@neverquest/utilities/helpers";
 
 export default function SellItems() {
-  const [inventoryValue, setInventory] = useAtom(inventory);
-  const setMerchantInventory = useSetAtom(merchantInventory);
-  const balanceResources = useSetAtom(resourcesBalance);
+  const [inventoryValue, setInventory] = useRecoilState(inventory);
+  const setMerchantInventory = useSetRecoilState(merchantInventory);
+  const balanceResources = useSetRecoilState(resourcesBalance);
 
   const [sellConfirmation, setSellConfirmation] = useState<symbol | null>(null);
 

@@ -1,19 +1,22 @@
-import { useAtomValue } from "jotai";
 import Stack from "react-bootstrap/Stack";
+import { useRecoilValue } from "recoil";
 
 import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import icon from "@neverquest/icons/barbute.svg";
-import { deltaTotalProtection } from "@neverquest/state/deltas";
-import { showTotalProtection } from "@neverquest/state/show";
+import { deltas } from "@neverquest/state/deltas";
+import { isShowing } from "@neverquest/state/isShowing";
 import { totalProtection } from "@neverquest/state/statistics";
+import { DeltaType, ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function TotalProtection() {
-  const showTotalProtectionValue = useAtomValue(showTotalProtection);
-  const totalProtectionValue = useAtomValue(totalProtection);
+  const showTotalProtectionValue = useRecoilValue(isShowing(ShowingType.TotalProtection));
+  const totalProtectionValue = useRecoilValue(totalProtection);
+
+  const deltaTotalProtection = deltas(DeltaType.TotalProtection);
 
   useDeltaText({
     deltaAtom: deltaTotalProtection,

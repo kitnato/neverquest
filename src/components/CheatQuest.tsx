@@ -1,4 +1,5 @@
-import { useAtomValue, useSetAtom } from "jotai";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+
 import { level, levelUp, progress, progressMax } from "@neverquest/state/encounter";
 import { resourcesBalance } from "@neverquest/state/resources";
 import { useEffect } from "react";
@@ -10,11 +11,11 @@ declare global {
 }
 
 export default function CheatQuest() {
-  const levelValue = useAtomValue(level);
-  const progressMaxValue = useAtomValue(progressMax);
-  const setLevelUp = useSetAtom(levelUp);
-  const balanceResources = useSetAtom(resourcesBalance);
-  const setProgress = useSetAtom(progress);
+  const levelValue = useRecoilValue(level);
+  const progressMaxValue = useRecoilValue(progressMax);
+  const setLevelUp = useSetRecoilState(levelUp);
+  const balanceResources = useSetRecoilState(resourcesBalance);
+  const setProgress = useSetRecoilState(progress);
 
   useEffect(() => {
     window.cheatQuest = (state, value) => {
@@ -47,7 +48,7 @@ export default function CheatQuest() {
             const difference = value - levelValue;
 
             for (let i = 0; i < difference; i++) {
-              setLevelUp();
+              setLevelUp(null);
             }
           }
           break;

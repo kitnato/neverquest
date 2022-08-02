@@ -1,4 +1,4 @@
-import { PrimitiveAtom, useAtom } from "jotai";
+import { RecoilState, useRecoilState } from "recoil";
 import Form from "react-bootstrap/Form";
 
 export default function SettingsSwitch({
@@ -6,11 +6,11 @@ export default function SettingsSwitch({
   isDisabled = false,
   label,
 }: {
-  atom: PrimitiveAtom<boolean>;
+  atom: RecoilState<boolean>;
   isDisabled?: boolean;
   label: string;
 }) {
-  const [toggledValue, setToggle] = useAtom(atom);
+  const [toggledValue, setToggle] = useRecoilState(atom);
 
   return (
     <Form.Switch

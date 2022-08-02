@@ -5,7 +5,7 @@ import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import ReserveMeter from "@neverquest/components/ReserveMeter";
 import icon from "@neverquest/icons/hospital-cross.svg";
-import { deltaHealth, deltaTotalHealthRegenerationRate } from "@neverquest/state/deltas";
+import { deltas } from "@neverquest/state/deltas";
 import {
   currentHealth,
   healthChange,
@@ -14,6 +14,7 @@ import {
 } from "@neverquest/state/reserves";
 import { totalHealthRegenerationRate } from "@neverquest/state/statistics";
 import { UIAttachment } from "@neverquest/types/ui";
+import { DeltaType } from "@neverquest/types/enums";
 
 export default function Health() {
   return (
@@ -28,12 +29,12 @@ export default function Health() {
             atomMaximum={maximumHealth}
           />
 
-          <FloatingText atom={deltaHealth} />
+          <FloatingText atom={deltas(DeltaType.Health)} />
         </Stack>
 
         <Regeneration
           atomReserve={healthChange}
-          atomDeltaRegenerationRate={deltaTotalHealthRegenerationRate}
+          atomDeltaRegenerationRate={deltas(DeltaType.TotalHealthRegenerationRate)}
           isReserveMaxedOut={isHealthMaxedOut}
           regenerationRate={totalHealthRegenerationRate}
         />

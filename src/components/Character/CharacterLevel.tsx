@@ -1,14 +1,15 @@
-import { useAtomValue } from "jotai";
 import Stack from "react-bootstrap/Stack";
+import { useRecoilValue } from "recoil";
 
 import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import icon from "@neverquest/icons/level-four.svg";
 import { characterLevel } from "@neverquest/state/character";
-import { deltaCharacterLevel } from "@neverquest/state/deltas";
+import { deltas } from "@neverquest/state/deltas";
+import { DeltaType } from "@neverquest/types/enums";
 
 export default function CharacterLevel() {
-  const characterLevelValue = useAtomValue(characterLevel);
+  const characterLevelValue = useRecoilValue(characterLevel);
 
   return (
     <Stack direction="horizontal" gap={3}>
@@ -16,7 +17,7 @@ export default function CharacterLevel() {
 
       <span>{characterLevelValue}</span>
 
-      <FloatingText atom={deltaCharacterLevel} />
+      <FloatingText atom={deltas(DeltaType.CharacterLevel)} />
     </Stack>
   );
 }

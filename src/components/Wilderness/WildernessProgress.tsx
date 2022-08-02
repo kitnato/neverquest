@@ -1,19 +1,22 @@
-import { useAtomValue } from "jotai";
 import Stack from "react-bootstrap/Stack";
+import { useRecoilValue } from "recoil";
 
 import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import progressIcon from "@neverquest/icons/stairs.svg";
-import { deltaWildernessProgress } from "@neverquest/state/deltas";
+import { deltas } from "@neverquest/state/deltas";
 import { isWilderness, progress, progressMax } from "@neverquest/state/encounter";
+import { DeltaType } from "@neverquest/types/enums";
 import { OverlayPlacement, UIVariant } from "@neverquest/types/ui";
 
 export default function WildernessProgress() {
-  const isWildernessValue = useAtomValue(isWilderness);
-  const progressValue = useAtomValue(progress);
-  const progressMaxValue = useAtomValue(progressMax);
+  const isWildernessValue = useRecoilValue(isWilderness);
+  const progressValue = useRecoilValue(progress);
+  const progressMaxValue = useRecoilValue(progressMax);
+
+  const deltaWildernessProgress = deltas(DeltaType.WildernessProgress);
 
   useDeltaText({
     deltaAtom: deltaWildernessProgress,

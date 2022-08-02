@@ -1,16 +1,10 @@
-import { useAtomValue } from "jotai";
+import { useRecoilValue } from "recoil";
 
 import { encumbrance, encumbranceMaximum } from "@neverquest/state/inventory";
 
 export default function useCheckEncumbrance() {
-  const encumbranceValue = useAtomValue(encumbrance);
-  const encumbranceMaximumValue = useAtomValue(encumbranceMaximum);
+  const encumbranceValue = useRecoilValue(encumbrance);
+  const encumbranceMaximumValue = useRecoilValue(encumbranceMaximum);
 
-  return ({ weight }: { weight: number }) => {
-    if (encumbranceValue + weight > encumbranceMaximumValue) {
-      return false;
-    }
-
-    return true;
-  };
+  return ({ weight }: { weight: number }) => encumbranceValue + weight <= encumbranceMaximumValue;
 }

@@ -1,16 +1,17 @@
-import { useAtomValue } from "jotai";
 import Stack from "react-bootstrap/Stack";
+import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import icon from "@neverquest/icons/heavy-timer.svg";
-import { showDamagePerSecond } from "@neverquest/state/show";
+import { isShowing } from "@neverquest/state/isShowing";
 import { damagePerSecond } from "@neverquest/state/statistics";
+import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function DamagePerSecond() {
-  const damagePerSecondValue = useAtomValue(damagePerSecond);
-  const showDamagePerSecondValue = useAtomValue(showDamagePerSecond);
+  const damagePerSecondValue = useRecoilValue(damagePerSecond);
+  const showDamagePerSecondValue = useRecoilValue(isShowing(ShowingType.DamagePerSecond));
 
   if (!showDamagePerSecondValue) {
     return null;

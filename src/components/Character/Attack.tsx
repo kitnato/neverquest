@@ -1,5 +1,5 @@
 import { OverlayTrigger, Popover, Stack, Table } from "react-bootstrap";
-import { useAtomValue } from "jotai";
+import { useRecoilValue } from "recoil";
 
 import AttackMeter from "@neverquest/components/Character/AttackMeter";
 import FloatingText from "@neverquest/components/FloatingText";
@@ -7,24 +7,27 @@ import ImageIcon from "@neverquest/components/ImageIcon";
 import icon from "@neverquest/icons/striking-splinter.svg";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { attributes } from "@neverquest/state/attributes";
-import { deltaTotalAttackRate } from "@neverquest/state/deltas";
+import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
-import { showTotalAttackRateSummary } from "@neverquest/state/show";
+import { isShowing } from "@neverquest/state/isShowing";
 import { totalAttackRate } from "@neverquest/state/statistics";
+import { AttributeType, DeltaType, ShowingType } from "@neverquest/types/enums";
 import {
   formatMilliseconds,
   formatPercentage,
   getComputedStat,
 } from "@neverquest/utilities/helpers";
-import { AttributeType } from "@neverquest/types/enums";
 import { ATTRIBUTES } from "@neverquest/utilities/constants-attributes";
 
 export default function Attack() {
-  const { points } = useAtomValue(attributes)[AttributeType.AttackRateBonus];
-  const showTotalAttackRateBreakdownValue = useAtomValue(showTotalAttackRateSummary);
-  const weaponValue = useAtomValue(weapon);
+  const { points } = useRecoilValue(attributes(AttributeType.AttackRateBonus));
+  const showTotalAttackRateBreakdownValue = useRecoilValue(
+    isShowing(ShowingType.TotalAttackRateSummary)
+  );
+  const weaponValue = useRecoilValue(weapon);
 
   const { base, increment, name } = ATTRIBUTES[AttributeType.AttackRateBonus];
+  const deltaTotalAttackRate = deltas(DeltaType.TotalAttackRate);
 
   useDeltaText({
     deltaAtom: deltaTotalAttackRate,

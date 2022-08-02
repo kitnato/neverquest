@@ -1,6 +1,6 @@
-import { useAtomValue, useSetAtom } from "jotai";
 import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import icon from "@neverquest/icons/journey.svg";
@@ -11,10 +11,10 @@ import { UNKNOWN } from "@neverquest/utilities/constants";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function TravelButton({ isDisabled }: { isDisabled: boolean }) {
-  const isWildernessValue = useAtomValue(isWilderness);
-  const hasLootedValue = useAtomValue(hasLooted);
-  const levelValue = useAtomValue(level);
-  const switchLocation = useSetAtom(location);
+  const isWildernessValue = useRecoilValue(isWilderness);
+  const hasLootedValue = useRecoilValue(hasLooted);
+  const levelValue = useRecoilValue(level);
+  const switchLocation = useSetRecoilState(location);
 
   const destination = (() => {
     if (levelValue === 1 && isWildernessValue) {
@@ -43,7 +43,7 @@ export default function TravelButton({ isDisabled }: { isDisabled: boolean }) {
         onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
           currentTarget.blur();
 
-          switchLocation();
+          switchLocation("");
         }}
         variant={UIVariant.Outline}
       >

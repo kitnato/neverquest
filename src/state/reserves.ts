@@ -1,55 +1,82 @@
-import { atom } from "jotai";
-import { atomWithReset } from "jotai/utils";
+import { atom, DefaultValue, selector } from "recoil";
 
 import { attributes } from "@neverquest/state/attributes";
-import { deltaHealth, deltaStamina } from "@neverquest/state/deltas";
-import { gameOver } from "@neverquest/state/global";
+import { deltas } from "@neverquest/state/deltas";
+import { isShowing } from "@neverquest/state/isShowing";
+import { isGameOver } from "@neverquest/state/global";
 import { shield, weapon } from "@neverquest/state/inventory";
-import { AttributeType } from "@neverquest/types/enums";
-import { DeltaDisplay, FloatingTextType } from "@neverquest/types/ui";
+import { AttributeType, DeltaType, ShowingType } from "@neverquest/types/enums";
+import { HealthChangeProps } from "@neverquest/types/props";
+import { FloatingTextType } from "@neverquest/types/ui";
 import { ATTRIBUTES } from "@neverquest/utilities/constants-attributes";
 
-// PRIMITIVES
-
-export const currentHealth = atomWithReset(0);
-
-export const currentStamina = atomWithReset(0);
-
-// READERS
-
-export const canAttack = atom((get) => get(currentStamina) >= get(weapon).staminaCost);
-
-export const canBlock = atom((get) => get(currentStamina) >= get(shield).staminaCost);
-
-export const isHealthLow = atom(
-  (get) => get(currentHealth) <= Math.ceil(get(maximumHealth) * 0.33)
-);
-
-export const isHealthMaxedOut = atom((get) => get(currentHealth) >= get(maximumHealth));
-
-export const isStaminaMaxedOut = atom((get) => get(currentStamina) >= get(maximumStamina));
-
-export const maximumHealth = atom((get) => {
-  const { points } = get(attributes)[AttributeType.Health];
-
-  const { base, increment } = ATTRIBUTES[AttributeType.Health];
-
-  return base + increment * points;
+export const currentHealth = atom({
+  default: 0,
+  key: "currentHealth",
 });
 
-export const maximumStamina = atom((get) => {
-  const { points } = get(attributes)[AttributeType.Stamina];
-
-  const { base, increment } = ATTRIBUTES[AttributeType.Stamina];
-
-  return base + increment * points;
+export const currentStamina = atom({
+  default: 0,
+  key: "currentStamina",
 });
 
-// WRITERS
+export const canAttack = selector({
+  key: "canAttack",
+  get: ({ get }) => get(currentStamina) >= get(weapon).staminaCost,
+});
 
-export const healthChange = atom(
-  null,
-  (get, set, change: number | { delta: number; deltaContents: DeltaDisplay }) => {
+export const canBlock = selector({
+  key: "canBlock",
+  get: ({ get }) => get(currentStamina) >= get(shield).staminaCost,
+});
+
+export const isHealthLow = selector({
+  key: "isHealthLow",
+  get: ({ get }) => get(currentHealth) <= Math.ceil(get(maximumHealth) * 0.33),
+});
+
+export const isHealthMaxedOut = selector({
+  key: "isHealthMaxedOut",
+  get: ({ get }) => get(currentHealth) >= get(maximumHealth),
+});
+
+export const isStaminaMaxedOut = selector({
+  key: "isStaminaMaxedOut",
+  get: ({ get }) => get(currentStamina) >= get(maximumStamina),
+});
+
+export const maximumHealth = selector({
+  key: "maximumHealth",
+  get: ({ get }) => {
+    const { points } = get(attributes(AttributeType.Health));
+
+    const { base, increment } = ATTRIBUTES[AttributeType.Health];
+
+    return base + increment * points;
+  },
+});
+
+export const maximumStamina = selector({
+  key: "maximumStamina",
+  get: ({ get }) => {
+    const { points } = get(attributes(AttributeType.Stamina));
+
+    const { base, increment } = ATTRIBUTES[AttributeType.Stamina];
+
+    return base + increment * points;
+  },
+});
+
+// TODO: refactor as useRecoilTransaction(), as soon as it can handle selectors too
+
+export const healthChange = selector<HealthChangeProps>({
+  get: () => 0,
+  key: "healthChange",
+  set: ({ get, set }, change) => {
+    if (change instanceof DefaultValue) {
+      return;
+    }
+
     const max = get(maximumHealth);
     const isSimpleDelta = typeof change === "number";
     const healthChange = isSimpleDelta ? change : change.delta;
@@ -59,17 +86,18 @@ export const healthChange = atom(
     if (isSimpleDelta) {
       const isPositive = healthChange > 0;
 
-      set(deltaHealth, {
+      set(deltas(DeltaType.Health), {
         color: isPositive ? FloatingTextType.Positive : FloatingTextType.Negative,
         value: `${isPositive ? `+${healthChange}` : healthChange}`,
       });
     } else {
-      set(deltaHealth, change.deltaContents);
+      set(deltas(DeltaType.Health), change.deltaContents);
     }
 
     if (newHealth <= 0) {
       newHealth = 0;
-      set(gameOver, true);
+      set(isGameOver, true);
+      set(isShowing(ShowingType.GameOver), true);
     }
 
     if (newHealth > max) {
@@ -77,25 +105,32 @@ export const healthChange = atom(
     }
 
     set(currentHealth, newHealth);
-  }
-);
+  },
+});
 
-export const staminaChange = atom(null, (get, set, delta: number) => {
-  const max = get(maximumStamina);
-  let newStamina = get(currentStamina) + delta;
+export const staminaChange = selector({
+  get: () => 0,
+  key: "staminaChange",
+  set: ({ get, set }, delta) => {
+    if (delta instanceof DefaultValue) {
+      return;
+    }
+    const max = get(maximumStamina);
+    let newStamina = get(currentStamina) + delta;
 
-  set(deltaStamina, {
-    color: delta > 0 ? FloatingTextType.Positive : FloatingTextType.Negative,
-    value: `${delta > 0 ? `+${delta}` : delta}`,
-  });
+    set(deltas(DeltaType.Stamina), {
+      color: delta > 0 ? FloatingTextType.Positive : FloatingTextType.Negative,
+      value: `${delta > 0 ? `+${delta}` : delta}`,
+    });
 
-  if (newStamina < 0) {
-    newStamina = 0;
-  }
+    if (newStamina < 0) {
+      newStamina = 0;
+    }
 
-  if (newStamina > max) {
-    newStamina = max;
-  }
+    if (newStamina > max) {
+      newStamina = max;
+    }
 
-  set(currentStamina, newStamina);
+    set(currentStamina, newStamina);
+  },
 });

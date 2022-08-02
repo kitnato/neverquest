@@ -1,6 +1,6 @@
 import { MouseEvent } from "react";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import useAcquireItem from "@neverquest/hooks/useAcquireItem";
 import useCheckEncumbrance from "@neverquest/hooks/useCheckEncumbrance";
@@ -9,9 +9,9 @@ import { resourcesBalance, coins } from "@neverquest/state/resources";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function BuyItemButton({ id }: { id: symbol }) {
-  const [merchantInventoryValue, setMerchantInventory] = useAtom(merchantInventory);
-  const coinsValue = useAtomValue(coins);
-  const balanceResources = useSetAtom(resourcesBalance);
+  const [merchantInventoryValue, setMerchantInventory] = useRecoilState(merchantInventory);
+  const coinsValue = useRecoilValue(coins);
+  const balanceResources = useSetRecoilState(resourcesBalance);
 
   const acquireItem = useAcquireItem();
   const checkEncumbrance = useCheckEncumbrance();

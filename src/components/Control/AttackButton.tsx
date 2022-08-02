@@ -1,6 +1,6 @@
-import { useAtomValue, useAtom } from "jotai";
 import { MouseEvent, useEffect, useState } from "react";
 import { Button, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 import ConfirmationDialog from "@neverquest/components/ConfirmationDialog";
 import ImageIcon from "@neverquest/components/ImageIcon";
@@ -10,20 +10,24 @@ import retreatIcon from "@neverquest/icons/return-arrow.svg";
 import { attributesIncreasable } from "@neverquest/state/attributes";
 import { isAttacking } from "@neverquest/state/character";
 import { isLevelCompleted } from "@neverquest/state/encounter";
+import { isShowing } from "@neverquest/state/isShowing";
 import { isMonsterEngaged } from "@neverquest/state/monster";
 import { isHealthLow } from "@neverquest/state/reserves";
-import { showLowHealthWarning, showWildernessStatus } from "@neverquest/state/show";
+import { lowHealthWarning } from "@neverquest/state/global";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
+import { ShowingType } from "@neverquest/types/enums";
 
 export default function AttackButton({ isDisabled }: { isDisabled: boolean }) {
-  const [isAttackingValue, setAttacking] = useAtom(isAttacking);
-  const [showWildernessStatusValue, setShowWildernessStatusValue] = useAtom(showWildernessStatus);
-  const attributesIncreasableValue = useAtomValue(attributesIncreasable);
-  const isHealthLowValue = useAtomValue(isHealthLow);
-  const isLevelCompletedValue = useAtomValue(isLevelCompleted);
-  const isMonsterEngagedValue = useAtomValue(isMonsterEngaged);
-  const showLowHealthWarningValue = useAtomValue(showLowHealthWarning);
+  const [isAttackingValue, setAttacking] = useRecoilState(isAttacking);
+  const [showWildernessStatusValue, setShowWildernessStatusValue] = useRecoilState(
+    isShowing(ShowingType.WildernessStatus)
+  );
+  const attributesIncreasableValue = useRecoilValue(attributesIncreasable);
+  const isHealthLowValue = useRecoilValue(isHealthLow);
+  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
+  const isMonsterEngagedValue = useRecoilValue(isMonsterEngaged);
+  const showLowHealthWarningValue = useRecoilValue(lowHealthWarning);
 
   const [showAttackConfirmation, setShowAttackConfirmation] = useState(false);
 

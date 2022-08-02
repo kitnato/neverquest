@@ -1,14 +1,15 @@
-import { useAtomValue } from "jotai";
+import { useRecoilValue } from "recoil";
 import Stack from "react-bootstrap/Stack";
 
 import WildernessProgress from "@neverquest/components/Wilderness/WildernessProgress";
 import WildernessLevel from "@neverquest/components/Wilderness/WildernessLevel";
-import { showWildernessStatus } from "@neverquest/state/show";
+import { isShowing } from "@neverquest/state/isShowing";
+import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function WildernessStatus() {
-  const showWildernessStatusValue = useAtomValue(showWildernessStatus);
+  const showWildernessStatusValue = useRecoilValue(isShowing(ShowingType.WildernessStatus));
 
   if (!showWildernessStatusValue) {
     return null;

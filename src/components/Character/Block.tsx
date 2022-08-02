@@ -1,16 +1,17 @@
 import Stack from "react-bootstrap/Stack";
-import { useAtomValue } from "jotai";
+import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import icon from "@neverquest/icons/shield-reflect.svg";
 import { shield } from "@neverquest/state/inventory";
-import { showBlockChance } from "@neverquest/state/show";
+import { isShowing } from "@neverquest/state/isShowing";
 import { AnimationType } from "@neverquest/types/ui";
 import { formatPercentage, getAnimationClass } from "@neverquest/utilities/helpers";
+import { ShowingType } from "@neverquest/types/enums";
 
 export default function Block() {
-  const { block } = useAtomValue(shield);
-  const showBlockChanceValue = useAtomValue(showBlockChance);
+  const { block } = useRecoilValue(shield);
+  const showBlockChanceValue = useRecoilValue(isShowing(ShowingType.BlockChance));
 
   if (!showBlockChanceValue) {
     return null;

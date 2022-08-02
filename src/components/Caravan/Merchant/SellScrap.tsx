@@ -1,7 +1,7 @@
 import { MouseEvent } from "react";
-import { useAtomValue, useSetAtom } from "jotai";
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { ArrowRight } from "react-bootstrap-icons";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import Coins from "@neverquest/components/Resource/Coins";
 import Scrap from "@neverquest/components/Resource/Scrap";
@@ -10,10 +10,10 @@ import { resourcesBalance, scrap } from "@neverquest/state/resources";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function SellScrap() {
-  const scrapValue = useAtomValue(scrap);
-  const exchangeScrapValue = useAtomValue(exchangeScrap);
-  const exchangeCoinValue = useAtomValue(exchangeCoin);
-  const balanceResources = useSetAtom(resourcesBalance);
+  const scrapValue = useRecoilValue(scrap);
+  const exchangeScrapValue = useRecoilValue(exchangeScrap);
+  const exchangeCoinValue = useRecoilValue(exchangeCoin);
+  const balanceResources = useSetRecoilState(resourcesBalance);
 
   const canSell = scrapValue >= exchangeScrapValue;
 

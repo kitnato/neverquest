@@ -1,5 +1,5 @@
-import { Atom, PrimitiveAtom, useAtomValue } from "jotai";
 import Stack from "react-bootstrap/Stack";
+import { RecoilState, useRecoilValue } from "recoil";
 
 import FloatingText from "@neverquest/components/FloatingText";
 import { DeltaDisplay, AnimationType } from "@neverquest/types/ui";
@@ -12,13 +12,13 @@ export default function Resource({
   deltaAtom,
   showAtom,
 }: {
-  atom: Atom<number>;
+  atom: RecoilState<number>;
   Component: React.ElementType;
-  deltaAtom: PrimitiveAtom<DeltaDisplay>;
-  showAtom: Atom<boolean>;
+  deltaAtom: RecoilState<DeltaDisplay>;
+  showAtom: RecoilState<boolean>;
 }) {
-  const lootValue = useAtomValue(atom);
-  const showValue = useAtomValue(showAtom);
+  const lootValue = useRecoilValue(atom);
+  const showValue = useRecoilValue(showAtom);
 
   useDeltaText({
     deltaAtom,

@@ -1,11 +1,11 @@
-import { useAtomValue } from "jotai";
 import { Stack } from "react-bootstrap";
+import { useRecoilValue } from "recoil";
 
 import PurchasableItems from "@neverquest/components/Caravan/Merchant/PurchasableItems";
 import { merchantInventory } from "@neverquest/state/caravan";
 
 export default function BuyItems() {
-  const merchantInventoryValue = useAtomValue(merchantInventory);
+  const merchantInventoryValue = useRecoilValue(merchantInventory);
 
   const newItemIDs = Object.getOwnPropertySymbols(merchantInventoryValue).filter(
     (id) => !merchantInventoryValue[id].isReturned

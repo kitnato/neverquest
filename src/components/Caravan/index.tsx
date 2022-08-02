@@ -1,64 +1,56 @@
-import { useAtomValue } from "jotai";
+import { useRecoilValue } from "recoil";
 import { useState } from "react";
 import { Card, Stack } from "react-bootstrap";
 
 import DismissableScreen from "@neverquest/components/DismissableScreen";
 import CrewHirable from "@neverquest/components/Caravan/CrewHirable";
 import CrewHired from "@neverquest/components/Caravan/CrewHired";
-import { crew } from "@neverquest/state/caravan";
-import { CrewHireStatus, CrewType } from "@neverquest/types/enums";
+import { crewHirable } from "@neverquest/state/caravan";
+import { isShowing } from "@neverquest/state/isShowing";
+import { CrewType, ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/utilities/constants-caravan";
 
 export default function Caravan() {
-  const crewValue = useAtomValue(crew);
+  const crewHirableValue = useRecoilValue(crewHirable);
+  const isShowingCrewHiring = useRecoilValue(isShowing(ShowingType.CrewHiring));
+
   const [currentMember, setCurrentMember] = useState<CrewType | null>(null);
   const [isScreenShowing, setScreenShowing] = useState(false);
 
-  const hirableCrew = CREW_ORDER.filter(
-    (type) => crewValue[type].hireStatus === CrewHireStatus.Hirable
-  );
-
   const onActivate = (isShowing: boolean, member?: CrewType) => {
     setScreenShowing(isShowing);
-
-    if (member) {
-      setCurrentMember(member);
-    } else {
-      setCurrentMember(null);
-    }
+    setCurrentMember(member ?? null);
   };
 
   return (
     <>
       <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
         <Card.Body>
-          <Stack gap={3}>
-            {CREW_ORDER.map((type, index) => {
-              const member = crewValue[type];
+          <Stack gap={5}>
+            <Stack gap={3}>
+              {isShowingCrewHiring && <h6>Hired crew</h6>}
 
-              if (member.hireStatus === CrewHireStatus.Hired) {
-                return (
-                  <CrewHired key={index} setActive={() => onActivate(true, type)} type={type} />
-                );
-              }
+              {CREW_ORDER.map((type, index) => (
+                <CrewHired key={index} setActive={() => onActivate(true, type)} type={type} />
+              ))}
+            </Stack>
 
-              return null;
-            })}
-          </Stack>
-
-          {hirableCrew.length > 0 && (
-            <>
-              <hr />
-
+            {isShowingCrewHiring && (
               <Stack gap={3}>
-                {hirableCrew.map((type, index) => (
+                <h6>Crew for hire</h6>
+
+                {crewHirableValue.length === 0 && (
+                  <span className="fst-italic">None available.</span>
+                )}
+
+                {CREW_ORDER.map((type, index) => (
                   <CrewHirable key={index} type={type} />
                 ))}
               </Stack>
-            </>
-          )}
+            )}
+          </Stack>
         </Card.Body>
       </Card>
 

@@ -1,14 +1,15 @@
-import { useAtomValue } from "jotai";
 import Stack from "react-bootstrap/Stack";
+import { useRecoilValue } from "recoil";
 
 import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import icon from "@neverquest/icons/abstract-013.svg";
 import { essenceAbsorbed } from "@neverquest/state/character";
-import { deltaEssenceAbsorbed } from "@neverquest/state/deltas";
+import { deltas } from "@neverquest/state/deltas";
+import { DeltaType } from "@neverquest/types/enums";
 
 export default function EssenceAbsorbed() {
-  const essenceAbsorbedValue = useAtomValue(essenceAbsorbed);
+  const essenceAbsorbedValue = useRecoilValue(essenceAbsorbed);
 
   return (
     <Stack direction="horizontal" gap={3}>
@@ -16,7 +17,7 @@ export default function EssenceAbsorbed() {
 
       <span>{essenceAbsorbedValue}</span>
 
-      <FloatingText atom={deltaEssenceAbsorbed} />
+      <FloatingText atom={deltas(DeltaType.EssenceAbsorbed)} />
     </Stack>
   );
 }

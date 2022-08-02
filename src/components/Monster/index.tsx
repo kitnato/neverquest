@@ -1,6 +1,6 @@
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect } from "react";
 import { Card, Stack } from "react-bootstrap";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import MonsterStatus from "@neverquest/components/Monster/MonsterStatus";
@@ -12,11 +12,11 @@ import { UNKNOWN } from "@neverquest/utilities/constants";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function Monster() {
-  const setLooting = useSetAtom(isLooting);
-  const [isMonsterEngagedValue, setMonsterEngaged] = useAtom(isMonsterEngaged);
-  const isAttackingValue = useAtomValue(isAttacking);
-  const isMonsterDeadValue = useAtomValue(isMonsterDead);
-  const regenerateMonster = useSetAtom(monsterRegenerate);
+  const setLooting = useSetRecoilState(isLooting);
+  const [isMonsterEngagedValue, setMonsterEngaged] = useRecoilState(isMonsterEngaged);
+  const isAttackingValue = useRecoilValue(isAttacking);
+  const isMonsterDeadValue = useRecoilValue(isMonsterDead);
+  const regenerateMonster = useSetRecoilState(monsterRegenerate);
 
   useEffect(() => {
     // If player is attacking a new monster, engage it.
@@ -26,7 +26,7 @@ export default function Monster() {
 
     // If player stops attacking but the monster is still alive, regenerate it.
     if (!isAttackingValue && isMonsterEngagedValue && !isMonsterDeadValue) {
-      regenerateMonster();
+      regenerateMonster(null);
     }
 
     if (isMonsterDeadValue) {

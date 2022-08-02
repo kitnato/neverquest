@@ -1,6 +1,6 @@
-import { useAtom, useAtomValue } from "jotai";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Col, Row, Stack } from "react-bootstrap";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import Character from "@neverquest/components/Character";
 import ConfirmationDialog from "@neverquest/components/ConfirmationDialog";
@@ -8,21 +8,20 @@ import Control from "@neverquest/components/Control";
 import Encounter from "@neverquest/components/Encounter";
 import Location from "@neverquest/components/Location";
 import WildernessStatus from "@neverquest/components/Wilderness/WildernessStatus";
-import useReset from "@neverquest/hooks/useReset";
-import { gameOver } from "@neverquest/state/global";
-import { showGameOver } from "@neverquest/state/show";
+import { isGameOver } from "@neverquest/state/global";
+import { SeedContext } from "@neverquest/state/SeedContext";
+import { isShowing } from "@neverquest/state/isShowing";
+import { ShowingType } from "@neverquest/types/enums";
 
 export default function Main() {
-  const [showGameOverValue, setShowGameOver] = useAtom(showGameOver);
-  const isGameOver = useAtomValue(gameOver);
+  const [isShowingGameOver, setIsShowingGameOver] = useRecoilState(isShowing(ShowingType.GameOver));
+  const isGameOverValue = useRecoilValue(isGameOver);
 
-  const reset = useReset();
+  const resetSeedContext = useContext(SeedContext);
 
   useEffect(() => {
     // Remove any route or parameter pollution in URL.
     window.history.replaceState({}, document.title, "/");
-
-    reset();
   }, []);
 
   return (
@@ -55,10 +54,10 @@ export default function Main() {
 
       <ConfirmationDialog
         confirmationLabel="Restart"
-        onConfirm={reset}
+        onConfirm={resetSeedContext}
         message="Start a new quest?"
-        setHide={() => setShowGameOver(false)}
-        show={isGameOver && showGameOverValue}
+        setHide={() => setIsShowingGameOver(false)}
+        show={isGameOverValue && isShowingGameOver}
         title="You are dead."
       />
     </Stack>

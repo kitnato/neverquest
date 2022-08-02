@@ -96,3 +96,10 @@ export const ATTRIBUTES_ORDER = [
   AttributeType.RecoveryRate,
   AttributeType.LootBonus,
 ];
+
+export const ATTRIBUTES_INITIAL = [
+  AttributeType.AttackRateBonus,
+  AttributeType.Damage,
+  AttributeType.Health,
+  AttributeType.RecoveryRate,
+];

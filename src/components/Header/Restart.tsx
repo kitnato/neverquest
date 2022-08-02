@@ -1,34 +1,35 @@
-import { useAtomValue } from "jotai";
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useContext, useState } from "react";
 import { Button } from "react-bootstrap";
 import { ExclamationTriangle } from "react-bootstrap-icons";
+import { useRecoilValue } from "recoil";
 
 import ConfirmationDialog from "@neverquest/components/ConfirmationDialog";
-import useReset from "@neverquest/hooks/useReset";
-import { gameOver } from "@neverquest/state/global";
-import { showGameOver } from "@neverquest/state/show";
+import { isShowing } from "@neverquest/state/isShowing";
+import { isGameOver } from "@neverquest/state/global";
+import { SeedContext } from "@neverquest/state/SeedContext";
+import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function Restart() {
-  const isGameOver = useAtomValue(gameOver);
-  const showGameOverValue = useAtomValue(showGameOver);
-  const [isResetShowing, setResetShowing] = useState(false);
+  const isGameOverValue = useRecoilValue(isGameOver);
+  const isShowingGameOver = useRecoilValue(isShowing(ShowingType.GameOver));
 
-  const reset = useReset();
+  const resetSeedContext = useContext(SeedContext);
+  const [isShowingRestart, setShowingRestart] = useState(false);
 
   return (
     <>
       <Button
         className={
-          isGameOver && !isResetShowing && !showGameOverValue
+          isGameOverValue && !isShowingGameOver && !isShowingRestart
             ? getAnimationClass({ isInfinite: true, type: AnimationType.Pulse })
             : undefined
         }
         onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
           currentTarget.blur();
 
-          setResetShowing(true);
+          setShowingRestart(true);
         }}
         variant="outline-light"
       >
@@ -37,10 +38,10 @@ export default function Restart() {
 
       <ConfirmationDialog
         confirmationLabel="Restart"
-        onConfirm={reset}
+        onConfirm={resetSeedContext}
         message="This will reset all progress and restart from the beginning."
-        setHide={() => setResetShowing(false)}
-        show={isResetShowing}
+        setHide={() => setShowingRestart(false)}
+        show={isShowingRestart}
         title="Start a new quest?"
       />
     </>

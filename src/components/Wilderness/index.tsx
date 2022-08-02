@@ -1,5 +1,5 @@
-import { useAtomValue } from "jotai";
 import { Card, Stack } from "react-bootstrap";
+import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import icon from "@neverquest/icons/crossed-bones.svg";
@@ -9,7 +9,7 @@ import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function Wilderness() {
-  const isLevelCompletedValue = useAtomValue(isLevelCompleted);
+  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
 
   return (
     <Stack gap={3}>

@@ -1,11 +1,11 @@
 import { MouseEvent } from "react";
-import { useAtomValue } from "jotai";
 import { Button, Stack } from "react-bootstrap";
+import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import icon from "@neverquest/icons/cowled.svg";
 import { crew } from "@neverquest/state/caravan";
-import { CrewType } from "@neverquest/types/enums";
+import { CrewStatus, CrewType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 import { CREW_MEMBERS } from "@neverquest/utilities/constants-caravan";
 
@@ -16,7 +16,12 @@ export default function CrewHirable({
   setActive: () => void;
   type: CrewType;
 }) {
-  const crewValue = useAtomValue(crew);
+  const { hireStatus, monologueProgress } = useRecoilValue(crew(type));
+
+  if (hireStatus !== CrewStatus.Hired) {
+    return null;
+  }
+
   const { interaction, monologues, name } = CREW_MEMBERS[type];
 
   return (
@@ -24,7 +29,7 @@ export default function CrewHirable({
       <ImageIcon icon={icon} tooltip={name} />
 
       <div className="align-items-center d-flex justify-content-between w-100">
-        <span>{`"${monologues[crewValue[type].monologueProgress]}"`}</span>
+        <span>{`"${monologues[monologueProgress]}"`}</span>
 
         <Button
           onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {

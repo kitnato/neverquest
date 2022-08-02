@@ -1,5 +1,5 @@
-import { useAtomValue, useSetAtom } from "jotai";
 import { nanoid } from "nanoid";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import useCheckEncumbrance from "@neverquest/hooks/useCheckEncumbrance";
 import { hasKnapsack } from "@neverquest/state/character";
@@ -24,15 +24,15 @@ import {
 import { isArmor, isItem, isShield, isTrinket, isWeapon } from "@neverquest/utilities/type-guards";
 
 export default function useAcquireItem() {
-  const armorValue = useAtomValue(armor);
-  const autoEquipValue = useAtomValue(autoEquip);
-  const shieldValue = useAtomValue(shield);
-  const trinketValue = useAtomValue(trinket);
-  const weaponValue = useAtomValue(weapon);
-  const setEncumbranceMaximum = useSetAtom(encumbranceMaximum);
-  const setHasKnapsack = useSetAtom(hasKnapsack);
-  const setInventory = useSetAtom(inventory);
-  const equipItem = useSetAtom(itemEquip);
+  const armorValue = useRecoilValue(armor);
+  const autoEquipValue = useRecoilValue(autoEquip);
+  const shieldValue = useRecoilValue(shield);
+  const trinketValue = useRecoilValue(trinket);
+  const weaponValue = useRecoilValue(weapon);
+  const setEncumbranceMaximum = useSetRecoilState(encumbranceMaximum);
+  const setHasKnapsack = useSetRecoilState(hasKnapsack);
+  const setInventory = useSetRecoilState(inventory);
+  const equipItem = useSetRecoilState(itemEquip);
 
   const checkEncumbrance = useCheckEncumbrance();
 

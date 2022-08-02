@@ -1,35 +1,57 @@
-import { atom } from "jotai";
-import { atomWithReset } from "jotai/utils";
+import { atom, selector } from "recoil";
 
 import { UNKNOWN } from "@neverquest/utilities/constants";
 import { getTriangularNumber } from "@neverquest/utilities/helpers";
 
-// PRIMITIVES
+export const characterLevel = atom({
+  default: 0,
+  key: "characterLevel",
+});
 
-export const characterLevel = atomWithReset(0);
+export const hasKnapsack = atom({
+  default: false,
+  key: "hasKnapsack",
+});
 
-export const hasKnapsack = atomWithReset(false);
+export const isAttacking = atom({
+  default: false,
+  key: "isAttacking",
+});
 
-export const isAttacking = atomWithReset(false);
+export const isLooting = atom({
+  default: false,
+  key: "isLooting",
+});
 
-export const isLooting = atomWithReset(false);
+export const isRecovering = atom({
+  default: false,
+  key: "isRecovering",
+});
 
-export const isRecovering = atomWithReset(false);
+export const lootingRate = atom({
+  default: 2500,
+  key: "lootingRate",
+});
 
-export const lootingRate = atomWithReset(2500);
+export const name = atom({
+  default: UNKNOWN,
+  key: "name",
+});
 
-export const name = atomWithReset(UNKNOWN);
+export const statusElement = atom<HTMLDivElement | null>({
+  default: null,
+  key: "statusElement",
+});
 
-export const statusElement = atomWithReset<HTMLDivElement | null>(null);
+export const essenceAbsorbed = selector({
+  key: "essenceAbsorbed",
+  get: ({ get }) => {
+    let total = 0;
 
-// READERS
+    for (let i = 0; i <= get(characterLevel); i++) {
+      total += getTriangularNumber(i);
+    }
 
-export const essenceAbsorbed = atom((get) => {
-  let total = 0;
-
-  for (let i = 0; i <= get(characterLevel); i++) {
-    total += getTriangularNumber(i);
-  }
-
-  return total;
+    return total;
+  },
 });

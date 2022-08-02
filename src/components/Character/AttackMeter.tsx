@@ -1,5 +1,5 @@
-import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import useAnimation from "@neverquest/hooks/useAnimation";
@@ -12,13 +12,13 @@ import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
 export default function AttackMeter() {
-  const isAttackingValue = useAtomValue(isAttacking);
-  const isLootingValue = useAtomValue(isLooting);
-  const isMonsterDeadValue = useAtomValue(isMonsterDead);
-  const isRecoveringValue = useAtomValue(isRecovering);
-  const canAttackValue = useAtomValue(canAttack);
-  const totalAttackRateValue = useAtomValue(totalAttackRate);
-  const attack = useSetAtom(offense);
+  const isAttackingValue = useRecoilValue(isAttacking);
+  const isLootingValue = useRecoilValue(isLooting);
+  const isMonsterDeadValue = useRecoilValue(isMonsterDead);
+  const isRecoveringValue = useRecoilValue(isRecovering);
+  const canAttackValue = useRecoilValue(canAttack);
+  const totalAttackRateValue = useRecoilValue(totalAttackRate);
+  const attack = useSetRecoilState(offense);
   const [deltaAttack, setDeltaAttack] = useState(0);
 
   useAnimation((delta) => {
@@ -27,7 +27,7 @@ export default function AttackMeter() {
 
   useEffect(() => {
     if (deltaAttack >= totalAttackRateValue) {
-      attack();
+      attack(null);
       setDeltaAttack(0);
     }
   }, [deltaAttack, totalAttackRateValue]);

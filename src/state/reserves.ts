@@ -1,24 +1,31 @@
 import { atom, DefaultValue, selector } from "recoil";
 
+import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import { attributes } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
+import { localStorageEffect } from "@neverquest/state/effects";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isGameOver } from "@neverquest/state/global";
 import { shield, weapon } from "@neverquest/state/inventory";
-import { AttributeType, DeltaType, ShowingType } from "@neverquest/types/enums";
+import { AttributeType, DeltaType, ShowingType, StorageKey } from "@neverquest/types/enums";
 import { HealthChangeProps } from "@neverquest/types/props";
 import { FloatingTextType } from "@neverquest/types/ui";
-import { ATTRIBUTES } from "@neverquest/utilities/constants-attributes";
+
+// ATOMS
 
 export const currentHealth = atom({
   default: 0,
-  key: "currentHealth",
+  effects: [localStorageEffect<number>(StorageKey.CurrentHealth)],
+  key: StorageKey.CurrentHealth,
 });
 
 export const currentStamina = atom({
   default: 0,
-  key: "currentStamina",
+  effects: [localStorageEffect<number>(StorageKey.CurrentStamina)],
+  key: StorageKey.CurrentStamina,
 });
+
+// SELECTORS
 
 export const canAttack = selector({
   key: "canAttack",

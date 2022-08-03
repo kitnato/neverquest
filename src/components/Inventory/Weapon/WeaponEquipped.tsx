@@ -3,13 +3,13 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import WeaponName from "@neverquest/components/Inventory/Weapon/WeaponName";
+import { NO_WEAPON } from "@neverquest/constants/gear";
 import iconEquipped from "@neverquest/icons/axe-sword.svg";
 import iconUnequipped from "@neverquest/icons/fist.svg";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
-import { NO_WEAPON } from "@neverquest/utilities/constants-gear";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function WeaponEquipped() {

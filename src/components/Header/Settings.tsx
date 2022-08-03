@@ -5,9 +5,12 @@ import { useRecoilValue } from "recoil";
 
 import SettingsSwitch from "@neverquest/components/Header/SettingsSwitch";
 import { hasKnapsack } from "@neverquest/state/character";
-import { autoEquip, lowHealthWarning, nsfw } from "@neverquest/state/global";
-import { isShowing as isShowingAtom } from "@neverquest/state/isShowing";
-import { ShowingType } from "@neverquest/types/enums";
+import {
+  autoEquip,
+  isNSFW,
+  isShowingDamagePerSecond,
+  lowHealthWarning,
+} from "@neverquest/state/global";
 
 export default function Settings() {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
@@ -26,10 +29,10 @@ export default function Settings() {
         <Modal.Body>
           <Form>
             <Stack gap={3}>
-              <SettingsSwitch atom={nsfw} label="NSFW mode (profanity)" />
+              <SettingsSwitch atom={isNSFW} label="NSFW mode (profanity)" />
 
               <SettingsSwitch
-                atom={isShowingAtom(ShowingType.DamagePerSecond)}
+                atom={isShowingDamagePerSecond}
                 label="Show damage per second (DPS)"
               />
 

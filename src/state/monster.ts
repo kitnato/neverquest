@@ -3,46 +3,51 @@ import { atom, selector } from "recoil";
 import LOCRA from "@neverquest/locra";
 import { CreatureType } from "@neverquest/locra/types";
 import { deltas } from "@neverquest/state/deltas";
+import { localStorageEffect } from "@neverquest/state/effects";
 import { level, progress } from "@neverquest/state/encounter";
-import { nsfw } from "@neverquest/state/global";
+import { isNSFW } from "@neverquest/state/global";
 import { FloatingTextType } from "@neverquest/types/ui";
-import { DeltaType } from "@neverquest/types/enums";
+import { DeltaType, StorageKey } from "@neverquest/types/enums";
 import { getDamagePerSecond } from "@neverquest/utilities/helpers";
+
+// ATOMS
 
 export const currentHealthMonster = atom({
   default: -1,
-  key: "currentHealthMonster",
+  effects: [localStorageEffect<number>(StorageKey.CurrentHealthMonster)],
+  key: StorageKey.CurrentHealthMonster,
+});
+export const isMonsterEngaged = atom({
+  default: false,
+  effects: [localStorageEffect<boolean>(StorageKey.IsMonsterEngaged)],
+  key: StorageKey.IsMonsterEngaged,
 });
 
 export const isMonsterNew = atom({
   default: false,
-  key: "isMonsterNew",
-});
-
-export const isMonsterEngaged = atom({
-  default: false,
-  key: "isMonsterEngaged",
+  effects: [localStorageEffect<boolean>(StorageKey.IsMonsterNew)],
+  key: StorageKey.IsMonsterNew,
 });
 
 export const isMonsterStaggered = atom({
   default: false,
-  key: "isMonsterStaggered",
+  effects: [localStorageEffect<boolean>(StorageKey.IsMonsterStaggered)],
+  key: StorageKey.IsMonsterStaggered,
 });
 
 export const monsterName = atom({
   default: "",
-  key: "monsterName",
+  effects: [localStorageEffect<string>(StorageKey.MonsterName)],
+  key: StorageKey.MonsterName,
 });
 
 export const monsterStatusElement = atom<HTMLDivElement | null>({
   default: null,
-  key: "monsterStatusElement",
+  effects: [localStorageEffect<HTMLDivElement | null>(StorageKey.MonsterStatusElement)],
+  key: StorageKey.MonsterStatusElement,
 });
 
-export const isMonsterDead = selector({
-  key: "isMonsterDead",
-  get: ({ get }) => get(currentHealthMonster) === 0,
-});
+// SELECTORS
 
 export const damagePerSecondMonster = selector({
   key: "damagePerSecondMonster",
@@ -51,6 +56,11 @@ export const damagePerSecondMonster = selector({
       damage: get(totalDamageMonster),
       rate: get(totalAttackRateMonster),
     }),
+});
+
+export const isMonsterDead = selector({
+  key: "isMonsterDead",
+  get: ({ get }) => get(currentHealthMonster) === 0,
 });
 
 export const maximumHealthMonster = selector({
@@ -94,7 +104,7 @@ export const monsterCreate = selector({
     set(
       monsterName,
       LOCRA.generateCreature({
-        isNSFW: get(nsfw),
+        isNSFW: get(isNSFW),
         hasPrefix: Math.random() < 0.8,
         hasSuffix: Math.random() < 0.1 * Math.ceil(get(level) / 2),
         type: CreatureType.Monster,

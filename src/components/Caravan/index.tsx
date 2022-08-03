@@ -5,12 +5,12 @@ import { Card, Stack } from "react-bootstrap";
 import DismissableScreen from "@neverquest/components/DismissableScreen";
 import CrewHirable from "@neverquest/components/Caravan/CrewHirable";
 import CrewHired from "@neverquest/components/Caravan/CrewHired";
+import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/constants/caravan";
 import { crewHirable } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import { CrewType, ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
-import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/utilities/constants-caravan";
 
 export default function Caravan() {
   const crewHirableValue = useRecoilValue(crewHirable);

@@ -4,12 +4,12 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import Coins from "@neverquest/components/Resource/Coins";
+import { CREW_MEMBERS } from "@neverquest/constants/caravan";
 import icon from "@neverquest/icons/cowled.svg";
 import { crew } from "@neverquest/state/caravan";
 import { coins, resourcesBalance } from "@neverquest/state/resources";
 import { CrewStatus, CrewType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
-import { CREW_MEMBERS } from "@neverquest/utilities/constants-caravan";
 
 export default function CrewHirable({ type }: { type: CrewType }) {
   const [{ hireStatus }, setCrewMember] = useRecoilState(crew(type));

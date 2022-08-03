@@ -4,9 +4,9 @@ import { useRecoilValue } from "recoil";
 import TrainSkillButton from "@neverquest/components/Caravan/Mercenary/TrainSkillButton";
 import SkillDisplay from "@neverquest/components/Character/SkillDisplay";
 import Coins from "@neverquest/components/Resource/Coins";
+import { SKILLS } from "@neverquest/constants/skills";
 import { skills } from "@neverquest/state/skills";
 import { SkillStatus, SkillType } from "@neverquest/types/enums";
-import { SKILLS } from "@neverquest/utilities/constants-skills";
 
 export default function TrainableSkill({ type }: { type: SkillType }) {
   const skillValue = useRecoilValue(skills(type));

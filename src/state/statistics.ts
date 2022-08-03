@@ -1,10 +1,10 @@
 import { selector } from "recoil";
 
+import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import { attributes } from "@neverquest/state/attributes";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { getComputedStat, getDamagePerSecond } from "@neverquest/utilities/helpers";
 import { AttributeType } from "@neverquest/types/enums";
-import { ATTRIBUTES } from "@neverquest/utilities/constants-attributes";
 
 export const damagePerSecond = selector({
   key: "damagePerSecond",

@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { Col, Row, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -9,7 +9,7 @@ import Encounter from "@neverquest/components/Encounter";
 import Location from "@neverquest/components/Location";
 import WildernessStatus from "@neverquest/components/Wilderness/WildernessStatus";
 import { isGameOver } from "@neverquest/state/global";
-import { SeedContext } from "@neverquest/state/SeedContext";
+import { useReset } from "@neverquest/state/SeedContext";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";
 
@@ -17,7 +17,7 @@ export default function Main() {
   const [isShowingGameOver, setIsShowingGameOver] = useRecoilState(isShowing(ShowingType.GameOver));
   const isGameOverValue = useRecoilValue(isGameOver);
 
-  const resetSeedContext = useContext(SeedContext);
+  const reset = useReset();
 
   useEffect(() => {
     // Remove any route or parameter pollution in URL.
@@ -54,7 +54,7 @@ export default function Main() {
 
       <ConfirmationDialog
         confirmationLabel="Restart"
-        onConfirm={resetSeedContext}
+        onConfirm={reset}
         message="Start a new quest?"
         setHide={() => setIsShowingGameOver(false)}
         show={isGameOverValue && isShowingGameOver}

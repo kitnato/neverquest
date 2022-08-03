@@ -1,23 +1,30 @@
 import { atomFamily, selector } from "recoil";
 
 import { characterLevel } from "@neverquest/state/character";
+import { localStorageEffect } from "@neverquest/state/effects";
 import { essence } from "@neverquest/state/resources";
 import { getTriangularNumber } from "@neverquest/utilities/helpers";
-import { AttributeType } from "@neverquest/types/enums";
+import { AttributeType, StorageKey } from "@neverquest/types/enums";
 
-export const attributes = atomFamily<
-  {
-    canAssign: boolean;
-    points: number;
-  },
-  AttributeType
->({
+interface AttributeState {
+  canAssign: boolean;
+  points: number;
+}
+
+// ATOMS
+
+export const attributes = atomFamily<AttributeState, AttributeType>({
   default: {
     canAssign: false,
     points: 0,
   },
-  key: "attributes",
+  effects: (parameter) => [
+    localStorageEffect<AttributeState>(`${StorageKey.Attributes}-${parameter}`),
+  ],
+  key: StorageKey.Attributes,
 });
+
+// SELECTORS
 
 export const attributeCost = selector({
   get: ({ get }) => getTriangularNumber(get(characterLevel) + 1),

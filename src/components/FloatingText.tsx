@@ -1,11 +1,11 @@
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 import { Stack } from "react-bootstrap";
-import { RecoilState, useRecoilState } from "recoil";
+import { RecoilState, useResetRecoilState, useRecoilValue } from "recoil";
 
-import { AnimationSpeed, AnimationType, DeltaDisplay } from "@neverquest/types/ui";
-import { DELTA_DEFAULT } from "@neverquest/utilities/constants";
+import { DELTA_DEFAULT } from "@neverquest/constants";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
+import { AnimationSpeed, AnimationType, DeltaDisplay } from "@neverquest/types/ui";
 
 type FloatingText = {
   contents: JSX.Element;
@@ -13,7 +13,8 @@ type FloatingText = {
 };
 
 export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay> }) {
-  const [deltaValue, setDeltaValue] = useRecoilState(atom);
+  const deltaValue = useRecoilValue(atom);
+  const resetDeltaValue = useResetRecoilState(atom);
 
   const [textQueue, setTextQueue] = useState<FloatingText[]>([]);
 
@@ -73,7 +74,7 @@ export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay>
       ]);
     }
 
-    setDeltaValue(DELTA_DEFAULT);
+    resetDeltaValue();
   }, [deltaValue]);
 
   return (

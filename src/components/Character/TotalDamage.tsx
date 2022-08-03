@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
+import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import icon from "@neverquest/icons/wolverine-claws.svg";
 import { attributes } from "@neverquest/state/attributes";
@@ -12,7 +13,6 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { totalDamage } from "@neverquest/state/statistics";
 import { AttributeType, DeltaType, ShowingType } from "@neverquest/types/enums";
 import { getComputedStat } from "@neverquest/utilities/helpers";
-import { ATTRIBUTES } from "@neverquest/utilities/constants-attributes";
 
 export default function TotalDamage() {
   const { points } = useRecoilValue(attributes(AttributeType.Damage));

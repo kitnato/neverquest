@@ -5,26 +5,24 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import Coins from "@neverquest/components/Resource/Coins";
 import Scrap from "@neverquest/components/Resource/Scrap";
-import { exchangeCoin, exchangeScrap } from "@neverquest/state/caravan";
+import { EXCHANGE_COIN, EXCHANGE_SCRAP } from "@neverquest/constants/caravan";
 import { resourcesBalance, scrap } from "@neverquest/state/resources";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function SellScrap() {
   const scrapValue = useRecoilValue(scrap);
-  const exchangeScrapValue = useRecoilValue(exchangeScrap);
-  const exchangeCoinValue = useRecoilValue(exchangeCoin);
   const balanceResources = useSetRecoilState(resourcesBalance);
 
-  const canSell = scrapValue >= exchangeScrapValue;
+  const canSell = scrapValue >= EXCHANGE_SCRAP;
 
   return (
     <div className="align-items-center d-flex justify-content-between w-100">
       <Stack direction="horizontal" gap={3}>
-        <Scrap tooltip="Scrap (give)" value={exchangeScrapValue} />
+        <Scrap tooltip="Scrap (give)" value={EXCHANGE_SCRAP} />
 
         <ArrowRight />
 
-        <Coins tooltip="Coins (receive)" value={exchangeCoinValue} />
+        <Coins tooltip="Coins (receive)" value={EXCHANGE_COIN} />
       </Stack>
 
       <OverlayTrigger
@@ -39,8 +37,8 @@ export default function SellScrap() {
               currentTarget.blur();
 
               balanceResources({
-                coinsDifference: exchangeCoinValue,
-                scrapDifference: -exchangeScrapValue,
+                coinsDifference: EXCHANGE_COIN,
+                scrapDifference: -EXCHANGE_SCRAP,
               });
             }}
             variant={UIVariant.Outline}

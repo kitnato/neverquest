@@ -1,19 +1,30 @@
 import { atom, atomFamily, DefaultValue, selectorFamily } from "recoil";
 
-import { SkillStatus, SkillType } from "@neverquest/types/enums";
+import { localStorageEffect } from "@neverquest/state/effects";
+import { SkillStatus, SkillType, StorageKey } from "@neverquest/types/enums";
+
+interface SkillsStatusState {
+  areTrainable: SkillType[];
+  areTrained: SkillType[];
+}
+
+// ATOMS
 
 const skillsMapping = atomFamily<SkillStatus, SkillType>({
   default: SkillStatus.Unavailable,
-  key: "skillsMapping",
+  effects: (parameter) => [
+    localStorageEffect<SkillStatus>(`${StorageKey.SkillsMapping}-${parameter}`),
+  ],
+  key: StorageKey.SkillsMapping,
 });
 
-export const skillsStatus = atom<{
-  areTrainable: SkillType[];
-  areTrained: SkillType[];
-}>({
-  key: "skillsStatus",
+export const skillsStatus = atom<SkillsStatusState>({
   default: { areTrainable: [], areTrained: [] },
+  effects: [localStorageEffect<SkillsStatusState>(StorageKey.SkillsStatus)],
+  key: StorageKey.SkillsStatus,
 });
+
+// SELECTORS
 
 export const skills = selectorFamily<SkillStatus, SkillType>({
   key: "skills",

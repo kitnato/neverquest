@@ -1,21 +1,28 @@
 import { atom, DefaultValue, selector } from "recoil";
 
+import { NO_ARMOR, NO_TRINKET, NO_SHIELD, NO_WEAPON } from "@neverquest/constants/gear";
 import { attributes } from "@neverquest/state/attributes";
+import { localStorageEffect } from "@neverquest/state/effects";
 import { isShowing } from "@neverquest/state/isShowing";
 import { Armor, Inventory, Shield, Trinket, Weapon } from "@neverquest/types";
-import { NO_ARMOR, NO_TRINKET, NO_SHIELD, NO_WEAPON } from "@neverquest/utilities/constants-gear";
-import { isArmor, isShield, isTrinket, isWeapon } from "@neverquest/utilities/type-guards";
-import { AttributeType, ShowingType } from "@neverquest/types/enums";
+import { AttributeType, ShowingType, StorageKey } from "@neverquest/types/enums";
+import { isArmor, isShield, isTrinket, isWeapon } from "@neverquest/types/type-guards";
+
+// ATOMS
 
 export const encumbranceMaximum = atom({
   default: 3,
-  key: "encumbranceMaximum",
+  effects: [localStorageEffect<number>(StorageKey.EncumbranceMaximum)],
+  key: StorageKey.EncumbranceMaximum,
 });
 
 export const inventory = atom<Inventory>({
   default: {},
-  key: "inventory",
+  effects: [localStorageEffect<Inventory>(StorageKey.Inventory)],
+  key: StorageKey.Inventory,
 });
+
+// SELECTORS
 
 export const armor = selector({
   key: "armor",

@@ -1,6 +1,6 @@
+import { ANIMATED_CLASS, ANIMATE_PREFIX } from "@neverquest/constants";
 import { RangeProps } from "@neverquest/types/props";
 import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
-import { ANIMATED_CLASS, ANIMATE_PREFIX } from "@neverquest/utilities/constants";
 
 export function animateElement({
   element,

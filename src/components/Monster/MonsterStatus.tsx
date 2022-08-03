@@ -36,7 +36,7 @@ export default function MonsterStatus() {
   }, [element, isMonsterNewValue]);
 
   return (
-    <Card className="d-none" ref={element}>
+    <Card ref={element}>
       <Card.Body>
         <Stack gap={3}>
           <MonsterName />

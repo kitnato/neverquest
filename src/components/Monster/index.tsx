@@ -4,11 +4,11 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import MonsterStatus from "@neverquest/components/Monster/MonsterStatus";
+import { UNKNOWN } from "@neverquest/constants";
 import unknownIcon from "@neverquest/icons/evil-eyes.svg";
 import { isAttacking, isLooting } from "@neverquest/state/character";
 import { isMonsterDead, isMonsterEngaged, monsterRegenerate } from "@neverquest/state/monster";
 import { AnimationType } from "@neverquest/types/ui";
-import { UNKNOWN } from "@neverquest/utilities/constants";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function Monster() {

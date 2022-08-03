@@ -2,7 +2,7 @@ import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { QuestionSquare } from "react-bootstrap-icons";
 
-import { UNKNOWN } from "@neverquest/utilities/constants";
+import { UNKNOWN } from "@neverquest/constants";
 
 export default function About() {
   const [isShowing, setShowing] = useState(false);

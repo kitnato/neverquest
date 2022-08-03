@@ -1,7 +1,7 @@
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
+import { TRANSPARENT_PIXEL } from "@neverquest/constants";
 import { OverlayPlacement } from "@neverquest/types/ui";
-import { TRANSPARENT_PIXEL } from "@neverquest/utilities/constants";
 
 export default function ImageIcon({
   flipped = false,

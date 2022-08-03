@@ -1,8 +1,8 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 
+import { NO_SHIELD } from "@neverquest/constants/gear";
 import { Shield } from "@neverquest/types";
 import { capitalizeAll, formatMilliseconds, formatPercentage } from "@neverquest/utilities/helpers";
-import { NO_SHIELD } from "@neverquest/utilities/constants-gear";
 
 export default function ShieldName({ shield }: { shield: Shield }) {
   const { block, name, stagger, staminaCost, type, weight } = shield;

@@ -3,12 +3,12 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import ShieldName from "@neverquest/components/Inventory/Shield/ShieldName";
+import { NO_SHIELD } from "@neverquest/constants/gear";
 import iconUnequipped from "@neverquest/icons/fist.svg";
 import iconEquipped from "@neverquest/icons/round-shield.svg";
 import { shield } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { AnimationType } from "@neverquest/types/ui";
-import { NO_SHIELD } from "@neverquest/utilities/constants-gear";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 import { ShowingType } from "@neverquest/types/enums";
 

@@ -1,39 +1,48 @@
 import { nanoid } from "nanoid";
 import { atom, atomFamily, DefaultValue, selector, selectorFamily } from "recoil";
 
+import { MERCHANT_OFFERS } from "@neverquest/constants/caravan";
+import { localStorageEffect } from "@neverquest/state/effects";
 import { AffixTag } from "@neverquest/locra/types";
 import { level } from "@neverquest/state/encounter";
-import { nsfw } from "@neverquest/state/global";
+import { isNSFW } from "@neverquest/state/global";
 import { InventoryMerchant } from "@neverquest/types";
-import { CrewStatus, CrewType } from "@neverquest/types/enums";
+import { CrewStatus, CrewType, StorageKey } from "@neverquest/types/enums";
+import { isItem } from "@neverquest/types/type-guards";
 import { generateArmor, generateShield, generateWeapon } from "@neverquest/utilities/generators";
-import { isItem } from "@neverquest/utilities/type-guards";
-import { MERCHANT_OFFERS } from "@neverquest/utilities/constants-caravan";
 
-export interface CrewMap {
+export interface CrewState {
   hireStatus: CrewStatus;
   monologueProgress: number;
 }
 
-const crewMapping = atomFamily<CrewMap, CrewType>({
+// ATOMS
+
+const caravanMapping = atomFamily<CrewState, CrewType>({
   default: {
     hireStatus: CrewStatus.Unavailable,
     monologueProgress: 0,
   },
-  key: "crewMapping",
+  effects: (parameter) => [
+    localStorageEffect<CrewState>(`${StorageKey.CaravanMapping}-${parameter}`),
+  ],
+  key: StorageKey.CaravanMapping,
 });
 
 export const crewHirable = atom<CrewType[]>({
-  key: "crewHirable",
   default: [],
+  effects: [localStorageEffect<CrewType[]>(StorageKey.CrewHirable)],
+  key: StorageKey.CrewHirable,
 });
 
-export const crew = selectorFamily<CrewMap, CrewType>({
+// SELECTORS
+
+export const crew = selectorFamily<CrewState, CrewType>({
   key: "crew",
   get:
     (type) =>
     ({ get }) =>
-      get(crewMapping(type)),
+      get(caravanMapping(type)),
   set:
     (type) =>
     ({ set }, status) => {
@@ -41,7 +50,7 @@ export const crew = selectorFamily<CrewMap, CrewType>({
         return;
       }
 
-      set(crewMapping(type), status);
+      set(caravanMapping(type), status);
 
       if (status.hireStatus === CrewStatus.Hirable) {
         set(crewHirable, (current) => [...current, type]);
@@ -49,16 +58,6 @@ export const crew = selectorFamily<CrewMap, CrewType>({
         set(crewHirable, (current) => current.filter((currentType) => currentType !== type));
       }
     },
-});
-
-export const exchangeCoin = atom({
-  default: 1,
-  key: "exchangeCoin",
-});
-
-export const exchangeScrap = atom({
-  default: 3,
-  key: "exchangeScrap",
 });
 
 export const merchantInventory = atom<InventoryMerchant>({
@@ -74,7 +73,7 @@ export const merchantInventoryGeneration = selector({
   set: ({ get, set }) => {
     const levelValue = get(level);
     const inventory = { ...get(merchantInventory) };
-    const nsfwValue = get(nsfw);
+    const nsfwValue = get(isNSFW);
 
     // Remove all previously returned items, so they no longer appear under buy back.
     Object.getOwnPropertySymbols(inventory)

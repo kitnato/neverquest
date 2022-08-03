@@ -3,7 +3,7 @@ import Item from "@neverquest/components/Inventory/Item";
 import ShieldInventory from "@neverquest/components/Inventory/Shield/ShieldInventory";
 import WeaponInventory from "@neverquest/components/Inventory/Weapon/WeaponInventory";
 import { Gear, Item as ItemType } from "@neverquest/types";
-import { isArmor, isShield, isWeapon } from "@neverquest/utilities/type-guards";
+import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 
 export default function InventoryElement({ item }: { item: Gear | ItemType }) {
   // TODO - all types

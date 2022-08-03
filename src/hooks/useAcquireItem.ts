@@ -1,6 +1,13 @@
 import { nanoid } from "nanoid";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
+import {
+  ITEM_KNAPSACK,
+  NO_ARMOR,
+  NO_SHIELD,
+  NO_TRINKET,
+  NO_WEAPON,
+} from "@neverquest/constants/gear";
 import useCheckEncumbrance from "@neverquest/hooks/useCheckEncumbrance";
 import { hasKnapsack } from "@neverquest/state/character";
 import { autoEquip } from "@neverquest/state/global";
@@ -14,14 +21,7 @@ import {
   weapon,
 } from "@neverquest/state/inventory";
 import { Gear, Item } from "@neverquest/types";
-import {
-  ITEM_KNAPSACK,
-  NO_ARMOR,
-  NO_SHIELD,
-  NO_TRINKET,
-  NO_WEAPON,
-} from "@neverquest/utilities/constants-gear";
-import { isArmor, isItem, isShield, isTrinket, isWeapon } from "@neverquest/utilities/type-guards";
+import { isArmor, isItem, isShield, isTrinket, isWeapon } from "@neverquest/types/type-guards";
 
 export default function useAcquireItem() {
   const armorValue = useRecoilValue(armor);

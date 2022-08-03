@@ -5,11 +5,7 @@ import Medic from "@neverquest/components/Caravan/Medic";
 import Merchant from "@neverquest/components/Caravan/Merchant";
 import Mercenary from "@neverquest/components/Caravan/Mercenary";
 import Tailor from "@neverquest/components/Caravan/Tailor";
-import {
-  ITEM_COMPASS,
-  ITEM_HEARTHSTONE,
-  ITEM_KNAPSACK,
-} from "@neverquest/utilities/constants-items";
+import { ITEM_COMPASS, ITEM_HEARTHSTONE, ITEM_KNAPSACK } from "@neverquest/constants/items";
 import { CrewMember, Item } from "@neverquest/types";
 import { ArmorClass, CrewType, WeaponClass } from "@neverquest/types/enums";
 
@@ -88,6 +84,10 @@ export const CREW_ORDER = [
 ];
 
 export const CREW_INITIAL = [CrewType.Merchant];
+
+export const EXCHANGE_COIN = 1;
+
+export const EXCHANGE_SCRAP = 3;
 
 export const MERCHANT_OFFERS: Record<
   number,

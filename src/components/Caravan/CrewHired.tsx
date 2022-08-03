@@ -3,11 +3,11 @@ import { Button, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
+import { CREW_MEMBERS } from "@neverquest/constants/caravan";
 import icon from "@neverquest/icons/cowled.svg";
 import { crew } from "@neverquest/state/caravan";
 import { CrewStatus, CrewType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
-import { CREW_MEMBERS } from "@neverquest/utilities/constants-caravan";
 
 export default function CrewHirable({
   setActive,

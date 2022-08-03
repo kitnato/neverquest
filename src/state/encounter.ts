@@ -1,28 +1,36 @@
 import { atom, selector } from "recoil";
 
+import { UNKNOWN } from "@neverquest/constants";
+import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/constants/caravan";
 import LOCRA from "@neverquest/locra";
 import { crew, merchantInventoryGeneration } from "@neverquest/state/caravan";
-import { nsfw } from "@neverquest/state/global";
+import { localStorageEffect } from "@neverquest/state/effects";
+import { isNSFW } from "@neverquest/state/global";
 import { isShowing } from "@neverquest/state/isShowing";
 import { monsterCreate } from "@neverquest/state/monster";
-import { CrewStatus, LocationType, ShowingType } from "@neverquest/types/enums";
-import { UNKNOWN } from "@neverquest/utilities/constants";
-import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/utilities/constants-caravan";
+import { CrewStatus, LocationType, ShowingType, StorageKey } from "@neverquest/types/enums";
+
+// ATOMS
 
 export const level = atom({
   default: 1,
-  key: "level",
+  effects: [localStorageEffect<number>(StorageKey.Level)],
+  key: StorageKey.Level,
 });
 
 export const mode = atom({
   default: LocationType.Wilderness,
-  key: "mode",
+  effects: [localStorageEffect<LocationType>(StorageKey.Mode)],
+  key: StorageKey.Mode,
 });
 
 export const progress = atom({
   default: 0,
-  key: "progress",
+  effects: [localStorageEffect<number>(StorageKey.Progress)],
+  key: StorageKey.Progress,
 });
+
+// SELECTORS
 
 export const isLevelCompleted = selector({
   key: "isLevelCompleted",
@@ -44,7 +52,7 @@ export const location = selector({
   get: ({ get }) => {
     const isWildernessValue = get(isWilderness);
     const levelValue = get(level);
-    const nsfwValue = get(nsfw);
+    const nsfwValue = get(isNSFW);
 
     if (isWildernessValue) {
       if (levelValue === 1) {

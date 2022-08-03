@@ -1,10 +1,10 @@
 import Stack from "react-bootstrap/Stack";
+import { useRecoilValue } from "recoil";
 
 import TrainableSkill from "@neverquest/components/Caravan/Mercenary/TrainableSkill";
 import TrainedSkill from "@neverquest/components/Caravan/Mercenary/TrainedSkill";
-import { useRecoilValue } from "recoil";
+import { SKILLS_ORDER } from "@neverquest/constants/skills";
 import { skillsStatus } from "@neverquest/state/skills";
-import { SKILLS_ORDER } from "@neverquest/utilities/constants-skills";
 
 export default function Mercenary() {
   const { areTrainable, areTrained } = useRecoilValue(skillsStatus);

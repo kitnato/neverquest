@@ -672,7 +672,7 @@ Default: off. Once toggled, all elements of the UI will be shown at once instead
 
 The LOCRA (LOcation, CReature, Artifact) system generates a pseudo-random variety of names for different irreverent fantasy-themed items and monsters that the character interacts with.
 
-It works by generating a name for a location, creature or artifact based on a JSON library of (loosely) fantasy-world-themed words that can be composed to make (somewhat) coherent names for the three types in question. Parameters for tags and affix composition can be passed to make the generation more specific. If [NSFW mode](#nsfw-mode) is on, the names may also be pornographic or decidedly non-fantasy-themed.
+It works by generating a name for a location, creature or artifact based on a JSON library of (loosely) fantasy-world-themed words that can be composed to make (somewhat) coherent names for the three types in question. Parameters for tags and affix composition can be passed to make the generation more specific. If [NSFW mode](#isNSFW-mode) is on, the names may also be pornographic or decidedly non-fantasy-themed.
 
 Generating a creature name, for example, depending on the parameters passed, might yield anything from "Intrepid Farmer" to "Voluptuous Manticore of Unmitigated Penetration".
 

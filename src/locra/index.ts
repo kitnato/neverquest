@@ -83,15 +83,15 @@ export default class LOCRA {
   }
 
   static generateArtifact({
-    isNSFW = false,
     hasPrefix = false,
     hasSuffix = false,
+    isNSFW = false,
     tags = [],
     query,
   }: {
-    isNSFW?: boolean;
     hasPrefix?: boolean;
     hasSuffix?: boolean;
+    isNSFW?: boolean;
     tags?: AffixTag[];
     query: ArtifactQuery;
   }) {
@@ -114,15 +114,15 @@ export default class LOCRA {
   }
 
   static generateCreature({
-    isNSFW = false,
     hasPrefix = false,
     hasSuffix = false,
+    isNSFW = false,
     tags = [],
     type,
   }: {
-    isNSFW?: boolean;
     hasPrefix?: boolean;
     hasSuffix?: boolean;
+    isNSFW?: boolean;
     tags?: AffixTag[];
     type: CreatureType;
   }) {
@@ -143,14 +143,14 @@ export default class LOCRA {
   }
 
   static generateLocation({
-    isNSFW = false,
     hasPrefix = false,
     hasSuffix = false,
+    isNSFW = false,
     tags = [],
   }: {
-    isNSFW?: boolean;
     hasPrefix?: boolean;
     hasSuffix?: boolean;
+    isNSFW?: boolean;
     tags?: AffixTag[];
   }) {
     const filteredLocations = locations.filter((location) =>

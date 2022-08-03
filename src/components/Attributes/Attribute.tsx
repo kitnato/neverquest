@@ -4,13 +4,13 @@ import { Clock, Plus } from "react-bootstrap-icons";
 import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
-import { AttributeType, DeltaType } from "@neverquest/types/enums";
+import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import { attributeCost, attributes, attributesIncreasable } from "@neverquest/state/attributes";
 import { characterLevel } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { resourcesBalance } from "@neverquest/state/resources";
+import { AttributeType, DeltaType } from "@neverquest/types/enums";
 import { FloatingTextType, UIVariant } from "@neverquest/types/ui";
-import { ATTRIBUTES } from "@neverquest/utilities/constants-attributes";
 
 export default function Attribute({ type }: { type: AttributeType }) {
   const [{ canAssign, points }, setAttribute] = useRecoilState(attributes(type));

@@ -1,12 +1,12 @@
 import LOCRA from "@neverquest/locra";
 import { AffixTag, ArtifactType, ShieldType, WeaponType } from "@neverquest/locra/types";
-import { Armor, Shield, Weapon } from "@neverquest/types";
-import { ArmorClass, WeaponClass } from "@neverquest/types/enums";
 import {
   ARMOR_SPECIFICATIONS,
   SHIELD_SPECIFICATIONS,
   WEAPON_SPECIFICATIONS,
-} from "@neverquest/utilities/constants-gear";
+} from "@neverquest/constants/gear";
+import { Armor, Shield, Weapon } from "@neverquest/types";
+import { ArmorClass, WeaponClass } from "@neverquest/types/enums";
 import { getFromRange } from "@neverquest/utilities/helpers";
 
 export function generateArmor({

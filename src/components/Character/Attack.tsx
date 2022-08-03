@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import AttackMeter from "@neverquest/components/Character/AttackMeter";
 import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
+import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import icon from "@neverquest/icons/striking-splinter.svg";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { attributes } from "@neverquest/state/attributes";
@@ -17,7 +18,6 @@ import {
   formatPercentage,
   getComputedStat,
 } from "@neverquest/utilities/helpers";
-import { ATTRIBUTES } from "@neverquest/utilities/constants-attributes";
 
 export default function Attack() {
   const { points } = useRecoilValue(attributes(AttributeType.AttackRateBonus));

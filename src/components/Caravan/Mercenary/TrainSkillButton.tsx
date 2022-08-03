@@ -2,11 +2,11 @@ import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
+import { SKILLS } from "@neverquest/constants/skills";
 import { resourcesBalance, coins } from "@neverquest/state/resources";
 import { skills } from "@neverquest/state/skills";
-import { SkillType } from "@neverquest/types/enums";
+import { SkillStatus, SkillType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
-import { SKILLS } from "@neverquest/utilities/constants-skills";
 
 export default function TrainSkillButton({ type }: { type: SkillType }) {
   const coinsValue = useRecoilValue(coins);
@@ -28,10 +28,7 @@ export default function TrainSkillButton({ type }: { type: SkillType }) {
           onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
             currentTarget.blur();
 
-            setSkill((current) => ({
-              ...current,
-              isAcquired: true,
-            }));
+            setSkill(SkillStatus.Trained);
             balanceResources({ coinsDifference: -price });
           }}
           variant={UIVariant.Outline}

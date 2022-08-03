@@ -13,7 +13,7 @@ import { isLevelCompleted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMonsterEngaged } from "@neverquest/state/monster";
 import { isHealthLow } from "@neverquest/state/reserves";
-import { lowHealthWarning } from "@neverquest/state/global";
+import { lowHealthWarning } from "@neverquest/state/settings";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 import { ShowingType } from "@neverquest/types/enums";

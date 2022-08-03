@@ -5,7 +5,7 @@ import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { isRecovering } from "@neverquest/state/character";
-import { HealthChangeProps } from "@neverquest/types/props";
+import { ReserveChangeProps } from "@neverquest/types/props";
 import { UIAttachment, UISize, UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
@@ -14,7 +14,7 @@ export default function RegenerationMeter({
   isReserveMaxedOut,
   regenerationRate,
 }: {
-  atomReserve: RecoilState<HealthChangeProps>;
+  atomReserve: RecoilState<ReserveChangeProps>;
   isReserveMaxedOut: RecoilValueReadOnly<boolean>;
   regenerationRate: RecoilValueReadOnly<number>;
 }) {

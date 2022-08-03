@@ -4,8 +4,8 @@ import { RecoilRoot } from "recoil";
 import CheatQuest from "@neverquest/components/CheatQuest";
 import Header from "@neverquest/components/Header";
 import Main from "@neverquest/components/Main";
-import { initialization } from "@neverquest/state/global";
 import { SeedContext, useSeed } from "@neverquest/state/SeedContext";
+import { initialization } from "@neverquest/state/transactions";
 
 export default function App() {
   const { seed, resetSeed } = useSeed();

@@ -6,7 +6,7 @@ import ImageIcon from "@neverquest/components/ImageIcon";
 import aliveIcon from "@neverquest/icons/domino-mask.svg";
 import deadIcon from "@neverquest/icons/skull-crossed-bones.svg";
 import { name } from "@neverquest/state/character";
-import { isGameOver } from "@neverquest/state/global";
+import { isGameOver } from "@neverquest/state/settings";
 
 export default function Name() {
   const [nameValue, setName] = useRecoilState(name);

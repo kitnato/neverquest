@@ -4,7 +4,8 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import icon from "@neverquest/icons/locked-chest.svg";
 import { isLevelCompleted } from "@neverquest/state/encounter";
-import { hasLooted, resourcesBalance } from "@neverquest/state/resources";
+import { hasLooted } from "@neverquest/state/resources";
+import { resourcesBalance } from "@neverquest/state/transactions";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 

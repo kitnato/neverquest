@@ -5,7 +5,8 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import useAcquireItem from "@neverquest/hooks/useAcquireItem";
 import useCheckEncumbrance from "@neverquest/hooks/useCheckEncumbrance";
 import { merchantInventory } from "@neverquest/state/caravan";
-import { resourcesBalance, coins } from "@neverquest/state/resources";
+import { coins } from "@neverquest/state/resources";
+import { resourcesBalance } from "@neverquest/state/transactions";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function BuyItemButton({ id }: { id: symbol }) {

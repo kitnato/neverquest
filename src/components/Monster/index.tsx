@@ -7,7 +7,8 @@ import MonsterStatus from "@neverquest/components/Monster/MonsterStatus";
 import { UNKNOWN } from "@neverquest/constants";
 import unknownIcon from "@neverquest/icons/evil-eyes.svg";
 import { isAttacking, isLooting } from "@neverquest/state/character";
-import { isMonsterDead, isMonsterEngaged, monsterRegenerate } from "@neverquest/state/monster";
+import { isMonsterDead, isMonsterEngaged } from "@neverquest/state/monster";
+import { monsterRegenerate } from "@neverquest/state/transactions";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 

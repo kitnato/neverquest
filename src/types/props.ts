@@ -1,6 +1,6 @@
 import { DeltaDisplay } from "@neverquest/types/ui";
 
-export type HealthChangeProps = number | { delta: number; deltaContents: DeltaDisplay };
+export type ReserveChangeProps = number | { delta: number; deltaContents: DeltaDisplay };
 
 export interface LootProps {
   tooltip?: string | undefined;

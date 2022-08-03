@@ -8,9 +8,9 @@ import Control from "@neverquest/components/Control";
 import Encounter from "@neverquest/components/Encounter";
 import Location from "@neverquest/components/Location";
 import WildernessStatus from "@neverquest/components/Wilderness/WildernessStatus";
-import { isGameOver } from "@neverquest/state/global";
-import { useReset } from "@neverquest/state/SeedContext";
 import { isShowing } from "@neverquest/state/isShowing";
+import { useReset } from "@neverquest/state/SeedContext";
+import { isGameOver } from "@neverquest/state/settings";
 import { ShowingType } from "@neverquest/types/enums";
 
 export default function Main() {

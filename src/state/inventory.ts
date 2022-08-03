@@ -1,11 +1,9 @@
-import { atom, DefaultValue, selector } from "recoil";
+import { atom, selector } from "recoil";
 
 import { NO_ARMOR, NO_TRINKET, NO_SHIELD, NO_WEAPON } from "@neverquest/constants/gear";
-import { attributes } from "@neverquest/state/attributes";
 import { localStorageEffect } from "@neverquest/state/effects";
-import { isShowing } from "@neverquest/state/isShowing";
 import { Armor, Inventory, Shield, Trinket, Weapon } from "@neverquest/types";
-import { AttributeType, ShowingType, StorageKey } from "@neverquest/types/enums";
+import { StorageKey } from "@neverquest/types/enums";
 import { isArmor, isShield, isTrinket, isWeapon } from "@neverquest/types/type-guards";
 
 // ATOMS
@@ -110,94 +108,5 @@ export const weapon = selector({
     }
 
     return NO_WEAPON;
-  },
-});
-
-// TODO: refactor as useRecoilTransaction(), as soon as it can handle selectors too.
-
-export const itemEquip = selector({
-  get: () => Symbol(),
-  key: "itemEquip",
-  set: ({ get, set }, id) => {
-    if (id instanceof DefaultValue) {
-      return;
-    }
-
-    const { item } = get(inventory)[id];
-
-    if (!item) {
-      return;
-    }
-
-    set(inventory, (current) => ({
-      ...current,
-      [id]: { ...current[id], isEquipped: true },
-    }));
-
-    if (isArmor(item)) {
-      if (!get(isShowing(ShowingType.Armor))) {
-        set(isShowing(ShowingType.Armor), true);
-      }
-
-      if (!get(isShowing(ShowingType.TotalProtection))) {
-        set(isShowing(ShowingType.TotalProtection), true);
-      }
-    }
-
-    if (isShield(item)) {
-      if (!get(isShowing(ShowingType.Shield))) {
-        set(isShowing(ShowingType.Shield), true);
-      }
-
-      if (!get(isShowing(ShowingType.BlockChance))) {
-        set(isShowing(ShowingType.BlockChance), true);
-      }
-    }
-
-    if (isTrinket(item)) {
-      if (!get(isShowing(ShowingType.Trinket))) {
-        set(isShowing(ShowingType.Trinket), true);
-      }
-    }
-
-    if (isWeapon(item)) {
-      if (!get(isShowing(ShowingType.Stamina)) && item.staminaCost > 0) {
-        set(isShowing(ShowingType.Stamina), true);
-
-        if (!get(attributes(AttributeType.Stamina)).canAssign) {
-          set(attributes(AttributeType.Stamina), (current) => ({
-            ...current,
-            canAssign: true,
-          }));
-        }
-      }
-
-      if (!get(isShowing(ShowingType.TotalAttackRateSummary))) {
-        set(isShowing(ShowingType.TotalAttackRateSummary), true);
-      }
-
-      if (!get(isShowing(ShowingType.TotalDamageSummary))) {
-        set(isShowing(ShowingType.TotalDamageSummary), true);
-      }
-
-      if (!get(isShowing(ShowingType.Weapon))) {
-        set(isShowing(ShowingType.Weapon), true);
-      }
-    }
-  },
-});
-
-export const itemUnequip = selector({
-  get: () => Symbol(),
-  key: "itemUnequip",
-  set: ({ set }, id) => {
-    if (id instanceof DefaultValue) {
-      return;
-    }
-
-    set(inventory, (current) => ({
-      ...current,
-      [id]: { ...current[id], isEquipped: false },
-    }));
   },
 });

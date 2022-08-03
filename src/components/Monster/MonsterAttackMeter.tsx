@@ -4,7 +4,6 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { isAttacking } from "@neverquest/state/character";
-import { defense } from "@neverquest/state/combat";
 import {
   currentHealthMonster,
   isMonsterDead,
@@ -12,6 +11,7 @@ import {
   isMonsterStaggered,
   totalAttackRateMonster,
 } from "@neverquest/state/monster";
+import { defense } from "@neverquest/state/transactions";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 

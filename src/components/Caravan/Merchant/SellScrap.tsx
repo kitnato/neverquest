@@ -6,7 +6,8 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import Coins from "@neverquest/components/Resource/Coins";
 import Scrap from "@neverquest/components/Resource/Scrap";
 import { EXCHANGE_COIN, EXCHANGE_SCRAP } from "@neverquest/constants/caravan";
-import { resourcesBalance, scrap } from "@neverquest/state/resources";
+import { scrap } from "@neverquest/state/resources";
+import { resourcesBalance } from "@neverquest/state/transactions";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function SellScrap() {

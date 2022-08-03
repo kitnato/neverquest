@@ -5,8 +5,8 @@ import { useRecoilValue } from "recoil";
 
 import ConfirmationDialog from "@neverquest/components/ConfirmationDialog";
 import { isShowing } from "@neverquest/state/isShowing";
-import { isGameOver } from "@neverquest/state/global";
 import { useReset } from "@neverquest/state/SeedContext";
+import { isGameOver } from "@neverquest/state/settings";
 import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";

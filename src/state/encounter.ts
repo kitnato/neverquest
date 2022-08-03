@@ -1,14 +1,11 @@
 import { atom, selector } from "recoil";
 
 import { UNKNOWN } from "@neverquest/constants";
-import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/constants/caravan";
 import LOCRA from "@neverquest/locra";
-import { crew, merchantInventoryGeneration } from "@neverquest/state/caravan";
 import { localStorageEffect } from "@neverquest/state/effects";
-import { isNSFW } from "@neverquest/state/global";
-import { isShowing } from "@neverquest/state/isShowing";
-import { monsterCreate } from "@neverquest/state/monster";
-import { CrewStatus, LocationType, ShowingType, StorageKey } from "@neverquest/types/enums";
+import { isNSFW } from "@neverquest/state/settings";
+import { levelUp } from "@neverquest/state/transactions";
+import { LocationType, StorageKey } from "@neverquest/types/enums";
 
 // ATOMS
 
@@ -78,48 +75,5 @@ export const location = selector({
       set(levelUp, null);
       set(mode, LocationType.Wilderness);
     }
-  },
-});
-
-// TODO: refactor as useRecoilTransaction(), as soon as it can handle selectors too
-
-export const levelUp = selector({
-  get: () => null,
-  key: "levelUp",
-  set: ({ get, set }) => {
-    const levelValue = get(level);
-    const nextLevel = levelValue + 1;
-
-    CREW_ORDER.forEach((type) => {
-      const { hireStatus, monologueProgress } = get(crew(type));
-      const isShowingCrewHiring = isShowing(ShowingType.CrewHiring);
-
-      const { hirableLevel, monologues } = CREW_MEMBERS[type];
-
-      // Progress the monologue for all hired crew members.
-      if (hireStatus === CrewStatus.Hired && monologueProgress < monologues.length - 1) {
-        set(crew(type), (current) => ({
-          ...current,
-          monologueProgress: current.monologueProgress + 1,
-        }));
-      }
-
-      // Make crew member hirable if the appropriate level has been reached.
-      if (hireStatus === CrewStatus.Unavailable && nextLevel >= hirableLevel) {
-        set(crew(type), (current) => ({
-          ...current,
-          hireStatus: CrewStatus.Hirable,
-        }));
-
-        if (!get(isShowingCrewHiring)) {
-          set(isShowingCrewHiring, true);
-        }
-      }
-    });
-
-    set(level, nextLevel);
-    set(progress, 0);
-    set(merchantInventoryGeneration, null);
-    set(monsterCreate, null);
   },
 });

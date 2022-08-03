@@ -7,14 +7,10 @@ import ImageIcon from "@neverquest/components/ImageIcon";
 import ReserveMeter from "@neverquest/components/ReserveMeter";
 import icon from "@neverquest/icons/lungs.svg";
 import { deltas } from "@neverquest/state/deltas";
-import {
-  currentStamina,
-  isStaminaMaxedOut,
-  maximumStamina,
-  staminaChange,
-} from "@neverquest/state/reserves";
 import { isShowing } from "@neverquest/state/isShowing";
+import { currentStamina, isStaminaMaxedOut, maximumStamina } from "@neverquest/state/reserves";
 import { totalStaminaRegenerationRate } from "@neverquest/state/statistics";
+import { staminaChange } from "@neverquest/state/transactions";
 import { AnimationType, UIAttachment } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
@@ -46,8 +42,8 @@ export default function Stamina() {
         </Stack>
 
         <Regeneration
-          atomReserve={staminaChange}
           atomDeltaRegenerationRate={deltas(DeltaType.TotalStaminaRegenerationRate)}
+          atomReserve={staminaChange}
           isReserveMaxedOut={isStaminaMaxedOut}
           regenerationRate={totalStaminaRegenerationRate}
         />

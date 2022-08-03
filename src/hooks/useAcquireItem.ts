@@ -10,16 +10,16 @@ import {
 } from "@neverquest/constants/gear";
 import useCheckEncumbrance from "@neverquest/hooks/useCheckEncumbrance";
 import { hasKnapsack } from "@neverquest/state/character";
-import { autoEquip } from "@neverquest/state/global";
 import {
   armor,
   encumbranceMaximum,
   inventory,
-  itemEquip,
   shield,
   trinket,
   weapon,
 } from "@neverquest/state/inventory";
+import { autoEquip } from "@neverquest/state/settings";
+import { itemEquip } from "@neverquest/state/transactions";
 import { Gear, Item } from "@neverquest/types";
 import { isArmor, isItem, isShield, isTrinket, isWeapon } from "@neverquest/types/type-guards";
 

@@ -6,13 +6,9 @@ import ImageIcon from "@neverquest/components/ImageIcon";
 import ReserveMeter from "@neverquest/components/ReserveMeter";
 import icon from "@neverquest/icons/hospital-cross.svg";
 import { deltas } from "@neverquest/state/deltas";
-import {
-  currentHealth,
-  healthChange,
-  isHealthMaxedOut,
-  maximumHealth,
-} from "@neverquest/state/reserves";
+import { currentHealth, isHealthMaxedOut, maximumHealth } from "@neverquest/state/reserves";
 import { totalHealthRegenerationRate } from "@neverquest/state/statistics";
+import { healthChange } from "@neverquest/state/transactions";
 import { UIAttachment } from "@neverquest/types/ui";
 import { DeltaType } from "@neverquest/types/enums";
 

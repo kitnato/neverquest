@@ -1,7 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import { level, levelUp, progress, progressMax } from "@neverquest/state/encounter";
-import { resourcesBalance } from "@neverquest/state/resources";
+import { level, progress, progressMax } from "@neverquest/state/encounter";
+import { levelUp, resourcesBalance } from "@neverquest/state/transactions";
 import { useEffect } from "react";
 
 declare global {

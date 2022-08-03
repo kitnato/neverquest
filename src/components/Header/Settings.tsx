@@ -10,7 +10,7 @@ import {
   isNSFW,
   isShowingDamagePerSecond,
   lowHealthWarning,
-} from "@neverquest/state/global";
+} from "@neverquest/state/settings";
 
 export default function Settings() {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);

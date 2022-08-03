@@ -8,7 +8,7 @@ import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import { attributeCost, attributes, attributesIncreasable } from "@neverquest/state/attributes";
 import { characterLevel } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { resourcesBalance } from "@neverquest/state/resources";
+import { resourcesBalance } from "@neverquest/state/transactions";
 import { AttributeType, DeltaType } from "@neverquest/types/enums";
 import { FloatingTextType, UIVariant } from "@neverquest/types/ui";
 

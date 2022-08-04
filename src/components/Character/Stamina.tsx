@@ -5,7 +5,7 @@ import Regeneration from "@neverquest/components/Character/Regeneration";
 import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import ReserveMeter from "@neverquest/components/ReserveMeter";
-import icon from "@neverquest/icons/lungs.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/lungs.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { currentStamina, isStaminaMaxedOut, maximumStamina } from "@neverquest/state/reserves";
@@ -28,7 +28,7 @@ export default function Stamina() {
       direction="horizontal"
       gap={3}
     >
-      <ImageIcon icon={icon} tooltip="Stamina" />
+      <ImageIcon Icon={Icon} tooltip="Stamina" />
 
       <Stack>
         <Stack className="w-100" direction="horizontal">

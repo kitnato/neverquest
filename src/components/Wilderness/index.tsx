@@ -2,7 +2,7 @@ import { Card, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
-import icon from "@neverquest/icons/crossed-bones.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/crossed-bones.svg";
 import Monster from "@neverquest/components/Monster";
 import { isLevelCompleted } from "@neverquest/state/encounter";
 import { AnimationType } from "@neverquest/types/ui";
@@ -17,7 +17,7 @@ export default function Wilderness() {
         <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
           <Card.Body>
             <Stack direction="horizontal" gap={5}>
-              <ImageIcon icon={icon} tooltip="Monster remains" />
+              <ImageIcon Icon={Icon} tooltip="Monster remains" />
 
               <span className="fst-italic">Everything is dead.</span>
             </Stack>

@@ -4,7 +4,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import { UNKNOWN } from "@neverquest/constants";
-import icon from "@neverquest/icons/journey.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/journey.svg";
 import { isWilderness, level, location } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
@@ -47,7 +47,7 @@ export default function TravelButton({ isDisabled }: { isDisabled: boolean }) {
         }}
         variant={UIVariant.Outline}
       >
-        <ImageIcon icon={icon} flipped={!isWildernessValue} />
+        <ImageIcon Icon={Icon} flipped={!isWildernessValue} />
       </Button>
     </OverlayTrigger>
   );

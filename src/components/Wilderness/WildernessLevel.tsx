@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import FloatingText from "@neverquest/components/FloatingText";
-import icon from "@neverquest/icons/flying-flag.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/flying-flag.svg";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { level } from "@neverquest/state/encounter";
 import { deltas } from "@neverquest/state/deltas";
@@ -22,7 +22,7 @@ export default function WildernessLevel() {
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} placement={OverlayPlacement.Bottom} tooltip="Level" />
+      <ImageIcon Icon={Icon} placement={OverlayPlacement.Bottom} tooltip="Level" />
 
       <span>{levelValue}</span>
 

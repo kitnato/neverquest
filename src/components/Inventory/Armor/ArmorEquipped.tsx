@@ -4,8 +4,8 @@ import { useRecoilValue } from "recoil";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import ArmorName from "@neverquest/components/Inventory/Armor/ArmorName";
 import { NO_ARMOR } from "@neverquest/constants/gear";
-import iconUnequipped from "@neverquest/icons/ribcage.svg";
-import iconEquipped from "@neverquest/icons/shoulder-armor.svg";
+import { ReactComponent as IconUnequipped } from "@neverquest/icons/ribcage.svg";
+import { ReactComponent as IconEquipped } from "@neverquest/icons/shoulder-armor.svg";
 import { armor } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";
@@ -27,7 +27,7 @@ export default function ArmorEquipped() {
       gap={3}
     >
       <ImageIcon
-        icon={armorValue === NO_ARMOR ? iconUnequipped : iconEquipped}
+        Icon={armorValue === NO_ARMOR ? IconUnequipped : IconEquipped}
         tooltip="Equipped armor"
       />
 

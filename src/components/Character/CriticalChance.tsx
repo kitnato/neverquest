@@ -2,7 +2,7 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
-import icon from "@neverquest/icons/spiky-eclipse.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/spiky-eclipse.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import { totalCriticalChance } from "@neverquest/state/statistics";
 import { AnimationType } from "@neverquest/types/ui";
@@ -24,7 +24,7 @@ export default function CriticalChance() {
       direction="horizontal"
       gap={3}
     >
-      <ImageIcon icon={icon} tooltip="Critical hit chance" />
+      <ImageIcon Icon={Icon} tooltip="Critical hit chance" />
 
       <span>{`${formatPercentage(criticalChanceValue)}`}</span>
     </Stack>

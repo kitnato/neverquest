@@ -1,12 +1,12 @@
-import compassIcon from "@neverquest/icons/compass.svg";
-import knapsackIcon from "@neverquest/icons/knapsack.svg";
-import stoneIcon from "@neverquest/icons/stone-wheel.svg";
+import { ReactComponent as IconCompass } from "@neverquest/icons/compass.svg";
+import { ReactComponent as IconKnapsack } from "@neverquest/icons/knapsack.svg";
+import { ReactComponent as IconStone } from "@neverquest/icons/stone-wheel.svg";
 import { Item } from "@neverquest/types";
 
 // TODO
 export const ITEM_COMPASS: Item = {
   description: "Seek out more monsters in the wilderness.",
-  icon: compassIcon,
+  Icon: IconCompass,
   isPortable: true,
   name: "Compass",
   price: 30,
@@ -16,7 +16,7 @@ export const ITEM_COMPASS: Item = {
 // TODO
 export const ITEM_HEARTHSTONE: Item = {
   description: "Travel back to the caravan even if there are still lurking monsters.",
-  icon: stoneIcon,
+  Icon: IconStone,
   isPortable: true,
   name: "Hearthstone",
   price: 55,
@@ -25,7 +25,7 @@ export const ITEM_HEARTHSTONE: Item = {
 
 export const ITEM_KNAPSACK: Item = {
   description: "Carry more items and manage gear.",
-  icon: knapsackIcon,
+  Icon: IconKnapsack,
   isPortable: false,
   name: "Knapsack",
   price: 12,

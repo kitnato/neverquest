@@ -2,7 +2,7 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
-import icon from "@neverquest/icons/shield-reflect.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/shield-reflect.svg";
 import { shield } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { AnimationType } from "@neverquest/types/ui";
@@ -23,7 +23,7 @@ export default function Block() {
       direction="horizontal"
       gap={3}
     >
-      <ImageIcon icon={icon} tooltip="Block chance" />
+      <ImageIcon Icon={Icon} tooltip="Block chance" />
 
       <span>{formatPercentage(block)}</span>
     </Stack>

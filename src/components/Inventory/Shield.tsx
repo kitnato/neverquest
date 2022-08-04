@@ -2,7 +2,7 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
-import icon from "@neverquest/icons/round-shield.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/round-shield.svg";
 import { shield } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";
@@ -24,7 +24,7 @@ export default function Shield() {
       direction="horizontal"
       gap={3}
     >
-      <ImageIcon icon={icon} tooltip="Shield" />
+      <ImageIcon Icon={Icon} tooltip="Shield" />
 
       <span>{shieldValue.name}</span>
     </Stack>

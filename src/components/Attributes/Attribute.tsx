@@ -21,7 +21,7 @@ export default function Attribute({ type }: { type: AttributeType }) {
   const setDeltaEssenceAbsorbed = useSetRecoilState(deltas(DeltaType.EssenceAbsorbed));
   const balanceResources = useSetRecoilState(resourcesBalance);
 
-  const { description, icon, name } = ATTRIBUTES[type];
+  const { description, Icon, name } = ATTRIBUTES[type];
 
   if (!canAssign) {
     return null;
@@ -30,7 +30,7 @@ export default function Attribute({ type }: { type: AttributeType }) {
   return (
     <div className="align-items-center d-flex justify-content-between w-100">
       <Stack direction="horizontal" gap={3}>
-        <ImageIcon icon={icon} tooltip={name} />
+        <ImageIcon Icon={Icon} tooltip={name} />
 
         <span>{description}</span>
       </Stack>

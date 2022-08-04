@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
-import icon from "@neverquest/icons/barbute.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/barbute.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { totalProtection } from "@neverquest/state/statistics";
@@ -33,7 +33,7 @@ export default function TotalProtection() {
       direction="horizontal"
       gap={3}
     >
-      <ImageIcon icon={icon} tooltip="Total protection" />
+      <ImageIcon Icon={Icon} tooltip="Total protection" />
 
       <span>{totalProtectionValue}</span>
 

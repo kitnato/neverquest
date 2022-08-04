@@ -5,7 +5,7 @@ import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
-import progressIcon from "@neverquest/icons/stairs.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/stairs.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isWilderness, progress, progressMax } from "@neverquest/state/encounter";
 import { DeltaType } from "@neverquest/types/enums";
@@ -30,7 +30,7 @@ export default function WildernessProgress() {
 
   return (
     <Stack className="w-100" direction="horizontal" gap={3}>
-      <ImageIcon icon={progressIcon} placement={OverlayPlacement.Bottom} tooltip="Progress" />
+      <ImageIcon Icon={Icon} placement={OverlayPlacement.Bottom} tooltip="Progress" />
 
       <Stack className="w-100" direction="horizontal">
         <LabelledProgressBar

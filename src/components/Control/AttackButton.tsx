@@ -4,9 +4,9 @@ import { useRecoilValue, useRecoilState } from "recoil";
 
 import ConfirmationDialog from "@neverquest/components/ConfirmationDialog";
 import ImageIcon from "@neverquest/components/ImageIcon";
-import attackIcon from "@neverquest/icons/tron-arrow.svg";
-import restingIcon from "@neverquest/icons/tired-eye.svg";
-import retreatIcon from "@neverquest/icons/return-arrow.svg";
+import { ReactComponent as IconRetreat } from "@neverquest/icons/return-arrow.svg";
+import { ReactComponent as IconResting } from "@neverquest/icons/tired-eye.svg";
+import { ReactComponent as IconAttack } from "@neverquest/icons/tron-arrow.svg";
 import { attributesIncreasable } from "@neverquest/state/attributes";
 import { isAttacking } from "@neverquest/state/character";
 import { isLevelCompleted } from "@neverquest/state/encounter";
@@ -49,22 +49,22 @@ export default function AttackButton({ isDisabled }: { isDisabled: boolean }) {
     }
   }, [isAttackingValue, isLevelCompletedValue, setAttacking]);
 
-  const { animation, icon, tooltip } = (() => {
+  const { animation, Icon, tooltip } = (() => {
     if (isLevelCompletedValue) {
-      return { animation: "", icon: restingIcon, tooltip: "Resting" };
+      return { animation: "", Icon: IconResting, tooltip: "Resting" };
     }
 
     if (isAttackingValue) {
       return {
         animation: showWarning ? pulseAnimation : "",
-        icon: retreatIcon,
+        Icon: IconRetreat,
         tooltip: "Retreat",
       };
     }
 
     return {
       animation: attributesIncreasableValue ? "" : pulseAnimation,
-      icon: attackIcon,
+      Icon: IconAttack,
       tooltip: "Attack",
     };
   })();
@@ -103,7 +103,7 @@ export default function AttackButton({ isDisabled }: { isDisabled: boolean }) {
             }}
             variant={UIVariant.Outline}
           >
-            <ImageIcon icon={icon} />
+            <ImageIcon Icon={Icon} />
           </Button>
         </span>
       </OverlayTrigger>

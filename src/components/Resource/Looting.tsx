@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import LootingMeter from "@neverquest/components/Resource/LootingMeter";
-import icon from "@neverquest/icons/vulture.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/vulture.svg";
 import { isLooting } from "@neverquest/state/character";
 import { progress } from "@neverquest/state/encounter";
 import { AnimationType } from "@neverquest/types/ui";
@@ -23,7 +23,7 @@ export default function Looting() {
       direction="horizontal"
       gap={3}
     >
-      <ImageIcon icon={icon} tooltip="Looting" />
+      <ImageIcon Icon={Icon} tooltip="Looting" />
 
       <LootingMeter />
     </Stack>

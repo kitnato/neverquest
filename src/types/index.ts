@@ -1,5 +1,6 @@
 import { ShieldType, WeaponType } from "@neverquest/locra/types";
 import { ArmorClass, WeaponClass } from "@neverquest/types/enums";
+import { SVGIcon } from "@neverquest/types/props";
 
 export type Armor = ItemBase & {
   armorClass?: ArmorClass;
@@ -9,7 +10,7 @@ export type Armor = ItemBase & {
 export interface Attribute {
   base: number;
   description: string;
-  icon: string;
+  Icon: SVGIcon;
   increment: number;
   name: string;
 }
@@ -43,7 +44,7 @@ export interface InventoryMerchant {
 
 export type Item = ItemBase & {
   description: string;
-  icon: string;
+  Icon: SVGIcon;
   isPortable: boolean;
 };
 
@@ -65,7 +66,7 @@ export type Shield = ItemBase & {
 
 export interface Skill {
   description: string;
-  icon: string;
+  Icon: SVGIcon;
   name: string;
   price: number;
 }

@@ -3,7 +3,7 @@ import Stack from "react-bootstrap/Stack";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import MonsterStaggerMeter from "@neverquest/components/Monster/MonsterStaggerMeter";
-import icon from "@neverquest/icons/star-swirl.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/star-swirl.svg";
 import { totalStaggerRate } from "@neverquest/state/statistics";
 
 export default function MonsterStagger() {
@@ -15,7 +15,7 @@ export default function MonsterStagger() {
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip="Staggered duration" />
+      <ImageIcon Icon={Icon} tooltip="Staggered duration" />
 
       <MonsterStaggerMeter />
     </Stack>

@@ -2,7 +2,7 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
-import icon from "@neverquest/icons/heavy-timer.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/heavy-timer.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import { damagePerSecondMonster } from "@neverquest/state/monster";
 import { AnimationType } from "@neverquest/types/ui";
@@ -23,7 +23,7 @@ export default function MonsterDamagePerSecond() {
       direction="horizontal"
       gap={3}
     >
-      <ImageIcon icon={icon} tooltip="Monster damage per second (DPS)" />
+      <ImageIcon Icon={Icon} tooltip="Monster damage per second (DPS)" />
 
       <span>{damagePerSecondMonsterValue}</span>
     </Stack>

@@ -1,6 +1,5 @@
 import { ShieldType, WeaponType } from "@neverquest/locra/types";
-import knapsackIcon from "@neverquest/icons/knapsack.svg";
-import { Armor, Item, Shield, Trinket, Weapon } from "@neverquest/types";
+import { Armor, Shield, Trinket, Weapon } from "@neverquest/types";
 import { ArmorClass, WeaponClass } from "@neverquest/types/enums";
 import { RangeProps } from "@neverquest/types/props";
 
@@ -20,15 +19,6 @@ export const ARMOR_SPECIFICATIONS: Record<
     protectionModifier: 2,
     weight: 2,
   },
-};
-
-export const ITEM_KNAPSACK: Item = {
-  description: "Carry more items and manage gear.",
-  icon: knapsackIcon,
-  isPortable: false,
-  name: "Knapsack",
-  price: 12,
-  weight: 0,
 };
 
 export const NO_ARMOR: Armor = {

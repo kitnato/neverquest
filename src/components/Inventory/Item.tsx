@@ -4,11 +4,11 @@ import ImageIcon from "@neverquest/components/ImageIcon";
 import { Item as ItemType } from "@neverquest/types";
 
 export default function Item({ item }: { item: ItemType }) {
-  const { description, icon, name } = item;
+  const { description, Icon, name } = item;
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip="Item" />
+      <ImageIcon Icon={Icon} tooltip="Item" />
 
       <OverlayTrigger
         overlay={

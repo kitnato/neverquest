@@ -2,7 +2,7 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
-import icon from "@neverquest/icons/heavy-timer.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/heavy-timer.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import { damagePerSecond } from "@neverquest/state/statistics";
 import { ShowingType } from "@neverquest/types/enums";
@@ -23,7 +23,7 @@ export default function DamagePerSecond() {
       direction="horizontal"
       gap={3}
     >
-      <ImageIcon icon={icon} tooltip="Damage per second (DPS)" />
+      <ImageIcon Icon={Icon} tooltip="Damage per second (DPS)" />
 
       <span>{damagePerSecondValue}</span>
     </Stack>

@@ -5,7 +5,7 @@ import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
-import icon from "@neverquest/icons/wolverine-claws.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/wolverine-claws.svg";
 import { attributes } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
@@ -30,7 +30,7 @@ export default function TotalDamage() {
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip="Total damage" />
+      <ImageIcon Icon={Icon} tooltip="Total damage" />
 
       {showTotalDamageBreakdownValue ? (
         <OverlayTrigger

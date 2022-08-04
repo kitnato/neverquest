@@ -5,7 +5,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import MonsterStatus from "@neverquest/components/Monster/MonsterStatus";
 import { UNKNOWN } from "@neverquest/constants";
-import unknownIcon from "@neverquest/icons/evil-eyes.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/evil-eyes.svg";
 import { isAttacking, isLooting } from "@neverquest/state/character";
 import { isMonsterDead, isMonsterEngaged } from "@neverquest/state/monster";
 import { monsterRegenerate } from "@neverquest/state/transactions";
@@ -43,7 +43,7 @@ export default function Monster() {
     <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
       <Card.Body>
         <Stack direction="horizontal" gap={3}>
-          <ImageIcon icon={unknownIcon} tooltip={UNKNOWN} />
+          <ImageIcon Icon={Icon} tooltip={UNKNOWN} />
 
           <span className="fst-italic">The darkness stirs.</span>
         </Stack>

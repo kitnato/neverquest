@@ -5,7 +5,7 @@ import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import RecoveryMeter from "@neverquest/components/Character/RecoveryMeter";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
-import icon from "@neverquest/icons/knockout.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/knockout.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { totalRecoveryRate } from "@neverquest/state/statistics";
@@ -34,7 +34,7 @@ export default function Recovery() {
       direction="horizontal"
       gap={3}
     >
-      <ImageIcon icon={icon} tooltip="Recovery rate" />
+      <ImageIcon Icon={Icon} tooltip="Recovery rate" />
 
       <Stack className="w-100" direction="horizontal">
         <RecoveryMeter />

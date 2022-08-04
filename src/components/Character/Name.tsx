@@ -3,8 +3,8 @@ import { ChangeEvent, KeyboardEvent, MouseEvent, useState } from "react";
 import { FormControl, Stack } from "react-bootstrap";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
-import aliveIcon from "@neverquest/icons/domino-mask.svg";
-import deadIcon from "@neverquest/icons/skull-crossed-bones.svg";
+import { ReactComponent as AliveIcon } from "@neverquest/icons/domino-mask.svg";
+import { ReactComponent as DeadIcon } from "@neverquest/icons/skull-crossed-bones.svg";
 import { name } from "@neverquest/state/character";
 import { isGameOver } from "@neverquest/state/settings";
 
@@ -16,7 +16,7 @@ export default function Name() {
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={isGameOverValue ? deadIcon : aliveIcon} tooltip="Name" />
+      <ImageIcon Icon={isGameOverValue ? DeadIcon : AliveIcon} tooltip="Name" />
 
       <FormControl
         className="hover-grow"

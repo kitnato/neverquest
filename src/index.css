@@ -4,7 +4,7 @@ body {
   user-select: none;
 }
 
-button.btn-outline-dark:hover img {
+button.btn-outline-dark:hover svg {
   filter: invert(1);
 }
 

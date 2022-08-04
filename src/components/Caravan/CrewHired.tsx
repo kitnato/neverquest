@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
 import { CREW_MEMBERS } from "@neverquest/constants/caravan";
-import icon from "@neverquest/icons/cowled.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/cowled.svg";
 import { crew } from "@neverquest/state/caravan";
 import { CrewStatus, CrewType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
@@ -26,7 +26,7 @@ export default function CrewHirable({
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip={name} />
+      <ImageIcon Icon={Icon} tooltip={name} />
 
       <div className="align-items-center d-flex justify-content-between w-100">
         <span>{`"${monologues[monologueProgress]}"`}</span>

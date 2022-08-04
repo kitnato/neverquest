@@ -5,7 +5,7 @@ import AttackMeter from "@neverquest/components/Character/AttackMeter";
 import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import { ATTRIBUTES } from "@neverquest/constants/attributes";
-import icon from "@neverquest/icons/striking-splinter.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/striking-splinter.svg";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { attributes } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
@@ -45,7 +45,7 @@ export default function Attack() {
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip="Attack rate" />
+      <ImageIcon Icon={Icon} tooltip="Attack rate" />
 
       {showTotalAttackRateBreakdownValue ? (
         <OverlayTrigger

@@ -2,7 +2,7 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
-import icon from "@neverquest/icons/wolverine-claws.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/wolverine-claws.svg";
 import { totalDamageMonster } from "@neverquest/state/monster";
 
 export default function MonsterDamage() {
@@ -10,7 +10,7 @@ export default function MonsterDamage() {
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <ImageIcon icon={icon} tooltip="Monster damage" />
+      <ImageIcon Icon={Icon} tooltip="Monster damage" />
 
       <span>{totalDamageMonsterValue}</span>
     </Stack>

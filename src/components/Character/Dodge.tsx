@@ -2,7 +2,7 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
-import icon from "@neverquest/icons/wingfoot.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/wingfoot.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import { totalDodgeChance } from "@neverquest/state/statistics";
 import { ShowingType } from "@neverquest/types/enums";
@@ -24,7 +24,7 @@ export default function Dodge() {
       direction="horizontal"
       gap={3}
     >
-      <ImageIcon icon={icon} tooltip="Dodge" />
+      <ImageIcon Icon={Icon} tooltip="Dodge" />
 
       <span>{formatPercentage(dodgeChanceValue)}</span>
     </Stack>

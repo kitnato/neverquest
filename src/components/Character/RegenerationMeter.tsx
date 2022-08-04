@@ -22,6 +22,7 @@ export default function RegenerationMeter({
   const regenerationRateValue = useRecoilValue(regenerationRate);
   const isReserveMaxedOutValue = useRecoilValue(isReserveMaxedOut);
   const changeCurrentReserve = useSetRecoilState(atomReserve);
+
   const [deltaRegeneration, setDeltaRegeneration] = useState(0);
 
   useAnimation((delta) => {

@@ -264,7 +264,7 @@ The [merchant](#merchant) is always present from the start. Other crew members c
 
 `[TODO]`
 
-Buy [elixirs](#elixirs), [salves](#salves) and [poisons](#poisons).
+Purchase [elixirs](#elixirs), [salves](#salves) and [poisons](#poisons).
 
 #### Blacksmith
 

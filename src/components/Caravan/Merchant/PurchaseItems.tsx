@@ -13,7 +13,7 @@ export default function BuyItems() {
 
   return (
     <Stack gap={3}>
-      <h6>Buy items</h6>
+      <h6>Purchase items</h6>
 
       {newItemIDs.length === 0 ? (
         <span className="fst-italic">Nothing available.</span>

@@ -68,7 +68,7 @@ import {
 import { generateArmor, generateShield, generateWeapon } from "@neverquest/utilities/generators";
 import { animateElement } from "@neverquest/utilities/helpers";
 
-// TODO - refactor all as useRecoilTransaction(), as soon as it can handle selectors too.
+// TODO - refactor all as useRecoilTransaction(), as soon as it can handle selectors too. Or make them all hooks?
 
 export const defense = selector({
   get: () => null,

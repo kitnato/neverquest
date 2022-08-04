@@ -1,7 +1,7 @@
 import { Col, Row } from "react-bootstrap";
 
-import CritChance from "@neverquest/components/Character/CritChance";
-import CritDamage from "@neverquest/components/Character/CritDamage";
+import CriticalChance from "@neverquest/components/Character/CriticalChance";
+import CriticalDamage from "@neverquest/components/Character/CriticalDamage";
 import DamagePerSecond from "@neverquest/components/Character/DamagePerSecond";
 import TotalDamage from "@neverquest/components/Character/TotalDamage";
 
@@ -13,11 +13,11 @@ export default function Offense() {
       </Col>
 
       <Col>
-        <CritChance />
+        <CriticalChance />
       </Col>
 
       <Col>
-        <CritDamage />
+        <CriticalDamage />
       </Col>
 
       <Col>

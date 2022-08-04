@@ -108,7 +108,7 @@ export enum SkillType {
 export enum StorageKey {
   Attributes = "attributes",
   AutoEquip = "autoEquip",
-  CaravanMapping = "caravanMapping",
+  CrewMapping = "crewMapping",
   CharacterLevel = "characterLevel",
   Coins = "coins",
   CoinsLoot = "coinsLoot",

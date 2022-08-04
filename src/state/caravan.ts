@@ -11,15 +11,13 @@ export interface CrewState {
 
 // ATOMS
 
-const caravanMapping = atomFamily<CrewState, CrewType>({
+const crewMapping = atomFamily<CrewState, CrewType>({
   default: {
     hireStatus: CrewStatus.Unavailable,
     monologueProgress: 0,
   },
-  effects: (parameter) => [
-    localStorageEffect<CrewState>(`${StorageKey.CaravanMapping}-${parameter}`),
-  ],
-  key: StorageKey.CaravanMapping,
+  effects: (parameter) => [localStorageEffect<CrewState>(`${StorageKey.CrewMapping}-${parameter}`)],
+  key: StorageKey.CrewMapping,
 });
 
 export const crewHirable = atom<CrewType[]>({
@@ -35,7 +33,7 @@ export const crew = selectorFamily<CrewState, CrewType>({
   get:
     (type) =>
     ({ get }) =>
-      get(caravanMapping(type)),
+      get(crewMapping(type)),
   set:
     (type) =>
     ({ set }, status) => {
@@ -43,7 +41,7 @@ export const crew = selectorFamily<CrewState, CrewType>({
         return;
       }
 
-      set(caravanMapping(type), status);
+      set(crewMapping(type), status);
 
       if (status.hireStatus === CrewStatus.Hirable) {
         set(crewHirable, (current) => [...current, type]);

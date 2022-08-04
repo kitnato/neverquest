@@ -16,8 +16,8 @@ export default function useDeltaText({
   stop?: (previous: null | number, current: number) => boolean;
   valueAtom: RecoilValueReadOnly<number>;
 }) {
-  const setDeltaValue = useSetRecoilState(deltaAtom);
   const currentValue = useRecoilValue(valueAtom);
+  const setDeltaValue = useSetRecoilState(deltaAtom);
 
   const previousValue = usePreviousValue(currentValue);
 

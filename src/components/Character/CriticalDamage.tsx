@@ -2,16 +2,16 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
-import icon from "@neverquest/icons/spiky-eclipse.svg";
+import icon from "@neverquest/icons/striking-splinter.svg";
 import { isShowing } from "@neverquest/state/isShowing";
-import { totalCriticalChance } from "@neverquest/state/statistics";
+import { totalCriticalDamage } from "@neverquest/state/statistics";
+import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { formatPercentage } from "@neverquest/utilities/helpers";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
-import { ShowingType } from "@neverquest/types/enums";
 
-export default function CritChance() {
-  const criticalChanceValue = useRecoilValue(totalCriticalChance);
+export default function CriticalDamage() {
+  const criticalDamageValue = useRecoilValue(totalCriticalDamage);
   const showCriticalValue = useRecoilValue(isShowing(ShowingType.Critical));
 
   if (!showCriticalValue) {
@@ -24,9 +24,9 @@ export default function CritChance() {
       direction="horizontal"
       gap={3}
     >
-      <ImageIcon icon={icon} tooltip="Critical hit chance" />
+      <ImageIcon icon={icon} tooltip="Critical damage bonus" />
 
-      <span>{`${formatPercentage(criticalChanceValue)}`}</span>
+      <span>{formatPercentage(criticalDamageValue)}</span>
     </Stack>
   );
 }

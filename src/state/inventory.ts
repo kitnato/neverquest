@@ -1,10 +1,10 @@
 import { atom, selector } from "recoil";
 
-import { NO_ARMOR, NO_TRINKET, NO_SHIELD, NO_WEAPON } from "@neverquest/constants/gear";
+import { NO_ARMOR, NO_SHIELD, NO_WEAPON } from "@neverquest/constants/gear";
 import { localStorageEffect } from "@neverquest/state/effects";
-import { Armor, Inventory, Shield, Trinket, Weapon } from "@neverquest/types";
+import { Armor, Inventory, Shield, Weapon } from "@neverquest/types";
 import { StorageKey } from "@neverquest/types/enums";
-import { isArmor, isShield, isTrinket, isWeapon } from "@neverquest/types/type-guards";
+import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 
 // ATOMS
 
@@ -72,24 +72,6 @@ export const shield = selector({
     }
 
     return NO_SHIELD;
-  },
-});
-
-export const trinket = selector({
-  key: "trinket",
-  get: ({ get }) => {
-    const currentInventory = get(inventory);
-    const equippedTrinketID = Object.getOwnPropertySymbols(currentInventory).filter((id) => {
-      const { isEquipped, item } = currentInventory[id];
-
-      return isEquipped && isTrinket(item);
-    })[0];
-
-    if (equippedTrinketID) {
-      return currentInventory[equippedTrinketID].item as Trinket;
-    }
-
-    return NO_TRINKET;
   },
 });
 

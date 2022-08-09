@@ -1,11 +1,11 @@
-import { Armor, Gear, Item, Shield, Trinket, Weapon } from "@neverquest/types";
+import { Armor, Gear, Item, Shield, Weapon } from "@neverquest/types";
 
 export function isArmor(gear: unknown): gear is Armor {
   return isObject(gear) && gear.protection !== undefined;
 }
 
 export function isGear(gear: unknown): gear is Gear {
-  return isObject(gear) && (isArmor(gear) || isShield(gear) || isTrinket(gear) || isWeapon(gear));
+  return isObject(gear) && (isArmor(gear) || isShield(gear) || isWeapon(gear));
 }
 
 export function isItem(item: unknown): item is Item {
@@ -18,11 +18,6 @@ function isObject(value: unknown): value is Record<string, unknown> {
 
 export function isShield(gear: unknown): gear is Shield {
   return isObject(gear) && gear.block !== undefined;
-}
-
-// TODO
-export function isTrinket(gear: unknown): gear is Trinket {
-  return false;
 }
 
 export function isWeapon(gear: unknown): gear is Weapon {

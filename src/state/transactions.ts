@@ -58,7 +58,7 @@ import {
   SkillStatus,
 } from "@neverquest/types/enums";
 import { ReserveChangeProps } from "@neverquest/types/props";
-import { isArmor, isItem, isShield, isTrinket, isWeapon } from "@neverquest/types/type-guards";
+import { isArmor, isItem, isShield, isWeapon } from "@neverquest/types/type-guards";
 import {
   AnimationSpeed,
   AnimationType,
@@ -247,12 +247,6 @@ export const itemEquip = selector({
 
       if (!get(isShowing(ShowingType.BlockChance))) {
         set(isShowing(ShowingType.BlockChance), true);
-      }
-    }
-
-    if (isTrinket(item)) {
-      if (!get(isShowing(ShowingType.Trinket))) {
-        set(isShowing(ShowingType.Trinket), true);
       }
     }
 

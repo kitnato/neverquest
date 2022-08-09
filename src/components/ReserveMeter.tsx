@@ -1,4 +1,4 @@
-import { RecoilState, RecoilValueReadOnly, useRecoilValue } from "recoil";
+import { RecoilValueReadOnly, useRecoilValue } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import { UIAttachment, UIVariant } from "@neverquest/types/ui";
@@ -9,7 +9,7 @@ export default function ReserveMeter({
   atomMaximum,
 }: {
   attached?: UIAttachment;
-  atom: RecoilState<number>;
+  atom: RecoilValueReadOnly<number>;
   atomMaximum: RecoilValueReadOnly<number>;
 }) {
   const atomValue = useRecoilValue(atom);

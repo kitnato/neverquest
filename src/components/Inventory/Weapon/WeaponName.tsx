@@ -1,7 +1,7 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { NO_WEAPON } from "@neverquest/constants/gear";
+import { NO_WEAPON, WEAPON_CLASS_ICONS } from "@neverquest/constants/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { Weapon } from "@neverquest/types";
 import { ShowingType } from "@neverquest/types/enums";
@@ -10,19 +10,15 @@ import {
   formatMilliseconds,
   getDamagePerSecond,
 } from "@neverquest/utilities/helpers";
+import { hasKnapsack } from "@neverquest/state/character";
 
 export default function WeaponName({ weapon }: { weapon: Weapon }) {
+  const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const showDPSValue = useRecoilValue(isShowing(ShowingType.DamagePerSecond));
 
-  const { damage, name, rate, staminaCost, type, weaponClass, weight } = weapon;
-
-  const WeaponType = () => (
-    <tr>
-      <td className="fst-italic text-end">Type:</td>
-
-      <td>{capitalizeAll(type)}</td>
-    </tr>
-  );
+  const { damage, name, rate, staminaCost, weaponClass, weight } = weapon;
+  const Icon = WEAPON_CLASS_ICONS[weaponClass];
+  const italicClass = "fst-italic text-end";
 
   return (
     <OverlayTrigger
@@ -34,7 +30,7 @@ export default function WeaponName({ weapon }: { weapon: Weapon }) {
             <Table borderless size="sm" style={{ margin: 0 }}>
               <tbody>
                 <tr>
-                  <td className="fst-italic text-end">Damage:</td>
+                  <td className={italicClass}>Damage:</td>
 
                   <td>{`${damage}${
                     showDPSValue
@@ -47,35 +43,36 @@ export default function WeaponName({ weapon }: { weapon: Weapon }) {
                 </tr>
 
                 <tr>
-                  <td className="fst-italic text-end">Attack rate:</td>
+                  <td className={italicClass}>Attack rate:</td>
 
                   <td>{formatMilliseconds(rate)}</td>
                 </tr>
 
-                {weapon !== NO_WEAPON ? (
+                {weapon !== NO_WEAPON && (
                   <>
                     <tr>
-                      <td className="fst-italic text-end">Stamina cost:</td>
+                      <td className={italicClass}>Stamina cost:</td>
 
                       <td>{staminaCost}</td>
                     </tr>
 
-                    <WeaponType />
-
                     <tr>
-                      <td className="fst-italic text-end">Class:</td>
+                      <td className={italicClass}>Class:</td>
 
-                      <td>{weaponClass}</td>
+                      <td>
+                        <Icon width={16} />
+                        &nbsp;{capitalizeAll(weaponClass)}
+                      </td>
                     </tr>
 
-                    <tr>
-                      <td className="fst-italic text-end">Weight:</td>
+                    {hasKnapsackValue && (
+                      <tr>
+                        <td className={italicClass}>Weight:</td>
 
-                      <td>{weight}</td>
-                    </tr>
+                        <td>{weight}</td>
+                      </tr>
+                    )}
                   </>
-                ) : (
-                  <WeaponType />
                 )}
               </tbody>
             </Table>

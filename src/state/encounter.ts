@@ -58,7 +58,6 @@ export const location = selector({
 
       return LOCRA.generateLocation({
         isNSFW: nsfwValue,
-        // TODO - affix probabilities
         hasPrefix: Math.random() < 0.8,
         hasSuffix: Math.random() < 0.1 * Math.ceil(levelValue / 2),
       });

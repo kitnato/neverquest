@@ -19,29 +19,25 @@ export enum AffixTag {
   LowQuality = "lowQuality",
 }
 
-export type ArtifactQuery =
-  | {
-      subtype?: ArmorType;
-      type: ArtifactType.Armor;
-    }
-  | {
-      subtype?: ShieldType;
-      type: ArtifactType.Shield;
-    }
-  | {
-      subtype: undefined;
-      type: ArtifactType.Trinket;
-    }
-  | {
-      subtype?: WeaponType;
-      type: ArtifactType.Weapon;
-    };
+export interface ArmorQuery {
+  subtype?: ArmorType;
+  type: ArtifactType.Armor;
+}
 
 export enum ArtifactType {
   Armor = "armor",
   Shield = "shield",
-  Trinket = "trinket",
   Weapon = "weapon",
+}
+
+export interface ShieldQuery {
+  subtype?: ShieldType;
+  type: ArtifactType.Shield;
+}
+export interface WeaponQuery {
+  subtype?: WeaponType;
+  type: ArtifactType.Weapon;
+  weaponClass: WeaponClass;
 }
 
 export enum Category {
@@ -68,6 +64,12 @@ export enum ShieldType {
   Medium = "medium",
   Small = "small",
   Tower = "tower",
+}
+
+export enum WeaponClass {
+  Blunt = "blunt",
+  Piercing = "piercing",
+  Slashing = "slashing",
 }
 
 export enum WeaponType {

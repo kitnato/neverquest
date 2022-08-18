@@ -51,7 +51,7 @@
     ]
   },
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "vite build",
     "format": "prettier --write .",
     "lint-code": "eslint --fix --ext .ts,.tsx .",
     "lint-styles": "stylelint '**/*.css'",

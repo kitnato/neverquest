@@ -14,7 +14,7 @@ export default function ImageIcon({
   placement?: OverlayPlacement;
   tooltip?: JSX.Element | string;
 }) {
-  const IconStyled = <Icon style={{ height: 35, transform: `scaleX(${flipped ? -1 : 1})` }} />;
+  const IconStyled = <Icon style={{ height: 36, transform: `scaleX(${flipped ? -1 : 1})` }} />;
 
   if (tooltip) {
     return (

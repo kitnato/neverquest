@@ -88,7 +88,6 @@ export enum ShowingType {
   TotalAttackRateSummary,
   TotalDamageSummary,
   TotalProtection,
-  Trinket,
   Weapon,
   WildernessStatus,
 }
@@ -147,9 +146,7 @@ export enum StorageKey {
   StatusElement = "statusElement",
 }
 
-export enum WeaponClass {
-  Balanced = "Balanced",
-  Heavy = "Heavy",
-  Light = "Light",
-  TwoHanded = "Two-handed",
+export enum WeaponGrip {
+  OneHanded,
+  TwoHanded,
 }

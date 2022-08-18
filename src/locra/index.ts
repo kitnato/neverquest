@@ -5,10 +5,12 @@ import locations from "@neverquest/locra/db-locations.json";
 import {
   AffixTag,
   AffixType,
-  ArtifactQuery,
+  ArmorQuery,
   Category,
   CreatureType,
   GeneratorParameters,
+  ShieldQuery,
+  WeaponQuery,
 } from "@neverquest/locra/types";
 import { capitalizeAll } from "@neverquest/utilities/helpers";
 
@@ -93,12 +95,13 @@ export default class LOCRA {
     hasSuffix?: boolean;
     isNSFW?: boolean;
     tags?: AffixTag[];
-    query: ArtifactQuery;
+    query: ArmorQuery | ShieldQuery | WeaponQuery;
   }) {
-    const { subtype, type } = query;
+    const { subtype, type, weaponClass } = query as WeaponQuery;
     const filteredArtifacts = artifacts.filter(
       (artifact) =>
         (subtype ? artifact.subtype === subtype : true) &&
+        (artifact.class && weaponClass ? artifact.class === weaponClass : true) &&
         artifact.type === type &&
         (isNSFW
           ? !!artifact.isNSFW === true || !!artifact.isNSFW === false

@@ -6,7 +6,6 @@ import { Gear, Item as ItemType } from "@neverquest/types";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 
 export default function InventoryElement({ item }: { item: Gear | ItemType }) {
-  // TODO - all types
   if (isArmor(item)) {
     return <ArmorInventory armor={item} />;
   }

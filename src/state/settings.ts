@@ -11,7 +11,7 @@ export const autoEquip = atom({
   key: StorageKey.AutoEquip,
 });
 
-// TODO - move?
+// TODO - move.
 export const isGameOver = atom({
   default: false,
   effects: [localStorageEffect<boolean>(StorageKey.IsGameOver)],

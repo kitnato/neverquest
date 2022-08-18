@@ -1,5 +1,5 @@
-import { ShieldType, WeaponType } from "@neverquest/locra/types";
-import { ArmorClass, WeaponClass } from "@neverquest/types/enums";
+import { ShieldType, WeaponClass, WeaponType } from "@neverquest/locra/types";
+import { ArmorClass, WeaponGrip } from "@neverquest/types/enums";
 import { SVGIcon } from "@neverquest/types/props";
 
 export type Armor = ItemBase & {
@@ -54,7 +54,6 @@ interface ItemBase {
   weight: number;
 }
 
-// TODO - add Trinket
 export type Gear = Armor | Shield | Weapon;
 
 export type Shield = ItemBase & {
@@ -71,13 +70,11 @@ export interface Skill {
   price: number;
 }
 
-// TODO
-export type Trinket = ItemBase;
-
 export type Weapon = ItemBase & {
   damage: number;
+  grip: WeaponGrip;
   rate: number;
   staminaCost: number;
   type: WeaponType;
-  weaponClass?: WeaponClass;
+  weaponClass: WeaponClass;
 };

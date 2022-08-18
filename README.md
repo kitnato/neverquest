@@ -2,7 +2,7 @@
 
 _An irreverent UI-based incremental action role-playing game._
 
-This README serves as a gameplay guide, technical manual and glossary of terms. For anything prefaced with a `[TODO]` tag, see the [roadmap](#roadmap).
+This README serves as a gameplay guide, technical manual and glossary of terms. For anything prefaced with a `TODO` tag, see the [roadmap](#roadmap).
 
 `[SCREENSHOT]`
 
@@ -32,7 +32,7 @@ It is [regenerated](#stamina-regeneration-rate) over time, at a faster initial p
 
 #### Energy
 
-`[TODO]`
+`TODO`
 
 Consumed when activating [skills](#skills), [auras](#auras) and [sorceries](#sorceries), regenerated over time.
 
@@ -48,7 +48,7 @@ Gained from selling scrap and items to the [merchant](#merchant) and dropped by 
 
 Gained from killing monsters and disenchanting gear. Primarily spent on attribute ranks. Essence cost increases for every such rank allocation.
 
-`[TODO]` Essence can also be used to enchant gear.
+`TODO` Essence can also be used to enchant gear.
 
 #### Scrap
 
@@ -60,25 +60,49 @@ Attributes each provide a direct increasing effect for each rank. Each rank allo
 
 [Essence](#essence) is used to allocate ranks. The cost of allocation is increased for every rank.
 
+#### Acumen
+
+`TODO`
+
+Sorcery casting rate.
+
 #### Agility
 
-Chance to dodge a monster's attack.
+Affects [dodge chance](#dodge-chance). Requires skill: [Quick Reflexes](#quick-reflexes).
 
 #### Dexterity
 
 Chance of landing a critical hit.
 
+#### Cruelty
+
+Affects [bleed damage](#bleed-damage). Requires skill: [Anatomy](#anatomy).
+
 #### Endurance
 
 Maximum total stamina resource.
+
+#### Finesse
+
+Affects [parry chance](#parry-chance). Requires skill: [Escrime](#escrime).
 
 #### Fortitude
 
 Stamina regeneration rate.
 
+#### Intellect
+
+`TODO`
+
+Energy regeneration rate.
+
 #### Luck
 
 Amount of loot dropped by monsters.
+
+#### Might
+
+Affects [stagger duration](#stagger). Requires skill: [Traumatology](#traumatology).
 
 #### Perception
 
@@ -96,6 +120,12 @@ Rate of attack.
 
 Base damage of an attack.
 
+#### Tenacity
+
+`TODO`
+
+Amount of damage taken without needing to [recover](#recovery-rate).
+
 #### Vigor
 
 Health regeneration rate.
@@ -104,27 +134,9 @@ Health regeneration rate.
 
 Maximum total health resource.
 
-#### Acumen
-
-`[TODO]`
-
-Sorcery casting rate.
-
-#### Intellect
-
-`[TODO]`
-
-Energy regeneration rate.
-
-#### Tenacity
-
-`[TODO]`
-
-Amount of damage taken without needing to [recover](#recovery-rate).
-
 #### Wisdom
 
-`[TODO]`
+`TODO`
 
 Total [energy](#energy).
 
@@ -140,13 +152,21 @@ Requires toggling on in the global [settings](#settings). If on, shows the expec
 
 Time duration between attacks, not considering any interruptions such as [recovery](#recovery-rate).
 
+#### Bleed chance
+
+Percentage determining the chance that when attacking, the given [bleed damage](#bleed-damage) of the current weapon's damage is inflicted on the monster over 2.5 seconds.
+
+#### Bleed damage
+
+Percentage of the weapon's total damage that is inflicted over time after a successful attack with bleed. Damage proportional to this total bleed damage is taken every 100 milliseconds until duration (2.5 seconds total) is complete.
+
 #### Block chance
 
-Percentage chance that when defending, all incoming non-protected damage is blocked.
+Percentage determining the chance that when defending, all incoming non-protected damage is blocked.
 
 #### Critical chance
 
-Percentage chance that when attacking, critical damage is dealt, which multiplies [total damage](#total-damage).
+Percentage determining the chance that when attacking, critical damage is dealt, which multiplies [total damage](#total-damage).
 
 #### Critical damage
 
@@ -172,6 +192,14 @@ Amount of damage that is discarded from the total when defending.
 
 Recovery occurs when the character is dealt damage, halting regeneration of [reserves](#reserves) and the [attack meter](#attack-rate). It is bounded by a certain duration.
 
+#### Stagger chance
+
+Percentage determining the chance of [incapacitating](#stagger) the monster when attacking or defending based on the current [gear](#gear) ([shields](#shields) and [blunt weapons](#blunt-weapon)) for a certain [duration](#stagger-duration).
+
+#### Stagger duration
+
+Time until the monster recovers from incapacitation until it can continue attacking.
+
 #### Stamina regeneration rate
 
 Time duration until [stamina](#stamina) is restored by one point.
@@ -196,15 +224,21 @@ Apart from attacking, retreating and defending, there are several mechanics that
 
 Some of the following effects are intrinsic to gear and can't be controlled directly the way [attributes](#attributes) are. Others also don't appear as part of [statistics](#statistics), as they become apparent in the character and monster status screens.
 
+#### Bleed
+
+Certain successful attacks by a monster or the character can inflict bleed, a damage over time effect consisting of a total amount of damage inflicted regularly (every 100 milliseconds) over a certain period of time (2.5 seconds).
+
+For the character, this is determined by the [bleed chance](#bleed-chance) and [bleed damage](#bleed-damage) attributes.
+
 #### Block
 
-A successful block by the character upon a monster's attack will negate all damage done, yet costs [stamina](#stamina). Blocking will also inflict a certain [stagger](#stagger) duration on the monster.
+A successful block by the character upon a monster's attack will negate all damage done, yet costs [stamina](#stamina). Blocking may also inflict [stagger](#stagger) on the monster, depending on the acquisition of the [Traumatology](#traumatology) skill.
 
 The overall chance to block an attack is determined by the [block chance](#block-chance) statistic.
 
 #### Deflection
 
-`[TODO]`
+`TODO`
 
 The chance for the character to completely ignore all effects of an incoming monster's non-physical damage and/or [ailment](#ailments).
 
@@ -213,10 +247,6 @@ The chance for the character to completely ignore all effects of an incoming mon
 Dodging an incoming attack negates all damage, but doesn't cost any stamina the way [blocking](#block) does.
 
 The overall chance to dodge an attack is determined by the [dodge chance](#dodge-chance) statistic.
-
-#### Execution
-
-A successful execution by the character immediately kills the monster when the attack lands.
 
 #### Exhaustion
 
@@ -232,11 +262,17 @@ The looted resources can only be collected once the [wave](#wilderness) is compl
 
 A successful parry will deal 50% of the total damage of the attack and reflect the other 50% back to the attacker.
 
-The overall chance to parry an attack is determined by the [parry chance](#parry-chance) statistic.
+The overall chance to parry an attack is determined by the [parry chance](#parry-chance) statistic, which is influenced by the current gear ([slashing weapons](#slashing-weapon) and [medium shields](#medium-shield)) and the [Finesse](#finesse) attribute.
+
+Parrying will only be available after acquiring the [Escrime](#escrime) skill.
 
 #### Stagger
 
 When staggered, the monster will not be able to attack for a certain duration. The character is considered staggered themselves when they are [recovering](#recovery-rate).
+
+The overall [stagger chance](#stagger-chance) statistic is determined by the current gear ([shields](#shields) and [blunt weapons](#blunt-weapon)). The [stagger duration](#stagger-duration) is influenced by the [Might](#might) attribute and current gear as well.
+
+Parrying will only be available after acquiring the [Traumatology](#traumatology) skill.
 
 ## Encounter
 
@@ -262,7 +298,7 @@ The [merchant](#merchant) is always present from the start. Other crew members c
 
 #### Alchemist
 
-`[TODO]`
+`TODO`
 
 Purchase [elixirs](#elixirs), [salves](#salves) and [poisons](#poisons).
 
@@ -274,13 +310,13 @@ Repairs, dismantles, crafts and upgrades [weapons](#weapons) and [armor](#armor)
 
 Restores all [health](#health), [stamina](#stamina) and [energy](#energy) when purchasing a hot meal.
 
-`[TODO]` Grants a Well Fed [buff](#buffs) for the first wave (+10% [mastery](#mastery) gain).
+`TODO` Grants a Well Fed [buff](#buffs) for the first wave (+10% [mastery](#mastery) gain).
 
 #### Medic
 
 Their presence saves the character from death (no restart necessary) once per wilderness level in return for a percentage of all of the character's current [resources](#resources). Upgrades to the medic's supplies, paid in coins and/or scrap, reduce this death payment.
 
-Also sells first aid kits that can cure a bleed effect and restore a certain amount of health over time.
+Also sells first aid kits that can cure a [bleed](#bleed) effect and restore a certain amount of health over time.
 
 #### Mercenary
 
@@ -294,7 +330,7 @@ The merchant's inventory of items will grow and diversify after each new wildern
 
 #### Sorcerer
 
-`[TODO]`
+`TODO`
 
 Acquire [sorceries](#sorceries) and [auras](#auras). Acquire certain attributes.
 
@@ -302,11 +338,11 @@ Acquire [sorceries](#sorceries) and [auras](#auras). Acquire certain attributes.
 
 Sells upgrades for increasing maximum [encumbrance](#encumbrance.
 
-`[TODO]` Also allows adding extra [potion](#potions) slots, as well as extra [trinket](#trinkets) slots.
+`TODO` Also allows adding extra [potion](#potions) slots, as well as extra [trinket](#trinkets) slots.
 
 #### Witch
 
-`[TODO]`
+`TODO`
 
 Enchant and disenchant [gear](#gear), requiring essence. Acquire certain attributes.
 
@@ -352,55 +388,54 @@ Standard type that has no special features.
 
 ###### Ranged
 
-`[TODO]`
+`TODO`
+
+##### Weapon grip
+
+A weapon can either by one-handed or two-handed, taking up the corresponding gear slots when equipped.
+
+###### One-handed
+
+- 1 slot
+- Low damage
+- High attack rate
+- Low stamina requirement
+
+###### Two-handed
+
+`TODO`
+
+- 2 slots
+- High damage
+- Low attack rate
+- High stamina requirement
+- Chance for [execution](#execution) on hit.
+
+###### Dual wield
+
+`TODO`
+
+A one-handed weapon in each slot. Provides a penalty to damage and attack rate to the off-hand weapon.
 
 ##### Weapon class
 
-Whatever its [type](#weapon-type), a weapon falls into one of several classes that intrinsically grants certain modifiers.
-
-Each slot corresponds to one hand being used to wield said weapon. Only one weapon can be equipped at a time, unless the [dual wielding](#dual-wielding) skill is acquired.
+Whatever its [type](#weapon-type) or [grip](#weapon-grip), a weapon falls into one of several classes that intrinsically grants certain modifiers. These modifiers are only relevant if the associated [passive skill](#passive-skills) is acquired.
 
 ###### Unarmed
 
 No initial modifiers.
 
-###### Light weapon
+###### Blunt weapon
 
-- 1 slot
-- Low damage
-- High attack rate
-- Low stamina cost
-- `[HQ]` Chance to [bleed](#bleed)
-- Low cost
+Adds chance to [stagger](#stagger) for a certain duration. Required skill: [Traumatology](#traumatology).
 
-###### Balanced weapon
+###### Piercing weapon
 
-- 1 slot
-- Medium damage
-- Medium attack rate
-- Low stamina cost
-- `[HQ]` +% [parry chance](#parry-chance)
-- Medium cost
+Chance to inflict [bleed](#bleed). Required skill: [Traumatology](#traumatology).
 
-###### Heavy weapon
+###### Slashing weapon
 
-- 1 slot
-- High damage
-- Low attack rate
-- Medium stamina cost
-- `[HQ]` Chance to [stagger](#stagger) for 1.5s
-- High cost
-
-###### Two-handed weapon
-
-`[TODO]`
-
-- 2 slots
-- Highest damage
-- Lowest attack rate
-- High stamina requirement
-- `[HQ]` Chance for [execution](#execution)
-- Medium cost
+Chance to [parry](#parry). Required skill: [Escrime](#escrime).
 
 #### Armor
 
@@ -415,25 +450,25 @@ No initial modifiers.
 ##### Hide armor
 
 - Low protection
-- `[HQ]` Chance to avoid [bleed](#bleed)
+- `[HQ]` Lower [bleed](#bleed) damage
 - Low cost
 
 ##### Reinforced armor
 
 - Medium protection
 - Low -% dodge
-- `[HQ]` Chance to avoid bleed
+- `[HQ]` Lower bleed damage & duration
 - `[HQ]` +% [block chance](#block-chance)
 - Medium cost
 
 ##### Plate armor
 
-`[TODO]`
+`TODO`
 
 - High protection
 - High -% dodge
 - -% attack rate
-- `[HQ]` Chance to avoid bleed
+- `[HQ]` Lower bleed damage & duration
 - `[HQ]` +% block chance
 - `[HQ]` Chance to [deflect](#deflection) spells
 - High cost
@@ -442,7 +477,7 @@ No initial modifiers.
 
 This slot allows the wielding of [shields](#shields).
 
-`[TODO]` Can also be taken up by [two-handed weapons](##two-handed) and any other off-hand items.
+`TODO` Can also be taken up by [two-handed weapons](#two-handed) and any other off-hand items.
 
 ##### Shields
 
@@ -488,7 +523,7 @@ Allows the character to go to the caravan regardless of if the current wildernes
 
 ### Potions
 
-`[TODO]`
+`TODO`
 
 One of three types that take up the potion slot(s).
 
@@ -508,7 +543,7 @@ Grants a temporary [buff](#buffs), or cures or temporarily immunizes against [ai
 
 ## Mastery
 
-`[TODO]`
+`TODO`
 
 Using a particular weapon or armor type increases its associated mastery. Weapon mastery increases when attacking and armor mastery increases when being hit.
 
@@ -520,7 +555,7 @@ Skills are acquired from caravan crew and can either be activated or passive.
 
 ### Activated skills
 
-`[TODO]`
+`TODO`
 
 Once acquired, activating a skill requires [energy](#energy).
 
@@ -532,6 +567,10 @@ Cast spells that remain active until dispelled. Provides [buffs](#buffs) in retu
 
 Special combat skills that can be activated during combat.
 
+##### Execute
+
+Available if the monster is at or below 20% health and kills it immediately.
+
 #### Sorceries
 
 Cast spells with immediate and/or over-time effects.
@@ -540,43 +579,49 @@ Cast spells with immediate and/or over-time effects.
 
 Permanent effects that once acquired always provide their benefits.
 
+#### Anatomy
+
+Unlocks [bleed](#bleed) when using [piercing](#piercing-weapon) weapons. Unlocks the [Cruelty](#cruelty) attribute.
+
 #### Armorcraft
 
 Allows the use of [reinforced](#reinforced-armor) and [plate](#plate-armor) armors.
 
 #### Assassination
 
-Unlocks [dexterity](#dexterity) and [perception](#perception) attributes, as well as [critical chance](#critical-chance) and [critical damage](#critical-damage) modifiers on [gear](#gear).
-
-#### Butchery
-
-Unlocks the ability to [execute](#execution), as well as its modifiers on gear.
+Unlocks [dexterity](#dexterity) and [perception](#perception) attributes, as well as [critical chance](#critical-chance) and [critical damage](#critical-damage) modifiers on [weapons](#weapons).
 
 #### Calisthenics
 
 Unlocks the [fortitude](#fortitude) and [vigor](#vigor) attributes.
 
+#### Dual wielding
+
+`TODO`
+
+Allows the use of a one-handed weapon in main hand as well as offhand.
+
 #### Escrime
 
-Unlocks the ability to [parry](#parry), as well as its modifiers on gear.
+Unlocks the ability to [parry](#parry) when using [slashing](#slashing-weapon) weapons and [medium shields](#medium-shield). Unlocks the [Finesse](#finesse) attribute.
 
 #### Siegecraft
 
-Allows the use of [heavy](#heavy-weapon) and [two-handed](#two-handed-weapon) weapons.
+`TODO`
+
+Allows the use of [two-handed](#two-handed) weapons.
 
 #### Shieldcraft
 
 Allows the use of [medium](#medium-shield) and [tower](#tower-shield) shields.
 
-#### Quick reflexes
+#### Traumatology
+
+Unlocks the ability to [stagger](#stagger) when using [blunt](#blunt-weapon) weapons and [blocking](#block) with shields. Unlocks the [Might](#might) attribute.
+
+#### Quick Reflexes
 
 Unlocks [agility](#agility) attribute and [dodge chance](#dodge-chance) modifiers on gear.
-
-#### Dual wielding
-
-`[TODO]`
-
-Allows the use of a 1-handed weapon in main hand as well as offhand.
 
 ## Status effects
 
@@ -586,17 +631,17 @@ Temporary or permanent effects granted or changing the current monster or charac
 
 Negative status effects that dampen the character or monster. For the character, they may be treated by [potions](#potions) and other items.
 
-#### Bleed
+#### Bleeding
 
-Certain successful attacks by a monster or the character can inflict bleed, a damage over time effect constrained by a total amount of damage inflicted regularly over a certain period of time. Bleed effects can be stemmed by a [first aid kit](#medic) or certain [salves](#salves).
+Certain monster attacks may apply a [bleed](#bleed) effect on the character. This can be stemmed by a [first aid kit](#medic) or certain [salves](#salves).
 
 #### Diseased
 
-`[TODO]`
+`TODO`
 
 #### Poisoned
 
-`[TODO]`
+`TODO`
 
 ### Buffs
 
@@ -604,17 +649,19 @@ Positive status effects that boost or improve the character or monster.
 
 ## Traits
 
-`[TODO]`
+`TODO`
 
 Traits are permanent passive abilities that are unlocked when reaching certain mastery levels or a certain attribute value.
 
+- Brawler: an unequipped shield adds to unarmed damage, using both hands.
 - Bruiser: current stamina adds unarmed bonus damage.
 - Nudist: double dodge rate when not wearing any armor.
 - Scrounger: double looting rate.
+- Shredder: bleed damage is all taken immediately.
 
 ## Achievements
 
-`[TODO]`
+`TODO`
 
 Meta progression. Grant bonuses when completed.
 
@@ -680,7 +727,7 @@ LOCRA can be considered somewhat independent of Neverquest, as it can be used ou
 
 ## Roadmap
 
-Neverquest is a work-in-progress. Several features marked with `[TODO]` are pending refinement and implementation.
+Neverquest is a work-in-progress. Several features marked with `TODO` are pending refinement and implementation.
 
 - `v1.0.0` [CURRENT] -
 

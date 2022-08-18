@@ -1,4 +1,4 @@
-import { ShieldType, WeaponType } from "@neverquest/locra/types";
+import { ShieldType, WeaponClass, WeaponType } from "@neverquest/locra/types";
 import Blacksmith from "@neverquest/components/Caravan/Blacksmith";
 import Cook from "@neverquest/components/Caravan/Cook";
 import Medic from "@neverquest/components/Caravan/Medic";
@@ -7,7 +7,7 @@ import Mercenary from "@neverquest/components/Caravan/Mercenary";
 import Tailor from "@neverquest/components/Caravan/Tailor";
 import { ITEM_COMPASS, ITEM_HEARTHSTONE, ITEM_KNAPSACK } from "@neverquest/constants/items";
 import { CrewMember, Item } from "@neverquest/types";
-import { ArmorClass, CrewType, WeaponClass } from "@neverquest/types/enums";
+import { ArmorClass, CrewType } from "@neverquest/types/enums";
 
 export const CREW_MEMBERS: Record<CrewType, CrewMember> = {
   [CrewType.Blacksmith]: {
@@ -15,7 +15,7 @@ export const CREW_MEMBERS: Record<CrewType, CrewMember> = {
     description: "Crafts superior gear.",
     interaction: "Craft",
     hirableLevel: 5,
-    monologues: ["What can I make ya?"],
+    monologues: ["In need of better gear?"],
     name: "Blacksmith",
     price: 35,
   },
@@ -101,7 +101,7 @@ export const MERCHANT_OFFERS: Record<
   1: [
     {
       type: WeaponType.Melee,
-      weaponClass: WeaponClass.Light,
+      weaponClass: WeaponClass.Piercing,
     },
   ],
   2: [
@@ -118,7 +118,7 @@ export const MERCHANT_OFFERS: Record<
   5: [
     {
       type: WeaponType.Melee,
-      weaponClass: WeaponClass.Balanced,
+      weaponClass: WeaponClass.Slashing,
     },
     {
       armorClass: ArmorClass.Reinforced,
@@ -131,7 +131,7 @@ export const MERCHANT_OFFERS: Record<
   7: [
     {
       type: WeaponType.Melee,
-      weaponClass: WeaponClass.Heavy,
+      weaponClass: WeaponClass.Blunt,
     },
     {
       type: ShieldType.Tower,

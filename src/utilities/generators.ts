@@ -1,13 +1,15 @@
 import LOCRA from "@neverquest/locra";
-import { AffixTag, ArtifactType, ShieldType, WeaponType } from "@neverquest/locra/types";
 import {
-  ARMOR_SPECIFICATIONS,
-  SHIELD_SPECIFICATIONS,
-  WEAPON_SPECIFICATIONS,
-} from "@neverquest/constants/gear";
+  AffixTag,
+  ArtifactType,
+  ShieldType,
+  WeaponClass,
+  WeaponType,
+} from "@neverquest/locra/types";
+import { ARMOR_SPECIFICATIONS, SHIELD_SPECIFICATIONS } from "@neverquest/constants/gear";
 import { Armor, Shield, Weapon } from "@neverquest/types";
-import { ArmorClass, WeaponClass } from "@neverquest/types/enums";
-import { getFromRange } from "@neverquest/utilities/helpers";
+import { ArmorClass, WeaponGrip } from "@neverquest/types/enums";
+import { getFromRange, getWeaponSpecifications } from "@neverquest/utilities/helpers";
 
 export function generateArmor({
   armorClass,
@@ -107,10 +109,11 @@ export function generateWeapon({
   type: WeaponType;
   weaponClass: WeaponClass;
 }): Weapon {
-  const { damageModifier, rateRange, staminaCost, weight } = WEAPON_SPECIFICATIONS[weaponClass];
+  const { damage, price, rate, staminaCost, weight } = getWeaponSpecifications(level);
 
   return {
-    damage: Math.ceil(level * damageModifier),
+    damage,
+    grip: WeaponGrip.OneHanded, // TODO
     name:
       name ||
       LOCRA.generateArtifact({
@@ -121,10 +124,11 @@ export function generateWeapon({
         query: {
           subtype: type,
           type: ArtifactType.Weapon,
+          weaponClass,
         },
       }),
-    price: level * 2 + Math.floor(level / 2),
-    rate: getFromRange(rateRange),
+    price,
+    rate,
     staminaCost,
     type,
     weaponClass,

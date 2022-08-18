@@ -1,6 +1,9 @@
-import { ShieldType, WeaponType } from "@neverquest/locra/types";
-import { Armor, Shield, Trinket, Weapon } from "@neverquest/types";
-import { ArmorClass, WeaponClass } from "@neverquest/types/enums";
+import { ReactComponent as IconBlunt } from "@neverquest/icons/gavel.svg";
+import { ReactComponent as IconPiercing } from "@neverquest/icons/bullseye.svg";
+import { ReactComponent as IconSlashing } from "@neverquest/icons/crossed-slashes.svg";
+import { ShieldType, WeaponClass, WeaponType } from "@neverquest/locra/types";
+import { Armor, Shield, Weapon } from "@neverquest/types";
+import { ArmorClass, WeaponGrip } from "@neverquest/types/enums";
 import { RangeProps } from "@neverquest/types/props";
 
 export const ARMOR_SPECIFICATIONS: Record<
@@ -37,19 +40,15 @@ export const NO_SHIELD: Shield = {
   weight: 0,
 };
 
-export const NO_TRINKET: Trinket = {
-  name: "None",
-  price: 0,
-  weight: 0,
-};
-
 export const NO_WEAPON: Weapon = {
   damage: 1,
+  grip: WeaponGrip.OneHanded,
   name: "Unarmed",
   price: 0,
   rate: 3000,
   staminaCost: 0,
   type: WeaponType.Melee,
+  weaponClass: WeaponClass.Blunt,
   weight: 0,
 };
 
@@ -77,32 +76,8 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
 };
 
-export const WEAPON_SPECIFICATIONS: Record<
-  WeaponClass,
-  { damageModifier: number; rateRange: RangeProps; staminaCost: number; weight: number }
-> = {
-  [WeaponClass.Balanced]: {
-    damageModifier: 2,
-    rateRange: { minimum: 3400, maximum: 4000 },
-    staminaCost: 2,
-    weight: 2,
-  },
-  [WeaponClass.Heavy]: {
-    damageModifier: 3,
-    rateRange: { minimum: 3900, maximum: 4500 },
-    staminaCost: 3,
-    weight: 3,
-  },
-  [WeaponClass.Light]: {
-    damageModifier: 1.25,
-    rateRange: { minimum: 3000, maximum: 3500 },
-    staminaCost: 1,
-    weight: 1,
-  },
-  [WeaponClass.TwoHanded]: {
-    damageModifier: 4,
-    rateRange: { minimum: 4000, maximum: 5000 },
-    staminaCost: 3,
-    weight: 4,
-  },
+export const WEAPON_CLASS_ICONS = {
+  [WeaponClass.Blunt]: IconBlunt,
+  [WeaponClass.Piercing]: IconPiercing,
+  [WeaponClass.Slashing]: IconSlashing,
 };

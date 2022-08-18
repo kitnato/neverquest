@@ -9,7 +9,6 @@ import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
-// TODO
 export default function Shield() {
   const shieldValue = useRecoilValue(shield);
   const showShieldValue = useRecoilValue(isShowing(ShowingType.Shield));

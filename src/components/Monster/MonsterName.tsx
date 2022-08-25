@@ -8,7 +8,7 @@ import { ReactComponent as IconLurking } from "@neverquest/icons/mouth-watering.
 import { isAttacking } from "@neverquest/state/character";
 import { isMonsterDead, monsterName } from "@neverquest/state/monster";
 
-export default function MonsterName() {
+export default function () {
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const monsterNameValue = useRecoilValue(monsterName);

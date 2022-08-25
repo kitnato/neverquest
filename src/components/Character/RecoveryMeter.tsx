@@ -8,7 +8,7 @@ import { totalRecoveryRate } from "@neverquest/state/statistics";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
-export default function RecoveryMeter() {
+export default function () {
   const [isRecoveringValue, setRecovering] = useRecoilState(isRecovering);
   const totalRecoveryRateValue = useRecoilValue(totalRecoveryRate);
   const [deltaRecovery, setDeltaRecovery] = useState(0);

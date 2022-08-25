@@ -12,7 +12,7 @@ import {
 } from "@neverquest/utilities/helpers";
 import { hasKnapsack } from "@neverquest/state/character";
 
-export default function WeaponName({ weapon }: { weapon: Weapon }) {
+export default function ({ weapon }: { weapon: Weapon }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const showDPSValue = useRecoilValue(isShowing(ShowingType.DamagePerSecond));
 

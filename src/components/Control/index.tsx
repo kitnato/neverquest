@@ -8,7 +8,7 @@ import InventoryButton from "@neverquest/components/Control/InventoryButton";
 import TravelButton from "@neverquest/components/Control/TravelButton";
 import { isGameOver } from "@neverquest/state/settings";
 
-export default function Control() {
+export default function () {
   const isGameOverValue = useRecoilValue(isGameOver);
 
   return (

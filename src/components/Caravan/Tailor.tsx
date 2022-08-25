@@ -1,4 +1,4 @@
 // TODO
-export default function Tailor() {
+export default function () {
   return <></>;
 }

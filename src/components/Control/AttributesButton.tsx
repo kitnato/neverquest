@@ -14,7 +14,7 @@ import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
-export default function AttributesButton({ isDisabled }: { isDisabled: boolean }) {
+export default function ({ isDisabled }: { isDisabled: boolean }) {
   const attributesIncreasableValue = useRecoilValue(attributesIncreasable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterEngagedValue = useRecoilValue(isMonsterEngaged);

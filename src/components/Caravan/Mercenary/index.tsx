@@ -6,7 +6,7 @@ import TrainedSkill from "@neverquest/components/Caravan/Mercenary/TrainedSkill"
 import { SKILLS_ORDER } from "@neverquest/constants/skills";
 import { skillsStatus } from "@neverquest/state/skills";
 
-export default function Mercenary() {
+export default function () {
   const { areTrainable, areTrained } = useRecoilValue(skillsStatus);
 
   return (

@@ -1,4 +1,4 @@
 // TODO
-export default function Medic() {
+export default function () {
   return <></>;
 }

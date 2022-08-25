@@ -5,7 +5,7 @@ import ImageIcon from "@neverquest/components/ImageIcon";
 import { ReactComponent as Icon } from "@neverquest/icons/wolverine-claws.svg";
 import { totalDamageMonster } from "@neverquest/state/monster";
 
-export default function MonsterDamage() {
+export default function () {
   const totalDamageMonsterValue = useRecoilValue(totalDamageMonster);
 
   return (

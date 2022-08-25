@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-export default function CheatQuest() {
+export default function () {
   const levelValue = useRecoilValue(level);
   const progressMaxValue = useRecoilValue(progressMax);
   const setLevelUp = useSetRecoilState(levelUp);

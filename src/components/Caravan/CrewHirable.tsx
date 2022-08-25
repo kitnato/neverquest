@@ -12,7 +12,7 @@ import { resourcesBalance } from "@neverquest/state/transactions";
 import { CrewStatus, CrewType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 
-export default function CrewHirable({ type }: { type: CrewType }) {
+export default function ({ type }: { type: CrewType }) {
   const [{ hireStatus }, setCrewMember] = useRecoilState(crew(type));
   const coinsValue = useRecoilValue(coins);
   const balanceResources = useSetRecoilState(resourcesBalance);

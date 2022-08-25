@@ -15,7 +15,7 @@ import { AnimationType, UIAttachment } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
 
-export default function Stamina() {
+export default function () {
   const showStaminaValue = useRecoilValue(isShowing(ShowingType.Stamina));
 
   if (!showStaminaValue) {

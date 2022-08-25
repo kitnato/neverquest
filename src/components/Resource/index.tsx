@@ -6,7 +6,7 @@ import { DeltaDisplay, AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 
-export default function Resource({
+export default function ({
   atom,
   Component,
   deltaAtom,

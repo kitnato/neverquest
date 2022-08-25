@@ -8,7 +8,7 @@ import { itemEquip, itemUnequip } from "@neverquest/state/transactions";
 import { isGear } from "@neverquest/types/type-guards";
 import { UIVariant } from "@neverquest/types/ui";
 
-export default function Inventory() {
+export default function () {
   const inventoryValue = useRecoilValue(inventory);
   const equipItem = useSetRecoilState(itemEquip);
   const unequipItem = useSetRecoilState(itemUnequip);

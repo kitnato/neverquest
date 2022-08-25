@@ -12,7 +12,7 @@ import { healthChange } from "@neverquest/state/transactions";
 import { UIAttachment } from "@neverquest/types/ui";
 import { DeltaType } from "@neverquest/types/enums";
 
-export default function Health() {
+export default function () {
   return (
     <Stack direction="horizontal" gap={3}>
       <ImageIcon Icon={Icon} tooltip="Health" />

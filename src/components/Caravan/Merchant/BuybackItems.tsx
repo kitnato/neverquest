@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import PurchasableItems from "@neverquest/components/Caravan/Merchant/PurchasableItems";
 import { merchantInventory } from "@neverquest/state/caravan";
 
-export default function BuyBackItems() {
+export default function () {
   const merchantInventoryValue = useRecoilValue(merchantInventory);
 
   const returnedItemIDs = Object.getOwnPropertySymbols(merchantInventoryValue).filter(

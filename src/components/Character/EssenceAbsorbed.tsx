@@ -8,7 +8,7 @@ import { essenceAbsorbed } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { DeltaType } from "@neverquest/types/enums";
 
-export default function EssenceAbsorbed() {
+export default function () {
   const essenceAbsorbedValue = useRecoilValue(essenceAbsorbed);
 
   return (

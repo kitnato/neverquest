@@ -13,7 +13,7 @@ import { statusElement } from "@neverquest/state/character";
 import { AnimationType } from "@neverquest/types/ui";
 import { animateElement } from "@neverquest/utilities/helpers";
 
-export default function Status() {
+export default function () {
   const element = useRef(null);
   const setStatusElement = useSetRecoilState(statusElement);
 

@@ -8,7 +8,7 @@ import { SKILLS } from "@neverquest/constants/skills";
 import { skills } from "@neverquest/state/skills";
 import { SkillStatus, SkillType } from "@neverquest/types/enums";
 
-export default function TrainableSkill({ type }: { type: SkillType }) {
+export default function ({ type }: { type: SkillType }) {
   const skillValue = useRecoilValue(skills(type));
 
   if (skillValue === SkillStatus.Trainable) {

@@ -12,7 +12,7 @@ import { monsterRegenerate } from "@neverquest/state/transactions";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
-export default function Monster() {
+export default function () {
   const setLooting = useSetRecoilState(isLooting);
   const [isMonsterEngagedValue, setMonsterEngaged] = useRecoilState(isMonsterEngaged);
   const isAttackingValue = useRecoilValue(isAttacking);

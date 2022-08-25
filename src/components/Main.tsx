@@ -13,7 +13,7 @@ import { useReset } from "@neverquest/state/SeedContext";
 import { isGameOver } from "@neverquest/state/settings";
 import { ShowingType } from "@neverquest/types/enums";
 
-export default function Main() {
+export default function () {
   const [isShowingGameOver, setIsShowingGameOver] = useRecoilState(isShowing(ShowingType.GameOver));
   const isGameOverValue = useRecoilValue(isGameOver);
 

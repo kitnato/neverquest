@@ -4,7 +4,7 @@ import { NO_SHIELD } from "@neverquest/constants/gear";
 import { Shield } from "@neverquest/types";
 import { capitalizeAll, formatMilliseconds, formatPercentage } from "@neverquest/utilities/helpers";
 
-export default function ShieldName({ shield }: { shield: Shield }) {
+export default function ({ shield }: { shield: Shield }) {
   const { block, name, stagger, staminaCost, type, weight } = shield;
 
   return (

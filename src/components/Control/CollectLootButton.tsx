@@ -9,7 +9,7 @@ import { resourcesBalance } from "@neverquest/state/transactions";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
-export default function CollectLootButton({ isDisabled }: { isDisabled: boolean }) {
+export default function ({ isDisabled }: { isDisabled: boolean }) {
   const hasLootedValue = useRecoilValue(hasLooted);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const balanceResources = useSetRecoilState(resourcesBalance);

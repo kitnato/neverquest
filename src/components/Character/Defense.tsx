@@ -9,7 +9,7 @@ import { AnimationType } from "@neverquest/types/ui";
 import { ShowingType } from "@neverquest/types/enums";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
-export default function Defense() {
+export default function () {
   const showBlockChanceValue = useRecoilValue(isShowing(ShowingType.BlockChance));
   const showDodgeChanceValue = useRecoilValue(isShowing(ShowingType.DodgeChance));
   const showTotalProtectionValue = useRecoilValue(isShowing(ShowingType.TotalProtection));

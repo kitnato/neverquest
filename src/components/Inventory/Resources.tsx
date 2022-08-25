@@ -7,7 +7,7 @@ import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 import { ShowingType } from "@neverquest/types/enums";
 
-export default function Resources() {
+export default function () {
   const showCoinsValue = useRecoilValue(isShowing(ShowingType.Coins));
   const showEssenceValue = useRecoilValue(isShowing(ShowingType.Essence));
   const showScrapValue = useRecoilValue(isShowing(ShowingType.Scrap));

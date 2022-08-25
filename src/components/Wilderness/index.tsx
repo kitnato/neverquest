@@ -8,7 +8,7 @@ import { isLevelCompleted } from "@neverquest/state/encounter";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
-export default function Wilderness() {
+export default function () {
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
 
   return (

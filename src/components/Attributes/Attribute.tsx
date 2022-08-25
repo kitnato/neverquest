@@ -12,7 +12,7 @@ import { resourcesBalance } from "@neverquest/state/transactions";
 import { AttributeType, DeltaType } from "@neverquest/types/enums";
 import { FloatingTextType, UIVariant } from "@neverquest/types/ui";
 
-export default function Attribute({ type }: { type: AttributeType }) {
+export default function ({ type }: { type: AttributeType }) {
   const [{ canAssign, points }, setAttribute] = useRecoilState(attributes(type));
   const attributeCostValue = useRecoilValue(attributeCost);
   const attributesIncreasableValue = useRecoilValue(attributesIncreasable);

@@ -8,7 +8,7 @@ import { totalStaggerRate } from "@neverquest/state/statistics";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
-export default function MonsterStaggerMeter() {
+export default function () {
   const [isStaggeredValue, setStaggered] = useRecoilState(isMonsterStaggered);
   const totalStaggerRateValue = useRecoilValue(totalStaggerRate);
   const [deltaStagger, setDeltaStagger] = useState(0);

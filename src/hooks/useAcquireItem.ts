@@ -11,7 +11,7 @@ import { itemEquip } from "@neverquest/state/transactions";
 import { Gear, Item } from "@neverquest/types";
 import { isArmor, isItem, isShield, isWeapon } from "@neverquest/types/type-guards";
 
-export default function useAcquireItem() {
+export default function () {
   const armorValue = useRecoilValue(armor);
   const autoEquipValue = useRecoilValue(autoEquip);
   const shieldValue = useRecoilValue(shield);

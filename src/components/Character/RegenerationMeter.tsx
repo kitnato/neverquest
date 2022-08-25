@@ -9,7 +9,7 @@ import { ReserveChangeProps } from "@neverquest/types/props";
 import { UIAttachment, UISize, UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
-export default function RegenerationMeter({
+export default function ({
   atomReserve,
   isReserveMaxedOut,
   regenerationRate,

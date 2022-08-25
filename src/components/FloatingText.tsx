@@ -12,7 +12,7 @@ type FloatingText = {
   key: string;
 };
 
-export default function FloatingText({ atom }: { atom: RecoilState<DeltaDisplay> }) {
+export default function ({ atom }: { atom: RecoilState<DeltaDisplay> }) {
   const deltaValue = useRecoilValue(atom);
   const resetDeltaValue = useResetRecoilState(atom);
 

@@ -10,7 +10,7 @@ import { AnimationType } from "@neverquest/types/ui";
 import { formatPercentage } from "@neverquest/utilities/helpers";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
-export default function CriticalDamage() {
+export default function () {
   const criticalDamageValue = useRecoilValue(totalCriticalDamage);
   const showCriticalValue = useRecoilValue(isShowing(ShowingType.Critical));
 

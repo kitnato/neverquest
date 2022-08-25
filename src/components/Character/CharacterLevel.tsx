@@ -8,7 +8,7 @@ import { characterLevel } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { DeltaType } from "@neverquest/types/enums";
 
-export default function CharacterLevel() {
+export default function () {
   const characterLevelValue = useRecoilValue(characterLevel);
 
   return (

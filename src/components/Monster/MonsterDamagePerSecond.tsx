@@ -9,7 +9,7 @@ import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 import { ShowingType } from "@neverquest/types/enums";
 
-export default function MonsterDamagePerSecond() {
+export default function () {
   const damagePerSecondMonsterValue = useRecoilValue(damagePerSecondMonster);
   const isShowingDamagePerSecond = useRecoilValue(isShowing(ShowingType.DamagePerSecond));
 

@@ -5,7 +5,7 @@ import CriticalDamage from "@neverquest/components/Character/CriticalDamage";
 import DamagePerSecond from "@neverquest/components/Character/DamagePerSecond";
 import TotalDamage from "@neverquest/components/Character/TotalDamage";
 
-export default function Offense() {
+export default function () {
   return (
     <Row>
       <Col>

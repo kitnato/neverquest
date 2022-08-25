@@ -8,7 +8,7 @@ import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
-export default function WildernessStatus() {
+export default function () {
   const showWildernessStatusValue = useRecoilValue(isShowing(ShowingType.WildernessStatus));
 
   if (!showWildernessStatusValue) {

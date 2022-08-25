@@ -15,7 +15,7 @@ import { defense } from "@neverquest/state/transactions";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
-export default function MonsterAttackMeter() {
+export default function () {
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isMonsterEngagedValue = useRecoilValue(isMonsterEngaged);

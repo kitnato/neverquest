@@ -9,7 +9,7 @@ import { resourcesBalance } from "@neverquest/state/transactions";
 import { SkillStatus, SkillType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 
-export default function TrainSkillButton({ type }: { type: SkillType }) {
+export default function ({ type }: { type: SkillType }) {
   const coinsValue = useRecoilValue(coins);
   const balanceResources = useSetRecoilState(resourcesBalance);
   const setSkill = useSetRecoilState(skills(type));

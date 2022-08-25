@@ -12,7 +12,7 @@ import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
-export default function ArmorEquipped() {
+export default function () {
   const armorValue = useRecoilValue(armor);
   const showArmorValue = useRecoilValue(isShowing(ShowingType.Armor));
 

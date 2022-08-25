@@ -10,7 +10,7 @@ import { formatPercentage } from "@neverquest/utilities/helpers";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 import { ShowingType } from "@neverquest/types/enums";
 
-export default function CriticalChance() {
+export default function () {
   const criticalChanceValue = useRecoilValue(totalCriticalChance);
   const showCriticalValue = useRecoilValue(isShowing(ShowingType.Critical));
 

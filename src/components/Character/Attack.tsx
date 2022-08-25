@@ -19,7 +19,7 @@ import {
   getComputedStat,
 } from "@neverquest/utilities/helpers";
 
-export default function Attack() {
+export default function () {
   const { points } = useRecoilValue(attributes(AttributeType.AttackRateBonus));
   const showTotalAttackRateBreakdownValue = useRecoilValue(
     isShowing(ShowingType.TotalAttackRateSummary)

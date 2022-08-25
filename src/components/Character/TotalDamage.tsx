@@ -14,7 +14,7 @@ import { totalDamage } from "@neverquest/state/statistics";
 import { AttributeType, DeltaType, ShowingType } from "@neverquest/types/enums";
 import { getComputedStat } from "@neverquest/utilities/helpers";
 
-export default function TotalDamage() {
+export default function () {
   const { points } = useRecoilValue(attributes(AttributeType.Damage));
   const showTotalDamageBreakdownValue = useRecoilValue(isShowing(ShowingType.TotalDamageSummary));
   const totalDamageValue = useRecoilValue(totalDamage);

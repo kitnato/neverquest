@@ -3,7 +3,7 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { SVGIcon } from "@neverquest/types/props";
 import { OverlayPlacement } from "@neverquest/types/ui";
 
-export default function ImageIcon({
+export default function ({
   flipped = false,
   Icon,
   placement = OverlayPlacement.Top,

@@ -9,7 +9,7 @@ import { lootDrop, monsterCreate } from "@neverquest/state/transactions";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
-export default function LootingMeter() {
+export default function () {
   const [isLootingValue, setLooting] = useRecoilState(isLooting);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const lootingRateValue = useRecoilValue(lootingRate);

@@ -8,7 +8,7 @@ import { deltas } from "@neverquest/state/deltas";
 import { currentHealthMonster, maximumHealthMonster } from "@neverquest/state/monster";
 import { DeltaType } from "@neverquest/types/enums";
 
-export default function MonsterHealth() {
+export default function () {
   return (
     <Stack direction="horizontal" gap={3}>
       <ImageIcon Icon={Icon} tooltip="Monster health" />

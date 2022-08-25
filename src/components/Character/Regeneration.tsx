@@ -6,7 +6,7 @@ import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { ReserveChangeProps } from "@neverquest/types/props";
 import { DeltaDisplay } from "@neverquest/types/ui";
 
-export default function Regeneration({
+export default function ({
   atomDeltaRegenerationRate,
   atomReserve,
   isReserveMaxedOut,

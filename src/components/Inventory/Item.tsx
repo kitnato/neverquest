@@ -3,7 +3,7 @@ import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import { Item as ItemType } from "@neverquest/types";
 
-export default function Item({ item }: { item: ItemType }) {
+export default function ({ item }: { item: ItemType }) {
   const { description, Icon, name } = item;
 
   return (

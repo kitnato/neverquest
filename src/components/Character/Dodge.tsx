@@ -10,7 +10,7 @@ import { AnimationType } from "@neverquest/types/ui";
 import { formatPercentage } from "@neverquest/utilities/helpers";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
-export default function Dodge() {
+export default function () {
   const dodgeChanceValue = useRecoilValue(totalDodgeChance);
   const showDodgeChanceValue = useRecoilValue(isShowing(ShowingType.DodgeChance));
 

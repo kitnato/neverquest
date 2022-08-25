@@ -6,7 +6,7 @@ import Restart from "@neverquest/components/Header/Restart";
 import Settings from "@neverquest/components/Header/Settings";
 import { version } from "@neverquest/config";
 
-export default function Header() {
+export default function () {
   return (
     <Navbar bg="dark" collapseOnSelect className="mb-4" expand="lg" variant="dark">
       <Container>

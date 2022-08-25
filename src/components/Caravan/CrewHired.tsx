@@ -9,13 +9,7 @@ import { crew } from "@neverquest/state/caravan";
 import { CrewStatus, CrewType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 
-export default function CrewHirable({
-  setActive,
-  type,
-}: {
-  setActive: () => void;
-  type: CrewType;
-}) {
+export default function ({ setActive, type }: { setActive: () => void; type: CrewType }) {
   const { hireStatus, monologueProgress } = useRecoilValue(crew(type));
 
   if (hireStatus !== CrewStatus.Hired) {

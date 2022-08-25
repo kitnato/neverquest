@@ -1,4 +1,4 @@
 // TODO
-export default function Cook() {
+export default function () {
   return <></>;
 }

@@ -5,7 +5,7 @@ import usePreviousValue from "@neverquest/hooks/usePreviousValue";
 import { DeltaDisplay, FloatingTextType } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
-export default function useDeltaText({
+export default function ({
   deltaAtom,
   isTime = false,
   stop = (previous) => previous === null,

@@ -12,7 +12,7 @@ import {
   lowHealthWarning,
 } from "@neverquest/state/settings";
 
-export default function Settings() {
+export default function () {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
 
   const [isShowing, setShowing] = useState(false);

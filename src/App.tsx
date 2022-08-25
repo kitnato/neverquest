@@ -7,7 +7,7 @@ import Main from "@neverquest/components/Main";
 import { SeedContext, useSeed } from "@neverquest/state/SeedContext";
 import { initialization } from "@neverquest/state/transactions";
 
-export default function App() {
+export default function () {
   const { seed, resetSeed } = useSeed();
 
   return (

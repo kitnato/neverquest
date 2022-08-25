@@ -8,7 +8,7 @@ import { ReactComponent as DeadIcon } from "@neverquest/icons/skull-crossed-bone
 import { name } from "@neverquest/state/character";
 import { isGameOver } from "@neverquest/state/settings";
 
-export default function Name() {
+export default function () {
   const [nameValue, setName] = useRecoilState(name);
   const isGameOverValue = useRecoilValue(isGameOver);
 

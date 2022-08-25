@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { isGameOver } from "@neverquest/state/settings";
 
-export default function useAnimation(callback: (time: number) => void, stop: boolean) {
+export default function (callback: (time: number) => void, stop: boolean) {
   const isGameOverValue = useRecoilValue(isGameOver);
   const frameRef = useRef(-1);
   const previousTimeRef = useRef(0);

@@ -9,7 +9,7 @@ import { AnimationType } from "@neverquest/types/ui";
 import { formatPercentage, getAnimationClass } from "@neverquest/utilities/helpers";
 import { ShowingType } from "@neverquest/types/enums";
 
-export default function Block() {
+export default function () {
   const { block } = useRecoilValue(shield);
   const showBlockChanceValue = useRecoilValue(isShowing(ShowingType.BlockChance));
 

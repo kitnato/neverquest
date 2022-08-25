@@ -11,7 +11,7 @@ import { resourcesBalance } from "@neverquest/state/transactions";
 import { UIVariant } from "@neverquest/types/ui";
 import { getSellPrice } from "@neverquest/utilities/helpers";
 
-export default function SellItems() {
+export default function () {
   const [inventoryValue, setInventory] = useRecoilState(inventory);
   const setMerchantInventory = useSetRecoilState(merchantInventory);
   const balanceResources = useSetRecoilState(resourcesBalance);

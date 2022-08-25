@@ -6,7 +6,7 @@ import { ReactComponent as Icon } from "@neverquest/icons/mountain-road.svg";
 import { location } from "@neverquest/state/encounter";
 import { OverlayPlacement } from "@neverquest/types/ui";
 
-export default function Location() {
+export default function () {
   const locationValue = useRecoilValue(location);
 
   return (

@@ -5,7 +5,7 @@ import WeaponName from "@neverquest/components/Inventory/Weapon/WeaponName";
 import { ReactComponent as Icon } from "@neverquest/icons/axe-sword.svg";
 import { Weapon } from "@neverquest/types";
 
-export default function WeaponInventory({ weapon }: { weapon: Weapon }) {
+export default function ({ weapon }: { weapon: Weapon }) {
   return (
     <Stack direction="horizontal" gap={3}>
       <ImageIcon Icon={Icon} tooltip="Weapon" />

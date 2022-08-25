@@ -1,4 +1,4 @@
 // TODO
-export default function Blacksmith() {
+export default function () {
   return <></>;
 }

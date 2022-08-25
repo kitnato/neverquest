@@ -10,7 +10,7 @@ import { hasLooted } from "@neverquest/state/resources";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
-export default function TravelButton({ isDisabled }: { isDisabled: boolean }) {
+export default function ({ isDisabled }: { isDisabled: boolean }) {
   const isWildernessValue = useRecoilValue(isWilderness);
   const hasLootedValue = useRecoilValue(hasLooted);
   const levelValue = useRecoilValue(level);

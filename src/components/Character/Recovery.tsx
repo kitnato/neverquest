@@ -13,7 +13,7 @@ import { DeltaType, ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
-export default function Recovery() {
+export default function () {
   const showRecoveryValue = useRecoilValue(isShowing(ShowingType.Recovery));
 
   const deltaTotalRecoveryRate = deltas(DeltaType.TotalRecoveryRate);

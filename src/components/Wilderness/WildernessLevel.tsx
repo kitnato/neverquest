@@ -10,7 +10,7 @@ import { deltas } from "@neverquest/state/deltas";
 import { OverlayPlacement } from "@neverquest/types/ui";
 import { DeltaType } from "@neverquest/types/enums";
 
-export default function WildernessLevel() {
+export default function () {
   const levelValue = useRecoilValue(level);
 
   const deltaWildernessLevel = deltas(DeltaType.WildernessLevel);

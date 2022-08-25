@@ -6,7 +6,7 @@ import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { DeltaDisplay, AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
-export default function Lootable({
+export default function ({
   atom,
   Component,
   deltaAtom,

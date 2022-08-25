@@ -6,7 +6,7 @@ import Loot from "@neverquest/components/Resource/Loot";
 import Wilderness from "@neverquest/components/Wilderness";
 import { isWilderness } from "@neverquest/state/encounter";
 
-export default function Encounter() {
+export default function () {
   const isWildernessValue = useRecoilValue(isWilderness);
 
   return (

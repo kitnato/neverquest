@@ -10,7 +10,7 @@ import { scrap } from "@neverquest/state/resources";
 import { resourcesBalance } from "@neverquest/state/transactions";
 import { UIVariant } from "@neverquest/types/ui";
 
-export default function SellScrap() {
+export default function () {
   const scrapValue = useRecoilValue(scrap);
   const balanceResources = useSetRecoilState(resourcesBalance);
 

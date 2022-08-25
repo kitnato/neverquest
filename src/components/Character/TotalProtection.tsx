@@ -12,7 +12,7 @@ import { DeltaType, ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
-export default function TotalProtection() {
+export default function () {
   const showTotalProtectionValue = useRecoilValue(isShowing(ShowingType.TotalProtection));
   const totalProtectionValue = useRecoilValue(totalProtection);
 

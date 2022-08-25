@@ -18,7 +18,7 @@ import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 import { ShowingType } from "@neverquest/types/enums";
 
-export default function AttackButton({ isDisabled }: { isDisabled: boolean }) {
+export default function ({ isDisabled }: { isDisabled: boolean }) {
   const [isAttackingValue, setAttacking] = useRecoilState(isAttacking);
   const [showWildernessStatusValue, setShowWildernessStatusValue] = useRecoilState(
     isShowing(ShowingType.WildernessStatus)

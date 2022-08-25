@@ -11,7 +11,7 @@ import { isWilderness, progress, progressMax } from "@neverquest/state/encounter
 import { DeltaType } from "@neverquest/types/enums";
 import { OverlayPlacement, UIVariant } from "@neverquest/types/ui";
 
-export default function WildernessProgress() {
+export default function () {
   const isWildernessValue = useRecoilValue(isWilderness);
   const progressValue = useRecoilValue(progress);
   const progressMaxValue = useRecoilValue(progressMax);

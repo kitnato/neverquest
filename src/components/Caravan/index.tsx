@@ -12,7 +12,7 @@ import { CrewType, ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
-export default function Caravan() {
+export default function () {
   const crewHirableValue = useRecoilValue(crewHirable);
   const isShowingCrewHiring = useRecoilValue(isShowing(ShowingType.CrewHiring));
 

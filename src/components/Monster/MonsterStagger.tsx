@@ -6,7 +6,7 @@ import MonsterStaggerMeter from "@neverquest/components/Monster/MonsterStaggerMe
 import { ReactComponent as Icon } from "@neverquest/icons/star-swirl.svg";
 import { totalStaggerRate } from "@neverquest/state/statistics";
 
-export default function MonsterStagger() {
+export default function () {
   const totalStaggerRateValue = useRecoilValue(totalStaggerRate);
 
   if (totalStaggerRateValue === 0) {

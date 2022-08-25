@@ -10,7 +10,7 @@ import { hasLooted } from "@neverquest/state/resources";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
-export default function Loot() {
+export default function () {
   const hasLootedValue = useRecoilValue(hasLooted);
   const progressValue = useRecoilValue(progress);
 

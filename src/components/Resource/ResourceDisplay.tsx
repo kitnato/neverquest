@@ -17,7 +17,7 @@ import {
 } from "@neverquest/state/resources";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
 
-export default function ResourceDisplay({ isLoot }: { isLoot?: boolean }) {
+export default function ({ isLoot }: { isLoot?: boolean }) {
   return (
     <Row>
       {isLoot ? (

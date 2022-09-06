@@ -68,7 +68,7 @@ Sorcery casting rate.
 
 #### Agility
 
-Affects [dodge chance](#dodge-chance). Requires skill: [Quick Reflexes](#quick-reflexes).
+Affects [dodge chance](#dodge-chance). Requires skill: [Evasion](#evasion).
 
 #### Dexterity
 
@@ -230,11 +230,13 @@ Certain successful attacks by a monster or the character can inflict bleed, a da
 
 For the character, this is determined by the [bleed chance](#bleed-chance) and [bleed damage](#bleed-damage) attributes.
 
+Inflicting bleed will only be possible after acquiring the [Anatomy](#anatomy) skill.
+
 #### Block
 
 A successful block by the character upon a monster's attack will negate all damage done, yet costs [stamina](#stamina). Blocking may also inflict [stagger](#stagger) on the monster, depending on the acquisition of the [Traumatology](#traumatology) skill.
 
-The overall chance to block an attack is determined by the [block chance](#block-chance) statistic.
+The overall chance to block an attack is determined by the [block chance](#block-chance) statistic and is determined usually by wielding a [shield](#shields).
 
 #### Deflection
 
@@ -248,13 +250,15 @@ Dodging an incoming attack negates all damage, but doesn't cost any stamina the 
 
 The overall chance to dodge an attack is determined by the [dodge chance](#dodge-chance) statistic.
 
+Dodging will only be possible after acquiring the [Evasion](#evasion) skill.
+
 #### Exhaustion
 
 When there is no [stamina](#stamina) to attack or block, the character must wait for it to [regenerate](#stamina-regeneration-rate) first before being able to do either.
 
 #### Looting
 
-After the monster is defeated, its remains are looted automatically for any [resources](#-resources). This takes a few seconds, but can be shortened with certain [traits](#traits) or [items](#inventory).
+After the monster is defeated, its remains are looted automatically for any [resources](#resources). This takes a few seconds, but can be shortened with certain [traits](#traits) or [items](#inventory).
 
 The looted resources can only be collected once the [wave](#wilderness) is completed.
 
@@ -264,7 +268,7 @@ A successful parry will deal 50% of the total damage of the attack and reflect t
 
 The overall chance to parry an attack is determined by the [parry chance](#parry-chance) statistic, which is influenced by the current gear ([slashing weapons](#slashing-weapon) and [medium shields](#medium-shield)) and the [Finesse](#finesse) attribute.
 
-Parrying will only be available after acquiring the [Escrime](#escrime) skill.
+Parrying will only be possible after acquiring the [Escrime](#escrime) skill.
 
 #### Stagger
 
@@ -272,7 +276,7 @@ When staggered, the monster will not be able to attack for a certain duration. T
 
 The overall [stagger chance](#stagger-chance) statistic is determined by the current gear ([shields](#shields) and [blunt weapons](#blunt-weapon)). The [stagger duration](#stagger-duration) is influenced by the [Might](#might) attribute and current gear as well.
 
-Parrying will only be available after acquiring the [Traumatology](#traumatology) skill.
+Staggering will only be possible after acquiring the [Traumatology](#traumatology) skill.
 
 ## Encounter
 
@@ -409,7 +413,6 @@ A weapon can either by one-handed or two-handed, taking up the corresponding gea
 - High damage
 - Low attack rate
 - High stamina requirement
-- Chance for [execution](#execution) on hit.
 
 ###### Dual wield
 
@@ -605,6 +608,10 @@ Allows the use of a one-handed weapon in main hand as well as offhand.
 
 Unlocks the ability to [parry](#parry) when using [slashing](#slashing-weapon) weapons and [medium shields](#medium-shield). Unlocks the [Finesse](#finesse) attribute.
 
+#### Evasion
+
+Unlocks [agility](#agility) attribute and [dodge chance](#dodge-chance) modifiers on gear.
+
 #### Siegecraft
 
 `TODO`
@@ -618,10 +625,6 @@ Allows the use of [medium](#medium-shield) and [tower](#tower-shield) shields.
 #### Traumatology
 
 Unlocks the ability to [stagger](#stagger) when using [blunt](#blunt-weapon) weapons and [blocking](#block) with shields. Unlocks the [Might](#might) attribute.
-
-#### Quick Reflexes
-
-Unlocks [agility](#agility) attribute and [dodge chance](#dodge-chance) modifiers on gear.
 
 ## Status effects
 
@@ -719,7 +722,7 @@ Default: off. Once toggled, all elements of the UI will be shown at once instead
 
 The LOCRA (LOcation, CReature, Artifact) system generates a pseudo-random variety of names for different irreverent fantasy-themed items and monsters that the character interacts with.
 
-It works by generating a name for a location, creature or artifact based on a JSON library of (loosely) fantasy-world-themed words that can be composed to make (somewhat) coherent names for the three types in question. Parameters for tags and affix composition can be passed to make the generation more specific. If [NSFW mode](#isNSFW-mode) is on, the names may also be pornographic or decidedly non-fantasy-themed.
+It works by generating a name for a location, creature or artifact based on a JSON library of (loosely) fantasy-world-themed words that can be composed to make (somewhat) coherent names for the three types in question. Parameters for tags and affix composition can be passed to make the generation more specific. If [NSFW mode](#nsfw-mode) is on, the names may also be pornographic or decidedly non-fantasy-themed.
 
 Generating a creature name, for example, depending on the parameters passed, might yield anything from "Intrepid Farmer" to "Voluptuous Manticore of Unmitigated Penetration".
 

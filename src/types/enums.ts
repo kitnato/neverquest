@@ -99,9 +99,14 @@ export enum SkillStatus {
 }
 
 export enum SkillType {
+  Armors,
+  Bleed,
   Criticals,
-  Dodging,
-  Parrying,
+  Dodge,
+  Parry,
+  Regeneration,
+  Shields,
+  Stagger,
 }
 
 export enum StorageKey {

@@ -1,4 +1,4 @@
-import { atom, atomFamily, DefaultValue, selectorFamily } from "recoil";
+import { atom, atomFamily, DefaultValue, selector, selectorFamily } from "recoil";
 
 import { localStorageEffect } from "@neverquest/state/effects";
 import { SkillStatus, SkillType, StorageKey } from "@neverquest/types/enums";
@@ -55,4 +55,14 @@ export const skills = selectorFamily<SkillStatus, SkillType>({
         }));
       }
     },
+});
+
+export const showWeaponClass = selector({
+  key: "showWeaponClass",
+  get: ({ get }) => {
+    const { areTrained } = get(skillsStatus);
+    const weaponSkills = [SkillType.Bleed, SkillType.Parry, SkillType.Stagger];
+
+    return areTrained.some((skill) => weaponSkills.includes(skill));
+  },
 });

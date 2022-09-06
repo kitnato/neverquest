@@ -11,10 +11,12 @@ import {
   getDamagePerSecond,
 } from "@neverquest/utilities/helpers";
 import { hasKnapsack } from "@neverquest/state/character";
+import { showWeaponClass } from "@neverquest/state/skills";
 
 export default function ({ weapon }: { weapon: Weapon }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const showDPSValue = useRecoilValue(isShowing(ShowingType.DamagePerSecond));
+  const showWeaponClassValue = useRecoilValue(showWeaponClass);
 
   const { damage, name, rate, staminaCost, weaponClass, weight } = weapon;
   const Icon = WEAPON_CLASS_ICONS[weaponClass];
@@ -56,14 +58,16 @@ export default function ({ weapon }: { weapon: Weapon }) {
                       <td>{staminaCost}</td>
                     </tr>
 
-                    <tr>
-                      <td className={italicClass}>Class:</td>
+                    {showWeaponClassValue && (
+                      <tr>
+                        <td className={italicClass}>Class:</td>
 
-                      <td>
-                        <Icon width={16} />
-                        &nbsp;{capitalizeAll(weaponClass)}
-                      </td>
-                    </tr>
+                        <td>
+                          <Icon width={16} />
+                          &nbsp;{capitalizeAll(weaponClass)}
+                        </td>
+                      </tr>
+                    )}
 
                     {hasKnapsackValue && (
                       <tr>

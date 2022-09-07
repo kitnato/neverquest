@@ -1,7 +1,7 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { NO_WEAPON, WEAPON_CLASS_ICONS } from "@neverquest/constants/gear";
+import { WEAPON_CLASS_ICONS } from "@neverquest/constants/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { Weapon } from "@neverquest/types";
 import { ShowingType } from "@neverquest/types/enums";
@@ -12,10 +12,12 @@ import {
 } from "@neverquest/utilities/helpers";
 import { hasKnapsack } from "@neverquest/state/character";
 import { showWeaponClass } from "@neverquest/state/skills";
+import { UNKNOWN } from "@neverquest/constants";
 
 export default function ({ weapon }: { weapon: Weapon }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const showDPSValue = useRecoilValue(isShowing(ShowingType.DamagePerSecond));
+  const showStaminaValue = useRecoilValue(isShowing(ShowingType.Stamina));
   const showWeaponClassValue = useRecoilValue(showWeaponClass);
 
   const { damage, name, rate, staminaCost, weaponClass, weight } = weapon;
@@ -50,34 +52,44 @@ export default function ({ weapon }: { weapon: Weapon }) {
                   <td>{formatMilliseconds(rate)}</td>
                 </tr>
 
-                {weapon !== NO_WEAPON && (
-                  <>
-                    <tr>
+                <tr>
+                  {showStaminaValue ? (
+                    <>
                       <td className={italicClass}>Stamina cost:</td>
 
                       <td>{staminaCost}</td>
-                    </tr>
+                    </>
+                  ) : (
+                    <td className="text-end">{UNKNOWN}</td>
+                  )}
+                </tr>
 
-                    {showWeaponClassValue && (
-                      <tr>
-                        <td className={italicClass}>Class:</td>
+                <tr>
+                  {showWeaponClassValue ? (
+                    <>
+                      <td className={italicClass}>Class:</td>
 
-                        <td>
-                          <Icon width={16} />
-                          &nbsp;{capitalizeAll(weaponClass)}
-                        </td>
-                      </tr>
-                    )}
+                      <td>
+                        <Icon width={16} />
+                        &nbsp;{capitalizeAll(weaponClass)}
+                      </td>
+                    </>
+                  ) : (
+                    <td className="text-end">{UNKNOWN}</td>
+                  )}
+                </tr>
 
-                    {hasKnapsackValue && (
-                      <tr>
-                        <td className={italicClass}>Weight:</td>
+                <tr>
+                  {hasKnapsackValue ? (
+                    <>
+                      <td className={italicClass}>Weight:</td>
 
-                        <td>{weight}</td>
-                      </tr>
-                    )}
-                  </>
-                )}
+                      <td>{weight}</td>
+                    </>
+                  ) : (
+                    <td className="text-end">{UNKNOWN}</td>
+                  )}
+                </tr>
               </tbody>
             </Table>
           </Popover.Body>

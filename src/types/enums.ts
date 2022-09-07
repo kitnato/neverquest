@@ -5,15 +5,18 @@ export enum ArmorClass {
 }
 
 export enum AttributeType {
-  AttackRateBonus,
+  AttackRate,
+  BleedDamage,
   CriticalChance,
   CriticalDamage,
   Damage,
   DodgeChance,
   Health,
   HealthRegenerationRate,
-  LootBonus,
+  Loot,
+  ParryChance,
   RecoveryRate,
+  StaggerDuration,
   Stamina,
   StaminaRegenerationRate,
 }

@@ -1,5 +1,5 @@
 import { ShieldType, WeaponClass, WeaponType } from "@neverquest/locra/types";
-import { ArmorClass, WeaponGrip } from "@neverquest/types/enums";
+import { ArmorClass, SkillType, WeaponGrip } from "@neverquest/types/enums";
 import { SVGIcon } from "@neverquest/types/props";
 
 export type Armor = ItemBase & {
@@ -13,6 +13,7 @@ export interface Attribute {
   Icon: SVGIcon;
   increment: number;
   name: string;
+  requiredSkill?: SkillType;
 }
 
 export interface CrewMember {

@@ -2,6 +2,8 @@ import { atom, atomFamily, DefaultValue, selector, selectorFamily } from "recoil
 
 import { localStorageEffect } from "@neverquest/state/effects";
 import { SkillStatus, SkillType, StorageKey } from "@neverquest/types/enums";
+import { ATTRIBUTES, ATTRIBUTES_ORDER } from "@neverquest/constants/attributes";
+import { attributes } from "./attributes";
 
 interface SkillsStatusState {
   areTrainable: SkillType[];
@@ -53,6 +55,17 @@ export const skills = selectorFamily<SkillStatus, SkillType>({
           areTrainable: current.areTrainable.filter((currentType) => currentType !== type),
           areTrained: [...current.areTrained, type],
         }));
+
+        ATTRIBUTES_ORDER.forEach((attributeType) => {
+          const { requiredSkill } = ATTRIBUTES[attributeType];
+
+          if (requiredSkill === type) {
+            set(attributes(attributeType), (current) => ({
+              ...current,
+              canAssign: true,
+            }));
+          }
+        });
       }
     },
 });

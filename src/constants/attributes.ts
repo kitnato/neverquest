@@ -1,15 +1,23 @@
 // TODO - diversify icons.
 import { ReactComponent as Icon } from "@neverquest/icons/abstract-049.svg";
 import { Attribute } from "@neverquest/types";
-import { AttributeType } from "@neverquest/types/enums";
+import { AttributeType, SkillType } from "@neverquest/types/enums";
 
 export const ATTRIBUTES: Record<AttributeType, Attribute> = {
-  [AttributeType.AttackRateBonus]: {
+  [AttributeType.AttackRate]: {
     base: 0,
     description: "Reduces attack rate",
     Icon,
     increment: 0.03,
     name: "Speed",
+  },
+  [AttributeType.BleedDamage]: {
+    base: 0,
+    description: "Increases bleed damage",
+    Icon,
+    increment: 0.05,
+    name: "Cruelty",
+    requiredSkill: SkillType.Bleed,
   },
   [AttributeType.CriticalChance]: {
     base: 0,
@@ -17,6 +25,7 @@ export const ATTRIBUTES: Record<AttributeType, Attribute> = {
     increment: 0.03,
     Icon,
     name: "Dexterity",
+    requiredSkill: SkillType.Criticals,
   },
   [AttributeType.CriticalDamage]: {
     base: 1.5,
@@ -24,6 +33,7 @@ export const ATTRIBUTES: Record<AttributeType, Attribute> = {
     Icon,
     increment: 0.15,
     name: "Perception",
+    requiredSkill: SkillType.Criticals,
   },
   [AttributeType.Damage]: {
     base: 0,
@@ -38,6 +48,7 @@ export const ATTRIBUTES: Record<AttributeType, Attribute> = {
     Icon,
     increment: 0.04,
     name: "Agility",
+    requiredSkill: SkillType.Dodge,
   },
   [AttributeType.Health]: {
     base: 8,
@@ -52,13 +63,22 @@ export const ATTRIBUTES: Record<AttributeType, Attribute> = {
     Icon,
     increment: -200,
     name: "Vigor",
+    requiredSkill: SkillType.Regeneration,
   },
-  [AttributeType.LootBonus]: {
+  [AttributeType.Loot]: {
     base: 0,
     description: "Increases amount of loot dropped by monsters",
     Icon,
     increment: 0.03,
     name: "Luck",
+  },
+  [AttributeType.ParryChance]: {
+    base: 0,
+    description: "Increases parry chance",
+    Icon,
+    increment: 0.02,
+    name: "Finesse",
+    requiredSkill: SkillType.Parry,
   },
   [AttributeType.RecoveryRate]: {
     base: 1500,
@@ -66,6 +86,14 @@ export const ATTRIBUTES: Record<AttributeType, Attribute> = {
     Icon,
     increment: -100,
     name: "Resilience",
+  },
+  [AttributeType.StaggerDuration]: {
+    base: 0,
+    description: "Increases stagger duration",
+    Icon,
+    increment: 50,
+    name: "Might",
+    requiredSkill: SkillType.Stagger,
   },
   [AttributeType.Stamina]: {
     base: 4,
@@ -80,6 +108,7 @@ export const ATTRIBUTES: Record<AttributeType, Attribute> = {
     Icon,
     increment: -150,
     name: "Fortitude",
+    requiredSkill: SkillType.Regeneration,
   },
 };
 
@@ -89,16 +118,19 @@ export const ATTRIBUTES_ORDER = [
   AttributeType.Stamina,
   AttributeType.StaminaRegenerationRate,
   AttributeType.Damage,
-  AttributeType.AttackRateBonus,
+  AttributeType.AttackRate,
   AttributeType.CriticalChance,
   AttributeType.CriticalDamage,
+  AttributeType.BleedDamage,
   AttributeType.DodgeChance,
+  AttributeType.ParryChance,
+  AttributeType.StaggerDuration,
   AttributeType.RecoveryRate,
-  AttributeType.LootBonus,
+  AttributeType.Loot,
 ];
 
 export const ATTRIBUTES_INITIAL = [
-  AttributeType.AttackRateBonus,
+  AttributeType.AttackRate,
   AttributeType.Damage,
   AttributeType.Health,
   AttributeType.RecoveryRate,

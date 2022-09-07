@@ -20,13 +20,13 @@ import {
 } from "@neverquest/utilities/helpers";
 
 export default function () {
-  const { points } = useRecoilValue(attributes(AttributeType.AttackRateBonus));
+  const { points } = useRecoilValue(attributes(AttributeType.AttackRate));
   const showTotalAttackRateBreakdownValue = useRecoilValue(
     isShowing(ShowingType.TotalAttackRateSummary)
   );
   const weaponValue = useRecoilValue(weapon);
 
-  const { base, increment, name } = ATTRIBUTES[AttributeType.AttackRateBonus];
+  const { base, increment, name } = ATTRIBUTES[AttributeType.AttackRate];
   const deltaTotalAttackRate = deltas(DeltaType.TotalAttackRate);
 
   useDeltaText({

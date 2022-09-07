@@ -18,10 +18,10 @@ export const damagePerSecond = selector({
 export const totalAttackRate = selector({
   key: "totalAttackRate",
   get: ({ get }) => {
-    const { points } = get(attributes(AttributeType.AttackRateBonus));
+    const { points } = get(attributes(AttributeType.AttackRate));
     const { rate } = get(weapon);
 
-    const { base, increment } = ATTRIBUTES[AttributeType.AttackRateBonus];
+    const { base, increment } = ATTRIBUTES[AttributeType.AttackRate];
 
     return rate * (1 - getComputedStat({ base, increment, points }));
   },

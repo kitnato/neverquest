@@ -4,12 +4,15 @@ import Stack from "react-bootstrap/Stack";
 import ImageIcon from "@neverquest/components/ImageIcon";
 import MonsterStaggerMeter from "@neverquest/components/Monster/MonsterStaggerMeter";
 import { ReactComponent as Icon } from "@neverquest/icons/star-swirl.svg";
-import { totalStaggerRate } from "@neverquest/state/statistics";
+import { totalStaggerDuration } from "@neverquest/state/statistics";
+import { skills } from "@neverquest/state/skills";
+import { SkillStatus, SkillType } from "@neverquest/types/enums";
 
 export default function () {
-  const totalStaggerRateValue = useRecoilValue(totalStaggerRate);
+  const staggerSkill = useRecoilValue(skills(SkillType.Stagger));
+  const totalStaggerDurationValue = useRecoilValue(totalStaggerDuration);
 
-  if (totalStaggerRateValue === 0) {
+  if (staggerSkill !== SkillStatus.Trained || totalStaggerDurationValue === 0) {
     return null;
   }
 

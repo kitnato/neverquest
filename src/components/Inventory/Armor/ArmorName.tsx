@@ -1,7 +1,7 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { UNKNOWN } from "@neverquest/constants";
+import { CLASS_TABLE_CELL_ITALIC, UNKNOWN } from "@neverquest/constants";
 import { hasKnapsack } from "@neverquest/state/character";
 import { skills } from "@neverquest/state/skills";
 import { Armor } from "@neverquest/types";
@@ -23,7 +23,7 @@ export default function ({ armor }: { armor: Armor }) {
             <Table borderless size="sm" style={{ margin: 0 }}>
               <tbody>
                 <tr>
-                  <td className="fst-italic text-end">Protection:</td>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Protection:</td>
 
                   <td>{protection}</td>
                 </tr>
@@ -31,7 +31,7 @@ export default function ({ armor }: { armor: Armor }) {
                 <tr>
                   {armorsSkillValue == SkillStatus.Trained ? (
                     <>
-                      <td className="fst-italic text-end">Class:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 
                       <td>{armorClass}</td>
                     </>
@@ -43,7 +43,7 @@ export default function ({ armor }: { armor: Armor }) {
                 <tr>
                   {hasKnapsackValue ? (
                     <>
-                      <td className="fst-italic text-end">Weight:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Weight:</td>
 
                       <td>{weight}</td>
                     </>

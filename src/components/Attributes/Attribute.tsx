@@ -4,6 +4,7 @@ import { Clock, Plus } from "react-bootstrap-icons";
 import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/ImageIcon";
+import { UNKNOWN } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import { attributeCost, attributes, attributesIncreasable } from "@neverquest/state/attributes";
 import { characterLevel } from "@neverquest/state/character";
@@ -23,52 +24,54 @@ export default function ({ type }: { type: AttributeType }) {
 
   const { description, Icon, name } = ATTRIBUTES[type];
 
-  if (!canAssign) {
-    return null;
-  }
-
   return (
     <div className="align-items-center d-flex justify-content-between w-100">
-      <Stack direction="horizontal" gap={3}>
-        <ImageIcon Icon={Icon} tooltip={name} />
+      {canAssign ? (
+        <>
+          <Stack direction="horizontal" gap={3}>
+            <ImageIcon Icon={Icon} tooltip={name} />
 
-        <span>{description}</span>
-      </Stack>
+            <span>{description}</span>
+          </Stack>
 
-      <Stack direction="horizontal" gap={3}>
-        <span>{points}</span>
+          <Stack direction="horizontal" gap={3}>
+            <span>{points}</span>
 
-        <OverlayTrigger
-          overlay={<Tooltip>{`Cost: ${attributeCostValue} essence`}</Tooltip>}
-          placement="top"
-        >
-          <span className="d-inline-block">
-            <Button
-              disabled={!attributesIncreasableValue}
-              onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-                currentTarget.blur();
-
-                setAttribute((current) => ({
-                  ...current,
-                  points: current.points + 1,
-                }));
-
-                balanceResources({ essenceDifference: -attributeCostValue });
-                setDeltaEssenceAbsorbed({
-                  color: FloatingTextType.Positive,
-                  value: `+${attributeCostValue}`,
-                });
-
-                setCharacterLevel((current) => current + 1);
-                setDeltaCharacterLevel({ color: FloatingTextType.Positive, value: "+1" });
-              }}
-              variant={UIVariant.Outline}
+            <OverlayTrigger
+              overlay={<Tooltip>{`Cost: ${attributeCostValue} essence`}</Tooltip>}
+              placement="top"
             >
-              {attributesIncreasableValue ? <Plus /> : <Clock />}
-            </Button>
-          </span>
-        </OverlayTrigger>
-      </Stack>
+              <span className="d-inline-block">
+                <Button
+                  disabled={!attributesIncreasableValue}
+                  onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+                    currentTarget.blur();
+
+                    setAttribute((current) => ({
+                      ...current,
+                      points: current.points + 1,
+                    }));
+
+                    balanceResources({ essenceDifference: -attributeCostValue });
+                    setDeltaEssenceAbsorbed({
+                      color: FloatingTextType.Positive,
+                      value: `+${attributeCostValue}`,
+                    });
+
+                    setCharacterLevel((current) => current + 1);
+                    setDeltaCharacterLevel({ color: FloatingTextType.Positive, value: "+1" });
+                  }}
+                  variant={UIVariant.Outline}
+                >
+                  {attributesIncreasableValue ? <Plus /> : <Clock />}
+                </Button>
+              </span>
+            </OverlayTrigger>
+          </Stack>
+        </>
+      ) : (
+        UNKNOWN
+      )}
     </div>
   );
 }

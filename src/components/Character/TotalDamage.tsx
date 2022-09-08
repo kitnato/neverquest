@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import FloatingText from "@neverquest/components/FloatingText";
 import ImageIcon from "@neverquest/components/ImageIcon";
+import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/wolverine-claws.svg";
@@ -42,13 +43,13 @@ export default function () {
                 <Table borderless size="sm">
                   <tbody>
                     <tr>
-                      <td className="fst-italic text-end">Weapon:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
 
                       <td>{weaponValue.damage}</td>
                     </tr>
 
                     <tr>
-                      <td className="fst-italic text-end">{`${name} attribute:`}</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
 
                       <td>{`+${getComputedStat({ base, increment, points })}`}</td>
                     </tr>

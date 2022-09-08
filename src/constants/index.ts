@@ -1,6 +1,8 @@
-export const ANIMATE_PREFIX = "animate__";
+export const CLASS_ANIMATE_PREFIX = "animate__";
 
-export const ANIMATED_CLASS = `${ANIMATE_PREFIX}animated`;
+export const CLASS_ANIMATED = `${CLASS_ANIMATE_PREFIX}animated`;
+
+export const CLASS_TABLE_CELL_ITALIC = "fst-italic text-end";
 
 export const DELTA_DEFAULT = {
   color: null,

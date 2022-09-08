@@ -1,8 +1,11 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { CLASS_TABLE_CELL_ITALIC, UNKNOWN } from "@neverquest/constants";
 import { WEAPON_CLASS_ICONS } from "@neverquest/constants/gear";
+import { hasKnapsack } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
+import { showWeaponClass } from "@neverquest/state/skills";
 import { Weapon } from "@neverquest/types";
 import { ShowingType } from "@neverquest/types/enums";
 import {
@@ -10,9 +13,6 @@ import {
   formatMilliseconds,
   getDamagePerSecond,
 } from "@neverquest/utilities/helpers";
-import { hasKnapsack } from "@neverquest/state/character";
-import { showWeaponClass } from "@neverquest/state/skills";
-import { UNKNOWN } from "@neverquest/constants";
 
 export default function ({ weapon }: { weapon: Weapon }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
@@ -22,7 +22,6 @@ export default function ({ weapon }: { weapon: Weapon }) {
 
   const { damage, name, rate, staminaCost, weaponClass, weight } = weapon;
   const Icon = WEAPON_CLASS_ICONS[weaponClass];
-  const italicClass = "fst-italic text-end";
 
   return (
     <OverlayTrigger
@@ -34,7 +33,7 @@ export default function ({ weapon }: { weapon: Weapon }) {
             <Table borderless size="sm" style={{ margin: 0 }}>
               <tbody>
                 <tr>
-                  <td className={italicClass}>Damage:</td>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Damage:</td>
 
                   <td>{`${damage}${
                     showDPSValue
@@ -47,7 +46,7 @@ export default function ({ weapon }: { weapon: Weapon }) {
                 </tr>
 
                 <tr>
-                  <td className={italicClass}>Attack rate:</td>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Attack rate:</td>
 
                   <td>{formatMilliseconds(rate)}</td>
                 </tr>
@@ -55,7 +54,7 @@ export default function ({ weapon }: { weapon: Weapon }) {
                 <tr>
                   {showStaminaValue ? (
                     <>
-                      <td className={italicClass}>Stamina cost:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Stamina cost:</td>
 
                       <td>{staminaCost}</td>
                     </>
@@ -67,7 +66,7 @@ export default function ({ weapon }: { weapon: Weapon }) {
                 <tr>
                   {showWeaponClassValue ? (
                     <>
-                      <td className={italicClass}>Class:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 
                       <td>
                         <Icon width={16} />
@@ -82,7 +81,7 @@ export default function ({ weapon }: { weapon: Weapon }) {
                 <tr>
                   {hasKnapsackValue ? (
                     <>
-                      <td className={italicClass}>Weight:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Weight:</td>
 
                       <td>{weight}</td>
                     </>

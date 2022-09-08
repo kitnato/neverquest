@@ -4,13 +4,13 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { isMonsterStaggered } from "@neverquest/state/monster";
-import { totalStaggerRate } from "@neverquest/state/statistics";
+import { totalStaggerDuration } from "@neverquest/state/statistics";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
 export default function () {
   const [isStaggeredValue, setStaggered] = useRecoilState(isMonsterStaggered);
-  const totalStaggerRateValue = useRecoilValue(totalStaggerRate);
+  const totalStaggerDurationValue = useRecoilValue(totalStaggerDuration);
   const [deltaStagger, setDeltaStagger] = useState(0);
 
   useAnimation((delta) => {
@@ -18,11 +18,11 @@ export default function () {
   }, !isStaggeredValue);
 
   useEffect(() => {
-    if (deltaStagger >= totalStaggerRateValue) {
+    if (deltaStagger >= totalStaggerDurationValue) {
       setDeltaStagger(0);
       setStaggered(false);
     }
-  }, [deltaStagger, totalStaggerRateValue]);
+  }, [deltaStagger, totalStaggerDurationValue]);
 
   useEffect(() => {
     if (!isStaggeredValue) {
@@ -33,8 +33,8 @@ export default function () {
   return (
     <LabelledProgressBar
       disableTransitions
-      label={formatMilliseconds(totalStaggerRateValue - deltaStagger)}
-      value={(deltaStagger / totalStaggerRateValue) * 100}
+      label={formatMilliseconds(totalStaggerDurationValue - deltaStagger)}
+      value={(deltaStagger / totalStaggerDurationValue) * 100}
       variant={UIVariant.Secondary}
     />
   );

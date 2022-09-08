@@ -1,4 +1,4 @@
-import { ANIMATED_CLASS, ANIMATE_PREFIX } from "@neverquest/constants";
+import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/constants";
 import { RangeProps } from "@neverquest/types/props";
 import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
 
@@ -16,14 +16,14 @@ export function animateElement({
   }
 
   const { addEventListener, classList } = element;
-  const animationName = `${ANIMATE_PREFIX}${type}`;
-  const animationSpeedClass = speed ? `${ANIMATE_PREFIX}${speed}` : null;
+  const animationName = `${CLASS_ANIMATE_PREFIX}${type}`;
+  const animationSpeedClass = speed ? `${CLASS_ANIMATE_PREFIX}${speed}` : null;
 
   if (classList.contains("d-none")) {
     classList.remove("d-none");
   }
 
-  classList.add(ANIMATED_CLASS, animationName);
+  classList.add(CLASS_ANIMATED, animationName);
 
   if (animationSpeedClass) {
     classList.add(animationSpeedClass);
@@ -33,7 +33,7 @@ export function animateElement({
     "animationend",
     (event: AnimationEvent) => {
       event.stopPropagation();
-      classList.remove(ANIMATED_CLASS, animationName);
+      classList.remove(CLASS_ANIMATED, animationName);
 
       if (animationSpeedClass) {
         classList.remove(animationSpeedClass);
@@ -111,9 +111,9 @@ export function getAnimationClass({
   speed?: AnimationSpeed;
   type: AnimationType;
 }) {
-  return `${ANIMATED_CLASS} ${ANIMATE_PREFIX}${type}${
-    isInfinite ? ` ${ANIMATE_PREFIX}infinite` : ""
-  }${speed ? ` ${ANIMATE_PREFIX}${speed}` : ""}`;
+  return `${CLASS_ANIMATED} ${CLASS_ANIMATE_PREFIX}${type}${
+    isInfinite ? ` ${CLASS_ANIMATE_PREFIX}infinite` : ""
+  }${speed ? ` ${CLASS_ANIMATE_PREFIX}${speed}` : ""}`;
 }
 
 export function getComputedStat({

@@ -1,7 +1,7 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { UNKNOWN } from "@neverquest/constants";
+import { CLASS_TABLE_CELL_ITALIC, UNKNOWN } from "@neverquest/constants";
 import { hasKnapsack } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
@@ -27,15 +27,15 @@ export default function ({ shield }: { shield: Shield }) {
             <Table borderless size="sm" style={{ margin: 0 }}>
               <tbody>
                 <tr>
-                  <td className="fst-italic text-end">Block chance:</td>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Block chance:</td>
 
                   <td>{formatPercentage(block)}</td>
                 </tr>
 
                 <tr>
-                  {staggerSkillValue ? (
+                  {staggerSkillValue === SkillStatus.Trained ? (
                     <>
-                      <td className="fst-italic text-end">Stagger duration:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Stagger duration:</td>
 
                       <td>{formatMilliseconds(stagger)}</td>
                     </>
@@ -47,7 +47,7 @@ export default function ({ shield }: { shield: Shield }) {
                 <tr>
                   {showStaminaValue ? (
                     <>
-                      <td className="fst-italic text-end">Stamina cost:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Stamina cost:</td>
 
                       <td>{staminaCost}</td>
                     </>
@@ -59,7 +59,7 @@ export default function ({ shield }: { shield: Shield }) {
                 <tr>
                   {shieldSkillValue === SkillStatus.Trained ? (
                     <>
-                      <td className="fst-italic text-end">Type:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Type:</td>
 
                       <td>{capitalizeAll(type)}</td>
                     </>
@@ -71,7 +71,7 @@ export default function ({ shield }: { shield: Shield }) {
                 <tr>
                   {hasKnapsackValue ? (
                     <>
-                      <td className="fst-italic text-end">Weight:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Weight:</td>
 
                       <td>{weight}</td>
                     </>

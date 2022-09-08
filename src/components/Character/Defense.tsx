@@ -5,16 +5,17 @@ import Block from "@neverquest/components/Character/Block";
 import Dodge from "@neverquest/components/Character/Dodge";
 import TotalProtection from "@neverquest/components/Character/TotalProtection";
 import { isShowing } from "@neverquest/state/isShowing";
+import { skills } from "@neverquest/state/skills";
+import { ShowingType, SkillStatus, SkillType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
-import { ShowingType } from "@neverquest/types/enums";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function () {
   const showBlockChanceValue = useRecoilValue(isShowing(ShowingType.BlockChance));
-  const showDodgeChanceValue = useRecoilValue(isShowing(ShowingType.DodgeChance));
   const showTotalProtectionValue = useRecoilValue(isShowing(ShowingType.TotalProtection));
+  const dodgeSkill = useRecoilValue(skills(SkillType.Dodge));
 
-  if (!showBlockChanceValue && !showDodgeChanceValue && !showTotalProtectionValue) {
+  if (!showBlockChanceValue && !showTotalProtectionValue && dodgeSkill !== SkillStatus.Trained) {
     return null;
   }
 

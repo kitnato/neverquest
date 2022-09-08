@@ -56,6 +56,7 @@ import {
   DeltaType,
   ShowingType,
   SkillStatus,
+  SkillType,
 } from "@neverquest/types/enums";
 import { ReserveChangeProps } from "@neverquest/types/props";
 import { isArmor, isItem, isShield, isWeapon } from "@neverquest/types/type-guards";
@@ -106,7 +107,10 @@ export const defense = selector({
             value: "BLOCKED",
           });
           set(staminaChange, -staminaCost);
-          set(isMonsterStaggered, true);
+
+          if (get(skills(SkillType.Stagger)) !== SkillStatus.Trained) {
+            set(isMonsterStaggered, true);
+          }
         } else {
           set(deltas(DeltaType.Stamina), [
             {

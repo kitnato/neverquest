@@ -12,6 +12,7 @@ export const currentHealthMonster = atom({
   effects: [localStorageEffect<number>(StorageKey.CurrentHealthMonster)],
   key: StorageKey.CurrentHealthMonster,
 });
+
 export const isMonsterEngaged = atom({
   default: false,
   effects: [localStorageEffect<boolean>(StorageKey.IsMonsterEngaged)],

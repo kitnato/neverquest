@@ -61,7 +61,7 @@ export default function () {
                 </Stack>
 
                 <Stack direction="horizontal" gap={3}>
-                  <Coins tooltip="Price (coins)" value={getSellPrice(item)} />
+                  <Coins tooltip="Value (coins)" value={getSellPrice(item)} />
 
                   <Button
                     onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {

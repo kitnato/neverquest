@@ -89,33 +89,30 @@ export const EXCHANGE_COIN = 1;
 
 export const EXCHANGE_SCRAP = 3;
 
-export const MERCHANT_OFFERS: Record<
-  number,
-  (
-    | Item
-    | { type: WeaponType; weaponClass: WeaponClass }
-    | { armorClass: ArmorClass }
-    | { type: ShieldType }
-  )[]
-> = {
-  1: [
+export const MERCHANT_OFFERS: (
+  | Item
+  | { type: WeaponType; weaponClass: WeaponClass }
+  | { armorClass: ArmorClass }
+  | { type: ShieldType }
+)[][] = [
+  [
     {
       type: WeaponType.Melee,
       weaponClass: WeaponClass.Piercing,
     },
   ],
-  2: [
+  [
     {
       armorClass: ArmorClass.Hide,
     },
   ],
-  3: [
+  [
     {
       type: ShieldType.Small,
     },
   ],
-  4: [ITEM_KNAPSACK],
-  5: [
+  [ITEM_KNAPSACK],
+  [
     {
       type: WeaponType.Melee,
       weaponClass: WeaponClass.Slashing,
@@ -127,8 +124,8 @@ export const MERCHANT_OFFERS: Record<
       type: ShieldType.Medium,
     },
   ],
-  6: [ITEM_COMPASS],
-  7: [
+  [ITEM_COMPASS],
+  [
     {
       type: WeaponType.Melee,
       weaponClass: WeaponClass.Blunt,
@@ -137,5 +134,5 @@ export const MERCHANT_OFFERS: Record<
       type: ShieldType.Tower,
     },
   ],
-  8: [ITEM_HEARTHSTONE],
-};
+  [ITEM_HEARTHSTONE],
+];

@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import { SVGIcon } from "@neverquest/types/props";
@@ -12,7 +13,7 @@ export default function ({
   flipped?: boolean;
   Icon: SVGIcon;
   placement?: OverlayPlacement;
-  tooltip?: JSX.Element | string;
+  tooltip?: ReactNode;
 }) {
   const IconStyled = <Icon style={{ height: 36, transform: `scaleX(${flipped ? -1 : 1})` }} />;
 

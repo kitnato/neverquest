@@ -54,6 +54,15 @@ export const SKILLS: Record<SkillType, Skill> = {
   },
 };
 
-export const SKILLS_ORDER = [SkillType.Criticals, SkillType.Parry, SkillType.Dodge];
+export const SKILLS_ORDER = [
+  SkillType.Criticals,
+  SkillType.Parry,
+  SkillType.Dodge,
+  SkillType.Stagger,
+  SkillType.Regeneration,
+  SkillType.Armors,
+  SkillType.Shields,
+  SkillType.Bleed,
+];
 
 export const SKILLS_INITIAL = [SkillType.Criticals, SkillType.Parry, SkillType.Dodge];

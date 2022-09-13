@@ -24,7 +24,7 @@ export default function () {
       direction="horizontal"
       gap={3}
     >
-      <ImageIcon Icon={Icon} tooltip="Dodge" />
+      <ImageIcon Icon={Icon} tooltip="Dodge chance" />
 
       <span>{formatPercentage(dodgeChanceValue)}</span>
     </Stack>

@@ -16,12 +16,15 @@ export default function () {
   const crewHirableValue = useRecoilValue(crewHirable);
   const isShowingCrewHiring = useRecoilValue(isShowing(ShowingType.CrewHiring));
 
-  const [currentMember, setCurrentMember] = useState<CrewType | null>(null);
+  const [activeMember, setActiveMember] = useState<CrewType | null>(null);
   const [isScreenShowing, setScreenShowing] = useState(false);
+
+  const ActiveMemberComponent = () =>
+    activeMember ? CREW_MEMBERS[activeMember].Component() : null;
 
   const onActivate = (isShowing: boolean, member?: CrewType) => {
     setScreenShowing(isShowing);
-    setCurrentMember(member ?? null);
+    setActiveMember(member ?? null);
   };
 
   return (
@@ -54,12 +57,12 @@ export default function () {
         </Card.Body>
       </Card>
 
-      {currentMember && (
+      {activeMember && (
         <DismissableScreen
-          contents={CREW_MEMBERS[currentMember].Component()}
+          contents={<ActiveMemberComponent />}
           isShowing={isScreenShowing}
           onClose={() => onActivate(false)}
-          title={CREW_MEMBERS[currentMember].name}
+          title={CREW_MEMBERS[activeMember].name}
         />
       )}
     </>

@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { level, progress, progressMax } from "@neverquest/state/encounter";
 import { levelUp, resourcesBalance } from "@neverquest/state/transactions";
-import { useEffect } from "react";
+import { SkillStatus, SkillType } from "@neverquest/types/enums";
+import { skills } from "@neverquest/state/skills";
 
 declare global {
   interface Window {
@@ -15,6 +17,16 @@ export default function () {
   const progressMaxValue = useRecoilValue(progressMax);
   const setLevelUp = useSetRecoilState(levelUp);
   const balanceResources = useSetRecoilState(resourcesBalance);
+  const setSkill = [
+    useSetRecoilState(skills(SkillType.Armors)),
+    useSetRecoilState(skills(SkillType.Bleed)),
+    useSetRecoilState(skills(SkillType.Criticals)),
+    useSetRecoilState(skills(SkillType.Dodge)),
+    useSetRecoilState(skills(SkillType.Parry)),
+    useSetRecoilState(skills(SkillType.Regeneration)),
+    useSetRecoilState(skills(SkillType.Shields)),
+    useSetRecoilState(skills(SkillType.Stagger)),
+  ];
   const setProgress = useSetRecoilState(progress);
 
   useEffect(() => {
@@ -24,6 +36,16 @@ export default function () {
         case "COINAGE":
           if (typeof value === "number") {
             balanceResources({ coinsDifference: value });
+          }
+          break;
+        // Doom
+        case "IDBEHOLDV":
+          // TODO - invulnerability
+          break;
+        // Heretic
+        case "gimmee":
+          if (typeof value === "number" && value in SkillType) {
+            setSkill[value](SkillStatus.Trained);
           }
           break;
         // Source engine
@@ -44,7 +66,7 @@ export default function () {
           break;
         // Thief
         case "starting_mission":
-          if (typeof value === "number" && value && value > levelValue) {
+          if (typeof value === "number" && value > levelValue) {
             const difference = value - levelValue;
 
             for (let i = 0; i < difference; i++) {

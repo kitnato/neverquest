@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import Offcanvas, { OffcanvasPlacement } from "react-bootstrap/Offcanvas";
 
 export default function ({
@@ -7,7 +8,7 @@ export default function ({
   placement = "end",
   title,
 }: {
-  contents: JSX.Element;
+  contents: ReactNode;
   isShowing: boolean;
   onClose: () => void;
   placement?: OffcanvasPlacement;

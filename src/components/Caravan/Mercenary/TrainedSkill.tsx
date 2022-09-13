@@ -7,9 +7,9 @@ import { SkillStatus, SkillType } from "@neverquest/types/enums";
 export default function ({ type }: { type: SkillType }) {
   const skillValue = useRecoilValue(skills(type));
 
-  if (skillValue === SkillStatus.Trained) {
-    return <SkillDisplay type={type} />;
+  if (skillValue !== SkillStatus.Trained) {
+    return null;
   }
 
-  return null;
+  return <SkillDisplay type={type} />;
 }

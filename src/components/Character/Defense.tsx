@@ -1,8 +1,9 @@
 import { Col, Row } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import Block from "@neverquest/components/Character/Block";
-import Dodge from "@neverquest/components/Character/Dodge";
+import Block from "@neverquest/components/Character/BlockChance";
+import Dodge from "@neverquest/components/Character/DodgeChance";
+import Parry from "@neverquest/components/Character/ParryChance";
 import TotalProtection from "@neverquest/components/Character/TotalProtection";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
@@ -31,6 +32,10 @@ export default function () {
 
       <Col>
         <Dodge />
+      </Col>
+
+      <Col>
+        <Parry />
       </Col>
     </Row>
   );

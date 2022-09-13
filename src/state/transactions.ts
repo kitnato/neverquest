@@ -48,7 +48,13 @@ import {
   scrap,
 } from "@neverquest/state/resources";
 import { isGameOver, isNSFW } from "@neverquest/state/settings";
-import { totalProtection, totalBlockChance, totalDamage } from "@neverquest/state/statistics";
+import {
+  totalProtection,
+  totalBlockChance,
+  totalDamage,
+  totalParryChance,
+  totalDodgeChance,
+} from "@neverquest/state/statistics";
 import { skills } from "@neverquest/state/skills";
 import {
   AttributeType,
@@ -60,12 +66,7 @@ import {
 } from "@neverquest/types/enums";
 import { ReserveChangeProps } from "@neverquest/types/props";
 import { isArmor, isItem, isShield, isWeapon } from "@neverquest/types/type-guards";
-import {
-  AnimationSpeed,
-  AnimationType,
-  DeltaDisplay,
-  FloatingTextType,
-} from "@neverquest/types/ui";
+import { AnimationSpeed, AnimationType, FloatingTextType } from "@neverquest/types/ui";
 import { generateArmor, generateShield, generateWeapon } from "@neverquest/utilities/generators";
 import { animateElement } from "@neverquest/utilities/helpers";
 
@@ -75,79 +76,125 @@ export const defense = selector({
   get: () => null,
   key: "defense",
   set: ({ get, set }) => {
-    const totalProtectionValue = get(totalProtection);
-    const healthDamage = (() => {
-      const damage = totalProtectionValue - get(totalDamageMonster);
-
-      return damage < 0 ? damage : 0;
-    })();
-    const deltaHealth = deltas(DeltaType.Health);
-
     animateElement({
       element: get(statusElement),
       speed: AnimationSpeed.Fast,
       type: AnimationType.HeadShake,
     });
 
+    const deltaHealth = deltas(DeltaType.Health);
+    const hasDodged =
+      get(skills(SkillType.Dodge)) === SkillStatus.Trained &&
+      Math.random() <= get(totalDodgeChance);
+
+    if (hasDodged) {
+      set(deltaHealth, {
+        color: FloatingTextType.Neutral,
+        value: "DODGED",
+      });
+
+      return;
+    }
+
+    const totalProtectionValue = get(totalProtection);
+    const monsterDamage = get(totalDamageMonster);
+    const healthDamage = (() => {
+      const damage = totalProtectionValue - monsterDamage;
+
+      return damage < 0 ? damage : 0;
+    })();
+
     if (healthDamage === 0) {
       set(deltaHealth, {
         color: FloatingTextType.Neutral,
         value: "0",
       });
-    } else {
+
+      return;
+    }
+
+    const hasBlocked = Math.random() <= get(totalBlockChance);
+
+    if (hasBlocked) {
       const canBlockValue = get(canBlock);
-      const hasBlocked = Math.random() <= get(totalBlockChance);
+      const { staminaCost } = get(shield);
 
-      if (hasBlocked) {
-        const { staminaCost } = get(shield);
+      if (canBlockValue) {
+        set(deltaHealth, {
+          color: FloatingTextType.Neutral,
+          value: "BLOCKED",
+        });
+        set(staminaChange, -staminaCost);
 
-        if (canBlockValue) {
-          set(deltaHealth, {
-            color: FloatingTextType.Neutral,
-            value: "BLOCKED",
-          });
-          set(staminaChange, -staminaCost);
-
-          if (get(skills(SkillType.Stagger)) !== SkillStatus.Trained) {
-            set(isMonsterStaggered, true);
-          }
-        } else {
-          set(deltas(DeltaType.Stamina), [
-            {
-              color: FloatingTextType.Neutral,
-              value: "CANNOT BLOCK",
-            },
-            {
-              color: FloatingTextType.Negative,
-              value: ` (${staminaCost})`,
-            },
-          ]);
+        if (get(skills(SkillType.Stagger)) !== SkillStatus.Trained) {
+          set(isMonsterStaggered, true);
         }
+
+        return;
       } else {
-        let deltaContents: DeltaDisplay = {
-          color: FloatingTextType.Negative,
-          value: `${healthDamage}`,
-        };
-
-        if (totalProtectionValue > 0) {
-          deltaContents = [
-            deltaContents,
-            {
-              color: FloatingTextType.Neutral,
-              value: ` (${totalProtectionValue})`,
-            },
-          ];
-        }
-
-        set(healthChange, { delta: healthDamage, deltaContents });
-
-        if (!get(isShowing(ShowingType.Recovery))) {
-          set(isShowing(ShowingType.Recovery), true);
-        }
-
-        set(isRecovering, true);
+        set(deltas(DeltaType.Stamina), [
+          {
+            color: FloatingTextType.Neutral,
+            value: "CANNOT BLOCK",
+          },
+          {
+            color: FloatingTextType.Negative,
+            value: ` (${staminaCost})`,
+          },
+        ]);
       }
     }
+
+    const hasParried =
+      get(skills(SkillType.Parry)) === SkillStatus.Trained &&
+      Math.random() <= get(totalParryChance);
+
+    if (!hasBlocked && hasParried) {
+      const parryDamage = Math.floor(monsterDamage / 2);
+      const monsterHealth = get(currentHealthMonster) - parryDamage;
+
+      set(currentHealthMonster, monsterHealth);
+      set(deltas(DeltaType.HealthMonster), [
+        {
+          color: FloatingTextType.Neutral,
+          value: "PARRIED",
+        },
+        {
+          color: FloatingTextType.Negative,
+          value: ` (${parryDamage})`,
+        },
+      ]);
+
+      animateElement({
+        element: get(monsterStatusElement),
+        speed: AnimationSpeed.Fast,
+        type: AnimationType.HeadShake,
+      });
+    }
+
+    if (totalProtectionValue > 0) {
+      set(healthChange, {
+        delta: healthDamage,
+        deltaContents: [
+          {
+            color: FloatingTextType.Negative,
+            value: `${healthDamage}`,
+          },
+          {
+            color: FloatingTextType.Neutral,
+            value: ` (${totalProtectionValue})`,
+          },
+        ],
+      });
+    } else {
+      set(healthChange, healthDamage);
+    }
+
+    if (!get(isShowing(ShowingType.Recovery))) {
+      set(isShowing(ShowingType.Recovery), true);
+    }
+
+    set(isRecovering, true);
   },
 });
 
@@ -200,7 +247,6 @@ export const initialization = selector({
 
     set(currentHealth, get(maximumHealth));
     set(currentStamina, get(maximumStamina));
-    set(merchantInventoryGeneration, null);
     set(monsterCreate, null);
 
     ATTRIBUTES_INITIAL.forEach((type) =>
@@ -300,8 +346,8 @@ export const merchantInventoryGeneration = selector({
   get: () => null,
   key: "merchantInventoryGeneration",
   set: ({ get, set }) => {
-    const levelValue = get(level);
     const inventory = { ...get(merchantInventory) };
+    const levelValue = get(level);
     const nsfwValue = get(isNSFW);
 
     // Remove all previously returned items, so they no longer appear under buy back.
@@ -309,56 +355,60 @@ export const merchantInventoryGeneration = selector({
       .filter((id) => inventory[id].isReturned)
       .forEach((id) => delete inventory[id]);
 
-    // Merchant always offers one of each (low quality) gear at the current level, even if previously sold.
-    const gearSettings = {
-      hasPrefix: true,
-      isNSFW: nsfwValue,
-      level: levelValue,
-      tags: [AffixTag.LowQuality],
-    };
+    const merchantOffersIndex = levelValue - 1;
 
-    MERCHANT_OFFERS[levelValue].forEach((item) => {
-      const symbol = Symbol();
-      const inventoryContentsBase = {
-        isReturned: false,
-        key: nanoid(),
+    if (MERCHANT_OFFERS[merchantOffersIndex]) {
+      // Merchant always offers one of each (low quality) gear at the current level, even if previously sold.
+      const gearSettings = {
+        hasPrefix: true,
+        isNSFW: nsfwValue,
+        level: levelValue,
+        tags: [AffixTag.LowQuality],
       };
 
-      if (isItem(item)) {
-        inventory[symbol] = {
-          ...inventoryContentsBase,
-          item,
+      MERCHANT_OFFERS[merchantOffersIndex].forEach((item) => {
+        const symbol = Symbol();
+        const inventoryContentsBase = {
+          isReturned: false,
+          key: nanoid(),
         };
-      } else {
-        const gear = (() => {
-          if ("armorClass" in item) {
-            return generateArmor({
+
+        if (isItem(item)) {
+          inventory[symbol] = {
+            ...inventoryContentsBase,
+            item,
+          };
+        } else {
+          const gear = (() => {
+            if ("armorClass" in item) {
+              return generateArmor({
+                ...gearSettings,
+                ...item,
+              });
+            }
+
+            if ("weaponClass" in item) {
+              return generateWeapon({
+                ...gearSettings,
+                ...item,
+              });
+            }
+
+            return generateShield({
               ...gearSettings,
               ...item,
             });
-          }
+          })();
 
-          if ("weaponClass" in item) {
-            return generateWeapon({
-              ...gearSettings,
-              ...item,
-            });
-          }
+          inventory[symbol] = {
+            ...inventoryContentsBase,
+            item: gear,
+          };
+        }
+      });
 
-          return generateShield({
-            ...gearSettings,
-            ...item,
-          });
-        })();
-
-        inventory[symbol] = {
-          ...inventoryContentsBase,
-          item: gear,
-        };
-      }
-    });
-
-    set(merchantInventory, inventory);
+      set(merchantInventory, inventory);
+    }
   },
 });
 
@@ -470,7 +520,6 @@ export const offense = selector({
     const { staminaCost } = get(weapon);
 
     if (get(canAttack)) {
-      const element = get(monsterStatusElement);
       const totalDamageValue = get(totalDamage);
       let monsterHealth = get(currentHealthMonster) - totalDamageValue;
 
@@ -489,7 +538,7 @@ export const offense = selector({
       });
 
       animateElement({
-        element,
+        element: get(monsterStatusElement),
         speed: AnimationSpeed.Fast,
         type: AnimationType.HeadShake,
       });

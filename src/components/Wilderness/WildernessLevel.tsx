@@ -1,7 +1,6 @@
-import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconDisplay from "@neverquest/components/IconDisplay";
 import FloatingText from "@neverquest/components/FloatingText";
 import { ReactComponent as Icon } from "@neverquest/icons/flying-flag.svg";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
@@ -21,12 +20,17 @@ export default function () {
   });
 
   return (
-    <Stack direction="horizontal" gap={3}>
-      <ImageIcon Icon={Icon} placement={OverlayPlacement.Bottom} tooltip="Level" />
+    <IconDisplay
+      contents={
+        <>
+          <span>{levelValue}</span>
 
-      <span>{levelValue}</span>
-
-      <FloatingText atom={deltaWildernessLevel} />
-    </Stack>
+          <FloatingText atom={deltaWildernessLevel} />
+        </>
+      }
+      Icon={Icon}
+      iconProps={{ placement: OverlayPlacement.Bottom }}
+      tooltip="Level"
+    />
   );
 }

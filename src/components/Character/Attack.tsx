@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import AttackMeter from "@neverquest/components/Character/AttackMeter";
 import FloatingText from "@neverquest/components/FloatingText";
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconDisplay from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import { ReactComponent as Icon } from "@neverquest/icons/striking-splinter.svg";
@@ -45,45 +45,47 @@ export default function () {
   );
 
   return (
-    <Stack direction="horizontal" gap={3}>
-      <ImageIcon Icon={Icon} tooltip="Attack rate" />
+    <IconDisplay
+      contents={
+        showTotalAttackRateBreakdownValue ? (
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <Popover.Header as="h4">Attack rate breakdown</Popover.Header>
 
-      {showTotalAttackRateBreakdownValue ? (
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <Popover.Header as="h4">Attack rate breakdown</Popover.Header>
+                <Popover.Body>
+                  <Table borderless size="sm">
+                    <tbody>
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
 
-              <Popover.Body>
-                <Table borderless size="sm">
-                  <tbody>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
+                        <td>{formatMilliseconds(weaponValue.rate)}</td>
+                      </tr>
 
-                      <td>{formatMilliseconds(weaponValue.rate)}</td>
-                    </tr>
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
-
-                      <td>{`-${formatPercentage(
-                        getComputedStat({ base, increment, points })
-                      )}`}</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Popover.Body>
-            </Popover>
-          }
-          placement="top"
-        >
-          <div className="w-100">
-            <MeterWithDelta />
-          </div>
-        </OverlayTrigger>
-      ) : (
-        <MeterWithDelta />
-      )}
-    </Stack>
+                        <td>{`-${formatPercentage(
+                          getComputedStat({ base, increment, points })
+                        )}`}</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </Popover.Body>
+              </Popover>
+            }
+            placement="top"
+          >
+            <div className="w-100">
+              <MeterWithDelta />
+            </div>
+          </OverlayTrigger>
+        ) : (
+          <MeterWithDelta />
+        )
+      }
+      Icon={Icon}
+      tooltip="Attack rate"
+    />
   );
 }

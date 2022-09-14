@@ -1,8 +1,13 @@
-import { DeltaDisplay } from "@neverquest/types/ui";
+import { ReactNode } from "react";
 
-export type ReserveChangeProps = number | { delta: number; deltaContents: DeltaDisplay };
+import { DeltaDisplay, OverlayPlacement } from "@neverquest/types/ui";
 
-export type SVGIcon = React.FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string }>;
+export interface IconImageProps {
+  Icon: SVGIcon;
+  isFlipped?: boolean;
+  placement?: OverlayPlacement;
+  tooltip?: ReactNode;
+}
 
 export interface LootProps {
   tooltip?: string | undefined;
@@ -13,3 +18,7 @@ export interface RangeProps {
   maximum: number;
   minimum: number;
 }
+
+export type ReserveChangeProps = number | { delta: number; deltaContents: DeltaDisplay };
+
+export type SVGIcon = React.FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string }>;

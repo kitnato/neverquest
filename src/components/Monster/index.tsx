@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { Card, Stack } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconDisplay from "@neverquest/components/IconDisplay";
 import MonsterStatus from "@neverquest/components/Monster/MonsterStatus";
 import { UNKNOWN } from "@neverquest/constants";
 import { ReactComponent as Icon } from "@neverquest/icons/evil-eyes.svg";
@@ -42,11 +42,11 @@ export default function () {
   return (
     <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
       <Card.Body>
-        <Stack direction="horizontal" gap={3}>
-          <ImageIcon Icon={Icon} tooltip={UNKNOWN} />
-
-          <span className="fst-italic">The darkness stirs.</span>
-        </Stack>
+        <IconDisplay
+          contents={<span className="fst-italic">The darkness stirs.</span>}
+          Icon={Icon}
+          tooltip={UNKNOWN}
+        />
       </Card.Body>
     </Card>
   );

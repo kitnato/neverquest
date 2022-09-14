@@ -1,7 +1,7 @@
 import { Card, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconImage from "@neverquest/components/IconImage";
 import ResourceDisplay from "@neverquest/components/Resource/ResourceDisplay";
 import Looting from "@neverquest/components/Resource/Looting";
 import { ReactComponent as Icon } from "@neverquest/icons/open-chest.svg";
@@ -23,7 +23,7 @@ export default function () {
           <Card.Body>
             {hasLootedValue ? (
               <Stack direction="horizontal" gap={5}>
-                <ImageIcon Icon={Icon} tooltip="Loot" />
+                <IconImage Icon={Icon} tooltip="Loot" />
 
                 <span className="fst-italic">Nothing remains.</span>
               </Stack>

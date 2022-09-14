@@ -1,7 +1,7 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconImage from "@neverquest/components/IconImage";
 import { ReactComponent as Icon } from "@neverquest/icons/locked-chest.svg";
 import { isLevelCompleted } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
@@ -26,7 +26,7 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
         onClick={() => balanceResources({})}
         variant={UIVariant.Outline}
       >
-        <ImageIcon Icon={Icon} />
+        <IconImage Icon={Icon} />
       </Button>
     </OverlayTrigger>
   );

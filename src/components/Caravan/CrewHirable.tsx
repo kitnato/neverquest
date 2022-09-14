@@ -2,7 +2,7 @@ import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconDisplay from "@neverquest/components/IconDisplay";
 import Coins from "@neverquest/components/Resource/Coins";
 import { CREW_MEMBERS } from "@neverquest/constants/caravan";
 import { ReactComponent as Icon } from "@neverquest/icons/cowled.svg";
@@ -26,11 +26,7 @@ export default function ({ type }: { type: CrewType }) {
 
   return (
     <div className="align-items-center d-flex justify-content-between w-100">
-      <Stack direction="horizontal" gap={3}>
-        <ImageIcon Icon={Icon} tooltip={name} />
-
-        <span>{description}</span>
-      </Stack>
+      <IconDisplay contents={description} Icon={Icon} isDescription tooltip={name} />
 
       <Stack direction="horizontal" gap={3}>
         <Coins tooltip="Price (coins)" value={price} />

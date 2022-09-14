@@ -4,10 +4,6 @@ body {
   user-select: none;
 }
 
-button.btn-outline-dark:hover svg {
-  filter: invert(1);
-}
-
 input.form-control-plaintext {
   cursor: pointer;
   outline: none;

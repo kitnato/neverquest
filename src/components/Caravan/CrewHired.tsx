@@ -1,8 +1,8 @@
 import { MouseEvent } from "react";
-import { Button, Stack } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconDisplay from "@neverquest/components/IconDisplay";
 import { CREW_MEMBERS } from "@neverquest/constants/caravan";
 import { ReactComponent as Icon } from "@neverquest/icons/cowled.svg";
 import { crew } from "@neverquest/state/caravan";
@@ -19,23 +19,25 @@ export default function ({ setActive, type }: { setActive: () => void; type: Cre
   const { interaction, monologues, name } = CREW_MEMBERS[type];
 
   return (
-    <Stack direction="horizontal" gap={3}>
-      <ImageIcon Icon={Icon} tooltip={name} />
+    <IconDisplay
+      contents={
+        <div className="align-items-center d-flex justify-content-between w-100">
+          <span>{`"${monologues[monologueProgress]}"`}</span>
 
-      <div className="align-items-center d-flex justify-content-between w-100">
-        <span>{`"${monologues[monologueProgress]}"`}</span>
+          <Button
+            onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+              currentTarget.blur();
 
-        <Button
-          onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-            currentTarget.blur();
-
-            setActive();
-          }}
-          variant={UIVariant.Outline}
-        >
-          {interaction}
-        </Button>
-      </div>
-    </Stack>
+              setActive();
+            }}
+            variant={UIVariant.Outline}
+          >
+            {interaction}
+          </Button>
+        </div>
+      }
+      Icon={Icon}
+      tooltip={name}
+    />
   );
 }

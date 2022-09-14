@@ -1,8 +1,8 @@
-import { OverlayTrigger, Popover, Stack, Table } from "react-bootstrap";
+import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import FloatingText from "@neverquest/components/FloatingText";
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconDisplay from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
@@ -30,43 +30,47 @@ export default function () {
   });
 
   return (
-    <Stack direction="horizontal" gap={3}>
-      <ImageIcon Icon={Icon} tooltip="Total damage" />
+    <IconDisplay
+      contents={
+        <>
+          {showTotalDamageBreakdownValue ? (
+            <OverlayTrigger
+              overlay={
+                <Popover>
+                  <Popover.Header as="h4">Damage breakdown</Popover.Header>
 
-      {showTotalDamageBreakdownValue ? (
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <Popover.Header as="h4">Damage breakdown</Popover.Header>
+                  <Popover.Body>
+                    <Table borderless size="sm">
+                      <tbody>
+                        <tr>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
 
-              <Popover.Body>
-                <Table borderless size="sm">
-                  <tbody>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
+                          <td>{weaponValue.damage}</td>
+                        </tr>
 
-                      <td>{weaponValue.damage}</td>
-                    </tr>
+                        <tr>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
+                          <td>{`+${getComputedStat({ base, increment, points })}`}</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Popover.Body>
+                </Popover>
+              }
+              placement="top"
+            >
+              <span>{totalDamageValue}</span>
+            </OverlayTrigger>
+          ) : (
+            <span>{totalDamageValue}</span>
+          )}
 
-                      <td>{`+${getComputedStat({ base, increment, points })}`}</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Popover.Body>
-            </Popover>
-          }
-          placement="top"
-        >
-          <span>{totalDamageValue}</span>
-        </OverlayTrigger>
-      ) : (
-        <span>{totalDamageValue}</span>
-      )}
-
-      <FloatingText atom={deltaTotalDamage} />
-    </Stack>
+          <FloatingText atom={deltaTotalDamage} />
+        </>
+      }
+      Icon={Icon}
+      tooltip="Total damage"
+    />
   );
 }

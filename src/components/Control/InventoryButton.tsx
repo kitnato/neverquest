@@ -3,7 +3,7 @@ import { MouseEvent, useState } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import DismissableScreen from "@neverquest/components/DismissableScreen";
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconImage from "@neverquest/components/IconImage";
 import Inventory from "@neverquest/components/Inventory";
 import { ReactComponent as Icon } from "@neverquest/icons/knapsack.svg";
 import { hasKnapsack, isAttacking } from "@neverquest/state/character";
@@ -32,7 +32,7 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
             }}
             variant={UIVariant.Outline}
           >
-            <ImageIcon Icon={Icon} />
+            <IconImage Icon={Icon} />
           </Button>
         </span>
       </OverlayTrigger>

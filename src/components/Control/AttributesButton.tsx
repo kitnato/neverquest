@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import Attributes from "@neverquest/components/Attributes";
 import DismissableScreen from "@neverquest/components/DismissableScreen";
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconImage from "@neverquest/components/IconImage";
 import { ReactComponent as Icon } from "@neverquest/icons/skills.svg";
 import { attributesIncreasable } from "@neverquest/state/attributes";
 import { isAttacking } from "@neverquest/state/character";
@@ -45,7 +45,7 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
             }}
             variant={UIVariant.Outline}
           >
-            <ImageIcon Icon={Icon} />
+            <IconImage Icon={Icon} />
 
             {attributesIncreasableValue && (
               <Badge bg="secondary" className="position-absolute" style={{ top: 12 }}>

@@ -3,7 +3,7 @@ import { Button, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useRecoilState } from "recoil";
 
 import ConfirmationDialog from "@neverquest/components/ConfirmationDialog";
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconImage from "@neverquest/components/IconImage";
 import { ReactComponent as IconRetreat } from "@neverquest/icons/return-arrow.svg";
 import { ReactComponent as IconResting } from "@neverquest/icons/tired-eye.svg";
 import { ReactComponent as IconAttack } from "@neverquest/icons/tron-arrow.svg";
@@ -103,7 +103,7 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
             }}
             variant={UIVariant.Outline}
           >
-            <ImageIcon Icon={Icon} />
+            <IconImage Icon={Icon} />
           </Button>
         </span>
       </OverlayTrigger>

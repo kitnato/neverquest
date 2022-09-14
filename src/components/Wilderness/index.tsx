@@ -1,7 +1,7 @@
 import { Card, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconImage from "@neverquest/components/IconImage";
 import { ReactComponent as Icon } from "@neverquest/icons/crossed-bones.svg";
 import Monster from "@neverquest/components/Monster";
 import { isLevelCompleted } from "@neverquest/state/encounter";
@@ -17,7 +17,7 @@ export default function () {
         <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
           <Card.Body>
             <Stack direction="horizontal" gap={5}>
-              <ImageIcon Icon={Icon} tooltip="Monster remains" />
+              <IconImage Icon={Icon} tooltip="Monster remains" />
 
               <span className="fst-italic">Everything is dead.</span>
             </Stack>

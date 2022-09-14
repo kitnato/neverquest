@@ -4,7 +4,7 @@ import { UNKNOWN } from "@neverquest/constants";
 import LOCRA from "@neverquest/locra";
 import { localStorageEffect } from "@neverquest/state/effects";
 import { isNSFW } from "@neverquest/state/settings";
-import { levelUp } from "@neverquest/state/transactions";
+import { levelUp, merchantInventoryGeneration } from "@neverquest/state/transactions";
 import { LocationType, StorageKey } from "@neverquest/types/enums";
 
 // ATOMS
@@ -69,6 +69,7 @@ export const location = selector({
     const isWildernessValue = get(isWilderness);
 
     if (isWildernessValue) {
+      set(merchantInventoryGeneration, null);
       set(mode, LocationType.Caravan);
     } else {
       set(levelUp, null);

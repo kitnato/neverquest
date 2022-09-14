@@ -2,7 +2,7 @@ import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import FloatingText from "@neverquest/components/FloatingText";
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconDisplay from "@neverquest/components/IconDisplay";
 import RecoveryMeter from "@neverquest/components/Character/RecoveryMeter";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/knockout.svg";
@@ -10,8 +10,6 @@ import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { totalRecoveryRate } from "@neverquest/state/statistics";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
-import { AnimationType } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function () {
   const showRecoveryValue = useRecoilValue(isShowing(ShowingType.Recovery));
@@ -29,18 +27,17 @@ export default function () {
   }
 
   return (
-    <Stack
-      className={getAnimationClass({ type: AnimationType.FlipInX })}
-      direction="horizontal"
-      gap={3}
-    >
-      <ImageIcon Icon={Icon} tooltip="Recovery rate" />
+    <IconDisplay
+      contents={
+        <Stack className="w-100" direction="horizontal">
+          <RecoveryMeter />
 
-      <Stack className="w-100" direction="horizontal">
-        <RecoveryMeter />
-
-        <FloatingText atom={deltaTotalRecoveryRate} />
-      </Stack>
-    </Stack>
+          <FloatingText atom={deltaTotalRecoveryRate} />
+        </Stack>
+      }
+      Icon={Icon}
+      isAnimated
+      tooltip="Recovery rate"
+    />
   );
 }

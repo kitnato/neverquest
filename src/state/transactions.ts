@@ -448,7 +448,6 @@ export const levelUp = selector({
 
     set(level, nextLevel);
     set(progress, 0);
-    set(merchantInventoryGeneration, null);
     set(monsterCreate, null);
   },
 });

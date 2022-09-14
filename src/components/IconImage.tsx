@@ -1,21 +1,15 @@
-import { ReactNode } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-import { SVGIcon } from "@neverquest/types/props";
+import { IconImageProps } from "@neverquest/types/props";
 import { OverlayPlacement } from "@neverquest/types/ui";
 
 export default function ({
-  flipped = false,
   Icon,
+  isFlipped = false,
   placement = OverlayPlacement.Top,
   tooltip,
-}: {
-  flipped?: boolean;
-  Icon: SVGIcon;
-  placement?: OverlayPlacement;
-  tooltip?: ReactNode;
-}) {
-  const IconStyled = <Icon style={{ height: 36, transform: `scaleX(${flipped ? -1 : 1})` }} />;
+}: IconImageProps) {
+  const IconStyled = <Icon style={{ height: 36, transform: `scaleX(${isFlipped ? -1 : 1})` }} />;
 
   if (tooltip) {
     return (

@@ -2,7 +2,7 @@ import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import ImageIcon from "@neverquest/components/ImageIcon";
+import ImageIcon from "@neverquest/components/IconImage";
 import { UNKNOWN } from "@neverquest/constants";
 import { ReactComponent as Icon } from "@neverquest/icons/journey.svg";
 import { isWilderness, level, location } from "@neverquest/state/encounter";
@@ -47,7 +47,7 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
         }}
         variant={UIVariant.Outline}
       >
-        <ImageIcon Icon={Icon} flipped={!isWildernessValue} />
+        <ImageIcon Icon={Icon} isFlipped={!isWildernessValue} />
       </Button>
     </OverlayTrigger>
   );

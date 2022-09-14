@@ -3,7 +3,7 @@ import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { Clock, Plus } from "react-bootstrap-icons";
 import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
 
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconDisplay from "@neverquest/components/IconDisplay";
 import { UNKNOWN } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import { attributeCost, attributes, attributesIncreasable } from "@neverquest/state/attributes";
@@ -28,11 +28,7 @@ export default function ({ type }: { type: AttributeType }) {
     <div className="align-items-center d-flex justify-content-between w-100">
       {canAssign ? (
         <>
-          <Stack direction="horizontal" gap={3}>
-            <ImageIcon Icon={Icon} tooltip={name} />
-
-            <span>{description}</span>
-          </Stack>
+          <IconDisplay contents={description} Icon={Icon} isDescription tooltip={name} />
 
           <Stack direction="horizontal" gap={3}>
             <span>{points}</span>
@@ -63,14 +59,14 @@ export default function ({ type }: { type: AttributeType }) {
                   }}
                   variant={UIVariant.Outline}
                 >
-                  {attributesIncreasableValue ? <Plus /> : <Clock />}
+                  {attributesIncreasableValue ? <Plus height="1.5em" width="1.5em" /> : <Clock />}
                 </Button>
               </span>
             </OverlayTrigger>
           </Stack>
         </>
       ) : (
-        UNKNOWN
+        <span className="text-center w-100">{UNKNOWN}</span>
       )}
     </div>
   );

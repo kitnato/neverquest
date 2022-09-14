@@ -1,8 +1,7 @@
-import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
 import FloatingText from "@neverquest/components/FloatingText";
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconDisplay from "@neverquest/components/IconDisplay";
 import { ReactComponent as Icon } from "@neverquest/icons/abstract-013.svg";
 import { essenceAbsorbed } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
@@ -12,12 +11,16 @@ export default function () {
   const essenceAbsorbedValue = useRecoilValue(essenceAbsorbed);
 
   return (
-    <Stack direction="horizontal" gap={3}>
-      <ImageIcon Icon={Icon} tooltip="Absorbed essence" />
+    <IconDisplay
+      contents={
+        <>
+          <span>{essenceAbsorbedValue}</span>
 
-      <span>{essenceAbsorbedValue}</span>
-
-      <FloatingText atom={deltas(DeltaType.EssenceAbsorbed)} />
-    </Stack>
+          <FloatingText atom={deltas(DeltaType.EssenceAbsorbed)} />
+        </>
+      }
+      Icon={Icon}
+      tooltip="Absorbed essence"
+    />
   );
 }

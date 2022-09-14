@@ -1,6 +1,6 @@
 import Stack from "react-bootstrap/Stack";
 
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconDisplay from "@neverquest/components/IconDisplay";
 import FloatingText from "@neverquest/components/FloatingText";
 import ReserveMeter from "@neverquest/components/ReserveMeter";
 import { ReactComponent as Icon } from "@neverquest/icons/hospital-cross.svg";
@@ -10,14 +10,16 @@ import { DeltaType } from "@neverquest/types/enums";
 
 export default function () {
   return (
-    <Stack direction="horizontal" gap={3}>
-      <ImageIcon Icon={Icon} tooltip="Monster health" />
+    <IconDisplay
+      contents={
+        <Stack className="w-100" direction="horizontal">
+          <ReserveMeter atom={currentHealthMonster} atomMaximum={maximumHealthMonster} />
 
-      <Stack className="w-100" direction="horizontal">
-        <ReserveMeter atom={currentHealthMonster} atomMaximum={maximumHealthMonster} />
-
-        <FloatingText atom={deltas(DeltaType.HealthMonster)} />
-      </Stack>
-    </Stack>
+          <FloatingText atom={deltas(DeltaType.HealthMonster)} />
+        </Stack>
+      }
+      Icon={Icon}
+      tooltip="Monster health"
+    />
   );
 }

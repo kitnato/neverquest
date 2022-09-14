@@ -1,12 +1,9 @@
-import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconDisplay from "@neverquest/components/IconDisplay";
 import { ReactComponent as Icon } from "@neverquest/icons/heavy-timer.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import { damagePerSecondMonster } from "@neverquest/state/monster";
-import { AnimationType } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
 import { ShowingType } from "@neverquest/types/enums";
 
 export default function () {
@@ -18,14 +15,11 @@ export default function () {
   }
 
   return (
-    <Stack
-      className={getAnimationClass({ type: AnimationType.FlipInX })}
-      direction="horizontal"
-      gap={3}
-    >
-      <ImageIcon Icon={Icon} tooltip="Monster damage per second (DPS)" />
-
-      <span>{damagePerSecondMonsterValue}</span>
-    </Stack>
+    <IconDisplay
+      contents={damagePerSecondMonsterValue}
+      Icon={Icon}
+      isAnimated
+      tooltip="Monster damage per second (DPS)"
+    />
   );
 }

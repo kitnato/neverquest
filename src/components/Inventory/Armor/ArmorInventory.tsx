@@ -1,16 +1,10 @@
-import Stack from "react-bootstrap/Stack";
-
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconDisplay from "@neverquest/components/IconDisplay";
 import ArmorName from "@neverquest/components/Inventory/Armor/ArmorName";
 import { ReactComponent as Icon } from "@neverquest/icons/shoulder-armor.svg";
 import { Armor } from "@neverquest/types";
 
-export default function ({ armor }: { armor: Armor }) {
-  return (
-    <Stack direction="horizontal" gap={3}>
-      <ImageIcon Icon={Icon} tooltip="Armor" />
+// <IconDisplay contents={} Icon={Icon} isAnimated
 
-      <ArmorName armor={armor} />
-    </Stack>
-  );
+export default function ({ armor }: { armor: Armor }) {
+  return <IconDisplay contents={<ArmorName armor={armor} />} Icon={Icon} tooltip="Armor" />;
 }

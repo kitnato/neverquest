@@ -1,7 +1,6 @@
-import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconDisplay from "@neverquest/components/IconDisplay";
 import { ReactComponent as IconAttacking } from "@neverquest/icons/carnivore-mouth.svg";
 import { ReactComponent as IconDead } from "@neverquest/icons/dinosaur-bones.svg";
 import { ReactComponent as IconLurking } from "@neverquest/icons/mouth-watering.svg";
@@ -25,11 +24,5 @@ export default function () {
     return { Icon: IconLurking, tooltip: "Lurking monster" };
   })();
 
-  return (
-    <Stack direction="horizontal" gap={3}>
-      <ImageIcon Icon={Icon} tooltip={tooltip} />
-
-      <span>{monsterNameValue}</span>
-    </Stack>
-  );
+  return <IconDisplay contents={monsterNameValue} Icon={Icon} tooltip={tooltip} />;
 }

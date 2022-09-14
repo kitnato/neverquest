@@ -1,8 +1,8 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import { ChangeEvent, KeyboardEvent, MouseEvent, useState } from "react";
-import { FormControl, Stack } from "react-bootstrap";
+import { FormControl } from "react-bootstrap";
 
-import ImageIcon from "@neverquest/components/ImageIcon";
+import IconDisplay from "@neverquest/components/IconDisplay";
 import { ReactComponent as AliveIcon } from "@neverquest/icons/domino-mask.svg";
 import { ReactComponent as DeadIcon } from "@neverquest/icons/skull-crossed-bones.svg";
 import { name } from "@neverquest/state/character";
@@ -15,24 +15,26 @@ export default function () {
   const [isEditing, setEditing] = useState(false);
 
   return (
-    <Stack direction="horizontal" gap={3}>
-      <ImageIcon Icon={isGameOverValue ? DeadIcon : AliveIcon} tooltip="Name" />
-
-      <FormControl
-        className="hover-grow"
-        onBlur={() => setEditing(false)}
-        onChange={({ target }: ChangeEvent<HTMLInputElement>) => setName(target.value)}
-        onClick={({ currentTarget }: MouseEvent<HTMLInputElement>) => {
-          setEditing(true);
-          currentTarget.setSelectionRange(0, 0);
-          currentTarget.select();
-        }}
-        onKeyPress={({ key }: KeyboardEvent<HTMLInputElement>) =>
-          key === "Enter" && setEditing(false)
-        }
-        plaintext={!isEditing}
-        value={nameValue}
-      />
-    </Stack>
+    <IconDisplay
+      contents={
+        <FormControl
+          className="hover-grow"
+          onBlur={() => setEditing(false)}
+          onChange={({ target }: ChangeEvent<HTMLInputElement>) => setName(target.value)}
+          onClick={({ currentTarget }: MouseEvent<HTMLInputElement>) => {
+            setEditing(true);
+            currentTarget.setSelectionRange(0, 0);
+            currentTarget.select();
+          }}
+          onKeyDown={({ key }: KeyboardEvent<HTMLInputElement>) =>
+            key === "Enter" && setEditing(false)
+          }
+          plaintext={!isEditing}
+          value={nameValue}
+        />
+      }
+      Icon={isGameOverValue ? DeadIcon : AliveIcon}
+      tooltip="Name"
+    />
   );
 }

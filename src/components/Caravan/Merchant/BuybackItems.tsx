@@ -7,7 +7,7 @@ import { merchantInventory } from "@neverquest/state/caravan";
 export default function () {
   const merchantInventoryValue = useRecoilValue(merchantInventory);
 
-  const returnedItemIDs = Object.getOwnPropertySymbols(merchantInventoryValue).filter(
+  const returnedItemIDs = Object.getOwnPropertyNames(merchantInventoryValue).filter(
     (id) => merchantInventoryValue[id].isReturned
   );
 

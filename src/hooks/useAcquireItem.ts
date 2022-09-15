@@ -37,7 +37,7 @@ export default function () {
       return true;
     }
 
-    const id = Symbol();
+    const id = nanoid();
     const key = nanoid();
 
     setInventory((current) => ({

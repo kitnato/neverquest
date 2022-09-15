@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { MouseEvent, useState } from "react";
 import { Button, Stack } from "react-bootstrap";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -16,11 +17,11 @@ export default function () {
   const setMerchantInventory = useSetRecoilState(merchantInventory);
   const balanceResources = useSetRecoilState(resourcesBalance);
 
-  const [sellConfirmation, setSellConfirmation] = useState<symbol | null>(null);
+  const [sellConfirmation, setSellConfirmation] = useState<string | null>(null);
 
-  const inventoryIDs = Object.getOwnPropertySymbols(inventoryValue);
+  const inventoryIDs = Object.getOwnPropertyNames(inventoryValue);
 
-  const sellItem = (id: symbol) => {
+  const sellItem = (id: string) => {
     const { item, key } = inventoryValue[id];
 
     setInventory((current) => {
@@ -33,7 +34,7 @@ export default function () {
     balanceResources({ coinsDifference: getSellPrice(item) });
     setMerchantInventory((current) => ({
       ...current,
-      [Symbol()]: { isReturned: true, item, key },
+      [nanoid()]: { isReturned: true, item, key },
     }));
   };
 

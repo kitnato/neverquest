@@ -32,13 +32,13 @@ interface InventoryBase {
 }
 
 export interface Inventory {
-  [id: symbol]: InventoryBase & {
+  [id: string]: InventoryBase & {
     isEquipped: boolean;
   };
 }
 
 export interface InventoryMerchant {
-  [id: symbol]: InventoryBase & {
+  [id: string]: InventoryBase & {
     isReturned: boolean;
   };
 }

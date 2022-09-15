@@ -52,7 +52,7 @@ export const ATTRIBUTES: Record<AttributeType, Attribute> = {
   },
   [AttributeType.Health]: {
     base: 8,
-    description: "Increases maximum total health",
+    description: "Increases maximum health",
     Icon,
     increment: 4,
     name: "Vitality",
@@ -97,7 +97,7 @@ export const ATTRIBUTES: Record<AttributeType, Attribute> = {
   },
   [AttributeType.Stamina]: {
     base: 4,
-    description: "Increases maximum total stamina",
+    description: "Increases maximum stamina",
     Icon,
     increment: 2,
     name: "Endurance",
@@ -119,13 +119,13 @@ export const ATTRIBUTES_ORDER = [
   AttributeType.StaminaRegenerationRate,
   AttributeType.Damage,
   AttributeType.AttackRate,
+  AttributeType.RecoveryRate,
   AttributeType.CriticalChance,
   AttributeType.CriticalDamage,
   AttributeType.BleedDamage,
   AttributeType.DodgeChance,
   AttributeType.ParryChance,
   AttributeType.StaggerDuration,
-  AttributeType.RecoveryRate,
   AttributeType.Loot,
 ];
 

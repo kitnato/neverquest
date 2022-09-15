@@ -13,15 +13,15 @@ export default function () {
   const equipItem = useSetRecoilState(itemEquip);
   const unequipItem = useSetRecoilState(itemUnequip);
 
-  const equippedInventoryIDs = Object.getOwnPropertySymbols(inventoryValue).filter(
+  const equippedInventoryIDs = Object.getOwnPropertyNames(inventoryValue).filter(
     (id) => inventoryValue[id].isEquipped
   );
-  const storedInventoryValueIDs = Object.getOwnPropertySymbols(inventoryValue).filter(
+  const storedInventoryValueIDs = Object.getOwnPropertyNames(inventoryValue).filter(
     (id) => !inventoryValue[id].isEquipped
   );
 
-  const onEquipItem = (id: symbol) => () => equipItem(id);
-  const onUnequipItem = (id: symbol) => () => unequipItem(id);
+  const onEquipItem = (id: string) => () => equipItem(id);
+  const onUnequipItem = (id: string) => () => unequipItem(id);
 
   return (
     <Stack gap={5}>

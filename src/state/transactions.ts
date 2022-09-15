@@ -262,7 +262,7 @@ export const initialization = selector({
 });
 
 export const itemEquip = selector({
-  get: () => Symbol(),
+  get: () => nanoid(),
   key: "itemEquip",
   set: ({ get, set }, id) => {
     if (id instanceof DefaultValue) {
@@ -328,7 +328,7 @@ export const itemEquip = selector({
 });
 
 export const itemUnequip = selector({
-  get: () => Symbol(),
+  get: () => nanoid(),
   key: "itemUnequip",
   set: ({ set }, id) => {
     if (id instanceof DefaultValue) {
@@ -351,7 +351,7 @@ export const merchantInventoryGeneration = selector({
     const nsfwValue = get(isNSFW);
 
     // Remove all previously returned items, so they no longer appear under buy back.
-    Object.getOwnPropertySymbols(inventory)
+    Object.getOwnPropertyNames(inventory)
       .filter((id) => inventory[id].isReturned)
       .forEach((id) => delete inventory[id]);
 
@@ -367,14 +367,14 @@ export const merchantInventoryGeneration = selector({
       };
 
       MERCHANT_OFFERS[merchantOffersIndex].forEach((item) => {
-        const symbol = Symbol();
+        const id = nanoid();
         const inventoryContentsBase = {
           isReturned: false,
           key: nanoid(),
         };
 
         if (isItem(item)) {
-          inventory[symbol] = {
+          inventory[id] = {
             ...inventoryContentsBase,
             item,
           };
@@ -400,7 +400,7 @@ export const merchantInventoryGeneration = selector({
             });
           })();
 
-          inventory[symbol] = {
+          inventory[id] = {
             ...inventoryContentsBase,
             item: gear,
           };

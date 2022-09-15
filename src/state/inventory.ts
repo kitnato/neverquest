@@ -26,7 +26,7 @@ export const armor = selector({
   key: "armor",
   get: ({ get }) => {
     const currentInventory = get(inventory);
-    const equippedArmorID = Object.getOwnPropertySymbols(currentInventory).filter((id) => {
+    const equippedArmorID = Object.getOwnPropertyNames(currentInventory).filter((id) => {
       const { isEquipped, item } = currentInventory[id];
 
       return isEquipped && isArmor(item);
@@ -45,7 +45,7 @@ export const encumbrance = selector({
   get: ({ get }) => {
     const inventoryValue = get(inventory);
 
-    return Object.getOwnPropertySymbols(inventoryValue).reduce(
+    return Object.getOwnPropertyNames(inventoryValue).reduce(
       (totalEncumbrance, id) => totalEncumbrance + inventoryValue[id].item.weight,
       0
     );
@@ -61,7 +61,7 @@ export const shield = selector({
   key: "shield",
   get: ({ get }) => {
     const currentInventory = get(inventory);
-    const equippedShieldID = Object.getOwnPropertySymbols(currentInventory).filter((id) => {
+    const equippedShieldID = Object.getOwnPropertyNames(currentInventory).filter((id) => {
       const { isEquipped, item } = currentInventory[id];
 
       return isEquipped && isShield(item);
@@ -79,7 +79,7 @@ export const weapon = selector({
   key: "weapon",
   get: ({ get }) => {
     const currentInventory = get(inventory);
-    const equippedWeaponID = Object.getOwnPropertySymbols(currentInventory).filter((id) => {
+    const equippedWeaponID = Object.getOwnPropertyNames(currentInventory).filter((id) => {
       const { isEquipped, item } = currentInventory[id];
 
       return isEquipped && isWeapon(item);

@@ -9,7 +9,7 @@ import { coins } from "@neverquest/state/resources";
 import { resourcesBalance } from "@neverquest/state/transactions";
 import { UIVariant } from "@neverquest/types/ui";
 
-export default function ({ id }: { id: symbol }) {
+export default function ({ id }: { id: string }) {
   const [merchantInventoryValue, setMerchantInventory] = useRecoilState(merchantInventory);
   const coinsValue = useRecoilValue(coins);
   const balanceResources = useSetRecoilState(resourcesBalance);

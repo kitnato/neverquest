@@ -6,7 +6,7 @@ import InventoryElement from "@neverquest/components/Inventory/InventoryElement"
 import Coins from "@neverquest/components/Resource/Coins";
 import { merchantInventory } from "@neverquest/state/caravan";
 
-export default function ({ inventoryIDs }: { inventoryIDs: symbol[] }) {
+export default function ({ inventoryIDs }: { inventoryIDs: string[] }) {
   const merchantInventoryValue = useRecoilValue(merchantInventory);
 
   return (

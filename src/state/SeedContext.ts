@@ -12,7 +12,7 @@ export const useReset = () => {
   const context = useContext(SeedContext);
 
   return () => {
-    ls.set(KEY_SESSION, null);
+    ls.remove(KEY_SESSION);
     context();
   };
 };

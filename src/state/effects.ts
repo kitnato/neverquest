@@ -3,8 +3,6 @@ import { AtomEffect } from "recoil";
 
 import { KEY_SESSION, KEY_SETTINGS } from "@neverquest/constants";
 
-ls.config.encrypt = true;
-
 export const localStorageEffect =
   <ValueType>(key: string, isSettings?: boolean): AtomEffect<ValueType> =>
   ({ setSelf, onSet }) => {
@@ -13,7 +11,7 @@ export const localStorageEffect =
     const storeKey = isSettings ? KEY_SETTINGS : KEY_SESSION;
     const store = ls.get<Store>(storeKey);
 
-    if (store) {
+    if (store !== null) {
       const storedValue = store[key];
 
       if (storedValue !== undefined) {

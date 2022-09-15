@@ -3,28 +3,24 @@ import { RecoilRoot } from "recoil";
 
 import CheatQuest from "@neverquest/components/CheatQuest";
 import Header from "@neverquest/components/Header";
+import Initializer from "@neverquest/components/Initializer";
 import Main from "@neverquest/components/Main";
 import { SeedContext, useSeed } from "@neverquest/state/SeedContext";
-import { initialization } from "@neverquest/state/transactions";
 
 export default function () {
   const { seed, resetSeed } = useSeed();
-
   return (
     <SeedContext.Provider value={resetSeed}>
-      <RecoilRoot
-        initializeState={({ set }) => {
-          set(initialization, null);
-        }}
-        key={seed}
-      >
-        <CheatQuest />
+      <RecoilRoot key={seed}>
+        <Initializer>
+          <CheatQuest />
 
-        <Header />
+          <Header />
 
-        <Container>
-          <Main />
-        </Container>
+          <Container>
+            <Main />
+          </Container>
+        </Initializer>
       </RecoilRoot>
     </SeedContext.Provider>
   );

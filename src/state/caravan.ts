@@ -4,12 +4,18 @@ import { localStorageEffect } from "@neverquest/state/effects";
 import { InventoryMerchant } from "@neverquest/types";
 import { CrewStatus, CrewType, StorageKey } from "@neverquest/types/enums";
 
-export interface CrewState {
+interface CrewState {
   hireStatus: CrewStatus;
   monologueProgress: number;
 }
 
 // ATOMS
+
+export const crewHirable = atom<CrewType[]>({
+  default: [],
+  effects: [localStorageEffect<CrewType[]>(StorageKey.CrewHirable)],
+  key: StorageKey.CrewHirable,
+});
 
 const crewMapping = atomFamily<CrewState, CrewType>({
   default: {
@@ -20,10 +26,10 @@ const crewMapping = atomFamily<CrewState, CrewType>({
   key: StorageKey.CrewMapping,
 });
 
-export const crewHirable = atom<CrewType[]>({
-  default: [],
-  effects: [localStorageEffect<CrewType[]>(StorageKey.CrewHirable)],
-  key: StorageKey.CrewHirable,
+export const merchantInventory = atom<InventoryMerchant>({
+  default: {},
+  effects: [localStorageEffect<InventoryMerchant>(StorageKey.MerchantInventory)],
+  key: StorageKey.MerchantInventory,
 });
 
 // SELECTORS
@@ -49,9 +55,4 @@ export const crew = selectorFamily<CrewState, CrewType>({
         set(crewHirable, (current) => current.filter((currentType) => currentType !== type));
       }
     },
-});
-
-export const merchantInventory = atom<InventoryMerchant>({
-  default: {},
-  key: "merchantInventory",
 });

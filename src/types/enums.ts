@@ -139,6 +139,7 @@ export enum StorageKey {
   Level = "level",
   LootingRate = "lootingRate",
   LowHealthWarning = "lowHealthWarning",
+  MerchantInventory = "merchantInventory",
   Mode = "mode",
   MonsterName = "monsterName",
   MonsterStatusElement = "monsterStatusElement",

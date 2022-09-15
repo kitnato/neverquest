@@ -70,7 +70,7 @@ export default function () {
         </>
       }
       Icon={Icon}
-      tooltip="Total damage"
+      tooltip="Damage per hit"
     />
   );
 }

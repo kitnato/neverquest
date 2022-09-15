@@ -5,6 +5,7 @@ import { CLASS_TABLE_CELL_ITALIC, UNKNOWN } from "@neverquest/constants";
 import { WEAPON_CLASS_ICONS } from "@neverquest/constants/gear";
 import { hasKnapsack } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
+import { isShowingDamagePerSecond } from "@neverquest/state/settings";
 import { showWeaponClass } from "@neverquest/state/skills";
 import { Weapon } from "@neverquest/types";
 import { ShowingType } from "@neverquest/types/enums";
@@ -16,7 +17,7 @@ import {
 
 export default function ({ weapon }: { weapon: Weapon }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
-  const showDPSValue = useRecoilValue(isShowing(ShowingType.DamagePerSecond));
+  const isShowingDamagePerSecondValue = useRecoilValue(isShowingDamagePerSecond);
   const showStaminaValue = useRecoilValue(isShowing(ShowingType.Stamina));
   const showWeaponClassValue = useRecoilValue(showWeaponClass);
 
@@ -36,7 +37,7 @@ export default function ({ weapon }: { weapon: Weapon }) {
                   <td className={CLASS_TABLE_CELL_ITALIC}>Damage:</td>
 
                   <td>{`${damage}${
-                    showDPSValue
+                    isShowingDamagePerSecondValue
                       ? ` (${getDamagePerSecond({
                           damage,
                           rate,

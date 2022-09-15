@@ -128,8 +128,21 @@ export function getComputedStat({
   return base + increment * points;
 }
 
-export function getDamagePerSecond({ damage, rate }: { damage: number; rate: number }) {
-  return formatToFixed(damage / 2 / (rate / 1000));
+export function getDamagePerSecond({
+  damage,
+  criticalChance = 0,
+  criticalDamage = 0,
+  rate,
+}: {
+  damage: number;
+  criticalChance?: number;
+  criticalDamage?: number;
+  rate: number;
+}) {
+  const regular = damage * (1 - criticalChance);
+  const critical = damage * criticalChance * criticalDamage;
+
+  return formatToFixed((regular + critical) / (rate / 1000));
 }
 
 export function getFromRange({ maximum, minimum }: RangeProps) {
@@ -149,9 +162,9 @@ export function getTriangularNumber(number: number) {
 
 export function getWeaponSpecifications(level: number) {
   return {
-    damage: getFromRange({ maximum: level + Math.floor(level / 3), minimum: level }),
+    damage: getFromRange({ maximum: level + Math.ceil(level / 3), minimum: level + 1 }),
     price: level * 2 + Math.floor(level / 2),
-    rate: getFromRange({ maximum: 3500, minimum: 3000 }) - Math.floor(level / 2) * 50,
+    rate: getFromRange({ maximum: 4000, minimum: 3500 }) - Math.floor(level / 2) * 50,
     staminaCost: 1 + Math.floor(level / 3),
     weight: 1 + Math.floor(level / 4),
   };

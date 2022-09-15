@@ -77,7 +77,6 @@ export enum ShowingType {
   BlockChance,
   Coins,
   CrewHiring,
-  DamagePerSecond,
   Defense,
   Essence,
   GameOver,

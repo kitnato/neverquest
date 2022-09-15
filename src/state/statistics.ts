@@ -11,6 +11,8 @@ export const damagePerSecond = selector({
   get: ({ get }) =>
     getDamagePerSecond({
       damage: get(totalDamage),
+      criticalChance: get(totalCriticalChance),
+      criticalDamage: get(totalCriticalDamage),
       rate: get(totalAttackRate),
     }),
 });

@@ -2,15 +2,14 @@ import { useRecoilValue } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import { ReactComponent as Icon } from "@neverquest/icons/heavy-timer.svg";
-import { isShowing } from "@neverquest/state/isShowing";
+import { isShowingDamagePerSecond } from "@neverquest/state/settings";
 import { damagePerSecond } from "@neverquest/state/statistics";
-import { ShowingType } from "@neverquest/types/enums";
 
 export default function () {
   const damagePerSecondValue = useRecoilValue(damagePerSecond);
-  const showDamagePerSecondValue = useRecoilValue(isShowing(ShowingType.DamagePerSecond));
+  const isShowingDamagePerSecondValue = useRecoilValue(isShowingDamagePerSecond);
 
-  if (!showDamagePerSecondValue) {
+  if (!isShowingDamagePerSecondValue) {
     return null;
   }
 

@@ -32,9 +32,9 @@
   ],
   "rules": {
     "import/order": ["error", { "alphabetize": { "order": "asc", "caseInsensitive": true } }],
-    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "no-console": ["warn", { "allow": ["error", "warn"] }],
     "react/display-name": "off",
-    "react/jsx-sort-props": "error",
+    "react/jsx-sort-props": ["error", { "ignoreCase": true }],
     "react-hooks/exhaustive-deps": "error",
     "sort-imports": [
       "error",

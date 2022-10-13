@@ -46,7 +46,6 @@ export default function () {
 
   return (
     <IconDisplay
-      Icon={Icon}
       contents={
         showTotalAttackRateBreakdownValue ? (
           <OverlayTrigger
@@ -85,6 +84,7 @@ export default function () {
           <MeterWithDelta />
         )
       }
+      Icon={Icon}
       tooltip="Attack rate"
     />
   );

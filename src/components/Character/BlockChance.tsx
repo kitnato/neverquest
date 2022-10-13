@@ -18,9 +18,9 @@ export default function () {
 
   return (
     <IconDisplay
-      Icon={Icon}
       animation={AnimationType.FlipInX}
       contents={formatPercentage(block)}
+      Icon={Icon}
       tooltip="Block chance"
     />
   );

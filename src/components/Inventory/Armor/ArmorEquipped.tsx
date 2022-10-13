@@ -19,8 +19,8 @@ export default function () {
 
   return (
     <IconDisplay
-      Icon={armorValue === NO_ARMOR ? IconUnequipped : IconEquipped}
       contents={<ArmorName armor={armorValue} />}
+      Icon={armorValue === NO_ARMOR ? IconUnequipped : IconEquipped}
       isAnimated
       tooltip="Equipped armor"
     />

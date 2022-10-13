@@ -15,7 +15,6 @@ import { UIAttachment } from "@neverquest/types/ui";
 export default function () {
   return (
     <IconDisplay
-      Icon={Icon}
       contents={
         <Stack>
           <Stack className="w-100" direction="horizontal">
@@ -36,6 +35,7 @@ export default function () {
           />
         </Stack>
       }
+      Icon={Icon}
       tooltip="Health"
     />
   );

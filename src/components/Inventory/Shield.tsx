@@ -14,5 +14,5 @@ export default function () {
     return null;
   }
 
-  return <IconDisplay Icon={Icon} contents={shieldValue.name} isAnimated tooltip="Shield" />;
+  return <IconDisplay contents={shieldValue.name} Icon={Icon} isAnimated tooltip="Shield" />;
 }

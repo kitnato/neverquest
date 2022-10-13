@@ -1,5 +1,6 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
+
 import FloatingText from "@neverquest/components/FloatingText";
 import IconDisplay from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
@@ -10,13 +11,16 @@ import { attributes } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { totalDamage } from "@neverquest/state/statistics";
+import { isShowingDamagePerSecond } from "@neverquest/state/settings";
+import { damagePerSecond, totalDamage } from "@neverquest/state/statistics";
 import { AttributeType, DeltaType, ShowingType } from "@neverquest/types/enums";
 import { getComputedStat } from "@neverquest/utilities/helpers";
 
 export default function () {
   const { points } = useRecoilValue(attributes(AttributeType.Damage));
+  const damagePerSecondValue = useRecoilValue(damagePerSecond);
   const showTotalDamageBreakdownValue = useRecoilValue(isShowing(ShowingType.TotalDamageSummary));
+  const isShowingDamagePerSecondValue = useRecoilValue(isShowingDamagePerSecond);
   const totalDamageValue = useRecoilValue(totalDamage);
   const weaponValue = useRecoilValue(weapon);
 
@@ -28,9 +32,12 @@ export default function () {
     valueAtom: totalDamage,
   });
 
+  const totalDamageDisplay = (
+    <span>{isShowingDamagePerSecondValue ? `${totalDamageValue} Total` : totalDamageValue}</span>
+  );
+
   return (
     <IconDisplay
-      Icon={Icon}
       contents={
         <>
           {showTotalDamageBreakdownValue ? (
@@ -60,15 +67,17 @@ export default function () {
               }
               placement="top"
             >
-              <span>{totalDamageValue}</span>
+              {totalDamageDisplay}
             </OverlayTrigger>
           ) : (
-            <span>{totalDamageValue}</span>
+            totalDamageDisplay
           )}
 
           <FloatingText atom={deltaTotalDamage} />
         </>
       }
+      description={isShowingDamagePerSecondValue ? `${damagePerSecondValue} DPS` : null}
+      Icon={Icon}
       tooltip="Damage per hit"
     />
   );

@@ -12,7 +12,6 @@ export default function () {
 
   return (
     <IconDisplay
-      Icon={Icon}
       contents={
         <>
           <span>{essenceAbsorbedValue}</span>
@@ -20,6 +19,7 @@ export default function () {
           <FloatingText atom={deltas(DeltaType.EssenceAbsorbed)} />
         </>
       }
+      Icon={Icon}
       tooltip="Absorbed essence"
     />
   );

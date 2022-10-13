@@ -16,7 +16,6 @@ export default function () {
 
   return (
     <IconDisplay
-      Icon={isGameOverValue ? DeadIcon : AliveIcon}
       contents={
         <FormControl
           className="hover-grow"
@@ -34,6 +33,7 @@ export default function () {
           value={nameValue}
         />
       }
+      Icon={isGameOverValue ? DeadIcon : AliveIcon}
       tooltip="Name"
     />
   );

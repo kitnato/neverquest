@@ -6,5 +6,5 @@ import { Armor } from "@neverquest/types";
 // <IconDisplay contents={} Icon={Icon} isAnimated
 
 export default function ({ armor }: { armor: Armor }) {
-  return <IconDisplay Icon={Icon} contents={<ArmorName armor={armor} />} tooltip="Armor" />;
+  return <IconDisplay contents={<ArmorName armor={armor} />} Icon={Icon} tooltip="Armor" />;
 }

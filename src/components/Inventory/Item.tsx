@@ -8,7 +8,6 @@ export default function ({ item }: { item: ItemType }) {
 
   return (
     <IconDisplay
-      Icon={Icon}
       contents={
         <OverlayTrigger
           overlay={
@@ -25,6 +24,7 @@ export default function ({ item }: { item: ItemType }) {
           <span>{name}</span>
         </OverlayTrigger>
       }
+      Icon={Icon}
       tooltip="Item"
     />
   );

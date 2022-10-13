@@ -6,8 +6,8 @@ import { encumbrance, encumbranceMaximum } from "@neverquest/state/inventory";
 export default function () {
   return (
     <IconDisplay
-      Icon={Icon}
       contents={<ReserveMeter atom={encumbrance} atomMaximum={encumbranceMaximum} />}
+      Icon={Icon}
       tooltip="Encumbrance"
     />
   );

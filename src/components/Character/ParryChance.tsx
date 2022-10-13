@@ -18,9 +18,9 @@ export default function () {
 
   return (
     <IconDisplay
-      Icon={Icon}
       animation={AnimationType.FlipInX}
       contents={formatPercentage(parryChanceValue)}
+      Icon={Icon}
       tooltip="Parry chance"
     />
   );

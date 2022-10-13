@@ -19,8 +19,8 @@ export default function () {
 
   return (
     <IconDisplay
-      Icon={shieldValue === NO_SHIELD ? IconUnequipped : IconEquipped}
       contents={<ShieldName shield={shieldValue} />}
+      Icon={shieldValue === NO_SHIELD ? IconUnequipped : IconEquipped}
       isAnimated
       tooltip="Equipped shield"
     />

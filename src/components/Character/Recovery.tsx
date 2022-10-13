@@ -28,7 +28,6 @@ export default function () {
 
   return (
     <IconDisplay
-      Icon={Icon}
       contents={
         <Stack className="w-100" direction="horizontal">
           <RecoveryMeter />
@@ -36,6 +35,7 @@ export default function () {
           <FloatingText atom={deltaTotalRecoveryRate} />
         </Stack>
       }
+      Icon={Icon}
       isAnimated
       tooltip="Recovery rate"
     />

@@ -50,8 +50,8 @@ export default function () {
     <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
       <Card.Body>
         <IconDisplay
-          Icon={Icon}
           contents={<span className="fst-italic">The darkness stirs.</span>}
+          Icon={Icon}
           tooltip={UNKNOWN}
         />
       </Card.Body>

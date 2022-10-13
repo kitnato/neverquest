@@ -21,7 +21,6 @@ export default function () {
 
   return (
     <IconDisplay
-      Icon={Icon}
       contents={
         <>
           <span>{levelValue}</span>
@@ -29,6 +28,7 @@ export default function () {
           <FloatingText atom={deltaWildernessLevel} />
         </>
       }
+      Icon={Icon}
       iconProps={{ placement: OverlayPlacement.Bottom }}
       tooltip="Level"
     />

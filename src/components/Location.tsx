@@ -10,8 +10,8 @@ export default function () {
 
   return (
     <IconDisplay
-      Icon={Icon}
       contents={locationValue}
+      Icon={Icon}
       iconProps={{ placement: OverlayPlacement.Bottom }}
       tooltip="Location"
     />

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { RecoilState, RecoilValueReadOnly, useRecoilValue, useSetRecoilState } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
-
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { isRecovering } from "@neverquest/state/character";
 import { ReserveChangeProps } from "@neverquest/types/props";

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { level, progress, progressMax } from "@neverquest/state/encounter";
@@ -15,22 +15,42 @@ declare global {
 export default function () {
   const levelValue = useRecoilValue(level);
   const progressMaxValue = useRecoilValue(progressMax);
+  const setSkillArmor = useSetRecoilState(skills(SkillType.Armors));
+  const setSkillBleed = useSetRecoilState(skills(SkillType.Bleed));
+  const setSkillCriticals = useSetRecoilState(skills(SkillType.Criticals));
+  const setSkillDodge = useSetRecoilState(skills(SkillType.Dodge));
+  const setSkillParry = useSetRecoilState(skills(SkillType.Parry));
+  const setSkillRegeneration = useSetRecoilState(skills(SkillType.Regeneration));
+  const setSkillShields = useSetRecoilState(skills(SkillType.Shields));
+  const setSkillStagger = useSetRecoilState(skills(SkillType.Stagger));
   const setLevelUp = useSetRecoilState(levelUp);
   const setProgress = useSetRecoilState(progress);
   const balanceResources = useSetRecoilState(resourcesBalance);
 
-  useEffect(() => {
-    const setSkill = [
-      useSetRecoilState(skills(SkillType.Armors)),
-      useSetRecoilState(skills(SkillType.Bleed)),
-      useSetRecoilState(skills(SkillType.Criticals)),
-      useSetRecoilState(skills(SkillType.Dodge)),
-      useSetRecoilState(skills(SkillType.Parry)),
-      useSetRecoilState(skills(SkillType.Regeneration)),
-      useSetRecoilState(skills(SkillType.Shields)),
-      useSetRecoilState(skills(SkillType.Stagger)),
-    ];
+  const setSkill = useMemo(
+    () => [
+      setSkillArmor,
+      setSkillBleed,
+      setSkillCriticals,
+      setSkillDodge,
+      setSkillParry,
+      setSkillRegeneration,
+      setSkillShields,
+      setSkillStagger,
+    ],
+    [
+      setSkillArmor,
+      setSkillBleed,
+      setSkillCriticals,
+      setSkillDodge,
+      setSkillParry,
+      setSkillRegeneration,
+      setSkillShields,
+      setSkillStagger,
+    ]
+  );
 
+  useEffect(() => {
     window.cheatQuest = (state, value) => {
       switch (state) {
         // Age of Empires
@@ -79,7 +99,7 @@ export default function () {
           return;
       }
     };
-  }, [balanceResources, levelValue, progressMaxValue, setLevelUp, setProgress]);
+  }, [balanceResources, levelValue, progressMaxValue, setLevelUp, setProgress, setSkill]);
 
   return <></>;
 }

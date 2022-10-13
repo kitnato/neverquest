@@ -4,7 +4,6 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 
 import MonsterAttack from "@neverquest/components/Monster/MonsterAttack";
 import MonsterDamage from "@neverquest/components/Monster/MonsterDamage";
-import MonsterDamagePerSecond from "@neverquest/components/Monster/MonsterDamagePerSecond";
 import MonsterHealth from "@neverquest/components/Monster/MonsterHealth";
 import MonsterName from "@neverquest/components/Monster/MonsterName";
 import MonsterStagger from "@neverquest/components/Monster/MonsterStagger";
@@ -53,11 +52,7 @@ export default function () {
             </Col>
           </Row>
 
-          <Stack direction="horizontal" gap={5}>
-            <MonsterDamage />
-
-            <MonsterDamagePerSecond />
-          </Stack>
+          <MonsterDamage />
         </Stack>
       </Card.Body>
     </Card>

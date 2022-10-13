@@ -11,7 +11,6 @@ import { DeltaType } from "@neverquest/types/enums";
 export default function () {
   return (
     <IconDisplay
-      Icon={Icon}
       contents={
         <Stack className="w-100" direction="horizontal">
           <ReserveMeter atom={currentHealthMonster} atomMaximum={maximumHealthMonster} />
@@ -19,6 +18,7 @@ export default function () {
           <FloatingText atom={deltas(DeltaType.HealthMonster)} />
         </Stack>
       }
+      Icon={Icon}
       tooltip="Monster health"
     />
   );

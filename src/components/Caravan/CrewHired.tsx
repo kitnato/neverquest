@@ -20,7 +20,6 @@ export default function ({ setActive, type }: { setActive: () => void; type: Cre
 
   return (
     <IconDisplay
-      Icon={Icon}
       contents={
         <div className="align-items-center d-flex justify-content-between w-100">
           <span>{`"${monologues[monologueProgress]}"`}</span>
@@ -37,6 +36,7 @@ export default function ({ setActive, type }: { setActive: () => void; type: Cre
           </Button>
         </div>
       }
+      Icon={Icon}
       tooltip={name}
     />
   );

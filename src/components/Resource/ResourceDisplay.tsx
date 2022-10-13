@@ -24,8 +24,8 @@ export default function ({ isLoot }: { isLoot?: boolean }) {
         <>
           <Col>
             <Lootable
-              Component={Essence}
               atom={essenceLoot}
+              Component={Essence}
               deltaAtom={deltas(DeltaType.EssenceLoot)}
               tooltip={"Looted essence"}
             />
@@ -33,8 +33,8 @@ export default function ({ isLoot }: { isLoot?: boolean }) {
 
           <Col>
             <Lootable
-              Component={Scrap}
               atom={scrapLoot}
+              Component={Scrap}
               deltaAtom={deltas(DeltaType.ScrapLoot)}
               tooltip={"Looted scrap"}
             />
@@ -42,8 +42,8 @@ export default function ({ isLoot }: { isLoot?: boolean }) {
 
           <Col>
             <Lootable
-              Component={Coins}
               atom={coinsLoot}
+              Component={Coins}
               deltaAtom={deltas(DeltaType.CoinsLoot)}
               tooltip={"Looted coins"}
             />
@@ -53,8 +53,8 @@ export default function ({ isLoot }: { isLoot?: boolean }) {
         <>
           <Col>
             <Resource
-              Component={Essence}
               atom={essence}
+              Component={Essence}
               deltaAtom={deltas(DeltaType.Essence)}
               showAtom={isShowing(ShowingType.Essence)}
             />
@@ -62,8 +62,8 @@ export default function ({ isLoot }: { isLoot?: boolean }) {
 
           <Col>
             <Resource
-              Component={Scrap}
               atom={scrap}
+              Component={Scrap}
               deltaAtom={deltas(DeltaType.Scrap)}
               showAtom={isShowing(ShowingType.Scrap)}
             />
@@ -71,8 +71,8 @@ export default function ({ isLoot }: { isLoot?: boolean }) {
 
           <Col>
             <Resource
-              Component={Coins}
               atom={coins}
+              Component={Coins}
               deltaAtom={deltas(DeltaType.Coins)}
               showAtom={isShowing(ShowingType.Coins)}
             />

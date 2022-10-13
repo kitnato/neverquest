@@ -8,18 +8,18 @@ import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function ({
   contents,
+  description,
   Icon,
   iconProps,
   isAnimated,
-  isDescription,
   tooltip,
 }: {
   Icon: SVGIcon;
   animation?: AnimationType;
   contents: ReactNode;
+  description?: ReactNode;
   iconProps?: Partial<IconImageProps>;
   isAnimated?: boolean;
-  isDescription?: boolean;
   tooltip: string;
 }) {
   const { isFlipped, placement } = iconProps || {};
@@ -32,11 +32,11 @@ export default function ({
     >
       <IconImage Icon={Icon} isFlipped={isFlipped} placement={placement} tooltip={tooltip} />
 
-      {isDescription ? (
+      {description ? (
         <Stack>
-          <span>{tooltip}</span>
+          <span>{contents}</span>
 
-          <small className="text-muted">{contents}</small>
+          <small className="text-muted">{description}</small>
         </Stack>
       ) : typeof contents === "string" || typeof contents === "number" ? (
         <span>{contents}</span>

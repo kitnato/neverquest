@@ -28,7 +28,7 @@ export default function ({ type }: { type: AttributeType }) {
     <div className="align-items-center d-flex justify-content-between w-100">
       {canAssign ? (
         <>
-          <IconDisplay Icon={Icon} contents={description} isDescription tooltip={name} />
+          <IconDisplay contents={name} description={description} Icon={Icon} tooltip={name} />
 
           <Stack direction="horizontal" gap={3}>
             <span>{points}</span>

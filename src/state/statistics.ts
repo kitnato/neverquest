@@ -3,22 +3,21 @@ import { selector } from "recoil";
 import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import { attributes } from "@neverquest/state/attributes";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
-import { getComputedStat, getDamagePerSecond } from "@neverquest/utilities/helpers";
 import { AttributeType } from "@neverquest/types/enums";
+import { getComputedStat, getDamagePerSecond } from "@neverquest/utilities/helpers";
 
 export const damagePerSecond = selector({
-  key: "damagePerSecond",
   get: ({ get }) =>
     getDamagePerSecond({
-      damage: get(totalDamage),
       criticalChance: get(totalCriticalChance),
       criticalDamage: get(totalCriticalDamage),
+      damage: get(totalDamage),
       rate: get(totalAttackRate),
     }),
+  key: "damagePerSecond",
 });
 
 export const totalAttackRate = selector({
-  key: "totalAttackRate",
   get: ({ get }) => {
     const { points } = get(attributes(AttributeType.AttackRate));
 
@@ -26,10 +25,10 @@ export const totalAttackRate = selector({
 
     return get(weapon).rate * (1 - getComputedStat({ base, increment, points }));
   },
+  key: "totalAttackRate",
 });
 
 export const totalDamage = selector({
-  key: "totalDamage",
   get: ({ get }) => {
     const { points } = get(attributes(AttributeType.Damage));
 
@@ -37,20 +36,20 @@ export const totalDamage = selector({
 
     return get(weapon).damage + getComputedStat({ base, increment, points });
   },
+  key: "totalDamage",
 });
 
 export const totalBlockChance = selector({
-  key: "totalBlockChance",
   get: ({ get }) => get(shield).block,
+  key: "totalBlockChance",
 });
 
 export const totalProtection = selector({
-  key: "totalProtection",
   get: ({ get }) => get(armor).protection,
+  key: "totalProtection",
 });
 
 export const totalStaggerDuration = selector({
-  key: "totalStaggerDuration",
   get: ({ get }) => {
     const { points } = get(attributes(AttributeType.StaggerDuration));
 
@@ -58,12 +57,12 @@ export const totalStaggerDuration = selector({
 
     return getComputedStat({ base, increment, points }) + get(shield).stagger;
   },
+  key: "totalStaggerDuration",
 });
 
 // TODO - combine into selectorFamily?
 
 export const totalBleedDamage = selector({
-  key: "totalBleedDamage",
   get: ({ get }) => {
     const { points } = get(attributes(AttributeType.BleedDamage));
 
@@ -71,10 +70,10 @@ export const totalBleedDamage = selector({
 
     return getComputedStat({ base, increment, points });
   },
+  key: "totalBleedDamage",
 });
 
 export const totalCriticalChance = selector({
-  key: "totalCriticalChance",
   get: ({ get }) => {
     const { points } = get(attributes(AttributeType.CriticalChance));
 
@@ -82,10 +81,10 @@ export const totalCriticalChance = selector({
 
     return getComputedStat({ base, increment, points });
   },
+  key: "totalCriticalChance",
 });
 
 export const totalCriticalDamage = selector({
-  key: "totalCriticalDamage",
   get: ({ get }) => {
     const { points } = get(attributes(AttributeType.CriticalDamage));
 
@@ -93,10 +92,10 @@ export const totalCriticalDamage = selector({
 
     return getComputedStat({ base, increment, points });
   },
+  key: "totalCriticalDamage",
 });
 
 export const totalDodgeChance = selector({
-  key: "totalDodgeChance",
   get: ({ get }) => {
     const { points } = get(attributes(AttributeType.DodgeChance));
 
@@ -104,10 +103,10 @@ export const totalDodgeChance = selector({
 
     return getComputedStat({ base, increment, points });
   },
+  key: "totalDodgeChance",
 });
 
 export const totalHealthRegenerationRate = selector({
-  key: "totalHealthRegenerationRate",
   get: ({ get }) => {
     const { points } = get(attributes(AttributeType.HealthRegenerationRate));
 
@@ -115,10 +114,10 @@ export const totalHealthRegenerationRate = selector({
 
     return getComputedStat({ base, increment, points });
   },
+  key: "totalHealthRegenerationRate",
 });
 
 export const totalParryChance = selector({
-  key: "totalParryChance",
   get: ({ get }) => {
     const { points } = get(attributes(AttributeType.ParryChance));
 
@@ -126,10 +125,10 @@ export const totalParryChance = selector({
 
     return getComputedStat({ base, increment, points });
   },
+  key: "totalParryChance",
 });
 
 export const totalRecoveryRate = selector({
-  key: "totalRecoveryRate",
   get: ({ get }) => {
     const { points } = get(attributes(AttributeType.RecoveryRate));
 
@@ -137,10 +136,10 @@ export const totalRecoveryRate = selector({
 
     return getComputedStat({ base, increment, points });
   },
+  key: "totalRecoveryRate",
 });
 
 export const totalStaminaRegenerationRate = selector({
-  key: "totalStaminaRegenerationRate",
   get: ({ get }) => {
     const { points } = get(attributes(AttributeType.StaminaRegenerationRate));
 
@@ -148,4 +147,5 @@ export const totalStaminaRegenerationRate = selector({
 
     return getComputedStat({ base, increment, points });
   },
+  key: "totalStaminaRegenerationRate",
 });

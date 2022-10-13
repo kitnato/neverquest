@@ -24,5 +24,5 @@ export const useSeed = () => {
     setSeed(nanoid());
   }, []);
 
-  return { seed, resetSeed };
+  return { resetSeed, seed };
 };

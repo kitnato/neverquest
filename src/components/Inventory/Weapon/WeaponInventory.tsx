@@ -4,5 +4,5 @@ import { ReactComponent as Icon } from "@neverquest/icons/axe-sword.svg";
 import { Weapon } from "@neverquest/types";
 
 export default function ({ weapon }: { weapon: Weapon }) {
-  return <IconDisplay contents={<WeaponName weapon={weapon} />} Icon={Icon} tooltip="Weapon" />;
+  return <IconDisplay Icon={Icon} contents={<WeaponName weapon={weapon} />} tooltip="Weapon" />;
 }

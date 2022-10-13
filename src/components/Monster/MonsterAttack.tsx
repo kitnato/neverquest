@@ -4,6 +4,6 @@ import { ReactComponent as Icon } from "@neverquest/icons/striking-splinter.svg"
 
 export default function () {
   return (
-    <IconDisplay contents={<MonsterAttackMeter />} Icon={Icon} tooltip="Monster attack rate" />
+    <IconDisplay Icon={Icon} contents={<MonsterAttackMeter />} tooltip="Monster attack rate" />
   );
 }

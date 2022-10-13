@@ -31,7 +31,7 @@ export default function () {
         createMonster(null);
       }
     }
-  }, [deltaLooting, isLevelCompletedValue, lootingRateValue]);
+  }, [createMonster, deltaLooting, dropLoot, isLevelCompletedValue, lootingRateValue, setLooting]);
 
   return (
     <LabelledProgressBar

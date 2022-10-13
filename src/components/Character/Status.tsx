@@ -21,10 +21,10 @@ export default function () {
     const { current } = element;
 
     setStatusElement(current);
-    animateElement({ type: AnimationType.FlipInX, element: current });
+    animateElement({ element: current, type: AnimationType.FlipInX });
 
     return () => setStatusElement(null);
-  }, []);
+  }, [setStatusElement]);
 
   return (
     <Card ref={element}>

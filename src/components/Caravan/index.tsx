@@ -1,10 +1,10 @@
-import { useRecoilValue } from "recoil";
 import { useState } from "react";
 import { Card, Stack } from "react-bootstrap";
+import { useRecoilValue } from "recoil";
 
-import DismissableScreen from "@neverquest/components/DismissableScreen";
 import CrewHirable from "@neverquest/components/Caravan/CrewHirable";
 import CrewHired from "@neverquest/components/Caravan/CrewHired";
+import DismissableScreen from "@neverquest/components/DismissableScreen";
 import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/constants/caravan";
 import { crewHirable } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";

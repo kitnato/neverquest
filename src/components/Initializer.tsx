@@ -8,7 +8,7 @@ export default function ({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     initialize(null);
-  }, []);
+  }, [initialize]);
 
   return <>{children}</>;
 }

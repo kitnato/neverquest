@@ -2,8 +2,8 @@ import { Card, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import IconImage from "@neverquest/components/IconImage";
-import { ReactComponent as Icon } from "@neverquest/icons/crossed-bones.svg";
 import Monster from "@neverquest/components/Monster";
+import { ReactComponent as Icon } from "@neverquest/icons/crossed-bones.svg";
 import { isLevelCompleted } from "@neverquest/state/encounter";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";

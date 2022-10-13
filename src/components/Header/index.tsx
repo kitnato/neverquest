@@ -8,7 +8,7 @@ import { version } from "@neverquest/config";
 
 export default function () {
   return (
-    <Navbar bg="dark" collapseOnSelect className="mb-4" expand="lg" variant="dark">
+    <Navbar bg="dark" className="mb-4" collapseOnSelect expand="lg" variant="dark">
       <Container>
         <Navbar.Brand>
           <Stack direction="horizontal" gap={3}>

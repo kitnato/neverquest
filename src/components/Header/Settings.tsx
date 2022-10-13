@@ -19,9 +19,9 @@ export default function () {
 
   return (
     <span>
-      <Gear style={{ cursor: "pointer" }} onClick={() => setShowing(true)} />
+      <Gear onClick={() => setShowing(true)} style={{ cursor: "pointer" }} />
 
-      <Modal show={isShowing} onHide={() => setShowing(false)}>
+      <Modal onHide={() => setShowing(false)} show={isShowing}>
         <Modal.Header closeButton>
           <Modal.Title>Settings</Modal.Title>
         </Modal.Header>

@@ -18,10 +18,10 @@ export default function ({
   variant: UIVariant;
 }) {
   const style: Partial<{
-    borderTopLeftRadius: number;
-    borderTopRightRadius: number;
     borderBottomLeftRadius: number;
     borderBottomRightRadius: number;
+    borderTopLeftRadius: number;
+    borderTopRightRadius: number;
     height: number;
   }> = size === UISize.Tiny ? { height: 10 } : {};
 

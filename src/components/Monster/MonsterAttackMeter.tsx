@@ -35,14 +35,14 @@ export default function () {
       setDeltaAttack(0);
       defend(null);
     }
-  }, [deltaAttack, isMonsterDeadValue, totalAttackRateMonsterValue]);
+  }, [defend, deltaAttack, isMonsterDeadValue, totalAttackRateMonsterValue]);
 
   useEffect(() => {
     if (!isAttackingValue && !isMonsterDeadValue) {
       setDeltaAttack(0);
       resetCurrentHealthMonster();
     }
-  }, [isAttackingValue, isMonsterDeadValue]);
+  }, [isAttackingValue, isMonsterDeadValue, resetCurrentHealthMonster]);
 
   useEffect(() => {
     if (isMonsterDeadValue) {

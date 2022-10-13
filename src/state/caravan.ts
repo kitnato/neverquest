@@ -1,4 +1,4 @@
-import { atom, atomFamily, DefaultValue, selectorFamily } from "recoil";
+import { DefaultValue, atom, atomFamily, selectorFamily } from "recoil";
 
 import { localStorageEffect } from "@neverquest/state/effects";
 import { InventoryMerchant } from "@neverquest/types";
@@ -35,11 +35,11 @@ export const merchantInventory = atom<InventoryMerchant>({
 // SELECTORS
 
 export const crew = selectorFamily<CrewState, CrewType>({
-  key: "crew",
   get:
     (type) =>
     ({ get }) =>
       get(crewMapping(type)),
+  key: "crew",
   set:
     (type) =>
     ({ set }, status) => {

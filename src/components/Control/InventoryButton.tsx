@@ -1,6 +1,6 @@
-import { useRecoilValue } from "recoil";
 import { MouseEvent, useState } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { useRecoilValue } from "recoil";
 
 import DismissableScreen from "@neverquest/components/DismissableScreen";
 import IconImage from "@neverquest/components/IconImage";

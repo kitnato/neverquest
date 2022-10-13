@@ -1,6 +1,6 @@
 import { MouseEvent, useEffect, useState } from "react";
 import { Button, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import ConfirmationDialog from "@neverquest/components/ConfirmationDialog";
 import IconImage from "@neverquest/components/IconImage";
@@ -14,9 +14,9 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { isMonsterEngaged } from "@neverquest/state/monster";
 import { isHealthLow } from "@neverquest/state/reserves";
 import { lowHealthWarning } from "@neverquest/state/settings";
+import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
-import { ShowingType } from "@neverquest/types/enums";
 
 export default function ({ isDisabled }: { isDisabled: boolean }) {
   const [isAttackingValue, setAttacking] = useRecoilState(isAttacking);
@@ -110,8 +110,8 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
 
       <ConfirmationDialog
         confirmationLabel="Attack anyway"
-        onConfirm={toggleAttack}
         message="If you attack before increasing your attributes, you will have to kill all monsters before you get another chance."
+        onConfirm={toggleAttack}
         setHide={() => setShowAttackConfirmation(false)}
         show={showAttackConfirmation}
         title="Unspent attribute points!"

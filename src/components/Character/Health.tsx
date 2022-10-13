@@ -9,33 +9,33 @@ import { deltas } from "@neverquest/state/deltas";
 import { currentHealth, isHealthMaxedOut, maximumHealth } from "@neverquest/state/reserves";
 import { totalHealthRegenerationRate } from "@neverquest/state/statistics";
 import { healthChange } from "@neverquest/state/transactions";
-import { UIAttachment } from "@neverquest/types/ui";
 import { DeltaType } from "@neverquest/types/enums";
+import { UIAttachment } from "@neverquest/types/ui";
 
 export default function () {
   return (
     <IconDisplay
+      Icon={Icon}
       contents={
         <Stack>
-          <Stack direction="horizontal" className="w-100">
+          <Stack className="w-100" direction="horizontal">
             <ReserveMeter
-              attached={UIAttachment.Below}
               atom={currentHealth}
               atomMaximum={maximumHealth}
+              attached={UIAttachment.Below}
             />
 
             <FloatingText atom={deltas(DeltaType.Health)} />
           </Stack>
 
           <Regeneration
-            atomReserve={healthChange}
             atomDeltaRegenerationRate={deltas(DeltaType.TotalHealthRegenerationRate)}
+            atomReserve={healthChange}
             isReserveMaxedOut={isHealthMaxedOut}
             regenerationRate={totalHealthRegenerationRate}
           />
         </Stack>
       }
-      Icon={Icon}
       tooltip="Health"
     />
   );

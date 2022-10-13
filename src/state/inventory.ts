@@ -23,7 +23,6 @@ export const inventory = atom<Inventory>({
 // SELECTORS
 
 export const armor = selector({
-  key: "armor",
   get: ({ get }) => {
     const currentInventory = get(inventory);
     const equippedArmorID = Object.getOwnPropertyNames(currentInventory).filter((id) => {
@@ -38,10 +37,10 @@ export const armor = selector({
 
     return NO_ARMOR;
   },
+  key: "armor",
 });
 
 export const encumbrance = selector({
-  key: "encumbrance",
   get: ({ get }) => {
     const inventoryValue = get(inventory);
 
@@ -50,15 +49,15 @@ export const encumbrance = selector({
       0
     );
   },
+  key: "encumbrance",
 });
 
 export const isInventoryFull = selector({
-  key: "isInventoryFull",
   get: ({ get }) => get(encumbrance) === get(encumbranceMaximum),
+  key: "isInventoryFull",
 });
 
 export const shield = selector({
-  key: "shield",
   get: ({ get }) => {
     const currentInventory = get(inventory);
     const equippedShieldID = Object.getOwnPropertyNames(currentInventory).filter((id) => {
@@ -73,10 +72,10 @@ export const shield = selector({
 
     return NO_SHIELD;
   },
+  key: "shield",
 });
 
 export const weapon = selector({
-  key: "weapon",
   get: ({ get }) => {
     const currentInventory = get(inventory);
     const equippedWeaponID = Object.getOwnPropertyNames(currentInventory).filter((id) => {
@@ -91,4 +90,5 @@ export const weapon = selector({
 
     return NO_WEAPON;
   },
+  key: "weapon",
 });

@@ -14,9 +14,9 @@ export default function ({
   isDescription,
   tooltip,
 }: {
+  Icon: SVGIcon;
   animation?: AnimationType;
   contents: ReactNode;
-  Icon: SVGIcon;
   iconProps?: Partial<IconImageProps>;
   isAnimated?: boolean;
   isDescription?: boolean;

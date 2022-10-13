@@ -30,22 +30,21 @@ export const progress = atom({
 // SELECTORS
 
 export const isLevelCompleted = selector({
-  key: "isLevelCompleted",
   get: ({ get }) => get(progress) === get(progressMax),
+  key: "isLevelCompleted",
 });
 
 export const isWilderness = selector({
-  key: "isWilderness",
   get: ({ get }) => get(mode) === LocationType.Wilderness,
+  key: "isWilderness",
 });
 
 export const progressMax = selector({
-  key: "progressMax",
   get: ({ get }) => get(level) + 2,
+  key: "progressMax",
 });
 
 export const location = selector({
-  key: "location",
   get: ({ get }) => {
     const isWildernessValue = get(isWilderness);
     const levelValue = get(level);
@@ -57,14 +56,15 @@ export const location = selector({
       }
 
       return LOCRA.generateLocation({
-        isNSFW: nsfwValue,
         hasPrefix: Math.random() < 0.8,
         hasSuffix: Math.random() < 0.1 * Math.ceil(levelValue / 2),
+        isNSFW: nsfwValue,
       });
     }
 
     return "Caravan";
   },
+  key: "location",
   set: ({ get, set }) => {
     const isWildernessValue = get(isWilderness);
 

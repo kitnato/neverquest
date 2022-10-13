@@ -1,11 +1,11 @@
-import { ShieldType, WeaponClass, WeaponType } from "@neverquest/locra/types";
 import Blacksmith from "@neverquest/components/Caravan/Blacksmith";
 import Cook from "@neverquest/components/Caravan/Cook";
 import Medic from "@neverquest/components/Caravan/Medic";
-import Merchant from "@neverquest/components/Caravan/Merchant";
 import Mercenary from "@neverquest/components/Caravan/Mercenary";
+import Merchant from "@neverquest/components/Caravan/Merchant";
 import Tailor from "@neverquest/components/Caravan/Tailor";
 import { ITEM_COMPASS, ITEM_HEARTHSTONE, ITEM_KNAPSACK } from "@neverquest/constants/items";
+import { ShieldType, WeaponClass, WeaponType } from "@neverquest/locra/types";
 import { CrewMember, Item } from "@neverquest/types";
 import { ArmorClass, CrewType } from "@neverquest/types/enums";
 
@@ -13,8 +13,8 @@ export const CREW_MEMBERS: Record<CrewType, CrewMember> = {
   [CrewType.Blacksmith]: {
     Component: Blacksmith,
     description: "Crafts superior gear.",
-    interaction: "Craft",
     hirableLevel: 5,
+    interaction: "Craft",
     monologues: ["In need of better gear?"],
     name: "Blacksmith",
     price: 35,
@@ -23,8 +23,8 @@ export const CREW_MEMBERS: Record<CrewType, CrewMember> = {
   [CrewType.Cook]: {
     Component: Cook,
     description: "Cooks delicious meals that revitalize.",
-    interaction: "Trade",
     hirableLevel: 99,
+    interaction: "Trade",
     monologues: [""],
     name: "Cook",
     price: 0,
@@ -32,8 +32,8 @@ export const CREW_MEMBERS: Record<CrewType, CrewMember> = {
   [CrewType.Medic]: {
     Component: Medic,
     description: "Stems wounds and rescues from certain death.",
-    interaction: "Trade",
     hirableLevel: 99,
+    interaction: "Trade",
     monologues: [""],
     name: "Medic",
     price: 0,
@@ -41,8 +41,8 @@ export const CREW_MEMBERS: Record<CrewType, CrewMember> = {
   [CrewType.Mercenary]: {
     Component: Mercenary,
     description: "Trains new skills and attributes.",
-    interaction: "Train",
     hirableLevel: 5,
+    interaction: "Train",
     monologues: ["Perhaps I can teach you something."],
     name: "Mercenary",
     price: 25,
@@ -50,8 +50,8 @@ export const CREW_MEMBERS: Record<CrewType, CrewMember> = {
   [CrewType.Merchant]: {
     Component: Merchant,
     description: "",
-    interaction: "Trade",
     hirableLevel: 0,
+    interaction: "Trade",
     monologues: [
       "Greetings. I have what you're looking for.",
       "Hello again. Some threads, perhaps?",
@@ -66,8 +66,8 @@ export const CREW_MEMBERS: Record<CrewType, CrewMember> = {
   [CrewType.Tailor]: {
     Component: Tailor,
     description: "",
-    interaction: "Upgrade",
     hirableLevel: 99,
+    interaction: "Upgrade",
     monologues: ["Allow me to deepen your pockets."],
     name: "Tailor",
     price: 0,

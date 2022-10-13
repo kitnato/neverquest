@@ -86,11 +86,11 @@ export default function () {
           {sellConfirmation && (
             <ConfirmationDialog
               confirmationLabel="Sell"
-              onConfirm={() => sellItem(sellConfirmation)}
               message={`
                 You can buy it back at the original purchase price
                 but it will be gone forever once you leave the caravan.
               `}
+              onConfirm={() => sellItem(sellConfirmation)}
               setHide={() => setSellConfirmation(null)}
               show={sellConfirmation !== null}
               title="Sell equipped item?"

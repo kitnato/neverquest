@@ -5,7 +5,7 @@ import { KEY_SESSION, KEY_SETTINGS } from "@neverquest/constants";
 
 export const localStorageEffect =
   <ValueType>(key: string, isSettings?: boolean): AtomEffect<ValueType> =>
-  ({ setSelf, onSet }) => {
+  ({ onSet, setSelf }) => {
     type Store = Partial<Record<string, ValueType>>;
 
     const storeKey = isSettings ? KEY_SETTINGS : KEY_SESSION;

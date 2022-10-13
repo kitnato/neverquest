@@ -18,9 +18,9 @@ export default function () {
 
   return (
     <IconDisplay
+      Icon={Icon}
       animation={AnimationType.FlipInX}
       contents={formatPercentage(dodgeChanceValue)}
-      Icon={Icon}
       tooltip="Dodge chance"
     />
   );

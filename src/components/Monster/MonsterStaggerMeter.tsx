@@ -22,7 +22,7 @@ export default function () {
       setDeltaStagger(0);
       setStaggered(false);
     }
-  }, [deltaStagger, totalStaggerDurationValue]);
+  }, [deltaStagger, setStaggered, totalStaggerDurationValue]);
 
   useEffect(() => {
     if (!isStaggeredValue) {

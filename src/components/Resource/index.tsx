@@ -2,9 +2,9 @@ import Stack from "react-bootstrap/Stack";
 import { RecoilState, useRecoilValue } from "recoil";
 
 import FloatingText from "@neverquest/components/FloatingText";
-import { DeltaDisplay, AnimationType } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
+import { AnimationType, DeltaDisplay } from "@neverquest/types/ui";
+import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function ({
   atom,
@@ -12,8 +12,8 @@ export default function ({
   deltaAtom,
   showAtom,
 }: {
-  atom: RecoilState<number>;
   Component: React.ElementType;
+  atom: RecoilState<number>;
   deltaAtom: RecoilState<DeltaDisplay>;
   showAtom: RecoilState<boolean>;
 }) {

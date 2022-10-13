@@ -7,5 +7,5 @@ import { totalDamageMonster } from "@neverquest/state/monster";
 export default function () {
   const totalDamageMonsterValue = useRecoilValue(totalDamageMonster);
 
-  return <IconDisplay contents={totalDamageMonsterValue} Icon={Icon} tooltip="Monster damage" />;
+  return <IconDisplay Icon={Icon} contents={totalDamageMonsterValue} tooltip="Monster damage" />;
 }

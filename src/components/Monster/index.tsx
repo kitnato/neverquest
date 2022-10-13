@@ -33,7 +33,14 @@ export default function () {
     if (isMonsterDeadValue) {
       setLooting(true);
     }
-  }, [isAttackingValue, isMonsterDeadValue, isMonsterEngagedValue]);
+  }, [
+    isAttackingValue,
+    isMonsterDeadValue,
+    isMonsterEngagedValue,
+    regenerateMonster,
+    setLooting,
+    setMonsterEngaged,
+  ]);
 
   if (isAttackingValue || isMonsterEngagedValue) {
     return <MonsterStatus />;
@@ -43,8 +50,8 @@ export default function () {
     <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
       <Card.Body>
         <IconDisplay
-          contents={<span className="fst-italic">The darkness stirs.</span>}
           Icon={Icon}
+          contents={<span className="fst-italic">The darkness stirs.</span>}
           tooltip={UNKNOWN}
         />
       </Card.Body>

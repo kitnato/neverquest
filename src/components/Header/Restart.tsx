@@ -39,8 +39,8 @@ export default function () {
 
       <ConfirmationDialog
         confirmationLabel="Restart"
-        onConfirm={reset}
         message="This will reset all progress and restart from the beginning."
+        onConfirm={reset}
         setHide={() => setShowingRestart(false)}
         show={isShowingRestart}
         title="Start a new quest?"

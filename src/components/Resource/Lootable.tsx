@@ -3,7 +3,7 @@ import { RecoilState, useRecoilValue } from "recoil";
 
 import FloatingText from "@neverquest/components/FloatingText";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
-import { DeltaDisplay, AnimationType } from "@neverquest/types/ui";
+import { AnimationType, DeltaDisplay } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function ({
@@ -12,8 +12,8 @@ export default function ({
   deltaAtom,
   tooltip,
 }: {
-  atom: RecoilState<number>;
   Component: React.ElementType;
+  atom: RecoilState<number>;
   deltaAtom: RecoilState<DeltaDisplay>;
   tooltip: string;
 }) {

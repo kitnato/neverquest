@@ -6,8 +6,8 @@ export enum AffixType {
 export enum ArmorType {
   Chest = "chest",
   Feet = "feet",
-  Head = "head",
   Hands = "hands",
+  Head = "head",
   Legs = "legs",
   Shoulders = "shoulders",
   Waist = "waist",

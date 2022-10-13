@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSetRecoilState, useRecoilValue, RecoilState, RecoilValueReadOnly } from "recoil";
+import { RecoilState, RecoilValueReadOnly, useRecoilValue, useSetRecoilState } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 
@@ -34,7 +34,7 @@ export default function ({
       setDeltaRegeneration(0);
       changeCurrentReserve(1);
     }
-  }, [deltaRegeneration, regenerationRateValue]);
+  }, [changeCurrentReserve, deltaRegeneration, regenerationRateValue]);
 
   // Catches any leftover increments after regeneration is complete.
   useEffect(() => {

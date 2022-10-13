@@ -1,8 +1,8 @@
 import { Button, Col, Row, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import InventoryElement from "@neverquest/components/Inventory/InventoryElement";
 import Encumbrance from "@neverquest/components/Inventory/Encumbrance";
+import InventoryElement from "@neverquest/components/Inventory/InventoryElement";
 import { inventory } from "@neverquest/state/inventory";
 import { itemEquip, itemUnequip } from "@neverquest/state/transactions";
 import { isGear } from "@neverquest/types/type-guards";

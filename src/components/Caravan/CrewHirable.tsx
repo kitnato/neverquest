@@ -26,7 +26,7 @@ export default function ({ type }: { type: CrewType }) {
 
   return (
     <div className="align-items-center d-flex justify-content-between w-100">
-      <IconDisplay contents={description} Icon={Icon} isDescription tooltip={name} />
+      <IconDisplay Icon={Icon} contents={description} isDescription tooltip={name} />
 
       <Stack direction="horizontal" gap={3}>
         <Coins tooltip="Price (coins)" value={price} />

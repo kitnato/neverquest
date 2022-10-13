@@ -8,8 +8,8 @@ import IconImage from "@neverquest/components/IconImage";
 import { ReactComponent as Icon } from "@neverquest/icons/skills.svg";
 import { attributesIncreasable } from "@neverquest/state/attributes";
 import { isAttacking } from "@neverquest/state/character";
-import { isMonsterEngaged } from "@neverquest/state/monster";
 import { isShowing } from "@neverquest/state/isShowing";
+import { isMonsterEngaged } from "@neverquest/state/monster";
 import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
@@ -32,12 +32,12 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
       <OverlayTrigger overlay={<Tooltip>Attributes</Tooltip>} placement="top">
         <span className={`${getAnimationClass({ type: AnimationType.FlipInX })} d-inline-block`}>
           <Button
-            disabled={isButtonDisabled}
             className={`position-relative${
               attributesIncreasableValue && !isButtonDisabled
                 ? ` ${getAnimationClass({ isInfinite: true, type: AnimationType.Pulse })}`
                 : ""
             }`}
+            disabled={isButtonDisabled}
             onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
               currentTarget.blur();
 

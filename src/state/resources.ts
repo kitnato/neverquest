@@ -45,7 +45,7 @@ export const scrapLoot = atom({
 // SELECTORS
 
 export const hasLooted = selector({
-  key: "hasLooted",
   get: ({ get }) =>
     get(essenceLoot) === 0 && get(coinsLoot) === 0 && get(scrapLoot) === 0 && get(isLevelCompleted),
+  key: "hasLooted",
 });

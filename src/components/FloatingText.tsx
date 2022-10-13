@@ -1,11 +1,11 @@
 import { nanoid } from "nanoid";
 import { ReactNode, useEffect, useState } from "react";
 import { Stack } from "react-bootstrap";
-import { RecoilState, useResetRecoilState, useRecoilValue } from "recoil";
+import { RecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { DELTA_DEFAULT } from "@neverquest/constants";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
 import { AnimationSpeed, AnimationType, DeltaDisplay } from "@neverquest/types/ui";
+import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 type FloatingText = {
   contents: ReactNode;
@@ -75,7 +75,7 @@ export default function ({ atom }: { atom: RecoilState<DeltaDisplay> }) {
     }
 
     resetDeltaValue();
-  }, [deltaValue]);
+  }, [animationClass, deltaValue, resetDeltaValue]);
 
   return (
     <div className="position-relative">

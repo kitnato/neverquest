@@ -1,8 +1,8 @@
 import { nanoid } from "nanoid";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import { ITEM_KNAPSACK } from "@neverquest/constants/items";
 import { NO_ARMOR, NO_SHIELD, NO_WEAPON } from "@neverquest/constants/gear";
+import { ITEM_KNAPSACK } from "@neverquest/constants/items";
 import useCheckEncumbrance from "@neverquest/hooks/useCheckEncumbrance";
 import { hasKnapsack } from "@neverquest/state/character";
 import { armor, encumbranceMaximum, inventory, shield, weapon } from "@neverquest/state/inventory";

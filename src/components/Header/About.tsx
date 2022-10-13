@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Modal from "react-bootstrap/Modal";
 import { QuestionSquare } from "react-bootstrap-icons";
+import Modal from "react-bootstrap/Modal";
 
 import { UNKNOWN } from "@neverquest/constants";
 
@@ -11,9 +11,9 @@ export default function () {
 
   return (
     <span>
-      <QuestionSquare style={{ cursor: "pointer" }} onClick={() => handleShow(true)} />
+      <QuestionSquare onClick={() => handleShow(true)} style={{ cursor: "pointer" }} />
 
-      <Modal show={isShowing} onHide={() => handleShow(false)}>
+      <Modal onHide={() => handleShow(false)} show={isShowing}>
         <Modal.Header closeButton>
           <Modal.Title>About</Modal.Title>
         </Modal.Header>

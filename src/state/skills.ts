@@ -1,9 +1,9 @@
-import { atom, atomFamily, DefaultValue, selector, selectorFamily } from "recoil";
+import { DefaultValue, atom, atomFamily, selector, selectorFamily } from "recoil";
 
+import { attributes } from "./attributes";
+import { ATTRIBUTES, ATTRIBUTES_ORDER } from "@neverquest/constants/attributes";
 import { localStorageEffect } from "@neverquest/state/effects";
 import { SkillStatus, SkillType, StorageKey } from "@neverquest/types/enums";
-import { ATTRIBUTES, ATTRIBUTES_ORDER } from "@neverquest/constants/attributes";
-import { attributes } from "./attributes";
 
 interface SkillsStatusState {
   areTrainable: SkillType[];
@@ -29,11 +29,11 @@ export const skillsStatus = atom<SkillsStatusState>({
 // SELECTORS
 
 export const skills = selectorFamily<SkillStatus, SkillType>({
-  key: "skills",
   get:
     (type) =>
     ({ get }) =>
       get(skillsMapping(type)),
+  key: "skills",
   set:
     (type) =>
     ({ set }, status) => {
@@ -71,11 +71,11 @@ export const skills = selectorFamily<SkillStatus, SkillType>({
 });
 
 export const showWeaponClass = selector({
-  key: "showWeaponClass",
   get: ({ get }) => {
     const { areTrained } = get(skillsStatus);
     const weaponSkills = [SkillType.Bleed, SkillType.Parry, SkillType.Stagger];
 
     return areTrained.some((skill) => weaponSkills.includes(skill));
   },
+  key: "showWeaponClass",
 });

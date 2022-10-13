@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 
-import { skills } from "@neverquest/state/skills";
 import SkillDisplay from "@neverquest/components/Character/SkillDisplay";
+import { skills } from "@neverquest/state/skills";
 import { SkillStatus, SkillType } from "@neverquest/types/enums";
 
 export default function ({ type }: { type: SkillType }) {

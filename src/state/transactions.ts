@@ -3,8 +3,6 @@ import { nanoid } from "nanoid";
 import { DefaultValue, selector } from "recoil";
 
 import { KEY_SESSION } from "@neverquest/constants";
-import LOCRA from "@neverquest/locra";
-import { AffixTag, CreatureType } from "@neverquest/locra/types";
 import { ATTRIBUTES_INITIAL } from "@neverquest/constants/attributes";
 import {
   CREW_INITIAL,
@@ -12,12 +10,14 @@ import {
   CREW_ORDER,
   MERCHANT_OFFERS,
 } from "@neverquest/constants/caravan";
-import { level, progress } from "@neverquest/state/encounter";
 import { SKILLS_INITIAL } from "@neverquest/constants/skills";
+import LOCRA from "@neverquest/locra";
+import { AffixTag, CreatureType } from "@neverquest/locra/types";
 import { attributes } from "@neverquest/state/attributes";
 import { crew, merchantInventory } from "@neverquest/state/caravan";
-import { statusElement, isRecovering } from "@neverquest/state/character";
+import { isRecovering, statusElement } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
+import { level, progress } from "@neverquest/state/encounter";
 import { inventory, shield, weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import {
@@ -32,30 +32,30 @@ import {
   totalDamageMonster,
 } from "@neverquest/state/monster";
 import {
-  currentHealth,
-  maximumHealth,
-  currentStamina,
-  maximumStamina,
   canAttack,
   canBlock,
+  currentHealth,
+  currentStamina,
+  maximumHealth,
+  maximumStamina,
 } from "@neverquest/state/reserves";
 import {
-  essenceLoot,
-  scrapLoot,
-  coinsLoot,
   coins,
+  coinsLoot,
   essence,
+  essenceLoot,
   scrap,
+  scrapLoot,
 } from "@neverquest/state/resources";
 import { isGameOver, isNSFW } from "@neverquest/state/settings";
+import { skills } from "@neverquest/state/skills";
 import {
-  totalProtection,
   totalBlockChance,
   totalDamage,
-  totalParryChance,
   totalDodgeChance,
+  totalParryChance,
+  totalProtection,
 } from "@neverquest/state/statistics";
-import { skills } from "@neverquest/state/skills";
 import {
   AttributeType,
   CrewStatus,
@@ -481,9 +481,9 @@ export const monsterCreate = selector({
     set(
       monsterName,
       LOCRA.generateCreature({
-        isNSFW: get(isNSFW),
         hasPrefix: Math.random() < 0.8,
         hasSuffix: Math.random() < 0.1 * Math.ceil(get(level) / 2),
+        isNSFW: get(isNSFW),
         type: CreatureType.Monster,
       })
     );

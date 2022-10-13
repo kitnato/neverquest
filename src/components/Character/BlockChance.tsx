@@ -4,9 +4,9 @@ import IconDisplay from "@neverquest/components/IconDisplay";
 import { ReactComponent as Icon } from "@neverquest/icons/shield-reflect.svg";
 import { shield } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { formatPercentage } from "@neverquest/utilities/helpers";
-import { ShowingType } from "@neverquest/types/enums";
 
 export default function () {
   const { block } = useRecoilValue(shield);
@@ -18,9 +18,9 @@ export default function () {
 
   return (
     <IconDisplay
+      Icon={Icon}
       animation={AnimationType.FlipInX}
       contents={formatPercentage(block)}
-      Icon={Icon}
       tooltip="Block chance"
     />
   );

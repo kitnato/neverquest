@@ -12,6 +12,7 @@ export default function () {
 
   return (
     <IconDisplay
+      Icon={Icon}
       contents={
         <>
           <span>{characterLevelValue}</span>
@@ -19,7 +20,6 @@ export default function () {
           <FloatingText atom={deltas(DeltaType.CharacterLevel)} />
         </>
       }
-      Icon={Icon}
       tooltip="Power level"
     />
   );

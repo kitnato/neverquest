@@ -1,13 +1,13 @@
 import { useRecoilValue } from "recoil";
 
-import IconDisplay from "@neverquest/components/IconDisplay";
 import FloatingText from "@neverquest/components/FloatingText";
-import { ReactComponent as Icon } from "@neverquest/icons/flying-flag.svg";
+import IconDisplay from "@neverquest/components/IconDisplay";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
-import { level } from "@neverquest/state/encounter";
+import { ReactComponent as Icon } from "@neverquest/icons/flying-flag.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { OverlayPlacement } from "@neverquest/types/ui";
+import { level } from "@neverquest/state/encounter";
 import { DeltaType } from "@neverquest/types/enums";
+import { OverlayPlacement } from "@neverquest/types/ui";
 
 export default function () {
   const levelValue = useRecoilValue(level);
@@ -21,6 +21,7 @@ export default function () {
 
   return (
     <IconDisplay
+      Icon={Icon}
       contents={
         <>
           <span>{levelValue}</span>
@@ -28,7 +29,6 @@ export default function () {
           <FloatingText atom={deltaWildernessLevel} />
         </>
       }
-      Icon={Icon}
       iconProps={{ placement: OverlayPlacement.Bottom }}
       tooltip="Level"
     />

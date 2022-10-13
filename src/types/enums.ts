@@ -65,8 +65,8 @@ export enum LocationType {
 }
 
 export enum LootType {
-  Essence,
   Coins,
+  Essence,
   Scrap,
 }
 
@@ -112,11 +112,11 @@ export enum SkillType {
 export enum StorageKey {
   Attributes = "attributes",
   AutoEquip = "autoEquip",
-  CrewMapping = "crewMapping",
   CharacterLevel = "characterLevel",
   Coins = "coins",
   CoinsLoot = "coinsLoot",
   CrewHirable = "crewHirable",
+  CrewMapping = "crewMapping",
   CurrentHealth = "currentHealth",
   CurrentHealthMonster = "currentHealthMonster",
   CurrentStamina = "currentStamina",
@@ -129,9 +129,10 @@ export enum StorageKey {
   IsAttacking = "isAttacking",
   IsGameOver = "isGameOver",
   IsLooting = "isLooting",
-  IsMonsterNew = "isMonsterNew",
   IsMonsterEngaged = "isMonsterEngaged",
+  IsMonsterNew = "isMonsterNew",
   IsMonsterStaggered = "isMonsterStaggered",
+  IsNSFW = "isNSFW",
   IsRecovering = "isRecovering",
   IsShowing = "isShowing",
   IsShowingDamagePerSecond = "isShowingDamagePerSecond",
@@ -143,7 +144,6 @@ export enum StorageKey {
   MonsterName = "monsterName",
   MonsterStatusElement = "monsterStatusElement",
   Name = "name",
-  NSFW = "isNSFW",
   Progress = "progress",
   Scrap = "scrap",
   ScrapLoot = "scrapLoot",

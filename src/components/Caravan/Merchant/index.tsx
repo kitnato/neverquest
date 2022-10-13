@@ -2,8 +2,8 @@ import Stack from "react-bootstrap/Stack";
 
 import BuyBackItems from "@neverquest/components/Caravan/Merchant/BuyBackItems";
 import PurchaseItems from "@neverquest/components/Caravan/Merchant/PurchaseItems";
-import SellScrap from "@neverquest/components/Caravan/Merchant/SellScrap";
 import SellItems from "@neverquest/components/Caravan/Merchant/SellItems";
+import SellScrap from "@neverquest/components/Caravan/Merchant/SellScrap";
 
 export default function () {
   return (

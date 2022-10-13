@@ -129,14 +129,14 @@ export function getComputedStat({
 }
 
 export function getDamagePerSecond({
-  damage,
   criticalChance = 0,
   criticalDamage = 0,
+  damage,
   rate,
 }: {
-  damage: number;
   criticalChance?: number;
   criticalDamage?: number;
+  damage: number;
   rate: number;
 }) {
   const regular = damage * (1 - criticalChance);

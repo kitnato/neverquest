@@ -20,8 +20,8 @@ export const isGameOver = atom({
 
 export const isNSFW = atom({
   default: true,
-  effects: [localStorageEffect<boolean>(StorageKey.NSFW, true)],
-  key: StorageKey.NSFW,
+  effects: [localStorageEffect<boolean>(StorageKey.IsNSFW, true)],
+  key: StorageKey.IsNSFW,
 });
 
 export const isShowingDamagePerSecond = atom({

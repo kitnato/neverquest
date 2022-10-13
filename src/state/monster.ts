@@ -46,26 +46,25 @@ export const monsterStatusElement = atom<HTMLDivElement | null>({
 // SELECTORS
 
 export const damagePerSecondMonster = selector({
-  key: "damagePerSecondMonster",
   get: ({ get }) =>
     getDamagePerSecond({
       damage: get(totalDamageMonster),
       rate: get(totalAttackRateMonster),
     }),
+  key: "damagePerSecondMonster",
 });
 
 export const isMonsterDead = selector({
-  key: "isMonsterDead",
   get: ({ get }) => get(currentHealthMonster) === 0,
+  key: "isMonsterDead",
 });
 
 export const maximumHealthMonster = selector({
-  key: "maximumHealthMonster",
   get: ({ get }) => Math.ceil(get(level) * 2) + Math.floor(get(progress) / 2),
+  key: "maximumHealthMonster",
 });
 
 export const monsterLoot = selector({
-  key: "monsterLoot",
   get: ({ get }) => {
     const levelValue = get(level);
     const progressValue = get(progress);
@@ -75,18 +74,19 @@ export const monsterLoot = selector({
       scrap: Math.floor(progressValue * 1.2 + levelValue * 1.75),
     };
   },
+  key: "monsterLoot",
 });
 
 export const totalAttackRateMonster = selector({
-  key: "totalAttackRateMonster",
   get: ({ get }) => 4510 - get(progress) - 10 * get(level) * 2,
+  key: "totalAttackRateMonster",
 });
 
 export const totalDamageMonster = selector({
-  key: "totalDamageMonster",
   get: ({ get }) => {
     const levelValue = get(level);
 
     return levelValue + Math.floor(levelValue / 2.5) + Math.floor(get(progress) / 3);
   },
+  key: "totalDamageMonster",
 });

@@ -1,7 +1,7 @@
 import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { Clock, Plus } from "react-bootstrap-icons";
-import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import { UNKNOWN } from "@neverquest/constants";
@@ -28,7 +28,7 @@ export default function ({ type }: { type: AttributeType }) {
     <div className="align-items-center d-flex justify-content-between w-100">
       {canAssign ? (
         <>
-          <IconDisplay contents={description} Icon={Icon} isDescription tooltip={name} />
+          <IconDisplay Icon={Icon} contents={description} isDescription tooltip={name} />
 
           <Stack direction="horizontal" gap={3}>
             <span>{points}</span>

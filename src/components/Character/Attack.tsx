@@ -6,8 +6,8 @@ import FloatingText from "@neverquest/components/FloatingText";
 import IconDisplay from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/constants/attributes";
-import { ReactComponent as Icon } from "@neverquest/icons/striking-splinter.svg";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
+import { ReactComponent as Icon } from "@neverquest/icons/striking-splinter.svg";
 import { attributes } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
@@ -46,6 +46,7 @@ export default function () {
 
   return (
     <IconDisplay
+      Icon={Icon}
       contents={
         showTotalAttackRateBreakdownValue ? (
           <OverlayTrigger
@@ -84,7 +85,6 @@ export default function () {
           <MeterWithDelta />
         )
       }
-      Icon={Icon}
       tooltip="Attack rate"
     />
   );

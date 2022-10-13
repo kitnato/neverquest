@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import useAnimation from "@neverquest/hooks/useAnimation";

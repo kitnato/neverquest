@@ -17,8 +17,8 @@ export default function () {
 
   return (
     <IconDisplay
-      contents={formatPercentage(criticalChanceValue)}
       Icon={Icon}
+      contents={formatPercentage(criticalChanceValue)}
       isAnimated
       tooltip="Critical hit chance"
     />

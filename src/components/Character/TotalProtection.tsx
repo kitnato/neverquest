@@ -27,6 +27,7 @@ export default function () {
 
   return (
     <IconDisplay
+      Icon={Icon}
       animation={AnimationType.FlipInX}
       contents={
         <>
@@ -35,7 +36,6 @@ export default function () {
           <FloatingText atom={deltaTotalProtection} />
         </>
       }
-      Icon={Icon}
       tooltip="Total protection"
     />
   );

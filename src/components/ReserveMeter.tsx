@@ -4,13 +4,13 @@ import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import { UIAttachment, UIVariant } from "@neverquest/types/ui";
 
 export default function ({
-  attached,
   atom,
   atomMaximum,
+  attached,
 }: {
-  attached?: UIAttachment;
   atom: RecoilValueReadOnly<number>;
   atomMaximum: RecoilValueReadOnly<number>;
+  attached?: UIAttachment;
 }) {
   const atomValue = useRecoilValue(atom);
   const atomMaximumValue = useRecoilValue(atomMaximum);

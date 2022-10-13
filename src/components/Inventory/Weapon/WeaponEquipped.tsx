@@ -21,8 +21,8 @@ export default function () {
 
   return (
     <IconDisplay
-      contents={<WeaponName weapon={weaponValue} />}
       Icon={isEquipped ? IconEquipped : IconUnequipped}
+      contents={<WeaponName weapon={weaponValue} />}
       iconProps={{ isFlipped: !isEquipped }}
       isAnimated
       tooltip="Equipped weapon"

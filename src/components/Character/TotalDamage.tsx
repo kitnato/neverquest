@@ -1,6 +1,5 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
-
 import FloatingText from "@neverquest/components/FloatingText";
 import IconDisplay from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
@@ -31,6 +30,7 @@ export default function () {
 
   return (
     <IconDisplay
+      Icon={Icon}
       contents={
         <>
           {showTotalDamageBreakdownValue ? (
@@ -69,7 +69,6 @@ export default function () {
           <FloatingText atom={deltaTotalDamage} />
         </>
       }
-      Icon={Icon}
       tooltip="Damage per hit"
     />
   );

@@ -1,6 +1,6 @@
-import { useRecoilState, useRecoilValue } from "recoil";
 import { ChangeEvent, KeyboardEvent, MouseEvent, useState } from "react";
 import { FormControl } from "react-bootstrap";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import { ReactComponent as AliveIcon } from "@neverquest/icons/domino-mask.svg";
@@ -16,6 +16,7 @@ export default function () {
 
   return (
     <IconDisplay
+      Icon={isGameOverValue ? DeadIcon : AliveIcon}
       contents={
         <FormControl
           className="hover-grow"
@@ -33,7 +34,6 @@ export default function () {
           value={nameValue}
         />
       }
-      Icon={isGameOverValue ? DeadIcon : AliveIcon}
       tooltip="Name"
     />
   );

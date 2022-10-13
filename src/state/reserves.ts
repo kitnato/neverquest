@@ -23,32 +23,31 @@ export const currentStamina = atom({
 // SELECTORS
 
 export const canAttack = selector({
-  key: "canAttack",
   get: ({ get }) => get(currentStamina) >= get(weapon).staminaCost,
+  key: "canAttack",
 });
 
 export const canBlock = selector({
-  key: "canBlock",
   get: ({ get }) => get(currentStamina) >= get(shield).staminaCost,
+  key: "canBlock",
 });
 
 export const isHealthLow = selector({
-  key: "isHealthLow",
   get: ({ get }) => get(currentHealth) <= Math.ceil(get(maximumHealth) * 0.33),
+  key: "isHealthLow",
 });
 
 export const isHealthMaxedOut = selector({
-  key: "isHealthMaxedOut",
   get: ({ get }) => get(currentHealth) >= get(maximumHealth),
+  key: "isHealthMaxedOut",
 });
 
 export const isStaminaMaxedOut = selector({
-  key: "isStaminaMaxedOut",
   get: ({ get }) => get(currentStamina) >= get(maximumStamina),
+  key: "isStaminaMaxedOut",
 });
 
 export const maximumHealth = selector({
-  key: "maximumHealth",
   get: ({ get }) => {
     const { points } = get(attributes(AttributeType.Health));
 
@@ -56,10 +55,10 @@ export const maximumHealth = selector({
 
     return base + increment * points;
   },
+  key: "maximumHealth",
 });
 
 export const maximumStamina = selector({
-  key: "maximumStamina",
   get: ({ get }) => {
     const { points } = get(attributes(AttributeType.Stamina));
 
@@ -67,4 +66,5 @@ export const maximumStamina = selector({
 
     return base + increment * points;
   },
+  key: "maximumStamina",
 });

@@ -1,9 +1,9 @@
 import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
+import RecoveryMeter from "@neverquest/components/Character/RecoveryMeter";
 import FloatingText from "@neverquest/components/FloatingText";
 import IconDisplay from "@neverquest/components/IconDisplay";
-import RecoveryMeter from "@neverquest/components/Character/RecoveryMeter";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/knockout.svg";
 import { deltas } from "@neverquest/state/deltas";
@@ -28,6 +28,7 @@ export default function () {
 
   return (
     <IconDisplay
+      Icon={Icon}
       contents={
         <Stack className="w-100" direction="horizontal">
           <RecoveryMeter />
@@ -35,7 +36,6 @@ export default function () {
           <FloatingText atom={deltaTotalRecoveryRate} />
         </Stack>
       }
-      Icon={Icon}
       isAnimated
       tooltip="Recovery rate"
     />

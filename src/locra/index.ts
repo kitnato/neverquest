@@ -94,8 +94,8 @@ export default class LOCRA {
     hasPrefix?: boolean;
     hasSuffix?: boolean;
     isNSFW?: boolean;
-    tags?: AffixTag[];
     query: ArmorQuery | ShieldQuery | WeaponQuery;
+    tags?: AffixTag[];
   }) {
     const { subtype, type, weaponClass } = query as WeaponQuery;
     const filteredArtifacts = artifacts.filter(
@@ -112,7 +112,7 @@ export default class LOCRA {
     return this.generate({
       category: Category.Artifact,
       name,
-      parameters: { isNSFW, hasPrefix, hasSuffix, prefixTags: tags, suffixTags: tags },
+      parameters: { hasPrefix, hasSuffix, isNSFW, prefixTags: tags, suffixTags: tags },
     });
   }
 
@@ -141,7 +141,7 @@ export default class LOCRA {
     return this.generate({
       category: Category.Creature,
       name,
-      parameters: { isNSFW, hasPrefix, hasSuffix, prefixTags: tags, suffixTags: tags },
+      parameters: { hasPrefix, hasSuffix, isNSFW, prefixTags: tags, suffixTags: tags },
     });
   }
 
@@ -166,7 +166,7 @@ export default class LOCRA {
     return this.generate({
       category: Category.Location,
       name,
-      parameters: { isNSFW, hasPrefix, hasSuffix, prefixTags: tags, suffixTags: tags },
+      parameters: { hasPrefix, hasSuffix, isNSFW, prefixTags: tags, suffixTags: tags },
     });
   }
 }

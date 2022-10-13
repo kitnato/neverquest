@@ -22,8 +22,8 @@ export const ATTRIBUTES: Record<AttributeType, Attribute> = {
   [AttributeType.CriticalChance]: {
     base: 0,
     description: "Increases critical hit chance",
-    increment: 0.03,
     Icon,
+    increment: 0.03,
     name: "Dexterity",
     requiredSkill: SkillType.Criticals,
   },

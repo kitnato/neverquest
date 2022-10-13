@@ -8,9 +8,9 @@ export type Armor = ItemBase & {
 };
 
 export interface Attribute {
+  Icon: SVGIcon;
   base: number;
   description: string;
-  Icon: SVGIcon;
   increment: number;
   name: string;
   requiredSkill?: SkillType;
@@ -19,8 +19,8 @@ export interface Attribute {
 export interface CrewMember {
   Component: () => JSX.Element;
   description: string;
-  interaction: string;
   hirableLevel: number;
+  interaction: string;
   monologues: string[];
   name: string;
   price: number;
@@ -44,8 +44,8 @@ export interface InventoryMerchant {
 }
 
 export type Item = ItemBase & {
-  description: string;
   Icon: SVGIcon;
+  description: string;
   isPortable: boolean;
 };
 
@@ -65,8 +65,8 @@ export type Shield = ItemBase & {
 };
 
 export interface Skill {
-  description: string;
   Icon: SVGIcon;
+  description: string;
   name: string;
   price: number;
 }

@@ -2,8 +2,8 @@ import { Card, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import IconImage from "@neverquest/components/IconImage";
-import ResourceDisplay from "@neverquest/components/Resource/ResourceDisplay";
 import Looting from "@neverquest/components/Resource/Looting";
+import ResourceDisplay from "@neverquest/components/Resource/ResourceDisplay";
 import { ReactComponent as Icon } from "@neverquest/icons/open-chest.svg";
 import { progress } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";

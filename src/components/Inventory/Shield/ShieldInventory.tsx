@@ -4,5 +4,5 @@ import { ReactComponent as Icon } from "@neverquest/icons/round-shield.svg";
 import { Shield } from "@neverquest/types";
 
 export default function ({ shield }: { shield: Shield }) {
-  return <IconDisplay contents={<ShieldName shield={shield} />} Icon={Icon} tooltip="Shield" />;
+  return <IconDisplay Icon={Icon} contents={<ShieldName shield={shield} />} tooltip="Shield" />;
 }

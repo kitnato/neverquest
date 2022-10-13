@@ -11,8 +11,8 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { currentStamina, isStaminaMaxedOut, maximumStamina } from "@neverquest/state/reserves";
 import { totalStaminaRegenerationRate } from "@neverquest/state/statistics";
 import { staminaChange } from "@neverquest/state/transactions";
-import { UIAttachment } from "@neverquest/types/ui";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
+import { UIAttachment } from "@neverquest/types/ui";
 
 export default function () {
   const showStaminaValue = useRecoilValue(isShowing(ShowingType.Stamina));
@@ -23,13 +23,14 @@ export default function () {
 
   return (
     <IconDisplay
+      Icon={Icon}
       contents={
         <Stack>
           <Stack className="w-100" direction="horizontal">
             <ReserveMeter
-              attached={UIAttachment.Below}
               atom={currentStamina}
               atomMaximum={maximumStamina}
+              attached={UIAttachment.Below}
             />
 
             <FloatingText atom={deltas(DeltaType.Stamina)} />
@@ -43,7 +44,6 @@ export default function () {
           />
         </Stack>
       }
-      Icon={Icon}
       isAnimated
       tooltip="Stamina"
     />

@@ -14,5 +14,5 @@ export default function () {
     return progressValue === 0 ? null : <hr />;
   }
 
-  return <IconDisplay contents={<LootingMeter />} Icon={Icon} isAnimated tooltip="Looting" />;
+  return <IconDisplay Icon={Icon} contents={<LootingMeter />} isAnimated tooltip="Looting" />;
 }

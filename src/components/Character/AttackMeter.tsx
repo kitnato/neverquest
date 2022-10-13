@@ -30,7 +30,7 @@ export default function () {
       attack(null);
       setDeltaAttack(0);
     }
-  }, [deltaAttack, totalAttackRateValue]);
+  }, [attack, deltaAttack, totalAttackRateValue]);
 
   useEffect(() => {
     if (!isAttackingValue || isLootingValue || isMonsterDeadValue || !canAttackValue) {

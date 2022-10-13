@@ -43,5 +43,5 @@ export default function ({
         isTime ? formatMilliseconds(Math.abs(difference)) : difference
       }`,
     });
-  }, [currentValue, previousValue]);
+  }, [currentValue, isTime, negativeColor, positiveColor, previousValue, setDeltaValue, stop]);
 }

@@ -3,9 +3,9 @@ import { Card, Col, Row, Stack } from "react-bootstrap";
 import { useRecoilState, useSetRecoilState } from "recoil";
 
 import MonsterAttack from "@neverquest/components/Monster/MonsterAttack";
-import MonsterHealth from "@neverquest/components/Monster/MonsterHealth";
 import MonsterDamage from "@neverquest/components/Monster/MonsterDamage";
 import MonsterDamagePerSecond from "@neverquest/components/Monster/MonsterDamagePerSecond";
+import MonsterHealth from "@neverquest/components/Monster/MonsterHealth";
 import MonsterName from "@neverquest/components/Monster/MonsterName";
 import MonsterStagger from "@neverquest/components/Monster/MonsterStagger";
 import { isMonsterNew, monsterStatusElement } from "@neverquest/state/monster";
@@ -22,18 +22,18 @@ export default function () {
     setMonsterStatusElement(element.current);
 
     return () => setMonsterStatusElement(null);
-  }, [element]);
+  }, [element, setMonsterStatusElement]);
 
   useEffect(() => {
     if (isMonsterNewValue) {
       animateElement({
-        type: AnimationType.ZoomInRight,
         element: element.current,
         speed: AnimationSpeed.Faster,
+        type: AnimationType.ZoomInRight,
       });
       setIsMonsterNew(false);
     }
-  }, [element, isMonsterNewValue]);
+  }, [element, isMonsterNewValue, setIsMonsterNew]);
 
   return (
     <Card ref={element}>

@@ -54,8 +54,8 @@ export default function () {
 
       <ConfirmationDialog
         confirmationLabel="Restart"
-        onConfirm={reset}
         message="Start a new quest?"
+        onConfirm={reset}
         setHide={() => setIsShowingGameOver(false)}
         show={isGameOverValue && isShowingGameOver}
         title="You are dead."

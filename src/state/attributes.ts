@@ -3,8 +3,8 @@ import { atomFamily, selector } from "recoil";
 import { characterLevel } from "@neverquest/state/character";
 import { localStorageEffect } from "@neverquest/state/effects";
 import { essence } from "@neverquest/state/resources";
-import { getTriangularNumber } from "@neverquest/utilities/helpers";
 import { AttributeType, StorageKey } from "@neverquest/types/enums";
+import { getTriangularNumber } from "@neverquest/utilities/helpers";
 
 interface AttributeState {
   canAssign: boolean;

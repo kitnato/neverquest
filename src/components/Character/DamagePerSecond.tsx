@@ -15,8 +15,8 @@ export default function () {
 
   return (
     <IconDisplay
-      contents={damagePerSecondValue}
       Icon={Icon}
+      contents={damagePerSecondValue}
       isAnimated
       tooltip="Damage per second (DPS)"
     />

@@ -4,15 +4,15 @@ import { UIVariant } from "@neverquest/types/ui";
 
 export default function ({
   confirmationLabel,
-  onConfirm,
   message,
+  onConfirm,
   setHide,
   show,
   title,
 }: {
   confirmationLabel: string;
-  onConfirm: () => void;
   message: string;
+  onConfirm: () => void;
   setHide: () => void;
   show: boolean;
   title: string;

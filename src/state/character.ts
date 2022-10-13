@@ -58,7 +58,6 @@ export const statusElement = atom<HTMLDivElement | null>({
 // SELECTORS
 
 export const essenceAbsorbed = selector({
-  key: "essenceAbsorbed",
   get: ({ get }) => {
     let total = 0;
 
@@ -68,4 +67,5 @@ export const essenceAbsorbed = selector({
 
     return total;
   },
+  key: "essenceAbsorbed",
 });

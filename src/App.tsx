@@ -8,7 +8,8 @@ import Main from "@neverquest/components/Main";
 import { SeedContext, useSeed } from "@neverquest/state/SeedContext";
 
 export default function () {
-  const { seed, resetSeed } = useSeed();
+  const { resetSeed, seed } = useSeed();
+
   return (
     <SeedContext.Provider value={resetSeed}>
       <RecoilRoot key={seed}>

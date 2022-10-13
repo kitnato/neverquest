@@ -2,8 +2,8 @@ import { useRecoilValue } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import { ReactComponent as Icon } from "@neverquest/icons/heavy-timer.svg";
-import { isShowingDamagePerSecond } from "@neverquest/state/settings";
 import { damagePerSecondMonster } from "@neverquest/state/monster";
+import { isShowingDamagePerSecond } from "@neverquest/state/settings";
 
 export default function () {
   const damagePerSecondMonsterValue = useRecoilValue(damagePerSecondMonster);
@@ -15,8 +15,8 @@ export default function () {
 
   return (
     <IconDisplay
-      contents={damagePerSecondMonsterValue}
       Icon={Icon}
+      contents={damagePerSecondMonsterValue}
       isAnimated
       tooltip="Monster damage per second (DPS)"
     />

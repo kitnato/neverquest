@@ -1,3 +1,4 @@
+import { ARMOR_SPECIFICATIONS, SHIELD_SPECIFICATIONS } from "@neverquest/constants/gear";
 import LOCRA from "@neverquest/locra";
 import {
   AffixTag,
@@ -6,7 +7,6 @@ import {
   WeaponClass,
   WeaponType,
 } from "@neverquest/locra/types";
-import { ARMOR_SPECIFICATIONS, SHIELD_SPECIFICATIONS } from "@neverquest/constants/gear";
 import { Armor, Shield, Weapon } from "@neverquest/types";
 import { ArmorClass, WeaponGrip } from "@neverquest/types/enums";
 import { getFromRange, getWeaponSpecifications } from "@neverquest/utilities/helpers";
@@ -38,10 +38,10 @@ export function generateArmor({
         hasPrefix,
         hasSuffix,
         isNSFW,
-        tags,
         query: {
           type: ArtifactType.Armor,
         },
+        tags,
       }),
     price: level * 2 + Math.floor(level / 2),
     protection: Math.floor(level * protectionModifier),
@@ -76,11 +76,11 @@ export function generateShield({
         hasPrefix,
         hasSuffix,
         isNSFW,
-        tags,
         query: {
           subtype: type,
           type: ArtifactType.Shield,
         },
+        tags,
       }),
     price: level * 2 + Math.ceil(level / 1.5),
     stagger: (800 + Math.floor(level * 10)) * staggerModifier,
@@ -120,12 +120,12 @@ export function generateWeapon({
         hasPrefix,
         hasSuffix,
         isNSFW,
-        tags,
         query: {
           subtype: type,
           type: ArtifactType.Weapon,
           weaponClass,
         },
+        tags,
       }),
     price,
     rate,

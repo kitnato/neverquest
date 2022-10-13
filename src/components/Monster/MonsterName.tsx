@@ -24,5 +24,5 @@ export default function () {
     return { Icon: IconLurking, tooltip: "Lurking monster" };
   })();
 
-  return <IconDisplay contents={monsterNameValue} Icon={Icon} tooltip={tooltip} />;
+  return <IconDisplay Icon={Icon} contents={monsterNameValue} tooltip={tooltip} />;
 }

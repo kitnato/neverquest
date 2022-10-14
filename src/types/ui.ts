@@ -16,12 +16,17 @@ export enum AnimationType {
 
 export type DeltaDisplay = DeltaDisplayContents | DeltaDisplayContents[];
 
-export interface DeltaDisplayContents {
-  color: FloatingTextType | null;
-  value: string;
+interface DeltaDisplayContents {
+  color: FloatingText | null;
+  value: number | string;
 }
 
-export enum FloatingTextType {
+export interface DeltaReserve {
+  delta?: DeltaDisplay;
+  value: number;
+}
+
+export enum FloatingText {
   Negative = "text-danger",
   Neutral = "text-muted",
   Positive = "text-success",

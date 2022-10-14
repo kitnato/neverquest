@@ -19,7 +19,7 @@ import { getComputedStat } from "@neverquest/utilities/helpers";
 export default function () {
   const { points } = useRecoilValue(attributes(AttributeType.Damage));
   const damagePerSecondValue = useRecoilValue(damagePerSecond);
-  const showTotalDamageBreakdownValue = useRecoilValue(isShowing(ShowingType.TotalDamageSummary));
+  const showTotalDamageDetailsValue = useRecoilValue(isShowing(ShowingType.TotalDamageSummary));
   const isShowingDamagePerSecondValue = useRecoilValue(isShowingDamagePerSecond);
   const totalDamageValue = useRecoilValue(totalDamage);
   const weaponValue = useRecoilValue(weapon);
@@ -40,11 +40,11 @@ export default function () {
     <IconDisplay
       contents={
         <>
-          {showTotalDamageBreakdownValue ? (
+          {showTotalDamageDetailsValue ? (
             <OverlayTrigger
               overlay={
                 <Popover>
-                  <Popover.Header as="h4">Damage breakdown</Popover.Header>
+                  <Popover.Header as="h4">Damage details</Popover.Header>
 
                   <Popover.Body>
                     <Table borderless size="sm">
@@ -78,7 +78,7 @@ export default function () {
       }
       description={isShowingDamagePerSecondValue ? `${damagePerSecondValue} DPS` : null}
       Icon={Icon}
-      tooltip="Damage per hit"
+      tooltip="Damage per strike"
     />
   );
 }

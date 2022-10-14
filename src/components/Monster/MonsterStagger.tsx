@@ -15,7 +15,5 @@ export default function () {
     return null;
   }
 
-  return (
-    <IconDisplay contents={<MonsterStaggerMeter />} Icon={Icon} tooltip="Staggered duration" />
-  );
+  return <IconDisplay contents={<MonsterStaggerMeter />} Icon={Icon} tooltip="Staggered" />;
 }

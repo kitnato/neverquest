@@ -12,16 +12,16 @@ export const ATTRIBUTES: Record<AttributeType, Attribute> = {
     name: "Speed",
   },
   [AttributeType.BleedDamage]: {
-    base: 0,
+    base: 0.1,
     description: "Increases bleed damage",
     Icon,
-    increment: 0.05,
+    increment: 0.04,
     name: "Cruelty",
     requiredSkill: SkillType.Bleed,
   },
   [AttributeType.CriticalChance]: {
     base: 0,
-    description: "Increases critical hit chance",
+    description: "Increases critical strike chance",
     Icon,
     increment: 0.03,
     name: "Dexterity",
@@ -29,7 +29,7 @@ export const ATTRIBUTES: Record<AttributeType, Attribute> = {
   },
   [AttributeType.CriticalDamage]: {
     base: 1.5,
-    description: "Increases critical hit damage",
+    description: "Increases critical strike damage",
     Icon,
     increment: 0.15,
     name: "Perception",
@@ -135,3 +135,7 @@ export const ATTRIBUTES_INITIAL = [
   AttributeType.Health,
   AttributeType.RecoveryRate,
 ];
+
+export const BLEED_DELTA = 500;
+
+export const BLEED_DURATION = 2500;

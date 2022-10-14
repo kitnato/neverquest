@@ -3,7 +3,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { Stack } from "react-bootstrap";
 import { RecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
-import { DELTA_DEFAULT } from "@neverquest/constants";
+import { DEFAULT_DELTA_DISPLAY } from "@neverquest/constants";
 import { AnimationSpeed, AnimationType, DeltaDisplay } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
@@ -24,15 +24,14 @@ export default function ({ atom }: { atom: RecoilState<DeltaDisplay> }) {
   });
 
   useEffect(() => {
-    if (deltaValue === DELTA_DEFAULT) {
+    if (deltaValue === DEFAULT_DELTA_DISPLAY) {
       return;
     }
 
     const key = nanoid();
 
-    const onAnimationEnd = (id: string) => () => {
+    const onAnimationEnd = (id: string) => () =>
       setTextQueue((current) => current.filter(({ key }) => key !== id));
-    };
 
     if (Array.isArray(deltaValue)) {
       setTextQueue((current) => [

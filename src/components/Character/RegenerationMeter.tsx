@@ -4,8 +4,7 @@ import { RecoilState, RecoilValueReadOnly, useRecoilValue, useSetRecoilState } f
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { isRecovering } from "@neverquest/state/character";
-import { ReserveChangeProps } from "@neverquest/types/props";
-import { UIAttachment, UISize, UIVariant } from "@neverquest/types/ui";
+import { DeltaReserve, UIAttachment, UISize, UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
 export default function ({
@@ -13,7 +12,7 @@ export default function ({
   isReserveMaxedOut,
   regenerationRate,
 }: {
-  atomReserve: RecoilState<ReserveChangeProps>;
+  atomReserve: RecoilState<DeltaReserve>;
   isReserveMaxedOut: RecoilValueReadOnly<boolean>;
   regenerationRate: RecoilValueReadOnly<number>;
 }) {
@@ -31,7 +30,7 @@ export default function ({
   useEffect(() => {
     if (deltaRegeneration >= regenerationRateValue) {
       setDeltaRegeneration(0);
-      changeCurrentReserve(1);
+      changeCurrentReserve({ value: 1 });
     }
   }, [changeCurrentReserve, deltaRegeneration, regenerationRateValue]);
 

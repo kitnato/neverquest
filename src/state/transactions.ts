@@ -2,8 +2,8 @@ import ls from "localstorage-slim";
 import { nanoid } from "nanoid";
 import { DefaultValue, selector } from "recoil";
 
-import { KEY_SESSION } from "@neverquest/constants";
-import { ATTRIBUTES_INITIAL } from "@neverquest/constants/attributes";
+import { DEFAULT_RESERVE_CHANGE, KEY_SESSION } from "@neverquest/constants";
+import { ATTRIBUTES_INITIAL, BLEED_DURATION } from "@neverquest/constants/attributes";
 import {
   CREW_INITIAL,
   CREW_MEMBERS,
@@ -26,6 +26,7 @@ import {
   isMonsterNew,
   isMonsterStaggered,
   maximumHealthMonster,
+  monsterBleedingDuration,
   monsterLoot,
   monsterName,
   monsterStatusElement,
@@ -50,6 +51,7 @@ import {
 import { isGameOver, isNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
 import {
+  totalBleedChance,
   totalBlockChance,
   totalDamage,
   totalDodgeChance,
@@ -64,9 +66,14 @@ import {
   SkillStatus,
   SkillType,
 } from "@neverquest/types/enums";
-import { ReserveChangeProps } from "@neverquest/types/props";
 import { isArmor, isItem, isShield, isWeapon } from "@neverquest/types/type-guards";
-import { AnimationSpeed, AnimationType, FloatingTextType } from "@neverquest/types/ui";
+import {
+  AnimationSpeed,
+  AnimationType,
+  DeltaDisplay,
+  DeltaReserve,
+  FloatingText,
+} from "@neverquest/types/ui";
 import { generateArmor, generateShield, generateWeapon } from "@neverquest/utilities/generators";
 import { animateElement } from "@neverquest/utilities/helpers";
 
@@ -89,7 +96,7 @@ export const defense = selector({
 
     if (hasDodged) {
       set(deltaHealth, {
-        color: FloatingTextType.Neutral,
+        color: FloatingText.Neutral,
         value: "DODGED",
       });
 
@@ -106,8 +113,8 @@ export const defense = selector({
 
     if (healthDamage === 0) {
       set(deltaHealth, {
-        color: FloatingTextType.Neutral,
-        value: "0",
+        color: FloatingText.Neutral,
+        value: healthDamage,
       });
 
       return;
@@ -121,12 +128,12 @@ export const defense = selector({
 
       if (canBlockValue) {
         set(deltaHealth, {
-          color: FloatingTextType.Neutral,
+          color: FloatingText.Neutral,
           value: "BLOCKED",
         });
-        set(staminaChange, -staminaCost);
+        set(staminaChange, { value: -staminaCost });
 
-        if (get(skills(SkillType.Stagger)) !== SkillStatus.Trained) {
+        if (get(skills(SkillType.Stagger)) === SkillStatus.Trained) {
           set(isMonsterStaggered, true);
         }
 
@@ -134,11 +141,11 @@ export const defense = selector({
       } else {
         set(deltas(DeltaType.Stamina), [
           {
-            color: FloatingTextType.Neutral,
+            color: FloatingText.Neutral,
             value: "CANNOT BLOCK",
           },
           {
-            color: FloatingTextType.Negative,
+            color: FloatingText.Negative,
             value: ` (${staminaCost})`,
           },
         ]);
@@ -156,11 +163,11 @@ export const defense = selector({
       set(currentHealthMonster, monsterHealth);
       set(deltas(DeltaType.HealthMonster), [
         {
-          color: FloatingTextType.Neutral,
+          color: FloatingText.Neutral,
           value: "PARRIED",
         },
         {
-          color: FloatingTextType.Negative,
+          color: FloatingText.Negative,
           value: ` (${parryDamage})`,
         },
       ]);
@@ -172,23 +179,22 @@ export const defense = selector({
       });
     }
 
+    let deltaHealthOverride: DeltaDisplay | undefined;
+
     if (totalProtectionValue > 0) {
-      set(healthChange, {
-        delta: healthDamage,
-        deltaContents: [
-          {
-            color: FloatingTextType.Negative,
-            value: `${healthDamage}`,
-          },
-          {
-            color: FloatingTextType.Neutral,
-            value: ` (${totalProtectionValue})`,
-          },
-        ],
-      });
-    } else {
-      set(healthChange, healthDamage);
+      deltaHealthOverride = [
+        {
+          color: FloatingText.Negative,
+          value: healthDamage,
+        },
+        {
+          color: FloatingText.Neutral,
+          value: ` (${totalProtectionValue})`,
+        },
+      ];
     }
+
+    set(healthChange, { delta: deltaHealthOverride, value: healthDamage });
 
     if (!get(isShowing(ShowingType.Recovery))) {
       set(isShowing(ShowingType.Recovery), true);
@@ -198,30 +204,27 @@ export const defense = selector({
   },
 });
 
-export const healthChange = selector<ReserveChangeProps>({
-  get: () => 0,
+export const healthChange = selector<DeltaReserve>({
+  get: () => DEFAULT_RESERVE_CHANGE,
   key: "healthChange",
   set: ({ get, set }, change) => {
     if (change instanceof DefaultValue) {
       return;
     }
 
+    const { delta, value } = change;
     const max = get(maximumHealth);
-    const isSimpleDelta = typeof change === "number";
-    const healthChange = isSimpleDelta ? change : change.delta;
+    const isPositive = value > 0;
 
-    let newHealth = get(currentHealth) + healthChange;
+    let newHealth = get(currentHealth) + value;
 
-    if (isSimpleDelta) {
-      const isPositive = healthChange > 0;
-
-      set(deltas(DeltaType.Health), {
-        color: isPositive ? FloatingTextType.Positive : FloatingTextType.Negative,
-        value: `${isPositive ? `+${healthChange}` : healthChange}`,
-      });
-    } else {
-      set(deltas(DeltaType.Health), change.deltaContents);
-    }
+    set(
+      deltas(DeltaType.Health),
+      delta ?? {
+        color: isPositive ? FloatingText.Positive : FloatingText.Negative,
+        value: isPositive ? `+${value}` : value,
+      }
+    );
 
     if (newHealth <= 0) {
       newHealth = 0;
@@ -503,7 +506,7 @@ export const monsterRegenerate = selector({
 
     if (difference > 0) {
       set(deltas(DeltaType.HealthMonster), {
-        color: FloatingTextType.Positive,
+        color: FloatingText.Positive,
         value: `+${difference}`,
       });
     }
@@ -520,6 +523,11 @@ export const offense = selector({
 
     if (get(canAttack)) {
       const totalDamageValue = get(totalDamage);
+      const hasInflictedBleed =
+        get(monsterBleedingDuration) === 0 &&
+        get(skills(SkillType.Bleed)) === SkillStatus.Trained &&
+        Math.random() <= get(totalBleedChance);
+
       let monsterHealth = get(currentHealthMonster) - totalDamageValue;
 
       if (monsterHealth < 0) {
@@ -527,14 +535,18 @@ export const offense = selector({
       }
 
       if (staminaCost > 0) {
-        set(staminaChange, -staminaCost);
+        set(staminaChange, { value: -staminaCost });
       }
 
       set(currentHealthMonster, monsterHealth);
       set(deltas(DeltaType.HealthMonster), {
-        color: FloatingTextType.Negative,
-        value: `${-totalDamageValue}`,
+        color: FloatingText.Negative,
+        value: -totalDamageValue,
       });
+
+      if (hasInflictedBleed) {
+        set(monsterBleedingDuration, BLEED_DURATION);
+      }
 
       animateElement({
         element: get(monsterStatusElement),
@@ -544,11 +556,11 @@ export const offense = selector({
     } else {
       set(deltas(DeltaType.Stamina), [
         {
-          color: FloatingTextType.Neutral,
+          color: FloatingText.Neutral,
           value: "CANNOT ATTACK",
         },
         {
-          color: FloatingTextType.Negative,
+          color: FloatingText.Negative,
           value: ` (${staminaCost})`,
         },
       ]);
@@ -620,16 +632,21 @@ export const resourcesBalance = selector({
   },
 });
 
-export const staminaChange = selector<ReserveChangeProps>({
-  get: () => 0,
+export const staminaChange = selector<DeltaReserve>({
+  get: () => DEFAULT_RESERVE_CHANGE,
   key: "staminaChange",
-  set: ({ get, set }, delta) => {
+  set: ({ get, set }, change) => {
+    if (change instanceof DefaultValue) {
+      return;
+    }
+
+    const { value } = change;
     const max = get(maximumStamina);
-    let newStamina = get(currentStamina) + (delta as number);
+    let newStamina = get(currentStamina) + value;
 
     set(deltas(DeltaType.Stamina), {
-      color: delta > 0 ? FloatingTextType.Positive : FloatingTextType.Negative,
-      value: `${delta > 0 ? `+${delta}` : delta}`,
+      color: value > 0 ? FloatingText.Positive : FloatingText.Negative,
+      value: value > 0 ? `+${value}` : value,
     });
 
     if (newStamina < 0) {

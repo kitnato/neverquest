@@ -3,7 +3,7 @@ import { atom, selector } from "recoil";
 import { localStorageEffect } from "@neverquest/state/effects";
 import { level, progress } from "@neverquest/state/encounter";
 import { StorageKey } from "@neverquest/types/enums";
-import { getDamagePerSecond } from "@neverquest/utilities/helpers";
+import { getDamagePerRate } from "@neverquest/utilities/helpers";
 
 // ATOMS
 
@@ -31,6 +31,12 @@ export const isMonsterStaggered = atom({
   key: StorageKey.IsMonsterStaggered,
 });
 
+export const monsterBleedingDuration = atom({
+  default: 0,
+  effects: [localStorageEffect<number>(StorageKey.MonsterBleedingDuration)],
+  key: StorageKey.MonsterBleedingDuration,
+});
+
 export const monsterName = atom({
   default: "",
   effects: [localStorageEffect<string>(StorageKey.MonsterName)],
@@ -47,7 +53,7 @@ export const monsterStatusElement = atom<HTMLDivElement | null>({
 
 export const damagePerSecondMonster = selector({
   get: ({ get }) =>
-    getDamagePerSecond({
+    getDamagePerRate({
       damage: get(totalDamageMonster),
       rate: get(totalAttackRateMonster),
     }),
@@ -60,7 +66,7 @@ export const isMonsterDead = selector({
 });
 
 export const maximumHealthMonster = selector({
-  get: ({ get }) => Math.ceil(get(level) * 2) + Math.floor(get(progress) / 2),
+  get: ({ get }) => Math.floor(get(level) * 1.5) + Math.floor(get(progress) / 3),
   key: "maximumHealthMonster",
 });
 

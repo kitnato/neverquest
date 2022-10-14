@@ -9,11 +9,7 @@ import { isShowingDamagePerSecond } from "@neverquest/state/settings";
 import { showWeaponClass } from "@neverquest/state/skills";
 import { Weapon } from "@neverquest/types";
 import { ShowingType } from "@neverquest/types/enums";
-import {
-  capitalizeAll,
-  formatMilliseconds,
-  getDamagePerSecond,
-} from "@neverquest/utilities/helpers";
+import { capitalizeAll, formatMilliseconds, getDamagePerRate } from "@neverquest/utilities/helpers";
 
 export default function ({ weapon }: { weapon: Weapon }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
@@ -38,7 +34,7 @@ export default function ({ weapon }: { weapon: Weapon }) {
 
                   <td>{`${damage}${
                     isShowingDamagePerSecondValue
-                      ? ` (${getDamagePerSecond({
+                      ? ` (${getDamagePerRate({
                           damage,
                           rate,
                         })} DPS)`

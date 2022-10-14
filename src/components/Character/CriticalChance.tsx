@@ -20,7 +20,7 @@ export default function () {
       contents={formatPercentage(criticalChanceValue)}
       Icon={Icon}
       isAnimated
-      tooltip="Critical hit chance"
+      tooltip="Critical strike chance"
     />
   );
 }

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { DeltaDisplay, OverlayPlacement } from "@neverquest/types/ui";
+import { OverlayPlacement } from "@neverquest/types/ui";
 
 export interface IconImageProps {
   Icon: SVGIcon;
@@ -18,7 +18,5 @@ export interface RangeProps {
   maximum: number;
   minimum: number;
 }
-
-export type ReserveChangeProps = number | { delta: number; deltaContents: DeltaDisplay };
 
 export type SVGIcon = React.FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string }>;

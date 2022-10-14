@@ -141,6 +141,7 @@ export enum StorageKey {
   LowHealthWarning = "lowHealthWarning",
   MerchantInventory = "merchantInventory",
   Mode = "mode",
+  MonsterBleedingDuration = "monsterBleedingDuration",
   MonsterName = "monsterName",
   MonsterStatusElement = "monsterStatusElement",
   Name = "name",

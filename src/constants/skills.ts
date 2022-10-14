@@ -14,7 +14,7 @@ export const SKILLS: Record<SkillType, Skill> = {
     description: "Unlocks the ability to inflict bleeding.",
     Icon,
     name: "Anatomy",
-    price: 35,
+    price: 100,
   },
   [SkillType.Criticals]: {
     description: "Unlocks the ability to deal critical strikes.",
@@ -26,19 +26,19 @@ export const SKILLS: Record<SkillType, Skill> = {
     description: "Unlocks the ability to dodge attacks, negating all damage.",
     Icon,
     name: "Evasion",
-    price: 15,
+    price: 50,
   },
   [SkillType.Parry]: {
     description: "Unlocks the ability to parry attacks, partially reflecting damage.",
     Icon,
     name: "Escrime",
-    price: 20,
+    price: 30,
   },
   [SkillType.Regeneration]: {
     description: "Unlocks attributes that improve health & stamina regeneration.",
     Icon,
     name: "Calisthenics",
-    price: 60,
+    price: 15,
   },
   [SkillType.Shields]: {
     description: "Unlocks the use of medium and tower shields.",

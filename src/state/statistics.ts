@@ -1,17 +1,22 @@
 import { selector } from "recoil";
 
-import { ATTRIBUTES } from "@neverquest/constants/attributes";
+import { ATTRIBUTES, BLEED_DURATION } from "@neverquest/constants/attributes";
 import { attributes } from "@neverquest/state/attributes";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { AttributeType } from "@neverquest/types/enums";
-import { getComputedStat, getDamagePerSecond } from "@neverquest/utilities/helpers";
+import { getComputedStat, getDamagePerRate } from "@neverquest/utilities/helpers";
+
+export const bleedDamageDelta = selector({
+  get: ({ get }) => (get(totalDamage) * get(totalBleedDamage)) / BLEED_DURATION,
+  key: "bleedDamageDelta",
+});
 
 export const damagePerSecond = selector({
   get: ({ get }) =>
-    getDamagePerSecond({
-      criticalChance: get(totalCriticalChance),
-      criticalDamage: get(totalCriticalDamage),
+    getDamagePerRate({
       damage: get(totalDamage),
+      damageModifier: get(totalCriticalDamage),
+      damageModifierChance: get(totalCriticalChance),
       rate: get(totalAttackRate),
     }),
   key: "damagePerSecond",
@@ -28,39 +33,10 @@ export const totalAttackRate = selector({
   key: "totalAttackRate",
 });
 
-export const totalDamage = selector({
-  get: ({ get }) => {
-    const { points } = get(attributes(AttributeType.Damage));
-
-    const { base, increment } = ATTRIBUTES[AttributeType.Damage];
-
-    return get(weapon).damage + getComputedStat({ base, increment, points });
-  },
-  key: "totalDamage",
+export const totalBleedChance = selector({
+  get: ({ get }) => get(weapon).bleedChance || 0,
+  key: "totalBleedChance",
 });
-
-export const totalBlockChance = selector({
-  get: ({ get }) => get(shield).block,
-  key: "totalBlockChance",
-});
-
-export const totalProtection = selector({
-  get: ({ get }) => get(armor).protection,
-  key: "totalProtection",
-});
-
-export const totalStaggerDuration = selector({
-  get: ({ get }) => {
-    const { points } = get(attributes(AttributeType.StaggerDuration));
-
-    const { base, increment } = ATTRIBUTES[AttributeType.StaggerDuration];
-
-    return getComputedStat({ base, increment, points }) + get(shield).stagger;
-  },
-  key: "totalStaggerDuration",
-});
-
-// TODO - combine into selectorFamily?
 
 export const totalBleedDamage = selector({
   get: ({ get }) => {
@@ -71,6 +47,11 @@ export const totalBleedDamage = selector({
     return getComputedStat({ base, increment, points });
   },
   key: "totalBleedDamage",
+});
+
+export const totalBlockChance = selector({
+  get: ({ get }) => get(shield).block,
+  key: "totalBlockChance",
 });
 
 export const totalCriticalChance = selector({
@@ -93,6 +74,17 @@ export const totalCriticalDamage = selector({
     return getComputedStat({ base, increment, points });
   },
   key: "totalCriticalDamage",
+});
+
+export const totalDamage = selector({
+  get: ({ get }) => {
+    const { points } = get(attributes(AttributeType.Damage));
+
+    const { base, increment } = ATTRIBUTES[AttributeType.Damage];
+
+    return getComputedStat({ base, increment, points }) + get(weapon).damage;
+  },
+  key: "totalDamage",
 });
 
 export const totalDodgeChance = selector({
@@ -128,6 +120,11 @@ export const totalParryChance = selector({
   key: "totalParryChance",
 });
 
+export const totalProtection = selector({
+  get: ({ get }) => get(armor).protection,
+  key: "totalProtection",
+});
+
 export const totalRecoveryRate = selector({
   get: ({ get }) => {
     const { points } = get(attributes(AttributeType.RecoveryRate));
@@ -148,4 +145,15 @@ export const totalStaminaRegenerationRate = selector({
     return getComputedStat({ base, increment, points });
   },
   key: "totalStaminaRegenerationRate",
+});
+
+export const totalStaggerDuration = selector({
+  get: ({ get }) => {
+    const { points } = get(attributes(AttributeType.StaggerDuration));
+
+    const { base, increment } = ATTRIBUTES[AttributeType.StaggerDuration];
+
+    return getComputedStat({ base, increment, points }) + get(shield).stagger;
+  },
+  key: "totalStaggerDuration",
 });

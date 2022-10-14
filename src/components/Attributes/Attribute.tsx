@@ -11,7 +11,7 @@ import { characterLevel } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { resourcesBalance } from "@neverquest/state/transactions";
 import { AttributeType, DeltaType } from "@neverquest/types/enums";
-import { FloatingTextType, UIVariant } from "@neverquest/types/ui";
+import { FloatingText, UIVariant } from "@neverquest/types/ui";
 
 export default function ({ type }: { type: AttributeType }) {
   const [{ canAssign, points }, setAttribute] = useRecoilState(attributes(type));
@@ -50,12 +50,12 @@ export default function ({ type }: { type: AttributeType }) {
 
                     balanceResources({ essenceDifference: -attributeCostValue });
                     setDeltaEssenceAbsorbed({
-                      color: FloatingTextType.Positive,
+                      color: FloatingText.Positive,
                       value: `+${attributeCostValue}`,
                     });
 
                     setCharacterLevel((current) => current + 1);
-                    setDeltaCharacterLevel({ color: FloatingTextType.Positive, value: "+1" });
+                    setDeltaCharacterLevel({ color: FloatingText.Positive, value: "+1" });
                   }}
                   variant={UIVariant.Outline}
                 >

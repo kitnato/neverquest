@@ -72,9 +72,12 @@ export interface Skill {
 }
 
 export type Weapon = ItemBase & {
+  bleedChance?: number;
   damage: number;
   grip: WeaponGrip;
+  parryChance?: number;
   rate: number;
+  staggerDuration?: number;
   staminaCost: number;
   type: WeaponType;
   weaponClass: WeaponClass;

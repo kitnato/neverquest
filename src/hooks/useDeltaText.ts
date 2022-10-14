@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { RecoilState, RecoilValueReadOnly, useRecoilValue, useSetRecoilState } from "recoil";
 
 import usePreviousValue from "@neverquest/hooks/usePreviousValue";
-import { DeltaDisplay, FloatingTextType } from "@neverquest/types/ui";
+import { DeltaDisplay, FloatingText } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
 export default function ({
@@ -21,8 +21,8 @@ export default function ({
 
   const previousValue = usePreviousValue(currentValue);
 
-  const negativeColor = isTime ? FloatingTextType.Positive : FloatingTextType.Negative;
-  const positiveColor = isTime ? FloatingTextType.Negative : FloatingTextType.Positive;
+  const negativeColor = isTime ? FloatingText.Positive : FloatingText.Negative;
+  const positiveColor = isTime ? FloatingText.Negative : FloatingText.Positive;
 
   useEffect(() => {
     if (stop(previousValue, currentValue)) {

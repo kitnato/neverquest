@@ -22,7 +22,7 @@ import {
 
 export default function () {
   const { points } = useRecoilValue(attributes(AttributeType.AttackRate));
-  const showTotalAttackRateBreakdownValue = useRecoilValue(
+  const showTotalAttackRateDetailsValue = useRecoilValue(
     isShowing(ShowingType.TotalAttackRateSummary)
   );
   const weaponValue = useRecoilValue(weapon);
@@ -47,11 +47,11 @@ export default function () {
   return (
     <IconDisplay
       contents={
-        showTotalAttackRateBreakdownValue ? (
+        showTotalAttackRateDetailsValue ? (
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header as="h4">Attack rate breakdown</Popover.Header>
+                <Popover.Header as="h4">Attack rate details</Popover.Header>
 
                 <Popover.Body>
                   <Table borderless size="sm">

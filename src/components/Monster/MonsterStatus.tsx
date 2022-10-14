@@ -3,6 +3,7 @@ import { Card, Col, Row, Stack } from "react-bootstrap";
 import { useRecoilState, useSetRecoilState } from "recoil";
 
 import MonsterAttack from "@neverquest/components/Monster/MonsterAttack";
+import MonsterBleed from "@neverquest/components/Monster/MonsterBleed";
 import MonsterDamage from "@neverquest/components/Monster/MonsterDamage";
 import MonsterHealth from "@neverquest/components/Monster/MonsterHealth";
 import MonsterName from "@neverquest/components/Monster/MonsterName";
@@ -52,7 +53,15 @@ export default function () {
             </Col>
           </Row>
 
-          <MonsterDamage />
+          <Row>
+            <Col>
+              <MonsterDamage />
+            </Col>
+
+            <Col>
+              <MonsterBleed />
+            </Col>
+          </Row>
         </Stack>
       </Card.Body>
     </Card>

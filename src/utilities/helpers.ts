@@ -128,19 +128,19 @@ export function getComputedStat({
   return base + increment * points;
 }
 
-export function getDamagePerSecond({
-  criticalChance = 0,
-  criticalDamage = 0,
+export function getDamagePerRate({
   damage,
+  damageModifier = 0,
+  damageModifierChance = 0,
   rate,
 }: {
-  criticalChance?: number;
-  criticalDamage?: number;
   damage: number;
+  damageModifier?: number;
+  damageModifierChance?: number;
   rate: number;
 }) {
-  const regular = damage * (1 - criticalChance);
-  const critical = damage * criticalChance * criticalDamage;
+  const regular = damage * (1 - damageModifierChance);
+  const critical = damage * damageModifierChance * damageModifier;
 
   return formatToFixed((regular + critical) / (rate / 1000));
 }

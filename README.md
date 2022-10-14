@@ -64,75 +64,77 @@ Attributes each provide a direct increasing effect for each rank. Each rank allo
 
 `TODO`
 
-Sorcery casting rate.
+Affects [sorcery](#sorceries) casting rate.
 
 #### Agility
 
-Affects [dodge chance](#dodge-chance). Requires skill: [Evasion](#evasion).
+Affects [dodge chance](#dodge-chance). Required skill: [Evasion](#evasion).
 
 #### Dexterity
 
-Chance of landing a critical hit.
+Affects [critical chance](#critical-chance). Required skill: [Assassination](#assassination).
 
 #### Cruelty
 
-Affects [bleed damage](#bleed-damage). Requires skill: [Anatomy](#anatomy).
+Affects [bleed damage](#bleed-damage). Required skill: [Anatomy](#anatomy).
 
 #### Endurance
 
-Maximum total stamina resource.
+Affects maximum [total stamina](#stamina).
 
 #### Finesse
 
-Affects [parry chance](#parry-chance). Requires skill: [Escrime](#escrime).
+Affects [parry chance](#parry-chance). Required skill: [Escrime](#escrime).
 
 #### Fortitude
 
-Stamina regeneration rate.
+Affects [stamina regeneration rate](#stamina-regeneration-rate).
 
 #### Intellect
 
 `TODO`
 
-Energy regeneration rate.
+Affects energy regeneration rate.
 
 #### Luck
 
-Amount of loot dropped by monsters.
+`TODO`
+
+Affects the amount of loot dropped by monsters.
 
 #### Might
 
-Affects [stagger duration](#stagger). Requires skill: [Traumatology](#traumatology).
+Affects [stagger duration](#stagger-duration). Required skill: [Traumatology](#traumatology).
 
 #### Perception
 
-Damage multiplier of a critical hit.
+Affects [critical damage](#critical-damage). Required skill: [Assassination](#assassination).
 
 #### Resilience
 
-Rate of recovery after being hit.
+Affects [rate of recovery](#recovery-rate) after being struck.
 
 #### Speed
 
-Rate of attack.
+Affects [rate of attack](#attack-rate).
 
 #### Strength
 
-Base damage of an attack.
+Affects [total damage](#total-damage) of an attack.
 
 #### Tenacity
 
 `TODO`
 
-Amount of damage taken without needing to [recover](#recovery-rate).
+Affects amount of damage that can be taken without needing to [recover](#recovery-rate).
 
 #### Vigor
 
-Health regeneration rate.
+Affects [health regeneration rate](#health-regeneration-rate).
 
 #### Vitality
 
-Maximum total health resource.
+Affects maximum [total health](#health).
 
 #### Wisdom
 
@@ -146,7 +148,7 @@ Derived from the character's [attributes](#attributes), [gear](#gear), and any c
 
 #### Damage per second
 
-Requires toggling on in the global [settings](#settings). If on, shows the expected damage per second the character can deal, taking into account [attack rate](#attack-rate), current [total damage](#total-damage) and [critical hits](#critical-chance).
+Requires toggling on in the global [settings](#settings). If on, shows the expected damage per second the character can deal, taking into account [attack rate](#attack-rate), current [total damage](#total-damage) and [critical strikes](#critical-chance).
 
 #### Attack rate
 
@@ -158,7 +160,9 @@ Percentage determining the chance that when attacking, the given [bleed damage](
 
 #### Bleed damage
 
-Percentage of the weapon's total damage that is inflicted over time after a successful attack with bleed. Damage proportional to this total bleed damage is taken every 100 milliseconds until duration (2.5 seconds total) is complete.
+Percentage of the weapon's total damage that is inflicted over time after a successful attack with bleed. Proportional to this total is taken every 500 milliseconds until duration (2.5 seconds total) is complete.
+
+Can be increased with the [Cruelty](#cruelty) attribute.
 
 #### Block chance
 
@@ -166,53 +170,67 @@ Percentage determining the chance that when defending, all incoming non-protecte
 
 #### Critical chance
 
-Percentage determining the chance that when attacking, critical damage is dealt, which multiplies [total damage](#total-damage).
+Percentage determining the chance that upon attacking, [critical damage](#critical-damage) is dealt.
+
+Can be increased with the [Dexterity](#dexterity) attribute.
 
 #### Critical damage
 
-Percentage increase of total damage dealt when attacking in case of a [critical hit](#critical-chance).
+Percentage increase of [total damage](#total-damage) dealt when attacking with a [critical strike](#critical-strike).
+
+Can be increased with the [Perception](#perception) attribute.
 
 #### Dodge chance
 
 Percentage determining the chance of when defending, the character avoids all damage entirely.
 
+Can be increased with the [Agility](#agility) attribute.
+
 #### Health regeneration rate
 
 Time duration until [health](#health) is restored by one point.
 
+Can be increased with the [Vigor](#vigor) attribute.
+
 #### Parry chance
 
-Percentage determining the chance of when defending, the character only taking 50% of damage (before protection) and reflecting the 50% on to the attacker.
+Percentage determining a successful [parry](#parry).
+
+Can be increased with the [Finesse](#finesse) attribute.
 
 #### Protection
 
-Amount of damage that is discarded from the total when defending.
+Amount of damage that is discarded from the total when defending. This is determined primarily through [armor](#armor) and other [gear](#gear).
 
 #### Recovery rate
 
-Recovery occurs when the character is dealt damage, halting regeneration of [reserves](#reserves) and the [attack meter](#attack-rate). It is bounded by a certain duration.
+Recovery occurs when the character is dealt damage, halting regeneration of [reserves](#reserves) and the [attack meter](#attack-rate). It is bounded by a certain duration, which can be decreased with the [Resilience](#resilience) attribute.
 
 #### Stagger chance
 
-Percentage determining the chance of [incapacitating](#stagger) the monster when attacking or defending based on the current [gear](#gear) ([shields](#shields) and [blunt weapons](#blunt-weapon)) for a certain [duration](#stagger-duration).
+Percentage determining the chance of [incapacitating](#stagger) the monster when attacking or defending based primarily on the current [gear](#gear) ([shields](#shields) and [blunt weapons](#blunt-weapon)) for a certain [duration](#stagger-duration).
 
 #### Stagger duration
 
 Time until the monster recovers from incapacitation until it can continue attacking.
 
+Can be increased with the [Might](#might) attribute.
+
 #### Stamina regeneration rate
 
 Time duration until [stamina](#stamina) is restored by one point.
 
+Can be increased with the [Fortitude](#fortitude) attribute.
+
 #### Total damage
 
-Damage from [strength](#strength) in addition to [weapon](#weapons) damage with any other bonuses.
+Damage from [strength](#strength) in addition to [weapon](#weapons) damage along with any other bonuses that is applied on every [attack](#combat).
 
 ## Combat
 
-The [wilderness](#wilderness) initially always has a lurking [monster](#monster). When ready, the character can choose to **attack** continuously based on their [attack rate](#attack-rate), **engaging** the monster in the process. While engaged, the monster will also attack continuously, triggering the character to **defend** themselves. When the monster hits the character, [recovery](#recovery-rate) is triggered. While recovering, the character won't be able to attack or regenerate their [reserves](#reserves).
+The [wilderness](#wilderness) initially always has a lurking [monster](#monster). When ready, the character can choose to **attack** continuously based on their [attack rate](#attack-rate), **engaging** the monster in the process. While engaged, the monster will also attack continuously, triggering the character to **defend** themselves. When the monster strikes the character, [recovery](#recovery-rate) is triggered. While recovering, the character won't be able to attack or regenerate their [reserves](#reserves).
 
-Both the character and monster will keep attacking one another until either the character **retreats**, upon which the monster's health instantly regenerates to its maximum, or if the monster or character is dead (either of their health reaches zero).
+Both the character and monster will keep attacking one another until either the character **retreats**, upon which the monster's health instantly regenerates to its maximum, or if the monster or character is dead (one of either's health reaches zero).
 
 Upon a monster's death, the wave progress is incremented, its remains are looted and the next monster in the wave is engaged automatically, unless the character retreats.
 
@@ -222,21 +240,23 @@ The character will enter a **resting** state once the wave is complete and there
 
 Apart from attacking, retreating and defending, there are several mechanics that occur during combat.
 
-Some of the following effects are intrinsic to gear and can't be controlled directly the way [attributes](#attributes) are. Others also don't appear as part of [statistics](#statistics), as they become apparent in the character and monster status screens.
+Some of the following effects are intrinsic to gear and aren't controlled directly the way [attributes](#attributes) are.
 
 #### Bleed
 
-Certain successful attacks by a monster or the character can inflict bleed, a damage over time effect consisting of a total amount of damage inflicted regularly (every 100 milliseconds) over a certain period of time (2.5 seconds).
+Certain successful attacks by a monster or the character can inflict bleed, a damage over time effect consisting of a total amount of damage inflicted regularly over a certain period of time (2.5 seconds).
 
-For the character, this is determined by the [bleed chance](#bleed-chance) and [bleed damage](#bleed-damage) attributes.
-
-Inflicting bleed will only be possible after acquiring the [Anatomy](#anatomy) skill.
+For the character, [bleed chance](#bleed-chance) and [bleed damage](#bleed-damage) statistics determine this mechanic. Inflicting bleed is only possible after acquiring the [Anatomy](#anatomy) skill.
 
 #### Block
 
 A successful block by the character upon a monster's attack will negate all damage done, yet costs [stamina](#stamina). Blocking may also inflict [stagger](#stagger) on the monster, depending on the acquisition of the [Traumatology](#traumatology) skill.
 
-The overall chance to block an attack is determined by the [block chance](#block-chance) statistic and is determined usually by wielding a [shield](#shields).
+The overall chance to block an attack is determined by the [block chance](#block-chance) statistic and is determined primarily by wielding a [shield](#shields).
+
+#### Critical Strike
+
+An attack might deal extra damage, which is determined by the [chance](#critical-chance) to do so and the overall [damage multiplier](#critical-damage).
 
 #### Deflection
 
@@ -250,7 +270,7 @@ Dodging an incoming attack negates all damage, but doesn't cost any stamina the 
 
 The overall chance to dodge an attack is determined by the [dodge chance](#dodge-chance) statistic.
 
-Dodging will only be possible after acquiring the [Evasion](#evasion) skill.
+Dodging is only possible after acquiring the [Evasion](#evasion) skill.
 
 #### Exhaustion
 
@@ -264,19 +284,19 @@ The looted resources can only be collected once the [wave](#wilderness) is compl
 
 #### Parry
 
-A successful parry will deal 50% of the total damage of the attack and reflect the other 50% back to the attacker.
+A successful parry will deal 50% of the total damage of the inflicted attack (after protection) and reflect the other 50% back to the attacker.
 
 The overall chance to parry an attack is determined by the [parry chance](#parry-chance) statistic, which is influenced by the current gear ([slashing weapons](#slashing-weapon) and [medium shields](#medium-shield)) and the [Finesse](#finesse) attribute.
 
-Parrying will only be possible after acquiring the [Escrime](#escrime) skill.
+Parrying is only possible after acquiring the [Escrime](#escrime) skill.
 
 #### Stagger
 
 When staggered, the monster will not be able to attack for a certain duration. The character is considered staggered themselves when they are [recovering](#recovery-rate).
 
-The overall [stagger chance](#stagger-chance) statistic is determined by the current gear ([shields](#shields) and [blunt weapons](#blunt-weapon)). The [stagger duration](#stagger-duration) is influenced by the [Might](#might) attribute and current gear as well.
+The overall [stagger chance](#stagger-chance) statistic is determined by the current gear ([shields](#shields) and [blunt weapons](#blunt-weapon)). The [stagger duration](#stagger-duration) is influenced by the [Might](#might) attribute in addition to the current gear.
 
-Staggering will only be possible after acquiring the [Traumatology](#traumatology) skill.
+Staggering is only possible after acquiring the [Traumatology](#traumatology) skill.
 
 ## Encounter
 
@@ -434,7 +454,7 @@ Adds chance to [stagger](#stagger) for a certain duration. Required skill: [Trau
 
 ###### Piercing weapon
 
-Chance to inflict [bleed](#bleed). Required skill: [Traumatology](#traumatology).
+Chance to inflict [bleed](#bleed). Required skill: [Anatomy](#anatomy).
 
 ###### Slashing weapon
 
@@ -442,7 +462,7 @@ Chance to [parry](#parry). Required skill: [Escrime](#escrime).
 
 #### Armor
 
-Armor provides [protection](#protection). When hit by an attack, the protection value is subtracted from total damage received.
+Armor provides [protection](#protection). When struck by an attack, the protection value is subtracted from total damage received.
 
 Each of the following armor classes increases the protection value and adds certain modifiers.
 
@@ -484,7 +504,7 @@ This slot allows the wielding of [shields](#shields).
 
 ##### Shields
 
-Grants block chance, providing a percentage [chance to block](#block-chance) all incoming damage. Also grants [stagger](#stagger).
+Grants block chance, providing a percentage [chance to block](#block-chance) all incoming damage. Also grants [stagger](#stagger) with the acquisition of the [Traumatology](#traumatology) skill.
 
 ###### Small shield
 
@@ -538,7 +558,7 @@ Restores health, stamina or both. Purchased from the [alchemist](#alchemist).
 
 #### Poisons
 
-Adds poison to weapons automatically with each hit, applying damage-over-time effects and potentially other ailments. Has a certain number of charges before it is used up.
+Adds poison to weapons automatically with each strike, applying damage-over-time effects and potentially other ailments. Has a certain number of charges before it is used up.
 
 #### Salves
 
@@ -548,7 +568,7 @@ Grants a temporary [buff](#buffs), or cures or temporarily immunizes against [ai
 
 `TODO`
 
-Using a particular weapon or armor type increases its associated mastery. Weapon mastery increases when attacking and armor mastery increases when being hit.
+Using a particular weapon or armor type increases its associated mastery. Weapon mastery increases when attacking and armor mastery increases when being strike.
 
 Leveling up mastery confers bonuses on the respective armor and weapon types. Certain weapons require mastery levels before they can be used effectively.
 
@@ -584,7 +604,7 @@ Permanent effects that once acquired always provide their benefits.
 
 #### Anatomy
 
-Unlocks [bleed](#bleed) when using [piercing](#piercing-weapon) weapons. Unlocks the [Cruelty](#cruelty) attribute.
+Unlocks [bleed](#bleed) when using [piercing](#piercing-weapon) weapons. Also unlocks the [Cruelty](#cruelty) attribute.
 
 #### Armorcraft
 
@@ -660,7 +680,7 @@ Traits are permanent passive abilities that are unlocked when reaching certain m
 - Bruiser: current stamina adds unarmed bonus damage.
 - Nudist: double dodge rate when not wearing any armor.
 - Scrounger: double looting rate.
-- Shredder: bleed damage is all taken immediately.
+- Shredder: total bleed damage is inflicted all at once.
 
 ## Achievements
 
@@ -672,10 +692,10 @@ Meta progression. Grant bonuses when completed.
 
 - Kill first monster
 - Kill 5/10/25/50/100/1000 monsters _(5 achievements)_
-- Kill a monster in one hit
+- Kill a monster in one strike
 - Kill a monster with bleed damage
-- Dodge 1/5/10/25/50/100 hits
-- Dodge 3 hits in a row
+- Dodge 1/5/10/25/50/100 strikes
+- Dodge 3 strikes in a row
 - Reflect damage
 
 ### Caravan achievements

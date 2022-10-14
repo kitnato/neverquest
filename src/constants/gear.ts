@@ -57,19 +57,19 @@ export const SHIELD_SPECIFICATIONS: Record<
   { blockRange: RangeProps; staggerModifier: number; staminaCost: number; weight: number }
 > = {
   [ShieldType.Medium]: {
-    blockRange: { maximum: 0.59, minimum: 0.33 },
+    blockRange: { maximum: 0.5, minimum: 0.25 },
     staggerModifier: 1.75,
     staminaCost: 2,
     weight: 2,
   },
   [ShieldType.Small]: {
-    blockRange: { maximum: 0.33, minimum: 0.2 },
+    blockRange: { maximum: 0.25, minimum: 0.1 },
     staggerModifier: 1.2,
     staminaCost: 1,
     weight: 1,
   },
   [ShieldType.Tower]: {
-    blockRange: { maximum: 0.8, minimum: 0.6 },
+    blockRange: { maximum: 0.75, minimum: 0.5 },
     staggerModifier: 2.5,
     staminaCost: 3,
     weight: 3,

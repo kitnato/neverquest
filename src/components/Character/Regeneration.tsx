@@ -3,8 +3,7 @@ import { RecoilState, RecoilValueReadOnly } from "recoil";
 import RegenerationMeter from "@neverquest/components/Character/RegenerationMeter";
 import FloatingText from "@neverquest/components/FloatingText";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
-import { ReserveChangeProps } from "@neverquest/types/props";
-import { DeltaDisplay } from "@neverquest/types/ui";
+import { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
 
 export default function ({
   atomDeltaRegenerationRate,
@@ -13,7 +12,7 @@ export default function ({
   regenerationRate,
 }: {
   atomDeltaRegenerationRate: RecoilState<DeltaDisplay>;
-  atomReserve: RecoilState<ReserveChangeProps>;
+  atomReserve: RecoilState<DeltaReserve>;
   isReserveMaxedOut: RecoilValueReadOnly<boolean>;
   regenerationRate: RecoilValueReadOnly<number>;
 }) {

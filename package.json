@@ -2,6 +2,7 @@
   "name": "neverquest",
   "version": "1.0.0",
   "private": true,
+  "license": "cc-by-sa-4.0",
   "dependencies": {
     "animate.css": "^4.1.1",
     "bootstrap": "^5.1.3",

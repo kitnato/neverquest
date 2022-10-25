@@ -771,10 +771,12 @@ To run the app locally from source, you will need to use a command-line interfac
 
 Before doing any changes, please do the following:
 
-1. In the CLI, go to the project folder.
+1. In the CLI, go to the project folder (e.g. `cd neverquest`).
 1. Run `npm run prepare`
 
 Now, every time you commit any changes, all the relevant code, markup and style linters & formatters will apply any changes automatically.
+
+The linter config can be viewed in `.eslintrc.json`, `.stylelintrc.json` and `.prettierc.json`.
 
 ## Implementation
 
@@ -784,13 +786,19 @@ Now, every time you commit any changes, all the relevant code, markup and style 
 
 - The UI framework is provided by [Bootstrap](https://react-bootstrap.github.io).
 
-- The app state management library is [Jotai](https://jotai.org).
+- The app state management library is [Recoil](https://recoiljs.org).
+
+- Linting & its automation provided by [eslint](https://eslint.org/) and [prettier](https://prettier.io/).
+
+- Code style & linting automation is provided by [husky](https://typicode.github.io/husky/#/) and [lint-staged](https://www.npmjs.com/package/lint-staged).
 
 - Animations are provided by [Animate.css](https://animate.style).
 
 ## License
 
-Neverquest &copy; 2022 is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+![CC BY-NC-SA 4.0](/public/by-nc-sa.eu.svg?raw=true)
+
+This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 ## Appendices
 

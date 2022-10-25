@@ -24,6 +24,7 @@
     "@typescript-eslint",
     "import",
     "json",
+    "prettier",
     "react",
     "react-hooks",
     "sort-destructure-keys",
@@ -31,7 +32,10 @@
     "typescript-sort-keys"
   ],
   "rules": {
-    "import/order": ["error", { "alphabetize": { "order": "asc", "caseInsensitive": true } }],
+    "import/order": [
+      "error",
+      { "alphabetize": { "order": "asc", "caseInsensitive": true } }
+    ],
     "no-console": ["warn", { "allow": ["error", "warn"] }],
     "react/display-name": "off",
     "react/jsx-sort-props": ["error", { "ignoreCase": true }],
@@ -42,7 +46,10 @@
         "ignoreDeclarationSort": true
       }
     ],
-    "sort-destructure-keys/sort-destructure-keys": [2, { "caseSensitive": false }],
+    "sort-destructure-keys/sort-destructure-keys": [
+      2,
+      { "caseSensitive": false }
+    ],
     "sort-keys-fix/sort-keys-fix": ["error", "asc", { "caseSensitive": false }]
   },
   "settings": {

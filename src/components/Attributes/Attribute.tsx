@@ -48,14 +48,19 @@ export default function ({ type }: { type: AttributeType }) {
                       points: current.points + 1,
                     }));
 
-                    balanceResources({ essenceDifference: -attributeCostValue });
+                    balanceResources({
+                      essenceDifference: -attributeCostValue,
+                    });
                     setDeltaEssenceAbsorbed({
                       color: FloatingText.Positive,
                       value: `+${attributeCostValue}`,
                     });
 
                     setCharacterLevel((current) => current + 1);
-                    setDeltaCharacterLevel({ color: FloatingText.Positive, value: "+1" });
+                    setDeltaCharacterLevel({
+                      color: FloatingText.Positive,
+                      value: "+1",
+                    });
                   }}
                   variant={UIVariant.Outline}
                 >

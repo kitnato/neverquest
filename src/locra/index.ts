@@ -112,7 +112,13 @@ export default class LOCRA {
     return this.generate({
       category: Category.Artifact,
       name,
-      parameters: { hasPrefix, hasSuffix, isNSFW, prefixTags: tags, suffixTags: tags },
+      parameters: {
+        hasPrefix,
+        hasSuffix,
+        isNSFW,
+        prefixTags: tags,
+        suffixTags: tags,
+      },
     });
   }
 
@@ -141,7 +147,13 @@ export default class LOCRA {
     return this.generate({
       category: Category.Creature,
       name,
-      parameters: { hasPrefix, hasSuffix, isNSFW, prefixTags: tags, suffixTags: tags },
+      parameters: {
+        hasPrefix,
+        hasSuffix,
+        isNSFW,
+        prefixTags: tags,
+        suffixTags: tags,
+      },
     });
   }
 
@@ -166,7 +178,13 @@ export default class LOCRA {
     return this.generate({
       category: Category.Location,
       name,
-      parameters: { hasPrefix, hasSuffix, isNSFW, prefixTags: tags, suffixTags: tags },
+      parameters: {
+        hasPrefix,
+        hasSuffix,
+        isNSFW,
+        prefixTags: tags,
+        suffixTags: tags,
+      },
     });
   }
 }

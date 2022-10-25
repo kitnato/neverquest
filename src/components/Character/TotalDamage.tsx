@@ -58,7 +58,11 @@ export default function () {
                         <tr>
                           <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
 
-                          <td>{`+${getComputedStat({ base, increment, points })}`}</td>
+                          <td>{`+${getComputedStat({
+                            base,
+                            increment,
+                            points,
+                          })}`}</td>
                         </tr>
                       </tbody>
                     </Table>

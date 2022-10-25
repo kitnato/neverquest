@@ -257,7 +257,10 @@ export const initialization = selector({
     );
 
     CREW_INITIAL.forEach((type) =>
-      set(crew(type), (current) => ({ ...current, hireStatus: CrewStatus.Hired }))
+      set(crew(type), (current) => ({
+        ...current,
+        hireStatus: CrewStatus.Hired,
+      }))
     );
 
     SKILLS_INITIAL.forEach((type) => set(skills(type), SkillStatus.Trainable));
@@ -574,7 +577,11 @@ export const resourcesBalance = selector({
   set: (
     { get, set },
     difference:
-      | Partial<{ coinsDifference: number; essenceDifference: number; scrapDifference: number }>
+      | Partial<{
+          coinsDifference: number;
+          essenceDifference: number;
+          scrapDifference: number;
+        }>
       | DefaultValue
   ) => {
     if (difference instanceof DefaultValue) {

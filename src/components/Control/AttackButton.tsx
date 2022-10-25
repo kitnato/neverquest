@@ -31,7 +31,10 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
 
   const [showAttackConfirmation, setShowAttackConfirmation] = useState(false);
 
-  const pulseAnimation = getAnimationClass({ isInfinite: true, type: AnimationType.Pulse });
+  const pulseAnimation = getAnimationClass({
+    isInfinite: true,
+    type: AnimationType.Pulse,
+  });
   const showWarning =
     isAttackingValue && !isDisabled && showLowHealthWarningValue && isHealthLowValue;
 

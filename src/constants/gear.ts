@@ -54,7 +54,12 @@ export const NO_WEAPON: Weapon = {
 
 export const SHIELD_SPECIFICATIONS: Record<
   ShieldType,
-  { blockRange: RangeProps; staggerModifier: number; staminaCost: number; weight: number }
+  {
+    blockRange: RangeProps;
+    staggerModifier: number;
+    staminaCost: number;
+    weight: number;
+  }
 > = {
   [ShieldType.Medium]: {
     blockRange: { maximum: 0.5, minimum: 0.25 },

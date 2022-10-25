@@ -22,7 +22,11 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>Inventory</Tooltip>} placement="top">
-        <span className={`d-inline-block ${getAnimationClass({ type: AnimationType.FlipInX })}`}>
+        <span
+          className={`d-inline-block ${getAnimationClass({
+            type: AnimationType.FlipInX,
+          })}`}
+        >
           <Button
             disabled={isAttackingValue || isDisabled}
             onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {

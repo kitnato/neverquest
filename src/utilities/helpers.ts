@@ -162,7 +162,10 @@ export function getTriangularNumber(number: number) {
 
 export function getWeaponSpecifications(level: number) {
   return {
-    damage: getFromRange({ maximum: level + Math.ceil(level / 3), minimum: level + 1 }),
+    damage: getFromRange({
+      maximum: level + Math.ceil(level / 3),
+      minimum: level + 1,
+    }),
     price: level * 2 + Math.floor(level / 2),
     rate: getFromRange({ maximum: 4000, minimum: 3500 }) - Math.floor(level / 2) * 50,
     staminaCost: 1 + Math.floor(level / 3),

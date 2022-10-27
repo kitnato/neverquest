@@ -15,7 +15,7 @@ export function animateElement({
     return;
   }
 
-  const { addEventListener, classList } = element;
+  const { classList } = element;
   const animationName = `${CLASS_ANIMATE_PREFIX}${type}`;
   const animationSpeedClass = speed ? `${CLASS_ANIMATE_PREFIX}${speed}` : null;
 
@@ -29,7 +29,7 @@ export function animateElement({
     classList.add(animationSpeedClass);
   }
 
-  addEventListener(
+  element.addEventListener(
     "animationend",
     (event: AnimationEvent) => {
       event.stopPropagation();

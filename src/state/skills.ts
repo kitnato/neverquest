@@ -1,38 +1,25 @@
-import { DefaultValue, atom, atomFamily, selector, selectorFamily } from "recoil";
+import { DefaultValue, atomFamily, selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES, ATTRIBUTES_ORDER } from "@neverquest/constants/attributes";
 import { attributes } from "@neverquest/state/attributes";
 import { localStorageEffect } from "@neverquest/state/effects";
-import { SkillStatus, SkillType, StorageKey } from "@neverquest/types/enums";
-
-interface SkillsStatusState {
-  areTrainable: SkillType[];
-  areTrained: SkillType[];
-}
+import { SkillType, StorageKey } from "@neverquest/types/enums";
 
 // ATOMS
 
-const skillsMapping = atomFamily<SkillStatus, SkillType>({
-  default: SkillStatus.Unavailable,
-  effects: (parameter) => [
-    localStorageEffect<SkillStatus>(`${StorageKey.SkillsMapping}-${parameter}`),
-  ],
-  key: StorageKey.SkillsMapping,
-});
-
-export const skillsStatus = atom<SkillsStatusState>({
-  default: { areTrainable: [], areTrained: [] },
-  effects: [localStorageEffect<SkillsStatusState>(StorageKey.SkillsStatus)],
+export const skillsStatus = atomFamily<boolean, SkillType>({
+  default: false,
+  effects: (parameter) => [localStorageEffect<boolean>(`${StorageKey.SkillsStatus}-${parameter}`)],
   key: StorageKey.SkillsStatus,
 });
 
 // SELECTORS
 
-export const skills = selectorFamily<SkillStatus, SkillType>({
+export const skills = selectorFamily<boolean, SkillType>({
   get:
     (type) =>
     ({ get }) =>
-      get(skillsMapping(type)),
+      get(skillsStatus(type)),
   key: "skills",
   set:
     (type) =>
@@ -41,28 +28,16 @@ export const skills = selectorFamily<SkillStatus, SkillType>({
         return;
       }
 
-      set(skillsMapping(type), status);
+      set(skillsStatus(type), status);
 
-      if (status === SkillStatus.Trainable) {
-        set(skillsStatus, (current) => ({
-          areTrainable: [...current.areTrainable, type],
-          areTrained: current.areTrained.filter((currentType) => currentType !== type),
-        }));
-      }
-
-      if (status === SkillStatus.Trained) {
-        set(skillsStatus, (current) => ({
-          areTrainable: current.areTrainable.filter((currentType) => currentType !== type),
-          areTrained: [...current.areTrained, type],
-        }));
-
+      if (status) {
         ATTRIBUTES_ORDER.forEach((attributeType) => {
           const { requiredSkill } = ATTRIBUTES[attributeType];
 
           if (requiredSkill === type) {
             set(attributes(attributeType), (current) => ({
               ...current,
-              canAssign: true,
+              isUnlocked: true,
             }));
           }
         });
@@ -70,12 +45,16 @@ export const skills = selectorFamily<SkillStatus, SkillType>({
     },
 });
 
-export const showWeaponClass = selector({
-  get: ({ get }) => {
-    const { areTrained } = get(skillsStatus);
-    const weaponSkills = [SkillType.Bleed, SkillType.Parry, SkillType.Stagger];
-
-    return areTrained.some((skill) => weaponSkills.includes(skill));
-  },
-  key: "showWeaponClass",
+export const skillsTrained = selector<Record<SkillType, boolean>>({
+  get: ({ get }) => ({
+    [SkillType.Armors]: get(skillsStatus(SkillType.Armors)),
+    [SkillType.Bleed]: get(skillsStatus(SkillType.Bleed)),
+    [SkillType.Criticals]: get(skillsStatus(SkillType.Criticals)),
+    [SkillType.Dodge]: get(skillsStatus(SkillType.Dodge)),
+    [SkillType.Parry]: get(skillsStatus(SkillType.Parry)),
+    [SkillType.Regeneration]: get(skillsStatus(SkillType.Regeneration)),
+    [SkillType.Shields]: get(skillsStatus(SkillType.Shields)),
+    [SkillType.Stagger]: get(skillsStatus(SkillType.Stagger)),
+  }),
+  key: "skillsTrained",
 });

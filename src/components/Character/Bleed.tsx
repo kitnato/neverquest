@@ -7,7 +7,7 @@ import { ATTRIBUTES, BLEED_DURATION } from "@neverquest/constants/attributes";
 import { ReactComponent as Icon } from "@neverquest/icons/spiky-eclipse.svg";
 import { skills } from "@neverquest/state/skills";
 import { totalBleedChance, totalBleedDamage, totalDamage } from "@neverquest/state/statistics";
-import { AttributeType, SkillStatus, SkillType } from "@neverquest/types/enums";
+import { AttributeType, SkillType } from "@neverquest/types/enums";
 import {
   formatMilliseconds,
   formatPercentage,
@@ -23,7 +23,7 @@ export default function () {
 
   const { name } = ATTRIBUTES[AttributeType.BleedDamage];
 
-  if (bleedSkill !== SkillStatus.Trained) {
+  if (!bleedSkill) {
     return null;
   }
 

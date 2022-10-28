@@ -7,7 +7,7 @@ import { AttributeType, StorageKey } from "@neverquest/types/enums";
 import { getTriangularNumber } from "@neverquest/utilities/helpers";
 
 interface AttributeState {
-  canAssign: boolean;
+  isUnlocked: boolean;
   points: number;
 }
 
@@ -15,7 +15,7 @@ interface AttributeState {
 
 export const attributes = atomFamily<AttributeState, AttributeType>({
   default: {
-    canAssign: false,
+    isUnlocked: false,
     points: 0,
   },
   effects: (parameter) => [

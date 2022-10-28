@@ -14,7 +14,7 @@ import { AttributeType, DeltaType } from "@neverquest/types/enums";
 import { FloatingText, UIVariant } from "@neverquest/types/ui";
 
 export default function ({ type }: { type: AttributeType }) {
-  const [{ canAssign, points }, setAttribute] = useRecoilState(attributes(type));
+  const [{ isUnlocked, points }, setAttribute] = useRecoilState(attributes(type));
   const attributeCostValue = useRecoilValue(attributeCost);
   const attributesIncreasableValue = useRecoilValue(attributesIncreasable);
   const setCharacterLevel = useSetRecoilState(characterLevel);
@@ -26,7 +26,7 @@ export default function ({ type }: { type: AttributeType }) {
 
   return (
     <div className="align-items-center d-flex justify-content-between w-100">
-      {canAssign ? (
+      {isUnlocked ? (
         <>
           <IconDisplay contents={name} description={description} Icon={Icon} tooltip={name} />
 

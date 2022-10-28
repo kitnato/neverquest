@@ -3,29 +3,44 @@ import { useRecoilValue } from "recoil";
 
 import TrainSkillButton from "@neverquest/components/Caravan/Mercenary/TrainSkillButton";
 import SkillDisplay from "@neverquest/components/Character/SkillDisplay";
+import IconDisplay from "@neverquest/components/IconDisplay";
 import Coins from "@neverquest/components/Resource/Coins";
 import { UNKNOWN } from "@neverquest/constants";
 import { SKILLS } from "@neverquest/constants/skills";
+import { ReactComponent as IconUnknown } from "@neverquest/icons/perspective-dice-six-faces-random.svg";
+import { characterLevel } from "@neverquest/state/character";
 import { skills } from "@neverquest/state/skills";
-import { SkillStatus, SkillType } from "@neverquest/types/enums";
+import { SkillType } from "@neverquest/types/enums";
 
 export default function ({ type }: { type: SkillType }) {
+  const characterLevelValue = useRecoilValue(characterLevel);
   const skillValue = useRecoilValue(skills(type));
+
+  const { price, requiredLevel } = SKILLS[type];
+
+  if (skillValue) {
+    return null;
+  }
 
   return (
     <div className="align-items-center d-flex justify-content-between w-100">
-      {skillValue !== SkillStatus.Trainable ? (
-        UNKNOWN
-      ) : (
+      {requiredLevel <= characterLevelValue ? (
         <>
           <SkillDisplay type={type} />
 
           <Stack direction="horizontal" gap={3}>
-            <Coins tooltip="Price (coins)" value={SKILLS[type].price} />
+            <Coins tooltip="Price (coins)" value={price} />
 
             <TrainSkillButton type={type} />
           </Stack>
         </>
+      ) : (
+        <IconDisplay
+          contents={UNKNOWN}
+          description={`Unlocks at Power Level ${requiredLevel}`}
+          Icon={IconUnknown}
+          tooltip={UNKNOWN}
+        />
       )}
     </div>
   );

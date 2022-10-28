@@ -5,7 +5,7 @@ import { CLASS_TABLE_CELL_ITALIC, UNKNOWN } from "@neverquest/constants";
 import { hasKnapsack } from "@neverquest/state/character";
 import { skills } from "@neverquest/state/skills";
 import { Armor } from "@neverquest/types";
-import { SkillStatus, SkillType } from "@neverquest/types/enums";
+import { SkillType } from "@neverquest/types/enums";
 
 export default function ({ armor }: { armor: Armor }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
@@ -29,7 +29,7 @@ export default function ({ armor }: { armor: Armor }) {
                 </tr>
 
                 <tr>
-                  {armorsSkillValue == SkillStatus.Trained ? (
+                  {armorsSkillValue ? (
                     <>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 

@@ -4,7 +4,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { level, progress, progressMax } from "@neverquest/state/encounter";
 import { skills } from "@neverquest/state/skills";
 import { levelUp, resourcesBalance } from "@neverquest/state/transactions";
-import { SkillStatus, SkillType } from "@neverquest/types/enums";
+import { SkillType } from "@neverquest/types/enums";
 
 declare global {
   interface Window {
@@ -66,7 +66,7 @@ export default function () {
         // Heretic
         case "gimmee":
           if (typeof value === "number" && value in SkillType) {
-            setSkill[value](SkillStatus.Trained);
+            setSkill[value](true);
           }
           break;
         // Source engine

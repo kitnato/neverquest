@@ -10,7 +10,6 @@ import {
   CREW_ORDER,
   MERCHANT_OFFERS,
 } from "@neverquest/constants/caravan";
-import { SKILLS_INITIAL } from "@neverquest/constants/skills";
 import LOCRA from "@neverquest/locra";
 import { AffixTag, CreatureType } from "@neverquest/locra/types";
 import { attributes } from "@neverquest/state/attributes";
@@ -63,7 +62,6 @@ import {
   CrewStatus,
   DeltaType,
   ShowingType,
-  SkillStatus,
   SkillType,
 } from "@neverquest/types/enums";
 import { isArmor, isItem, isShield, isWeapon } from "@neverquest/types/type-guards";
@@ -90,9 +88,7 @@ export const defense = selector({
     });
 
     const deltaHealth = deltas(DeltaType.Health);
-    const hasDodged =
-      get(skills(SkillType.Dodge)) === SkillStatus.Trained &&
-      Math.random() <= get(totalDodgeChance);
+    const hasDodged = get(skills(SkillType.Dodge)) && Math.random() <= get(totalDodgeChance);
 
     if (hasDodged) {
       set(deltaHealth, {
@@ -133,7 +129,7 @@ export const defense = selector({
         });
         set(staminaChange, { value: -staminaCost });
 
-        if (get(skills(SkillType.Stagger)) === SkillStatus.Trained) {
+        if (get(skills(SkillType.Stagger))) {
           set(isMonsterStaggered, true);
         }
 
@@ -152,9 +148,7 @@ export const defense = selector({
       }
     }
 
-    const hasParried =
-      get(skills(SkillType.Parry)) === SkillStatus.Trained &&
-      Math.random() <= get(totalParryChance);
+    const hasParried = get(skills(SkillType.Parry)) && Math.random() <= get(totalParryChance);
 
     if (!hasBlocked && hasParried) {
       const parryDamage = Math.floor(monsterDamage / 2);
@@ -253,7 +247,7 @@ export const initialization = selector({
     set(monsterCreate, null);
 
     ATTRIBUTES_INITIAL.forEach((type) =>
-      set(attributes(type), (current) => ({ ...current, canAssign: true }))
+      set(attributes(type), (current) => ({ ...current, isUnlocked: true }))
     );
 
     CREW_INITIAL.forEach((type) =>
@@ -262,8 +256,6 @@ export const initialization = selector({
         hireStatus: CrewStatus.Hired,
       }))
     );
-
-    SKILLS_INITIAL.forEach((type) => set(skills(type), SkillStatus.Trainable));
   },
 });
 
@@ -310,10 +302,10 @@ export const itemEquip = selector({
       if (!get(isShowing(ShowingType.Stamina)) && item.staminaCost > 0) {
         set(isShowing(ShowingType.Stamina), true);
 
-        if (!get(attributes(AttributeType.Stamina)).canAssign) {
+        if (!get(attributes(AttributeType.Stamina)).isUnlocked) {
           set(attributes(AttributeType.Stamina), (current) => ({
             ...current,
-            canAssign: true,
+            isUnlocked: true,
           }));
         }
       }
@@ -528,7 +520,7 @@ export const offense = selector({
       const totalDamageValue = get(totalDamage);
       const hasInflictedBleed =
         get(monsterBleedingDuration) === 0 &&
-        get(skills(SkillType.Bleed)) === SkillStatus.Trained &&
+        get(skills(SkillType.Bleed)) &&
         Math.random() <= get(totalBleedChance);
 
       let monsterHealth = get(currentHealthMonster) - totalDamageValue;

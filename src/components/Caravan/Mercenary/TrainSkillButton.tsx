@@ -6,7 +6,7 @@ import { SKILLS } from "@neverquest/constants/skills";
 import { coins } from "@neverquest/state/resources";
 import { skills } from "@neverquest/state/skills";
 import { resourcesBalance } from "@neverquest/state/transactions";
-import { SkillStatus, SkillType } from "@neverquest/types/enums";
+import { SkillType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function ({ type }: { type: SkillType }) {
@@ -29,7 +29,7 @@ export default function ({ type }: { type: SkillType }) {
           onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
             currentTarget.blur();
 
-            setSkill(SkillStatus.Trained);
+            setSkill(true);
             balanceResources({ coinsDifference: -price });
           }}
           variant={UIVariant.Outline}

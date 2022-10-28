@@ -92,12 +92,6 @@ export enum ShowingType {
   WildernessStatus,
 }
 
-export enum SkillStatus {
-  Trainable,
-  Trained,
-  Unavailable,
-}
-
 export enum SkillType {
   Armors,
   Bleed,
@@ -148,7 +142,6 @@ export enum StorageKey {
   Progress = "progress",
   Scrap = "scrap",
   ScrapLoot = "scrapLoot",
-  SkillsMapping = "skillsMapping",
   SkillsStatus = "skillsStatus",
   StatusElement = "statusElement",
 }

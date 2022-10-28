@@ -5,13 +5,13 @@ import MonsterStaggerMeter from "@neverquest/components/Monster/MonsterStaggerMe
 import { ReactComponent as Icon } from "@neverquest/icons/star-swirl.svg";
 import { skills } from "@neverquest/state/skills";
 import { totalStaggerDuration } from "@neverquest/state/statistics";
-import { SkillStatus, SkillType } from "@neverquest/types/enums";
+import { SkillType } from "@neverquest/types/enums";
 
 export default function () {
   const staggerSkill = useRecoilValue(skills(SkillType.Stagger));
   const totalStaggerDurationValue = useRecoilValue(totalStaggerDuration);
 
-  if (staggerSkill !== SkillStatus.Trained || totalStaggerDurationValue === 0) {
+  if (!staggerSkill || totalStaggerDurationValue === 0) {
     return null;
   }
 

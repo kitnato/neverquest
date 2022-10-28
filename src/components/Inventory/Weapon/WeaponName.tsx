@@ -3,10 +3,11 @@ import { useRecoilValue } from "recoil";
 
 import { CLASS_TABLE_CELL_ITALIC, UNKNOWN } from "@neverquest/constants";
 import { WEAPON_CLASS_ICONS } from "@neverquest/constants/gear";
+import { WEAPON_CLASS_SKILL_MAPPING } from "@neverquest/constants/skills";
 import { hasKnapsack } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingDamagePerSecond } from "@neverquest/state/settings";
-import { showWeaponClass } from "@neverquest/state/skills";
+import { skills } from "@neverquest/state/skills";
 import { Weapon } from "@neverquest/types";
 import { ShowingType } from "@neverquest/types/enums";
 import { capitalizeAll, formatMilliseconds, getDamagePerRate } from "@neverquest/utilities/helpers";
@@ -15,10 +16,11 @@ export default function ({ weapon }: { weapon: Weapon }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const isShowingDamagePerSecondValue = useRecoilValue(isShowingDamagePerSecond);
   const showStaminaValue = useRecoilValue(isShowing(ShowingType.Stamina));
-  const showWeaponClassValue = useRecoilValue(showWeaponClass);
 
   const { damage, name, rate, staminaCost, weaponClass, weight } = weapon;
   const Icon = WEAPON_CLASS_ICONS[weaponClass];
+
+  const showWeaponClass = useRecoilValue(skills(WEAPON_CLASS_SKILL_MAPPING[weaponClass]));
 
   return (
     <OverlayTrigger
@@ -61,7 +63,7 @@ export default function ({ weapon }: { weapon: Weapon }) {
                 </tr>
 
                 <tr>
-                  {showWeaponClassValue ? (
+                  {showWeaponClass ? (
                     <>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 

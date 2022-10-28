@@ -69,6 +69,7 @@ export interface Skill {
   description: string;
   name: string;
   price: number;
+  requiredLevel: number;
 }
 
 export type Weapon = ItemBase & {

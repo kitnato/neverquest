@@ -6,7 +6,7 @@ import { hasKnapsack } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { Shield } from "@neverquest/types";
-import { ShowingType, SkillStatus, SkillType } from "@neverquest/types/enums";
+import { ShowingType, SkillType } from "@neverquest/types/enums";
 import { capitalizeAll, formatMilliseconds, formatPercentage } from "@neverquest/utilities/helpers";
 
 export default function ({ shield }: { shield: Shield }) {
@@ -33,7 +33,7 @@ export default function ({ shield }: { shield: Shield }) {
                 </tr>
 
                 <tr>
-                  {staggerSkillValue === SkillStatus.Trained ? (
+                  {staggerSkillValue ? (
                     <>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Stagger duration:</td>
 
@@ -57,7 +57,7 @@ export default function ({ shield }: { shield: Shield }) {
                 </tr>
 
                 <tr>
-                  {shieldSkillValue === SkillStatus.Trained ? (
+                  {shieldSkillValue ? (
                     <>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Type:</td>
 

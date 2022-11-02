@@ -45,7 +45,7 @@ export const NO_WEAPON: Weapon = {
   grip: WeaponGrip.OneHanded,
   name: "Unarmed",
   price: 0,
-  rate: 3000,
+  rate: 2500,
   staminaCost: 0,
   type: WeaponType.Melee,
   weaponClass: WeaponClass.Blunt,

@@ -24,9 +24,8 @@ export const damagePerSecond = selector({
 
 export const totalAttackRate = selector({
   get: ({ get }) => {
-    const { points } = get(attributes(AttributeType.AttackRate));
-
     const { base, increment } = ATTRIBUTES[AttributeType.AttackRate];
+    const { points } = get(attributes(AttributeType.AttackRate));
 
     return get(weapon).rate * (1 - getComputedStat({ base, increment, points }));
   },
@@ -40,9 +39,8 @@ export const totalBleedChance = selector({
 
 export const totalBleedDamage = selector({
   get: ({ get }) => {
-    const { points } = get(attributes(AttributeType.BleedDamage));
-
     const { base, increment } = ATTRIBUTES[AttributeType.BleedDamage];
+    const { points } = get(attributes(AttributeType.BleedDamage));
 
     return getComputedStat({ base, increment, points });
   },
@@ -56,9 +54,8 @@ export const totalBlockChance = selector({
 
 export const totalCriticalChance = selector({
   get: ({ get }) => {
-    const { points } = get(attributes(AttributeType.CriticalChance));
-
     const { base, increment } = ATTRIBUTES[AttributeType.CriticalChance];
+    const { points } = get(attributes(AttributeType.CriticalChance));
 
     return getComputedStat({ base, increment, points });
   },
@@ -67,9 +64,8 @@ export const totalCriticalChance = selector({
 
 export const totalCriticalDamage = selector({
   get: ({ get }) => {
-    const { points } = get(attributes(AttributeType.CriticalDamage));
-
     const { base, increment } = ATTRIBUTES[AttributeType.CriticalDamage];
+    const { points } = get(attributes(AttributeType.CriticalDamage));
 
     return getComputedStat({ base, increment, points });
   },
@@ -78,9 +74,8 @@ export const totalCriticalDamage = selector({
 
 export const totalDamage = selector({
   get: ({ get }) => {
-    const { points } = get(attributes(AttributeType.Damage));
-
     const { base, increment } = ATTRIBUTES[AttributeType.Damage];
+    const { points } = get(attributes(AttributeType.Damage));
 
     return getComputedStat({ base, increment, points }) + get(weapon).damage;
   },
@@ -89,9 +84,8 @@ export const totalDamage = selector({
 
 export const totalDodgeChance = selector({
   get: ({ get }) => {
-    const { points } = get(attributes(AttributeType.DodgeChance));
-
     const { base, increment } = ATTRIBUTES[AttributeType.DodgeChance];
+    const { points } = get(attributes(AttributeType.DodgeChance));
 
     return getComputedStat({ base, increment, points });
   },
@@ -100,9 +94,8 @@ export const totalDodgeChance = selector({
 
 export const totalHealthRegenerationRate = selector({
   get: ({ get }) => {
-    const { points } = get(attributes(AttributeType.HealthRegenerationRate));
-
     const { base, increment } = ATTRIBUTES[AttributeType.HealthRegenerationRate];
+    const { points } = get(attributes(AttributeType.HealthRegenerationRate));
 
     return getComputedStat({ base, increment, points });
   },
@@ -111,9 +104,8 @@ export const totalHealthRegenerationRate = selector({
 
 export const totalParryChance = selector({
   get: ({ get }) => {
-    const { points } = get(attributes(AttributeType.ParryChance));
-
     const { base, increment } = ATTRIBUTES[AttributeType.ParryChance];
+    const { points } = get(attributes(AttributeType.ParryChance));
 
     return getComputedStat({ base, increment, points });
   },
@@ -127,9 +119,8 @@ export const totalProtection = selector({
 
 export const totalRecoveryRate = selector({
   get: ({ get }) => {
-    const { points } = get(attributes(AttributeType.RecoveryRate));
-
     const { base, increment } = ATTRIBUTES[AttributeType.RecoveryRate];
+    const { points } = get(attributes(AttributeType.RecoveryRate));
 
     return getComputedStat({ base, increment, points });
   },
@@ -138,9 +129,8 @@ export const totalRecoveryRate = selector({
 
 export const totalStaminaRegenerationRate = selector({
   get: ({ get }) => {
-    const { points } = get(attributes(AttributeType.StaminaRegenerationRate));
-
     const { base, increment } = ATTRIBUTES[AttributeType.StaminaRegenerationRate];
+    const { points } = get(attributes(AttributeType.StaminaRegenerationRate));
 
     return getComputedStat({ base, increment, points });
   },
@@ -149,9 +139,8 @@ export const totalStaminaRegenerationRate = selector({
 
 export const totalStaggerDuration = selector({
   get: ({ get }) => {
-    const { points } = get(attributes(AttributeType.StaggerDuration));
-
     const { base, increment } = ATTRIBUTES[AttributeType.StaggerDuration];
+    const { points } = get(attributes(AttributeType.StaggerDuration));
 
     return getComputedStat({ base, increment, points }) + get(shield).stagger;
   },

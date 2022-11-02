@@ -66,7 +66,7 @@ export const isMonsterDead = selector({
 });
 
 export const maximumHealthMonster = selector({
-  get: ({ get }) => Math.floor(get(level) * 1.5) + Math.floor(get(progress) / 3),
+  get: ({ get }) => Math.ceil(get(level) * 1.5) + Math.floor(get(progress) / 3),
   key: "maximumHealthMonster",
 });
 

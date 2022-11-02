@@ -6,7 +6,7 @@ import Attributes from "@neverquest/components/Attributes";
 import DismissableScreen from "@neverquest/components/DismissableScreen";
 import IconImage from "@neverquest/components/IconImage";
 import { ReactComponent as Icon } from "@neverquest/icons/skills.svg";
-import { attributesIncreasable } from "@neverquest/state/attributes";
+import { areAttributesIncreasable } from "@neverquest/state/attributes";
 import { isAttacking } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMonsterEngaged } from "@neverquest/state/monster";
@@ -15,7 +15,7 @@ import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function ({ isDisabled }: { isDisabled: boolean }) {
-  const attributesIncreasableValue = useRecoilValue(attributesIncreasable);
+  const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterEngagedValue = useRecoilValue(isMonsterEngaged);
   const showAttributesButtonValue = useRecoilValue(isShowing(ShowingType.AttributesButton));
@@ -37,7 +37,7 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
         >
           <Button
             className={`position-relative${
-              attributesIncreasableValue && !isButtonDisabled
+              areAttributesIncreasableValue && !isButtonDisabled
                 ? ` ${getAnimationClass({
                     isInfinite: true,
                     type: AnimationType.Pulse,
@@ -52,13 +52,15 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
             }}
             variant={UIVariant.Outline}
           >
-            <IconImage Icon={Icon} />
+            <>
+              <IconImage Icon={Icon} />
 
-            {attributesIncreasableValue && (
-              <Badge bg="secondary" className="position-absolute" style={{ top: 12 }}>
-                &#43;
-              </Badge>
-            )}
+              {areAttributesIncreasableValue && (
+                <Badge bg="secondary" className="position-absolute" style={{ top: 12 }}>
+                  &#43;
+                </Badge>
+              )}
+            </>
           </Button>
         </span>
       </OverlayTrigger>

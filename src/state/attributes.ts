@@ -1,10 +1,11 @@
-import { atomFamily, selector } from "recoil";
+import { atomFamily, selector, selectorFamily } from "recoil";
 
+import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import { characterLevel } from "@neverquest/state/character";
 import { localStorageEffect } from "@neverquest/state/effects";
 import { essence } from "@neverquest/state/resources";
 import { AttributeType, StorageKey } from "@neverquest/types/enums";
-import { getTriangularNumber } from "@neverquest/utilities/helpers";
+import { getComputedStat, getTriangularNumber } from "@neverquest/utilities/helpers";
 
 interface AttributeState {
   isUnlocked: boolean;
@@ -31,7 +32,21 @@ export const attributeCost = selector({
   key: "attributeCost",
 });
 
-export const attributesIncreasable = selector({
+export const areAttributesIncreasable = selector({
   get: ({ get }) => get(attributeCost) <= get(essence),
-  key: "attributesIncreasable",
+  key: "areAttributesIncreasable",
+});
+
+export const isAttributeMaxed = selectorFamily<boolean, AttributeType>({
+  get:
+    (parameter) =>
+    ({ get }) => {
+      const { base, increment, maximum } = ATTRIBUTES[parameter];
+      const { points } = get(attributes(parameter));
+
+      return maximum === undefined
+        ? false
+        : maximum === getComputedStat({ base, increment, points });
+    },
+  key: "isAttributeMaxed",
 });

@@ -20,7 +20,7 @@ export default function () {
         {allTrained ? (
           <span className="fst-italic">None available.</span>
         ) : (
-          SKILLS_ORDER.map((type, index) => <TrainableSkill key={index} type={type} />)
+          SKILLS_ORDER.map((type) => <TrainableSkill key={type} type={type} />)
         )}
       </Stack>
 
@@ -30,7 +30,7 @@ export default function () {
         {noneTrained ? (
           <span className="fst-italic">None.</span>
         ) : (
-          SKILLS_ORDER.map((type, index) => <TrainedSkill key={index} type={type} />)
+          SKILLS_ORDER.map((type) => <TrainedSkill key={type} type={type} />)
         )}
       </Stack>
     </Stack>

@@ -7,7 +7,7 @@ import IconImage from "@neverquest/components/IconImage";
 import { ReactComponent as IconRetreat } from "@neverquest/icons/return-arrow.svg";
 import { ReactComponent as IconResting } from "@neverquest/icons/tired-eye.svg";
 import { ReactComponent as IconAttack } from "@neverquest/icons/tron-arrow.svg";
-import { attributesIncreasable } from "@neverquest/state/attributes";
+import { areAttributesIncreasable } from "@neverquest/state/attributes";
 import { isAttacking } from "@neverquest/state/character";
 import { isLevelCompleted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -23,7 +23,7 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
   const [showWildernessStatusValue, setShowWildernessStatusValue] = useRecoilState(
     isShowing(ShowingType.WildernessStatus)
   );
-  const attributesIncreasableValue = useRecoilValue(attributesIncreasable);
+  const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const isHealthLowValue = useRecoilValue(isHealthLow);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const isMonsterEngagedValue = useRecoilValue(isMonsterEngaged);
@@ -66,7 +66,7 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
     }
 
     return {
-      animation: attributesIncreasableValue ? "" : pulseAnimation,
+      animation: areAttributesIncreasableValue ? "" : pulseAnimation,
       Icon: IconAttack,
       tooltip: "Attack",
     };
@@ -98,7 +98,7 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
             onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
               currentTarget.blur();
 
-              if (attributesIncreasableValue && !isMonsterEngagedValue) {
+              if (areAttributesIncreasableValue && !isMonsterEngagedValue) {
                 setShowAttackConfirmation(true);
               } else {
                 toggleAttack();

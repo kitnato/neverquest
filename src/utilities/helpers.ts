@@ -167,7 +167,7 @@ export function getWeaponSpecifications(level: number) {
       minimum: level + 1,
     }),
     price: level * 2 + Math.floor(level / 2),
-    rate: getFromRange({ maximum: 4000, minimum: 3500 }) - Math.floor(level / 2) * 50,
+    rate: getFromRange({ maximum: 3000, minimum: 2000 }) - Math.floor(level / 2) * 50,
     staminaCost: 1 + Math.floor(level / 3),
     weight: 1 + Math.floor(level / 4),
   };

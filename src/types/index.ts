@@ -12,6 +12,7 @@ export interface Attribute {
   base: number;
   description: string;
   increment: number;
+  maximum?: number;
   name: string;
   requiredSkill?: SkillType;
 }

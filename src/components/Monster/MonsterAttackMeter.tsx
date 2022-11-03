@@ -11,7 +11,7 @@ import {
   isMonsterStaggered,
   totalAttackRateMonster,
 } from "@neverquest/state/monster";
-import { defense } from "@neverquest/state/transactions";
+import { defense } from "@neverquest/state/transactions/combat";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 

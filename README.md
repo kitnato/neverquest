@@ -548,13 +548,13 @@ Allows the character to go to the caravan regardless of if the current wildernes
 
 `TODO`
 
-One of three types that take up the potion slot(s).
+One of three types that take up the potion slot(s). Purchased from the [alchemist](#alchemist).
 
 Further slots can be added by the [tailor](#tailor).
 
 #### Elixirs
 
-Restores health, stamina or both. Purchased from the [alchemist](#alchemist).
+Restores [stamina](#stamina).
 
 #### Poisons
 
@@ -562,7 +562,7 @@ Adds poison to weapons automatically with each strike, applying damage-over-time
 
 #### Salves
 
-Grants a temporary [buff](#buffs), or cures or temporarily immunizes against [ailments](#ailments).
+Temporarily immunizes against [ailments](#ailments).
 
 ## Mastery
 

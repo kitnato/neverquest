@@ -14,7 +14,7 @@ import {
 } from "@neverquest/state/attributes";
 import { characterLevel } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { resourcesBalance } from "@neverquest/state/transactions";
+import { resourcesBalance } from "@neverquest/state/transactions/possessions";
 import { AttributeType, DeltaType } from "@neverquest/types/enums";
 import { FloatingText, UIVariant } from "@neverquest/types/ui";
 

@@ -8,7 +8,7 @@ import { CREW_MEMBERS } from "@neverquest/constants/caravan";
 import { ReactComponent as Icon } from "@neverquest/icons/cowled.svg";
 import { crew } from "@neverquest/state/caravan";
 import { coins } from "@neverquest/state/resources";
-import { resourcesBalance } from "@neverquest/state/transactions";
+import { resourcesBalance } from "@neverquest/state/transactions/possessions";
 import { CrewStatus, CrewType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 

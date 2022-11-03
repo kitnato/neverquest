@@ -7,7 +7,7 @@ import Coins from "@neverquest/components/Resource/Coins";
 import Scrap from "@neverquest/components/Resource/Scrap";
 import { EXCHANGE_COIN, EXCHANGE_SCRAP } from "@neverquest/constants/caravan";
 import { scrap } from "@neverquest/state/resources";
-import { resourcesBalance } from "@neverquest/state/transactions";
+import { resourcesBalance } from "@neverquest/state/transactions/possessions";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function () {

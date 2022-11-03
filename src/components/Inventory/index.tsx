@@ -4,7 +4,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import Encumbrance from "@neverquest/components/Inventory/Encumbrance";
 import InventoryElement from "@neverquest/components/Inventory/InventoryElement";
 import { inventory } from "@neverquest/state/inventory";
-import { itemEquip, itemUnequip } from "@neverquest/state/transactions";
+import { itemEquip, itemUnequip } from "@neverquest/state/transactions/possessions";
 import { isGear } from "@neverquest/types/type-guards";
 import { UIVariant } from "@neverquest/types/ui";
 

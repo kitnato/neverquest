@@ -5,7 +5,7 @@ import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { isLooting, lootingRate } from "@neverquest/state/character";
 import { isLevelCompleted } from "@neverquest/state/encounter";
-import { lootDrop, monsterCreate } from "@neverquest/state/transactions";
+import { lootDrop, monsterCreate } from "@neverquest/state/transactions/monster";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 

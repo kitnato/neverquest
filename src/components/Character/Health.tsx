@@ -8,7 +8,7 @@ import { ReactComponent as Icon } from "@neverquest/icons/hospital-cross.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { currentHealth, isHealthMaxedOut, maximumHealth } from "@neverquest/state/reserves";
 import { totalHealthRegenerationRate } from "@neverquest/state/statistics";
-import { healthChange } from "@neverquest/state/transactions";
+import { healthChange } from "@neverquest/state/transactions/reserves";
 import { DeltaType } from "@neverquest/types/enums";
 import { UIAttachment } from "@neverquest/types/ui";
 

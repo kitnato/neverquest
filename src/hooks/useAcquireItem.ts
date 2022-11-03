@@ -7,7 +7,7 @@ import useCheckEncumbrance from "@neverquest/hooks/useCheckEncumbrance";
 import { hasKnapsack } from "@neverquest/state/character";
 import { armor, encumbranceMaximum, inventory, shield, weapon } from "@neverquest/state/inventory";
 import { autoEquip } from "@neverquest/state/settings";
-import { itemEquip } from "@neverquest/state/transactions";
+import { itemEquip } from "@neverquest/state/transactions/possessions";
 import { Gear, Item } from "@neverquest/types";
 import { isArmor, isItem, isShield, isWeapon } from "@neverquest/types/type-guards";
 

@@ -4,7 +4,8 @@ import { UNKNOWN } from "@neverquest/constants";
 import LOCRA from "@neverquest/locra";
 import { localStorageEffect } from "@neverquest/state/effects";
 import { isNSFW } from "@neverquest/state/settings";
-import { levelUp, merchantInventoryGeneration } from "@neverquest/state/transactions";
+import { merchantInventoryGeneration } from "@neverquest/state/transactions/possessions";
+import { levelUp } from "@neverquest/state/transactions/progress";
 import { LocationType, StorageKey } from "@neverquest/types/enums";
 
 // ATOMS

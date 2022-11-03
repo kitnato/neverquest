@@ -10,7 +10,7 @@ import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { currentStamina, isStaminaMaxedOut, maximumStamina } from "@neverquest/state/reserves";
 import { totalStaminaRegenerationRate } from "@neverquest/state/statistics";
-import { staminaChange } from "@neverquest/state/transactions";
+import { staminaChange } from "@neverquest/state/transactions/reserves";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
 import { UIAttachment } from "@neverquest/types/ui";
 

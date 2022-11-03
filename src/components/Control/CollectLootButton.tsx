@@ -5,7 +5,7 @@ import IconImage from "@neverquest/components/IconImage";
 import { ReactComponent as Icon } from "@neverquest/icons/locked-chest.svg";
 import { isLevelCompleted } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
-import { resourcesBalance } from "@neverquest/state/transactions";
+import { resourcesBalance } from "@neverquest/state/transactions/possessions";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 

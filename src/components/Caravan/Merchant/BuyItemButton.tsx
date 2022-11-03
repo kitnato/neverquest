@@ -6,7 +6,7 @@ import useAcquireItem from "@neverquest/hooks/useAcquireItem";
 import useCheckEncumbrance from "@neverquest/hooks/useCheckEncumbrance";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { coins } from "@neverquest/state/resources";
-import { resourcesBalance } from "@neverquest/state/transactions";
+import { resourcesBalance } from "@neverquest/state/transactions/possessions";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function ({ id }: { id: string }) {

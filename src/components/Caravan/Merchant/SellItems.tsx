@@ -8,7 +8,7 @@ import InventoryElement from "@neverquest/components/Inventory/InventoryElement"
 import Coins from "@neverquest/components/Resource/Coins";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { inventory } from "@neverquest/state/inventory";
-import { resourcesBalance } from "@neverquest/state/transactions";
+import { resourcesBalance } from "@neverquest/state/transactions/possessions";
 import { UIVariant } from "@neverquest/types/ui";
 import { getSellPrice } from "@neverquest/utilities/helpers";
 

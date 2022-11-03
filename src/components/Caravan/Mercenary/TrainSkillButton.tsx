@@ -5,7 +5,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { SKILLS } from "@neverquest/constants/skills";
 import { coins } from "@neverquest/state/resources";
 import { skills } from "@neverquest/state/skills";
-import { resourcesBalance } from "@neverquest/state/transactions";
+import { resourcesBalance } from "@neverquest/state/transactions/possessions";
 import { SkillType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 

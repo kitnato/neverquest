@@ -3,7 +3,8 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { level, progress, progressMax } from "@neverquest/state/encounter";
 import { skills } from "@neverquest/state/skills";
-import { levelUp, resourcesBalance } from "@neverquest/state/transactions";
+import { resourcesBalance } from "@neverquest/state/transactions/possessions";
+import { levelUp } from "@neverquest/state/transactions/progress";
 import { SkillType } from "@neverquest/types/enums";
 
 declare global {
@@ -15,6 +16,9 @@ declare global {
 export default function () {
   const levelValue = useRecoilValue(level);
   const progressMaxValue = useRecoilValue(progressMax);
+  const setLevelUp = useSetRecoilState(levelUp);
+  const setProgress = useSetRecoilState(progress);
+  const balanceResources = useSetRecoilState(resourcesBalance);
   const setSkillArmor = useSetRecoilState(skills(SkillType.Armors));
   const setSkillBleed = useSetRecoilState(skills(SkillType.Bleed));
   const setSkillCriticals = useSetRecoilState(skills(SkillType.Criticals));
@@ -23,9 +27,6 @@ export default function () {
   const setSkillRegeneration = useSetRecoilState(skills(SkillType.Regeneration));
   const setSkillShields = useSetRecoilState(skills(SkillType.Shields));
   const setSkillStagger = useSetRecoilState(skills(SkillType.Stagger));
-  const setLevelUp = useSetRecoilState(levelUp);
-  const setProgress = useSetRecoilState(progress);
-  const balanceResources = useSetRecoilState(resourcesBalance);
 
   const setSkill = useMemo(
     () => [

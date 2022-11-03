@@ -7,7 +7,7 @@ import { isAttacking, isLooting, isRecovering } from "@neverquest/state/characte
 import { isMonsterDead } from "@neverquest/state/monster";
 import { canAttack } from "@neverquest/state/reserves";
 import { totalAttackRate } from "@neverquest/state/statistics";
-import { offense } from "@neverquest/state/transactions";
+import { offense } from "@neverquest/state/transactions/combat";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 

@@ -760,7 +760,7 @@ To run the app locally from source, you will need to use a command-line interfac
 
 ### Run the app
 
-1. Open the CLI and change into a suitable directory (e.g. "My Documents" folder)
+1. Open the CLI and change into a suitable directory
 1. Run `git clone git@github.com:cneuro/neverquest.git`
 1. Run `cd neverquest`
 1. Run `npm install`
@@ -774,25 +774,25 @@ Before doing any changes, please do the following:
 1. In the CLI, go to the project folder (e.g. `cd neverquest`).
 1. Run `npm run prepare`
 
-Now, every time you commit any changes, all the relevant code, markup and style linters & formatters will apply any changes automatically.
+Now, every time changes are committed, all the relevant code, markup and style linters & formatters will apply any changes automatically.
 
 The linter config can be viewed in `.eslintrc.json`, `.stylelintrc.json` and `.prettierc.json`.
 
 ## Implementation
 
-- This project is bootstrapped with [Vite](https://vitejs.dev).
+- Built on [Vite](https://vitejs.dev).
 
 - Written in [TypeScript](https://www.typescriptlang.org).
 
-- The UI framework is provided by [Bootstrap](https://react-bootstrap.github.io).
+- UI framework is provided by [Bootstrap](https://react-bootstrap.github.io).
 
-- The app state management library is [Recoil](https://recoiljs.org).
+- State management library is [Recoil](https://recoiljs.org).
 
-- Linting & its automation provided by [eslint](https://eslint.org/) and [prettier](https://prettier.io/).
+- Code style & linting is provided by [eslint](https://eslint.org), [stylelint](https://stylelint.io) and [prettier](https://prettier.io).
 
-- Code style & linting automation is provided by [husky](https://typicode.github.io/husky/#/) and [lint-staged](https://www.npmjs.com/package/lint-staged).
+- Automation is provided by [husky](https://typicode.github.io/husky) and [lint-staged](https://www.npmjs.com/package/lint-staged).
 
-- Animations are provided by [Animate.css](https://animate.style).
+- Animation library is [Animate.css](https://animate.style).
 
 ## License
 

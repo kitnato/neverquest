@@ -2,14 +2,14 @@ import { DefaultValue, atomFamily, selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES, ATTRIBUTES_ORDER } from "@neverquest/constants/attributes";
 import { attributes } from "@neverquest/state/attributes";
-import { localStorageEffect } from "@neverquest/state/effects";
+import localStorage from "@neverquest/state/effects/localStorage";
 import { SkillType, StorageKey } from "@neverquest/types/enums";
 
 // ATOMS
 
 export const skillsStatus = atomFamily<boolean, SkillType>({
   default: false,
-  effects: (parameter) => [localStorageEffect<boolean>(`${StorageKey.SkillsStatus}-${parameter}`)],
+  effects: (parameter) => [localStorage<boolean>(`${StorageKey.SkillsStatus}-${parameter}`)],
   key: StorageKey.SkillsStatus,
 });
 

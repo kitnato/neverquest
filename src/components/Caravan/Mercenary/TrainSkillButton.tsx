@@ -3,16 +3,17 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { SKILLS } from "@neverquest/constants/skills";
+import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
 import { coins } from "@neverquest/state/resources";
 import { skills } from "@neverquest/state/skills";
-import { resourcesBalance } from "@neverquest/state/transactions/possessions";
 import { SkillType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function ({ type }: { type: SkillType }) {
   const coinsValue = useRecoilValue(coins);
-  const balanceResources = useSetRecoilState(resourcesBalance);
   const setSkill = useSetRecoilState(skills(type));
+
+  const transactResources = useTransactResources();
 
   const { price } = SKILLS[type];
   const isAffordable = price <= coinsValue;
@@ -30,7 +31,7 @@ export default function ({ type }: { type: SkillType }) {
             currentTarget.blur();
 
             setSkill(true);
-            balanceResources({ coinsDifference: -price });
+            transactResources({ coinsDifference: -price });
           }}
           variant={UIVariant.Outline}
         >

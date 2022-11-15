@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
+import useDefend from "@neverquest/hooks/actions/useDefend";
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { isAttacking } from "@neverquest/state/character";
 import {
@@ -11,7 +12,6 @@ import {
   isMonsterStaggered,
   totalAttackRateMonster,
 } from "@neverquest/state/monster";
-import { defense } from "@neverquest/state/transactions/combat";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
@@ -22,9 +22,10 @@ export default function () {
   const isMonsterStaggeredValue = useRecoilValue(isMonsterStaggered);
   const totalAttackRateMonsterValue = useRecoilValue(totalAttackRateMonster);
   const resetCurrentHealthMonster = useResetRecoilState(currentHealthMonster);
-  const defend = useSetRecoilState(defense);
 
   const [deltaAttack, setDeltaAttack] = useState(0);
+
+  const defend = useDefend();
 
   useAnimation((delta) => {
     setDeltaAttack((current) => current + delta);
@@ -32,8 +33,8 @@ export default function () {
 
   useEffect(() => {
     if (!isMonsterDeadValue && deltaAttack >= totalAttackRateMonsterValue) {
+      defend();
       setDeltaAttack(0);
-      defend(null);
     }
   }, [defend, deltaAttack, isMonsterDeadValue, totalAttackRateMonsterValue]);
 

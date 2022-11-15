@@ -1,18 +1,19 @@
 import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { ArrowRight } from "react-bootstrap-icons";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import Coins from "@neverquest/components/Resource/Coins";
 import Scrap from "@neverquest/components/Resource/Scrap";
 import { EXCHANGE_COIN, EXCHANGE_SCRAP } from "@neverquest/constants/caravan";
+import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
 import { scrap } from "@neverquest/state/resources";
-import { resourcesBalance } from "@neverquest/state/transactions/possessions";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function () {
   const scrapValue = useRecoilValue(scrap);
-  const balanceResources = useSetRecoilState(resourcesBalance);
+
+  const transactResources = useTransactResources();
 
   const canSell = scrapValue >= EXCHANGE_SCRAP;
 
@@ -37,7 +38,7 @@ export default function () {
             onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
               currentTarget.blur();
 
-              balanceResources({
+              transactResources({
                 coinsDifference: EXCHANGE_COIN,
                 scrapDifference: -EXCHANGE_SCRAP,
               });

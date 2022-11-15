@@ -35,21 +35,20 @@
     "vite-tsconfig-paths": "^3.5.2"
   },
   "lint-staged": {
-    "*.css": [
-      "npm run lint-styles",
-      "npm run lint-format"
-    ],
     "*.{json,md}": [
       "npm run lint-format"
     ],
     "*.{ts,tsx}": [
       "npm run lint-code",
       "npm run lint-format"
+    ],
+    "*.css": [
+      "npm run lint-styles",
+      "npm run lint-format"
     ]
   },
   "scripts": {
     "build": "vite build",
-    "lint-all": "npm run lint-all",
     "lint-code": "eslint --fix --ext .ts,.tsx .",
     "lint-format": "prettier --write .",
     "lint-styles": "stylelint '**/*.css'",

@@ -1,10 +1,10 @@
 import { useEffect, useMemo } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
+import useIncreaseLevel from "@neverquest/hooks/actions/useIncreaseLevel";
+import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
 import { level, progress, progressMax } from "@neverquest/state/encounter";
 import { skills } from "@neverquest/state/skills";
-import { resourcesBalance } from "@neverquest/state/transactions/possessions";
-import { levelUp } from "@neverquest/state/transactions/progress";
 import { SkillType } from "@neverquest/types/enums";
 
 declare global {
@@ -16,9 +16,7 @@ declare global {
 export default function () {
   const levelValue = useRecoilValue(level);
   const progressMaxValue = useRecoilValue(progressMax);
-  const setLevelUp = useSetRecoilState(levelUp);
   const setProgress = useSetRecoilState(progress);
-  const balanceResources = useSetRecoilState(resourcesBalance);
   const setSkillArmor = useSetRecoilState(skills(SkillType.Armors));
   const setSkillBleed = useSetRecoilState(skills(SkillType.Bleed));
   const setSkillCriticals = useSetRecoilState(skills(SkillType.Criticals));
@@ -27,6 +25,9 @@ export default function () {
   const setSkillRegeneration = useSetRecoilState(skills(SkillType.Regeneration));
   const setSkillShields = useSetRecoilState(skills(SkillType.Shields));
   const setSkillStagger = useSetRecoilState(skills(SkillType.Stagger));
+
+  const increaseLevel = useIncreaseLevel();
+  const transactResources = useTransactResources();
 
   const setSkill = useMemo(
     () => [
@@ -57,7 +58,7 @@ export default function () {
         // Age of Empires
         case "COINAGE":
           if (typeof value === "number") {
-            balanceResources({ coinsDifference: value });
+            transactResources({ coinsDifference: value });
           }
           break;
         // Doom
@@ -77,13 +78,13 @@ export default function () {
         // The Sims
         case "rosebud":
           if (typeof value === "number") {
-            balanceResources({ scrapDifference: value });
+            transactResources({ scrapDifference: value });
           }
           break;
         // Starcraft
         case "something for nothing":
           if (typeof value === "number") {
-            balanceResources({ essenceDifference: value });
+            transactResources({ essenceDifference: value });
           }
           break;
         // Thief
@@ -92,7 +93,7 @@ export default function () {
             const difference = value - levelValue;
 
             for (let i = 0; i < difference; i++) {
-              setLevelUp(null);
+              increaseLevel();
             }
           }
           break;
@@ -100,7 +101,7 @@ export default function () {
           return;
       }
     };
-  }, [balanceResources, levelValue, progressMaxValue, setLevelUp, setProgress, setSkill]);
+  }, [transactResources, levelValue, progressMaxValue, increaseLevel, setProgress, setSkill]);
 
   return <></>;
 }

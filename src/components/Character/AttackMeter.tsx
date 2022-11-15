@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
+import useAttack from "@neverquest/hooks/actions/useAttack";
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { isAttacking, isLooting, isRecovering } from "@neverquest/state/character";
 import { isMonsterDead } from "@neverquest/state/monster";
 import { canAttack } from "@neverquest/state/reserves";
 import { totalAttackRate } from "@neverquest/state/statistics";
-import { offense } from "@neverquest/state/transactions/combat";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
@@ -18,25 +18,28 @@ export default function () {
   const isRecoveringValue = useRecoilValue(isRecovering);
   const canAttackValue = useRecoilValue(canAttack);
   const totalAttackRateValue = useRecoilValue(totalAttackRate);
-  const attack = useSetRecoilState(offense);
+
   const [deltaAttack, setDeltaAttack] = useState(0);
 
-  useAnimation((delta) => {
-    setDeltaAttack((current) => current + delta);
-  }, !isAttackingValue || isLootingValue || isRecoveringValue || !canAttackValue);
+  const attack = useAttack();
 
   useEffect(() => {
     if (deltaAttack >= totalAttackRateValue) {
-      attack(null);
+      attack();
       setDeltaAttack(0);
     }
   }, [attack, deltaAttack, totalAttackRateValue]);
 
   useEffect(() => {
-    if (!isAttackingValue || isLootingValue || isMonsterDeadValue || !canAttackValue) {
+    if (!canAttackValue || !isAttackingValue || isLootingValue || isMonsterDeadValue) {
       setDeltaAttack(0);
     }
-  }, [isAttackingValue, isLootingValue, isMonsterDeadValue, canAttackValue]);
+  }, [canAttackValue, isAttackingValue, isLootingValue, isMonsterDeadValue]);
+
+  useAnimation(
+    (delta) => setDeltaAttack((current) => current + delta),
+    !canAttackValue || !isAttackingValue || isLootingValue || isRecoveringValue
+  );
 
   return (
     <LabelledProgressBar

@@ -2,29 +2,27 @@ import { atom, selector } from "recoil";
 
 import { UNKNOWN } from "@neverquest/constants";
 import LOCRA from "@neverquest/locra";
-import { localStorageEffect } from "@neverquest/state/effects";
+import localStorage from "@neverquest/state/effects/localStorage";
 import { isNSFW } from "@neverquest/state/settings";
-import { merchantInventoryGeneration } from "@neverquest/state/transactions/possessions";
-import { levelUp } from "@neverquest/state/transactions/progress";
 import { LocationType, StorageKey } from "@neverquest/types/enums";
 
 // ATOMS
 
 export const level = atom({
   default: 1,
-  effects: [localStorageEffect<number>(StorageKey.Level)],
+  effects: [localStorage<number>(StorageKey.Level)],
   key: StorageKey.Level,
 });
 
 export const mode = atom({
   default: LocationType.Wilderness,
-  effects: [localStorageEffect<LocationType>(StorageKey.Mode)],
+  effects: [localStorage<LocationType>(StorageKey.Mode)],
   key: StorageKey.Mode,
 });
 
 export const progress = atom({
   default: 0,
-  effects: [localStorageEffect<number>(StorageKey.Progress)],
+  effects: [localStorage<number>(StorageKey.Progress)],
   key: StorageKey.Progress,
 });
 
@@ -47,9 +45,9 @@ export const progressMax = selector({
 
 export const location = selector({
   get: ({ get }) => {
+    const nsfwValue = get(isNSFW);
     const isWildernessValue = get(isWilderness);
     const levelValue = get(level);
-    const nsfwValue = get(isNSFW);
 
     if (isWildernessValue) {
       if (levelValue === 1) {
@@ -66,15 +64,4 @@ export const location = selector({
     return "Caravan";
   },
   key: "location",
-  set: ({ get, set }) => {
-    const isWildernessValue = get(isWilderness);
-
-    if (isWildernessValue) {
-      set(merchantInventoryGeneration, null);
-      set(mode, LocationType.Caravan);
-    } else {
-      set(levelUp, null);
-      set(mode, LocationType.Wilderness);
-    }
-  },
 });

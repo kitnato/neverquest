@@ -5,10 +5,10 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import IconDisplay from "@neverquest/components/IconDisplay";
 import MonsterStatus from "@neverquest/components/Monster/MonsterStatus";
 import { UNKNOWN } from "@neverquest/constants";
+import useRegenerateMonster from "@neverquest/hooks/actions/useRegenerateMonster";
 import { ReactComponent as Icon } from "@neverquest/icons/evil-eyes.svg";
 import { isAttacking, isLooting } from "@neverquest/state/character";
 import { isMonsterDead, isMonsterEngaged } from "@neverquest/state/monster";
-import { monsterRegenerate } from "@neverquest/state/transactions/monster";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
@@ -17,7 +17,7 @@ export default function () {
   const [isMonsterEngagedValue, setMonsterEngaged] = useRecoilState(isMonsterEngaged);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
-  const regenerateMonster = useSetRecoilState(monsterRegenerate);
+  const regenerateMonster = useRegenerateMonster();
 
   useEffect(() => {
     // If player is attacking a new monster, engage it.
@@ -27,7 +27,7 @@ export default function () {
 
     // If player stops attacking but the monster is still alive, regenerate it.
     if (!isAttackingValue && isMonsterEngagedValue && !isMonsterDeadValue) {
-      regenerateMonster(null);
+      regenerateMonster();
     }
 
     if (isMonsterDeadValue) {

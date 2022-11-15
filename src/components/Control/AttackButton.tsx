@@ -113,7 +113,7 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
 
       <ConfirmationDialog
         confirmationLabel="Attack anyway"
-        message="If you attack before increasing your attributes, you will have to kill all monsters before you get another chance."
+        message="If you attack before increasing your attributes, you will have to defeat all monsters before you get another chance."
         onConfirm={toggleAttack}
         setHide={() => setShowAttackConfirmation(false)}
         show={showAttackConfirmation}

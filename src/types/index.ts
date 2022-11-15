@@ -28,8 +28,8 @@ export interface CrewMember {
 }
 
 interface InventoryBase {
-  item: Gear | Item;
   key: string;
+  possession: Possession;
 }
 
 export interface Inventory {
@@ -57,6 +57,8 @@ interface ItemBase {
 }
 
 export type Gear = Armor | Shield | Weapon;
+
+export type Possession = Gear | Item;
 
 export type Shield = ItemBase & {
   block: number;

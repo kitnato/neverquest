@@ -1,3 +1,4 @@
+import { RecoilValue, Snapshot } from "recoil";
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/constants";
 import { RangeProps } from "@neverquest/types/props";
 import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
@@ -153,6 +154,10 @@ export function getFromRange({ maximum, minimum }: RangeProps) {
 
 export function getSellPrice({ price }: { price: number }) {
   return Math.floor(price / 2);
+}
+
+export function getSnapshotGetter({ getLoadable }: Snapshot) {
+  return <T>(state: RecoilValue<T>) => getLoadable(state).getValue();
 }
 
 // https://en.wikipedia.org/wiki/Triangular_number

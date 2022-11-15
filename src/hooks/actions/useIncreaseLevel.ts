@@ -1,16 +1,19 @@
-import { selector } from "recoil";
+import { useRecoilCallback } from "recoil";
 
-import { monsterCreate } from "./monster";
 import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/constants/caravan";
+import useCreateMonster from "@neverquest/hooks/actions/useCreateMonster";
 import { crew } from "@neverquest/state/caravan";
 import { level, progress } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { CrewStatus, ShowingType } from "@neverquest/types/enums";
+import { getSnapshotGetter } from "@neverquest/utilities/helpers";
 
-export const levelUp = selector({
-  get: () => null,
-  key: "levelUp",
-  set: ({ get, set }) => {
+export default function () {
+  const createMonster = useCreateMonster();
+
+  return useRecoilCallback(({ set, snapshot }) => () => {
+    const get = getSnapshotGetter(snapshot);
+
     const levelValue = get(level);
     const nextLevel = levelValue + 1;
 
@@ -43,6 +46,6 @@ export const levelUp = selector({
 
     set(level, nextLevel);
     set(progress, 0);
-    set(monsterCreate, null);
-  },
-});
+    createMonster();
+  });
+}

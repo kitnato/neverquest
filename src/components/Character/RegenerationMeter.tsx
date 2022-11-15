@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RecoilState, RecoilValueReadOnly, useRecoilValue, useSetRecoilState } from "recoil";
+import { RecoilValueReadOnly, useRecoilValue } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import useAnimation from "@neverquest/hooks/useAnimation";
@@ -8,18 +8,17 @@ import { DeltaReserve, UIAttachment, UISize, UIVariant } from "@neverquest/types
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
 export default function ({
-  atomReserve,
+  handleChangeReserve,
   isReserveMaxedOut,
   regenerationRate,
 }: {
-  atomReserve: RecoilState<DeltaReserve>;
+  handleChangeReserve: (change: DeltaReserve) => void;
   isReserveMaxedOut: RecoilValueReadOnly<boolean>;
   regenerationRate: RecoilValueReadOnly<number>;
 }) {
   const isRecoveringValue = useRecoilValue(isRecovering);
   const regenerationRateValue = useRecoilValue(regenerationRate);
   const isReserveMaxedOutValue = useRecoilValue(isReserveMaxedOut);
-  const changeCurrentReserve = useSetRecoilState(atomReserve);
 
   const [deltaRegeneration, setDeltaRegeneration] = useState(0);
 
@@ -30,9 +29,9 @@ export default function ({
   useEffect(() => {
     if (deltaRegeneration >= regenerationRateValue) {
       setDeltaRegeneration(0);
-      changeCurrentReserve({ value: 1 });
+      handleChangeReserve({ value: 1 });
     }
-  }, [changeCurrentReserve, deltaRegeneration, regenerationRateValue]);
+  }, [handleChangeReserve, deltaRegeneration, regenerationRateValue]);
 
   // Catches any leftover increments after regeneration is complete.
   useEffect(() => {

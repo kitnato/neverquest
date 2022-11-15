@@ -1,21 +1,21 @@
 import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import Coins from "@neverquest/components/Resource/Coins";
 import { CREW_MEMBERS } from "@neverquest/constants/caravan";
+import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
 import { ReactComponent as Icon } from "@neverquest/icons/cowled.svg";
 import { crew } from "@neverquest/state/caravan";
 import { coins } from "@neverquest/state/resources";
-import { resourcesBalance } from "@neverquest/state/transactions/possessions";
 import { CrewStatus, CrewType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function ({ type }: { type: CrewType }) {
   const [{ hireStatus }, setCrewMember] = useRecoilState(crew(type));
   const coinsValue = useRecoilValue(coins);
-  const balanceResources = useSetRecoilState(resourcesBalance);
+  const transactResources = useTransactResources();
 
   if (hireStatus !== CrewStatus.Hirable) {
     return null;
@@ -46,7 +46,7 @@ export default function ({ type }: { type: CrewType }) {
                   ...current,
                   hireStatus: CrewStatus.Hired,
                 }));
-                balanceResources({ coinsDifference: -price });
+                transactResources({ coinsDifference: -price });
               }}
               variant={UIVariant.Outline}
             >

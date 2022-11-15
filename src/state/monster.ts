@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 
-import { localStorageEffect } from "@neverquest/state/effects";
+import localStorage from "@neverquest/state/effects/localStorage";
 import { level, progress } from "@neverquest/state/encounter";
 import { StorageKey } from "@neverquest/types/enums";
 import { getDamagePerRate } from "@neverquest/utilities/helpers";
@@ -9,43 +9,43 @@ import { getDamagePerRate } from "@neverquest/utilities/helpers";
 
 export const currentHealthMonster = atom({
   default: -1,
-  effects: [localStorageEffect<number>(StorageKey.CurrentHealthMonster)],
+  effects: [localStorage<number>(StorageKey.CurrentHealthMonster)],
   key: StorageKey.CurrentHealthMonster,
 });
 
 export const isMonsterEngaged = atom({
   default: false,
-  effects: [localStorageEffect<boolean>(StorageKey.IsMonsterEngaged)],
+  effects: [localStorage<boolean>(StorageKey.IsMonsterEngaged)],
   key: StorageKey.IsMonsterEngaged,
 });
 
 export const isMonsterNew = atom({
   default: false,
-  effects: [localStorageEffect<boolean>(StorageKey.IsMonsterNew)],
+  effects: [localStorage<boolean>(StorageKey.IsMonsterNew)],
   key: StorageKey.IsMonsterNew,
 });
 
 export const isMonsterStaggered = atom({
   default: false,
-  effects: [localStorageEffect<boolean>(StorageKey.IsMonsterStaggered)],
+  effects: [localStorage<boolean>(StorageKey.IsMonsterStaggered)],
   key: StorageKey.IsMonsterStaggered,
 });
 
 export const monsterBleedingDuration = atom({
   default: 0,
-  effects: [localStorageEffect<number>(StorageKey.MonsterBleedingDuration)],
+  effects: [localStorage<number>(StorageKey.MonsterBleedingDuration)],
   key: StorageKey.MonsterBleedingDuration,
 });
 
 export const monsterName = atom({
   default: "",
-  effects: [localStorageEffect<string>(StorageKey.MonsterName)],
+  effects: [localStorage<string>(StorageKey.MonsterName)],
   key: StorageKey.MonsterName,
 });
 
 export const monsterStatusElement = atom<HTMLDivElement | null>({
   default: null,
-  effects: [localStorageEffect<HTMLDivElement | null>(StorageKey.MonsterStatusElement)],
+  effects: [localStorage<HTMLDivElement | null>(StorageKey.MonsterStatusElement)],
   key: StorageKey.MonsterStatusElement,
 });
 

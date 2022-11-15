@@ -6,6 +6,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import IconDisplay from "@neverquest/components/IconDisplay";
 import { UNKNOWN } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/constants/attributes";
+import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
 import {
   areAttributesIncreasable,
   attributeCost,
@@ -14,7 +15,6 @@ import {
 } from "@neverquest/state/attributes";
 import { characterLevel } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { resourcesBalance } from "@neverquest/state/transactions/possessions";
 import { AttributeType, DeltaType } from "@neverquest/types/enums";
 import { FloatingText, UIVariant } from "@neverquest/types/ui";
 
@@ -26,7 +26,8 @@ export default function ({ type }: { type: AttributeType }) {
   const setCharacterLevel = useSetRecoilState(characterLevel);
   const setDeltaCharacterLevel = useSetRecoilState(deltas(DeltaType.CharacterLevel));
   const setDeltaEssenceAbsorbed = useSetRecoilState(deltas(DeltaType.EssenceAbsorbed));
-  const balanceResources = useSetRecoilState(resourcesBalance);
+
+  const transactResources = useTransactResources();
 
   const { description, Icon, name } = ATTRIBUTES[type];
 
@@ -38,7 +39,7 @@ export default function ({ type }: { type: AttributeType }) {
       points: current.points + 1,
     }));
 
-    balanceResources({
+    transactResources({
       essenceDifference: -attributeCostValue,
     });
     setDeltaEssenceAbsorbed({
@@ -75,11 +76,7 @@ export default function ({ type }: { type: AttributeType }) {
                     onClick={onIncrease}
                     variant={UIVariant.Outline}
                   >
-                    {areAttributesIncreasableValue ? (
-                      <Plus height="1.4em" width="1.4em" />
-                    ) : (
-                      <Clock />
-                    )}
+                    {areAttributesIncreasableValue ? <Plus /> : <Clock />}
                   </Button>
                 </span>
               </OverlayTrigger>

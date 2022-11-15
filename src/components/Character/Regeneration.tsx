@@ -7,12 +7,12 @@ import { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
 
 export default function ({
   atomDeltaRegenerationRate,
-  atomReserve,
+  handleChangeReserve,
   isReserveMaxedOut,
   regenerationRate,
 }: {
   atomDeltaRegenerationRate: RecoilState<DeltaDisplay>;
-  atomReserve: RecoilState<DeltaReserve>;
+  handleChangeReserve: (change: DeltaReserve) => void;
   isReserveMaxedOut: RecoilValueReadOnly<boolean>;
   regenerationRate: RecoilValueReadOnly<number>;
 }) {
@@ -25,7 +25,7 @@ export default function ({
   return (
     <>
       <RegenerationMeter
-        atomReserve={atomReserve}
+        handleChangeReserve={handleChangeReserve}
         isReserveMaxedOut={isReserveMaxedOut}
         regenerationRate={regenerationRate}
       />

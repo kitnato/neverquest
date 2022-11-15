@@ -1,10 +1,10 @@
 import ls from "localstorage-slim";
-import { selector } from "recoil";
+import { useRecoilCallback } from "recoil";
 
-import { monsterCreate } from "./monster";
 import { KEY_SESSION } from "@neverquest/constants";
 import { ATTRIBUTES_INITIAL } from "@neverquest/constants/attributes";
 import { CREW_INITIAL } from "@neverquest/constants/caravan";
+import useCreateMonster from "@neverquest/hooks/actions/useCreateMonster";
 import { attributes } from "@neverquest/state/attributes";
 import { crew } from "@neverquest/state/caravan";
 import {
@@ -14,18 +14,21 @@ import {
   maximumStamina,
 } from "@neverquest/state/reserves";
 import { CrewStatus } from "@neverquest/types/enums";
+import { getSnapshotGetter } from "@neverquest/utilities/helpers";
 
-export const initialization = selector({
-  get: () => null,
-  key: "initialization",
-  set: ({ get, set }) => {
+export default function () {
+  const createMonster = useCreateMonster();
+
+  return useRecoilCallback(({ set, snapshot }) => () => {
+    const get = getSnapshotGetter(snapshot);
+
     if (ls.get(KEY_SESSION) !== null) {
       return;
     }
 
     set(currentHealth, get(maximumHealth));
     set(currentStamina, get(maximumStamina));
-    set(monsterCreate, null);
+    createMonster();
 
     ATTRIBUTES_INITIAL.forEach((type) =>
       set(attributes(type), (current) => ({ ...current, isUnlocked: true }))
@@ -37,5 +40,5 @@ export const initialization = selector({
         hireStatus: CrewStatus.Hired,
       }))
     );
-  },
-});
+  });
+}

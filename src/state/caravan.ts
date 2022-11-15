@@ -1,6 +1,6 @@
 import { DefaultValue, atom, atomFamily, selectorFamily } from "recoil";
 
-import { localStorageEffect } from "@neverquest/state/effects";
+import localStorage from "@neverquest/state/effects/localStorage";
 import { InventoryMerchant } from "@neverquest/types";
 import { CrewStatus, CrewType, StorageKey } from "@neverquest/types/enums";
 
@@ -13,7 +13,7 @@ interface CrewState {
 
 export const crewHirable = atom<CrewType[]>({
   default: [],
-  effects: [localStorageEffect<CrewType[]>(StorageKey.CrewHirable)],
+  effects: [localStorage<CrewType[]>(StorageKey.CrewHirable)],
   key: StorageKey.CrewHirable,
 });
 
@@ -22,13 +22,13 @@ const crewMapping = atomFamily<CrewState, CrewType>({
     hireStatus: CrewStatus.Unavailable,
     monologueProgress: 0,
   },
-  effects: (parameter) => [localStorageEffect<CrewState>(`${StorageKey.CrewMapping}-${parameter}`)],
+  effects: (parameter) => [localStorage<CrewState>(`${StorageKey.CrewMapping}-${parameter}`)],
   key: StorageKey.CrewMapping,
 });
 
 export const merchantInventory = atom<InventoryMerchant>({
   default: {},
-  effects: [localStorageEffect<InventoryMerchant>(StorageKey.MerchantInventory)],
+  effects: [localStorage<InventoryMerchant>(StorageKey.MerchantInventory)],
   key: StorageKey.MerchantInventory,
 });
 

@@ -4,15 +4,17 @@ import Regeneration from "@neverquest/components/Character/Regeneration";
 import FloatingText from "@neverquest/components/FloatingText";
 import IconDisplay from "@neverquest/components/IconDisplay";
 import ReserveMeter from "@neverquest/components/ReserveMeter";
+import useChangeHealth from "@neverquest/hooks/actions/useChangeHealth";
 import { ReactComponent as Icon } from "@neverquest/icons/hospital-cross.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { currentHealth, isHealthMaxedOut, maximumHealth } from "@neverquest/state/reserves";
 import { totalHealthRegenerationRate } from "@neverquest/state/statistics";
-import { healthChange } from "@neverquest/state/transactions/reserves";
 import { DeltaType } from "@neverquest/types/enums";
 import { UIAttachment } from "@neverquest/types/ui";
 
 export default function () {
+  const changeHealth = useChangeHealth();
+
   return (
     <IconDisplay
       contents={
@@ -29,7 +31,7 @@ export default function () {
 
           <Regeneration
             atomDeltaRegenerationRate={deltas(DeltaType.TotalHealthRegenerationRate)}
-            atomReserve={healthChange}
+            handleChangeReserve={changeHealth}
             isReserveMaxedOut={isHealthMaxedOut}
             regenerationRate={totalHealthRegenerationRate}
           />

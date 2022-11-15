@@ -1,13 +1,12 @@
 import { ReactNode, useEffect } from "react";
-import { useSetRecoilState } from "recoil";
 
-import { initialization } from "@neverquest/state/transactions/initialization";
+import useInitialize from "@neverquest/hooks/actions/useInitialize";
 
 export default function ({ children }: { children: ReactNode }) {
-  const initialize = useSetRecoilState(initialization);
+  const initialize = useInitialize();
 
   useEffect(() => {
-    initialize(null);
+    initialize();
   }, [initialize]);
 
   return <>{children}</>;

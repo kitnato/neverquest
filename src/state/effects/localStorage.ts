@@ -3,9 +3,8 @@ import { AtomEffect } from "recoil";
 
 import { KEY_SESSION, KEY_SETTINGS } from "@neverquest/constants";
 
-export const localStorageEffect =
-  <ValueType>(key: string, isSettings?: boolean): AtomEffect<ValueType> =>
-  ({ onSet, setSelf }) => {
+export default function <ValueType>(key: string, isSettings?: boolean): AtomEffect<ValueType> {
+  return ({ onSet, setSelf }) => {
     type Store = Partial<Record<string, ValueType>>;
 
     const storeKey = isSettings ? KEY_SETTINGS : KEY_SESSION;
@@ -31,3 +30,4 @@ export const localStorageEffect =
       ls.set(storeKey, newStore);
     });
   };
+}

@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { Modal } from "react-bootstrap";
 import { QuestionSquare } from "react-bootstrap-icons";
-import Modal from "react-bootstrap/Modal";
 
 import { UNKNOWN } from "@neverquest/constants";
 

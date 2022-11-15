@@ -2,7 +2,7 @@ import { atomFamily, selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import { characterLevel } from "@neverquest/state/character";
-import { localStorageEffect } from "@neverquest/state/effects";
+import localStorage from "@neverquest/state/effects/localStorage";
 import { essence } from "@neverquest/state/resources";
 import { AttributeType, StorageKey } from "@neverquest/types/enums";
 import { getComputedStat, getTriangularNumber } from "@neverquest/utilities/helpers";
@@ -19,9 +19,7 @@ export const attributes = atomFamily<AttributeState, AttributeType>({
     isUnlocked: false,
     points: 0,
   },
-  effects: (parameter) => [
-    localStorageEffect<AttributeState>(`${StorageKey.Attributes}-${parameter}`),
-  ],
+  effects: (parameter) => [localStorage<AttributeState>(`${StorageKey.Attributes}-${parameter}`)],
   key: StorageKey.Attributes,
 });
 
@@ -39,10 +37,10 @@ export const areAttributesIncreasable = selector({
 
 export const isAttributeMaxed = selectorFamily<boolean, AttributeType>({
   get:
-    (parameter) =>
+    (type) =>
     ({ get }) => {
-      const { base, increment, maximum } = ATTRIBUTES[parameter];
-      const { points } = get(attributes(parameter));
+      const { base, increment, maximum } = ATTRIBUTES[type];
+      const { points } = get(attributes(type));
 
       return maximum === undefined
         ? false

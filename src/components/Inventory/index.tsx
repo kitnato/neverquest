@@ -1,17 +1,17 @@
 import { Button, Col, Row, Stack } from "react-bootstrap";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import Encumbrance from "@neverquest/components/Inventory/Encumbrance";
 import InventoryElement from "@neverquest/components/Inventory/InventoryElement";
+import useToggleEquipGear from "@neverquest/hooks/actions/useToggleEquipGear";
 import { inventory } from "@neverquest/state/inventory";
-import { itemEquip, itemUnequip } from "@neverquest/state/transactions/possessions";
 import { isGear } from "@neverquest/types/type-guards";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function () {
   const inventoryValue = useRecoilValue(inventory);
-  const equipItem = useSetRecoilState(itemEquip);
-  const unequipItem = useSetRecoilState(itemUnequip);
+
+  const toggleEquipGear = useToggleEquipGear();
 
   const equippedInventoryIDs = Object.getOwnPropertyNames(inventoryValue).filter(
     (id) => inventoryValue[id].isEquipped
@@ -20,8 +20,7 @@ export default function () {
     (id) => !inventoryValue[id].isEquipped
   );
 
-  const onEquipItem = (id: string) => () => equipItem(id);
-  const onUnequipItem = (id: string) => () => unequipItem(id);
+  const handleToggleEquipGear = (id: string) => () => toggleEquipGear(id);
 
   return (
     <Stack gap={5}>
@@ -35,18 +34,18 @@ export default function () {
         {equippedInventoryIDs.length === 0 && <span className="fst-italic">Nothing equipped.</span>}
 
         {equippedInventoryIDs.map((id) => {
-          const { item, key } = inventoryValue[id];
+          const { key, possession } = inventoryValue[id];
 
           return (
             <Row key={key}>
               <Col xs={8}>
                 <Stack direction="horizontal">
-                  <InventoryElement item={item} />
+                  <InventoryElement possession={possession} />
                 </Stack>
               </Col>
 
               <Col>
-                <Button onClick={onUnequipItem(id)} variant={UIVariant.Outline}>
+                <Button onClick={handleToggleEquipGear(id)} variant={UIVariant.Outline}>
                   Unequip
                 </Button>
               </Col>
@@ -63,17 +62,17 @@ export default function () {
         )}
 
         {storedInventoryValueIDs.map((id) => {
-          const { item, key } = inventoryValue[id];
+          const { key, possession } = inventoryValue[id];
 
           return (
             <Row key={key}>
               <Col xs={7}>
-                <InventoryElement item={item} />
+                <InventoryElement possession={possession} />
               </Col>
 
-              {isGear(item) && (
+              {isGear(possession) && (
                 <Col>
-                  <Button onClick={onEquipItem(id)} variant={UIVariant.Outline}>
+                  <Button onClick={handleToggleEquipGear(id)} variant={UIVariant.Outline}>
                     Equip
                   </Button>
                 </Col>

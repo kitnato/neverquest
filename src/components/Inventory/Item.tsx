@@ -1,9 +1,9 @@
 import { OverlayTrigger, Popover } from "react-bootstrap";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
-import { Item as ItemType } from "@neverquest/types";
+import { Item } from "@neverquest/types";
 
-export default function ({ item }: { item: ItemType }) {
+export default function ({ item }: { item: Item }) {
   const { description, Icon, name } = item;
 
   return (

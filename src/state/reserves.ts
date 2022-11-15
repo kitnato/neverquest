@@ -2,7 +2,7 @@ import { atom, selector } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import { attributes } from "@neverquest/state/attributes";
-import { localStorageEffect } from "@neverquest/state/effects";
+import localStorage from "@neverquest/state/effects/localStorage";
 import { shield, weapon } from "@neverquest/state/inventory";
 import { AttributeType, StorageKey } from "@neverquest/types/enums";
 
@@ -10,13 +10,13 @@ import { AttributeType, StorageKey } from "@neverquest/types/enums";
 
 export const currentHealth = atom({
   default: 0,
-  effects: [localStorageEffect<number>(StorageKey.CurrentHealth)],
+  effects: [localStorage<number>(StorageKey.CurrentHealth)],
   key: StorageKey.CurrentHealth,
 });
 
 export const currentStamina = atom({
   default: 0,
-  effects: [localStorageEffect<number>(StorageKey.CurrentStamina)],
+  effects: [localStorage<number>(StorageKey.CurrentStamina)],
   key: StorageKey.CurrentStamina,
 });
 

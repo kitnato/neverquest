@@ -1,47 +1,46 @@
-import { selector } from "recoil";
+import { useRecoilCallback } from "recoil";
 
-import { healthChange, staminaChange } from "./reserves";
-import { BLEED_DURATION } from "@neverquest/constants/attributes";
+import useChangeHealth from "@neverquest/hooks/actions/useChangeHealth";
+import useChangeStamina from "@neverquest/hooks/actions/useChangeStamina";
 import { isRecovering, statusElement } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { shield, weapon } from "@neverquest/state/inventory";
+import { shield } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import {
   currentHealthMonster,
   isMonsterStaggered,
-  monsterBleedingDuration,
   monsterStatusElement,
   totalDamageMonster,
 } from "@neverquest/state/monster";
-import { canAttack, canBlock } from "@neverquest/state/reserves";
+import { canBlock } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
 import {
-  totalBleedChance,
   totalBlockChance,
-  totalDamage,
   totalDodgeChance,
   totalParryChance,
   totalProtection,
 } from "@neverquest/state/statistics";
 import { DeltaType, ShowingType, SkillType } from "@neverquest/types/enums";
 import { AnimationSpeed, AnimationType, DeltaDisplay, FloatingText } from "@neverquest/types/ui";
-import { animateElement } from "@neverquest/utilities/helpers";
+import { animateElement, getSnapshotGetter } from "@neverquest/utilities/helpers";
 
-export const defense = selector({
-  get: () => null,
-  key: "defense",
-  set: ({ get, set }) => {
+export default function () {
+  const changeHealth = useChangeHealth();
+  const changeStamina = useChangeStamina();
+
+  return useRecoilCallback(({ set, snapshot }) => () => {
+    const get = getSnapshotGetter(snapshot);
+
     animateElement({
       element: get(statusElement),
       speed: AnimationSpeed.Fast,
       type: AnimationType.HeadShake,
     });
 
-    const deltaHealth = deltas(DeltaType.Health);
     const hasDodged = get(skills(SkillType.Dodge)) && Math.random() <= get(totalDodgeChance);
 
     if (hasDodged) {
-      set(deltaHealth, {
+      set(deltas(DeltaType.Health), {
         color: FloatingText.Neutral,
         value: "DODGED",
       });
@@ -49,16 +48,14 @@ export const defense = selector({
       return;
     }
 
-    const totalProtectionValue = get(totalProtection);
-    const monsterDamage = get(totalDamageMonster);
     const healthDamage = (() => {
-      const damage = totalProtectionValue - monsterDamage;
+      const damage = get(totalProtection) - get(totalDamageMonster);
 
       return damage < 0 ? damage : 0;
     })();
 
     if (healthDamage === 0) {
-      set(deltaHealth, {
+      set(deltas(DeltaType.Health), {
         color: FloatingText.Neutral,
         value: healthDamage,
       });
@@ -69,15 +66,14 @@ export const defense = selector({
     const hasBlocked = Math.random() <= get(totalBlockChance);
 
     if (hasBlocked) {
-      const canBlockValue = get(canBlock);
       const { staminaCost } = get(shield);
 
-      if (canBlockValue) {
-        set(deltaHealth, {
+      if (get(canBlock)) {
+        set(deltas(DeltaType.Health), {
           color: FloatingText.Neutral,
           value: "BLOCKED",
         });
-        set(staminaChange, { value: -staminaCost });
+        changeStamina({ value: -staminaCost });
 
         if (get(skills(SkillType.Stagger))) {
           set(isMonsterStaggered, true);
@@ -101,10 +97,9 @@ export const defense = selector({
     const hasParried = get(skills(SkillType.Parry)) && Math.random() <= get(totalParryChance);
 
     if (!hasBlocked && hasParried) {
-      const parryDamage = Math.floor(monsterDamage / 2);
-      const monsterHealth = get(currentHealthMonster) - parryDamage;
+      const parryDamage = Math.floor(get(totalDamageMonster) / 2);
 
-      set(currentHealthMonster, monsterHealth);
+      set(currentHealthMonster, (current) => current - parryDamage);
       set(deltas(DeltaType.HealthMonster), [
         {
           color: FloatingText.Neutral,
@@ -125,7 +120,7 @@ export const defense = selector({
 
     let deltaHealthOverride: DeltaDisplay | undefined;
 
-    if (totalProtectionValue > 0) {
+    if (get(totalProtection) > 0) {
       deltaHealthOverride = [
         {
           color: FloatingText.Negative,
@@ -133,70 +128,17 @@ export const defense = selector({
         },
         {
           color: FloatingText.Neutral,
-          value: ` (${totalProtectionValue})`,
+          value: ` (${get(totalProtection)})`,
         },
       ];
     }
 
-    set(healthChange, { delta: deltaHealthOverride, value: healthDamage });
+    changeHealth({ delta: deltaHealthOverride, value: healthDamage });
 
     if (!get(isShowing(ShowingType.Recovery))) {
       set(isShowing(ShowingType.Recovery), true);
     }
 
     set(isRecovering, true);
-  },
-});
-
-export const offense = selector({
-  get: () => null,
-  key: "offense",
-  set: ({ get, set }) => {
-    const { staminaCost } = get(weapon);
-
-    if (get(canAttack)) {
-      const totalDamageValue = get(totalDamage);
-      const hasInflictedBleed =
-        get(monsterBleedingDuration) === 0 &&
-        get(skills(SkillType.Bleed)) &&
-        Math.random() <= get(totalBleedChance);
-
-      let monsterHealth = get(currentHealthMonster) - totalDamageValue;
-
-      if (monsterHealth < 0) {
-        monsterHealth = 0;
-      }
-
-      if (staminaCost > 0) {
-        set(staminaChange, { value: -staminaCost });
-      }
-
-      set(currentHealthMonster, monsterHealth);
-      set(deltas(DeltaType.HealthMonster), {
-        color: FloatingText.Negative,
-        value: -totalDamageValue,
-      });
-
-      if (hasInflictedBleed) {
-        set(monsterBleedingDuration, BLEED_DURATION);
-      }
-
-      animateElement({
-        element: get(monsterStatusElement),
-        speed: AnimationSpeed.Fast,
-        type: AnimationType.HeadShake,
-      });
-    } else {
-      set(deltas(DeltaType.Stamina), [
-        {
-          color: FloatingText.Neutral,
-          value: "CANNOT ATTACK",
-        },
-        {
-          color: FloatingText.Negative,
-          value: ` (${staminaCost})`,
-        },
-      ]);
-    }
-  },
-});
+  });
+}

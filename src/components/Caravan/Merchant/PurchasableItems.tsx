@@ -12,14 +12,15 @@ export default function ({ inventoryIDs }: { inventoryIDs: string[] }) {
   return (
     <>
       {inventoryIDs.map((id) => {
-        const { item, key } = merchantInventoryValue[id];
+        const { key, possession } = merchantInventoryValue[id];
+        const { price } = possession;
 
         return (
           <div className="align-items-center d-flex justify-content-between w-100" key={key}>
-            <InventoryElement item={item} />
+            <InventoryElement possession={possession} />
 
             <Stack direction="horizontal" gap={3}>
-              <Coins tooltip="Price (coins)" value={item.price} />
+              <Coins tooltip="Price (coins)" value={price} />
 
               <BuyItemButton id={id} />
             </Stack>

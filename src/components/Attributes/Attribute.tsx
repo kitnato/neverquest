@@ -1,12 +1,14 @@
 import { MouseEvent } from "react";
 import { Badge, Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
-import { Clock, Plus } from "react-bootstrap-icons";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
+import IconImage from "@neverquest/components/IconImage";
 import { UNKNOWN } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
+import { ReactComponent as IconWait } from "@neverquest/icons/hourglass.svg";
+import { ReactComponent as IconIncrease } from "@neverquest/icons/upgrade.svg";
 import {
   areAttributesIncreasable,
   attributeCost,
@@ -76,7 +78,7 @@ export default function ({ type }: { type: AttributeType }) {
                     onClick={onIncrease}
                     variant={UIVariant.Outline}
                   >
-                    {areAttributesIncreasableValue ? <Plus /> : <Clock />}
+                    <IconImage Icon={areAttributesIncreasableValue ? IconIncrease : IconWait} />
                   </Button>
                 </span>
               </OverlayTrigger>

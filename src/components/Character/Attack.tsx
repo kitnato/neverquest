@@ -1,11 +1,13 @@
+import { useEffect } from "react";
 import { OverlayTrigger, Popover, Stack, Table } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import AttackMeter from "@neverquest/components/Character/AttackMeter";
 import FloatingText from "@neverquest/components/FloatingText";
 import IconDisplay from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/constants/attributes";
+import { NO_WEAPON } from "@neverquest/constants/gear";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/striking-splinter.svg";
 import { attributes } from "@neverquest/state/attributes";
@@ -22,7 +24,7 @@ import {
 
 export default function () {
   const { points } = useRecoilValue(attributes(AttributeType.AttackRate));
-  const showTotalAttackRateDetailsValue = useRecoilValue(
+  const [showTotalAttackRateDetailsValue, setShowTotalAttackRateDetails] = useRecoilState(
     isShowing(ShowingType.TotalAttackRateSummary)
   );
   const weaponValue = useRecoilValue(weapon);
@@ -35,6 +37,12 @@ export default function () {
     isTime: true,
     valueAtom: totalAttackRate,
   });
+
+  useEffect(() => {
+    if (points > 0 && !showTotalAttackRateDetailsValue) {
+      setShowTotalAttackRateDetails(true);
+    }
+  }, [points, setShowTotalAttackRateDetails, showTotalAttackRateDetailsValue]);
 
   const MeterWithDelta = () => (
     <Stack className="w-100" direction="horizontal">
@@ -57,7 +65,9 @@ export default function () {
                   <Table borderless size="sm">
                     <tbody>
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>{`${
+                          weaponValue === NO_WEAPON ? "Base" : "Weapon"
+                        }:`}</td>
 
                         <td>{formatMilliseconds(weaponValue.rate)}</td>
                       </tr>

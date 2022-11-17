@@ -32,15 +32,16 @@ export const NO_ARMOR: Armor = {
 };
 
 export const NO_SHIELD: Shield = {
-  block: 0,
+  blockChance: 0,
   name: "None",
   price: 0,
-  stagger: 0,
+  staggerChance: 0,
   staminaCost: 0,
   weight: 0,
 };
 
 export const NO_WEAPON: Weapon = {
+  abilityChance: 0,
   damage: 1,
   grip: WeaponGrip.OneHanded,
   name: "Unarmed",

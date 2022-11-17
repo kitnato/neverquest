@@ -76,12 +76,12 @@ export const ATTRIBUTES: Record<AttributeType, Attribute> = {
     increment: 0.03,
     name: "Luck",
   },
-  [AttributeType.ParryChance]: {
+  [AttributeType.ParryDamage]: {
     base: 0,
-    description: "Increases parry chance",
+    description: "Increases damage absorbed and reflected when parrying",
     Icon,
     increment: 0.02,
-    maximum: 0.8,
+    maximum: 0.5,
     name: "Finesse",
     requiredSkill: SkillType.Parry,
   },
@@ -132,7 +132,7 @@ export const ATTRIBUTES_ORDER = [
   AttributeType.CriticalDamage,
   AttributeType.BleedDamage,
   AttributeType.DodgeChance,
-  AttributeType.ParryChance,
+  AttributeType.ParryDamage,
   AttributeType.StaggerDuration,
   AttributeType.Loot,
 ];

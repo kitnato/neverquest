@@ -69,7 +69,7 @@ export function generateShield({
   const { blockRange, staggerModifier, staminaCost, weight } = SHIELD_SPECIFICATIONS[type];
 
   return {
-    block: getFromRange(blockRange),
+    blockChance: getFromRange(blockRange),
     name:
       name ||
       LOCRA.generateArtifact({
@@ -83,7 +83,7 @@ export function generateShield({
         tags,
       }),
     price: level * 2 + Math.ceil(level / 1.5),
-    stagger: (800 + Math.floor(level * 10)) * staggerModifier,
+    staggerChance: (0.1 + Math.floor((level * 2) / 100)) * staggerModifier,
     staminaCost,
     type,
     weight,
@@ -109,11 +109,14 @@ export function generateWeapon({
   type: WeaponType;
   weaponClass: WeaponClass;
 }): Weapon {
-  const { damage, price, rate, staminaCost, weight } = getWeaponSpecifications(level);
+  const { damage, modifier, price, rate, staminaCost, weight } = getWeaponSpecifications(level);
 
-  return {
+  const weapon = {
+    abilityChance: 0,
+    bleedChance: 0,
     damage,
-    grip: WeaponGrip.OneHanded, // TODO
+    // TODO
+    grip: WeaponGrip.OneHanded,
     name:
       name ||
       LOCRA.generateArtifact({
@@ -134,4 +137,18 @@ export function generateWeapon({
     weaponClass,
     weight,
   };
+
+  switch (weaponClass) {
+    case WeaponClass.Blunt:
+      weapon.abilityChance = modifier * (0.1 + Math.floor((level * 2) / 90));
+      break;
+    case WeaponClass.Piercing:
+      weapon.abilityChance = modifier * (0.2 + Math.floor((level * 2) / 100));
+      break;
+    case WeaponClass.Slashing:
+      weapon.abilityChance = modifier * (0.15 + Math.floor((level * 2) / 100));
+      break;
+  }
+
+  return weapon;
 }

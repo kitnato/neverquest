@@ -6,7 +6,7 @@ import useAttack from "@neverquest/hooks/actions/useAttack";
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { isAttacking, isLooting, isRecovering } from "@neverquest/state/character";
 import { isMonsterDead } from "@neverquest/state/monster";
-import { canAttack } from "@neverquest/state/reserves";
+import { canAttackOrParry } from "@neverquest/state/reserves";
 import { totalAttackRate } from "@neverquest/state/statistics";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
@@ -16,7 +16,7 @@ export default function () {
   const isLootingValue = useRecoilValue(isLooting);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isRecoveringValue = useRecoilValue(isRecovering);
-  const canAttackValue = useRecoilValue(canAttack);
+  const canAttackOrParryValue = useRecoilValue(canAttackOrParry);
   const totalAttackRateValue = useRecoilValue(totalAttackRate);
 
   const [deltaAttack, setDeltaAttack] = useState(0);
@@ -31,20 +31,22 @@ export default function () {
   }, [attack, deltaAttack, totalAttackRateValue]);
 
   useEffect(() => {
-    if (!canAttackValue || !isAttackingValue || isLootingValue || isMonsterDeadValue) {
+    if (!canAttackOrParryValue || !isAttackingValue || isLootingValue || isMonsterDeadValue) {
       setDeltaAttack(0);
     }
-  }, [canAttackValue, isAttackingValue, isLootingValue, isMonsterDeadValue]);
+  }, [canAttackOrParryValue, isAttackingValue, isLootingValue, isMonsterDeadValue]);
 
   useAnimation(
     (delta) => setDeltaAttack((current) => current + delta),
-    !canAttackValue || !isAttackingValue || isLootingValue || isRecoveringValue
+    !canAttackOrParryValue || !isAttackingValue || isLootingValue || isRecoveringValue
   );
 
   return (
     <LabelledProgressBar
       disableTransitions
-      label={canAttackValue ? formatMilliseconds(totalAttackRateValue - deltaAttack) : "EXHAUSTED"}
+      label={
+        canAttackOrParryValue ? formatMilliseconds(totalAttackRateValue - deltaAttack) : "EXHAUSTED"
+      }
       value={(deltaAttack / totalAttackRateValue) * 100}
       variant={UIVariant.Secondary}
     />

@@ -22,9 +22,9 @@ export const currentStamina = atom({
 
 // SELECTORS
 
-export const canAttack = selector({
+export const canAttackOrParry = selector({
   get: ({ get }) => get(currentStamina) >= get(weapon).staminaCost,
-  key: "canAttack",
+  key: "canAttackOrParry",
 });
 
 export const canBlock = selector({

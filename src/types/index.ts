@@ -61,8 +61,8 @@ export type Gear = Armor | Shield | Weapon;
 export type Possession = Gear | Item;
 
 export type Shield = ItemBase & {
-  block: number;
-  stagger: number;
+  blockChance: number;
+  staggerChance: number;
   staminaCost: number;
   type?: ShieldType;
 };
@@ -76,12 +76,10 @@ export interface Skill {
 }
 
 export type Weapon = ItemBase & {
-  bleedChance?: number;
+  abilityChance: number;
   damage: number;
   grip: WeaponGrip;
-  parryChance?: number;
   rate: number;
-  staggerDuration?: number;
   staminaCost: number;
   type: WeaponType;
   weaponClass: WeaponClass;

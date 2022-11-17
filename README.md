@@ -84,7 +84,7 @@ Affects maximum [total stamina](#stamina).
 
 #### Finesse
 
-Affects [parry chance](#parry-chance). Required skill: [Escrime](#escrime).
+Affects [parry absorption](#parry-absorption) & [parry damage](#parry-damage) in equal measure. Required skill: [Escrime](#escrime).
 
 #### Fortitude
 
@@ -192,11 +192,17 @@ Time duration until [health](#health) is restored by one point.
 
 Can be increased with the [Vigor](#vigor) attribute.
 
+#### Parry absorption
+
+Percentage of attacking damage after current [protection](#protection) that is subtracted upon a successful parry (base: 33%). Can be increased with the [Finesse](#finesse) attribute.
+
 #### Parry chance
 
-Percentage determining a successful [parry](#parry).
+Percentage chance determining a successful [parry](#parry) when defending.
 
-Can be increased with the [Finesse](#finesse) attribute.
+#### Parry damage
+
+Percentage of attacking damage that is inflicted on the attacker upon a successful parry (base: 25%). Can be increased with the [Finesse](#finesse) attribute.
 
 #### Protection
 
@@ -208,7 +214,7 @@ Recovery occurs when the character is dealt damage, halting regeneration of [res
 
 #### Stagger chance
 
-Percentage determining the chance of [incapacitating](#stagger) the monster when attacking or defending based primarily on the current [gear](#gear) ([shields](#shields) and [blunt weapons](#blunt-weapon)) for a certain [duration](#stagger-duration).
+Percentage determining the chance of [staggering](#stagger) (incapacitating) the monster when attacking or defending based primarily on the current [gear](#gear) ([shields](#shields) and [blunt weapons](#blunt-weapon)) for a certain [duration](#stagger-duration).
 
 #### Stagger duration
 
@@ -238,7 +244,7 @@ The character will enter a **resting** state once the wave is complete and there
 
 ### Combat mechanics
 
-Apart from attacking, retreating and defending, there are several mechanics that occur during combat.
+Apart from the ones marked in bold in the [combat](#combat) section, there are several additional mechanics that occur during combat.
 
 Some of the following effects are intrinsic to gear and aren't controlled directly the way [attributes](#attributes) are.
 
@@ -274,7 +280,7 @@ Dodging is only possible after acquiring the [Evasion](#evasion) skill.
 
 #### Exhaustion
 
-When there is no [stamina](#stamina) to attack or block, the character must wait for it to [regenerate](#stamina-regeneration-rate) first before being able to do either.
+When there is not enough [stamina](#stamina) to pay for an attack, [parry](#parry) or [block](#block), sufficient [stamina regeneration](#stamina-regeneration-rate) must occur first before being able to do any of them.
 
 #### Looting
 
@@ -284,9 +290,9 @@ The looted resources can only be collected once the [wave](#wilderness) is compl
 
 #### Parry
 
-A successful parry will deal 50% of the total damage of the inflicted attack (after protection) and reflect the other 50% back to the attacker.
+A successful parry [absorbs](#parry-absorption) a percentage of the total damage of an attack and [reflects](#parry-damage) a percentage back to the attacker. These percentages are determined by the [Finesse](#finesse) attribute.
 
-The overall chance to parry an attack is determined by the [parry chance](#parry-chance) statistic, which is influenced by the current gear ([slashing weapons](#slashing-weapon) and [medium shields](#medium-shield)) and the [Finesse](#finesse) attribute.
+The overall chance to parry an attack is determined by the [parry chance](#parry-chance), which is influenced by currently-equipped gear ([slashing weapons](#slashing-weapon). When parrying occurs, the stamina cost of the currently-equipped weapon is paid. If [exhausted](#exhaustion), no parrying can occur.
 
 Parrying is only possible after acquiring the [Escrime](#escrime) skill.
 
@@ -294,7 +300,7 @@ Parrying is only possible after acquiring the [Escrime](#escrime) skill.
 
 When staggered, the monster will not be able to attack for a certain duration. The character is considered staggered themselves when they are [recovering](#recovery-rate).
 
-The overall [stagger chance](#stagger-chance) statistic is determined by the current gear ([shields](#shields) and [blunt weapons](#blunt-weapon)). The [stagger duration](#stagger-duration) is influenced by the [Might](#might) attribute in addition to the current gear.
+The overall [stagger chance](#stagger-chance) statistic is determined by the current gear ([shields](#shields) and [blunt weapons](#blunt-weapon)). The [stagger duration](#stagger-duration) is influenced by the [Might](#might).
 
 Staggering is only possible after acquiring the [Traumatology](#traumatology) skill.
 
@@ -396,7 +402,7 @@ Viewing encumbrance and managing it can only be accomplished once the [knapsack]
 
 Items that can be equipped and unequipped from the inventory.
 
-The [merchant](#merchant) sells low quality versions of all gear types at various levels, which lack the property marked with a `[HQ]` tag. To acquire gear with the `[HQ]` property, they need to be crafted by the [blacksmith](#blacksmith).
+The [merchant](#merchant) sells one of each gear type at various levels. To acquire improved gear, they need to be crafted by the [blacksmith](#blacksmith).
 
 #### Weapons
 
@@ -473,15 +479,13 @@ No initial modifiers.
 ##### Hide armor
 
 - Low protection
-- `[HQ]` Lower [bleed](#bleed) damage
 - Low cost
 
 ##### Reinforced armor
 
 - Medium protection
 - Low -% dodge
-- `[HQ]` Lower bleed damage & duration
-- `[HQ]` +% [block chance](#block-chance)
+- Lower bleed damage
 - Medium cost
 
 ##### Plate armor
@@ -491,9 +495,9 @@ No initial modifiers.
 - High protection
 - High -% dodge
 - -% attack rate
-- `[HQ]` Lower bleed damage & duration
-- `[HQ]` +% block chance
-- `[HQ]` Chance to [deflect](#deflection) spells
+- Immunity to bleed
+- +% block chance
+- Chance to [deflect](#deflection) spells
 - High cost
 
 #### Off-hand
@@ -504,30 +508,30 @@ This slot allows the wielding of [shields](#shields).
 
 ##### Shields
 
-Grants block chance, providing a percentage [chance to block](#block-chance) all incoming damage. Also grants [stagger](#stagger) with the acquisition of the [Traumatology](#traumatology) skill.
+Grants a percentage [chance to block](#block-chance) all incoming damage. Also grants [stagger chance](#stagger) with the acquisition of the [Traumatology](#traumatology) skill.
 
 ###### Small shield
 
 - Low chance to block
-- Low stagger duration
+- Low stagger chance
 - Low stamina cost
-- `[HQ]` +% [dodge chance](#dodge-chance)
+- +% [dodge chance](#dodge-chance)
 - Low cost
 
 ###### Medium shield
 
 - Medium chance to block
-- Medium stagger duration
+- Medium stagger chance
 - Low stamina cost
-- `[HQ]` +% [parry chance](#parry-chance)
+- +% [parry chance](#parry-chance)
 - Medium cost
 
 ###### Tower shield
 
 - High chance to block
-- High stagger duration
+- High stagger chance
 - High stamina cost
-- `[HQ]` +% [protection](#protection)
+- +% [protection](#protection)
 - High cost
 
 #### Trinkets
@@ -626,7 +630,7 @@ Allows the use of a one-handed weapon in main hand as well as offhand.
 
 #### Escrime
 
-Unlocks the ability to [parry](#parry) when using [slashing](#slashing-weapon) weapons and [medium shields](#medium-shield). Unlocks the [Finesse](#finesse) attribute.
+Unlocks the ability to [parry](#parry) when using [slashing](#slashing-weapon) weapons. Also unlocks the [Finesse](#finesse) attribute.
 
 #### Evasion
 

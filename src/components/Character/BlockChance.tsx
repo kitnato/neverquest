@@ -9,7 +9,7 @@ import { AnimationType } from "@neverquest/types/ui";
 import { formatPercentage } from "@neverquest/utilities/helpers";
 
 export default function () {
-  const { block } = useRecoilValue(shield);
+  const { blockChance } = useRecoilValue(shield);
   const showBlockChanceValue = useRecoilValue(isShowing(ShowingType.BlockChance));
 
   if (!showBlockChanceValue) {
@@ -19,7 +19,7 @@ export default function () {
   return (
     <IconDisplay
       animation={AnimationType.FlipInX}
-      contents={formatPercentage(block)}
+      contents={formatPercentage(blockChance)}
       Icon={Icon}
       tooltip="Block chance"
     />

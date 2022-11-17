@@ -32,11 +32,11 @@ export default function () {
       setDeltaMonsterHealth([
         {
           color: FloatingText.Negative,
-          value: -bleedDamageValue,
+          value: "BLEEDING",
         },
         {
           color: FloatingText.Negative,
-          value: ` BLEED`,
+          value: ` (-${bleedDamageValue})`,
         },
       ]);
       setDeltaBleeding(0);

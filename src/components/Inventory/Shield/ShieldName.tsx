@@ -7,7 +7,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { Shield } from "@neverquest/types";
 import { ShowingType, SkillType } from "@neverquest/types/enums";
-import { capitalizeAll, formatMilliseconds, formatPercentage } from "@neverquest/utilities/helpers";
+import { capitalizeAll, formatPercentage } from "@neverquest/utilities/helpers";
 
 export default function ({ shield }: { shield: Shield }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
@@ -15,7 +15,7 @@ export default function ({ shield }: { shield: Shield }) {
   const shieldSkillValue = useRecoilValue(skills(SkillType.Shields));
   const staggerSkillValue = useRecoilValue(skills(SkillType.Stagger));
 
-  const { block, name, stagger, staminaCost, type, weight } = shield;
+  const { blockChance, name, staggerChance, staminaCost, type, weight } = shield;
 
   return (
     <OverlayTrigger
@@ -29,15 +29,15 @@ export default function ({ shield }: { shield: Shield }) {
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Block chance:</td>
 
-                  <td>{formatPercentage(block)}</td>
+                  <td>{formatPercentage(blockChance)}</td>
                 </tr>
 
                 <tr>
                   {staggerSkillValue ? (
                     <>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Stagger duration:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance:</td>
 
-                      <td>{formatMilliseconds(stagger)}</td>
+                      <td>{formatPercentage(staggerChance)}</td>
                     </>
                   ) : (
                     <td className="text-end">{UNKNOWN}</td>

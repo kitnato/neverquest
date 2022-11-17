@@ -9,7 +9,7 @@ import {
   monsterBleedingDuration,
   monsterStatusElement,
 } from "@neverquest/state/monster";
-import { canAttack } from "@neverquest/state/reserves";
+import { canAttackOrParry } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
 import { totalBleedChance, totalDamage } from "@neverquest/state/statistics";
 import { DeltaType, SkillType } from "@neverquest/types/enums";
@@ -26,7 +26,7 @@ export default function () {
 
         const { staminaCost } = get(weapon);
 
-        if (get(canAttack)) {
+        if (get(canAttackOrParry)) {
           const hasInflictedBleed =
             get(monsterBleedingDuration) === 0 &&
             get(skills(SkillType.Bleed)) &&

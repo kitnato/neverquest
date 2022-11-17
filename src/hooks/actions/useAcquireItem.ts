@@ -22,6 +22,8 @@ export default function () {
     if (name === ITEM_KNAPSACK.name) {
       set(encumbranceMaximum, (current) => current + 1);
       set(hasKnapsack, true);
+
+      return true;
     }
 
     set(inventory, (current) => ({

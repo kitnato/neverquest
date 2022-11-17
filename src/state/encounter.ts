@@ -1,32 +1,15 @@
 import { atom, selector } from "recoil";
 
 import { UNKNOWN } from "@neverquest/constants";
-import LOCRA from "@neverquest/locra";
 import localStorage from "@neverquest/state/effects/localStorage";
-import { isNSFW } from "@neverquest/state/settings";
 import { LocationType, StorageKey } from "@neverquest/types/enums";
 
-// ATOMS
-
-export const level = atom({
-  default: 1,
-  effects: [localStorage<number>(StorageKey.Level)],
-  key: StorageKey.Level,
-});
-
-export const mode = atom({
-  default: LocationType.Wilderness,
-  effects: [localStorage<LocationType>(StorageKey.Mode)],
-  key: StorageKey.Mode,
-});
-
-export const progress = atom({
-  default: 0,
-  effects: [localStorage<number>(StorageKey.Progress)],
-  key: StorageKey.Progress,
-});
-
 // SELECTORS
+
+export const maximumLevel = selector({
+  get: ({ get }) => get(locations).length,
+  key: "maximumLevel",
+});
 
 export const isLevelCompleted = selector({
   get: ({ get }) => get(progress) === get(progressMax),
@@ -45,23 +28,46 @@ export const progressMax = selector({
 
 export const location = selector({
   get: ({ get }) => {
-    const nsfwValue = get(isNSFW);
     const isWildernessValue = get(isWilderness);
     const levelValue = get(level);
+    const locationsValue = get(locations);
+    const maximumLevelValue = get(maximumLevel);
 
     if (isWildernessValue) {
-      if (levelValue === 1) {
+      if (levelValue === 1 && maximumLevelValue === 1) {
         return UNKNOWN;
       }
 
-      return LOCRA.generateLocation({
-        hasPrefix: Math.random() < 0.8,
-        hasSuffix: Math.random() < 0.1 * Math.ceil(levelValue / 2),
-        isNSFW: nsfwValue,
-      });
+      return locationsValue[levelValue - 1];
     }
 
     return "Caravan";
   },
   key: "location",
+});
+
+// ATOMS
+
+export const level = atom({
+  default: maximumLevel,
+  effects: [localStorage<LocationType>(StorageKey.Level)],
+  key: StorageKey.Level,
+});
+
+export const locations = atom<string[]>({
+  default: [],
+  effects: [localStorage<string[]>(StorageKey.Locations)],
+  key: StorageKey.Locations,
+});
+
+export const mode = atom({
+  default: LocationType.Wilderness,
+  effects: [localStorage<LocationType>(StorageKey.Mode)],
+  key: StorageKey.Mode,
+});
+
+export const progress = atom({
+  default: 0,
+  effects: [localStorage<number>(StorageKey.Progress)],
+  key: StorageKey.Progress,
 });

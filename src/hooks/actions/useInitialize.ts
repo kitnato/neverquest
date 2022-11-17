@@ -1,5 +1,5 @@
 import ls from "localstorage-slim";
-import { useRecoilCallback } from "recoil";
+import { useRecoilCallback, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { KEY_SESSION } from "@neverquest/constants";
 import { ATTRIBUTES_INITIAL } from "@neverquest/constants/attributes";
@@ -7,27 +7,24 @@ import { CREW_INITIAL } from "@neverquest/constants/caravan";
 import useCreateMonster from "@neverquest/hooks/actions/useCreateMonster";
 import { attributes } from "@neverquest/state/attributes";
 import { crew } from "@neverquest/state/caravan";
-import {
-  currentHealth,
-  currentStamina,
-  maximumHealth,
-  maximumStamina,
-} from "@neverquest/state/reserves";
+import { level, locations } from "@neverquest/state/encounter";
+import { isNSFW } from "@neverquest/state/settings";
 import { CrewStatus } from "@neverquest/types/enums";
-import { getSnapshotGetter } from "@neverquest/utilities/helpers";
+import { generateLocation } from "@neverquest/utilities/generators";
 
 export default function () {
   const createMonster = useCreateMonster();
 
-  return useRecoilCallback(({ set, snapshot }) => () => {
-    const get = getSnapshotGetter(snapshot);
+  const levelValue = useRecoilValue(level);
+  const isNSFWValue = useRecoilValue(isNSFW);
+  const setLocations = useSetRecoilState(locations);
 
+  return useRecoilCallback(({ set }) => () => {
     if (ls.get(KEY_SESSION) !== null) {
       return;
     }
 
-    set(currentHealth, get(maximumHealth));
-    set(currentStamina, get(maximumStamina));
+    setLocations([generateLocation({ isNSFW: isNSFWValue, level: levelValue })]);
     createMonster();
 
     ATTRIBUTES_INITIAL.forEach((type) =>

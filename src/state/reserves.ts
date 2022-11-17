@@ -6,20 +6,6 @@ import localStorage from "@neverquest/state/effects/localStorage";
 import { shield, weapon } from "@neverquest/state/inventory";
 import { AttributeType, StorageKey } from "@neverquest/types/enums";
 
-// ATOMS
-
-export const currentHealth = atom({
-  default: 0,
-  effects: [localStorage<number>(StorageKey.CurrentHealth)],
-  key: StorageKey.CurrentHealth,
-});
-
-export const currentStamina = atom({
-  default: 0,
-  effects: [localStorage<number>(StorageKey.CurrentStamina)],
-  key: StorageKey.CurrentStamina,
-});
-
 // SELECTORS
 
 export const canAttackOrParry = selector({
@@ -67,4 +53,18 @@ export const maximumStamina = selector({
     return base + increment * points;
   },
   key: "maximumStamina",
+});
+
+// ATOMS
+
+export const currentHealth = atom({
+  default: maximumHealth,
+  effects: [localStorage<number>(StorageKey.CurrentHealth)],
+  key: StorageKey.CurrentHealth,
+});
+
+export const currentStamina = atom({
+  default: maximumStamina,
+  effects: [localStorage<number>(StorageKey.CurrentStamina)],
+  key: StorageKey.CurrentStamina,
 });

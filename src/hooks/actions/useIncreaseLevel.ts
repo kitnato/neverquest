@@ -3,9 +3,11 @@ import { useRecoilCallback } from "recoil";
 import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/constants/caravan";
 import useCreateMonster from "@neverquest/hooks/actions/useCreateMonster";
 import { crew } from "@neverquest/state/caravan";
-import { level, progress } from "@neverquest/state/encounter";
+import { level, locations, progress } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
+import { isNSFW } from "@neverquest/state/settings";
 import { CrewStatus, ShowingType } from "@neverquest/types/enums";
+import { generateLocation } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/helpers";
 
 export default function () {
@@ -43,6 +45,13 @@ export default function () {
         }
       }
     });
+
+    if (!get(locations)[nextLevel]) {
+      set(locations, (current) => [
+        ...current,
+        generateLocation({ isNSFW: get(isNSFW), level: nextLevel }),
+      ]);
+    }
 
     set(level, nextLevel);
     set(progress, 0);

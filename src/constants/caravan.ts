@@ -111,7 +111,7 @@ export const MERCHANT_OFFERS: (
       type: ShieldType.Small,
     },
   ],
-  [ITEM_KNAPSACK],
+  [ITEM_KNAPSACK, ITEM_COMPASS, ITEM_HEARTHSTONE],
   [
     {
       type: WeaponType.Melee,
@@ -124,7 +124,6 @@ export const MERCHANT_OFFERS: (
       type: ShieldType.Medium,
     },
   ],
-  [ITEM_COMPASS],
   [
     {
       type: WeaponType.Melee,
@@ -134,5 +133,4 @@ export const MERCHANT_OFFERS: (
       type: ShieldType.Tower,
     },
   ],
-  [ITEM_HEARTHSTONE],
 ];

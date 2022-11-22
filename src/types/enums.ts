@@ -60,8 +60,8 @@ export enum DeltaType {
 }
 
 export enum LocationType {
-  Caravan,
-  Wilderness,
+  Caravan = "Caravan",
+  Wilderness = "Wilderness",
 }
 
 export enum LootType {

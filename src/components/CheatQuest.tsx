@@ -4,7 +4,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import useGenerateMerchantInventory from "@neverquest/hooks/actions/useGenerateMerchantInventory";
 import useIncreaseLevel from "@neverquest/hooks/actions/useIncreaseLevel";
 import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
-import { level, progress, progressMax } from "@neverquest/state/encounter";
+import { isWilderness, level, progress, progressMax } from "@neverquest/state/encounter";
 import { skills } from "@neverquest/state/skills";
 import { SkillType } from "@neverquest/types/enums";
 
@@ -15,6 +15,7 @@ declare global {
 }
 
 export default function () {
+  const isWildernessValue = useRecoilValue(isWilderness);
   const levelValue = useRecoilValue(level);
   const progressMaxValue = useRecoilValue(progressMax);
   const setProgress = useSetRecoilState(progress);
@@ -107,6 +108,7 @@ export default function () {
   }, [
     generateMerchantInventory,
     increaseLevel,
+    isWildernessValue,
     levelValue,
     progressMaxValue,
     setProgress,
@@ -114,5 +116,5 @@ export default function () {
     transactResources,
   ]);
 
-  return <></>;
+  return null;
 }

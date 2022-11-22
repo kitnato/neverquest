@@ -27,7 +27,7 @@ export const locationName = selector({
       return get(wilderness).name;
     }
 
-    return "Caravan";
+    return LocationType.Caravan;
   },
   key: "location",
 });
@@ -84,7 +84,7 @@ export const wilderness = selector<Wilderness>({
 
 export const level = atom({
   default: maximumLevel,
-  effects: [localStorage<LocationType>(StorageKey.Level)],
+  effects: [localStorage<number>(StorageKey.Level)],
   key: StorageKey.Level,
 });
 

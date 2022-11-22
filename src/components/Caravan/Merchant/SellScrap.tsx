@@ -18,6 +18,41 @@ export default function () {
 
   const canSell = scrapValue >= EXCHANGE_SCRAP;
 
+  const handleSellSingle = () =>
+    transactResources({
+      coinsDifference: EXCHANGE_COIN,
+      scrapDifference: -EXCHANGE_SCRAP,
+    });
+  const handleSellAll = () => {
+    const amount = Math.floor(scrapValue / EXCHANGE_SCRAP);
+
+    transactResources({
+      coinsDifference: amount,
+      scrapDifference: -(amount * EXCHANGE_SCRAP),
+    });
+  };
+
+  const SellButton = ({ handleClick, label }: { handleClick: () => void; label: string }) => (
+    <OverlayTrigger
+      overlay={<Tooltip>No scrap left.</Tooltip>}
+      placement="top"
+      trigger={canSell ? [] : ["hover", "focus"]}
+    >
+      <span className="d-inline-block">
+        <Button
+          disabled={!canSell}
+          onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+            currentTarget.blur();
+            handleClick();
+          }}
+          variant={UIVariant.Outline}
+        >
+          {label}
+        </Button>
+      </span>
+    </OverlayTrigger>
+  );
+
   return (
     <div className={CLASS_DIV_FULL_WIDTH}>
       <Stack direction="horizontal" gap={3}>
@@ -28,28 +63,11 @@ export default function () {
         <Coins tooltip="Coins (receive)" value={EXCHANGE_COIN} />
       </Stack>
 
-      <OverlayTrigger
-        overlay={<Tooltip>Not enough scrap!</Tooltip>}
-        placement="top"
-        trigger={canSell ? [] : ["hover", "focus"]}
-      >
-        <span className="d-inline-block">
-          <Button
-            disabled={!canSell}
-            onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-              currentTarget.blur();
+      <Stack direction="horizontal" gap={3}>
+        <SellButton handleClick={handleSellSingle} label="Sell" />
 
-              transactResources({
-                coinsDifference: EXCHANGE_COIN,
-                scrapDifference: -EXCHANGE_SCRAP,
-              });
-            }}
-            variant={UIVariant.Outline}
-          >
-            Sell
-          </Button>
-        </span>
-      </OverlayTrigger>
+        <SellButton handleClick={handleSellAll} label="Sell all" />
+      </Stack>
     </div>
   );
 }

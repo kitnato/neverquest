@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
+import useGenerateMerchantInventory from "@neverquest/hooks/actions/useGenerateMerchantInventory";
 import useIncreaseLevel from "@neverquest/hooks/actions/useIncreaseLevel";
 import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
 import { level, progress, progressMax } from "@neverquest/state/encounter";
@@ -26,6 +27,7 @@ export default function () {
   const setSkillShields = useSetRecoilState(skills(SkillType.Shields));
   const setSkillStagger = useSetRecoilState(skills(SkillType.Stagger));
 
+  const generateMerchantInventory = useGenerateMerchantInventory();
   const increaseLevel = useIncreaseLevel();
   const transactResources = useTransactResources();
 
@@ -73,7 +75,7 @@ export default function () {
           break;
         // Source engine
         case "noclip":
-          setProgress(progressMaxValue);
+          setProgress((current) => progressMaxValue - current);
           break;
         // The Sims
         case "rosebud":
@@ -94,6 +96,7 @@ export default function () {
 
             for (let i = 0; i < difference; i++) {
               increaseLevel();
+              generateMerchantInventory();
             }
           }
           break;
@@ -101,7 +104,15 @@ export default function () {
           return;
       }
     };
-  }, [transactResources, levelValue, progressMaxValue, increaseLevel, setProgress, setSkill]);
+  }, [
+    generateMerchantInventory,
+    increaseLevel,
+    levelValue,
+    progressMaxValue,
+    setProgress,
+    setSkill,
+    transactResources,
+  ]);
 
   return <></>;
 }

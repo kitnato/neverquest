@@ -21,7 +21,7 @@ export default function () {
   return (
     <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
       <Card.Body>
-        <Row>
+        <Row className="align-items-center">
           <Col>
             <WeaponEquipped />
           </Col>

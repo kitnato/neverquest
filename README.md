@@ -701,6 +701,7 @@ Meta progression. Grant bonuses when completed.
 - Dodge 1/5/10/25/50/100 strikes
 - Dodge 3 strikes in a row
 - Reflect damage
+- After acquiring Compass, clear all levels before returning to Caravan
 
 ### Caravan achievements
 

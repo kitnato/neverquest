@@ -8,6 +8,7 @@ import MonsterDamage from "@neverquest/components/Monster/MonsterDamage";
 import MonsterHealth from "@neverquest/components/Monster/MonsterHealth";
 import MonsterName from "@neverquest/components/Monster/MonsterName";
 import MonsterStagger from "@neverquest/components/Monster/MonsterStagger";
+import useCreateMonster from "@neverquest/hooks/actions/useCreateMonster";
 import { isMonsterNew, monsterStatusElement } from "@neverquest/state/monster";
 import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
 import { animateElement } from "@neverquest/utilities/helpers";
@@ -18,6 +19,8 @@ export default function () {
 
   const element = useRef(null);
 
+  const createMonster = useCreateMonster();
+
   useEffect(() => {
     setMonsterStatusElement(element.current);
 
@@ -26,14 +29,17 @@ export default function () {
 
   useEffect(() => {
     if (isMonsterNewValue) {
+      createMonster();
+
       animateElement({
         element: element.current,
         speed: AnimationSpeed.Faster,
         type: AnimationType.ZoomInRight,
       });
+
       setIsMonsterNew(false);
     }
-  }, [element, isMonsterNewValue, setIsMonsterNew]);
+  }, [createMonster, element, isMonsterNewValue, setIsMonsterNew]);
 
   return (
     <Card ref={element}>

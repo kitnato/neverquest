@@ -13,12 +13,6 @@ export const characterLevel = atom({
   key: StorageKey.CharacterLevel,
 });
 
-export const hasKnapsack = atom({
-  default: false,
-  effects: [localStorage<boolean>(StorageKey.HasKnapsack)],
-  key: StorageKey.HasKnapsack,
-});
-
 export const isAttacking = atom({
   default: false,
   effects: [localStorage<boolean>(StorageKey.IsAttacking)],

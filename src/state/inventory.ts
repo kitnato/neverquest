@@ -1,6 +1,7 @@
 import { atom, selector, selectorFamily } from "recoil";
 
 import { NO_ARMOR, NO_SHIELD, NO_WEAPON } from "@neverquest/constants/gear";
+import { ITEM_COMPASS } from "@neverquest/constants/items";
 import localStorage from "@neverquest/state/effects/localStorage";
 import { Armor, Inventory, Shield, Weapon } from "@neverquest/types";
 import { StorageKey } from "@neverquest/types/enums";
@@ -14,6 +15,12 @@ export const encumbranceMaximum = atom({
   key: StorageKey.EncumbranceMaximum,
 });
 
+export const hasKnapsack = atom({
+  default: false,
+  effects: [localStorage<boolean>(StorageKey.HasKnapsack)],
+  key: StorageKey.HasKnapsack,
+});
+
 export const inventory = atom<Inventory>({
   default: {},
   effects: [localStorage<Inventory>(StorageKey.Inventory)],
@@ -24,15 +31,15 @@ export const inventory = atom<Inventory>({
 
 export const armor = selector({
   get: ({ get }) => {
-    const currentInventory = get(inventory);
-    const equippedArmorID = Object.getOwnPropertyNames(currentInventory).filter((id) => {
-      const { isEquipped, possession } = currentInventory[id];
+    const inventoryValue = get(inventory);
+    const equippedArmorID = Object.getOwnPropertyNames(inventoryValue).filter((id) => {
+      const { isEquipped, possession } = inventoryValue[id];
 
       return isEquipped && isArmor(possession);
     })[0];
 
     if (equippedArmorID) {
-      return currentInventory[equippedArmorID].possession as Armor;
+      return inventoryValue[equippedArmorID].possession as Armor;
     }
 
     return NO_ARMOR;
@@ -60,6 +67,23 @@ export const encumbrance = selector({
   key: "encumbrance",
 });
 
+export const hasCompass = selector({
+  get: ({ get }) => {
+    const inventoryValue = get(inventory);
+
+    return (
+      Object.getOwnPropertyNames(inventoryValue).findIndex((id) => {
+        const {
+          possession: { name },
+        } = inventoryValue[id];
+
+        return name === ITEM_COMPASS.name;
+      }) !== -1
+    );
+  },
+  key: "hasCompass",
+});
+
 export const isInventoryFull = selector({
   get: ({ get }) => get(encumbrance) === get(encumbranceMaximum),
   key: "isInventoryFull",
@@ -67,15 +91,15 @@ export const isInventoryFull = selector({
 
 export const shield = selector({
   get: ({ get }) => {
-    const currentInventory = get(inventory);
-    const equippedShieldID = Object.getOwnPropertyNames(currentInventory).filter((id) => {
-      const { isEquipped, possession } = currentInventory[id];
+    const inventoryValue = get(inventory);
+    const equippedShieldID = Object.getOwnPropertyNames(inventoryValue).filter((id) => {
+      const { isEquipped, possession } = inventoryValue[id];
 
       return isEquipped && isShield(possession);
     })[0];
 
     if (equippedShieldID) {
-      return currentInventory[equippedShieldID].possession as Shield;
+      return inventoryValue[equippedShieldID].possession as Shield;
     }
 
     return NO_SHIELD;
@@ -85,15 +109,15 @@ export const shield = selector({
 
 export const weapon = selector({
   get: ({ get }) => {
-    const currentInventory = get(inventory);
-    const equippedWeaponID = Object.getOwnPropertyNames(currentInventory).filter((id) => {
-      const { isEquipped, possession } = currentInventory[id];
+    const inventoryValue = get(inventory);
+    const equippedWeaponID = Object.getOwnPropertyNames(inventoryValue).filter((id) => {
+      const { isEquipped, possession } = inventoryValue[id];
 
       return isEquipped && isWeapon(possession);
     })[0];
 
     if (equippedWeaponID) {
-      return currentInventory[equippedWeaponID].possession as Weapon;
+      return inventoryValue[equippedWeaponID].possession as Weapon;
     }
 
     return NO_WEAPON;

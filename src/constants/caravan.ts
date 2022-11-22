@@ -4,7 +4,12 @@ import Medic from "@neverquest/components/Caravan/Medic";
 import Mercenary from "@neverquest/components/Caravan/Mercenary";
 import Merchant from "@neverquest/components/Caravan/Merchant";
 import Tailor from "@neverquest/components/Caravan/Tailor";
-import { ITEM_COMPASS, ITEM_HEARTHSTONE, ITEM_KNAPSACK } from "@neverquest/constants/items";
+import {
+  ITEM_COMPASS,
+  ITEM_HEARTHSTONE,
+  ITEM_KNAPSACK,
+  ITEM_LODESTONE,
+} from "@neverquest/constants/items";
 import { ShieldType, WeaponClass, WeaponType } from "@neverquest/locra/types";
 import { CrewMember, Item } from "@neverquest/types";
 import { ArmorClass, CrewType } from "@neverquest/types/enums";
@@ -111,23 +116,22 @@ export const MERCHANT_OFFERS: (
       type: ShieldType.Small,
     },
   ],
-  [ITEM_KNAPSACK, ITEM_COMPASS, ITEM_HEARTHSTONE],
+  [ITEM_KNAPSACK],
+  [ITEM_LODESTONE, ITEM_COMPASS, ITEM_HEARTHSTONE],
   [
     {
       type: WeaponType.Melee,
       weaponClass: WeaponClass.Slashing,
     },
     {
+      type: WeaponType.Melee,
+      weaponClass: WeaponClass.Blunt,
+    },
+    {
       armorClass: ArmorClass.Reinforced,
     },
     {
       type: ShieldType.Medium,
-    },
-  ],
-  [
-    {
-      type: WeaponType.Melee,
-      weaponClass: WeaponClass.Blunt,
     },
     {
       type: ShieldType.Tower,

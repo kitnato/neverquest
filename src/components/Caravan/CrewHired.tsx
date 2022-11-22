@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
+import { CLASS_DIV_FULL_WIDTH } from "@neverquest/constants";
 import { CREW_MEMBERS } from "@neverquest/constants/caravan";
 import { ReactComponent as Icon } from "@neverquest/icons/cowled.svg";
 import { crew } from "@neverquest/state/caravan";
@@ -21,7 +22,7 @@ export default function ({ setActive, type }: { setActive: () => void; type: Cre
   return (
     <IconDisplay
       contents={
-        <div className="align-items-center d-flex justify-content-between w-100">
+        <div className={CLASS_DIV_FULL_WIDTH}>
           <span>{`"${monologues[monologueProgress]}"`}</span>
 
           <Button

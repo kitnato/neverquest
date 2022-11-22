@@ -84,3 +84,8 @@ export type Weapon = ItemBase & {
   type: WeaponType;
   weaponClass: WeaponClass;
 };
+
+export interface Wilderness {
+  name: string;
+  progress: number;
+}

@@ -2,7 +2,7 @@ import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { CLASS_TABLE_CELL_ITALIC, UNKNOWN } from "@neverquest/constants";
-import { hasKnapsack } from "@neverquest/state/character";
+import { hasKnapsack } from "@neverquest/state/inventory";
 import { skills } from "@neverquest/state/skills";
 import { Armor } from "@neverquest/types";
 import { SkillType } from "@neverquest/types/enums";

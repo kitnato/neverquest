@@ -63,13 +63,13 @@ export const SHIELD_SPECIFICATIONS: Record<
   }
 > = {
   [ShieldType.Medium]: {
-    blockRange: { maximum: 0.5, minimum: 0.25 },
+    blockRange: { maximum: 0.49, minimum: 0.25 },
     staggerModifier: 1.75,
     staminaCost: 2,
     weight: 2,
   },
   [ShieldType.Small]: {
-    blockRange: { maximum: 0.25, minimum: 0.1 },
+    blockRange: { maximum: 0.24, minimum: 0.1 },
     staggerModifier: 1.2,
     staminaCost: 1,
     weight: 1,

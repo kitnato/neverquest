@@ -17,6 +17,7 @@ export default function () {
   const [isMonsterEngagedValue, setMonsterEngaged] = useRecoilState(isMonsterEngaged);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
+
   const regenerateMonster = useRegenerateMonster();
 
   useEffect(() => {

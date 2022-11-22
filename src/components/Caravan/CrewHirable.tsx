@@ -4,6 +4,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import Coins from "@neverquest/components/Resource/Coins";
+import { CLASS_DIV_FULL_WIDTH } from "@neverquest/constants";
 import { CREW_MEMBERS } from "@neverquest/constants/caravan";
 import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
 import { ReactComponent as Icon } from "@neverquest/icons/cowled.svg";
@@ -25,7 +26,7 @@ export default function ({ type }: { type: CrewType }) {
   const isAffordable = price <= coinsValue;
 
   return (
-    <div className="align-items-center d-flex justify-content-between w-100">
+    <div className={CLASS_DIV_FULL_WIDTH}>
       <IconDisplay contents={name} description={description} Icon={Icon} tooltip={name} />
 
       <Stack direction="horizontal" gap={3}>

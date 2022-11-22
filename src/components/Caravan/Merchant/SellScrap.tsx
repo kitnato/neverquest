@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 
 import Coins from "@neverquest/components/Resource/Coins";
 import Scrap from "@neverquest/components/Resource/Scrap";
+import { CLASS_DIV_FULL_WIDTH } from "@neverquest/constants";
 import { EXCHANGE_COIN, EXCHANGE_SCRAP } from "@neverquest/constants/caravan";
 import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
 import { scrap } from "@neverquest/state/resources";
@@ -18,7 +19,7 @@ export default function () {
   const canSell = scrapValue >= EXCHANGE_SCRAP;
 
   return (
-    <div className="align-items-center d-flex justify-content-between w-100">
+    <div className={CLASS_DIV_FULL_WIDTH}>
       <Stack direction="horizontal" gap={3}>
         <Scrap tooltip="Scrap (give)" value={EXCHANGE_SCRAP} />
 

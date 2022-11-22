@@ -6,7 +6,8 @@ import DismissableScreen from "@neverquest/components/DismissableScreen";
 import IconImage from "@neverquest/components/IconImage";
 import Inventory from "@neverquest/components/Inventory";
 import { ReactComponent as Icon } from "@neverquest/icons/knapsack.svg";
-import { hasKnapsack, isAttacking } from "@neverquest/state/character";
+import { isAttacking } from "@neverquest/state/character";
+import { hasKnapsack } from "@neverquest/state/inventory";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 

@@ -26,7 +26,6 @@ export default function () {
     const merchantOffersIndex = levelValue - 1;
 
     if (MERCHANT_OFFERS[merchantOffersIndex]) {
-      // Merchant always offers one of each (low quality) gear at the current level, even if previously sold.
       const gearSettings = {
         hasPrefix: true,
         isNSFW: nsfwValue,

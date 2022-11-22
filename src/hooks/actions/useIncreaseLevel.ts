@@ -1,9 +1,8 @@
 import { useRecoilCallback } from "recoil";
 
 import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/constants/caravan";
-import useCreateMonster from "@neverquest/hooks/actions/useCreateMonster";
 import { crew } from "@neverquest/state/caravan";
-import { level, locations, progress } from "@neverquest/state/encounter";
+import { level, wildernesses } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isNSFW } from "@neverquest/state/settings";
 import { CrewStatus, ShowingType } from "@neverquest/types/enums";
@@ -11,8 +10,6 @@ import { generateLocation } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/helpers";
 
 export default function () {
-  const createMonster = useCreateMonster();
-
   return useRecoilCallback(({ set, snapshot }) => () => {
     const get = getSnapshotGetter(snapshot);
 
@@ -46,15 +43,13 @@ export default function () {
       }
     });
 
-    if (!get(locations)[nextLevel]) {
-      set(locations, (current) => [
+    if (!get(wildernesses)[nextLevel]) {
+      set(wildernesses, (current) => [
         ...current,
-        generateLocation({ isNSFW: get(isNSFW), level: nextLevel }),
+        { name: generateLocation({ isNSFW: get(isNSFW), level: nextLevel }), progress: 0 },
       ]);
     }
 
     set(level, nextLevel);
-    set(progress, 0);
-    createMonster();
   });
 }

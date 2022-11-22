@@ -4,7 +4,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import IconImage from "@neverquest/components/IconImage";
-import { UNKNOWN } from "@neverquest/constants";
+import { CLASS_DIV_FULL_WIDTH, UNKNOWN } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
 import { ReactComponent as IconWait } from "@neverquest/icons/hourglass.svg";
@@ -57,7 +57,7 @@ export default function ({ type }: { type: AttributeType }) {
   };
 
   return (
-    <div className="align-items-center d-flex justify-content-between w-100">
+    <div className={CLASS_DIV_FULL_WIDTH}>
       {isUnlocked ? (
         <>
           <IconDisplay contents={name} description={description} Icon={Icon} tooltip={name} />

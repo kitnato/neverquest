@@ -58,7 +58,7 @@ export default function () {
     }
 
     const totalDamageMonsterValue = get(totalDamageMonster);
-    const healthDamage = (() => {
+    let healthDamage = (() => {
       const damage = get(totalProtection) - totalDamageMonsterValue;
 
       return damage < 0 ? damage : 0;
@@ -82,7 +82,7 @@ export default function () {
       const { staminaCost } = get(weapon);
 
       if (get(canAttackOrParry)) {
-        const parryDealt = healthDamage - Math.floor(healthDamage * get(totalParryAbsorption));
+        healthDamage = Math.floor(healthDamage * get(totalParryAbsorption));
         const parryReflected = Math.floor(totalDamageMonsterValue * get(totalParryDamage));
 
         set(currentHealthMonster, (current) => current - parryReflected);
@@ -104,7 +104,7 @@ export default function () {
           },
           {
             color: FloatingText.Negative,
-            value: ` (${parryDealt})`,
+            value: ` (${healthDamage})`,
           },
         ];
 
@@ -135,6 +135,7 @@ export default function () {
       const { staminaCost } = get(shield);
 
       if (get(canBlock)) {
+        healthDamage = 0;
         const hasStaggered = Math.random() <= get(totalStaggerChance);
 
         deltaHealth = {
@@ -182,7 +183,9 @@ export default function () {
       }
     }
 
-    changeHealth({ delta: deltaHealth, value: healthDamage });
+    if (healthDamage < 0) {
+      changeHealth({ delta: deltaHealth, value: healthDamage });
+    }
 
     if (deltaStamina) {
       set(deltas(DeltaType.Stamina), deltaStamina);

@@ -25,22 +25,16 @@ export default function () {
   }, []);
 
   return (
-    <Stack gap={3}>
+    <>
       <Row>
         <Col>
-          <Location />
-        </Col>
+          <Stack gap={3}>
+            <Location />
 
-        <Col style={{ width: 80 }} xs="auto" />
-
-        <Col>
-          <WildernessStatus />
-        </Col>
-      </Row>
-
-      <Row>
-        <Col style={{ zIndex: 1050 }}>
-          <Character />
+            <div style={{ zIndex: 1050 }}>
+              <Character />
+            </div>
+          </Stack>
         </Col>
 
         <Col xs="auto">
@@ -48,7 +42,11 @@ export default function () {
         </Col>
 
         <Col>
-          <Encounter />
+          <Stack gap={3}>
+            <WildernessStatus />
+
+            <Encounter />
+          </Stack>
         </Col>
       </Row>
 
@@ -60,6 +58,6 @@ export default function () {
         show={isGameOverValue && isShowingGameOver}
         title="You are dead."
       />
-    </Stack>
+    </>
   );
 }

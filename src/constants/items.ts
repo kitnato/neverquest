@@ -4,13 +4,12 @@ import { ReactComponent as IconKnapsack } from "@neverquest/icons/knapsack.svg";
 import { ReactComponent as IconStone } from "@neverquest/icons/stone-wheel.svg";
 import { Item } from "@neverquest/types";
 
-// TODO
 export const ITEM_COMPASS: Item = {
-  description: "Return to locations previously visited.",
+  description: "Navigate the wilderness to find previous locations.",
   Icon: IconCompass,
   isPortable: true,
   name: "Compass",
-  price: 30,
+  price: 35,
   weight: 1,
 };
 
@@ -20,7 +19,7 @@ export const ITEM_HEARTHSTONE: Item = {
   Icon: IconStone,
   isPortable: true,
   name: "Hearthstone",
-  price: 55,
+  price: 50,
   weight: 1,
 };
 
@@ -29,7 +28,7 @@ export const ITEM_KNAPSACK: Item = {
   Icon: IconKnapsack,
   isPortable: false,
   name: "Knapsack",
-  price: 12,
+  price: 15,
   weight: 0,
 };
 

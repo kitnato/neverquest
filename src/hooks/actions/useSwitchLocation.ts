@@ -2,7 +2,7 @@ import { useRecoilCallback } from "recoil";
 
 import useGenerateMerchantInventory from "@neverquest/hooks/actions/useGenerateMerchantInventory";
 import useIncreaseLevel from "@neverquest/hooks/actions/useIncreaseLevel";
-import { isWilderness, mode } from "@neverquest/state/encounter";
+import { isWilderness, level, maximumLevel, mode } from "@neverquest/state/encounter";
 import { LocationType } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/helpers";
 
@@ -19,7 +19,10 @@ export default function () {
       generateMerchantInventory();
       set(mode, LocationType.Caravan);
     } else {
-      increaseLevel();
+      if (get(level) === get(maximumLevel)) {
+        increaseLevel();
+      }
+
       set(mode, LocationType.Wilderness);
     }
   });

@@ -131,7 +131,6 @@ export enum StorageKey {
   IsShowing = "isShowing",
   IsShowingDamagePerSecond = "isShowingDamagePerSecond",
   Level = "level",
-  Locations = "locations",
   LootingRate = "lootingRate",
   LowHealthWarning = "lowHealthWarning",
   MerchantInventory = "merchantInventory",
@@ -145,6 +144,7 @@ export enum StorageKey {
   ScrapLoot = "scrapLoot",
   SkillsStatus = "skillsStatus",
   StatusElement = "statusElement",
+  Wildernesses = "wildernesses",
 }
 
 export enum WeaponGrip {

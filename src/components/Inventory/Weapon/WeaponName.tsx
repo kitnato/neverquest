@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { CLASS_TABLE_CELL_ITALIC, UNKNOWN } from "@neverquest/constants";
 import { WEAPON_CLASS_ICONS } from "@neverquest/constants/gear";
 import { WEAPON_CLASS_SKILL_MAPPING } from "@neverquest/constants/skills";
-import { hasKnapsack } from "@neverquest/state/character";
+import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingDamagePerSecond } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";

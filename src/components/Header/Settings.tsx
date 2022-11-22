@@ -4,7 +4,7 @@ import { Gear } from "react-bootstrap-icons";
 import { useRecoilValue } from "recoil";
 
 import SettingsSwitch from "@neverquest/components/Header/SettingsSwitch";
-import { hasKnapsack } from "@neverquest/state/character";
+import { hasKnapsack } from "@neverquest/state/inventory";
 import {
   autoEquip,
   isNSFW,

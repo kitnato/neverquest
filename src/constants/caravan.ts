@@ -90,7 +90,7 @@ export const CREW_ORDER = [
 
 export const CREW_INITIAL = [CrewType.Merchant];
 
-export const EXCHANGE_COIN = 1;
+export const EXCHANGE_COINS = 1;
 
 export const EXCHANGE_SCRAP = 3;
 

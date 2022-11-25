@@ -91,7 +91,11 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
         placement="top"
         show={showWarning || undefined}
       >
-        <span className="d-inline-block">
+        <span
+          className={`d-inline-block ${getAnimationClass({
+            type: AnimationType.BounceIn,
+          })}`}
+        >
           <Button
             className={animation}
             disabled={isDisabled || isLevelCompletedValue}

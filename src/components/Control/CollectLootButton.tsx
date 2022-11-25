@@ -21,14 +21,20 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
 
   return (
     <OverlayTrigger overlay={<Tooltip>Collect loot</Tooltip>} placement="top">
-      <Button
-        className={getAnimationClass({ type: AnimationType.FlipInX })}
-        disabled={isDisabled}
-        onClick={() => transactResources({})}
-        variant={UIVariant.Outline}
+      <span
+        className={`d-inline-block ${getAnimationClass({
+          type: AnimationType.BounceIn,
+        })}`}
       >
-        <IconImage Icon={Icon} />
-      </Button>
+        <Button
+          className={`${getAnimationClass({ isInfinite: true, type: AnimationType.Pulse })}`}
+          disabled={isDisabled}
+          onClick={() => transactResources({})}
+          variant={UIVariant.Outline}
+        >
+          <IconImage Icon={Icon} />
+        </Button>
+      </span>
     </OverlayTrigger>
   );
 }

@@ -8,7 +8,7 @@ import { LocationType, StorageKey } from "@neverquest/types/enums";
 // SELECTORS
 
 export const isLevelCompleted = selector({
-  get: ({ get }) => get(wilderness).progress === get(progressMax),
+  get: ({ get }) => get(wilderness).progress === get(progressMaximum),
   key: "isLevelCompleted",
 });
 
@@ -66,13 +66,13 @@ export const progress = selector({
   },
 });
 
-export const progressMax = selector({
+export const progressMaximum = selector({
   get: ({ get }) => {
     const levelValue = get(level);
 
     return levelValue + 2 + Math.floor(levelValue / 3);
   },
-  key: "progressMax",
+  key: "progressMaximum",
 });
 
 export const wilderness = selector<Wilderness>({

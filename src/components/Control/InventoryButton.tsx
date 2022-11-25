@@ -25,7 +25,7 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
       <OverlayTrigger overlay={<Tooltip>Inventory</Tooltip>} placement="top">
         <span
           className={`d-inline-block ${getAnimationClass({
-            type: AnimationType.FlipInX,
+            type: AnimationType.BounceIn,
           })}`}
         >
           <Button

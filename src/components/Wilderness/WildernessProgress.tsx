@@ -7,14 +7,14 @@ import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/stairs.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { isWilderness, progress, progressMax } from "@neverquest/state/encounter";
+import { isWilderness, progress, progressMaximum } from "@neverquest/state/encounter";
 import { DeltaType } from "@neverquest/types/enums";
 import { OverlayPlacement, UIVariant } from "@neverquest/types/ui";
 
 export default function () {
   const isWildernessValue = useRecoilValue(isWilderness);
   const progressValue = useRecoilValue(progress);
-  const progressMaxValue = useRecoilValue(progressMax);
+  const progressMaximumValue = useRecoilValue(progressMaximum);
 
   const deltaWildernessProgress = deltas(DeltaType.WildernessProgress);
 
@@ -34,8 +34,8 @@ export default function () {
 
       <Stack className="w-100" direction="horizontal">
         <LabelledProgressBar
-          label={`${progressValue}/${progressMaxValue}`}
-          value={(progressValue / progressMaxValue) * 100}
+          label={`${progressValue}/${progressMaximumValue}`}
+          value={(progressValue / progressMaximumValue) * 100}
           variant={UIVariant.Primary}
         />
 

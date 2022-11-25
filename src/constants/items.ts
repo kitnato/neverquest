@@ -1,3 +1,6 @@
+import CompassUseButton from "@neverquest/components/Inventory/Item/CompassUseButton";
+import HearthstoneUseButton from "@neverquest/components/Inventory/Item/HearthstoneUseButton";
+import LodestoneUseButton from "@neverquest/components/Inventory/Item/LodestoneUseButton";
 import { ReactComponent as IconCompass } from "@neverquest/icons/compass.svg";
 import { ReactComponent as IconCrystal } from "@neverquest/icons/crystal-eye.svg";
 import { ReactComponent as IconKnapsack } from "@neverquest/icons/knapsack.svg";
@@ -5,7 +8,8 @@ import { ReactComponent as IconStone } from "@neverquest/icons/stone-wheel.svg";
 import { Item } from "@neverquest/types";
 
 export const ITEM_COMPASS: Item = {
-  description: "Navigate the wilderness to find previous locations.",
+  Action: CompassUseButton,
+  description: "Navigate the wilderness to return to previous locations.",
   Icon: IconCompass,
   isPortable: true,
   name: "Compass",
@@ -15,6 +19,7 @@ export const ITEM_COMPASS: Item = {
 
 // TODO
 export const ITEM_HEARTHSTONE: Item = {
+  Action: HearthstoneUseButton,
   description: "Travel back to the caravan even if there are still lurking monsters.",
   Icon: IconStone,
   isPortable: true,
@@ -32,9 +37,9 @@ export const ITEM_KNAPSACK: Item = {
   weight: 0,
 };
 
-// TODO
 export const ITEM_LODESTONE: Item = {
-  description: "Attract more monsters even when everything's dead.",
+  Action: LodestoneUseButton,
+  description: "Lure more monsters in the wilderness when everything's dead.",
   Icon: IconCrystal,
   isPortable: true,
   name: "Lodestone",

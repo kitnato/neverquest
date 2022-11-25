@@ -183,9 +183,7 @@ export default function () {
       }
     }
 
-    if (healthDamage < 0) {
-      changeHealth({ delta: deltaHealth, value: healthDamage });
-    }
+    changeHealth({ delta: deltaHealth, value: healthDamage });
 
     if (deltaStamina) {
       set(deltas(DeltaType.Stamina), deltaStamina);

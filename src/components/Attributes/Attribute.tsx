@@ -4,7 +4,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import IconImage from "@neverquest/components/IconImage";
-import { CLASS_DIV_FULL_WIDTH, UNKNOWN } from "@neverquest/constants";
+import { CLASS_FULL_WIDTH_JUSTIFIED, UNKNOWN } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/constants/attributes";
 import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
 import { ReactComponent as IconWait } from "@neverquest/icons/hourglass.svg";
@@ -17,6 +17,7 @@ import {
 } from "@neverquest/state/attributes";
 import { characterLevel } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
+import { isMonsterEngaged } from "@neverquest/state/monster";
 import { AttributeType, DeltaType } from "@neverquest/types/enums";
 import { FloatingText, UIVariant } from "@neverquest/types/ui";
 
@@ -25,6 +26,7 @@ export default function ({ type }: { type: AttributeType }) {
   const attributeCostValue = useRecoilValue(attributeCost);
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const isAttributeMaxedValue = useRecoilValue(isAttributeMaxed(type));
+  const isMonsterEngagedValue = useRecoilValue(isMonsterEngaged);
   const setCharacterLevel = useSetRecoilState(characterLevel);
   const setDeltaCharacterLevel = useSetRecoilState(deltas(DeltaType.CharacterLevel));
   const setDeltaEssenceAbsorbed = useSetRecoilState(deltas(DeltaType.EssenceAbsorbed));
@@ -57,7 +59,7 @@ export default function ({ type }: { type: AttributeType }) {
   };
 
   return (
-    <div className={CLASS_DIV_FULL_WIDTH}>
+    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       {isUnlocked ? (
         <>
           <IconDisplay contents={name} description={description} Icon={Icon} tooltip={name} />
@@ -74,11 +76,17 @@ export default function ({ type }: { type: AttributeType }) {
               >
                 <span className="d-inline-block">
                   <Button
-                    disabled={!areAttributesIncreasableValue}
+                    disabled={!areAttributesIncreasableValue || isMonsterEngagedValue}
                     onClick={onIncrease}
                     variant={UIVariant.Outline}
                   >
-                    <IconImage Icon={areAttributesIncreasableValue ? IconIncrease : IconWait} />
+                    <IconImage
+                      Icon={
+                        areAttributesIncreasableValue && !isMonsterEngagedValue
+                          ? IconIncrease
+                          : IconWait
+                      }
+                    />
                   </Button>
                 </span>
               </OverlayTrigger>

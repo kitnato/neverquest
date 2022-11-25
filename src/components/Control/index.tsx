@@ -5,7 +5,7 @@ import AttackButton from "@neverquest/components/Control/AttackButton";
 import AttributesButton from "@neverquest/components/Control/AttributesButton";
 import CollectLootButton from "@neverquest/components/Control/CollectLootButton";
 import InventoryButton from "@neverquest/components/Control/InventoryButton";
-import NavigationButton from "@neverquest/components/Control/NavigationButton";
+import RetireButton from "@neverquest/components/Control/RetireButton";
 import TravelButton from "@neverquest/components/Control/TravelButton";
 import { isGameOver } from "@neverquest/state/settings";
 
@@ -14,7 +14,7 @@ export default function () {
 
   return (
     <Stack gap={3}>
-      <NavigationButton isDisabled={isGameOverValue} />
+      <RetireButton isDisabled={isGameOverValue} />
 
       <AttackButton isDisabled={isGameOverValue} />
 

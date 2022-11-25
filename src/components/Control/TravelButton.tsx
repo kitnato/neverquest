@@ -36,22 +36,28 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
       overlay={<Tooltip>{`${isWildernessValue ? "Go to" : "Return to"} ${destination}`}</Tooltip>}
       placement="top"
     >
-      <Button
-        className={
-          isWildernessValue
-            ? getAnimationClass({ isInfinite: true, type: AnimationType.Pulse })
-            : ""
-        }
-        disabled={isDisabled}
-        onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-          currentTarget.blur();
-
-          switchLocation();
-        }}
-        variant={UIVariant.Outline}
+      <span
+        className={`d-inline-block ${getAnimationClass({
+          type: AnimationType.BounceIn,
+        })}`}
       >
-        <ImageIcon Icon={Icon} isFlipped={!isWildernessValue} />
-      </Button>
+        <Button
+          className={
+            isWildernessValue
+              ? getAnimationClass({ isInfinite: true, type: AnimationType.Pulse })
+              : ""
+          }
+          disabled={isDisabled}
+          onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+            currentTarget.blur();
+
+            switchLocation();
+          }}
+          variant={UIVariant.Outline}
+        >
+          <ImageIcon Icon={Icon} isFlipped={!isWildernessValue} />
+        </Button>
+      </span>
     </OverlayTrigger>
   );
 }

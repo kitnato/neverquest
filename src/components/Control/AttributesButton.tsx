@@ -21,8 +21,6 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
   const showAttributesButtonValue = useRecoilValue(isShowing(ShowingType.AttributesButton));
   const [isScreenShowing, setScreenShowing] = useState(false);
 
-  const isButtonDisabled = isAttackingValue || isDisabled || isMonsterEngagedValue;
-
   if (!showAttributesButtonValue) {
     return null;
   }
@@ -31,20 +29,20 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
     <>
       <OverlayTrigger overlay={<Tooltip>Attributes</Tooltip>} placement="top">
         <span
-          className={`${getAnimationClass({
-            type: AnimationType.FlipInX,
-          })} d-inline-block`}
+          className={`d-inline-block ${getAnimationClass({
+            type: AnimationType.BounceIn,
+          })}`}
         >
           <Button
             className={`position-relative${
-              areAttributesIncreasableValue && !isButtonDisabled
+              areAttributesIncreasableValue && !isMonsterEngagedValue
                 ? ` ${getAnimationClass({
                     isInfinite: true,
                     type: AnimationType.Pulse,
                   })}`
                 : ""
             }`}
-            disabled={isButtonDisabled}
+            disabled={isAttackingValue || isDisabled}
             onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
               currentTarget.blur();
 

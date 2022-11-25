@@ -4,7 +4,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import useGenerateMerchantInventory from "@neverquest/hooks/actions/useGenerateMerchantInventory";
 import useIncreaseLevel from "@neverquest/hooks/actions/useIncreaseLevel";
 import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
-import { isWilderness, level, progress, progressMax } from "@neverquest/state/encounter";
+import { isWilderness, level, progress, progressMaximum } from "@neverquest/state/encounter";
 import { skills } from "@neverquest/state/skills";
 import { SkillType } from "@neverquest/types/enums";
 
@@ -17,7 +17,7 @@ declare global {
 export default function () {
   const isWildernessValue = useRecoilValue(isWilderness);
   const levelValue = useRecoilValue(level);
-  const progressMaxValue = useRecoilValue(progressMax);
+  const progressMaximumValue = useRecoilValue(progressMaximum);
   const setProgress = useSetRecoilState(progress);
   const setSkillArmor = useSetRecoilState(skills(SkillType.Armors));
   const setSkillBleed = useSetRecoilState(skills(SkillType.Bleed));
@@ -76,7 +76,7 @@ export default function () {
           break;
         // Source engine
         case "noclip":
-          setProgress((current) => progressMaxValue - current);
+          setProgress((current) => progressMaximumValue - current);
           break;
         // The Sims
         case "rosebud":
@@ -110,7 +110,7 @@ export default function () {
     increaseLevel,
     isWildernessValue,
     levelValue,
-    progressMaxValue,
+    progressMaximumValue,
     setProgress,
     setSkill,
     transactResources,

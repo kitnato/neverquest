@@ -19,8 +19,15 @@ export default function () {
   const [activeMember, setActiveMember] = useState<CrewType | null>(null);
   const [isScreenShowing, setScreenShowing] = useState(false);
 
-  const ActiveMemberComponent = () =>
-    activeMember ? CREW_MEMBERS[activeMember].Component() : null;
+  const ActiveMemberComponent = () => {
+    if (activeMember) {
+      const { Component } = CREW_MEMBERS[activeMember];
+
+      return <Component />;
+    }
+
+    return null;
+  };
 
   const onActivate = (isShowing: boolean, member?: CrewType) => {
     setScreenShowing(isShowing);

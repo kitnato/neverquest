@@ -5,7 +5,7 @@ import TrainSkillButton from "@neverquest/components/Caravan/Mercenary/TrainSkil
 import SkillDisplay from "@neverquest/components/Character/SkillDisplay";
 import IconDisplay from "@neverquest/components/IconDisplay";
 import Coins from "@neverquest/components/Resource/Coins";
-import { CLASS_DIV_FULL_WIDTH, UNKNOWN } from "@neverquest/constants";
+import { CLASS_FULL_WIDTH_JUSTIFIED, UNKNOWN } from "@neverquest/constants";
 import { SKILLS } from "@neverquest/constants/skills";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/perspective-dice-six-faces-random.svg";
 import { characterLevel } from "@neverquest/state/character";
@@ -23,7 +23,7 @@ export default function ({ type }: { type: SkillType }) {
   }
 
   return (
-    <div className={CLASS_DIV_FULL_WIDTH}>
+    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       {requiredLevel <= characterLevelValue ? (
         <>
           <SkillDisplay type={type} />

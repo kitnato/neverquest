@@ -1,5 +1,12 @@
 import { RecoilValue, Snapshot } from "recoil";
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/constants";
+import {
+  ITEM_COMPASS,
+  ITEM_HEARTHSTONE,
+  ITEM_KNAPSACK,
+  ITEM_LODESTONE,
+} from "@neverquest/constants/items";
+import { Item } from "@neverquest/types";
 import { RangeProps } from "@neverquest/types/props";
 import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
 
@@ -150,6 +157,21 @@ export function getFromRange({ maximum, minimum }: RangeProps) {
   const result = Math.random() * (maximum - minimum) + minimum;
 
   return Number.isInteger(maximum) && Number.isInteger(minimum) ? Math.round(result) : result;
+}
+
+export function getItemFunctionComponents(item: Item) {
+  switch (item.name) {
+    case ITEM_COMPASS.name:
+      return { ...ITEM_COMPASS };
+    case ITEM_HEARTHSTONE.name:
+      return { ...ITEM_HEARTHSTONE };
+    case ITEM_LODESTONE.name:
+      return { ...ITEM_LODESTONE };
+    case ITEM_KNAPSACK.name:
+      return { ...ITEM_KNAPSACK };
+    default:
+      return { ...item };
+  }
 }
 
 export function getSellPrice({ price }: { price: number }) {

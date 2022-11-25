@@ -6,7 +6,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import ConfirmationDialog from "@neverquest/components/ConfirmationDialog";
 import InventoryElement from "@neverquest/components/Inventory/InventoryElement";
 import Coins from "@neverquest/components/Resource/Coins";
-import { CLASS_DIV_FULL_WIDTH } from "@neverquest/constants";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
 import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { inventory } from "@neverquest/state/inventory";
@@ -51,7 +51,7 @@ export default function () {
             const { isEquipped, key, possession } = inventoryValue[id];
 
             return (
-              <div className={CLASS_DIV_FULL_WIDTH} key={key}>
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={key}>
                 <Stack direction="horizontal">
                   <InventoryElement possession={possession} />
 

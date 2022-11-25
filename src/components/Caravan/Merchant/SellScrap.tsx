@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil";
 
 import Coins from "@neverquest/components/Resource/Coins";
 import Scrap from "@neverquest/components/Resource/Scrap";
-import { CLASS_DIV_FULL_WIDTH } from "@neverquest/constants";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
 import { EXCHANGE_COINS, EXCHANGE_SCRAP } from "@neverquest/constants/caravan";
 import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
 import { scrap } from "@neverquest/state/resources";
@@ -35,7 +35,7 @@ export default function () {
   };
 
   return (
-    <div className={CLASS_DIV_FULL_WIDTH}>
+    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <Stack direction="horizontal" gap={3}>
         <Scrap tooltip="Scrap (give)" value={EXCHANGE_SCRAP} />
 
@@ -49,7 +49,7 @@ export default function () {
           overlay={
             <Tooltip>
               {canSell
-                ? `Sell ${EXCHANGE_SCRAP} scrap for ${EXCHANGE_COINS} coins`
+                ? `Sell ${EXCHANGE_SCRAP} scrap for ${EXCHANGE_COINS} coin`
                 : "No scrap left."}
             </Tooltip>
           }

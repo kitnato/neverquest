@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import BuyItemButton from "@neverquest/components/Caravan/Merchant/BuyItemButton";
 import InventoryElement from "@neverquest/components/Inventory/InventoryElement";
 import Coins from "@neverquest/components/Resource/Coins";
-import { CLASS_DIV_FULL_WIDTH } from "@neverquest/constants";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
 import { merchantInventory } from "@neverquest/state/caravan";
 
 export default function ({ inventoryIDs }: { inventoryIDs: string[] }) {
@@ -17,7 +17,7 @@ export default function ({ inventoryIDs }: { inventoryIDs: string[] }) {
         const { price } = possession;
 
         return (
-          <div className={CLASS_DIV_FULL_WIDTH} key={key}>
+          <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={key}>
             <InventoryElement possession={possession} />
 
             <Stack direction="horizontal" gap={3}>

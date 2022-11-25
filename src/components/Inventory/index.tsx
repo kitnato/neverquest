@@ -1,12 +1,14 @@
-import { Button, Col, Row, Stack } from "react-bootstrap";
+import { Button, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import Encumbrance from "@neverquest/components/Inventory/Encumbrance";
 import InventoryElement from "@neverquest/components/Inventory/InventoryElement";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
 import useToggleEquipGear from "@neverquest/hooks/actions/useToggleEquipGear";
 import { inventory } from "@neverquest/state/inventory";
-import { isGear } from "@neverquest/types/type-guards";
+import { isGear, isItem } from "@neverquest/types/type-guards";
 import { UIVariant } from "@neverquest/types/ui";
+import { getItemFunctionComponents } from "@neverquest/utilities/helpers";
 
 export default function () {
   const inventoryValue = useRecoilValue(inventory);
@@ -37,19 +39,13 @@ export default function () {
           const { key, possession } = inventoryValue[id];
 
           return (
-            <Row key={key}>
-              <Col xs={8}>
-                <Stack direction="horizontal">
-                  <InventoryElement possession={possession} />
-                </Stack>
-              </Col>
+            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={key}>
+              <InventoryElement possession={possession} />
 
-              <Col>
-                <Button onClick={handleToggleEquipGear(id)} variant={UIVariant.Outline}>
-                  Unequip
-                </Button>
-              </Col>
-            </Row>
+              <Button onClick={handleToggleEquipGear(id)} variant={UIVariant.Outline}>
+                Unequip
+              </Button>
+            </div>
           );
         })}
       </Stack>
@@ -63,21 +59,28 @@ export default function () {
 
         {storedInventoryValueIDs.map((id) => {
           const { key, possession } = inventoryValue[id];
+          let PossessionAction;
+
+          if (isGear(possession)) {
+            PossessionAction = () => (
+              <Button onClick={handleToggleEquipGear(id)} variant={UIVariant.Outline}>
+                Equip
+              </Button>
+            );
+          }
+
+          if (isItem(possession)) {
+            const { Action } = getItemFunctionComponents(possession);
+
+            PossessionAction = Action;
+          }
 
           return (
-            <Row key={key}>
-              <Col xs={7}>
-                <InventoryElement possession={possession} />
-              </Col>
+            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={key}>
+              <InventoryElement possession={possession} />
 
-              {isGear(possession) && (
-                <Col>
-                  <Button onClick={handleToggleEquipGear(id)} variant={UIVariant.Outline}>
-                    Equip
-                  </Button>
-                </Col>
-              )}
-            </Row>
+              {PossessionAction && <PossessionAction />}
+            </div>
           );
         })}
       </Stack>

@@ -32,8 +32,8 @@ export const monsterLoot = selector({
     const progressValue = get(progress);
 
     return {
-      essence: Math.floor(progressValue * 0.5 + levelValue * 2.5),
-      scrap: Math.floor(progressValue * 1.2 + levelValue * 1.75),
+      essence: Math.floor(progressValue * 2 + levelValue * 3),
+      scrap: Math.floor(progressValue * 1.5 + levelValue * 2),
     };
   },
   key: "monsterLoot",
@@ -48,7 +48,7 @@ export const totalDamageMonster = selector({
   get: ({ get }) => {
     const levelValue = get(level);
 
-    return levelValue + Math.floor(levelValue / 2.5) + Math.floor(get(progress) / 3);
+    return levelValue + Math.floor(levelValue / 3) + Math.floor(get(progress) / 3);
   },
   key: "totalDamageMonster",
 });

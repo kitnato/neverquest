@@ -1,7 +1,6 @@
 import { atom, selector, selectorFamily } from "recoil";
 
 import { NO_ARMOR, NO_SHIELD, NO_WEAPON } from "@neverquest/constants/gear";
-import { ITEM_COMPASS } from "@neverquest/constants/items";
 import localStorage from "@neverquest/state/effects/localStorage";
 import { Armor, Inventory, Shield, Weapon } from "@neverquest/types";
 import { StorageKey } from "@neverquest/types/enums";
@@ -67,22 +66,25 @@ export const encumbrance = selector({
   key: "encumbrance",
 });
 
-export const hasCompass = selector({
-  get: ({ get }) => {
-    const inventoryValue = get(inventory);
+// TODO - remove?
+// export const hasItem = selectorFamily({
+//   get:
+//     (itemName) =>
+//     ({ get }) => {
+//       const inventoryValue = get(inventory);
 
-    return (
-      Object.getOwnPropertyNames(inventoryValue).findIndex((id) => {
-        const {
-          possession: { name },
-        } = inventoryValue[id];
+//       return (
+//         Object.getOwnPropertyNames(inventoryValue).findIndex((id) => {
+//           const {
+//             possession: { name },
+//           } = inventoryValue[id];
 
-        return name === ITEM_COMPASS.name;
-      }) !== -1
-    );
-  },
-  key: "hasCompass",
-});
+//           return name === itemName;
+//         }) !== -1
+//       );
+//     },
+//   key: "hasItem",
+// });
 
 export const isInventoryFull = selector({
   get: ({ get }) => get(encumbrance) === get(encumbranceMaximum),

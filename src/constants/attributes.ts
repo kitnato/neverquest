@@ -122,12 +122,12 @@ export const ATTRIBUTES: Record<AttributeType, Attribute> = {
 
 export const ATTRIBUTES_ORDER = [
   AttributeType.Health,
-  AttributeType.HealthRegenerationRate,
   AttributeType.Stamina,
-  AttributeType.StaminaRegenerationRate,
   AttributeType.Damage,
   AttributeType.AttackRate,
   AttributeType.RecoveryRate,
+  AttributeType.HealthRegenerationRate,
+  AttributeType.StaminaRegenerationRate,
   AttributeType.CriticalChance,
   AttributeType.CriticalDamage,
   AttributeType.BleedDamage,

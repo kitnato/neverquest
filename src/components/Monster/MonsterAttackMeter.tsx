@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
-import { useRecoilValue, useResetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import useDefend from "@neverquest/hooks/actions/useDefend";
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { isAttacking } from "@neverquest/state/character";
 import {
-  currentHealthMonster,
   isMonsterDead,
-  isMonsterEngaged,
   isMonsterStaggered,
   totalAttackRateMonster,
 } from "@neverquest/state/monster";
@@ -18,10 +16,8 @@ import { formatMilliseconds } from "@neverquest/utilities/helpers";
 export default function () {
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
-  const isMonsterEngagedValue = useRecoilValue(isMonsterEngaged);
   const isMonsterStaggeredValue = useRecoilValue(isMonsterStaggered);
   const totalAttackRateMonsterValue = useRecoilValue(totalAttackRateMonster);
-  const resetCurrentHealthMonster = useResetRecoilState(currentHealthMonster);
 
   const [deltaAttack, setDeltaAttack] = useState(0);
 
@@ -29,27 +25,20 @@ export default function () {
 
   useAnimation((delta) => {
     setDeltaAttack((current) => current + delta);
-  }, !isAttackingValue || isMonsterDeadValue || !isMonsterEngagedValue || isMonsterStaggeredValue);
+  }, !isAttackingValue || isMonsterDeadValue || isMonsterStaggeredValue);
 
   useEffect(() => {
-    if (!isMonsterDeadValue && deltaAttack >= totalAttackRateMonsterValue) {
+    if (deltaAttack >= totalAttackRateMonsterValue) {
       defend();
       setDeltaAttack(0);
     }
-  }, [defend, deltaAttack, isMonsterDeadValue, totalAttackRateMonsterValue]);
+  }, [defend, deltaAttack, totalAttackRateMonsterValue]);
 
   useEffect(() => {
-    if (!isAttackingValue && !isMonsterDeadValue) {
-      setDeltaAttack(0);
-      resetCurrentHealthMonster();
-    }
-  }, [isAttackingValue, isMonsterDeadValue, resetCurrentHealthMonster]);
-
-  useEffect(() => {
-    if (isMonsterDeadValue) {
+    if ((!isAttackingValue && !isMonsterDeadValue) || isMonsterDeadValue) {
       setDeltaAttack(0);
     }
-  }, [isMonsterDeadValue]);
+  }, [isAttackingValue, isMonsterDeadValue]);
 
   return (
     <LabelledProgressBar

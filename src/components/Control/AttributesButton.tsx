@@ -9,7 +9,7 @@ import { ReactComponent as Icon } from "@neverquest/icons/skills.svg";
 import { areAttributesIncreasable } from "@neverquest/state/attributes";
 import { isAttacking } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
-import { isMonsterEngaged } from "@neverquest/state/monster";
+import { isLevelStarted } from "@neverquest/state/monster";
 import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
@@ -17,7 +17,7 @@ import { getAnimationClass } from "@neverquest/utilities/helpers";
 export default function ({ isDisabled }: { isDisabled: boolean }) {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const isAttackingValue = useRecoilValue(isAttacking);
-  const isMonsterEngagedValue = useRecoilValue(isMonsterEngaged);
+  const isLevelStartedValue = useRecoilValue(isLevelStarted);
   const showAttributesButtonValue = useRecoilValue(isShowing(ShowingType.AttributesButton));
   const [isScreenShowing, setScreenShowing] = useState(false);
 
@@ -35,7 +35,7 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
         >
           <Button
             className={`position-relative${
-              areAttributesIncreasableValue && !isMonsterEngagedValue
+              areAttributesIncreasableValue && !isLevelStartedValue
                 ? ` ${getAnimationClass({
                     isInfinite: true,
                     type: AnimationType.Pulse,

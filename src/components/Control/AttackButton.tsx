@@ -11,7 +11,7 @@ import { areAttributesIncreasable } from "@neverquest/state/attributes";
 import { isAttacking } from "@neverquest/state/character";
 import { isLevelCompleted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
-import { isMonsterEngaged } from "@neverquest/state/monster";
+import { isLevelStarted } from "@neverquest/state/monster";
 import { isHealthLow } from "@neverquest/state/reserves";
 import { lowHealthWarning } from "@neverquest/state/settings";
 import { ShowingType } from "@neverquest/types/enums";
@@ -26,7 +26,7 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const isHealthLowValue = useRecoilValue(isHealthLow);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
-  const isMonsterEngagedValue = useRecoilValue(isMonsterEngaged);
+  const isLevelStartedValue = useRecoilValue(isLevelStarted);
   const showLowHealthWarningValue = useRecoilValue(lowHealthWarning);
 
   const [showAttackConfirmation, setShowAttackConfirmation] = useState(false);
@@ -102,7 +102,7 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
             onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
               currentTarget.blur();
 
-              if (areAttributesIncreasableValue && !isMonsterEngagedValue) {
+              if (areAttributesIncreasableValue && !isLevelStartedValue) {
                 setShowAttackConfirmation(true);
               } else {
                 toggleAttack();

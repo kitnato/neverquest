@@ -4,10 +4,10 @@ import { useRecoilValue } from "recoil";
 import AttributesList from "@neverquest/components/Attributes/AttributesList";
 import CharacterLevel from "@neverquest/components/Character/CharacterLevel";
 import EssenceAbsorbed from "@neverquest/components/Character/EssenceAbsorbed";
-import { isMonsterEngaged } from "@neverquest/state/monster";
+import { isLevelStarted } from "@neverquest/state/monster";
 
 export default function () {
-  const isMonsterEngagedValue = useRecoilValue(isMonsterEngaged);
+  const isLevelStartedValue = useRecoilValue(isLevelStarted);
 
   return (
     <Stack gap={5}>
@@ -16,9 +16,7 @@ export default function () {
 
         <EssenceAbsorbed />
 
-        {isMonsterEngagedValue && (
-          <span>Cannot increase attributes while a monster is engaged!</span>
-        )}
+        {isLevelStartedValue && <span>Cannot increase attributes with monsters around!</span>}
       </Stack>
 
       <AttributesList />

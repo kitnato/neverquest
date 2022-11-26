@@ -5,13 +5,13 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import IconDisplay from "@neverquest/components/IconDisplay";
 import { ReactComponent as Icon } from "@neverquest/icons/treasure-map.svg";
 import { isLevelCompleted, isWilderness, level, wildernesses } from "@neverquest/state/encounter";
-import { isMonsterEngaged } from "@neverquest/state/monster";
+import { isLevelStarted } from "@neverquest/state/monster";
 import { hasLooted } from "@neverquest/state/resources";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function () {
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
-  const isMonsterEngagedValue = useRecoilValue(isMonsterEngaged);
+  const isLevelStartedValue = useRecoilValue(isLevelStarted);
   const isWildernessValue = useRecoilValue(isWilderness);
   const hasLootedValue = useRecoilValue(hasLooted);
   const wildernessesValue = useRecoilValue(wildernesses);
@@ -20,7 +20,7 @@ export default function () {
   const [isShowing, setShowing] = useState(false);
 
   const canNavigate =
-    (!isMonsterEngagedValue || (isLevelCompletedValue && hasLootedValue)) && isWildernessValue;
+    (!isLevelStartedValue || (isLevelCompletedValue && hasLootedValue)) && isWildernessValue;
 
   const handleNavigate = ({ target: { value } }: ChangeEvent<HTMLSelectElement>) => {
     setShowing(false);

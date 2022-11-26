@@ -17,7 +17,7 @@ import {
 } from "@neverquest/state/attributes";
 import { characterLevel } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { isMonsterEngaged } from "@neverquest/state/monster";
+import { isLevelStarted } from "@neverquest/state/monster";
 import { AttributeType, DeltaType } from "@neverquest/types/enums";
 import { FloatingText, UIVariant } from "@neverquest/types/ui";
 
@@ -26,7 +26,7 @@ export default function ({ type }: { type: AttributeType }) {
   const attributeCostValue = useRecoilValue(attributeCost);
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const isAttributeMaxedValue = useRecoilValue(isAttributeMaxed(type));
-  const isMonsterEngagedValue = useRecoilValue(isMonsterEngaged);
+  const isLevelStartedValue = useRecoilValue(isLevelStarted);
   const setCharacterLevel = useSetRecoilState(characterLevel);
   const setDeltaCharacterLevel = useSetRecoilState(deltas(DeltaType.CharacterLevel));
   const setDeltaEssenceAbsorbed = useSetRecoilState(deltas(DeltaType.EssenceAbsorbed));
@@ -76,13 +76,13 @@ export default function ({ type }: { type: AttributeType }) {
               >
                 <span className="d-inline-block">
                   <Button
-                    disabled={!areAttributesIncreasableValue || isMonsterEngagedValue}
+                    disabled={!areAttributesIncreasableValue || isLevelStartedValue}
                     onClick={onIncrease}
                     variant={UIVariant.Outline}
                   >
                     <IconImage
                       Icon={
-                        areAttributesIncreasableValue && !isMonsterEngagedValue
+                        areAttributesIncreasableValue && !isLevelStartedValue
                           ? IconIncrease
                           : IconWait
                       }

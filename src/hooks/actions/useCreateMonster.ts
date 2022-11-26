@@ -5,7 +5,6 @@ import { CreatureType } from "@neverquest/locra/types";
 import { level } from "@neverquest/state/encounter";
 import {
   currentHealthMonster,
-  isMonsterEngaged,
   isMonsterNew,
   maximumHealthMonster,
   monsterName,
@@ -27,7 +26,6 @@ export default function () {
       })
     );
 
-    set(isMonsterEngaged, false);
     set(currentHealthMonster, get(maximumHealthMonster));
     set(isMonsterNew, true);
   });

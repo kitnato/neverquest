@@ -17,7 +17,7 @@ export const damagePerSecondMonster = selector({
 });
 
 export const isMonsterDead = selector({
-  get: ({ get }) => get(isMonsterEngaged) && get(currentHealthMonster) === 0,
+  get: ({ get }) => get(isLevelStarted) && get(currentHealthMonster) === 0,
   key: "isMonsterDead",
 });
 
@@ -61,10 +61,10 @@ export const currentHealthMonster = atom({
   key: StorageKey.CurrentHealthMonster,
 });
 
-export const isMonsterEngaged = atom({
+export const isLevelStarted = atom({
   default: false,
-  effects: [localStorage<boolean>(StorageKey.IsMonsterEngaged)],
-  key: StorageKey.IsMonsterEngaged,
+  effects: [localStorage<boolean>(StorageKey.IsLevelStarted)],
+  key: StorageKey.IsLevelStarted,
 });
 
 export const isMonsterNew = atom({

@@ -147,15 +147,18 @@ export function generateWeapon({
   };
 
   switch (weaponClass) {
-    case WeaponClass.Blunt:
+    case WeaponClass.Blunt: {
       weapon.abilityChance = modifier * (0.1 + Math.floor((level * 2) / 90));
       break;
-    case WeaponClass.Piercing:
+    }
+    case WeaponClass.Piercing: {
       weapon.abilityChance = modifier * (0.2 + Math.floor((level * 2) / 100));
       break;
-    case WeaponClass.Slashing:
+    }
+    case WeaponClass.Slashing: {
       weapon.abilityChance = modifier * (0.15 + Math.floor((level * 2) / 100));
       break;
+    }
   }
 
   return weapon;

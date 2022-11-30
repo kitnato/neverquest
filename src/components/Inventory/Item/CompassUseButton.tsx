@@ -40,7 +40,7 @@ export default function () {
         placement="top"
         trigger={!canNavigate ? ["hover", "focus"] : []}
       >
-        <span className={"d-inline-block"}>
+        <span className="d-inline-block">
           <Button disabled={!canNavigate} onClick={handleShowing} variant={UIVariant.Outline}>
             Use
           </Button>

@@ -27,7 +27,7 @@ export default function ({ isLoot }: { isLoot?: boolean }) {
               atom={essenceLoot}
               Component={Essence}
               deltaAtom={deltas(DeltaType.EssenceLoot)}
-              tooltip={"Looted essence"}
+              tooltip="Looted essence"
             />
           </Col>
 
@@ -36,7 +36,7 @@ export default function ({ isLoot }: { isLoot?: boolean }) {
               atom={scrapLoot}
               Component={Scrap}
               deltaAtom={deltas(DeltaType.ScrapLoot)}
-              tooltip={"Looted scrap"}
+              tooltip="Looted scrap"
             />
           </Col>
 
@@ -45,7 +45,7 @@ export default function ({ isLoot }: { isLoot?: boolean }) {
               atom={coinsLoot}
               Component={Coins}
               deltaAtom={deltas(DeltaType.CoinsLoot)}
-              tooltip={"Looted coins"}
+              tooltip="Looted coins"
             />
           </Col>
         </>

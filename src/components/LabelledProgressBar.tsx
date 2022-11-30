@@ -26,14 +26,16 @@ export default function ({
   }> = size === UISize.Tiny ? { height: 10 } : {};
 
   switch (attached) {
-    case UIAttachment.Above:
+    case UIAttachment.Above: {
       style.borderTopLeftRadius = 0;
       style.borderTopRightRadius = 0;
       break;
-    case UIAttachment.Below:
+    }
+    case UIAttachment.Below: {
       style.borderBottomLeftRadius = 0;
       style.borderBottomRightRadius = 0;
       break;
+    }
   }
 
   return (

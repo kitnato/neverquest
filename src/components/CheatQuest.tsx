@@ -59,39 +59,45 @@ export default function () {
     window.cheatQuest = (state, value) => {
       switch (state) {
         // Age of Empires
-        case "COINAGE":
+        case "COINAGE": {
           if (typeof value === "number") {
             transactResources({ coinsDifference: value });
           }
           break;
+        }
         // Doom
-        case "IDBEHOLDV":
+        case "IDBEHOLDV": {
           // TODO - invulnerability
           break;
+        }
         // Heretic
-        case "gimmee":
+        case "gimmee": {
           if (typeof value === "number" && value in SkillType) {
             setSkill[value](true);
           }
           break;
+        }
         // Source engine
-        case "noclip":
+        case "noclip": {
           setProgress((current) => progressMaximumValue - current);
           break;
+        }
         // The Sims
-        case "rosebud":
+        case "rosebud": {
           if (typeof value === "number") {
             transactResources({ scrapDifference: value });
           }
           break;
+        }
         // Starcraft
-        case "something for nothing":
+        case "something for nothing": {
           if (typeof value === "number") {
             transactResources({ essenceDifference: value });
           }
           break;
+        }
         // Thief
-        case "starting_mission":
+        case "starting_mission": {
           if (typeof value === "number" && value > levelValue) {
             const difference = value - levelValue;
 
@@ -101,8 +107,10 @@ export default function () {
             }
           }
           break;
-        default:
+        }
+        default: {
           return;
+        }
       }
     };
   }, [

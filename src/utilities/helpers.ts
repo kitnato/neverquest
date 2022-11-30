@@ -161,16 +161,21 @@ export function getFromRange({ maximum, minimum }: RangeProps) {
 
 export function getItemFunctionComponents(item: Item) {
   switch (item.name) {
-    case ITEM_COMPASS.name:
+    case ITEM_COMPASS.name: {
       return { ...ITEM_COMPASS };
-    case ITEM_HEARTHSTONE.name:
+    }
+    case ITEM_HEARTHSTONE.name: {
       return { ...ITEM_HEARTHSTONE };
-    case ITEM_LODESTONE.name:
+    }
+    case ITEM_LODESTONE.name: {
       return { ...ITEM_LODESTONE };
-    case ITEM_KNAPSACK.name:
+    }
+    case ITEM_KNAPSACK.name: {
       return { ...ITEM_KNAPSACK };
-    default:
+    }
+    default: {
       return { ...item };
+    }
   }
 }
 

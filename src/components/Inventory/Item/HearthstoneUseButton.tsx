@@ -25,7 +25,7 @@ export default function () {
         placement="top"
         trigger={!canWarp ? ["focus", "hover"] : []}
       >
-        <span className={"d-inline-block"}>
+        <span className="d-inline-block">
           <Button disabled={!canWarp} onClick={handleWarp} variant={UIVariant.Outline}>
             Use
           </Button>

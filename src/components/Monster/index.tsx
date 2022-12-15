@@ -20,28 +20,25 @@ export default function () {
 
   const regenerateMonster = useRegenerateMonster();
 
+  // Once the player attacks, the monsters are engaged.
   useEffect(() => {
-    // Once the player attacks, the monsters are engaged.
     if (isAttackingValue && !isLevelStartedValue) {
       setLevelStarted(true);
     }
+  }, [isAttackingValue, isLevelStartedValue, setLevelStarted]);
 
-    // If player stops attacking but the monster is still alive, regenerate it.
+  // If player stops attacking but the monster is still alive, regenerate it.
+  useEffect(() => {
     if (!isAttackingValue && isLevelStartedValue && !isMonsterDeadValue) {
       regenerateMonster();
     }
+  }, [isAttackingValue, isMonsterDeadValue, isLevelStartedValue, regenerateMonster]);
 
+  useEffect(() => {
     if (isMonsterDeadValue) {
       setLooting(true);
     }
-  }, [
-    isAttackingValue,
-    isMonsterDeadValue,
-    isLevelStartedValue,
-    regenerateMonster,
-    setLooting,
-    setLevelStarted,
-  ]);
+  }, [isMonsterDeadValue, setLooting]);
 
   if (isLevelStartedValue) {
     return <MonsterStatus />;

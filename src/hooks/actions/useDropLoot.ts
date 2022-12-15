@@ -1,13 +1,14 @@
-import { useRecoilCallback } from "recoil";
+import { useRecoilCallback, useSetRecoilState } from "recoil";
 
+import { isLooting } from "@neverquest/state/character";
 import { progress } from "@neverquest/state/encounter";
-import { isShowing } from "@neverquest/state/isShowing";
 import { monsterLoot } from "@neverquest/state/monster";
 import { essenceLoot, scrapLoot } from "@neverquest/state/resources";
-import { ShowingType } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/helpers";
 
 export default function () {
+  const setLooting = useSetRecoilState(isLooting);
+
   return useRecoilCallback(({ set, snapshot }) => () => {
     const get = getSnapshotGetter(snapshot);
 
@@ -21,10 +22,7 @@ export default function () {
       set(scrapLoot, (current) => current + scrap);
     }
 
+    setLooting(false);
     set(progress, (current) => current + 1);
-
-    if (!get(isShowing(ShowingType.Attributes))) {
-      set(isShowing(ShowingType.Attributes), true);
-    }
   });
 }

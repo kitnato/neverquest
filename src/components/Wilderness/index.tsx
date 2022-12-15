@@ -1,24 +1,30 @@
 import { useEffect } from "react";
 import { Card, Stack } from "react-bootstrap";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import IconImage from "@neverquest/components/IconImage";
 import Monster from "@neverquest/components/Monster";
+import useCreateMonster from "@neverquest/hooks/actions/useCreateMonster";
 import { ReactComponent as Icon } from "@neverquest/icons/crossed-bones.svg";
-import { isLevelCompleted } from "@neverquest/state/encounter";
+import { isLevelCompleted, progress } from "@neverquest/state/encounter";
 import { isLevelStarted } from "@neverquest/state/monster";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function () {
-  const [isLevelStartedValue, setLevelStarted] = useRecoilState(isLevelStarted);
+  const progressValue = useRecoilValue(progress);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
+  const setLevelStarted = useSetRecoilState(isLevelStarted);
+
+  const createMonster = useCreateMonster();
 
   useEffect(() => {
-    if (isLevelStartedValue && isLevelCompletedValue) {
+    if (isLevelCompletedValue) {
       setLevelStarted(false);
+    } else {
+      createMonster();
     }
-  });
+  }, [createMonster, isLevelCompletedValue, progressValue, setLevelStarted]);
 
   return (
     <Stack gap={3}>

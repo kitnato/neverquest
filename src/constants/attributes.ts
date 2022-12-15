@@ -54,7 +54,7 @@ export const ATTRIBUTES: Record<AttributeType, Attribute> = {
     requiredSkill: SkillType.Dodge,
   },
   [AttributeType.Health]: {
-    base: 8,
+    base: 12,
     description: "Increases maximum health",
     Icon,
     increment: 4,

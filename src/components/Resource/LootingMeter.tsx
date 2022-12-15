@@ -1,23 +1,20 @@
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
-import useCreateMonster from "@neverquest/hooks/actions/useCreateMonster";
 import useDropLoot from "@neverquest/hooks/actions/useDropLoot";
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { isLooting, lootingRate } from "@neverquest/state/character";
-import { isLevelCompleted } from "@neverquest/state/encounter";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/helpers";
 
 export default function () {
-  const [isLootingValue, setLooting] = useRecoilState(isLooting);
-  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
+  const isLootingValue = useRecoilValue(isLooting);
   const lootingRateValue = useRecoilValue(lootingRate);
-  const createMonster = useCreateMonster();
-  const dropLoot = useDropLoot();
 
   const [deltaLooting, setDeltaLooting] = useState(0);
+
+  const dropLoot = useDropLoot();
 
   useAnimation((delta) => {
     setDeltaLooting((current) => current + delta);
@@ -25,14 +22,10 @@ export default function () {
 
   useEffect(() => {
     if (deltaLooting >= lootingRateValue) {
+      setDeltaLooting(0);
       dropLoot();
-      setLooting(false);
-
-      if (!isLevelCompletedValue) {
-        createMonster();
-      }
     }
-  }, [createMonster, deltaLooting, dropLoot, isLevelCompletedValue, lootingRateValue, setLooting]);
+  }, [deltaLooting, dropLoot, lootingRateValue]);
 
   return (
     <LabelledProgressBar

@@ -7,7 +7,8 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
   plugins: [
     checker({
-      eslint: { lintCommand: "eslint './src/**/*.{ts,tsx}'" },
+      eslint: { lintCommand: "eslint --ext .ts,.tsx ." },
+      overlay: false,
       typescript: true,
     }),
     react(),

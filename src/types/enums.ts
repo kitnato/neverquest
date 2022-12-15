@@ -72,7 +72,6 @@ export enum LootType {
 
 export enum ShowingType {
   Armor,
-  Attributes,
   AttributesButton,
   BlockChance,
   Coins,

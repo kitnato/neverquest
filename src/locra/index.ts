@@ -29,6 +29,11 @@ export default class LOCRA {
 
     if (hasPrefix) {
       const filteredPrefixes = affixes.filter((affix) => {
+        // Discard prefix if it's the same as the main name (e.g. "Fungus Fungus").
+        if (affix.name === name) {
+          return false;
+        }
+
         // If we want a tagged prefix, check if the current affix has all of them, otherwise discard it.
         if (prefixTags.length > 0) {
           if (affix.tags) {
@@ -43,12 +48,13 @@ export default class LOCRA {
           return false;
         }
 
-        // Return any prefix (with NSFW filter).
+        // Otherwise, return any prefix (with NSFW filter).
         return (
           affix[category] === AffixType.Prefix &&
           (isNSFW ? !!affix.isNSFW === true || !!affix.isNSFW === false : !!affix.isNSFW === false)
         );
       });
+
       const prefix = filteredPrefixes[Math.floor(Math.random() * filteredPrefixes.length)];
 
       finalName.unshift(capitalizeAll(prefix.name));
@@ -70,7 +76,7 @@ export default class LOCRA {
           return false;
         }
 
-        // Return any prefix (with NSFW filter).
+        // Otherwise, return any suffix (with NSFW filter).
         return (
           affix[category] === AffixType.Suffix &&
           (isNSFW ? !!affix.isNSFW === true || !!affix.isNSFW === false : !!affix.isNSFW === false)

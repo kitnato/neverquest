@@ -2772,6 +2772,12 @@
   { "name": "vigilance", "artifact": "suffix" },
   { "name": "vigilant", "creature": "prefix", "location": "prefix" },
   {
+    "name": "vile",
+    "artifact": "prefix",
+    "creature": "prefix",
+    "location": "prefix"
+  },
+  {
     "name": "villainous",
     "artifact": "prefix",
     "creature": "prefix",

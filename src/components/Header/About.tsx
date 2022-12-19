@@ -5,9 +5,9 @@ import { QuestionSquare } from "react-bootstrap-icons";
 import { UNKNOWN } from "@neverquest/constants";
 
 export default function () {
-  const [isShowing, setShowing] = useState(false);
+  const [isShowing, setIsShowing] = useState(false);
 
-  const handleShow = (state: boolean) => setShowing(state);
+  const handleShow = (state: boolean) => setIsShowing(state);
 
   return (
     <span>

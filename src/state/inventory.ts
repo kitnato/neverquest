@@ -26,6 +26,12 @@ export const inventory = atom<Inventory>({
   key: StorageKey.Inventory,
 });
 
+export const isInventoryOpen = atom<boolean>({
+  default: false,
+  effects: [localStorage<boolean>(StorageKey.isInventoryOpen)],
+  key: StorageKey.isInventoryOpen,
+});
+
 // SELECTORS
 
 export const armor = selector({

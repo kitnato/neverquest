@@ -1,11 +1,17 @@
 import { ChangeEvent, MouseEvent, useState } from "react";
 import { Button, Form, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import { ReactComponent as Icon } from "@neverquest/icons/treasure-map.svg";
-import { isLevelCompleted, isWilderness, level, wildernesses } from "@neverquest/state/encounter";
-import { isLevelStarted } from "@neverquest/state/monster";
+import {
+  isLevelCompleted,
+  isLevelStarted,
+  isWilderness,
+  level,
+  wildernesses,
+} from "@neverquest/state/encounter";
+import { isInventoryOpen } from "@neverquest/state/inventory";
 import { hasLooted } from "@neverquest/state/resources";
 import { UIVariant } from "@neverquest/types/ui";
 
@@ -16,27 +22,35 @@ export default function () {
   const hasLootedValue = useRecoilValue(hasLooted);
   const wildernessesValue = useRecoilValue(wildernesses);
   const [levelValue, setLevel] = useRecoilState(level);
+  const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
 
-  const [isShowing, setShowing] = useState(false);
+  const [isShowing, setIsShowing] = useState(false);
 
   const canNavigate =
     (!isLevelStartedValue || (isLevelCompletedValue && hasLootedValue)) && isWildernessValue;
 
   const handleNavigate = ({ target: { value } }: ChangeEvent<HTMLSelectElement>) => {
-    setShowing(false);
+    setIsShowing(false);
+    resetIsInventoryOpen();
     setLevel(+value);
   };
 
   const handleShowing = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
     currentTarget.blur();
 
-    setShowing(true);
+    setIsShowing(true);
   };
 
   return (
     <>
       <OverlayTrigger
-        overlay={<Tooltip>Requires a quiet wilderness.</Tooltip>}
+        overlay={
+          <Tooltip>
+            {isWildernessValue
+              ? `Too ${isLevelCompletedValue ? "much loot" : "many monsters"}.`
+              : "The caravan is interfering."}
+          </Tooltip>
+        }
         placement="top"
         trigger={!canNavigate ? ["hover", "focus"] : []}
       >
@@ -47,7 +61,7 @@ export default function () {
         </span>
       </OverlayTrigger>
 
-      <Modal onHide={() => setShowing(false)} show={isShowing}>
+      <Modal onHide={() => setIsShowing(false)} show={isShowing}>
         <Modal.Header closeButton>
           <Modal.Title>Navigate to another wilderness</Modal.Title>
         </Modal.Header>

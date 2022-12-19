@@ -6,34 +6,35 @@ import ImageIcon from "@neverquest/components/IconImage";
 import { UNKNOWN } from "@neverquest/constants";
 import useSwitchLocation from "@neverquest/hooks/actions/useSwitchLocation";
 import { ReactComponent as Icon } from "@neverquest/icons/journey.svg";
-import { isWilderness, level } from "@neverquest/state/encounter";
+import { isLevelCompleted, isWilderness, level } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
 import { LocationType } from "@neverquest/types/enums";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function ({ isDisabled }: { isDisabled: boolean }) {
+  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const isWildernessValue = useRecoilValue(isWilderness);
   const hasLootedValue = useRecoilValue(hasLooted);
   const levelValue = useRecoilValue(level);
 
   const switchLocation = useSwitchLocation();
 
-  const destination = (() => {
-    if (levelValue === 1 && isWildernessValue) {
-      return UNKNOWN;
-    }
-
-    return isWildernessValue ? LocationType.Caravan : LocationType.Wilderness;
-  })();
-
-  if (!hasLootedValue) {
+  if (!(hasLootedValue && isLevelCompletedValue) && isWildernessValue) {
     return null;
   }
 
   return (
     <OverlayTrigger
-      overlay={<Tooltip>{`${isWildernessValue ? "Go to" : "Return to"} ${destination}`}</Tooltip>}
+      overlay={
+        <Tooltip>{`${isWildernessValue ? "Go to" : "Return to"} ${
+          levelValue === 1 && isWildernessValue
+            ? UNKNOWN
+            : isWildernessValue
+            ? LocationType.Caravan
+            : LocationType.Wilderness
+        }`}</Tooltip>
+      }
       placement="top"
     >
       <span

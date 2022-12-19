@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil";
 
 import localStorage from "@neverquest/state/effects/localStorage";
-import { level, progress } from "@neverquest/state/encounter";
+import { isLevelStarted, level, progress } from "@neverquest/state/encounter";
 import { StorageKey } from "@neverquest/types/enums";
 import { getDamagePerRate } from "@neverquest/utilities/helpers";
 
@@ -59,12 +59,6 @@ export const currentHealthMonster = atom({
   default: maximumHealthMonster,
   effects: [localStorage<number>(StorageKey.CurrentHealthMonster)],
   key: StorageKey.CurrentHealthMonster,
-});
-
-export const isLevelStarted = atom({
-  default: false,
-  effects: [localStorage<boolean>(StorageKey.IsLevelStarted)],
-  key: StorageKey.IsLevelStarted,
 });
 
 export const isMonsterNew = atom({

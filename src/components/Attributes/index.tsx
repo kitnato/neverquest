@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import AttributesList from "@neverquest/components/Attributes/AttributesList";
 import CharacterLevel from "@neverquest/components/Character/CharacterLevel";
 import EssenceAbsorbed from "@neverquest/components/Character/EssenceAbsorbed";
-import { isLevelStarted } from "@neverquest/state/monster";
+import { isLevelStarted } from "@neverquest/state/encounter";
 
 export default function () {
   const isLevelStartedValue = useRecoilValue(isLevelStarted);
@@ -16,7 +16,7 @@ export default function () {
 
         <EssenceAbsorbed />
 
-        {isLevelStartedValue && <span>Cannot increase attributes with monsters around!</span>}
+        {isLevelStartedValue && <span>Cannot increase attributes while monsters are lurking!</span>}
       </Stack>
 
       <AttributesList />

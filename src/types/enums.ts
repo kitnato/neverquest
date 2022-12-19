@@ -144,6 +144,7 @@ export enum StorageKey {
   SkillsStatus = "skillsStatus",
   StatusElement = "statusElement",
   Wildernesses = "wildernesses",
+  isInventoryOpen = "isInventoryOpen",
 }
 
 export enum WeaponGrip {

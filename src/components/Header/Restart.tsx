@@ -15,7 +15,7 @@ export default function () {
   const isGameOverValue = useRecoilValue(isGameOver);
   const isShowingGameOver = useRecoilValue(isShowing(ShowingType.GameOver));
 
-  const [isShowingRestart, setShowingRestart] = useState(false);
+  const [isShowingRestart, setIsShowingRestart] = useState(false);
 
   const reset = useReset();
 
@@ -30,7 +30,7 @@ export default function () {
         onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
           currentTarget.blur();
 
-          setShowingRestart(true);
+          setIsShowingRestart(true);
         }}
         variant="outline-light"
       >
@@ -41,7 +41,7 @@ export default function () {
         confirmationLabel="Restart"
         message="This will reset all progress and restart from the beginning."
         onConfirm={reset}
-        setHide={() => setShowingRestart(false)}
+        setHide={() => setIsShowingRestart(false)}
         show={isShowingRestart}
         title="Start a new quest?"
       />

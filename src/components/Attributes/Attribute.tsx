@@ -17,7 +17,7 @@ import {
 } from "@neverquest/state/attributes";
 import { characterLevel } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { isLevelStarted } from "@neverquest/state/monster";
+import { isLevelStarted } from "@neverquest/state/encounter";
 import { AttributeType, DeltaType } from "@neverquest/types/enums";
 import { FloatingText, UIVariant } from "@neverquest/types/ui";
 

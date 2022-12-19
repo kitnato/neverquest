@@ -15,13 +15,13 @@ import {
 export default function () {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
 
-  const [isShowing, setShowing] = useState(false);
+  const [isShowing, setIsShowing] = useState(false);
 
   return (
     <span>
-      <Gear onClick={() => setShowing(true)} style={{ cursor: "pointer" }} />
+      <Gear onClick={() => setIsShowing(true)} style={{ cursor: "pointer" }} />
 
-      <Modal onHide={() => setShowing(false)} show={isShowing}>
+      <Modal onHide={() => setIsShowing(false)} show={isShowing}>
         <Modal.Header closeButton>
           <Modal.Title>Settings</Modal.Title>
         </Modal.Header>

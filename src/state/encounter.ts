@@ -41,19 +41,35 @@ export const progress = selector({
   get: ({ get }) => get(wilderness).progress,
   key: "progress",
   set: ({ get, set }, amount) => {
-    const currentWilderness = { ...get(wildernesses)[get(level) - 1] };
+    const target = get(level) - 1;
+    const newWildernesses = [...get(wildernesses)].map((wilderness, index) => {
+      if (index === target) {
+        const { name } = wilderness;
 
-    if (amount instanceof DefaultValue) {
-      currentWilderness.progress = 0;
-    } else {
-      if (amount === -1) {
-        currentWilderness.progress = get(progressMaximum);
-      } else {
-        currentWilderness.progress = amount;
+        if (amount instanceof DefaultValue) {
+          return {
+            name,
+            progress: 0,
+          };
+        }
+
+        if (amount === -1) {
+          return {
+            name,
+            progress: get(progressMaximum),
+          };
+        }
+
+        return {
+          name,
+          progress: amount,
+        };
       }
-    }
 
-    set(wildernesses, (current) => [...current.slice(0, -1), currentWilderness]);
+      return wilderness;
+    });
+
+    set(wildernesses, newWildernesses);
   },
 });
 
@@ -72,6 +88,12 @@ export const wilderness = selector<Wilderness>({
 });
 
 // ATOMS
+
+export const isLevelStarted = atom({
+  default: false,
+  effects: [localStorage<boolean>(StorageKey.IsLevelStarted)],
+  key: StorageKey.IsLevelStarted,
+});
 
 export const level = atom({
   default: maximumLevel,

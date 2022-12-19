@@ -6,25 +6,23 @@ import IconImage from "@neverquest/components/IconImage";
 import Monster from "@neverquest/components/Monster";
 import useCreateMonster from "@neverquest/hooks/actions/useCreateMonster";
 import { ReactComponent as Icon } from "@neverquest/icons/crossed-bones.svg";
-import { isLevelCompleted, progress } from "@neverquest/state/encounter";
-import { isLevelStarted } from "@neverquest/state/monster";
+import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/helpers";
 
 export default function () {
-  const progressValue = useRecoilValue(progress);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
-  const setLevelStarted = useSetRecoilState(isLevelStarted);
+  const setIsLevelStarted = useSetRecoilState(isLevelStarted);
 
   const createMonster = useCreateMonster();
 
   useEffect(() => {
     if (isLevelCompletedValue) {
-      setLevelStarted(false);
+      setIsLevelStarted(false);
     } else {
       createMonster();
     }
-  }, [createMonster, isLevelCompletedValue, progressValue, setLevelStarted]);
+  });
 
   return (
     <Stack gap={3}>

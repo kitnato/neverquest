@@ -41,28 +41,19 @@ export const progress = selector({
   get: ({ get }) => get(wilderness).progress,
   key: "progress",
   set: ({ get, set }, amount) => {
-    const target = get(level) - 1;
-    const newWildernesses = [...get(wildernesses)].map((wilderness, index) => {
-      if (index === target) {
-        const { name } = wilderness;
+    const currentWilderness = { ...get(wildernesses)[get(level) - 1] };
 
-        if (amount instanceof DefaultValue) {
-          return {
-            name,
-            progress: 0,
-          };
-        }
-
-        return {
-          name,
-          progress: amount,
-        };
+    if (amount instanceof DefaultValue) {
+      currentWilderness.progress = 0;
+    } else {
+      if (amount === -1) {
+        currentWilderness.progress = get(progressMaximum);
+      } else {
+        currentWilderness.progress = amount;
       }
+    }
 
-      return wilderness;
-    });
-
-    set(wildernesses, newWildernesses);
+    set(wildernesses, (current) => [...current.slice(0, -1), currentWilderness]);
   },
 });
 

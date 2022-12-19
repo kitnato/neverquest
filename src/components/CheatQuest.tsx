@@ -3,8 +3,10 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import useGenerateMerchantInventory from "@neverquest/hooks/actions/useGenerateMerchantInventory";
 import useIncreaseLevel from "@neverquest/hooks/actions/useIncreaseLevel";
+import useSwitchLocation from "@neverquest/hooks/actions/useSwitchLocation";
 import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
 import { isWilderness, level, progress, progressMaximum } from "@neverquest/state/encounter";
+import { coinsLoot, essenceLoot, scrapLoot } from "@neverquest/state/resources";
 import { skills } from "@neverquest/state/skills";
 import { SkillType } from "@neverquest/types/enums";
 
@@ -18,6 +20,9 @@ export default function () {
   const isWildernessValue = useRecoilValue(isWilderness);
   const levelValue = useRecoilValue(level);
   const progressMaximumValue = useRecoilValue(progressMaximum);
+  const setCoinsLoot = useSetRecoilState(coinsLoot);
+  const setEssenceLoot = useSetRecoilState(essenceLoot);
+  const setScrapLoot = useSetRecoilState(scrapLoot);
   const setProgress = useSetRecoilState(progress);
   const setSkillArmor = useSetRecoilState(skills(SkillType.Armors));
   const setSkillBleed = useSetRecoilState(skills(SkillType.Bleed));
@@ -30,6 +35,7 @@ export default function () {
 
   const generateMerchantInventory = useGenerateMerchantInventory();
   const increaseLevel = useIncreaseLevel();
+  const switchLocation = useSwitchLocation();
   const transactResources = useTransactResources();
 
   const setSkill = useMemo(
@@ -79,7 +85,7 @@ export default function () {
         }
         // Source engine
         case "noclip": {
-          setProgress((current) => progressMaximumValue - current);
+          setProgress(progressMaximumValue);
           break;
         }
         // The Sims
@@ -104,6 +110,14 @@ export default function () {
             for (let i = 0; i < difference; i++) {
               increaseLevel();
               generateMerchantInventory();
+              setProgress(-1);
+            }
+
+            if (isWildernessValue) {
+              setCoinsLoot(0);
+              setEssenceLoot(0);
+              setScrapLoot(0);
+              switchLocation();
             }
           }
           break;
@@ -119,8 +133,12 @@ export default function () {
     isWildernessValue,
     levelValue,
     progressMaximumValue,
+    setCoinsLoot,
+    setEssenceLoot,
     setProgress,
+    setScrapLoot,
     setSkill,
+    switchLocation,
     transactResources,
   ]);
 

@@ -6,7 +6,7 @@ import useAnimation from "@neverquest/hooks/useAnimation";
 import { isMonsterStaggered } from "@neverquest/state/monster";
 import { totalStaggerDuration } from "@neverquest/state/statistics";
 import { UIVariant } from "@neverquest/types/ui";
-import { formatMilliseconds } from "@neverquest/utilities/helpers";
+import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export default function () {
   const [isStaggeredValue, setStaggered] = useRecoilState(isMonsterStaggered);

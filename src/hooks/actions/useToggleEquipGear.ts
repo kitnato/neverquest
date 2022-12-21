@@ -6,7 +6,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { Gear } from "@neverquest/types";
 import { AttributeType, ShowingType } from "@neverquest/types/enums";
 import { isArmor, isGear, isShield, isWeapon } from "@neverquest/types/type-guards";
-import { getSnapshotGetter } from "@neverquest/utilities/helpers";
+import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 // TODO - refactor with useRecoilTransaction so that these can be called from each other without passing values
 export default function () {

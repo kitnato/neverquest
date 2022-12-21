@@ -1,4 +1,3 @@
-import { FunctionComponent } from "react";
 import { ShieldType, WeaponClass, WeaponType } from "@neverquest/locra/types";
 import { ArmorClass, SkillType, WeaponGrip } from "@neverquest/types/enums";
 import { SVGIcon } from "@neverquest/types/props";
@@ -19,7 +18,6 @@ export interface Attribute {
 }
 
 export interface CrewMember {
-  Component: FunctionComponent;
   description: string;
   hirableLevel: number;
   interaction: string;
@@ -46,7 +44,6 @@ export interface InventoryMerchant {
 }
 
 export type Item = ItemBase & {
-  Action?: FunctionComponent;
   Icon: SVGIcon;
   description: string;
   isPortable: boolean;

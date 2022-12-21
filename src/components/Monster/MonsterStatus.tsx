@@ -10,7 +10,7 @@ import MonsterName from "@neverquest/components/Monster/MonsterName";
 import MonsterStagger from "@neverquest/components/Monster/MonsterStagger";
 import { isMonsterNew, monsterStatusElement } from "@neverquest/state/monster";
 import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
-import { animateElement } from "@neverquest/utilities/helpers";
+import animateElement from "@neverquest/utilities/animateElement";
 
 export default function () {
   const [isMonsterNewValue, setMonsterNew] = useRecoilState(isMonsterNew);

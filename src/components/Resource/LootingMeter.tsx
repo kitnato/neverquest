@@ -6,7 +6,7 @@ import useDropLoot from "@neverquest/hooks/actions/useDropLoot";
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { isLooting, lootingRate } from "@neverquest/state/character";
 import { UIVariant } from "@neverquest/types/ui";
-import { formatMilliseconds } from "@neverquest/utilities/helpers";
+import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export default function () {
   const isLootingValue = useRecoilValue(isLooting);

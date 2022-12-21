@@ -14,7 +14,8 @@ import { skills } from "@neverquest/state/skills";
 import { totalBleedChance, totalDamage } from "@neverquest/state/statistics";
 import { DeltaType, SkillType } from "@neverquest/types/enums";
 import { AnimationSpeed, AnimationType, FloatingText } from "@neverquest/types/ui";
-import { animateElement, getSnapshotGetter } from "@neverquest/utilities/helpers";
+import animateElement from "@neverquest/utilities/animateElement";
+import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
   const changeStamina = useChangeStamina();

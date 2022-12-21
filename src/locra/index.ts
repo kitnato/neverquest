@@ -12,7 +12,7 @@ import {
   ShieldQuery,
   WeaponQuery,
 } from "@neverquest/locra/types";
-import { capitalizeAll } from "@neverquest/utilities/helpers";
+import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export default class LOCRA {
   static generate({

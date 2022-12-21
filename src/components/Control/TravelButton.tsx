@@ -10,7 +10,7 @@ import { isLevelCompleted, isWilderness, level } from "@neverquest/state/encount
 import { hasLooted } from "@neverquest/state/resources";
 import { LocationType } from "@neverquest/types/enums";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function ({ isDisabled }: { isDisabled: boolean }) {
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);

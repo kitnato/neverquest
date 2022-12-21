@@ -10,7 +10,7 @@ import {
   monsterName,
 } from "@neverquest/state/monster";
 import { isNSFW } from "@neverquest/state/settings";
-import { getSnapshotGetter } from "@neverquest/utilities/helpers";
+import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
   return useRecoilCallback(({ set, snapshot }) => () => {

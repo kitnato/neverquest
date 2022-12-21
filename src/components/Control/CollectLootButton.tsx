@@ -7,7 +7,7 @@ import { ReactComponent as Icon } from "@neverquest/icons/locked-chest.svg";
 import { isLevelCompleted } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function ({ isDisabled }: { isDisabled: boolean }) {
   const hasLootedValue = useRecoilValue(hasLooted);

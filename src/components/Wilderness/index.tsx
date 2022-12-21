@@ -8,7 +8,7 @@ import useCreateMonster from "@neverquest/hooks/actions/useCreateMonster";
 import { ReactComponent as Icon } from "@neverquest/icons/crossed-bones.svg";
 import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
 import { AnimationType } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function () {
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);

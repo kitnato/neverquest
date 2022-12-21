@@ -1,14 +1,14 @@
 import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
-import { MERCHANT_OFFERS } from "@neverquest/constants/caravan";
+import { MERCHANT_OFFERS } from "@neverquest/constants/merchant";
 import { AffixTag } from "@neverquest/locra/types";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { level } from "@neverquest/state/encounter";
 import { isNSFW } from "@neverquest/state/settings";
 import { isItem } from "@neverquest/types/type-guards";
 import { generateArmor, generateShield, generateWeapon } from "@neverquest/utilities/generators";
-import { getSnapshotGetter } from "@neverquest/utilities/helpers";
+import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
   return useRecoilCallback(({ set, snapshot }) => () => {

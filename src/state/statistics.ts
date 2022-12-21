@@ -5,7 +5,7 @@ import { WeaponClass } from "@neverquest/locra/types";
 import { attributes } from "@neverquest/state/attributes";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { AttributeType } from "@neverquest/types/enums";
-import { getComputedStat, getDamagePerRate } from "@neverquest/utilities/helpers";
+import { getComputedStat, getDamagePerRate } from "@neverquest/utilities/getters";
 
 export const bleedDamageDelta = selector({
   get: ({ get }) => (get(totalDamage) * get(totalBleedDamage)) / BLEED_DURATION,

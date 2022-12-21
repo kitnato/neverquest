@@ -12,7 +12,7 @@ import { isLevelStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function ({ isDisabled }: { isDisabled: boolean }) {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);

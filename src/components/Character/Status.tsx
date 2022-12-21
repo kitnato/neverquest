@@ -11,7 +11,7 @@ import Recovery from "@neverquest/components/Character/Recovery";
 import Stamina from "@neverquest/components/Character/Stamina";
 import { statusElement } from "@neverquest/state/character";
 import { AnimationType } from "@neverquest/types/ui";
-import { animateElement } from "@neverquest/utilities/helpers";
+import animateElement from "@neverquest/utilities/animateElement";
 
 export default function () {
   const element = useRef(null);

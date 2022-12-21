@@ -6,7 +6,7 @@ import useAnimation from "@neverquest/hooks/useAnimation";
 import { isRecovering } from "@neverquest/state/character";
 import { totalRecoveryRate } from "@neverquest/state/statistics";
 import { UIVariant } from "@neverquest/types/ui";
-import { formatMilliseconds } from "@neverquest/utilities/helpers";
+import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export default function () {
   const [isRecoveringValue, setRecovering] = useRecoilState(isRecovering);

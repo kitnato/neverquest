@@ -9,7 +9,7 @@ import {
 } from "@neverquest/locra/types";
 import { Armor, Shield, Weapon } from "@neverquest/types";
 import { ArmorClass, WeaponGrip } from "@neverquest/types/enums";
-import { getFromRange, getWeaponSpecifications } from "@neverquest/utilities/helpers";
+import { getFromRange, getWeaponSpecifications } from "@neverquest/utilities/getters";
 
 export function generateArmor({
   armorClass,

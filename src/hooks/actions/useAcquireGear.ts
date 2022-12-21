@@ -7,7 +7,7 @@ import { armor, canFit, inventory, shield, weapon } from "@neverquest/state/inve
 import { autoEquip } from "@neverquest/state/settings";
 import { Gear } from "@neverquest/types";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
-import { getSnapshotGetter } from "@neverquest/utilities/helpers";
+import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
   const toggleEquipGear = useToggleEquipGear();

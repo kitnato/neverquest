@@ -5,7 +5,7 @@ import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { isRecovering } from "@neverquest/state/character";
 import { DeltaReserve, UIAttachment, UISize, UIVariant } from "@neverquest/types/ui";
-import { formatMilliseconds } from "@neverquest/utilities/helpers";
+import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export default function ({
   handleChangeReserve,

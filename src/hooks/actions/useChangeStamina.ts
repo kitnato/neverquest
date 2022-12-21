@@ -4,7 +4,7 @@ import { deltas } from "@neverquest/state/deltas";
 import { currentStamina, maximumStamina } from "@neverquest/state/reserves";
 import { DeltaType } from "@neverquest/types/enums";
 import { DeltaReserve, FloatingText } from "@neverquest/types/ui";
-import { getSnapshotGetter } from "@neverquest/utilities/helpers";
+import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
   return useRecoilCallback(({ set, snapshot }) => ({ value }: DeltaReserve) => {

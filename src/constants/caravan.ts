@@ -1,22 +1,8 @@
-import Blacksmith from "@neverquest/components/Caravan/Blacksmith";
-import Cook from "@neverquest/components/Caravan/Cook";
-import Medic from "@neverquest/components/Caravan/Medic";
-import Mercenary from "@neverquest/components/Caravan/Mercenary";
-import Merchant from "@neverquest/components/Caravan/Merchant";
-import Tailor from "@neverquest/components/Caravan/Tailor";
-import {
-  ITEM_COMPASS,
-  ITEM_HEARTHSTONE,
-  ITEM_KNAPSACK,
-  ITEM_LODESTONE,
-} from "@neverquest/constants/items";
-import { ShieldType, WeaponClass, WeaponType } from "@neverquest/locra/types";
-import { CrewMember, Item } from "@neverquest/types";
-import { ArmorClass, CrewType } from "@neverquest/types/enums";
+import { CrewMember } from "@neverquest/types";
+import { CrewType } from "@neverquest/types/enums";
 
 export const CREW_MEMBERS: Record<CrewType, CrewMember> = {
   [CrewType.Blacksmith]: {
-    Component: Blacksmith,
     description: "Crafts superior gear.",
     hirableLevel: 5,
     interaction: "Craft",
@@ -26,7 +12,6 @@ export const CREW_MEMBERS: Record<CrewType, CrewMember> = {
   },
   // TODO
   [CrewType.Cook]: {
-    Component: Cook,
     description: "Cooks delicious meals that revitalize.",
     hirableLevel: 99,
     interaction: "Trade",
@@ -35,7 +20,6 @@ export const CREW_MEMBERS: Record<CrewType, CrewMember> = {
     price: 0,
   },
   [CrewType.Medic]: {
-    Component: Medic,
     description: "Stems wounds and rescues from certain death.",
     hirableLevel: 99,
     interaction: "Trade",
@@ -44,7 +28,6 @@ export const CREW_MEMBERS: Record<CrewType, CrewMember> = {
     price: 0,
   },
   [CrewType.Mercenary]: {
-    Component: Mercenary,
     description: "Trains new skills and attributes.",
     hirableLevel: 5,
     interaction: "Train",
@@ -53,7 +36,6 @@ export const CREW_MEMBERS: Record<CrewType, CrewMember> = {
     price: 25,
   },
   [CrewType.Merchant]: {
-    Component: Merchant,
     description: "",
     hirableLevel: 0,
     interaction: "Trade",
@@ -69,7 +51,6 @@ export const CREW_MEMBERS: Record<CrewType, CrewMember> = {
   },
   // TODO
   [CrewType.Tailor]: {
-    Component: Tailor,
     description: "",
     hirableLevel: 99,
     interaction: "Upgrade",
@@ -89,52 +70,3 @@ export const CREW_ORDER = [
 ];
 
 export const CREW_INITIAL = [CrewType.Merchant];
-
-export const EXCHANGE_COINS = 1;
-
-export const EXCHANGE_SCRAP = 3;
-
-export const MERCHANT_OFFERS: (
-  | Item
-  | { type: WeaponType; weaponClass: WeaponClass }
-  | { armorClass: ArmorClass }
-  | { type: ShieldType }
-)[][] = [
-  [
-    {
-      type: WeaponType.Melee,
-      weaponClass: WeaponClass.Piercing,
-    },
-  ],
-  [
-    {
-      armorClass: ArmorClass.Hide,
-    },
-  ],
-  [
-    {
-      type: ShieldType.Small,
-    },
-  ],
-  [ITEM_KNAPSACK],
-  [ITEM_LODESTONE, ITEM_COMPASS, ITEM_HEARTHSTONE],
-  [
-    {
-      type: WeaponType.Melee,
-      weaponClass: WeaponClass.Slashing,
-    },
-    {
-      type: WeaponType.Melee,
-      weaponClass: WeaponClass.Blunt,
-    },
-    {
-      armorClass: ArmorClass.Reinforced,
-    },
-    {
-      type: ShieldType.Medium,
-    },
-    {
-      type: ShieldType.Tower,
-    },
-  ],
-];

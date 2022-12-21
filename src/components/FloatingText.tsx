@@ -5,7 +5,7 @@ import { RecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { DEFAULT_DELTA_DISPLAY } from "@neverquest/constants";
 import { AnimationSpeed, AnimationType, DeltaDisplay } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 type FloatingText = {
   contents: ReactNode;

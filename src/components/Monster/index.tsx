@@ -11,7 +11,7 @@ import { isAttacking, isLooting } from "@neverquest/state/character";
 import { isLevelStarted } from "@neverquest/state/encounter";
 import { isMonsterDead } from "@neverquest/state/monster";
 import { AnimationType } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function () {
   const setLooting = useSetRecoilState(isLooting);

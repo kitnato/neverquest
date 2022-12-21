@@ -3,7 +3,7 @@ import { atom, selector } from "recoil";
 import localStorage from "@neverquest/state/effects/localStorage";
 import { isLevelStarted, level, progress } from "@neverquest/state/encounter";
 import { StorageKey } from "@neverquest/types/enums";
-import { getDamagePerRate } from "@neverquest/utilities/helpers";
+import { getDamagePerRate } from "@neverquest/utilities/getters";
 
 // SELECTORS
 

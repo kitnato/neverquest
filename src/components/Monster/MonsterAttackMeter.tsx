@@ -11,7 +11,7 @@ import {
   totalAttackRateMonster,
 } from "@neverquest/state/monster";
 import { UIVariant } from "@neverquest/types/ui";
-import { formatMilliseconds } from "@neverquest/utilities/helpers";
+import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export default function () {
   const isAttackingValue = useRecoilValue(isAttacking);

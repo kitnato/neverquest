@@ -11,7 +11,7 @@ import {
   mode,
 } from "@neverquest/state/encounter";
 import { LocationType } from "@neverquest/types/enums";
-import { getSnapshotGetter } from "@neverquest/utilities/helpers";
+import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);

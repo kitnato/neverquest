@@ -5,7 +5,7 @@ import { characterLevel } from "@neverquest/state/character";
 import localStorage from "@neverquest/state/effects/localStorage";
 import { essence } from "@neverquest/state/resources";
 import { AttributeType, StorageKey } from "@neverquest/types/enums";
-import { getComputedStat, getTriangularNumber } from "@neverquest/utilities/helpers";
+import { getComputedStat, getTriangularNumber } from "@neverquest/utilities/getters";
 
 interface AttributeState {
   isUnlocked: boolean;

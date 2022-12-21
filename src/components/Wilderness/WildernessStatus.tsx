@@ -6,7 +6,7 @@ import WildernessProgress from "@neverquest/components/Wilderness/WildernessProg
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function () {
   const showWildernessStatusValue = useRecoilValue(isShowing(ShowingType.WildernessStatus));

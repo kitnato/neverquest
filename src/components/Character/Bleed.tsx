@@ -12,8 +12,8 @@ import {
   formatMilliseconds,
   formatPercentage,
   formatToFixed,
-  getDamagePerRate,
-} from "@neverquest/utilities/helpers";
+} from "@neverquest/utilities/formatters";
+import { getDamagePerRate } from "@neverquest/utilities/getters";
 
 export default function () {
   const totalBleedDamageValue = useRecoilValue(totalBleedDamage);

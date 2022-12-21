@@ -9,7 +9,7 @@ import { useReset } from "@neverquest/state/SeedContext";
 import { isGameOver } from "@neverquest/state/settings";
 import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function () {
   const isGameOverValue = useRecoilValue(isGameOver);

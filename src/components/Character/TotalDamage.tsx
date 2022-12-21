@@ -14,7 +14,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingDamagePerSecond } from "@neverquest/state/settings";
 import { damagePerSecond, totalDamage } from "@neverquest/state/statistics";
 import { AttributeType, DeltaType, ShowingType } from "@neverquest/types/enums";
-import { getComputedStat } from "@neverquest/utilities/helpers";
+import { getComputedStat } from "@neverquest/utilities/getters";
 
 export default function () {
   const { points } = useRecoilValue(attributes(AttributeType.Damage));

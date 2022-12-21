@@ -7,7 +7,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { isNSFW } from "@neverquest/state/settings";
 import { CrewStatus, ShowingType } from "@neverquest/types/enums";
 import { generateLocation } from "@neverquest/utilities/generators";
-import { getSnapshotGetter } from "@neverquest/utilities/helpers";
+import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
   return useRecoilCallback(({ set, snapshot }) => () => {

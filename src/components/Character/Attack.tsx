@@ -16,11 +16,8 @@ import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { totalAttackRate } from "@neverquest/state/statistics";
 import { AttributeType, DeltaType, ShowingType } from "@neverquest/types/enums";
-import {
-  formatMilliseconds,
-  formatPercentage,
-  getComputedStat,
-} from "@neverquest/utilities/helpers";
+import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
+import { getComputedStat } from "@neverquest/utilities/getters";
 
 export default function () {
   const { points } = useRecoilValue(attributes(AttributeType.AttackRate));

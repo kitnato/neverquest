@@ -5,7 +5,7 @@ import { ReactComponent as Icon } from "@neverquest/icons/striking-splinter.svg"
 import { skills } from "@neverquest/state/skills";
 import { totalCriticalDamage } from "@neverquest/state/statistics";
 import { SkillType } from "@neverquest/types/enums";
-import { formatPercentage } from "@neverquest/utilities/helpers";
+import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export default function () {
   const criticalDamageValue = useRecoilValue(totalCriticalDamage);

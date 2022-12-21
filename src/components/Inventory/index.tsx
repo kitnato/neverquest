@@ -1,14 +1,18 @@
+import { FunctionComponent } from "react";
 import { Button, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import Encumbrance from "@neverquest/components/Inventory/Encumbrance";
 import InventoryElement from "@neverquest/components/Inventory/InventoryElement";
+import CompassUseButton from "@neverquest/components/Inventory/Item/CompassUseButton";
+import HearthstoneUseButton from "@neverquest/components/Inventory/Item/HearthstoneUseButton";
+import LodestoneUseButton from "@neverquest/components/Inventory/Item/LodestoneUseButton";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
+import { ITEM_COMPASS, ITEM_HEARTHSTONE, ITEM_LODESTONE } from "@neverquest/constants/items";
 import useToggleEquipGear from "@neverquest/hooks/actions/useToggleEquipGear";
 import { inventory } from "@neverquest/state/inventory";
 import { isGear, isItem } from "@neverquest/types/type-guards";
 import { UIVariant } from "@neverquest/types/ui";
-import { getItemFunctionComponents } from "@neverquest/utilities/helpers";
 
 export default function () {
   const inventoryValue = useRecoilValue(inventory);
@@ -59,7 +63,7 @@ export default function () {
 
         {storedInventoryValueIDs.map((id) => {
           const { key, possession } = inventoryValue[id];
-          let PossessionAction;
+          let PossessionAction: FunctionComponent = () => null;
 
           if (isGear(possession)) {
             PossessionAction = () => (
@@ -70,16 +74,29 @@ export default function () {
           }
 
           if (isItem(possession)) {
-            const { Action } = getItemFunctionComponents(possession);
-
-            PossessionAction = Action;
+            PossessionAction = (() => {
+              switch (possession.name) {
+                case ITEM_COMPASS.name: {
+                  return CompassUseButton;
+                }
+                case ITEM_HEARTHSTONE.name: {
+                  return HearthstoneUseButton;
+                }
+                case ITEM_LODESTONE.name: {
+                  return LodestoneUseButton;
+                }
+                default: {
+                  return () => null;
+                }
+              }
+            })();
           }
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={key}>
               <InventoryElement possession={possession} />
 
-              {PossessionAction && <PossessionAction />}
+              <PossessionAction />
             </div>
           );
         })}

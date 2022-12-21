@@ -3,7 +3,7 @@ import { atom, selector } from "recoil";
 import { UNKNOWN } from "@neverquest/constants";
 import localStorage from "@neverquest/state/effects/localStorage";
 import { StorageKey } from "@neverquest/types/enums";
-import { getTriangularNumber } from "@neverquest/utilities/helpers";
+import { getTriangularNumber } from "@neverquest/utilities/getters";
 
 // ATOMS
 

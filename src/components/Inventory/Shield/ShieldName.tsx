@@ -7,7 +7,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { Shield } from "@neverquest/types";
 import { ShowingType, SkillType } from "@neverquest/types/enums";
-import { capitalizeAll, formatPercentage } from "@neverquest/utilities/helpers";
+import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 
 export default function ({ shield }: { shield: Shield }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);

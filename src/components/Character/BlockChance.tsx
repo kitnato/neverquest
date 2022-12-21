@@ -6,7 +6,7 @@ import { shield } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
-import { formatPercentage } from "@neverquest/utilities/helpers";
+import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export default function () {
   const { blockChance } = useRecoilValue(shield);

@@ -6,7 +6,7 @@ import { characterLevel } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { AttributeType, DeltaType } from "@neverquest/types/enums";
 import { FloatingText } from "@neverquest/types/ui";
-import { getSnapshotGetter } from "@neverquest/utilities/helpers";
+import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
   const transactResources = useTransactResources();

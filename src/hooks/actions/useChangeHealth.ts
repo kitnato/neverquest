@@ -6,7 +6,7 @@ import { currentHealth, maximumHealth } from "@neverquest/state/reserves";
 import { isGameOver } from "@neverquest/state/settings";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
 import { DeltaReserve, FloatingText } from "@neverquest/types/ui";
-import { getSnapshotGetter } from "@neverquest/utilities/helpers";
+import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
   return useRecoilCallback(({ set, snapshot }) => (change: DeltaReserve) => {

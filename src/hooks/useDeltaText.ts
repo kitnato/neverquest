@@ -3,7 +3,7 @@ import { RecoilState, RecoilValueReadOnly, useRecoilValue, useSetRecoilState } f
 
 import usePreviousValue from "@neverquest/hooks/usePreviousValue";
 import { DeltaDisplay, FloatingText } from "@neverquest/types/ui";
-import { formatMilliseconds } from "@neverquest/utilities/helpers";
+import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export default function ({
   deltaAtom,

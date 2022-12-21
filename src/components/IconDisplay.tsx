@@ -4,7 +4,7 @@ import { Stack } from "react-bootstrap";
 import IconImage from "@neverquest/components/IconImage";
 import { IconImageProps, SVGIcon } from "@neverquest/types/props";
 import { AnimationType } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function ({
   contents,

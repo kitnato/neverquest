@@ -5,7 +5,7 @@ import ImageIcon from "@neverquest/components/IconImage";
 import { ReactComponent as Icon } from "@neverquest/icons/rocking-chair.svg";
 import { isWilderness } from "@neverquest/state/encounter";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 // TODO
 export default function ({ isDisabled }: { isDisabled: boolean }) {

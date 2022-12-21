@@ -10,7 +10,7 @@ import {
   scrapLoot,
 } from "@neverquest/state/resources";
 import { ShowingType } from "@neverquest/types/enums";
-import { getSnapshotGetter } from "@neverquest/utilities/helpers";
+import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
   return useRecoilCallback(

@@ -11,7 +11,7 @@ import useTransactResources from "@neverquest/hooks/actions/useTransactResources
 import { merchantInventory } from "@neverquest/state/caravan";
 import { inventory } from "@neverquest/state/inventory";
 import { UIVariant } from "@neverquest/types/ui";
-import { getSellPrice } from "@neverquest/utilities/helpers";
+import { getSellPrice } from "@neverquest/utilities/getters";
 
 export default function () {
   const [inventoryValue, setInventory] = useRecoilState(inventory);

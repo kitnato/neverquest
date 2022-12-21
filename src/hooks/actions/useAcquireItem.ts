@@ -4,7 +4,7 @@ import { useRecoilCallback } from "recoil";
 import { ITEM_KNAPSACK } from "@neverquest/constants/items";
 import { canFit, encumbranceMaximum, hasKnapsack, inventory } from "@neverquest/state/inventory";
 import { Item } from "@neverquest/types";
-import { getSnapshotGetter } from "@neverquest/utilities/helpers";
+import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
   return useRecoilCallback(({ set, snapshot }) => ({ item }: { item: Item }) => {

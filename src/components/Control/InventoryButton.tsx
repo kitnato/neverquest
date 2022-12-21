@@ -9,7 +9,7 @@ import { ReactComponent as Icon } from "@neverquest/icons/knapsack.svg";
 import { isAttacking } from "@neverquest/state/character";
 import { hasKnapsack, isInventoryOpen } from "@neverquest/state/inventory";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function ({ isDisabled }: { isDisabled: boolean }) {
   const [isInventoryOpenValue, setIsInventoryOpen] = useRecoilState(isInventoryOpen);

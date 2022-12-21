@@ -6,7 +6,7 @@ import { skills } from "@neverquest/state/skills";
 import { totalParryChance } from "@neverquest/state/statistics";
 import { SkillType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
-import { formatPercentage } from "@neverquest/utilities/helpers";
+import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export default function () {
   const parryChanceValue = useRecoilValue(totalParryChance);

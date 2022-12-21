@@ -9,7 +9,7 @@ import { currentHealthMonster, monsterBleedingDuration } from "@neverquest/state
 import { bleedDamageDelta } from "@neverquest/state/statistics";
 import { DeltaType } from "@neverquest/types/enums";
 import { FloatingText, UIVariant } from "@neverquest/types/ui";
-import { formatMilliseconds } from "@neverquest/utilities/helpers";
+import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export default function () {
   const [monsterBleedingDurationValue, setMonsterBleedingDuration] =

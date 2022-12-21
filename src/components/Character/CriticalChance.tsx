@@ -5,7 +5,7 @@ import { ReactComponent as Icon } from "@neverquest/icons/spiky-eclipse.svg";
 import { skills } from "@neverquest/state/skills";
 import { totalCriticalChance } from "@neverquest/state/statistics";
 import { SkillType } from "@neverquest/types/enums";
-import { formatPercentage } from "@neverquest/utilities/helpers";
+import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export default function () {
   const criticalChanceValue = useRecoilValue(totalCriticalChance);

@@ -3,11 +3,9 @@ import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import IconDisplay from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { Item } from "@neverquest/types";
-import { getItemFunctionComponents } from "@neverquest/utilities/helpers";
 
 export default function ({ item }: { item: Item }) {
-  const { description, name, weight } = item;
-  const { Icon } = getItemFunctionComponents(item);
+  const { description, Icon, name, weight } = item;
 
   return (
     <IconDisplay

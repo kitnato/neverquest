@@ -6,7 +6,7 @@ import { useRecoilValue } from "recoil";
 import Coins from "@neverquest/components/Resource/Coins";
 import Scrap from "@neverquest/components/Resource/Scrap";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
-import { EXCHANGE_COINS, EXCHANGE_SCRAP } from "@neverquest/constants/caravan";
+import { EXCHANGE_COINS, EXCHANGE_SCRAP } from "@neverquest/constants/merchant";
 import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
 import { scrap } from "@neverquest/state/resources";
 import { UIVariant } from "@neverquest/types/ui";

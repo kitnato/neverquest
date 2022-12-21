@@ -9,7 +9,7 @@ import { isMonsterDead } from "@neverquest/state/monster";
 import { canAttackOrParry } from "@neverquest/state/reserves";
 import { totalAttackRate } from "@neverquest/state/statistics";
 import { UIVariant } from "@neverquest/types/ui";
-import { formatMilliseconds } from "@neverquest/utilities/helpers";
+import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export default function () {
   const isAttackingValue = useRecoilValue(isAttacking);

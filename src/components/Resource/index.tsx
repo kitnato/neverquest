@@ -4,7 +4,7 @@ import { RecoilState, useRecoilValue } from "recoil";
 import FloatingText from "@neverquest/components/FloatingText";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { AnimationType, DeltaDisplay } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function ({
   atom,

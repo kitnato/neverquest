@@ -5,7 +5,7 @@ import ResourceDisplay from "@neverquest/components/Resource/ResourceDisplay";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function () {
   const showCoinsValue = useRecoilValue(isShowing(ShowingType.Coins));

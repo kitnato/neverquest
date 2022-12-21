@@ -15,7 +15,7 @@ import { isHealthLow } from "@neverquest/state/reserves";
 import { lowHealthWarning } from "@neverquest/state/settings";
 import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/helpers";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function ({ isDisabled }: { isDisabled: boolean }) {
   const [isAttackingValue, setAttacking] = useRecoilState(isAttacking);

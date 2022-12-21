@@ -25,7 +25,8 @@ import {
 } from "@neverquest/state/statistics";
 import { DeltaType, ShowingType, SkillType } from "@neverquest/types/enums";
 import { AnimationSpeed, AnimationType, DeltaDisplay, FloatingText } from "@neverquest/types/ui";
-import { animateElement, getSnapshotGetter } from "@neverquest/utilities/helpers";
+import animateElement from "@neverquest/utilities/animateElement";
+import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 // If dodged, no other actions taken (all damage negated)
 // If health damage (total protection minus total monster damage) is 0 or less, no other actions taken

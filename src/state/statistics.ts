@@ -8,7 +8,7 @@ import { AttributeType } from "@neverquest/types/enums";
 import { getComputedStat, getDamagePerRate } from "@neverquest/utilities/getters";
 
 export const bleedDamageDelta = selector({
-  get: ({ get }) => (get(totalDamage) * get(totalBleedDamage)) / BLEED_DURATION,
+  get: ({ get }) => Math.ceil((get(totalDamage) * get(totalBleedDamage)) / BLEED_DURATION),
   key: "bleedDamageDelta",
 });
 

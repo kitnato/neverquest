@@ -11,9 +11,14 @@ import {
 } from "@neverquest/state/monster";
 import { canAttackOrParry } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
-import { totalBleedChance, totalDamage } from "@neverquest/state/statistics";
+import {
+  totalBleedChance,
+  totalCriticalChance,
+  totalCriticalDamage,
+  totalDamage,
+} from "@neverquest/state/statistics";
 import { DeltaType, SkillType } from "@neverquest/types/enums";
-import { AnimationSpeed, AnimationType, FloatingText } from "@neverquest/types/ui";
+import { AnimationSpeed, AnimationType, DeltaDisplay, FloatingText } from "@neverquest/types/ui";
 import animateElement from "@neverquest/utilities/animateElement";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -28,12 +33,18 @@ export default function () {
         const { staminaCost } = get(weapon);
 
         if (get(canAttackOrParry)) {
+          const hasInflictedCritical =
+            get(skills(SkillType.Criticals)) && Math.random() <= get(totalCriticalChance);
           const hasInflictedBleed =
             get(monsterBleedingDuration) === 0 &&
             get(skills(SkillType.Bleed)) &&
             Math.random() <= get(totalBleedChance);
 
-          let monsterHealth = get(currentHealthMonster) - get(totalDamage);
+          const baseDamage = -get(totalDamage);
+          const damage = hasInflictedCritical ? baseDamage * get(totalCriticalDamage) : baseDamage;
+          const extra: DeltaDisplay = [];
+
+          let monsterHealth = get(currentHealthMonster) + damage;
 
           if (monsterHealth < 0) {
             monsterHealth = 0;
@@ -44,14 +55,29 @@ export default function () {
           }
 
           set(currentHealthMonster, monsterHealth);
-          set(deltas(DeltaType.HealthMonster), {
-            color: FloatingText.Negative,
-            value: -get(totalDamage),
-          });
+
+          if (hasInflictedCritical) {
+            extra.push({
+              color: FloatingText.Negative,
+              value: "CRITICAL",
+            });
+          }
 
           if (hasInflictedBleed) {
             set(monsterBleedingDuration, BLEED_DURATION);
+            extra.push({
+              color: FloatingText.Negative,
+              value: "BLEED",
+            });
           }
+
+          set(deltas(DeltaType.HealthMonster), [
+            {
+              color: FloatingText.Negative,
+              value: damage,
+            },
+            ...extra,
+          ]);
 
           animateElement({
             element: get(monsterStatusElement),

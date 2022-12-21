@@ -6,12 +6,14 @@ import IconImage from "@neverquest/components/IconImage";
 import Monster from "@neverquest/components/Monster";
 import useCreateMonster from "@neverquest/hooks/actions/useCreateMonster";
 import { ReactComponent as Icon } from "@neverquest/icons/crossed-bones.svg";
-import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
+import { isLevelCompleted, isLevelStarted, progress } from "@neverquest/state/encounter";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function () {
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
+  // Progress needs to be tracked here so that a new monster is created whenever there is level progression.
+  const progressValue = useRecoilValue(progress);
   const setIsLevelStarted = useSetRecoilState(isLevelStarted);
 
   const createMonster = useCreateMonster();
@@ -22,7 +24,7 @@ export default function () {
     } else {
       createMonster();
     }
-  });
+  }, [createMonster, isLevelCompletedValue, progressValue, setIsLevelStarted]);
 
   return (
     <Stack gap={3}>

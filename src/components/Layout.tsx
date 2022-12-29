@@ -7,6 +7,7 @@ import ConfirmationDialog from "@neverquest/components/ConfirmationDialog";
 import Control from "@neverquest/components/Control";
 import Encounter from "@neverquest/components/Encounter";
 import Location from "@neverquest/components/Location";
+import Masteries from "@neverquest/components/Masteries";
 import WildernessStatus from "@neverquest/components/Wilderness/WildernessStatus";
 import { isShowing } from "@neverquest/state/isShowing";
 import { useReset } from "@neverquest/state/SeedContext";
@@ -34,6 +35,8 @@ export default function () {
             <div style={{ zIndex: 1050 }}>
               <Character />
             </div>
+
+            <Masteries />
           </Stack>
         </Col>
 

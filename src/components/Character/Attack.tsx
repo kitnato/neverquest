@@ -17,7 +17,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { totalAttackRate } from "@neverquest/state/statistics";
 import { AttributeType, DeltaType, ShowingType } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
-import { getComputedStat } from "@neverquest/utilities/getters";
+import { getComputedStatistic } from "@neverquest/utilities/getters";
 
 export default function () {
   const { points } = useRecoilValue(attributes(AttributeType.AttackRate));
@@ -73,7 +73,7 @@ export default function () {
                         <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
 
                         <td>{`-${formatPercentage(
-                          getComputedStat({ base, increment, points })
+                          getComputedStatistic({ base, increment, points })
                         )}`}</td>
                       </tr>
                     </tbody>

@@ -74,17 +74,9 @@ Affects [dodge chance](#dodge-chance). Required skill: [Evasion](#evasion).
 
 Affects [critical chance](#critical-chance). Required skill: [Assassination](#assassination).
 
-#### Cruelty
-
-Affects [bleed damage](#bleed-damage). Required skill: [Anatomy](#anatomy).
-
 #### Endurance
 
 Affects maximum [total stamina](#stamina).
-
-#### Finesse
-
-Affects [parry absorption](#parry-absorption) & [parry damage](#parry-damage) in equal measure. Required skill: [Escrime](#escrime).
 
 #### Fortitude
 
@@ -102,10 +94,6 @@ Affects energy regeneration rate.
 
 Affects the amount of loot dropped by monsters.
 
-#### Might
-
-Affects [stagger duration](#stagger-duration). Required skill: [Traumatology](#traumatology).
-
 #### Perception
 
 Affects [critical damage](#critical-damage). Required skill: [Assassination](#assassination).
@@ -121,12 +109,6 @@ Affects [rate of attack](#attack-rate).
 #### Strength
 
 Affects [total damage](#total-damage) of an attack.
-
-#### Tenacity
-
-`TODO`
-
-Affects amount of damage that can be taken without needing to [recover](#recovery-rate).
 
 #### Vigor
 
@@ -162,7 +144,7 @@ Percentage determining the chance that when attacking, the given [bleed damage](
 
 Percentage of the weapon's total damage that is inflicted over time after a successful attack with bleed. Proportional to this total is taken every 500 milliseconds until duration (2.5 seconds total) is complete.
 
-Can be increased with the [Cruelty](#cruelty) attribute.
+Can be increased by mastering [Cruelty](#cruelty).
 
 #### Block chance
 
@@ -194,7 +176,7 @@ Can be increased with the [Vigor](#vigor) attribute.
 
 #### Parry absorption
 
-Percentage of attacking damage after current [protection](#protection) that is subtracted upon a successful parry (base: 33%). Can be increased with the [Finesse](#finesse) attribute.
+Percentage of attacking damage after current [protection](#protection) that is subtracted upon a successful parry (base: 33%). Can be increased by mastering [Finesse](#finesse).
 
 #### Parry chance
 
@@ -202,7 +184,7 @@ Percentage chance determining a successful [parry](#parry) when defending.
 
 #### Parry damage
 
-Percentage of attacking damage that is inflicted on the attacker upon a successful parry (base: 25%). Can be increased with the [Finesse](#finesse) attribute.
+Percentage of attacking damage that is inflicted on the attacker upon a successful parry (base: 25%). Can be increased by mastering [Finesse](#finesse).
 
 #### Protection
 
@@ -214,13 +196,13 @@ Recovery occurs when the character is dealt damage, halting regeneration of [res
 
 #### Stagger chance
 
-Percentage determining the chance of [staggering](#stagger) (incapacitating) the monster when attacking or defending based primarily on the current [gear](#gear) ([shields](#shields) and [blunt weapons](#blunt-weapon)) for a certain [duration](#stagger-duration).
+Percentage determining the chance of [staggering](#stagger) the monster when attacking or defending based primarily on the current [gear](#gear) ([shields](#shields) and [blunt weapons](#blunt-weapon)) for a certain [duration](#stagger-duration).
 
 #### Stagger duration
 
-Time until the monster recovers from incapacitation until it can continue attacking.
+Time until the monster recovers from [staggering](#stagger) until it can continue attacking.
 
-Can be increased with the [Might](#might) attribute.
+Can be increased by mastering [Might](#might).
 
 #### Stamina regeneration rate
 
@@ -266,9 +248,7 @@ An attack might deal extra damage, which is determined by the [chance](#critical
 
 #### Deflection
 
-`TODO`
-
-The chance for the character to completely ignore all effects of an incoming monster's non-physical damage and/or [ailment](#ailments).
+The chance for the character to completely ignore all effects of an incoming monster's spell (`TODO`) and/or [ailment](#ailments).
 
 #### Dodge
 
@@ -290,7 +270,7 @@ The looted resources can only be collected once the [wave](#wilderness) is compl
 
 #### Parry
 
-A successful parry [absorbs](#parry-absorption) a percentage of the total damage of an attack and [reflects](#parry-damage) a percentage back to the attacker. These percentages are determined by the [Finesse](#finesse) attribute.
+A successful parry [absorbs](#parry-absorption) a percentage of the total damage of an attack and [reflects](#parry-damage) a percentage back to the attacker. These percentages are determined by the [Finesse](#finesse) mastery rank.
 
 The overall chance to parry an attack is determined by the [parry chance](#parry-chance), which is influenced by currently-equipped gear ([slashing weapons](#slashing-weapon). When parrying occurs, the stamina cost of the currently-equipped weapon is paid. If [exhausted](#exhaustion), no parrying can occur.
 
@@ -300,7 +280,7 @@ Parrying is only possible after acquiring the [Escrime](#escrime) skill.
 
 When staggered, the monster will not be able to attack for a certain duration. The character is considered staggered themselves when they are [recovering](#recovery-rate).
 
-The overall [stagger chance](#stagger-chance) statistic is determined by the current gear ([shields](#shields) and [blunt weapons](#blunt-weapon)). The [stagger duration](#stagger-duration) is influenced by the [Might](#might).
+The overall [stagger chance](#stagger-chance) statistic is determined by the current gear ([shields](#shields) and [blunt weapons](#blunt-weapon)). The [stagger duration](#stagger-duration) is determined by the [Might](#might) mastery.
 
 Staggering is only possible after acquiring the [Traumatology](#traumatology) skill.
 
@@ -490,14 +470,11 @@ No initial modifiers.
 
 ##### Plate armor
 
-`TODO`
-
 - High protection
 - High -% dodge
 - -% attack rate
-- Immunity to bleed
 - +% block chance
-- Chance to [deflect](#deflection) spells
+- % [deflect](#deflection) chance
 - High cost
 
 #### Off-hand
@@ -566,15 +543,29 @@ Adds poison to weapons automatically with each strike, applying damage-over-time
 
 #### Salves
 
-Temporarily immunizes against [ailments](#ailments).
+Temporarily immunizes against certain [ailments](#ailments).
 
 ## Mastery
 
-`TODO`
+Using a particular weapon or armor increases its associated mastery, determined by ranks. Weapon mastery progress towards the next rank is gained when the respective mastery's requirements are met during combat.
 
-Using a particular weapon or armor type increases its associated mastery. Weapon mastery increases when attacking and armor mastery increases when being strike.
+Each mastery starts at rank 1 and requires a certain amount of accumulated progress before the next rank is achieved. Each rank confers bonuses on the respective armor and weapon types.
 
-Leveling up mastery confers bonuses on the respective armor and weapon types. Certain weapons require mastery levels before they can be used effectively.
+### Cruelty
+
+Progress is gained by using [piercing weapons](#piercing-weapon). Each rank increases [bleed damage](#bleed-damage). Required skill: [Anatomy](#anatomy).
+
+### Finesse
+
+Progress is gained by using [slashing weapons](#slashing-weapon). Each rank increases [parry absorption](#parry-absorption) & [parry damage](#parry-damage). Required skill: [Escrime](#escrime).
+
+### Might
+
+Progress is gained by using [blunt weapons](#blunt-weapon) and blocking with [shields](#shields). Each rank increases [stagger duration](#stagger-duration). Required skill: [Traumatology](#traumatology).
+
+### Tenacity
+
+Progress is gained by being struck while wearing [armor](#armor). Each rank increases the chance that [recovery](#recovery-rate) is not triggered when struck. Required skill: [Armorcraft](#armorcraft).
 
 ## Skills
 
@@ -608,11 +599,11 @@ Permanent effects that once acquired always provide their benefits.
 
 #### Anatomy
 
-Unlocks [bleed](#bleed) when using [piercing](#piercing-weapon) weapons. Also unlocks the [Cruelty](#cruelty) attribute.
+Unlocks [bleed](#bleed) when using [piercing](#piercing-weapon) weapons. Also unlocks the [Cruelty](#cruelty) mastery.
 
 #### Armorcraft
 
-Allows the use of [reinforced](#reinforced-armor) and [plate](#plate-armor) armors.
+Allows the use of [plate](#plate-armor) armor. Also unlocks the [Tenacity](#tenacity) mastery.
 
 #### Assassination
 
@@ -630,7 +621,7 @@ Allows the use of a one-handed weapon in main hand as well as offhand.
 
 #### Escrime
 
-Unlocks the ability to [parry](#parry) when using [slashing](#slashing-weapon) weapons. Also unlocks the [Finesse](#finesse) attribute.
+Unlocks the ability to [parry](#parry) when using [slashing](#slashing-weapon) weapons. Also unlocks the [Finesse](#finesse) mastery.
 
 #### Evasion
 
@@ -648,7 +639,7 @@ Allows the use of [medium](#medium-shield) and [tower](#tower-shield) shields.
 
 #### Traumatology
 
-Unlocks the ability to [stagger](#stagger) when using [blunt](#blunt-weapon) weapons and [blocking](#block) with shields. Unlocks the [Might](#might) attribute.
+Unlocks the ability to [stagger](#stagger) when using [blunt](#blunt-weapon) weapons and [blocking](#block) with shields. Unlocks the [Might](#might) mastery.
 
 ## Status effects
 
@@ -660,7 +651,7 @@ Negative status effects that dampen the character or monster. For the character,
 
 #### Bleeding
 
-Certain monster attacks may apply a [bleed](#bleed) effect on the character. This can be stemmed by a [first aid kit](#medic) or certain [salves](#salves).
+Certain monster attacks may apply a [bleed](#bleed) effect on the character. This can be stemmed by a [first aid kit](#medic). It can also be avoided if an attack is successfully [deflected](#deflection).
 
 #### Diseased
 
@@ -686,30 +677,31 @@ Traits are permanent passive abilities that are unlocked when reaching certain m
 - Scrounger: double looting rate.
 - Shredder: total bleed damage is inflicted all at once.
 
-## Achievements
+## Quests
 
 `TODO`
 
 Meta progression. Grant bonuses when completed.
 
-### Combat achievements
+### Combat quests
 
 - Kill first monster
-- Kill 5/10/25/50/100/1000 monsters _(5 achievements)_
+- Kill 5/10/25/50/100/1000 monsters _(5 quests)_
 - Kill a monster in one strike
 - Kill a monster with bleed damage
 - Dodge 1/5/10/25/50/100 strikes
 - Dodge 3 strikes in a row
 - Reflect damage
+- Parry, inflict bleed and stagger in one attack
 - After acquiring Compass, clear all levels before returning to Caravan
 
-### Caravan achievements
+### Caravan quests
 
 - Purchase an item
 - Hire first new crew member
 - Hire X _(X = crew member)_
 
-### Gear achievements
+### Gear quests
 
 - Equip a weapon
 - Equip armor
@@ -717,7 +709,7 @@ Meta progression. Grant bonuses when completed.
 
 ### Meta
 
-- Achieve 5/10/25/50/100/all achievements
+- Achieve 5/10/25/50/100/all quests
 
 ## Settings
 
@@ -774,7 +766,7 @@ To run the app locally from source, you will need to use a command-line interfac
 
 ### Local development
 
-Before doing any changes, please do the following:
+Before committing any changes, please do the following:
 
 1. In the CLI, go to the project folder (e.g. `cd neverquest`).
 1. Run `npm run prepare`

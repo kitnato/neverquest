@@ -5,23 +5,12 @@ import { characterLevel } from "@neverquest/state/character";
 import localStorage from "@neverquest/state/effects/localStorage";
 import { essence } from "@neverquest/state/resources";
 import { AttributeType, StorageKey } from "@neverquest/types/enums";
-import { getComputedStat, getTriangularNumber } from "@neverquest/utilities/getters";
+import { getComputedStatistic, getTriangularNumber } from "@neverquest/utilities/getters";
 
 interface AttributeState {
   isUnlocked: boolean;
   points: number;
 }
-
-// ATOMS
-
-export const attributes = atomFamily<AttributeState, AttributeType>({
-  default: {
-    isUnlocked: false,
-    points: 0,
-  },
-  effects: (parameter) => [localStorage<AttributeState>(`${StorageKey.Attributes}-${parameter}`)],
-  key: StorageKey.Attributes,
-});
 
 // SELECTORS
 
@@ -44,7 +33,18 @@ export const isAttributeMaxed = selectorFamily<boolean, AttributeType>({
 
       return maximum === undefined
         ? false
-        : maximum === getComputedStat({ base, increment, points });
+        : maximum === getComputedStatistic({ base, increment, points });
     },
   key: "isAttributeMaxed",
+});
+
+// ATOMS
+
+export const attributes = atomFamily<AttributeState, AttributeType>({
+  default: {
+    isUnlocked: false,
+    points: 0,
+  },
+  effects: (parameter) => [localStorage<AttributeState>(`${StorageKey.Attributes}-${parameter}`)],
+  key: StorageKey.Attributes,
 });

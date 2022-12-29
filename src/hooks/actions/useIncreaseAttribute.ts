@@ -3,9 +3,7 @@ import { useRecoilCallback } from "recoil";
 import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
 import { attributeCost, attributes } from "@neverquest/state/attributes";
 import { characterLevel } from "@neverquest/state/character";
-import { deltas } from "@neverquest/state/deltas";
-import { AttributeType, DeltaType } from "@neverquest/types/enums";
-import { FloatingText } from "@neverquest/types/ui";
+import { AttributeType } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
@@ -24,15 +22,7 @@ export default function () {
     transactResources({
       essenceDifference: -attributeCostValue,
     });
-    set(deltas(DeltaType.EssenceAbsorbed), {
-      color: FloatingText.Positive,
-      value: `+${attributeCostValue}`,
-    });
 
     set(characterLevel, (current) => current + 1);
-    set(deltas(DeltaType.CharacterLevel), {
-      color: FloatingText.Positive,
-      value: "+1",
-    });
   });
 }

@@ -22,7 +22,7 @@ export const isMonsterDead = selector({
 });
 
 export const maximumHealthMonster = selector({
-  get: ({ get }) => Math.floor(get(level) * 2.25) + Math.floor(get(progress) / 3),
+  get: ({ get }) => Math.floor(get(level) * 2.1 + get(progress) / 3.5),
   key: "maximumHealthMonster",
 });
 
@@ -48,7 +48,7 @@ export const totalDamageMonster = selector({
   get: ({ get }) => {
     const levelValue = get(level);
 
-    return levelValue + Math.floor(levelValue / 3) + Math.floor(get(progress) / 3);
+    return levelValue + Math.floor(levelValue / 5 + get(progress) / 4);
   },
   key: "totalDamageMonster",
 });

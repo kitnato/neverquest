@@ -7,7 +7,7 @@ export type Armor = ItemBase & {
   protection: number;
 };
 
-export interface Attribute {
+export interface AttributeOrMastery {
   Icon: SVGIcon;
   base: number;
   description: string;

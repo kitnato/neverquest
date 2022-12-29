@@ -77,7 +77,7 @@ export const progressMaximum = selector({
   get: ({ get }) => {
     const levelValue = get(level);
 
-    return levelValue + 2 + Math.floor(levelValue / 3);
+    return levelValue + 2 + Math.floor(levelValue / 5);
   },
   key: "progressMaximum",
 });

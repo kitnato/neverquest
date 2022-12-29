@@ -2079,9 +2079,9 @@
   { "name": "regurgitating", "creature": "prefix" },
   {
     "name": "regurgitation",
-    "artifact": "prefix",
-    "creature": "prefix",
-    "location": "prefix"
+    "artifact": "suffix",
+    "creature": "suffix",
+    "location": "suffix"
   },
   {
     "name": "repugnant",

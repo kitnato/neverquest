@@ -9,29 +9,6 @@ interface CrewState {
   monologueProgress: number;
 }
 
-// ATOMS
-
-export const crewHirable = atom<CrewType[]>({
-  default: [],
-  effects: [localStorage<CrewType[]>(StorageKey.CrewHirable)],
-  key: StorageKey.CrewHirable,
-});
-
-const crewMapping = atomFamily<CrewState, CrewType>({
-  default: {
-    hireStatus: CrewStatus.Unavailable,
-    monologueProgress: 0,
-  },
-  effects: (parameter) => [localStorage<CrewState>(`${StorageKey.CrewMapping}-${parameter}`)],
-  key: StorageKey.CrewMapping,
-});
-
-export const merchantInventory = atom<InventoryMerchant>({
-  default: {},
-  effects: [localStorage<InventoryMerchant>(StorageKey.MerchantInventory)],
-  key: StorageKey.MerchantInventory,
-});
-
 // SELECTORS
 
 export const crew = selectorFamily<CrewState, CrewType>({
@@ -55,4 +32,27 @@ export const crew = selectorFamily<CrewState, CrewType>({
         set(crewHirable, (current) => current.filter((currentType) => currentType !== type));
       }
     },
+});
+
+// ATOMS
+
+export const crewHirable = atom<CrewType[]>({
+  default: [],
+  effects: [localStorage<CrewType[]>(StorageKey.CrewHirable)],
+  key: StorageKey.CrewHirable,
+});
+
+const crewMapping = atomFamily<CrewState, CrewType>({
+  default: {
+    hireStatus: CrewStatus.Unavailable,
+    monologueProgress: 0,
+  },
+  effects: (parameter) => [localStorage<CrewState>(`${StorageKey.CrewMapping}-${parameter}`)],
+  key: StorageKey.CrewMapping,
+});
+
+export const merchantInventory = atom<InventoryMerchant>({
+  default: {},
+  effects: [localStorage<InventoryMerchant>(StorageKey.MerchantInventory)],
+  key: StorageKey.MerchantInventory,
 });

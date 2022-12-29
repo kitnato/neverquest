@@ -2,6 +2,7 @@ import { useRecoilCallback } from "recoil";
 
 import useChangeHealth from "@neverquest/hooks/actions/useChangeHealth";
 import useChangeStamina from "@neverquest/hooks/actions/useChangeStamina";
+import useIncreaseMastery from "@neverquest/hooks/actions/useIncreaseMastery";
 import { isRecovering, statusElement } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { shield, weapon } from "@neverquest/state/inventory";
@@ -21,22 +22,25 @@ import {
   totalParryChance,
   totalParryDamage,
   totalProtection,
-  totalStaggerChance,
 } from "@neverquest/state/statistics";
-import { DeltaType, ShowingType, SkillType } from "@neverquest/types/enums";
+import { DeltaType, MasteryType, ShowingType, SkillType } from "@neverquest/types/enums";
 import { AnimationSpeed, AnimationType, DeltaDisplay, FloatingText } from "@neverquest/types/ui";
 import animateElement from "@neverquest/utilities/animateElement";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-// If dodged, no other actions taken (all damage negated)
-// If health damage (total protection minus total monster damage) is 0 or less, no other actions taken
-// If parrying occurs, check stamina cost, and continue
-// If not parried and blocking occurs, check stamina cost, and continue
-// If not parried and not blocked, set recovery, and continue
-// Process total health & stamina deltas
+/**
+ * If dodged, no other actions taken (all damage negated)
+ * If health damage (total protection minus total monster damage) is 0 or less, no other actions taken
+ * If parrying occurs, check stamina cost, and continue
+ * If not parried and blocking occurs, check stamina cost, and continue
+ * If blocking occurs, check if monster is staggered
+ * If not parried and not blocked, set recovery, and continue
+ * Process total health & stamina deltas
+ */
 export default function () {
   const changeHealth = useChangeHealth();
   const changeStamina = useChangeStamina();
+  const increaseMastery = useIncreaseMastery();
 
   return useRecoilCallback(({ set, snapshot }) => () => {
     const get = getSnapshotGetter(snapshot);
@@ -110,6 +114,7 @@ export default function () {
         ];
 
         changeStamina({ value: -staminaCost });
+        increaseMastery(MasteryType.ParryDamage);
 
         animateElement({
           element: get(monsterStatusElement),
@@ -137,7 +142,9 @@ export default function () {
 
       if (get(canBlock)) {
         healthDamage = 0;
-        const hasStaggered = Math.random() <= get(totalStaggerChance);
+
+        const hasStaggered =
+          get(skills(SkillType.Stagger)) && Math.random() <= get(shield).staggerChance;
 
         deltaHealth = {
           color: FloatingText.Neutral,
@@ -146,7 +153,7 @@ export default function () {
 
         changeStamina({ value: -staminaCost });
 
-        if (get(skills(SkillType.Stagger)) && hasStaggered) {
+        if (hasStaggered) {
           set(isMonsterStaggered, true);
         }
       } else {

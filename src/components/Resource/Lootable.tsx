@@ -21,7 +21,7 @@ export default function ({
 
   useDeltaText({
     deltaAtom,
-    stop: () => false,
+    // stop: () => false,
     valueAtom: atom,
   });
 

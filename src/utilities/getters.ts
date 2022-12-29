@@ -1,6 +1,8 @@
 import { RecoilValue, Snapshot } from "recoil";
 
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/constants";
+import { WeaponClass } from "@neverquest/locra/types";
+import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
 import { RangeProps } from "@neverquest/types/props";
 import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
 import { formatToFixed } from "@neverquest/utilities/formatters";
@@ -19,7 +21,7 @@ export function getAnimationClass({
   }${speed ? ` ${CLASS_ANIMATE_PREFIX}${speed}` : ""}`;
 }
 
-export function getComputedStat({
+export function getComputedStatistic({
   base,
   increment,
   points,
@@ -48,6 +50,20 @@ export function getDamagePerRate({
   return formatToFixed((regular + critical) / (rate / 1000));
 }
 
+export function getDeltaTypeFromMasteryType(type: MasteryType) {
+  switch (type) {
+    case MasteryType.BleedDamage: {
+      return DeltaType.MasteryBleed;
+    }
+    case MasteryType.ParryDamage: {
+      return DeltaType.MasteryParry;
+    }
+    case MasteryType.StaggerDuration: {
+      return DeltaType.MasteryStagger;
+    }
+  }
+}
+
 export function getFromRange({ maximum, minimum }: RangeProps) {
   const result = Math.random() * (maximum - minimum) + minimum;
 
@@ -65,6 +81,20 @@ export function getSnapshotGetter({ getLoadable }: Snapshot) {
 // https://en.wikipedia.org/wiki/Triangular_number
 export function getTriangularNumber(number: number) {
   return (number * (number + 1)) / 2;
+}
+
+export function getSkillTypeFromWeaponClass(type: WeaponClass) {
+  switch (type) {
+    case WeaponClass.Blunt: {
+      return SkillType.Stagger;
+    }
+    case WeaponClass.Piercing: {
+      return SkillType.Bleed;
+    }
+    case WeaponClass.Slashing: {
+      return SkillType.Parry;
+    }
+  }
 }
 
 export function getWeaponSpecifications(level: number) {

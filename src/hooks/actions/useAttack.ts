@@ -2,10 +2,13 @@ import { useRecoilCallback } from "recoil";
 
 import { BLEED_DURATION } from "@neverquest/constants/attributes";
 import useChangeStamina from "@neverquest/hooks/actions/useChangeStamina";
+import useIncreaseMastery from "@neverquest/hooks/actions/useIncreaseMastery";
+import { WeaponClass } from "@neverquest/locra/types";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import {
   currentHealthMonster,
+  isMonsterStaggered,
   monsterBleedingDuration,
   monsterStatusElement,
 } from "@neverquest/state/monster";
@@ -17,20 +20,21 @@ import {
   totalCriticalDamage,
   totalDamage,
 } from "@neverquest/state/statistics";
-import { DeltaType, SkillType } from "@neverquest/types/enums";
+import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
 import { AnimationSpeed, AnimationType, DeltaDisplay, FloatingText } from "@neverquest/types/ui";
 import animateElement from "@neverquest/utilities/animateElement";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
   const changeStamina = useChangeStamina();
+  const increaseMastery = useIncreaseMastery();
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const { staminaCost } = get(weapon);
+        const { abilityChance, staminaCost, weaponClass } = get(weapon);
 
         if (get(canAttackOrParry)) {
           const hasInflictedCritical =
@@ -39,6 +43,10 @@ export default function () {
             get(monsterBleedingDuration) === 0 &&
             get(skills(SkillType.Bleed)) &&
             Math.random() <= get(totalBleedChance);
+          const hasInflictedStagger =
+            get(skills(SkillType.Stagger)) &&
+            weaponClass === WeaponClass.Blunt &&
+            Math.random() <= abilityChance;
 
           const baseDamage = -get(totalDamage);
           const damage = hasInflictedCritical ? baseDamage * get(totalCriticalDamage) : baseDamage;
@@ -58,7 +66,7 @@ export default function () {
 
           if (hasInflictedCritical) {
             extra.push({
-              color: FloatingText.Negative,
+              color: FloatingText.Neutral,
               value: "CRITICAL",
             });
           }
@@ -66,9 +74,19 @@ export default function () {
           if (hasInflictedBleed) {
             set(monsterBleedingDuration, BLEED_DURATION);
             extra.push({
-              color: FloatingText.Negative,
+              color: FloatingText.Neutral,
               value: "BLEED",
             });
+            increaseMastery(MasteryType.BleedDamage);
+          }
+
+          if (hasInflictedStagger) {
+            set(isMonsterStaggered, true);
+            extra.push({
+              color: FloatingText.Neutral,
+              value: "STAGGER",
+            });
+            increaseMastery(MasteryType.StaggerDuration);
           }
 
           set(deltas(DeltaType.HealthMonster), [

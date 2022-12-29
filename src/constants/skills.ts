@@ -1,6 +1,5 @@
 // TODO - diversify icons.
 import { ReactComponent as Icon } from "@neverquest/icons/abstract-049.svg";
-import { WeaponClass } from "@neverquest/locra/types";
 import { Skill } from "@neverquest/types";
 import { SkillType } from "@neverquest/types/enums";
 
@@ -55,7 +54,7 @@ export const SKILLS: Record<SkillType, Skill> = {
     requiredLevel: 30,
   },
   [SkillType.Stagger]: {
-    description: "Unlocks the ability to temporarily incapacitate the attacker.",
+    description: "Unlocks the ability to temporarily stagger the attacker.",
     Icon,
     name: "Traumatology",
     price: 45,
@@ -73,9 +72,3 @@ export const SKILLS_ORDER = [
   SkillType.Bleed,
   SkillType.Armors,
 ];
-
-export const WEAPON_CLASS_SKILL_MAPPING = {
-  [WeaponClass.Blunt]: SkillType.Stagger,
-  [WeaponClass.Piercing]: SkillType.Bleed,
-  [WeaponClass.Slashing]: SkillType.Parry,
-};

@@ -14,7 +14,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingDamagePerSecond } from "@neverquest/state/settings";
 import { damagePerSecond, totalDamage } from "@neverquest/state/statistics";
 import { AttributeType, DeltaType, ShowingType } from "@neverquest/types/enums";
-import { getComputedStat } from "@neverquest/utilities/getters";
+import { getComputedStatistic } from "@neverquest/utilities/getters";
 
 export default function () {
   const { points } = useRecoilValue(attributes(AttributeType.Damage));
@@ -32,9 +32,7 @@ export default function () {
     valueAtom: totalDamage,
   });
 
-  const totalDamageDisplay = (
-    <span>{isShowingDamagePerSecondValue ? `${totalDamageValue} Total` : totalDamageValue}</span>
-  );
+  const totalDamageDisplay = <span>{totalDamageValue}</span>;
 
   return (
     <IconDisplay
@@ -58,7 +56,7 @@ export default function () {
                         <tr>
                           <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
 
-                          <td>{`+${getComputedStat({
+                          <td>{`+${getComputedStatistic({
                             base,
                             increment,
                             points,
@@ -82,7 +80,7 @@ export default function () {
       }
       description={isShowingDamagePerSecondValue ? `${damagePerSecondValue} DPS` : null}
       Icon={Icon}
-      tooltip="Damage per strike"
+      tooltip="Damage"
     />
   );
 }

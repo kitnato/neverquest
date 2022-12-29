@@ -5,6 +5,8 @@ import localStorage from "@neverquest/state/effects/localStorage";
 import { DeltaType, StorageKey } from "@neverquest/types/enums";
 import { DeltaDisplay } from "@neverquest/types/ui";
 
+// ATOMS
+
 export const deltas = atomFamily<DeltaDisplay, DeltaType>({
   default: DEFAULT_DELTA_DISPLAY,
   effects: (parameter) => [localStorage<DeltaDisplay>(`${StorageKey.Deltas}-${parameter}`)],

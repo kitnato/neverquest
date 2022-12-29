@@ -3,11 +3,12 @@ import { useRecoilValue } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
-import { ATTRIBUTES, BLEED_DURATION } from "@neverquest/constants/attributes";
+import { BLEED_DURATION } from "@neverquest/constants/attributes";
+import { MASTERIES } from "@neverquest/constants/masteries";
 import { ReactComponent as Icon } from "@neverquest/icons/spiky-eclipse.svg";
 import { skills } from "@neverquest/state/skills";
 import { totalBleedChance, totalBleedDamage, totalDamage } from "@neverquest/state/statistics";
-import { AttributeType, SkillType } from "@neverquest/types/enums";
+import { MasteryType, SkillType } from "@neverquest/types/enums";
 import {
   formatMilliseconds,
   formatPercentage,
@@ -21,7 +22,7 @@ export default function () {
   const totalDamageValue = useRecoilValue(totalDamage);
   const bleedSkill = useRecoilValue(skills(SkillType.Bleed));
 
-  const { name } = ATTRIBUTES[AttributeType.BleedDamage];
+  const { name } = MASTERIES[MasteryType.BleedDamage];
 
   if (!bleedSkill) {
     return null;
@@ -45,7 +46,7 @@ export default function () {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} mastery:`}</td>
 
                       <td>{`${formatPercentage(totalBleedDamageValue)} of damage`}</td>
                     </tr>

@@ -6,7 +6,6 @@ export enum ArmorClass {
 
 export enum AttributeType {
   AttackRate,
-  BleedDamage,
   CriticalChance,
   CriticalDamage,
   Damage,
@@ -14,9 +13,7 @@ export enum AttributeType {
   Health,
   HealthRegenerationRate,
   Loot,
-  ParryDamage,
   RecoveryRate,
-  StaggerDuration,
   Stamina,
   StaminaRegenerationRate,
 }
@@ -37,15 +34,18 @@ export enum CrewType {
 }
 
 export enum DeltaType {
-  Essence,
-  EssenceAbsorbed,
-  EssenceLoot,
+  CharacterLevel,
   Coins,
   CoinsLoot,
   DamagePerSecond,
+  Essence,
+  EssenceAbsorbed,
+  EssenceLoot,
   Health,
   HealthMonster,
-  CharacterLevel,
+  MasteryBleed,
+  MasteryParry,
+  MasteryStagger,
   Scrap,
   ScrapLoot,
   Stamina,
@@ -68,6 +68,12 @@ export enum LootType {
   Coins,
   Essence,
   Scrap,
+}
+
+export enum MasteryType {
+  BleedDamage,
+  ParryDamage,
+  StaggerDuration,
 }
 
 export enum ShowingType {
@@ -132,6 +138,7 @@ export enum StorageKey {
   Level = "level",
   LootingRate = "lootingRate",
   LowHealthWarning = "lowHealthWarning",
+  Masteries = "masteries",
   MerchantInventory = "merchantInventory",
   Mode = "mode",
   MonsterBleedingDuration = "monsterBleedingDuration",

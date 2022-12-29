@@ -3,7 +3,6 @@ import { useRecoilValue } from "recoil";
 
 import { CLASS_TABLE_CELL_ITALIC, UNKNOWN } from "@neverquest/constants";
 import { WEAPON_CLASS_ICONS } from "@neverquest/constants/gear";
-import { WEAPON_CLASS_SKILL_MAPPING } from "@neverquest/constants/skills";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingDamagePerSecond } from "@neverquest/state/settings";
@@ -11,7 +10,7 @@ import { skills } from "@neverquest/state/skills";
 import { Weapon } from "@neverquest/types";
 import { ShowingType } from "@neverquest/types/enums";
 import { capitalizeAll, formatMilliseconds } from "@neverquest/utilities/formatters";
-import { getDamagePerRate } from "@neverquest/utilities/getters";
+import { getDamagePerRate, getSkillTypeFromWeaponClass } from "@neverquest/utilities/getters";
 
 export default function ({ weapon }: { weapon: Weapon }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
@@ -21,7 +20,7 @@ export default function ({ weapon }: { weapon: Weapon }) {
   const { damage, name, rate, staminaCost, weaponClass, weight } = weapon;
   const Icon = WEAPON_CLASS_ICONS[weaponClass];
 
-  const showWeaponClass = useRecoilValue(skills(WEAPON_CLASS_SKILL_MAPPING[weaponClass]));
+  const showWeaponClass = useRecoilValue(skills(getSkillTypeFromWeaponClass(weaponClass)));
 
   return (
     <OverlayTrigger

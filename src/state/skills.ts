@@ -5,14 +5,6 @@ import { attributes } from "@neverquest/state/attributes";
 import localStorage from "@neverquest/state/effects/localStorage";
 import { SkillType, StorageKey } from "@neverquest/types/enums";
 
-// ATOMS
-
-export const skillsStatus = atomFamily<boolean, SkillType>({
-  default: false,
-  effects: (parameter) => [localStorage<boolean>(`${StorageKey.SkillsStatus}-${parameter}`)],
-  key: StorageKey.SkillsStatus,
-});
-
 // SELECTORS
 
 export const skills = selectorFamily<boolean, SkillType>({
@@ -57,4 +49,12 @@ export const skillsTrained = selector<Record<SkillType, boolean>>({
     [SkillType.Stagger]: get(skillsStatus(SkillType.Stagger)),
   }),
   key: "skillsTrained",
+});
+
+// ATOMS
+
+export const skillsStatus = atomFamily<boolean, SkillType>({
+  default: false,
+  effects: (parameter) => [localStorage<boolean>(`${StorageKey.SkillsStatus}-${parameter}`)],
+  key: StorageKey.SkillsStatus,
 });

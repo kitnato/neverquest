@@ -3,6 +3,13 @@ import { atom, selector } from "recoil";
 import localStorage from "@neverquest/state/effects/localStorage";
 import { StorageKey } from "@neverquest/types/enums";
 
+// SELECTORS
+
+export const hasLooted = selector({
+  get: ({ get }) => get(essenceLoot) === 0 && get(coinsLoot) === 0 && get(scrapLoot) === 0,
+  key: "hasLooted",
+});
+
 // ATOMS
 
 export const essence = atom({
@@ -39,11 +46,4 @@ export const scrapLoot = atom({
   default: 0,
   effects: [localStorage<number>(StorageKey.ScrapLoot)],
   key: StorageKey.ScrapLoot,
-});
-
-// SELECTORS
-
-export const hasLooted = selector({
-  get: ({ get }) => get(essenceLoot) === 0 && get(coinsLoot) === 0 && get(scrapLoot) === 0,
-  key: "hasLooted",
 });

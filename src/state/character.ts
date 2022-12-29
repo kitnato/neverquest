@@ -5,6 +5,21 @@ import localStorage from "@neverquest/state/effects/localStorage";
 import { StorageKey } from "@neverquest/types/enums";
 import { getTriangularNumber } from "@neverquest/utilities/getters";
 
+// SELECTORS
+
+export const essenceAbsorbed = selector({
+  get: ({ get }) => {
+    let total = 0;
+
+    for (let i = 0; i <= get(characterLevel); i++) {
+      total += getTriangularNumber(i);
+    }
+
+    return total;
+  },
+  key: "essenceAbsorbed",
+});
+
 // ATOMS
 
 export const characterLevel = atom({
@@ -47,19 +62,4 @@ export const statusElement = atom<HTMLDivElement | null>({
   default: null,
   effects: [localStorage<HTMLDivElement | null>(StorageKey.StatusElement)],
   key: StorageKey.StatusElement,
-});
-
-// SELECTORS
-
-export const essenceAbsorbed = selector({
-  get: ({ get }) => {
-    let total = 0;
-
-    for (let i = 0; i <= get(characterLevel); i++) {
-      total += getTriangularNumber(i);
-    }
-
-    return total;
-  },
-  key: "essenceAbsorbed",
 });

@@ -1,12 +1,12 @@
 import { MouseEvent } from "react";
 import { Badge, Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import IconImage from "@neverquest/components/IconImage";
 import { CLASS_FULL_WIDTH_JUSTIFIED, UNKNOWN } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/constants/attributes";
-import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
+import useIncreaseAttribute from "@neverquest/hooks/actions/useIncreaseAttribute";
 import { ReactComponent as IconWait } from "@neverquest/icons/hourglass.svg";
 import { ReactComponent as IconIncrease } from "@neverquest/icons/upgrade.svg";
 import {
@@ -15,47 +15,25 @@ import {
   attributes,
   isAttributeMaxed,
 } from "@neverquest/state/attributes";
-import { characterLevel } from "@neverquest/state/character";
-import { deltas } from "@neverquest/state/deltas";
 import { isLevelStarted } from "@neverquest/state/encounter";
-import { AttributeType, DeltaType } from "@neverquest/types/enums";
-import { FloatingText, UIVariant } from "@neverquest/types/ui";
+import { AttributeType } from "@neverquest/types/enums";
+import { UIVariant } from "@neverquest/types/ui";
 
 export default function ({ type }: { type: AttributeType }) {
-  const [{ isUnlocked, points }, setAttribute] = useRecoilState(attributes(type));
+  const { isUnlocked, points } = useRecoilValue(attributes(type));
   const attributeCostValue = useRecoilValue(attributeCost);
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const isAttributeMaxedValue = useRecoilValue(isAttributeMaxed(type));
   const isLevelStartedValue = useRecoilValue(isLevelStarted);
-  const setCharacterLevel = useSetRecoilState(characterLevel);
-  const setDeltaCharacterLevel = useSetRecoilState(deltas(DeltaType.CharacterLevel));
-  const setDeltaEssenceAbsorbed = useSetRecoilState(deltas(DeltaType.EssenceAbsorbed));
 
-  const transactResources = useTransactResources();
+  const increaseAttribute = useIncreaseAttribute();
 
   const { description, Icon, name } = ATTRIBUTES[type];
 
   const onIncrease = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
     currentTarget.blur();
 
-    setAttribute((current) => ({
-      ...current,
-      points: current.points + 1,
-    }));
-
-    transactResources({
-      essenceDifference: -attributeCostValue,
-    });
-    setDeltaEssenceAbsorbed({
-      color: FloatingText.Positive,
-      value: `+${attributeCostValue}`,
-    });
-
-    setCharacterLevel((current) => current + 1);
-    setDeltaCharacterLevel({
-      color: FloatingText.Positive,
-      value: "+1",
-    });
+    increaseAttribute(type);
   };
 
   return (

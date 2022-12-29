@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import MonsterStaggerMeter from "@neverquest/components/Monster/MonsterStaggerMeter";
-import { ReactComponent as Icon } from "@neverquest/icons/star-swirl.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/knocked-out-stars.svg";
 import { skills } from "@neverquest/state/skills";
 import { totalStaggerDuration } from "@neverquest/state/statistics";
 import { SkillType } from "@neverquest/types/enums";

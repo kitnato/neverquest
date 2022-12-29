@@ -6,32 +6,6 @@ import { Armor, Inventory, Shield, Weapon } from "@neverquest/types";
 import { StorageKey } from "@neverquest/types/enums";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 
-// ATOMS
-
-export const encumbranceMaximum = atom({
-  default: 3,
-  effects: [localStorage<number>(StorageKey.EncumbranceMaximum)],
-  key: StorageKey.EncumbranceMaximum,
-});
-
-export const hasKnapsack = atom({
-  default: false,
-  effects: [localStorage<boolean>(StorageKey.HasKnapsack)],
-  key: StorageKey.HasKnapsack,
-});
-
-export const inventory = atom<Inventory>({
-  default: {},
-  effects: [localStorage<Inventory>(StorageKey.Inventory)],
-  key: StorageKey.Inventory,
-});
-
-export const isInventoryOpen = atom<boolean>({
-  default: false,
-  effects: [localStorage<boolean>(StorageKey.isInventoryOpen)],
-  key: StorageKey.isInventoryOpen,
-});
-
 // SELECTORS
 
 export const armor = selector({
@@ -72,26 +46,6 @@ export const encumbrance = selector({
   key: "encumbrance",
 });
 
-// TODO - remove?
-// export const hasItem = selectorFamily({
-//   get:
-//     (itemName) =>
-//     ({ get }) => {
-//       const inventoryValue = get(inventory);
-
-//       return (
-//         Object.getOwnPropertyNames(inventoryValue).findIndex((id) => {
-//           const {
-//             possession: { name },
-//           } = inventoryValue[id];
-
-//           return name === itemName;
-//         }) !== -1
-//       );
-//     },
-//   key: "hasItem",
-// });
-
 export const isInventoryFull = selector({
   get: ({ get }) => get(encumbrance) === get(encumbranceMaximum),
   key: "isInventoryFull",
@@ -131,4 +85,30 @@ export const weapon = selector({
     return NO_WEAPON;
   },
   key: "weapon",
+});
+
+// ATOMS
+
+export const encumbranceMaximum = atom({
+  default: 3,
+  effects: [localStorage<number>(StorageKey.EncumbranceMaximum)],
+  key: StorageKey.EncumbranceMaximum,
+});
+
+export const hasKnapsack = atom({
+  default: false,
+  effects: [localStorage<boolean>(StorageKey.HasKnapsack)],
+  key: StorageKey.HasKnapsack,
+});
+
+export const inventory = atom<Inventory>({
+  default: {},
+  effects: [localStorage<Inventory>(StorageKey.Inventory)],
+  key: StorageKey.Inventory,
+});
+
+export const isInventoryOpen = atom<boolean>({
+  default: false,
+  effects: [localStorage<boolean>(StorageKey.isInventoryOpen)],
+  key: StorageKey.isInventoryOpen,
 });

@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
-import { ITEM_KNAPSACK } from "@neverquest/constants/items";
+import { ITEM_KNAPSACK } from "@neverquest/data/items";
 import { canFit, encumbranceMaximum, hasKnapsack, inventory } from "@neverquest/state/inventory";
 import { Item } from "@neverquest/types";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";

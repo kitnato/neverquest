@@ -2,8 +2,8 @@ import ls from "localstorage-slim";
 import { useRecoilCallback, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { KEY_SESSION } from "@neverquest/constants";
-import { ATTRIBUTES_INITIAL } from "@neverquest/constants/attributes";
-import { CREW_INITIAL } from "@neverquest/constants/caravan";
+import { ATTRIBUTES_INITIAL } from "@neverquest/data/attributes";
+import { CREW_INITIAL } from "@neverquest/data/caravan";
 import useCreateMonster from "@neverquest/hooks/actions/useCreateMonster";
 import { attributes } from "@neverquest/state/attributes";
 import { crew } from "@neverquest/state/caravan";

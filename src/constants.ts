@@ -1,5 +1,9 @@
 import { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
 
+export const BLEED_DELTA = 500;
+
+export const BLEED_DURATION = 2500;
+
 export const CLASS_ANIMATE_PREFIX = "animate__";
 
 export const CLASS_ANIMATED = `${CLASS_ANIMATE_PREFIX}animated`;
@@ -16,6 +20,10 @@ export const DEFAULT_DELTA_DISPLAY: DeltaDisplay = {
 export const DEFAULT_RESERVE_CHANGE: DeltaReserve = {
   value: 0,
 };
+
+export const EXCHANGE_COINS = 1;
+
+export const EXCHANGE_SCRAP = 3;
 
 const KEY_STORAGE_PREFIX = "nq";
 

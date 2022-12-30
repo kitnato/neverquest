@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import TrainableSkill from "@neverquest/components/Caravan/Mercenary/TrainableSkill";
 import TrainedSkill from "@neverquest/components/Caravan/Mercenary/TrainedSkill";
-import { SKILLS_ORDER } from "@neverquest/constants/skills";
+import { SKILLS_ORDER } from "@neverquest/data/skills";
 import { skillsTrained } from "@neverquest/state/skills";
 
 export default function () {

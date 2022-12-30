@@ -1,7 +1,7 @@
-import affixes from "@neverquest/locra/db-affixes.json";
-import artifacts from "@neverquest/locra/db-artifacts.json";
-import creatures from "@neverquest/locra/db-creatures.json";
-import locations from "@neverquest/locra/db-locations.json";
+import affixes from "@neverquest/locra/data/affixes.json";
+import artifacts from "@neverquest/locra/data/artifacts.json";
+import creatures from "@neverquest/locra/data/creatures.json";
+import locations from "@neverquest/locra/data/locations.json";
 import {
   AffixTag,
   AffixType,

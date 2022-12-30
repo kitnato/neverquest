@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil";
 import IconDisplay from "@neverquest/components/IconDisplay";
 import IconImage from "@neverquest/components/IconImage";
 import { CLASS_FULL_WIDTH_JUSTIFIED, UNKNOWN } from "@neverquest/constants";
-import { ATTRIBUTES } from "@neverquest/constants/attributes";
+import { ATTRIBUTES } from "@neverquest/data/attributes";
 import useIncreaseAttribute from "@neverquest/hooks/actions/useIncreaseAttribute";
 import { ReactComponent as IconWait } from "@neverquest/icons/hourglass.svg";
 import { ReactComponent as IconIncrease } from "@neverquest/icons/upgrade.svg";

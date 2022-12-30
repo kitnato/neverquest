@@ -1,6 +1,6 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
-import { ATTRIBUTES } from "@neverquest/constants/attributes";
+import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { characterLevel } from "@neverquest/state/character";
 import localStorage from "@neverquest/state/effects/localStorage";
 import { essence } from "@neverquest/state/resources";

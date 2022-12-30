@@ -1,6 +1,6 @@
 import { atom, selector, selectorFamily } from "recoil";
 
-import { NO_ARMOR, NO_SHIELD, NO_WEAPON } from "@neverquest/constants/gear";
+import { NO_ARMOR, NO_SHIELD, NO_WEAPON } from "@neverquest/data/gear";
 import localStorage from "@neverquest/state/effects/localStorage";
 import { Armor, Inventory, Shield, Weapon } from "@neverquest/types";
 import { StorageKey } from "@neverquest/types/enums";

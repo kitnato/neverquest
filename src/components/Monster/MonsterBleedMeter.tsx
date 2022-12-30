@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
-import { BLEED_DELTA, BLEED_DURATION } from "@neverquest/constants/attributes";
+import { BLEED_DELTA, BLEED_DURATION } from "@neverquest/constants";
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { deltas } from "@neverquest/state/deltas";
 import { currentHealthMonster, monsterBleedingDuration } from "@neverquest/state/monster";

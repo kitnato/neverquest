@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { BLEED_DURATION } from "@neverquest/constants/attributes";
+import { BLEED_DURATION } from "@neverquest/constants";
 import useChangeStamina from "@neverquest/hooks/actions/useChangeStamina";
 import useIncreaseMastery from "@neverquest/hooks/actions/useIncreaseMastery";
 import { WeaponClass } from "@neverquest/locra/types";

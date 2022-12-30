@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
-import { NO_ARMOR, NO_SHIELD, NO_WEAPON } from "@neverquest/constants/gear";
+import { NO_ARMOR, NO_SHIELD, NO_WEAPON } from "@neverquest/data/gear";
 import useToggleEquipGear from "@neverquest/hooks/actions/useToggleEquipGear";
 import { armor, canFit, inventory, shield, weapon } from "@neverquest/state/inventory";
 import { autoEquip } from "@neverquest/state/settings";

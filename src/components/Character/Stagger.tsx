@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
-import { MASTERIES } from "@neverquest/constants/masteries";
+import { MASTERIES } from "@neverquest/data/masteries";
 import { ReactComponent as Icon } from "@neverquest/icons/star-swirl.svg";
 import { WeaponClass } from "@neverquest/locra/types";
 import { shield, weapon } from "@neverquest/state/inventory";

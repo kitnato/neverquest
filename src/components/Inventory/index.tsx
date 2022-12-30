@@ -8,7 +8,7 @@ import CompassUseButton from "@neverquest/components/Inventory/Item/CompassUseBu
 import HearthstoneUseButton from "@neverquest/components/Inventory/Item/HearthstoneUseButton";
 import LodestoneUseButton from "@neverquest/components/Inventory/Item/LodestoneUseButton";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
-import { ITEM_COMPASS, ITEM_HEARTHSTONE, ITEM_LODESTONE } from "@neverquest/constants/items";
+import { ITEM_COMPASS, ITEM_HEARTHSTONE, ITEM_LODESTONE } from "@neverquest/data/items";
 import useToggleEquipGear from "@neverquest/hooks/actions/useToggleEquipGear";
 import { inventory } from "@neverquest/state/inventory";
 import { isGear, isItem } from "@neverquest/types/type-guards";

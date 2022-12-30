@@ -1,6 +1,6 @@
 import { DefaultValue, atomFamily, selector, selectorFamily } from "recoil";
 
-import { ATTRIBUTES, ATTRIBUTES_ORDER } from "@neverquest/constants/attributes";
+import { ATTRIBUTES, ATTRIBUTES_ORDER } from "@neverquest/data/attributes";
 import { attributes } from "@neverquest/state/attributes";
 import localStorage from "@neverquest/state/effects/localStorage";
 import { SkillType, StorageKey } from "@neverquest/types/enums";

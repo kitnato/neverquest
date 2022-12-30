@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 
-import { ATTRIBUTES } from "@neverquest/constants/attributes";
+import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { attributes } from "@neverquest/state/attributes";
 import localStorage from "@neverquest/state/effects/localStorage";
 import { shield, weapon } from "@neverquest/state/inventory";

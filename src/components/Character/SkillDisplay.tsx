@@ -1,5 +1,5 @@
 import IconDisplay from "@neverquest/components/IconDisplay";
-import { SKILLS } from "@neverquest/constants/skills";
+import { SKILLS } from "@neverquest/data/skills";
 import { SkillType } from "@neverquest/types/enums";
 
 export default function ({ type }: { type: SkillType }) {

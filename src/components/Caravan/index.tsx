@@ -11,7 +11,7 @@ import Mercenary from "@neverquest/components/Caravan/Mercenary";
 import Merchant from "@neverquest/components/Caravan/Merchant";
 import Tailor from "@neverquest/components/Caravan/Tailor";
 import DismissableScreen from "@neverquest/components/DismissableScreen";
-import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/constants/caravan";
+import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/data/caravan";
 import { crewHirable } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import { CrewType, ShowingType } from "@neverquest/types/enums";

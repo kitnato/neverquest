@@ -2,9 +2,8 @@ import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
-import { BLEED_DURATION } from "@neverquest/constants/attributes";
-import { MASTERIES } from "@neverquest/constants/masteries";
+import { BLEED_DURATION, CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
+import { MASTERIES } from "@neverquest/data/masteries";
 import { ReactComponent as Icon } from "@neverquest/icons/spiky-eclipse.svg";
 import { skills } from "@neverquest/state/skills";
 import { totalBleedChance, totalBleedDamage, totalDamage } from "@neverquest/state/statistics";

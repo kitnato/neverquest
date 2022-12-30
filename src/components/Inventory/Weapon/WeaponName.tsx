@@ -2,7 +2,7 @@ import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { CLASS_TABLE_CELL_ITALIC, UNKNOWN } from "@neverquest/constants";
-import { WEAPON_CLASS_ICONS } from "@neverquest/constants/gear";
+import { WEAPON_CLASS_ICONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingDamagePerSecond } from "@neverquest/state/settings";

@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/constants/caravan";
+import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/data/caravan";
 import { crew } from "@neverquest/state/caravan";
 import { level, wildernesses } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";

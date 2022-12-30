@@ -3,14 +3,10 @@ import {
   ITEM_HEARTHSTONE,
   ITEM_KNAPSACK,
   ITEM_LODESTONE,
-} from "@neverquest/constants/items";
+} from "@neverquest/data/items";
 import { ShieldType, WeaponClass, WeaponType } from "@neverquest/locra/types";
 import { Item } from "@neverquest/types";
 import { ArmorClass } from "@neverquest/types/enums";
-
-export const EXCHANGE_COINS = 1;
-
-export const EXCHANGE_SCRAP = 3;
 
 export const MERCHANT_OFFERS: (
   | Item

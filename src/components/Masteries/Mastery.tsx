@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import FloatingText from "@neverquest/components/FloatingText";
 import IconDisplay from "@neverquest/components/IconDisplay";
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
-import { MASTERIES } from "@neverquest/constants/masteries";
+import { MASTERIES } from "@neverquest/data/masteries";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowingMastery } from "@neverquest/state/isShowing";
 import { masteries, masteryCost } from "@neverquest/state/masteries";

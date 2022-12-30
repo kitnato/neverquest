@@ -1,7 +1,7 @@
 import Stack from "react-bootstrap/Stack";
 
 import Attribute from "@neverquest/components/Attributes/Attribute";
-import { ATTRIBUTES_ORDER } from "@neverquest/constants/attributes";
+import { ATTRIBUTES_ORDER } from "@neverquest/data/attributes";
 
 export default function () {
   return (

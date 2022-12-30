@@ -1,11 +1,12 @@
 import { selector } from "recoil";
 
-import { masteries } from "./masteries";
-import { ATTRIBUTES, BLEED_DURATION } from "@neverquest/constants/attributes";
-import { MASTERIES } from "@neverquest/constants/masteries";
+import { BLEED_DURATION } from "@neverquest/constants";
+import { ATTRIBUTES } from "@neverquest/data/attributes";
+import { MASTERIES } from "@neverquest/data/masteries";
 import { WeaponClass } from "@neverquest/locra/types";
 import { attributes } from "@neverquest/state/attributes";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
+import { masteries } from "@neverquest/state/masteries";
 import { AttributeType, MasteryType } from "@neverquest/types/enums";
 import { getComputedStatistic, getDamagePerRate } from "@neverquest/utilities/getters";
 

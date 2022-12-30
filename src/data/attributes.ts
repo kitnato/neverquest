@@ -114,7 +114,3 @@ export const ATTRIBUTES_INITIAL = [
   AttributeType.Health,
   AttributeType.RecoveryRate,
 ];
-
-export const BLEED_DELTA = 500;
-
-export const BLEED_DURATION = 2500;

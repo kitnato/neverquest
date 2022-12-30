@@ -1,12 +1,16 @@
 @import "~animate.css";
 @import "bootstrap-custom.scss";
 
+.no-transitions .progress-bar {
+  transition: none;
+}
+
 body {
   user-select: none;
 }
 
 input {
- &.form-control-plaintext {
+  &.form-control-plaintext {
     cursor: pointer;
     outline: none;
   }

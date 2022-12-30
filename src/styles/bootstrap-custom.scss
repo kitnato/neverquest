@@ -10,11 +10,6 @@ $tooltip-opacity: 1;
   box-shadow: none !important;
 }
 
-// Some progress bars should have transitions.
-.no-transitions .progress-bar {
-  transition: none;
-}
-
 // Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
 .popover.show,
 .tooltip.show > .tooltip-inner {

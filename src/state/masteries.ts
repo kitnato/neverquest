@@ -26,6 +26,6 @@ export const masteryCost = selectorFamily<number, MasteryType>({
   get:
     (type) =>
     ({ get }) =>
-      getTriangularNumber(get(masteries(type)).rank + 3),
+      getTriangularNumber(get(masteries(type)).rank + 2),
   key: "masteryCost",
 });

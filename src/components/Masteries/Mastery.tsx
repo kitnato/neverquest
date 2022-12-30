@@ -26,17 +26,21 @@ export default function ({ type }: { type: MasteryType }) {
   return (
     <IconDisplay
       contents={
-        <Stack className="w-100" direction="horizontal">
-          <LabelledProgressBar
-            label={`${progress}/${masteryCostValue}`}
-            value={(progress / masteryCostValue) * 100}
-            variant={UIVariant.Secondary}
-          />
+        <Stack direction="horizontal">
+          <Stack className="w-100" direction="horizontal" gap={3}>
+            <span>{rank}</span>
+
+            <LabelledProgressBar
+              label={`${progress}/${masteryCostValue}`}
+              value={(progress / masteryCostValue) * 100}
+              variant={UIVariant.Secondary}
+            />
+          </Stack>
 
           <FloatingText atom={deltas(getDeltaTypeFromMasteryType(type))} />
         </Stack>
       }
-      description={`Rank: ${rank}. ${description}`}
+      description={description}
       Icon={Icon}
       tooltip={name}
     />

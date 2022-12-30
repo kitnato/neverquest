@@ -12,7 +12,8 @@
     "react-bootstrap": "2.7.0",
     "react-bootstrap-icons": "1.10.2",
     "react-dom": "18.2.0",
-    "recoil": "0.7.6"
+    "recoil": "0.7.6",
+    "sass": "1.57.1"
   },
   "devDependencies": {
     "@cneuro/eslint-config-alpha": "1.2.1",

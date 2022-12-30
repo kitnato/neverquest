@@ -3,10 +3,7 @@ import { createRoot } from "react-dom/client";
 
 import App from "@neverquest/App";
 
-import "animate.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-import "@neverquest/index.css";
+import "@neverquest/styles/index.scss";
 
 const root = createRoot(document.getElementById("root") as HTMLElement);
 

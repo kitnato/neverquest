@@ -1,3 +1,4 @@
+import path from "path";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import { checker } from "vite-plugin-checker";
@@ -15,4 +16,10 @@ export default defineConfig({
     svgr(),
     tsconfigPaths(),
   ],
+  resolve: {
+    alias: {
+      "~animate.css": path.resolve(__dirname, "node_modules/animate.css"),
+      "~bootstrap": path.resolve(__dirname, "node_modules/bootstrap"),
+    }
+  },
 });

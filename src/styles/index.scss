@@ -1,0 +1,27 @@
+@import "~animate.css";
+@import "bootstrap-custom.scss";
+
+body {
+  user-select: none;
+}
+
+input {
+ &.form-control-plaintext {
+    cursor: pointer;
+    outline: none;
+  }
+
+  &.hover-grow:hover:not(:focus) {
+    transform: scale(1.1);
+    transform-origin: center left;
+    transition: transform 0.5s;
+  }
+}
+
+h6 {
+  font-variant: all-petite-caps;
+}
+
+small {
+  letter-spacing: 1px;
+}

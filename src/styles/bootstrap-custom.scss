@@ -1,0 +1,24 @@
+$accordion-border-color: var(--bs-border-color-translucent);
+$accordion-button-active-bg: none;
+$accordion-button-active-color: var(--bs-body-color);
+$offcanvas-horizontal-width: 46%;
+$progress-height: 1.25rem;
+$tooltip-opacity: 1;
+
+// There is no variable that controls the box-shadow when unfocused (resulting in a dividing line).
+.accordion-button {
+  box-shadow: none !important;
+}
+
+// Some progress bars should have transitions.
+.no-transitions .progress-bar {
+  transition: none;
+}
+
+// Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
+.popover.show,
+.tooltip.show > .tooltip-inner {
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2);
+}
+
+@import "~bootstrap/scss/bootstrap";

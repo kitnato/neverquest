@@ -15,12 +15,7 @@ export default function ({
   title: string;
 }) {
   return (
-    <Offcanvas
-      onHide={onClose}
-      placement={placement}
-      show={isShowing}
-      style={{ minWidth: 500, width: "33%" }}
-    >
+    <Offcanvas onHide={onClose} placement={placement} show={isShowing}>
       <Offcanvas.Header closeButton>
         <Offcanvas.Title>{title}</Offcanvas.Title>
       </Offcanvas.Header>

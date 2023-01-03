@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { Button, Stack } from "react-bootstrap";
+import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import Encumbrance from "@neverquest/components/Inventory/Encumbrance";
@@ -10,8 +10,8 @@ import LodestoneUseButton from "@neverquest/components/Inventory/Item/LodestoneU
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
 import { ITEM_COMPASS, ITEM_HEARTHSTONE, ITEM_LODESTONE } from "@neverquest/data/items";
 import useToggleEquipGear from "@neverquest/hooks/actions/useToggleEquipGear";
-import { inventory } from "@neverquest/state/inventory";
-import { isGear, isItem } from "@neverquest/types/type-guards";
+import { canEquipArmor, inventory } from "@neverquest/state/inventory";
+import { isArmor, isGear, isItem } from "@neverquest/types/type-guards";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function () {
@@ -66,10 +66,24 @@ export default function () {
           let PossessionAction: FunctionComponent = () => null;
 
           if (isGear(possession)) {
+            const cannotEquipArmor = isArmor(possession) && !canEquipArmor(possession.armorClass);
+
             PossessionAction = () => (
-              <Button onClick={handleToggleEquipGear(id)} variant={UIVariant.Outline}>
-                Equip
-              </Button>
+              <OverlayTrigger
+                overlay={<Tooltip>Using this is a mystery.</Tooltip>}
+                placement="top"
+                trigger={cannotEquipArmor ? ["hover", "focus"] : []}
+              >
+                <span className="d-inline-block">
+                  <Button
+                    disabled={cannotEquipArmor}
+                    onClick={handleToggleEquipGear(id)}
+                    variant={UIVariant.Outline}
+                  >
+                    Equip
+                  </Button>
+                </span>
+              </OverlayTrigger>
             );
           }
 

@@ -4,6 +4,8 @@ import { SVGIcon } from "@neverquest/types/props";
 
 export type Armor = ItemBase & {
   armorClass?: ArmorClass;
+  deflection?: number;
+  penalty?: number;
   protection: number;
 };
 

@@ -33,7 +33,10 @@ export const totalAttackRate = selector({
     const { base, increment } = ATTRIBUTES[AttributeType.AttackRate];
     const { points } = get(attributes(AttributeType.AttackRate));
 
-    return get(weapon).rate * (1 - getComputedStatistic({ base, increment, points }));
+    const statistic = get(weapon).rate * (1 - getComputedStatistic({ base, increment, points }));
+    const penalty = get(armor).penalty || 0 * statistic;
+
+    return statistic - penalty;
   },
   key: "totalAttackRate",
 });
@@ -96,12 +99,21 @@ export const totalDamage = selector({
   key: "totalDamage",
 });
 
+// TODO
+export const totalDeflection = selector({
+  get: ({ get }) => get(armor).deflection || 0,
+  key: "totalDeflection",
+});
+
 export const totalDodgeChance = selector({
   get: ({ get }) => {
     const { base, increment } = ATTRIBUTES[AttributeType.DodgeChance];
     const { points } = get(attributes(AttributeType.DodgeChance));
 
-    return getComputedStatistic({ base, increment, points });
+    const statistic = getComputedStatistic({ base, increment, points });
+    const penalty = get(armor).penalty || 0 * statistic;
+
+    return statistic - penalty;
   },
   key: "totalDodgeChance",
 });

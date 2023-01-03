@@ -465,16 +465,18 @@ No initial modifiers.
 
 - Medium protection
 - Low -% dodge
-- Lower bleed damage
+- Low [deflection](#deflection) chance
 - Medium cost
 
 ##### Plate armor
 
+`TODO`
+
 - High protection
 - High -% dodge
 - -% attack rate
-- +% block chance
-- % [deflect](#deflection) chance
+- ???
+- High [deflection](#deflection) chance
 - High cost
 
 #### Off-hand

@@ -1,7 +1,7 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { CLASS_TABLE_CELL_ITALIC, UNKNOWN } from "@neverquest/constants";
+import { CLASS_TABLE_CELL_ITALIC, ICON_INLAY_SIZE, UNKNOWN } from "@neverquest/constants";
 import { WEAPON_ICONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -73,7 +73,7 @@ export default function ({ weapon }: { weapon: Weapon }) {
                       <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 
                       <td>
-                        <Icon width={16} />
+                        <Icon width={ICON_INLAY_SIZE} />
                         &nbsp;{capitalizeAll(weaponClass)}
                       </td>
                     </tr>

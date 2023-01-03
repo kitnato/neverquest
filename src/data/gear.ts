@@ -1,10 +1,13 @@
+import { ReactComponent as IconHide } from "@neverquest/icons/animal-hide.svg";
 import { ReactComponent as IconPiercing } from "@neverquest/icons/bullseye.svg";
 import { ReactComponent as IconSlashing } from "@neverquest/icons/crossed-slashes.svg";
+import { ReactComponent as IconReinforced } from "@neverquest/icons/fish-scales.svg";
 import { ReactComponent as IconBlunt } from "@neverquest/icons/gavel.svg";
+import { ReactComponent as IconPlate } from "@neverquest/icons/metal-scales.svg";
 import { ShieldType, WeaponClass, WeaponType } from "@neverquest/locra/types";
 import { Armor, Shield, Weapon } from "@neverquest/types";
 import { ArmorClass, WeaponGrip } from "@neverquest/types/enums";
-import { RangeProps } from "@neverquest/types/props";
+import { RangeProps, SVGIcon } from "@neverquest/types/props";
 
 export const ARMOR_NONE: Armor = {
   name: "Unarmored",
@@ -13,19 +16,36 @@ export const ARMOR_NONE: Armor = {
   weight: 0,
 };
 
+export const ARMOR_ICONS: Record<ArmorClass, SVGIcon> = {
+  [ArmorClass.Hide]: IconHide,
+  [ArmorClass.Plate]: IconPlate,
+  [ArmorClass.Reinforced]: IconReinforced,
+};
+
 export const ARMOR_SPECIFICATIONS: Record<
   ArmorClass,
-  { protectionModifier: number; weight: number }
+  {
+    deflectionModifier: number;
+    penaltyModifier: number;
+    protectionModifier: number;
+    weight: number;
+  }
 > = {
   [ArmorClass.Hide]: {
+    deflectionModifier: 0,
+    penaltyModifier: 0,
     protectionModifier: 1.25,
     weight: 1,
   },
   [ArmorClass.Plate]: {
+    deflectionModifier: 2,
+    penaltyModifier: 1.5,
     protectionModifier: 3,
     weight: 3,
   },
   [ArmorClass.Reinforced]: {
+    deflectionModifier: 1,
+    penaltyModifier: 1,
     protectionModifier: 2,
     weight: 2,
   },
@@ -69,7 +89,7 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
 };
 
-export const WEAPON_ICONS = {
+export const WEAPON_ICONS: Record<WeaponClass, SVGIcon> = {
   [WeaponClass.Blunt]: IconBlunt,
   [WeaponClass.Piercing]: IconPiercing,
   [WeaponClass.Slashing]: IconSlashing,

@@ -25,10 +25,12 @@ export const EXCHANGE_COINS = 1;
 
 export const EXCHANGE_SCRAP = 3;
 
+export const ICON_INLAY_SIZE = 16;
+
 const KEY_STORAGE_PREFIX = "nq";
 
-export const KEY_SESSION = `${KEY_STORAGE_PREFIX}-session`;
+export const KEY_SESSION = `${KEY_STORAGE_PREFIX}-ss`;
 
-export const KEY_SETTINGS = `${KEY_STORAGE_PREFIX}-settings`;
+export const KEY_SETTINGS = `${KEY_STORAGE_PREFIX}-st`;
 
 export const UNKNOWN = "???";

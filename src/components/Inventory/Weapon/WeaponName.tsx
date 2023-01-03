@@ -24,8 +24,8 @@ export default function ({ weapon }: { weapon: Weapon }) {
   const { abilityChance, damage, name, rate, staminaCost, weaponClass, weight } = weapon;
   const Icon = WEAPON_ICONS[weaponClass];
 
-  const weaponSkill = getSkillTypeFromWeaponClass(weaponClass);
-  const showWeaponClass = useRecoilValue(skills(weaponSkill));
+  const skillType = getSkillTypeFromWeaponClass(weaponClass);
+  const showWeaponClass = useRecoilValue(skills(skillType));
 
   return (
     <OverlayTrigger
@@ -79,7 +79,7 @@ export default function ({ weapon }: { weapon: Weapon }) {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>{weaponSkill} chance:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>{skillType} chance:</td>
 
                       <td>{formatPercentage(abilityChance)}</td>
                     </tr>

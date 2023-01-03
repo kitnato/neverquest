@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import IconDisplay from "@neverquest/components/IconDisplay";
 import { BLEED_DURATION, CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { MASTERIES } from "@neverquest/data/masteries";
-import { ReactComponent as Icon } from "@neverquest/icons/spiky-eclipse.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/bleeding-wound.svg";
 import { skills } from "@neverquest/state/skills";
 import { totalBleedChance, totalBleedDamage, totalDamage } from "@neverquest/state/statistics";
 import { MasteryType, SkillType } from "@neverquest/types/enums";

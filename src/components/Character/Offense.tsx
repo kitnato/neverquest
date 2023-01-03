@@ -1,8 +1,7 @@
 import { Col, Row } from "react-bootstrap";
 
 import Bleed from "@neverquest/components/Character/Bleed";
-import CriticalChance from "@neverquest/components/Character/CriticalChance";
-import CriticalDamage from "@neverquest/components/Character/CriticalDamage";
+import CriticalRating from "@neverquest/components/Character/CriticalRating";
 import Stagger from "@neverquest/components/Character/Stagger";
 import TotalDamage from "@neverquest/components/Character/TotalDamage";
 
@@ -18,11 +17,7 @@ export default function () {
       </Col>
 
       <Col>
-        <CriticalChance />
-      </Col>
-
-      <Col>
-        <CriticalDamage />
+        <CriticalRating />
       </Col>
 
       <Col>

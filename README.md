@@ -38,11 +38,11 @@ Consumed when activating [skills](#skills), [auras](#auras) and [sorceries](#sor
 
 ### Resources
 
-Collected by [looting](#looting) dead monsters and selling or dismantling items at the [caravan](#caravan).
+Collected by [looting](#looting) dead monsters and selling or dismantling [gear](#gear) at the [caravan](#caravan).
 
 #### Coins
 
-Gained from selling scrap and items to the [merchant](#merchant) and dropped by certain rare monsters. Used to pay for [caravan](#caravan) crew, some of their services and any item purchases.
+Gained from selling scrap and [items](#item) to the [merchant](#merchant) and dropped by certain rare monsters. Used to pay for [caravan](#caravan) crew, some of their services and any item purchases.
 
 #### Essence
 
@@ -220,7 +220,7 @@ The [wilderness](#wilderness) initially always has a lurking [monster](#monster)
 
 Both the character and monster will keep attacking one another until either the character **retreats**, upon which the monster's health instantly regenerates to its maximum, or if the monster or character is dead (one of either's health reaches zero).
 
-Upon a monster's death, the wave progress is incremented, its remains are looted and the next monster in the wave is engaged automatically, unless the character retreats.
+Upon a monster's death, the wilderness level's **wave** progress is incremented, its remains are looted and the next monster is engaged automatically, unless the character retreats.
 
 The character will enter a **resting** state once the wave is complete and there are no more monsters to fight.
 
@@ -264,7 +264,7 @@ When there is not enough [stamina](#stamina) to pay for an attack, [parry](#parr
 
 #### Looting
 
-After the monster is defeated, its remains are looted automatically for any [resources](#resources). This takes a few seconds, but can be shortened with certain [traits](#traits) or [items](#inventory).
+After the monster is defeated, its remains are looted automatically for any [resources](#resources). This takes a few seconds, but can be shortened with certain [traits](#traits) or [items](#item).
 
 The looted resources can only be collected once the [wave](#wilderness) is completed.
 
@@ -310,7 +310,7 @@ The [merchant](#merchant) is always present from the start. Other crew members c
 
 `TODO`
 
-Purchase [elixirs](#elixirs), [salves](#salves) and [poisons](#poisons).
+Purchase [potions](#potions).
 
 #### Blacksmith
 
@@ -334,7 +334,7 @@ Offers acquisition of new physical [skills](#skills) and [attributes](#attribute
 
 #### Merchant
 
-Sell and buy items. Exchange scrap for coins. Coins can then be used to purchase whatever the merchant has available and used for other goods and services of the caravan.
+Buy and sell [items](#item). Exchange scrap for coins. Coins can then be used to purchase whatever the merchant has available and used for other goods and services of the caravan.
 
 The merchant's inventory of items will grow and diversify after each new wilderness level.
 
@@ -360,13 +360,15 @@ Enchant and disenchant [gear](#gear), requiring essence. Acquire certain attribu
 
 The inventory is accessible as soon as the character acquires the [knapsack](#knapsack) from the merchant.
 
-Before acquiring the knapsack, all equippable items are automatically equipped if possible and all consumables are immediately consumed. Additionally, [encumbrance](#encumbrance) can't be extended.
+Before acquiring the knapsack, all gear is automatically equipped if possible and all consumables are immediately consumed. Additionally, [encumbrance](#encumbrance) can't be extended via the [tailor](#tailor).
+
+### Item
 
 An item can either be;
 
 a) a piece of [gear](#gear), or
-b) a consumable like an [elixir](#elixirs), or
-c) a [trinket](#trinkets) that grants special effects when equipped.
+b) a consumable like a [potion](#potions), or
+c) a [trinket](#trinkets) that grants a special effect or action.
 
 ### Knapsack
 
@@ -483,7 +485,7 @@ No initial modifiers.
 
 This slot allows the wielding of [shields](#shields).
 
-`TODO` Can also be taken up by [two-handed weapons](#two-handed) and any other off-hand items.
+`TODO` Can also be taken up by [two-handed weapons](#two-handed) and any other off-hand gear.
 
 ##### Shields
 
@@ -515,17 +517,21 @@ Grants a percentage [chance to block](#block-chance) all incoming damage. Also g
 
 #### Trinkets
 
-Can grant various [buffs](#buffs) and other effects while equipped. Initially, only one trinket can be equipped at a time, but more slots can be acquired via the [tailor](#tailor).
+Can grant various [buffs](#buffs), actions and other effects if they are carried in the [inventory](#inventory).
 
-The following are some of the early items available from the merchant.
+The following are some of the early trinkets available from the merchant.
 
 ##### Compass
 
-Allows the character to restart the current wilderness level upon initial completion rather than only being able to go to the caravan. This increases the amount of collectable [loot](#resources) at that level.
+Allows the character to return to any previous wilderness level. Since the progress of all levels is preserved even after returning to the [caravan](#caravan), the [lodestone](#lodestone) must be used to reset it.
 
 ##### Hearthstone
 
-Allows the character to go to the caravan regardless of if the current wilderness level's wave is cleared or not. Character cannot be engaged in combat to use it.
+Allows the character to return to the caravan regardless of if the current [wilderness'](#wilderness) wave is cleared or not. Can only be used if not currently attacking (so that the inventory can be opened to use the hearthstone).
+
+##### Lodestone
+
+Allows the character to find more monsters on the current wilderness level rather than only being able to go back to the caravan. Defeating more monsters thus increases the amount of collectable [loot](#resources) on that level.
 
 ### Potions
 
@@ -533,41 +539,55 @@ Allows the character to go to the caravan regardless of if the current wildernes
 
 One of three types that take up the potion slot(s). Purchased from the [alchemist](#alchemist).
 
-Further slots can be added by the [tailor](#tailor).
+Further potion slots can be added by the [tailor](#tailor).
 
-#### Elixirs
+#### Elixir
 
 Restores [stamina](#stamina).
 
-#### Poisons
+#### Poison
 
 Adds poison to weapons automatically with each strike, applying damage-over-time effects and potentially other ailments. Has a certain number of charges before it is used up.
 
-#### Salves
+#### Salve
 
-Temporarily immunizes against certain [ailments](#ailments).
+Cures certain [ailments](#ailments).
 
 ## Mastery
 
-Using a particular weapon or armor increases its associated mastery, determined by ranks. Weapon mastery progress towards the next rank is gained when the respective mastery's requirements are met during combat.
+Using a particular piece of [gear](#gear) increases its associated mastery based on its type and class, which is determined by ranks. Acquiring a mastery to train requires the acquisition of its associated [skill](#skills).
 
-Each mastery starts at rank 1 and requires a certain amount of accumulated progress before the next rank is achieved. Each rank confers bonuses on the respective armor and weapon types.
+Each mastery starts at rank 0 and requires a certain amount of accumulated progress before the next rank is achieved.
 
 ### Cruelty
 
-Progress is gained by using [piercing weapons](#piercing-weapon). Each rank increases [bleed damage](#bleed-damage). Required skill: [Anatomy](#anatomy).
+Required skill: [Anatomy](#anatomy).
+
+Progress is gained by using [piercing weapons](#piercing-weapon). Each rank increases [bleed damage](#bleed-damage).
 
 ### Finesse
 
-Progress is gained by using [slashing weapons](#slashing-weapon). Each rank increases [parry absorption](#parry-absorption) & [parry damage](#parry-damage). Required skill: [Escrime](#escrime).
+Required skill: [Escrime](#escrime).
+
+Progress is gained by using [slashing weapons](#slashing-weapon). Each rank increases [parry absorption](#parry-absorption) & [parry damage](#parry-damage).
 
 ### Might
 
-Progress is gained by using [blunt weapons](#blunt-weapon) and blocking with [shields](#shields). Each rank increases [stagger duration](#stagger-duration). Required skill: [Traumatology](#traumatology).
+Required skill: [Traumatology](#traumatology).
+
+Progress is gained by using [blunt weapons](#blunt-weapon). Each rank increases [stagger duration](#stagger-duration).
+
+### Obstinacy
+
+Required skill: [Shieldcraft](#traumatology).
+
+Progress is gained by successfully [blocking](#block) with [shields](#shields). Each rank increases the chance that [stamina](#stamina) is not consumed when blocking.
 
 ### Tenacity
 
-Progress is gained by being struck while wearing [armor](#armor). Each rank increases the chance that [recovery](#recovery-rate) is not triggered when struck. Required skill: [Armorcraft](#armorcraft).
+Required skill: [Armorcraft](#armorcraft).
+
+Progress is gained by being struck while wearing [armor](#armor). Each rank increases the chance that [recovery](#recovery-rate) is not triggered when struck.
 
 ## Skills
 
@@ -583,9 +603,9 @@ Once acquired, activating a skill requires [energy](#energy).
 
 Cast spells that remain active until dispelled. Provides [buffs](#buffs) in return for reserving a percentage of energy.
 
-#### Physical
+#### Physical (activated)
 
-Special combat skills that can be activated during combat.
+Combat skills that can be activated during combat. Acquired from the [Mercenary](#mercenary).
 
 ##### Execute
 
@@ -597,51 +617,55 @@ Cast spells with immediate and/or over-time effects.
 
 ### Passive skills
 
-Permanent effects that once acquired always provide their benefits.
+Permanent effects that always provide their benefits once they are acquired.
 
-#### Anatomy
+#### Physical (passive)
+
+Skills that unlock certain [attributes](#attributes), [statistics](#statistics) or [masteries](#mastery). Acquired from the [Mercenary](#mercenary).
+
+##### Anatomy
 
 Unlocks [bleed](#bleed) when using [piercing](#piercing-weapon) weapons. Also unlocks the [Cruelty](#cruelty) mastery.
 
-#### Armorcraft
+##### Armorcraft
 
-Allows the use of [plate](#plate-armor) armor. Also unlocks the [Tenacity](#tenacity) mastery.
+Allows the use and knowledge of [reinforced](#reinforced-armor) and [plate](#plate-armor) armor. Also unlocks the [Tenacity](#tenacity) mastery.
 
-#### Assassination
+##### Assassination
 
-Unlocks [dexterity](#dexterity) and [perception](#perception) attributes, as well as [critical chance](#critical-chance) and [critical damage](#critical-damage) modifiers on [weapons](#weapons).
+Unlocks [dexterity](#dexterity) and [perception](#perception) attributes.
 
-#### Calisthenics
+##### Calisthenics
 
 Unlocks the [fortitude](#fortitude) and [vigor](#vigor) attributes.
 
-#### Dual wielding
+##### Dual wielding
 
 `TODO`
 
 Allows the use of a one-handed weapon in main hand as well as offhand.
 
-#### Escrime
+##### Escrime
 
 Unlocks the ability to [parry](#parry) when using [slashing](#slashing-weapon) weapons. Also unlocks the [Finesse](#finesse) mastery.
 
-#### Evasion
+##### Evasion
 
 Unlocks [agility](#agility) attribute and [dodge chance](#dodge-chance) modifiers on gear.
 
-#### Siegecraft
+##### Siegecraft
 
 `TODO`
 
 Allows the use of [two-handed](#two-handed) weapons.
 
-#### Shieldcraft
+##### Shieldcraft
 
-Allows the use of [medium](#medium-shield) and [tower](#tower-shield) shields.
+Allows the use and knowledge of [medium](#medium-shield) and [tower](#tower-shield) shields. Also unlocks the [Obstinacy](#obstinacy) mastery.
 
-#### Traumatology
+##### Traumatology
 
-Unlocks the ability to [stagger](#stagger) when using [blunt](#blunt-weapon) weapons and [blocking](#block) with shields. Unlocks the [Might](#might) mastery.
+Unlocks the ability to [stagger](#stagger) when using [blunt](#blunt-weapon) weapons and [blocking](#block) with shields. Also unlocks the [Might](#might) mastery.
 
 ## Status effects
 
@@ -649,7 +673,7 @@ Temporary or permanent effects granted or changing the current monster or charac
 
 ### Ailments
 
-Negative status effects that dampen the character or monster. For the character, they may be treated by [potions](#potions) and other items.
+Negative status effects that dampen the character or monster. For the character, they may be treated by [potions](#potions).
 
 #### Bleeding
 
@@ -685,33 +709,52 @@ Traits are permanent passive abilities that are unlocked when reaching certain m
 
 Meta progression. Grant bonuses when completed.
 
+### Challenges
+
+- Parry, inflict bleed and stagger in one attack
+
 ### Combat quests
 
 - Kill first monster
-- Kill 5/10/25/50/100/1000 monsters _(5 quests)_
+- Kill 5/10/25/50/100/1000 monsters
 - Kill a monster in one strike
-- Kill a monster with bleed damage
-- Dodge 1/5/10/25/50/100 strikes
+- Kill a monster with [bleed](#bleed) damage
+- [Block](#block) 1/5/10/25/50/100 strikes
+- Block 3 strikes in a row
+- [Dodge](#dodge) 1/5/10/25/50/100 strikes
 - Dodge 3 strikes in a row
-- Reflect damage
-- Parry, inflict bleed and stagger in one attack
-- After acquiring Compass, clear all levels before returning to Caravan
+- [Parry](#parry) 1/5/10/25/50/100 strikes
+- Parry 3 strikes in a row
+- [Stagger](#stagger) 1/5/10/25/50/100 times
+- Stagger 3 times in a row
 
 ### Caravan quests
 
-- Purchase an item
-- Hire first new crew member
-- Hire X _(X = crew member)_
+- Purchase [armor](#armor)
+- Purchase a [shield](#shields)
+- Purchase a [weapon](#weapons)
+- Purchase the [compass](#compass)
+- Purchase the [hearthstone](#hearthstone)
+- Purchase the [lodestone](#lodestone)
+- Hire the [blacksmith](#blacksmith)
+- Hire the [cook](#cook)
+- Hire the [medic](#medic)
+- Hire the [merchant](#merchant)
+- Hire the [mercenary](#mercenary)
+- Hire the [tailor](#tailor)
 
 ### Gear quests
 
 - Equip a weapon
 - Equip armor
 - Equip a shield
+- Discover [armor classes](#armor)
+- Discover [weapon classes](#weapon-class)
+- Discover [shield types](#shields)
 
 ### Meta
 
-- Achieve 5/10/25/50/100/all quests
+- Complete 5/10/25/50/100/all quests
 
 ## Settings
 

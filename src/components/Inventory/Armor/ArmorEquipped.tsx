@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import ArmorName from "@neverquest/components/Inventory/Armor/ArmorName";
-import { NO_ARMOR } from "@neverquest/data/gear";
+import { ARMOR_NONE } from "@neverquest/data/gear";
 import { ReactComponent as IconUnequipped } from "@neverquest/icons/ribcage.svg";
 import { ReactComponent as IconEquipped } from "@neverquest/icons/shoulder-armor.svg";
 import { armor } from "@neverquest/state/inventory";
@@ -20,7 +20,7 @@ export default function () {
   return (
     <IconDisplay
       contents={<ArmorName armor={armorValue} />}
-      Icon={armorValue === NO_ARMOR ? IconUnequipped : IconEquipped}
+      Icon={armorValue === ARMOR_NONE ? IconUnequipped : IconEquipped}
       isAnimated
       tooltip="Equipped armor"
     />

@@ -94,6 +94,13 @@ export const ATTRIBUTES: Record<AttributeType, AttributeOrMastery> = {
   },
 };
 
+export const ATTRIBUTES_INITIAL = [
+  AttributeType.AttackRate,
+  AttributeType.Damage,
+  AttributeType.Health,
+  AttributeType.RecoveryRate,
+];
+
 export const ATTRIBUTES_ORDER = [
   AttributeType.Health,
   AttributeType.Stamina,
@@ -106,11 +113,4 @@ export const ATTRIBUTES_ORDER = [
   AttributeType.CriticalDamage,
   AttributeType.DodgeChance,
   AttributeType.Loot,
-];
-
-export const ATTRIBUTES_INITIAL = [
-  AttributeType.AttackRate,
-  AttributeType.Damage,
-  AttributeType.Health,
-  AttributeType.RecoveryRate,
 ];

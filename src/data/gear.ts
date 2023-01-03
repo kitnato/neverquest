@@ -6,6 +6,13 @@ import { Armor, Shield, Weapon } from "@neverquest/types";
 import { ArmorClass, WeaponGrip } from "@neverquest/types/enums";
 import { RangeProps } from "@neverquest/types/props";
 
+export const ARMOR_NONE: Armor = {
+  name: "Unarmored",
+  price: 0,
+  protection: 0,
+  weight: 0,
+};
+
 export const ARMOR_SPECIFICATIONS: Record<
   ArmorClass,
   { protectionModifier: number; weight: number }
@@ -24,32 +31,12 @@ export const ARMOR_SPECIFICATIONS: Record<
   },
 };
 
-export const NO_ARMOR: Armor = {
-  name: "Unarmored",
-  price: 0,
-  protection: 0,
-  weight: 0,
-};
-
-export const NO_SHIELD: Shield = {
+export const SHIELD_NONE: Shield = {
   blockChance: 0,
   name: "None",
   price: 0,
   staggerChance: 0,
   staminaCost: 0,
-  weight: 0,
-};
-
-export const NO_WEAPON: Weapon = {
-  abilityChance: 0,
-  damage: 1,
-  grip: WeaponGrip.OneHanded,
-  name: "Unarmed",
-  price: 0,
-  rate: 2500,
-  staminaCost: 0,
-  type: WeaponType.Melee,
-  weaponClass: WeaponClass.Blunt,
   weight: 0,
 };
 
@@ -82,8 +69,21 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
 };
 
-export const WEAPON_CLASS_ICONS = {
+export const WEAPON_ICONS = {
   [WeaponClass.Blunt]: IconBlunt,
   [WeaponClass.Piercing]: IconPiercing,
   [WeaponClass.Slashing]: IconSlashing,
+};
+
+export const WEAPON_NONE: Weapon = {
+  abilityChance: 0,
+  damage: 1,
+  grip: WeaponGrip.OneHanded,
+  name: "Unarmed",
+  price: 0,
+  rate: 2500,
+  staminaCost: 0,
+  type: WeaponType.Melee,
+  weaponClass: WeaponClass.Blunt,
+  weight: 0,
 };

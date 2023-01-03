@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/data/caravan";
+import { CREW, CREW_ORDER } from "@neverquest/data/caravan";
 import { crew } from "@neverquest/state/caravan";
 import { level, wildernesses } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -20,7 +20,7 @@ export default function () {
       const { hireStatus, monologueProgress } = get(crew(type));
       const isShowingCrewHiring = isShowing(ShowingType.CrewHiring);
 
-      const { hirableLevel, monologues } = CREW_MEMBERS[type];
+      const { hirableLevel, monologues } = CREW[type];
 
       // Progress the monologue for all hired crew members.
       if (hireStatus === CrewStatus.Hired && monologueProgress < monologues.length - 1) {

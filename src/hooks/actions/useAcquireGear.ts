@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
-import { NO_ARMOR, NO_SHIELD, NO_WEAPON } from "@neverquest/data/gear";
+import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import useToggleEquipGear from "@neverquest/hooks/actions/useToggleEquipGear";
 import { armor, canFit, inventory, shield, weapon } from "@neverquest/state/inventory";
 import { autoEquip } from "@neverquest/state/settings";
@@ -27,9 +27,9 @@ export default function () {
 
     if (
       get(autoEquip) &&
-      ((get(armor) === NO_ARMOR && isArmor(gear)) ||
-        (get(shield) === NO_SHIELD && isShield(gear)) ||
-        (get(weapon) === NO_WEAPON && isWeapon(gear)))
+      ((get(armor) === ARMOR_NONE && isArmor(gear)) ||
+        (get(shield) === SHIELD_NONE && isShield(gear)) ||
+        (get(weapon) === WEAPON_NONE && isWeapon(gear)))
     ) {
       isEquipped = true;
       toggleEquipGear(gear);

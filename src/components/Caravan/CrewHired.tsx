@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
-import { CREW_MEMBERS } from "@neverquest/data/caravan";
+import { CREW } from "@neverquest/data/caravan";
 import { ReactComponent as Icon } from "@neverquest/icons/cowled.svg";
 import { crew } from "@neverquest/state/caravan";
 import { CrewStatus, CrewType } from "@neverquest/types/enums";
@@ -17,7 +17,7 @@ export default function ({ setActive, type }: { setActive: () => void; type: Cre
     return null;
   }
 
-  const { interaction, monologues, name } = CREW_MEMBERS[type];
+  const { interaction, monologues, name } = CREW[type];
 
   return (
     <IconDisplay

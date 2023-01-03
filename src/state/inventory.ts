@@ -1,6 +1,6 @@
 import { atom, selector, selectorFamily } from "recoil";
 
-import { NO_ARMOR, NO_SHIELD, NO_WEAPON } from "@neverquest/data/gear";
+import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import localStorage from "@neverquest/state/effects/localStorage";
 import { Armor, Inventory, Shield, Weapon } from "@neverquest/types";
 import { StorageKey } from "@neverquest/types/enums";
@@ -21,7 +21,7 @@ export const armor = selector({
       return inventoryValue[equippedArmorID].possession as Armor;
     }
 
-    return NO_ARMOR;
+    return ARMOR_NONE;
   },
   key: "armor",
 });
@@ -64,7 +64,7 @@ export const shield = selector({
       return inventoryValue[equippedShieldID].possession as Shield;
     }
 
-    return NO_SHIELD;
+    return SHIELD_NONE;
   },
   key: "shield",
 });
@@ -82,7 +82,7 @@ export const weapon = selector({
       return inventoryValue[equippedWeaponID].possession as Weapon;
     }
 
-    return NO_WEAPON;
+    return WEAPON_NONE;
   },
   key: "weapon",
 });

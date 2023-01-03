@@ -7,7 +7,7 @@ import FloatingText from "@neverquest/components/FloatingText";
 import IconDisplay from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import { NO_WEAPON } from "@neverquest/data/gear";
+import { WEAPON_NONE } from "@neverquest/data/gear";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/striking-splinter.svg";
 import { attributes } from "@neverquest/state/attributes";
@@ -63,7 +63,7 @@ export default function () {
                     <tbody>
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>{`${
-                          weaponValue === NO_WEAPON ? "Base" : "Weapon"
+                          weaponValue === WEAPON_NONE ? "Base" : "Weapon"
                         }:`}</td>
 
                         <td>{formatMilliseconds(weaponValue.rate)}</td>

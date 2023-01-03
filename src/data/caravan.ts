@@ -1,7 +1,7 @@
 import { CrewMember } from "@neverquest/types";
 import { CrewType } from "@neverquest/types/enums";
 
-export const CREW_MEMBERS: Record<CrewType, CrewMember> = {
+export const CREW: Record<CrewType, CrewMember> = {
   [CrewType.Blacksmith]: {
     description: "Crafts superior gear.",
     hirableLevel: 5,
@@ -60,6 +60,8 @@ export const CREW_MEMBERS: Record<CrewType, CrewMember> = {
   },
 };
 
+export const CREW_INITIAL = [CrewType.Merchant];
+
 export const CREW_ORDER = [
   CrewType.Merchant,
   CrewType.Mercenary,
@@ -68,5 +70,3 @@ export const CREW_ORDER = [
   CrewType.Medic,
   CrewType.Tailor,
 ];
-
-export const CREW_INITIAL = [CrewType.Merchant];

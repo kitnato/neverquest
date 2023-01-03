@@ -11,7 +11,7 @@ import Mercenary from "@neverquest/components/Caravan/Mercenary";
 import Merchant from "@neverquest/components/Caravan/Merchant";
 import Tailor from "@neverquest/components/Caravan/Tailor";
 import DismissableScreen from "@neverquest/components/DismissableScreen";
-import { CREW_MEMBERS, CREW_ORDER } from "@neverquest/data/caravan";
+import { CREW, CREW_ORDER } from "@neverquest/data/caravan";
 import { crewHirable } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import { CrewType, ShowingType } from "@neverquest/types/enums";
@@ -27,23 +27,23 @@ export default function () {
 
   const ActiveMemberComponent: FunctionComponent = (() => {
     if (activeMember) {
-      switch (CREW_MEMBERS[activeMember].name) {
-        case CREW_MEMBERS[CrewType.Blacksmith].name: {
+      switch (CREW[activeMember].name) {
+        case CREW[CrewType.Blacksmith].name: {
           return Blacksmith;
         }
-        case CREW_MEMBERS[CrewType.Cook].name: {
+        case CREW[CrewType.Cook].name: {
           return Cook;
         }
-        case CREW_MEMBERS[CrewType.Medic].name: {
+        case CREW[CrewType.Medic].name: {
           return Medic;
         }
-        case CREW_MEMBERS[CrewType.Mercenary].name: {
+        case CREW[CrewType.Mercenary].name: {
           return Mercenary;
         }
-        case CREW_MEMBERS[CrewType.Merchant].name: {
+        case CREW[CrewType.Merchant].name: {
           return Merchant;
         }
-        case CREW_MEMBERS[CrewType.Tailor].name: {
+        case CREW[CrewType.Tailor].name: {
           return Tailor;
         }
         default: {
@@ -95,7 +95,7 @@ export default function () {
           contents={<ActiveMemberComponent />}
           isShowing={isScreenShowing}
           onClose={() => onActivate(false)}
-          title={CREW_MEMBERS[activeMember].name}
+          title={CREW[activeMember].name}
         />
       )}
     </>

@@ -2,7 +2,7 @@ import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { CLASS_TABLE_CELL_ITALIC, UNKNOWN } from "@neverquest/constants";
-import { WEAPON_CLASS_ICONS } from "@neverquest/data/gear";
+import { WEAPON_ICONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingDamagePerSecond } from "@neverquest/state/settings";
@@ -22,7 +22,7 @@ export default function ({ weapon }: { weapon: Weapon }) {
   const showStaminaValue = useRecoilValue(isShowing(ShowingType.Stamina));
 
   const { abilityChance, damage, name, rate, staminaCost, weaponClass, weight } = weapon;
-  const Icon = WEAPON_CLASS_ICONS[weaponClass];
+  const Icon = WEAPON_ICONS[weaponClass];
 
   const weaponSkill = getSkillTypeFromWeaponClass(weaponClass);
   const showWeaponClass = useRecoilValue(skills(weaponSkill));

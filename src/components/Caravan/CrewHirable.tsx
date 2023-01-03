@@ -5,7 +5,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import IconDisplay from "@neverquest/components/IconDisplay";
 import Coins from "@neverquest/components/Resource/Coins";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
-import { CREW_MEMBERS } from "@neverquest/data/caravan";
+import { CREW } from "@neverquest/data/caravan";
 import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
 import { ReactComponent as Icon } from "@neverquest/icons/cowled.svg";
 import { crew } from "@neverquest/state/caravan";
@@ -22,7 +22,7 @@ export default function ({ type }: { type: CrewType }) {
     return null;
   }
 
-  const { description, name, price } = CREW_MEMBERS[type];
+  const { description, name, price } = CREW[type];
   const isAffordable = price <= coinsValue;
 
   return (

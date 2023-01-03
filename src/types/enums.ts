@@ -98,14 +98,14 @@ export enum ShowingType {
 }
 
 export enum SkillType {
-  Armors,
-  Bleed,
-  Criticals,
-  Dodge,
-  Parry,
-  Regeneration,
-  Shields,
-  Stagger,
+  Armors = "Armorcraft",
+  Bleed = "Bleed",
+  Criticals = "Criticals",
+  Dodge = "Dodge",
+  Parry = "Parry",
+  Regeneration = "Regeneration",
+  Shields = "Shieldcraft",
+  Stagger = "Stagger",
 }
 
 export enum StorageKey {

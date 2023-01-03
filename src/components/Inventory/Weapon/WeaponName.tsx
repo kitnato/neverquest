@@ -9,7 +9,11 @@ import { isShowingDamagePerSecond } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
 import { Weapon } from "@neverquest/types";
 import { ShowingType } from "@neverquest/types/enums";
-import { capitalizeAll, formatMilliseconds } from "@neverquest/utilities/formatters";
+import {
+  capitalizeAll,
+  formatMilliseconds,
+  formatPercentage,
+} from "@neverquest/utilities/formatters";
 import { getDamagePerRate, getSkillTypeFromWeaponClass } from "@neverquest/utilities/getters";
 
 export default function ({ weapon }: { weapon: Weapon }) {
@@ -17,10 +21,11 @@ export default function ({ weapon }: { weapon: Weapon }) {
   const isShowingDamagePerSecondValue = useRecoilValue(isShowingDamagePerSecond);
   const showStaminaValue = useRecoilValue(isShowing(ShowingType.Stamina));
 
-  const { damage, name, rate, staminaCost, weaponClass, weight } = weapon;
+  const { abilityChance, damage, name, rate, staminaCost, weaponClass, weight } = weapon;
   const Icon = WEAPON_CLASS_ICONS[weaponClass];
 
-  const showWeaponClass = useRecoilValue(skills(getSkillTypeFromWeaponClass(weaponClass)));
+  const weaponSkill = getSkillTypeFromWeaponClass(weaponClass);
+  const showWeaponClass = useRecoilValue(skills(weaponSkill));
 
   return (
     <OverlayTrigger
@@ -62,20 +67,28 @@ export default function ({ weapon }: { weapon: Weapon }) {
                   )}
                 </tr>
 
-                <tr>
-                  {showWeaponClass ? (
-                    <>
+                {showWeaponClass ? (
+                  <>
+                    <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 
                       <td>
                         <Icon width={16} />
                         &nbsp;{capitalizeAll(weaponClass)}
                       </td>
-                    </>
-                  ) : (
+                    </tr>
+
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>{weaponSkill} chance:</td>
+
+                      <td>{formatPercentage(abilityChance)}</td>
+                    </tr>
+                  </>
+                ) : (
+                  <tr>
                     <td className="text-end">{UNKNOWN}</td>
-                  )}
-                </tr>
+                  </tr>
+                )}
 
                 <tr>
                   {hasKnapsackValue ? (

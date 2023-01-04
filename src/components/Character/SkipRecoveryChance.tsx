@@ -37,7 +37,7 @@ export default function () {
         </>
       }
       Icon={Icon}
-      tooltip="Tenacity"
+      tooltip="Chance to skip recovery"
     />
   );
 }

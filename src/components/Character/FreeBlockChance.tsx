@@ -37,7 +37,7 @@ export default function () {
         </>
       }
       Icon={Icon}
-      tooltip="Obstinacy"
+      tooltip="Chance for blocking without stamina cost"
     />
   );
 }

@@ -28,6 +28,16 @@ export const damagePerSecond = selector({
   key: "damagePerSecond",
 });
 
+export const freeBlockChance = selector({
+  get: ({ get }) => {
+    const { base, increment } = MASTERIES[MasteryType.FreeBlockChance];
+    const { rank } = get(masteries(MasteryType.FreeBlockChance));
+
+    return getComputedStatistic({ base, increment, points: rank });
+  },
+  key: "freeBlockChance",
+});
+
 export const totalAttackRate = selector({
   get: ({ get }) => {
     const { base, increment } = ATTRIBUTES[AttributeType.AttackRate];
@@ -174,6 +184,16 @@ export const totalRecoveryRate = selector({
     return getComputedStatistic({ base, increment, points });
   },
   key: "totalRecoveryRate",
+});
+
+export const skipRecoveryChance = selector({
+  get: ({ get }) => {
+    const { base, increment } = MASTERIES[MasteryType.SkipRecoveryChance];
+    const { rank } = get(masteries(MasteryType.SkipRecoveryChance));
+
+    return getComputedStatistic({ base, increment, points: rank });
+  },
+  key: "skipRecoveryChance",
 });
 
 export const totalStaminaRegenerationRate = selector({

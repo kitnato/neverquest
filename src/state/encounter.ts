@@ -27,7 +27,7 @@ export const locationName = selector({
       return get(wilderness).name;
     }
 
-    return LocationType.Caravan;
+    return "Caravan";
   },
   key: "location",
 });

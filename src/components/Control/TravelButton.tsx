@@ -8,7 +8,6 @@ import useSwitchLocation from "@neverquest/hooks/actions/useSwitchLocation";
 import { ReactComponent as Icon } from "@neverquest/icons/journey.svg";
 import { isLevelCompleted, isWilderness, level } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
-import { LocationType } from "@neverquest/types/enums";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -31,8 +30,8 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
           levelValue === 1 && isWildernessValue
             ? UNKNOWN
             : isWildernessValue
-            ? LocationType.Caravan
-            : LocationType.Wilderness
+            ? "Caravan"
+            : "Wilderness"
         }`}</Tooltip>
       }
       placement="top"

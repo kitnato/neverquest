@@ -34,6 +34,10 @@ export default function () {
       if (!get(isShowing(ShowingType.TotalProtection))) {
         set(isShowing(ShowingType.TotalProtection), true);
       }
+
+      if (!get(isShowing(ShowingType.Deflection)) && possession.deflection) {
+        set(isShowing(ShowingType.Deflection), true);
+      }
     }
 
     if (isShield(possession)) {

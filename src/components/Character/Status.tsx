@@ -3,6 +3,7 @@ import { Card, Col, Row, Stack } from "react-bootstrap";
 import { useSetRecoilState } from "recoil";
 
 import Attack from "@neverquest/components/Character/Attack";
+import Chances from "@neverquest/components/Character/Chances";
 import Defense from "@neverquest/components/Character/Defense";
 import Health from "@neverquest/components/Character/Health";
 import Name from "@neverquest/components/Character/Name";
@@ -49,6 +50,8 @@ export default function () {
           <Offense />
 
           <Defense />
+
+          <Chances />
         </Stack>
       </Card.Body>
     </Card>

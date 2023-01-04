@@ -12,11 +12,11 @@ import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function () {
-  const showBlockChanceValue = useRecoilValue(isShowing(ShowingType.BlockChance));
-  const showTotalProtectionValue = useRecoilValue(isShowing(ShowingType.TotalProtection));
+  const isShowingBlockChance = useRecoilValue(isShowing(ShowingType.BlockChance));
+  const isShowingTotalProtection = useRecoilValue(isShowing(ShowingType.TotalProtection));
   const dodgeSkill = useRecoilValue(skills(SkillType.Dodge));
 
-  if (!dodgeSkill && !showBlockChanceValue && !showTotalProtectionValue) {
+  if (!dodgeSkill && !isShowingBlockChance && !isShowingTotalProtection) {
     return null;
   }
 

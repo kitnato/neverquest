@@ -26,6 +26,7 @@ export const ARMOR_SPECIFICATIONS: Record<
   ArmorClass,
   {
     deflectionModifier: number;
+    name: string;
     penaltyModifier: number;
     protectionModifier: number;
     weight: number;
@@ -33,18 +34,21 @@ export const ARMOR_SPECIFICATIONS: Record<
 > = {
   [ArmorClass.Hide]: {
     deflectionModifier: 0,
+    name: "Hide",
     penaltyModifier: 0,
     protectionModifier: 1.25,
     weight: 1,
   },
   [ArmorClass.Plate]: {
     deflectionModifier: 2,
+    name: "Plate",
     penaltyModifier: 1.5,
     protectionModifier: 3,
     weight: 3,
   },
   [ArmorClass.Reinforced]: {
     deflectionModifier: 1,
+    name: "Reinforced",
     penaltyModifier: 1,
     protectionModifier: 2,
     weight: 2,

@@ -2,7 +2,7 @@ import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { CLASS_TABLE_CELL_ITALIC, ICON_INLAY_SIZE, UNKNOWN } from "@neverquest/constants";
-import { ARMOR_ICONS } from "@neverquest/data/gear";
+import { ARMOR_ICONS, ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { skills } from "@neverquest/state/skills";
 import { Armor } from "@neverquest/types";
@@ -38,7 +38,8 @@ export default function ({ armor }: { armor: Armor }) {
 
                       <td>
                         <Icon width={ICON_INLAY_SIZE} />
-                        &nbsp;{capitalizeAll(armorClass)}
+                        &nbsp;
+                        {capitalizeAll(armorClass ? ARMOR_SPECIFICATIONS[armorClass].name : "None")}
                       </td>
                     </tr>
 
@@ -85,7 +86,6 @@ export default function ({ armor }: { armor: Armor }) {
         </Popover>
       }
       placement="top"
-      trigger={armorClass ? ["hover", "focus"] : []}
     >
       <span>{name}</span>
     </OverlayTrigger>

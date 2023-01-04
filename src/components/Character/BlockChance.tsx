@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
-import { ReactComponent as Icon } from "@neverquest/icons/shield-reflect.svg";
+import { ReactComponent as Icon } from "@neverquest/icons/slashed-shield.svg";
 import { shield } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";

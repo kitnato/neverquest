@@ -55,8 +55,14 @@ export function getDeltaTypeFromMasteryType(type: MasteryType) {
     case MasteryType.BleedDamage: {
       return DeltaType.MasteryBleed;
     }
+    case MasteryType.FreeBlockChance: {
+      return DeltaType.ChanceFreeBlock;
+    }
     case MasteryType.ParryDamage: {
       return DeltaType.MasteryParry;
+    }
+    case MasteryType.SkipRecoveryChance: {
+      return DeltaType.ChanceSkipRecovery;
     }
     case MasteryType.StaggerDuration: {
       return DeltaType.MasteryStagger;

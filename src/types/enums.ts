@@ -1,7 +1,7 @@
 export enum ArmorClass {
-  Hide = "Hide",
-  Plate = "Plate",
-  Reinforced = "Reinforced",
+  Hide,
+  Plate,
+  Reinforced,
 }
 
 export enum AttributeType {
@@ -34,10 +34,13 @@ export enum CrewType {
 }
 
 export enum DeltaType {
+  ChanceFreeBlock,
+  ChanceSkipRecovery,
   CharacterLevel,
   Coins,
   CoinsLoot,
   DamagePerSecond,
+  Deflection,
   Essence,
   EssenceAbsorbed,
   EssenceLoot,
@@ -60,8 +63,8 @@ export enum DeltaType {
 }
 
 export enum LocationType {
-  Caravan = "Caravan",
-  Wilderness = "Wilderness",
+  Caravan,
+  Wilderness,
 }
 
 export enum LootType {
@@ -72,7 +75,9 @@ export enum LootType {
 
 export enum MasteryType {
   BleedDamage,
+  FreeBlockChance,
   ParryDamage,
+  SkipRecoveryChance,
   StaggerDuration,
 }
 
@@ -83,6 +88,7 @@ export enum ShowingType {
   Coins,
   CrewHiring,
   Defense,
+  Deflection,
   Essence,
   GameOver,
   Loot,
@@ -98,14 +104,14 @@ export enum ShowingType {
 }
 
 export enum SkillType {
-  Armors = "Armorcraft",
-  Bleed = "Bleed",
-  Criticals = "Criticals",
-  Dodge = "Dodge",
-  Parry = "Parry",
-  Regeneration = "Regeneration",
-  Shields = "Shieldcraft",
-  Stagger = "Stagger",
+  Armors,
+  Bleed,
+  Criticals,
+  Dodge,
+  Parry,
+  Regeneration,
+  Shields,
+  Stagger,
 }
 
 export enum StorageKey {

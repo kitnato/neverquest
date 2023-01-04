@@ -16,6 +16,8 @@ import {
 import { canAttackOrParry, canBlock } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
 import {
+  freeBlockChance,
+  skipRecoveryChance,
   totalBlockChance,
   totalDodgeChance,
   totalParryAbsorption,
@@ -145,13 +147,26 @@ export default function () {
 
         const hasStaggered =
           get(skills(SkillType.Stagger)) && Math.random() <= get(shield).staggerChance;
+        const shieldsSkill = get(skills(SkillType.Shields));
+        const isFreeBlock = shieldsSkill && Math.random() <= get(freeBlockChance);
 
         deltaHealth = {
           color: FloatingText.Neutral,
           value: "BLOCKED",
         };
 
-        changeStamina({ value: -staminaCost });
+        if (shieldsSkill) {
+          increaseMastery(MasteryType.FreeBlockChance);
+        }
+
+        if (isFreeBlock) {
+          deltaStamina = {
+            color: FloatingText.Neutral,
+            value: "OBSTINATE",
+          };
+        } else {
+          changeStamina({ value: -staminaCost });
+        }
 
         if (hasStaggered) {
           set(isMonsterStaggered, true);
@@ -171,12 +186,6 @@ export default function () {
     }
 
     if (!hasBlocked && !hasParried) {
-      if (!get(isShowing(ShowingType.Recovery))) {
-        set(isShowing(ShowingType.Recovery), true);
-      }
-
-      set(isRecovering, true);
-
       if (get(totalProtection) > 0) {
         deltaHealth = [
           {
@@ -189,6 +198,21 @@ export default function () {
           },
         ];
       }
+    }
+
+    const armorsSkill = get(skills(SkillType.Armors));
+    const hasSkippedRecovery = armorsSkill && Math.random() <= get(skipRecoveryChance);
+
+    if (armorsSkill) {
+      increaseMastery(MasteryType.SkipRecoveryChance);
+    }
+
+    if (!hasSkippedRecovery) {
+      if (!get(isShowing(ShowingType.Recovery))) {
+        set(isShowing(ShowingType.Recovery), true);
+      }
+
+      set(isRecovering, true);
     }
 
     changeHealth({ delta: deltaHealth, value: healthDamage });

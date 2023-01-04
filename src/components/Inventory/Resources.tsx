@@ -8,11 +8,11 @@ import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function () {
-  const showCoinsValue = useRecoilValue(isShowing(ShowingType.Coins));
-  const showEssenceValue = useRecoilValue(isShowing(ShowingType.Essence));
-  const showScrapValue = useRecoilValue(isShowing(ShowingType.Scrap));
+  const isShowingCoins = useRecoilValue(isShowing(ShowingType.Coins));
+  const isShowingEssence = useRecoilValue(isShowing(ShowingType.Essence));
+  const isShowingScrap = useRecoilValue(isShowing(ShowingType.Scrap));
 
-  if (!showEssenceValue && !showCoinsValue && !showScrapValue) {
+  if (!isShowingEssence && !isShowingCoins && !isShowingScrap) {
     return null;
   }
 

@@ -19,7 +19,7 @@ export default function () {
     }
 
     if (name === ITEM_KNAPSACK.name) {
-      set(encumbranceMaximum, (current) => current + 1);
+      set(encumbranceMaximum, 5);
       set(hasKnapsack, true);
 
       return true;

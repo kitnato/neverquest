@@ -14,45 +14,45 @@ import { attributes } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { totalAttackRate } from "@neverquest/state/statistics";
+import { attackRate } from "@neverquest/state/statistics";
 import { AttributeType, DeltaType, ShowingType } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 import { getComputedStatistic } from "@neverquest/utilities/getters";
 
 export default function () {
   const { points } = useRecoilValue(attributes(AttributeType.AttackRate));
-  const [showTotalAttackRateDetailsValue, setShowTotalAttackRateDetails] = useRecoilState(
-    isShowing(ShowingType.TotalAttackRateSummary)
+  const [isShowingAttackRateSummary, setShowingAttackRateSummary] = useRecoilState(
+    isShowing(ShowingType.AttackRateSummary)
   );
   const weaponValue = useRecoilValue(weapon);
 
   const { base, increment, name } = ATTRIBUTES[AttributeType.AttackRate];
-  const deltaTotalAttackRate = deltas(DeltaType.TotalAttackRate);
+  const deltaAttackRate = deltas(DeltaType.AttackRate);
 
   useDeltaText({
-    deltaAtom: deltaTotalAttackRate,
+    deltaAtom: deltaAttackRate,
     isTime: true,
-    valueAtom: totalAttackRate,
+    valueAtom: attackRate,
   });
 
   useEffect(() => {
-    if (points > 0 && !showTotalAttackRateDetailsValue) {
-      setShowTotalAttackRateDetails(true);
+    if (points > 0 && !isShowingAttackRateSummary) {
+      setShowingAttackRateSummary(true);
     }
-  }, [points, setShowTotalAttackRateDetails, showTotalAttackRateDetailsValue]);
+  }, [points, setShowingAttackRateSummary, isShowingAttackRateSummary]);
 
   const MeterWithDelta = () => (
     <Stack className="w-100" direction="horizontal">
       <AttackMeter />
 
-      <FloatingText atom={deltaTotalAttackRate} />
+      <FloatingText atom={deltaAttackRate} />
     </Stack>
   );
 
   return (
     <IconDisplay
       contents={
-        showTotalAttackRateDetailsValue ? (
+        isShowingAttackRateSummary ? (
           <OverlayTrigger
             overlay={
               <Popover>

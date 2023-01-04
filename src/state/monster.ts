@@ -7,11 +7,25 @@ import { getDamagePerRate } from "@neverquest/utilities/getters";
 
 // SELECTORS
 
+export const attackRateMonster = selector({
+  get: ({ get }) => 4510 - get(progress) - 10 * get(level) * 2,
+  key: "attackRateMonster",
+});
+
+export const damageMonster = selector({
+  get: ({ get }) => {
+    const levelValue = get(level);
+
+    return levelValue + Math.floor(levelValue / 5 + get(progress) / 4);
+  },
+  key: "damageMonster",
+});
+
 export const damagePerSecondMonster = selector({
   get: ({ get }) =>
     getDamagePerRate({
-      damage: get(totalDamageMonster),
-      rate: get(totalAttackRateMonster),
+      damage: get(damageMonster),
+      rate: get(attackRateMonster),
     }),
   key: "damagePerSecondMonster",
 });
@@ -37,20 +51,6 @@ export const monsterLoot = selector({
     };
   },
   key: "monsterLoot",
-});
-
-export const totalAttackRateMonster = selector({
-  get: ({ get }) => 4510 - get(progress) - 10 * get(level) * 2,
-  key: "totalAttackRateMonster",
-});
-
-export const totalDamageMonster = selector({
-  get: ({ get }) => {
-    const levelValue = get(level);
-
-    return levelValue + Math.floor(levelValue / 5 + get(progress) / 4);
-  },
-  key: "totalDamageMonster",
 });
 
 // ATOMS

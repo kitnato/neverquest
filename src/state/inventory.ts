@@ -48,7 +48,7 @@ export const encumbrance = selector({
     const inventoryValue = get(inventory);
 
     return Object.getOwnPropertyNames(inventoryValue).reduce(
-      (totalEncumbrance, id) => totalEncumbrance + inventoryValue[id].possession.weight,
+      (current, id) => current + inventoryValue[id].possession.weight,
       0
     );
   },

@@ -6,7 +6,7 @@ import { BLEED_DURATION, CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { ReactComponent as Icon } from "@neverquest/icons/bleeding-wound.svg";
 import { skills } from "@neverquest/state/skills";
-import { totalBleedChance, totalBleedDamage, totalDamage } from "@neverquest/state/statistics";
+import { bleedChance, bleedDamage, damage } from "@neverquest/state/statistics";
 import { MasteryType, SkillType } from "@neverquest/types/enums";
 import {
   formatMilliseconds,
@@ -16,10 +16,10 @@ import {
 import { getDamagePerRate } from "@neverquest/utilities/getters";
 
 export default function () {
-  const totalBleedDamageValue = useRecoilValue(totalBleedDamage);
-  const totalBleedChanceValue = useRecoilValue(totalBleedChance);
-  const totalDamageValue = useRecoilValue(totalDamage);
+  const bleedDamageValue = useRecoilValue(bleedDamage);
+  const bleedChanceValue = useRecoilValue(bleedChance);
   const bleedSkill = useRecoilValue(skills(SkillType.Bleed));
+  const damageValue = useRecoilValue(damage);
 
   const { name } = MASTERIES[MasteryType.BleedDamage];
 
@@ -41,19 +41,19 @@ export default function () {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
 
-                      <td>{`${formatPercentage(totalBleedChanceValue)} chance`}</td>
+                      <td>{`${formatPercentage(bleedChanceValue)} chance`}</td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} mastery:`}</td>
 
-                      <td>{`${formatPercentage(totalBleedDamageValue)} of damage`}</td>
+                      <td>{`${formatPercentage(bleedDamageValue)} of damage`}</td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Bleed damage:</td>
 
-                      <td>{formatToFixed(totalDamageValue * totalBleedDamageValue)}</td>
+                      <td>{formatToFixed(damageValue * bleedDamageValue)}</td>
                     </tr>
 
                     <tr>
@@ -70,9 +70,9 @@ export default function () {
         >
           <span>
             {getDamagePerRate({
-              damage: totalDamageValue,
-              damageModifier: totalBleedDamageValue,
-              damageModifierChance: totalBleedChanceValue,
+              damage: damageValue,
+              damageModifier: bleedDamageValue,
+              damageModifierChance: bleedChanceValue,
               rate: BLEED_DURATION,
             })}
           </span>

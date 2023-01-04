@@ -8,7 +8,7 @@ import useChangeHealth from "@neverquest/hooks/actions/useChangeHealth";
 import { ReactComponent as Icon } from "@neverquest/icons/hospital-cross.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { currentHealth, isHealthMaxedOut, maximumHealth } from "@neverquest/state/reserves";
-import { totalHealthRegenerationRate } from "@neverquest/state/statistics";
+import { healthRegenerationRate } from "@neverquest/state/statistics";
 import { DeltaType } from "@neverquest/types/enums";
 import { UIAttachment } from "@neverquest/types/ui";
 
@@ -30,10 +30,10 @@ export default function () {
           </Stack>
 
           <Regeneration
-            atomDeltaRegenerationRate={deltas(DeltaType.TotalHealthRegenerationRate)}
+            atomDeltaRegenerationRate={deltas(DeltaType.HealthRegenerationRate)}
             handleChangeReserve={changeHealth}
             isReserveMaxedOut={isHealthMaxedOut}
-            regenerationRate={totalHealthRegenerationRate}
+            regenerationRate={healthRegenerationRate}
           />
         </Stack>
       }

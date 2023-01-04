@@ -6,20 +6,20 @@ import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/shield-reflect.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
-import { totalDeflection } from "@neverquest/state/statistics";
+import { deflection } from "@neverquest/state/statistics";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export default function () {
-  const totalDeflectionValue = useRecoilValue(totalDeflection);
+  const deflectionValue = useRecoilValue(deflection);
   const isShowingDeflection = useRecoilValue(isShowing(ShowingType.Deflection));
 
   const deltaDeflection = deltas(DeltaType.Deflection);
 
   useDeltaText({
     deltaAtom: deltaDeflection,
-    valueAtom: totalDeflection,
+    valueAtom: deflection,
   });
 
   if (!isShowingDeflection) {
@@ -31,7 +31,7 @@ export default function () {
       animation={AnimationType.FlipInX}
       contents={
         <>
-          <span>{formatPercentage(totalDeflectionValue)}</span>
+          <span>{formatPercentage(deflectionValue)}</span>
 
           <FloatingText atom={deltaDeflection} />
         </>

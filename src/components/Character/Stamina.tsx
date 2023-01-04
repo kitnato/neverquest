@@ -10,16 +10,16 @@ import { ReactComponent as Icon } from "@neverquest/icons/lungs.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { currentStamina, isStaminaMaxedOut, maximumStamina } from "@neverquest/state/reserves";
-import { totalStaminaRegenerationRate } from "@neverquest/state/statistics";
+import { staminaRegenerationRate } from "@neverquest/state/statistics";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
 import { UIAttachment } from "@neverquest/types/ui";
 
 export default function () {
-  const showStaminaValue = useRecoilValue(isShowing(ShowingType.Stamina));
+  const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
 
   const changeStamina = useChangeStamina();
 
-  if (!showStaminaValue) {
+  if (!isShowingStamina) {
     return null;
   }
 
@@ -38,10 +38,10 @@ export default function () {
           </Stack>
 
           <Regeneration
-            atomDeltaRegenerationRate={deltas(DeltaType.TotalStaminaRegenerationRate)}
+            atomDeltaRegenerationRate={deltas(DeltaType.StaminaRegenerationRate)}
             handleChangeReserve={changeStamina}
             isReserveMaxedOut={isStaminaMaxedOut}
-            regenerationRate={totalStaminaRegenerationRate}
+            regenerationRate={staminaRegenerationRate}
           />
         </Stack>
       }

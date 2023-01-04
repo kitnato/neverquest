@@ -31,8 +31,8 @@ export default function () {
         set(isShowing(ShowingType.Armor), true);
       }
 
-      if (!get(isShowing(ShowingType.TotalProtection))) {
-        set(isShowing(ShowingType.TotalProtection), true);
+      if (!get(isShowing(ShowingType.Protection))) {
+        set(isShowing(ShowingType.Protection), true);
       }
 
       if (!get(isShowing(ShowingType.Deflection)) && possession.deflection) {
@@ -62,12 +62,12 @@ export default function () {
         }
       }
 
-      if (!get(isShowing(ShowingType.TotalAttackRateSummary))) {
-        set(isShowing(ShowingType.TotalAttackRateSummary), true);
+      if (!get(isShowing(ShowingType.AttackRateSummary))) {
+        set(isShowing(ShowingType.AttackRateSummary), true);
       }
 
-      if (!get(isShowing(ShowingType.TotalDamageSummary))) {
-        set(isShowing(ShowingType.TotalDamageSummary), true);
+      if (!get(isShowing(ShowingType.DamageSummary))) {
+        set(isShowing(ShowingType.DamageSummary), true);
       }
 
       if (!get(isShowing(ShowingType.Weapon))) {

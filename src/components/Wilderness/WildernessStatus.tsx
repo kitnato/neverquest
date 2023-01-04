@@ -9,16 +9,16 @@ import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function () {
-  const showWildernessStatusValue = useRecoilValue(isShowing(ShowingType.WildernessStatus));
+  const isShowingWildernessStatus = useRecoilValue(isShowing(ShowingType.WildernessStatus));
 
   return (
     <Stack
       className={
-        showWildernessStatusValue ? getAnimationClass({ type: AnimationType.FlipInX }) : ""
+        isShowingWildernessStatus ? getAnimationClass({ type: AnimationType.FlipInX }) : ""
       }
       direction="horizontal"
       gap={5}
-      style={{ visibility: showWildernessStatusValue ? "visible" : "hidden" }}
+      style={{ visibility: isShowingWildernessStatus ? "visible" : "hidden" }}
     >
       <WildernessLevel />
 

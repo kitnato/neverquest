@@ -12,33 +12,33 @@ import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingDamagePerSecond } from "@neverquest/state/settings";
-import { damagePerSecond, totalDamage } from "@neverquest/state/statistics";
+import { damage, damagePerSecond } from "@neverquest/state/statistics";
 import { AttributeType, DeltaType, ShowingType } from "@neverquest/types/enums";
 import { getComputedStatistic } from "@neverquest/utilities/getters";
 
 export default function () {
   const { points } = useRecoilValue(attributes(AttributeType.Damage));
   const damagePerSecondValue = useRecoilValue(damagePerSecond);
-  const showTotalDamageDetailsValue = useRecoilValue(isShowing(ShowingType.TotalDamageSummary));
+  const isShowingDamageSummary = useRecoilValue(isShowing(ShowingType.DamageSummary));
   const isShowingDamagePerSecondValue = useRecoilValue(isShowingDamagePerSecond);
-  const totalDamageValue = useRecoilValue(totalDamage);
+  const damageValue = useRecoilValue(damage);
   const weaponValue = useRecoilValue(weapon);
 
   const { base, increment, name } = ATTRIBUTES[AttributeType.Damage];
-  const deltaTotalDamage = deltas(DeltaType.TotalDamage);
+  const deltaDamage = deltas(DeltaType.Damage);
 
   useDeltaText({
-    deltaAtom: deltaTotalDamage,
-    valueAtom: totalDamage,
+    deltaAtom: deltaDamage,
+    valueAtom: damage,
   });
 
-  const totalDamageDisplay = <span>{totalDamageValue}</span>;
+  const damageDisplay = <span>{damageValue}</span>;
 
   return (
     <IconDisplay
       contents={
         <>
-          {showTotalDamageDetailsValue ? (
+          {isShowingDamageSummary ? (
             <OverlayTrigger
               overlay={
                 <Popover>
@@ -69,13 +69,13 @@ export default function () {
               }
               placement="top"
             >
-              {totalDamageDisplay}
+              {damageDisplay}
             </OverlayTrigger>
           ) : (
-            totalDamageDisplay
+            damageDisplay
           )}
 
-          <FloatingText atom={deltaTotalDamage} />
+          <FloatingText atom={deltaDamage} />
         </>
       }
       description={isShowingDamagePerSecondValue ? `${damagePerSecondValue} DPS` : null}

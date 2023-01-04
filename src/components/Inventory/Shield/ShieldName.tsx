@@ -11,7 +11,7 @@ import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatter
 
 export default function ({ shield }: { shield: Shield }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
-  const showStaminaValue = useRecoilValue(isShowing(ShowingType.Stamina));
+  const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
   const shieldSkillValue = useRecoilValue(skills(SkillType.Shields));
   const staggerSkillValue = useRecoilValue(skills(SkillType.Stagger));
 
@@ -33,11 +33,11 @@ export default function ({ shield }: { shield: Shield }) {
                 </tr>
 
                 <tr>
-                  {staggerSkillValue ? (
+                  {isShowingStamina ? (
                     <>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Stamina cost:</td>
 
-                      <td>{formatPercentage(staggerChance)}</td>
+                      <td>{staminaCost}</td>
                     </>
                   ) : (
                     <td className="text-end">{UNKNOWN}</td>
@@ -45,11 +45,11 @@ export default function ({ shield }: { shield: Shield }) {
                 </tr>
 
                 <tr>
-                  {showStaminaValue ? (
+                  {staggerSkillValue ? (
                     <>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Stamina cost:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance:</td>
 
-                      <td>{staminaCost}</td>
+                      <td>{formatPercentage(staggerChance)}</td>
                     </>
                   ) : (
                     <td className="text-end">{UNKNOWN}</td>

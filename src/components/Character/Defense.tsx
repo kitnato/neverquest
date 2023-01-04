@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import BlockChance from "@neverquest/components/Character/BlockChance";
 import DodgeChance from "@neverquest/components/Character/DodgeChance";
 import ParryChance from "@neverquest/components/Character/ParryChance";
-import TotalProtection from "@neverquest/components/Character/TotalProtection";
+import Protection from "@neverquest/components/Character/Protection";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { ShowingType, SkillType } from "@neverquest/types/enums";
@@ -13,17 +13,17 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function () {
   const isShowingBlockChance = useRecoilValue(isShowing(ShowingType.BlockChance));
-  const isShowingTotalProtection = useRecoilValue(isShowing(ShowingType.TotalProtection));
+  const isShowingProtection = useRecoilValue(isShowing(ShowingType.Protection));
   const dodgeSkill = useRecoilValue(skills(SkillType.Dodge));
 
-  if (!dodgeSkill && !isShowingBlockChance && !isShowingTotalProtection) {
+  if (!dodgeSkill && !isShowingBlockChance && !isShowingProtection) {
     return null;
   }
 
   return (
     <Row className={getAnimationClass({ type: AnimationType.FlipInX })}>
       <Col>
-        <TotalProtection />
+        <Protection />
       </Col>
 
       <Col>

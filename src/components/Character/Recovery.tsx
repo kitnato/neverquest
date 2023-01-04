@@ -8,21 +8,21 @@ import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/knockout.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
-import { totalRecoveryRate } from "@neverquest/state/statistics";
+import { recoveryRate } from "@neverquest/state/statistics";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
 
 export default function () {
-  const showRecoveryValue = useRecoilValue(isShowing(ShowingType.Recovery));
+  const isShowingRecovery = useRecoilValue(isShowing(ShowingType.Recovery));
 
-  const deltaTotalRecoveryRate = deltas(DeltaType.TotalRecoveryRate);
+  const deltaRecoveryRate = deltas(DeltaType.RecoveryRate);
 
   useDeltaText({
-    deltaAtom: deltaTotalRecoveryRate,
+    deltaAtom: deltaRecoveryRate,
     isTime: true,
-    valueAtom: totalRecoveryRate,
+    valueAtom: recoveryRate,
   });
 
-  if (!showRecoveryValue) {
+  if (!isShowingRecovery) {
     return null;
   }
 
@@ -32,7 +32,7 @@ export default function () {
         <Stack className="w-100" direction="horizontal">
           <RecoveryMeter />
 
-          <FloatingText atom={deltaTotalRecoveryRate} />
+          <FloatingText atom={deltaRecoveryRate} />
         </Stack>
       }
       Icon={Icon}

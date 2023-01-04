@@ -6,22 +6,22 @@ import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/barbute.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
-import { totalProtection } from "@neverquest/state/statistics";
+import { protection } from "@neverquest/state/statistics";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 
 export default function () {
-  const showTotalProtectionValue = useRecoilValue(isShowing(ShowingType.TotalProtection));
-  const totalProtectionValue = useRecoilValue(totalProtection);
+  const isShowingProtection = useRecoilValue(isShowing(ShowingType.Protection));
+  const protectionValue = useRecoilValue(protection);
 
-  const deltaTotalProtection = deltas(DeltaType.TotalProtection);
+  const deltaProtection = deltas(DeltaType.Protection);
 
   useDeltaText({
-    deltaAtom: deltaTotalProtection,
-    valueAtom: totalProtection,
+    deltaAtom: deltaProtection,
+    valueAtom: protection,
   });
 
-  if (!showTotalProtectionValue) {
+  if (!isShowingProtection) {
     return null;
   }
 
@@ -30,13 +30,13 @@ export default function () {
       animation={AnimationType.FlipInX}
       contents={
         <>
-          <span>{totalProtectionValue}</span>
+          <span>{protectionValue}</span>
 
-          <FloatingText atom={deltaTotalProtection} />
+          <FloatingText atom={deltaProtection} />
         </>
       }
       Icon={Icon}
-      tooltip="Total protection"
+      tooltip="Protection"
     />
   );
 }

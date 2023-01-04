@@ -8,7 +8,7 @@ import { ReactComponent as Icon } from "@neverquest/icons/star-swirl.svg";
 import { WeaponClass } from "@neverquest/locra/types";
 import { shield, weapon } from "@neverquest/state/inventory";
 import { skills } from "@neverquest/state/skills";
-import { totalStaggerDuration } from "@neverquest/state/statistics";
+import { staggerDuration } from "@neverquest/state/statistics";
 import { MasteryType, SkillType } from "@neverquest/types/enums";
 import {
   formatMilliseconds,
@@ -18,7 +18,7 @@ import {
 
 // TODO - revise Stagger formula
 export default function () {
-  const totalStaggerDurationValue = useRecoilValue(totalStaggerDuration);
+  const staggerDurationValue = useRecoilValue(staggerDuration);
   const { staggerChance } = useRecoilValue(shield);
   const staggerSkill = useRecoilValue(skills(SkillType.Stagger));
   const { abilityChance, weaponClass } = useRecoilValue(weapon);
@@ -56,7 +56,7 @@ export default function () {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} mastery:`}</td>
 
-                      <td>{`${formatMilliseconds(totalStaggerDurationValue)} duration`}</td>
+                      <td>{`${formatMilliseconds(staggerDurationValue)} duration`}</td>
                     </tr>
                   </tbody>
                 </Table>
@@ -67,8 +67,7 @@ export default function () {
         >
           <span>
             {formatToFixed(
-              (staggerChance * totalStaggerDurationValue +
-                weaponStaggerChance * totalStaggerDurationValue) /
+              (staggerChance * staggerDurationValue + weaponStaggerChance * staggerDurationValue) /
                 1000
             )}
           </span>

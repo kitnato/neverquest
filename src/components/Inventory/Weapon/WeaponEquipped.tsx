@@ -10,12 +10,12 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";
 
 export default function () {
-  const showWeaponValue = useRecoilValue(isShowing(ShowingType.Weapon));
+  const isShowingWeapon = useRecoilValue(isShowing(ShowingType.Weapon));
   const weaponValue = useRecoilValue(weapon);
 
   const isEquipped = weaponValue !== WEAPON_NONE;
 
-  if (!showWeaponValue) {
+  if (!isShowingWeapon) {
     return null;
   }
 

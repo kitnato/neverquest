@@ -7,7 +7,7 @@ import useAnimation from "@neverquest/hooks/useAnimation";
 import { isAttacking, isLooting, isRecovering } from "@neverquest/state/character";
 import { isMonsterDead } from "@neverquest/state/monster";
 import { canAttackOrParry } from "@neverquest/state/reserves";
-import { totalAttackRate } from "@neverquest/state/statistics";
+import { attackRate } from "@neverquest/state/statistics";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
@@ -17,18 +17,18 @@ export default function () {
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isRecoveringValue = useRecoilValue(isRecovering);
   const canAttackOrParryValue = useRecoilValue(canAttackOrParry);
-  const totalAttackRateValue = useRecoilValue(totalAttackRate);
+  const attackRateValue = useRecoilValue(attackRate);
 
   const [deltaAttack, setDeltaAttack] = useState(0);
 
   const attack = useAttack();
 
   useEffect(() => {
-    if (deltaAttack >= totalAttackRateValue) {
+    if (deltaAttack >= attackRateValue) {
       attack();
       setDeltaAttack(0);
     }
-  }, [attack, deltaAttack, totalAttackRateValue]);
+  }, [attack, deltaAttack, attackRateValue]);
 
   useEffect(() => {
     if (!canAttackOrParryValue || !isAttackingValue || isLootingValue || isMonsterDeadValue) {
@@ -45,9 +45,9 @@ export default function () {
     <LabelledProgressBar
       disableTransitions
       label={
-        canAttackOrParryValue ? formatMilliseconds(totalAttackRateValue - deltaAttack) : "EXHAUSTED"
+        canAttackOrParryValue ? formatMilliseconds(attackRateValue - deltaAttack) : "EXHAUSTED"
       }
-      value={(deltaAttack / totalAttackRateValue) * 100}
+      value={(deltaAttack / attackRateValue) * 100}
       variant={UIVariant.Secondary}
     />
   );

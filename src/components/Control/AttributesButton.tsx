@@ -18,10 +18,11 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isLevelStartedValue = useRecoilValue(isLevelStarted);
-  const showAttributesButtonValue = useRecoilValue(isShowing(ShowingType.AttributesButton));
+  const isShowingAttributesButton = useRecoilValue(isShowing(ShowingType.AttributesButton));
+
   const [isScreenShowing, setScreenShowing] = useState(false);
 
-  if (!showAttributesButtonValue) {
+  if (!isShowingAttributesButton) {
     return null;
   }
 

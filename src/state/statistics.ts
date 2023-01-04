@@ -12,20 +12,110 @@ import { getComputedStatistic, getDamagePerRate } from "@neverquest/utilities/ge
 
 // SELECTORS
 
+export const attackRate = selector({
+  get: ({ get }) => {
+    const { base, increment } = ATTRIBUTES[AttributeType.AttackRate];
+    const { points } = get(attributes(AttributeType.AttackRate));
+
+    const statistic = get(weapon).rate * (1 - getComputedStatistic({ base, increment, points }));
+    const penalty = get(armor).penalty || 0 * statistic;
+
+    return statistic - penalty;
+  },
+  key: "attackRate",
+});
+
+export const bleedChance = selector({
+  get: ({ get }) => {
+    const { abilityChance, weaponClass } = get(weapon);
+
+    if (weaponClass === WeaponClass.Piercing && abilityChance > 0) {
+      return abilityChance;
+    }
+
+    return 0;
+  },
+  key: "bleedChance",
+});
+
+export const bleedDamage = selector({
+  get: ({ get }) => {
+    const { base, increment } = MASTERIES[MasteryType.BleedDamage];
+    const { rank } = get(masteries(MasteryType.BleedDamage));
+
+    return getComputedStatistic({ base, increment, points: rank });
+  },
+  key: "bleedDamage",
+});
+
 export const bleedDamageDelta = selector({
-  get: ({ get }) => Math.ceil((get(totalDamage) * get(totalBleedDamage)) / BLEED_DURATION),
+  get: ({ get }) => Math.ceil((get(damage) * get(bleedDamage)) / BLEED_DURATION),
   key: "bleedDamageDelta",
+});
+
+export const blockChance = selector({
+  get: ({ get }) => get(shield).blockChance,
+  key: "blockChance",
+});
+
+export const criticalChance = selector({
+  get: ({ get }) => {
+    const { base, increment } = ATTRIBUTES[AttributeType.CriticalChance];
+    const { points } = get(attributes(AttributeType.CriticalChance));
+
+    return getComputedStatistic({ base, increment, points });
+  },
+  key: "criticalChance",
+});
+
+export const criticalDamage = selector({
+  get: ({ get }) => {
+    const { base, increment } = ATTRIBUTES[AttributeType.CriticalDamage];
+    const { points } = get(attributes(AttributeType.CriticalDamage));
+
+    return getComputedStatistic({ base, increment, points });
+  },
+  key: "criticalDamage",
+});
+
+export const damage = selector({
+  get: ({ get }) => {
+    const { base, increment } = ATTRIBUTES[AttributeType.Damage];
+    const { points } = get(attributes(AttributeType.Damage));
+
+    return getComputedStatistic({ base, increment, points }) + get(weapon).damage;
+  },
+  key: "damage",
 });
 
 export const damagePerSecond = selector({
   get: ({ get }) =>
     getDamagePerRate({
-      damage: get(totalDamage),
-      damageModifier: get(totalCriticalDamage),
-      damageModifierChance: get(totalCriticalChance),
-      rate: get(totalAttackRate),
+      damage: get(damage),
+      damageModifier: get(criticalDamage),
+      damageModifierChance: get(criticalChance),
+      rate: get(attackRate),
     }),
   key: "damagePerSecond",
+});
+
+// TODO
+export const deflection = selector({
+  get: ({ get }) => get(armor).deflection || 0,
+  key: "deflection",
+});
+
+export const dodgeChance = selector({
+  get: ({ get }) => {
+    const { base, increment } = ATTRIBUTES[AttributeType.DodgeChance];
+    const { points } = get(attributes(AttributeType.DodgeChance));
+
+    const statistic = getComputedStatistic({ base, increment, points });
+    const penalty = get(armor).penalty || 0 * statistic;
+
+    return statistic - penalty;
+  },
+  key: "dodgeChance",
 });
 
 export const freeBlockChance = selector({
@@ -38,117 +128,27 @@ export const freeBlockChance = selector({
   key: "freeBlockChance",
 });
 
-export const totalAttackRate = selector({
-  get: ({ get }) => {
-    const { base, increment } = ATTRIBUTES[AttributeType.AttackRate];
-    const { points } = get(attributes(AttributeType.AttackRate));
-
-    const statistic = get(weapon).rate * (1 - getComputedStatistic({ base, increment, points }));
-    const penalty = get(armor).penalty || 0 * statistic;
-
-    return statistic - penalty;
-  },
-  key: "totalAttackRate",
-});
-
-export const totalBleedChance = selector({
-  get: ({ get }) => {
-    const { abilityChance, weaponClass } = get(weapon);
-
-    if (weaponClass === WeaponClass.Piercing && abilityChance > 0) {
-      return abilityChance;
-    }
-
-    return 0;
-  },
-  key: "totalBleedChance",
-});
-
-export const totalBleedDamage = selector({
-  get: ({ get }) => {
-    const { base, increment } = MASTERIES[MasteryType.BleedDamage];
-    const { rank } = get(masteries(MasteryType.BleedDamage));
-
-    return getComputedStatistic({ base, increment, points: rank });
-  },
-  key: "totalBleedDamage",
-});
-
-export const totalBlockChance = selector({
-  get: ({ get }) => get(shield).blockChance,
-  key: "totalBlockChance",
-});
-
-export const totalCriticalChance = selector({
-  get: ({ get }) => {
-    const { base, increment } = ATTRIBUTES[AttributeType.CriticalChance];
-    const { points } = get(attributes(AttributeType.CriticalChance));
-
-    return getComputedStatistic({ base, increment, points });
-  },
-  key: "totalCriticalChance",
-});
-
-export const totalCriticalDamage = selector({
-  get: ({ get }) => {
-    const { base, increment } = ATTRIBUTES[AttributeType.CriticalDamage];
-    const { points } = get(attributes(AttributeType.CriticalDamage));
-
-    return getComputedStatistic({ base, increment, points });
-  },
-  key: "totalCriticalDamage",
-});
-
-export const totalDamage = selector({
-  get: ({ get }) => {
-    const { base, increment } = ATTRIBUTES[AttributeType.Damage];
-    const { points } = get(attributes(AttributeType.Damage));
-
-    return getComputedStatistic({ base, increment, points }) + get(weapon).damage;
-  },
-  key: "totalDamage",
-});
-
-// TODO
-export const totalDeflection = selector({
-  get: ({ get }) => get(armor).deflection || 0,
-  key: "totalDeflection",
-});
-
-export const totalDodgeChance = selector({
-  get: ({ get }) => {
-    const { base, increment } = ATTRIBUTES[AttributeType.DodgeChance];
-    const { points } = get(attributes(AttributeType.DodgeChance));
-
-    const statistic = getComputedStatistic({ base, increment, points });
-    const penalty = get(armor).penalty || 0 * statistic;
-
-    return statistic - penalty;
-  },
-  key: "totalDodgeChance",
-});
-
-export const totalHealthRegenerationRate = selector({
+export const healthRegenerationRate = selector({
   get: ({ get }) => {
     const { base, increment } = ATTRIBUTES[AttributeType.HealthRegenerationRate];
     const { points } = get(attributes(AttributeType.HealthRegenerationRate));
 
     return getComputedStatistic({ base, increment, points });
   },
-  key: "totalHealthRegenerationRate",
+  key: "healthRegenerationRate",
 });
 
-export const totalParryAbsorption = selector({
+export const parryAbsorption = selector({
   get: ({ get }) => {
     const { base, increment } = MASTERIES[MasteryType.ParryDamage];
     const { rank } = get(masteries(MasteryType.ParryDamage));
 
     return 0.33 + getComputedStatistic({ base, increment, points: rank });
   },
-  key: "totalParryAbsorption",
+  key: "parryAbsorption",
 });
 
-export const totalParryChance = selector({
+export const parryChance = selector({
   get: ({ get }) => {
     const { abilityChance, weaponClass } = get(weapon);
 
@@ -158,32 +158,32 @@ export const totalParryChance = selector({
 
     return 0;
   },
-  key: "totalParryChance",
+  key: "parryChance",
 });
 
-export const totalParryDamage = selector({
+export const parryDamage = selector({
   get: ({ get }) => {
     const { base, increment } = MASTERIES[MasteryType.ParryDamage];
     const { rank } = get(masteries(MasteryType.ParryDamage));
 
     return 0.25 + getComputedStatistic({ base, increment, points: rank });
   },
-  key: "totalParryDamage",
+  key: "parryDamage",
 });
 
-export const totalProtection = selector({
+export const protection = selector({
   get: ({ get }) => get(armor).protection,
-  key: "totalProtection",
+  key: "protection",
 });
 
-export const totalRecoveryRate = selector({
+export const recoveryRate = selector({
   get: ({ get }) => {
     const { base, increment } = ATTRIBUTES[AttributeType.RecoveryRate];
     const { points } = get(attributes(AttributeType.RecoveryRate));
 
     return getComputedStatistic({ base, increment, points });
   },
-  key: "totalRecoveryRate",
+  key: "recoveryRate",
 });
 
 export const skipRecoveryChance = selector({
@@ -196,22 +196,22 @@ export const skipRecoveryChance = selector({
   key: "skipRecoveryChance",
 });
 
-export const totalStaminaRegenerationRate = selector({
+export const staminaRegenerationRate = selector({
   get: ({ get }) => {
     const { base, increment } = ATTRIBUTES[AttributeType.StaminaRegenerationRate];
     const { points } = get(attributes(AttributeType.StaminaRegenerationRate));
 
     return getComputedStatistic({ base, increment, points });
   },
-  key: "totalStaminaRegenerationRate",
+  key: "staminaRegenerationRate",
 });
 
-export const totalStaggerDuration = selector({
+export const staggerDuration = selector({
   get: ({ get }) => {
     const { base, increment } = MASTERIES[MasteryType.StaggerDuration];
     const { rank } = get(masteries(MasteryType.StaggerDuration));
 
     return getComputedStatistic({ base, increment, points: rank });
   },
-  key: "totalStaggerDuration",
+  key: "staggerDuration",
 });

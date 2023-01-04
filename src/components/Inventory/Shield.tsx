@@ -8,9 +8,9 @@ import { ShowingType } from "@neverquest/types/enums";
 
 export default function () {
   const shieldValue = useRecoilValue(shield);
-  const showShieldValue = useRecoilValue(isShowing(ShowingType.Shield));
+  const isShowingShield = useRecoilValue(isShowing(ShowingType.Shield));
 
-  if (!showShieldValue) {
+  if (!isShowingShield) {
     return null;
   }
 

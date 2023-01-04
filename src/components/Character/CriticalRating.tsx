@@ -5,13 +5,13 @@ import IconDisplay from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { ReactComponent as Icon } from "@neverquest/icons/striking-splinter.svg";
 import { skills } from "@neverquest/state/skills";
-import { totalCriticalChance, totalCriticalDamage } from "@neverquest/state/statistics";
+import { criticalChance, criticalDamage } from "@neverquest/state/statistics";
 import { SkillType } from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export default function () {
-  const criticalChanceValue = useRecoilValue(totalCriticalChance);
-  const criticalDamageValue = useRecoilValue(totalCriticalDamage);
+  const criticalChanceValue = useRecoilValue(criticalChance);
+  const criticalDamageValue = useRecoilValue(criticalDamage);
   const criticalsSkill = useRecoilValue(skills(SkillType.Criticals));
 
   if (!criticalsSkill) {

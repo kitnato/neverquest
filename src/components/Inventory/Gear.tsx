@@ -10,11 +10,11 @@ import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function () {
-  const showArmorValue = useRecoilValue(isShowing(ShowingType.Armor));
-  const showShieldValue = useRecoilValue(isShowing(ShowingType.Shield));
-  const showWeaponValue = useRecoilValue(isShowing(ShowingType.Weapon));
+  const isShowingArmor = useRecoilValue(isShowing(ShowingType.Armor));
+  const isShowingShield = useRecoilValue(isShowing(ShowingType.Shield));
+  const isShowingWeapon = useRecoilValue(isShowing(ShowingType.Weapon));
 
-  if (!showArmorValue && !showShieldValue && !showWeaponValue) {
+  if (!isShowingArmor && !isShowingShield && !isShowingWeapon) {
     return null;
   }
 

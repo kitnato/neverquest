@@ -11,9 +11,9 @@ import { ShowingType } from "@neverquest/types/enums";
 
 export default function () {
   const armorValue = useRecoilValue(armor);
-  const showArmorValue = useRecoilValue(isShowing(ShowingType.Armor));
+  const isShowingArmor = useRecoilValue(isShowing(ShowingType.Armor));
 
-  if (!showArmorValue) {
+  if (!isShowingArmor) {
     return null;
   }
 

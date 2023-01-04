@@ -19,7 +19,7 @@ import { getDamagePerRate, getSkillTypeFromWeaponClass } from "@neverquest/utili
 export default function ({ weapon }: { weapon: Weapon }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const isShowingDamagePerSecondValue = useRecoilValue(isShowingDamagePerSecond);
-  const showStaminaValue = useRecoilValue(isShowing(ShowingType.Stamina));
+  const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
 
   const { abilityChance, damage, name, rate, staminaCost, weaponClass, weight } = weapon;
   const Icon = WEAPON_ICONS[weaponClass];
@@ -56,7 +56,7 @@ export default function ({ weapon }: { weapon: Weapon }) {
                 </tr>
 
                 <tr>
-                  {showStaminaValue ? (
+                  {isShowingStamina ? (
                     <>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Stamina cost:</td>
 

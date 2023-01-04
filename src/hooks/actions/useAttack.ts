@@ -14,12 +14,7 @@ import {
 } from "@neverquest/state/monster";
 import { canAttackOrParry } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
-import {
-  totalBleedChance,
-  totalCriticalChance,
-  totalCriticalDamage,
-  totalDamage,
-} from "@neverquest/state/statistics";
+import { bleedChance, criticalChance, criticalDamage, damage } from "@neverquest/state/statistics";
 import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
 import { AnimationSpeed, AnimationType, DeltaDisplay, FloatingText } from "@neverquest/types/ui";
 import animateElement from "@neverquest/utilities/animateElement";
@@ -38,21 +33,21 @@ export default function () {
 
         if (get(canAttackOrParry)) {
           const hasInflictedCritical =
-            get(skills(SkillType.Criticals)) && Math.random() <= get(totalCriticalChance);
+            get(skills(SkillType.Criticals)) && Math.random() <= get(criticalChance);
           const hasInflictedBleed =
             get(monsterBleedingDuration) === 0 &&
             get(skills(SkillType.Bleed)) &&
-            Math.random() <= get(totalBleedChance);
+            Math.random() <= get(bleedChance);
           const hasInflictedStagger =
             get(skills(SkillType.Stagger)) &&
             weaponClass === WeaponClass.Blunt &&
             Math.random() <= abilityChance;
 
-          const baseDamage = -get(totalDamage);
-          const damage = hasInflictedCritical ? baseDamage * get(totalCriticalDamage) : baseDamage;
+          const baseDamage = -get(damage);
           const extra: DeltaDisplay = [];
+          const totalDamage = hasInflictedCritical ? baseDamage * get(criticalDamage) : baseDamage;
 
-          let monsterHealth = get(currentHealthMonster) + damage;
+          let monsterHealth = get(currentHealthMonster) + totalDamage;
 
           if (monsterHealth < 0) {
             monsterHealth = 0;
@@ -73,26 +68,28 @@ export default function () {
 
           if (hasInflictedBleed) {
             set(monsterBleedingDuration, BLEED_DURATION);
+            increaseMastery(MasteryType.BleedDamage);
+
             extra.push({
               color: FloatingText.Neutral,
               value: "BLEED",
             });
-            increaseMastery(MasteryType.BleedDamage);
           }
 
           if (hasInflictedStagger) {
             set(isMonsterStaggered, true);
+            increaseMastery(MasteryType.StaggerDuration);
+
             extra.push({
               color: FloatingText.Neutral,
               value: "STAGGER",
             });
-            increaseMastery(MasteryType.StaggerDuration);
           }
 
           set(deltas(DeltaType.HealthMonster), [
             {
               color: FloatingText.Negative,
-              value: damage,
+              value: totalDamage,
             },
             ...extra,
           ]);

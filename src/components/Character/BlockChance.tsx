@@ -9,10 +9,10 @@ import { AnimationType } from "@neverquest/types/ui";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export default function () {
+  const isShowingBlockChance = useRecoilValue(isShowing(ShowingType.BlockChance));
   const { blockChance } = useRecoilValue(shield);
-  const showBlockChanceValue = useRecoilValue(isShowing(ShowingType.BlockChance));
 
-  if (!showBlockChanceValue) {
+  if (!isShowingBlockChance) {
     return null;
   }
 

@@ -1,6 +1,5 @@
 import { selector } from "recoil";
 
-import { BLEED_DURATION } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { WeaponClass } from "@neverquest/locra/types";
@@ -47,11 +46,6 @@ export const bleedDamage = selector({
     return getComputedStatistic({ amount: rank, base, increment });
   },
   key: "bleedDamage",
-});
-
-export const bleedDamageDelta = selector({
-  get: ({ get }) => Math.ceil((get(damage) * get(bleedDamage)) / BLEED_DURATION),
-  key: "bleedDamageDelta",
 });
 
 export const blockChance = selector({

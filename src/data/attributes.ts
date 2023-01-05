@@ -33,7 +33,7 @@ export const ATTRIBUTES: Record<AttributeType, AttributeOrMastery> = {
     base: 0,
     description: "Increases base attack damage.",
     Icon,
-    increment: 1,
+    increment: 5,
     name: "Strength",
   },
   [AttributeType.DodgeChance]: {
@@ -46,14 +46,14 @@ export const ATTRIBUTES: Record<AttributeType, AttributeOrMastery> = {
     requiredSkill: SkillType.Dodge,
   },
   [AttributeType.Health]: {
-    base: 12,
+    base: 100,
     description: "Increases maximum health.",
     Icon,
-    increment: 4,
+    increment: 15,
     name: "Vitality",
   },
   [AttributeType.HealthRegenerationRate]: {
-    base: 6500,
+    base: 6000,
     description: "Increases health regeneration rate.",
     Icon,
     increment: -200,
@@ -77,10 +77,10 @@ export const ATTRIBUTES: Record<AttributeType, AttributeOrMastery> = {
     name: "Resilience",
   },
   [AttributeType.Stamina]: {
-    base: 4,
+    base: 40,
     description: "Increases maximum stamina.",
     Icon,
-    increment: 2,
+    increment: 10,
     name: "Endurance",
   },
   [AttributeType.StaminaRegenerationRate]: {

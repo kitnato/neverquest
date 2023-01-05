@@ -69,26 +69,26 @@ export const SHIELD_SPECIFICATIONS: Record<
   {
     blockRange: RangeProps;
     staggerModifier: number;
-    staminaCost: number;
+    staminaCostModifier: number;
     weight: number;
   }
 > = {
   [ShieldType.Medium]: {
     blockRange: { maximum: 0.49, minimum: 0.25 },
     staggerModifier: 1.75,
-    staminaCost: 2,
+    staminaCostModifier: 1.5,
     weight: 2,
   },
   [ShieldType.Small]: {
     blockRange: { maximum: 0.24, minimum: 0.1 },
     staggerModifier: 1.2,
-    staminaCost: 1,
+    staminaCostModifier: 1,
     weight: 1,
   },
   [ShieldType.Tower]: {
     blockRange: { maximum: 0.75, minimum: 0.5 },
     staggerModifier: 2.5,
-    staminaCost: 3,
+    staminaCostModifier: 2.5,
     weight: 3,
   },
 };
@@ -101,7 +101,7 @@ export const WEAPON_ICONS: Record<WeaponClass, SVGIcon> = {
 
 export const WEAPON_NONE: Weapon = {
   abilityChance: 0,
-  damage: 1,
+  damage: 10,
   grip: WeaponGrip.OneHanded,
   name: "Unarmed",
   price: 0,

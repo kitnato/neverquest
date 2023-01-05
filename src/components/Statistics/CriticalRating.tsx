@@ -47,7 +47,7 @@ export default function () {
           }
           placement="top"
         >
-          <span>{criticalChanceValue * criticalDamageValue * 100}</span>
+          <span>{Math.round(criticalChanceValue * criticalDamageValue * 100)}</span>
         </OverlayTrigger>
       }
       Icon={Icon}

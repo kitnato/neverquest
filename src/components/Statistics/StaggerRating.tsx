@@ -10,13 +10,8 @@ import { shield, weapon } from "@neverquest/state/inventory";
 import { skills } from "@neverquest/state/skills";
 import { staggerDuration } from "@neverquest/state/statistics";
 import { MasteryType, SkillType } from "@neverquest/types/enums";
-import {
-  formatMilliseconds,
-  formatPercentage,
-  formatToFixed,
-} from "@neverquest/utilities/formatters";
+import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
-// TODO - revise Stagger formula
 export default function () {
   const { staggerChance } = useRecoilValue(shield);
   const staggerSkill = useRecoilValue(skills(SkillType.Stagger));
@@ -36,7 +31,7 @@ export default function () {
         <OverlayTrigger
           overlay={
             <Popover>
-              <Popover.Header as="h4">Stagger details</Popover.Header>
+              <Popover.Header as="h4">Stagger rating details</Popover.Header>
 
               <Popover.Body>
                 <Table borderless size="sm">
@@ -66,16 +61,15 @@ export default function () {
           placement="top"
         >
           <span>
-            {formatToFixed(
-              (staggerChance * staggerDurationValue + weaponStaggerChance * staggerDurationValue) /
-                1000
+            {Math.round(
+              staggerChance * staggerDurationValue + weaponStaggerChance * staggerDurationValue
             )}
           </span>
         </OverlayTrigger>
       }
       Icon={Icon}
       isAnimated
-      tooltip="Stagger"
+      tooltip="Stagger rating"
     />
   );
 }

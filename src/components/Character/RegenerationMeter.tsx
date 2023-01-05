@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { RecoilValueReadOnly, useRecoilValue } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
+import { DELTA_RESERVE_REGENERATION } from "@neverquest/constants";
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { isRecovering } from "@neverquest/state/character";
 import { DeltaReserve, UIAttachment, UISize, UIVariant } from "@neverquest/types/ui";
@@ -29,7 +30,7 @@ export default function ({
   useEffect(() => {
     if (deltaRegeneration >= regenerationRateValue) {
       setDeltaRegeneration(0);
-      handleChangeReserve({ value: 1 });
+      handleChangeReserve({ value: DELTA_RESERVE_REGENERATION });
     }
   }, [handleChangeReserve, deltaRegeneration, regenerationRateValue]);
 

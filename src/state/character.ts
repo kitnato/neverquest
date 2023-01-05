@@ -58,6 +58,12 @@ export const name = atom({
   key: StorageKey.Name,
 });
 
+export const poisonDuration = atom({
+  default: 0,
+  effects: [localStorage<number>(StorageKey.PoisonDuration)],
+  key: StorageKey.PoisonDuration,
+});
+
 export const statusElement = atom<HTMLDivElement | null>({
   default: null,
   effects: [localStorage<HTMLDivElement | null>(StorageKey.StatusElement)],

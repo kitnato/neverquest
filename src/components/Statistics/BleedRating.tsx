@@ -2,18 +2,14 @@ import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
-import { BLEED_DURATION, CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
+import { BLEED, CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { ReactComponent as Icon } from "@neverquest/icons/bleeding-wound.svg";
 import { skills } from "@neverquest/state/skills";
 import { bleedChance, bleedDamage, damage } from "@neverquest/state/statistics";
 import { MasteryType, SkillType } from "@neverquest/types/enums";
-import {
-  formatMilliseconds,
-  formatPercentage,
-  formatToFixed,
-} from "@neverquest/utilities/formatters";
-import { getDamagePerRate } from "@neverquest/utilities/getters";
+import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
+import { getDamagePerTick } from "@neverquest/utilities/getters";
 
 export default function () {
   const bleedChanceValue = useRecoilValue(bleedChance);
@@ -21,7 +17,18 @@ export default function () {
   const damageValue = useRecoilValue(damage);
   const bleedSkill = useRecoilValue(skills(SkillType.Bleed));
 
+  const { duration, ticks } = BLEED;
   const { name } = MASTERIES[MasteryType.BleedDamage];
+  const bleedPerTick = Math.round(
+    getDamagePerTick({
+      damage: damageValue,
+      duration,
+      proportion: bleedDamageValue,
+      ticks,
+    }) *
+      bleedChanceValue *
+      100
+  );
 
   if (!bleedSkill) {
     return null;
@@ -33,7 +40,7 @@ export default function () {
         <OverlayTrigger
           overlay={
             <Popover>
-              <Popover.Header as="h4">Bleed details</Popover.Header>
+              <Popover.Header as="h4">Bleed rating details</Popover.Header>
 
               <Popover.Body>
                 <Table borderless size="sm">
@@ -53,13 +60,15 @@ export default function () {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Bleed damage:</td>
 
-                      <td>{formatToFixed(damageValue * bleedDamageValue)}</td>
+                      <td>{`${Math.ceil(
+                        damageValue * bleedDamageValue
+                      )} (${bleedPerTick} per tick)`}</td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
 
-                      <td>{formatMilliseconds(BLEED_DURATION)}</td>
+                      <td>{formatMilliseconds(duration)}</td>
                     </tr>
                   </tbody>
                 </Table>
@@ -68,19 +77,12 @@ export default function () {
           }
           placement="top"
         >
-          <span>
-            {getDamagePerRate({
-              damage: damageValue,
-              damageModifier: bleedDamageValue,
-              damageModifierChance: bleedChanceValue,
-              rate: BLEED_DURATION,
-            })}
-          </span>
+          <span>{bleedPerTick}</span>
         </OverlayTrigger>
       }
       Icon={Icon}
       isAnimated
-      tooltip="Bleed damage"
+      tooltip="Bleed rating"
     />
   );
 }

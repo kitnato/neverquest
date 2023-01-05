@@ -8,9 +8,9 @@ import { deltas } from "@neverquest/state/deltas";
 import { shield, weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import {
-  currentHealthMonster,
-  damageMonster,
   isMonsterStaggered,
+  monsterCurrentHealth,
+  monsterDamage,
   monsterStatusElement,
 } from "@neverquest/state/monster";
 import { canAttackOrParry, canBlock } from "@neverquest/state/reserves";
@@ -64,9 +64,9 @@ export default function () {
       return;
     }
 
-    const damageMonsterValue = get(damageMonster);
+    const monsterDamageValue = get(monsterDamage);
     let healthDamage = (() => {
-      const damage = get(protection) - damageMonsterValue;
+      const damage = get(protection) - monsterDamageValue;
 
       return damage < 0 ? damage : 0;
     })();
@@ -90,9 +90,9 @@ export default function () {
 
       if (get(canAttackOrParry)) {
         healthDamage = Math.floor(healthDamage * get(parryAbsorption));
-        const parryReflected = Math.floor(damageMonsterValue * get(parryDamage));
+        const parryReflected = Math.floor(monsterDamageValue * get(parryDamage));
 
-        set(currentHealthMonster, (current) => current - parryReflected);
+        set(monsterCurrentHealth, (current) => current - parryReflected);
         set(deltas(DeltaType.HealthMonster), [
           {
             color: FloatingText.Negative,

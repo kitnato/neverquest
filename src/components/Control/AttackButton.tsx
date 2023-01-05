@@ -53,19 +53,19 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
 
   const { animation, Icon, tooltip } = (() => {
     if (isLevelCompletedValue) {
-      return { animation: "", Icon: IconResting, tooltip: "Resting" };
+      return { animation: undefined, Icon: IconResting, tooltip: "Resting" };
     }
 
     if (isAttackingValue) {
       return {
-        animation: showWarning ? pulseAnimation : "",
+        animation: showWarning ? pulseAnimation : undefined,
         Icon: IconRetreat,
         tooltip: "Retreat",
       };
     }
 
     return {
-      animation: areAttributesIncreasableValue ? "" : pulseAnimation,
+      animation: areAttributesIncreasableValue ? undefined : pulseAnimation,
       Icon: IconAttack,
       tooltip: "Attack",
     };

@@ -1,15 +1,13 @@
 import { Col, Row } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import BlockChance from "@neverquest/components/Character/BlockChance";
-import DodgeChance from "@neverquest/components/Character/DodgeChance";
-import ParryChance from "@neverquest/components/Character/ParryChance";
-import Protection from "@neverquest/components/Character/Protection";
+import BlockChance from "@neverquest/components/Statistics/BlockChance";
+import DodgeChance from "@neverquest/components/Statistics/DodgeChance";
+import ParryChance from "@neverquest/components/Statistics/ParryChance";
+import Protection from "@neverquest/components/Statistics/Protection";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { ShowingType, SkillType } from "@neverquest/types/enums";
-import { AnimationType } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function () {
   const isShowingBlockChance = useRecoilValue(isShowing(ShowingType.BlockChance));
@@ -21,7 +19,7 @@ export default function () {
   }
 
   return (
-    <Row className={getAnimationClass({ type: AnimationType.FlipInX })}>
+    <Row>
       <Col>
         <Protection />
       </Col>

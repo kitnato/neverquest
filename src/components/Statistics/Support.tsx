@@ -1,14 +1,12 @@
 import { Col, Row } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import Deflection from "@neverquest/components/Character/Deflection";
-import FreeBlockChance from "@neverquest/components/Character/FreeBlockChance";
-import SkipRecoveryChance from "@neverquest/components/Character/SkipRecoveryChance";
+import DeflectionChance from "@neverquest/components/Statistics/DeflectionChance";
+import FreeBlockChance from "@neverquest/components/Statistics/FreeBlockChance";
+import SkipRecoveryChance from "@neverquest/components/Statistics/SkipRecoveryChance";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { ShowingType, SkillType } from "@neverquest/types/enums";
-import { AnimationType } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function () {
   const isShowingDeflection = useRecoilValue(isShowing(ShowingType.Deflection));
@@ -20,7 +18,7 @@ export default function () {
   }
 
   return (
-    <Row className={getAnimationClass({ type: AnimationType.FlipInX })}>
+    <Row>
       <Col>
         <SkipRecoveryChance />
       </Col>
@@ -30,7 +28,7 @@ export default function () {
       </Col>
 
       <Col>
-        <Deflection />
+        <DeflectionChance />
       </Col>
     </Row>
   );

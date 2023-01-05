@@ -47,7 +47,7 @@ export function generateArmor({
       }),
     penalty: penaltyModifier ? penaltyModifier * (0.05 + level / 10) : undefined,
     price: level * 2 + Math.floor(level / 2),
-    protection: Math.floor(level * protectionModifier),
+    protection: Math.floor(level * 5 * protectionModifier),
     weight,
   };
 }
@@ -77,7 +77,7 @@ export function generateShield({
   tags?: AffixTag[];
   type: ShieldType;
 }): Shield {
-  const { blockRange, staggerModifier, staminaCost, weight } = SHIELD_SPECIFICATIONS[type];
+  const { blockRange, staggerModifier, staminaCostModifier, weight } = SHIELD_SPECIFICATIONS[type];
 
   return {
     blockChance: getFromRange(blockRange),
@@ -95,7 +95,7 @@ export function generateShield({
       }),
     price: level * 2 + Math.ceil(level / 1.5),
     staggerChance: (0.1 + Math.floor((level * 2) / 100)) * staggerModifier,
-    staminaCost,
+    staminaCost: (level + 8) * staminaCostModifier,
     type,
     weight,
   };
@@ -120,6 +120,7 @@ export function generateWeapon({
   type: WeaponType;
   weaponClass: WeaponClass;
 }): Weapon {
+  // TODO - refactor this to WEAPON_SPECIFICATIONS
   const { damage, modifier, price, rate, staminaCost, weight } = getWeaponSpecifications(level);
 
   const weapon = {

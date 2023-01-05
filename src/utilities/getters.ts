@@ -50,6 +50,20 @@ export function getDamagePerRate({
   return formatToFixed((regular + critical) / (rate / 1000));
 }
 
+export function getDamagePerTick({
+  damage,
+  duration,
+  proportion,
+  ticks,
+}: {
+  damage: number;
+  duration: number;
+  proportion: number;
+  ticks: number;
+}) {
+  return Math.round(((damage * proportion) / duration) * (duration / ticks));
+}
+
 export function getDeltaTypeFromMasteryType(type: MasteryType) {
   switch (type) {
     case MasteryType.BleedDamage: {
@@ -106,13 +120,13 @@ export function getSkillTypeFromWeaponClass(type: WeaponClass) {
 export function getWeaponSpecifications(level: number) {
   return {
     damage: getFromRange({
-      maximum: level + Math.ceil(level / 3),
-      minimum: level + 1,
+      maximum: level * 8 + Math.ceil(level / 3) * 2,
+      minimum: level * 8,
     }),
-    modifier: 1 + level / 100,
+    modifier: 1 + level / 2,
     price: level * 2 + Math.floor(level / 2),
     rate: getFromRange({ maximum: 3000, minimum: 2500 }) - Math.floor(level / 2) * 50,
-    staminaCost: 1 + Math.floor(level / 3),
+    staminaCost: level * 4 + Math.floor(level / 3),
     weight: 1 + Math.floor(level / 4),
   };
 }

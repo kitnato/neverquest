@@ -1,15 +1,15 @@
 import { useRecoilCallback } from "recoil";
 
-import { BLEED_DURATION } from "@neverquest/constants";
+import { BLEED } from "@neverquest/constants";
 import useChangeStamina from "@neverquest/hooks/actions/useChangeStamina";
 import useIncreaseMastery from "@neverquest/hooks/actions/useIncreaseMastery";
 import { WeaponClass } from "@neverquest/locra/types";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import {
-  currentHealthMonster,
   isMonsterStaggered,
   monsterBleedingDuration,
+  monsterCurrentHealth,
   monsterStatusElement,
 } from "@neverquest/state/monster";
 import { canAttackOrParry } from "@neverquest/state/reserves";
@@ -47,7 +47,7 @@ export default function () {
           const extra: DeltaDisplay = [];
           const totalDamage = hasInflictedCritical ? baseDamage * get(criticalDamage) : baseDamage;
 
-          let monsterHealth = get(currentHealthMonster) + totalDamage;
+          let monsterHealth = get(monsterCurrentHealth) + totalDamage;
 
           if (monsterHealth < 0) {
             monsterHealth = 0;
@@ -57,7 +57,7 @@ export default function () {
             changeStamina({ value: -staminaCost });
           }
 
-          set(currentHealthMonster, monsterHealth);
+          set(monsterCurrentHealth, monsterHealth);
 
           if (hasInflictedCritical) {
             extra.push({
@@ -67,7 +67,7 @@ export default function () {
           }
 
           if (hasInflictedBleed) {
-            set(monsterBleedingDuration, BLEED_DURATION);
+            set(monsterBleedingDuration, BLEED.duration);
             increaseMastery(MasteryType.BleedDamage);
 
             extra.push({

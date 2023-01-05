@@ -26,7 +26,7 @@ export default function ({
 
   return (
     <Stack
-      className={isAnimated ? getAnimationClass({ type: AnimationType.FlipInX }) : ""}
+      className={isAnimated ? getAnimationClass({ type: AnimationType.FlipInX }) : undefined}
       direction="horizontal"
       gap={3}
     >

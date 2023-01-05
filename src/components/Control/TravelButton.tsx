@@ -45,7 +45,7 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
           className={
             isWildernessValue
               ? getAnimationClass({ isInfinite: true, type: AnimationType.Pulse })
-              : ""
+              : undefined
           }
           disabled={isDisabled}
           onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {

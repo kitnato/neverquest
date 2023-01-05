@@ -4,9 +4,9 @@ import LOCRA from "@neverquest/locra";
 import { CreatureType } from "@neverquest/locra/types";
 import { level } from "@neverquest/state/encounter";
 import {
-  currentHealthMonster,
   isMonsterNew,
-  maximumHealthMonster,
+  monsterCurrentHealth,
+  monsterMaximumHealth,
   monsterName,
 } from "@neverquest/state/monster";
 import { isNSFW } from "@neverquest/state/settings";
@@ -26,7 +26,7 @@ export default function () {
       })
     );
 
-    set(currentHealthMonster, get(maximumHealthMonster));
+    set(monsterCurrentHealth, get(monsterMaximumHealth));
     set(isMonsterNew, true);
   });
 }

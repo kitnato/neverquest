@@ -3,11 +3,9 @@ import { Card, Col, Row, Stack } from "react-bootstrap";
 import { useSetRecoilState } from "recoil";
 
 import Attack from "@neverquest/components/Character/Attack";
-import Chances from "@neverquest/components/Character/Chances";
-import Defense from "@neverquest/components/Character/Defense";
 import Health from "@neverquest/components/Character/Health";
 import Name from "@neverquest/components/Character/Name";
-import Offense from "@neverquest/components/Character/Offense";
+import Poisoned from "@neverquest/components/Character/Poisoned";
 import Recovery from "@neverquest/components/Character/Recovery";
 import Stamina from "@neverquest/components/Character/Stamina";
 import { statusElement } from "@neverquest/state/character";
@@ -37,21 +35,17 @@ export default function () {
 
           <Stamina />
 
-          <Row>
-            <Col>
-              <Attack />
-            </Col>
+          <Attack />
 
+          <Row>
             <Col>
               <Recovery />
             </Col>
+
+            <Col>
+              <Poisoned />
+            </Col>
           </Row>
-
-          <Offense />
-
-          <Defense />
-
-          <Chances />
         </Stack>
       </Card.Body>
     </Card>

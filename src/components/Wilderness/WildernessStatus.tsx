@@ -14,7 +14,7 @@ export default function () {
   return (
     <Stack
       className={
-        isShowingWildernessStatus ? getAnimationClass({ type: AnimationType.FlipInX }) : ""
+        isShowingWildernessStatus ? getAnimationClass({ type: AnimationType.FlipInX }) : undefined
       }
       direction="horizontal"
       gap={5}

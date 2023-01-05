@@ -9,8 +9,8 @@ import { name } from "@neverquest/state/character";
 import { isGameOver } from "@neverquest/state/settings";
 
 export default function () {
-  const [nameValue, setName] = useRecoilState(name);
   const isGameOverValue = useRecoilValue(isGameOver);
+  const [nameValue, setName] = useRecoilState(name);
 
   const [isEditing, setEditing] = useState(false);
 

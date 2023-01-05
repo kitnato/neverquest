@@ -12,12 +12,12 @@ import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export default function () {
+  const attackRateValue = useRecoilValue(attackRate);
+  const canAttackOrParryValue = useRecoilValue(canAttackOrParry);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isLootingValue = useRecoilValue(isLooting);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isRecoveringValue = useRecoilValue(isRecovering);
-  const canAttackOrParryValue = useRecoilValue(canAttackOrParry);
-  const attackRateValue = useRecoilValue(attackRate);
 
   const [deltaAttack, setDeltaAttack] = useState(0);
 

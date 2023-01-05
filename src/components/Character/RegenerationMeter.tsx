@@ -17,8 +17,8 @@ export default function ({
   regenerationRate: RecoilValueReadOnly<number>;
 }) {
   const isRecoveringValue = useRecoilValue(isRecovering);
-  const regenerationRateValue = useRecoilValue(regenerationRate);
   const isReserveMaxedOutValue = useRecoilValue(isReserveMaxedOut);
+  const regenerationRateValue = useRecoilValue(regenerationRate);
 
   const [deltaRegeneration, setDeltaRegeneration] = useState(0);
 

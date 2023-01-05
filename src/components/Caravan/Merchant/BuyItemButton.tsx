@@ -12,8 +12,8 @@ import { isItem } from "@neverquest/types/type-guards";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function ({ id }: { id: string }) {
-  const [merchantInventoryValue, setMerchantInventory] = useRecoilState(merchantInventory);
   const coinsValue = useRecoilValue(coins);
+  const [merchantInventoryValue, setMerchantInventory] = useRecoilState(merchantInventory);
 
   const acquireItem = useAcquireItem();
   const acquireGear = useAcquireGear();

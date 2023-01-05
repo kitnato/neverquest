@@ -18,14 +18,14 @@ import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function ({ isDisabled }: { isDisabled: boolean }) {
-  const [isAttackingValue, setAttacking] = useRecoilState(isAttacking);
-  const [showWildernessStatusValue, setShowWildernessStatusValue] = useRecoilState(
-    isShowing(ShowingType.WildernessStatus)
-  );
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
+  const [isAttackingValue, setAttacking] = useRecoilState(isAttacking);
   const isHealthLowValue = useRecoilValue(isHealthLow);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const isLevelStartedValue = useRecoilValue(isLevelStarted);
+  const [showWildernessStatusValue, setShowWildernessStatusValue] = useRecoilState(
+    isShowing(ShowingType.WildernessStatus)
+  );
   const showLowHealthWarningValue = useRecoilValue(lowHealthWarning);
 
   const [showAttackConfirmation, setShowAttackConfirmation] = useState(false);

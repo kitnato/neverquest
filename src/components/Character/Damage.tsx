@@ -18,10 +18,10 @@ import { getComputedStatistic } from "@neverquest/utilities/getters";
 
 export default function () {
   const { points } = useRecoilValue(attributes(AttributeType.Damage));
+  const damageValue = useRecoilValue(damage);
   const damagePerSecondValue = useRecoilValue(damagePerSecond);
   const isShowingDamageSummary = useRecoilValue(isShowing(ShowingType.DamageSummary));
   const isShowingDamagePerSecondValue = useRecoilValue(isShowingDamagePerSecond);
-  const damageValue = useRecoilValue(damage);
   const weaponValue = useRecoilValue(weapon);
 
   const { base, increment, name } = ATTRIBUTES[AttributeType.Damage];

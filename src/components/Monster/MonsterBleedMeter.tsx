@@ -12,11 +12,12 @@ import { FloatingText, UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export default function () {
-  const [monsterBleedingDurationValue, setMonsterBleedingDuration] =
-    useRecoilState(monsterBleedingDuration);
   const bleedDamageValue = useRecoilValue(bleedDamageDelta);
   const setCurrentHealthMonster = useSetRecoilState(currentHealthMonster);
   const setDeltaMonsterHealth = useSetRecoilState(deltas(DeltaType.HealthMonster));
+  const [monsterBleedingDurationValue, setMonsterBleedingDuration] =
+    useRecoilState(monsterBleedingDuration);
+
   const [deltaBleeding, setDeltaBleeding] = useState(0);
 
   const stoppedBleeding = monsterBleedingDurationValue <= 0;

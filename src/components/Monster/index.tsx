@@ -14,9 +14,9 @@ import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function () {
-  const setLooting = useSetRecoilState(isLooting);
-  const [isLevelStartedValue, setIsLevelStarted] = useRecoilState(isLevelStarted);
   const isAttackingValue = useRecoilValue(isAttacking);
+  const [isLevelStartedValue, setIsLevelStarted] = useRecoilState(isLevelStarted);
+  const setLooting = useSetRecoilState(isLooting);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
 
   const regenerateMonster = useRegenerateMonster();

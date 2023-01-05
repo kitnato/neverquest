@@ -16,9 +16,10 @@ import { getSellPrice } from "@neverquest/utilities/getters";
 export default function () {
   const [inventoryValue, setInventory] = useRecoilState(inventory);
   const setMerchantInventory = useSetRecoilState(merchantInventory);
-  const transactResources = useTransactResources();
 
   const [sellConfirmation, setSellConfirmation] = useState<string | null>(null);
+
+  const transactResources = useTransactResources();
 
   const inventoryIDs = Object.getOwnPropertyNames(inventoryValue);
 

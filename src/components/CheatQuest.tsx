@@ -20,6 +20,7 @@ export default function () {
   const isWildernessValue = useRecoilValue(isWilderness);
   const levelValue = useRecoilValue(level);
   const progressMaximumValue = useRecoilValue(progressMaximum);
+
   const setCoinsLoot = useSetRecoilState(coinsLoot);
   const setEssenceLoot = useSetRecoilState(essenceLoot);
   const setScrapLoot = useSetRecoilState(scrapLoot);

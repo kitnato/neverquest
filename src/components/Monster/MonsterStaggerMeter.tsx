@@ -11,6 +11,7 @@ import { formatMilliseconds } from "@neverquest/utilities/formatters";
 export default function () {
   const [isStaggeredValue, setStaggered] = useRecoilState(isMonsterStaggered);
   const staggerDurationValue = useRecoilValue(staggerDuration);
+
   const [deltaStagger, setDeltaStagger] = useState(0);
 
   useAnimation((delta) => {

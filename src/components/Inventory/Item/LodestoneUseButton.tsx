@@ -7,9 +7,9 @@ import { UIVariant } from "@neverquest/types/ui";
 
 export default function () {
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
-  const isWildernessValue = useRecoilValue(isWilderness);
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
   const resetProgress = useResetRecoilState(progress);
+  const isWildernessValue = useRecoilValue(isWilderness);
 
   const canLure = isLevelCompletedValue && isWildernessValue;
 

@@ -18,9 +18,9 @@ import {
 
 // TODO - revise Stagger formula
 export default function () {
-  const staggerDurationValue = useRecoilValue(staggerDuration);
   const { staggerChance } = useRecoilValue(shield);
   const staggerSkill = useRecoilValue(skills(SkillType.Stagger));
+  const staggerDurationValue = useRecoilValue(staggerDuration);
   const { abilityChance, weaponClass } = useRecoilValue(weapon);
 
   const { name } = MASTERIES[MasteryType.StaggerDuration];

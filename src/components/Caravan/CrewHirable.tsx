@@ -14,8 +14,9 @@ import { CrewStatus, CrewType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function ({ type }: { type: CrewType }) {
-  const [{ hireStatus }, setCrewMember] = useRecoilState(crew(type));
   const coinsValue = useRecoilValue(coins);
+  const [{ hireStatus }, setCrewMember] = useRecoilState(crew(type));
+
   const transactResources = useTransactResources();
 
   if (hireStatus !== CrewStatus.Hirable) {

@@ -13,9 +13,9 @@ import { UIVariant } from "@neverquest/types/ui";
 export default function () {
   const hasLootedValue = useRecoilValue(hasLooted);
   const isAttackingValue = useRecoilValue(isAttacking);
+  const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const isWildernessValue = useRecoilValue(isWilderness);
-  const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
 
   const [isShowingConfirmation, setIsShowingConfirmation] = useState(false);
 

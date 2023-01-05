@@ -8,8 +8,8 @@ import { bleedChance } from "@neverquest/state/statistics";
 import { SkillType } from "@neverquest/types/enums";
 
 export default function () {
-  const bleedSkill = useRecoilValue(skills(SkillType.Bleed));
   const bleedChanceValue = useRecoilValue(bleedChance);
+  const bleedSkill = useRecoilValue(skills(SkillType.Bleed));
 
   if (!bleedSkill || bleedChanceValue === 0) {
     return null;

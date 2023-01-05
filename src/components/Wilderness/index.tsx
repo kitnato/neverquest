@@ -12,9 +12,9 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function () {
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
+  const setIsLevelStarted = useSetRecoilState(isLevelStarted);
   // Progress needs to be tracked here so that a new monster is created whenever there is level progression.
   const progressValue = useRecoilValue(progress);
-  const setIsLevelStarted = useSetRecoilState(isLevelStarted);
 
   const createMonster = useCreateMonster();
 

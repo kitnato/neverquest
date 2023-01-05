@@ -12,9 +12,9 @@ import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function ({ isDisabled }: { isDisabled: boolean }) {
+  const hasLootedValue = useRecoilValue(hasLooted);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const isWildernessValue = useRecoilValue(isWilderness);
-  const hasLootedValue = useRecoilValue(hasLooted);
   const levelValue = useRecoilValue(level);
 
   const switchLocation = useSwitchLocation();

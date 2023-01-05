@@ -16,13 +16,13 @@ import { hasLooted } from "@neverquest/state/resources";
 import { UIVariant } from "@neverquest/types/ui";
 
 export default function () {
+  const hasLootedValue = useRecoilValue(hasLooted);
+  const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const isLevelStartedValue = useRecoilValue(isLevelStarted);
   const isWildernessValue = useRecoilValue(isWilderness);
-  const hasLootedValue = useRecoilValue(hasLooted);
-  const wildernessesValue = useRecoilValue(wildernesses);
   const [levelValue, setLevel] = useRecoilState(level);
-  const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
+  const wildernessesValue = useRecoilValue(wildernesses);
 
   const [isShowing, setIsShowing] = useState(false);
 

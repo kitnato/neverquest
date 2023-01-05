@@ -16,10 +16,10 @@ import {
 import { getDamagePerRate } from "@neverquest/utilities/getters";
 
 export default function () {
-  const bleedDamageValue = useRecoilValue(bleedDamage);
   const bleedChanceValue = useRecoilValue(bleedChance);
-  const bleedSkill = useRecoilValue(skills(SkillType.Bleed));
+  const bleedDamageValue = useRecoilValue(bleedDamage);
   const damageValue = useRecoilValue(damage);
+  const bleedSkill = useRecoilValue(skills(SkillType.Bleed));
 
   const { name } = MASTERIES[MasteryType.BleedDamage];
 

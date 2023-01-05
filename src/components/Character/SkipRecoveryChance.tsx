@@ -13,8 +13,8 @@ import { AnimationType } from "@neverquest/types/ui";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export default function () {
-  const skipRecoveryChanceValue = useRecoilValue(skipRecoveryChance);
   const armorsSkill = useRecoilValue(skills(SkillType.Armors));
+  const skipRecoveryChanceValue = useRecoilValue(skipRecoveryChance);
 
   const deltaChanceSkipRecovery = deltas(DeltaType.ChanceSkipRecovery);
 

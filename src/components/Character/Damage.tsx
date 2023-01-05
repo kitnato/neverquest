@@ -57,9 +57,9 @@ export default function () {
                           <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
 
                           <td>{`+${getComputedStatistic({
+                            amount: points,
                             base,
                             increment,
-                            points,
                           })}`}</td>
                         </tr>
                       </tbody>

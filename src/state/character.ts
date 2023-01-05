@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 
-import { UNKNOWN } from "@neverquest/constants";
+import { LABEL_UNKNOWN } from "@neverquest/constants";
 import localStorage from "@neverquest/state/effects/localStorage";
 import { StorageKey } from "@neverquest/types/enums";
 import { getTriangularNumber } from "@neverquest/utilities/getters";
@@ -53,7 +53,7 @@ export const lootingRate = atom({
 });
 
 export const name = atom({
-  default: UNKNOWN,
+  default: LABEL_UNKNOWN,
   effects: [localStorage<string>(StorageKey.Name)],
   key: StorageKey.Name,
 });

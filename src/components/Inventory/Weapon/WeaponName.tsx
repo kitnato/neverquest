@@ -1,7 +1,7 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { CLASS_TABLE_CELL_ITALIC, ICON_INLAY_SIZE, UNKNOWN } from "@neverquest/constants";
+import { CLASS_TABLE_CELL_ITALIC, ICON_INLAY_SIZE, LABEL_UNKNOWN } from "@neverquest/constants";
 import { WEAPON_ICONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -63,7 +63,7 @@ export default function ({ weapon }: { weapon: Weapon }) {
                       <td>{staminaCost}</td>
                     </>
                   ) : (
-                    <td className="text-end">{UNKNOWN}</td>
+                    <td className="text-end">{LABEL_UNKNOWN}</td>
                   )}
                 </tr>
 
@@ -86,7 +86,7 @@ export default function ({ weapon }: { weapon: Weapon }) {
                   </>
                 ) : (
                   <tr>
-                    <td className="text-end">{UNKNOWN}</td>
+                    <td className="text-end">{LABEL_UNKNOWN}</td>
                   </tr>
                 )}
 
@@ -98,7 +98,7 @@ export default function ({ weapon }: { weapon: Weapon }) {
                       <td>{weight}</td>
                     </>
                   ) : (
-                    <td className="text-end">{UNKNOWN}</td>
+                    <td className="text-end">{LABEL_UNKNOWN}</td>
                   )}
                 </tr>
               </tbody>

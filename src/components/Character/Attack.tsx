@@ -73,7 +73,7 @@ export default function () {
                         <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
 
                         <td>{`-${formatPercentage(
-                          getComputedStatistic({ base, increment, points })
+                          getComputedStatistic({ amount: points, base, increment })
                         )}`}</td>
                       </tr>
                     </tbody>

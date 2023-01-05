@@ -4,7 +4,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import MonsterStatus from "@neverquest/components/Monster/MonsterStatus";
-import { UNKNOWN } from "@neverquest/constants";
+import { LABEL_UNKNOWN } from "@neverquest/constants";
 import useRegenerateMonster from "@neverquest/hooks/actions/useRegenerateMonster";
 import { ReactComponent as Icon } from "@neverquest/icons/evil-eyes.svg";
 import { isAttacking, isLooting } from "@neverquest/state/character";
@@ -51,7 +51,7 @@ export default function () {
         <IconDisplay
           contents={<span className="fst-italic">The darkness stirs.</span>}
           Icon={Icon}
-          tooltip={UNKNOWN}
+          tooltip={LABEL_UNKNOWN}
         />
       </Card.Body>
     </Card>

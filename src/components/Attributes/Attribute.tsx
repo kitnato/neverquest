@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import IconImage from "@neverquest/components/IconImage";
-import { CLASS_FULL_WIDTH_JUSTIFIED, UNKNOWN } from "@neverquest/constants";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_AT_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import useIncreaseAttribute from "@neverquest/hooks/actions/useIncreaseAttribute";
 import { ReactComponent as IconWait } from "@neverquest/icons/hourglass.svg";
@@ -13,7 +13,7 @@ import {
   areAttributesIncreasable,
   attributeCost,
   attributes,
-  isAttributeMaxed,
+  isAttributeAtMaximum,
 } from "@neverquest/state/attributes";
 import { isLevelStarted } from "@neverquest/state/encounter";
 import { AttributeType } from "@neverquest/types/enums";
@@ -23,7 +23,7 @@ export default function ({ type }: { type: AttributeType }) {
   const { isUnlocked, points } = useRecoilValue(attributes(type));
   const attributeCostValue = useRecoilValue(attributeCost);
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
-  const isAttributeMaxedValue = useRecoilValue(isAttributeMaxed(type));
+  const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(type));
   const isLevelStartedValue = useRecoilValue(isLevelStarted);
 
   const increaseAttribute = useIncreaseAttribute();
@@ -45,8 +45,8 @@ export default function ({ type }: { type: AttributeType }) {
           <Stack direction="horizontal" gap={3}>
             <span>{points}</span>
 
-            {isAttributeMaxedValue ? (
-              <Badge bg="secondary">MAX</Badge>
+            {isAttributeAtMaximumValue ? (
+              <Badge bg="secondary">{LABEL_AT_MAXIMUM}</Badge>
             ) : (
               <OverlayTrigger
                 overlay={<Tooltip>{`Cost: ${attributeCostValue} essence`}</Tooltip>}
@@ -72,7 +72,7 @@ export default function ({ type }: { type: AttributeType }) {
           </Stack>
         </>
       ) : (
-        <span className="text-center w-100">{UNKNOWN}</span>
+        <span className="text-center w-100">{LABEL_UNKNOWN}</span>
       )}
     </div>
   );

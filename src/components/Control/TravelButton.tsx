@@ -3,7 +3,7 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import ImageIcon from "@neverquest/components/IconImage";
-import { UNKNOWN } from "@neverquest/constants";
+import { LABEL_UNKNOWN } from "@neverquest/constants";
 import useSwitchLocation from "@neverquest/hooks/actions/useSwitchLocation";
 import { ReactComponent as Icon } from "@neverquest/icons/journey.svg";
 import { isLevelCompleted, isWilderness, level } from "@neverquest/state/encounter";
@@ -28,7 +28,7 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
       overlay={
         <Tooltip>{`${isWildernessValue ? "Go to" : "Return to"} ${
           levelValue === 1 && isWildernessValue
-            ? UNKNOWN
+            ? LABEL_UNKNOWN
             : isWildernessValue
             ? "Caravan"
             : "Wilderness"

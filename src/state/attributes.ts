@@ -24,7 +24,7 @@ export const areAttributesIncreasable = selector({
   key: "areAttributesIncreasable",
 });
 
-export const isAttributeMaxed = selectorFamily<boolean, AttributeType>({
+export const isAttributeAtMaximum = selectorFamily<boolean, AttributeType>({
   get:
     (type) =>
     ({ get }) => {
@@ -33,9 +33,9 @@ export const isAttributeMaxed = selectorFamily<boolean, AttributeType>({
 
       return maximum === undefined
         ? false
-        : maximum === getComputedStatistic({ base, increment, points });
+        : maximum === getComputedStatistic({ amount: points, base, increment });
     },
-  key: "isAttributeMaxed",
+  key: "isAttributeAtMaximum",
 });
 
 // ATOMS

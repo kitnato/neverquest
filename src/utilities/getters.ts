@@ -22,15 +22,15 @@ export function getAnimationClass({
 }
 
 export function getComputedStatistic({
+  amount,
   base,
   increment,
-  points,
 }: {
+  amount: number;
   base: number;
   increment: number;
-  points: number;
 }) {
-  return base + increment * points;
+  return base + increment * amount;
 }
 
 export function getDamagePerRate({

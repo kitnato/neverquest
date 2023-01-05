@@ -1,6 +1,6 @@
 import { DefaultValue, atom, selector } from "recoil";
 
-import { UNKNOWN } from "@neverquest/constants";
+import { LABEL_UNKNOWN } from "@neverquest/constants";
 import localStorage from "@neverquest/state/effects/localStorage";
 import { Wilderness } from "@neverquest/types";
 import { LocationType, StorageKey } from "@neverquest/types/enums";
@@ -21,7 +21,7 @@ export const locationName = selector({
   get: ({ get }) => {
     if (get(isWilderness)) {
       if (get(maximumLevel) === 1) {
-        return UNKNOWN;
+        return LABEL_UNKNOWN;
       }
 
       return get(wilderness).name;

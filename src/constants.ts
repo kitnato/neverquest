@@ -33,4 +33,6 @@ export const KEY_SESSION = `${KEY_STORAGE_PREFIX}-ss`;
 
 export const KEY_SETTINGS = `${KEY_STORAGE_PREFIX}-st`;
 
-export const UNKNOWN = "???";
+export const LABEL_AT_MAXIMUM = "MAX";
+
+export const LABEL_UNKNOWN = "???";

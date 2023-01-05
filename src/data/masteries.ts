@@ -17,7 +17,7 @@ export const MASTERIES: Record<MasteryType, AttributeOrMastery> = {
     description: "Chance that blocking consumes no stamina. Trains when blocking.",
     Icon,
     increment: 0.03,
-    name: "Obstinacy",
+    name: "Stability",
     requiredSkill: SkillType.Shields,
   },
   [MasteryType.ParryDamage]: {
@@ -30,7 +30,7 @@ export const MASTERIES: Record<MasteryType, AttributeOrMastery> = {
   },
   [MasteryType.SkipRecoveryChance]: {
     base: 0,
-    description: "Chance to ignore recovery when struck. Trains when struck normally.",
+    description: "Chance to ignore recovery when struck. Trains when struck.",
     Icon,
     increment: 0.025,
     name: "Tenacity",

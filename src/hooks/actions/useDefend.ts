@@ -162,7 +162,7 @@ export default function () {
         if (isFreeBlock) {
           deltaStamina = {
             color: FloatingText.Neutral,
-            value: "OBSTINATE",
+            value: "STABILIZED",
           };
         } else {
           changeStamina({ value: -staminaCost });

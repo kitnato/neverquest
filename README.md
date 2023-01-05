@@ -577,7 +577,7 @@ Required skill: [Traumatology](#traumatology).
 
 Progress is gained by using [blunt weapons](#blunt-weapon). Each rank increases [stagger duration](#stagger-duration).
 
-### Obstinacy
+### Stability
 
 Required skill: [Shieldcraft](#traumatology).
 
@@ -661,7 +661,7 @@ Allows the use of [two-handed](#two-handed) weapons.
 
 ##### Shieldcraft
 
-Allows the use and knowledge of [medium](#medium-shield) and [tower](#tower-shield) shields. Also unlocks the [Obstinacy](#obstinacy) mastery.
+Allows the use and knowledge of [medium](#medium-shield) and [tower](#tower-shield) shields. Also unlocks the [Stability](#stability) mastery.
 
 ##### Traumatology
 

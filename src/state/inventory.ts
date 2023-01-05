@@ -1,10 +1,9 @@
 import { atom, selector, selectorFamily } from "recoil";
 
-import { skills } from "./skills";
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import localStorage from "@neverquest/state/effects/localStorage";
 import { Armor, Inventory, Shield, Weapon } from "@neverquest/types";
-import { ArmorClass, SkillType, StorageKey } from "@neverquest/types/enums";
+import { StorageKey } from "@neverquest/types/enums";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 
 // SELECTORS
@@ -25,14 +24,6 @@ export const armor = selector({
     return ARMOR_NONE;
   },
   key: "armor",
-});
-
-export const canEquipArmor = selectorFamily<boolean, ArmorClass | undefined>({
-  get:
-    (armorClass) =>
-    ({ get }) =>
-      !get(skills(SkillType.Armors)) && armorClass !== ArmorClass.Hide,
-  key: "canEquipArmor",
 });
 
 export const canFit = selectorFamily<boolean, number>({

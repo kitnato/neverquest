@@ -44,7 +44,7 @@ export default function () {
             Math.random() <= abilityChance;
 
           const baseDamage = -get(damage);
-          const extra: DeltaDisplay = [];
+          const extraDeltas: DeltaDisplay = [];
           const totalDamage = hasInflictedCritical ? baseDamage * get(criticalDamage) : baseDamage;
 
           let monsterHealth = get(monsterCurrentHealth) + totalDamage;
@@ -60,7 +60,7 @@ export default function () {
           set(monsterCurrentHealth, monsterHealth);
 
           if (hasInflictedCritical) {
-            extra.push({
+            extraDeltas.push({
               color: FloatingText.Neutral,
               value: "CRITICAL",
             });
@@ -70,7 +70,7 @@ export default function () {
             set(monsterBleedingDuration, BLEED.duration);
             increaseMastery(MasteryType.BleedDamage);
 
-            extra.push({
+            extraDeltas.push({
               color: FloatingText.Neutral,
               value: "BLEED",
             });
@@ -80,7 +80,7 @@ export default function () {
             set(isMonsterStaggered, true);
             increaseMastery(MasteryType.StaggerDuration);
 
-            extra.push({
+            extraDeltas.push({
               color: FloatingText.Neutral,
               value: "STAGGER",
             });
@@ -91,7 +91,7 @@ export default function () {
               color: FloatingText.Negative,
               value: totalDamage,
             },
-            ...extra,
+            ...extraDeltas,
           ]);
 
           animateElement({

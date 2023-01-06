@@ -10,6 +10,7 @@ import { bleedDamage, damage } from "@neverquest/state/statistics";
 import { DeltaType } from "@neverquest/types/enums";
 import { FloatingText, UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
+import { getDamagePerTick } from "@neverquest/utilities/getters";
 
 export default function () {
   const setMonsterCurrentHealth = useSetRecoilState(monsterCurrentHealth);
@@ -23,7 +24,12 @@ export default function () {
 
   const { duration, ticks } = BLEED;
   const bleedingDelta = duration / ticks;
-  const bleedingDamage = ((damageValue * bleedDamageValue) / duration) * bleedingDelta;
+  const bleedingDamage = getDamagePerTick({
+    damage: damageValue,
+    duration,
+    proportion: bleedDamageValue,
+    ticks,
+  });
   const hasBleedingStopped = monsterBleedingDurationValue <= 0;
 
   useAnimation((delta) => {

@@ -11,6 +11,7 @@ import { currentHealth } from "@neverquest/state/reserves";
 import { DeltaType } from "@neverquest/types/enums";
 import { FloatingText, UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
+import { getDamagePerTick } from "@neverquest/utilities/getters";
 
 export default function () {
   const setCurrentHealth = useSetRecoilState(currentHealth);
@@ -22,7 +23,12 @@ export default function () {
 
   const { damage, duration, ticks } = POISON;
   const poisonDelta = duration / ticks;
-  const poisonDamage = ((monsterDamageValue * damage) / duration) * poisonDelta;
+  const poisonDamage = getDamagePerTick({
+    damage: monsterDamageValue,
+    duration,
+    proportion: damage,
+    ticks,
+  });
   const stoppedPoisoning = poisonDurationValue <= 0;
 
   useAnimation((delta) => {

@@ -1,10 +1,8 @@
 import { useRecoilCallback } from "recoil";
 
 import { deltas } from "@neverquest/state/deltas";
-import { isShowing } from "@neverquest/state/isShowing";
-import { currentHealth, maximumHealth } from "@neverquest/state/reserves";
-import { isGameOver } from "@neverquest/state/settings";
-import { DeltaType, ShowingType } from "@neverquest/types/enums";
+import { monsterCurrentHealth, monsterMaximumHealth } from "@neverquest/state/monster";
+import { DeltaType } from "@neverquest/types/enums";
 import { DeltaReserve, FloatingText } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -13,30 +11,27 @@ export default function () {
     const get = getSnapshotGetter(snapshot);
 
     const { delta, value } = change;
-    const max = get(maximumHealth);
+    const max = get(monsterMaximumHealth);
     const isPositive = value > 0;
 
-    let newHealth = get(currentHealth) + value;
+    let newHealth = get(monsterCurrentHealth) + value;
 
     set(
-      deltas(DeltaType.Health),
+      deltas(DeltaType.HealthMonster),
       delta ?? {
         color: isPositive ? FloatingText.Positive : FloatingText.Negative,
         value: isPositive ? `+${value}` : value,
       }
     );
 
-    if (newHealth <= 0) {
+    if (newHealth < 0) {
       newHealth = 0;
-
-      set(isGameOver, true);
-      set(isShowing(ShowingType.GameOver), true);
     }
 
     if (newHealth > max) {
       newHealth = max;
     }
 
-    set(currentHealth, newHealth);
+    set(monsterCurrentHealth, newHealth);
   });
 }

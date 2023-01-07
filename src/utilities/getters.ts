@@ -72,7 +72,7 @@ export function getDeltaTypeFromMasteryType(type: MasteryType) {
     case MasteryType.FreeBlockChance: {
       return DeltaType.ChanceFreeBlock;
     }
-    case MasteryType.ParryDamage: {
+    case MasteryType.ParryFactor: {
       return DeltaType.MasteryParry;
     }
     case MasteryType.SkipRecoveryChance: {

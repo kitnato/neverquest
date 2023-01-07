@@ -76,7 +76,7 @@ export enum LootType {
 export enum MasteryType {
   BleedDamage,
   FreeBlockChance,
-  ParryDamage,
+  ParryFactor,
   SkipRecoveryChance,
   StaggerDuration,
 }

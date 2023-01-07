@@ -135,8 +135,8 @@ export const healthRegenerationRate = selector({
 
 export const parryAbsorption = selector({
   get: ({ get }) => {
-    const { base, increment } = MASTERIES[MasteryType.ParryDamage];
-    const { rank } = get(masteries(MasteryType.ParryDamage));
+    const { base, increment } = MASTERIES[MasteryType.ParryFactor];
+    const { rank } = get(masteries(MasteryType.ParryFactor));
 
     return 0.33 + getComputedStatistic({ amount: rank, base, increment });
   },
@@ -158,8 +158,8 @@ export const parryChance = selector({
 
 export const parryDamage = selector({
   get: ({ get }) => {
-    const { base, increment } = MASTERIES[MasteryType.ParryDamage];
-    const { rank } = get(masteries(MasteryType.ParryDamage));
+    const { base, increment } = MASTERIES[MasteryType.ParryFactor];
+    const { rank } = get(masteries(MasteryType.ParryFactor));
 
     return 0.25 + getComputedStatistic({ amount: rank, base, increment });
   },

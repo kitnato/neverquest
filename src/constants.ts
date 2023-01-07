@@ -23,7 +23,7 @@ export const DEFAULT_RESERVE_CHANGE: DeltaReserve = {
 };
 
 // TODO - replace with Vigor & Fortitude repurposing.
-export const DELTA_RESERVE_REGENERATION = 5;
+export const DELTA_RESERVE_REGENERATION = 4;
 
 export const EXCHANGE_COINS = 1;
 

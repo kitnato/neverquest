@@ -1,26 +1,25 @@
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import { BLEED } from "@neverquest/constants";
+import useChangeMonsterHealth from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import useAnimation from "@neverquest/hooks/useAnimation";
-import { deltas } from "@neverquest/state/deltas";
-import { monsterBleedingDuration, monsterCurrentHealth } from "@neverquest/state/monster";
+import { monsterBleedingDuration } from "@neverquest/state/monster";
 import { bleedDamage, damage } from "@neverquest/state/statistics";
-import { DeltaType } from "@neverquest/types/enums";
 import { FloatingText, UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 import { getDamagePerTick } from "@neverquest/utilities/getters";
 
 export default function () {
-  const setMonsterCurrentHealth = useSetRecoilState(monsterCurrentHealth);
-  const setDeltaMonsterHealth = useSetRecoilState(deltas(DeltaType.HealthMonster));
   const [monsterBleedingDurationValue, setMonsterBleedingDuration] =
     useRecoilState(monsterBleedingDuration);
   const bleedDamageValue = useRecoilValue(bleedDamage);
   const damageValue = useRecoilValue(damage);
 
   const [deltaBleeding, setDeltaBleeding] = useState(0);
+
+  const changeMonsterHealth = useChangeMonsterHealth();
 
   const { duration, ticks } = BLEED;
   const bleedingDelta = duration / ticks;
@@ -39,26 +38,16 @@ export default function () {
 
   useEffect(() => {
     if (deltaBleeding >= bleedingDelta) {
-      setMonsterCurrentHealth((current) => current - bleedingDamage);
-      setDeltaMonsterHealth([
-        {
+      changeMonsterHealth({
+        delta: {
           color: FloatingText.Negative,
-          value: "BLEEDING",
+          value: `BLEEDING (-${bleedingDamage})`,
         },
-        {
-          color: FloatingText.Negative,
-          value: ` (-${bleedingDamage})`,
-        },
-      ]);
+        value: -bleedingDamage,
+      });
       setDeltaBleeding(0);
     }
-  }, [
-    bleedingDamage,
-    bleedingDelta,
-    setMonsterCurrentHealth,
-    setDeltaMonsterHealth,
-    deltaBleeding,
-  ]);
+  }, [bleedingDamage, bleedingDelta, deltaBleeding, changeMonsterHealth]);
 
   useEffect(() => {
     if (hasBleedingStopped) {

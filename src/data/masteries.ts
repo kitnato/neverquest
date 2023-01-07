@@ -22,7 +22,7 @@ export const MASTERIES: Record<MasteryType, AttributeOrMastery> = {
     name: "Stability",
     requiredSkill: SkillType.Shields,
   },
-  [MasteryType.ParryDamage]: {
+  [MasteryType.ParryFactor]: {
     base: 0,
     description: "Affects damage absorbed and reflected when parrying. Trains when parrying.",
     Icon,
@@ -53,7 +53,7 @@ export const MASTERIES: Record<MasteryType, AttributeOrMastery> = {
 
 export const MASTERIES_ORDER = [
   MasteryType.StaggerDuration,
-  MasteryType.ParryDamage,
+  MasteryType.ParryFactor,
   MasteryType.BleedDamage,
   MasteryType.SkipRecoveryChance,
   MasteryType.FreeBlockChance,

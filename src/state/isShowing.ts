@@ -14,7 +14,7 @@ export const isShowingMastery = selectorFamily<boolean, MasteryType | null>({
         case MasteryType.BleedDamage: {
           return get(skills(SkillType.Bleed));
         }
-        case MasteryType.ParryDamage: {
+        case MasteryType.ParryFactor: {
           return get(skills(SkillType.Parry));
         }
         case MasteryType.StaggerDuration: {

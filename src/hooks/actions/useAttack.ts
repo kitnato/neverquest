@@ -1,6 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { BLEED } from "@neverquest/constants";
+import useChangeMonsterHealth from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import useChangeStamina from "@neverquest/hooks/actions/useChangeStamina";
 import useIncreaseMastery from "@neverquest/hooks/actions/useIncreaseMastery";
 import { WeaponClass } from "@neverquest/locra/types";
@@ -9,7 +10,6 @@ import { weapon } from "@neverquest/state/inventory";
 import {
   isMonsterStaggered,
   monsterBleedingDuration,
-  monsterCurrentHealth,
   monsterStatusElement,
 } from "@neverquest/state/monster";
 import { canAttackOrParry } from "@neverquest/state/reserves";
@@ -21,6 +21,7 @@ import animateElement from "@neverquest/utilities/animateElement";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
+  const changeMonsterHealth = useChangeMonsterHealth();
   const changeStamina = useChangeStamina();
   const increaseMastery = useIncreaseMastery();
 
@@ -44,23 +45,22 @@ export default function () {
             Math.random() <= abilityChance;
 
           const baseDamage = -get(damage);
-          const extraDeltas: DeltaDisplay = [];
-          const totalDamage = hasInflictedCritical ? baseDamage * get(criticalDamage) : baseDamage;
-
-          let monsterHealth = get(monsterCurrentHealth) + totalDamage;
-
-          if (monsterHealth < 0) {
-            monsterHealth = 0;
-          }
+          const totalDamage = hasInflictedCritical
+            ? baseDamage + baseDamage * get(criticalDamage)
+            : baseDamage;
+          const monsterDeltas: DeltaDisplay = [
+            {
+              color: FloatingText.Negative,
+              value: totalDamage,
+            },
+          ];
 
           if (staminaCost > 0) {
             changeStamina({ value: -staminaCost });
           }
 
-          set(monsterCurrentHealth, monsterHealth);
-
           if (hasInflictedCritical) {
-            extraDeltas.push({
+            monsterDeltas.push({
               color: FloatingText.Neutral,
               value: "CRITICAL",
             });
@@ -70,7 +70,7 @@ export default function () {
             set(monsterBleedingDuration, BLEED.duration);
             increaseMastery(MasteryType.BleedDamage);
 
-            extraDeltas.push({
+            monsterDeltas.push({
               color: FloatingText.Neutral,
               value: "BLEED",
             });
@@ -80,19 +80,13 @@ export default function () {
             set(isMonsterStaggered, true);
             increaseMastery(MasteryType.StaggerDuration);
 
-            extraDeltas.push({
+            monsterDeltas.push({
               color: FloatingText.Neutral,
               value: "STAGGER",
             });
           }
 
-          set(deltas(DeltaType.HealthMonster), [
-            {
-              color: FloatingText.Negative,
-              value: totalDamage,
-            },
-            ...extraDeltas,
-          ]);
+          changeMonsterHealth({ delta: monsterDeltas, value: totalDamage });
 
           animateElement({
             element: get(monsterStatusElement),

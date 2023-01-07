@@ -3,17 +3,12 @@ import { useRecoilCallback } from "recoil";
 import LOCRA from "@neverquest/locra";
 import { CreatureType } from "@neverquest/locra/types";
 import { level } from "@neverquest/state/encounter";
-import {
-  isMonsterNew,
-  monsterCurrentHealth,
-  monsterMaximumHealth,
-  monsterName,
-} from "@neverquest/state/monster";
+import { isMonsterNew, monsterCurrentHealth, monsterName } from "@neverquest/state/monster";
 import { isNSFW } from "@neverquest/state/settings";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
-  return useRecoilCallback(({ set, snapshot }) => () => {
+  return useRecoilCallback(({ reset, set, snapshot }) => () => {
     const get = getSnapshotGetter(snapshot);
 
     set(
@@ -26,7 +21,7 @@ export default function () {
       })
     );
 
-    set(monsterCurrentHealth, get(monsterMaximumHealth));
+    reset(monsterCurrentHealth);
     set(isMonsterNew, true);
   });
 }

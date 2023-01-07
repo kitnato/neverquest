@@ -1,18 +1,14 @@
 import { useRecoilCallback } from "recoil";
 
 import useChangeHealth from "@neverquest/hooks/actions/useChangeHealth";
+import useChangeMonsterHealth from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import useChangeStamina from "@neverquest/hooks/actions/useChangeStamina";
 import useIncreaseMastery from "@neverquest/hooks/actions/useIncreaseMastery";
 import { isRecovering, statusElement } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { shield, weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import {
-  isMonsterStaggered,
-  monsterCurrentHealth,
-  monsterDamage,
-  monsterStatusElement,
-} from "@neverquest/state/monster";
+import { isMonsterStaggered, monsterDamage, monsterStatusElement } from "@neverquest/state/monster";
 import { canAttackOrParry, canBlock } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
 import {
@@ -41,6 +37,7 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
  */
 export default function () {
   const changeHealth = useChangeHealth();
+  const changeMonsterHealth = useChangeMonsterHealth();
   const changeStamina = useChangeStamina();
   const increaseMastery = useIncreaseMastery();
 
@@ -90,19 +87,22 @@ export default function () {
 
       if (get(canAttackOrParry)) {
         healthDamage = Math.floor(healthDamage * get(parryAbsorption));
-        const parryReflected = Math.floor(monsterDamageValue * get(parryDamage));
 
-        set(monsterCurrentHealth, (current) => current - parryReflected);
-        set(deltas(DeltaType.HealthMonster), [
-          {
-            color: FloatingText.Negative,
-            value: "PARRIED",
-          },
-          {
-            color: FloatingText.Negative,
-            value: ` (${parryReflected})`,
-          },
-        ]);
+        const parryReflected = -Math.floor(monsterDamageValue * get(parryDamage));
+
+        changeMonsterHealth({
+          delta: [
+            {
+              color: FloatingText.Neutral,
+              value: "PARRIED",
+            },
+            {
+              color: FloatingText.Negative,
+              value: ` (${parryReflected})`,
+            },
+          ],
+          value: parryReflected,
+        });
 
         deltaHealth = [
           {
@@ -116,7 +116,7 @@ export default function () {
         ];
 
         changeStamina({ value: -staminaCost });
-        increaseMastery(MasteryType.ParryDamage);
+        increaseMastery(MasteryType.ParryFactor);
 
         animateElement({
           element: get(monsterStatusElement),

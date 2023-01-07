@@ -1,23 +1,21 @@
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import { POISON } from "@neverquest/constants";
+import useChangeHealth from "@neverquest/hooks/actions/useChangeHealth";
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { poisonDuration } from "@neverquest/state/character";
-import { deltas } from "@neverquest/state/deltas";
 import { monsterDamage } from "@neverquest/state/monster";
-import { currentHealth } from "@neverquest/state/reserves";
-import { DeltaType } from "@neverquest/types/enums";
 import { FloatingText, UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 import { getDamagePerTick } from "@neverquest/utilities/getters";
 
 export default function () {
-  const setCurrentHealth = useSetRecoilState(currentHealth);
-  const setDeltaHealth = useSetRecoilState(deltas(DeltaType.Health));
   const [poisonDurationValue, setPoisonDuration] = useRecoilState(poisonDuration);
   const monsterDamageValue = useRecoilValue(monsterDamage);
+
+  const changeHealth = useChangeHealth();
 
   const [deltaPoisoned, setDeltaPoisoned] = useState(0);
 
@@ -38,20 +36,16 @@ export default function () {
 
   useEffect(() => {
     if (deltaPoisoned >= poisonDelta) {
-      setCurrentHealth((current) => current - poisonDamage);
-      setDeltaHealth([
-        {
+      changeHealth({
+        delta: {
           color: FloatingText.Negative,
-          value: "POISONED",
+          value: `POISONED (-${poisonDamage})`,
         },
-        {
-          color: FloatingText.Negative,
-          value: ` (-${poisonDamage})`,
-        },
-      ]);
+        value: -poisonDamage,
+      });
       setDeltaPoisoned(0);
     }
-  }, [deltaPoisoned, poisonDamage, poisonDelta, setCurrentHealth, setDeltaHealth]);
+  }, [changeHealth, deltaPoisoned, poisonDamage, poisonDelta]);
 
   useEffect(() => {
     if (stoppedPoisoning) {

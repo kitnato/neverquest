@@ -13,7 +13,7 @@ export default function ({ armor }: { armor: Armor }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const armorsSkillValue = useRecoilValue(skills(SkillType.Armors));
 
-  const { armorClass, deflection, name, penalty, protection, weight } = armor;
+  const { armorClass, deflectionChance, name, penalty, protection, weight } = armor;
   const Icon = armorClass ? ARMOR_ICONS[armorClass] : () => null;
 
   return (
@@ -43,11 +43,11 @@ export default function ({ armor }: { armor: Armor }) {
                       </td>
                     </tr>
 
-                    {deflection && (
+                    {deflectionChance && (
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Deflection chance</td>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Deflection chance:</td>
 
-                        <td>{formatPercentage(deflection)}</td>
+                        <td>{formatPercentage(deflectionChance)}</td>
                       </tr>
                     )}
 

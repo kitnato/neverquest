@@ -20,10 +20,12 @@ export default function () {
 
     set(
       deltas(DeltaType.Health),
-      delta ?? {
-        color: isPositive ? FloatingText.Positive : FloatingText.Negative,
-        value: isPositive ? `+${value}` : value,
-      }
+      delta && Array.isArray(delta) && delta.length
+        ? delta
+        : {
+            color: isPositive ? FloatingText.Positive : FloatingText.Negative,
+            value: isPositive ? `+${value}` : value,
+          }
     );
 
     if (newHealth <= 0) {

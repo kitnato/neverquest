@@ -95,10 +95,9 @@ export const damagePerSecond = selector({
   key: "damagePerSecond",
 });
 
-// TODO
-export const deflection = selector({
-  get: ({ get }) => get(armor).deflection || 0,
-  key: "deflection",
+export const deflectionChance = selector({
+  get: ({ get }) => get(armor).deflectionChance || 0,
+  key: "deflectionChance",
 });
 
 export const dodgeChance = selector({

@@ -695,7 +695,7 @@ Positive status effects that boost or improve the character or monster.
 
 `TODO`
 
-Traits are permanent passive abilities that are unlocked when reaching certain mastery levels or a certain attribute value.
+Traits are permanent passive abilities.
 
 - Brawler: an unequipped shield adds to unarmed damage, using both hands.
 - Bruiser: current stamina adds unarmed bonus damage.

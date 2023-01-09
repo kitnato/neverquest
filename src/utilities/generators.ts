@@ -28,12 +28,14 @@ export function generateArmor({
   name?: string;
   tags?: AffixTag[];
 }): Armor {
-  const { deflectionModifier, penaltyModifier, protectionModifier, weight } =
+  const { deflectionChanceModifier, penaltyModifier, protectionModifier, weight } =
     ARMOR_SPECIFICATIONS[armorClass];
 
   return {
     armorClass,
-    deflection: deflectionModifier ? deflectionModifier * (0.1 + level / 5) : undefined,
+    deflectionChance: deflectionChanceModifier
+      ? deflectionChanceModifier * (0.1 + level / 5)
+      : undefined,
     name:
       name ||
       LOCRA.generateArtifact({

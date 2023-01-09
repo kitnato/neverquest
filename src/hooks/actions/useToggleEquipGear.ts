@@ -35,7 +35,7 @@ export default function () {
         set(isShowing(ShowingType.Protection), true);
       }
 
-      if (!get(isShowing(ShowingType.Deflection)) && possession.deflection) {
+      if (!get(isShowing(ShowingType.Deflection)) && possession.deflectionChance) {
         set(isShowing(ShowingType.Deflection), true);
       }
     }

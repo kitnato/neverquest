@@ -1,18 +1,25 @@
 import { useRecoilCallback } from "recoil";
 
+import { POISON } from "@neverquest/constants";
 import useChangeHealth from "@neverquest/hooks/actions/useChangeHealth";
 import useChangeMonsterHealth from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import useChangeStamina from "@neverquest/hooks/actions/useChangeStamina";
 import useIncreaseMastery from "@neverquest/hooks/actions/useIncreaseMastery";
-import { isRecovering, statusElement } from "@neverquest/state/character";
+import { isRecovering, poisonDuration, statusElement } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { shield, weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { isMonsterStaggered, monsterDamage, monsterStatusElement } from "@neverquest/state/monster";
+import {
+  isMonsterStaggered,
+  monsterDamage,
+  monsterPoisonChance,
+  monsterStatusElement,
+} from "@neverquest/state/monster";
 import { canAttackOrParry, canBlock } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
 import {
   blockChance,
+  deflectionChance,
   dodgeChance,
   freeBlockChance,
   parryAbsorption,
@@ -29,6 +36,7 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 /**
  * If dodged, no other actions taken (all damage negated)
  * If health damage (protection minus monster damage) is 0 or less, no other actions taken
+ * Check for and apply monster poisoning.
  * If parrying occurs, check stamina cost, and continue
  * If not parried and blocking occurs, check stamina cost, and continue
  * If blocking occurs, check if monster is staggered
@@ -77,7 +85,7 @@ export default function () {
       return;
     }
 
-    let deltaHealth: DeltaDisplay | undefined;
+    let deltaHealth: DeltaDisplay = [];
     let deltaStamina: DeltaDisplay | undefined;
 
     const hasParried = get(skills(SkillType.Parry)) && Math.random() <= get(parryChance);
@@ -150,10 +158,12 @@ export default function () {
         const shieldsSkill = get(skills(SkillType.Shields));
         const isFreeBlock = shieldsSkill && Math.random() <= get(freeBlockChance);
 
-        deltaHealth = {
-          color: FloatingText.Neutral,
-          value: "BLOCKED",
-        };
+        deltaHealth = [
+          {
+            color: FloatingText.Neutral,
+            value: "BLOCKED",
+          },
+        ];
 
         if (shieldsSkill) {
           increaseMastery(MasteryType.FreeBlockChance);
@@ -213,6 +223,26 @@ export default function () {
       }
 
       set(isRecovering, true);
+    }
+
+    const isPoisoned = Math.random() <= get(monsterPoisonChance);
+
+    if (isPoisoned) {
+      const hasDeflected = get(skills(SkillType.Armors)) && Math.random() <= get(deflectionChance);
+
+      if (hasDeflected) {
+        deltaHealth.push({
+          color: FloatingText.Positive,
+          value: "DEFLECTED POISON",
+        });
+      } else {
+        set(poisonDuration, POISON.duration);
+
+        deltaHealth.push({
+          color: FloatingText.Negative,
+          value: "POISONED",
+        });
+      }
     }
 
     changeHealth({ delta: deltaHealth, value: healthDamage });

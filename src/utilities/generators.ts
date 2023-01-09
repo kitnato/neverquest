@@ -9,7 +9,7 @@ import {
 } from "@neverquest/locra/types";
 import { Armor, Shield, Weapon } from "@neverquest/types";
 import { ArmorClass, WeaponGrip } from "@neverquest/types/enums";
-import { getFromRange, getWeaponSpecifications } from "@neverquest/utilities/getters";
+import { getFromRange } from "@neverquest/utilities/getters";
 
 export function generateArmor({
   armorClass,
@@ -120,13 +120,13 @@ export function generateWeapon({
   type: WeaponType;
   weaponClass: WeaponClass;
 }): Weapon {
-  // TODO - refactor this to WEAPON_SPECIFICATIONS
-  const { damage, modifier, price, rate, staminaCost, weight } = getWeaponSpecifications(level);
-
+  const abilityChanceModifier = 1 + level / 2;
   const weapon = {
     abilityChance: 0,
-    bleedChance: 0,
-    damage,
+    damage: getFromRange({
+      maximum: level * 8 + Math.ceil(level / 3) * 2,
+      minimum: level * 8,
+    }),
     // TODO
     grip: WeaponGrip.OneHanded,
     name:
@@ -142,25 +142,25 @@ export function generateWeapon({
         },
         tags,
       }),
-    price,
-    rate,
-    staminaCost,
+    price: level * 2 + Math.floor(level / 2),
+    rate: getFromRange({ maximum: 3000, minimum: 2500 }) - Math.floor(level / 2) * 50,
+    staminaCost: level + 2 + Math.floor(level / 3),
     type,
     weaponClass,
-    weight,
+    weight: 1 + Math.floor(level / 4),
   };
 
   switch (weaponClass) {
     case WeaponClass.Blunt: {
-      weapon.abilityChance = modifier * (0.1 + Math.floor((level * 2) / 90));
+      weapon.abilityChance = abilityChanceModifier * (0.1 + Math.floor((level * 2) / 90));
       break;
     }
     case WeaponClass.Piercing: {
-      weapon.abilityChance = modifier * (0.2 + Math.floor((level * 2) / 100));
+      weapon.abilityChance = abilityChanceModifier * (0.2 + Math.floor((level * 2) / 100));
       break;
     }
     case WeaponClass.Slashing: {
-      weapon.abilityChance = modifier * (0.15 + Math.floor((level * 2) / 100));
+      weapon.abilityChance = abilityChanceModifier * (0.15 + Math.floor((level * 2) / 100));
       break;
     }
   }

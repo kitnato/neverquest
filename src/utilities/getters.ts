@@ -116,17 +116,3 @@ export function getSkillTypeFromWeaponClass(type: WeaponClass) {
     }
   }
 }
-
-export function getWeaponSpecifications(level: number) {
-  return {
-    damage: getFromRange({
-      maximum: level * 8 + Math.ceil(level / 3) * 2,
-      minimum: level * 8,
-    }),
-    modifier: 1 + level / 2,
-    price: level * 2 + Math.floor(level / 2),
-    rate: getFromRange({ maximum: 3000, minimum: 2500 }) - Math.floor(level / 2) * 50,
-    staminaCost: level + 2 + Math.floor(level / 3),
-    weight: 1 + Math.floor(level / 4),
-  };
-}

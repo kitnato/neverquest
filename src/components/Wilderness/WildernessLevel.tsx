@@ -15,8 +15,8 @@ export default function () {
   const deltaWildernessLevel = deltas(DeltaType.WildernessLevel);
 
   useDeltaText({
-    deltaAtom: deltaWildernessLevel,
-    valueAtom: level,
+    atomDelta: deltaWildernessLevel,
+    atomValue: level,
   });
 
   return (

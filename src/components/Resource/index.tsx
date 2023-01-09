@@ -8,22 +8,22 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function ({
   atom,
+  atomDelta,
   Component,
-  deltaAtom,
   showAtom,
 }: {
   Component: React.ElementType;
   atom: RecoilState<number>;
-  deltaAtom: RecoilState<DeltaDisplay>;
+  atomDelta: RecoilState<DeltaDisplay>;
   showAtom: RecoilState<boolean>;
 }) {
   const lootValue = useRecoilValue(atom);
   const showValue = useRecoilValue(showAtom);
 
   useDeltaText({
-    deltaAtom,
+    atomDelta,
     // stop: () => false,
-    valueAtom: atom,
+    atomValue: atom,
   });
 
   if (!showValue) {
@@ -38,7 +38,7 @@ export default function ({
     >
       <Component value={lootValue} />
 
-      <FloatingText atom={deltaAtom} />
+      <FloatingText atom={atomDelta} />
     </Stack>
   );
 }

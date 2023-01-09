@@ -14,8 +14,8 @@ export default function () {
   const deltaEssenceAbsorbed = deltas(DeltaType.EssenceAbsorbed);
 
   useDeltaText({
-    deltaAtom: deltaEssenceAbsorbed,
-    valueAtom: essenceAbsorbed,
+    atomDelta: deltaEssenceAbsorbed,
+    atomValue: essenceAbsorbed,
   });
 
   return (

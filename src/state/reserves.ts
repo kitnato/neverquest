@@ -23,14 +23,14 @@ export const isHealthLow = selector({
   key: "isHealthLow",
 });
 
-export const isHealthMaxedOut = selector({
+export const isHealthAtMaximum = selector({
   get: ({ get }) => get(currentHealth) >= get(maximumHealth),
-  key: "isHealthMaxedOut",
+  key: "isHealthAtMaximum",
 });
 
-export const isStaminaMaxedOut = selector({
+export const isStaminaAtMaximum = selector({
   get: ({ get }) => get(currentStamina) >= get(maximumStamina),
-  key: "isStaminaMaxedOut",
+  key: "isStaminaAtMaximum",
 });
 
 export const maximumHealth = selector({

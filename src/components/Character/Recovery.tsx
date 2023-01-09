@@ -17,9 +17,9 @@ export default function () {
   const deltaRecoveryRate = deltas(DeltaType.RecoveryRate);
 
   useDeltaText({
-    deltaAtom: deltaRecoveryRate,
+    atomDelta: deltaRecoveryRate,
+    atomValue: recoveryRate,
     isTime: true,
-    valueAtom: recoveryRate,
   });
 
   if (!isShowingRecovery) {

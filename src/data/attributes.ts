@@ -6,7 +6,7 @@ import { AttributeType, SkillType } from "@neverquest/types/enums";
 export const ATTRIBUTES: Record<AttributeType, AttributeOrMastery> = {
   [AttributeType.AttackRate]: {
     base: 0,
-    description: "Reduces attack rate.",
+    description: "Increases attack rate.",
     Icon,
     increment: 0.05,
     maximum: 0.9,
@@ -33,7 +33,7 @@ export const ATTRIBUTES: Record<AttributeType, AttributeOrMastery> = {
     base: 0,
     description: "Increases base attack damage.",
     Icon,
-    increment: 5,
+    increment: 3,
     name: "Strength",
   },
   [AttributeType.DodgeChance]: {
@@ -49,17 +49,8 @@ export const ATTRIBUTES: Record<AttributeType, AttributeOrMastery> = {
     base: 100,
     description: "Increases maximum health.",
     Icon,
-    increment: 15,
+    increment: 10,
     name: "Vitality",
-  },
-  [AttributeType.HealthRegenerationRate]: {
-    base: 6000,
-    description: "Increases health regeneration rate.",
-    Icon,
-    increment: -200,
-    maximum: 1000,
-    name: "Vigor",
-    requiredSkill: SkillType.Regeneration,
   },
   [AttributeType.Loot]: {
     base: 0,
@@ -70,27 +61,35 @@ export const ATTRIBUTES: Record<AttributeType, AttributeOrMastery> = {
   },
   [AttributeType.RecoveryRate]: {
     base: 1500,
-    description: "Reduces recovery rate.",
+    description: "Increases recovery rate.",
     Icon,
     increment: -150,
     maximum: 100,
     name: "Resilience",
   },
-  [AttributeType.Stamina]: {
-    base: 40,
-    description: "Increases maximum stamina.",
+  [AttributeType.ReserveRegenerationAmount]: {
+    base: 0,
+    description: "Increases health & stamina regeneration amount.",
     Icon,
-    increment: 10,
-    name: "Endurance",
-  },
-  [AttributeType.StaminaRegenerationRate]: {
-    base: 5500,
-    description: "Increases stamina regeneration rate.",
-    Icon,
-    increment: -150,
-    maximum: 500,
+    increment: 1,
     name: "Fortitude",
     requiredSkill: SkillType.Regeneration,
+  },
+
+  [AttributeType.ReserveRegenerationRate]: {
+    base: 0,
+    description: "Increases health & stamina regeneration rate.",
+    Icon,
+    increment: 0.05,
+    name: "Vigor",
+    requiredSkill: SkillType.Regeneration,
+  },
+  [AttributeType.Stamina]: {
+    base: 10,
+    description: "Increases maximum stamina.",
+    Icon,
+    increment: 5,
+    name: "Endurance",
   },
 };
 
@@ -107,8 +106,8 @@ export const ATTRIBUTES_ORDER = [
   AttributeType.Damage,
   AttributeType.AttackRate,
   AttributeType.RecoveryRate,
-  AttributeType.HealthRegenerationRate,
-  AttributeType.StaminaRegenerationRate,
+  AttributeType.ReserveRegenerationRate,
+  AttributeType.ReserveRegenerationAmount,
   AttributeType.CriticalChance,
   AttributeType.CriticalDamage,
   AttributeType.DodgeChance,

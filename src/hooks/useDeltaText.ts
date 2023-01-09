@@ -6,18 +6,18 @@ import { DeltaDisplay, FloatingText } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export default function ({
-  deltaAtom,
+  atomDelta,
+  atomValue,
   isTime = false,
   stop = (previous) => previous === null,
-  valueAtom,
 }: {
-  deltaAtom: RecoilState<DeltaDisplay>;
+  atomDelta: RecoilState<DeltaDisplay>;
+  atomValue: RecoilValueReadOnly<number>;
   isTime?: boolean;
   stop?: (previous: null | number, current: number) => boolean;
-  valueAtom: RecoilValueReadOnly<number>;
 }) {
-  const currentValue = useRecoilValue(valueAtom);
-  const setDeltaValue = useSetRecoilState(deltaAtom);
+  const currentValue = useRecoilValue(atomValue);
+  const setDeltaValue = useSetRecoilState(atomDelta);
 
   const previousValue = usePreviousValue(currentValue);
 

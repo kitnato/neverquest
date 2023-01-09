@@ -19,8 +19,8 @@ export default function () {
   const deltaChanceFreeBlock = deltas(DeltaType.ChanceFreeBlock);
 
   useDeltaText({
-    deltaAtom: deltaChanceFreeBlock,
-    valueAtom: freeBlockChance,
+    atomDelta: deltaChanceFreeBlock,
+    atomValue: freeBlockChance,
   });
 
   if (!shieldsSkill) {

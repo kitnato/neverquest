@@ -1,5 +1,6 @@
 import { selector } from "recoil";
 
+import { REGENERATION_RATE_HEALTH, REGENERATION_RATE_STAMINA } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { WeaponClass } from "@neverquest/locra/types";
@@ -123,12 +124,25 @@ export const freeBlockChance = selector({
   key: "freeBlockChance",
 });
 
+export const healthRegenerationAmount = selector({
+  get: ({ get }) => {
+    const { base, increment } = ATTRIBUTES[AttributeType.ReserveRegenerationAmount];
+    const { points } = get(attributes(AttributeType.ReserveRegenerationAmount));
+
+    return 4 + getComputedStatistic({ amount: points, base, increment });
+  },
+  key: "healthRegenerationAmount",
+});
+
 export const healthRegenerationRate = selector({
   get: ({ get }) => {
-    const { base, increment } = ATTRIBUTES[AttributeType.HealthRegenerationRate];
-    const { points } = get(attributes(AttributeType.HealthRegenerationRate));
+    const { base, increment } = ATTRIBUTES[AttributeType.ReserveRegenerationRate];
+    const { points } = get(attributes(AttributeType.ReserveRegenerationRate));
 
-    return getComputedStatistic({ amount: points, base, increment });
+    return Math.round(
+      REGENERATION_RATE_HEALTH -
+        REGENERATION_RATE_HEALTH * getComputedStatistic({ amount: points, base, increment })
+    );
   },
   key: "healthRegenerationRate",
 });
@@ -191,12 +205,25 @@ export const skipRecoveryChance = selector({
   key: "skipRecoveryChance",
 });
 
+export const staminaRegenerationAmount = selector({
+  get: ({ get }) => {
+    const { base, increment } = ATTRIBUTES[AttributeType.ReserveRegenerationAmount];
+    const { points } = get(attributes(AttributeType.ReserveRegenerationAmount));
+
+    return 2 + getComputedStatistic({ amount: points, base, increment });
+  },
+  key: "staminaRegenerationAmount",
+});
+
 export const staminaRegenerationRate = selector({
   get: ({ get }) => {
-    const { base, increment } = ATTRIBUTES[AttributeType.StaminaRegenerationRate];
-    const { points } = get(attributes(AttributeType.StaminaRegenerationRate));
+    const { base, increment } = ATTRIBUTES[AttributeType.ReserveRegenerationAmount];
+    const { points } = get(attributes(AttributeType.ReserveRegenerationAmount));
 
-    return getComputedStatistic({ amount: points, base, increment });
+    return Math.round(
+      REGENERATION_RATE_STAMINA -
+        REGENERATION_RATE_STAMINA * getComputedStatistic({ amount: points, base, increment })
+    );
   },
   key: "staminaRegenerationRate",
 });

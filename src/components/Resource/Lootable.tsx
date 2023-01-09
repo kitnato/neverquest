@@ -8,21 +8,21 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function ({
   atom,
+  atomDelta,
   Component,
-  deltaAtom,
   tooltip,
 }: {
   Component: React.ElementType;
   atom: RecoilState<number>;
-  deltaAtom: RecoilState<DeltaDisplay>;
+  atomDelta: RecoilState<DeltaDisplay>;
   tooltip: string;
 }) {
   const resourceValue = useRecoilValue(atom);
 
   useDeltaText({
-    deltaAtom,
+    atomDelta,
     // stop: () => false,
-    valueAtom: atom,
+    atomValue: atom,
   });
 
   if (resourceValue === 0) {
@@ -37,7 +37,7 @@ export default function ({
     >
       <Component tooltip={tooltip} value={resourceValue} />
 
-      <FloatingText atom={deltaAtom} />
+      <FloatingText atom={atomDelta} />
     </Stack>
   );
 }

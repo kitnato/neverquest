@@ -19,9 +19,9 @@ export default function () {
   const deltaWildernessProgress = deltas(DeltaType.WildernessProgress);
 
   useDeltaText({
-    deltaAtom: deltaWildernessProgress,
+    atomDelta: deltaWildernessProgress,
+    atomValue: progress,
     stop: (_, current) => current === 0,
-    valueAtom: progress,
   });
 
   if (!isWildernessValue) {

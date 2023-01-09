@@ -14,8 +14,8 @@ export default function () {
   const deltaCharacterLevel = deltas(DeltaType.CharacterLevel);
 
   useDeltaText({
-    deltaAtom: deltaCharacterLevel,
-    valueAtom: characterLevel,
+    atomDelta: deltaCharacterLevel,
+    atomValue: characterLevel,
   });
 
   return (

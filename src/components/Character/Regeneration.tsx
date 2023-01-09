@@ -1,34 +1,21 @@
-import { RecoilState, RecoilValueReadOnly } from "recoil";
-
 import RegenerationMeter from "@neverquest/components/Character/RegenerationMeter";
 import FloatingText from "@neverquest/components/FloatingText";
+import { RESERVES } from "@neverquest/data/reserves";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
-import { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
+import { ReserveType } from "@neverquest/types/enums";
 
-export default function ({
-  atomDeltaRegenerationRate,
-  handleChangeReserve,
-  isReserveMaxedOut,
-  regenerationRate,
-}: {
-  atomDeltaRegenerationRate: RecoilState<DeltaDisplay>;
-  handleChangeReserve: (change: DeltaReserve) => void;
-  isReserveMaxedOut: RecoilValueReadOnly<boolean>;
-  regenerationRate: RecoilValueReadOnly<number>;
-}) {
+export default function ({ type }: { type: ReserveType.Health | ReserveType.Stamina }) {
+  const { atomDeltaRegenerationRate, atomRegenerationRate } = RESERVES[type];
+
   useDeltaText({
-    deltaAtom: atomDeltaRegenerationRate,
+    atomDelta: atomDeltaRegenerationRate,
+    atomValue: atomRegenerationRate,
     isTime: true,
-    valueAtom: regenerationRate,
   });
 
   return (
     <>
-      <RegenerationMeter
-        handleChangeReserve={handleChangeReserve}
-        isReserveMaxedOut={isReserveMaxedOut}
-        regenerationRate={regenerationRate}
-      />
+      <RegenerationMeter type={type} />
 
       <FloatingText atom={atomDeltaRegenerationRate} />
     </>

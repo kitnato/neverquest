@@ -1,45 +1,37 @@
 import { useEffect, useState } from "react";
-import { RecoilValueReadOnly, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
-import { DELTA_RESERVE_REGENERATION } from "@neverquest/constants";
+import { RESERVES } from "@neverquest/data/reserves";
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { isRecovering } from "@neverquest/state/character";
-import { DeltaReserve, UIAttachment, UISize, UIVariant } from "@neverquest/types/ui";
+import { ReserveType } from "@neverquest/types/enums";
+import { UIAttachment, UISize, UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
-export default function ({
-  handleChangeReserve,
-  isReserveMaxedOut,
-  regenerationRate,
-}: {
-  handleChangeReserve: (change: DeltaReserve) => void;
-  isReserveMaxedOut: RecoilValueReadOnly<boolean>;
-  regenerationRate: RecoilValueReadOnly<number>;
-}) {
+export default function ({ type }: { type: ReserveType.Health | ReserveType.Stamina }) {
+  const { atomIsAtMaximum, atomRegenerationAmount, atomRegenerationRate, useActionChange } =
+    RESERVES[type];
+
+  const isReserveAtMaximum = useRecoilValue(atomIsAtMaximum);
+  const regenerationAmountValue = useRecoilValue(atomRegenerationAmount);
+  const regenerationRateValue = useRecoilValue(atomRegenerationRate);
   const isRecoveringValue = useRecoilValue(isRecovering);
-  const isReserveMaxedOutValue = useRecoilValue(isReserveMaxedOut);
-  const regenerationRateValue = useRecoilValue(regenerationRate);
 
   const [deltaRegeneration, setDeltaRegeneration] = useState(0);
 
-  useAnimation((delta) => {
-    setDeltaRegeneration((current) => current + delta);
-  }, isReserveMaxedOutValue || isRecoveringValue);
+  const changeReserve = useActionChange();
 
   useEffect(() => {
     if (deltaRegeneration >= regenerationRateValue) {
       setDeltaRegeneration(0);
-      handleChangeReserve({ value: DELTA_RESERVE_REGENERATION });
+      changeReserve({ value: regenerationAmountValue });
     }
-  }, [handleChangeReserve, deltaRegeneration, regenerationRateValue]);
+  }, [deltaRegeneration, regenerationRateValue, regenerationAmountValue, changeReserve]);
 
-  // Catches any leftover increments after regeneration is complete.
-  useEffect(() => {
-    if (deltaRegeneration > 0 && isReserveMaxedOutValue) {
-      setDeltaRegeneration(0);
-    }
-  }, [deltaRegeneration, isReserveMaxedOutValue]);
+  useAnimation((delta) => {
+    setDeltaRegeneration((current) => current + delta);
+  }, isReserveAtMaximum || isRecoveringValue);
 
   const label = (() => {
     if (isRecoveringValue) {

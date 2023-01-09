@@ -18,8 +18,8 @@ export default function () {
   const deltaDeflection = deltas(DeltaType.Deflection);
 
   useDeltaText({
-    deltaAtom: deltaDeflection,
-    valueAtom: deflection,
+    atomDelta: deltaDeflection,
+    atomValue: deflection,
   });
 
   if (!isShowingDeflection) {

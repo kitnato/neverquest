@@ -1,17 +1,13 @@
-import { RecoilValueReadOnly, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
+import { RESERVES } from "@neverquest/data/reserves";
+import { ReserveType } from "@neverquest/types/enums";
 import { UIAttachment, UIVariant } from "@neverquest/types/ui";
 
-export default function ({
-  atom,
-  atomMaximum,
-  attached,
-}: {
-  atom: RecoilValueReadOnly<number>;
-  atomMaximum: RecoilValueReadOnly<number>;
-  attached?: UIAttachment;
-}) {
+export default function ({ attached, type }: { attached?: UIAttachment; type: ReserveType }) {
+  const { atom, atomMaximum } = RESERVES[type];
+
   const atomValue = useRecoilValue(atom);
   const atomMaximumValue = useRecoilValue(atomMaximum);
 

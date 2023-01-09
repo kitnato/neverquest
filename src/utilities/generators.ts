@@ -95,7 +95,7 @@ export function generateShield({
       }),
     price: level * 2 + Math.ceil(level / 1.5),
     staggerChance: (0.1 + Math.floor((level * 2) / 100)) * staggerModifier,
-    staminaCost: (level + 8) * staminaCostModifier,
+    staminaCost: Math.round((level + 2) * staminaCostModifier),
     type,
     weight,
   };

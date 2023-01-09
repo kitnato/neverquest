@@ -19,8 +19,8 @@ export default function () {
   const deltaChanceSkipRecovery = deltas(DeltaType.ChanceSkipRecovery);
 
   useDeltaText({
-    deltaAtom: deltaChanceSkipRecovery,
-    valueAtom: skipRecoveryChance,
+    atomDelta: deltaChanceSkipRecovery,
+    atomValue: skipRecoveryChance,
   });
 
   if (!armorsSkill) {

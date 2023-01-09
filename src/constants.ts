@@ -1,4 +1,4 @@
-import { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
+import { DeltaDisplay } from "@neverquest/types/ui";
 
 export const BLEED = {
   duration: 3000,
@@ -18,13 +18,6 @@ export const DEFAULT_DELTA_DISPLAY: DeltaDisplay = {
   value: "",
 };
 
-export const DEFAULT_RESERVE_CHANGE: DeltaReserve = {
-  value: 0,
-};
-
-// TODO - replace with Vigor & Fortitude repurposing.
-export const DELTA_RESERVE_REGENERATION = 4;
-
 export const EXCHANGE_COINS = 1;
 
 export const EXCHANGE_SCRAP = 3;
@@ -43,9 +36,13 @@ export const LABEL_UNKNOWN = "???";
 
 export const POISON = {
   chanceBase: 0.05,
-  chanceIncrement: 0.02,
+  chanceIncrement: 0.01,
   damage: 0.33,
   duration: 5000,
   minimumLevel: 11,
   ticks: 10,
 };
+
+export const REGENERATION_RATE_HEALTH = 6000;
+
+export const REGENERATION_RATE_STAMINA = 5000;

@@ -5,15 +5,14 @@ import IconDisplay from "@neverquest/components/IconDisplay";
 import ReserveMeter from "@neverquest/components/ReserveMeter";
 import { ReactComponent as Icon } from "@neverquest/icons/hospital-cross.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { monsterCurrentHealth, monsterMaximumHealth } from "@neverquest/state/monster";
-import { DeltaType } from "@neverquest/types/enums";
+import { DeltaType, ReserveType } from "@neverquest/types/enums";
 
 export default function () {
   return (
     <IconDisplay
       contents={
         <Stack className="w-100" direction="horizontal">
-          <ReserveMeter atom={monsterCurrentHealth} atomMaximum={monsterMaximumHealth} />
+          <ReserveMeter type={ReserveType.MonsterHealth} />
 
           <FloatingText atom={deltas(DeltaType.HealthMonster)} />
         </Stack>

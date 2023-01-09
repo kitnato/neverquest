@@ -11,11 +11,11 @@ export enum AttributeType {
   Damage,
   DodgeChance,
   Health,
-  HealthRegenerationRate,
   Loot,
   RecoveryRate,
+  ReserveRegenerationAmount,
+  ReserveRegenerationRate,
   Stamina,
-  StaminaRegenerationRate,
 }
 
 export enum CrewStatus {
@@ -101,6 +101,13 @@ export enum ShowingType {
   Stamina,
   Weapon,
   WildernessStatus,
+}
+
+export enum ReserveType {
+  Encumbrance,
+  Health,
+  MonsterHealth,
+  Stamina,
 }
 
 export enum SkillType {

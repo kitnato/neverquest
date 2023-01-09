@@ -17,8 +17,8 @@ export default function () {
   const deltaProtection = deltas(DeltaType.Protection);
 
   useDeltaText({
-    deltaAtom: deltaProtection,
-    valueAtom: protection,
+    atomDelta: deltaProtection,
+    atomValue: protection,
   });
 
   if (!isShowingProtection) {

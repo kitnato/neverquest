@@ -30,9 +30,9 @@ export default function () {
   const deltaAttackRate = deltas(DeltaType.AttackRate);
 
   useDeltaText({
-    deltaAtom: deltaAttackRate,
+    atomDelta: deltaAttackRate,
+    atomValue: attackRate,
     isTime: true,
-    valueAtom: attackRate,
   });
 
   useEffect(() => {

@@ -28,8 +28,8 @@ export default function () {
   const deltaDamage = deltas(DeltaType.Damage);
 
   useDeltaText({
-    deltaAtom: deltaDamage,
-    valueAtom: damage,
+    atomDelta: deltaDamage,
+    atomValue: damage,
   });
 
   const damageDisplay = <span>{damageValue}</span>;

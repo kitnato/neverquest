@@ -33,16 +33,26 @@ export enum CrewType {
   Tailor,
 }
 
+export enum DeltaTextType {
+  Number,
+  Percentage,
+  Time,
+}
+
 export enum DeltaType {
   AttackRate,
+  BleedRating,
+  BlockChance,
   ChanceFreeBlock,
   ChanceSkipRecovery,
   CharacterLevel,
   Coins,
   CoinsLoot,
+  CriticalRating,
   Damage,
   DamagePerSecond,
   Deflection,
+  DodgeChance,
   Essence,
   EssenceAbsorbed,
   EssenceLoot,
@@ -52,10 +62,12 @@ export enum DeltaType {
   MasteryBleed,
   MasteryParry,
   MasteryStagger,
+  ParryChance,
   Protection,
   RecoveryRate,
   Scrap,
   ScrapLoot,
+  StaggerRating,
   Stamina,
   StaminaRegenerationRate,
   WildernessLevel,

@@ -29,7 +29,12 @@ import {
   skipRecoveryChance,
 } from "@neverquest/state/statistics";
 import { DeltaType, MasteryType, ShowingType, SkillType } from "@neverquest/types/enums";
-import { AnimationSpeed, AnimationType, DeltaDisplay, FloatingText } from "@neverquest/types/ui";
+import {
+  AnimationSpeed,
+  AnimationType,
+  DeltaDisplay,
+  FloatingTextVariant,
+} from "@neverquest/types/ui";
 import animateElement from "@neverquest/utilities/animateElement";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -62,7 +67,7 @@ export default function () {
 
     if (hasDodged) {
       set(deltas(DeltaType.Health), {
-        color: FloatingText.Neutral,
+        color: FloatingTextVariant.Neutral,
         value: "DODGED",
       });
 
@@ -78,7 +83,7 @@ export default function () {
 
     if (healthDamage === 0) {
       set(deltas(DeltaType.Health), {
-        color: FloatingText.Neutral,
+        color: FloatingTextVariant.Neutral,
         value: healthDamage,
       });
 
@@ -101,11 +106,11 @@ export default function () {
         changeMonsterHealth({
           delta: [
             {
-              color: FloatingText.Neutral,
+              color: FloatingTextVariant.Neutral,
               value: "PARRIED",
             },
             {
-              color: FloatingText.Negative,
+              color: FloatingTextVariant.Negative,
               value: ` (${parryReflected})`,
             },
           ],
@@ -114,11 +119,11 @@ export default function () {
 
         deltaHealth = [
           {
-            color: FloatingText.Neutral,
+            color: FloatingTextVariant.Neutral,
             value: "PARRIED",
           },
           {
-            color: FloatingText.Negative,
+            color: FloatingTextVariant.Negative,
             value: ` (${healthDamage})`,
           },
         ];
@@ -134,11 +139,11 @@ export default function () {
       } else {
         deltaStamina = [
           {
-            color: FloatingText.Neutral,
+            color: FloatingTextVariant.Neutral,
             value: "CANNOT PARRY",
           },
           {
-            color: FloatingText.Negative,
+            color: FloatingTextVariant.Negative,
             value: ` (${staminaCost})`,
           },
         ];
@@ -160,7 +165,7 @@ export default function () {
 
         deltaHealth = [
           {
-            color: FloatingText.Neutral,
+            color: FloatingTextVariant.Neutral,
             value: "BLOCKED",
           },
         ];
@@ -171,7 +176,7 @@ export default function () {
 
         if (isFreeBlock) {
           deltaStamina = {
-            color: FloatingText.Neutral,
+            color: FloatingTextVariant.Neutral,
             value: "STABILIZED",
           };
         } else {
@@ -184,11 +189,11 @@ export default function () {
       } else {
         deltaStamina = [
           {
-            color: FloatingText.Neutral,
+            color: FloatingTextVariant.Neutral,
             value: "CANNOT BLOCK",
           },
           {
-            color: FloatingText.Negative,
+            color: FloatingTextVariant.Negative,
             value: ` (${staminaCost})`,
           },
         ];
@@ -199,11 +204,11 @@ export default function () {
       if (get(protection) > 0) {
         deltaHealth = [
           {
-            color: FloatingText.Negative,
+            color: FloatingTextVariant.Negative,
             value: healthDamage,
           },
           {
-            color: FloatingText.Neutral,
+            color: FloatingTextVariant.Neutral,
             value: ` (${get(protection)})`,
           },
         ];
@@ -232,14 +237,14 @@ export default function () {
 
       if (hasDeflected) {
         deltaHealth.push({
-          color: FloatingText.Positive,
+          color: FloatingTextVariant.Positive,
           value: "DEFLECTED POISON",
         });
       } else {
         set(poisonDuration, POISON.duration);
 
         deltaHealth.push({
-          color: FloatingText.Negative,
+          color: FloatingTextVariant.Negative,
           value: "POISONED",
         });
       }

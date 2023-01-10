@@ -13,16 +13,12 @@ export default function () {
   const monsterDamageValue = useRecoilValue(monsterDamage);
 
   const { damage, duration, ticks } = POISON;
-  const poisonPerTick = Math.round(
-    getDamagePerTick({
-      damage: monsterDamageValue,
-      duration,
-      proportion: damage,
-      ticks,
-    }) *
-      monsterPoisonChanceValue *
-      100
-  );
+  const poisonPerTick = getDamagePerTick({
+    damage: monsterDamageValue,
+    duration,
+    proportion: damage,
+    ticks,
+  });
 
   if (!monsterPoisonChanceValue) {
     return null;
@@ -65,7 +61,7 @@ export default function () {
           }
           placement="top"
         >
-          <span>{poisonPerTick}</span>
+          <span>{Math.round(poisonPerTick * monsterPoisonChanceValue * 100)}</span>
         </OverlayTrigger>
       }
       Icon={Icon}

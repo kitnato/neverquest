@@ -2,7 +2,7 @@ import RegenerationMeter from "@neverquest/components/Character/RegenerationMete
 import FloatingText from "@neverquest/components/FloatingText";
 import { RESERVES } from "@neverquest/data/reserves";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
-import { ReserveType } from "@neverquest/types/enums";
+import { DeltaTextType, ReserveType } from "@neverquest/types/enums";
 
 export default function ({ type }: { type: ReserveType.Health | ReserveType.Stamina }) {
   const { atomDeltaRegenerationRate, atomRegenerationRate } = RESERVES[type];
@@ -10,7 +10,7 @@ export default function ({ type }: { type: ReserveType.Health | ReserveType.Stam
   useDeltaText({
     atomDelta: atomDeltaRegenerationRate,
     atomValue: atomRegenerationRate,
-    isTime: true,
+    type: DeltaTextType.Time,
   });
 
   return (

@@ -1,6 +1,6 @@
 import { selector } from "recoil";
 
-import { REGENERATION_RATE_HEALTH, REGENERATION_RATE_STAMINA } from "@neverquest/constants";
+import { BLEED, REGENERATION_RATE_HEALTH, REGENERATION_RATE_STAMINA } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { WeaponClass } from "@neverquest/locra/types";
@@ -8,7 +8,11 @@ import { attributes } from "@neverquest/state/attributes";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { masteries } from "@neverquest/state/masteries";
 import { AttributeType, MasteryType } from "@neverquest/types/enums";
-import { getComputedStatistic, getDamagePerRate } from "@neverquest/utilities/getters";
+import {
+  getComputedStatistic,
+  getDamagePerRate,
+  getDamagePerTick,
+} from "@neverquest/utilities/getters";
 
 // SELECTORS
 
@@ -49,6 +53,25 @@ export const bleedDamage = selector({
   key: "bleedDamage",
 });
 
+export const bleedRating = selector({
+  get: ({ get }) => Math.round(get(bleedTick) * get(bleedChance) * 100),
+  key: "bleedRating",
+});
+
+export const bleedTick = selector({
+  get: ({ get }) => {
+    const { duration, ticks } = BLEED;
+
+    return getDamagePerTick({
+      damage: get(damage),
+      duration,
+      proportion: get(bleedDamage),
+      ticks,
+    });
+  },
+  key: "bleedTick",
+});
+
 export const blockChance = selector({
   get: ({ get }) => get(shield).blockChance,
   key: "blockChance",
@@ -72,6 +95,11 @@ export const criticalDamage = selector({
     return getComputedStatistic({ amount: points, base, increment });
   },
   key: "criticalDamage",
+});
+
+export const criticalRating = selector({
+  get: ({ get }) => Math.round(get(criticalChance) * get(criticalDamage) * 100),
+  key: "criticalRating",
 });
 
 export const damage = selector({
@@ -204,6 +232,37 @@ export const skipRecoveryChance = selector({
   key: "skipRecoveryChance",
 });
 
+export const staggerChanceWeapon = selector({
+  get: ({ get }) => {
+    const { abilityChance, weaponClass } = get(weapon);
+
+    return weaponClass === WeaponClass.Blunt ? abilityChance : 0;
+  },
+  key: "staggerChanceWeapon",
+});
+
+export const staggerDuration = selector({
+  get: ({ get }) => {
+    const { base, increment } = MASTERIES[MasteryType.StaggerDuration];
+    const { rank } = get(masteries(MasteryType.StaggerDuration));
+
+    return getComputedStatistic({ amount: rank, base, increment });
+  },
+  key: "staggerDuration",
+});
+
+export const staggerRating = selector({
+  get: ({ get }) => {
+    const staggerDurationValue = get(staggerDuration);
+
+    return Math.round(
+      get(shield).staggerChance * staggerDurationValue +
+        get(staggerChanceWeapon) * staggerDurationValue
+    );
+  },
+  key: "staggerRating",
+});
+
 export const staminaRegenerationAmount = selector({
   get: ({ get }) => {
     const { base, increment } = ATTRIBUTES[AttributeType.ReserveRegenerationAmount];
@@ -225,14 +284,4 @@ export const staminaRegenerationRate = selector({
     );
   },
   key: "staminaRegenerationRate",
-});
-
-export const staggerDuration = selector({
-  get: ({ get }) => {
-    const { base, increment } = MASTERIES[MasteryType.StaggerDuration];
-    const { rank } = get(masteries(MasteryType.StaggerDuration));
-
-    return getComputedStatistic({ amount: rank, base, increment });
-  },
-  key: "staggerDuration",
 });

@@ -16,7 +16,12 @@ import { canAttackOrParry } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
 import { bleedChance, criticalChance, criticalDamage, damage } from "@neverquest/state/statistics";
 import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
-import { AnimationSpeed, AnimationType, DeltaDisplay, FloatingText } from "@neverquest/types/ui";
+import {
+  AnimationSpeed,
+  AnimationType,
+  DeltaDisplay,
+  FloatingTextVariant,
+} from "@neverquest/types/ui";
 import animateElement from "@neverquest/utilities/animateElement";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -50,7 +55,7 @@ export default function () {
             : baseDamage;
           const monsterDeltas: DeltaDisplay = [
             {
-              color: FloatingText.Negative,
+              color: FloatingTextVariant.Negative,
               value: totalDamage,
             },
           ];
@@ -61,7 +66,7 @@ export default function () {
 
           if (hasInflictedCritical) {
             monsterDeltas.push({
-              color: FloatingText.Neutral,
+              color: FloatingTextVariant.Neutral,
               value: "CRITICAL",
             });
           }
@@ -71,7 +76,7 @@ export default function () {
             increaseMastery(MasteryType.BleedDamage);
 
             monsterDeltas.push({
-              color: FloatingText.Neutral,
+              color: FloatingTextVariant.Neutral,
               value: "BLEED",
             });
           }
@@ -81,7 +86,7 @@ export default function () {
             increaseMastery(MasteryType.StaggerDuration);
 
             monsterDeltas.push({
-              color: FloatingText.Neutral,
+              color: FloatingTextVariant.Neutral,
               value: "STAGGER",
             });
           }
@@ -96,11 +101,11 @@ export default function () {
         } else {
           set(deltas(DeltaType.Stamina), [
             {
-              color: FloatingText.Neutral,
+              color: FloatingTextVariant.Neutral,
               value: "CANNOT ATTACK",
             },
             {
-              color: FloatingText.Negative,
+              color: FloatingTextVariant.Negative,
               value: ` (${staminaCost})`,
             },
           ]);

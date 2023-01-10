@@ -1,16 +1,26 @@
 import { useRecoilValue } from "recoil";
 
+import FloatingText from "@neverquest/components/FloatingText";
 import IconDisplay from "@neverquest/components/IconDisplay";
+import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/slashed-shield.svg";
-import { shield } from "@neverquest/state/inventory";
+import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
-import { ShowingType } from "@neverquest/types/enums";
+import { blockChance } from "@neverquest/state/statistics";
+import { DeltaType, ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export default function () {
   const isShowingBlockChance = useRecoilValue(isShowing(ShowingType.BlockChance));
-  const { blockChance } = useRecoilValue(shield);
+  const blockChanceValue = useRecoilValue(blockChance);
+
+  const deltaBlockChance = deltas(DeltaType.BlockChance);
+
+  useDeltaText({
+    atomDelta: deltaBlockChance,
+    atomValue: blockChance,
+  });
 
   if (!isShowingBlockChance) {
     return null;
@@ -19,7 +29,13 @@ export default function () {
   return (
     <IconDisplay
       animation={AnimationType.FlipInX}
-      contents={formatPercentage(blockChance)}
+      contents={
+        <>
+          <span>{formatPercentage(blockChanceValue)}</span>
+
+          <FloatingText atom={deltaBlockChance} />
+        </>
+      }
       Icon={Icon}
       tooltip="Block chance"
     />

@@ -17,7 +17,7 @@ export enum AnimationType {
 export type DeltaDisplay = DeltaDisplayContents | DeltaDisplayContents[];
 
 interface DeltaDisplayContents {
-  color: FloatingText | null;
+  color: FloatingTextVariant | null;
   value: number | string;
 }
 
@@ -26,7 +26,7 @@ export interface DeltaReserve {
   value: number;
 }
 
-export enum FloatingText {
+export enum FloatingTextVariant {
   Negative = "text-danger",
   Neutral = "text-muted",
   Positive = "text-success",
@@ -47,7 +47,6 @@ export enum UISize {
   Tiny,
 }
 
-// Using Bootstrap 5 variants.
 export enum UIVariant {
   Outline = "outline-dark",
   Primary = "dark",

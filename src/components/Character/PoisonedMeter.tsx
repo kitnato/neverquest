@@ -7,7 +7,7 @@ import useChangeHealth from "@neverquest/hooks/actions/useChangeHealth";
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { poisonDuration } from "@neverquest/state/character";
 import { monsterDamage } from "@neverquest/state/monster";
-import { FloatingText, UIVariant } from "@neverquest/types/ui";
+import { FloatingTextVariant, UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 import { getDamagePerTick } from "@neverquest/utilities/getters";
 
@@ -21,7 +21,7 @@ export default function () {
 
   const { damage, duration, ticks } = POISON;
   const poisonDelta = duration / ticks;
-  const poisonDamage = getDamagePerTick({
+  const poisonPerTick = getDamagePerTick({
     damage: monsterDamageValue,
     duration,
     proportion: damage,
@@ -38,21 +38,21 @@ export default function () {
     if (deltaPoisoned >= poisonDelta) {
       changeHealth({
         delta: {
-          color: FloatingText.Negative,
-          value: `POISONED (-${poisonDamage})`,
+          color: FloatingTextVariant.Negative,
+          value: `POISONED (-${poisonPerTick})`,
         },
-        value: -poisonDamage,
+        value: -poisonPerTick,
       });
       setDeltaPoisoned(0);
     }
-  }, [changeHealth, deltaPoisoned, poisonDamage, poisonDelta]);
+  }, [changeHealth, deltaPoisoned, poisonDelta, poisonPerTick]);
 
   useEffect(() => {
     if (hasPoisonEnded) {
       setPoisonDuration(0);
       setDeltaPoisoned(0);
     }
-  }, [setPoisonDuration, hasPoisonEnded]);
+  }, [hasPoisonEnded, setPoisonDuration]);
 
   return (
     <LabelledProgressBar

@@ -7,7 +7,7 @@ import useChangeMonsterHealth from "@neverquest/hooks/actions/useChangeMonsterHe
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { monsterBleedingDuration } from "@neverquest/state/monster";
 import { bleedDamage, damage } from "@neverquest/state/statistics";
-import { FloatingText, UIVariant } from "@neverquest/types/ui";
+import { FloatingTextVariant, UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 import { getDamagePerTick } from "@neverquest/utilities/getters";
 
@@ -40,7 +40,7 @@ export default function () {
     if (deltaBleeding >= bleedingDelta) {
       changeMonsterHealth({
         delta: {
-          color: FloatingText.Negative,
+          color: FloatingTextVariant.Negative,
           value: `BLEEDING (-${bleedingDamage})`,
         },
         value: -bleedingDamage,

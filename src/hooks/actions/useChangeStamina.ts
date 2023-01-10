@@ -3,7 +3,7 @@ import { useRecoilCallback } from "recoil";
 import { deltas } from "@neverquest/state/deltas";
 import { currentStamina, maximumStamina } from "@neverquest/state/reserves";
 import { DeltaType } from "@neverquest/types/enums";
-import { DeltaReserve, FloatingText } from "@neverquest/types/ui";
+import { DeltaReserve, FloatingTextVariant } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
@@ -16,10 +16,10 @@ export default function () {
     set(deltas(DeltaType.Stamina), {
       color:
         value > 0
-          ? FloatingText.Positive
+          ? FloatingTextVariant.Positive
           : value < 0
-          ? FloatingText.Negative
-          : FloatingText.Neutral,
+          ? FloatingTextVariant.Negative
+          : FloatingTextVariant.Neutral,
       value: value > 0 ? `+${value}` : value,
     });
 

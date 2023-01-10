@@ -9,7 +9,7 @@ import { ReactComponent as Icon } from "@neverquest/icons/knockout.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { recoveryRate } from "@neverquest/state/statistics";
-import { DeltaType, ShowingType } from "@neverquest/types/enums";
+import { DeltaTextType, DeltaType, ShowingType } from "@neverquest/types/enums";
 
 export default function () {
   const isShowingRecovery = useRecoilValue(isShowing(ShowingType.Recovery));
@@ -19,7 +19,7 @@ export default function () {
   useDeltaText({
     atomDelta: deltaRecoveryRate,
     atomValue: recoveryRate,
-    isTime: true,
+    type: DeltaTextType.Time,
   });
 
   if (!isShowingRecovery) {

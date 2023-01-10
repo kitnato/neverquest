@@ -3,7 +3,7 @@ import { useRecoilCallback } from "recoil";
 import { deltas } from "@neverquest/state/deltas";
 import { monsterCurrentHealth, monsterMaximumHealth } from "@neverquest/state/monster";
 import { DeltaType } from "@neverquest/types/enums";
-import { FloatingText } from "@neverquest/types/ui";
+import { FloatingTextVariant } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
@@ -15,7 +15,7 @@ export default function () {
 
     if (difference > 0) {
       set(deltas(DeltaType.HealthMonster), {
-        color: FloatingText.Positive,
+        color: FloatingTextVariant.Positive,
         value: `HEAL +${difference}`,
       });
     }

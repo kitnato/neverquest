@@ -5,7 +5,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { currentHealth, maximumHealth } from "@neverquest/state/reserves";
 import { isGameOver } from "@neverquest/state/settings";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
-import { DeltaReserve, FloatingText } from "@neverquest/types/ui";
+import { DeltaReserve, FloatingTextVariant } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
@@ -23,7 +23,7 @@ export default function () {
       delta && Array.isArray(delta) && delta.length
         ? delta
         : {
-            color: isPositive ? FloatingText.Positive : FloatingText.Negative,
+            color: isPositive ? FloatingTextVariant.Positive : FloatingTextVariant.Negative,
             value: isPositive ? `+${value}` : value,
           }
     );

@@ -2,27 +2,30 @@ import { useEffect } from "react";
 import { RecoilState, RecoilValueReadOnly, useRecoilValue, useSetRecoilState } from "recoil";
 
 import usePreviousValue from "@neverquest/hooks/usePreviousValue";
-import { DeltaDisplay, FloatingText } from "@neverquest/types/ui";
-import { formatMilliseconds } from "@neverquest/utilities/formatters";
+import { DeltaTextType } from "@neverquest/types/enums";
+import { DeltaDisplay, FloatingTextVariant } from "@neverquest/types/ui";
+import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export default function ({
   atomDelta,
   atomValue,
-  isTime = false,
   stop = (previous) => previous === null,
+  type = DeltaTextType.Number,
 }: {
   atomDelta: RecoilState<DeltaDisplay>;
   atomValue: RecoilValueReadOnly<number>;
-  isTime?: boolean;
   stop?: (previous: null | number, current: number) => boolean;
+  type?: DeltaTextType;
 }) {
   const currentValue = useRecoilValue(atomValue);
   const setDeltaValue = useSetRecoilState(atomDelta);
 
   const previousValue = usePreviousValue(currentValue);
 
-  const negativeColor = isTime ? FloatingText.Positive : FloatingText.Negative;
-  const positiveColor = isTime ? FloatingText.Negative : FloatingText.Positive;
+  const isPercentage = type === DeltaTextType.Percentage;
+  const isTime = type === DeltaTextType.Time;
+  const negativeColor = isTime ? FloatingTextVariant.Positive : FloatingTextVariant.Negative;
+  const positiveColor = isTime ? FloatingTextVariant.Negative : FloatingTextVariant.Positive;
 
   useEffect(() => {
     if (stop(previousValue, currentValue)) {
@@ -40,8 +43,21 @@ export default function ({
     setDeltaValue({
       color: isPositive ? positiveColor : negativeColor,
       value: `${isPositive ? "+" : isTime ? "-" : ""}${
-        isTime ? formatMilliseconds(Math.abs(difference)) : difference
+        isTime
+          ? formatMilliseconds(Math.abs(difference))
+          : isPercentage
+          ? formatPercentage(difference)
+          : difference
       }`,
     });
-  }, [currentValue, isTime, negativeColor, positiveColor, previousValue, setDeltaValue, stop]);
+  }, [
+    currentValue,
+    isPercentage,
+    isTime,
+    negativeColor,
+    positiveColor,
+    previousValue,
+    setDeltaValue,
+    stop,
+  ]);
 }

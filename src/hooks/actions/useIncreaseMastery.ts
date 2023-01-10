@@ -3,7 +3,7 @@ import { useRecoilCallback } from "recoil";
 import { deltas } from "@neverquest/state/deltas";
 import { isMasteryAtMaximum, masteries, masteryCost } from "@neverquest/state/masteries";
 import { MasteryType } from "@neverquest/types/enums";
-import { FloatingText } from "@neverquest/types/ui";
+import { FloatingTextVariant } from "@neverquest/types/ui";
 import { getDeltaTypeFromMasteryType, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
@@ -27,7 +27,7 @@ export default function () {
       }));
 
       set(deltas(deltaType), {
-        color: FloatingText.Positive,
+        color: FloatingTextVariant.Positive,
         value: "+1",
       });
     } else {
@@ -37,7 +37,7 @@ export default function () {
       }));
 
       set(deltas(deltaType), {
-        color: FloatingText.Positive,
+        color: FloatingTextVariant.Positive,
         value: "RANK UP",
       });
     }

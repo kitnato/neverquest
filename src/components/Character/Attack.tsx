@@ -15,7 +15,7 @@ import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { attackRate } from "@neverquest/state/statistics";
-import { AttributeType, DeltaType, ShowingType } from "@neverquest/types/enums";
+import { AttributeType, DeltaTextType, DeltaType, ShowingType } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 import { getComputedStatistic } from "@neverquest/utilities/getters";
 
@@ -32,7 +32,7 @@ export default function () {
   useDeltaText({
     atomDelta: deltaAttackRate,
     atomValue: attackRate,
-    isTime: true,
+    type: DeltaTextType.Time,
   });
 
   useEffect(() => {

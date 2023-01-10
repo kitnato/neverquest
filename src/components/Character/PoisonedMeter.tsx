@@ -27,12 +27,12 @@ export default function () {
     proportion: damage,
     ticks,
   });
-  const stoppedPoisoning = poisonDurationValue <= 0;
+  const hasPoisonEnded = poisonDurationValue <= 0;
 
   useAnimation((delta) => {
     setPoisonDuration((current) => current - delta);
     setDeltaPoisoned((current) => current + delta);
-  }, stoppedPoisoning);
+  }, hasPoisonEnded);
 
   useEffect(() => {
     if (deltaPoisoned >= poisonDelta) {
@@ -48,11 +48,11 @@ export default function () {
   }, [changeHealth, deltaPoisoned, poisonDamage, poisonDelta]);
 
   useEffect(() => {
-    if (stoppedPoisoning) {
+    if (hasPoisonEnded) {
       setPoisonDuration(0);
       setDeltaPoisoned(0);
     }
-  }, [setPoisonDuration, stoppedPoisoning]);
+  }, [setPoisonDuration, hasPoisonEnded]);
 
   return (
     <LabelledProgressBar

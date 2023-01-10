@@ -225,7 +225,7 @@ export default function () {
       set(isRecovering, true);
     }
 
-    const isPoisoned = Math.random() <= get(monsterPoisonChance);
+    const isPoisoned = get(poisonDuration) == 0 && Math.random() <= get(monsterPoisonChance);
 
     if (isPoisoned) {
       const hasDeflected = get(skills(SkillType.Armors)) && Math.random() <= get(deflectionChance);

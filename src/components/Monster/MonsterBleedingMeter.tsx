@@ -31,11 +31,6 @@ export default function () {
   });
   const hasBleedingStopped = monsterBleedingDurationValue <= 0;
 
-  useAnimation((delta) => {
-    setMonsterBleedingDuration((current) => current - delta);
-    setDeltaBleeding((current) => current + delta);
-  }, hasBleedingStopped);
-
   useEffect(() => {
     if (deltaBleeding >= bleedingDelta) {
       changeMonsterHealth({
@@ -55,6 +50,11 @@ export default function () {
       setDeltaBleeding(0);
     }
   }, [setMonsterBleedingDuration, hasBleedingStopped]);
+
+  useAnimation((delta) => {
+    setMonsterBleedingDuration((current) => current - delta);
+    setDeltaBleeding((current) => current + delta);
+  }, hasBleedingStopped);
 
   return (
     <LabelledProgressBar

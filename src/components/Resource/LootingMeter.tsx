@@ -1,37 +1,37 @@
-import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import useDropLoot from "@neverquest/hooks/actions/useDropLoot";
 import useAnimation from "@neverquest/hooks/useAnimation";
-import { isLooting, lootingRate } from "@neverquest/state/character";
+import { isLooting, lootingDuration, lootingRate } from "@neverquest/state/character";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export default function () {
+  const [lootingDurationValue, setLootingDuration] = useRecoilState(lootingDuration);
   const isLootingValue = useRecoilValue(isLooting);
   const lootingRateValue = useRecoilValue(lootingRate);
 
-  const [deltaLooting, setDeltaLooting] = useState(0);
-
   const dropLoot = useDropLoot();
 
-  useAnimation((delta) => {
-    setDeltaLooting((current) => current + delta);
-  }, !isLootingValue);
+  const lootingProgress = lootingRateValue - lootingDurationValue;
 
-  useEffect(() => {
-    if (deltaLooting >= lootingRateValue) {
-      setDeltaLooting(0);
+  useAnimation((delta) => {
+    let newDelta = lootingDurationValue - delta;
+
+    if (newDelta <= 0) {
+      newDelta = 0;
       dropLoot();
     }
-  }, [deltaLooting, dropLoot, lootingRateValue]);
+
+    setLootingDuration(newDelta);
+  }, !isLootingValue);
 
   return (
     <LabelledProgressBar
       disableTransitions
-      label={formatMilliseconds(lootingRateValue - deltaLooting)}
-      value={(deltaLooting / lootingRateValue) * 100}
+      label={formatMilliseconds(lootingProgress)}
+      value={(lootingProgress / lootingRateValue) * 100}
       variant={UIVariant.Secondary}
     />
   );

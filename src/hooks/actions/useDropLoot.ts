@@ -1,14 +1,11 @@
-import { useRecoilCallback, useSetRecoilState } from "recoil";
+import { useRecoilCallback } from "recoil";
 
-import { isLooting } from "@neverquest/state/character";
 import { progress } from "@neverquest/state/encounter";
 import { monsterLoot } from "@neverquest/state/monster";
 import { essenceLoot, scrapLoot } from "@neverquest/state/resources";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export default function () {
-  const setLooting = useSetRecoilState(isLooting);
-
   return useRecoilCallback(({ set, snapshot }) => () => {
     const get = getSnapshotGetter(snapshot);
 
@@ -22,7 +19,6 @@ export default function () {
       set(scrapLoot, (current) => current + scrap);
     }
 
-    setLooting(false);
     set(progress, (current) => current + 1);
   });
 }

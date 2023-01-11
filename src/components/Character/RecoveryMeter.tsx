@@ -1,35 +1,36 @@
-import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import useAnimation from "@neverquest/hooks/useAnimation";
-import { isRecovering } from "@neverquest/state/character";
+import { recoveryDuration } from "@neverquest/state/character";
 import { recoveryRate } from "@neverquest/state/statistics";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export default function () {
-  const [isRecoveringValue, setRecovering] = useRecoilState(isRecovering);
+  const [recoveryDurationValue, setRecoveryDuration] = useRecoilState(recoveryDuration);
   const recoveryRateValue = useRecoilValue(recoveryRate);
 
-  const [deltaRecovery, setDeltaRecovery] = useState(0);
+  const hasRecovered = recoveryDurationValue === 0;
+  const recoveryProgress = hasRecovered ? 0 : recoveryRateValue - recoveryDurationValue;
 
   useAnimation((delta) => {
-    setDeltaRecovery((current) => current + delta);
-  }, !isRecoveringValue);
+    setRecoveryDuration((current) => {
+      const value = current - delta;
 
-  useEffect(() => {
-    if (deltaRecovery >= recoveryRateValue) {
-      setDeltaRecovery(0);
-      setRecovering(false);
-    }
-  }, [deltaRecovery, recoveryRateValue, setRecovering]);
+      if (value < 0) {
+        return 0;
+      }
+
+      return value;
+    });
+  }, hasRecovered);
 
   return (
     <LabelledProgressBar
       disableTransitions
-      label={formatMilliseconds(recoveryRateValue - deltaRecovery)}
-      value={(deltaRecovery / recoveryRateValue) * 100}
+      label={formatMilliseconds(recoveryProgress)}
+      value={(recoveryProgress / recoveryRateValue) * 100}
       variant={UIVariant.Secondary}
     />
   );

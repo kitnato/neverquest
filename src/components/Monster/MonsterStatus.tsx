@@ -8,7 +8,7 @@ import MonsterDamage from "@neverquest/components/Monster/MonsterDamage";
 import MonsterHealth from "@neverquest/components/Monster/MonsterHealth";
 import MonsterName from "@neverquest/components/Monster/MonsterName";
 import MonsterPoisonRating from "@neverquest/components/Monster/MonsterPoisonRating";
-import MonsterStagger from "@neverquest/components/Monster/MonsterStagger";
+import MonsterStaggered from "@neverquest/components/Monster/MonsterStaggered";
 import { isMonsterNew, monsterStatusElement } from "@neverquest/state/monster";
 import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
 import animateElement from "@neverquest/utilities/animateElement";
@@ -63,7 +63,7 @@ export default function () {
 
           <Row>
             <Col>
-              <MonsterStagger />
+              <MonsterStaggered />
             </Col>
 
             <Col>

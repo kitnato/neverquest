@@ -13,6 +13,11 @@ export const isMonsterDead = selector({
   key: "isMonsterDead",
 });
 
+export const isMonsterStaggered = selector({
+  get: ({ get }) => get(monsterStaggeredDuration) > 0,
+  key: "isMonsterStaggered",
+});
+
 export const monsterAttackRate = selector({
   get: ({ get }) => 4510 - get(progress) - 10 * get(level) * 2,
   key: "monsterAttackRate",
@@ -72,12 +77,6 @@ export const isMonsterNew = atom({
   key: StorageKey.IsMonsterNew,
 });
 
-export const isMonsterStaggered = atom({
-  default: false,
-  effects: [localStorage<boolean>(StorageKey.IsMonsterStaggered)],
-  key: StorageKey.IsMonsterStaggered,
-});
-
 export const monsterBleedingDuration = atom({
   default: 0,
   effects: [localStorage<number>(StorageKey.MonsterBleedingDuration)],
@@ -94,6 +93,12 @@ export const monsterName = atom({
   default: "",
   effects: [localStorage<string>(StorageKey.MonsterName)],
   key: StorageKey.MonsterName,
+});
+
+export const monsterStaggeredDuration = atom({
+  default: 0,
+  effects: [localStorage<number>(StorageKey.MonsterStaggeredDuration)],
+  key: StorageKey.MonsterStaggeredDuration,
 });
 
 export const monsterStatusElement = atom<HTMLDivElement | null>({

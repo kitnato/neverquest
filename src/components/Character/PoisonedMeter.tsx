@@ -29,11 +29,6 @@ export default function () {
   });
   const hasPoisonEnded = poisonDurationValue <= 0;
 
-  useAnimation((delta) => {
-    setPoisonDuration((current) => current - delta);
-    setDeltaPoisoned((current) => current + delta);
-  }, hasPoisonEnded);
-
   useEffect(() => {
     if (deltaPoisoned >= poisonDelta) {
       changeHealth({
@@ -53,6 +48,11 @@ export default function () {
       setDeltaPoisoned(0);
     }
   }, [hasPoisonEnded, setPoisonDuration]);
+
+  useAnimation((delta) => {
+    setPoisonDuration((current) => current - delta);
+    setDeltaPoisoned((current) => current + delta);
+  }, hasPoisonEnded);
 
   return (
     <LabelledProgressBar

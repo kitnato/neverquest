@@ -7,7 +7,7 @@ import MonsterStatus from "@neverquest/components/Monster/MonsterStatus";
 import { LABEL_UNKNOWN } from "@neverquest/constants";
 import useRegenerateMonster from "@neverquest/hooks/actions/useRegenerateMonster";
 import { ReactComponent as Icon } from "@neverquest/icons/evil-eyes.svg";
-import { isAttacking, isLooting } from "@neverquest/state/character";
+import { isAttacking, lootingDuration, lootingRate } from "@neverquest/state/character";
 import { isLevelStarted } from "@neverquest/state/encounter";
 import { isMonsterDead } from "@neverquest/state/monster";
 import { AnimationType } from "@neverquest/types/ui";
@@ -16,8 +16,9 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 export default function () {
   const isAttackingValue = useRecoilValue(isAttacking);
   const [isLevelStartedValue, setIsLevelStarted] = useRecoilState(isLevelStarted);
-  const setLooting = useSetRecoilState(isLooting);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
+  const lootingRateValue = useRecoilValue(lootingRate);
+  const setLootingDuration = useSetRecoilState(lootingDuration);
 
   const regenerateMonster = useRegenerateMonster();
 
@@ -37,9 +38,9 @@ export default function () {
 
   useEffect(() => {
     if (isMonsterDeadValue) {
-      setLooting(true);
+      setLootingDuration(lootingRateValue);
     }
-  }, [isMonsterDeadValue, setLooting]);
+  }, [isMonsterDeadValue, lootingRateValue, setLootingDuration]);
 
   if (isLevelStartedValue) {
     return <MonsterStatus />;

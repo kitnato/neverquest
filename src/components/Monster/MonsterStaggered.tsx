@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
-import MonsterStaggerMeter from "@neverquest/components/Monster/MonsterStaggerMeter";
+import MonsterStaggeredMeter from "@neverquest/components/Monster/MonsterStaggeredMeter";
 import { ReactComponent as Icon } from "@neverquest/icons/knocked-out-stars.svg";
 import { skills } from "@neverquest/state/skills";
 import { staggerDuration } from "@neverquest/state/statistics";
@@ -15,5 +15,5 @@ export default function () {
     return null;
   }
 
-  return <IconDisplay contents={<MonsterStaggerMeter />} Icon={Icon} tooltip="Staggered" />;
+  return <IconDisplay contents={<MonsterStaggeredMeter />} Icon={Icon} tooltip="Staggered" />;
 }

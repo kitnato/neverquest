@@ -20,6 +20,16 @@ export const essenceAbsorbed = selector({
   key: "essenceAbsorbed",
 });
 
+export const isLooting = selector({
+  get: ({ get }) => get(lootingDuration) > 0,
+  key: "isLooting",
+});
+
+export const isRecovering = selector({
+  get: ({ get }) => get(recoveryDuration) > 0,
+  key: "isRecovering",
+});
+
 // ATOMS
 
 export const characterLevel = atom({
@@ -34,16 +44,10 @@ export const isAttacking = atom({
   key: StorageKey.IsAttacking,
 });
 
-export const isLooting = atom({
-  default: false,
-  effects: [localStorage<boolean>(StorageKey.IsLooting)],
-  key: StorageKey.IsLooting,
-});
-
-export const isRecovering = atom({
-  default: false,
-  effects: [localStorage<boolean>(StorageKey.IsRecovering)],
-  key: StorageKey.IsRecovering,
+export const lootingDuration = atom({
+  default: 0,
+  effects: [localStorage<number>(StorageKey.LootingDuration)],
+  key: StorageKey.LootingDuration,
 });
 
 export const lootingRate = atom({
@@ -62,6 +66,12 @@ export const poisonDuration = atom({
   default: 0,
   effects: [localStorage<number>(StorageKey.PoisonDuration)],
   key: StorageKey.PoisonDuration,
+});
+
+export const recoveryDuration = atom({
+  default: 0,
+  effects: [localStorage<number>(StorageKey.RecoveryDuration)],
+  key: StorageKey.RecoveryDuration,
 });
 
 export const statusElement = atom<HTMLDivElement | null>({

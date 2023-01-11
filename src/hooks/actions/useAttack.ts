@@ -8,13 +8,19 @@ import { WeaponClass } from "@neverquest/locra/types";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import {
-  isMonsterStaggered,
   monsterBleedingDuration,
+  monsterStaggeredDuration,
   monsterStatusElement,
 } from "@neverquest/state/monster";
 import { canAttackOrParry } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
-import { bleedChance, criticalChance, criticalDamage, damage } from "@neverquest/state/statistics";
+import {
+  bleedChance,
+  criticalChance,
+  criticalDamage,
+  damage,
+  staggerDuration,
+} from "@neverquest/state/statistics";
 import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
 import {
   AnimationSpeed,
@@ -82,7 +88,7 @@ export default function () {
           }
 
           if (hasInflictedStagger) {
-            set(isMonsterStaggered, true);
+            set(monsterStaggeredDuration, get(staggerDuration));
             increaseMastery(MasteryType.StaggerDuration);
 
             monsterDeltas.push({

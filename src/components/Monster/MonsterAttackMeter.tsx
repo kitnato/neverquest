@@ -10,18 +10,14 @@ import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export default function () {
-  const monsterAttackRateValue = useRecoilValue(monsterAttackRate);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isMonsterStaggeredValue = useRecoilValue(isMonsterStaggered);
+  const monsterAttackRateValue = useRecoilValue(monsterAttackRate);
 
   const [deltaAttack, setDeltaAttack] = useState(0);
 
   const defend = useDefend();
-
-  useAnimation((delta) => {
-    setDeltaAttack((current) => current + delta);
-  }, !isAttackingValue || isMonsterDeadValue || isMonsterStaggeredValue);
 
   useEffect(() => {
     if (deltaAttack >= monsterAttackRateValue) {
@@ -35,6 +31,10 @@ export default function () {
       setDeltaAttack(0);
     }
   }, [isAttackingValue, isMonsterDeadValue]);
+
+  useAnimation((delta) => {
+    setDeltaAttack((current) => current + delta);
+  }, !isAttackingValue || isMonsterDeadValue || isMonsterStaggeredValue);
 
   return (
     <LabelledProgressBar

@@ -5,14 +5,14 @@ import useChangeHealth from "@neverquest/hooks/actions/useChangeHealth";
 import useChangeMonsterHealth from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import useChangeStamina from "@neverquest/hooks/actions/useChangeStamina";
 import useIncreaseMastery from "@neverquest/hooks/actions/useIncreaseMastery";
-import { isRecovering, poisonDuration, statusElement } from "@neverquest/state/character";
+import { poisonDuration, recoveryDuration, statusElement } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { shield, weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import {
-  isMonsterStaggered,
   monsterDamage,
   monsterPoisonChance,
+  monsterStaggeredDuration,
   monsterStatusElement,
 } from "@neverquest/state/monster";
 import { canAttackOrParry, canBlock } from "@neverquest/state/reserves";
@@ -26,7 +26,9 @@ import {
   parryChance,
   parryDamage,
   protection,
+  recoveryRate,
   skipRecoveryChance,
+  staggerDuration,
 } from "@neverquest/state/statistics";
 import { DeltaType, MasteryType, ShowingType, SkillType } from "@neverquest/types/enums";
 import {
@@ -184,7 +186,7 @@ export default function () {
         }
 
         if (hasStaggered) {
-          set(isMonsterStaggered, true);
+          set(monsterStaggeredDuration, get(staggerDuration));
         }
       } else {
         deltaStamina = [
@@ -227,7 +229,7 @@ export default function () {
         set(isShowing(ShowingType.Recovery), true);
       }
 
-      set(isRecovering, true);
+      set(recoveryDuration, get(recoveryRate));
     }
 
     const isPoisoned = get(poisonDuration) == 0 && Math.random() <= get(monsterPoisonChance);

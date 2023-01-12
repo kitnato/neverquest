@@ -4,6 +4,7 @@ $accordion-button-active-color: var(--bs-body-color);
 $offcanvas-horizontal-width: 46%;
 $progress-height: 1.25rem;
 $tooltip-opacity: 1;
+$zindex-tooltip: 1048;
 
 // There is no variable that controls the box-shadow when unfocused (resulting in a dividing line).
 .accordion-button {

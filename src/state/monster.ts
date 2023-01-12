@@ -18,6 +18,12 @@ export const isMonsterStaggered = selector({
   key: "isMonsterStaggered",
 });
 
+export const monsterAttackDuration = atom({
+  default: 0,
+  effects: [localStorage<number>(StorageKey.MonsterAttackDuration)],
+  key: StorageKey.MonsterAttackDuration,
+});
+
 export const monsterAttackRate = selector({
   get: ({ get }) => 4510 - get(progress) - 10 * get(level) * 2,
   key: "monsterAttackRate",

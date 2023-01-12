@@ -36,6 +36,12 @@ export const crew = selectorFamily<CrewState, CrewType>({
 
 // ATOMS
 
+export const crewActive = atom<CrewType | null>({
+  default: null,
+  effects: [localStorage<CrewType | null>(StorageKey.CrewActive)],
+  key: StorageKey.CrewActive,
+});
+
 export const crewHirable = atom<CrewType[]>({
   default: [],
   effects: [localStorage<CrewType[]>(StorageKey.CrewHirable)],

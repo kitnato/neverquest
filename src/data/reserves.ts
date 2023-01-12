@@ -1,5 +1,9 @@
 import useChangeHealth from "@neverquest/hooks/actions/useChangeHealth";
 import useChangeStamina from "@neverquest/hooks/actions/useChangeStamina";
+import {
+  healthRegenerationDuration,
+  staminaRegenerationDuration,
+} from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { encumbrance, encumbranceMaximum } from "@neverquest/state/inventory";
 import { monsterCurrentHealth, monsterMaximumHealth } from "@neverquest/state/monster";
@@ -30,6 +34,7 @@ export const RESERVES = {
     atomIsAtMaximum: isHealthAtMaximum,
     atomMaximum: maximumHealth,
     atomRegenerationAmount: healthRegenerationAmount,
+    atomRegenerationDuration: healthRegenerationDuration,
     atomRegenerationRate: healthRegenerationRate,
     useActionChange: useChangeHealth,
   },
@@ -43,6 +48,7 @@ export const RESERVES = {
     atomIsAtMaximum: isStaminaAtMaximum,
     atomMaximum: maximumStamina,
     atomRegenerationAmount: staminaRegenerationAmount,
+    atomRegenerationDuration: staminaRegenerationDuration,
     atomRegenerationRate: staminaRegenerationRate,
     useActionChange: useChangeStamina,
   },

@@ -13,6 +13,7 @@ export default function () {
       contents={locationNameValue}
       Icon={Icon}
       iconProps={{ placement: OverlayPlacement.Bottom }}
+      isAnimated
       tooltip="Location"
     />
   );

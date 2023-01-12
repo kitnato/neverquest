@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 import useGenerateMerchantInventory from "@neverquest/hooks/actions/useGenerateMerchantInventory";
 import useIncreaseLevel from "@neverquest/hooks/actions/useIncreaseLevel";
@@ -21,9 +21,9 @@ export default function () {
   const levelValue = useRecoilValue(level);
   const progressMaximumValue = useRecoilValue(progressMaximum);
 
-  const setCoinsLoot = useSetRecoilState(coinsLoot);
-  const setEssenceLoot = useSetRecoilState(essenceLoot);
-  const setScrapLoot = useSetRecoilState(scrapLoot);
+  const resetCoinsLoot = useResetRecoilState(coinsLoot);
+  const resetEssenceLoot = useResetRecoilState(essenceLoot);
+  const resetScrapLoot = useResetRecoilState(scrapLoot);
   const setProgress = useSetRecoilState(progress);
   const setSkillArmor = useSetRecoilState(skills(SkillType.Armors));
   const setSkillBleed = useSetRecoilState(skills(SkillType.Bleed));
@@ -115,9 +115,9 @@ export default function () {
             }
 
             if (isWildernessValue) {
-              setCoinsLoot(0);
-              setEssenceLoot(0);
-              setScrapLoot(0);
+              resetCoinsLoot();
+              resetEssenceLoot();
+              resetScrapLoot();
               switchLocation();
             }
           }
@@ -134,10 +134,10 @@ export default function () {
     isWildernessValue,
     levelValue,
     progressMaximumValue,
-    setCoinsLoot,
-    setEssenceLoot,
+    resetCoinsLoot,
+    resetEssenceLoot,
+    resetScrapLoot,
     setProgress,
-    setScrapLoot,
     setSkill,
     switchLocation,
     transactResources,

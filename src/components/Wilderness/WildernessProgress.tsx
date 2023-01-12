@@ -39,7 +39,7 @@ export default function () {
           variant={UIVariant.Primary}
         />
 
-        <FloatingText atom={deltaWildernessProgress} />
+        <FloatingText type={DeltaType.WildernessProgress} />
       </Stack>
     </Stack>
   );

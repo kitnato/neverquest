@@ -24,7 +24,7 @@ export default function () {
         <>
           <span>{characterLevelValue}</span>
 
-          <FloatingText atom={deltaCharacterLevel} />
+          <FloatingText type={DeltaType.CharacterLevel} />
         </>
       }
       Icon={Icon}

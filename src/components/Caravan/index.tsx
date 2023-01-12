@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from "react";
 import { Card, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import Blacksmith from "@neverquest/components/Caravan/Blacksmith";
 import Cook from "@neverquest/components/Caravan/Cook";
@@ -12,22 +12,22 @@ import Merchant from "@neverquest/components/Caravan/Merchant";
 import Tailor from "@neverquest/components/Caravan/Tailor";
 import DismissableScreen from "@neverquest/components/DismissableScreen";
 import { CREW, CREW_ORDER } from "@neverquest/data/caravan";
-import { crewHirable } from "@neverquest/state/caravan";
+import { crewActive, crewHirable } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import { CrewType, ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function () {
+  const [crewActiveValue, setCrewActive] = useRecoilState(crewActive);
   const crewHirableValue = useRecoilValue(crewHirable);
   const isShowingCrewHiring = useRecoilValue(isShowing(ShowingType.CrewHiring));
 
-  const [activeMember, setActiveMember] = useState<CrewType | null>(null);
   const [isScreenShowing, setScreenShowing] = useState(false);
 
   const ActiveMemberComponent: FunctionComponent = (() => {
-    if (activeMember) {
-      switch (CREW[activeMember].name) {
+    if (crewActiveValue) {
+      switch (CREW[crewActiveValue].name) {
         case CREW[CrewType.Blacksmith].name: {
           return Blacksmith;
         }
@@ -57,7 +57,7 @@ export default function () {
 
   const onActivate = (isShowing: boolean, member?: CrewType) => {
     setScreenShowing(isShowing);
-    setActiveMember(member ?? null);
+    setCrewActive(member ?? null);
   };
 
   return (
@@ -90,12 +90,12 @@ export default function () {
         </Card.Body>
       </Card>
 
-      {activeMember && (
+      {crewActiveValue && (
         <DismissableScreen
           contents={<ActiveMemberComponent />}
           isShowing={isScreenShowing}
           onClose={() => onActivate(false)}
-          title={CREW[activeMember].name}
+          title={CREW[crewActiveValue].name}
         />
       )}
     </>

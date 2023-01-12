@@ -2,8 +2,15 @@ import { useRecoilCallback } from "recoil";
 
 import LOCRA from "@neverquest/locra";
 import { CreatureType } from "@neverquest/locra/types";
+import { isAttacking } from "@neverquest/state/character";
 import { level } from "@neverquest/state/encounter";
-import { isMonsterNew, monsterCurrentHealth, monsterName } from "@neverquest/state/monster";
+import {
+  isMonsterNew,
+  monsterAttackDuration,
+  monsterAttackRate,
+  monsterCurrentHealth,
+  monsterName,
+} from "@neverquest/state/monster";
 import { isNSFW } from "@neverquest/state/settings";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -22,6 +29,11 @@ export default function () {
     );
 
     reset(monsterCurrentHealth);
+
+    if (get(isAttacking)) {
+      set(monsterAttackDuration, get(monsterAttackRate));
+    }
+
     set(isMonsterNew, true);
   });
 }

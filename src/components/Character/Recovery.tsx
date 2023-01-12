@@ -32,7 +32,7 @@ export default function () {
         <Stack className="w-100" direction="horizontal">
           <RecoveryMeter />
 
-          <FloatingText atom={deltaRecoveryRate} />
+          <FloatingText type={DeltaType.RecoveryRate} />
         </Stack>
       }
       Icon={Icon}

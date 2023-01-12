@@ -1,99 +1,78 @@
 import { nanoid } from "nanoid";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Stack } from "react-bootstrap";
-import { RecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { DEFAULT_DELTA_DISPLAY } from "@neverquest/constants";
-import { AnimationSpeed, AnimationType, DeltaDisplay } from "@neverquest/types/ui";
+import { deltas, floatingTextQueues } from "@neverquest/state/deltas";
+import { DeltaType } from "@neverquest/types/enums";
+import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-type FloatingText = {
-  contents: ReactNode;
-  key: string;
-};
-
-export default function ({ atom }: { atom: RecoilState<DeltaDisplay> }) {
-  const deltaValue = useRecoilValue(atom);
-  const resetDeltaValue = useResetRecoilState(atom);
-
-  const [textQueue, setTextQueue] = useState<FloatingText[]>([]);
+export default function ({ type }: { type: DeltaType }) {
+  const delta = deltas(type);
+  const deltaValue = useRecoilValue(delta);
+  const resetDeltaValue = useResetRecoilState(delta);
+  const [floatingTextQueue, setFloatingTextQueue] = useRecoilState(floatingTextQueues(type));
 
   const animationClass = getAnimationClass({
     speed: AnimationSpeed.Slower,
     type: AnimationType.FadeOutUp,
   });
 
+  const onAnimationEnd = (id: string) => () =>
+    setFloatingTextQueue((current) => current.filter(({ key }) => key !== id));
+
   useEffect(() => {
     if (deltaValue === DEFAULT_DELTA_DISPLAY) {
       return;
     }
 
-    const key = nanoid();
-
-    const onAnimationEnd = (id: string) => () =>
-      setTextQueue((current) => current.filter(({ key }) => key !== id));
-
-    if (Array.isArray(deltaValue)) {
-      setTextQueue((current) => [
-        ...current,
-        {
-          contents: (
-            <Stack
-              className={animationClass}
-              direction="horizontal"
-              gap={1}
-              onAnimationEnd={onAnimationEnd(key)}
-            >
-              {deltaValue.map(({ color, value }) => (
-                <span className={color || ""} key={value}>
-                  {value}
-                </span>
-              ))}
-            </Stack>
-          ),
-          key,
-        },
-      ]);
-    } else {
-      const { color, value } = deltaValue;
-
-      setTextQueue((current) => [
-        ...current,
-        {
-          contents: (
-            <div
-              className={`${animationClass}${color ? ` ${color}` : ""}`}
-              onAnimationEnd={onAnimationEnd(key)}
-            >
-              {value}
-            </div>
-          ),
-          key,
-        },
-      ]);
-    }
+    setFloatingTextQueue((current) => [
+      ...current,
+      {
+        delta: deltaValue,
+        key: nanoid(),
+      },
+    ]);
 
     resetDeltaValue();
-  }, [animationClass, deltaValue, resetDeltaValue]);
+  }, [animationClass, deltaValue, resetDeltaValue, setFloatingTextQueue]);
 
   return (
     <div className="position-relative">
-      {textQueue.map((delta) => {
-        const { contents, key } = delta;
-
-        return (
-          <small className="position-absolute" key={key} style={{ bottom: -6, left: -8 }}>
-            <strong
-              style={{
-                textShadow:
-                  "-1px 1px 1px #fff, 1px 1px 1px #fff, 1px -1px 1px #fff, -1px -1px 1px #fff",
-              }}
-            >
-              {contents}
-            </strong>
-          </small>
-        );
-      })}
+      {floatingTextQueue.map(({ delta, key }) => (
+        <small className="position-absolute" key={key} style={{ bottom: -6, left: -8 }}>
+          <strong
+            style={{
+              textShadow:
+                "-1px 1px 1px #fff, 1px 1px 1px #fff, 1px -1px 1px #fff, -1px -1px 1px #fff",
+            }}
+          >
+            {Array.isArray(delta) ? (
+              <Stack
+                className={animationClass}
+                direction="horizontal"
+                gap={1}
+                onAnimationEnd={onAnimationEnd(key)}
+              >
+                {delta.map(({ color, value }) => (
+                  <span className={color || ""} key={value}>
+                    {value}
+                  </span>
+                ))}
+              </Stack>
+            ) : (
+              <div
+                className={`${animationClass}${delta.color ? ` ${delta.color}` : ""}`}
+                onAnimationEnd={onAnimationEnd(key)}
+              >
+                {delta.value}
+              </div>
+            )}
+          </strong>
+        </small>
+      ))}
     </div>
   );
 }

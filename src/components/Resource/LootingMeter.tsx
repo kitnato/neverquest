@@ -17,14 +17,14 @@ export default function () {
   const lootingProgress = lootingRateValue - lootingDurationValue;
 
   useAnimation((delta) => {
-    let newDelta = lootingDurationValue - delta;
+    let newDuration = lootingDurationValue - delta;
 
-    if (newDelta <= 0) {
-      newDelta = 0;
+    if (newDuration <= 0) {
+      newDuration = 0;
       dropLoot();
     }
 
-    setLootingDuration(newDelta);
+    setLootingDuration(newDuration);
   }, !isLootingValue);
 
   return (

@@ -26,6 +26,11 @@ export interface DeltaReserve {
   value: number;
 }
 
+export type FloatingText = {
+  delta: DeltaDisplay;
+  key: string;
+};
+
 export enum FloatingTextVariant {
   Negative = "text-danger",
   Neutral = "text-muted",

@@ -6,7 +6,6 @@ import IconDisplay from "@neverquest/components/IconDisplay";
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import { LABEL_AT_MAXIMUM } from "@neverquest/constants";
 import { MASTERIES } from "@neverquest/data/masteries";
-import { deltas } from "@neverquest/state/deltas";
 import { isShowingMastery } from "@neverquest/state/isShowing";
 import { isMasteryAtMaximum, masteries, masteryCost } from "@neverquest/state/masteries";
 import { MasteryType } from "@neverquest/types/enums";
@@ -37,7 +36,7 @@ export default function ({ type }: { type: MasteryType }) {
             <LabelledProgressBar label={label} value={value} variant={UIVariant.Secondary} />
           </Stack>
 
-          <FloatingText atom={deltas(getDeltaTypeFromMasteryType(type))} />
+          <FloatingText type={getDeltaTypeFromMasteryType(type)} />
         </Stack>
       }
       description={description}

@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import { BLEED } from "@neverquest/constants";
 import useChangeMonsterHealth from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import useAnimation from "@neverquest/hooks/useAnimation";
+import { monsterBleedingDelta } from "@neverquest/state/deltas";
 import { monsterBleedingDuration } from "@neverquest/state/monster";
 import { bleedDamage, damage } from "@neverquest/state/statistics";
 import { FloatingTextVariant, UIVariant } from "@neverquest/types/ui";
@@ -12,12 +12,12 @@ import { formatMilliseconds } from "@neverquest/utilities/formatters";
 import { getDamagePerTick } from "@neverquest/utilities/getters";
 
 export default function () {
+  const resetMonsterBleedingDelta = useResetRecoilState(monsterBleedingDelta);
+  const [monsterBleedingDeltaValue, setMonsterBleedingDelta] = useRecoilState(monsterBleedingDelta);
   const [monsterBleedingDurationValue, setMonsterBleedingDuration] =
     useRecoilState(monsterBleedingDuration);
   const bleedDamageValue = useRecoilValue(bleedDamage);
   const damageValue = useRecoilValue(damage);
-
-  const [deltaBleeding, setDeltaBleeding] = useState(0);
 
   const changeMonsterHealth = useChangeMonsterHealth();
 
@@ -29,10 +29,11 @@ export default function () {
     proportion: bleedDamageValue,
     ticks,
   });
-  const hasBleedingStopped = monsterBleedingDurationValue <= 0;
 
-  useEffect(() => {
-    if (deltaBleeding >= bleedingDelta) {
+  useAnimation((delta) => {
+    const newDelta = monsterBleedingDeltaValue + delta;
+
+    if (newDelta >= bleedingDelta) {
       changeMonsterHealth({
         delta: {
           color: FloatingTextVariant.Negative,
@@ -40,21 +41,19 @@ export default function () {
         },
         value: -bleedingDamage,
       });
-      setDeltaBleeding(0);
+      resetMonsterBleedingDelta();
+    } else {
+      setMonsterBleedingDelta(newDelta);
     }
-  }, [bleedingDamage, bleedingDelta, deltaBleeding, changeMonsterHealth]);
 
-  useEffect(() => {
-    if (hasBleedingStopped) {
-      setMonsterBleedingDuration(0);
-      setDeltaBleeding(0);
+    let newDuration = monsterBleedingDurationValue - delta;
+
+    if (newDuration < 0) {
+      newDuration = 0;
     }
-  }, [setMonsterBleedingDuration, hasBleedingStopped]);
 
-  useAnimation((delta) => {
-    setMonsterBleedingDuration((current) => current - delta);
-    setDeltaBleeding((current) => current + delta);
-  }, hasBleedingStopped);
+    setMonsterBleedingDuration(newDuration);
+  }, monsterBleedingDurationValue <= 0);
 
   return (
     <LabelledProgressBar

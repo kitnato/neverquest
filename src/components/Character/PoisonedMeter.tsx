@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
 import { POISON } from "@neverquest/constants";
 import useChangeHealth from "@neverquest/hooks/actions/useChangeHealth";
 import useAnimation from "@neverquest/hooks/useAnimation";
 import { poisonDuration } from "@neverquest/state/character";
+import { poisonedDelta } from "@neverquest/state/deltas";
 import { monsterDamage } from "@neverquest/state/monster";
 import { FloatingTextVariant, UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 import { getDamagePerTick } from "@neverquest/utilities/getters";
 
 export default function () {
+  const resetPoisonedDelta = useResetRecoilState(poisonedDelta);
+  const [poisonedDeltaValue, setPoisonedDelta] = useRecoilState(poisonedDelta);
   const [poisonDurationValue, setPoisonDuration] = useRecoilState(poisonDuration);
   const monsterDamageValue = useRecoilValue(monsterDamage);
 
   const changeHealth = useChangeHealth();
-
-  const [deltaPoisoned, setDeltaPoisoned] = useState(0);
 
   const { damage, duration, ticks } = POISON;
   const poisonDelta = duration / ticks;
@@ -27,10 +27,11 @@ export default function () {
     proportion: damage,
     ticks,
   });
-  const hasPoisonEnded = poisonDurationValue <= 0;
 
-  useEffect(() => {
-    if (deltaPoisoned >= poisonDelta) {
+  useAnimation((delta) => {
+    const newDelta = poisonedDeltaValue + delta;
+
+    if (newDelta >= poisonDelta) {
       changeHealth({
         delta: {
           color: FloatingTextVariant.Negative,
@@ -38,21 +39,19 @@ export default function () {
         },
         value: -poisonPerTick,
       });
-      setDeltaPoisoned(0);
+      resetPoisonedDelta();
+    } else {
+      setPoisonedDelta(newDelta);
     }
-  }, [changeHealth, deltaPoisoned, poisonDelta, poisonPerTick]);
 
-  useEffect(() => {
-    if (hasPoisonEnded) {
-      setPoisonDuration(0);
-      setDeltaPoisoned(0);
+    let newDuration = poisonDurationValue - delta;
+
+    if (newDuration < 0) {
+      newDuration = 0;
     }
-  }, [hasPoisonEnded, setPoisonDuration]);
 
-  useAnimation((delta) => {
-    setPoisonDuration((current) => current - delta);
-    setDeltaPoisoned((current) => current + delta);
-  }, hasPoisonEnded);
+    setPoisonDuration(newDuration);
+  }, poisonDurationValue <= 0);
 
   return (
     <LabelledProgressBar

@@ -117,6 +117,6 @@ export default function () {
           ]);
         }
       },
-    []
+    [changeMonsterHealth, changeStamina, increaseMastery]
   );
 }

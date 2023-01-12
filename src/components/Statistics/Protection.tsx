@@ -8,7 +8,6 @@ import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { protection } from "@neverquest/state/statistics";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
-import { AnimationType } from "@neverquest/types/ui";
 
 export default function () {
   const isShowingProtection = useRecoilValue(isShowing(ShowingType.Protection));
@@ -27,15 +26,15 @@ export default function () {
 
   return (
     <IconDisplay
-      animation={AnimationType.FlipInX}
       contents={
         <>
           <span>{protectionValue}</span>
 
-          <FloatingText atom={deltaProtection} />
+          <FloatingText type={DeltaType.Protection} />
         </>
       }
       Icon={Icon}
+      isAnimated
       tooltip="Protection"
     />
   );

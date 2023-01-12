@@ -9,7 +9,6 @@ import { deltas } from "@neverquest/state/deltas";
 import { skills } from "@neverquest/state/skills";
 import { freeBlockChance } from "@neverquest/state/statistics";
 import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
-import { AnimationType } from "@neverquest/types/ui";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export default function () {
@@ -29,15 +28,15 @@ export default function () {
 
   return (
     <IconDisplay
-      animation={AnimationType.FlipInX}
       contents={
         <>
           <span>{formatPercentage(freeBlockChanceValue)}</span>
 
-          <FloatingText atom={deltaChanceFreeBlock} />
+          <FloatingText type={DeltaType.ChanceFreeBlock} />
         </>
       }
       Icon={Icon}
+      isAnimated
       tooltip={MASTERIES[MasteryType.FreeBlockChance].name}
     />
   );

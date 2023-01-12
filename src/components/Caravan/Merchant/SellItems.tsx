@@ -89,8 +89,8 @@ export default function () {
             <ConfirmationDialog
               confirmationLabel="Sell"
               message={`
-                You can buy it back at the original purchase price
-                but it will be gone forever once you leave the caravan.
+                It can be bought back at the original purchase price
+                but it will be gone forever once leaving the caravan.
               `}
               onConfirm={() => sellPossession(sellConfirmation)}
               setHide={() => setSellConfirmation(null)}

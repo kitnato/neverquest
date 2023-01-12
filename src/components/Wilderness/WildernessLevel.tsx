@@ -25,7 +25,7 @@ export default function () {
         <>
           <span>{levelValue}</span>
 
-          <FloatingText atom={deltaWildernessLevel} />
+          <FloatingText type={DeltaType.WildernessLevel} />
         </>
       }
       Icon={Icon}

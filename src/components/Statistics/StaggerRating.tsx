@@ -12,7 +12,6 @@ import { shield } from "@neverquest/state/inventory";
 import { skills } from "@neverquest/state/skills";
 import { staggerChanceWeapon, staggerDuration, staggerRating } from "@neverquest/state/statistics";
 import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
-import { AnimationType } from "@neverquest/types/ui";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export default function () {
@@ -37,7 +36,6 @@ export default function () {
 
   return (
     <IconDisplay
-      animation={AnimationType.FlipInX}
       contents={
         <>
           <OverlayTrigger
@@ -75,7 +73,7 @@ export default function () {
             <span>{staggerRatingValue}</span>
           </OverlayTrigger>
 
-          <FloatingText atom={deltaStaggerRating} />
+          <FloatingText type={DeltaType.StaggerRating} />
         </>
       }
       Icon={Icon}

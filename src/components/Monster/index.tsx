@@ -1,46 +1,30 @@
 import { useEffect } from "react";
 import { Card } from "react-bootstrap";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 import IconDisplay from "@neverquest/components/IconDisplay";
 import MonsterStatus from "@neverquest/components/Monster/MonsterStatus";
 import { LABEL_UNKNOWN } from "@neverquest/constants";
-import useRegenerateMonster from "@neverquest/hooks/actions/useRegenerateMonster";
 import { ReactComponent as Icon } from "@neverquest/icons/evil-eyes.svg";
-import { isAttacking, lootingDuration, lootingRate } from "@neverquest/state/character";
+import { lootingDuration, lootingRate } from "@neverquest/state/character";
 import { isLevelStarted } from "@neverquest/state/encounter";
-import { isMonsterDead } from "@neverquest/state/monster";
+import { isMonsterDead, monsterAttackDuration } from "@neverquest/state/monster";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export default function () {
-  const isAttackingValue = useRecoilValue(isAttacking);
-  const [isLevelStartedValue, setIsLevelStarted] = useRecoilState(isLevelStarted);
+  const isLevelStartedValue = useRecoilValue(isLevelStarted);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const lootingRateValue = useRecoilValue(lootingRate);
+  const resetMonsterAttackDuration = useResetRecoilState(monsterAttackDuration);
   const setLootingDuration = useSetRecoilState(lootingDuration);
-
-  const regenerateMonster = useRegenerateMonster();
-
-  // Once the player attacks, the monsters are engaged.
-  useEffect(() => {
-    if (isAttackingValue && !isLevelStartedValue) {
-      setIsLevelStarted(true);
-    }
-  }, [isAttackingValue, isLevelStartedValue, setIsLevelStarted]);
-
-  // If player stops attacking but the monster is still alive, regenerate it.
-  useEffect(() => {
-    if (!isAttackingValue && isLevelStartedValue && !isMonsterDeadValue) {
-      regenerateMonster();
-    }
-  }, [isAttackingValue, isMonsterDeadValue, isLevelStartedValue, regenerateMonster]);
 
   useEffect(() => {
     if (isMonsterDeadValue) {
       setLootingDuration(lootingRateValue);
+      resetMonsterAttackDuration();
     }
-  }, [isMonsterDeadValue, lootingRateValue, setLootingDuration]);
+  }, [isMonsterDeadValue, lootingRateValue, setLootingDuration, resetMonsterAttackDuration]);
 
   if (isLevelStartedValue) {
     return <MonsterStatus />;

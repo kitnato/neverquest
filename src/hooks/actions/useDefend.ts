@@ -56,206 +56,211 @@ export default function () {
   const changeStamina = useChangeStamina();
   const increaseMastery = useIncreaseMastery();
 
-  return useRecoilCallback(({ set, snapshot }) => () => {
-    const get = getSnapshotGetter(snapshot);
-
-    animateElement({
-      element: get(statusElement),
-      speed: AnimationSpeed.Fast,
-      type: AnimationType.HeadShake,
-    });
-
-    const hasDodged = get(skills(SkillType.Dodge)) && Math.random() <= get(dodgeChance);
-
-    if (hasDodged) {
-      set(deltas(DeltaType.Health), {
-        color: FloatingTextVariant.Neutral,
-        value: "DODGED",
-      });
-
-      return;
-    }
-
-    const monsterDamageValue = get(monsterDamage);
-    let healthDamage = (() => {
-      const damage = get(protection) - monsterDamageValue;
-
-      return damage < 0 ? damage : 0;
-    })();
-
-    if (healthDamage === 0) {
-      set(deltas(DeltaType.Health), {
-        color: FloatingTextVariant.Neutral,
-        value: healthDamage,
-      });
-
-      return;
-    }
-
-    let deltaHealth: DeltaDisplay = [];
-    let deltaStamina: DeltaDisplay | undefined;
-
-    const hasParried = get(skills(SkillType.Parry)) && Math.random() <= get(parryChance);
-
-    if (hasParried) {
-      const { staminaCost } = get(weapon);
-
-      if (get(canAttackOrParry)) {
-        healthDamage = Math.floor(healthDamage * get(parryAbsorption));
-
-        const parryReflected = -Math.floor(monsterDamageValue * get(parryDamage));
-
-        changeMonsterHealth({
-          delta: [
-            {
-              color: FloatingTextVariant.Neutral,
-              value: "PARRIED",
-            },
-            {
-              color: FloatingTextVariant.Negative,
-              value: ` (${parryReflected})`,
-            },
-          ],
-          value: parryReflected,
-        });
-
-        deltaHealth = [
-          {
-            color: FloatingTextVariant.Neutral,
-            value: "PARRIED",
-          },
-          {
-            color: FloatingTextVariant.Negative,
-            value: ` (${healthDamage})`,
-          },
-        ];
-
-        changeStamina({ value: -staminaCost });
-        increaseMastery(MasteryType.ParryFactor);
+  return useRecoilCallback(
+    ({ set, snapshot }) =>
+      () => {
+        const get = getSnapshotGetter(snapshot);
 
         animateElement({
-          element: get(monsterStatusElement),
+          element: get(statusElement),
           speed: AnimationSpeed.Fast,
           type: AnimationType.HeadShake,
         });
-      } else {
-        deltaStamina = [
-          {
+
+        const hasDodged = get(skills(SkillType.Dodge)) && Math.random() <= get(dodgeChance);
+
+        if (hasDodged) {
+          set(deltas(DeltaType.Health), {
             color: FloatingTextVariant.Neutral,
-            value: "CANNOT PARRY",
-          },
-          {
-            color: FloatingTextVariant.Negative,
-            value: ` (${staminaCost})`,
-          },
-        ];
-      }
-    }
+            value: "DODGED",
+          });
 
-    const hasBlocked = Math.random() <= get(blockChance);
-
-    if (hasBlocked && !hasParried) {
-      const { staminaCost } = get(shield);
-
-      if (get(canBlock)) {
-        healthDamage = 0;
-
-        const hasStaggered =
-          get(skills(SkillType.Stagger)) && Math.random() <= get(shield).staggerChance;
-        const shieldsSkill = get(skills(SkillType.Shields));
-        const isFreeBlock = shieldsSkill && Math.random() <= get(freeBlockChance);
-
-        deltaHealth = [
-          {
-            color: FloatingTextVariant.Neutral,
-            value: "BLOCKED",
-          },
-        ];
-
-        if (shieldsSkill) {
-          increaseMastery(MasteryType.FreeBlockChance);
+          return;
         }
 
-        if (isFreeBlock) {
-          deltaStamina = {
-            color: FloatingTextVariant.Neutral,
-            value: "STABILIZED",
-          };
-        } else {
-          changeStamina({ value: -staminaCost });
-        }
+        const monsterDamageValue = get(monsterDamage);
+        let healthDamage = (() => {
+          const damage = get(protection) - monsterDamageValue;
 
-        if (hasStaggered) {
-          set(monsterStaggeredDuration, get(staggerDuration));
-        }
-      } else {
-        deltaStamina = [
-          {
-            color: FloatingTextVariant.Neutral,
-            value: "CANNOT BLOCK",
-          },
-          {
-            color: FloatingTextVariant.Negative,
-            value: ` (${staminaCost})`,
-          },
-        ];
-      }
-    }
+          return damage < 0 ? damage : 0;
+        })();
 
-    if (!hasBlocked && !hasParried) {
-      if (get(protection) > 0) {
-        deltaHealth = [
-          {
-            color: FloatingTextVariant.Negative,
+        if (healthDamage === 0) {
+          set(deltas(DeltaType.Health), {
+            color: FloatingTextVariant.Neutral,
             value: healthDamage,
-          },
-          {
-            color: FloatingTextVariant.Neutral,
-            value: ` (${get(protection)})`,
-          },
-        ];
-      }
-    }
+          });
 
-    const armorsSkill = get(skills(SkillType.Armors));
-    const hasSkippedRecovery = armorsSkill && Math.random() <= get(skipRecoveryChance);
+          return;
+        }
 
-    if (armorsSkill) {
-      increaseMastery(MasteryType.SkipRecoveryChance);
-    }
+        let deltaHealth: DeltaDisplay = [];
+        let deltaStamina: DeltaDisplay | undefined;
 
-    if (!hasSkippedRecovery) {
-      if (!get(isShowing(ShowingType.Recovery))) {
-        set(isShowing(ShowingType.Recovery), true);
-      }
+        const hasParried = get(skills(SkillType.Parry)) && Math.random() <= get(parryChance);
 
-      set(recoveryDuration, get(recoveryRate));
-    }
+        if (hasParried) {
+          const { staminaCost } = get(weapon);
 
-    const isPoisoned = get(poisonDuration) == 0 && Math.random() <= get(monsterPoisonChance);
+          if (get(canAttackOrParry)) {
+            healthDamage = Math.floor(healthDamage * get(parryAbsorption));
 
-    if (isPoisoned) {
-      const hasDeflected = get(skills(SkillType.Armors)) && Math.random() <= get(deflectionChance);
+            const parryReflected = -Math.floor(monsterDamageValue * get(parryDamage));
 
-      if (hasDeflected) {
-        deltaHealth.push({
-          color: FloatingTextVariant.Positive,
-          value: "DEFLECTED POISON",
-        });
-      } else {
-        set(poisonDuration, POISON.duration);
+            changeMonsterHealth({
+              delta: [
+                {
+                  color: FloatingTextVariant.Neutral,
+                  value: "PARRIED",
+                },
+                {
+                  color: FloatingTextVariant.Negative,
+                  value: ` (${parryReflected})`,
+                },
+              ],
+              value: parryReflected,
+            });
 
-        deltaHealth.push({
-          color: FloatingTextVariant.Negative,
-          value: "POISONED",
-        });
-      }
-    }
+            deltaHealth = [
+              {
+                color: FloatingTextVariant.Neutral,
+                value: "PARRIED",
+              },
+              {
+                color: FloatingTextVariant.Negative,
+                value: ` (${healthDamage})`,
+              },
+            ];
 
-    changeHealth({ delta: deltaHealth, value: healthDamage });
+            changeStamina({ value: -staminaCost });
+            increaseMastery(MasteryType.ParryFactor);
 
-    if (deltaStamina) {
-      set(deltas(DeltaType.Stamina), deltaStamina);
-    }
-  });
+            animateElement({
+              element: get(monsterStatusElement),
+              speed: AnimationSpeed.Fast,
+              type: AnimationType.HeadShake,
+            });
+          } else {
+            deltaStamina = [
+              {
+                color: FloatingTextVariant.Neutral,
+                value: "CANNOT PARRY",
+              },
+              {
+                color: FloatingTextVariant.Negative,
+                value: ` (${staminaCost})`,
+              },
+            ];
+          }
+        }
+
+        const hasBlocked = Math.random() <= get(blockChance);
+
+        if (hasBlocked && !hasParried) {
+          const { staminaCost } = get(shield);
+
+          if (get(canBlock)) {
+            healthDamage = 0;
+
+            const hasStaggered =
+              get(skills(SkillType.Stagger)) && Math.random() <= get(shield).staggerChance;
+            const shieldsSkill = get(skills(SkillType.Shields));
+            const isFreeBlock = shieldsSkill && Math.random() <= get(freeBlockChance);
+
+            deltaHealth = [
+              {
+                color: FloatingTextVariant.Neutral,
+                value: "BLOCKED",
+              },
+            ];
+
+            if (shieldsSkill) {
+              increaseMastery(MasteryType.FreeBlockChance);
+            }
+
+            if (isFreeBlock) {
+              deltaStamina = {
+                color: FloatingTextVariant.Neutral,
+                value: "STABILIZED",
+              };
+            } else {
+              changeStamina({ value: -staminaCost });
+            }
+
+            if (hasStaggered) {
+              set(monsterStaggeredDuration, get(staggerDuration));
+            }
+          } else {
+            deltaStamina = [
+              {
+                color: FloatingTextVariant.Neutral,
+                value: "CANNOT BLOCK",
+              },
+              {
+                color: FloatingTextVariant.Negative,
+                value: ` (${staminaCost})`,
+              },
+            ];
+          }
+        }
+
+        if (!hasBlocked && !hasParried) {
+          if (get(protection) > 0) {
+            deltaHealth = [
+              {
+                color: FloatingTextVariant.Negative,
+                value: healthDamage,
+              },
+              {
+                color: FloatingTextVariant.Neutral,
+                value: ` (${get(protection)})`,
+              },
+            ];
+          }
+        }
+
+        const armorsSkill = get(skills(SkillType.Armors));
+        const hasSkippedRecovery = armorsSkill && Math.random() <= get(skipRecoveryChance);
+
+        if (armorsSkill) {
+          increaseMastery(MasteryType.SkipRecoveryChance);
+        }
+
+        if (!hasSkippedRecovery) {
+          if (!get(isShowing(ShowingType.Recovery))) {
+            set(isShowing(ShowingType.Recovery), true);
+          }
+
+          set(recoveryDuration, get(recoveryRate));
+        }
+
+        const isPoisoned = get(poisonDuration) == 0 && Math.random() <= get(monsterPoisonChance);
+
+        if (isPoisoned) {
+          const hasDeflected =
+            get(skills(SkillType.Armors)) && Math.random() <= get(deflectionChance);
+
+          if (hasDeflected) {
+            deltaHealth.push({
+              color: FloatingTextVariant.Positive,
+              value: "DEFLECTED POISON",
+            });
+          } else {
+            set(poisonDuration, POISON.duration);
+
+            deltaHealth.push({
+              color: FloatingTextVariant.Negative,
+              value: "POISONED",
+            });
+          }
+        }
+
+        changeHealth({ delta: deltaHealth, value: healthDamage });
+
+        if (deltaStamina) {
+          set(deltas(DeltaType.Stamina), deltaStamina);
+        }
+      },
+    [changeHealth, changeMonsterHealth, changeStamina, increaseMastery]
+  );
 }

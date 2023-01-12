@@ -45,7 +45,7 @@ export default function () {
     <Stack className="w-100" direction="horizontal">
       <AttackMeter />
 
-      <FloatingText atom={deltaAttackRate} />
+      <FloatingText type={DeltaType.AttackRate} />
     </Stack>
   );
 

@@ -8,7 +8,6 @@ import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { blockChance } from "@neverquest/state/statistics";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
-import { AnimationType } from "@neverquest/types/ui";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export default function () {
@@ -28,15 +27,15 @@ export default function () {
 
   return (
     <IconDisplay
-      animation={AnimationType.FlipInX}
       contents={
         <>
           <span>{formatPercentage(blockChanceValue)}</span>
 
-          <FloatingText atom={deltaBlockChance} />
+          <FloatingText type={DeltaType.BlockChance} />
         </>
       }
       Icon={Icon}
+      isAnimated
       tooltip="Block chance"
     />
   );

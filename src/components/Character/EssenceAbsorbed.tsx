@@ -24,7 +24,7 @@ export default function () {
         <>
           <span>{essenceAbsorbedValue}</span>
 
-          <FloatingText atom={deltaEssenceAbsorbed} />
+          <FloatingText type={DeltaType.EssenceAbsorbed} />
         </>
       }
       Icon={Icon}

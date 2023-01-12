@@ -32,7 +32,7 @@ export default function () {
           <Stack gap={3}>
             <Location />
 
-            <div style={{ zIndex: 1050 }}>
+            <div style={{ zIndex: 1048 }}>
               <Character />
             </div>
 
@@ -59,7 +59,7 @@ export default function () {
         onConfirm={reset}
         setHide={() => setIsShowingGameOver(false)}
         show={isGameOverValue && isShowingGameOver}
-        title="You are dead."
+        title="Death has come."
       />
     </>
   );

@@ -17,7 +17,6 @@ import {
   damage,
 } from "@neverquest/state/statistics";
 import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
-import { AnimationType } from "@neverquest/types/ui";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export default function () {
@@ -44,7 +43,6 @@ export default function () {
 
   return (
     <IconDisplay
-      animation={AnimationType.FlipInX}
       contents={
         <>
           <OverlayTrigger
@@ -90,7 +88,7 @@ export default function () {
             <span>{bleedRatingValue}</span>
           </OverlayTrigger>
 
-          <FloatingText atom={deltaBleed} />
+          <FloatingText type={DeltaType.BleedRating} />
         </>
       }
       Icon={Icon}

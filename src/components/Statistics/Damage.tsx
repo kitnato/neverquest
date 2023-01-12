@@ -75,7 +75,7 @@ export default function () {
             damageDisplay
           )}
 
-          <FloatingText atom={deltaDamage} />
+          <FloatingText type={DeltaType.Damage} />
         </>
       }
       description={isShowingDamagePerSecondValue ? `${damagePerSecondValue} DPS` : null}

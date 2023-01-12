@@ -32,6 +32,12 @@ export const isRecovering = selector({
 
 // ATOMS
 
+export const attackDuration = atom({
+  default: 0,
+  effects: [localStorage<number>(StorageKey.AttackDuration)],
+  key: StorageKey.AttackDuration,
+});
+
 export const characterLevel = atom({
   default: 0,
   effects: [localStorage<number>(StorageKey.CharacterLevel)],
@@ -42,6 +48,12 @@ export const isAttacking = atom({
   default: false,
   effects: [localStorage<boolean>(StorageKey.IsAttacking)],
   key: StorageKey.IsAttacking,
+});
+
+export const healthRegenerationDuration = atom({
+  default: 0,
+  effects: [localStorage<number>(StorageKey.HealthRegenerationDuration)],
+  key: StorageKey.HealthRegenerationDuration,
 });
 
 export const lootingDuration = atom({
@@ -72,6 +84,12 @@ export const recoveryDuration = atom({
   default: 0,
   effects: [localStorage<number>(StorageKey.RecoveryDuration)],
   key: StorageKey.RecoveryDuration,
+});
+
+export const staminaRegenerationDuration = atom({
+  default: 0,
+  effects: [localStorage<number>(StorageKey.StaminaRegenerationDuration)],
+  key: StorageKey.StaminaRegenerationDuration,
 });
 
 export const statusElement = atom<HTMLDivElement | null>({

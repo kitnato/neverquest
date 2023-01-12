@@ -12,34 +12,38 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 export default function () {
   const toggleEquipGear = useToggleEquipGear();
 
-  return useRecoilCallback(({ set, snapshot }) => ({ gear }: { gear: Gear }) => {
-    const get = getSnapshotGetter(snapshot);
+  return useRecoilCallback(
+    ({ set, snapshot }) =>
+      ({ gear }: { gear: Gear }) => {
+        const get = getSnapshotGetter(snapshot);
 
-    const id = nanoid();
-    const key = nanoid();
-    const { weight } = gear;
+        const id = nanoid();
+        const key = nanoid();
+        const { weight } = gear;
 
-    if (!get(canFit(weight))) {
-      return false;
-    }
+        if (!get(canFit(weight))) {
+          return false;
+        }
 
-    let isEquipped = false;
+        let isEquipped = false;
 
-    if (
-      get(autoEquip) &&
-      ((get(armor) === ARMOR_NONE && isArmor(gear)) ||
-        (get(shield) === SHIELD_NONE && isShield(gear)) ||
-        (get(weapon) === WEAPON_NONE && isWeapon(gear)))
-    ) {
-      isEquipped = true;
-      toggleEquipGear(gear);
-    }
+        if (
+          get(autoEquip) &&
+          ((get(armor) === ARMOR_NONE && isArmor(gear)) ||
+            (get(shield) === SHIELD_NONE && isShield(gear)) ||
+            (get(weapon) === WEAPON_NONE && isWeapon(gear)))
+        ) {
+          isEquipped = true;
+          toggleEquipGear(gear);
+        }
 
-    set(inventory, (current) => ({
-      ...current,
-      [id]: { isEquipped, key, possession: gear },
-    }));
+        set(inventory, (current) => ({
+          ...current,
+          [id]: { isEquipped, key, possession: gear },
+        }));
 
-    return true;
-  });
+        return true;
+      },
+    [toggleEquipGear]
+  );
 }

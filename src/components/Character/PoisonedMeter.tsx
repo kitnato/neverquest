@@ -21,7 +21,7 @@ export default function () {
 
   const { damage, duration, ticks } = POISON;
   const poisonDelta = duration / ticks;
-  const poisonPerTick = getDamagePerTick({
+  const poisonTick = getDamagePerTick({
     damage: monsterDamageValue,
     duration,
     proportion: damage,
@@ -35,9 +35,9 @@ export default function () {
       changeHealth({
         delta: {
           color: FloatingTextVariant.Negative,
-          value: `POISONED (-${poisonPerTick})`,
+          value: `POISONED (-${poisonTick})`,
         },
-        value: -poisonPerTick,
+        value: -poisonTick,
       });
       resetPoisonedDelta();
     } else {

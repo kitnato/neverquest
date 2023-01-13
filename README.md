@@ -232,15 +232,19 @@ Some of the following effects are intrinsic to gear and aren't controlled direct
 
 #### Bleed
 
-Certain successful attacks by a monster or the character can inflict bleed, a damage over time effect consisting of a total amount of damage inflicted regularly over a certain period of time (2.5 seconds).
+Certain successful attacks by the character can inflict "bleeding" on the monster, a damage over time effect consisting of a total amount of damage inflicted regularly over a certain period of time.
 
-For the character, [bleed chance](#bleed-chance) and [bleed damage](#bleed-damage) statistics determine this mechanic. Inflicting bleed is only possible after acquiring the [Anatomy](#anatomy) skill.
+The statistics [bleed chance](#bleed-chance) and [bleed damage](#bleed-damage) determine this mechanic. Inflicting bleed is only possible after acquiring the [Anatomy](#anatomy) skill. This mechanic functions similar to its counterpart [poison](#poison).
 
 #### Block
 
 A successful block by the character upon a monster's attack will negate all damage done, yet costs [stamina](#stamina). Blocking may also inflict [stagger](#stagger) on the monster, depending on the acquisition of the [Traumatology](#traumatology) skill.
 
 The overall chance to block an attack is determined by the [block chance](#block-chance) statistic and is determined primarily by wielding a [shield](#shields).
+
+#### Blight
+
+Blight may be inflicted by a monster if it successfully [poisons](#poison) the character, during which total stamina is reduced by a set percentage until the poisoned effect ends. The magnitude and chance of this blight is proportional to the wilderness level in which the monster resides.
 
 #### Critical Strike
 
@@ -275,6 +279,16 @@ A successful parry [absorbs](#parry-absorption) a percentage of the total damage
 The overall chance to parry an attack is determined by the [parry chance](#parry-chance), which is influenced by currently-equipped gear ([slashing weapons](#slashing-weapon). When parrying occurs, the stamina cost of the currently-equipped weapon is paid. If [exhausted](#exhaustion), no parrying can occur.
 
 Parrying is only possible after acquiring the [Escrime](#escrime) skill.
+
+#### Poison
+
+Certain successful attacks by the monster can afflict the character with "poisoned", a damage over time effect consisting of a total amount of damage inflicted regularly over a certain period of time.
+
+Monsters won't exhibit this mechanic until later [wilderness](#wilderness) levels. It functions similar to its counterpart [bleed](#bleed).
+
+If poisoned, there is also a chance for the character to become [blighted](#blight).
+
+Poison (and resulting blight) effects can be [deflected](#deflection).
 
 #### Stagger
 
@@ -535,23 +549,23 @@ Allows the character to find more monsters on the current wilderness level rathe
 
 ### Potions
 
-`TODO`
-
-One of three types that take up the potion slot(s). Purchased from the [alchemist](#alchemist).
+One of several types of items that take up the potion slots. Purchased from the [alchemist](#alchemist).
 
 Further potion slots can be added by the [tailor](#tailor).
 
 #### Elixir
 
-Restores [stamina](#stamina).
+Fully restores [stamina](#stamina). Does not affect [blight](#blight).
 
-#### Poison
+#### Venom
 
-Adds poison to weapons automatically with each strike, applying damage-over-time effects and potentially other ailments. Has a certain number of charges before it is used up.
+`TODO`
+
+Once applied to a weapon, it adds an effect with each strike, applying damage-over-time effects and potentially other ailments. Has a certain number of charges before it is used up.
 
 #### Salve
 
-Cures certain [ailments](#ailments).
+Cures certain [ailments](#ailments), most notably [poison](#poison) and [blight](#blight).
 
 ## Mastery
 
@@ -677,19 +691,21 @@ Negative status effects that dampen the character or monster. For the character,
 
 #### Bleeding
 
-Certain monster attacks may apply a [bleed](#bleed) effect on the character. This can be stemmed by a [first aid kit](#medic). It can also be avoided if an attack is successfully [deflected](#deflection).
+Certain monster attacks may apply a [bleeding](#bleed) effect on the character. This can be stemmed by a [first aid kit](#medic). It can also be avoided if an attack is successfully [deflected](#deflection).
 
-#### Diseased
+#### Blighted
 
-`TODO`
+Upon successfully [poisoning](#poisoned) the character, a monster's attack may also apply a [blighted](#blight) effect on the character. This effect can be cured by a [salve](#salve).
 
 #### Poisoned
 
-`TODO`
+Certain monster attacks may apply a [poisoned](#poison) effect on the character. This effect can be cured by a [salve](#salve). It can also be avoided if an attack is successfully [deflected](#deflection).
 
 ### Buffs
 
-Positive status effects that boost or improve the character or monster.
+`TODO`
+
+Temporary status effects that boost or improve the character or monster.
 
 ## Traits
 
@@ -702,6 +718,7 @@ Traits are permanent passive abilities.
 - Nudist: double dodge rate when not wearing any armor.
 - Scrounger: double looting rate.
 - Shredder: total bleed damage is inflicted all at once.
+- Tank: Ignore penalties when wearing heavy armor.
 
 ## Quests
 

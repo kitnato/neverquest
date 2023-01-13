@@ -5,15 +5,17 @@ import { CLASS_TABLE_CELL_ITALIC, ICON_INLAY_SIZE, LABEL_UNKNOWN } from "@neverq
 import { ARMOR_ICONS, ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { skills } from "@neverquest/state/skills";
+import { armorPenalty } from "@neverquest/state/statistics";
 import { Armor } from "@neverquest/types";
 import { ArmorClass, SkillType } from "@neverquest/types/enums";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 
 export default function ({ armor }: { armor: Armor }) {
+  const armorPenaltyValue = useRecoilValue(armorPenalty);
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const armorsSkillValue = useRecoilValue(skills(SkillType.Armors));
 
-  const { armorClass, deflectionChance, name, penalty, protection, weight } = armor;
+  const { armorClass, deflectionChance, name, protection, weight } = armor;
   const Icon = armorClass ? ARMOR_ICONS[armorClass] : () => null;
 
   return (
@@ -51,7 +53,7 @@ export default function ({ armor }: { armor: Armor }) {
                       </tr>
                     )}
 
-                    {penalty && (
+                    {armorPenaltyValue && (
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>{`Penalty to ${
                           armorClass === ArmorClass.Reinforced
@@ -59,7 +61,7 @@ export default function ({ armor }: { armor: Armor }) {
                             : "dodge chance & attack rate"
                         }:`}</td>
 
-                        <td>{formatPercentage(penalty)}</td>
+                        <td>{formatPercentage(armorPenaltyValue)}</td>
                       </tr>
                     )}
                   </>

@@ -35,10 +35,12 @@ export const LABEL_AT_MAXIMUM = "MAX";
 export const LABEL_UNKNOWN = "???";
 
 export const POISON = {
+  blightChance: 0.1,
+  blightEffect: 0.1,
   chanceBase: 0.05,
   chanceIncrement: 0.01,
   damage: 0.33,
-  duration: 5000,
+  duration: 15000,
   minimumLevel: 11,
   ticks: 10,
 };

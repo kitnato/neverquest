@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { attributes } from "@neverquest/state/attributes";
-import { inventory } from "@neverquest/state/inventory";
+import { armor, inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { Gear } from "@neverquest/types";
 import { AttributeType, ShowingType } from "@neverquest/types/enums";
@@ -38,6 +38,10 @@ export default function () {
       if (!get(isShowing(ShowingType.Deflection)) && possession.deflectionChance) {
         set(isShowing(ShowingType.Deflection), true);
       }
+
+      if (!get(isShowing(ShowingType.DodgeChanceDetails)) && possession.penalty) {
+        set(isShowing(ShowingType.DodgeChanceDetails), true);
+      }
     }
 
     if (isShield(possession)) {
@@ -62,16 +66,20 @@ export default function () {
         }
       }
 
-      if (!get(isShowing(ShowingType.AttackRateSummary))) {
-        set(isShowing(ShowingType.AttackRateSummary), true);
+      if (!get(isShowing(ShowingType.AttackRateDetails))) {
+        set(isShowing(ShowingType.AttackRateDetails), true);
       }
 
-      if (!get(isShowing(ShowingType.DamageSummary))) {
-        set(isShowing(ShowingType.DamageSummary), true);
+      if (!get(isShowing(ShowingType.DamageDetails))) {
+        set(isShowing(ShowingType.DamageDetails), true);
       }
 
       if (!get(isShowing(ShowingType.Weapon))) {
         set(isShowing(ShowingType.Weapon), true);
+      }
+
+      if (!get(isShowing(ShowingType.AttackRatePenalty)) && get(armor).penalty) {
+        set(isShowing(ShowingType.AttackRatePenalty), true);
       }
     }
   });

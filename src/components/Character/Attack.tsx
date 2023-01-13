@@ -1,6 +1,5 @@
-import { useEffect } from "react";
 import { OverlayTrigger, Popover, Stack, Table } from "react-bootstrap";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import AttackMeter from "@neverquest/components/Character/AttackMeter";
 import FloatingText from "@neverquest/components/FloatingText";
@@ -10,23 +9,21 @@ import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { WEAPON_NONE } from "@neverquest/data/gear";
 import useDeltaText from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/striking-splinter.svg";
-import { attributes } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { attackRate } from "@neverquest/state/statistics";
+import { armorPenalty, attackRate } from "@neverquest/state/statistics";
 import { AttributeType, DeltaTextType, DeltaType, ShowingType } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
-import { getComputedStatistic } from "@neverquest/utilities/getters";
 
 export default function () {
-  const { points } = useRecoilValue(attributes(AttributeType.AttackRate));
-  const [isShowingAttackRateSummary, setShowingAttackRateSummary] = useRecoilState(
-    isShowing(ShowingType.AttackRateSummary)
-  );
+  const armorPenaltyValue = useRecoilValue(armorPenalty);
+  const attackRateValue = useRecoilValue(attackRate);
+  const isShowingAttackRateDetails = useRecoilValue(isShowing(ShowingType.AttackRateDetails));
+  const isShowingAttackRatePenalty = useRecoilValue(isShowing(ShowingType.AttackRatePenalty));
   const weaponValue = useRecoilValue(weapon);
 
-  const { base, increment, name } = ATTRIBUTES[AttributeType.AttackRate];
+  const { name } = ATTRIBUTES[AttributeType.AttackRate];
   const deltaAttackRate = deltas(DeltaType.AttackRate);
 
   useDeltaText({
@@ -34,12 +31,6 @@ export default function () {
     atomValue: attackRate,
     type: DeltaTextType.Time,
   });
-
-  useEffect(() => {
-    if (points > 0 && !isShowingAttackRateSummary) {
-      setShowingAttackRateSummary(true);
-    }
-  }, [points, setShowingAttackRateSummary, isShowingAttackRateSummary]);
 
   const MeterWithDelta = () => (
     <Stack className="w-100" direction="horizontal">
@@ -52,7 +43,7 @@ export default function () {
   return (
     <IconDisplay
       contents={
-        isShowingAttackRateSummary ? (
+        isShowingAttackRateDetails ? (
           <OverlayTrigger
             overlay={
               <Popover>
@@ -72,10 +63,20 @@ export default function () {
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
 
-                        <td>{`-${formatPercentage(
-                          getComputedStatistic({ amount: points, base, increment })
-                        )}`}</td>
+                        <td>{`-${formatPercentage(attackRateValue)}`}</td>
                       </tr>
+
+                      {isShowingAttackRatePenalty && (
+                        <tr>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Penalty from armor:</td>
+
+                          <td>
+                            <td>{`+${formatPercentage(
+                              armorPenaltyValue
+                            )} of total attack rate`}</td>
+                          </td>
+                        </tr>
+                      )}
                     </tbody>
                   </Table>
                 </Popover.Body>

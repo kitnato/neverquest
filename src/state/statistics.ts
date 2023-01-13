@@ -21,13 +21,24 @@ export const attackRate = selector({
     const { base, increment } = ATTRIBUTES[AttributeType.AttackRate];
     const { points } = get(attributes(AttributeType.AttackRate));
 
-    const statistic =
-      get(weapon).rate * (1 - getComputedStatistic({ amount: points, base, increment }));
-    const penalty = get(armor).penalty || 0 * statistic;
+    return get(weapon).rate * (1 - getComputedStatistic({ amount: points, base, increment }));
+  },
+  key: "attackRate",
+});
+
+export const attackRateTotal = selector({
+  get: ({ get }) => {
+    const statistic = get(attackRate);
+    const penalty = get(armorPenalty) * statistic;
 
     return statistic - penalty;
   },
-  key: "attackRate",
+  key: "attackRateTotal",
+});
+
+export const armorPenalty = selector({
+  get: ({ get }) => get(armor).penalty || 0,
+  key: "armorPenalty",
 });
 
 export const bleedChance = selector({
@@ -133,12 +144,19 @@ export const dodgeChance = selector({
     const { base, increment } = ATTRIBUTES[AttributeType.DodgeChance];
     const { points } = get(attributes(AttributeType.DodgeChance));
 
-    const statistic = getComputedStatistic({ amount: points, base, increment });
-    const penalty = get(armor).penalty || 0 * statistic;
-
-    return statistic - penalty;
+    return getComputedStatistic({ amount: points, base, increment });
   },
   key: "dodgeChance",
+});
+
+export const dodgeChanceTotal = selector({
+  get: ({ get }) => {
+    const chance = get(dodgeChance);
+    const penalty = get(armorPenalty) || 0 * chance;
+
+    return chance - penalty;
+  },
+  key: "dodgeChanceTotal",
 });
 
 export const freeBlockChance = selector({

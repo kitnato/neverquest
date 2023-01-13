@@ -61,7 +61,7 @@ export function getDamagePerTick({
   proportion: number;
   ticks: number;
 }) {
-  return Math.round(((damage * proportion) / duration) * (duration / ticks));
+  return Math.ceil(((damage * proportion) / duration) * (duration / ticks));
 }
 
 export function getDeltaTypeFromMasteryType(type: MasteryType) {

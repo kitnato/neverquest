@@ -95,14 +95,16 @@ export enum MasteryType {
 
 export enum ShowingType {
   Armor,
-  AttackRateSummary,
+  AttackRateDetails,
+  AttackRatePenalty,
   AttributesButton,
   BlockChance,
   Coins,
   CrewHiring,
-  DamageSummary,
+  DamageDetails,
   Defense,
   Deflection,
+  DodgeChanceDetails,
   Essence,
   GameOver,
   Loot,

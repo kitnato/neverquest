@@ -20,7 +20,7 @@ import { skills } from "@neverquest/state/skills";
 import {
   blockChance,
   deflectionChance,
-  dodgeChance,
+  dodgeChanceTotal,
   freeBlockChance,
   parryAbsorption,
   parryChance,
@@ -67,7 +67,7 @@ export default function () {
           type: AnimationType.HeadShake,
         });
 
-        const hasDodged = get(skills(SkillType.Dodge)) && Math.random() <= get(dodgeChance);
+        const hasDodged = get(skills(SkillType.Dodge)) && Math.random() <= get(dodgeChanceTotal);
 
         if (hasDodged) {
           set(deltas(DeltaType.Health), {

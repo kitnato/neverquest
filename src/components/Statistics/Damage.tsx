@@ -20,11 +20,12 @@ export default function () {
   const { points } = useRecoilValue(attributes(AttributeType.Damage));
   const damageValue = useRecoilValue(damage);
   const damagePerSecondValue = useRecoilValue(damagePerSecond);
-  const isShowingDamageSummary = useRecoilValue(isShowing(ShowingType.DamageSummary));
+  const isShowingDamageDetails = useRecoilValue(isShowing(ShowingType.DamageDetails));
   const isShowingDamagePerSecondValue = useRecoilValue(isShowingDamagePerSecond);
   const weaponValue = useRecoilValue(weapon);
 
   const { base, increment, name } = ATTRIBUTES[AttributeType.Damage];
+  const DamageDisplay = () => <span>{damageValue}</span>;
   const deltaDamage = deltas(DeltaType.Damage);
 
   useDeltaText({
@@ -32,13 +33,11 @@ export default function () {
     atomValue: damage,
   });
 
-  const damageDisplay = <span>{damageValue}</span>;
-
   return (
     <IconDisplay
       contents={
         <>
-          {isShowingDamageSummary ? (
+          {isShowingDamageDetails ? (
             <OverlayTrigger
               overlay={
                 <Popover>
@@ -69,10 +68,10 @@ export default function () {
               }
               placement="top"
             >
-              {damageDisplay}
+              <DamageDisplay />
             </OverlayTrigger>
           ) : (
-            damageDisplay
+            <DamageDisplay />
           )}
 
           <FloatingText type={DeltaType.Damage} />

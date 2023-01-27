@@ -1,14 +1,14 @@
 import { Col, Row } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import DeflectionChance from "@neverquest/components/Statistics/DeflectionChance";
-import FreeBlockChance from "@neverquest/components/Statistics/FreeBlockChance";
-import SkipRecoveryChance from "@neverquest/components/Statistics/SkipRecoveryChance";
+import { DeflectionChance } from "@neverquest/components/Statistics/DeflectionChance";
+import { FreeBlockChance } from "@neverquest/components/Statistics/FreeBlockChance";
+import { SkipRecoveryChance } from "@neverquest/components/Statistics/SkipRecoveryChance";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { ShowingType, SkillType } from "@neverquest/types/enums";
 
-export default function () {
+export function Support() {
   const isShowingDeflection = useRecoilValue(isShowing(ShowingType.Deflection));
   const armorsSkill = useRecoilValue(skills(SkillType.Armors));
   const shieldsSkill = useRecoilValue(skills(SkillType.Shields));

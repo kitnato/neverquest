@@ -9,7 +9,7 @@ import { CrewStatus, ShowingType } from "@neverquest/types/enums";
 import { generateLocation } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export default function () {
+export function useIncreaseLevel() {
   return useRecoilCallback(({ set, snapshot }) => () => {
     const get = getSnapshotGetter(snapshot);
 

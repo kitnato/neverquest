@@ -1,9 +1,9 @@
 import { useRecoilCallback } from "recoil";
 
 import { BLEED } from "@neverquest/constants";
-import useChangeMonsterHealth from "@neverquest/hooks/actions/useChangeMonsterHealth";
-import useChangeStamina from "@neverquest/hooks/actions/useChangeStamina";
-import useIncreaseMastery from "@neverquest/hooks/actions/useIncreaseMastery";
+import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
+import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
+import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
 import { WeaponClass } from "@neverquest/locra/types";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
@@ -28,10 +28,10 @@ import {
   DeltaDisplay,
   FloatingTextVariant,
 } from "@neverquest/types/ui";
-import animateElement from "@neverquest/utilities/animateElement";
+import { animateElement } from "@neverquest/utilities/animateElement";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export default function () {
+export function useAttack() {
   const changeMonsterHealth = useChangeMonsterHealth();
   const changeStamina = useChangeStamina();
   const increaseMastery = useIncreaseMastery();

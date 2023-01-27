@@ -1,22 +1,22 @@
-import ArmorDisplay from "@neverquest/components/Inventory/Armor/ArmorDisplay";
-import Item from "@neverquest/components/Inventory/Item";
-import ShieldDisplay from "@neverquest/components/Inventory/Shield/ShieldDisplay";
-import WeaponDisplay from "@neverquest/components/Inventory/Weapon/WeaponDisplay";
-import { Possession } from "@neverquest/types";
+import { ArmorDisplay } from "@neverquest/components/Inventory/Armor/ArmorDisplay";
+import { ShieldDisplay } from "@neverquest/components/Inventory/Shield/ShieldDisplay";
+import { TrinketItem } from "@neverquest/components/Inventory/TrinketItem";
+import { WeaponDisplay } from "@neverquest/components/Inventory/Weapon/WeaponDisplay";
+import { Item } from "@neverquest/types";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 
-export default function ({ possession }: { possession: Possession }) {
-  if (isArmor(possession)) {
-    return <ArmorDisplay armor={possession} />;
+export function InventoryElement({ item }: { item: Item }) {
+  if (isArmor(item)) {
+    return <ArmorDisplay armor={item} />;
   }
 
-  if (isShield(possession)) {
-    return <ShieldDisplay shield={possession} />;
+  if (isShield(item)) {
+    return <ShieldDisplay shield={item} />;
   }
 
-  if (isWeapon(possession)) {
-    return <WeaponDisplay weapon={possession} />;
+  if (isWeapon(item)) {
+    return <WeaponDisplay weapon={item} />;
   }
 
-  return <Item item={possession} />;
+  return <TrinketItem trinket={item} />;
 }

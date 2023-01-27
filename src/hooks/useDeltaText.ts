@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { RecoilState, RecoilValueReadOnly, useRecoilValue, useSetRecoilState } from "recoil";
 
-import usePreviousValue from "@neverquest/hooks/usePreviousValue";
+import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
 import { DeltaTextType } from "@neverquest/types/enums";
 import { DeltaDisplay, FloatingTextVariant } from "@neverquest/types/ui";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
-export default function ({
+export function useDeltaText({
   atomDelta,
   atomValue,
   stop = (previous) => previous === null,

@@ -1,11 +1,11 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import FloatingText from "@neverquest/components/FloatingText";
-import IconDisplay from "@neverquest/components/IconDisplay";
+import { FloatingText } from "@neverquest/components/FloatingText";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { MASTERIES } from "@neverquest/data/masteries";
-import useDeltaText from "@neverquest/hooks/useDeltaText";
+import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/star-swirl.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { shield } from "@neverquest/state/inventory";
@@ -14,7 +14,7 @@ import { staggerChanceWeapon, staggerDuration, staggerRating } from "@neverquest
 import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
-export default function () {
+export function StaggerRating() {
   const { staggerChance } = useRecoilValue(shield);
   const staggerSkill = useRecoilValue(skills(SkillType.Stagger));
   const staggerChanceWeaponValue = useRecoilValue(staggerChanceWeapon);

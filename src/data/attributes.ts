@@ -85,7 +85,7 @@ export const ATTRIBUTES: Record<AttributeType, AttributeOrMastery> = {
     requiredSkill: SkillType.Regeneration,
   },
   [AttributeType.Stamina]: {
-    base: 10,
+    base: 20,
     description: "Increases maximum stamina.",
     Icon,
     increment: 5,

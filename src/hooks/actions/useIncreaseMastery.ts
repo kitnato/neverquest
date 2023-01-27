@@ -6,7 +6,7 @@ import { MasteryType } from "@neverquest/types/enums";
 import { FloatingTextVariant } from "@neverquest/types/ui";
 import { getDeltaTypeFromMasteryType, getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export default function () {
+export function useIncreaseMastery() {
   return useRecoilCallback(({ set, snapshot }) => (type: MasteryType) => {
     const get = getSnapshotGetter(snapshot);
 

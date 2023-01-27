@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import LOCRA from "@neverquest/locra";
+import { LOCRA } from "@neverquest/locra";
 import { CreatureType } from "@neverquest/locra/types";
 import { isAttacking } from "@neverquest/state/character";
 import { level } from "@neverquest/state/encounter";
@@ -14,7 +14,7 @@ import {
 import { isNSFW } from "@neverquest/state/settings";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export default function () {
+export function useCreateMonster() {
   return useRecoilCallback(({ reset, set, snapshot }) => () => {
     const get = getSnapshotGetter(snapshot);
 

@@ -5,7 +5,7 @@ import { isLevelCompleted, isWilderness, progress } from "@neverquest/state/enco
 import { isInventoryOpen } from "@neverquest/state/inventory";
 import { UIVariant } from "@neverquest/types/ui";
 
-export default function () {
+export function LodestoneUseButton() {
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
   const resetProgress = useResetRecoilState(progress);

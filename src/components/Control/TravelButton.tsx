@@ -2,16 +2,16 @@ import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import ImageIcon from "@neverquest/components/IconImage";
+import { IconImage } from "@neverquest/components/IconImage";
 import { LABEL_UNKNOWN } from "@neverquest/constants";
-import useSwitchLocation from "@neverquest/hooks/actions/useSwitchLocation";
+import { useSwitchLocation } from "@neverquest/hooks/actions/useSwitchLocation";
 import { ReactComponent as Icon } from "@neverquest/icons/journey.svg";
 import { isLevelCompleted, isWilderness, level } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export default function ({ isDisabled }: { isDisabled: boolean }) {
+export function TravelButton({ isDisabled }: { isDisabled: boolean }) {
   const hasLootedValue = useRecoilValue(hasLooted);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const isWildernessValue = useRecoilValue(isWilderness);
@@ -55,7 +55,7 @@ export default function ({ isDisabled }: { isDisabled: boolean }) {
           }}
           variant={UIVariant.Outline}
         >
-          <ImageIcon Icon={Icon} isFlipped={!isWildernessValue} />
+          <IconImage Icon={Icon} isFlipped={!isWildernessValue} />
         </Button>
       </span>
     </OverlayTrigger>

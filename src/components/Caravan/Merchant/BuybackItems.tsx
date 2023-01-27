@@ -1,10 +1,10 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import PurchasableItems from "@neverquest/components/Caravan/Merchant/PurchasableItems";
+import { PurchasableItems } from "@neverquest/components/Caravan/Merchant/PurchasableItems";
 import { merchantInventory } from "@neverquest/state/caravan";
 
-export default function () {
+export function BuybackItems() {
   const merchantInventoryValue = useRecoilValue(merchantInventory);
 
   const returnedItemIDs = Object.getOwnPropertyNames(merchantInventoryValue).filter(

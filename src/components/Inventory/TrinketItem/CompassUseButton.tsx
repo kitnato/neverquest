@@ -2,7 +2,7 @@ import { ChangeEvent, MouseEvent, useState } from "react";
 import { Button, Form, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
-import IconDisplay from "@neverquest/components/IconDisplay";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ReactComponent as Icon } from "@neverquest/icons/treasure-map.svg";
 import {
   isLevelCompleted,
@@ -15,7 +15,7 @@ import { isInventoryOpen } from "@neverquest/state/inventory";
 import { hasLooted } from "@neverquest/state/resources";
 import { UIVariant } from "@neverquest/types/ui";
 
-export default function () {
+export function CompassUseButton() {
   const hasLootedValue = useRecoilValue(hasLooted);
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);

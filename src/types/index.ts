@@ -29,8 +29,8 @@ export interface CrewMember {
 }
 
 interface InventoryBase {
+  item: Item;
   key: string;
-  possession: Possession;
 }
 
 export interface Inventory {
@@ -45,11 +45,7 @@ export interface InventoryMerchant {
   };
 }
 
-export type Item = ItemBase & {
-  Icon: SVGIcon;
-  description: string;
-  isPortable: boolean;
-};
+export type Item = Gear | Trinket;
 
 interface ItemBase {
   name: string;
@@ -58,8 +54,6 @@ interface ItemBase {
 }
 
 export type Gear = Armor | Shield | Weapon;
-
-export type Possession = Gear | Item;
 
 export type Shield = ItemBase & {
   blockChance: number;
@@ -75,6 +69,12 @@ export interface Skill {
   price: number;
   requiredLevel: number;
 }
+
+export type Trinket = ItemBase & {
+  Icon: SVGIcon;
+  description: string;
+  isPortable: boolean;
+};
 
 export type Weapon = ItemBase & {
   abilityChance: number;

@@ -1,11 +1,11 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import FloatingText from "@neverquest/components/FloatingText";
-import IconDisplay from "@neverquest/components/IconDisplay";
+import { FloatingText } from "@neverquest/components/FloatingText";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import useDeltaText from "@neverquest/hooks/useDeltaText";
+import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/wingfoot.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -14,7 +14,7 @@ import { armorPenalty, dodgeChance, dodgeChanceTotal } from "@neverquest/state/s
 import { AttributeType, DeltaType, ShowingType, SkillType } from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
-export default function () {
+export function DodgeChance() {
   const armorPenaltyValue = useRecoilValue(armorPenalty);
   const dodgeChanceValue = useRecoilValue(dodgeChance);
   const dodgeChanceTotalValue = useRecoilValue(dodgeChanceTotal);

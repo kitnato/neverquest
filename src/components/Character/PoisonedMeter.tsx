@@ -1,9 +1,9 @@
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
-import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
+import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { POISON } from "@neverquest/constants";
-import useChangeHealth from "@neverquest/hooks/actions/useChangeHealth";
-import useAnimation from "@neverquest/hooks/useAnimation";
+import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
+import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { poisonDuration } from "@neverquest/state/character";
 import { poisonedDelta } from "@neverquest/state/deltas";
 import { monsterDamage } from "@neverquest/state/monster";
@@ -11,7 +11,7 @@ import { FloatingTextVariant, UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 import { getDamagePerTick } from "@neverquest/utilities/getters";
 
-export default function () {
+export function PoisonedMeter() {
   const resetPoisonedDelta = useResetRecoilState(poisonedDelta);
   const [poisonedDeltaValue, setPoisonedDelta] = useRecoilState(poisonedDelta);
   const [poisonDurationValue, setPoisonDuration] = useRecoilState(poisonDuration);

@@ -3,17 +3,17 @@ import { MouseEvent, useState } from "react";
 import { Button, Stack } from "react-bootstrap";
 import { useRecoilState, useSetRecoilState } from "recoil";
 
-import ConfirmationDialog from "@neverquest/components/ConfirmationDialog";
-import InventoryElement from "@neverquest/components/Inventory/InventoryElement";
-import Coins from "@neverquest/components/Resource/Coins";
+import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
+import { InventoryElement } from "@neverquest/components/Inventory/InventoryElement";
+import { Coins } from "@neverquest/components/Resource/Coins";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
-import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
+import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { inventory } from "@neverquest/state/inventory";
 import { UIVariant } from "@neverquest/types/ui";
 import { getSellPrice } from "@neverquest/utilities/getters";
 
-export default function () {
+export function SellItems() {
   const [inventoryValue, setInventory] = useRecoilState(inventory);
   const setMerchantInventory = useSetRecoilState(merchantInventory);
 
@@ -24,7 +24,7 @@ export default function () {
   const inventoryIDs = Object.getOwnPropertyNames(inventoryValue);
 
   const sellPossession = (id: string) => {
-    const { key, possession } = inventoryValue[id];
+    const { item, key } = inventoryValue[id];
 
     setInventory((current) => {
       const newInventoryContents = { ...current };
@@ -35,9 +35,9 @@ export default function () {
     });
     setMerchantInventory((current) => ({
       ...current,
-      [nanoid()]: { isReturned: true, key, possession },
+      [nanoid()]: { isReturned: true, item, key },
     }));
-    transactResources({ coinsDifference: getSellPrice(possession) });
+    transactResources({ coinsDifference: getSellPrice(item) });
   };
 
   return (
@@ -49,12 +49,12 @@ export default function () {
       ) : (
         <Stack gap={3}>
           {inventoryIDs.map((id) => {
-            const { isEquipped, key, possession } = inventoryValue[id];
+            const { isEquipped, item, key } = inventoryValue[id];
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={key}>
                 <Stack direction="horizontal">
-                  <InventoryElement possession={possession} />
+                  <InventoryElement item={item} />
 
                   {isEquipped && (
                     <span className="fst-italic" style={{ width: "max-content" }}>
@@ -64,7 +64,7 @@ export default function () {
                 </Stack>
 
                 <Stack direction="horizontal" gap={3}>
-                  <Coins tooltip="Value (coins)" value={getSellPrice(possession)} />
+                  <Coins tooltip="Value (coins)" value={getSellPrice(item)} />
 
                   <Button
                     onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {

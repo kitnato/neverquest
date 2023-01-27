@@ -1,7 +1,7 @@
 import Form from "react-bootstrap/Form";
 import { RecoilState, useRecoilState } from "recoil";
 
-export default function ({
+export function SettingsSwitch({
   atom,
   isDisabled = false,
   label,

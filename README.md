@@ -338,9 +338,9 @@ Restores all [health](#health), [stamina](#stamina) and [energy](#energy) when p
 
 #### Medic
 
-Their presence saves the character from death (no restart necessary) once per wilderness level in return for a percentage of all of the character's current [resources](#resources). Upgrades to the medic's supplies, paid in coins and/or scrap, reduce this death payment.
+Their presence resuscitates the character from death (no restart necessary) once per wilderness level in return for a percentage of all of the character's current [resources](#resources). The medic also sells first-aid kits that stem [bleeding](#bleeding) and restore a percentage of missing health subject to a certain application duration.
 
-Also sells first aid kits that can cure a [bleed](#bleed) effect and restore a certain amount of health over time.
+Upgrades to the medic's supplies, paid in coins and/or scrap, reduce the resuscitation cost and the first-aid application duration.
 
 #### Mercenary
 
@@ -382,7 +382,7 @@ An item can either be;
 
 a) a piece of [gear](#gear), or
 b) a consumable like a [potion](#potions), or
-c) a [trinket](#trinkets) that grants a special effect or action.
+c) a [trinket](#trinkets) that grants a special effect and/or an action.
 
 ### Knapsack
 
@@ -691,7 +691,7 @@ Negative status effects that dampen the character or monster. For the character,
 
 #### Bleeding
 
-Certain monster attacks may apply a [bleeding](#bleed) effect on the character. This can be stemmed by a [first aid kit](#medic). It can also be avoided if an attack is successfully [deflected](#deflection).
+Certain monster attacks may apply a [bleeding](#bleed) effect on the character. This can be stemmed by a [first-aid kit](#medic). It can also be avoided if an attack is successfully [deflected](#deflection).
 
 #### Blighted
 
@@ -713,11 +713,12 @@ Temporary status effects that boost or improve the character or monster.
 
 Traits are permanent passive abilities.
 
-- Brawler: an unequipped shield adds to unarmed damage, using both hands.
-- Bruiser: current stamina adds unarmed bonus damage.
-- Nudist: double dodge rate when not wearing any armor.
-- Scrounger: double looting rate.
-- Shredder: total bleed damage is inflicted all at once.
+- Brawler: An unequipped shield adds to unarmed damage, using both hands.
+- Bruiser: Current stamina adds unarmed bonus damage.
+- Nudist: Double dodge rate when not wearing any armor.
+- Quaffer: Automatically consume an equipped elixir if under 20% health.
+- Scrounger: Double looting rate.
+- Shredder: Total bleed damage is inflicted all at once.
 - Tank: Ignore penalties when wearing heavy armor.
 
 ## Quests
@@ -817,7 +818,7 @@ Neverquest is a work-in-progress. Several features marked with `TODO` are pendin
 
 To run the app locally from source, you will need to use a command-line interface (CLI), as well as have [git](https://git-scm.com/downloads) and [NPM](https://docs.npmjs.com/cli/v8/configuring-npm/install) installed globally.
 
-### Run the app
+### Install & run the app
 
 1. Open the CLI and change into a suitable directory
 1. Run `git clone git@github.com:cneuro/neverquest.git`
@@ -828,7 +829,7 @@ To run the app locally from source, you will need to use a command-line interfac
 
 ### Local development
 
-Before committing any changes, please do the following:
+After [installation](#install--run-the-app), but before committing any changes, please do the following:
 
 1. In the CLI, go to the project folder (e.g. `cd neverquest`).
 1. Run `npm run prepare`

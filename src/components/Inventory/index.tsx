@@ -2,19 +2,19 @@ import { FunctionComponent } from "react";
 import { Button, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import Encumbrance from "@neverquest/components/Inventory/Encumbrance";
-import InventoryElement from "@neverquest/components/Inventory/InventoryElement";
-import CompassUseButton from "@neverquest/components/Inventory/Item/CompassUseButton";
-import HearthstoneUseButton from "@neverquest/components/Inventory/Item/HearthstoneUseButton";
-import LodestoneUseButton from "@neverquest/components/Inventory/Item/LodestoneUseButton";
+import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
+import { InventoryElement } from "@neverquest/components/Inventory/InventoryElement";
+import { CompassUseButton } from "@neverquest/components/Inventory/TrinketItem/CompassUseButton";
+import { HearthstoneUseButton } from "@neverquest/components/Inventory/TrinketItem/HearthstoneUseButton";
+import { LodestoneUseButton } from "@neverquest/components/Inventory/TrinketItem/LodestoneUseButton";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
-import { ITEM_COMPASS, ITEM_HEARTHSTONE, ITEM_LODESTONE } from "@neverquest/data/items";
-import useToggleEquipGear from "@neverquest/hooks/actions/useToggleEquipGear";
+import { TRINKET_COMPASS, TRINKET_HEARTHSTONE, TRINKET_LODESTONE } from "@neverquest/data/trinkets";
+import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { inventory } from "@neverquest/state/inventory";
-import { isGear, isItem } from "@neverquest/types/type-guards";
+import { isGear, isTrinket } from "@neverquest/types/type-guards";
 import { UIVariant } from "@neverquest/types/ui";
 
-export default function () {
+export function Inventory() {
   const inventoryValue = useRecoilValue(inventory);
 
   const toggleEquipGear = useToggleEquipGear();
@@ -40,11 +40,11 @@ export default function () {
         {equippedInventoryIDs.length === 0 && <span className="fst-italic">Nothing equipped.</span>}
 
         {equippedInventoryIDs.map((id) => {
-          const { key, possession } = inventoryValue[id];
+          const { item, key } = inventoryValue[id];
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={key}>
-              <InventoryElement possession={possession} />
+              <InventoryElement item={item} />
 
               <Button onClick={handleToggleEquipGear(id)} variant={UIVariant.Outline}>
                 Unequip
@@ -62,27 +62,29 @@ export default function () {
         )}
 
         {storedInventoryValueIDs.map((id) => {
-          const { key, possession } = inventoryValue[id];
+          const { item, key } = inventoryValue[id];
           let PossessionAction: FunctionComponent = () => null;
 
-          if (isGear(possession)) {
-            PossessionAction = () => (
+          if (isGear(item)) {
+            const EquipButton = () => (
               <Button onClick={handleToggleEquipGear(id)} variant={UIVariant.Outline}>
                 Equip
               </Button>
             );
+
+            PossessionAction = EquipButton;
           }
 
-          if (isItem(possession)) {
+          if (isTrinket(item)) {
             PossessionAction = (() => {
-              switch (possession.name) {
-                case ITEM_COMPASS.name: {
+              switch (item.name) {
+                case TRINKET_COMPASS.name: {
                   return CompassUseButton;
                 }
-                case ITEM_HEARTHSTONE.name: {
+                case TRINKET_HEARTHSTONE.name: {
                   return HearthstoneUseButton;
                 }
-                case ITEM_LODESTONE.name: {
+                case TRINKET_LODESTONE.name: {
                   return LodestoneUseButton;
                 }
                 default: {
@@ -94,7 +96,7 @@ export default function () {
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={key}>
-              <InventoryElement possession={possession} />
+              <InventoryElement item={item} />
 
               <PossessionAction />
             </div>

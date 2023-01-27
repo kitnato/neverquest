@@ -1,10 +1,10 @@
 import { Col, Row } from "react-bootstrap";
 
-import Resource from "@neverquest/components/Resource";
-import Coins from "@neverquest/components/Resource/Coins";
-import Essence from "@neverquest/components/Resource/Essence";
-import Lootable from "@neverquest/components/Resource/Lootable";
-import Scrap from "@neverquest/components/Resource/Scrap";
+import { Resource } from "@neverquest/components/Resource";
+import { Coins } from "@neverquest/components/Resource/Coins";
+import { Essence } from "@neverquest/components/Resource/Essence";
+import { Lootable } from "@neverquest/components/Resource/Lootable";
+import { Scrap } from "@neverquest/components/Resource/Scrap";
 import { isShowing } from "@neverquest/state/isShowing";
 import {
   coins,
@@ -16,7 +16,7 @@ import {
 } from "@neverquest/state/resources";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
 
-export default function ({ isLoot }: { isLoot?: boolean }) {
+export function ResourceDisplay({ isLoot }: { isLoot?: boolean }) {
   return (
     <Row>
       {isLoot ? (

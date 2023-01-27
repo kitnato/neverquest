@@ -1,6 +1,6 @@
 import { atomFamily, selectorFamily } from "recoil";
 
-import localStorage from "@neverquest/state/effects/localStorage";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { skills } from "@neverquest/state/skills";
 import { MasteryType, ShowingType, SkillType, StorageKey } from "@neverquest/types/enums";
 
@@ -36,6 +36,6 @@ export const isShowingMastery = selectorFamily<boolean, MasteryType | null>({
 
 export const isShowing = atomFamily<boolean, ShowingType>({
   default: false,
-  effects: (parameter) => [localStorage<boolean>(`${StorageKey.IsShowing}-${parameter}`)],
+  effects: (parameter) => [handleLocalStorage<boolean>(`${StorageKey.IsShowing}-${parameter}`)],
   key: StorageKey.IsShowing,
 });

@@ -3,7 +3,7 @@ import { Form, Modal, Stack } from "react-bootstrap";
 import { Gear } from "react-bootstrap-icons";
 import { useRecoilValue } from "recoil";
 
-import SettingsSwitch from "@neverquest/components/Header/SettingsSwitch";
+import { SettingsSwitch } from "@neverquest/components/Header/SettingsSwitch";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import {
   autoEquip,
@@ -12,7 +12,7 @@ import {
   lowHealthWarning,
 } from "@neverquest/state/settings";
 
-export default function () {
+export function Settings() {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
 
   const [isShowing, setIsShowing] = useState(false);

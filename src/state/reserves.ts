@@ -2,7 +2,7 @@ import { atom, selector } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { attributes } from "@neverquest/state/attributes";
-import localStorage from "@neverquest/state/effects/localStorage";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { shield, weapon } from "@neverquest/state/inventory";
 import { AttributeType, StorageKey } from "@neverquest/types/enums";
 
@@ -59,12 +59,12 @@ export const maximumStamina = selector({
 
 export const currentHealth = atom({
   default: maximumHealth,
-  effects: [localStorage<number>(StorageKey.CurrentHealth)],
+  effects: [handleLocalStorage<number>(StorageKey.CurrentHealth)],
   key: StorageKey.CurrentHealth,
 });
 
 export const currentStamina = atom({
   default: maximumStamina,
-  effects: [localStorage<number>(StorageKey.CurrentStamina)],
+  effects: [handleLocalStorage<number>(StorageKey.CurrentStamina)],
   key: StorageKey.CurrentStamina,
 });

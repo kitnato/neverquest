@@ -1,16 +1,16 @@
 import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
-import Regeneration from "@neverquest/components/Character/Regeneration";
-import FloatingText from "@neverquest/components/FloatingText";
-import IconDisplay from "@neverquest/components/IconDisplay";
-import ReserveMeter from "@neverquest/components/ReserveMeter";
+import { Regeneration } from "@neverquest/components/Character/Regeneration";
+import { FloatingText } from "@neverquest/components/FloatingText";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { ReserveMeter } from "@neverquest/components/ReserveMeter";
 import { ReactComponent as Icon } from "@neverquest/icons/lungs.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import { DeltaType, ReserveType, ShowingType } from "@neverquest/types/enums";
 import { UIAttachment } from "@neverquest/types/ui";
 
-export default function () {
+export function Stamina() {
   const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
 
   if (!isShowingStamina) {

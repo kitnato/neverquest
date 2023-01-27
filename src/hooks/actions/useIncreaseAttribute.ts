@@ -1,12 +1,12 @@
 import { useRecoilCallback } from "recoil";
 
-import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
+import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { attributeCost, attributes } from "@neverquest/state/attributes";
 import { characterLevel } from "@neverquest/state/character";
 import { AttributeType } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export default function () {
+export function useIncreaseAttribute() {
   const transactResources = useTransactResources();
 
   return useRecoilCallback(({ set, snapshot }) => (type: AttributeType) => {

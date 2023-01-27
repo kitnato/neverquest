@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import useRegenerateMonster from "@neverquest/hooks/actions/useRegenerateMonster";
+import { useRegenerateMonster } from "@neverquest/hooks/actions/useRegenerateMonster";
 import { attackDuration, isAttacking } from "@neverquest/state/character";
 import { isLevelStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -9,7 +9,7 @@ import { attackRateTotal } from "@neverquest/state/statistics";
 import { ShowingType } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export default function () {
+export function useToggleAttack() {
   const regenerateMonster = useRegenerateMonster();
 
   return useRecoilCallback(

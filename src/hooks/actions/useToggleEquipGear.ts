@@ -9,16 +9,16 @@ import { isArmor, isGear, isShield, isWeapon } from "@neverquest/types/type-guar
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 // TODO - refactor with useRecoilTransaction so that these can be called from each other without passing values
-export default function () {
+export function useToggleEquipGear() {
   return useRecoilCallback(({ set, snapshot }) => (idOrGear: string | Gear) => {
     const get = getSnapshotGetter(snapshot);
 
-    let possession;
+    let item;
 
     if (isGear(idOrGear)) {
-      possession = idOrGear;
+      item = idOrGear;
     } else {
-      possession = get(inventory)[idOrGear].possession;
+      item = get(inventory)[idOrGear].item;
 
       set(inventory, (current) => ({
         ...current,
@@ -26,7 +26,7 @@ export default function () {
       }));
     }
 
-    if (isArmor(possession)) {
+    if (isArmor(item)) {
       if (!get(isShowing(ShowingType.Armor))) {
         set(isShowing(ShowingType.Armor), true);
       }
@@ -35,16 +35,16 @@ export default function () {
         set(isShowing(ShowingType.Protection), true);
       }
 
-      if (!get(isShowing(ShowingType.Deflection)) && possession.deflectionChance) {
+      if (!get(isShowing(ShowingType.Deflection)) && item.deflectionChance) {
         set(isShowing(ShowingType.Deflection), true);
       }
 
-      if (!get(isShowing(ShowingType.DodgeChanceDetails)) && possession.penalty) {
+      if (!get(isShowing(ShowingType.DodgeChanceDetails)) && item.penalty) {
         set(isShowing(ShowingType.DodgeChanceDetails), true);
       }
     }
 
-    if (isShield(possession)) {
+    if (isShield(item)) {
       if (!get(isShowing(ShowingType.Shield))) {
         set(isShowing(ShowingType.Shield), true);
       }
@@ -54,8 +54,8 @@ export default function () {
       }
     }
 
-    if (isWeapon(possession)) {
-      if (!get(isShowing(ShowingType.Stamina)) && possession.staminaCost > 0) {
+    if (isWeapon(item)) {
+      if (!get(isShowing(ShowingType.Stamina)) && item.staminaCost > 0) {
         set(isShowing(ShowingType.Stamina), true);
 
         if (!get(attributes(AttributeType.Stamina)).isUnlocked) {

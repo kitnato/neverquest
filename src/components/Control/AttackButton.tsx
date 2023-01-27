@@ -2,9 +2,9 @@ import { MouseEvent, useEffect, useState } from "react";
 import { Button, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import ConfirmationDialog from "@neverquest/components/ConfirmationDialog";
-import IconImage from "@neverquest/components/IconImage";
-import useToggleAttack from "@neverquest/hooks/actions/useToggleAttack";
+import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
+import { IconImage } from "@neverquest/components/IconImage";
+import { useToggleAttack } from "@neverquest/hooks/actions/useToggleAttack";
 import { ReactComponent as IconRetreat } from "@neverquest/icons/return-arrow.svg";
 import { ReactComponent as IconResting } from "@neverquest/icons/tired-eye.svg";
 import { ReactComponent as IconAttack } from "@neverquest/icons/tron-arrow.svg";
@@ -16,7 +16,7 @@ import { lowHealthWarning } from "@neverquest/state/settings";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export default function ({ isDisabled }: { isDisabled: boolean }) {
+export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
   const [isAttackingValue, setAttacking] = useRecoilState(isAttacking);
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const isHealthLowValue = useRecoilValue(isHealthLow);

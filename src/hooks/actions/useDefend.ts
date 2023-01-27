@@ -1,10 +1,10 @@
 import { useRecoilCallback } from "recoil";
 
 import { POISON } from "@neverquest/constants";
-import useChangeHealth from "@neverquest/hooks/actions/useChangeHealth";
-import useChangeMonsterHealth from "@neverquest/hooks/actions/useChangeMonsterHealth";
-import useChangeStamina from "@neverquest/hooks/actions/useChangeStamina";
-import useIncreaseMastery from "@neverquest/hooks/actions/useIncreaseMastery";
+import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
+import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
+import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
+import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
 import { poisonDuration, recoveryDuration, statusElement } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { shield, weapon } from "@neverquest/state/inventory";
@@ -37,7 +37,7 @@ import {
   DeltaDisplay,
   FloatingTextVariant,
 } from "@neverquest/types/ui";
-import animateElement from "@neverquest/utilities/animateElement";
+import { animateElement } from "@neverquest/utilities/animateElement";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 /**
@@ -50,7 +50,7 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
  * If not parried and not blocked, set recovery, and continue
  * Process health & stamina deltas
  */
-export default function () {
+export function useDefend() {
   const changeHealth = useChangeHealth();
   const changeMonsterHealth = useChangeMonsterHealth();
   const changeStamina = useChangeStamina();

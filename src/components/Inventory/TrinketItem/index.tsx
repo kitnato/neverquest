@@ -1,11 +1,11 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 
-import IconDisplay from "@neverquest/components/IconDisplay";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
-import { Item } from "@neverquest/types";
+import { Trinket } from "@neverquest/types";
 
-export default function ({ item }: { item: Item }) {
-  const { description, Icon, name, weight } = item;
+export function TrinketItem({ trinket }: { trinket: Trinket }) {
+  const { description, Icon, name, weight } = trinket;
 
   return (
     <IconDisplay
@@ -36,7 +36,7 @@ export default function ({ item }: { item: Item }) {
         </OverlayTrigger>
       }
       Icon={Icon}
-      tooltip="Item"
+      tooltip="Trinket"
     />
   );
 }

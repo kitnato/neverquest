@@ -1,15 +1,15 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
-import useAttack from "@neverquest/hooks/actions/useAttack";
-import useAnimation from "@neverquest/hooks/useAnimation";
+import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
+import { useAttack } from "@neverquest/hooks/actions/useAttack";
+import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { attackDuration, isAttacking, isLooting, isRecovering } from "@neverquest/state/character";
 import { canAttackOrParry } from "@neverquest/state/reserves";
 import { attackRateTotal } from "@neverquest/state/statistics";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
-export default function () {
+export function AttackMeter() {
   const [attackDurationValue, setAttackDuration] = useRecoilState(attackDuration);
   const attackRateTotalValue = useRecoilValue(attackRateTotal);
   const canAttackOrParryValue = useRecoilValue(canAttackOrParry);

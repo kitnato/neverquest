@@ -1,8 +1,8 @@
 import { useRecoilValue } from "recoil";
 
-import FloatingText from "@neverquest/components/FloatingText";
-import IconDisplay from "@neverquest/components/IconDisplay";
-import useDeltaText from "@neverquest/hooks/useDeltaText";
+import { FloatingText } from "@neverquest/components/FloatingText";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/shield-reflect.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -10,7 +10,7 @@ import { deflectionChance } from "@neverquest/state/statistics";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
-export default function () {
+export function DeflectionChance() {
   const deflectionChanceValue = useRecoilValue(deflectionChance);
   const isShowingDeflection = useRecoilValue(isShowing(ShowingType.Deflection));
 

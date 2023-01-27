@@ -1,12 +1,12 @@
 import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
-import TrainableSkill from "@neverquest/components/Caravan/Mercenary/TrainableSkill";
-import TrainedSkill from "@neverquest/components/Caravan/Mercenary/TrainedSkill";
+import { TrainableSkill } from "@neverquest/components/Caravan/Mercenary/TrainableSkill";
+import { TrainedSkill } from "@neverquest/components/Caravan/Mercenary/TrainedSkill";
 import { SKILLS_ORDER } from "@neverquest/data/skills";
 import { skillsTrained } from "@neverquest/state/skills";
 
-export default function () {
+export function Mercenary() {
   const skillsTrainedAll = Object.values(useRecoilValue(skillsTrained));
 
   const allTrained = skillsTrainedAll.every((isSkillTrained) => isSkillTrained);

@@ -6,7 +6,7 @@ import { DeltaType } from "@neverquest/types/enums";
 import { FloatingTextVariant } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export default function () {
+export function useRegenerateMonster() {
   return useRecoilCallback(({ reset, set, snapshot }) => () => {
     const get = getSnapshotGetter(snapshot);
 

@@ -5,7 +5,7 @@ import { monsterLoot } from "@neverquest/state/monster";
 import { essenceLoot, scrapLoot } from "@neverquest/state/resources";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export default function () {
+export function useDropLoot() {
   return useRecoilCallback(({ set, snapshot }) => () => {
     const get = getSnapshotGetter(snapshot);
 

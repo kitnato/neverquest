@@ -4,7 +4,7 @@ import { QuestionSquare } from "react-bootstrap-icons";
 
 import { LABEL_UNKNOWN } from "@neverquest/constants";
 
-export default function () {
+export function About() {
   const [isShowing, setIsShowing] = useState(false);
 
   const handleShow = (state: boolean) => setIsShowing(state);

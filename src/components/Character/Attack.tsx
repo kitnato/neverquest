@@ -1,13 +1,13 @@
 import { OverlayTrigger, Popover, Stack, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import AttackMeter from "@neverquest/components/Character/AttackMeter";
-import FloatingText from "@neverquest/components/FloatingText";
-import IconDisplay from "@neverquest/components/IconDisplay";
+import { AttackMeter } from "@neverquest/components/Character/AttackMeter";
+import { FloatingText } from "@neverquest/components/FloatingText";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { WEAPON_NONE } from "@neverquest/data/gear";
-import useDeltaText from "@neverquest/hooks/useDeltaText";
+import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/striking-splinter.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
@@ -16,7 +16,7 @@ import { armorPenalty, attackRate } from "@neverquest/state/statistics";
 import { AttributeType, DeltaTextType, DeltaType, ShowingType } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
-export default function () {
+export function Attack() {
   const armorPenaltyValue = useRecoilValue(armorPenalty);
   const attackRateValue = useRecoilValue(attackRate);
   const isShowingAttackRateDetails = useRecoilValue(isShowing(ShowingType.AttackRateDetails));

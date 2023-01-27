@@ -1,15 +1,15 @@
 import { Accordion } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import IconDisplay from "@neverquest/components/IconDisplay";
-import Mastery from "@neverquest/components/Masteries/Mastery";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { Mastery } from "@neverquest/components/Masteries/Mastery";
 import { MASTERIES_ORDER } from "@neverquest/data/masteries";
 import { ReactComponent as Icon } from "@neverquest/icons/master-of-arms.svg";
 import { isShowingMastery } from "@neverquest/state/isShowing";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export default function () {
+export function Masteries() {
   const isShowingMasteryValue = useRecoilValue(isShowingMastery(null));
 
   if (!isShowingMasteryValue) {

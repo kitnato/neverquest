@@ -1,11 +1,11 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import FloatingText from "@neverquest/components/FloatingText";
-import IconDisplay from "@neverquest/components/IconDisplay";
+import { FloatingText } from "@neverquest/components/FloatingText";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import useDeltaText from "@neverquest/hooks/useDeltaText";
+import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/wolverine-claws.svg";
 import { attributes } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
@@ -16,7 +16,7 @@ import { damage, damagePerSecond } from "@neverquest/state/statistics";
 import { AttributeType, DeltaType, ShowingType } from "@neverquest/types/enums";
 import { getComputedStatistic } from "@neverquest/utilities/getters";
 
-export default function () {
+export function Damage() {
   const { points } = useRecoilValue(attributes(AttributeType.Damage));
   const damageValue = useRecoilValue(damage);
   const damagePerSecondValue = useRecoilValue(damagePerSecond);

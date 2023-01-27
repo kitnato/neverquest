@@ -9,7 +9,7 @@ import { DeltaType } from "@neverquest/types/enums";
 import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export default function ({ type }: { type: DeltaType }) {
+export function FloatingText({ type }: { type: DeltaType }) {
   const delta = deltas(type);
   const deltaValue = useRecoilValue(delta);
   const resetDeltaValue = useResetRecoilState(delta);

@@ -1,5 +1,5 @@
-import useChangeHealth from "@neverquest/hooks/actions/useChangeHealth";
-import useChangeStamina from "@neverquest/hooks/actions/useChangeStamina";
+import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
+import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import {
   healthRegenerationDuration,
   staminaRegenerationDuration,

@@ -10,7 +10,7 @@ import { Armor } from "@neverquest/types";
 import { ArmorClass, SkillType } from "@neverquest/types/enums";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 
-export default function ({ armor }: { armor: Armor }) {
+export function ArmorName({ armor }: { armor: Armor }) {
   const armorPenaltyValue = useRecoilValue(armorPenalty);
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const armorsSkillValue = useRecoilValue(skills(SkillType.Armors));

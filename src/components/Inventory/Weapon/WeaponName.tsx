@@ -16,7 +16,7 @@ import {
 } from "@neverquest/utilities/formatters";
 import { getDamagePerRate, getSkillTypeFromWeaponClass } from "@neverquest/utilities/getters";
 
-export default function ({ weapon }: { weapon: Weapon }) {
+export function WeaponName({ weapon }: { weapon: Weapon }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const isShowingDamagePerSecondValue = useRecoilValue(isShowingDamagePerSecond);
   const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));

@@ -1,11 +1,11 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import FloatingText from "@neverquest/components/FloatingText";
-import IconDisplay from "@neverquest/components/IconDisplay";
+import { FloatingText } from "@neverquest/components/FloatingText";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { BLEED, CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { MASTERIES } from "@neverquest/data/masteries";
-import useDeltaText from "@neverquest/hooks/useDeltaText";
+import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/bleeding-wound.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { skills } from "@neverquest/state/skills";
@@ -19,7 +19,7 @@ import {
 import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
-export default function () {
+export function BleedRating() {
   const bleedChanceValue = useRecoilValue(bleedChance);
   const bleedDamageValue = useRecoilValue(bleedDamage);
   const bleedRatingValue = useRecoilValue(bleedRating);

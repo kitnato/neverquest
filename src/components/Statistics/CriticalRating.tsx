@@ -1,10 +1,10 @@
 import { OverlayTrigger, Popover, Table } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import FloatingText from "@neverquest/components/FloatingText";
-import IconDisplay from "@neverquest/components/IconDisplay";
+import { FloatingText } from "@neverquest/components/FloatingText";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
-import useDeltaText from "@neverquest/hooks/useDeltaText";
+import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/striking-splinter.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { skills } from "@neverquest/state/skills";
@@ -12,7 +12,7 @@ import { criticalChance, criticalDamage, criticalRating } from "@neverquest/stat
 import { DeltaType, SkillType } from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
-export default function () {
+export function CriticalRating() {
   const criticalChanceValue = useRecoilValue(criticalChance);
   const criticalDamageValue = useRecoilValue(criticalDamage);
   const criticalRatingValue = useRecoilValue(criticalRating);

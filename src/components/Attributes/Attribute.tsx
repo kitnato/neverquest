@@ -2,11 +2,11 @@ import { MouseEvent } from "react";
 import { Badge, Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import IconDisplay from "@neverquest/components/IconDisplay";
-import IconImage from "@neverquest/components/IconImage";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_AT_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import useIncreaseAttribute from "@neverquest/hooks/actions/useIncreaseAttribute";
+import { useIncreaseAttribute } from "@neverquest/hooks/actions/useIncreaseAttribute";
 import { ReactComponent as IconWait } from "@neverquest/icons/hourglass.svg";
 import { ReactComponent as IconIncrease } from "@neverquest/icons/upgrade.svg";
 import {
@@ -19,7 +19,7 @@ import { isLevelStarted } from "@neverquest/state/encounter";
 import { AttributeType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 
-export default function ({ type }: { type: AttributeType }) {
+export function Attribute({ type }: { type: AttributeType }) {
   const { isUnlocked, points } = useRecoilValue(attributes(type));
   const attributeCostValue = useRecoilValue(attributeCost);
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);

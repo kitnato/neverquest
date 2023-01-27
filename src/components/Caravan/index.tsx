@@ -2,15 +2,15 @@ import { FunctionComponent, useState } from "react";
 import { Card, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import Blacksmith from "@neverquest/components/Caravan/Blacksmith";
-import Cook from "@neverquest/components/Caravan/Cook";
-import CrewHirable from "@neverquest/components/Caravan/CrewHirable";
-import CrewHired from "@neverquest/components/Caravan/CrewHired";
-import Medic from "@neverquest/components/Caravan/Medic";
-import Mercenary from "@neverquest/components/Caravan/Mercenary";
-import Merchant from "@neverquest/components/Caravan/Merchant";
-import Tailor from "@neverquest/components/Caravan/Tailor";
-import DismissableScreen from "@neverquest/components/DismissableScreen";
+import { Blacksmith } from "@neverquest/components/Caravan/Blacksmith";
+import { Cook } from "@neverquest/components/Caravan/Cook";
+import { CrewHirable } from "@neverquest/components/Caravan/CrewHirable";
+import { CrewHired } from "@neverquest/components/Caravan/CrewHired";
+import { Medic } from "@neverquest/components/Caravan/Medic";
+import { Mercenary } from "@neverquest/components/Caravan/Mercenary";
+import { Merchant } from "@neverquest/components/Caravan/Merchant";
+import { Tailor } from "@neverquest/components/Caravan/Tailor";
+import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { CREW, CREW_ORDER } from "@neverquest/data/caravan";
 import { crewActive, crewHirable } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -18,7 +18,7 @@ import { CrewType, ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export default function () {
+export function Caravan() {
   const [crewActiveValue, setCrewActive] = useRecoilState(crewActive);
   const crewHirableValue = useRecoilValue(crewHirable);
   const isShowingCrewHiring = useRecoilValue(isShowing(ShowingType.CrewHiring));

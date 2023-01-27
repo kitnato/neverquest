@@ -2,7 +2,7 @@ import { OverlayTrigger, ProgressBar, Tooltip } from "react-bootstrap";
 
 import { UIAttachment, UISize, UIVariant } from "@neverquest/types/ui";
 
-export default function ({
+export function LabelledProgressBar({
   attached,
   disableTransitions = false,
   label,

@@ -1,10 +1,10 @@
 import { useEffect, useMemo } from "react";
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
-import useGenerateMerchantInventory from "@neverquest/hooks/actions/useGenerateMerchantInventory";
-import useIncreaseLevel from "@neverquest/hooks/actions/useIncreaseLevel";
-import useSwitchLocation from "@neverquest/hooks/actions/useSwitchLocation";
-import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
+import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGenerateMerchantInventory";
+import { useIncreaseLevel } from "@neverquest/hooks/actions/useIncreaseLevel";
+import { useSwitchLocation } from "@neverquest/hooks/actions/useSwitchLocation";
+import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { isWilderness, level, progress, progressMaximum } from "@neverquest/state/encounter";
 import { coinsLoot, essenceLoot, scrapLoot } from "@neverquest/state/resources";
 import { skills } from "@neverquest/state/skills";
@@ -16,7 +16,7 @@ declare global {
   }
 }
 
-export default function () {
+export function CheatQuest() {
   const isWildernessValue = useRecoilValue(isWilderness);
   const levelValue = useRecoilValue(level);
   const progressMaximumValue = useRecoilValue(progressMaximum);

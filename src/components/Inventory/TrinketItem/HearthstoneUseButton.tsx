@@ -2,15 +2,15 @@ import { useState } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 
-import ConfirmationDialog from "@neverquest/components/ConfirmationDialog";
-import useSwitchLocation from "@neverquest/hooks/actions/useSwitchLocation";
+import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
+import { useSwitchLocation } from "@neverquest/hooks/actions/useSwitchLocation";
 import { isAttacking } from "@neverquest/state/character";
 import { isLevelCompleted, isWilderness } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
 import { hasLooted } from "@neverquest/state/resources";
 import { UIVariant } from "@neverquest/types/ui";
 
-export default function () {
+export function HearthstoneUseButton() {
   const hasLootedValue = useRecoilValue(hasLooted);
   const isAttackingValue = useRecoilValue(isAttacking);
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);

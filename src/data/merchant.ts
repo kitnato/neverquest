@@ -1,15 +1,15 @@
 import {
-  ITEM_COMPASS,
-  ITEM_HEARTHSTONE,
-  ITEM_KNAPSACK,
-  ITEM_LODESTONE,
-} from "@neverquest/data/items";
+  TRINKET_COMPASS,
+  TRINKET_HEARTHSTONE,
+  TRINKET_KNAPSACK,
+  TRINKET_LODESTONE,
+} from "@neverquest/data/trinkets";
 import { ShieldType, WeaponClass, WeaponType } from "@neverquest/locra/types";
-import { Item } from "@neverquest/types";
+import { Trinket } from "@neverquest/types";
 import { ArmorClass } from "@neverquest/types/enums";
 
 export const MERCHANT_OFFERS: (
-  | Item
+  | Trinket
   | { type: WeaponType; weaponClass: WeaponClass }
   | { armorClass: ArmorClass }
   | { type: ShieldType }
@@ -30,8 +30,8 @@ export const MERCHANT_OFFERS: (
       type: ShieldType.Small,
     },
   ],
-  [ITEM_KNAPSACK],
-  [ITEM_LODESTONE, ITEM_COMPASS, ITEM_HEARTHSTONE],
+  [TRINKET_KNAPSACK],
+  [TRINKET_LODESTONE, TRINKET_COMPASS, TRINKET_HEARTHSTONE],
   [
     {
       type: WeaponType.Melee,

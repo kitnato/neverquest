@@ -1,24 +1,24 @@
 import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
-import { ITEM_KNAPSACK } from "@neverquest/data/items";
+import { TRINKET_KNAPSACK } from "@neverquest/data/trinkets";
 import { canFit, encumbranceMaximum, hasKnapsack, inventory } from "@neverquest/state/inventory";
-import { Item } from "@neverquest/types";
+import { Trinket } from "@neverquest/types";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export default function () {
-  return useRecoilCallback(({ set, snapshot }) => ({ item }: { item: Item }) => {
+export function useAcquireTrinket() {
+  return useRecoilCallback(({ set, snapshot }) => ({ trinket }: { trinket: Trinket }) => {
     const get = getSnapshotGetter(snapshot);
 
     const id = nanoid();
     const key = nanoid();
-    const { name, weight } = item;
+    const { name, weight } = trinket;
 
     if (!get(canFit(weight))) {
       return false;
     }
 
-    if (name === ITEM_KNAPSACK.name) {
+    if (name === TRINKET_KNAPSACK.name) {
       set(encumbranceMaximum, 5);
       set(hasKnapsack, true);
 
@@ -27,7 +27,7 @@ export default function () {
 
     set(inventory, (current) => ({
       ...current,
-      [id]: { isEquipped: false, key, possession: item },
+      [id]: { isEquipped: false, item: trinket, key },
     }));
 
     return true;

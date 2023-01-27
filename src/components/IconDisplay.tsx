@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
 import { Stack } from "react-bootstrap";
 
-import IconImage from "@neverquest/components/IconImage";
+import { IconImage } from "@neverquest/components/IconImage";
 import { IconImageProps, SVGIcon } from "@neverquest/types/props";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export default function ({
+export function IconDisplay({
   contents,
   description,
   Icon,

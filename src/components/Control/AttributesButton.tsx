@@ -2,9 +2,9 @@ import { MouseEvent, useState } from "react";
 import { Badge, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import Attributes from "@neverquest/components/Attributes";
-import DismissableScreen from "@neverquest/components/DismissableScreen";
-import IconImage from "@neverquest/components/IconImage";
+import { Attributes } from "@neverquest/components/Attributes";
+import { DismissableScreen } from "@neverquest/components/DismissableScreen";
+import { IconImage } from "@neverquest/components/IconImage";
 import { ReactComponent as Icon } from "@neverquest/icons/skills.svg";
 import { areAttributesIncreasable } from "@neverquest/state/attributes";
 import { isAttacking } from "@neverquest/state/character";
@@ -14,7 +14,7 @@ import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export default function ({ isDisabled }: { isDisabled: boolean }) {
+export function AttributesButton({ isDisabled }: { isDisabled: boolean }) {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isLevelStartedValue = useRecoilValue(isLevelStarted);

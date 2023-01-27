@@ -1,7 +1,7 @@
 import { useRecoilCallback, useRecoilValue } from "recoil";
 
-import useGenerateMerchantInventory from "@neverquest/hooks/actions/useGenerateMerchantInventory";
-import useIncreaseLevel from "@neverquest/hooks/actions/useIncreaseLevel";
+import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGenerateMerchantInventory";
+import { useIncreaseLevel } from "@neverquest/hooks/actions/useIncreaseLevel";
 import {
   isLevelCompleted,
   isLevelStarted,
@@ -13,7 +13,7 @@ import {
 import { LocationType } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export default function () {
+export function useSwitchLocation() {
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
 
   const generateMerchantInventory = useGenerateMerchantInventory();

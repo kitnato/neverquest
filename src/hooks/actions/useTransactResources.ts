@@ -12,7 +12,7 @@ import {
 import { ShowingType } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export default function () {
+export function useTransactResources() {
   return useRecoilCallback(
     ({ set, snapshot }) =>
       (

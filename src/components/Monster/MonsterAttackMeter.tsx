@@ -1,8 +1,8 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
-import useDefend from "@neverquest/hooks/actions/useDefend";
-import useAnimation from "@neverquest/hooks/useAnimation";
+import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
+import { useDefend } from "@neverquest/hooks/actions/useDefend";
+import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { isAttacking } from "@neverquest/state/character";
 import {
   isMonsterDead,
@@ -13,7 +13,7 @@ import {
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
-export default function () {
+export function MonsterAttackMeter() {
   const [monsterAttackDurationValue, setMonsterAttackDuration] =
     useRecoilState(monsterAttackDuration);
   const isAttackingValue = useRecoilValue(isAttacking);

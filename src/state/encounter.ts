@@ -1,7 +1,7 @@
 import { DefaultValue, atom, selector } from "recoil";
 
 import { LABEL_UNKNOWN } from "@neverquest/constants";
-import localStorage from "@neverquest/state/effects/localStorage";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { Wilderness } from "@neverquest/types";
 import { LocationType, StorageKey } from "@neverquest/types/enums";
 
@@ -91,24 +91,24 @@ export const wilderness = selector<Wilderness>({
 
 export const isLevelStarted = atom({
   default: false,
-  effects: [localStorage<boolean>(StorageKey.IsLevelStarted)],
+  effects: [handleLocalStorage<boolean>(StorageKey.IsLevelStarted)],
   key: StorageKey.IsLevelStarted,
 });
 
 export const level = atom({
   default: maximumLevel,
-  effects: [localStorage<number>(StorageKey.Level)],
+  effects: [handleLocalStorage<number>(StorageKey.Level)],
   key: StorageKey.Level,
 });
 
 export const mode = atom({
   default: LocationType.Wilderness,
-  effects: [localStorage<LocationType>(StorageKey.Mode)],
+  effects: [handleLocalStorage<LocationType>(StorageKey.Mode)],
   key: StorageKey.Mode,
 });
 
 export const wildernesses = atom<Wilderness[]>({
   default: [{ name: "", progress: 0 }],
-  effects: [localStorage<Wilderness[]>(StorageKey.Wildernesses)],
+  effects: [handleLocalStorage<Wilderness[]>(StorageKey.Wildernesses)],
   key: StorageKey.Wildernesses,
 });

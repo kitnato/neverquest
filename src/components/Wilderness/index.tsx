@@ -2,15 +2,15 @@ import { useEffect } from "react";
 import { Card, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import IconImage from "@neverquest/components/IconImage";
-import Monster from "@neverquest/components/Monster";
-import useCreateMonster from "@neverquest/hooks/actions/useCreateMonster";
+import { IconImage } from "@neverquest/components/IconImage";
+import { Monster } from "@neverquest/components/Monster";
+import { useCreateMonster } from "@neverquest/hooks/actions/useCreateMonster";
 import { ReactComponent as Icon } from "@neverquest/icons/crossed-bones.svg";
 import { isLevelCompleted, isLevelStarted, progress } from "@neverquest/state/encounter";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export default function () {
+export function Wilderness() {
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const setIsLevelStarted = useSetRecoilState(isLevelStarted);
   // Progress needs to be tracked here so that a new monster is created whenever there is level progression.

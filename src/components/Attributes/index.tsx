@@ -1,12 +1,12 @@
 import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
-import AttributesList from "@neverquest/components/Attributes/AttributesList";
-import CharacterLevel from "@neverquest/components/Character/CharacterLevel";
-import EssenceAbsorbed from "@neverquest/components/Character/EssenceAbsorbed";
+import { AttributesList } from "@neverquest/components/Attributes/AttributesList";
+import { CharacterLevel } from "@neverquest/components/Character/CharacterLevel";
+import { EssenceAbsorbed } from "@neverquest/components/Character/EssenceAbsorbed";
 import { isLevelStarted } from "@neverquest/state/encounter";
 
-export default function () {
+export function Attributes() {
   const isLevelStartedValue = useRecoilValue(isLevelStarted);
 
   return (

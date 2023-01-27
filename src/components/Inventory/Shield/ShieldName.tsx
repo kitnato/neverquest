@@ -9,7 +9,7 @@ import { Shield } from "@neverquest/types";
 import { ShowingType, SkillType } from "@neverquest/types/enums";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 
-export default function ({ shield }: { shield: Shield }) {
+export function ShieldName({ shield }: { shield: Shield }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
   const shieldSkillValue = useRecoilValue(skills(SkillType.Shields));

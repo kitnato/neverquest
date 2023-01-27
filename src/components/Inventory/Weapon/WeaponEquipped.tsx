@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 
-import IconDisplay from "@neverquest/components/IconDisplay";
-import WeaponName from "@neverquest/components/Inventory/Weapon/WeaponName";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
 import { WEAPON_NONE } from "@neverquest/data/gear";
 import { ReactComponent as IconEquipped } from "@neverquest/icons/axe-sword.svg";
 import { ReactComponent as IconUnequipped } from "@neverquest/icons/fist.svg";
@@ -9,7 +9,7 @@ import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";
 
-export default function () {
+export function WeaponEquipped() {
   const isShowingWeapon = useRecoilValue(isShowing(ShowingType.Weapon));
   const weaponValue = useRecoilValue(weapon);
 

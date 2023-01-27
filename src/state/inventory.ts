@@ -1,7 +1,7 @@
 import { atom, selector, selectorFamily } from "recoil";
 
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
-import localStorage from "@neverquest/state/effects/localStorage";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { Armor, Inventory, Shield, Weapon } from "@neverquest/types";
 import { StorageKey } from "@neverquest/types/enums";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
@@ -12,13 +12,13 @@ export const armor = selector({
   get: ({ get }) => {
     const inventoryValue = get(inventory);
     const equippedArmorID = Object.getOwnPropertyNames(inventoryValue).filter((id) => {
-      const { isEquipped, possession } = inventoryValue[id];
+      const { isEquipped, item } = inventoryValue[id];
 
-      return isEquipped && isArmor(possession);
+      return isEquipped && isArmor(item);
     })[0];
 
     if (equippedArmorID) {
-      return inventoryValue[equippedArmorID].possession as Armor;
+      return inventoryValue[equippedArmorID].item as Armor;
     }
 
     return ARMOR_NONE;
@@ -39,7 +39,7 @@ export const encumbrance = selector({
     const inventoryValue = get(inventory);
 
     return Object.getOwnPropertyNames(inventoryValue).reduce(
-      (current, id) => current + inventoryValue[id].possession.weight,
+      (current, id) => current + inventoryValue[id].item.weight,
       0
     );
   },
@@ -55,13 +55,13 @@ export const shield = selector({
   get: ({ get }) => {
     const inventoryValue = get(inventory);
     const equippedShieldID = Object.getOwnPropertyNames(inventoryValue).filter((id) => {
-      const { isEquipped, possession } = inventoryValue[id];
+      const { isEquipped, item } = inventoryValue[id];
 
-      return isEquipped && isShield(possession);
+      return isEquipped && isShield(item);
     })[0];
 
     if (equippedShieldID) {
-      return inventoryValue[equippedShieldID].possession as Shield;
+      return inventoryValue[equippedShieldID].item as Shield;
     }
 
     return SHIELD_NONE;
@@ -73,13 +73,13 @@ export const weapon = selector({
   get: ({ get }) => {
     const inventoryValue = get(inventory);
     const equippedWeaponID = Object.getOwnPropertyNames(inventoryValue).filter((id) => {
-      const { isEquipped, possession } = inventoryValue[id];
+      const { isEquipped, item } = inventoryValue[id];
 
-      return isEquipped && isWeapon(possession);
+      return isEquipped && isWeapon(item);
     })[0];
 
     if (equippedWeaponID) {
-      return inventoryValue[equippedWeaponID].possession as Weapon;
+      return inventoryValue[equippedWeaponID].item as Weapon;
     }
 
     return WEAPON_NONE;
@@ -91,24 +91,24 @@ export const weapon = selector({
 
 export const encumbranceMaximum = atom({
   default: 3,
-  effects: [localStorage<number>(StorageKey.EncumbranceMaximum)],
+  effects: [handleLocalStorage<number>(StorageKey.EncumbranceMaximum)],
   key: StorageKey.EncumbranceMaximum,
 });
 
 export const hasKnapsack = atom({
   default: false,
-  effects: [localStorage<boolean>(StorageKey.HasKnapsack)],
+  effects: [handleLocalStorage<boolean>(StorageKey.HasKnapsack)],
   key: StorageKey.HasKnapsack,
 });
 
 export const inventory = atom<Inventory>({
   default: {},
-  effects: [localStorage<Inventory>(StorageKey.Inventory)],
+  effects: [handleLocalStorage<Inventory>(StorageKey.Inventory)],
   key: StorageKey.Inventory,
 });
 
 export const isInventoryOpen = atom<boolean>({
   default: false,
-  effects: [localStorage<boolean>(StorageKey.isInventoryOpen)],
+  effects: [handleLocalStorage<boolean>(StorageKey.isInventoryOpen)],
   key: StorageKey.isInventoryOpen,
 });

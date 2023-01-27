@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { ExclamationTriangle } from "react-bootstrap-icons";
 import { useRecoilValue } from "recoil";
 
-import ConfirmationDialog from "@neverquest/components/ConfirmationDialog";
+import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { isShowing } from "@neverquest/state/isShowing";
 import { useReset } from "@neverquest/state/SeedContext";
 import { isGameOver } from "@neverquest/state/settings";
@@ -11,7 +11,7 @@ import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export default function () {
+export function Restart() {
   const isGameOverValue = useRecoilValue(isGameOver);
   const isShowingGameOver = useRecoilValue(isShowing(ShowingType.GameOver));
 

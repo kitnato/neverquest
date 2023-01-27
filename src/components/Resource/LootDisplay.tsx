@@ -1,16 +1,16 @@
 import { Card, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import IconImage from "@neverquest/components/IconImage";
-import Looting from "@neverquest/components/Resource/Looting";
-import ResourceDisplay from "@neverquest/components/Resource/ResourceDisplay";
+import { IconImage } from "@neverquest/components/IconImage";
+import { Looting } from "@neverquest/components/Resource/Looting";
+import { ResourceDisplay } from "@neverquest/components/Resource/ResourceDisplay";
 import { ReactComponent as Icon } from "@neverquest/icons/open-chest.svg";
 import { progress } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export default function () {
+export function LootDisplay() {
   const hasLootedValue = useRecoilValue(hasLooted);
   const progressValue = useRecoilValue(progress);
 

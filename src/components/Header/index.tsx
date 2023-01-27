@@ -1,12 +1,12 @@
 import { Badge, Button, Container, Nav, Navbar, Stack } from "react-bootstrap";
 import { Github } from "react-bootstrap-icons";
 
-import About from "@neverquest/components/Header/About";
-import Restart from "@neverquest/components/Header/Restart";
-import Settings from "@neverquest/components/Header/Settings";
+import { About } from "@neverquest/components/Header/About";
+import { Restart } from "@neverquest/components/Header/Restart";
+import { Settings } from "@neverquest/components/Header/Settings";
 import { version } from "@neverquest/config";
 
-export default function () {
+export function Header() {
   return (
     <Navbar bg="dark" className="mb-4" collapseOnSelect expand="lg" variant="dark">
       <Container>

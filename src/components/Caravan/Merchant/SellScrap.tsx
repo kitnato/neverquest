@@ -3,14 +3,14 @@ import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { ArrowRight } from "react-bootstrap-icons";
 import { useRecoilValue } from "recoil";
 
-import Coins from "@neverquest/components/Resource/Coins";
-import Scrap from "@neverquest/components/Resource/Scrap";
+import { Coins } from "@neverquest/components/Resource/Coins";
+import { Scrap } from "@neverquest/components/Resource/Scrap";
 import { CLASS_FULL_WIDTH_JUSTIFIED, EXCHANGE_COINS, EXCHANGE_SCRAP } from "@neverquest/constants";
-import useTransactResources from "@neverquest/hooks/actions/useTransactResources";
+import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { scrap } from "@neverquest/state/resources";
 import { UIVariant } from "@neverquest/types/ui";
 
-export default function () {
+export function SellScrap() {
   const scrapValue = useRecoilValue(scrap);
 
   const transactResources = useTransactResources();

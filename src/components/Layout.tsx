@@ -2,19 +2,19 @@ import { useEffect } from "react";
 import { Col, Row, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import Character from "@neverquest/components/Character";
-import ConfirmationDialog from "@neverquest/components/ConfirmationDialog";
-import Control from "@neverquest/components/Control";
-import Encounter from "@neverquest/components/Encounter";
-import Location from "@neverquest/components/Location";
-import Masteries from "@neverquest/components/Masteries";
-import WildernessStatus from "@neverquest/components/Wilderness/WildernessStatus";
+import { Character } from "@neverquest/components/Character";
+import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
+import { Control } from "@neverquest/components/Control";
+import { Encounter } from "@neverquest/components/Encounter";
+import { Location } from "@neverquest/components/Location";
+import { Masteries } from "@neverquest/components/Masteries";
+import { WildernessStatus } from "@neverquest/components/Wilderness/WildernessStatus";
 import { isShowing } from "@neverquest/state/isShowing";
 import { useReset } from "@neverquest/state/SeedContext";
 import { isGameOver } from "@neverquest/state/settings";
 import { ShowingType } from "@neverquest/types/enums";
 
-export default function () {
+export function Layout() {
   const isGameOverValue = useRecoilValue(isGameOver);
   const [isShowingGameOver, setIsShowingGameOver] = useRecoilState(isShowing(ShowingType.GameOver));
 

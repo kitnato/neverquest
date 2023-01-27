@@ -14,7 +14,7 @@ import {
 } from "@neverquest/locra/types";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
-export default class LOCRA {
+export class LOCRA {
   static generate({
     category,
     name,

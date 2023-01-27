@@ -6,11 +6,11 @@ import { AffixTag } from "@neverquest/locra/types";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { level } from "@neverquest/state/encounter";
 import { isNSFW } from "@neverquest/state/settings";
-import { isItem } from "@neverquest/types/type-guards";
+import { isTrinket } from "@neverquest/types/type-guards";
 import { generateArmor, generateShield, generateWeapon } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export default function () {
+export function useGenerateMerchantInventory() {
   return useRecoilCallback(({ set, snapshot }) => () => {
     const get = getSnapshotGetter(snapshot);
 
@@ -40,10 +40,10 @@ export default function () {
           key: nanoid(),
         };
 
-        if (isItem(offer)) {
+        if (isTrinket(offer)) {
           inventory[id] = {
             ...inventoryContentsBase,
-            possession: offer,
+            item: offer,
           };
         } else {
           const gear = (() => {
@@ -69,7 +69,7 @@ export default function () {
 
           inventory[id] = {
             ...inventoryContentsBase,
-            possession: gear,
+            item: gear,
           };
         }
       });

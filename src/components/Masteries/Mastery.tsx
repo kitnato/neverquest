@@ -1,9 +1,9 @@
 import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
-import FloatingText from "@neverquest/components/FloatingText";
-import IconDisplay from "@neverquest/components/IconDisplay";
-import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
+import { FloatingText } from "@neverquest/components/FloatingText";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { LABEL_AT_MAXIMUM } from "@neverquest/constants";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { isShowingMastery } from "@neverquest/state/isShowing";
@@ -12,7 +12,7 @@ import { MasteryType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 import { getDeltaTypeFromMasteryType } from "@neverquest/utilities/getters";
 
-export default function ({ type }: { type: MasteryType }) {
+export function Mastery({ type }: { type: MasteryType }) {
   const isMasteryAtMaximumValue = useRecoilValue(isMasteryAtMaximum(type));
   const isShowingMasteryValue = useRecoilValue(isShowingMastery(type));
   const { progress, rank } = useRecoilValue(masteries(type));

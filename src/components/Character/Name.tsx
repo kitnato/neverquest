@@ -2,13 +2,13 @@ import { ChangeEvent, KeyboardEvent, MouseEvent, useState } from "react";
 import { FormControl } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import IconDisplay from "@neverquest/components/IconDisplay";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ReactComponent as AliveIcon } from "@neverquest/icons/domino-mask.svg";
 import { ReactComponent as DeadIcon } from "@neverquest/icons/skull-crossed-bones.svg";
 import { name } from "@neverquest/state/character";
 import { isGameOver } from "@neverquest/state/settings";
 
-export default function () {
+export function Name() {
   const isGameOverValue = useRecoilValue(isGameOver);
   const [nameValue, setName] = useRecoilState(name);
 

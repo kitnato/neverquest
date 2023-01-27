@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil";
 
 import { POISON } from "@neverquest/constants";
-import localStorage from "@neverquest/state/effects/localStorage";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { isLevelStarted, level, progress } from "@neverquest/state/encounter";
 import { StorageKey } from "@neverquest/types/enums";
 import { getDamagePerRate } from "@neverquest/utilities/getters";
@@ -20,7 +20,7 @@ export const isMonsterStaggered = selector({
 
 export const monsterAttackDuration = atom({
   default: 0,
-  effects: [localStorage<number>(StorageKey.MonsterAttackDuration)],
+  effects: [handleLocalStorage<number>(StorageKey.MonsterAttackDuration)],
   key: StorageKey.MonsterAttackDuration,
 });
 
@@ -79,36 +79,36 @@ export const monsterLoot = selector({
 
 export const isMonsterNew = atom({
   default: false,
-  effects: [localStorage<boolean>(StorageKey.IsMonsterNew)],
+  effects: [handleLocalStorage<boolean>(StorageKey.IsMonsterNew)],
   key: StorageKey.IsMonsterNew,
 });
 
 export const monsterBleedingDuration = atom({
   default: 0,
-  effects: [localStorage<number>(StorageKey.MonsterBleedingDuration)],
+  effects: [handleLocalStorage<number>(StorageKey.MonsterBleedingDuration)],
   key: StorageKey.MonsterBleedingDuration,
 });
 
 export const monsterCurrentHealth = atom({
   default: monsterMaximumHealth,
-  effects: [localStorage<number>(StorageKey.MonsterCurrentHealth)],
+  effects: [handleLocalStorage<number>(StorageKey.MonsterCurrentHealth)],
   key: StorageKey.MonsterCurrentHealth,
 });
 
 export const monsterName = atom({
   default: "",
-  effects: [localStorage<string>(StorageKey.MonsterName)],
+  effects: [handleLocalStorage<string>(StorageKey.MonsterName)],
   key: StorageKey.MonsterName,
 });
 
 export const monsterStaggeredDuration = atom({
   default: 0,
-  effects: [localStorage<number>(StorageKey.MonsterStaggeredDuration)],
+  effects: [handleLocalStorage<number>(StorageKey.MonsterStaggeredDuration)],
   key: StorageKey.MonsterStaggeredDuration,
 });
 
 export const monsterStatusElement = atom<HTMLDivElement | null>({
   default: null,
-  effects: [localStorage<HTMLDivElement | null>(StorageKey.MonsterStatusElement)],
+  effects: [handleLocalStorage<HTMLDivElement | null>(StorageKey.MonsterStatusElement)],
   key: StorageKey.MonsterStatusElement,
 });

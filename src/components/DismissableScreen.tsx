@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import Offcanvas, { OffcanvasPlacement } from "react-bootstrap/Offcanvas";
 
-export default function ({
+export function DismissableScreen({
   contents,
   isShowing,
   onClose,

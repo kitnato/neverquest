@@ -2,7 +2,7 @@ import { MouseEvent } from "react";
 import { Button } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import IconDisplay from "@neverquest/components/IconDisplay";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
 import { CREW } from "@neverquest/data/caravan";
 import { ReactComponent as Icon } from "@neverquest/icons/cowled.svg";
@@ -10,7 +10,7 @@ import { crew } from "@neverquest/state/caravan";
 import { CrewStatus, CrewType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 
-export default function ({ setActive, type }: { setActive: () => void; type: CrewType }) {
+export function CrewHired({ setActive, type }: { setActive: () => void; type: CrewType }) {
   const { hireStatus, monologueProgress } = useRecoilValue(crew(type));
 
   if (hireStatus !== CrewStatus.Hired) {

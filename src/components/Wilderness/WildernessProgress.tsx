@@ -1,17 +1,17 @@
 import Stack from "react-bootstrap/Stack";
 import { useRecoilValue } from "recoil";
 
-import FloatingText from "@neverquest/components/FloatingText";
-import IconImage from "@neverquest/components/IconImage";
-import LabelledProgressBar from "@neverquest/components/LabelledProgressBar";
-import useDeltaText from "@neverquest/hooks/useDeltaText";
+import { FloatingText } from "@neverquest/components/FloatingText";
+import { IconImage } from "@neverquest/components/IconImage";
+import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
+import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/stairs.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isWilderness, progress, progressMaximum } from "@neverquest/state/encounter";
 import { DeltaType } from "@neverquest/types/enums";
 import { OverlayPlacement, UIVariant } from "@neverquest/types/ui";
 
-export default function () {
+export function WildernessProgress() {
   const isWildernessValue = useRecoilValue(isWilderness);
   const progressValue = useRecoilValue(progress);
   const progressMaximumValue = useRecoilValue(progressMaximum);

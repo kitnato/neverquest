@@ -1,15 +1,15 @@
 import { useRecoilValue } from "recoil";
 
-import FloatingText from "@neverquest/components/FloatingText";
-import IconDisplay from "@neverquest/components/IconDisplay";
-import useDeltaText from "@neverquest/hooks/useDeltaText";
+import { FloatingText } from "@neverquest/components/FloatingText";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/barbute.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { protection } from "@neverquest/state/statistics";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
 
-export default function () {
+export function Protection() {
   const isShowingProtection = useRecoilValue(isShowing(ShowingType.Protection));
   const protectionValue = useRecoilValue(protection);
 

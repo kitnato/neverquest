@@ -2,7 +2,7 @@ import { Button, Modal } from "react-bootstrap";
 
 import { UIVariant } from "@neverquest/types/ui";
 
-export default function ({
+export function ConfirmationDialog({
   confirmationLabel,
   message,
   onConfirm,

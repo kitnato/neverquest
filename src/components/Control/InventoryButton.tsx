@@ -2,16 +2,16 @@ import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import DismissableScreen from "@neverquest/components/DismissableScreen";
-import IconImage from "@neverquest/components/IconImage";
-import Inventory from "@neverquest/components/Inventory";
+import { DismissableScreen } from "@neverquest/components/DismissableScreen";
+import { IconImage } from "@neverquest/components/IconImage";
+import { Inventory } from "@neverquest/components/Inventory";
 import { ReactComponent as Icon } from "@neverquest/icons/knapsack.svg";
 import { isAttacking } from "@neverquest/state/character";
 import { hasKnapsack, isInventoryOpen } from "@neverquest/state/inventory";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export default function ({ isDisabled }: { isDisabled: boolean }) {
+export function InventoryButton({ isDisabled }: { isDisabled: boolean }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const isAttackingValue = useRecoilValue(isAttacking);
   const [isInventoryOpenValue, setIsInventoryOpen] = useRecoilState(isInventoryOpen);

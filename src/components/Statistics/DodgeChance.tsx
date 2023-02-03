@@ -8,14 +8,21 @@ import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/wingfoot.svg";
 import { deltas } from "@neverquest/state/deltas";
+import { armor } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
-import { armorPenalty, dodgeChance, dodgeChanceTotal } from "@neverquest/state/statistics";
-import { AttributeType, DeltaType, ShowingType, SkillType } from "@neverquest/types/enums";
+import { dodgeChance, dodgeChanceTotal } from "@neverquest/state/statistics";
+import {
+  ArmorClass,
+  AttributeType,
+  DeltaType,
+  ShowingType,
+  SkillType,
+} from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function DodgeChance() {
-  const armorPenaltyValue = useRecoilValue(armorPenalty);
+  const { armorClass, staminaCost } = useRecoilValue(armor);
   const dodgeChanceValue = useRecoilValue(dodgeChance);
   const dodgeChanceTotalValue = useRecoilValue(dodgeChanceTotal);
   const isShowingDodgeChanceDetails = useRecoilValue(isShowing(ShowingType.DodgeChanceDetails));
@@ -56,7 +63,21 @@ export function DodgeChance() {
                         <tr>
                           <td className={CLASS_TABLE_CELL_ITALIC}>Penalty from armor:</td>
 
-                          <td>{`-${formatPercentage(armorPenaltyValue)} of dodge chance`}</td>
+                          <td>
+                            {(() => {
+                              switch (armorClass) {
+                                case ArmorClass.Plate: {
+                                  return "Cannot dodge";
+                                }
+                                case ArmorClass.Reinforced: {
+                                  return `${staminaCost || 0} stamina cost`;
+                                }
+                                default: {
+                                  return "None";
+                                }
+                              }
+                            })()}
+                          </td>
                         </tr>
                       </tbody>
                     </Table>

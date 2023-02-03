@@ -12,15 +12,13 @@ import { ReactComponent as Icon } from "@neverquest/icons/striking-splinter.svg"
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { armorPenalty, attackRate } from "@neverquest/state/statistics";
+import { attackRate } from "@neverquest/state/statistics";
 import { AttributeType, DeltaTextType, DeltaType, ShowingType } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Attack() {
-  const armorPenaltyValue = useRecoilValue(armorPenalty);
   const attackRateValue = useRecoilValue(attackRate);
   const isShowingAttackRateDetails = useRecoilValue(isShowing(ShowingType.AttackRateDetails));
-  const isShowingAttackRatePenalty = useRecoilValue(isShowing(ShowingType.AttackRatePenalty));
   const weaponValue = useRecoilValue(weapon);
 
   const { name } = ATTRIBUTES[AttributeType.AttackRate];
@@ -65,18 +63,6 @@ export function Attack() {
 
                         <td>{`-${formatPercentage(attackRateValue)}`}</td>
                       </tr>
-
-                      {isShowingAttackRatePenalty && (
-                        <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Penalty from armor:</td>
-
-                          <td>
-                            <td>{`+${formatPercentage(
-                              armorPenaltyValue
-                            )} of total attack rate`}</td>
-                          </td>
-                        </tr>
-                      )}
                     </tbody>
                   </Table>
                 </Popover.Body>

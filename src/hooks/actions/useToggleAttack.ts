@@ -5,7 +5,7 @@ import { attackDuration, isAttacking } from "@neverquest/state/character";
 import { isLevelStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { monsterAttackDuration, monsterAttackRate } from "@neverquest/state/monster";
-import { attackRateTotal } from "@neverquest/state/statistics";
+import { attackRate } from "@neverquest/state/statistics";
 import { ShowingType } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -29,7 +29,7 @@ export function useToggleAttack() {
             set(isLevelStarted, true);
           }
 
-          set(attackDuration, get(attackRateTotal));
+          set(attackDuration, get(attackRate));
           set(monsterAttackDuration, get(monsterAttackRate));
         }
 

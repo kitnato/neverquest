@@ -27,30 +27,34 @@ export const ARMOR_SPECIFICATIONS: Record<
   {
     deflectionChanceModifier: number;
     name: string;
-    penaltyModifier: number;
+    penalty: number;
     protectionModifier: number;
+    staminaCostModifier: number;
     weight: number;
   }
 > = {
   [ArmorClass.Hide]: {
     deflectionChanceModifier: 0,
     name: "Hide",
-    penaltyModifier: 0,
+    penalty: 0,
     protectionModifier: 1.25,
+    staminaCostModifier: 0,
     weight: 1,
   },
   [ArmorClass.Plate]: {
     deflectionChanceModifier: 2,
     name: "Plate",
-    penaltyModifier: 1.5,
+    penalty: 1,
     protectionModifier: 3,
+    staminaCostModifier: 1,
     weight: 3,
   },
   [ArmorClass.Reinforced]: {
     deflectionChanceModifier: 1,
     name: "Reinforced",
-    penaltyModifier: 1,
+    penalty: 0,
     protectionModifier: 2,
+    staminaCostModifier: 0,
     weight: 2,
   },
 };

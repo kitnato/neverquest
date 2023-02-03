@@ -480,19 +480,15 @@ No initial modifiers.
 ##### Reinforced armor
 
 - Medium protection
-- Low -% dodge
+- Dodging costs stamina
 - Low [deflection](#deflection) chance
 - Medium cost
 
 ##### Plate armor
 
-`TODO`
-
 - High protection
-- High -% dodge
-- -% attack rate
-- ???
-- High [deflection](#deflection) chance
+- Cannot dodge
+- High deflection chance
 - High cost
 
 #### Off-hand

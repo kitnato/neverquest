@@ -3,7 +3,7 @@ import { atom, selector } from "recoil";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { attributes } from "@neverquest/state/attributes";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { shield, weapon } from "@neverquest/state/inventory";
+import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { AttributeType, StorageKey } from "@neverquest/types/enums";
 
 // SELECTORS
@@ -16,6 +16,11 @@ export const canAttackOrParry = selector({
 export const canBlock = selector({
   get: ({ get }) => get(currentStamina) >= get(shield).staminaCost,
   key: "canBlock",
+});
+
+export const canDodge = selector({
+  get: ({ get }) => get(currentStamina) >= (get(armor).staminaCost || 0),
+  key: "canDodge",
 });
 
 export const isHealthLow = selector({

@@ -7,7 +7,7 @@ import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
 import { poisonDuration, recoveryDuration, statusElement } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { shield, weapon } from "@neverquest/state/inventory";
+import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import {
   monsterDamage,
@@ -15,7 +15,7 @@ import {
   monsterStaggeredDuration,
   monsterStatusElement,
 } from "@neverquest/state/monster";
-import { canAttackOrParry, canBlock } from "@neverquest/state/reserves";
+import { canAttackOrParry, canBlock, canDodge } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
 import {
   blockChance,
@@ -70,12 +70,19 @@ export function useDefend() {
         const hasDodged = get(skills(SkillType.Dodge)) && Math.random() <= get(dodgeChanceTotal);
 
         if (hasDodged) {
-          set(deltas(DeltaType.Health), {
-            color: FloatingTextVariant.Neutral,
-            value: "DODGED",
-          });
+          if (get(canDodge)) {
+            set(deltas(DeltaType.Health), {
+              color: FloatingTextVariant.Neutral,
+              value: "DODGED",
+            });
 
-          return;
+            return;
+          } else {
+            set(deltas(DeltaType.Health), {
+              color: FloatingTextVariant.Neutral,
+              value: `CANNOT DODGE (${get(armor).staminaCost || 0})`,
+            });
+          }
         }
 
         const monsterDamageValue = get(monsterDamage);

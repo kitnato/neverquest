@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { attributes } from "@neverquest/state/attributes";
-import { armor, inventory } from "@neverquest/state/inventory";
+import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { Gear } from "@neverquest/types";
 import { AttributeType, ShowingType } from "@neverquest/types/enums";
@@ -39,7 +39,7 @@ export function useToggleEquipGear() {
         set(isShowing(ShowingType.Deflection), true);
       }
 
-      if (!get(isShowing(ShowingType.DodgeChanceDetails)) && item.penalty) {
+      if (!get(isShowing(ShowingType.DodgeChanceDetails)) && (item.penalty || item.staminaCost)) {
         set(isShowing(ShowingType.DodgeChanceDetails), true);
       }
     }
@@ -76,10 +76,6 @@ export function useToggleEquipGear() {
 
       if (!get(isShowing(ShowingType.Weapon))) {
         set(isShowing(ShowingType.Weapon), true);
-      }
-
-      if (!get(isShowing(ShowingType.AttackRatePenalty)) && get(armor).penalty) {
-        set(isShowing(ShowingType.AttackRatePenalty), true);
       }
     }
   });

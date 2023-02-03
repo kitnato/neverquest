@@ -28,7 +28,7 @@ export function generateArmor({
   name?: string;
   tags?: AffixTag[];
 }): Armor {
-  const { deflectionChanceModifier, penaltyModifier, protectionModifier, weight } =
+  const { deflectionChanceModifier, penalty, protectionModifier, staminaCostModifier, weight } =
     ARMOR_SPECIFICATIONS[armorClass];
 
   return {
@@ -47,9 +47,10 @@ export function generateArmor({
         },
         tags,
       }),
-    penalty: penaltyModifier ? penaltyModifier * (0.05 + level / 10) : undefined,
+    penalty,
     price: level * 2 + Math.floor(level / 2),
     protection: Math.floor(level * 5 * protectionModifier),
+    staminaCost: staminaCostModifier * Math.floor(level / 2),
     weight,
   };
 }

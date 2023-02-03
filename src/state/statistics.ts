@@ -26,21 +26,6 @@ export const attackRate = selector({
   key: "attackRate",
 });
 
-export const attackRateTotal = selector({
-  get: ({ get }) => {
-    const statistic = get(attackRate);
-    const penalty = get(armorPenalty) * statistic;
-
-    return statistic - penalty;
-  },
-  key: "attackRateTotal",
-});
-
-export const armorPenalty = selector({
-  get: ({ get }) => get(armor).penalty || 0,
-  key: "armorPenalty",
-});
-
 export const bleedChance = selector({
   get: ({ get }) => {
     const { abilityChance, weaponClass } = get(weapon);
@@ -151,10 +136,10 @@ export const dodgeChance = selector({
 
 export const dodgeChanceTotal = selector({
   get: ({ get }) => {
-    const chance = get(dodgeChance);
-    const penalty = get(armorPenalty) || 0 * chance;
+    const { penalty } = get(armor);
+    const total = get(dodgeChance);
 
-    return chance - penalty;
+    return penalty ? total - total * penalty : total;
   },
   key: "dodgeChanceTotal",
 });

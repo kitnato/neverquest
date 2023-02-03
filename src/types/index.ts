@@ -7,6 +7,7 @@ export type Armor = ItemBase & {
   deflectionChance?: number;
   penalty?: number;
   protection: number;
+  staminaCost?: number;
 };
 
 export interface AttributeOrMastery {

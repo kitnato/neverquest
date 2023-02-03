@@ -21,9 +21,14 @@ export const attackRate = selector({
     const { base, increment } = ATTRIBUTES[AttributeType.AttackRate];
     const { points } = get(attributes(AttributeType.AttackRate));
 
-    return get(weapon).rate * (1 - getComputedStatistic({ amount: points, base, increment }));
+    return getComputedStatistic({ amount: points, base, increment });
   },
   key: "attackRate",
+});
+
+export const attackRateTotal = selector({
+  get: ({ get }) => get(weapon).rate * (1 - get(attackRate)),
+  key: "attackRateTotal",
 });
 
 export const bleedChance = selector({

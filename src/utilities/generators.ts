@@ -147,7 +147,7 @@ export function generateWeapon({
       }),
     price: level * 2 + Math.floor(level / 2),
     rate: getFromRange({ maximum: 3000, minimum: 2500 }) - Math.floor(level / 2) * 50,
-    staminaCost: level + 2 + Math.floor(level / 3),
+    staminaCost: level + Math.floor(level / 3),
     type,
     weaponClass,
     weight: 1 + Math.floor(level / 4),

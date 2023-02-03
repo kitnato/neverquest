@@ -5,13 +5,13 @@ import { useAttack } from "@neverquest/hooks/actions/useAttack";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { attackDuration, isAttacking, isLooting, isRecovering } from "@neverquest/state/character";
 import { canAttackOrParry } from "@neverquest/state/reserves";
-import { attackRate } from "@neverquest/state/statistics";
+import { attackRateTotal } from "@neverquest/state/statistics";
 import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export function AttackMeter() {
   const [attackDurationValue, setAttackDuration] = useRecoilState(attackDuration);
-  const attackRateValue = useRecoilValue(attackRate);
+  const attackRateTotalValue = useRecoilValue(attackRateTotal);
   const canAttackOrParryValue = useRecoilValue(canAttackOrParry);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isLootingValue = useRecoilValue(isLooting);
@@ -19,14 +19,12 @@ export function AttackMeter() {
 
   const attack = useAttack();
 
-  const attackProgress = attackDurationValue === 0 ? 0 : attackRateValue - attackDurationValue;
-
   useAnimation((delta) => {
     let newDuration = attackDurationValue - delta;
 
     if (newDuration <= 0) {
       attack();
-      newDuration = attackRateValue;
+      newDuration = attackRateTotalValue;
     }
 
     setAttackDuration(newDuration);
@@ -35,8 +33,16 @@ export function AttackMeter() {
   return (
     <LabelledProgressBar
       disableTransitions
-      label={canAttackOrParryValue ? formatMilliseconds(attackProgress) : "EXHAUSTED"}
-      value={(attackProgress / attackRateValue) * 100}
+      label={
+        canAttackOrParryValue
+          ? formatMilliseconds(attackDurationValue || attackRateTotalValue)
+          : "EXHAUSTED"
+      }
+      value={
+        ((attackDurationValue === 0 ? 0 : attackRateTotalValue - attackDurationValue) /
+          attackRateTotalValue) *
+        100
+      }
       variant={UIVariant.Secondary}
     />
   );

@@ -12,7 +12,6 @@ export function RecoveryMeter() {
   const recoveryRateValue = useRecoilValue(recoveryRate);
 
   const hasRecovered = recoveryDurationValue === 0;
-  const recoveryProgress = hasRecovered ? 0 : recoveryRateValue - recoveryDurationValue;
 
   useAnimation((delta) => {
     setRecoveryDuration((current) => {
@@ -29,8 +28,10 @@ export function RecoveryMeter() {
   return (
     <LabelledProgressBar
       disableTransitions
-      label={formatMilliseconds(recoveryProgress)}
-      value={(recoveryProgress / recoveryRateValue) * 100}
+      label={formatMilliseconds(recoveryDurationValue || recoveryRateValue)}
+      value={
+        ((hasRecovered ? 0 : recoveryRateValue - recoveryDurationValue) / recoveryRateValue) * 100
+      }
       variant={UIVariant.Secondary}
     />
   );

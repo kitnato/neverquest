@@ -23,9 +23,6 @@ export function MonsterAttackMeter() {
 
   const defend = useDefend();
 
-  const monsterAttackProgress =
-    monsterAttackDurationValue === 0 ? 0 : monsterAttackRateValue - monsterAttackDurationValue;
-
   useAnimation((delta) => {
     let newDuration = monsterAttackDurationValue - delta;
 
@@ -40,8 +37,14 @@ export function MonsterAttackMeter() {
   return (
     <LabelledProgressBar
       disableTransitions
-      label={formatMilliseconds(monsterAttackProgress)}
-      value={(monsterAttackProgress / monsterAttackRateValue) * 100}
+      label={formatMilliseconds(monsterAttackDurationValue || monsterAttackRateValue)}
+      value={
+        ((monsterAttackDurationValue === 0
+          ? 0
+          : monsterAttackRateValue - monsterAttackDurationValue) /
+          monsterAttackRateValue) *
+        100
+      }
       variant={UIVariant.Secondary}
     />
   );

@@ -12,7 +12,7 @@ import { ReactComponent as Icon } from "@neverquest/icons/striking-splinter.svg"
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { attackRate } from "@neverquest/state/statistics";
+import { attackRate, attackRateTotal } from "@neverquest/state/statistics";
 import { AttributeType, DeltaTextType, DeltaType, ShowingType } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
@@ -26,7 +26,7 @@ export function Attack() {
 
   useDeltaText({
     atomDelta: deltaAttackRate,
-    atomValue: attackRate,
+    atomValue: attackRateTotal,
     type: DeltaTextType.Time,
   });
 

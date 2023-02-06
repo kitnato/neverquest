@@ -45,7 +45,7 @@ export function Attack() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header as="h4">Attack rate details</Popover.Header>
+                <Popover.Header>Attack rate details</Popover.Header>
 
                 <Popover.Body>
                   <Table borderless size="sm">

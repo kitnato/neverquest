@@ -25,7 +25,6 @@ export function Damage() {
   const weaponValue = useRecoilValue(weapon);
 
   const { base, increment, name } = ATTRIBUTES[AttributeType.Damage];
-  const DamageDisplay = () => <span>{damageValue}</span>;
   const deltaDamage = deltas(DeltaType.Damage);
 
   useDeltaText({
@@ -41,7 +40,7 @@ export function Damage() {
             <OverlayTrigger
               overlay={
                 <Popover>
-                  <Popover.Header as="h4">Damage details</Popover.Header>
+                  <Popover.Header>Damage details</Popover.Header>
 
                   <Popover.Body>
                     <Table borderless size="sm">
@@ -68,10 +67,10 @@ export function Damage() {
               }
               placement="top"
             >
-              <DamageDisplay />
+              <span>{damageValue}</span>
             </OverlayTrigger>
           ) : (
-            <DamageDisplay />
+            damageValue
           )}
 
           <FloatingText type={DeltaType.Damage} />

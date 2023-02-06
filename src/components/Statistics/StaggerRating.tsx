@@ -41,7 +41,7 @@ export function StaggerRating() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header as="h4">Stagger rating details</Popover.Header>
+                <Popover.Header>Stagger rating details</Popover.Header>
 
                 <Popover.Body>
                   <Table borderless size="sm">

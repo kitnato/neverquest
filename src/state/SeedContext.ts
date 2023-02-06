@@ -6,7 +6,7 @@ import { KEY_SESSION } from "@neverquest/constants";
 
 ls.config.encrypt = true;
 
-export const SeedContext = createContext(() => console.warn("SeedContext.Provider not found"));
+export const SeedContext = createContext(() => console.error("SeedContext.Provider not found"));
 
 export const useReset = () => {
   const context = useContext(SeedContext);

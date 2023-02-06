@@ -47,6 +47,7 @@ export function FloatingText({ type }: { type: DeltaType }) {
             style={{
               textShadow:
                 "-1px 1px 1px #fff, 1px 1px 1px #fff, 1px -1px 1px #fff, -1px -1px 1px #fff",
+              whiteSpace: "nowrap",
             }}
           >
             {Array.isArray(delta) ? (

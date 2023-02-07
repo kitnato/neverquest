@@ -52,7 +52,7 @@ export function CompassUseButton() {
           </Tooltip>
         }
         placement="top"
-        trigger={!canNavigate ? ["hover", "focus"] : []}
+        trigger={canNavigate ? [] : ["hover", "focus"]}
       >
         <span className="d-inline-block">
           <Button disabled={!canNavigate} onClick={handleShowing} variant={UIVariant.Outline}>

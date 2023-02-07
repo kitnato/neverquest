@@ -45,6 +45,12 @@ export const POISON = {
   ticks: 10,
 };
 
+export const RECOVERY_RATE = 1500;
+
+export const REGENERATION_AMOUNT_HEALTH = 4;
+
 export const REGENERATION_RATE_HEALTH = 6000;
+
+export const REGENERATION_AMOUNT_STAMINA = 2;
 
 export const REGENERATION_RATE_STAMINA = 5000;

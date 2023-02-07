@@ -30,53 +30,43 @@ export function Attack() {
     type: DeltaTextType.Time,
   });
 
-  const MeterWithDelta = () => (
-    <Stack className="w-100" direction="horizontal">
-      <AttackMeter />
-
-      <FloatingText type={DeltaType.AttackRate} />
-    </Stack>
-  );
-
   return (
     <IconDisplay
       contents={
-        isShowingAttackRateDetails ? (
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <Popover.Header>Attack rate details</Popover.Header>
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <Popover.Header>Attack rate details</Popover.Header>
 
-                <Popover.Body>
-                  <Table borderless size="sm">
-                    <tbody>
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>{`${
-                          weaponValue === WEAPON_NONE ? "Base" : "Weapon"
-                        }:`}</td>
+              <Popover.Body>
+                <Table borderless size="sm">
+                  <tbody>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>{`${
+                        weaponValue === WEAPON_NONE ? "Base" : "Weapon"
+                      }:`}</td>
 
-                        <td>{formatMilliseconds(weaponValue.rate)}</td>
-                      </tr>
+                      <td>{formatMilliseconds(weaponValue.rate)}</td>
+                    </tr>
 
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
 
-                        <td>{`-${formatPercentage(attackRateValue)}`}</td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                </Popover.Body>
-              </Popover>
-            }
-            placement="top"
-          >
-            <div className="w-100">
-              <MeterWithDelta />
-            </div>
-          </OverlayTrigger>
-        ) : (
-          <MeterWithDelta />
-        )
+                      <td>{`-${formatPercentage(attackRateValue)}`}</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Popover.Body>
+            </Popover>
+          }
+          placement="top"
+          trigger={isShowingAttackRateDetails ? ["hover", "focus"] : []}
+        >
+          <Stack className="w-100" direction="horizontal">
+            <AttackMeter />
+            <FloatingText type={DeltaType.AttackRate} />
+          </Stack>
+        </OverlayTrigger>
       }
       Icon={Icon}
       tooltip="Attack rate"

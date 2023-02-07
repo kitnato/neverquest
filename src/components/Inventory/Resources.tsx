@@ -1,4 +1,4 @@
-import Card from "react-bootstrap/Card";
+import { Card } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { ResourceDisplay } from "@neverquest/components/Resource/ResourceDisplay";

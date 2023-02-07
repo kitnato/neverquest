@@ -1,4 +1,4 @@
-import Container from "react-bootstrap/Container";
+import { Container } from "react-bootstrap";
 import { RecoilRoot } from "recoil";
 
 import { CheatQuest } from "@neverquest/components/CheatQuest";

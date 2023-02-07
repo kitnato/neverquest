@@ -37,7 +37,7 @@ export function HearthstoneUseButton() {
       <OverlayTrigger
         overlay={<Tooltip>The hearthstone is cold.</Tooltip>}
         placement="top"
-        trigger={!canWarp ? ["focus", "hover"] : []}
+        trigger={canWarp ? [] : ["focus", "hover"]}
       >
         <span className="d-inline-block">
           <Button disabled={!canWarp} onClick={handleWarp} variant={UIVariant.Outline}>

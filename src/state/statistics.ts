@@ -1,6 +1,12 @@
 import { selector } from "recoil";
 
-import { BLEED, REGENERATION_RATE_HEALTH, REGENERATION_RATE_STAMINA } from "@neverquest/constants";
+import {
+  BLEED,
+  REGENERATION_AMOUNT_HEALTH,
+  REGENERATION_AMOUNT_STAMINA,
+  REGENERATION_RATE_HEALTH,
+  REGENERATION_RATE_STAMINA,
+} from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { WeaponClass } from "@neverquest/locra/types";
@@ -160,25 +166,13 @@ export const freeBlockChance = selector({
 });
 
 export const healthRegenerationAmount = selector({
-  get: ({ get }) => {
-    const { base, increment } = ATTRIBUTES[AttributeType.ReserveRegenerationAmount];
-    const { points } = get(attributes(AttributeType.ReserveRegenerationAmount));
-
-    return 4 + getComputedStatistic({ amount: points, base, increment });
-  },
+  get: ({ get }) => REGENERATION_AMOUNT_HEALTH + get(reserveRegenerationAmount),
   key: "healthRegenerationAmount",
 });
 
 export const healthRegenerationRate = selector({
-  get: ({ get }) => {
-    const { base, increment } = ATTRIBUTES[AttributeType.ReserveRegenerationRate];
-    const { points } = get(attributes(AttributeType.ReserveRegenerationRate));
-
-    return Math.round(
-      REGENERATION_RATE_HEALTH -
-        REGENERATION_RATE_HEALTH * getComputedStatistic({ amount: points, base, increment })
-    );
-  },
+  get: ({ get }) =>
+    Math.round(REGENERATION_RATE_HEALTH - REGENERATION_RATE_HEALTH * get(reserveRegenerationRate)),
   key: "healthRegenerationRate",
 });
 
@@ -230,6 +224,26 @@ export const recoveryRate = selector({
   key: "recoveryRate",
 });
 
+export const reserveRegenerationAmount = selector({
+  get: ({ get }) => {
+    const { base, increment } = ATTRIBUTES[AttributeType.ReserveRegenerationAmount];
+    const { points } = get(attributes(AttributeType.ReserveRegenerationAmount));
+
+    return getComputedStatistic({ amount: points, base, increment });
+  },
+  key: "reserveRegenerationAmount",
+});
+
+export const reserveRegenerationRate = selector({
+  get: ({ get }) => {
+    const { base, increment } = ATTRIBUTES[AttributeType.ReserveRegenerationRate];
+    const { points } = get(attributes(AttributeType.ReserveRegenerationRate));
+
+    return getComputedStatistic({ amount: points, base, increment });
+  },
+  key: "reserveRegenerationRate",
+});
+
 export const skipRecoveryChance = selector({
   get: ({ get }) => {
     const { base, increment } = MASTERIES[MasteryType.SkipRecoveryChance];
@@ -272,24 +286,14 @@ export const staggerRating = selector({
 });
 
 export const staminaRegenerationAmount = selector({
-  get: ({ get }) => {
-    const { base, increment } = ATTRIBUTES[AttributeType.ReserveRegenerationAmount];
-    const { points } = get(attributes(AttributeType.ReserveRegenerationAmount));
-
-    return 2 + getComputedStatistic({ amount: points, base, increment });
-  },
+  get: ({ get }) => REGENERATION_AMOUNT_STAMINA + get(reserveRegenerationAmount),
   key: "staminaRegenerationAmount",
 });
 
 export const staminaRegenerationRate = selector({
-  get: ({ get }) => {
-    const { base, increment } = ATTRIBUTES[AttributeType.ReserveRegenerationAmount];
-    const { points } = get(attributes(AttributeType.ReserveRegenerationAmount));
-
-    return Math.round(
-      REGENERATION_RATE_STAMINA -
-        REGENERATION_RATE_STAMINA * getComputedStatistic({ amount: points, base, increment })
-    );
-  },
+  get: ({ get }) =>
+    Math.round(
+      REGENERATION_RATE_STAMINA - REGENERATION_RATE_STAMINA * get(reserveRegenerationRate)
+    ),
   key: "staminaRegenerationRate",
 });

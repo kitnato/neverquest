@@ -1,4 +1,4 @@
-import Stack from "react-bootstrap/Stack";
+import { Stack } from "react-bootstrap";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";

@@ -1,4 +1,4 @@
-import Stack from "react-bootstrap/Stack";
+import { Stack } from "react-bootstrap";
 
 import { Regeneration } from "@neverquest/components/Character/Regeneration";
 import { FloatingText } from "@neverquest/components/FloatingText";

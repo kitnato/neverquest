@@ -30,7 +30,6 @@ export function DodgeChance() {
 
   const { name } = ATTRIBUTES[AttributeType.DodgeChance];
   const deltaDodgeChance = deltas(DeltaType.DodgeChance);
-  const DodgeChanceDisplay = () => <span>{formatPercentage(dodgeChanceTotalValue)}</span>;
 
   useDeltaText({
     atomDelta: deltaDodgeChance,
@@ -45,52 +44,49 @@ export function DodgeChance() {
     <IconDisplay
       contents={
         <>
-          {isShowingDodgeChanceDetails ? (
-            <OverlayTrigger
-              overlay={
-                <Popover>
-                  <Popover.Header>Dodge details</Popover.Header>
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <Popover.Header>Dodge details</Popover.Header>
 
-                  <Popover.Body>
-                    <Table borderless size="sm">
-                      <tbody>
-                        <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
+                <Popover.Body>
+                  <Table borderless size="sm">
+                    <tbody>
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
 
-                          <td>{`${formatPercentage(dodgeChanceValue)} dodge chance`}</td>
-                        </tr>
+                        <td>{`${formatPercentage(dodgeChanceValue)} dodge chance`}</td>
+                      </tr>
 
-                        <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Penalty from armor:</td>
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Penalty from armor:</td>
 
-                          <td>
-                            {(() => {
-                              switch (armorClass) {
-                                case ArmorClass.Plate: {
-                                  return "Cannot dodge";
-                                }
-                                case ArmorClass.Reinforced: {
-                                  return `${staminaCost || 0} stamina cost`;
-                                }
-                                default: {
-                                  return "None";
-                                }
+                        <td>
+                          {(() => {
+                            switch (armorClass) {
+                              case ArmorClass.Plate: {
+                                return "Cannot dodge";
                               }
-                            })()}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                  </Popover.Body>
-                </Popover>
-              }
-              placement="top"
-            >
-              <DodgeChanceDisplay />
-            </OverlayTrigger>
-          ) : (
-            <DodgeChanceDisplay />
-          )}
+                              case ArmorClass.Reinforced: {
+                                return `${staminaCost || 0} stamina cost`;
+                              }
+                              default: {
+                                return "None";
+                              }
+                            }
+                          })()}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </Popover.Body>
+              </Popover>
+            }
+            placement="top"
+            trigger={isShowingDodgeChanceDetails ? ["hover", "focus"] : []}
+          >
+            <span>{formatPercentage(dodgeChanceTotalValue)}</span>
+          </OverlayTrigger>
 
           <FloatingText type={DeltaType.DodgeChance} />
         </>

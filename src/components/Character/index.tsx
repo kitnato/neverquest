@@ -1,4 +1,4 @@
-import Stack from "react-bootstrap/Stack";
+import { Stack } from "react-bootstrap";
 
 import { Status } from "@neverquest/components/Character/Status";
 import { Gear } from "@neverquest/components/Inventory/Gear";

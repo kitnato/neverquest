@@ -1,4 +1,4 @@
-import Stack from "react-bootstrap/Stack";
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { Caravan } from "@neverquest/components/Caravan";

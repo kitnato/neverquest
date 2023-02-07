@@ -1,4 +1,4 @@
-import Stack from "react-bootstrap/Stack";
+import { Stack } from "react-bootstrap";
 import { RecoilState, useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";

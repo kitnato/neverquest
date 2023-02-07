@@ -5,8 +5,9 @@
   transition: none;
 }
 
-// TODO - Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6314 
-.popover, .tooltip {
+// TODO - Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6314
+.popover,
+.tooltip {
   position: fixed;
 }
 

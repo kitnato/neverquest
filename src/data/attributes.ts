@@ -1,4 +1,5 @@
 // TODO - diversify icons.
+import { RECOVERY_RATE } from "@neverquest/constants";
 import { ReactComponent as Icon } from "@neverquest/icons/abstract-049.svg";
 import { AttributeOrMastery } from "@neverquest/types";
 import { AttributeType, SkillType } from "@neverquest/types/enums";
@@ -60,7 +61,7 @@ export const ATTRIBUTES: Record<AttributeType, AttributeOrMastery> = {
     name: "Luck",
   },
   [AttributeType.RecoveryRate]: {
-    base: 1500,
+    base: RECOVERY_RATE,
     description: "Increases recovery rate.",
     Icon,
     increment: -150,

@@ -36,42 +36,39 @@ export function Damage() {
     <IconDisplay
       contents={
         <>
-          {isShowingDamageDetails ? (
-            <OverlayTrigger
-              overlay={
-                <Popover>
-                  <Popover.Header>Damage details</Popover.Header>
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <Popover.Header>Damage details</Popover.Header>
 
-                  <Popover.Body>
-                    <Table borderless size="sm">
-                      <tbody>
-                        <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
+                <Popover.Body>
+                  <Table borderless size="sm">
+                    <tbody>
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
 
-                          <td>{weaponValue.damage}</td>
-                        </tr>
+                        <td>{weaponValue.damage}</td>
+                      </tr>
 
-                        <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
 
-                          <td>{`+${getComputedStatistic({
-                            amount: points,
-                            base,
-                            increment,
-                          })}`}</td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                  </Popover.Body>
-                </Popover>
-              }
-              placement="top"
-            >
-              <span>{damageValue}</span>
-            </OverlayTrigger>
-          ) : (
-            damageValue
-          )}
+                        <td>{`+${getComputedStatistic({
+                          amount: points,
+                          base,
+                          increment,
+                        })}`}</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </Popover.Body>
+              </Popover>
+            }
+            placement="top"
+            trigger={isShowingDamageDetails ? ["hover", "focus"] : []}
+          >
+            <span>{damageValue}</span>
+          </OverlayTrigger>
 
           <FloatingText type={DeltaType.Damage} />
         </>

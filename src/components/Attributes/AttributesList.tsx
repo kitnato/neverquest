@@ -1,4 +1,4 @@
-import Stack from "react-bootstrap/Stack";
+import { Stack } from "react-bootstrap";
 
 import { Attribute } from "@neverquest/components/Attributes/Attribute";
 import { ATTRIBUTES_ORDER } from "@neverquest/data/attributes";

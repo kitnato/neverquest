@@ -1,4 +1,4 @@
-import Stack from "react-bootstrap/Stack";
+import { Stack } from "react-bootstrap";
 
 import { BuybackItems } from "@neverquest/components/Caravan/Merchant/BuybackItems";
 import { PurchaseItems } from "@neverquest/components/Caravan/Merchant/PurchaseItems";

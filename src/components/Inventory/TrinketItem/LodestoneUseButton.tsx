@@ -23,7 +23,7 @@ export function LodestoneUseButton() {
       <OverlayTrigger
         overlay={<Tooltip>Requires a quiet wilderness.</Tooltip>}
         placement="top"
-        trigger={!canLure ? ["focus", "hover"] : []}
+        trigger={canLure ? [] : ["focus", "hover"]}
       >
         <span className="d-inline-block">
           <Button disabled={!canLure} onClick={handleLure} variant={UIVariant.Outline}>

@@ -11,70 +11,74 @@ import { generateArmor, generateShield, generateWeapon } from "@neverquest/utili
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useGenerateMerchantInventory() {
-  return useRecoilCallback(({ set, snapshot }) => () => {
-    const get = getSnapshotGetter(snapshot);
+  return useRecoilCallback(
+    ({ set, snapshot }) =>
+      () => {
+        const get = getSnapshotGetter(snapshot);
 
-    const inventory = { ...get(merchantInventory) };
-    const levelValue = get(level);
-    const nsfwValue = get(isNSFW);
+        const inventory = { ...get(merchantInventory) };
+        const levelValue = get(level);
+        const nsfwValue = get(isNSFW);
 
-    // Remove all previously returned items, so they no longer appear under buy back.
-    Object.getOwnPropertyNames(inventory)
-      .filter((id) => inventory[id].isReturned)
-      .forEach((id) => delete inventory[id]);
+        // Remove all previously returned items, so they no longer appear under buy back.
+        Object.getOwnPropertyNames(inventory)
+          .filter((id) => inventory[id].isReturned)
+          .forEach((id) => delete inventory[id]);
 
-    const merchantOffersIndex = levelValue - 1;
+        const merchantOffersIndex = levelValue - 1;
 
-    if (MERCHANT_OFFERS[merchantOffersIndex]) {
-      const gearSettings = {
-        hasPrefix: true,
-        isNSFW: nsfwValue,
-        level: levelValue,
-        tags: [AffixTag.LowQuality],
-      };
-
-      MERCHANT_OFFERS[merchantOffersIndex].forEach((offer) => {
-        const id = nanoid();
-        const inventoryContentsBase = {
-          isReturned: false,
-          key: nanoid(),
-        };
-
-        if (isTrinket(offer)) {
-          inventory[id] = {
-            ...inventoryContentsBase,
-            item: offer,
+        if (MERCHANT_OFFERS[merchantOffersIndex]) {
+          const gearSettings = {
+            hasPrefix: true,
+            isNSFW: nsfwValue,
+            level: levelValue,
+            tags: [AffixTag.LowQuality],
           };
-        } else {
-          const gear = (() => {
-            if ("armorClass" in offer) {
-              return generateArmor({
-                ...gearSettings,
-                ...offer,
-              });
+
+          MERCHANT_OFFERS[merchantOffersIndex].forEach((offer) => {
+            const id = nanoid();
+            const inventoryContentsBase = {
+              isReturned: false,
+              key: nanoid(),
+            };
+
+            if (isTrinket(offer)) {
+              inventory[id] = {
+                ...inventoryContentsBase,
+                item: offer,
+              };
+            } else {
+              const gear = (() => {
+                if ("armorClass" in offer) {
+                  return generateArmor({
+                    ...gearSettings,
+                    ...offer,
+                  });
+                }
+
+                if ("weaponClass" in offer) {
+                  return generateWeapon({
+                    ...gearSettings,
+                    ...offer,
+                  });
+                }
+
+                return generateShield({
+                  ...gearSettings,
+                  ...offer,
+                });
+              })();
+
+              inventory[id] = {
+                ...inventoryContentsBase,
+                item: gear,
+              };
             }
+          });
 
-            if ("weaponClass" in offer) {
-              return generateWeapon({
-                ...gearSettings,
-                ...offer,
-              });
-            }
-
-            return generateShield({
-              ...gearSettings,
-              ...offer,
-            });
-          })();
-
-          inventory[id] = {
-            ...inventoryContentsBase,
-            item: gear,
-          };
+          set(merchantInventory, inventory);
         }
-      });
-
-      set(merchantInventory, inventory);
-    }
-  });
+      },
+    []
+  );
 }

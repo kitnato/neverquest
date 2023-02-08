@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 
+// TODO - remove?
 export function useTimeout(callback: () => void, delay: null | number) {
   const timeoutRef = useRef(-1);
   const savedCallback = useRef(callback);

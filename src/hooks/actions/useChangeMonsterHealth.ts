@@ -1,37 +1,50 @@
 import { useRecoilCallback } from "recoil";
 
+import { attackDuration, lootingDuration, lootingRate } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { monsterCurrentHealth, monsterMaximumHealth } from "@neverquest/state/monster";
+import {
+  monsterAttackDuration,
+  monsterCurrentHealth,
+  monsterMaximumHealth,
+} from "@neverquest/state/monster";
 import { DeltaType } from "@neverquest/types/enums";
 import { DeltaReserve, FloatingTextVariant } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeMonsterHealth() {
-  return useRecoilCallback(({ set, snapshot }) => (change: DeltaReserve) => {
-    const get = getSnapshotGetter(snapshot);
+  return useRecoilCallback(
+    ({ reset, set, snapshot }) =>
+      (change: DeltaReserve) => {
+        const get = getSnapshotGetter(snapshot);
 
-    const { delta, value } = change;
-    const max = get(monsterMaximumHealth);
-    const isPositive = value > 0;
+        const { delta, value } = change;
+        const max = get(monsterMaximumHealth);
+        const isPositive = value > 0;
 
-    let newHealth = get(monsterCurrentHealth) + value;
+        let newHealth = get(monsterCurrentHealth) + value;
 
-    set(
-      deltas(DeltaType.HealthMonster),
-      delta ?? {
-        color: isPositive ? FloatingTextVariant.Positive : FloatingTextVariant.Negative,
-        value: isPositive ? `+${value}` : value,
-      }
-    );
+        set(
+          deltas(DeltaType.HealthMonster),
+          delta ?? {
+            color: isPositive ? FloatingTextVariant.Positive : FloatingTextVariant.Negative,
+            value: isPositive ? `+${value}` : value,
+          }
+        );
 
-    if (newHealth < 0) {
-      newHealth = 0;
-    }
+        if (newHealth < 0) {
+          newHealth = 0;
 
-    if (newHealth > max) {
-      newHealth = max;
-    }
+          set(lootingDuration, get(lootingRate));
+          reset(attackDuration);
+          reset(monsterAttackDuration);
+        }
 
-    set(monsterCurrentHealth, newHealth);
-  });
+        if (newHealth > max) {
+          newHealth = max;
+        }
+
+        set(monsterCurrentHealth, newHealth);
+      },
+    []
+  );
 }

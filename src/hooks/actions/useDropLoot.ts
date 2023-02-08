@@ -6,19 +6,23 @@ import { essenceLoot, scrapLoot } from "@neverquest/state/resources";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useDropLoot() {
-  return useRecoilCallback(({ set, snapshot }) => () => {
-    const get = getSnapshotGetter(snapshot);
+  return useRecoilCallback(
+    ({ set, snapshot }) =>
+      () => {
+        const get = getSnapshotGetter(snapshot);
 
-    const { essence, scrap } = get(monsterLoot);
+        const { essence, scrap } = get(monsterLoot);
 
-    if (essence > 0) {
-      set(essenceLoot, (current) => current + essence);
-    }
+        if (essence > 0) {
+          set(essenceLoot, (current) => current + essence);
+        }
 
-    if (scrap > 0) {
-      set(scrapLoot, (current) => current + scrap);
-    }
+        if (scrap > 0) {
+          set(scrapLoot, (current) => current + scrap);
+        }
 
-    set(progress, (current) => current + 1);
-  });
+        set(progress, (current) => current + 1);
+      },
+    []
+  );
 }

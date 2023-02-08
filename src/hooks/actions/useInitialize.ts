@@ -1,5 +1,5 @@
 import ls from "localstorage-slim";
-import { useRecoilCallback, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilCallback } from "recoil";
 
 import { KEY_SESSION } from "@neverquest/constants";
 import { ATTRIBUTES_INITIAL } from "@neverquest/data/attributes";
@@ -11,34 +11,37 @@ import { level, wildernesses } from "@neverquest/state/encounter";
 import { isNSFW } from "@neverquest/state/settings";
 import { CrewStatus } from "@neverquest/types/enums";
 import { generateLocation } from "@neverquest/utilities/generators";
+import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useInitialize() {
-  const levelValue = useRecoilValue(level);
-  const isNSFWValue = useRecoilValue(isNSFW);
-  const setWildernesses = useSetRecoilState(wildernesses);
-
   const createMonster = useCreateMonster();
 
-  return useRecoilCallback(({ set }) => () => {
-    if (ls.get(KEY_SESSION) !== null) {
-      return;
-    }
+  return useRecoilCallback(
+    ({ set, snapshot }) =>
+      () => {
+        const get = getSnapshotGetter(snapshot);
 
-    ATTRIBUTES_INITIAL.forEach((type) =>
-      set(attributes(type), (current) => ({ ...current, isUnlocked: true }))
-    );
+        if (ls.get(KEY_SESSION) !== null) {
+          return;
+        }
 
-    CREW_INITIAL.forEach((type) =>
-      set(crew(type), (current) => ({
-        ...current,
-        hireStatus: CrewStatus.Hired,
-      }))
-    );
+        ATTRIBUTES_INITIAL.forEach((type) =>
+          set(attributes(type), (current) => ({ ...current, isUnlocked: true }))
+        );
 
-    setWildernesses([
-      { name: generateLocation({ isNSFW: isNSFWValue, level: levelValue }), progress: 0 },
-    ]);
+        CREW_INITIAL.forEach((type) =>
+          set(crew(type), (current) => ({
+            ...current,
+            hireStatus: CrewStatus.Hired,
+          }))
+        );
 
-    createMonster();
-  });
+        set(wildernesses, [
+          { name: generateLocation({ isNSFW: get(isNSFW), level: get(level) }), progress: 0 },
+        ]);
+
+        createMonster();
+      },
+    [createMonster]
+  );
 }

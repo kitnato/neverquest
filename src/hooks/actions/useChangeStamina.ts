@@ -9,34 +9,38 @@ import { DeltaReserve, FloatingTextVariant } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeStamina() {
-  return useRecoilCallback(({ set, snapshot }) => ({ value }: DeltaReserve) => {
-    const get = getSnapshotGetter(snapshot);
+  return useRecoilCallback(
+    ({ set, snapshot }) =>
+      ({ value }: DeltaReserve) => {
+        const get = getSnapshotGetter(snapshot);
 
-    const maximumStaminaValue = get(maximumStamina);
-    let newStamina = get(currentStamina) + value;
+        const maximumStaminaValue = get(maximumStamina);
+        let newStamina = get(currentStamina) + value;
 
-    set(deltas(DeltaType.Stamina), {
-      color:
-        value > 0
-          ? FloatingTextVariant.Positive
-          : value < 0
-          ? FloatingTextVariant.Negative
-          : FloatingTextVariant.Neutral,
-      value: value > 0 ? `+${value}` : value,
-    });
+        set(deltas(DeltaType.Stamina), {
+          color:
+            value > 0
+              ? FloatingTextVariant.Positive
+              : value < 0
+              ? FloatingTextVariant.Negative
+              : FloatingTextVariant.Neutral,
+          value: value > 0 ? `+${value}` : value,
+        });
 
-    if (newStamina < 0) {
-      newStamina = 0;
-    }
+        if (newStamina < 0) {
+          newStamina = 0;
+        }
 
-    if (newStamina > maximumStaminaValue) {
-      newStamina = maximumStaminaValue;
-    }
+        if (newStamina > maximumStaminaValue) {
+          newStamina = maximumStaminaValue;
+        }
 
-    if (newStamina < maximumStaminaValue) {
-      set(staminaRegenerationDuration, get(staminaRegenerationRate));
-    }
+        if (newStamina < maximumStaminaValue) {
+          set(staminaRegenerationDuration, get(staminaRegenerationRate));
+        }
 
-    set(currentStamina, newStamina);
-  });
+        set(currentStamina, newStamina);
+      },
+    []
+  );
 }

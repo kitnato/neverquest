@@ -1,3 +1,4 @@
+import { DAMAGE_BASE } from "@neverquest/constants";
 import { ReactComponent as IconHide } from "@neverquest/icons/animal-hide.svg";
 import { ReactComponent as IconPiercing } from "@neverquest/icons/bullseye.svg";
 import { ReactComponent as IconSlashing } from "@neverquest/icons/crossed-slashes.svg";
@@ -105,7 +106,7 @@ export const WEAPON_ICONS: Record<WeaponClass, SVGIcon> = {
 
 export const WEAPON_NONE: Weapon = {
   abilityChance: 0,
-  damage: 10,
+  damage: DAMAGE_BASE,
   grip: WeaponGrip.OneHanded,
   name: "Unarmed",
   price: 0,

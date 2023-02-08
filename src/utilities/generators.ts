@@ -1,3 +1,4 @@
+import { DAMAGE_BASE } from "@neverquest/constants";
 import { ARMOR_SPECIFICATIONS, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
 import { LOCRA } from "@neverquest/locra";
 import {
@@ -127,8 +128,8 @@ export function generateWeapon({
   const weapon = {
     abilityChance: 0,
     damage: getFromRange({
-      maximum: level * 8 + Math.ceil(level / 3) * 2,
-      minimum: level * 8,
+      maximum: DAMAGE_BASE + level + Math.ceil(level / 3) * 2,
+      minimum: DAMAGE_BASE + level,
     }),
     // TODO
     grip: WeaponGrip.OneHanded,

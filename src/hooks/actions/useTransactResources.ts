@@ -74,6 +74,7 @@ export function useTransactResources() {
             set(scrapLoot, 0);
           }
         }
-      }
+      },
+    []
   );
 }

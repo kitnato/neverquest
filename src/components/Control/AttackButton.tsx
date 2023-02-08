@@ -17,7 +17,7 @@ import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
-  const [isAttackingValue, setAttacking] = useRecoilState(isAttacking);
+  const [isAttackingValue, setIsAttacking] = useRecoilState(isAttacking);
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const isHealthLowValue = useRecoilValue(isHealthLow);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
@@ -37,9 +37,9 @@ export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
 
   useEffect(() => {
     if (isAttackingValue && isLevelCompletedValue) {
-      setAttacking(false);
+      setIsAttacking(false);
     }
-  }, [isAttackingValue, isLevelCompletedValue, setAttacking]);
+  }, [isAttackingValue, isLevelCompletedValue, setIsAttacking]);
 
   const { animation, Icon, tooltip } = (() => {
     if (isLevelCompletedValue) {

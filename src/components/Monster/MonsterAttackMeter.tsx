@@ -1,7 +1,9 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useEffect } from "react";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useDefend } from "@neverquest/hooks/actions/useDefend";
+import { useRegenerateMonster } from "@neverquest/hooks/actions/useRegenerateMonster";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { isAttacking } from "@neverquest/state/character";
 import {
@@ -20,13 +22,34 @@ export function MonsterAttackMeter() {
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isMonsterStaggeredValue = useRecoilValue(isMonsterStaggered);
   const monsterAttackRateValue = useRecoilValue(monsterAttackRate);
+  const resetMonsterAttackDuration = useResetRecoilState(monsterAttackDuration);
 
   const defend = useDefend();
+  const regenerateMonster = useRegenerateMonster();
+
+  useEffect(() => {
+    if (isAttackingValue) {
+      setMonsterAttackDuration(monsterAttackRateValue);
+    } else {
+      resetMonsterAttackDuration();
+
+      if (!isMonsterDeadValue) {
+        regenerateMonster();
+      }
+    }
+  }, [
+    isAttackingValue,
+    isMonsterDeadValue,
+    monsterAttackRateValue,
+    regenerateMonster,
+    resetMonsterAttackDuration,
+    setMonsterAttackDuration,
+  ]);
 
   useAnimation((delta) => {
     let newDuration = monsterAttackDurationValue - delta;
 
-    if (isAttackingValue && newDuration <= 0) {
+    if (newDuration <= 0) {
       defend();
       newDuration = monsterAttackRateValue;
     }

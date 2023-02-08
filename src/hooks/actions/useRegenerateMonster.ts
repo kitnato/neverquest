@@ -11,23 +11,27 @@ import { FloatingTextVariant } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useRegenerateMonster() {
-  return useRecoilCallback(({ reset, set, snapshot }) => () => {
-    const get = getSnapshotGetter(snapshot);
+  return useRecoilCallback(
+    ({ reset, set, snapshot }) =>
+      () => {
+        const get = getSnapshotGetter(snapshot);
 
-    if (get(isMonsterDead)) {
-      return;
-    }
+        if (get(isMonsterDead)) {
+          return;
+        }
 
-    const monsterMaximumHealthValue = get(monsterMaximumHealth);
-    const difference = monsterMaximumHealthValue - get(monsterCurrentHealth);
+        const monsterMaximumHealthValue = get(monsterMaximumHealth);
+        const difference = monsterMaximumHealthValue - get(monsterCurrentHealth);
 
-    if (difference > 0) {
-      set(deltas(DeltaType.HealthMonster), {
-        color: FloatingTextVariant.Positive,
-        value: `HEAL +${difference}`,
-      });
-    }
+        if (difference > 0) {
+          set(deltas(DeltaType.HealthMonster), {
+            color: FloatingTextVariant.Positive,
+            value: `HEAL +${difference}`,
+          });
+        }
 
-    reset(monsterCurrentHealth);
-  });
+        reset(monsterCurrentHealth);
+      },
+    []
+  );
 }

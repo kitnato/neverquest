@@ -10,46 +10,50 @@ import { generateLocation } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useIncreaseLevel() {
-  return useRecoilCallback(({ set, snapshot }) => () => {
-    const get = getSnapshotGetter(snapshot);
+  return useRecoilCallback(
+    ({ set, snapshot }) =>
+      () => {
+        const get = getSnapshotGetter(snapshot);
 
-    const levelValue = get(level);
-    const nextLevel = levelValue + 1;
+        const levelValue = get(level);
+        const nextLevel = levelValue + 1;
 
-    CREW_ORDER.forEach((type) => {
-      const { hireStatus, monologueProgress } = get(crew(type));
-      const isShowingCrewHiring = isShowing(ShowingType.CrewHiring);
+        CREW_ORDER.forEach((type) => {
+          const { hireStatus, monologueProgress } = get(crew(type));
+          const isShowingCrewHiring = isShowing(ShowingType.CrewHiring);
 
-      const { hirableLevel, monologues } = CREW[type];
+          const { hirableLevel, monologues } = CREW[type];
 
-      // Progress the monologue for all hired crew members.
-      if (hireStatus === CrewStatus.Hired && monologueProgress < monologues.length - 1) {
-        set(crew(type), (current) => ({
-          ...current,
-          monologueProgress: current.monologueProgress + 1,
-        }));
-      }
+          // Progress the monologue for all hired crew members.
+          if (hireStatus === CrewStatus.Hired && monologueProgress < monologues.length - 1) {
+            set(crew(type), (current) => ({
+              ...current,
+              monologueProgress: current.monologueProgress + 1,
+            }));
+          }
 
-      // Make crew member hirable if the appropriate level has been reached.
-      if (hireStatus === CrewStatus.Unavailable && nextLevel >= hirableLevel) {
-        set(crew(type), (current) => ({
-          ...current,
-          hireStatus: CrewStatus.Hirable,
-        }));
+          // Make crew member hirable if the appropriate level has been reached.
+          if (hireStatus === CrewStatus.Unavailable && nextLevel >= hirableLevel) {
+            set(crew(type), (current) => ({
+              ...current,
+              hireStatus: CrewStatus.Hirable,
+            }));
 
-        if (!get(isShowingCrewHiring)) {
-          set(isShowingCrewHiring, true);
+            if (!get(isShowingCrewHiring)) {
+              set(isShowingCrewHiring, true);
+            }
+          }
+        });
+
+        if (!get(wildernesses)[nextLevel]) {
+          set(wildernesses, (current) => [
+            ...current,
+            { name: generateLocation({ isNSFW: get(isNSFW), level: nextLevel }), progress: 0 },
+          ]);
         }
-      }
-    });
 
-    if (!get(wildernesses)[nextLevel]) {
-      set(wildernesses, (current) => [
-        ...current,
-        { name: generateLocation({ isNSFW: get(isNSFW), level: nextLevel }), progress: 0 },
-      ]);
-    }
-
-    set(level, nextLevel);
-  });
+        set(level, nextLevel);
+      },
+    []
+  );
 }

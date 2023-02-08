@@ -9,20 +9,24 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 export function useIncreaseAttribute() {
   const transactResources = useTransactResources();
 
-  return useRecoilCallback(({ set, snapshot }) => (type: AttributeType) => {
-    const get = getSnapshotGetter(snapshot);
+  return useRecoilCallback(
+    ({ set, snapshot }) =>
+      (type: AttributeType) => {
+        const get = getSnapshotGetter(snapshot);
 
-    const attributeCostValue = get(attributeCost);
+        const attributeCostValue = get(attributeCost);
 
-    set(attributes(type), (current) => ({
-      ...current,
-      points: current.points + 1,
-    }));
+        set(attributes(type), (current) => ({
+          ...current,
+          points: current.points + 1,
+        }));
 
-    transactResources({
-      essenceDifference: -attributeCostValue,
-    });
+        transactResources({
+          essenceDifference: -attributeCostValue,
+        });
 
-    set(characterLevel, (current) => current + 1);
-  });
+        set(characterLevel, (current) => current + 1);
+      },
+    [transactResources]
+  );
 }

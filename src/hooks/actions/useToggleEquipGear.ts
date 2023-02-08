@@ -1,7 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
 import { attributes } from "@neverquest/state/attributes";
-import { attackDuration } from "@neverquest/state/character";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { Gear } from "@neverquest/types";
@@ -9,10 +8,9 @@ import { AttributeType, ShowingType } from "@neverquest/types/enums";
 import { isArmor, isGear, isShield, isWeapon } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-// TODO - refactor with useRecoilTransaction so that these can be called from each other without passing values
 export function useToggleEquipGear() {
   return useRecoilCallback(
-    ({ reset, set, snapshot }) =>
+    ({ set, snapshot }) =>
       (idOrGear: string | Gear) => {
         const get = getSnapshotGetter(snapshot);
 
@@ -83,8 +81,6 @@ export function useToggleEquipGear() {
           if (!get(isShowing(ShowingType.Weapon))) {
             set(isShowing(ShowingType.Weapon), true);
           }
-
-          reset(attackDuration);
         }
       },
     []

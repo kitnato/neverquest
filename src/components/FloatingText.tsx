@@ -14,6 +14,7 @@ export function FloatingText({ type }: { type: DeltaType }) {
   const deltaValue = useRecoilValue(delta);
   const resetDeltaValue = useResetRecoilState(delta);
   const [floatingTextQueue, setFloatingTextQueue] = useRecoilState(floatingTextQueues(type));
+  const resetFloatingTextQueue = useResetRecoilState(floatingTextQueues(type));
 
   const animationClass = getAnimationClass({
     speed: AnimationSpeed.Slower,
@@ -22,6 +23,10 @@ export function FloatingText({ type }: { type: DeltaType }) {
 
   const onAnimationEnd = (id: string) => () =>
     setFloatingTextQueue((current) => current.filter(({ key }) => key !== id));
+
+  useEffect(() => {
+    resetFloatingTextQueue();
+  }, [resetFloatingTextQueue]);
 
   useEffect(() => {
     if (deltaValue === DEFAULT_DELTA_DISPLAY) {
@@ -37,7 +42,7 @@ export function FloatingText({ type }: { type: DeltaType }) {
     ]);
 
     resetDeltaValue();
-  }, [animationClass, deltaValue, resetDeltaValue, setFloatingTextQueue]);
+  }, [deltaValue, resetDeltaValue, setFloatingTextQueue]);
 
   return (
     <div className="position-relative">

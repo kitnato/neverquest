@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { LABEL_UNKNOWN } from "@neverquest/constants";
-import { useSwitchLocation } from "@neverquest/hooks/actions/useSwitchLocation";
+import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { ReactComponent as Icon } from "@neverquest/icons/journey.svg";
 import { isLevelCompleted, isWilderness, level } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
@@ -17,7 +17,7 @@ export function TravelButton({ isDisabled }: { isDisabled: boolean }) {
   const isWildernessValue = useRecoilValue(isWilderness);
   const levelValue = useRecoilValue(level);
 
-  const switchLocation = useSwitchLocation();
+  const toggleLocation = useToggleLocation();
 
   if (!(hasLootedValue && isLevelCompletedValue) && isWildernessValue) {
     return null;
@@ -51,7 +51,7 @@ export function TravelButton({ isDisabled }: { isDisabled: boolean }) {
           onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
             currentTarget.blur();
 
-            switchLocation();
+            toggleLocation();
           }}
           variant={UIVariant.Outline}
         >

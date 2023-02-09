@@ -60,7 +60,7 @@ export function Recovery() {
                           <td>{`-${formatPercentage(1 - recoveryRateValue / RECOVERY_RATE)}`}</td>
                         </>
                       ) : (
-                        <td>{LABEL_UNKNOWN}</td>
+                        <td className="text-end">{LABEL_UNKNOWN}</td>
                       )}
                     </tr>
 
@@ -72,7 +72,7 @@ export function Recovery() {
                           <td>{formatPercentage(skipRecoveryChanceValue)}</td>
                         </>
                       ) : (
-                        <td>{LABEL_UNKNOWN}</td>
+                        <td className="text-end">{LABEL_UNKNOWN}</td>
                       )}
                     </tr>
                   </tbody>

@@ -2,22 +2,14 @@ import { atom, selector } from "recoil";
 
 import { LABEL_UNKNOWN } from "@neverquest/constants";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { maximumStamina, staminaDebuff } from "@neverquest/state/reserves";
 import { StorageKey } from "@neverquest/types/enums";
-import { getTriangularNumber } from "@neverquest/utilities/getters";
 
 // SELECTORS
 
-export const essenceAbsorbed = selector({
-  get: ({ get }) => {
-    let total = 0;
-
-    for (let i = 0; i <= get(characterLevel); i++) {
-      total += getTriangularNumber(i);
-    }
-
-    return total;
-  },
-  key: "essenceAbsorbed",
+export const isBlighted = selector({
+  get: ({ get }) => get(maximumStamina) === get(staminaDebuff),
+  key: "isBlighted",
 });
 
 export const isLooting = selector({
@@ -36,12 +28,6 @@ export const attackDuration = atom({
   default: 0,
   effects: [handleLocalStorage<number>(StorageKey.AttackDuration)],
   key: StorageKey.AttackDuration,
-});
-
-export const characterLevel = atom({
-  default: 0,
-  effects: [handleLocalStorage<number>(StorageKey.CharacterLevel)],
-  key: StorageKey.CharacterLevel,
 });
 
 export const isAttacking = atom({

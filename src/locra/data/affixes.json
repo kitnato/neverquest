@@ -1007,7 +1007,7 @@
   {
     "name": "fortune",
     "artifact": "suffix",
-    "creature": "prefix",
+    "creature": "suffix",
     "location": "suffix"
   },
   { "name": "fossilized", "artifact": "prefix", "creature": "prefix" },

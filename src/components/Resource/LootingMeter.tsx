@@ -2,6 +2,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useDropLoot } from "@neverquest/hooks/actions/useDropLoot";
+import { useProgression } from "@neverquest/hooks/actions/useProgression";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { isLooting, lootingDuration, lootingRate } from "@neverquest/state/character";
 import { UIVariant } from "@neverquest/types/ui";
@@ -13,6 +14,7 @@ export function LootingMeter() {
   const lootingRateValue = useRecoilValue(lootingRate);
 
   const dropLoot = useDropLoot();
+  const progression = useProgression();
 
   const lootingProgress = lootingRateValue - lootingDurationValue;
 
@@ -22,6 +24,7 @@ export function LootingMeter() {
     if (newDuration <= 0) {
       newDuration = 0;
       dropLoot();
+      progression();
     }
 
     setLootingDuration(newDuration);

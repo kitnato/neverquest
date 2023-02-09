@@ -13,7 +13,7 @@ import {
   isHealthAtMaximum,
   isStaminaAtMaximum,
   maximumHealth,
-  maximumStamina,
+  maximumStaminaTotal,
 } from "@neverquest/state/reserves";
 import {
   healthRegenerationAmount,
@@ -46,7 +46,7 @@ export const RESERVES = {
     atom: currentStamina,
     atomDeltaRegenerationRate: deltas(DeltaType.StaminaRegenerationRate),
     atomIsAtMaximum: isStaminaAtMaximum,
-    atomMaximum: maximumStamina,
+    atomMaximum: maximumStaminaTotal,
     atomRegenerationAmount: staminaRegenerationAmount,
     atomRegenerationDuration: staminaRegenerationDuration,
     atomRegenerationRate: staminaRegenerationRate,

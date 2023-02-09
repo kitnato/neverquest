@@ -30,7 +30,7 @@ export const monsterAttackRate = selector({
 });
 
 export const monsterDamage = selector({
-  get: ({ get }) => Math.floor(get(level) * 6 + get(progress) / 2),
+  get: ({ get }) => Math.floor(get(level) * 5 + get(progress) / 2),
   key: "monsterDamage",
 });
 
@@ -44,7 +44,7 @@ export const monsterDamagePerSecond = selector({
 });
 
 export const monsterMaximumHealth = selector({
-  get: ({ get }) => Math.floor(get(level) * 20 + get(progress) / 2),
+  get: ({ get }) => Math.floor(10 + get(level) * 10 + get(progress) / 2),
   key: "monsterMaximumHealth",
 });
 
@@ -107,8 +107,8 @@ export const monsterStaggeredDuration = atom({
   key: StorageKey.MonsterStaggeredDuration,
 });
 
-export const monsterStatusElement = atom<HTMLDivElement | null>({
+export const monsterElement = atom<HTMLDivElement | null>({
   default: null,
-  effects: [handleLocalStorage<HTMLDivElement | null>(StorageKey.MonsterStatusElement)],
-  key: StorageKey.MonsterStatusElement,
+  effects: [handleLocalStorage<HTMLDivElement | null>(StorageKey.MonsterElement)],
+  key: StorageKey.MonsterElement,
 });

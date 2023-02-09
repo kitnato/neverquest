@@ -2,7 +2,7 @@ import { useRecoilCallback } from "recoil";
 
 import { staminaRegenerationDuration } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { currentStamina, maximumStamina } from "@neverquest/state/reserves";
+import { currentStamina, maximumStaminaTotal } from "@neverquest/state/reserves";
 import { staminaRegenerationRate } from "@neverquest/state/statistics";
 import { DeltaType } from "@neverquest/types/enums";
 import { DeltaReserve, FloatingTextVariant } from "@neverquest/types/ui";
@@ -14,7 +14,7 @@ export function useChangeStamina() {
       ({ value }: DeltaReserve) => {
         const get = getSnapshotGetter(snapshot);
 
-        const maximumStaminaValue = get(maximumStamina);
+        const maximumStaminaTotalValue = get(maximumStaminaTotal);
         let newStamina = get(currentStamina) + value;
 
         set(deltas(DeltaType.Stamina), {
@@ -31,11 +31,11 @@ export function useChangeStamina() {
           newStamina = 0;
         }
 
-        if (newStamina > maximumStaminaValue) {
-          newStamina = maximumStaminaValue;
+        if (newStamina > maximumStaminaTotalValue) {
+          newStamina = maximumStaminaTotalValue;
         }
 
-        if (newStamina < maximumStaminaValue) {
+        if (newStamina < maximumStaminaTotalValue) {
           set(staminaRegenerationDuration, get(staminaRegenerationRate));
         }
 

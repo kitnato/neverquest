@@ -9,8 +9,8 @@ import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import {
   monsterBleedingDuration,
+  monsterElement,
   monsterStaggeredDuration,
-  monsterStatusElement,
 } from "@neverquest/state/monster";
 import { canAttackOrParry } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
@@ -100,7 +100,7 @@ export function useAttack() {
           changeMonsterHealth({ delta: monsterDeltas, value: totalDamage });
 
           animateElement({
-            element: get(monsterStatusElement),
+            element: get(monsterElement),
             speed: AnimationSpeed.Fast,
             type: AnimationType.HeadShake,
           });

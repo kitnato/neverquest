@@ -66,7 +66,7 @@ export function Damage() {
             placement="top"
             trigger={isShowingDamageDetails ? ["hover", "focus"] : []}
           >
-            <span>{damageValue}</span>
+            <span>{damageTotalValue}</span>
           </OverlayTrigger>
 
           <FloatingText type={DeltaType.Damage} />

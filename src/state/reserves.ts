@@ -34,7 +34,7 @@ export const isHealthAtMaximum = selector({
 });
 
 export const isStaminaAtMaximum = selector({
-  get: ({ get }) => get(currentStamina) >= get(maximumStamina),
+  get: ({ get }) => get(currentStamina) >= get(maximumStaminaTotal),
   key: "isStaminaAtMaximum",
 });
 
@@ -60,6 +60,19 @@ export const maximumStamina = selector({
   key: "maximumStamina",
 });
 
+export const maximumStaminaTotal = selector({
+  get: ({ get }) => {
+    const newMaximum = get(maximumStamina) - get(staminaDebuff);
+
+    if (newMaximum < 0) {
+      return 0;
+    }
+
+    return newMaximum;
+  },
+  key: "maximumStaminaTotal",
+});
+
 // ATOMS
 
 export const currentHealth = atom({
@@ -72,4 +85,10 @@ export const currentStamina = atom({
   default: maximumStamina,
   effects: [handleLocalStorage<number>(StorageKey.CurrentStamina)],
   key: StorageKey.CurrentStamina,
+});
+
+export const staminaDebuff = atom({
+  default: 0,
+  effects: [handleLocalStorage<number>(StorageKey.StaminaDebuff)],
+  key: StorageKey.StaminaDebuff,
 });

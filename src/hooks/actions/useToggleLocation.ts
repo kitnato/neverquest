@@ -13,20 +13,21 @@ import {
 import { LocationType } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export function useSwitchLocation() {
+export function useToggleLocation() {
   const generateMerchantInventory = useGenerateMerchantInventory();
   const increaseLevel = useIncreaseLevel();
 
   return useRecoilCallback(
-    ({ set, snapshot }) =>
+    ({ reset, set, snapshot }) =>
       () => {
         const get = getSnapshotGetter(snapshot);
 
         const isWildernessValue = get(isWilderness);
 
         if (isWildernessValue) {
-          set(isLevelStarted, false);
           generateMerchantInventory();
+
+          reset(isLevelStarted);
           set(mode, LocationType.Caravan);
         } else {
           if (get(isLevelCompleted) && get(level) === get(maximumLevel)) {

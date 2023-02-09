@@ -15,7 +15,7 @@ import {
   attributes,
   isAttributeAtMaximum,
 } from "@neverquest/state/attributes";
-import { isLevelStarted } from "@neverquest/state/encounter";
+import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
 import { AttributeType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 
@@ -25,10 +25,13 @@ export function Attribute({ type }: { type: AttributeType }) {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(type));
   const isLevelStartedValue = useRecoilValue(isLevelStarted);
+  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
 
   const increaseAttribute = useIncreaseAttribute();
 
   const { description, Icon, name } = ATTRIBUTES[type];
+  const canIncrease =
+    areAttributesIncreasableValue && (!isLevelStartedValue || isLevelCompletedValue);
 
   const onIncrease = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
     currentTarget.blur();
@@ -53,18 +56,8 @@ export function Attribute({ type }: { type: AttributeType }) {
                 placement="top"
               >
                 <span className="d-inline-block">
-                  <Button
-                    disabled={!areAttributesIncreasableValue || isLevelStartedValue}
-                    onClick={onIncrease}
-                    variant={UIVariant.Outline}
-                  >
-                    <IconImage
-                      Icon={
-                        areAttributesIncreasableValue && !isLevelStartedValue
-                          ? IconIncrease
-                          : IconWait
-                      }
-                    />
+                  <Button disabled={!canIncrease} onClick={onIncrease} variant={UIVariant.Outline}>
+                    <IconImage Icon={canIncrease ? IconIncrease : IconWait} />
                   </Button>
                 </span>
               </OverlayTrigger>

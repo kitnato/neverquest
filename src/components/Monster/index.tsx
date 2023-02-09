@@ -1,29 +1,76 @@
-import { Card } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useEffect, useRef } from "react";
+import { Card, Col, Row, Stack } from "react-bootstrap";
+import { useRecoilState } from "recoil";
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { MonsterStatus } from "@neverquest/components/Monster/MonsterStatus";
-import { LABEL_UNKNOWN } from "@neverquest/constants";
-import { ReactComponent as Icon } from "@neverquest/icons/evil-eyes.svg";
-import { isLevelStarted } from "@neverquest/state/encounter";
-import { AnimationType } from "@neverquest/types/ui";
-import { getAnimationClass } from "@neverquest/utilities/getters";
+import { MonsterAttack } from "@neverquest/components/Monster/MonsterAttack";
+import { MonsterBleeding } from "@neverquest/components/Monster/MonsterBleeding";
+import { MonsterDamage } from "@neverquest/components/Monster/MonsterDamage";
+import { MonsterHealth } from "@neverquest/components/Monster/MonsterHealth";
+import { MonsterName } from "@neverquest/components/Monster/MonsterName";
+import { MonsterPoisonRating } from "@neverquest/components/Monster/MonsterPoisonRating";
+import { MonsterStaggered } from "@neverquest/components/Monster/MonsterStaggered";
+import { isMonsterNew, monsterElement } from "@neverquest/state/monster";
+import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
+import { animateElement } from "@neverquest/utilities/animateElement";
 
 export function Monster() {
-  const isLevelStartedValue = useRecoilValue(isLevelStarted);
+  const [isMonsterNewValue, setMonsterNew] = useRecoilState(isMonsterNew);
+  const [monsterElementValue, setMonsterElement] = useRecoilState(monsterElement);
 
-  if (isLevelStartedValue) {
-    return <MonsterStatus />;
-  }
+  const element = useRef(null);
+
+  useEffect(() => {
+    const { current } = element;
+
+    if (current) {
+      setMonsterElement(current);
+    }
+
+    return () => setMonsterElement(null);
+  }, [element, setMonsterElement]);
+
+  useEffect(() => {
+    if (isMonsterNewValue && monsterElementValue) {
+      animateElement({
+        element: monsterElementValue,
+        speed: AnimationSpeed.Faster,
+        type: AnimationType.ZoomInRight,
+      });
+
+      setMonsterNew(false);
+    }
+  }, [isMonsterNewValue, monsterElementValue, setMonsterNew]);
 
   return (
-    <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
+    <Card ref={element}>
       <Card.Body>
-        <IconDisplay
-          contents={<span className="fst-italic">The darkness stirs.</span>}
-          Icon={Icon}
-          tooltip={LABEL_UNKNOWN}
-        />
+        <Stack gap={3}>
+          <MonsterName />
+
+          <MonsterHealth />
+
+          <MonsterAttack />
+
+          <Row>
+            <Col>
+              <MonsterDamage />
+            </Col>
+
+            <Col>
+              <MonsterPoisonRating />
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>
+              <MonsterStaggered />
+            </Col>
+
+            <Col>
+              <MonsterBleeding />
+            </Col>
+          </Row>
+        </Stack>
       </Card.Body>
     </Card>
   );

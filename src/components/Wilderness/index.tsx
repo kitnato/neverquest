@@ -1,46 +1,46 @@
-import { useEffect } from "react";
-import { Card, Stack } from "react-bootstrap";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { Card } from "react-bootstrap";
+import { useRecoilValue } from "recoil";
 
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "../IconDisplay";
 import { Monster } from "@neverquest/components/Monster";
-import { useCreateMonster } from "@neverquest/hooks/actions/useCreateMonster";
-import { ReactComponent as Icon } from "@neverquest/icons/crossed-bones.svg";
-import { isLevelCompleted, isLevelStarted, progress } from "@neverquest/state/encounter";
+import { LABEL_UNKNOWN } from "@neverquest/constants";
+import { ReactComponent as IconDead } from "@neverquest/icons/crossed-bones.svg";
+import { ReactComponent as IconLurking } from "@neverquest/icons/evil-eyes.svg";
+import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Wilderness() {
+  const isLevelStartedValue = useRecoilValue(isLevelStarted);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
-  const setIsLevelStarted = useSetRecoilState(isLevelStarted);
-  // Progress needs to be tracked here so that a new monster is created whenever there is level progression.
-  const progressValue = useRecoilValue(progress);
 
-  const createMonster = useCreateMonster();
+  if (isLevelCompletedValue) {
+    return (
+      <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
+        <Card.Body>
+          <IconDisplay
+            contents={<span className="fst-italic">Everything is dead.</span>}
+            Icon={IconDead}
+            tooltip="Monster remains"
+          />
+        </Card.Body>
+      </Card>
+    );
+  }
 
-  useEffect(() => {
-    if (isLevelCompletedValue) {
-      setIsLevelStarted(false);
-    } else {
-      createMonster();
-    }
-  }, [createMonster, isLevelCompletedValue, progressValue, setIsLevelStarted]);
+  if (isLevelStartedValue) {
+    return <Monster />;
+  }
 
   return (
-    <Stack gap={3}>
-      {isLevelCompletedValue ? (
-        <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
-          <Card.Body>
-            <Stack direction="horizontal" gap={5}>
-              <IconImage Icon={Icon} tooltip="Monster remains" />
-
-              <span className="fst-italic">Everything is dead.</span>
-            </Stack>
-          </Card.Body>
-        </Card>
-      ) : (
-        <Monster />
-      )}
-    </Stack>
+    <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
+      <Card.Body>
+        <IconDisplay
+          contents={<span className="fst-italic">The darkness stirs.</span>}
+          Icon={IconLurking}
+          tooltip={LABEL_UNKNOWN}
+        />
+      </Card.Body>
+    </Card>
   );
 }

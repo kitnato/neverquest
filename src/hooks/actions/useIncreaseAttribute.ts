@@ -1,8 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
-import { attributeCost, attributes } from "@neverquest/state/attributes";
-import { characterLevel } from "@neverquest/state/character";
+import { attributeCost, attributes, characterLevel } from "@neverquest/state/attributes";
 import { AttributeType } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 

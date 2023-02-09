@@ -3,7 +3,7 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
-import { useSwitchLocation } from "@neverquest/hooks/actions/useSwitchLocation";
+import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { isAttacking } from "@neverquest/state/character";
 import { isLevelCompleted, isWilderness } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
@@ -19,7 +19,7 @@ export function HearthstoneUseButton() {
 
   const [isShowingConfirmation, setIsShowingConfirmation] = useState(false);
 
-  const switchLocation = useSwitchLocation();
+  const toggleLocation = useToggleLocation();
 
   const canWarp = !isAttackingValue && isWildernessValue;
 
@@ -28,7 +28,7 @@ export function HearthstoneUseButton() {
       setIsShowingConfirmation(true);
     } else {
       resetIsInventoryOpen();
-      switchLocation();
+      toggleLocation();
     }
   };
 
@@ -49,7 +49,7 @@ export function HearthstoneUseButton() {
       <ConfirmationDialog
         confirmationLabel="Warp"
         message="Warping back to Caravan now will forfeit all uncollected loot."
-        onConfirm={switchLocation}
+        onConfirm={toggleLocation}
         setHide={() => setIsShowingConfirmation(false)}
         show={isShowingConfirmation}
         title="Forfeit loot?"

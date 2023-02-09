@@ -3,7 +3,7 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGenerateMerchantInventory";
 import { useIncreaseLevel } from "@neverquest/hooks/actions/useIncreaseLevel";
-import { useSwitchLocation } from "@neverquest/hooks/actions/useSwitchLocation";
+import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { isWilderness, level, progress, progressMaximum } from "@neverquest/state/encounter";
 import { coinsLoot, essenceLoot, scrapLoot } from "@neverquest/state/resources";
@@ -36,7 +36,7 @@ export function CheatQuest() {
 
   const generateMerchantInventory = useGenerateMerchantInventory();
   const increaseLevel = useIncreaseLevel();
-  const switchLocation = useSwitchLocation();
+  const toggleLocation = useToggleLocation();
   const transactResources = useTransactResources();
 
   const setSkill = useMemo(
@@ -118,7 +118,7 @@ export function CheatQuest() {
               resetCoinsLoot();
               resetEssenceLoot();
               resetScrapLoot();
-              switchLocation();
+              toggleLocation();
             }
           }
           break;
@@ -139,7 +139,7 @@ export function CheatQuest() {
     resetScrapLoot,
     setProgress,
     setSkill,
-    switchLocation,
+    toggleLocation,
     transactResources,
   ]);
 

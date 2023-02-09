@@ -7,7 +7,7 @@ import { ReactComponent as Icon } from "@neverquest/icons/slashed-shield.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { blockChance } from "@neverquest/state/statistics";
-import { DeltaType, ShowingType } from "@neverquest/types/enums";
+import { DeltaTextType, DeltaType, ShowingType } from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function BlockChance() {
@@ -19,6 +19,7 @@ export function BlockChance() {
   useDeltaText({
     atomDelta: deltaBlockChance,
     atomValue: blockChance,
+    type: DeltaTextType.Percentage,
   });
 
   if (!isShowingBlockChance) {

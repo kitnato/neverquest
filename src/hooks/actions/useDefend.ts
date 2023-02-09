@@ -11,11 +11,11 @@ import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import {
   monsterDamage,
+  monsterElement,
   monsterPoisonChance,
   monsterStaggeredDuration,
-  monsterStatusElement,
 } from "@neverquest/state/monster";
-import { canAttackOrParry, canBlock, canDodge } from "@neverquest/state/reserves";
+import { canAttackOrParry, canBlock, canDodge, staminaDebuff } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
 import {
   blockChance,
@@ -102,7 +102,7 @@ export function useDefend() {
         }
 
         let deltaHealth: DeltaDisplay = [];
-        let deltaStamina: DeltaDisplay | undefined;
+        let deltaStamina: DeltaDisplay = [];
 
         const hasParried = get(skills(SkillType.Parry)) && Math.random() <= get(parryChance);
 
@@ -143,7 +143,7 @@ export function useDefend() {
             increaseMastery(MasteryType.ParryFactor);
 
             animateElement({
-              element: get(monsterStatusElement),
+              element: get(monsterElement),
               speed: AnimationSpeed.Fast,
               type: AnimationType.HeadShake,
             });
@@ -186,10 +186,10 @@ export function useDefend() {
             }
 
             if (isFreeBlock) {
-              deltaStamina = {
+              deltaStamina.push({
                 color: FloatingTextVariant.Neutral,
                 value: "STABILIZED",
-              };
+              });
             } else {
               changeStamina({ value: -staminaCost });
             }
@@ -241,7 +241,7 @@ export function useDefend() {
           set(recoveryDuration, get(recoveryRate));
         }
 
-        const isPoisoned = get(poisonDuration) == 0 && Math.random() <= get(monsterPoisonChance);
+        const isPoisoned = Math.random() <= get(monsterPoisonChance);
 
         if (isPoisoned) {
           const hasDeflected =
@@ -253,12 +253,21 @@ export function useDefend() {
               value: "DEFLECTED POISON",
             });
           } else {
-            set(poisonDuration, POISON.duration);
+            if (get(poisonDuration) > 0) {
+              set(staminaDebuff, (current) => current + 1);
 
-            deltaHealth.push({
-              color: FloatingTextVariant.Negative,
-              value: "POISONED",
-            });
+              deltaStamina.push({
+                color: FloatingTextVariant.Negative,
+                value: "BLIGHTED",
+              });
+            } else {
+              set(poisonDuration, POISON.duration);
+
+              deltaHealth.push({
+                color: FloatingTextVariant.Negative,
+                value: "POISONED",
+              });
+            }
           }
         }
 

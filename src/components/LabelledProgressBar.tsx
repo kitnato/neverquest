@@ -6,6 +6,7 @@ export function LabelledProgressBar({
   attached,
   disableTransitions = false,
   label,
+  sibling = <></>,
   size = UISize.Normal,
   value,
   variant,
@@ -13,6 +14,7 @@ export function LabelledProgressBar({
   attached?: UIAttachment;
   disableTransitions?: boolean;
   label: string;
+  sibling?: JSX.Element;
   size?: UISize;
   value: number;
   variant: UIVariant;
@@ -42,7 +44,11 @@ export function LabelledProgressBar({
     <div className={`position-relative w-100 ${disableTransitions ? "no-transitions" : ""}`}>
       {size === UISize.Normal && (
         <>
-          <ProgressBar now={value} style={style} variant={variant} />
+          <ProgressBar style={style}>
+            <ProgressBar key={1} now={value} variant={variant} />
+
+            {sibling}
+          </ProgressBar>
 
           <small
             className="position-absolute text-light"
@@ -61,7 +67,11 @@ export function LabelledProgressBar({
 
       {size === UISize.Tiny && (
         <OverlayTrigger overlay={<Tooltip>{label}</Tooltip>} placement="bottom">
-          <ProgressBar now={value} style={style} variant={variant} />
+          <ProgressBar style={style}>
+            <ProgressBar key={1} now={value} variant={variant} />
+
+            {sibling}
+          </ProgressBar>
         </OverlayTrigger>
       )}
     </div>

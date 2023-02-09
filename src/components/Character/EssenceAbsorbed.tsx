@@ -4,7 +4,7 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/abstract-013.svg";
-import { essenceAbsorbed } from "@neverquest/state/character";
+import { essenceAbsorbed } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { DeltaType } from "@neverquest/types/enums";
 

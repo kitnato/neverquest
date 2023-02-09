@@ -5,12 +5,13 @@ import { RecoveryMeter } from "@neverquest/components/Character/RecoveryMeter";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN, RECOVERY_RATE } from "@neverquest/constants";
+import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/knockout.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { recoveryRate, skipRecoveryChance } from "@neverquest/state/statistics";
-import { DeltaTextType, DeltaType, ShowingType } from "@neverquest/types/enums";
+import { AttributeType, DeltaTextType, DeltaType, ShowingType } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Recovery() {
@@ -20,6 +21,7 @@ export function Recovery() {
 
   const deltaRecoveryRate = deltas(DeltaType.RecoveryRate);
 
+  const { name } = ATTRIBUTES[AttributeType.RecoveryRate];
   const showRecoveryRate = recoveryRateValue !== RECOVERY_RATE;
   const showSkipRecovery = skipRecoveryChanceValue > 0;
 
@@ -53,7 +55,7 @@ export function Recovery() {
                     <tr>
                       {showRecoveryRate ? (
                         <>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Resilience attribute:</td>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>{name} attribute:</td>
 
                           <td>{`-${formatPercentage(1 - recoveryRateValue / RECOVERY_RATE)}`}</td>
                         </>

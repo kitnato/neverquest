@@ -27,6 +27,7 @@ export function RegenerationMeter({ type }: { type: ReserveType.Health | Reserve
 
   const changeReserve = useActionChange();
 
+  const isHealth = type === ReserveType.Health;
   const regenerationProgress =
     regenerationDuration === 0 ? 0 : regenerationRateValue - regenerationDuration;
 
@@ -52,11 +53,15 @@ export function RegenerationMeter({ type }: { type: ReserveType.Health | Reserve
       return "Recovering ...";
     }
 
-    return `${
-      regenerationDuration === 0
-        ? "Regeneration"
-        : `Regenerating ${formatMilliseconds(regenerationProgress)}`
-    } (${formatMilliseconds(regenerationRateValue)})`;
+    if (regenerationDuration === 0) {
+      return `${isHealth ? "Health" : "Stamina"} regeneration (${formatMilliseconds(
+        regenerationRateValue
+      )})`;
+    }
+
+    return `Regenerating ${isHealth ? "health" : "stamina"} (${formatMilliseconds(
+      regenerationProgress
+    )}) ...`;
   })();
 
   return (

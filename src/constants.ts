@@ -3,7 +3,7 @@ import { DeltaDisplay } from "@neverquest/types/ui";
 export const BLEED = {
   duration: 3000,
   ticks: 10,
-};
+} as const;
 
 export const CLASS_ANIMATE_PREFIX = "animate__";
 
@@ -45,7 +45,7 @@ export const POISON = {
   duration: 15000,
   minimumLevel: 11,
   ticks: 10,
-};
+} as const;
 
 export const RECOVERY_RATE = 1500;
 

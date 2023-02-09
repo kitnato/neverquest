@@ -114,15 +114,20 @@ export const damage = selector({
     const { base, increment } = ATTRIBUTES[AttributeType.Damage];
     const { points } = get(attributes(AttributeType.Damage));
 
-    return getComputedStatistic({ amount: points, base, increment }) + get(weapon).damage;
+    return getComputedStatistic({ amount: points, base, increment });
   },
   key: "damage",
+});
+
+export const damageTotal = selector({
+  get: ({ get }) => get(damage) + get(weapon).damage,
+  key: "damageTotal",
 });
 
 export const damagePerSecond = selector({
   get: ({ get }) =>
     getDamagePerRate({
-      damage: get(damage),
+      damage: get(damageTotal),
       damageModifier: get(criticalDamage),
       damageModifierChance: get(criticalChance),
       rate: get(attackRate),

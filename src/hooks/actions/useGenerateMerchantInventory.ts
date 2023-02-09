@@ -6,6 +6,7 @@ import { AffixTag } from "@neverquest/locra/types";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { level } from "@neverquest/state/encounter";
 import { isNSFW } from "@neverquest/state/settings";
+import { InventoryMerchant } from "@neverquest/types";
 import { isTrinket } from "@neverquest/types/type-guards";
 import { generateArmor, generateShield, generateWeapon } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -16,7 +17,7 @@ export function useGenerateMerchantInventory() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const inventory = { ...get(merchantInventory) };
+        const inventory: InventoryMerchant = { ...get(merchantInventory) };
         const levelValue = get(level);
         const nsfwValue = get(isNSFW);
 
@@ -28,7 +29,7 @@ export function useGenerateMerchantInventory() {
         const merchantOffersIndex = levelValue - 1;
 
         if (MERCHANT_OFFERS[merchantOffersIndex]) {
-          const gearSettings = {
+          const SETTINGS_GEAR = {
             hasPrefix: true,
             isNSFW: nsfwValue,
             level: levelValue,
@@ -51,20 +52,20 @@ export function useGenerateMerchantInventory() {
               const gear = (() => {
                 if ("armorClass" in offer) {
                   return generateArmor({
-                    ...gearSettings,
+                    ...SETTINGS_GEAR,
                     ...offer,
                   });
                 }
 
                 if ("weaponClass" in offer) {
                   return generateWeapon({
-                    ...gearSettings,
+                    ...SETTINGS_GEAR,
                     ...offer,
                   });
                 }
 
                 return generateShield({
-                  ...gearSettings,
+                  ...SETTINGS_GEAR,
                   ...offer,
                 });
               })();

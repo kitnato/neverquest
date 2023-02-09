@@ -7,29 +7,26 @@ import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/wolverine-claws.svg";
-import { attributes } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingDamagePerSecond } from "@neverquest/state/settings";
-import { damage, damagePerSecond } from "@neverquest/state/statistics";
+import { damage, damagePerSecond, damageTotal } from "@neverquest/state/statistics";
 import { AttributeType, DeltaType, ShowingType } from "@neverquest/types/enums";
-import { getComputedStatistic } from "@neverquest/utilities/getters";
 
 export function Damage() {
-  const { points } = useRecoilValue(attributes(AttributeType.Damage));
   const damageValue = useRecoilValue(damage);
+  const damageTotalValue = useRecoilValue(damageTotal);
   const damagePerSecondValue = useRecoilValue(damagePerSecond);
   const isShowingDamageDetails = useRecoilValue(isShowing(ShowingType.DamageDetails));
   const isShowingDamagePerSecondValue = useRecoilValue(isShowingDamagePerSecond);
   const weaponValue = useRecoilValue(weapon);
 
-  const { base, increment, name } = ATTRIBUTES[AttributeType.Damage];
-  const deltaDamage = deltas(DeltaType.Damage);
+  const { name } = ATTRIBUTES[AttributeType.Damage];
 
   useDeltaText({
-    atomDelta: deltaDamage,
-    atomValue: damage,
+    atomDelta: deltas(DeltaType.Damage),
+    atomValue: damageTotal,
   });
 
   return (
@@ -45,6 +42,12 @@ export function Damage() {
                   <Table borderless size="sm">
                     <tbody>
                       <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Per attack:</td>
+
+                        <td>{damageTotalValue}</td>
+                      </tr>
+
+                      <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
 
                         <td>{weaponValue.damage}</td>
@@ -53,11 +56,7 @@ export function Damage() {
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
 
-                        <td>{`+${getComputedStatistic({
-                          amount: points,
-                          base,
-                          increment,
-                        })}`}</td>
+                        <td>{`+${damageValue}`}</td>
                       </tr>
                     </tbody>
                   </Table>

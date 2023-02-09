@@ -5,15 +5,9 @@ import {
   TRINKET_LODESTONE,
 } from "@neverquest/data/trinkets";
 import { ShieldType, WeaponClass, WeaponType } from "@neverquest/locra/types";
-import { Trinket } from "@neverquest/types";
 import { ArmorClass } from "@neverquest/types/enums";
 
-export const MERCHANT_OFFERS: (
-  | Trinket
-  | { type: WeaponType; weaponClass: WeaponClass }
-  | { armorClass: ArmorClass }
-  | { type: ShieldType }
-)[][] = [
+export const MERCHANT_OFFERS = [
   [
     {
       type: WeaponType.Melee,
@@ -51,4 +45,4 @@ export const MERCHANT_OFFERS: (
       type: ShieldType.Tower,
     },
   ],
-];
+] as const;

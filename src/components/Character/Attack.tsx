@@ -64,6 +64,7 @@ export function Attack() {
         >
           <Stack className="w-100" direction="horizontal">
             <AttackMeter />
+
             <FloatingText type={DeltaType.AttackRate} />
           </Stack>
         </OverlayTrigger>

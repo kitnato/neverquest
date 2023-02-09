@@ -18,7 +18,7 @@ import {
   bleedChance,
   criticalChance,
   criticalDamage,
-  damage,
+  damageTotal,
   staggerDuration,
 } from "@neverquest/state/statistics";
 import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
@@ -55,7 +55,7 @@ export function useAttack() {
             weaponClass === WeaponClass.Blunt &&
             Math.random() <= abilityChance;
 
-          const baseDamage = -get(damage);
+          const baseDamage = -get(damageTotal);
           const totalDamage = hasInflictedCritical
             ? baseDamage + baseDamage * get(criticalDamage)
             : baseDamage;

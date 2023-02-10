@@ -1,6 +1,6 @@
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useState } from "react";
 import { Button, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { IconImage } from "@neverquest/components/IconImage";
@@ -17,7 +17,7 @@ import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
-  const [isAttackingValue, setIsAttacking] = useRecoilState(isAttacking);
+  const isAttackingValue = useRecoilValue(isAttacking);
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const isHealthLowValue = useRecoilValue(isHealthLow);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
@@ -34,12 +34,6 @@ export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
   });
   const showWarning =
     isAttackingValue && !isDisabled && showLowHealthWarningValue && isHealthLowValue;
-
-  useEffect(() => {
-    if (isAttackingValue && isLevelCompletedValue) {
-      setIsAttacking(false);
-    }
-  }, [isAttackingValue, isLevelCompletedValue, setIsAttacking]);
 
   const { animation, Icon, tooltip } = (() => {
     if (isLevelCompletedValue) {

@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useAttack } from "@neverquest/hooks/actions/useAttack";
@@ -18,17 +17,8 @@ export function AttackMeter() {
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isRecoveringValue = useRecoilValue(isRecovering);
-  const resetAttackDuration = useResetRecoilState(attackDuration);
 
   const attack = useAttack();
-
-  useEffect(() => {
-    if (isAttackingValue) {
-      setAttackDuration(attackRateTotalValue);
-    } else {
-      resetAttackDuration();
-    }
-  }, [attackRateTotalValue, isAttackingValue, resetAttackDuration, setAttackDuration]);
 
   useAnimation((delta) => {
     let newDuration = attackDurationValue - delta;

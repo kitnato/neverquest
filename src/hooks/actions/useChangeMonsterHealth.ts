@@ -31,7 +31,7 @@ export function useChangeMonsterHealth() {
           }
         );
 
-        if (newHealth < 0) {
+        if (newHealth <= 0) {
           newHealth = 0;
 
           set(lootingDuration, get(lootingRate));

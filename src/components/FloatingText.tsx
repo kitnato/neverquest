@@ -12,8 +12,8 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 export function FloatingText({ type }: { type: DeltaType }) {
   const delta = deltas(type);
   const deltaValue = useRecoilValue(delta);
-  const resetDeltaValue = useResetRecoilState(delta);
   const [floatingTextQueue, setFloatingTextQueue] = useRecoilState(floatingTextQueues(type));
+  const resetDeltaValue = useResetRecoilState(delta);
   const resetFloatingTextQueue = useResetRecoilState(floatingTextQueues(type));
 
   const animationClass = getAnimationClass({

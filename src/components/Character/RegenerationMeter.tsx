@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { RESERVES } from "@neverquest/data/reserves";
@@ -18,7 +17,6 @@ export function RegenerationMeter({ type }: { type: ReserveType.Health | Reserve
     useActionChange,
   } = RESERVES[type];
 
-  const resetRegenerationDuration = useResetRecoilState(atomRegenerationDuration);
   const [regenerationDuration, setRegenerationDuration] = useRecoilState(atomRegenerationDuration);
   const isReserveAtMaximum = useRecoilValue(atomIsAtMaximum);
   const regenerationAmountValue = useRecoilValue(atomRegenerationAmount);
@@ -30,12 +28,6 @@ export function RegenerationMeter({ type }: { type: ReserveType.Health | Reserve
   const isHealth = type === ReserveType.Health;
   const regenerationProgress =
     regenerationDuration === 0 ? 0 : regenerationRateValue - regenerationDuration;
-
-  useEffect(() => {
-    if (isReserveAtMaximum) {
-      resetRegenerationDuration();
-    }
-  }, [isReserveAtMaximum, resetRegenerationDuration]);
 
   useAnimation((delta) => {
     let newDuration = regenerationDuration - delta;

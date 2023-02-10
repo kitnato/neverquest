@@ -7,7 +7,7 @@ import { Initializer } from "@neverquest/components/Initializer";
 import { Layout } from "@neverquest/components/Layout";
 import { SeedContext, useSeed } from "@neverquest/state/SeedContext";
 
-export function App() {
+export function Core() {
   const { resetSeed, seed } = useSeed();
 
   return (

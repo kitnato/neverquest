@@ -9,7 +9,7 @@ import {
 } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { MASTERIES } from "@neverquest/data/masteries";
-import { WeaponClass } from "@neverquest/locra/types";
+import { WeaponClass } from "@neverquest/LOCRA/types";
 import { attributes } from "@neverquest/state/attributes";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { masteries } from "@neverquest/state/masteries";

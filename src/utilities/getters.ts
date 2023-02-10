@@ -1,7 +1,7 @@
 import { RecoilValue, Snapshot } from "recoil";
 
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/constants";
-import { WeaponClass } from "@neverquest/locra/types";
+import { WeaponClass } from "@neverquest/LOCRA/types";
 import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
 import { RangeProps } from "@neverquest/types/props";
 import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";

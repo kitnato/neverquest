@@ -4,7 +4,7 @@ import { BLEED } from "@neverquest/constants";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
-import { WeaponClass } from "@neverquest/locra/types";
+import { WeaponClass } from "@neverquest/LOCRA/types";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import {

@@ -1,4 +1,4 @@
-import { ShieldType, WeaponClass, WeaponType } from "@neverquest/locra/types";
+import { ShieldType, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
 import { ArmorClass, SkillType, WeaponGrip } from "@neverquest/types/enums";
 import { SVGIcon } from "@neverquest/types/props";
 

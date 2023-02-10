@@ -1,0 +1,632 @@
+[
+  { "name": "aegis", "subtype": "medium", "type": "shield" },
+  { "name": "amulet", "type": "trinket" },
+  { "name": "anklet", "subtype": "feet", "type": "armor" },
+  {
+    "name": "arbalest",
+    "class": "blunt",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  { "name": "artichoke", "type": "trinket" },
+  { "name": "artifact", "type": "trinket" },
+  { "name": "axe", "class": "slashing", "subtype": "melee", "type": "weapon" },
+  {
+    "name": "back-scratcher",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "ballista",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  {
+    "name": "bardiche",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "baton", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  {
+    "name": "bayonet",
+    "class": "piercing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "belt", "subtype": "waist", "type": "armor" },
+  { "name": "biscuit", "type": "trinket" },
+  {
+    "name": "blade",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "blowpipe",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  {
+    "name": "bludgeon",
+    "class": "blunt",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "bomb", "class": "blunt", "subtype": "ranged", "type": "weapon" },
+  { "name": "bone", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  {
+    "name": "bong",
+    "class": "blunt",
+    "isNSFW": true,
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "bong", "isNSFW": true, "type": "trinket" },
+  { "name": "book", "class": "slashing", "subtype": "melee", "type": "weapon" },
+  { "name": "book", "type": "trinket" },
+  { "name": "boombox", "type": "trinket" },
+  {
+    "name": "boomerang",
+    "class": "blunt",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  {
+    "name": "boomstick",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  { "name": "boots", "subtype": "feet", "type": "armor" },
+  { "name": "bottle", "type": "trinket" },
+  { "name": "bow", "type": "trinket" },
+  { "name": "box", "type": "trinket" },
+  { "name": "bracelet", "type": "trinket" },
+  { "name": "bracers", "subtype": "hands", "type": "armor" },
+  {
+    "name": "brass knuckles",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "breeches", "subtype": "legs", "type": "armor" },
+  { "name": "buckler", "subtype": "small", "type": "shield" },
+  { "name": "bulwark", "subtype": "tower", "type": "shield" },
+  { "name": "burger", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  { "name": "buttplug", "isNSFW": true, "type": "trinket" },
+  { "name": "cake", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  { "name": "cannon", "class": "blunt", "subtype": "ranged", "type": "weapon" },
+  { "name": "canteen", "type": "trinket" },
+  { "name": "cap", "subtype": "head", "type": "armor" },
+  {
+    "name": "catapult",
+    "class": "blunt",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  { "name": "chainmail", "subtype": "chest", "type": "armor" },
+  {
+    "name": "chakram",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  { "name": "chalice", "type": "trinket" },
+  { "name": "charm", "type": "trinket" },
+  { "name": "chestplate", "subtype": "chest", "type": "armor" },
+  { "name": "circlet", "subtype": "head", "type": "armor" },
+  {
+    "name": "claymore",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "cleaver",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "club", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  { "name": "coif", "subtype": "head", "type": "armor" },
+  { "name": "conundrum", "type": "trinket" },
+  { "name": "cowl", "subtype": "head", "type": "armor" },
+  {
+    "name": "crossbow",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  { "name": "crown", "subtype": "head", "type": "armor" },
+  { "name": "cube", "type": "trinket" },
+  {
+    "name": "cucumber",
+    "class": "blunt",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "cudgel", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  { "name": "cufflinks", "type": "trinket" },
+  {
+    "name": "culverin",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  { "name": "cup", "type": "trinket" },
+  {
+    "name": "cutlass",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "dagger",
+    "class": "piercing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "dart",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  {
+    "name": "darts",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  { "name": "diaper", "isNSFW": true, "type": "trinket" },
+  {
+    "name": "dildo",
+    "class": "blunt",
+    "isNSFW": true,
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "doll", "type": "trinket" },
+  { "name": "doorknob", "type": "trinket" },
+  {
+    "name": "drill",
+    "class": "piercing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "epaulets", "subtype": "shoulders", "type": "armor" },
+  { "name": "epee", "class": "slashing", "subtype": "melee", "type": "weapon" },
+  { "name": "eye", "type": "trinket" },
+  { "name": "eyeglasses", "type": "trinket" },
+  {
+    "name": "falchion",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "faulds", "subtype": "legs", "type": "armor" },
+  { "name": "fish", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  { "name": "flail", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  { "name": "flask", "type": "trinket" },
+  {
+    "name": "flintlock",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  {
+    "name": "flowerpot",
+    "class": "blunt",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "flute", "type": "trinket" },
+  { "name": "fork", "class": "piercing", "subtype": "melee", "type": "weapon" },
+  { "name": "gherkin", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  {
+    "name": "glaive",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "goggles", "type": "trinket" },
+  { "name": "grail", "type": "trinket" },
+  { "name": "greatshield", "subtype": "tower", "type": "shield" },
+  { "name": "greaves", "subtype": "feet", "type": "armor" },
+  {
+    "name": "grenade",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  {
+    "name": "guisarme",
+    "class": "piercing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "gun", "class": "piercing", "subtype": "ranged", "type": "weapon" },
+  {
+    "name": "halberd",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "hammer", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  { "name": "harp", "type": "trinket" },
+  {
+    "name": "harpoon",
+    "class": "piercing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "hatchet",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "heater shield", "subtype": "medium", "type": "shield" },
+  { "name": "helmet", "subtype": "head", "type": "armor" },
+  { "name": "holster", "type": "trinket" },
+  { "name": "hoplon", "subtype": "small", "type": "shield" },
+  {
+    "name": "javelin",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  { "name": "jewel", "type": "trinket" },
+  { "name": "jewels", "type": "trinket" },
+  {
+    "name": "katana",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "kite shield", "subtype": "medium", "type": "shield" },
+  {
+    "name": "knife",
+    "class": "piercing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "knuckles",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "kris", "class": "slashing", "subtype": "melee", "type": "weapon" },
+  {
+    "name": "kunai",
+    "class": "piercing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "ladle", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  {
+    "name": "lance",
+    "class": "piercing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "legplates", "subtype": "legs", "type": "armor" },
+  { "name": "lemon", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  {
+    "name": "letter-opener",
+    "class": "piercing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "limb", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  {
+    "name": "longbow",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  { "name": "mace", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  { "name": "macguffin", "type": "trinket" },
+  {
+    "name": "machete",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "mangonel",
+    "class": "blunt",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  { "name": "maul", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  { "name": "mittens", "subtype": "hands", "type": "armor" },
+  {
+    "name": "morningstar",
+    "class": "blunt",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "mortar",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  {
+    "name": "musket",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  { "name": "muzzle", "type": "trinket" },
+  { "name": "nail", "class": "piercing", "subtype": "melee", "type": "weapon" },
+  {
+    "name": "nunchucks",
+    "class": "blunt",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "oculus", "type": "trinket" },
+  { "name": "oddity", "type": "trinket" },
+  { "name": "ovaries", "isNSFW": true, "type": "trinket" },
+  { "name": "panties", "isNSFW": true, "subtype": "legs", "type": "armor" },
+  { "name": "pants", "subtype": "legs", "type": "armor" },
+  { "name": "pauldrons", "subtype": "shoulders", "type": "armor" },
+  { "name": "pavise", "subtype": "medium", "type": "shield" },
+  {
+    "name": "peashooter",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  {
+    "name": "penetrator",
+    "class": "piercing",
+    "isNSFW": true,
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "penknife",
+    "class": "piercing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "petrary",
+    "class": "blunt",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  {
+    "name": "phallus",
+    "class": "blunt",
+    "isNSFW": true,
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "pickaxe",
+    "class": "piercing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "pie", "subtype": "small", "type": "shield" },
+  { "name": "pike", "class": "piercing", "subtype": "melee", "type": "weapon" },
+  { "name": "pipe", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  { "name": "pizza", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  { "name": "pommel", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  { "name": "potato", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  { "name": "rags", "subtype": "chest", "type": "armor" },
+  { "name": "ram", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  {
+    "name": "ranseur",
+    "class": "piercing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "rapier",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "rifle",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  { "name": "ring", "type": "trinket" },
+  { "name": "rod", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  {
+    "name": "saber",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "sausage", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  { "name": "scepter", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  {
+    "name": "scimitar",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "scythe",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "shield", "type": "shield" },
+  {
+    "name": "shotgun",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  { "name": "shovel", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  {
+    "name": "showerhead",
+    "class": "blunt",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "shroud", "subtype": "chest", "type": "armor" },
+  {
+    "name": "shuriken",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  {
+    "name": "sickle",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "skull shield", "subtype": "medium", "type": "shield" },
+  { "name": "skull", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  {
+    "name": "slingshot",
+    "class": "blunt",
+    "sff": true,
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  { "name": "sollerets", "subtype": "feet", "type": "armor" },
+  { "name": "spaulders", "subtype": "shoulders", "type": "armor" },
+  {
+    "name": "spear",
+    "class": "piercing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "speculum", "isNSFW": true, "type": "trinket" },
+  {
+    "name": "spetum",
+    "class": "piercing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "sphere", "type": "trinket" },
+  { "name": "spoon", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  { "name": "staff", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  { "name": "stick", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  {
+    "name": "stiletto",
+    "class": "piercing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "stone", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  {
+    "name": "switchblade",
+    "class": "piercing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "sword",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "talisman", "type": "trinket" },
+  {
+    "name": "talon",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "targe", "subtype": "small", "type": "shield" },
+  {
+    "name": "teeth",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "tesseract", "type": "trinket" },
+  { "name": "testicles", "isNSFW": true, "type": "trinket" },
+  { "name": "thimble", "type": "trinket" },
+  { "name": "thing", "type": "trinket" },
+  {
+    "name": "throwing knives",
+    "class": "piercing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  { "name": "token", "type": "trinket" },
+  {
+    "name": "tomahawk",
+    "class": "slashing",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  { "name": "tome", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  { "name": "tome", "type": "trinket" },
+  { "name": "tooth", "type": "trinket" },
+  { "name": "tower shield", "subtype": "tower", "type": "shield" },
+  {
+    "name": "trebuchet",
+    "class": "blunt",
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  {
+    "name": "trident",
+    "class": "piercing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "truncheon",
+    "class": "blunt",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "turd",
+    "class": "blunt",
+    "isNSFW": true,
+    "subtype": "ranged",
+    "type": "weapon"
+  },
+  { "name": "underwear", "isNSFW": true, "subtype": "legs", "type": "armor" },
+  {
+    "name": "vegetable",
+    "class": "blunt",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "vial", "type": "trinket" },
+  { "name": "violin", "type": "trinket" },
+  { "name": "visor", "subtype": "head", "type": "armor" },
+  {
+    "name": "voulge",
+    "class": "slashing",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "wand", "class": "blunt", "subtype": "melee", "type": "weapon" },
+  {
+    "name": "warhammer",
+    "class": "blunt",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  {
+    "name": "waterpipe",
+    "class": "blunt",
+    "subtype": "melee",
+    "type": "weapon"
+  },
+  { "name": "whip", "class": "slashing", "subtype": "melee", "type": "weapon" }
+]

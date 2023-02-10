@@ -1,13 +1,13 @@
 import { DAMAGE_BASE } from "@neverquest/constants";
 import { ARMOR_SPECIFICATIONS, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
-import { LOCRA } from "@neverquest/locra";
+import { LOCRA } from "@neverquest/LOCRA";
 import {
   AffixTag,
   ArtifactType,
   ShieldType,
   WeaponClass,
   WeaponType,
-} from "@neverquest/locra/types";
+} from "@neverquest/LOCRA/types";
 import { Armor, Shield, Weapon } from "@neverquest/types";
 import { ArmorClass, WeaponGrip } from "@neverquest/types/enums";
 import { getFromRange } from "@neverquest/utilities/getters";

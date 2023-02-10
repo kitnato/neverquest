@@ -5,7 +5,7 @@ import { ReactComponent as IconSlashing } from "@neverquest/icons/crossed-slashe
 import { ReactComponent as IconReinforced } from "@neverquest/icons/fish-scales.svg";
 import { ReactComponent as IconBlunt } from "@neverquest/icons/gavel.svg";
 import { ReactComponent as IconPlate } from "@neverquest/icons/metal-scales.svg";
-import { ShieldType, WeaponClass, WeaponType } from "@neverquest/locra/types";
+import { ShieldType, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
 import { Armor, Shield, Weapon } from "@neverquest/types";
 import { ArmorClass, WeaponGrip } from "@neverquest/types/enums";
 import { RangeProps, SVGIcon } from "@neverquest/types/props";

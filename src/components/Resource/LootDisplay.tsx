@@ -1,7 +1,7 @@
 import { Card, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Looting } from "@neverquest/components/Resource/Looting";
 import { ResourceDisplay } from "@neverquest/components/Resource/ResourceDisplay";
 import { ReactComponent as Icon } from "@neverquest/icons/open-chest.svg";
@@ -22,11 +22,12 @@ export function LootDisplay() {
         <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
           <Card.Body>
             {hasLootedValue ? (
-              <Stack direction="horizontal" gap={5}>
-                <IconImage Icon={Icon} tooltip="Loot" />
-
-                <span className="fst-italic">Nothing remains.</span>
-              </Stack>
+              <IconDisplay
+                contents={<span className="fst-italic">Nothing remains.</span>}
+                Icon={Icon}
+                isSpaced
+                tooltip="Loot"
+              />
             ) : (
               <ResourceDisplay isLoot />
             )}

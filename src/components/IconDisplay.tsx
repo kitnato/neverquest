@@ -12,6 +12,7 @@ export function IconDisplay({
   Icon,
   iconProps,
   isAnimated,
+  isSpaced,
   tooltip,
 }: {
   Icon: SVGIcon;
@@ -19,6 +20,7 @@ export function IconDisplay({
   description?: ReactNode;
   iconProps?: Partial<IconImageProps>;
   isAnimated?: boolean;
+  isSpaced?: boolean;
   tooltip: string;
 }) {
   const { isFlipped, placement } = iconProps || {};
@@ -27,7 +29,7 @@ export function IconDisplay({
     <Stack
       className={isAnimated ? getAnimationClass({ type: AnimationType.FlipInX }) : undefined}
       direction="horizontal"
-      gap={3}
+      gap={isSpaced ? 5 : 3}
     >
       <IconImage Icon={Icon} isFlipped={isFlipped} placement={placement} tooltip={tooltip} />
 

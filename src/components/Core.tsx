@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { RecoilRoot } from "recoil";
 
@@ -9,6 +10,11 @@ import { SeedContext, useSeed } from "@neverquest/state/SeedContext";
 
 export function Core() {
   const { resetSeed, seed } = useSeed();
+
+  useEffect(() => {
+    // TODO - extend to replace a path of any length
+    window.history.replaceState({}, document.title, "/");
+  }, []);
 
   return (
     <SeedContext.Provider value={resetSeed}>

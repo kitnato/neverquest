@@ -1,7 +1,7 @@
 import { Card } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconDisplay } from "../IconDisplay";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Monster } from "@neverquest/components/Monster";
 import { LABEL_UNKNOWN } from "@neverquest/constants";
 import { ReactComponent as IconDead } from "@neverquest/icons/crossed-bones.svg";
@@ -21,6 +21,7 @@ export function Wilderness() {
           <IconDisplay
             contents={<span className="fst-italic">Everything is dead.</span>}
             Icon={IconDead}
+            isSpaced
             tooltip="Monster remains"
           />
         </Card.Body>
@@ -38,6 +39,7 @@ export function Wilderness() {
         <IconDisplay
           contents={<span className="fst-italic">The darkness stirs.</span>}
           Icon={IconLurking}
+          isSpaced
           tooltip={LABEL_UNKNOWN}
         />
       </Card.Body>

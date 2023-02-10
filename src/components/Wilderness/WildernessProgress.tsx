@@ -2,7 +2,7 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/stairs.svg";
@@ -29,18 +29,21 @@ export function WildernessProgress() {
   }
 
   return (
-    <Stack className="w-100" direction="horizontal" gap={3}>
-      <IconImage Icon={Icon} placement={OverlayPlacement.Bottom} tooltip="Progress" />
+    <IconDisplay
+      contents={
+        <Stack className="w-100" direction="horizontal">
+          <LabelledProgressBar
+            label={`${progressValue}/${progressMaximumValue}`}
+            value={(progressValue / progressMaximumValue) * 100}
+            variant={UIVariant.Primary}
+          />
 
-      <Stack className="w-100" direction="horizontal">
-        <LabelledProgressBar
-          label={`${progressValue}/${progressMaximumValue}`}
-          value={(progressValue / progressMaximumValue) * 100}
-          variant={UIVariant.Primary}
-        />
-
-        <FloatingText type={DeltaType.WildernessProgress} />
-      </Stack>
-    </Stack>
+          <FloatingText type={DeltaType.WildernessProgress} />
+        </Stack>
+      }
+      Icon={Icon}
+      iconProps={{ placement: OverlayPlacement.Bottom }}
+      tooltip="Progress"
+    />
   );
 }

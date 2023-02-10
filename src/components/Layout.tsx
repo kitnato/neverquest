@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Col, Row, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -19,11 +18,6 @@ export function Layout() {
   const [isShowingGameOver, setIsShowingGameOver] = useRecoilState(isShowing(ShowingType.GameOver));
 
   const reset = useReset();
-
-  useEffect(() => {
-    // Remove any route or parameter pollution in URL.
-    window.history.replaceState({}, document.title, "/");
-  }, []);
 
   return (
     <>

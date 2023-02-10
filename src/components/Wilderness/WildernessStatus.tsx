@@ -13,9 +13,9 @@ export function WildernessStatus() {
 
   return (
     <Stack
-      className={
-        isShowingWildernessStatus ? getAnimationClass({ type: AnimationType.FlipInX }) : undefined
-      }
+      className={`w-100${
+        isShowingWildernessStatus ? ` ${getAnimationClass({ type: AnimationType.FlipInX })}` : ""
+      }`}
       direction="horizontal"
       gap={5}
       style={{ visibility: isShowingWildernessStatus ? "visible" : "hidden" }}

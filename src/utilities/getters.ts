@@ -7,6 +7,23 @@ import { RangeProps } from "@neverquest/types/props";
 import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
 import { formatToFixed } from "@neverquest/utilities/formatters";
 
+export function getAbilityNameFromSkillType(type: SkillType) {
+  switch (type) {
+    case SkillType.Bleed: {
+      return "Bleed";
+    }
+    case SkillType.Parry: {
+      return "Parry";
+    }
+    case SkillType.Stagger: {
+      return "Stagger";
+    }
+    default: {
+      return "";
+    }
+  }
+}
+
 export function getAnimationClass({
   isInfinite,
   speed,
@@ -103,8 +120,8 @@ export function getTriangularNumber(number: number) {
   return (number * (number + 1)) / 2;
 }
 
-export function getSkillTypeFromWeaponClass(type: WeaponClass) {
-  switch (type) {
+export function getSkillTypeFromWeaponClass(weaponClass: WeaponClass) {
+  switch (weaponClass) {
     case WeaponClass.Blunt: {
       return SkillType.Stagger;
     }

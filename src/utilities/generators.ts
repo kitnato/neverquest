@@ -50,7 +50,7 @@ export function generateArmor({
       }),
     penalty,
     price: level * 2 + Math.floor(level / 2),
-    protection: Math.floor(level * 5 * protectionModifier),
+    protection: Math.round(level * 3 * protectionModifier),
     staminaCost: staminaCostModifier * Math.floor(level / 2),
     weight,
   };
@@ -99,7 +99,7 @@ export function generateShield({
       }),
     price: level * 2 + Math.ceil(level / 1.5),
     staggerChance: (0.1 + Math.floor((level * 2) / 100)) * staggerModifier,
-    staminaCost: Math.round((level + 2) * staminaCostModifier),
+    staminaCost: Math.round(level * staminaCostModifier),
     type,
     weight,
   };
@@ -124,12 +124,13 @@ export function generateWeapon({
   type: WeaponType;
   weaponClass: WeaponClass;
 }): Weapon {
+  // TODO - create a WEAPON_SPECIFICATIONS?
   const abilityChanceModifier = 1 + level / 2;
   const weapon = {
     abilityChance: 0,
     damage: getFromRange({
-      maximum: DAMAGE_BASE + level + Math.ceil(level / 3) * 2,
-      minimum: DAMAGE_BASE + level,
+      maximum: DAMAGE_BASE + level + Math.ceil(level / 2) * 3,
+      minimum: DAMAGE_BASE + level + Math.ceil(level / 2),
     }),
     // TODO
     grip: WeaponGrip.OneHanded,
@@ -147,7 +148,7 @@ export function generateWeapon({
         tags,
       }),
     price: level * 2 + Math.floor(level / 2),
-    rate: getFromRange({ maximum: 3000, minimum: 2500 }) - Math.floor(level / 2) * 50,
+    rate: getFromRange({ maximum: 3300, minimum: 2800 }) - Math.floor(level / 2) * 50,
     staminaCost: level + Math.floor(level / 2),
     type,
     weaponClass,

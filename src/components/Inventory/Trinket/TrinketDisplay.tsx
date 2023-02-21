@@ -4,7 +4,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { Trinket } from "@neverquest/types";
 
-export function TrinketItem({ trinket }: { trinket: Trinket }) {
+export function TrinketDisplay({ trinket }: { trinket: Trinket }) {
   const { description, Icon, name, weight } = trinket;
 
   return (

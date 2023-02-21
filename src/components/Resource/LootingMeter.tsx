@@ -23,6 +23,7 @@ export function LootingMeter() {
 
     if (newDuration <= 0) {
       newDuration = 0;
+
       dropLoot();
       progression();
     }

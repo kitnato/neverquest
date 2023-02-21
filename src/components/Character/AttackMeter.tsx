@@ -3,7 +3,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useAttack } from "@neverquest/hooks/actions/useAttack";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
-import { attackDuration, isAttacking, isRecovering } from "@neverquest/state/character";
+import { attackDuration, isAttacking, isLooting, isRecovering } from "@neverquest/state/character";
 import { isMonsterDead } from "@neverquest/state/monster";
 import { canAttackOrParry } from "@neverquest/state/reserves";
 import { attackRateTotal } from "@neverquest/state/statistics";
@@ -15,6 +15,7 @@ export function AttackMeter() {
   const attackRateTotalValue = useRecoilValue(attackRateTotal);
   const canAttackOrParryValue = useRecoilValue(canAttackOrParry);
   const isAttackingValue = useRecoilValue(isAttacking);
+  const isLootingValue = useRecoilValue(isLooting);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isRecoveringValue = useRecoilValue(isRecovering);
 
@@ -29,7 +30,7 @@ export function AttackMeter() {
     }
 
     setAttackDuration(newDuration);
-  }, !canAttackOrParryValue || !isAttackingValue || isMonsterDeadValue || isRecoveringValue);
+  }, !canAttackOrParryValue || !isAttackingValue || isLootingValue || isMonsterDeadValue || isRecoveringValue);
 
   return (
     <LabelledProgressBar

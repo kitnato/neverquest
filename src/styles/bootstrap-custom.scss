@@ -1,6 +1,10 @@
+// TODO - set primary color to gray-900, no more dark?
 $accordion-border-color: var(--bs-border-color-translucent);
 $accordion-button-active-bg: none;
 $accordion-button-active-color: var(--bs-body-color);
+$nav-link-hover-color: var(--bs-gray-600);
+$nav-link-color: var(--bs-gray-900);
+$nav-pills-link-active-bg: var(--bs-gray-900);
 $offcanvas-horizontal-width: 46%;
 $progress-height: 1.25rem;
 $tooltip-opacity: 1;

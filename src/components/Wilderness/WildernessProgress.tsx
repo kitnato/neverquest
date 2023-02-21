@@ -29,21 +29,23 @@ export function WildernessProgress() {
   }
 
   return (
-    <IconDisplay
-      contents={
-        <Stack className="w-100" direction="horizontal">
-          <LabelledProgressBar
-            label={`${progressValue}/${progressMaximumValue}`}
-            value={(progressValue / progressMaximumValue) * 100}
-            variant={UIVariant.Primary}
-          />
+    <div className="w-100">
+      <IconDisplay
+        contents={
+          <Stack className="w-100" direction="horizontal">
+            <LabelledProgressBar
+              label={`${progressValue}/${progressMaximumValue}`}
+              value={(progressValue / progressMaximumValue) * 100}
+              variant={UIVariant.Primary}
+            />
 
-          <FloatingText type={DeltaType.WildernessProgress} />
-        </Stack>
-      }
-      Icon={Icon}
-      iconProps={{ placement: OverlayPlacement.Bottom }}
-      tooltip="Progress"
-    />
+            <FloatingText type={DeltaType.WildernessProgress} />
+          </Stack>
+        }
+        Icon={Icon}
+        iconProps={{ placement: OverlayPlacement.Bottom }}
+        tooltip="Progress"
+      />
+    </div>
   );
 }

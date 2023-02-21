@@ -14,7 +14,11 @@ import {
   formatMilliseconds,
   formatPercentage,
 } from "@neverquest/utilities/formatters";
-import { getDamagePerRate, getSkillTypeFromWeaponClass } from "@neverquest/utilities/getters";
+import {
+  getAbilityNameFromSkillType,
+  getDamagePerRate,
+  getSkillTypeFromWeaponClass,
+} from "@neverquest/utilities/getters";
 
 export function WeaponName({ weapon }: { weapon: Weapon }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
@@ -25,7 +29,7 @@ export function WeaponName({ weapon }: { weapon: Weapon }) {
   const Icon = WEAPON_ICONS[weaponClass];
 
   const skillType = getSkillTypeFromWeaponClass(weaponClass);
-  const showWeaponClass = useRecoilValue(skills(skillType));
+  const skillValue = useRecoilValue(skills(skillType));
 
   return (
     <OverlayTrigger
@@ -67,23 +71,23 @@ export function WeaponName({ weapon }: { weapon: Weapon }) {
                   )}
                 </tr>
 
-                {showWeaponClass ? (
-                  <>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
+                <tr>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 
-                      <td>
-                        <Icon width={ICON_INLAY_SIZE} />
-                        &nbsp;{capitalizeAll(weaponClass)}
-                      </td>
-                    </tr>
+                  <td>
+                    <Icon width={ICON_INLAY_SIZE} />
+                    &nbsp;{capitalizeAll(weaponClass)}
+                  </td>
+                </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>{skillType} chance:</td>
+                {skillValue ? (
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      {getAbilityNameFromSkillType(skillType)} chance:
+                    </td>
 
-                      <td>{formatPercentage(abilityChance)}</td>
-                    </tr>
-                  </>
+                    <td>{formatPercentage(abilityChance)}</td>
+                  </tr>
                 ) : (
                   <tr>
                     <td className="text-end">{LABEL_UNKNOWN}</td>

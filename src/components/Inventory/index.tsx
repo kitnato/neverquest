@@ -4,9 +4,9 @@ import { useRecoilValue } from "recoil";
 
 import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
 import { InventoryElement } from "@neverquest/components/Inventory/InventoryElement";
-import { CompassUseButton } from "@neverquest/components/Inventory/TrinketItem/CompassUseButton";
-import { HearthstoneUseButton } from "@neverquest/components/Inventory/TrinketItem/HearthstoneUseButton";
-import { LodestoneUseButton } from "@neverquest/components/Inventory/TrinketItem/LodestoneUseButton";
+import { CompassUseButton } from "@neverquest/components/Inventory/Trinket/CompassUseButton";
+import { HearthstoneUseButton } from "@neverquest/components/Inventory/Trinket/HearthstoneUseButton";
+import { LodestoneUseButton } from "@neverquest/components/Inventory/Trinket/LodestoneUseButton";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
 import { TRINKET_COMPASS, TRINKET_HEARTHSTONE, TRINKET_LODESTONE } from "@neverquest/data/trinkets";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";

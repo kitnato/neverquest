@@ -26,36 +26,36 @@ export function Caravan() {
   const [isScreenShowing, setScreenShowing] = useState(false);
 
   const ActiveMemberComponent: FunctionComponent = (() => {
-    if (crewActiveValue) {
-      switch (CREW[crewActiveValue].name) {
-        case CREW[CrewType.Blacksmith].name: {
-          return Blacksmith;
-        }
-        case CREW[CrewType.Cook].name: {
-          return Cook;
-        }
-        case CREW[CrewType.Medic].name: {
-          return Medic;
-        }
-        case CREW[CrewType.Mercenary].name: {
-          return Mercenary;
-        }
-        case CREW[CrewType.Merchant].name: {
-          return Merchant;
-        }
-        case CREW[CrewType.Tailor].name: {
-          return Tailor;
-        }
-        default: {
-          return () => null;
-        }
-      }
+    if (crewActiveValue === null) {
+      return () => null;
     }
 
-    return () => null;
+    switch (crewActiveValue) {
+      case CrewType.Blacksmith: {
+        return Blacksmith;
+      }
+      case CrewType.Cook: {
+        return Cook;
+      }
+      case CrewType.Medic: {
+        return Medic;
+      }
+      case CrewType.Mercenary: {
+        return Mercenary;
+      }
+      case CrewType.Merchant: {
+        return Merchant;
+      }
+      case CrewType.Tailor: {
+        return Tailor;
+      }
+      default: {
+        return () => null;
+      }
+    }
   })();
 
-  const onActivate = (isShowing: boolean, member?: CrewType) => {
+  const toggleCrewActive = (isShowing: boolean, member?: CrewType) => {
     setScreenShowing(isShowing);
     setCrewActive(member ?? null);
   };
@@ -69,7 +69,7 @@ export function Caravan() {
               {isShowingCrewHiring && <h6>Hired crew</h6>}
 
               {CREW_ORDER.map((type, index) => (
-                <CrewHired key={index} setActive={() => onActivate(true, type)} type={type} />
+                <CrewHired key={index} setActive={() => toggleCrewActive(true, type)} type={type} />
               ))}
             </Stack>
 
@@ -90,11 +90,11 @@ export function Caravan() {
         </Card.Body>
       </Card>
 
-      {crewActiveValue && (
+      {crewActiveValue !== null && (
         <DismissableScreen
           contents={<ActiveMemberComponent />}
           isShowing={isScreenShowing}
-          onClose={() => onActivate(false)}
+          onClose={() => toggleCrewActive(false)}
           title={CREW[crewActiveValue].name}
         />
       )}

@@ -130,7 +130,7 @@ export const damagePerSecond = selector({
       damage: get(damageTotal),
       damageModifier: get(criticalDamage),
       damageModifierChance: get(criticalChance),
-      rate: get(attackRate),
+      rate: get(attackRateTotal),
     }),
   key: "damagePerSecond",
 });

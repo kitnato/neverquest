@@ -1,9 +1,10 @@
-import { OverlayTrigger, Popover, Stack, Table } from "react-bootstrap";
+import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { RecoveryMeter } from "@neverquest/components/Character/RecoveryMeter";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN, RECOVERY_RATE } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -44,39 +45,37 @@ export function Recovery() {
               <Popover.Header>Recovery details</Popover.Header>
 
               <Popover.Body>
-                <Table borderless size="sm">
-                  <tbody>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Base rate:</td>
+                <DetailsTable>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Base rate:</td>
 
-                      <td>{formatMilliseconds(RECOVERY_RATE)}</td>
-                    </tr>
+                    <td>{formatMilliseconds(RECOVERY_RATE)}</td>
+                  </tr>
 
-                    <tr>
-                      {showRecoveryRate ? (
-                        <>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>{name} attribute:</td>
+                  <tr>
+                    {showRecoveryRate ? (
+                      <>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>{name} attribute:</td>
 
-                          <td>{`-${formatPercentage(1 - recoveryRateValue / RECOVERY_RATE)}`}</td>
-                        </>
-                      ) : (
-                        <td className="text-end">{LABEL_UNKNOWN}</td>
-                      )}
-                    </tr>
+                        <td>{`-${formatPercentage(1 - recoveryRateValue / RECOVERY_RATE)}`}</td>
+                      </>
+                    ) : (
+                      <td className="text-end">{LABEL_UNKNOWN}</td>
+                    )}
+                  </tr>
 
-                    <tr>
-                      {showSkipRecovery ? (
-                        <>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Chance to skip recovery:</td>
+                  <tr>
+                    {showSkipRecovery ? (
+                      <>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Chance to skip recovery:</td>
 
-                          <td>{formatPercentage(skipRecoveryChanceValue)}</td>
-                        </>
-                      ) : (
-                        <td className="text-end">{LABEL_UNKNOWN}</td>
-                      )}
-                    </tr>
-                  </tbody>
-                </Table>
+                        <td>{formatPercentage(skipRecoveryChanceValue)}</td>
+                      </>
+                    ) : (
+                      <td className="text-end">{LABEL_UNKNOWN}</td>
+                    )}
+                  </tr>
+                </DetailsTable>
               </Popover.Body>
             </Popover>
           }

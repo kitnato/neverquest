@@ -1,6 +1,17 @@
+export enum AffixTag {
+  Elemental = "elemental",
+  HighQuality = "highQuality",
+  LowQuality = "lowQuality",
+}
+
 export enum AffixType {
   Prefix = "prefix",
   Suffix = "suffix",
+}
+
+export interface ArmorQuery {
+  subtype?: ArmorType;
+  type: ArtifactType.Armor;
 }
 
 export enum ArmorType {
@@ -13,31 +24,10 @@ export enum ArmorType {
   Waist = "waist",
 }
 
-export enum AffixTag {
-  Elemental = "elemental",
-  HighQuality = "highQuality",
-  LowQuality = "lowQuality",
-}
-
-export interface ArmorQuery {
-  subtype?: ArmorType;
-  type: ArtifactType.Armor;
-}
-
 export enum ArtifactType {
   Armor = "armor",
   Shield = "shield",
   Weapon = "weapon",
-}
-
-export interface ShieldQuery {
-  subtype?: ShieldType;
-  type: ArtifactType.Shield;
-}
-export interface WeaponQuery {
-  subtype?: WeaponType;
-  type: ArtifactType.Weapon;
-  weaponClass: WeaponClass;
 }
 
 export enum Category {
@@ -60,6 +50,11 @@ export interface GeneratorParameters {
   suffixTags: AffixTag[];
 }
 
+export interface ShieldQuery {
+  subtype?: ShieldType;
+  type: ArtifactType.Shield;
+}
+
 export enum ShieldType {
   Medium = "medium",
   Small = "small",
@@ -70,6 +65,12 @@ export enum WeaponClass {
   Blunt = "blunt",
   Piercing = "piercing",
   Slashing = "slashing",
+}
+
+export interface WeaponQuery {
+  subtype?: WeaponType;
+  type: ArtifactType.Weapon;
+  weaponClass: WeaponClass;
 }
 
 export enum WeaponType {

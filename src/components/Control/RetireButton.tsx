@@ -24,9 +24,9 @@ export function RetireButton({ isDisabled }: { isDisabled: boolean }) {
           })}`}
         >
           <Button
+            className="invisible"
             disabled={isWildernessValue || isDisabled}
             onClick={handleRetirement}
-            style={{ visibility: "hidden" }}
             variant={UIVariant.Outline}
           >
             <IconImage Icon={Icon} />

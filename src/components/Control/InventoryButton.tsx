@@ -1,4 +1,3 @@
-import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -30,7 +29,7 @@ export function InventoryButton({ isDisabled }: { isDisabled: boolean }) {
         >
           <Button
             disabled={isAttackingValue || isDisabled}
-            onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+            onClick={({ currentTarget }) => {
               currentTarget.blur();
 
               setIsInventoryOpen(true);

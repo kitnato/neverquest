@@ -1,4 +1,3 @@
-import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
@@ -27,7 +26,7 @@ export function TrainSkillButton({ type }: { type: SkillType }) {
       <span className="d-inline-block">
         <Button
           disabled={!isAffordable}
-          onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+          onClick={({ currentTarget }) => {
             currentTarget.blur();
 
             setSkill(true);

@@ -1,8 +1,9 @@
-import { OverlayTrigger, Popover, Table } from "react-bootstrap";
+import { OverlayTrigger, Popover } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -44,27 +45,25 @@ export function StaggerRating() {
                 <Popover.Header>Stagger rating details</Popover.Header>
 
                 <Popover.Body>
-                  <Table borderless size="sm">
-                    <tbody>
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance on hit:</td>
+                  <DetailsTable>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance on hit:</td>
 
-                        <td>{formatPercentage(staggerChanceWeaponValue)}</td>
-                      </tr>
+                      <td>{formatPercentage(staggerChanceWeaponValue)}</td>
+                    </tr>
 
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance on block:</td>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance on block:</td>
 
-                        <td>{formatPercentage(staggerChance)}</td>
-                      </tr>
+                      <td>{formatPercentage(staggerChance)}</td>
+                    </tr>
 
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} mastery:`}</td>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} mastery:`}</td>
 
-                        <td>{`${formatMilliseconds(staggerDurationValue)} duration`}</td>
-                      </tr>
-                    </tbody>
-                  </Table>
+                      <td>{`${formatMilliseconds(staggerDurationValue)} duration`}</td>
+                    </tr>
+                  </DetailsTable>
                 </Popover.Body>
               </Popover>
             }

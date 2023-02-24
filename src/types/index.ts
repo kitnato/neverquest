@@ -2,7 +2,7 @@ import { ShieldType, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
 import { ArmorClass, SkillType, WeaponGrip } from "@neverquest/types/enums";
 import { SVGIcon } from "@neverquest/types/props";
 
-export type Armor = ItemBase & {
+export type Armor = GearBase & {
   armorClass?: ArmorClass;
   deflectionChance?: number;
   penalty?: number;
@@ -56,7 +56,9 @@ interface ItemBase {
 
 export type Gear = Armor | Shield | Weapon;
 
-export type Shield = ItemBase & {
+type GearBase = ItemBase & { scrapCost: number };
+
+export type Shield = GearBase & {
   blockChance: number;
   staggerChance: number;
   staminaCost: number;
@@ -77,7 +79,7 @@ export type Trinket = ItemBase & {
   isPortable: boolean;
 };
 
-export type Weapon = ItemBase & {
+export type Weapon = GearBase & {
   abilityChance: number;
   damage: number;
   grip: WeaponGrip;

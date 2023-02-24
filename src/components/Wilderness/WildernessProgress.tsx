@@ -9,7 +9,7 @@ import { ReactComponent as Icon } from "@neverquest/icons/stairs.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isWilderness, progress, progressMaximum } from "@neverquest/state/encounter";
 import { DeltaType } from "@neverquest/types/enums";
-import { OverlayPlacement, UIVariant } from "@neverquest/types/ui";
+import { UIVariant } from "@neverquest/types/ui";
 
 export function WildernessProgress() {
   const isWildernessValue = useRecoilValue(isWilderness);
@@ -43,7 +43,7 @@ export function WildernessProgress() {
           </Stack>
         }
         Icon={Icon}
-        iconProps={{ placement: OverlayPlacement.Bottom }}
+        iconProps={{ placement: "bottom" }}
         tooltip="Progress"
       />
     </div>

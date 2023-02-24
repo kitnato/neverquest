@@ -45,14 +45,13 @@ export function FloatingText({ type }: { type: DeltaType }) {
   }, [deltaValue, resetDeltaValue, setFloatingTextQueue]);
 
   return (
-    <div className="position-relative">
+    <div className="d-flex flex-nowrap position-relative">
       {floatingTextQueue.map(({ delta, key }) => (
         <small className="position-absolute" key={key} style={{ bottom: -6, left: -8 }}>
           <strong
             style={{
               textShadow:
                 "-1px 1px 1px #fff, 1px 1px 1px #fff, 1px -1px 1px #fff, -1px -1px 1px #fff",
-              whiteSpace: "nowrap",
             }}
           >
             {Array.isArray(delta) ? (
@@ -63,7 +62,7 @@ export function FloatingText({ type }: { type: DeltaType }) {
                 onAnimationEnd={onAnimationEnd(key)}
               >
                 {delta.map(({ color, value }) => (
-                  <span className={color || ""} key={value}>
+                  <span className={color || undefined} key={value}>
                     {value}
                   </span>
                 ))}

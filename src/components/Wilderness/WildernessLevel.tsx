@@ -7,7 +7,6 @@ import { ReactComponent as Icon } from "@neverquest/icons/flying-flag.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { level } from "@neverquest/state/encounter";
 import { DeltaType } from "@neverquest/types/enums";
-import { OverlayPlacement } from "@neverquest/types/ui";
 
 export function WildernessLevel() {
   const levelValue = useRecoilValue(level);
@@ -29,7 +28,7 @@ export function WildernessLevel() {
         </>
       }
       Icon={Icon}
-      iconProps={{ placement: OverlayPlacement.Bottom }}
+      iconProps={{ placement: "bottom" }}
       tooltip="Level"
     />
   );

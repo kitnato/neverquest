@@ -51,6 +51,7 @@ export function generateArmor({
     penalty,
     price: level * 2 + Math.floor(level / 2),
     protection: Math.round(level * 3 * protectionModifier),
+    scrapCost: level * 3 + Math.floor(level / 2),
     staminaCost: staminaCostModifier * Math.floor(level / 2),
     weight,
   };
@@ -98,6 +99,7 @@ export function generateShield({
         tags,
       }),
     price: level * 2 + Math.ceil(level / 1.5),
+    scrapCost: level * 3 + Math.ceil(level / 1.5),
     staggerChance: (0.1 + Math.floor((level * 2) / 100)) * staggerModifier,
     staminaCost: Math.round(level * staminaCostModifier),
     type,
@@ -110,7 +112,6 @@ export function generateWeapon({
   hasSuffix,
   isNSFW,
   level,
-  name,
   tags,
   type,
   weaponClass,
@@ -119,7 +120,6 @@ export function generateWeapon({
   hasSuffix?: boolean;
   isNSFW: boolean;
   level: number;
-  name?: string;
   tags?: AffixTag[];
   type: WeaponType;
   weaponClass: WeaponClass;
@@ -134,21 +134,20 @@ export function generateWeapon({
     }),
     // TODO
     grip: WeaponGrip.OneHanded,
-    name:
-      name ||
-      LOCRA.generateArtifact({
-        hasPrefix,
-        hasSuffix,
-        isNSFW,
-        query: {
-          subtype: type,
-          type: ArtifactType.Weapon,
-          weaponClass,
-        },
-        tags,
-      }),
-    price: level * 2 + Math.floor(level / 2),
+    name: LOCRA.generateArtifact({
+      hasPrefix,
+      hasSuffix,
+      isNSFW,
+      query: {
+        subtype: type,
+        type: ArtifactType.Weapon,
+        weaponClass,
+      },
+      tags,
+    }),
+    price: Math.floor(level * 1.5 + level / 2),
     rate: getFromRange({ maximum: 3300, minimum: 2800 }) - Math.floor(level / 2) * 50,
+    scrapCost: Math.floor(level * 2.5 + level / 2),
     staminaCost: level + Math.floor(level / 2),
     type,
     weaponClass,

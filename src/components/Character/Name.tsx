@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, MouseEvent, useState } from "react";
+import { useState } from "react";
 import { FormControl } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -20,15 +20,14 @@ export function Name() {
         <FormControl
           className="hover-grow"
           onBlur={() => setEditing(false)}
-          onChange={({ target }: ChangeEvent<HTMLInputElement>) => setName(target.value)}
-          onClick={({ currentTarget }: MouseEvent<HTMLInputElement>) => {
+          onChange={({ target: { value } }) => setName(value)}
+          onClick={({ currentTarget: { select, setSelectionRange } }) => {
+            setSelectionRange(0, 0);
+            select();
+
             setEditing(true);
-            currentTarget.setSelectionRange(0, 0);
-            currentTarget.select();
           }}
-          onKeyDown={({ key }: KeyboardEvent<HTMLInputElement>) =>
-            key === "Enter" && setEditing(false)
-          }
+          onKeyDown={({ key }) => key === "Enter" && setEditing(false)}
           plaintext={!isEditing}
           value={nameValue}
         />

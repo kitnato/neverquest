@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import { Badge, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
@@ -44,7 +44,7 @@ export function AttributesButton({ isDisabled }: { isDisabled: boolean }) {
                 : ""
             }`}
             disabled={isAttackingValue || isDisabled}
-            onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+            onClick={({ currentTarget }) => {
               currentTarget.blur();
 
               setScreenShowing(true);

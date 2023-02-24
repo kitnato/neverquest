@@ -1,6 +1,7 @@
-import { OverlayTrigger, Popover, Table } from "react-bootstrap";
+import { OverlayTrigger, Popover } from "react-bootstrap";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { Trinket } from "@neverquest/types";
 
@@ -18,15 +19,13 @@ export function TrinketDisplay({ trinket }: { trinket: Trinket }) {
               <Popover.Body className="text-center">
                 <span className="fst-italic">{description}</span>
 
-                <Table borderless size="sm" style={{ margin: 0 }}>
-                  <tbody>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Weight:</td>
+                <DetailsTable>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Weight:</td>
 
-                      <td>{weight}</td>
-                    </tr>
-                  </tbody>
-                </Table>
+                    <td>{weight}</td>
+                  </tr>
+                </DetailsTable>
               </Popover.Body>
             </Popover>
           }

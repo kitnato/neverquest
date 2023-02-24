@@ -1,9 +1,10 @@
-import { OverlayTrigger, Popover, Stack, Table } from "react-bootstrap";
+import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { AttackMeter } from "@neverquest/components/Character/AttackMeter";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { WEAPON_NONE } from "@neverquest/data/gear";
@@ -39,23 +40,21 @@ export function Attack() {
               <Popover.Header>Attack rate details</Popover.Header>
 
               <Popover.Body>
-                <Table borderless size="sm">
-                  <tbody>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>{`${
-                        weaponValue === WEAPON_NONE ? "Base" : "Weapon"
-                      }:`}</td>
+                <DetailsTable>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>{`${
+                      weaponValue === WEAPON_NONE ? "Base" : "Weapon"
+                    }:`}</td>
 
-                      <td>{formatMilliseconds(weaponValue.rate)}</td>
-                    </tr>
+                    <td>{formatMilliseconds(weaponValue.rate)}</td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
 
-                      <td>{`-${formatPercentage(attackRateValue)}`}</td>
-                    </tr>
-                  </tbody>
-                </Table>
+                    <td>{`-${formatPercentage(attackRateValue)}`}</td>
+                  </tr>
+                </DetailsTable>
               </Popover.Body>
             </Popover>
           }

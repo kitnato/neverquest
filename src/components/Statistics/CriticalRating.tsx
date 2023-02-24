@@ -1,8 +1,9 @@
-import { OverlayTrigger, Popover, Table } from "react-bootstrap";
+import { OverlayTrigger, Popover } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as Icon } from "@neverquest/icons/striking-splinter.svg";
@@ -39,21 +40,19 @@ export function CriticalRating() {
                 <Popover.Header>Critical rating details</Popover.Header>
 
                 <Popover.Body>
-                  <Table borderless size="sm">
-                    <tbody>
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Critical strike chance:</td>
+                  <DetailsTable>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Critical strike chance:</td>
 
-                        <td>{formatPercentage(criticalChanceValue)}</td>
-                      </tr>
+                      <td>{formatPercentage(criticalChanceValue)}</td>
+                    </tr>
 
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Critical strike damage:</td>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Critical strike damage:</td>
 
-                        <td>{`${formatPercentage(criticalDamageValue)} of damage`}</td>
-                      </tr>
-                    </tbody>
-                  </Table>
+                      <td>{`${formatPercentage(criticalDamageValue)} of damage`}</td>
+                    </tr>
+                  </DetailsTable>
                 </Popover.Body>
               </Popover>
             }

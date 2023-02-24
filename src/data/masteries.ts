@@ -1,7 +1,7 @@
 // TODO - diversify icons.
 import { ReactComponent as Icon } from "@neverquest/icons/abstract-049.svg";
 import { AttributeOrMastery } from "@neverquest/types";
-import { MasteryType, SkillType } from "@neverquest/types/enums";
+import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
 
 export const MASTERIES: Record<MasteryType, AttributeOrMastery> = {
   [MasteryType.BleedDamage]: {
@@ -58,3 +58,11 @@ export const MASTERIES_ORDER = [
   MasteryType.SkipRecoveryChance,
   MasteryType.FreeBlockChance,
 ];
+
+export const MASTERY_DELTA_TYPE = {
+  [MasteryType.BleedDamage]: DeltaType.MasteryBleed,
+  [MasteryType.FreeBlockChance]: DeltaType.ChanceFreeBlock,
+  [MasteryType.ParryFactor]: DeltaType.MasteryParry,
+  [MasteryType.SkipRecoveryChance]: DeltaType.ChanceSkipRecovery,
+  [MasteryType.StaggerDuration]: DeltaType.MasteryStagger,
+};

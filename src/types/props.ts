@@ -1,11 +1,12 @@
 import { ReactNode } from "react";
 
-import { OverlayPlacement } from "@neverquest/types/ui";
+import { Placement } from "react-bootstrap/esm/types";
 
 export interface IconImageProps {
   Icon: SVGIcon;
   isFlipped?: boolean;
-  placement?: OverlayPlacement;
+  isSmall?: boolean;
+  placement?: Placement;
   tooltip?: ReactNode;
 }
 

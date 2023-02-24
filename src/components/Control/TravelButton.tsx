@@ -1,4 +1,3 @@
-import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
@@ -48,7 +47,7 @@ export function TravelButton({ isDisabled }: { isDisabled: boolean }) {
               : undefined
           }
           disabled={isDisabled}
-          onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+          onClick={({ currentTarget }) => {
             currentTarget.blur();
 
             toggleLocation();

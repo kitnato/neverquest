@@ -19,7 +19,7 @@ export function useGenerateMerchantInventory() {
 
         const inventory: InventoryMerchant = { ...get(merchantInventory) };
         const levelValue = get(level);
-        const nsfwValue = get(isNSFW);
+        const isNSFWValue = get(isNSFW);
 
         // Remove all previously returned items, so they no longer appear under buy back.
         Object.getOwnPropertyNames(inventory)
@@ -31,7 +31,7 @@ export function useGenerateMerchantInventory() {
         if (MERCHANT_OFFERS[merchantOffersIndex]) {
           const SETTINGS_GEAR = {
             hasPrefix: true,
-            isNSFW: nsfwValue,
+            isNSFW: isNSFWValue,
             level: levelValue,
             tags: [AffixTag.LowQuality],
           };

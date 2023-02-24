@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import { Button, Stack } from "react-bootstrap";
 import { useRecoilState, useSetRecoilState } from "recoil";
 
@@ -67,7 +67,7 @@ export function SellItems() {
                   <Coins tooltip="Value (coins)" value={getSellPrice(item)} />
 
                   <Button
-                    onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+                    onClick={({ currentTarget }) => {
                       currentTarget.blur();
 
                       if (isEquipped) {

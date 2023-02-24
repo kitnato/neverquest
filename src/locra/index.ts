@@ -62,7 +62,7 @@ export class LOCRA {
 
     if (hasSuffix) {
       const filteredSuffixes = affixes.filter((affix) => {
-        // If we want a tagged suffix, check if the current affix has all of them, otherwise discard it.
+        // If we want a tagged suffix, check if the current affix has all of them.
         if (suffixTags.length > 0) {
           if (affix.tags) {
             return (
@@ -73,7 +73,6 @@ export class LOCRA {
                 : !!affix.isNSFW === false)
             );
           }
-          return false;
         }
 
         // Otherwise, return any suffix (with NSFW filter).
@@ -103,11 +102,11 @@ export class LOCRA {
     query: ArmorQuery | ShieldQuery | WeaponQuery;
     tags?: AffixTag[];
   }) {
-    const { subtype, type, weaponClass } = query as WeaponQuery;
+    const { subtype, type } = query;
     const filteredArtifacts = artifacts.filter(
       (artifact) =>
         (subtype ? artifact.subtype === subtype : true) &&
-        (artifact.class && weaponClass ? artifact.class === weaponClass : true) &&
+        (artifact.class && "weaponClass" in query ? artifact.class === query.weaponClass : true) &&
         artifact.type === type &&
         (isNSFW
           ? !!artifact.isNSFW === true || !!artifact.isNSFW === false

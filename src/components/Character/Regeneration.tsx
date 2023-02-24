@@ -1,7 +1,9 @@
-import { OverlayTrigger, Popover, Table } from "react-bootstrap";
+import { OverlayTrigger, Popover } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
+
 import { RegenerationMeter } from "@neverquest/components/Character/RegenerationMeter";
 import { FloatingText } from "@neverquest/components/FloatingText";
+import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import {
   CLASS_TABLE_CELL_ITALIC,
   REGENERATION_AMOUNT_HEALTH,
@@ -47,53 +49,51 @@ export function Regeneration({ type }: { type: ReserveType.Health | ReserveType.
             <Popover.Header>{title} regeneration details</Popover.Header>
 
             <Popover.Body>
-              <Table borderless size="sm">
-                <tbody>
-                  {showRate && (
-                    <>
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Current rate:</td>
+              <DetailsTable>
+                {showRate && (
+                  <>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Current rate:</td>
 
-                        <td>{formatMilliseconds(regenerationRateValue)}</td>
-                      </tr>
+                      <td>{formatMilliseconds(regenerationRateValue)}</td>
+                    </tr>
 
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Base rate:</td>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Base rate:</td>
 
-                        <td>{formatMilliseconds(baseRate)}</td>
-                      </tr>
+                      <td>{formatMilliseconds(baseRate)}</td>
+                    </tr>
 
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>{rateName} attribute:</td>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>{rateName} attribute:</td>
 
-                        <td>{`-${formatPercentage(reserveRegenerationRateValue)}`}</td>
-                      </tr>
-                    </>
-                  )}
+                      <td>{`-${formatPercentage(reserveRegenerationRateValue)}`}</td>
+                    </tr>
+                  </>
+                )}
 
-                  {showAmount && (
-                    <>
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Total amount:</td>
+                {showAmount && (
+                  <>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Total amount:</td>
 
-                        <td>{regenerationAmountValue}</td>
-                      </tr>
+                      <td>{regenerationAmountValue}</td>
+                    </tr>
 
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Base amount:</td>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Base amount:</td>
 
-                        <td>{baseAmount}</td>
-                      </tr>
+                      <td>{baseAmount}</td>
+                    </tr>
 
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>{amountName} attribute:</td>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>{amountName} attribute:</td>
 
-                        <td>{`+${regenerationAmountValue - baseAmount}`}</td>
-                      </tr>
-                    </>
-                  )}
-                </tbody>
-              </Table>
+                      <td>{`+${regenerationAmountValue - baseAmount}`}</td>
+                    </tr>
+                  </>
+                )}
+              </DetailsTable>
             </Popover.Body>
           </Popover>
         }

@@ -37,11 +37,6 @@ export enum FloatingTextVariant {
   Positive = "text-success",
 }
 
-export enum OverlayPlacement {
-  Bottom = "bottom",
-  Top = "top",
-}
-
 export enum UIAttachment {
   Above,
   Below,

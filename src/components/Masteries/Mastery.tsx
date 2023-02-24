@@ -5,12 +5,11 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { LABEL_AT_MAXIMUM } from "@neverquest/constants";
-import { MASTERIES } from "@neverquest/data/masteries";
+import { MASTERIES, MASTERY_DELTA_TYPE } from "@neverquest/data/masteries";
 import { isShowingMastery } from "@neverquest/state/isShowing";
 import { isMasteryAtMaximum, masteries, masteryCost } from "@neverquest/state/masteries";
 import { MasteryType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
-import { getDeltaTypeFromMasteryType } from "@neverquest/utilities/getters";
 
 export function Mastery({ type }: { type: MasteryType }) {
   const isMasteryAtMaximumValue = useRecoilValue(isMasteryAtMaximum(type));
@@ -36,7 +35,7 @@ export function Mastery({ type }: { type: MasteryType }) {
             <LabelledProgressBar label={label} value={value} variant={UIVariant.Secondary} />
           </Stack>
 
-          <FloatingText type={getDeltaTypeFromMasteryType(type)} />
+          <FloatingText type={MASTERY_DELTA_TYPE[type]} />
         </Stack>
       }
       description={description}

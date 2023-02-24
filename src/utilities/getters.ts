@@ -1,28 +1,9 @@
 import { RecoilValue, Snapshot } from "recoil";
 
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/constants";
-import { WeaponClass } from "@neverquest/LOCRA/types";
-import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
 import { RangeProps } from "@neverquest/types/props";
 import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
 import { formatToFixed } from "@neverquest/utilities/formatters";
-
-export function getAbilityNameFromSkillType(type: SkillType) {
-  switch (type) {
-    case SkillType.Bleed: {
-      return "Bleed";
-    }
-    case SkillType.Parry: {
-      return "Parry";
-    }
-    case SkillType.Stagger: {
-      return "Stagger";
-    }
-    default: {
-      return "";
-    }
-  }
-}
 
 export function getAnimationClass({
   isInfinite,
@@ -81,26 +62,6 @@ export function getDamagePerTick({
   return Math.ceil(((damage * proportion) / duration) * (duration / ticks));
 }
 
-export function getDeltaTypeFromMasteryType(type: MasteryType) {
-  switch (type) {
-    case MasteryType.BleedDamage: {
-      return DeltaType.MasteryBleed;
-    }
-    case MasteryType.FreeBlockChance: {
-      return DeltaType.ChanceFreeBlock;
-    }
-    case MasteryType.ParryFactor: {
-      return DeltaType.MasteryParry;
-    }
-    case MasteryType.SkipRecoveryChance: {
-      return DeltaType.ChanceSkipRecovery;
-    }
-    case MasteryType.StaggerDuration: {
-      return DeltaType.MasteryStagger;
-    }
-  }
-}
-
 export function getFromRange({ maximum, minimum }: RangeProps) {
   const result = Math.random() * (maximum - minimum) + minimum;
 
@@ -118,18 +79,4 @@ export function getSnapshotGetter({ getLoadable }: Snapshot) {
 // https://en.wikipedia.org/wiki/Triangular_number
 export function getTriangularNumber(number: number) {
   return (number * (number + 1)) / 2;
-}
-
-export function getSkillTypeFromWeaponClass(weaponClass: WeaponClass) {
-  switch (weaponClass) {
-    case WeaponClass.Blunt: {
-      return SkillType.Stagger;
-    }
-    case WeaponClass.Piercing: {
-      return SkillType.Bleed;
-    }
-    case WeaponClass.Slashing: {
-      return SkillType.Parry;
-    }
-  }
 }

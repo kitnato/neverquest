@@ -1,7 +1,8 @@
-import { OverlayTrigger, Popover, Table } from "react-bootstrap";
+import { OverlayTrigger, Popover } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC, POISON } from "@neverquest/constants";
 import { ReactComponent as Icon } from "@neverquest/icons/death-juice.svg";
 import { monsterDamage, monsterPoisonChance } from "@neverquest/state/monster";
@@ -33,29 +34,27 @@ export function MonsterPoisonRating() {
               <Popover.Header>Poison rating details</Popover.Header>
 
               <Popover.Body>
-                <Table borderless size="sm">
-                  <tbody>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Poison chance:</td>
+                <DetailsTable>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Poison chance:</td>
 
-                      <td>{formatPercentage(monsterPoisonChanceValue)}</td>
-                    </tr>
+                    <td>{formatPercentage(monsterPoisonChanceValue)}</td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Poison damage:</td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Poison damage:</td>
 
-                      <td>{`${Math.ceil(damage * monsterDamageValue)} (${formatPercentage(
-                        damage
-                      )} of damage & ${poisonPerTick} per tick)`}</td>
-                    </tr>
+                    <td>{`${Math.ceil(damage * monsterDamageValue)} (${formatPercentage(
+                      damage
+                    )} of damage & ${poisonPerTick} per tick)`}</td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
 
-                      <td>{formatMilliseconds(duration)}</td>
-                    </tr>
-                  </tbody>
-                </Table>
+                    <td>{formatMilliseconds(duration)}</td>
+                  </tr>
+                </DetailsTable>
               </Popover.Body>
             </Popover>
           }

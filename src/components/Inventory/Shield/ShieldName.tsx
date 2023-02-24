@@ -1,6 +1,7 @@
-import { OverlayTrigger, Popover, Table } from "react-bootstrap";
+import { OverlayTrigger, Popover } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/constants";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -24,63 +25,61 @@ export function ShieldName({ shield }: { shield: Shield }) {
           <Popover.Header className="text-center">{name}</Popover.Header>
 
           <Popover.Body>
-            <Table borderless size="sm" style={{ margin: 0 }}>
-              <tbody>
-                <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Block chance:</td>
+            <DetailsTable>
+              <tr>
+                <td className={CLASS_TABLE_CELL_ITALIC}>Block chance:</td>
 
-                  <td>{formatPercentage(blockChance)}</td>
-                </tr>
+                <td>{formatPercentage(blockChance)}</td>
+              </tr>
 
-                <tr>
-                  {isShowingStamina ? (
-                    <>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Stamina cost:</td>
+              <tr>
+                {isShowingStamina ? (
+                  <>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Stamina cost:</td>
 
-                      <td>{staminaCost}</td>
-                    </>
-                  ) : (
-                    <td className="text-end">{LABEL_UNKNOWN}</td>
-                  )}
-                </tr>
+                    <td>{staminaCost}</td>
+                  </>
+                ) : (
+                  <td className="text-end">{LABEL_UNKNOWN}</td>
+                )}
+              </tr>
 
-                <tr>
-                  {staggerSkillValue ? (
-                    <>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance:</td>
+              <tr>
+                {staggerSkillValue ? (
+                  <>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance:</td>
 
-                      <td>{formatPercentage(staggerChance)}</td>
-                    </>
-                  ) : (
-                    <td className="text-end">{LABEL_UNKNOWN}</td>
-                  )}
-                </tr>
+                    <td>{formatPercentage(staggerChance)}</td>
+                  </>
+                ) : (
+                  <td className="text-end">{LABEL_UNKNOWN}</td>
+                )}
+              </tr>
 
-                <tr>
-                  {shieldSkillValue ? (
-                    <>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Type:</td>
+              <tr>
+                {shieldSkillValue ? (
+                  <>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Type:</td>
 
-                      <td>{capitalizeAll(type)}</td>
-                    </>
-                  ) : (
-                    <td className="text-end">{LABEL_UNKNOWN}</td>
-                  )}
-                </tr>
+                    <td>{capitalizeAll(type)}</td>
+                  </>
+                ) : (
+                  <td className="text-end">{LABEL_UNKNOWN}</td>
+                )}
+              </tr>
 
-                <tr>
-                  {hasKnapsackValue ? (
-                    <>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Weight:</td>
+              <tr>
+                {hasKnapsackValue ? (
+                  <>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Weight:</td>
 
-                      <td>{weight}</td>
-                    </>
-                  ) : (
-                    <td className="text-end">{LABEL_UNKNOWN}</td>
-                  )}
-                </tr>
-              </tbody>
-            </Table>
+                    <td>{weight}</td>
+                  </>
+                ) : (
+                  <td className="text-end">{LABEL_UNKNOWN}</td>
+                )}
+              </tr>
+            </DetailsTable>
           </Popover.Body>
         </Popover>
       }

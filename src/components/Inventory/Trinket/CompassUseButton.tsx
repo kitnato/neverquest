@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Button, Form, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
@@ -35,12 +35,6 @@ export function CompassUseButton() {
     setLevel(+value);
   };
 
-  const handleShowing = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-    currentTarget.blur();
-
-    setIsShowing(true);
-  };
-
   return (
     <>
       <OverlayTrigger
@@ -55,7 +49,15 @@ export function CompassUseButton() {
         trigger={canNavigate ? [] : ["hover", "focus"]}
       >
         <span className="d-inline-block">
-          <Button disabled={!canNavigate} onClick={handleShowing} variant={UIVariant.Outline}>
+          <Button
+            disabled={!canNavigate}
+            onClick={({ currentTarget }) => {
+              currentTarget.blur();
+
+              setIsShowing(true);
+            }}
+            variant={UIVariant.Outline}
+          >
             Use
           </Button>
         </span>

@@ -1,4 +1,3 @@
-import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { ArrowRight } from "react-bootstrap-icons";
 import { useRecoilValue } from "recoil";
@@ -57,8 +56,9 @@ export function SellScrap() {
           <span className="d-inline-block">
             <Button
               disabled={!canSell}
-              onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+              onClick={({ currentTarget }) => {
                 currentTarget.blur();
+
                 handleSell();
               }}
               variant={UIVariant.Outline}
@@ -79,8 +79,9 @@ export function SellScrap() {
           <span className="d-inline-block">
             <Button
               disabled={!canSell}
-              onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+              onClick={({ currentTarget }) => {
                 currentTarget.blur();
+
                 handleSell(true);
               }}
               variant={UIVariant.Outline}

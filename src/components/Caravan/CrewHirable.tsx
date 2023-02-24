@@ -1,4 +1,3 @@
-import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -41,7 +40,7 @@ export function CrewHirable({ type }: { type: CrewType }) {
           <span className="d-inline-block">
             <Button
               disabled={!isAffordable}
-              onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+              onClick={({ currentTarget }) => {
                 currentTarget.blur();
 
                 setCrewMember((current) => ({

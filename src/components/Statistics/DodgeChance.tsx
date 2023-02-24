@@ -1,8 +1,9 @@
-import { OverlayTrigger, Popover, Table } from "react-bootstrap";
+import { OverlayTrigger, Popover } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -50,35 +51,33 @@ export function DodgeChance() {
                 <Popover.Header>Dodge details</Popover.Header>
 
                 <Popover.Body>
-                  <Table borderless size="sm">
-                    <tbody>
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
+                  <DetailsTable>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
 
-                        <td>{`${formatPercentage(dodgeChanceValue)} dodge chance`}</td>
-                      </tr>
+                      <td>{`${formatPercentage(dodgeChanceValue)} dodge chance`}</td>
+                    </tr>
 
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Penalty from armor:</td>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Penalty from armor:</td>
 
-                        <td>
-                          {(() => {
-                            switch (armorClass) {
-                              case ArmorClass.Plate: {
-                                return "Cannot dodge";
-                              }
-                              case ArmorClass.Reinforced: {
-                                return `${staminaCost || 0} stamina cost`;
-                              }
-                              default: {
-                                return "None";
-                              }
+                      <td>
+                        {(() => {
+                          switch (armorClass) {
+                            case ArmorClass.Plate: {
+                              return "Cannot dodge";
                             }
-                          })()}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </Table>
+                            case ArmorClass.Reinforced: {
+                              return `${staminaCost || 0} stamina cost`;
+                            }
+                            default: {
+                              return "None";
+                            }
+                          }
+                        })()}
+                      </td>
+                    </tr>
+                  </DetailsTable>
                 </Popover.Body>
               </Popover>
             }

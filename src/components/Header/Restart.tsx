@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { ExclamationTriangle } from "react-bootstrap-icons";
 import { useRecoilValue } from "recoil";
@@ -27,7 +27,7 @@ export function Restart() {
             ? getAnimationClass({ isInfinite: true, type: AnimationType.Pulse })
             : undefined
         }
-        onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+        onClick={({ currentTarget }) => {
           currentTarget.blur();
 
           setIsShowingRestart(true);

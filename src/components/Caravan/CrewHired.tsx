@@ -1,4 +1,3 @@
-import { MouseEvent } from "react";
 import { Button } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
@@ -26,7 +25,7 @@ export function CrewHired({ setActive, type }: { setActive: () => void; type: Cr
           <span>{`"${monologues[monologueProgress]}"`}</span>
 
           <Button
-            onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+            onClick={({ currentTarget }) => {
               currentTarget.blur();
 
               setActive();

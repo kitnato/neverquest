@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import { Button, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
@@ -82,7 +82,7 @@ export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
           <Button
             className={animation}
             disabled={isDisabled || isLevelCompletedValue}
-            onClick={({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+            onClick={({ currentTarget }) => {
               currentTarget.blur();
 
               if (areAttributesIncreasableValue && !isLevelStartedValue) {

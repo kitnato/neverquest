@@ -1,8 +1,9 @@
-import { OverlayTrigger, Popover, Table } from "react-bootstrap";
+import { OverlayTrigger, Popover } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC, ICON_INLAY_SIZE, LABEL_UNKNOWN } from "@neverquest/constants";
-import { WEAPON_ICONS } from "@neverquest/data/gear";
+import { WEAPON_ABILITY_NAME, WEAPON_ICONS, WEAPON_SKILL_TYPE } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingDamagePerSecond } from "@neverquest/state/settings";
@@ -14,11 +15,7 @@ import {
   formatMilliseconds,
   formatPercentage,
 } from "@neverquest/utilities/formatters";
-import {
-  getAbilityNameFromSkillType,
-  getDamagePerRate,
-  getSkillTypeFromWeaponClass,
-} from "@neverquest/utilities/getters";
+import { getDamagePerRate } from "@neverquest/utilities/getters";
 
 export function WeaponName({ weapon }: { weapon: Weapon }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
@@ -28,8 +25,7 @@ export function WeaponName({ weapon }: { weapon: Weapon }) {
   const { abilityChance, damage, name, rate, staminaCost, weaponClass, weight } = weapon;
   const Icon = WEAPON_ICONS[weaponClass];
 
-  const skillType = getSkillTypeFromWeaponClass(weaponClass);
-  const skillValue = useRecoilValue(skills(skillType));
+  const skillValue = useRecoilValue(skills(WEAPON_SKILL_TYPE[weaponClass]));
 
   return (
     <OverlayTrigger
@@ -38,75 +34,73 @@ export function WeaponName({ weapon }: { weapon: Weapon }) {
           <Popover.Header className="text-center">{name}</Popover.Header>
 
           <Popover.Body>
-            <Table borderless size="sm" style={{ margin: 0 }}>
-              <tbody>
-                <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Damage:</td>
+            <DetailsTable>
+              <tr>
+                <td className={CLASS_TABLE_CELL_ITALIC}>Damage:</td>
 
-                  <td>{`${damage}${
-                    isShowingDamagePerSecondValue
-                      ? ` (${getDamagePerRate({
-                          damage,
-                          rate,
-                        })} DPS)`
-                      : ""
-                  }`}</td>
-                </tr>
+                <td>{`${damage}${
+                  isShowingDamagePerSecondValue
+                    ? ` (${getDamagePerRate({
+                        damage,
+                        rate,
+                      })} DPS)`
+                    : ""
+                }`}</td>
+              </tr>
 
-                <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Attack rate:</td>
+              <tr>
+                <td className={CLASS_TABLE_CELL_ITALIC}>Attack rate:</td>
 
-                  <td>{formatMilliseconds(rate)}</td>
-                </tr>
+                <td>{formatMilliseconds(rate)}</td>
+              </tr>
 
-                <tr>
-                  {isShowingStamina ? (
-                    <>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Stamina cost:</td>
+              <tr>
+                {isShowingStamina ? (
+                  <>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Stamina cost:</td>
 
-                      <td>{staminaCost}</td>
-                    </>
-                  ) : (
-                    <td className="text-end">{LABEL_UNKNOWN}</td>
-                  )}
-                </tr>
-
-                <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
-
-                  <td>
-                    <Icon width={ICON_INLAY_SIZE} />
-                    &nbsp;{capitalizeAll(weaponClass)}
-                  </td>
-                </tr>
-
-                {skillValue ? (
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
-                      {getAbilityNameFromSkillType(skillType)} chance:
-                    </td>
-
-                    <td>{formatPercentage(abilityChance)}</td>
-                  </tr>
+                    <td>{staminaCost}</td>
+                  </>
                 ) : (
-                  <tr>
-                    <td className="text-end">{LABEL_UNKNOWN}</td>
-                  </tr>
+                  <td className="text-end">{LABEL_UNKNOWN}</td>
                 )}
+              </tr>
 
+              <tr>
+                <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
+
+                <td>
+                  <Icon width={ICON_INLAY_SIZE} />
+                  &nbsp;{capitalizeAll(weaponClass)}
+                </td>
+              </tr>
+
+              {skillValue ? (
                 <tr>
-                  {hasKnapsackValue ? (
-                    <>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Weight:</td>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>
+                    {WEAPON_ABILITY_NAME[weaponClass]} chance:
+                  </td>
 
-                      <td>{weight}</td>
-                    </>
-                  ) : (
-                    <td className="text-end">{LABEL_UNKNOWN}</td>
-                  )}
+                  <td>{formatPercentage(abilityChance)}</td>
                 </tr>
-              </tbody>
-            </Table>
+              ) : (
+                <tr>
+                  <td className="text-end">{LABEL_UNKNOWN}</td>
+                </tr>
+              )}
+
+              <tr>
+                {hasKnapsackValue ? (
+                  <>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Weight:</td>
+
+                    <td>{weight}</td>
+                  </>
+                ) : (
+                  <td className="text-end">{LABEL_UNKNOWN}</td>
+                )}
+              </tr>
+            </DetailsTable>
           </Popover.Body>
         </Popover>
       }

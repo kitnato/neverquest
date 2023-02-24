@@ -67,7 +67,7 @@ export function CheatQuest() {
       switch (state) {
         // Age of Empires
         case "COINAGE": {
-          if (typeof value === "number") {
+          if (Number.isInteger(value)) {
             transactResources({ coinsDifference: value });
           }
           break;
@@ -79,7 +79,7 @@ export function CheatQuest() {
         }
         // Heretic
         case "gimmee": {
-          if (typeof value === "number" && value in SkillType) {
+          if (Number.isInteger(value) && value !== undefined && value in SkillType) {
             setSkill[value](true);
           }
           break;
@@ -91,21 +91,21 @@ export function CheatQuest() {
         }
         // The Sims
         case "rosebud": {
-          if (typeof value === "number") {
+          if (Number.isInteger(value)) {
             transactResources({ scrapDifference: value });
           }
           break;
         }
         // Starcraft
         case "something for nothing": {
-          if (typeof value === "number") {
+          if (Number.isInteger(value)) {
             transactResources({ essenceDifference: value });
           }
           break;
         }
         // Thief
         case "starting_mission": {
-          if (typeof value === "number" && value > levelValue) {
+          if (Number.isInteger(value) && value !== undefined && value > levelValue) {
             const difference = value - levelValue;
 
             for (let i = 0; i < difference; i++) {

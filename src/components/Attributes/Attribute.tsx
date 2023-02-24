@@ -1,4 +1,3 @@
-import { MouseEvent } from "react";
 import { Badge, Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
@@ -33,12 +32,6 @@ export function Attribute({ type }: { type: AttributeType }) {
   const canIncrease =
     areAttributesIncreasableValue && (!isLevelStartedValue || isLevelCompletedValue);
 
-  const onIncrease = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-    currentTarget.blur();
-
-    increaseAttribute(type);
-  };
-
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       {isUnlocked ? (
@@ -56,7 +49,15 @@ export function Attribute({ type }: { type: AttributeType }) {
                 placement="top"
               >
                 <span className="d-inline-block">
-                  <Button disabled={!canIncrease} onClick={onIncrease} variant={UIVariant.Outline}>
+                  <Button
+                    disabled={!canIncrease}
+                    onClick={({ currentTarget }) => {
+                      currentTarget.blur();
+
+                      increaseAttribute(type);
+                    }}
+                    variant={UIVariant.Outline}
+                  >
                     <IconImage Icon={canIncrease ? IconIncrease : IconWait} />
                   </Button>
                 </span>

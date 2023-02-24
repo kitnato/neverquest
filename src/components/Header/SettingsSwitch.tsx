@@ -17,7 +17,7 @@ export function SettingsSwitch({
       defaultChecked={toggledValue}
       disabled={isDisabled}
       label={label}
-      onChange={({ target: { checked } }: { target: { checked: boolean } }) => setToggle(checked)}
+      onChange={({ target: { checked } }) => setToggle(checked)}
     />
   );
 }

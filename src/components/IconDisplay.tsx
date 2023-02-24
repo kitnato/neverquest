@@ -27,7 +27,7 @@ export function IconDisplay({
 
   return (
     <Stack
-      className={isAnimated ? getAnimationClass({ type: AnimationType.FlipInX }) : undefined}
+      className={isAnimated ? getAnimationClass({ type: AnimationType.FlipInX }) : ""}
       direction="horizontal"
       gap={isSpaced ? 5 : 3}
       style={{ whiteSpace: "nowrap" }}
@@ -40,7 +40,7 @@ export function IconDisplay({
 
           <small className="text-muted">{description}</small>
         </Stack>
-      ) : typeof contents === "string" || typeof contents === "number" ? (
+      ) : typeof contents === "string" || Number.isInteger(contents) ? (
         <span>{contents}</span>
       ) : (
         contents

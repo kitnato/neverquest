@@ -7,13 +7,14 @@ import { ReactComponent as IconBlunt } from "@neverquest/icons/gavel.svg";
 import { ReactComponent as IconPlate } from "@neverquest/icons/metal-scales.svg";
 import { ShieldType, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
 import { Armor, Shield, Weapon } from "@neverquest/types";
-import { ArmorClass, WeaponGrip } from "@neverquest/types/enums";
+import { ArmorClass, SkillType, WeaponGrip } from "@neverquest/types/enums";
 import { RangeProps, SVGIcon } from "@neverquest/types/props";
 
 export const ARMOR_NONE: Armor = {
   name: "Unarmored",
   price: 0,
   protection: 0,
+  scrapCost: 0,
   weight: 0,
 };
 
@@ -64,6 +65,7 @@ export const SHIELD_NONE: Shield = {
   blockChance: 0,
   name: "None",
   price: 0,
+  scrapCost: 0,
   staggerChance: 0,
   staminaCost: 0,
   weight: 0,
@@ -98,10 +100,22 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
 };
 
+export const WEAPON_ABILITY_NAME = {
+  [WeaponClass.Blunt]: "Stagger",
+  [WeaponClass.Piercing]: "Bleed",
+  [WeaponClass.Slashing]: "Parry",
+};
+
 export const WEAPON_ICONS: Record<WeaponClass, SVGIcon> = {
   [WeaponClass.Blunt]: IconBlunt,
   [WeaponClass.Piercing]: IconPiercing,
   [WeaponClass.Slashing]: IconSlashing,
+};
+
+export const WEAPON_SKILL_TYPE = {
+  [WeaponClass.Blunt]: SkillType.Stagger,
+  [WeaponClass.Piercing]: SkillType.Bleed,
+  [WeaponClass.Slashing]: SkillType.Parry,
 };
 
 export const WEAPON_NONE: Weapon = {
@@ -111,6 +125,7 @@ export const WEAPON_NONE: Weapon = {
   name: "Unarmed",
   price: 0,
   rate: 2500,
+  scrapCost: 0,
   staminaCost: 0,
   type: WeaponType.Melee,
   weaponClass: WeaponClass.Blunt,

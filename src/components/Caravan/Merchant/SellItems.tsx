@@ -89,7 +89,7 @@ export function SellItems() {
             <ConfirmationDialog
               confirmationLabel="Sell"
               message={`
-                It can be bought back at the original purchase price
+                It can be bought back at the original purchase coinPrice
                 but it will be gone forever once leaving the caravan.
               `}
               onConfirm={() => sellPossession(sellConfirmation)}

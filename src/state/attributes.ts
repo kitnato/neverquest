@@ -4,7 +4,7 @@ import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { essence } from "@neverquest/state/resources";
 import { AttributeType, StorageKey } from "@neverquest/types/enums";
-import { getComputedStatistic, getTriangularNumber } from "@neverquest/utilities/getters";
+import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 
 interface AttributeState {
   isUnlocked: boolean;
@@ -14,7 +14,7 @@ interface AttributeState {
 // SELECTORS
 
 export const attributeCost = selector({
-  get: ({ get }) => getTriangularNumber(get(characterLevel) + 1),
+  get: ({ get }) => getGrowthTriangular(get(characterLevel) + 1),
   key: "attributeCost",
 });
 
@@ -28,7 +28,7 @@ export const essenceAbsorbed = selector({
     let total = 0;
 
     for (let i = 0; i <= get(characterLevel); i++) {
-      total += getTriangularNumber(i);
+      total += getGrowthTriangular(i);
     }
 
     return total;

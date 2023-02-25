@@ -38,7 +38,7 @@ export function WeaponOptions() {
 
   const skillValue = useRecoilValue(skills(WEAPON_SKILL_TYPE[weaponClass]));
 
-  const { abilityChance, damage, price, rate, scrapCost, staminaCost, weight } = generateWeapon({
+  const { abilityChance, coinPrice, ranges, scrapPrice, staminaCost, weight } = generateWeapon({
     hasPrefix: true,
     hasSuffix: true,
     isNSFW: isNSFWValue,
@@ -52,10 +52,10 @@ export function WeaponOptions() {
     type: WeaponType.Melee,
     weaponClass,
   });
-  const hasCoins = price <= coinsValue;
-  const hasScrap = scrapCost <= scrapValue;
+  const hasCoins = coinPrice <= coinsValue;
+  const hasScrap = scrapPrice <= scrapValue;
   const isCraftable = hasCoins && hasScrap;
-  const maximumWeaponLevel = weaponLevel + 3;
+  const maximumWeaponLevel = levelValue + 3;
 
   const handleCraft = () => {
     // TODO
@@ -108,14 +108,16 @@ export function WeaponOptions() {
         />
 
         <IconDisplay
-          contents={damage}
+          contents={`${ranges.damage.minimum}-${ranges.damage.maximum}`}
           Icon={IconDamage}
           iconProps={{ placement: "left" }}
           tooltip="Damage"
         />
 
         <IconDisplay
-          contents={formatMilliseconds(rate)}
+          contents={`${formatMilliseconds(ranges.rate.minimum)}-${formatMilliseconds(
+            ranges.rate.maximum
+          )}`}
           Icon={IconAttackRate}
           iconProps={{ placement: "left" }}
           tooltip="Attack rate"
@@ -146,9 +148,9 @@ export function WeaponOptions() {
       <hr />
 
       <Stack direction="horizontal" gap={5}>
-        <Scrap tooltip="Cost (scrap)" value={scrapCost} />
+        <Scrap tooltip="Cost (scrap)" value={scrapPrice} />
 
-        <Coins tooltip="Price (coins)" value={price} />
+        <Coins tooltip="Price (coins)" value={coinPrice} />
 
         <OverlayTrigger
           overlay={

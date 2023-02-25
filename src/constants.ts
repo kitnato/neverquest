@@ -13,8 +13,6 @@ export const CLASS_FULL_WIDTH_JUSTIFIED = "align-items-center d-flex justify-con
 
 export const CLASS_TABLE_CELL_ITALIC = "fst-italic text-end";
 
-export const DAMAGE_BASE = 10;
-
 export const DEFAULT_DELTA_DISPLAY: DeltaDisplay = {
   color: null,
   value: "",

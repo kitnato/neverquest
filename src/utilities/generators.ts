@@ -1,4 +1,3 @@
-import { DAMAGE_BASE } from "@neverquest/constants";
 import { ARMOR_SPECIFICATIONS, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
 import { LOCRA } from "@neverquest/LOCRA";
 import {
@@ -10,7 +9,7 @@ import {
 } from "@neverquest/LOCRA/types";
 import { Armor, Shield, Weapon } from "@neverquest/types";
 import { ArmorClass, WeaponGrip } from "@neverquest/types/enums";
-import { getFromRange } from "@neverquest/utilities/getters";
+import { getFromRange, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function generateArmor({
   armorClass,
@@ -29,11 +28,18 @@ export function generateArmor({
   name?: string;
   tags?: AffixTag[];
 }): Armor {
-  const { deflectionChanceModifier, penalty, protectionModifier, staminaCostModifier, weight } =
-    ARMOR_SPECIFICATIONS[armorClass];
+  const {
+    deflectionChanceModifier,
+    penalty,
+    protectionModifier,
+    staminaCostModifier,
+    weightModifier,
+  } = ARMOR_SPECIFICATIONS[armorClass];
+  const growthFactor = getGrowthSigmoid(level);
 
   return {
     armorClass,
+    coinPrice: 4 + Math.round(400 * growthFactor),
     deflectionChance: deflectionChanceModifier
       ? deflectionChanceModifier * (0.1 + level / 5)
       : undefined,
@@ -49,11 +55,10 @@ export function generateArmor({
         tags,
       }),
     penalty,
-    price: level * 2 + Math.floor(level / 2),
-    protection: Math.round(level * 3 * protectionModifier),
-    scrapCost: level * 3 + Math.floor(level / 2),
-    staminaCost: staminaCostModifier * Math.floor(level / 2),
-    weight,
+    protection: 2 + Math.round(300 * growthFactor) * protectionModifier,
+    scrapPrice: 3 + Math.round(1500 * growthFactor),
+    staminaCost: (1 + Math.round(10 * growthFactor)) * staminaCostModifier,
+    weight: (1 + Math.round(10 * growthFactor)) * weightModifier,
   };
 }
 
@@ -82,10 +87,13 @@ export function generateShield({
   tags?: AffixTag[];
   type: ShieldType;
 }): Shield {
-  const { blockRange, staggerModifier, staminaCostModifier, weight } = SHIELD_SPECIFICATIONS[type];
+  const { blockRange, staggerModifier, staminaCostModifier, weightModifier } =
+    SHIELD_SPECIFICATIONS[type];
+  const growthFactor = getGrowthSigmoid(level);
 
   return {
     blockChance: getFromRange(blockRange),
+    coinPrice: 10 + Math.round(300 * growthFactor),
     name:
       name ||
       LOCRA.generateArtifact({
@@ -98,12 +106,11 @@ export function generateShield({
         },
         tags,
       }),
-    price: level * 2 + Math.ceil(level / 1.5),
-    scrapCost: level * 3 + Math.ceil(level / 1.5),
-    staggerChance: (0.1 + Math.floor((level * 2) / 100)) * staggerModifier,
-    staminaCost: Math.round(level * staminaCostModifier),
+    scrapPrice: 5 + Math.round(2000 * growthFactor),
+    staggerChance: (0.1 + Math.round(0.9 * growthFactor)) * staggerModifier,
+    staminaCost: (1 + Math.round(20 * growthFactor)) * staminaCostModifier,
     type,
-    weight,
+    weight: (1 + Math.round(10 * growthFactor)) * weightModifier,
   };
 }
 
@@ -126,12 +133,21 @@ export function generateWeapon({
 }): Weapon {
   // TODO - create a WEAPON_SPECIFICATIONS?
   const abilityChanceModifier = 1 + level / 2;
+  const growthFactor = getGrowthSigmoid(level);
+  const ranges = {
+    damage: {
+      maximum: Math.round(1300 * growthFactor),
+      minimum: Math.round(1000 * growthFactor),
+    },
+    rate: {
+      maximum: 3500 - Math.round(3000 * growthFactor),
+      minimum: 3300 - Math.round(3000 * growthFactor),
+    },
+  };
   const weapon = {
     abilityChance: 0,
-    damage: getFromRange({
-      maximum: DAMAGE_BASE + level + Math.ceil(level / 2) * 3,
-      minimum: DAMAGE_BASE + level + Math.ceil(level / 2),
-    }),
+    coinPrice: 2 + Math.round(200 * growthFactor),
+    damage: getFromRange({ ...ranges.damage }),
     // TODO
     grip: WeaponGrip.OneHanded,
     name: LOCRA.generateArtifact({
@@ -145,26 +161,26 @@ export function generateWeapon({
       },
       tags,
     }),
-    price: Math.floor(level * 1.5 + level / 2),
-    rate: getFromRange({ maximum: 3300, minimum: 2800 }) - Math.floor(level / 2) * 50,
-    scrapCost: Math.floor(level * 2.5 + level / 2),
-    staminaCost: level + Math.floor(level / 2),
+    ranges,
+    rate: getFromRange({ ...ranges.rate }),
+    scrapPrice: 3 + Math.round(1000 * growthFactor),
+    staminaCost: 1 + Math.round(25 * growthFactor),
     type,
     weaponClass,
-    weight: 1 + Math.floor(level / 4),
+    weight: 1 + Math.round(10 * growthFactor),
   };
 
   switch (weaponClass) {
     case WeaponClass.Blunt: {
-      weapon.abilityChance = abilityChanceModifier * (0.1 + Math.floor((level * 2) / 90));
+      weapon.abilityChance = abilityChanceModifier * (0.1 + Math.round(0.8 * growthFactor));
       break;
     }
     case WeaponClass.Piercing: {
-      weapon.abilityChance = abilityChanceModifier * (0.2 + Math.floor((level * 2) / 100));
+      weapon.abilityChance = abilityChanceModifier * (0.2 + Math.round(0.7 * growthFactor));
       break;
     }
     case WeaponClass.Slashing: {
-      weapon.abilityChance = abilityChanceModifier * (0.15 + Math.floor((level * 2) / 100));
+      weapon.abilityChance = abilityChanceModifier * (0.15 + Math.round(0.85 * growthFactor));
       break;
     }
   }

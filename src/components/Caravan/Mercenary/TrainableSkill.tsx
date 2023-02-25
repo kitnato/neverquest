@@ -16,7 +16,7 @@ export function TrainableSkill({ type }: { type: SkillType }) {
   const characterLevelValue = useRecoilValue(characterLevel);
   const skillValue = useRecoilValue(skills(type));
 
-  const { price, requiredLevel } = SKILLS[type];
+  const { coinPrice, requiredLevel } = SKILLS[type];
 
   if (skillValue) {
     return null;
@@ -29,7 +29,7 @@ export function TrainableSkill({ type }: { type: SkillType }) {
           <SkillDisplay type={type} />
 
           <Stack direction="horizontal" gap={3}>
-            <Coins tooltip="Price (coins)" value={price} />
+            <Coins tooltip="Price (coins)" value={coinPrice} />
 
             <TrainSkillButton type={type} />
           </Stack>

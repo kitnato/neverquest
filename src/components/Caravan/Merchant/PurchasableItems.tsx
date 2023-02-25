@@ -14,14 +14,14 @@ export function PurchasableItems({ inventoryIDs }: { inventoryIDs: string[] }) {
     <>
       {inventoryIDs.map((id) => {
         const { item, key } = merchantInventoryValue[id];
-        const { price } = item;
+        const { coinPrice } = item;
 
         return (
           <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={key}>
             <InventoryElement item={item} />
 
             <Stack direction="horizontal" gap={3}>
-              <Coins tooltip="Price (coins)" value={price} />
+              <Coins tooltip="Price (coins)" value={coinPrice} />
 
               <BuyItemButton id={id} />
             </Stack>

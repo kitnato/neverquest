@@ -14,8 +14,8 @@ export function TrainSkillButton({ type }: { type: SkillType }) {
 
   const transactResources = useTransactResources();
 
-  const { price } = SKILLS[type];
-  const isAffordable = price <= coinsValue;
+  const { coinPrice } = SKILLS[type];
+  const isAffordable = coinPrice <= coinsValue;
 
   return (
     <OverlayTrigger
@@ -30,7 +30,7 @@ export function TrainSkillButton({ type }: { type: SkillType }) {
             currentTarget.blur();
 
             setSkill(true);
-            transactResources({ coinsDifference: -price });
+            transactResources({ coinsDifference: -coinPrice });
           }}
           variant={UIVariant.Outline}
         >

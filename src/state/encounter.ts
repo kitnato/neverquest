@@ -4,6 +4,7 @@ import { LABEL_UNKNOWN } from "@neverquest/constants";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { Wilderness } from "@neverquest/types";
 import { LocationType, StorageKey } from "@neverquest/types/enums";
+import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 // SELECTORS
 
@@ -74,11 +75,7 @@ export const progress = selector({
 });
 
 export const progressMaximum = selector({
-  get: ({ get }) => {
-    const levelValue = get(level);
-
-    return levelValue + 2 + Math.floor(levelValue / 5);
-  },
+  get: ({ get }) => 3 + Math.round(50 * getGrowthSigmoid(get(level))),
   key: "progressMaximum",
 });
 

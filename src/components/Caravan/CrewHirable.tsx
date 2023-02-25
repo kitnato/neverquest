@@ -22,15 +22,15 @@ export function CrewHirable({ type }: { type: CrewType }) {
     return null;
   }
 
-  const { description, name, price } = CREW[type];
-  const isAffordable = price <= coinsValue;
+  const { coinPrice, description, name } = CREW[type];
+  const isAffordable = coinPrice <= coinsValue;
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <IconDisplay contents={name} description={description} Icon={Icon} tooltip={name} />
 
       <Stack direction="horizontal" gap={3}>
-        <Coins tooltip="Price (coins)" value={price} />
+        <Coins tooltip="Price (coins)" value={coinPrice} />
 
         <OverlayTrigger
           overlay={<Tooltip>{!isAffordable && <>Not enough coins!</>}</Tooltip>}
@@ -47,7 +47,7 @@ export function CrewHirable({ type }: { type: CrewType }) {
                   ...current,
                   hireStatus: CrewStatus.Hired,
                 }));
-                transactResources({ coinsDifference: -price });
+                transactResources({ coinsDifference: -coinPrice });
               }}
               variant={UIVariant.Outline}
             >

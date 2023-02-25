@@ -4,7 +4,7 @@ import { POISON } from "@neverquest/constants";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { isLevelStarted, level, progress } from "@neverquest/state/encounter";
 import { StorageKey } from "@neverquest/types/enums";
-import { getDamagePerRate } from "@neverquest/utilities/getters";
+import { getDamagePerRate, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 // SELECTORS
 
@@ -25,12 +25,28 @@ export const monsterAttackDuration = atom({
 });
 
 export const monsterAttackRate = selector({
-  get: ({ get }) => 4510 - get(progress) - 10 * get(level) * 2,
+  get: ({ get }) => {
+    const levelValue = get(level);
+
+    return (
+      4500 -
+      Math.round(4000 * getGrowthSigmoid(levelValue)) -
+      Math.round(get(progress) * 10 * getGrowthSigmoid(levelValue))
+    );
+  },
   key: "monsterAttackRate",
 });
 
 export const monsterDamage = selector({
-  get: ({ get }) => Math.floor(get(level) * 5 + get(progress) / 2),
+  get: ({ get }) => {
+    const levelValue = get(level);
+
+    return (
+      5 +
+      Math.round(1000 * getGrowthSigmoid(levelValue)) +
+      Math.round(get(progress) * 5 * getGrowthSigmoid(levelValue))
+    );
+  },
   key: "monsterDamage",
 });
 
@@ -44,7 +60,15 @@ export const monsterDamagePerSecond = selector({
 });
 
 export const monsterMaximumHealth = selector({
-  get: ({ get }) => Math.floor(10 + get(level) * 10 + get(progress) / 2),
+  get: ({ get }) => {
+    const levelValue = get(level);
+
+    return (
+      10 +
+      Math.round(5000 * getGrowthSigmoid(levelValue)) +
+      Math.round(get(progress) * 10 * getGrowthSigmoid(levelValue))
+    );
+  },
   key: "monsterMaximumHealth",
 });
 
@@ -66,10 +90,11 @@ export const monsterLoot = selector({
   get: ({ get }) => {
     const levelValue = get(level);
     const progressValue = get(progress);
+    const growthFactor = getGrowthSigmoid(levelValue);
 
     return {
-      essence: Math.floor(progressValue * 2 + levelValue * 3),
-      scrap: Math.floor(progressValue * 1.5 + levelValue * 2),
+      essence: Math.ceil(progressValue * 50 * growthFactor + 200 * growthFactor),
+      scrap: Math.ceil(progressValue * 50 * growthFactor + 250 * growthFactor),
     };
   },
   key: "monsterLoot",

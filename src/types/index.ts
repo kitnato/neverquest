@@ -21,12 +21,12 @@ export interface AttributeOrMastery {
 }
 
 export interface CrewMember {
+  coinPrice: number;
   description: string;
   hirableLevel: number;
   interaction: string;
   monologues: string[];
   name: string;
-  price: number;
 }
 
 interface InventoryBase {
@@ -49,14 +49,19 @@ export interface InventoryMerchant {
 export type Item = Gear | Trinket;
 
 interface ItemBase {
+  coinPrice: number;
   name: string;
-  price: number;
   weight: number;
 }
 
 export type Gear = Armor | Shield | Weapon;
 
-type GearBase = ItemBase & { scrapCost: number };
+type GearBase = ItemBase & { scrapPrice: number };
+
+export interface Range {
+  maximum: number;
+  minimum: number;
+}
 
 export type Shield = GearBase & {
   blockChance: number;
@@ -67,9 +72,9 @@ export type Shield = GearBase & {
 
 export interface Skill {
   Icon: SVGIcon;
+  coinPrice: number;
   description: string;
   name: string;
-  price: number;
   requiredLevel: number;
 }
 
@@ -83,6 +88,10 @@ export type Weapon = GearBase & {
   abilityChance: number;
   damage: number;
   grip: WeaponGrip;
+  ranges: {
+    damage: Range;
+    rate: Range;
+  };
   rate: number;
   staminaCost: number;
   type: WeaponType;

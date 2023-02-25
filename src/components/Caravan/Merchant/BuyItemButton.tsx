@@ -20,8 +20,8 @@ export function BuyItemButton({ id }: { id: string }) {
   const transactResources = useTransactResources();
 
   const { item } = merchantInventoryValue[id];
-  const { price, weight } = item;
-  const isAffordable = price <= coinsValue;
+  const { coinPrice, weight } = item;
+  const isAffordable = coinPrice <= coinsValue;
   const isFitting = useRecoilValue(canFit(weight));
   const isPurchasable = isAffordable && isFitting;
 
@@ -40,7 +40,7 @@ export function BuyItemButton({ id }: { id: string }) {
 
         return newMerchantInventory;
       });
-      transactResources({ coinsDifference: -price });
+      transactResources({ coinsDifference: -coinPrice });
     }
   };
 

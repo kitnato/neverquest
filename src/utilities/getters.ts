@@ -1,7 +1,7 @@
 import { RecoilValue, Snapshot } from "recoil";
 
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/constants";
-import { RangeProps } from "@neverquest/types/props";
+import { Range } from "@neverquest/types";
 import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
 import { formatToFixed } from "@neverquest/utilities/formatters";
 
@@ -62,21 +62,27 @@ export function getDamagePerTick({
   return Math.ceil(((damage * proportion) / duration) * (duration / ticks));
 }
 
-export function getFromRange({ maximum, minimum }: RangeProps) {
+export function getFromRange({ maximum, minimum }: Range) {
   const result = Math.random() * (maximum - minimum) + minimum;
 
   return Number.isInteger(maximum) && Number.isInteger(minimum) ? Math.round(result) : result;
 }
 
-export function getSellPrice({ price }: { price: number }) {
-  return Math.floor(price / 2);
+export function getSellPrice({ coinPrice }: { coinPrice: number }) {
+  return Math.floor(coinPrice / 2);
+}
+
+// https://en.wikipedia.org/wiki/Sigmoid_function
+// f(0) = ~0, f(50) = ~0.6, f(100) = ~1
+export function getGrowthSigmoid(x: number) {
+  return 1 / (1 + 100 * Math.pow(Math.E, -0.1 * x));
+}
+
+// https://en.wikipedia.org/wiki/Triangular_number
+export function getGrowthTriangular(number: number) {
+  return (number * (number + 1)) / 2;
 }
 
 export function getSnapshotGetter({ getLoadable }: Snapshot) {
   return <T>(state: RecoilValue<T>) => getLoadable(state).getValue();
-}
-
-// https://en.wikipedia.org/wiki/Triangular_number
-export function getTriangularNumber(number: number) {
-  return (number * (number + 1)) / 2;
 }

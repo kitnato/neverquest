@@ -15,9 +15,4 @@ export interface LootProps {
   value: number;
 }
 
-export interface RangeProps {
-  maximum: number;
-  minimum: number;
-}
-
 export type SVGIcon = React.FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string }>;

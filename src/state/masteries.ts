@@ -3,7 +3,7 @@ import { atomFamily, selectorFamily } from "recoil";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { MasteryType, StorageKey } from "@neverquest/types/enums";
-import { getComputedStatistic, getTriangularNumber } from "@neverquest/utilities/getters";
+import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 
 interface MasteryState {
   progress: number;
@@ -43,6 +43,6 @@ export const masteryCost = selectorFamily<number, MasteryType>({
   get:
     (type) =>
     ({ get }) =>
-      getTriangularNumber(get(masteries(type)).rank + 2),
+      getGrowthTriangular(get(masteries(type)).rank + 2),
   key: "masteryCost",
 });

@@ -3,7 +3,7 @@ import { Button, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
-import { InventoryElement } from "@neverquest/components/Inventory/InventoryElement";
+import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { CompassUseButton } from "@neverquest/components/Inventory/Trinket/CompassUseButton";
 import { HearthstoneUseButton } from "@neverquest/components/Inventory/Trinket/HearthstoneUseButton";
 import { LodestoneUseButton } from "@neverquest/components/Inventory/Trinket/LodestoneUseButton";
@@ -44,7 +44,7 @@ export function Inventory() {
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={key}>
-              <InventoryElement item={item} />
+              <ItemDisplay item={item} />
 
               <Button onClick={handleToggleEquipGear(id)} variant={UIVariant.Outline}>
                 Unequip
@@ -96,7 +96,7 @@ export function Inventory() {
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={key}>
-              <InventoryElement item={item} />
+              <ItemDisplay item={item} />
 
               <PossessionAction />
             </div>

@@ -28,7 +28,7 @@ export function WildernessLevel() {
         </>
       }
       Icon={Icon}
-      iconProps={{ placement: "bottom" }}
+      iconProps={{ overlayPlacement: "bottom" }}
       tooltip="Level"
     />
   );

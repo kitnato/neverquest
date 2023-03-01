@@ -43,7 +43,7 @@ export function WildernessProgress() {
           </Stack>
         }
         Icon={Icon}
-        iconProps={{ placement: "bottom" }}
+        iconProps={{ overlayPlacement: "bottom" }}
         tooltip="Progress"
       />
     </div>

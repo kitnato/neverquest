@@ -18,10 +18,6 @@ export const DEFAULT_DELTA_DISPLAY: DeltaDisplay = {
   value: "",
 };
 
-export const EXCHANGE_COINS = 1;
-
-export const EXCHANGE_SCRAP = 3;
-
 export const ICON_INLAY_SIZE = 16;
 
 const KEY_STORAGE_PREFIX = "nq";

@@ -1,4 +1,5 @@
 import { OverlayTrigger, Popover } from "react-bootstrap";
+import { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
@@ -10,7 +11,13 @@ import { Shield } from "@neverquest/types";
 import { ShowingType, SkillType } from "@neverquest/types/enums";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 
-export function ShieldName({ shield }: { shield: Shield }) {
+export function ShieldName({
+  placement = "top",
+  shield,
+}: {
+  placement?: Placement;
+  shield: Shield;
+}) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
   const shieldSkillValue = useRecoilValue(skills(SkillType.Shields));
@@ -83,7 +90,7 @@ export function ShieldName({ shield }: { shield: Shield }) {
           </Popover.Body>
         </Popover>
       }
-      placement="top"
+      placement={placement}
     >
       <span>{name}</span>
     </OverlayTrigger>

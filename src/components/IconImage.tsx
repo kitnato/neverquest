@@ -6,7 +6,7 @@ export function IconImage({
   Icon,
   isFlipped = false,
   isSmall = false,
-  placement = "top",
+  overlayPlacement = "top",
   tooltip,
 }: IconImageProps) {
   const IconStyled = () => (
@@ -15,7 +15,7 @@ export function IconImage({
 
   if (tooltip) {
     return (
-      <OverlayTrigger overlay={<Tooltip>{tooltip}</Tooltip>} placement={placement}>
+      <OverlayTrigger overlay={<Tooltip>{tooltip}</Tooltip>} placement={overlayPlacement}>
         <span>
           <IconStyled />
         </span>

@@ -1,4 +1,5 @@
 import { OverlayTrigger, Popover } from "react-bootstrap";
+import { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
@@ -17,7 +18,13 @@ import {
 } from "@neverquest/utilities/formatters";
 import { getDamagePerRate } from "@neverquest/utilities/getters";
 
-export function WeaponName({ weapon }: { weapon: Weapon }) {
+export function WeaponName({
+  placement = "top",
+  weapon,
+}: {
+  placement?: Placement;
+  weapon: Weapon;
+}) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const isShowingDamagePerSecondValue = useRecoilValue(isShowingDamagePerSecond);
   const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
@@ -104,7 +111,7 @@ export function WeaponName({ weapon }: { weapon: Weapon }) {
           </Popover.Body>
         </Popover>
       }
-      placement="top"
+      placement={placement}
     >
       <span>{name}</span>
     </OverlayTrigger>

@@ -6,9 +6,11 @@ export interface IconImageProps {
   Icon: SVGIcon;
   isFlipped?: boolean;
   isSmall?: boolean;
-  placement?: Placement;
+  overlayPlacement?: Placement;
   tooltip?: ReactNode;
 }
+
+export type IconImageDOMProps = Omit<IconImageProps, "Icon">;
 
 export interface LootProps {
   tooltip?: string | undefined;

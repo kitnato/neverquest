@@ -1,4 +1,5 @@
 import { OverlayTrigger, Popover } from "react-bootstrap";
+import { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
@@ -10,7 +11,7 @@ import { Armor } from "@neverquest/types";
 import { SkillType } from "@neverquest/types/enums";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 
-export function ArmorName({ armor }: { armor: Armor }) {
+export function ArmorName({ armor, placement = "top" }: { armor: Armor; placement?: Placement }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const armorsSkillValue = useRecoilValue(skills(SkillType.Armors));
 
@@ -88,7 +89,7 @@ export function ArmorName({ armor }: { armor: Armor }) {
           </Popover.Body>
         </Popover>
       }
-      placement="top"
+      placement={placement}
     >
       <span>{name}</span>
     </OverlayTrigger>

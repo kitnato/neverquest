@@ -42,9 +42,8 @@ export const monsterDamage = selector({
     const levelValue = get(level);
 
     return (
-      5 +
       Math.round(1000 * getGrowthSigmoid(levelValue)) +
-      Math.round(get(progress) * 5 * getGrowthSigmoid(levelValue))
+      Math.round(get(progress) * 50 * getGrowthSigmoid(levelValue))
     );
   },
   key: "monsterDamage",
@@ -64,9 +63,8 @@ export const monsterMaximumHealth = selector({
     const levelValue = get(level);
 
     return (
-      10 +
-      Math.round(5000 * getGrowthSigmoid(levelValue)) +
-      Math.round(get(progress) * 10 * getGrowthSigmoid(levelValue))
+      Math.round(3000 * getGrowthSigmoid(levelValue)) +
+      Math.round(get(progress) * 100 * getGrowthSigmoid(levelValue))
     );
   },
   key: "monsterMaximumHealth",
@@ -81,6 +79,7 @@ export const monsterPoisonChance = selector({
       return 0;
     }
 
+    // TODO - use sigmoid growth
     return chanceBase + (levelValue - minimumLevel) * chanceIncrement;
   },
   key: "monsterPoisonChance",
@@ -91,10 +90,12 @@ export const monsterLoot = selector({
     const levelValue = get(level);
     const progressValue = get(progress);
     const growthFactor = getGrowthSigmoid(levelValue);
+    const progressFactor = progressValue * 50;
 
     return {
-      essence: Math.ceil(progressValue * 50 * growthFactor + 200 * growthFactor),
-      scrap: Math.ceil(progressValue * 50 * growthFactor + 250 * growthFactor),
+      coins: Math.ceil(progressFactor * growthFactor + 50 * growthFactor),
+      essence: Math.ceil(progressFactor * growthFactor + 100 * growthFactor),
+      scrap: Math.ceil(progressFactor * growthFactor + 200 * growthFactor),
     };
   },
   key: "monsterLoot",

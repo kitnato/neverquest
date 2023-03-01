@@ -4,7 +4,7 @@ import { Button, Stack } from "react-bootstrap";
 import { useRecoilState, useSetRecoilState } from "recoil";
 
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
-import { InventoryElement } from "@neverquest/components/Inventory/InventoryElement";
+import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { Coins } from "@neverquest/components/Resource/Coins";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
@@ -54,7 +54,7 @@ export function SellItems() {
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={key}>
                 <Stack direction="horizontal">
-                  <InventoryElement item={item} />
+                  <ItemDisplay item={item} overlayPlacement="right" />
 
                   {isEquipped && (
                     <span className="fst-italic" style={{ width: "max-content" }}>

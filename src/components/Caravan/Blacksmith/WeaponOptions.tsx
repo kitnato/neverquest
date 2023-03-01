@@ -87,7 +87,7 @@ export function WeaponOptions() {
             />
           }
           Icon={IconLevel}
-          iconProps={{ placement: "left" }}
+          iconProps={{ overlayPlacement: "left" }}
           tooltip="Level"
         />
 
@@ -103,14 +103,14 @@ export function WeaponOptions() {
             </FormSelect>
           }
           Icon={IconClass}
-          iconProps={{ placement: "left" }}
+          iconProps={{ overlayPlacement: "left" }}
           tooltip="Class"
         />
 
         <IconDisplay
           contents={`${ranges.damage.minimum}-${ranges.damage.maximum}`}
           Icon={IconDamage}
-          iconProps={{ placement: "left" }}
+          iconProps={{ overlayPlacement: "left" }}
           tooltip="Damage"
         />
 
@@ -119,28 +119,28 @@ export function WeaponOptions() {
             ranges.rate.maximum
           )}`}
           Icon={IconAttackRate}
-          iconProps={{ placement: "left" }}
+          iconProps={{ overlayPlacement: "left" }}
           tooltip="Attack rate"
         />
 
         <IconDisplay
           contents={skillValue ? formatPercentage(abilityChance) : LABEL_UNKNOWN}
           Icon={skillValue ? IconAttackRate : IconUnknown}
-          iconProps={{ placement: "left" }}
+          iconProps={{ overlayPlacement: "left" }}
           tooltip={skillValue ? `${WEAPON_ABILITY_NAME[weaponClass]} chance` : LABEL_UNKNOWN}
         />
 
         <IconDisplay
           contents={staminaCost}
           Icon={IconStaminaCost}
-          iconProps={{ placement: "left" }}
+          iconProps={{ overlayPlacement: "left" }}
           tooltip="Stamina cost"
         />
 
         <IconDisplay
           contents={weight}
           Icon={IconWeight}
-          iconProps={{ placement: "left" }}
+          iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
         />
       </Stack>
@@ -156,6 +156,7 @@ export function WeaponOptions() {
           overlay={
             <Tooltip>
               {!hasCoins && <div>Not enough coins!</div>}
+
               {!hasScrap && <div>Not enough scrap!</div>}
             </Tooltip>
           }

@@ -11,7 +11,7 @@ export function Location() {
     <IconDisplay
       contents={locationNameValue}
       Icon={Icon}
-      iconProps={{ placement: "bottom" }}
+      iconProps={{ overlayPlacement: "bottom" }}
       isAnimated
       tooltip="Location"
     />

@@ -146,7 +146,7 @@ export function generateWeapon({
   };
   const weapon = {
     abilityChance: 0,
-    coinPrice: 2 + Math.round(200 * growthFactor),
+    coinPrice: Math.round(150 * growthFactor),
     damage: getFromRange({ ...ranges.damage }),
     // TODO
     grip: WeaponGrip.OneHanded,

@@ -3,7 +3,12 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_AT_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/constants";
+import {
+  CLASS_FULL_WIDTH_JUSTIFIED,
+  ICON_UNKNOWN,
+  LABEL_AT_MAXIMUM,
+  LABEL_UNKNOWN,
+} from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { useIncreaseAttribute } from "@neverquest/hooks/actions/useIncreaseAttribute";
 import { ReactComponent as IconWait } from "@neverquest/icons/hourglass.svg";
@@ -51,11 +56,7 @@ export function Attribute({ type }: { type: AttributeType }) {
                 <span className="d-inline-block">
                   <Button
                     disabled={!canIncrease}
-                    onClick={({ currentTarget }) => {
-                      currentTarget.blur();
-
-                      increaseAttribute(type);
-                    }}
+                    onClick={() => increaseAttribute(type)}
                     variant={UIVariant.Outline}
                   >
                     <IconImage Icon={canIncrease ? IconIncrease : IconWait} />
@@ -66,7 +67,7 @@ export function Attribute({ type }: { type: AttributeType }) {
           </Stack>
         </>
       ) : (
-        <span className="text-center w-100">{LABEL_UNKNOWN}</span>
+        <IconDisplay contents={LABEL_UNKNOWN} Icon={ICON_UNKNOWN} tooltip={LABEL_UNKNOWN} />
       )}
     </div>
   );

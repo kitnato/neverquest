@@ -1,3 +1,4 @@
+import { ReactComponent as IconUnknown } from "@neverquest/icons/perspective-dice-six-faces-random.svg";
 import { DeltaDisplay } from "@neverquest/types/ui";
 
 export const BLEED = {
@@ -19,6 +20,8 @@ export const DEFAULT_DELTA_DISPLAY: DeltaDisplay = {
 };
 
 export const ICON_INLAY_SIZE = 16;
+
+export const ICON_UNKNOWN = IconUnknown;
 
 const KEY_STORAGE_PREFIX = "nq";
 

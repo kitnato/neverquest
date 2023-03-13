@@ -82,9 +82,7 @@ export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
           <Button
             className={animation}
             disabled={isDisabled || isLevelCompletedValue}
-            onClick={({ currentTarget }) => {
-              currentTarget.blur();
-
+            onClick={() => {
               if (areAttributesIncreasableValue && !isLevelStartedValue) {
                 setShowAttackConfirmation(true);
               } else {

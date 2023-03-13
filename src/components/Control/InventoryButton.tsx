@@ -29,11 +29,7 @@ export function InventoryButton({ isDisabled }: { isDisabled: boolean }) {
         >
           <Button
             disabled={isAttackingValue || isDisabled}
-            onClick={({ currentTarget }) => {
-              currentTarget.blur();
-
-              setIsInventoryOpen(true);
-            }}
+            onClick={() => setIsInventoryOpen(true)}
             variant={UIVariant.Outline}
           >
             <IconImage Icon={Icon} />

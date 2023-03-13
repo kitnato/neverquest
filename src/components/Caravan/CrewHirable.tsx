@@ -40,9 +40,7 @@ export function CrewHirable({ type }: { type: CrewType }) {
           <span className="d-inline-block">
             <Button
               disabled={!isAffordable}
-              onClick={({ currentTarget }) => {
-                currentTarget.blur();
-
+              onClick={() => {
                 setCrewMember((current) => ({
                   ...current,
                   hireStatus: CrewStatus.Hired,

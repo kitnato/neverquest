@@ -26,9 +26,7 @@ export function TrainSkillButton({ type }: { type: SkillType }) {
       <span className="d-inline-block">
         <Button
           disabled={!isAffordable}
-          onClick={({ currentTarget }) => {
-            currentTarget.blur();
-
+          onClick={() => {
             setSkill(true);
             transactResources({ coinsDifference: -coinPrice });
           }}

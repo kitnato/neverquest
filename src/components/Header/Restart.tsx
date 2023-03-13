@@ -27,11 +27,7 @@ export function Restart() {
             ? getAnimationClass({ isInfinite: true, type: AnimationType.Pulse })
             : undefined
         }
-        onClick={({ currentTarget }) => {
-          currentTarget.blur();
-
-          setIsShowingRestart(true);
-        }}
+        onClick={() => setIsShowingRestart(true)}
         variant="outline-light"
       >
         <ExclamationTriangle /> Restart

@@ -47,11 +47,7 @@ export function TravelButton({ isDisabled }: { isDisabled: boolean }) {
               : undefined
           }
           disabled={isDisabled}
-          onClick={({ currentTarget }) => {
-            currentTarget.blur();
-
-            toggleLocation();
-          }}
+          onClick={() => toggleLocation()}
           variant={UIVariant.Outline}
         >
           <IconImage Icon={Icon} isFlipped={!isWildernessValue} />

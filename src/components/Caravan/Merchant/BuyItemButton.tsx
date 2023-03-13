@@ -1,4 +1,3 @@
-import { MouseEvent } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -25,9 +24,7 @@ export function BuyItemButton({ id }: { id: string }) {
   const isFitting = useRecoilValue(canFit(weight));
   const isPurchasable = isAffordable && isFitting;
 
-  const handlePurchase = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-    currentTarget.blur();
-
+  const handlePurchase = () => {
     const isReceived = isTrinket(item)
       ? acquireTrinket({ trinket: item })
       : acquireGear({ gear: item });

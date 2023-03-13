@@ -44,11 +44,7 @@ export function AttributesButton({ isDisabled }: { isDisabled: boolean }) {
                 : ""
             }`}
             disabled={isAttackingValue || isDisabled}
-            onClick={({ currentTarget }) => {
-              currentTarget.blur();
-
-              setScreenShowing(true);
-            }}
+            onClick={() => setScreenShowing(true)}
             variant={UIVariant.Outline}
           >
             <>

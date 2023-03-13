@@ -51,11 +51,7 @@ export function CompassUseButton() {
         <span className="d-inline-block">
           <Button
             disabled={!canNavigate}
-            onClick={({ currentTarget }) => {
-              currentTarget.blur();
-
-              setIsShowing(true);
-            }}
+            onClick={() => setIsShowing(true)}
             variant={UIVariant.Outline}
           >
             Use

@@ -67,9 +67,7 @@ export function SellItems() {
                   <Coins tooltip="Value (coins)" value={getSellPrice(item)} />
 
                   <Button
-                    onClick={({ currentTarget }) => {
-                      currentTarget.blur();
-
+                    onClick={() => {
                       if (isEquipped) {
                         setSellConfirmation(id);
                       } else {

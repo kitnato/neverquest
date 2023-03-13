@@ -39,7 +39,7 @@ export function generateArmor({
 
   return {
     armorClass,
-    coinPrice: 4 + Math.round(400 * growthFactor),
+    coinPrice: Math.round(600 * growthFactor),
     deflectionChance: deflectionChanceModifier
       ? deflectionChanceModifier * (0.1 + level / 5)
       : undefined,
@@ -93,7 +93,7 @@ export function generateShield({
 
   return {
     blockChance: getFromRange(blockRange),
-    coinPrice: 10 + Math.round(300 * growthFactor),
+    coinPrice: Math.round(500 * growthFactor),
     name:
       name ||
       LOCRA.generateArtifact({
@@ -146,7 +146,7 @@ export function generateWeapon({
   };
   const weapon = {
     abilityChance: 0,
-    coinPrice: Math.round(150 * growthFactor),
+    coinPrice: Math.round(400 * growthFactor),
     damage: getFromRange({ ...ranges.damage }),
     // TODO
     grip: WeaponGrip.OneHanded,

@@ -75,7 +75,7 @@ export const progress = selector({
 });
 
 export const progressMaximum = selector({
-  get: ({ get }) => 3 + Math.round(50 * getGrowthSigmoid(get(level))),
+  get: ({ get }) => 2 + Math.round(98 * getGrowthSigmoid(get(level))),
   key: "progressMaximum",
 });
 

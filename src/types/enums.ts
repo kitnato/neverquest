@@ -95,6 +95,7 @@ export enum MasteryType {
 
 export enum ShowingType {
   Armor,
+  AttackRate,
   AttackRateDetails,
   AttributesButton,
   BlockChance,

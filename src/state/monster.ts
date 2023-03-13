@@ -25,27 +25,14 @@ export const monsterAttackDuration = atom({
 });
 
 export const monsterAttackRate = selector({
-  get: ({ get }) => {
-    const levelValue = get(level);
-
-    return (
-      4500 -
-      Math.round(4000 * getGrowthSigmoid(levelValue)) -
-      Math.round(get(progress) * 10 * getGrowthSigmoid(levelValue))
-    );
-  },
+  get: ({ get }) =>
+    4500 - Math.round(4000 * getGrowthSigmoid(get(level)) - 10 * getGrowthSigmoid(get(progress))),
   key: "monsterAttackRate",
 });
 
 export const monsterDamage = selector({
-  get: ({ get }) => {
-    const levelValue = get(level);
-
-    return (
-      Math.round(1000 * getGrowthSigmoid(levelValue)) +
-      Math.round(get(progress) * 50 * getGrowthSigmoid(levelValue))
-    );
-  },
+  get: ({ get }) =>
+    Math.round(1000 * getGrowthSigmoid(get(level)) + 50 * getGrowthSigmoid(get(progress))),
   key: "monsterDamage",
 });
 
@@ -59,14 +46,8 @@ export const monsterDamagePerSecond = selector({
 });
 
 export const monsterMaximumHealth = selector({
-  get: ({ get }) => {
-    const levelValue = get(level);
-
-    return (
-      Math.round(3000 * getGrowthSigmoid(levelValue)) +
-      Math.round(get(progress) * 100 * getGrowthSigmoid(levelValue))
-    );
-  },
+  get: ({ get }) =>
+    Math.round(3000 * getGrowthSigmoid(get(level)) + 100 * getGrowthSigmoid(get(progress))),
   key: "monsterMaximumHealth",
 });
 
@@ -88,14 +69,13 @@ export const monsterPoisonChance = selector({
 export const monsterLoot = selector({
   get: ({ get }) => {
     const levelValue = get(level);
-    const progressValue = get(progress);
     const growthFactor = getGrowthSigmoid(levelValue);
-    const progressFactor = progressValue * 50;
+    const progressFactor = getGrowthSigmoid(get(progress)) * 100;
 
     return {
-      coins: Math.ceil(progressFactor * growthFactor + 50 * growthFactor),
-      essence: Math.ceil(progressFactor * growthFactor + 100 * growthFactor),
-      scrap: Math.ceil(progressFactor * growthFactor + 200 * growthFactor),
+      coins: Math.round(progressFactor + 150 * growthFactor),
+      essence: Math.round(progressFactor + 200 * growthFactor),
+      scrap: Math.round(progressFactor + 250 * growthFactor),
     };
   },
   key: "monsterLoot",

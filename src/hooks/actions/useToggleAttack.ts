@@ -17,7 +17,8 @@ export function useToggleAttack() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const deltaShowWildernessStatus = isShowing(ShowingType.WildernessStatus);
+        const isShowingAttackRate = isShowing(ShowingType.AttackRate);
+        const isShowingWildernessStatus = isShowing(ShowingType.WildernessStatus);
         const isAttackingValue = get(isAttacking);
 
         set(isAttacking, !isAttackingValue);
@@ -26,8 +27,12 @@ export function useToggleAttack() {
           set(isLevelStarted, true);
         }
 
-        if (!get(deltaShowWildernessStatus)) {
-          set(deltaShowWildernessStatus, true);
+        if (!get(isShowingAttackRate)) {
+          set(isShowingAttackRate, true);
+        }
+
+        if (!get(isShowingWildernessStatus)) {
+          set(isShowingWildernessStatus, true);
         }
 
         if (isAttackingValue) {

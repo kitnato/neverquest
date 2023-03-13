@@ -19,6 +19,7 @@ import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/form
 
 export function Attack() {
   const attackRateValue = useRecoilValue(attackRate);
+  const isShowingAttackRate = useRecoilValue(isShowing(ShowingType.AttackRate));
   const isShowingAttackRateDetails = useRecoilValue(isShowing(ShowingType.AttackRateDetails));
   const weaponValue = useRecoilValue(weapon);
 
@@ -30,6 +31,10 @@ export function Attack() {
     atomValue: attackRateTotal,
     type: DeltaTextType.Time,
   });
+
+  if (!isShowingAttackRate) {
+    return null;
+  }
 
   return (
     <IconDisplay
@@ -69,6 +74,7 @@ export function Attack() {
         </OverlayTrigger>
       }
       Icon={Icon}
+      isAnimated
       tooltip="Attack rate"
     />
   );

@@ -6,10 +6,9 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
-import { ATTRIBUTES } from "@neverquest/data/attributes";
+import { ATTACK_RATE_ICON, ATTRIBUTES } from "@neverquest/data/attributes";
 import { WEAPON_NONE } from "@neverquest/data/gear";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as Icon } from "@neverquest/icons/striking-splinter.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -73,7 +72,7 @@ export function Attack() {
           </Stack>
         </OverlayTrigger>
       }
-      Icon={Icon}
+      Icon={ATTACK_RATE_ICON}
       isAnimated
       tooltip="Attack rate"
     />

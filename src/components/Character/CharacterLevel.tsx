@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as Icon } from "@neverquest/icons/level-four.svg";
+import { ReactComponent as IconCharacterLevel } from "@neverquest/icons/level-four.svg";
 import { characterLevel } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { DeltaType } from "@neverquest/types/enums";
@@ -27,7 +27,7 @@ export function CharacterLevel() {
           <FloatingText type={DeltaType.CharacterLevel} />
         </>
       }
-      Icon={Icon}
+      Icon={IconCharacterLevel}
       tooltip="Power level"
     />
   );

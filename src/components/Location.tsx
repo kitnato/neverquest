@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ReactComponent as Icon } from "@neverquest/icons/mountain-road.svg";
+import { ReactComponent as IconLocation } from "@neverquest/icons/mountain-road.svg";
 import { locationName } from "@neverquest/state/encounter";
 
 export function Location() {
@@ -10,7 +10,7 @@ export function Location() {
   return (
     <IconDisplay
       contents={locationNameValue}
-      Icon={Icon}
+      Icon={IconLocation}
       iconProps={{ overlayPlacement: "bottom" }}
       isAnimated
       tooltip="Location"

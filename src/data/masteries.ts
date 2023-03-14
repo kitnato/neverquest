@@ -1,13 +1,13 @@
-// TODO - diversify icons.
-import { ReactComponent as Icon } from "@neverquest/icons/abstract-049.svg";
+import { ICON_PLACEHOLDER } from "@neverquest/constants";
 import { AttributeOrMastery } from "@neverquest/types";
 import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
 
+// TODO - diversify icons.
 export const MASTERIES: Record<MasteryType, AttributeOrMastery> = {
   [MasteryType.BleedDamage]: {
     base: 0.1,
     description: "Affects bleed damage. Trains when inflicting bleed.",
-    Icon,
+    Icon: ICON_PLACEHOLDER,
     increment: 0.04,
     maximum: 1,
     name: "Cruelty",
@@ -16,7 +16,7 @@ export const MASTERIES: Record<MasteryType, AttributeOrMastery> = {
   [MasteryType.FreeBlockChance]: {
     base: 0,
     description: "Chance that blocking consumes no stamina. Trains when blocking.",
-    Icon,
+    Icon: ICON_PLACEHOLDER,
     increment: 0.03,
     maximum: 0.66,
     name: "Stability",
@@ -25,7 +25,7 @@ export const MASTERIES: Record<MasteryType, AttributeOrMastery> = {
   [MasteryType.ParryFactor]: {
     base: 0,
     description: "Affects damage absorbed and reflected when parrying. Trains when parrying.",
-    Icon,
+    Icon: ICON_PLACEHOLDER,
     increment: 0.02,
     maximum: 0.8,
     name: "Finesse",
@@ -34,7 +34,7 @@ export const MASTERIES: Record<MasteryType, AttributeOrMastery> = {
   [MasteryType.SkipRecoveryChance]: {
     base: 0,
     description: "Chance to ignore recovery when struck. Trains when struck.",
-    Icon,
+    Icon: ICON_PLACEHOLDER,
     increment: 0.02,
     maximum: 0.9,
     name: "Tenacity",
@@ -43,7 +43,7 @@ export const MASTERIES: Record<MasteryType, AttributeOrMastery> = {
   [MasteryType.StaggerDuration]: {
     base: 1200,
     description: "Affects stagger duration. Trains when inflicting stagger.",
-    Icon,
+    Icon: ICON_PLACEHOLDER,
     increment: 100,
     maximum: 3500,
     name: "Might",

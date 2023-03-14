@@ -2,8 +2,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
-import { WEAPON_NONE } from "@neverquest/data/gear";
-import { ReactComponent as IconEquipped } from "@neverquest/icons/axe-sword.svg";
+import { WEAPON_ICON, WEAPON_NONE } from "@neverquest/data/gear";
 import { ReactComponent as IconUnequipped } from "@neverquest/icons/fist.svg";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -22,7 +21,7 @@ export function WeaponEquipped() {
   return (
     <IconDisplay
       contents={<WeaponName weapon={weaponValue} />}
-      Icon={isEquipped ? IconEquipped : IconUnequipped}
+      Icon={isEquipped ? WEAPON_ICON : IconUnequipped}
       iconProps={{ isFlipped: !isEquipped }}
       isAnimated
       tooltip="Equipped weapon"

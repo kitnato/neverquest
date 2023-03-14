@@ -1,3 +1,4 @@
+import { ReactComponent as IconPlaceholder } from "@neverquest/icons/abstract-049.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/perspective-dice-six-faces-random.svg";
 import { DeltaDisplay } from "@neverquest/types/ui";
 
@@ -20,6 +21,8 @@ export const DEFAULT_DELTA_DISPLAY: DeltaDisplay = {
 };
 
 export const ICON_INLAY_SIZE = 16;
+
+export const ICON_PLACEHOLDER = IconPlaceholder;
 
 export const ICON_UNKNOWN = IconUnknown;
 

@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as Icon } from "@neverquest/icons/shield-reflect.svg";
+import { ReactComponent as IconDeflection } from "@neverquest/icons/shield-reflect.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { deflectionChance } from "@neverquest/state/statistics";
@@ -34,7 +34,7 @@ export function DeflectionChance() {
           <FloatingText type={DeltaType.Deflection} />
         </>
       }
-      Icon={Icon}
+      Icon={IconDeflection}
       isAnimated
       tooltip="Deflection chance"
     />

@@ -8,7 +8,7 @@ import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN, RECOVERY_RATE } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as Icon } from "@neverquest/icons/knockout.svg";
+import { ReactComponent as IconRecovery } from "@neverquest/icons/knockout.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { recoveryRate, skipRecoveryChance } from "@neverquest/state/statistics";
@@ -89,7 +89,7 @@ export function Recovery() {
           </Stack>
         </OverlayTrigger>
       }
-      Icon={Icon}
+      Icon={IconRecovery}
       isAnimated
       tooltip="Recovery rate"
     />

@@ -7,7 +7,7 @@ import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { BLEED, CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as Icon } from "@neverquest/icons/bleeding-wound.svg";
+import { ReactComponent as IconBleedRating } from "@neverquest/icons/bleeding-wound.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { skills } from "@neverquest/state/skills";
 import {
@@ -90,7 +90,7 @@ export function BleedRating() {
           <FloatingText type={DeltaType.BleedRating} />
         </>
       }
-      Icon={Icon}
+      Icon={IconBleedRating}
       isAnimated
       tooltip="Bleed rating"
     />

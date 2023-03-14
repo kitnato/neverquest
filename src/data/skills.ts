@@ -1,62 +1,62 @@
-// TODO - diversify icons.
-import { ReactComponent as Icon } from "@neverquest/icons/abstract-049.svg";
+import { ICON_PLACEHOLDER } from "@neverquest/constants";
 import { Skill } from "@neverquest/types";
 import { SkillType } from "@neverquest/types/enums";
 
+// TODO - diversify icons.
 export const SKILLS: Record<SkillType, Skill> = {
   [SkillType.Armors]: {
     coinPrice: 65,
     description: "Unlocks the use of reinforced and plate armors.",
-    Icon,
+    Icon: ICON_PLACEHOLDER,
     name: "Armorcraft",
     requiredLevel: 45,
   },
   [SkillType.Bleed]: {
     coinPrice: 65,
     description: "Unlocks the ability to inflict bleeding.",
-    Icon,
+    Icon: ICON_PLACEHOLDER,
     name: "Anatomy",
     requiredLevel: 40,
   },
   [SkillType.Criticals]: {
     coinPrice: 35,
     description: "Unlocks the ability to deal critical strikes.",
-    Icon,
+    Icon: ICON_PLACEHOLDER,
     name: "Assassination",
     requiredLevel: 15,
   },
   [SkillType.Dodge]: {
     coinPrice: 55,
     description: "Unlocks the ability to dodge attacks, negating all damage.",
-    Icon,
+    Icon: ICON_PLACEHOLDER,
     name: "Evasion",
     requiredLevel: 35,
   },
   [SkillType.Parry]: {
     coinPrice: 45,
     description: "Unlocks the ability to parry attacks, partially reflecting damage.",
-    Icon,
+    Icon: ICON_PLACEHOLDER,
     name: "Escrime",
     requiredLevel: 25,
   },
   [SkillType.Regeneration]: {
     coinPrice: 35,
     description: "Unlocks attributes that improve health & stamina regeneration.",
-    Icon,
+    Icon: ICON_PLACEHOLDER,
     name: "Calisthenics",
     requiredLevel: 10,
   },
   [SkillType.Shields]: {
     coinPrice: 55,
     description: "Unlocks the use of medium and tower shields.",
-    Icon,
+    Icon: ICON_PLACEHOLDER,
     name: "Shieldcraft",
     requiredLevel: 30,
   },
   [SkillType.Stagger]: {
     coinPrice: 45,
     description: "Unlocks the ability to temporarily stagger the attacker.",
-    Icon,
+    Icon: ICON_PLACEHOLDER,
     name: "Traumatology",
     requiredLevel: 20,
   },

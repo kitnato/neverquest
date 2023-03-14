@@ -4,7 +4,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { IconImage } from "@neverquest/components/IconImage";
 import { Inventory } from "@neverquest/components/Inventory";
-import { ReactComponent as Icon } from "@neverquest/icons/knapsack.svg";
+import { ReactComponent as IconInventory } from "@neverquest/icons/knapsack.svg";
 import { isAttacking } from "@neverquest/state/character";
 import { hasKnapsack, isInventoryOpen } from "@neverquest/state/inventory";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
@@ -32,7 +32,7 @@ export function InventoryButton({ isDisabled }: { isDisabled: boolean }) {
             onClick={() => setIsInventoryOpen(true)}
             variant={UIVariant.Outline}
           >
-            <IconImage Icon={Icon} />
+            <IconImage Icon={IconInventory} />
           </Button>
         </span>
       </OverlayTrigger>

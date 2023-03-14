@@ -3,8 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
-import { CREW } from "@neverquest/data/caravan";
-import { ReactComponent as Icon } from "@neverquest/icons/cowled.svg";
+import { CREW, CREW_ICON } from "@neverquest/data/caravan";
 import { crew } from "@neverquest/state/caravan";
 import { CrewStatus, CrewType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
@@ -29,7 +28,7 @@ export function CrewHired({ setActive, type }: { setActive: () => void; type: Cr
           </Button>
         </div>
       }
-      Icon={Icon}
+      Icon={CREW_ICON}
       tooltip={name}
     />
   );

@@ -4,7 +4,7 @@ import { Regeneration } from "@neverquest/components/Character/Regeneration";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ReserveMeter } from "@neverquest/components/ReserveMeter";
-import { ReactComponent as Icon } from "@neverquest/icons/hospital-cross.svg";
+import { HEALTH_ICON } from "@neverquest/data/reserves";
 import { DeltaType, ReserveType } from "@neverquest/types/enums";
 import { UIAttachment } from "@neverquest/types/ui";
 
@@ -22,7 +22,7 @@ export function Health() {
           <Regeneration type={ReserveType.Health} />
         </Stack>
       }
-      Icon={Icon}
+      Icon={HEALTH_ICON}
       tooltip="Health"
     />
   );

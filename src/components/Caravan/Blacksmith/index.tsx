@@ -2,9 +2,7 @@ import { Nav, Stack, Tab } from "react-bootstrap";
 
 import { WeaponOptions } from "@neverquest/components/Caravan/Blacksmith/WeaponOptions";
 import { IconImage } from "@neverquest/components/IconImage";
-import { ReactComponent as IconWeapon } from "@neverquest/icons/axe-sword.svg";
-import { ReactComponent as IconShield } from "@neverquest/icons/round-shield.svg";
-import { ReactComponent as IconArmor } from "@neverquest/icons/shoulder-armor.svg";
+import { ARMOR_ICON, SHIELD_ICON, WEAPON_ICON } from "@neverquest/data/gear";
 
 enum TabKey {
   Armor,
@@ -15,19 +13,19 @@ enum TabKey {
 const DATA_TABS = [
   {
     Component: WeaponOptions,
-    Icon: IconWeapon,
+    Icon: WEAPON_ICON,
     key: TabKey.Weapon,
     label: "Weapon",
   },
   {
     Component: WeaponOptions,
-    Icon: IconArmor,
+    Icon: ARMOR_ICON,
     key: TabKey.Armor,
     label: "Armor",
   },
   {
     Component: WeaponOptions,
-    Icon: IconShield,
+    Icon: SHIELD_ICON,
     key: TabKey.Shield,
     label: "Shield",
   },

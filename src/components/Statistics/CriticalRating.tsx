@@ -6,7 +6,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as Icon } from "@neverquest/icons/striking-splinter.svg";
+import { ReactComponent as IconCriticalRating } from "@neverquest/icons/spiky-eclipse.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { skills } from "@neverquest/state/skills";
 import { criticalChance, criticalDamage, criticalRating } from "@neverquest/state/statistics";
@@ -64,7 +64,7 @@ export function CriticalRating() {
           <FloatingText type={DeltaType.CriticalRating} />
         </>
       }
-      Icon={Icon}
+      Icon={IconCriticalRating}
       isAnimated
       tooltip="Critical rating"
     />

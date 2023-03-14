@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LootingMeter } from "@neverquest/components/Resource/LootingMeter";
-import { ReactComponent as Icon } from "@neverquest/icons/vulture.svg";
+import { ReactComponent as IconLooting } from "@neverquest/icons/vulture.svg";
 import { isLooting } from "@neverquest/state/character";
 import { progress } from "@neverquest/state/encounter";
 
@@ -14,5 +14,7 @@ export function Looting() {
     return progressValue === 0 ? null : <hr />;
   }
 
-  return <IconDisplay contents={<LootingMeter />} Icon={Icon} isAnimated tooltip="Looting" />;
+  return (
+    <IconDisplay contents={<LootingMeter />} Icon={IconLooting} isAnimated tooltip="Looting" />
+  );
 }

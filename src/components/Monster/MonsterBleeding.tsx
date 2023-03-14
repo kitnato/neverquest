@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterBleedingMeter } from "@neverquest/components/Monster/MonsterBleedingMeter";
-import { ReactComponent as Icon } from "@neverquest/icons/drop.svg";
+import { ReactComponent as IconBleeding } from "@neverquest/icons/drop.svg";
 import { skills } from "@neverquest/state/skills";
 import { bleedChance } from "@neverquest/state/statistics";
 import { SkillType } from "@neverquest/types/enums";
@@ -15,5 +15,5 @@ export function MonsterBleeding() {
     return null;
   }
 
-  return <IconDisplay contents={<MonsterBleedingMeter />} Icon={Icon} tooltip="Bleeding" />;
+  return <IconDisplay contents={<MonsterBleedingMeter />} Icon={IconBleeding} tooltip="Bleeding" />;
 }

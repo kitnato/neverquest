@@ -1,9 +1,12 @@
 import { ReactComponent as IconHide } from "@neverquest/icons/animal-hide.svg";
+import { ReactComponent as IconWeapon } from "@neverquest/icons/axe-sword.svg";
 import { ReactComponent as IconPiercing } from "@neverquest/icons/bullseye.svg";
 import { ReactComponent as IconSlashing } from "@neverquest/icons/crossed-slashes.svg";
 import { ReactComponent as IconReinforced } from "@neverquest/icons/fish-scales.svg";
 import { ReactComponent as IconBlunt } from "@neverquest/icons/gavel.svg";
 import { ReactComponent as IconPlate } from "@neverquest/icons/metal-scales.svg";
+import { ReactComponent as IconShield } from "@neverquest/icons/round-shield.svg";
+import { ReactComponent as IconArmor } from "@neverquest/icons/shoulder-armor.svg";
 import { ShieldType, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
 import { Armor, Range, Shield, Weapon } from "@neverquest/types";
 import { ArmorClass, SkillType, WeaponGrip } from "@neverquest/types/enums";
@@ -17,11 +20,13 @@ export const ARMOR_NONE: Armor = {
   weight: 0,
 };
 
-export const ARMOR_ICONS: Record<ArmorClass, SVGIcon> = {
+export const ARMOR_CLASS_ICONS: Record<ArmorClass, SVGIcon> = {
   [ArmorClass.Hide]: IconHide,
   [ArmorClass.Plate]: IconPlate,
   [ArmorClass.Reinforced]: IconReinforced,
 };
+
+export const ARMOR_ICON = IconArmor;
 
 export const ARMOR_SPECIFICATIONS: Record<
   ArmorClass,
@@ -59,6 +64,8 @@ export const ARMOR_SPECIFICATIONS: Record<
     weightModifier: 1.25,
   },
 };
+
+export const SHIELD_ICON = IconShield;
 
 export const SHIELD_NONE: Shield = {
   blockChance: 0,
@@ -105,11 +112,13 @@ export const WEAPON_ABILITY_NAME = {
   [WeaponClass.Slashing]: "Parry",
 };
 
-export const WEAPON_ICONS: Record<WeaponClass, SVGIcon> = {
+export const WEAPON_CLASS_ICONS: Record<WeaponClass, SVGIcon> = {
   [WeaponClass.Blunt]: IconBlunt,
   [WeaponClass.Piercing]: IconPiercing,
   [WeaponClass.Slashing]: IconSlashing,
 };
+
+export const WEAPON_ICON = IconWeapon;
 
 export const WEAPON_SKILL_TYPE = {
   [WeaponClass.Blunt]: SkillType.Stagger,

@@ -21,7 +21,7 @@ export function TrinketName({
           <Popover.Header className="text-center">{name}</Popover.Header>
 
           <Popover.Body className="text-center">
-            <span className="fst-italic">{description}</span>
+            <span>{description}</span>
 
             <DetailsTable>
               <tr>

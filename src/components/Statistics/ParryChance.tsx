@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as Icon } from "@neverquest/icons/sword-clash.svg";
+import { ReactComponent as IconParryChance } from "@neverquest/icons/sword-clash.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { skills } from "@neverquest/state/skills";
 import { parryChance } from "@neverquest/state/statistics";
@@ -34,7 +34,7 @@ export function ParryChance() {
           <FloatingText type={DeltaType.ParryChance} />
         </>
       }
-      Icon={Icon}
+      Icon={IconParryChance}
       isAnimated
       tooltip="Parry chance"
     />

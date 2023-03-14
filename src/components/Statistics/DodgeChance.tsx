@@ -7,7 +7,7 @@ import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as Icon } from "@neverquest/icons/wingfoot.svg";
+import { ReactComponent as IconDodgeChance } from "@neverquest/icons/wingfoot.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { armor } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -90,7 +90,7 @@ export function DodgeChance() {
           <FloatingText type={DeltaType.DodgeChance} />
         </>
       }
-      Icon={Icon}
+      Icon={IconDodgeChance}
       isAnimated
       tooltip="Dodge chance"
     />

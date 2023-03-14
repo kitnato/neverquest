@@ -2,7 +2,7 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { ReactComponent as Icon } from "@neverquest/icons/rocking-chair.svg";
+import { ReactComponent as IconRetire } from "@neverquest/icons/rocking-chair.svg";
 import { isWilderness } from "@neverquest/state/encounter";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
@@ -29,7 +29,7 @@ export function RetireButton({ isDisabled }: { isDisabled: boolean }) {
             onClick={handleRetirement}
             variant={UIVariant.Outline}
           >
-            <IconImage Icon={Icon} />
+            <IconImage Icon={IconRetire} />
           </Button>
         </span>
       </OverlayTrigger>

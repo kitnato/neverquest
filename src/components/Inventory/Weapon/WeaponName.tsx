@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC, ICON_INLAY_SIZE, LABEL_UNKNOWN } from "@neverquest/constants";
-import { WEAPON_ABILITY_NAME, WEAPON_ICONS, WEAPON_SKILL_TYPE } from "@neverquest/data/gear";
+import { WEAPON_ABILITY_NAME, WEAPON_CLASS_ICONS, WEAPON_SKILL_TYPE } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingDamagePerSecond } from "@neverquest/state/settings";
@@ -30,7 +30,7 @@ export function WeaponName({
   const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
 
   const { abilityChance, damage, name, rate, staminaCost, weaponClass, weight } = weapon;
-  const Icon = WEAPON_ICONS[weaponClass];
+  const Icon = WEAPON_CLASS_ICONS[weaponClass];
 
   const skillValue = useRecoilValue(skills(WEAPON_SKILL_TYPE[weaponClass]));
 

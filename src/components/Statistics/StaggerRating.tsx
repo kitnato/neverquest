@@ -7,7 +7,7 @@ import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as Icon } from "@neverquest/icons/star-swirl.svg";
+import { ReactComponent as IconStaggerRating } from "@neverquest/icons/star-swirl.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { shield } from "@neverquest/state/inventory";
 import { skills } from "@neverquest/state/skills";
@@ -75,7 +75,7 @@ export function StaggerRating() {
           <FloatingText type={DeltaType.StaggerRating} />
         </>
       }
-      Icon={Icon}
+      Icon={IconStaggerRating}
       isAnimated
       tooltip="Stagger rating"
     />

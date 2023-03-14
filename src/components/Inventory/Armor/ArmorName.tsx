@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC, ICON_INLAY_SIZE, LABEL_UNKNOWN } from "@neverquest/constants";
-import { ARMOR_ICONS, ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
+import { ARMOR_CLASS_ICONS, ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { skills } from "@neverquest/state/skills";
 import { Armor } from "@neverquest/types";
@@ -16,7 +16,7 @@ export function ArmorName({ armor, placement = "top" }: { armor: Armor; placemen
   const armorsSkillValue = useRecoilValue(skills(SkillType.Armors));
 
   const { armorClass, deflectionChance, name, penalty, protection, staminaCost, weight } = armor;
-  const Icon = armorClass ? ARMOR_ICONS[armorClass] : () => null;
+  const Icon = armorClass ? ARMOR_CLASS_ICONS[armorClass] : () => null;
 
   return (
     <OverlayTrigger

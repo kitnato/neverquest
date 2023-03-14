@@ -3,8 +3,9 @@ import { FormControl } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ReactComponent as AliveIcon } from "@neverquest/icons/domino-mask.svg";
-import { ReactComponent as DeadIcon } from "@neverquest/icons/skull-crossed-bones.svg";
+import { LABEL_UNKNOWN } from "@neverquest/constants";
+import { ReactComponent as IconAlive } from "@neverquest/icons/domino-mask.svg";
+import { ReactComponent as IconDead } from "@neverquest/icons/skull-crossed-bones.svg";
 import { name } from "@neverquest/state/character";
 import { isGameOver } from "@neverquest/state/settings";
 
@@ -19,11 +20,19 @@ export function Name() {
       contents={
         <FormControl
           className="hover-grow"
-          onBlur={() => setEditing(false)}
+          onBlur={({ currentTarget: { value } }) => {
+            if (!value) {
+              setName(LABEL_UNKNOWN);
+            }
+
+            setEditing(false);
+          }}
           onChange={({ target: { value } }) => setName(value)}
-          onClick={({ currentTarget: { select, setSelectionRange } }) => {
-            setSelectionRange(0, 0);
-            select();
+          onClick={({ currentTarget }) => {
+            if (currentTarget.value === LABEL_UNKNOWN) {
+              currentTarget.setSelectionRange(0, 0);
+              currentTarget.select();
+            }
 
             setEditing(true);
           }}
@@ -32,7 +41,7 @@ export function Name() {
           value={nameValue}
         />
       }
-      Icon={isGameOverValue ? DeadIcon : AliveIcon}
+      Icon={isGameOverValue ? IconDead : IconAlive}
       tooltip="Name"
     />
   );

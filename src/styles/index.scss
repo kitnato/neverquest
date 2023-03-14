@@ -1,6 +1,11 @@
 @import "~animate.css";
 @import "bootstrap-custom.scss";
 
+::selection {
+  background: var(--bs-gray-600);
+  color: white;
+}
+
 .no-transitions .progress-bar {
   transition: none;
 }

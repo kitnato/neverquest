@@ -8,7 +8,7 @@ export function handleLocalStorage<ValueType>(
   isSettings?: boolean
 ): AtomEffect<ValueType> {
   return ({ onSet, setSelf }) => {
-    type Store = Partial<Record<string, ValueType>>;
+    type Store = Record<string, ValueType>;
 
     const storeKey = isSettings ? KEY_SETTINGS : KEY_SESSION;
     const store = ls.get<Store>(storeKey);

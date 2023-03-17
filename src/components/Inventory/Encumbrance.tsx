@@ -1,13 +1,13 @@
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ReserveMeter } from "@neverquest/components/ReserveMeter";
-import { ReactComponent as IconEncumbrance } from "@neverquest/icons/weight-crush.svg";
+import { ICON_WEIGHT } from "@neverquest/constants";
 import { ReserveType } from "@neverquest/types/enums";
 
 export function Encumbrance() {
   return (
     <IconDisplay
       contents={<ReserveMeter type={ReserveType.Encumbrance} />}
-      Icon={IconEncumbrance}
+      Icon={ICON_WEIGHT}
       tooltip="Encumbrance"
     />
   );

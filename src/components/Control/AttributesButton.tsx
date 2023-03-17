@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Badge, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { Attributes } from "@neverquest/components/Attributes";
+import { ButtonBadge } from "@neverquest/components/Control/ButtonBadge";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { IconImage } from "@neverquest/components/IconImage";
 import { ReactComponent as IconAttributes } from "@neverquest/icons/skills.svg";
+import { ReactComponent as IconUpgrade } from "@neverquest/icons/upgrade.svg";
 import { areAttributesIncreasable } from "@neverquest/state/attributes";
 import { isAttacking } from "@neverquest/state/character";
 import { isLevelStarted } from "@neverquest/state/encounter";
@@ -47,15 +49,9 @@ export function AttributesButton({ isDisabled }: { isDisabled: boolean }) {
             onClick={() => setScreenShowing(true)}
             variant={UIVariant.Outline}
           >
-            <>
-              <IconImage Icon={IconAttributes} />
+            <IconImage Icon={IconAttributes} />
 
-              {areAttributesIncreasableValue && (
-                <Badge bg="secondary" className="position-absolute" style={{ top: 12 }}>
-                  &#43;
-                </Badge>
-              )}
-            </>
+            <ButtonBadge Icon={IconUpgrade} isShowing={areAttributesIncreasableValue} />
           </Button>
         </span>
       </OverlayTrigger>

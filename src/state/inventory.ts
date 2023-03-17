@@ -47,7 +47,7 @@ export const encumbrance = selector({
 });
 
 export const isInventoryFull = selector({
-  get: ({ get }) => get(encumbrance) === get(encumbranceMaximum),
+  get: ({ get }) => get(encumbrance) >= get(encumbranceMaximum),
   key: "isInventoryFull",
 });
 

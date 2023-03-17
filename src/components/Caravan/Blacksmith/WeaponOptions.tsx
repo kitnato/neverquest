@@ -5,14 +5,13 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Coins } from "@neverquest/components/Resource/Coins";
 import { Scrap } from "@neverquest/components/Resource/Scrap";
-import { ICON_UNKNOWN, LABEL_UNKNOWN } from "@neverquest/constants";
+import { ICON_UNKNOWN, ICON_WEIGHT, LABEL_UNKNOWN } from "@neverquest/constants";
 import { WEAPON_ABILITY_NAME, WEAPON_SKILL_TYPE } from "@neverquest/data/gear";
 import { ReactComponent as IconAttackRate } from "@neverquest/icons/blade-fall.svg";
 import { ReactComponent as IconClass } from "@neverquest/icons/gear-hammer.svg";
 import { ReactComponent as IconStaminaCost } from "@neverquest/icons/ink-swirl.svg";
 import { ReactComponent as IconDamage } from "@neverquest/icons/pointy-sword.svg";
 import { ReactComponent as IconLevel } from "@neverquest/icons/private-first-class.svg";
-import { ReactComponent as IconWeight } from "@neverquest/icons/weight-crush.svg";
 import { AffixTag, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
 import { level } from "@neverquest/state/encounter";
 import { coins, scrap } from "@neverquest/state/resources";
@@ -138,7 +137,7 @@ export function WeaponOptions() {
 
         <IconDisplay
           contents={weight}
-          Icon={IconWeight}
+          Icon={ICON_WEIGHT}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
         />

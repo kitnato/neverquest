@@ -12,7 +12,7 @@ import {
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { useIncreaseAttribute } from "@neverquest/hooks/actions/useIncreaseAttribute";
 import { ReactComponent as IconWait } from "@neverquest/icons/hourglass.svg";
-import { ReactComponent as IconIncrease } from "@neverquest/icons/upgrade.svg";
+import { ReactComponent as IconIncrease } from "@neverquest/icons/private.svg";
 import {
   areAttributesIncreasable,
   attributeCost,

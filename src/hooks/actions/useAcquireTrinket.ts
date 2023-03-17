@@ -21,7 +21,7 @@ export function useAcquireTrinket() {
         }
 
         if (name === TRINKET_KNAPSACK.name) {
-          set(encumbranceMaximum, 5);
+          set(encumbranceMaximum, (current) => current + 1);
           set(hasKnapsack, true);
 
           return true;

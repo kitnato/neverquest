@@ -1,11 +1,10 @@
 import { ReactComponent as IconCompass } from "@neverquest/icons/compass.svg";
-import { ReactComponent as IconCrystal } from "@neverquest/icons/crystal-eye.svg";
 import { ReactComponent as IconKnapsack } from "@neverquest/icons/knapsack.svg";
 import { ReactComponent as IconStone } from "@neverquest/icons/stone-wheel.svg";
 import { Trinket } from "@neverquest/types";
 
 export const TRINKET_COMPASS: Trinket = {
-  coinPrice: 35,
+  coinPrice: 20,
   description: "Navigate the wilderness to return to previous locations.",
   Icon: IconCompass,
   isPortable: true,
@@ -29,13 +28,4 @@ export const TRINKET_KNAPSACK: Trinket = {
   isPortable: false,
   name: "Knapsack",
   weight: 0,
-};
-
-export const TRINKET_LODESTONE: Trinket = {
-  coinPrice: 25,
-  description: "Lure more monsters in the wilderness when everything's dead.",
-  Icon: IconCrystal,
-  isPortable: true,
-  name: "Lodestone",
-  weight: 1,
 };

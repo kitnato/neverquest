@@ -1,15 +1,14 @@
-import { DefaultValue, atom, selector } from "recoil";
+import { atom, selector } from "recoil";
 
 import { LABEL_UNKNOWN } from "@neverquest/constants";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { Wilderness } from "@neverquest/types";
 import { LocationType, StorageKey } from "@neverquest/types/enums";
 import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 // SELECTORS
 
 export const isLevelCompleted = selector({
-  get: ({ get }) => get(wilderness).progress === get(progressMaximum),
+  get: ({ get }) => get(progress) === get(progressMaximum),
   key: "isLevelCompleted",
 });
 
@@ -25,7 +24,7 @@ export const locationName = selector({
         return LABEL_UNKNOWN;
       }
 
-      return get(wilderness).name;
+      return get(wilderness);
     }
 
     return "Caravan";
@@ -38,48 +37,12 @@ export const maximumLevel = selector({
   key: "maximumLevel",
 });
 
-export const progress = selector({
-  get: ({ get }) => get(wilderness).progress,
-  key: "progress",
-  set: ({ get, set }, amount) => {
-    const target = get(level) - 1;
-    const newWildernesses = [...get(wildernesses)].map((wilderness, index) => {
-      if (index === target) {
-        const { name } = wilderness;
-
-        if (amount instanceof DefaultValue) {
-          return {
-            name,
-            progress: 0,
-          };
-        }
-
-        if (amount === -1) {
-          return {
-            name,
-            progress: get(progressMaximum),
-          };
-        }
-
-        return {
-          name,
-          progress: amount,
-        };
-      }
-
-      return wilderness;
-    });
-
-    set(wildernesses, newWildernesses);
-  },
-});
-
 export const progressMaximum = selector({
   get: ({ get }) => 2 + Math.round(98 * getGrowthSigmoid(get(level))),
   key: "progressMaximum",
 });
 
-export const wilderness = selector<Wilderness>({
+export const wilderness = selector({
   get: ({ get }) => get(wildernesses)[get(level) - 1],
   key: "wilderness",
 });
@@ -104,8 +67,14 @@ export const mode = atom({
   key: StorageKey.Mode,
 });
 
-export const wildernesses = atom<Wilderness[]>({
-  default: [{ name: "", progress: 0 }],
-  effects: [handleLocalStorage<Wilderness[]>(StorageKey.Wildernesses)],
+export const progress = atom({
+  default: 0,
+  effects: [handleLocalStorage<number>(StorageKey.Progress)],
+  key: StorageKey.Progress,
+});
+
+export const wildernesses = atom<string[]>({
+  default: [],
+  effects: [handleLocalStorage<string[]>(StorageKey.Wildernesses)],
   key: StorageKey.Wildernesses,
 });

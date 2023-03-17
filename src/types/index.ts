@@ -97,8 +97,3 @@ export type Weapon = GearBase & {
   type: WeaponType;
   weaponClass: WeaponClass;
 };
-
-export interface Wilderness {
-  name: string;
-  progress: number;
-}

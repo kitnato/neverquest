@@ -36,9 +36,7 @@ export function useInitialize() {
           }))
         );
 
-        set(wildernesses, [
-          { name: generateLocation({ isNSFW: get(isNSFW), level: get(level) }), progress: 0 },
-        ]);
+        set(wildernesses, [generateLocation({ isNSFW: get(isNSFW), level: get(level) })]);
 
         createMonster();
       },

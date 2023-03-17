@@ -9,6 +9,7 @@ import {
   isLevelStarted,
   isWilderness,
   level,
+  progress,
   wildernesses,
 } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
@@ -18,6 +19,7 @@ import { UIVariant } from "@neverquest/types/ui";
 export function CompassUseButton() {
   const hasLootedValue = useRecoilValue(hasLooted);
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
+  const resetProgress = useResetRecoilState(progress);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const isLevelStartedValue = useRecoilValue(isLevelStarted);
   const isWildernessValue = useRecoilValue(isWilderness);
@@ -33,6 +35,7 @@ export function CompassUseButton() {
     setIsShowing(false);
     resetIsInventoryOpen();
     setLevel(+value);
+    resetProgress();
   };
 
   return (
@@ -61,14 +64,14 @@ export function CompassUseButton() {
 
       <Modal onHide={() => setIsShowing(false)} show={isShowing}>
         <Modal.Header closeButton>
-          <Modal.Title>Navigate to another wilderness</Modal.Title>
+          <Modal.Title>Travel between wildernesses</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           <IconDisplay
             contents={
               <Form.Select disabled={!canNavigate} onChange={handleNavigate} value={levelValue}>
-                {wildernessesValue.map(({ name }, index) => {
+                {wildernessesValue.map((name, index) => {
                   const levelIndex = index + 1;
 
                   return (

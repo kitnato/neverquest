@@ -6,9 +6,8 @@ import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { CompassUseButton } from "@neverquest/components/Inventory/Trinket/CompassUseButton";
 import { HearthstoneUseButton } from "@neverquest/components/Inventory/Trinket/HearthstoneUseButton";
-import { LodestoneUseButton } from "@neverquest/components/Inventory/Trinket/LodestoneUseButton";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
-import { TRINKET_COMPASS, TRINKET_HEARTHSTONE, TRINKET_LODESTONE } from "@neverquest/data/trinkets";
+import { TRINKET_COMPASS, TRINKET_HEARTHSTONE } from "@neverquest/data/trinkets";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { inventory } from "@neverquest/state/inventory";
 import { isGear, isTrinket } from "@neverquest/types/type-guards";
@@ -83,9 +82,6 @@ export function Inventory() {
                 }
                 case TRINKET_HEARTHSTONE.name: {
                   return HearthstoneUseButton;
-                }
-                case TRINKET_LODESTONE.name: {
-                  return LodestoneUseButton;
                 }
                 default: {
                   return () => null;

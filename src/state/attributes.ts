@@ -3,7 +3,7 @@ import { atom, atomFamily, selector, selectorFamily } from "recoil";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { essence } from "@neverquest/state/resources";
-import { AttributeType, StorageKey } from "@neverquest/types/enums";
+import { AttributeType } from "@neverquest/types/enums";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 
 interface AttributeState {
@@ -57,14 +57,12 @@ export const attributes = atomFamily<AttributeState, AttributeType>({
     isUnlocked: false,
     points: 0,
   },
-  effects: (parameter) => [
-    handleLocalStorage<AttributeState>(`${StorageKey.Attributes}-${parameter}`),
-  ],
-  key: StorageKey.Attributes,
+  effects: (parameter) => [handleLocalStorage<AttributeState>({ key: "attributes", parameter })],
+  key: "attributes",
 });
 
 export const characterLevel = atom({
   default: 0,
-  effects: [handleLocalStorage<number>(StorageKey.CharacterLevel)],
-  key: StorageKey.CharacterLevel,
+  effects: [handleLocalStorage<number>({ key: "characterLevel" })],
+  key: "characterLevel",
 });

@@ -1,7 +1,6 @@
 import { atom, selector } from "recoil";
 
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { StorageKey } from "@neverquest/types/enums";
 
 // SELECTORS
 
@@ -14,36 +13,36 @@ export const hasLooted = selector({
 
 export const essence = atom({
   default: 0,
-  effects: [handleLocalStorage<number>(StorageKey.Essence)],
-  key: StorageKey.Essence,
+  effects: [handleLocalStorage<number>({ key: "essence" })],
+  key: "essence",
 });
 
 export const essenceLoot = atom({
   default: 0,
-  effects: [handleLocalStorage<number>(StorageKey.EssenceLoot)],
-  key: StorageKey.EssenceLoot,
+  effects: [handleLocalStorage<number>({ key: "essenceLoot" })],
+  key: "essenceLoot",
 });
 
 export const coins = atom({
   default: 0,
-  effects: [handleLocalStorage<number>(StorageKey.Coins)],
-  key: StorageKey.Coins,
+  effects: [handleLocalStorage<number>({ key: "coins" })],
+  key: "coins",
 });
 
 export const coinsLoot = atom({
   default: 0,
-  effects: [handleLocalStorage<number>(StorageKey.CoinsLoot)],
-  key: StorageKey.CoinsLoot,
+  effects: [handleLocalStorage<number>({ key: "coinsLoot" })],
+  key: "coinsLoot",
 });
 
 export const scrap = atom({
   default: 0,
-  effects: [handleLocalStorage<number>(StorageKey.Scrap)],
-  key: StorageKey.Scrap,
+  effects: [handleLocalStorage<number>({ key: "scrap" })],
+  key: "scrap",
 });
 
 export const scrapLoot = atom({
   default: 0,
-  effects: [handleLocalStorage<number>(StorageKey.ScrapLoot)],
-  key: StorageKey.ScrapLoot,
+  effects: [handleLocalStorage<number>({ key: "scrapLoot" })],
+  key: "scrapLoot",
 });

@@ -3,7 +3,7 @@ import { DefaultValue, atomFamily, selector, selectorFamily } from "recoil";
 import { ATTRIBUTES, ATTRIBUTES_ORDER } from "@neverquest/data/attributes";
 import { attributes } from "@neverquest/state/attributes";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { SkillType, StorageKey } from "@neverquest/types/enums";
+import { SkillType } from "@neverquest/types/enums";
 
 // SELECTORS
 
@@ -55,6 +55,6 @@ export const skillsTrained = selector<Record<SkillType, boolean>>({
 
 export const skillsStatus = atomFamily<boolean, SkillType>({
   default: false,
-  effects: (parameter) => [handleLocalStorage<boolean>(`${StorageKey.SkillsStatus}-${parameter}`)],
-  key: StorageKey.SkillsStatus,
+  effects: (parameter) => [handleLocalStorage<boolean>({ key: "skillsStatus", parameter })],
+  key: "skillsStatus",
 });

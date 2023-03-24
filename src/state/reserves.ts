@@ -4,7 +4,7 @@ import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { attributes } from "@neverquest/state/attributes";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
-import { AttributeType, StorageKey } from "@neverquest/types/enums";
+import { AttributeType } from "@neverquest/types/enums";
 
 // SELECTORS
 
@@ -77,18 +77,18 @@ export const maximumStaminaTotal = selector({
 
 export const currentHealth = atom({
   default: maximumHealth,
-  effects: [handleLocalStorage<number>(StorageKey.CurrentHealth)],
-  key: StorageKey.CurrentHealth,
+  effects: [handleLocalStorage<number>({ key: "currentHealth" })],
+  key: "currentHealth",
 });
 
 export const currentStamina = atom({
   default: maximumStamina,
-  effects: [handleLocalStorage<number>(StorageKey.CurrentStamina)],
-  key: StorageKey.CurrentStamina,
+  effects: [handleLocalStorage<number>({ key: "currentStamina" })],
+  key: "currentStamina",
 });
 
 export const staminaDebuff = atom({
   default: 0,
-  effects: [handleLocalStorage<number>(StorageKey.StaminaDebuff)],
-  key: StorageKey.StaminaDebuff,
+  effects: [handleLocalStorage<number>({ key: "staminaDebuff" })],
+  key: "staminaDebuff",
 });

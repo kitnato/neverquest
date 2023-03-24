@@ -3,7 +3,6 @@ import { atom, selector, selectorFamily } from "recoil";
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { Armor, Inventory, Shield, Weapon } from "@neverquest/types";
-import { StorageKey } from "@neverquest/types/enums";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 
 // SELECTORS
@@ -91,24 +90,24 @@ export const weapon = selector({
 
 export const encumbranceMaximum = atom({
   default: 3,
-  effects: [handleLocalStorage<number>(StorageKey.EncumbranceMaximum)],
-  key: StorageKey.EncumbranceMaximum,
+  effects: [handleLocalStorage<number>({ key: "encumbranceMaximum" })],
+  key: "encumbranceMaximum",
 });
 
 export const hasKnapsack = atom({
   default: false,
-  effects: [handleLocalStorage<boolean>(StorageKey.HasKnapsack)],
-  key: StorageKey.HasKnapsack,
+  effects: [handleLocalStorage<boolean>({ key: "hasKnapsack" })],
+  key: "hasKnapsack",
 });
 
 export const inventory = atom<Inventory>({
   default: {},
-  effects: [handleLocalStorage<Inventory>(StorageKey.Inventory)],
-  key: StorageKey.Inventory,
+  effects: [handleLocalStorage<Inventory>({ key: "inventory" })],
+  key: "inventory",
 });
 
 export const isInventoryOpen = atom<boolean>({
   default: false,
-  effects: [handleLocalStorage<boolean>(StorageKey.isInventoryOpen)],
-  key: StorageKey.isInventoryOpen,
+  effects: [handleLocalStorage<boolean>({ key: "isInventoryOpen" })],
+  key: "isInventoryOpen",
 });

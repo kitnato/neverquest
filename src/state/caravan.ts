@@ -2,7 +2,7 @@ import { DefaultValue, atom, atomFamily, selectorFamily } from "recoil";
 
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { InventoryMerchant } from "@neverquest/types";
-import { CrewStatus, CrewType, StorageKey } from "@neverquest/types/enums";
+import { CrewStatus, CrewType } from "@neverquest/types/enums";
 
 interface CrewState {
   hireStatus: CrewStatus;
@@ -38,14 +38,14 @@ export const crew = selectorFamily<CrewState, CrewType>({
 
 export const crewActive = atom<CrewType | null>({
   default: null,
-  effects: [handleLocalStorage<CrewType | null>(StorageKey.CrewActive)],
-  key: StorageKey.CrewActive,
+  effects: [handleLocalStorage<CrewType | null>({ key: "crewActive" })],
+  key: "crewActive",
 });
 
 export const crewHirable = atom<CrewType[]>({
   default: [],
-  effects: [handleLocalStorage<CrewType[]>(StorageKey.CrewHirable)],
-  key: StorageKey.CrewHirable,
+  effects: [handleLocalStorage<CrewType[]>({ key: "crewHirable" })],
+  key: "crewHirable",
 });
 
 const crewMapping = atomFamily<CrewState, CrewType>({
@@ -53,18 +53,18 @@ const crewMapping = atomFamily<CrewState, CrewType>({
     hireStatus: CrewStatus.Unavailable,
     monologueProgress: 0,
   },
-  effects: (parameter) => [handleLocalStorage<CrewState>(`${StorageKey.CrewMapping}-${parameter}`)],
-  key: StorageKey.CrewMapping,
+  effects: (parameter) => [handleLocalStorage<CrewState>({ key: "crewMapping", parameter })],
+  key: "crewMapping",
 });
 
 export const hasBoughtFromMerchant = atom({
   default: false,
-  effects: [handleLocalStorage<boolean>(StorageKey.HasBoughtFromMerchant)],
-  key: StorageKey.HasBoughtFromMerchant,
+  effects: [handleLocalStorage<boolean>({ key: "hasBoughtFromMerchant" })],
+  key: "hasBoughtFromMerchant",
 });
 
 export const merchantInventory = atom<InventoryMerchant>({
   default: {},
-  effects: [handleLocalStorage<InventoryMerchant>(StorageKey.MerchantInventory)],
-  key: StorageKey.MerchantInventory,
+  effects: [handleLocalStorage<InventoryMerchant>({ key: "merchantInventory" })],
+  key: "merchantInventory",
 });

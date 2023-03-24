@@ -2,7 +2,7 @@ import { atomFamily, selectorFamily } from "recoil";
 
 import { MASTERIES } from "@neverquest/data/masteries";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { MasteryType, StorageKey } from "@neverquest/types/enums";
+import { MasteryType } from "@neverquest/types/enums";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 
 interface MasteryState {
@@ -17,10 +17,8 @@ export const masteries = atomFamily<MasteryState, MasteryType>({
     progress: 0,
     rank: 0,
   },
-  effects: (parameter) => [
-    handleLocalStorage<MasteryState>(`${StorageKey.Masteries}-${parameter}`),
-  ],
-  key: StorageKey.Masteries,
+  effects: (parameter) => [handleLocalStorage<MasteryState>({ key: "masteries", parameter })],
+  key: "masteries",
 });
 
 // SELECTORS

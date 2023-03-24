@@ -3,8 +3,8 @@ import { Button, FormControl, FormSelect, OverlayTrigger, Stack, Tooltip } from 
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { Coins } from "@neverquest/components/Resource/Coins";
-import { Scrap } from "@neverquest/components/Resource/Scrap";
+import { Coins } from "@neverquest/components/Resources/Coins";
+import { Scrap } from "@neverquest/components/Resources/Scrap";
 import { ICON_UNKNOWN, ICON_WEIGHT, LABEL_UNKNOWN } from "@neverquest/constants";
 import { WEAPON_ABILITY_NAME, WEAPON_SKILL_TYPE } from "@neverquest/data/gear";
 import { ReactComponent as IconAttackRate } from "@neverquest/icons/blade-fall.svg";

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Modal, Stack } from "react-bootstrap";
+import { Form, Modal, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { Gear } from "react-bootstrap-icons";
 import { useRecoilValue } from "recoil";
 
@@ -17,9 +17,13 @@ export function Settings() {
 
   const [isShowing, setIsShowing] = useState(false);
 
+  const settingsLabel = "Settings";
+
   return (
     <span>
-      <Gear onClick={() => setIsShowing(true)} style={{ cursor: "pointer" }} />
+      <OverlayTrigger overlay={<Tooltip>{settingsLabel}</Tooltip>} placement="bottom">
+        <Gear onClick={() => setIsShowing(true)} style={{ cursor: "pointer" }} />
+      </OverlayTrigger>
 
       <Modal onHide={() => setIsShowing(false)} show={isShowing}>
         <Modal.Header closeButton>

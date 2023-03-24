@@ -1,10 +1,10 @@
 import { Col, Row } from "react-bootstrap";
 
-import { Resource } from "@neverquest/components/Resource";
-import { Coins } from "@neverquest/components/Resource/Coins";
-import { Essence } from "@neverquest/components/Resource/Essence";
-import { Lootable } from "@neverquest/components/Resource/Lootable";
-import { Scrap } from "@neverquest/components/Resource/Scrap";
+import { Resource } from "@neverquest/components/Resources";
+import { Coins } from "@neverquest/components/Resources/Coins";
+import { Essence } from "@neverquest/components/Resources/Essence";
+import { Lootable } from "@neverquest/components/Resources/Lootable";
+import { Scrap } from "@neverquest/components/Resources/Scrap";
 import { isShowing } from "@neverquest/state/isShowing";
 import {
   coins,

@@ -1,7 +1,7 @@
 import { Card } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { ResourceDisplay } from "@neverquest/components/Resource/ResourceDisplay";
+import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";

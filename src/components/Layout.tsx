@@ -3,7 +3,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import { Character } from "@neverquest/components/Character";
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
-import { Control } from "@neverquest/components/Control";
+import { Control } from "@neverquest/components/Controls";
 import { Encounter } from "@neverquest/components/Encounter";
 import { Location } from "@neverquest/components/Location";
 import { Masteries } from "@neverquest/components/Masteries";

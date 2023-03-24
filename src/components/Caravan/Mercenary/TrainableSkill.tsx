@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { TrainSkillButton } from "@neverquest/components/Caravan/Mercenary/TrainSkillButton";
 import { SkillDisplay } from "@neverquest/components/Character/SkillDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { Coins } from "@neverquest/components/Resource/Coins";
+import { Coins } from "@neverquest/components/Resources/Coins";
 import { CLASS_FULL_WIDTH_JUSTIFIED, ICON_UNKNOWN, LABEL_UNKNOWN } from "@neverquest/constants";
 import { SKILLS } from "@neverquest/data/skills";
 import { characterLevel } from "@neverquest/state/attributes";

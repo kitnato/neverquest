@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal } from "react-bootstrap";
+import { Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { QuestionSquare } from "react-bootstrap-icons";
 
 import { LABEL_UNKNOWN } from "@neverquest/constants";
@@ -9,9 +9,13 @@ export function About() {
 
   const handleShow = (state: boolean) => setIsShowing(state);
 
+  const aboutLabel = "About";
+
   return (
     <span>
-      <QuestionSquare onClick={() => handleShow(true)} style={{ cursor: "pointer" }} />
+      <OverlayTrigger overlay={<Tooltip>{aboutLabel}</Tooltip>} placement="bottom">
+        <QuestionSquare onClick={() => handleShow(true)} style={{ cursor: "pointer" }} />
+      </OverlayTrigger>
 
       <Modal onHide={() => handleShow(false)} show={isShowing}>
         <Modal.Header closeButton>

@@ -1,12 +1,12 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { AttackButton } from "@neverquest/components/Control/AttackButton";
-import { AttributesButton } from "@neverquest/components/Control/AttributesButton";
-import { CollectLootButton } from "@neverquest/components/Control/CollectLootButton";
-import { InventoryButton } from "@neverquest/components/Control/InventoryButton";
-import { RetireButton } from "@neverquest/components/Control/RetireButton";
-import { TravelButton } from "@neverquest/components/Control/TravelButton";
+import { AttackButton } from "@neverquest/components/Controls/AttackButton";
+import { AttributesButton } from "@neverquest/components/Controls/AttributesButton";
+import { CollectLootButton } from "@neverquest/components/Controls/CollectLootButton";
+import { InventoryButton } from "@neverquest/components/Controls/InventoryButton";
+import { RetireButton } from "@neverquest/components/Controls/RetireButton";
+import { TravelButton } from "@neverquest/components/Controls/TravelButton";
 import { isGameOver } from "@neverquest/state/settings";
 
 export function Control() {

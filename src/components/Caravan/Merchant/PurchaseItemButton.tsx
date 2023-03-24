@@ -10,7 +10,7 @@ import { coins } from "@neverquest/state/resources";
 import { isTrinket } from "@neverquest/types/type-guards";
 import { UIVariant } from "@neverquest/types/ui";
 
-export function BuyItemButton({ id }: { id: string }) {
+export function PurchaseItemButton({ id }: { id: string }) {
   const coinsValue = useRecoilValue(coins);
   const [merchantInventoryValue, setMerchantInventory] = useRecoilState(merchantInventory);
   const setHasBoughtFromMerchant = useSetRecoilState(hasBoughtFromMerchant);
@@ -56,7 +56,7 @@ export function BuyItemButton({ id }: { id: string }) {
     >
       <span className="d-inline-block">
         <Button disabled={!isPurchasable} onClick={handlePurchase} variant={UIVariant.Outline}>
-          Buy
+          Purchase
         </Button>
       </span>
     </OverlayTrigger>

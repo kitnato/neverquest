@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { BuyItemButton } from "@neverquest/components/Caravan/Merchant/BuyItemButton";
+import { PurchaseItemButton } from "@neverquest/components/Caravan/Merchant/PurchaseItemButton";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { Coins } from "@neverquest/components/Resources/Coins";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
@@ -23,7 +23,7 @@ export function PurchasableItems({ inventoryIDs }: { inventoryIDs: string[] }) {
             <Stack direction="horizontal" gap={3}>
               <Coins tooltip="Price (coins)" value={coinPrice} />
 
-              <BuyItemButton id={id} />
+              <PurchaseItemButton id={id} />
             </Stack>
           </div>
         );

@@ -55,6 +55,14 @@ export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
     };
   })();
 
+  const handleAttack = () => {
+    if (areAttributesIncreasableValue && !isLevelStartedValue) {
+      setShowAttackConfirmation(true);
+    } else {
+      toggleAttack();
+    }
+  };
+
   return (
     <>
       <OverlayTrigger
@@ -82,13 +90,7 @@ export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
           <Button
             className={animation}
             disabled={isDisabled || isLevelCompletedValue}
-            onClick={() => {
-              if (areAttributesIncreasableValue && !isLevelStartedValue) {
-                setShowAttackConfirmation(true);
-              } else {
-                toggleAttack();
-              }
-            }}
+            onClick={handleAttack}
             variant={UIVariant.Outline}
           >
             <IconImage Icon={Icon} />

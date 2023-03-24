@@ -17,6 +17,11 @@ export function ConfirmationDialog({
   show: boolean;
   title: string;
 }) {
+  const handleConfirmation = () => {
+    onConfirm();
+    setHide();
+  };
+
   return (
     <Modal backdrop="static" onHide={setHide} show={show}>
       <Modal.Header closeButton>
@@ -26,13 +31,7 @@ export function ConfirmationDialog({
       <Modal.Body>{message}</Modal.Body>
 
       <Modal.Footer>
-        <Button
-          onClick={() => {
-            onConfirm();
-            setHide();
-          }}
-          variant={UIVariant.Outline}
-        >
+        <Button onClick={handleConfirmation} variant={UIVariant.Outline}>
           {confirmationLabel}
         </Button>
       </Modal.Footer>

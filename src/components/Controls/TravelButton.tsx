@@ -24,6 +24,14 @@ export function TravelButton({ isDisabled }: { isDisabled: boolean }) {
 
   const [showTravelConfirmation, setShowTravelConfirmation] = useState(false);
 
+  const handleTravel = () => {
+    if (!hasBoughtFromMerchantValue && !isWildernessValue && levelValue <= 3) {
+      setShowTravelConfirmation(true);
+    } else {
+      toggleLocation();
+    }
+  };
+
   if (!(hasLootedValue && isLevelCompletedValue) && isWildernessValue) {
     return null;
   }
@@ -56,13 +64,7 @@ export function TravelButton({ isDisabled }: { isDisabled: boolean }) {
                 : undefined
             }
             disabled={isDisabled}
-            onClick={() => {
-              if (!hasBoughtFromMerchantValue && !isWildernessValue && levelValue <= 3) {
-                setShowTravelConfirmation(true);
-              } else {
-                toggleLocation();
-              }
-            }}
+            onClick={handleTravel}
             variant={UIVariant.Outline}
           >
             <IconImage Icon={IconTravel} isFlipped={!isWildernessValue} />

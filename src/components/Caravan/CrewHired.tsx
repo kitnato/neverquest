@@ -23,7 +23,7 @@ export function CrewHired({ setActive, type }: { setActive: () => void; type: Cr
         <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
           <span>{`"${monologues[monologueProgress]}"`}</span>
 
-          <Button onClick={() => setActive()} variant={UIVariant.Outline}>
+          <Button onClick={setActive} variant={UIVariant.Outline}>
             {interaction}
           </Button>
         </div>

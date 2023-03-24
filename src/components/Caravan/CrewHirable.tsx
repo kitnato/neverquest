@@ -24,6 +24,14 @@ export function CrewHirable({ type }: { type: CrewType }) {
   const { coinPrice, description, name } = CREW[type];
   const isAffordable = coinPrice <= coinsValue;
 
+  const handleHire = () => {
+    setCrewMember((current) => ({
+      ...current,
+      hireStatus: CrewStatus.Hired,
+    }));
+    transactResources({ coinsDifference: -coinPrice });
+  };
+
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <IconDisplay contents={name} description={description} Icon={CREW_ICON} tooltip={name} />
@@ -37,17 +45,7 @@ export function CrewHirable({ type }: { type: CrewType }) {
           trigger={isAffordable ? [] : ["hover", "focus"]}
         >
           <span className="d-inline-block">
-            <Button
-              disabled={!isAffordable}
-              onClick={() => {
-                setCrewMember((current) => ({
-                  ...current,
-                  hireStatus: CrewStatus.Hired,
-                }));
-                transactResources({ coinsDifference: -coinPrice });
-              }}
-              variant={UIVariant.Outline}
-            >
+            <Button disabled={!isAffordable} onClick={handleHire} variant={UIVariant.Outline}>
               Hire
             </Button>
           </span>

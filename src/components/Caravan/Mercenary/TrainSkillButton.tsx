@@ -17,6 +17,11 @@ export function TrainSkillButton({ type }: { type: SkillType }) {
   const { coinPrice } = SKILLS[type];
   const isAffordable = coinPrice <= coinsValue;
 
+  const handleTrain = () => {
+    setSkill(true);
+    transactResources({ coinsDifference: -coinPrice });
+  };
+
   return (
     <OverlayTrigger
       overlay={<Tooltip>{!isAffordable && <>Not enough coins!</>}</Tooltip>}
@@ -24,14 +29,7 @@ export function TrainSkillButton({ type }: { type: SkillType }) {
       trigger={isAffordable ? [] : ["hover", "focus"]}
     >
       <span className="d-inline-block">
-        <Button
-          disabled={!isAffordable}
-          onClick={() => {
-            setSkill(true);
-            transactResources({ coinsDifference: -coinPrice });
-          }}
-          variant={UIVariant.Outline}
-        >
+        <Button disabled={!isAffordable} onClick={handleTrain} variant={UIVariant.Outline}>
           Train
         </Button>
       </span>

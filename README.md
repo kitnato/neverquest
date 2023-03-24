@@ -726,6 +726,7 @@ Meta progression. Grant bonuses when completed.
 ### Challenges
 
 - Parry, inflict bleed and stagger in one attack
+- Survive the first 4 levels without any gear equipped
 
 ### Combat quests
 

@@ -152,6 +152,7 @@ export enum StorageKey {
   Essence = "essence",
   EssenceLoot = "essenceLoot",
   FloatingTextQueues = "floatingTextQueues",
+  HasBoughtFromMerchant = "hasBoughtFromMerchant",
   HasKnapsack = "hasKnapsack",
   HealthRegenerationDuration = "HealthRegenerationDuration",
   Inventory = "inventory",

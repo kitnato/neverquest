@@ -57,6 +57,12 @@ const crewMapping = atomFamily<CrewState, CrewType>({
   key: StorageKey.CrewMapping,
 });
 
+export const hasBoughtFromMerchant = atom({
+  default: false,
+  effects: [handleLocalStorage<boolean>(StorageKey.HasBoughtFromMerchant)],
+  key: StorageKey.HasBoughtFromMerchant,
+});
+
 export const merchantInventory = atom<InventoryMerchant>({
   default: {},
   effects: [handleLocalStorage<InventoryMerchant>(StorageKey.MerchantInventory)],

@@ -1,10 +1,10 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { useAcquireGear } from "@neverquest/hooks/actions/useAcquireGear";
 import { useAcquireTrinket } from "@neverquest/hooks/actions/useAcquireTrinket";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
-import { merchantInventory } from "@neverquest/state/caravan";
+import { hasBoughtFromMerchant, merchantInventory } from "@neverquest/state/caravan";
 import { canFit } from "@neverquest/state/inventory";
 import { coins } from "@neverquest/state/resources";
 import { isTrinket } from "@neverquest/types/type-guards";
@@ -13,6 +13,7 @@ import { UIVariant } from "@neverquest/types/ui";
 export function BuyItemButton({ id }: { id: string }) {
   const coinsValue = useRecoilValue(coins);
   const [merchantInventoryValue, setMerchantInventory] = useRecoilState(merchantInventory);
+  const setHasBoughtFromMerchant = useSetRecoilState(hasBoughtFromMerchant);
 
   const acquireTrinket = useAcquireTrinket();
   const acquireGear = useAcquireGear();
@@ -38,6 +39,7 @@ export function BuyItemButton({ id }: { id: string }) {
         return newMerchantInventory;
       });
       transactResources({ coinsDifference: -coinPrice });
+      setHasBoughtFromMerchant(true);
     }
   };
 

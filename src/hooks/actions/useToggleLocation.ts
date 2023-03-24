@@ -2,6 +2,7 @@ import { useRecoilCallback } from "recoil";
 
 import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGenerateMerchantInventory";
 import { useIncreaseLevel } from "@neverquest/hooks/actions/useIncreaseLevel";
+import { hasBoughtFromMerchant } from "@neverquest/state/caravan";
 import {
   isLevelCompleted,
   isLevelStarted,
@@ -35,6 +36,7 @@ export function useToggleLocation() {
           }
 
           set(mode, LocationType.Wilderness);
+          set(hasBoughtFromMerchant, false);
         }
       },
     [generateMerchantInventory, increaseLevel]

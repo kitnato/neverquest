@@ -8,9 +8,9 @@ import { Encounter } from "@neverquest/components/Encounter";
 import { Location } from "@neverquest/components/Location";
 import { Masteries } from "@neverquest/components/Masteries";
 import { WildernessStatus } from "@neverquest/components/Wilderness/WildernessStatus";
+import { isGameOver } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
 import { useReset } from "@neverquest/state/SeedContext";
-import { isGameOver } from "@neverquest/state/settings";
 import { ShowingType } from "@neverquest/types/enums";
 
 export function Layout() {

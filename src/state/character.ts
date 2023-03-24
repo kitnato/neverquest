@@ -35,6 +35,12 @@ export const isAttacking = atom({
   key: "isAttacking",
 });
 
+export const isGameOver = atom({
+  default: false,
+  effects: [handleLocalStorage<boolean>({ key: "isGameOver" })],
+  key: "isGameOver",
+});
+
 export const healthRegenerationDuration = atom({
   default: 0,
   effects: [handleLocalStorage<number>({ key: "healthRegenerationDuration" })],

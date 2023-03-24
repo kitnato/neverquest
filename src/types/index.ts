@@ -106,6 +106,7 @@ export type StorageKey =
   | "isNSFW"
   | "isShowing"
   | "isShowingDamagePerSecond"
+  | "confirmControlWarnings"
   | "level"
   | "lootingDuration"
   | "lootingRate"

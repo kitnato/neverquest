@@ -7,6 +7,7 @@ import { SettingsSwitch } from "@neverquest/components/Header/SettingsSwitch";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import {
   autoEquip,
+  confirmControlWarnings,
   isNSFW,
   isShowingDamagePerSecond,
   lowHealthWarning,
@@ -40,7 +41,12 @@ export function Settings() {
                 label="Show damage per second (DPS)"
               />
 
-              <SettingsSwitch atom={lowHealthWarning} label="Show low-health warning" />
+              <SettingsSwitch atom={lowHealthWarning} label="Low-health warning" />
+
+              <SettingsSwitch
+                atom={confirmControlWarnings}
+                label="Attack & travel warning confirmations"
+              />
 
               <SettingsSwitch
                 atom={autoEquip}

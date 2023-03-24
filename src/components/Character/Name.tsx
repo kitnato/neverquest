@@ -6,8 +6,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LABEL_UNKNOWN } from "@neverquest/constants";
 import { ReactComponent as IconAlive } from "@neverquest/icons/domino-mask.svg";
 import { ReactComponent as IconDead } from "@neverquest/icons/skull-crossed-bones.svg";
-import { name } from "@neverquest/state/character";
-import { isGameOver } from "@neverquest/state/settings";
+import { isGameOver, name } from "@neverquest/state/character";
 
 export function Name() {
   const isGameOverValue = useRecoilValue(isGameOver);

@@ -10,10 +10,12 @@ import { ReactComponent as IconTravel } from "@neverquest/icons/journey.svg";
 import { hasBoughtFromMerchant } from "@neverquest/state/caravan";
 import { isLevelCompleted, isWilderness, level } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
+import { confirmControlWarnings } from "@neverquest/state/settings";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function TravelButton({ isDisabled }: { isDisabled: boolean }) {
+  const confirmControlWarningsValue = useRecoilValue(confirmControlWarnings);
   const hasBoughtFromMerchantValue = useRecoilValue(hasBoughtFromMerchant);
   const hasLootedValue = useRecoilValue(hasLooted);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
@@ -25,7 +27,12 @@ export function TravelButton({ isDisabled }: { isDisabled: boolean }) {
   const [showTravelConfirmation, setShowTravelConfirmation] = useState(false);
 
   const handleTravel = () => {
-    if (!hasBoughtFromMerchantValue && !isWildernessValue && levelValue <= 3) {
+    if (
+      confirmControlWarningsValue &&
+      !hasBoughtFromMerchantValue &&
+      !isWildernessValue &&
+      levelValue <= 3
+    ) {
       setShowTravelConfirmation(true);
     } else {
       toggleLocation();

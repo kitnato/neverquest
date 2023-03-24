@@ -1,10 +1,9 @@
 import { useRecoilCallback } from "recoil";
 
-import { healthRegenerationDuration } from "@neverquest/state/character";
+import { healthRegenerationDuration, isGameOver } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { currentHealth, maximumHealth } from "@neverquest/state/reserves";
-import { isGameOver } from "@neverquest/state/settings";
 import { healthRegenerationRate } from "@neverquest/state/statistics";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
 import { DeltaReserve, FloatingTextVariant } from "@neverquest/types/ui";

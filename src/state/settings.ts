@@ -10,11 +10,10 @@ export const autoEquip = atom({
   key: "autoEquip",
 });
 
-// TODO - move.
-export const isGameOver = atom({
-  default: false,
-  effects: [handleLocalStorage<boolean>({ key: "isGameOver" })],
-  key: "isGameOver",
+export const confirmControlWarnings = atom({
+  default: true,
+  effects: [handleLocalStorage<boolean>({ isSetting: true, key: "confirmControlWarnings" })],
+  key: "confirmControlWarnings",
 });
 
 export const isNSFW = atom({

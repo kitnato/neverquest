@@ -12,13 +12,14 @@ import { areAttributesIncreasable } from "@neverquest/state/attributes";
 import { isAttacking } from "@neverquest/state/character";
 import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
 import { isHealthLow } from "@neverquest/state/reserves";
-import { lowHealthWarning } from "@neverquest/state/settings";
+import { confirmControlWarnings, lowHealthWarning } from "@neverquest/state/settings";
 import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
-  const isAttackingValue = useRecoilValue(isAttacking);
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
+  const confirmControlWarningsValue = useRecoilValue(confirmControlWarnings);
+  const isAttackingValue = useRecoilValue(isAttacking);
   const isHealthLowValue = useRecoilValue(isHealthLow);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const isLevelStartedValue = useRecoilValue(isLevelStarted);
@@ -56,7 +57,7 @@ export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
   })();
 
   const handleAttack = () => {
-    if (areAttributesIncreasableValue && !isLevelStartedValue) {
+    if (areAttributesIncreasableValue && confirmControlWarningsValue && !isLevelStartedValue) {
       setShowAttackConfirmation(true);
     } else {
       toggleAttack();

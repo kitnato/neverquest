@@ -25,8 +25,8 @@ export enum CrewStatus {
 }
 
 export enum CrewType {
+  Alchemist,
   Blacksmith,
-  Cook,
   Medic,
   Mercenary,
   Merchant,

@@ -22,8 +22,8 @@ export function PurchaseItemButton({ id }: { id: string }) {
   const { item } = merchantInventoryValue[id];
   const { coinPrice, weight } = item;
   const isAffordable = coinPrice <= coinsValue;
-  const isFitting = useRecoilValue(canFit(weight));
-  const isPurchasable = isAffordable && isFitting;
+  const canFitValue = useRecoilValue(canFit(weight));
+  const isPurchasable = isAffordable && canFitValue;
 
   const handlePurchase = () => {
     const isReceived = isTrinket(item)
@@ -48,7 +48,7 @@ export function PurchaseItemButton({ id }: { id: string }) {
       overlay={
         <Tooltip>
           {!isAffordable && <div>Not enough coins!</div>}
-          {!isFitting && <div>Over-encumbered!</div>}
+          {!canFitValue && <div>Over-encumbered!</div>}
         </Tooltip>
       }
       placement="top"

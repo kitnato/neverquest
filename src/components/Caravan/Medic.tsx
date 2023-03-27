@@ -1,4 +1,4 @@
 // TODO
 export function Medic() {
-  return <></>;
+  return null;
 }

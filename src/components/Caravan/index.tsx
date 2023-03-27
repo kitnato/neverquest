@@ -2,8 +2,8 @@ import { FunctionComponent, useState } from "react";
 import { Card, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
+import { Alchemist } from "@neverquest/components/Caravan/Alchemist";
 import { Blacksmith } from "@neverquest/components/Caravan/Blacksmith";
-import { Cook } from "@neverquest/components/Caravan/Cook";
 import { CrewHirable } from "@neverquest/components/Caravan/CrewHirable";
 import { CrewHired } from "@neverquest/components/Caravan/CrewHired";
 import { Medic } from "@neverquest/components/Caravan/Medic";
@@ -26,16 +26,12 @@ export function Caravan() {
   const [isScreenShowing, setScreenShowing] = useState(false);
 
   const ActiveMemberComponent: FunctionComponent = (() => {
-    if (crewActiveValue === null) {
-      return () => null;
-    }
-
     switch (crewActiveValue) {
+      case CrewType.Alchemist: {
+        return Alchemist;
+      }
       case CrewType.Blacksmith: {
         return Blacksmith;
-      }
-      case CrewType.Cook: {
-        return Cook;
       }
       case CrewType.Medic: {
         return Medic;

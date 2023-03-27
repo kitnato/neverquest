@@ -3,8 +3,17 @@ import { CrewMember } from "@neverquest/types";
 import { CrewType } from "@neverquest/types/enums";
 
 export const CREW: Record<CrewType, CrewMember> = {
+  // TODO
+  [CrewType.Alchemist]: {
+    coinPrice: 0,
+    description: ".",
+    hirableLevel: 99,
+    interaction: "Transmute",
+    monologues: [""],
+    name: "Alchemist",
+  },
   [CrewType.Blacksmith]: {
-    coinPrice: 35,
+    coinPrice: 25,
     description: "Crafts superior gear.",
     hirableLevel: 5,
     interaction: "Craft",
@@ -12,26 +21,18 @@ export const CREW: Record<CrewType, CrewMember> = {
     name: "Blacksmith",
   },
   // TODO
-  [CrewType.Cook]: {
-    coinPrice: 0,
-    description: "Cooks delicious meals that revitalize.",
-    hirableLevel: 99,
-    interaction: "Trade",
-    monologues: [""],
-    name: "Cook",
-  },
   [CrewType.Medic]: {
     coinPrice: 0,
-    description: "Stems wounds and rescues from certain death.",
+    description: "Stems wounds and sells first aid kits.",
     hirableLevel: 99,
-    interaction: "Trade",
+    interaction: "Heal",
     monologues: [""],
     name: "Medic",
   },
   [CrewType.Mercenary]: {
-    coinPrice: 25,
+    coinPrice: 50,
     description: "Trains new skills and attributes.",
-    hirableLevel: 5,
+    hirableLevel: 8,
     interaction: "Train",
     monologues: ["Perhaps I can teach you something."],
     name: "Mercenary",
@@ -52,9 +53,9 @@ export const CREW: Record<CrewType, CrewMember> = {
   },
   // TODO
   [CrewType.Tailor]: {
-    coinPrice: 0,
-    description: "",
-    hirableLevel: 99,
+    coinPrice: 40,
+    description: "Expands inventory space.",
+    hirableLevel: 5,
     interaction: "Upgrade",
     monologues: ["Allow me to deepen your pockets."],
     name: "Tailor",
@@ -69,7 +70,7 @@ export const CREW_ORDER = [
   CrewType.Merchant,
   CrewType.Mercenary,
   CrewType.Blacksmith,
-  CrewType.Cook,
-  CrewType.Medic,
   CrewType.Tailor,
+  CrewType.Medic,
+  CrewType.Alchemist,
 ];

@@ -21,6 +21,8 @@ export const DEFAULT_DELTA_DISPLAY: DeltaDisplay = {
   value: "",
 };
 
+export const ENCUMBRANCE = 3;
+
 export const ICON_INLAY_SIZE = 16;
 
 export const ICON_PLACEHOLDER = IconPlaceholder;

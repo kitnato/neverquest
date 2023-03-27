@@ -7,6 +7,7 @@ import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery
 import { WeaponClass } from "@neverquest/LOCRA/types";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
+import { isShowing } from "@neverquest/state/isShowing";
 import {
   monsterBleedingDuration,
   monsterElement,
@@ -21,7 +22,7 @@ import {
   damageTotal,
   staggerDuration,
 } from "@neverquest/state/statistics";
-import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
+import { DeltaType, MasteryType, ShowingType, SkillType } from "@neverquest/types/enums";
 import {
   AnimationSpeed,
   AnimationType,
@@ -42,6 +43,10 @@ export function useAttack() {
         const get = getSnapshotGetter(snapshot);
 
         const { abilityChance, staminaCost, weaponClass } = get(weapon);
+
+        if (!get(isShowing(ShowingType.Statistics))) {
+          set(isShowing(ShowingType.Statistics), true);
+        }
 
         if (get(canAttackOrParry)) {
           const hasInflictedCritical =

@@ -113,6 +113,7 @@ export enum ShowingType {
   Scrap,
   Shield,
   Stamina,
+  Statistics,
   Weapon,
   WildernessStatus,
 }

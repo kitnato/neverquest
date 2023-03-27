@@ -30,7 +30,6 @@ export function IconDisplay({
       className={isAnimated ? getAnimationClass({ type: AnimationType.FlipInX }) : ""}
       direction="horizontal"
       gap={isSpaced ? 5 : 3}
-      style={{ whiteSpace: "nowrap" }}
     >
       <IconImage
         Icon={Icon}

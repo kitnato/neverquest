@@ -42,7 +42,7 @@ export function useChangeHealth() {
           newHealth = maximumHealthValue;
         }
 
-        if (newHealth < maximumHealthValue) {
+        if (newHealth < maximumHealthValue && get(healthRegenerationDuration) === 0) {
           set(healthRegenerationDuration, get(healthRegenerationRate));
         }
 

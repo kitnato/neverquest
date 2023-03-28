@@ -1,13 +1,13 @@
-import { ShieldType, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
-import { ArmorClass, SkillType, WeaponGrip } from "@neverquest/types/enums";
+import { ArmorClass, ShieldType, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
+import { SkillType, WeaponGrip } from "@neverquest/types/enums";
 import { SVGIcon } from "@neverquest/types/props";
 
 export type Armor = GearBase & {
   armorClass?: ArmorClass;
-  deflectionChance?: number;
-  penalty?: number;
+  deflectionChance: number;
+  dodgeChanceModifier: number;
   protection: number;
-  staminaCost?: number;
+  staminaCost: number;
 };
 
 export interface AttributeOrMastery {

@@ -13,17 +13,11 @@ import { armor } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { dodgeChance, dodgeChanceTotal } from "@neverquest/state/statistics";
-import {
-  ArmorClass,
-  AttributeType,
-  DeltaType,
-  ShowingType,
-  SkillType,
-} from "@neverquest/types/enums";
+import { AttributeType, DeltaType, ShowingType, SkillType } from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function DodgeChance() {
-  const { armorClass, staminaCost } = useRecoilValue(armor);
+  const { dodgeChanceModifier, staminaCost } = useRecoilValue(armor);
   const dodgeChanceValue = useRecoilValue(dodgeChance);
   const dodgeChanceTotalValue = useRecoilValue(dodgeChanceTotal);
   const isShowingDodgeChanceDetails = useRecoilValue(isShowing(ShowingType.DodgeChanceDetails));
@@ -59,21 +53,19 @@ export function DodgeChance() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Penalty from armor:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Penalties from armor:</td>
 
                       <td>
                         {(() => {
-                          switch (armorClass) {
-                            case ArmorClass.Plate: {
-                              return "Cannot dodge";
-                            }
-                            case ArmorClass.Reinforced: {
-                              return `${staminaCost || 0} stamina cost`;
-                            }
-                            default: {
-                              return "None";
-                            }
+                          if (staminaCost) {
+                            return `${staminaCost} stamina cost\n`;
                           }
+
+                          if (dodgeChanceModifier) {
+                            return `${formatPercentage(dodgeChanceModifier)} dodge chance\n`;
+                          }
+
+                          return "None";
                         })()}
                       </td>
                     </tr>

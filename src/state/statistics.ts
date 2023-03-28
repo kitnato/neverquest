@@ -152,10 +152,10 @@ export const dodgeChance = selector({
 
 export const dodgeChanceTotal = selector({
   get: ({ get }) => {
-    const { penalty } = get(armor);
+    const { dodgeChanceModifier } = get(armor);
     const total = get(dodgeChance);
 
-    return penalty ? total - total * penalty : total;
+    return total + total * dodgeChanceModifier;
   },
   key: "dodgeChanceTotal",
 });

@@ -19,7 +19,7 @@ export const canBlock = selector({
 });
 
 export const canDodge = selector({
-  get: ({ get }) => get(currentStamina) >= (get(armor).staminaCost || 0),
+  get: ({ get }) => get(currentStamina) >= get(armor).staminaCost,
   key: "canDodge",
 });
 

@@ -28,6 +28,8 @@ export function useToggleEquipGear() {
         }
 
         if (isArmor(item)) {
+          const { deflectionChance, dodgeChanceModifier, staminaCost } = item;
+
           if (!get(isShowing(ShowingType.Armor))) {
             set(isShowing(ShowingType.Armor), true);
           }
@@ -36,13 +38,13 @@ export function useToggleEquipGear() {
             set(isShowing(ShowingType.Protection), true);
           }
 
-          if (!get(isShowing(ShowingType.Deflection)) && item.deflectionChance) {
+          if (!get(isShowing(ShowingType.Deflection)) && deflectionChance) {
             set(isShowing(ShowingType.Deflection), true);
           }
 
           if (
             !get(isShowing(ShowingType.DodgeChanceDetails)) &&
-            (item.penalty || item.staminaCost)
+            (dodgeChanceModifier || staminaCost)
           ) {
             set(isShowing(ShowingType.DodgeChanceDetails), true);
           }

@@ -1,9 +1,3 @@
-export enum ArmorClass {
-  Hide,
-  Plate,
-  Reinforced,
-}
-
 export enum AttributeType {
   AttackRate,
   CriticalChance,

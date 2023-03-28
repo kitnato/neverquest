@@ -1,6 +1,5 @@
 import { TRINKET_COMPASS, TRINKET_HEARTHSTONE, TRINKET_KNAPSACK } from "@neverquest/data/trinkets";
-import { ShieldType, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
-import { ArmorClass } from "@neverquest/types/enums";
+import { ArmorClass, ShieldType, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
 
 export const MERCHANT_OFFERS = [
   [

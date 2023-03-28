@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC, ICON_INLAY_SIZE, LABEL_UNKNOWN } from "@neverquest/constants";
-import { ARMOR_CLASS_ICONS, ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
+import { ARMOR_CLASS_ICONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { skills } from "@neverquest/state/skills";
 import { Armor } from "@neverquest/types";
@@ -15,7 +15,15 @@ export function ArmorName({ armor, placement = "top" }: { armor: Armor; placemen
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const armorsSkillValue = useRecoilValue(skills(SkillType.Armors));
 
-  const { armorClass, deflectionChance, name, penalty, protection, staminaCost, weight } = armor;
+  const {
+    armorClass,
+    deflectionChance,
+    dodgeChanceModifier,
+    name,
+    protection,
+    staminaCost,
+    weight,
+  } = armor;
   const Icon = armorClass ? ARMOR_CLASS_ICONS[armorClass] : () => null;
 
   return (
@@ -40,7 +48,7 @@ export function ArmorName({ armor, placement = "top" }: { armor: Armor; placemen
                     <td>
                       <Icon width={ICON_INLAY_SIZE} />
                       &nbsp;
-                      {capitalizeAll(armorClass ? ARMOR_SPECIFICATIONS[armorClass].name : "None")}
+                      {capitalizeAll(armorClass ?? "None")}
                     </td>
                   </tr>
 
@@ -60,11 +68,11 @@ export function ArmorName({ armor, placement = "top" }: { armor: Armor; placemen
                     </tr>
                   )}
 
-                  {penalty && (
+                  {dodgeChanceModifier && (
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Penalty to dodge chance:</td>
 
-                      <td>{formatPercentage(penalty)}</td>
+                      <td>{formatPercentage(dodgeChanceModifier)}</td>
                     </tr>
                   )}
                 </>

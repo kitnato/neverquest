@@ -2,13 +2,14 @@ import { ARMOR_SPECIFICATIONS, SHIELD_SPECIFICATIONS } from "@neverquest/data/ge
 import { LOCRA } from "@neverquest/LOCRA";
 import {
   AffixTag,
+  ArmorClass,
   ArtifactType,
   ShieldType,
   WeaponClass,
   WeaponType,
 } from "@neverquest/LOCRA/types";
 import { Armor, Shield, Weapon } from "@neverquest/types";
-import { ArmorClass, WeaponGrip } from "@neverquest/types/enums";
+import { WeaponGrip } from "@neverquest/types/enums";
 import { getFromRange, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function generateArmor({
@@ -30,9 +31,9 @@ export function generateArmor({
 }): Armor {
   const {
     deflectionChanceModifier,
-    penalty,
+    dodgeChanceModifier,
+    dodgeCostModifier,
     protectionModifier,
-    staminaCostModifier,
     weightModifier,
   } = ARMOR_SPECIFICATIONS[armorClass];
   const growthFactor = getGrowthSigmoid(level);
@@ -40,9 +41,8 @@ export function generateArmor({
   return {
     armorClass,
     coinPrice: Math.round(600 * growthFactor),
-    deflectionChance: deflectionChanceModifier
-      ? deflectionChanceModifier * (0.1 + level / 5)
-      : undefined,
+    deflectionChance: (0.05 + 0.6 * growthFactor) * deflectionChanceModifier,
+    dodgeChanceModifier,
     name:
       name ||
       LOCRA.generateArtifact({
@@ -54,11 +54,10 @@ export function generateArmor({
         },
         tags,
       }),
-    penalty,
-    protection: 2 + Math.round(300 * growthFactor) * protectionModifier,
-    scrapPrice: 3 + Math.round(1500 * growthFactor),
-    staminaCost: (1 + Math.round(10 * growthFactor)) * staminaCostModifier,
-    weight: (1 + Math.round(10 * growthFactor)) * weightModifier,
+    protection: Math.round(300 * growthFactor * protectionModifier),
+    scrapPrice: Math.round(3500 * growthFactor),
+    staminaCost: Math.ceil(10 * growthFactor * dodgeCostModifier),
+    weight: Math.ceil(20 * growthFactor * weightModifier),
   };
 }
 
@@ -106,11 +105,11 @@ export function generateShield({
         },
         tags,
       }),
-    scrapPrice: 5 + Math.round(2000 * growthFactor),
-    staggerChance: (0.1 + Math.round(0.9 * growthFactor)) * staggerModifier,
-    staminaCost: (1 + Math.round(20 * growthFactor)) * staminaCostModifier,
+    scrapPrice: Math.round(3000 * growthFactor),
+    staggerChance: (0.1 + 0.9 * growthFactor) * staggerModifier,
+    staminaCost: Math.ceil(20 * growthFactor * staminaCostModifier),
     type,
-    weight: (1 + Math.round(10 * growthFactor)) * weightModifier,
+    weight: Math.ceil(15 * growthFactor * weightModifier),
   };
 }
 
@@ -131,8 +130,6 @@ export function generateWeapon({
   type: WeaponType;
   weaponClass: WeaponClass;
 }): Weapon {
-  // TODO - create a WEAPON_SPECIFICATIONS?
-  const abilityChanceModifier = 1 + level / 2;
   const growthFactor = getGrowthSigmoid(level);
   const ranges = {
     damage: {
@@ -163,24 +160,24 @@ export function generateWeapon({
     }),
     ranges,
     rate: getFromRange({ ...ranges.rate }),
-    scrapPrice: 3 + Math.round(1000 * growthFactor),
-    staminaCost: 1 + Math.round(25 * growthFactor),
+    scrapPrice: Math.round(2500 * growthFactor),
+    staminaCost: Math.ceil(25 * growthFactor),
     type,
     weaponClass,
-    weight: 1 + Math.round(10 * growthFactor),
+    weight: Math.ceil(15 * growthFactor),
   };
 
   switch (weaponClass) {
     case WeaponClass.Blunt: {
-      weapon.abilityChance = abilityChanceModifier * (0.1 + Math.round(0.8 * growthFactor));
+      weapon.abilityChance = 0.1 + Math.round(0.7 * growthFactor);
       break;
     }
     case WeaponClass.Piercing: {
-      weapon.abilityChance = abilityChanceModifier * (0.2 + Math.round(0.7 * growthFactor));
+      weapon.abilityChance = 0.2 + Math.round(0.7 * growthFactor);
       break;
     }
     case WeaponClass.Slashing: {
-      weapon.abilityChance = abilityChanceModifier * (0.15 + Math.round(0.85 * growthFactor));
+      weapon.abilityChance = 0.15 + Math.round(0.6 * growthFactor);
       break;
     }
   }

@@ -80,7 +80,7 @@ export function useDefend() {
           } else {
             set(deltas(DeltaType.Health), {
               color: FloatingTextVariant.Neutral,
-              value: `CANNOT DODGE (${get(armor).staminaCost || 0})`,
+              value: `CANNOT DODGE (${get(armor).staminaCost})`,
             });
           }
         }

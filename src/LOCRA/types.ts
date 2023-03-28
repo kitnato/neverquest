@@ -9,6 +9,12 @@ export enum AffixType {
   Suffix = "suffix",
 }
 
+export enum ArmorClass {
+  Hide = "hide",
+  Plate = "plate",
+  Reinforced = "reinforced",
+}
+
 export interface ArmorQuery {
   subtype?: ArmorType;
   type: ArtifactType.Armor;

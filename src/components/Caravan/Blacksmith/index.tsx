@@ -46,10 +46,10 @@ export function Blacksmith() {
         </Nav>
 
         <Tab.Content>
-          {DATA_TABS.map(({ Component, key, label }) => (
+          {DATA_TABS.map(({ Component, key }) => (
             <Tab.Pane eventKey={key} key={key}>
               <Stack gap={3}>
-                <h6>Craft {label.toLowerCase()}</h6>
+                <hr />
 
                 <Component />
               </Stack>

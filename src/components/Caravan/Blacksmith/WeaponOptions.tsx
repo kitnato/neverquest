@@ -96,7 +96,9 @@ export function WeaponOptions() {
               value={weaponClass}
             >
               <option value={WeaponClass.Blunt}>{capitalizeAll(WeaponClass.Blunt)}</option>
+
               <option value={WeaponClass.Piercing}>{capitalizeAll(WeaponClass.Piercing)}</option>
+
               <option value={WeaponClass.Slashing}>{capitalizeAll(WeaponClass.Slashing)}</option>
             </FormSelect>
           }

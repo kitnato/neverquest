@@ -56,8 +56,8 @@ export function generateArmor({
       }),
     protection: Math.round(300 * growthFactor * protectionModifier),
     scrapPrice: Math.round(3500 * growthFactor),
-    staminaCost: Math.ceil(10 * growthFactor * dodgeCostModifier),
-    weight: Math.ceil(20 * growthFactor * weightModifier),
+    staminaCost: Math.ceil(30 * growthFactor * dodgeCostModifier),
+    weight: Math.ceil(50 * growthFactor * weightModifier),
   };
 }
 
@@ -107,9 +107,9 @@ export function generateShield({
       }),
     scrapPrice: Math.round(3000 * growthFactor),
     staggerChance: (0.1 + 0.9 * growthFactor) * staggerModifier,
-    staminaCost: Math.ceil(20 * growthFactor * staminaCostModifier),
+    staminaCost: Math.ceil(40 * growthFactor * staminaCostModifier),
     type,
-    weight: Math.ceil(15 * growthFactor * weightModifier),
+    weight: Math.ceil(40 * growthFactor * weightModifier),
   };
 }
 
@@ -161,10 +161,10 @@ export function generateWeapon({
     ranges,
     rate: getFromRange({ ...ranges.rate }),
     scrapPrice: Math.round(2500 * growthFactor),
-    staminaCost: Math.ceil(25 * growthFactor),
+    staminaCost: Math.ceil(50 * growthFactor),
     type,
     weaponClass,
-    weight: Math.ceil(15 * growthFactor),
+    weight: Math.ceil(30 * growthFactor),
   };
 
   switch (weaponClass) {

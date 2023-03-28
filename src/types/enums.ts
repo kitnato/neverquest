@@ -102,6 +102,7 @@ export enum ShowingType {
   Essence,
   GameOver,
   Loot,
+  MonsterDamage,
   Protection,
   Recovery,
   Scrap,
@@ -109,6 +110,7 @@ export enum ShowingType {
   Stamina,
   Statistics,
   Weapon,
+  WeaponClass,
   WildernessStatus,
 }
 

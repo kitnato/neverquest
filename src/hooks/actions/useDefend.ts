@@ -61,6 +61,10 @@ export function useDefend() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
+        if (!get(isShowing(ShowingType.MonsterDamage))) {
+          set(isShowing(ShowingType.MonsterDamage), true);
+        }
+
         animateElement({
           element: get(statusElement),
           speed: AnimationSpeed.Fast,

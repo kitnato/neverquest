@@ -1,5 +1,5 @@
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Coins } from "@neverquest/components/Resources/Coins";
@@ -7,13 +7,15 @@ import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
 import { CREW, CREW_ICON } from "@neverquest/data/caravan";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { crew } from "@neverquest/state/caravan";
+import { isShowing } from "@neverquest/state/isShowing";
 import { coins } from "@neverquest/state/resources";
-import { CrewStatus, CrewType } from "@neverquest/types/enums";
+import { CrewStatus, CrewType, ShowingType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 
 export function CrewHirable({ type }: { type: CrewType }) {
   const coinsValue = useRecoilValue(coins);
   const [{ hireStatus }, setCrewMember] = useRecoilState(crew(type));
+  const setIsShowingWeaponClass = useSetRecoilState(isShowing(ShowingType.WeaponClass));
 
   const transactResources = useTransactResources();
 
@@ -30,6 +32,10 @@ export function CrewHirable({ type }: { type: CrewType }) {
       hireStatus: CrewStatus.Hired,
     }));
     transactResources({ coinsDifference: -coinPrice });
+
+    if (type === CrewType.Blacksmith) {
+      setIsShowingWeaponClass(true);
+    }
   };
 
   return (

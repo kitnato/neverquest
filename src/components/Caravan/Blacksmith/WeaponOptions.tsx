@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Button, FormControl, FormSelect, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
+import { FormControl, FormSelect, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGear";
+import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { Coins } from "@neverquest/components/Resources/Coins";
-import { Scrap } from "@neverquest/components/Resources/Scrap";
 import { ICON_UNKNOWN, ICON_WEIGHT, LABEL_UNKNOWN } from "@neverquest/constants";
 import { WEAPON_ABILITY_NAME, WEAPON_SKILL_TYPE } from "@neverquest/data/gear";
 import { ReactComponent as IconAttackRate } from "@neverquest/icons/blade-fall.svg";
@@ -13,11 +13,10 @@ import { ReactComponent as IconStaminaCost } from "@neverquest/icons/ink-swirl.s
 import { ReactComponent as IconDamage } from "@neverquest/icons/pointy-sword.svg";
 import { ReactComponent as IconLevel } from "@neverquest/icons/private-first-class.svg";
 import { AffixTag, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
+import { blacksmithInventory } from "@neverquest/state/caravan";
 import { level } from "@neverquest/state/encounter";
-import { coins, scrap } from "@neverquest/state/resources";
 import { isNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
-import { UIVariant } from "@neverquest/types/ui";
 import {
   capitalizeAll,
   formatMilliseconds,
@@ -26,17 +25,16 @@ import {
 import { generateWeapon } from "@neverquest/utilities/generators";
 
 export function WeaponOptions() {
+  const { weapon: craftedWeapon } = useRecoilValue(blacksmithInventory);
   const isNSFWValue = useRecoilValue(isNSFW);
   const levelValue = useRecoilValue(level);
-  const coinsValue = useRecoilValue(coins);
-  const scrapValue = useRecoilValue(scrap);
 
   const [weaponClass, setWeaponClass] = useState(WeaponClass.Blunt);
   const [weaponLevel, setWeaponLevel] = useState(levelValue);
 
   const skillValue = useRecoilValue(skills(WEAPON_SKILL_TYPE[weaponClass]));
 
-  const { abilityChance, coinPrice, ranges, scrapPrice, staminaCost, weight } = generateWeapon({
+  const weapon = generateWeapon({
     hasPrefix: true,
     hasSuffix: true,
     isNSFW: isNSFWValue,
@@ -50,14 +48,8 @@ export function WeaponOptions() {
     type: WeaponType.Melee,
     weaponClass,
   });
-  const hasCoins = coinPrice <= coinsValue;
-  const hasScrap = scrapPrice <= scrapValue;
-  const isCraftable = hasCoins && hasScrap;
+  const { abilityChance, ranges, staminaCost, weight } = weapon;
   const maximumWeaponLevel = levelValue + 3;
-
-  const handleCraft = () => {
-    // TODO
-  };
 
   return (
     <Stack className="mx-auto w-50" gap={3}>
@@ -147,34 +139,7 @@ export function WeaponOptions() {
 
       <hr />
 
-      <Stack direction="horizontal" gap={5}>
-        <Scrap tooltip="Cost (scrap)" value={scrapPrice} />
-
-        <Coins tooltip="Price (coins)" value={coinPrice} />
-
-        <OverlayTrigger
-          overlay={
-            <Tooltip>
-              {!hasCoins && <div>Not enough coins!</div>}
-
-              {!hasScrap && <div>Not enough scrap!</div>}
-            </Tooltip>
-          }
-          placement="top"
-          trigger={isCraftable ? [] : ["hover", "focus"]}
-        >
-          <span className="d-inline-block w-100">
-            <Button
-              className="w-100"
-              disabled={!isCraftable}
-              onClick={handleCraft}
-              variant={UIVariant.Outline}
-            >
-              Craft
-            </Button>
-          </span>
-        </OverlayTrigger>
-      </Stack>
+      {craftedWeapon ? <CraftedGear gear={craftedWeapon} /> : <CraftGear gear={weapon} />}
     </Stack>
   );
 }

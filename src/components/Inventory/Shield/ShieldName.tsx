@@ -52,11 +52,11 @@ export function ShieldName({
               </tr>
 
               <tr>
-                {staggerSkillValue ? (
+                {isShowingGearClassAndTypes ? (
                   <>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Type:</td>
 
-                    <td>{formatPercentage(staggerChance)}</td>
+                    <td>{capitalizeAll(type)}</td>
                   </>
                 ) : (
                   <td className="text-end">{LABEL_UNKNOWN}</td>
@@ -64,11 +64,11 @@ export function ShieldName({
               </tr>
 
               <tr>
-                {isShowingGearClassAndTypes ? (
+                {staggerSkillValue ? (
                   <>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Type:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance:</td>
 
-                    <td>{capitalizeAll(type)}</td>
+                    <td>{formatPercentage(staggerChance)}</td>
                   </>
                 ) : (
                   <td className="text-end">{LABEL_UNKNOWN}</td>

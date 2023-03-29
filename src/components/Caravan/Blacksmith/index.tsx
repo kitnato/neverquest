@@ -18,13 +18,15 @@ const DATA_TABS = [
     label: "Weapon",
   },
   {
-    Component: WeaponOptions,
+    // TODO
+    Component: () => null,
     Icon: ARMOR_ICON,
     key: TabKey.Armor,
     label: "Armor",
   },
   {
-    Component: WeaponOptions,
+    // TODO
+    Component: () => null,
     Icon: SHIELD_ICON,
     key: TabKey.Shield,
     label: "Shield",

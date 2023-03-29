@@ -16,10 +16,11 @@ interface AttributeState {
 export const attributePoints = selector({
   get: ({ get }) => {
     const nextCharacterLevel = get(characterLevel) + 1;
+
     let points = 0;
     let requiredEssence = get(attributeCost);
 
-    while (requiredEssence < get(essence)) {
+    while (requiredEssence <= get(essence)) {
       points += 1;
       requiredEssence += getGrowthTriangular(nextCharacterLevel + points);
     }

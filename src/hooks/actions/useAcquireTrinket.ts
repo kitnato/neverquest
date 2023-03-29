@@ -13,26 +13,25 @@ export function useAcquireTrinket() {
         const get = getSnapshotGetter(snapshot);
 
         const id = nanoid();
-        const key = nanoid();
         const { name, weight } = trinket;
 
         if (!get(canFit(weight))) {
-          return false;
+          return null;
         }
 
         if (name === TRINKET_KNAPSACK.name) {
           set(encumbranceMaximum, (current) => current + 1);
           set(hasKnapsack, true);
 
-          return true;
+          return null;
         }
 
         set(inventory, (current) => ({
           ...current,
-          [id]: { isEquipped: false, item: trinket, key },
+          [id]: trinket,
         }));
 
-        return true;
+        return id;
       },
     []
   );

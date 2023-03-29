@@ -13,11 +13,11 @@ export function PurchasableItems({ inventoryIDs }: { inventoryIDs: string[] }) {
   return (
     <>
       {inventoryIDs.map((id) => {
-        const { item, key } = merchantInventoryValue[id];
+        const { item } = merchantInventoryValue[id];
         const { coinPrice } = item;
 
         return (
-          <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={key}>
+          <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
             <ItemDisplay item={item} overlayPlacement="right" />
 
             <Stack direction="horizontal" gap={3}>

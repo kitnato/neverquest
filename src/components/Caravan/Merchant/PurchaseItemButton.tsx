@@ -3,6 +3,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { useAcquireGear } from "@neverquest/hooks/actions/useAcquireGear";
 import { useAcquireTrinket } from "@neverquest/hooks/actions/useAcquireTrinket";
+import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { hasBoughtFromMerchant, merchantInventory } from "@neverquest/state/caravan";
 import { canFit } from "@neverquest/state/inventory";
@@ -17,6 +18,7 @@ export function PurchaseItemButton({ id }: { id: string }) {
 
   const acquireTrinket = useAcquireTrinket();
   const acquireGear = useAcquireGear();
+  const toggleEquipGear = useToggleEquipGear();
   const transactResources = useTransactResources();
 
   const { item } = merchantInventoryValue[id];
@@ -26,11 +28,24 @@ export function PurchaseItemButton({ id }: { id: string }) {
   const isPurchasable = isAffordable && canFitValue;
 
   const handlePurchase = () => {
-    const isReceived = isTrinket(item)
-      ? acquireTrinket({ trinket: item })
-      : acquireGear({ gear: item });
+    let acquiredID = null;
 
-    if (isReceived) {
+    if (isTrinket(item)) {
+      acquiredID = acquireTrinket({ trinket: item });
+    } else {
+      const [shouldAutoEquip, id] = acquireGear({ gear: item });
+
+      if (id) {
+        acquiredID = id;
+
+        if (shouldAutoEquip) {
+          toggleEquipGear(acquiredID);
+        }
+      }
+    }
+
+    if (acquiredID) {
+      transactResources({ coinsDifference: -coinPrice });
       setMerchantInventory((current) => {
         const newMerchantInventory = { ...current };
 
@@ -38,7 +53,6 @@ export function PurchaseItemButton({ id }: { id: string }) {
 
         return newMerchantInventory;
       });
-      transactResources({ coinsDifference: -coinPrice });
       setHasBoughtFromMerchant(true);
     }
   };

@@ -38,14 +38,10 @@ export function useGenerateMerchantInventory() {
 
           MERCHANT_OFFERS[merchantOffersIndex].forEach((offer) => {
             const id = nanoid();
-            const inventoryContentsBase = {
-              isReturned: false,
-              key: nanoid(),
-            };
 
             if (isTrinket(offer)) {
               inventory[id] = {
-                ...inventoryContentsBase,
+                isReturned: false,
                 item: offer,
               };
             } else {
@@ -71,7 +67,7 @@ export function useGenerateMerchantInventory() {
               })();
 
               inventory[id] = {
-                ...inventoryContentsBase,
+                isReturned: false,
                 item: gear,
               };
             }

@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import { Button, Stack } from "react-bootstrap";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
@@ -9,12 +9,13 @@ import { Coins } from "@neverquest/components/Resources/Coins";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { merchantInventory } from "@neverquest/state/caravan";
-import { inventory } from "@neverquest/state/inventory";
+import { equippedItemIDs, inventory } from "@neverquest/state/inventory";
 import { UIVariant } from "@neverquest/types/ui";
 import { getSellPrice } from "@neverquest/utilities/getters";
 
 export function SellItems() {
   const [inventoryValue, setInventory] = useRecoilState(inventory);
+  const equippedItemIDValues = useRecoilValue(equippedItemIDs);
   const setMerchantInventory = useSetRecoilState(merchantInventory);
 
   const [sellConfirmation, setSellConfirmation] = useState<string | null>(null);
@@ -24,7 +25,7 @@ export function SellItems() {
   const inventoryIDs = Object.getOwnPropertyNames(inventoryValue);
 
   const sellPossession = (id: string) => {
-    const { item, key } = inventoryValue[id];
+    const item = inventoryValue[id];
 
     setInventory((current) => {
       const newInventoryContents = { ...current };
@@ -35,7 +36,7 @@ export function SellItems() {
     });
     setMerchantInventory((current) => ({
       ...current,
-      [nanoid()]: { isReturned: true, item, key },
+      [nanoid()]: { isReturned: true, item },
     }));
     transactResources({ coinsDifference: getSellPrice(item) });
   };
@@ -49,10 +50,11 @@ export function SellItems() {
       ) : (
         <Stack gap={3}>
           {inventoryIDs.map((id) => {
-            const { isEquipped, item, key } = inventoryValue[id];
+            const isEquipped = equippedItemIDValues.includes(id);
+            const item = inventoryValue[id];
 
             return (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={key}>
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
                 <Stack direction="horizontal">
                   <ItemDisplay item={item} overlayPlacement="right" />
 

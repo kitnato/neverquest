@@ -29,20 +29,20 @@ export interface CrewMember {
   name: string;
 }
 
-interface InventoryBase {
-  item: Item;
-  key: string;
+export interface Inventory {
+  [id: string]: Item;
 }
 
-export interface Inventory {
-  [id: string]: InventoryBase & {
-    isEquipped: boolean;
-  };
+export interface InventoryBlacksmith {
+  armor: Armor | null;
+  shield: Shield | null;
+  weapon: Weapon | null;
 }
 
 export interface InventoryMerchant {
-  [id: string]: InventoryBase & {
+  [id: string]: {
     isReturned: boolean;
+    item: Item;
   };
 }
 
@@ -82,6 +82,7 @@ export type StorageKey =
   | "attackDuration"
   | "attributes"
   | "autoEquip"
+  | "blacksmithInventory"
   | "characterLevel"
   | "coins"
   | "coinsLoot"
@@ -94,6 +95,9 @@ export type StorageKey =
   | "encumbranceMaximum"
   | "essence"
   | "essenceLoot"
+  | "equippedArmor"
+  | "equippedShield"
+  | "equippedWeapon"
   | "floatingTextQueues"
   | "hasBoughtFromMerchant"
   | "hasKnapsack"
@@ -101,6 +105,7 @@ export type StorageKey =
   | "inventory"
   | "isAttacking"
   | "isGameOver"
+  | "isInventoryOpen"
   | "isLevelStarted"
   | "isMonsterNew"
   | "isNSFW"
@@ -132,8 +137,7 @@ export type StorageKey =
   | "staminaDebuff"
   | "staminaRegenerationDuration"
   | "statusElement"
-  | "wildernesses"
-  | "isInventoryOpen";
+  | "wildernesses";
 
 export type Trinket = ItemBase & {
   Icon: SVGIcon;

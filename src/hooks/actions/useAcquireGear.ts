@@ -2,7 +2,6 @@ import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
-import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { armor, canFit, inventory, shield, weapon } from "@neverquest/state/inventory";
 import { autoEquip } from "@neverquest/state/settings";
 import { Gear } from "@neverquest/types";
@@ -10,22 +9,22 @@ import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useAcquireGear() {
-  const toggleEquipGear = useToggleEquipGear();
-
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      ({ gear }: { gear: Gear }) => {
+      ({ gear }: { gear: Gear }): [boolean, string | null] => {
         const get = getSnapshotGetter(snapshot);
 
         const id = nanoid();
-        const key = nanoid();
         const { weight } = gear;
 
         if (!get(canFit(weight))) {
-          return false;
+          return [false, null];
         }
 
-        let isEquipped = false;
+        set(inventory, (current) => ({
+          ...current,
+          [id]: gear,
+        }));
 
         if (
           get(autoEquip) &&
@@ -33,17 +32,11 @@ export function useAcquireGear() {
             (get(shield) === SHIELD_NONE && isShield(gear)) ||
             (get(weapon) === WEAPON_NONE && isWeapon(gear)))
         ) {
-          isEquipped = true;
-          toggleEquipGear(gear);
+          return [true, id];
         }
 
-        set(inventory, (current) => ({
-          ...current,
-          [id]: { isEquipped, item: gear, key },
-        }));
-
-        return true;
+        return [false, id];
       },
-    [toggleEquipGear]
+    []
   );
 }

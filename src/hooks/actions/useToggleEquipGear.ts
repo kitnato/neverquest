@@ -1,31 +1,26 @@
 import { useRecoilCallback } from "recoil";
 
 import { attributes } from "@neverquest/state/attributes";
-import { inventory } from "@neverquest/state/inventory";
+import {
+  equippedArmor,
+  equippedShield,
+  equippedWeapon,
+  inventory,
+} from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { Gear } from "@neverquest/types";
 import { AttributeType, ShowingType } from "@neverquest/types/enums";
-import { isArmor, isGear, isShield, isWeapon } from "@neverquest/types/type-guards";
+import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleEquipGear() {
   return useRecoilCallback(
-    ({ set, snapshot }) =>
-      (idOrGear: string | Gear) => {
+    ({ reset, set, snapshot }) =>
+      (id: string) => {
         const get = getSnapshotGetter(snapshot);
 
-        let item;
+        const item = get(inventory)[id];
 
-        if (isGear(idOrGear)) {
-          item = idOrGear;
-        } else {
-          item = get(inventory)[idOrGear].item;
-
-          set(inventory, (current) => ({
-            ...current,
-            [idOrGear]: { ...current[idOrGear], isEquipped: !current[idOrGear].isEquipped },
-          }));
-        }
+        let equippedGear = equippedArmor;
 
         if (isArmor(item)) {
           const { deflectionChance, dodgeChanceModifier, staminaCost } = item;
@@ -58,6 +53,8 @@ export function useToggleEquipGear() {
           if (!get(isShowing(ShowingType.BlockChance))) {
             set(isShowing(ShowingType.BlockChance), true);
           }
+
+          equippedGear = equippedShield;
         }
 
         if (isWeapon(item)) {
@@ -83,6 +80,14 @@ export function useToggleEquipGear() {
           if (!get(isShowing(ShowingType.Weapon))) {
             set(isShowing(ShowingType.Weapon), true);
           }
+
+          equippedGear = equippedWeapon;
+        }
+
+        if (get(equippedGear) === id) {
+          reset(equippedGear);
+        } else {
+          set(equippedGear, id);
         }
       },
     []

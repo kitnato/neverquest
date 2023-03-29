@@ -1,7 +1,7 @@
 import { DefaultValue, atom, atomFamily, selectorFamily } from "recoil";
 
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { InventoryMerchant } from "@neverquest/types";
+import { InventoryBlacksmith, InventoryMerchant } from "@neverquest/types";
 import { CrewStatus, CrewType } from "@neverquest/types/enums";
 
 interface CrewState {
@@ -35,6 +35,16 @@ export const crew = selectorFamily<CrewState, CrewType>({
 });
 
 // ATOMS
+
+export const blacksmithInventory = atom<InventoryBlacksmith>({
+  default: {
+    armor: null,
+    shield: null,
+    weapon: null,
+  },
+  effects: [handleLocalStorage<InventoryBlacksmith>({ key: "blacksmithInventory" })],
+  key: "blacksmithInventory",
+});
 
 export const crewActive = atom<CrewType | null>({
   default: null,

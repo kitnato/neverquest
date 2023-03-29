@@ -5,6 +5,8 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
+  ICON_ESSENCE,
+  ICON_SIZE_INLAY,
   ICON_UNKNOWN,
   LABEL_AT_MAXIMUM,
   LABEL_UNKNOWN,
@@ -50,7 +52,13 @@ export function Attribute({ type }: { type: AttributeType }) {
               <Badge bg="secondary">{LABEL_AT_MAXIMUM}</Badge>
             ) : (
               <OverlayTrigger
-                overlay={<Tooltip>{`Cost: ${attributeCostValue} essence`}</Tooltip>}
+                overlay={
+                  <Tooltip>
+                    {`Cost: ${attributeCostValue} `}
+                    <ICON_ESSENCE width={ICON_SIZE_INLAY} />
+                    {" essence"}
+                  </Tooltip>
+                }
                 placement="top"
               >
                 <span className="d-inline-block">

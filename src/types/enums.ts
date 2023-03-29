@@ -34,6 +34,7 @@ export enum DeltaTextType {
 }
 
 export enum DeltaType {
+  AttributePoints,
   AttackRate,
   BleedRating,
   BlockChance,

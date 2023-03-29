@@ -1,7 +1,7 @@
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ReactComponent as IconEssence } from "@neverquest/icons/incense.svg";
+import { ICON_ESSENCE } from "@neverquest/constants";
 import { LootProps } from "@neverquest/types/props";
 
 export function Essence({ tooltip, value }: LootProps) {
-  return <IconDisplay contents={value} Icon={IconEssence} tooltip={tooltip || "Essence"} />;
+  return <IconDisplay contents={value} Icon={ICON_ESSENCE} tooltip={tooltip || "Essence"} />;
 }

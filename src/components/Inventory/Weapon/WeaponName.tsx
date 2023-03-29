@@ -3,7 +3,7 @@ import { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import { CLASS_TABLE_CELL_ITALIC, ICON_INLAY_SIZE, LABEL_UNKNOWN } from "@neverquest/constants";
+import { CLASS_TABLE_CELL_ITALIC, ICON_SIZE_INLAY, LABEL_UNKNOWN } from "@neverquest/constants";
 import { WEAPON_ABILITY_NAME, WEAPON_CLASS_ICONS, WEAPON_SKILL_TYPE } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -80,7 +80,7 @@ export function WeaponName({
                     <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 
                     <td>
-                      <Icon width={ICON_INLAY_SIZE} />
+                      <Icon width={ICON_SIZE_INLAY} />
                       &nbsp;{capitalizeAll(weaponClass)}
                     </td>
                   </>

@@ -6,13 +6,15 @@ import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC, ICON_SIZE_INLAY, LABEL_UNKNOWN } from "@neverquest/constants";
 import { ARMOR_CLASS_ICONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
+import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { Armor } from "@neverquest/types";
-import { SkillType } from "@neverquest/types/enums";
+import { ShowingType, SkillType } from "@neverquest/types/enums";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function ArmorName({ armor, placement = "top" }: { armor: Armor; placement?: Placement }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
+  const isShowingGearClassAndTypes = useRecoilValue(isShowing(ShowingType.GearClassAndTypes));
   const armorsSkillValue = useRecoilValue(skills(SkillType.Armors));
 
   const {
@@ -40,9 +42,9 @@ export function ArmorName({ armor, placement = "top" }: { armor: Armor; placemen
                 <td>{protection}</td>
               </tr>
 
-              {armorsSkillValue ? (
-                <>
-                  <tr>
+              <tr>
+                {isShowingGearClassAndTypes ? (
+                  <>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 
                     <td>
@@ -50,37 +52,43 @@ export function ArmorName({ armor, placement = "top" }: { armor: Armor; placemen
                       &nbsp;
                       {capitalizeAll(armorClass ?? "None")}
                     </td>
-                  </tr>
-
-                  {deflectionChance && (
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Deflection chance:</td>
-
-                      <td>{formatPercentage(deflectionChance)}</td>
-                    </tr>
-                  )}
-
-                  {staminaCost && (
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Stamina cost when dodging:</td>
-
-                      <td>{staminaCost}</td>
-                    </tr>
-                  )}
-
-                  {dodgeChanceModifier && (
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Penalty to dodge chance:</td>
-
-                      <td>{formatPercentage(dodgeChanceModifier)}</td>
-                    </tr>
-                  )}
-                </>
-              ) : (
-                <tr>
+                  </>
+                ) : (
                   <td className="text-end">{LABEL_UNKNOWN}</td>
-                </tr>
-              )}
+                )}
+              </tr>
+
+              <tr>
+                {armorsSkillValue ? (
+                  <>
+                    {deflectionChance && (
+                      <>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Deflection chance:</td>
+
+                        <td>{formatPercentage(deflectionChance)}</td>
+                      </>
+                    )}
+
+                    {staminaCost && (
+                      <>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Stamina cost when dodging:</td>
+
+                        <td>{staminaCost}</td>
+                      </>
+                    )}
+
+                    {dodgeChanceModifier && (
+                      <>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Penalty to dodge chance:</td>
+
+                        <td>{formatPercentage(dodgeChanceModifier)}</td>
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <td className="text-end">{LABEL_UNKNOWN}</td>
+                )}
+              </tr>
 
               <tr>
                 {hasKnapsackValue ? (

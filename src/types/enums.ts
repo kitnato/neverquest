@@ -102,6 +102,7 @@ export enum ShowingType {
   DodgeChanceDetails,
   Essence,
   GameOver,
+  GearClassAndTypes,
   Loot,
   MonsterDamage,
   Protection,
@@ -111,7 +112,6 @@ export enum ShowingType {
   Stamina,
   Statistics,
   Weapon,
-  WeaponClass,
   WildernessStatus,
 }
 

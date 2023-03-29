@@ -19,8 +19,8 @@ export function ShieldName({
   shield: Shield;
 }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
+  const isShowingGearClassAndTypes = useRecoilValue(isShowing(ShowingType.GearClassAndTypes));
   const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
-  const shieldSkillValue = useRecoilValue(skills(SkillType.Shields));
   const staggerSkillValue = useRecoilValue(skills(SkillType.Stagger));
 
   const { blockChance, name, staggerChance, staminaCost, type, weight } = shield;
@@ -64,7 +64,7 @@ export function ShieldName({
               </tr>
 
               <tr>
-                {shieldSkillValue ? (
+                {isShowingGearClassAndTypes ? (
                   <>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Type:</td>
 

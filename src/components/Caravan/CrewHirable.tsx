@@ -15,7 +15,7 @@ import { UIVariant } from "@neverquest/types/ui";
 export function CrewHirable({ type }: { type: CrewType }) {
   const coinsValue = useRecoilValue(coins);
   const [{ hireStatus }, setCrewMember] = useRecoilState(crew(type));
-  const setIsShowingWeaponClass = useSetRecoilState(isShowing(ShowingType.WeaponClass));
+  const setIsGearClassAndTypes = useSetRecoilState(isShowing(ShowingType.GearClassAndTypes));
 
   const transactResources = useTransactResources();
 
@@ -34,7 +34,7 @@ export function CrewHirable({ type }: { type: CrewType }) {
     transactResources({ coinsDifference: -coinPrice });
 
     if (type === CrewType.Blacksmith) {
-      setIsShowingWeaponClass(true);
+      setIsGearClassAndTypes(true);
     }
   };
 

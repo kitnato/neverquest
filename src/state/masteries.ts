@@ -2,13 +2,13 @@ import { atomFamily, selectorFamily } from "recoil";
 
 import { MASTERIES } from "@neverquest/data/masteries";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { MasteryType } from "@neverquest/types/enums";
+import type { MasteryType } from "@neverquest/types/enums";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 
-interface MasteryState {
+type MasteryState = {
   progress: number;
   rank: number;
-}
+};
 
 // ATOMS
 

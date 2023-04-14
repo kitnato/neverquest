@@ -1,6 +1,6 @@
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { SKILLS } from "@neverquest/data/skills";
-import { SkillType } from "@neverquest/types/enums";
+import type { SkillType } from "@neverquest/types/enums";
 
 export function SkillDisplay({ type }: { type: SkillType }) {
   const { description, Icon, name } = SKILLS[type];

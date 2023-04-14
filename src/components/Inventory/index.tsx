@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import { Button, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 

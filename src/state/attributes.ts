@@ -3,13 +3,13 @@ import { atom, atomFamily, selector, selectorFamily } from "recoil";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { essence } from "@neverquest/state/resources";
-import { AttributeType } from "@neverquest/types/enums";
+import type { AttributeType } from "@neverquest/types/enums";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 
-interface AttributeState {
+type AttributeState = {
   isUnlocked: boolean;
   points: number;
-}
+};
 
 // SELECTORS
 

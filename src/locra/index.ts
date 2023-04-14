@@ -2,20 +2,17 @@ import affixes from "@neverquest/LOCRA/data/affixes.json";
 import artifacts from "@neverquest/LOCRA/data/artifacts.json";
 import creatures from "@neverquest/LOCRA/data/creatures.json";
 import locations from "@neverquest/LOCRA/data/locations.json";
-import {
+import type {
   AffixTag,
-  AffixType,
-  ArmorQuery,
+  ArtifactQuery,
   Category,
-  CreatureType,
+  Creature,
   GeneratorParameters,
-  ShieldQuery,
-  WeaponQuery,
 } from "@neverquest/LOCRA/types";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
-export class LOCRA {
-  static generate({
+export const LOCRA = {
+  generate: ({
     category,
     name,
     parameters,
@@ -23,7 +20,7 @@ export class LOCRA {
     category: Category;
     name: string;
     parameters: GeneratorParameters;
-  }) {
+  }) => {
     const finalName = [capitalizeAll(name)];
     const { hasPrefix, hasSuffix, isNSFW, prefixTags, suffixTags } = parameters;
 
@@ -38,11 +35,9 @@ export class LOCRA {
         if (prefixTags.length > 0) {
           if (affix.tags) {
             return (
-              affix[category] === AffixType.Prefix &&
+              affix[category] === "prefix" &&
               prefixTags.every((tag) => affix.tags.includes(tag)) &&
-              (isNSFW
-                ? !!affix.isNSFW === true || !!affix.isNSFW === false
-                : !!affix.isNSFW === false)
+              (isNSFW ? !!affix.isNSFW || !affix.isNSFW : !affix.isNSFW)
             );
           }
           return false;
@@ -50,8 +45,7 @@ export class LOCRA {
 
         // Otherwise, return any prefix (with NSFW filter).
         return (
-          affix[category] === AffixType.Prefix &&
-          (isNSFW ? !!affix.isNSFW === true || !!affix.isNSFW === false : !!affix.isNSFW === false)
+          affix[category] === "prefix" && (isNSFW ? !!affix.isNSFW || !affix.isNSFW : !affix.isNSFW)
         );
       });
 
@@ -66,19 +60,16 @@ export class LOCRA {
         if (suffixTags.length > 0) {
           if (affix.tags) {
             return (
-              affix[category] === AffixType.Suffix &&
+              affix[category] === "suffix" &&
               suffixTags.every((tag) => affix.tags.includes(tag)) &&
-              (isNSFW
-                ? !!affix.isNSFW === true || !!affix.isNSFW === false
-                : !!affix.isNSFW === false)
+              (isNSFW ? !!affix.isNSFW || !affix.isNSFW : !affix.isNSFW)
             );
           }
         }
 
         // Otherwise, return any suffix (with NSFW filter).
         return (
-          affix[category] === AffixType.Suffix &&
-          (isNSFW ? !!affix.isNSFW === true || !!affix.isNSFW === false : !!affix.isNSFW === false)
+          affix[category] === "suffix" && (isNSFW ? !!affix.isNSFW || !affix.isNSFW : !affix.isNSFW)
         );
       });
       const suffix = filteredSuffixes[Math.floor(Math.random() * filteredSuffixes.length)];
@@ -87,35 +78,35 @@ export class LOCRA {
     }
 
     return finalName.join(" ");
-  }
+  },
 
-  static generateArtifact({
+  generateArtifact: ({
     hasPrefix = false,
     hasSuffix = false,
     isNSFW = false,
-    tags = [],
     query,
+    tags = [],
   }: {
     hasPrefix?: boolean;
     hasSuffix?: boolean;
     isNSFW?: boolean;
-    query: ArmorQuery | ShieldQuery | WeaponQuery;
+    query: ArtifactQuery;
     tags?: AffixTag[];
-  }) {
+  }) => {
     const { subtype, type } = query;
     const filteredArtifacts = artifacts.filter(
       (artifact) =>
-        (subtype ? artifact.subtype === subtype : true) &&
-        (artifact.class && "weaponClass" in query ? artifact.class === query.weaponClass : true) &&
+        (subtype ? artifact.artifactClass === subtype : true) &&
+        ("artifactClass" in artifact && "artifactClass" in query
+          ? artifact.artifactClass === query.artifactClass
+          : true) &&
         artifact.type === type &&
-        (isNSFW
-          ? !!artifact.isNSFW === true || !!artifact.isNSFW === false
-          : !!artifact.isNSFW === false)
+        (isNSFW ? !!artifact.isNSFW || !artifact.isNSFW : !artifact.isNSFW)
     );
     const { name } = filteredArtifacts[Math.floor(Math.random() * filteredArtifacts.length)];
 
-    return this.generate({
-      category: Category.Artifact,
+    return LOCRA.generate({
+      category: "artifact",
       name,
       parameters: {
         hasPrefix,
@@ -125,9 +116,9 @@ export class LOCRA {
         suffixTags: tags,
       },
     });
-  }
+  },
 
-  static generateCreature({
+  generateCreature: ({
     hasPrefix = false,
     hasSuffix = false,
     isNSFW = false,
@@ -138,19 +129,17 @@ export class LOCRA {
     hasSuffix?: boolean;
     isNSFW?: boolean;
     tags?: AffixTag[];
-    type: CreatureType;
-  }) {
+    type: Creature;
+  }) => {
     const filteredCreatures = creatures.filter(
       (creature) =>
         creature.type === type &&
-        (isNSFW
-          ? !!creature.isNSFW === true || !!creature.isNSFW === false
-          : !!creature.isNSFW === false)
+        (isNSFW ? !!creature.isNSFW || !creature.isNSFW : !creature.isNSFW)
     );
     const { name } = filteredCreatures[Math.floor(Math.random() * filteredCreatures.length)];
 
-    return this.generate({
-      category: Category.Creature,
+    return LOCRA.generate({
+      category: "creature",
       name,
       parameters: {
         hasPrefix,
@@ -160,9 +149,9 @@ export class LOCRA {
         suffixTags: tags,
       },
     });
-  }
+  },
 
-  static generateLocation({
+  generateLocation: ({
     hasPrefix = false,
     hasSuffix = false,
     isNSFW = false,
@@ -172,16 +161,14 @@ export class LOCRA {
     hasSuffix?: boolean;
     isNSFW?: boolean;
     tags?: AffixTag[];
-  }) {
+  }) => {
     const filteredLocations = locations.filter((location) =>
-      isNSFW
-        ? !!location.isNSFW === true || !!location.isNSFW === false
-        : !!location.isNSFW === false
+      isNSFW ? !!location.isNSFW || !location.isNSFW : !location.isNSFW
     );
     const { name } = filteredLocations[Math.floor(Math.random() * filteredLocations.length)];
 
-    return this.generate({
-      category: Category.Location,
+    return LOCRA.generate({
+      category: "location",
       name,
       parameters: {
         hasPrefix,
@@ -191,5 +178,5 @@ export class LOCRA {
         suffixTags: tags,
       },
     });
-  }
-}
+  },
+};

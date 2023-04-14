@@ -5,7 +5,7 @@ import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { RESERVES } from "@neverquest/data/reserves";
 import { staminaDebuff } from "@neverquest/state/reserves";
 import { ReserveType } from "@neverquest/types/enums";
-import { UIAttachment, UIVariant } from "@neverquest/types/ui";
+import { type UIAttachment, UIVariant } from "@neverquest/types/ui";
 
 export function ReserveMeter({ attached, type }: { attached?: UIAttachment; type: ReserveType }) {
   const { atom, atomMaximum } = RESERVES[type];

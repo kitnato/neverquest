@@ -1,5 +1,5 @@
 import { Form } from "react-bootstrap";
-import { RecoilState, useRecoilState } from "recoil";
+import { type RecoilState, useRecoilState } from "recoil";
 
 export function SettingsSwitch({
   atom,

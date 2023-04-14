@@ -9,7 +9,7 @@ import { CLASS_FULL_WIDTH_JUSTIFIED, ICON_UNKNOWN, LABEL_UNKNOWN } from "@neverq
 import { SKILLS } from "@neverquest/data/skills";
 import { characterLevel } from "@neverquest/state/attributes";
 import { skills } from "@neverquest/state/skills";
-import { SkillType } from "@neverquest/types/enums";
+import type { SkillType } from "@neverquest/types/enums";
 
 export function TrainableSkill({ type }: { type: SkillType }) {
   const characterLevelValue = useRecoilValue(characterLevel);

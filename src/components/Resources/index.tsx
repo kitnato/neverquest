@@ -1,10 +1,10 @@
 import { Stack } from "react-bootstrap";
-import { RecoilState, useRecoilValue } from "recoil";
+import { type RecoilState, useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { deltas } from "@neverquest/state/deltas";
-import { DeltaType } from "@neverquest/types/enums";
+import type { DeltaType } from "@neverquest/types/enums";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 

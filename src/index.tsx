@@ -5,9 +5,7 @@ import { Core } from "@neverquest/components/Core";
 
 import "@neverquest/styles/index.scss";
 
-const root = createRoot(document.getElementById("root") as HTMLElement);
-
-root.render(
+createRoot(document.getElementById("root") as Element).render(
   <StrictMode>
     <Core />
   </StrictMode>

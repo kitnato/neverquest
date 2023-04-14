@@ -12,7 +12,7 @@ import { ReactComponent as IconClass } from "@neverquest/icons/gear-hammer.svg";
 import { ReactComponent as IconStaminaCost } from "@neverquest/icons/ink-swirl.svg";
 import { ReactComponent as IconDamage } from "@neverquest/icons/pointy-sword.svg";
 import { ReactComponent as IconLevel } from "@neverquest/icons/private-first-class.svg";
-import { AffixTag, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
+import { type WeaponClass, WeaponClasses } from "@neverquest/LOCRA/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { level } from "@neverquest/state/encounter";
 import { isNSFW } from "@neverquest/state/settings";
@@ -29,24 +29,24 @@ export function WeaponOptions() {
   const isNSFWValue = useRecoilValue(isNSFW);
   const levelValue = useRecoilValue(level);
 
-  const [weaponClass, setWeaponClass] = useState(WeaponClass.Blunt);
+  const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
   const [weaponLevel, setWeaponLevel] = useState(levelValue);
 
   const skillValue = useRecoilValue(skills(WEAPON_SKILL_TYPE[weaponClass]));
 
   const weapon = generateWeapon({
+    artifactClass: weaponClass,
     hasPrefix: true,
     hasSuffix: true,
     isNSFW: isNSFWValue,
     level: weaponLevel,
     tags:
       weaponLevel < levelValue - 1
-        ? [AffixTag.LowQuality]
+        ? ["lowQuality"]
         : weaponLevel > levelValue + 1
-        ? [AffixTag.HighQuality]
+        ? ["highQuality"]
         : undefined,
-    type: WeaponType.Melee,
-    weaponClass,
+    type: "melee",
   });
   const { abilityChance, ranges, staminaCost, weight } = weapon;
   const maximumWeaponLevel = levelValue + 3;
@@ -87,11 +87,11 @@ export function WeaponOptions() {
               onChange={({ target: { value } }) => setWeaponClass(value as WeaponClass)}
               value={weaponClass}
             >
-              <option value={WeaponClass.Blunt}>{capitalizeAll(WeaponClass.Blunt)}</option>
-
-              <option value={WeaponClass.Piercing}>{capitalizeAll(WeaponClass.Piercing)}</option>
-
-              <option value={WeaponClass.Slashing}>{capitalizeAll(WeaponClass.Slashing)}</option>
+              {WeaponClasses.map((weaponClass) => (
+                <option key={weaponClass} value={weaponClass}>
+                  {capitalizeAll(weaponClass)}
+                </option>
+              ))}
             </FormSelect>
           }
           Icon={IconClass}

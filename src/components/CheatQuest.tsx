@@ -10,11 +10,11 @@ import { coinsLoot, essenceLoot, scrapLoot } from "@neverquest/state/resources";
 import { skills } from "@neverquest/state/skills";
 import { SkillType } from "@neverquest/types/enums";
 
-declare global {
-  interface Window {
-    cheatQuest: (state: string, value?: number) => void;
-  }
-}
+type CheatGlobal = Window & {
+  cheatQuest: (state: string, value?: number) => void;
+};
+
+declare const window: CheatGlobal;
 
 export function CheatQuest() {
   const isWildernessValue = useRecoilValue(isWilderness);

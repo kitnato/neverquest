@@ -31,9 +31,9 @@ export function useTransactResources() {
           essenceDifference === undefined &&
           scrapDifference === undefined;
 
-        const coinsValue = isLooting ? get(coinsLoot) : coinsDifference || 0;
-        const essenceValue = isLooting ? get(essenceLoot) : essenceDifference || 0;
-        const scrapValue = isLooting ? get(scrapLoot) : scrapDifference || 0;
+        const coinsValue = isLooting ? get(coinsLoot) : coinsDifference ?? 0;
+        const essenceValue = isLooting ? get(essenceLoot) : essenceDifference ?? 0;
+        const scrapValue = isLooting ? get(scrapLoot) : scrapDifference ?? 0;
 
         if (coinsValue !== 0) {
           set(coins, (current) => current + coinsValue);

@@ -49,7 +49,7 @@ export function PurchaseItemButton({ id }: { id: string }) {
       setMerchantInventory((current) => {
         const newMerchantInventory = { ...current };
 
-        delete newMerchantInventory[id];
+        Reflect.deleteProperty(newMerchantInventory, id);
 
         return newMerchantInventory;
       });

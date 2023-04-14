@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { type FunctionComponent, useState } from "react";
 import { Card, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 

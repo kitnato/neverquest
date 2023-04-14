@@ -1,5 +1,5 @@
 import { OverlayTrigger, Popover } from "react-bootstrap";
-import { Placement } from "react-bootstrap/esm/types";
+import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
@@ -9,7 +9,7 @@ import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingDamagePerSecond } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
-import { Weapon } from "@neverquest/types";
+import type { Weapon } from "@neverquest/types";
 import { ShowingType } from "@neverquest/types/enums";
 import {
   capitalizeAll,
@@ -30,10 +30,10 @@ export function WeaponName({
   const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
   const isShowingGearClassAndTypes = useRecoilValue(isShowing(ShowingType.GearClassAndTypes));
 
-  const { abilityChance, damage, name, rate, staminaCost, weaponClass, weight } = weapon;
-  const Icon = WEAPON_CLASS_ICONS[weaponClass];
+  const { abilityChance, artifactClass, damage, name, rate, staminaCost, weight } = weapon;
+  const Icon = WEAPON_CLASS_ICONS[artifactClass];
 
-  const skillValue = useRecoilValue(skills(WEAPON_SKILL_TYPE[weaponClass]));
+  const skillValue = useRecoilValue(skills(WEAPON_SKILL_TYPE[artifactClass]));
 
   return (
     <OverlayTrigger
@@ -81,7 +81,7 @@ export function WeaponName({
 
                     <td>
                       <Icon width={ICON_SIZE_INLAY} />
-                      &nbsp;{capitalizeAll(weaponClass)}
+                      &nbsp;{capitalizeAll(artifactClass)}
                     </td>
                   </>
                 ) : (
@@ -92,7 +92,7 @@ export function WeaponName({
               {skillValue ? (
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>
-                    {WEAPON_ABILITY_NAME[weaponClass]} chance:
+                    {WEAPON_ABILITY_NAME[artifactClass]} chance:
                   </td>
 
                   <td>{formatPercentage(abilityChance)}</td>

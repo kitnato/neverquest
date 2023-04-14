@@ -8,7 +8,7 @@ import {
   monsterMaximumHealth,
 } from "@neverquest/state/monster";
 import { DeltaType } from "@neverquest/types/enums";
-import { DeltaReserve, FloatingTextVariant } from "@neverquest/types/ui";
+import { type DeltaReserve, FloatingTextVariant } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeMonsterHealth() {

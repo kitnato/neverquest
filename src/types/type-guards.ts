@@ -1,4 +1,4 @@
-import { Armor, Gear, Shield, Trinket, Weapon } from "@neverquest/types";
+import type { Armor, Gear, Shield, Trinket, Weapon } from "@neverquest/types";
 
 export function isArmor(gear: unknown): gear is Armor {
   return isObject(gear) && gear.protection !== undefined;

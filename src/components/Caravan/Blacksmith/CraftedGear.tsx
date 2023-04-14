@@ -6,7 +6,7 @@ import { useAcquireGear } from "@neverquest/hooks/actions/useAcquireGear";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { canFit } from "@neverquest/state/inventory";
-import { Gear } from "@neverquest/types";
+import type { Gear } from "@neverquest/types";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 import { UIVariant } from "@neverquest/types/ui";
 

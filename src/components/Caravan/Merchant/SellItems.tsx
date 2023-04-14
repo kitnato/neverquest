@@ -30,7 +30,7 @@ export function SellItems() {
     setInventory((current) => {
       const newInventoryContents = { ...current };
 
-      delete newInventoryContents[id];
+      Reflect.deleteProperty(newInventoryContents, id);
 
       return newInventoryContents;
     });
@@ -94,7 +94,7 @@ export function SellItems() {
               `}
               onConfirm={() => sellPossession(sellConfirmation)}
               setHide={() => setSellConfirmation(null)}
-              show={sellConfirmation !== null}
+              show={!!sellConfirmation}
               title="Sell equipped item?"
             />
           )}

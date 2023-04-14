@@ -3,7 +3,7 @@ import { useRecoilCallback } from "recoil";
 
 import { TRINKET_KNAPSACK } from "@neverquest/data/trinkets";
 import { canFit, encumbranceMaximum, hasKnapsack, inventory } from "@neverquest/state/inventory";
-import { Trinket } from "@neverquest/types";
+import type { Trinket } from "@neverquest/types";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useAcquireTrinket() {

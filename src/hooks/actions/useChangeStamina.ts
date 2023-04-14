@@ -5,7 +5,7 @@ import { deltas } from "@neverquest/state/deltas";
 import { currentStamina, maximumStaminaTotal } from "@neverquest/state/reserves";
 import { staminaRegenerationRate } from "@neverquest/state/statistics";
 import { DeltaType } from "@neverquest/types/enums";
-import { DeltaReserve, FloatingTextVariant } from "@neverquest/types/ui";
+import { type DeltaReserve, FloatingTextVariant } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeStamina() {

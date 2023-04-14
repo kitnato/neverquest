@@ -6,7 +6,7 @@ import { Scrap } from "@neverquest/components/Resources/Scrap";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { coins, scrap } from "@neverquest/state/resources";
-import { Gear } from "@neverquest/types";
+import type { Gear } from "@neverquest/types";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 import { UIVariant } from "@neverquest/types/ui";
 

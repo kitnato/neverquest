@@ -7,10 +7,10 @@ import { ReactComponent as IconBlunt } from "@neverquest/icons/gavel.svg";
 import { ReactComponent as IconPlate } from "@neverquest/icons/metal-scales.svg";
 import { ReactComponent as IconShield } from "@neverquest/icons/round-shield.svg";
 import { ReactComponent as IconArmor } from "@neverquest/icons/shoulder-armor.svg";
-import { ArmorClass, ShieldType, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
-import { Armor, Range, Shield, Weapon } from "@neverquest/types";
+import type { ArmorClass, ShieldType, WeaponClass } from "@neverquest/LOCRA/types";
+import type { Armor, Range, Shield, Weapon } from "@neverquest/types";
 import { SkillType, WeaponGrip } from "@neverquest/types/enums";
-import { SVGIcon } from "@neverquest/types/props";
+import type { SVGIcon } from "@neverquest/types/props";
 
 export const ARMOR_NONE: Armor = {
   coinPrice: 0,
@@ -24,9 +24,9 @@ export const ARMOR_NONE: Armor = {
 };
 
 export const ARMOR_CLASS_ICONS: Record<ArmorClass, SVGIcon> = {
-  [ArmorClass.Hide]: IconHide,
-  [ArmorClass.Plate]: IconPlate,
-  [ArmorClass.Reinforced]: IconReinforced,
+  hide: IconHide,
+  plate: IconPlate,
+  reinforced: IconReinforced,
 };
 
 export const ARMOR_ICON = IconArmor;
@@ -41,21 +41,21 @@ export const ARMOR_SPECIFICATIONS: Record<
     weightModifier: number;
   }
 > = {
-  [ArmorClass.Hide]: {
+  hide: {
     deflectionChanceModifier: 0,
     dodgeChanceModifier: 0,
     dodgeCostModifier: 0,
     protectionModifier: 0.5,
     weightModifier: 0.5,
   },
-  [ArmorClass.Plate]: {
+  plate: {
     deflectionChanceModifier: 1,
     dodgeChanceModifier: -1,
     dodgeCostModifier: 0,
     protectionModifier: 1,
     weightModifier: 1,
   },
-  [ArmorClass.Reinforced]: {
+  reinforced: {
     deflectionChanceModifier: 0.5,
     dodgeChanceModifier: 0,
     dodgeCostModifier: 1,
@@ -85,19 +85,19 @@ export const SHIELD_SPECIFICATIONS: Record<
     weightModifier: number;
   }
 > = {
-  [ShieldType.Medium]: {
+  medium: {
     blockRange: { maximum: 0.49, minimum: 0.25 },
     staggerModifier: 0.75,
     staminaCostModifier: 0.75,
     weightModifier: 0.75,
   },
-  [ShieldType.Small]: {
+  small: {
     blockRange: { maximum: 0.24, minimum: 0.1 },
     staggerModifier: 0.5,
     staminaCostModifier: 0.5,
     weightModifier: 0.5,
   },
-  [ShieldType.Tower]: {
+  tower: {
     blockRange: { maximum: 0.75, minimum: 0.5 },
     staggerModifier: 1,
     staminaCostModifier: 1,
@@ -106,27 +106,28 @@ export const SHIELD_SPECIFICATIONS: Record<
 };
 
 export const WEAPON_ABILITY_NAME = {
-  [WeaponClass.Blunt]: "Stagger",
-  [WeaponClass.Piercing]: "Bleed",
-  [WeaponClass.Slashing]: "Parry",
+  blunt: "Stagger",
+  piercing: "Bleed",
+  slashing: "Parry",
 };
 
 export const WEAPON_CLASS_ICONS: Record<WeaponClass, SVGIcon> = {
-  [WeaponClass.Blunt]: IconBlunt,
-  [WeaponClass.Piercing]: IconPiercing,
-  [WeaponClass.Slashing]: IconSlashing,
+  blunt: IconBlunt,
+  piercing: IconPiercing,
+  slashing: IconSlashing,
 };
 
 export const WEAPON_ICON = IconWeapon;
 
 export const WEAPON_SKILL_TYPE: Record<WeaponClass, SkillType> = {
-  [WeaponClass.Blunt]: SkillType.Stagger,
-  [WeaponClass.Piercing]: SkillType.Bleed,
-  [WeaponClass.Slashing]: SkillType.Parry,
+  blunt: SkillType.Stagger,
+  piercing: SkillType.Bleed,
+  slashing: SkillType.Parry,
 };
 
 export const WEAPON_NONE: Weapon = {
   abilityChance: 0,
+  artifactClass: "blunt",
   coinPrice: 0,
   damage: 10,
   grip: WeaponGrip.OneHanded,
@@ -144,7 +145,6 @@ export const WEAPON_NONE: Weapon = {
   rate: 2500,
   scrapPrice: 0,
   staminaCost: 0,
-  type: WeaponType.Melee,
-  weaponClass: WeaponClass.Blunt,
+  type: "melee",
   weight: 0,
 };

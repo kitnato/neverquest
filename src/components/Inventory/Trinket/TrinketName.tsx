@@ -1,9 +1,9 @@
 import { OverlayTrigger, Popover } from "react-bootstrap";
-import { Placement } from "react-bootstrap/esm/types";
+import type { Placement } from "react-bootstrap/esm/types";
 
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
-import { Trinket } from "@neverquest/types";
+import type { Trinket } from "@neverquest/types";
 
 export function TrinketName({
   placement = "top",

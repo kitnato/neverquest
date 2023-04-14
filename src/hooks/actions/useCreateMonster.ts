@@ -1,7 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
 import { LOCRA } from "@neverquest/LOCRA";
-import { CreatureType } from "@neverquest/LOCRA/types";
 import { isAttacking } from "@neverquest/state/character";
 import { level } from "@neverquest/state/encounter";
 import {
@@ -26,7 +25,7 @@ export function useCreateMonster() {
             hasPrefix: Math.random() < 0.8,
             hasSuffix: Math.random() < 0.1 * Math.ceil(get(level) / 2),
             isNSFW: get(isNSFW),
-            type: CreatureType.Monster,
+            type: "monster",
           })
         );
 
@@ -34,7 +33,7 @@ export function useCreateMonster() {
 
         set(isMonsterNew, true);
 
-        if (isAttacking) {
+        if (get(isAttacking)) {
           set(monsterAttackDuration, get(monsterAttackRate));
         }
       },

@@ -1,7 +1,7 @@
 import { ICON_PLACEHOLDER, RECOVERY_RATE } from "@neverquest/constants";
 import { ReactComponent as IconAttackRate } from "@neverquest/icons/striking-splinter.svg";
 import { ReactComponent as IconDamage } from "@neverquest/icons/wolverine-claws.svg";
-import { AttributeOrMastery } from "@neverquest/types";
+import type { AttributeOrMastery } from "@neverquest/types";
 import { AttributeType, SkillType } from "@neverquest/types/enums";
 
 export const ATTACK_RATE_ICON = IconAttackRate;

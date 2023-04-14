@@ -4,7 +4,6 @@ import { BLEED } from "@neverquest/constants";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
-import { WeaponClass } from "@neverquest/LOCRA/types";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -26,7 +25,7 @@ import { DeltaType, MasteryType, ShowingType, SkillType } from "@neverquest/type
 import {
   AnimationSpeed,
   AnimationType,
-  DeltaDisplay,
+  type DeltaDisplay,
   FloatingTextVariant,
 } from "@neverquest/types/ui";
 import { animateElement } from "@neverquest/utilities/animateElement";
@@ -42,7 +41,7 @@ export function useAttack() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const { abilityChance, staminaCost, weaponClass } = get(weapon);
+        const { abilityChance, artifactClass, staminaCost } = get(weapon);
 
         if (!get(isShowing(ShowingType.Statistics))) {
           set(isShowing(ShowingType.Statistics), true);
@@ -57,7 +56,7 @@ export function useAttack() {
             Math.random() <= get(bleedChance);
           const hasInflictedStagger =
             get(skills(SkillType.Stagger)) &&
-            weaponClass === WeaponClass.Blunt &&
+            artifactClass === "blunt" &&
             Math.random() <= abilityChance;
 
           const baseDamage = -get(damageTotal);

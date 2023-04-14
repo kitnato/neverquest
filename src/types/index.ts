@@ -1,16 +1,16 @@
-import { ArmorClass, ShieldType, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
-import { SkillType, WeaponGrip } from "@neverquest/types/enums";
-import { SVGIcon } from "@neverquest/types/props";
+import type { ArmorClass, ShieldType, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
+import type { SkillType, WeaponGrip } from "@neverquest/types/enums";
+import type { SVGIcon } from "@neverquest/types/props";
 
 export type Armor = GearBase & {
-  armorClass?: ArmorClass;
+  artifactClass?: ArmorClass;
   deflectionChance: number;
   dodgeChanceModifier: number;
   protection: number;
   staminaCost: number;
 };
 
-export interface AttributeOrMastery {
+export type AttributeOrMastery = {
   Icon: SVGIcon;
   base: number;
   description: string;
@@ -18,50 +18,49 @@ export interface AttributeOrMastery {
   maximum?: number;
   name: string;
   requiredSkill?: SkillType;
-}
+};
 
-export interface CrewMember {
+export type CrewMember = {
   coinPrice: number;
   description: string;
   hirableLevel: number;
   interaction: string;
   monologues: string[];
   name: string;
-}
+};
 
-export interface Inventory {
-  [id: string]: Item;
-}
+export type Inventory = Record<string, Item>;
 
-export interface InventoryBlacksmith {
+export type InventoryBlacksmith = {
   armor: Armor | null;
   shield: Shield | null;
   weapon: Weapon | null;
-}
+};
 
-export interface InventoryMerchant {
-  [id: string]: {
+export type InventoryMerchant = Record<
+  string,
+  {
     isReturned: boolean;
     item: Item;
-  };
-}
+  }
+>;
 
 export type Item = Gear | Trinket;
 
-interface ItemBase {
+type ItemBase = {
   coinPrice: number;
   name: string;
   weight: number;
-}
+};
 
 export type Gear = Armor | Shield | Weapon;
 
 type GearBase = ItemBase & { scrapPrice: number };
 
-export interface Range {
+export type Range = {
   maximum: number;
   minimum: number;
-}
+};
 
 export type Shield = GearBase & {
   blockChance: number;
@@ -70,13 +69,13 @@ export type Shield = GearBase & {
   type?: ShieldType;
 };
 
-export interface Skill {
+export type Skill = {
   Icon: SVGIcon;
   coinPrice: number;
   description: string;
   name: string;
   requiredLevel: number;
-}
+};
 
 export type StorageKey =
   | "attackDuration"
@@ -147,6 +146,7 @@ export type Trinket = ItemBase & {
 
 export type Weapon = GearBase & {
   abilityChance: number;
+  artifactClass: WeaponClass;
   damage: number;
   grip: WeaponGrip;
   ranges: {
@@ -156,5 +156,4 @@ export type Weapon = GearBase & {
   rate: number;
   staminaCost: number;
   type: WeaponType;
-  weaponClass: WeaponClass;
 };

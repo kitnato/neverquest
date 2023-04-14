@@ -9,7 +9,6 @@ import {
 } from "@neverquest/constants";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { MASTERIES } from "@neverquest/data/masteries";
-import { WeaponClass } from "@neverquest/LOCRA/types";
 import { attributes } from "@neverquest/state/attributes";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { masteries } from "@neverquest/state/masteries";
@@ -39,9 +38,9 @@ export const attackRateTotal = selector({
 
 export const bleedChance = selector({
   get: ({ get }) => {
-    const { abilityChance, weaponClass } = get(weapon);
+    const { abilityChance, artifactClass } = get(weapon);
 
-    if (weaponClass === WeaponClass.Piercing && abilityChance > 0) {
+    if (artifactClass === "piercing" && abilityChance > 0) {
       return abilityChance;
     }
 
@@ -193,9 +192,9 @@ export const parryAbsorption = selector({
 
 export const parryChance = selector({
   get: ({ get }) => {
-    const { abilityChance, weaponClass } = get(weapon);
+    const { abilityChance, artifactClass } = get(weapon);
 
-    if (weaponClass === WeaponClass.Slashing && abilityChance > 0) {
+    if (artifactClass === "slashing" && abilityChance > 0) {
       return abilityChance;
     }
 
@@ -261,9 +260,9 @@ export const skipRecoveryChance = selector({
 
 export const staggerChanceWeapon = selector({
   get: ({ get }) => {
-    const { abilityChance, weaponClass } = get(weapon);
+    const { abilityChance, artifactClass } = get(weapon);
 
-    return weaponClass === WeaponClass.Blunt ? abilityChance : 0;
+    return artifactClass === "blunt" ? abilityChance : 0;
   },
   key: "staggerChanceWeapon",
 });

@@ -1,6 +1,6 @@
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-import { IconImageProps } from "@neverquest/types/props";
+import type { IconImageProps } from "@neverquest/types/props";
 
 export function IconImage({
   Icon,

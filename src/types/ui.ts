@@ -16,15 +16,15 @@ export enum AnimationType {
 
 export type DeltaDisplay = DeltaDisplayContents | DeltaDisplayContents[];
 
-interface DeltaDisplayContents {
+type DeltaDisplayContents = {
   color: FloatingTextVariant | null;
   value: number | string;
-}
+};
 
-export interface DeltaReserve {
+export type DeltaReserve = {
   delta?: DeltaDisplay;
   value: number;
-}
+};
 
 export type FloatingText = {
   delta: DeltaDisplay;

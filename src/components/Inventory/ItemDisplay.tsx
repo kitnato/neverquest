@@ -1,4 +1,4 @@
-import { Placement } from "react-bootstrap/esm/types";
+import type { Placement } from "react-bootstrap/esm/types";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ArmorName } from "@neverquest/components/Inventory/Armor/ArmorName";
 import { ShieldName } from "@neverquest/components/Inventory/Shield/ShieldName";
@@ -7,8 +7,8 @@ import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
 import { ICON_UNKNOWN } from "@neverquest/constants";
 import { ARMOR_ICON, SHIELD_ICON, WEAPON_ICON } from "@neverquest/data/gear";
 import * as Trinkets from "@neverquest/data/trinkets";
-import { Item } from "@neverquest/types";
-import { IconImageDOMProps } from "@neverquest/types/props";
+import type { Item } from "@neverquest/types";
+import type { IconImageDOMProps } from "@neverquest/types/props";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 
 export function ItemDisplay({
@@ -53,13 +53,14 @@ export function ItemDisplay({
     );
   }
 
-  // If part of an inventory, the Icon FC does not get stored, so it needs to be looked up.
+  // TODO - If part of an inventory, the Icon FC does not get stored, so it needs to be looked up.
   const { name } = item;
   let { Icon } = item;
 
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!Icon) {
     Icon =
-      Object.values(Trinkets).find(({ name: trinketName }) => trinketName === name)?.Icon ||
+      Object.values(Trinkets).find(({ name: trinketName }) => trinketName === name)?.Icon ??
       ICON_UNKNOWN;
   }
 

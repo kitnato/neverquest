@@ -1,5 +1,5 @@
 import { ICON_PLACEHOLDER } from "@neverquest/constants";
-import { AttributeOrMastery } from "@neverquest/types";
+import type { AttributeOrMastery } from "@neverquest/types";
 import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
 
 // TODO - diversify icons.

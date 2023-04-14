@@ -1,8 +1,8 @@
-import { RecoilValue, Snapshot } from "recoil";
+import type { RecoilValue, Snapshot } from "recoil";
 
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/constants";
-import { Range } from "@neverquest/types";
-import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
+import type { Range } from "@neverquest/types";
+import type { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
 import { formatToFixed } from "@neverquest/utilities/formatters";
 
 export function getAnimationClass({

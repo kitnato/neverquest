@@ -1,13 +1,13 @@
 import { DefaultValue, atom, atomFamily, selectorFamily } from "recoil";
 
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { InventoryBlacksmith, InventoryMerchant } from "@neverquest/types";
-import { CrewStatus, CrewType } from "@neverquest/types/enums";
+import type { InventoryBlacksmith, InventoryMerchant } from "@neverquest/types";
+import { CrewStatus, type CrewType } from "@neverquest/types/enums";
 
-interface CrewState {
+type CrewState = {
   hireStatus: CrewStatus;
   monologueProgress: number;
-}
+};
 
 // SELECTORS
 

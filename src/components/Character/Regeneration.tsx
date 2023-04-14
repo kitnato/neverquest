@@ -107,7 +107,9 @@ export function Regeneration({ type }: { type: ReserveType.Health | ReserveType.
 
       <FloatingText
         type={
-          ReserveType.Health ? DeltaType.HealthRegenerationRate : DeltaType.StaminaRegenerationRate
+          type === ReserveType.Health
+            ? DeltaType.HealthRegenerationRate
+            : DeltaType.StaminaRegenerationRate
         }
       />
     </>

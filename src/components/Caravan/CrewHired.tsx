@@ -5,7 +5,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
 import { CREW, CREW_ICON } from "@neverquest/data/caravan";
 import { crew } from "@neverquest/state/caravan";
-import { CrewStatus, CrewType } from "@neverquest/types/enums";
+import { CrewStatus, type CrewType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 
 export function CrewHired({ setActive, type }: { setActive: () => void; type: CrewType }) {

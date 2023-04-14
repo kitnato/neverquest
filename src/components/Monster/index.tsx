@@ -22,9 +22,7 @@ export function Monster() {
   useEffect(() => {
     const { current } = element;
 
-    if (current) {
-      setMonsterElement(current);
-    }
+    setMonsterElement(current);
 
     return () => setMonsterElement(null);
   }, [element, setMonsterElement]);

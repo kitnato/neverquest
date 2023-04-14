@@ -34,7 +34,7 @@ import { DeltaType, MasteryType, ShowingType, SkillType } from "@neverquest/type
 import {
   AnimationSpeed,
   AnimationType,
-  DeltaDisplay,
+  type DeltaDisplay,
   FloatingTextVariant,
 } from "@neverquest/types/ui";
 import { animateElement } from "@neverquest/utilities/animateElement";
@@ -277,7 +277,7 @@ export function useDefend() {
 
         changeHealth({ delta: deltaHealth, value: healthDamage });
 
-        if (deltaStamina) {
+        if (deltaStamina.length > 0) {
           set(deltas(DeltaType.Stamina), deltaStamina);
         }
       },

@@ -8,7 +8,7 @@ import { LABEL_AT_MAXIMUM } from "@neverquest/constants";
 import { MASTERIES, MASTERY_DELTA_TYPE } from "@neverquest/data/masteries";
 import { isShowingMastery } from "@neverquest/state/isShowing";
 import { isMasteryAtMaximum, masteries, masteryCost } from "@neverquest/state/masteries";
-import { MasteryType } from "@neverquest/types/enums";
+import type { MasteryType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 
 export function Mastery({ type }: { type: MasteryType }) {

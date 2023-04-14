@@ -2,7 +2,7 @@ import { atomFamily, selectorFamily } from "recoil";
 
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { skills } from "@neverquest/state/skills";
-import { MasteryType, ShowingType, SkillType } from "@neverquest/types/enums";
+import { MasteryType, type ShowingType, SkillType } from "@neverquest/types/enums";
 
 // SELECTORS
 

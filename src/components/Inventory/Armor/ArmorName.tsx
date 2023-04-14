@@ -1,5 +1,5 @@
 import { OverlayTrigger, Popover } from "react-bootstrap";
-import { Placement } from "react-bootstrap/esm/types";
+import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
@@ -8,7 +8,7 @@ import { ARMOR_CLASS_ICONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
-import { Armor } from "@neverquest/types";
+import type { Armor } from "@neverquest/types";
 import { ShowingType, SkillType } from "@neverquest/types/enums";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 
@@ -18,7 +18,7 @@ export function ArmorName({ armor, placement = "top" }: { armor: Armor; placemen
   const armorsSkillValue = useRecoilValue(skills(SkillType.Armors));
 
   const {
-    armorClass,
+    artifactClass,
     deflectionChance,
     dodgeChanceModifier,
     name,
@@ -26,7 +26,7 @@ export function ArmorName({ armor, placement = "top" }: { armor: Armor; placemen
     staminaCost,
     weight,
   } = armor;
-  const Icon = armorClass ? ARMOR_CLASS_ICONS[armorClass] : () => null;
+  const Icon = artifactClass ? ARMOR_CLASS_ICONS[artifactClass] : () => null;
 
   return (
     <OverlayTrigger
@@ -50,7 +50,7 @@ export function ArmorName({ armor, placement = "top" }: { armor: Armor; placemen
                     <td>
                       <Icon width={ICON_SIZE_INLAY} />
                       &nbsp;
-                      {capitalizeAll(armorClass ?? "None")}
+                      {capitalizeAll(artifactClass ?? "None")}
                     </td>
                   </>
                 ) : (

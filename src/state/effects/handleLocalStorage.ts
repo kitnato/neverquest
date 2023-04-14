@@ -1,8 +1,8 @@
 import ls from "localstorage-slim";
-import { AtomEffect } from "recoil";
+import type { AtomEffect } from "recoil";
 
 import { KEY_SESSION, KEY_SETTINGS } from "@neverquest/constants";
-import { StorageKey } from "@neverquest/types";
+import type { StorageKey } from "@neverquest/types";
 
 export function handleLocalStorage<ValueType>({
   isSetting,
@@ -29,10 +29,10 @@ export function handleLocalStorage<ValueType>({
     }
 
     onSet((newValue, _, isReset) => {
-      const newStore = ls.get<Store>(storeKey) || {};
+      const newStore = ls.get<Store>(storeKey) ?? {};
 
       if (isReset) {
-        delete newStore[valueKey];
+        Reflect.deleteProperty(newStore, valueKey);
       } else {
         newStore[valueKey] = newValue;
       }

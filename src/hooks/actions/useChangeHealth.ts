@@ -6,7 +6,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { currentHealth, maximumHealth } from "@neverquest/state/reserves";
 import { healthRegenerationRate } from "@neverquest/state/statistics";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
-import { DeltaReserve, FloatingTextVariant } from "@neverquest/types/ui";
+import { type DeltaReserve, FloatingTextVariant } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeHealth() {

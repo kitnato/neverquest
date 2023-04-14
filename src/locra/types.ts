@@ -1,85 +1,44 @@
-export enum AffixTag {
-  Elemental = "elemental",
-  HighQuality = "highQuality",
-  LowQuality = "lowQuality",
-}
+export type Affix = "prefix" | "suffix";
 
-export enum AffixType {
-  Prefix = "prefix",
-  Suffix = "suffix",
-}
+export type AffixTag = "elemental" | "highQuality" | "lowQuality";
 
-export enum ArmorClass {
-  Hide = "hide",
-  Plate = "plate",
-  Reinforced = "reinforced",
-}
+export type ArmorClass = "hide" | "plate" | "reinforced";
 
-export interface ArmorQuery {
-  subtype?: ArmorType;
-  type: ArtifactType.Armor;
-}
+export type ArmorType = "chest" | "feet" | "hands" | "head" | "legs" | "shoulders" | "waist";
 
-export enum ArmorType {
-  Chest = "chest",
-  Feet = "feet",
-  Hands = "hands",
-  Head = "head",
-  Legs = "legs",
-  Shoulders = "shoulders",
-  Waist = "waist",
-}
+export type Artifact = "armor" | "shield" | "weapon";
 
-export enum ArtifactType {
-  Armor = "armor",
-  Shield = "shield",
-  Weapon = "weapon",
-}
+export type ArtifactQuery =
+  | {
+      artifactClass?: ArmorClass;
+      subtype?: ArmorType;
+      type: "armor";
+    }
+  | {
+      subtype?: ShieldType;
+      type: "shield";
+    }
+  | {
+      artifactClass?: WeaponClass;
+      subtype?: WeaponType;
+      type: "weapon";
+    };
 
-export enum Category {
-  Artifact = "artifact",
-  Creature = "creature",
-  Location = "location",
-}
+export type Category = "artifact" | "creature" | "location";
 
-export enum CreatureType {
-  Human = "human",
-  Monster = "monster",
-  Name = "name",
-}
+export type Creature = "human" | "monster" | "name";
 
-export interface GeneratorParameters {
+export type GeneratorParameters = {
   hasPrefix: boolean;
   hasSuffix: boolean;
   isNSFW: boolean;
   prefixTags: AffixTag[];
   suffixTags: AffixTag[];
-}
+};
 
-export interface ShieldQuery {
-  subtype?: ShieldType;
-  type: ArtifactType.Shield;
-}
+export type ShieldType = "medium" | "small" | "tower";
 
-export enum ShieldType {
-  Medium = "medium",
-  Small = "small",
-  Tower = "tower",
-}
+export const WeaponClasses = ["blunt", "piercing", "slashing"] as const;
+export type WeaponClass = (typeof WeaponClasses)[number];
 
-export enum WeaponClass {
-  Blunt = "blunt",
-  Piercing = "piercing",
-  Slashing = "slashing",
-}
-
-export interface WeaponQuery {
-  subtype?: WeaponType;
-  type: ArtifactType.Weapon;
-  weaponClass: WeaponClass;
-}
-
-export enum WeaponType {
-  Melee = "melee",
-  Ranged = "ranged",
-}
+export type WeaponType = "melee" | "ranged";

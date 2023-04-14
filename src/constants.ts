@@ -2,7 +2,7 @@ import { ReactComponent as IconPlaceholder } from "@neverquest/icons/abstract-04
 import { ReactComponent as IconEssence } from "@neverquest/icons/incense.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/perspective-dice-six-faces-random.svg";
 import { ReactComponent as IconWeight } from "@neverquest/icons/weight-crush.svg";
-import { DeltaDisplay } from "@neverquest/types/ui";
+import type { DeltaDisplay } from "@neverquest/types/ui";
 
 export const BLEED = {
   duration: 3000,

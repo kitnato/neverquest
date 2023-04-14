@@ -1,19 +1,18 @@
 import { ARMOR_SPECIFICATIONS, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
 import { LOCRA } from "@neverquest/LOCRA";
-import {
+import type {
   AffixTag,
   ArmorClass,
-  ArtifactType,
   ShieldType,
   WeaponClass,
   WeaponType,
 } from "@neverquest/LOCRA/types";
-import { Armor, Shield, Weapon } from "@neverquest/types";
+import type { Armor, Shield, Weapon } from "@neverquest/types";
 import { WeaponGrip } from "@neverquest/types/enums";
 import { getFromRange, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function generateArmor({
-  armorClass,
+  artifactClass,
   hasPrefix,
   hasSuffix,
   isNSFW,
@@ -21,7 +20,7 @@ export function generateArmor({
   name,
   tags,
 }: {
-  armorClass: ArmorClass;
+  artifactClass: ArmorClass;
   hasPrefix?: boolean;
   hasSuffix?: boolean;
   isNSFW: boolean;
@@ -35,22 +34,22 @@ export function generateArmor({
     dodgeCostModifier,
     protectionModifier,
     weightModifier,
-  } = ARMOR_SPECIFICATIONS[armorClass];
+  } = ARMOR_SPECIFICATIONS[artifactClass];
   const growthFactor = getGrowthSigmoid(level);
 
   return {
-    armorClass,
+    artifactClass,
     coinPrice: Math.round(600 * growthFactor),
     deflectionChance: (0.05 + 0.6 * growthFactor) * deflectionChanceModifier,
     dodgeChanceModifier,
     name:
-      name ||
+      name ??
       LOCRA.generateArtifact({
         hasPrefix,
         hasSuffix,
         isNSFW,
         query: {
-          type: ArtifactType.Armor,
+          type: "armor",
         },
         tags,
       }),
@@ -94,14 +93,14 @@ export function generateShield({
     blockChance: getFromRange(blockRange),
     coinPrice: Math.round(500 * growthFactor),
     name:
-      name ||
+      name ??
       LOCRA.generateArtifact({
         hasPrefix,
         hasSuffix,
         isNSFW,
         query: {
           subtype: type,
-          type: ArtifactType.Shield,
+          type: "shield",
         },
         tags,
       }),
@@ -114,21 +113,21 @@ export function generateShield({
 }
 
 export function generateWeapon({
+  artifactClass,
   hasPrefix,
   hasSuffix,
   isNSFW,
   level,
   tags,
   type,
-  weaponClass,
 }: {
+  artifactClass: WeaponClass;
   hasPrefix?: boolean;
   hasSuffix?: boolean;
   isNSFW: boolean;
   level: number;
   tags?: AffixTag[];
   type: WeaponType;
-  weaponClass: WeaponClass;
 }): Weapon {
   const growthFactor = getGrowthSigmoid(level);
   const ranges = {
@@ -143,7 +142,9 @@ export function generateWeapon({
   };
   const weapon = {
     abilityChance: 0,
+    artifactClass,
     coinPrice: Math.round(400 * growthFactor),
+
     damage: getFromRange({ ...ranges.damage }),
     // TODO
     grip: WeaponGrip.OneHanded,
@@ -152,9 +153,9 @@ export function generateWeapon({
       hasSuffix,
       isNSFW,
       query: {
+        artifactClass: artifactClass,
         subtype: type,
-        type: ArtifactType.Weapon,
-        weaponClass,
+        type: "weapon",
       },
       tags,
     }),
@@ -163,20 +164,19 @@ export function generateWeapon({
     scrapPrice: Math.round(2500 * growthFactor),
     staminaCost: Math.ceil(50 * growthFactor),
     type,
-    weaponClass,
     weight: Math.ceil(30 * growthFactor),
   };
 
-  switch (weaponClass) {
-    case WeaponClass.Blunt: {
+  switch (artifactClass) {
+    case "blunt": {
       weapon.abilityChance = 0.1 + Math.round(0.7 * growthFactor);
       break;
     }
-    case WeaponClass.Piercing: {
+    case "piercing": {
       weapon.abilityChance = 0.2 + Math.round(0.7 * growthFactor);
       break;
     }
-    case WeaponClass.Slashing: {
+    case "slashing": {
       weapon.abilityChance = 0.15 + Math.round(0.6 * growthFactor);
       break;
     }

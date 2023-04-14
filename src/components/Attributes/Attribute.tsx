@@ -22,7 +22,7 @@ import {
   isAttributeAtMaximum,
 } from "@neverquest/state/attributes";
 import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
-import { AttributeType } from "@neverquest/types/enums";
+import type { AttributeType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 
 export function Attribute({ type }: { type: AttributeType }) {

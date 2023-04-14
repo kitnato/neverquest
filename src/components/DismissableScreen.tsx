@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Offcanvas } from "react-bootstrap";
-import { OffcanvasPlacement } from "react-bootstrap/Offcanvas";
+import type { OffcanvasPlacement } from "react-bootstrap/Offcanvas";
 
 export function DismissableScreen({
   contents,

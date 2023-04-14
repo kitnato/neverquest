@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Stack } from "react-bootstrap";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { IconImageDOMProps, SVGIcon } from "@neverquest/types/props";
+import type { IconImageDOMProps, SVGIcon } from "@neverquest/types/props";
 import { AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -23,7 +23,7 @@ export function IconDisplay({
   isSpaced?: boolean;
   tooltip: string;
 }) {
-  const { isFlipped, overlayPlacement } = iconProps || {};
+  const { isFlipped, overlayPlacement } = iconProps ?? {};
 
   return (
     <Stack

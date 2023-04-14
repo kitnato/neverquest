@@ -5,7 +5,7 @@ import { SKILLS } from "@neverquest/data/skills";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { coins } from "@neverquest/state/resources";
 import { skills } from "@neverquest/state/skills";
-import { SkillType } from "@neverquest/types/enums";
+import type { SkillType } from "@neverquest/types/enums";
 import { UIVariant } from "@neverquest/types/ui";
 
 export function TrainSkillButton({ type }: { type: SkillType }) {

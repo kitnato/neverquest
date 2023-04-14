@@ -1,5 +1,5 @@
 import { ReactComponent as IconCrew } from "@neverquest/icons/cowled.svg";
-import { CrewMember } from "@neverquest/types";
+import type { CrewMember } from "@neverquest/types";
 import { CrewType } from "@neverquest/types/enums";
 
 export const CREW: Record<CrewType, CrewMember> = {

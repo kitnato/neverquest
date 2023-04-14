@@ -1,7 +1,7 @@
 import { ReactComponent as IconCompass } from "@neverquest/icons/compass.svg";
 import { ReactComponent as IconKnapsack } from "@neverquest/icons/knapsack.svg";
 import { ReactComponent as IconStone } from "@neverquest/icons/stone-wheel.svg";
-import { Trinket } from "@neverquest/types";
+import type { Trinket } from "@neverquest/types";
 
 export const TRINKET_COMPASS: Trinket = {
   coinPrice: 20,

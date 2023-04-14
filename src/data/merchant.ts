@@ -1,42 +1,58 @@
 import { TRINKET_COMPASS, TRINKET_HEARTHSTONE, TRINKET_KNAPSACK } from "@neverquest/data/trinkets";
-import { ArmorClass, ShieldType, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
+import type { ArmorClass, ShieldType, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
+import type { Trinket } from "@neverquest/types";
 
-export const MERCHANT_OFFERS = [
+// TODO - make sure artifact keys are typed as Artifact.
+type MerchantOffer =
+  | { artifact: "armor"; artifactClass: ArmorClass }
+  | { artifact: "shield"; type: ShieldType }
+  | { artifact: "weapon"; artifactClass: WeaponClass; type: WeaponType }
+  | Trinket;
+
+export const MERCHANT_OFFERS: MerchantOffer[][] = [
   [
     {
-      type: WeaponType.Melee,
-      weaponClass: WeaponClass.Piercing,
+      artifact: "weapon",
+      artifactClass: "piercing",
+      type: "melee",
     },
   ],
   [
     {
-      armorClass: ArmorClass.Hide,
+      artifact: "armor",
+      artifactClass: "hide",
     },
   ],
   [
     {
-      type: ShieldType.Small,
+      artifact: "shield",
+      type: "small",
     },
   ],
   [TRINKET_KNAPSACK],
   [TRINKET_COMPASS, TRINKET_HEARTHSTONE],
   [
     {
-      type: WeaponType.Melee,
-      weaponClass: WeaponClass.Slashing,
+      artifact: "weapon",
+      artifactClass: "slashing",
+      type: "melee",
     },
     {
-      type: WeaponType.Melee,
-      weaponClass: WeaponClass.Blunt,
+      artifact: "weapon",
+      artifactClass: "blunt",
+      type: "melee",
     },
     {
-      armorClass: ArmorClass.Reinforced,
+      artifact: "armor",
+      artifactClass: "reinforced",
     },
     {
-      type: ShieldType.Medium,
+      artifact: "shield",
+      type: "medium",
     },
     {
-      type: ShieldType.Tower,
+      artifact: "shield",
+      type: "tower",
     },
   ],
-] as const;
+];

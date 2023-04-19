@@ -31,12 +31,7 @@ import {
   staggerDuration,
 } from "@neverquest/state/statistics";
 import { DeltaType, MasteryType, ShowingType, SkillType } from "@neverquest/types/enums";
-import {
-  AnimationSpeed,
-  AnimationType,
-  type DeltaDisplay,
-  FloatingTextVariant,
-} from "@neverquest/types/ui";
+import type { DeltaDisplay } from "@neverquest/types/ui";
 import { animateElement } from "@neverquest/utilities/animateElement";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -67,8 +62,8 @@ export function useDefend() {
 
         animateElement({
           element: get(statusElement),
-          speed: AnimationSpeed.Fast,
-          type: AnimationType.HeadShake,
+          speed: "fast",
+          type: "headShake",
         });
 
         const hasDodged = get(skills(SkillType.Dodge)) && Math.random() <= get(dodgeChanceTotal);
@@ -76,14 +71,14 @@ export function useDefend() {
         if (hasDodged) {
           if (get(canDodge)) {
             set(deltas(DeltaType.Health), {
-              color: FloatingTextVariant.Neutral,
+              color: "text-muted",
               value: "DODGED",
             });
 
             return;
           } else {
             set(deltas(DeltaType.Health), {
-              color: FloatingTextVariant.Neutral,
+              color: "text-muted",
               value: `CANNOT DODGE (${get(armor).staminaCost})`,
             });
           }
@@ -98,7 +93,7 @@ export function useDefend() {
 
         if (healthDamage === 0) {
           set(deltas(DeltaType.Health), {
-            color: FloatingTextVariant.Neutral,
+            color: "text-muted",
             value: healthDamage,
           });
 
@@ -121,11 +116,11 @@ export function useDefend() {
             changeMonsterHealth({
               delta: [
                 {
-                  color: FloatingTextVariant.Neutral,
+                  color: "text-muted",
                   value: "PARRIED",
                 },
                 {
-                  color: FloatingTextVariant.Negative,
+                  color: "text-danger",
                   value: ` (${parryReflected})`,
                 },
               ],
@@ -134,11 +129,11 @@ export function useDefend() {
 
             deltaHealth = [
               {
-                color: FloatingTextVariant.Neutral,
+                color: "text-muted",
                 value: "PARRIED",
               },
               {
-                color: FloatingTextVariant.Negative,
+                color: "text-danger",
                 value: ` (${healthDamage})`,
               },
             ];
@@ -148,17 +143,17 @@ export function useDefend() {
 
             animateElement({
               element: get(monsterElement),
-              speed: AnimationSpeed.Fast,
-              type: AnimationType.HeadShake,
+              speed: "fast",
+              type: "headShake",
             });
           } else {
             deltaStamina = [
               {
-                color: FloatingTextVariant.Neutral,
+                color: "text-muted",
                 value: "CANNOT PARRY",
               },
               {
-                color: FloatingTextVariant.Negative,
+                color: "text-danger",
                 value: ` (${staminaCost})`,
               },
             ];
@@ -180,7 +175,7 @@ export function useDefend() {
 
             deltaHealth = [
               {
-                color: FloatingTextVariant.Neutral,
+                color: "text-muted",
                 value: "BLOCKED",
               },
             ];
@@ -191,7 +186,7 @@ export function useDefend() {
 
             if (isFreeBlock) {
               deltaStamina.push({
-                color: FloatingTextVariant.Neutral,
+                color: "text-muted",
                 value: "STABILIZED",
               });
             } else {
@@ -204,11 +199,11 @@ export function useDefend() {
           } else {
             deltaStamina = [
               {
-                color: FloatingTextVariant.Neutral,
+                color: "text-muted",
                 value: "CANNOT BLOCK",
               },
               {
-                color: FloatingTextVariant.Negative,
+                color: "text-danger",
                 value: ` (${staminaCost})`,
               },
             ];
@@ -219,11 +214,11 @@ export function useDefend() {
           if (get(protection) > 0) {
             deltaHealth = [
               {
-                color: FloatingTextVariant.Negative,
+                color: "text-danger",
                 value: healthDamage,
               },
               {
-                color: FloatingTextVariant.Neutral,
+                color: "text-muted",
                 value: ` (${get(protection)})`,
               },
             ];
@@ -253,7 +248,7 @@ export function useDefend() {
 
           if (hasDeflected) {
             deltaHealth.push({
-              color: FloatingTextVariant.Positive,
+              color: "text-success",
               value: "DEFLECTED POISON",
             });
           } else {
@@ -261,14 +256,14 @@ export function useDefend() {
               set(staminaDebuff, (current) => current + 1);
 
               deltaStamina.push({
-                color: FloatingTextVariant.Negative,
+                color: "text-danger",
                 value: "BLIGHTED",
               });
             } else {
               set(poisonDuration, POISON.duration);
 
               deltaHealth.push({
-                color: FloatingTextVariant.Negative,
+                color: "text-danger",
                 value: "POISONED",
               });
             }

@@ -9,7 +9,7 @@ import { Poisoned } from "@neverquest/components/Character/Poisoned";
 import { Recovery } from "@neverquest/components/Character/Recovery";
 import { Stamina } from "@neverquest/components/Character/Stamina";
 import { statusElement } from "@neverquest/state/character";
-import { AnimationType } from "@neverquest/types/ui";
+
 import { animateElement } from "@neverquest/utilities/animateElement";
 
 export function Status() {
@@ -20,7 +20,7 @@ export function Status() {
     const { current } = element;
 
     setStatusElement(current);
-    animateElement({ element: current, type: AnimationType.FlipInX });
+    animateElement({ element: current, type: "flipInX" });
 
     return () => setStatusElement(null);
   }, [setStatusElement]);

@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";
-import { AnimationType } from "@neverquest/types/ui";
+
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Resources() {
@@ -17,7 +17,7 @@ export function Resources() {
   }
 
   return (
-    <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
+    <Card className={getAnimationClass({ type: "flipInX" })}>
       <Card.Body>
         <ResourceDisplay />
       </Card.Body>

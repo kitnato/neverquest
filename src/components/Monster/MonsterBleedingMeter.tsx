@@ -7,7 +7,6 @@ import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { monsterBleedingDelta } from "@neverquest/state/deltas";
 import { monsterBleedingDuration } from "@neverquest/state/monster";
 import { bleedDamage, damageTotal } from "@neverquest/state/statistics";
-import { FloatingTextVariant, UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 import { getDamagePerTick } from "@neverquest/utilities/getters";
 
@@ -36,7 +35,7 @@ export function MonsterBleedingMeter() {
     if (newDelta >= bleedingDelta) {
       changeMonsterHealth({
         delta: {
-          color: FloatingTextVariant.Negative,
+          color: "text-danger",
           value: `BLEEDING (-${bleedingDamage})`,
         },
         value: -bleedingDamage,
@@ -60,7 +59,7 @@ export function MonsterBleedingMeter() {
       disableTransitions
       label={formatMilliseconds(monsterBleedingDurationValue)}
       value={(monsterBleedingDurationValue / duration) * 100}
-      variant={UIVariant.Secondary}
+      variant="secondary"
     />
   );
 }

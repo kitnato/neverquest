@@ -12,7 +12,7 @@ import { ReactComponent as IconRecovery } from "@neverquest/icons/knockout.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { recoveryRate, skipRecoveryChance } from "@neverquest/state/statistics";
-import { AttributeType, DeltaTextType, DeltaType, ShowingType } from "@neverquest/types/enums";
+import { AttributeType, DeltaText, DeltaType, ShowingType } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Recovery() {
@@ -29,7 +29,7 @@ export function Recovery() {
   useDeltaText({
     atomDelta: deltaRecoveryRate,
     atomValue: recoveryRate,
-    type: DeltaTextType.Time,
+    type: DeltaText.Time,
   });
 
   if (!isShowingRecovery) {

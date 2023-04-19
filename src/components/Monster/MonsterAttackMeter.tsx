@@ -10,7 +10,7 @@ import {
   monsterAttackDuration,
   monsterAttackRate,
 } from "@neverquest/state/monster";
-import { UIVariant } from "@neverquest/types/ui";
+
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export function MonsterAttackMeter() {
@@ -45,7 +45,7 @@ export function MonsterAttackMeter() {
           monsterAttackRateValue) *
         100
       }
-      variant={UIVariant.Secondary}
+      variant="secondary"
     />
   );
 }

@@ -1,7 +1,5 @@
 import { Button, Modal } from "react-bootstrap";
 
-import { UIVariant } from "@neverquest/types/ui";
-
 export function ConfirmationDialog({
   confirmationLabel,
   message,
@@ -31,7 +29,7 @@ export function ConfirmationDialog({
       <Modal.Body>{message}</Modal.Body>
 
       <Modal.Footer>
-        <Button onClick={handleConfirmation} variant={UIVariant.Outline}>
+        <Button onClick={handleConfirmation} variant="outline">
           {confirmationLabel}
         </Button>
       </Modal.Footer>

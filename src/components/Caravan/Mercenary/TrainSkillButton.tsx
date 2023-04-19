@@ -6,7 +6,6 @@ import { useTransactResources } from "@neverquest/hooks/actions/useTransactResou
 import { coins } from "@neverquest/state/resources";
 import { skills } from "@neverquest/state/skills";
 import type { SkillType } from "@neverquest/types/enums";
-import { UIVariant } from "@neverquest/types/ui";
 
 export function TrainSkillButton({ type }: { type: SkillType }) {
   const coinsValue = useRecoilValue(coins);
@@ -29,7 +28,7 @@ export function TrainSkillButton({ type }: { type: SkillType }) {
       trigger={isAffordable ? [] : ["hover", "focus"]}
     >
       <span className="d-inline-block">
-        <Button disabled={!isAffordable} onClick={handleTrain} variant={UIVariant.Outline}>
+        <Button disabled={!isAffordable} onClick={handleTrain} variant="outline">
           Train
         </Button>
       </span>

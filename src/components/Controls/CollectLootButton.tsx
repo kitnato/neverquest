@@ -6,7 +6,6 @@ import { useTransactResources } from "@neverquest/hooks/actions/useTransactResou
 import { ReactComponent as IconChest } from "@neverquest/icons/locked-chest.svg";
 import { isLevelCompleted } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
-import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function CollectLootButton({ isDisabled }: { isDisabled: boolean }) {
@@ -23,14 +22,14 @@ export function CollectLootButton({ isDisabled }: { isDisabled: boolean }) {
     <OverlayTrigger overlay={<Tooltip>Collect loot</Tooltip>} placement="top">
       <span
         className={`d-inline-block ${getAnimationClass({
-          type: AnimationType.BounceIn,
+          type: "bounceIn",
         })}`}
       >
         <Button
-          className={`${getAnimationClass({ isInfinite: true, type: AnimationType.Pulse })}`}
+          className={`${getAnimationClass({ isInfinite: true, type: "pulse" })}`}
           disabled={isDisabled}
           onClick={() => transactResources({})}
-          variant={UIVariant.Outline}
+          variant="outline"
         >
           <IconImage Icon={IconChest} />
         </Button>

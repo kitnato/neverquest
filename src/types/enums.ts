@@ -12,13 +12,7 @@ export enum AttributeType {
   Stamina,
 }
 
-export enum CrewStatus {
-  Hirable,
-  Hired,
-  Unavailable,
-}
-
-export enum CrewType {
+export enum CrewMember {
   Alchemist,
   Blacksmith,
   Medic,
@@ -27,7 +21,13 @@ export enum CrewType {
   Tailor,
 }
 
-export enum DeltaTextType {
+export enum CrewStatus {
+  Hirable,
+  Hired,
+  Unavailable,
+}
+
+export enum DeltaText {
   Number,
   Percentage,
   Time,

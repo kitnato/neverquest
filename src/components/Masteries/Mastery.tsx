@@ -9,7 +9,6 @@ import { MASTERIES, MASTERY_DELTA_TYPE } from "@neverquest/data/masteries";
 import { isShowingMastery } from "@neverquest/state/isShowing";
 import { isMasteryAtMaximum, masteries, masteryCost } from "@neverquest/state/masteries";
 import type { MasteryType } from "@neverquest/types/enums";
-import { UIVariant } from "@neverquest/types/ui";
 
 export function Mastery({ type }: { type: MasteryType }) {
   const isMasteryAtMaximumValue = useRecoilValue(isMasteryAtMaximum(type));
@@ -32,7 +31,7 @@ export function Mastery({ type }: { type: MasteryType }) {
           <Stack className="w-100" direction="horizontal" gap={3}>
             <span>{rank}</span>
 
-            <LabelledProgressBar label={label} value={value} variant={UIVariant.Secondary} />
+            <LabelledProgressBar label={label} value={value} variant="secondary" />
           </Stack>
 
           <FloatingText type={MASTERY_DELTA_TYPE[type]} />

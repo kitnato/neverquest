@@ -11,7 +11,6 @@ import { TRINKET_COMPASS, TRINKET_HEARTHSTONE } from "@neverquest/data/trinkets"
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { equippedItemIDs, inventory } from "@neverquest/state/inventory";
 import { isGear, isTrinket } from "@neverquest/types/type-guards";
-import { UIVariant } from "@neverquest/types/ui";
 
 export function Inventory() {
   const equippedItemIDValues = useRecoilValue(equippedItemIDs);
@@ -41,7 +40,7 @@ export function Inventory() {
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
               <ItemDisplay item={item} />
 
-              <Button onClick={() => toggleEquipGear(id)} variant={UIVariant.Outline}>
+              <Button onClick={() => toggleEquipGear(id)} variant="outline">
                 Unequip
               </Button>
             </div>
@@ -60,7 +59,7 @@ export function Inventory() {
 
           if (isGear(item)) {
             const EquipButton = () => (
-              <Button onClick={() => toggleEquipGear(id)} variant={UIVariant.Outline}>
+              <Button onClick={() => toggleEquipGear(id)} variant="outline">
                 Equip
               </Button>
             );

@@ -5,10 +5,9 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
 import { CREW, CREW_ICON } from "@neverquest/data/caravan";
 import { crew } from "@neverquest/state/caravan";
-import { CrewStatus, type CrewType } from "@neverquest/types/enums";
-import { UIVariant } from "@neverquest/types/ui";
+import { type CrewMember, CrewStatus } from "@neverquest/types/enums";
 
-export function CrewHired({ setActive, type }: { setActive: () => void; type: CrewType }) {
+export function CrewHired({ setActive, type }: { setActive: () => void; type: CrewMember }) {
   const { hireStatus, monologueProgress } = useRecoilValue(crew(type));
 
   if (hireStatus !== CrewStatus.Hired) {
@@ -23,7 +22,7 @@ export function CrewHired({ setActive, type }: { setActive: () => void; type: Cr
         <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
           <span>{`"${monologues[monologueProgress]}"`}</span>
 
-          <Button onClick={setActive} variant={UIVariant.Outline}>
+          <Button onClick={setActive} variant="outline">
             {interaction}
           </Button>
         </div>

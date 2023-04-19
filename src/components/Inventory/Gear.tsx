@@ -6,7 +6,7 @@ import { ShieldEquipped } from "@neverquest/components/Inventory/Shield/ShieldEq
 import { WeaponEquipped } from "@neverquest/components/Inventory/Weapon/WeaponEquipped";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";
-import { AnimationType } from "@neverquest/types/ui";
+
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Gear() {
@@ -19,7 +19,7 @@ export function Gear() {
   }
 
   return (
-    <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
+    <Card className={getAnimationClass({ type: "flipInX" })}>
       <Card.Body>
         <Row className="align-items-center">
           <Col>

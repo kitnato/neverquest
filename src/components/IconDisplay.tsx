@@ -3,7 +3,7 @@ import { Stack } from "react-bootstrap";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import type { IconImageDOMProps, SVGIcon } from "@neverquest/types/props";
-import { AnimationType } from "@neverquest/types/ui";
+
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function IconDisplay({
@@ -27,7 +27,7 @@ export function IconDisplay({
 
   return (
     <Stack
-      className={isAnimated ? getAnimationClass({ type: AnimationType.FlipInX }) : ""}
+      className={isAnimated ? getAnimationClass({ type: "flipInX" }) : ""}
       direction="horizontal"
       gap={isSpaced ? 5 : 3}
     >

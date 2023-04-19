@@ -5,7 +5,7 @@ import { RESERVES } from "@neverquest/data/reserves";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { isRecovering } from "@neverquest/state/character";
 import { ReserveType } from "@neverquest/types/enums";
-import { UIAttachment, UISize, UIVariant } from "@neverquest/types/ui";
+import { UIAttachment, UISize } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export function RegenerationMeter({ type }: { type: ReserveType.Health | ReserveType.Stamina }) {
@@ -63,7 +63,7 @@ export function RegenerationMeter({ type }: { type: ReserveType.Health | Reserve
       label={label}
       size={UISize.Tiny}
       value={(regenerationProgress / regenerationRateValue) * 100}
-      variant={UIVariant.Secondary}
+      variant="secondary"
     />
   );
 }

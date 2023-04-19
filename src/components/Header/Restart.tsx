@@ -8,7 +8,7 @@ import { isGameOver } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
 import { useReset } from "@neverquest/state/SeedContext";
 import { ShowingType } from "@neverquest/types/enums";
-import { AnimationType } from "@neverquest/types/ui";
+
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Restart() {
@@ -24,7 +24,7 @@ export function Restart() {
       <Button
         className={
           isGameOverValue && !isShowingGameOver && !isShowingRestart
-            ? getAnimationClass({ isInfinite: true, type: AnimationType.Pulse })
+            ? getAnimationClass({ isInfinite: true, type: "pulse" })
             : undefined
         }
         onClick={() => setIsShowingRestart(true)}

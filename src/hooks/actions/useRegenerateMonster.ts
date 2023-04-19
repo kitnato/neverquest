@@ -7,7 +7,6 @@ import {
   monsterMaximumHealth,
 } from "@neverquest/state/monster";
 import { DeltaType } from "@neverquest/types/enums";
-import { FloatingTextVariant } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useRegenerateMonster() {
@@ -25,7 +24,7 @@ export function useRegenerateMonster() {
 
         if (difference > 0) {
           set(deltas(DeltaType.HealthMonster), {
-            color: FloatingTextVariant.Positive,
+            color: "text-success",
             value: `HEAL +${difference}`,
           });
         }

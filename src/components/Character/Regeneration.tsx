@@ -15,7 +15,7 @@ import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { RESERVES } from "@neverquest/data/reserves";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { reserveRegenerationRate } from "@neverquest/state/statistics";
-import { AttributeType, DeltaTextType, DeltaType, ReserveType } from "@neverquest/types/enums";
+import { AttributeType, DeltaText, DeltaType, ReserveType } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Regeneration({ type }: { type: ReserveType.Health | ReserveType.Stamina }) {
@@ -38,7 +38,7 @@ export function Regeneration({ type }: { type: ReserveType.Health | ReserveType.
   useDeltaText({
     atomDelta: atomDeltaRegenerationRate,
     atomValue: atomRegenerationRate,
-    type: DeltaTextType.Time,
+    type: DeltaText.Time,
   });
 
   return (

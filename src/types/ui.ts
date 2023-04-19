@@ -1,23 +1,21 @@
-export enum AnimationSpeed {
-  Fast = "fast",
-  Faster = "faster",
-  Slow = "slow",
-  Slower = "slower",
-}
+export type AnimationSpeed = "fast" | "faster" | "slow" | "slower";
 
-export enum AnimationType {
-  BounceIn = "bounceIn",
-  FadeOutUp = "fadeOutUp",
-  FlipInX = "flipInX",
-  HeadShake = "headShake",
-  Pulse = "pulse",
-  ZoomInRight = "zoomInRight",
-}
+export type AnimationType =
+  | "bounceIn"
+  | "fadeOutUp"
+  | "flipInX"
+  | "headShake"
+  | "pulse"
+  | "zoomInRight";
+
+export type BootstrapColorVariant = "dark" | "outline-dark" | "secondary";
+
+export type BootstrapTextVariant = "text-danger" | "text-muted" | "text-success";
 
 export type DeltaDisplay = DeltaDisplayContents | DeltaDisplayContents[];
 
 type DeltaDisplayContents = {
-  color: FloatingTextVariant | null;
+  color: BootstrapTextVariant | null;
   value: number | string;
 };
 
@@ -31,12 +29,6 @@ export type FloatingText = {
   key: string;
 };
 
-export enum FloatingTextVariant {
-  Negative = "text-danger",
-  Neutral = "text-muted",
-  Positive = "text-success",
-}
-
 export enum UIAttachment {
   Above,
   Below,
@@ -45,10 +37,4 @@ export enum UIAttachment {
 export enum UISize {
   Normal,
   Tiny,
-}
-
-export enum UIVariant {
-  Outline = "outline-dark",
-  Primary = "dark",
-  Secondary = "secondary",
 }

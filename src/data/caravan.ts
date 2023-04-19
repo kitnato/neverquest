@@ -1,10 +1,19 @@
 import { ReactComponent as IconCrew } from "@neverquest/icons/cowled.svg";
-import type { CrewMember } from "@neverquest/types";
-import { CrewType } from "@neverquest/types/enums";
+import { CrewMember } from "@neverquest/types/enums";
 
-export const CREW: Record<CrewType, CrewMember> = {
+export const CREW: Record<
+  CrewMember,
+  {
+    coinPrice: number;
+    description: string;
+    hirableLevel: number;
+    interaction: string;
+    monologues: string[];
+    name: string;
+  }
+> = {
   // TODO
-  [CrewType.Alchemist]: {
+  [CrewMember.Alchemist]: {
     coinPrice: 0,
     description: ".",
     hirableLevel: 99,
@@ -12,7 +21,7 @@ export const CREW: Record<CrewType, CrewMember> = {
     monologues: [""],
     name: "Alchemist",
   },
-  [CrewType.Blacksmith]: {
+  [CrewMember.Blacksmith]: {
     coinPrice: 25,
     description: "Crafts superior gear.",
     hirableLevel: 5,
@@ -21,7 +30,7 @@ export const CREW: Record<CrewType, CrewMember> = {
     name: "Blacksmith",
   },
   // TODO
-  [CrewType.Medic]: {
+  [CrewMember.Medic]: {
     coinPrice: 0,
     description: "Stems wounds and sells first aid kits.",
     hirableLevel: 99,
@@ -29,7 +38,7 @@ export const CREW: Record<CrewType, CrewMember> = {
     monologues: [""],
     name: "Medic",
   },
-  [CrewType.Mercenary]: {
+  [CrewMember.Mercenary]: {
     coinPrice: 50,
     description: "Trains new skills and attributes.",
     hirableLevel: 8,
@@ -37,7 +46,7 @@ export const CREW: Record<CrewType, CrewMember> = {
     monologues: ["Perhaps I can teach you something."],
     name: "Mercenary",
   },
-  [CrewType.Merchant]: {
+  [CrewMember.Merchant]: {
     coinPrice: 0,
     description: "",
     hirableLevel: 0,
@@ -52,7 +61,7 @@ export const CREW: Record<CrewType, CrewMember> = {
     name: "Merchant",
   },
   // TODO
-  [CrewType.Tailor]: {
+  [CrewMember.Tailor]: {
     coinPrice: 40,
     description: "Expands inventory space.",
     hirableLevel: 5,
@@ -64,13 +73,13 @@ export const CREW: Record<CrewType, CrewMember> = {
 
 export const CREW_ICON = IconCrew;
 
-export const CREW_INITIAL = [CrewType.Merchant];
+export const CREW_INITIAL = [CrewMember.Merchant];
 
 export const CREW_ORDER = [
-  CrewType.Merchant,
-  CrewType.Mercenary,
-  CrewType.Blacksmith,
-  CrewType.Tailor,
-  CrewType.Medic,
-  CrewType.Alchemist,
+  CrewMember.Merchant,
+  CrewMember.Mercenary,
+  CrewMember.Blacksmith,
+  CrewMember.Tailor,
+  CrewMember.Medic,
+  CrewMember.Alchemist,
 ];

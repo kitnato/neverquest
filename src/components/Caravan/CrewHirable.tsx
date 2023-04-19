@@ -9,10 +9,9 @@ import { useTransactResources } from "@neverquest/hooks/actions/useTransactResou
 import { crew } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import { coins } from "@neverquest/state/resources";
-import { CrewStatus, CrewType, ShowingType } from "@neverquest/types/enums";
-import { UIVariant } from "@neverquest/types/ui";
+import { CrewMember, CrewStatus, ShowingType } from "@neverquest/types/enums";
 
-export function CrewHirable({ type }: { type: CrewType }) {
+export function CrewHirable({ type }: { type: CrewMember }) {
   const coinsValue = useRecoilValue(coins);
   const [{ hireStatus }, setCrewMember] = useRecoilState(crew(type));
   const setIsGearClassAndTypes = useSetRecoilState(isShowing(ShowingType.GearClassAndTypes));
@@ -33,7 +32,7 @@ export function CrewHirable({ type }: { type: CrewType }) {
     }));
     transactResources({ coinsDifference: -coinPrice });
 
-    if (type === CrewType.Blacksmith) {
+    if (type === CrewMember.Blacksmith) {
       setIsGearClassAndTypes(true);
     }
   };
@@ -51,7 +50,7 @@ export function CrewHirable({ type }: { type: CrewType }) {
           trigger={isAffordable ? [] : ["hover", "focus"]}
         >
           <span className="d-inline-block">
-            <Button disabled={!isAffordable} onClick={handleHire} variant={UIVariant.Outline}>
+            <Button disabled={!isAffordable} onClick={handleHire} variant="outline">
               Hire
             </Button>
           </span>

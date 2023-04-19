@@ -7,30 +7,30 @@ import {
 } from "recoil";
 
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
-import { DeltaTextType } from "@neverquest/types/enums";
-import { type DeltaDisplay, FloatingTextVariant } from "@neverquest/types/ui";
+import { DeltaText } from "@neverquest/types/enums";
+import type { BootstrapTextVariant, DeltaDisplay } from "@neverquest/types/ui";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function useDeltaText({
   atomDelta,
   atomValue,
   stop = (previous) => previous === null,
-  type = DeltaTextType.Number,
+  type = DeltaText.Number,
 }: {
   atomDelta: RecoilState<DeltaDisplay>;
   atomValue: RecoilValueReadOnly<number>;
   stop?: (previous: null | number, current: number) => boolean;
-  type?: DeltaTextType;
+  type?: DeltaText;
 }) {
   const currentValue = useRecoilValue(atomValue);
   const setDeltaValue = useSetRecoilState(atomDelta);
 
   const previousValue = usePreviousValue(currentValue);
 
-  const isPercentage = type === DeltaTextType.Percentage;
-  const isTime = type === DeltaTextType.Time;
-  const negativeColor = isTime ? FloatingTextVariant.Positive : FloatingTextVariant.Negative;
-  const positiveColor = isTime ? FloatingTextVariant.Negative : FloatingTextVariant.Positive;
+  const isPercentage = type === DeltaText.Percentage;
+  const isTime = type === DeltaText.Time;
+  const negativeColor: BootstrapTextVariant = isTime ? "text-success" : "text-danger";
+  const positiveColor: BootstrapTextVariant = isTime ? "text-danger" : "text-success";
 
   useEffect(() => {
     if (stop(previousValue, currentValue)) {

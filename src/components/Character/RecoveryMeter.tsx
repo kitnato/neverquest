@@ -4,7 +4,6 @@ import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { recoveryDuration } from "@neverquest/state/character";
 import { recoveryRate } from "@neverquest/state/statistics";
-import { UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export function RecoveryMeter() {
@@ -32,7 +31,7 @@ export function RecoveryMeter() {
       value={
         ((hasRecovered ? 0 : recoveryRateValue - recoveryDurationValue) / recoveryRateValue) * 100
       }
-      variant={UIVariant.Secondary}
+      variant="secondary"
     />
   );
 }

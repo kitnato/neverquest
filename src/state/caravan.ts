@@ -2,7 +2,7 @@ import { DefaultValue, atom, atomFamily, selectorFamily } from "recoil";
 
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import type { InventoryBlacksmith, InventoryMerchant } from "@neverquest/types";
-import { CrewStatus, type CrewType } from "@neverquest/types/enums";
+import { type CrewMember, CrewStatus } from "@neverquest/types/enums";
 
 type CrewState = {
   hireStatus: CrewStatus;
@@ -11,7 +11,7 @@ type CrewState = {
 
 // SELECTORS
 
-export const crew = selectorFamily<CrewState, CrewType>({
+export const crew = selectorFamily<CrewState, CrewMember>({
   get:
     (type) =>
     ({ get }) =>
@@ -46,19 +46,19 @@ export const blacksmithInventory = atom<InventoryBlacksmith>({
   key: "blacksmithInventory",
 });
 
-export const crewActive = atom<CrewType | null>({
+export const crewActive = atom<CrewMember | null>({
   default: null,
-  effects: [handleLocalStorage<CrewType | null>({ key: "crewActive" })],
+  effects: [handleLocalStorage<CrewMember | null>({ key: "crewActive" })],
   key: "crewActive",
 });
 
-export const crewHirable = atom<CrewType[]>({
+export const crewHirable = atom<CrewMember[]>({
   default: [],
-  effects: [handleLocalStorage<CrewType[]>({ key: "crewHirable" })],
+  effects: [handleLocalStorage<CrewMember[]>({ key: "crewHirable" })],
   key: "crewHirable",
 });
 
-const crewMapping = atomFamily<CrewState, CrewType>({
+const crewMapping = atomFamily<CrewState, CrewMember>({
   default: {
     hireStatus: CrewStatus.Unavailable,
     monologueProgress: 0,

@@ -20,14 +20,14 @@ export type AttributeOrMastery = {
   requiredSkill?: SkillType;
 };
 
-export type CrewMember = {
-  coinPrice: number;
-  description: string;
-  hirableLevel: number;
-  interaction: string;
-  monologues: string[];
-  name: string;
-};
+// export type CrewMember = {
+//   coinPrice: number;
+//   description: string;
+//   hirableLevel: number;
+//   interaction: string;
+//   monologues: string[];
+//   name: string;
+// };
 
 export type Inventory = Record<string, Item>;
 

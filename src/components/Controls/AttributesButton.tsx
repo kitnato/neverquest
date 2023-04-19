@@ -13,7 +13,6 @@ import { isAttacking } from "@neverquest/state/character";
 import { isLevelStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";
-import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function AttributesButton({ isDisabled }: { isDisabled: boolean }) {
@@ -33,7 +32,7 @@ export function AttributesButton({ isDisabled }: { isDisabled: boolean }) {
       <OverlayTrigger overlay={<Tooltip>Attributes</Tooltip>} placement="top">
         <span
           className={`d-inline-block ${getAnimationClass({
-            type: AnimationType.BounceIn,
+            type: "bounceIn",
           })}`}
         >
           <Button
@@ -41,13 +40,13 @@ export function AttributesButton({ isDisabled }: { isDisabled: boolean }) {
               areAttributesIncreasableValue && !isLevelStartedValue
                 ? ` ${getAnimationClass({
                     isInfinite: true,
-                    type: AnimationType.Pulse,
+                    type: "pulse",
                   })}`
                 : ""
             }`}
             disabled={isAttackingValue || isDisabled}
             onClick={() => setScreenShowing(true)}
-            variant={UIVariant.Outline}
+            variant="outline"
           >
             <IconImage Icon={IconAttributes} />
 

@@ -4,7 +4,6 @@ import { MASTERY_DELTA_TYPE } from "@neverquest/data/masteries";
 import { deltas } from "@neverquest/state/deltas";
 import { isMasteryAtMaximum, masteries, masteryCost } from "@neverquest/state/masteries";
 import type { MasteryType } from "@neverquest/types/enums";
-import { FloatingTextVariant } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useIncreaseMastery() {
@@ -30,7 +29,7 @@ export function useIncreaseMastery() {
           }));
 
           set(deltas(deltaType), {
-            color: FloatingTextVariant.Positive,
+            color: "text-success",
             value: "+1",
           });
         } else {
@@ -40,7 +39,7 @@ export function useIncreaseMastery() {
           }));
 
           set(deltas(deltaType), {
-            color: FloatingTextVariant.Positive,
+            color: "text-success",
             value: "RANK UP",
           });
         }

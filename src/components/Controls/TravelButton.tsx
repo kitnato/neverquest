@@ -11,7 +11,6 @@ import { hasBoughtFromMerchant } from "@neverquest/state/caravan";
 import { isLevelCompleted, isWilderness, level } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
 import { confirmControlWarnings } from "@neverquest/state/settings";
-import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function TravelButton({ isDisabled }: { isDisabled: boolean }) {
@@ -61,18 +60,16 @@ export function TravelButton({ isDisabled }: { isDisabled: boolean }) {
       >
         <span
           className={`d-inline-block ${getAnimationClass({
-            type: AnimationType.BounceIn,
+            type: "bounceIn",
           })}`}
         >
           <Button
             className={
-              isWildernessValue
-                ? getAnimationClass({ isInfinite: true, type: AnimationType.Pulse })
-                : undefined
+              isWildernessValue ? getAnimationClass({ isInfinite: true, type: "pulse" }) : undefined
             }
             disabled={isDisabled}
             onClick={handleTravel}
-            variant={UIVariant.Outline}
+            variant="outline"
           >
             <IconImage Icon={IconTravel} isFlipped={!isWildernessValue} />
           </Button>

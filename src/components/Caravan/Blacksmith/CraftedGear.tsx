@@ -8,7 +8,6 @@ import { blacksmithInventory } from "@neverquest/state/caravan";
 import { canFit } from "@neverquest/state/inventory";
 import type { Gear } from "@neverquest/types";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
-import { UIVariant } from "@neverquest/types/ui";
 
 export function CraftedGear({ gear }: { gear: Gear }) {
   const { weight } = gear;
@@ -51,12 +50,7 @@ export function CraftedGear({ gear }: { gear: Gear }) {
         trigger={canFitValue ? [] : ["hover", "focus"]}
       >
         <span className="d-inline-block w-100">
-          <Button
-            className="w-100"
-            disabled={!canFit}
-            onClick={handleAcquire}
-            variant={UIVariant.Outline}
-          >
+          <Button className="w-100" disabled={!canFit} onClick={handleAcquire} variant="outline">
             Acquire
           </Button>
         </span>

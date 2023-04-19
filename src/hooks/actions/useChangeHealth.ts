@@ -6,7 +6,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { currentHealth, maximumHealth } from "@neverquest/state/reserves";
 import { healthRegenerationRate } from "@neverquest/state/statistics";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
-import { type DeltaReserve, FloatingTextVariant } from "@neverquest/types/ui";
+import type { DeltaReserve } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeHealth() {
@@ -26,7 +26,7 @@ export function useChangeHealth() {
           delta && Array.isArray(delta) && delta.length
             ? delta
             : {
-                color: isPositive ? FloatingTextVariant.Positive : FloatingTextVariant.Negative,
+                color: isPositive ? "text-success" : "text-danger",
                 value: isPositive ? `+${value}` : value,
               }
         );

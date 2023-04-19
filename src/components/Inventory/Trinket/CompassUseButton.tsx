@@ -14,7 +14,6 @@ import {
 } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
 import { hasLooted } from "@neverquest/state/resources";
-import { UIVariant } from "@neverquest/types/ui";
 
 export function CompassUseButton() {
   const hasLootedValue = useRecoilValue(hasLooted);
@@ -52,11 +51,7 @@ export function CompassUseButton() {
         trigger={canNavigate ? [] : ["hover", "focus"]}
       >
         <span className="d-inline-block">
-          <Button
-            disabled={!canNavigate}
-            onClick={() => setIsShowing(true)}
-            variant={UIVariant.Outline}
-          >
+          <Button disabled={!canNavigate} onClick={() => setIsShowing(true)} variant="outline">
             Use
           </Button>
         </span>

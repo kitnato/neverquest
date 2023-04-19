@@ -9,7 +9,6 @@ import { ReactComponent as IconProgress } from "@neverquest/icons/stairs.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isWilderness, progress, progressMaximum } from "@neverquest/state/encounter";
 import { DeltaType } from "@neverquest/types/enums";
-import { UIVariant } from "@neverquest/types/ui";
 
 export function WildernessProgress() {
   const isWildernessValue = useRecoilValue(isWilderness);
@@ -36,7 +35,7 @@ export function WildernessProgress() {
             <LabelledProgressBar
               label={`${progressValue}/${progressMaximumValue}`}
               value={(progressValue / progressMaximumValue) * 100}
-              variant={UIVariant.Primary}
+              variant="dark"
             />
 
             <FloatingText type={DeltaType.WildernessProgress} />

@@ -7,7 +7,7 @@ import { LABEL_UNKNOWN } from "@neverquest/constants";
 import { ReactComponent as IconDead } from "@neverquest/icons/crossed-bones.svg";
 import { ReactComponent as IconLurking } from "@neverquest/icons/evil-eyes.svg";
 import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
-import { AnimationType } from "@neverquest/types/ui";
+
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Wilderness() {
@@ -16,7 +16,7 @@ export function Wilderness() {
 
   if (isLevelCompletedValue) {
     return (
-      <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
+      <Card className={getAnimationClass({ type: "flipInX" })}>
         <Card.Body>
           <IconDisplay
             contents={<span className="fst-italic">Everything is dead.</span>}
@@ -34,7 +34,7 @@ export function Wilderness() {
   }
 
   return (
-    <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
+    <Card className={getAnimationClass({ type: "flipInX" })}>
       <Card.Body>
         <IconDisplay
           contents={<span className="fst-italic">The darkness stirs.</span>}

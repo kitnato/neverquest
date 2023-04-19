@@ -6,7 +6,7 @@ import { ENCUMBRANCE } from "@neverquest/constants";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { encumbranceMaximum, hasKnapsack } from "@neverquest/state/inventory";
 import { coins } from "@neverquest/state/resources";
-import { UIVariant } from "@neverquest/types/ui";
+
 import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function ExpandInventory() {
@@ -42,7 +42,7 @@ export function ExpandInventory() {
         trigger={canExpand ? [] : ["hover", "focus"]}
       >
         <span className="d-inline-block">
-          <Button disabled={!canExpand} onClick={handleExpansion} variant={UIVariant.Outline}>
+          <Button disabled={!canExpand} onClick={handleExpansion} variant="outline">
             Expand
           </Button>
         </span>

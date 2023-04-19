@@ -6,7 +6,6 @@ import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import { DEFAULT_DELTA_DISPLAY } from "@neverquest/constants";
 import { deltas, floatingTextQueues } from "@neverquest/state/deltas";
 import type { DeltaType } from "@neverquest/types/enums";
-import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function FloatingText({ type }: { type: DeltaType }) {
@@ -17,8 +16,8 @@ export function FloatingText({ type }: { type: DeltaType }) {
   const resetFloatingTextQueue = useResetRecoilState(floatingTextQueues(type));
 
   const animationClass = getAnimationClass({
-    speed: AnimationSpeed.Slower,
-    type: AnimationType.FadeOutUp,
+    speed: "slower",
+    type: "fadeOutUp",
   });
 
   const onAnimationEnd = (id: string) => () =>

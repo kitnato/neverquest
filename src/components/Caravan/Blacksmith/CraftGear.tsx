@@ -8,7 +8,6 @@ import { blacksmithInventory } from "@neverquest/state/caravan";
 import { coins, scrap } from "@neverquest/state/resources";
 import type { Gear } from "@neverquest/types";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
-import { UIVariant } from "@neverquest/types/ui";
 
 export function CraftGear({ gear }: { gear: Gear }) {
   const coinsValue = useRecoilValue(coins);
@@ -55,12 +54,7 @@ export function CraftGear({ gear }: { gear: Gear }) {
         trigger={isCraftable ? [] : ["hover", "focus"]}
       >
         <span className="d-inline-block w-100">
-          <Button
-            className="w-100"
-            disabled={!isCraftable}
-            onClick={handleCraft}
-            variant={UIVariant.Outline}
-          >
+          <Button className="w-100" disabled={!isCraftable} onClick={handleCraft} variant="outline">
             Craft
           </Button>
         </span>

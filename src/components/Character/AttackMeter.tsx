@@ -7,7 +7,7 @@ import { attackDuration, isAttacking, isLooting, isRecovering } from "@neverques
 import { isMonsterDead } from "@neverquest/state/monster";
 import { canAttackOrParry } from "@neverquest/state/reserves";
 import { attackRateTotal } from "@neverquest/state/statistics";
-import { UIVariant } from "@neverquest/types/ui";
+
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export function AttackMeter() {
@@ -45,7 +45,7 @@ export function AttackMeter() {
           attackRateTotalValue) *
         100
       }
-      variant={UIVariant.Secondary}
+      variant="secondary"
     />
   );
 }

@@ -9,7 +9,6 @@ import { hasBoughtFromMerchant, merchantInventory } from "@neverquest/state/cara
 import { canFit } from "@neverquest/state/inventory";
 import { coins } from "@neverquest/state/resources";
 import { isTrinket } from "@neverquest/types/type-guards";
-import { UIVariant } from "@neverquest/types/ui";
 
 export function PurchaseItemButton({ id }: { id: string }) {
   const coinsValue = useRecoilValue(coins);
@@ -69,7 +68,7 @@ export function PurchaseItemButton({ id }: { id: string }) {
       trigger={isPurchasable ? [] : ["hover", "focus"]}
     >
       <span className="d-inline-block">
-        <Button disabled={!isPurchasable} onClick={handlePurchase} variant={UIVariant.Outline}>
+        <Button disabled={!isPurchasable} onClick={handlePurchase} variant="outline">
           Purchase
         </Button>
       </span>

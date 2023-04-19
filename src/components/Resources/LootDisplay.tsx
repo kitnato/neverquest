@@ -7,7 +7,7 @@ import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDispla
 import { ReactComponent as IconOpenChest } from "@neverquest/icons/open-chest.svg";
 import { progress } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
-import { AnimationType } from "@neverquest/types/ui";
+
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function LootDisplay() {
@@ -19,7 +19,7 @@ export function LootDisplay() {
       <Looting />
 
       {progressValue > 0 && (
-        <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
+        <Card className={getAnimationClass({ type: "flipInX" })}>
           <Card.Body>
             {hasLootedValue ? (
               <IconDisplay

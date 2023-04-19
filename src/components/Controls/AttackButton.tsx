@@ -13,7 +13,6 @@ import { isAttacking } from "@neverquest/state/character";
 import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
 import { isHealthLow } from "@neverquest/state/reserves";
 import { confirmControlWarnings, lowHealthWarning } from "@neverquest/state/settings";
-import { AnimationType, UIVariant } from "@neverquest/types/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
@@ -31,7 +30,7 @@ export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
 
   const pulseAnimation = getAnimationClass({
     isInfinite: true,
-    type: AnimationType.Pulse,
+    type: "pulse",
   });
   const showWarning =
     isAttackingValue && !isDisabled && showLowHealthWarningValue && isHealthLowValue;
@@ -85,14 +84,14 @@ export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
       >
         <span
           className={`d-inline-block ${getAnimationClass({
-            type: AnimationType.BounceIn,
+            type: "bounceIn",
           })}`}
         >
           <Button
             className={animation}
             disabled={isDisabled || isLevelCompletedValue}
             onClick={handleAttack}
-            variant={UIVariant.Outline}
+            variant="outline"
           >
             <IconImage Icon={Icon} />
           </Button>

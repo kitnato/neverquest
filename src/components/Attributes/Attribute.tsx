@@ -23,7 +23,6 @@ import {
 } from "@neverquest/state/attributes";
 import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
 import type { AttributeType } from "@neverquest/types/enums";
-import { UIVariant } from "@neverquest/types/ui";
 
 export function Attribute({ type }: { type: AttributeType }) {
   const { isUnlocked, points } = useRecoilValue(attributes(type));
@@ -65,7 +64,7 @@ export function Attribute({ type }: { type: AttributeType }) {
                   <Button
                     disabled={!canIncrease}
                     onClick={() => increaseAttribute(type)}
-                    variant={UIVariant.Outline}
+                    variant="outline"
                   >
                     <IconImage Icon={canIncrease ? IconIncrease : IconWait} />
                   </Button>

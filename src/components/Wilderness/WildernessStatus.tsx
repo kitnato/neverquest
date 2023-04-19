@@ -5,7 +5,7 @@ import { WildernessLevel } from "@neverquest/components/Wilderness/WildernessLev
 import { WildernessProgress } from "@neverquest/components/Wilderness/WildernessProgress";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";
-import { AnimationType } from "@neverquest/types/ui";
+
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function WildernessStatus() {
@@ -14,7 +14,7 @@ export function WildernessStatus() {
   return (
     <Stack
       className={`w-100${
-        isShowingWildernessStatus ? ` ${getAnimationClass({ type: AnimationType.FlipInX })}` : ""
+        isShowingWildernessStatus ? ` ${getAnimationClass({ type: "flipInX" })}` : ""
       }`}
       direction="horizontal"
       gap={5}

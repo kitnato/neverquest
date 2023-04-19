@@ -5,7 +5,7 @@ import { useDropLoot } from "@neverquest/hooks/actions/useDropLoot";
 import { useProgression } from "@neverquest/hooks/actions/useProgression";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { isLooting, lootingDuration, lootingRate } from "@neverquest/state/character";
-import { UIVariant } from "@neverquest/types/ui";
+
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export function LootingMeter() {
@@ -36,7 +36,7 @@ export function LootingMeter() {
       disableTransitions
       label={formatMilliseconds(lootingProgress)}
       value={(lootingProgress / lootingRateValue) * 100}
-      variant={UIVariant.Secondary}
+      variant="secondary"
     />
   );
 }

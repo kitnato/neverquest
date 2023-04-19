@@ -10,7 +10,6 @@ import { MonsterName } from "@neverquest/components/Monster/MonsterName";
 import { MonsterPoisonRating } from "@neverquest/components/Monster/MonsterPoisonRating";
 import { MonsterStaggered } from "@neverquest/components/Monster/MonsterStaggered";
 import { isMonsterNew, monsterElement } from "@neverquest/state/monster";
-import { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
 import { animateElement } from "@neverquest/utilities/animateElement";
 
 export function Monster() {
@@ -31,8 +30,8 @@ export function Monster() {
     if (isMonsterNewValue && monsterElementValue) {
       animateElement({
         element: monsterElementValue,
-        speed: AnimationSpeed.Faster,
-        type: AnimationType.ZoomInRight,
+        speed: "faster",
+        type: "zoomInRight",
       });
 
       setMonsterNew(false);

@@ -14,8 +14,8 @@ import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { CREW, CREW_ORDER } from "@neverquest/data/caravan";
 import { crewActive, crewHirable } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
-import { CrewType, ShowingType } from "@neverquest/types/enums";
-import { AnimationType } from "@neverquest/types/ui";
+import { CrewMember, ShowingType } from "@neverquest/types/enums";
+
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Caravan() {
@@ -27,22 +27,22 @@ export function Caravan() {
 
   const ActiveMemberComponent: FunctionComponent = (() => {
     switch (crewActiveValue) {
-      case CrewType.Alchemist: {
+      case CrewMember.Alchemist: {
         return Alchemist;
       }
-      case CrewType.Blacksmith: {
+      case CrewMember.Blacksmith: {
         return Blacksmith;
       }
-      case CrewType.Medic: {
+      case CrewMember.Medic: {
         return Medic;
       }
-      case CrewType.Mercenary: {
+      case CrewMember.Mercenary: {
         return Mercenary;
       }
-      case CrewType.Merchant: {
+      case CrewMember.Merchant: {
         return Merchant;
       }
-      case CrewType.Tailor: {
+      case CrewMember.Tailor: {
         return Tailor;
       }
       default: {
@@ -51,14 +51,14 @@ export function Caravan() {
     }
   })();
 
-  const toggleCrewActive = (isShowing: boolean, member?: CrewType) => {
+  const toggleCrewActive = (isShowing: boolean, member?: CrewMember) => {
     setScreenShowing(isShowing);
     setCrewActive(member ?? null);
   };
 
   return (
     <>
-      <Card className={getAnimationClass({ type: AnimationType.FlipInX })}>
+      <Card className={getAnimationClass({ type: "flipInX" })}>
         <Card.Body>
           <Stack gap={5}>
             <Stack gap={3}>

@@ -1,6 +1,6 @@
 import { OverlayTrigger, ProgressBar, Tooltip } from "react-bootstrap";
 
-import { UIAttachment, UISize, type UIVariant } from "@neverquest/types/ui";
+import { type BootstrapColorVariant, UIAttachment, UISize } from "@neverquest/types/ui";
 
 export function LabelledProgressBar({
   attached,
@@ -17,7 +17,7 @@ export function LabelledProgressBar({
   sibling?: JSX.Element;
   size?: UISize;
   value: number;
-  variant: UIVariant;
+  variant: BootstrapColorVariant;
 }) {
   const style: Partial<{
     borderBottomLeftRadius: number;

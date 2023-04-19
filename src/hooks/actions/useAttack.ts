@@ -22,12 +22,7 @@ import {
   staggerDuration,
 } from "@neverquest/state/statistics";
 import { DeltaType, MasteryType, ShowingType, SkillType } from "@neverquest/types/enums";
-import {
-  AnimationSpeed,
-  AnimationType,
-  type DeltaDisplay,
-  FloatingTextVariant,
-} from "@neverquest/types/ui";
+import type { DeltaDisplay } from "@neverquest/types/ui";
 import { animateElement } from "@neverquest/utilities/animateElement";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -65,7 +60,7 @@ export function useAttack() {
             : baseDamage;
           const monsterDeltas: DeltaDisplay = [
             {
-              color: FloatingTextVariant.Negative,
+              color: "text-danger",
               value: totalDamage,
             },
           ];
@@ -76,7 +71,7 @@ export function useAttack() {
 
           if (hasInflictedCritical) {
             monsterDeltas.push({
-              color: FloatingTextVariant.Neutral,
+              color: "text-muted",
               value: "CRITICAL",
             });
           }
@@ -86,7 +81,7 @@ export function useAttack() {
             increaseMastery(MasteryType.BleedDamage);
 
             monsterDeltas.push({
-              color: FloatingTextVariant.Neutral,
+              color: "text-muted",
               value: "BLEED",
             });
           }
@@ -96,7 +91,7 @@ export function useAttack() {
             increaseMastery(MasteryType.StaggerDuration);
 
             monsterDeltas.push({
-              color: FloatingTextVariant.Neutral,
+              color: "text-muted",
               value: "STAGGER",
             });
           }
@@ -105,17 +100,17 @@ export function useAttack() {
 
           animateElement({
             element: get(monsterElement),
-            speed: AnimationSpeed.Fast,
-            type: AnimationType.HeadShake,
+            speed: "fast",
+            type: "headShake",
           });
         } else {
           set(deltas(DeltaType.Stamina), [
             {
-              color: FloatingTextVariant.Neutral,
+              color: "text-muted",
               value: "CANNOT ATTACK",
             },
             {
-              color: FloatingTextVariant.Negative,
+              color: "text-danger",
               value: ` (${staminaCost})`,
             },
           ]);

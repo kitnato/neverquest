@@ -4,7 +4,7 @@ import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { isMonsterStaggered, monsterStaggeredDuration } from "@neverquest/state/monster";
 import { staggerDuration } from "@neverquest/state/statistics";
-import { UIVariant } from "@neverquest/types/ui";
+
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export function MonsterStaggeredMeter() {
@@ -32,7 +32,7 @@ export function MonsterStaggeredMeter() {
       disableTransitions
       label={formatMilliseconds(staggeringProgress)}
       value={(staggeringProgress / staggerDurationValue) * 100}
-      variant={UIVariant.Secondary}
+      variant="secondary"
     />
   );
 }

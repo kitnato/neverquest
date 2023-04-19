@@ -7,7 +7,6 @@ import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { poisonDuration } from "@neverquest/state/character";
 import { poisonedDelta } from "@neverquest/state/deltas";
 import { monsterDamage } from "@neverquest/state/monster";
-import { FloatingTextVariant, UIVariant } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 import { getDamagePerTick } from "@neverquest/utilities/getters";
 
@@ -34,7 +33,7 @@ export function PoisonedMeter() {
     if (newDelta >= poisonDelta) {
       changeHealth({
         delta: {
-          color: FloatingTextVariant.Negative,
+          color: "text-danger",
           value: `POISONED (-${poisonTick})`,
         },
         value: -poisonTick,
@@ -58,7 +57,7 @@ export function PoisonedMeter() {
       disableTransitions
       label={formatMilliseconds(poisonDurationValue)}
       value={(poisonDurationValue / duration) * 100}
-      variant={UIVariant.Secondary}
+      variant="secondary"
     />
   );
 }

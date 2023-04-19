@@ -8,7 +8,7 @@ import {
   monsterMaximumHealth,
 } from "@neverquest/state/monster";
 import { DeltaType } from "@neverquest/types/enums";
-import { type DeltaReserve, FloatingTextVariant } from "@neverquest/types/ui";
+import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeMonsterHealth() {
@@ -25,10 +25,11 @@ export function useChangeMonsterHealth() {
 
         set(
           deltas(DeltaType.HealthMonster),
-          delta ?? {
-            color: isPositive ? FloatingTextVariant.Positive : FloatingTextVariant.Negative,
-            value: isPositive ? `+${value}` : value,
-          }
+          delta ??
+            ({
+              color: isPositive ? "text-success" : "text-danger",
+              value: isPositive ? `+${value}` : value,
+            } as DeltaDisplay)
         );
 
         if (newHealth <= 0) {

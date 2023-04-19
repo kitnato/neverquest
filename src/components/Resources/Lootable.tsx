@@ -5,7 +5,7 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { deltas } from "@neverquest/state/deltas";
 import type { DeltaType } from "@neverquest/types/enums";
-import { AnimationType } from "@neverquest/types/ui";
+
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Lootable({
@@ -31,11 +31,7 @@ export function Lootable({
   }
 
   return (
-    <Stack
-      className={getAnimationClass({ type: AnimationType.FlipInX })}
-      direction="horizontal"
-      gap={3}
-    >
+    <Stack className={getAnimationClass({ type: "flipInX" })} direction="horizontal" gap={3}>
       <Component tooltip={tooltip} value={resourceValue} />
 
       <FloatingText type={deltaType} />

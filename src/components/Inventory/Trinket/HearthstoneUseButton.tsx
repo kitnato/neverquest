@@ -8,7 +8,6 @@ import { isAttacking } from "@neverquest/state/character";
 import { isLevelCompleted, isWilderness } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
 import { hasLooted } from "@neverquest/state/resources";
-import { UIVariant } from "@neverquest/types/ui";
 
 export function HearthstoneUseButton() {
   const hasLootedValue = useRecoilValue(hasLooted);
@@ -40,7 +39,7 @@ export function HearthstoneUseButton() {
         trigger={canWarp ? [] : ["focus", "hover"]}
       >
         <span className="d-inline-block">
-          <Button disabled={!canWarp} onClick={handleWarp} variant={UIVariant.Outline}>
+          <Button disabled={!canWarp} onClick={handleWarp} variant="outline">
             Use
           </Button>
         </span>

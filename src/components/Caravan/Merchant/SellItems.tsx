@@ -10,7 +10,7 @@ import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { equippedItemIDs, inventory } from "@neverquest/state/inventory";
-import { UIVariant } from "@neverquest/types/ui";
+
 import { getSellPrice } from "@neverquest/utilities/getters";
 
 export function SellItems() {
@@ -76,7 +76,7 @@ export function SellItems() {
                         sellPossession(id);
                       }
                     }}
-                    variant={UIVariant.Outline}
+                    variant="outline"
                   >
                     Sell
                   </Button>

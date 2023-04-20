@@ -1,4 +1,4 @@
-import type { ArmorClass, ShieldType, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
+import type { ArmorClass, ShieldSize, WeaponClass, WeaponModality } from "@neverquest/LOCRA/types";
 import type { SkillType, WeaponGrip } from "@neverquest/types/enums";
 import type { SVGIcon } from "@neverquest/types/props";
 
@@ -19,15 +19,6 @@ export type AttributeOrMastery = {
   name: string;
   requiredSkill?: SkillType;
 };
-
-// export type CrewMember = {
-//   coinPrice: number;
-//   description: string;
-//   hirableLevel: number;
-//   interaction: string;
-//   monologues: string[];
-//   name: string;
-// };
 
 export type Inventory = Record<string, Item>;
 
@@ -64,9 +55,9 @@ export type Range = {
 
 export type Shield = GearBase & {
   blockChance: number;
+  size?: ShieldSize;
   staggerChance: number;
   staminaCost: number;
-  type?: ShieldType;
 };
 
 export type Skill = {
@@ -149,11 +140,11 @@ export type Weapon = GearBase & {
   artifactClass: WeaponClass;
   damage: number;
   grip: WeaponGrip;
+  modality: WeaponModality;
   ranges: {
     damage: Range;
     rate: Range;
   };
   rate: number;
   staminaCost: number;
-  type: WeaponType;
 };

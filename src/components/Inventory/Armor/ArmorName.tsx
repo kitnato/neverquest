@@ -14,7 +14,7 @@ import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatter
 
 export function ArmorName({ armor, placement = "top" }: { armor: Armor; placement?: Placement }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
-  const isShowingGearClassAndTypes = useRecoilValue(isShowing(ShowingType.GearClassAndTypes));
+  const isShowingGearDetails = useRecoilValue(isShowing(ShowingType.GearDetails));
   const armorsSkillValue = useRecoilValue(skills(SkillType.Armors));
 
   const {
@@ -43,7 +43,7 @@ export function ArmorName({ armor, placement = "top" }: { armor: Armor; placemen
               </tr>
 
               <tr>
-                {isShowingGearClassAndTypes ? (
+                {isShowingGearDetails ? (
                   <>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 

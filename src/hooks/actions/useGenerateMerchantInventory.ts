@@ -48,16 +48,16 @@ export function useGenerateMerchantInventory() {
                 item: offer,
               };
             } else {
-              const { artifact } = offer;
+              const { type } = offer;
               const gear = (() => {
-                if (artifact === "armor") {
+                if (type === "armor") {
                   return generateArmor({
                     ...SETTINGS_GEAR,
                     ...offer,
                   });
                 }
 
-                if (artifact === "weapon") {
+                if (type === "weapon") {
                   return generateWeapon({
                     ...SETTINGS_GEAR,
                     ...offer,

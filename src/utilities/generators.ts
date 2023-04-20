@@ -3,9 +3,9 @@ import { LOCRA } from "@neverquest/LOCRA";
 import type {
   AffixTag,
   ArmorClass,
-  ShieldType,
+  ShieldSize,
   WeaponClass,
-  WeaponType,
+  WeaponModality,
 } from "@neverquest/LOCRA/types";
 import type { Armor, Shield, Weapon } from "@neverquest/types";
 import { WeaponGrip } from "@neverquest/types/enums";
@@ -74,19 +74,19 @@ export function generateShield({
   isNSFW,
   level,
   name,
+  size,
   tags,
-  type,
 }: {
   hasPrefix?: boolean;
   hasSuffix?: boolean;
   isNSFW: boolean;
   level: number;
   name?: string;
+  size: ShieldSize;
   tags?: AffixTag[];
-  type: ShieldType;
 }): Shield {
   const { blockRange, staggerModifier, staminaCostModifier, weightModifier } =
-    SHIELD_SPECIFICATIONS[type];
+    SHIELD_SPECIFICATIONS[size];
   const growthFactor = getGrowthSigmoid(level);
 
   return {
@@ -99,15 +99,15 @@ export function generateShield({
         hasSuffix,
         isNSFW,
         query: {
-          subtype: type,
+          subtype: size,
           type: "shield",
         },
         tags,
       }),
     scrapPrice: Math.round(3000 * growthFactor),
+    size,
     staggerChance: (0.1 + 0.9 * growthFactor) * staggerModifier,
     staminaCost: Math.ceil(40 * growthFactor * staminaCostModifier),
-    type,
     weight: Math.ceil(40 * growthFactor * weightModifier),
   };
 }
@@ -118,16 +118,16 @@ export function generateWeapon({
   hasSuffix,
   isNSFW,
   level,
+  modality,
   tags,
-  type,
 }: {
   artifactClass: WeaponClass;
   hasPrefix?: boolean;
   hasSuffix?: boolean;
   isNSFW: boolean;
   level: number;
+  modality: WeaponModality;
   tags?: AffixTag[];
-  type: WeaponType;
 }): Weapon {
   const growthFactor = getGrowthSigmoid(level);
   const ranges = {
@@ -148,13 +148,14 @@ export function generateWeapon({
     damage: getFromRange({ ...ranges.damage }),
     // TODO
     grip: WeaponGrip.OneHanded,
+    modality,
     name: LOCRA.generateArtifact({
       hasPrefix,
       hasSuffix,
       isNSFW,
       query: {
         artifactClass: artifactClass,
-        subtype: type,
+        subtype: modality,
         type: "weapon",
       },
       tags,
@@ -163,7 +164,6 @@ export function generateWeapon({
     rate: getFromRange({ ...ranges.rate }),
     scrapPrice: Math.round(2500 * growthFactor),
     staminaCost: Math.ceil(50 * growthFactor),
-    type,
     weight: Math.ceil(30 * growthFactor),
   };
 

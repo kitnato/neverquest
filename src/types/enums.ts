@@ -102,7 +102,7 @@ export enum ShowingType {
   DodgeChanceDetails,
   Essence,
   GameOver,
-  GearClassAndTypes,
+  GearDetails,
   Loot,
   MonsterDamage,
   Protection,

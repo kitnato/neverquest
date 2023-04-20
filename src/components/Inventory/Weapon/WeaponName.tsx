@@ -28,7 +28,7 @@ export function WeaponName({
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const isShowingDamagePerSecondValue = useRecoilValue(isShowingDamagePerSecond);
   const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
-  const isShowingGearClassAndTypes = useRecoilValue(isShowing(ShowingType.GearClassAndTypes));
+  const isShowingGearDetails = useRecoilValue(isShowing(ShowingType.GearDetails));
 
   const { abilityChance, artifactClass, damage, name, rate, staminaCost, weight } = weapon;
   const Icon = WEAPON_CLASS_ICONS[artifactClass];
@@ -75,7 +75,7 @@ export function WeaponName({
               </tr>
 
               <tr>
-                {isShowingGearClassAndTypes ? (
+                {isShowingGearDetails ? (
                   <>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 

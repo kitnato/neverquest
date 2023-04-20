@@ -19,11 +19,11 @@ export function ShieldName({
   shield: Shield;
 }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
-  const isShowingGearClassAndTypes = useRecoilValue(isShowing(ShowingType.GearClassAndTypes));
+  const isShowingGearDetails = useRecoilValue(isShowing(ShowingType.GearDetails));
   const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
   const staggerSkillValue = useRecoilValue(skills(SkillType.Stagger));
 
-  const { blockChance, name, staggerChance, staminaCost, type, weight } = shield;
+  const { blockChance, name, size, staggerChance, staminaCost, weight } = shield;
 
   return (
     <OverlayTrigger
@@ -52,11 +52,11 @@ export function ShieldName({
               </tr>
 
               <tr>
-                {isShowingGearClassAndTypes ? (
+                {isShowingGearDetails ? (
                   <>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Type:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Size:</td>
 
-                    <td>{capitalizeAll(type)}</td>
+                    <td>{capitalizeAll(size)}</td>
                   </>
                 ) : (
                   <td className="text-end">{LABEL_UNKNOWN}</td>

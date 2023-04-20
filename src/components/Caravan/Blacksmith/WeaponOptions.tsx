@@ -40,13 +40,13 @@ export function WeaponOptions() {
     hasSuffix: true,
     isNSFW: isNSFWValue,
     level: weaponLevel,
+    modality: "melee",
     tags:
       weaponLevel < levelValue - 1
         ? ["lowQuality"]
         : weaponLevel > levelValue + 1
         ? ["highQuality"]
         : undefined,
-    type: "melee",
   });
   const { abilityChance, ranges, staminaCost, weight } = weapon;
   const maximumWeaponLevel = levelValue + 3;

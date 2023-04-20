@@ -1,58 +1,69 @@
 import { TRINKET_COMPASS, TRINKET_HEARTHSTONE, TRINKET_KNAPSACK } from "@neverquest/data/trinkets";
-import type { ArmorClass, ShieldType, WeaponClass, WeaponType } from "@neverquest/LOCRA/types";
+import type {
+  ArmorClass,
+  ArtifactType,
+  ShieldSize,
+  WeaponClass,
+  WeaponModality,
+} from "@neverquest/LOCRA/types";
 import type { Trinket } from "@neverquest/types";
 
-// TODO - make sure artifact keys are typed as Artifact.
-type MerchantOffer =
-  | { artifact: "armor"; artifactClass: ArmorClass }
-  | { artifact: "shield"; type: ShieldType }
-  | { artifact: "weapon"; artifactClass: WeaponClass; type: WeaponType }
-  | Trinket;
-
-export const MERCHANT_OFFERS: MerchantOffer[][] = [
+export const MERCHANT_OFFERS: (
+  | ({
+      artifactClass: ArmorClass;
+    } & ArtifactType<"armor">)
+  | ({
+      size: ShieldSize;
+    } & ArtifactType<"shield">)
+  | ({
+      artifactClass: WeaponClass;
+      modality: WeaponModality;
+    } & ArtifactType<"weapon">)
+  | Trinket
+)[][] = [
   [
     {
-      artifact: "weapon",
       artifactClass: "piercing",
-      type: "melee",
+      modality: "melee",
+      type: "weapon",
     },
   ],
   [
     {
-      artifact: "armor",
       artifactClass: "hide",
+      type: "armor",
     },
   ],
   [
     {
-      artifact: "shield",
-      type: "small",
+      size: "small",
+      type: "shield",
     },
   ],
   [TRINKET_KNAPSACK],
   [TRINKET_COMPASS, TRINKET_HEARTHSTONE],
   [
     {
-      artifact: "weapon",
       artifactClass: "slashing",
-      type: "melee",
+      modality: "melee",
+      type: "weapon",
     },
     {
-      artifact: "weapon",
       artifactClass: "blunt",
-      type: "melee",
+      modality: "melee",
+      type: "weapon",
     },
     {
-      artifact: "armor",
       artifactClass: "reinforced",
+      type: "armor",
     },
     {
-      artifact: "shield",
-      type: "medium",
+      size: "medium",
+      type: "shield",
     },
     {
-      artifact: "shield",
-      type: "tower",
+      size: "tower",
+      type: "shield",
     },
   ],
 ];

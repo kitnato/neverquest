@@ -1,7 +1,7 @@
-import affixes from "@neverquest/LOCRA/data/affixes.json";
-import artifacts from "@neverquest/LOCRA/data/artifacts.json";
-import creatures from "@neverquest/LOCRA/data/creatures.json";
-import locations from "@neverquest/LOCRA/data/locations.json";
+import { AFFIXES } from "@neverquest/LOCRA/data/affixes";
+import { ARTIFACTS } from "@neverquest/LOCRA/data/artifacts";
+import { CREATURES } from "@neverquest/LOCRA/data/creatures";
+import { LOCATIONS } from "@neverquest/LOCRA/data/locations";
 import type {
   AffixTag,
   ArtifactQuery,
@@ -25,7 +25,7 @@ export const LOCRA = {
     const { hasPrefix, hasSuffix, isNSFW, prefixTags, suffixTags } = parameters;
 
     if (hasPrefix) {
-      const filteredPrefixes = affixes.filter((affix) => {
+      const filteredPrefixes = AFFIXES.filter((affix) => {
         // Discard prefix if it's the same as the main name (e.g. "Fungus Fungus").
         if (affix.name === name) {
           return false;
@@ -36,7 +36,7 @@ export const LOCRA = {
           if (affix.tags) {
             return (
               affix[category] === "prefix" &&
-              prefixTags.every((tag) => affix.tags.includes(tag)) &&
+              prefixTags.every((tag) => affix.tags?.includes(tag)) &&
               (isNSFW ? !!affix.isNSFW || !affix.isNSFW : !affix.isNSFW)
             );
           }
@@ -55,13 +55,13 @@ export const LOCRA = {
     }
 
     if (hasSuffix) {
-      const filteredSuffixes = affixes.filter((affix) => {
+      const filteredSuffixes = AFFIXES.filter((affix) => {
         // If we want a tagged suffix, check if the current affix has all of them.
         if (suffixTags.length > 0) {
           if (affix.tags) {
             return (
               affix[category] === "suffix" &&
-              suffixTags.every((tag) => affix.tags.includes(tag)) &&
+              suffixTags.every((tag) => affix.tags?.includes(tag)) &&
               (isNSFW ? !!affix.isNSFW || !affix.isNSFW : !affix.isNSFW)
             );
           }
@@ -93,14 +93,19 @@ export const LOCRA = {
     query: ArtifactQuery;
     tags?: AffixTag[];
   }) => {
-    const { subtype, type } = query;
-    const filteredArtifacts = artifacts.filter(
+    const filteredArtifacts = ARTIFACTS.filter(
       (artifact) =>
-        (subtype ? artifact.artifactClass === subtype : true) &&
-        ("artifactClass" in artifact && "artifactClass" in query
-          ? artifact.artifactClass === query.artifactClass
+        artifact.type === query.type &&
+        ("subtype" in query
+          ? "subtype" in artifact
+            ? artifact.subtype === query.subtype
+            : false
           : true) &&
-        artifact.type === type &&
+        ("artifactClass" in query
+          ? "artifactClass" in artifact
+            ? artifact.artifactClass === query.artifactClass
+            : false
+          : true) &&
         (isNSFW ? !!artifact.isNSFW || !artifact.isNSFW : !artifact.isNSFW)
     );
     const { name } = filteredArtifacts[Math.floor(Math.random() * filteredArtifacts.length)];
@@ -131,7 +136,7 @@ export const LOCRA = {
     tags?: AffixTag[];
     type: Creature;
   }) => {
-    const filteredCreatures = creatures.filter(
+    const filteredCreatures = CREATURES.filter(
       (creature) =>
         creature.type === type &&
         (isNSFW ? !!creature.isNSFW || !creature.isNSFW : !creature.isNSFW)
@@ -162,7 +167,7 @@ export const LOCRA = {
     isNSFW?: boolean;
     tags?: AffixTag[];
   }) => {
-    const filteredLocations = locations.filter((location) =>
+    const filteredLocations = LOCATIONS.filter((location) =>
       isNSFW ? !!location.isNSFW || !location.isNSFW : !location.isNSFW
     );
     const { name } = filteredLocations[Math.floor(Math.random() * filteredLocations.length)];

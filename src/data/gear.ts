@@ -7,7 +7,7 @@ import { ReactComponent as IconBlunt } from "@neverquest/icons/gavel.svg";
 import { ReactComponent as IconPlate } from "@neverquest/icons/metal-scales.svg";
 import { ReactComponent as IconShield } from "@neverquest/icons/round-shield.svg";
 import { ReactComponent as IconArmor } from "@neverquest/icons/shoulder-armor.svg";
-import type { ArmorClass, ShieldType, WeaponClass } from "@neverquest/LOCRA/types";
+import type { ArmorClass, ShieldSize, WeaponClass } from "@neverquest/LOCRA/types";
 import type { Armor, Range, Shield, Weapon } from "@neverquest/types";
 import { SkillType, WeaponGrip } from "@neverquest/types/enums";
 import type { SVGIcon } from "@neverquest/types/props";
@@ -77,7 +77,7 @@ export const SHIELD_NONE: Shield = {
 };
 
 export const SHIELD_SPECIFICATIONS: Record<
-  ShieldType,
+  ShieldSize,
   {
     blockRange: Range;
     staggerModifier: number;
@@ -131,6 +131,7 @@ export const WEAPON_NONE: Weapon = {
   coinPrice: 0,
   damage: 10,
   grip: WeaponGrip.OneHanded,
+  modality: "melee",
   name: "Unarmed",
   ranges: {
     damage: {
@@ -145,6 +146,5 @@ export const WEAPON_NONE: Weapon = {
   rate: 2500,
   scrapPrice: 0,
   staminaCost: 0,
-  type: "melee",
   weight: 0,
 };

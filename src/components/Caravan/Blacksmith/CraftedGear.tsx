@@ -50,7 +50,12 @@ export function CraftedGear({ gear }: { gear: Gear }) {
         trigger={canFitValue ? [] : ["hover", "focus"]}
       >
         <span className="d-inline-block w-100">
-          <Button className="w-100" disabled={!canFit} onClick={handleAcquire} variant="outline">
+          <Button
+            className="w-100"
+            disabled={!canFit}
+            onClick={handleAcquire}
+            variant="outline-dark"
+          >
             Acquire
           </Button>
         </span>

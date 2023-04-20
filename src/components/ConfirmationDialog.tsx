@@ -29,7 +29,7 @@ export function ConfirmationDialog({
       <Modal.Body>{message}</Modal.Body>
 
       <Modal.Footer>
-        <Button onClick={handleConfirmation} variant="outline">
+        <Button onClick={handleConfirmation} variant="outline-dark">
           {confirmationLabel}
         </Button>
       </Modal.Footer>

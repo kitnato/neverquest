@@ -46,7 +46,7 @@ export function AttributesButton({ isDisabled }: { isDisabled: boolean }) {
             }`}
             disabled={isAttackingValue || isDisabled}
             onClick={() => setScreenShowing(true)}
-            variant="outline"
+            variant="outline-dark"
           >
             <IconImage Icon={IconAttributes} />
 

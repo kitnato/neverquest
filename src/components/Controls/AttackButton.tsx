@@ -91,7 +91,7 @@ export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
             className={animation}
             disabled={isDisabled || isLevelCompletedValue}
             onClick={handleAttack}
-            variant="outline"
+            variant="outline-dark"
           >
             <IconImage Icon={Icon} />
           </Button>

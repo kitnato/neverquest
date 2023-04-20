@@ -76,7 +76,7 @@ export function SellItems() {
                         sellPossession(id);
                       }
                     }}
-                    variant="outline"
+                    variant="outline-dark"
                   >
                     Sell
                   </Button>

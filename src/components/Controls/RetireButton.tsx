@@ -26,7 +26,7 @@ export function RetireButton({ isDisabled }: { isDisabled: boolean }) {
             className="invisible"
             disabled={isWildernessValue || isDisabled}
             onClick={handleRetirement}
-            variant="outline"
+            variant="outline-dark"
           >
             <IconImage Icon={IconRetire} />
           </Button>

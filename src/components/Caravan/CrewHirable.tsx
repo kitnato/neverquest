@@ -50,7 +50,7 @@ export function CrewHirable({ type }: { type: CrewMember }) {
           trigger={isAffordable ? [] : ["hover", "focus"]}
         >
           <span className="d-inline-block">
-            <Button disabled={!isAffordable} onClick={handleHire} variant="outline">
+            <Button disabled={!isAffordable} onClick={handleHire} variant="outline-dark">
               Hire
             </Button>
           </span>

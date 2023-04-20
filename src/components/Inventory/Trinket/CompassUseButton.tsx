@@ -51,7 +51,7 @@ export function CompassUseButton() {
         trigger={canNavigate ? [] : ["hover", "focus"]}
       >
         <span className="d-inline-block">
-          <Button disabled={!canNavigate} onClick={() => setIsShowing(true)} variant="outline">
+          <Button disabled={!canNavigate} onClick={() => setIsShowing(true)} variant="outline-dark">
             Use
           </Button>
         </span>

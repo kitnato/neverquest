@@ -32,7 +32,7 @@ export function InventoryButton({ isDisabled }: { isDisabled: boolean }) {
           <Button
             disabled={isAttackingValue || isDisabled}
             onClick={() => setIsInventoryOpen(true)}
-            variant="outline"
+            variant="outline-dark"
           >
             <IconImage Icon={IconInventory} />
 

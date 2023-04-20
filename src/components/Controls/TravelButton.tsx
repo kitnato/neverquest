@@ -69,7 +69,7 @@ export function TravelButton({ isDisabled }: { isDisabled: boolean }) {
             }
             disabled={isDisabled}
             onClick={handleTravel}
-            variant="outline"
+            variant="outline-dark"
           >
             <IconImage Icon={IconTravel} isFlipped={!isWildernessValue} />
           </Button>

@@ -14,6 +14,12 @@ $zindex-tooltip: 1048;
   box-shadow: none !important;
 }
 
+// TODO - Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563
+.popover,
+.tooltip {
+  position: fixed;
+}
+
 // Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
 .popover.show,
 .tooltip.show > .tooltip-inner {

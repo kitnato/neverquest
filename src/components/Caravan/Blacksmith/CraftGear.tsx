@@ -54,7 +54,12 @@ export function CraftGear({ gear }: { gear: Gear }) {
         trigger={isCraftable ? [] : ["hover", "focus"]}
       >
         <span className="d-inline-block w-100">
-          <Button className="w-100" disabled={!isCraftable} onClick={handleCraft} variant="outline">
+          <Button
+            className="w-100"
+            disabled={!isCraftable}
+            onClick={handleCraft}
+            variant="outline-dark"
+          >
             Craft
           </Button>
         </span>

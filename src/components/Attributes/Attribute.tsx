@@ -64,7 +64,7 @@ export function Attribute({ type }: { type: AttributeType }) {
                   <Button
                     disabled={!canIncrease}
                     onClick={() => increaseAttribute(type)}
-                    variant="outline"
+                    variant="outline-dark"
                   >
                     <IconImage Icon={canIncrease ? IconIncrease : IconWait} />
                   </Button>

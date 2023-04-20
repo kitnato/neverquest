@@ -42,7 +42,7 @@ export function ExpandInventory() {
         trigger={canExpand ? [] : ["hover", "focus"]}
       >
         <span className="d-inline-block">
-          <Button disabled={!canExpand} onClick={handleExpansion} variant="outline">
+          <Button disabled={!canExpand} onClick={handleExpansion} variant="outline-dark">
             Expand
           </Button>
         </span>

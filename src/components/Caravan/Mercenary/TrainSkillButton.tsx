@@ -28,7 +28,7 @@ export function TrainSkillButton({ type }: { type: SkillType }) {
       trigger={isAffordable ? [] : ["hover", "focus"]}
     >
       <span className="d-inline-block">
-        <Button disabled={!isAffordable} onClick={handleTrain} variant="outline">
+        <Button disabled={!isAffordable} onClick={handleTrain} variant="outline-dark">
           Train
         </Button>
       </span>

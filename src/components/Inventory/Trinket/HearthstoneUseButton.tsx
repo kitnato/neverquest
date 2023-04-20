@@ -39,7 +39,7 @@ export function HearthstoneUseButton() {
         trigger={canWarp ? [] : ["focus", "hover"]}
       >
         <span className="d-inline-block">
-          <Button disabled={!canWarp} onClick={handleWarp} variant="outline">
+          <Button disabled={!canWarp} onClick={handleWarp} variant="outline-dark">
             Use
           </Button>
         </span>

@@ -29,7 +29,7 @@ export function CollectLootButton({ isDisabled }: { isDisabled: boolean }) {
           className={`${getAnimationClass({ isInfinite: true, type: "pulse" })}`}
           disabled={isDisabled}
           onClick={() => transactResources({})}
-          variant="outline"
+          variant="outline-dark"
         >
           <IconImage Icon={IconChest} />
         </Button>

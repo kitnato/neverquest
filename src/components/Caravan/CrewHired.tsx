@@ -22,7 +22,7 @@ export function CrewHired({ setActive, type }: { setActive: () => void; type: Cr
         <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
           <span>{`"${monologues[monologueProgress]}"`}</span>
 
-          <Button onClick={setActive} variant="outline">
+          <Button onClick={setActive} variant="outline-dark">
             {interaction}
           </Button>
         </div>

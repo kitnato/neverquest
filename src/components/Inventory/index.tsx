@@ -40,7 +40,7 @@ export function Inventory() {
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
               <ItemDisplay item={item} />
 
-              <Button onClick={() => toggleEquipGear(id)} variant="outline">
+              <Button onClick={() => toggleEquipGear(id)} variant="outline-dark">
                 Unequip
               </Button>
             </div>
@@ -59,7 +59,7 @@ export function Inventory() {
 
           if (isGear(item)) {
             const EquipButton = () => (
-              <Button onClick={() => toggleEquipGear(id)} variant="outline">
+              <Button onClick={() => toggleEquipGear(id)} variant="outline-dark">
                 Equip
               </Button>
             );

@@ -1,6 +1,8 @@
 import { ReactComponent as IconPlaceholder } from "@neverquest/icons/abstract-049.svg";
+import { ReactComponent as IconNoShield } from "@neverquest/icons/fist.svg";
 import { ReactComponent as IconEssence } from "@neverquest/icons/incense.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/perspective-dice-six-faces-random.svg";
+import { ReactComponent as IconNoArmor } from "@neverquest/icons/ribcage.svg";
 import { ReactComponent as IconWeight } from "@neverquest/icons/weight-crush.svg";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 
@@ -20,19 +22,23 @@ export const CLASS_TABLE_CELL_ITALIC = "fst-italic text-end";
 export const DEFAULT_DELTA_DISPLAY: DeltaDisplay = {
   color: null,
   value: "",
-};
+} as const;
 
 export const ENCUMBRANCE = 3;
 
 export const ICON_ESSENCE = IconEssence;
 
+export const ICON_NO_ARMOR = IconNoArmor;
+
+export const ICON_NO_SHIELD = IconNoShield;
+
 export const ICON_PLACEHOLDER = IconPlaceholder;
+
+export const ICON_SIZE_INLAY = 16;
 
 export const ICON_UNKNOWN = IconUnknown;
 
 export const ICON_WEIGHT = IconWeight;
-
-export const ICON_SIZE_INLAY = 16;
 
 const KEY_STORAGE_PREFIX = "nq";
 

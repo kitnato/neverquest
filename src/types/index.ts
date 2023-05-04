@@ -3,9 +3,9 @@ import type { SkillType, WeaponGrip } from "@neverquest/types/enums";
 import type { SVGIcon } from "@neverquest/types/props";
 
 export type Armor = GearBase & {
-  artifactClass?: ArmorClass;
   deflectionChance: number;
   dodgeChanceModifier: number;
+  gearClass?: ArmorClass;
   protection: number;
   staminaCost: number;
 };
@@ -137,8 +137,8 @@ export type Trinket = ItemBase & {
 
 export type Weapon = GearBase & {
   abilityChance: number;
-  artifactClass: WeaponClass;
   damage: number;
+  gearClass: WeaponClass;
   grip: WeaponGrip;
   modality: WeaponModality;
   ranges: {

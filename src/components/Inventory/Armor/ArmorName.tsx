@@ -3,8 +3,13 @@ import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import { CLASS_TABLE_CELL_ITALIC, ICON_SIZE_INLAY, LABEL_UNKNOWN } from "@neverquest/constants";
-import { ARMOR_CLASS_ICONS } from "@neverquest/data/gear";
+import {
+  CLASS_TABLE_CELL_ITALIC,
+  ICON_NO_ARMOR,
+  ICON_SIZE_INLAY,
+  LABEL_UNKNOWN,
+} from "@neverquest/constants";
+import { ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
@@ -18,15 +23,16 @@ export function ArmorName({ armor, placement = "top" }: { armor: Armor; placemen
   const armorsSkillValue = useRecoilValue(skills(SkillType.Armors));
 
   const {
-    artifactClass,
     deflectionChance,
     dodgeChanceModifier,
+    gearClass,
     name,
     protection,
     staminaCost,
     weight,
   } = armor;
-  const Icon = artifactClass ? ARMOR_CLASS_ICONS[artifactClass] : () => null;
+
+  const { Icon } = gearClass ? ARMOR_SPECIFICATIONS[gearClass] : { Icon: ICON_NO_ARMOR };
 
   return (
     <OverlayTrigger
@@ -50,7 +56,7 @@ export function ArmorName({ armor, placement = "top" }: { armor: Armor; placemen
                     <td>
                       <Icon width={ICON_SIZE_INLAY} />
                       &nbsp;
-                      {capitalizeAll(artifactClass ?? "None")}
+                      {capitalizeAll(gearClass ?? "None")}
                     </td>
                   </>
                 ) : (

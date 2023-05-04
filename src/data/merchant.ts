@@ -10,27 +10,27 @@ import type { Trinket } from "@neverquest/types";
 
 export const MERCHANT_OFFERS: (
   | ({
-      artifactClass: ArmorClass;
+      gearClass: ArmorClass;
     } & ArtifactType<"armor">)
   | ({
       size: ShieldSize;
     } & ArtifactType<"shield">)
   | ({
-      artifactClass: WeaponClass;
+      gearClass: WeaponClass;
       modality: WeaponModality;
     } & ArtifactType<"weapon">)
   | Trinket
 )[][] = [
   [
     {
-      artifactClass: "piercing",
+      gearClass: "piercing",
       modality: "melee",
       type: "weapon",
     },
   ],
   [
     {
-      artifactClass: "hide",
+      gearClass: "hide",
       type: "armor",
     },
   ],
@@ -44,17 +44,17 @@ export const MERCHANT_OFFERS: (
   [TRINKET_COMPASS, TRINKET_HEARTHSTONE],
   [
     {
-      artifactClass: "slashing",
+      gearClass: "slashing",
       modality: "melee",
       type: "weapon",
     },
     {
-      artifactClass: "blunt",
+      gearClass: "blunt",
       modality: "melee",
       type: "weapon",
     },
     {
-      artifactClass: "reinforced",
+      gearClass: "reinforced",
       type: "armor",
     },
     {

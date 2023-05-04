@@ -6,7 +6,7 @@ import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGe
 import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ICON_UNKNOWN, ICON_WEIGHT, LABEL_UNKNOWN } from "@neverquest/constants";
-import { WEAPON_ABILITY_NAME, WEAPON_SKILL_TYPE } from "@neverquest/data/gear";
+import { WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
 import { ReactComponent as IconAttackRate } from "@neverquest/icons/blade-fall.svg";
 import { ReactComponent as IconClass } from "@neverquest/icons/gear-hammer.svg";
 import { ReactComponent as IconStaminaCost } from "@neverquest/icons/ink-swirl.svg";
@@ -32,10 +32,12 @@ export function WeaponOptions() {
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
   const [weaponLevel, setWeaponLevel] = useState(levelValue);
 
-  const skillValue = useRecoilValue(skills(WEAPON_SKILL_TYPE[weaponClass]));
+  const { abilityName, skillType } = WEAPON_SPECIFICATIONS[weaponClass];
+
+  const skillValue = useRecoilValue(skills(skillType));
 
   const weapon = generateWeapon({
-    artifactClass: weaponClass,
+    gearClass: weaponClass,
     hasPrefix: true,
     hasSuffix: true,
     isNSFW: isNSFWValue,
@@ -119,7 +121,7 @@ export function WeaponOptions() {
           contents={skillValue ? formatPercentage(abilityChance) : LABEL_UNKNOWN}
           Icon={skillValue ? IconAttackRate : ICON_UNKNOWN}
           iconProps={{ overlayPlacement: "left" }}
-          tooltip={skillValue ? `${WEAPON_ABILITY_NAME[weaponClass]} chance` : LABEL_UNKNOWN}
+          tooltip={skillValue ? `${abilityName} chance` : LABEL_UNKNOWN}
         />
 
         <IconDisplay

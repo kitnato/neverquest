@@ -1,4 +1,8 @@
-import { ARMOR_SPECIFICATIONS, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
+import {
+  ARMOR_SPECIFICATIONS,
+  SHIELD_SPECIFICATIONS,
+  WEAPON_SPECIFICATIONS,
+} from "@neverquest/data/gear";
 import { LOCRA } from "@neverquest/LOCRA";
 import type {
   AffixTag,
@@ -12,7 +16,7 @@ import { WeaponGrip } from "@neverquest/types/enums";
 import { getFromRange, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function generateArmor({
-  artifactClass,
+  gearClass,
   hasPrefix,
   hasSuffix,
   isNSFW,
@@ -20,7 +24,7 @@ export function generateArmor({
   name,
   tags,
 }: {
-  artifactClass: ArmorClass;
+  gearClass: ArmorClass;
   hasPrefix?: boolean;
   hasSuffix?: boolean;
   isNSFW: boolean;
@@ -34,14 +38,14 @@ export function generateArmor({
     dodgeCostModifier,
     protectionModifier,
     weightModifier,
-  } = ARMOR_SPECIFICATIONS[artifactClass];
+  } = ARMOR_SPECIFICATIONS[gearClass];
   const growthFactor = getGrowthSigmoid(level);
 
   return {
-    artifactClass,
     coinPrice: Math.round(600 * growthFactor),
     deflectionChance: (0.05 + 0.6 * growthFactor) * deflectionChanceModifier,
     dodgeChanceModifier,
+    gearClass,
     name:
       name ??
       LOCRA.generateArtifact({
@@ -113,7 +117,7 @@ export function generateShield({
 }
 
 export function generateWeapon({
-  artifactClass,
+  gearClass,
   hasPrefix,
   hasSuffix,
   isNSFW,
@@ -121,7 +125,7 @@ export function generateWeapon({
   modality,
   tags,
 }: {
-  artifactClass: WeaponClass;
+  gearClass: WeaponClass;
   hasPrefix?: boolean;
   hasSuffix?: boolean;
   isNSFW: boolean;
@@ -129,6 +133,7 @@ export function generateWeapon({
   modality: WeaponModality;
   tags?: AffixTag[];
 }): Weapon {
+  const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
   const growthFactor = getGrowthSigmoid(level);
   const ranges = {
     damage: {
@@ -140,12 +145,13 @@ export function generateWeapon({
       minimum: 3300 - Math.round(3000 * growthFactor),
     },
   };
-  const weapon = {
-    abilityChance: 0,
-    artifactClass,
-    coinPrice: Math.round(400 * growthFactor),
 
+  return {
+    abilityChance: abilityChance.minimum + Math.round(abilityChance.maximum * growthFactor),
+    coinPrice: Math.round(400 * growthFactor),
     damage: getFromRange({ ...ranges.damage }),
+
+    gearClass,
     // TODO
     grip: WeaponGrip.OneHanded,
     modality,
@@ -154,7 +160,7 @@ export function generateWeapon({
       hasSuffix,
       isNSFW,
       query: {
-        artifactClass: artifactClass,
+        artifactClass: gearClass,
         subtype: modality,
         type: "weapon",
       },
@@ -166,21 +172,4 @@ export function generateWeapon({
     staminaCost: Math.ceil(50 * growthFactor),
     weight: Math.ceil(30 * growthFactor),
   };
-
-  switch (artifactClass) {
-    case "blunt": {
-      weapon.abilityChance = 0.1 + Math.round(0.7 * growthFactor);
-      break;
-    }
-    case "piercing": {
-      weapon.abilityChance = 0.2 + Math.round(0.7 * growthFactor);
-      break;
-    }
-    case "slashing": {
-      weapon.abilityChance = 0.15 + Math.round(0.6 * growthFactor);
-      break;
-    }
-  }
-
-  return weapon;
 }

@@ -3,7 +3,13 @@ import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/constants";
+import {
+  CLASS_TABLE_CELL_ITALIC,
+  ICON_NO_SHIELD,
+  ICON_SIZE_INLAY,
+  LABEL_UNKNOWN,
+} from "@neverquest/constants";
+import { SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
@@ -24,6 +30,7 @@ export function ShieldName({
   const staggerSkillValue = useRecoilValue(skills(SkillType.Stagger));
 
   const { blockChance, name, size, staggerChance, staminaCost, weight } = shield;
+  const { Icon } = size ? SHIELD_SPECIFICATIONS[size] : { Icon: ICON_NO_SHIELD };
 
   return (
     <OverlayTrigger
@@ -56,7 +63,10 @@ export function ShieldName({
                   <>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Size:</td>
 
-                    <td>{capitalizeAll(size)}</td>
+                    <td>
+                      <Icon width={ICON_SIZE_INLAY} />
+                      &nbsp;{capitalizeAll(size)}
+                    </td>
                   </>
                 ) : (
                   <td className="text-end">{LABEL_UNKNOWN}</td>

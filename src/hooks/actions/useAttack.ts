@@ -36,7 +36,7 @@ export function useAttack() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const { abilityChance, artifactClass, staminaCost } = get(weapon);
+        const { abilityChance, gearClass, staminaCost } = get(weapon);
 
         if (!get(isShowing(ShowingType.Statistics))) {
           set(isShowing(ShowingType.Statistics), true);
@@ -51,7 +51,7 @@ export function useAttack() {
             Math.random() <= get(bleedChance);
           const hasInflictedStagger =
             get(skills(SkillType.Stagger)) &&
-            artifactClass === "blunt" &&
+            gearClass === "blunt" &&
             Math.random() <= abilityChance;
 
           const baseDamage = -get(damageTotal);

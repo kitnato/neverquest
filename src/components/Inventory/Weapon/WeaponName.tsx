@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC, ICON_SIZE_INLAY, LABEL_UNKNOWN } from "@neverquest/constants";
-import { WEAPON_ABILITY_NAME, WEAPON_CLASS_ICONS, WEAPON_SKILL_TYPE } from "@neverquest/data/gear";
+import { WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingDamagePerSecond } from "@neverquest/state/settings";
@@ -30,10 +30,10 @@ export function WeaponName({
   const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
   const isShowingGearDetails = useRecoilValue(isShowing(ShowingType.GearDetails));
 
-  const { abilityChance, artifactClass, damage, name, rate, staminaCost, weight } = weapon;
-  const Icon = WEAPON_CLASS_ICONS[artifactClass];
+  const { abilityChance, damage, gearClass, name, rate, staminaCost, weight } = weapon;
+  const { abilityName, Icon, skillType } = WEAPON_SPECIFICATIONS[gearClass];
 
-  const skillValue = useRecoilValue(skills(WEAPON_SKILL_TYPE[artifactClass]));
+  const skillValue = useRecoilValue(skills(skillType));
 
   return (
     <OverlayTrigger
@@ -81,7 +81,7 @@ export function WeaponName({
 
                     <td>
                       <Icon width={ICON_SIZE_INLAY} />
-                      &nbsp;{capitalizeAll(artifactClass)}
+                      &nbsp;{capitalizeAll(gearClass)}
                     </td>
                   </>
                 ) : (
@@ -91,9 +91,7 @@ export function WeaponName({
 
               {skillValue ? (
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>
-                    {WEAPON_ABILITY_NAME[artifactClass]} chance:
-                  </td>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>{abilityName} chance:</td>
 
                   <td>{formatPercentage(abilityChance)}</td>
                 </tr>

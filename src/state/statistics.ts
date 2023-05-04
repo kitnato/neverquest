@@ -38,9 +38,9 @@ export const attackRateTotal = selector({
 
 export const bleedChance = selector({
   get: ({ get }) => {
-    const { abilityChance, artifactClass } = get(weapon);
+    const { abilityChance, gearClass } = get(weapon);
 
-    if (artifactClass === "piercing" && abilityChance > 0) {
+    if (gearClass === "piercing" && abilityChance > 0) {
       return abilityChance;
     }
 
@@ -192,9 +192,9 @@ export const parryAbsorption = selector({
 
 export const parryChance = selector({
   get: ({ get }) => {
-    const { abilityChance, artifactClass } = get(weapon);
+    const { abilityChance, gearClass } = get(weapon);
 
-    if (artifactClass === "slashing" && abilityChance > 0) {
+    if (gearClass === "slashing" && abilityChance > 0) {
       return abilityChance;
     }
 
@@ -260,9 +260,9 @@ export const skipRecoveryChance = selector({
 
 export const staggerChanceWeapon = selector({
   get: ({ get }) => {
-    const { abilityChance, artifactClass } = get(weapon);
+    const { abilityChance, gearClass } = get(weapon);
 
-    return artifactClass === "blunt" ? abilityChance : 0;
+    return gearClass === "blunt" ? abilityChance : 0;
   },
   key: "staggerChanceWeapon",
 });

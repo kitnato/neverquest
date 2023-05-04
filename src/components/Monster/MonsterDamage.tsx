@@ -22,6 +22,7 @@ export function MonsterDamage() {
       contents={monsterDamageValue}
       description={isShowingDamagePerSecondValue ? `${monsterDamagePerSecondValue} DPS` : null}
       Icon={DAMAGE_ICON}
+      isAnimated
       tooltip="Monster damage"
     />
   );

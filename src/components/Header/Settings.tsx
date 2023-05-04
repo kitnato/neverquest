@@ -10,6 +10,7 @@ import {
   confirmControlWarnings,
   isNSFW,
   isShowingDamagePerSecond,
+  isShowingGearLevel,
   lowHealthWarning,
 } from "@neverquest/state/settings";
 
@@ -53,6 +54,8 @@ export function Settings() {
                 isDisabled={!hasKnapsackValue}
                 label="Auto-equip new items"
               />
+
+              <SettingsSwitch atom={isShowingGearLevel} label="Show gear level" />
             </Stack>
           </Form>
         </Modal.Body>

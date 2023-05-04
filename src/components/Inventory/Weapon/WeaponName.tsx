@@ -7,7 +7,7 @@ import { CLASS_TABLE_CELL_ITALIC, ICON_SIZE_INLAY, LABEL_UNKNOWN } from "@neverq
 import { WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { isShowingDamagePerSecond } from "@neverquest/state/settings";
+import { isShowingDamagePerSecond, isShowingGearLevel } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
 import type { Weapon } from "@neverquest/types";
 import { ShowingType } from "@neverquest/types/enums";
@@ -27,10 +27,11 @@ export function WeaponName({
 }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const isShowingDamagePerSecondValue = useRecoilValue(isShowingDamagePerSecond);
-  const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
   const isShowingGearDetails = useRecoilValue(isShowing(ShowingType.GearDetails));
+  const isShowingGearLevelValue = useRecoilValue(isShowingGearLevel);
+  const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
 
-  const { abilityChance, damage, gearClass, name, rate, staminaCost, weight } = weapon;
+  const { abilityChance, damage, gearClass, level, name, rate, staminaCost, weight } = weapon;
   const { abilityName, Icon, skillType } = WEAPON_SPECIFICATIONS[gearClass];
 
   const skillValue = useRecoilValue(skills(skillType));
@@ -43,6 +44,14 @@ export function WeaponName({
 
           <Popover.Body>
             <DetailsTable>
+              {isShowingGearLevelValue && (
+                <tr>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Gear level:</td>
+
+                  <td>{level}</td>
+                </tr>
+              )}
+
               <tr>
                 <td className={CLASS_TABLE_CELL_ITALIC}>Damage:</td>
 

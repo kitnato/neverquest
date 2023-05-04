@@ -28,6 +28,12 @@ export const isShowingDamagePerSecond = atom({
   key: "isShowingDamagePerSecond",
 });
 
+export const isShowingGearLevel = atom({
+  default: false,
+  effects: [handleLocalStorage<boolean>({ isSetting: true, key: "isShowingGearLevel" })],
+  key: "isShowingGearLevel",
+});
+
 export const lowHealthWarning = atom({
   default: true,
   effects: [handleLocalStorage<boolean>({ isSetting: true, key: "lowHealthWarning" })],

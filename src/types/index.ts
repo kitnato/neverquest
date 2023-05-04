@@ -46,7 +46,7 @@ type ItemBase = {
 
 export type Gear = Armor | Shield | Weapon;
 
-type GearBase = ItemBase & { scrapPrice: number };
+type GearBase = ItemBase & { level: number; scrapPrice: number };
 
 export type Range = {
   maximum: number;
@@ -101,6 +101,7 @@ export type StorageKey =
   | "isNSFW"
   | "isShowing"
   | "isShowingDamagePerSecond"
+  | "isShowingGearLevel"
   | "confirmControlWarnings"
   | "level"
   | "lootingDuration"

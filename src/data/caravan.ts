@@ -73,7 +73,7 @@ export const CREW: Record<
 
 export const CREW_ICON = IconCrew;
 
-export const CREW_INITIAL = [CrewMember.Merchant];
+export const CREW_INITIAL = [CrewMember.Merchant] as const;
 
 export const CREW_ORDER = [
   CrewMember.Merchant,
@@ -82,4 +82,4 @@ export const CREW_ORDER = [
   CrewMember.Tailor,
   CrewMember.Medic,
   CrewMember.Alchemist,
-];
+] as const;

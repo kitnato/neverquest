@@ -12,6 +12,7 @@ import {
 import { ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { isShowingGearLevel } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
 import type { Armor } from "@neverquest/types";
 import { ShowingType, SkillType } from "@neverquest/types/enums";
@@ -20,12 +21,14 @@ import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatter
 export function ArmorName({ armor, placement = "top" }: { armor: Armor; placement?: Placement }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const isShowingGearDetails = useRecoilValue(isShowing(ShowingType.GearDetails));
+  const isShowingGearLevelValue = useRecoilValue(isShowingGearLevel);
   const armorsSkillValue = useRecoilValue(skills(SkillType.Armors));
 
   const {
     deflectionChance,
     dodgeChanceModifier,
     gearClass,
+    level,
     name,
     protection,
     staminaCost,
@@ -42,6 +45,14 @@ export function ArmorName({ armor, placement = "top" }: { armor: Armor; placemen
 
           <Popover.Body>
             <DetailsTable>
+              {isShowingGearLevelValue && (
+                <tr>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Gear level:</td>
+
+                  <td>{level}</td>
+                </tr>
+              )}
+
               <tr>
                 <td className={CLASS_TABLE_CELL_ITALIC}>Protection:</td>
 

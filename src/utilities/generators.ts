@@ -46,6 +46,7 @@ export function generateArmor({
     deflectionChance: (0.05 + 0.6 * growthFactor) * deflectionChanceModifier,
     dodgeChanceModifier,
     gearClass,
+    level,
     name:
       name ??
       LOCRA.generateArtifact({
@@ -96,6 +97,7 @@ export function generateShield({
   return {
     blockChance: getFromRange(blockRange),
     coinPrice: Math.round(500 * growthFactor),
+    level,
     name:
       name ??
       LOCRA.generateArtifact({
@@ -154,6 +156,7 @@ export function generateWeapon({
     gearClass,
     // TODO
     grip: WeaponGrip.OneHanded,
+    level,
     modality,
     name: LOCRA.generateArtifact({
       hasPrefix,

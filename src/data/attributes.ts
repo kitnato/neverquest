@@ -7,7 +7,7 @@ import { AttributeType, SkillType } from "@neverquest/types/enums";
 export const ATTACK_RATE_ICON = IconAttackRate;
 
 // TODO - diversify icons.
-export const ATTRIBUTES: Record<AttributeType, AttributeOrMastery> = {
+export const ATTRIBUTES: Readonly<Record<AttributeType, AttributeOrMastery>> = {
   [AttributeType.AttackRate]: {
     base: 0,
     description: "Increases attack rate.",
@@ -95,7 +95,7 @@ export const ATTRIBUTES: Record<AttributeType, AttributeOrMastery> = {
     increment: 4,
     name: "Endurance",
   },
-};
+} as const;
 
 export const ATTRIBUTES_INITIAL = [
   AttributeType.AttackRate,

@@ -12,6 +12,7 @@ import {
 import { SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { isShowingGearLevel } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
 import type { Shield } from "@neverquest/types";
 import { ShowingType, SkillType } from "@neverquest/types/enums";
@@ -26,10 +27,11 @@ export function ShieldName({
 }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const isShowingGearDetails = useRecoilValue(isShowing(ShowingType.GearDetails));
+  const isShowingGearLevelValue = useRecoilValue(isShowingGearLevel);
   const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
   const staggerSkillValue = useRecoilValue(skills(SkillType.Stagger));
 
-  const { blockChance, name, size, staggerChance, staminaCost, weight } = shield;
+  const { blockChance, level, name, size, staggerChance, staminaCost, weight } = shield;
   const { Icon } = size ? SHIELD_SPECIFICATIONS[size] : { Icon: ICON_NO_SHIELD };
 
   return (
@@ -40,6 +42,14 @@ export function ShieldName({
 
           <Popover.Body>
             <DetailsTable>
+              {isShowingGearLevelValue && (
+                <tr>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Gear level:</td>
+
+                  <td>{level}</td>
+                </tr>
+              )}
+
               <tr>
                 <td className={CLASS_TABLE_CELL_ITALIC}>Block chance:</td>
 

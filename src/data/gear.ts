@@ -19,27 +19,30 @@ import type { SVGIcon } from "@neverquest/types/props";
 
 export const ARMOR_ICON = IconArmor;
 
-export const ARMOR_NONE: Armor = {
+export const ARMOR_NONE: Readonly<Armor> = {
   coinPrice: 0,
   deflectionChance: 0,
   dodgeChanceModifier: 0,
+  level: 0,
   name: "Unarmored",
   protection: 0,
   scrapPrice: 0,
   staminaCost: 0,
   weight: 0,
-};
+} as const;
 
-export const ARMOR_SPECIFICATIONS: Record<
-  ArmorClass,
-  {
-    Icon: SVGIcon;
-    deflectionChanceModifier: number;
-    dodgeChanceModifier: number;
-    dodgeCostModifier: number;
-    protectionModifier: number;
-    weightModifier: number;
-  }
+export const ARMOR_SPECIFICATIONS: Readonly<
+  Record<
+    ArmorClass,
+    {
+      Icon: SVGIcon;
+      deflectionChanceModifier: number;
+      dodgeChanceModifier: number;
+      dodgeCostModifier: number;
+      protectionModifier: number;
+      weightModifier: number;
+    }
+  >
 > = {
   hide: {
     deflectionChanceModifier: 0,
@@ -65,31 +68,34 @@ export const ARMOR_SPECIFICATIONS: Record<
     protectionModifier: 0.75,
     weightModifier: 0.75,
   },
-};
+} as const;
 
 // Shield
 
 export const SHIELD_ICON = IconShield;
 
-export const SHIELD_NONE: Shield = {
+export const SHIELD_NONE: Readonly<Shield> = {
   blockChance: 0,
   coinPrice: 0,
+  level: 0,
   name: "None",
   scrapPrice: 0,
   staggerChance: 0,
   staminaCost: 0,
   weight: 0,
-};
+} as const;
 
-export const SHIELD_SPECIFICATIONS: Record<
-  ShieldSize,
-  {
-    Icon: SVGIcon;
-    blockRange: Range;
-    staggerModifier: number;
-    staminaCostModifier: number;
-    weightModifier: number;
-  }
+export const SHIELD_SPECIFICATIONS: Readonly<
+  Record<
+    ShieldSize,
+    {
+      Icon: SVGIcon;
+      blockRange: Range;
+      staggerModifier: number;
+      staminaCostModifier: number;
+      weightModifier: number;
+    }
+  >
 > = {
   medium: {
     blockRange: { maximum: 0.49, minimum: 0.25 },
@@ -112,18 +118,19 @@ export const SHIELD_SPECIFICATIONS: Record<
     staminaCostModifier: 1,
     weightModifier: 1,
   },
-};
+} as const;
 
 // Weapon
 
 export const WEAPON_ICON = IconWeapon;
 
-export const WEAPON_NONE: Weapon = {
+export const WEAPON_NONE: Readonly<Weapon> = {
   abilityChance: 0,
   coinPrice: 0,
   damage: 10,
   gearClass: "blunt",
   grip: WeaponGrip.OneHanded,
+  level: 0,
   modality: "melee",
   name: "Unarmed",
   ranges: {
@@ -140,16 +147,18 @@ export const WEAPON_NONE: Weapon = {
   scrapPrice: 0,
   staminaCost: 0,
   weight: 0,
-};
+} as const;
 
-export const WEAPON_SPECIFICATIONS: Record<
-  WeaponClass,
-  {
-    Icon: SVGIcon;
-    abilityChance: Range;
-    abilityName: string;
-    skillType: SkillType;
-  }
+export const WEAPON_SPECIFICATIONS: Readonly<
+  Record<
+    WeaponClass,
+    {
+      Icon: SVGIcon;
+      abilityChance: Range;
+      abilityName: string;
+      skillType: SkillType;
+    }
+  >
 > = {
   blunt: {
     abilityChance: { maximum: 0.7, minimum: 0.1 },
@@ -169,4 +178,4 @@ export const WEAPON_SPECIFICATIONS: Record<
     Icon: IconSlashing,
     skillType: SkillType.Parry,
   },
-};
+} as const;

@@ -22,14 +22,12 @@ export function useAcquireTrinket() {
         if (name === TRINKET_KNAPSACK.name) {
           set(encumbranceMaximum, (current) => current + 1);
           set(hasKnapsack, true);
-
-          return null;
+        } else {
+          set(inventory, (current) => ({
+            ...current,
+            [id]: trinket,
+          }));
         }
-
-        set(inventory, (current) => ({
-          ...current,
-          [id]: trinket,
-        }));
 
         return id;
       },

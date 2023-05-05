@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconWildernessLevel } from "@neverquest/icons/flying-flag.svg";
+import { ReactComponent as IconWildernessLevel } from "@neverquest/icons/wilderness-level.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { level } from "@neverquest/state/encounter";
 import { DeltaType } from "@neverquest/types/enums";

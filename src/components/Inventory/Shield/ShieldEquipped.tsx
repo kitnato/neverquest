@@ -2,8 +2,8 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ShieldName } from "@neverquest/components/Inventory/Shield/ShieldName";
-import { ICON_NO_SHIELD } from "@neverquest/constants";
-import { SHIELD_ICON } from "@neverquest/data/gear";
+import { ReactComponent as IconFist } from "@neverquest/icons/fist.svg";
+import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
 import { equippedShield, shield } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";
@@ -20,7 +20,7 @@ export function ShieldEquipped() {
   return (
     <IconDisplay
       contents={<ShieldName shield={shieldValue} />}
-      Icon={equippedShieldValue ? SHIELD_ICON : ICON_NO_SHIELD}
+      Icon={equippedShieldValue ? IconShield : IconFist}
       isAnimated
       tooltip="Equipped shield"
     />

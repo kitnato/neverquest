@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { QuestionSquare } from "react-bootstrap-icons";
 
-import { LABEL_UNKNOWN } from "@neverquest/constants";
+import { LABEL_UNKNOWN } from "@neverquest/data/constants";
 
 export function About() {
   const [isShowing, setIsShowing] = useState(false);

@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil";
 
 import { PoisonedMeter } from "@neverquest/components/Character/PoisonedMeter";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ReactComponent as IconPoisoned } from "@neverquest/icons/tear-tracks.svg";
+import { ReactComponent as IconPoisoned } from "@neverquest/icons/poisoned.svg";
 import { poisonDuration } from "@neverquest/state/character";
 
 export function Poisoned() {

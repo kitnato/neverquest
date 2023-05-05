@@ -3,18 +3,18 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
+import { ATTRIBUTES } from "@neverquest/data/attributes";
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
-  ICON_ESSENCE,
   ICON_SIZE_INLAY,
-  ICON_UNKNOWN,
   LABEL_AT_MAXIMUM,
   LABEL_UNKNOWN,
-} from "@neverquest/constants";
-import { ATTRIBUTES } from "@neverquest/data/attributes";
+} from "@neverquest/data/constants";
 import { useIncreaseAttribute } from "@neverquest/hooks/actions/useIncreaseAttribute";
+import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { ReactComponent as IconWait } from "@neverquest/icons/hourglass.svg";
-import { ReactComponent as IconIncrease } from "@neverquest/icons/private.svg";
+import { ReactComponent as IconIncrease } from "@neverquest/icons/increase.svg";
+import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import {
   areAttributesIncreasable,
   attributeCost,
@@ -54,7 +54,7 @@ export function Attribute({ type }: { type: AttributeType }) {
                 overlay={
                   <Tooltip>
                     {`Cost: ${attributeCostValue} `}
-                    <ICON_ESSENCE width={ICON_SIZE_INLAY} />
+                    <IconEssence width={ICON_SIZE_INLAY} />
                     {" essence"}
                   </Tooltip>
                 }
@@ -74,7 +74,7 @@ export function Attribute({ type }: { type: AttributeType }) {
           </Stack>
         </>
       ) : (
-        <IconDisplay contents={LABEL_UNKNOWN} Icon={ICON_UNKNOWN} tooltip={LABEL_UNKNOWN} />
+        <IconDisplay contents={LABEL_UNKNOWN} Icon={IconUnknown} tooltip={LABEL_UNKNOWN} />
       )}
     </div>
   );

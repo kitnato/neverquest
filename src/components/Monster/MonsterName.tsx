@@ -1,9 +1,9 @@
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ReactComponent as IconAttacking } from "@neverquest/icons/carnivore-mouth.svg";
-import { ReactComponent as IconDead } from "@neverquest/icons/dinosaur-bones.svg";
-import { ReactComponent as IconLurking } from "@neverquest/icons/mouth-watering.svg";
+import { ReactComponent as IconAttacking } from "@neverquest/icons/monster-attacking.svg";
+import { ReactComponent as IconCorpse } from "@neverquest/icons/monster-corpse.svg";
+import { ReactComponent as IconLurking } from "@neverquest/icons/monster-lurking.svg";
 import { isAttacking } from "@neverquest/state/character";
 import { isMonsterDead, monsterName } from "@neverquest/state/monster";
 
@@ -14,7 +14,7 @@ export function MonsterName() {
 
   const { Icon, tooltip } = (() => {
     if (isMonsterDeadValue) {
-      return { Icon: IconDead, tooltip: "Dead monster" };
+      return { Icon: IconCorpse, tooltip: "Dead monster" };
     }
 
     if (isAttackingValue) {

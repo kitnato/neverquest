@@ -1,13 +1,13 @@
 import { selector } from "recoil";
 
+import { ATTRIBUTES } from "@neverquest/data/attributes";
 import {
   BLEED,
   REGENERATION_AMOUNT_HEALTH,
   REGENERATION_AMOUNT_STAMINA,
   REGENERATION_RATE_HEALTH,
   REGENERATION_RATE_STAMINA,
-} from "@neverquest/constants";
-import { ATTRIBUTES } from "@neverquest/data/attributes";
+} from "@neverquest/data/constants";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { attributes } from "@neverquest/state/attributes";
 import { armor, shield, weapon } from "@neverquest/state/inventory";

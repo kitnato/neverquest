@@ -1,4 +1,3 @@
-import { ReactComponent as IconCrew } from "@neverquest/icons/cowled.svg";
 import { CrewMember } from "@neverquest/types/enums";
 
 export const CREW: Record<
@@ -70,8 +69,6 @@ export const CREW: Record<
     name: "Tailor",
   },
 };
-
-export const CREW_ICON = IconCrew;
 
 export const CREW_INITIAL = [CrewMember.Merchant] as const;
 

@@ -3,9 +3,10 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Coins } from "@neverquest/components/Resources/Coins";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
-import { CREW, CREW_ICON } from "@neverquest/data/caravan";
+import { CREW } from "@neverquest/data/caravan";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/constants";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
+import { ReactComponent as IconCrewMember } from "@neverquest/icons/crew-member.svg";
 import { crew } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import { coins } from "@neverquest/state/resources";
@@ -39,7 +40,7 @@ export function CrewHirable({ type }: { type: CrewMember }) {
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-      <IconDisplay contents={name} description={description} Icon={CREW_ICON} tooltip={name} />
+      <IconDisplay contents={name} description={description} Icon={IconCrewMember} tooltip={name} />
 
       <Stack direction="horizontal" gap={3}>
         <Coins tooltip="Price (coins)" value={coinPrice} />

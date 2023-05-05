@@ -3,7 +3,7 @@ import { Button, Form, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ReactComponent as IconMap } from "@neverquest/icons/treasure-map.svg";
+import { ReactComponent as IconNavigation } from "@neverquest/icons/navigation.svg";
 import {
   isLevelCompleted,
   isLevelStarted,
@@ -75,7 +75,7 @@ export function CompassUseButton() {
                 })}
               </Form.Select>
             }
-            Icon={IconMap}
+            Icon={IconNavigation}
             tooltip="Navigation"
           />
         </Modal.Body>

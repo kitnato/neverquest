@@ -6,7 +6,7 @@ import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { CompassUseButton } from "@neverquest/components/Inventory/Trinket/CompassUseButton";
 import { HearthstoneUseButton } from "@neverquest/components/Inventory/Trinket/HearthstoneUseButton";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/constants";
 import { TRINKET_COMPASS, TRINKET_HEARTHSTONE } from "@neverquest/data/trinkets";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { equippedItemIDs, inventory } from "@neverquest/state/inventory";

@@ -3,9 +3,9 @@ import { FormControl } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_UNKNOWN } from "@neverquest/constants";
-import { ReactComponent as IconAlive } from "@neverquest/icons/domino-mask.svg";
-import { ReactComponent as IconDead } from "@neverquest/icons/skull-crossed-bones.svg";
+import { LABEL_UNKNOWN } from "@neverquest/data/constants";
+import { ReactComponent as IconDead } from "@neverquest/icons/dead.svg";
+import { ReactComponent as IconAlive } from "@neverquest/icons/name.svg";
 import { isGameOver, name } from "@neverquest/state/character";
 
 export function Name() {

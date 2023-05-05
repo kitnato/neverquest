@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Mastery } from "@neverquest/components/Masteries/Mastery";
 import { MASTERIES_ORDER } from "@neverquest/data/masteries";
-import { ReactComponent as IconMasteries } from "@neverquest/icons/master-of-arms.svg";
+import { ReactComponent as IconMasteries } from "@neverquest/icons/masteries.svg";
 import { isShowingMastery } from "@neverquest/state/isShowing";
 
 import { getAnimationClass } from "@neverquest/utilities/getters";

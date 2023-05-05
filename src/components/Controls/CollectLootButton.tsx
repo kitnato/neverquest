@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
-import { ReactComponent as IconChest } from "@neverquest/icons/locked-chest.svg";
+import { ReactComponent as IconLoot } from "@neverquest/icons/loot.svg";
 import { isLevelCompleted } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
 import { getAnimationClass } from "@neverquest/utilities/getters";
@@ -31,7 +31,7 @@ export function CollectLootButton({ isDisabled }: { isDisabled: boolean }) {
           onClick={() => transactResources({})}
           variant="outline-dark"
         >
-          <IconImage Icon={IconChest} />
+          <IconImage Icon={IconLoot} />
         </Button>
       </span>
     </OverlayTrigger>

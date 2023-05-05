@@ -3,9 +3,9 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Monster } from "@neverquest/components/Monster";
-import { LABEL_UNKNOWN } from "@neverquest/constants";
-import { ReactComponent as IconDead } from "@neverquest/icons/crossed-bones.svg";
-import { ReactComponent as IconLurking } from "@neverquest/icons/evil-eyes.svg";
+import { LABEL_UNKNOWN } from "@neverquest/data/constants";
+import { ReactComponent as IconLurking } from "@neverquest/icons/monster-lurking.svg";
+import { ReactComponent as IconRemains } from "@neverquest/icons/monster-remains.svg";
 import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
 
 import { getAnimationClass } from "@neverquest/utilities/getters";
@@ -20,7 +20,7 @@ export function Wilderness() {
         <Card.Body>
           <IconDisplay
             contents={<span className="fst-italic">Everything is dead.</span>}
-            Icon={IconDead}
+            Icon={IconRemains}
             isSpaced
             tooltip="Monster remains"
           />

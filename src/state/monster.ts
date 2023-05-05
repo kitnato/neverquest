@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 
-import { POISON } from "@neverquest/constants";
+import { POISON } from "@neverquest/data/constants";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { isLevelStarted, level, progress } from "@neverquest/state/encounter";
 import { getDamagePerRate, getGrowthSigmoid } from "@neverquest/utilities/getters";

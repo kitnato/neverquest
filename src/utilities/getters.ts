@@ -1,6 +1,6 @@
 import type { RecoilValue, Snapshot } from "recoil";
 
-import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/constants";
+import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/data/constants";
 import type { Range } from "@neverquest/types";
 import type { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
 import { formatToFixed } from "@neverquest/utilities/formatters";

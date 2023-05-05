@@ -4,9 +4,9 @@ import { useRecoilValue } from "recoil";
 
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { IconImage } from "@neverquest/components/IconImage";
-import { LABEL_UNKNOWN } from "@neverquest/constants";
+import { LABEL_UNKNOWN } from "@neverquest/data/constants";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
-import { ReactComponent as IconTravel } from "@neverquest/icons/journey.svg";
+import { ReactComponent as IconTravel } from "@neverquest/icons/travel.svg";
 import { hasBoughtFromMerchant } from "@neverquest/state/caravan";
 import { isLevelCompleted, isWilderness, level } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";

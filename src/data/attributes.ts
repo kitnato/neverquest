@@ -1,6 +1,7 @@
-import { ICON_PLACEHOLDER, RECOVERY_RATE } from "@neverquest/constants";
-import { ReactComponent as IconAttackRate } from "@neverquest/icons/striking-splinter.svg";
-import { ReactComponent as IconDamage } from "@neverquest/icons/wolverine-claws.svg";
+import { RECOVERY_RATE } from "@neverquest/data/constants";
+import { ReactComponent as IconAttackRate } from "@neverquest/icons/attack-rate.svg";
+import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
+import { ReactComponent as IconPlaceholder } from "@neverquest/icons/placeholder.svg";
 import type { AttributeOrMastery } from "@neverquest/types";
 import { AttributeType, SkillType } from "@neverquest/types/enums";
 
@@ -11,7 +12,7 @@ export const ATTRIBUTES: Readonly<Record<AttributeType, AttributeOrMastery>> = {
   [AttributeType.AttackRate]: {
     base: 0,
     description: "Increases attack rate.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     increment: 0.05,
     maximum: 0.9,
     name: "Speed",
@@ -19,7 +20,7 @@ export const ATTRIBUTES: Readonly<Record<AttributeType, AttributeOrMastery>> = {
   [AttributeType.CriticalChance]: {
     base: 0,
     description: "Increases critical strike chance.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     increment: 0.03,
     maximum: 0.6,
     name: "Dexterity",
@@ -28,7 +29,7 @@ export const ATTRIBUTES: Readonly<Record<AttributeType, AttributeOrMastery>> = {
   [AttributeType.CriticalDamage]: {
     base: 1.5,
     description: "Increases critical strike damage.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     increment: 0.15,
     name: "Perception",
     requiredSkill: SkillType.Criticals,
@@ -36,14 +37,14 @@ export const ATTRIBUTES: Readonly<Record<AttributeType, AttributeOrMastery>> = {
   [AttributeType.Damage]: {
     base: 0,
     description: "Increases base attack damage.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     increment: 3,
     name: "Strength",
   },
   [AttributeType.DodgeChance]: {
     base: 0,
     description: "Increases chance to dodge an attack.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     increment: 0.04,
     maximum: 0.8,
     name: "Agility",
@@ -52,21 +53,21 @@ export const ATTRIBUTES: Readonly<Record<AttributeType, AttributeOrMastery>> = {
   [AttributeType.Health]: {
     base: 100,
     description: "Increases maximum health.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     increment: 10,
     name: "Vitality",
   },
   [AttributeType.Loot]: {
     base: 0,
     description: "Increases amount of loot dropped by monsters.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     increment: 0.03,
     name: "Luck",
   },
   [AttributeType.RecoveryRate]: {
     base: RECOVERY_RATE,
     description: "Increases recovery rate.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     increment: -150,
     maximum: 100,
     name: "Resilience",
@@ -74,7 +75,7 @@ export const ATTRIBUTES: Readonly<Record<AttributeType, AttributeOrMastery>> = {
   [AttributeType.ReserveRegenerationAmount]: {
     base: 0,
     description: "Increases health & stamina regeneration amount.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     increment: 1,
     name: "Fortitude",
     requiredSkill: SkillType.Regeneration,
@@ -83,7 +84,7 @@ export const ATTRIBUTES: Readonly<Record<AttributeType, AttributeOrMastery>> = {
   [AttributeType.ReserveRegenerationRate]: {
     base: 0,
     description: "Increases health & stamina regeneration rate.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     increment: 0.05,
     name: "Vigor",
     requiredSkill: SkillType.Regeneration,
@@ -91,7 +92,7 @@ export const ATTRIBUTES: Readonly<Record<AttributeType, AttributeOrMastery>> = {
   [AttributeType.Stamina]: {
     base: 10,
     description: "Increases maximum stamina.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     increment: 4,
     name: "Endurance",
   },

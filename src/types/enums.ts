@@ -40,7 +40,7 @@ export enum DeltaType {
   BlockChance,
   ChanceFreeBlock,
   ChanceSkipRecovery,
-  CharacterLevel,
+  PowerLevel,
   Coins,
   CoinsLoot,
   CriticalRating,

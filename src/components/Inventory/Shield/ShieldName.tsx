@@ -5,11 +5,11 @@ import { useRecoilValue } from "recoil";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import {
   CLASS_TABLE_CELL_ITALIC,
-  ICON_NO_SHIELD,
   ICON_SIZE_INLAY,
   LABEL_UNKNOWN,
-} from "@neverquest/constants";
+} from "@neverquest/data/constants";
 import { SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
+import { ReactComponent as IconFist } from "@neverquest/icons/fist.svg";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingGearLevel } from "@neverquest/state/settings";
@@ -32,7 +32,7 @@ export function ShieldName({
   const staggerSkillValue = useRecoilValue(skills(SkillType.Stagger));
 
   const { blockChance, level, name, size, staggerChance, staminaCost, weight } = shield;
-  const { Icon } = size ? SHIELD_SPECIFICATIONS[size] : { Icon: ICON_NO_SHIELD };
+  const { Icon } = size ? SHIELD_SPECIFICATIONS[size] : { Icon: IconFist };
 
   return (
     <OverlayTrigger

@@ -3,8 +3,8 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import { CLASS_TABLE_CELL_ITALIC, POISON } from "@neverquest/constants";
-import { ReactComponent as IconPoisonRating } from "@neverquest/icons/death-juice.svg";
+import { CLASS_TABLE_CELL_ITALIC, POISON } from "@neverquest/data/constants";
+import { ReactComponent as IconPoisonRating } from "@neverquest/icons/poison-rating.svg";
 import { monsterDamage, monsterPoisonChance } from "@neverquest/state/monster";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 import { getDamagePerTick } from "@neverquest/utilities/getters";

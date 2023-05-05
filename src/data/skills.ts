@@ -1,4 +1,4 @@
-import { ICON_PLACEHOLDER } from "@neverquest/constants";
+import { ReactComponent as IconPlaceholder } from "@neverquest/icons/placeholder.svg";
 import type { Skill } from "@neverquest/types";
 import { SkillType } from "@neverquest/types/enums";
 
@@ -7,56 +7,56 @@ export const SKILLS: Readonly<Record<SkillType, Skill>> = {
   [SkillType.Armors]: {
     coinPrice: 65,
     description: "Unlocks the use of reinforced and plate armors.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     name: "Armorcraft",
     requiredLevel: 45,
   },
   [SkillType.Bleed]: {
     coinPrice: 65,
     description: "Unlocks the ability to inflict bleeding.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     name: "Anatomy",
     requiredLevel: 40,
   },
   [SkillType.Criticals]: {
     coinPrice: 35,
     description: "Unlocks the ability to deal critical strikes.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     name: "Assassination",
     requiredLevel: 15,
   },
   [SkillType.Dodge]: {
     coinPrice: 55,
     description: "Unlocks the ability to dodge attacks, negating all damage.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     name: "Evasion",
     requiredLevel: 35,
   },
   [SkillType.Parry]: {
     coinPrice: 45,
     description: "Unlocks the ability to parry attacks, partially reflecting damage.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     name: "Escrime",
     requiredLevel: 25,
   },
   [SkillType.Regeneration]: {
     coinPrice: 35,
     description: "Unlocks attributes that improve health & stamina regeneration.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     name: "Calisthenics",
     requiredLevel: 10,
   },
   [SkillType.Shields]: {
     coinPrice: 55,
     description: "Unlocks the use of medium and tower shields.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     name: "Shieldcraft",
     requiredLevel: 30,
   },
   [SkillType.Stagger]: {
     coinPrice: 45,
     description: "Unlocks the ability to temporarily stagger the attacker.",
-    Icon: ICON_PLACEHOLDER,
+    Icon: IconPlaceholder,
     name: "Traumatology",
     requiredLevel: 20,
   },

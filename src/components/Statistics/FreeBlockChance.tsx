@@ -4,7 +4,7 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconFreeBlock } from "@neverquest/icons/static-guard.svg";
+import { ReactComponent as IconStability } from "@neverquest/icons/stability.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { skills } from "@neverquest/state/skills";
 import { freeBlockChance } from "@neverquest/state/statistics";
@@ -35,7 +35,7 @@ export function FreeBlockChance() {
           <FloatingText type={DeltaType.ChanceFreeBlock} />
         </>
       }
-      Icon={IconFreeBlock}
+      Icon={IconStability}
       isAnimated
       tooltip={MASTERIES[MasteryType.FreeBlockChance].name}
     />

@@ -1,6 +1,6 @@
 import { Badge } from "react-bootstrap";
 
-import { ICON_SIZE_INLAY } from "@neverquest/constants";
+import { ICON_SIZE_INLAY } from "@neverquest/data/constants";
 import type { SVGIcon } from "@neverquest/types/props";
 
 export function ButtonBadge({ Icon, isShowing }: { Icon: SVGIcon; isShowing: boolean }) {

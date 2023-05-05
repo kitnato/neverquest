@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 
-import { LABEL_UNKNOWN } from "@neverquest/constants";
+import { LABEL_UNKNOWN } from "@neverquest/data/constants";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { maximumStamina, staminaDebuff } from "@neverquest/state/reserves";
 

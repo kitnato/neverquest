@@ -1,6 +1,6 @@
 import { atom, atomFamily } from "recoil";
 
-import { DEFAULT_DELTA_DISPLAY } from "@neverquest/constants";
+import { DEFAULT_DELTA_DISPLAY } from "@neverquest/data/constants";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import type { DeltaType } from "@neverquest/types/enums";
 import type { DeltaDisplay, FloatingText } from "@neverquest/types/ui";

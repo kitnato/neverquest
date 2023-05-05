@@ -4,10 +4,10 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import { BLEED, CLASS_TABLE_CELL_ITALIC } from "@neverquest/constants";
+import { BLEED, CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/constants";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconBleedRating } from "@neverquest/icons/bleeding-wound.svg";
+import { ReactComponent as IconBleedRating } from "@neverquest/icons/bleed-rating.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { skills } from "@neverquest/state/skills";
 import {

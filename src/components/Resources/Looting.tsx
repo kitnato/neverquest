@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LootingMeter } from "@neverquest/components/Resources/LootingMeter";
-import { ReactComponent as IconLooting } from "@neverquest/icons/vulture.svg";
+import { ReactComponent as IconLooting } from "@neverquest/icons/looting.svg";
 import { isLooting } from "@neverquest/state/character";
 import { progress } from "@neverquest/state/encounter";
 

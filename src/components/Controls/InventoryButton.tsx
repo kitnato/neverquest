@@ -5,7 +5,7 @@ import { ButtonBadge } from "@neverquest/components/Controls/ButtonBadge";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { IconImage } from "@neverquest/components/IconImage";
 import { Inventory } from "@neverquest/components/Inventory";
-import { ICON_WEIGHT } from "@neverquest/constants";
+import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconInventory } from "@neverquest/icons/knapsack.svg";
 import { isAttacking } from "@neverquest/state/character";
 import { hasKnapsack, isInventoryFull, isInventoryOpen } from "@neverquest/state/inventory";
@@ -36,7 +36,7 @@ export function InventoryButton({ isDisabled }: { isDisabled: boolean }) {
           >
             <IconImage Icon={IconInventory} />
 
-            <ButtonBadge Icon={ICON_WEIGHT} isShowing={isInventoryFullValue} />
+            <ButtonBadge Icon={IconEncumbrance} isShowing={isInventoryFullValue} />
           </Button>
         </span>
       </OverlayTrigger>

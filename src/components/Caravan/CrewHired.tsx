@@ -2,8 +2,9 @@ import { Button } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
-import { CREW, CREW_ICON } from "@neverquest/data/caravan";
+import { CREW } from "@neverquest/data/caravan";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/constants";
+import { ReactComponent as IconCrewMember } from "@neverquest/icons/crew-member.svg";
 import { crew } from "@neverquest/state/caravan";
 import { type CrewMember, CrewStatus } from "@neverquest/types/enums";
 
@@ -27,7 +28,7 @@ export function CrewHired({ setActive, type }: { setActive: () => void; type: Cr
           </Button>
         </div>
       }
-      Icon={CREW_ICON}
+      Icon={IconCrewMember}
       tooltip={name}
     />
   );

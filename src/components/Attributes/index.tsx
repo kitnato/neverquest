@@ -1,11 +1,11 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { AttributePoints } from "./AttributePoints";
+import { AttributePoints } from "@neverquest/components/Attributes/AttributePoints";
 import { AttributesList } from "@neverquest/components/Attributes/AttributesList";
-import { CharacterLevel } from "@neverquest/components/Character/CharacterLevel";
 import { EssenceAbsorbed } from "@neverquest/components/Character/EssenceAbsorbed";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
+import { PowerLevel } from "@neverquest/components/Character/PowerLevel";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/constants";
 import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
 
 export function Attributes() {
@@ -16,7 +16,7 @@ export function Attributes() {
     <Stack gap={5}>
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <Stack className="position-sticky" direction="horizontal" gap={3}>
-          <CharacterLevel />
+          <PowerLevel />
 
           <EssenceAbsorbed />
 

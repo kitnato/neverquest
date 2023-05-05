@@ -1,6 +1,6 @@
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
-import { ReactComponent as IconHealth } from "@neverquest/icons/hospital-cross.svg";
+import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
 import {
   healthRegenerationDuration,
   staminaRegenerationDuration,

@@ -5,13 +5,16 @@ import { useRecoilValue } from "recoil";
 import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGear";
 import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ICON_UNKNOWN, ICON_WEIGHT, LABEL_UNKNOWN } from "@neverquest/constants";
+import { LABEL_UNKNOWN } from "@neverquest/data/constants";
 import { WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
-import { ReactComponent as IconAttackRate } from "@neverquest/icons/blade-fall.svg";
-import { ReactComponent as IconClass } from "@neverquest/icons/gear-hammer.svg";
-import { ReactComponent as IconStaminaCost } from "@neverquest/icons/ink-swirl.svg";
-import { ReactComponent as IconDamage } from "@neverquest/icons/pointy-sword.svg";
-import { ReactComponent as IconLevel } from "@neverquest/icons/private-first-class.svg";
+import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
+import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
+import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
+import { ReactComponent as IconStaminaCost } from "@neverquest/icons/stamina-cost.svg";
+import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
+import { ReactComponent as IconWeaponAbility } from "@neverquest/icons/weapon-ability.svg";
+import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
+import { ReactComponent as IconWeaponClass } from "@neverquest/icons/weapon-class.svg";
 import { type WeaponClass, WeaponClasses } from "@neverquest/LOCRA/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { level } from "@neverquest/state/encounter";
@@ -78,7 +81,7 @@ export function WeaponOptions() {
               value={weaponLevel}
             />
           }
-          Icon={IconLevel}
+          Icon={IconGearLevel}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Level"
         />
@@ -96,7 +99,7 @@ export function WeaponOptions() {
               ))}
             </FormSelect>
           }
-          Icon={IconClass}
+          Icon={IconWeaponClass}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Class"
         />
@@ -112,14 +115,14 @@ export function WeaponOptions() {
           contents={`${formatMilliseconds(ranges.rate.minimum)}-${formatMilliseconds(
             ranges.rate.maximum
           )}`}
-          Icon={IconAttackRate}
+          Icon={IconWeaponAttackRate}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Attack rate"
         />
 
         <IconDisplay
           contents={skillValue ? formatPercentage(abilityChance) : LABEL_UNKNOWN}
-          Icon={skillValue ? IconAttackRate : ICON_UNKNOWN}
+          Icon={skillValue ? IconWeaponAbility : IconUnknown}
           iconProps={{ overlayPlacement: "left" }}
           tooltip={skillValue ? `${abilityName} chance` : LABEL_UNKNOWN}
         />
@@ -133,7 +136,7 @@ export function WeaponOptions() {
 
         <IconDisplay
           contents={weight}
-          Icon={ICON_WEIGHT}
+          Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
         />

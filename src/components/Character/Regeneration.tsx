@@ -4,14 +4,14 @@ import { useRecoilValue } from "recoil";
 import { RegenerationMeter } from "@neverquest/components/Character/RegenerationMeter";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
+import { ATTRIBUTES } from "@neverquest/data/attributes";
 import {
   CLASS_TABLE_CELL_ITALIC,
   REGENERATION_AMOUNT_HEALTH,
   REGENERATION_AMOUNT_STAMINA,
   REGENERATION_RATE_HEALTH,
   REGENERATION_RATE_STAMINA,
-} from "@neverquest/constants";
-import { ATTRIBUTES } from "@neverquest/data/attributes";
+} from "@neverquest/data/constants";
 import { RESERVES } from "@neverquest/data/reserves";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { reserveRegenerationRate } from "@neverquest/state/statistics";

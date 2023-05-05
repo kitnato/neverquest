@@ -5,7 +5,7 @@ import { Regeneration } from "@neverquest/components/Character/Regeneration";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ReserveMeter } from "@neverquest/components/ReserveMeter";
-import { ReactComponent as IconStamina } from "@neverquest/icons/lungs.svg";
+import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import { DeltaType, ReserveType, ShowingType } from "@neverquest/types/enums";
 import { UIAttachment } from "@neverquest/types/ui";

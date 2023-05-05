@@ -5,11 +5,11 @@ import { useRecoilValue } from "recoil";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import {
   CLASS_TABLE_CELL_ITALIC,
-  ICON_NO_ARMOR,
   ICON_SIZE_INLAY,
   LABEL_UNKNOWN,
-} from "@neverquest/constants";
+} from "@neverquest/data/constants";
 import { ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
+import { ReactComponent as IconArmorNone } from "@neverquest/icons/armor-none.svg";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingGearLevel } from "@neverquest/state/settings";
@@ -35,7 +35,7 @@ export function ArmorName({ armor, placement = "top" }: { armor: Armor; placemen
     weight,
   } = armor;
 
-  const { Icon } = gearClass ? ARMOR_SPECIFICATIONS[gearClass] : { Icon: ICON_NO_ARMOR };
+  const { Icon } = gearClass ? ARMOR_SPECIFICATIONS[gearClass] : { Icon: IconArmorNone };
 
   return (
     <OverlayTrigger

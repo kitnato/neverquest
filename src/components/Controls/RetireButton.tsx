@@ -2,7 +2,7 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { ReactComponent as IconRetire } from "@neverquest/icons/rocking-chair.svg";
+import { ReactComponent as IconRetire } from "@neverquest/icons/retire.svg";
 import { isWilderness } from "@neverquest/state/encounter";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 

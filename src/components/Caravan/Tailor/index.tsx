@@ -1,6 +1,6 @@
-import { ExpandInventory } from "./ExpandInventory";
+import { ExpandInventory } from "@neverquest/components/Caravan/Tailor/ExpandInventory";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/constants";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/constants";
 import { TRINKET_KNAPSACK } from "@neverquest/data/trinkets";
 
 // TODO - add icon inset "+"

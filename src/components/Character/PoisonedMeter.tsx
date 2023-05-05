@@ -1,7 +1,7 @@
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { POISON } from "@neverquest/constants";
+import { POISON } from "@neverquest/data/constants";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { poisonDuration } from "@neverquest/state/character";

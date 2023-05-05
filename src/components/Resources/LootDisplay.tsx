@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Looting } from "@neverquest/components/Resources/Looting";
 import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
-import { ReactComponent as IconOpenChest } from "@neverquest/icons/open-chest.svg";
+import { ReactComponent as IconLooted } from "@neverquest/icons/loot.svg";
 import { progress } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
 
@@ -24,7 +24,7 @@ export function LootDisplay() {
             {hasLootedValue ? (
               <IconDisplay
                 contents={<span className="fst-italic">Nothing remains.</span>}
-                Icon={IconOpenChest}
+                Icon={IconLooted}
                 isSpaced
                 tooltip="Loot"
               />

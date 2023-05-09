@@ -58,7 +58,7 @@ export const ARMOR_SPECIFICATIONS: Readonly<
     dodgeCostModifier: 0,
     Icon: IconPlate,
     protectionModifier: 1,
-    weightModifier: 1,
+    weightModifier: 2,
   },
   reinforced: {
     deflectionChanceModifier: 0.5,
@@ -66,7 +66,7 @@ export const ARMOR_SPECIFICATIONS: Readonly<
     dodgeCostModifier: 1,
     Icon: IconReinforced,
     protectionModifier: 0.75,
-    weightModifier: 0.75,
+    weightModifier: 1,
   },
 } as const;
 
@@ -100,9 +100,9 @@ export const SHIELD_SPECIFICATIONS: Readonly<
   medium: {
     blockRange: { maximum: 0.49, minimum: 0.25 },
     Icon: IconShieldMedium,
-    staggerModifier: 0.75,
-    staminaCostModifier: 0.75,
-    weightModifier: 0.75,
+    staggerModifier: 1,
+    staminaCostModifier: 1.5,
+    weightModifier: 1,
   },
   small: {
     blockRange: { maximum: 0.24, minimum: 0.1 },
@@ -114,9 +114,9 @@ export const SHIELD_SPECIFICATIONS: Readonly<
   tower: {
     blockRange: { maximum: 0.75, minimum: 0.5 },
     Icon: IconShieldTower,
-    staggerModifier: 1,
-    staminaCostModifier: 1,
-    weightModifier: 1,
+    staggerModifier: 1.5,
+    staminaCostModifier: 2,
+    weightModifier: 2,
   },
 } as const;
 

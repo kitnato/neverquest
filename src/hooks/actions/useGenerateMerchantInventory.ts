@@ -4,7 +4,7 @@ import { useRecoilCallback } from "recoil";
 import { MERCHANT_OFFERS } from "@neverquest/data/merchant";
 import type { AffixTag } from "@neverquest/LOCRA/types";
 import { merchantInventory } from "@neverquest/state/caravan";
-import { level } from "@neverquest/state/encounter";
+import { level, maximumLevel } from "@neverquest/state/encounter";
 import { isNSFW } from "@neverquest/state/settings";
 import type { InventoryMerchant } from "@neverquest/types";
 import { isTrinket } from "@neverquest/types/type-guards";
@@ -26,7 +26,7 @@ export function useGenerateMerchantInventory() {
 
         const merchantOffersIndex = levelValue - 1;
 
-        if (MERCHANT_OFFERS[merchantOffersIndex]) {
+        if (levelValue === get(maximumLevel) && MERCHANT_OFFERS[merchantOffersIndex]) {
           const SETTINGS_GEAR: {
             hasPrefix: boolean;
             isNSFW: boolean;
@@ -76,9 +76,9 @@ export function useGenerateMerchantInventory() {
               };
             }
           });
-
-          set(merchantInventory, inventory);
         }
+
+        set(merchantInventory, inventory);
       },
     []
   );

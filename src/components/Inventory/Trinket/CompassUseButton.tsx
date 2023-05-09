@@ -3,13 +3,13 @@ import { Button, Form, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import { ReactComponent as IconNavigation } from "@neverquest/icons/navigation.svg";
 import {
   isLevelCompleted,
   isLevelStarted,
   isWilderness,
   level,
-  progress,
   wildernesses,
 } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
@@ -18,7 +18,6 @@ import { hasLooted } from "@neverquest/state/resources";
 export function CompassUseButton() {
   const hasLootedValue = useRecoilValue(hasLooted);
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
-  const resetProgress = useResetRecoilState(progress);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const isLevelStartedValue = useRecoilValue(isLevelStarted);
   const isWildernessValue = useRecoilValue(isWilderness);
@@ -27,14 +26,17 @@ export function CompassUseButton() {
 
   const [isShowing, setIsShowing] = useState(false);
 
+  const resetWilderness = useResetWilderness();
+
   const canNavigate =
     (!isLevelStartedValue || (isLevelCompletedValue && hasLootedValue)) && isWildernessValue;
 
   const handleNavigate = ({ target: { value } }: ChangeEvent<HTMLSelectElement>) => {
     setIsShowing(false);
-    resetIsInventoryOpen();
     setLevel(+value);
-    resetProgress();
+    resetIsInventoryOpen();
+
+    resetWilderness();
   };
 
   return (

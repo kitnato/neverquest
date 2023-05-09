@@ -27,9 +27,7 @@ export function useToggleLocation() {
         const isWildernessValue = get(isWilderness);
 
         if (isWildernessValue) {
-          if (get(level) === get(maximumLevel)) {
-            generateMerchantInventory();
-          }
+          generateMerchantInventory();
 
           set(mode, LocationType.Caravan);
         } else {

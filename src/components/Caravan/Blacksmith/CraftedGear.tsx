@@ -52,7 +52,7 @@ export function CraftedGear({ gear }: { gear: Gear }) {
         <span className="d-inline-block w-100">
           <Button
             className="w-100"
-            disabled={!canFit}
+            disabled={!canFitValue}
             onClick={handleAcquire}
             variant="outline-dark"
           >

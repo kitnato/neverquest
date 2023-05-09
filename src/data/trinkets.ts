@@ -13,7 +13,7 @@ export const TRINKET_COMPASS: Readonly<Trinket> = {
 } as const;
 
 export const TRINKET_HEARTHSTONE: Readonly<Trinket> = {
-  coinPrice: 50,
+  coinPrice: 40,
   description: "Travel back to the caravan even if there are still lurking monsters.",
   Icon: IconStone,
   isPortable: true,
@@ -22,7 +22,7 @@ export const TRINKET_HEARTHSTONE: Readonly<Trinket> = {
 };
 
 export const TRINKET_KNAPSACK: Readonly<Trinket> = {
-  coinPrice: 15,
+  coinPrice: 10,
   description: "Carry more possessions and manage gear.",
   Icon: IconKnapsack,
   isPortable: false,

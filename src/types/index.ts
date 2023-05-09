@@ -11,9 +11,9 @@ export type Armor = GearBase & {
 };
 
 export type AttributeOrMastery = {
-  Icon: SVGIcon;
   base: number;
   description: string;
+  Icon: SVGIcon;
   increment: number;
   maximum?: number;
   name: string;
@@ -61,9 +61,9 @@ export type Shield = GearBase & {
 };
 
 export type Skill = {
-  Icon: SVGIcon;
   coinPrice: number;
   description: string;
+  Icon: SVGIcon;
   name: string;
   requiredLevel: number;
 };
@@ -131,8 +131,8 @@ export type StorageKey =
   | "wildernesses";
 
 export type Trinket = ItemBase & {
-  Icon: SVGIcon;
   description: string;
+  Icon: SVGIcon;
   isPortable: boolean;
 };
 

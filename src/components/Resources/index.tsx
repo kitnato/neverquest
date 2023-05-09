@@ -13,8 +13,8 @@ export function Resource({
   deltaType,
   showAtom,
 }: {
-  Component: React.ElementType;
   atom: RecoilState<number>;
+  Component: React.ElementType;
   deltaType: DeltaType;
   showAtom: RecoilState<boolean>;
 }) {

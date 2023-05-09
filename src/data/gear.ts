@@ -35,10 +35,10 @@ export const ARMOR_SPECIFICATIONS: Readonly<
   Record<
     ArmorClass,
     {
-      Icon: SVGIcon;
       deflectionChanceModifier: number;
       dodgeChanceModifier: number;
       dodgeCostModifier: number;
+      Icon: SVGIcon;
       protectionModifier: number;
       weightModifier: number;
     }
@@ -89,8 +89,8 @@ export const SHIELD_SPECIFICATIONS: Readonly<
   Record<
     ShieldSize,
     {
-      Icon: SVGIcon;
       blockRange: Range;
+      Icon: SVGIcon;
       staggerModifier: number;
       staminaCostModifier: number;
       weightModifier: number;
@@ -153,9 +153,9 @@ export const WEAPON_SPECIFICATIONS: Readonly<
   Record<
     WeaponClass,
     {
-      Icon: SVGIcon;
       abilityChance: Range;
       abilityName: string;
+      Icon: SVGIcon;
       skillType: SkillType;
     }
   >

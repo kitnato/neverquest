@@ -1,5 +1,4 @@
 import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
 
 import { AttackButton } from "@neverquest/components/Controls/AttackButton";
 import { AttributesButton } from "@neverquest/components/Controls/AttributesButton";
@@ -7,24 +6,21 @@ import { CollectLootButton } from "@neverquest/components/Controls/CollectLootBu
 import { InventoryButton } from "@neverquest/components/Controls/InventoryButton";
 import { RetireButton } from "@neverquest/components/Controls/RetireButton";
 import { TravelButton } from "@neverquest/components/Controls/TravelButton";
-import { isGameOver } from "@neverquest/state/character";
 
 export function Control() {
-  const isGameOverValue = useRecoilValue(isGameOver);
-
   return (
     <Stack gap={3}>
-      <RetireButton isDisabled={isGameOverValue} />
+      <RetireButton />
 
-      <AttackButton isDisabled={isGameOverValue} />
+      <AttackButton />
 
-      <AttributesButton isDisabled={isGameOverValue} />
+      <AttributesButton />
 
-      <InventoryButton isDisabled={isGameOverValue} />
+      <InventoryButton />
 
-      <CollectLootButton isDisabled={isGameOverValue} />
+      <CollectLootButton />
 
-      <TravelButton isDisabled={isGameOverValue} />
+      <TravelButton />
     </Stack>
   );
 }

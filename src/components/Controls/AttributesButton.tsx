@@ -9,15 +9,17 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { ReactComponent as IconAttributes } from "@neverquest/icons/attributes.svg";
 import { ReactComponent as IconUpgrade } from "@neverquest/icons/upgrade.svg";
 import { areAttributesIncreasable } from "@neverquest/state/attributes";
-import { isAttacking } from "@neverquest/state/character";
-import { isLevelStarted } from "@neverquest/state/encounter";
+import { isAttacking, isGameOver } from "@neverquest/state/character";
+import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function AttributesButton({ isDisabled }: { isDisabled: boolean }) {
+export function AttributesButton() {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const isAttackingValue = useRecoilValue(isAttacking);
+  const isGameOverValue = useRecoilValue(isGameOver);
+  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const isLevelStartedValue = useRecoilValue(isLevelStarted);
   const isShowingAttributesButton = useRecoilValue(isShowing(ShowingType.AttributesButton));
 
@@ -37,14 +39,14 @@ export function AttributesButton({ isDisabled }: { isDisabled: boolean }) {
         >
           <Button
             className={`position-relative${
-              areAttributesIncreasableValue && !isLevelStartedValue
+              areAttributesIncreasableValue && (isLevelCompletedValue || !isLevelStartedValue)
                 ? ` ${getAnimationClass({
                     isInfinite: true,
                     type: "pulse",
                   })}`
                 : ""
             }`}
-            disabled={isAttackingValue || isDisabled}
+            disabled={isAttackingValue || isGameOverValue}
             onClick={() => setScreenShowing(true)}
             variant="outline-dark"
           >

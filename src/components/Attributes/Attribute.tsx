@@ -36,7 +36,7 @@ export function Attribute({ type }: { type: AttributeType }) {
 
   const { description, Icon, name } = ATTRIBUTES[type];
   const canIncrease =
-    areAttributesIncreasableValue && (!isLevelStartedValue || isLevelCompletedValue);
+    areAttributesIncreasableValue && (isLevelCompletedValue || !isLevelStartedValue);
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
@@ -53,9 +53,14 @@ export function Attribute({ type }: { type: AttributeType }) {
               <OverlayTrigger
                 overlay={
                   <Tooltip>
-                    {`Cost: ${attributeCostValue} `}
-                    <IconEssence width={ICON_SIZE_INLAY} />
-                    {" essence"}
+                    <div>
+                      {`Cost: ${attributeCostValue} `}
+                      <IconEssence width={ICON_SIZE_INLAY} />
+                      {" essence"}
+                    </div>
+                    {isLevelStartedValue && !isLevelCompletedValue && (
+                      <div>Monsters are lurking!</div>
+                    )}
                   </Tooltip>
                 }
                 placement="top"

@@ -7,14 +7,15 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { Inventory } from "@neverquest/components/Inventory";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconInventory } from "@neverquest/icons/knapsack.svg";
-import { isAttacking } from "@neverquest/state/character";
+import { isAttacking, isGameOver } from "@neverquest/state/character";
 import { hasKnapsack, isInventoryFull, isInventoryOpen } from "@neverquest/state/inventory";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function InventoryButton({ isDisabled }: { isDisabled: boolean }) {
-  const hasKnapsackValue = useRecoilValue(hasKnapsack);
+export function InventoryButton() {
   const isAttackingValue = useRecoilValue(isAttacking);
+  const isGameOverValue = useRecoilValue(isGameOver);
   const isInventoryFullValue = useRecoilValue(isInventoryFull);
+  const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const [isInventoryOpenValue, setIsInventoryOpen] = useRecoilState(isInventoryOpen);
 
   if (!hasKnapsackValue) {
@@ -30,7 +31,7 @@ export function InventoryButton({ isDisabled }: { isDisabled: boolean }) {
           })}`}
         >
           <Button
-            disabled={isAttackingValue || isDisabled}
+            disabled={isAttackingValue || isGameOverValue}
             onClick={() => setIsInventoryOpen(true)}
             variant="outline-dark"
           >

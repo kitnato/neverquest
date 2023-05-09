@@ -42,12 +42,6 @@ export function Damage() {
                 <Popover.Body>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Per attack:</td>
-
-                      <td>{damageTotalValue}</td>
-                    </tr>
-
-                    <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
 
                       <td>{weaponValue.damage}</td>

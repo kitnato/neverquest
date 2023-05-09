@@ -14,8 +14,8 @@ export function Lootable({
   deltaType,
   tooltip,
 }: {
-  Component: React.ElementType;
   atom: RecoilState<number>;
+  Component: React.ElementType;
   deltaType: DeltaType;
   tooltip: string;
 }) {

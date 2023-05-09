@@ -3,7 +3,7 @@ import { useRecoilCallback } from "recoil";
 import { CREW, CREW_ORDER } from "@neverquest/data/caravan";
 import { useCreateMonster } from "@neverquest/hooks/actions/useCreateMonster";
 import { crew } from "@neverquest/state/caravan";
-import { level, progress, wildernesses } from "@neverquest/state/encounter";
+import { level, wildernesses } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isNSFW } from "@neverquest/state/settings";
 import { CrewStatus, ShowingType } from "@neverquest/types/enums";
@@ -14,7 +14,7 @@ export function useIncreaseLevel() {
   const createMonster = useCreateMonster();
 
   return useRecoilCallback(
-    ({ reset, set, snapshot }) =>
+    ({ set, snapshot }) =>
       () => {
         const get = getSnapshotGetter(snapshot);
 
@@ -48,8 +48,6 @@ export function useIncreaseLevel() {
           }
         });
 
-        reset(progress);
-
         if (!get(wildernesses)[nextLevel - 1]) {
           set(wildernesses, (current) => [
             ...current,
@@ -58,7 +56,6 @@ export function useIncreaseLevel() {
         }
 
         set(level, nextLevel);
-        createMonster();
       },
     [createMonster]
   );

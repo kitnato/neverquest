@@ -222,7 +222,7 @@ Both the character and monster will keep attacking one another until either the 
 
 Upon a monster's death, the wilderness level's **progress** is incremented, its remains are looted and the next monster is engaged automatically, unless the character retreats.
 
-The character will enter a **resting** state once the level is complete and there are no more monsters to fight.
+The character will enter a **resting** state once the level is complete and there are no more monsters to fight, or when they are at the [caravan](#caravan).
 
 ### Combat mechanics
 

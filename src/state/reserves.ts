@@ -24,7 +24,7 @@ export const canDodge = selector({
 });
 
 export const isHealthLow = selector({
-  get: ({ get }) => get(currentHealth) <= Math.ceil(get(maximumHealth) * 0.33),
+  get: ({ get }) => get(currentHealth) <= Math.round(get(maximumHealth) * 0.33),
   key: "isHealthLow",
 });
 

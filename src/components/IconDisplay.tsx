@@ -15,9 +15,9 @@ export function IconDisplay({
   isSpaced,
   tooltip,
 }: {
-  Icon: SVGIcon;
   contents: ReactNode;
   description?: ReactNode;
+  Icon: SVGIcon;
   iconProps?: IconImageDOMProps;
   isAnimated?: boolean;
   isSpaced?: boolean;

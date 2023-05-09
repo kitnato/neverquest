@@ -3,11 +3,13 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { ReactComponent as IconRetire } from "@neverquest/icons/retire.svg";
+import { isGameOver } from "@neverquest/state/character";
 import { isWilderness } from "@neverquest/state/encounter";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 // TODO
-export function RetireButton({ isDisabled }: { isDisabled: boolean }) {
+export function RetireButton() {
+  const isGameOverValue = useRecoilValue(isGameOver);
   const isWildernessValue = useRecoilValue(isWilderness);
 
   const handleRetirement = () => {
@@ -24,7 +26,7 @@ export function RetireButton({ isDisabled }: { isDisabled: boolean }) {
         >
           <Button
             className="invisible"
-            disabled={isWildernessValue || isDisabled}
+            disabled={isGameOverValue || isWildernessValue}
             onClick={handleRetirement}
             variant="outline-dark"
           >

@@ -44,7 +44,7 @@ export function MonsterPoisonRating() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Poison damage:</td>
 
-                    <td>{`${Math.ceil(damage * monsterDamageValue)} (${formatPercentage(
+                    <td>{`${Math.round(damage * monsterDamageValue)} (${formatPercentage(
                       damage
                     )} of damage & ${poisonPerTick} per tick)`}</td>
                   </tr>

@@ -8,15 +8,17 @@ import { LABEL_UNKNOWN } from "@neverquest/data/constants";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { ReactComponent as IconTravel } from "@neverquest/icons/travel.svg";
 import { hasBoughtFromMerchant } from "@neverquest/state/caravan";
+import { isGameOver } from "@neverquest/state/character";
 import { isLevelCompleted, isWilderness, level } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
 import { confirmControlWarnings } from "@neverquest/state/settings";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function TravelButton({ isDisabled }: { isDisabled: boolean }) {
+export function TravelButton() {
   const confirmControlWarningsValue = useRecoilValue(confirmControlWarnings);
   const hasBoughtFromMerchantValue = useRecoilValue(hasBoughtFromMerchant);
   const hasLootedValue = useRecoilValue(hasLooted);
+  const isGameOverValue = useRecoilValue(isGameOver);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const isWildernessValue = useRecoilValue(isWilderness);
   const levelValue = useRecoilValue(level);
@@ -67,7 +69,7 @@ export function TravelButton({ isDisabled }: { isDisabled: boolean }) {
             className={
               isWildernessValue ? getAnimationClass({ isInfinite: true, type: "pulse" }) : undefined
             }
-            disabled={isDisabled}
+            disabled={isGameOverValue}
             onClick={handleTravel}
             variant="outline-dark"
           >

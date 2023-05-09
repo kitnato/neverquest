@@ -3,6 +3,7 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGenerateMerchantInventory";
 import { useIncreaseLevel } from "@neverquest/hooks/actions/useIncreaseLevel";
+import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { isWilderness, level, progress, progressMaximum } from "@neverquest/state/encounter";
@@ -10,11 +11,9 @@ import { coinsLoot, essenceLoot, scrapLoot } from "@neverquest/state/resources";
 import { skills } from "@neverquest/state/skills";
 import { SkillType } from "@neverquest/types/enums";
 
-type CheatGlobal = Window & {
+declare const window: Window & {
   cheatQuest: (state: string, value?: number) => void;
 };
-
-declare const window: CheatGlobal;
 
 export function CheatQuest() {
   const isWildernessValue = useRecoilValue(isWilderness);
@@ -38,6 +37,7 @@ export function CheatQuest() {
   const increaseLevel = useIncreaseLevel();
   const toggleLocation = useToggleLocation();
   const transactResources = useTransactResources();
+  const resetWilderness = useResetWilderness();
 
   const setSkill = useMemo(
     () => [
@@ -111,8 +111,8 @@ export function CheatQuest() {
             for (let i = 0; i < difference; i++) {
               increaseLevel();
               generateMerchantInventory();
-              setProgress(-1);
             }
+            resetWilderness();
 
             if (isWildernessValue) {
               resetCoinsLoot();
@@ -137,6 +137,7 @@ export function CheatQuest() {
     resetCoinsLoot,
     resetEssenceLoot,
     resetScrapLoot,
+    resetWilderness,
     setProgress,
     setSkill,
     toggleLocation,

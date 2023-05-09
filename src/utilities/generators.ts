@@ -68,7 +68,7 @@ export function generateArmor({
 export function generateLocation({ isNSFW, level }: { isNSFW: boolean; level: number }) {
   return LOCRA.generateLocation({
     hasPrefix: Math.random() < 0.8,
-    hasSuffix: Math.random() < 0.1 * Math.ceil(level / 2),
+    hasSuffix: Math.random() < 0.1 * Math.round(level / 2),
     isNSFW,
   });
 }

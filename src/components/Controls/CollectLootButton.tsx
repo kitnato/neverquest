@@ -4,11 +4,13 @@ import { useRecoilValue } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { ReactComponent as IconLoot } from "@neverquest/icons/loot.svg";
+import { isGameOver } from "@neverquest/state/character";
 import { isLevelCompleted } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function CollectLootButton({ isDisabled }: { isDisabled: boolean }) {
+export function CollectLootButton() {
+  const isGameOverValue = useRecoilValue(isGameOver);
   const hasLootedValue = useRecoilValue(hasLooted);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
 
@@ -27,7 +29,7 @@ export function CollectLootButton({ isDisabled }: { isDisabled: boolean }) {
       >
         <Button
           className={`${getAnimationClass({ isInfinite: true, type: "pulse" })}`}
-          disabled={isDisabled}
+          disabled={isGameOverValue}
           onClick={() => transactResources({})}
           variant="outline-dark"
         >

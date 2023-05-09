@@ -23,7 +23,7 @@ export function useCreateMonster() {
           monsterName,
           LOCRA.generateCreature({
             hasPrefix: Math.random() < 0.8,
-            hasSuffix: Math.random() < 0.1 * Math.ceil(get(level) / 2),
+            hasSuffix: Math.random() < 0.1 * Math.round(get(level) / 2),
             isNSFW: get(isNSFW),
             type: "monster",
           })

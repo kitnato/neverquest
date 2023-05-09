@@ -9,19 +9,22 @@ import { ReactComponent as IconAttack } from "@neverquest/icons/attack.svg";
 import { ReactComponent as IconResting } from "@neverquest/icons/resting.svg";
 import { ReactComponent as IconRetreat } from "@neverquest/icons/retreat.svg";
 import { areAttributesIncreasable } from "@neverquest/state/attributes";
-import { isAttacking } from "@neverquest/state/character";
-import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
+import { isAttacking, isGameOver } from "@neverquest/state/character";
+import { isLevelCompleted, isLevelStarted, isWilderness } from "@neverquest/state/encounter";
 import { isHealthLow } from "@neverquest/state/reserves";
 import { confirmControlWarnings, lowHealthWarning } from "@neverquest/state/settings";
+import type { SVGIcon } from "@neverquest/types/props";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
+export function AttackButton() {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const confirmControlWarningsValue = useRecoilValue(confirmControlWarnings);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isHealthLowValue = useRecoilValue(isHealthLow);
+  const isGameOverValue = useRecoilValue(isGameOver);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const isLevelStartedValue = useRecoilValue(isLevelStarted);
+  const isWildernessValue = useRecoilValue(isWilderness);
   const showLowHealthWarningValue = useRecoilValue(lowHealthWarning);
 
   const toggleAttack = useToggleAttack();
@@ -32,28 +35,30 @@ export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
     isInfinite: true,
     type: "pulse",
   });
+  const isDisabled = isGameOverValue || isLevelCompletedValue || !isWildernessValue;
   const showWarning =
     isAttackingValue && !isDisabled && showLowHealthWarningValue && isHealthLowValue;
 
-  const { animation, Icon, tooltip } = (() => {
-    if (isLevelCompletedValue) {
-      return { animation: undefined, Icon: IconResting, tooltip: "Resting" };
-    }
+  const { animation, Icon, tooltip }: { animation?: string; Icon: SVGIcon; tooltip: string } =
+    (() => {
+      if (isDisabled) {
+        return { Icon: IconResting, tooltip: "Resting" };
+      }
 
-    if (isAttackingValue) {
+      if (isAttackingValue) {
+        return {
+          animation: showWarning ? pulseAnimation : undefined,
+          Icon: IconRetreat,
+          tooltip: "Retreat",
+        };
+      }
+
       return {
-        animation: showWarning ? pulseAnimation : undefined,
-        Icon: IconRetreat,
-        tooltip: "Retreat",
+        animation: areAttributesIncreasableValue ? undefined : pulseAnimation,
+        Icon: IconAttack,
+        tooltip: "Attack",
       };
-    }
-
-    return {
-      animation: areAttributesIncreasableValue ? undefined : pulseAnimation,
-      Icon: IconAttack,
-      tooltip: "Attack",
-    };
-  })();
+    })();
 
   const handleAttack = () => {
     if (areAttributesIncreasableValue && confirmControlWarningsValue && !isLevelStartedValue) {
@@ -89,7 +94,7 @@ export function AttackButton({ isDisabled }: { isDisabled: boolean }) {
         >
           <Button
             className={animation}
-            disabled={isDisabled || isLevelCompletedValue}
+            disabled={isDisabled}
             onClick={handleAttack}
             variant="outline-dark"
           >

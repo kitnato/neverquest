@@ -9,7 +9,7 @@ import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { ReactComponent as IconTravel } from "@neverquest/icons/travel.svg";
 import { hasBoughtFromMerchant } from "@neverquest/state/caravan";
 import { isGameOver } from "@neverquest/state/character";
-import { isLevelCompleted, isWilderness, level } from "@neverquest/state/encounter";
+import { isLevelCompleted, isWilderness, maximumLevel } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
 import { confirmControlWarnings } from "@neverquest/state/settings";
 import { getAnimationClass } from "@neverquest/utilities/getters";
@@ -21,7 +21,7 @@ export function TravelButton() {
   const isGameOverValue = useRecoilValue(isGameOver);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
   const isWildernessValue = useRecoilValue(isWilderness);
-  const levelValue = useRecoilValue(level);
+  const maximumLevelValue = useRecoilValue(maximumLevel);
 
   const toggleLocation = useToggleLocation();
 
@@ -32,7 +32,7 @@ export function TravelButton() {
       confirmControlWarningsValue &&
       !hasBoughtFromMerchantValue &&
       !isWildernessValue &&
-      levelValue <= 3
+      maximumLevelValue <= 3
     ) {
       setShowTravelConfirmation(true);
     } else {
@@ -50,7 +50,7 @@ export function TravelButton() {
         overlay={
           <Tooltip>
             {`${isWildernessValue ? "Go to" : "Return to"} ${
-              levelValue === 1 && isWildernessValue
+              maximumLevelValue === 1 && isWildernessValue
                 ? LABEL_UNKNOWN
                 : isWildernessValue
                 ? "Caravan"

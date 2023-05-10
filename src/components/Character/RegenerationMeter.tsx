@@ -45,15 +45,15 @@ export function RegenerationMeter({ type }: { type: ReserveType.Health | Reserve
       return "Recovering ...";
     }
 
-    if (regenerationDuration === 0) {
+    if (regenerationProgress === 0) {
       return `${isHealth ? "Health" : "Stamina"} regeneration (${formatMilliseconds(
         regenerationRateValue
       )})`;
     }
 
     return `Regenerating ${isHealth ? "health" : "stamina"} (${formatMilliseconds(
-      regenerationProgress
-    )}) ...`;
+      regenerationRateValue - regenerationProgress
+    )})`;
   })();
 
   return (

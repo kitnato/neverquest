@@ -1391,10 +1391,9 @@ export const AFFIXES: AffixData[] = [
   { artifact: "prefix", name: "indispensable" },
   { creature: "prefix", location: "prefix", name: "inescapable" },
   { artifact: "prefix", location: "prefix", name: "inexorable" },
-  { creature: "suffix", location: "prefix", name: "infinite" },
+  { artifact: "prefix", creature: "prefix", location: "prefix", name: "infinite" },
   {
     artifact: "suffix",
-    creature: "suffix",
     location: "suffix",
     name: "infinity",
   },

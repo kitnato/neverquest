@@ -18,7 +18,7 @@ import { ReactComponent as IconWeaponClass } from "@neverquest/icons/weapon-clas
 import { type WeaponClass, WeaponClasses } from "@neverquest/LOCRA/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { level } from "@neverquest/state/encounter";
-import { isNSFW } from "@neverquest/state/settings";
+import { allowNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
 import {
   capitalizeAll,
@@ -29,7 +29,7 @@ import { generateWeapon } from "@neverquest/utilities/generators";
 
 export function WeaponOptions() {
   const { weapon: craftedWeapon } = useRecoilValue(blacksmithInventory);
-  const isNSFWValue = useRecoilValue(isNSFW);
+  const isNSFWValue = useRecoilValue(allowNSFW);
   const levelValue = useRecoilValue(level);
 
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
@@ -40,10 +40,10 @@ export function WeaponOptions() {
   const skillValue = useRecoilValue(skills(skillType));
 
   const weapon = generateWeapon({
+    allowNSFW: isNSFWValue,
     gearClass: weaponClass,
     hasPrefix: true,
     hasSuffix: true,
-    isNSFW: isNSFWValue,
     level: weaponLevel,
     modality: "melee",
     tags:
@@ -144,7 +144,7 @@ export function WeaponOptions() {
 
       <hr />
 
-      {craftedWeapon ? <CraftedGear gear={craftedWeapon} /> : <CraftGear gear={weapon} />}
+      {craftedWeapon != null ? <CraftedGear gear={craftedWeapon} /> : <CraftGear gear={weapon} />}
     </Stack>
   );
 }

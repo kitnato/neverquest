@@ -17,7 +17,7 @@ export function isShield(gear: unknown): gear is Shield {
 }
 
 export function isTrinket(trinket: unknown): trinket is Trinket {
-  return isObject(trinket) && trinket.isPortable !== undefined;
+  return isObject(trinket) && trinket.description !== undefined;
 }
 
 export function isWeapon(gear: unknown): gear is Weapon {

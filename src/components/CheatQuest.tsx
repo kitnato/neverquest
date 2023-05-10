@@ -112,6 +112,7 @@ export function CheatQuest() {
               increaseLevel();
               generateMerchantInventory();
             }
+
             resetWilderness();
 
             if (isWildernessValue) {

@@ -22,31 +22,31 @@ export const LOCRA = {
     parameters: GeneratorParameters;
   }) => {
     const finalName = [capitalizeAll(name)];
-    const { hasPrefix, hasSuffix, isNSFW, prefixTags, suffixTags } = parameters;
+    const { allowNSFW, hasPrefix, hasSuffix, prefixTags, suffixTags } = parameters;
 
     if (hasPrefix) {
       const filteredPrefixes = AFFIXES.filter((affix) => {
+        const filterNSFW = allowNSFW ? Boolean(affix.isNSFW) || !affix.isNSFW : !affix.isNSFW;
+
         // Discard prefix if it's the same as the main name (e.g. "Fungus Fungus").
         if (affix.name === name) {
           return false;
         }
 
-        // If we want a tagged prefix, check if the current affix has all of them, otherwise discard it.
+        // If we want a tagged prefix, check if the current affix has all of them (with NSFW filter), otherwise discard it.
         if (prefixTags.length > 0) {
-          if (affix.tags) {
+          if (affix.tags != null) {
             return (
               affix[category] === "prefix" &&
               prefixTags.every((tag) => affix.tags?.includes(tag)) &&
-              (isNSFW ? !!affix.isNSFW || !affix.isNSFW : !affix.isNSFW)
+              filterNSFW
             );
           }
           return false;
         }
 
         // Otherwise, return any prefix (with NSFW filter).
-        return (
-          affix[category] === "prefix" && (isNSFW ? !!affix.isNSFW || !affix.isNSFW : !affix.isNSFW)
-        );
+        return affix[category] === "prefix" && filterNSFW;
       });
 
       const prefix = filteredPrefixes[Math.round(Math.random() * filteredPrefixes.length)];
@@ -56,21 +56,21 @@ export const LOCRA = {
 
     if (hasSuffix) {
       const filteredSuffixes = AFFIXES.filter((affix) => {
-        // If we want a tagged suffix, check if the current affix has all of them.
+        const filterNSFW = allowNSFW ? Boolean(affix.isNSFW) || !affix.isNSFW : !affix.isNSFW;
+
+        // If we want a tagged suffix, check if the current affix has all of them (with NSFW filter).
         if (suffixTags.length > 0) {
-          if (affix.tags) {
+          if (affix.tags !== undefined) {
             return (
               affix[category] === "suffix" &&
               suffixTags.every((tag) => affix.tags?.includes(tag)) &&
-              (isNSFW ? !!affix.isNSFW || !affix.isNSFW : !affix.isNSFW)
+              filterNSFW
             );
           }
         }
 
         // Otherwise, return any suffix (with NSFW filter).
-        return (
-          affix[category] === "suffix" && (isNSFW ? !!affix.isNSFW || !affix.isNSFW : !affix.isNSFW)
-        );
+        return affix[category] === "suffix" && filterNSFW;
       });
 
       const suffix = filteredSuffixes[Math.round(Math.random() * filteredSuffixes.length)];
@@ -82,20 +82,22 @@ export const LOCRA = {
   },
 
   generateArtifact: ({
+    allowNSFW = false,
     hasPrefix = false,
     hasSuffix = false,
-    isNSFW = false,
     query,
     tags = [],
   }: {
+    allowNSFW?: boolean;
     hasPrefix?: boolean;
     hasSuffix?: boolean;
-    isNSFW?: boolean;
     query: ArtifactQuery;
     tags?: AffixTag[];
   }) => {
-    const filteredArtifacts = ARTIFACTS.filter(
-      (artifact) =>
+    const filteredArtifacts = ARTIFACTS.filter((artifact) => {
+      const isNSFW = Boolean(artifact.isNSFW);
+
+      return (
         artifact.type === query.type &&
         ("subtype" in query
           ? "subtype" in artifact
@@ -107,17 +109,18 @@ export const LOCRA = {
             ? artifact.artifactClass === query.artifactClass
             : false
           : true) &&
-        (isNSFW ? !!artifact.isNSFW || !artifact.isNSFW : !artifact.isNSFW)
-    );
+        (allowNSFW ? isNSFW || !isNSFW : !isNSFW)
+      );
+    });
     const { name } = filteredArtifacts[Math.floor(Math.random() * filteredArtifacts.length)];
 
     return LOCRA.generate({
       category: "artifact",
       name,
       parameters: {
+        allowNSFW,
         hasPrefix,
         hasSuffix,
-        isNSFW,
         prefixTags: tags,
         suffixTags: tags,
       },
@@ -125,32 +128,32 @@ export const LOCRA = {
   },
 
   generateCreature: ({
+    allowNSFW = false,
     hasPrefix = false,
     hasSuffix = false,
-    isNSFW = false,
     tags = [],
     type,
   }: {
+    allowNSFW?: boolean;
     hasPrefix?: boolean;
     hasSuffix?: boolean;
-    isNSFW?: boolean;
     tags?: AffixTag[];
     type: Creature;
   }) => {
-    const filteredCreatures = CREATURES.filter(
-      (creature) =>
-        creature.type === type &&
-        (isNSFW ? !!creature.isNSFW || !creature.isNSFW : !creature.isNSFW)
-    );
+    const filteredCreatures = CREATURES.filter((creature) => {
+      const isNSFW = Boolean(creature.isNSFW);
+
+      return creature.type === type && (allowNSFW ? isNSFW || !isNSFW : !isNSFW);
+    });
     const { name } = filteredCreatures[Math.floor(Math.random() * filteredCreatures.length)];
 
     return LOCRA.generate({
       category: "creature",
       name,
       parameters: {
+        allowNSFW,
         hasPrefix,
         hasSuffix,
-        isNSFW,
         prefixTags: tags,
         suffixTags: tags,
       },
@@ -158,28 +161,30 @@ export const LOCRA = {
   },
 
   generateLocation: ({
+    allowNSFW = false,
     hasPrefix = false,
     hasSuffix = false,
-    isNSFW = false,
     tags = [],
   }: {
+    allowNSFW?: boolean;
     hasPrefix?: boolean;
     hasSuffix?: boolean;
-    isNSFW?: boolean;
     tags?: AffixTag[];
   }) => {
-    const filteredLocations = LOCATIONS.filter((location) =>
-      isNSFW ? !!location.isNSFW || !location.isNSFW : !location.isNSFW
-    );
+    const filteredLocations = LOCATIONS.filter((location) => {
+      const isNSFW = Boolean(location.isNSFW);
+
+      return allowNSFW ? isNSFW || !isNSFW : !isNSFW;
+    });
     const { name } = filteredLocations[Math.floor(Math.random() * filteredLocations.length)];
 
     return LOCRA.generate({
       category: "location",
       name,
       parameters: {
+        allowNSFW,
         hasPrefix,
         hasSuffix,
-        isNSFW,
         prefixTags: tags,
         suffixTags: tags,
       },

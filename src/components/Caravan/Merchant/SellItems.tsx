@@ -85,7 +85,7 @@ export function SellItems() {
             );
           })}
 
-          {sellConfirmation && (
+          {sellConfirmation !== null && (
             <ConfirmationDialog
               confirmationLabel="Sell"
               message={`
@@ -94,7 +94,7 @@ export function SellItems() {
               `}
               onConfirm={() => sellPossession(sellConfirmation)}
               setHide={() => setSellConfirmation(null)}
-              show={!!sellConfirmation}
+              show={Boolean(sellConfirmation)}
               title="Sell equipped item?"
             />
           )}

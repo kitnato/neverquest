@@ -17,8 +17,8 @@
     "sass": "1.62.1"
   },
   "devDependencies": {
-    "@cneuro/eslint-config-functional": "1.7.2",
-    "@types/node": "20.1.1",
+    "@cneuro/eslint-config-functional": "1.8.0",
+    "@types/node": "20.1.2",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "@vitejs/plugin-react": "4.0.0",

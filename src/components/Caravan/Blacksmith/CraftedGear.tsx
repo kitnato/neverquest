@@ -21,7 +21,7 @@ export function CraftedGear({ gear }: { gear: Gear }) {
   const handleAcquire = () => {
     const [shouldAutoEquip, id] = acquireGear({ gear });
 
-    if (id) {
+    if (id !== null) {
       if (isArmor(gear)) {
         setBlacksmithInventory((current) => ({ ...current, armor: null }));
       }

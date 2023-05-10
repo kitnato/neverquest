@@ -24,7 +24,7 @@ export function animateElement({
 
   classList.add(CLASS_ANIMATED, animationName);
 
-  if (animationSpeedClass) {
+  if (animationSpeedClass !== null) {
     classList.add(animationSpeedClass);
   }
 
@@ -34,7 +34,7 @@ export function animateElement({
       event.stopPropagation();
       classList.remove(CLASS_ANIMATED, animationName);
 
-      if (animationSpeedClass) {
+      if (animationSpeedClass !== null) {
         classList.remove(animationSpeedClass);
       }
     },

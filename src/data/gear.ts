@@ -78,7 +78,7 @@ export const SHIELD_NONE: Readonly<Shield> = {
   blockChance: 0,
   coinPrice: 0,
   level: 0,
-  name: "None",
+  name: "Unshielded",
   scrapPrice: 0,
   staggerChance: 0,
   staminaCost: 0,

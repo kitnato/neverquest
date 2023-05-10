@@ -13,15 +13,15 @@ export function IconImage({
     <Icon height={isSmall ? 12 : 36} style={{ transform: `scaleX(${isFlipped ? -1 : 1})` }} />
   );
 
-  if (tooltip) {
-    return (
-      <OverlayTrigger overlay={<Tooltip>{tooltip}</Tooltip>} placement={overlayPlacement}>
-        <span>
-          <IconStyled />
-        </span>
-      </OverlayTrigger>
-    );
+  if (tooltip === undefined) {
+    return <IconStyled />;
   }
 
-  return <IconStyled />;
+  return (
+    <OverlayTrigger overlay={<Tooltip>{tooltip}</Tooltip>} placement={overlayPlacement}>
+      <span>
+        <IconStyled />
+      </span>
+    </OverlayTrigger>
+  );
 }

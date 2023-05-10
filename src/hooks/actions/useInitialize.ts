@@ -8,7 +8,7 @@ import { useCreateMonster } from "@neverquest/hooks/actions/useCreateMonster";
 import { attributes } from "@neverquest/state/attributes";
 import { crew } from "@neverquest/state/caravan";
 import { level, wildernesses } from "@neverquest/state/encounter";
-import { isNSFW } from "@neverquest/state/settings";
+import { allowNSFW } from "@neverquest/state/settings";
 import { CrewStatus } from "@neverquest/types/enums";
 import { generateLocation } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -36,7 +36,7 @@ export function useInitialize() {
           }))
         );
 
-        set(wildernesses, [generateLocation({ isNSFW: get(isNSFW), level: get(level) })]);
+        set(wildernesses, [generateLocation({ allowNSFW: get(allowNSFW), level: get(level) })]);
 
         createMonster();
       },

@@ -16,18 +16,18 @@ import { WeaponGrip } from "@neverquest/types/enums";
 import { getFromRange, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function generateArmor({
+  allowNSFW,
   gearClass,
   hasPrefix,
   hasSuffix,
-  isNSFW,
   level,
   name,
   tags,
 }: {
+  allowNSFW: boolean;
   gearClass: ArmorClass;
   hasPrefix?: boolean;
   hasSuffix?: boolean;
-  isNSFW: boolean;
   level: number;
   name?: string;
   tags?: AffixTag[];
@@ -50,9 +50,9 @@ export function generateArmor({
     name:
       name ??
       LOCRA.generateArtifact({
+        allowNSFW,
         hasPrefix,
         hasSuffix,
-        isNSFW,
         query: {
           type: "armor",
         },
@@ -65,26 +65,26 @@ export function generateArmor({
   };
 }
 
-export function generateLocation({ isNSFW, level }: { isNSFW: boolean; level: number }) {
+export function generateLocation({ allowNSFW, level }: { allowNSFW: boolean; level: number }) {
   return LOCRA.generateLocation({
+    allowNSFW,
     hasPrefix: Math.random() < 0.8,
     hasSuffix: Math.random() < 0.1 * Math.round(level / 2),
-    isNSFW,
   });
 }
 
 export function generateShield({
+  allowNSFW,
   hasPrefix,
   hasSuffix,
-  isNSFW,
   level,
   name,
   size,
   tags,
 }: {
+  allowNSFW: boolean;
   hasPrefix?: boolean;
   hasSuffix?: boolean;
-  isNSFW: boolean;
   level: number;
   name?: string;
   size: ShieldSize;
@@ -101,9 +101,9 @@ export function generateShield({
     name:
       name ??
       LOCRA.generateArtifact({
+        allowNSFW,
         hasPrefix,
         hasSuffix,
-        isNSFW,
         query: {
           subtype: size,
           type: "shield",
@@ -119,18 +119,18 @@ export function generateShield({
 }
 
 export function generateWeapon({
+  allowNSFW,
   gearClass,
   hasPrefix,
   hasSuffix,
-  isNSFW,
   level,
   modality,
   tags,
 }: {
+  allowNSFW: boolean;
   gearClass: WeaponClass;
   hasPrefix?: boolean;
   hasSuffix?: boolean;
-  isNSFW: boolean;
   level: number;
   modality: WeaponModality;
   tags?: AffixTag[];
@@ -159,9 +159,9 @@ export function generateWeapon({
     level,
     modality,
     name: LOCRA.generateArtifact({
+      allowNSFW,
       hasPrefix,
       hasSuffix,
-      isNSFW,
       query: {
         artifactClass: gearClass,
         subtype: modality,

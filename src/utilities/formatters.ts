@@ -1,23 +1,14 @@
-export function capitalizeAll(string: null | string | undefined) {
-  if (!string) {
-    return "";
-  }
-
-  // ^ matches the beginning of the string.
-  // \w matches any word character.
-  // {1} takes only the first character.
-  // Thus, ^\w{1} matches the first letter of the word.
-  // | works like the boolean OR. It matches the expression after and before the |.
-  // \s+ matches any amount of whitespace between the words (for example spaces, tabs, or line breaks)
+export function capitalizeAll(string: string) {
+  // ^\w{1} matches the first letter of the word, or (|) \s+ matches any amount of whitespace between the words.
   return string.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
 }
 
-export function formatMilliseconds(ms: number) {
-  if (ms <= 0 || Number.isNaN(ms)) {
+export function formatMilliseconds(milliseconds: number) {
+  if (milliseconds <= 0 || Number.isNaN(milliseconds)) {
     return "--";
   }
 
-  let seconds = ms / 1000;
+  let seconds = milliseconds / 1000;
   let minutes = Math.floor(seconds / 60);
   let hours = 0;
   let hoursDisplay = "";
@@ -43,7 +34,7 @@ export function formatMilliseconds(ms: number) {
     return `${secondsDisplay}s`;
   }
 
-  return `${formatToFixed(ms / 1000)}s`;
+  return `${formatToFixed(milliseconds / 1000)}s`;
 }
 
 export function formatPercentage(number: number) {

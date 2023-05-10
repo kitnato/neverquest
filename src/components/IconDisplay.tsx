@@ -38,7 +38,7 @@ export function IconDisplay({
         tooltip={tooltip}
       />
 
-      {description ? (
+      {description !== undefined ? (
         <Stack>
           <span>{contents}</span>
 

@@ -57,9 +57,9 @@ export type CreatureData = BaseData & {
 };
 
 export type GeneratorParameters = {
+  allowNSFW: boolean;
   hasPrefix: boolean;
   hasSuffix: boolean;
-  isNSFW: boolean;
   prefixTags: AffixTag[];
   suffixTags: AffixTag[];
 };

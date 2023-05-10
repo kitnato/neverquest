@@ -27,7 +27,7 @@ export function Monster() {
   }, [element, setMonsterElement]);
 
   useEffect(() => {
-    if (isMonsterNewValue && monsterElementValue) {
+    if (isMonsterNewValue && monsterElementValue !== null) {
       animateElement({
         element: monsterElementValue,
         speed: "faster",

@@ -5,7 +5,7 @@ import { MERCHANT_OFFERS } from "@neverquest/data/merchant";
 import type { AffixTag } from "@neverquest/LOCRA/types";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { level, maximumLevel } from "@neverquest/state/encounter";
-import { isNSFW } from "@neverquest/state/settings";
+import { allowNSFW } from "@neverquest/state/settings";
 import type { InventoryMerchant } from "@neverquest/types";
 import { isTrinket } from "@neverquest/types/type-guards";
 import { generateArmor, generateShield, generateWeapon } from "@neverquest/utilities/generators";
@@ -22,19 +22,22 @@ export function useGenerateMerchantInventory() {
           Object.entries({ ...get(merchantInventory) }).filter(([, { isReturned }]) => !isReturned)
         );
         const levelValue = get(level);
-        const isNSFWValue = get(isNSFW);
+        const isNSFWValue = get(allowNSFW);
 
         const merchantOffersIndex = levelValue - 1;
 
-        if (levelValue === get(maximumLevel) && MERCHANT_OFFERS[merchantOffersIndex]) {
+        if (
+          levelValue === get(maximumLevel) &&
+          Array.isArray(MERCHANT_OFFERS[merchantOffersIndex])
+        ) {
           const SETTINGS_GEAR: {
+            allowNSFW: boolean;
             hasPrefix: boolean;
-            isNSFW: boolean;
             level: number;
             tags: AffixTag[];
           } = {
+            allowNSFW: isNSFWValue,
             hasPrefix: true,
-            isNSFW: isNSFWValue,
             level: levelValue,
             tags: ["lowQuality"],
           };

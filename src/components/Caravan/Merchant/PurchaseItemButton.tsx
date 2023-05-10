@@ -27,14 +27,14 @@ export function PurchaseItemButton({ id }: { id: string }) {
   const isPurchasable = isAffordable && canFitValue;
 
   const handlePurchase = () => {
-    let acquiredID = null;
+    let acquiredID: string | null = null;
 
     if (isTrinket(item)) {
       acquiredID = acquireTrinket({ trinket: item });
     } else {
       const [shouldAutoEquip, id] = acquireGear({ gear: item });
 
-      if (id) {
+      if (id !== null) {
         acquiredID = id;
 
         if (shouldAutoEquip) {
@@ -43,7 +43,7 @@ export function PurchaseItemButton({ id }: { id: string }) {
       }
     }
 
-    if (acquiredID) {
+    if (acquiredID !== null) {
       transactResources({ coinsDifference: -coinPrice });
       setMerchantInventory((current) => {
         const newMerchantInventory = { ...current };

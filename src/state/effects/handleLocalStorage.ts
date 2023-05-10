@@ -18,7 +18,7 @@ export function handleLocalStorage<ValueType>({
 
     const storeKey = isSetting ? KEY_SETTINGS : KEY_SESSION;
     const store = ls.get<Store>(storeKey);
-    const valueKey = `${key}${parameter ? `-${parameter}` : ""}`;
+    const valueKey = `${key}${parameter === undefined ? "" : `-${parameter}`}`;
 
     if (store !== null) {
       const storedValue = store[valueKey];

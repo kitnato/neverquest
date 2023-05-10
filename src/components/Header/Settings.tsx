@@ -6,9 +6,9 @@ import { useRecoilValue } from "recoil";
 import { SettingsSwitch } from "@neverquest/components/Header/SettingsSwitch";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import {
+  allowNSFW,
   autoEquip,
   confirmControlWarnings,
-  isNSFW,
   isShowingDamagePerSecond,
   isShowingGearLevel,
   lowHealthWarning,
@@ -35,7 +35,7 @@ export function Settings() {
         <Modal.Body>
           <Form>
             <Stack gap={3}>
-              <SettingsSwitch atom={isNSFW} label="NSFW mode (profanity)" />
+              <SettingsSwitch atom={allowNSFW} label="NSFW mode (profanity)" />
 
               <SettingsSwitch
                 atom={isShowingDamagePerSecond}

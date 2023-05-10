@@ -20,8 +20,8 @@ export function WeaponEquipped() {
   return (
     <IconDisplay
       contents={<WeaponName weapon={weaponValue} />}
-      Icon={equippedWeaponValue ? WEAPON_ICON : IconUnequipped}
-      iconProps={{ isFlipped: !equippedWeaponValue }}
+      Icon={equippedWeaponValue === null ? IconUnequipped : WEAPON_ICON}
+      iconProps={{ isFlipped: equippedWeaponValue === null }}
       isAnimated
       tooltip="Equipped weapon"
     />

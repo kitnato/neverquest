@@ -5,8 +5,7 @@ import { ShieldName } from "@neverquest/components/Inventory/Shield/ShieldName";
 import { TrinketName } from "@neverquest/components/Inventory/Trinket/TrinketName";
 import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
 import { ARMOR_ICON, SHIELD_ICON, WEAPON_ICON } from "@neverquest/data/gear";
-import * as Trinkets from "@neverquest/data/trinkets";
-import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
+import { TRINKET_ICONS } from "@neverquest/data/trinkets";
 import type { Item } from "@neverquest/types";
 import type { IconImageDOMProps } from "@neverquest/types/props";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
@@ -53,21 +52,10 @@ export function ItemDisplay({
     );
   }
 
-  // TODO - If part of an inventory, the Icon FC does not get stored, so it needs to be looked up.
-  const { name } = item;
-  let { Icon } = item;
-
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  if (!Icon) {
-    Icon =
-      Object.values(Trinkets).find(({ name: trinketName }) => trinketName === name)?.Icon ??
-      IconUnknown;
-  }
-
   return (
     <IconDisplay
       contents={<TrinketName placement={overlayPlacement} trinket={item} />}
-      Icon={Icon}
+      Icon={TRINKET_ICONS[item.name]}
       iconProps={iconProps}
       tooltip="Trinket"
     />

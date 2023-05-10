@@ -10,7 +10,7 @@ import {
   monsterCurrentHealth,
   monsterName,
 } from "@neverquest/state/monster";
-import { isNSFW } from "@neverquest/state/settings";
+import { allowNSFW } from "@neverquest/state/settings";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useCreateMonster() {
@@ -22,9 +22,9 @@ export function useCreateMonster() {
         set(
           monsterName,
           LOCRA.generateCreature({
+            allowNSFW: get(allowNSFW),
             hasPrefix: Math.random() < 0.8,
             hasSuffix: Math.random() < 0.1 * Math.round(get(level) / 2),
-            isNSFW: get(isNSFW),
             type: "monster",
           })
         );

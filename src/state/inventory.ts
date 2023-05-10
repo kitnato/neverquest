@@ -11,11 +11,11 @@ export const armor = selector({
   get: ({ get }) => {
     const equippedArmorValue = get(equippedArmor);
 
-    if (equippedArmorValue) {
-      return get(inventory)[equippedArmorValue] as Armor;
+    if (equippedArmorValue === null) {
+      return ARMOR_NONE;
     }
 
-    return ARMOR_NONE;
+    return get(inventory)[equippedArmorValue] as Armor;
   },
   key: "armor",
 });
@@ -55,11 +55,11 @@ export const shield = selector({
   get: ({ get }) => {
     const equippedShieldValue = get(equippedShield);
 
-    if (equippedShieldValue) {
-      return get(inventory)[equippedShieldValue] as Shield;
+    if (equippedShieldValue === null) {
+      return SHIELD_NONE;
     }
 
-    return SHIELD_NONE;
+    return get(inventory)[equippedShieldValue] as Shield;
   },
   key: "shield",
 });
@@ -68,11 +68,11 @@ export const weapon = selector({
   get: ({ get }) => {
     const equippedWeaponValue = get(equippedWeapon);
 
-    if (equippedWeaponValue) {
-      return get(inventory)[equippedWeaponValue] as Weapon;
+    if (equippedWeaponValue === null) {
+      return WEAPON_NONE;
     }
 
-    return WEAPON_NONE;
+    return get(inventory)[equippedWeaponValue] as Weapon;
   },
   key: "weapon",
 });

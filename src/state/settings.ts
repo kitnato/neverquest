@@ -16,10 +16,10 @@ export const confirmControlWarnings = atom({
   key: "confirmControlWarnings",
 });
 
-export const isNSFW = atom({
+export const allowNSFW = atom({
   default: true,
-  effects: [handleLocalStorage<boolean>({ isSetting: true, key: "isNSFW" })],
-  key: "isNSFW",
+  effects: [handleLocalStorage<boolean>({ isSetting: true, key: "allowNSFW" })],
+  key: "allowNSFW",
 });
 
 export const isShowingDamagePerSecond = atom({

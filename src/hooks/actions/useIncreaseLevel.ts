@@ -5,7 +5,7 @@ import { useCreateMonster } from "@neverquest/hooks/actions/useCreateMonster";
 import { crew } from "@neverquest/state/caravan";
 import { level, wildernesses } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
-import { isNSFW } from "@neverquest/state/settings";
+import { allowNSFW } from "@neverquest/state/settings";
 import { CrewStatus, ShowingType } from "@neverquest/types/enums";
 import { generateLocation } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -51,7 +51,7 @@ export function useIncreaseLevel() {
         if (!get(wildernesses)[nextLevel - 1]) {
           set(wildernesses, (current) => [
             ...current,
-            generateLocation({ isNSFW: get(isNSFW), level: nextLevel }),
+            generateLocation({ allowNSFW: get(allowNSFW), level: nextLevel }),
           ]);
         }
 

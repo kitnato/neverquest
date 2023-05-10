@@ -98,7 +98,7 @@ export type StorageKey =
   | "isInventoryOpen"
   | "isLevelStarted"
   | "isMonsterNew"
-  | "isNSFW"
+  | "allowNSFW"
   | "isShowing"
   | "isShowingDamagePerSecond"
   | "isShowingGearLevel"
@@ -132,9 +132,10 @@ export type StorageKey =
 
 export type Trinket = ItemBase & {
   description: string;
-  Icon: SVGIcon;
-  isPortable: boolean;
+  name: TrinketName;
 };
+
+export type TrinketName = "Compass" | "Hearthstone" | "Knapsack";
 
 export type Weapon = GearBase & {
   abilityChance: number;

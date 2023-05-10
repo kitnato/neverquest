@@ -33,7 +33,7 @@ export function CompassUseButton() {
 
   const handleNavigate = ({ target: { value } }: ChangeEvent<HTMLSelectElement>) => {
     setIsShowing(false);
-    setLevel(+value);
+    setLevel(Number(value));
     resetIsInventoryOpen();
 
     resetWilderness();

@@ -20,7 +20,7 @@ export function ShieldEquipped() {
   return (
     <IconDisplay
       contents={<ShieldName shield={shieldValue} />}
-      Icon={equippedShieldValue ? IconShield : IconFist}
+      Icon={equippedShieldValue === null ? IconFist : IconShield}
       isAnimated
       tooltip="Equipped shield"
     />

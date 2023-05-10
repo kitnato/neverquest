@@ -23,7 +23,7 @@ export function useChangeHealth() {
 
         set(
           deltas(DeltaType.Health),
-          delta && Array.isArray(delta) && delta.length
+          delta !== undefined && Array.isArray(delta) && delta.length
             ? delta
             : {
                 color: isPositive ? "text-success" : "text-danger",

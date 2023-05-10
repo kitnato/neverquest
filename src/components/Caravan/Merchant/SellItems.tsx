@@ -7,10 +7,10 @@ import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { Coins } from "@neverquest/components/Resources/Coins";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/constants";
+import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { equippedItemIDs, inventory } from "@neverquest/state/inventory";
-
 import { getSellPrice } from "@neverquest/utilities/getters";
 
 export function SellItems() {
@@ -20,12 +20,18 @@ export function SellItems() {
 
   const [sellConfirmation, setSellConfirmation] = useState<string | null>(null);
 
+  const toggleEquipGear = useToggleEquipGear();
   const transactResources = useTransactResources();
 
   const inventoryIDs = Object.getOwnPropertyNames(inventoryValue);
 
   const sellPossession = (id: string) => {
+    const isEquipped = equippedItemIDValues.includes(id);
     const item = inventoryValue[id];
+
+    if (isEquipped) {
+      toggleEquipGear(id);
+    }
 
     setInventory((current) => {
       const newInventoryContents = { ...current };
@@ -34,6 +40,7 @@ export function SellItems() {
 
       return newInventoryContents;
     });
+
     setMerchantInventory((current) => ({
       ...current,
       [nanoid()]: { isReturned: true, item },

@@ -42,7 +42,9 @@ export const encumbrance = selector({
 
 export const equippedItemIDs = selector({
   get: ({ get }) =>
-    [get(equippedWeapon), get(equippedArmor), get(equippedShield)].filter((id) => id) as string[],
+    [get(equippedWeapon), get(equippedArmor), get(equippedShield)].filter((id) =>
+      Boolean(id)
+    ) as string[],
   key: "equippedItemIDs",
 });
 

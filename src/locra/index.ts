@@ -35,14 +35,15 @@ export const LOCRA = {
 
         // If we want a tagged prefix, check if the current affix has all of them (with NSFW filter), otherwise discard it.
         if (prefixTags.length > 0) {
-          if (affix.tags != null) {
-            return (
-              affix[category] === "prefix" &&
-              prefixTags.every((tag) => affix.tags?.includes(tag)) &&
-              filterNSFW
-            );
+          if (affix.tags === undefined) {
+            return false;
           }
-          return false;
+
+          return (
+            affix[category] === "prefix" &&
+            prefixTags.every((tag) => affix.tags?.includes(tag)) &&
+            filterNSFW
+          );
         }
 
         // Otherwise, return any prefix (with NSFW filter).

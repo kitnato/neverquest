@@ -22,7 +22,7 @@ export function useGenerateMerchantInventory() {
           Object.entries({ ...get(merchantInventory) }).filter(([, { isReturned }]) => !isReturned)
         );
         const levelValue = get(level);
-        const isNSFWValue = get(allowNSFW);
+        const allowNSFWValue = get(allowNSFW);
 
         const merchantOffersIndex = levelValue - 1;
 
@@ -36,7 +36,7 @@ export function useGenerateMerchantInventory() {
             level: number;
             tags: AffixTag[];
           } = {
-            allowNSFW: isNSFWValue,
+            allowNSFW: allowNSFWValue,
             hasPrefix: true,
             level: levelValue,
             tags: ["lowQuality"],

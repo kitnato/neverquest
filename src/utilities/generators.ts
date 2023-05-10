@@ -33,18 +33,25 @@ export function generateArmor({
   tags?: AffixTag[];
 }): Armor {
   const {
-    deflectionChanceModifier,
-    dodgeChanceModifier,
+    deflectionChanceRange,
     dodgeCostModifier,
+    priceModifier,
     protectionModifier,
     weightModifier,
   } = ARMOR_SPECIFICATIONS[gearClass];
   const growthFactor = getGrowthSigmoid(level);
+  const ranges = {
+    deflectionChance: {
+      maximum:
+        deflectionChanceRange.maximum - (deflectionChanceRange.maximum / 2) * (1 - growthFactor),
+      minimum:
+        deflectionChanceRange.minimum - (deflectionChanceRange.minimum / 2) * (1 - growthFactor),
+    },
+  };
 
   return {
-    coinPrice: Math.round(600 * growthFactor),
-    deflectionChance: (0.05 + 0.6 * growthFactor) * deflectionChanceModifier,
-    dodgeChanceModifier,
+    coinPrice: Math.round(600 * growthFactor * priceModifier),
+    deflectionChance: getFromRange(ranges.deflectionChance),
     gearClass,
     level,
     name:
@@ -59,7 +66,8 @@ export function generateArmor({
         tags,
       }),
     protection: Math.round(300 * growthFactor * protectionModifier),
-    scrapPrice: Math.round(3500 * growthFactor),
+    ranges,
+    scrapPrice: Math.round(3500 * growthFactor * priceModifier),
     staminaCost: Math.ceil(30 * growthFactor * dodgeCostModifier),
     weight: Math.ceil(50 * growthFactor * weightModifier),
   };
@@ -139,12 +147,12 @@ export function generateWeapon({
   const growthFactor = getGrowthSigmoid(level);
   const ranges = {
     damage: {
-      maximum: Math.round(1300 * growthFactor),
+      maximum: Math.round(1200 * growthFactor),
       minimum: Math.round(1000 * growthFactor),
     },
     rate: {
-      maximum: 3500 - Math.round(3000 * growthFactor),
-      minimum: 3300 - Math.round(3000 * growthFactor),
+      maximum: 3500 - Math.round(2500 * growthFactor),
+      minimum: 3300 - Math.round(2500 * growthFactor),
     },
   };
 

@@ -11,7 +11,7 @@ import { ReactComponent as IconPiercing } from "@neverquest/icons/weapon-piercin
 import { ReactComponent as IconSlashing } from "@neverquest/icons/weapon-slashing.svg";
 import { ReactComponent as IconWeapon } from "@neverquest/icons/weapon.svg";
 import type { ArmorClass, ShieldSize, WeaponClass } from "@neverquest/LOCRA/types";
-import type { Armor, Range, Shield, Weapon } from "@neverquest/types";
+import type { Range } from "@neverquest/types";
 import { SkillType, WeaponGrip } from "@neverquest/types/enums";
 import type { SVGIcon } from "@neverquest/types/props";
 
@@ -19,14 +19,11 @@ import type { SVGIcon } from "@neverquest/types/props";
 
 export const ARMOR_ICON = IconArmor;
 
-export const ARMOR_NONE: Readonly<Armor> = {
-  coinPrice: 0,
+export const ARMOR_NONE = {
   deflectionChance: 0,
-  dodgeChanceModifier: 0,
   level: 0,
   name: "Unarmored",
   protection: 0,
-  scrapPrice: 0,
   staminaCost: 0,
   weight: 0,
 } as const;
@@ -35,38 +32,38 @@ export const ARMOR_SPECIFICATIONS: Readonly<
   Record<
     ArmorClass,
     {
-      deflectionChanceModifier: number;
-      dodgeChanceModifier: number;
+      deflectionChanceRange: Range;
       dodgeCostModifier: number;
       Icon: SVGIcon;
+      priceModifier: number;
       protectionModifier: number;
       weightModifier: number;
     }
   >
 > = {
   hide: {
-    deflectionChanceModifier: 0,
-    dodgeChanceModifier: 0,
+    deflectionChanceRange: { maximum: 0, minimum: 0 },
     dodgeCostModifier: 0,
     Icon: IconHide,
-    protectionModifier: 0.5,
-    weightModifier: 0.5,
+    priceModifier: 1,
+    protectionModifier: 1,
+    weightModifier: 1,
   },
   plate: {
-    deflectionChanceModifier: 1,
-    dodgeChanceModifier: -1,
-    dodgeCostModifier: 0,
+    deflectionChanceRange: { maximum: 0.6, minimum: 0.3 },
+    dodgeCostModifier: Infinity,
     Icon: IconPlate,
-    protectionModifier: 1,
-    weightModifier: 2,
+    priceModifier: 2,
+    protectionModifier: 2.5,
+    weightModifier: 3,
   },
   reinforced: {
-    deflectionChanceModifier: 0.5,
-    dodgeChanceModifier: 0,
+    deflectionChanceRange: { maximum: 0.29, minimum: 0.1 },
     dodgeCostModifier: 1,
     Icon: IconReinforced,
-    protectionModifier: 0.75,
-    weightModifier: 1,
+    priceModifier: 1.5,
+    protectionModifier: 1.5,
+    weightModifier: 2,
   },
 } as const;
 
@@ -74,12 +71,10 @@ export const ARMOR_SPECIFICATIONS: Readonly<
 
 export const SHIELD_ICON = IconShield;
 
-export const SHIELD_NONE: Readonly<Shield> = {
+export const SHIELD_NONE = {
   blockChance: 0,
-  coinPrice: 0,
   level: 0,
   name: "Unshielded",
-  scrapPrice: 0,
   staggerChance: 0,
   staminaCost: 0,
   weight: 0,
@@ -100,22 +95,22 @@ export const SHIELD_SPECIFICATIONS: Readonly<
   medium: {
     blockRange: { maximum: 0.49, minimum: 0.25 },
     Icon: IconShieldMedium,
-    staggerModifier: 1,
-    staminaCostModifier: 1.5,
-    weightModifier: 1,
+    staggerModifier: 1.5,
+    staminaCostModifier: 2,
+    weightModifier: 1.5,
   },
   small: {
     blockRange: { maximum: 0.24, minimum: 0.1 },
     Icon: IconShieldSmall,
-    staggerModifier: 0.5,
-    staminaCostModifier: 0.5,
-    weightModifier: 0.5,
+    staggerModifier: 1,
+    staminaCostModifier: 1,
+    weightModifier: 1,
   },
   tower: {
     blockRange: { maximum: 0.75, minimum: 0.5 },
     Icon: IconShieldTower,
-    staggerModifier: 1.5,
-    staminaCostModifier: 2,
+    staggerModifier: 2.5,
+    staminaCostModifier: 3,
     weightModifier: 2,
   },
 } as const;
@@ -124,27 +119,15 @@ export const SHIELD_SPECIFICATIONS: Readonly<
 
 export const WEAPON_ICON = IconWeapon;
 
-export const WEAPON_NONE: Readonly<Weapon> = {
+export const WEAPON_NONE = {
   abilityChance: 0,
-  coinPrice: 0,
   damage: 10,
   gearClass: "blunt",
   grip: WeaponGrip.OneHanded,
   level: 0,
   modality: "melee",
   name: "Unarmed",
-  ranges: {
-    damage: {
-      maximum: 10,
-      minimum: 10,
-    },
-    rate: {
-      maximum: 2500,
-      minimum: 2500,
-    },
-  },
   rate: 2500,
-  scrapPrice: 0,
   staminaCost: 0,
   weight: 0,
 } as const;

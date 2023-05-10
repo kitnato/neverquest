@@ -256,7 +256,7 @@ The chance for the character to completely ignore all effects of an incoming mon
 
 #### Dodge
 
-Dodging an incoming attack negates all damage, but doesn't cost any stamina the way [blocking](#block) does, but only if no [armor](#armor) or [hide](#hide-armor) armor is worn. Heavier armor will incur a stamina cost for dodging, or might remove the ability to dodge altogether.
+Dodging an incoming attack negates all damage, but doesn't cost any stamina the way [blocking](#block) does, but only if no [armor](#armor) or [hide](#hide-armor) armor is worn. [Reinforced](#reinforced-armor) armor incurs a stamina cost for dodging, and [plate](#plate-armor) removes the ability to dodge altogether.
 
 The overall chance to dodge an attack is determined by the [dodge chance](#dodge-chance) statistic.
 
@@ -631,7 +631,7 @@ Unlocks [bleed](#bleed) when using [piercing](#piercing-weapon) weapons. Also un
 
 ##### Armorcraft
 
-Allows the use and knowledge of [reinforced](#reinforced-armor) and [plate](#plate-armor) armor. Also unlocks the [Tenacity](#tenacity) mastery.
+Allows the use and knowledge of [plate](#plate-armor) armor. Also unlocks the [Tenacity](#tenacity) mastery.
 
 ##### Assassination
 

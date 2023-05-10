@@ -1,5 +1,6 @@
 import { Nav, Stack, Tab } from "react-bootstrap";
 
+import { ArmorOptions } from "@neverquest/components/Caravan/Blacksmith/ArmorOptions";
 import { WeaponOptions } from "@neverquest/components/Caravan/Blacksmith/WeaponOptions";
 import { IconImage } from "@neverquest/components/IconImage";
 import { ARMOR_ICON, SHIELD_ICON, WEAPON_ICON } from "@neverquest/data/gear";
@@ -18,8 +19,7 @@ const DATA_TABS = [
     label: "Weapon",
   },
   {
-    // TODO
-    Component: () => null,
+    Component: ArmorOptions,
     Icon: ARMOR_ICON,
     key: TabKey.Armor,
     label: "Armor",
@@ -53,7 +53,9 @@ export function Blacksmith() {
               <Stack gap={3}>
                 <hr />
 
-                <Component />
+                <Stack className="mx-auto w-50" gap={3}>
+                  <Component />
+                </Stack>
               </Stack>
             </Tab.Pane>
           ))}

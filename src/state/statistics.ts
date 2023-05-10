@@ -135,7 +135,7 @@ export const damagePerSecond = selector({
 });
 
 export const deflectionChance = selector({
-  get: ({ get }) => get(armor).deflectionChance || 0,
+  get: ({ get }) => get(armor).deflectionChance,
   key: "deflectionChance",
 });
 
@@ -151,10 +151,13 @@ export const dodgeChance = selector({
 
 export const dodgeChanceTotal = selector({
   get: ({ get }) => {
-    const { dodgeChanceModifier } = get(armor);
-    const total = get(dodgeChance);
+    const { staminaCost } = get(armor);
 
-    return total + total * dodgeChanceModifier;
+    if (staminaCost === Infinity) {
+      return 0;
+    }
+
+    return get(dodgeChance);
   },
   key: "dodgeChanceTotal",
 });

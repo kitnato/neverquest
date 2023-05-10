@@ -23,7 +23,7 @@ export function useToggleEquipGear() {
         let equippedGear = equippedArmor;
 
         if (isArmor(item)) {
-          const { deflectionChance, dodgeChanceModifier, staminaCost } = item;
+          const { deflectionChance, staminaCost } = item;
 
           if (!get(isShowing(ShowingType.Armor))) {
             set(isShowing(ShowingType.Armor), true);
@@ -37,10 +37,7 @@ export function useToggleEquipGear() {
             set(isShowing(ShowingType.Deflection), true);
           }
 
-          if (
-            !get(isShowing(ShowingType.DodgeChanceDetails)) &&
-            (dodgeChanceModifier || staminaCost)
-          ) {
+          if (!get(isShowing(ShowingType.DodgeChanceDetails)) && staminaCost) {
             set(isShowing(ShowingType.DodgeChanceDetails), true);
           }
         }
@@ -58,7 +55,7 @@ export function useToggleEquipGear() {
         }
 
         if (isWeapon(item)) {
-          if (!get(isShowing(ShowingType.Stamina)) && item.staminaCost > 0) {
+          if (!get(isShowing(ShowingType.Stamina)) && item.staminaCost) {
             set(isShowing(ShowingType.Stamina), true);
 
             if (!get(attributes(AttributeType.Stamina)).isUnlocked) {

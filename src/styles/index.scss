@@ -14,6 +14,10 @@ body {
   user-select: none;
 }
 
+h6 {
+  font-variant: all-petite-caps;
+}
+
 input {
   &.form-control-plaintext {
     cursor: pointer;
@@ -27,10 +31,11 @@ input {
   }
 }
 
-h6 {
-  font-variant: all-petite-caps;
-}
-
 small {
   letter-spacing: 1px;
+}
+
+svg.inlay {
+  vertical-align: text-bottom;
+  width: 16px;
 }

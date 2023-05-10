@@ -1,6 +1,7 @@
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DodgePenalty } from "../Inventory/Armor/DodgePenalty";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
@@ -17,7 +18,7 @@ import { AttributeType, DeltaType, ShowingType, SkillType } from "@neverquest/ty
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function DodgeChance() {
-  const { dodgeChanceModifier, staminaCost } = useRecoilValue(armor);
+  const { staminaCost } = useRecoilValue(armor);
   const dodgeChanceValue = useRecoilValue(dodgeChance);
   const dodgeChanceTotalValue = useRecoilValue(dodgeChanceTotal);
   const isShowingDodgeChanceDetails = useRecoilValue(isShowing(ShowingType.DodgeChanceDetails));
@@ -53,20 +54,10 @@ export function DodgeChance() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Penalties from armor:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Penalty from armor:</td>
 
                       <td>
-                        {(() => {
-                          if (staminaCost) {
-                            return `${staminaCost} stamina cost\n`;
-                          }
-
-                          if (dodgeChanceModifier) {
-                            return `${formatPercentage(dodgeChanceModifier)} dodge chance\n`;
-                          }
-
-                          return "None";
-                        })()}
+                        <DodgePenalty staminaCost={staminaCost} />
                       </td>
                     </tr>
                   </DetailsTable>

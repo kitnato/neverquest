@@ -7,14 +7,14 @@ import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LABEL_UNKNOWN } from "@neverquest/data/constants";
 import { WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
-import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
+import { ReactComponent as IconClass } from "@neverquest/icons/gear-class.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { ReactComponent as IconStaminaCost } from "@neverquest/icons/stamina-cost.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { ReactComponent as IconWeaponAbility } from "@neverquest/icons/weapon-ability.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
-import { ReactComponent as IconWeaponClass } from "@neverquest/icons/weapon-class.svg";
+import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
 import { type WeaponClass, WeaponClasses } from "@neverquest/LOCRA/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { level } from "@neverquest/state/encounter";
@@ -29,7 +29,7 @@ import { generateWeapon } from "@neverquest/utilities/generators";
 
 export function WeaponOptions() {
   const { weapon: craftedWeapon } = useRecoilValue(blacksmithInventory);
-  const isNSFWValue = useRecoilValue(allowNSFW);
+  const allowNSFWValue = useRecoilValue(allowNSFW);
   const levelValue = useRecoilValue(level);
 
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
@@ -40,7 +40,7 @@ export function WeaponOptions() {
   const skillValue = useRecoilValue(skills(skillType));
 
   const weapon = generateWeapon({
-    allowNSFW: isNSFWValue,
+    allowNSFW: allowNSFWValue,
     gearClass: weaponClass,
     hasPrefix: true,
     hasSuffix: true,
@@ -57,8 +57,8 @@ export function WeaponOptions() {
   const maximumWeaponLevel = levelValue + 3;
 
   return (
-    <Stack className="mx-auto w-50" gap={3}>
-      <Stack className="mx-auto w-50" gap={3}>
+    <>
+      <Stack className="mx-auto" gap={3}>
         <IconDisplay
           contents={
             <FormControl
@@ -99,14 +99,14 @@ export function WeaponOptions() {
               ))}
             </FormSelect>
           }
-          Icon={IconWeaponClass}
+          Icon={IconClass}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Class"
         />
 
         <IconDisplay
           contents={`${ranges.damage.minimum}-${ranges.damage.maximum}`}
-          Icon={IconDamage}
+          Icon={IconWeaponDamage}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Damage"
         />
@@ -144,7 +144,7 @@ export function WeaponOptions() {
 
       <hr />
 
-      {craftedWeapon != null ? <CraftedGear gear={craftedWeapon} /> : <CraftGear gear={weapon} />}
-    </Stack>
+      {craftedWeapon === null ? <CraftGear gear={weapon} /> : <CraftedGear gear={craftedWeapon} />}
+    </>
   );
 }

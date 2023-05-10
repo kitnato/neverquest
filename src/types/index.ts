@@ -4,9 +4,11 @@ import type { SVGIcon } from "@neverquest/types/props";
 
 export type Armor = GearBase & {
   deflectionChance: number;
-  dodgeChanceModifier: number;
   gearClass?: ArmorClass;
   protection: number;
+  ranges: {
+    deflectionChance: Range;
+  };
   staminaCost: number;
 };
 

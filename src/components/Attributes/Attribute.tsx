@@ -6,7 +6,6 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
-  ICON_SIZE_INLAY,
   LABEL_AT_MAXIMUM,
   LABEL_UNKNOWN,
 } from "@neverquest/data/constants";
@@ -55,7 +54,7 @@ export function Attribute({ type }: { type: AttributeType }) {
                   <Tooltip>
                     <div>
                       {`Cost: ${attributeCostValue} `}
-                      <IconEssence width={ICON_SIZE_INLAY} />
+                      <IconEssence className="inlay" />
                       {" essence"}
                     </div>
                     {isLevelStartedValue && !isLevelCompletedValue && (

@@ -3,12 +3,8 @@ import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import {
-  CLASS_TABLE_CELL_ITALIC,
-  ICON_SIZE_INLAY,
-  LABEL_UNKNOWN,
-} from "@neverquest/data/constants";
-import { SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/constants";
+import { type SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingGearLevel } from "@neverquest/state/settings";
@@ -22,7 +18,7 @@ export function ShieldName({
   shield,
 }: {
   placement?: Placement;
-  shield: Shield;
+  shield: Shield | typeof SHIELD_NONE;
 }) {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const isShowingGearDetails = useRecoilValue(isShowing(ShowingType.GearDetails));
@@ -30,7 +26,7 @@ export function ShieldName({
   const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
   const staggerSkillValue = useRecoilValue(skills(SkillType.Stagger));
 
-  const { blockChance, level, name, size, staggerChance, staminaCost, weight } = shield;
+  const { blockChance, level, name, staggerChance, staminaCost, weight } = shield;
 
   return (
     <OverlayTrigger
@@ -73,15 +69,19 @@ export function ShieldName({
 
                     <td>
                       {(() => {
-                        if (size) {
-                          const { Icon } = SHIELD_SPECIFICATIONS[size];
+                        if ("size" in shield) {
+                          const { size } = shield;
 
-                          return (
-                            <>
-                              <Icon width={ICON_SIZE_INLAY} />
-                              &nbsp;{capitalizeAll(size)}
-                            </>
-                          );
+                          if (size) {
+                            const { Icon } = SHIELD_SPECIFICATIONS[size];
+
+                            return (
+                              <>
+                                <Icon className="inlay" />
+                                &nbsp;{capitalizeAll(size)}
+                              </>
+                            );
+                          }
                         }
 
                         return "None";

@@ -2,13 +2,10 @@ import { OverlayTrigger, Popover } from "react-bootstrap";
 import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
+import { DodgePenalty } from "@neverquest/components/Inventory/Armor/DodgePenalty";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import {
-  CLASS_TABLE_CELL_ITALIC,
-  ICON_SIZE_INLAY,
-  LABEL_UNKNOWN,
-} from "@neverquest/data/constants";
-import { ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/constants";
+import { type ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingGearLevel } from "@neverquest/state/settings";
@@ -17,22 +14,19 @@ import type { Armor } from "@neverquest/types";
 import { ShowingType, SkillType } from "@neverquest/types/enums";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 
-export function ArmorName({ armor, placement = "top" }: { armor: Armor; placement?: Placement }) {
+export function ArmorName({
+  armor,
+  placement = "top",
+}: {
+  armor: Armor | typeof ARMOR_NONE;
+  placement?: Placement;
+}) {
+  const dodgeSkill = useRecoilValue(skills(SkillType.Dodge));
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const isShowingGearDetails = useRecoilValue(isShowing(ShowingType.GearDetails));
   const isShowingGearLevelValue = useRecoilValue(isShowingGearLevel);
-  const armorsSkillValue = useRecoilValue(skills(SkillType.Armors));
 
-  const {
-    deflectionChance,
-    dodgeChanceModifier,
-    gearClass,
-    level,
-    name,
-    protection,
-    staminaCost,
-    weight,
-  } = armor;
+  const { deflectionChance, level, name, protection, staminaCost, weight } = armor;
 
   return (
     <OverlayTrigger
@@ -63,15 +57,19 @@ export function ArmorName({ armor, placement = "top" }: { armor: Armor; placemen
 
                     <td>
                       {(() => {
-                        if (gearClass) {
-                          const { Icon } = ARMOR_SPECIFICATIONS[gearClass];
+                        if ("gearClass" in armor) {
+                          const { gearClass } = armor;
 
-                          return (
-                            <>
-                              <Icon width={ICON_SIZE_INLAY} />
-                              &nbsp;{capitalizeAll(gearClass)}
-                            </>
-                          );
+                          if (gearClass) {
+                            const { Icon } = ARMOR_SPECIFICATIONS[gearClass];
+
+                            return (
+                              <>
+                                <Icon className="inlay" />
+                                &nbsp;{capitalizeAll(gearClass)}
+                              </>
+                            );
+                          }
                         }
 
                         return "None";
@@ -83,37 +81,26 @@ export function ArmorName({ armor, placement = "top" }: { armor: Armor; placemen
                 )}
               </tr>
 
-              <tr>
-                {armorsSkillValue ? (
-                  <>
-                    {deflectionChance && (
-                      <>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Deflection chance:</td>
+              {deflectionChance > 0 && (
+                <tr>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Deflection chance:</td>
 
-                        <td>{formatPercentage(deflectionChance)}</td>
-                      </>
-                    )}
+                  <td>{formatPercentage(deflectionChance)}</td>
+                </tr>
+              )}
 
-                    {staminaCost && (
-                      <>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Stamina cost when dodging:</td>
+              {staminaCost > 0 &&
+                (dodgeSkill ? (
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Dodge penalty:</td>
 
-                        <td>{staminaCost}</td>
-                      </>
-                    )}
-
-                    {dodgeChanceModifier && (
-                      <>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Penalty to dodge chance:</td>
-
-                        <td>{formatPercentage(dodgeChanceModifier)}</td>
-                      </>
-                    )}
-                  </>
+                    <td>
+                      <DodgePenalty staminaCost={staminaCost} />
+                    </td>
+                  </tr>
                 ) : (
                   <td className="text-end">{LABEL_UNKNOWN}</td>
-                )}
-              </tr>
+                ))}
 
               <tr>
                 {hasKnapsackValue ? (

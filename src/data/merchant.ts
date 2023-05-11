@@ -2,7 +2,7 @@ import { TRINKET_COMPASS, TRINKET_HEARTHSTONE, TRINKET_KNAPSACK } from "@neverqu
 import type {
   ArmorClass,
   ArtifactType,
-  ShieldSize,
+  ShieldClass,
   WeaponClass,
   WeaponModality,
 } from "@neverquest/LOCRA/types";
@@ -13,7 +13,7 @@ export const MERCHANT_OFFERS: (
       gearClass: ArmorClass;
     } & ArtifactType<"armor">)
   | ({
-      size: ShieldSize;
+      gearClass: ShieldClass;
     } & ArtifactType<"shield">)
   | ({
       gearClass: WeaponClass;
@@ -36,7 +36,7 @@ export const MERCHANT_OFFERS: (
   ],
   [
     {
-      size: "small",
+      gearClass: "small",
       type: "shield",
     },
   ],
@@ -58,11 +58,11 @@ export const MERCHANT_OFFERS: (
       type: "armor",
     },
     {
-      size: "medium",
+      gearClass: "medium",
       type: "shield",
     },
     {
-      size: "tower",
+      gearClass: "tower",
       type: "shield",
     },
   ],

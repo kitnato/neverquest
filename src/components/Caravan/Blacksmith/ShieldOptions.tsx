@@ -6,55 +6,41 @@ import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGe
 import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_OFFSET, LABEL_UNKNOWN } from "@neverquest/data/constants";
-import { WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
+import { ReactComponent as IconBlockChance } from "@neverquest/icons/block-chance.svg";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconClass } from "@neverquest/icons/gear-class.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { ReactComponent as IconStaminaCost } from "@neverquest/icons/stamina-cost.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
-import { ReactComponent as IconWeaponAbility } from "@neverquest/icons/weapon-ability.svg";
-import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
-import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
-import { type WeaponClass, WeaponClasses } from "@neverquest/LOCRA/types";
+import { type ShieldClass, ShieldClasses } from "@neverquest/LOCRA/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { level } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
-import {
-  capitalizeAll,
-  formatMilliseconds,
-  formatPercentage,
-} from "@neverquest/utilities/formatters";
-import { generateWeapon } from "@neverquest/utilities/generators";
+import { SkillType } from "@neverquest/types/enums";
+import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
+import { generateShield } from "@neverquest/utilities/generators";
 
-export function WeaponOptions() {
-  const { weapon: craftedWeapon } = useRecoilValue(blacksmithInventory);
+export function ShieldOptions() {
   const allowNSFWValue = useRecoilValue(allowNSFW);
+  const { shield: craftedShield } = useRecoilValue(blacksmithInventory);
   const levelValue = useRecoilValue(level);
 
-  const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
-  const [weaponLevel, setWeaponLevel] = useState(levelValue);
+  const [shieldClass, setShieldClass] = useState<ShieldClass>("small");
+  const [shieldLevel, setShieldLevel] = useState(levelValue);
 
-  const { abilityName, skillType } = WEAPON_SPECIFICATIONS[weaponClass];
+  const staggerSkillValue = useRecoilValue(skills(SkillType.Stagger));
+  const skillShieldsValue = useRecoilValue(skills(SkillType.Shields));
 
-  const skillValue = useRecoilValue(skills(skillType));
-
-  const weapon = generateWeapon({
+  const shield = generateShield({
     allowNSFW: allowNSFWValue,
-    gearClass: weaponClass,
+    gearClass: shieldClass,
     hasPrefix: true,
     hasSuffix: true,
-    level: weaponLevel,
-    modality: "melee",
-    tags:
-      weaponLevel < levelValue - 1
-        ? ["lowQuality"]
-        : weaponLevel > levelValue + 1
-        ? ["highQuality"]
-        : undefined,
+    level: shieldLevel,
   });
-  const { abilityChance, ranges, staminaCost, weight } = weapon;
-  const maximumWeaponLevel = levelValue + GEAR_LEVEL_OFFSET;
+  const { ranges, staggerChance, staminaCost, weight } = shield;
+  const maximumShieldLevel = levelValue + GEAR_LEVEL_OFFSET;
 
   return (
     <>
@@ -62,7 +48,7 @@ export function WeaponOptions() {
         <IconDisplay
           contents={
             <FormControl
-              max={maximumWeaponLevel}
+              max={maximumShieldLevel}
               min={1}
               onChange={({ target: { value } }) => {
                 if (!value) {
@@ -71,14 +57,14 @@ export function WeaponOptions() {
 
                 const parsedValue = Number.parseInt(value);
 
-                if (isNaN(parsedValue) || parsedValue < 1 || parsedValue > maximumWeaponLevel) {
+                if (isNaN(parsedValue) || parsedValue < 1 || parsedValue > maximumShieldLevel) {
                   return;
                 }
 
-                setWeaponLevel(parsedValue);
+                setShieldLevel(parsedValue);
               }}
               type="number"
-              value={weaponLevel}
+              value={shieldLevel}
             />
           }
           Icon={IconGearLevel}
@@ -89,12 +75,12 @@ export function WeaponOptions() {
         <IconDisplay
           contents={
             <FormSelect
-              onChange={({ target: { value } }) => setWeaponClass(value as WeaponClass)}
-              value={weaponClass}
+              onChange={({ target: { value } }) => setShieldClass(value as ShieldClass)}
+              value={shieldClass}
             >
-              {WeaponClasses.map((weaponClass) => (
-                <option key={weaponClass} value={weaponClass}>
-                  {capitalizeAll(weaponClass)}
+              {ShieldClasses.map((shieldClass) => (
+                <option key={shieldClass} value={shieldClass}>
+                  {capitalizeAll(shieldClass)}
                 </option>
               ))}
             </FormSelect>
@@ -105,26 +91,19 @@ export function WeaponOptions() {
         />
 
         <IconDisplay
-          contents={`${ranges.damage.minimum}-${ranges.damage.maximum}`}
-          Icon={IconWeaponDamage}
-          iconProps={{ overlayPlacement: "left" }}
-          tooltip="Damage"
-        />
-
-        <IconDisplay
-          contents={`${formatMilliseconds(ranges.rate.minimum)}-${formatMilliseconds(
-            ranges.rate.maximum
+          contents={`${formatPercentage(ranges.blockChance.minimum)}-${formatPercentage(
+            ranges.blockChance.maximum
           )}`}
-          Icon={IconWeaponAttackRate}
+          Icon={IconBlockChance}
           iconProps={{ overlayPlacement: "left" }}
-          tooltip="Attack rate"
+          tooltip="Block chance"
         />
 
         <IconDisplay
-          contents={skillValue ? formatPercentage(abilityChance) : LABEL_UNKNOWN}
-          Icon={skillValue ? IconWeaponAbility : IconUnknown}
+          contents={staggerSkillValue ? formatPercentage(staggerChance) : LABEL_UNKNOWN}
+          Icon={staggerSkillValue ? IconStaminaCost : IconUnknown}
           iconProps={{ overlayPlacement: "left" }}
-          tooltip={skillValue ? `${abilityName} chance` : LABEL_UNKNOWN}
+          tooltip={staggerSkillValue ? "Stagger chance" : LABEL_UNKNOWN}
         />
 
         <IconDisplay
@@ -144,7 +123,13 @@ export function WeaponOptions() {
 
       <hr />
 
-      {craftedWeapon === null ? <CraftGear gear={weapon} /> : <CraftedGear gear={craftedWeapon} />}
+      {!skillShieldsValue && shieldClass === "tower" ? (
+        <span className="text-center">Cannot use without training.</span>
+      ) : craftedShield === null ? (
+        <CraftGear gear={shield} />
+      ) : (
+        <CraftedGear gear={craftedShield} />
+      )}
     </>
   );
 }

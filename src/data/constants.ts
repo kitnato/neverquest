@@ -20,6 +20,8 @@ export const DEFAULT_DELTA_DISPLAY: DeltaDisplay = {
 
 export const ENCUMBRANCE = 3;
 
+export const GEAR_LEVEL_OFFSET = 3;
+
 const KEY_STORAGE_PREFIX = "nq";
 
 export const KEY_SESSION = `${KEY_STORAGE_PREFIX}-ss`;

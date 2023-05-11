@@ -65,20 +65,20 @@ export function ShieldName({
               <tr>
                 {isShowingGearDetails ? (
                   <>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Size:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 
                     <td>
                       {(() => {
-                        if ("size" in shield) {
-                          const { size } = shield;
+                        if ("gearClass" in shield) {
+                          const { gearClass } = shield;
 
-                          if (size) {
-                            const { Icon } = SHIELD_SPECIFICATIONS[size];
+                          if (gearClass) {
+                            const { Icon } = SHIELD_SPECIFICATIONS[gearClass];
 
                             return (
                               <>
                                 <Icon className="inlay" />
-                                &nbsp;{capitalizeAll(size)}
+                                &nbsp;{capitalizeAll(gearClass)}
                               </>
                             );
                           }

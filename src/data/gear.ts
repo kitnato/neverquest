@@ -1,23 +1,18 @@
 import { ReactComponent as IconPlate } from "@neverquest/icons/armor-plate.svg";
 import { ReactComponent as IconReinforced } from "@neverquest/icons/armor-reinforced.svg";
-import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
 import { ReactComponent as IconHide } from "@neverquest/icons/hide.svg";
 import { ReactComponent as IconShieldMedium } from "@neverquest/icons/shield-medium.svg";
 import { ReactComponent as IconShieldSmall } from "@neverquest/icons/shield-small.svg";
 import { ReactComponent as IconShieldTower } from "@neverquest/icons/shield-tower.svg";
-import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
 import { ReactComponent as IconBlunt } from "@neverquest/icons/weapon-blunt.svg";
 import { ReactComponent as IconPiercing } from "@neverquest/icons/weapon-piercing.svg";
 import { ReactComponent as IconSlashing } from "@neverquest/icons/weapon-slashing.svg";
-import { ReactComponent as IconWeapon } from "@neverquest/icons/weapon.svg";
-import type { ArmorClass, ShieldSize, WeaponClass } from "@neverquest/LOCRA/types";
+import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRA/types";
 import type { Range } from "@neverquest/types";
 import { SkillType, WeaponGrip } from "@neverquest/types/enums";
 import type { SVGIcon } from "@neverquest/types/props";
 
 // Armor
-
-export const ARMOR_ICON = IconArmor;
 
 export const ARMOR_NONE = {
   deflectionChance: 0,
@@ -69,8 +64,6 @@ export const ARMOR_SPECIFICATIONS: Readonly<
 
 // Shield
 
-export const SHIELD_ICON = IconShield;
-
 export const SHIELD_NONE = {
   blockChance: 0,
   level: 0,
@@ -82,9 +75,9 @@ export const SHIELD_NONE = {
 
 export const SHIELD_SPECIFICATIONS: Readonly<
   Record<
-    ShieldSize,
+    ShieldClass,
     {
-      blockRange: Range;
+      blockChanceRange: Range;
       Icon: SVGIcon;
       staggerModifier: number;
       staminaCostModifier: number;
@@ -93,21 +86,21 @@ export const SHIELD_SPECIFICATIONS: Readonly<
   >
 > = {
   medium: {
-    blockRange: { maximum: 0.49, minimum: 0.25 },
+    blockChanceRange: { maximum: 0.49, minimum: 0.25 },
     Icon: IconShieldMedium,
     staggerModifier: 1.5,
     staminaCostModifier: 2,
     weightModifier: 1.5,
   },
   small: {
-    blockRange: { maximum: 0.24, minimum: 0.1 },
+    blockChanceRange: { maximum: 0.24, minimum: 0.1 },
     Icon: IconShieldSmall,
     staggerModifier: 1,
     staminaCostModifier: 1,
     weightModifier: 1,
   },
   tower: {
-    blockRange: { maximum: 0.75, minimum: 0.5 },
+    blockChanceRange: { maximum: 0.75, minimum: 0.5 },
     Icon: IconShieldTower,
     staggerModifier: 2.5,
     staminaCostModifier: 3,
@@ -116,8 +109,6 @@ export const SHIELD_SPECIFICATIONS: Readonly<
 } as const;
 
 // Weapon
-
-export const WEAPON_ICON = IconWeapon;
 
 export const WEAPON_NONE = {
   abilityChance: 0,

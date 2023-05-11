@@ -1,4 +1,4 @@
-import type { ArmorClass, ShieldSize, WeaponClass, WeaponModality } from "@neverquest/LOCRA/types";
+import type { ArmorClass, ShieldClass, WeaponClass, WeaponModality } from "@neverquest/LOCRA/types";
 import type { SkillType, WeaponGrip } from "@neverquest/types/enums";
 import type { SVGIcon } from "@neverquest/types/props";
 
@@ -57,7 +57,10 @@ export type Range = {
 
 export type Shield = GearBase & {
   blockChance: number;
-  size?: ShieldSize;
+  gearClass?: ShieldClass;
+  ranges: {
+    blockChance: Range;
+  };
   staggerChance: number;
   staminaCost: number;
 };

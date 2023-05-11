@@ -24,7 +24,7 @@ export type ArtifactData = BaseData &
         subtype: ArmorSlot;
       } & ArtifactType<"armor">)
     | ({
-        subtype: ShieldSize;
+        subtype: ShieldClass;
       } & ArtifactType<"shield">)
     | ({
         artifactClass: WeaponClass;
@@ -39,7 +39,7 @@ export type ArtifactQuery =
       subtype?: ArmorSlot;
     } & ArtifactType<"armor">)
   | ({
-      subtype?: ShieldSize;
+      subtype?: ShieldClass;
     } & ArtifactType<"shield">)
   | ArtifactType<"trinket">
   | ({
@@ -65,7 +65,8 @@ export type GeneratorParameters = {
   suffixTags: AffixTag[];
 };
 
-export type ShieldSize = "medium" | "small" | "tower";
+export const ShieldClasses = ["small", "medium", "tower"] as const;
+export type ShieldClass = (typeof ShieldClasses)[number];
 
 export const WeaponClasses = ["blunt", "piercing", "slashing"] as const;
 export type WeaponClass = (typeof WeaponClasses)[number];

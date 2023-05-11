@@ -7,7 +7,7 @@ import { LOCRA } from "@neverquest/LOCRA";
 import type {
   AffixTag,
   ArmorClass,
-  ShieldSize,
+  ShieldClass,
   WeaponClass,
   WeaponModality,
 } from "@neverquest/LOCRA/types";
@@ -83,28 +83,35 @@ export function generateLocation({ allowNSFW, level }: { allowNSFW: boolean; lev
 
 export function generateShield({
   allowNSFW,
+  gearClass,
   hasPrefix,
   hasSuffix,
   level,
   name,
-  size,
   tags,
 }: {
   allowNSFW: boolean;
+  gearClass: ShieldClass;
   hasPrefix?: boolean;
   hasSuffix?: boolean;
   level: number;
   name?: string;
-  size: ShieldSize;
   tags?: AffixTag[];
 }): Shield {
-  const { blockRange, staggerModifier, staminaCostModifier, weightModifier } =
-    SHIELD_SPECIFICATIONS[size];
+  const { blockChanceRange, staggerModifier, staminaCostModifier, weightModifier } =
+    SHIELD_SPECIFICATIONS[gearClass];
   const growthFactor = getGrowthSigmoid(level);
+  const ranges = {
+    blockChance: {
+      maximum: blockChanceRange.maximum - (blockChanceRange.maximum / 2) * (1 - growthFactor),
+      minimum: blockChanceRange.minimum - (blockChanceRange.minimum / 2) * (1 - growthFactor),
+    },
+  };
 
   return {
-    blockChance: getFromRange(blockRange),
+    blockChance: getFromRange(ranges.blockChance),
     coinPrice: Math.round(500 * growthFactor),
+    gearClass,
     level,
     name:
       name ??
@@ -113,13 +120,13 @@ export function generateShield({
         hasPrefix,
         hasSuffix,
         query: {
-          subtype: size,
+          subtype: gearClass,
           type: "shield",
         },
         tags,
       }),
+    ranges,
     scrapPrice: Math.round(3000 * growthFactor),
-    size,
     staggerChance: (0.1 + 0.9 * growthFactor) * staggerModifier,
     staminaCost: Math.ceil(40 * growthFactor * staminaCostModifier),
     weight: Math.ceil(40 * growthFactor * weightModifier),

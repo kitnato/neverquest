@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconBlockChance } from "@neverquest/icons/slashed-shield.svg";
+import { ReactComponent as IconBlockChance } from "@neverquest/icons/block-chance.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { blockChance } from "@neverquest/state/statistics";

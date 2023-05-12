@@ -9,17 +9,17 @@ import { HearthstoneUseButton } from "@neverquest/components/Inventory/Trinket/H
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/constants";
 import { TRINKET_COMPASS, TRINKET_HEARTHSTONE } from "@neverquest/data/trinkets";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
-import { equippedItemIDs, inventory } from "@neverquest/state/inventory";
+import { equippedGearIDs, inventory } from "@neverquest/state/inventory";
 import { isGear, isTrinket } from "@neverquest/types/type-guards";
 
 export function Inventory() {
-  const equippedItemIDValues = useRecoilValue(equippedItemIDs);
+  const equippedGearIDValues = useRecoilValue(equippedGearIDs);
   const inventoryValue = useRecoilValue(inventory);
 
   const toggleEquipGear = useToggleEquipGear();
 
   const storedItemIDs = Object.getOwnPropertyNames(inventoryValue).filter(
-    (id) => !equippedItemIDValues.includes(id)
+    (id) => !equippedGearIDValues.includes(id)
   );
 
   return (
@@ -31,9 +31,9 @@ export function Inventory() {
       <Stack gap={3}>
         <h6>Equipped</h6>
 
-        {equippedItemIDValues.length === 0 && <span className="fst-italic">Nothing equipped.</span>}
+        {equippedGearIDValues.length === 0 && <span className="fst-italic">Nothing equipped.</span>}
 
-        {equippedItemIDValues.map((id) => {
+        {equippedGearIDValues.map((id) => {
           const item = inventoryValue[id];
 
           return (

@@ -1,6 +1,6 @@
 import { DefaultValue, atom, atomFamily, selectorFamily } from "recoil";
+import { handleLocalStorage, withStateKey } from "@neverquest/state";
 
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import type { InventoryBlacksmith, InventoryMerchant } from "@neverquest/types";
 import { type CrewMember, CrewStatus } from "@neverquest/types/enums";
 
@@ -11,70 +11,84 @@ type CrewState = {
 
 // SELECTORS
 
-export const crew = selectorFamily<CrewState, CrewMember>({
-  get:
-    (type) =>
-    ({ get }) =>
-      get(crewMapping(type)),
-  key: "crew",
-  set:
-    (type) =>
-    ({ set }, status) => {
-      if (status instanceof DefaultValue) {
-        return;
-      }
+export const crew = withStateKey("crew", (key) =>
+  selectorFamily<CrewState, CrewMember>({
+    get:
+      (type) =>
+      ({ get }) =>
+        get(crewMapping(type)),
+    key,
+    set:
+      (type) =>
+      ({ set }, status) => {
+        if (status instanceof DefaultValue) {
+          return;
+        }
 
-      set(crewMapping(type), status);
+        set(crewMapping(type), status);
 
-      if (status.hireStatus === CrewStatus.Hirable) {
-        set(crewHirable, (current) => [...current, type]);
-      } else {
-        set(crewHirable, (current) => current.filter((currentType) => currentType !== type));
-      }
-    },
-});
+        if (status.hireStatus === CrewStatus.Hirable) {
+          set(crewHirable, (current) => [...current, type]);
+        } else {
+          set(crewHirable, (current) => current.filter((currentType) => currentType !== type));
+        }
+      },
+  })
+);
 
 // ATOMS
 
-export const blacksmithInventory = atom<InventoryBlacksmith>({
-  default: {
-    armor: null,
-    shield: null,
-    weapon: null,
-  },
-  effects: [handleLocalStorage<InventoryBlacksmith>({ key: "blacksmithInventory" })],
-  key: "blacksmithInventory",
-});
+export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
+  atom<InventoryBlacksmith>({
+    default: {
+      armor: null,
+      shield: null,
+      weapon: null,
+    },
+    effects: [handleLocalStorage<InventoryBlacksmith>({ key })],
+    key,
+  })
+);
 
-export const crewActive = atom<CrewMember | null>({
-  default: null,
-  effects: [handleLocalStorage<CrewMember | null>({ key: "crewActive" })],
-  key: "crewActive",
-});
+export const crewActive = withStateKey("crewActive", (key) =>
+  atom<CrewMember | null>({
+    default: null,
+    effects: [handleLocalStorage<CrewMember | null>({ key })],
+    key,
+  })
+);
 
-export const crewHirable = atom<CrewMember[]>({
-  default: [],
-  effects: [handleLocalStorage<CrewMember[]>({ key: "crewHirable" })],
-  key: "crewHirable",
-});
+export const crewHirable = withStateKey("crewHirable", (key) =>
+  atom<CrewMember[]>({
+    default: [],
+    effects: [handleLocalStorage<CrewMember[]>({ key })],
+    key,
+  })
+);
 
-const crewMapping = atomFamily<CrewState, CrewMember>({
-  default: {
-    hireStatus: CrewStatus.Unavailable,
-    monologueProgress: 0,
-  },
-  effects: (parameter) => [handleLocalStorage<CrewState>({ key: "crewMapping", parameter })],
-  key: "crewMapping",
-});
+const crewMapping = withStateKey("crewMapping", (key) =>
+  atomFamily<CrewState, CrewMember>({
+    default: {
+      hireStatus: CrewStatus.Unavailable,
+      monologueProgress: 0,
+    },
+    effects: (parameter) => [handleLocalStorage<CrewState>({ key, parameter })],
+    key,
+  })
+);
 
-export const hasBoughtFromMerchant = atom({
-  default: false,
-  effects: [handleLocalStorage<boolean>({ key: "hasBoughtFromMerchant" })],
-  key: "hasBoughtFromMerchant",
-});
+export const hasBoughtFromMerchant = withStateKey("hasBoughtFromMerchant", (key) =>
+  atom({
+    default: false,
+    effects: [handleLocalStorage<boolean>({ key })],
+    key,
+  })
+);
 
-export const merchantInventory = atom<InventoryMerchant>({
-  default: {},
-  effects: [handleLocalStorage<InventoryMerchant>({ key: "merchantInventory" })],
-  key: "merchantInventory",
-});
+export const merchantInventory = withStateKey("merchantInventory", (key) =>
+  atom<InventoryMerchant>({
+    default: {},
+    effects: [handleLocalStorage<InventoryMerchant>({ key })],
+    key,
+  })
+);

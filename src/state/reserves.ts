@@ -1,94 +1,118 @@
 import { atom, selector } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
+import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { attributes } from "@neverquest/state/attributes";
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { AttributeType } from "@neverquest/types/enums";
 
 // SELECTORS
 
-export const canAttackOrParry = selector({
-  get: ({ get }) => get(currentStamina) >= get(weapon).staminaCost,
-  key: "canAttackOrParry",
-});
+export const canAttackOrParry = withStateKey("canAttackOrParry", (key) =>
+  selector({
+    get: ({ get }) => get(currentStamina) >= get(weapon).staminaCost,
+    key,
+  })
+);
 
-export const canBlock = selector({
-  get: ({ get }) => get(currentStamina) >= get(shield).staminaCost,
-  key: "canBlock",
-});
+export const canBlock = withStateKey("canBlock", (key) =>
+  selector({
+    get: ({ get }) => get(currentStamina) >= get(shield).staminaCost,
+    key,
+  })
+);
 
-export const canDodge = selector({
-  get: ({ get }) => get(currentStamina) >= get(armor).staminaCost,
-  key: "canDodge",
-});
+export const canDodge = withStateKey("canDodge", (key) =>
+  selector({
+    get: ({ get }) => get(currentStamina) >= get(armor).staminaCost,
+    key,
+  })
+);
 
-export const isHealthLow = selector({
-  get: ({ get }) => get(currentHealth) <= Math.round(get(maximumHealth) * 0.33),
-  key: "isHealthLow",
-});
+export const isHealthAtMaximum = withStateKey("isHealthAtMaximum", (key) =>
+  selector({
+    get: ({ get }) => get(currentHealth) >= get(maximumHealth),
+    key,
+  })
+);
 
-export const isHealthAtMaximum = selector({
-  get: ({ get }) => get(currentHealth) >= get(maximumHealth),
-  key: "isHealthAtMaximum",
-});
+export const isHealthLow = withStateKey("isHealthLow", (key) =>
+  selector({
+    get: ({ get }) => get(currentHealth) <= Math.round(get(maximumHealth) * 0.33),
+    key,
+  })
+);
 
-export const isStaminaAtMaximum = selector({
-  get: ({ get }) => get(currentStamina) >= get(maximumStaminaTotal),
-  key: "isStaminaAtMaximum",
-});
+export const isStaminaAtMaximum = withStateKey("isStaminaAtMaximum", (key) =>
+  selector({
+    get: ({ get }) => get(currentStamina) >= get(maximumStaminaTotal),
+    key,
+  })
+);
 
-export const maximumHealth = selector({
-  get: ({ get }) => {
-    const { points } = get(attributes(AttributeType.Health));
+export const maximumHealth = withStateKey("maximumHealth", (key) =>
+  selector({
+    get: ({ get }) => {
+      const { points } = get(attributes(AttributeType.Health));
 
-    const { base, increment } = ATTRIBUTES[AttributeType.Health];
+      const { base, increment } = ATTRIBUTES[AttributeType.Health];
 
-    return base + increment * points;
-  },
-  key: "maximumHealth",
-});
+      return base + increment * points;
+    },
+    key,
+  })
+);
 
-export const maximumStamina = selector({
-  get: ({ get }) => {
-    const { points } = get(attributes(AttributeType.Stamina));
+export const maximumStamina = withStateKey("maximumStamina", (key) =>
+  selector({
+    get: ({ get }) => {
+      const { points } = get(attributes(AttributeType.Stamina));
 
-    const { base, increment } = ATTRIBUTES[AttributeType.Stamina];
+      const { base, increment } = ATTRIBUTES[AttributeType.Stamina];
 
-    return base + increment * points;
-  },
-  key: "maximumStamina",
-});
+      return base + increment * points;
+    },
+    key,
+  })
+);
 
-export const maximumStaminaTotal = selector({
-  get: ({ get }) => {
-    const newMaximum = get(maximumStamina) - get(staminaDebuff);
+export const maximumStaminaTotal = withStateKey("maximumStaminaTotal", (key) =>
+  selector({
+    get: ({ get }) => {
+      const newMaximum = get(maximumStamina) - get(staminaDebuff);
 
-    if (newMaximum < 0) {
-      return 0;
-    }
+      if (newMaximum < 0) {
+        return 0;
+      }
 
-    return newMaximum;
-  },
-  key: "maximumStaminaTotal",
-});
+      return newMaximum;
+    },
+    key,
+  })
+);
 
 // ATOMS
 
-export const currentHealth = atom({
-  default: maximumHealth,
-  effects: [handleLocalStorage<number>({ key: "currentHealth" })],
-  key: "currentHealth",
-});
+export const currentHealth = withStateKey("currentHealth", (key) =>
+  atom({
+    default: maximumHealth,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
 
-export const currentStamina = atom({
-  default: maximumStamina,
-  effects: [handleLocalStorage<number>({ key: "currentStamina" })],
-  key: "currentStamina",
-});
+export const currentStamina = withStateKey("currentStamina", (key) =>
+  atom({
+    default: maximumStamina,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
 
-export const staminaDebuff = atom({
-  default: 0,
-  effects: [handleLocalStorage<number>({ key: "staminaDebuff" })],
-  key: "staminaDebuff",
-});
+export const staminaDebuff = withStateKey("staminaDebuff", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);

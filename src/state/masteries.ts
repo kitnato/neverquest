@@ -1,7 +1,7 @@
 import { atomFamily, selectorFamily } from "recoil";
 
 import { MASTERIES } from "@neverquest/data/masteries";
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { MasteryType } from "@neverquest/types/enums";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 
@@ -12,35 +12,41 @@ type MasteryState = {
 
 // ATOMS
 
-export const masteries = atomFamily<MasteryState, MasteryType>({
-  default: {
-    progress: 0,
-    rank: 0,
-  },
-  effects: (parameter) => [handleLocalStorage<MasteryState>({ key: "masteries", parameter })],
-  key: "masteries",
-});
+export const masteries = withStateKey("masteries", (key) =>
+  atomFamily<MasteryState, MasteryType>({
+    default: {
+      progress: 0,
+      rank: 0,
+    },
+    effects: (parameter) => [handleLocalStorage<MasteryState>({ key, parameter })],
+    key,
+  })
+);
 
 // SELECTORS
 
-export const isMasteryAtMaximum = selectorFamily<boolean, MasteryType>({
-  get:
-    (type) =>
-    ({ get }) => {
-      const { base, increment, maximum } = MASTERIES[type];
-      const { rank } = get(masteries(type));
+export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
+  selectorFamily<boolean, MasteryType>({
+    get:
+      (type) =>
+      ({ get }) => {
+        const { base, increment, maximum } = MASTERIES[type];
+        const { rank } = get(masteries(type));
 
-      return maximum === undefined
-        ? false
-        : maximum === getComputedStatistic({ amount: rank, base, increment });
-    },
-  key: "isMasteryAtMaximum",
-});
+        return maximum === undefined
+          ? false
+          : maximum === getComputedStatistic({ amount: rank, base, increment });
+      },
+    key,
+  })
+);
 
-export const masteryCost = selectorFamily<number, MasteryType>({
-  get:
-    (type) =>
-    ({ get }) =>
-      getGrowthTriangular(get(masteries(type)).rank + 2),
-  key: "masteryCost",
-});
+export const masteryCost = withStateKey("masteryCost", (key) =>
+  selectorFamily<number, MasteryType>({
+    get:
+      (type) =>
+      ({ get }) =>
+        getGrowthTriangular(get(masteries(type)).rank + 2),
+    key,
+  })
+);

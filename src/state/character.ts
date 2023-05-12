@@ -1,90 +1,118 @@
 import { atom, selector } from "recoil";
 
 import { LABEL_UNKNOWN } from "@neverquest/data/constants";
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { maximumStamina, staminaDebuff } from "@neverquest/state/reserves";
 
 // SELECTORS
 
-export const isBlighted = selector({
-  get: ({ get }) => get(maximumStamina) === get(staminaDebuff),
-  key: "isBlighted",
-});
+export const isBlighted = withStateKey("isBlighted", (key) =>
+  selector({
+    get: ({ get }) => get(maximumStamina) === get(staminaDebuff),
+    key,
+  })
+);
 
-export const isLooting = selector({
-  get: ({ get }) => get(lootingDuration) > 0,
-  key: "isLooting",
-});
+export const isLooting = withStateKey("isLooting", (key) =>
+  selector({
+    get: ({ get }) => get(lootingDuration) > 0,
+    key,
+  })
+);
 
-export const isRecovering = selector({
-  get: ({ get }) => get(recoveryDuration) > 0,
-  key: "isRecovering",
-});
+export const isRecovering = withStateKey("isRecovering", (key) =>
+  selector({
+    get: ({ get }) => get(recoveryDuration) > 0,
+    key,
+  })
+);
 
 // ATOMS
 
-export const attackDuration = atom({
-  default: 0,
-  effects: [handleLocalStorage<number>({ key: "attackDuration" })],
-  key: "attackDuration",
-});
+export const attackDuration = withStateKey("attackDuration", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
 
-export const isAttacking = atom({
-  default: false,
-  effects: [handleLocalStorage<boolean>({ key: "isAttacking" })],
-  key: "isAttacking",
-});
+export const isAttacking = withStateKey("isAttacking", (key) =>
+  atom({
+    default: false,
+    effects: [handleLocalStorage<boolean>({ key })],
+    key,
+  })
+);
 
-export const isGameOver = atom({
-  default: false,
-  effects: [handleLocalStorage<boolean>({ key: "isGameOver" })],
-  key: "isGameOver",
-});
+export const isGameOver = withStateKey("isGameOver", (key) =>
+  atom({
+    default: false,
+    effects: [handleLocalStorage<boolean>({ key })],
+    key,
+  })
+);
 
-export const healthRegenerationDuration = atom({
-  default: 0,
-  effects: [handleLocalStorage<number>({ key: "healthRegenerationDuration" })],
-  key: "healthRegenerationDuration",
-});
+export const healthRegenerationDuration = withStateKey("healthRegenerationDuration", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
 
-export const lootingDuration = atom({
-  default: 0,
-  effects: [handleLocalStorage<number>({ key: "lootingDuration" })],
-  key: "lootingDuration",
-});
+export const lootingDuration = withStateKey("lootingDuration", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
 
-export const lootingRate = atom({
-  default: 2500,
-  effects: [handleLocalStorage<number>({ key: "lootingRate" })],
-  key: "lootingRate",
-});
+export const lootingRate = withStateKey("lootingRate", (key) =>
+  atom({
+    default: 2500,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
 
-export const name = atom({
-  default: LABEL_UNKNOWN,
-  effects: [handleLocalStorage<string>({ key: "name" })],
-  key: "name",
-});
+export const name = withStateKey("name", (key) =>
+  atom({
+    default: LABEL_UNKNOWN,
+    effects: [handleLocalStorage<string>({ key })],
+    key,
+  })
+);
 
-export const poisonDuration = atom({
-  default: 0,
-  effects: [handleLocalStorage<number>({ key: "poisonDuration" })],
-  key: "poisonDuration",
-});
+export const poisonDuration = withStateKey("poisonDuration", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
 
-export const recoveryDuration = atom({
-  default: 0,
-  effects: [handleLocalStorage<number>({ key: "recoveryDuration" })],
-  key: "recoveryDuration",
-});
+export const recoveryDuration = withStateKey("recoveryDuration", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
 
-export const staminaRegenerationDuration = atom({
-  default: 0,
-  effects: [handleLocalStorage<number>({ key: "staminaRegenerationDuration" })],
-  key: "staminaRegenerationDuration",
-});
+export const staminaRegenerationDuration = withStateKey("staminaRegenerationDuration", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
 
-export const statusElement = atom<HTMLDivElement | null>({
-  default: null,
-  effects: [handleLocalStorage<HTMLDivElement | null>({ key: "statusElement" })],
-  key: "statusElement",
-});
+export const statusElement = withStateKey("statusElement", (key) =>
+  atom<HTMLDivElement | null>({
+    default: null,
+    effects: [handleLocalStorage<HTMLDivElement | null>({ key })],
+    key,
+  })
+);

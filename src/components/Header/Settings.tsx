@@ -10,6 +10,7 @@ import {
   autoEquip,
   confirmControlWarnings,
   isShowingDamagePerSecond,
+  isShowingGearComparisons,
   isShowingGearLevel,
   lowHealthWarning,
 } from "@neverquest/state/settings";
@@ -37,23 +38,25 @@ export function Settings() {
             <Stack gap={3}>
               <SettingsSwitch atom={allowNSFW} label="NSFW mode (profanity)" />
 
-              <SettingsSwitch
-                atom={isShowingDamagePerSecond}
-                label="Show damage per second (DPS)"
-              />
-
               <SettingsSwitch atom={lowHealthWarning} label="Low-health warning" />
 
               <SettingsSwitch
                 atom={confirmControlWarnings}
-                label="Attack & travel warning confirmations"
+                label="Attack & travel warning-confirmations"
               />
 
               <SettingsSwitch
                 atom={autoEquip}
                 isDisabled={!hasKnapsackValue}
-                label="Auto-equip new items"
+                label="Auto-equip new gear"
               />
+
+              <SettingsSwitch
+                atom={isShowingDamagePerSecond}
+                label="Show damage per second (DPS)"
+              />
+
+              <SettingsSwitch atom={isShowingGearComparisons} label="Show gear comparisons" />
 
               <SettingsSwitch atom={isShowingGearLevel} label="Show gear level" />
             </Stack>

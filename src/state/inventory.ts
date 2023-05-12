@@ -2,123 +2,151 @@ import { atom, selector, selectorFamily } from "recoil";
 
 import { ENCUMBRANCE } from "@neverquest/data/constants";
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { Armor, Inventory, Shield, Weapon } from "@neverquest/types";
 
 // SELECTORS
 
-export const armor = selector({
-  get: ({ get }) => {
-    const equippedArmorValue = get(equippedArmor);
+export const armor = withStateKey("armor", (key) =>
+  selector({
+    get: ({ get }) => {
+      const equippedArmorValue = get(equippedArmor);
 
-    if (equippedArmorValue === null) {
-      return ARMOR_NONE;
-    }
+      if (equippedArmorValue === null) {
+        return ARMOR_NONE;
+      }
 
-    return get(inventory)[equippedArmorValue] as Armor;
-  },
-  key: "armor",
-});
+      return get(inventory)[equippedArmorValue] as Armor;
+    },
+    key,
+  })
+);
 
-export const canFit = selectorFamily<boolean, number>({
-  get:
-    (weight) =>
-    ({ get }) =>
-      get(encumbrance) + weight <= get(encumbranceMaximum),
-  key: "canFit",
-});
+export const canFit = withStateKey("canFit", (key) =>
+  selectorFamily<boolean, number>({
+    get:
+      (weight) =>
+      ({ get }) =>
+        get(encumbrance) + weight <= get(encumbranceMaximum),
+    key,
+  })
+);
 
-export const encumbrance = selector({
-  get: ({ get }) => {
-    const inventoryValue = get(inventory);
+export const encumbrance = withStateKey("encumbrance", (key) =>
+  selector({
+    get: ({ get }) => {
+      const inventoryValue = get(inventory);
 
-    return Object.getOwnPropertyNames(inventoryValue).reduce(
-      (current, id) => current + inventoryValue[id].weight,
-      0
-    );
-  },
-  key: "encumbrance",
-});
+      return Object.getOwnPropertyNames(inventoryValue).reduce(
+        (current, id) => current + inventoryValue[id].weight,
+        0
+      );
+    },
+    key,
+  })
+);
 
-export const equippedItemIDs = selector({
-  get: ({ get }) =>
-    [get(equippedWeapon), get(equippedArmor), get(equippedShield)].filter((id) =>
-      Boolean(id)
-    ) as string[],
-  key: "equippedItemIDs",
-});
+export const equippedGearIDs = withStateKey("equippedGearIDs", (key) =>
+  selector({
+    get: ({ get }) =>
+      [get(equippedWeapon), get(equippedArmor), get(equippedShield)].filter((id) =>
+        Boolean(id)
+      ) as string[],
+    key,
+  })
+);
 
-export const isInventoryFull = selector({
-  get: ({ get }) => get(encumbrance) >= get(encumbranceMaximum),
-  key: "isInventoryFull",
-});
+export const isInventoryFull = withStateKey("isInventoryFull", (key) =>
+  selector({
+    get: ({ get }) => get(encumbrance) >= get(encumbranceMaximum),
+    key,
+  })
+);
 
-export const shield = selector({
-  get: ({ get }) => {
-    const equippedShieldValue = get(equippedShield);
+export const shield = withStateKey("shield", (key) =>
+  selector({
+    get: ({ get }) => {
+      const equippedShieldValue = get(equippedShield);
 
-    if (equippedShieldValue === null) {
-      return SHIELD_NONE;
-    }
+      if (equippedShieldValue === null) {
+        return SHIELD_NONE;
+      }
 
-    return get(inventory)[equippedShieldValue] as Shield;
-  },
-  key: "shield",
-});
+      return get(inventory)[equippedShieldValue] as Shield;
+    },
+    key,
+  })
+);
 
-export const weapon = selector({
-  get: ({ get }) => {
-    const equippedWeaponValue = get(equippedWeapon);
+export const weapon = withStateKey("weapon", (key) =>
+  selector({
+    get: ({ get }) => {
+      const equippedWeaponValue = get(equippedWeapon);
 
-    if (equippedWeaponValue === null) {
-      return WEAPON_NONE;
-    }
+      if (equippedWeaponValue === null) {
+        return WEAPON_NONE;
+      }
 
-    return get(inventory)[equippedWeaponValue] as Weapon;
-  },
-  key: "weapon",
-});
+      return get(inventory)[equippedWeaponValue] as Weapon;
+    },
+    key,
+  })
+);
 
 // ATOMS
 
-export const encumbranceMaximum = atom({
-  default: ENCUMBRANCE,
-  effects: [handleLocalStorage<number>({ key: "encumbranceMaximum" })],
-  key: "encumbranceMaximum",
-});
+export const encumbranceMaximum = withStateKey("encumbranceMaximum", (key) =>
+  atom({
+    default: ENCUMBRANCE,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
 
-export const equippedArmor = atom<string | null>({
-  default: null,
-  effects: [handleLocalStorage<string | null>({ key: "equippedArmor" })],
-  key: "equippedArmor",
-});
+export const equippedArmor = withStateKey("equippedArmor", (key) =>
+  atom<string | null>({
+    default: null,
+    effects: [handleLocalStorage<string | null>({ key })],
+    key,
+  })
+);
 
-export const equippedShield = atom<string | null>({
-  default: null,
-  effects: [handleLocalStorage<string | null>({ key: "equippedShield" })],
-  key: "equippedShield",
-});
+export const equippedShield = withStateKey("equippedShield", (key) =>
+  atom<string | null>({
+    default: null,
+    effects: [handleLocalStorage<string | null>({ key })],
+    key,
+  })
+);
 
-export const equippedWeapon = atom<string | null>({
-  default: null,
-  effects: [handleLocalStorage<string | null>({ key: "equippedWeapon" })],
-  key: "equippedWeapon",
-});
+export const equippedWeapon = withStateKey("equippedWeapon", (key) =>
+  atom<string | null>({
+    default: null,
+    effects: [handleLocalStorage<string | null>({ key })],
+    key,
+  })
+);
 
-export const hasKnapsack = atom({
-  default: false,
-  effects: [handleLocalStorage<boolean>({ key: "hasKnapsack" })],
-  key: "hasKnapsack",
-});
+export const hasKnapsack = withStateKey("hasKnapsack", (key) =>
+  atom({
+    default: false,
+    effects: [handleLocalStorage<boolean>({ key })],
+    key,
+  })
+);
 
-export const inventory = atom<Inventory>({
-  default: {},
-  effects: [handleLocalStorage<Inventory>({ key: "inventory" })],
-  key: "inventory",
-});
+export const inventory = withStateKey("inventory", (key) =>
+  atom<Inventory>({
+    default: {},
+    effects: [handleLocalStorage<Inventory>({ key })],
+    key,
+  })
+);
 
-export const isInventoryOpen = atom({
-  default: false,
-  effects: [handleLocalStorage<boolean>({ key: "isInventoryOpen" })],
-  key: "isInventoryOpen",
-});
+export const isInventoryOpen = withStateKey("isInventoryOpen", (key) =>
+  atom({
+    default: false,
+    effects: [handleLocalStorage<boolean>({ key })],
+    key,
+  })
+);

@@ -1,9 +1,9 @@
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { DodgePenalty } from "../Inventory/Armor/DodgePenalty";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { DodgePenalty } from "@neverquest/components/Inventory/Armor/DodgePenalty";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/constants";

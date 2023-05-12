@@ -10,12 +10,12 @@ import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/constants";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { merchantInventory } from "@neverquest/state/caravan";
-import { equippedItemIDs, inventory } from "@neverquest/state/inventory";
+import { equippedGearIDs, inventory } from "@neverquest/state/inventory";
 import { getSellPrice } from "@neverquest/utilities/getters";
 
 export function SellItems() {
   const [inventoryValue, setInventory] = useRecoilState(inventory);
-  const equippedItemIDValues = useRecoilValue(equippedItemIDs);
+  const equippedGearIDValues = useRecoilValue(equippedGearIDs);
   const setMerchantInventory = useSetRecoilState(merchantInventory);
 
   const [sellConfirmation, setSellConfirmation] = useState<string | null>(null);
@@ -26,7 +26,7 @@ export function SellItems() {
   const inventoryIDs = Object.getOwnPropertyNames(inventoryValue);
 
   const sellPossession = (id: string) => {
-    const isEquipped = equippedItemIDValues.includes(id);
+    const isEquipped = equippedGearIDValues.includes(id);
     const item = inventoryValue[id];
 
     if (isEquipped) {
@@ -57,7 +57,7 @@ export function SellItems() {
       ) : (
         <Stack gap={3}>
           {inventoryIDs.map((id) => {
-            const isEquipped = equippedItemIDValues.includes(id);
+            const isEquipped = equippedGearIDValues.includes(id);
             const item = inventoryValue[id];
 
             return (

@@ -1,48 +1,61 @@
 import { atom, selector } from "recoil";
-
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { handleLocalStorage, withStateKey } from "@neverquest/state";
 
 // SELECTORS
 
-export const hasLooted = selector({
-  get: ({ get }) => get(essenceLoot) === 0 && get(coinsLoot) === 0 && get(scrapLoot) === 0,
-  key: "hasLooted",
-});
+export const hasLooted = withStateKey("hasLooted", (key) =>
+  selector({
+    get: ({ get }) => get(essenceLoot) === 0 && get(coinsLoot) === 0 && get(scrapLoot) === 0,
+    key,
+  })
+);
 
 // ATOMS
 
-export const essence = atom({
-  default: 0,
-  effects: [handleLocalStorage<number>({ key: "essence" })],
-  key: "essence",
-});
+export const essence = withStateKey("essence", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
 
-export const essenceLoot = atom({
-  default: 0,
-  effects: [handleLocalStorage<number>({ key: "essenceLoot" })],
-  key: "essenceLoot",
-});
+export const essenceLoot = withStateKey("essenceLoot", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
 
-export const coins = atom({
-  default: 0,
-  effects: [handleLocalStorage<number>({ key: "coins" })],
-  key: "coins",
-});
+export const coins = withStateKey("coins", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
 
-export const coinsLoot = atom({
-  default: 0,
-  effects: [handleLocalStorage<number>({ key: "coinsLoot" })],
-  key: "coinsLoot",
-});
+export const coinsLoot = withStateKey("coinsLoot", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
 
-export const scrap = atom({
-  default: 0,
-  effects: [handleLocalStorage<number>({ key: "scrap" })],
-  key: "scrap",
-});
+export const scrap = withStateKey("scrap", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
 
-export const scrapLoot = atom({
-  default: 0,
-  effects: [handleLocalStorage<number>({ key: "scrapLoot" })],
-  key: "scrapLoot",
-});
+export const scrapLoot = withStateKey("scrapLoot", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);

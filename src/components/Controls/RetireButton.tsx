@@ -18,7 +18,7 @@ export function RetireButton() {
 
   return (
     <>
-      <OverlayTrigger overlay={<Tooltip>Retire</Tooltip>} placement="top" trigger={[]}>
+      <OverlayTrigger overlay={<Tooltip>Retire</Tooltip>}>
         <span
           className={`d-inline-block ${getAnimationClass({
             type: "bounceIn",

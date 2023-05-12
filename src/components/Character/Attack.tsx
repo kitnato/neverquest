@@ -63,7 +63,6 @@ export function Attack() {
               </Popover.Body>
             </Popover>
           }
-          placement="top"
           trigger={isShowingAttackRateDetails ? ["hover", "focus"] : []}
         >
           <Stack className="w-100" direction="horizontal">

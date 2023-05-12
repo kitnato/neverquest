@@ -38,7 +38,6 @@ export function ExpandInventory() {
             {!isAffordable && <div>Not enough coins!</div>}
           </Tooltip>
         }
-        placement="top"
         trigger={canExpand ? [] : ["hover", "focus"]}
       >
         <span className="d-inline-block">

@@ -5,6 +5,12 @@ import { useRecoilValue } from "recoil";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/constants";
 import { type WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
+import { ReactComponent as IconDamagePerSecond } from "@neverquest/icons/damage-per-second.svg";
+import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
+import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
+import { ReactComponent as IconStaminaCost } from "@neverquest/icons/stamina-cost.svg";
+import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
+import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isShowingDamagePerSecond, isShowingGearLevel } from "@neverquest/state/settings";
@@ -32,7 +38,7 @@ export function WeaponName({
   const isShowingStamina = useRecoilValue(isShowing(ShowingType.Stamina));
 
   const { abilityChance, damage, gearClass, level, name, rate, staminaCost, weight } = weapon;
-  const { abilityName, Icon, skillType } = WEAPON_SPECIFICATIONS[gearClass];
+  const { abilityName, IconAbility, IconGearClass, skillType } = WEAPON_SPECIFICATIONS[gearClass];
 
   const skillValue = useRecoilValue(skills(skillType));
 
@@ -48,35 +54,55 @@ export function WeaponName({
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Gear level:</td>
 
-                  <td>{level}</td>
+                  <td>
+                    <IconGearLevel className="inlay" />
+                    &nbsp;{level}
+                  </td>
                 </tr>
               )}
 
               <tr>
                 <td className={CLASS_TABLE_CELL_ITALIC}>Damage:</td>
 
-                <td>{`${damage}${
-                  isShowingDamagePerSecondValue
-                    ? ` (${getDamagePerRate({
-                        damage,
-                        rate,
-                      })} DPS)`
-                    : ""
-                }`}</td>
+                <td>
+                  <IconWeaponDamage className="inlay" />
+                  &nbsp;{damage}
+                </td>
               </tr>
 
               <tr>
                 <td className={CLASS_TABLE_CELL_ITALIC}>Attack rate:</td>
 
-                <td>{formatMilliseconds(rate)}</td>
+                <td>
+                  <IconWeaponAttackRate className="inlay" />
+                  &nbsp;{formatMilliseconds(rate)}
+                </td>
               </tr>
+
+              {isShowingDamagePerSecondValue && (
+                <tr>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Damage per second:</td>
+
+                  <td>
+                    <IconDamagePerSecond className="inlay" />
+                    &nbsp;
+                    {getDamagePerRate({
+                      damage,
+                      rate,
+                    })}
+                  </td>
+                </tr>
+              )}
 
               <tr>
                 {isShowingStamina ? (
                   <>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Stamina cost:</td>
 
-                    <td>{staminaCost}</td>
+                    <td>
+                      <IconStaminaCost className="inlay" />
+                      &nbsp;{staminaCost}
+                    </td>
                   </>
                 ) : (
                   <td className="text-end">{LABEL_UNKNOWN}</td>
@@ -89,7 +115,7 @@ export function WeaponName({
                     <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 
                     <td>
-                      <Icon className="inlay" />
+                      <IconGearClass className="inlay" />
                       &nbsp;{capitalizeAll(gearClass)}
                     </td>
                   </>
@@ -102,7 +128,10 @@ export function WeaponName({
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>{abilityName} chance:</td>
 
-                  <td>{formatPercentage(abilityChance)}</td>
+                  <td>
+                    <IconAbility className="inlay" />
+                    &nbsp;{formatPercentage(abilityChance)}
+                  </td>
                 </tr>
               ) : (
                 <tr>
@@ -115,7 +144,10 @@ export function WeaponName({
                   <>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Weight:</td>
 
-                    <td>{weight}</td>
+                    <td>
+                      <IconEncumbrance className="inlay" />
+                      &nbsp;{weight}
+                    </td>
                   </>
                 ) : (
                   <td className="text-end">{LABEL_UNKNOWN}</td>

@@ -64,7 +64,6 @@ export function DodgeChance() {
                 </Popover.Body>
               </Popover>
             }
-            placement="top"
             trigger={isShowingDodgeChanceDetails ? ["hover", "focus"] : []}
           >
             <span>{formatPercentage(dodgeChanceTotalValue)}</span>

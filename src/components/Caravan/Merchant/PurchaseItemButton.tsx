@@ -64,7 +64,6 @@ export function PurchaseItemButton({ id }: { id: string }) {
           {!canFitValue && <div>Over-encumbered!</div>}
         </Tooltip>
       }
-      placement="top"
       trigger={isPurchasable ? [] : ["hover", "focus"]}
     >
       <span className="d-inline-block">

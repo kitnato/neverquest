@@ -79,7 +79,6 @@ export function Recovery() {
               </Popover.Body>
             </Popover>
           }
-          placement="top"
           trigger={showRecoveryRate || showSkipRecovery ? ["hover", "focus"] : []}
         >
           <Stack className="w-100" direction="horizontal">

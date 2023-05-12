@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSecond";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/constants";
@@ -56,7 +57,6 @@ export function Damage() {
                 </Popover.Body>
               </Popover>
             }
-            placement="top"
             trigger={isShowingDamageDetails ? ["hover", "focus"] : []}
           >
             <span>{damageTotalValue}</span>
@@ -65,7 +65,9 @@ export function Damage() {
           <FloatingText type={DeltaType.Damage} />
         </>
       }
-      description={isShowingDamagePerSecondValue ? `${damagePerSecondValue} DPS` : null}
+      description={
+        isShowingDamagePerSecondValue && <DamagePerSecond damagePerSecond={damagePerSecondValue} />
+      }
       Icon={IconDamage}
       tooltip="Damage"
     />

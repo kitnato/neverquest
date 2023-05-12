@@ -82,7 +82,6 @@ export function BleedRating() {
                 </Popover.Body>
               </Popover>
             }
-            placement="top"
           >
             <span>{bleedRatingValue}</span>
           </OverlayTrigger>

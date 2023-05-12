@@ -58,7 +58,6 @@ export function TravelButton() {
             }`}
           </Tooltip>
         }
-        placement="top"
       >
         <span
           className={`d-inline-block ${getAnimationClass({

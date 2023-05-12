@@ -31,7 +31,7 @@ export function AttributesButton() {
 
   return (
     <>
-      <OverlayTrigger overlay={<Tooltip>Attributes</Tooltip>} placement="top">
+      <OverlayTrigger overlay={<Tooltip>Attributes</Tooltip>}>
         <span
           className={`d-inline-block ${getAnimationClass({
             type: "bounceIn",

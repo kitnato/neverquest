@@ -53,16 +53,15 @@ export function Attribute({ type }: { type: AttributeType }) {
                 overlay={
                   <Tooltip>
                     <div>
-                      {`Cost: ${attributeCostValue} `}
+                      Cost:&nbsp;{attributeCostValue}&nbsp;
                       <IconEssence className="inlay" />
-                      {" essence"}
+                      &nbsp;essence
                     </div>
                     {isLevelStartedValue && !isLevelCompletedValue && (
                       <div>Monsters are lurking!</div>
                     )}
                   </Tooltip>
                 }
-                placement="top"
               >
                 <span className="d-inline-block">
                   <Button

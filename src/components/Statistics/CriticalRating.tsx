@@ -56,7 +56,6 @@ export function CriticalRating() {
                 </Popover.Body>
               </Popover>
             }
-            placement="top"
           >
             <span>{criticalRatingValue}</span>
           </OverlayTrigger>

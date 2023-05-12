@@ -1,6 +1,7 @@
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSecond";
 import { DAMAGE_ICON } from "@neverquest/data/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
 import { monsterDamage, monsterDamagePerSecond } from "@neverquest/state/monster";
@@ -20,7 +21,11 @@ export function MonsterDamage() {
   return (
     <IconDisplay
       contents={monsterDamageValue}
-      description={isShowingDamagePerSecondValue ? `${monsterDamagePerSecondValue} DPS` : null}
+      description={
+        isShowingDamagePerSecondValue && (
+          <DamagePerSecond damagePerSecond={monsterDamagePerSecondValue} />
+        )
+      }
       Icon={DAMAGE_ICON}
       isAnimated
       tooltip="Monster damage"

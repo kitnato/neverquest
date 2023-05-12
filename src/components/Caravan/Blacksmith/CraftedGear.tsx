@@ -46,7 +46,6 @@ export function CraftedGear({ gear }: { gear: Gear }) {
 
       <OverlayTrigger
         overlay={<Tooltip>Over-encumbered!</Tooltip>}
-        placement="top"
         trigger={canFitValue ? [] : ["hover", "focus"]}
       >
         <span className="d-inline-block w-100">

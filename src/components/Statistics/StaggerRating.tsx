@@ -67,7 +67,6 @@ export function StaggerRating() {
                 </Popover.Body>
               </Popover>
             }
-            placement="top"
           >
             <span>{staggerRatingValue}</span>
           </OverlayTrigger>

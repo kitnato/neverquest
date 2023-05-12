@@ -24,7 +24,7 @@ export function InventoryButton() {
 
   return (
     <>
-      <OverlayTrigger overlay={<Tooltip>Inventory</Tooltip>} placement="top">
+      <OverlayTrigger overlay={<Tooltip>Inventory</Tooltip>}>
         <span
           className={`d-inline-block ${getAnimationClass({
             type: "bounceIn",

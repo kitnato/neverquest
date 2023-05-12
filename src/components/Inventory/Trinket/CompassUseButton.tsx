@@ -49,7 +49,6 @@ export function CompassUseButton() {
               : "The caravan is interfering."}
           </Tooltip>
         }
-        placement="top"
         trigger={canNavigate ? [] : ["hover", "focus"]}
       >
         <span className="d-inline-block">

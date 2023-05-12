@@ -50,7 +50,6 @@ export function CraftGear({ gear }: { gear: Gear }) {
             {!hasScrap && <div>Not enough scrap!</div>}
           </Tooltip>
         }
-        placement="top"
         trigger={isCraftable ? [] : ["hover", "focus"]}
       >
         <span className="d-inline-block w-100">

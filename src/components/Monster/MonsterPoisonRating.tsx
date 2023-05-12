@@ -58,7 +58,6 @@ export function MonsterPoisonRating() {
               </Popover.Body>
             </Popover>
           }
-          placement="top"
         >
           <span>{Math.round(poisonPerTick * monsterPoisonChanceValue * 100)}</span>
         </OverlayTrigger>

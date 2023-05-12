@@ -24,7 +24,6 @@ export function TrainSkillButton({ type }: { type: SkillType }) {
   return (
     <OverlayTrigger
       overlay={<Tooltip>Not enough coins!</Tooltip>}
-      placement="top"
       trigger={isAffordable ? [] : ["hover", "focus"]}
     >
       <span className="d-inline-block">

@@ -51,10 +51,7 @@ export function Settings() {
                 label="Auto-equip new gear"
               />
 
-              <SettingsSwitch
-                atom={isShowingDamagePerSecond}
-                label="Show damage per second (DPS)"
-              />
+              <SettingsSwitch atom={isShowingDamagePerSecond} label="Show damage per second" />
 
               <SettingsSwitch atom={isShowingGearComparisons} label="Show gear comparisons" />
 

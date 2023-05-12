@@ -21,7 +21,7 @@ export function CollectLootButton() {
   }
 
   return (
-    <OverlayTrigger overlay={<Tooltip>Collect loot</Tooltip>} placement="top">
+    <OverlayTrigger overlay={<Tooltip>Collect loot</Tooltip>}>
       <span
         className={`d-inline-block ${getAnimationClass({
           type: "bounceIn",

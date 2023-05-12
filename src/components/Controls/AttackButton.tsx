@@ -84,7 +84,6 @@ export function AttackButton() {
             <Tooltip>{tooltip}</Tooltip>
           )
         }
-        placement="top"
         show={showWarning || undefined}
       >
         <span

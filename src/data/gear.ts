@@ -1,12 +1,15 @@
 import { ReactComponent as IconPlate } from "@neverquest/icons/armor-plate.svg";
 import { ReactComponent as IconReinforced } from "@neverquest/icons/armor-reinforced.svg";
 import { ReactComponent as IconHide } from "@neverquest/icons/hide.svg";
+import { ReactComponent as IconParry } from "@neverquest/icons/parry-chance.svg";
 import { ReactComponent as IconShieldMedium } from "@neverquest/icons/shield-medium.svg";
 import { ReactComponent as IconShieldSmall } from "@neverquest/icons/shield-small.svg";
 import { ReactComponent as IconShieldTower } from "@neverquest/icons/shield-tower.svg";
+import { ReactComponent as IconWeaponBleed } from "@neverquest/icons/weapon-bleed.svg";
 import { ReactComponent as IconBlunt } from "@neverquest/icons/weapon-blunt.svg";
 import { ReactComponent as IconPiercing } from "@neverquest/icons/weapon-piercing.svg";
 import { ReactComponent as IconSlashing } from "@neverquest/icons/weapon-slashing.svg";
+import { ReactComponent as IconWeaponStagger } from "@neverquest/icons/weapon-stagger.svg";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRA/types";
 import type { Range } from "@neverquest/types";
 import { SkillType, WeaponGrip } from "@neverquest/types/enums";
@@ -129,7 +132,8 @@ export const WEAPON_SPECIFICATIONS: Readonly<
     {
       abilityChance: Range;
       abilityName: string;
-      Icon: SVGIcon;
+      IconAbility: SVGIcon;
+      IconGearClass: SVGIcon;
       skillType: SkillType;
     }
   >
@@ -137,19 +141,22 @@ export const WEAPON_SPECIFICATIONS: Readonly<
   blunt: {
     abilityChance: { maximum: 0.7, minimum: 0.1 },
     abilityName: "Stagger",
-    Icon: IconBlunt,
+    IconAbility: IconWeaponStagger,
+    IconGearClass: IconBlunt,
     skillType: SkillType.Stagger,
   },
   piercing: {
     abilityChance: { maximum: 0.7, minimum: 0.2 },
     abilityName: "Bleed",
-    Icon: IconPiercing,
+    IconAbility: IconWeaponBleed,
+    IconGearClass: IconPiercing,
     skillType: SkillType.Bleed,
   },
   slashing: {
     abilityChance: { maximum: 0.6, minimum: 0.15 },
     abilityName: "Parry",
-    Icon: IconSlashing,
+    IconAbility: IconParry,
+    IconGearClass: IconSlashing,
     skillType: SkillType.Parry,
   },
 } as const;

@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil";
 import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGear";
 import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { DodgePenalty } from "@neverquest/components/Inventory/Armor/DodgePenalty";
+import { DodgePenaltyDetail } from "@neverquest/components/Inventory/DodgePenaltyDetail";
 import { GEAR_LEVEL_OFFSET, LABEL_UNKNOWN } from "@neverquest/data/constants";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
 import { ReactComponent as IconDodgePenalty } from "@neverquest/icons/dodge-penalty.svg";
@@ -112,7 +112,9 @@ export function ArmorOptions() {
 
         {staminaCost > 0 && (
           <IconDisplay
-            contents={skillDodgeValue ? <DodgePenalty staminaCost={staminaCost} /> : LABEL_UNKNOWN}
+            contents={
+              skillDodgeValue ? <DodgePenaltyDetail staminaCost={staminaCost} /> : LABEL_UNKNOWN
+            }
             Icon={skillDodgeValue ? IconDodgePenalty : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
             tooltip={skillDodgeValue ? "Dodge penalty" : LABEL_UNKNOWN}

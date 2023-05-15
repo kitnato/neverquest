@@ -2,13 +2,15 @@ import { OverlayTrigger, Popover } from "react-bootstrap";
 import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
-import { DodgePenalty } from "@neverquest/components/Inventory/Armor/DodgePenalty";
+import { DodgePenaltyDetail } from "@neverquest/components/Inventory/DodgePenaltyDetail";
+import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
+import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/constants";
 import { type ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
-import { hasKnapsack } from "@neverquest/state/inventory";
+import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
+import { ReactComponent as IconProtection } from "@neverquest/icons/protection.svg";
 import { isShowing } from "@neverquest/state/isShowing";
-import { isShowingGearLevel } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
 import type { Armor } from "@neverquest/types";
 import { ShowingType, SkillType } from "@neverquest/types/enums";
@@ -22,9 +24,7 @@ export function ArmorName({
   placement?: Placement;
 }) {
   const dodgeSkill = useRecoilValue(skills(SkillType.Dodge));
-  const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const isShowingGearDetails = useRecoilValue(isShowing(ShowingType.GearDetails));
-  const isShowingGearLevelValue = useRecoilValue(isShowingGearLevel);
 
   const { deflectionChance, level, name, protection, staminaCost, weight } = armor;
 
@@ -36,18 +36,15 @@ export function ArmorName({
 
           <Popover.Body>
             <DetailsTable>
-              {isShowingGearLevelValue && (
-                <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Gear level:</td>
-
-                  <td>{level}</td>
-                </tr>
-              )}
+              <GearLevelDetail level={level} />
 
               <tr>
                 <td className={CLASS_TABLE_CELL_ITALIC}>Protection:</td>
 
-                <td>{protection}</td>
+                <td>
+                  <IconProtection className="inlay" />
+                  &nbsp;{protection}
+                </td>
               </tr>
 
               <tr>
@@ -85,7 +82,10 @@ export function ArmorName({
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Deflection chance:</td>
 
-                  <td>{formatPercentage(deflectionChance)}</td>
+                  <td>
+                    <IconDeflection className="inlay" />
+                    &nbsp;{formatPercentage(deflectionChance)}
+                  </td>
                 </tr>
               )}
 
@@ -95,24 +95,14 @@ export function ArmorName({
                     <td className={CLASS_TABLE_CELL_ITALIC}>Dodge penalty:</td>
 
                     <td>
-                      <DodgePenalty staminaCost={staminaCost} />
+                      <DodgePenaltyDetail staminaCost={staminaCost} />
                     </td>
                   </tr>
                 ) : (
                   <td className="text-end">{LABEL_UNKNOWN}</td>
                 ))}
 
-              <tr>
-                {hasKnapsackValue ? (
-                  <>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Weight:</td>
-
-                    <td>{weight}</td>
-                  </>
-                ) : (
-                  <td className="text-end">{LABEL_UNKNOWN}</td>
-                )}
-              </tr>
+              <WeightDetail weight={weight} />
             </DetailsTable>
           </Popover.Body>
         </Popover>

@@ -3,16 +3,16 @@ import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSecond";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/constants";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
+import { ReactComponent as IconDamagePerSecond } from "@neverquest/icons/damage-per-second.svg";
 import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { isShowingDamagePerSecond } from "@neverquest/state/settings";
+import { showDamagePerSecond } from "@neverquest/state/settings";
 import { damage, damagePerSecond, damageTotal } from "@neverquest/state/statistics";
 import { AttributeType, DeltaType, ShowingType } from "@neverquest/types/enums";
 
@@ -21,7 +21,7 @@ export function Damage() {
   const damageTotalValue = useRecoilValue(damageTotal);
   const damagePerSecondValue = useRecoilValue(damagePerSecond);
   const isShowingDamageDetails = useRecoilValue(isShowing(ShowingType.DamageDetails));
-  const isShowingDamagePerSecondValue = useRecoilValue(isShowingDamagePerSecond);
+  const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
   const weaponValue = useRecoilValue(weapon);
 
   const { name } = ATTRIBUTES[AttributeType.Damage];
@@ -66,7 +66,14 @@ export function Damage() {
         </>
       }
       description={
-        isShowingDamagePerSecondValue && <DamagePerSecond damagePerSecond={damagePerSecondValue} />
+        showDamagePerSecondValue && (
+          <IconDisplay
+            contents={damagePerSecondValue}
+            Icon={IconDamagePerSecond}
+            iconProps={{ ignoreColor: true, isSmall: true, overlayPlacement: "bottom" }}
+            tooltip="Damage per second"
+          />
+        )
       }
       Icon={IconDamage}
       tooltip="Damage"

@@ -1,13 +1,22 @@
 import { useRecoilValue } from "recoil";
 
+import { IconImage } from "@neverquest/components/IconImage";
+import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/constants";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
-import { isShowingGearLevel } from "@neverquest/state/settings";
+import { showGearLevel } from "@neverquest/state/settings";
+import type { ComparisonProps } from "@neverquest/types/props";
 
-export function GearLevelDetail({ level }: { level: number }) {
-  const isShowingGearLevelValue = useRecoilValue(isShowingGearLevel);
+export function GearLevelDetail({
+  comparison,
+  level,
+}: {
+  comparison: ComparisonProps;
+  level: number;
+}) {
+  const showGearLevelValue = useRecoilValue(showGearLevel);
 
-  if (!isShowingGearLevelValue) {
+  if (!showGearLevelValue) {
     return null;
   }
 
@@ -16,8 +25,14 @@ export function GearLevelDetail({ level }: { level: number }) {
       <td className={CLASS_TABLE_CELL_ITALIC}>Gear level:</td>
 
       <td>
-        <IconGearLevel className="inlay" />
+        <IconImage Icon={IconGearLevel} isSmall />
         &nbsp;{level}
+        {comparison !== null && (
+          <GearComparison
+            difference={level - comparison.subtrahend}
+            showingType={comparison.showingType}
+          />
+        )}
       </td>
     </tr>
   );

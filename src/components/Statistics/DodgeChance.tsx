@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { DodgePenaltyDetail } from "@neverquest/components/Inventory/DodgePenaltyDetail";
+import { DodgePenaltyContents } from "@neverquest/components/Inventory/DodgePenaltyContents";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/constants";
@@ -57,7 +57,7 @@ export function DodgeChance() {
                       <td className={CLASS_TABLE_CELL_ITALIC}>Penalty from armor:</td>
 
                       <td>
-                        <DodgePenaltyDetail staminaCost={staminaCost} />
+                        <DodgePenaltyContents staminaCost={staminaCost} />
                       </td>
                     </tr>
                   </DetailsTable>

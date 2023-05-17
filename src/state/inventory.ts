@@ -1,22 +1,23 @@
-import { atom, selector, selectorFamily } from "recoil";
+import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { ENCUMBRANCE } from "@neverquest/data/constants";
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { Armor, Inventory, Shield, Weapon } from "@neverquest/types";
+import { GearType } from "@neverquest/types/enums";
 
 // SELECTORS
 
 export const armor = withStateKey("armor", (key) =>
   selector({
     get: ({ get }) => {
-      const equippedArmorValue = get(equippedArmor);
+      const equippedArmorID = get(equippedGearID(GearType.Armor));
 
-      if (equippedArmorValue === null) {
+      if (equippedArmorID === null) {
         return ARMOR_NONE;
       }
 
-      return get(inventory)[equippedArmorValue] as Armor;
+      return get(inventory)[equippedArmorID] as Armor;
     },
     key,
   })
@@ -49,9 +50,11 @@ export const encumbrance = withStateKey("encumbrance", (key) =>
 export const equippedGearIDs = withStateKey("equippedGearIDs", (key) =>
   selector({
     get: ({ get }) =>
-      [get(equippedWeapon), get(equippedArmor), get(equippedShield)].filter((id) =>
-        Boolean(id)
-      ) as string[],
+      [
+        get(equippedGearID(GearType.Weapon)),
+        get(equippedGearID(GearType.Armor)),
+        get(equippedGearID(GearType.Shield)),
+      ].filter((id) => Boolean(id)) as string[],
     key,
   })
 );
@@ -66,13 +69,13 @@ export const isInventoryFull = withStateKey("isInventoryFull", (key) =>
 export const shield = withStateKey("shield", (key) =>
   selector({
     get: ({ get }) => {
-      const equippedShieldValue = get(equippedShield);
+      const equippedShieldID = get(equippedGearID(GearType.Shield));
 
-      if (equippedShieldValue === null) {
+      if (equippedShieldID === null) {
         return SHIELD_NONE;
       }
 
-      return get(inventory)[equippedShieldValue] as Shield;
+      return get(inventory)[equippedShieldID] as Shield;
     },
     key,
   })
@@ -81,13 +84,13 @@ export const shield = withStateKey("shield", (key) =>
 export const weapon = withStateKey("weapon", (key) =>
   selector({
     get: ({ get }) => {
-      const equippedWeaponValue = get(equippedWeapon);
+      const equippedWeaponID = get(equippedGearID(GearType.Weapon));
 
-      if (equippedWeaponValue === null) {
+      if (equippedWeaponID === null) {
         return WEAPON_NONE;
       }
 
-      return get(inventory)[equippedWeaponValue] as Weapon;
+      return get(inventory)[equippedWeaponID] as Weapon;
     },
     key,
   })
@@ -103,26 +106,10 @@ export const encumbranceMaximum = withStateKey("encumbranceMaximum", (key) =>
   })
 );
 
-export const equippedArmor = withStateKey("equippedArmor", (key) =>
-  atom<string | null>({
+export const equippedGearID = withStateKey("equippedGearID", (key) =>
+  atomFamily<string | null, GearType>({
     default: null,
-    effects: [handleLocalStorage<string | null>({ key })],
-    key,
-  })
-);
-
-export const equippedShield = withStateKey("equippedShield", (key) =>
-  atom<string | null>({
-    default: null,
-    effects: [handleLocalStorage<string | null>({ key })],
-    key,
-  })
-);
-
-export const equippedWeapon = withStateKey("equippedWeapon", (key) =>
-  atom<string | null>({
-    default: null,
-    effects: [handleLocalStorage<string | null>({ key })],
+    effects: (parameter) => [handleLocalStorage<string | null>({ key, parameter })],
     key,
   })
 );

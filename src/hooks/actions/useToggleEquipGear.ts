@@ -1,14 +1,9 @@
-import { useRecoilCallback } from "recoil";
+import { type RecoilState, useRecoilCallback } from "recoil";
 
 import { attributes } from "@neverquest/state/attributes";
-import {
-  equippedArmor,
-  equippedShield,
-  equippedWeapon,
-  inventory,
-} from "@neverquest/state/inventory";
+import { equippedGearID, inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { AttributeType, ShowingType } from "@neverquest/types/enums";
+import { AttributeType, GearType, ShowingType } from "@neverquest/types/enums";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -20,7 +15,13 @@ export function useToggleEquipGear() {
 
         const item = get(inventory)[id];
 
-        let equippedGear = equippedArmor;
+        const toggle = (slot: RecoilState<string | null>) => {
+          if (get(slot) === id) {
+            reset(slot);
+          } else {
+            set(slot, id);
+          }
+        };
 
         if (isArmor(item)) {
           const { deflectionChance, staminaCost } = item;
@@ -40,6 +41,12 @@ export function useToggleEquipGear() {
           if (!get(isShowing(ShowingType.DodgeChanceDetails)) && staminaCost) {
             set(isShowing(ShowingType.DodgeChanceDetails), true);
           }
+
+          if (!get(isShowing(ShowingType.GearComparisonArmor))) {
+            set(isShowing(ShowingType.GearComparisonArmor), true);
+          }
+
+          toggle(equippedGearID(GearType.Armor));
         }
 
         if (isShield(item)) {
@@ -51,7 +58,11 @@ export function useToggleEquipGear() {
             set(isShowing(ShowingType.BlockChance), true);
           }
 
-          equippedGear = equippedShield;
+          if (!get(isShowing(ShowingType.GearComparisonShield))) {
+            set(isShowing(ShowingType.GearComparisonShield), true);
+          }
+
+          toggle(equippedGearID(GearType.Shield));
         }
 
         if (isWeapon(item)) {
@@ -78,13 +89,11 @@ export function useToggleEquipGear() {
             set(isShowing(ShowingType.Weapon), true);
           }
 
-          equippedGear = equippedWeapon;
-        }
+          if (!get(isShowing(ShowingType.GearComparisonWeapon))) {
+            set(isShowing(ShowingType.GearComparisonWeapon), true);
+          }
 
-        if (get(equippedGear) === id) {
-          reset(equippedGear);
-        } else {
-          set(equippedGear, id);
+          toggle(equippedGearID(GearType.Weapon));
         }
       },
     []

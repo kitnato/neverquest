@@ -2,7 +2,9 @@ import { OverlayTrigger, Popover } from "react-bootstrap";
 import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
-import { DodgePenaltyDetail } from "@neverquest/components/Inventory/DodgePenaltyDetail";
+import { IconImage } from "@neverquest/components/IconImage";
+import { DodgePenaltyContents } from "@neverquest/components/Inventory/DodgePenaltyContents";
+import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
@@ -10,6 +12,7 @@ import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/constan
 import { type ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
 import { ReactComponent as IconProtection } from "@neverquest/icons/protection.svg";
+import { armor as armorEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import type { Armor } from "@neverquest/types";
@@ -18,15 +21,17 @@ import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatter
 
 export function ArmorName({
   armor,
-  placement = "top",
+  placement,
 }: {
   armor: Armor | typeof ARMOR_NONE;
   placement?: Placement;
 }) {
+  const armorEquippedValue = useRecoilValue(armorEquipped);
   const dodgeSkill = useRecoilValue(skills(SkillType.Dodge));
-  const isShowingGearDetails = useRecoilValue(isShowing(ShowingType.GearDetails));
+  const isShowingGearClass = useRecoilValue(isShowing(ShowingType.GearClass));
 
   const { deflectionChance, level, name, protection, staminaCost, weight } = armor;
+  const isEquipped = JSON.stringify(armorEquippedValue) === JSON.stringify(armor);
 
   return (
     <OverlayTrigger
@@ -36,19 +41,32 @@ export function ArmorName({
 
           <Popover.Body>
             <DetailsTable>
-              <GearLevelDetail level={level} />
+              <GearLevelDetail
+                comparison={
+                  isEquipped
+                    ? null
+                    : { showingType: ShowingType.Armor, subtrahend: armorEquippedValue.level }
+                }
+                level={level}
+              />
 
               <tr>
                 <td className={CLASS_TABLE_CELL_ITALIC}>Protection:</td>
 
                 <td>
-                  <IconProtection className="inlay" />
+                  <IconImage Icon={IconProtection} isSmall />
                   &nbsp;{protection}
+                  {!isEquipped && (
+                    <GearComparison
+                      difference={protection - armorEquippedValue.protection}
+                      showingType={ShowingType.Armor}
+                    />
+                  )}
                 </td>
               </tr>
 
               <tr>
-                {isShowingGearDetails ? (
+                {isShowingGearClass ? (
                   <>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 
@@ -62,7 +80,7 @@ export function ArmorName({
 
                             return (
                               <>
-                                <Icon className="inlay" />
+                                <IconImage Icon={Icon} isSmall />
                                 &nbsp;{capitalizeAll(gearClass)}
                               </>
                             );
@@ -83,8 +101,14 @@ export function ArmorName({
                   <td className={CLASS_TABLE_CELL_ITALIC}>Deflection chance:</td>
 
                   <td>
-                    <IconDeflection className="inlay" />
+                    <IconImage Icon={IconDeflection} isSmall />
                     &nbsp;{formatPercentage(deflectionChance)}
+                    {!isEquipped && (
+                      <GearComparison
+                        difference={deflectionChance - armorEquippedValue.deflectionChance}
+                        showingType={ShowingType.Armor}
+                      />
+                    )}
                   </td>
                 </tr>
               )}
@@ -95,14 +119,29 @@ export function ArmorName({
                     <td className={CLASS_TABLE_CELL_ITALIC}>Dodge penalty:</td>
 
                     <td>
-                      <DodgePenaltyDetail staminaCost={staminaCost} />
+                      <DodgePenaltyContents staminaCost={staminaCost} />
+
+                      {!isEquipped && (
+                        <GearComparison
+                          difference={staminaCost - armorEquippedValue.staminaCost}
+                          isDownPositive
+                          showingType={ShowingType.Armor}
+                        />
+                      )}
                     </td>
                   </tr>
                 ) : (
                   <td className="text-end">{LABEL_UNKNOWN}</td>
                 ))}
 
-              <WeightDetail weight={weight} />
+              <WeightDetail
+                comparison={
+                  isEquipped
+                    ? null
+                    : { showingType: ShowingType.Armor, subtrahend: armorEquippedValue.weight }
+                }
+                weight={weight}
+              />
             </DetailsTable>
           </Popover.Body>
         </Popover>

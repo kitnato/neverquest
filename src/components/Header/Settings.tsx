@@ -9,10 +9,10 @@ import {
   allowNSFW,
   autoEquip,
   confirmControlWarnings,
-  isShowingDamagePerSecond,
-  isShowingGearComparisons,
-  isShowingGearLevel,
   lowHealthWarning,
+  showDamagePerSecond,
+  showGearComparison,
+  showGearLevel,
 } from "@neverquest/state/settings";
 
 export function Settings() {
@@ -51,11 +51,11 @@ export function Settings() {
                 label="Auto-equip new gear"
               />
 
-              <SettingsSwitch atom={isShowingDamagePerSecond} label="Show damage per second" />
+              <SettingsSwitch atom={showDamagePerSecond} label="Show damage per second" />
 
-              <SettingsSwitch atom={isShowingGearComparisons} label="Show gear comparisons" />
+              <SettingsSwitch atom={showGearComparison} label="Show gear comparisons" />
 
-              <SettingsSwitch atom={isShowingGearLevel} label="Show gear level" />
+              <SettingsSwitch atom={showGearLevel} label="Show gear level" />
             </Stack>
           </Form>
         </Modal.Body>

@@ -6,6 +6,18 @@
   color: white;
 }
 
+.color-default {
+  color: var(--bs-body-color);
+}
+
+.color-negative {
+  color: var(--bs-danger);
+}
+
+.color-positive {
+  color: var(--bs-success);
+}
+
 .no-transitions .progress-bar {
   transition: none;
 }
@@ -35,7 +47,11 @@ small {
   letter-spacing: 1px;
 }
 
-svg.inlay {
-  vertical-align: text-bottom;
-  width: 16px;
+svg.icon-image {
+  width: 36px;
+
+  &.small {
+    vertical-align: text-bottom;
+    width: 16px;
+  }
 }

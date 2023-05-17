@@ -4,13 +4,18 @@ import type { IconImageProps } from "@neverquest/types/props";
 
 export function IconImage({
   Icon,
+  ignoreColor = false,
   isFlipped = false,
+  isMirrored = false,
   isSmall = false,
-  overlayPlacement = "top",
+  overlayPlacement,
   tooltip,
 }: IconImageProps) {
   const IconStyled = () => (
-    <Icon height={isSmall ? 12 : 36} style={{ transform: `scaleX(${isFlipped ? -1 : 1})` }} />
+    <Icon
+      className={`icon-image ${isSmall ? "small" : ""} ${ignoreColor ? "color-default" : ""}`}
+      style={{ transform: `scaleX(${isMirrored ? -1 : 1}) scaleY(${isFlipped ? -1 : 1})` }}
+    />
   );
 
   if (tooltip === undefined) {

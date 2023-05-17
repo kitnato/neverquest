@@ -1,17 +1,11 @@
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import type { Placement } from "react-bootstrap/esm/types";
 
+import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/constants";
 import type { Trinket } from "@neverquest/types";
 
-export function TrinketName({
-  placement = "top",
-  trinket,
-}: {
-  placement?: Placement;
-  trinket: Trinket;
-}) {
+export function TrinketName({ placement, trinket }: { placement?: Placement; trinket: Trinket }) {
   const { description, name, weight } = trinket;
 
   return (
@@ -24,11 +18,7 @@ export function TrinketName({
             <span>{description}</span>
 
             <DetailsTable>
-              <tr>
-                <td className={CLASS_TABLE_CELL_ITALIC}>Weight:</td>
-
-                <td>{weight}</td>
-              </tr>
+              <WeightDetail weight={weight} />
             </DetailsTable>
           </Popover.Body>
         </Popover>

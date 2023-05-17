@@ -10,7 +10,7 @@ import { ReactComponent as IconBlockChance } from "@neverquest/icons/block-chanc
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconClass } from "@neverquest/icons/gear-class.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
-import { ReactComponent as IconStaminaCost } from "@neverquest/icons/stamina-cost.svg";
+import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { type ShieldClass, ShieldClasses } from "@neverquest/LOCRA/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
@@ -101,14 +101,14 @@ export function ShieldOptions() {
 
         <IconDisplay
           contents={staggerSkillValue ? formatPercentage(staggerChance) : LABEL_UNKNOWN}
-          Icon={staggerSkillValue ? IconStaminaCost : IconUnknown}
+          Icon={staggerSkillValue ? IconStamina : IconUnknown}
           iconProps={{ overlayPlacement: "left" }}
           tooltip={staggerSkillValue ? "Stagger chance" : LABEL_UNKNOWN}
         />
 
         <IconDisplay
           contents={staminaCost}
-          Icon={IconStaminaCost}
+          Icon={IconStamina}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Stamina cost"
         />

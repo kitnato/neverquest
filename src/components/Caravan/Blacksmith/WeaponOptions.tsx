@@ -10,7 +10,7 @@ import { WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconClass } from "@neverquest/icons/gear-class.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
-import { ReactComponent as IconStaminaCost } from "@neverquest/icons/stamina-cost.svg";
+import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { ReactComponent as IconWeaponAbility } from "@neverquest/icons/weapon-ability.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
@@ -129,7 +129,7 @@ export function WeaponOptions() {
 
         <IconDisplay
           contents={staminaCost}
-          Icon={IconStaminaCost}
+          Icon={IconStamina}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Stamina cost"
         />

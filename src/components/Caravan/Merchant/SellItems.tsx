@@ -14,8 +14,8 @@ import { equippedGearIDs, inventory } from "@neverquest/state/inventory";
 import { getSellPrice } from "@neverquest/utilities/getters";
 
 export function SellItems() {
-  const [inventoryValue, setInventory] = useRecoilState(inventory);
   const equippedGearIDValues = useRecoilValue(equippedGearIDs);
+  const [inventoryValue, setInventory] = useRecoilState(inventory);
   const setMerchantInventory = useSetRecoilState(merchantInventory);
 
   const [sellConfirmation, setSellConfirmation] = useState<string | null>(null);

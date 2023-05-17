@@ -23,20 +23,13 @@ export function IconDisplay({
   isSpaced?: boolean;
   tooltip: string;
 }) {
-  const { isFlipped, overlayPlacement } = iconProps ?? {};
-
   return (
     <Stack
       className={isAnimated ? getAnimationClass({ type: "flipInX" }) : ""}
       direction="horizontal"
-      gap={isSpaced ? 5 : 3}
+      gap={isSpaced ? 5 : iconProps?.isSmall ? 1 : 3}
     >
-      <IconImage
-        Icon={Icon}
-        isFlipped={isFlipped}
-        overlayPlacement={overlayPlacement}
-        tooltip={tooltip}
-      />
+      <IconImage Icon={Icon} tooltip={tooltip} {...iconProps} />
 
       {description !== undefined &&
       description !== null &&

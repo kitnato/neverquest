@@ -2,7 +2,9 @@ import { OverlayTrigger, Popover } from "react-bootstrap";
 import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
-import { GearLevelDetail } from "../GearLevelDetail";
+import { IconImage } from "@neverquest/components/IconImage";
+import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
+import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Inventory/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
@@ -11,8 +13,9 @@ import { type WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
 import { ReactComponent as IconDamagePerSecond } from "@neverquest/icons/damage-per-second.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
+import { weapon as weaponEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { isShowingDamagePerSecond } from "@neverquest/state/settings";
+import { showDamagePerSecond } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
 import type { Weapon } from "@neverquest/types";
 import { ShowingType } from "@neverquest/types/enums";
@@ -20,21 +23,28 @@ import {
   capitalizeAll,
   formatMilliseconds,
   formatPercentage,
+  formatToFixed,
 } from "@neverquest/utilities/formatters";
 import { getDamagePerRate } from "@neverquest/utilities/getters";
 
 export function WeaponName({
-  placement = "top",
+  placement,
   weapon,
 }: {
   placement?: Placement;
   weapon: Weapon | typeof WEAPON_NONE;
 }) {
-  const isShowingDamagePerSecondValue = useRecoilValue(isShowingDamagePerSecond);
-  const isShowingGearDetails = useRecoilValue(isShowing(ShowingType.GearDetails));
+  const isShowingGearClass = useRecoilValue(isShowing(ShowingType.GearClass));
+  const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
+  const weaponEquippedValue = useRecoilValue(weaponEquipped);
 
   const { abilityChance, damage, gearClass, level, name, rate, staminaCost, weight } = weapon;
   const { abilityName, IconAbility, IconGearClass, skillType } = WEAPON_SPECIFICATIONS[gearClass];
+  const damagePerSecond = getDamagePerRate({
+    damage,
+    rate,
+  });
+  const isEquipped = JSON.stringify(weaponEquippedValue) === JSON.stringify(weapon);
 
   const skillValue = useRecoilValue(skills(skillType));
 
@@ -46,14 +56,27 @@ export function WeaponName({
 
           <Popover.Body>
             <DetailsTable>
-              <GearLevelDetail level={level} />
+              <GearLevelDetail
+                comparison={
+                  isEquipped
+                    ? null
+                    : { showingType: ShowingType.Weapon, subtrahend: weaponEquippedValue.level }
+                }
+                level={level}
+              />
 
               <tr>
                 <td className={CLASS_TABLE_CELL_ITALIC}>Damage:</td>
 
                 <td>
-                  <IconWeaponDamage className="inlay" />
+                  <IconImage Icon={IconWeaponDamage} isSmall />
                   &nbsp;{damage}
+                  {!isEquipped && (
+                    <GearComparison
+                      difference={damage - weaponEquippedValue.damage}
+                      showingType={ShowingType.Weapon}
+                    />
+                  )}
                 </td>
               </tr>
 
@@ -61,35 +84,61 @@ export function WeaponName({
                 <td className={CLASS_TABLE_CELL_ITALIC}>Attack rate:</td>
 
                 <td>
-                  <IconWeaponAttackRate className="inlay" />
+                  <IconImage Icon={IconWeaponAttackRate} isSmall />
                   &nbsp;{formatMilliseconds(rate)}
+                  {!isEquipped && (
+                    <GearComparison
+                      difference={rate - weaponEquippedValue.rate}
+                      isDownPositive
+                      showingType={ShowingType.Weapon}
+                    />
+                  )}
                 </td>
               </tr>
 
-              {isShowingDamagePerSecondValue && (
+              {showDamagePerSecondValue && (
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Damage per second:</td>
 
                   <td>
-                    <IconDamagePerSecond className="inlay" />
+                    <IconImage Icon={IconDamagePerSecond} isSmall />
                     &nbsp;
-                    {getDamagePerRate({
-                      damage,
-                      rate,
-                    })}
+                    {formatToFixed(damagePerSecond)}
+                    {!isEquipped && (
+                      <GearComparison
+                        difference={
+                          damagePerSecond -
+                          getDamagePerRate({
+                            damage: weaponEquippedValue.damage,
+                            rate: weaponEquippedValue.rate,
+                          })
+                        }
+                        showingType={ShowingType.Weapon}
+                      />
+                    )}
                   </td>
                 </tr>
               )}
 
-              <StaminaCostDetail cost={staminaCost} />
+              <StaminaCostDetail
+                comparison={
+                  isEquipped
+                    ? null
+                    : {
+                        showingType: ShowingType.Weapon,
+                        subtrahend: weaponEquippedValue.staminaCost,
+                      }
+                }
+                cost={staminaCost}
+              />
 
               <tr>
-                {isShowingGearDetails ? (
+                {isShowingGearClass ? (
                   <>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 
                     <td>
-                      <IconGearClass className="inlay" />
+                      <IconImage Icon={IconGearClass} isSmall />
                       &nbsp;{capitalizeAll(gearClass)}
                     </td>
                   </>
@@ -103,8 +152,14 @@ export function WeaponName({
                   <td className={CLASS_TABLE_CELL_ITALIC}>{abilityName} chance:</td>
 
                   <td>
-                    <IconAbility className="inlay" />
+                    <IconImage Icon={IconAbility} isSmall />
                     &nbsp;{formatPercentage(abilityChance)}
+                    {!isEquipped && (
+                      <GearComparison
+                        difference={abilityChance - weaponEquippedValue.abilityChance}
+                        showingType={ShowingType.Weapon}
+                      />
+                    )}
                   </td>
                 </tr>
               ) : (
@@ -113,7 +168,14 @@ export function WeaponName({
                 </tr>
               )}
 
-              <WeightDetail weight={weight} />
+              <WeightDetail
+                comparison={
+                  isEquipped
+                    ? null
+                    : { showingType: ShowingType.Weapon, subtrahend: weaponEquippedValue.weight }
+                }
+                weight={weight}
+              />
             </DetailsTable>
           </Popover.Body>
         </Popover>

@@ -15,7 +15,7 @@ import { CrewMember, CrewStatus, ShowingType } from "@neverquest/types/enums";
 export function CrewHirable({ type }: { type: CrewMember }) {
   const coinsValue = useRecoilValue(coins);
   const [{ hireStatus }, setCrewMember] = useRecoilState(crew(type));
-  const setIsGearDetails = useSetRecoilState(isShowing(ShowingType.GearDetails));
+  const setIsShowingGearClass = useSetRecoilState(isShowing(ShowingType.GearClass));
 
   const transactResources = useTransactResources();
 
@@ -34,7 +34,7 @@ export function CrewHirable({ type }: { type: CrewMember }) {
     transactResources({ coinsDifference: -coinPrice });
 
     if (type === CrewMember.Blacksmith) {
-      setIsGearDetails(true);
+      setIsShowingGearClass(true);
     }
   };
 

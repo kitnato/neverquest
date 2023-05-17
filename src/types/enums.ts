@@ -69,6 +69,12 @@ export enum DeltaType {
   WildernessProgress,
 }
 
+export enum GearType {
+  Armor,
+  Shield,
+  Weapon,
+}
+
 export enum LocationType {
   Caravan,
   Wilderness,
@@ -102,7 +108,10 @@ export enum ShowingType {
   DodgeChanceDetails,
   Essence,
   GameOver,
-  GearDetails,
+  GearClass,
+  GearComparisonArmor,
+  GearComparisonShield,
+  GearComparisonWeapon,
   Loot,
   MonsterDamage,
   Protection,

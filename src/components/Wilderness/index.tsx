@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Monster } from "@neverquest/components/Monster";
 import { LABEL_UNKNOWN } from "@neverquest/data/constants";
-import { ReactComponent as IconLurking } from "@neverquest/icons/monster-lurking.svg";
+import { ReactComponent as IconHiding } from "@neverquest/icons/monster-hiding.svg";
 import { ReactComponent as IconRemains } from "@neverquest/icons/monster-remains.svg";
 import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
 
@@ -38,7 +38,7 @@ export function Wilderness() {
       <Card.Body>
         <IconDisplay
           contents={<span className="fst-italic">The darkness stirs.</span>}
-          Icon={IconLurking}
+          Icon={IconHiding}
           isSpaced
           tooltip={LABEL_UNKNOWN}
         />

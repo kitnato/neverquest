@@ -72,7 +72,7 @@ export function TravelButton() {
             onClick={handleTravel}
             variant="outline-dark"
           >
-            <IconImage Icon={IconTravel} isFlipped={!isWildernessValue} />
+            <IconImage Icon={IconTravel} isMirrored={!isWildernessValue} />
           </Button>
         </span>
       </OverlayTrigger>

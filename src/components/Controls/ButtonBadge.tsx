@@ -1,5 +1,6 @@
 import { Badge } from "react-bootstrap";
 
+import { IconImage } from "@neverquest/components/IconImage";
 import type { SVGIcon } from "@neverquest/types/props";
 
 export function ButtonBadge({ Icon, isShowing }: { Icon: SVGIcon; isShowing: boolean }) {
@@ -9,7 +10,7 @@ export function ButtonBadge({ Icon, isShowing }: { Icon: SVGIcon; isShowing: boo
 
   return (
     <Badge bg="secondary" className="position-absolute" style={{ top: 12 }}>
-      <Icon className="inlay" />
+      <IconImage Icon={Icon} isSmall />
     </Badge>
   );
 }

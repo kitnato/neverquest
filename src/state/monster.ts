@@ -3,6 +3,7 @@ import { atom, selector } from "recoil";
 import { POISON } from "@neverquest/data/constants";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isLevelStarted, level, progress } from "@neverquest/state/encounter";
+import { formatToFixed } from "@neverquest/utilities/formatters";
 import { getDamagePerRate, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 // SELECTORS
@@ -40,10 +41,12 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
 export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (key) =>
   selector({
     get: ({ get }) =>
-      getDamagePerRate({
-        damage: get(monsterDamage),
-        rate: get(monsterAttackRate),
-      }),
+      formatToFixed(
+        getDamagePerRate({
+          damage: get(monsterDamage),
+          rate: get(monsterAttackRate),
+        })
+      ),
     key,
   })
 );

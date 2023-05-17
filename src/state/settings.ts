@@ -28,33 +28,33 @@ export const confirmControlWarnings = withStateKey("confirmControlWarnings", (ke
   })
 );
 
-export const isShowingDamagePerSecond = withStateKey("isShowingDamagePerSecond", (key) =>
-  atom({
-    default: false,
-    effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
-    key,
-  })
-);
-
-export const isShowingGearComparisons = withStateKey("isShowingGearComparisons", (key) =>
-  atom({
-    default: true,
-    effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
-    key,
-  })
-);
-
-export const isShowingGearLevel = withStateKey("isShowingGearLevel", (key) =>
-  atom({
-    default: false,
-    effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
-    key,
-  })
-);
-
 export const lowHealthWarning = withStateKey("lowHealthWarning", (key) =>
   atom({
     default: true,
+    effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
+    key,
+  })
+);
+
+export const showDamagePerSecond = withStateKey("showDamagePerSecond", (key) =>
+  atom({
+    default: false,
+    effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
+    key,
+  })
+);
+
+export const showGearComparison = withStateKey("showGearComparison", (key) =>
+  atom({
+    default: true,
+    effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
+    key,
+  })
+);
+
+export const showGearLevel = withStateKey("showGearLevel", (key) =>
+  atom({
+    default: false,
     effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
     key,
   })

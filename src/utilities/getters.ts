@@ -3,7 +3,6 @@ import type { RecoilValue, Snapshot } from "recoil";
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/data/constants";
 import type { Range } from "@neverquest/types";
 import type { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
-import { formatToFixed } from "@neverquest/utilities/formatters";
 
 export function getAnimationClass({
   isInfinite,
@@ -45,7 +44,7 @@ export function getDamagePerRate({
   const regular = damage * (1 - damageModifierChance);
   const critical = damage * damageModifierChance * damageModifier;
 
-  return formatToFixed((regular + critical) / (rate / 1000));
+  return (regular + critical) / (rate / 1000);
 }
 
 export function getDamagePerTick({

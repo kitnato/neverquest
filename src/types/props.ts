@@ -11,6 +11,7 @@ export type IconImageProps = {
   isFlipped?: boolean;
   isMirrored?: boolean;
   isSmall?: boolean;
+  onClick?: () => void;
   overlayPlacement?: Placement;
   tooltip?: ReactNode;
 };

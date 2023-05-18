@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
-import { ExclamationTriangle } from "react-bootstrap-icons";
 import { useRecoilValue } from "recoil";
 
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
+import { IconImage } from "@neverquest/components/IconImage";
+import { ReactComponent as IconRestart } from "@neverquest/icons/restart.svg";
 import { isGameOver } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
 import { useReset } from "@neverquest/state/SeedContext";
 import { ShowingType } from "@neverquest/types/enums";
-
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Restart() {
@@ -30,7 +30,7 @@ export function Restart() {
         onClick={() => setIsShowingRestart(true)}
         variant="outline-light"
       >
-        <ExclamationTriangle /> Restart
+        <IconImage Icon={IconRestart} isSmall /> Restart
       </Button>
 
       <ConfirmationDialog

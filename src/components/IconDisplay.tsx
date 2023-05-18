@@ -11,8 +11,8 @@ export function IconDisplay({
   description,
   Icon,
   iconProps,
-  isAnimated,
-  isSpaced,
+  isAnimated = false,
+  isSpaced = false,
   tooltip,
 }: {
   contents: ReactNode;

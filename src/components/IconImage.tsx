@@ -8,13 +8,18 @@ export function IconImage({
   isFlipped = false,
   isMirrored = false,
   isSmall = false,
+  onClick,
   overlayPlacement,
   tooltip,
 }: IconImageProps) {
   const IconStyled = () => (
     <Icon
       className={`icon-image ${isSmall ? "small" : ""} ${ignoreColor ? "color-default" : ""}`}
-      style={{ transform: `scaleX(${isMirrored ? -1 : 1}) scaleY(${isFlipped ? -1 : 1})` }}
+      onClick={onClick}
+      style={{
+        cursor: onClick !== undefined ? "pointer" : "inherit",
+        transform: `scaleX(${isMirrored ? -1 : 1}) scaleY(${isFlipped ? -1 : 1})`,
+      }}
     />
   );
 

@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Form, Modal, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
-import { Gear } from "react-bootstrap-icons";
+import { Form, Modal, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { SettingsSwitch } from "@neverquest/components/Header/SettingsSwitch";
+import { IconImage } from "@neverquest/components/IconImage";
+import { ReactComponent as IconSettings } from "@neverquest/icons/settings.svg";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import {
   allowNSFW,
@@ -20,17 +21,21 @@ export function Settings() {
 
   const [isShowing, setIsShowing] = useState(false);
 
-  const settingsLabel = "Settings";
-
   return (
-    <span>
-      <OverlayTrigger overlay={<Tooltip>{settingsLabel}</Tooltip>} placement="bottom">
-        <Gear onClick={() => setIsShowing(true)} style={{ cursor: "pointer" }} />
-      </OverlayTrigger>
+    <>
+      <IconImage
+        Icon={IconSettings}
+        onClick={() => setIsShowing(true)}
+        overlayPlacement="bottom"
+        tooltip="Settings"
+      />
 
       <Modal onHide={() => setIsShowing(false)} show={isShowing}>
         <Modal.Header closeButton>
-          <Modal.Title>Settings</Modal.Title>
+          <Modal.Title>
+            <IconImage Icon={IconSettings} />
+            &nbsp;Settings
+          </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
@@ -60,6 +65,6 @@ export function Settings() {
           </Form>
         </Modal.Body>
       </Modal>
-    </span>
+    </>
   );
 }

@@ -28,9 +28,7 @@ export function GearComparison({
       <>
         &nbsp;
         <span
-          className={
-            isDifferenceEqual ? undefined : `color-${isPositive ? "positive" : "negative"}`
-          }
+          className={isDifferenceEqual ? "text-muted" : isPositive ? "text-success" : "text-danger"}
         >
           <IconImage
             Icon={isDifferenceEqual ? IconEquals : IconIncrease}

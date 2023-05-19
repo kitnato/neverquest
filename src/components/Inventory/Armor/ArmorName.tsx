@@ -11,6 +11,7 @@ import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/constants";
 import { type ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
+import { ReactComponent as IconNone } from "@neverquest/icons/gear-class-none.svg";
 import { ReactComponent as IconProtection } from "@neverquest/icons/protection.svg";
 import { armor as armorEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -87,7 +88,12 @@ export function ArmorName({
                           }
                         }
 
-                        return "None";
+                        return (
+                          <>
+                            <IconImage Icon={IconNone} isSmall />
+                            &nbsp;None
+                          </>
+                        );
                       })()}
                     </td>
                   </>

@@ -7,7 +7,7 @@ export function DodgePenaltyContents({ staminaCost }: { staminaCost: number }) {
       {staminaCost === Infinity ? (
         <>Cannot dodge.</>
       ) : staminaCost === 0 ? (
-        <>None</>
+        <>None.</>
       ) : (
         <>
           {staminaCost} <IconImage Icon={IconStamina} isSmall /> stamina

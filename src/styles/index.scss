@@ -6,18 +6,6 @@
   color: white;
 }
 
-.color-default {
-  color: var(--bs-body-color);
-}
-
-.color-negative {
-  color: var(--bs-danger);
-}
-
-.color-positive {
-  color: var(--bs-success);
-}
-
 .no-transitions .progress-bar {
   transition: none;
 }

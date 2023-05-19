@@ -71,12 +71,12 @@ export function Damage() {
             contents={damagePerSecondValue}
             Icon={IconDamagePerSecond}
             iconProps={{ ignoreColor: true, isSmall: true, overlayPlacement: "bottom" }}
-            tooltip="Damage per second"
+            tooltip="Total damage per second"
           />
         )
       }
       Icon={IconDamage}
-      tooltip="Damage"
+      tooltip="Total damage"
     />
   );
 }

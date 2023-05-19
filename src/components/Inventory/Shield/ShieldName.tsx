@@ -11,6 +11,7 @@ import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/constants";
 import { type SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
 import { ReactComponent as IconBlockChance } from "@neverquest/icons/block-chance.svg";
+import { ReactComponent as IconNone } from "@neverquest/icons/gear-class-none.svg";
 import { ReactComponent as IconStaggerChance } from "@neverquest/icons/shield-stagger.svg";
 import { shield as shieldEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -99,7 +100,12 @@ export function ShieldName({
                           }
                         }
 
-                        return "None";
+                        return (
+                          <>
+                            <IconImage Icon={IconNone} isSmall />
+                            &nbsp;None
+                          </>
+                        );
                       })()}
                     </td>
                   </>

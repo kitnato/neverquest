@@ -14,7 +14,7 @@ export function IconImage({
 }: IconImageProps) {
   const IconStyled = () => (
     <Icon
-      className={`icon-image ${isSmall ? "small" : ""} ${ignoreColor ? "color-default" : ""}`}
+      className={`icon-image ${isSmall ? "small" : ""} ${ignoreColor ? "text-body" : ""}`}
       onClick={onClick}
       style={{
         cursor: onClick !== undefined ? "pointer" : "inherit",

@@ -1,16 +1,15 @@
 import type { DeltaDisplay } from "@neverquest/types/ui";
 
+export const ATTACK_RATE_ATTENUATION = 2500;
+
 export const BLEED = {
   duration: 3000,
   ticks: 10,
 } as const;
 
 export const CLASS_ANIMATE_PREFIX = "animate__";
-
 export const CLASS_ANIMATED = `${CLASS_ANIMATE_PREFIX}animated`;
-
 export const CLASS_FULL_WIDTH_JUSTIFIED = "align-items-center d-flex justify-content-between w-100";
-
 export const CLASS_TABLE_CELL_ITALIC = "fst-italic text-end";
 
 export const DEFAULT_DELTA_DISPLAY: DeltaDisplay = {
@@ -23,13 +22,10 @@ export const ENCUMBRANCE = 3;
 export const GEAR_LEVEL_OFFSET = 3;
 
 const KEY_STORAGE_PREFIX = "nq";
-
 export const KEY_SESSION = `${KEY_STORAGE_PREFIX}-ss`;
-
 export const KEY_SETTINGS = `${KEY_STORAGE_PREFIX}-st`;
 
 export const LABEL_AT_MAXIMUM = "MAX";
-
 export const LABEL_UNKNOWN = "???";
 
 export const POISON = {
@@ -46,9 +42,6 @@ export const POISON = {
 export const RECOVERY_RATE = 1500;
 
 export const REGENERATION_AMOUNT_HEALTH = 4;
-
-export const REGENERATION_RATE_HEALTH = 6000;
-
+export const REGENERATION_RATE_HEALTH = 5000;
 export const REGENERATION_AMOUNT_STAMINA = 1;
-
-export const REGENERATION_RATE_STAMINA = 5000;
+export const REGENERATION_RATE_STAMINA = 4500;

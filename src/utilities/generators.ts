@@ -1,3 +1,4 @@
+import { ATTACK_RATE_ATTENUATION } from "@neverquest/data/constants";
 import {
   ARMOR_SPECIFICATIONS,
   SHIELD_SPECIFICATIONS,
@@ -151,8 +152,8 @@ export function generateWeapon({
       minimum: Math.round(1000 * growthFactor),
     },
     rate: {
-      maximum: 3500 - Math.round(2500 * growthFactor),
-      minimum: 3300 - Math.round(2500 * growthFactor),
+      maximum: 3500 - Math.round(ATTACK_RATE_ATTENUATION * growthFactor),
+      minimum: 3300 - Math.round(ATTACK_RATE_ATTENUATION * growthFactor),
     },
   };
 

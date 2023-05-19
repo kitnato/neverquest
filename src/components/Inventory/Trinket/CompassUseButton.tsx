@@ -3,7 +3,9 @@ import { Button, Form, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { IconImage } from "@neverquest/components/IconImage";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
+import { ReactComponent as IconCompass } from "@neverquest/icons/compass.svg";
 import { ReactComponent as IconNavigation } from "@neverquest/icons/navigation.svg";
 import {
   isLevelCompleted,
@@ -60,7 +62,10 @@ export function CompassUseButton() {
 
       <Modal onHide={() => setIsShowing(false)} show={isShowing}>
         <Modal.Header closeButton>
-          <Modal.Title>Travel between wildernesses</Modal.Title>
+          <Modal.Title>
+            <IconImage Icon={IconCompass} />
+            &nbsp;Travel between wildernesses
+          </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>

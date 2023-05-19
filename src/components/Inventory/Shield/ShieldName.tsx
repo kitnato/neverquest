@@ -55,7 +55,7 @@ export function ShieldName({
                 <td className={CLASS_TABLE_CELL_ITALIC}>Block chance:</td>
 
                 <td>
-                  <IconImage Icon={IconBlock} isSmall />
+                  <IconImage Icon={IconBlock} size="tiny" />
                   &nbsp;{formatPercentage(block)}
                   {!isEquipped && (
                     <GearComparison
@@ -93,7 +93,7 @@ export function ShieldName({
 
                             return (
                               <>
-                                <IconImage Icon={Icon} isSmall />
+                                <IconImage Icon={Icon} size="tiny" />
                                 &nbsp;{capitalizeAll(gearClass)}
                               </>
                             );
@@ -102,7 +102,7 @@ export function ShieldName({
 
                         return (
                           <>
-                            <IconImage Icon={IconNone} isSmall />
+                            <IconImage Icon={IconNone} size="tiny" />
                             &nbsp;None
                           </>
                         );
@@ -120,7 +120,7 @@ export function ShieldName({
                     <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance:</td>
 
                     <td>
-                      <IconImage Icon={IconStagger} isSmall />
+                      <IconImage Icon={IconStagger} size="tiny" />
                       &nbsp;{formatPercentage(stagger)}
                       {!isEquipped && (
                         <GearComparison

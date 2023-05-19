@@ -69,7 +69,7 @@ export function WeaponName({
                 <td className={CLASS_TABLE_CELL_ITALIC}>Damage:</td>
 
                 <td>
-                  <IconImage Icon={IconWeaponDamage} isSmall />
+                  <IconImage Icon={IconWeaponDamage} size="tiny" />
                   &nbsp;{damage}
                   {!isEquipped && (
                     <GearComparison
@@ -84,7 +84,7 @@ export function WeaponName({
                 <td className={CLASS_TABLE_CELL_ITALIC}>Attack rate:</td>
 
                 <td>
-                  <IconImage Icon={IconWeaponAttackRate} isSmall />
+                  <IconImage Icon={IconWeaponAttackRate} size="tiny" />
                   &nbsp;{formatMilliseconds(rate)}
                   {!isEquipped && (
                     <GearComparison
@@ -101,7 +101,7 @@ export function WeaponName({
                   <td className={CLASS_TABLE_CELL_ITALIC}>Damage per second:</td>
 
                   <td>
-                    <IconImage Icon={IconWeaponDamagePerSecond} isSmall />
+                    <IconImage Icon={IconWeaponDamagePerSecond} size="tiny" />
                     &nbsp;
                     {formatToFixed(damagePerSecond)}
                     {!isEquipped && (
@@ -138,7 +138,7 @@ export function WeaponName({
                     <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 
                     <td>
-                      <IconImage Icon={IconGearClass} isSmall />
+                      <IconImage Icon={IconGearClass} size="tiny" />
                       &nbsp;{capitalizeAll(gearClass)}
                     </td>
                   </>
@@ -153,7 +153,7 @@ export function WeaponName({
                     <td className={CLASS_TABLE_CELL_ITALIC}>{abilityName} chance:</td>
 
                     <td>
-                      <IconImage Icon={IconAbility} isSmall />
+                      <IconImage Icon={IconAbility} size="tiny" />
                       &nbsp;{formatPercentage(abilityChance)}
                       {!isEquipped && (
                         <GearComparison

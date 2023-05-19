@@ -23,7 +23,7 @@ export function WeightDetail({
           <td className={CLASS_TABLE_CELL_ITALIC}>Weight:</td>
 
           <td>
-            <IconImage Icon={IconEncumbrance} isSmall />
+            <IconImage Icon={IconEncumbrance} size="tiny" />
             &nbsp;{weight}
             {comparison !== null && (
               <GearComparison

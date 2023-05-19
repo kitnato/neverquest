@@ -24,7 +24,7 @@ export function StaminaCostDetail({
           <td className={CLASS_TABLE_CELL_ITALIC}>Stamina cost:</td>
 
           <td>
-            <IconImage Icon={IconStamina} isSmall />
+            <IconImage Icon={IconStamina} size="tiny" />
             &nbsp;{cost}
             {comparison !== null && (
               <GearComparison

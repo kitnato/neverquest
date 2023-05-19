@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Modal, Stack } from "react-bootstrap";
+import { Button, Form, Modal, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { SettingsSwitch } from "@neverquest/components/Header/SettingsSwitch";
@@ -23,12 +23,11 @@ export function Settings() {
 
   return (
     <>
-      <IconImage
-        Icon={IconSettings}
-        onClick={() => setIsShowing(true)}
-        overlayPlacement="bottom"
-        tooltip="Settings"
-      />
+      <OverlayTrigger overlay={<Tooltip>Settings</Tooltip>} placement="bottom">
+        <Button onClick={() => setIsShowing(true)} variant="outline-light">
+          <IconImage Icon={IconSettings} size="small" />
+        </Button>
+      </OverlayTrigger>
 
       <Modal onHide={() => setIsShowing(false)} show={isShowing}>
         <Modal.Header closeButton>

@@ -7,14 +7,14 @@ export function IconImage({
   ignoreColor = false,
   isFlipped = false,
   isMirrored = false,
-  isSmall = false,
   onClick,
   overlayPlacement,
+  size,
   tooltip,
 }: IconImageProps) {
   const IconStyled = () => (
     <Icon
-      className={`icon-image ${isSmall ? "small" : ""} ${ignoreColor ? "text-body" : ""}`}
+      className={`icon-image ${size ?? ""} ${ignoreColor ? "text-body" : ""}`}
       onClick={onClick}
       style={{
         cursor: onClick !== undefined ? "pointer" : "inherit",

@@ -38,8 +38,12 @@ small {
 svg.icon-image {
   width: 36px;
 
-  &.small {
+  &.small, &.tiny {
     vertical-align: text-bottom;
+    width: 24px;
+  }
+
+  &.tiny {
     width: 16px;
   }
 }

@@ -1,5 +1,8 @@
 import { Button, Modal } from "react-bootstrap";
 
+import { IconImage } from "@neverquest/components/IconImage";
+import { ReactComponent as IconWarning } from "@neverquest/icons/warning.svg";
+
 export function ConfirmationDialog({
   confirmationLabel,
   message,
@@ -23,7 +26,10 @@ export function ConfirmationDialog({
   return (
     <Modal backdrop="static" onHide={setHide} show={show}>
       <Modal.Header closeButton>
-        <Modal.Title>{title}</Modal.Title>
+        <Modal.Title>
+          <IconImage Icon={IconWarning} />
+          &nbsp;{title}
+        </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>{message}</Modal.Body>

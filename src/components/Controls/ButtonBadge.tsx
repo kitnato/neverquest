@@ -10,7 +10,7 @@ export function ButtonBadge({ Icon, isShowing }: { Icon: SVGIcon; isShowing: boo
 
   return (
     <Badge bg="secondary" className="position-absolute" style={{ top: 12 }}>
-      <IconImage Icon={Icon} isSmall />
+      <IconImage Icon={Icon} size="tiny" />
     </Badge>
   );
 }

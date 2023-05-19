@@ -56,7 +56,7 @@ export function ArmorName({
                 <td className={CLASS_TABLE_CELL_ITALIC}>Protection:</td>
 
                 <td>
-                  <IconImage Icon={IconProtection} isSmall />
+                  <IconImage Icon={IconProtection} size="tiny" />
                   &nbsp;{protection}
                   {!isEquipped && (
                     <GearComparison
@@ -82,7 +82,7 @@ export function ArmorName({
 
                             return (
                               <>
-                                <IconImage Icon={Icon} isSmall />
+                                <IconImage Icon={Icon} size="tiny" />
                                 &nbsp;{capitalizeAll(gearClass)}
                               </>
                             );
@@ -91,7 +91,7 @@ export function ArmorName({
 
                         return (
                           <>
-                            <IconImage Icon={IconNone} isSmall />
+                            <IconImage Icon={IconNone} size="tiny" />
                             &nbsp;None
                           </>
                         );
@@ -110,7 +110,7 @@ export function ArmorName({
                       <td className={CLASS_TABLE_CELL_ITALIC}>Deflection chance:</td>
 
                       <td>
-                        <IconImage Icon={IconDeflection} isSmall />
+                        <IconImage Icon={IconDeflection} size="tiny" />
                         &nbsp;{formatPercentage(deflection)}
                         {!isEquipped && (
                           <GearComparison

@@ -25,7 +25,7 @@ export function GearLevelDetail({
       <td className={CLASS_TABLE_CELL_ITALIC}>Gear level:</td>
 
       <td>
-        <IconImage Icon={IconGearLevel} isSmall />
+        <IconImage Icon={IconGearLevel} size="tiny" />
         &nbsp;{level}
         {comparison !== null && (
           <GearComparison

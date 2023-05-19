@@ -26,7 +26,7 @@ export function MonsterDamage() {
           <IconDisplay
             contents={monsterDamagePerSecondValue}
             Icon={IconDamagePerSecond}
-            iconProps={{ ignoreColor: true, isSmall: true, overlayPlacement: "bottom" }}
+            iconProps={{ ignoreColor: true, overlayPlacement: "bottom", size: "tiny" }}
             tooltip="Damage per second"
           />
         )

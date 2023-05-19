@@ -10,12 +10,12 @@ export function Header() {
     <Navbar bg="dark" className="mb-4" collapseOnSelect expand="lg" variant="dark">
       <Container>
         <Navbar.Brand>
-          <Stack direction="horizontal" gap={5}>
+          <Stack direction="horizontal" gap={3}>
             <span>neverquest</span>
 
-            <Settings />
-
-            <About />
+            <Badge bg="light" text="dark">
+              v{version}
+            </Badge>
           </Stack>
         </Navbar.Brand>
 
@@ -23,9 +23,9 @@ export function Header() {
 
         <Nav>
           <Stack direction="horizontal" gap={3}>
-            <Badge bg="light" text="dark">
-              v{version}
-            </Badge>
+            <About />
+
+            <Settings />
 
             <Restart />
           </Stack>

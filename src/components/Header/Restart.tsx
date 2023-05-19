@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
@@ -21,17 +21,19 @@ export function Restart() {
 
   return (
     <>
-      <Button
-        className={
-          isGameOverValue && !isShowingGameOver && !isShowingRestart
-            ? getAnimationClass({ isInfinite: true, type: "pulse" })
-            : undefined
-        }
-        onClick={() => setIsShowingRestart(true)}
-        variant="outline-light"
-      >
-        <IconImage Icon={IconRestart} isSmall /> Restart
-      </Button>
+      <OverlayTrigger overlay={<Tooltip>Restart</Tooltip>} placement="bottom">
+        <Button
+          className={
+            isGameOverValue && !isShowingGameOver && !isShowingRestart
+              ? getAnimationClass({ isInfinite: true, type: "pulse" })
+              : undefined
+          }
+          onClick={() => setIsShowingRestart(true)}
+          variant="outline-light"
+        >
+          <IconImage Icon={IconRestart} size="small" />
+        </Button>
+      </OverlayTrigger>
 
       <ConfirmationDialog
         confirmationLabel="Restart"

@@ -54,7 +54,7 @@ export function Attribute({ type }: { type: AttributeType }) {
                   <Tooltip>
                     <div>
                       Cost:&nbsp;{attributeCostValue}&nbsp;
-                      <IconImage Icon={IconEssence} isSmall />
+                      <IconImage Icon={IconEssence} size="tiny" />
                       &nbsp;essence
                     </div>
                     {isLevelStartedValue && !isLevelCompletedValue && (

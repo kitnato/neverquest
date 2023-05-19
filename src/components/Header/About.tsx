@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal } from "react-bootstrap";
+import { Button, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { LABEL_UNKNOWN } from "@neverquest/data/constants";
@@ -10,12 +10,11 @@ export function About() {
 
   return (
     <>
-      <IconImage
-        Icon={IconAbout}
-        onClick={() => setIsShowing(true)}
-        overlayPlacement="bottom"
-        tooltip="About"
-      />
+      <OverlayTrigger overlay={<Tooltip>About</Tooltip>} placement="bottom">
+        <Button onClick={() => setIsShowing(true)} variant="outline-light">
+          <IconImage Icon={IconAbout} size="small" />
+        </Button>
+      </OverlayTrigger>
 
       <Modal onHide={() => setIsShowing(false)} show={isShowing}>
         <Modal.Header closeButton>

@@ -48,22 +48,24 @@ export const MERCHANT_OFFERS: (
       modality: "melee",
       type: "weapon",
     },
+  ],
+  [
     {
       gearClass: "blunt",
       modality: "melee",
       type: "weapon",
     },
-    {
-      gearClass: "reinforced",
-      type: "armor",
-    },
+  ],
+  [
     {
       gearClass: "medium",
       type: "shield",
     },
+  ],
+  [
     {
-      gearClass: "tower",
-      type: "shield",
+      gearClass: "reinforced",
+      type: "armor",
     },
   ],
 ];

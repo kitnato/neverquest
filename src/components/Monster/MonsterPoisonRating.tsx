@@ -31,7 +31,7 @@ export function MonsterPoisonRating() {
         <OverlayTrigger
           overlay={
             <Popover>
-              <Popover.Header>Poison rating details</Popover.Header>
+              <Popover.Header className="text-center">Poison rating details</Popover.Header>
 
               <Popover.Body>
                 <DetailsTable>

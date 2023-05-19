@@ -24,7 +24,7 @@ export function useToggleEquipGear() {
         };
 
         if (isArmor(item)) {
-          const { deflectionChance, staminaCost } = item;
+          const { staminaCost } = item;
 
           if (!get(isShowing(ShowingType.Armor))) {
             set(isShowing(ShowingType.Armor), true);
@@ -32,10 +32,6 @@ export function useToggleEquipGear() {
 
           if (!get(isShowing(ShowingType.Protection))) {
             set(isShowing(ShowingType.Protection), true);
-          }
-
-          if (!get(isShowing(ShowingType.Deflection)) && deflectionChance) {
-            set(isShowing(ShowingType.Deflection), true);
           }
 
           if (!get(isShowing(ShowingType.DodgeChanceDetails)) && staminaCost) {

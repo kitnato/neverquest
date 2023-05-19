@@ -35,16 +35,6 @@ import type { DeltaDisplay } from "@neverquest/types/ui";
 import { animateElement } from "@neverquest/utilities/animateElement";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-/**
- * If dodged, no other actions taken (all damage negated)
- * If health damage (protection minus monster damage) is 0 or less, no other actions taken
- * Check for and apply monster poisoning.
- * If parrying occurs, check stamina cost, and continue
- * If not parried and blocking occurs, check stamina cost, and continue
- * If blocking occurs, check if monster is staggered
- * If not parried and not blocked, set recovery, and continue
- * Process health & stamina deltas
- */
 export function useDefend() {
   const changeHealth = useChangeHealth();
   const changeMonsterHealth = useChangeMonsterHealth();
@@ -68,6 +58,7 @@ export function useDefend() {
 
         const hasDodged = get(skills(SkillType.Dodge)) && Math.random() <= get(dodgeChanceTotal);
 
+        // If attack is dodged, nothing else happens (all damage is negated).
         if (hasDodged) {
           if (get(canDodge)) {
             set(deltas(DeltaType.Health), {
@@ -84,6 +75,7 @@ export function useDefend() {
           }
         }
 
+        // If health damage (protection minus monster damage) is 0 or less, nothing else happens.
         const monsterDamageValue = get(monsterDamage);
         let healthDamage = (() => {
           const damage = get(protection) - monsterDamageValue;
@@ -105,6 +97,7 @@ export function useDefend() {
 
         const hasParried = get(skills(SkillType.Parry)) && Math.random() <= get(parryChance);
 
+        // If parrying occurs, check & apply stamina cost.
         if (hasParried) {
           const { staminaCost } = get(weapon);
 
@@ -162,6 +155,7 @@ export function useDefend() {
 
         const hasBlocked = Math.random() <= get(blockChance);
 
+        // If not parried and blocking occurs, check & apply stamina cost.
         if (hasBlocked && !hasParried) {
           const { staminaCost } = get(shield);
 
@@ -193,6 +187,7 @@ export function useDefend() {
               changeStamina({ value: -staminaCost });
             }
 
+            // Blocking has occurred, check if monster is staggered.
             if (hasStaggered) {
               set(monsterStaggeredDuration, get(staggerDuration));
             }
@@ -210,6 +205,7 @@ export function useDefend() {
           }
         }
 
+        // If neither parried nor blocked, show damage.
         if (!hasBlocked && !hasParried) {
           if (get(protection) > 0) {
             deltaHealth = [
@@ -228,10 +224,7 @@ export function useDefend() {
         const armorsSkill = get(skills(SkillType.Armors));
         const hasSkippedRecovery = armorsSkill && Math.random() <= get(skipRecoveryChance);
 
-        if (armorsSkill) {
-          increaseMastery(MasteryType.SkipRecoveryChance);
-        }
-
+        // If Tenacity isn't available or hasn't been triggered, activate recovery.
         if (!hasSkippedRecovery) {
           if (!get(isShowing(ShowingType.Recovery))) {
             set(isShowing(ShowingType.Recovery), true);
@@ -240,8 +233,14 @@ export function useDefend() {
           set(recoveryDuration, get(recoveryRate));
         }
 
+        // Increment Armorcraft mastery (if applicable).
+        if (armorsSkill) {
+          increaseMastery(MasteryType.SkipRecoveryChance);
+        }
+
         const isPoisoned = Math.random() <= get(monsterPoisonChance);
 
+        // If poisoning occurs, check if it can and has been deflected, otherwise apply poison - if there is an active poisoning, increment blight instead.
         if (isPoisoned) {
           const hasDeflected =
             get(skills(SkillType.Armors)) && Math.random() <= get(deflectionChance);
@@ -270,6 +269,7 @@ export function useDefend() {
           }
         }
 
+        // The attack went through, apply damage and any stamina costs.
         changeHealth({ delta: deltaHealth, value: healthDamage });
 
         if (deltaStamina.length > 0) {

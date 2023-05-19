@@ -31,8 +31,8 @@ export function ArmorOptions() {
   const [armorClass, setArmorClass] = useState<ArmorClass>("hide");
   const [armorLevel, setArmorLevel] = useState(levelValue);
 
-  const skillArmorsValue = useRecoilValue(skills(SkillType.Armors));
-  const skillDodgeValue = useRecoilValue(skills(SkillType.Dodge));
+  const skillArmors = useRecoilValue(skills(SkillType.Armors));
+  const skillDodge = useRecoilValue(skills(SkillType.Dodge));
 
   const armor = generateArmor({
     allowNSFW: allowNSFWValue,
@@ -101,23 +101,27 @@ export function ArmorOptions() {
 
         {deflectionChance > 0 && (
           <IconDisplay
-            contents={`${formatPercentage(ranges.deflectionChance.minimum)}-${formatPercentage(
-              ranges.deflectionChance.maximum
-            )}`}
-            Icon={IconDeflection}
+            contents={
+              skillArmors
+                ? `${formatPercentage(ranges.deflectionChance.minimum)}-${formatPercentage(
+                    ranges.deflectionChance.maximum
+                  )}`
+                : LABEL_UNKNOWN
+            }
+            Icon={skillArmors ? IconDeflection : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
-            tooltip="Deflection chance"
+            tooltip={skillArmors ? "Deflection chance" : LABEL_UNKNOWN}
           />
         )}
 
         {staminaCost > 0 && (
           <IconDisplay
             contents={
-              skillDodgeValue ? <DodgePenaltyContents staminaCost={staminaCost} /> : LABEL_UNKNOWN
+              skillDodge ? <DodgePenaltyContents staminaCost={staminaCost} /> : LABEL_UNKNOWN
             }
-            Icon={skillDodgeValue ? IconDodgePenalty : IconUnknown}
+            Icon={skillDodge ? IconDodgePenalty : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
-            tooltip={skillDodgeValue ? "Dodge penalty" : LABEL_UNKNOWN}
+            tooltip={skillDodge ? "Dodge penalty" : LABEL_UNKNOWN}
           />
         )}
 
@@ -131,7 +135,7 @@ export function ArmorOptions() {
 
       <hr />
 
-      {!skillArmorsValue && armorClass === "plate" ? (
+      {!skillArmors && armorClass === "plate" ? (
         <span className="text-center">Cannot use without training.</span>
       ) : craftedArmor === null ? (
         <CraftGear gear={armor} />

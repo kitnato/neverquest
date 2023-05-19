@@ -6,7 +6,7 @@ import type { SVGIcon } from "@neverquest/types/props";
 
 export const TRINKET_COMPASS: Readonly<Trinket> = {
   coinPrice: 20,
-  description: "Navigate the wilderness to return to previous locations.",
+  description: "Navigate the wilderness to hunt in previous locations.",
   name: "Compass",
   weight: 1,
 } as const;

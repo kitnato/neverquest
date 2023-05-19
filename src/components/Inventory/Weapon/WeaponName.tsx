@@ -147,26 +147,26 @@ export function WeaponName({
                 )}
               </tr>
 
-              {skillValue ? (
-                <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>{abilityName} chance:</td>
+              <tr>
+                {skillValue ? (
+                  <>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>{abilityName} chance:</td>
 
-                  <td>
-                    <IconImage Icon={IconAbility} isSmall />
-                    &nbsp;{formatPercentage(abilityChance)}
-                    {!isEquipped && (
-                      <GearComparison
-                        difference={abilityChance - weaponEquippedValue.abilityChance}
-                        showingType={ShowingType.Weapon}
-                      />
-                    )}
-                  </td>
-                </tr>
-              ) : (
-                <tr>
+                    <td>
+                      <IconImage Icon={IconAbility} isSmall />
+                      &nbsp;{formatPercentage(abilityChance)}
+                      {!isEquipped && (
+                        <GearComparison
+                          difference={abilityChance - weaponEquippedValue.abilityChance}
+                          showingType={ShowingType.Weapon}
+                        />
+                      )}
+                    </td>
+                  </>
+                ) : (
                   <td className="text-end">{LABEL_UNKNOWN}</td>
-                </tr>
-              )}
+                )}
+              </tr>
 
               <WeightDetail
                 comparison={

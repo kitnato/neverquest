@@ -42,7 +42,7 @@ export function Recovery() {
         <OverlayTrigger
           overlay={
             <Popover>
-              <Popover.Header>Recovery details</Popover.Header>
+              <Popover.Header className="text-center">Recovery details</Popover.Header>
 
               <Popover.Body>
                 <DetailsTable>

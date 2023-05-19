@@ -28,8 +28,9 @@ export function ArmorName({
   placement?: Placement;
 }) {
   const armorEquippedValue = useRecoilValue(armorEquipped);
-  const dodgeSkill = useRecoilValue(skills(SkillType.Dodge));
   const isShowingGearClass = useRecoilValue(isShowing(ShowingType.GearClass));
+  const skillArmors = useRecoilValue(skills(SkillType.Armors));
+  const skillDodge = useRecoilValue(skills(SkillType.Dodge));
 
   const { deflectionChance, level, name, protection, staminaCost, weight } = armor;
   const isEquipped = JSON.stringify(armorEquippedValue) === JSON.stringify(armor);
@@ -104,41 +105,50 @@ export function ArmorName({
 
               {deflectionChance > 0 && (
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Deflection chance:</td>
+                  {skillArmors ? (
+                    <>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Deflection chance:</td>
 
-                  <td>
-                    <IconImage Icon={IconDeflection} isSmall />
-                    &nbsp;{formatPercentage(deflectionChance)}
-                    {!isEquipped && (
-                      <GearComparison
-                        difference={deflectionChance - armorEquippedValue.deflectionChance}
-                        showingType={ShowingType.Armor}
-                      />
-                    )}
-                  </td>
+                      <td>
+                        <IconImage Icon={IconDeflection} isSmall />
+                        &nbsp;{formatPercentage(deflectionChance)}
+                        {!isEquipped && (
+                          <GearComparison
+                            difference={deflectionChance - armorEquippedValue.deflectionChance}
+                            showingType={ShowingType.Armor}
+                          />
+                        )}
+                      </td>
+                    </>
+                  ) : (
+                    <td className="text-end">{LABEL_UNKNOWN}</td>
+                  )}
                 </tr>
               )}
 
-              {staminaCost > 0 &&
-                (dodgeSkill ? (
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Dodge penalty:</td>
+              {staminaCost > 0 && (
+                <tr>
+                  {skillDodge ? (
+                    <>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Dodge penalty:</td>
 
-                    <td>
-                      <DodgePenaltyContents staminaCost={staminaCost} />
+                      <td>
+                        <DodgePenaltyContents staminaCost={staminaCost} />
 
-                      {!isEquipped && (
-                        <GearComparison
-                          difference={staminaCost - armorEquippedValue.staminaCost}
-                          isDownPositive
-                          showingType={ShowingType.Armor}
-                        />
-                      )}
-                    </td>
-                  </tr>
-                ) : (
-                  <td className="text-end">{LABEL_UNKNOWN}</td>
-                ))}
+                        {!isEquipped && (
+                          <GearComparison
+                            difference={staminaCost - armorEquippedValue.staminaCost}
+                            isDownPositive
+                            showingType={ShowingType.Armor}
+                          />
+                        )}
+                      </td>
+                    </>
+                  ) : (
+                    <td className="text-end">{LABEL_UNKNOWN}</td>
+                  )}
+                </tr>
+              )}
 
               <WeightDetail
                 comparison={

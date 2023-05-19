@@ -49,7 +49,7 @@ export function BleedRating() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header>Bleed rating details</Popover.Header>
+                <Popover.Header className="text-center">Bleed rating details</Popover.Header>
 
                 <Popover.Body>
                   <DetailsTable>

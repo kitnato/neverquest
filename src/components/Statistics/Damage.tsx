@@ -38,7 +38,7 @@ export function Damage() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header>Damage details</Popover.Header>
+                <Popover.Header className="text-center">Damage details</Popover.Header>
 
                 <Popover.Body>
                   <DetailsTable>

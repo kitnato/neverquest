@@ -74,7 +74,7 @@ export function AttackButton() {
         overlay={
           showWarning ? (
             <Popover>
-              <Popover.Header>
+              <Popover.Header className="text-center">
                 <strong>Low health</strong>
               </Popover.Header>
 

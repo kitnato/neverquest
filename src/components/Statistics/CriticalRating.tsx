@@ -37,7 +37,7 @@ export function CriticalRating() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header>Critical rating details</Popover.Header>
+                <Popover.Header className="text-center">Critical rating details</Popover.Header>
 
                 <Popover.Body>
                   <DetailsTable>

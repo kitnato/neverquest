@@ -43,7 +43,7 @@ export function DodgeChance() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header>Dodge details</Popover.Header>
+                <Popover.Header className="text-center">Dodge details</Popover.Header>
 
                 <Popover.Body>
                   <DetailsTable>

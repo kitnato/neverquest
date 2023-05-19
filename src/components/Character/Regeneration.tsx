@@ -46,7 +46,7 @@ export function Regeneration({ type }: { type: ReserveType.Health | ReserveType.
       <OverlayTrigger
         overlay={
           <Popover>
-            <Popover.Header>{title} regeneration details</Popover.Header>
+            <Popover.Header className="text-center">{title} regeneration details</Popover.Header>
 
             <Popover.Body>
               <DetailsTable>

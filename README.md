@@ -254,6 +254,8 @@ An attack might deal extra damage, which is determined by the [chance](#critical
 
 The chance for the character to completely ignore all effects of an incoming monster's spell (`TODO`) and/or [ailment](#ailments).
 
+Deflecting an ailment is only possible after acquiring the [Armorcraft](#armorcraft) skill.
+
 #### Dodge
 
 Dodging an incoming attack negates all damage, but doesn't cost any stamina the way [blocking](#block) does, but only if no [armor](#armor) or [hide](#hide-armor) armor is worn. [Reinforced](#reinforced-armor) armor incurs a stamina cost for dodging, and [plate](#plate-armor) removes the ability to dodge altogether.
@@ -581,7 +583,7 @@ Progress is gained by using [blunt weapons](#blunt-weapon). Each rank increases 
 
 ### Stability
 
-Required skill: [Shieldcraft](#traumatology).
+Required skill: [Shieldcraft](#shieldcraft).
 
 Progress is gained by successfully [blocking](#block) with [shields](#shields). Each rank increases the chance that [stamina](#stamina) is not consumed when blocking.
 
@@ -593,7 +595,7 @@ Progress is gained by being struck while wearing [armor](#armor). Each rank incr
 
 ## Skills
 
-Skills are acquired from caravan crew and can either be activated or passive.
+Skills are acquired from caravan crew and can either be activated `TODO` or passive.
 
 ### Activated skills
 
@@ -631,7 +633,7 @@ Unlocks [bleed](#bleed) when using [piercing](#piercing-weapon) weapons. Also un
 
 ##### Armorcraft
 
-Allows the use and knowledge of [plate](#plate-armor) armor. Also unlocks the [Tenacity](#tenacity) mastery.
+Allows the use and knowledge of [plate](#plate-armor) armor. Also unlocks the [Tenacity](#tenacity) mastery and the [deflection](#deflection) ability.
 
 ##### Assassination
 

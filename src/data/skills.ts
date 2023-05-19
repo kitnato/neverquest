@@ -6,7 +6,7 @@ import { SkillType } from "@neverquest/types/enums";
 export const SKILLS: Readonly<Record<SkillType, Skill>> = {
   [SkillType.Armors]: {
     coinPrice: 65,
-    description: "Unlocks the use of reinforced and plate armors.",
+    description: "Unlocks the use of plate armor & deflection.",
     Icon: IconPlaceholder,
     name: "Armorcraft",
     requiredLevel: 45,
@@ -48,7 +48,7 @@ export const SKILLS: Readonly<Record<SkillType, Skill>> = {
   },
   [SkillType.Shields]: {
     coinPrice: 55,
-    description: "Unlocks the use of medium and tower shields.",
+    description: "Unlocks the use of tower shields.",
     Icon: IconPlaceholder,
     name: "Shieldcraft",
     requiredLevel: 30,

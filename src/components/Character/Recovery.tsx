@@ -11,20 +11,20 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconRecovery } from "@neverquest/icons/recovery.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
-import { recoveryRate, skipRecoveryChance } from "@neverquest/state/statistics";
+import { recoveryRate, tenacity } from "@neverquest/state/statistics";
 import { AttributeType, DeltaText, DeltaType, ShowingType } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Recovery() {
   const isShowingRecovery = useRecoilValue(isShowing(ShowingType.Recovery));
-  const skipRecoveryChanceValue = useRecoilValue(skipRecoveryChance);
+  const tenacityValue = useRecoilValue(tenacity);
   const recoveryRateValue = useRecoilValue(recoveryRate);
 
   const deltaRecoveryRate = deltas(DeltaType.RecoveryRate);
 
   const { name } = ATTRIBUTES[AttributeType.RecoveryRate];
   const showRecoveryRate = recoveryRateValue !== RECOVERY_RATE;
-  const showSkipRecovery = skipRecoveryChanceValue > 0;
+  const showTenacity = tenacityValue > 0;
 
   useDeltaText({
     atomDelta: deltaRecoveryRate,
@@ -65,11 +65,11 @@ export function Recovery() {
                   </tr>
 
                   <tr>
-                    {showSkipRecovery ? (
+                    {showTenacity ? (
                       <>
                         <td className={CLASS_TABLE_CELL_ITALIC}>Chance to skip recovery:</td>
 
-                        <td>{formatPercentage(skipRecoveryChanceValue)}</td>
+                        <td>{formatPercentage(tenacityValue)}</td>
                       </>
                     ) : (
                       <td className="text-end">{LABEL_UNKNOWN}</td>
@@ -79,7 +79,7 @@ export function Recovery() {
               </Popover.Body>
             </Popover>
           }
-          trigger={showRecoveryRate || showSkipRecovery ? ["hover", "focus"] : []}
+          trigger={showRecoveryRate || showTenacity ? ["hover", "focus"] : []}
         >
           <Stack className="w-100" direction="horizontal">
             <RecoveryMeter />

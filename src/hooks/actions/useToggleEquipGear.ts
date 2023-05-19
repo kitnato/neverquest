@@ -34,8 +34,8 @@ export function useToggleEquipGear() {
             set(isShowing(ShowingType.Protection), true);
           }
 
-          if (!get(isShowing(ShowingType.DodgeChanceDetails)) && staminaCost) {
-            set(isShowing(ShowingType.DodgeChanceDetails), true);
+          if (!get(isShowing(ShowingType.DodgeDetails)) && staminaCost) {
+            set(isShowing(ShowingType.DodgeDetails), true);
           }
 
           if (!get(isShowing(ShowingType.GearComparisonArmor))) {
@@ -50,8 +50,8 @@ export function useToggleEquipGear() {
             set(isShowing(ShowingType.Shield), true);
           }
 
-          if (!get(isShowing(ShowingType.BlockChance))) {
-            set(isShowing(ShowingType.BlockChance), true);
+          if (!get(isShowing(ShowingType.Block))) {
+            set(isShowing(ShowingType.Block), true);
           }
 
           if (!get(isShowing(ShowingType.GearComparisonShield))) {

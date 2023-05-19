@@ -12,23 +12,23 @@ import { isShowing } from "@neverquest/state/isShowing";
 import {
   monsterDamage,
   monsterElement,
-  monsterPoisonChance,
+  monsterPoison,
   monsterStaggeredDuration,
 } from "@neverquest/state/monster";
 import { canAttackOrParry, canBlock, canDodge, staminaDebuff } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
 import {
-  blockChance,
-  deflectionChance,
-  dodgeChanceTotal,
-  freeBlockChance,
+  block,
+  deflection,
+  dodgeTotal,
+  parry,
   parryAbsorption,
-  parryChance,
   parryDamage,
   protection,
   recoveryRate,
-  skipRecoveryChance,
+  stability,
   staggerDuration,
+  tenacity,
 } from "@neverquest/state/statistics";
 import { DeltaType, MasteryType, ShowingType, SkillType } from "@neverquest/types/enums";
 import type { DeltaDisplay } from "@neverquest/types/ui";
@@ -56,7 +56,7 @@ export function useDefend() {
           type: "headShake",
         });
 
-        const hasDodged = get(skills(SkillType.Dodge)) && Math.random() <= get(dodgeChanceTotal);
+        const hasDodged = get(skills(SkillType.Dodge)) && Math.random() <= get(dodgeTotal);
 
         // If attack is dodged, nothing else happens (all damage is negated).
         if (hasDodged) {
@@ -95,7 +95,7 @@ export function useDefend() {
         let deltaHealth: DeltaDisplay = [];
         let deltaStamina: DeltaDisplay = [];
 
-        const hasParried = get(skills(SkillType.Parry)) && Math.random() <= get(parryChance);
+        const hasParried = get(skills(SkillType.Parry)) && Math.random() <= get(parry);
 
         // If parrying occurs, check & apply stamina cost.
         if (hasParried) {
@@ -153,7 +153,7 @@ export function useDefend() {
           }
         }
 
-        const hasBlocked = Math.random() <= get(blockChance);
+        const hasBlocked = Math.random() <= get(block);
 
         // If not parried and blocking occurs, check & apply stamina cost.
         if (hasBlocked && !hasParried) {
@@ -163,9 +163,9 @@ export function useDefend() {
             healthDamage = 0;
 
             const hasStaggered =
-              get(skills(SkillType.Stagger)) && Math.random() <= get(shield).staggerChance;
+              get(skills(SkillType.Stagger)) && Math.random() <= get(shield).stagger;
             const shieldsSkill = get(skills(SkillType.Shields));
-            const isFreeBlock = shieldsSkill && Math.random() <= get(freeBlockChance);
+            const isFreeBlock = shieldsSkill && Math.random() <= get(stability);
 
             deltaHealth = [
               {
@@ -175,7 +175,7 @@ export function useDefend() {
             ];
 
             if (shieldsSkill) {
-              increaseMastery(MasteryType.FreeBlockChance);
+              increaseMastery(MasteryType.Stability);
             }
 
             if (isFreeBlock) {
@@ -222,7 +222,7 @@ export function useDefend() {
         }
 
         const armorsSkill = get(skills(SkillType.Armors));
-        const hasSkippedRecovery = armorsSkill && Math.random() <= get(skipRecoveryChance);
+        const hasSkippedRecovery = armorsSkill && Math.random() <= get(tenacity);
 
         // If Tenacity isn't available or hasn't been triggered, activate recovery.
         if (!hasSkippedRecovery) {
@@ -235,15 +235,14 @@ export function useDefend() {
 
         // Increment Armorcraft mastery (if applicable).
         if (armorsSkill) {
-          increaseMastery(MasteryType.SkipRecoveryChance);
+          increaseMastery(MasteryType.Tenacity);
         }
 
-        const isPoisoned = Math.random() <= get(monsterPoisonChance);
+        const isPoisoned = Math.random() <= get(monsterPoison);
 
         // If poisoning occurs, check if it can and has been deflected, otherwise apply poison - if there is an active poisoning, increment blight instead.
         if (isPoisoned) {
-          const hasDeflected =
-            get(skills(SkillType.Armors)) && Math.random() <= get(deflectionChance);
+          const hasDeflected = get(skills(SkillType.Armors)) && Math.random() <= get(deflection);
 
           if (hasDeflected) {
             deltaHealth.push({

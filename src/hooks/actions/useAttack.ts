@@ -15,7 +15,7 @@ import {
 import { canAttackOrParry } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
 import {
-  bleedChance,
+  bleed,
   criticalChance,
   criticalDamage,
   damageTotal,
@@ -48,7 +48,7 @@ export function useAttack() {
           const hasInflictedBleed =
             get(monsterBleedingDuration) === 0 &&
             get(skills(SkillType.Bleed)) &&
-            Math.random() <= get(bleedChance);
+            Math.random() <= get(bleed);
           const hasInflictedStagger =
             get(skills(SkillType.Stagger)) &&
             gearClass === "blunt" &&

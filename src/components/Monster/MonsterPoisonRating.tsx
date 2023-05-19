@@ -5,13 +5,13 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC, POISON } from "@neverquest/data/constants";
 import { ReactComponent as IconPoisonRating } from "@neverquest/icons/poison-rating.svg";
-import { monsterDamage, monsterPoisonChance } from "@neverquest/state/monster";
+import { monsterDamage, monsterPoison } from "@neverquest/state/monster";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 import { getDamagePerTick } from "@neverquest/utilities/getters";
 
 export function MonsterPoisonRating() {
-  const monsterPoisonChanceValue = useRecoilValue(monsterPoisonChance);
   const monsterDamageValue = useRecoilValue(monsterDamage);
+  const monsterPoisonValue = useRecoilValue(monsterPoison);
 
   const { damage, duration, ticks } = POISON;
   const poisonPerTick = getDamagePerTick({
@@ -21,7 +21,7 @@ export function MonsterPoisonRating() {
     ticks,
   });
 
-  if (!monsterPoisonChanceValue) {
+  if (!monsterPoisonValue) {
     return null;
   }
 
@@ -38,7 +38,7 @@ export function MonsterPoisonRating() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Poison chance:</td>
 
-                    <td>{formatPercentage(monsterPoisonChanceValue)}</td>
+                    <td>{formatPercentage(monsterPoisonValue)}</td>
                   </tr>
 
                   <tr>
@@ -59,7 +59,7 @@ export function MonsterPoisonRating() {
             </Popover>
           }
         >
-          <span>{Math.round(poisonPerTick * monsterPoisonChanceValue * 100)}</span>
+          <span>{Math.round(poisonPerTick * monsterPoisonValue * 100)}</span>
         </OverlayTrigger>
       }
       Icon={IconPoisonRating}

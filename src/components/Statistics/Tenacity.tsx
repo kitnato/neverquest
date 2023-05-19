@@ -4,22 +4,22 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconSkipRecovery } from "@neverquest/icons/skip-recovery.svg";
+import { ReactComponent as IconTenacity } from "@neverquest/icons/tenacity.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { skills } from "@neverquest/state/skills";
-import { skipRecoveryChance } from "@neverquest/state/statistics";
+import { tenacity } from "@neverquest/state/statistics";
 import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
-export function SkipRecoveryChance() {
+export function Tenacity() {
   const armorsSkill = useRecoilValue(skills(SkillType.Armors));
-  const skipRecoveryChanceValue = useRecoilValue(skipRecoveryChance);
+  const tenacityValue = useRecoilValue(tenacity);
 
-  const deltaChanceSkipRecovery = deltas(DeltaType.ChanceSkipRecovery);
+  const deltaTenacity = deltas(DeltaType.Tenacity);
 
   useDeltaText({
-    atomDelta: deltaChanceSkipRecovery,
-    atomValue: skipRecoveryChance,
+    atomDelta: deltaTenacity,
+    atomValue: tenacity,
   });
 
   if (!armorsSkill) {
@@ -30,14 +30,14 @@ export function SkipRecoveryChance() {
     <IconDisplay
       contents={
         <>
-          <span>{formatPercentage(skipRecoveryChanceValue)}</span>
+          <span>{formatPercentage(tenacityValue)}</span>
 
-          <FloatingText type={DeltaType.ChanceSkipRecovery} />
+          <FloatingText type={DeltaType.Tenacity} />
         </>
       }
-      Icon={IconSkipRecovery}
+      Icon={IconTenacity}
       isAnimated
-      tooltip={MASTERIES[MasteryType.SkipRecoveryChance].name}
+      tooltip={MASTERIES[MasteryType.Tenacity].name}
     />
   );
 }

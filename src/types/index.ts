@@ -3,11 +3,11 @@ import type { SkillType, WeaponGrip } from "@neverquest/types/enums";
 import type { SVGIcon } from "@neverquest/types/props";
 
 export type Armor = GearBase & {
-  deflectionChance: number;
+  deflection: number;
   gearClass?: ArmorClass;
   protection: number;
   ranges: {
-    deflectionChance: Range;
+    deflection: Range;
   };
   staminaCost: number;
 };
@@ -56,12 +56,12 @@ export type Range = {
 };
 
 export type Shield = GearBase & {
-  blockChance: number;
+  block: number;
   gearClass?: ShieldClass;
   ranges: {
-    blockChance: Range;
+    block: Range;
   };
-  staggerChance: number;
+  stagger: number;
   staminaCost: number;
 };
 

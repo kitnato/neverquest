@@ -13,15 +13,6 @@ export const MASTERIES: Readonly<Record<MasteryType, AttributeOrMastery>> = {
     name: "Cruelty",
     requiredSkill: SkillType.Bleed,
   },
-  [MasteryType.FreeBlockChance]: {
-    base: 0,
-    description: "Chance that blocking consumes no stamina. Trains when blocking.",
-    Icon: IconPlaceholder,
-    increment: 0.03,
-    maximum: 0.66,
-    name: "Stability",
-    requiredSkill: SkillType.Shields,
-  },
   [MasteryType.ParryFactor]: {
     base: 0,
     description: "Affects damage absorbed and reflected when parrying. Trains when parrying.",
@@ -31,14 +22,14 @@ export const MASTERIES: Readonly<Record<MasteryType, AttributeOrMastery>> = {
     name: "Finesse",
     requiredSkill: SkillType.Parry,
   },
-  [MasteryType.SkipRecoveryChance]: {
+  [MasteryType.Stability]: {
     base: 0,
-    description: "Chance to ignore recovery when struck. Trains when struck.",
+    description: "Chance that blocking consumes no stamina. Trains when blocking.",
     Icon: IconPlaceholder,
-    increment: 0.02,
-    maximum: 0.9,
-    name: "Tenacity",
-    requiredSkill: SkillType.Armors,
+    increment: 0.03,
+    maximum: 0.66,
+    name: "Stability",
+    requiredSkill: SkillType.Shields,
   },
   [MasteryType.StaggerDuration]: {
     base: 1200,
@@ -49,20 +40,29 @@ export const MASTERIES: Readonly<Record<MasteryType, AttributeOrMastery>> = {
     name: "Might",
     requiredSkill: SkillType.Stagger,
   },
+  [MasteryType.Tenacity]: {
+    base: 0,
+    description: "Chance to skip recovery when struck. Trains when struck.",
+    Icon: IconPlaceholder,
+    increment: 0.02,
+    maximum: 0.9,
+    name: "Tenacity",
+    requiredSkill: SkillType.Armors,
+  },
 } as const;
 
 export const MASTERIES_ORDER = [
   MasteryType.StaggerDuration,
   MasteryType.ParryFactor,
   MasteryType.BleedDamage,
-  MasteryType.SkipRecoveryChance,
-  MasteryType.FreeBlockChance,
+  MasteryType.Tenacity,
+  MasteryType.Stability,
 ] as const;
 
 export const MASTERY_DELTA_TYPE: Readonly<Record<MasteryType, DeltaType>> = {
   [MasteryType.BleedDamage]: DeltaType.MasteryBleed,
-  [MasteryType.FreeBlockChance]: DeltaType.ChanceFreeBlock,
   [MasteryType.ParryFactor]: DeltaType.MasteryParry,
-  [MasteryType.SkipRecoveryChance]: DeltaType.ChanceSkipRecovery,
+  [MasteryType.Stability]: DeltaType.Stability,
   [MasteryType.StaggerDuration]: DeltaType.MasteryStagger,
+  [MasteryType.Tenacity]: DeltaType.Tenacity,
 } as const;

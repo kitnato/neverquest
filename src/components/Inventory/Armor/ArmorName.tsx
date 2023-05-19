@@ -32,7 +32,7 @@ export function ArmorName({
   const skillArmors = useRecoilValue(skills(SkillType.Armors));
   const skillDodge = useRecoilValue(skills(SkillType.Dodge));
 
-  const { deflectionChance, level, name, protection, staminaCost, weight } = armor;
+  const { deflection, level, name, protection, staminaCost, weight } = armor;
   const isEquipped = JSON.stringify(armorEquippedValue) === JSON.stringify(armor);
 
   return (
@@ -103,7 +103,7 @@ export function ArmorName({
                 )}
               </tr>
 
-              {deflectionChance > 0 && (
+              {deflection > 0 && (
                 <tr>
                   {skillArmors ? (
                     <>
@@ -111,10 +111,10 @@ export function ArmorName({
 
                       <td>
                         <IconImage Icon={IconDeflection} isSmall />
-                        &nbsp;{formatPercentage(deflectionChance)}
+                        &nbsp;{formatPercentage(deflection)}
                         {!isEquipped && (
                           <GearComparison
-                            difference={deflectionChance - armorEquippedValue.deflectionChance}
+                            difference={deflection - armorEquippedValue.deflection}
                             showingType={ShowingType.Armor}
                           />
                         )}

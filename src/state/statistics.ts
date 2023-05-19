@@ -42,7 +42,7 @@ export const attackRateTotal = withStateKey("attackRateTotal", (key) =>
   })
 );
 
-export const bleedChance = withStateKey("bleedChance", (key) =>
+export const bleed = withStateKey("bleed", (key) =>
   selector({
     get: ({ get }) => {
       const { abilityChance, gearClass } = get(weapon);
@@ -71,7 +71,7 @@ export const bleedDamage = withStateKey("bleedDamage", (key) =>
 
 export const bleedRating = withStateKey("bleedRating", (key) =>
   selector({
-    get: ({ get }) => Math.round(get(bleedTick) * get(bleedChance) * 100),
+    get: ({ get }) => Math.round(get(bleedTick) * get(bleed) * 100),
     key,
   })
 );
@@ -92,9 +92,9 @@ export const bleedTick = withStateKey("bleedTick", (key) =>
   })
 );
 
-export const blockChance = withStateKey("blockChance", (key) =>
+export const block = withStateKey("block", (key) =>
   selector({
-    get: ({ get }) => get(shield).blockChance,
+    get: ({ get }) => get(shield).block,
     key,
   })
 );
@@ -164,18 +164,18 @@ export const damagePerSecond = withStateKey("damagePerSecond", (key) =>
   })
 );
 
-export const deflectionChance = withStateKey("deflectionChance", (key) =>
+export const deflection = withStateKey("deflection", (key) =>
   selector({
-    get: ({ get }) => get(armor).deflectionChance,
+    get: ({ get }) => get(armor).deflection,
     key,
   })
 );
 
-export const dodgeChance = withStateKey("dodgeChance", (key) =>
+export const dodge = withStateKey("dodge", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES[AttributeType.DodgeChance];
-      const { points } = get(attributes(AttributeType.DodgeChance));
+      const { base, increment } = ATTRIBUTES[AttributeType.Dodge];
+      const { points } = get(attributes(AttributeType.Dodge));
 
       return getComputedStatistic({ amount: points, base, increment });
     },
@@ -183,7 +183,7 @@ export const dodgeChance = withStateKey("dodgeChance", (key) =>
   })
 );
 
-export const dodgeChanceTotal = withStateKey("dodgeChanceTotal", (key) =>
+export const dodgeTotal = withStateKey("dodgeTotal", (key) =>
   selector({
     get: ({ get }) => {
       const { staminaCost } = get(armor);
@@ -192,17 +192,17 @@ export const dodgeChanceTotal = withStateKey("dodgeChanceTotal", (key) =>
         return 0;
       }
 
-      return get(dodgeChance);
+      return get(dodge);
     },
     key,
   })
 );
 
-export const freeBlockChance = withStateKey("freeBlockChance", (key) =>
+export const stability = withStateKey("stability", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = MASTERIES[MasteryType.FreeBlockChance];
-      const { rank } = get(masteries(MasteryType.FreeBlockChance));
+      const { base, increment } = MASTERIES[MasteryType.Stability];
+      const { rank } = get(masteries(MasteryType.Stability));
 
       return getComputedStatistic({ amount: rank, base, increment });
     },
@@ -239,7 +239,7 @@ export const parryAbsorption = withStateKey("parryAbsorption", (key) =>
   })
 );
 
-export const parryChance = withStateKey("parryChance", (key) =>
+export const parry = withStateKey("parry", (key) =>
   selector({
     get: ({ get }) => {
       const { abilityChance, gearClass } = get(weapon);
@@ -309,29 +309,6 @@ export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (
   })
 );
 
-export const skipRecoveryChance = withStateKey("skipRecoveryChance", (key) =>
-  selector({
-    get: ({ get }) => {
-      const { base, increment } = MASTERIES[MasteryType.SkipRecoveryChance];
-      const { rank } = get(masteries(MasteryType.SkipRecoveryChance));
-
-      return getComputedStatistic({ amount: rank, base, increment });
-    },
-    key,
-  })
-);
-
-export const staggerChanceWeapon = withStateKey("staggerChanceWeapon", (key) =>
-  selector({
-    get: ({ get }) => {
-      const { abilityChance, gearClass } = get(weapon);
-
-      return gearClass === "blunt" ? abilityChance : 0;
-    },
-    key,
-  })
-);
-
 export const staggerDuration = withStateKey("staggerDuration", (key) =>
   selector({
     get: ({ get }) => {
@@ -350,9 +327,19 @@ export const staggerRating = withStateKey("staggerRating", (key) =>
       const staggerDurationValue = get(staggerDuration);
 
       return Math.round(
-        get(shield).staggerChance * staggerDurationValue +
-          get(staggerChanceWeapon) * staggerDurationValue
+        get(shield).stagger * staggerDurationValue + get(staggerWeapon) * staggerDurationValue
       );
+    },
+    key,
+  })
+);
+
+export const staggerWeapon = withStateKey("staggerWeapon", (key) =>
+  selector({
+    get: ({ get }) => {
+      const { abilityChance, gearClass } = get(weapon);
+
+      return gearClass === "blunt" ? abilityChance : 0;
     },
     key,
   })
@@ -371,6 +358,18 @@ export const staminaRegenerationRate = withStateKey("staminaRegenerationRate", (
       Math.round(
         REGENERATION_RATE_STAMINA - REGENERATION_RATE_STAMINA * get(reserveRegenerationRate)
       ),
+    key,
+  })
+);
+
+export const tenacity = withStateKey("tenacity", (key) =>
+  selector({
+    get: ({ get }) => {
+      const { base, increment } = MASTERIES[MasteryType.Tenacity];
+      const { rank } = get(masteries(MasteryType.Tenacity));
+
+      return getComputedStatistic({ amount: rank, base, increment });
+    },
     key,
   })
 );

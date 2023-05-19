@@ -8,28 +8,28 @@ import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/constants";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconDodgeChance } from "@neverquest/icons/dodge.svg";
+import { ReactComponent as IconDodge } from "@neverquest/icons/dodge.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { armor } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
-import { dodgeChance, dodgeChanceTotal } from "@neverquest/state/statistics";
+import { dodge, dodgeTotal } from "@neverquest/state/statistics";
 import { AttributeType, DeltaType, ShowingType, SkillType } from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
-export function DodgeChance() {
+export function Dodge() {
   const { staminaCost } = useRecoilValue(armor);
-  const dodgeChanceValue = useRecoilValue(dodgeChance);
-  const dodgeChanceTotalValue = useRecoilValue(dodgeChanceTotal);
-  const isShowingDodgeChanceDetails = useRecoilValue(isShowing(ShowingType.DodgeChanceDetails));
+  const dodgeValue = useRecoilValue(dodge);
+  const dodgeTotalValue = useRecoilValue(dodgeTotal);
+  const isShowingDodgeDetails = useRecoilValue(isShowing(ShowingType.DodgeDetails));
   const dodgeSkill = useRecoilValue(skills(SkillType.Dodge));
 
-  const { name } = ATTRIBUTES[AttributeType.DodgeChance];
-  const deltaDodgeChance = deltas(DeltaType.DodgeChance);
+  const { name } = ATTRIBUTES[AttributeType.Dodge];
+  const deltaDodge = deltas(DeltaType.Dodge);
 
   useDeltaText({
-    atomDelta: deltaDodgeChance,
-    atomValue: dodgeChanceTotal,
+    atomDelta: deltaDodge,
+    atomValue: dodgeTotal,
   });
 
   if (!dodgeSkill) {
@@ -50,11 +50,11 @@ export function DodgeChance() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
 
-                      <td>{`${formatPercentage(dodgeChanceValue)} dodge chance`}</td>
+                      <td>{`${formatPercentage(dodgeValue)} dodge chance`}</td>
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Penalty from armor:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Armor penalty:</td>
 
                       <td>
                         <DodgePenaltyContents staminaCost={staminaCost} />
@@ -64,15 +64,15 @@ export function DodgeChance() {
                 </Popover.Body>
               </Popover>
             }
-            trigger={isShowingDodgeChanceDetails ? ["hover", "focus"] : []}
+            trigger={isShowingDodgeDetails ? ["hover", "focus"] : []}
           >
-            <span>{formatPercentage(dodgeChanceTotalValue)}</span>
+            <span>{formatPercentage(dodgeTotalValue)}</span>
           </OverlayTrigger>
 
-          <FloatingText type={DeltaType.DodgeChance} />
+          <FloatingText type={DeltaType.Dodge} />
         </>
       }
-      Icon={IconDodgeChance}
+      Icon={IconDodge}
       isAnimated
       tooltip="Dodge chance"
     />

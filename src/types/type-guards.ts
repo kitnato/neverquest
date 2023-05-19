@@ -13,7 +13,7 @@ function isObject(value: unknown): value is Record<string, unknown> {
 }
 
 export function isShield(gear: unknown): gear is Shield {
-  return isObject(gear) && gear.blockChance !== undefined;
+  return isObject(gear) && gear.block !== undefined;
 }
 
 export function isTrinket(trinket: unknown): trinket is Trinket {

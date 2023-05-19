@@ -15,13 +15,13 @@ export const isShowingMastery = withStateKey("isShowingMastery", (key) =>
           case MasteryType.BleedDamage: {
             return get(skills(SkillType.Bleed));
           }
-          case MasteryType.FreeBlockChance: {
+          case MasteryType.Stability: {
             return get(skills(SkillType.Shields));
           }
           case MasteryType.ParryFactor: {
             return get(skills(SkillType.Parry));
           }
-          case MasteryType.SkipRecoveryChance: {
+          case MasteryType.Tenacity: {
             return get(skills(SkillType.Armors));
           }
           case MasteryType.StaggerDuration: {

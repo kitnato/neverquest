@@ -41,7 +41,7 @@ export function ArmorOptions() {
     hasSuffix: true,
     level: armorLevel,
   });
-  const { deflectionChance, protection, ranges, staminaCost, weight } = armor;
+  const { deflection, protection, ranges, staminaCost, weight } = armor;
   const maximumArmorLevel = levelValue + GEAR_LEVEL_OFFSET;
 
   return (
@@ -99,12 +99,12 @@ export function ArmorOptions() {
           tooltip="Protection"
         />
 
-        {deflectionChance > 0 && (
+        {deflection > 0 && (
           <IconDisplay
             contents={
               skillArmors
-                ? `${formatPercentage(ranges.deflectionChance.minimum)}-${formatPercentage(
-                    ranges.deflectionChance.maximum
+                ? `${formatPercentage(ranges.deflection.minimum)}-${formatPercentage(
+                    ranges.deflection.maximum
                   )}`
                 : LABEL_UNKNOWN
             }

@@ -6,7 +6,7 @@ import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGe
 import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_OFFSET, LABEL_UNKNOWN } from "@neverquest/data/constants";
-import { ReactComponent as IconBlockChance } from "@neverquest/icons/block-chance.svg";
+import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconClass } from "@neverquest/icons/gear-class.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
@@ -39,7 +39,7 @@ export function ShieldOptions() {
     hasSuffix: true,
     level: shieldLevel,
   });
-  const { ranges, staggerChance, staminaCost, weight } = shield;
+  const { ranges, stagger, staminaCost, weight } = shield;
   const maximumShieldLevel = levelValue + GEAR_LEVEL_OFFSET;
 
   return (
@@ -91,16 +91,16 @@ export function ShieldOptions() {
         />
 
         <IconDisplay
-          contents={`${formatPercentage(ranges.blockChance.minimum)}-${formatPercentage(
-            ranges.blockChance.maximum
+          contents={`${formatPercentage(ranges.block.minimum)}-${formatPercentage(
+            ranges.block.maximum
           )}`}
-          Icon={IconBlockChance}
+          Icon={IconBlock}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Block chance"
         />
 
         <IconDisplay
-          contents={staggerSkillValue ? formatPercentage(staggerChance) : LABEL_UNKNOWN}
+          contents={staggerSkillValue ? formatPercentage(stagger) : LABEL_UNKNOWN}
           Icon={staggerSkillValue ? IconStamina : IconUnknown}
           iconProps={{ overlayPlacement: "left" }}
           tooltip={staggerSkillValue ? "Stagger chance" : LABEL_UNKNOWN}

@@ -41,7 +41,7 @@ export const ATTRIBUTES: Readonly<Record<AttributeType, AttributeOrMastery>> = {
     increment: 3,
     name: "Strength",
   },
-  [AttributeType.DodgeChance]: {
+  [AttributeType.Dodge]: {
     base: 0,
     description: "Increases chance to dodge an attack.",
     Icon: IconPlaceholder,
@@ -115,7 +115,7 @@ export const ATTRIBUTES_ORDER = [
   AttributeType.ReserveRegenerationAmount,
   AttributeType.CriticalChance,
   AttributeType.CriticalDamage,
-  AttributeType.DodgeChance,
+  AttributeType.Dodge,
   AttributeType.Loot,
 ];
 

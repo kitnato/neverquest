@@ -59,7 +59,7 @@ export const monsterMaximumHealth = withStateKey("monsterMaximumHealth", (key) =
   })
 );
 
-export const monsterPoisonChance = withStateKey("monsterPoisonChance", (key) =>
+export const monsterPoison = withStateKey("monsterPoison", (key) =>
   selector({
     get: ({ get }) => {
       const levelValue = get(level);

@@ -10,18 +10,12 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconBleedRating } from "@neverquest/icons/bleed-rating.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { skills } from "@neverquest/state/skills";
-import {
-  bleedChance,
-  bleedDamage,
-  bleedRating,
-  bleedTick,
-  damage,
-} from "@neverquest/state/statistics";
+import { bleed, bleedDamage, bleedRating, bleedTick, damage } from "@neverquest/state/statistics";
 import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function BleedRating() {
-  const bleedChanceValue = useRecoilValue(bleedChance);
+  const bleedValue = useRecoilValue(bleed);
   const bleedDamageValue = useRecoilValue(bleedDamage);
   const bleedRatingValue = useRecoilValue(bleedRating);
   const bleedTickValue = useRecoilValue(bleedTick);
@@ -56,7 +50,7 @@ export function BleedRating() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
 
-                      <td>{`${formatPercentage(bleedChanceValue)} chance`}</td>
+                      <td>{`${formatPercentage(bleedValue)} chance`}</td>
                     </tr>
 
                     <tr>

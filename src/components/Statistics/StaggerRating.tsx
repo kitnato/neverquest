@@ -11,16 +11,16 @@ import { ReactComponent as IconStaggerRating } from "@neverquest/icons/stagger-r
 import { deltas } from "@neverquest/state/deltas";
 import { shield } from "@neverquest/state/inventory";
 import { skills } from "@neverquest/state/skills";
-import { staggerChanceWeapon, staggerDuration, staggerRating } from "@neverquest/state/statistics";
+import { staggerDuration, staggerRating, staggerWeapon } from "@neverquest/state/statistics";
 import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function StaggerRating() {
-  const { staggerChance } = useRecoilValue(shield);
+  const { stagger } = useRecoilValue(shield);
   const staggerSkill = useRecoilValue(skills(SkillType.Stagger));
-  const staggerChanceWeaponValue = useRecoilValue(staggerChanceWeapon);
   const staggerDurationValue = useRecoilValue(staggerDuration);
   const staggerRatingValue = useRecoilValue(staggerRating);
+  const staggerWeaponValue = useRecoilValue(staggerWeapon);
 
   const deltaStaggerRating = deltas(DeltaType.StaggerRating);
 
@@ -49,13 +49,13 @@ export function StaggerRating() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance on hit:</td>
 
-                      <td>{formatPercentage(staggerChanceWeaponValue)}</td>
+                      <td>{formatPercentage(staggerWeaponValue)}</td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance on block:</td>
 
-                      <td>{formatPercentage(staggerChance)}</td>
+                      <td>{formatPercentage(stagger)}</td>
                     </tr>
 
                     <tr>

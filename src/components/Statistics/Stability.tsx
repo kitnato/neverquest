@@ -3,25 +3,25 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconParryChance } from "@neverquest/icons/parry-chance.svg";
+import { ReactComponent as IconStability } from "@neverquest/icons/stability.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { skills } from "@neverquest/state/skills";
-import { parryChance } from "@neverquest/state/statistics";
+import { stability } from "@neverquest/state/statistics";
 import { DeltaType, SkillType } from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
-export function ParryChance() {
-  const parryChanceValue = useRecoilValue(parryChance);
-  const parrySkill = useRecoilValue(skills(SkillType.Parry));
+export function Stability() {
+  const stabilityValue = useRecoilValue(stability);
+  const shieldsSkill = useRecoilValue(skills(SkillType.Shields));
 
-  const deltaParryChance = deltas(DeltaType.ParryChance);
+  const deltaStability = deltas(DeltaType.Stability);
 
   useDeltaText({
-    atomDelta: deltaParryChance,
-    atomValue: parryChance,
+    atomDelta: deltaStability,
+    atomValue: stability,
   });
 
-  if (!parrySkill) {
+  if (!shieldsSkill) {
     return null;
   }
 
@@ -29,14 +29,14 @@ export function ParryChance() {
     <IconDisplay
       contents={
         <>
-          <span>{formatPercentage(parryChanceValue)}</span>
+          <span>{formatPercentage(stabilityValue)}</span>
 
-          <FloatingText type={DeltaType.ParryChance} />
+          <FloatingText type={DeltaType.Stability} />
         </>
       }
-      Icon={IconParryChance}
+      Icon={IconStability}
       isAnimated
-      tooltip="Parry chance"
+      tooltip="Free block chance"
     />
   );
 }

@@ -1,20 +1,20 @@
 import { Col, Row } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { BlockChance } from "@neverquest/components/Statistics/BlockChance";
-import { DodgeChance } from "@neverquest/components/Statistics/DodgeChance";
-import { ParryChance } from "@neverquest/components/Statistics/ParryChance";
+import { Block } from "@neverquest/components/Statistics/Block";
+import { Dodge } from "@neverquest/components/Statistics/Dodge";
+import { Parry } from "@neverquest/components/Statistics/Parry";
 import { Protection } from "@neverquest/components/Statistics/Protection";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { ShowingType, SkillType } from "@neverquest/types/enums";
 
 export function Defense() {
-  const isShowingBlockChance = useRecoilValue(isShowing(ShowingType.BlockChance));
+  const isShowingBlock = useRecoilValue(isShowing(ShowingType.Block));
   const isShowingProtection = useRecoilValue(isShowing(ShowingType.Protection));
   const dodgeSkill = useRecoilValue(skills(SkillType.Dodge));
 
-  if (!dodgeSkill && !isShowingBlockChance && !isShowingProtection) {
+  if (!dodgeSkill && !isShowingBlock && !isShowingProtection) {
     return null;
   }
 
@@ -25,15 +25,15 @@ export function Defense() {
       </Col>
 
       <Col>
-        <BlockChance />
+        <Block />
       </Col>
 
       <Col>
-        <DodgeChance />
+        <Dodge />
       </Col>
 
       <Col>
-        <ParryChance />
+        <Parry />
       </Col>
     </Row>
   );

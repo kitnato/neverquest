@@ -6,19 +6,19 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
-import { deflectionChance } from "@neverquest/state/statistics";
+import { deflection } from "@neverquest/state/statistics";
 import { DeltaType, ShowingType } from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
-export function DeflectionChance() {
-  const deflectionChanceValue = useRecoilValue(deflectionChance);
+export function Deflection() {
+  const deflectionValue = useRecoilValue(deflection);
   const isShowingDeflection = useRecoilValue(isShowing(ShowingType.Deflection));
 
   const deltaDeflection = deltas(DeltaType.Deflection);
 
   useDeltaText({
     atomDelta: deltaDeflection,
-    atomValue: deflectionChance,
+    atomValue: deflection,
   });
 
   if (!isShowingDeflection) {
@@ -29,7 +29,7 @@ export function DeflectionChance() {
     <IconDisplay
       contents={
         <>
-          <span>{formatPercentage(deflectionChanceValue)}</span>
+          <span>{formatPercentage(deflectionValue)}</span>
 
           <FloatingText type={DeltaType.Deflection} />
         </>

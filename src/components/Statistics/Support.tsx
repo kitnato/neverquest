@@ -1,9 +1,9 @@
 import { Col, Row } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { DeflectionChance } from "@neverquest/components/Statistics/DeflectionChance";
-import { FreeBlockChance } from "@neverquest/components/Statistics/FreeBlockChance";
-import { SkipRecoveryChance } from "@neverquest/components/Statistics/SkipRecoveryChance";
+import { Deflection } from "@neverquest/components/Statistics/Deflection";
+import { Stability } from "@neverquest/components/Statistics/Stability";
+import { Tenacity } from "@neverquest/components/Statistics/Tenacity";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { ShowingType, SkillType } from "@neverquest/types/enums";
@@ -20,15 +20,15 @@ export function Support() {
   return (
     <Row>
       <Col>
-        <SkipRecoveryChance />
+        <Tenacity />
       </Col>
 
       <Col>
-        <FreeBlockChance />
+        <Stability />
       </Col>
 
       <Col>
-        <DeflectionChance />
+        <Deflection />
       </Col>
     </Row>
   );

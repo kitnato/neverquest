@@ -10,9 +10,9 @@ import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/constants";
 import { type SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
-import { ReactComponent as IconBlockChance } from "@neverquest/icons/block-chance.svg";
+import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
 import { ReactComponent as IconNone } from "@neverquest/icons/gear-class-none.svg";
-import { ReactComponent as IconStaggerChance } from "@neverquest/icons/shield-stagger.svg";
+import { ReactComponent as IconStagger } from "@neverquest/icons/shield-stagger.svg";
 import { shield as shieldEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
@@ -31,7 +31,7 @@ export function ShieldName({
   const shieldEquippedValue = useRecoilValue(shieldEquipped);
   const staggerSkillValue = useRecoilValue(skills(SkillType.Stagger));
 
-  const { blockChance, level, name, staggerChance, staminaCost, weight } = shield;
+  const { block, level, name, stagger, staminaCost, weight } = shield;
   const isEquipped = JSON.stringify(shieldEquippedValue) === JSON.stringify(shield);
 
   return (
@@ -55,11 +55,11 @@ export function ShieldName({
                 <td className={CLASS_TABLE_CELL_ITALIC}>Block chance:</td>
 
                 <td>
-                  <IconImage Icon={IconBlockChance} isSmall />
-                  &nbsp;{formatPercentage(blockChance)}
+                  <IconImage Icon={IconBlock} isSmall />
+                  &nbsp;{formatPercentage(block)}
                   {!isEquipped && (
                     <GearComparison
-                      difference={blockChance - shieldEquippedValue.blockChance}
+                      difference={block - shieldEquippedValue.block}
                       showingType={ShowingType.Shield}
                     />
                   )}
@@ -120,11 +120,11 @@ export function ShieldName({
                     <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance:</td>
 
                     <td>
-                      <IconImage Icon={IconStaggerChance} isSmall />
-                      &nbsp;{formatPercentage(staggerChance)}
+                      <IconImage Icon={IconStagger} isSmall />
+                      &nbsp;{formatPercentage(stagger)}
                       {!isEquipped && (
                         <GearComparison
-                          difference={staggerChance - shieldEquippedValue.staggerChance}
+                          difference={stagger - shieldEquippedValue.stagger}
                           showingType={ShowingType.Shield}
                         />
                       )}

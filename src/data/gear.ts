@@ -1,7 +1,7 @@
 import { ReactComponent as IconPlate } from "@neverquest/icons/armor-plate.svg";
 import { ReactComponent as IconReinforced } from "@neverquest/icons/armor-reinforced.svg";
 import { ReactComponent as IconHide } from "@neverquest/icons/hide.svg";
-import { ReactComponent as IconParry } from "@neverquest/icons/parry-chance.svg";
+import { ReactComponent as IconParry } from "@neverquest/icons/parry.svg";
 import { ReactComponent as IconShieldMedium } from "@neverquest/icons/shield-medium.svg";
 import { ReactComponent as IconShieldSmall } from "@neverquest/icons/shield-small.svg";
 import { ReactComponent as IconShieldTower } from "@neverquest/icons/shield-tower.svg";
@@ -18,7 +18,7 @@ import type { SVGIcon } from "@neverquest/types/props";
 // Armor
 
 export const ARMOR_NONE = {
-  deflectionChance: 0,
+  deflection: 0,
   level: 0,
   name: "Unarmored",
   protection: 0,
@@ -30,7 +30,7 @@ export const ARMOR_SPECIFICATIONS: Readonly<
   Record<
     ArmorClass,
     {
-      deflectionChanceRange: Range;
+      deflectionRange: Range;
       dodgeCostModifier: number;
       Icon: SVGIcon;
       priceModifier: number;
@@ -40,7 +40,7 @@ export const ARMOR_SPECIFICATIONS: Readonly<
   >
 > = {
   hide: {
-    deflectionChanceRange: { maximum: 0, minimum: 0 },
+    deflectionRange: { maximum: 0, minimum: 0 },
     dodgeCostModifier: 0,
     Icon: IconHide,
     priceModifier: 1,
@@ -48,7 +48,7 @@ export const ARMOR_SPECIFICATIONS: Readonly<
     weightModifier: 1,
   },
   plate: {
-    deflectionChanceRange: { maximum: 0.6, minimum: 0.3 },
+    deflectionRange: { maximum: 0.6, minimum: 0.3 },
     dodgeCostModifier: Infinity,
     Icon: IconPlate,
     priceModifier: 2,
@@ -56,7 +56,7 @@ export const ARMOR_SPECIFICATIONS: Readonly<
     weightModifier: 3,
   },
   reinforced: {
-    deflectionChanceRange: { maximum: 0.29, minimum: 0.1 },
+    deflectionRange: { maximum: 0.29, minimum: 0.1 },
     dodgeCostModifier: 1,
     Icon: IconReinforced,
     priceModifier: 1.5,
@@ -68,10 +68,10 @@ export const ARMOR_SPECIFICATIONS: Readonly<
 // Shield
 
 export const SHIELD_NONE = {
-  blockChance: 0,
+  block: 0,
   level: 0,
   name: "Unshielded",
-  staggerChance: 0,
+  stagger: 0,
   staminaCost: 0,
   weight: 0,
 } as const;
@@ -80,7 +80,7 @@ export const SHIELD_SPECIFICATIONS: Readonly<
   Record<
     ShieldClass,
     {
-      blockChanceRange: Range;
+      blockRange: Range;
       Icon: SVGIcon;
       staggerModifier: number;
       staminaCostModifier: number;
@@ -89,21 +89,21 @@ export const SHIELD_SPECIFICATIONS: Readonly<
   >
 > = {
   medium: {
-    blockChanceRange: { maximum: 0.49, minimum: 0.25 },
+    blockRange: { maximum: 0.49, minimum: 0.25 },
     Icon: IconShieldMedium,
     staggerModifier: 1.5,
     staminaCostModifier: 2,
     weightModifier: 1.5,
   },
   small: {
-    blockChanceRange: { maximum: 0.24, minimum: 0.1 },
+    blockRange: { maximum: 0.24, minimum: 0.1 },
     Icon: IconShieldSmall,
     staggerModifier: 1,
     staminaCostModifier: 1,
     weightModifier: 1,
   },
   tower: {
-    blockChanceRange: { maximum: 0.75, minimum: 0.5 },
+    blockRange: { maximum: 0.75, minimum: 0.5 },
     Icon: IconShieldTower,
     staggerModifier: 2.5,
     staminaCostModifier: 3,

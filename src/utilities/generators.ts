@@ -32,26 +32,19 @@ export function generateArmor({
   name?: string;
   tags?: AffixTag[];
 }): Armor {
-  const {
-    deflectionChanceRange,
-    dodgeCostModifier,
-    priceModifier,
-    protectionModifier,
-    weightModifier,
-  } = ARMOR_SPECIFICATIONS[gearClass];
+  const { deflectionRange, dodgeCostModifier, priceModifier, protectionModifier, weightModifier } =
+    ARMOR_SPECIFICATIONS[gearClass];
   const growthFactor = getGrowthSigmoid(level);
   const ranges = {
-    deflectionChance: {
-      maximum:
-        deflectionChanceRange.maximum - (deflectionChanceRange.maximum / 2) * (1 - growthFactor),
-      minimum:
-        deflectionChanceRange.minimum - (deflectionChanceRange.minimum / 2) * (1 - growthFactor),
+    deflection: {
+      maximum: deflectionRange.maximum - (deflectionRange.maximum / 2) * (1 - growthFactor),
+      minimum: deflectionRange.minimum - (deflectionRange.minimum / 2) * (1 - growthFactor),
     },
   };
 
   return {
     coinPrice: Math.round(600 * growthFactor * priceModifier),
-    deflectionChance: getFromRange(ranges.deflectionChance),
+    deflection: getFromRange(ranges.deflection),
     gearClass,
     level,
     name:
@@ -98,18 +91,18 @@ export function generateShield({
   name?: string;
   tags?: AffixTag[];
 }): Shield {
-  const { blockChanceRange, staggerModifier, staminaCostModifier, weightModifier } =
+  const { blockRange, staggerModifier, staminaCostModifier, weightModifier } =
     SHIELD_SPECIFICATIONS[gearClass];
   const growthFactor = getGrowthSigmoid(level);
   const ranges = {
-    blockChance: {
-      maximum: blockChanceRange.maximum - (blockChanceRange.maximum / 2) * (1 - growthFactor),
-      minimum: blockChanceRange.minimum - (blockChanceRange.minimum / 2) * (1 - growthFactor),
+    block: {
+      maximum: blockRange.maximum - (blockRange.maximum / 2) * (1 - growthFactor),
+      minimum: blockRange.minimum - (blockRange.minimum / 2) * (1 - growthFactor),
     },
   };
 
   return {
-    blockChance: getFromRange(ranges.blockChance),
+    block: getFromRange(ranges.block),
     coinPrice: Math.round(500 * growthFactor),
     gearClass,
     level,
@@ -127,7 +120,7 @@ export function generateShield({
       }),
     ranges,
     scrapPrice: Math.round(3000 * growthFactor),
-    staggerChance: (0.1 + 0.9 * growthFactor) * staggerModifier,
+    stagger: (0.1 + 0.9 * growthFactor) * staggerModifier,
     staminaCost: Math.ceil(40 * growthFactor * staminaCostModifier),
     weight: Math.ceil(40 * growthFactor * weightModifier),
   };

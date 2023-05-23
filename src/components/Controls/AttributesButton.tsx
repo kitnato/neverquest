@@ -58,11 +58,12 @@ export function AttributesButton() {
       </OverlayTrigger>
 
       <DismissableScreen
-        contents={<Attributes />}
         isShowing={isScreenShowing}
         onClose={() => setScreenShowing(false)}
         title="Attributes"
-      />
+      >
+        <Attributes />
+      </DismissableScreen>
     </>
   );
 }

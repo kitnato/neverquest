@@ -4,7 +4,7 @@ import { ArmorName } from "@neverquest/components/Inventory/Armor/ArmorName";
 import { ShieldName } from "@neverquest/components/Inventory/Shield/ShieldName";
 import { TrinketName } from "@neverquest/components/Inventory/Trinket/TrinketName";
 import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
-import { TRINKET_ICONS } from "@neverquest/data/trinkets";
+import { TRINKETS } from "@neverquest/data/trinkets";
 import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
 import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
 import { ReactComponent as IconWeapon } from "@neverquest/icons/weapon.svg";
@@ -57,7 +57,7 @@ export function ItemDisplay({
   return (
     <IconDisplay
       contents={<TrinketName placement={overlayPlacement} trinket={item} />}
-      Icon={TRINKET_ICONS[item.name]}
+      Icon={TRINKETS[item.name].Icon}
       iconProps={iconProps}
       tooltip="Trinket"
     />

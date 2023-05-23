@@ -1,4 +1,3 @@
-import { TRINKET_COMPASS, TRINKET_HEARTHSTONE, TRINKET_KNAPSACK } from "@neverquest/data/trinkets";
 import type {
   ArmorClass,
   ArtifactType,
@@ -6,7 +5,7 @@ import type {
   WeaponClass,
   WeaponModality,
 } from "@neverquest/LOCRA/types";
-import type { Trinket } from "@neverquest/types";
+import type { TrinketName } from "@neverquest/types";
 
 export const MERCHANT_OFFERS: (
   | ({
@@ -19,7 +18,9 @@ export const MERCHANT_OFFERS: (
       gearClass: WeaponClass;
       modality: WeaponModality;
     } & ArtifactType<"weapon">)
-  | Trinket
+  | ({
+      name: TrinketName;
+    } & ArtifactType<"trinket">)
 )[][] = [
   [
     {
@@ -40,8 +41,11 @@ export const MERCHANT_OFFERS: (
       type: "shield",
     },
   ],
-  [TRINKET_KNAPSACK],
-  [TRINKET_COMPASS, TRINKET_HEARTHSTONE],
+  [{ name: "Knapsack", type: "trinket" }],
+  [
+    { name: "Compass", type: "trinket" },
+    { name: "Hearthstone", type: "trinket" },
+  ],
   [
     {
       gearClass: "slashing",

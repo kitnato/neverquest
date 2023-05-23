@@ -1,7 +1,6 @@
 import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
-import { TRINKET_KNAPSACK } from "@neverquest/data/trinkets";
 import { canFit, encumbranceMaximum, hasKnapsack, inventory } from "@neverquest/state/inventory";
 import type { Trinket } from "@neverquest/types";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -19,7 +18,7 @@ export function useAcquireTrinket() {
           return null;
         }
 
-        if (name === TRINKET_KNAPSACK.name) {
+        if (name === "Knapsack") {
           set(encumbranceMaximum, (current) => current + 1);
           set(hasKnapsack, true);
         } else {

@@ -43,11 +43,12 @@ export function InventoryButton() {
       </OverlayTrigger>
 
       <DismissableScreen
-        contents={<Inventory />}
         isShowing={isInventoryOpenValue}
         onClose={() => setIsInventoryOpen(false)}
         title="Inventory"
-      />
+      >
+        <Inventory />
+      </DismissableScreen>
     </>
   );
 }

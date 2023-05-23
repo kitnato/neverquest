@@ -1,20 +1,14 @@
-import { type FunctionComponent, useState } from "react";
+import { useState } from "react";
 import { Card, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import { Alchemist } from "@neverquest/components/Caravan/Alchemist";
-import { Blacksmith } from "@neverquest/components/Caravan/Blacksmith";
 import { CrewHirable } from "@neverquest/components/Caravan/CrewHirable";
 import { CrewHired } from "@neverquest/components/Caravan/CrewHired";
-import { Medic } from "@neverquest/components/Caravan/Medic";
-import { Mercenary } from "@neverquest/components/Caravan/Mercenary";
-import { Merchant } from "@neverquest/components/Caravan/Merchant";
-import { Tailor } from "@neverquest/components/Caravan/Tailor";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { CREW, CREW_ORDER } from "@neverquest/data/caravan";
 import { crewActive, crewHirable } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
-import { CrewMember, ShowingType } from "@neverquest/types/enums";
+import { type CrewMember, ShowingType } from "@neverquest/types/enums";
 
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -24,32 +18,6 @@ export function Caravan() {
   const isShowingCrewHiring = useRecoilValue(isShowing(ShowingType.CrewHiring));
 
   const [isScreenShowing, setScreenShowing] = useState(false);
-
-  const ActiveMemberComponent: FunctionComponent = (() => {
-    switch (crewActiveValue) {
-      case CrewMember.Alchemist: {
-        return Alchemist;
-      }
-      case CrewMember.Blacksmith: {
-        return Blacksmith;
-      }
-      case CrewMember.Medic: {
-        return Medic;
-      }
-      case CrewMember.Mercenary: {
-        return Mercenary;
-      }
-      case CrewMember.Merchant: {
-        return Merchant;
-      }
-      case CrewMember.Tailor: {
-        return Tailor;
-      }
-      default: {
-        return () => null;
-      }
-    }
-  })();
 
   const toggleCrewActive = (isShowing: boolean, member?: CrewMember) => {
     setScreenShowing(isShowing);
@@ -86,14 +54,20 @@ export function Caravan() {
         </Card.Body>
       </Card>
 
-      {crewActiveValue !== null && (
-        <DismissableScreen
-          contents={<ActiveMemberComponent />}
-          isShowing={isScreenShowing}
-          onClose={() => toggleCrewActive(false)}
-          title={CREW[crewActiveValue].name}
-        />
-      )}
+      {crewActiveValue !== null &&
+        (() => {
+          const { Component, name } = CREW[crewActiveValue];
+
+          return (
+            <DismissableScreen
+              isShowing={isScreenShowing}
+              onClose={() => toggleCrewActive(false)}
+              title={name}
+            >
+              <Component />
+            </DismissableScreen>
+          );
+        })}
     </>
   );
 }

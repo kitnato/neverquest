@@ -46,7 +46,7 @@ export function HearthstoneUseButton() {
 
       <ConfirmationDialog
         confirmationLabel="Warp"
-        message="Warping back to Caravan now will forfeit all uncollected loot."
+        message="Warping back to the caravan now will forfeit all uncollected loot."
         onConfirm={toggleLocation}
         setHide={() => setIsShowingConfirmation(false)}
         show={isShowingConfirmation}

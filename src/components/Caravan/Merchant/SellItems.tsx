@@ -25,7 +25,7 @@ export function SellItems() {
 
   const inventoryIDs = Object.getOwnPropertyNames(inventoryValue);
 
-  const sellPossession = (id: string) => {
+  const sellItem = (id: string) => {
     const isEquipped = equippedGearIDValues.includes(id);
     const item = inventoryValue[id];
 
@@ -80,7 +80,7 @@ export function SellItems() {
                       if (isEquipped) {
                         setSellConfirmation(id);
                       } else {
-                        sellPossession(id);
+                        sellItem(id);
                       }
                     }}
                     variant="outline-dark"
@@ -99,7 +99,7 @@ export function SellItems() {
                 It can be bought back at the original purchase price
                 but it will be gone forever once leaving the caravan.
               `}
-              onConfirm={() => sellPossession(sellConfirmation)}
+              onConfirm={() => sellItem(sellConfirmation)}
               setHide={() => setSellConfirmation(null)}
               show={Boolean(sellConfirmation)}
               title="Sell equipped item?"

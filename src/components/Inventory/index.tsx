@@ -2,15 +2,21 @@ import type { FunctionComponent } from "react";
 import { Button, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { CompassUseButton } from "./Trinket/CompassUseButton";
+import { HearthstoneUseButton } from "./Trinket/HearthstoneUseButton";
 import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
-import { CompassUseButton } from "@neverquest/components/Inventory/Trinket/CompassUseButton";
-import { HearthstoneUseButton } from "@neverquest/components/Inventory/Trinket/HearthstoneUseButton";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/constants";
-import { TRINKET_COMPASS, TRINKET_HEARTHSTONE } from "@neverquest/data/trinkets";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { equippedGearIDs, inventory } from "@neverquest/state/inventory";
+import type { TrinketName } from "@neverquest/types";
 import { isGear, isTrinket } from "@neverquest/types/type-guards";
+
+const TRINKET_ACTIONS: Readonly<Record<TrinketName, FunctionComponent>> = {
+  Compass: CompassUseButton,
+  Hearthstone: HearthstoneUseButton,
+  Knapsack: () => null,
+} as const;
 
 export function Inventory() {
   const equippedGearIDValues = useRecoilValue(equippedGearIDs);
@@ -55,7 +61,7 @@ export function Inventory() {
 
         {storedItemIDs.map((id) => {
           const item = inventoryValue[id];
-          let PossessionAction: FunctionComponent = () => null;
+          let ItemAction: FunctionComponent = () => null;
 
           if (isGear(item)) {
             const EquipButton = () => (
@@ -64,30 +70,18 @@ export function Inventory() {
               </Button>
             );
 
-            PossessionAction = EquipButton;
+            ItemAction = EquipButton;
           }
 
           if (isTrinket(item)) {
-            PossessionAction = (() => {
-              switch (item.name) {
-                case TRINKET_COMPASS.name: {
-                  return CompassUseButton;
-                }
-                case TRINKET_HEARTHSTONE.name: {
-                  return HearthstoneUseButton;
-                }
-                default: {
-                  return () => null;
-                }
-              }
-            })();
+            ItemAction = TRINKET_ACTIONS[item.name];
           }
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
               <ItemDisplay item={item} />
 
-              <PossessionAction />
+              <ItemAction />
             </div>
           );
         })}

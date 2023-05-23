@@ -18,7 +18,9 @@ export enum CrewMember {
   Medic,
   Mercenary,
   Merchant,
+  Mystic,
   Tailor,
+  Witch,
 }
 
 export enum CrewStatus {

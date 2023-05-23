@@ -2,12 +2,12 @@ import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
 import { MERCHANT_OFFERS } from "@neverquest/data/merchant";
+import { TRINKETS } from "@neverquest/data/trinkets";
 import type { AffixTag } from "@neverquest/LOCRA/types";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { level, maximumLevel } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
 import type { InventoryMerchant } from "@neverquest/types";
-import { isTrinket } from "@neverquest/types/type-guards";
 import { generateArmor, generateShield, generateWeapon } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -45,39 +45,36 @@ export function useGenerateMerchantInventory() {
           MERCHANT_OFFERS[merchantOffersIndex].forEach((offer) => {
             const id = nanoid();
 
-            if (isTrinket(offer)) {
-              inventory[id] = {
-                isReturned: false,
-                item: offer,
-              };
-            } else {
-              const { type } = offer;
-              const gear = (() => {
-                if (type === "armor") {
-                  return generateArmor({
-                    ...SETTINGS_GEAR,
-                    ...offer,
-                  });
-                }
+            const { type } = offer;
+            const item = (() => {
+              if (type === "armor") {
+                return generateArmor({
+                  ...SETTINGS_GEAR,
+                  ...offer,
+                });
+              }
 
-                if (type === "weapon") {
-                  return generateWeapon({
-                    ...SETTINGS_GEAR,
-                    ...offer,
-                  });
-                }
-
+              if (type === "shield") {
                 return generateShield({
                   ...SETTINGS_GEAR,
                   ...offer,
                 });
-              })();
+              }
 
-              inventory[id] = {
-                isReturned: false,
-                item: gear,
-              };
-            }
+              if (type === "weapon") {
+                return generateWeapon({
+                  ...SETTINGS_GEAR,
+                  ...offer,
+                });
+              }
+
+              return TRINKETS[offer.name].item;
+            })();
+
+            inventory[id] = {
+              isReturned: false,
+              item,
+            };
           });
         }
 

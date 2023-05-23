@@ -2,6 +2,7 @@ import { type ChangeEvent, useState } from "react";
 import { Button, Form, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
+import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
@@ -26,18 +27,18 @@ export function CompassUseButton() {
   const [levelValue, setLevel] = useRecoilState(level);
   const wildernessesValue = useRecoilValue(wildernesses);
 
-  const [isShowing, setIsShowing] = useState(false);
+  const [isShowingConfirmation, setIsShowingConfirmation] = useState(false);
+  const [isShowingNavigation, setIsShowingNavigation] = useState(false);
 
   const resetWilderness = useResetWilderness();
 
-  const canNavigate =
-    (!isLevelStartedValue || (isLevelCompletedValue && hasLootedValue)) && isWildernessValue;
+  const canNavigate = (!isLevelStartedValue || isLevelCompletedValue) && isWildernessValue;
 
   const handleNavigate = ({ target: { value } }: ChangeEvent<HTMLSelectElement>) => {
-    setIsShowing(false);
+    setIsShowingNavigation(false);
     setLevel(Number(value));
-    resetIsInventoryOpen();
 
+    resetIsInventoryOpen();
     resetWilderness();
   };
 
@@ -46,25 +47,33 @@ export function CompassUseButton() {
       <OverlayTrigger
         overlay={
           <Tooltip>
-            {isWildernessValue
-              ? `Too ${isLevelCompletedValue ? "much loot" : "many monsters"}.`
-              : "The caravan is interfering."}
+            {isWildernessValue ? "Too many monsters." : "The caravan is interfering."}
           </Tooltip>
         }
         trigger={canNavigate ? [] : ["hover", "focus"]}
       >
         <span className="d-inline-block">
-          <Button disabled={!canNavigate} onClick={() => setIsShowing(true)} variant="outline-dark">
+          <Button
+            disabled={!canNavigate}
+            onClick={() => {
+              if (isLevelCompletedValue && !hasLootedValue) {
+                setIsShowingConfirmation(true);
+              } else {
+                setIsShowingNavigation(true);
+              }
+            }}
+            variant="outline-dark"
+          >
             Use
           </Button>
         </span>
       </OverlayTrigger>
 
-      <Modal onHide={() => setIsShowing(false)} show={isShowing}>
+      <Modal onHide={() => setIsShowingNavigation(false)} show={isShowingNavigation}>
         <Modal.Header closeButton>
           <Modal.Title>
             <IconImage Icon={IconCompass} />
-            &nbsp;Travel between wildernesses
+            &nbsp;Navigate the wilderness
           </Modal.Title>
         </Modal.Header>
 
@@ -86,6 +95,15 @@ export function CompassUseButton() {
           />
         </Modal.Body>
       </Modal>
+
+      <ConfirmationDialog
+        confirmationLabel="Navigate"
+        message="Navigating now will forfeit all uncollected loot."
+        onConfirm={() => setIsShowingNavigation(true)}
+        setHide={() => setIsShowingConfirmation(false)}
+        show={isShowingConfirmation}
+        title="Forfeit loot?"
+      />
     </>
   );
 }

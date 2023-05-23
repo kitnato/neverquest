@@ -62,7 +62,7 @@ export const CREW: Record<
   [CrewMember.Merchant]: {
     coinPrice: 0,
     Component: Merchant,
-    description: "",
+    description: "Offers various items for purchase and buys unwanted items.",
     hirableLevel: 0,
     interaction: "Trade",
     monologues: [

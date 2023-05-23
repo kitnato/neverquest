@@ -67,7 +67,7 @@ export function Caravan() {
               <Component />
             </DismissableScreen>
           );
-        })}
+        })()}
     </>
   );
 }

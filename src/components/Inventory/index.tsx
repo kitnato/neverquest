@@ -44,7 +44,7 @@ export function Inventory() {
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-              <ItemDisplay item={item} />
+              <ItemDisplay item={item} overlayPlacement="right" />
 
               <Button onClick={() => toggleEquipGear(id)} variant="outline-dark">
                 Unequip

@@ -4,9 +4,10 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Coins } from "@neverquest/components/Resources/Coins";
 import { CREW } from "@neverquest/data/caravan";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/constants";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/data/constants";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { ReactComponent as IconCrewMember } from "@neverquest/icons/crew-member.svg";
+import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { crew } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import { coins } from "@neverquest/state/resources";
@@ -19,11 +20,7 @@ export function CrewHirable({ type }: { type: CrewMember }) {
 
   const transactResources = useTransactResources();
 
-  if (hireStatus !== CrewStatus.Hirable) {
-    return null;
-  }
-
-  const { coinPrice, description, name } = CREW[type];
+  const { coinPrice, description, hirableLevel, name } = CREW[type];
   const isAffordable = coinPrice <= coinsValue;
 
   const handleHire = () => {
@@ -38,24 +35,44 @@ export function CrewHirable({ type }: { type: CrewMember }) {
     }
   };
 
+  if (hireStatus === CrewStatus.Hired) {
+    return null;
+  }
+
+  if (hireStatus === CrewStatus.Hirable) {
+    return (
+      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+        <IconDisplay
+          contents={name}
+          description={description}
+          Icon={IconCrewMember}
+          tooltip={name}
+        />
+
+        <Stack direction="horizontal" gap={3}>
+          <Coins tooltip="Price (coins)" value={coinPrice} />
+
+          <OverlayTrigger
+            overlay={<Tooltip>Not enough coins!</Tooltip>}
+            trigger={isAffordable ? [] : ["hover", "focus"]}
+          >
+            <span className="d-inline-block">
+              <Button disabled={!isAffordable} onClick={handleHire} variant="outline-dark">
+                Hire
+              </Button>
+            </span>
+          </OverlayTrigger>
+        </Stack>
+      </div>
+    );
+  }
+
   return (
-    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-      <IconDisplay contents={name} description={description} Icon={IconCrewMember} tooltip={name} />
-
-      <Stack direction="horizontal" gap={3}>
-        <Coins tooltip="Price (coins)" value={coinPrice} />
-
-        <OverlayTrigger
-          overlay={<Tooltip>Not enough coins!</Tooltip>}
-          trigger={isAffordable ? [] : ["hover", "focus"]}
-        >
-          <span className="d-inline-block">
-            <Button disabled={!isAffordable} onClick={handleHire} variant="outline-dark">
-              Hire
-            </Button>
-          </span>
-        </OverlayTrigger>
-      </Stack>
-    </div>
+    <IconDisplay
+      contents={LABEL_UNKNOWN}
+      description={`Unlocks at Level ${hirableLevel}`}
+      Icon={IconUnknown}
+      tooltip={LABEL_UNKNOWN}
+    />
   );
 }

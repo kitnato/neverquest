@@ -7,6 +7,10 @@ import type {
 } from "@neverquest/LOCRA/types";
 import type { TrinketName } from "@neverquest/types";
 
+export const MEDIC_PRICE_BANDAGES = 18;
+export const MEDIC_PRICE_SURGERY = 6;
+export const MEDIC_PRICE_SURGERY_CRITICAL = 15;
+
 export const MERCHANT_OFFERS: (
   | ({
       gearClass: ArmorClass;

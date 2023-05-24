@@ -34,7 +34,7 @@ export function PoisonedMeter() {
       changeHealth({
         delta: {
           color: "text-danger",
-          value: `POISONED (-${poisonTick})`,
+          value: `POISONED -${poisonTick}`,
         },
         value: -poisonTick,
       });

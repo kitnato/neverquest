@@ -44,8 +44,8 @@ export const CREW: Record<
   [CrewMember.Medic]: {
     coinPrice: 50,
     Component: Medic,
-    description: "Stems wounds and sells first aid kits.",
-    hirableLevel: 12,
+    description: "Heals wounds and sells bandages.",
+    hirableLevel: 8,
     interaction: "Heal",
     monologues: ["Allow me to patch you up."],
     name: "Medic",
@@ -54,7 +54,7 @@ export const CREW: Record<
     coinPrice: 40,
     Component: Mercenary,
     description: "Trains new skills and attributes.",
-    hirableLevel: 8,
+    hirableLevel: 12,
     interaction: "Train",
     monologues: ["Perhaps I can teach you something."],
     name: "Mercenary",
@@ -76,7 +76,7 @@ export const CREW: Record<
   },
   // TODO
   [CrewMember.Mystic]: {
-    coinPrice: 150,
+    coinPrice: 200,
     Component: Mystic,
     description: "Unlocks resetting of the power level.",
     hirableLevel: 30,
@@ -85,17 +85,17 @@ export const CREW: Record<
     name: "Alchemist",
   },
   [CrewMember.Tailor]: {
-    coinPrice: 30,
+    coinPrice: 40,
     Component: Tailor,
     description: "Expands inventory space.",
-    hirableLevel: 5,
+    hirableLevel: 6,
     interaction: "Upgrade",
     monologues: ["Allow me to deepen your pockets."],
     name: "Tailor",
   },
   // TODO
   [CrewMember.Witch]: {
-    coinPrice: 100,
+    coinPrice: 120,
     Component: Witch,
     description: "Sells potions that cure ailments.",
     hirableLevel: 20,
@@ -107,13 +107,6 @@ export const CREW: Record<
 
 export const CREW_INITIAL = [CrewMember.Merchant] as const;
 
-export const CREW_ORDER = [
-  CrewMember.Merchant,
-  CrewMember.Mercenary,
-  CrewMember.Blacksmith,
-  CrewMember.Tailor,
-  CrewMember.Medic,
-  CrewMember.Witch,
-  CrewMember.Alchemist,
-  CrewMember.Mystic,
-] as const;
+export const CREW_ORDER: CrewMember[] = Object.entries(CREW)
+  .sort(([, a], [, b]) => a.hirableLevel - b.hirableLevel)
+  .map(([type]) => Number(type) as CrewMember);

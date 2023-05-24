@@ -3,10 +3,16 @@ import type { Placement } from "react-bootstrap/esm/types";
 
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import type { Trinket } from "@neverquest/types";
+import type { Consumable, Trinket } from "@neverquest/types";
 
-export function TrinketName({ placement, trinket }: { placement?: Placement; trinket: Trinket }) {
-  const { description, name, weight } = trinket;
+export function ItemName({
+  item,
+  placement,
+}: {
+  item: Consumable | Trinket;
+  placement?: Placement;
+}) {
+  const { description, name, weight } = item;
 
   return (
     <OverlayTrigger

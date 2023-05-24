@@ -3,17 +3,17 @@ import { useRecoilCallback } from "recoil";
 
 import { KNAPSACK_SIZE } from "@neverquest/data/trinkets";
 import { canFit, encumbranceMaximum, hasKnapsack, inventory } from "@neverquest/state/inventory";
-import type { Trinket } from "@neverquest/types";
+import type { Consumable, Trinket } from "@neverquest/types";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export function useAcquireTrinket() {
+export function useAcquireItem() {
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      ({ trinket }: { trinket: Trinket }) => {
+      ({ item }: { item: Consumable | Trinket }) => {
         const get = getSnapshotGetter(snapshot);
 
         const id = nanoid();
-        const { name, weight } = trinket;
+        const { name, weight } = item;
 
         if (!get(canFit(weight))) {
           return null;
@@ -25,7 +25,7 @@ export function useAcquireTrinket() {
         } else {
           set(inventory, (current) => ({
             ...current,
-            [id]: trinket,
+            [id]: item,
           }));
         }
 

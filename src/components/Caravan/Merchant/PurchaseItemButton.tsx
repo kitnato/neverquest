@@ -2,20 +2,20 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { useAcquireGear } from "@neverquest/hooks/actions/useAcquireGear";
-import { useAcquireTrinket } from "@neverquest/hooks/actions/useAcquireTrinket";
+import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { hasBoughtFromMerchant, merchantInventory } from "@neverquest/state/caravan";
 import { canFit } from "@neverquest/state/inventory";
 import { coins } from "@neverquest/state/resources";
-import { isTrinket } from "@neverquest/types/type-guards";
+import { isGear } from "@neverquest/types/type-guards";
 
 export function PurchaseItemButton({ id }: { id: string }) {
   const coinsValue = useRecoilValue(coins);
   const [merchantInventoryValue, setMerchantInventory] = useRecoilState(merchantInventory);
   const setHasBoughtFromMerchant = useSetRecoilState(hasBoughtFromMerchant);
 
-  const acquireTrinket = useAcquireTrinket();
+  const acquireItem = useAcquireItem();
   const acquireGear = useAcquireGear();
   const toggleEquipGear = useToggleEquipGear();
   const transactResources = useTransactResources();
@@ -29,9 +29,7 @@ export function PurchaseItemButton({ id }: { id: string }) {
   const handlePurchase = () => {
     let acquiredID: string | null = null;
 
-    if (isTrinket(item)) {
-      acquiredID = acquireTrinket({ trinket: item });
-    } else {
+    if (isGear(item)) {
       const [shouldAutoEquip, id] = acquireGear({ gear: item });
 
       if (id !== null) {
@@ -41,10 +39,13 @@ export function PurchaseItemButton({ id }: { id: string }) {
           toggleEquipGear(acquiredID);
         }
       }
+    } else {
+      acquiredID = acquireItem({ item });
     }
 
     if (acquiredID !== null) {
       transactResources({ coinsDifference: -coinPrice });
+
       setMerchantInventory((current) => {
         const { [id]: _, ...newMerchantInventory } = current;
 

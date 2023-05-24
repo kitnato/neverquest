@@ -192,7 +192,7 @@ Amount of damage that is discarded from the total when defending. This is determ
 
 #### Recovery rate
 
-Recovery occurs when the character is dealt damage, halting regeneration of [reserves](#reserves) and the [attack meter](#attack-rate). It is bounded by a certain duration, which can be decreased with the [Resilience](#resilience) attribute.
+Time until character recovers from a monster's successful attack. This duration can be decreased with the [Resilience](#resilience) attribute.
 
 #### Stagger chance
 
@@ -230,21 +230,11 @@ Apart from the ones marked in bold in the [combat](#combat) section, there are s
 
 Some of the following effects are intrinsic to gear and aren't controlled directly the way [attributes](#attributes) are.
 
-#### Bleed
-
-Certain successful attacks by the character can inflict "bleeding" on the monster, a damage over time effect consisting of a total amount of damage inflicted regularly over a certain period of time.
-
-The statistics [bleed chance](#bleed-chance) and [bleed damage](#bleed-damage) determine this mechanic. Inflicting bleed is only possible after acquiring the [Anatomy](#anatomy) skill. This mechanic functions similar to its counterpart [poison](#poison).
-
 #### Block
 
 A successful block by the character upon a monster's attack will negate all damage done, yet costs [stamina](#stamina). Blocking may also inflict [stagger](#stagger) on the monster, depending on the acquisition of the [Traumatology](#traumatology) skill.
 
 The overall chance to block an attack is determined by the [block chance](#block-chance) statistic and is determined primarily by wielding a [shield](#shields).
-
-#### Blight
-
-Blight may be inflicted by a monster if it successfully [poisons](#poison) the character while they are poisoned already, during which total stamina is reduced by a set percentage until the poisoned effect ends. The magnitude and chance of this blight is proportional to the wilderness level in which the monster resides.
 
 #### Critical Strike
 
@@ -281,24 +271,6 @@ A successful parry [absorbs](#parry-absorption) a percentage of the total damage
 The overall chance to parry an attack is determined by the [parry chance](#parry-chance), which is influenced by currently-equipped gear ([slashing weapons](#slashing-weapon). When parrying occurs, the stamina cost of the currently-equipped weapon is paid. If [exhausted](#exhaustion), no parrying can occur.
 
 Parrying is only possible after acquiring the [Escrime](#escrime) skill.
-
-#### Poison
-
-Certain successful attacks by the monster can afflict the character with "poisoned", a damage over time effect consisting of a total amount of damage inflicted regularly over a certain period of time.
-
-Monsters won't exhibit this mechanic until later [wilderness](#wilderness) levels. It functions similar to its counterpart [bleed](#bleed).
-
-Once poisoned, there is also a chance for the character to become [blighted](#blight).
-
-Poison (and resulting blight) effects can be [deflected](#deflection).
-
-#### Stagger
-
-When staggered, the monster will not be able to attack for a certain duration. The character is considered staggered themselves when they are [recovering](#recovery-rate).
-
-The overall [stagger chance](#stagger-chance) statistic is determined by the current gear ([shields](#shields) and [blunt weapons](#blunt-weapon)). The [stagger duration](#stagger-duration) is determined by the [Might](#might) mastery.
-
-Staggering is only possible after acquiring the [Traumatology](#traumatology) skill.
 
 ## Encounter
 
@@ -340,7 +312,7 @@ Grants a Well Fed [buff](#buffs) for the next wilderness level (+10% [mastery](#
 
 #### Medic
 
-Offers full healing in exchange for coins. Also sells first-aid kits that stem [bleeding](#bleeding) and restore health.
+Offers full healing in exchange for coins. Also sells bandages that stem [bleeding](#bleed) and restore health.
 
 #### Mercenary
 
@@ -677,19 +649,43 @@ Temporary or permanent effects granted or changing the current monster or charac
 
 ### Ailments
 
-Negative status effects that dampen the character or monster. For the character, they may be treated by [potions](#potions).
+Negative status effects that dampen the character or monster.
 
-#### Bleeding
+#### Bleed
 
-Certain monster attacks may apply a [bleeding](#bleed) effect on the character. This can be stemmed by a [first-aid kit](#medic). It can also be avoided if an attack is successfully [deflected](#deflection).
+Certain successful attacks by the character can inflict bleeding on the monster, a damage over time effect consisting of a total amount of damage inflicted regularly over a certain period of time.
 
-#### Blighted
+The statistics [bleed chance](#bleed-chance) and [bleed damage](#bleed-damage) determine this mechanic. Inflicting bleed is only possible after acquiring the [Anatomy](#anatomy) skill. This mechanic functions similar to its counterpart [poison](#poison).
 
-Upon successfully [poisoning](#poisoned) the character, a monster's attack may also apply a [blighted](#blight) effect on the character. This effect can be cured by a [salve](#salve).
+#### Blight
 
-#### Poisoned
+Blight may be inflicted by a monster if it successfully [poisons](#poison) the character while they are poisoned already, during which total stamina is reduced by a set percentage until the poisoned effect ends. The magnitude and chance of this blight is proportional to the wilderness level in which the monster resides.
 
-Certain monster attacks may apply a [poisoned](#poison) effect on the character. This effect can be cured by a [salve](#salve). It can also be avoided if an attack is successfully [deflected](#deflection).
+This effect can be cured by a [salve](#salve). It can also be avoided if an attack is successfully [deflected](#deflection).
+
+#### Poison
+
+Certain successful attacks by the monster can afflict the character with poison, a damage over time effect consisting of a total amount of damage inflicted regularly over a certain period of time.
+
+Monsters won't exhibit this mechanic until later [wilderness](#wilderness) levels. It functions similar to its counterpart [bleed](#bleed).
+
+Once poisoned, there is also a chance for the character to become [blighted](#blight).
+
+This effect can be cured by a [salve](#salve). It can also be avoided if an attack is successfully [deflected](#deflection).
+
+#### Recovery
+
+Recovery occurs when the character is dealt damage, halting regeneration of [reserves](#reserves) and the [attack meter](#attack-rate). Its duration is determined by the [recovery rate](#recovery-rate).
+
+It functions similarly to its counterpart [stagger](#stagger).
+
+#### Stagger
+
+When staggered, the monster will not be able to attack for a certain duration. It functions similarly to its counterpart [recovery](#recovery).
+
+The overall [stagger chance](#stagger-chance) statistic is determined by the current gear ([shields](#shields) and [blunt weapons](#blunt-weapon)). The [stagger duration](#stagger-duration) is determined by the [Might](#might) mastery.
+
+Staggering is only possible after acquiring the [Traumatology](#traumatology) skill.
 
 ### Buffs
 

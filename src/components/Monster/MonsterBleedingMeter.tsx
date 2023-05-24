@@ -36,7 +36,7 @@ export function MonsterBleedingMeter() {
       changeMonsterHealth({
         delta: {
           color: "text-danger",
-          value: `BLEEDING (-${bleedingDamage})`,
+          value: `BLEEDING -${bleedingDamage}`,
         },
         value: -bleedingDamage,
       });

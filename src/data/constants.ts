@@ -1,6 +1,6 @@
 import type { DeltaDisplay } from "@neverquest/types/ui";
 
-export const ATTACK_RATE_ATTENUATION = 2500;
+export const ATTACK_RATE_ATTENUATION = 2000;
 
 export const BLEED = {
   duration: 3000,

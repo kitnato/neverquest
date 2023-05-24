@@ -22,6 +22,13 @@ export type AttributeOrMastery = {
   requiredSkill?: SkillType;
 };
 
+export type Consumable = ItemBase & {
+  description: string;
+  name: ConsumableName;
+};
+
+export type ConsumableName = "Bandages" | "Elixir" | "Salve";
+
 export type Inventory = Record<string, Item>;
 
 export type InventoryBlacksmith = {
@@ -38,7 +45,7 @@ export type InventoryMerchant = Record<
   }
 >;
 
-export type Item = Gear | Trinket;
+export type Item = Consumable | Gear | Trinket;
 
 type ItemBase = {
   coinPrice: number;

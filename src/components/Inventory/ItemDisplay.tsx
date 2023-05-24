@@ -1,16 +1,18 @@
 import type { Placement } from "react-bootstrap/esm/types";
+
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ArmorName } from "@neverquest/components/Inventory/Armor/ArmorName";
+import { ItemName } from "@neverquest/components/Inventory/ItemName";
 import { ShieldName } from "@neverquest/components/Inventory/Shield/ShieldName";
-import { TrinketName } from "@neverquest/components/Inventory/Trinket/TrinketName";
 import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
+import { CONSUMABLES } from "@neverquest/data/consumables";
 import { TRINKETS } from "@neverquest/data/trinkets";
 import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
 import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
 import { ReactComponent as IconWeapon } from "@neverquest/icons/weapon.svg";
 import type { Item } from "@neverquest/types";
 import type { IconImageDOMProps } from "@neverquest/types/props";
-import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
+import { isArmor, isShield, isTrinket, isWeapon } from "@neverquest/types/type-guards";
 
 export function ItemDisplay({
   iconProps,
@@ -43,6 +45,17 @@ export function ItemDisplay({
     );
   }
 
+  if (isTrinket(item)) {
+    return (
+      <IconDisplay
+        contents={<ItemName item={item} placement={overlayPlacement} />}
+        Icon={TRINKETS[item.name].Icon}
+        iconProps={iconProps}
+        tooltip="Trinket"
+      />
+    );
+  }
+
   if (isWeapon(item)) {
     return (
       <IconDisplay
@@ -56,10 +69,10 @@ export function ItemDisplay({
 
   return (
     <IconDisplay
-      contents={<TrinketName placement={overlayPlacement} trinket={item} />}
-      Icon={TRINKETS[item.name].Icon}
+      contents={<ItemName item={item} placement={overlayPlacement} />}
+      Icon={CONSUMABLES[item.name].Icon}
       iconProps={iconProps}
-      tooltip="Trinket"
+      tooltip="Consumable"
     />
   );
 }

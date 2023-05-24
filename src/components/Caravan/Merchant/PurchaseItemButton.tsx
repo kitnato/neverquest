@@ -46,9 +46,7 @@ export function PurchaseItemButton({ id }: { id: string }) {
     if (acquiredID !== null) {
       transactResources({ coinsDifference: -coinPrice });
       setMerchantInventory((current) => {
-        const newMerchantInventory = { ...current };
-
-        Reflect.deleteProperty(newMerchantInventory, id);
+        const { [id]: _, ...newMerchantInventory } = current;
 
         return newMerchantInventory;
       });

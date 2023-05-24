@@ -33,3 +33,5 @@ export const TRINKETS: Readonly<Record<TrinketName, { Icon: SVGIcon; item: Trink
     },
   },
 } as const;
+
+export const KNAPSACK_SIZE = 3;

@@ -34,9 +34,7 @@ export function SellItems() {
     }
 
     setInventory((current) => {
-      const newInventoryContents = { ...current };
-
-      Reflect.deleteProperty(newInventoryContents, id);
+      const { [id]: _, ...newInventoryContents } = current;
 
       return newInventoryContents;
     });

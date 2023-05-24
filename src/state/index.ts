@@ -29,15 +29,17 @@ export function handleLocalStorage<ValueType>({
     }
 
     onSet((newValue, _, isReset) => {
-      const newStore = ls.get<Store>(storeKey) ?? {};
+      const store = ls.get<Store>(storeKey);
 
-      if (isReset) {
-        Reflect.deleteProperty(newStore, valueKey);
-      } else {
-        newStore[valueKey] = newValue;
+      if (store !== null) {
+        if (isReset) {
+          const { [valueKey]: _, ...newStore } = store;
+
+          ls.set(storeKey, newStore);
+        } else {
+          ls.set(storeKey, { ...store, [valueKey]: newValue });
+        }
       }
-
-      ls.set(storeKey, newStore);
     });
   };
 }

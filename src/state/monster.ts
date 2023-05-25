@@ -25,7 +25,7 @@ export const isMonsterStaggered = withStateKey("isMonsterStaggered", (key) =>
 export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   selector({
     get: ({ get }) =>
-      4200 -
+      4500 -
       Math.round(4000 * getGrowthSigmoid(get(level)) - 100 * getGrowthSigmoid(get(progress))),
     key,
   })

@@ -4,7 +4,7 @@ import { useRecoilCallback } from "recoil";
 import { ATTRIBUTES_INITIAL } from "@neverquest/data/attributes";
 import { CREW_INITIAL } from "@neverquest/data/caravan";
 import { KEY_SESSION } from "@neverquest/data/constants";
-import { useCreateMonster } from "@neverquest/hooks/actions/useCreateMonster";
+import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
 import { attributes } from "@neverquest/state/attributes";
 import { crew } from "@neverquest/state/caravan";
 import { level, wildernesses } from "@neverquest/state/encounter";
@@ -14,7 +14,7 @@ import { generateLocation } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useInitialize() {
-  const createMonster = useCreateMonster();
+  const createMonster = useGenerateMonster();
 
   return useRecoilCallback(
     ({ set, snapshot }) =>

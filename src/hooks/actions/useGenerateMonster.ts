@@ -11,20 +11,21 @@ import {
   monsterName,
 } from "@neverquest/state/monster";
 import { allowNSFW } from "@neverquest/state/settings";
-import { getSnapshotGetter } from "@neverquest/utilities/getters";
+import { getGrowthSigmoid, getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export function useCreateMonster() {
+export function useGenerateMonster() {
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
       () => {
         const get = getSnapshotGetter(snapshot);
+        const growthFactor = getGrowthSigmoid(get(level));
 
         set(
           monsterName,
           LOCRA.generateCreature({
             allowNSFW: get(allowNSFW),
-            hasPrefix: Math.random() < 0.8,
-            hasSuffix: Math.random() < 0.1 * Math.round(get(level) / 2),
+            hasPrefix: Math.random() <= 0.6 + 0.4 * growthFactor,
+            hasSuffix: Math.random() <= 0.05 + 0.75 * growthFactor,
             type: "monster",
           })
         );

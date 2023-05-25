@@ -68,10 +68,12 @@ export function generateArmor({
 }
 
 export function generateLocation({ allowNSFW, level }: { allowNSFW: boolean; level: number }) {
+  const growthFactor = getGrowthSigmoid(level);
+
   return LOCRA.generateLocation({
     allowNSFW,
-    hasPrefix: Math.random() < 0.8,
-    hasSuffix: Math.random() < 0.1 * Math.round(level / 2),
+    hasPrefix: Math.random() < 0.7 + 0.3 * growthFactor,
+    hasSuffix: Math.random() < 0.1 + 0.7 * growthFactor,
   });
 }
 

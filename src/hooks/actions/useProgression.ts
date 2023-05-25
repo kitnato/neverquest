@@ -1,12 +1,12 @@
 import { useRecoilCallback } from "recoil";
 
-import { useCreateMonster } from "@neverquest/hooks/actions/useCreateMonster";
+import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
 import { attackDuration, isAttacking } from "@neverquest/state/character";
 import { isLevelCompleted } from "@neverquest/state/encounter";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useProgression() {
-  const createMonster = useCreateMonster();
+  const createMonster = useGenerateMonster();
 
   return useRecoilCallback(
     ({ reset, snapshot }) =>

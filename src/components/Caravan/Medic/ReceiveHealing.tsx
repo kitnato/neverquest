@@ -31,7 +31,7 @@ export function ReceiveHealing() {
   const isAffordable = price <= coinsValue;
   const isPurchasable = isAffordable && !isHealthAtMaximumValue;
 
-  const handleOperate = () => {
+  const handleHeal = () => {
     changeHealth({
       delta: {
         color: "text-success",
@@ -68,8 +68,8 @@ export function ReceiveHealing() {
             trigger={isAffordable ? [] : ["hover", "focus"]}
           >
             <span className="d-inline-block">
-              <Button disabled={!isPurchasable} onClick={handleOperate} variant="outline-dark">
-                Operate
+              <Button disabled={!isPurchasable} onClick={handleHeal} variant="outline-dark">
+                Heal
               </Button>
             </span>
           </OverlayTrigger>

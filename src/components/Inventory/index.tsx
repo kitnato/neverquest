@@ -12,11 +12,11 @@ import { equippedGearIDs, inventory } from "@neverquest/state/inventory";
 import type { TrinketName } from "@neverquest/types";
 import { isGear, isTrinket } from "@neverquest/types/type-guards";
 
-const TRINKET_ACTIONS: Readonly<Record<TrinketName, FunctionComponent>> = {
+const TRINKET_ACTIONS: Record<TrinketName, FunctionComponent> = {
   Compass: CompassUseButton,
   Hearthstone: HearthstoneUseButton,
   Knapsack: () => null,
-} as const;
+};
 
 export function Inventory() {
   const equippedGearIDValues = useRecoilValue(equippedGearIDs);

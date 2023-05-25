@@ -55,4 +55,4 @@ export const RESERVES = {
     atomRegenerationRate: staminaRegenerationRate,
     useActionChange: useChangeStamina,
   },
-} as const;
+};

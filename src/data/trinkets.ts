@@ -4,7 +4,7 @@ import { ReactComponent as IconKnapsack } from "@neverquest/icons/knapsack.svg";
 import type { Trinket, TrinketName } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
 
-export const TRINKETS: Readonly<Record<TrinketName, { Icon: SVGIcon; item: Trinket }>> = {
+export const TRINKETS: Record<TrinketName, { Icon: SVGIcon; item: Trinket }> = {
   Compass: {
     Icon: IconCompass,
     item: {
@@ -32,6 +32,6 @@ export const TRINKETS: Readonly<Record<TrinketName, { Icon: SVGIcon; item: Trink
       weight: 0,
     },
   },
-} as const;
+};
 
 export const KNAPSACK_SIZE = 3;

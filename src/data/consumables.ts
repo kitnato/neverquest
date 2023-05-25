@@ -4,7 +4,7 @@ import { ReactComponent as IconKnapsack } from "@neverquest/icons/knapsack.svg";
 import type { Consumable, ConsumableName } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
 
-export const CONSUMABLES: Readonly<Record<ConsumableName, { Icon: SVGIcon; item: Consumable }>> = {
+export const CONSUMABLES: Record<ConsumableName, { Icon: SVGIcon; item: Consumable }> = {
   Bandages: {
     Icon: IconBandages,
     item: {
@@ -32,4 +32,4 @@ export const CONSUMABLES: Readonly<Record<ConsumableName, { Icon: SVGIcon; item:
       weight: 1,
     },
   },
-} as const;
+};

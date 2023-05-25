@@ -3,7 +3,7 @@ import type { AttributeOrMastery } from "@neverquest/types";
 import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
 
 // TODO - diversify icons.
-export const MASTERIES: Readonly<Record<MasteryType, AttributeOrMastery>> = {
+export const MASTERIES: Record<MasteryType, AttributeOrMastery> = {
   [MasteryType.BleedDamage]: {
     base: 0.1,
     description: "Affects bleed damage. Trains when inflicting bleed.",
@@ -49,7 +49,7 @@ export const MASTERIES: Readonly<Record<MasteryType, AttributeOrMastery>> = {
     name: "Tenacity",
     requiredSkill: SkillType.Armors,
   },
-} as const;
+};
 
 export const MASTERIES_ORDER = [
   MasteryType.StaggerDuration,
@@ -57,12 +57,12 @@ export const MASTERIES_ORDER = [
   MasteryType.BleedDamage,
   MasteryType.Tenacity,
   MasteryType.Stability,
-] as const;
+];
 
-export const MASTERY_DELTA_TYPE: Readonly<Record<MasteryType, DeltaType>> = {
+export const MASTERY_DELTA_TYPE: Record<MasteryType, DeltaType> = {
   [MasteryType.BleedDamage]: DeltaType.MasteryBleed,
   [MasteryType.ParryFactor]: DeltaType.MasteryParry,
   [MasteryType.Stability]: DeltaType.Stability,
   [MasteryType.StaggerDuration]: DeltaType.MasteryStagger,
   [MasteryType.Tenacity]: DeltaType.Tenacity,
-} as const;
+};

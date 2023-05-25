@@ -5,7 +5,7 @@ export const ATTACK_RATE_ATTENUATION = 2000;
 export const BLEED = {
   duration: 3000,
   ticks: 10,
-} as const;
+};
 
 export const CLASS_ANIMATE_PREFIX = "animate__";
 export const CLASS_ANIMATED = `${CLASS_ANIMATE_PREFIX}animated`;
@@ -15,7 +15,7 @@ export const CLASS_TABLE_CELL_ITALIC = "fst-italic text-end";
 export const DEFAULT_DELTA_DISPLAY: DeltaDisplay = {
   color: null,
   value: "",
-} as const;
+};
 
 export const ENCUMBRANCE = 3;
 
@@ -37,7 +37,7 @@ export const POISON = {
   duration: 15000,
   minimumLevel: 11,
   ticks: 10,
-} as const;
+};
 
 export const RECOVERY_RATE = 1500;
 

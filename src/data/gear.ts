@@ -24,20 +24,18 @@ export const ARMOR_NONE = {
   protection: 0,
   staminaCost: 0,
   weight: 0,
-} as const;
+};
 
-export const ARMOR_SPECIFICATIONS: Readonly<
-  Record<
-    ArmorClass,
-    {
-      deflectionRange: Range;
-      dodgeCostModifier: number;
-      Icon: SVGIcon;
-      priceModifier: number;
-      protectionModifier: number;
-      weightModifier: number;
-    }
-  >
+export const ARMOR_SPECIFICATIONS: Record<
+  ArmorClass,
+  {
+    deflectionRange: Range;
+    dodgeCostModifier: number;
+    Icon: SVGIcon;
+    priceModifier: number;
+    protectionModifier: number;
+    weightModifier: number;
+  }
 > = {
   hide: {
     deflectionRange: { maximum: 0, minimum: 0 },
@@ -63,7 +61,7 @@ export const ARMOR_SPECIFICATIONS: Readonly<
     protectionModifier: 1.5,
     weightModifier: 2,
   },
-} as const;
+};
 
 // Shield
 
@@ -74,19 +72,17 @@ export const SHIELD_NONE = {
   stagger: 0,
   staminaCost: 0,
   weight: 0,
-} as const;
+};
 
-export const SHIELD_SPECIFICATIONS: Readonly<
-  Record<
-    ShieldClass,
-    {
-      blockRange: Range;
-      Icon: SVGIcon;
-      staggerModifier: number;
-      staminaCostModifier: number;
-      weightModifier: number;
-    }
-  >
+export const SHIELD_SPECIFICATIONS: Record<
+  ShieldClass,
+  {
+    blockRange: Range;
+    Icon: SVGIcon;
+    staggerModifier: number;
+    staminaCostModifier: number;
+    weightModifier: number;
+  }
 > = {
   medium: {
     blockRange: { maximum: 0.49, minimum: 0.25 },
@@ -109,7 +105,7 @@ export const SHIELD_SPECIFICATIONS: Readonly<
     staminaCostModifier: 3,
     weightModifier: 2,
   },
-} as const;
+};
 
 // Weapon
 
@@ -126,17 +122,15 @@ export const WEAPON_NONE = {
   weight: 0,
 } as const;
 
-export const WEAPON_SPECIFICATIONS: Readonly<
-  Record<
-    WeaponClass,
-    {
-      abilityChance: Range;
-      abilityName: string;
-      IconAbility: SVGIcon;
-      IconGearClass: SVGIcon;
-      skillType: SkillType;
-    }
-  >
+export const WEAPON_SPECIFICATIONS: Record<
+  WeaponClass,
+  {
+    abilityChance: Range;
+    abilityName: string;
+    IconAbility: SVGIcon;
+    IconGearClass: SVGIcon;
+    skillType: SkillType;
+  }
 > = {
   blunt: {
     abilityChance: { maximum: 0.7, minimum: 0.1 },
@@ -159,4 +153,4 @@ export const WEAPON_SPECIFICATIONS: Readonly<
     IconGearClass: IconSlashing,
     skillType: SkillType.Parry,
   },
-} as const;
+};

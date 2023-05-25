@@ -3,7 +3,7 @@ import type { Skill } from "@neverquest/types";
 import { SkillType } from "@neverquest/types/enums";
 
 // TODO - diversify icons.
-export const SKILLS: Readonly<Record<SkillType, Skill>> = {
+export const SKILLS: Record<SkillType, Skill> = {
   [SkillType.Armors]: {
     coinPrice: 65,
     description: "Unlocks the use of plate armor & deflection.",
@@ -60,7 +60,7 @@ export const SKILLS: Readonly<Record<SkillType, Skill>> = {
     name: "Traumatology",
     requiredLevel: 20,
   },
-} as const;
+};
 
 export const SKILLS_ORDER = [
   SkillType.Regeneration,
@@ -71,4 +71,4 @@ export const SKILLS_ORDER = [
   SkillType.Dodge,
   SkillType.Bleed,
   SkillType.Armors,
-] as const;
+];

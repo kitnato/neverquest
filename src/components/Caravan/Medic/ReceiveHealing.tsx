@@ -5,40 +5,27 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Coins } from "@neverquest/components/Resources/Coins";
 import { MEDIC_PRICE_SURGERY, MEDIC_PRICE_SURGERY_CRITICAL } from "@neverquest/data/caravan";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/internal";
-import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
+import { useHeal } from "@neverquest/hooks/actions/useHeal";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { ReactComponent as IconSurgery } from "@neverquest/icons/surgery.svg";
-import {
-  currentHealth,
-  isHealthAtMaximum,
-  isHealthLow,
-  maximumHealth,
-} from "@neverquest/state/reserves";
+import { isHealthAtMaximum, isHealthLow } from "@neverquest/state/reserves";
 import { coins } from "@neverquest/state/resources";
 
 export function ReceiveHealing() {
   const coinsValue = useRecoilValue(coins);
-  const currentHealthValue = useRecoilValue(currentHealth);
   const isHealthAtMaximumValue = useRecoilValue(isHealthAtMaximum);
   const isHealthLowValue = useRecoilValue(isHealthLow);
-  const maximumHealthValue = useRecoilValue(maximumHealth);
 
-  const changeHealth = useChangeHealth();
   const transactResources = useTransactResources();
 
   const price = isHealthLowValue ? MEDIC_PRICE_SURGERY_CRITICAL : MEDIC_PRICE_SURGERY;
-  const healthDifference = maximumHealthValue - currentHealthValue;
   const isAffordable = price <= coinsValue;
   const isPurchasable = isAffordable && !isHealthAtMaximumValue;
 
+  const heal = useHeal();
+
   const handleHeal = () => {
-    changeHealth({
-      delta: {
-        color: "text-success",
-        value: `HEAL +${healthDifference}`,
-      },
-      value: healthDifference,
-    });
+    heal();
 
     transactResources({ coinsDifference: -price });
   };
@@ -67,7 +54,7 @@ export function ReceiveHealing() {
             }
             trigger={isAffordable ? [] : ["hover", "focus"]}
           >
-            <span className="d-inline-block">
+            <span>
               <Button disabled={!isPurchasable} onClick={handleHeal} variant="outline-dark">
                 Heal
               </Button>

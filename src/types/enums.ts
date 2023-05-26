@@ -26,7 +26,7 @@ export enum CrewMember {
 export enum CrewStatus {
   Hirable,
   Hired,
-  Unavailable,
+  Locked,
 }
 
 export enum DeltaText {

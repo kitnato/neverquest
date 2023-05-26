@@ -165,7 +165,6 @@ export function useDefend() {
             const hasStaggered =
               get(skills(Skill.Traumatology)) && Math.random() <= get(shield).stagger;
             const shieldsSkill = get(skills(Skill.Shieldcraft));
-            const isFreeBlock = shieldsSkill && Math.random() <= get(stability);
 
             deltaHealth = [
               {
@@ -175,16 +174,18 @@ export function useDefend() {
             ];
 
             if (shieldsSkill) {
-              increaseMastery(Mastery.Stability);
-            }
+              const isFreeBlock = Math.random() <= get(stability);
 
-            if (isFreeBlock) {
-              deltaStamina.push({
-                color: "text-muted",
-                value: "STABILIZED",
-              });
-            } else {
-              changeStamina({ value: -staminaCost });
+              increaseMastery(Mastery.Stability);
+
+              if (isFreeBlock) {
+                deltaStamina.push({
+                  color: "text-muted",
+                  value: "STABILIZED",
+                });
+              } else {
+                changeStamina({ value: -staminaCost });
+              }
             }
 
             // Blocking has occurred, check if monster is staggered.

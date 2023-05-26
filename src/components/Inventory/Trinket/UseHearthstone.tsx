@@ -9,7 +9,7 @@ import { isLevelCompleted, isWilderness } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
 import { hasLooted } from "@neverquest/state/resources";
 
-export function HearthstoneUseButton() {
+export function UseHearthstone() {
   const hasLootedValue = useRecoilValue(hasLooted);
   const isAttackingValue = useRecoilValue(isAttacking);
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
@@ -37,7 +37,7 @@ export function HearthstoneUseButton() {
         overlay={<Tooltip>The hearthstone is cold.</Tooltip>}
         trigger={canWarp ? [] : ["focus", "hover"]}
       >
-        <span className="d-inline-block">
+        <span>
           <Button disabled={!canWarp} onClick={handleWarp} variant="outline-dark">
             Use
           </Button>

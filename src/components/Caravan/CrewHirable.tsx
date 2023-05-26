@@ -56,7 +56,7 @@ export function CrewHirable({ type }: { type: CrewMember }) {
             overlay={<Tooltip>Not enough coins!</Tooltip>}
             trigger={isAffordable ? [] : ["hover", "focus"]}
           >
-            <span className="d-inline-block">
+            <span>
               <Button disabled={!isAffordable} onClick={handleHire} variant="outline-dark">
                 Hire
               </Button>

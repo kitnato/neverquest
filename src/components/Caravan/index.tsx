@@ -14,7 +14,7 @@ import { Tailor } from "@neverquest/components/Caravan/Tailor";
 import { Witch } from "@neverquest/components/Caravan/Witch";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { CREW, CREW_ORDER } from "@neverquest/data/caravan";
-import { crewActive, crewHirable } from "@neverquest/state/caravan";
+import { crewActive, crewAvailable } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import { CrewMember, Showing } from "@neverquest/types/enums";
 import { getAnimationClass } from "@neverquest/utilities/getters";
@@ -31,8 +31,8 @@ const CREW_COMPONENTS: Record<CrewMember, FunctionComponent> = {
 };
 
 export function Caravan() {
+  const crewAvailableValue = useRecoilValue(crewAvailable);
   const [crewActiveValue, setCrewActive] = useRecoilState(crewActive);
-  const crewHirableValue = useRecoilValue(crewHirable);
   const isShowingCrewHiring = useRecoilValue(isShowing(Showing.CrewHiring));
 
   const [isScreenShowing, setScreenShowing] = useState(false);
@@ -59,7 +59,7 @@ export function Caravan() {
               <Stack gap={3}>
                 <h6>Crew for hire</h6>
 
-                {crewHirableValue.length === 0 && (
+                {crewAvailableValue.length === 0 && (
                   <span className="fst-italic">None available.</span>
                 )}
 

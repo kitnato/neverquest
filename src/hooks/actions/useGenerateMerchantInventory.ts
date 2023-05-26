@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
 import { MERCHANT_OFFERS } from "@neverquest/data/caravan";
-import { TRINKETS } from "@neverquest/data/trinkets";
+import { TRINKETS } from "@neverquest/data/inventory";
 import type { AffixTag } from "@neverquest/LOCRA/types";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { level, maximumLevel } from "@neverquest/state/encounter";

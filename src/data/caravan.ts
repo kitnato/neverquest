@@ -23,7 +23,7 @@ export const CREW: Record<
 > = {
   // TODO
   [CrewMember.Alchemist]: {
-    coinPrice: 60,
+    coinPrice: 100,
     description: "Converts essence, scrap and coins between one another.",
     hirableLevel: 15,
     interaction: "Transmute",
@@ -47,7 +47,7 @@ export const CREW: Record<
     name: "Medic",
   },
   [CrewMember.Mercenary]: {
-    coinPrice: 40,
+    coinPrice: 80,
     description: "Trains new skills and attributes.",
     hirableLevel: 12,
     interaction: "Train",
@@ -78,7 +78,7 @@ export const CREW: Record<
     name: "Alchemist",
   },
   [CrewMember.Tailor]: {
-    coinPrice: 40,
+    coinPrice: 30,
     description: "Expands inventory space.",
     hirableLevel: 6,
     interaction: "Upgrade",
@@ -87,7 +87,7 @@ export const CREW: Record<
   },
   // TODO
   [CrewMember.Witch]: {
-    coinPrice: 120,
+    coinPrice: 150,
     description: "Sells potions that cure ailments.",
     hirableLevel: 20,
     interaction: "Brew",

@@ -77,7 +77,8 @@ export type Trinket = ItemBase & {
   name: TrinketName;
 };
 
-export type TrinketName = "Compass" | "Hearthstone" | "Knapsack";
+export const TRINKET_NAMES = ["Compass", "Hearthstone", "Knapsack"] as const;
+export type TrinketName = (typeof TRINKET_NAMES)[number];
 
 export type Weapon = GearBase & {
   abilityChance: number;

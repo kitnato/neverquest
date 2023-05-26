@@ -65,7 +65,7 @@ export function PurchaseItemButton({ id }: { id: string }) {
       }
       trigger={isPurchasable ? [] : ["hover", "focus"]}
     >
-      <span className="d-inline-block">
+      <span>
         <Button disabled={!isPurchasable} onClick={handlePurchase} variant="outline-dark">
           Purchase
         </Button>

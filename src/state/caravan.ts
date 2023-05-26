@@ -1,4 +1,5 @@
 import { DefaultValue, atom, atomFamily, selectorFamily } from "recoil";
+import { CREW_ORDER } from "@neverquest/data/caravan";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 
 import type { InventoryBlacksmith, InventoryMerchant } from "@neverquest/types";
@@ -27,10 +28,8 @@ export const crew = withStateKey("crew", (key) =>
 
         set(crewMapping(type), status);
 
-        if (status.hireStatus === CrewStatus.Hirable) {
-          set(crewHirable, (current) => [...current, type]);
-        } else {
-          set(crewHirable, (current) => current.filter((currentType) => currentType !== type));
+        if (status.hireStatus === CrewStatus.Hired) {
+          set(crewAvailable, (current) => current.filter((crewType) => crewType !== type));
         }
       },
   })
@@ -58,9 +57,9 @@ export const crewActive = withStateKey("crewActive", (key) =>
   })
 );
 
-export const crewHirable = withStateKey("crewHirable", (key) =>
+export const crewAvailable = withStateKey("crewAvailable", (key) =>
   atom<CrewMember[]>({
-    default: [],
+    default: [...CREW_ORDER],
     effects: [handleLocalStorage<CrewMember[]>({ key })],
     key,
   })
@@ -69,7 +68,7 @@ export const crewHirable = withStateKey("crewHirable", (key) =>
 const crewMapping = withStateKey("crewMapping", (key) =>
   atomFamily<CrewState, CrewMember>({
     default: {
-      hireStatus: CrewStatus.Unavailable,
+      hireStatus: CrewStatus.Locked,
       monologueProgress: 0,
     },
     effects: (parameter) => [handleLocalStorage<CrewState>({ key, parameter })],

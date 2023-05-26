@@ -98,7 +98,7 @@ export const ATTRIBUTES_INITIAL = [
   Attribute.Strength,
   Attribute.Vitality,
   Attribute.Resilience,
-];
+] as const;
 
 export const ATTRIBUTES_ORDER = [
   Attribute.Vitality,

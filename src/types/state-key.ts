@@ -25,7 +25,7 @@ export type StateKey =
   | "confirmControlWarnings"
   | "crew"
   | "crewActive"
-  | "crewHirable"
+  | "crewAvailable"
   | "crewMapping"
   | "criticalChance"
   | "criticalDamage"

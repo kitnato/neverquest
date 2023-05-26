@@ -34,7 +34,7 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
 export const monsterDamage = withStateKey("monsterDamage", (key) =>
   selector({
     get: ({ get }) =>
-      Math.round(1000 * getGrowthSigmoid(get(level)) + 50 * getGrowthSigmoid(get(progress))),
+      Math.round(800 * getGrowthSigmoid(get(level)) + 100 * getGrowthSigmoid(get(progress))),
     key,
   })
 );
@@ -55,7 +55,7 @@ export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (ke
 export const monsterMaximumHealth = withStateKey("monsterMaximumHealth", (key) =>
   selector({
     get: ({ get }) =>
-      Math.round(3000 * getGrowthSigmoid(get(level)) + 100 * getGrowthSigmoid(get(progress))),
+      Math.round(2500 * getGrowthSigmoid(get(level)) + 200 * getGrowthSigmoid(get(progress))),
     key,
   })
 );

@@ -63,7 +63,7 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
                   </Tooltip>
                 }
               >
-                <span className="d-inline-block">
+                <span>
                   <Button
                     disabled={!canIncrease}
                     onClick={() => increaseAttribute(type)}

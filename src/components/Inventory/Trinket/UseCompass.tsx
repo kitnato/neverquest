@@ -18,7 +18,7 @@ import {
 import { isInventoryOpen } from "@neverquest/state/inventory";
 import { hasLooted } from "@neverquest/state/resources";
 
-export function CompassUseButton() {
+export function UseCompass() {
   const hasLootedValue = useRecoilValue(hasLooted);
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
   const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
@@ -52,7 +52,7 @@ export function CompassUseButton() {
         }
         trigger={canNavigate ? [] : ["hover", "focus"]}
       >
-        <span className="d-inline-block">
+        <span>
           <Button
             disabled={!canNavigate}
             onClick={() => {

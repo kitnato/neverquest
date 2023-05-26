@@ -18,9 +18,10 @@ export function PurchaseBandages() {
 
   const { item } = CONSUMABLES.Bandages;
   const { coinPrice, weight } = item;
-  const isAffordable = coinPrice <= coinsValue;
+
   const canFitValue = useRecoilValue(canFit(weight));
-  const isPurchasable = isAffordable && canFitValue;
+  const isAffordable = coinPrice <= coinsValue;
+  const isPurchasable = canFitValue && isAffordable;
 
   const handlePurchase = () => {
     const acquiredID = acquireItem({ item });
@@ -49,7 +50,7 @@ export function PurchaseBandages() {
             }
             trigger={isPurchasable ? [] : ["hover", "focus"]}
           >
-            <span className="d-inline-block">
+            <span>
               <Button disabled={!isPurchasable} onClick={handlePurchase} variant="outline-dark">
                 Purchase
               </Button>

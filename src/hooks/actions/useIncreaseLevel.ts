@@ -36,7 +36,7 @@ export function useIncreaseLevel() {
           }
 
           // Make crew member hirable if the appropriate level has been reached.
-          if (hireStatus === CrewStatus.Unavailable && nextLevel >= hirableLevel) {
+          if (hireStatus === CrewStatus.Locked && nextLevel >= hirableLevel) {
             set(crew(type), (current) => ({
               ...current,
               hireStatus: CrewStatus.Hirable,

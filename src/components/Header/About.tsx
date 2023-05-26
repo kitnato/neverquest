@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { LABEL_UNKNOWN } from "@neverquest/data/constants";
+import { LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { ReactComponent as IconAbout } from "@neverquest/icons/about.svg";
 
 export function About() {

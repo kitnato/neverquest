@@ -1,7 +1,7 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import { ENCUMBRANCE } from "@neverquest/data/constants";
-import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
+import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
+import { ENCUMBRANCE } from "@neverquest/data/statistics";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { Armor, Inventory, Shield, Weapon } from "@neverquest/types";
 import { GearType } from "@neverquest/types/enums";

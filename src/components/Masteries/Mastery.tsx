@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { LABEL_AT_MAXIMUM } from "@neverquest/data/constants";
+import { LABEL_AT_MAXIMUM } from "@neverquest/data/internal";
 import { MASTERIES, MASTERY_DELTA_TYPE } from "@neverquest/data/masteries";
 import { isShowingMastery } from "@neverquest/state/isShowing";
 import { isMasteryAtMaximum, masteries, masteryCost } from "@neverquest/state/masteries";

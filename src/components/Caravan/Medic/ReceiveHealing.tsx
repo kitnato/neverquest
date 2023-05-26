@@ -3,8 +3,8 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Coins } from "@neverquest/components/Resources/Coins";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/constants";
-import { MEDIC_PRICE_SURGERY, MEDIC_PRICE_SURGERY_CRITICAL } from "@neverquest/data/crew";
+import { MEDIC_PRICE_SURGERY, MEDIC_PRICE_SURGERY_CRITICAL } from "@neverquest/data/caravan";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/internal";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { ReactComponent as IconSurgery } from "@neverquest/icons/surgery.svg";

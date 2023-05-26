@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { IconImage } from "@neverquest/components/IconImage";
-import { LABEL_UNKNOWN } from "@neverquest/data/constants";
+import { LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { ReactComponent as IconTravel } from "@neverquest/icons/travel.svg";
 import { hasBoughtFromMerchant } from "@neverquest/state/caravan";

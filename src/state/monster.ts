@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 
-import { POISON } from "@neverquest/data/constants";
+import { POISON } from "@neverquest/data/statistics";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isLevelStarted, level, progress } from "@neverquest/state/encounter";
 import { formatToFixed } from "@neverquest/utilities/formatters";

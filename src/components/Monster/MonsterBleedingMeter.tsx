@@ -1,7 +1,7 @@
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { BLEED } from "@neverquest/data/constants";
+import { BLEED } from "@neverquest/data/statistics";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { monsterBleedingDelta } from "@neverquest/state/deltas";

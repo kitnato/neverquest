@@ -1,6 +1,5 @@
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
-import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
 import {
   healthRegenerationDuration,
   staminaRegenerationDuration,
@@ -23,8 +22,6 @@ import {
   staminaRegenerationRate,
 } from "@neverquest/state/statistics";
 import { DeltaType, ReserveType } from "@neverquest/types/enums";
-
-export const HEALTH_ICON = IconHealth;
 
 export const RESERVES = {
   [ReserveType.Encumbrance]: {

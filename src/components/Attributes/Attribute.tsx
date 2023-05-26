@@ -8,7 +8,7 @@ import {
   CLASS_FULL_WIDTH_JUSTIFIED,
   LABEL_AT_MAXIMUM,
   LABEL_UNKNOWN,
-} from "@neverquest/data/constants";
+} from "@neverquest/data/internal";
 import { useIncreaseAttribute } from "@neverquest/hooks/actions/useIncreaseAttribute";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { ReactComponent as IconWait } from "@neverquest/icons/hourglass.svg";

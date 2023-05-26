@@ -1,20 +1,19 @@
-import type { FunctionComponent } from "react";
-
-import { Alchemist } from "@neverquest/components/Caravan/Alchemist";
-import { Blacksmith } from "@neverquest/components/Caravan/Blacksmith";
-import { Medic } from "@neverquest/components/Caravan/Medic";
-import { Mercenary } from "@neverquest/components/Caravan/Mercenary";
-import { Merchant } from "@neverquest/components/Caravan/Merchant";
-import { Mystic } from "@neverquest/components/Caravan/Mystic";
-import { Tailor } from "@neverquest/components/Caravan/Tailor";
-import { Witch } from "@neverquest/components/Caravan/Witch";
+import type {
+  ArmorClass,
+  ArtifactType,
+  ShieldClass,
+  WeaponClass,
+  WeaponModality,
+} from "@neverquest/LOCRA/types";
+import type { TrinketName } from "@neverquest/types";
 import { CrewMember } from "@neverquest/types/enums";
+
+export const BLACKSMITH_GEAR_LEVEL_MAXIMUM = 3;
 
 export const CREW: Record<
   CrewMember,
   {
     coinPrice: number;
-    Component: FunctionComponent;
     description: string;
     hirableLevel: number;
     interaction: string;
@@ -25,7 +24,6 @@ export const CREW: Record<
   // TODO
   [CrewMember.Alchemist]: {
     coinPrice: 60,
-    Component: Alchemist,
     description: "Converts essence, scrap and coins between one another.",
     hirableLevel: 15,
     interaction: "Transmute",
@@ -34,7 +32,6 @@ export const CREW: Record<
   },
   [CrewMember.Blacksmith]: {
     coinPrice: 20,
-    Component: Blacksmith,
     description: "Crafts superior gear.",
     hirableLevel: 5,
     interaction: "Craft",
@@ -43,7 +40,6 @@ export const CREW: Record<
   },
   [CrewMember.Medic]: {
     coinPrice: 50,
-    Component: Medic,
     description: "Heals wounds and sells bandages.",
     hirableLevel: 8,
     interaction: "Heal",
@@ -52,7 +48,6 @@ export const CREW: Record<
   },
   [CrewMember.Mercenary]: {
     coinPrice: 40,
-    Component: Mercenary,
     description: "Trains new skills and attributes.",
     hirableLevel: 12,
     interaction: "Train",
@@ -61,7 +56,6 @@ export const CREW: Record<
   },
   [CrewMember.Merchant]: {
     coinPrice: 0,
-    Component: Merchant,
     description: "Offers various items for purchase and buys unwanted items.",
     hirableLevel: 0,
     interaction: "Trade",
@@ -77,7 +71,6 @@ export const CREW: Record<
   // TODO
   [CrewMember.Mystic]: {
     coinPrice: 200,
-    Component: Mystic,
     description: "Unlocks resetting of the power level.",
     hirableLevel: 30,
     interaction: "Ritual",
@@ -86,7 +79,6 @@ export const CREW: Record<
   },
   [CrewMember.Tailor]: {
     coinPrice: 40,
-    Component: Tailor,
     description: "Expands inventory space.",
     hirableLevel: 6,
     interaction: "Upgrade",
@@ -96,7 +88,6 @@ export const CREW: Record<
   // TODO
   [CrewMember.Witch]: {
     coinPrice: 120,
-    Component: Witch,
     description: "Sells potions that cure ailments.",
     hirableLevel: 20,
     interaction: "Brew",
@@ -110,3 +101,74 @@ export const CREW_INITIAL = [CrewMember.Merchant] as const;
 export const CREW_ORDER: CrewMember[] = Object.entries(CREW)
   .sort(([, a], [, b]) => a.hirableLevel - b.hirableLevel)
   .map(([type]) => Number(type) as CrewMember);
+
+export const MEDIC_PRICE_BANDAGES = 18;
+export const MEDIC_PRICE_SURGERY = 6;
+export const MEDIC_PRICE_SURGERY_CRITICAL = 15;
+
+export const MERCHANT_OFFERS: (
+  | ({
+      gearClass: ArmorClass;
+    } & ArtifactType<"armor">)
+  | ({
+      gearClass: ShieldClass;
+    } & ArtifactType<"shield">)
+  | ({
+      gearClass: WeaponClass;
+      modality: WeaponModality;
+    } & ArtifactType<"weapon">)
+  | ({
+      name: TrinketName;
+    } & ArtifactType<"trinket">)
+)[][] = [
+  [
+    {
+      gearClass: "piercing",
+      modality: "melee",
+      type: "weapon",
+    },
+  ],
+  [
+    {
+      gearClass: "hide",
+      type: "armor",
+    },
+  ],
+  [
+    {
+      gearClass: "small",
+      type: "shield",
+    },
+  ],
+  [{ name: "Knapsack", type: "trinket" }],
+  [
+    { name: "Compass", type: "trinket" },
+    { name: "Hearthstone", type: "trinket" },
+  ],
+  [
+    {
+      gearClass: "slashing",
+      modality: "melee",
+      type: "weapon",
+    },
+  ],
+  [
+    {
+      gearClass: "blunt",
+      modality: "melee",
+      type: "weapon",
+    },
+  ],
+  [
+    {
+      gearClass: "medium",
+      type: "shield",
+    },
+  ],
+  [
+    {
+      gearClass: "reinforced",
+      type: "armor",
+    },
+  ],
+];

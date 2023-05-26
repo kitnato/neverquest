@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/constants";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ShowingType } from "@neverquest/types/enums";

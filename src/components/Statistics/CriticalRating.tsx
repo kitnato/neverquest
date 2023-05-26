@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/constants";
+import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/internal";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconCriticalRating } from "@neverquest/icons/critical-rating.svg";
 import { deltas } from "@neverquest/state/deltas";

@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { BLEED } from "@neverquest/data/constants";
+import { BLEED } from "@neverquest/data/statistics";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";

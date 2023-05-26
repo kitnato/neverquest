@@ -4,7 +4,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Coins } from "@neverquest/components/Resources/Coins";
 import { CREW } from "@neverquest/data/caravan";
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/data/constants";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { ReactComponent as IconCrewMember } from "@neverquest/icons/crew-member.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";

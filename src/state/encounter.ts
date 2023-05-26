@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 
-import { LABEL_UNKNOWN } from "@neverquest/data/constants";
+import { LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { LocationType } from "@neverquest/types/enums";
 import { getGrowthSigmoid } from "@neverquest/utilities/getters";

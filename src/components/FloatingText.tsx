@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
-import { DEFAULT_DELTA_DISPLAY } from "@neverquest/data/constants";
+import { DEFAULT_DELTA_DISPLAY } from "@neverquest/data/internal";
 import { deltas, floatingTextQueues } from "@neverquest/state/deltas";
 import type { DeltaType } from "@neverquest/types/enums";
 import { getAnimationClass } from "@neverquest/utilities/getters";

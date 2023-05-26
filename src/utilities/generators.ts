@@ -1,9 +1,9 @@
-import { ATTACK_RATE_ATTENUATION } from "@neverquest/data/constants";
 import {
   ARMOR_SPECIFICATIONS,
   SHIELD_SPECIFICATIONS,
   WEAPON_SPECIFICATIONS,
-} from "@neverquest/data/gear";
+} from "@neverquest/data/inventory";
+import { ATTACK_RATE_ATTENUATION } from "@neverquest/data/statistics";
 import { LOCRA } from "@neverquest/LOCRA";
 import type {
   AffixTag,

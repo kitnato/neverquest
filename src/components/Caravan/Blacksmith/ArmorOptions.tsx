@@ -6,7 +6,8 @@ import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGe
 import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DodgePenaltyContents } from "@neverquest/components/Inventory/DodgePenaltyContents";
-import { GEAR_LEVEL_OFFSET, LABEL_UNKNOWN } from "@neverquest/data/constants";
+import { BLACKSMITH_GEAR_LEVEL_MAXIMUM } from "@neverquest/data/caravan";
+import { LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
 import { ReactComponent as IconDodgePenalty } from "@neverquest/icons/dodge-penalty.svg";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
@@ -42,7 +43,7 @@ export function ArmorOptions() {
     level: armorLevel,
   });
   const { deflection, protection, ranges, staminaCost, weight } = armor;
-  const maximumArmorLevel = levelValue + GEAR_LEVEL_OFFSET;
+  const maximumArmorLevel = levelValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
 
   return (
     <>

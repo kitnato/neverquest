@@ -1,16 +1,34 @@
-import { useState } from "react";
+import { type FunctionComponent, useState } from "react";
 import { Card, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
+import { Alchemist } from "@neverquest/components/Caravan/Alchemist";
+import { Blacksmith } from "@neverquest/components/Caravan/Blacksmith";
 import { CrewHirable } from "@neverquest/components/Caravan/CrewHirable";
 import { CrewHired } from "@neverquest/components/Caravan/CrewHired";
+import { Medic } from "@neverquest/components/Caravan/Medic";
+import { Mercenary } from "@neverquest/components/Caravan/Mercenary";
+import { Merchant } from "@neverquest/components/Caravan/Merchant";
+import { Mystic } from "@neverquest/components/Caravan/Mystic";
+import { Tailor } from "@neverquest/components/Caravan/Tailor";
+import { Witch } from "@neverquest/components/Caravan/Witch";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { CREW, CREW_ORDER } from "@neverquest/data/caravan";
 import { crewActive, crewHirable } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
-import { type CrewMember, ShowingType } from "@neverquest/types/enums";
-
+import { CrewMember, ShowingType } from "@neverquest/types/enums";
 import { getAnimationClass } from "@neverquest/utilities/getters";
+
+const CREW_COMPONENTS: Record<CrewMember, FunctionComponent> = {
+  [CrewMember.Alchemist]: Alchemist,
+  [CrewMember.Blacksmith]: Blacksmith,
+  [CrewMember.Medic]: Medic,
+  [CrewMember.Mercenary]: Mercenary,
+  [CrewMember.Merchant]: Merchant,
+  [CrewMember.Mystic]: Mystic,
+  [CrewMember.Tailor]: Tailor,
+  [CrewMember.Witch]: Witch,
+};
 
 export function Caravan() {
   const [crewActiveValue, setCrewActive] = useRecoilState(crewActive);
@@ -56,7 +74,8 @@ export function Caravan() {
 
       {crewActiveValue !== null &&
         (() => {
-          const { Component, name } = CREW[crewActiveValue];
+          const Component = CREW_COMPONENTS[crewActiveValue];
+          const { name } = CREW[crewActiveValue];
 
           return (
             <DismissableScreen

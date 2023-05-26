@@ -6,7 +6,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { Coins } from "@neverquest/components/Resources/Coins";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/constants";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/internal";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { merchantInventory } from "@neverquest/state/caravan";

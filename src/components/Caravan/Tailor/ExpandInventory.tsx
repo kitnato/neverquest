@@ -2,7 +2,7 @@ import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { Coins } from "@neverquest/components/Resources/Coins";
-import { ENCUMBRANCE } from "@neverquest/data/constants";
+import { ENCUMBRANCE } from "@neverquest/data/statistics";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { encumbranceMaximum, hasKnapsack } from "@neverquest/state/inventory";
 import { coins } from "@neverquest/state/resources";

@@ -1,8 +1,8 @@
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { DAMAGE_ICON } from "@neverquest/data/attributes";
 import { ReactComponent as IconDamagePerSecond } from "@neverquest/icons/damage-per-second.svg";
+import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import { monsterDamage, monsterDamagePerSecond } from "@neverquest/state/monster";
 import { showDamagePerSecond } from "@neverquest/state/settings";
@@ -31,7 +31,7 @@ export function MonsterDamage() {
           />
         )
       }
-      Icon={DAMAGE_ICON}
+      Icon={IconDamage}
       isAnimated
       tooltip="Monster damage"
     />

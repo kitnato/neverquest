@@ -4,7 +4,7 @@ import { AttributePoints } from "@neverquest/components/Attributes/AttributePoin
 import { AttributesList } from "@neverquest/components/Attributes/AttributesList";
 import { EssenceAbsorbed } from "@neverquest/components/Character/EssenceAbsorbed";
 import { PowerLevel } from "@neverquest/components/Character/PowerLevel";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/constants";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/internal";
 
 export function Attributes() {
   return (

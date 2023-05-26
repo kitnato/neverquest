@@ -5,7 +5,7 @@ import { TrainSkillButton } from "@neverquest/components/Caravan/Mercenary/Train
 import { SkillDisplay } from "@neverquest/components/Character/SkillDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Coins } from "@neverquest/components/Resources/Coins";
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/data/constants";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { SKILLS } from "@neverquest/data/skills";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { characterLevel } from "@neverquest/state/attributes";

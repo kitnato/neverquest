@@ -1,6 +1,6 @@
 import { ExpandInventory } from "@neverquest/components/Caravan/Tailor/ExpandInventory";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/constants";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/internal";
 import { ReactComponent as IconTailoring } from "@neverquest/icons/tailoring.svg";
 
 export function Tailor() {

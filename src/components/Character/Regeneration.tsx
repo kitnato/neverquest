@@ -5,14 +5,14 @@ import { RegenerationMeter } from "@neverquest/components/Character/Regeneration
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
+import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/internal";
+import { RESERVES } from "@neverquest/data/reserves";
 import {
-  CLASS_TABLE_CELL_ITALIC,
   REGENERATION_AMOUNT_HEALTH,
   REGENERATION_AMOUNT_STAMINA,
   REGENERATION_RATE_HEALTH,
   REGENERATION_RATE_STAMINA,
-} from "@neverquest/data/constants";
-import { RESERVES } from "@neverquest/data/reserves";
+} from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { reserveRegenerationRate } from "@neverquest/state/statistics";
 import { AttributeType, DeltaText, DeltaType, ReserveType } from "@neverquest/types/enums";

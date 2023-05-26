@@ -6,7 +6,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DodgePenaltyContents } from "@neverquest/components/Inventory/DodgePenaltyContents";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/constants";
+import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/internal";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconDodge } from "@neverquest/icons/dodge.svg";
 import { deltas } from "@neverquest/state/deltas";

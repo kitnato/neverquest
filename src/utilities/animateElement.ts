@@ -1,4 +1,4 @@
-import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/data/constants";
+import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/data/internal";
 import type { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
 
 export function animateElement({

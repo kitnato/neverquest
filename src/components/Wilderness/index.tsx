@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Monster } from "@neverquest/components/Monster";
-import { LABEL_UNKNOWN } from "@neverquest/data/constants";
+import { LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { ReactComponent as IconHiding } from "@neverquest/icons/monster-hiding.svg";
 import { ReactComponent as IconRemains } from "@neverquest/icons/monster-remains.svg";
 import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";

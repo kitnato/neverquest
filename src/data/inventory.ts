@@ -1,6 +1,9 @@
 import { ReactComponent as IconPlate } from "@neverquest/icons/armor-plate.svg";
 import { ReactComponent as IconReinforced } from "@neverquest/icons/armor-reinforced.svg";
+import { ReactComponent as IconBandages } from "@neverquest/icons/bandages.svg";
+import { ReactComponent as IconStone } from "@neverquest/icons/hearthstone.svg";
 import { ReactComponent as IconHide } from "@neverquest/icons/hide.svg";
+import { ReactComponent as IconKnapsack } from "@neverquest/icons/knapsack.svg";
 import { ReactComponent as IconParry } from "@neverquest/icons/parry.svg";
 import { ReactComponent as IconShieldMedium } from "@neverquest/icons/shield-medium.svg";
 import { ReactComponent as IconShieldSmall } from "@neverquest/icons/shield-small.svg";
@@ -11,7 +14,7 @@ import { ReactComponent as IconPiercing } from "@neverquest/icons/weapon-piercin
 import { ReactComponent as IconSlashing } from "@neverquest/icons/weapon-slashing.svg";
 import { ReactComponent as IconWeaponStagger } from "@neverquest/icons/weapon-stagger.svg";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRA/types";
-import type { Range } from "@neverquest/types";
+import type { Consumable, ConsumableName, Range } from "@neverquest/types";
 import { SkillType, WeaponGrip } from "@neverquest/types/enums";
 import type { SVGIcon } from "@neverquest/types/props";
 
@@ -152,5 +155,35 @@ export const WEAPON_SPECIFICATIONS: Record<
     IconAbility: IconParry,
     IconGearClass: IconSlashing,
     skillType: SkillType.Parry,
+  },
+};
+
+export const CONSUMABLES: Record<ConsumableName, { Icon: SVGIcon; item: Consumable }> = {
+  Bandages: {
+    Icon: IconBandages,
+    item: {
+      coinPrice: 10,
+      description: "Restores all health when used.",
+      name: "Bandages",
+      weight: 1,
+    },
+  },
+  Elixir: {
+    Icon: IconStone,
+    item: {
+      coinPrice: 40,
+      description: "Restores all stamina.",
+      name: "Elixir",
+      weight: 1,
+    },
+  },
+  Salve: {
+    Icon: IconKnapsack,
+    item: {
+      coinPrice: 10,
+      description: "Cures poison and blight.",
+      name: "Salve",
+      weight: 1,
+    },
   },
 };

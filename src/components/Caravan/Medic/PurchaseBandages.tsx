@@ -3,8 +3,8 @@ import { useRecoilValue } from "recoil";
 
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { Coins } from "@neverquest/components/Resources/Coins";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/constants";
-import { CONSUMABLES } from "@neverquest/data/consumables";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/internal";
+import { CONSUMABLES } from "@neverquest/data/inventory";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { canFit } from "@neverquest/state/inventory";

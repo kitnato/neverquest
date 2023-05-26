@@ -1,11 +1,7 @@
-import { RECOVERY_RATE } from "@neverquest/data/constants";
-import { ReactComponent as IconAttackRate } from "@neverquest/icons/attack-rate.svg";
-import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
+import { RECOVERY_RATE } from "@neverquest/data/statistics";
 import { ReactComponent as IconPlaceholder } from "@neverquest/icons/placeholder.svg";
 import type { AttributeOrMastery } from "@neverquest/types";
 import { AttributeType, SkillType } from "@neverquest/types/enums";
-
-export const ATTACK_RATE_ICON = IconAttackRate;
 
 // TODO - diversify icons.
 export const ATTRIBUTES: Record<AttributeType, AttributeOrMastery> = {
@@ -118,5 +114,3 @@ export const ATTRIBUTES_ORDER = [
   AttributeType.Dodge,
   AttributeType.Loot,
 ];
-
-export const DAMAGE_ICON = IconDamage;

@@ -11,10 +11,10 @@ export function UseBandages() {
   return (
     <OverlayTrigger
       overlay={<Tooltip>{isHealthAtMaximumValue && <div>Already at full health!</div>}</Tooltip>}
-      trigger={isHealthAtMaximumValue ? [] : ["hover", "focus"]}
+      trigger={isHealthAtMaximumValue ? ["hover", "focus"] : []}
     >
       <span>
-        <Button disabled={!isHealthAtMaximumValue} onClick={heal} variant="outline-dark">
+        <Button disabled={isHealthAtMaximumValue} onClick={heal} variant="outline-dark">
           Heal
         </Button>
       </span>

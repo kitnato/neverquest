@@ -6,7 +6,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { currentHealth, maximumHealth } from "@neverquest/state/reserves";
 import { healthRegenerationRate } from "@neverquest/state/statistics";
 import { Delta, Showing } from "@neverquest/types/enums";
-import type { DeltaReserve } from "@neverquest/types/ui";
+import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeHealth() {
@@ -23,12 +23,12 @@ export function useChangeHealth() {
 
         set(
           deltas(Delta.Health),
-          delta !== undefined && Array.isArray(delta) && delta.length
-            ? delta
-            : {
+          delta === undefined
+            ? ({
                 color: isPositive ? "text-success" : "text-danger",
                 value: isPositive ? `+${value}` : value,
-              }
+              } as DeltaDisplay)
+            : delta
         );
 
         if (newHealth <= 0) {

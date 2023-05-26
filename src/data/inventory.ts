@@ -2,10 +2,12 @@ import { ReactComponent as IconPlate } from "@neverquest/icons/armor-plate.svg";
 import { ReactComponent as IconReinforced } from "@neverquest/icons/armor-reinforced.svg";
 import { ReactComponent as IconBandages } from "@neverquest/icons/bandages.svg";
 import { ReactComponent as IconCompass } from "@neverquest/icons/compass.svg";
+import { ReactComponent as IconElixir } from "@neverquest/icons/elixir.svg";
 import { ReactComponent as IconStone } from "@neverquest/icons/hearthstone.svg";
 import { ReactComponent as IconHide } from "@neverquest/icons/hide.svg";
 import { ReactComponent as IconKnapsack } from "@neverquest/icons/knapsack.svg";
 import { ReactComponent as IconParry } from "@neverquest/icons/parry.svg";
+import { ReactComponent as IconSalve } from "@neverquest/icons/salve.svg";
 import { ReactComponent as IconShieldMedium } from "@neverquest/icons/shield-medium.svg";
 import { ReactComponent as IconShieldSmall } from "@neverquest/icons/shield-small.svg";
 import { ReactComponent as IconShieldTower } from "@neverquest/icons/shield-tower.svg";
@@ -76,7 +78,7 @@ export const CONSUMABLES: Record<ConsumableName, { Icon: SVGIcon; item: Consumab
     },
   },
   Elixir: {
-    Icon: IconStone,
+    Icon: IconElixir,
     item: {
       coinPrice: 40,
       description: "Restores all stamina.",
@@ -85,7 +87,7 @@ export const CONSUMABLES: Record<ConsumableName, { Icon: SVGIcon; item: Consumab
     },
   },
   Salve: {
-    Icon: IconKnapsack,
+    Icon: IconSalve,
     item: {
       coinPrice: 10,
       description: "Cures poison and blight.",

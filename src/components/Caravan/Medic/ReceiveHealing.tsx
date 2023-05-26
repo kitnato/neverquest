@@ -36,9 +36,9 @@ export function ReceiveHealing() {
 
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay
-          contents="Undergo surgery to regain full health."
+          contents="Operation"
+          description="Undergo surgery to regain full health."
           Icon={IconSurgery}
-          iconProps={{ overlayPlacement: "right" }}
           tooltip="Surgery"
         />
 
@@ -52,7 +52,7 @@ export function ReceiveHealing() {
                 {isHealthAtMaximumValue && <div>Already at full health!</div>}
               </Tooltip>
             }
-            trigger={isAffordable ? [] : ["hover", "focus"]}
+            trigger={isPurchasable ? [] : ["hover", "focus"]}
           >
             <span>
               <Button disabled={!isPurchasable} onClick={handleHeal} variant="outline-dark">

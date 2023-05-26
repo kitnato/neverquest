@@ -7,14 +7,14 @@ import { ReactComponent as IconParry } from "@neverquest/icons/parry.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { skills } from "@neverquest/state/skills";
 import { parry } from "@neverquest/state/statistics";
-import { DeltaType, SkillType } from "@neverquest/types/enums";
+import { Delta, Skill } from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Parry() {
   const parryValue = useRecoilValue(parry);
-  const parrySkill = useRecoilValue(skills(SkillType.Parry));
+  const parrySkill = useRecoilValue(skills(Skill.Escrime));
 
-  const deltaParry = deltas(DeltaType.Parry);
+  const deltaParry = deltas(Delta.Parry);
 
   useDeltaText({
     atomDelta: deltaParry,
@@ -31,7 +31,7 @@ export function Parry() {
         <>
           <span>{formatPercentage(parryValue)}</span>
 
-          <FloatingText type={DeltaType.Parry} />
+          <FloatingText type={Delta.Parry} />
         </>
       }
       Icon={IconParry}

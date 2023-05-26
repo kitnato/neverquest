@@ -5,17 +5,17 @@ import { Character } from "@neverquest/components/Character";
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { Control } from "@neverquest/components/Controls";
 import { Encounter } from "@neverquest/components/Encounter";
-import { Location } from "@neverquest/components/Location";
+import { LocationDisplay } from "@neverquest/components/LocationDisplay";
 import { Masteries } from "@neverquest/components/Masteries";
 import { WildernessStatus } from "@neverquest/components/Wilderness/WildernessStatus";
 import { isGameOver } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
 import { useReset } from "@neverquest/state/SeedContext";
-import { ShowingType } from "@neverquest/types/enums";
+import { Showing } from "@neverquest/types/enums";
 
 export function Layout() {
   const isGameOverValue = useRecoilValue(isGameOver);
-  const [isShowingGameOver, setIsShowingGameOver] = useRecoilState(isShowing(ShowingType.GameOver));
+  const [isShowingGameOver, setIsShowingGameOver] = useRecoilState(isShowing(Showing.GameOver));
 
   const reset = useReset();
 
@@ -24,7 +24,7 @@ export function Layout() {
       <Row>
         <Col>
           <Stack gap={3}>
-            <Location />
+            <LocationDisplay />
 
             <div style={{ zIndex: 1048 }}>
               <Character />

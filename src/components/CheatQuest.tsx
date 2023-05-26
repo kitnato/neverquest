@@ -9,7 +9,7 @@ import { useTransactResources } from "@neverquest/hooks/actions/useTransactResou
 import { isWilderness, level, progress, progressMaximum } from "@neverquest/state/encounter";
 import { coinsLoot, essenceLoot, scrapLoot } from "@neverquest/state/resources";
 import { skills } from "@neverquest/state/skills";
-import { SkillType } from "@neverquest/types/enums";
+import { Skill } from "@neverquest/types/enums";
 
 declare const window: Window & {
   cheatQuest: (state: string, value?: number) => void;
@@ -24,14 +24,14 @@ export function CheatQuest() {
   const resetEssenceLoot = useResetRecoilState(essenceLoot);
   const resetScrapLoot = useResetRecoilState(scrapLoot);
   const setProgress = useSetRecoilState(progress);
-  const setSkillArmor = useSetRecoilState(skills(SkillType.Armors));
-  const setSkillBleed = useSetRecoilState(skills(SkillType.Bleed));
-  const setSkillCriticals = useSetRecoilState(skills(SkillType.Criticals));
-  const setSkillDodge = useSetRecoilState(skills(SkillType.Dodge));
-  const setSkillParry = useSetRecoilState(skills(SkillType.Parry));
-  const setSkillRegeneration = useSetRecoilState(skills(SkillType.Regeneration));
-  const setSkillShields = useSetRecoilState(skills(SkillType.Shields));
-  const setSkillStagger = useSetRecoilState(skills(SkillType.Stagger));
+  const setSkillArmor = useSetRecoilState(skills(Skill.Armorcraft));
+  const setSkillBleed = useSetRecoilState(skills(Skill.Anatomy));
+  const setSkillCriticals = useSetRecoilState(skills(Skill.Assassination));
+  const setSkillDodge = useSetRecoilState(skills(Skill.Evasion));
+  const setSkillParry = useSetRecoilState(skills(Skill.Escrime));
+  const setSkillRegeneration = useSetRecoilState(skills(Skill.Calisthenics));
+  const setSkillShields = useSetRecoilState(skills(Skill.Shieldcraft));
+  const setSkillStagger = useSetRecoilState(skills(Skill.Traumatology));
 
   const generateMerchantInventory = useGenerateMerchantInventory();
   const increaseLevel = useIncreaseLevel();
@@ -79,7 +79,7 @@ export function CheatQuest() {
         }
         // Heretic
         case "gimmee": {
-          if (Number.isInteger(value) && value !== undefined && value in SkillType) {
+          if (Number.isInteger(value) && value !== undefined && value in Skill) {
             setSkill[value](true);
           }
           break;

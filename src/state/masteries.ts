@@ -2,7 +2,7 @@ import { atomFamily, selectorFamily } from "recoil";
 
 import { MASTERIES } from "@neverquest/data/masteries";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import type { MasteryType } from "@neverquest/types/enums";
+import type { Mastery } from "@neverquest/types/enums";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 
 type MasteryState = {
@@ -13,7 +13,7 @@ type MasteryState = {
 // ATOMS
 
 export const masteries = withStateKey("masteries", (key) =>
-  atomFamily<MasteryState, MasteryType>({
+  atomFamily<MasteryState, Mastery>({
     default: {
       progress: 0,
       rank: 0,
@@ -26,7 +26,7 @@ export const masteries = withStateKey("masteries", (key) =>
 // SELECTORS
 
 export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
-  selectorFamily<boolean, MasteryType>({
+  selectorFamily<boolean, Mastery>({
     get:
       (type) =>
       ({ get }) => {
@@ -42,7 +42,7 @@ export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
 );
 
 export const masteryCost = withStateKey("masteryCost", (key) =>
-  selectorFamily<number, MasteryType>({
+  selectorFamily<number, Mastery>({
     get:
       (type) =>
       ({ get }) =>

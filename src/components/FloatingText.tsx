@@ -5,10 +5,10 @@ import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { DEFAULT_DELTA_DISPLAY } from "@neverquest/data/internal";
 import { deltas, floatingTextQueues } from "@neverquest/state/deltas";
-import type { DeltaType } from "@neverquest/types/enums";
+import type { Delta } from "@neverquest/types/enums";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function FloatingText({ type }: { type: DeltaType }) {
+export function FloatingText({ type }: { type: Delta }) {
   const delta = deltas(type);
   const deltaValue = useRecoilValue(delta);
   const [floatingTextQueue, setFloatingTextQueue] = useRecoilState(floatingTextQueues(type));

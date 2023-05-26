@@ -21,9 +21,9 @@ import {
   isAttributeAtMaximum,
 } from "@neverquest/state/attributes";
 import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
-import type { AttributeType } from "@neverquest/types/enums";
+import type { Attribute } from "@neverquest/types/enums";
 
-export function Attribute({ type }: { type: AttributeType }) {
+export function AttributeDisplay({ type }: { type: Attribute }) {
   const { isUnlocked, points } = useRecoilValue(attributes(type));
   const attributeCostValue = useRecoilValue(attributeCost);
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);

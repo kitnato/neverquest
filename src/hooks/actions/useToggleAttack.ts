@@ -6,7 +6,7 @@ import { isLevelStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMonsterDead, monsterAttackDuration, monsterAttackRate } from "@neverquest/state/monster";
 import { attackRateTotal } from "@neverquest/state/statistics";
-import { ShowingType } from "@neverquest/types/enums";
+import { Showing } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleAttack() {
@@ -17,8 +17,8 @@ export function useToggleAttack() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const isShowingAttackRate = isShowing(ShowingType.AttackRate);
-        const isShowingWildernessStatus = isShowing(ShowingType.WildernessStatus);
+        const isShowingAttackRate = isShowing(Showing.AttackRate);
+        const isShowingWildernessStatus = isShowing(Showing.WildernessStatus);
         const isAttackingValue = get(isAttacking);
 
         set(isAttacking, !isAttackingValue);

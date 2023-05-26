@@ -2,7 +2,7 @@ import { atom, selector } from "recoil";
 
 import { LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import { LocationType } from "@neverquest/types/enums";
+import { Location } from "@neverquest/types/enums";
 import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 // SELECTORS
@@ -16,7 +16,7 @@ export const isLevelCompleted = withStateKey("isLevelCompleted", (key) =>
 
 export const isWilderness = withStateKey("isWilderness", (key) =>
   selector({
-    get: ({ get }) => get(mode) === LocationType.Wilderness,
+    get: ({ get }) => get(mode) === Location.Wilderness,
     key,
   })
 );
@@ -79,8 +79,8 @@ export const level = withStateKey("level", (key) =>
 
 export const mode = withStateKey("mode", (key) =>
   atom({
-    default: LocationType.Wilderness,
-    effects: [handleLocalStorage<LocationType>({ key })],
+    default: Location.Wilderness,
+    effects: [handleLocalStorage<Location>({ key })],
     key,
   })
 );

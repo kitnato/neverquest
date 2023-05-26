@@ -4,7 +4,7 @@ import { type RecoilState, useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { deltas } from "@neverquest/state/deltas";
-import type { DeltaType } from "@neverquest/types/enums";
+import type { Delta } from "@neverquest/types/enums";
 
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -16,7 +16,7 @@ export function Lootable({
 }: {
   atom: RecoilState<number>;
   Component: React.ElementType;
-  deltaType: DeltaType;
+  deltaType: Delta;
   tooltip: string;
 }) {
   const resourceValue = useRecoilValue(atom);

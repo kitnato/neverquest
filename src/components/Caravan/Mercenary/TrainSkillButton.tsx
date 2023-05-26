@@ -5,9 +5,9 @@ import { SKILLS } from "@neverquest/data/skills";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { coins } from "@neverquest/state/resources";
 import { skills } from "@neverquest/state/skills";
-import type { SkillType } from "@neverquest/types/enums";
+import type { Skill } from "@neverquest/types/enums";
 
-export function TrainSkillButton({ type }: { type: SkillType }) {
+export function TrainSkillButton({ type }: { type: Skill }) {
   const coinsValue = useRecoilValue(coins);
   const setSkill = useSetRecoilState(skills(type));
 

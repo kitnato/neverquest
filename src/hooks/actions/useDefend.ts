@@ -30,7 +30,7 @@ import {
   staggerDuration,
   tenacity,
 } from "@neverquest/state/statistics";
-import { DeltaType, MasteryType, ShowingType, SkillType } from "@neverquest/types/enums";
+import { Delta, Mastery, Showing, Skill } from "@neverquest/types/enums";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import { animateElement } from "@neverquest/utilities/animateElement";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -46,8 +46,8 @@ export function useDefend() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        if (!get(isShowing(ShowingType.MonsterDamage))) {
-          set(isShowing(ShowingType.MonsterDamage), true);
+        if (!get(isShowing(Showing.MonsterDamage))) {
+          set(isShowing(Showing.MonsterDamage), true);
         }
 
         animateElement({
@@ -56,19 +56,19 @@ export function useDefend() {
           type: "headShake",
         });
 
-        const hasDodged = get(skills(SkillType.Dodge)) && Math.random() <= get(dodgeTotal);
+        const hasDodged = get(skills(Skill.Evasion)) && Math.random() <= get(dodgeTotal);
 
         // If attack is dodged, nothing else happens (all damage is negated).
         if (hasDodged) {
           if (get(canDodge)) {
-            set(deltas(DeltaType.Health), {
+            set(deltas(Delta.Health), {
               color: "text-muted",
               value: "DODGED",
             });
 
             return;
           } else {
-            set(deltas(DeltaType.Health), {
+            set(deltas(Delta.Health), {
               color: "text-muted",
               value: `CANNOT DODGE (${get(armor).staminaCost})`,
             });
@@ -84,7 +84,7 @@ export function useDefend() {
         })();
 
         if (healthDamage === 0) {
-          set(deltas(DeltaType.Health), {
+          set(deltas(Delta.Health), {
             color: "text-muted",
             value: healthDamage,
           });
@@ -95,7 +95,7 @@ export function useDefend() {
         let deltaHealth: DeltaDisplay = [];
         let deltaStamina: DeltaDisplay = [];
 
-        const hasParried = get(skills(SkillType.Parry)) && Math.random() <= get(parry);
+        const hasParried = get(skills(Skill.Escrime)) && Math.random() <= get(parry);
 
         // If parrying occurs, check & apply stamina cost.
         if (hasParried) {
@@ -132,7 +132,7 @@ export function useDefend() {
             ];
 
             changeStamina({ value: -staminaCost });
-            increaseMastery(MasteryType.ParryFactor);
+            increaseMastery(Mastery.Finesse);
 
             animateElement({
               element: get(monsterElement),
@@ -163,8 +163,8 @@ export function useDefend() {
             healthDamage = 0;
 
             const hasStaggered =
-              get(skills(SkillType.Stagger)) && Math.random() <= get(shield).stagger;
-            const shieldsSkill = get(skills(SkillType.Shields));
+              get(skills(Skill.Traumatology)) && Math.random() <= get(shield).stagger;
+            const shieldsSkill = get(skills(Skill.Shieldcraft));
             const isFreeBlock = shieldsSkill && Math.random() <= get(stability);
 
             deltaHealth = [
@@ -175,7 +175,7 @@ export function useDefend() {
             ];
 
             if (shieldsSkill) {
-              increaseMastery(MasteryType.Stability);
+              increaseMastery(Mastery.Stability);
             }
 
             if (isFreeBlock) {
@@ -221,13 +221,13 @@ export function useDefend() {
           }
         }
 
-        const armorsSkill = get(skills(SkillType.Armors));
+        const armorsSkill = get(skills(Skill.Armorcraft));
         const hasSkippedRecovery = armorsSkill && Math.random() <= get(tenacity);
 
         // If Tenacity isn't available or hasn't been triggered, activate recovery.
         if (!hasSkippedRecovery) {
-          if (!get(isShowing(ShowingType.Recovery))) {
-            set(isShowing(ShowingType.Recovery), true);
+          if (!get(isShowing(Showing.Recovery))) {
+            set(isShowing(Showing.Recovery), true);
           }
 
           set(recoveryDuration, get(recoveryRate));
@@ -235,14 +235,14 @@ export function useDefend() {
 
         // Increment Armorcraft mastery (if applicable).
         if (armorsSkill) {
-          increaseMastery(MasteryType.Tenacity);
+          increaseMastery(Mastery.Tenacity);
         }
 
         const isPoisoned = Math.random() <= get(monsterPoison);
 
         // If poisoning occurs, check if it can and has been deflected, otherwise apply poison - if there is an active poisoning, increment blight instead.
         if (isPoisoned) {
-          const hasDeflected = get(skills(SkillType.Armors)) && Math.random() <= get(deflection);
+          const hasDeflected = get(skills(Skill.Armorcraft)) && Math.random() <= get(deflection);
 
           if (hasDeflected) {
             deltaHealth.push({
@@ -272,7 +272,7 @@ export function useDefend() {
         changeHealth({ delta: deltaHealth, value: healthDamage });
 
         if (deltaStamina.length > 0) {
-          set(deltas(DeltaType.Stamina), deltaStamina);
+          set(deltas(Delta.Stamina), deltaStamina);
         }
       },
     [changeHealth, changeMonsterHealth, changeStamina, increaseMastery]

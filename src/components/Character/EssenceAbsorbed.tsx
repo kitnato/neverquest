@@ -6,12 +6,12 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconEssenceAbsorbed } from "@neverquest/icons/essence-absorbed.svg";
 import { essenceAbsorbed } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
-import { DeltaType } from "@neverquest/types/enums";
+import { Delta } from "@neverquest/types/enums";
 
 export function EssenceAbsorbed() {
   const essenceAbsorbedValue = useRecoilValue(essenceAbsorbed);
 
-  const deltaEssenceAbsorbed = deltas(DeltaType.EssenceAbsorbed);
+  const deltaEssenceAbsorbed = deltas(Delta.EssenceAbsorbed);
 
   useDeltaText({
     atomDelta: deltaEssenceAbsorbed,
@@ -24,7 +24,7 @@ export function EssenceAbsorbed() {
         <>
           <span>{essenceAbsorbedValue}</span>
 
-          <FloatingText type={DeltaType.EssenceAbsorbed} />
+          <FloatingText type={Delta.EssenceAbsorbed} />
         </>
       }
       Icon={IconEssenceAbsorbed}

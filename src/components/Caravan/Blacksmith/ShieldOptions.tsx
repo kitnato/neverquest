@@ -18,7 +18,7 @@ import { blacksmithInventory } from "@neverquest/state/caravan";
 import { level } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
-import { SkillType } from "@neverquest/types/enums";
+import { Skill } from "@neverquest/types/enums";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 import { generateShield } from "@neverquest/utilities/generators";
 
@@ -30,8 +30,8 @@ export function ShieldOptions() {
   const [shieldClass, setShieldClass] = useState<ShieldClass>("small");
   const [shieldLevel, setShieldLevel] = useState(levelValue);
 
-  const staggerSkillValue = useRecoilValue(skills(SkillType.Stagger));
-  const skillShieldsValue = useRecoilValue(skills(SkillType.Shields));
+  const staggerSkillValue = useRecoilValue(skills(Skill.Traumatology));
+  const skillShieldsValue = useRecoilValue(skills(Skill.Shieldcraft));
 
   const shield = generateShield({
     allowNSFW: allowNSFWValue,

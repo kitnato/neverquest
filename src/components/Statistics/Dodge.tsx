@@ -14,18 +14,18 @@ import { armor } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { dodge, dodgeTotal } from "@neverquest/state/statistics";
-import { AttributeType, DeltaType, ShowingType, SkillType } from "@neverquest/types/enums";
+import { Attribute, Delta, Showing, Skill } from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Dodge() {
   const { staminaCost } = useRecoilValue(armor);
   const dodgeValue = useRecoilValue(dodge);
   const dodgeTotalValue = useRecoilValue(dodgeTotal);
-  const isShowingDodgeDetails = useRecoilValue(isShowing(ShowingType.DodgeDetails));
-  const dodgeSkill = useRecoilValue(skills(SkillType.Dodge));
+  const isShowingDodgeDetails = useRecoilValue(isShowing(Showing.DodgeDetails));
+  const dodgeSkill = useRecoilValue(skills(Skill.Evasion));
 
-  const { name } = ATTRIBUTES[AttributeType.Dodge];
-  const deltaDodge = deltas(DeltaType.Dodge);
+  const { name } = ATTRIBUTES[Attribute.Agility];
+  const deltaDodge = deltas(Delta.Dodge);
 
   useDeltaText({
     atomDelta: deltaDodge,
@@ -69,7 +69,7 @@ export function Dodge() {
             <span>{formatPercentage(dodgeTotalValue)}</span>
           </OverlayTrigger>
 
-          <FloatingText type={DeltaType.Dodge} />
+          <FloatingText type={Delta.Dodge} />
         </>
       }
       Icon={IconDodge}

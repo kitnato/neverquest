@@ -8,14 +8,14 @@ import { ReactComponent as IconTenacity } from "@neverquest/icons/tenacity.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { skills } from "@neverquest/state/skills";
 import { tenacity } from "@neverquest/state/statistics";
-import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
+import { Delta, Mastery, Skill } from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Tenacity() {
-  const armorsSkill = useRecoilValue(skills(SkillType.Armors));
+  const armorsSkill = useRecoilValue(skills(Skill.Armorcraft));
   const tenacityValue = useRecoilValue(tenacity);
 
-  const deltaTenacity = deltas(DeltaType.Tenacity);
+  const deltaTenacity = deltas(Delta.Tenacity);
 
   useDeltaText({
     atomDelta: deltaTenacity,
@@ -32,12 +32,12 @@ export function Tenacity() {
         <>
           <span>{formatPercentage(tenacityValue)}</span>
 
-          <FloatingText type={DeltaType.Tenacity} />
+          <FloatingText type={Delta.Tenacity} />
         </>
       }
       Icon={IconTenacity}
       isAnimated
-      tooltip={MASTERIES[MasteryType.Tenacity].name}
+      tooltip={MASTERIES[Mastery.Tenacity].name}
     />
   );
 }

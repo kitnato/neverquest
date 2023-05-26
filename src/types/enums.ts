@@ -1,15 +1,15 @@
-export enum AttributeType {
-  AttackRate,
-  CriticalChance,
-  CriticalDamage,
-  Damage,
-  Dodge,
-  Health,
-  Loot,
-  RecoveryRate,
-  ReserveRegenerationAmount,
-  ReserveRegenerationRate,
-  Stamina,
+export enum Attribute {
+  Agility,
+  Dexterity,
+  Endurance,
+  Fortitude,
+  Luck,
+  Perception,
+  Resilience,
+  Speed,
+  Strength,
+  Vigor,
+  Vitality,
 }
 
 export enum CrewMember {
@@ -35,14 +35,12 @@ export enum DeltaText {
   Time,
 }
 
-export enum DeltaType {
+export enum Delta {
   AttributePoints,
   AttackRate,
   BleedRating,
   Block,
-  Stability,
-  Tenacity,
-  PowerLevel,
+  Cruelty,
   Coins,
   CoinsLoot,
   CriticalRating,
@@ -53,20 +51,22 @@ export enum DeltaType {
   Essence,
   EssenceAbsorbed,
   EssenceLoot,
+  Finesse,
   Health,
   HealthMonster,
   HealthRegenerationRate,
-  MasteryBleed,
-  MasteryParry,
-  MasteryStagger,
+  Might,
   Parry,
+  PowerLevel,
   Protection,
   RecoveryRate,
   Scrap,
   ScrapLoot,
+  Stability,
   StaggerRating,
   Stamina,
   StaminaRegenerationRate,
+  Tenacity,
   WildernessLevel,
   WildernessProgress,
 }
@@ -77,26 +77,20 @@ export enum GearType {
   Weapon,
 }
 
-export enum LocationType {
+export enum Location {
   Caravan,
   Wilderness,
 }
 
-export enum LootType {
-  Coins,
-  Essence,
-  Scrap,
-}
-
-export enum MasteryType {
-  BleedDamage,
+export enum Mastery {
+  Cruelty,
+  Finesse,
+  Might,
   Stability,
-  ParryFactor,
   Tenacity,
-  StaggerDuration,
 }
 
-export enum ShowingType {
+export enum Showing {
   Armor,
   AttackRate,
   AttackRateDetails,
@@ -126,22 +120,22 @@ export enum ShowingType {
   WildernessStatus,
 }
 
-export enum ReserveType {
+export enum Reserve {
   Encumbrance,
   Health,
   MonsterHealth,
   Stamina,
 }
 
-export enum SkillType {
-  Armors,
-  Bleed,
-  Criticals,
-  Dodge,
-  Parry,
-  Regeneration,
-  Shields,
-  Stagger,
+export enum Skill {
+  Anatomy,
+  Armorcraft,
+  Assassination,
+  Calisthenics,
+  Escrime,
+  Evasion,
+  Shieldcraft,
+  Traumatology,
 }
 
 export enum WeaponGrip {

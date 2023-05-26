@@ -16,7 +16,7 @@ import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { CREW, CREW_ORDER } from "@neverquest/data/caravan";
 import { crewActive, crewHirable } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
-import { CrewMember, ShowingType } from "@neverquest/types/enums";
+import { CrewMember, Showing } from "@neverquest/types/enums";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 const CREW_COMPONENTS: Record<CrewMember, FunctionComponent> = {
@@ -33,7 +33,7 @@ const CREW_COMPONENTS: Record<CrewMember, FunctionComponent> = {
 export function Caravan() {
   const [crewActiveValue, setCrewActive] = useRecoilState(crewActive);
   const crewHirableValue = useRecoilValue(crewHirable);
-  const isShowingCrewHiring = useRecoilValue(isShowing(ShowingType.CrewHiring));
+  const isShowingCrewHiring = useRecoilValue(isShowing(Showing.CrewHiring));
 
   const [isScreenShowing, setScreenShowing] = useState(false);
 

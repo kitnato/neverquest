@@ -2,9 +2,9 @@ import { useRecoilValue } from "recoil";
 
 import { SkillDisplay } from "@neverquest/components/Character/SkillDisplay";
 import { skills } from "@neverquest/state/skills";
-import type { SkillType } from "@neverquest/types/enums";
+import type { Skill } from "@neverquest/types/enums";
 
-export function TrainedSkill({ type }: { type: SkillType }) {
+export function TrainedSkill({ type }: { type: Skill }) {
   const skillValue = useRecoilValue(skills(type));
 
   if (!skillValue) {

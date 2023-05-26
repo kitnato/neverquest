@@ -6,12 +6,12 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconAttributePoints } from "@neverquest/icons/attribute-points.svg";
 import { attributePoints } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
-import { DeltaType } from "@neverquest/types/enums";
+import { Delta } from "@neverquest/types/enums";
 
 export function AttributePoints() {
   const attributePointsValue = useRecoilValue(attributePoints);
 
-  const deltaAttributePoints = deltas(DeltaType.AttributePoints);
+  const deltaAttributePoints = deltas(Delta.AttributePoints);
 
   useDeltaText({
     atomDelta: deltaAttributePoints,
@@ -24,7 +24,7 @@ export function AttributePoints() {
         <>
           <span>{attributePointsValue}</span>
 
-          <FloatingText type={DeltaType.AttributePoints} />
+          <FloatingText type={Delta.AttributePoints} />
         </>
       }
       Icon={IconAttributePoints}

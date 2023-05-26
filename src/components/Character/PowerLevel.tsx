@@ -6,12 +6,12 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconPowerLevel } from "@neverquest/icons/power-level.svg";
 import { characterLevel } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
-import { DeltaType } from "@neverquest/types/enums";
+import { Delta } from "@neverquest/types/enums";
 
 export function PowerLevel() {
   const characterLevelValue = useRecoilValue(characterLevel);
 
-  const deltaPowerLevel = deltas(DeltaType.PowerLevel);
+  const deltaPowerLevel = deltas(Delta.PowerLevel);
 
   useDeltaText({
     atomDelta: deltaPowerLevel,
@@ -24,7 +24,7 @@ export function PowerLevel() {
         <>
           <span>{characterLevelValue}</span>
 
-          <FloatingText type={DeltaType.PowerLevel} />
+          <FloatingText type={Delta.PowerLevel} />
         </>
       }
       Icon={IconPowerLevel}

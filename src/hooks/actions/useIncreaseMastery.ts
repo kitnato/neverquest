@@ -3,13 +3,13 @@ import { useRecoilCallback } from "recoil";
 import { MASTERY_DELTA_TYPE } from "@neverquest/data/masteries";
 import { deltas } from "@neverquest/state/deltas";
 import { isMasteryAtMaximum, masteries, masteryCost } from "@neverquest/state/masteries";
-import type { MasteryType } from "@neverquest/types/enums";
+import type { Mastery } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useIncreaseMastery() {
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      (type: MasteryType) => {
+      (type: Mastery) => {
         const get = getSnapshotGetter(snapshot);
 
         if (get(isMasteryAtMaximum(type))) {

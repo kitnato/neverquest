@@ -15,20 +15,20 @@ import {
 } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { reserveRegenerationRate } from "@neverquest/state/statistics";
-import { AttributeType, DeltaText, DeltaType, ReserveType } from "@neverquest/types/enums";
+import { Attribute, Delta, DeltaText, Reserve } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
-export function Regeneration({ type }: { type: ReserveType.Health | ReserveType.Stamina }) {
+export function Regeneration({ type }: { type: Reserve.Health | Reserve.Stamina }) {
   const { atomDeltaRegenerationRate, atomRegenerationAmount, atomRegenerationRate } =
     RESERVES[type];
-  const isHealth = type === ReserveType.Health;
+  const isHealth = type === Reserve.Health;
 
   const regenerationAmountValue = useRecoilValue(atomRegenerationAmount);
   const regenerationRateValue = useRecoilValue(atomRegenerationRate);
   const reserveRegenerationRateValue = useRecoilValue(reserveRegenerationRate);
 
-  const { name: amountName } = ATTRIBUTES[AttributeType.ReserveRegenerationAmount];
-  const { name: rateName } = ATTRIBUTES[AttributeType.ReserveRegenerationRate];
+  const { name: amountName } = ATTRIBUTES[Attribute.Fortitude];
+  const { name: rateName } = ATTRIBUTES[Attribute.Vigor];
   const baseAmount = isHealth ? REGENERATION_AMOUNT_HEALTH : REGENERATION_AMOUNT_STAMINA;
   const baseRate = isHealth ? REGENERATION_RATE_HEALTH : REGENERATION_RATE_STAMINA;
   const showAmount = regenerationAmountValue - baseAmount > 0;
@@ -107,9 +107,7 @@ export function Regeneration({ type }: { type: ReserveType.Health | ReserveType.
 
       <FloatingText
         type={
-          type === ReserveType.Health
-            ? DeltaType.HealthRegenerationRate
-            : DeltaType.StaminaRegenerationRate
+          type === Reserve.Health ? Delta.HealthRegenerationRate : Delta.StaminaRegenerationRate
         }
       />
     </>

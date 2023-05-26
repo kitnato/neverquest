@@ -9,7 +9,7 @@ import {
   scrap,
   scrapLoot,
 } from "@neverquest/state/resources";
-import { ShowingType } from "@neverquest/types/enums";
+import { Showing } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useTransactResources() {
@@ -38,8 +38,8 @@ export function useTransactResources() {
         if (coinsValue !== 0) {
           set(coins, (current) => current + coinsValue);
 
-          if (!get(isShowing(ShowingType.Coins))) {
-            set(isShowing(ShowingType.Coins), true);
+          if (!get(isShowing(Showing.Coins))) {
+            set(isShowing(Showing.Coins), true);
           }
 
           if (isLooting) {
@@ -50,12 +50,12 @@ export function useTransactResources() {
         if (essenceValue !== 0) {
           set(essence, (current) => current + essenceValue);
 
-          if (!get(isShowing(ShowingType.Essence))) {
-            set(isShowing(ShowingType.Essence), true);
+          if (!get(isShowing(Showing.Essence))) {
+            set(isShowing(Showing.Essence), true);
           }
 
-          if (!get(isShowing(ShowingType.AttributesButton))) {
-            set(isShowing(ShowingType.AttributesButton), true);
+          if (!get(isShowing(Showing.AttributesButton))) {
+            set(isShowing(Showing.AttributesButton), true);
           }
 
           if (isLooting) {
@@ -66,8 +66,8 @@ export function useTransactResources() {
         if (scrapValue !== 0) {
           set(scrap, (current) => current + scrapValue);
 
-          if (!get(isShowing(ShowingType.Scrap))) {
-            set(isShowing(ShowingType.Scrap), true);
+          if (!get(isShowing(Showing.Scrap))) {
+            set(isShowing(Showing.Scrap), true);
           }
 
           if (isLooting) {

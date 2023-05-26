@@ -1,5 +1,5 @@
 import type { ArmorClass, ShieldClass, WeaponClass, WeaponModality } from "@neverquest/LOCRA/types";
-import type { SkillType, WeaponGrip } from "@neverquest/types/enums";
+import type { Skill, WeaponGrip } from "@neverquest/types/enums";
 import type { SVGIcon } from "@neverquest/types/props";
 
 export type Armor = GearBase & {
@@ -19,7 +19,7 @@ export type AttributeOrMastery = {
   increment: number;
   maximum?: number;
   name: string;
-  requiredSkill?: SkillType;
+  requiredSkill?: Skill;
 };
 
 export type Consumable = ItemBase & {
@@ -70,14 +70,6 @@ export type Shield = GearBase & {
   };
   stagger: number;
   staminaCost: number;
-};
-
-export type Skill = {
-  coinPrice: number;
-  description: string;
-  Icon: SVGIcon;
-  name: string;
-  requiredLevel: number;
 };
 
 export type Trinket = ItemBase & {

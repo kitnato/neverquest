@@ -8,12 +8,12 @@ import { ReactComponent as IconRestart } from "@neverquest/icons/restart.svg";
 import { isGameOver } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
 import { useReset } from "@neverquest/state/SeedContext";
-import { ShowingType } from "@neverquest/types/enums";
+import { Showing } from "@neverquest/types/enums";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Restart() {
   const isGameOverValue = useRecoilValue(isGameOver);
-  const isShowingGameOver = useRecoilValue(isShowing(ShowingType.GameOver));
+  const isShowingGameOver = useRecoilValue(isShowing(Showing.GameOver));
 
   const [isShowingRestart, setIsShowingRestart] = useState(false);
 

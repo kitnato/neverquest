@@ -8,14 +8,14 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconProgress } from "@neverquest/icons/progress.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isWilderness, progress, progressMaximum } from "@neverquest/state/encounter";
-import { DeltaType } from "@neverquest/types/enums";
+import { Delta } from "@neverquest/types/enums";
 
 export function WildernessProgress() {
   const isWildernessValue = useRecoilValue(isWilderness);
   const progressValue = useRecoilValue(progress);
   const progressMaximumValue = useRecoilValue(progressMaximum);
 
-  const deltaWildernessProgress = deltas(DeltaType.WildernessProgress);
+  const deltaWildernessProgress = deltas(Delta.WildernessProgress);
 
   useDeltaText({
     atomDelta: deltaWildernessProgress,
@@ -38,7 +38,7 @@ export function WildernessProgress() {
               variant="dark"
             />
 
-            <FloatingText type={DeltaType.WildernessProgress} />
+            <FloatingText type={Delta.WildernessProgress} />
           </Stack>
         }
         Icon={IconProgress}

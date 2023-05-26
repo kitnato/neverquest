@@ -7,12 +7,12 @@ import { Parry } from "@neverquest/components/Statistics/Parry";
 import { Protection } from "@neverquest/components/Statistics/Protection";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
-import { ShowingType, SkillType } from "@neverquest/types/enums";
+import { Showing, Skill } from "@neverquest/types/enums";
 
 export function Defense() {
-  const isShowingBlock = useRecoilValue(isShowing(ShowingType.Block));
-  const isShowingProtection = useRecoilValue(isShowing(ShowingType.Protection));
-  const dodgeSkill = useRecoilValue(skills(SkillType.Dodge));
+  const isShowingBlock = useRecoilValue(isShowing(Showing.Block));
+  const isShowingProtection = useRecoilValue(isShowing(Showing.Protection));
+  const dodgeSkill = useRecoilValue(skills(Skill.Evasion));
 
   if (!dodgeSkill && !isShowingBlock && !isShowingProtection) {
     return null;

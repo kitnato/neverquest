@@ -5,14 +5,14 @@ import { ArmorEquipped } from "@neverquest/components/Inventory/Armor/ArmorEquip
 import { ShieldEquipped } from "@neverquest/components/Inventory/Shield/ShieldEquipped";
 import { WeaponEquipped } from "@neverquest/components/Inventory/Weapon/WeaponEquipped";
 import { isShowing } from "@neverquest/state/isShowing";
-import { ShowingType } from "@neverquest/types/enums";
+import { Showing } from "@neverquest/types/enums";
 
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Gear() {
-  const isShowingArmor = useRecoilValue(isShowing(ShowingType.Armor));
-  const isShowingShield = useRecoilValue(isShowing(ShowingType.Shield));
-  const isShowingWeapon = useRecoilValue(isShowing(ShowingType.Weapon));
+  const isShowingArmor = useRecoilValue(isShowing(Showing.Armor));
+  const isShowingShield = useRecoilValue(isShowing(Showing.Shield));
+  const isShowingWeapon = useRecoilValue(isShowing(Showing.Weapon));
 
   if (!isShowingArmor && !isShowingShield && !isShowingWeapon) {
     return null;

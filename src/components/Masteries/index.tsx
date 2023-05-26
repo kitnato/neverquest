@@ -2,7 +2,7 @@ import { Accordion } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { Mastery } from "@neverquest/components/Masteries/Mastery";
+import { MasteryDisplay } from "@neverquest/components/Masteries/MasteryDisplay";
 import { MASTERIES_ORDER } from "@neverquest/data/masteries";
 import { ReactComponent as IconMasteries } from "@neverquest/icons/masteries.svg";
 import { isShowingMastery } from "@neverquest/state/isShowing";
@@ -25,7 +25,7 @@ export function Masteries() {
 
         <Accordion.Body>
           {MASTERIES_ORDER.map((type) => (
-            <Mastery key={type} type={type} />
+            <MasteryDisplay key={type} type={type} />
           ))}
         </Accordion.Body>
       </Accordion.Item>

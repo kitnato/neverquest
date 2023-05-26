@@ -1,13 +1,13 @@
 import { Stack } from "react-bootstrap";
 
-import { Attribute } from "@neverquest/components/Attributes/Attribute";
+import { AttributeDisplay } from "@neverquest/components/Attributes/AttributeDisplay";
 import { ATTRIBUTES_ORDER } from "@neverquest/data/attributes";
 
 export function AttributesList() {
   return (
     <Stack gap={3}>
       {ATTRIBUTES_ORDER.map((type, index) => (
-        <Attribute key={index} type={type} />
+        <AttributeDisplay key={index} type={type} />
       ))}
     </Stack>
   );

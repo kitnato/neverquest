@@ -12,19 +12,19 @@ import { deltas } from "@neverquest/state/deltas";
 import { shield } from "@neverquest/state/inventory";
 import { skills } from "@neverquest/state/skills";
 import { staggerDuration, staggerRating, staggerWeapon } from "@neverquest/state/statistics";
-import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
+import { Delta, Mastery, Skill } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function StaggerRating() {
   const { stagger } = useRecoilValue(shield);
-  const staggerSkill = useRecoilValue(skills(SkillType.Stagger));
+  const staggerSkill = useRecoilValue(skills(Skill.Traumatology));
   const staggerDurationValue = useRecoilValue(staggerDuration);
   const staggerRatingValue = useRecoilValue(staggerRating);
   const staggerWeaponValue = useRecoilValue(staggerWeapon);
 
-  const deltaStaggerRating = deltas(DeltaType.StaggerRating);
+  const deltaStaggerRating = deltas(Delta.StaggerRating);
 
-  const { name } = MASTERIES[MasteryType.StaggerDuration];
+  const { name } = MASTERIES[Mastery.Might];
 
   useDeltaText({
     atomDelta: deltaStaggerRating,
@@ -71,7 +71,7 @@ export function StaggerRating() {
             <span>{staggerRatingValue}</span>
           </OverlayTrigger>
 
-          <FloatingText type={DeltaType.StaggerRating} />
+          <FloatingText type={Delta.StaggerRating} />
         </>
       }
       Icon={IconStaggerRating}

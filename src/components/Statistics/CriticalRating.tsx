@@ -10,16 +10,16 @@ import { ReactComponent as IconCriticalRating } from "@neverquest/icons/critical
 import { deltas } from "@neverquest/state/deltas";
 import { skills } from "@neverquest/state/skills";
 import { criticalChance, criticalDamage, criticalRating } from "@neverquest/state/statistics";
-import { DeltaType, SkillType } from "@neverquest/types/enums";
+import { Delta, Skill } from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function CriticalRating() {
   const criticalChanceValue = useRecoilValue(criticalChance);
   const criticalDamageValue = useRecoilValue(criticalDamage);
   const criticalRatingValue = useRecoilValue(criticalRating);
-  const criticalsSkill = useRecoilValue(skills(SkillType.Criticals));
+  const criticalsSkill = useRecoilValue(skills(Skill.Assassination));
 
-  const deltaCriticalRating = deltas(DeltaType.CriticalRating);
+  const deltaCriticalRating = deltas(Delta.CriticalRating);
 
   useDeltaText({
     atomDelta: deltaCriticalRating,
@@ -60,7 +60,7 @@ export function CriticalRating() {
             <span>{criticalRatingValue}</span>
           </OverlayTrigger>
 
-          <FloatingText type={DeltaType.CriticalRating} />
+          <FloatingText type={Delta.CriticalRating} />
         </>
       }
       Icon={IconCriticalRating}

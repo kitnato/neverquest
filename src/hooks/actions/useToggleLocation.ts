@@ -11,7 +11,7 @@ import {
   maximumLevel,
   mode,
 } from "@neverquest/state/encounter";
-import { LocationType } from "@neverquest/types/enums";
+import { Location } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleLocation() {
@@ -29,7 +29,7 @@ export function useToggleLocation() {
         if (isWildernessValue) {
           generateMerchantInventory();
 
-          set(mode, LocationType.Caravan);
+          set(mode, Location.Caravan);
         } else {
           if (get(isLevelCompleted) && get(level) === get(maximumLevel)) {
             increaseLevel();
@@ -37,7 +37,7 @@ export function useToggleLocation() {
 
           resetWilderness();
 
-          set(mode, LocationType.Wilderness);
+          set(mode, Location.Wilderness);
           set(hasBoughtFromMerchant, false);
         }
       },

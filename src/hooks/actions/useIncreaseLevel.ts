@@ -6,7 +6,7 @@ import { crew } from "@neverquest/state/caravan";
 import { level, wildernesses } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
-import { CrewStatus, ShowingType } from "@neverquest/types/enums";
+import { CrewStatus, Showing } from "@neverquest/types/enums";
 import { generateLocation } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -23,7 +23,7 @@ export function useIncreaseLevel() {
 
         CREW_ORDER.forEach((type) => {
           const { hireStatus, monologueProgress } = get(crew(type));
-          const isShowingCrewHiring = isShowing(ShowingType.CrewHiring);
+          const isShowingCrewHiring = isShowing(Showing.CrewHiring);
 
           const { hirableLevel, monologues } = CREW[type];
 

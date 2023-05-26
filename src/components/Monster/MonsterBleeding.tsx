@@ -5,11 +5,11 @@ import { MonsterBleedingMeter } from "@neverquest/components/Monster/MonsterBlee
 import { ReactComponent as IconBleeding } from "@neverquest/icons/bleeding.svg";
 import { skills } from "@neverquest/state/skills";
 import { bleed } from "@neverquest/state/statistics";
-import { SkillType } from "@neverquest/types/enums";
+import { Skill } from "@neverquest/types/enums";
 
 export function MonsterBleeding() {
   const bleedValue = useRecoilValue(bleed);
-  const bleedSkill = useRecoilValue(skills(SkillType.Bleed));
+  const bleedSkill = useRecoilValue(skills(Skill.Anatomy));
 
   if (!bleedSkill || bleedValue === 0) {
     return null;

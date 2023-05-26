@@ -4,7 +4,7 @@ import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { attributes } from "@neverquest/state/attributes";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
-import { AttributeType } from "@neverquest/types/enums";
+import { Attribute } from "@neverquest/types/enums";
 
 // SELECTORS
 
@@ -53,9 +53,9 @@ export const isStaminaAtMaximum = withStateKey("isStaminaAtMaximum", (key) =>
 export const maximumHealth = withStateKey("maximumHealth", (key) =>
   selector({
     get: ({ get }) => {
-      const { points } = get(attributes(AttributeType.Health));
+      const { points } = get(attributes(Attribute.Vitality));
 
-      const { base, increment } = ATTRIBUTES[AttributeType.Health];
+      const { base, increment } = ATTRIBUTES[Attribute.Vitality];
 
       return base + increment * points;
     },
@@ -66,9 +66,9 @@ export const maximumHealth = withStateKey("maximumHealth", (key) =>
 export const maximumStamina = withStateKey("maximumStamina", (key) =>
   selector({
     get: ({ get }) => {
-      const { points } = get(attributes(AttributeType.Stamina));
+      const { points } = get(attributes(Attribute.Endurance));
 
-      const { base, increment } = ATTRIBUTES[AttributeType.Stamina];
+      const { base, increment } = ATTRIBUTES[Attribute.Endurance];
 
       return base + increment * points;
     },

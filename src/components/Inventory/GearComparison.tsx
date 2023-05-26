@@ -5,7 +5,7 @@ import { ReactComponent as IconEquals } from "@neverquest/icons/equals.svg";
 import { ReactComponent as IconIncrease } from "@neverquest/icons/increase.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import { showGearComparison } from "@neverquest/state/settings";
-import type { ShowingType } from "@neverquest/types/enums";
+import type { Showing } from "@neverquest/types/enums";
 
 export function GearComparison({
   difference,
@@ -14,7 +14,7 @@ export function GearComparison({
 }: {
   difference: number;
   isDownPositive?: boolean;
-  showingType: ShowingType;
+  showingType: Showing;
 }) {
   const isShowingGearComparison = useRecoilValue(isShowing(showingType));
   const showGearComparisonValue = useRecoilValue(showGearComparison);

@@ -21,7 +21,7 @@ import {
   damageTotal,
   staggerDuration,
 } from "@neverquest/state/statistics";
-import { DeltaType, MasteryType, ShowingType, SkillType } from "@neverquest/types/enums";
+import { Delta, Mastery, Showing, Skill } from "@neverquest/types/enums";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import { animateElement } from "@neverquest/utilities/animateElement";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -38,19 +38,19 @@ export function useAttack() {
 
         const { abilityChance, gearClass, staminaCost } = get(weapon);
 
-        if (!get(isShowing(ShowingType.Statistics))) {
-          set(isShowing(ShowingType.Statistics), true);
+        if (!get(isShowing(Showing.Statistics))) {
+          set(isShowing(Showing.Statistics), true);
         }
 
         if (get(canAttackOrParry)) {
           const hasInflictedCritical =
-            get(skills(SkillType.Criticals)) && Math.random() <= get(criticalChance);
+            get(skills(Skill.Assassination)) && Math.random() <= get(criticalChance);
           const hasInflictedBleed =
             get(monsterBleedingDuration) === 0 &&
-            get(skills(SkillType.Bleed)) &&
+            get(skills(Skill.Anatomy)) &&
             Math.random() <= get(bleed);
           const hasInflictedStagger =
-            get(skills(SkillType.Stagger)) &&
+            get(skills(Skill.Traumatology)) &&
             gearClass === "blunt" &&
             Math.random() <= abilityChance;
 
@@ -78,7 +78,7 @@ export function useAttack() {
 
           if (hasInflictedBleed) {
             set(monsterBleedingDuration, BLEED.duration);
-            increaseMastery(MasteryType.BleedDamage);
+            increaseMastery(Mastery.Cruelty);
 
             monsterDeltas.push({
               color: "text-muted",
@@ -88,7 +88,7 @@ export function useAttack() {
 
           if (hasInflictedStagger) {
             set(monsterStaggeredDuration, get(staggerDuration));
-            increaseMastery(MasteryType.StaggerDuration);
+            increaseMastery(Mastery.Might);
 
             monsterDeltas.push({
               color: "text-muted",
@@ -104,7 +104,7 @@ export function useAttack() {
             type: "headShake",
           });
         } else {
-          set(deltas(DeltaType.Stamina), [
+          set(deltas(Delta.Stamina), [
             {
               color: "text-muted",
               value: "CANNOT ATTACK",

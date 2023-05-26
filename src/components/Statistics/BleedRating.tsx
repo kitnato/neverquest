@@ -12,7 +12,7 @@ import { ReactComponent as IconBleedRating } from "@neverquest/icons/bleed-ratin
 import { deltas } from "@neverquest/state/deltas";
 import { skills } from "@neverquest/state/skills";
 import { bleed, bleedDamage, bleedRating, bleedTick, damage } from "@neverquest/state/statistics";
-import { DeltaType, MasteryType, SkillType } from "@neverquest/types/enums";
+import { Delta, Mastery, Skill } from "@neverquest/types/enums";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function BleedRating() {
@@ -21,12 +21,12 @@ export function BleedRating() {
   const bleedRatingValue = useRecoilValue(bleedRating);
   const bleedTickValue = useRecoilValue(bleedTick);
   const damageValue = useRecoilValue(damage);
-  const bleedSkill = useRecoilValue(skills(SkillType.Bleed));
+  const bleedSkill = useRecoilValue(skills(Skill.Anatomy));
 
-  const deltaBleed = deltas(DeltaType.BleedRating);
+  const deltaBleed = deltas(Delta.BleedRating);
 
   const { duration } = BLEED;
-  const { name } = MASTERIES[MasteryType.BleedDamage];
+  const { name } = MASTERIES[Mastery.Cruelty];
 
   useDeltaText({
     atomDelta: deltaBleed,
@@ -81,7 +81,7 @@ export function BleedRating() {
             <span>{bleedRatingValue}</span>
           </OverlayTrigger>
 
-          <FloatingText type={DeltaType.BleedRating} />
+          <FloatingText type={Delta.BleedRating} />
         </>
       }
       Icon={IconBleedRating}

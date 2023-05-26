@@ -7,14 +7,14 @@ import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.s
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { deflection } from "@neverquest/state/statistics";
-import { DeltaType, ShowingType } from "@neverquest/types/enums";
+import { Delta, Showing } from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Deflection() {
   const deflectionValue = useRecoilValue(deflection);
-  const isShowingDeflection = useRecoilValue(isShowing(ShowingType.Deflection));
+  const isShowingDeflection = useRecoilValue(isShowing(Showing.Deflection));
 
-  const deltaDeflection = deltas(DeltaType.Deflection);
+  const deltaDeflection = deltas(Delta.Deflection);
 
   useDeltaText({
     atomDelta: deltaDeflection,
@@ -31,7 +31,7 @@ export function Deflection() {
         <>
           <span>{formatPercentage(deflectionValue)}</span>
 
-          <FloatingText type={DeltaType.Deflection} />
+          <FloatingText type={Delta.Deflection} />
         </>
       }
       Icon={IconDeflection}

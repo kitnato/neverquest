@@ -10,9 +10,9 @@ import { SKILLS } from "@neverquest/data/skills";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { characterLevel } from "@neverquest/state/attributes";
 import { skills } from "@neverquest/state/skills";
-import type { SkillType } from "@neverquest/types/enums";
+import type { Skill } from "@neverquest/types/enums";
 
-export function TrainableSkill({ type }: { type: SkillType }) {
+export function TrainableSkill({ type }: { type: Skill }) {
   const characterLevelValue = useRecoilValue(characterLevel);
   const skillValue = useRecoilValue(skills(type));
 

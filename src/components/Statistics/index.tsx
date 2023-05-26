@@ -5,12 +5,12 @@ import { Defense } from "@neverquest/components/Statistics/Defense";
 import { Offense } from "@neverquest/components/Statistics/Offense";
 import { Support } from "@neverquest/components/Statistics/Support";
 import { isShowing } from "@neverquest/state/isShowing";
-import { ShowingType } from "@neverquest/types/enums";
+import { Showing } from "@neverquest/types/enums";
 
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Statistics() {
-  const isShowingStatistics = useRecoilValue(isShowing(ShowingType.Statistics));
+  const isShowingStatistics = useRecoilValue(isShowing(Showing.Statistics));
 
   if (!isShowingStatistics) {
     return null;

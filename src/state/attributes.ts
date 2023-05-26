@@ -3,7 +3,7 @@ import { atom, atomFamily, selector, selectorFamily } from "recoil";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { essence } from "@neverquest/state/resources";
-import type { AttributeType } from "@neverquest/types/enums";
+import type { Attribute } from "@neverquest/types/enums";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 
 type AttributeState = {
@@ -62,7 +62,7 @@ export const essenceAbsorbed = withStateKey("essenceAbsorbed", (key) =>
 );
 
 export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =>
-  selectorFamily<boolean, AttributeType>({
+  selectorFamily<boolean, Attribute>({
     get:
       (type) =>
       ({ get }) => {
@@ -80,7 +80,7 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =
 // ATOMS
 
 export const attributes = withStateKey("attributes", (key) =>
-  atomFamily<AttributeState, AttributeType>({
+  atomFamily<AttributeState, Attribute>({
     default: {
       isUnlocked: false,
       points: 0,

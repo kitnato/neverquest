@@ -3,12 +3,12 @@ import { DefaultValue, atomFamily, selector, selectorFamily } from "recoil";
 import { ATTRIBUTES, ATTRIBUTES_ORDER } from "@neverquest/data/attributes";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { attributes } from "@neverquest/state/attributes";
-import { SkillType } from "@neverquest/types/enums";
+import { Skill } from "@neverquest/types/enums";
 
 // SELECTORS
 
 export const skills = withStateKey("skills", (key) =>
-  selectorFamily<boolean, SkillType>({
+  selectorFamily<boolean, Skill>({
     get:
       (type) =>
       ({ get }) =>
@@ -40,16 +40,16 @@ export const skills = withStateKey("skills", (key) =>
 );
 
 export const skillsTrained = withStateKey("skillsTrained", (key) =>
-  selector<Record<SkillType, boolean>>({
+  selector<Record<Skill, boolean>>({
     get: ({ get }) => ({
-      [SkillType.Armors]: get(skillsStatus(SkillType.Armors)),
-      [SkillType.Bleed]: get(skillsStatus(SkillType.Bleed)),
-      [SkillType.Criticals]: get(skillsStatus(SkillType.Criticals)),
-      [SkillType.Dodge]: get(skillsStatus(SkillType.Dodge)),
-      [SkillType.Parry]: get(skillsStatus(SkillType.Parry)),
-      [SkillType.Regeneration]: get(skillsStatus(SkillType.Regeneration)),
-      [SkillType.Shields]: get(skillsStatus(SkillType.Shields)),
-      [SkillType.Stagger]: get(skillsStatus(SkillType.Stagger)),
+      [Skill.Armorcraft]: get(skillsStatus(Skill.Armorcraft)),
+      [Skill.Anatomy]: get(skillsStatus(Skill.Anatomy)),
+      [Skill.Assassination]: get(skillsStatus(Skill.Assassination)),
+      [Skill.Evasion]: get(skillsStatus(Skill.Evasion)),
+      [Skill.Escrime]: get(skillsStatus(Skill.Escrime)),
+      [Skill.Calisthenics]: get(skillsStatus(Skill.Calisthenics)),
+      [Skill.Shieldcraft]: get(skillsStatus(Skill.Shieldcraft)),
+      [Skill.Traumatology]: get(skillsStatus(Skill.Traumatology)),
     }),
     key,
   })
@@ -58,7 +58,7 @@ export const skillsTrained = withStateKey("skillsTrained", (key) =>
 // ATOMS
 
 export const skillsStatus = withStateKey("skillsStatus", (key) =>
-  atomFamily<boolean, SkillType>({
+  atomFamily<boolean, Skill>({
     default: false,
     effects: (parameter) => [handleLocalStorage<boolean>({ key, parameter })],
     key,

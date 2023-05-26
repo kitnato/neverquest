@@ -5,10 +5,10 @@ import { MonsterStaggeredMeter } from "@neverquest/components/Monster/MonsterSta
 import { ReactComponent as IconStaggered } from "@neverquest/icons/monster-staggered.svg";
 import { skills } from "@neverquest/state/skills";
 import { staggerDuration } from "@neverquest/state/statistics";
-import { SkillType } from "@neverquest/types/enums";
+import { Skill } from "@neverquest/types/enums";
 
 export function MonsterStaggered() {
-  const staggerSkill = useRecoilValue(skills(SkillType.Stagger));
+  const staggerSkill = useRecoilValue(skills(Skill.Traumatology));
   const staggerDurationValue = useRecoilValue(staggerDuration);
 
   if (!staggerSkill || staggerDurationValue === 0) {

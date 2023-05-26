@@ -11,12 +11,12 @@ import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { crew } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import { coins } from "@neverquest/state/resources";
-import { CrewMember, CrewStatus, ShowingType } from "@neverquest/types/enums";
+import { CrewMember, CrewStatus, Showing } from "@neverquest/types/enums";
 
 export function CrewHirable({ type }: { type: CrewMember }) {
   const coinsValue = useRecoilValue(coins);
   const [{ hireStatus }, setCrewMember] = useRecoilState(crew(type));
-  const setIsShowingGearClass = useSetRecoilState(isShowing(ShowingType.GearClass));
+  const setIsShowingGearClass = useSetRecoilState(isShowing(Showing.GearClass));
 
   const transactResources = useTransactResources();
 

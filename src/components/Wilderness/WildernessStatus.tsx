@@ -4,12 +4,12 @@ import { useRecoilValue } from "recoil";
 import { WildernessLevel } from "@neverquest/components/Wilderness/WildernessLevel";
 import { WildernessProgress } from "@neverquest/components/Wilderness/WildernessProgress";
 import { isShowing } from "@neverquest/state/isShowing";
-import { ShowingType } from "@neverquest/types/enums";
+import { Showing } from "@neverquest/types/enums";
 
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function WildernessStatus() {
-  const isShowingWildernessStatus = useRecoilValue(isShowing(ShowingType.WildernessStatus));
+  const isShowingWildernessStatus = useRecoilValue(isShowing(Showing.WildernessStatus));
 
   return (
     <Stack

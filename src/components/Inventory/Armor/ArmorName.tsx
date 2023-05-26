@@ -17,7 +17,7 @@ import { armor as armorEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import type { Armor } from "@neverquest/types";
-import { ShowingType, SkillType } from "@neverquest/types/enums";
+import { Showing, Skill } from "@neverquest/types/enums";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function ArmorName({
@@ -28,9 +28,9 @@ export function ArmorName({
   placement?: Placement;
 }) {
   const armorEquippedValue = useRecoilValue(armorEquipped);
-  const isShowingGearClass = useRecoilValue(isShowing(ShowingType.GearClass));
-  const skillArmors = useRecoilValue(skills(SkillType.Armors));
-  const skillDodge = useRecoilValue(skills(SkillType.Dodge));
+  const isShowingGearClass = useRecoilValue(isShowing(Showing.GearClass));
+  const skillArmors = useRecoilValue(skills(Skill.Armorcraft));
+  const skillDodge = useRecoilValue(skills(Skill.Evasion));
 
   const { deflection, level, name, protection, staminaCost, weight } = armor;
   const isEquipped = JSON.stringify(armorEquippedValue) === JSON.stringify(armor);
@@ -47,7 +47,7 @@ export function ArmorName({
                 comparison={
                   isEquipped
                     ? null
-                    : { showingType: ShowingType.Armor, subtrahend: armorEquippedValue.level }
+                    : { showingType: Showing.Armor, subtrahend: armorEquippedValue.level }
                 }
                 level={level}
               />
@@ -61,7 +61,7 @@ export function ArmorName({
                   {!isEquipped && (
                     <GearComparison
                       difference={protection - armorEquippedValue.protection}
-                      showingType={ShowingType.Armor}
+                      showingType={Showing.Armor}
                     />
                   )}
                 </td>
@@ -115,7 +115,7 @@ export function ArmorName({
                         {!isEquipped && (
                           <GearComparison
                             difference={deflection - armorEquippedValue.deflection}
-                            showingType={ShowingType.Armor}
+                            showingType={Showing.Armor}
                           />
                         )}
                       </td>
@@ -139,7 +139,7 @@ export function ArmorName({
                           <GearComparison
                             difference={staminaCost - armorEquippedValue.staminaCost}
                             isDownPositive
-                            showingType={ShowingType.Armor}
+                            showingType={Showing.Armor}
                           />
                         )}
                       </td>
@@ -154,7 +154,7 @@ export function ArmorName({
                 comparison={
                   isEquipped
                     ? null
-                    : { showingType: ShowingType.Armor, subtrahend: armorEquippedValue.weight }
+                    : { showingType: Showing.Armor, subtrahend: armorEquippedValue.weight }
                 }
                 weight={weight}
               />

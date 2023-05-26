@@ -7,13 +7,13 @@ import { ReactComponent as IconProtection } from "@neverquest/icons/protection.s
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { protection } from "@neverquest/state/statistics";
-import { DeltaType, ShowingType } from "@neverquest/types/enums";
+import { Delta, Showing } from "@neverquest/types/enums";
 
 export function Protection() {
-  const isShowingProtection = useRecoilValue(isShowing(ShowingType.Protection));
+  const isShowingProtection = useRecoilValue(isShowing(Showing.Protection));
   const protectionValue = useRecoilValue(protection);
 
-  const deltaProtection = deltas(DeltaType.Protection);
+  const deltaProtection = deltas(Delta.Protection);
 
   useDeltaText({
     atomDelta: deltaProtection,
@@ -30,7 +30,7 @@ export function Protection() {
         <>
           <span>{protectionValue}</span>
 
-          <FloatingText type={DeltaType.Protection} />
+          <FloatingText type={Delta.Protection} />
         </>
       }
       Icon={IconProtection}

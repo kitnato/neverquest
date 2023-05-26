@@ -5,7 +5,7 @@ import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { currentHealth, maximumHealth } from "@neverquest/state/reserves";
 import { healthRegenerationRate } from "@neverquest/state/statistics";
-import { DeltaType, ShowingType } from "@neverquest/types/enums";
+import { Delta, Showing } from "@neverquest/types/enums";
 import type { DeltaReserve } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -22,7 +22,7 @@ export function useChangeHealth() {
         let newHealth = get(currentHealth) + value;
 
         set(
-          deltas(DeltaType.Health),
+          deltas(Delta.Health),
           delta !== undefined && Array.isArray(delta) && delta.length
             ? delta
             : {
@@ -35,7 +35,7 @@ export function useChangeHealth() {
           newHealth = 0;
 
           set(isGameOver, true);
-          set(isShowing(ShowingType.GameOver), true);
+          set(isShowing(Showing.GameOver), true);
         }
 
         if (newHealth > maximumHealthValue) {

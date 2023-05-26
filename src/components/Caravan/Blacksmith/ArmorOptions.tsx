@@ -20,7 +20,7 @@ import { blacksmithInventory } from "@neverquest/state/caravan";
 import { level } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
-import { SkillType } from "@neverquest/types/enums";
+import { Skill } from "@neverquest/types/enums";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 import { generateArmor } from "@neverquest/utilities/generators";
 
@@ -32,8 +32,8 @@ export function ArmorOptions() {
   const [armorClass, setArmorClass] = useState<ArmorClass>("hide");
   const [armorLevel, setArmorLevel] = useState(levelValue);
 
-  const skillArmors = useRecoilValue(skills(SkillType.Armors));
-  const skillDodge = useRecoilValue(skills(SkillType.Dodge));
+  const skillArmors = useRecoilValue(skills(Skill.Armorcraft));
+  const skillDodge = useRecoilValue(skills(Skill.Evasion));
 
   const armor = generateArmor({
     allowNSFW: allowNSFWValue,

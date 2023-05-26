@@ -6,12 +6,12 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconWildernessLevel } from "@neverquest/icons/wilderness-level.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { level } from "@neverquest/state/encounter";
-import { DeltaType } from "@neverquest/types/enums";
+import { Delta } from "@neverquest/types/enums";
 
 export function WildernessLevel() {
   const levelValue = useRecoilValue(level);
 
-  const deltaWildernessLevel = deltas(DeltaType.WildernessLevel);
+  const deltaWildernessLevel = deltas(Delta.WildernessLevel);
 
   useDeltaText({
     atomDelta: deltaWildernessLevel,
@@ -24,7 +24,7 @@ export function WildernessLevel() {
         <>
           <span>{levelValue}</span>
 
-          <FloatingText type={DeltaType.WildernessLevel} />
+          <FloatingText type={Delta.WildernessLevel} />
         </>
       }
       Icon={IconWildernessLevel}

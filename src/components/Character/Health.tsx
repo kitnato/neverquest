@@ -5,7 +5,7 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ReserveMeter } from "@neverquest/components/ReserveMeter";
 import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
-import { DeltaType, ReserveType } from "@neverquest/types/enums";
+import { Delta, Reserve } from "@neverquest/types/enums";
 import { UIAttachment } from "@neverquest/types/ui";
 
 export function Health() {
@@ -14,12 +14,12 @@ export function Health() {
       contents={
         <Stack>
           <Stack className="w-100" direction="horizontal">
-            <ReserveMeter attached={UIAttachment.Below} type={ReserveType.Health} />
+            <ReserveMeter attached={UIAttachment.Below} type={Reserve.Health} />
 
-            <FloatingText type={DeltaType.Health} />
+            <FloatingText type={Delta.Health} />
           </Stack>
 
-          <Regeneration type={ReserveType.Health} />
+          <Regeneration type={Reserve.Health} />
         </Stack>
       }
       Icon={IconHealth}

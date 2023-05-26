@@ -4,11 +4,11 @@ import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { RESERVES } from "@neverquest/data/reserves";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { isRecovering } from "@neverquest/state/character";
-import { ReserveType } from "@neverquest/types/enums";
+import { Reserve } from "@neverquest/types/enums";
 import { UIAttachment, UISize } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
-export function RegenerationMeter({ type }: { type: ReserveType.Health | ReserveType.Stamina }) {
+export function RegenerationMeter({ type }: { type: Reserve.Health | Reserve.Stamina }) {
   const {
     atomIsAtMaximum,
     atomRegenerationAmount,
@@ -25,7 +25,7 @@ export function RegenerationMeter({ type }: { type: ReserveType.Health | Reserve
 
   const changeReserve = useActionChange();
 
-  const isHealth = type === ReserveType.Health;
+  const isHealth = type === Reserve.Health;
   const regenerationProgress =
     regenerationDuration === 0 ? 0 : regenerationRateValue - regenerationDuration;
 

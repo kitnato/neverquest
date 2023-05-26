@@ -21,16 +21,16 @@ import {
   staminaRegenerationAmount,
   staminaRegenerationRate,
 } from "@neverquest/state/statistics";
-import { DeltaType, ReserveType } from "@neverquest/types/enums";
+import { Delta, Reserve } from "@neverquest/types/enums";
 
 export const RESERVES = {
-  [ReserveType.Encumbrance]: {
+  [Reserve.Encumbrance]: {
     atom: encumbrance,
     atomMaximum: encumbranceMaximum,
   },
-  [ReserveType.Health]: {
+  [Reserve.Health]: {
     atom: currentHealth,
-    atomDeltaRegenerationRate: deltas(DeltaType.HealthRegenerationRate),
+    atomDeltaRegenerationRate: deltas(Delta.HealthRegenerationRate),
     atomIsAtMaximum: isHealthAtMaximum,
     atomMaximum: maximumHealth,
     atomRegenerationAmount: healthRegenerationAmount,
@@ -38,13 +38,13 @@ export const RESERVES = {
     atomRegenerationRate: healthRegenerationRate,
     useActionChange: useChangeHealth,
   },
-  [ReserveType.MonsterHealth]: {
+  [Reserve.MonsterHealth]: {
     atom: monsterCurrentHealth,
     atomMaximum: monsterMaximumHealth,
   },
-  [ReserveType.Stamina]: {
+  [Reserve.Stamina]: {
     atom: currentStamina,
-    atomDeltaRegenerationRate: deltas(DeltaType.StaminaRegenerationRate),
+    atomDeltaRegenerationRate: deltas(Delta.StaminaRegenerationRate),
     atomIsAtMaximum: isStaminaAtMaximum,
     atomMaximum: maximumStaminaTotal,
     atomRegenerationAmount: staminaRegenerationAmount,

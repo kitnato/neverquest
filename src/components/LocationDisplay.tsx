@@ -4,7 +4,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ReactComponent as IconLocation } from "@neverquest/icons/location.svg";
 import { locationName } from "@neverquest/state/encounter";
 
-export function Location() {
+export function LocationDisplay() {
   const locationNameValue = useRecoilValue(locationName);
 
   return (

@@ -10,10 +10,10 @@ import { Showing, Skill } from "@neverquest/types/enums";
 
 export function Support() {
   const isShowingDeflection = useRecoilValue(isShowing(Showing.Deflection));
-  const armorsSkill = useRecoilValue(skills(Skill.Armorcraft));
-  const shieldsSkill = useRecoilValue(skills(Skill.Shieldcraft));
+  const skillArmorcraft = useRecoilValue(skills(Skill.Armorcraft));
+  const skillShieldcraft = useRecoilValue(skills(Skill.Shieldcraft));
 
-  if (!armorsSkill && !shieldsSkill && !isShowingDeflection) {
+  if (!skillArmorcraft && !skillShieldcraft && !isShowingDeflection) {
     return null;
   }
 

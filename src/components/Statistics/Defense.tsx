@@ -12,9 +12,9 @@ import { Showing, Skill } from "@neverquest/types/enums";
 export function Defense() {
   const isShowingBlock = useRecoilValue(isShowing(Showing.Block));
   const isShowingProtection = useRecoilValue(isShowing(Showing.Protection));
-  const dodgeSkill = useRecoilValue(skills(Skill.Evasion));
+  const skillEvasion = useRecoilValue(skills(Skill.Evasion));
 
-  if (!dodgeSkill && !isShowingBlock && !isShowingProtection) {
+  if (!isShowingBlock && !isShowingProtection && !skillEvasion) {
     return null;
   }
 

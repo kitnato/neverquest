@@ -17,7 +17,7 @@ import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/form
 
 export function StaggerRating() {
   const { stagger } = useRecoilValue(shield);
-  const staggerSkill = useRecoilValue(skills(Skill.Traumatology));
+  const skillTraumatology = useRecoilValue(skills(Skill.Traumatology));
   const staggerDurationValue = useRecoilValue(staggerDuration);
   const staggerRatingValue = useRecoilValue(staggerRating);
   const staggerWeaponValue = useRecoilValue(staggerWeapon);
@@ -31,7 +31,7 @@ export function StaggerRating() {
     atomValue: staggerRating,
   });
 
-  if (!staggerSkill) {
+  if (!skillTraumatology) {
     return null;
   }
 

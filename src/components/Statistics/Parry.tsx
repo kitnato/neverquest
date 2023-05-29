@@ -12,7 +12,7 @@ import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Parry() {
   const parryValue = useRecoilValue(parry);
-  const parrySkill = useRecoilValue(skills(Skill.Escrime));
+  const skillEscrime = useRecoilValue(skills(Skill.Escrime));
 
   const deltaParry = deltas(Delta.Parry);
 
@@ -21,7 +21,7 @@ export function Parry() {
     atomValue: parry,
   });
 
-  if (!parrySkill) {
+  if (!skillEscrime) {
     return null;
   }
 

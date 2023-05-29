@@ -9,9 +9,9 @@ import { Skill } from "@neverquest/types/enums";
 
 export function MonsterBleeding() {
   const bleedValue = useRecoilValue(bleed);
-  const bleedSkill = useRecoilValue(skills(Skill.Anatomy));
+  const skillAnatomy = useRecoilValue(skills(Skill.Anatomy));
 
-  if (!bleedSkill || bleedValue === 0) {
+  if (bleedValue === 0 || !skillAnatomy) {
     return null;
   }
 

@@ -164,7 +164,7 @@ export function useDefend() {
 
             const hasStaggered =
               get(skills(Skill.Traumatology)) && Math.random() <= get(shield).stagger;
-            const shieldsSkill = get(skills(Skill.Shieldcraft));
+            const skillShieldcraft = get(skills(Skill.Shieldcraft));
 
             deltaHealth = [
               {
@@ -173,7 +173,7 @@ export function useDefend() {
               },
             ];
 
-            if (shieldsSkill) {
+            if (skillShieldcraft) {
               const isFreeBlock = Math.random() <= get(stability);
 
               increaseMastery(Mastery.Stability);
@@ -222,8 +222,8 @@ export function useDefend() {
           }
         }
 
-        const armorsSkill = get(skills(Skill.Armorcraft));
-        const hasSkippedRecovery = armorsSkill && Math.random() <= get(tenacity);
+        const skillArmorcraft = get(skills(Skill.Armorcraft));
+        const hasSkippedRecovery = skillArmorcraft && Math.random() <= get(tenacity);
 
         // If Tenacity isn't available or hasn't been triggered, activate recovery.
         if (!hasSkippedRecovery) {
@@ -235,7 +235,7 @@ export function useDefend() {
         }
 
         // Increment Armorcraft mastery (if applicable).
-        if (armorsSkill) {
+        if (skillArmorcraft) {
           increaseMastery(Mastery.Tenacity);
         }
 

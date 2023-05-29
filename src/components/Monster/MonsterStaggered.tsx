@@ -8,10 +8,10 @@ import { staggerDuration } from "@neverquest/state/statistics";
 import { Skill } from "@neverquest/types/enums";
 
 export function MonsterStaggered() {
-  const staggerSkill = useRecoilValue(skills(Skill.Traumatology));
+  const skillTraumatology = useRecoilValue(skills(Skill.Traumatology));
   const staggerDurationValue = useRecoilValue(staggerDuration);
 
-  if (!staggerSkill || staggerDurationValue === 0) {
+  if (!skillTraumatology || staggerDurationValue === 0) {
     return null;
   }
 

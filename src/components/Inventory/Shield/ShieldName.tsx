@@ -29,7 +29,7 @@ export function ShieldName({
 }) {
   const isShowingGearClass = useRecoilValue(isShowing(Showing.GearClass));
   const shieldEquippedValue = useRecoilValue(shieldEquipped);
-  const staggerSkillValue = useRecoilValue(skills(Skill.Traumatology));
+  const skillTraumatology = useRecoilValue(skills(Skill.Traumatology));
 
   const { block, level, name, stagger, staminaCost, weight } = shield;
   const isEquipped = JSON.stringify(shieldEquippedValue) === JSON.stringify(shield);
@@ -115,7 +115,7 @@ export function ShieldName({
               </tr>
 
               <tr>
-                {staggerSkillValue ? (
+                {skillTraumatology ? (
                   <>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance:</td>
 

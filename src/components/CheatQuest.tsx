@@ -24,14 +24,14 @@ export function CheatQuest() {
   const resetEssenceLoot = useResetRecoilState(essenceLoot);
   const resetScrapLoot = useResetRecoilState(scrapLoot);
   const setProgress = useSetRecoilState(progress);
-  const setSkillArmor = useSetRecoilState(skills(Skill.Armorcraft));
-  const setSkillBleed = useSetRecoilState(skills(Skill.Anatomy));
-  const setSkillCriticals = useSetRecoilState(skills(Skill.Assassination));
-  const setSkillDodge = useSetRecoilState(skills(Skill.Evasion));
-  const setSkillParry = useSetRecoilState(skills(Skill.Escrime));
-  const setSkillRegeneration = useSetRecoilState(skills(Skill.Calisthenics));
-  const setSkillShields = useSetRecoilState(skills(Skill.Shieldcraft));
-  const setSkillStagger = useSetRecoilState(skills(Skill.Traumatology));
+  const setSkillArmorcraft = useSetRecoilState(skills(Skill.Armorcraft));
+  const setSkillAnatomy = useSetRecoilState(skills(Skill.Anatomy));
+  const setSkillAssassination = useSetRecoilState(skills(Skill.Assassination));
+  const setSkillEvasion = useSetRecoilState(skills(Skill.Evasion));
+  const setSkillEscrime = useSetRecoilState(skills(Skill.Escrime));
+  const setSkillCalisthenics = useSetRecoilState(skills(Skill.Calisthenics));
+  const setSkillShieldcraft = useSetRecoilState(skills(Skill.Shieldcraft));
+  const setSkillTraumatology = useSetRecoilState(skills(Skill.Traumatology));
 
   const generateMerchantInventory = useGenerateMerchantInventory();
   const increaseLevel = useIncreaseLevel();
@@ -41,24 +41,24 @@ export function CheatQuest() {
 
   const setSkill = useMemo(
     () => [
-      setSkillArmor,
-      setSkillBleed,
-      setSkillCriticals,
-      setSkillDodge,
-      setSkillParry,
-      setSkillRegeneration,
-      setSkillShields,
-      setSkillStagger,
+      setSkillArmorcraft,
+      setSkillAnatomy,
+      setSkillAssassination,
+      setSkillEvasion,
+      setSkillEscrime,
+      setSkillCalisthenics,
+      setSkillShieldcraft,
+      setSkillTraumatology,
     ],
     [
-      setSkillArmor,
-      setSkillBleed,
-      setSkillCriticals,
-      setSkillDodge,
-      setSkillParry,
-      setSkillRegeneration,
-      setSkillShields,
-      setSkillStagger,
+      setSkillArmorcraft,
+      setSkillAnatomy,
+      setSkillAssassination,
+      setSkillEvasion,
+      setSkillEscrime,
+      setSkillCalisthenics,
+      setSkillShieldcraft,
+      setSkillTraumatology,
     ]
   );
 
@@ -125,6 +125,8 @@ export function CheatQuest() {
           break;
         }
         default: {
+          console.warn("Some doors are better left unopened ...");
+
           return;
         }
       }

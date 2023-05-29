@@ -21,7 +21,7 @@ export function BleedRating() {
   const bleedRatingValue = useRecoilValue(bleedRating);
   const bleedTickValue = useRecoilValue(bleedTick);
   const damageValue = useRecoilValue(damage);
-  const bleedSkill = useRecoilValue(skills(Skill.Anatomy));
+  const skillAnatomy = useRecoilValue(skills(Skill.Anatomy));
 
   const deltaBleed = deltas(Delta.BleedRating);
 
@@ -33,7 +33,7 @@ export function BleedRating() {
     atomValue: bleedRating,
   });
 
-  if (!bleedSkill) {
+  if (!skillAnatomy) {
     return null;
   }
 

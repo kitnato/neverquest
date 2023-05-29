@@ -30,8 +30,8 @@ export function ShieldOptions() {
   const [shieldClass, setShieldClass] = useState<ShieldClass>("small");
   const [shieldLevel, setShieldLevel] = useState(levelValue);
 
-  const staggerSkillValue = useRecoilValue(skills(Skill.Traumatology));
-  const skillShieldsValue = useRecoilValue(skills(Skill.Shieldcraft));
+  const skillShieldcraft = useRecoilValue(skills(Skill.Shieldcraft));
+  const skillTraumatology = useRecoilValue(skills(Skill.Traumatology));
 
   const shield = generateShield({
     allowNSFW: allowNSFWValue,
@@ -101,10 +101,10 @@ export function ShieldOptions() {
         />
 
         <IconDisplay
-          contents={staggerSkillValue ? formatPercentage(stagger) : LABEL_UNKNOWN}
-          Icon={staggerSkillValue ? IconStamina : IconUnknown}
+          contents={skillTraumatology ? formatPercentage(stagger) : LABEL_UNKNOWN}
+          Icon={skillTraumatology ? IconStamina : IconUnknown}
           iconProps={{ overlayPlacement: "left" }}
-          tooltip={staggerSkillValue ? "Stagger chance" : LABEL_UNKNOWN}
+          tooltip={skillTraumatology ? "Stagger chance" : LABEL_UNKNOWN}
         />
 
         <IconDisplay
@@ -124,7 +124,7 @@ export function ShieldOptions() {
 
       <hr />
 
-      {!skillShieldsValue && shieldClass === "tower" ? (
+      {!skillShieldcraft && shieldClass === "tower" ? (
         <span className="text-center">Cannot use without training.</span>
       ) : craftedShield === null ? (
         <CraftGear gear={shield} />

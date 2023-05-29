@@ -12,7 +12,7 @@ import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Stability() {
   const stabilityValue = useRecoilValue(stability);
-  const shieldsSkill = useRecoilValue(skills(Skill.Shieldcraft));
+  const skillShieldcraft = useRecoilValue(skills(Skill.Shieldcraft));
 
   const deltaStability = deltas(Delta.Stability);
 
@@ -21,7 +21,7 @@ export function Stability() {
     atomValue: stability,
   });
 
-  if (!shieldsSkill) {
+  if (!skillShieldcraft) {
     return null;
   }
 

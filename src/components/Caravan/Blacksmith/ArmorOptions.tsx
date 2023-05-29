@@ -32,8 +32,8 @@ export function ArmorOptions() {
   const [armorClass, setArmorClass] = useState<ArmorClass>("hide");
   const [armorLevel, setArmorLevel] = useState(levelValue);
 
-  const skillArmors = useRecoilValue(skills(Skill.Armorcraft));
-  const skillDodge = useRecoilValue(skills(Skill.Evasion));
+  const skillArmorcraft = useRecoilValue(skills(Skill.Armorcraft));
+  const skillEvasion = useRecoilValue(skills(Skill.Evasion));
 
   const armor = generateArmor({
     allowNSFW: allowNSFWValue,
@@ -103,26 +103,26 @@ export function ArmorOptions() {
         {deflection > 0 && (
           <IconDisplay
             contents={
-              skillArmors
+              skillArmorcraft
                 ? `${formatPercentage(ranges.deflection.minimum)}-${formatPercentage(
                     ranges.deflection.maximum
                   )}`
                 : LABEL_UNKNOWN
             }
-            Icon={skillArmors ? IconDeflection : IconUnknown}
+            Icon={skillArmorcraft ? IconDeflection : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
-            tooltip={skillArmors ? "Deflection chance" : LABEL_UNKNOWN}
+            tooltip={skillArmorcraft ? "Deflection chance" : LABEL_UNKNOWN}
           />
         )}
 
         {staminaCost > 0 && (
           <IconDisplay
             contents={
-              skillDodge ? <DodgePenaltyContents staminaCost={staminaCost} /> : LABEL_UNKNOWN
+              skillEvasion ? <DodgePenaltyContents staminaCost={staminaCost} /> : LABEL_UNKNOWN
             }
-            Icon={skillDodge ? IconDodgePenalty : IconUnknown}
+            Icon={skillEvasion ? IconDodgePenalty : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
-            tooltip={skillDodge ? "Dodge penalty" : LABEL_UNKNOWN}
+            tooltip={skillEvasion ? "Dodge penalty" : LABEL_UNKNOWN}
           />
         )}
 
@@ -136,7 +136,7 @@ export function ArmorOptions() {
 
       <hr />
 
-      {!skillArmors && armorClass === "plate" ? (
+      {!skillArmorcraft && armorClass === "plate" ? (
         <span className="text-center">Cannot use without training.</span>
       ) : craftedArmor === null ? (
         <CraftGear gear={armor} />

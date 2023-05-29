@@ -22,7 +22,7 @@ export function Dodge() {
   const dodgeValue = useRecoilValue(dodge);
   const dodgeTotalValue = useRecoilValue(dodgeTotal);
   const isShowingDodgeDetails = useRecoilValue(isShowing(Showing.DodgeDetails));
-  const dodgeSkill = useRecoilValue(skills(Skill.Evasion));
+  const skillEvasion = useRecoilValue(skills(Skill.Evasion));
 
   const { name } = ATTRIBUTES[Attribute.Agility];
   const deltaDodge = deltas(Delta.Dodge);
@@ -32,7 +32,7 @@ export function Dodge() {
     atomValue: dodgeTotal,
   });
 
-  if (!dodgeSkill) {
+  if (!skillEvasion) {
     return null;
   }
 

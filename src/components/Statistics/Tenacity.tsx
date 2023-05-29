@@ -12,7 +12,7 @@ import { Delta, Mastery, Skill } from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Tenacity() {
-  const armorsSkill = useRecoilValue(skills(Skill.Armorcraft));
+  const skillArmorcraft = useRecoilValue(skills(Skill.Armorcraft));
   const tenacityValue = useRecoilValue(tenacity);
 
   const deltaTenacity = deltas(Delta.Tenacity);
@@ -22,7 +22,7 @@ export function Tenacity() {
     atomValue: tenacity,
   });
 
-  if (!armorsSkill) {
+  if (!skillArmorcraft) {
     return null;
   }
 

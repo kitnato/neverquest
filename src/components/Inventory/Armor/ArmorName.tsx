@@ -29,8 +29,8 @@ export function ArmorName({
 }) {
   const armorEquippedValue = useRecoilValue(armorEquipped);
   const isShowingGearClass = useRecoilValue(isShowing(Showing.GearClass));
-  const skillArmors = useRecoilValue(skills(Skill.Armorcraft));
-  const skillDodge = useRecoilValue(skills(Skill.Evasion));
+  const skillArmorcraft = useRecoilValue(skills(Skill.Armorcraft));
+  const skillEvasion = useRecoilValue(skills(Skill.Evasion));
 
   const { deflection, level, name, protection, staminaCost, weight } = armor;
   const isEquipped = JSON.stringify(armorEquippedValue) === JSON.stringify(armor);
@@ -105,7 +105,7 @@ export function ArmorName({
 
               {deflection > 0 && (
                 <tr>
-                  {skillArmors ? (
+                  {skillArmorcraft ? (
                     <>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Deflection chance:</td>
 
@@ -128,7 +128,7 @@ export function ArmorName({
 
               {staminaCost > 0 && (
                 <tr>
-                  {skillDodge ? (
+                  {skillEvasion ? (
                     <>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Dodge penalty:</td>
 

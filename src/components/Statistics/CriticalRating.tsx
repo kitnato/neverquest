@@ -17,7 +17,7 @@ export function CriticalRating() {
   const criticalChanceValue = useRecoilValue(criticalChance);
   const criticalDamageValue = useRecoilValue(criticalDamage);
   const criticalRatingValue = useRecoilValue(criticalRating);
-  const criticalsSkill = useRecoilValue(skills(Skill.Assassination));
+  const skillAssassination = useRecoilValue(skills(Skill.Assassination));
 
   const deltaCriticalRating = deltas(Delta.CriticalRating);
 
@@ -26,7 +26,7 @@ export function CriticalRating() {
     atomValue: criticalRating,
   });
 
-  if (!criticalsSkill) {
+  if (!skillAssassination) {
     return null;
   }
 

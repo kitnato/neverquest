@@ -3,7 +3,9 @@ import { useRecoilCallback } from "recoil";
 
 import { KNAPSACK_SIZE } from "@neverquest/data/inventory";
 import { canFit, encumbranceMaximum, hasKnapsack, inventory } from "@neverquest/state/inventory";
+import { isShowing } from "@neverquest/state/isShowing";
 import type { Consumable, Trinket } from "@neverquest/types";
+import { Showing } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useAcquireItem() {
@@ -22,6 +24,8 @@ export function useAcquireItem() {
         if (name === "Knapsack") {
           set(encumbranceMaximum, (current) => current + KNAPSACK_SIZE);
           set(hasKnapsack, true);
+
+          set(isShowing(Showing.Weight), true);
         } else {
           set(inventory, (current) => ({
             ...current,

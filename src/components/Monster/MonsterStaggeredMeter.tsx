@@ -2,21 +2,21 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
-import { isMonsterStaggered, monsterStaggeredDuration } from "@neverquest/state/monster";
+import { isMonsterStaggered, monsterStaggerDuration } from "@neverquest/state/monster";
 import { staggerDuration } from "@neverquest/state/statistics";
 
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export function MonsterStaggeredMeter() {
-  const [monsterStaggeredDurationValue, setMonsterStaggeredDuration] =
-    useRecoilState(monsterStaggeredDuration);
+  const [monsterStaggerDurationValue, setMonsterStaggerDuration] =
+    useRecoilState(monsterStaggerDuration);
   const isMonsterStaggeredValue = useRecoilValue(isMonsterStaggered);
   const staggerDurationValue = useRecoilValue(staggerDuration);
 
-  const staggeringProgress = staggerDurationValue - monsterStaggeredDurationValue;
+  const staggeringProgress = staggerDurationValue - monsterStaggerDurationValue;
 
   useAnimation((delta) => {
-    setMonsterStaggeredDuration((current) => {
+    setMonsterStaggerDuration((current) => {
       const value = current - delta;
 
       if (value < 0) {

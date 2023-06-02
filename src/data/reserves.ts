@@ -6,14 +6,14 @@ import {
 } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { encumbrance, encumbranceMaximum } from "@neverquest/state/inventory";
-import { monsterCurrentHealth, monsterMaximumHealth } from "@neverquest/state/monster";
+import { monsterHealthCurrent, monsterHealthMaximum } from "@neverquest/state/monster";
 import {
-  currentHealth,
-  currentStamina,
+  healthCurrent,
+  healthMaximum,
   isHealthAtMaximum,
   isStaminaAtMaximum,
-  maximumHealth,
-  maximumStaminaTotal,
+  staminaCurrent,
+  staminaMaximumTotal,
 } from "@neverquest/state/reserves";
 import {
   healthRegenerationAmount,
@@ -29,24 +29,24 @@ export const RESERVES = {
     atomMaximum: encumbranceMaximum,
   },
   [Reserve.Health]: {
-    atom: currentHealth,
+    atom: healthCurrent,
     atomDeltaRegenerationRate: deltas(Delta.HealthRegenerationRate),
     atomIsAtMaximum: isHealthAtMaximum,
-    atomMaximum: maximumHealth,
+    atomMaximum: healthMaximum,
     atomRegenerationAmount: healthRegenerationAmount,
     atomRegenerationDuration: healthRegenerationDuration,
     atomRegenerationRate: healthRegenerationRate,
     useActionChange: useChangeHealth,
   },
   [Reserve.MonsterHealth]: {
-    atom: monsterCurrentHealth,
-    atomMaximum: monsterMaximumHealth,
+    atom: monsterHealthCurrent,
+    atomMaximum: monsterHealthMaximum,
   },
   [Reserve.Stamina]: {
-    atom: currentStamina,
+    atom: staminaCurrent,
     atomDeltaRegenerationRate: deltas(Delta.StaminaRegenerationRate),
     atomIsAtMaximum: isStaminaAtMaximum,
-    atomMaximum: maximumStaminaTotal,
+    atomMaximum: staminaMaximumTotal,
     atomRegenerationAmount: staminaRegenerationAmount,
     atomRegenerationDuration: staminaRegenerationDuration,
     atomRegenerationRate: staminaRegenerationRate,

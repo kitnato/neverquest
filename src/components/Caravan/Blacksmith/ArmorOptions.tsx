@@ -7,7 +7,6 @@ import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DodgePenaltyContents } from "@neverquest/components/Inventory/DodgePenaltyContents";
 import { BLACKSMITH_GEAR_LEVEL_MAXIMUM } from "@neverquest/data/caravan";
-import { LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
 import { ReactComponent as IconDodgePenalty } from "@neverquest/icons/dodge-penalty.svg";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
@@ -17,23 +16,25 @@ import { ReactComponent as IconArmorProtection } from "@neverquest/icons/protect
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { type ArmorClass, ArmorClasses } from "@neverquest/LOCRA/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
-import { level } from "@neverquest/state/encounter";
+import { stage } from "@neverquest/state/encounter";
+import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
-import { Skill } from "@neverquest/types/enums";
+import { Showing, Skill } from "@neverquest/types/enums";
+import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 import { generateArmor } from "@neverquest/utilities/generators";
 
 export function ArmorOptions() {
   const allowNSFWValue = useRecoilValue(allowNSFW);
   const { armor: craftedArmor } = useRecoilValue(blacksmithInventory);
-  const levelValue = useRecoilValue(level);
+  const isShowingDeflection = useRecoilValue(isShowing(Showing.Deflection));
+  const isShowingDodge = useRecoilValue(isShowing(Showing.Dodge));
+  const skillArmorcraft = useRecoilValue(skills(Skill.Armorcraft));
+  const stageValue = useRecoilValue(stage);
 
   const [armorClass, setArmorClass] = useState<ArmorClass>("hide");
-  const [armorLevel, setArmorLevel] = useState(levelValue);
-
-  const skillArmorcraft = useRecoilValue(skills(Skill.Armorcraft));
-  const skillEvasion = useRecoilValue(skills(Skill.Evasion));
+  const [armorLevel, setArmorLevel] = useState(stageValue);
 
   const armor = generateArmor({
     allowNSFW: allowNSFWValue,
@@ -43,7 +44,7 @@ export function ArmorOptions() {
     level: armorLevel,
   });
   const { deflection, protection, ranges, staminaCost, weight } = armor;
-  const maximumArmorLevel = levelValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
+  const maximumArmorLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
 
   return (
     <>
@@ -103,26 +104,26 @@ export function ArmorOptions() {
         {deflection > 0 && (
           <IconDisplay
             contents={
-              skillArmorcraft
+              isShowingDeflection
                 ? `${formatPercentage(ranges.deflection.minimum)}-${formatPercentage(
                     ranges.deflection.maximum
                   )}`
                 : LABEL_UNKNOWN
             }
-            Icon={skillArmorcraft ? IconDeflection : IconUnknown}
+            Icon={isShowingDeflection ? IconDeflection : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
-            tooltip={skillArmorcraft ? "Deflection chance" : LABEL_UNKNOWN}
+            tooltip={isShowingDeflection ? "Deflection chance" : LABEL_UNKNOWN}
           />
         )}
 
         {staminaCost > 0 && (
           <IconDisplay
             contents={
-              skillEvasion ? <DodgePenaltyContents staminaCost={staminaCost} /> : LABEL_UNKNOWN
+              isShowingDodge ? <DodgePenaltyContents staminaCost={staminaCost} /> : LABEL_UNKNOWN
             }
-            Icon={skillEvasion ? IconDodgePenalty : IconUnknown}
+            Icon={isShowingDodge ? IconDodgePenalty : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
-            tooltip={skillEvasion ? "Dodge penalty" : LABEL_UNKNOWN}
+            tooltip={isShowingDodge ? "Dodge penalty" : LABEL_UNKNOWN}
           />
         )}
 

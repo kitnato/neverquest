@@ -4,23 +4,21 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { LABEL_AT_MAXIMUM } from "@neverquest/data/internal";
 import { MASTERIES, MASTERY_DELTA_TYPE } from "@neverquest/data/masteries";
-import { isShowingMastery } from "@neverquest/state/isShowing";
 import { isMasteryAtMaximum, masteries, masteryCost } from "@neverquest/state/masteries";
 import type { Mastery } from "@neverquest/types/enums";
+import { LABEL_AT_MAXIMUM } from "@neverquest/utilities/constants";
 
 export function MasteryDisplay({ type }: { type: Mastery }) {
   const isMasteryAtMaximumValue = useRecoilValue(isMasteryAtMaximum(type));
-  const isShowingMasteryValue = useRecoilValue(isShowingMastery(type));
-  const { progress, rank } = useRecoilValue(masteries(type));
+  const { isUnlocked, progress, rank } = useRecoilValue(masteries(type));
   const masteryCostValue = useRecoilValue(masteryCost(type));
 
   const { description, Icon, name } = MASTERIES[type];
   const label = isMasteryAtMaximumValue ? LABEL_AT_MAXIMUM : `${progress}/${masteryCostValue}`;
   const value = isMasteryAtMaximumValue ? 100 : (progress / masteryCostValue) * 100;
 
-  if (!isShowingMasteryValue) {
+  if (!isUnlocked) {
     return null;
   }
 

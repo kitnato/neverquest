@@ -6,11 +6,11 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { Coins } from "@neverquest/components/Resources/Coins";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/internal";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { equippedGearIDs, inventory } from "@neverquest/state/inventory";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { getSellPrice } from "@neverquest/utilities/getters";
 
 export function SellItems() {

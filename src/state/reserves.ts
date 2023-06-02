@@ -10,47 +10,26 @@ import { Attribute } from "@neverquest/types/enums";
 
 export const canAttackOrParry = withStateKey("canAttackOrParry", (key) =>
   selector({
-    get: ({ get }) => get(currentStamina) >= get(weapon).staminaCost,
+    get: ({ get }) => get(staminaCurrent) >= get(weapon).staminaCost,
     key,
   })
 );
 
 export const canBlock = withStateKey("canBlock", (key) =>
   selector({
-    get: ({ get }) => get(currentStamina) >= get(shield).staminaCost,
+    get: ({ get }) => get(staminaCurrent) >= get(shield).staminaCost,
     key,
   })
 );
 
 export const canDodge = withStateKey("canDodge", (key) =>
   selector({
-    get: ({ get }) => get(currentStamina) >= get(armor).staminaCost,
+    get: ({ get }) => get(staminaCurrent) >= get(armor).staminaCost,
     key,
   })
 );
 
-export const isHealthAtMaximum = withStateKey("isHealthAtMaximum", (key) =>
-  selector({
-    get: ({ get }) => get(currentHealth) >= get(maximumHealth),
-    key,
-  })
-);
-
-export const isHealthLow = withStateKey("isHealthLow", (key) =>
-  selector({
-    get: ({ get }) => get(currentHealth) <= Math.round(get(maximumHealth) * 0.33),
-    key,
-  })
-);
-
-export const isStaminaAtMaximum = withStateKey("isStaminaAtMaximum", (key) =>
-  selector({
-    get: ({ get }) => get(currentStamina) >= get(maximumStaminaTotal),
-    key,
-  })
-);
-
-export const maximumHealth = withStateKey("maximumHealth", (key) =>
+export const healthMaximum = withStateKey("healthMaximum", (key) =>
   selector({
     get: ({ get }) => {
       const { points } = get(attributes(Attribute.Vitality));
@@ -63,7 +42,28 @@ export const maximumHealth = withStateKey("maximumHealth", (key) =>
   })
 );
 
-export const maximumStamina = withStateKey("maximumStamina", (key) =>
+export const isHealthAtMaximum = withStateKey("isHealthAtMaximum", (key) =>
+  selector({
+    get: ({ get }) => get(healthCurrent) >= get(healthMaximum),
+    key,
+  })
+);
+
+export const isHealthLow = withStateKey("isHealthLow", (key) =>
+  selector({
+    get: ({ get }) => get(healthCurrent) <= Math.round(get(healthMaximum) * 0.33),
+    key,
+  })
+);
+
+export const isStaminaAtMaximum = withStateKey("isStaminaAtMaximum", (key) =>
+  selector({
+    get: ({ get }) => get(staminaCurrent) >= get(staminaMaximumTotal),
+    key,
+  })
+);
+
+export const staminaMaximum = withStateKey("staminaMaximum", (key) =>
   selector({
     get: ({ get }) => {
       const { points } = get(attributes(Attribute.Endurance));
@@ -76,10 +76,10 @@ export const maximumStamina = withStateKey("maximumStamina", (key) =>
   })
 );
 
-export const maximumStaminaTotal = withStateKey("maximumStaminaTotal", (key) =>
+export const staminaMaximumTotal = withStateKey("staminaMaximumTotal", (key) =>
   selector({
     get: ({ get }) => {
-      const newMaximum = get(maximumStamina) - get(staminaDebuff);
+      const newMaximum = get(staminaMaximum) - get(blight);
 
       if (newMaximum < 0) {
         return 0;
@@ -93,25 +93,25 @@ export const maximumStaminaTotal = withStateKey("maximumStaminaTotal", (key) =>
 
 // ATOMS
 
-export const currentHealth = withStateKey("currentHealth", (key) =>
-  atom({
-    default: maximumHealth,
-    effects: [handleLocalStorage<number>({ key })],
-    key,
-  })
-);
-
-export const currentStamina = withStateKey("currentStamina", (key) =>
-  atom({
-    default: maximumStamina,
-    effects: [handleLocalStorage<number>({ key })],
-    key,
-  })
-);
-
-export const staminaDebuff = withStateKey("staminaDebuff", (key) =>
+export const blight = withStateKey("blight", (key) =>
   atom({
     default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
+
+export const healthCurrent = withStateKey("healthCurrent", (key) =>
+  atom({
+    default: healthMaximum,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
+
+export const staminaCurrent = withStateKey("staminaCurrent", (key) =>
+  atom({
+    default: staminaMaximum,
     effects: [handleLocalStorage<number>({ key })],
     key,
   })

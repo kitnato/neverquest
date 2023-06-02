@@ -2,7 +2,7 @@ import ls from "localstorage-slim";
 import { nanoid } from "nanoid";
 
 import { createContext, useCallback, useContext, useState } from "react";
-import { KEY_SESSION } from "@neverquest/data/internal";
+import { KEY_SESSION } from "@neverquest/utilities/constants";
 
 export const SeedContext = createContext(() => console.error("SeedContext.Provider not found"));
 

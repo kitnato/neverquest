@@ -2,10 +2,11 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
-import { hasKnapsack } from "@neverquest/state/inventory";
+import { isShowing } from "@neverquest/state/isShowing";
+import { Showing } from "@neverquest/types/enums";
 import type { ComparisonProps } from "@neverquest/types/props";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 
 export function WeightDetail({
   comparison = null,
@@ -14,11 +15,11 @@ export function WeightDetail({
   comparison?: ComparisonProps;
   weight: number;
 }) {
-  const hasKnapsackValue = useRecoilValue(hasKnapsack);
+  const isShowingWeight = useRecoilValue(isShowing(Showing.Weight));
 
   return (
     <tr>
-      {hasKnapsackValue ? (
+      {isShowingWeight ? (
         <>
           <td className={CLASS_TABLE_CELL_ITALIC}>Weight:</td>
 

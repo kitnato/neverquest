@@ -10,7 +10,7 @@ import { ReactComponent as IconResting } from "@neverquest/icons/resting.svg";
 import { ReactComponent as IconRetreat } from "@neverquest/icons/retreat.svg";
 import { areAttributesIncreasable } from "@neverquest/state/attributes";
 import { isAttacking, isGameOver } from "@neverquest/state/character";
-import { isLevelCompleted, isLevelStarted, isWilderness } from "@neverquest/state/encounter";
+import { isStageCompleted, isStageStarted, isWilderness } from "@neverquest/state/encounter";
 import { isHealthLow } from "@neverquest/state/reserves";
 import { confirmControlWarnings, lowHealthWarning } from "@neverquest/state/settings";
 import type { SVGIcon } from "@neverquest/types/props";
@@ -22,8 +22,8 @@ export function AttackButton() {
   const isAttackingValue = useRecoilValue(isAttacking);
   const isHealthLowValue = useRecoilValue(isHealthLow);
   const isGameOverValue = useRecoilValue(isGameOver);
-  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
-  const isLevelStartedValue = useRecoilValue(isLevelStarted);
+  const isStageCompletedValue = useRecoilValue(isStageCompleted);
+  const isStageStartedValue = useRecoilValue(isStageStarted);
   const isWildernessValue = useRecoilValue(isWilderness);
   const showLowHealthWarningValue = useRecoilValue(lowHealthWarning);
 
@@ -35,7 +35,7 @@ export function AttackButton() {
     isInfinite: true,
     type: "pulse",
   });
-  const isDisabled = isGameOverValue || isLevelCompletedValue || !isWildernessValue;
+  const isDisabled = isGameOverValue || isStageCompletedValue || !isWildernessValue;
   const showWarning =
     isAttackingValue && !isDisabled && showLowHealthWarningValue && isHealthLowValue;
 
@@ -61,7 +61,7 @@ export function AttackButton() {
     })();
 
   const handleAttack = () => {
-    if (areAttributesIncreasableValue && confirmControlWarningsValue && !isLevelStartedValue) {
+    if (areAttributesIncreasableValue && confirmControlWarningsValue && !isStageStartedValue) {
       setShowAttackConfirmation(true);
     } else {
       toggleAttack();

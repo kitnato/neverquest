@@ -1,22 +1,22 @@
 import { useRecoilCallback } from "recoil";
 
 import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGenerateMerchantInventory";
-import { useIncreaseLevel } from "@neverquest/hooks/actions/useIncreaseLevel";
+import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import { hasBoughtFromMerchant } from "@neverquest/state/caravan";
 import {
-  isLevelCompleted,
+  isStageCompleted,
   isWilderness,
-  level,
-  maximumLevel,
   mode,
+  stage,
+  stageMaximum,
 } from "@neverquest/state/encounter";
 import { Location } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleLocation() {
   const generateMerchantInventory = useGenerateMerchantInventory();
-  const increaseLevel = useIncreaseLevel();
+  const increaseStage = useIncreaseStage();
   const resetWilderness = useResetWilderness();
 
   return useRecoilCallback(
@@ -31,8 +31,8 @@ export function useToggleLocation() {
 
           set(mode, Location.Caravan);
         } else {
-          if (get(isLevelCompleted) && get(level) === get(maximumLevel)) {
-            increaseLevel();
+          if (get(isStageCompleted) && get(stage) === get(stageMaximum)) {
+            increaseStage();
           }
 
           resetWilderness();
@@ -41,6 +41,6 @@ export function useToggleLocation() {
           set(hasBoughtFromMerchant, false);
         }
       },
-    [generateMerchantInventory, increaseLevel]
+    [generateMerchantInventory, increaseStage]
   );
 }

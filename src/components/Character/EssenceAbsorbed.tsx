@@ -11,10 +11,8 @@ import { Delta } from "@neverquest/types/enums";
 export function EssenceAbsorbed() {
   const essenceAbsorbedValue = useRecoilValue(essenceAbsorbed);
 
-  const deltaEssenceAbsorbed = deltas(Delta.EssenceAbsorbed);
-
   useDeltaText({
-    atomDelta: deltaEssenceAbsorbed,
+    atomDelta: deltas(Delta.EssenceAbsorbed),
     atomValue: essenceAbsorbed,
   });
 

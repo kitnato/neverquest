@@ -3,10 +3,10 @@ import { FormControl } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { ReactComponent as IconDead } from "@neverquest/icons/dead.svg";
 import { ReactComponent as IconAlive } from "@neverquest/icons/name.svg";
 import { isGameOver, name } from "@neverquest/state/character";
+import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 
 export function Name() {
   const isGameOverValue = useRecoilValue(isGameOver);

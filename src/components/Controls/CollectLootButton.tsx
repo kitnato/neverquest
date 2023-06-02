@@ -5,18 +5,18 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { ReactComponent as IconLoot } from "@neverquest/icons/loot.svg";
 import { isGameOver } from "@neverquest/state/character";
-import { isLevelCompleted } from "@neverquest/state/encounter";
+import { isStageCompleted } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function CollectLootButton() {
   const isGameOverValue = useRecoilValue(isGameOver);
   const hasLootedValue = useRecoilValue(hasLooted);
-  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
+  const isStageCompletedValue = useRecoilValue(isStageCompleted);
 
   const transactResources = useTransactResources();
 
-  if (hasLootedValue || !isLevelCompletedValue) {
+  if (hasLootedValue || !isStageCompletedValue) {
     return null;
   }
 

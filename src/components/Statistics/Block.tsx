@@ -14,10 +14,8 @@ export function Block() {
   const isShowingBlock = useRecoilValue(isShowing(Showing.Block));
   const blockValue = useRecoilValue(block);
 
-  const deltaBlock = deltas(Delta.Block);
-
   useDeltaText({
-    atomDelta: deltaBlock,
+    atomDelta: deltas(Delta.Block),
     atomValue: block,
     type: DeltaText.Percentage,
   });

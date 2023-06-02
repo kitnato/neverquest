@@ -6,7 +6,6 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { RECOVERY_RATE } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconRecovery } from "@neverquest/icons/recovery.svg";
@@ -14,6 +13,7 @@ import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { recoveryRate, tenacity } from "@neverquest/state/statistics";
 import { Attribute, Delta, DeltaText, Showing } from "@neverquest/types/enums";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Recovery() {
@@ -21,14 +21,12 @@ export function Recovery() {
   const tenacityValue = useRecoilValue(tenacity);
   const recoveryRateValue = useRecoilValue(recoveryRate);
 
-  const deltaRecoveryRate = deltas(Delta.RecoveryRate);
-
   const { name } = ATTRIBUTES[Attribute.Resilience];
   const showRecoveryRate = recoveryRateValue !== RECOVERY_RATE;
   const showTenacity = tenacityValue > 0;
 
   useDeltaText({
-    atomDelta: deltaRecoveryRate,
+    atomDelta: deltas(Delta.RecoveryRate),
     atomValue: recoveryRate,
     type: DeltaText.Time,
   });

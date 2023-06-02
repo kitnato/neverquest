@@ -2,10 +2,11 @@ import { atomFamily, selectorFamily } from "recoil";
 
 import { MASTERIES } from "@neverquest/data/masteries";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
+import type { UnlockedState } from "@neverquest/types";
 import type { Mastery } from "@neverquest/types/enums";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 
-type MasteryState = {
+type MasteryState = UnlockedState & {
   progress: number;
   rank: number;
 };
@@ -15,6 +16,7 @@ type MasteryState = {
 export const masteries = withStateKey("masteries", (key) =>
   atomFamily<MasteryState, Mastery>({
     default: {
+      isUnlocked: false,
       progress: 0,
       rank: 0,
     },

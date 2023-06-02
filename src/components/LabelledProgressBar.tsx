@@ -1,13 +1,13 @@
 import { OverlayTrigger, ProgressBar, Tooltip } from "react-bootstrap";
 
-import { type BootstrapColorVariant, UIAttachment, UISize } from "@neverquest/types/ui";
+import type { BootstrapColorVariant, UIAttachment, UISize } from "@neverquest/types/ui";
 
 export function LabelledProgressBar({
   attached,
   disableTransitions = false,
   label,
   sibling = <></>,
-  size = UISize.Normal,
+  size = "normal",
   value,
   variant,
 }: {
@@ -19,21 +19,22 @@ export function LabelledProgressBar({
   value: number;
   variant: BootstrapColorVariant;
 }) {
+  const isSizeNormal = size === "normal";
   const style: Partial<{
     borderBottomLeftRadius: number;
     borderBottomRightRadius: number;
     borderTopLeftRadius: number;
     borderTopRightRadius: number;
     height: number;
-  }> = size === UISize.Tiny ? { height: 10 } : {};
+  }> = isSizeNormal ? {} : { height: 10 };
 
   switch (attached) {
-    case UIAttachment.Above: {
+    case "above": {
       style.borderTopLeftRadius = 0;
       style.borderTopRightRadius = 0;
       break;
     }
-    case UIAttachment.Below: {
+    case "below": {
       style.borderBottomLeftRadius = 0;
       style.borderBottomRightRadius = 0;
       break;
@@ -42,7 +43,7 @@ export function LabelledProgressBar({
 
   return (
     <div className={`position-relative w-100 ${disableTransitions ? "no-transitions" : ""}`}>
-      {size === UISize.Normal && (
+      {isSizeNormal ? (
         <>
           <ProgressBar style={style}>
             <ProgressBar key={1} now={value} variant={variant} />
@@ -63,9 +64,7 @@ export function LabelledProgressBar({
             {label}
           </small>
         </>
-      )}
-
-      {size === UISize.Tiny && (
+      ) : (
         <OverlayTrigger overlay={<Tooltip>{label}</Tooltip>} placement="bottom">
           <ProgressBar style={style}>
             <ProgressBar key={1} now={value} variant={variant} />

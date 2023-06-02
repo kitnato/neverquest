@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
-import { currentHealth, maximumHealth } from "@neverquest/state/reserves";
+import { healthCurrent, healthMaximum } from "@neverquest/state/reserves";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useHeal() {
@@ -12,7 +12,7 @@ export function useHeal() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const healthDifference = get(maximumHealth) - get(currentHealth);
+        const healthDifference = get(healthMaximum) - get(healthCurrent);
 
         changeHealth({
           delta: {

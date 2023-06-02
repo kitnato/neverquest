@@ -13,9 +13,9 @@ import {
   monsterDamage,
   monsterElement,
   monsterPoison,
-  monsterStaggeredDuration,
+  monsterStaggerDuration,
 } from "@neverquest/state/monster";
-import { canAttackOrParry, canBlock, canDodge, staminaDebuff } from "@neverquest/state/reserves";
+import { blight, canAttackOrParry, canBlock, canDodge } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
 import {
   block,
@@ -46,9 +46,7 @@ export function useDefend() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        if (!get(isShowing(Showing.MonsterDamage))) {
-          set(isShowing(Showing.MonsterDamage), true);
-        }
+        set(isShowing(Showing.MonsterOffense), true);
 
         animateElement({
           element: get(statusElement),
@@ -162,10 +160,6 @@ export function useDefend() {
           if (get(canBlock)) {
             healthDamage = 0;
 
-            const hasStaggered =
-              get(skills(Skill.Traumatology)) && Math.random() <= get(shield).stagger;
-            const skillShieldcraft = get(skills(Skill.Shieldcraft));
-
             deltaHealth = [
               {
                 color: "text-muted",
@@ -173,24 +167,28 @@ export function useDefend() {
               },
             ];
 
-            if (skillShieldcraft) {
-              const isFreeBlock = Math.random() <= get(stability);
+            const hasStabilized = get(skills(Skill.Shieldcraft)) && Math.random() <= get(stability);
 
-              increaseMastery(Mastery.Stability);
+            increaseMastery(Mastery.Stability);
 
-              if (isFreeBlock) {
-                deltaStamina.push({
-                  color: "text-muted",
-                  value: "STABILIZED",
-                });
-              } else {
-                changeStamina({ value: -staminaCost });
-              }
+            // If Shieldcraft skill is acquired, check if a free block occurs, otherwise spend stamina blocking.
+            if (hasStabilized) {
+              deltaStamina.push({
+                color: "text-muted",
+                value: "STABILIZED",
+              });
             }
 
-            // Blocking has occurred, check if monster is staggered.
+            if (!hasStabilized) {
+              changeStamina({ value: -staminaCost });
+            }
+
+            const hasStaggered =
+              get(skills(Skill.Traumatology)) && Math.random() <= get(shield).stagger;
+
+            // Check if monster is staggered.
             if (hasStaggered) {
-              set(monsterStaggeredDuration, get(staggerDuration));
+              set(monsterStaggerDuration, get(staggerDuration));
             }
           } else {
             deltaStamina = [
@@ -222,26 +220,21 @@ export function useDefend() {
           }
         }
 
-        const skillArmorcraft = get(skills(Skill.Armorcraft));
-        const hasSkippedRecovery = skillArmorcraft && Math.random() <= get(tenacity);
+        const hasIgnoredRecovery = get(skills(Skill.Armorcraft)) && Math.random() <= get(tenacity);
 
-        // If Tenacity isn't available or hasn't been triggered, activate recovery.
-        if (!hasSkippedRecovery) {
-          if (!get(isShowing(Showing.Recovery))) {
-            set(isShowing(Showing.Recovery), true);
-          }
+        increaseMastery(Mastery.Tenacity);
+
+        // If Tenacity hasn't been triggered, activate recovery.
+        if (!hasIgnoredRecovery) {
+          set(isShowing(Showing.Ailments), true);
+          set(isShowing(Showing.Recovery), true);
 
           set(recoveryDuration, get(recoveryRate));
         }
 
-        // Increment Armorcraft mastery (if applicable).
-        if (skillArmorcraft) {
-          increaseMastery(Mastery.Tenacity);
-        }
-
         const isPoisoned = Math.random() <= get(monsterPoison);
 
-        // If poisoning occurs, check if it can and has been deflected, otherwise apply poison - if there is an active poisoning, increment blight instead.
+        // If poisoning occurs, check if has been deflected, otherwise apply poison - if there is an active poisoning, increment blight instead.
         if (isPoisoned) {
           const hasDeflected = get(skills(Skill.Armorcraft)) && Math.random() <= get(deflection);
 
@@ -252,13 +245,14 @@ export function useDefend() {
             });
           } else {
             if (get(poisonDuration) > 0) {
-              set(staminaDebuff, (current) => current + 1);
+              set(blight, (current) => current + 1);
 
               deltaStamina.push({
                 color: "text-danger",
                 value: "BLIGHTED",
               });
             } else {
+              set(isShowing(Showing.Ailments), true);
               set(poisonDuration, POISON.duration);
 
               deltaHealth.push({

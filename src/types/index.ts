@@ -1,5 +1,5 @@
 import type { ArmorClass, ShieldClass, WeaponClass, WeaponModality } from "@neverquest/LOCRA/types";
-import type { Skill, WeaponGrip } from "@neverquest/types/enums";
+import type { WeaponGrip } from "@neverquest/types/enums";
 import type { SVGIcon } from "@neverquest/types/props";
 
 export type Armor = GearBase & {
@@ -12,14 +12,13 @@ export type Armor = GearBase & {
   staminaCost: number;
 };
 
-export type AttributeOrMastery = {
+export type AttributeOrMastery = UnlockedState & {
   base: number;
   description: string;
   Icon: SVGIcon;
   increment: number;
   maximum?: number;
   name: string;
-  requiredSkill?: Skill;
 };
 
 export type Consumable = ItemBase & {
@@ -79,6 +78,10 @@ export type Trinket = ItemBase & {
 
 export const TRINKET_NAMES = ["Compass", "Hearthstone", "Knapsack"] as const;
 export type TrinketName = (typeof TRINKET_NAMES)[number];
+
+export type UnlockedState = {
+  isUnlocked: boolean;
+};
 
 export type Weapon = GearBase & {
   abilityChance: number;

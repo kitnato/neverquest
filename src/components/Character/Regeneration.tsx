@@ -5,7 +5,6 @@ import { RegenerationMeter } from "@neverquest/components/Character/Regeneration
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/internal";
 import { RESERVES } from "@neverquest/data/reserves";
 import {
   REGENERATION_AMOUNT_HEALTH,
@@ -14,8 +13,10 @@ import {
   REGENERATION_RATE_STAMINA,
 } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
+import { isShowing } from "@neverquest/state/isShowing";
 import { reserveRegenerationRate } from "@neverquest/state/statistics";
-import { Attribute, Delta, DeltaText, Reserve } from "@neverquest/types/enums";
+import { Attribute, Delta, DeltaText, Reserve, Showing } from "@neverquest/types/enums";
+import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Regeneration({ type }: { type: Reserve.Health | Reserve.Stamina }) {
@@ -25,14 +26,13 @@ export function Regeneration({ type }: { type: Reserve.Health | Reserve.Stamina 
 
   const regenerationAmountValue = useRecoilValue(atomRegenerationAmount);
   const regenerationRateValue = useRecoilValue(atomRegenerationRate);
+  const isShowingReserveDetails = useRecoilValue(isShowing(Showing.ReserveDetails));
   const reserveRegenerationRateValue = useRecoilValue(reserveRegenerationRate);
 
   const { name: amountName } = ATTRIBUTES[Attribute.Fortitude];
   const { name: rateName } = ATTRIBUTES[Attribute.Vigor];
   const baseAmount = isHealth ? REGENERATION_AMOUNT_HEALTH : REGENERATION_AMOUNT_STAMINA;
   const baseRate = isHealth ? REGENERATION_RATE_HEALTH : REGENERATION_RATE_STAMINA;
-  const showAmount = regenerationAmountValue - baseAmount > 0;
-  const showRate = regenerationRateValue - baseRate > 0;
   const title = isHealth ? "Health" : "Stamina";
 
   useDeltaText({
@@ -50,55 +50,47 @@ export function Regeneration({ type }: { type: Reserve.Health | Reserve.Stamina 
 
             <Popover.Body>
               <DetailsTable>
-                {showRate && (
-                  <>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Current rate:</td>
+                <tr>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Current rate:</td>
 
-                      <td>{formatMilliseconds(regenerationRateValue)}</td>
-                    </tr>
+                  <td>{formatMilliseconds(regenerationRateValue)}</td>
+                </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Base rate:</td>
+                <tr>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Base rate:</td>
 
-                      <td>{formatMilliseconds(baseRate)}</td>
-                    </tr>
+                  <td>{formatMilliseconds(baseRate)}</td>
+                </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>{rateName} attribute:</td>
+                <tr>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>{rateName} attribute:</td>
 
-                      <td>{`-${formatPercentage(reserveRegenerationRateValue)}`}</td>
-                    </tr>
-                  </>
-                )}
+                  <td>{`-${formatPercentage(reserveRegenerationRateValue)}`}</td>
+                </tr>
 
-                {showAmount && (
-                  <>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Total amount:</td>
+                <tr>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Total amount:</td>
 
-                      <td>{regenerationAmountValue}</td>
-                    </tr>
+                  <td>{regenerationAmountValue}</td>
+                </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Base amount:</td>
+                <tr>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Base amount:</td>
 
-                      <td>{baseAmount}</td>
-                    </tr>
+                  <td>{baseAmount}</td>
+                </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>{amountName} attribute:</td>
+                <tr>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>{amountName} attribute:</td>
 
-                      <td>{`+${regenerationAmountValue - baseAmount}`}</td>
-                    </tr>
-                  </>
-                )}
+                  <td>{`+${regenerationAmountValue - baseAmount}`}</td>
+                </tr>
               </DetailsTable>
             </Popover.Body>
           </Popover>
         }
         placement="right"
-        trigger={showAmount || showRate ? ["hover", "focus"] : []}
+        trigger={isShowingReserveDetails ? ["hover", "focus"] : []}
       >
         <>
           <RegenerationMeter type={type} />

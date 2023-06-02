@@ -5,7 +5,7 @@ import { useRecoilValue, useResetRecoilState } from "recoil";
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { isAttacking } from "@neverquest/state/character";
-import { isLevelCompleted, isWilderness } from "@neverquest/state/encounter";
+import { isStageCompleted, isWilderness } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
 import { hasLooted } from "@neverquest/state/resources";
 
@@ -13,7 +13,7 @@ export function UseHearthstone() {
   const hasLootedValue = useRecoilValue(hasLooted);
   const isAttackingValue = useRecoilValue(isAttacking);
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
-  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
+  const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isWildernessValue = useRecoilValue(isWilderness);
 
   const [isShowingConfirmation, setIsShowingConfirmation] = useState(false);
@@ -23,7 +23,7 @@ export function UseHearthstone() {
   const canWarp = !isAttackingValue && isWildernessValue;
 
   const handleWarp = () => {
-    if (isLevelCompletedValue && !hasLootedValue) {
+    if (isStageCompletedValue && !hasLootedValue) {
       setIsShowingConfirmation(true);
     } else {
       resetIsInventoryOpen();

@@ -13,10 +13,8 @@ export function Protection() {
   const isShowingProtection = useRecoilValue(isShowing(Showing.Protection));
   const protectionValue = useRecoilValue(protection);
 
-  const deltaProtection = deltas(Delta.Protection);
-
   useDeltaText({
-    atomDelta: deltaProtection,
+    atomDelta: deltas(Delta.Protection),
     atomValue: protection,
   });
 

@@ -4,29 +4,29 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/internal";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconCriticalRating } from "@neverquest/icons/critical-rating.svg";
 import { deltas } from "@neverquest/state/deltas";
+import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { criticalChance, criticalDamage, criticalRating } from "@neverquest/state/statistics";
-import { Delta, Skill } from "@neverquest/types/enums";
+import { Delta, Showing, Skill } from "@neverquest/types/enums";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function CriticalRating() {
   const criticalChanceValue = useRecoilValue(criticalChance);
   const criticalDamageValue = useRecoilValue(criticalDamage);
   const criticalRatingValue = useRecoilValue(criticalRating);
+  const isShowingCriticalRating = useRecoilValue(isShowing(Showing.CriticalRating));
   const skillAssassination = useRecoilValue(skills(Skill.Assassination));
 
-  const deltaCriticalRating = deltas(Delta.CriticalRating);
-
   useDeltaText({
-    atomDelta: deltaCriticalRating,
+    atomDelta: deltas(Delta.CriticalRating),
     atomValue: criticalRating,
   });
 
-  if (!skillAssassination) {
+  if (!isShowingCriticalRating) {
     return null;
   }
 
@@ -56,8 +56,9 @@ export function CriticalRating() {
                 </Popover.Body>
               </Popover>
             }
+            trigger={skillAssassination ? ["hover", "focus"] : []}
           >
-            <span>{criticalRatingValue}</span>
+            <span>{skillAssassination ? criticalRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
           <FloatingText type={Delta.CriticalRating} />

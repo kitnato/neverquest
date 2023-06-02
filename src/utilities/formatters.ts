@@ -1,3 +1,5 @@
+import { LABEL_EMPTY } from "@neverquest/utilities/constants";
+
 export function capitalizeAll(string: string) {
   // ^\w{1} matches the first letter of the word, or (|) \s+ matches any amount of whitespace between the words.
   return string.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
@@ -5,7 +7,7 @@ export function capitalizeAll(string: string) {
 
 export function formatMilliseconds(milliseconds: number) {
   if (milliseconds <= 0 || Number.isNaN(milliseconds)) {
-    return "--";
+    return LABEL_EMPTY;
   }
 
   let seconds = milliseconds / 1000;

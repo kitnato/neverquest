@@ -18,7 +18,7 @@ import { ReactComponent as IconSlashing } from "@neverquest/icons/weapon-slashin
 import { ReactComponent as IconWeaponStagger } from "@neverquest/icons/weapon-stagger.svg";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRA/types";
 import type { Consumable, ConsumableName, Range, Trinket, TrinketName } from "@neverquest/types";
-import { Skill, WeaponGrip } from "@neverquest/types/enums";
+import { Showing, WeaponGrip } from "@neverquest/types/enums";
 import type { SVGIcon } from "@neverquest/types/props";
 
 export const ARMOR_NONE = {
@@ -191,7 +191,7 @@ export const WEAPON_SPECIFICATIONS: Record<
     abilityName: string;
     IconAbility: SVGIcon;
     IconGearClass: SVGIcon;
-    skillType: Skill;
+    showingType: Showing;
   }
 > = {
   blunt: {
@@ -199,20 +199,20 @@ export const WEAPON_SPECIFICATIONS: Record<
     abilityName: "Stagger",
     IconAbility: IconWeaponStagger,
     IconGearClass: IconBlunt,
-    skillType: Skill.Traumatology,
+    showingType: Showing.Stagger,
   },
   piercing: {
     abilityChance: { maximum: 0.7, minimum: 0.2 },
     abilityName: "Bleed",
     IconAbility: IconWeaponBleed,
     IconGearClass: IconPiercing,
-    skillType: Skill.Anatomy,
+    showingType: Showing.Bleed,
   },
   slashing: {
     abilityChance: { maximum: 0.6, minimum: 0.15 },
     abilityName: "Parry",
     IconAbility: IconParry,
     IconGearClass: IconSlashing,
-    skillType: Skill.Escrime,
+    showingType: Showing.Parry,
   },
 };

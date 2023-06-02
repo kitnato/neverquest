@@ -5,30 +5,27 @@ import { Deflection } from "@neverquest/components/Statistics/Deflection";
 import { Stability } from "@neverquest/components/Statistics/Stability";
 import { Tenacity } from "@neverquest/components/Statistics/Tenacity";
 import { isShowing } from "@neverquest/state/isShowing";
-import { skills } from "@neverquest/state/skills";
-import { Showing, Skill } from "@neverquest/types/enums";
+import { Showing } from "@neverquest/types/enums";
 
 export function Support() {
-  const isShowingDeflection = useRecoilValue(isShowing(Showing.Deflection));
-  const skillArmorcraft = useRecoilValue(skills(Skill.Armorcraft));
-  const skillShieldcraft = useRecoilValue(skills(Skill.Shieldcraft));
+  const isShowingSupport = useRecoilValue(isShowing(Showing.Support));
 
-  if (!skillArmorcraft && !skillShieldcraft && !isShowingDeflection) {
+  if (!isShowingSupport) {
     return null;
   }
 
   return (
     <Row>
       <Col>
+        <Deflection />
+      </Col>
+
+      <Col>
         <Tenacity />
       </Col>
 
       <Col>
         <Stability />
-      </Col>
-
-      <Col>
-        <Deflection />
       </Col>
     </Row>
   );

@@ -4,15 +4,16 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/internal";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { BLEED } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconBleedRating } from "@neverquest/icons/bleed-rating.svg";
 import { deltas } from "@neverquest/state/deltas";
+import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { bleed, bleedDamage, bleedRating, bleedTick, damage } from "@neverquest/state/statistics";
-import { Delta, Mastery, Skill } from "@neverquest/types/enums";
+import { Delta, Mastery, Showing, Skill } from "@neverquest/types/enums";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function BleedRating() {
@@ -21,19 +22,18 @@ export function BleedRating() {
   const bleedRatingValue = useRecoilValue(bleedRating);
   const bleedTickValue = useRecoilValue(bleedTick);
   const damageValue = useRecoilValue(damage);
+  const isShowingBleed = useRecoilValue(isShowing(Showing.Bleed));
   const skillAnatomy = useRecoilValue(skills(Skill.Anatomy));
-
-  const deltaBleed = deltas(Delta.BleedRating);
 
   const { duration } = BLEED;
   const { name } = MASTERIES[Mastery.Cruelty];
 
   useDeltaText({
-    atomDelta: deltaBleed,
+    atomDelta: deltas(Delta.BleedRating),
     atomValue: bleedRating,
   });
 
-  if (!skillAnatomy) {
+  if (!isShowingBleed) {
     return null;
   }
 
@@ -77,8 +77,9 @@ export function BleedRating() {
                 </Popover.Body>
               </Popover>
             }
+            trigger={skillAnatomy ? ["hover", "focus"] : []}
           >
-            <span>{bleedRatingValue}</span>
+            <span>{skillAnatomy ? bleedRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
           <FloatingText type={Delta.BleedRating} />

@@ -2,7 +2,7 @@ import { atom, selector } from "recoil";
 
 import { POISON } from "@neverquest/data/statistics";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import { isLevelStarted, level, progress } from "@neverquest/state/encounter";
+import { isStageStarted, progress, stage } from "@neverquest/state/encounter";
 import { formatToFixed } from "@neverquest/utilities/formatters";
 import { getDamagePerRate, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
@@ -10,14 +10,14 @@ import { getDamagePerRate, getGrowthSigmoid } from "@neverquest/utilities/getter
 
 export const isMonsterDead = withStateKey("isMonsterDead", (key) =>
   selector({
-    get: ({ get }) => get(isLevelStarted) && get(monsterCurrentHealth) === 0,
+    get: ({ get }) => get(isStageStarted) && get(monsterHealthCurrent) === 0,
     key,
   })
 );
 
 export const isMonsterStaggered = withStateKey("isMonsterStaggered", (key) =>
   selector({
-    get: ({ get }) => get(monsterStaggeredDuration) > 0,
+    get: ({ get }) => get(monsterStaggerDuration) > 0,
     key,
   })
 );
@@ -26,7 +26,7 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   selector({
     get: ({ get }) =>
       4500 -
-      Math.round(4000 * getGrowthSigmoid(get(level)) - 100 * getGrowthSigmoid(get(progress))),
+      Math.round(4000 * getGrowthSigmoid(get(stage)) - 100 * getGrowthSigmoid(get(progress))),
     key,
   })
 );
@@ -34,7 +34,7 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
 export const monsterDamage = withStateKey("monsterDamage", (key) =>
   selector({
     get: ({ get }) =>
-      Math.round(800 * getGrowthSigmoid(get(level)) + 100 * getGrowthSigmoid(get(progress))),
+      Math.round(800 * getGrowthSigmoid(get(stage)) + 100 * getGrowthSigmoid(get(progress))),
     key,
   })
 );
@@ -52,10 +52,10 @@ export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (ke
   })
 );
 
-export const monsterMaximumHealth = withStateKey("monsterMaximumHealth", (key) =>
+export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =>
   selector({
     get: ({ get }) =>
-      Math.round(2500 * getGrowthSigmoid(get(level)) + 200 * getGrowthSigmoid(get(progress))),
+      Math.round(2500 * getGrowthSigmoid(get(stage)) + 200 * getGrowthSigmoid(get(progress))),
     key,
   })
 );
@@ -63,15 +63,15 @@ export const monsterMaximumHealth = withStateKey("monsterMaximumHealth", (key) =
 export const monsterPoison = withStateKey("monsterPoison", (key) =>
   selector({
     get: ({ get }) => {
-      const levelValue = get(level);
+      const stageValue = get(stage);
       const { chanceBase, chanceIncrement, minimumLevel } = POISON;
 
-      if (levelValue < minimumLevel) {
+      if (stageValue < minimumLevel) {
         return 0;
       }
 
       // TODO - use sigmoid growth
-      return chanceBase + (levelValue - minimumLevel) * chanceIncrement;
+      return chanceBase + (stageValue - minimumLevel) * chanceIncrement;
     },
     key,
   })
@@ -80,8 +80,8 @@ export const monsterPoison = withStateKey("monsterPoison", (key) =>
 export const monsterLoot = withStateKey("monsterLoot", (key) =>
   selector({
     get: ({ get }) => {
-      const levelValue = get(level);
-      const growthFactor = getGrowthSigmoid(levelValue);
+      const stageValue = get(stage);
+      const growthFactor = getGrowthSigmoid(stageValue);
       const progressFactor = getGrowthSigmoid(get(progress)) * 100;
 
       return {
@@ -120,9 +120,9 @@ export const monsterBleedingDuration = withStateKey("monsterBleedingDuration", (
   })
 );
 
-export const monsterCurrentHealth = withStateKey("masteries", (key) =>
+export const monsterHealthCurrent = withStateKey("masteries", (key) =>
   atom({
-    default: monsterMaximumHealth,
+    default: monsterHealthMaximum,
     effects: [handleLocalStorage<number>({ key })],
     key,
   })
@@ -136,7 +136,7 @@ export const monsterName = withStateKey("monsterName", (key) =>
   })
 );
 
-export const monsterStaggeredDuration = withStateKey("monsterStaggeredDuration", (key) =>
+export const monsterStaggerDuration = withStateKey("monsterStaggerDuration", (key) =>
   atom({
     default: 0,
     effects: [handleLocalStorage<number>({ key })],

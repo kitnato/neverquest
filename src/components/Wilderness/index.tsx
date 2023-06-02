@@ -3,18 +3,18 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Monster } from "@neverquest/components/Monster";
-import { LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { ReactComponent as IconHiding } from "@neverquest/icons/monster-hiding.svg";
 import { ReactComponent as IconRemains } from "@neverquest/icons/monster-remains.svg";
-import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
+import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
+import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Wilderness() {
-  const isLevelStartedValue = useRecoilValue(isLevelStarted);
-  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
+  const isStageStartedValue = useRecoilValue(isStageStarted);
+  const isStageCompletedValue = useRecoilValue(isStageCompleted);
 
-  if (isLevelCompletedValue) {
+  if (isStageCompletedValue) {
     return (
       <Card className={getAnimationClass({ type: "flipInX" })}>
         <Card.Body>
@@ -29,7 +29,7 @@ export function Wilderness() {
     );
   }
 
-  if (isLevelStartedValue) {
+  if (isStageStartedValue) {
     return <Monster />;
   }
 

@@ -1,14 +1,12 @@
 import { useEffect, useRef } from "react";
-import { Card, Col, Row, Stack } from "react-bootstrap";
+import { Card, Stack } from "react-bootstrap";
 import { useRecoilState } from "recoil";
 
+import { MonsterAilments } from "@neverquest/components/Monster/MonsterAilments";
 import { MonsterAttack } from "@neverquest/components/Monster/MonsterAttack";
-import { MonsterBleeding } from "@neverquest/components/Monster/MonsterBleeding";
-import { MonsterDamage } from "@neverquest/components/Monster/MonsterDamage";
 import { MonsterHealth } from "@neverquest/components/Monster/MonsterHealth";
 import { MonsterName } from "@neverquest/components/Monster/MonsterName";
-import { MonsterPoisonRating } from "@neverquest/components/Monster/MonsterPoisonRating";
-import { MonsterStaggered } from "@neverquest/components/Monster/MonsterStaggered";
+import { MonsterOffense } from "@neverquest/components/Monster/MonsterOffense";
 import { isMonsterNew, monsterElement } from "@neverquest/state/monster";
 import { animateElement } from "@neverquest/utilities/animateElement";
 
@@ -48,25 +46,9 @@ export function Monster() {
 
           <MonsterAttack />
 
-          <Row>
-            <Col>
-              <MonsterDamage />
-            </Col>
+          <MonsterOffense />
 
-            <Col>
-              <MonsterPoisonRating />
-            </Col>
-          </Row>
-
-          <Row>
-            <Col>
-              <MonsterStaggered />
-            </Col>
-
-            <Col>
-              <MonsterBleeding />
-            </Col>
-          </Row>
+          <MonsterAilments />
         </Stack>
       </Card.Body>
     </Card>

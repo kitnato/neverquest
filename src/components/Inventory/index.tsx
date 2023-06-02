@@ -7,11 +7,11 @@ import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { UseCompass } from "@neverquest/components/Inventory/Trinket/UseCompass";
 import { UseHearthstone } from "@neverquest/components/Inventory/Trinket/UseHearthstone";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/internal";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { equippedGearIDs, inventory } from "@neverquest/state/inventory";
 import type { ConsumableName, TrinketName } from "@neverquest/types";
 import { isGear } from "@neverquest/types/type-guards";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 
 const ITEM_ACTIONS: Record<ConsumableName | TrinketName, FunctionComponent> = {
   Bandages: UseBandages,

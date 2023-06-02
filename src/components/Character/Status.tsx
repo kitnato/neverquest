@@ -1,15 +1,13 @@
 import { useEffect, useRef } from "react";
-import { Card, Col, Row, Stack } from "react-bootstrap";
+import { Card, Stack } from "react-bootstrap";
 import { useSetRecoilState } from "recoil";
 
+import { Ailments } from "@neverquest/components/Character/Ailments";
 import { Attack } from "@neverquest/components/Character/Attack";
 import { Health } from "@neverquest/components/Character/Health";
 import { Name } from "@neverquest/components/Character/Name";
-import { Poisoned } from "@neverquest/components/Character/Poisoned";
-import { Recovery } from "@neverquest/components/Character/Recovery";
 import { Stamina } from "@neverquest/components/Character/Stamina";
 import { statusElement } from "@neverquest/state/character";
-
 import { animateElement } from "@neverquest/utilities/animateElement";
 
 export function Status() {
@@ -37,15 +35,7 @@ export function Status() {
 
           <Attack />
 
-          <Row>
-            <Col>
-              <Recovery />
-            </Col>
-
-            <Col>
-              <Poisoned />
-            </Col>
-          </Row>
+          <Ailments />
         </Stack>
       </Card.Body>
     </Card>

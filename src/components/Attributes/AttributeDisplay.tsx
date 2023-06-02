@@ -4,11 +4,6 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import {
-  CLASS_FULL_WIDTH_JUSTIFIED,
-  LABEL_AT_MAXIMUM,
-  LABEL_UNKNOWN,
-} from "@neverquest/data/internal";
 import { useIncreaseAttribute } from "@neverquest/hooks/actions/useIncreaseAttribute";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { ReactComponent as IconWait } from "@neverquest/icons/hourglass.svg";
@@ -20,22 +15,27 @@ import {
   attributes,
   isAttributeAtMaximum,
 } from "@neverquest/state/attributes";
-import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
+import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
 import type { Attribute } from "@neverquest/types/enums";
+import {
+  CLASS_FULL_WIDTH_JUSTIFIED,
+  LABEL_AT_MAXIMUM,
+  LABEL_UNKNOWN,
+} from "@neverquest/utilities/constants";
 
 export function AttributeDisplay({ type }: { type: Attribute }) {
   const { isUnlocked, points } = useRecoilValue(attributes(type));
   const attributeCostValue = useRecoilValue(attributeCost);
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(type));
-  const isLevelStartedValue = useRecoilValue(isLevelStarted);
-  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
+  const isStageCompletedValue = useRecoilValue(isStageCompleted);
+  const isStageStartedValue = useRecoilValue(isStageStarted);
 
   const increaseAttribute = useIncreaseAttribute();
 
   const { description, Icon, name } = ATTRIBUTES[type];
   const canIncrease =
-    areAttributesIncreasableValue && (isLevelCompletedValue || !isLevelStartedValue);
+    areAttributesIncreasableValue && (isStageCompletedValue || !isStageStartedValue);
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
@@ -57,7 +57,7 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
                       <IconImage Icon={IconEssence} size="tiny" />
                       &nbsp;essence
                     </div>
-                    {isLevelStartedValue && !isLevelCompletedValue && (
+                    {isStageStartedValue && !isStageCompletedValue && (
                       <div>Monsters are lurking!</div>
                     )}
                   </Tooltip>
@@ -77,7 +77,12 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
           </Stack>
         </>
       ) : (
-        <IconDisplay contents={LABEL_UNKNOWN} Icon={IconUnknown} tooltip={LABEL_UNKNOWN} />
+        <IconDisplay
+          contents={LABEL_UNKNOWN}
+          description="There is power to be unlocked"
+          Icon={IconUnknown}
+          tooltip={LABEL_UNKNOWN}
+        />
       )}
     </div>
   );

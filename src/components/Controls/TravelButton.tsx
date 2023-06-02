@@ -4,14 +4,14 @@ import { useRecoilValue } from "recoil";
 
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { IconImage } from "@neverquest/components/IconImage";
-import { LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { ReactComponent as IconTravel } from "@neverquest/icons/travel.svg";
 import { hasBoughtFromMerchant } from "@neverquest/state/caravan";
 import { isGameOver } from "@neverquest/state/character";
-import { isLevelCompleted, isWilderness, maximumLevel } from "@neverquest/state/encounter";
+import { isStageCompleted, isWilderness, stageMaximum } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
 import { confirmControlWarnings } from "@neverquest/state/settings";
+import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function TravelButton() {
@@ -19,9 +19,9 @@ export function TravelButton() {
   const hasBoughtFromMerchantValue = useRecoilValue(hasBoughtFromMerchant);
   const hasLootedValue = useRecoilValue(hasLooted);
   const isGameOverValue = useRecoilValue(isGameOver);
-  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
+  const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isWildernessValue = useRecoilValue(isWilderness);
-  const maximumLevelValue = useRecoilValue(maximumLevel);
+  const stageMaximumValue = useRecoilValue(stageMaximum);
 
   const toggleLocation = useToggleLocation();
 
@@ -32,7 +32,7 @@ export function TravelButton() {
       confirmControlWarningsValue &&
       !hasBoughtFromMerchantValue &&
       !isWildernessValue &&
-      maximumLevelValue <= 3
+      stageMaximumValue <= 3
     ) {
       setShowTravelConfirmation(true);
     } else {
@@ -40,7 +40,7 @@ export function TravelButton() {
     }
   };
 
-  if (!(hasLootedValue && isLevelCompletedValue) && isWildernessValue) {
+  if (!(hasLootedValue && isStageCompletedValue) && isWildernessValue) {
     return null;
   }
 
@@ -50,7 +50,7 @@ export function TravelButton() {
         overlay={
           <Tooltip>
             {`${isWildernessValue ? "Go to" : "Return to"} ${
-              maximumLevelValue === 1 && isWildernessValue
+              stageMaximumValue === 1 && isWildernessValue
                 ? LABEL_UNKNOWN
                 : isWildernessValue
                 ? "Caravan"

@@ -15,49 +15,48 @@ export const CREW: Record<
   {
     coinPrice: number;
     description: string;
-    hirableLevel: number;
     interaction: string;
     monologues: string[];
     name: string;
+    requiredStage: number;
   }
 > = {
   // TODO
   [CrewMember.Alchemist]: {
     coinPrice: 100,
     description: "Converts essence, scrap and coins between one another.",
-    hirableLevel: 15,
     interaction: "Transmute",
     monologues: ["Things are not always what they seem."],
     name: "Alchemist",
+    requiredStage: 15,
   },
   [CrewMember.Blacksmith]: {
     coinPrice: 20,
     description: "Crafts superior gear.",
-    hirableLevel: 5,
     interaction: "Craft",
     monologues: ["In need of better gear?"],
     name: "Blacksmith",
+    requiredStage: 5,
   },
   [CrewMember.Medic]: {
     coinPrice: 50,
     description: "Heals wounds and sells bandages.",
-    hirableLevel: 8,
     interaction: "Heal",
     monologues: ["Allow me to patch you up."],
     name: "Medic",
+    requiredStage: 8,
   },
   [CrewMember.Mercenary]: {
     coinPrice: 80,
     description: "Trains new skills and attributes.",
-    hirableLevel: 12,
     interaction: "Train",
     monologues: ["Perhaps I can teach you something."],
     name: "Mercenary",
+    requiredStage: 12,
   },
   [CrewMember.Merchant]: {
     coinPrice: 0,
     description: "Offers various items for purchase and buys unwanted items.",
-    hirableLevel: 0,
     interaction: "Trade",
     monologues: [
       "Greetings. I have what you're looking for.",
@@ -67,39 +66,38 @@ export const CREW: Record<
       "Welcome back. Always a sight for sore eyes.",
     ],
     name: "Merchant",
+    requiredStage: 0,
   },
   // TODO
   [CrewMember.Mystic]: {
     coinPrice: 200,
-    description: "Unlocks resetting of the power level.",
-    hirableLevel: 30,
+    description: "Offers a ritual that purges all essence.",
     interaction: "Ritual",
     monologues: ["Prepared to pierce the veil?"],
     name: "Alchemist",
+    requiredStage: 30,
   },
   [CrewMember.Tailor]: {
     coinPrice: 30,
     description: "Expands inventory space.",
-    hirableLevel: 6,
     interaction: "Upgrade",
     monologues: ["Allow me to deepen your pockets."],
     name: "Tailor",
+    requiredStage: 6,
   },
   // TODO
   [CrewMember.Witch]: {
     coinPrice: 150,
     description: "Sells potions that cure ailments.",
-    hirableLevel: 20,
     interaction: "Brew",
     monologues: ["Gaze deep into my cauldron ..."],
     name: "Alchemist",
+    requiredStage: 20,
   },
 };
 
-export const CREW_INITIAL = [CrewMember.Merchant] as const;
-
 export const CREW_ORDER: CrewMember[] = Object.entries(CREW)
-  .sort(([, a], [, b]) => a.hirableLevel - b.hirableLevel)
+  .sort(([, a], [, b]) => a.requiredStage - b.requiredStage)
   .map(([type]) => Number(type) as CrewMember);
 
 export const MEDIC_PRICE_BANDAGES = 18;

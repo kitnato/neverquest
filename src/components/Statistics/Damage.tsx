@@ -5,7 +5,6 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/internal";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconDamagePerSecond } from "@neverquest/icons/damage-per-second.svg";
 import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
@@ -15,6 +14,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { showDamagePerSecond } from "@neverquest/state/settings";
 import { damage, damagePerSecond, damageTotal } from "@neverquest/state/statistics";
 import { Attribute, Delta, Showing } from "@neverquest/types/enums";
+import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 
 export function Damage() {
   const damageValue = useRecoilValue(damage);

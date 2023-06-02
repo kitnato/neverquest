@@ -10,7 +10,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import {
   monsterBleedingDuration,
   monsterElement,
-  monsterStaggeredDuration,
+  monsterStaggerDuration,
 } from "@neverquest/state/monster";
 import { canAttackOrParry } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
@@ -38,9 +38,7 @@ export function useAttack() {
 
         const { abilityChance, gearClass, staminaCost } = get(weapon);
 
-        if (!get(isShowing(Showing.Statistics))) {
-          set(isShowing(Showing.Statistics), true);
-        }
+        set(isShowing(Showing.Statistics), true);
 
         if (get(canAttackOrParry)) {
           const hasInflictedCritical =
@@ -77,7 +75,9 @@ export function useAttack() {
           }
 
           if (hasInflictedBleed) {
+            set(isShowing(Showing.MonsterAilments), true);
             set(monsterBleedingDuration, BLEED.duration);
+
             increaseMastery(Mastery.Cruelty);
 
             monsterDeltas.push({
@@ -87,7 +87,9 @@ export function useAttack() {
           }
 
           if (hasInflictedStagger) {
-            set(monsterStaggeredDuration, get(staggerDuration));
+            set(isShowing(Showing.MonsterAilments), true);
+            set(monsterStaggerDuration, get(staggerDuration));
+
             increaseMastery(Mastery.Might);
 
             monsterDeltas.push({

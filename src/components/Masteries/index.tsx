@@ -5,14 +5,14 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MasteryDisplay } from "@neverquest/components/Masteries/MasteryDisplay";
 import { MASTERIES_ORDER } from "@neverquest/data/masteries";
 import { ReactComponent as IconMasteries } from "@neverquest/icons/masteries.svg";
-import { isShowingMastery } from "@neverquest/state/isShowing";
-
+import { isShowing } from "@neverquest/state/isShowing";
+import { Showing } from "@neverquest/types/enums";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Masteries() {
-  const isShowingMasteryValue = useRecoilValue(isShowingMastery(null));
+  const isShowingMasteries = useRecoilValue(isShowing(Showing.Masteries));
 
-  if (!isShowingMasteryValue) {
+  if (!isShowingMasteries) {
     return null;
   }
 

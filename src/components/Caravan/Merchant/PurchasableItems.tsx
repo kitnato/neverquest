@@ -4,8 +4,8 @@ import { useRecoilValue } from "recoil";
 import { PurchaseItemButton } from "@neverquest/components/Caravan/Merchant/PurchaseItemButton";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { Coins } from "@neverquest/components/Resources/Coins";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/internal";
 import { merchantInventory } from "@neverquest/state/caravan";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 
 export function PurchasableItems({ inventoryIDs }: { inventoryIDs: string[] }) {
   const merchantInventoryValue = useRecoilValue(merchantInventory);

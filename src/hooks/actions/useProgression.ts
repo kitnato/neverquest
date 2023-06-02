@@ -2,7 +2,7 @@ import { useRecoilCallback } from "recoil";
 
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
 import { attackDuration, isAttacking } from "@neverquest/state/character";
-import { isLevelCompleted } from "@neverquest/state/encounter";
+import { isStageCompleted } from "@neverquest/state/encounter";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useProgression() {
@@ -13,7 +13,7 @@ export function useProgression() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        if (get(isLevelCompleted)) {
+        if (get(isStageCompleted)) {
           reset(attackDuration);
           reset(isAttacking);
         } else {

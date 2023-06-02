@@ -1,8 +1,8 @@
 import type { RecoilValue, Snapshot } from "recoil";
 
-import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/data/internal";
 import type { Range } from "@neverquest/types";
 import type { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
+import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/utilities/constants";
 
 export function getAnimationClass({
   isInfinite,

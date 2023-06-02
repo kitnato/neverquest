@@ -5,7 +5,6 @@ import { RESERVES } from "@neverquest/data/reserves";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { isRecovering } from "@neverquest/state/character";
 import { Reserve } from "@neverquest/types/enums";
-import { UIAttachment, UISize } from "@neverquest/types/ui";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export function RegenerationMeter({ type }: { type: Reserve.Health | Reserve.Stamina }) {
@@ -58,10 +57,10 @@ export function RegenerationMeter({ type }: { type: Reserve.Health | Reserve.Sta
 
   return (
     <LabelledProgressBar
-      attached={UIAttachment.Above}
+      attached="above"
       disableTransitions
       label={label}
-      size={UISize.Tiny}
+      size="tiny"
       value={(regenerationProgress / regenerationRateValue) * 100}
       variant="secondary"
     />

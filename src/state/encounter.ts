@@ -1,13 +1,13 @@
 import { atom, selector } from "recoil";
 
-import { LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { Location } from "@neverquest/types/enums";
+import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 // SELECTORS
 
-export const isLevelCompleted = withStateKey("isLevelCompleted", (key) =>
+export const isStageCompleted = withStateKey("isStageCompleted", (key) =>
   selector({
     get: ({ get }) => get(progress) === get(progressMaximum),
     key,
@@ -21,11 +21,11 @@ export const isWilderness = withStateKey("isWilderness", (key) =>
   })
 );
 
-export const locationName = withStateKey("locationName", (key) =>
+export const location = withStateKey("location", (key) =>
   selector({
     get: ({ get }) => {
       if (get(isWilderness)) {
-        if (get(maximumLevel) === 1) {
+        if (get(stageMaximum) === 1) {
           return LABEL_UNKNOWN;
         }
 
@@ -38,30 +38,30 @@ export const locationName = withStateKey("locationName", (key) =>
   })
 );
 
-export const maximumLevel = withStateKey("maximumLevel", (key) =>
+export const progressMaximum = withStateKey("progressMaximum", (key) =>
+  selector({
+    get: ({ get }) => 2 + Math.round(98 * getGrowthSigmoid(get(stage))),
+    key,
+  })
+);
+
+export const stageMaximum = withStateKey("stageMaximum", (key) =>
   selector({
     get: ({ get }) => get(wildernesses).length,
     key,
   })
 );
 
-export const progressMaximum = withStateKey("progressMaximum", (key) =>
-  selector({
-    get: ({ get }) => 2 + Math.round(98 * getGrowthSigmoid(get(level))),
-    key,
-  })
-);
-
 export const wilderness = withStateKey("wilderness", (key) =>
   selector({
-    get: ({ get }) => get(wildernesses)[get(level) - 1],
+    get: ({ get }) => get(wildernesses)[get(stage) - 1],
     key,
   })
 );
 
 // ATOMS
 
-export const isLevelStarted = withStateKey("isLevelStarted", (key) =>
+export const isStageStarted = withStateKey("isStageStarted", (key) =>
   atom({
     default: false,
     effects: [handleLocalStorage<boolean>({ key })],
@@ -69,9 +69,9 @@ export const isLevelStarted = withStateKey("isLevelStarted", (key) =>
   })
 );
 
-export const level = withStateKey("level", (key) =>
+export const stage = withStateKey("stage", (key) =>
   atom({
-    default: maximumLevel,
+    default: stageMaximum,
     effects: [handleLocalStorage<number>({ key })],
     key,
   })

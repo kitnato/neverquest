@@ -3,19 +3,21 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterStaggeredMeter } from "@neverquest/components/Monster/MonsterStaggeredMeter";
 import { ReactComponent as IconStaggered } from "@neverquest/icons/monster-staggered.svg";
-import { skills } from "@neverquest/state/skills";
-import { staggerDuration } from "@neverquest/state/statistics";
-import { Skill } from "@neverquest/types/enums";
+import { monsterStaggerDuration } from "@neverquest/state/monster";
 
 export function MonsterStaggered() {
-  const skillTraumatology = useRecoilValue(skills(Skill.Traumatology));
-  const staggerDurationValue = useRecoilValue(staggerDuration);
+  const monsterStaggerDurationValue = useRecoilValue(monsterStaggerDuration);
 
-  if (!skillTraumatology || staggerDurationValue === 0) {
+  if (monsterStaggerDurationValue === 0) {
     return null;
   }
 
   return (
-    <IconDisplay contents={<MonsterStaggeredMeter />} Icon={IconStaggered} tooltip="Staggered" />
+    <IconDisplay
+      contents={<MonsterStaggeredMeter />}
+      Icon={IconStaggered}
+      isAnimated
+      tooltip="Staggered"
+    />
   );
 }

@@ -4,7 +4,6 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Coins } from "@neverquest/components/Resources/Coins";
 import { CREW } from "@neverquest/data/caravan";
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { ReactComponent as IconCrewMember } from "@neverquest/icons/crew-member.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
@@ -12,6 +11,7 @@ import { crew } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import { coins } from "@neverquest/state/resources";
 import { CrewMember, CrewStatus, Showing } from "@neverquest/types/enums";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 
 export function CrewHirable({ type }: { type: CrewMember }) {
   const coinsValue = useRecoilValue(coins);
@@ -20,7 +20,7 @@ export function CrewHirable({ type }: { type: CrewMember }) {
 
   const transactResources = useTransactResources();
 
-  const { coinPrice, description, hirableLevel, name } = CREW[type];
+  const { coinPrice, description, name, requiredStage } = CREW[type];
   const isAffordable = coinPrice <= coinsValue;
 
   const handleHire = () => {
@@ -70,7 +70,7 @@ export function CrewHirable({ type }: { type: CrewMember }) {
   return (
     <IconDisplay
       contents={LABEL_UNKNOWN}
-      description={`Unlocks at Level ${hirableLevel}`}
+      description={`Unlocks at stage ${requiredStage}`}
       Icon={IconUnknown}
       tooltip={LABEL_UNKNOWN}
     />

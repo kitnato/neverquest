@@ -10,7 +10,7 @@ import { ReactComponent as IconAttributes } from "@neverquest/icons/attributes.s
 import { ReactComponent as IconUpgrade } from "@neverquest/icons/upgrade.svg";
 import { areAttributesIncreasable } from "@neverquest/state/attributes";
 import { isAttacking, isGameOver } from "@neverquest/state/character";
-import { isLevelCompleted, isLevelStarted } from "@neverquest/state/encounter";
+import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { Showing } from "@neverquest/types/enums";
 import { getAnimationClass } from "@neverquest/utilities/getters";
@@ -19,8 +19,8 @@ export function AttributesButton() {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isGameOverValue = useRecoilValue(isGameOver);
-  const isLevelCompletedValue = useRecoilValue(isLevelCompleted);
-  const isLevelStartedValue = useRecoilValue(isLevelStarted);
+  const isStageCompletedValue = useRecoilValue(isStageCompleted);
+  const isStageStartedValue = useRecoilValue(isStageStarted);
   const isShowingAttributesButton = useRecoilValue(isShowing(Showing.AttributesButton));
 
   const [isScreenShowing, setScreenShowing] = useState(false);
@@ -39,7 +39,7 @@ export function AttributesButton() {
         >
           <Button
             className={`position-relative${
-              areAttributesIncreasableValue && (isLevelCompletedValue || !isLevelStartedValue)
+              areAttributesIncreasableValue && (isStageCompletedValue || !isStageStartedValue)
                 ? ` ${getAnimationClass({
                     isInfinite: true,
                     type: "pulse",

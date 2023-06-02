@@ -67,8 +67,8 @@ export function generateArmor({
   };
 }
 
-export function generateLocation({ allowNSFW, level }: { allowNSFW: boolean; level: number }) {
-  const growthFactor = getGrowthSigmoid(level);
+export function generateWilderness({ allowNSFW, stage }: { allowNSFW: boolean; stage: number }) {
+  const growthFactor = getGrowthSigmoid(stage);
 
   return LOCRA.generateLocation({
     allowNSFW,

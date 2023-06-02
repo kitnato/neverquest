@@ -8,7 +8,6 @@ import { ReserveMeter } from "@neverquest/components/ReserveMeter";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import { Delta, Reserve, Showing } from "@neverquest/types/enums";
-import { UIAttachment } from "@neverquest/types/ui";
 
 export function Stamina() {
   const isShowingStamina = useRecoilValue(isShowing(Showing.Stamina));
@@ -22,7 +21,7 @@ export function Stamina() {
       contents={
         <Stack>
           <Stack className="w-100" direction="horizontal">
-            <ReserveMeter attached={UIAttachment.Below} type={Reserve.Stamina} />
+            <ReserveMeter attached="below" type={Reserve.Stamina} />
 
             <FloatingText type={Delta.Stamina} />
           </Stack>

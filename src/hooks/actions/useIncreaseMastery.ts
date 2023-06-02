@@ -16,14 +16,20 @@ export function useIncreaseMastery() {
           return;
         }
 
-        const { progress } = get(masteries(type));
+        const { isUnlocked, progress } = get(masteries(type));
+
+        if (!isUnlocked) {
+          return;
+        }
+
         const masteryCostValue = get(masteryCost(type));
 
         const deltaType = MASTERY_DELTA_TYPE[type];
         const newProgress = progress + 1;
 
         if (newProgress === masteryCostValue) {
-          set(masteries(type), ({ rank }) => ({
+          set(masteries(type), ({ rank, ...current }) => ({
+            ...current,
             progress: 0,
             rank: rank + 1,
           }));

@@ -5,15 +5,15 @@ import { TrainSkillButton } from "@neverquest/components/Caravan/Mercenary/Train
 import { SkillDisplay } from "@neverquest/components/Character/SkillDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Coins } from "@neverquest/components/Resources/Coins";
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { SKILLS } from "@neverquest/data/skills";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
-import { characterLevel } from "@neverquest/state/attributes";
+import { level } from "@neverquest/state/attributes";
 import { skills } from "@neverquest/state/skills";
 import type { Skill } from "@neverquest/types/enums";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 
 export function TrainableSkill({ type }: { type: Skill }) {
-  const characterLevelValue = useRecoilValue(characterLevel);
+  const levelValue = useRecoilValue(level);
   const skillValue = useRecoilValue(skills(type));
 
   const { coinPrice, requiredLevel } = SKILLS[type];
@@ -24,7 +24,7 @@ export function TrainableSkill({ type }: { type: Skill }) {
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-      {requiredLevel <= characterLevelValue ? (
+      {requiredLevel <= levelValue ? (
         <>
           <SkillDisplay type={type} />
 
@@ -37,7 +37,7 @@ export function TrainableSkill({ type }: { type: Skill }) {
       ) : (
         <IconDisplay
           contents={LABEL_UNKNOWN}
-          description={`Unlocks at power level ${requiredLevel}`}
+          description={`Unlocks at level ${requiredLevel}`}
           Icon={IconUnknown}
           tooltip={LABEL_UNKNOWN}
         />

@@ -2,11 +2,11 @@ import { useEffect, useMemo } from "react";
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGenerateMerchantInventory";
-import { useIncreaseLevel } from "@neverquest/hooks/actions/useIncreaseLevel";
+import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
-import { isWilderness, level, progress, progressMaximum } from "@neverquest/state/encounter";
+import { isWilderness, progress, progressMaximum, stage } from "@neverquest/state/encounter";
 import { coinsLoot, essenceLoot, scrapLoot } from "@neverquest/state/resources";
 import { skills } from "@neverquest/state/skills";
 import { Skill } from "@neverquest/types/enums";
@@ -17,7 +17,7 @@ declare const window: Window & {
 
 export function CheatQuest() {
   const isWildernessValue = useRecoilValue(isWilderness);
-  const levelValue = useRecoilValue(level);
+  const stageValue = useRecoilValue(stage);
   const progressMaximumValue = useRecoilValue(progressMaximum);
 
   const resetCoinsLoot = useResetRecoilState(coinsLoot);
@@ -34,11 +34,12 @@ export function CheatQuest() {
   const setSkillTraumatology = useSetRecoilState(skills(Skill.Traumatology));
 
   const generateMerchantInventory = useGenerateMerchantInventory();
-  const increaseLevel = useIncreaseLevel();
+  const increaseStage = useIncreaseStage();
+  const resetWilderness = useResetWilderness();
   const toggleLocation = useToggleLocation();
   const transactResources = useTransactResources();
-  const resetWilderness = useResetWilderness();
 
+  // TODO - useAcquireSkill()
   const setSkill = useMemo(
     () => [
       setSkillArmorcraft,
@@ -105,11 +106,11 @@ export function CheatQuest() {
         }
         // Thief
         case "starting_mission": {
-          if (Number.isInteger(value) && value !== undefined && value > levelValue) {
-            const difference = value - levelValue;
+          if (Number.isInteger(value) && value !== undefined && value > stageValue) {
+            const difference = value - stageValue;
 
             for (let i = 0; i < difference; i++) {
-              increaseLevel();
+              increaseStage();
               generateMerchantInventory();
             }
 
@@ -133,9 +134,9 @@ export function CheatQuest() {
     };
   }, [
     generateMerchantInventory,
-    increaseLevel,
+    increaseStage,
     isWildernessValue,
-    levelValue,
+    stageValue,
     progressMaximumValue,
     resetCoinsLoot,
     resetEssenceLoot,

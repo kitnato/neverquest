@@ -2,27 +2,27 @@ import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { MASTERIES } from "@neverquest/data/masteries";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconTenacity } from "@neverquest/icons/tenacity.svg";
 import { deltas } from "@neverquest/state/deltas";
+import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { tenacity } from "@neverquest/state/statistics";
-import { Delta, Mastery, Skill } from "@neverquest/types/enums";
+import { Delta, Showing, Skill } from "@neverquest/types/enums";
+import { LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Tenacity() {
-  const skillArmorcraft = useRecoilValue(skills(Skill.Armorcraft));
+  const isShowingTenacity = useRecoilValue(isShowing(Showing.Tenacity));
   const tenacityValue = useRecoilValue(tenacity);
-
-  const deltaTenacity = deltas(Delta.Tenacity);
+  const skillTenacity = useRecoilValue(skills(Skill.Armorcraft));
 
   useDeltaText({
-    atomDelta: deltaTenacity,
+    atomDelta: deltas(Delta.Tenacity),
     atomValue: tenacity,
   });
 
-  if (!skillArmorcraft) {
+  if (!isShowingTenacity) {
     return null;
   }
 
@@ -30,14 +30,14 @@ export function Tenacity() {
     <IconDisplay
       contents={
         <>
-          <span>{formatPercentage(tenacityValue)}</span>
+          <span>{skillTenacity ? formatPercentage(tenacityValue) : LABEL_EMPTY}</span>
 
           <FloatingText type={Delta.Tenacity} />
         </>
       }
       Icon={IconTenacity}
       isAnimated
-      tooltip={MASTERIES[Mastery.Tenacity].name}
+      tooltip="Chance to skip recovery"
     />
   );
 }

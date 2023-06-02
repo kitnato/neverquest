@@ -3,6 +3,7 @@ import { Button, Form, Modal, OverlayTrigger, Stack, Tooltip } from "react-boots
 import { useRecoilValue } from "recoil";
 
 import { SettingsSwitch } from "@neverquest/components/Header/SettingsSwitch";
+import { ShowEverything } from "@neverquest/components/Header/ShowEverything";
 import { IconImage } from "@neverquest/components/IconImage";
 import { ReactComponent as IconSettings } from "@neverquest/icons/settings.svg";
 import { hasKnapsack } from "@neverquest/state/inventory";
@@ -40,7 +41,7 @@ export function Settings() {
         <Modal.Body>
           <Form>
             <Stack gap={3}>
-              <SettingsSwitch atom={allowNSFW} label="NSFW mode (profanity)" />
+              <h6>Safeguards</h6>
 
               <SettingsSwitch atom={lowHealthWarning} label="Low-health warning" />
 
@@ -48,6 +49,8 @@ export function Settings() {
                 atom={confirmControlWarnings}
                 label="Attack & travel warning-confirmations"
               />
+
+              <h6>Gear</h6>
 
               <SettingsSwitch
                 atom={autoEquip}
@@ -60,6 +63,12 @@ export function Settings() {
               <SettingsSwitch atom={showGearComparison} label="Show gear comparisons" />
 
               <SettingsSwitch atom={showGearLevel} label="Show gear level" />
+
+              <h6>Spoilers</h6>
+
+              <SettingsSwitch atom={allowNSFW} label="NSFW mode (profanity)" />
+
+              <ShowEverything />
             </Stack>
           </Form>
         </Modal.Body>

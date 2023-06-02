@@ -8,7 +8,6 @@ import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetai
 import { StaminaCostDetail } from "@neverquest/components/Inventory/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { type WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
 import { ReactComponent as IconWeaponDamagePerSecond } from "@neverquest/icons/weapon-damage-per-second.svg";
@@ -16,9 +15,9 @@ import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-dam
 import { weapon as weaponEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { showDamagePerSecond } from "@neverquest/state/settings";
-import { skills } from "@neverquest/state/skills";
 import type { Weapon } from "@neverquest/types";
 import { Showing } from "@neverquest/types/enums";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import {
   capitalizeAll,
   formatMilliseconds,
@@ -39,14 +38,14 @@ export function WeaponName({
   const weaponEquippedValue = useRecoilValue(weaponEquipped);
 
   const { abilityChance, damage, gearClass, level, name, rate, staminaCost, weight } = weapon;
-  const { abilityName, IconAbility, IconGearClass, skillType } = WEAPON_SPECIFICATIONS[gearClass];
+  const { abilityName, IconAbility, IconGearClass, showingType } = WEAPON_SPECIFICATIONS[gearClass];
   const damagePerSecond = getDamagePerRate({
     damage,
     rate,
   });
   const isEquipped = JSON.stringify(weaponEquippedValue) === JSON.stringify(weapon);
 
-  const skillValue = useRecoilValue(skills(skillType));
+  const isShowingAbility = useRecoilValue(isShowing(showingType));
 
   return (
     <OverlayTrigger
@@ -148,7 +147,7 @@ export function WeaponName({
               </tr>
 
               <tr>
-                {skillValue ? (
+                {isShowingAbility ? (
                   <>
                     <td className={CLASS_TABLE_CELL_ITALIC}>{abilityName} chance:</td>
 

@@ -3,11 +3,11 @@ import { atom, atomFamily, selector, selectorFamily } from "recoil";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { essence } from "@neverquest/state/resources";
+import type { UnlockedState } from "@neverquest/types";
 import type { Attribute } from "@neverquest/types/enums";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 
-type AttributeState = {
-  isUnlocked: boolean;
+type AttributeState = UnlockedState & {
   points: number;
 };
 
@@ -16,14 +16,14 @@ type AttributeState = {
 export const attributePoints = withStateKey("attributePoints", (key) =>
   selector({
     get: ({ get }) => {
-      const nextPowerLevel = get(characterLevel) + 1;
+      const nextLevel = get(level) + 1;
 
       let points = 0;
       let requiredEssence = get(attributeCost);
 
       while (requiredEssence <= get(essence)) {
         points += 1;
-        requiredEssence += getGrowthTriangular(nextPowerLevel + points);
+        requiredEssence += getGrowthTriangular(nextLevel + points);
       }
 
       return points;
@@ -34,7 +34,7 @@ export const attributePoints = withStateKey("attributePoints", (key) =>
 
 export const attributeCost = withStateKey("attributeCost", (key) =>
   selector({
-    get: ({ get }) => getGrowthTriangular(get(characterLevel) + 1),
+    get: ({ get }) => getGrowthTriangular(get(level) + 1),
     key,
   })
 );
@@ -51,7 +51,7 @@ export const essenceAbsorbed = withStateKey("essenceAbsorbed", (key) =>
     get: ({ get }) => {
       let total = 0;
 
-      for (let i = 0; i <= get(characterLevel); i++) {
+      for (let i = 0; i <= get(level); i++) {
         total += getGrowthTriangular(i);
       }
 
@@ -90,7 +90,7 @@ export const attributes = withStateKey("attributes", (key) =>
   })
 );
 
-export const characterLevel = withStateKey("characterLevel", (key) =>
+export const level = withStateKey("level", (key) =>
   atom({
     default: 0,
     effects: [handleLocalStorage<number>({ key })],

@@ -8,16 +8,15 @@ import { GearComparison } from "@neverquest/components/Inventory/GearComparison"
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { type ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
 import { ReactComponent as IconNone } from "@neverquest/icons/gear-class-none.svg";
 import { ReactComponent as IconProtection } from "@neverquest/icons/protection.svg";
 import { armor as armorEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { skills } from "@neverquest/state/skills";
 import type { Armor } from "@neverquest/types";
-import { Showing, Skill } from "@neverquest/types/enums";
+import { Showing } from "@neverquest/types/enums";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function ArmorName({
@@ -28,9 +27,9 @@ export function ArmorName({
   placement?: Placement;
 }) {
   const armorEquippedValue = useRecoilValue(armorEquipped);
+  const isShowingDeflection = useRecoilValue(isShowing(Showing.Deflection));
+  const isShowingDodgePenalty = useRecoilValue(isShowing(Showing.DodgePenalty));
   const isShowingGearClass = useRecoilValue(isShowing(Showing.GearClass));
-  const skillArmorcraft = useRecoilValue(skills(Skill.Armorcraft));
-  const skillEvasion = useRecoilValue(skills(Skill.Evasion));
 
   const { deflection, level, name, protection, staminaCost, weight } = armor;
   const isEquipped = JSON.stringify(armorEquippedValue) === JSON.stringify(armor);
@@ -105,7 +104,7 @@ export function ArmorName({
 
               {deflection > 0 && (
                 <tr>
-                  {skillArmorcraft ? (
+                  {isShowingDeflection ? (
                     <>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Deflection chance:</td>
 
@@ -128,7 +127,7 @@ export function ArmorName({
 
               {staminaCost > 0 && (
                 <tr>
-                  {skillEvasion ? (
+                  {isShowingDodgePenalty ? (
                     <>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Dodge penalty:</td>
 

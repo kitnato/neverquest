@@ -38,9 +38,7 @@ export function useTransactResources() {
         if (coinsValue !== 0) {
           set(coins, (current) => current + coinsValue);
 
-          if (!get(isShowing(Showing.Coins))) {
-            set(isShowing(Showing.Coins), true);
-          }
+          set(isShowing(Showing.Coins), true);
 
           if (isLooting) {
             set(coinsLoot, 0);
@@ -50,13 +48,8 @@ export function useTransactResources() {
         if (essenceValue !== 0) {
           set(essence, (current) => current + essenceValue);
 
-          if (!get(isShowing(Showing.Essence))) {
-            set(isShowing(Showing.Essence), true);
-          }
-
-          if (!get(isShowing(Showing.AttributesButton))) {
-            set(isShowing(Showing.AttributesButton), true);
-          }
+          set(isShowing(Showing.Essence), true);
+          set(isShowing(Showing.AttributesButton), true);
 
           if (isLooting) {
             set(essenceLoot, 0);
@@ -66,9 +59,7 @@ export function useTransactResources() {
         if (scrapValue !== 0) {
           set(scrap, (current) => current + scrapValue);
 
-          if (!get(isShowing(Showing.Scrap))) {
-            set(isShowing(Showing.Scrap), true);
-          }
+          set(isShowing(Showing.Scrap), true);
 
           if (isLooting) {
             set(scrapLoot, 0);

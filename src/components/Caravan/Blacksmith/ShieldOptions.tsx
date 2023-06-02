@@ -6,7 +6,6 @@ import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGe
 import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { BLACKSMITH_GEAR_LEVEL_MAXIMUM } from "@neverquest/data/caravan";
-import { LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconClass } from "@neverquest/icons/gear-class.svg";
@@ -15,23 +14,25 @@ import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { type ShieldClass, ShieldClasses } from "@neverquest/LOCRA/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
-import { level } from "@neverquest/state/encounter";
+import { stage } from "@neverquest/state/encounter";
+import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
-import { Skill } from "@neverquest/types/enums";
+import { Showing, Skill } from "@neverquest/types/enums";
+import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 import { generateShield } from "@neverquest/utilities/generators";
 
 export function ShieldOptions() {
   const allowNSFWValue = useRecoilValue(allowNSFW);
   const { shield: craftedShield } = useRecoilValue(blacksmithInventory);
-  const levelValue = useRecoilValue(level);
+  const stageValue = useRecoilValue(stage);
 
   const [shieldClass, setShieldClass] = useState<ShieldClass>("small");
-  const [shieldLevel, setShieldLevel] = useState(levelValue);
+  const [shieldLevel, setShieldLevel] = useState(stageValue);
 
+  const isShowingStagger = useRecoilValue(isShowing(Showing.Stagger));
   const skillShieldcraft = useRecoilValue(skills(Skill.Shieldcraft));
-  const skillTraumatology = useRecoilValue(skills(Skill.Traumatology));
 
   const shield = generateShield({
     allowNSFW: allowNSFWValue,
@@ -41,7 +42,7 @@ export function ShieldOptions() {
     level: shieldLevel,
   });
   const { ranges, stagger, staminaCost, weight } = shield;
-  const maximumShieldLevel = levelValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
+  const maximumShieldLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
 
   return (
     <>
@@ -101,10 +102,10 @@ export function ShieldOptions() {
         />
 
         <IconDisplay
-          contents={skillTraumatology ? formatPercentage(stagger) : LABEL_UNKNOWN}
-          Icon={skillTraumatology ? IconStamina : IconUnknown}
+          contents={isShowingStagger ? formatPercentage(stagger) : LABEL_UNKNOWN}
+          Icon={isShowingStagger ? IconStamina : IconUnknown}
           iconProps={{ overlayPlacement: "left" }}
-          tooltip={skillTraumatology ? "Stagger chance" : LABEL_UNKNOWN}
+          tooltip={isShowingStagger ? "Stagger chance" : LABEL_UNKNOWN}
         />
 
         <IconDisplay

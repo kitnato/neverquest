@@ -1,14 +1,14 @@
 import { atom, selector } from "recoil";
 
-import { LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import { maximumStamina, staminaDebuff } from "@neverquest/state/reserves";
+import { blight, staminaMaximum } from "@neverquest/state/reserves";
+import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 
 // SELECTORS
 
 export const isBlighted = withStateKey("isBlighted", (key) =>
   selector({
-    get: ({ get }) => get(maximumStamina) === get(staminaDebuff),
+    get: ({ get }) => get(staminaMaximum) === get(blight),
     key,
   })
 );

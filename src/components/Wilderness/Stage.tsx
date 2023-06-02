@@ -3,33 +3,31 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconWildernessLevel } from "@neverquest/icons/wilderness-level.svg";
+import { ReactComponent as IconStage } from "@neverquest/icons/stage.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { level } from "@neverquest/state/encounter";
+import { stage } from "@neverquest/state/encounter";
 import { Delta } from "@neverquest/types/enums";
 
-export function WildernessLevel() {
-  const levelValue = useRecoilValue(level);
-
-  const deltaWildernessLevel = deltas(Delta.WildernessLevel);
+export function Stage() {
+  const stageValue = useRecoilValue(stage);
 
   useDeltaText({
-    atomDelta: deltaWildernessLevel,
-    atomValue: level,
+    atomDelta: deltas(Delta.Stage),
+    atomValue: stage,
   });
 
   return (
     <IconDisplay
       contents={
         <>
-          <span>{levelValue}</span>
+          <span>{stageValue}</span>
 
-          <FloatingText type={Delta.WildernessLevel} />
+          <FloatingText type={Delta.Stage} />
         </>
       }
-      Icon={IconWildernessLevel}
+      Icon={IconStage}
       iconProps={{ overlayPlacement: "bottom" }}
-      tooltip="Level"
+      tooltip="Stage"
     />
   );
 }

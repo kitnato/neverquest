@@ -10,15 +10,13 @@ import { deltas } from "@neverquest/state/deltas";
 import { isWilderness, progress, progressMaximum } from "@neverquest/state/encounter";
 import { Delta } from "@neverquest/types/enums";
 
-export function WildernessProgress() {
+export function Progress() {
   const isWildernessValue = useRecoilValue(isWilderness);
   const progressValue = useRecoilValue(progress);
   const progressMaximumValue = useRecoilValue(progressMaximum);
 
-  const deltaWildernessProgress = deltas(Delta.WildernessProgress);
-
   useDeltaText({
-    atomDelta: deltaWildernessProgress,
+    atomDelta: deltas(Delta.Progress),
     atomValue: progress,
     stop: (_, current) => current === 0,
   });
@@ -38,7 +36,7 @@ export function WildernessProgress() {
               variant="dark"
             />
 
-            <FloatingText type={Delta.WildernessProgress} />
+            <FloatingText type={Delta.Progress} />
           </Stack>
         }
         Icon={IconProgress}

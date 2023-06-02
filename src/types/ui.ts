@@ -29,12 +29,6 @@ export type FloatingText = {
   key: string;
 };
 
-export enum UIAttachment {
-  Above,
-  Below,
-}
+export type UIAttachment = "above" | "below";
 
-export enum UISize {
-  Normal,
-  Tiny,
-}
+export type UISize = "normal" | "tiny";

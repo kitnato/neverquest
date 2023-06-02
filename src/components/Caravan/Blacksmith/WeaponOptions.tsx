@@ -6,7 +6,6 @@ import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGe
 import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { BLACKSMITH_GEAR_LEVEL_MAXIMUM } from "@neverquest/data/caravan";
-import { LABEL_UNKNOWN } from "@neverquest/data/internal";
 import { WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconClass } from "@neverquest/icons/gear-class.svg";
@@ -18,9 +17,10 @@ import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
 import { type WeaponClass, WeaponClasses } from "@neverquest/LOCRA/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
-import { level } from "@neverquest/state/encounter";
+import { stage } from "@neverquest/state/encounter";
+import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
-import { skills } from "@neverquest/state/skills";
+import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import {
   capitalizeAll,
   formatMilliseconds,
@@ -31,14 +31,14 @@ import { generateWeapon } from "@neverquest/utilities/generators";
 export function WeaponOptions() {
   const { weapon: craftedWeapon } = useRecoilValue(blacksmithInventory);
   const allowNSFWValue = useRecoilValue(allowNSFW);
-  const levelValue = useRecoilValue(level);
+  const stageValue = useRecoilValue(stage);
 
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
-  const [weaponLevel, setWeaponLevel] = useState(levelValue);
+  const [weaponLevel, setWeaponLevel] = useState(stageValue);
 
-  const { abilityName, skillType } = WEAPON_SPECIFICATIONS[weaponClass];
+  const { abilityName, showingType } = WEAPON_SPECIFICATIONS[weaponClass];
 
-  const skillValue = useRecoilValue(skills(skillType));
+  const isShowingValue = useRecoilValue(isShowing(showingType));
 
   const weapon = generateWeapon({
     allowNSFW: allowNSFWValue,
@@ -48,14 +48,14 @@ export function WeaponOptions() {
     level: weaponLevel,
     modality: "melee",
     tags:
-      weaponLevel < levelValue - 1
+      weaponLevel < stageValue - 1
         ? ["lowQuality"]
-        : weaponLevel > levelValue + 1
+        : weaponLevel > stageValue + 1
         ? ["highQuality"]
         : undefined,
   });
   const { abilityChance, ranges, staminaCost, weight } = weapon;
-  const maximumWeaponLevel = levelValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
+  const maximumWeaponLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
 
   return (
     <>
@@ -122,10 +122,10 @@ export function WeaponOptions() {
         />
 
         <IconDisplay
-          contents={skillValue ? formatPercentage(abilityChance) : LABEL_UNKNOWN}
-          Icon={skillValue ? IconWeaponAbility : IconUnknown}
+          contents={isShowingValue ? formatPercentage(abilityChance) : LABEL_UNKNOWN}
+          Icon={isShowingValue ? IconWeaponAbility : IconUnknown}
           iconProps={{ overlayPlacement: "left" }}
-          tooltip={skillValue ? `${abilityName} chance` : LABEL_UNKNOWN}
+          tooltip={isShowingValue ? `${abilityName} chance` : LABEL_UNKNOWN}
         />
 
         <IconDisplay

@@ -3,15 +3,15 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterBleedingMeter } from "@neverquest/components/Monster/MonsterBleedingMeter";
 import { ReactComponent as IconBleeding } from "@neverquest/icons/bleeding.svg";
-import { skills } from "@neverquest/state/skills";
+import { isShowing } from "@neverquest/state/isShowing";
 import { bleed } from "@neverquest/state/statistics";
-import { Skill } from "@neverquest/types/enums";
+import { Showing } from "@neverquest/types/enums";
 
 export function MonsterBleeding() {
   const bleedValue = useRecoilValue(bleed);
-  const skillAnatomy = useRecoilValue(skills(Skill.Anatomy));
+  const isShowingBleed = useRecoilValue(isShowing(Showing.Bleed));
 
-  if (bleedValue === 0 || !skillAnatomy) {
+  if (bleedValue === 0 || !isShowingBleed) {
     return null;
   }
 

@@ -1,7 +1,15 @@
+@font-face {
+  font-family: "AoboshiOne-Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("AoboshiOne-Regular"), url("AoboshiOne-Regular.woff") format("woff");
+}
+
 $accordion-border-color: var(--bs-border-color-translucent);
 $accordion-button-active-bg: none;
 $accordion-button-active-color: var(--bs-body-color);
 $component-active-bg: #212529; // var(--bs-gray-900)
+$font-family-base: "AoboshiOne-Regular", serif;
 $nav-link-hover-color: var(--bs-gray-600);
 $nav-link-color: var(--bs-gray-900);
 $offcanvas-horizontal-width: 45%;

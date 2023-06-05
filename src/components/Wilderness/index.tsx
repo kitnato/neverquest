@@ -34,7 +34,7 @@ export function Wilderness() {
   }
 
   return (
-    <Card className={getAnimationClass({ type: "flipInX" })}>
+    <Card className={getAnimationClass({ speed: "fast", type: "zoomIn" })}>
       <Card.Body>
         <IconDisplay
           contents={<span className="fst-italic">The darkness stirs.</span>}

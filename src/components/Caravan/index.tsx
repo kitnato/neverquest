@@ -44,7 +44,7 @@ export function Caravan() {
 
   return (
     <>
-      <Card className={getAnimationClass({ type: "flipInX" })}>
+      <Card className={getAnimationClass({ speed: "fast", type: "zoomIn" })}>
         <Card.Body>
           <Stack gap={5}>
             <Stack gap={3}>

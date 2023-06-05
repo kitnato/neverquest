@@ -6,6 +6,7 @@ export type AnimationType =
   | "flipInX"
   | "headShake"
   | "pulse"
+  | "zoomIn"
   | "zoomInRight";
 
 export type BootstrapColorVariant = "dark" | "outline-dark" | "secondary";

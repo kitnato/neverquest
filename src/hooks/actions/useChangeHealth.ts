@@ -23,7 +23,7 @@ export function useChangeHealth() {
 
         set(
           deltas(Delta.Health),
-          delta === undefined
+          delta === undefined || (Array.isArray(delta) && delta.length === 0)
             ? ({
                 color: isPositive ? "text-success" : "text-danger",
                 value: isPositive ? `+${value}` : value,

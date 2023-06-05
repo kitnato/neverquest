@@ -73,10 +73,12 @@ export function useDefend() {
           }
         }
 
+        const protectionValue = get(protection);
+
         // If health damage (protection minus monster damage) is 0 or less, nothing else happens.
         const monsterDamageValue = get(monsterDamage);
         let healthDamage = (() => {
-          const damage = get(protection) - monsterDamageValue;
+          const damage = protectionValue - monsterDamageValue;
 
           return damage < 0 ? damage : 0;
         })();
@@ -204,20 +206,18 @@ export function useDefend() {
           }
         }
 
-        // If neither parried nor blocked, show damage.
-        if (!hasBlocked && !hasParried) {
-          if (get(protection) > 0) {
-            deltaHealth = [
-              {
-                color: "text-danger",
-                value: healthDamage,
-              },
-              {
-                color: "text-muted",
-                value: ` (${get(protection)})`,
-              },
-            ];
-          }
+        // If neither parried nor blocked, show damage with protection.
+        if (!hasBlocked && !hasParried && protectionValue > 0) {
+          deltaHealth = [
+            {
+              color: "text-danger",
+              value: healthDamage,
+            },
+            {
+              color: "text-muted",
+              value: ` (${protectionValue})`,
+            },
+          ];
         }
 
         const hasIgnoredRecovery = get(skills(Skill.Armorcraft)) && Math.random() <= get(tenacity);

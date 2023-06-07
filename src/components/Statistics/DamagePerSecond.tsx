@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "../FloatingText";
@@ -26,11 +27,11 @@ export function DamagePerSecond() {
   return (
     <IconDisplay
       contents={
-        <>
+        <Stack direction="horizontal">
           <span>{formatFloat(damagePerSecondValue)}</span>
 
-          <FloatingText deltaType="damagePerSecond" isRelative />
-        </>
+          <FloatingText deltaType="damagePerSecond" />
+        </Stack>
       }
       Icon={IconDamagePerSecond}
       iconProps={{ ignoreColor: true, overlayPlacement: "bottom", size: "tiny" }}

@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover } from "react-bootstrap";
+import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
@@ -38,7 +38,7 @@ export function Dodge() {
   return (
     <IconDisplay
       contents={
-        <>
+        <Stack direction="horizontal">
           <OverlayTrigger
             overlay={
               <Popover>
@@ -69,7 +69,7 @@ export function Dodge() {
           </OverlayTrigger>
 
           <FloatingText deltaType="dodge" />
-        </>
+        </Stack>
       }
       Icon={IconDodge}
       isAnimated

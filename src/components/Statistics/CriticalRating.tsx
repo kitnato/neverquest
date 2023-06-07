@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover } from "react-bootstrap";
+import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
@@ -33,7 +33,7 @@ export function CriticalRating() {
   return (
     <IconDisplay
       contents={
-        <>
+        <Stack direction="horizontal">
           <OverlayTrigger
             overlay={
               <Popover>
@@ -62,7 +62,7 @@ export function CriticalRating() {
           </OverlayTrigger>
 
           <FloatingText deltaType="criticalRating" />
-        </>
+        </Stack>
       }
       Icon={IconCriticalRating}
       isAnimated

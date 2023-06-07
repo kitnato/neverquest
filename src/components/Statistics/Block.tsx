@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
@@ -26,11 +27,11 @@ export function Block() {
   return (
     <IconDisplay
       contents={
-        <>
+        <Stack direction="horizontal">
           <span>{formatPercentage(blockValue)}</span>
 
           <FloatingText deltaType="block" />
-        </>
+        </Stack>
       }
       Icon={IconBlock}
       isAnimated

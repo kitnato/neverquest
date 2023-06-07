@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
@@ -29,11 +30,11 @@ export function Deflection() {
   return (
     <IconDisplay
       contents={
-        <>
+        <Stack direction="horizontal">
           <span>{skillArmorcraft ? formatPercentage(deflectionValue) : LABEL_EMPTY}</span>
 
           <FloatingText deltaType="deflection" />
-        </>
+        </Stack>
       }
       Icon={IconDeflection}
       isAnimated

@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover } from "react-bootstrap";
+import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { RegenerationMeter } from "@neverquest/components/Character/RegenerationMeter";
@@ -41,7 +41,7 @@ export function Regeneration({ type }: { type: "health" | "stamina" }) {
   });
 
   return (
-    <>
+    <Stack className="w-100" direction="horizontal">
       <OverlayTrigger
         overlay={
           <Popover>
@@ -96,8 +96,7 @@ export function Regeneration({ type }: { type: "health" | "stamina" }) {
 
       <FloatingText
         deltaType={type === "health" ? "healthRegenerationRate" : "staminaRegenerationRate"}
-        isRelative
       />
-    </>
+    </Stack>
   );
 }

@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
@@ -18,11 +19,11 @@ export function EssenceAbsorbed() {
   return (
     <IconDisplay
       contents={
-        <>
+        <Stack direction="horizontal">
           <span>{essenceAbsorbedValue}</span>
 
           <FloatingText deltaType="essenceAbsorbed" />
-        </>
+        </Stack>
       }
       Icon={IconEssenceAbsorbed}
       tooltip="Absorbed essence"

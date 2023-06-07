@@ -31,7 +31,7 @@ export function Resource({
   }
 
   return (
-    <Stack className={getAnimationClass({ type: "flipInX" })} direction="horizontal" gap={3}>
+    <Stack className={getAnimationClass({ type: "flipInX" })} direction="horizontal">
       <Component value={lootValue} />
 
       <FloatingText deltaType={deltaType} />

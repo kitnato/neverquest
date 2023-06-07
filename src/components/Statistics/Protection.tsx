@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
@@ -24,11 +25,11 @@ export function Protection() {
   return (
     <IconDisplay
       contents={
-        <>
+        <Stack direction="horizontal">
           <span>{protectionValue}</span>
 
           <FloatingText deltaType="protection" />
-        </>
+        </Stack>
       }
       Icon={IconProtection}
       isAnimated

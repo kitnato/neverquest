@@ -30,7 +30,7 @@ export function Damage() {
   return (
     <IconDisplay
       contents={
-        <Stack direction="horizontal" gap={3}>
+        <Stack direction="horizontal">
           <OverlayTrigger
             overlay={
               <Popover>

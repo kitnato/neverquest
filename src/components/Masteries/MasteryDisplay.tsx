@@ -25,14 +25,14 @@ export function MasteryDisplay({ type }: { type: Mastery }) {
   return (
     <IconDisplay
       contents={
-        <Stack direction="horizontal">
+        <Stack className="w-100" direction="horizontal">
           <Stack className="w-100" direction="horizontal" gap={3}>
             <span>{rank}</span>
 
             <LabelledProgressBar label={label} value={value} variant="secondary" />
           </Stack>
 
-          <FloatingText deltaType={type} isRelative />
+          <FloatingText deltaType={type} />
         </Stack>
       }
       description={description}

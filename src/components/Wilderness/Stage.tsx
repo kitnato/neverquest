@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
@@ -18,11 +19,11 @@ export function Stage() {
   return (
     <IconDisplay
       contents={
-        <>
+        <Stack direction="horizontal">
           <span>{stageValue}</span>
 
           <FloatingText deltaType="stage" />
-        </>
+        </Stack>
       }
       Icon={IconStage}
       iconProps={{ overlayPlacement: "bottom" }}

@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover } from "react-bootstrap";
+import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
@@ -40,7 +40,7 @@ export function BleedRating() {
   return (
     <IconDisplay
       contents={
-        <>
+        <Stack direction="horizontal">
           <OverlayTrigger
             overlay={
               <Popover>
@@ -83,7 +83,7 @@ export function BleedRating() {
           </OverlayTrigger>
 
           <FloatingText deltaType="bleedRating" />
-        </>
+        </Stack>
       }
       Icon={IconBleedRating}
       isAnimated

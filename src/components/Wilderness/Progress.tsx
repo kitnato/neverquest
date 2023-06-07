@@ -25,7 +25,7 @@ export function Progress() {
   }
 
   return (
-    <div className="w-100">
+    <Stack className="w-100">
       <IconDisplay
         contents={
           <Stack className="w-100" direction="horizontal">
@@ -35,13 +35,13 @@ export function Progress() {
               variant="dark"
             />
 
-            <FloatingText deltaType="progress" isRelative />
+            <FloatingText deltaType="progress" />
           </Stack>
         }
         Icon={IconProgress}
         iconProps={{ overlayPlacement: "bottom" }}
         tooltip="Progress"
       />
-    </div>
+    </Stack>
   );
 }

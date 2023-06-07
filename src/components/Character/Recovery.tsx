@@ -82,7 +82,7 @@ export function Recovery() {
           <Stack className="w-100" direction="horizontal">
             <RecoveryMeter />
 
-            <FloatingText deltaType="recoveryRate" isRelative />
+            <FloatingText deltaType="recoveryRate" />
           </Stack>
         </OverlayTrigger>
       }

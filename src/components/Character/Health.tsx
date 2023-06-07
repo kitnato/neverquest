@@ -14,7 +14,7 @@ export function Health() {
           <Stack className="w-100" direction="horizontal">
             <ReserveMeter attached="below" type="health" />
 
-            <FloatingText deltaType="health" isRelative />
+            <FloatingText deltaType="health" />
           </Stack>
 
           <Regeneration type="health" />

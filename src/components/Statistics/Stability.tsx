@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
@@ -28,11 +29,11 @@ export function Stability() {
   return (
     <IconDisplay
       contents={
-        <>
+        <Stack direction="horizontal">
           <span>{skillShieldcraft ? formatPercentage(stabilityValue) : LABEL_EMPTY}</span>
 
           <FloatingText deltaType="stability" />
-        </>
+        </Stack>
       }
       Icon={IconStability}
       isAnimated

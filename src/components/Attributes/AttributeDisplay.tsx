@@ -16,7 +16,7 @@ import {
   isAttributeAtMaximum,
 } from "@neverquest/state/attributes";
 import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
-import type { Attribute } from "@neverquest/types/enums";
+import type { Attribute } from "@neverquest/types/unions";
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
   LABEL_AT_MAXIMUM,

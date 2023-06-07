@@ -9,7 +9,7 @@ import { SKILLS } from "@neverquest/data/skills";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { level } from "@neverquest/state/attributes";
 import { skills } from "@neverquest/state/skills";
-import type { Skill } from "@neverquest/types/enums";
+import type { Skill } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 
 export function TrainableSkill({ type }: { type: Skill }) {

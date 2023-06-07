@@ -8,17 +8,16 @@ import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { stability } from "@neverquest/state/statistics";
-import { Delta, Showing, Skill } from "@neverquest/types/enums";
 import { LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Stability() {
-  const isShowingStability = useRecoilValue(isShowing(Showing.Stability));
-  const skillShieldcraft = useRecoilValue(skills(Skill.Shieldcraft));
+  const isShowingStability = useRecoilValue(isShowing("stability"));
+  const skillShieldcraft = useRecoilValue(skills("shieldcraft"));
   const stabilityValue = useRecoilValue(stability);
 
   useDeltaText({
-    atomDelta: deltas(Delta.Stability),
+    atomDelta: deltas("stability"),
     atomValue: stability,
   });
 
@@ -32,7 +31,7 @@ export function Stability() {
         <>
           <span>{skillShieldcraft ? formatPercentage(stabilityValue) : LABEL_EMPTY}</span>
 
-          <FloatingText type={Delta.Stability} />
+          <FloatingText type="stability" />
         </>
       }
       Icon={IconStability}

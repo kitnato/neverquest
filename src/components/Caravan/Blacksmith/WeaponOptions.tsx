@@ -15,7 +15,7 @@ import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { ReactComponent as IconWeaponAbility } from "@neverquest/icons/weapon-ability.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
-import { type WeaponClass, WeaponClasses } from "@neverquest/LOCRA/types";
+import { WEAPON_CLASSES, type WeaponClass } from "@neverquest/LOCRA/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -93,7 +93,7 @@ export function WeaponOptions() {
               onChange={({ target: { value } }) => setWeaponClass(value as WeaponClass)}
               value={weaponClass}
             >
-              {WeaponClasses.map((weaponClass) => (
+              {WEAPON_CLASSES.map((weaponClass) => (
                 <option key={weaponClass} value={weaponClass}>
                   {capitalizeAll(weaponClass)}
                 </option>

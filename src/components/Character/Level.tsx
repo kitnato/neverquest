@@ -6,13 +6,12 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconLevel } from "@neverquest/icons/level.svg";
 import { level } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
-import { Delta } from "@neverquest/types/enums";
 
 export function Level() {
   const levelValue = useRecoilValue(level);
 
   useDeltaText({
-    atomDelta: deltas(Delta.Level),
+    atomDelta: deltas("level"),
     atomValue: level,
   });
 
@@ -22,7 +21,7 @@ export function Level() {
         <>
           <span>{levelValue}</span>
 
-          <FloatingText type={Delta.Level} />
+          <FloatingText type="level" />
         </>
       }
       Icon={IconLevel}

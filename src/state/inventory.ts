@@ -4,14 +4,14 @@ import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory
 import { ENCUMBRANCE } from "@neverquest/data/statistics";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { Armor, Inventory, Shield, Weapon } from "@neverquest/types";
-import { GearType } from "@neverquest/types/enums";
+import type { GearType } from "@neverquest/types/unions";
 
 // SELECTORS
 
 export const armor = withStateKey("armor", (key) =>
   selector({
     get: ({ get }) => {
-      const equippedArmorID = get(equippedGearID(GearType.Armor));
+      const equippedArmorID = get(equippedGearID("armor"));
 
       if (equippedArmorID === null) {
         return ARMOR_NONE;
@@ -51,9 +51,9 @@ export const equippedGearIDs = withStateKey("equippedGearIDs", (key) =>
   selector({
     get: ({ get }) =>
       [
-        get(equippedGearID(GearType.Weapon)),
-        get(equippedGearID(GearType.Armor)),
-        get(equippedGearID(GearType.Shield)),
+        get(equippedGearID("weapon")),
+        get(equippedGearID("armor")),
+        get(equippedGearID("shield")),
       ].filter((id) => Boolean(id)) as string[],
     key,
   })
@@ -69,7 +69,7 @@ export const isInventoryFull = withStateKey("isInventoryFull", (key) =>
 export const shield = withStateKey("shield", (key) =>
   selector({
     get: ({ get }) => {
-      const equippedShieldID = get(equippedGearID(GearType.Shield));
+      const equippedShieldID = get(equippedGearID("shield"));
 
       if (equippedShieldID === null) {
         return SHIELD_NONE;
@@ -84,7 +84,7 @@ export const shield = withStateKey("shield", (key) =>
 export const weapon = withStateKey("weapon", (key) =>
   selector({
     get: ({ get }) => {
-      const equippedWeaponID = get(equippedGearID(GearType.Weapon));
+      const equippedWeaponID = get(equippedGearID("weapon"));
 
       if (equippedWeaponID === null) {
         return WEAPON_NONE;

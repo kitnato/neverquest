@@ -4,7 +4,6 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { isShowing } from "@neverquest/state/isShowing";
-import { Showing } from "@neverquest/types/enums";
 import type { ComparisonProps } from "@neverquest/types/props";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 
@@ -15,7 +14,7 @@ export function WeightDetail({
   comparison?: ComparisonProps;
   weight: number;
 }) {
-  const isShowingWeight = useRecoilValue(isShowing(Showing.Weight));
+  const isShowingWeight = useRecoilValue(isShowing("weight"));
 
   return (
     <tr>

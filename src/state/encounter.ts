@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil";
 
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import { Location } from "@neverquest/types/enums";
+import type { Location } from "@neverquest/types/unions";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
@@ -16,7 +16,7 @@ export const isStageCompleted = withStateKey("isStageCompleted", (key) =>
 
 export const isWilderness = withStateKey("isWilderness", (key) =>
   selector({
-    get: ({ get }) => get(mode) === Location.Wilderness,
+    get: ({ get }) => get(mode) === "wilderness",
     key,
   })
 );
@@ -79,7 +79,7 @@ export const stage = withStateKey("stage", (key) =>
 
 export const mode = withStateKey("mode", (key) =>
   atom({
-    default: Location.Wilderness,
+    default: "wilderness" as Location,
     effects: [handleLocalStorage<Location>({ key })],
     key,
   })

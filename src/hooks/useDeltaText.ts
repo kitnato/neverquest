@@ -7,15 +7,15 @@ import {
 } from "recoil";
 
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
-import { DeltaText } from "@neverquest/types/enums";
 import type { BootstrapTextVariant, DeltaDisplay } from "@neverquest/types/ui";
+import type { DeltaText } from "@neverquest/types/unions";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function useDeltaText({
   atomDelta,
   atomValue,
   stop = (previous) => previous === null,
-  type = DeltaText.Number,
+  type = "number",
 }: {
   atomDelta: RecoilState<DeltaDisplay>;
   atomValue: RecoilValueReadOnly<number>;
@@ -27,8 +27,8 @@ export function useDeltaText({
 
   const previousValue = usePreviousValue(currentValue);
 
-  const isPercentage = type === DeltaText.Percentage;
-  const isTime = type === DeltaText.Time;
+  const isPercentage = type === "percentage";
+  const isTime = type === "time";
   const negativeColor: BootstrapTextVariant = isTime ? "text-success" : "text-danger";
   const positiveColor: BootstrapTextVariant = isTime ? "text-danger" : "text-success";
 

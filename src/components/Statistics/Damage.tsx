@@ -13,21 +13,20 @@ import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { showDamagePerSecond } from "@neverquest/state/settings";
 import { damage, damagePerSecond, damageTotal } from "@neverquest/state/statistics";
-import { Attribute, Delta, Showing } from "@neverquest/types/enums";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 
 export function Damage() {
   const damageValue = useRecoilValue(damage);
   const damageTotalValue = useRecoilValue(damageTotal);
   const damagePerSecondValue = useRecoilValue(damagePerSecond);
-  const isShowingDamageDetails = useRecoilValue(isShowing(Showing.DamageDetails));
+  const isShowingDamageDetails = useRecoilValue(isShowing("damageDetails"));
   const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
   const weaponValue = useRecoilValue(weapon);
 
-  const { name } = ATTRIBUTES[Attribute.Strength];
+  const { name } = ATTRIBUTES.strength;
 
   useDeltaText({
-    atomDelta: deltas(Delta.Damage),
+    atomDelta: deltas("damage"),
     atomValue: damageTotal,
   });
 
@@ -62,7 +61,7 @@ export function Damage() {
             <span>{damageTotalValue}</span>
           </OverlayTrigger>
 
-          <FloatingText type={Delta.Damage} />
+          <FloatingText type="damage" />
         </>
       }
       description={

@@ -6,7 +6,6 @@ import {
   monsterHealthCurrent,
   monsterHealthMaximum,
 } from "@neverquest/state/monster";
-import { Delta } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useRegenerateMonster() {
@@ -23,7 +22,7 @@ export function useRegenerateMonster() {
         const difference = monsterHealthMaximumValue - get(monsterHealthCurrent);
 
         if (difference > 0) {
-          set(deltas(Delta.HealthMonster), {
+          set(deltas("monsterHealth"), {
             color: "text-success",
             value: `HEAL +${difference}`,
           });

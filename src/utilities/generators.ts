@@ -13,7 +13,6 @@ import type {
   WeaponModality,
 } from "@neverquest/LOCRA/types";
 import type { Armor, Shield, Weapon } from "@neverquest/types";
-import { WeaponGrip } from "@neverquest/types/enums";
 import { getFromRange, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function generateArmor({
@@ -166,7 +165,7 @@ export function generateWeapon({
 
     gearClass,
     // TODO
-    grip: WeaponGrip.OneHanded,
+    grip: "oneHanded",
     level,
     modality,
     name: LOCRA.generateArtifact({

@@ -4,7 +4,6 @@ import { attributes } from "@neverquest/state/attributes";
 import { equippedGearID, inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
-import { Attribute, GearType, Showing, Skill } from "@neverquest/types/enums";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -27,45 +26,42 @@ export function useToggleEquipGear() {
         if (isArmor(item)) {
           const { staminaCost } = item;
 
-          set(isShowing(Showing.Armor), true);
-          set(isShowing(Showing.Defense), true);
-          set(isShowing(Showing.GearComparisonArmor), true);
-          set(isShowing(Showing.Protection), true);
+          set(isShowing("armor"), true);
+          set(isShowing("defense"), true);
+          set(isShowing("protection"), true);
 
-          if (get(skills(Skill.Evasion)) && staminaCost) {
-            set(isShowing(Showing.DodgePenalty), true);
+          if (get(skills("evasion")) && staminaCost) {
+            set(isShowing("dodgePenalty"), true);
           }
 
-          toggle(equippedGearID(GearType.Armor));
+          toggle(equippedGearID("armor"));
         }
 
         if (isShield(item)) {
-          set(isShowing(Showing.Block), true);
-          set(isShowing(Showing.Defense), true);
-          set(isShowing(Showing.GearComparisonShield), true);
-          set(isShowing(Showing.Shield), true);
+          set(isShowing("block"), true);
+          set(isShowing("defense"), true);
+          set(isShowing("shield"), true);
 
-          toggle(equippedGearID(GearType.Shield));
+          toggle(equippedGearID("shield"));
         }
 
         if (isWeapon(item)) {
           if (item.staminaCost) {
-            set(isShowing(Showing.Stamina), true);
+            set(isShowing("stamina"), true);
 
-            if (!get(attributes(Attribute.Endurance)).isUnlocked) {
-              set(attributes(Attribute.Endurance), (current) => ({
+            if (!get(attributes("endurance")).isUnlocked) {
+              set(attributes("endurance"), (current) => ({
                 ...current,
                 isUnlocked: true,
               }));
             }
           }
 
-          set(isShowing(Showing.AttackRateDetails), true);
-          set(isShowing(Showing.DamageDetails), true);
-          set(isShowing(Showing.GearComparisonWeapon), true);
-          set(isShowing(Showing.Weapon), true);
+          set(isShowing("attackRateDetails"), true);
+          set(isShowing("damageDetails"), true);
+          set(isShowing("weapon"), true);
 
-          toggle(equippedGearID(GearType.Weapon));
+          toggle(equippedGearID("weapon"));
         }
       },
     []

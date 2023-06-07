@@ -10,13 +10,13 @@ import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { crew } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import { coins } from "@neverquest/state/resources";
-import { CrewMember, CrewStatus, Showing } from "@neverquest/types/enums";
+import type { CrewMember } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 
 export function CrewHirable({ type }: { type: CrewMember }) {
   const coinsValue = useRecoilValue(coins);
   const [{ hireStatus }, setCrewMember] = useRecoilState(crew(type));
-  const setIsShowingGearClass = useSetRecoilState(isShowing(Showing.GearClass));
+  const setIsShowingGearClass = useSetRecoilState(isShowing("gearClass"));
 
   const transactResources = useTransactResources();
 
@@ -26,20 +26,20 @@ export function CrewHirable({ type }: { type: CrewMember }) {
   const handleHire = () => {
     setCrewMember((current) => ({
       ...current,
-      hireStatus: CrewStatus.Hired,
+      hireStatus: "hired",
     }));
     transactResources({ coinsDifference: -coinPrice });
 
-    if (type === CrewMember.Blacksmith) {
+    if (type === "blacksmith") {
       setIsShowingGearClass(true);
     }
   };
 
-  if (hireStatus === CrewStatus.Hired) {
+  if (hireStatus === "hired") {
     return null;
   }
 
-  if (hireStatus === CrewStatus.Hirable) {
+  if (hireStatus === "hirable") {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay

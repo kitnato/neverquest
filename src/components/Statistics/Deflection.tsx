@@ -8,17 +8,16 @@ import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { deflection } from "@neverquest/state/statistics";
-import { Delta, Showing, Skill } from "@neverquest/types/enums";
 import { LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Deflection() {
   const deflectionValue = useRecoilValue(deflection);
-  const isShowingDeflection = useRecoilValue(isShowing(Showing.Deflection));
-  const skillArmorcraft = useRecoilValue(skills(Skill.Armorcraft));
+  const isShowingDeflection = useRecoilValue(isShowing("deflection"));
+  const skillArmorcraft = useRecoilValue(skills("armorcraft"));
 
   useDeltaText({
-    atomDelta: deltas(Delta.Deflection),
+    atomDelta: deltas("deflection"),
     atomValue: deflection,
   });
 
@@ -32,7 +31,7 @@ export function Deflection() {
         <>
           <span>{skillArmorcraft ? formatPercentage(deflectionValue) : LABEL_EMPTY}</span>
 
-          <FloatingText type={Delta.Deflection} />
+          <FloatingText type="deflection" />
         </>
       }
       Icon={IconDeflection}

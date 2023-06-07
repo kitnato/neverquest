@@ -3,14 +3,13 @@ import { useRecoilValue } from "recoil";
 
 import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { isShowing } from "@neverquest/state/isShowing";
-import { Showing } from "@neverquest/types/enums";
 
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Resources() {
-  const isShowingCoins = useRecoilValue(isShowing(Showing.Coins));
-  const isShowingEssence = useRecoilValue(isShowing(Showing.Essence));
-  const isShowingScrap = useRecoilValue(isShowing(Showing.Scrap));
+  const isShowingCoins = useRecoilValue(isShowing("coins"));
+  const isShowingEssence = useRecoilValue(isShowing("essence"));
+  const isShowingScrap = useRecoilValue(isShowing("scrap"));
 
   if (!isShowingEssence && !isShowingCoins && !isShowingScrap) {
     return null;

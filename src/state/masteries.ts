@@ -3,7 +3,7 @@ import { atomFamily, selectorFamily } from "recoil";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { UnlockedState } from "@neverquest/types";
-import type { Mastery } from "@neverquest/types/enums";
+import type { Mastery } from "@neverquest/types/unions";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 
 type MasteryState = UnlockedState & {

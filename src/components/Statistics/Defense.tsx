@@ -6,10 +6,9 @@ import { Dodge } from "@neverquest/components/Statistics/Dodge";
 import { Parry } from "@neverquest/components/Statistics/Parry";
 import { Protection } from "@neverquest/components/Statistics/Protection";
 import { isShowing } from "@neverquest/state/isShowing";
-import { Showing } from "@neverquest/types/enums";
 
 export function Defense() {
-  const isShowingDefense = useRecoilValue(isShowing(Showing.Defense));
+  const isShowingDefense = useRecoilValue(isShowing("defense"));
 
   if (!isShowingDefense) {
     return null;

@@ -13,7 +13,6 @@ import { withStateKey } from "@neverquest/state";
 import { attributes } from "@neverquest/state/attributes";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { masteries } from "@neverquest/state/masteries";
-import { Attribute, Mastery } from "@neverquest/types/enums";
 import { formatToFixed } from "@neverquest/utilities/formatters";
 import {
   getComputedStatistic,
@@ -26,8 +25,8 @@ import {
 export const attackRate = withStateKey("attackRate", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES[Attribute.Speed];
-      const { points } = get(attributes(Attribute.Speed));
+      const { base, increment } = ATTRIBUTES.speed;
+      const { points } = get(attributes("speed"));
 
       return getComputedStatistic({ amount: points, base, increment });
     },
@@ -60,8 +59,8 @@ export const bleed = withStateKey("bleed", (key) =>
 export const bleedDamage = withStateKey("bleedDamage", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = MASTERIES[Mastery.Cruelty];
-      const { rank } = get(masteries(Mastery.Cruelty));
+      const { base, increment } = MASTERIES.cruelty;
+      const { rank } = get(masteries("cruelty"));
 
       return getComputedStatistic({ amount: rank, base, increment });
     },
@@ -102,8 +101,8 @@ export const block = withStateKey("block", (key) =>
 export const criticalChance = withStateKey("criticalChance", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES[Attribute.Dexterity];
-      const { points } = get(attributes(Attribute.Dexterity));
+      const { base, increment } = ATTRIBUTES.dexterity;
+      const { points } = get(attributes("dexterity"));
 
       return getComputedStatistic({ amount: points, base, increment });
     },
@@ -114,8 +113,8 @@ export const criticalChance = withStateKey("criticalChance", (key) =>
 export const criticalDamage = withStateKey("criticalDamage", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES[Attribute.Perception];
-      const { points } = get(attributes(Attribute.Perception));
+      const { base, increment } = ATTRIBUTES.perception;
+      const { points } = get(attributes("perception"));
 
       return getComputedStatistic({ amount: points, base, increment });
     },
@@ -133,8 +132,8 @@ export const criticalRating = withStateKey("criticalRating", (key) =>
 export const damage = withStateKey("damage", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES[Attribute.Strength];
-      const { points } = get(attributes(Attribute.Strength));
+      const { base, increment } = ATTRIBUTES.strength;
+      const { points } = get(attributes("strength"));
 
       return getComputedStatistic({ amount: points, base, increment });
     },
@@ -174,8 +173,8 @@ export const deflection = withStateKey("deflection", (key) =>
 export const dodge = withStateKey("dodge", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES[Attribute.Agility];
-      const { points } = get(attributes(Attribute.Agility));
+      const { base, increment } = ATTRIBUTES.agility;
+      const { points } = get(attributes("agility"));
 
       return getComputedStatistic({ amount: points, base, increment });
     },
@@ -201,8 +200,8 @@ export const dodgeTotal = withStateKey("dodgeTotal", (key) =>
 export const stability = withStateKey("stability", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = MASTERIES[Mastery.Stability];
-      const { rank } = get(masteries(Mastery.Stability));
+      const { base, increment } = MASTERIES.stability;
+      const { rank } = get(masteries("stability"));
 
       return getComputedStatistic({ amount: rank, base, increment });
     },
@@ -230,8 +229,8 @@ export const healthRegenerationRate = withStateKey("healthRegenerationRate", (ke
 export const parryAbsorption = withStateKey("parryAbsorption", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = MASTERIES[Mastery.Finesse];
-      const { rank } = get(masteries(Mastery.Finesse));
+      const { base, increment } = MASTERIES.finesse;
+      const { rank } = get(masteries("finesse"));
 
       return 0.33 + getComputedStatistic({ amount: rank, base, increment });
     },
@@ -257,8 +256,8 @@ export const parry = withStateKey("parry", (key) =>
 export const parryDamage = withStateKey("parryDamage", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = MASTERIES[Mastery.Finesse];
-      const { rank } = get(masteries(Mastery.Finesse));
+      const { base, increment } = MASTERIES.finesse;
+      const { rank } = get(masteries("finesse"));
 
       return 0.25 + getComputedStatistic({ amount: rank, base, increment });
     },
@@ -276,8 +275,8 @@ export const protection = withStateKey("protection", (key) =>
 export const recoveryRate = withStateKey("recoveryRate", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES[Attribute.Resilience];
-      const { points } = get(attributes(Attribute.Resilience));
+      const { base, increment } = ATTRIBUTES.resilience;
+      const { points } = get(attributes("resilience"));
 
       return getComputedStatistic({ amount: points, base, increment });
     },
@@ -288,8 +287,8 @@ export const recoveryRate = withStateKey("recoveryRate", (key) =>
 export const reserveRegenerationAmount = withStateKey("reserveRegenerationAmount", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES[Attribute.Fortitude];
-      const { points } = get(attributes(Attribute.Fortitude));
+      const { base, increment } = ATTRIBUTES.fortitude;
+      const { points } = get(attributes("fortitude"));
 
       return getComputedStatistic({ amount: points, base, increment });
     },
@@ -300,8 +299,8 @@ export const reserveRegenerationAmount = withStateKey("reserveRegenerationAmount
 export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES[Attribute.Vigor];
-      const { points } = get(attributes(Attribute.Vigor));
+      const { base, increment } = ATTRIBUTES.vigor;
+      const { points } = get(attributes("vigor"));
 
       return getComputedStatistic({ amount: points, base, increment });
     },
@@ -312,8 +311,8 @@ export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (
 export const staggerDuration = withStateKey("staggerDuration", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = MASTERIES[Mastery.Might];
-      const { rank } = get(masteries(Mastery.Might));
+      const { base, increment } = MASTERIES.might;
+      const { rank } = get(masteries("might"));
 
       return getComputedStatistic({ amount: rank, base, increment });
     },
@@ -365,8 +364,8 @@ export const staminaRegenerationRate = withStateKey("staminaRegenerationRate", (
 export const tenacity = withStateKey("tenacity", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = MASTERIES[Mastery.Tenacity];
-      const { rank } = get(masteries(Mastery.Tenacity));
+      const { base, increment } = MASTERIES.tenacity;
+      const { rank } = get(masteries("tenacity"));
 
       return getComputedStatistic({ amount: rank, base, increment });
     },

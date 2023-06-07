@@ -8,29 +8,23 @@ import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
 import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
 import { ReactComponent as IconWeapon } from "@neverquest/icons/weapon.svg";
 
-enum TabKey {
-  Armor,
-  Shield,
-  Weapon,
-}
-
 const DATA_TABS = [
   {
     Component: WeaponOptions,
     Icon: IconWeapon,
-    key: TabKey.Weapon,
+    key: "weapon",
     label: "Weapon",
   },
   {
     Component: ArmorOptions,
     Icon: IconArmor,
-    key: TabKey.Armor,
+    key: "armor",
     label: "Armor",
   },
   {
     Component: ShieldOptions,
     Icon: IconShield,
-    key: TabKey.Shield,
+    key: "shield",
     label: "Shield",
   },
 ];
@@ -38,7 +32,7 @@ const DATA_TABS = [
 export function Blacksmith() {
   return (
     <Stack gap={3}>
-      <Tab.Container defaultActiveKey={TabKey.Weapon}>
+      <Tab.Container defaultActiveKey="weapon">
         <Nav justify variant="pills">
           {DATA_TABS.map(({ Icon, key, label }) => (
             <Nav.Item key={key}>

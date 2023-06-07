@@ -9,7 +9,6 @@ import {
   scrap,
   scrapLoot,
 } from "@neverquest/state/resources";
-import { Showing } from "@neverquest/types/enums";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useTransactResources() {
@@ -38,7 +37,7 @@ export function useTransactResources() {
         if (coinsValue !== 0) {
           set(coins, (current) => current + coinsValue);
 
-          set(isShowing(Showing.Coins), true);
+          set(isShowing("coins"), true);
 
           if (isLooting) {
             set(coinsLoot, 0);
@@ -48,8 +47,8 @@ export function useTransactResources() {
         if (essenceValue !== 0) {
           set(essence, (current) => current + essenceValue);
 
-          set(isShowing(Showing.Essence), true);
-          set(isShowing(Showing.AttributesButton), true);
+          set(isShowing("essence"), true);
+          set(isShowing("attributesButton"), true);
 
           if (isLooting) {
             set(essenceLoot, 0);
@@ -59,7 +58,7 @@ export function useTransactResources() {
         if (scrapValue !== 0) {
           set(scrap, (current) => current + scrapValue);
 
-          set(isShowing(Showing.Scrap), true);
+          set(isShowing("scrap"), true);
 
           if (isLooting) {
             set(scrapLoot, 0);

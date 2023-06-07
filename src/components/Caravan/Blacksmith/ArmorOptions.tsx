@@ -14,13 +14,12 @@ import { ReactComponent as IconClass } from "@neverquest/icons/gear-class.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { ReactComponent as IconArmorProtection } from "@neverquest/icons/protection.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
-import { type ArmorClass, ArmorClasses } from "@neverquest/LOCRA/types";
+import { ARMOR_CLASSES, type ArmorClass } from "@neverquest/LOCRA/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
-import { Showing, Skill } from "@neverquest/types/enums";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 import { generateArmor } from "@neverquest/utilities/generators";
@@ -28,9 +27,9 @@ import { generateArmor } from "@neverquest/utilities/generators";
 export function ArmorOptions() {
   const allowNSFWValue = useRecoilValue(allowNSFW);
   const { armor: craftedArmor } = useRecoilValue(blacksmithInventory);
-  const isShowingDeflection = useRecoilValue(isShowing(Showing.Deflection));
-  const isShowingDodge = useRecoilValue(isShowing(Showing.Dodge));
-  const skillArmorcraft = useRecoilValue(skills(Skill.Armorcraft));
+  const isShowingDeflection = useRecoilValue(isShowing("deflection"));
+  const isShowingDodge = useRecoilValue(isShowing("dodge"));
+  const skillArmorcraft = useRecoilValue(skills("armorcraft"));
   const stageValue = useRecoilValue(stage);
 
   const [armorClass, setArmorClass] = useState<ArmorClass>("hide");
@@ -82,7 +81,7 @@ export function ArmorOptions() {
               onChange={({ target: { value } }) => setArmorClass(value as ArmorClass)}
               value={armorClass}
             >
-              {ArmorClasses.map((armorClass) => (
+              {ARMOR_CLASSES.map((armorClass) => (
                 <option key={armorClass} value={armorClass}>
                   {capitalizeAll(armorClass)}
                 </option>

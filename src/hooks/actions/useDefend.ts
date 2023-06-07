@@ -30,7 +30,6 @@ import {
   staggerDuration,
   tenacity,
 } from "@neverquest/state/statistics";
-import { Delta, Mastery, Showing, Skill } from "@neverquest/types/enums";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import { animateElement } from "@neverquest/utilities/animateElement";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -46,7 +45,7 @@ export function useDefend() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        set(isShowing(Showing.MonsterOffense), true);
+        set(isShowing("monsterOffense"), true);
 
         animateElement({
           element: get(statusElement),
@@ -54,19 +53,19 @@ export function useDefend() {
           type: "headShake",
         });
 
-        const hasDodged = get(skills(Skill.Evasion)) && Math.random() <= get(dodgeTotal);
+        const hasDodged = get(skills("evasion")) && Math.random() <= get(dodgeTotal);
 
         // If attack is dodged, nothing else happens (all damage is negated).
         if (hasDodged) {
           if (get(canDodge)) {
-            set(deltas(Delta.Health), {
+            set(deltas("health"), {
               color: "text-muted",
               value: "DODGED",
             });
 
             return;
           } else {
-            set(deltas(Delta.Health), {
+            set(deltas("health"), {
               color: "text-muted",
               value: `CANNOT DODGE (${get(armor).staminaCost})`,
             });
@@ -84,7 +83,7 @@ export function useDefend() {
         })();
 
         if (healthDamage === 0) {
-          set(deltas(Delta.Health), {
+          set(deltas("health"), {
             color: "text-muted",
             value: healthDamage,
           });
@@ -95,7 +94,7 @@ export function useDefend() {
         let deltaHealth: DeltaDisplay = [];
         let deltaStamina: DeltaDisplay = [];
 
-        const hasParried = get(skills(Skill.Escrime)) && Math.random() <= get(parry);
+        const hasParried = get(skills("escrime")) && Math.random() <= get(parry);
 
         // If parrying occurs, check & apply stamina cost.
         if (hasParried) {
@@ -132,7 +131,7 @@ export function useDefend() {
             ];
 
             changeStamina({ value: -staminaCost });
-            increaseMastery(Mastery.Finesse);
+            increaseMastery("finesse");
 
             animateElement({
               element: get(monsterElement),
@@ -169,9 +168,9 @@ export function useDefend() {
               },
             ];
 
-            const hasStabilized = get(skills(Skill.Shieldcraft)) && Math.random() <= get(stability);
+            const hasStabilized = get(skills("shieldcraft")) && Math.random() <= get(stability);
 
-            increaseMastery(Mastery.Stability);
+            increaseMastery("stability");
 
             // If Shieldcraft skill is acquired, check if a free block occurs, otherwise spend stamina blocking.
             if (hasStabilized) {
@@ -186,7 +185,7 @@ export function useDefend() {
             }
 
             const hasStaggered =
-              get(skills(Skill.Traumatology)) && Math.random() <= get(shield).stagger;
+              get(skills("traumatology")) && Math.random() <= get(shield).stagger;
 
             // Check if monster is staggered.
             if (hasStaggered) {
@@ -220,14 +219,14 @@ export function useDefend() {
           ];
         }
 
-        const hasIgnoredRecovery = get(skills(Skill.Armorcraft)) && Math.random() <= get(tenacity);
+        const hasIgnoredRecovery = get(skills("armorcraft")) && Math.random() <= get(tenacity);
 
-        increaseMastery(Mastery.Tenacity);
+        increaseMastery("tenacity");
 
         // If Tenacity hasn't been triggered, activate recovery.
         if (!hasIgnoredRecovery) {
-          set(isShowing(Showing.Ailments), true);
-          set(isShowing(Showing.Recovery), true);
+          set(isShowing("ailments"), true);
+          set(isShowing("recovery"), true);
 
           set(recoveryDuration, get(recoveryRate));
         }
@@ -236,7 +235,7 @@ export function useDefend() {
 
         // If poisoning occurs, check if has been deflected, otherwise apply poison - if there is an active poisoning, increment blight instead.
         if (isPoisoned) {
-          const hasDeflected = get(skills(Skill.Armorcraft)) && Math.random() <= get(deflection);
+          const hasDeflected = get(skills("armorcraft")) && Math.random() <= get(deflection);
 
           if (hasDeflected) {
             deltaHealth.push({
@@ -252,7 +251,7 @@ export function useDefend() {
                 value: "BLIGHTED",
               });
             } else {
-              set(isShowing(Showing.Ailments), true);
+              set(isShowing("ailments"), true);
               set(poisonDuration, POISON.duration);
 
               deltaHealth.push({
@@ -267,7 +266,7 @@ export function useDefend() {
         changeHealth({ delta: deltaHealth, value: healthDamage });
 
         if (deltaStamina.length > 0) {
-          set(deltas(Delta.Stamina), deltaStamina);
+          set(deltas("stamina"), deltaStamina);
         }
       },
     [changeHealth, changeMonsterHealth, changeStamina, increaseMastery]

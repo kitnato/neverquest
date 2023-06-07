@@ -12,7 +12,6 @@ import { areAttributesIncreasable } from "@neverquest/state/attributes";
 import { isAttacking, isGameOver } from "@neverquest/state/character";
 import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
-import { Showing } from "@neverquest/types/enums";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function AttributesButton() {
@@ -21,7 +20,7 @@ export function AttributesButton() {
   const isGameOverValue = useRecoilValue(isGameOver);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isStageStartedValue = useRecoilValue(isStageStarted);
-  const isShowingAttributesButton = useRecoilValue(isShowing(Showing.AttributesButton));
+  const isShowingAttributesButton = useRecoilValue(isShowing("attributesButton"));
 
   const [isScreenShowing, setScreenShowing] = useState(false);
 

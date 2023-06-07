@@ -1,9 +1,8 @@
 import { useRecoilCallback } from "recoil";
 
-import { MASTERY_DELTA_TYPE } from "@neverquest/data/masteries";
 import { deltas } from "@neverquest/state/deltas";
 import { isMasteryAtMaximum, masteries, masteryCost } from "@neverquest/state/masteries";
-import type { Mastery } from "@neverquest/types/enums";
+import type { Mastery } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useIncreaseMastery() {
@@ -23,8 +22,6 @@ export function useIncreaseMastery() {
         }
 
         const masteryCostValue = get(masteryCost(type));
-
-        const deltaType = MASTERY_DELTA_TYPE[type];
         const newProgress = progress + 1;
 
         if (newProgress === masteryCostValue) {
@@ -34,7 +31,7 @@ export function useIncreaseMastery() {
             rank: rank + 1,
           }));
 
-          set(deltas(deltaType), {
+          set(deltas(type), {
             color: "text-success",
             value: "+1",
           });
@@ -44,7 +41,7 @@ export function useIncreaseMastery() {
             progress: newProgress,
           }));
 
-          set(deltas(deltaType), {
+          set(deltas(type), {
             color: "text-success",
             value: "RANK UP",
           });

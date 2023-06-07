@@ -6,11 +6,10 @@ import { MasteryDisplay } from "@neverquest/components/Masteries/MasteryDisplay"
 import { MASTERIES_ORDER } from "@neverquest/data/masteries";
 import { ReactComponent as IconMasteries } from "@neverquest/icons/masteries.svg";
 import { isShowing } from "@neverquest/state/isShowing";
-import { Showing } from "@neverquest/types/enums";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Masteries() {
-  const isShowingMasteries = useRecoilValue(isShowing(Showing.Masteries));
+  const isShowingMasteries = useRecoilValue(isShowing("masteries"));
 
   if (!isShowingMasteries) {
     return null;

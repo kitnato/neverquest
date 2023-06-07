@@ -1,11 +1,11 @@
 import { RECOVERY_RATE } from "@neverquest/data/statistics";
 import { ReactComponent as IconPlaceholder } from "@neverquest/icons/placeholder.svg";
 import type { AttributeOrMastery } from "@neverquest/types";
-import { Attribute } from "@neverquest/types/enums";
+import type { Attribute } from "@neverquest/types/unions";
 
 // TODO - diversify icons.
 export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
-  [Attribute.Agility]: {
+  agility: {
     base: 0,
     description: "Increases chance to dodge an attack.",
     Icon: IconPlaceholder,
@@ -14,7 +14,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     maximum: 0.8,
     name: "Agility",
   },
-  [Attribute.Dexterity]: {
+  dexterity: {
     base: 0,
     description: "Increases critical strike chance.",
     Icon: IconPlaceholder,
@@ -23,7 +23,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     maximum: 0.6,
     name: "Dexterity",
   },
-  [Attribute.Endurance]: {
+  endurance: {
     base: 10,
     description: "Increases maximum stamina.",
     Icon: IconPlaceholder,
@@ -31,7 +31,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     isUnlocked: true,
     name: "Endurance",
   },
-  [Attribute.Fortitude]: {
+  fortitude: {
     base: 0,
     description: "Increases health & stamina regeneration amount.",
     Icon: IconPlaceholder,
@@ -39,7 +39,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     isUnlocked: false,
     name: "Fortitude",
   },
-  [Attribute.Luck]: {
+  luck: {
     base: 0,
     description: "Increases amount of loot dropped by monsters.",
     Icon: IconPlaceholder,
@@ -47,7 +47,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     isUnlocked: false,
     name: "Luck",
   },
-  [Attribute.Perception]: {
+  perception: {
     base: 1.5,
     description: "Increases critical strike damage.",
     Icon: IconPlaceholder,
@@ -55,7 +55,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     isUnlocked: false,
     name: "Perception",
   },
-  [Attribute.Resilience]: {
+  resilience: {
     base: RECOVERY_RATE,
     description: "Increases recovery rate.",
     Icon: IconPlaceholder,
@@ -64,7 +64,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     maximum: 100,
     name: "Resilience",
   },
-  [Attribute.Speed]: {
+  speed: {
     base: 0,
     description: "Increases attack rate.",
     Icon: IconPlaceholder,
@@ -73,7 +73,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     maximum: 0.9,
     name: "Speed",
   },
-  [Attribute.Strength]: {
+  strength: {
     base: 0,
     description: "Increases base attack damage.",
     Icon: IconPlaceholder,
@@ -81,7 +81,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     isUnlocked: true,
     name: "Strength",
   },
-  [Attribute.Vigor]: {
+  vigor: {
     base: 0,
     description: "Increases health & stamina regeneration rate.",
     Icon: IconPlaceholder,
@@ -89,7 +89,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     isUnlocked: false,
     name: "Vigor",
   },
-  [Attribute.Vitality]: {
+  vitality: {
     base: 100,
     description: "Increases maximum health.",
     Icon: IconPlaceholder,
@@ -99,16 +99,16 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
   },
 };
 
-export const ATTRIBUTES_ORDER = [
-  Attribute.Vitality,
-  Attribute.Endurance,
-  Attribute.Strength,
-  Attribute.Speed,
-  Attribute.Resilience,
-  Attribute.Vigor,
-  Attribute.Fortitude,
-  Attribute.Dexterity,
-  Attribute.Perception,
-  Attribute.Agility,
-  Attribute.Luck,
+export const ATTRIBUTES_ORDER: Attribute[] = [
+  "vitality",
+  "endurance",
+  "strength",
+  "speed",
+  "resilience",
+  "vigor",
+  "fortitude",
+  "dexterity",
+  "perception",
+  "agility",
+  "luck",
 ];

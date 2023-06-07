@@ -1,9 +1,9 @@
 import { DefaultValue, atom, atomFamily, selectorFamily } from "recoil";
+
 import { CREW_ORDER } from "@neverquest/data/caravan";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-
 import type { InventoryBlacksmith, InventoryMerchant } from "@neverquest/types";
-import { type CrewMember, CrewStatus } from "@neverquest/types/enums";
+import type { CrewMember, CrewStatus } from "@neverquest/types/unions";
 
 type CrewState = {
   hireStatus: CrewStatus;
@@ -28,7 +28,7 @@ export const crew = withStateKey("crew", (key) =>
 
         set(crewMapping(type), status);
 
-        if (status.hireStatus === CrewStatus.Hired) {
+        if (status.hireStatus === "hired") {
           set(crewAvailable, (current) => current.filter((crewType) => crewType !== type));
         }
       },
@@ -68,7 +68,7 @@ export const crewAvailable = withStateKey("crewAvailable", (key) =>
 const crewMapping = withStateKey("crewMapping", (key) =>
   atomFamily<CrewState, CrewMember>({
     default: {
-      hireStatus: CrewStatus.Locked,
+      hireStatus: "locked",
       monologueProgress: 0,
     },
     effects: (parameter) => [handleLocalStorage<CrewState>({ key, parameter })],

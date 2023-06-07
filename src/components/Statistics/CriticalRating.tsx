@@ -10,7 +10,6 @@ import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { criticalChance, criticalDamage, criticalRating } from "@neverquest/state/statistics";
-import { Delta, Showing, Skill } from "@neverquest/types/enums";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
@@ -18,11 +17,11 @@ export function CriticalRating() {
   const criticalChanceValue = useRecoilValue(criticalChance);
   const criticalDamageValue = useRecoilValue(criticalDamage);
   const criticalRatingValue = useRecoilValue(criticalRating);
-  const isShowingCriticalRating = useRecoilValue(isShowing(Showing.CriticalRating));
-  const skillAssassination = useRecoilValue(skills(Skill.Assassination));
+  const isShowingCriticalRating = useRecoilValue(isShowing("criticalRating"));
+  const skillAssassination = useRecoilValue(skills("assassination"));
 
   useDeltaText({
-    atomDelta: deltas(Delta.CriticalRating),
+    atomDelta: deltas("criticalRating"),
     atomValue: criticalRating,
   });
 
@@ -61,7 +60,7 @@ export function CriticalRating() {
             <span>{skillAssassination ? criticalRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
-          <FloatingText type={Delta.CriticalRating} />
+          <FloatingText type="criticalRating" />
         </>
       }
       Icon={IconCriticalRating}

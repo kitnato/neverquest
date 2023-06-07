@@ -2,7 +2,7 @@ import { useRecoilCallback } from "recoil";
 
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { attributeCost, attributes, level } from "@neverquest/state/attributes";
-import type { Attribute } from "@neverquest/types/enums";
+import type { Attribute } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useIncreaseAttribute() {

@@ -4,9 +4,9 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { MASTERIES, MASTERY_DELTA_TYPE } from "@neverquest/data/masteries";
+import { MASTERIES } from "@neverquest/data/masteries";
 import { isMasteryAtMaximum, masteries, masteryCost } from "@neverquest/state/masteries";
-import type { Mastery } from "@neverquest/types/enums";
+import type { Mastery } from "@neverquest/types/unions";
 import { LABEL_AT_MAXIMUM } from "@neverquest/utilities/constants";
 
 export function MasteryDisplay({ type }: { type: Mastery }) {
@@ -32,7 +32,7 @@ export function MasteryDisplay({ type }: { type: Mastery }) {
             <LabelledProgressBar label={label} value={value} variant="secondary" />
           </Stack>
 
-          <FloatingText type={MASTERY_DELTA_TYPE[type]} />
+          <FloatingText type={type} />
         </Stack>
       }
       description={description}

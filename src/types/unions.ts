@@ -1,3 +1,126 @@
+export type Attribute =
+  | "agility"
+  | "dexterity"
+  | "endurance"
+  | "fortitude"
+  | "luck"
+  | "perception"
+  | "resilience"
+  | "speed"
+  | "strength"
+  | "vigor"
+  | "vitality";
+
+export type CrewMember =
+  | "alchemist"
+  | "blacksmith"
+  | "medic"
+  | "mercenary"
+  | "merchant"
+  | "mystic"
+  | "tailor"
+  | "witch";
+
+export type CrewStatus = "hirable" | "hired" | "locked";
+
+export type DeltaText = "number" | "percentage" | "time";
+
+export type Delta =
+  | "attackRate"
+  | "attributePoints"
+  | "bleedRating"
+  | "block"
+  | "coins"
+  | "coinsLoot"
+  | "criticalRating"
+  | "cruelty"
+  | "damage"
+  | "damagePerSecond"
+  | "deflection"
+  | "dodge"
+  | "essence"
+  | "essenceAbsorbed"
+  | "essenceLoot"
+  | "finesse"
+  | "health"
+  | "healthRegenerationRate"
+  | "level"
+  | "might"
+  | "monsterHealth"
+  | "parry"
+  | "progress"
+  | "protection"
+  | "recoveryRate"
+  | "scrap"
+  | "scrapLoot"
+  | "stability"
+  | "stage"
+  | "staggerRating"
+  | "stamina"
+  | "staminaRegenerationRate"
+  | "tenacity";
+
+export type GearType = "armor" | "shield" | "weapon";
+
+export type Location = "caravan" | "wilderness";
+
+export type Mastery = "cruelty" | "finesse" | "might" | "stability" | "tenacity";
+
+export type Reserve = "encumbrance" | "health" | "monsterHealth" | "stamina";
+
+export const SHOWING = [
+  "ailments",
+  "armor",
+  "attackRate",
+  "attackRateDetails",
+  "attributesButton",
+  "bleed",
+  "block",
+  "coins",
+  "crewHiring",
+  "criticalRating",
+  "damageDetails",
+  "defense",
+  "deflection",
+  "dodge",
+  "dodgePenalty",
+  "essence",
+  "gameOver",
+  "gearClass",
+  "loot",
+  "masteries",
+  "monsterAilments",
+  "monsterOffense",
+  "parry",
+  "protection",
+  "recovery",
+  "reserveDetails",
+  "scrap",
+  "shield",
+  "stability",
+  "stagger",
+  "stamina",
+  "statistics",
+  "support",
+  "tenacity",
+  "weapon",
+  "weight",
+  "wildernessStatus",
+] as const;
+export type Showing = (typeof SHOWING)[number];
+
+export const SKILLS = [
+  "anatomy",
+  "armorcraft",
+  "assassination",
+  "calisthenics",
+  "escrime",
+  "evasion",
+  "shieldcraft",
+  "traumatology",
+] as const;
+export type Skill = (typeof SKILLS)[number];
+
 export type StateKey =
   | "allowNSFW"
   | "areAttributesIncreasable"
@@ -134,3 +257,5 @@ export type StateKey =
   | "weapon"
   | "wilderness"
   | "wildernesses";
+
+export type WeaponGrip = "oneHanded" | "twoHanded";

@@ -6,13 +6,12 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconStage } from "@neverquest/icons/stage.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { stage } from "@neverquest/state/encounter";
-import { Delta } from "@neverquest/types/enums";
 
 export function Stage() {
   const stageValue = useRecoilValue(stage);
 
   useDeltaText({
-    atomDelta: deltas(Delta.Stage),
+    atomDelta: deltas("stage"),
     atomValue: stage,
   });
 
@@ -22,7 +21,7 @@ export function Stage() {
         <>
           <span>{stageValue}</span>
 
-          <FloatingText type={Delta.Stage} />
+          <FloatingText type="stage" />
         </>
       }
       Icon={IconStage}

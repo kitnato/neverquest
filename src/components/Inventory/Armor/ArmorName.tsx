@@ -10,12 +10,11 @@ import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { type ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
-import { ReactComponent as IconNone } from "@neverquest/icons/gear-class-none.svg";
+import { ReactComponent as IconNone } from "@neverquest/icons/none.svg";
 import { ReactComponent as IconProtection } from "@neverquest/icons/protection.svg";
 import { armor as armorEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import type { Armor } from "@neverquest/types";
-import { Showing } from "@neverquest/types/enums";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 
@@ -27,9 +26,9 @@ export function ArmorName({
   placement?: Placement;
 }) {
   const armorEquippedValue = useRecoilValue(armorEquipped);
-  const isShowingDeflection = useRecoilValue(isShowing(Showing.Deflection));
-  const isShowingDodgePenalty = useRecoilValue(isShowing(Showing.DodgePenalty));
-  const isShowingGearClass = useRecoilValue(isShowing(Showing.GearClass));
+  const isShowingDeflection = useRecoilValue(isShowing("deflection"));
+  const isShowingDodgePenalty = useRecoilValue(isShowing("dodgePenalty"));
+  const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
 
   const { deflection, level, name, protection, staminaCost, weight } = armor;
   const isEquipped = JSON.stringify(armorEquippedValue) === JSON.stringify(armor);
@@ -44,9 +43,7 @@ export function ArmorName({
             <DetailsTable>
               <GearLevelDetail
                 comparison={
-                  isEquipped
-                    ? null
-                    : { showingType: Showing.Armor, subtrahend: armorEquippedValue.level }
+                  isEquipped ? null : { showingType: "armor", subtrahend: armorEquippedValue.level }
                 }
                 level={level}
               />
@@ -60,7 +57,7 @@ export function ArmorName({
                   {!isEquipped && (
                     <GearComparison
                       difference={protection - armorEquippedValue.protection}
-                      showingType={Showing.Armor}
+                      showingType="armor"
                     />
                   )}
                 </td>
@@ -114,7 +111,7 @@ export function ArmorName({
                         {!isEquipped && (
                           <GearComparison
                             difference={deflection - armorEquippedValue.deflection}
-                            showingType={Showing.Armor}
+                            showingType="armor"
                           />
                         )}
                       </td>
@@ -138,7 +135,7 @@ export function ArmorName({
                           <GearComparison
                             difference={staminaCost - armorEquippedValue.staminaCost}
                             isDownPositive
-                            showingType={Showing.Armor}
+                            showingType="armor"
                           />
                         )}
                       </td>
@@ -153,7 +150,7 @@ export function ArmorName({
                 comparison={
                   isEquipped
                     ? null
-                    : { showingType: Showing.Armor, subtrahend: armorEquippedValue.weight }
+                    : { showingType: "armor", subtrahend: armorEquippedValue.weight }
                 }
                 weight={weight}
               />

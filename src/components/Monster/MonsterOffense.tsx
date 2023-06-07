@@ -4,10 +4,9 @@ import { useRecoilValue } from "recoil";
 import { MonsterDamage } from "@neverquest/components/Monster/MonsterDamage";
 import { MonsterPoisonRating } from "@neverquest/components/Monster/MonsterPoisonRating";
 import { isShowing } from "@neverquest/state/isShowing";
-import { Showing } from "@neverquest/types/enums";
 
 export function MonsterOffense() {
-  const isShowingMonsterOffense = useRecoilValue(isShowing(Showing.MonsterOffense));
+  const isShowingMonsterOffense = useRecoilValue(isShowing("monsterOffense"));
 
   if (!isShowingMonsterOffense) {
     return null;

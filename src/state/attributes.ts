@@ -4,7 +4,7 @@ import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { essence } from "@neverquest/state/resources";
 import type { UnlockedState } from "@neverquest/types";
-import type { Attribute } from "@neverquest/types/enums";
+import type { Attribute } from "@neverquest/types/unions";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 
 type AttributeState = UnlockedState & {

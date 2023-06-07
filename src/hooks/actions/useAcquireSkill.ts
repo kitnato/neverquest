@@ -5,7 +5,7 @@ import { attributes } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
 import { masteries } from "@neverquest/state/masteries";
 import { skills } from "@neverquest/state/skills";
-import { Showing, type Skill } from "@neverquest/types/enums";
+import type { Skill } from "@neverquest/types/unions";
 
 export function useAcquireSkill() {
   return useRecoilCallback(
@@ -24,7 +24,7 @@ export function useAcquireSkill() {
         });
 
         if (Array.isArray(unlocksMasteries)) {
-          set(isShowing(Showing.Masteries), true);
+          set(isShowing("masteries"), true);
 
           unlocksMasteries.forEach((mastery) => {
             set(masteries(mastery), (current) => ({ ...current, isUnlocked: true }));

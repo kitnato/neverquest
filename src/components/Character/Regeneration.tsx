@@ -15,22 +15,21 @@ import {
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { isShowing } from "@neverquest/state/isShowing";
 import { reserveRegenerationRate } from "@neverquest/state/statistics";
-import { Attribute, Delta, DeltaText, Reserve, Showing } from "@neverquest/types/enums";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
-export function Regeneration({ type }: { type: Reserve.Health | Reserve.Stamina }) {
+export function Regeneration({ type }: { type: "health" | "stamina" }) {
   const { atomDeltaRegenerationRate, atomRegenerationAmount, atomRegenerationRate } =
     RESERVES[type];
-  const isHealth = type === Reserve.Health;
+  const isHealth = type === "health";
 
   const regenerationAmountValue = useRecoilValue(atomRegenerationAmount);
   const regenerationRateValue = useRecoilValue(atomRegenerationRate);
-  const isShowingReserveDetails = useRecoilValue(isShowing(Showing.ReserveDetails));
+  const isShowingReserveDetails = useRecoilValue(isShowing("reserveDetails"));
   const reserveRegenerationRateValue = useRecoilValue(reserveRegenerationRate);
 
-  const { name: amountName } = ATTRIBUTES[Attribute.Fortitude];
-  const { name: rateName } = ATTRIBUTES[Attribute.Vigor];
+  const { name: amountName } = ATTRIBUTES.fortitude;
+  const { name: rateName } = ATTRIBUTES.vigor;
   const baseAmount = isHealth ? REGENERATION_AMOUNT_HEALTH : REGENERATION_AMOUNT_STAMINA;
   const baseRate = isHealth ? REGENERATION_RATE_HEALTH : REGENERATION_RATE_STAMINA;
   const title = isHealth ? "Health" : "Stamina";
@@ -38,7 +37,7 @@ export function Regeneration({ type }: { type: Reserve.Health | Reserve.Stamina 
   useDeltaText({
     atomDelta: atomDeltaRegenerationRate,
     atomValue: atomRegenerationRate,
-    type: DeltaText.Time,
+    type: "time",
   });
 
   return (
@@ -98,9 +97,7 @@ export function Regeneration({ type }: { type: Reserve.Health | Reserve.Stamina 
       </OverlayTrigger>
 
       <FloatingText
-        type={
-          type === Reserve.Health ? Delta.HealthRegenerationRate : Delta.StaminaRegenerationRate
-        }
+        type={type === "health" ? "healthRegenerationRate" : "staminaRegenerationRate"}
       />
     </>
   );

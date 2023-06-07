@@ -16,24 +16,24 @@ import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { CREW, CREW_ORDER } from "@neverquest/data/caravan";
 import { crewActive, crewAvailable } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
-import { CrewMember, Showing } from "@neverquest/types/enums";
+import type { CrewMember } from "@neverquest/types/unions";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 const CREW_COMPONENTS: Record<CrewMember, FunctionComponent> = {
-  [CrewMember.Alchemist]: Alchemist,
-  [CrewMember.Blacksmith]: Blacksmith,
-  [CrewMember.Medic]: Medic,
-  [CrewMember.Mercenary]: Mercenary,
-  [CrewMember.Merchant]: Merchant,
-  [CrewMember.Mystic]: Mystic,
-  [CrewMember.Tailor]: Tailor,
-  [CrewMember.Witch]: Witch,
+  alchemist: Alchemist,
+  blacksmith: Blacksmith,
+  medic: Medic,
+  mercenary: Mercenary,
+  merchant: Merchant,
+  mystic: Mystic,
+  tailor: Tailor,
+  witch: Witch,
 };
 
 export function Caravan() {
   const crewAvailableValue = useRecoilValue(crewAvailable);
   const [crewActiveValue, setCrewActive] = useRecoilState(crewActive);
-  const isShowingCrewHiring = useRecoilValue(isShowing(Showing.CrewHiring));
+  const isShowingCrewHiring = useRecoilValue(isShowing("crewHiring"));
 
   const [isScreenShowing, setScreenShowing] = useState(false);
 

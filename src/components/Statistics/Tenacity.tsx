@@ -8,17 +8,16 @@ import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { tenacity } from "@neverquest/state/statistics";
-import { Delta, Showing, Skill } from "@neverquest/types/enums";
 import { LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Tenacity() {
-  const isShowingTenacity = useRecoilValue(isShowing(Showing.Tenacity));
+  const isShowingTenacity = useRecoilValue(isShowing("tenacity"));
   const tenacityValue = useRecoilValue(tenacity);
-  const skillTenacity = useRecoilValue(skills(Skill.Armorcraft));
+  const skillTenacity = useRecoilValue(skills("armorcraft"));
 
   useDeltaText({
-    atomDelta: deltas(Delta.Tenacity),
+    atomDelta: deltas("tenacity"),
     atomValue: tenacity,
   });
 
@@ -32,7 +31,7 @@ export function Tenacity() {
         <>
           <span>{skillTenacity ? formatPercentage(tenacityValue) : LABEL_EMPTY}</span>
 
-          <FloatingText type={Delta.Tenacity} />
+          <FloatingText type="tenacity" />
         </>
       }
       Icon={IconTenacity}

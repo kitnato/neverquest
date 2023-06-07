@@ -12,13 +12,12 @@ import { ReactComponent as IconClass } from "@neverquest/icons/gear-class.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
-import { type ShieldClass, ShieldClasses } from "@neverquest/LOCRA/types";
+import { SHIELD_CLASSES, type ShieldClass } from "@neverquest/LOCRA/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
-import { Showing, Skill } from "@neverquest/types/enums";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 import { generateShield } from "@neverquest/utilities/generators";
@@ -31,8 +30,8 @@ export function ShieldOptions() {
   const [shieldClass, setShieldClass] = useState<ShieldClass>("small");
   const [shieldLevel, setShieldLevel] = useState(stageValue);
 
-  const isShowingStagger = useRecoilValue(isShowing(Showing.Stagger));
-  const skillShieldcraft = useRecoilValue(skills(Skill.Shieldcraft));
+  const isShowingStagger = useRecoilValue(isShowing("stagger"));
+  const skillShieldcraft = useRecoilValue(skills("shieldcraft"));
 
   const shield = generateShield({
     allowNSFW: allowNSFWValue,
@@ -80,7 +79,7 @@ export function ShieldOptions() {
               onChange={({ target: { value } }) => setShieldClass(value as ShieldClass)}
               value={shieldClass}
             >
-              {ShieldClasses.map((shieldClass) => (
+              {SHIELD_CLASSES.map((shieldClass) => (
                 <option key={shieldClass} value={shieldClass}>
                   {capitalizeAll(shieldClass)}
                 </option>

@@ -1,6 +1,6 @@
 import type { ArmorClass, ShieldClass, WeaponClass, WeaponModality } from "@neverquest/LOCRA/types";
-import type { WeaponGrip } from "@neverquest/types/enums";
 import type { SVGIcon } from "@neverquest/types/props";
+import type { WeaponGrip } from "@neverquest/types/unions";
 
 export type Armor = GearBase & {
   deflection: number;

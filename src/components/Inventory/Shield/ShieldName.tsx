@@ -10,12 +10,11 @@ import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { type SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
-import { ReactComponent as IconNone } from "@neverquest/icons/gear-class-none.svg";
+import { ReactComponent as IconNone } from "@neverquest/icons/none.svg";
 import { ReactComponent as IconStagger } from "@neverquest/icons/shield-stagger.svg";
 import { shield as shieldEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import type { Shield } from "@neverquest/types";
-import { Showing } from "@neverquest/types/enums";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 
@@ -26,8 +25,8 @@ export function ShieldName({
   placement?: Placement;
   shield: Shield | typeof SHIELD_NONE;
 }) {
-  const isShowingGearClass = useRecoilValue(isShowing(Showing.GearClass));
-  const isShowingStagger = useRecoilValue(isShowing(Showing.Stagger));
+  const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
+  const isShowingStagger = useRecoilValue(isShowing("stagger"));
   const shieldEquippedValue = useRecoilValue(shieldEquipped);
 
   const { block, level, name, stagger, staminaCost, weight } = shield;
@@ -45,7 +44,7 @@ export function ShieldName({
                 comparison={
                   isEquipped
                     ? null
-                    : { showingType: Showing.Shield, subtrahend: shieldEquippedValue.level }
+                    : { showingType: "shield", subtrahend: shieldEquippedValue.level }
                 }
                 level={level}
               />
@@ -59,7 +58,7 @@ export function ShieldName({
                   {!isEquipped && (
                     <GearComparison
                       difference={block - shieldEquippedValue.block}
-                      showingType={Showing.Shield}
+                      showingType="shield"
                     />
                   )}
                 </td>
@@ -70,7 +69,7 @@ export function ShieldName({
                   isEquipped
                     ? null
                     : {
-                        showingType: Showing.Shield,
+                        showingType: "shield",
                         subtrahend: shieldEquippedValue.staminaCost,
                       }
                 }
@@ -124,7 +123,7 @@ export function ShieldName({
                       {!isEquipped && (
                         <GearComparison
                           difference={stagger - shieldEquippedValue.stagger}
-                          showingType={Showing.Shield}
+                          showingType="shield"
                         />
                       )}
                     </td>
@@ -138,7 +137,7 @@ export function ShieldName({
                 comparison={
                   isEquipped
                     ? null
-                    : { showingType: Showing.Shield, subtrahend: shieldEquippedValue.weight }
+                    : { showingType: "shield", subtrahend: shieldEquippedValue.weight }
                 }
                 weight={weight}
               />

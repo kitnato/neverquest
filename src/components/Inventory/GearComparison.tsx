@@ -5,7 +5,7 @@ import { ReactComponent as IconEquals } from "@neverquest/icons/equals.svg";
 import { ReactComponent as IconIncrease } from "@neverquest/icons/increase.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import { showGearComparison } from "@neverquest/state/settings";
-import type { Showing } from "@neverquest/types/enums";
+import type { Showing } from "@neverquest/types/unions";
 
 export function GearComparison({
   difference,

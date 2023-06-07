@@ -8,17 +8,16 @@ import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { parry } from "@neverquest/state/statistics";
-import { Delta, Showing, Skill } from "@neverquest/types/enums";
 import { LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Parry() {
   const parryValue = useRecoilValue(parry);
-  const isShowingParry = useRecoilValue(isShowing(Showing.Parry));
-  const skillEscrime = useRecoilValue(skills(Skill.Escrime));
+  const isShowingParry = useRecoilValue(isShowing("parry"));
+  const skillEscrime = useRecoilValue(skills("escrime"));
 
   useDeltaText({
-    atomDelta: deltas(Delta.Parry),
+    atomDelta: deltas("parry"),
     atomValue: parry,
   });
 
@@ -32,7 +31,7 @@ export function Parry() {
         <>
           <span>{skillEscrime ? formatPercentage(parryValue) : LABEL_EMPTY}</span>
 
-          <FloatingText type={Delta.Parry} />
+          <FloatingText type="parry" />
         </>
       }
       Icon={IconParry}

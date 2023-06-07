@@ -12,23 +12,22 @@ import { ReactComponent as IconRecovery } from "@neverquest/icons/recovery.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { recoveryRate, tenacity } from "@neverquest/state/statistics";
-import { Attribute, Delta, DeltaText, Showing } from "@neverquest/types/enums";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Recovery() {
-  const isShowingRecovery = useRecoilValue(isShowing(Showing.Recovery));
+  const isShowingRecovery = useRecoilValue(isShowing("recovery"));
   const tenacityValue = useRecoilValue(tenacity);
   const recoveryRateValue = useRecoilValue(recoveryRate);
 
-  const { name } = ATTRIBUTES[Attribute.Resilience];
+  const { name } = ATTRIBUTES.resilience;
   const showRecoveryRate = recoveryRateValue !== RECOVERY_RATE;
   const showTenacity = tenacityValue > 0;
 
   useDeltaText({
-    atomDelta: deltas(Delta.RecoveryRate),
+    atomDelta: deltas("recoveryRate"),
     atomValue: recoveryRate,
-    type: DeltaText.Time,
+    type: "time",
   });
 
   if (!isShowingRecovery) {
@@ -83,7 +82,7 @@ export function Recovery() {
           <Stack className="w-100" direction="horizontal">
             <RecoveryMeter />
 
-            <FloatingText type={Delta.RecoveryRate} />
+            <FloatingText type="recoveryRate" />
           </Stack>
         </OverlayTrigger>
       }

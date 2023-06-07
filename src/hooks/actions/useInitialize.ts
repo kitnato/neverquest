@@ -8,7 +8,7 @@ import { attributes } from "@neverquest/state/attributes";
 import { crew } from "@neverquest/state/caravan";
 import { stage, wildernesses } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
-import { CrewStatus } from "@neverquest/types/enums";
+import type { Attribute, CrewMember, CrewStatus } from "@neverquest/types/unions";
 import { KEY_SESSION } from "@neverquest/utilities/constants";
 import { generateWilderness } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -21,26 +21,24 @@ export function useInitialize() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const stageValue = get(stage);
-
         if (ls.get(KEY_SESSION) !== null) {
           return;
         }
 
         Object.entries(ATTRIBUTES).forEach(([type, { isUnlocked }]) =>
-          set(attributes(Number(type)), (current) => ({ ...current, isUnlocked }))
+          set(attributes(type as Attribute), (current) => ({ ...current, isUnlocked }))
         );
 
         Object.entries(CREW).forEach(([type, { requiredStage }]) => {
-          if (requiredStage <= stageValue) {
-            set(crew(Number(type)), (current) => ({
+          if (requiredStage === 0) {
+            set(crew(type as CrewMember), (current) => ({
               ...current,
-              hireStatus: CrewStatus.Hired,
+              hireStatus: "hired" as CrewStatus,
             }));
           }
         });
 
-        set(wildernesses, [generateWilderness({ allowNSFW: get(allowNSFW), stage: stageValue })]);
+        set(wildernesses, [generateWilderness({ allowNSFW: get(allowNSFW), stage: get(stage) })]);
 
         createMonster();
       },

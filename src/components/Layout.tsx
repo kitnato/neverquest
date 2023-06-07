@@ -11,11 +11,10 @@ import { WildernessStatus } from "@neverquest/components/Wilderness/WildernessSt
 import { isGameOver } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
 import { useReset } from "@neverquest/state/SeedContext";
-import { Showing } from "@neverquest/types/enums";
 
 export function Layout() {
   const isGameOverValue = useRecoilValue(isGameOver);
-  const [isShowingGameOver, setIsShowingGameOver] = useRecoilState(isShowing(Showing.GameOver));
+  const [isShowingGameOver, setIsShowingGameOver] = useRecoilState(isShowing("gameOver"));
 
   const reset = useReset();
 

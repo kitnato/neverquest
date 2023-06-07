@@ -4,7 +4,7 @@ import { Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { deltas, floatingTextQueues } from "@neverquest/state/deltas";
-import type { Delta } from "@neverquest/types/enums";
+import type { Delta } from "@neverquest/types/unions";
 import { DEFAULT_DELTA_DISPLAY } from "@neverquest/utilities/constants";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 

@@ -4,7 +4,7 @@ import { type RecoilState, useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { deltas } from "@neverquest/state/deltas";
-import type { Delta } from "@neverquest/types/enums";
+import type { Delta } from "@neverquest/types/unions";
 
 import { getAnimationClass } from "@neverquest/utilities/getters";
 

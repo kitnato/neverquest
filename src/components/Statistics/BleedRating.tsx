@@ -12,7 +12,6 @@ import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { bleed, bleedDamage, bleedRating, bleedTick, damage } from "@neverquest/state/statistics";
-import { Delta, Mastery, Showing, Skill } from "@neverquest/types/enums";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
@@ -22,14 +21,14 @@ export function BleedRating() {
   const bleedRatingValue = useRecoilValue(bleedRating);
   const bleedTickValue = useRecoilValue(bleedTick);
   const damageValue = useRecoilValue(damage);
-  const isShowingBleed = useRecoilValue(isShowing(Showing.Bleed));
-  const skillAnatomy = useRecoilValue(skills(Skill.Anatomy));
+  const isShowingBleed = useRecoilValue(isShowing("bleed"));
+  const skillAnatomy = useRecoilValue(skills("anatomy"));
 
   const { duration } = BLEED;
-  const { name } = MASTERIES[Mastery.Cruelty];
+  const { name } = MASTERIES.cruelty;
 
   useDeltaText({
-    atomDelta: deltas(Delta.BleedRating),
+    atomDelta: deltas("bleedRating"),
     atomValue: bleedRating,
   });
 
@@ -82,7 +81,7 @@ export function BleedRating() {
             <span>{skillAnatomy ? bleedRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
-          <FloatingText type={Delta.BleedRating} />
+          <FloatingText type="bleedRating" />
         </>
       }
       Icon={IconBleedRating}

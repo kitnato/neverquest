@@ -6,12 +6,11 @@ import { ReactComponent as IconArmorNone } from "@neverquest/icons/armor-none.sv
 import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
 import { armor, equippedGearID } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { GearType, Showing } from "@neverquest/types/enums";
 
 export function ArmorEquipped() {
   const armorValue = useRecoilValue(armor);
-  const equippedArmorValue = useRecoilValue(equippedGearID(GearType.Armor));
-  const isShowingArmor = useRecoilValue(isShowing(Showing.Armor));
+  const equippedArmorValue = useRecoilValue(equippedGearID("armor"));
+  const isShowingArmor = useRecoilValue(isShowing("armor"));
 
   if (!isShowingArmor) {
     return null;

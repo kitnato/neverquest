@@ -7,10 +7,9 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ReserveMeter } from "@neverquest/components/ReserveMeter";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { isShowing } from "@neverquest/state/isShowing";
-import { Delta, Reserve, Showing } from "@neverquest/types/enums";
 
 export function Stamina() {
-  const isShowingStamina = useRecoilValue(isShowing(Showing.Stamina));
+  const isShowingStamina = useRecoilValue(isShowing("stamina"));
 
   if (!isShowingStamina) {
     return null;
@@ -21,12 +20,12 @@ export function Stamina() {
       contents={
         <Stack>
           <Stack className="w-100" direction="horizontal">
-            <ReserveMeter attached="below" type={Reserve.Stamina} />
+            <ReserveMeter attached="below" type="stamina" />
 
-            <FloatingText type={Delta.Stamina} />
+            <FloatingText type="stamina" />
           </Stack>
 
-          <Regeneration type={Reserve.Stamina} />
+          <Regeneration type="stamina" />
         </Stack>
       }
       Icon={IconStamina}

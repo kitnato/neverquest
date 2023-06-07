@@ -7,7 +7,6 @@ import {
   monsterHealthCurrent,
   monsterHealthMaximum,
 } from "@neverquest/state/monster";
-import { Delta } from "@neverquest/types/enums";
 import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -24,7 +23,7 @@ export function useChangeMonsterHealth() {
         let newHealth = get(monsterHealthCurrent) + value;
 
         set(
-          deltas(Delta.HealthMonster),
+          deltas("monsterHealth"),
           delta ??
             ({
               color: isPositive ? "text-success" : "text-danger",

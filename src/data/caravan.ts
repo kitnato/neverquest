@@ -6,7 +6,7 @@ import type {
   WeaponModality,
 } from "@neverquest/LOCRA/types";
 import type { TrinketName } from "@neverquest/types";
-import { CrewMember } from "@neverquest/types/enums";
+import type { CrewMember } from "@neverquest/types/unions";
 
 export const BLACKSMITH_GEAR_LEVEL_MAXIMUM = 3;
 
@@ -22,7 +22,7 @@ export const CREW: Record<
   }
 > = {
   // TODO
-  [CrewMember.Alchemist]: {
+  alchemist: {
     coinPrice: 100,
     description: "Converts essence, scrap and coins between one another.",
     interaction: "Transmute",
@@ -30,7 +30,7 @@ export const CREW: Record<
     name: "Alchemist",
     requiredStage: 15,
   },
-  [CrewMember.Blacksmith]: {
+  blacksmith: {
     coinPrice: 20,
     description: "Crafts superior gear.",
     interaction: "Craft",
@@ -38,7 +38,7 @@ export const CREW: Record<
     name: "Blacksmith",
     requiredStage: 5,
   },
-  [CrewMember.Medic]: {
+  medic: {
     coinPrice: 50,
     description: "Heals wounds and sells bandages.",
     interaction: "Heal",
@@ -46,7 +46,7 @@ export const CREW: Record<
     name: "Medic",
     requiredStage: 8,
   },
-  [CrewMember.Mercenary]: {
+  mercenary: {
     coinPrice: 80,
     description: "Trains new skills and attributes.",
     interaction: "Train",
@@ -54,7 +54,7 @@ export const CREW: Record<
     name: "Mercenary",
     requiredStage: 12,
   },
-  [CrewMember.Merchant]: {
+  merchant: {
     coinPrice: 0,
     description: "Offers various items for purchase and buys unwanted items.",
     interaction: "Trade",
@@ -69,7 +69,7 @@ export const CREW: Record<
     requiredStage: 0,
   },
   // TODO
-  [CrewMember.Mystic]: {
+  mystic: {
     coinPrice: 200,
     description: "Offers a ritual that purges all essence.",
     interaction: "Ritual",
@@ -77,7 +77,7 @@ export const CREW: Record<
     name: "Alchemist",
     requiredStage: 30,
   },
-  [CrewMember.Tailor]: {
+  tailor: {
     coinPrice: 30,
     description: "Expands inventory space.",
     interaction: "Upgrade",
@@ -86,7 +86,7 @@ export const CREW: Record<
     requiredStage: 6,
   },
   // TODO
-  [CrewMember.Witch]: {
+  witch: {
     coinPrice: 150,
     description: "Sells potions that cure ailments.",
     interaction: "Brew",
@@ -98,7 +98,7 @@ export const CREW: Record<
 
 export const CREW_ORDER: CrewMember[] = Object.entries(CREW)
   .sort(([, a], [, b]) => a.requiredStage - b.requiredStage)
-  .map(([type]) => Number(type) as CrewMember);
+  .map(([type]) => type as CrewMember);
 
 export const MEDIC_PRICE_BANDAGES = 18;
 export const MEDIC_PRICE_SURGERY = 6;

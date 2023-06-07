@@ -13,22 +13,21 @@ import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { attackRate, attackRateTotal } from "@neverquest/state/statistics";
-import { Attribute, Delta, DeltaText, Showing } from "@neverquest/types/enums";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Attack() {
   const attackRateValue = useRecoilValue(attackRate);
-  const isShowingAttackRate = useRecoilValue(isShowing(Showing.AttackRate));
-  const isShowingAttackRateDetails = useRecoilValue(isShowing(Showing.AttackRateDetails));
+  const isShowingAttackRate = useRecoilValue(isShowing("attackRate"));
+  const isShowingAttackRateDetails = useRecoilValue(isShowing("attackRateDetails"));
   const weaponValue = useRecoilValue(weapon);
 
-  const { name } = ATTRIBUTES[Attribute.Speed];
+  const { name } = ATTRIBUTES.speed;
 
   useDeltaText({
-    atomDelta: deltas(Delta.AttackRate),
+    atomDelta: deltas("attackRate"),
     atomValue: attackRateTotal,
-    type: DeltaText.Time,
+    type: "time",
   });
 
   if (!isShowingAttackRate) {
@@ -67,7 +66,7 @@ export function Attack() {
           <Stack className="w-100" direction="horizontal">
             <AttackMeter />
 
-            <FloatingText type={Delta.AttackRate} />
+            <FloatingText type="attackRate" />
           </Stack>
         </OverlayTrigger>
       }

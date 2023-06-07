@@ -12,22 +12,21 @@ import { shield } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { staggerDuration, staggerRating, staggerWeapon } from "@neverquest/state/statistics";
-import { Delta, Mastery, Showing, Skill } from "@neverquest/types/enums";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function StaggerRating() {
   const { stagger } = useRecoilValue(shield);
-  const isShowingStagger = useRecoilValue(isShowing(Showing.Stagger));
+  const isShowingStagger = useRecoilValue(isShowing("stagger"));
   const staggerDurationValue = useRecoilValue(staggerDuration);
   const staggerRatingValue = useRecoilValue(staggerRating);
   const staggerWeaponValue = useRecoilValue(staggerWeapon);
-  const skillTraumatology = useRecoilValue(skills(Skill.Traumatology));
+  const skillTraumatology = useRecoilValue(skills("traumatology"));
 
-  const { name } = MASTERIES[Mastery.Might];
+  const { name } = MASTERIES.might;
 
   useDeltaText({
-    atomDelta: deltas(Delta.StaggerRating),
+    atomDelta: deltas("staggerRating"),
     atomValue: staggerRating,
   });
 
@@ -72,7 +71,7 @@ export function StaggerRating() {
             <span>{skillTraumatology ? staggerRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
-          <FloatingText type={Delta.StaggerRating} />
+          <FloatingText type="staggerRating" />
         </>
       }
       Icon={IconStaggerRating}

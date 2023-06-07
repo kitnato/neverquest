@@ -1,7 +1,7 @@
 import ls from "localstorage-slim";
 import type { AtomEffect } from "recoil";
 
-import type { StateKey } from "@neverquest/types/state-key";
+import type { StateKey } from "@neverquest/types/unions";
 import { KEY_SESSION, KEY_SETTINGS } from "@neverquest/utilities/constants";
 
 export function handleLocalStorage<ValueType>({
@@ -11,7 +11,7 @@ export function handleLocalStorage<ValueType>({
 }: {
   isSetting?: boolean;
   key: StateKey;
-  parameter?: number;
+  parameter?: string;
 }): AtomEffect<ValueType> {
   return ({ onSet, setSelf }) => {
     type Store = Record<string, ValueType>;

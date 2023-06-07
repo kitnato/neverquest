@@ -16,7 +16,6 @@ import { weapon as weaponEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { showDamagePerSecond } from "@neverquest/state/settings";
 import type { Weapon } from "@neverquest/types";
-import { Showing } from "@neverquest/types/enums";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import {
   capitalizeAll,
@@ -33,7 +32,7 @@ export function WeaponName({
   placement?: Placement;
   weapon: Weapon | typeof WEAPON_NONE;
 }) {
-  const isShowingGearClass = useRecoilValue(isShowing(Showing.GearClass));
+  const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
   const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
   const weaponEquippedValue = useRecoilValue(weaponEquipped);
 
@@ -59,7 +58,7 @@ export function WeaponName({
                 comparison={
                   isEquipped
                     ? null
-                    : { showingType: Showing.Weapon, subtrahend: weaponEquippedValue.level }
+                    : { showingType: "weapon", subtrahend: weaponEquippedValue.level }
                 }
                 level={level}
               />
@@ -73,7 +72,7 @@ export function WeaponName({
                   {!isEquipped && (
                     <GearComparison
                       difference={damage - weaponEquippedValue.damage}
-                      showingType={Showing.Weapon}
+                      showingType="weapon"
                     />
                   )}
                 </td>
@@ -89,7 +88,7 @@ export function WeaponName({
                     <GearComparison
                       difference={rate - weaponEquippedValue.rate}
                       isDownPositive
-                      showingType={Showing.Weapon}
+                      showingType="weapon"
                     />
                   )}
                 </td>
@@ -112,7 +111,7 @@ export function WeaponName({
                             rate: weaponEquippedValue.rate,
                           })
                         }
-                        showingType={Showing.Weapon}
+                        showingType="weapon"
                       />
                     )}
                   </td>
@@ -124,7 +123,7 @@ export function WeaponName({
                   isEquipped
                     ? null
                     : {
-                        showingType: Showing.Weapon,
+                        showingType: "weapon",
                         subtrahend: weaponEquippedValue.staminaCost,
                       }
                 }
@@ -157,7 +156,7 @@ export function WeaponName({
                       {!isEquipped && (
                         <GearComparison
                           difference={abilityChance - weaponEquippedValue.abilityChance}
-                          showingType={Showing.Weapon}
+                          showingType="weapon"
                         />
                       )}
                     </td>
@@ -171,7 +170,7 @@ export function WeaponName({
                 comparison={
                   isEquipped
                     ? null
-                    : { showingType: Showing.Weapon, subtrahend: weaponEquippedValue.weight }
+                    : { showingType: "weapon", subtrahend: weaponEquippedValue.weight }
                 }
                 weight={weight}
               />

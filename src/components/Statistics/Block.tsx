@@ -7,17 +7,16 @@ import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { block } from "@neverquest/state/statistics";
-import { Delta, DeltaText, Showing } from "@neverquest/types/enums";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Block() {
-  const isShowingBlock = useRecoilValue(isShowing(Showing.Block));
+  const isShowingBlock = useRecoilValue(isShowing("block"));
   const blockValue = useRecoilValue(block);
 
   useDeltaText({
-    atomDelta: deltas(Delta.Block),
+    atomDelta: deltas("block"),
     atomValue: block,
-    type: DeltaText.Percentage,
+    type: "percentage",
   });
 
   if (!isShowingBlock) {
@@ -30,7 +29,7 @@ export function Block() {
         <>
           <span>{formatPercentage(blockValue)}</span>
 
-          <FloatingText type={Delta.Block} />
+          <FloatingText type="block" />
         </>
       }
       Icon={IconBlock}

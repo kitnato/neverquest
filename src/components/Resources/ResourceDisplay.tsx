@@ -14,9 +14,8 @@ import {
   scrap,
   scrapLoot,
 } from "@neverquest/state/resources";
-import { Delta, Showing } from "@neverquest/types/enums";
 
-export function ResourceDisplay({ isLoot }: { isLoot?: boolean }) {
+export function ResourceDisplay({ isLoot = false }: { isLoot?: boolean }) {
   return (
     <Row>
       {isLoot ? (
@@ -25,7 +24,7 @@ export function ResourceDisplay({ isLoot }: { isLoot?: boolean }) {
             <Lootable
               atom={essenceLoot}
               Component={Essence}
-              deltaType={Delta.EssenceLoot}
+              deltaType="essenceLoot"
               tooltip="Looted essence"
             />
           </Col>
@@ -34,7 +33,7 @@ export function ResourceDisplay({ isLoot }: { isLoot?: boolean }) {
             <Lootable
               atom={scrapLoot}
               Component={Scrap}
-              deltaType={Delta.ScrapLoot}
+              deltaType="scrapLoot"
               tooltip="Looted scrap"
             />
           </Col>
@@ -43,7 +42,7 @@ export function ResourceDisplay({ isLoot }: { isLoot?: boolean }) {
             <Lootable
               atom={coinsLoot}
               Component={Coins}
-              deltaType={Delta.CoinsLoot}
+              deltaType="coinsLoot"
               tooltip="Looted coins"
             />
           </Col>
@@ -54,8 +53,8 @@ export function ResourceDisplay({ isLoot }: { isLoot?: boolean }) {
             <Resource
               atom={essence}
               Component={Essence}
-              deltaType={Delta.Essence}
-              showAtom={isShowing(Showing.Essence)}
+              deltaType="essence"
+              showAtom={isShowing("essence")}
             />
           </Col>
 
@@ -63,8 +62,8 @@ export function ResourceDisplay({ isLoot }: { isLoot?: boolean }) {
             <Resource
               atom={scrap}
               Component={Scrap}
-              deltaType={Delta.Scrap}
-              showAtom={isShowing(Showing.Scrap)}
+              deltaType="scrap"
+              showAtom={isShowing("scrap")}
             />
           </Col>
 
@@ -72,8 +71,8 @@ export function ResourceDisplay({ isLoot }: { isLoot?: boolean }) {
             <Resource
               atom={coins}
               Component={Coins}
-              deltaType={Delta.Coins}
-              showAtom={isShowing(Showing.Coins)}
+              deltaType="coins"
+              showAtom={isShowing("coins")}
             />
           </Col>
         </>

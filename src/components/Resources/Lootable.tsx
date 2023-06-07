@@ -34,7 +34,7 @@ export function Lootable({
     <Stack className={getAnimationClass({ type: "flipInX" })} direction="horizontal" gap={3}>
       <Component tooltip={tooltip} value={resourceValue} />
 
-      <FloatingText type={deltaType} />
+      <FloatingText deltaType={deltaType} />
     </Stack>
   );
 }

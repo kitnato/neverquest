@@ -32,7 +32,7 @@ export function Parry() {
         <>
           <span>{skillEscrime ? formatPercentage(parryValue) : LABEL_EMPTY}</span>
 
-          <FloatingText type="parry" />
+          <FloatingText deltaType="parry" />
         </>
       }
       Icon={IconParry}

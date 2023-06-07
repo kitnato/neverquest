@@ -22,7 +22,7 @@ export function Stamina() {
           <Stack className="w-100" direction="horizontal">
             <ReserveMeter attached="below" type="stamina" />
 
-            <FloatingText type="stamina" />
+            <FloatingText deltaType="stamina" isRelative />
           </Stack>
 
           <Regeneration type="stamina" />

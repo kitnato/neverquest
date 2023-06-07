@@ -82,7 +82,7 @@ export function BleedRating() {
             <span>{skillAnatomy ? bleedRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
-          <FloatingText type="bleedRating" />
+          <FloatingText deltaType="bleedRating" />
         </>
       }
       Icon={IconBleedRating}

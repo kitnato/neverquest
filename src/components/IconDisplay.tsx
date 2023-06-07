@@ -35,11 +35,11 @@ export function IconDisplay({
       description !== null &&
       description !== false &&
       description !== "" ? (
-        <Stack>
-          <span>{contents}</span>
+        <div>
+          <div>{contents}</div>
 
           <small className="text-muted">{description}</small>
-        </Stack>
+        </div>
       ) : typeof contents === "string" || Number.isInteger(contents) ? (
         <span>{contents}</span>
       ) : (

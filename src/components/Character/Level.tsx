@@ -21,7 +21,7 @@ export function Level() {
         <>
           <span>{levelValue}</span>
 
-          <FloatingText type="level" />
+          <FloatingText deltaType="level" />
         </>
       }
       Icon={IconLevel}

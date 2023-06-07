@@ -27,7 +27,7 @@ export function Protection() {
         <>
           <span>{protectionValue}</span>
 
-          <FloatingText type="protection" />
+          <FloatingText deltaType="protection" />
         </>
       }
       Icon={IconProtection}

@@ -72,7 +72,7 @@ export function StaggerRating() {
             <span>{skillTraumatology ? staggerRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
-          <FloatingText type="staggerRating" />
+          <FloatingText deltaType="staggerRating" />
         </>
       }
       Icon={IconStaggerRating}

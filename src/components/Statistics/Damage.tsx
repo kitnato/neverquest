@@ -30,7 +30,7 @@ export function Damage() {
   return (
     <IconDisplay
       contents={
-        <Stack direction="horizontal" gap={2}>
+        <Stack direction="horizontal" gap={3}>
           <OverlayTrigger
             overlay={
               <Popover>
@@ -58,7 +58,7 @@ export function Damage() {
             <span>{damageTotalValue}</span>
           </OverlayTrigger>
 
-          <FloatingText type="damage" />
+          <FloatingText deltaType="damage" />
         </Stack>
       }
       description={<DamagePerSecond />}

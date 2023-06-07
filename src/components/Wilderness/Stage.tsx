@@ -21,7 +21,7 @@ export function Stage() {
         <>
           <span>{stageValue}</span>
 
-          <FloatingText type="stage" />
+          <FloatingText deltaType="stage" />
         </>
       }
       Icon={IconStage}

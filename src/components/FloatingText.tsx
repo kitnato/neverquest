@@ -8,12 +8,18 @@ import type { Delta } from "@neverquest/types/unions";
 import { DEFAULT_DELTA_DISPLAY } from "@neverquest/utilities/constants";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function FloatingText({ type }: { type: Delta }) {
-  const delta = deltas(type);
+export function FloatingText({
+  deltaType,
+  isRelative = false,
+}: {
+  deltaType: Delta;
+  isRelative?: boolean;
+}) {
+  const delta = deltas(deltaType);
   const deltaValue = useRecoilValue(delta);
-  const [floatingTextQueue, setFloatingTextQueue] = useRecoilState(floatingTextQueues(type));
+  const [floatingTextQueue, setFloatingTextQueue] = useRecoilState(floatingTextQueues(deltaType));
   const resetDeltaValue = useResetRecoilState(delta);
-  const resetFloatingTextQueue = useResetRecoilState(floatingTextQueues(type));
+  const resetFloatingTextQueue = useResetRecoilState(floatingTextQueues(deltaType));
 
   const animationClass = getAnimationClass({
     speed: "slower",
@@ -46,7 +52,11 @@ export function FloatingText({ type }: { type: Delta }) {
   return (
     <div className="d-flex flex-nowrap position-relative">
       {floatingTextQueue.map(({ delta, key }) => (
-        <small className="position-absolute" key={key} style={{ bottom: -6, left: -8 }}>
+        <small
+          className="position-absolute"
+          key={key}
+          style={isRelative ? { bottom: -6, left: -4 } : { bottom: -6, right: -4 }}
+        >
           <strong
             style={{
               textShadow:

@@ -32,7 +32,7 @@ export function Deflection() {
         <>
           <span>{skillArmorcraft ? formatPercentage(deflectionValue) : LABEL_EMPTY}</span>
 
-          <FloatingText type="deflection" />
+          <FloatingText deltaType="deflection" />
         </>
       }
       Icon={IconDeflection}

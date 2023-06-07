@@ -21,7 +21,7 @@ export function EssenceAbsorbed() {
         <>
           <span>{essenceAbsorbedValue}</span>
 
-          <FloatingText type="essenceAbsorbed" />
+          <FloatingText deltaType="essenceAbsorbed" />
         </>
       }
       Icon={IconEssenceAbsorbed}

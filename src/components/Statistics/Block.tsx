@@ -29,7 +29,7 @@ export function Block() {
         <>
           <span>{formatPercentage(blockValue)}</span>
 
-          <FloatingText type="block" />
+          <FloatingText deltaType="block" />
         </>
       }
       Icon={IconBlock}

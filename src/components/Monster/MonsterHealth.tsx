@@ -12,7 +12,7 @@ export function MonsterHealth() {
         <Stack className="w-100" direction="horizontal">
           <ReserveMeter type="monsterHealth" />
 
-          <FloatingText type="monsterHealth" />
+          <FloatingText deltaType="monsterHealth" isRelative />
         </Stack>
       }
       Icon={IconHealth}

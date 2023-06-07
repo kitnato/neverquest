@@ -61,7 +61,7 @@ export function CriticalRating() {
             <span>{skillAssassination ? criticalRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
-          <FloatingText type="criticalRating" />
+          <FloatingText deltaType="criticalRating" />
         </>
       }
       Icon={IconCriticalRating}

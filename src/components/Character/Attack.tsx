@@ -66,7 +66,7 @@ export function Attack() {
           <Stack className="w-100" direction="horizontal">
             <AttackMeter />
 
-            <FloatingText type="attackRate" />
+            <FloatingText deltaType="attackRate" isRelative />
           </Stack>
         </OverlayTrigger>
       }

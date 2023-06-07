@@ -32,7 +32,7 @@ export function MasteryDisplay({ type }: { type: Mastery }) {
             <LabelledProgressBar label={label} value={value} variant="secondary" />
           </Stack>
 
-          <FloatingText type={type} />
+          <FloatingText deltaType={type} isRelative />
         </Stack>
       }
       description={description}

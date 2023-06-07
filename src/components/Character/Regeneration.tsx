@@ -91,13 +91,12 @@ export function Regeneration({ type }: { type: "health" | "stamina" }) {
         placement="right"
         trigger={isShowingReserveDetails ? ["hover", "focus"] : []}
       >
-        <>
-          <RegenerationMeter type={type} />
-        </>
+        <RegenerationMeter type={type} />
       </OverlayTrigger>
 
       <FloatingText
-        type={type === "health" ? "healthRegenerationRate" : "staminaRegenerationRate"}
+        deltaType={type === "health" ? "healthRegenerationRate" : "staminaRegenerationRate"}
+        isRelative
       />
     </>
   );

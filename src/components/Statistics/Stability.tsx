@@ -31,7 +31,7 @@ export function Stability() {
         <>
           <span>{skillShieldcraft ? formatPercentage(stabilityValue) : LABEL_EMPTY}</span>
 
-          <FloatingText type="stability" />
+          <FloatingText deltaType="stability" />
         </>
       }
       Icon={IconStability}

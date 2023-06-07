@@ -31,7 +31,7 @@ export function Tenacity() {
         <>
           <span>{skillTenacity ? formatPercentage(tenacityValue) : LABEL_EMPTY}</span>
 
-          <FloatingText type="tenacity" />
+          <FloatingText deltaType="tenacity" />
         </>
       }
       Icon={IconTenacity}

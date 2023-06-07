@@ -68,7 +68,7 @@ export function Dodge() {
             <span>{skillEvasion ? formatPercentage(dodgeTotalValue) : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
-          <FloatingText type="dodge" />
+          <FloatingText deltaType="dodge" />
         </>
       }
       Icon={IconDodge}

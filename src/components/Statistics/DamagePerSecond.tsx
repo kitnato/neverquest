@@ -29,7 +29,7 @@ export function DamagePerSecond() {
         <>
           <span>{formatFloat(damagePerSecondValue)}</span>
 
-          <FloatingText type="damagePerSecond" />
+          <FloatingText deltaType="damagePerSecond" isRelative />
         </>
       }
       Icon={IconDamagePerSecond}

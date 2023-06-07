@@ -23,7 +23,7 @@ export function AttributePoints() {
         <>
           <span>{attributePointsValue}</span>
 
-          <FloatingText type="attributePoints" />
+          <FloatingText deltaType="attributePoints" />
         </>
       }
       Icon={IconAttributePoints}

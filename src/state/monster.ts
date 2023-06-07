@@ -3,7 +3,7 @@ import { atom, selector } from "recoil";
 import { POISON } from "@neverquest/data/statistics";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isStageStarted, progress, stage } from "@neverquest/state/encounter";
-import { formatToFixed } from "@neverquest/utilities/formatters";
+import { formatFloat } from "@neverquest/utilities/formatters";
 import { getDamagePerRate, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 // SELECTORS
@@ -25,8 +25,7 @@ export const isMonsterStaggered = withStateKey("isMonsterStaggered", (key) =>
 export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   selector({
     get: ({ get }) =>
-      4500 -
-      Math.round(4000 * getGrowthSigmoid(get(stage)) - 100 * getGrowthSigmoid(get(progress))),
+      4500 - Math.round(4000 * getGrowthSigmoid(get(stage)) - 80 * getGrowthSigmoid(get(progress))),
     key,
   })
 );
@@ -34,7 +33,7 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
 export const monsterDamage = withStateKey("monsterDamage", (key) =>
   selector({
     get: ({ get }) =>
-      Math.round(800 * getGrowthSigmoid(get(stage)) + 100 * getGrowthSigmoid(get(progress))),
+      Math.round(700 * getGrowthSigmoid(get(stage)) + 50 * getGrowthSigmoid(get(progress))),
     key,
   })
 );
@@ -42,7 +41,7 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
 export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (key) =>
   selector({
     get: ({ get }) =>
-      formatToFixed(
+      formatFloat(
         getDamagePerRate({
           damage: get(monsterDamage),
           rate: get(monsterAttackRate),
@@ -55,7 +54,7 @@ export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (ke
 export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =>
   selector({
     get: ({ get }) =>
-      Math.round(2500 * getGrowthSigmoid(get(stage)) + 200 * getGrowthSigmoid(get(progress))),
+      Math.round(2400 * getGrowthSigmoid(get(stage)) + 100 * getGrowthSigmoid(get(progress))),
     key,
   })
 );

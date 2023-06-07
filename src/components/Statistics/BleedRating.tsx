@@ -30,6 +30,7 @@ export function BleedRating() {
   useDeltaText({
     atomDelta: deltas("bleedRating"),
     atomValue: bleedRating,
+    stop: (previous) => previous === null || !skillAnatomy,
   });
 
   if (!isShowingBleed) {

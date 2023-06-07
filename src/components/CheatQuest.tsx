@@ -6,6 +6,7 @@ import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
+import { isAttacking } from "@neverquest/state/character";
 import { isWilderness, progress, progressMaximum, stage } from "@neverquest/state/encounter";
 import { coinsLoot, essenceLoot, scrapLoot } from "@neverquest/state/resources";
 import { skills } from "@neverquest/state/skills";
@@ -22,6 +23,7 @@ export function CheatQuest() {
 
   const resetCoinsLoot = useResetRecoilState(coinsLoot);
   const resetEssenceLoot = useResetRecoilState(essenceLoot);
+  const setIsAttacking = useSetRecoilState(isAttacking);
   const resetScrapLoot = useResetRecoilState(scrapLoot);
   const setProgress = useSetRecoilState(progress);
   const setSkillArmorcraft = useSetRecoilState(skills("armorcraft"));
@@ -110,13 +112,14 @@ export function CheatQuest() {
             const difference = value - stageValue;
 
             for (let i = 0; i < difference; i++) {
-              increaseStage();
               generateMerchantInventory();
+              increaseStage();
             }
 
             resetWilderness();
 
             if (isWildernessValue) {
+              setIsAttacking(false);
               resetCoinsLoot();
               resetEssenceLoot();
               resetScrapLoot();
@@ -146,6 +149,7 @@ export function CheatQuest() {
     setSkill,
     toggleLocation,
     transactResources,
+    setIsAttacking,
   ]);
 
   return null;

@@ -28,7 +28,7 @@ export const CREW: Record<
     interaction: "Transmute",
     monologues: ["Things are not always what they seem."],
     name: "Alchemist",
-    requiredStage: 15,
+    requiredStage: 16,
   },
   blacksmith: {
     coinPrice: 20,
@@ -44,7 +44,7 @@ export const CREW: Record<
     interaction: "Heal",
     monologues: ["Allow me to patch you up."],
     name: "Medic",
-    requiredStage: 8,
+    requiredStage: 6,
   },
   mercenary: {
     coinPrice: 80,
@@ -63,6 +63,7 @@ export const CREW: Record<
       "Hello again. Some threads, perhaps?",
       "Ah, you're back. Care for more protection?",
       "You must be over-burdened. I have just the thing.",
+      "I heard there are other travelers looking to sell their services.",
       "Welcome back. Always a sight for sore eyes.",
     ],
     name: "Merchant",
@@ -83,7 +84,7 @@ export const CREW: Record<
     interaction: "Upgrade",
     monologues: ["Allow me to deepen your pockets."],
     name: "Tailor",
-    requiredStage: 6,
+    requiredStage: 8,
   },
   // TODO
   witch: {

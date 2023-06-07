@@ -19,9 +19,9 @@ import type { Weapon } from "@neverquest/types";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import {
   capitalizeAll,
+  formatFloat,
   formatMilliseconds,
   formatPercentage,
-  formatToFixed,
 } from "@neverquest/utilities/formatters";
 import { getDamagePerRate } from "@neverquest/utilities/getters";
 
@@ -101,7 +101,7 @@ export function WeaponName({
                   <td>
                     <IconImage Icon={IconWeaponDamagePerSecond} size="tiny" />
                     &nbsp;
-                    {formatToFixed(damagePerSecond)}
+                    {formatFloat(damagePerSecond)}
                     {!isEquipped && (
                       <GearComparison
                         difference={

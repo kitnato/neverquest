@@ -25,9 +25,7 @@ export function Layout() {
           <Stack gap={3}>
             <LocationDisplay />
 
-            <div style={{ zIndex: 1048 }}>
-              <Character />
-            </div>
+            <Character />
 
             <Masteries />
           </Stack>

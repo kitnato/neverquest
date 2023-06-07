@@ -13,7 +13,6 @@ import { withStateKey } from "@neverquest/state";
 import { attributes } from "@neverquest/state/attributes";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { masteries } from "@neverquest/state/masteries";
-import { formatToFixed } from "@neverquest/utilities/formatters";
 import {
   getComputedStatistic,
   getDamagePerRate,
@@ -151,14 +150,12 @@ export const damageTotal = withStateKey("damageTotal", (key) =>
 export const damagePerSecond = withStateKey("damagePerSecond", (key) =>
   selector({
     get: ({ get }) =>
-      formatToFixed(
-        getDamagePerRate({
-          damage: get(damageTotal),
-          damageModifier: get(criticalDamage),
-          damageModifierChance: get(criticalChance),
-          rate: get(attackRateTotal),
-        })
-      ),
+      getDamagePerRate({
+        damage: get(damageTotal),
+        damageModifier: get(criticalDamage),
+        damageModifierChance: get(criticalChance),
+        rate: get(attackRateTotal),
+      }),
     key,
   })
 );

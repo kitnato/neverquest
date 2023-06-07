@@ -35,13 +35,13 @@ export function AttackButton() {
     isInfinite: true,
     type: "pulse",
   });
-  const isDisabled = isGameOverValue || isStageCompletedValue || !isWildernessValue;
+  const isResting = isGameOverValue || isStageCompletedValue || !isWildernessValue;
   const showWarning =
-    isAttackingValue && !isDisabled && showLowHealthWarningValue && isHealthLowValue;
+    isAttackingValue && isHealthLowValue && !isResting && showLowHealthWarningValue;
 
   const { animation, Icon, tooltip }: { animation?: string; Icon: SVGIcon; tooltip: string } =
     (() => {
-      if (isDisabled) {
+      if (isResting) {
         return { Icon: IconResting, tooltip: "Resting" };
       }
 
@@ -93,7 +93,7 @@ export function AttackButton() {
         >
           <Button
             className={animation}
-            disabled={isDisabled}
+            disabled={isResting}
             onClick={handleAttack}
             variant="outline-dark"
           >

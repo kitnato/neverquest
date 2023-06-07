@@ -19,6 +19,7 @@ export function Deflection() {
   useDeltaText({
     atomDelta: deltas("deflection"),
     atomValue: deflection,
+    stop: (previous) => previous === null || !skillArmorcraft,
   });
 
   if (!isShowingDeflection) {

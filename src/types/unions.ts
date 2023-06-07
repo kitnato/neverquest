@@ -23,7 +23,7 @@ export type CrewMember =
 
 export type CrewStatus = "hirable" | "hired" | "locked";
 
-export type DeltaText = "number" | "percentage" | "time";
+export type DeltaText = "float" | "integer" | "percentage" | "time";
 
 export type Delta =
   | "attackRate"

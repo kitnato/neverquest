@@ -10,6 +10,10 @@
   transition: none;
 }
 
+.overlay-highlighted {
+  z-index: 1048;
+}
+
 body {
   user-select: none;
 }

@@ -16,7 +16,10 @@ export function Masteries() {
   }
 
   return (
-    <Accordion className={getAnimationClass({ type: "flipInX" })} defaultActiveKey="0">
+    <Accordion
+      className={`overlay-highlighted ${getAnimationClass({ type: "flipInX" })}`}
+      defaultActiveKey="0"
+    >
       <Accordion.Item eventKey="0">
         <Accordion.Header>
           <IconDisplay contents="Masteries" Icon={IconMasteries} tooltip="Masteries" />

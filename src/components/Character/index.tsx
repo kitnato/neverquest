@@ -7,7 +7,7 @@ import { Statistics } from "@neverquest/components/Statistics";
 
 export function Character() {
   return (
-    <Stack gap={3}>
+    <Stack className="overlay-highlighted" gap={3}>
       <Status />
 
       <Statistics />

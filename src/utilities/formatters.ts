@@ -36,15 +36,15 @@ export function formatMilliseconds(milliseconds: number) {
     return `${secondsDisplay}s`;
   }
 
-  return `${formatToFixed(milliseconds / 1000)}s`;
+  return `${formatFloat(milliseconds / 1000)}s`;
 }
 
 export function formatPercentage(number: number) {
-  return `${formatToFixed(number * 100)}%`;
+  return `${formatFloat(number * 100)}%`;
 }
 
 // Correctly does the rounding as opposed to .toFixed().
-export function formatToFixed(number: number, decimals = 2) {
+export function formatFloat(number: number, decimals = 2) {
   const multiplier = 10 ** decimals;
   const result = parseFloat((number * multiplier).toFixed(11));
 

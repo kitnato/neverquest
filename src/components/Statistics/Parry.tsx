@@ -19,6 +19,7 @@ export function Parry() {
   useDeltaText({
     atomDelta: deltas("parry"),
     atomValue: parry,
+    stop: (previous) => previous === null || !skillEscrime,
   });
 
   if (!isShowingParry) {

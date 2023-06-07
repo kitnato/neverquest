@@ -1,26 +1,23 @@
-import { OverlayTrigger, Popover } from "react-bootstrap";
+import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSecond";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconDamagePerSecond } from "@neverquest/icons/damage-per-second.svg";
 import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { showDamagePerSecond } from "@neverquest/state/settings";
-import { damage, damagePerSecond, damageTotal } from "@neverquest/state/statistics";
+import { damage, damageTotal } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 
 export function Damage() {
   const damageValue = useRecoilValue(damage);
   const damageTotalValue = useRecoilValue(damageTotal);
-  const damagePerSecondValue = useRecoilValue(damagePerSecond);
   const isShowingDamageDetails = useRecoilValue(isShowing("damageDetails"));
-  const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
   const weaponValue = useRecoilValue(weapon);
 
   const { name } = ATTRIBUTES.strength;
@@ -33,7 +30,7 @@ export function Damage() {
   return (
     <IconDisplay
       contents={
-        <>
+        <Stack direction="horizontal" gap={2}>
           <OverlayTrigger
             overlay={
               <Popover>
@@ -62,18 +59,9 @@ export function Damage() {
           </OverlayTrigger>
 
           <FloatingText type="damage" />
-        </>
+        </Stack>
       }
-      description={
-        showDamagePerSecondValue && (
-          <IconDisplay
-            contents={damagePerSecondValue}
-            Icon={IconDamagePerSecond}
-            iconProps={{ ignoreColor: true, overlayPlacement: "bottom", size: "tiny" }}
-            tooltip="Total damage per second"
-          />
-        )
-      }
+      description={<DamagePerSecond />}
       Icon={IconDamage}
       tooltip="Total damage"
     />

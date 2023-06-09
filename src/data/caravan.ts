@@ -106,19 +106,19 @@ export const MEDIC_PRICE_SURGERY = 6;
 export const MEDIC_PRICE_SURGERY_CRITICAL = 15;
 
 export const MERCHANT_OFFERS: (
-  | ({
+  | (ArtifactType<"armor"> & {
       gearClass: ArmorClass;
-    } & ArtifactType<"armor">)
-  | ({
+    })
+  | (ArtifactType<"shield"> & {
       gearClass: ShieldClass;
-    } & ArtifactType<"shield">)
-  | ({
+    })
+  | (ArtifactType<"trinket"> & {
+      name: TrinketName;
+    })
+  | (ArtifactType<"weapon"> & {
       gearClass: WeaponClass;
       modality: WeaponModality;
-    } & ArtifactType<"weapon">)
-  | ({
-      name: TrinketName;
-    } & ArtifactType<"trinket">)
+    })
 )[][] = [
   [
     {

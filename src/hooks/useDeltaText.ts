@@ -23,7 +23,7 @@ export function useDeltaText({
 }: {
   atomDelta: RecoilState<DeltaDisplay>;
   atomValue: RecoilValueReadOnly<number>;
-  stop?: (previous: null | number, current: number) => boolean;
+  stop?: (previous: number | null, current: number) => boolean;
   type?: DeltaText;
 }) {
   const currentValue = useRecoilValue(atomValue);

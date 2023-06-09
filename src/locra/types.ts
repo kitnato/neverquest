@@ -20,32 +20,32 @@ export type ArtifactType<T extends Artifact> = { type: T };
 
 export type ArtifactData = BaseData &
   (
-    | ({
+    | ArtifactType<"trinket">
+    | (ArtifactType<"armor"> & {
         subtype: ArmorSlot;
-      } & ArtifactType<"armor">)
-    | ({
+      })
+    | (ArtifactType<"shield"> & {
         subtype: ShieldClass;
-      } & ArtifactType<"shield">)
-    | ({
+      })
+    | (ArtifactType<"weapon"> & {
         artifactClass: WeaponClass;
         subtype: WeaponModality;
-      } & ArtifactType<"weapon">)
-    | ArtifactType<"trinket">
+      })
   );
 
 export type ArtifactQuery =
-  | ({
+  | ArtifactType<"trinket">
+  | (ArtifactType<"armor"> & {
       artifactClass?: ArmorClass;
       subtype?: ArmorSlot;
-    } & ArtifactType<"armor">)
-  | ({
+    })
+  | (ArtifactType<"shield"> & {
       subtype?: ShieldClass;
-    } & ArtifactType<"shield">)
-  | ArtifactType<"trinket">
-  | ({
+    })
+  | (ArtifactType<"weapon"> & {
       artifactClass?: WeaponClass;
       subtype?: WeaponModality;
-    } & ArtifactType<"weapon">);
+    });
 
 export type BaseData = { isNSFW?: boolean; name: string };
 

@@ -13,12 +13,12 @@
     "react-bootstrap": "2.7.4",
     "react-dom": "18.2.0",
     "recoil": "0.7.7",
-    "sass": "1.62.1"
+    "sass": "1.63.2"
   },
   "devDependencies": {
-    "@cneuro/eslint-config-functional": "1.9.3",
+    "@cneuro/eslint-config-functional": "1.9.4",
     "@types/node": "20.2.5",
-    "@types/react": "18.2.8",
+    "@types/react": "18.2.9",
     "@types/react-dom": "18.2.4",
     "@vitejs/plugin-react": "4.0.0",
     "eslint": "8.42.0",

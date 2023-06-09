@@ -5,7 +5,11 @@ import { GearComparison } from "@neverquest/components/Inventory/GearComparison"
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import type { ComparisonProps } from "@neverquest/types/props";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
+import {
+  CLASS_TABLE_CELL_ITALIC,
+  LABEL_EMPTY,
+  LABEL_UNKNOWN,
+} from "@neverquest/utilities/constants";
 
 export function WeightDetail({
   comparison = null,
@@ -24,7 +28,7 @@ export function WeightDetail({
 
           <td>
             <IconImage Icon={IconEncumbrance} size="tiny" />
-            &nbsp;{weight}
+            &nbsp;{weight || LABEL_EMPTY}
             {comparison !== null && (
               <GearComparison
                 difference={weight - comparison.subtrahend}

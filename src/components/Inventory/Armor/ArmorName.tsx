@@ -31,7 +31,7 @@ export function ArmorName({
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
 
   const { deflection, level, name, protection, staminaCost, weight } = armor;
-  const showComparison = armorEquippedValue.id === armor.id;
+  const showComparison = armorEquippedValue.id !== armor.id;
 
   return (
     <OverlayTrigger
@@ -44,8 +44,8 @@ export function ArmorName({
               <GearLevelDetail
                 comparison={
                   showComparison
-                    ? null
-                    : { showingType: "armor", subtrahend: armorEquippedValue.level }
+                    ? { showingType: "armor", subtrahend: armorEquippedValue.level }
+                    : null
                 }
                 level={level}
               />
@@ -56,7 +56,7 @@ export function ArmorName({
                 <td>
                   <IconImage Icon={IconProtection} size="tiny" />
                   &nbsp;{protection}
-                  {!showComparison && (
+                  {showComparison && (
                     <GearComparison
                       difference={protection - armorEquippedValue.protection}
                       showingType="armor"
@@ -110,7 +110,7 @@ export function ArmorName({
                       <td>
                         <IconImage Icon={IconDeflection} size="tiny" />
                         &nbsp;{formatPercentage(deflection)}
-                        {!showComparison && (
+                        {showComparison && (
                           <GearComparison
                             difference={deflection - armorEquippedValue.deflection}
                             showingType="armor"
@@ -133,7 +133,7 @@ export function ArmorName({
                       <td>
                         <DodgePenaltyContents staminaCost={staminaCost} />
 
-                        {!showComparison && (
+                        {showComparison && (
                           <GearComparison
                             difference={staminaCost - armorEquippedValue.staminaCost}
                             isDownPositive
@@ -151,8 +151,8 @@ export function ArmorName({
               <WeightDetail
                 comparison={
                   showComparison
-                    ? null
-                    : { showingType: "armor", subtrahend: armorEquippedValue.weight }
+                    ? { showingType: "armor", subtrahend: armorEquippedValue.weight }
+                    : null
                 }
                 weight={weight}
               />

@@ -30,7 +30,7 @@ export function ShieldName({
   const shieldEquippedValue = useRecoilValue(shieldEquipped);
 
   const { block, level, name, stagger, staminaCost, weight } = shield;
-  const showComparison = shieldEquippedValue.id === shield.id;
+  const showComparison = shieldEquippedValue.id !== shield.id;
 
   return (
     <OverlayTrigger
@@ -43,8 +43,8 @@ export function ShieldName({
               <GearLevelDetail
                 comparison={
                   showComparison
-                    ? null
-                    : { showingType: "shield", subtrahend: shieldEquippedValue.level }
+                    ? { showingType: "shield", subtrahend: shieldEquippedValue.level }
+                    : null
                 }
                 level={level}
               />
@@ -55,7 +55,7 @@ export function ShieldName({
                 <td>
                   <IconImage Icon={IconBlock} size="tiny" />
                   &nbsp;{formatPercentage(block)}
-                  {!showComparison && (
+                  {showComparison && (
                     <GearComparison
                       difference={block - shieldEquippedValue.block}
                       showingType="shield"
@@ -67,11 +67,11 @@ export function ShieldName({
               <StaminaCostDetail
                 comparison={
                   showComparison
-                    ? null
-                    : {
+                    ? {
                         showingType: "shield",
                         subtrahend: shieldEquippedValue.staminaCost,
                       }
+                    : null
                 }
                 cost={staminaCost}
               />
@@ -120,7 +120,7 @@ export function ShieldName({
                     <td>
                       <IconImage Icon={IconStagger} size="tiny" />
                       &nbsp;{formatPercentage(stagger)}
-                      {!showComparison && (
+                      {showComparison && (
                         <GearComparison
                           difference={stagger - shieldEquippedValue.stagger}
                           showingType="shield"
@@ -136,8 +136,8 @@ export function ShieldName({
               <WeightDetail
                 comparison={
                   showComparison
-                    ? null
-                    : { showingType: "shield", subtrahend: shieldEquippedValue.weight }
+                    ? { showingType: "shield", subtrahend: shieldEquippedValue.weight }
+                    : null
                 }
                 weight={weight}
               />

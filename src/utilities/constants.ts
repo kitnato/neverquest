@@ -10,9 +10,9 @@ export const DEFAULT_DELTA_DISPLAY: DeltaDisplay = {
   value: "",
 };
 
-const KEY_STORAGE_PREFIX = "nq";
-export const KEY_SESSION = `${KEY_STORAGE_PREFIX}-ss`;
-export const KEY_SETTINGS = `${KEY_STORAGE_PREFIX}-st`;
+const KEY_STORAGE_PREFIX = "neverquest";
+export const KEY_SESSION = `${KEY_STORAGE_PREFIX}-session`;
+export const KEY_SETTINGS = `${KEY_STORAGE_PREFIX}-settings`;
 
 export const LABEL_AT_MAXIMUM = "MAX";
 export const LABEL_EMPTY = "--";

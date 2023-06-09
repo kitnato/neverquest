@@ -6,7 +6,7 @@ import { CheatQuest } from "@neverquest/components/CheatQuest";
 import { Header } from "@neverquest/components/Header";
 import { Initializer } from "@neverquest/components/Initializer";
 import { Layout } from "@neverquest/components/Layout";
-import { SeedContext, useSeed } from "@neverquest/state/SeedContext";
+import { SeedContext, useSeed } from "@neverquest/state/seed";
 
 export function Core() {
   const { resetSeed, seed } = useSeed();

@@ -91,7 +91,9 @@ export function Regeneration({ type }: { type: "health" | "stamina" }) {
         placement="right"
         trigger={isShowingReserveDetails ? ["hover", "focus"] : []}
       >
-        <RegenerationMeter type={type} />
+        <div className="w-100">
+          <RegenerationMeter type={type} />
+        </div>
       </OverlayTrigger>
 
       <FloatingText

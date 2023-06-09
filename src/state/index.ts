@@ -29,16 +29,14 @@ export function handleLocalStorage<ValueType>({
     }
 
     onSet((newValue, _, isReset) => {
-      const store = ls.get<Store>(storeKey);
+      const store = ls.get<Store>(storeKey) ?? {};
 
-      if (store !== null) {
-        if (isReset) {
-          const { [valueKey]: _, ...newStore } = store;
+      if (isReset) {
+        const { [valueKey]: _, ...newStore } = store;
 
-          ls.set(storeKey, newStore);
-        } else {
-          ls.set(storeKey, { ...store, [valueKey]: newValue });
-        }
+        ls.set(storeKey, newStore);
+      } else {
+        ls.set(storeKey, { ...store, [valueKey]: newValue });
       }
     });
   };

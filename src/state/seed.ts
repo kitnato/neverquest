@@ -6,7 +6,7 @@ import { KEY_SESSION } from "@neverquest/utilities/constants";
 
 export const SeedContext = createContext(() => console.error("SeedContext.Provider not found"));
 
-export const useReset = () => {
+export const useRestart = () => {
   const context = useContext(SeedContext);
 
   return () => {

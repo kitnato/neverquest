@@ -10,13 +10,13 @@ import { Masteries } from "@neverquest/components/Masteries";
 import { WildernessStatus } from "@neverquest/components/Wilderness/WildernessStatus";
 import { isGameOver } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
-import { useReset } from "@neverquest/state/SeedContext";
+import { useRestart } from "@neverquest/state/seed";
 
 export function Layout() {
   const isGameOverValue = useRecoilValue(isGameOver);
   const [isShowingGameOver, setIsShowingGameOver] = useRecoilState(isShowing("gameOver"));
 
-  const reset = useReset();
+  const restart = useRestart();
 
   return (
     <>
@@ -47,7 +47,7 @@ export function Layout() {
       <ConfirmationDialog
         confirmationLabel="Restart"
         message="Start a new quest?"
-        onConfirm={reset}
+        onConfirm={restart}
         setHide={() => setIsShowingGameOver(false)}
         show={isGameOverValue && isShowingGameOver}
         title="Death has come."

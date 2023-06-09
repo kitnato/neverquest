@@ -28,33 +28,29 @@ export type Consumable = ItemBase & {
 
 export type ConsumableName = "Bandages" | "Elixir" | "Salve";
 
-export type Inventory = Record<string, Item>;
-
 export type InventoryBlacksmith = {
   armor: Armor | null;
   shield: Shield | null;
   weapon: Weapon | null;
 };
 
-export type InventoryMerchant = Record<
-  string,
-  {
-    isReturned: boolean;
-    item: Item;
-  }
->;
+export type InventoryMerchant = {
+  isReturned: boolean;
+  item: Item;
+}[];
 
 export type Item = Consumable | Gear | Trinket;
 
 type ItemBase = {
   coinPrice: number;
+  id: string;
   name: string;
   weight: number;
 };
 
 export type Gear = Armor | Shield | Weapon;
 
-type GearBase = ItemBase & { level: number; scrapPrice: number };
+type GearBase = ItemBase & { isEquipped: boolean; level: number; scrapPrice: number };
 
 export type Range = {
   maximum: number;

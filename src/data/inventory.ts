@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { ReactComponent as IconPlate } from "@neverquest/icons/armor-plate.svg";
 import { ReactComponent as IconReinforced } from "@neverquest/icons/armor-reinforced.svg";
 import { ReactComponent as IconBandages } from "@neverquest/icons/bandages.svg";
@@ -16,13 +17,14 @@ import { ReactComponent as IconBlunt } from "@neverquest/icons/weapon-blunt.svg"
 import { ReactComponent as IconPiercing } from "@neverquest/icons/weapon-piercing.svg";
 import { ReactComponent as IconSlashing } from "@neverquest/icons/weapon-slashing.svg";
 import { ReactComponent as IconWeaponStagger } from "@neverquest/icons/weapon-stagger.svg";
-import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRA/types";
+import type { ArmorClass, ShieldClass, WeaponClass, WeaponModality } from "@neverquest/LOCRA/types";
 import type { Consumable, ConsumableName, Range, Trinket, TrinketName } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Showing } from "@neverquest/types/unions";
+import type { Showing, WeaponGrip } from "@neverquest/types/unions";
 
 export const ARMOR_NONE = {
   deflection: 0,
+  id: nanoid(),
   level: 0,
   name: "Unarmored",
   protection: 0,
@@ -67,40 +69,42 @@ export const ARMOR_SPECIFICATIONS: Record<
   },
 };
 
-export const CONSUMABLES: Record<ConsumableName, { Icon: SVGIcon; item: Consumable }> = {
-  Bandages: {
-    Icon: IconBandages,
-    item: {
-      coinPrice: 10,
-      description: "Restores all health when used.",
-      name: "Bandages",
-      weight: 1,
+export const CONSUMABLES: Record<ConsumableName, { Icon: SVGIcon; item: Omit<Consumable, "id"> }> =
+  {
+    Bandages: {
+      Icon: IconBandages,
+      item: {
+        coinPrice: 10,
+        description: "Restores all health when used.",
+        name: "Bandages",
+        weight: 1,
+      },
     },
-  },
-  Elixir: {
-    Icon: IconElixir,
-    item: {
-      coinPrice: 40,
-      description: "Restores all stamina.",
-      name: "Elixir",
-      weight: 1,
+    Elixir: {
+      Icon: IconElixir,
+      item: {
+        coinPrice: 40,
+        description: "Restores all stamina.",
+        name: "Elixir",
+        weight: 1,
+      },
     },
-  },
-  Salve: {
-    Icon: IconSalve,
-    item: {
-      coinPrice: 10,
-      description: "Cures poison and blight.",
-      name: "Salve",
-      weight: 1,
+    Salve: {
+      Icon: IconSalve,
+      item: {
+        coinPrice: 10,
+        description: "Cures poison and blight.",
+        name: "Salve",
+        weight: 1,
+      },
     },
-  },
-};
+  };
 
 export const KNAPSACK_SIZE = 3;
 
 export const SHIELD_NONE = {
   block: 0,
+  id: nanoid(),
   level: 0,
   name: "Unshielded",
   stagger: 0,
@@ -147,6 +151,7 @@ export const TRINKETS: Record<TrinketName, { Icon: SVGIcon; item: Trinket }> = {
     item: {
       coinPrice: 20,
       description: "Navigate the wilderness to hunt in previous locations.",
+      id: nanoid(),
       name: "Compass",
       weight: 1,
     },
@@ -156,6 +161,7 @@ export const TRINKETS: Record<TrinketName, { Icon: SVGIcon; item: Trinket }> = {
     item: {
       coinPrice: 40,
       description: "Travel back to the caravan even if there are still lurking monsters.",
+      id: nanoid(),
       name: "Hearthstone",
       weight: 1,
     },
@@ -165,6 +171,7 @@ export const TRINKETS: Record<TrinketName, { Icon: SVGIcon; item: Trinket }> = {
     item: {
       coinPrice: 10,
       description: "Carry more items and manage gear.",
+      id: nanoid(),
       name: "Knapsack",
       weight: 0,
     },
@@ -174,15 +181,16 @@ export const TRINKETS: Record<TrinketName, { Icon: SVGIcon; item: Trinket }> = {
 export const WEAPON_NONE = {
   abilityChance: 0,
   damage: 10,
-  gearClass: "blunt",
-  grip: "oneHanded",
+  gearClass: "blunt" as WeaponClass,
+  grip: "oneHanded" as WeaponGrip,
+  id: nanoid(),
   level: 0,
-  modality: "melee",
+  modality: "melee" as WeaponModality,
   name: "Unarmed",
   rate: 2500,
   staminaCost: 0,
   weight: 0,
-} as const;
+};
 
 export const WEAPON_SPECIFICATIONS: Record<
   WeaponClass,

@@ -19,9 +19,9 @@ export function CraftedGear({ gear }: { gear: Gear }) {
   const toggleEquipGear = useToggleEquipGear();
 
   const handleAcquire = () => {
-    const [shouldAutoEquip, id] = acquireGear({ gear });
+    const shouldAutoEquip = acquireGear(gear);
 
-    if (id !== null) {
+    if (shouldAutoEquip !== null) {
       if (isArmor(gear)) {
         setBlacksmithInventory((current) => ({ ...current, armor: null }));
       }
@@ -35,7 +35,7 @@ export function CraftedGear({ gear }: { gear: Gear }) {
       }
 
       if (shouldAutoEquip) {
-        toggleEquipGear(id);
+        toggleEquipGear(gear);
       }
     }
   };

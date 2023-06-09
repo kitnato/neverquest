@@ -8,8 +8,8 @@ import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { UseCompass } from "@neverquest/components/Inventory/Trinket/UseCompass";
 import { UseHearthstone } from "@neverquest/components/Inventory/Trinket/UseHearthstone";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
-import { equippedGearIDs, inventory } from "@neverquest/state/inventory";
-import type { ConsumableName, TrinketName } from "@neverquest/types";
+import { inventory } from "@neverquest/state/inventory";
+import type { ConsumableName, Gear, TrinketName } from "@neverquest/types";
 import { isGear } from "@neverquest/types/type-guards";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 
@@ -23,13 +23,13 @@ const ITEM_ACTIONS: Record<ConsumableName | TrinketName, FunctionComponent> = {
 };
 
 export function Inventory() {
-  const equippedGearIDValues = useRecoilValue(equippedGearIDs);
   const inventoryValue = useRecoilValue(inventory);
 
   const toggleEquipGear = useToggleEquipGear();
 
-  const storedItemIDs = Object.getOwnPropertyNames(inventoryValue).filter(
-    (id) => !equippedGearIDValues.includes(id)
+  const equippedGear = inventoryValue.filter((item) => isGear(item) && item.isEquipped);
+  const storedItems = inventoryValue.filter(
+    (item) => !isGear(item) || (isGear(item) && !item.isEquipped)
   );
 
   return (
@@ -41,16 +41,16 @@ export function Inventory() {
       <Stack gap={3}>
         <h6>Equipped</h6>
 
-        {equippedGearIDValues.length === 0 && <span className="fst-italic">Nothing equipped.</span>}
+        {equippedGear.length === 0 && <span className="fst-italic">Nothing equipped.</span>}
 
-        {equippedGearIDValues.map((id) => {
-          const item = inventoryValue[id];
+        {equippedGear.map((item) => {
+          const { id } = item;
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
               <ItemDisplay item={item} overlayPlacement="right" />
 
-              <Button onClick={() => toggleEquipGear(id)} variant="outline-dark">
+              <Button onClick={() => toggleEquipGear(item as Gear)} variant="outline-dark">
                 Unequip
               </Button>
             </div>
@@ -61,21 +61,19 @@ export function Inventory() {
       <Stack gap={3}>
         <h6>Stored</h6>
 
-        {storedItemIDs.length === 0 && <span className="fst-italic">Nothing stored.</span>}
+        {storedItems.length === 0 && <span className="fst-italic">Nothing stored.</span>}
 
-        {storedItemIDs.map((id) => {
-          const item = inventoryValue[id];
-
+        {storedItems.map((item) => {
           const ItemAction = isGear(item)
             ? () => (
-                <Button onClick={() => toggleEquipGear(id)} variant="outline-dark">
+                <Button onClick={() => toggleEquipGear(item)} variant="outline-dark">
                   Equip
                 </Button>
               )
             : ITEM_ACTIONS[item.name];
 
           return (
-            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
+            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.id}>
               <ItemDisplay item={item} />
 
               <ItemAction />

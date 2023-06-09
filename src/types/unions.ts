@@ -162,8 +162,6 @@ export type StateKey =
   | "dodgeTotal"
   | "encumbrance"
   | "encumbranceMaximum"
-  | "equippedGearID"
-  | "equippedGearIDs"
   | "essence"
   | "essenceAbsorbed"
   | "essenceLoot"

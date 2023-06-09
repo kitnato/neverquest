@@ -10,7 +10,7 @@ import type { Skill } from "@neverquest/types/unions";
 export function useAcquireSkill() {
   return useRecoilCallback(
     ({ set }) =>
-      ({ skill }: { skill: Skill }) => {
+      (skill: Skill) => {
         const { shows, unlocksAttributes, unlocksMasteries } = SKILLS[skill];
 
         set(skills(skill), true);

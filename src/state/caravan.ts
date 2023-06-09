@@ -86,7 +86,7 @@ export const hasBoughtFromMerchant = withStateKey("hasBoughtFromMerchant", (key)
 
 export const merchantInventory = withStateKey("merchantInventory", (key) =>
   atom<InventoryMerchant>({
-    default: {},
+    default: [],
     effects: [handleLocalStorage<InventoryMerchant>({ key })],
     key,
   })

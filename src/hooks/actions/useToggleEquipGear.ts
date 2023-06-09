@@ -1,30 +1,21 @@
-import { type RecoilState, useRecoilCallback } from "recoil";
+import { useRecoilCallback } from "recoil";
 
 import { attributes } from "@neverquest/state/attributes";
-import { equippedGearID, inventory } from "@neverquest/state/inventory";
+import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
-import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
+import type { Gear } from "@neverquest/types";
+import { isArmor, isGear, isShield, isWeapon } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleEquipGear() {
   return useRecoilCallback(
-    ({ reset, set, snapshot }) =>
-      (id: string) => {
+    ({ set, snapshot }) =>
+      (gear: Gear) => {
         const get = getSnapshotGetter(snapshot);
 
-        const item = get(inventory)[id];
-
-        const toggle = (slot: RecoilState<string | null>) => {
-          if (get(slot) === id) {
-            reset(slot);
-          } else {
-            set(slot, id);
-          }
-        };
-
-        if (isArmor(item)) {
-          const { staminaCost } = item;
+        if (isArmor(gear)) {
+          const { staminaCost } = gear;
 
           set(isShowing("armor"), true);
           set(isShowing("defense"), true);
@@ -33,20 +24,16 @@ export function useToggleEquipGear() {
           if (get(skills("evasion")) && staminaCost) {
             set(isShowing("dodgePenalty"), true);
           }
-
-          toggle(equippedGearID("armor"));
         }
 
-        if (isShield(item)) {
+        if (isShield(gear)) {
           set(isShowing("block"), true);
           set(isShowing("defense"), true);
           set(isShowing("shield"), true);
-
-          toggle(equippedGearID("shield"));
         }
 
-        if (isWeapon(item)) {
-          if (item.staminaCost) {
+        if (isWeapon(gear)) {
+          if (gear.staminaCost) {
             set(isShowing("stamina"), true);
 
             if (!get(attributes("endurance")).isUnlocked) {
@@ -60,9 +47,20 @@ export function useToggleEquipGear() {
           set(isShowing("attackRateDetails"), true);
           set(isShowing("damageDetails"), true);
           set(isShowing("weapon"), true);
-
-          toggle(equippedGearID("weapon"));
         }
+
+        set(inventory, (current) =>
+          current.map((currentItem) => {
+            if (isGear(currentItem) && currentItem.id === gear.id) {
+              return {
+                ...currentItem,
+                isEquipped: !currentItem.isEquipped,
+              };
+            }
+
+            return currentItem;
+          })
+        );
       },
     []
   );

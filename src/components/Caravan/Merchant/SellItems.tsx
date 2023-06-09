@@ -1,7 +1,6 @@
-import { nanoid } from "nanoid";
 import { useState } from "react";
 import { Button, Stack } from "react-bootstrap";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
@@ -9,40 +8,29 @@ import { Coins } from "@neverquest/components/Resources/Coins";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { merchantInventory } from "@neverquest/state/caravan";
-import { equippedGearIDs, inventory } from "@neverquest/state/inventory";
+import { inventory } from "@neverquest/state/inventory";
+import type { Item } from "@neverquest/types";
+import { isGear } from "@neverquest/types/type-guards";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { getSellPrice } from "@neverquest/utilities/getters";
 
 export function SellItems() {
-  const equippedGearIDValues = useRecoilValue(equippedGearIDs);
   const [inventoryValue, setInventory] = useRecoilState(inventory);
   const setMerchantInventory = useSetRecoilState(merchantInventory);
 
-  const [sellConfirmation, setSellConfirmation] = useState<string | null>(null);
+  const [sellConfirmation, setSellConfirmation] = useState<Item | null>(null);
 
   const toggleEquipGear = useToggleEquipGear();
   const transactResources = useTransactResources();
 
-  const inventoryIDs = Object.getOwnPropertyNames(inventoryValue);
-
-  const sellItem = (id: string) => {
-    const isEquipped = equippedGearIDValues.includes(id);
-    const item = inventoryValue[id];
-
-    if (isEquipped) {
-      toggleEquipGear(id);
+  const sellItem = (item: Item) => {
+    if (isGear(item)) {
+      toggleEquipGear(item);
     }
 
-    setInventory((current) => {
-      const { [id]: _, ...newInventoryContents } = current;
+    setInventory((current) => current.filter(({ id }) => id !== item.id));
 
-      return newInventoryContents;
-    });
-
-    setMerchantInventory((current) => ({
-      ...current,
-      [nanoid()]: { isReturned: true, item },
-    }));
+    setMerchantInventory((current) => current.concat({ isReturned: true, item }));
     transactResources({ coinsDifference: getSellPrice(item) });
   };
 
@@ -50,16 +38,15 @@ export function SellItems() {
     <Stack gap={3}>
       <h6>Sell items</h6>
 
-      {inventoryIDs.length === 0 ? (
+      {inventoryValue.length === 0 ? (
         <span className="fst-italic">Nothing to sell.</span>
       ) : (
         <Stack gap={3}>
-          {inventoryIDs.map((id) => {
-            const isEquipped = equippedGearIDValues.includes(id);
-            const item = inventoryValue[id];
+          {inventoryValue.map((item) => {
+            const isEquipped = isGear(item) && item.isEquipped;
 
             return (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.id}>
                 <Stack direction="horizontal">
                   <ItemDisplay item={item} overlayPlacement="right" />
 
@@ -76,9 +63,9 @@ export function SellItems() {
                   <Button
                     onClick={() => {
                       if (isEquipped) {
-                        setSellConfirmation(id);
+                        setSellConfirmation(item);
                       } else {
-                        sellItem(id);
+                        sellItem(item);
                       }
                     }}
                     variant="outline-dark"

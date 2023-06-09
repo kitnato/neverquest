@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
@@ -11,20 +10,16 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 export function useAcquireGear() {
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      ({ gear }: { gear: Gear }): [boolean, string | null] => {
+      (gear: Gear) => {
         const get = getSnapshotGetter(snapshot);
 
-        const id = nanoid();
         const { weight } = gear;
 
         if (!get(canFit(weight))) {
-          return [false, null];
+          return null;
         }
 
-        set(inventory, (current) => ({
-          ...current,
-          [id]: gear,
-        }));
+        set(inventory, (current) => current.concat(gear));
 
         if (
           get(autoEquip) &&
@@ -32,10 +27,10 @@ export function useAcquireGear() {
             (get(shield) === SHIELD_NONE && isShield(gear)) ||
             (get(weapon) === WEAPON_NONE && isWeapon(gear)))
         ) {
-          return [true, id];
+          return true;
         }
 
-        return [false, id];
+        return false;
       },
     []
   );

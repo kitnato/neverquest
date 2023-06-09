@@ -30,7 +30,7 @@ export function ShieldName({
   const shieldEquippedValue = useRecoilValue(shieldEquipped);
 
   const { block, level, name, stagger, staminaCost, weight } = shield;
-  const isEquipped = JSON.stringify(shieldEquippedValue) === JSON.stringify(shield);
+  const showComparison = shieldEquippedValue.id === shield.id;
 
   return (
     <OverlayTrigger
@@ -42,7 +42,7 @@ export function ShieldName({
             <DetailsTable>
               <GearLevelDetail
                 comparison={
-                  isEquipped
+                  showComparison
                     ? null
                     : { showingType: "shield", subtrahend: shieldEquippedValue.level }
                 }
@@ -55,7 +55,7 @@ export function ShieldName({
                 <td>
                   <IconImage Icon={IconBlock} size="tiny" />
                   &nbsp;{formatPercentage(block)}
-                  {!isEquipped && (
+                  {!showComparison && (
                     <GearComparison
                       difference={block - shieldEquippedValue.block}
                       showingType="shield"
@@ -66,7 +66,7 @@ export function ShieldName({
 
               <StaminaCostDetail
                 comparison={
-                  isEquipped
+                  showComparison
                     ? null
                     : {
                         showingType: "shield",
@@ -120,7 +120,7 @@ export function ShieldName({
                     <td>
                       <IconImage Icon={IconStagger} size="tiny" />
                       &nbsp;{formatPercentage(stagger)}
-                      {!isEquipped && (
+                      {!showComparison && (
                         <GearComparison
                           difference={stagger - shieldEquippedValue.stagger}
                           showingType="shield"
@@ -135,7 +135,7 @@ export function ShieldName({
 
               <WeightDetail
                 comparison={
-                  isEquipped
+                  showComparison
                     ? null
                     : { showingType: "shield", subtrahend: shieldEquippedValue.weight }
                 }

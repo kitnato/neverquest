@@ -7,18 +7,16 @@ import { merchantInventory } from "@neverquest/state/caravan";
 export function PurchaseItems() {
   const merchantInventoryValue = useRecoilValue(merchantInventory);
 
-  const newItemIDs = Object.getOwnPropertyNames(merchantInventoryValue).filter(
-    (id) => !merchantInventoryValue[id].isReturned
-  );
+  const newItems = merchantInventoryValue.filter((item) => !item.isReturned);
 
   return (
     <Stack gap={3}>
       <h6>Purchase items</h6>
 
-      {newItemIDs.length === 0 ? (
+      {newItems.length === 0 ? (
         <span className="fst-italic">Nothing available.</span>
       ) : (
-        <PurchasableItems inventoryIDs={newItemIDs} />
+        <PurchasableItems items={newItems.map(({ item }) => item)} />
       )}
     </Stack>
   );

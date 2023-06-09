@@ -42,7 +42,7 @@ export function WeaponName({
     damage,
     rate,
   });
-  const isEquipped = JSON.stringify(weaponEquippedValue) === JSON.stringify(weapon);
+  const showComparison = weaponEquippedValue.id === weapon.id;
 
   const isShowingAbility = useRecoilValue(isShowing(showingType));
 
@@ -56,7 +56,7 @@ export function WeaponName({
             <DetailsTable>
               <GearLevelDetail
                 comparison={
-                  isEquipped
+                  showComparison
                     ? null
                     : { showingType: "weapon", subtrahend: weaponEquippedValue.level }
                 }
@@ -69,7 +69,7 @@ export function WeaponName({
                 <td>
                   <IconImage Icon={IconWeaponDamage} size="tiny" />
                   &nbsp;{damage}
-                  {!isEquipped && (
+                  {!showComparison && (
                     <GearComparison
                       difference={damage - weaponEquippedValue.damage}
                       showingType="weapon"
@@ -84,7 +84,7 @@ export function WeaponName({
                 <td>
                   <IconImage Icon={IconWeaponAttackRate} size="tiny" />
                   &nbsp;{formatMilliseconds(rate)}
-                  {!isEquipped && (
+                  {!showComparison && (
                     <GearComparison
                       difference={rate - weaponEquippedValue.rate}
                       isDownPositive
@@ -102,7 +102,7 @@ export function WeaponName({
                     <IconImage Icon={IconWeaponDamagePerSecond} size="tiny" />
                     &nbsp;
                     {formatFloat(damagePerSecond)}
-                    {!isEquipped && (
+                    {!showComparison && (
                       <GearComparison
                         difference={
                           damagePerSecond -
@@ -120,7 +120,7 @@ export function WeaponName({
 
               <StaminaCostDetail
                 comparison={
-                  isEquipped
+                  showComparison
                     ? null
                     : {
                         showingType: "weapon",
@@ -153,7 +153,7 @@ export function WeaponName({
                     <td>
                       <IconImage Icon={IconAbility} size="tiny" />
                       &nbsp;{formatPercentage(abilityChance)}
-                      {!isEquipped && (
+                      {!showComparison && (
                         <GearComparison
                           difference={abilityChance - weaponEquippedValue.abilityChance}
                           showingType="weapon"
@@ -168,7 +168,7 @@ export function WeaponName({
 
               <WeightDetail
                 comparison={
-                  isEquipped
+                  showComparison
                     ? null
                     : { showingType: "weapon", subtrahend: weaponEquippedValue.weight }
                 }

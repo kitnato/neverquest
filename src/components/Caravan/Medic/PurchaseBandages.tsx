@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
@@ -8,6 +9,7 @@ import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { canFit } from "@neverquest/state/inventory";
 import { coins } from "@neverquest/state/resources";
+import type { Consumable } from "@neverquest/types";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 
 export function PurchaseBandages() {
@@ -17,16 +19,18 @@ export function PurchaseBandages() {
   const transactResources = useTransactResources();
 
   const { item } = CONSUMABLES.Bandages;
-  const { coinPrice, weight } = item;
+  const itemWithID: Consumable = {
+    ...item,
+    id: nanoid(),
+  };
+  const { coinPrice, weight } = itemWithID;
 
   const canFitValue = useRecoilValue(canFit(weight));
   const isAffordable = coinPrice <= coinsValue;
   const isPurchasable = canFitValue && isAffordable;
 
   const handlePurchase = () => {
-    const acquiredID = acquireItem({ item });
-
-    if (acquiredID !== null) {
+    if (acquireItem(itemWithID)) {
       transactResources({ coinsDifference: -coinPrice });
     }
   };
@@ -36,7 +40,7 @@ export function PurchaseBandages() {
       <h6>Purchase bandages</h6>
 
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        <ItemDisplay item={item} overlayPlacement="right" />
+        <ItemDisplay item={itemWithID} overlayPlacement="right" />
 
         <Stack direction="horizontal" gap={3}>
           <Coins tooltip="Price (coins)" value={coinPrice} />

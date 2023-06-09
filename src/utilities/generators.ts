@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid";
+
 import {
   ARMOR_SPECIFICATIONS,
   SHIELD_SPECIFICATIONS,
@@ -46,6 +48,8 @@ export function generateArmor({
     coinPrice: Math.round(600 * growthFactor * priceModifier),
     deflection: getFromRange(ranges.deflection),
     gearClass,
+    id: nanoid(),
+    isEquipped: false,
     level,
     name:
       name ??
@@ -107,6 +111,8 @@ export function generateShield({
     block: getFromRange(ranges.block),
     coinPrice: Math.round(500 * growthFactor),
     gearClass,
+    id: nanoid(),
+    isEquipped: false,
     level,
     name:
       name ??
@@ -162,10 +168,12 @@ export function generateWeapon({
     abilityChance: abilityChance.minimum + Math.round(abilityChance.maximum * growthFactor),
     coinPrice: Math.round(400 * growthFactor),
     damage: getFromRange({ ...ranges.damage }),
-
     gearClass,
     // TODO
     grip: "oneHanded",
+
+    id: nanoid(),
+    isEquipped: false,
     level,
     modality,
     name: LOCRA.generateArtifact({

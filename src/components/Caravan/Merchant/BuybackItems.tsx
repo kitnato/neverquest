@@ -7,11 +7,9 @@ import { merchantInventory } from "@neverquest/state/caravan";
 export function BuybackItems() {
   const merchantInventoryValue = useRecoilValue(merchantInventory);
 
-  const returnedItemIDs = Object.getOwnPropertyNames(merchantInventoryValue).filter(
-    (id) => merchantInventoryValue[id].isReturned
-  );
+  const returnedItems = merchantInventoryValue.filter((item) => item.isReturned);
 
-  if (returnedItemIDs.length === 0) {
+  if (returnedItems.length === 0) {
     return null;
   }
 
@@ -19,7 +17,7 @@ export function BuybackItems() {
     <Stack gap={3}>
       <h6>Buy back items</h6>
 
-      <PurchasableItems inventoryIDs={returnedItemIDs} />
+      <PurchasableItems items={returnedItems.map(({ item }) => item)} />
     </Stack>
   );
 }

@@ -1,23 +1,29 @@
-import { atom, atomFamily, selector, selectorFamily } from "recoil";
+import { atom, selector, selectorFamily } from "recoil";
 
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import { ENCUMBRANCE } from "@neverquest/data/statistics";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import type { Armor, Inventory, Shield, Weapon } from "@neverquest/types";
-import type { GearType } from "@neverquest/types/unions";
+import type { Armor, Item, Shield, Weapon } from "@neverquest/types";
+import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 
 // SELECTORS
 
 export const armor = withStateKey("armor", (key) =>
-  selector({
+  selector<Armor | typeof ARMOR_NONE>({
     get: ({ get }) => {
-      const equippedArmorID = get(equippedGearID("armor"));
+      const equippedArmor = get(inventory).find((item) => {
+        if (isArmor(item)) {
+          return item.isEquipped;
+        }
 
-      if (equippedArmorID === null) {
+        return;
+      });
+
+      if (equippedArmor === undefined) {
         return ARMOR_NONE;
       }
 
-      return get(inventory)[equippedArmorID] as Armor;
+      return equippedArmor as Armor;
     },
     key,
   })
@@ -38,23 +44,8 @@ export const encumbrance = withStateKey("encumbrance", (key) =>
     get: ({ get }) => {
       const inventoryValue = get(inventory);
 
-      return Object.getOwnPropertyNames(inventoryValue).reduce(
-        (current, id) => current + inventoryValue[id].weight,
-        0
-      );
+      return inventoryValue.reduce((current, item) => current + item.weight, 0);
     },
-    key,
-  })
-);
-
-export const equippedGearIDs = withStateKey("equippedGearIDs", (key) =>
-  selector({
-    get: ({ get }) =>
-      [
-        get(equippedGearID("weapon")),
-        get(equippedGearID("armor")),
-        get(equippedGearID("shield")),
-      ].filter((id) => Boolean(id)) as string[],
     key,
   })
 );
@@ -67,30 +58,42 @@ export const isInventoryFull = withStateKey("isInventoryFull", (key) =>
 );
 
 export const shield = withStateKey("shield", (key) =>
-  selector({
+  selector<Shield | typeof SHIELD_NONE>({
     get: ({ get }) => {
-      const equippedShieldID = get(equippedGearID("shield"));
+      const equippedShield = get(inventory).find((item) => {
+        if (isShield(item)) {
+          return item.isEquipped;
+        }
 
-      if (equippedShieldID === null) {
+        return;
+      });
+
+      if (equippedShield === undefined) {
         return SHIELD_NONE;
       }
 
-      return get(inventory)[equippedShieldID] as Shield;
+      return equippedShield as Shield;
     },
     key,
   })
 );
 
 export const weapon = withStateKey("weapon", (key) =>
-  selector({
+  selector<Weapon | typeof WEAPON_NONE>({
     get: ({ get }) => {
-      const equippedWeaponID = get(equippedGearID("weapon"));
+      const equippedWeapon = get(inventory).find((item) => {
+        if (isWeapon(item)) {
+          return item.isEquipped;
+        }
 
-      if (equippedWeaponID === null) {
+        return;
+      });
+
+      if (equippedWeapon === undefined) {
         return WEAPON_NONE;
       }
 
-      return get(inventory)[equippedWeaponID] as Weapon;
+      return equippedWeapon as Weapon;
     },
     key,
   })
@@ -106,14 +109,6 @@ export const encumbranceMaximum = withStateKey("encumbranceMaximum", (key) =>
   })
 );
 
-export const equippedGearID = withStateKey("equippedGearID", (key) =>
-  atomFamily<string | null, GearType>({
-    default: null,
-    effects: (parameter) => [handleLocalStorage<string | null>({ key, parameter })],
-    key,
-  })
-);
-
 export const hasKnapsack = withStateKey("hasKnapsack", (key) =>
   atom({
     default: false,
@@ -123,9 +118,9 @@ export const hasKnapsack = withStateKey("hasKnapsack", (key) =>
 );
 
 export const inventory = withStateKey("inventory", (key) =>
-  atom<Inventory>({
-    default: {},
-    effects: [handleLocalStorage<Inventory>({ key })],
+  atom<Item[]>({
+    default: [],
+    effects: [handleLocalStorage<Item[]>({ key })],
     key,
   })
 );

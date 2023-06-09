@@ -1,5 +1,5 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { useAcquireGear } from "@neverquest/hooks/actions/useAcquireGear";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
@@ -8,11 +8,12 @@ import { useTransactResources } from "@neverquest/hooks/actions/useTransactResou
 import { hasBoughtFromMerchant, merchantInventory } from "@neverquest/state/caravan";
 import { canFit } from "@neverquest/state/inventory";
 import { coins } from "@neverquest/state/resources";
+import type { Item } from "@neverquest/types";
 import { isGear } from "@neverquest/types/type-guards";
 
-export function PurchaseItemButton({ id }: { id: string }) {
+export function PurchaseItemButton({ item }: { item: Item }) {
   const coinsValue = useRecoilValue(coins);
-  const [merchantInventoryValue, setMerchantInventory] = useRecoilState(merchantInventory);
+  const setMerchantInventory = useSetRecoilState(merchantInventory);
   const setHasBoughtFromMerchant = useSetRecoilState(hasBoughtFromMerchant);
 
   const acquireItem = useAcquireItem();
@@ -20,37 +21,27 @@ export function PurchaseItemButton({ id }: { id: string }) {
   const toggleEquipGear = useToggleEquipGear();
   const transactResources = useTransactResources();
 
-  const { item } = merchantInventoryValue[id];
   const { coinPrice, weight } = item;
   const isAffordable = coinPrice <= coinsValue;
   const canFitValue = useRecoilValue(canFit(weight));
   const isPurchasable = isAffordable && canFitValue;
 
   const handlePurchase = () => {
-    let acquiredID: string | null = null;
+    let hasAcquiredItem = false;
 
     if (isGear(item)) {
-      const [shouldAutoEquip, id] = acquireGear({ gear: item });
-
-      if (id !== null) {
-        acquiredID = id;
-
-        if (shouldAutoEquip) {
-          toggleEquipGear(acquiredID);
-        }
+      if (acquireGear(item)) {
+        toggleEquipGear(item);
+        hasAcquiredItem = true;
       }
     } else {
-      acquiredID = acquireItem({ item });
+      hasAcquiredItem = acquireItem(item);
     }
 
-    if (acquiredID !== null) {
+    if (hasAcquiredItem) {
       transactResources({ coinsDifference: -coinPrice });
 
-      setMerchantInventory((current) => {
-        const { [id]: _, ...newMerchantInventory } = current;
-
-        return newMerchantInventory;
-      });
+      setMerchantInventory((current) => current.filter(({ item: { id } }) => id !== item.id));
       setHasBoughtFromMerchant(true);
     }
   };

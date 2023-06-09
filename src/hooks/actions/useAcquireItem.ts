@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
 import { KNAPSACK_SIZE } from "@neverquest/data/inventory";
@@ -10,14 +9,13 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 export function useAcquireItem() {
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      ({ item }: { item: Consumable | Trinket }) => {
+      (item: Consumable | Trinket) => {
         const get = getSnapshotGetter(snapshot);
 
-        const id = nanoid();
         const { name, weight } = item;
 
         if (!get(canFit(weight))) {
-          return null;
+          return false;
         }
 
         if (name === "Knapsack") {
@@ -26,13 +24,10 @@ export function useAcquireItem() {
 
           set(isShowing("weight"), true);
         } else {
-          set(inventory, (current) => ({
-            ...current,
-            [id]: item,
-          }));
+          set(inventory, (current) => current.concat(item));
         }
 
-        return id;
+        return true;
       },
     []
   );

@@ -3,12 +3,12 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterStaggeredMeter } from "@neverquest/components/Monster/MonsterStaggeredMeter";
 import { ReactComponent as IconStaggered } from "@neverquest/icons/monster-staggered.svg";
-import { monsterStaggerDuration } from "@neverquest/state/monster";
+import { isShowing } from "@neverquest/state/isShowing";
 
 export function MonsterStaggered() {
-  const monsterStaggerDurationValue = useRecoilValue(monsterStaggerDuration);
+  const isShowingStagger = useRecoilValue(isShowing("stagger"));
 
-  if (monsterStaggerDurationValue === 0) {
+  if (!isShowingStagger) {
     return null;
   }
 

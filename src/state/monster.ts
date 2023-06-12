@@ -1,8 +1,16 @@
 import { atom, selector } from "recoil";
 
-import { POISON } from "@neverquest/data/statistics";
+import {
+  BLIGHT,
+  LOOT,
+  MONSTER_ATTACK_RATE,
+  MONSTER_DAMAGE,
+  MONSTER_HEALTH,
+  POISON,
+} from "@neverquest/data/monster";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isStageStarted, progress, stage } from "@neverquest/state/encounter";
+import { staminaMaximum } from "@neverquest/state/reserves";
 import { formatFloat } from "@neverquest/utilities/formatters";
 import { getDamagePerRate, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
@@ -24,16 +32,53 @@ export const isMonsterStaggered = withStateKey("isMonsterStaggered", (key) =>
 
 export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   selector({
-    get: ({ get }) =>
-      4500 - Math.round(4000 * getGrowthSigmoid(get(stage)) - 80 * getGrowthSigmoid(get(progress))),
+    get: ({ get }) => {
+      const { base, bonus, reduction } = MONSTER_ATTACK_RATE;
+
+      return (
+        base -
+        Math.round(
+          reduction * getGrowthSigmoid(get(stage)) + bonus * getGrowthSigmoid(get(progress))
+        )
+      );
+    },
+    key,
+  })
+);
+
+export const monsterBlightChance = withStateKey("monsterBlightChance", (key) =>
+  selector({
+    get: ({ get }) => {
+      const stageValue = get(stage);
+
+      const { chanceBase, chanceMaximum, stageRequired } = BLIGHT;
+
+      if (stageValue < stageRequired) {
+        return 0;
+      }
+
+      return chanceBase + chanceMaximum * getGrowthSigmoid(stageValue);
+    },
+    key,
+  })
+);
+
+export const monsterBlightIncrement = withStateKey("monsterBlightIncrement", (key) =>
+  selector({
+    get: ({ get }) => Math.round(BLIGHT.increment * get(staminaMaximum)),
     key,
   })
 );
 
 export const monsterDamage = withStateKey("monsterDamage", (key) =>
   selector({
-    get: ({ get }) =>
-      Math.round(700 * getGrowthSigmoid(get(stage)) + 50 * getGrowthSigmoid(get(progress))),
+    get: ({ get }) => {
+      const { bonus, maximum } = MONSTER_DAMAGE;
+
+      return Math.round(
+        maximum * getGrowthSigmoid(get(stage)) + bonus * getGrowthSigmoid(get(progress))
+      );
+    },
     key,
   })
 );
@@ -53,24 +98,51 @@ export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (ke
 
 export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =>
   selector({
-    get: ({ get }) =>
-      Math.round(2400 * getGrowthSigmoid(get(stage)) + 100 * getGrowthSigmoid(get(progress))),
+    get: ({ get }) => {
+      const { bonus, maximum } = MONSTER_HEALTH;
+
+      return Math.round(
+        maximum * getGrowthSigmoid(get(stage)) + bonus * getGrowthSigmoid(get(progress))
+      );
+    },
     key,
   })
 );
 
-export const monsterPoison = withStateKey("monsterPoison", (key) =>
+export const monsterPoisonChance = withStateKey("monsterPoisonChance", (key) =>
   selector({
     get: ({ get }) => {
       const stageValue = get(stage);
-      const { chanceBase, chanceIncrement, minimumLevel } = POISON;
 
-      if (stageValue < minimumLevel) {
+      const { chanceBase, chanceMaximum, stageRequired } = POISON;
+
+      if (stageValue < stageRequired) {
         return 0;
       }
 
-      // TODO - use sigmoid growth
-      return chanceBase + (stageValue - minimumLevel) * chanceIncrement;
+      return chanceBase + chanceMaximum * getGrowthSigmoid(stageValue);
+    },
+    key,
+  })
+);
+
+export const monsterPoisonDuration = withStateKey("monsterPoisonDuration", (key) =>
+  selector({
+    get: ({ get }) => {
+      const { durationBase, durationMaximum } = POISON;
+
+      return durationBase + durationMaximum * getGrowthSigmoid(get(stage));
+    },
+    key,
+  })
+);
+
+export const monsterPoisonMagnitude = withStateKey("monsterPoisonMagnitude", (key) =>
+  selector({
+    get: ({ get }) => {
+      const { magnitudeBase, magnitudeMaximum } = POISON;
+
+      return magnitudeBase + magnitudeMaximum * getGrowthSigmoid(get(stage));
     },
     key,
   })
@@ -79,14 +151,16 @@ export const monsterPoison = withStateKey("monsterPoison", (key) =>
 export const monsterLoot = withStateKey("monsterLoot", (key) =>
   selector({
     get: ({ get }) => {
+      const { bonus, coinsBase, essenceBase, scrapBase } = LOOT;
+
       const stageValue = get(stage);
       const growthFactor = getGrowthSigmoid(stageValue);
-      const progressFactor = getGrowthSigmoid(get(progress)) * 100;
+      const progressFactor = getGrowthSigmoid(get(progress)) * bonus;
 
       return {
-        coins: Math.round(progressFactor + 150 * growthFactor),
-        essence: Math.round(progressFactor + 200 * growthFactor),
-        scrap: Math.round(progressFactor + 250 * growthFactor),
+        coins: Math.round(progressFactor + coinsBase * growthFactor),
+        essence: Math.round(progressFactor + essenceBase * growthFactor),
+        scrap: Math.round(progressFactor + scrapBase * growthFactor),
       };
     },
     key,

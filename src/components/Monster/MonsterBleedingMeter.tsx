@@ -7,6 +7,7 @@ import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { monsterBleedingDelta } from "@neverquest/state/deltas";
 import { monsterBleedingDuration } from "@neverquest/state/monster";
 import { bleedDamage, damageTotal } from "@neverquest/state/statistics";
+import { LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 import { getDamagePerTick } from "@neverquest/utilities/getters";
 
@@ -57,7 +58,11 @@ export function MonsterBleedingMeter() {
   return (
     <LabelledProgressBar
       disableTransitions
-      label={formatMilliseconds(monsterBleedingDurationValue)}
+      label={
+        monsterBleedingDurationValue > 0
+          ? formatMilliseconds(monsterBleedingDurationValue)
+          : LABEL_EMPTY
+      }
       value={(monsterBleedingDurationValue / duration) * 100}
       variant="secondary"
     />

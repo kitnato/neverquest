@@ -69,7 +69,6 @@ export type Mastery = "cruelty" | "finesse" | "might" | "stability" | "tenacity"
 export type Reserve = "encumbrance" | "health" | "monsterHealth" | "stamina";
 
 export const SHOWING = [
-  "ailments",
   "armor",
   "attackRate",
   "attackRateDetails",
@@ -208,6 +207,8 @@ export type StateKey =
   | "monsterAttackRate"
   | "monsterBleedingDelta"
   | "monsterBleedingDuration"
+  | "monsterBlightChance"
+  | "monsterBlightIncrement"
   | "monsterDamage"
   | "monsterDamagePerSecond"
   | "monsterElement"
@@ -215,7 +216,9 @@ export type StateKey =
   | "monsterHealthMaximum"
   | "monsterLoot"
   | "monsterName"
-  | "monsterPoison"
+  | "monsterPoisonChance"
+  | "monsterPoisonDuration"
+  | "monsterPoisonMagnitude"
   | "monsterStaggerDuration"
   | "name"
   | "parry"

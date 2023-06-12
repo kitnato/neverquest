@@ -2,11 +2,12 @@ import { useEffect, useRef } from "react";
 import { Card, Stack } from "react-bootstrap";
 import { useRecoilState } from "recoil";
 
-import { MonsterAilments } from "@neverquest/components/Monster/MonsterAilments";
 import { MonsterAttack } from "@neverquest/components/Monster/MonsterAttack";
+import { MonsterBleeding } from "@neverquest/components/Monster/MonsterBleeding";
 import { MonsterHealth } from "@neverquest/components/Monster/MonsterHealth";
 import { MonsterName } from "@neverquest/components/Monster/MonsterName";
 import { MonsterOffense } from "@neverquest/components/Monster/MonsterOffense";
+import { MonsterStaggered } from "@neverquest/components/Monster/MonsterStaggered";
 import { isMonsterNew, monsterElement } from "@neverquest/state/monster";
 import { animateElement } from "@neverquest/utilities/animateElement";
 
@@ -48,7 +49,9 @@ export function Monster() {
 
           <MonsterOffense />
 
-          <MonsterAilments />
+          <MonsterStaggered />
+
+          <MonsterBleeding />
         </Stack>
       </Card.Body>
     </Card>

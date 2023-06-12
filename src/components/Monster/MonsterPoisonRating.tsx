@@ -3,26 +3,23 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import { POISON } from "@neverquest/data/statistics";
 import { ReactComponent as IconPoisonRating } from "@neverquest/icons/poison-rating.svg";
-import { monsterDamage, monsterPoison } from "@neverquest/state/monster";
+import {
+  monsterPoisonChance,
+  monsterPoisonDuration,
+  monsterPoisonMagnitude,
+} from "@neverquest/state/monster";
+import { healthMaximum } from "@neverquest/state/reserves";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
-import { getDamagePerTick } from "@neverquest/utilities/getters";
 
 export function MonsterPoisonRating() {
-  const monsterDamageValue = useRecoilValue(monsterDamage);
-  const monsterPoisonValue = useRecoilValue(monsterPoison);
+  const healthMaximumValue = useRecoilValue(healthMaximum);
+  const monsterPoisonChanceValue = useRecoilValue(monsterPoisonChance);
+  const monsterPoisonDurationValue = useRecoilValue(monsterPoisonDuration);
+  const monsterPoisonMagnitudeValue = useRecoilValue(monsterPoisonMagnitude);
 
-  const { damage, duration, ticks } = POISON;
-  const poisonPerTick = getDamagePerTick({
-    damage: monsterDamageValue,
-    duration,
-    proportion: damage,
-    ticks,
-  });
-
-  if (!monsterPoisonValue) {
+  if (monsterPoisonChanceValue === 0) {
     return null;
   }
 
@@ -37,30 +34,37 @@ export function MonsterPoisonRating() {
               <Popover.Body>
                 <DetailsTable>
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Poison chance:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
 
-                    <td>{formatPercentage(monsterPoisonValue)}</td>
+                    <td>{formatPercentage(monsterPoisonChanceValue)}</td>
                   </tr>
 
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Poison damage:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
 
-                    <td>{`${Math.round(damage * monsterDamageValue)} (${formatPercentage(
-                      damage
-                    )} of damage & ${poisonPerTick} per tick)`}</td>
+                    <td>{`${formatPercentage(
+                      monsterPoisonMagnitudeValue * healthMaximumValue
+                    )} health reduction`}</td>
                   </tr>
 
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
 
-                    <td>{formatMilliseconds(duration)}</td>
+                    <td>{formatMilliseconds(monsterPoisonDurationValue)}</td>
                   </tr>
                 </DetailsTable>
               </Popover.Body>
             </Popover>
           }
         >
-          <span>{Math.round(poisonPerTick * monsterPoisonValue * 100)}</span>
+          <span>
+            {Math.round(
+              monsterPoisonChanceValue *
+                monsterPoisonMagnitudeValue *
+                monsterPoisonDurationValue *
+                100
+            )}
+          </span>
         </OverlayTrigger>
       }
       Icon={IconPoisonRating}

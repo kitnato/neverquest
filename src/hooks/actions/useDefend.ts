@@ -1,6 +1,5 @@
 import { useRecoilCallback } from "recoil";
 
-import { POISON } from "@neverquest/data/statistics";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
@@ -12,7 +11,8 @@ import { isShowing } from "@neverquest/state/isShowing";
 import {
   monsterDamage,
   monsterElement,
-  monsterPoison,
+  monsterPoisonChance,
+  monsterPoisonDuration,
   monsterStaggerDuration,
 } from "@neverquest/state/monster";
 import { blight, canAttackOrParry, canBlock, canDodge } from "@neverquest/state/reserves";
@@ -225,13 +225,12 @@ export function useDefend() {
 
         // If Tenacity hasn't been triggered, activate recovery.
         if (!hasIgnoredRecovery) {
-          set(isShowing("ailments"), true);
           set(isShowing("recovery"), true);
 
           set(recoveryDuration, get(recoveryRate));
         }
 
-        const isPoisoned = Math.random() <= get(monsterPoison);
+        const isPoisoned = Math.random() <= get(monsterPoisonChance);
 
         // If poisoning occurs, check if has been deflected, otherwise apply poison - if there is an active poisoning, increment blight instead.
         if (isPoisoned) {
@@ -251,8 +250,7 @@ export function useDefend() {
                 value: "BLIGHTED",
               });
             } else {
-              set(isShowing("ailments"), true);
-              set(poisonDuration, POISON.duration);
+              set(poisonDuration, get(monsterPoisonDuration));
 
               deltaHealth.push({
                 color: "text-danger",

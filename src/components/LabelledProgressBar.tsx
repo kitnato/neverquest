@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { OverlayTrigger, ProgressBar, Tooltip } from "react-bootstrap";
 
 import type { BootstrapColorVariant, UIAttachment, UISize } from "@neverquest/types/ui";
@@ -6,7 +7,7 @@ export function LabelledProgressBar({
   attached,
   disableTransitions = false,
   label,
-  sibling = <></>,
+  sibling = null,
   size = "normal",
   value,
   variant,
@@ -14,7 +15,7 @@ export function LabelledProgressBar({
   attached?: UIAttachment;
   disableTransitions?: boolean;
   label: string;
-  sibling?: JSX.Element;
+  sibling?: ReactNode;
   size?: UISize;
   value: number;
   variant: BootstrapColorVariant;
@@ -54,11 +55,11 @@ export function LabelledProgressBar({
           <small
             className="position-absolute text-light"
             style={{
-              right: "50%",
+              left: sibling === null ? "50%" : 0,
               textShadow:
                 "-1px 1px 1px #212529, 1px 1px 1px #212529, 1px -1px 1px #212529, -1px -1px 1px #212529",
               top: 0,
-              transform: "translateX(50%)",
+              transform: sibling === null ? "translateX(-50%)" : undefined,
             }}
           >
             {label}
@@ -68,8 +69,6 @@ export function LabelledProgressBar({
         <OverlayTrigger overlay={<Tooltip>{label}</Tooltip>} placement="bottom">
           <ProgressBar style={style}>
             <ProgressBar key={1} now={value} variant={variant} />
-
-            {sibling}
           </ProgressBar>
         </OverlayTrigger>
       )}

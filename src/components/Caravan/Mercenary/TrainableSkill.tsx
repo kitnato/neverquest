@@ -1,8 +1,8 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { SkillDisplay } from "@neverquest/components/Caravan/Mercenary/SkillDisplay";
 import { TrainSkillButton } from "@neverquest/components/Caravan/Mercenary/TrainSkillButton";
-import { SkillDisplay } from "@neverquest/components/Character/SkillDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Coins } from "@neverquest/components/Resources/Coins";
 import { SKILLS } from "@neverquest/data/skills";

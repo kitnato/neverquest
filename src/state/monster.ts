@@ -10,7 +10,6 @@ import {
 } from "@neverquest/data/monster";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isStageStarted, progress, stage } from "@neverquest/state/encounter";
-import { staminaMaximum } from "@neverquest/state/reserves";
 import { formatFloat } from "@neverquest/utilities/formatters";
 import { getDamagePerRate, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
@@ -18,7 +17,7 @@ import { getDamagePerRate, getGrowthSigmoid } from "@neverquest/utilities/getter
 
 export const isMonsterDead = withStateKey("isMonsterDead", (key) =>
   selector({
-    get: ({ get }) => get(isStageStarted) && get(monsterHealthCurrent) === 0,
+    get: ({ get }) => get(isStageStarted) && get(monsterHealth) === 0,
     key,
   })
 );
@@ -59,13 +58,6 @@ export const monsterBlightChance = withStateKey("monsterBlightChance", (key) =>
 
       return chanceBase + chanceMaximum * getGrowthSigmoid(stageValue);
     },
-    key,
-  })
-);
-
-export const monsterBlightIncrement = withStateKey("monsterBlightIncrement", (key) =>
-  selector({
-    get: ({ get }) => Math.round(BLIGHT.increment * get(staminaMaximum)),
     key,
   })
 );
@@ -193,7 +185,7 @@ export const monsterBleedingDuration = withStateKey("monsterBleedingDuration", (
   })
 );
 
-export const monsterHealthCurrent = withStateKey("masteries", (key) =>
+export const monsterHealth = withStateKey("masteries", (key) =>
   atom({
     default: monsterHealthMaximum,
     effects: [handleLocalStorage<number>({ key })],

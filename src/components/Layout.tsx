@@ -5,7 +5,7 @@ import { Character } from "@neverquest/components/Character";
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { Control } from "@neverquest/components/Controls";
 import { Encounter } from "@neverquest/components/Encounter";
-import { LocationDisplay } from "@neverquest/components/LocationDisplay";
+import { Location } from "@neverquest/components/Location";
 import { Masteries } from "@neverquest/components/Masteries";
 import { WildernessStatus } from "@neverquest/components/Wilderness/WildernessStatus";
 import { isGameOver } from "@neverquest/state/character";
@@ -23,7 +23,7 @@ export function Layout() {
       <Row>
         <Col>
           <Stack gap={3}>
-            <LocationDisplay />
+            <Location />
 
             <Character />
 

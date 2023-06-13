@@ -4,7 +4,7 @@ import { attackDuration, lootingDuration, lootingRate } from "@neverquest/state/
 import { deltas } from "@neverquest/state/deltas";
 import {
   monsterAttackDuration,
-  monsterHealthCurrent,
+  monsterHealth,
   monsterHealthMaximum,
 } from "@neverquest/state/monster";
 import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
@@ -20,7 +20,7 @@ export function useChangeMonsterHealth() {
         const max = get(monsterHealthMaximum);
         const isPositive = value > 0;
 
-        let newHealth = get(monsterHealthCurrent) + value;
+        let newHealth = get(monsterHealth) + value;
 
         set(
           deltas("monsterHealth"),
@@ -43,7 +43,7 @@ export function useChangeMonsterHealth() {
           newHealth = max;
         }
 
-        set(monsterHealthCurrent, newHealth);
+        set(monsterHealth, newHealth);
       },
     []
   );

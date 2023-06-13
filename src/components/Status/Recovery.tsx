@@ -1,10 +1,10 @@
 import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { RecoveryMeter } from "@neverquest/components/Character/RecoveryMeter";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
+import { RecoveryMeter } from "@neverquest/components/Status/RecoveryMeter";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { RECOVERY_RATE } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";

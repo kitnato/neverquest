@@ -66,7 +66,7 @@ export type Location = "caravan" | "wilderness";
 
 export type Mastery = "cruelty" | "finesse" | "might" | "stability" | "tenacity";
 
-export type Reserve = "encumbrance" | "health" | "monsterHealth" | "stamina";
+export type Reserve = "health" | "stamina";
 
 export const SHOWING = [
   "armor",
@@ -137,6 +137,7 @@ export type StateKey =
   | "bleedRating"
   | "bleedTick"
   | "blight"
+  | "blightIncrement"
   | "block"
   | "canAttackOrParry"
   | "canBlock"
@@ -168,8 +169,9 @@ export type StateKey =
   | "hasBoughtFromMerchant"
   | "hasKnapsack"
   | "hasLooted"
-  | "healthCurrent"
+  | "health"
   | "healthMaximum"
+  | "healthMaximumTotal"
   | "healthRegenerationAmount"
   | "healthRegenerationDuration"
   | "healthRegenerationRate"
@@ -208,11 +210,10 @@ export type StateKey =
   | "monsterBleedingDelta"
   | "monsterBleedingDuration"
   | "monsterBlightChance"
-  | "monsterBlightIncrement"
   | "monsterDamage"
   | "monsterDamagePerSecond"
   | "monsterElement"
-  | "monsterHealthCurrent"
+  | "monsterHealth"
   | "monsterHealthMaximum"
   | "monsterLoot"
   | "monsterName"
@@ -247,7 +248,7 @@ export type StateKey =
   | "staggerDuration"
   | "staggerRating"
   | "staggerWeapon"
-  | "staminaCurrent"
+  | "stamina"
   | "staminaMaximum"
   | "staminaMaximumTotal"
   | "staminaRegenerationAmount"

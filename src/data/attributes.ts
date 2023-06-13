@@ -1,3 +1,4 @@
+import { RESERVES } from "@neverquest/data/reserves";
 import { RECOVERY_RATE } from "@neverquest/data/statistics";
 import { ReactComponent as IconPlaceholder } from "@neverquest/icons/placeholder.svg";
 import type { AttributeOrMastery } from "@neverquest/types";
@@ -24,7 +25,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     name: "Dexterity",
   },
   endurance: {
-    base: 10,
+    base: RESERVES.stamina.baseAmount,
     description: "Increases maximum stamina.",
     Icon: IconPlaceholder,
     increment: 4,
@@ -48,6 +49,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     name: "Luck",
   },
   perception: {
+    // TODO - move base amount to /data
     base: 1.5,
     description: "Increases critical strike damage.",
     Icon: IconPlaceholder,
@@ -90,7 +92,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     name: "Vigor",
   },
   vitality: {
-    base: 100,
+    base: RESERVES.health.baseAmount,
     description: "Increases maximum health.",
     Icon: IconPlaceholder,
     increment: 10,

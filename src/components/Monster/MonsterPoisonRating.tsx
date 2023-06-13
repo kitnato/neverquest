@@ -9,12 +9,10 @@ import {
   monsterPoisonDuration,
   monsterPoisonMagnitude,
 } from "@neverquest/state/monster";
-import { healthMaximum } from "@neverquest/state/reserves";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function MonsterPoisonRating() {
-  const healthMaximumValue = useRecoilValue(healthMaximum);
   const monsterPoisonChanceValue = useRecoilValue(monsterPoisonChance);
   const monsterPoisonDurationValue = useRecoilValue(monsterPoisonDuration);
   const monsterPoisonMagnitudeValue = useRecoilValue(monsterPoisonMagnitude);
@@ -42,9 +40,7 @@ export function MonsterPoisonRating() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
 
-                    <td>{`${formatPercentage(
-                      monsterPoisonMagnitudeValue * healthMaximumValue
-                    )} health reduction`}</td>
+                    <td>{`${formatPercentage(monsterPoisonMagnitudeValue)} health reduction`}</td>
                   </tr>
 
                   <tr>

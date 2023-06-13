@@ -1,10 +1,10 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { Regeneration } from "@neverquest/components/Character/Regeneration";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ReserveMeter } from "@neverquest/components/ReserveMeter";
+import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
+import { StaminaMeter } from "@neverquest/components/Reserves/StaminaMeter";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 
@@ -20,7 +20,7 @@ export function Stamina() {
       contents={
         <Stack>
           <Stack className="w-100" direction="horizontal">
-            <ReserveMeter attached="below" type="stamina" />
+            <StaminaMeter />
 
             <FloatingText deltaType="stamina" />
           </Stack>

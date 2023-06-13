@@ -2,11 +2,11 @@ import { useEffect, useRef } from "react";
 import { Card, Stack } from "react-bootstrap";
 import { useSetRecoilState } from "recoil";
 
-import { Attack } from "@neverquest/components/Character/Attack";
-import { Health } from "@neverquest/components/Character/Health";
-import { Name } from "@neverquest/components/Character/Name";
-import { Recovery } from "@neverquest/components/Character/Recovery";
-import { Stamina } from "@neverquest/components/Character/Stamina";
+import { Health } from "@neverquest/components/Reserves/Health";
+import { Stamina } from "@neverquest/components/Reserves/Stamina";
+import { Attack } from "@neverquest/components/Status/Attack";
+import { Name } from "@neverquest/components/Status/Name";
+import { Recovery } from "@neverquest/components/Status/Recovery";
 import { statusElement } from "@neverquest/state/character";
 import { animateElement } from "@neverquest/utilities/animateElement";
 

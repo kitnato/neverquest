@@ -1,11 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { deltas } from "@neverquest/state/deltas";
-import {
-  isMonsterDead,
-  monsterHealthCurrent,
-  monsterHealthMaximum,
-} from "@neverquest/state/monster";
+import { isMonsterDead, monsterHealth, monsterHealthMaximum } from "@neverquest/state/monster";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useRegenerateMonster() {
@@ -19,7 +15,7 @@ export function useRegenerateMonster() {
         }
 
         const monsterHealthMaximumValue = get(monsterHealthMaximum);
-        const difference = monsterHealthMaximumValue - get(monsterHealthCurrent);
+        const difference = monsterHealthMaximumValue - get(monsterHealth);
 
         if (difference > 0) {
           set(deltas("monsterHealth"), {
@@ -28,7 +24,7 @@ export function useRegenerateMonster() {
           });
         }
 
-        reset(monsterHealthCurrent);
+        reset(monsterHealth);
       },
     []
   );

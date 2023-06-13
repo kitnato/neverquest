@@ -1,10 +1,10 @@
 import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { AttackMeter } from "@neverquest/components/Character/AttackMeter";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
+import { AttackMeter } from "@neverquest/components/Status/AttackMeter";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { WEAPON_NONE } from "@neverquest/data/inventory";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";

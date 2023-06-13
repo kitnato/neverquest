@@ -5,18 +5,15 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { ReactComponent as IconBlightRating } from "@neverquest/icons/blight-rating.svg";
 import { poisonDuration } from "@neverquest/state/character";
-import {
-  monsterBlightChance,
-  monsterBlightIncrement,
-  monsterPoisonChance,
-} from "@neverquest/state/monster";
+import { monsterBlightChance, monsterPoisonChance } from "@neverquest/state/monster";
+import { blightIncrement } from "@neverquest/state/reserves";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function MonsterBlightRating() {
+  const blightIncrementValue = useRecoilValue(blightIncrement);
   const poisonDurationValue = useRecoilValue(poisonDuration);
   const monsterBlightChanceValue = useRecoilValue(monsterBlightChance);
-  const monsterBlightIncrementValue = useRecoilValue(monsterBlightIncrement);
   const monsterPoisonChanceValue = useRecoilValue(monsterPoisonChance);
 
   if (monsterBlightChanceValue === 0) {
@@ -42,7 +39,7 @@ export function MonsterBlightRating() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
 
-                    <td>{`${monsterBlightIncrementValue} stamina reduction per affliction`}</td>
+                    <td>{`${blightIncrementValue} stamina reduction per affliction`}</td>
                   </tr>
                 </DetailsTable>
               </Popover.Body>

@@ -1,9 +1,9 @@
 import { Stack } from "react-bootstrap";
 
-import { Regeneration } from "@neverquest/components/Character/Regeneration";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ReserveMeter } from "@neverquest/components/ReserveMeter";
+import { HealthMeter } from "@neverquest/components/Reserves/HealthMeter";
+import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
 import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
 
 export function Health() {
@@ -12,7 +12,7 @@ export function Health() {
       contents={
         <Stack>
           <Stack className="w-100" direction="horizontal">
-            <ReserveMeter attached="below" type="health" />
+            <HealthMeter />
 
             <FloatingText deltaType="health" />
           </Stack>

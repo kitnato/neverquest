@@ -2,13 +2,8 @@ import { selector } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { MASTERIES } from "@neverquest/data/masteries";
-import {
-  BLEED,
-  REGENERATION_AMOUNT_HEALTH,
-  REGENERATION_AMOUNT_STAMINA,
-  REGENERATION_RATE_HEALTH,
-  REGENERATION_RATE_STAMINA,
-} from "@neverquest/data/statistics";
+import { RESERVES } from "@neverquest/data/reserves";
+import { BLEED } from "@neverquest/data/statistics";
 import { withStateKey } from "@neverquest/state";
 import { attributes } from "@neverquest/state/attributes";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
@@ -208,17 +203,18 @@ export const stability = withStateKey("stability", (key) =>
 
 export const healthRegenerationAmount = withStateKey("healthRegenerationAmount", (key) =>
   selector({
-    get: ({ get }) => REGENERATION_AMOUNT_HEALTH + get(reserveRegenerationAmount),
+    get: ({ get }) => RESERVES.health.baseRegenerationAmount + get(reserveRegenerationAmount),
     key,
   })
 );
 
 export const healthRegenerationRate = withStateKey("healthRegenerationRate", (key) =>
   selector({
-    get: ({ get }) =>
-      Math.round(
-        REGENERATION_RATE_HEALTH - REGENERATION_RATE_HEALTH * get(reserveRegenerationRate)
-      ),
+    get: ({ get }) => {
+      const { baseRegenerationRate } = RESERVES.health;
+
+      return Math.round(baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRate));
+    },
     key,
   })
 );
@@ -343,17 +339,17 @@ export const staggerWeapon = withStateKey("staggerWeapon", (key) =>
 
 export const staminaRegenerationAmount = withStateKey("staminaRegenerationAmount", (key) =>
   selector({
-    get: ({ get }) => REGENERATION_AMOUNT_STAMINA + get(reserveRegenerationAmount),
+    get: ({ get }) => RESERVES.stamina.baseRegenerationAmount + get(reserveRegenerationAmount),
     key,
   })
 );
 
 export const staminaRegenerationRate = withStateKey("staminaRegenerationRate", (key) =>
   selector({
-    get: ({ get }) =>
-      Math.round(
-        REGENERATION_RATE_STAMINA - REGENERATION_RATE_STAMINA * get(reserveRegenerationRate)
-      ),
+    get: ({ get }) => {
+      const { baseRegenerationRate } = RESERVES.stamina;
+      return Math.round(baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRate));
+    },
     key,
   })
 );

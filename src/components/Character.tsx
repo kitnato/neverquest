@@ -1,9 +1,9 @@
 import { Stack } from "react-bootstrap";
 
-import { Status } from "@neverquest/components/Character/Status";
 import { Gear } from "@neverquest/components/Inventory/Gear";
 import { Resources } from "@neverquest/components/Inventory/Resources";
 import { Statistics } from "@neverquest/components/Statistics";
+import { Status } from "@neverquest/components/Status";
 
 export function Character() {
   return (
@@ -12,9 +12,9 @@ export function Character() {
 
       <Statistics />
 
-      <Resources />
-
       <Gear />
+
+      <Resources />
     </Stack>
   );
 }

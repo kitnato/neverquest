@@ -9,6 +9,7 @@ import { deltas } from "@neverquest/state/deltas";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import {
+  monsterBlightChance,
   monsterDamage,
   monsterElement,
   monsterPoisonChance,
@@ -242,7 +243,9 @@ export function useDefend() {
               value: "DEFLECTED POISON",
             });
           } else {
-            if (get(poisonDuration) > 0) {
+            const isBlighted = Math.random() <= get(monsterBlightChance);
+
+            if (get(poisonDuration) > 0 && isBlighted) {
               set(blight, (current) => current + 1);
 
               deltaStamina.push({

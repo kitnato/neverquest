@@ -1,42 +1,44 @@
 import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { RegenerationMeter } from "@neverquest/components/Character/RegenerationMeter";
 import { FloatingText } from "@neverquest/components/FloatingText";
+import { RegenerationMeter } from "@neverquest/components/Reserves/RegenerationMeter";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { RESERVES } from "@neverquest/data/reserves";
-import {
-  REGENERATION_AMOUNT_HEALTH,
-  REGENERATION_AMOUNT_STAMINA,
-  REGENERATION_RATE_HEALTH,
-  REGENERATION_RATE_STAMINA,
-} from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
+import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
-import { reserveRegenerationRate } from "@neverquest/state/statistics";
+import {
+  healthRegenerationAmount,
+  healthRegenerationRate,
+  reserveRegenerationRate,
+  staminaRegenerationAmount,
+  staminaRegenerationRate,
+} from "@neverquest/state/statistics";
+import type { Reserve } from "@neverquest/types/unions";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
-export function Regeneration({ type }: { type: "health" | "stamina" }) {
-  const { atomDeltaRegenerationRate, atomRegenerationAmount, atomRegenerationRate } =
-    RESERVES[type];
+export function Regeneration({ type }: { type: Reserve }) {
+  const { baseRegenerationAmount, baseRegenerationRate, label, regenerationDelta } = RESERVES[type];
   const isHealth = type === "health";
 
-  const regenerationAmountValue = useRecoilValue(atomRegenerationAmount);
-  const regenerationRateValue = useRecoilValue(atomRegenerationRate);
+  const regenerationAmountValue = useRecoilValue(
+    isHealth ? healthRegenerationAmount : staminaRegenerationAmount
+  );
+  const regenerationRateValue = useRecoilValue(
+    isHealth ? healthRegenerationRate : staminaRegenerationRate
+  );
   const isShowingReserveDetails = useRecoilValue(isShowing("reserveDetails"));
   const reserveRegenerationRateValue = useRecoilValue(reserveRegenerationRate);
 
   const { name: amountName } = ATTRIBUTES.fortitude;
   const { name: rateName } = ATTRIBUTES.vigor;
-  const baseAmount = isHealth ? REGENERATION_AMOUNT_HEALTH : REGENERATION_AMOUNT_STAMINA;
-  const baseRate = isHealth ? REGENERATION_RATE_HEALTH : REGENERATION_RATE_STAMINA;
-  const title = isHealth ? "Health" : "Stamina";
 
   useDeltaText({
-    atomDelta: atomDeltaRegenerationRate,
-    atomValue: atomRegenerationRate,
+    atomDelta: deltas(regenerationDelta),
+    atomValue: isHealth ? healthRegenerationRate : staminaRegenerationRate,
     type: "time",
   });
 
@@ -45,7 +47,7 @@ export function Regeneration({ type }: { type: "health" | "stamina" }) {
       <OverlayTrigger
         overlay={
           <Popover>
-            <Popover.Header className="text-center">{title} regeneration details</Popover.Header>
+            <Popover.Header className="text-center">{label} regeneration details</Popover.Header>
 
             <Popover.Body>
               <DetailsTable>
@@ -58,7 +60,7 @@ export function Regeneration({ type }: { type: "health" | "stamina" }) {
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Base rate:</td>
 
-                  <td>{formatMilliseconds(baseRate)}</td>
+                  <td>{formatMilliseconds(baseRegenerationRate)}</td>
                 </tr>
 
                 <tr>
@@ -76,13 +78,13 @@ export function Regeneration({ type }: { type: "health" | "stamina" }) {
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Base amount:</td>
 
-                  <td>{baseAmount}</td>
+                  <td>{baseRegenerationAmount}</td>
                 </tr>
 
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>{amountName} attribute:</td>
 
-                  <td>{`+${regenerationAmountValue - baseAmount}`}</td>
+                  <td>{`+${regenerationAmountValue - baseRegenerationAmount}`}</td>
                 </tr>
               </DetailsTable>
             </Popover.Body>

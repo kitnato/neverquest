@@ -7,7 +7,7 @@ import {
   isMonsterNew,
   monsterAttackDuration,
   monsterAttackRate,
-  monsterHealthCurrent,
+  monsterHealth,
   monsterName,
 } from "@neverquest/state/monster";
 import { allowNSFW } from "@neverquest/state/settings";
@@ -30,7 +30,7 @@ export function useGenerateMonster() {
           })
         );
 
-        reset(monsterHealthCurrent);
+        reset(monsterHealth);
 
         set(isMonsterNew, true);
 

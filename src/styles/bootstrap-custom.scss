@@ -1,5 +1,5 @@
 @font-face {
-  font-family: "AoboshiOne-Regular";
+  font-family: AoboshiOne-Regular;
   font-style: normal;
   font-weight: normal;
   src: local("AoboshiOne-Regular"), url("AoboshiOne-Regular.woff") format("woff");
@@ -13,7 +13,6 @@ $font-family-base: "AoboshiOne-Regular", serif;
 $nav-link-hover-color: var(--bs-gray-600);
 $nav-link-color: var(--bs-gray-900);
 $offcanvas-horizontal-width: 45%;
-$primary: #306030;
 $progress-height: 1.25rem;
 $tooltip-opacity: 1;
 $zindex-tooltip: 1048;
@@ -21,6 +20,19 @@ $zindex-tooltip: 1048;
 // There is no variable that controls the box-shadow when unfocused (resulting in a dividing line).
 .accordion-button {
   box-shadow: none !important;
+}
+
+// Lighten the stripes on the progress bar so the "dark" variant becomes distinguishable
+.progress-bar-striped {
+  background-image: linear-gradient(
+    45deg,
+    rgb(255 255 255 / 50%) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgb(255 255 255 / 50%) 50% rgb(255 255 255 / 50%) 75%,
+    transparent 75%,
+    transparent
+  );
 }
 
 // TODO - Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563
@@ -32,7 +44,5 @@ $zindex-tooltip: 1048;
 // Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
 .popover.show,
 .tooltip.show > .tooltip-inner {
-  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 4px 1px rgb(0 0 0 / 20%);
 }
-
-@import "~bootstrap/scss/bootstrap";

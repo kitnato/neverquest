@@ -1,5 +1,6 @@
 @import "~animate.css";
-@import "bootstrap-custom.scss";
+@import "bootstrap-custom";
+@import "~bootstrap/scss/bootstrap";
 
 ::selection {
   background: var(--bs-gray-600);

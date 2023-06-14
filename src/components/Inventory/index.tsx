@@ -9,8 +9,8 @@ import { UseCompass } from "@neverquest/components/Inventory/Trinket/UseCompass"
 import { UseHearthstone } from "@neverquest/components/Inventory/Trinket/UseHearthstone";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { inventory } from "@neverquest/state/inventory";
-import type { ConsumableName, Gear, TrinketName } from "@neverquest/types";
-import { isGear } from "@neverquest/types/type-guards";
+import type { ConsumableName, TrinketName } from "@neverquest/types";
+import { isArmor, isGear, isShield, isWeapon } from "@neverquest/types/type-guards";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 
 const ITEM_ACTIONS: Record<ConsumableName | TrinketName, FunctionComponent> = {
@@ -27,7 +27,7 @@ export function Inventory() {
 
   const toggleEquipGear = useToggleEquipGear();
 
-  const equippedGear = inventoryValue.filter((item) => isGear(item) && item.isEquipped);
+  const equippedGear = [...inventoryValue.filter((item) => isGear(item) && item.isEquipped)];
   const storedItems = inventoryValue.filter(
     (item) => !isGear(item) || (isGear(item) && !item.isEquipped)
   );
@@ -43,19 +43,21 @@ export function Inventory() {
 
         {equippedGear.length === 0 && <span className="fst-italic">Nothing equipped.</span>}
 
-        {equippedGear.map((item) => {
-          const { id } = item;
+        {[equippedGear.find(isWeapon), equippedGear.find(isArmor), equippedGear.find(isShield)]
+          .filter(isGear)
+          .map((item) => {
+            const { id } = item;
 
-          return (
-            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-              <ItemDisplay item={item} overlayPlacement="right" />
+            return (
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
+                <ItemDisplay item={item} overlayPlacement="right" />
 
-              <Button onClick={() => toggleEquipGear(item as Gear)} variant="outline-dark">
-                Unequip
-              </Button>
-            </div>
-          );
-        })}
+                <Button onClick={() => toggleEquipGear(item)} variant="outline-dark">
+                  Unequip
+                </Button>
+              </div>
+            );
+          })}
       </Stack>
 
       <Stack gap={3}>

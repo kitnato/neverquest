@@ -1,4 +1,4 @@
-import { OverlayTrigger, ProgressBar, Tooltip } from "react-bootstrap";
+import { ProgressBar } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
@@ -18,19 +18,12 @@ export function StaminaMeter() {
     <LabelledProgressBar
       attached="below"
       label={`${staminaValue}/${staminaMaximumTotalValue}${
-        penalty > 0 ? ` (${staminaMaximumValue})` : ""
+        penalty > 0
+          ? ` (${staminaMaximumValue}) Blight: ${formatPercentage(blightValue * BLIGHT.increment)}`
+          : ""
       }`}
       sibling={
-        penalty > 0 ? (
-          <OverlayTrigger
-            overlay={
-              <Tooltip>{`Blight: ${formatPercentage(blightValue * BLIGHT.increment)}`}</Tooltip>
-            }
-            placement="top"
-          >
-            <ProgressBar key={2} now={penalty} striped variant="dark" />
-          </OverlayTrigger>
-        ) : null
+        penalty > 0 ? <ProgressBar animated key={2} now={penalty} striped variant="dark" /> : null
       }
       value={(staminaValue / staminaMaximumTotalValue) * 100}
       variant="dark"

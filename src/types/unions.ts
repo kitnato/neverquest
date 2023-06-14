@@ -68,7 +68,10 @@ export type Mastery = "cruelty" | "finesse" | "might" | "stability" | "tenacity"
 
 export type Reserve = "health" | "stamina";
 
-export const SHOWING = [
+export const RESOURCE_TYPES = ["coins", "essence", "scrap"] as const;
+export type Resource = (typeof RESOURCE_TYPES)[number];
+
+export const SHOWING_TYPES = [
   "armor",
   "attackRate",
   "attackRateDetails",
@@ -106,9 +109,9 @@ export const SHOWING = [
   "weight",
   "wildernessStatus",
 ] as const;
-export type Showing = (typeof SHOWING)[number];
+export type Showing = (typeof SHOWING_TYPES)[number];
 
-export const SKILLS = [
+export const SKILL_TYPES = [
   "anatomy",
   "armorcraft",
   "assassination",
@@ -118,7 +121,7 @@ export const SKILLS = [
   "shieldcraft",
   "traumatology",
 ] as const;
-export type Skill = (typeof SKILLS)[number];
+export type Skill = (typeof SKILL_TYPES)[number];
 
 export type StateKey =
   | "allowNSFW"

@@ -50,7 +50,7 @@ export const LOCRA = {
         return affix[category] === "prefix" && filterNSFW;
       });
 
-      const prefix = filteredPrefixes[Math.round(Math.random() * filteredPrefixes.length)];
+      const prefix = filteredPrefixes[Math.floor(Math.random() * filteredPrefixes.length)];
 
       finalName.unshift(capitalizeAll(prefix.name));
     }
@@ -74,7 +74,7 @@ export const LOCRA = {
         return affix[category] === "suffix" && filterNSFW;
       });
 
-      const suffix = filteredSuffixes[Math.round(Math.random() * filteredSuffixes.length)];
+      const suffix = filteredSuffixes[Math.floor(Math.random() * filteredSuffixes.length)];
 
       finalName.push("of", capitalizeAll(suffix.name));
     }

@@ -40,7 +40,7 @@ export function MonsterPoisonRating() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
 
-                    <td>{`${formatPercentage(monsterPoisonMagnitudeValue)} health reduction`}</td>
+                    <td>{`-${formatPercentage(monsterPoisonMagnitudeValue)} health`}</td>
                   </tr>
 
                   <tr>
@@ -55,10 +55,7 @@ export function MonsterPoisonRating() {
         >
           <span>
             {Math.round(
-              monsterPoisonChanceValue *
-                monsterPoisonMagnitudeValue *
-                monsterPoisonDurationValue *
-                100
+              monsterPoisonChanceValue * monsterPoisonMagnitudeValue * monsterPoisonDurationValue
             )}
           </span>
         </OverlayTrigger>

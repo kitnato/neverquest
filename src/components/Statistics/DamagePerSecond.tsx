@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "../FloatingText";
+import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconDamagePerSecond } from "@neverquest/icons/damage-per-second.svg";

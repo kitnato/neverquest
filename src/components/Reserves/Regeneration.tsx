@@ -23,13 +23,12 @@ import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/form
 export function Regeneration({ type }: { type: Reserve }) {
   const { baseRegenerationAmount, baseRegenerationRate, label, regenerationDelta } = RESERVES[type];
   const isHealth = type === "health";
+  const regenerationRate = isHealth ? healthRegenerationRate : staminaRegenerationRate;
 
   const regenerationAmountValue = useRecoilValue(
     isHealth ? healthRegenerationAmount : staminaRegenerationAmount
   );
-  const regenerationRateValue = useRecoilValue(
-    isHealth ? healthRegenerationRate : staminaRegenerationRate
-  );
+  const regenerationRateValue = useRecoilValue(regenerationRate);
   const isShowingReserveDetails = useRecoilValue(isShowing("reserveDetails"));
   const reserveRegenerationRateValue = useRecoilValue(reserveRegenerationRate);
 
@@ -38,7 +37,7 @@ export function Regeneration({ type }: { type: Reserve }) {
 
   useDeltaText({
     atomDelta: deltas(regenerationDelta),
-    atomValue: isHealth ? healthRegenerationRate : staminaRegenerationRate,
+    atomValue: regenerationRate,
     type: "time",
   });
 

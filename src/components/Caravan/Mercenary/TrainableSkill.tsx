@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { SkillDisplay } from "@neverquest/components/Caravan/Mercenary/SkillDisplay";
 import { TrainSkillButton } from "@neverquest/components/Caravan/Mercenary/TrainSkillButton";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { Coins } from "@neverquest/components/Resources/Coins";
+import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { SKILLS } from "@neverquest/data/skills";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { level } from "@neverquest/state/attributes";
@@ -29,7 +29,7 @@ export function TrainableSkill({ type }: { type: Skill }) {
           <SkillDisplay type={type} />
 
           <Stack direction="horizontal" gap={3}>
-            <Coins tooltip="Price (coins)" value={coinPrice} />
+            <ResourceDisplay tooltip="Price (coins)" type="coins" value={coinPrice} />
 
             <TrainSkillButton type={type} />
           </Stack>

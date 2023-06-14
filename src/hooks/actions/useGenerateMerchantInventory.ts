@@ -23,8 +23,6 @@ export function useGenerateMerchantInventory() {
         const stageValue = get(stage);
         const allowNSFWValue = get(allowNSFW);
 
-        const merchantOffersIndex = stageValue - 1;
-
         if (stageValue === get(stageMaximum)) {
           const SETTINGS_GEAR: {
             allowNSFW: boolean;
@@ -37,48 +35,51 @@ export function useGenerateMerchantInventory() {
             level: stageValue,
             tags: ["lowQuality"],
           };
+          const merchantOffersIndex = stageValue - 1;
 
-          MERCHANT_OFFERS[merchantOffersIndex].forEach((offer) => {
-            const { type } = offer;
-            const item = (() => {
-              if (type === "armor") {
-                return {
-                  ...generateArmor({
-                    ...SETTINGS_GEAR,
-                    ...offer,
-                  }),
-                  isEquipped: false,
-                };
-              }
+          if (merchantOffersIndex < MERCHANT_OFFERS.length) {
+            MERCHANT_OFFERS[merchantOffersIndex].forEach((offer) => {
+              const { type } = offer;
+              const item = (() => {
+                if (type === "armor") {
+                  return {
+                    ...generateArmor({
+                      ...SETTINGS_GEAR,
+                      ...offer,
+                    }),
+                    isEquipped: false,
+                  };
+                }
 
-              if (type === "shield") {
-                return {
-                  ...generateShield({
-                    ...SETTINGS_GEAR,
-                    ...offer,
-                  }),
-                  isEquipped: false,
-                };
-              }
+                if (type === "shield") {
+                  return {
+                    ...generateShield({
+                      ...SETTINGS_GEAR,
+                      ...offer,
+                    }),
+                    isEquipped: false,
+                  };
+                }
 
-              if (type === "weapon") {
-                return {
-                  ...generateWeapon({
-                    ...SETTINGS_GEAR,
-                    ...offer,
-                  }),
-                  isEquipped: false,
-                };
-              }
+                if (type === "weapon") {
+                  return {
+                    ...generateWeapon({
+                      ...SETTINGS_GEAR,
+                      ...offer,
+                    }),
+                    isEquipped: false,
+                  };
+                }
 
-              return TRINKETS[offer.name].item;
-            })();
+                return TRINKETS[offer.name].item;
+              })();
 
-            inventory.push({
-              isReturned: false,
-              item,
+              inventory.push({
+                isReturned: false,
+                item,
+              });
             });
-          });
+          }
         }
 
         set(merchantInventory, inventory);

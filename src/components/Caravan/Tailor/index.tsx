@@ -7,7 +7,8 @@ export function Tailor() {
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <IconDisplay
-        contents="Adds extra pockets to the knapsack to expand maximum encumbrance by 1."
+        contents="Expand inventory"
+        description="Adds extra pockets to the knapsack to expand maximum encumbrance by 1."
         Icon={IconTailoring}
         tooltip="Expand inventory"
       />

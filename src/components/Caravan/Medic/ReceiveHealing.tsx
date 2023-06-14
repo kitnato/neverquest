@@ -2,7 +2,7 @@ import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { Coins } from "@neverquest/components/Resources/Coins";
+import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { MEDIC_PRICE_SURGERY, MEDIC_PRICE_SURGERY_CRITICAL } from "@neverquest/data/caravan";
 import { useHeal } from "@neverquest/hooks/actions/useHeal";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
@@ -35,15 +35,10 @@ export function ReceiveHealing() {
       <h6>Receive healing</h6>
 
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        <IconDisplay
-          contents="Operation"
-          description="Undergo surgery to regain full health."
-          Icon={IconSurgery}
-          tooltip="Surgery"
-        />
+        <IconDisplay contents="Regain full health" Icon={IconSurgery} tooltip="Surgery" />
 
         <Stack direction="horizontal" gap={3}>
-          <Coins tooltip="Price (coins)" value={price} />
+          <ResourceDisplay tooltip="Price (coins)" type="coins" value={price} />
 
           <OverlayTrigger
             overlay={

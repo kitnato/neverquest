@@ -45,7 +45,7 @@ export function generateArmor({
   };
 
   return {
-    coinPrice: Math.round(600 * growthFactor * priceModifier),
+    coinPrice: Math.round(500 * growthFactor * priceModifier),
     deflection: getFromRange(ranges.deflection),
     gearClass,
     id: nanoid(),
@@ -65,7 +65,7 @@ export function generateArmor({
     protection: Math.round(300 * growthFactor * protectionModifier),
     ranges,
     scrapPrice: Math.round(3500 * growthFactor * priceModifier),
-    staminaCost: Math.ceil(30 * growthFactor * dodgeCostModifier),
+    staminaCost: Math.ceil(25 * growthFactor * dodgeCostModifier),
     weight: Math.ceil(50 * growthFactor * weightModifier),
   };
 }
@@ -109,7 +109,7 @@ export function generateShield({
 
   return {
     block: getFromRange(ranges.block),
-    coinPrice: Math.round(500 * growthFactor),
+    coinPrice: Math.round(400 * growthFactor),
     gearClass,
     id: nanoid(),
     isEquipped: false,
@@ -129,7 +129,7 @@ export function generateShield({
     ranges,
     scrapPrice: Math.round(3000 * growthFactor),
     stagger: (0.1 + 0.9 * growthFactor) * staggerModifier,
-    staminaCost: Math.ceil(40 * growthFactor * staminaCostModifier),
+    staminaCost: Math.ceil(30 * growthFactor * staminaCostModifier),
     weight: Math.ceil(40 * growthFactor * weightModifier),
   };
 }
@@ -166,7 +166,7 @@ export function generateWeapon({
 
   return {
     abilityChance: abilityChance.minimum + Math.round(abilityChance.maximum * growthFactor),
-    coinPrice: Math.round(400 * growthFactor),
+    coinPrice: Math.round(300 * growthFactor),
     damage: getFromRange({ ...ranges.damage }),
     gearClass,
     // TODO
@@ -190,7 +190,7 @@ export function generateWeapon({
     ranges,
     rate: getFromRange({ ...ranges.rate }),
     scrapPrice: Math.round(2500 * growthFactor),
-    staminaCost: Math.ceil(50 * growthFactor),
+    staminaCost: Math.ceil(40 * growthFactor),
     weight: Math.ceil(30 * growthFactor),
   };
 }

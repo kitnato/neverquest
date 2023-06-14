@@ -51,11 +51,24 @@ export function useToggleEquipGear() {
 
         set(inventory, (current) =>
           current.map((currentItem) => {
-            if (isGear(currentItem) && currentItem.id === gear.id) {
-              return {
-                ...currentItem,
-                isEquipped: !currentItem.isEquipped,
-              };
+            if (isGear(currentItem)) {
+              if (currentItem.id === gear.id) {
+                return {
+                  ...currentItem,
+                  isEquipped: !currentItem.isEquipped,
+                };
+              } else if (
+                currentItem.isEquipped &&
+                !gear.isEquipped &&
+                ((isArmor(currentItem) && isArmor(gear)) ||
+                  (isShield(currentItem) && isShield(gear)) ||
+                  (isWeapon(currentItem) && isWeapon(gear)))
+              ) {
+                return {
+                  ...currentItem,
+                  isEquipped: false,
+                };
+              }
             }
 
             return currentItem;

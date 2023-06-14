@@ -1,8 +1,7 @@
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import { Coins } from "@neverquest/components/Resources/Coins";
-import { Scrap } from "@neverquest/components/Resources/Scrap";
+import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { coins, scrap } from "@neverquest/state/resources";
@@ -39,9 +38,9 @@ export function CraftGear({ gear }: { gear: Gear }) {
 
   return (
     <Stack direction="horizontal" gap={5}>
-      <Scrap tooltip="Cost (scrap)" value={scrapPrice} />
+      <ResourceDisplay tooltip="Cost (scrap)" type="scrap" value={scrapPrice} />
 
-      <Coins tooltip="Price (coins)" value={coinPrice} />
+      <ResourceDisplay tooltip="Price (coins)" type="coins" value={coinPrice} />
 
       <OverlayTrigger
         overlay={

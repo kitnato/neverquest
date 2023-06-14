@@ -26,7 +26,7 @@ export function MonsterBlightRating() {
         <OverlayTrigger
           overlay={
             <Popover>
-              <Popover.Header className="text-center">Blight details</Popover.Header>
+              <Popover.Header className="text-center">Blight rating details</Popover.Header>
 
               <Popover.Body>
                 <DetailsTable>
@@ -39,7 +39,7 @@ export function MonsterBlightRating() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
 
-                    <td>{`${blightIncrementValue} stamina reduction per affliction`}</td>
+                    <td>{`-${blightIncrementValue} stamina per affliction`}</td>
                   </tr>
                 </DetailsTable>
               </Popover.Body>
@@ -48,7 +48,9 @@ export function MonsterBlightRating() {
         >
           <span>
             {poisonDurationValue > 0
-              ? formatPercentage(monsterBlightChanceValue * monsterPoisonChanceValue)
+              ? Math.round(
+                  monsterBlightChanceValue * monsterPoisonChanceValue * blightIncrementValue * 100
+                )
               : LABEL_EMPTY}
           </span>
         </OverlayTrigger>

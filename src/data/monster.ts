@@ -8,8 +8,8 @@ export const BLIGHT = {
 export const LOOT = {
   bonus: 100,
   coinsBase: 150,
-  essenceBase: 200,
-  scrapBase: 250,
+  essenceBase: 300,
+  scrapBase: 200,
 };
 
 export const MONSTER_ATTACK_RATE = {
@@ -30,10 +30,10 @@ export const MONSTER_HEALTH = {
 
 export const POISON = {
   chanceBase: 0.05,
-  chanceMaximum: 0.3,
+  chanceMaximum: 0.33,
   durationBase: 30000,
   durationMaximum: 170000,
-  magnitudeBase: 0.2,
+  magnitudeBase: 0.15,
   magnitudeMaximum: 0.4,
   stageRequired: 15,
 };

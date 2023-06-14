@@ -11,16 +11,16 @@ export const RESERVES: Record<
   }
 > = {
   health: {
-    baseAmount: 10,
+    baseAmount: 80,
     baseRegenerationAmount: 4,
-    baseRegenerationRate: 5000,
+    baseRegenerationRate: 4000,
     label: "Health",
     regenerationDelta: "healthRegenerationRate",
   },
   stamina: {
-    baseAmount: 100,
+    baseAmount: 10,
     baseRegenerationAmount: 1,
-    baseRegenerationRate: 4500,
+    baseRegenerationRate: 3500,
     label: "Stamina",
     regenerationDelta: "staminaRegenerationRate",
   },

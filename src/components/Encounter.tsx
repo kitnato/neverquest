@@ -2,7 +2,7 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { Caravan } from "@neverquest/components/Caravan";
-import { LootDisplay } from "@neverquest/components/Resources/LootDisplay";
+import { LootDisplay } from "@neverquest/components/Loot/LootDisplay";
 import { Wilderness } from "@neverquest/components/Wilderness";
 import { isWilderness } from "@neverquest/state/encounter";
 

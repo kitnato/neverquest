@@ -3,7 +3,7 @@ import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
-import { Coins } from "@neverquest/components/Resources/Coins";
+import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { CONSUMABLES } from "@neverquest/data/inventory";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
@@ -43,7 +43,7 @@ export function PurchaseBandages() {
         <ItemDisplay item={itemWithID} overlayPlacement="right" />
 
         <Stack direction="horizontal" gap={3}>
-          <Coins tooltip="Price (coins)" value={coinPrice} />
+          <ResourceDisplay tooltip="Price (coins)" type="coins" value={coinPrice} />
 
           <OverlayTrigger
             overlay={

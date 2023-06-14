@@ -2,7 +2,7 @@ import { Stack } from "react-bootstrap";
 
 import { AttributePoints } from "@neverquest/components/Attributes/AttributePoints";
 import { AttributesList } from "@neverquest/components/Attributes/AttributesList";
-import { EssenceAbsorbed } from "@neverquest/components/Resources/EssenceAbsorbed";
+import { EssenceAbsorbed } from "@neverquest/components/Attributes/EssenceAbsorbed";
 import { Level } from "@neverquest/components/Status/Level";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 

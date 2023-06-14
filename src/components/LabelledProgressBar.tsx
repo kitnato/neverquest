@@ -55,7 +55,7 @@ export function LabelledProgressBar({
           <small
             className="position-absolute text-light"
             style={{
-              left: sibling === null ? "50%" : 0,
+              left: sibling === null ? "50%" : 16,
               textShadow:
                 "-1px 1px 1px #212529, 1px 1px 1px #212529, 1px -1px 1px #212529, -1px -1px 1px #212529",
               top: 0,

@@ -4,7 +4,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
-import { Coins } from "@neverquest/components/Resources/Coins";
+import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { merchantInventory } from "@neverquest/state/caravan";
@@ -58,7 +58,11 @@ export function SellItems() {
                 </Stack>
 
                 <Stack direction="horizontal" gap={3}>
-                  <Coins tooltip="Value (coins)" value={getSellPrice(item)} />
+                  <ResourceDisplay
+                    tooltip="Value (coins)"
+                    type="coins"
+                    value={getSellPrice(item)}
+                  />
 
                   <Button
                     onClick={() => {

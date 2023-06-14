@@ -2,7 +2,7 @@ import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { Coins } from "@neverquest/components/Resources/Coins";
+import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { CREW } from "@neverquest/data/caravan";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { ReactComponent as IconCrewMember } from "@neverquest/icons/crew-member.svg";
@@ -50,7 +50,7 @@ export function CrewHirable({ type }: { type: CrewMember }) {
         />
 
         <Stack direction="horizontal" gap={3}>
-          <Coins tooltip="Price (coins)" value={coinPrice} />
+          <ResourceDisplay tooltip="Price (coins)" type="coins" value={coinPrice} />
 
           <OverlayTrigger
             overlay={<Tooltip>Not enough coins!</Tooltip>}

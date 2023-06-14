@@ -24,7 +24,7 @@ export const CREW: Record<
   // TODO
   alchemist: {
     coinPrice: 100,
-    description: "Converts essence, scrap and coins between one another.",
+    description: "Converts resources between one another.",
     interaction: "Transmute",
     monologues: ["Things are not always what they seem."],
     name: "Alchemist",

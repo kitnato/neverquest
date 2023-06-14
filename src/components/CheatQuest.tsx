@@ -10,7 +10,7 @@ import { isAttacking } from "@neverquest/state/character";
 import { isWilderness, progress, progressMaximum, stage } from "@neverquest/state/encounter";
 import { coinsLoot, essenceLoot, scrapLoot } from "@neverquest/state/resources";
 import { skills } from "@neverquest/state/skills";
-import { SKILLS } from "@neverquest/types/unions";
+import { SKILL_TYPES } from "@neverquest/types/unions";
 
 declare const window: Window & {
   cheatQuest: (state: string, value?: number) => void;
@@ -82,7 +82,7 @@ export function CheatQuest() {
         }
         // Heretic
         case "gimmee": {
-          if (typeof value === "string" && value in SKILLS) {
+          if (typeof value === "string" && value in SKILL_TYPES) {
             setSkill[value](true);
           }
           break;

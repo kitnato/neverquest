@@ -13,6 +13,7 @@ import {
 import { isHealthAtMaximum, isStaminaAtMaximum } from "@neverquest/state/reserves";
 import {
   healthRegenerationAmount,
+  healthRegenerationRate,
   staminaRegenerationAmount,
   staminaRegenerationRate,
 } from "@neverquest/state/statistics";
@@ -33,10 +34,10 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
   );
   const isReserveAtMaximum = useRecoilValue(isHealth ? isHealthAtMaximum : isStaminaAtMaximum);
   const regenerationAmountValue = useRecoilValue(
-    isHealth ? staminaRegenerationAmount : healthRegenerationAmount
+    isHealth ? healthRegenerationAmount : staminaRegenerationAmount
   );
   const regenerationRateValue = useRecoilValue(
-    isHealth ? staminaRegenerationRate : staminaRegenerationRate
+    isHealth ? healthRegenerationRate : staminaRegenerationRate
   );
   const isRecoveringValue = useRecoilValue(isRecovering);
 

@@ -1,13 +1,12 @@
-import { Card, Stack } from "react-bootstrap";
+import { Card, Col, Row, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { Looting } from "@neverquest/components/Resources/Looting";
-import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
+import { Loot } from "@neverquest/components/Loot";
+import { Looting } from "@neverquest/components/Loot/Looting";
 import { ReactComponent as IconLooted } from "@neverquest/icons/loot.svg";
 import { progress } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
-
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function LootDisplay() {
@@ -29,7 +28,19 @@ export function LootDisplay() {
                 tooltip="Loot"
               />
             ) : (
-              <ResourceDisplay isLoot />
+              <Row>
+                <Col>
+                  <Loot type="essence" />
+                </Col>
+
+                <Col>
+                  <Loot type="scrap" />
+                </Col>
+
+                <Col>
+                  <Loot type="coins" />
+                </Col>
+              </Row>
             )}
           </Card.Body>
         </Card>

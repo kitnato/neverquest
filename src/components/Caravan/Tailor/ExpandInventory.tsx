@@ -1,7 +1,7 @@
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import { Coins } from "@neverquest/components/Resources/Coins";
+import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { ENCUMBRANCE } from "@neverquest/data/statistics";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { encumbranceMaximum, hasKnapsack } from "@neverquest/state/inventory";
@@ -23,13 +23,13 @@ export function ExpandInventory() {
   const canExpand = isAffordable && hasKnapsackValue;
 
   const handleExpansion = () => {
-    transactResources({ coinsDifference: price });
+    transactResources({ coinsDifference: -price });
     setEncumbranceMaximum((current) => current + 1);
   };
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <Coins tooltip="Price (coins)" value={price} />
+      <ResourceDisplay tooltip="Price (coins)" type="coins" value={price} />
 
       <OverlayTrigger
         overlay={

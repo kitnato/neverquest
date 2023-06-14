@@ -23,7 +23,9 @@ export function StaminaMeter() {
           : ""
       }`}
       sibling={
-        penalty > 0 ? <ProgressBar animated key={2} now={penalty} striped variant="dark" /> : null
+        penalty > 0 ? (
+          <ProgressBar animated key={2} now={penalty} striped variant="secondary" />
+        ) : null
       }
       value={(staminaValue / staminaMaximumTotalValue) * 100}
       variant="dark"

@@ -37,7 +37,9 @@ export function HealthMeter() {
           : ""
       }`}
       sibling={
-        penalty > 0 ? <ProgressBar animated key={2} now={penalty} striped variant="dark" /> : null
+        penalty > 0 ? (
+          <ProgressBar animated key={2} now={penalty} striped variant="secondary" />
+        ) : null
       }
       value={(healthValue / healthMaximumTotalValue) * (100 - penalty)}
       variant="dark"

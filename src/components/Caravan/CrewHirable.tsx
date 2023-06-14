@@ -12,6 +12,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { coins } from "@neverquest/state/resources";
 import type { CrewMember } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
+import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function CrewHirable({ type }: { type: CrewMember }) {
   const coinsValue = useRecoilValue(coins);
@@ -20,8 +21,9 @@ export function CrewHirable({ type }: { type: CrewMember }) {
 
   const transactResources = useTransactResources();
 
-  const { coinPrice, description, name, requiredStage } = CREW[type];
+  const { coinPrice, description, requiredStage } = CREW[type];
   const isAffordable = coinPrice <= coinsValue;
+  const name = capitalizeAll(type);
 
   const handleHire = () => {
     setCrewMember((current) => ({

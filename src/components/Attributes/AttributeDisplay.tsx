@@ -22,6 +22,7 @@ import {
   LABEL_AT_MAXIMUM,
   LABEL_UNKNOWN,
 } from "@neverquest/utilities/constants";
+import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function AttributeDisplay({ type }: { type: Attribute }) {
   const { isUnlocked, points } = useRecoilValue(attributes(type));
@@ -33,9 +34,10 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
 
   const increaseAttribute = useIncreaseAttribute();
 
-  const { description, Icon, name } = ATTRIBUTES[type];
+  const { description, Icon } = ATTRIBUTES[type];
   const canIncrease =
     areAttributesIncreasableValue && (isStageCompletedValue || !isStageStartedValue);
+  const name = capitalizeAll(type);
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>

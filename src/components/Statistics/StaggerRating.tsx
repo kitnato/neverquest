@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import { MASTERIES } from "@neverquest/data/masteries";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconStaggerRating } from "@neverquest/icons/stagger-rating.svg";
 import { deltas } from "@neverquest/state/deltas";
@@ -22,8 +21,6 @@ export function StaggerRating() {
   const staggerRatingValue = useRecoilValue(staggerRating);
   const staggerWeaponValue = useRecoilValue(staggerWeapon);
   const skillTraumatology = useRecoilValue(skills("traumatology"));
-
-  const { name } = MASTERIES.might;
 
   useDeltaText({
     atomDelta: deltas("staggerRating"),
@@ -59,7 +56,7 @@ export function StaggerRating() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} mastery:`}</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Might mastery:</td>
 
                       <td>{`${formatMilliseconds(staggerDurationValue)} duration`}</td>
                     </tr>

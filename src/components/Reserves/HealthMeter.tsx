@@ -36,9 +36,7 @@ export function HealthMeter() {
           ? ` (${healthMaximumValue}) Poison: ${formatMilliseconds(poisonDurationValue)}`
           : ""
       }`}
-      sibling={
-        penalty > 0 ? <ProgressBar animated key={2} now={penalty} striped variant="dark" /> : null
-      }
+      sibling={penalty > 0 ? <ProgressBar animated key={2} now={penalty} striped /> : null}
       value={(healthValue / healthMaximumTotalValue) * (100 - penalty)}
       variant="dark"
     />

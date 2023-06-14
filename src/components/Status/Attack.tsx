@@ -5,7 +5,6 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { AttackMeter } from "@neverquest/components/Status/AttackMeter";
-import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { WEAPON_NONE } from "@neverquest/data/inventory";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconAttackRate } from "@neverquest/icons/attack-rate.svg";
@@ -21,8 +20,6 @@ export function Attack() {
   const isShowingAttackRate = useRecoilValue(isShowing("attackRate"));
   const isShowingAttackRateDetails = useRecoilValue(isShowing("attackRateDetails"));
   const weaponValue = useRecoilValue(weapon);
-
-  const { name } = ATTRIBUTES.speed;
 
   useDeltaText({
     atomDelta: deltas("attackRate"),
@@ -53,7 +50,7 @@ export function Attack() {
                   </tr>
 
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} attribute:`}</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Speed attribute:</td>
 
                     <td>{`-${formatPercentage(attackRateValue)}`}</td>
                   </tr>

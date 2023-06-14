@@ -8,13 +8,14 @@ import { MASTERIES } from "@neverquest/data/masteries";
 import { isMasteryAtMaximum, masteries, masteryCost } from "@neverquest/state/masteries";
 import type { Mastery } from "@neverquest/types/unions";
 import { LABEL_AT_MAXIMUM } from "@neverquest/utilities/constants";
+import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function MasteryDisplay({ type }: { type: Mastery }) {
   const isMasteryAtMaximumValue = useRecoilValue(isMasteryAtMaximum(type));
   const { isUnlocked, progress, rank } = useRecoilValue(masteries(type));
   const masteryCostValue = useRecoilValue(masteryCost(type));
 
-  const { description, Icon, name } = MASTERIES[type];
+  const { description, Icon } = MASTERIES[type];
   const label = isMasteryAtMaximumValue ? LABEL_AT_MAXIMUM : `${progress}/${masteryCostValue}`;
   const value = isMasteryAtMaximumValue ? 100 : (progress / masteryCostValue) * 100;
 
@@ -37,7 +38,7 @@ export function MasteryDisplay({ type }: { type: Mastery }) {
       }
       description={description}
       Icon={Icon}
-      tooltip={name}
+      tooltip={capitalizeAll(type)}
     />
   );
 }

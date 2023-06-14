@@ -18,7 +18,6 @@ export type AttributeOrMastery = UnlockedState & {
   Icon: SVGIcon;
   increment: number;
   maximum?: number;
-  name: string;
 };
 
 export type Consumable = ItemBase & {

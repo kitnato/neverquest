@@ -7,6 +7,7 @@ import { ReactComponent as IconCrewMember } from "@neverquest/icons/crew-member.
 import { crew } from "@neverquest/state/caravan";
 import type { CrewMember } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
+import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function CrewHired({ setActive, type }: { setActive: () => void; type: CrewMember }) {
   const { hireStatus, monologueProgress } = useRecoilValue(crew(type));
@@ -15,7 +16,7 @@ export function CrewHired({ setActive, type }: { setActive: () => void; type: Cr
     return null;
   }
 
-  const { interaction, monologues, name } = CREW[type];
+  const { interaction, monologues } = CREW[type];
 
   return (
     <IconDisplay
@@ -29,7 +30,7 @@ export function CrewHired({ setActive, type }: { setActive: () => void; type: Cr
         </div>
       }
       Icon={IconCrewMember}
-      tooltip={name}
+      tooltip={capitalizeAll(type)}
     />
   );
 }

@@ -17,7 +17,6 @@ export const CREW: Record<
     description: string;
     interaction: string;
     monologues: string[];
-    name: string;
     requiredStage: number;
   }
 > = {
@@ -27,7 +26,6 @@ export const CREW: Record<
     description: "Converts resources between one another.",
     interaction: "Transmute",
     monologues: ["Things are not always what they seem."],
-    name: "Alchemist",
     requiredStage: 16,
   },
   blacksmith: {
@@ -35,7 +33,6 @@ export const CREW: Record<
     description: "Crafts superior gear.",
     interaction: "Craft",
     monologues: ["In need of better gear?"],
-    name: "Blacksmith",
     requiredStage: 5,
   },
   medic: {
@@ -43,7 +40,6 @@ export const CREW: Record<
     description: "Heals wounds and sells bandages.",
     interaction: "Heal",
     monologues: ["Allow me to patch you up."],
-    name: "Medic",
     requiredStage: 6,
   },
   mercenary: {
@@ -51,7 +47,6 @@ export const CREW: Record<
     description: "Trains new skills and attributes.",
     interaction: "Train",
     monologues: ["Perhaps I can teach you something."],
-    name: "Mercenary",
     requiredStage: 12,
   },
   merchant: {
@@ -66,7 +61,6 @@ export const CREW: Record<
       "I heard there are other travelers looking to sell their services.",
       "Welcome back. Always a sight for sore eyes.",
     ],
-    name: "Merchant",
     requiredStage: 0,
   },
   // TODO
@@ -75,7 +69,6 @@ export const CREW: Record<
     description: "Offers a ritual that purges all essence.",
     interaction: "Ritual",
     monologues: ["Prepared to pierce the veil?"],
-    name: "Alchemist",
     requiredStage: 30,
   },
   tailor: {
@@ -83,7 +76,6 @@ export const CREW: Record<
     description: "Expands inventory space.",
     interaction: "Upgrade",
     monologues: ["Allow me to deepen your pockets."],
-    name: "Tailor",
     requiredStage: 8,
   },
   // TODO
@@ -92,7 +84,6 @@ export const CREW: Record<
     description: "Sells potions that cure ailments.",
     interaction: "Brew",
     monologues: ["Gaze deep into my cauldron ..."],
-    name: "Alchemist",
     requiredStage: 20,
   },
 };

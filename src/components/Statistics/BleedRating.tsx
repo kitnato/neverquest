@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import { MASTERIES } from "@neverquest/data/masteries";
 import { BLEED } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconBleedRating } from "@neverquest/icons/bleed-rating.svg";
@@ -25,7 +24,6 @@ export function BleedRating() {
   const skillAnatomy = useRecoilValue(skills("anatomy"));
 
   const { duration } = BLEED;
-  const { name } = MASTERIES.cruelty;
 
   useDeltaText({
     atomDelta: deltas("bleedRating"),
@@ -55,7 +53,7 @@ export function BleedRating() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>{`${name} mastery:`}</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Cruelty mastery:</td>
 
                       <td>{`${formatPercentage(bleedDamageValue)} of damage`}</td>
                     </tr>

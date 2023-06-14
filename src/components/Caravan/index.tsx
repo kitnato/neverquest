@@ -13,10 +13,11 @@ import { Mystic } from "@neverquest/components/Caravan/Mystic";
 import { Tailor } from "@neverquest/components/Caravan/Tailor";
 import { Witch } from "@neverquest/components/Caravan/Witch";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
-import { CREW, CREW_ORDER } from "@neverquest/data/caravan";
+import { CREW_ORDER } from "@neverquest/data/caravan";
 import { crewActive, crewAvailable } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import type { CrewMember } from "@neverquest/types/unions";
+import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 const CREW_COMPONENTS: Record<CrewMember, FunctionComponent> = {
@@ -75,13 +76,12 @@ export function Caravan() {
       {crewActiveValue !== null &&
         (() => {
           const Component = CREW_COMPONENTS[crewActiveValue];
-          const { name } = CREW[crewActiveValue];
 
           return (
             <DismissableScreen
               isShowing={isScreenShowing}
               onClose={() => toggleCrewActive(false)}
-              title={name}
+              title={capitalizeAll(crewActiveValue)}
             >
               <Component />
             </DismissableScreen>

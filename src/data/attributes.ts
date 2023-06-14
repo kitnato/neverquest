@@ -13,7 +13,6 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     increment: 0.04,
     isUnlocked: false,
     maximum: 0.8,
-    name: "Agility",
   },
   dexterity: {
     base: 0,
@@ -22,7 +21,6 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     increment: 0.03,
     isUnlocked: false,
     maximum: 0.6,
-    name: "Dexterity",
   },
   endurance: {
     base: RESERVES.stamina.baseAmount,
@@ -30,7 +28,6 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     Icon: IconPlaceholder,
     increment: 4,
     isUnlocked: true,
-    name: "Endurance",
   },
   fortitude: {
     base: 0,
@@ -38,7 +35,6 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     Icon: IconPlaceholder,
     increment: 2,
     isUnlocked: false,
-    name: "Fortitude",
   },
   luck: {
     base: 0,
@@ -46,7 +42,6 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     Icon: IconPlaceholder,
     increment: 0.03,
     isUnlocked: false,
-    name: "Luck",
   },
   perception: {
     // TODO - move base amount to /data
@@ -55,7 +50,6 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     Icon: IconPlaceholder,
     increment: 0.15,
     isUnlocked: false,
-    name: "Perception",
   },
   resilience: {
     base: RECOVERY_RATE,
@@ -64,7 +58,6 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     increment: -150,
     isUnlocked: true,
     maximum: 100,
-    name: "Resilience",
   },
   speed: {
     base: 0,
@@ -73,7 +66,6 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     increment: 0.05,
     isUnlocked: true,
     maximum: 0.9,
-    name: "Speed",
   },
   strength: {
     base: 0,
@@ -81,7 +73,6 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     Icon: IconPlaceholder,
     increment: 2,
     isUnlocked: true,
-    name: "Strength",
   },
   vigor: {
     base: 0,
@@ -89,7 +80,6 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     Icon: IconPlaceholder,
     increment: 0.05,
     isUnlocked: false,
-    name: "Vigor",
   },
   vitality: {
     base: RESERVES.health.baseAmount,
@@ -97,7 +87,6 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     Icon: IconPlaceholder,
     increment: 10,
     isUnlocked: true,
-    name: "Vitality",
   },
 };
 

@@ -5,7 +5,6 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { RecoveryMeter } from "@neverquest/components/Status/RecoveryMeter";
-import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { RECOVERY_RATE } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconRecovery } from "@neverquest/icons/recovery.svg";
@@ -20,7 +19,6 @@ export function Recovery() {
   const tenacityValue = useRecoilValue(tenacity);
   const recoveryRateValue = useRecoilValue(recoveryRate);
 
-  const { name } = ATTRIBUTES.resilience;
   const showRecoveryRate = recoveryRateValue !== RECOVERY_RATE;
   const showTenacity = tenacityValue > 0;
 
@@ -53,7 +51,7 @@ export function Recovery() {
                   <tr>
                     {showRecoveryRate ? (
                       <>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>{name} attribute:</td>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Resilience attribute:</td>
 
                         <td>{`-${formatPercentage(1 - recoveryRateValue / RECOVERY_RATE)}`}</td>
                       </>

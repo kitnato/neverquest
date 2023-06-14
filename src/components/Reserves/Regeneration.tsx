@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { RegenerationMeter } from "@neverquest/components/Reserves/RegenerationMeter";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { RESERVES } from "@neverquest/data/reserves";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { deltas } from "@neverquest/state/deltas";
@@ -31,9 +30,6 @@ export function Regeneration({ type }: { type: Reserve }) {
   const regenerationRateValue = useRecoilValue(regenerationRate);
   const isShowingReserveDetails = useRecoilValue(isShowing("reserveDetails"));
   const reserveRegenerationRateValue = useRecoilValue(reserveRegenerationRate);
-
-  const { name: amountName } = ATTRIBUTES.fortitude;
-  const { name: rateName } = ATTRIBUTES.vigor;
 
   useDeltaText({
     atomDelta: deltas(regenerationDelta),
@@ -63,7 +59,7 @@ export function Regeneration({ type }: { type: Reserve }) {
                 </tr>
 
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>{rateName} attribute:</td>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Vigor attribute:</td>
 
                   <td>{`-${formatPercentage(reserveRegenerationRateValue)}`}</td>
                 </tr>
@@ -81,7 +77,7 @@ export function Regeneration({ type }: { type: Reserve }) {
                 </tr>
 
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>{amountName} attribute:</td>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Fortitude attribute:</td>
 
                   <td>{`+${regenerationAmountValue - baseRegenerationAmount}`}</td>
                 </tr>

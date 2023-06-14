@@ -22,9 +22,7 @@ export function StaminaMeter() {
           ? ` (${staminaMaximumValue}) Blight: ${formatPercentage(blightValue * BLIGHT.increment)}`
           : ""
       }`}
-      sibling={
-        penalty > 0 ? <ProgressBar animated key={2} now={penalty} striped variant="dark" /> : null
-      }
+      sibling={penalty > 0 ? <ProgressBar animated key={2} now={penalty} striped /> : null}
       value={(staminaValue / staminaMaximumTotalValue) * 100}
       variant="dark"
     />

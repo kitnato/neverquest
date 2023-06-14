@@ -11,7 +11,6 @@ export const MASTERIES: Record<Mastery, AttributeOrMastery> = {
     increment: 0.04,
     isUnlocked: false,
     maximum: 1,
-    name: "Cruelty",
   },
   finesse: {
     base: 0,
@@ -20,7 +19,6 @@ export const MASTERIES: Record<Mastery, AttributeOrMastery> = {
     increment: 0.02,
     isUnlocked: false,
     maximum: 0.8,
-    name: "Finesse",
   },
   might: {
     base: 1200,
@@ -29,7 +27,6 @@ export const MASTERIES: Record<Mastery, AttributeOrMastery> = {
     increment: 100,
     isUnlocked: false,
     maximum: 3500,
-    name: "Might",
   },
   stability: {
     base: 0,
@@ -38,7 +35,6 @@ export const MASTERIES: Record<Mastery, AttributeOrMastery> = {
     increment: 0.03,
     isUnlocked: false,
     maximum: 0.66,
-    name: "Stability",
   },
   tenacity: {
     base: 0,
@@ -47,7 +43,6 @@ export const MASTERIES: Record<Mastery, AttributeOrMastery> = {
     increment: 0.02,
     isUnlocked: false,
     maximum: 0.9,
-    name: "Tenacity",
   },
 };
 

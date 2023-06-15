@@ -54,10 +54,8 @@ export function useDefend() {
           type: "headShake",
         });
 
-        const hasDodged = get(skills("evasion")) && Math.random() <= get(dodgeTotal);
-
         // If attack is dodged, nothing else happens (all damage is negated).
-        if (hasDodged) {
+        if (get(skills("evasion")) && Math.random() <= get(dodgeTotal)) {
           if (get(canDodge)) {
             set(deltas("health"), {
               color: "text-muted",
@@ -169,19 +167,15 @@ export function useDefend() {
               },
             ];
 
-            const hasStabilized = get(skills("shieldcraft")) && Math.random() <= get(stability);
-
             increaseMastery("stability");
 
             // If Shieldcraft skill is acquired, check if a free block occurs, otherwise spend stamina blocking.
-            if (hasStabilized) {
+            if (get(skills("shieldcraft")) && Math.random() <= get(stability)) {
               deltaStamina.push({
                 color: "text-muted",
                 value: "STABILIZED",
               });
-            }
-
-            if (!hasStabilized) {
+            } else {
               changeStamina({ value: -staminaCost });
             }
 
@@ -220,21 +214,17 @@ export function useDefend() {
           ];
         }
 
-        const hasIgnoredRecovery = get(skills("armorcraft")) && Math.random() <= get(tenacity);
-
         increaseMastery("tenacity");
 
         // If Tenacity hasn't been triggered, activate recovery.
-        if (!hasIgnoredRecovery) {
+        if (!get(skills("armorcraft")) && Math.random() <= get(tenacity)) {
           set(isShowing("recovery"), true);
 
           set(recoveryDuration, get(recoveryRate));
         }
 
-        const isPoisoned = Math.random() <= get(monsterPoisonChance);
-
         // If poisoning occurs, check if has been deflected, otherwise apply poison - if there is an active poisoning, increment blight instead.
-        if (isPoisoned) {
+        if (Math.random() <= get(monsterPoisonChance)) {
           const hasDeflected = get(skills("armorcraft")) && Math.random() <= get(deflection);
 
           if (hasDeflected) {
@@ -243,9 +233,7 @@ export function useDefend() {
               value: "DEFLECTED POISON",
             });
           } else {
-            const isBlighted = Math.random() <= get(monsterBlightChance);
-
-            if (get(poisonDuration) > 0 && isBlighted) {
+            if (Math.random() <= get(monsterBlightChance)) {
               set(blight, (current) => current + 1);
 
               deltaStamina.push({

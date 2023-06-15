@@ -31,9 +31,15 @@ export function MonsterBlightRating() {
               <Popover.Body>
                 <DetailsTable>
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance when poisoned:</td>
 
-                    <td>{`${formatPercentage(monsterBlightChanceValue)} if poisoned`}</td>
+                    <td>{formatPercentage(monsterBlightChanceValue)}</td>
+                  </tr>
+
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Total chance:</td>
+
+                    <td>{formatPercentage(monsterBlightChanceValue * monsterPoisonChanceValue)}</td>
                   </tr>
 
                   <tr>
@@ -48,9 +54,7 @@ export function MonsterBlightRating() {
         >
           <span>
             {poisonDurationValue > 0
-              ? Math.round(
-                  monsterBlightChanceValue * monsterPoisonChanceValue * blightIncrementValue * 100
-                )
+              ? Math.round(monsterBlightChanceValue * blightIncrementValue * 100)
               : LABEL_EMPTY}
           </span>
         </OverlayTrigger>

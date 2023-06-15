@@ -9,15 +9,15 @@ export function Header() {
   return (
     <Navbar bg="dark" className="mb-4" collapseOnSelect expand="lg" variant="dark">
       <Container>
-        <Navbar.Brand>
-          <Stack direction="horizontal" gap={3}>
+        <Stack direction="horizontal">
+          <Navbar.Brand>
             <span>neverquest</span>
+          </Navbar.Brand>
 
-            <Badge bg="light" text="dark">
-              v{version}
-            </Badge>
-          </Stack>
-        </Navbar.Brand>
+          <Badge bg="light" text="dark">
+            v{version}
+          </Badge>
+        </Stack>
 
         <Nav className="d-none d-sm-block ml-auto mr-auto" />
 

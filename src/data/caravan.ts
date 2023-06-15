@@ -162,3 +162,6 @@ export const MERCHANT_OFFERS: (
     },
   ],
 ];
+
+export const TRANSMUTE_COST = 3;
+export const TRANSMUTE_YIELD = 1;

@@ -25,11 +25,7 @@ export function InventoryButton() {
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>Inventory</Tooltip>}>
-        <span
-          className={`d-inline-block ${getAnimationClass({
-            type: "bounceIn",
-          })}`}
-        >
+        <span className={getAnimationClass({ type: "bounceIn" })}>
           <Button
             disabled={isAttackingValue || isGameOverValue}
             onClick={() => setIsInventoryOpen(true)}

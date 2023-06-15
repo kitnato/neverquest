@@ -217,7 +217,7 @@ export function useDefend() {
         increaseMastery("tenacity");
 
         // If Tenacity hasn't been triggered, activate recovery.
-        if (!get(skills("armorcraft")) && Math.random() <= get(tenacity)) {
+        if (!(get(skills("armorcraft")) && Math.random() <= get(tenacity))) {
           set(isShowing("recovery"), true);
 
           set(recoveryDuration, get(recoveryRate));

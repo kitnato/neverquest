@@ -51,7 +51,7 @@ export function CraftGear({ gear }: { gear: Gear }) {
         }
         trigger={isCraftable ? [] : ["hover", "focus"]}
       >
-        <span className="d-inline-block w-100">
+        <span>
           <Button
             className="w-100"
             disabled={!isCraftable}

@@ -31,11 +31,7 @@ export function AttributesButton() {
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>Attributes</Tooltip>}>
-        <span
-          className={`d-inline-block ${getAnimationClass({
-            type: "bounceIn",
-          })}`}
-        >
+        <span className={getAnimationClass({ type: "bounceIn" })}>
           <Button
             className={`position-relative${
               areAttributesIncreasableValue && (isStageCompletedValue || !isStageStartedValue)

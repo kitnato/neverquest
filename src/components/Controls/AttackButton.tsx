@@ -86,11 +86,7 @@ export function AttackButton() {
         }
         show={showWarning || undefined}
       >
-        <span
-          className={`d-inline-block ${getAnimationClass({
-            type: "bounceIn",
-          })}`}
-        >
+        <span className={getAnimationClass({ type: "bounceIn" })}>
           <Button
             className={animation}
             disabled={isResting}

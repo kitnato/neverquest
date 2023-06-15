@@ -37,7 +37,7 @@ export function MonsterBlightRating() {
                   </tr>
 
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Total chance:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance of affliction:</td>
 
                     <td>{formatPercentage(monsterBlightChanceValue * monsterPoisonChanceValue)}</td>
                   </tr>

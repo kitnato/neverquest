@@ -9,22 +9,18 @@ import {
   scrap,
   scrapLoot,
 } from "@neverquest/state/resources";
+import type { ResourceTransaction } from "@neverquest/types/props";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useTransactResources() {
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      (
-        difference: Partial<{
-          coinsDifference: number;
-          essenceDifference: number;
-          scrapDifference: number;
-        }>
-      ) => {
+      (difference: ResourceTransaction) => {
         const get = getSnapshotGetter(snapshot);
 
         const { coinsDifference, essenceDifference, scrapDifference } = difference;
 
+        // TODO - separate looting into a hook/component method?
         const isLooting =
           coinsDifference === undefined &&
           essenceDifference === undefined &&

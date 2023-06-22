@@ -45,11 +45,7 @@ export function UseCompass() {
   return (
     <>
       <OverlayTrigger
-        overlay={
-          <Tooltip>
-            {isWildernessValue ? "Too many monsters." : "The caravan is interfering."}
-          </Tooltip>
-        }
+        overlay={<Tooltip>The needle is spinning.</Tooltip>}
         trigger={canNavigate ? [] : ["hover", "focus"]}
       >
         <span>

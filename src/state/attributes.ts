@@ -71,7 +71,7 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =
 
         return maximum === undefined
           ? false
-          : maximum === getComputedStatistic({ amount: points, base, increment });
+          : maximum >= getComputedStatistic({ amount: points, base, increment });
       },
     key,
   })

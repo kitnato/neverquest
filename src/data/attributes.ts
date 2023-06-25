@@ -57,7 +57,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     Icon: IconPlaceholder,
     increment: -150,
     isUnlocked: true,
-    maximum: 100,
+    maximum: 150,
   },
   speed: {
     base: 0,

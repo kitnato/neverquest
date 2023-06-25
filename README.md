@@ -515,13 +515,17 @@ Allows the character to return to the caravan regardless of if the current [wild
 
 Purchased from the [witch](#witch).
 
+#### Antidote
+
+Cures and removes [poison](#poison).
+
 #### Elixir
 
 Fully restores [stamina](#stamina). Does not affect [blight](#blight).
 
 #### Salve
 
-Cures certain [ailments](#ailments), most notably [poison](#poison) and [blight](#blight).
+Cures and removes [blight](#blight).
 
 #### Venom
 
@@ -673,7 +677,7 @@ The effect gradually wears off as maximum health is restored over time, during w
 
 Monsters won't exhibit poison until later [wilderness](#wilderness) stages. Once poisoned, there is also a chance for certain monsters to inflict [blight](#blight), depending on the stage.
 
-This effect can be cured by a [salve](#salve). It can also be avoided if an attack is successfully [deflected](#deflection).
+This effect can be cured by an [antidote](#antidote). It can also be avoided if an attack is successfully [deflected](#deflection).
 
 #### Recovery
 

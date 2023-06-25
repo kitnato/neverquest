@@ -3,8 +3,12 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
-import { poisonDuration } from "@neverquest/state/character";
-import { health, healthMaximum, healthMaximumTotal } from "@neverquest/state/reserves";
+import {
+  health,
+  healthMaximum,
+  healthMaximumTotal,
+  poisonDuration,
+} from "@neverquest/state/reserves";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export function HealthMeter() {
@@ -14,7 +18,7 @@ export function HealthMeter() {
   const healthMaximumTotalValue = useRecoilValue(healthMaximumTotal);
 
   const penalty = healthMaximumValue - healthMaximumTotalValue;
-  const isPoisoned = penalty > 0 && poisonDurationValue > 0;
+  const isPoisoned = poisonDurationValue > 0;
 
   useAnimation((delta) => {
     setPoisonDuration((current) => {
@@ -32,12 +36,12 @@ export function HealthMeter() {
     <LabelledProgressBar
       attached="below"
       label={`${healthValue}/${healthMaximumTotalValue}${
-        penalty > 0
+        isPoisoned
           ? ` (${healthMaximumValue}) Poison: ${formatMilliseconds(poisonDurationValue)}`
           : ""
       }`}
       sibling={
-        penalty > 0 ? (
+        isPoisoned ? (
           <ProgressBar animated key={2} now={penalty} striped variant="secondary" />
         ) : null
       }

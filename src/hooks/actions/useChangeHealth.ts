@@ -1,20 +1,19 @@
 import { useRecoilCallback } from "recoil";
 
-import { healthRegenerationDuration, isGameOver } from "@neverquest/state/character";
+import { isGameOver } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
-import { health, healthMaximumTotal } from "@neverquest/state/reserves";
+import { health, healthMaximumTotal, healthRegenerationDuration } from "@neverquest/state/reserves";
 import { healthRegenerationRate } from "@neverquest/state/statistics";
 import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeHealth() {
   return useRecoilCallback(
-    ({ set, snapshot }) =>
-      (change: DeltaReserve) => {
+    ({ reset, set, snapshot }) =>
+      ({ delta, value }: DeltaReserve) => {
         const get = getSnapshotGetter(snapshot);
 
-        const { delta, value } = change;
         const healthMaximumTotalValue = get(healthMaximumTotal);
         const isPositive = value > 0;
 
@@ -37,8 +36,9 @@ export function useChangeHealth() {
           set(isShowing("gameOver"), true);
         }
 
-        if (newHealth > healthMaximumTotalValue) {
+        if (newHealth >= healthMaximumTotalValue) {
           newHealth = healthMaximumTotalValue;
+          reset(healthRegenerationDuration);
         }
 
         if (newHealth < healthMaximumTotalValue && get(healthRegenerationDuration) === 0) {

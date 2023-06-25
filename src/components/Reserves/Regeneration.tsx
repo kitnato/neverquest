@@ -24,11 +24,11 @@ export function Regeneration({ type }: { type: Reserve }) {
   const isHealth = type === "health";
   const regenerationRate = isHealth ? healthRegenerationRate : staminaRegenerationRate;
 
+  const isShowingReserveDetails = useRecoilValue(isShowing("reserveDetails"));
   const regenerationAmountValue = useRecoilValue(
     isHealth ? healthRegenerationAmount : staminaRegenerationAmount
   );
   const regenerationRateValue = useRecoilValue(regenerationRate);
-  const isShowingReserveDetails = useRecoilValue(isShowing("reserveDetails"));
   const reserveRegenerationRateValue = useRecoilValue(reserveRegenerationRate);
 
   useDeltaText({

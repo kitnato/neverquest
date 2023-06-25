@@ -1,32 +1,43 @@
 import { useRecoilCallback } from "recoil";
 
-import { staminaRegenerationDuration } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { stamina, staminaMaximumTotal } from "@neverquest/state/reserves";
+import {
+  stamina,
+  staminaMaximumTotal,
+  staminaRegenerationDuration,
+} from "@neverquest/state/reserves";
 import { staminaRegenerationRate } from "@neverquest/state/statistics";
-import type { DeltaReserve } from "@neverquest/types/ui";
+import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeStamina() {
   return useRecoilCallback(
-    ({ set, snapshot }) =>
-      ({ value }: DeltaReserve) => {
+    ({ reset, set, snapshot }) =>
+      ({ delta, value }: DeltaReserve) => {
         const get = getSnapshotGetter(snapshot);
 
+        const isPositive = value > 0;
         const staminaMaximumTotalValue = get(staminaMaximumTotal);
+
         let newStamina = get(stamina) + value;
 
-        set(deltas("stamina"), {
-          color: value > 0 ? "text-success" : value < 0 ? "text-danger" : "text-muted",
-          value: value > 0 ? `+${value}` : value,
-        });
+        set(
+          deltas("stamina"),
+          delta === undefined || (Array.isArray(delta) && delta.length === 0)
+            ? ({
+                color: isPositive ? "text-success" : "text-danger",
+                value: isPositive ? `+${value}` : value,
+              } as DeltaDisplay)
+            : delta
+        );
 
         if (newStamina < 0) {
           newStamina = 0;
         }
 
-        if (newStamina > staminaMaximumTotalValue) {
+        if (newStamina >= staminaMaximumTotalValue) {
           newStamina = staminaMaximumTotalValue;
+          reset(staminaRegenerationDuration);
         }
 
         if (newStamina < staminaMaximumTotalValue) {

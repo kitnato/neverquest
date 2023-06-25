@@ -25,7 +25,7 @@ export type Consumable = ItemBase & {
   name: ConsumableName;
 };
 
-export type ConsumableName = "Bandages" | "Elixir" | "Salve";
+export type ConsumableName = "Antidote" | "Bandages" | "Elixir" | "Salve";
 
 export type InventoryBlacksmith = {
   armor: Armor | null;

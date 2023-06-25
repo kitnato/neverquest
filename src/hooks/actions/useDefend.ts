@@ -4,7 +4,13 @@ import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
-import { poisonDuration, recoveryDuration, statusElement } from "@neverquest/state/character";
+import {
+  canAttackOrParry,
+  canBlock,
+  canDodge,
+  recoveryDuration,
+  statusElement,
+} from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -16,7 +22,7 @@ import {
   monsterPoisonDuration,
   monsterStaggerDuration,
 } from "@neverquest/state/monster";
-import { blight, canAttackOrParry, canBlock, canDodge } from "@neverquest/state/reserves";
+import { blight, poisonDuration } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
 import {
   block,

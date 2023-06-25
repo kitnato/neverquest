@@ -4,6 +4,7 @@ import { BLEED } from "@neverquest/data/statistics";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
+import { canAttackOrParry } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -12,7 +13,6 @@ import {
   monsterElement,
   monsterStaggerDuration,
 } from "@neverquest/state/monster";
-import { canAttackOrParry } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
 import {
   bleed,

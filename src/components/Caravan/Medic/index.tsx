@@ -1,12 +1,16 @@
 import { Stack } from "react-bootstrap";
 
-import { PurchaseBandages } from "@neverquest/components/Caravan/Medic/PurchaseBandages";
 import { ReceiveHealing } from "@neverquest/components/Caravan/Medic/ReceiveHealing";
+import { PurchaseConsumable } from "@neverquest/components/Caravan/PurchaseConsumable";
 
 export function Medic() {
   return (
     <Stack gap={5}>
-      <PurchaseBandages />
+      <Stack gap={3}>
+        <h6>Purchase bandages</h6>
+
+        <PurchaseConsumable name="Bandages" />
+      </Stack>
 
       <ReceiveHealing />
     </Stack>

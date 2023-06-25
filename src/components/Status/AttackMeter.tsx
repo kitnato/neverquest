@@ -3,9 +3,14 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useAttack } from "@neverquest/hooks/actions/useAttack";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
-import { attackDuration, isAttacking, isLooting, isRecovering } from "@neverquest/state/character";
+import {
+  attackDuration,
+  canAttackOrParry,
+  isAttacking,
+  isLooting,
+  isRecovering,
+} from "@neverquest/state/character";
 import { isMonsterDead } from "@neverquest/state/monster";
-import { canAttackOrParry } from "@neverquest/state/reserves";
 import { attackRateTotal } from "@neverquest/state/statistics";
 
 import { formatMilliseconds } from "@neverquest/utilities/formatters";

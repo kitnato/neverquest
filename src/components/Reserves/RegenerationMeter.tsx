@@ -5,12 +5,13 @@ import { RESERVES } from "@neverquest/data/reserves";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
+import { isRecovering } from "@neverquest/state/character";
 import {
   healthRegenerationDuration,
-  isRecovering,
+  isHealthAtMaximum,
+  isStaminaAtMaximum,
   staminaRegenerationDuration,
-} from "@neverquest/state/character";
-import { isHealthAtMaximum, isStaminaAtMaximum } from "@neverquest/state/reserves";
+} from "@neverquest/state/reserves";
 import {
   healthRegenerationAmount,
   healthRegenerationRate,

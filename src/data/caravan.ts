@@ -5,7 +5,7 @@ import type {
   WeaponClass,
   WeaponModality,
 } from "@neverquest/LOCRA/types";
-import type { TrinketName } from "@neverquest/types";
+import type { ConsumableName, TrinketName } from "@neverquest/types";
 import type { CrewMember } from "@neverquest/types/unions";
 
 export const BLACKSMITH_GEAR_LEVEL_MAXIMUM = 3;
@@ -33,14 +33,14 @@ export const CREW: Record<
     description: "Crafts superior gear.",
     interaction: "Craft",
     monologues: ["In need of better gear?"],
-    requiredStage: 5,
+    requiredStage: 6,
   },
   medic: {
     coinPrice: 50,
     description: "Heals wounds and sells bandages.",
     interaction: "Heal",
     monologues: ["Allow me to patch you up."],
-    requiredStage: 6,
+    requiredStage: 8,
   },
   mercenary: {
     coinPrice: 80,
@@ -58,7 +58,8 @@ export const CREW: Record<
       "Hello again. Some threads, perhaps?",
       "Ah, you're back. Care for more protection?",
       "You must be over-burdened. I have just the thing.",
-      "I heard there are other travelers looking to sell their services.",
+      "Got a fresh shipment of gear, care to see?",
+      "Heard there are other travelers looking to sell their services.",
       "Welcome back. Always a sight for sore eyes.",
     ],
     requiredStage: 0,
@@ -76,7 +77,7 @@ export const CREW: Record<
     description: "Expands inventory space.",
     interaction: "Upgrade",
     monologues: ["Allow me to deepen your pockets."],
-    requiredStage: 8,
+    requiredStage: 10,
   },
   // TODO
   witch: {
@@ -141,21 +142,15 @@ export const MERCHANT_OFFERS: (
       modality: "melee",
       type: "weapon",
     },
-  ],
-  [
     {
       gearClass: "blunt",
       modality: "melee",
       type: "weapon",
     },
-  ],
-  [
     {
       gearClass: "medium",
       type: "shield",
     },
-  ],
-  [
     {
       gearClass: "reinforced",
       type: "armor",
@@ -165,3 +160,5 @@ export const MERCHANT_OFFERS: (
 
 export const TRANSMUTE_COST = 3;
 export const TRANSMUTE_YIELD = 1;
+
+export const WITCH_POTIONS: ConsumableName[] = ["Elixir", "Antidote", "Salve"];

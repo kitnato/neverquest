@@ -1,4 +1,5 @@
 import { nanoid } from "nanoid";
+import { ReactComponent as IconAntidote } from "@neverquest/icons/antidote.svg";
 import { ReactComponent as IconPlate } from "@neverquest/icons/armor-plate.svg";
 import { ReactComponent as IconReinforced } from "@neverquest/icons/armor-reinforced.svg";
 import { ReactComponent as IconBandages } from "@neverquest/icons/bandages.svg";
@@ -71,11 +72,20 @@ export const ARMOR_SPECIFICATIONS: Record<
 
 export const CONSUMABLES: Record<ConsumableName, { Icon: SVGIcon; item: Omit<Consumable, "id"> }> =
   {
+    Antidote: {
+      Icon: IconAntidote,
+      item: {
+        coinPrice: 15,
+        description: "Cures poison.",
+        name: "Antidote",
+        weight: 1,
+      },
+    },
     Bandages: {
       Icon: IconBandages,
       item: {
         coinPrice: 10,
-        description: "Restores all health when used.",
+        description: "Restores all health.",
         name: "Bandages",
         weight: 1,
       },
@@ -83,7 +93,7 @@ export const CONSUMABLES: Record<ConsumableName, { Icon: SVGIcon; item: Omit<Con
     Elixir: {
       Icon: IconElixir,
       item: {
-        coinPrice: 40,
+        coinPrice: 8,
         description: "Restores all stamina.",
         name: "Elixir",
         weight: 1,
@@ -92,8 +102,8 @@ export const CONSUMABLES: Record<ConsumableName, { Icon: SVGIcon; item: Omit<Con
     Salve: {
       Icon: IconSalve,
       item: {
-        coinPrice: 10,
-        description: "Cures poison and blight.",
+        coinPrice: 25,
+        description: "Cures blight.",
         name: "Salve",
         weight: 1,
       },

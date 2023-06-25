@@ -19,8 +19,8 @@ export const MONSTER_ATTACK_RATE = {
 };
 
 export const MONSTER_DAMAGE = {
-  bonus: 50,
-  maximum: 700,
+  bonus: 60,
+  maximum: 750,
 };
 
 export const MONSTER_HEALTH = {

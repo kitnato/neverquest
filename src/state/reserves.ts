@@ -4,8 +4,6 @@ import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { BLIGHT } from "@neverquest/data/monster";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { attributes } from "@neverquest/state/attributes";
-import { poisonDuration } from "@neverquest/state/character";
-import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { monsterPoisonDuration, monsterPoisonMagnitude } from "@neverquest/state/monster";
 
 // SELECTORS
@@ -13,27 +11,6 @@ import { monsterPoisonDuration, monsterPoisonMagnitude } from "@neverquest/state
 export const blightIncrement = withStateKey("blightIncrement", (key) =>
   selector({
     get: ({ get }) => Math.round(BLIGHT.increment * get(staminaMaximum)),
-    key,
-  })
-);
-
-export const canAttackOrParry = withStateKey("canAttackOrParry", (key) =>
-  selector({
-    get: ({ get }) => get(stamina) >= get(weapon).staminaCost,
-    key,
-  })
-);
-
-export const canBlock = withStateKey("canBlock", (key) =>
-  selector({
-    get: ({ get }) => get(stamina) >= get(shield).staminaCost,
-    key,
-  })
-);
-
-export const canDodge = withStateKey("canDodge", (key) =>
-  selector({
-    get: ({ get }) => get(stamina) >= get(armor).staminaCost,
     key,
   })
 );
@@ -139,9 +116,33 @@ export const health = withStateKey("health", (key) =>
   })
 );
 
+export const healthRegenerationDuration = withStateKey("healthRegenerationDuration", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
+
+export const poisonDuration = withStateKey("poisonDuration", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
+
 export const stamina = withStateKey("stamina", (key) =>
   atom({
     default: staminaMaximum,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  })
+);
+
+export const staminaRegenerationDuration = withStateKey("staminaRegenerationDuration", (key) =>
+  atom({
+    default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
   })

@@ -1,9 +1,32 @@
 import { atom, selector } from "recoil";
 
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
+import { armor, shield, weapon } from "@neverquest/state/inventory";
+import { stamina } from "@neverquest/state/reserves";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 
 // SELECTORS
+
+export const canAttackOrParry = withStateKey("canAttackOrParry", (key) =>
+  selector({
+    get: ({ get }) => get(stamina) >= get(weapon).staminaCost,
+    key,
+  })
+);
+
+export const canBlock = withStateKey("canBlock", (key) =>
+  selector({
+    get: ({ get }) => get(stamina) >= get(shield).staminaCost,
+    key,
+  })
+);
+
+export const canDodge = withStateKey("canDodge", (key) =>
+  selector({
+    get: ({ get }) => get(stamina) >= get(armor).staminaCost,
+    key,
+  })
+);
 
 export const isLooting = withStateKey("isLooting", (key) =>
   selector({
@@ -45,14 +68,6 @@ export const isGameOver = withStateKey("isGameOver", (key) =>
   })
 );
 
-export const healthRegenerationDuration = withStateKey("healthRegenerationDuration", (key) =>
-  atom({
-    default: 0,
-    effects: [handleLocalStorage<number>({ key })],
-    key,
-  })
-);
-
 export const lootingDuration = withStateKey("lootingDuration", (key) =>
   atom({
     default: 0,
@@ -77,23 +92,7 @@ export const name = withStateKey("name", (key) =>
   })
 );
 
-export const poisonDuration = withStateKey("poisonDuration", (key) =>
-  atom({
-    default: 0,
-    effects: [handleLocalStorage<number>({ key })],
-    key,
-  })
-);
-
 export const recoveryDuration = withStateKey("recoveryDuration", (key) =>
-  atom({
-    default: 0,
-    effects: [handleLocalStorage<number>({ key })],
-    key,
-  })
-);
-
-export const staminaRegenerationDuration = withStateKey("staminaRegenerationDuration", (key) =>
   atom({
     default: 0,
     effects: [handleLocalStorage<number>({ key })],

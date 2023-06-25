@@ -4,9 +4,8 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { ReactComponent as IconBlightRating } from "@neverquest/icons/blight-rating.svg";
-import { poisonDuration } from "@neverquest/state/character";
 import { monsterBlightChance, monsterPoisonChance } from "@neverquest/state/monster";
-import { blightIncrement } from "@neverquest/state/reserves";
+import { blightIncrement, poisonDuration } from "@neverquest/state/reserves";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 

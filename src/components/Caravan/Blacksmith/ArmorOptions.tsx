@@ -23,6 +23,7 @@ import { skills } from "@neverquest/state/skills";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 import { generateArmor } from "@neverquest/utilities/generators";
+import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function ArmorOptions() {
   const allowNSFWValue = useRecoilValue(allowNSFW);
@@ -39,7 +40,7 @@ export function ArmorOptions() {
     allowNSFW: allowNSFWValue,
     gearClass: armorClass,
     hasPrefix: true,
-    hasSuffix: true,
+    hasSuffix: Math.random() < getGrowthSigmoid(armorLevel),
     level: armorLevel,
   });
   const { deflection, protection, ranges, staminaCost, weight } = armor;

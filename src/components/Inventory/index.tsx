@@ -12,18 +12,19 @@ import { ActivateCompass } from "@neverquest/components/Inventory/Trinket/Activa
 import { ActivateHearthstone } from "@neverquest/components/Inventory/Trinket/ActivateHearthstone";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { inventory } from "@neverquest/state/inventory";
-import type { ConsumableName, TrinketName } from "@neverquest/types";
 import { isArmor, isGear, isShield, isWeapon } from "@neverquest/types/type-guards";
+import type { Consumable, Trinket } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 
-const ITEM_ACTIONS: Record<ConsumableName | TrinketName, FunctionComponent<{ itemID: string }>> = {
-  Antidote: ConsumeAntidote,
-  Bandages: ConsumeBandages,
-  Compass: ActivateCompass,
-  Elixir: ConsumeElixir,
-  Hearthstone: ActivateHearthstone,
-  Knapsack: () => null,
-  Salve: ConsumeSalve,
+const ITEM_ACTIONS: Record<Consumable | Trinket, FunctionComponent<{ itemID: string }>> = {
+  antidote: ConsumeAntidote,
+  bandages: ConsumeBandages,
+  compass: ActivateCompass,
+  elixir: ConsumeElixir,
+  hearthstone: ActivateHearthstone,
+  knapsack: () => null,
+  salve: ConsumeSalve,
+  soulstone: () => null,
 };
 
 export function Inventory() {
@@ -77,7 +78,7 @@ export function Inventory() {
                   Equip
                 </Button>
               )
-            : ITEM_ACTIONS[item.name];
+            : ITEM_ACTIONS[item.type];
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>

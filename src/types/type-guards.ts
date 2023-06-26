@@ -1,17 +1,22 @@
-import {
-  type Armor,
-  type Gear,
-  type Shield,
-  TRINKET_NAMES,
-  type Trinket,
-  type Weapon,
+import { CONSUMABLES, TRINKETS } from "@neverquest/data/inventory";
+import type {
+  Armor,
+  ConsumableItem,
+  GearItem,
+  Shield,
+  TrinketItem,
+  Weapon,
 } from "@neverquest/types";
 
 export function isArmor(gear: unknown): gear is Armor {
   return isObject(gear) && gear.protection !== undefined;
 }
 
-export function isGear(gear: unknown): gear is Gear {
+export function isConsumable(consumable: unknown): consumable is ConsumableItem {
+  return isObject(consumable) && Object.keys(CONSUMABLES).some((type) => type === consumable.type);
+}
+
+export function isGear(gear: unknown): gear is GearItem {
   return isObject(gear) && (isArmor(gear) || isShield(gear) || isWeapon(gear));
 }
 
@@ -23,8 +28,8 @@ export function isShield(gear: unknown): gear is Shield {
   return isObject(gear) && gear.block !== undefined;
 }
 
-export function isTrinket(trinket: unknown): trinket is Trinket {
-  return isObject(trinket) && TRINKET_NAMES.some((name) => name === trinket.name);
+export function isTrinket(trinket: unknown): trinket is TrinketItem {
+  return isObject(trinket) && Object.keys(TRINKETS).some((type) => type === trinket.type);
 }
 
 export function isWeapon(gear: unknown): gear is Weapon {

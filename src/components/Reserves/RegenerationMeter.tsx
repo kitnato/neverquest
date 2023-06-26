@@ -1,4 +1,5 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useEffect } from "react";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { RESERVES } from "@neverquest/data/reserves";
@@ -29,10 +30,9 @@ const RESERVE_CHANGE: Record<Reserve, () => (change: DeltaReserve) => void> = {
 
 export function RegenerationMeter({ type }: { type: Reserve }) {
   const isHealth = type === "health";
+  const regenerationDuration = isHealth ? healthRegenerationDuration : staminaRegenerationDuration;
 
-  const [regenerationDurationValue, setRegenerationDuration] = useRecoilState(
-    isHealth ? healthRegenerationDuration : staminaRegenerationDuration
-  );
+  const [regenerationDurationValue, setRegenerationDuration] = useRecoilState(regenerationDuration);
   const isReserveAtMaximum = useRecoilValue(isHealth ? isHealthAtMaximum : isStaminaAtMaximum);
   const regenerationAmountValue = useRecoilValue(
     isHealth ? healthRegenerationAmount : staminaRegenerationAmount
@@ -41,6 +41,7 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
     isHealth ? healthRegenerationRate : staminaRegenerationRate
   );
   const isRecoveringValue = useRecoilValue(isRecovering);
+  const resetRegenerationDuration = useResetRecoilState(regenerationDuration);
 
   const changeReserve = RESERVE_CHANGE[type]();
 
@@ -58,6 +59,13 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
 
     setRegenerationDuration(newDuration);
   }, isReserveAtMaximum || isRecoveringValue);
+
+  // Needed to catch attribute resets and poison/blight penalties.
+  useEffect(() => {
+    if (isReserveAtMaximum) {
+      resetRegenerationDuration();
+    }
+  }, [isReserveAtMaximum, resetRegenerationDuration]);
 
   const details = (() => {
     if (isRecoveringValue) {

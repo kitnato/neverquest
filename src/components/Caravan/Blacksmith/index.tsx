@@ -32,6 +32,8 @@ const DATA_TABS = [
 export function Blacksmith() {
   return (
     <Stack gap={3}>
+      <h6>Craft gear</h6>
+
       <Tab.Container defaultActiveKey="weapon">
         <Nav justify variant="pills">
           {DATA_TABS.map(({ Icon, key, label }) => (

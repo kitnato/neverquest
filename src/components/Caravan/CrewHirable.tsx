@@ -48,7 +48,7 @@ export function CrewHirable({ type }: { type: CrewMember }) {
           contents={name}
           description={description}
           Icon={IconCrewMember}
-          tooltip={name}
+          tooltip="Caravan crew"
         />
 
         <Stack direction="horizontal" gap={3}>

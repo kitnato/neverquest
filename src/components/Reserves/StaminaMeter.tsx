@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { ProgressBar } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { BLIGHT } from "@neverquest/data/monster";
@@ -11,8 +12,15 @@ export function StaminaMeter() {
   const staminaValue = useRecoilValue(stamina);
   const staminaMaximumValue = useRecoilValue(staminaMaximum);
   const staminaMaximumTotalValue = useRecoilValue(staminaMaximumTotal);
+  const resetStamina = useResetRecoilState(stamina);
 
   const penalty = staminaMaximumValue - staminaMaximumTotalValue;
+
+  useEffect(() => {
+    if (staminaValue > staminaMaximumTotalValue) {
+      resetStamina();
+    }
+  }, [resetStamina, staminaMaximumTotalValue, staminaValue]);
 
   return (
     <LabelledProgressBar

@@ -21,6 +21,7 @@ import { skills } from "@neverquest/state/skills";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 import { generateShield } from "@neverquest/utilities/generators";
+import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function ShieldOptions() {
   const allowNSFWValue = useRecoilValue(allowNSFW);
@@ -37,7 +38,7 @@ export function ShieldOptions() {
     allowNSFW: allowNSFWValue,
     gearClass: shieldClass,
     hasPrefix: true,
-    hasSuffix: true,
+    hasSuffix: Math.random() < getGrowthSigmoid(shieldLevel),
     level: shieldLevel,
   });
   const { ranges, stagger, staminaCost, weight } = shield;

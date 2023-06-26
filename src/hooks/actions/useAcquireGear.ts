@@ -3,14 +3,14 @@ import { useRecoilCallback } from "recoil";
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import { armor, canFit, inventory, shield, weapon } from "@neverquest/state/inventory";
 import { autoEquip } from "@neverquest/state/settings";
-import type { Gear } from "@neverquest/types";
+import type { GearItem } from "@neverquest/types";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useAcquireGear() {
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      (gear: Gear) => {
+      (gear: GearItem) => {
         const get = getSnapshotGetter(snapshot);
 
         const { weight } = gear;

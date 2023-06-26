@@ -11,6 +11,8 @@ export type Attribute =
   | "vigor"
   | "vitality";
 
+export type Consumable = "antidote" | "bandages" | "elixir" | "salve" | "soulstone";
+
 export type CrewMember =
   | "alchemist"
   | "blacksmith"
@@ -60,7 +62,7 @@ export type Delta =
   | "staminaRegenerationRate"
   | "tenacity";
 
-export type GearType = "armor" | "shield" | "weapon";
+export type Gear = "armor" | "shield" | "weapon";
 
 export type Location = "caravan" | "wilderness";
 
@@ -262,5 +264,7 @@ export type StateKey =
   | "weapon"
   | "wilderness"
   | "wildernesses";
+
+export type Trinket = "compass" | "hearthstone" | "knapsack";
 
 export type WeaponGrip = "oneHanded" | "twoHanded";

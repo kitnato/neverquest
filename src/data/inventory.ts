@@ -13,15 +13,16 @@ import { ReactComponent as IconSalve } from "@neverquest/icons/salve.svg";
 import { ReactComponent as IconShieldMedium } from "@neverquest/icons/shield-medium.svg";
 import { ReactComponent as IconShieldSmall } from "@neverquest/icons/shield-small.svg";
 import { ReactComponent as IconShieldTower } from "@neverquest/icons/shield-tower.svg";
+import { ReactComponent as IconSoulstone } from "@neverquest/icons/soulstone.svg";
 import { ReactComponent as IconWeaponBleed } from "@neverquest/icons/weapon-bleed.svg";
 import { ReactComponent as IconBlunt } from "@neverquest/icons/weapon-blunt.svg";
 import { ReactComponent as IconPiercing } from "@neverquest/icons/weapon-piercing.svg";
 import { ReactComponent as IconSlashing } from "@neverquest/icons/weapon-slashing.svg";
 import { ReactComponent as IconWeaponStagger } from "@neverquest/icons/weapon-stagger.svg";
 import type { ArmorClass, ShieldClass, WeaponClass, WeaponModality } from "@neverquest/LOCRA/types";
-import type { Consumable, ConsumableName, Range, Trinket, TrinketName } from "@neverquest/types";
+import type { ConsumableItem, Range, TrinketItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Showing, WeaponGrip } from "@neverquest/types/unions";
+import type { Consumable, Showing, Trinket, WeaponGrip } from "@neverquest/types/unions";
 
 export const ARMOR_NONE = {
   deflection: 0,
@@ -70,42 +71,51 @@ export const ARMOR_SPECIFICATIONS: Record<
   },
 };
 
-export const CONSUMABLES: Record<ConsumableName, { Icon: SVGIcon; item: Omit<Consumable, "id"> }> =
+export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<ConsumableItem, "id"> }> =
   {
-    Antidote: {
+    antidote: {
       Icon: IconAntidote,
       item: {
         coinPrice: 15,
         description: "Cures poison.",
-        name: "Antidote",
+        type: "antidote",
         weight: 1,
       },
     },
-    Bandages: {
+    bandages: {
       Icon: IconBandages,
       item: {
         coinPrice: 10,
         description: "Restores all health.",
-        name: "Bandages",
+        type: "bandages",
         weight: 1,
       },
     },
-    Elixir: {
+    elixir: {
       Icon: IconElixir,
       item: {
         coinPrice: 8,
         description: "Restores all stamina.",
-        name: "Elixir",
+        type: "elixir",
         weight: 1,
       },
     },
-    Salve: {
+    salve: {
       Icon: IconSalve,
       item: {
         coinPrice: 25,
         description: "Cures blight.",
-        name: "Salve",
-        weight: 1,
+        type: "salve",
+        weight: 2,
+      },
+    },
+    soulstone: {
+      Icon: IconSoulstone,
+      item: {
+        coinPrice: 100,
+        description: "Resurrects the carrier upon death.",
+        type: "soulstone",
+        weight: 5,
       },
     },
   };
@@ -155,34 +165,34 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
 };
 
-export const TRINKETS: Record<TrinketName, { Icon: SVGIcon; item: Trinket }> = {
-  Compass: {
+export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
+  compass: {
     Icon: IconCompass,
     item: {
       coinPrice: 20,
       description: "Navigate the wilderness to hunt in previous locations.",
       id: nanoid(),
-      name: "Compass",
+      type: "compass",
       weight: 1,
     },
   },
-  Hearthstone: {
+  hearthstone: {
     Icon: IconStone,
     item: {
       coinPrice: 40,
       description: "Travel back to the caravan even if there are still lurking monsters.",
       id: nanoid(),
-      name: "Hearthstone",
+      type: "hearthstone",
       weight: 1,
     },
   },
-  Knapsack: {
+  knapsack: {
     Icon: IconKnapsack,
     item: {
       coinPrice: 10,
       description: "Carry more items and manage gear.",
       id: nanoid(),
-      name: "Knapsack",
+      type: "knapsack",
       weight: 0,
     },
   },

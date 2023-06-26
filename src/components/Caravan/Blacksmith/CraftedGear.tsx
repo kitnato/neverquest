@@ -6,10 +6,10 @@ import { useAcquireGear } from "@neverquest/hooks/actions/useAcquireGear";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { canFit } from "@neverquest/state/inventory";
-import type { Gear } from "@neverquest/types";
+import type { GearItem } from "@neverquest/types";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 
-export function CraftedGear({ gear }: { gear: Gear }) {
+export function CraftedGear({ gear }: { gear: GearItem }) {
   const { weight } = gear;
 
   const canFitValue = useRecoilValue(canFit(weight));

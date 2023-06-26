@@ -9,17 +9,18 @@ import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { canFit } from "@neverquest/state/inventory";
 import { coins } from "@neverquest/state/resources";
-import type { Consumable, ConsumableName } from "@neverquest/types";
+import type { ConsumableItem } from "@neverquest/types";
+import type { Consumable } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 
-export function PurchaseConsumable({ name }: { name: ConsumableName }) {
+export function PurchaseConsumable({ type }: { type: Consumable }) {
   const coinsValue = useRecoilValue(coins);
 
   const acquireItem = useAcquireItem();
   const transactResources = useTransactResources();
 
-  const { item } = CONSUMABLES[name];
-  const itemWithID: Consumable = {
+  const { item } = CONSUMABLES[type];
+  const itemWithID: ConsumableItem = {
     ...item,
     id: nanoid(),
   };

@@ -1,6 +1,6 @@
 import type { ArmorClass, ShieldClass, WeaponClass, WeaponModality } from "@neverquest/LOCRA/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { WeaponGrip } from "@neverquest/types/unions";
+import type { Consumable, Trinket, WeaponGrip } from "@neverquest/types/unions";
 
 export type Armor = GearBase & {
   deflection: number;
@@ -20,12 +20,10 @@ export type AttributeOrMastery = UnlockedState & {
   maximum?: number;
 };
 
-export type Consumable = ItemBase & {
+export type ConsumableItem = ItemBase & {
   description: string;
-  name: ConsumableName;
+  type: Consumable;
 };
-
-export type ConsumableName = "Antidote" | "Bandages" | "Elixir" | "Salve";
 
 export type InventoryBlacksmith = {
   armor: Armor | null;
@@ -38,18 +36,17 @@ export type InventoryMerchant = {
   item: Item;
 }[];
 
-export type Item = Consumable | Gear | Trinket;
+export type Item = ConsumableItem | GearItem | TrinketItem;
 
 type ItemBase = {
   coinPrice: number;
   id: string;
-  name: string;
   weight: number;
 };
 
-export type Gear = Armor | Shield | Weapon;
+export type GearItem = Armor | Shield | Weapon;
 
-type GearBase = ItemBase & { isEquipped: boolean; level: number; scrapPrice: number };
+type GearBase = ItemBase & { isEquipped: boolean; level: number; name: string; scrapPrice: number };
 
 export type Range = {
   maximum: number;
@@ -66,13 +63,10 @@ export type Shield = GearBase & {
   staminaCost: number;
 };
 
-export type Trinket = ItemBase & {
+export type TrinketItem = ItemBase & {
   description: string;
-  name: TrinketName;
+  type: Trinket;
 };
-
-export const TRINKET_NAMES = ["Compass", "Hearthstone", "Knapsack"] as const;
-export type TrinketName = (typeof TRINKET_NAMES)[number];
 
 export type UnlockedState = {
   isUnlocked: boolean;

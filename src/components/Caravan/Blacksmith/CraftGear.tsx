@@ -5,10 +5,10 @@ import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDispla
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { coins, scrap } from "@neverquest/state/resources";
-import type { Gear } from "@neverquest/types";
+import type { GearItem } from "@neverquest/types";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 
-export function CraftGear({ gear }: { gear: Gear }) {
+export function CraftGear({ gear }: { gear: GearItem }) {
   const coinsValue = useRecoilValue(coins);
   const scrapValue = useRecoilValue(scrap);
   const setBlacksmithInventory = useSetRecoilState(blacksmithInventory);

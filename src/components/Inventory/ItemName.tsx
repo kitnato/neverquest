@@ -3,16 +3,18 @@ import type { Placement } from "react-bootstrap/esm/types";
 
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
-import type { Consumable, Trinket } from "@neverquest/types";
+import type { ConsumableItem, TrinketItem } from "@neverquest/types";
+import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function ItemName({
   item,
   placement,
 }: {
-  item: Consumable | Trinket;
+  item: ConsumableItem | TrinketItem;
   placement?: Placement;
 }) {
-  const { description, name, weight } = item;
+  const { description, type, weight } = item;
+  const name = capitalizeAll(type);
 
   return (
     <OverlayTrigger

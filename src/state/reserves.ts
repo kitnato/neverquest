@@ -110,7 +110,7 @@ export const blight = withStateKey("blight", (key) =>
 
 export const health = withStateKey("health", (key) =>
   atom({
-    default: healthMaximum,
+    default: healthMaximumTotal,
     effects: [handleLocalStorage<number>({ key })],
     key,
   })
@@ -134,7 +134,7 @@ export const poisonDuration = withStateKey("poisonDuration", (key) =>
 
 export const stamina = withStateKey("stamina", (key) =>
   atom({
-    default: staminaMaximum,
+    default: staminaMaximumTotal,
     effects: [handleLocalStorage<number>({ key })],
     key,
   })

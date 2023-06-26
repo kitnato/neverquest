@@ -26,7 +26,7 @@ export function Level() {
         </Stack>
       }
       Icon={IconLevel}
-      tooltip="Level"
+      tooltip="Power level"
     />
   );
 }

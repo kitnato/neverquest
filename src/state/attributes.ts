@@ -1,4 +1,4 @@
-import { atom, atomFamily, selector, selectorFamily } from "recoil";
+import { atomFamily, selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
@@ -77,6 +77,17 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =
   })
 );
 
+export const level = withStateKey("level", (key) =>
+  selector({
+    get: ({ get }) =>
+      Object.keys(ATTRIBUTES).reduce(
+        (current, type) => current + get(attributes(type as Attribute)).points,
+        0
+      ),
+    key,
+  })
+);
+
 // ATOMS
 
 export const attributes = withStateKey("attributes", (key) =>
@@ -86,14 +97,6 @@ export const attributes = withStateKey("attributes", (key) =>
       points: 0,
     },
     effects: (parameter) => [handleLocalStorage<AttributeState>({ key, parameter })],
-    key,
-  })
-);
-
-export const level = withStateKey("level", (key) =>
-  atom({
-    default: 0,
-    effects: [handleLocalStorage<number>({ key })],
     key,
   })
 );

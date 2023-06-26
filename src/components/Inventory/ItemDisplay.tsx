@@ -48,7 +48,7 @@ export function ItemDisplay({
     return (
       <IconDisplay
         contents={<ItemName item={item} placement={overlayPlacement} />}
-        Icon={TRINKETS[item.name].Icon}
+        Icon={TRINKETS[item.type].Icon}
         iconProps={iconProps}
         tooltip="Trinket"
       />
@@ -69,7 +69,7 @@ export function ItemDisplay({
   return (
     <IconDisplay
       contents={<ItemName item={item} placement={overlayPlacement} />}
-      Icon={CONSUMABLES[item.name].Icon}
+      Icon={CONSUMABLES[item.type].Icon}
       iconProps={iconProps}
       tooltip="Consumable"
     />

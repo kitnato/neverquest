@@ -5,8 +5,7 @@ import type {
   WeaponClass,
   WeaponModality,
 } from "@neverquest/LOCRA/types";
-import type { ConsumableName, TrinketName } from "@neverquest/types";
-import type { CrewMember } from "@neverquest/types/unions";
+import type { Consumable, CrewMember, Trinket } from "@neverquest/types/unions";
 
 export const BLACKSMITH_GEAR_LEVEL_MAXIMUM = 3;
 
@@ -20,7 +19,6 @@ export const CREW: Record<
     requiredStage: number;
   }
 > = {
-  // TODO
   alchemist: {
     coinPrice: 100,
     description: "Converts resources between one another.",
@@ -64,10 +62,9 @@ export const CREW: Record<
     ],
     requiredStage: 0,
   },
-  // TODO
   occultist: {
     coinPrice: 200,
-    description: "Offers rituals for purging essence and resurrection.",
+    description: "Sells soulstones and offers purging rituals.",
     interaction: "Ritual",
     monologues: ["Prepared to pierce the veil?"],
     requiredStage: 30,
@@ -92,6 +89,8 @@ export const CREW_ORDER: CrewMember[] = Object.entries(CREW)
   .sort(([, a], [, b]) => a.requiredStage - b.requiredStage)
   .map(([type]) => type as CrewMember);
 
+export const OCCULTIST_PURGE_PRICE_MULTIPLIER = 0.66;
+
 export const MEDIC_PRICE_BANDAGES = 18;
 export const MEDIC_PRICE_SURGERY = 6;
 export const MEDIC_PRICE_SURGERY_CRITICAL = 15;
@@ -104,7 +103,7 @@ export const MERCHANT_OFFERS: (
       gearClass: ShieldClass;
     })
   | (ArtifactType<"trinket"> & {
-      name: TrinketName;
+      name: Trinket;
     })
   | (ArtifactType<"weapon"> & {
       gearClass: WeaponClass;
@@ -131,9 +130,9 @@ export const MERCHANT_OFFERS: (
     },
   ],
   [
-    { name: "Knapsack", type: "trinket" },
-    { name: "Compass", type: "trinket" },
-    { name: "Hearthstone", type: "trinket" },
+    { name: "knapsack", type: "trinket" },
+    { name: "compass", type: "trinket" },
+    { name: "hearthstone", type: "trinket" },
   ],
   [
     {
@@ -160,4 +159,4 @@ export const MERCHANT_OFFERS: (
 export const TRANSMUTE_COST = 3;
 export const TRANSMUTE_YIELD = 1;
 
-export const WITCH_POTIONS: ConsumableName[] = ["Elixir", "Antidote", "Salve"];
+export const WITCH_POTIONS: Consumable[] = ["elixir", "antidote", "salve"];

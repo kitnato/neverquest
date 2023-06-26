@@ -19,18 +19,17 @@ export function CrewHired({ setActive, type }: { setActive: () => void; type: Cr
   const { interaction, monologues } = CREW[type];
 
   return (
-    <IconDisplay
-      contents={
-        <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-          <span>{`"${monologues[monologueProgress]}"`}</span>
+    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+      <IconDisplay
+        contents={capitalizeAll(type)}
+        description={`"${monologues[monologueProgress]}"`}
+        Icon={IconCrewMember}
+        tooltip="Caravan crew"
+      />
 
-          <Button onClick={setActive} variant="outline-dark">
-            {interaction}
-          </Button>
-        </div>
-      }
-      Icon={IconCrewMember}
-      tooltip={capitalizeAll(type)}
-    />
+      <Button onClick={setActive} variant="outline-dark">
+        {interaction}
+      </Button>
+    </div>
   );
 }

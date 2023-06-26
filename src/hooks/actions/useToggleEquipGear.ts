@@ -4,14 +4,14 @@ import { attributes } from "@neverquest/state/attributes";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
-import type { Gear } from "@neverquest/types";
+import type { GearItem } from "@neverquest/types";
 import { isArmor, isGear, isShield, isWeapon } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleEquipGear() {
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      (gear: Gear) => {
+      (gear: GearItem) => {
         const get = getSnapshotGetter(snapshot);
 
         if (isArmor(gear)) {

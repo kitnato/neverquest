@@ -6,7 +6,6 @@ import {
   attributeCost,
   attributes,
   isAttributeAtMaximum,
-  level,
 } from "@neverquest/state/attributes";
 import type { Attribute } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -31,8 +30,6 @@ export function useIncreaseAttribute() {
         transactResources({
           essenceDifference: -get(attributeCost),
         });
-
-        set(level, (current) => current + 1);
       },
     [transactResources]
   );

@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { ProgressBar } from "react-bootstrap";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
@@ -16,6 +17,7 @@ export function HealthMeter() {
   const healthValue = useRecoilValue(health);
   const healthMaximumValue = useRecoilValue(healthMaximum);
   const healthMaximumTotalValue = useRecoilValue(healthMaximumTotal);
+  const resetHealth = useResetRecoilState(health);
 
   const penalty = healthMaximumValue - healthMaximumTotalValue;
   const isPoisoned = poisonDurationValue > 0;
@@ -31,6 +33,12 @@ export function HealthMeter() {
       return value;
     });
   }, !isPoisoned);
+
+  useEffect(() => {
+    if (healthValue > healthMaximumTotalValue) {
+      resetHealth();
+    }
+  }, [healthMaximumTotalValue, healthValue, resetHealth]);
 
   return (
     <LabelledProgressBar

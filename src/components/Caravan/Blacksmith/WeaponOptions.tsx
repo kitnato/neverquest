@@ -27,6 +27,7 @@ import {
   formatPercentage,
 } from "@neverquest/utilities/formatters";
 import { generateWeapon } from "@neverquest/utilities/generators";
+import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function WeaponOptions() {
   const { weapon: craftedWeapon } = useRecoilValue(blacksmithInventory);
@@ -44,7 +45,7 @@ export function WeaponOptions() {
     allowNSFW: allowNSFWValue,
     gearClass: weaponClass,
     hasPrefix: true,
-    hasSuffix: true,
+    hasSuffix: Math.random() < getGrowthSigmoid(weaponLevel),
     level: weaponLevel,
     modality: "melee",
     tags:

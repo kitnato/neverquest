@@ -16,7 +16,7 @@ export function ExpandInventory() {
 
   const transactResources = useTransactResources();
 
-  const price = Math.round(300 * getGrowthSigmoid(encumbranceMaximumValue - (ENCUMBRANCE - 1)));
+  const price = Math.round(300 * getGrowthSigmoid(encumbranceMaximumValue - (ENCUMBRANCE - 1)) * 2);
   const isAffordable = price <= coinsValue;
   const canExpand = isAffordable && hasKnapsackValue;
 

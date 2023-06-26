@@ -173,7 +173,7 @@ export const CREATURES: CreatureData[] = [
   { name: "mushroom", type: "monster" },
   { name: "mutant", type: "monster" },
   { name: "mutilator", type: "monster" },
-  { name: "mystic", type: "human" },
+  { name: "occultist", type: "human" },
   { name: "narwhal", type: "monster" },
   { name: "necrophage", type: "monster" },
   { name: "nigel", type: "name" },

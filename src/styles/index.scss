@@ -39,9 +39,7 @@ input {
 svg.icon-image {
   width: 36px;
 
-  &.small,
-  &.tiny {
-    vertical-align: text-bottom;
+  &.small {
     width: 24px;
   }
 

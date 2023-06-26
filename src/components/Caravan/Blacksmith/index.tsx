@@ -37,7 +37,8 @@ export function Blacksmith() {
           {DATA_TABS.map(({ Icon, key, label }) => (
             <Nav.Item key={key}>
               <Nav.Link eventKey={key}>
-                <IconImage Icon={Icon} /> {label}
+                <IconImage Icon={Icon} />
+                &nbsp;{label}
               </Nav.Link>
             </Nav.Item>
           ))}

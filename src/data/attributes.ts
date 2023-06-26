@@ -26,7 +26,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     base: RESERVES.stamina.baseAmount,
     description: "Increases maximum stamina.",
     Icon: IconPlaceholder,
-    increment: 4,
+    increment: 5,
     isUnlocked: true,
   },
   fortitude: {

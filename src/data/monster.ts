@@ -7,9 +7,9 @@ export const BLIGHT = {
 
 export const LOOT = {
   bonus: 100,
-  coinsBase: 150,
-  essenceBase: 300,
-  scrapBase: 200,
+  coinsBase: 200,
+  essenceBase: 400,
+  scrapBase: 250,
 };
 
 export const MONSTER_ATTACK_RATE = {

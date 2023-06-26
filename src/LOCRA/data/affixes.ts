@@ -1733,15 +1733,15 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
-    name: "mystic",
+    name: "occultist",
   },
   {
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
-    name: "mystical",
+    name: "occultistal",
   },
-  { artifact: "suffix", name: "mysticism" },
+  { artifact: "suffix", name: "occultistism" },
   {
     artifact: "prefix",
     creature: "prefix",
@@ -2218,12 +2218,11 @@ export const AFFIXES: AffixData[] = [
     name: "scorn",
   },
   {
-    artifact: "suffix",
+    artifact: "prefix",
     creature: "prefix",
     location: "prefix",
     name: "scornful",
   },
-  { creature: "prefix", name: "scornful" },
   {
     artifact: "prefix",
     creature: "prefix",

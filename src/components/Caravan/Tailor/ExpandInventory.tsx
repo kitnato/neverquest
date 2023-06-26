@@ -16,9 +16,7 @@ export function ExpandInventory() {
 
   const transactResources = useTransactResources();
 
-  const price = Math.round(
-    250 * getGrowthSigmoid((encumbranceMaximumValue - (ENCUMBRANCE - 1)) * 10)
-  );
+  const price = Math.round(300 * getGrowthSigmoid(encumbranceMaximumValue - (ENCUMBRANCE - 1)));
   const isAffordable = price <= coinsValue;
   const canExpand = isAffordable && hasKnapsackValue;
 
@@ -34,7 +32,7 @@ export function ExpandInventory() {
       <OverlayTrigger
         overlay={
           <Tooltip>
-            {!canExpand && <div>Knapsack required!</div>}
+            {!hasKnapsackValue && <div>Knapsack required!</div>}
             {!isAffordable && <div>Not enough coins!</div>}
           </Tooltip>
         }

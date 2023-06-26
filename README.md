@@ -324,9 +324,9 @@ Purchase and sell [items](#item). Coins can then be used to purchase whatever th
 
 The merchant's inventory of items will grow and diversify after each new stage.
 
-#### Mystic
+#### Occultist
 
-Offers a reset of all acquired [attribute](#attributes) points in exchange for coins and essence.
+Offers a reset of all acquired [attribute](#attributes) points in exchange for coins and essence. Also sells soulstones that resurrect the character upon death.
 
 #### Sorcerer
 

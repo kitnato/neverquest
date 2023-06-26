@@ -36,18 +36,18 @@ export const CREW: Record<
     requiredStage: 6,
   },
   medic: {
-    coinPrice: 50,
+    coinPrice: 80,
     description: "Heals wounds and sells bandages.",
     interaction: "Heal",
     monologues: ["Allow me to patch you up."],
-    requiredStage: 8,
+    requiredStage: 12,
   },
   mercenary: {
-    coinPrice: 80,
+    coinPrice: 60,
     description: "Trains new skills and attributes.",
     interaction: "Train",
     monologues: ["Perhaps I can teach you something."],
-    requiredStage: 12,
+    requiredStage: 10,
   },
   merchant: {
     coinPrice: 0,
@@ -65,9 +65,9 @@ export const CREW: Record<
     requiredStage: 0,
   },
   // TODO
-  mystic: {
+  occultist: {
     coinPrice: 200,
-    description: "Offers a ritual that purges all essence.",
+    description: "Offers rituals for purging essence and resurrection.",
     interaction: "Ritual",
     monologues: ["Prepared to pierce the veil?"],
     requiredStage: 30,
@@ -77,9 +77,8 @@ export const CREW: Record<
     description: "Expands inventory space.",
     interaction: "Upgrade",
     monologues: ["Allow me to deepen your pockets."],
-    requiredStage: 10,
+    requiredStage: 8,
   },
-  // TODO
   witch: {
     coinPrice: 150,
     description: "Sells potions that cure ailments.",
@@ -131,8 +130,8 @@ export const MERCHANT_OFFERS: (
       type: "shield",
     },
   ],
-  [{ name: "Knapsack", type: "trinket" }],
   [
+    { name: "Knapsack", type: "trinket" },
     { name: "Compass", type: "trinket" },
     { name: "Hearthstone", type: "trinket" },
   ],

@@ -55,10 +55,11 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
                 overlay={
                   <Tooltip>
                     <div>
-                      Cost:&nbsp;{attributeCostValue}&nbsp;
+                      Cost:&nbsp;
                       <IconImage Icon={IconEssence} size="tiny" />
-                      &nbsp;essence
+                      &nbsp;{attributeCostValue}
                     </div>
+
                     {isStageStartedValue && !isStageCompletedValue && (
                       <div>Monsters are lurking!</div>
                     )}

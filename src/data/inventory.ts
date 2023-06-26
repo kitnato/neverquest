@@ -58,7 +58,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     Icon: IconPlate,
     priceModifier: 2,
     protectionModifier: 2.5,
-    weightModifier: 3,
+    weightModifier: 2.25,
   },
   reinforced: {
     deflectionRange: { maximum: 0.29, minimum: 0.1 },
@@ -66,7 +66,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     Icon: IconReinforced,
     priceModifier: 1.5,
     protectionModifier: 1.5,
-    weightModifier: 2,
+    weightModifier: 1.75,
   },
 };
 

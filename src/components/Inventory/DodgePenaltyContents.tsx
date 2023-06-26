@@ -10,10 +10,10 @@ export function DodgePenaltyContents({ staminaCost }: { staminaCost: number }) {
         <>None.</>
       ) : (
         <>
-          {staminaCost} <IconImage Icon={IconStamina} size="tiny" /> stamina
+          <IconImage Icon={IconStamina} size="tiny" />
+          &nbsp;{staminaCost}
         </>
       )}
-      ;
     </span>
   );
 }

@@ -40,7 +40,7 @@ export function useChangeStamina() {
           reset(staminaRegenerationDuration);
         }
 
-        if (newStamina < staminaMaximumTotalValue) {
+        if (newStamina < staminaMaximumTotalValue && get(staminaRegenerationDuration) === 0) {
           set(staminaRegenerationDuration, get(staminaRegenerationRate));
         }
 

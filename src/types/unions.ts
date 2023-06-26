@@ -17,7 +17,7 @@ export type CrewMember =
   | "medic"
   | "mercenary"
   | "merchant"
-  | "mystic"
+  | "occultist"
   | "tailor"
   | "witch";
 

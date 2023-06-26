@@ -9,7 +9,7 @@ import { CrewHired } from "@neverquest/components/Caravan/CrewHired";
 import { Medic } from "@neverquest/components/Caravan/Medic";
 import { Mercenary } from "@neverquest/components/Caravan/Mercenary";
 import { Merchant } from "@neverquest/components/Caravan/Merchant";
-import { Mystic } from "@neverquest/components/Caravan/Mystic";
+import { Occultist } from "@neverquest/components/Caravan/Occultist";
 import { Tailor } from "@neverquest/components/Caravan/Tailor";
 import { Witch } from "@neverquest/components/Caravan/Witch";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
@@ -26,7 +26,7 @@ const CREW_COMPONENTS: Record<CrewMember, FunctionComponent> = {
   medic: Medic,
   mercenary: Mercenary,
   merchant: Merchant,
-  mystic: Mystic,
+  occultist: Occultist,
   tailor: Tailor,
   witch: Witch,
 };

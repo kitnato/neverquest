@@ -3,8 +3,9 @@ import { atom, selector } from "recoil";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { BLIGHT } from "@neverquest/data/monster";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import { attributes } from "@neverquest/state/attributes";
+import { attributes, level } from "@neverquest/state/attributes";
 import { monsterPoisonDuration, monsterPoisonMagnitude } from "@neverquest/state/monster";
+import { getComputedStatistic } from "@neverquest/utilities/getters";
 
 // SELECTORS
 
@@ -18,11 +19,11 @@ export const blightIncrement = withStateKey("blightIncrement", (key) =>
 export const healthMaximum = withStateKey("healthMaximum", (key) =>
   selector({
     get: ({ get }) => {
-      const { points } = get(attributes("vitality"));
-
       const { base, increment } = ATTRIBUTES.vitality;
+      const { points } = get(attributes("vitality"));
+      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return base + increment * points;
+      return Math.round(total + total * (get(level) / 100));
     },
     key,
   })
@@ -73,11 +74,11 @@ export const isStaminaAtMaximum = withStateKey("isStaminaAtMaximum", (key) =>
 export const staminaMaximum = withStateKey("staminaMaximum", (key) =>
   selector({
     get: ({ get }) => {
-      const { points } = get(attributes("endurance"));
-
       const { base, increment } = ATTRIBUTES.endurance;
+      const { points } = get(attributes("endurance"));
+      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return base + increment * points;
+      return Math.round(total + total * (get(level) / 100));
     },
     key,
   })

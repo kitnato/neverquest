@@ -25,6 +25,7 @@ export function Level() {
           <FloatingText deltaType="level" />
         </Stack>
       }
+      description={`Increases attribute effects by ${levelValue}%`}
       Icon={IconLevel}
       tooltip="Power level"
     />

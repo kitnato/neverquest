@@ -5,7 +5,7 @@ import { MASTERIES } from "@neverquest/data/masteries";
 import { RESERVES } from "@neverquest/data/reserves";
 import { BLEED } from "@neverquest/data/statistics";
 import { withStateKey } from "@neverquest/state";
-import { attributes } from "@neverquest/state/attributes";
+import { attributes, level } from "@neverquest/state/attributes";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { masteries } from "@neverquest/state/masteries";
 import {
@@ -21,8 +21,9 @@ export const attackRate = withStateKey("attackRate", (key) =>
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.speed;
       const { points } = get(attributes("speed"));
+      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return getComputedStatistic({ amount: points, base, increment });
+      return Math.round(total + total * (get(level) / 100));
     },
     key,
   })
@@ -97,8 +98,9 @@ export const criticalChance = withStateKey("criticalChance", (key) =>
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.dexterity;
       const { points } = get(attributes("dexterity"));
+      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return getComputedStatistic({ amount: points, base, increment });
+      return Math.round(total + total * (get(level) / 100));
     },
     key,
   })
@@ -109,8 +111,9 @@ export const criticalDamage = withStateKey("criticalDamage", (key) =>
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.perception;
       const { points } = get(attributes("perception"));
+      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return getComputedStatistic({ amount: points, base, increment });
+      return Math.round(total + total * (get(level) / 100));
     },
     key,
   })
@@ -128,8 +131,9 @@ export const damage = withStateKey("damage", (key) =>
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.strength;
       const { points } = get(attributes("strength"));
+      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return getComputedStatistic({ amount: points, base, increment });
+      return Math.round(total + total * (get(level) / 100));
     },
     key,
   })
@@ -167,8 +171,9 @@ export const dodge = withStateKey("dodge", (key) =>
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.agility;
       const { points } = get(attributes("agility"));
+      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return getComputedStatistic({ amount: points, base, increment });
+      return Math.round(total + total * (get(level) / 100));
     },
     key,
   })
@@ -270,8 +275,9 @@ export const recoveryRate = withStateKey("recoveryRate", (key) =>
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.resilience;
       const { points } = get(attributes("resilience"));
+      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return getComputedStatistic({ amount: points, base, increment });
+      return Math.round(total + total * (get(level) / 100));
     },
     key,
   })
@@ -282,8 +288,9 @@ export const reserveRegenerationAmount = withStateKey("reserveRegenerationAmount
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.fortitude;
       const { points } = get(attributes("fortitude"));
+      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return getComputedStatistic({ amount: points, base, increment });
+      return Math.round(total + total * (get(level) / 100));
     },
     key,
   })
@@ -294,8 +301,9 @@ export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.vigor;
       const { points } = get(attributes("vigor"));
+      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return getComputedStatistic({ amount: points, base, increment });
+      return Math.round(total + total * (get(level) / 100));
     },
     key,
   })

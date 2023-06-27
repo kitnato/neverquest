@@ -10,11 +10,9 @@ export function Attributes() {
   return (
     <Stack gap={5}>
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        <Stack className="position-sticky" direction="horizontal" gap={3}>
-          <Level />
+        <Level />
 
-          <EssenceAbsorbed />
-        </Stack>
+        <EssenceAbsorbed />
 
         <AttributePoints />
       </div>

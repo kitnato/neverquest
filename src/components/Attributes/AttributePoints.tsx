@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
@@ -20,11 +21,11 @@ export function AttributePoints() {
   return (
     <IconDisplay
       contents={
-        <>
+        <Stack direction="horizontal">
           <span>{attributePointsValue}</span>
 
           <FloatingText deltaType="attributePoints" />
-        </>
+        </Stack>
       }
       Icon={IconAttributePoints}
       tooltip="Available attribute points"

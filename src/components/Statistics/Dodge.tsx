@@ -1,17 +1,17 @@
 import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DodgePenaltyContents } from "@neverquest/components/Inventory/DodgePenaltyContents";
-import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconDodge } from "@neverquest/icons/dodge.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { armor } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
-import { dodge, dodgeTotal } from "@neverquest/state/statistics";
+import { dodge, dodgeTotal, powerBonus, rawAttributeStatistic } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
@@ -21,6 +21,8 @@ export function Dodge() {
   const dodgeTotalValue = useRecoilValue(dodgeTotal);
   const isShowingDodge = useRecoilValue(isShowing("dodge"));
   const isShowingDodgePenalty = useRecoilValue(isShowing("dodgePenalty"));
+  const powerBonusValue = useRecoilValue(powerBonus("agility"));
+  const statisticValue = useRecoilValue(rawAttributeStatistic("agility"));
   const skillEvasion = useRecoilValue(skills("evasion"));
 
   useDeltaText({
@@ -48,6 +50,17 @@ export function Dodge() {
 
                       <td>{`${formatPercentage(dodgeValue)} dodge chance`}</td>
                     </tr>
+
+                    {powerBonusValue > 0 && (
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+
+                        <td>{`${formatPercentage(statisticValue)} +${formatPercentage(
+                          powerBonusValue,
+                          0
+                        )}`}</td>
+                      </tr>
+                    )}
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Armor penalty:</td>

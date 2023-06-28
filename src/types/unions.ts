@@ -47,7 +47,7 @@ export type Delta =
   | "health"
   | "healthRegenerationRate"
   | "level"
-  | "luck"
+  | "lootBonus"
   | "might"
   | "monsterHealth"
   | "parry"
@@ -91,8 +91,10 @@ export const SHOWING_TYPES = [
   "essence",
   "gameOver",
   "gearClass",
+  "healthDetails",
   "loot",
-  "luck",
+  "lootBonus",
+  "lootBonusDetails",
   "masteries",
   "monsterAilments",
   "monsterOffense",
@@ -106,6 +108,7 @@ export const SHOWING_TYPES = [
   "stability",
   "stagger",
   "stamina",
+  "staminaDetails",
   "statistics",
   "tenacity",
   "weapon",
@@ -205,10 +208,10 @@ export type StateKey =
   | "isWilderness"
   | "level"
   | "location"
+  | "lootBonus"
   | "lootingDuration"
   | "lootingRate"
   | "lowHealthWarning"
-  | "luck"
   | "masteries"
   | "masteryCost"
   | "merchantInventory"
@@ -239,6 +242,7 @@ export type StateKey =
   | "progress"
   | "progressMaximum"
   | "protection"
+  | "rawAttributeStatistic"
   | "recoveryDuration"
   | "recoveryRate"
   | "reserveRegenerationAmount"

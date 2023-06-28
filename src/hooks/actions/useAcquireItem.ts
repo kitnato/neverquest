@@ -26,9 +26,13 @@ export function useAcquireItem() {
           set(isShowing("weight"), true);
         } else {
           if (type === "antique coin") {
-            set(isShowing("luck"), true);
+            set(isShowing("lootBonus"), true);
 
             set(attributes("luck"), (current) => ({ ...current, isUnlocked: true }));
+          }
+
+          if (type === "tome of power") {
+            set(isShowing("lootBonusDetails"), true);
           }
 
           set(inventory, (current) => current.concat(item));

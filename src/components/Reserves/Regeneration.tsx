@@ -1,9 +1,9 @@
 import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { RegenerationMeter } from "@neverquest/components/Reserves/RegenerationMeter";
-import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { RESERVES } from "@neverquest/data/reserves";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { deltas } from "@neverquest/state/deltas";
@@ -14,7 +14,11 @@ import {
   staminaRegenerationAmount,
   staminaRegenerationRate,
 } from "@neverquest/state/reserves";
-import { reserveRegenerationRate } from "@neverquest/state/statistics";
+import {
+  powerBonus,
+  rawAttributeStatistic,
+  reserveRegenerationRate,
+} from "@neverquest/state/statistics";
 import type { Reserve } from "@neverquest/types/unions";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
@@ -22,18 +26,20 @@ import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/form
 export function Regeneration({ type }: { type: Reserve }) {
   const { baseRegenerationAmount, baseRegenerationRate, label, regenerationDelta } = RESERVES[type];
   const isHealth = type === "health";
-  const regenerationRate = isHealth ? healthRegenerationRate : staminaRegenerationRate;
 
   const isShowingReserveDetails = useRecoilValue(isShowing("reserveDetails"));
+  const powerBonusAmountValue = useRecoilValue(powerBonus("fortitude"));
+  const powerBonusRateValue = useRecoilValue(powerBonus("vigor"));
+  const statisticAmountValue = useRecoilValue(rawAttributeStatistic("fortitude"));
+  const statisticRateValue = useRecoilValue(rawAttributeStatistic("vigor"));
   const regenerationAmountValue = useRecoilValue(
     isHealth ? healthRegenerationAmount : staminaRegenerationAmount
   );
-  const regenerationRateValue = useRecoilValue(regenerationRate);
   const reserveRegenerationRateValue = useRecoilValue(reserveRegenerationRate);
 
   useDeltaText({
     atomDelta: deltas(regenerationDelta),
-    atomValue: regenerationRate,
+    atomValue: isHealth ? healthRegenerationRate : staminaRegenerationRate,
     type: "time",
   });
 
@@ -47,12 +53,6 @@ export function Regeneration({ type }: { type: Reserve }) {
             <Popover.Body>
               <DetailsTable>
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Current rate:</td>
-
-                  <td>{formatMilliseconds(regenerationRateValue)}</td>
-                </tr>
-
-                <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Base rate:</td>
 
                   <td>{formatMilliseconds(baseRegenerationRate)}</td>
@@ -64,11 +64,15 @@ export function Regeneration({ type }: { type: Reserve }) {
                   <td>{`-${formatPercentage(reserveRegenerationRateValue)}`}</td>
                 </tr>
 
-                <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Total amount:</td>
+                {powerBonusRateValue > 0 && (
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
 
-                  <td>{regenerationAmountValue}</td>
-                </tr>
+                    <td>{`-${formatPercentage(statisticRateValue)} +${formatPercentage(
+                      powerBonusRateValue
+                    )}`}</td>
+                  </tr>
+                )}
 
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Base amount:</td>
@@ -81,6 +85,16 @@ export function Regeneration({ type }: { type: Reserve }) {
 
                   <td>{`+${regenerationAmountValue - baseRegenerationAmount}`}</td>
                 </tr>
+
+                {powerBonusAmountValue > 0 && (
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+
+                    <td>{`${statisticAmountValue - baseRegenerationAmount} +${formatPercentage(
+                      powerBonusAmountValue
+                    )}`}</td>
+                  </tr>
+                )}
               </DetailsTable>
             </Popover.Body>
           </Popover>

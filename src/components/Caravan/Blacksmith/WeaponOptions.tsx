@@ -55,7 +55,7 @@ export function WeaponOptions() {
         ? ["highQuality"]
         : undefined,
   });
-  const { abilityChance, ranges, staminaCost, weight } = weapon;
+  const { ranges, staminaCost, weight } = weapon;
   const maximumWeaponLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
 
   return (
@@ -123,7 +123,13 @@ export function WeaponOptions() {
         />
 
         <IconDisplay
-          contents={isShowingValue ? formatPercentage(abilityChance) : LABEL_UNKNOWN}
+          contents={
+            isShowingValue
+              ? `${formatPercentage(ranges.ability.minimum)}-${formatPercentage(
+                  ranges.ability.maximum
+                )}`
+              : LABEL_UNKNOWN
+          }
           Icon={isShowingValue ? IconWeaponAbility : IconUnknown}
           iconProps={{ overlayPlacement: "left" }}
           tooltip={isShowingValue ? `${abilityName} chance` : LABEL_UNKNOWN}

@@ -1,8 +1,8 @@
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import type { Placement } from "react-bootstrap/esm/types";
 
+import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
-import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import type { ConsumableItem, TrinketItem } from "@neverquest/types";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 

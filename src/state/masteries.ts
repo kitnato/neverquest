@@ -35,9 +35,7 @@ export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
         const { base, increment, maximum } = MASTERIES[type];
         const { rank } = get(masteries(type));
 
-        return maximum === undefined
-          ? false
-          : maximum === getComputedStatistic({ amount: rank, base, increment });
+        return maximum === getComputedStatistic({ amount: rank, base, increment });
       },
     key,
   })

@@ -27,10 +27,9 @@ export const healthMaximum = withStateKey("healthMaximum", (key) =>
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.vitality;
       const { points } = get(attributes("vitality"));
+      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return Math.round(
-        getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("vitality"))
-      );
+      return Math.round(total + total * get(powerBonus("vitality")));
     },
     key,
   })
@@ -84,7 +83,7 @@ export const isHealthAtMaximum = withStateKey("isHealthAtMaximum", (key) =>
 
 export const isHealthLow = withStateKey("isHealthLow", (key) =>
   selector({
-    get: ({ get }) => get(health) <= Math.round(get(healthMaximumTotal) * 0.33),
+    get: ({ get }) => get(health) <= get(healthMaximumTotal) * 0.33,
     key,
   })
 );
@@ -101,10 +100,9 @@ export const staminaMaximum = withStateKey("staminaMaximum", (key) =>
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.endurance;
       const { points } = get(attributes("endurance"));
+      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return Math.round(
-        getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("endurance"))
-      );
+      return Math.round(total + total * get(powerBonus("endurance")));
     },
     key,
   })

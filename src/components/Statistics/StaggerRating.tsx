@@ -1,9 +1,9 @@
 import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconStaggerRating } from "@neverquest/icons/stagger-rating.svg";
 import { deltas } from "@neverquest/state/deltas";
@@ -44,13 +44,13 @@ export function StaggerRating() {
                 <Popover.Body>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance on hit:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
 
                       <td>{formatPercentage(staggerWeaponValue)}</td>
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance on block:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance on block:</td>
 
                       <td>{formatPercentage(stagger)}</td>
                     </tr>

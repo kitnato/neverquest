@@ -27,7 +27,7 @@ export function Level() {
           <FloatingText deltaType="level" />
         </Stack>
       }
-      description={hasTomeOfPower && "The Tome is empowering all attribute effects."}
+      description={hasTomeOfPower && "All attribute effects empowered."}
       Icon={IconLevel}
       tooltip="Power level"
     />

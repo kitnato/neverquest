@@ -88,6 +88,7 @@ export type Weapon = GearBase & {
   grip: WeaponGrip;
   modality: WeaponModality;
   ranges: {
+    ability: Range;
     damage: Range;
     rate: Range;
   };

@@ -2,12 +2,12 @@ import { OverlayTrigger, Popover } from "react-bootstrap";
 import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
+import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconImage } from "@neverquest/components/IconImage";
 import { DodgePenaltyContents } from "@neverquest/components/Inventory/DodgePenaltyContents";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
-import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { type ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
 import { ReactComponent as IconNone } from "@neverquest/icons/none.svg";

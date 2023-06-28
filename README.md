@@ -704,7 +704,7 @@ Temporary status effects that boost or improve the character or monster.
 Traits are permanent passive abilities acquired when retired for all subsequent new quests.
 
 - Brawler: An unequipped shield adds to unarmed damage, using both hands.
-- Bruiser: Current stamina adds unarmed bonus damage.
+- Bruiser: Current stamina adds unarmed bonus damage & unarmed strikes have a chance to stagger.
 - Inoculation: Poison health reduction is halved and recovery rate is accelerated.
 - Nudist: Double dodge rate when not wearing any armor.
 - Field surgeon: Automatically consume a bandage if at low health.

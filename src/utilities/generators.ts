@@ -103,7 +103,7 @@ export function generateShield({
   const ranges = {
     block: {
       maximum: blockRange.maximum - (blockRange.maximum / 2) * (1 - growthFactor),
-      minimum: blockRange.minimum - (blockRange.minimum / 2) * (1 - growthFactor),
+      minimum: blockRange.minimum,
     },
   };
 
@@ -154,6 +154,10 @@ export function generateWeapon({
   const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
   const growthFactor = getGrowthSigmoid(level);
   const ranges = {
+    ability: {
+      maximum: abilityChance.maximum - (abilityChance.maximum / 2) * (1 - growthFactor),
+      minimum: abilityChance.minimum,
+    },
     damage: {
       maximum: Math.round(1200 * growthFactor),
       minimum: Math.round(1000 * growthFactor),
@@ -165,9 +169,9 @@ export function generateWeapon({
   };
 
   return {
-    abilityChance: abilityChance.minimum + Math.round(abilityChance.maximum * growthFactor),
+    abilityChance: getFromRange(ranges.ability),
     coinPrice: Math.round(300 * growthFactor),
-    damage: getFromRange({ ...ranges.damage }),
+    damage: getFromRange(ranges.damage),
     gearClass,
     // TODO
     grip: "one-handed",
@@ -187,7 +191,7 @@ export function generateWeapon({
       tags,
     }),
     ranges,
-    rate: getFromRange({ ...ranges.rate }),
+    rate: getFromRange(ranges.rate),
     scrapPrice: Math.round(2500 * growthFactor),
     staminaCost: Math.ceil(40 * growthFactor),
     weight: Math.ceil(30 * growthFactor),

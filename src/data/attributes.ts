@@ -31,6 +31,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
     increment: 5,
     isUnlocked: true,
     powerBonus: 0.01,
+    shows: "staminaDetails",
   },
   fortitude: {
     base: 0,
@@ -38,6 +39,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
     Icon: IconPlaceholder,
     increment: 2,
     isUnlocked: false,
+    maximum: 50,
     powerBonus: 0.01,
   },
   luck: {
@@ -55,7 +57,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
     Icon: IconPlaceholder,
     increment: 0.15,
     isUnlocked: false,
-    powerBonus: 0.005,
+    powerBonus: 0.003,
   },
   resilience: {
     base: RECOVERY_RATE,
@@ -92,6 +94,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
     Icon: IconPlaceholder,
     increment: 0.05,
     isUnlocked: false,
+    maximum: 0.9,
     powerBonus: 0.005,
   },
   vitality: {
@@ -101,6 +104,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
     increment: 10,
     isUnlocked: true,
     powerBonus: 0.01,
+    shows: "healthDetails",
   },
 };
 

@@ -39,8 +39,8 @@ export function formatMilliseconds(milliseconds: number) {
   return `${formatFloat(milliseconds / 1000)}s`;
 }
 
-export function formatPercentage(number: number) {
-  return `${formatFloat(number * 100)}%`;
+export function formatPercentage(number: number, decimals?: number) {
+  return `${formatFloat(number * 100, decimals)}%`;
 }
 
 // Correctly does the rounding as opposed to .toFixed().

@@ -73,7 +73,7 @@ export const SKILLS: Record<
   },
   traumatology: {
     coinPrice: 45,
-    description: "Unlocks the ability to temporarily stagger the attacker.",
+    description: "Unlocks the ability to stagger monsters.",
     Icon: IconPlaceholder,
     requiredLevel: 20,
     shows: ["stagger"],

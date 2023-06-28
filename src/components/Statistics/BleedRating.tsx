@@ -1,9 +1,9 @@
 import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { BLEED } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconBleedRating } from "@neverquest/icons/bleed-rating.svg";

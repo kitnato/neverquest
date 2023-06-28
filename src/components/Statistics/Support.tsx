@@ -2,18 +2,18 @@ import { Col, Row } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { Deflection } from "@neverquest/components/Statistics/Deflection";
-import { Luck } from "@neverquest/components/Statistics/Luck";
+import { LootBonus } from "@neverquest/components/Statistics/LootBonus";
 import { Stability } from "@neverquest/components/Statistics/Stability";
 import { Tenacity } from "@neverquest/components/Statistics/Tenacity";
 import { isShowing } from "@neverquest/state/isShowing";
 
 export function Support() {
   const isShowingDeflection = useRecoilValue(isShowing("deflection"));
-  const isShowingLuck = useRecoilValue(isShowing("luck"));
+  const isShowingLootBonus = useRecoilValue(isShowing("lootBonus"));
   const isShowingStability = useRecoilValue(isShowing("stability"));
   const isShowingTenacity = useRecoilValue(isShowing("tenacity"));
 
-  if (!isShowingDeflection && !isShowingLuck && !isShowingStability && !isShowingTenacity) {
+  if (!isShowingDeflection && !isShowingLootBonus && !isShowingStability && !isShowingTenacity) {
     return null;
   }
 
@@ -32,7 +32,7 @@ export function Support() {
       </Col>
 
       <Col>
-        <Luck />
+        <LootBonus />
       </Col>
     </Row>
   );

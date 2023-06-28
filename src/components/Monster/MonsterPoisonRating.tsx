@@ -1,8 +1,8 @@
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { ReactComponent as IconPoisonRating } from "@neverquest/icons/poison-rating.svg";
 import {
   monsterPoisonChance,

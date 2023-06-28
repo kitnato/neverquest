@@ -1,6 +1,5 @@
 import { atom, selector } from "recoil";
 
-import { luck } from "./statistics";
 import {
   BLIGHT,
   LOOT,
@@ -11,6 +10,7 @@ import {
 } from "@neverquest/data/monster";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isStageStarted, progress, stage } from "@neverquest/state/encounter";
+import { lootBonus } from "@neverquest/state/statistics";
 import { formatFloat } from "@neverquest/utilities/formatters";
 import { getDamagePerRate, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
@@ -146,15 +146,15 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
     get: ({ get }) => {
       const { bonus, coinsBase, essenceBase, scrapBase } = LOOT;
 
+      const luckBonus = 1 + get(lootBonus);
       const stageValue = get(stage);
       const growthFactor = getGrowthSigmoid(stageValue);
-      const luckBonus = 1 + get(luck);
-      const progressFactor = getGrowthSigmoid(get(progress)) * bonus;
+      const progressBonus = getGrowthSigmoid(get(progress)) * bonus;
 
       return {
-        coins: Math.round((progressFactor + coinsBase * growthFactor) * luckBonus),
-        essence: Math.round((progressFactor + essenceBase * growthFactor) * luckBonus),
-        scrap: Math.round((progressFactor + scrapBase * growthFactor) * luckBonus),
+        coins: Math.round((progressBonus + coinsBase * growthFactor) * luckBonus),
+        essence: Math.round((progressBonus + essenceBase * growthFactor) * luckBonus),
+        scrap: Math.round((progressBonus + scrapBase * growthFactor) * luckBonus),
       };
     },
     key,

@@ -257,14 +257,14 @@ export const WEAPON_SPECIFICATIONS: Record<
   }
 > = {
   blunt: {
-    abilityChance: { maximum: 0.7, minimum: 0.1 },
+    abilityChance: { maximum: 0.5, minimum: 0.1 },
     abilityName: "Stagger",
     IconAbility: IconWeaponStagger,
     IconGearClass: IconBlunt,
     showingType: "stagger",
   },
   piercing: {
-    abilityChance: { maximum: 0.7, minimum: 0.2 },
+    abilityChance: { maximum: 0.5, minimum: 0.2 },
     abilityName: "Bleed",
     IconAbility: IconWeaponBleed,
     IconGearClass: IconPiercing,

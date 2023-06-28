@@ -19,10 +19,9 @@ import {
 export const attackRate = withStateKey("attackRate", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES.speed;
-      const { points } = get(attributes("speed"));
+      const total = get(rawAttributeStatistic("speed"));
 
-      return getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("speed"));
+      return total + total * get(powerBonus("speed"));
     },
     key,
   })
@@ -95,12 +94,9 @@ export const block = withStateKey("block", (key) =>
 export const criticalChance = withStateKey("criticalChance", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES.dexterity;
-      const { points } = get(attributes("dexterity"));
+      const total = get(rawAttributeStatistic("dexterity"));
 
-      return (
-        getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("dexterity"))
-      );
+      return total + total * get(powerBonus("dexterity"));
     },
     key,
   })
@@ -109,12 +105,9 @@ export const criticalChance = withStateKey("criticalChance", (key) =>
 export const criticalDamage = withStateKey("criticalDamage", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES.perception;
-      const { points } = get(attributes("perception"));
+      const total = get(rawAttributeStatistic("perception"));
 
-      return (
-        getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("perception"))
-      );
+      return total + total * get(powerBonus("perception"));
     },
     key,
   })
@@ -130,12 +123,9 @@ export const criticalRating = withStateKey("criticalRating", (key) =>
 export const damage = withStateKey("damage", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES.strength;
-      const { points } = get(attributes("strength"));
+      const total = get(rawAttributeStatistic("strength"));
 
-      return Math.round(
-        getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("strength"))
-      );
+      return Math.round(total + total * get(powerBonus("strength")));
     },
     key,
   })
@@ -171,10 +161,9 @@ export const deflection = withStateKey("deflection", (key) =>
 export const dodge = withStateKey("dodge", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES.agility;
-      const { points } = get(attributes("agility"));
+      const total = get(rawAttributeStatistic("agility"));
 
-      return getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("agility"));
+      return total + total * get(powerBonus("agility"));
     },
     key,
   })
@@ -207,15 +196,12 @@ export const stability = withStateKey("stability", (key) =>
   })
 );
 
-export const luck = withStateKey("luck", (key) =>
+export const lootBonus = withStateKey("lootBonus", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES.luck;
-      const { points } = get(attributes("luck"));
+      const total = get(rawAttributeStatistic("luck"));
 
-      return get(hasItem("antique coin"))
-        ? getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("agility"))
-        : 0;
+      return get(hasItem("antique coin")) ? total + total * get(powerBonus("luck")) : 0;
     },
     key,
   })
@@ -264,18 +250,8 @@ export const powerBonus = withStateKey("powerBonus", (key) =>
   selectorFamily<number, Attribute>({
     get:
       (type) =>
-      ({ get }) => {
-        const { base, increment, powerBonus } = ATTRIBUTES[type];
-        const { points } = get(attributes(type));
-
-        if (get(hasItem("tome of power"))) {
-          return (
-            getComputedStatistic({ amount: points, base, increment }) * (get(level) * powerBonus)
-          );
-        }
-
-        return 0;
-      },
+      ({ get }) =>
+        get(hasItem("tome of power")) ? get(level) * ATTRIBUTES[type].powerBonus : 0,
     key,
   })
 );
@@ -287,15 +263,26 @@ export const protection = withStateKey("protection", (key) =>
   })
 );
 
+export const rawAttributeStatistic = withStateKey("rawAttributeStatistic", (key) =>
+  selectorFamily<number, Attribute>({
+    get:
+      (type) =>
+      ({ get }) => {
+        const { base, increment } = ATTRIBUTES[type];
+        const { points } = get(attributes(type));
+
+        return getComputedStatistic({ amount: points, base, increment });
+      },
+    key,
+  })
+);
+
 export const recoveryRate = withStateKey("recoveryRate", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES.resilience;
-      const { points } = get(attributes("resilience"));
+      const total = get(rawAttributeStatistic("resilience"));
 
-      return Math.round(
-        getComputedStatistic({ amount: points, base, increment }) - get(powerBonus("resilience"))
-      );
+      return Math.round(total - total * get(powerBonus("resilience")));
     },
     key,
   })
@@ -304,12 +291,9 @@ export const recoveryRate = withStateKey("recoveryRate", (key) =>
 export const reserveRegenerationAmount = withStateKey("reserveRegenerationAmount", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES.fortitude;
-      const { points } = get(attributes("fortitude"));
+      const total = get(rawAttributeStatistic("fortitude"));
 
-      return Math.round(
-        getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("fortitude"))
-      );
+      return Math.round(total + total * get(powerBonus("fortitude")));
     },
     key,
   })
@@ -318,10 +302,9 @@ export const reserveRegenerationAmount = withStateKey("reserveRegenerationAmount
 export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES.vigor;
-      const { points } = get(attributes("vigor"));
+      const total = get(rawAttributeStatistic("vigor"));
 
-      return getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("vigor"));
+      return total + total * get(powerBonus("vigor"));
     },
     key,
   })

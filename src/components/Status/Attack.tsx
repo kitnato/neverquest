@@ -1,9 +1,9 @@
 import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { DetailsTable } from "@neverquest/components/Statistics/DetailsTable";
 import { AttackMeter } from "@neverquest/components/Status/AttackMeter";
 import { WEAPON_NONE } from "@neverquest/data/inventory";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -11,7 +11,12 @@ import { ReactComponent as IconAttackRate } from "@neverquest/icons/attack-rate.
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { attackRate, attackRateTotal } from "@neverquest/state/statistics";
+import {
+  attackRate,
+  attackRateTotal,
+  powerBonus,
+  rawAttributeStatistic,
+} from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
@@ -19,6 +24,8 @@ export function Attack() {
   const attackRateValue = useRecoilValue(attackRate);
   const isShowingAttackRate = useRecoilValue(isShowing("attackRate"));
   const isShowingAttackRateDetails = useRecoilValue(isShowing("attackRateDetails"));
+  const powerBonusValue = useRecoilValue(powerBonus("speed"));
+  const statisticValue = useRecoilValue(rawAttributeStatistic("speed"));
   const weaponValue = useRecoilValue(weapon);
 
   useDeltaText({
@@ -54,6 +61,17 @@ export function Attack() {
 
                     <td>{`-${formatPercentage(attackRateValue)}`}</td>
                   </tr>
+
+                  {powerBonusValue > 0 && (
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+
+                      <td>{`-${formatPercentage(statisticValue)} +${formatPercentage(
+                        powerBonusValue,
+                        0
+                      )}`}</td>
+                    </tr>
+                  )}
                 </DetailsTable>
               </Popover.Body>
             </Popover>

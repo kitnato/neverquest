@@ -35,10 +35,10 @@ export function useGenerateMerchantInventory() {
             level: stageValue,
             tags: ["lowQuality"],
           };
-          const merchantOffersIndex = stageValue - 1;
+          const merchantOffers = MERCHANT_OFFERS[stageValue];
 
-          if (merchantOffersIndex < MERCHANT_OFFERS.length) {
-            MERCHANT_OFFERS[merchantOffersIndex].forEach((offer) => {
+          if (merchantOffers !== undefined) {
+            merchantOffers.forEach((offer) => {
               const { type } = offer;
               const item = (() => {
                 if (type === "armor") {

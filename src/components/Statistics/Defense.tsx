@@ -8,9 +8,12 @@ import { Protection } from "@neverquest/components/Statistics/Protection";
 import { isShowing } from "@neverquest/state/isShowing";
 
 export function Defense() {
-  const isShowingDefense = useRecoilValue(isShowing("defense"));
+  const isShowingBlock = useRecoilValue(isShowing("block"));
+  const isShowingDodge = useRecoilValue(isShowing("dodge"));
+  const isShowingParry = useRecoilValue(isShowing("parry"));
+  const isShowingProtection = useRecoilValue(isShowing("protection"));
 
-  if (!isShowingDefense) {
+  if (!isShowingBlock && !isShowingDodge && !isShowingParry && !isShowingProtection) {
     return null;
   }
 

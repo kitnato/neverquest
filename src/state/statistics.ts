@@ -1,13 +1,13 @@
-import { selector } from "recoil";
+import { selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { MASTERIES } from "@neverquest/data/masteries";
-import { RESERVES } from "@neverquest/data/reserves";
 import { BLEED } from "@neverquest/data/statistics";
 import { withStateKey } from "@neverquest/state";
 import { attributes, level } from "@neverquest/state/attributes";
-import { armor, shield, weapon } from "@neverquest/state/inventory";
+import { armor, hasItem, shield, weapon } from "@neverquest/state/inventory";
 import { masteries } from "@neverquest/state/masteries";
+import type { Attribute } from "@neverquest/types/unions";
 import {
   getComputedStatistic,
   getDamagePerRate,
@@ -21,9 +21,8 @@ export const attackRate = withStateKey("attackRate", (key) =>
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.speed;
       const { points } = get(attributes("speed"));
-      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return Math.round(total + total * (get(level) / 100));
+      return getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("speed"));
     },
     key,
   })
@@ -98,9 +97,10 @@ export const criticalChance = withStateKey("criticalChance", (key) =>
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.dexterity;
       const { points } = get(attributes("dexterity"));
-      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return Math.round(total + total * (get(level) / 100));
+      return (
+        getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("dexterity"))
+      );
     },
     key,
   })
@@ -111,9 +111,10 @@ export const criticalDamage = withStateKey("criticalDamage", (key) =>
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.perception;
       const { points } = get(attributes("perception"));
-      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return Math.round(total + total * (get(level) / 100));
+      return (
+        getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("perception"))
+      );
     },
     key,
   })
@@ -131,9 +132,10 @@ export const damage = withStateKey("damage", (key) =>
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.strength;
       const { points } = get(attributes("strength"));
-      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return Math.round(total + total * (get(level) / 100));
+      return Math.round(
+        getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("strength"))
+      );
     },
     key,
   })
@@ -171,9 +173,8 @@ export const dodge = withStateKey("dodge", (key) =>
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.agility;
       const { points } = get(attributes("agility"));
-      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return Math.round(total + total * (get(level) / 100));
+      return getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("agility"));
     },
     key,
   })
@@ -206,19 +207,15 @@ export const stability = withStateKey("stability", (key) =>
   })
 );
 
-export const healthRegenerationAmount = withStateKey("healthRegenerationAmount", (key) =>
-  selector({
-    get: ({ get }) => RESERVES.health.baseRegenerationAmount + get(reserveRegenerationAmount),
-    key,
-  })
-);
-
-export const healthRegenerationRate = withStateKey("healthRegenerationRate", (key) =>
+export const luck = withStateKey("luck", (key) =>
   selector({
     get: ({ get }) => {
-      const { baseRegenerationRate } = RESERVES.health;
+      const { base, increment } = ATTRIBUTES.luck;
+      const { points } = get(attributes("luck"));
 
-      return Math.round(baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRate));
+      return get(hasItem("antique coin"))
+        ? getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("agility"))
+        : 0;
     },
     key,
   })
@@ -263,6 +260,26 @@ export const parryDamage = withStateKey("parryDamage", (key) =>
   })
 );
 
+export const powerBonus = withStateKey("powerBonus", (key) =>
+  selectorFamily<number, Attribute>({
+    get:
+      (type) =>
+      ({ get }) => {
+        const { base, increment, powerBonus } = ATTRIBUTES[type];
+        const { points } = get(attributes(type));
+
+        if (get(hasItem("tome of power"))) {
+          return (
+            getComputedStatistic({ amount: points, base, increment }) * (get(level) * powerBonus)
+          );
+        }
+
+        return 0;
+      },
+    key,
+  })
+);
+
 export const protection = withStateKey("protection", (key) =>
   selector({
     get: ({ get }) => get(armor).protection,
@@ -275,9 +292,10 @@ export const recoveryRate = withStateKey("recoveryRate", (key) =>
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.resilience;
       const { points } = get(attributes("resilience"));
-      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return Math.round(total + total * (get(level) / 100));
+      return Math.round(
+        getComputedStatistic({ amount: points, base, increment }) - get(powerBonus("resilience"))
+      );
     },
     key,
   })
@@ -288,9 +306,10 @@ export const reserveRegenerationAmount = withStateKey("reserveRegenerationAmount
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.fortitude;
       const { points } = get(attributes("fortitude"));
-      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return Math.round(total + total * (get(level) / 100));
+      return Math.round(
+        getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("fortitude"))
+      );
     },
     key,
   })
@@ -301,9 +320,8 @@ export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.vigor;
       const { points } = get(attributes("vigor"));
-      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return Math.round(total + total * (get(level) / 100));
+      return getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("vigor"));
     },
     key,
   })
@@ -340,23 +358,6 @@ export const staggerWeapon = withStateKey("staggerWeapon", (key) =>
       const { abilityChance, gearClass } = get(weapon);
 
       return gearClass === "blunt" ? abilityChance : 0;
-    },
-    key,
-  })
-);
-
-export const staminaRegenerationAmount = withStateKey("staminaRegenerationAmount", (key) =>
-  selector({
-    get: ({ get }) => RESERVES.stamina.baseRegenerationAmount + get(reserveRegenerationAmount),
-    key,
-  })
-);
-
-export const staminaRegenerationRate = withStateKey("staminaRegenerationRate", (key) =>
-  selector({
-    get: ({ get }) => {
-      const { baseRegenerationRate } = RESERVES.stamina;
-      return Math.round(baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRate));
     },
     key,
   })

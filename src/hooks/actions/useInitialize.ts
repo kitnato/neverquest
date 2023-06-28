@@ -8,13 +8,13 @@ import { attributes } from "@neverquest/state/attributes";
 import { crew } from "@neverquest/state/caravan";
 import { stage, wildernesses } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
-import type { Attribute, CrewMember, CrewStatus } from "@neverquest/types/unions";
+import type { Attribute, CrewMember } from "@neverquest/types/unions";
 import { KEY_SESSION } from "@neverquest/utilities/constants";
 import { generateWilderness } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useInitialize() {
-  const createMonster = useGenerateMonster();
+  const generateMonster = useGenerateMonster();
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
@@ -31,17 +31,14 @@ export function useInitialize() {
 
         Object.entries(CREW).forEach(([type, { requiredStage }]) => {
           if (requiredStage === 0) {
-            set(crew(type as CrewMember), (current) => ({
-              ...current,
-              hireStatus: "hired" as CrewStatus,
-            }));
+            set(crew(type as CrewMember), "hired");
           }
         });
 
         set(wildernesses, [generateWilderness({ allowNSFW: get(allowNSFW), stage: get(stage) })]);
 
-        createMonster();
+        generateMonster();
       },
-    [createMonster]
+    [generateMonster]
   );
 }

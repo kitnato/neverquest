@@ -1,18 +1,32 @@
+import { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Monster } from "@neverquest/components/Monster";
+import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
+import { useToggleAttack } from "@neverquest/hooks/actions/useToggleAttack";
 import { ReactComponent as IconHiding } from "@neverquest/icons/monster-hiding.svg";
 import { ReactComponent as IconRemains } from "@neverquest/icons/monster-remains.svg";
-import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
+import { isStageCompleted, isStageStarted, progress } from "@neverquest/state/encounter";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
-
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Wilderness() {
   const isStageStartedValue = useRecoilValue(isStageStarted);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
+  const progressValue = useRecoilValue(progress);
+
+  const generateMonster = useGenerateMonster();
+  const toggleAttack = useToggleAttack();
+
+  useEffect(() => {
+    if (isStageCompletedValue) {
+      toggleAttack();
+    } else if (isStageStartedValue) {
+      generateMonster();
+    }
+  }, [generateMonster, isStageCompletedValue, isStageStartedValue, progressValue, toggleAttack]);
 
   if (isStageCompletedValue) {
     return (

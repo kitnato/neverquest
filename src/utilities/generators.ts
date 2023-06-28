@@ -170,8 +170,7 @@ export function generateWeapon({
     damage: getFromRange({ ...ranges.damage }),
     gearClass,
     // TODO
-    grip: "oneHanded",
-
+    grip: "one-handed",
     id: nanoid(),
     isEquipped: false,
     level,

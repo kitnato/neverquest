@@ -13,7 +13,7 @@ export function Tailor() {
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay
           contents="Sow pockets"
-          description="Increase maximum encumbrance"
+          description="Increases maximum encumbrance."
           Icon={IconTailoring}
           tooltip="Tailoring"
         />

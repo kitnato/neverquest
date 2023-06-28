@@ -1,5 +1,6 @@
 import { atom, selector } from "recoil";
 
+import { luck } from "./statistics";
 import {
   BLIGHT,
   LOOT,
@@ -147,12 +148,13 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
 
       const stageValue = get(stage);
       const growthFactor = getGrowthSigmoid(stageValue);
+      const luckBonus = 1 + get(luck);
       const progressFactor = getGrowthSigmoid(get(progress)) * bonus;
 
       return {
-        coins: Math.round(progressFactor + coinsBase * growthFactor),
-        essence: Math.round(progressFactor + essenceBase * growthFactor),
-        scrap: Math.round(progressFactor + scrapBase * growthFactor),
+        coins: Math.round((progressFactor + coinsBase * growthFactor) * luckBonus),
+        essence: Math.round((progressFactor + essenceBase * growthFactor) * luckBonus),
+        scrap: Math.round((progressFactor + scrapBase * growthFactor) * luckBonus),
       };
     },
     key,
@@ -185,7 +187,7 @@ export const monsterBleedingDuration = withStateKey("monsterBleedingDuration", (
   })
 );
 
-export const monsterHealth = withStateKey("masteries", (key) =>
+export const monsterHealth = withStateKey("monsterHealth", (key) =>
   atom({
     default: monsterHealthMaximum,
     effects: [handleLocalStorage<number>({ key })],

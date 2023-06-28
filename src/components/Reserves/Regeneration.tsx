@@ -11,10 +11,10 @@ import { isShowing } from "@neverquest/state/isShowing";
 import {
   healthRegenerationAmount,
   healthRegenerationRate,
-  reserveRegenerationRate,
   staminaRegenerationAmount,
   staminaRegenerationRate,
-} from "@neverquest/state/statistics";
+} from "@neverquest/state/reserves";
+import { reserveRegenerationRate } from "@neverquest/state/statistics";
 import type { Reserve } from "@neverquest/types/unions";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";

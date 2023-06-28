@@ -4,7 +4,14 @@ import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory
 import { ENCUMBRANCE } from "@neverquest/data/statistics";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { Armor, Item, Shield, Weapon } from "@neverquest/types";
-import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
+import {
+  isArmor,
+  isConsumable,
+  isShield,
+  isTrinket,
+  isWeapon,
+} from "@neverquest/types/type-guards";
+import type { Consumable, Trinket } from "@neverquest/types/unions";
 
 // SELECTORS
 
@@ -46,6 +53,20 @@ export const encumbrance = withStateKey("encumbrance", (key) =>
 
       return inventoryValue.reduce((current, item) => current + item.weight, 0);
     },
+    key,
+  })
+);
+
+export const hasItem = withStateKey("hasItem", (key) =>
+  selectorFamily<boolean, Consumable | Trinket>({
+    get:
+      (type) =>
+      ({ get }) =>
+        Boolean(
+          get(inventory).find(
+            (item) => (isConsumable(item) || isTrinket(item)) && item.type === type
+          )
+        ),
     key,
   })
 );

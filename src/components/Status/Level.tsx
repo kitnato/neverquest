@@ -7,8 +7,10 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconLevel } from "@neverquest/icons/level.svg";
 import { level } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
+import { hasItem } from "@neverquest/state/inventory";
 
 export function Level() {
+  const hasTomeOfPower = useRecoilValue(hasItem("tome of power"));
   const levelValue = useRecoilValue(level);
 
   useDeltaText({
@@ -25,7 +27,7 @@ export function Level() {
           <FloatingText deltaType="level" />
         </Stack>
       }
-      description={`Increases attribute effects by ${levelValue}%`}
+      description={hasTomeOfPower && "The Tome is empowering all attribute effects."}
       Icon={IconLevel}
       tooltip="Power level"
     />

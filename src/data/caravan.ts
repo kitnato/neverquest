@@ -15,7 +15,7 @@ export const CREW: Record<
     coinPrice: number;
     description: string;
     interaction: string;
-    monologues: string[];
+    monologues: Record<number, string | undefined>;
     requiredStage: number;
   }
 > = {
@@ -23,64 +23,68 @@ export const CREW: Record<
     coinPrice: 100,
     description: "Converts resources between one another.",
     interaction: "Transmute",
-    monologues: ["Things are not always what they seem."],
+    monologues: { 1: "Things are not always what they seem." },
     requiredStage: 16,
   },
   blacksmith: {
-    coinPrice: 20,
+    coinPrice: 35,
     description: "Crafts superior gear.",
     interaction: "Craft",
-    monologues: ["In need of better gear?"],
-    requiredStage: 6,
+    monologues: { 1: "In need of better gear?" },
+    requiredStage: 8,
   },
   medic: {
     coinPrice: 80,
     description: "Heals wounds and sells bandages.",
     interaction: "Heal",
-    monologues: ["Allow me to patch you up."],
+    monologues: { 1: "Allow me to patch you up." },
     requiredStage: 12,
   },
   mercenary: {
     coinPrice: 60,
     description: "Trains new skills and attributes.",
     interaction: "Train",
-    monologues: ["Perhaps I can teach you something."],
+    monologues: { 1: "Perhaps I can teach you something." },
     requiredStage: 10,
   },
   merchant: {
     coinPrice: 0,
     description: "Offers various items for purchase and buys unwanted items.",
     interaction: "Trade",
-    monologues: [
-      "Greetings. I have what you're looking for.",
-      "Hello again. Some threads, perhaps?",
-      "Ah, you're back. Care for more protection?",
-      "You must be over-burdened. I have just the thing.",
-      "Got a fresh shipment of gear, care to see?",
-      "Heard there are other travelers looking to sell their services.",
-      "Welcome back. Always a sight for sore eyes.",
-    ],
+    monologues: {
+      1: "Greetings. I have what you're looking for.",
+      2: "Hello again. Some threads, perhaps?",
+      3: "Ah, you're back. Care for more protection?",
+      4: "You must be over-burdened. I have just the thing.",
+      5: "Got a fresh shipment of gear, care to see?",
+      6: "Heard there are other travelers looking to sell their services.",
+      7: "Your headway in the wilderness is helping business.",
+      14: "I recently came into possession of a few curiosities.",
+      15: "Can I interest you in anything else?",
+      25: "A dark wanderer passed by and sold me a strange book ...",
+      26: "Welcome back. Always a sight for sore eyes.",
+    },
     requiredStage: 0,
   },
   occultist: {
     coinPrice: 200,
     description: "Sells soulstones and offers purging rituals.",
     interaction: "Ritual",
-    monologues: ["Prepared to pierce the veil?"],
+    monologues: { 1: "Prepared to pierce the veil?" },
     requiredStage: 30,
   },
   tailor: {
-    coinPrice: 30,
+    coinPrice: 20,
     description: "Expands inventory space.",
     interaction: "Upgrade",
-    monologues: ["Allow me to deepen your pockets."],
-    requiredStage: 8,
+    monologues: { 1: "Allow me to deepen your pockets." },
+    requiredStage: 6,
   },
   witch: {
     coinPrice: 150,
     description: "Sells potions that cure ailments.",
     interaction: "Brew",
-    monologues: ["Gaze deep into my cauldron ..."],
+    monologues: { 1: "Gaze deep into my cauldron ..." },
     requiredStage: 20,
   },
 };
@@ -95,46 +99,50 @@ export const MEDIC_PRICE_BANDAGES = 18;
 export const MEDIC_PRICE_SURGERY = 6;
 export const MEDIC_PRICE_SURGERY_CRITICAL = 15;
 
-export const MERCHANT_OFFERS: (
-  | (ArtifactType<"armor"> & {
-      gearClass: ArmorClass;
-    })
-  | (ArtifactType<"shield"> & {
-      gearClass: ShieldClass;
-    })
-  | (ArtifactType<"trinket"> & {
-      name: Trinket;
-    })
-  | (ArtifactType<"weapon"> & {
-      gearClass: WeaponClass;
-      modality: WeaponModality;
-    })
-)[][] = [
-  [
+export const MERCHANT_OFFERS: Record<
+  number,
+  | (
+      | (ArtifactType<"armor"> & {
+          gearClass: ArmorClass;
+        })
+      | (ArtifactType<"shield"> & {
+          gearClass: ShieldClass;
+        })
+      | (ArtifactType<"trinket"> & {
+          name: Trinket;
+        })
+      | (ArtifactType<"weapon"> & {
+          gearClass: WeaponClass;
+          modality: WeaponModality;
+        })
+    )[]
+  | undefined
+> = {
+  1: [
     {
       gearClass: "piercing",
       modality: "melee",
       type: "weapon",
     },
   ],
-  [
+  2: [
     {
       gearClass: "hide",
       type: "armor",
     },
   ],
-  [
+  3: [
     {
       gearClass: "small",
       type: "shield",
     },
   ],
-  [
+  4: [
     { name: "knapsack", type: "trinket" },
     { name: "compass", type: "trinket" },
     { name: "hearthstone", type: "trinket" },
   ],
-  [
+  5: [
     {
       gearClass: "slashing",
       modality: "melee",
@@ -154,7 +162,12 @@ export const MERCHANT_OFFERS: (
       type: "armor",
     },
   ],
-];
+  14: [
+    { name: "antique coin", type: "trinket" },
+    { name: "monkey paw", type: "trinket" },
+  ],
+  25: [{ name: "tome of power", type: "trinket" }],
+};
 
 export const TRANSMUTE_COST = 3;
 export const TRANSMUTE_YIELD = 1;

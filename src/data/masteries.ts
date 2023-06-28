@@ -1,9 +1,9 @@
 import { ReactComponent as IconPlaceholder } from "@neverquest/icons/placeholder.svg";
-import type { AttributeOrMastery } from "@neverquest/types";
+import type { MasteryData } from "@neverquest/types";
 import type { Mastery } from "@neverquest/types/unions";
 
 // TODO - diversify icons.
-export const MASTERIES: Record<Mastery, AttributeOrMastery> = {
+export const MASTERIES: Record<Mastery, MasteryData> = {
   cruelty: {
     base: 0.1,
     description: "Affects bleed damage. Trains when inflicting bleed.",

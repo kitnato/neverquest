@@ -1,6 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { KNAPSACK_SIZE } from "@neverquest/data/inventory";
+import { attributes } from "@neverquest/state/attributes";
 import { canFit, encumbranceMaximum, hasKnapsack, inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import type { ConsumableItem, TrinketItem } from "@neverquest/types";
@@ -24,6 +25,12 @@ export function useAcquireItem() {
 
           set(isShowing("weight"), true);
         } else {
+          if (type === "antique coin") {
+            set(isShowing("luck"), true);
+
+            set(attributes("luck"), (current) => ({ ...current, isUnlocked: true }));
+          }
+
           set(inventory, (current) => current.concat(item));
         }
 

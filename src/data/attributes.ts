@@ -1,11 +1,11 @@
 import { RESERVES } from "@neverquest/data/reserves";
 import { RECOVERY_RATE } from "@neverquest/data/statistics";
 import { ReactComponent as IconPlaceholder } from "@neverquest/icons/placeholder.svg";
-import type { AttributeOrMastery } from "@neverquest/types";
+import type { AttributeData } from "@neverquest/types";
 import type { Attribute } from "@neverquest/types/unions";
 
 // TODO - diversify icons.
-export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
+export const ATTRIBUTES: Record<Attribute, AttributeData> = {
   agility: {
     base: 0,
     description: "Increases chance to dodge an attack.",
@@ -13,6 +13,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     increment: 0.04,
     isUnlocked: false,
     maximum: 0.8,
+    powerBonus: 0.005,
   },
   dexterity: {
     base: 0,
@@ -21,6 +22,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     increment: 0.03,
     isUnlocked: false,
     maximum: 0.6,
+    powerBonus: 0.005,
   },
   endurance: {
     base: RESERVES.stamina.baseAmount,
@@ -28,6 +30,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     Icon: IconPlaceholder,
     increment: 5,
     isUnlocked: true,
+    powerBonus: 0.01,
   },
   fortitude: {
     base: 0,
@@ -35,6 +38,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     Icon: IconPlaceholder,
     increment: 2,
     isUnlocked: false,
+    powerBonus: 0.01,
   },
   luck: {
     base: 0,
@@ -42,6 +46,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     Icon: IconPlaceholder,
     increment: 0.03,
     isUnlocked: false,
+    powerBonus: 0.01,
   },
   perception: {
     // TODO - move base amount to /data
@@ -50,6 +55,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     Icon: IconPlaceholder,
     increment: 0.15,
     isUnlocked: false,
+    powerBonus: 0.005,
   },
   resilience: {
     base: RECOVERY_RATE,
@@ -58,6 +64,8 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     increment: -150,
     isUnlocked: true,
     maximum: 150,
+    powerBonus: 0.005,
+    shows: "recoveryDetails",
   },
   speed: {
     base: 0,
@@ -66,6 +74,8 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     increment: 0.05,
     isUnlocked: true,
     maximum: 0.9,
+    powerBonus: 0.005,
+    shows: "attackRateDetails",
   },
   strength: {
     base: 0,
@@ -73,6 +83,8 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     Icon: IconPlaceholder,
     increment: 2,
     isUnlocked: true,
+    powerBonus: 0.01,
+    shows: "damageDetails",
   },
   vigor: {
     base: 0,
@@ -80,6 +92,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     Icon: IconPlaceholder,
     increment: 0.05,
     isUnlocked: false,
+    powerBonus: 0.005,
   },
   vitality: {
     base: RESERVES.health.baseAmount,
@@ -87,6 +100,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeOrMastery> = {
     Icon: IconPlaceholder,
     increment: 10,
     isUnlocked: true,
+    powerBonus: 0.01,
   },
 };
 

@@ -6,7 +6,7 @@ export function capitalizeAll(string: string) {
 }
 
 export function formatMilliseconds(milliseconds: number) {
-  if (milliseconds <= 0 || Number.isNaN(milliseconds)) {
+  if (milliseconds < 0 || Number.isNaN(milliseconds)) {
     return LABEL_EMPTY;
   }
 

@@ -8,17 +8,15 @@ import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { isRecovering } from "@neverquest/state/character";
 import {
+  healthRegenerationAmount,
   healthRegenerationDuration,
+  healthRegenerationRate,
   isHealthAtMaximum,
   isStaminaAtMaximum,
-  staminaRegenerationDuration,
-} from "@neverquest/state/reserves";
-import {
-  healthRegenerationAmount,
-  healthRegenerationRate,
   staminaRegenerationAmount,
+  staminaRegenerationDuration,
   staminaRegenerationRate,
-} from "@neverquest/state/statistics";
+} from "@neverquest/state/reserves";
 import type { DeltaReserve } from "@neverquest/types/ui";
 import type { Reserve } from "@neverquest/types/unions";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";

@@ -5,15 +5,10 @@ import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { InventoryBlacksmith, InventoryMerchant } from "@neverquest/types";
 import type { CrewMember, CrewStatus } from "@neverquest/types/unions";
 
-type CrewState = {
-  hireStatus: CrewStatus;
-  monologueProgress: number;
-};
-
 // SELECTORS
 
 export const crew = withStateKey("crew", (key) =>
-  selectorFamily<CrewState, CrewMember>({
+  selectorFamily<CrewStatus, CrewMember>({
     get:
       (type) =>
       ({ get }) =>
@@ -28,7 +23,7 @@ export const crew = withStateKey("crew", (key) =>
 
         set(crewMapping(type), status);
 
-        if (status.hireStatus === "hired") {
+        if (status === "hired") {
           set(crewAvailable, (current) => current.filter((crewType) => crewType !== type));
         }
       },
@@ -66,12 +61,9 @@ export const crewAvailable = withStateKey("crewAvailable", (key) =>
 );
 
 const crewMapping = withStateKey("crewMapping", (key) =>
-  atomFamily<CrewState, CrewMember>({
-    default: {
-      hireStatus: "locked",
-      monologueProgress: 0,
-    },
-    effects: (parameter) => [handleLocalStorage<CrewState>({ key, parameter })],
+  atomFamily<CrewStatus, CrewMember>({
+    default: "locked",
+    effects: (parameter) => [handleLocalStorage<CrewStatus>({ key, parameter })],
     key,
   })
 );

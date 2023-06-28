@@ -14,11 +14,12 @@ export function useToggleEquipGear() {
       (gear: GearItem) => {
         const get = getSnapshotGetter(snapshot);
 
+        set(isShowing("statistics"), true);
+
         if (isArmor(gear)) {
           const { staminaCost } = gear;
 
           set(isShowing("armor"), true);
-          set(isShowing("defense"), true);
           set(isShowing("protection"), true);
 
           if (get(skills("evasion")) && staminaCost) {
@@ -28,7 +29,6 @@ export function useToggleEquipGear() {
 
         if (isShield(gear)) {
           set(isShowing("block"), true);
-          set(isShowing("defense"), true);
           set(isShowing("shield"), true);
         }
 

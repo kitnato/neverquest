@@ -10,17 +10,14 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconRecovery } from "@neverquest/icons/recovery.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
-import { recoveryRate, tenacity } from "@neverquest/state/statistics";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
-import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
+import { recoveryRate } from "@neverquest/state/statistics";
+import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
+import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export function Recovery() {
   const isShowingRecovery = useRecoilValue(isShowing("recovery"));
-  const tenacityValue = useRecoilValue(tenacity);
+  const isShowingRecoveryDetails = useRecoilValue(isShowing("recoveryDetails"));
   const recoveryRateValue = useRecoilValue(recoveryRate);
-
-  const showRecoveryRate = recoveryRateValue !== RECOVERY_RATE;
-  const showTenacity = tenacityValue > 0;
 
   useDeltaText({
     atomDelta: deltas("recoveryRate"),
@@ -49,33 +46,15 @@ export function Recovery() {
                   </tr>
 
                   <tr>
-                    {showRecoveryRate ? (
-                      <>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Resilience attribute:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Resilience attribute:</td>
 
-                        <td>{`-${formatPercentage(1 - recoveryRateValue / RECOVERY_RATE)}`}</td>
-                      </>
-                    ) : (
-                      <td className="text-end">{LABEL_UNKNOWN}</td>
-                    )}
-                  </tr>
-
-                  <tr>
-                    {showTenacity ? (
-                      <>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Chance to skip recovery:</td>
-
-                        <td>{formatPercentage(tenacityValue)}</td>
-                      </>
-                    ) : (
-                      <td className="text-end">{LABEL_UNKNOWN}</td>
-                    )}
+                    <td>{`-${formatMilliseconds(RECOVERY_RATE - recoveryRateValue)}`}</td>
                   </tr>
                 </DetailsTable>
               </Popover.Body>
             </Popover>
           }
-          trigger={showRecoveryRate || showTenacity ? ["hover", "focus"] : []}
+          trigger={isShowingRecoveryDetails ? ["hover", "focus"] : []}
         >
           <Stack className="w-100" direction="horizontal">
             <RecoveryMeter />

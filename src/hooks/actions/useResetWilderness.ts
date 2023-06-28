@@ -4,15 +4,15 @@ import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster
 import { isStageStarted, progress } from "@neverquest/state/encounter";
 
 export function useResetWilderness() {
-  const createMonster = useGenerateMonster();
+  const generateMonster = useGenerateMonster();
 
   return useRecoilCallback(
     ({ reset }) =>
       () => {
         reset(isStageStarted);
         reset(progress);
-        createMonster();
+        generateMonster();
       },
-    [createMonster]
+    [generateMonster]
   );
 }

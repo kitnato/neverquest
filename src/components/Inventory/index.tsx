@@ -18,13 +18,16 @@ import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 
 const ITEM_ACTIONS: Record<Consumable | Trinket, FunctionComponent<{ itemID: string }>> = {
   antidote: ConsumeAntidote,
+  "antique coin": () => null,
   bandages: ConsumeBandages,
   compass: ActivateCompass,
   elixir: ConsumeElixir,
   hearthstone: ActivateHearthstone,
   knapsack: () => null,
+  "monkey paw": () => null,
   salve: ConsumeSalve,
   soulstone: () => null,
+  "tome of power": () => null,
 };
 
 export function Inventory() {

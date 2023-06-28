@@ -1,5 +1,7 @@
 import { nanoid } from "nanoid";
+
 import { ReactComponent as IconAntidote } from "@neverquest/icons/antidote.svg";
+import { ReactComponent as IconAntiqueCoin } from "@neverquest/icons/antique-coin.svg";
 import { ReactComponent as IconPlate } from "@neverquest/icons/armor-plate.svg";
 import { ReactComponent as IconReinforced } from "@neverquest/icons/armor-reinforced.svg";
 import { ReactComponent as IconBandages } from "@neverquest/icons/bandages.svg";
@@ -8,21 +10,23 @@ import { ReactComponent as IconElixir } from "@neverquest/icons/elixir.svg";
 import { ReactComponent as IconStone } from "@neverquest/icons/hearthstone.svg";
 import { ReactComponent as IconHide } from "@neverquest/icons/hide.svg";
 import { ReactComponent as IconKnapsack } from "@neverquest/icons/knapsack.svg";
+import { ReactComponent as IconMonkeyPaw } from "@neverquest/icons/monkey-paw.svg";
 import { ReactComponent as IconParry } from "@neverquest/icons/parry.svg";
 import { ReactComponent as IconSalve } from "@neverquest/icons/salve.svg";
 import { ReactComponent as IconShieldMedium } from "@neverquest/icons/shield-medium.svg";
 import { ReactComponent as IconShieldSmall } from "@neverquest/icons/shield-small.svg";
 import { ReactComponent as IconShieldTower } from "@neverquest/icons/shield-tower.svg";
 import { ReactComponent as IconSoulstone } from "@neverquest/icons/soulstone.svg";
+import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconWeaponBleed } from "@neverquest/icons/weapon-bleed.svg";
 import { ReactComponent as IconBlunt } from "@neverquest/icons/weapon-blunt.svg";
 import { ReactComponent as IconPiercing } from "@neverquest/icons/weapon-piercing.svg";
 import { ReactComponent as IconSlashing } from "@neverquest/icons/weapon-slashing.svg";
 import { ReactComponent as IconWeaponStagger } from "@neverquest/icons/weapon-stagger.svg";
-import type { ArmorClass, ShieldClass, WeaponClass, WeaponModality } from "@neverquest/LOCRA/types";
-import type { ConsumableItem, Range, TrinketItem } from "@neverquest/types";
+import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRA/types";
+import type { ConsumableItem, Range, TrinketItem, Weapon } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Showing, Trinket, WeaponGrip } from "@neverquest/types/unions";
+import type { Consumable, Showing, Trinket } from "@neverquest/types/unions";
 
 export const ARMOR_NONE = {
   deflection: 0,
@@ -59,7 +63,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     Icon: IconPlate,
     priceModifier: 2,
     protectionModifier: 2.5,
-    weightModifier: 2.25,
+    weightModifier: 2.5,
   },
   reinforced: {
     deflectionRange: { maximum: 0.29, minimum: 0.1 },
@@ -166,6 +170,16 @@ export const SHIELD_SPECIFICATIONS: Record<
 };
 
 export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
+  "antique coin": {
+    Icon: IconAntiqueCoin,
+    item: {
+      coinPrice: 150,
+      description: "Unlocks the Luck attribute.",
+      id: nanoid(),
+      type: "antique coin",
+      weight: 2,
+    },
+  },
   compass: {
     Icon: IconCompass,
     item: {
@@ -196,16 +210,36 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
       weight: 0,
     },
   },
+  "monkey paw": {
+    Icon: IconMonkeyPaw,
+    item: {
+      coinPrice: 200,
+      description: "Looting a corpse is instantaneous.",
+      id: nanoid(),
+      type: "monkey paw",
+      weight: 2,
+    },
+  },
+  "tome of power": {
+    Icon: IconTomeOfPower,
+    item: {
+      coinPrice: 500,
+      description: "Power levels grant a bonus to all attributes.",
+      id: nanoid(),
+      type: "tome of power",
+      weight: 6,
+    },
+  },
 };
 
-export const WEAPON_NONE = {
+export const WEAPON_NONE: Omit<Weapon, "coinPrice" | "isEquipped" | "ranges" | "scrapPrice"> = {
   abilityChance: 0,
   damage: 10,
-  gearClass: "blunt" as WeaponClass,
-  grip: "oneHanded" as WeaponGrip,
+  gearClass: "blunt",
+  grip: "one-handed",
   id: nanoid(),
   level: 0,
-  modality: "melee" as WeaponModality,
+  modality: "melee",
   name: "Unarmed",
   rate: 2500,
   staminaCost: 0,

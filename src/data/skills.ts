@@ -28,7 +28,7 @@ export const SKILLS: Record<
     description: "Unlocks the use of plate armor, chance to deflect ailments & improves recovery.",
     Icon: IconPlaceholder,
     requiredLevel: 45,
-    shows: ["deflection", "support"],
+    shows: ["deflection", "tenacity"],
     unlocksMasteries: ["tenacity"],
   },
   assassination: {
@@ -68,7 +68,7 @@ export const SKILLS: Record<
     description: "Unlocks the use of tower shields & stabilizes blocking.",
     Icon: IconPlaceholder,
     requiredLevel: 30,
-    shows: ["stability", "support"],
+    shows: ["stability"],
     unlocksMasteries: ["stability"],
   },
   traumatology: {

@@ -90,9 +90,7 @@ Affects energy regeneration rate.
 
 #### Luck
 
-`TODO`
-
-Affects the amount of loot dropped by monsters.
+Affects the amount of loot dropped by monsters. Must be included with a special [trinket](#trinkets).
 
 #### Perception
 

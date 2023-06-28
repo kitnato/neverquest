@@ -5,8 +5,8 @@ import {
   stamina,
   staminaMaximumTotal,
   staminaRegenerationDuration,
+  staminaRegenerationRate,
 } from "@neverquest/state/reserves";
-import { staminaRegenerationRate } from "@neverquest/state/statistics";
 import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 

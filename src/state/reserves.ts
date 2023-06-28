@@ -2,9 +2,15 @@ import { atom, selector } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { BLIGHT } from "@neverquest/data/monster";
+import { RESERVES } from "@neverquest/data/reserves";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import { attributes, level } from "@neverquest/state/attributes";
+import { attributes } from "@neverquest/state/attributes";
 import { monsterPoisonDuration, monsterPoisonMagnitude } from "@neverquest/state/monster";
+import {
+  powerBonus,
+  reserveRegenerationAmount,
+  reserveRegenerationRate,
+} from "@neverquest/state/statistics";
 import { getComputedStatistic } from "@neverquest/utilities/getters";
 
 // SELECTORS
@@ -21,9 +27,10 @@ export const healthMaximum = withStateKey("healthMaximum", (key) =>
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.vitality;
       const { points } = get(attributes("vitality"));
-      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return Math.round(total + total * (get(level) / 100));
+      return Math.round(
+        getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("vitality"))
+      );
     },
     key,
   })
@@ -45,6 +52,24 @@ export const healthMaximumTotal = withStateKey("healthMaximumTotal", (key) =>
       }
 
       return newMaximum;
+    },
+    key,
+  })
+);
+
+export const healthRegenerationAmount = withStateKey("healthRegenerationAmount", (key) =>
+  selector({
+    get: ({ get }) => RESERVES.health.baseRegenerationAmount + get(reserveRegenerationAmount),
+    key,
+  })
+);
+
+export const healthRegenerationRate = withStateKey("healthRegenerationRate", (key) =>
+  selector({
+    get: ({ get }) => {
+      const { baseRegenerationRate } = RESERVES.health;
+
+      return Math.round(baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRate));
     },
     key,
   })
@@ -76,9 +101,10 @@ export const staminaMaximum = withStateKey("staminaMaximum", (key) =>
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.endurance;
       const { points } = get(attributes("endurance"));
-      const total = getComputedStatistic({ amount: points, base, increment });
 
-      return Math.round(total + total * (get(level) / 100));
+      return Math.round(
+        getComputedStatistic({ amount: points, base, increment }) + get(powerBonus("endurance"))
+      );
     },
     key,
   })
@@ -94,6 +120,24 @@ export const staminaMaximumTotal = withStateKey("staminaMaximumTotal", (key) =>
       }
 
       return newMaximum;
+    },
+    key,
+  })
+);
+
+export const staminaRegenerationAmount = withStateKey("staminaRegenerationAmount", (key) =>
+  selector({
+    get: ({ get }) => RESERVES.stamina.baseRegenerationAmount + get(reserveRegenerationAmount),
+    key,
+  })
+);
+
+export const staminaRegenerationRate = withStateKey("staminaRegenerationRate", (key) =>
+  selector({
+    get: ({ get }) => {
+      const { baseRegenerationRate } = RESERVES.stamina;
+
+      return Math.round(baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRate));
     },
     key,
   })

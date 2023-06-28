@@ -16,7 +16,7 @@ import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function CrewHirable({ type }: { type: CrewMember }) {
   const coinsValue = useRecoilValue(coins);
-  const [{ hireStatus }, setCrewMember] = useRecoilState(crew(type));
+  const [hireStatus, setHireStatus] = useRecoilState(crew(type));
   const setIsShowingGearClass = useSetRecoilState(isShowing("gearClass"));
 
   const transactResources = useTransactResources();
@@ -26,10 +26,7 @@ export function CrewHirable({ type }: { type: CrewMember }) {
   const name = capitalizeAll(type);
 
   const handleHire = () => {
-    setCrewMember((current) => ({
-      ...current,
-      hireStatus: "hired",
-    }));
+    setHireStatus("hired");
     transactResources({ coinsDifference: -coinPrice });
 
     if (type === "blacksmith") {
@@ -72,7 +69,7 @@ export function CrewHirable({ type }: { type: CrewMember }) {
   return (
     <IconDisplay
       contents={LABEL_UNKNOWN}
-      description={`Unlocks at stage ${requiredStage}`}
+      description={`Unlocks at stage ${requiredStage}.`}
       Icon={IconUnknown}
       tooltip={LABEL_UNKNOWN}
     />

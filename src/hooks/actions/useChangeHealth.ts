@@ -4,8 +4,12 @@ import { isGameOver } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { health, healthMaximumTotal, healthRegenerationDuration } from "@neverquest/state/reserves";
-import { healthRegenerationRate } from "@neverquest/state/statistics";
+import {
+  health,
+  healthMaximumTotal,
+  healthRegenerationDuration,
+  healthRegenerationRate,
+} from "@neverquest/state/reserves";
 import { isConsumable } from "@neverquest/types/type-guards";
 import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";

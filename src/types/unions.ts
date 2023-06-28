@@ -47,6 +47,7 @@ export type Delta =
   | "health"
   | "healthRegenerationRate"
   | "level"
+  | "luck"
   | "might"
   | "monsterHealth"
   | "parry"
@@ -84,7 +85,6 @@ export const SHOWING_TYPES = [
   "crewHiring",
   "criticalRating",
   "damageDetails",
-  "defense",
   "deflection",
   "dodge",
   "dodgePenalty",
@@ -92,12 +92,14 @@ export const SHOWING_TYPES = [
   "gameOver",
   "gearClass",
   "loot",
+  "luck",
   "masteries",
   "monsterAilments",
   "monsterOffense",
   "parry",
   "protection",
   "recovery",
+  "recoveryDetails",
   "reserveDetails",
   "scrap",
   "shield",
@@ -105,7 +107,6 @@ export const SHOWING_TYPES = [
   "stagger",
   "stamina",
   "statistics",
-  "support",
   "tenacity",
   "weapon",
   "weight",
@@ -172,6 +173,7 @@ export type StateKey =
   | "essenceLoot"
   | "floatingTextQueues"
   | "hasBoughtFromMerchant"
+  | "hasItem"
   | "hasKnapsack"
   | "hasLooted"
   | "health"
@@ -206,6 +208,7 @@ export type StateKey =
   | "lootingDuration"
   | "lootingRate"
   | "lowHealthWarning"
+  | "luck"
   | "masteries"
   | "masteryCost"
   | "merchantInventory"
@@ -232,6 +235,7 @@ export type StateKey =
   | "parryDamage"
   | "poisonDuration"
   | "poisonedDelta"
+  | "powerBonus"
   | "progress"
   | "progressMaximum"
   | "protection"
@@ -265,6 +269,12 @@ export type StateKey =
   | "wilderness"
   | "wildernesses";
 
-export type Trinket = "compass" | "hearthstone" | "knapsack";
+export type Trinket =
+  | "antique coin"
+  | "compass"
+  | "hearthstone"
+  | "knapsack"
+  | "monkey paw"
+  | "tome of power";
 
-export type WeaponGrip = "oneHanded" | "twoHanded";
+export type WeaponGrip = "one-handed" | "two-handed";

@@ -10,7 +10,7 @@ import { hasKnapsack } from "@neverquest/state/inventory";
 import {
   allowNSFW,
   autoEquip,
-  confirmControlWarnings,
+  confirmationWarnings,
   lowHealthWarning,
   showDamagePerSecond,
   showGearComparison,
@@ -45,10 +45,7 @@ export function Settings() {
 
               <SettingsSwitch atom={lowHealthWarning} label="Low-health warning" />
 
-              <SettingsSwitch
-                atom={confirmControlWarnings}
-                label="Attack & travel warning-confirmations"
-              />
+              <SettingsSwitch atom={confirmationWarnings} label="Warn of & confirm risky choices" />
 
               <h6>Gear</h6>
 

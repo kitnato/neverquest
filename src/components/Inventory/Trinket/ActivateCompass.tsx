@@ -17,8 +17,10 @@ import {
 } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
 import { hasLooted } from "@neverquest/state/resources";
+import { confirmationWarnings } from "@neverquest/state/settings";
 
 export function ActivateCompass() {
+  const confirmationWarningsValue = useRecoilValue(confirmationWarnings);
   const hasLootedValue = useRecoilValue(hasLooted);
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
@@ -52,7 +54,7 @@ export function ActivateCompass() {
           <Button
             disabled={!canNavigate}
             onClick={() => {
-              if (isStageCompletedValue && !hasLootedValue) {
+              if (confirmationWarningsValue && !hasLootedValue && isStageCompletedValue) {
                 setIsShowingConfirmation(true);
               } else {
                 setIsShowingNavigation(true);

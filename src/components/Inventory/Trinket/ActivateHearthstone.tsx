@@ -8,8 +8,10 @@ import { isAttacking } from "@neverquest/state/character";
 import { isStageCompleted, isWilderness } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
 import { hasLooted } from "@neverquest/state/resources";
+import { confirmationWarnings } from "@neverquest/state/settings";
 
 export function ActivateHearthstone() {
+  const confirmationWarningsValue = useRecoilValue(confirmationWarnings);
   const hasLootedValue = useRecoilValue(hasLooted);
   const isAttackingValue = useRecoilValue(isAttacking);
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
@@ -23,7 +25,7 @@ export function ActivateHearthstone() {
   const canWarp = !isAttackingValue && isWildernessValue;
 
   const handleWarp = () => {
-    if (isStageCompletedValue && !hasLootedValue) {
+    if (confirmationWarningsValue && isStageCompletedValue && !hasLootedValue) {
       setIsShowingConfirmation(true);
     } else {
       resetIsInventoryOpen();

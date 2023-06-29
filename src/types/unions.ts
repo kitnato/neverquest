@@ -151,7 +151,7 @@ export type StateKey =
   | "canFit"
   | "coins"
   | "coinsLoot"
-  | "confirmControlWarnings"
+  | "confirmationWarnings"
   | "crew"
   | "crewActive"
   | "crewAvailable"

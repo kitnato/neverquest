@@ -10,12 +10,12 @@ import { hasBoughtFromMerchant } from "@neverquest/state/caravan";
 import { isGameOver } from "@neverquest/state/character";
 import { isStageCompleted, isWilderness, stageMaximum } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
-import { confirmControlWarnings } from "@neverquest/state/settings";
+import { confirmationWarnings } from "@neverquest/state/settings";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function TravelButton() {
-  const confirmControlWarningsValue = useRecoilValue(confirmControlWarnings);
+  const confirmationWarningsValue = useRecoilValue(confirmationWarnings);
   const hasBoughtFromMerchantValue = useRecoilValue(hasBoughtFromMerchant);
   const hasLootedValue = useRecoilValue(hasLooted);
   const isGameOverValue = useRecoilValue(isGameOver);
@@ -29,7 +29,7 @@ export function TravelButton() {
 
   const handleTravel = () => {
     if (
-      confirmControlWarningsValue &&
+      confirmationWarningsValue &&
       !hasBoughtFromMerchantValue &&
       !isWildernessValue &&
       stageMaximumValue <= 3
@@ -75,7 +75,7 @@ export function TravelButton() {
 
       <ConfirmationDialog
         confirmationLabel="Travel anyway"
-        message="Adventuring will be significantly harder without proper gear."
+        message="Questing will be significantly harder without proper gear."
         onConfirm={toggleLocation}
         setHide={() => setShowTravelConfirmation(false)}
         show={showTravelConfirmation}

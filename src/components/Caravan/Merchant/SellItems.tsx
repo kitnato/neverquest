@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Stack } from "react-bootstrap";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
@@ -9,12 +9,14 @@ import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { inventory } from "@neverquest/state/inventory";
+import { confirmationWarnings } from "@neverquest/state/settings";
 import type { Item } from "@neverquest/types";
 import { isGear } from "@neverquest/types/type-guards";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { getSellPrice } from "@neverquest/utilities/getters";
 
 export function SellItems() {
+  const confirmationWarningsValue = useRecoilValue(confirmationWarnings);
   const [inventoryValue, setInventory] = useRecoilState(inventory);
   const setMerchantInventory = useSetRecoilState(merchantInventory);
 
@@ -66,7 +68,7 @@ export function SellItems() {
 
                   <Button
                     onClick={() => {
-                      if (isEquipped) {
+                      if (confirmationWarningsValue && isEquipped) {
                         setSellConfirmation(item);
                       } else {
                         sellItem(item);
@@ -84,10 +86,7 @@ export function SellItems() {
           {sellConfirmation !== null && (
             <ConfirmationDialog
               confirmationLabel="Sell"
-              message={`
-                It can be bought back at the original purchase price
-                but it will be gone forever once leaving the caravan.
-              `}
+              message="It can be bought back at the original purchase price but it will be gone forever once leaving the caravan."
               onConfirm={() => sellItem(sellConfirmation)}
               setHide={() => setSellConfirmation(null)}
               show={Boolean(sellConfirmation)}

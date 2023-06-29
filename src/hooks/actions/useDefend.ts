@@ -110,6 +110,8 @@ export function useDefend() {
 
             const parryReflected = -Math.floor(monsterDamageValue * get(parryDamage));
 
+            set(isShowing("monsterAilments"), true);
+
             changeMonsterHealth({
               delta: [
                 {
@@ -188,9 +190,20 @@ export function useDefend() {
             const hasStaggered =
               get(skills("traumatology")) && Math.random() <= get(shield).stagger;
 
-            // Check if monster is staggered.
+            // If monster is staggered, also increase Might mastery.
             if (hasStaggered) {
+              set(isShowing("monsterAilments"), true);
               set(monsterStaggerDuration, get(staggerDuration));
+
+              increaseMastery("might");
+
+              changeMonsterHealth({
+                delta: {
+                  color: "text-muted",
+                  value: "STAGGER",
+                },
+                value: 0,
+              });
             }
           } else {
             deltaStamina = [
@@ -229,7 +242,26 @@ export function useDefend() {
           set(recoveryDuration, get(recoveryRate));
         }
 
-        // If poisoning occurs, check if has been deflected, otherwise apply poison - if there is an active poisoning, increment blight instead.
+        // If already poisoned, check if blighting has occurred and if it's been deflected.
+        if (get(poisonDuration) > 0 && Math.random() <= get(monsterBlightChance)) {
+          const hasDeflected = get(skills("armorcraft")) && Math.random() <= get(deflection);
+
+          if (hasDeflected) {
+            deltaStamina.push({
+              color: "text-success",
+              value: "DEFLECTED BLIGHT",
+            });
+          } else {
+            set(blight, (current) => current + 1);
+
+            deltaStamina.push({
+              color: "text-danger",
+              value: "BLIGHTED",
+            });
+          }
+        }
+
+        // If poisoning occurs, check if has been deflected, otherwise apply poison.
         if (Math.random() <= get(monsterPoisonChance)) {
           const hasDeflected = get(skills("armorcraft")) && Math.random() <= get(deflection);
 
@@ -239,21 +271,12 @@ export function useDefend() {
               value: "DEFLECTED POISON",
             });
           } else {
-            if (Math.random() <= get(monsterBlightChance)) {
-              set(blight, (current) => current + 1);
+            set(poisonDuration, get(monsterPoisonDuration));
 
-              deltaStamina.push({
-                color: "text-danger",
-                value: "BLIGHTED",
-              });
-            } else {
-              set(poisonDuration, get(monsterPoisonDuration));
-
-              deltaHealth.push({
-                color: "text-danger",
-                value: "POISONED",
-              });
-            }
+            deltaHealth.push({
+              color: "text-danger",
+              value: "POISONED",
+            });
           }
         }
 

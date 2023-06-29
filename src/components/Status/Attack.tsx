@@ -41,49 +41,56 @@ export function Attack() {
   return (
     <IconDisplay
       contents={
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <Popover.Header className="text-center">Attack rate details</Popover.Header>
+        <Stack className="w-100" direction="horizontal">
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <Popover.Header className="text-center">Attack rate details</Popover.Header>
 
-              <Popover.Body>
-                <DetailsTable>
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>{`${
-                      weaponValue === WEAPON_NONE ? "Base" : "Weapon"
-                    }:`}</td>
-
-                    <td>{formatMilliseconds(weaponValue.rate)}</td>
-                  </tr>
-
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Speed attribute:</td>
-
-                    <td>{`-${formatPercentage(attackRateValue)}`}</td>
-                  </tr>
-
-                  {powerBonusValue > 0 && (
+                <Popover.Body>
+                  <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>{`${
+                        weaponValue === WEAPON_NONE ? "Base" : "Weapon"
+                      }:`}</td>
 
-                      <td>{`-${formatPercentage(statisticValue)} +${formatPercentage(
-                        powerBonusValue,
-                        0
-                      )}`}</td>
+                      <td>{formatMilliseconds(weaponValue.rate)}</td>
                     </tr>
-                  )}
-                </DetailsTable>
-              </Popover.Body>
-            </Popover>
-          }
-          trigger={isShowingAttackRateDetails ? ["hover", "focus"] : []}
-        >
-          <Stack className="w-100" direction="horizontal">
-            <AttackMeter />
 
-            <FloatingText deltaType="attackRate" />
-          </Stack>
-        </OverlayTrigger>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Speed attribute:</td>
+
+                      <td>{`-${formatPercentage(statisticValue)}`}</td>
+                    </tr>
+
+                    {powerBonusValue > 0 && (
+                      <>
+                        <tr>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+
+                          <td>{`+${formatPercentage(powerBonusValue, 0)}`}</td>
+                        </tr>
+
+                        <tr>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Total speed:</td>
+
+                          <td>{`-${formatPercentage(attackRateValue)}`}</td>
+                        </tr>
+                      </>
+                    )}
+                  </DetailsTable>
+                </Popover.Body>
+              </Popover>
+            }
+            trigger={isShowingAttackRateDetails ? ["hover", "focus"] : []}
+          >
+            <div className="w-100">
+              <AttackMeter />
+            </div>
+          </OverlayTrigger>
+
+          <FloatingText deltaType="attackRate" />
+        </Stack>
       }
       Icon={IconAttackRate}
       isAnimated

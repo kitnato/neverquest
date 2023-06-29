@@ -17,7 +17,7 @@ export function MonsterStaggered() {
       contents={<MonsterStaggeredMeter />}
       Icon={IconStaggered}
       isAnimated
-      tooltip="Staggered"
+      tooltip="Stagger duration"
     />
   );
 }

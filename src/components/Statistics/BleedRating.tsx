@@ -23,8 +23,6 @@ export function BleedRating() {
   const isShowingBleed = useRecoilValue(isShowing("bleed"));
   const skillAnatomy = useRecoilValue(skills("anatomy"));
 
-  const { duration } = BLEED;
-
   useDeltaText({
     atomDelta: deltas("bleedRating"),
     atomValue: bleedRating,
@@ -69,7 +67,7 @@ export function BleedRating() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
 
-                      <td>{formatMilliseconds(duration)}</td>
+                      <td>{formatMilliseconds(BLEED.duration)}</td>
                     </tr>
                   </DetailsTable>
                 </Popover.Body>

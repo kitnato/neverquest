@@ -71,14 +71,24 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
     }
 
     if (regenerationProgress === 0) {
-      return `${label} regeneration (${regenerationAmountValue} per ${formatMilliseconds(
-        regenerationRateValue
-      )})`;
+      return (
+        <span>
+          {`${label} regeneration`}
+          <br />
+          {`${regenerationAmountValue} per ${formatMilliseconds(regenerationRateValue)}`}
+        </span>
+      );
     }
 
-    return `Regenerating ${type} (${formatMilliseconds(
-      regenerationRateValue - regenerationProgress
-    )} for ${regenerationAmountValue})`;
+    return (
+      <span>
+        {`Regenerating ${type}`}
+        <br />
+        {`${regenerationAmountValue} in ${formatMilliseconds(
+          regenerationRateValue - regenerationProgress
+        )}`}
+      </span>
+    );
   })();
 
   return (

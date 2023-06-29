@@ -52,35 +52,47 @@ export function CriticalRating() {
                 <Popover.Body>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Critical chance:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Base chance:</td>
 
-                      <td>{formatPercentage(criticalChanceValue)}</td>
+                      <td>{formatPercentage(statisticChanceValue)}</td>
                     </tr>
 
                     {powerBonusChanceValue > 0 && (
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+                      <>
+                        <tr>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
 
-                        <td>{`${formatPercentage(statisticChanceValue)} +${formatPercentage(
-                          powerBonusChanceValue
-                        )}`}</td>
-                      </tr>
+                          <td>{`+${formatPercentage(powerBonusChanceValue)}`}</td>
+                        </tr>
+
+                        <tr>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Total chance:</td>
+
+                          <td>{formatPercentage(criticalChanceValue)}</td>
+                        </tr>
+                      </>
                     )}
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Critical damage:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Base damage:</td>
 
-                      <td>{formatPercentage(criticalDamageValue)}</td>
+                      <td>{formatPercentage(statisticDamageValue)}</td>
                     </tr>
 
                     {powerBonusDamageValue > 0 && (
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+                      <>
+                        <tr>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
 
-                        <td>{`${formatPercentage(statisticDamageValue)} +${formatPercentage(
-                          powerBonusDamageValue
-                        )}`}</td>
-                      </tr>
+                          <td>{`+${formatPercentage(powerBonusDamageValue)}`}</td>
+                        </tr>
+
+                        <tr>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Total damage:</td>
+
+                          <td>{formatPercentage(criticalDamageValue)}</td>
+                        </tr>
+                      </>
                     )}
                   </DetailsTable>
                 </Popover.Body>

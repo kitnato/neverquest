@@ -82,7 +82,7 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
       ) : (
         <IconDisplay
           contents={LABEL_UNKNOWN}
-          description="There is power to be unlocked."
+          description="Unlocked by acquiring a skill."
           Icon={IconUnknown}
           tooltip={LABEL_UNKNOWN}
         />

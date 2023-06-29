@@ -14,7 +14,7 @@ export function LabelledProgressBar({
 }: {
   attached?: UIAttachment;
   disableTransitions?: boolean;
-  label: string;
+  label: ReactNode;
   sibling?: ReactNode;
   size?: UISize;
   value: number;

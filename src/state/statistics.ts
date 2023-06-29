@@ -115,7 +115,7 @@ export const criticalDamage = withStateKey("criticalDamage", (key) =>
 
 export const criticalRating = withStateKey("criticalRating", (key) =>
   selector({
-    get: ({ get }) => Math.round(get(criticalChance) * get(criticalDamage) * 100),
+    get: ({ get }) => Math.round(get(criticalChance) * get(criticalDamage) * 1000),
     key,
   })
 );
@@ -179,18 +179,6 @@ export const dodgeTotal = withStateKey("dodgeTotal", (key) =>
       }
 
       return get(dodge);
-    },
-    key,
-  })
-);
-
-export const stability = withStateKey("stability", (key) =>
-  selector({
-    get: ({ get }) => {
-      const { base, increment } = MASTERIES.stability;
-      const { rank } = get(masteries("stability"));
-
-      return getComputedStatistic({ amount: rank, base, increment });
     },
     key,
   })
@@ -341,6 +329,18 @@ export const staggerWeapon = withStateKey("staggerWeapon", (key) =>
       const { abilityChance, gearClass } = get(weapon);
 
       return gearClass === "blunt" ? abilityChance : 0;
+    },
+    key,
+  })
+);
+
+export const stability = withStateKey("stability", (key) =>
+  selector({
+    get: ({ get }) => {
+      const { base, increment } = MASTERIES.stability;
+      const { rank } = get(masteries("stability"));
+
+      return getComputedStatistic({ amount: rank, base, increment });
     },
     key,
   })

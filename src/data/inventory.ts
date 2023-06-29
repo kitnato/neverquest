@@ -224,7 +224,7 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
     Icon: IconTomeOfPower,
     item: {
       coinPrice: 500,
-      description: "Power levels grant a bonus to all attributes.",
+      description: "Grants a bonus to all attributes based on power level.",
       id: nanoid(),
       type: "tome of power",
       weight: 6,

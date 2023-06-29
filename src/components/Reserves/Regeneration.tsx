@@ -8,17 +8,8 @@ import { RESERVES } from "@neverquest/data/reserves";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
-import {
-  healthRegenerationAmount,
-  healthRegenerationRate,
-  staminaRegenerationAmount,
-  staminaRegenerationRate,
-} from "@neverquest/state/reserves";
-import {
-  powerBonus,
-  rawAttributeStatistic,
-  reserveRegenerationRate,
-} from "@neverquest/state/statistics";
+import { healthRegenerationRate, staminaRegenerationRate } from "@neverquest/state/reserves";
+import { powerBonus, rawAttributeStatistic } from "@neverquest/state/statistics";
 import type { Reserve } from "@neverquest/types/unions";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
@@ -32,10 +23,6 @@ export function Regeneration({ type }: { type: Reserve }) {
   const powerBonusRateValue = useRecoilValue(powerBonus("vigor"));
   const statisticAmountValue = useRecoilValue(rawAttributeStatistic("fortitude"));
   const statisticRateValue = useRecoilValue(rawAttributeStatistic("vigor"));
-  const regenerationAmountValue = useRecoilValue(
-    isHealth ? healthRegenerationAmount : staminaRegenerationAmount
-  );
-  const reserveRegenerationRateValue = useRecoilValue(reserveRegenerationRate);
 
   useDeltaText({
     atomDelta: deltas(regenerationDelta),
@@ -61,16 +48,14 @@ export function Regeneration({ type }: { type: Reserve }) {
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Vigor attribute:</td>
 
-                  <td>{`-${formatPercentage(reserveRegenerationRateValue)}`}</td>
+                  <td>{`-${formatPercentage(statisticRateValue)}`}</td>
                 </tr>
 
                 {powerBonusRateValue > 0 && (
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
 
-                    <td>{`-${formatPercentage(statisticRateValue)} +${formatPercentage(
-                      powerBonusRateValue
-                    )}`}</td>
+                    <td>{`+${formatPercentage(powerBonusRateValue)}`}</td>
                   </tr>
                 )}
 
@@ -83,16 +68,14 @@ export function Regeneration({ type }: { type: Reserve }) {
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Fortitude attribute:</td>
 
-                  <td>{`+${regenerationAmountValue - baseRegenerationAmount}`}</td>
+                  <td>{`+${statisticAmountValue - baseRegenerationAmount}`}</td>
                 </tr>
 
                 {powerBonusAmountValue > 0 && (
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
 
-                    <td>{`${statisticAmountValue - baseRegenerationAmount} +${formatPercentage(
-                      powerBonusAmountValue
-                    )}`}</td>
+                    <td>{`+${formatPercentage(powerBonusAmountValue)}`}</td>
                   </tr>
                 )}
               </DetailsTable>

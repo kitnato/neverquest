@@ -44,17 +44,14 @@ export function LootBonus() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Luck attribute:</td>
 
-                      <td>{`+${formatPercentage(lootBonusValue)} loot amount`}</td>
+                      <td>{`+${formatPercentage(statisticValue)} loot amount`}</td>
                     </tr>
 
                     {powerBonusValue > 0 && (
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
 
-                        <td>{`${formatPercentage(statisticValue)} +${formatPercentage(
-                          powerBonusValue,
-                          0
-                        )}`}</td>
+                        <td>{`+${formatPercentage(powerBonusValue, 0)}`}</td>
                       </tr>
                     )}
                   </DetailsTable>

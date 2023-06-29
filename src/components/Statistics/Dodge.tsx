@@ -48,18 +48,23 @@ export function Dodge() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Agility attribute:</td>
 
-                      <td>{`${formatPercentage(dodgeValue)} dodge chance`}</td>
+                      <td>{`${formatPercentage(statisticValue)} dodge chance`}</td>
                     </tr>
 
                     {powerBonusValue > 0 && (
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+                      <>
+                        <tr>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
 
-                        <td>{`${formatPercentage(statisticValue)} +${formatPercentage(
-                          powerBonusValue,
-                          0
-                        )}`}</td>
-                      </tr>
+                          <td>{`+${formatPercentage(powerBonusValue, 0)}`}</td>
+                        </tr>
+
+                        <tr>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Total agility:</td>
+
+                          <td>{`${formatPercentage(dodgeValue)} dodge chance`}</td>
+                        </tr>
+                      </>
                     )}
 
                     <tr>

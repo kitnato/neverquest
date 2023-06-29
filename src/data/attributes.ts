@@ -71,7 +71,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
   },
   speed: {
     base: 0,
-    description: "Increases attack rate.",
+    description: "Reduces attack rate.",
     Icon: IconPlaceholder,
     increment: 0.05,
     isUnlocked: true,
@@ -81,7 +81,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
   },
   strength: {
     base: 0,
-    description: "Increases base attack damage.",
+    description: "Increases damage.",
     Icon: IconPlaceholder,
     increment: 2,
     isUnlocked: true,
@@ -90,7 +90,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
   },
   vigor: {
     base: 0,
-    description: "Increases health & stamina regeneration rate.",
+    description: "Reduces health & stamina regeneration rate.",
     Icon: IconPlaceholder,
     increment: 0.05,
     isUnlocked: false,

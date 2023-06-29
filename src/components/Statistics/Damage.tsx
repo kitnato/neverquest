@@ -52,15 +52,23 @@ export function Damage() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Strength attribute:</td>
 
-                      <td>{`+${damageValue}`}</td>
+                      <td>{`+${statisticValue}`}</td>
                     </tr>
 
                     {powerBonusValue > 0 && (
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+                      <>
+                        <tr>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
 
-                        <td>{`${statisticValue} +${formatPercentage(powerBonusValue)}`}</td>
-                      </tr>
+                          <td>{`+${formatPercentage(powerBonusValue)}`}</td>
+                        </tr>
+
+                        <tr>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Total strength:</td>
+
+                          <td>{`+${damageValue}`}</td>
+                        </tr>
+                      </>
                     )}
                   </DetailsTable>
                 </Popover.Body>

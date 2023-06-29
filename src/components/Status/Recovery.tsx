@@ -34,46 +34,48 @@ export function Recovery() {
   return (
     <IconDisplay
       contents={
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <Popover.Header className="text-center">Recovery details</Popover.Header>
+        <Stack className="w-100" direction="horizontal">
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <Popover.Header className="text-center">Recovery details</Popover.Header>
 
-              <Popover.Body>
-                <DetailsTable>
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Base rate:</td>
-
-                    <td>{formatMilliseconds(RECOVERY_RATE)}</td>
-                  </tr>
-
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Resilience attribute:</td>
-
-                    <td>{`-${formatMilliseconds(RECOVERY_RATE - recoveryRateValue)}`}</td>
-                  </tr>
-
-                  {powerBonusValue > 0 && (
+                <Popover.Body>
+                  <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Base rate:</td>
 
-                      <td>{`-${formatPercentage(
-                        RECOVERY_RATE - statisticValue
-                      )} +${formatPercentage(powerBonusValue)}`}</td>
+                      <td>{formatMilliseconds(RECOVERY_RATE)}</td>
                     </tr>
-                  )}
-                </DetailsTable>
-              </Popover.Body>
-            </Popover>
-          }
-          trigger={isShowingRecoveryDetails ? ["hover", "focus"] : []}
-        >
-          <Stack className="w-100" direction="horizontal">
-            <RecoveryMeter />
 
-            <FloatingText deltaType="recoveryRate" />
-          </Stack>
-        </OverlayTrigger>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Resilience attribute:</td>
+
+                      <td>{`-${formatMilliseconds(RECOVERY_RATE - recoveryRateValue)}`}</td>
+                    </tr>
+
+                    {powerBonusValue > 0 && (
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+
+                        <td>{`-${formatMilliseconds(
+                          RECOVERY_RATE - statisticValue
+                        )} +${formatPercentage(powerBonusValue)}`}</td>
+                      </tr>
+                    )}
+                  </DetailsTable>
+                </Popover.Body>
+              </Popover>
+            }
+            trigger={isShowingRecoveryDetails ? ["hover", "focus"] : []}
+          >
+            <div className="w-100">
+              <RecoveryMeter />
+            </div>
+          </OverlayTrigger>
+
+          <FloatingText deltaType="recoveryRate" />
+        </Stack>
       }
       Icon={IconRecovery}
       isAnimated

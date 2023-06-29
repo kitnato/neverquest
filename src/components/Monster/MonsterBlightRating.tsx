@@ -3,8 +3,10 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { IconImage } from "@neverquest/components/IconImage";
 import { ReactComponent as IconBlightRating } from "@neverquest/icons/blight-rating.svg";
-import { monsterBlightChance, monsterPoisonChance } from "@neverquest/state/monster";
+import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
+import { monsterBlightChance } from "@neverquest/state/monster";
 import { blightIncrement, poisonDuration } from "@neverquest/state/reserves";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
@@ -13,7 +15,6 @@ export function MonsterBlightRating() {
   const blightIncrementValue = useRecoilValue(blightIncrement);
   const poisonDurationValue = useRecoilValue(poisonDuration);
   const monsterBlightChanceValue = useRecoilValue(monsterBlightChance);
-  const monsterPoisonChanceValue = useRecoilValue(monsterPoisonChance);
 
   if (monsterBlightChanceValue === 0) {
     return null;
@@ -30,21 +31,18 @@ export function MonsterBlightRating() {
               <Popover.Body>
                 <DetailsTable>
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance when poisoned:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance once poisoned:</td>
 
                     <td>{formatPercentage(monsterBlightChanceValue)}</td>
                   </tr>
 
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance of affliction:</td>
-
-                    <td>{formatPercentage(monsterBlightChanceValue * monsterPoisonChanceValue)}</td>
-                  </tr>
-
-                  <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
 
-                    <td>{`-${blightIncrementValue} stamina per affliction`}</td>
+                    <td>
+                      <IconImage Icon={IconStamina} size="tiny" />
+                      &nbsp;{`-${blightIncrementValue}`}
+                    </td>
                   </tr>
                 </DetailsTable>
               </Popover.Body>

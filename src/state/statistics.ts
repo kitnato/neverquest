@@ -2,7 +2,7 @@ import { selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { MASTERIES } from "@neverquest/data/masteries";
-import { BLEED } from "@neverquest/data/statistics";
+import { BLEED, RECOVERY_RATE } from "@neverquest/data/statistics";
 import { withStateKey } from "@neverquest/state";
 import { attributes, level } from "@neverquest/state/attributes";
 import { armor, hasItem, shield, weapon } from "@neverquest/state/inventory";
@@ -267,10 +267,18 @@ export const rawAttributeStatistic = withStateKey("rawAttributeStatistic", (key)
 
 export const recoveryRate = withStateKey("recoveryRate", (key) =>
   selector({
-    get: ({ get }) => {
-      const total = get(rawAttributeStatistic("resilience"));
+    get: ({ get }) => RECOVERY_RATE - RECOVERY_RATE * get(recoveryRateReduction),
+    key,
+  })
+);
 
-      return Math.round(total - total * get(powerBonus("resilience")));
+export const recoveryRateReduction = withStateKey("parryDamage", (key) =>
+  selector({
+    get: ({ get }) => {
+      const { base, increment } = MASTERIES.resilience;
+      const { isUnlocked, rank } = get(masteries("resilience"));
+
+      return isUnlocked ? getComputedStatistic({ amount: rank, base, increment }) : 0;
     },
     key,
   })
@@ -346,11 +354,11 @@ export const stability = withStateKey("stability", (key) =>
   })
 );
 
-export const tenacity = withStateKey("tenacity", (key) =>
+export const resilience = withStateKey("resilience", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, increment } = MASTERIES.tenacity;
-      const { rank } = get(masteries("tenacity"));
+      const { base, increment } = MASTERIES.resilience;
+      const { rank } = get(masteries("resilience"));
 
       return getComputedStatistic({ amount: rank, base, increment });
     },

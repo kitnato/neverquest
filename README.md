@@ -96,10 +96,6 @@ Affects the amount of loot dropped by monsters. Must be included with a special 
 
 Affects [critical damage](#critical-damage). Required skill: [Assassination](#assassination).
 
-#### Resilience
-
-Affects [rate of recovery](#recovery-rate) after being struck.
-
 #### Speed
 
 Affects [rate of attack](#attack-rate).
@@ -190,7 +186,7 @@ Amount of damage that is discarded from the total when defending. This is determ
 
 #### Recovery rate
 
-Time until character recovers from a monster's successful attack. This duration can be decreased with the [Resilience](#resilience) attribute.
+Time until character recovers from a monster's successful attack. This duration can be decreased with the [resilience](#resilience) mastery.
 
 #### Stagger chance
 
@@ -434,7 +430,7 @@ Chance to [parry](#parry). Required skill: [Escrime](#escrime).
 
 #### Armor
 
-Armor provides [protection](#protection). When struck by an attack, the protection value is subtracted from total damage received.
+Armor provides [protection](#protection). When defending, the protection value is subtracted from total damage received.
 
 Each of the following armor classes increases the protection value and adds certain modifiers.
 
@@ -559,13 +555,13 @@ Progress is gained by using [blunt weapons](#blunt-weapon). Each rank increases 
 
 Required skill: [Shieldcraft](#shieldcraft).
 
-Progress is gained by successfully [blocking](#block) with [shields](#shields). Each rank increases the chance that [stamina](#stamina) is not consumed when blocking.
+Progress is gained by successfully [blocking](#block) with [shields](#shields). Each rank reduces the [stamina](#stamina) cost of blocking.
 
-### Tenacity
+### Resilience
 
 Required skill: [Armorcraft](#armorcraft).
 
-Progress is gained by being struck while wearing [armor](#armor). Each rank increases the chance that [recovery](#recovery-rate) is not triggered when struck.
+Progress is gained when defending. Each rank reduces [recovery](#recovery-rate) .
 
 ## Skills
 
@@ -607,7 +603,7 @@ Unlocks [bleed](#bleed) when using [piercing](#piercing-weapon) weapons. Also un
 
 ##### Armorcraft
 
-Allows the use and knowledge of [plate](#plate-armor) armor. Also unlocks the [Tenacity](#tenacity) mastery and the [deflection](#deflection) ability.
+Allows the use and knowledge of [plate](#plate-armor) armor. Also unlocks the [resilience](#resilience) mastery and the [deflection](#deflection) ability.
 
 ##### Assassination
 

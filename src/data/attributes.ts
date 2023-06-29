@@ -1,5 +1,4 @@
 import { RESERVES } from "@neverquest/data/reserves";
-import { RECOVERY_RATE } from "@neverquest/data/statistics";
 import { ReactComponent as IconPlaceholder } from "@neverquest/icons/placeholder.svg";
 import type { AttributeData } from "@neverquest/types";
 import type { Attribute } from "@neverquest/types/unions";
@@ -59,16 +58,6 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
     isUnlocked: false,
     powerBonus: 0.003,
   },
-  resilience: {
-    base: RECOVERY_RATE,
-    description: "Increases recovery rate.",
-    Icon: IconPlaceholder,
-    increment: -150,
-    isUnlocked: true,
-    maximum: 150,
-    powerBonus: 0.005,
-    shows: "recoveryDetails",
-  },
   speed: {
     base: 0,
     description: "Reduces attack rate.",
@@ -113,7 +102,6 @@ export const ATTRIBUTES_ORDER: Attribute[] = [
   "endurance",
   "strength",
   "speed",
-  "resilience",
   "vigor",
   "fortitude",
   "dexterity",

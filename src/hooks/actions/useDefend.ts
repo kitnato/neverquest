@@ -33,9 +33,9 @@ import {
   parryDamage,
   protection,
   recoveryRate,
+  resilience,
   stability,
   staggerDuration,
-  tenacity,
 } from "@neverquest/state/statistics";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import { animateElement } from "@neverquest/utilities/animateElement";
@@ -175,8 +175,6 @@ export function useDefend() {
               },
             ];
 
-            increaseMastery("stability");
-
             // If Shieldcraft skill is acquired, check if a free block occurs, otherwise spend stamina blocking.
             if (get(skills("shieldcraft")) && Math.random() <= get(stability)) {
               deltaStamina.push({
@@ -186,6 +184,8 @@ export function useDefend() {
             } else {
               changeStamina({ value: -staminaCost });
             }
+
+            increaseMastery("stability");
 
             const hasStaggered =
               get(skills("traumatology")) && Math.random() <= get(shield).stagger;
@@ -233,14 +233,13 @@ export function useDefend() {
           ];
         }
 
-        increaseMastery("tenacity");
-
-        // If Tenacity hasn't been triggered, activate recovery.
-        if (!(get(skills("armorcraft")) && Math.random() <= get(tenacity))) {
+        // If Resilience hasn't been triggered, activate recovery.
+        if (!(get(skills("armorcraft")) && Math.random() <= get(resilience))) {
           set(isShowing("recovery"), true);
-
           set(recoveryDuration, get(recoveryRate));
         }
+
+        increaseMastery("resilience");
 
         // If already poisoned, check if blighting has occurred and if it's been deflected.
         if (get(poisonDuration) > 0 && Math.random() <= get(monsterBlightChance)) {

@@ -5,7 +5,6 @@ export type Attribute =
   | "fortitude"
   | "luck"
   | "perception"
-  | "resilience"
   | "speed"
   | "strength"
   | "vigor"
@@ -54,20 +53,20 @@ export type Delta =
   | "progress"
   | "protection"
   | "recoveryRate"
+  | "resilience"
   | "scrap"
   | "scrapLoot"
   | "stability"
   | "stage"
   | "staggerRating"
   | "stamina"
-  | "staminaRegenerationRate"
-  | "tenacity";
+  | "staminaRegenerationRate";
 
 export type Gear = "armor" | "shield" | "weapon";
 
 export type Location = "caravan" | "wilderness";
 
-export type Mastery = "cruelty" | "finesse" | "might" | "stability" | "tenacity";
+export type Mastery = "cruelty" | "finesse" | "might" | "resilience" | "stability";
 
 export type Reserve = "health" | "stamina";
 
@@ -101,7 +100,6 @@ export const SHOWING_TYPES = [
   "parry",
   "protection",
   "recovery",
-  "recoveryDetails",
   "reserveDetails",
   "scrap",
   "shield",
@@ -110,7 +108,6 @@ export const SHOWING_TYPES = [
   "stamina",
   "staminaDetails",
   "statistics",
-  "tenacity",
   "weapon",
   "weight",
   "wildernessStatus",
@@ -247,6 +244,7 @@ export type StateKey =
   | "recoveryRate"
   | "reserveRegenerationAmount"
   | "reserveRegenerationRate"
+  | "resilience"
   | "scrap"
   | "scrapLoot"
   | "shield"
@@ -268,7 +266,6 @@ export type StateKey =
   | "staminaRegenerationDuration"
   | "staminaRegenerationRate"
   | "statusElement"
-  | "tenacity"
   | "weapon"
   | "wilderness"
   | "wildernesses";

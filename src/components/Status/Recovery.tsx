@@ -10,16 +10,15 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconRecovery } from "@neverquest/icons/recovery.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
-import { powerBonus, rawAttributeStatistic, recoveryRate } from "@neverquest/state/statistics";
+import { masteries } from "@neverquest/state/masteries";
+import { recoveryRate, recoveryRateReduction } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Recovery() {
   const isShowingRecovery = useRecoilValue(isShowing("recovery"));
-  const isShowingRecoveryDetails = useRecoilValue(isShowing("recoveryDetails"));
-  const recoveryRateValue = useRecoilValue(recoveryRate);
-  const powerBonusValue = useRecoilValue(powerBonus("resilience"));
-  const statisticValue = useRecoilValue(rawAttributeStatistic("resilience"));
+  const { isUnlocked } = useRecoilValue(masteries("resilience"));
+  const recoveryRateReductionValue = useRecoilValue(recoveryRateReduction);
 
   useDeltaText({
     atomDelta: deltas("recoveryRate"),
@@ -49,25 +48,15 @@ export function Recovery() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Resilience attribute:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Resilience mastery:</td>
 
-                      <td>{`-${formatMilliseconds(RECOVERY_RATE - recoveryRateValue)}`}</td>
+                      <td>{`-${formatPercentage(recoveryRateReductionValue)}`}</td>
                     </tr>
-
-                    {powerBonusValue > 0 && (
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
-
-                        <td>{`-${formatMilliseconds(
-                          RECOVERY_RATE - statisticValue
-                        )} +${formatPercentage(powerBonusValue)}`}</td>
-                      </tr>
-                    )}
                   </DetailsTable>
                 </Popover.Body>
               </Popover>
             }
-            trigger={isShowingRecoveryDetails ? ["hover", "focus"] : []}
+            trigger={isUnlocked ? ["hover", "focus"] : []}
           >
             <div className="w-100">
               <RecoveryMeter />

@@ -28,8 +28,8 @@ export const SKILLS: Record<
     description: "Unlocks the use of plate armor, chance to deflect ailments & improves recovery.",
     Icon: IconPlaceholder,
     requiredLevel: 45,
-    shows: ["deflection", "tenacity"],
-    unlocksMasteries: ["tenacity"],
+    shows: ["deflection"],
+    unlocksMasteries: ["resilience"],
   },
   assassination: {
     coinPrice: 35,

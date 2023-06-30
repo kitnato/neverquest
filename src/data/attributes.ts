@@ -70,7 +70,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
   },
   strength: {
     base: 0,
-    description: "Increases damage.",
+    description: "Increases attack damage.",
     Icon: IconPlaceholder,
     increment: 2,
     isUnlocked: true,

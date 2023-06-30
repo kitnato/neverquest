@@ -7,13 +7,13 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { ReactComponent as IconBlightRating } from "@neverquest/icons/blight-rating.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { monsterBlightChance } from "@neverquest/state/monster";
-import { blightIncrement, poisonDuration } from "@neverquest/state/reserves";
+import { blightIncrement, isPoisoned } from "@neverquest/state/reserves";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function MonsterBlightRating() {
   const blightIncrementValue = useRecoilValue(blightIncrement);
-  const poisonDurationValue = useRecoilValue(poisonDuration);
+  const isPoisonedValue = useRecoilValue(isPoisoned);
   const monsterBlightChanceValue = useRecoilValue(monsterBlightChance);
 
   if (monsterBlightChanceValue === 0) {
@@ -50,7 +50,7 @@ export function MonsterBlightRating() {
           }
         >
           <span>
-            {poisonDurationValue > 0
+            {isPoisonedValue
               ? Math.round(monsterBlightChanceValue * blightIncrementValue * 100)
               : LABEL_EMPTY}
           </span>

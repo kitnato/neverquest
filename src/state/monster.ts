@@ -16,6 +16,13 @@ import { getDamagePerRate, getGrowthSigmoid } from "@neverquest/utilities/getter
 
 // SELECTORS
 
+export const isMonsterBleeding = withStateKey("isMonsterBleeding", (key) =>
+  selector({
+    get: ({ get }) => get(monsterBleedingDuration) > 0,
+    key,
+  })
+);
+
 export const isMonsterDead = withStateKey("isMonsterDead", (key) =>
   selector({
     get: ({ get }) => get(isStageStarted) && get(monsterHealth) === 0,

@@ -24,14 +24,17 @@ export function MonsterAttackMeter() {
   const defend = useDefend();
 
   useAnimation((delta) => {
-    let newDuration = monsterAttackDurationValue - delta;
+    setMonsterAttackDuration((current) => {
+      const value = current - delta;
 
-    if (newDuration <= 0) {
-      defend();
-      newDuration = monsterAttackRateValue;
-    }
+      if (value <= 0) {
+        defend();
 
-    setMonsterAttackDuration(newDuration);
+        return monsterAttackRateValue;
+      }
+
+      return value;
+    });
   }, !isAttackingValue || isMonsterDeadValue || isMonsterStaggeredValue);
 
   return (

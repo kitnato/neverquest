@@ -16,7 +16,7 @@ export const SKILLS: Record<
   }
 > = {
   anatomy: {
-    coinPrice: 65,
+    coinPrice: 120,
     description: "Unlocks the ability to inflict bleeding.",
     Icon: IconPlaceholder,
     requiredLevel: 40,
@@ -24,7 +24,7 @@ export const SKILLS: Record<
     unlocksMasteries: ["cruelty"],
   },
   armorcraft: {
-    coinPrice: 65,
+    coinPrice: 135,
     description: "Unlocks the use of plate armor, chance to deflect ailments & improves recovery.",
     Icon: IconPlaceholder,
     requiredLevel: 45,
@@ -32,7 +32,7 @@ export const SKILLS: Record<
     unlocksMasteries: ["resilience"],
   },
   assassination: {
-    coinPrice: 35,
+    coinPrice: 45,
     description: "Unlocks the ability to deal critical strikes.",
     Icon: IconPlaceholder,
     requiredLevel: 15,
@@ -40,7 +40,7 @@ export const SKILLS: Record<
     unlocksAttributes: ["dexterity", "perception"],
   },
   calisthenics: {
-    coinPrice: 35,
+    coinPrice: 30,
     description: "Unlocks attributes that improve health & stamina regeneration.",
     Icon: IconPlaceholder,
     requiredLevel: 10,
@@ -48,7 +48,7 @@ export const SKILLS: Record<
     unlocksAttributes: ["fortitude", "vigor"],
   },
   escrime: {
-    coinPrice: 45,
+    coinPrice: 75,
     description: "Unlocks the ability to parry attacks, partially reflecting damage.",
     Icon: IconPlaceholder,
     requiredLevel: 25,
@@ -56,7 +56,7 @@ export const SKILLS: Record<
     unlocksMasteries: ["finesse"],
   },
   evasion: {
-    coinPrice: 55,
+    coinPrice: 105,
     description: "Unlocks the ability to dodge attacks, negating all damage.",
     Icon: IconPlaceholder,
     requiredLevel: 35,
@@ -64,7 +64,7 @@ export const SKILLS: Record<
     unlocksAttributes: ["agility"],
   },
   shieldcraft: {
-    coinPrice: 55,
+    coinPrice: 90,
     description: "Unlocks the use of tower shields & stabilizes blocking.",
     Icon: IconPlaceholder,
     requiredLevel: 30,
@@ -72,7 +72,7 @@ export const SKILLS: Record<
     unlocksMasteries: ["stability"],
   },
   traumatology: {
-    coinPrice: 45,
+    coinPrice: 60,
     description: "Unlocks the ability to stagger monsters.",
     Icon: IconPlaceholder,
     requiredLevel: 20,

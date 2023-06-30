@@ -14,7 +14,6 @@ export function MonsterStaggeredMeter() {
   const isMonsterStaggeredValue = useRecoilValue(isMonsterStaggered);
   const staggerDurationValue = useRecoilValue(staggerDuration);
 
-  const isStaggered = monsterStaggerDurationValue > 0;
   const staggeringProgress = staggerDurationValue - monsterStaggerDurationValue;
 
   useAnimation((delta) => {
@@ -32,8 +31,8 @@ export function MonsterStaggeredMeter() {
   return (
     <LabelledProgressBar
       disableTransitions
-      label={isStaggered ? formatMilliseconds(staggeringProgress) : LABEL_EMPTY}
-      value={isStaggered ? (staggeringProgress / staggerDurationValue) * 100 : 0}
+      label={isMonsterStaggeredValue ? formatMilliseconds(staggeringProgress) : LABEL_EMPTY}
+      value={isMonsterStaggeredValue ? (staggeringProgress / staggerDurationValue) * 100 : 0}
       variant="secondary"
     />
   );

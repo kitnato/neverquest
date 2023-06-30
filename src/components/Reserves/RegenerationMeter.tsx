@@ -48,14 +48,17 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
     regenerationDurationValue === 0 ? 0 : regenerationRateValue - regenerationDurationValue;
 
   useAnimation((delta) => {
-    let newDuration = regenerationDurationValue - delta;
+    setRegenerationDuration((current) => {
+      const value = current - delta;
 
-    if (newDuration <= 0) {
-      changeReserve({ value: regenerationAmountValue });
-      newDuration = regenerationRateValue;
-    }
+      if (value <= 0) {
+        changeReserve({ value: regenerationAmountValue });
 
-    setRegenerationDuration(newDuration);
+        return regenerationRateValue;
+      }
+
+      return value;
+    });
   }, isReserveAtMaximum || isRecoveringValue);
 
   // Needed to catch attribute resets and poison/blight penalties.

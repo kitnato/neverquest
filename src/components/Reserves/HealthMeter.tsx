@@ -8,6 +8,7 @@ import {
   health,
   healthMaximum,
   healthMaximumTotal,
+  isPoisoned,
   poisonDuration,
 } from "@neverquest/state/reserves";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
@@ -17,10 +18,10 @@ export function HealthMeter() {
   const healthValue = useRecoilValue(health);
   const healthMaximumValue = useRecoilValue(healthMaximum);
   const healthMaximumTotalValue = useRecoilValue(healthMaximumTotal);
+  const isPoisonedValue = useRecoilValue(isPoisoned);
   const resetHealth = useResetRecoilState(health);
 
   const penalty = healthMaximumValue - healthMaximumTotalValue;
-  const isPoisoned = poisonDurationValue > 0;
 
   useAnimation((delta) => {
     setPoisonDuration((current) => {
@@ -32,7 +33,7 @@ export function HealthMeter() {
 
       return value;
     });
-  }, !isPoisoned);
+  }, !isPoisonedValue);
 
   useEffect(() => {
     if (healthValue > healthMaximumTotalValue) {
@@ -44,12 +45,12 @@ export function HealthMeter() {
     <LabelledProgressBar
       attached="below"
       label={`${healthValue}/${healthMaximumTotalValue}${
-        isPoisoned
+        isPoisonedValue
           ? ` (${healthMaximumValue}) Poison: ${formatMilliseconds(poisonDurationValue)}`
           : ""
       }`}
       sibling={
-        isPoisoned ? (
+        isPoisonedValue ? (
           <ProgressBar animated key={2} now={penalty} striped variant="secondary" />
         ) : null
       }

@@ -22,7 +22,7 @@ import {
   monsterPoisonDuration,
   monsterStaggerDuration,
 } from "@neverquest/state/monster";
-import { blight, poisonDuration } from "@neverquest/state/reserves";
+import { blight, isPoisoned, poisonDuration } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
 import {
   block,
@@ -242,7 +242,7 @@ export function useDefend() {
         increaseMastery("resilience");
 
         // If already poisoned, check if blighting has occurred and if it's been deflected.
-        if (get(poisonDuration) > 0 && Math.random() <= get(monsterBlightChance)) {
+        if (get(isPoisoned) && Math.random() <= get(monsterBlightChance)) {
           const hasDeflected = get(skills("armorcraft")) && Math.random() <= get(deflection);
 
           if (hasDeflected) {

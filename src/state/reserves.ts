@@ -88,6 +88,13 @@ export const isHealthLow = withStateKey("isHealthLow", (key) =>
   })
 );
 
+export const isPoisoned = withStateKey("isPoisoned", (key) =>
+  selector({
+    get: ({ get }) => get(poisonDuration) > 0,
+    key,
+  })
+);
+
 export const isStaminaAtMaximum = withStateKey("isStaminaAtMaximum", (key) =>
   selector({
     get: ({ get }) => get(stamina) >= get(staminaMaximumTotal),

@@ -244,6 +244,7 @@ export type StateKey =
   | "rawAttributeStatistic"
   | "recoveryDuration"
   | "recoveryRate"
+  | "recoveryRateReduction"
   | "reserveRegenerationAmount"
   | "reserveRegenerationRate"
   | "resilience"

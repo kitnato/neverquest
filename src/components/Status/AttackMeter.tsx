@@ -27,17 +27,15 @@ export function AttackMeter() {
   const attack = useAttack();
 
   useAnimation((delta) => {
-    setAttackDuration((current) => {
-      const value = current - delta;
+    const value = attackDurationValue - delta;
 
-      if (value <= 0) {
-        attack();
+    if (value <= 0) {
+      attack();
 
-        return attackRateTotalValue;
-      }
-
-      return value;
-    });
+      setAttackDuration(attackRateTotalValue);
+    } else {
+      setAttackDuration(value);
+    }
   }, !canAttackOrParryValue || !isAttackingValue || isLootingValue || isMonsterDeadValue || isRecoveringValue);
 
   return (

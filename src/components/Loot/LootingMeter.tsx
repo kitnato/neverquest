@@ -17,17 +17,15 @@ export function LootingMeter() {
   const lootingProgress = lootingRateValue - lootingDurationValue;
 
   useAnimation((delta) => {
-    setLootingDuration((current) => {
-      const value = current - delta;
+    const value = lootingDurationValue - delta;
 
-      if (value <= 0) {
-        progression();
+    if (value <= 0) {
+      progression();
 
-        return 0;
-      }
-
-      return value;
-    });
+      setLootingDuration(0);
+    } else {
+      setLootingDuration(value);
+    }
   }, !isLootingValue);
 
   return (

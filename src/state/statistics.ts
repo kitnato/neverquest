@@ -272,7 +272,7 @@ export const recoveryRate = withStateKey("recoveryRate", (key) =>
   })
 );
 
-export const recoveryRateReduction = withStateKey("parryDamage", (key) =>
+export const recoveryRateReduction = withStateKey("recoveryRateReduction", (key) =>
   selector({
     get: ({ get }) => {
       const { base, increment } = MASTERIES.resilience;

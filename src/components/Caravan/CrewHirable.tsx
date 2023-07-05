@@ -71,7 +71,7 @@ export function CrewHirable({ type }: { type: CrewMember }) {
       contents={LABEL_UNKNOWN}
       description={`Unlocks at stage ${requiredStage}.`}
       Icon={IconUnknown}
-      tooltip={LABEL_UNKNOWN}
+      tooltip="Caravan crew"
     />
   );
 }

@@ -42,6 +42,7 @@ export function MonsterBleedingMeter() {
         },
         value: -bleedingDamage,
       });
+
       resetMonsterBleedingDelta();
     } else {
       setMonsterBleedingDelta(newDelta);

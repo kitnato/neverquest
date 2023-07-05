@@ -23,19 +23,20 @@ export function MonsterAttackMeter() {
 
   const defend = useDefend();
 
-  useAnimation((delta) => {
-    setMonsterAttackDuration((current) => {
-      const value = current - delta;
+  useAnimation(
+    (delta) => {
+      const value = monsterAttackDurationValue - delta;
 
       if (value <= 0) {
         defend();
 
-        return monsterAttackRateValue;
+        setMonsterAttackDuration(monsterAttackRateValue);
+      } else {
+        setMonsterAttackDuration(value);
       }
-
-      return value;
-    });
-  }, !isAttackingValue || isMonsterDeadValue || isMonsterStaggeredValue);
+    },
+    !isAttackingValue || isMonsterDeadValue || isMonsterStaggeredValue,
+  );
 
   return (
     <LabelledProgressBar

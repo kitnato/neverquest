@@ -39,7 +39,7 @@ export function TrainableSkill({ type }: { type: Skill }) {
           contents={LABEL_UNKNOWN}
           description={`Unlocks at power level ${requiredLevel}.`}
           Icon={IconUnknown}
-          tooltip={LABEL_UNKNOWN}
+          tooltip="Skill"
         />
       )}
     </div>

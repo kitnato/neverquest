@@ -5,9 +5,10 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { MASTERIES } from "@neverquest/data/masteries";
+import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { isMasteryAtMaximum, masteries, masteryCost } from "@neverquest/state/masteries";
 import type { Mastery } from "@neverquest/types/unions";
-import { LABEL_AT_MAXIMUM } from "@neverquest/utilities/constants";
+import { LABEL_AT_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function MasteryDisplay({ type }: { type: Mastery }) {
@@ -19,11 +20,7 @@ export function MasteryDisplay({ type }: { type: Mastery }) {
   const label = isMasteryAtMaximumValue ? LABEL_AT_MAXIMUM : `${progress}/${masteryCostValue}`;
   const value = isMasteryAtMaximumValue ? 100 : (progress / masteryCostValue) * 100;
 
-  if (!isUnlocked) {
-    return null;
-  }
-
-  return (
+  return isUnlocked ? (
     <IconDisplay
       contents={
         <Stack className="w-100" direction="horizontal">
@@ -39,6 +36,13 @@ export function MasteryDisplay({ type }: { type: Mastery }) {
       description={description}
       Icon={Icon}
       tooltip={capitalizeAll(type)}
+    />
+  ) : (
+    <IconDisplay
+      contents={LABEL_UNKNOWN}
+      description="Unlocked by acquiring a skill."
+      Icon={IconUnknown}
+      tooltip="Mastery"
     />
   );
 }

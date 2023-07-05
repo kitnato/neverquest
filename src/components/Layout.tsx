@@ -20,7 +20,7 @@ export function Layout() {
 
   return (
     <>
-      <Row>
+      <Row style={{ marginBottom: 32 }}>
         <Col>
           <Stack gap={3}>
             <Location />

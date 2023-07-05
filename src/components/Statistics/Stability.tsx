@@ -37,7 +37,7 @@ export function Stability() {
       }
       Icon={IconStability}
       isAnimated
-      tooltip="Chance of 0-stamina block"
+      tooltip="0-stamina block chance"
     />
   );
 }

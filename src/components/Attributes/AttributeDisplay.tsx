@@ -43,7 +43,7 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       {isUnlocked ? (
         <>
-          <IconDisplay contents={name} description={description} Icon={Icon} tooltip={name} />
+          <IconDisplay contents={name} description={description} Icon={Icon} tooltip="Attribute" />
 
           <Stack direction="horizontal" gap={3}>
             <span>{points}</span>
@@ -84,7 +84,7 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
           contents={LABEL_UNKNOWN}
           description="Unlocked by acquiring a skill."
           Icon={IconUnknown}
-          tooltip={LABEL_UNKNOWN}
+          tooltip="Attribute"
         />
       )}
     </div>

@@ -3,9 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { ReactComponent as IconBlightRating } from "@neverquest/icons/blight-rating.svg";
-import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { monsterBlightChance } from "@neverquest/state/monster";
 import { blightIncrement, isPoisoned } from "@neverquest/state/reserves";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
@@ -31,7 +29,7 @@ export function MonsterBlightRating() {
               <Popover.Body>
                 <DetailsTable>
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance once poisoned:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
 
                     <td>{formatPercentage(monsterBlightChanceValue)}</td>
                   </tr>
@@ -39,10 +37,7 @@ export function MonsterBlightRating() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
 
-                    <td>
-                      <IconImage Icon={IconStamina} size="tiny" />
-                      &nbsp;{`-${blightIncrementValue}`}
-                    </td>
+                    <td>{`-${blightIncrementValue} stamina`}</td>
                   </tr>
                 </DetailsTable>
               </Popover.Body>

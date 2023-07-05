@@ -5,7 +5,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconLuck } from "@neverquest/icons/luck.svg";
+import { ReactComponent as IconLootBonus } from "@neverquest/icons/loot-bonus.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { hasItem } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -66,7 +66,7 @@ export function LootBonus() {
           <FloatingText deltaType="lootBonus" />
         </Stack>
       }
-      Icon={IconLuck}
+      Icon={IconLootBonus}
       isAnimated
       tooltip="Loot bonus"
     />

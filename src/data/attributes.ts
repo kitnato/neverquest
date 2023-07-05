@@ -1,14 +1,22 @@
 import { RESERVES } from "@neverquest/data/reserves";
-import { ReactComponent as IconPlaceholder } from "@neverquest/icons/placeholder.svg";
+import { ReactComponent as IconAgility } from "@neverquest/icons/agility.svg";
+import { ReactComponent as IconDexterity } from "@neverquest/icons/dexterity.svg";
+import { ReactComponent as IconEndurance } from "@neverquest/icons/endurance.svg";
+import { ReactComponent as IconFortitude } from "@neverquest/icons/fortitude.svg";
+import { ReactComponent as IconLuck } from "@neverquest/icons/luck.svg";
+import { ReactComponent as IconPerception } from "@neverquest/icons/perception.svg";
+import { ReactComponent as IconSpeed } from "@neverquest/icons/speed.svg";
+import { ReactComponent as IconStrength } from "@neverquest/icons/strength.svg";
+import { ReactComponent as IconVigor } from "@neverquest/icons/vigor.svg";
+import { ReactComponent as IconVitality } from "@neverquest/icons/vitality.svg";
 import type { AttributeData } from "@neverquest/types";
 import type { Attribute } from "@neverquest/types/unions";
 
-// TODO - diversify icons.
 export const ATTRIBUTES: Record<Attribute, AttributeData> = {
   agility: {
     base: 0,
     description: "Increases chance to dodge an attack.",
-    Icon: IconPlaceholder,
+    Icon: IconAgility,
     increment: 0.04,
     isUnlocked: false,
     maximum: 0.8,
@@ -17,7 +25,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
   dexterity: {
     base: 0,
     description: "Increases critical strike chance.",
-    Icon: IconPlaceholder,
+    Icon: IconDexterity,
     increment: 0.03,
     isUnlocked: false,
     maximum: 0.6,
@@ -26,7 +34,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
   endurance: {
     base: RESERVES.stamina.baseAmount,
     description: "Increases maximum stamina.",
-    Icon: IconPlaceholder,
+    Icon: IconEndurance,
     increment: 5,
     isUnlocked: true,
     powerBonus: 0.01,
@@ -35,7 +43,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
   fortitude: {
     base: 0,
     description: "Increases health & stamina regeneration amount.",
-    Icon: IconPlaceholder,
+    Icon: IconFortitude,
     increment: 2,
     isUnlocked: false,
     maximum: 50,
@@ -44,7 +52,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
   luck: {
     base: 0,
     description: "Increases amount of loot dropped by monsters.",
-    Icon: IconPlaceholder,
+    Icon: IconLuck,
     increment: 0.03,
     isUnlocked: false,
     powerBonus: 0.01,
@@ -53,7 +61,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
     // TODO - move base amount to /data
     base: 1.5,
     description: "Increases critical strike damage.",
-    Icon: IconPlaceholder,
+    Icon: IconPerception,
     increment: 0.15,
     isUnlocked: false,
     powerBonus: 0.003,
@@ -61,7 +69,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
   speed: {
     base: 0,
     description: "Reduces attack rate.",
-    Icon: IconPlaceholder,
+    Icon: IconSpeed,
     increment: 0.05,
     isUnlocked: true,
     maximum: 0.9,
@@ -71,7 +79,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
   strength: {
     base: 0,
     description: "Increases attack damage.",
-    Icon: IconPlaceholder,
+    Icon: IconStrength,
     increment: 2,
     isUnlocked: true,
     powerBonus: 0.01,
@@ -80,7 +88,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
   vigor: {
     base: 0,
     description: "Reduces health & stamina regeneration rate.",
-    Icon: IconPlaceholder,
+    Icon: IconVigor,
     increment: 0.05,
     isUnlocked: false,
     maximum: 0.9,
@@ -89,7 +97,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
   vitality: {
     base: RESERVES.health.baseAmount,
     description: "Increases maximum health.",
-    Icon: IconPlaceholder,
+    Icon: IconVitality,
     increment: 10,
     isUnlocked: true,
     powerBonus: 0.01,

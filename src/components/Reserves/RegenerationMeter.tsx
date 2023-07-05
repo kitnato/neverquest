@@ -33,10 +33,10 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
   const [regenerationDurationValue, setRegenerationDuration] = useRecoilState(regenerationDuration);
   const isReserveAtMaximum = useRecoilValue(isHealth ? isHealthAtMaximum : isStaminaAtMaximum);
   const regenerationAmountValue = useRecoilValue(
-    isHealth ? healthRegenerationAmount : staminaRegenerationAmount
+    isHealth ? healthRegenerationAmount : staminaRegenerationAmount,
   );
   const regenerationRateValue = useRecoilValue(
-    isHealth ? healthRegenerationRate : staminaRegenerationRate
+    isHealth ? healthRegenerationRate : staminaRegenerationRate,
   );
   const isRecoveringValue = useRecoilValue(isRecovering);
   const resetRegenerationDuration = useResetRecoilState(regenerationDuration);
@@ -48,17 +48,15 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
     regenerationDurationValue === 0 ? 0 : regenerationRateValue - regenerationDurationValue;
 
   useAnimation((delta) => {
-    setRegenerationDuration((current) => {
-      const value = current - delta;
+    const value = regenerationDurationValue - delta;
 
-      if (value <= 0) {
-        changeReserve({ value: regenerationAmountValue });
+    if (value <= 0) {
+      changeReserve({ value: regenerationAmountValue });
 
-        return regenerationRateValue;
-      }
-
-      return value;
-    });
+      setRegenerationDuration(regenerationRateValue);
+    } else {
+      setRegenerationDuration(value);
+    }
   }, isReserveAtMaximum || isRecoveringValue);
 
   // Needed to catch attribute resets and poison/blight penalties.
@@ -88,7 +86,7 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
         {`Regenerating ${type}`}
         <br />
         {`${regenerationAmountValue} in ${formatMilliseconds(
-          regenerationRateValue - regenerationProgress
+          regenerationRateValue - regenerationProgress,
         )}`}
       </span>
     );

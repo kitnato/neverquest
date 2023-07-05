@@ -1,4 +1,4 @@
-import { Accordion } from "react-bootstrap";
+import { Accordion, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
@@ -26,9 +26,11 @@ export function Masteries() {
         </Accordion.Header>
 
         <Accordion.Body>
-          {MASTERIES_ORDER.map((type) => (
-            <MasteryDisplay key={type} type={type} />
-          ))}
+          <Stack gap={3}>
+            {MASTERIES_ORDER.map((type) => (
+              <MasteryDisplay key={type} type={type} />
+            ))}
+          </Stack>
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>

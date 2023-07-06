@@ -7,7 +7,6 @@ import { isGameOver } from "@neverquest/state/character";
 import { isWilderness } from "@neverquest/state/encounter";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-// TODO
 export function RetireButton() {
   const isGameOverValue = useRecoilValue(isGameOver);
   const isWildernessValue = useRecoilValue(isWilderness);

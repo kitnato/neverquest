@@ -3,7 +3,6 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CREW } from "@neverquest/data/caravan";
-import { ReactComponent as IconCrewMember } from "@neverquest/icons/crew-member.svg";
 import { crew } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import type { CrewMember } from "@neverquest/types/unions";
@@ -18,7 +17,7 @@ export function CrewHired({ setActive, type }: { setActive: () => void; type: Cr
     return null;
   }
 
-  const { interaction, monologues } = CREW[type];
+  const { Icon, interaction, monologues } = CREW[type];
   const monologue =
     monologues[stageValue] ??
     (() => {
@@ -37,7 +36,7 @@ export function CrewHired({ setActive, type }: { setActive: () => void; type: Cr
       <IconDisplay
         contents={capitalizeAll(type)}
         description={`"${monologue}"`}
-        Icon={IconCrewMember}
+        Icon={Icon}
         tooltip="Caravan crew"
       />
 

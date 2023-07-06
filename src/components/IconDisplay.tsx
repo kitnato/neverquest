@@ -35,7 +35,7 @@ export function IconDisplay({
       description !== null &&
       description !== false &&
       description !== "" ? (
-        <div>
+        <div className="w-100">
           <div>{contents}</div>
 
           <small className="text-muted">{description}</small>

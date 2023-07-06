@@ -28,6 +28,7 @@ export function Dodge() {
   useDeltaText({
     atomDelta: deltas("dodge"),
     atomValue: dodgeTotal,
+    type: "percentage",
   });
 
   if (!isShowingDodge) {

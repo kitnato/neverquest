@@ -10,6 +10,7 @@ import { isMasteryAtMaximum, masteries, masteryCost } from "@neverquest/state/ma
 import type { Mastery } from "@neverquest/types/unions";
 import { LABEL_AT_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function MasteryDisplay({ type }: { type: Mastery }) {
   const isMasteryAtMaximumValue = useRecoilValue(isMasteryAtMaximum(type));
@@ -20,29 +21,36 @@ export function MasteryDisplay({ type }: { type: Mastery }) {
   const label = isMasteryAtMaximumValue ? LABEL_AT_MAXIMUM : `${progress}/${masteryCostValue}`;
   const value = isMasteryAtMaximumValue ? 100 : (progress / masteryCostValue) * 100;
 
-  return isUnlocked ? (
-    <IconDisplay
-      contents={
-        <Stack className="w-100" direction="horizontal">
-          <Stack className="w-100" direction="horizontal" gap={3}>
-            <span>{rank}</span>
+  return (
+    <div className={getAnimationClass({ type: "flipInX" })}>
+      {isUnlocked ? (
+        <IconDisplay
+          contents={
+            <Stack gap={1}>
+              <span>{capitalizeAll(type)}</span>
+              <Stack direction="horizontal">
+                <Stack className="w-100" direction="horizontal" gap={3}>
+                  <span>{rank}</span>
 
-            <LabelledProgressBar label={label} value={value} variant="secondary" />
-          </Stack>
+                  <LabelledProgressBar label={label} value={value} variant="secondary" />
+                </Stack>
 
-          <FloatingText deltaType={type} />
-        </Stack>
-      }
-      description={description}
-      Icon={Icon}
-      tooltip={capitalizeAll(type)}
-    />
-  ) : (
-    <IconDisplay
-      contents={LABEL_UNKNOWN}
-      description="Unlocked by acquiring a skill."
-      Icon={IconUnknown}
-      tooltip="Mastery"
-    />
+                <FloatingText deltaType={type} />
+              </Stack>
+            </Stack>
+          }
+          description={description}
+          Icon={Icon}
+          tooltip="Mastery"
+        />
+      ) : (
+        <IconDisplay
+          contents={LABEL_UNKNOWN}
+          description="Unlocked by acquiring a skill."
+          Icon={IconUnknown}
+          tooltip="Mastery"
+        />
+      )}
+    </div>
   );
 }

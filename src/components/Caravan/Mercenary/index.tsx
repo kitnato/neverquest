@@ -30,7 +30,9 @@ export function Mercenary() {
         {noneTrained ? (
           <span className="fst-italic">None.</span>
         ) : (
-          SKILLS_ORDER.map((type) => <TrainedSkill key={type} type={type} />)
+          SKILLS_ORDER.sort((a, b) => a.localeCompare(b)).map((type) => (
+            <TrainedSkill key={type} type={type} />
+          ))
         )}
       </Stack>
     </Stack>

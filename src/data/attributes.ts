@@ -106,10 +106,10 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
 };
 
 export const ATTRIBUTES_ORDER: Attribute[] = [
-  "vitality",
-  "endurance",
   "strength",
   "speed",
+  "vitality",
+  "endurance",
   "vigor",
   "fortitude",
   "dexterity",

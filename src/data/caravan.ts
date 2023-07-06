@@ -1,3 +1,11 @@
+import { ReactComponent as IconAlchemist } from "@neverquest/icons/alchemist.svg";
+import { ReactComponent as IconBlacksmith } from "@neverquest/icons/blacksmith.svg";
+import { ReactComponent as IconMedic } from "@neverquest/icons/medic.svg";
+import { ReactComponent as IconMercenary } from "@neverquest/icons/mercenary.svg";
+import { ReactComponent as IconMerchant } from "@neverquest/icons/merchant.svg";
+import { ReactComponent as IconOccultist } from "@neverquest/icons/occultist.svg";
+import { ReactComponent as IconTailor } from "@neverquest/icons/tailor.svg";
+import { ReactComponent as IconWitch } from "@neverquest/icons/witch.svg";
 import type {
   ArmorClass,
   ArtifactType,
@@ -5,6 +13,7 @@ import type {
   WeaponClass,
   WeaponModality,
 } from "@neverquest/LOCRA/types";
+import type { SVGIcon } from "@neverquest/types/props";
 import type { Consumable, CrewMember, Trinket } from "@neverquest/types/unions";
 
 export const BLACKSMITH_GEAR_LEVEL_MAXIMUM = 3;
@@ -14,6 +23,7 @@ export const CREW: Record<
   {
     coinPrice: number;
     description: string;
+    Icon: SVGIcon;
     interaction: string;
     monologues: Record<number, string | undefined>;
     requiredStage: number;
@@ -22,6 +32,7 @@ export const CREW: Record<
   alchemist: {
     coinPrice: 100,
     description: "Converts resources between one another.",
+    Icon: IconAlchemist,
     interaction: "Transmute",
     monologues: { 1: "Things are not always what they seem." },
     requiredStage: 16,
@@ -29,6 +40,7 @@ export const CREW: Record<
   blacksmith: {
     coinPrice: 35,
     description: "Crafts superior gear.",
+    Icon: IconBlacksmith,
     interaction: "Craft",
     monologues: { 1: "In need of better gear?" },
     requiredStage: 8,
@@ -36,6 +48,7 @@ export const CREW: Record<
   medic: {
     coinPrice: 80,
     description: "Heals wounds and sells bandages.",
+    Icon: IconMedic,
     interaction: "Heal",
     monologues: { 1: "Allow me to patch you up." },
     requiredStage: 12,
@@ -43,6 +56,7 @@ export const CREW: Record<
   mercenary: {
     coinPrice: 60,
     description: "Trains new skills and attributes.",
+    Icon: IconMercenary,
     interaction: "Train",
     monologues: { 1: "Perhaps I can teach you something." },
     requiredStage: 10,
@@ -50,6 +64,7 @@ export const CREW: Record<
   merchant: {
     coinPrice: 0,
     description: "Offers various items for purchase and buys unwanted items.",
+    Icon: IconMerchant,
     interaction: "Trade",
     monologues: {
       1: "Greetings. I have what you're looking for.",
@@ -69,6 +84,7 @@ export const CREW: Record<
   occultist: {
     coinPrice: 200,
     description: "Sells soulstones and offers purging rituals.",
+    Icon: IconOccultist,
     interaction: "Ritual",
     monologues: { 1: "Prepared to pierce the veil?" },
     requiredStage: 30,
@@ -76,6 +92,7 @@ export const CREW: Record<
   tailor: {
     coinPrice: 20,
     description: "Expands inventory space.",
+    Icon: IconTailor,
     interaction: "Upgrade",
     monologues: { 1: "Allow me to deepen your pockets." },
     requiredStage: 6,
@@ -83,6 +100,7 @@ export const CREW: Record<
   witch: {
     coinPrice: 150,
     description: "Sells potions that cure ailments.",
+    Icon: IconWitch,
     interaction: "Brew",
     monologues: { 1: "Gaze deep into my cauldron ..." },
     requiredStage: 20,

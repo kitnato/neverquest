@@ -2,8 +2,8 @@ import { Col, Row } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { Deflection } from "@neverquest/components/Statistics/Deflection";
+import { FreeBlock } from "@neverquest/components/Statistics/FreeBlock";
 import { LootBonus } from "@neverquest/components/Statistics/LootBonus";
-import { Stability } from "@neverquest/components/Statistics/Stability";
 import { isShowing } from "@neverquest/state/isShowing";
 
 export function Support() {
@@ -22,7 +22,7 @@ export function Support() {
       </Col>
 
       <Col>
-        <Stability />
+        <FreeBlock />
       </Col>
 
       <Col>

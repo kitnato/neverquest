@@ -5,7 +5,6 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { CREW } from "@neverquest/data/caravan";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
-import { ReactComponent as IconCrewMember } from "@neverquest/icons/crew-member.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { crew } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -21,7 +20,7 @@ export function CrewHirable({ type }: { type: CrewMember }) {
 
   const transactResources = useTransactResources();
 
-  const { coinPrice, description, requiredStage } = CREW[type];
+  const { coinPrice, description, Icon, requiredStage } = CREW[type];
   const isAffordable = coinPrice <= coinsValue;
   const name = capitalizeAll(type);
 
@@ -41,12 +40,7 @@ export function CrewHirable({ type }: { type: CrewMember }) {
   if (hireStatus === "hirable") {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        <IconDisplay
-          contents={name}
-          description={description}
-          Icon={IconCrewMember}
-          tooltip="Caravan crew"
-        />
+        <IconDisplay contents={name} description={description} Icon={Icon} tooltip="Caravan crew" />
 
         <Stack direction="horizontal" gap={3}>
           <ResourceDisplay tooltip="Price (coins)" type="coins" value={coinPrice} />

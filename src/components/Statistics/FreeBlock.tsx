@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconStability } from "@neverquest/icons/stability.svg";
+import { ReactComponent as IconFreeBlock } from "@neverquest/icons/free-block.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
@@ -12,7 +12,7 @@ import { stability } from "@neverquest/state/statistics";
 import { LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
-export function Stability() {
+export function FreeBlock() {
   const isShowingStability = useRecoilValue(isShowing("stability"));
   const skillShieldcraft = useRecoilValue(skills("shieldcraft"));
   const stabilityValue = useRecoilValue(stability);
@@ -35,7 +35,7 @@ export function Stability() {
           <FloatingText deltaType="stability" />
         </Stack>
       }
-      Icon={IconStability}
+      Icon={IconFreeBlock}
       isAnimated
       tooltip="0-stamina block chance"
     />

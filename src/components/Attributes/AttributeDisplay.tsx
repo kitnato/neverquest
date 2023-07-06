@@ -82,7 +82,7 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
       ) : (
         <IconDisplay
           contents={LABEL_UNKNOWN}
-          description="Unlocked by acquiring a skill."
+          description={type === "luck" ? LABEL_UNKNOWN : "Unlocked by acquiring a skill."}
           Icon={IconUnknown}
           tooltip="Attribute"
         />

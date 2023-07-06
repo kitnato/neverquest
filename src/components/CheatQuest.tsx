@@ -1,6 +1,7 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
+import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill";
 import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGenerateMerchantInventory";
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
@@ -9,7 +10,6 @@ import { useTransactResources } from "@neverquest/hooks/actions/useTransactResou
 import { isAttacking } from "@neverquest/state/character";
 import { isWilderness, progress, progressMaximum, stage } from "@neverquest/state/encounter";
 import { coinsLoot, essenceLoot, scrapLoot } from "@neverquest/state/resources";
-import { skills } from "@neverquest/state/skills";
 import { SKILL_TYPES } from "@neverquest/types/unions";
 
 declare const window: Window & {
@@ -26,44 +26,13 @@ export function CheatQuest() {
   const setIsAttacking = useSetRecoilState(isAttacking);
   const resetScrapLoot = useResetRecoilState(scrapLoot);
   const setProgress = useSetRecoilState(progress);
-  const setSkillArmorcraft = useSetRecoilState(skills("armorcraft"));
-  const setSkillAnatomy = useSetRecoilState(skills("anatomy"));
-  const setSkillAssassination = useSetRecoilState(skills("assassination"));
-  const setSkillEvasion = useSetRecoilState(skills("evasion"));
-  const setSkillEscrime = useSetRecoilState(skills("escrime"));
-  const setSkillCalisthenics = useSetRecoilState(skills("calisthenics"));
-  const setSkillShieldcraft = useSetRecoilState(skills("shieldcraft"));
-  const setSkillTraumatology = useSetRecoilState(skills("traumatology"));
 
+  const acquireSkill = useAcquireSkill();
   const generateMerchantInventory = useGenerateMerchantInventory();
   const increaseStage = useIncreaseStage();
   const resetWilderness = useResetWilderness();
   const toggleLocation = useToggleLocation();
   const transactResources = useTransactResources();
-
-  // TODO - useAcquireSkill()
-  const setSkill = useMemo(
-    () => [
-      setSkillArmorcraft,
-      setSkillAnatomy,
-      setSkillAssassination,
-      setSkillEvasion,
-      setSkillEscrime,
-      setSkillCalisthenics,
-      setSkillShieldcraft,
-      setSkillTraumatology,
-    ],
-    [
-      setSkillArmorcraft,
-      setSkillAnatomy,
-      setSkillAssassination,
-      setSkillEvasion,
-      setSkillEscrime,
-      setSkillCalisthenics,
-      setSkillShieldcraft,
-      setSkillTraumatology,
-    ]
-  );
 
   useEffect(() => {
     window.cheatQuest = (state, value) => {
@@ -83,7 +52,7 @@ export function CheatQuest() {
         // Heretic
         case "gimmee": {
           if (typeof value === "string" && value in SKILL_TYPES) {
-            setSkill[value](true);
+            acquireSkill(value);
           }
           break;
         }
@@ -136,6 +105,7 @@ export function CheatQuest() {
       }
     };
   }, [
+    acquireSkill,
     generateMerchantInventory,
     increaseStage,
     isWildernessValue,
@@ -146,7 +116,6 @@ export function CheatQuest() {
     resetScrapLoot,
     resetWilderness,
     setProgress,
-    setSkill,
     toggleLocation,
     transactResources,
     setIsAttacking,

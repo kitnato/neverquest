@@ -8,10 +8,10 @@ import type { Mastery } from "@neverquest/types/unions";
 
 export const MASTERIES: Record<Mastery, MasteryData> = {
   cruelty: {
-    base: 0.1,
-    description: "Increases bleed damage. Trains when inflicting bleed.",
+    base: 0.2,
+    description: "Determines bleed damage. Trains when inflicting bleed.",
     Icon: IconCruelty,
-    increment: 0.04,
+    increment: 0.02,
     isUnlocked: false,
     maximum: 1,
   },
@@ -21,11 +21,11 @@ export const MASTERIES: Record<Mastery, MasteryData> = {
     Icon: IconFinesse,
     increment: 0.02,
     isUnlocked: false,
-    maximum: 0.8,
+    maximum: 0.9,
   },
   might: {
     base: 1200,
-    description: "Increases stagger duration. Trains when inflicting stagger.",
+    description: "Determines stagger duration. Trains when inflicting stagger.",
     Icon: IconMight,
     increment: 100,
     isUnlocked: false,
@@ -41,7 +41,7 @@ export const MASTERIES: Record<Mastery, MasteryData> = {
   },
   stability: {
     base: 0,
-    description: "Increases chance for 0-stamina blocks. Trains when blocking.",
+    description: "Determines chance for 0-stamina blocks. Trains when blocking.",
     Icon: IconStability,
     increment: 0.03,
     isUnlocked: false,

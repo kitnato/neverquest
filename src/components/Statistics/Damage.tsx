@@ -4,18 +4,18 @@ import { useRecoilValue } from "recoil";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { IconImage } from "@neverquest/components/IconImage";
 import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSecond";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
+import { ReactComponent as IconStrength } from "@neverquest/icons/strength.svg";
+import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
+import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
+import { rawAttributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import {
-  damage,
-  damageTotal,
-  powerBonus,
-  rawAttributeStatistic,
-} from "@neverquest/state/statistics";
+import { damage, damageTotal, powerBonus } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
@@ -24,7 +24,7 @@ export function Damage() {
   const damageTotalValue = useRecoilValue(damageTotal);
   const isShowingDamageDetails = useRecoilValue(isShowing("damageDetails"));
   const powerBonusValue = useRecoilValue(powerBonus("strength"));
-  const statisticValue = useRecoilValue(rawAttributeStatistic("strength"));
+  const strengthValue = useRecoilValue(rawAttributeStatistic("strength"));
   const weaponValue = useRecoilValue(weapon);
 
   useDeltaText({
@@ -46,25 +46,34 @@ export function Damage() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
 
-                      <td>{weaponValue.damage}</td>
+                      <td>
+                        <IconImage Icon={IconWeaponDamage} size="tiny" />
+                        &nbsp;{weaponValue.damage}
+                      </td>
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Strength attribute:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Strength:</td>
 
-                      <td>{`+${statisticValue}`}</td>
+                      <td>
+                        <IconImage Icon={IconStrength} size="tiny" />
+                        &nbsp;{`+${strengthValue}`}
+                      </td>
                     </tr>
 
                     {powerBonusValue > 0 && (
                       <>
                         <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Empowered:</td>
 
-                          <td>{`+${formatPercentage(powerBonusValue)}`}</td>
+                          <td>
+                            <IconImage Icon={IconPower} size="tiny" />
+                            &nbsp;{`+${formatPercentage(powerBonusValue, 0)}`}
+                          </td>
                         </tr>
 
                         <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Total strength:</td>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Total:</td>
 
                           <td>{`+${damageValue}`}</td>
                         </tr>

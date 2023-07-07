@@ -4,19 +4,23 @@ import { useRecoilValue } from "recoil";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { IconImage } from "@neverquest/components/IconImage";
 import { HealthMeter } from "@neverquest/components/Reserves/HealthMeter";
 import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
 import { RESERVES } from "@neverquest/data/reserves";
 import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
+import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
+import { ReactComponent as IconVitality } from "@neverquest/icons/vitality.svg";
+import { rawAttributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
-import { powerBonus, rawAttributeStatistic } from "@neverquest/state/statistics";
+import { powerBonus } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Health() {
   const isShowingHealthDetails = useRecoilValue(isShowing("healthDetails"));
   const powerBonusValue = useRecoilValue(powerBonus("vitality"));
-  const statisticValue = useRecoilValue(rawAttributeStatistic("vitality"));
+  const vitalityValue = useRecoilValue(rawAttributeStatistic("vitality"));
 
   const { baseAmount } = RESERVES.health;
 
@@ -33,22 +37,31 @@ export function Health() {
                   <Popover.Body>
                     <DetailsTable>
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Base health:</td>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
 
-                        <td>{baseAmount}</td>
+                        <td>
+                          <IconImage Icon={IconHealth} size="tiny" />
+                          &nbsp;{baseAmount}
+                        </td>
                       </tr>
 
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Vitality attribute:</td>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Vitality:</td>
 
-                        <td>{`+${statisticValue - baseAmount}`}</td>
+                        <td>
+                          <IconImage Icon={IconVitality} size="tiny" />
+                          &nbsp;{`+${vitalityValue - baseAmount}`}
+                        </td>
                       </tr>
 
                       {powerBonusValue > 0 && (
                         <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Empowered:</td>
 
-                          <td>{`+${formatPercentage(powerBonusValue)}`}</td>
+                          <td>
+                            <IconImage Icon={IconPower} size="tiny" />
+                            &nbsp;{`+${formatPercentage(powerBonusValue, 0)}`}
+                          </td>
                         </tr>
                       )}
                     </DetailsTable>

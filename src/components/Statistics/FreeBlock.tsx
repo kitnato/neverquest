@@ -7,12 +7,14 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconFreeBlock } from "@neverquest/icons/free-block.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
+import { rawMasteryStatistic } from "@neverquest/state/masteries";
 import { skills } from "@neverquest/state/skills";
-import { stability } from "@neverquest/state/statistics";
 import { LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function FreeBlock() {
+  const stability = rawMasteryStatistic("stability");
+
   const isShowingStability = useRecoilValue(isShowing("stability"));
   const skillShieldcraft = useRecoilValue(skills("shieldcraft"));
   const stabilityValue = useRecoilValue(stability);

@@ -4,24 +4,30 @@ import { useRecoilValue } from "recoil";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { IconImage } from "@neverquest/components/IconImage";
 import { BLEED } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconBleedRating } from "@neverquest/icons/bleed-rating.svg";
+import { ReactComponent as IconCruelty } from "@neverquest/icons/cruelty.svg";
+import { ReactComponent as IconWeaponBleed } from "@neverquest/icons/weapon-bleed.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
+import { rawMasteryStatistic } from "@neverquest/state/masteries";
 import { skills } from "@neverquest/state/skills";
-import { bleed, bleedDamage, bleedRating, bleedTick, damage } from "@neverquest/state/statistics";
+import { bleed, bleedRating, bleedTick, damageTotal } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function BleedRating() {
   const bleedValue = useRecoilValue(bleed);
-  const bleedDamageValue = useRecoilValue(bleedDamage);
   const bleedRatingValue = useRecoilValue(bleedRating);
-  const bleedTickValue = useRecoilValue(bleedTick);
-  const damageValue = useRecoilValue(damage);
+  const { damage, duration: bleedTickDuration } = useRecoilValue(bleedTick);
+  const damageTotalValue = useRecoilValue(damageTotal);
   const isShowingBleed = useRecoilValue(isShowing("bleed"));
+  const crueltyValue = useRecoilValue(rawMasteryStatistic("cruelty"));
   const skillAnatomy = useRecoilValue(skills("anatomy"));
+
+  const { duration, ticks } = BLEED;
 
   useDeltaText({
     atomDelta: deltas("bleedRating"),
@@ -45,29 +51,41 @@ export function BleedRating() {
                 <Popover.Body>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
 
-                      <td>{`${formatPercentage(bleedValue)} chance`}</td>
+                      <td>
+                        <IconImage Icon={IconWeaponBleed} size="tiny" />
+                        &nbsp;{`${bleedValue === 0 ? LABEL_EMPTY : formatPercentage(bleedValue)}`}
+                      </td>
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Cruelty mastery:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Cruelty:</td>
 
-                      <td>{`${formatPercentage(bleedDamageValue)} of damage`}</td>
+                      <td>
+                        <IconImage Icon={IconCruelty} size="tiny" />
+                        &nbsp;{`${formatPercentage(crueltyValue)} of total damage`}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
+
+                      <td>{formatMilliseconds(duration)}</td>
+                    </tr>
+
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Ticks:</td>
+
+                      <td>{`${ticks} (every ${formatMilliseconds(bleedTickDuration)})`}</td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Bleed damage:</td>
 
                       <td>{`${Math.round(
-                        damageValue * bleedDamageValue
-                      )} (${bleedTickValue} per tick)`}</td>
-                    </tr>
-
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
-
-                      <td>{formatMilliseconds(BLEED.duration)}</td>
+                        damageTotalValue * crueltyValue
+                      )} (${damage} per tick)`}</td>
                     </tr>
                   </DetailsTable>
                 </Popover.Body>

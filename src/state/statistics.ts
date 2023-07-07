@@ -1,18 +1,13 @@
 import { selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import { MASTERIES } from "@neverquest/data/masteries";
-import { BLEED, RECOVERY_RATE } from "@neverquest/data/statistics";
+import { BLEED, PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/statistics";
 import { withStateKey } from "@neverquest/state";
-import { attributes, level } from "@neverquest/state/attributes";
+import { level, rawAttributeStatistic } from "@neverquest/state/attributes";
 import { armor, hasItem, shield, weapon } from "@neverquest/state/inventory";
-import { masteries } from "@neverquest/state/masteries";
+import { rawMasteryStatistic } from "@neverquest/state/masteries";
 import type { Attribute } from "@neverquest/types/unions";
-import {
-  getComputedStatistic,
-  getDamagePerRate,
-  getDamagePerTick,
-} from "@neverquest/utilities/getters";
+import { getDamagePerRate, getDamagePerTick } from "@neverquest/utilities/getters";
 
 // SELECTORS
 
@@ -39,23 +34,7 @@ export const bleed = withStateKey("bleed", (key) =>
     get: ({ get }) => {
       const { abilityChance, gearClass } = get(weapon);
 
-      if (gearClass === "piercing" && abilityChance > 0) {
-        return abilityChance;
-      }
-
-      return 0;
-    },
-    key,
-  })
-);
-
-export const bleedDamage = withStateKey("bleedDamage", (key) =>
-  selector({
-    get: ({ get }) => {
-      const { base, increment } = MASTERIES.cruelty;
-      const { rank } = get(masteries("cruelty"));
-
-      return getComputedStatistic({ amount: rank, base, increment });
+      return gearClass === "piercing" ? abilityChance : 0;
     },
     key,
   })
@@ -63,7 +42,7 @@ export const bleedDamage = withStateKey("bleedDamage", (key) =>
 
 export const bleedRating = withStateKey("bleedRating", (key) =>
   selector({
-    get: ({ get }) => Math.round(get(bleedTick) * get(bleed) * 100),
+    get: ({ get }) => Math.round(get(bleedTick).damage * get(bleed) * 100),
     key,
   })
 );
@@ -73,12 +52,15 @@ export const bleedTick = withStateKey("bleedTick", (key) =>
     get: ({ get }) => {
       const { duration, ticks } = BLEED;
 
-      return getDamagePerTick({
-        damage: get(damage),
-        duration,
-        proportion: get(bleedDamage),
-        ticks,
-      });
+      return {
+        damage: getDamagePerTick({
+          damage: get(damageTotal),
+          duration,
+          proportion: get(rawMasteryStatistic("cruelty")),
+          ticks,
+        }),
+        duration: duration / ticks,
+      };
     },
     key,
   })
@@ -197,26 +179,17 @@ export const lootBonus = withStateKey("lootBonus", (key) =>
 
 export const parryAbsorption = withStateKey("parryAbsorption", (key) =>
   selector({
-    get: ({ get }) => {
-      const { base, increment } = MASTERIES.finesse;
-      const { rank } = get(masteries("finesse"));
-
-      return 0.33 + getComputedStatistic({ amount: rank, base, increment });
-    },
+    get: ({ get }) => PARRY_ABSORPTION + get(rawMasteryStatistic("finesse")),
     key,
   })
 );
 
-export const parry = withStateKey("parry", (key) =>
+export const parryChance = withStateKey("parryChance", (key) =>
   selector({
     get: ({ get }) => {
       const { abilityChance, gearClass } = get(weapon);
 
-      if (gearClass === "slashing" && abilityChance > 0) {
-        return abilityChance;
-      }
-
-      return 0;
+      return gearClass === "slashing" ? abilityChance : 0;
     },
     key,
   })
@@ -224,12 +197,14 @@ export const parry = withStateKey("parry", (key) =>
 
 export const parryDamage = withStateKey("parryDamage", (key) =>
   selector({
-    get: ({ get }) => {
-      const { base, increment } = MASTERIES.finesse;
-      const { rank } = get(masteries("finesse"));
+    get: ({ get }) => PARRY_DAMAGE + get(rawMasteryStatistic("finesse")),
+    key,
+  })
+);
 
-      return 0.25 + getComputedStatistic({ amount: rank, base, increment });
-    },
+export const parryRating = withStateKey("parryRating", (key) =>
+  selector({
+    get: ({ get }) => Math.round(get(parryChance) * get(parryAbsorption) * get(parryDamage) * 1000),
     key,
   })
 );
@@ -251,35 +226,9 @@ export const protection = withStateKey("protection", (key) =>
   })
 );
 
-export const rawAttributeStatistic = withStateKey("rawAttributeStatistic", (key) =>
-  selectorFamily<number, Attribute>({
-    get:
-      (type) =>
-      ({ get }) => {
-        const { base, increment } = ATTRIBUTES[type];
-        const { points } = get(attributes(type));
-
-        return getComputedStatistic({ amount: points, base, increment });
-      },
-    key,
-  })
-);
-
 export const recoveryRate = withStateKey("recoveryRate", (key) =>
   selector({
-    get: ({ get }) => RECOVERY_RATE - RECOVERY_RATE * get(recoveryRateReduction),
-    key,
-  })
-);
-
-export const recoveryRateReduction = withStateKey("recoveryRateReduction", (key) =>
-  selector({
-    get: ({ get }) => {
-      const { base, increment } = MASTERIES.resilience;
-      const { isUnlocked, rank } = get(masteries("resilience"));
-
-      return isUnlocked ? getComputedStatistic({ amount: rank, base, increment }) : 0;
-    },
+    get: ({ get }) => RECOVERY_RATE - RECOVERY_RATE * get(rawMasteryStatistic("resilience")),
     key,
   })
 );
@@ -306,26 +255,12 @@ export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (
   })
 );
 
-export const staggerDuration = withStateKey("staggerDuration", (key) =>
-  selector({
-    get: ({ get }) => {
-      const { base, increment } = MASTERIES.might;
-      const { rank } = get(masteries("might"));
-
-      return getComputedStatistic({ amount: rank, base, increment });
-    },
-    key,
-  })
-);
-
 export const staggerRating = withStateKey("staggerRating", (key) =>
   selector({
     get: ({ get }) => {
-      const staggerDurationValue = get(staggerDuration);
+      const mightValue = get(rawMasteryStatistic("might"));
 
-      return Math.round(
-        get(shield).stagger * staggerDurationValue + get(staggerWeapon) * staggerDurationValue
-      );
+      return Math.round(get(shield).stagger * mightValue + get(staggerWeapon) * mightValue);
     },
     key,
   })
@@ -337,30 +272,6 @@ export const staggerWeapon = withStateKey("staggerWeapon", (key) =>
       const { abilityChance, gearClass } = get(weapon);
 
       return gearClass === "blunt" ? abilityChance : 0;
-    },
-    key,
-  })
-);
-
-export const stability = withStateKey("stability", (key) =>
-  selector({
-    get: ({ get }) => {
-      const { base, increment } = MASTERIES.stability;
-      const { rank } = get(masteries("stability"));
-
-      return getComputedStatistic({ amount: rank, base, increment });
-    },
-    key,
-  })
-);
-
-export const resilience = withStateKey("resilience", (key) =>
-  selector({
-    get: ({ get }) => {
-      const { base, increment } = MASTERIES.resilience;
-      const { rank } = get(masteries("resilience"));
-
-      return getComputedStatistic({ amount: rank, base, increment });
     },
     key,
   })

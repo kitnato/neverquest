@@ -17,7 +17,7 @@ import { ReactComponent as IconShieldMedium } from "@neverquest/icons/shield-med
 import { ReactComponent as IconShieldSmall } from "@neverquest/icons/shield-small.svg";
 import { ReactComponent as IconShieldTower } from "@neverquest/icons/shield-tower.svg";
 import { ReactComponent as IconSoulstone } from "@neverquest/icons/soulstone.svg";
-import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
+import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconWeaponBleed } from "@neverquest/icons/weapon-bleed.svg";
 import { ReactComponent as IconBlunt } from "@neverquest/icons/weapon-blunt.svg";
 import { ReactComponent as IconPiercing } from "@neverquest/icons/weapon-piercing.svg";
@@ -221,7 +221,7 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
     },
   },
   "tome of power": {
-    Icon: IconTomeOfPower,
+    Icon: IconPower,
     item: {
       coinPrice: 500,
       description: "Grants a bonus to all attributes based on power level.",

@@ -50,3 +50,17 @@ export const masteryCost = withStateKey("masteryCost", (key) =>
     key,
   })
 );
+
+export const rawMasteryStatistic = withStateKey("rawMasteryStatistic", (key) =>
+  selectorFamily<number, Mastery>({
+    get:
+      (type) =>
+      ({ get }) => {
+        const { base, increment } = MASTERIES[type];
+        const { rank } = get(masteries(type));
+
+        return getComputedStatistic({ amount: rank, base, increment });
+      },
+    key,
+  })
+);

@@ -4,19 +4,19 @@ import { useRecoilValue } from "recoil";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { IconImage } from "@neverquest/components/IconImage";
 import { AttackMeter } from "@neverquest/components/Status/AttackMeter";
 import { WEAPON_NONE } from "@neverquest/data/inventory";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconAttackRate } from "@neverquest/icons/attack-rate.svg";
+import { ReactComponent as IconWeaponSpeed } from "@neverquest/icons/speed.svg";
+import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
+import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
+import { rawAttributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import {
-  attackRate,
-  attackRateTotal,
-  powerBonus,
-  rawAttributeStatistic,
-} from "@neverquest/state/statistics";
+import { attackRate, attackRateTotal, powerBonus } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
@@ -25,7 +25,7 @@ export function Attack() {
   const isShowingAttackRate = useRecoilValue(isShowing("attackRate"));
   const isShowingAttackRateDetails = useRecoilValue(isShowing("attackRateDetails"));
   const powerBonusValue = useRecoilValue(powerBonus("speed"));
-  const statisticValue = useRecoilValue(rawAttributeStatistic("speed"));
+  const speedValue = useRecoilValue(rawAttributeStatistic("speed"));
   const weaponValue = useRecoilValue(weapon);
 
   useDeltaText({
@@ -54,25 +54,34 @@ export function Attack() {
                         weaponValue === WEAPON_NONE ? "Base" : "Weapon"
                       }:`}</td>
 
-                      <td>{formatMilliseconds(weaponValue.rate)}</td>
+                      <td>
+                        <IconImage Icon={IconWeaponAttackRate} size="tiny" />
+                        &nbsp;{formatMilliseconds(weaponValue.rate)}
+                      </td>
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Speed attribute:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Speed:</td>
 
-                      <td>{`-${formatPercentage(statisticValue)}`}</td>
+                      <td>
+                        <IconImage Icon={IconWeaponSpeed} size="tiny" />
+                        &nbsp;{`-${formatPercentage(speedValue, 0)}`}
+                      </td>
                     </tr>
 
                     {powerBonusValue > 0 && (
                       <>
                         <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Empowered:</td>
 
-                          <td>{`+${formatPercentage(powerBonusValue, 0)}`}</td>
+                          <td>
+                            <IconImage Icon={IconPower} size="tiny" />
+                            &nbsp;{`+${formatPercentage(powerBonusValue)}`}
+                          </td>
                         </tr>
 
                         <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Total speed:</td>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Total:</td>
 
                           <td>{`-${formatPercentage(attackRateValue)}`}</td>
                         </tr>

@@ -3,13 +3,18 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
+import { IconImage } from "@neverquest/components/IconImage";
 import { RegenerationMeter } from "@neverquest/components/Reserves/RegenerationMeter";
 import { RESERVES } from "@neverquest/data/reserves";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
+import { ReactComponent as IconFortitude } from "@neverquest/icons/fortitude.svg";
+import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
+import { ReactComponent as IconVigor } from "@neverquest/icons/vigor.svg";
+import { rawAttributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { healthRegenerationRate, staminaRegenerationRate } from "@neverquest/state/reserves";
-import { powerBonus, rawAttributeStatistic } from "@neverquest/state/statistics";
+import { powerBonus } from "@neverquest/state/statistics";
 import type { Reserve } from "@neverquest/types/unions";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
@@ -21,8 +26,8 @@ export function Regeneration({ type }: { type: Reserve }) {
   const isShowingReserveDetails = useRecoilValue(isShowing("reserveDetails"));
   const powerBonusAmountValue = useRecoilValue(powerBonus("fortitude"));
   const powerBonusRateValue = useRecoilValue(powerBonus("vigor"));
-  const statisticAmountValue = useRecoilValue(rawAttributeStatistic("fortitude"));
-  const statisticRateValue = useRecoilValue(rawAttributeStatistic("vigor"));
+  const fortitudeValue = useRecoilValue(rawAttributeStatistic("fortitude"));
+  const vigorValue = useRecoilValue(rawAttributeStatistic("vigor"));
 
   useDeltaText({
     atomDelta: deltas(regenerationDelta),
@@ -46,16 +51,22 @@ export function Regeneration({ type }: { type: Reserve }) {
                 </tr>
 
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Vigor attribute:</td>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Vigor:</td>
 
-                  <td>{`-${formatPercentage(statisticRateValue)}`}</td>
+                  <td>
+                    <IconImage Icon={IconVigor} size="tiny" />
+                    &nbsp;{`-${formatPercentage(vigorValue)}`}
+                  </td>
                 </tr>
 
                 {powerBonusRateValue > 0 && (
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Empowered:</td>
 
-                    <td>{`+${formatPercentage(powerBonusRateValue)}`}</td>
+                    <td>
+                      <IconImage Icon={IconPower} size="tiny" />
+                      &nbsp;{`+${formatPercentage(powerBonusRateValue)}`}
+                    </td>
                   </tr>
                 )}
 
@@ -66,16 +77,22 @@ export function Regeneration({ type }: { type: Reserve }) {
                 </tr>
 
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Fortitude attribute:</td>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Fortitude:</td>
 
-                  <td>{`+${statisticAmountValue - baseRegenerationAmount}`}</td>
+                  <td>
+                    <IconImage Icon={IconFortitude} size="tiny" />
+                    &nbsp;{`+${fortitudeValue}`}
+                  </td>
                 </tr>
 
                 {powerBonusAmountValue > 0 && (
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Empowered:</td>
 
-                    <td>{`+${formatPercentage(powerBonusAmountValue)}`}</td>
+                    <td>
+                      <IconImage Icon={IconPower} size="tiny" />
+                      &nbsp;{`+${formatPercentage(powerBonusAmountValue, 0)}`}
+                    </td>
                   </tr>
                 )}
               </DetailsTable>

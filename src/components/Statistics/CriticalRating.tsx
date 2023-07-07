@@ -4,8 +4,13 @@ import { useRecoilValue } from "recoil";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { IconImage } from "@neverquest/components/IconImage";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconCriticalRating } from "@neverquest/icons/critical-rating.svg";
+import { ReactComponent as IconDexterity } from "@neverquest/icons/dexterity.svg";
+import { ReactComponent as IconPerception } from "@neverquest/icons/perception.svg";
+import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
+import { rawAttributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
@@ -14,7 +19,6 @@ import {
   criticalDamage,
   criticalRating,
   powerBonus,
-  rawAttributeStatistic,
 } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
@@ -27,8 +31,8 @@ export function CriticalRating() {
   const powerBonusChanceValue = useRecoilValue(powerBonus("dexterity"));
   const powerBonusDamageValue = useRecoilValue(powerBonus("perception"));
   const skillAssassination = useRecoilValue(skills("assassination"));
-  const statisticChanceValue = useRecoilValue(rawAttributeStatistic("dexterity"));
-  const statisticDamageValue = useRecoilValue(rawAttributeStatistic("perception"));
+  const dexterityValue = useRecoilValue(rawAttributeStatistic("dexterity"));
+  const perceptionValue = useRecoilValue(rawAttributeStatistic("perception"));
 
   useDeltaText({
     atomDelta: deltas("criticalRating"),
@@ -52,17 +56,23 @@ export function CriticalRating() {
                 <Popover.Body>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Base chance:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Dexterity:</td>
 
-                      <td>{formatPercentage(statisticChanceValue)}</td>
+                      <td>
+                        <IconImage Icon={IconDexterity} size="tiny" />
+                        &nbsp;{`${formatPercentage(dexterityValue, 0)} chance`}
+                      </td>
                     </tr>
 
                     {powerBonusChanceValue > 0 && (
                       <>
                         <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Empowered:</td>
 
-                          <td>{`+${formatPercentage(powerBonusChanceValue)}`}</td>
+                          <td>
+                            <IconImage Icon={IconPower} size="tiny" />
+                            &nbsp;{`+${formatPercentage(powerBonusChanceValue)}`}
+                          </td>
                         </tr>
 
                         <tr>
@@ -74,17 +84,23 @@ export function CriticalRating() {
                     )}
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Base damage:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Perception:</td>
 
-                      <td>{formatPercentage(statisticDamageValue)}</td>
+                      <td>
+                        <IconImage Icon={IconPerception} size="tiny" />
+                        &nbsp;{`${formatPercentage(perceptionValue, 0)} damage`}
+                      </td>
                     </tr>
 
                     {powerBonusDamageValue > 0 && (
                       <>
                         <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Power bonus:</td>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Empowered:</td>
 
-                          <td>{`+${formatPercentage(powerBonusDamageValue)}`}</td>
+                          <td>
+                            <IconImage Icon={IconPower} size="tiny" />
+                            &nbsp;{`+${formatPercentage(powerBonusDamageValue)}`}
+                          </td>
                         </tr>
 
                         <tr>

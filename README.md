@@ -693,26 +693,32 @@ Staggering is only possible after acquiring the [Traumatology](#traumatology) sk
 
 Temporary status effects that boost or improve the character or monster.
 
-## Traits
+## Retirement
 
 `TODO`
 
-Traits are permanent passive abilities acquired when retired for all subsequent new quests.
+When reaching a certain power level, the character can retire. This restarts the quest from stage 0 with power level 0, however all hired caravan crew are retained. A [trait](#traits) can be also chosen that confers a permanent bonus.
 
-- Brawler: An unequipped shield adds to unarmed damage, using both hands.
-- Bruiser: Current stamina adds unarmed bonus damage & unarmed strikes have a chance to stagger.
-- Inoculation: Poison health reduction is halved and recovery rate is accelerated.
+### Traits
+
+`TODO`
+
+Traits are permanent passive abilities acquired upon retiring for all subsequent new quests.
+
+- Brawler: Wearing no shield adds doubles unarmed damage.
+- Bruiser: Current stamina adds unarmed bonus damage & unarmed attacks have a chance to stagger.
+- Inoculated: When poisoned, health reduction and recovery rate are halved.
 - Nudist: Double dodge rate when not wearing any armor.
-- Field surgeon: Automatically consume a bandage if at low health.
-- Scrounger: Double looting rate.
-- Shredder: Total bleed damage is inflicted all at once.
-- Tank: Ignore penalties when wearing heavy armor.
+- Field surgeon: Automatically restore health when not in combat.
+- Shredder: Bleed damage is inflicted all at once.
+- Stalwart: Ignore penalties when wearing armor.
+- Tank: Shields increase protection by 50%.
 
 ## Quests
 
 `TODO`
 
-Meta progression. Grant bonuses when completed.
+Progression trackers, similar to achievements. Grant bonuses when completed.
 
 ### Challenges
 

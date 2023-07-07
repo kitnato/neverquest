@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { Block } from "@neverquest/components/Statistics/Block";
 import { Dodge } from "@neverquest/components/Statistics/Dodge";
-import { Parry } from "@neverquest/components/Statistics/Parry";
+import { ParryRating } from "@neverquest/components/Statistics/ParryRating";
 import { Protection } from "@neverquest/components/Statistics/Protection";
 import { isShowing } from "@neverquest/state/isShowing";
 
@@ -32,7 +32,7 @@ export function Defense() {
       </Col>
 
       <Col>
-        <Parry />
+        <ParryRating />
       </Col>
     </Row>
   );

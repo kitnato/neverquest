@@ -58,7 +58,7 @@ export function getDamagePerTick({
   proportion: number;
   ticks: number;
 }) {
-  return Math.ceil(((damage * proportion) / duration) * (duration / ticks));
+  return Math.round(((damage * proportion) / duration) * (duration / ticks)) || 1;
 }
 
 export function getFromRange({ maximum, minimum }: Range) {

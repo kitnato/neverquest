@@ -88,6 +88,20 @@ export const level = withStateKey("level", (key) =>
   })
 );
 
+export const rawAttributeStatistic = withStateKey("rawAttributeStatistic", (key) =>
+  selectorFamily<number, Attribute>({
+    get:
+      (type) =>
+      ({ get }) => {
+        const { base, increment } = ATTRIBUTES[type];
+        const { points } = get(attributes(type));
+
+        return getComputedStatistic({ amount: points, base, increment });
+      },
+    key,
+  })
+);
+
 // ATOMS
 
 export const attributes = withStateKey("attributes", (key) =>

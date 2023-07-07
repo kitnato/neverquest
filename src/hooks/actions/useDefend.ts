@@ -14,6 +14,7 @@ import {
 import { deltas } from "@neverquest/state/deltas";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { rawMasteryStatistic } from "@neverquest/state/masteries";
 import {
   monsterBlightChance,
   monsterDamage,
@@ -28,14 +29,11 @@ import {
   block,
   deflection,
   dodgeTotal,
-  parry,
   parryAbsorption,
+  parryChance,
   parryDamage,
   protection,
   recoveryRate,
-  resilience,
-  stability,
-  staggerDuration,
 } from "@neverquest/state/statistics";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import { animateElement } from "@neverquest/utilities/animateElement";
@@ -99,7 +97,7 @@ export function useDefend() {
         let deltaHealth: DeltaDisplay = [];
         let deltaStamina: DeltaDisplay = [];
 
-        const hasParried = get(skills("escrime")) && Math.random() <= get(parry);
+        const hasParried = get(skills("escrime")) && Math.random() <= get(parryChance);
 
         // If parrying occurs, check & apply stamina cost.
         if (hasParried) {
@@ -176,7 +174,10 @@ export function useDefend() {
             ];
 
             // If Shieldcraft skill is acquired, check if a free block occurs, otherwise spend stamina blocking.
-            if (get(skills("shieldcraft")) && Math.random() <= get(stability)) {
+            if (
+              get(skills("shieldcraft")) &&
+              Math.random() <= get(rawMasteryStatistic("stability"))
+            ) {
               deltaStamina.push({
                 color: "text-muted",
                 value: "STABILIZED",
@@ -193,7 +194,7 @@ export function useDefend() {
             // If monster is staggered, also increase Might mastery.
             if (hasStaggered) {
               set(isShowing("monsterAilments"), true);
-              set(monsterStaggerDuration, get(staggerDuration));
+              set(monsterStaggerDuration, get(rawMasteryStatistic("might")));
 
               increaseMastery("might");
 
@@ -234,7 +235,9 @@ export function useDefend() {
         }
 
         // If Resilience hasn't been triggered, activate recovery.
-        if (!(get(skills("armorcraft")) && Math.random() <= get(resilience))) {
+        if (
+          !(get(skills("armorcraft")) && Math.random() <= get(rawMasteryStatistic("resilience")))
+        ) {
           set(isShowing("recovery"), true);
           set(recoveryDuration, get(recoveryRate));
         }

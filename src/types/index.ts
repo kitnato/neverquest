@@ -54,6 +54,7 @@ export type GearItem = Armor | Shield | Weapon;
 type GearBase = ItemBase & { isEquipped: boolean; level: number; name: string; scrapPrice: number };
 
 export type MasteryData = AttributeOrMasteryBaseData & {
+  instructions: string;
   maximum: number;
 };
 

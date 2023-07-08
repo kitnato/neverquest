@@ -22,7 +22,7 @@ export function Masteries() {
         </Accordion.Header>
 
         <Accordion.Body>
-          <Stack gap={4}>
+          <Stack gap={3}>
             {MASTERIES_ORDER.map((type) => (
               <MasteryDisplay key={type} type={type} />
             ))}

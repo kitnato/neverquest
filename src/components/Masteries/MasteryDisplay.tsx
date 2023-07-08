@@ -1,4 +1,4 @@
-import { Stack } from "react-bootstrap";
+import { OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
@@ -17,7 +17,7 @@ export function MasteryDisplay({ type }: { type: Mastery }) {
   const { isUnlocked, progress, rank } = useRecoilValue(masteries(type));
   const masteryCostValue = useRecoilValue(masteryCost(type));
 
-  const { description, Icon } = MASTERIES[type];
+  const { description, Icon, instructions } = MASTERIES[type];
   const label = isMasteryAtMaximumValue ? LABEL_AT_MAXIMUM : `${progress}/${masteryCostValue}`;
   const value = isMasteryAtMaximumValue ? 100 : (progress / masteryCostValue) * 100;
 
@@ -26,20 +26,28 @@ export function MasteryDisplay({ type }: { type: Mastery }) {
       {isUnlocked ? (
         <IconDisplay
           contents={
-            <Stack gap={1}>
-              <span>{capitalizeAll(type)}</span>
+            <Stack>
+              <div>
+                <OverlayTrigger overlay={<Tooltip>{description}</Tooltip>} placement="right">
+                  <span>{capitalizeAll(type)}</span>
+                </OverlayTrigger>
+              </div>
+
               <Stack direction="horizontal">
                 <Stack className="w-100" direction="horizontal" gap={3}>
                   <span>{rank}</span>
 
-                  <LabelledProgressBar label={label} value={value} variant="secondary" />
+                  <OverlayTrigger overlay={<Tooltip>{instructions}</Tooltip>}>
+                    <span className="w-100">
+                      <LabelledProgressBar label={label} value={value} variant="secondary" />
+                    </span>
+                  </OverlayTrigger>
                 </Stack>
 
                 <FloatingText deltaType={type} />
               </Stack>
             </Stack>
           }
-          description={description}
           Icon={Icon}
           tooltip="Mastery"
         />

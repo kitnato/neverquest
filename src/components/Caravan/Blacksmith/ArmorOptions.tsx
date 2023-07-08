@@ -7,10 +7,10 @@ import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DodgePenaltyContents } from "@neverquest/components/Inventory/DodgePenaltyContents";
 import { BLACKSMITH_GEAR_LEVEL_MAXIMUM } from "@neverquest/data/caravan";
+import { ARMOR_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
 import { ReactComponent as IconDodgePenalty } from "@neverquest/icons/dodge-penalty.svg";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
-import { ReactComponent as IconClass } from "@neverquest/icons/gear-class.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { ReactComponent as IconArmorProtection } from "@neverquest/icons/protection.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
@@ -44,6 +44,7 @@ export function ArmorOptions() {
     level: armorLevel,
   });
   const { deflection, protection, ranges, staminaCost, weight } = armor;
+  const { Icon } = ARMOR_SPECIFICATIONS[armorClass];
   const maximumArmorLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
 
   return (
@@ -89,7 +90,7 @@ export function ArmorOptions() {
               ))}
             </FormSelect>
           }
-          Icon={IconClass}
+          Icon={Icon}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Class"
         />

@@ -45,6 +45,7 @@ export function generateArmor({
   };
 
   return {
+    // TODO - base to /data.
     coinPrice: Math.round(500 * growthFactor * priceModifier),
     deflection: getFromRange(ranges.deflection),
     gearClass,
@@ -62,6 +63,7 @@ export function generateArmor({
         },
         tags,
       }),
+    // TODO - base to /data.
     protection: Math.round(300 * growthFactor * protectionModifier),
     ranges,
     scrapPrice: Math.round(3500 * growthFactor * priceModifier),
@@ -75,6 +77,7 @@ export function generateWilderness({ allowNSFW, stage }: { allowNSFW: boolean; s
 
   return LOCRA.generateLocation({
     allowNSFW,
+    // TODO - base to /data.
     hasPrefix: Math.random() < 0.7 + 0.3 * growthFactor,
     hasSuffix: Math.random() < 0.1 + 0.7 * growthFactor,
   });
@@ -109,6 +112,7 @@ export function generateShield({
 
   return {
     block: getFromRange(ranges.block),
+    // TODO - base to /data.
     coinPrice: Math.round(400 * growthFactor),
     gearClass,
     id: nanoid(),
@@ -127,6 +131,7 @@ export function generateShield({
         tags,
       }),
     ranges,
+    // TODO - base to /data.
     scrapPrice: Math.round(3000 * growthFactor),
     stagger: (0.1 + 0.9 * growthFactor) * staggerModifier,
     staminaCost: Math.ceil(30 * growthFactor * staminaCostModifier),
@@ -159,10 +164,12 @@ export function generateWeapon({
       minimum: abilityChance.minimum,
     },
     damage: {
+      // TODO - base to /data.
       maximum: Math.round(1200 * growthFactor),
       minimum: Math.round(1000 * growthFactor),
     },
     rate: {
+      // TODO - base to /data.
       maximum: 3500 - Math.round(ATTACK_RATE_ATTENUATION * growthFactor),
       minimum: 3300 - Math.round(ATTACK_RATE_ATTENUATION * growthFactor),
     },
@@ -170,6 +177,7 @@ export function generateWeapon({
 
   return {
     abilityChance: getFromRange(ranges.ability),
+    // TODO - base to /data.
     coinPrice: Math.round(300 * growthFactor),
     damage: getFromRange(ranges.damage),
     gearClass,
@@ -192,6 +200,7 @@ export function generateWeapon({
     }),
     ranges,
     rate: getFromRange(ranges.rate),
+    // TODO - base to /data.
     scrapPrice: Math.round(2500 * growthFactor),
     staminaCost: Math.ceil(40 * growthFactor),
     weight: Math.ceil(30 * growthFactor),

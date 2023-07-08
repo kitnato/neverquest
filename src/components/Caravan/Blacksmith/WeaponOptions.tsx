@@ -8,11 +8,9 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { BLACKSMITH_GEAR_LEVEL_MAXIMUM } from "@neverquest/data/caravan";
 import { WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
-import { ReactComponent as IconClass } from "@neverquest/icons/gear-class.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
-import { ReactComponent as IconWeaponAbility } from "@neverquest/icons/weapon-ability.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
 import { WEAPON_CLASSES, type WeaponClass } from "@neverquest/LOCRA/types";
@@ -37,7 +35,8 @@ export function WeaponOptions() {
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
   const [weaponLevel, setWeaponLevel] = useState(stageValue);
 
-  const { abilityName, showingType } = WEAPON_SPECIFICATIONS[weaponClass];
+  const { abilityName, IconAbility, IconGearClass, showingType } =
+    WEAPON_SPECIFICATIONS[weaponClass];
 
   const isShowingValue = useRecoilValue(isShowing(showingType));
 
@@ -101,7 +100,7 @@ export function WeaponOptions() {
               ))}
             </FormSelect>
           }
-          Icon={IconClass}
+          Icon={IconGearClass}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Class"
         />
@@ -130,7 +129,7 @@ export function WeaponOptions() {
                 )}`
               : LABEL_UNKNOWN
           }
-          Icon={isShowingValue ? IconWeaponAbility : IconUnknown}
+          Icon={isShowingValue ? IconAbility : IconUnknown}
           iconProps={{ overlayPlacement: "left" }}
           tooltip={isShowingValue ? `${abilityName} chance` : LABEL_UNKNOWN}
         />

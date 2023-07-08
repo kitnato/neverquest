@@ -6,10 +6,11 @@ import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGe
 import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { BLACKSMITH_GEAR_LEVEL_MAXIMUM } from "@neverquest/data/caravan";
+import { SHIELD_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
-import { ReactComponent as IconClass } from "@neverquest/icons/gear-class.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
+import { ReactComponent as IconShieldStagger } from "@neverquest/icons/shield-stagger.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { SHIELD_CLASSES, type ShieldClass } from "@neverquest/LOCRA/types";
@@ -42,6 +43,7 @@ export function ShieldOptions() {
     level: shieldLevel,
   });
   const { ranges, stagger, staminaCost, weight } = shield;
+  const { Icon } = SHIELD_SPECIFICATIONS[shieldClass];
   const maximumShieldLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
 
   return (
@@ -87,7 +89,7 @@ export function ShieldOptions() {
               ))}
             </FormSelect>
           }
-          Icon={IconClass}
+          Icon={Icon}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Class"
         />
@@ -103,7 +105,7 @@ export function ShieldOptions() {
 
         <IconDisplay
           contents={isShowingStagger ? formatPercentage(stagger) : LABEL_UNKNOWN}
-          Icon={isShowingStagger ? IconStamina : IconUnknown}
+          Icon={isShowingStagger ? IconShieldStagger : IconUnknown}
           iconProps={{ overlayPlacement: "left" }}
           tooltip={isShowingStagger ? "Stagger chance" : LABEL_UNKNOWN}
         />

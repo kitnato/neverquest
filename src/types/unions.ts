@@ -39,6 +39,7 @@ export type Delta =
   | "damagePerSecond"
   | "deflection"
   | "dodge"
+  | "encumbrance"
   | "essence"
   | "essenceAbsorbed"
   | "essenceLoot"

@@ -22,7 +22,7 @@ export function ExpandInventory() {
 
   const handleExpansion = () => {
     transactResources({ coinsDifference: -price });
-    setEncumbranceMaximum((current) => current + 1);
+    setEncumbranceMaximum((current) => current + 3);
   };
 
   return (

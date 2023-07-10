@@ -37,17 +37,24 @@ export function generateArmor({
   const { deflectionRange, dodgeCostModifier, priceModifier, protectionModifier, weightModifier } =
     ARMOR_SPECIFICATIONS[gearClass];
   const growthFactor = getGrowthSigmoid(level);
-  const ranges = {
-    deflection: {
-      maximum: deflectionRange.maximum - (deflectionRange.maximum / 2) * (1 - growthFactor),
-      minimum: deflectionRange.minimum - (deflectionRange.minimum / 2) * (1 - growthFactor),
-    },
-  };
+  const ranges =
+    deflectionRange === undefined
+      ? null
+      : {
+          deflection: {
+            maximum:
+              deflectionRange[0].maximum +
+              (deflectionRange[1].maximum - deflectionRange[0].maximum) * growthFactor,
+            minimum:
+              deflectionRange[0].minimum +
+              (deflectionRange[1].minimum - deflectionRange[0].minimum) * growthFactor,
+          },
+        };
 
   return {
     // TODO - base to /data.
     coinPrice: Math.round(500 * growthFactor * priceModifier),
-    deflection: getFromRange(ranges.deflection),
+    deflection: ranges === null ? 0 : getFromRange(ranges.deflection),
     gearClass,
     id: nanoid(),
     isEquipped: false,
@@ -105,8 +112,10 @@ export function generateShield({
   const growthFactor = getGrowthSigmoid(level);
   const ranges = {
     block: {
-      maximum: blockRange.maximum - (blockRange.maximum / 2) * (1 - growthFactor),
-      minimum: blockRange.minimum,
+      maximum:
+        blockRange[0].maximum + (blockRange[1].maximum - blockRange[0].maximum) * growthFactor,
+      minimum:
+        blockRange[0].minimum + (blockRange[1].minimum - blockRange[0].minimum) * growthFactor,
     },
   };
 
@@ -160,13 +169,17 @@ export function generateWeapon({
   const growthFactor = getGrowthSigmoid(level);
   const ranges = {
     ability: {
-      maximum: abilityChance.maximum - (abilityChance.maximum / 2) * (1 - growthFactor),
-      minimum: abilityChance.minimum,
+      maximum:
+        abilityChance[0].maximum +
+        (abilityChance[1].maximum - abilityChance[0].maximum) * growthFactor,
+      minimum:
+        abilityChance[0].minimum +
+        (abilityChance[1].minimum - abilityChance[0].minimum) * growthFactor,
     },
     damage: {
       // TODO - base to /data.
       maximum: Math.round(1200 * growthFactor),
-      minimum: Math.round(1000 * growthFactor),
+      minimum: Math.round(1100 * growthFactor),
     },
     rate: {
       // TODO - base to /data.

@@ -43,7 +43,7 @@ export function ArmorOptions() {
     hasSuffix: Math.random() < getGrowthSigmoid(armorLevel),
     level: armorLevel,
   });
-  const { deflection, protection, ranges, staminaCost, weight } = armor;
+  const { protection, ranges, staminaCost, weight } = armor;
   const { Icon } = ARMOR_SPECIFICATIONS[armorClass];
   const maximumArmorLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
 
@@ -102,7 +102,7 @@ export function ArmorOptions() {
           tooltip="Protection"
         />
 
-        {deflection > 0 && (
+        {ranges !== null && (
           <IconDisplay
             contents={
               isShowingDeflection

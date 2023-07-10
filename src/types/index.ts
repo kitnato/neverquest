@@ -8,7 +8,7 @@ export type Armor = GearBase & {
   protection: number;
   ranges: {
     deflection: Range;
-  };
+  } | null;
   staminaCost: number;
 };
 

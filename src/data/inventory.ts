@@ -41,7 +41,7 @@ export const ARMOR_NONE = {
 export const ARMOR_SPECIFICATIONS: Record<
   ArmorClass,
   {
-    deflectionRange: Range;
+    deflectionRange?: [Range, Range];
     dodgeCostModifier: number;
     Icon: SVGIcon;
     priceModifier: number;
@@ -50,28 +50,33 @@ export const ARMOR_SPECIFICATIONS: Record<
   }
 > = {
   hide: {
-    deflectionRange: { maximum: 0, minimum: 0 },
     dodgeCostModifier: 0,
     Icon: IconHide,
+    priceModifier: 0.2,
+    protectionModifier: 0.25,
+    weightModifier: 0.2,
+  },
+  plate: {
+    deflectionRange: [
+      { maximum: 0.4, minimum: 0.33 },
+      { maximum: 0.65, minimum: 0.55 },
+    ],
+    dodgeCostModifier: Infinity,
+    Icon: IconPlate,
     priceModifier: 1,
     protectionModifier: 1,
     weightModifier: 1,
   },
-  plate: {
-    deflectionRange: { maximum: 0.6, minimum: 0.3 },
-    dodgeCostModifier: Infinity,
-    Icon: IconPlate,
-    priceModifier: 2,
-    protectionModifier: 2.5,
-    weightModifier: 2.5,
-  },
   reinforced: {
-    deflectionRange: { maximum: 0.29, minimum: 0.1 },
+    deflectionRange: [
+      { maximum: 0.2, minimum: 0.13 },
+      { maximum: 0.32, minimum: 0.25 },
+    ],
     dodgeCostModifier: 1,
     Icon: IconReinforced,
-    priceModifier: 1.5,
-    protectionModifier: 1.5,
-    weightModifier: 1.75,
+    priceModifier: 0.5,
+    protectionModifier: 0.5,
+    weightModifier: 0.5,
   },
 };
 
@@ -139,7 +144,7 @@ export const SHIELD_NONE = {
 export const SHIELD_SPECIFICATIONS: Record<
   ShieldClass,
   {
-    blockRange: Range;
+    blockRange: [Range, Range];
     Icon: SVGIcon;
     staggerModifier: number;
     staminaCostModifier: number;
@@ -147,25 +152,34 @@ export const SHIELD_SPECIFICATIONS: Record<
   }
 > = {
   medium: {
-    blockRange: { maximum: 0.49, minimum: 0.25 },
+    blockRange: [
+      { maximum: 0.3, minimum: 0.25 },
+      { maximum: 0.45, minimum: 0.4 },
+    ],
     Icon: IconShieldMedium,
-    staggerModifier: 1.5,
-    staminaCostModifier: 2,
-    weightModifier: 1.5,
+    staggerModifier: 0.4,
+    staminaCostModifier: 0.5,
+    weightModifier: 0.5,
   },
   small: {
-    blockRange: { maximum: 0.24, minimum: 0.1 },
+    blockRange: [
+      { maximum: 0.2, minimum: 0.13 },
+      { maximum: 0.24, minimum: 0.2 },
+    ],
     Icon: IconShieldSmall,
+    staggerModifier: 0.2,
+    staminaCostModifier: 0.25,
+    weightModifier: 0.25,
+  },
+  tower: {
+    blockRange: [
+      { maximum: 0.55, minimum: 0.45 },
+      { maximum: 0.75, minimum: 0.7 },
+    ],
+    Icon: IconShieldTower,
     staggerModifier: 1,
     staminaCostModifier: 1,
     weightModifier: 1,
-  },
-  tower: {
-    blockRange: { maximum: 0.75, minimum: 0.5 },
-    Icon: IconShieldTower,
-    staggerModifier: 2.5,
-    staminaCostModifier: 3,
-    weightModifier: 2,
   },
 };
 
@@ -249,7 +263,7 @@ export const WEAPON_NONE: Omit<Weapon, "coinPrice" | "isEquipped" | "ranges" | "
 export const WEAPON_SPECIFICATIONS: Record<
   WeaponClass,
   {
-    abilityChance: Range;
+    abilityChance: [Range, Range];
     abilityName: string;
     IconAbility: SVGIcon;
     IconGearClass: SVGIcon;
@@ -257,21 +271,30 @@ export const WEAPON_SPECIFICATIONS: Record<
   }
 > = {
   blunt: {
-    abilityChance: { maximum: 0.5, minimum: 0.1 },
+    abilityChance: [
+      { maximum: 0.2, minimum: 0.13 },
+      { maximum: 0.5, minimum: 0.43 },
+    ],
     abilityName: "Stagger",
     IconAbility: IconWeaponStagger,
     IconGearClass: IconBlunt,
     showingType: "stagger",
   },
   piercing: {
-    abilityChance: { maximum: 0.5, minimum: 0.2 },
+    abilityChance: [
+      { maximum: 0.25, minimum: 0.2 },
+      { maximum: 0.6, minimum: 0.53 },
+    ],
     abilityName: "Bleed",
     IconAbility: IconWeaponBleed,
     IconGearClass: IconPiercing,
     showingType: "bleed",
   },
   slashing: {
-    abilityChance: { maximum: 0.6, minimum: 0.15 },
+    abilityChance: [
+      { maximum: 0.2, minimum: 0.12 },
+      { maximum: 0.6, minimum: 0.53 },
+    ],
     abilityName: "Parry",
     IconAbility: IconParry,
     IconGearClass: IconSlashing,

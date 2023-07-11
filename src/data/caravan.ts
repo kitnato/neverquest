@@ -111,7 +111,7 @@ export const CREW_ORDER: CrewMember[] = Object.entries(CREW)
   .sort(([, a], [, b]) => a.requiredStage - b.requiredStage)
   .map(([type]) => type as CrewMember);
 
-export const OCCULTIST_PURGE_PRICE_MULTIPLIER = 0.66;
+export const OCCULTIST_PURGE_PRICE_MULTIPLIER = 0.33;
 
 export const MEDIC_PRICE_BANDAGES = 18;
 export const MEDIC_PRICE_SURGERY = 6;

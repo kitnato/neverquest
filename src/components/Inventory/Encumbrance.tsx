@@ -21,22 +21,18 @@ export function Encumbrance() {
   });
 
   return (
-    <IconDisplay
-      contents={
-        <Stack className="w-100" direction="horizontal">
-          <div className="w-100">
-            <LabelledProgressBar
-              label={`${encumbranceValue}/${encumbranceMaximumValue}`}
-              value={(encumbranceValue / encumbranceMaximumValue) * 100}
-              variant="dark"
-            />
-          </div>
+    <Stack className="w-100" direction="horizontal">
+      <IconDisplay contents="" Icon={IconEncumbrance} tooltip="Encumbrance" />
 
-          <FloatingText deltaType="encumbrance" />
-        </Stack>
-      }
-      Icon={IconEncumbrance}
-      tooltip="Encumbrance"
-    />
+      <FloatingText deltaType="encumbrance" />
+
+      <div className="w-100">
+        <LabelledProgressBar
+          label={`${encumbranceValue}/${encumbranceMaximumValue}`}
+          value={(encumbranceValue / encumbranceMaximumValue) * 100}
+          variant="dark"
+        />
+      </div>
+    </Stack>
   );
 }

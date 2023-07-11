@@ -44,7 +44,7 @@ export function FloatingText({ deltaType }: { deltaType: Delta }) {
   }, [deltaValue, resetDeltaValue, setFloatingTextQueue]);
 
   return (
-    <div className="d-flex flex-nowrap position-relative">
+    <div className="d-flex flex-nowrap position-relative" style={{ zIndex: 100 }}>
       {floatingTextQueue.map(({ delta, key }) => (
         <small className="position-absolute" key={key} style={{ bottom: -8, left: 4 }}>
           <strong

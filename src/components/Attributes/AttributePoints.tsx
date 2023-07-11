@@ -19,16 +19,12 @@ export function AttributePoints() {
   });
 
   return (
-    <IconDisplay
-      contents={
-        <Stack direction="horizontal">
-          <span>{attributePointsValue}</span>
+    <Stack direction="horizontal">
+      <IconDisplay contents="" Icon={IconAttributePoints} tooltip="Available attribute points" />
 
-          <FloatingText deltaType="attributePoints" />
-        </Stack>
-      }
-      Icon={IconAttributePoints}
-      tooltip="Available attribute points"
-    />
+      <FloatingText deltaType="attributePoints" />
+
+      <span>{attributePointsValue}</span>
+    </Stack>
   );
 }

@@ -1,18 +1,15 @@
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
+import { PurchaseItemButton } from "@neverquest/components/Caravan/PurchaseItemButton";
 import { useAcquireGear } from "@neverquest/hooks/actions/useAcquireGear";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { hasBoughtFromMerchant, merchantInventory } from "@neverquest/state/caravan";
-import { canFit } from "@neverquest/state/inventory";
-import { coins } from "@neverquest/state/resources";
 import type { Item } from "@neverquest/types";
 import { isGear } from "@neverquest/types/type-guards";
 
-export function PurchaseItemButton({ item }: { item: Item }) {
-  const coinsValue = useRecoilValue(coins);
+export function PurchaseItem({ item }: { item: Item }) {
   const setMerchantInventory = useSetRecoilState(merchantInventory);
   const setHasBoughtFromMerchant = useSetRecoilState(hasBoughtFromMerchant);
 
@@ -21,10 +18,7 @@ export function PurchaseItemButton({ item }: { item: Item }) {
   const toggleEquipGear = useToggleEquipGear();
   const transactResources = useTransactResources();
 
-  const { coinPrice, weight } = item;
-  const isAffordable = coinPrice <= coinsValue;
-  const canFitValue = useRecoilValue(canFit(weight));
-  const isPurchasable = isAffordable && canFitValue;
+  const { coinPrice } = item;
 
   const handlePurchase = () => {
     let hasAcquiredItem = false;
@@ -46,21 +40,5 @@ export function PurchaseItemButton({ item }: { item: Item }) {
     }
   };
 
-  return (
-    <OverlayTrigger
-      overlay={
-        <Tooltip>
-          {!isAffordable && <div>Not enough coins!</div>}
-          {!canFitValue && <div>Over-encumbered!</div>}
-        </Tooltip>
-      }
-      trigger={isPurchasable ? [] : ["hover", "focus"]}
-    >
-      <span>
-        <Button disabled={!isPurchasable} onClick={handlePurchase} variant="outline-dark">
-          Purchase
-        </Button>
-      </span>
-    </OverlayTrigger>
-  );
+  return <PurchaseItemButton handlePurchase={handlePurchase} item={item} />;
 }

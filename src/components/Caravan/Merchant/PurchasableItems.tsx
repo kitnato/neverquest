@@ -1,6 +1,6 @@
 import { Stack } from "react-bootstrap";
 
-import { PurchaseItemButton } from "@neverquest/components/Caravan/Merchant/PurchaseItemButton";
+import { PurchaseItem } from "@neverquest/components/Caravan/Merchant/PurchaseItem";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import type { Item } from "@neverquest/types";
@@ -19,7 +19,7 @@ export function PurchasableItems({ items }: { items: Item[] }) {
             <Stack direction="horizontal" gap={3}>
               <ResourceDisplay tooltip="Price (coins)" type="coins" value={coinPrice} />
 
-              <PurchaseItemButton item={item} />
+              <PurchaseItem item={item} />
             </Stack>
           </div>
         );

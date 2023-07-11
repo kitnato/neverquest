@@ -1,21 +1,17 @@
 import { nanoid } from "nanoid";
-import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Stack } from "react-bootstrap";
 
+import { PurchaseItemButton } from "@neverquest/components/Caravan/PurchaseItemButton";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { CONSUMABLES } from "@neverquest/data/inventory";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
-import { canFit } from "@neverquest/state/inventory";
-import { coins } from "@neverquest/state/resources";
 import type { ConsumableItem } from "@neverquest/types";
 import type { Consumable } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 
 export function PurchaseConsumable({ type }: { type: Consumable }) {
-  const coinsValue = useRecoilValue(coins);
-
   const acquireItem = useAcquireItem();
   const transactResources = useTransactResources();
 
@@ -24,11 +20,7 @@ export function PurchaseConsumable({ type }: { type: Consumable }) {
     ...item,
     id: nanoid(),
   };
-  const { coinPrice, weight } = itemWithID;
-
-  const canFitValue = useRecoilValue(canFit(weight));
-  const isAffordable = coinPrice <= coinsValue;
-  const isPurchasable = canFitValue && isAffordable;
+  const { coinPrice } = itemWithID;
 
   const handlePurchase = () => {
     if (acquireItem(itemWithID)) {
@@ -43,21 +35,7 @@ export function PurchaseConsumable({ type }: { type: Consumable }) {
       <Stack direction="horizontal" gap={3}>
         <ResourceDisplay tooltip="Price (coins)" type="coins" value={coinPrice} />
 
-        <OverlayTrigger
-          overlay={
-            <Tooltip>
-              {!isAffordable && <div>Not enough coins!</div>}
-              {!canFitValue && <div>Over-encumbered!</div>}
-            </Tooltip>
-          }
-          trigger={isPurchasable ? [] : ["hover", "focus"]}
-        >
-          <span>
-            <Button disabled={!isPurchasable} onClick={handlePurchase} variant="outline-dark">
-              Purchase
-            </Button>
-          </span>
-        </OverlayTrigger>
+        <PurchaseItemButton handlePurchase={handlePurchase} item={itemWithID} />
       </Stack>
     </div>
   );

@@ -8,6 +8,8 @@ import { RegenerationMeter } from "@neverquest/components/Reserves/RegenerationM
 import { RESERVES } from "@neverquest/data/reserves";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconFortitude } from "@neverquest/icons/fortitude.svg";
+import { ReactComponent as IconRegenerationAmount } from "@neverquest/icons/regeneration-amount.svg";
+import { ReactComponent as IconRegenerationRate } from "@neverquest/icons/regeneration-rate.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconVigor } from "@neverquest/icons/vigor.svg";
 import { rawAttributeStatistic } from "@neverquest/state/attributes";
@@ -47,52 +49,58 @@ export function Regeneration({ type }: { type: Reserve }) {
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Base rate:</td>
 
-                  <td>{formatMilliseconds(baseRegenerationRate)}</td>
+                  <td>
+                    <IconImage Icon={IconRegenerationRate} size="tiny" />
+                    &nbsp;{formatMilliseconds(baseRegenerationRate)}
+                  </td>
                 </tr>
 
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Vigor:</td>
-
-                  <td>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>
                     <IconImage Icon={IconVigor} size="tiny" />
-                    &nbsp;{`-${formatPercentage(vigorValue)}`}
+                    &nbsp;Vigor:
                   </td>
+
+                  <td>{`-${formatPercentage(vigorValue)}`}</td>
                 </tr>
 
                 {powerBonusRateValue > 0 && (
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Empowered:</td>
-
-                    <td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
                       <IconImage Icon={IconPower} size="tiny" />
-                      &nbsp;{`+${formatPercentage(powerBonusRateValue)}`}
+                      &nbsp;Empowered:
                     </td>
+
+                    <td>{`+${formatPercentage(powerBonusRateValue)}`}</td>
                   </tr>
                 )}
 
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Base amount:</td>
 
-                  <td>{baseRegenerationAmount}</td>
+                  <td>
+                    <IconImage Icon={IconRegenerationAmount} size="tiny" />
+                    &nbsp;{baseRegenerationAmount}
+                  </td>
                 </tr>
 
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Fortitude:</td>
-
-                  <td>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>
                     <IconImage Icon={IconFortitude} size="tiny" />
-                    &nbsp;{`+${fortitudeValue}`}
+                    &nbsp;Fortitude:
                   </td>
+
+                  <td>{`+${fortitudeValue}`}</td>
                 </tr>
 
                 {powerBonusAmountValue > 0 && (
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Empowered:</td>
-
-                    <td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
                       <IconImage Icon={IconPower} size="tiny" />
-                      &nbsp;{`+${formatPercentage(powerBonusAmountValue, 0)}`}
+                      &nbsp;Empowered:
                     </td>
+
+                    <td>{`+${formatPercentage(powerBonusAmountValue, 0)}`}</td>
                   </tr>
                 )}
               </DetailsTable>

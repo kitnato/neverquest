@@ -44,29 +44,26 @@ export function Stamina() {
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
 
-                        <td>
-                          <IconImage Icon={IconStamina} size="tiny" />
-                          &nbsp;{baseAmount}
-                        </td>
+                        <td>{baseAmount}</td>
                       </tr>
 
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Endurance:</td>
-
-                        <td>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>
                           <IconImage Icon={IconEndurance} size="tiny" />
-                          &nbsp;{`+${enduranceValue - baseAmount}`}
+                          &nbsp;Endurance:
                         </td>
+
+                        <td>{`+${enduranceValue - baseAmount}`}</td>
                       </tr>
 
                       {powerBonusValue > 0 && (
                         <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Empowered:</td>
-
-                          <td>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>
                             <IconImage Icon={IconPower} size="tiny" />
-                            &nbsp;{`+${formatPercentage(powerBonusValue, 0)}`}
+                            &nbsp;Empowered:
                           </td>
+
+                          <td>{`+${formatPercentage(powerBonusValue, 0)}`}</td>
                         </tr>
                       )}
                     </DetailsTable>

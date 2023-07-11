@@ -61,23 +61,23 @@ export function Attack() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Speed:</td>
-
-                      <td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
                         <IconImage Icon={IconWeaponSpeed} size="tiny" />
-                        &nbsp;{`-${formatPercentage(speedValue, 0)}`}
+                        &nbsp;Speed:
                       </td>
+
+                      <td>{`-${formatPercentage(speedValue, 0)}`}</td>
                     </tr>
 
                     {powerBonusValue > 0 && (
                       <>
                         <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Empowered:</td>
-
-                          <td>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>
                             <IconImage Icon={IconPower} size="tiny" />
-                            &nbsp;{`+${formatPercentage(powerBonusValue)}`}
+                            &nbsp;Empowered:
                           </td>
+
+                          <td>{`+${formatPercentage(powerBonusValue)}`}</td>
                         </tr>
 
                         <tr>

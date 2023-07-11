@@ -39,29 +39,26 @@ export function Health() {
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
 
-                        <td>
-                          <IconImage Icon={IconHealth} size="tiny" />
-                          &nbsp;{baseAmount}
-                        </td>
+                        <td>{baseAmount}</td>
                       </tr>
 
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Vitality:</td>
-
-                        <td>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>
                           <IconImage Icon={IconVitality} size="tiny" />
-                          &nbsp;{`+${vitalityValue - baseAmount}`}
+                          &nbsp;Vitality:
                         </td>
+
+                        <td>{`+${vitalityValue - baseAmount}`}</td>
                       </tr>
 
                       {powerBonusValue > 0 && (
                         <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Empowered:</td>
-
-                          <td>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>
                             <IconImage Icon={IconPower} size="tiny" />
-                            &nbsp;{`+${formatPercentage(powerBonusValue, 0)}`}
+                            &nbsp;Empowered:
                           </td>
+
+                          <td>{`+${formatPercentage(powerBonusValue, 0)}`}</td>
                         </tr>
                       )}
                     </DetailsTable>

@@ -39,7 +39,7 @@ export function Damage() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header className="text-center">Damage details</Popover.Header>
+                <Popover.Header className="text-center">Total damage details</Popover.Header>
 
                 <Popover.Body>
                   <DetailsTable>
@@ -53,23 +53,23 @@ export function Damage() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Strength:</td>
-
-                      <td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
                         <IconImage Icon={IconStrength} size="tiny" />
-                        &nbsp;{`+${strengthValue}`}
+                        &nbsp;Strength:
                       </td>
+
+                      <td>{`+${strengthValue}`}</td>
                     </tr>
 
                     {powerBonusValue > 0 && (
                       <>
                         <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Empowered:</td>
-
-                          <td>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>
                             <IconImage Icon={IconPower} size="tiny" />
-                            &nbsp;{`+${formatPercentage(powerBonusValue, 0)}`}
+                            &nbsp;Empowered:
                           </td>
+
+                          <td>{`+${formatPercentage(powerBonusValue, 0)}`}</td>
                         </tr>
 
                         <tr>

@@ -70,12 +70,12 @@ export function StaggerRating() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Might:</td>
-
-                      <td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
                         <IconImage Icon={IconMight} size="tiny" />
-                        &nbsp;{`${formatMilliseconds(mightValue)}`}
+                        &nbsp;Might:
                       </td>
+
+                      <td>{`${formatMilliseconds(mightValue)}`}</td>
                     </tr>
                   </DetailsTable>
                 </Popover.Body>

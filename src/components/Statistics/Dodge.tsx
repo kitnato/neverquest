@@ -8,6 +8,7 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { DodgePenaltyContents } from "@neverquest/components/Inventory/DodgePenaltyContents";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconAgility } from "@neverquest/icons/agility.svg";
+import { ReactComponent as IconDodgePenalty } from "@neverquest/icons/dodge-penalty.svg";
 import { ReactComponent as IconDodge } from "@neverquest/icons/dodge.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
 import { rawAttributeStatistic } from "@neverquest/state/attributes";
@@ -55,22 +56,22 @@ export function Dodge() {
                 <Popover.Body>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Agility:</td>
-
-                      <td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
                         <IconImage Icon={IconAgility} size="tiny" />
-                        &nbsp;{`${formatPercentage(statisticValue, 0)}`}
+                        &nbsp;Agility:
                       </td>
+
+                      <td>{`${formatPercentage(statisticValue, 0)}`}</td>
                     </tr>
 
                     {powerBonusValue > 0 && (
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Empowered:</td>
-
-                        <td>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>
                           <IconImage Icon={IconPower} size="tiny" />
-                          &nbsp;{`+${formatPercentage(powerBonusValue)}`}
+                          &nbsp;Empowered:
                         </td>
+
+                        <td>{`+${formatPercentage(powerBonusValue)}`}</td>
                       </tr>
                     )}
 
@@ -79,6 +80,8 @@ export function Dodge() {
                         <td className={CLASS_TABLE_CELL_ITALIC}>Armor penalty:</td>
 
                         <td>
+                          <IconImage Icon={IconDodgePenalty} size="tiny" />
+                          &nbsp;
                           <DodgePenaltyContents staminaCost={staminaCost} />
                         </td>
                       </tr>

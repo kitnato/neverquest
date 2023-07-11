@@ -39,7 +39,7 @@ export function Recovery() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header className="text-center">Recovery details</Popover.Header>
+                <Popover.Header className="text-center">Recovery rate details</Popover.Header>
 
                 <Popover.Body>
                   <DetailsTable>
@@ -50,12 +50,12 @@ export function Recovery() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Resilience:</td>
-
-                      <td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
                         <IconImage Icon={IconResilience} size="tiny" />
-                        &nbsp;{`-${formatPercentage(resilienceValue, 0)}`}
+                        &nbsp;Resilience:
                       </td>
+
+                      <td>{`-${formatPercentage(resilienceValue, 0)}`}</td>
                     </tr>
                   </DetailsTable>
                 </Popover.Body>

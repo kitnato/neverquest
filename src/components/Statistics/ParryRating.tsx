@@ -54,7 +54,7 @@ export function ParryRating() {
                 <Popover.Body>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
 
                       <td>
                         <IconImage Icon={IconParry} size="tiny" />
@@ -75,12 +75,12 @@ export function ParryRating() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Finesse:</td>
-
-                      <td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
                         <IconImage Icon={IconFinesse} size="tiny" />
-                        &nbsp;{`+${formatPercentage(finesseValue, 0)}`}
+                        &nbsp;Finesse:
                       </td>
+
+                      <td>{`+${formatPercentage(finesseValue, 0)}`}</td>
                     </tr>
 
                     {finesseValue > 0 && (

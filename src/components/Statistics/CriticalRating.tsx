@@ -6,6 +6,8 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
+import { ReactComponent as IconCriticalChance } from "@neverquest/icons/critical-chance.svg";
+import { ReactComponent as IconCriticalDamage } from "@neverquest/icons/critical-damage.svg";
 import { ReactComponent as IconCriticalRating } from "@neverquest/icons/critical-rating.svg";
 import { ReactComponent as IconDexterity } from "@neverquest/icons/dexterity.svg";
 import { ReactComponent as IconPerception } from "@neverquest/icons/perception.svg";
@@ -56,10 +58,13 @@ export function CriticalRating() {
                 <Popover.Body>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Dexterity:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <IconImage Icon={IconDexterity} size="tiny" />
+                        &nbsp;Dexterity:
+                      </td>
 
                       <td>
-                        <IconImage Icon={IconDexterity} size="tiny" />
+                        <IconImage Icon={IconCriticalChance} size="tiny" />
                         &nbsp;{`${formatPercentage(dexterityValue, 0)} chance`}
                       </td>
                     </tr>
@@ -67,27 +72,33 @@ export function CriticalRating() {
                     {powerBonusChanceValue > 0 && (
                       <>
                         <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Empowered:</td>
-
-                          <td>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>
                             <IconImage Icon={IconPower} size="tiny" />
-                            &nbsp;{`+${formatPercentage(powerBonusChanceValue)}`}
+                            &nbsp;Empowered:
                           </td>
+
+                          <td>{`+${formatPercentage(powerBonusChanceValue)}`}</td>
                         </tr>
 
                         <tr>
                           <td className={CLASS_TABLE_CELL_ITALIC}>Total chance:</td>
 
-                          <td>{formatPercentage(criticalChanceValue)}</td>
+                          <td>
+                            <IconImage Icon={IconCriticalChance} size="tiny" />
+                            &nbsp;{formatPercentage(criticalChanceValue)}
+                          </td>
                         </tr>
                       </>
                     )}
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Perception:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <IconImage Icon={IconPerception} size="tiny" />
+                        &nbsp;Perception:
+                      </td>
 
                       <td>
-                        <IconImage Icon={IconPerception} size="tiny" />
+                        <IconImage Icon={IconCriticalDamage} size="tiny" />
                         &nbsp;{`${formatPercentage(perceptionValue, 0)} damage`}
                       </td>
                     </tr>
@@ -95,18 +106,21 @@ export function CriticalRating() {
                     {powerBonusDamageValue > 0 && (
                       <>
                         <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Empowered:</td>
-
-                          <td>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>
                             <IconImage Icon={IconPower} size="tiny" />
-                            &nbsp;{`+${formatPercentage(powerBonusDamageValue)}`}
+                            &nbsp;Empowered:
                           </td>
+
+                          <td>{`+${formatPercentage(powerBonusDamageValue)}`}</td>
                         </tr>
 
                         <tr>
                           <td className={CLASS_TABLE_CELL_ITALIC}>Total damage:</td>
 
-                          <td>{formatPercentage(criticalDamageValue)}</td>
+                          <td>
+                            <IconImage Icon={IconCriticalDamage} size="tiny" />
+                            &nbsp;{formatPercentage(criticalDamageValue)}
+                          </td>
                         </tr>
                       </>
                     )}

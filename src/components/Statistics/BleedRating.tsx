@@ -60,12 +60,12 @@ export function BleedRating() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Cruelty:</td>
-
-                      <td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
                         <IconImage Icon={IconCruelty} size="tiny" />
-                        &nbsp;{`${formatPercentage(crueltyValue)} of total damage`}
+                        &nbsp;Cruelty:
                       </td>
+
+                      <td>{`${formatPercentage(crueltyValue)} of total damage`}</td>
                     </tr>
 
                     <tr>

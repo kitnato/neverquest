@@ -47,22 +47,22 @@ export function LootBonus() {
                 <Popover.Body>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Luck:</td>
-
-                      <td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
                         <IconImage Icon={IconLuck} size="tiny" />
-                        &nbsp;{`+${formatPercentage(luckValue, 0)}`}
+                        &nbsp;Luck:
                       </td>
+
+                      <td>{`+${formatPercentage(luckValue, 0)}`}</td>
                     </tr>
 
                     {powerBonusValue > 0 && (
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Empowered:</td>
-
-                        <td>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>
                           <IconImage Icon={IconPower} size="tiny" />
-                          &nbsp;{`+${formatPercentage(powerBonusValue, 0)}`}
+                          &nbsp;Empowered:
                         </td>
+
+                        <td>{`+${formatPercentage(powerBonusValue, 0)}`}</td>
                       </tr>
                     )}
                   </DetailsTable>

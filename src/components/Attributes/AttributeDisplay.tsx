@@ -1,6 +1,7 @@
 import { Badge, Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { AttributeIncreaseDetails } from "./AttributeIncreaseDetails";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
@@ -54,6 +55,8 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
               <OverlayTrigger
                 overlay={
                   <Tooltip>
+                    <AttributeIncreaseDetails type={type} />
+
                     <div>
                       Cost:&nbsp;
                       <IconImage Icon={IconEssence} size="tiny" />

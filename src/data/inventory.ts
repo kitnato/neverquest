@@ -87,6 +87,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         coinPrice: 15,
         description: "Cures poison.",
+        stack: Infinity,
         type: "antidote",
         weight: 1,
       },
@@ -96,6 +97,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         coinPrice: 10,
         description: "Restores all health.",
+        stack: Infinity,
         type: "bandages",
         weight: 1,
       },
@@ -105,6 +107,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         coinPrice: 8,
         description: "Restores all stamina.",
+        stack: Infinity,
         type: "elixir",
         weight: 1,
       },
@@ -114,6 +117,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         coinPrice: 25,
         description: "Cures blight.",
+        stack: Infinity,
         type: "salve",
         weight: 2,
       },
@@ -123,6 +127,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         coinPrice: 100,
         description: "Resurrects the carrier upon death.",
+        stack: Infinity,
         type: "soulstone",
         weight: 5,
       },

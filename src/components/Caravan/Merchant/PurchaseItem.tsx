@@ -1,4 +1,4 @@
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 import { PurchaseItemButton } from "@neverquest/components/Caravan/PurchaseItemButton";
 import { useAcquireGear } from "@neverquest/hooks/actions/useAcquireGear";
@@ -7,10 +7,10 @@ import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { hasBoughtFromMerchant, merchantInventory } from "@neverquest/state/caravan";
 import type { Item } from "@neverquest/types";
-import { isGear } from "@neverquest/types/type-guards";
+import { isConsumable, isGear } from "@neverquest/types/type-guards";
 
 export function PurchaseItem({ item }: { item: Item }) {
-  const setMerchantInventory = useSetRecoilState(merchantInventory);
+  const [merchantInventoryValue, setMerchantInventory] = useRecoilState(merchantInventory);
   const setHasBoughtFromMerchant = useSetRecoilState(hasBoughtFromMerchant);
 
   const acquireItem = useAcquireItem();
@@ -35,7 +35,26 @@ export function PurchaseItem({ item }: { item: Item }) {
     if (hasAcquiredItem) {
       transactResources({ coinsDifference: -coinPrice });
 
-      setMerchantInventory((current) => current.filter(({ item: { id } }) => id !== item.id));
+      if (isConsumable(item)) {
+        const { stack, type } = item;
+
+        if (stack === 1) {
+          setMerchantInventory((current) => current.filter(({ item: { id } }) => id !== item.id));
+        } else {
+          const merchantStackIndex = merchantInventoryValue.findIndex(
+            ({ item }) => isConsumable(item) && item.type === type
+          );
+
+          setMerchantInventory((current) => [
+            ...current.slice(0, merchantStackIndex),
+            { isReturned: true, item: { ...item, stack: item.stack - 1 } },
+            ...current.slice(merchantStackIndex + 1),
+          ]);
+        }
+      } else {
+        setMerchantInventory((current) => current.filter(({ item: { id } }) => id !== item.id));
+      }
+
       setHasBoughtFromMerchant(true);
     }
   };

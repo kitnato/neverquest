@@ -9,9 +9,11 @@ import { capitalizeAll } from "@neverquest/utilities/formatters";
 export function ItemName({
   item,
   placement,
+  stack,
 }: {
   item: ConsumableItem | TrinketItem;
   placement?: Placement;
+  stack?: number;
 }) {
   const { description, type, weight } = item;
   const name = capitalizeAll(type);
@@ -33,7 +35,9 @@ export function ItemName({
       }
       placement={placement}
     >
-      <span>{name}</span>
+      <span>{`${name}${
+        stack !== undefined && stack > 1 && stack !== Infinity ? ` x${stack}` : ""
+      }`}</span>
     </OverlayTrigger>
   );
 }

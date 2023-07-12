@@ -1,4 +1,3 @@
-import { CONSUMABLES, TRINKETS } from "@neverquest/data/inventory";
 import type {
   Armor,
   ConsumableItem,
@@ -7,13 +6,14 @@ import type {
   TrinketItem,
   Weapon,
 } from "@neverquest/types";
+import { CONSUMABLE_TYPES, TRINKET_TYPES } from "@neverquest/types/unions";
 
 export function isArmor(gear: unknown): gear is Armor {
   return isObject(gear) && gear.protection !== undefined;
 }
 
 export function isConsumable(consumable: unknown): consumable is ConsumableItem {
-  return isObject(consumable) && Object.keys(CONSUMABLES).some((type) => type === consumable.type);
+  return isObject(consumable) && CONSUMABLE_TYPES.some((type) => type === consumable.type);
 }
 
 export function isGear(gear: unknown): gear is GearItem {
@@ -29,7 +29,7 @@ export function isShield(gear: unknown): gear is Shield {
 }
 
 export function isTrinket(trinket: unknown): trinket is TrinketItem {
-  return isObject(trinket) && Object.keys(TRINKETS).some((type) => type === trinket.type);
+  return isObject(trinket) && TRINKET_TYPES.some((type) => type === trinket.type);
 }
 
 export function isWeapon(gear: unknown): gear is Weapon {

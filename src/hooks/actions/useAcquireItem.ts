@@ -48,9 +48,28 @@ export function useAcquireItem() {
               ...current,
               { key: id, type: type as Consumable },
             ]);
-          }
 
-          set(inventory, (current) => current.concat(item));
+            const inventoryValue = get(inventory);
+            const existingStack = inventoryValue.find(
+              (item) => isConsumable(item) && item.type === type
+            );
+
+            if (existingStack === undefined) {
+              set(inventory, (current) => current.concat({ ...item, stack: 1 }));
+            } else if (isConsumable(existingStack)) {
+              const stackIndex = inventoryValue.findIndex(
+                (item) => isConsumable(item) && item.type === type
+              );
+
+              set(inventory, (current) => [
+                ...current.slice(0, stackIndex),
+                { ...item, stack: existingStack.stack + 1 },
+                ...current.slice(stackIndex + 1),
+              ]);
+            }
+          } else {
+            set(inventory, (current) => current.concat(item));
+          }
         }
 
         return true;

@@ -66,10 +66,12 @@ export function ItemDisplay({
     );
   }
 
+  const { stack, type } = item;
+
   return (
     <IconDisplay
-      contents={<ItemName item={item} placement={overlayPlacement} />}
-      Icon={CONSUMABLES[item.type].Icon}
+      contents={<ItemName item={item} placement={overlayPlacement} stack={stack} />}
+      Icon={CONSUMABLES[type].Icon}
       iconProps={iconProps}
       tooltip="Consumable"
     />

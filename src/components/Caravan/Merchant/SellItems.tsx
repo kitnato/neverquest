@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Stack } from "react-bootstrap";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
@@ -11,14 +11,21 @@ import { merchantInventory } from "@neverquest/state/caravan";
 import { inventory } from "@neverquest/state/inventory";
 import { confirmationWarnings } from "@neverquest/state/settings";
 import type { Item } from "@neverquest/types";
-import { isGear } from "@neverquest/types/type-guards";
+import {
+  isArmor,
+  isConsumable,
+  isGear,
+  isShield,
+  isTrinket,
+  isWeapon,
+} from "@neverquest/types/type-guards";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { getSellPrice } from "@neverquest/utilities/getters";
 
 export function SellItems() {
   const confirmationWarningsValue = useRecoilValue(confirmationWarnings);
   const [inventoryValue, setInventory] = useRecoilState(inventory);
-  const setMerchantInventory = useSetRecoilState(merchantInventory);
+  const [merchantInventoryValue, setMerchantInventory] = useRecoilState(merchantInventory);
 
   const [sellConfirmation, setSellConfirmation] = useState<Item | null>(null);
 
@@ -30,11 +37,74 @@ export function SellItems() {
       toggleEquipGear(item);
     }
 
-    setInventory((current) => current.filter(({ id }) => id !== item.id));
+    if (isConsumable(item)) {
+      const { stack, type } = item;
 
-    setMerchantInventory((current) => current.concat({ isReturned: true, item }));
+      if (stack === 1) {
+        setInventory((current) => current.filter(({ id }) => id !== item.id));
+      } else {
+        const stackIndex = inventoryValue.findIndex(
+          (item) => isConsumable(item) && item.type === type
+        );
+
+        setInventory((current) => [
+          ...current.slice(0, stackIndex),
+          { ...item, stack: stack - 1 },
+          ...current.slice(stackIndex + 1),
+        ]);
+      }
+
+      const merchantStack = merchantInventoryValue.find(
+        ({ item }) => isConsumable(item) && item.type === type
+      );
+
+      if (merchantStack === undefined) {
+        setMerchantInventory((current) =>
+          current.concat({ isReturned: true, item: { ...item, stack: 1 } })
+        );
+      } else if (isConsumable(merchantStack.item)) {
+        const merchantStackIndex = merchantInventoryValue.findIndex(
+          ({ item }) => isConsumable(item) && item.type === type
+        );
+        const { item: merchantItem } = merchantStack;
+
+        setMerchantInventory((current) => [
+          ...current.slice(0, merchantStackIndex),
+          { isReturned: true, item: { ...merchantItem, stack: merchantItem.stack + 1 } },
+          ...current.slice(merchantStackIndex + 1),
+        ]);
+      }
+    } else {
+      setInventory((current) => current.filter(({ id }) => id !== item.id));
+      setMerchantInventory((current) => current.concat({ isReturned: true, item }));
+    }
+
     transactResources({ coinsDifference: getSellPrice(item) });
   };
+
+  const equippedGear = [...inventoryValue.filter((item) => isGear(item) && item.isEquipped)];
+  const storedItems = inventoryValue.filter(
+    (item) => !isGear(item) || (isGear(item) && !item.isEquipped)
+  );
+
+  const SellItem = ({ item, showConfirmation }: { item: Item; showConfirmation?: boolean }) => (
+    <Stack direction="horizontal" gap={3}>
+      <ResourceDisplay tooltip="Value (coins)" type="coins" value={getSellPrice(item)} />
+
+      <Button
+        onClick={() => {
+          if (confirmationWarningsValue && showConfirmation) {
+            setSellConfirmation(item);
+          } else {
+            sellItem(item);
+          }
+        }}
+        variant="outline-dark"
+      >
+        Sell
+      </Button>
+    </Stack>
+  );
 
   return (
     <Stack gap={3}>
@@ -44,44 +114,52 @@ export function SellItems() {
         <span className="fst-italic">Nothing to sell.</span>
       ) : (
         <Stack gap={3}>
-          {inventoryValue.map((item) => {
-            const isEquipped = isGear(item) && item.isEquipped;
+          {[equippedGear.find(isWeapon), equippedGear.find(isArmor), equippedGear.find(isShield)]
+            .filter(isGear)
+            .map((item) => {
+              const { isEquipped } = item;
 
-            return (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.id}>
-                <Stack direction="horizontal">
+              return (
+                <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.id}>
+                  <Stack direction="horizontal">
+                    <ItemDisplay item={item} overlayPlacement="right" />
+
+                    {isEquipped && (
+                      <span className="fst-italic" style={{ width: "max-content" }}>
+                        &nbsp;(Equipped)
+                      </span>
+                    )}
+                  </Stack>
+
+                  <SellItem item={item} showConfirmation={isEquipped} />
+                </div>
+              );
+            })}
+
+          {storedItems
+            .filter(isGear)
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((item) => {
+              return (
+                <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.id}>
                   <ItemDisplay item={item} overlayPlacement="right" />
 
-                  {isEquipped && (
-                    <span className="fst-italic" style={{ width: "max-content" }}>
-                      &nbsp;(Equipped)
-                    </span>
-                  )}
-                </Stack>
+                  <SellItem item={item} />
+                </div>
+              );
+            })}
 
-                <Stack direction="horizontal" gap={3}>
-                  <ResourceDisplay
-                    tooltip="Value (coins)"
-                    type="coins"
-                    value={getSellPrice(item)}
-                  />
+          {[...storedItems.filter(isTrinket), ...storedItems.filter(isConsumable)]
+            .sort((a, b) => a.type.localeCompare(b.type))
+            .map((item) => {
+              return (
+                <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.id}>
+                  <ItemDisplay item={item} overlayPlacement="right" />
 
-                  <Button
-                    onClick={() => {
-                      if (confirmationWarningsValue && isEquipped) {
-                        setSellConfirmation(item);
-                      } else {
-                        sellItem(item);
-                      }
-                    }}
-                    variant="outline-dark"
-                  >
-                    Sell
-                  </Button>
-                </Stack>
-              </div>
-            );
-          })}
+                  <SellItem item={item} />
+                </div>
+              );
+            })}
 
           {sellConfirmation !== null && (
             <ConfirmationDialog

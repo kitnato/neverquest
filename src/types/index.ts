@@ -27,6 +27,7 @@ export type AttributeOrMasteryBaseData = UnlockedState & {
 
 export type ConsumableItem = ItemBase & {
   description: string;
+  stack: number;
   type: Consumable;
 };
 

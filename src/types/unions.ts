@@ -10,7 +10,8 @@ export type Attribute =
   | "vigor"
   | "vitality";
 
-export type Consumable = "antidote" | "bandages" | "elixir" | "salve" | "soulstone";
+export const CONSUMABLE_TYPES = ["antidote", "bandages", "elixir", "salve", "soulstone"] as const;
+export type Consumable = (typeof CONSUMABLE_TYPES)[number];
 
 export type CrewMember =
   | "alchemist"
@@ -273,12 +274,14 @@ export type StateKey =
   | "wilderness"
   | "wildernesses";
 
-export type Trinket =
-  | "antique coin"
-  | "compass"
-  | "hearthstone"
-  | "knapsack"
-  | "monkey paw"
-  | "tome of power";
+export const TRINKET_TYPES = [
+  "antique coin",
+  "compass",
+  "hearthstone",
+  "knapsack",
+  "monkey paw",
+  "tome of power",
+] as const;
+export type Trinket = (typeof TRINKET_TYPES)[number];
 
 export type WeaponGrip = "one-handed" | "two-handed";

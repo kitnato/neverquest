@@ -152,6 +152,7 @@ export type StateKey =
   | "coins"
   | "coinsLoot"
   | "confirmationWarnings"
+  | "consumablesAcquired"
   | "crew"
   | "crewActive"
   | "crewAvailable"

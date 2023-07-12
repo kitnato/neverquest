@@ -20,7 +20,7 @@ export function FloatingText({ deltaType }: { deltaType: Delta }) {
     type: "fadeOutUp",
   });
 
-  const onAnimationEnd = (id: string) => () =>
+  const handleAnimationEnd = (id: string) => () =>
     setFloatingTextQueue((current) => current.filter(({ key }) => key !== id));
 
   useEffect(() => {
@@ -58,7 +58,7 @@ export function FloatingText({ deltaType }: { deltaType: Delta }) {
                 className={animationClass}
                 direction="horizontal"
                 gap={1}
-                onAnimationEnd={onAnimationEnd(key)}
+                onAnimationEnd={handleAnimationEnd(key)}
               >
                 {delta.map(({ color, value }) => (
                   <span className={color ?? undefined} key={value}>
@@ -69,7 +69,7 @@ export function FloatingText({ deltaType }: { deltaType: Delta }) {
             ) : (
               <div
                 className={`${animationClass}${delta.color ? ` ${delta.color}` : ""}`}
-                onAnimationEnd={onAnimationEnd(key)}
+                onAnimationEnd={handleAnimationEnd(key)}
               >
                 {delta.value}
               </div>

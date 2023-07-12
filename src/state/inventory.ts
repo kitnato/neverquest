@@ -122,6 +122,14 @@ export const weapon = withStateKey("weapon", (key) =>
 
 // ATOMS
 
+export const consumablesAcquired = withStateKey("consumablesAcquired", (key) =>
+  atom({
+    default: [],
+    effects: [handleLocalStorage<{ key: string; type: Consumable }[]>({ key })],
+    key,
+  })
+);
+
 export const encumbranceMaximum = withStateKey("encumbranceMaximum", (key) =>
   atom({
     default: ENCUMBRANCE,

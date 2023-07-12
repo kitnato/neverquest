@@ -1,4 +1,5 @@
 import { nanoid } from "nanoid";
+import { useState } from "react";
 import { Stack } from "react-bootstrap";
 
 import { PurchaseItemButton } from "@neverquest/components/Caravan/PurchaseItemButton";
@@ -12,13 +13,15 @@ import type { Consumable } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 
 export function PurchaseConsumable({ type }: { type: Consumable }) {
+  const [consumableID, setConsumableID] = useState(nanoid());
+
   const acquireItem = useAcquireItem();
   const transactResources = useTransactResources();
 
   const { item } = CONSUMABLES[type];
   const itemWithID: ConsumableItem = {
     ...item,
-    id: nanoid(),
+    id: consumableID,
   };
   const { coinPrice } = itemWithID;
 
@@ -26,6 +29,8 @@ export function PurchaseConsumable({ type }: { type: Consumable }) {
     if (acquireItem(itemWithID)) {
       transactResources({ coinsDifference: -coinPrice });
     }
+
+    setConsumableID(nanoid());
   };
 
   return (

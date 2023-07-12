@@ -2,9 +2,17 @@ import { useRecoilCallback } from "recoil";
 
 import { KNAPSACK_SIZE } from "@neverquest/data/inventory";
 import { attributes } from "@neverquest/state/attributes";
-import { canFit, encumbranceMaximum, hasKnapsack, inventory } from "@neverquest/state/inventory";
+import {
+  canFit,
+  consumablesAcquired,
+  encumbranceMaximum,
+  hasKnapsack,
+  inventory,
+} from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import type { ConsumableItem, TrinketItem } from "@neverquest/types";
+import { isConsumable } from "@neverquest/types/type-guards";
+import type { Consumable } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useAcquireItem() {
@@ -13,7 +21,7 @@ export function useAcquireItem() {
       (item: ConsumableItem | TrinketItem) => {
         const get = getSnapshotGetter(snapshot);
 
-        const { type, weight } = item;
+        const { id, type, weight } = item;
 
         if (!get(canFit(weight))) {
           return false;
@@ -33,6 +41,13 @@ export function useAcquireItem() {
 
           if (type === "tome of power") {
             set(isShowing("lootBonusDetails"), true);
+          }
+
+          if (isConsumable(item)) {
+            set(consumablesAcquired, (current) => [
+              ...current,
+              { key: id, type: type as Consumable },
+            ]);
           }
 
           set(inventory, (current) => current.concat(item));

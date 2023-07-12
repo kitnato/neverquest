@@ -7,7 +7,8 @@ export type AnimationType =
   | "headShake"
   | "pulse"
   | "zoomIn"
-  | "zoomInRight";
+  | "zoomInRight"
+  | "zoomOut";
 
 export type BootstrapColorVariant = "dark" | "outline-dark" | "secondary";
 

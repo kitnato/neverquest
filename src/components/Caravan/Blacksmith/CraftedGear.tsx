@@ -2,7 +2,7 @@ import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
-import { useAcquireGear } from "@neverquest/hooks/actions/useAcquireGear";
+import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { canFit } from "@neverquest/state/inventory";
@@ -15,28 +15,30 @@ export function CraftedGear({ gear }: { gear: GearItem }) {
   const canFitValue = useRecoilValue(canFit(weight));
   const setBlacksmithInventory = useSetRecoilState(blacksmithInventory);
 
-  const acquireGear = useAcquireGear();
+  const acquireItem = useAcquireItem();
   const toggleEquipGear = useToggleEquipGear();
 
   const handleAcquire = () => {
-    const shouldAutoEquip = acquireGear(gear);
+    const acquisitionStatus = acquireItem(gear, "donation");
 
-    if (shouldAutoEquip !== null) {
-      if (isArmor(gear)) {
-        setBlacksmithInventory((current) => ({ ...current, armor: null }));
-      }
+    if (acquisitionStatus === "noFit") {
+      return;
+    }
 
-      if (isShield(gear)) {
-        setBlacksmithInventory((current) => ({ ...current, shield: null }));
-      }
+    if (isArmor(gear)) {
+      setBlacksmithInventory((current) => ({ ...current, armor: null }));
+    }
 
-      if (isWeapon(gear)) {
-        setBlacksmithInventory((current) => ({ ...current, weapon: null }));
-      }
+    if (isShield(gear)) {
+      setBlacksmithInventory((current) => ({ ...current, shield: null }));
+    }
 
-      if (shouldAutoEquip) {
-        toggleEquipGear(gear);
-      }
+    if (isWeapon(gear)) {
+      setBlacksmithInventory((current) => ({ ...current, weapon: null }));
+    }
+
+    if (acquisitionStatus === "autoEquip") {
+      toggleEquipGear(gear);
     }
   };
 

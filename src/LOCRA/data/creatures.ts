@@ -58,7 +58,6 @@ export const CREATURES: CreatureData[] = [
   { name: "coward", type: "human" },
   { name: "cripple", type: "monster" },
   { name: "cyborg", type: "monster" },
-  { name: "daemon", type: "monster" },
   { name: "dave", type: "name" },
   { name: "dealer", type: "human" },
   { name: "defiler", type: "monster" },

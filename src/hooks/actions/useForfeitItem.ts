@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { useToggleEquipGear } from "./useToggleEquipGear";
+import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { inventory } from "@neverquest/state/inventory";
 import type { Item } from "@neverquest/types";

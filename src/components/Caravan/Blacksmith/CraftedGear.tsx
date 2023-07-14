@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
@@ -5,7 +6,7 @@ import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { blacksmithInventory } from "@neverquest/state/caravan";
-import { canFit } from "@neverquest/state/inventory";
+import { canFit, itemsAcquired } from "@neverquest/state/inventory";
 import type { GearItem } from "@neverquest/types";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 
@@ -14,6 +15,7 @@ export function CraftedGear({ gear }: { gear: GearItem }) {
 
   const canFitValue = useRecoilValue(canFit(weight));
   const setBlacksmithInventory = useSetRecoilState(blacksmithInventory);
+  const setItemsAcquired = useSetRecoilState(itemsAcquired);
 
   const acquireItem = useAcquireItem();
   const toggleEquipGear = useToggleEquipGear();
@@ -25,15 +27,20 @@ export function CraftedGear({ gear }: { gear: GearItem }) {
       return;
     }
 
+    const id = nanoid();
+
     if (isArmor(gear)) {
+      setItemsAcquired((current) => [...current, { key: id, type: "armor" }]);
       setBlacksmithInventory((current) => ({ ...current, armor: null }));
     }
 
     if (isShield(gear)) {
+      setItemsAcquired((current) => [...current, { key: id, type: "shield" }]);
       setBlacksmithInventory((current) => ({ ...current, shield: null }));
     }
 
     if (isWeapon(gear)) {
+      setItemsAcquired((current) => [...current, { key: id, type: "weapon" }]);
       setBlacksmithInventory((current) => ({ ...current, weapon: null }));
     }
 

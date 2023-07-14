@@ -2,7 +2,7 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { ButtonBadge } from "@neverquest/components/Controls/ButtonBadge";
-import { ConsumableAcquisition } from "@neverquest/components/Controls/ConsumableAcquisition";
+import { ItemAcquisition } from "@neverquest/components/Controls/ItemAcquisition";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { IconImage } from "@neverquest/components/IconImage";
 import { Inventory } from "@neverquest/components/Inventory";
@@ -36,7 +36,7 @@ export function InventoryButton() {
 
             <ButtonBadge Icon={IconEncumbrance} isShowing={isInventoryFullValue} />
 
-            <ConsumableAcquisition />
+            <ItemAcquisition />
           </Button>
         </span>
       </OverlayTrigger>

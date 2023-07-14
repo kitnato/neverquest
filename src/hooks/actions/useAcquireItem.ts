@@ -7,10 +7,10 @@ import { attributes } from "@neverquest/state/attributes";
 import {
   armor,
   canFit,
-  consumablesAcquired,
   encumbranceMaximum,
   hasKnapsack,
   inventory,
+  itemsAcquired,
   shield,
   weapon,
 } from "@neverquest/state/inventory";
@@ -74,10 +74,7 @@ export function useAcquireItem() {
             }
 
             if (isConsumable(item)) {
-              set(consumablesAcquired, (current) => [
-                ...current,
-                { key: id, type: type as Consumable },
-              ]);
+              set(itemsAcquired, (current) => [...current, { key: id, type: type as Consumable }]);
 
               const existingStack = inventoryValue.find(
                 (current) => isConsumable(current) && current.type === type

@@ -11,7 +11,7 @@ import {
   isTrinket,
   isWeapon,
 } from "@neverquest/types/type-guards";
-import type { Consumable, Trinket } from "@neverquest/types/unions";
+import type { Consumable, Gear, Trinket } from "@neverquest/types/unions";
 
 // SELECTORS
 
@@ -122,10 +122,10 @@ export const weapon = withStateKey("weapon", (key) =>
 
 // ATOMS
 
-export const consumablesAcquired = withStateKey("consumablesAcquired", (key) =>
+export const itemsAcquired = withStateKey("itemsAcquired", (key) =>
   atom({
     default: [],
-    effects: [handleLocalStorage<{ key: string; type: Consumable }[]>({ key })],
+    effects: [handleLocalStorage<{ key: string; type: Consumable | Gear }[]>({ key })],
     key,
   })
 );

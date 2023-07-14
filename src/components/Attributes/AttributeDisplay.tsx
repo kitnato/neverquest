@@ -1,7 +1,7 @@
 import { Badge, Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { AttributeIncreaseDetails } from "./AttributeIncreaseDetails";
+import { AttributeIncreaseDetails } from "@neverquest/components/Attributes/AttributeIncreaseDetails";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { ATTRIBUTES } from "@neverquest/data/attributes";

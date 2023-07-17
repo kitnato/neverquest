@@ -14,13 +14,13 @@ import { Tailor } from "@neverquest/components/Caravan/Tailor";
 import { Witch } from "@neverquest/components/Caravan/Witch";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { CREW_ORDER } from "@neverquest/data/caravan";
-import { crewActive, crewAvailable } from "@neverquest/state/caravan";
+import { crewActive, isCrewAvailable } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
-import type { CrewMember } from "@neverquest/types/unions";
+import type { Crew } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-const CREW_COMPONENTS: Record<CrewMember, FunctionComponent> = {
+const CREW_COMPONENTS: Record<Crew, FunctionComponent> = {
   alchemist: Alchemist,
   blacksmith: Blacksmith,
   medic: Medic,
@@ -32,13 +32,13 @@ const CREW_COMPONENTS: Record<CrewMember, FunctionComponent> = {
 };
 
 export function Caravan() {
-  const crewAvailableValue = useRecoilValue(crewAvailable);
+  const isCrewAvailableValue = useRecoilValue(isCrewAvailable);
   const [crewActiveValue, setCrewActive] = useRecoilState(crewActive);
   const isShowingCrewHiring = useRecoilValue(isShowing("crewHiring"));
 
   const [isScreenShowing, setScreenShowing] = useState(false);
 
-  const toggleCrewActive = (isShowing: boolean, member?: CrewMember) => {
+  const toggleCrewActive = (isShowing: boolean, member?: Crew) => {
     setScreenShowing(isShowing);
     setCrewActive(member ?? null);
   };
@@ -60,9 +60,7 @@ export function Caravan() {
               <Stack gap={3}>
                 <h6>Crew for hire</h6>
 
-                {crewAvailableValue.length === 0 && (
-                  <span className="fst-italic">None available.</span>
-                )}
+                {!isCrewAvailableValue && <span className="fst-italic">None available.</span>}
 
                 {CREW_ORDER.map((type, index) => (
                   <CrewHirable key={index} type={type} />

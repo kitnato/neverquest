@@ -6,16 +6,16 @@ import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDispla
 import { CREW } from "@neverquest/data/caravan";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
-import { crew } from "@neverquest/state/caravan";
+import { hireStatus } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import { coins } from "@neverquest/state/resources";
-import type { CrewMember } from "@neverquest/types/unions";
+import type { Crew } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
-export function CrewHirable({ type }: { type: CrewMember }) {
+export function CrewHirable({ type }: { type: Crew }) {
   const coinsValue = useRecoilValue(coins);
-  const [hireStatus, setHireStatus] = useRecoilState(crew(type));
+  const [hireStatusValue, setHireStatus] = useRecoilState(hireStatus(type));
   const setIsShowingGearClass = useSetRecoilState(isShowing("gearClass"));
 
   const transactResources = useTransactResources();
@@ -33,11 +33,11 @@ export function CrewHirable({ type }: { type: CrewMember }) {
     }
   };
 
-  if (hireStatus === "hired") {
+  if (hireStatusValue === "hired") {
     return null;
   }
 
-  if (hireStatus === "hirable") {
+  if (hireStatusValue === "hirable") {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay contents={name} description={description} Icon={Icon} tooltip="Caravan crew" />

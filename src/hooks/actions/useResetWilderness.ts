@@ -11,6 +11,7 @@ export function useResetWilderness() {
       () => {
         reset(isStageStarted);
         reset(progress);
+
         generateMonster();
       },
     [generateMonster]

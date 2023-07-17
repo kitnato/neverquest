@@ -5,9 +5,7 @@ import { useInitialize } from "@neverquest/hooks/actions/useInitialize";
 export function Initializer({ children }: { children: ReactNode }) {
   const initialize = useInitialize();
 
-  useEffect(() => {
-    initialize();
-  }, [initialize]);
+  useEffect(initialize, [initialize]);
 
   return <>{children}</>;
 }

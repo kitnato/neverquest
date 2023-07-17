@@ -13,7 +13,7 @@ export type Attribute =
 export const CONSUMABLE_TYPES = ["antidote", "bandages", "elixir", "salve", "soulstone"] as const;
 export type Consumable = (typeof CONSUMABLE_TYPES)[number];
 
-export type CrewMember =
+export type Crew =
   | "alchemist"
   | "blacksmith"
   | "medic"
@@ -153,10 +153,7 @@ export type StateKey =
   | "coins"
   | "coinsLoot"
   | "confirmationWarnings"
-  | "crew"
   | "crewActive"
-  | "crewAvailable"
-  | "crewMapping"
   | "criticalChance"
   | "criticalDamage"
   | "criticalRating"
@@ -183,10 +180,12 @@ export type StateKey =
   | "healthRegenerationAmount"
   | "healthRegenerationDuration"
   | "healthRegenerationRate"
+  | "hireStatus"
   | "inventory"
   | "isAttacking"
   | "isAttributeAtMaximum"
   | "isBlighted"
+  | "isCrewAvailable"
   | "isGameOver"
   | "isHealthAtMaximum"
   | "isHealthLow"

@@ -5,10 +5,10 @@ import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { CREW } from "@neverquest/data/caravan";
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
 import { attributes } from "@neverquest/state/attributes";
-import { crew } from "@neverquest/state/caravan";
+import { hireStatus } from "@neverquest/state/caravan";
 import { stage, wildernesses } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
-import type { Attribute, CrewMember } from "@neverquest/types/unions";
+import type { Attribute, Crew } from "@neverquest/types/unions";
 import { KEY_SESSION } from "@neverquest/utilities/constants";
 import { generateWilderness } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -31,7 +31,7 @@ export function useInitialize() {
 
         Object.entries(CREW).forEach(([type, { requiredStage }]) => {
           if (requiredStage === 0) {
-            set(crew(type as CrewMember), "hired");
+            set(hireStatus(type as Crew), "hired");
           }
         });
 

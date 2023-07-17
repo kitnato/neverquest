@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
-import { progress } from "@neverquest/state/encounter";
+import { progress, progressMaximum } from "@neverquest/state/encounter";
 import { monsterLoot } from "@neverquest/state/monster";
 import { coinsLoot, essenceLoot, scrapLoot } from "@neverquest/state/resources";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -28,7 +28,13 @@ export function useProgression() {
           set(scrapLoot, (current) => current + scrap);
         }
 
-        set(progress, (current) => current + 1);
+        const nextProgress = get(progress) + 1;
+
+        set(progress, nextProgress);
+
+        if (nextProgress < get(progressMaximum)) {
+          generateMonster();
+        }
       },
     [generateMonster]
   );

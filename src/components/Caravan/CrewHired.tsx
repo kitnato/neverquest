@@ -3,17 +3,17 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CREW } from "@neverquest/data/caravan";
-import { crew } from "@neverquest/state/caravan";
+import { hireStatus } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
-import type { CrewMember } from "@neverquest/types/unions";
+import type { Crew } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
-export function CrewHired({ setActive, type }: { setActive: () => void; type: CrewMember }) {
-  const hireStatus = useRecoilValue(crew(type));
+export function CrewHired({ setActive, type }: { setActive: () => void; type: Crew }) {
+  const hireStatusValue = useRecoilValue(hireStatus(type));
   const stageValue = useRecoilValue(stage);
 
-  if (hireStatus !== "hired") {
+  if (hireStatusValue !== "hired") {
     return null;
   }
 

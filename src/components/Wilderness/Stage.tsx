@@ -14,6 +14,7 @@ export function Stage() {
   useDeltaText({
     atomDelta: deltas("stage"),
     atomValue: stage,
+    stop: (_, current) => current === 1,
   });
 
   return (

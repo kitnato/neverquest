@@ -14,12 +14,12 @@ import type {
   WeaponModality,
 } from "@neverquest/LOCRA/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, CrewMember, Trinket } from "@neverquest/types/unions";
+import type { Consumable, Crew, Trinket } from "@neverquest/types/unions";
 
 export const BLACKSMITH_GEAR_LEVEL_MAXIMUM = 3;
 
 export const CREW: Record<
-  CrewMember,
+  Crew,
   {
     coinPrice: number;
     description: string;
@@ -107,9 +107,9 @@ export const CREW: Record<
   },
 };
 
-export const CREW_ORDER: CrewMember[] = Object.entries(CREW)
+export const CREW_ORDER: Crew[] = Object.entries(CREW)
   .sort(([, a], [, b]) => a.requiredStage - b.requiredStage)
-  .map(([type]) => type as CrewMember);
+  .map(([type]) => type as Crew);
 
 export const OCCULTIST_PURGE_PRICE_MULTIPLIER = 0.33;
 

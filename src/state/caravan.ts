@@ -1,32 +1,16 @@
-import { DefaultValue, atom, atomFamily, selectorFamily } from "recoil";
+import { atom, atomFamily, selector } from "recoil";
 
 import { CREW_ORDER } from "@neverquest/data/caravan";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { InventoryBlacksmith, InventoryMerchant } from "@neverquest/types";
-import type { CrewMember, CrewStatus } from "@neverquest/types/unions";
+import type { Crew, CrewStatus } from "@neverquest/types/unions";
 
 // SELECTORS
 
-export const crew = withStateKey("crew", (key) =>
-  selectorFamily<CrewStatus, CrewMember>({
-    get:
-      (type) =>
-      ({ get }) =>
-        get(crewMapping(type)),
+export const isCrewAvailable = withStateKey("isCrewAvailable", (key) =>
+  selector({
+    get: ({ get }) => CREW_ORDER.every((type) => get(hireStatus(type)) !== "hired"),
     key,
-    set:
-      (type) =>
-      ({ set }, status) => {
-        if (status instanceof DefaultValue) {
-          return;
-        }
-
-        set(crewMapping(type), status);
-
-        if (status === "hired") {
-          set(crewAvailable, (current) => current.filter((crewType) => crewType !== type));
-        }
-      },
   })
 );
 
@@ -45,25 +29,9 @@ export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
 );
 
 export const crewActive = withStateKey("crewActive", (key) =>
-  atom<CrewMember | null>({
+  atom<Crew | null>({
     default: null,
-    effects: [handleLocalStorage<CrewMember | null>({ key })],
-    key,
-  })
-);
-
-export const crewAvailable = withStateKey("crewAvailable", (key) =>
-  atom<CrewMember[]>({
-    default: [...CREW_ORDER],
-    effects: [handleLocalStorage<CrewMember[]>({ key })],
-    key,
-  })
-);
-
-const crewMapping = withStateKey("crewMapping", (key) =>
-  atomFamily<CrewStatus, CrewMember>({
-    default: "locked",
-    effects: (parameter) => [handleLocalStorage<CrewStatus>({ key, parameter })],
+    effects: [handleLocalStorage<Crew | null>({ key })],
     key,
   })
 );
@@ -72,6 +40,14 @@ export const hasBoughtFromMerchant = withStateKey("hasBoughtFromMerchant", (key)
   atom({
     default: false,
     effects: [handleLocalStorage<boolean>({ key })],
+    key,
+  })
+);
+
+export const hireStatus = withStateKey("hireStatus", (key) =>
+  atomFamily<CrewStatus, Crew>({
+    default: "locked",
+    effects: (parameter) => [handleLocalStorage<CrewStatus>({ key, parameter })],
     key,
   })
 );

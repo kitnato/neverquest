@@ -15,7 +15,7 @@ import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function CrewHirable({ type }: { type: Crew }) {
   const coinsValue = useRecoilValue(coins);
-  const [hireStatusValue, setHireStatus] = useRecoilState(hireStatus(type));
+  const [{ status: hireStatusValue }, setHireStatus] = useRecoilState(hireStatus(type));
   const setIsShowingGearClass = useSetRecoilState(isShowing("gearClass"));
 
   const transactResources = useTransactResources();
@@ -25,7 +25,7 @@ export function CrewHirable({ type }: { type: Crew }) {
   const name = capitalizeAll(type);
 
   const handleHire = () => {
-    setHireStatus("hired");
+    setHireStatus({ status: "hired" });
     transactResources({ coinsDifference: -coinPrice });
 
     if (type === "blacksmith") {

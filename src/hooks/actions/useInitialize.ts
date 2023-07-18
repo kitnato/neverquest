@@ -31,7 +31,7 @@ export function useInitialize() {
 
         Object.entries(CREW).forEach(([type, { requiredStage }]) => {
           if (requiredStage === 0) {
-            set(hireStatus(type as Crew), "hired");
+            set(hireStatus(type as Crew), { status: "hired" });
           }
         });
 

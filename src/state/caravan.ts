@@ -9,7 +9,7 @@ import type { Crew, CrewStatus } from "@neverquest/types/unions";
 
 export const isCrewAvailable = withStateKey("isCrewAvailable", (key) =>
   selector({
-    get: ({ get }) => CREW_ORDER.every((type) => get(hireStatus(type)) !== "hired"),
+    get: ({ get }) => CREW_ORDER.every((type) => get(hireStatus(type)).status !== "hired"),
     key,
   })
 );
@@ -44,10 +44,11 @@ export const hasBoughtFromMerchant = withStateKey("hasBoughtFromMerchant", (key)
   })
 );
 
+// TODO - must use { status } object instead of just CrewStatus, otherwise onSet() does not trigger in useInitializer().
 export const hireStatus = withStateKey("hireStatus", (key) =>
-  atomFamily<CrewStatus, Crew>({
-    default: "locked",
-    effects: (parameter) => [handleLocalStorage<CrewStatus>({ key, parameter })],
+  atomFamily<{ status: CrewStatus }, Crew>({
+    default: { status: null },
+    effects: (parameter) => [handleLocalStorage<{ status: CrewStatus }>({ key, parameter })],
     key,
   })
 );

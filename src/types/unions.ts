@@ -23,7 +23,7 @@ export type Crew =
   | "tailor"
   | "witch";
 
-export type CrewStatus = "hirable" | "hired" | "locked";
+export type CrewStatus = "hirable" | "hired" | null;
 
 export type DeltaText = "float" | "integer" | "percentage" | "time";
 

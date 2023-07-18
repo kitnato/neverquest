@@ -19,13 +19,13 @@ export function useIncreaseStage() {
         const nextStage = stageValue + 1;
 
         CREW_ORDER.forEach((type) => {
-          const hireStatusValue = get(hireStatus(type));
+          const { status: hireStatusValue } = get(hireStatus(type));
           const isShowingCrewHiring = isShowing("crewHiring");
 
           const { requiredStage } = CREW[type];
 
-          if (hireStatusValue === "locked" && nextStage >= requiredStage) {
-            set(hireStatus(type), "hirable");
+          if (hireStatusValue === null && nextStage >= requiredStage) {
+            set(hireStatus(type), { status: "hirable" });
             set(isShowingCrewHiring, true);
           }
         });

@@ -10,7 +10,7 @@ import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function CrewHired({ setActive, type }: { setActive: () => void; type: Crew }) {
-  const hireStatusValue = useRecoilValue(hireStatus(type));
+  const { status: hireStatusValue } = useRecoilValue(hireStatus(type));
   const stageValue = useRecoilValue(stage);
 
   if (hireStatusValue !== "hired") {

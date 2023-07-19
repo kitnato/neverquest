@@ -5,6 +5,14 @@ export function capitalizeAll(string: string) {
   return string.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
 }
 
+// Correctly does the rounding as opposed to .toFixed().
+export function formatFloat(number: number, decimals = 2) {
+  const multiplier = 10 ** decimals;
+  const result = parseFloat((number * multiplier).toFixed(11));
+
+  return (Math.round(result) / multiplier).toFixed(decimals);
+}
+
 export function formatMilliseconds(milliseconds: number) {
   if (milliseconds < 0 || Number.isNaN(milliseconds)) {
     return LABEL_EMPTY;
@@ -43,10 +51,11 @@ export function formatPercentage(number: number, decimals?: number) {
   return `${formatFloat(number * 100, decimals)}%`;
 }
 
-// Correctly does the rounding as opposed to .toFixed().
-export function formatFloat(number: number, decimals = 2) {
-  const multiplier = 10 ** decimals;
-  const result = parseFloat((number * multiplier).toFixed(11));
-
-  return (Math.round(result) / multiplier).toFixed(decimals);
+export function formatSlug(string: string) {
+  return string
+    .replace(/^\s+|\s+$/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9 -]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
 }

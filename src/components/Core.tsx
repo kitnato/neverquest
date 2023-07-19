@@ -13,7 +13,7 @@ export function Core() {
 
   useEffect(() => {
     // TODO - extend to replace a path of any length
-    window.history.replaceState({}, document.title, "/");
+    window.history.replaceState(null, "", "/");
   }, []);
 
   return (

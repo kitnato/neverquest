@@ -7,6 +7,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 // eslint-disable-next-line import/no-default-export
 export default defineConfig({
+  assetsInclude: ["**/*.md"],
   plugins: [
     checker({
       eslint: { lintCommand: "eslint --ext .ts,.tsx ." },
@@ -21,6 +22,6 @@ export default defineConfig({
     alias: {
       "~animate.css": path.resolve(__dirname, "node_modules/animate.css"),
       "~bootstrap": path.resolve(__dirname, "node_modules/bootstrap"),
-    }
+    },
   },
 });

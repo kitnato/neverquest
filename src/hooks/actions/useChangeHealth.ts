@@ -9,6 +9,7 @@ import {
   healthMaximumTotal,
   healthRegenerationDuration,
   healthRegenerationRate,
+  isImmortal,
 } from "@neverquest/state/reserves";
 import { isConsumable } from "@neverquest/types/type-guards";
 import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
@@ -66,7 +67,9 @@ export function useChangeHealth() {
           set(healthRegenerationDuration, get(healthRegenerationRate));
         }
 
-        set(health, newHealth);
+        if (isPositive || !get(isImmortal)) {
+          set(health, newHealth);
+        }
       },
     []
   );

@@ -174,6 +174,14 @@ export const healthRegenerationDuration = withStateKey("healthRegenerationDurati
   })
 );
 
+export const isImmortal = withStateKey("isImmortal", (key) =>
+  atom({
+    default: false,
+    effects: [handleLocalStorage<boolean>({ key })],
+    key,
+  })
+);
+
 export const poisonDuration = withStateKey("poisonDuration", (key) =>
   atom({
     default: 0,

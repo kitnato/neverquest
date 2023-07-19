@@ -9,6 +9,7 @@ import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { isAttacking } from "@neverquest/state/character";
 import { isWilderness, progress, progressMaximum, stage } from "@neverquest/state/encounter";
+import { isImmortal } from "@neverquest/state/reserves";
 import { coinsLoot, essenceLoot, scrapLoot } from "@neverquest/state/resources";
 import { SKILL_TYPES } from "@neverquest/types/unions";
 
@@ -23,8 +24,10 @@ export function CheatQuest() {
 
   const resetCoinsLoot = useResetRecoilState(coinsLoot);
   const resetEssenceLoot = useResetRecoilState(essenceLoot);
-  const setIsAttacking = useSetRecoilState(isAttacking);
   const resetScrapLoot = useResetRecoilState(scrapLoot);
+
+  const setIsAttacking = useSetRecoilState(isAttacking);
+  const setIsImmortal = useSetRecoilState(isImmortal);
   const setProgress = useSetRecoilState(progress);
 
   const acquireSkill = useAcquireSkill();
@@ -42,11 +45,13 @@ export function CheatQuest() {
           if (Number.isInteger(value)) {
             transactResources({ coinsDifference: value });
           }
+
           break;
         }
         // Doom
         case "IDBEHOLDV": {
-          // TODO - invulnerability
+          setIsImmortal((current) => !current);
+
           break;
         }
         // Heretic
@@ -54,11 +59,13 @@ export function CheatQuest() {
           if (typeof value === "string" && value in SKILL_TYPES) {
             acquireSkill(value);
           }
+
           break;
         }
         // Source engine
         case "noclip": {
           setProgress(progressMaximumValue);
+
           break;
         }
         // The Sims
@@ -66,6 +73,7 @@ export function CheatQuest() {
           if (Number.isInteger(value)) {
             transactResources({ scrapDifference: value });
           }
+
           break;
         }
         // Starcraft
@@ -73,6 +81,7 @@ export function CheatQuest() {
           if (Number.isInteger(value)) {
             transactResources({ essenceDifference: value });
           }
+
           break;
         }
         // Thief
@@ -95,6 +104,7 @@ export function CheatQuest() {
               toggleLocation();
             }
           }
+
           break;
         }
         default: {
@@ -119,6 +129,7 @@ export function CheatQuest() {
     toggleLocation,
     transactResources,
     setIsAttacking,
+    setIsImmortal,
   ]);
 
   return null;

@@ -189,6 +189,7 @@ export type StateKey =
   | "isGameOver"
   | "isHealthAtMaximum"
   | "isHealthLow"
+  | "isImmortal"
   | "isInventoryFull"
   | "isInventoryOpen"
   | "isLooting"

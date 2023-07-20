@@ -163,7 +163,6 @@ export type StateKey =
   | "deflection"
   | "deltas"
   | "dodge"
-  | "dodgeTotal"
   | "encumbrance"
   | "encumbranceMaximum"
   | "essence"
@@ -239,7 +238,6 @@ export type StateKey =
   | "parryDamage"
   | "parryRating"
   | "poisonDuration"
-  | "poisonedDelta"
   | "powerBonus"
   | "progress"
   | "progressMaximum"
@@ -271,7 +269,6 @@ export type StateKey =
   | "staminaRegenerationRate"
   | "statusElement"
   | "weapon"
-  | "wilderness"
   | "wildernesses";
 
 export const TRINKET_TYPES = [

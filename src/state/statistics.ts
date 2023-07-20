@@ -143,24 +143,14 @@ export const deflection = withStateKey("deflection", (key) =>
 export const dodge = withStateKey("dodge", (key) =>
   selector({
     get: ({ get }) => {
-      const total = get(rawAttributeStatistic("agility"));
-
-      return total + total * get(powerBonus("agility"));
-    },
-    key,
-  })
-);
-
-export const dodgeTotal = withStateKey("dodgeTotal", (key) =>
-  selector({
-    get: ({ get }) => {
       const { staminaCost } = get(armor);
+      const total = get(rawAttributeStatistic("agility"));
 
       if (staminaCost === Infinity) {
         return 0;
       }
 
-      return get(dodge);
+      return total + total * get(powerBonus("agility"));
     },
     key,
   })

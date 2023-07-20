@@ -28,7 +28,7 @@ import { skills } from "@neverquest/state/skills";
 import {
   block,
   deflection,
-  dodgeTotal,
+  dodge,
   parryAbsorption,
   parryChance,
   parryDamage,
@@ -59,7 +59,7 @@ export function useDefend() {
         });
 
         // If attack is dodged, nothing else happens (all damage is negated).
-        if (get(skills("evasion")) && Math.random() <= get(dodgeTotal)) {
+        if (get(skills("evasion")) && Math.random() <= get(dodge)) {
           if (get(canDodge)) {
             set(deltas("health"), {
               color: "text-muted",

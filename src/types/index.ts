@@ -18,7 +18,7 @@ export type AttributeData = AttributeOrMasteryBaseData & {
   shows?: Showing;
 };
 
-export type AttributeOrMasteryBaseData = UnlockedState & {
+type AttributeOrMasteryBaseData = UnlockedState & {
   base: number;
   description: string;
   Icon: SVGIcon;

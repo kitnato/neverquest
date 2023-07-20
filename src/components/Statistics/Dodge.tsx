@@ -16,7 +16,7 @@ import { deltas } from "@neverquest/state/deltas";
 import { armor, hasItem } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
-import { dodgeTotal, powerBonus } from "@neverquest/state/statistics";
+import { dodge, powerBonus } from "@neverquest/state/statistics";
 import {
   CLASS_TABLE_CELL_ITALIC,
   LABEL_EMPTY,
@@ -26,7 +26,7 @@ import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Dodge() {
   const { staminaCost } = useRecoilValue(armor);
-  const dodgeTotalValue = useRecoilValue(dodgeTotal);
+  const dodgeValue = useRecoilValue(dodge);
   const isShowingDodge = useRecoilValue(isShowing("dodge"));
   const isShowingDodgePenalty = useRecoilValue(isShowing("dodgePenalty"));
   const hasTomeOfPower = useRecoilValue(hasItem("tome of power"));
@@ -36,7 +36,7 @@ export function Dodge() {
 
   useDeltaText({
     atomDelta: deltas("dodge"),
-    atomValue: dodgeTotal,
+    atomValue: dodge,
     type: "percentage",
   });
 
@@ -96,7 +96,7 @@ export function Dodge() {
               skillEvasion && (isShowingDodgePenalty || hasTomeOfPower) ? ["hover", "focus"] : []
             }
           >
-            <span>{skillEvasion ? formatPercentage(dodgeTotalValue) : LABEL_EMPTY}</span>
+            <span>{skillEvasion ? formatPercentage(dodgeValue) : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
           <FloatingText deltaType="dodge" />

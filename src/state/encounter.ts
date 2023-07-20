@@ -29,7 +29,7 @@ export const location = withStateKey("location", (key) =>
           return LABEL_UNKNOWN;
         }
 
-        return get(wilderness);
+        return get(wildernesses)[get(stage) - 1];
       }
 
       return "Caravan";
@@ -48,13 +48,6 @@ export const progressMaximum = withStateKey("progressMaximum", (key) =>
 export const stageMaximum = withStateKey("stageMaximum", (key) =>
   selector({
     get: ({ get }) => get(wildernesses).length,
-    key,
-  })
-);
-
-export const wilderness = withStateKey("wilderness", (key) =>
-  selector({
-    get: ({ get }) => get(wildernesses)[get(stage) - 1],
     key,
   })
 );
@@ -78,8 +71,8 @@ export const stage = withStateKey("stage", (key) =>
 );
 
 export const mode = withStateKey("mode", (key) =>
-  atom({
-    default: "wilderness" as Location,
+  atom<Location>({
+    default: "wilderness",
     effects: [handleLocalStorage<Location>({ key })],
     key,
   })

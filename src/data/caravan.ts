@@ -113,7 +113,6 @@ export const CREW_ORDER: Crew[] = Object.entries(CREW)
 
 export const OCCULTIST_PURGE_PRICE_MULTIPLIER = 0.33;
 
-export const MEDIC_PRICE_BANDAGES = 18;
 export const MEDIC_PRICE_SURGERY = 6;
 export const MEDIC_PRICE_SURGERY_CRITICAL = 15;
 

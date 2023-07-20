@@ -1,4 +1,4 @@
-export type Affix = "prefix" | "suffix";
+type Affix = "prefix" | "suffix";
 
 export type AffixTag = "elemental" | "highQuality" | "lowQuality";
 
@@ -14,7 +14,7 @@ export type ArmorClass = (typeof ARMOR_CLASSES)[number];
 
 type ArmorSlot = "chest" | "feet" | "hands" | "head" | "legs" | "shoulders" | "waist";
 
-export type Artifact = "armor" | "shield" | "trinket" | "weapon";
+type Artifact = "armor" | "shield" | "trinket" | "weapon";
 
 export type ArtifactType<T extends Artifact> = { type: T };
 

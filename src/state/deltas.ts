@@ -30,11 +30,3 @@ export const monsterBleedingDelta = withStateKey("monsterBleedingDelta", (key) =
     key,
   })
 );
-
-export const poisonedDelta = withStateKey("poisonedDelta", (key) =>
-  atom({
-    default: 0,
-    effects: [handleLocalStorage<number>({ key })],
-    key,
-  })
-);

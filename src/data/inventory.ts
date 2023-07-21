@@ -28,6 +28,14 @@ import type { ConsumableItem, Range, TrinketItem, Weapon } from "@neverquest/typ
 import type { SVGIcon } from "@neverquest/types/props";
 import type { Consumable, Showing, Trinket } from "@neverquest/types/unions";
 
+export const ARMOR_BASE = {
+  coinPrice: 500,
+  protection: 300,
+  scrapPrice: 3500,
+  staminaCost: 25,
+  weight: 50,
+};
+
 export const ARMOR_NONE = {
   deflection: 0,
   id: nanoid(),
@@ -134,7 +142,17 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
     },
   };
 
+export const ENCUMBRANCE = 3;
+
 export const KNAPSACK_SIZE = 3;
+
+export const SHIELD_BASE = {
+  coinPrice: 400,
+  scrapPrice: 3000,
+  stagger: { attenuation: 0.8, minimum: 0.1 },
+  staminaCost: 30,
+  weight: 40,
+};
 
 export const SHIELD_NONE = {
   block: 0,
@@ -249,6 +267,21 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
       weight: 6,
     },
   },
+};
+
+export const WEAPON_BASE = {
+  coinPrice: 300,
+  damage: {
+    maximum: 1200,
+    minimum: 1100,
+  },
+  rate: {
+    maximum: 3500,
+    minimum: 3300,
+  },
+  scrapPrice: 2500,
+  staminaCost: 40,
+  weight: 30,
 };
 
 export const WEAPON_NONE: Omit<Weapon, "coinPrice" | "isEquipped" | "ranges" | "scrapPrice"> = {

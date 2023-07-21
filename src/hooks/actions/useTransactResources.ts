@@ -20,7 +20,6 @@ export function useTransactResources() {
 
         const { coinsDifference, essenceDifference, scrapDifference } = difference;
 
-        // TODO - separate looting into a hook/component method?
         const isLooting =
           coinsDifference === undefined &&
           essenceDifference === undefined &&

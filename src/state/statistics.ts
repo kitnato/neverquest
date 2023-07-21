@@ -1,7 +1,7 @@
 import { selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import { BLEED, PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/statistics";
+import { BLEED, PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/combat";
 import { withStateKey } from "@neverquest/state";
 import { level, rawAttributeStatistic } from "@neverquest/state/attributes";
 import { armor, hasItem, shield, weapon } from "@neverquest/state/inventory";

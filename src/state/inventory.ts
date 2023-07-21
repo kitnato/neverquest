@@ -1,7 +1,6 @@
 import { atom, selector, selectorFamily } from "recoil";
 
-import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
-import { ENCUMBRANCE } from "@neverquest/data/statistics";
+import { ARMOR_NONE, ENCUMBRANCE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { Armor, Item, Shield, Weapon } from "@neverquest/types";
 import {

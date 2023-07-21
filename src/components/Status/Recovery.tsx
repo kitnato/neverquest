@@ -6,7 +6,7 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { RecoveryMeter } from "@neverquest/components/Status/RecoveryMeter";
-import { RECOVERY_RATE } from "@neverquest/data/statistics";
+import { RECOVERY_RATE } from "@neverquest/data/combat";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconRecovery } from "@neverquest/icons/recovery.svg";
 import { ReactComponent as IconResilience } from "@neverquest/icons/resilience.svg";

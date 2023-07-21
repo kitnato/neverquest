@@ -5,7 +5,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { BLEED } from "@neverquest/data/statistics";
+import { BLEED } from "@neverquest/data/combat";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconBleedRating } from "@neverquest/icons/bleed-rating.svg";
 import { ReactComponent as IconCruelty } from "@neverquest/icons/cruelty.svg";

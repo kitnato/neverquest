@@ -12,7 +12,7 @@ export function Core() {
   const { resetSeed, seed } = useSeed();
 
   useEffect(() => {
-    // TODO - extend to replace a path of any length
+    // Only works for non-nested routes.
     window.history.replaceState(null, "", "/");
   }, []);
 

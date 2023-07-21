@@ -1,11 +1,15 @@
 import { nanoid } from "nanoid";
 
+import { ATTACK_RATE_ATTENUATION } from "@neverquest/data/combat";
 import {
+  ARMOR_BASE,
   ARMOR_SPECIFICATIONS,
+  SHIELD_BASE,
   SHIELD_SPECIFICATIONS,
+  WEAPON_BASE,
   WEAPON_SPECIFICATIONS,
 } from "@neverquest/data/inventory";
-import { ATTACK_RATE_ATTENUATION } from "@neverquest/data/statistics";
+import { LOCATION_AFFIX_BASE } from "@neverquest/data/location";
 import { LOCRA } from "@neverquest/LOCRA";
 import type {
   AffixTag,
@@ -34,6 +38,7 @@ export function generateArmor({
   name?: string;
   tags?: AffixTag[];
 }): Armor {
+  const { coinPrice, protection, scrapPrice, staminaCost, weight } = ARMOR_BASE;
   const { deflectionRange, dodgeCostModifier, priceModifier, protectionModifier, weightModifier } =
     ARMOR_SPECIFICATIONS[gearClass];
   const growthFactor = getGrowthSigmoid(level);
@@ -52,8 +57,7 @@ export function generateArmor({
         };
 
   return {
-    // TODO - base to /data.
-    coinPrice: Math.round(500 * growthFactor * priceModifier),
+    coinPrice: Math.round(coinPrice * growthFactor * priceModifier),
     deflection: ranges === null ? 0 : getFromRange(ranges.deflection),
     gearClass,
     id: nanoid(),
@@ -70,23 +74,22 @@ export function generateArmor({
         },
         tags,
       }),
-    // TODO - base to /data.
-    protection: Math.round(300 * growthFactor * protectionModifier),
+    protection: Math.round(protection * growthFactor * protectionModifier),
     ranges,
-    scrapPrice: Math.round(3500 * growthFactor * priceModifier),
-    staminaCost: Math.ceil(25 * growthFactor * dodgeCostModifier),
-    weight: Math.ceil(50 * growthFactor * weightModifier),
+    scrapPrice: Math.round(scrapPrice * growthFactor * priceModifier),
+    staminaCost: Math.ceil(staminaCost * growthFactor * dodgeCostModifier),
+    weight: Math.ceil(weight * growthFactor * weightModifier),
   };
 }
 
 export function generateWilderness({ allowNSFW, stage }: { allowNSFW: boolean; stage: number }) {
+  const { prefix, suffix } = LOCATION_AFFIX_BASE;
   const growthFactor = getGrowthSigmoid(stage);
 
   return LOCRA.generateLocation({
     allowNSFW,
-    // TODO - base to /data.
-    hasPrefix: Math.random() < 0.7 + 0.3 * growthFactor,
-    hasSuffix: Math.random() < 0.1 + 0.7 * growthFactor,
+    hasPrefix: Math.random() < prefix.minimum + prefix.attenuation * growthFactor,
+    hasSuffix: Math.random() < suffix.minimum + suffix.attenuation * growthFactor,
   });
 }
 
@@ -107,6 +110,7 @@ export function generateShield({
   name?: string;
   tags?: AffixTag[];
 }): Shield {
+  const { coinPrice, scrapPrice, stagger, staminaCost, weight } = SHIELD_BASE;
   const { blockRange, staggerModifier, staminaCostModifier, weightModifier } =
     SHIELD_SPECIFICATIONS[gearClass];
   const growthFactor = getGrowthSigmoid(level);
@@ -121,8 +125,7 @@ export function generateShield({
 
   return {
     block: getFromRange(ranges.block),
-    // TODO - base to /data.
-    coinPrice: Math.round(400 * growthFactor),
+    coinPrice: Math.round(coinPrice * growthFactor),
     gearClass,
     id: nanoid(),
     isEquipped: false,
@@ -140,11 +143,10 @@ export function generateShield({
         tags,
       }),
     ranges,
-    // TODO - base to /data.
-    scrapPrice: Math.round(3000 * growthFactor),
-    stagger: (0.1 + 0.9 * growthFactor) * staggerModifier,
-    staminaCost: Math.ceil(30 * growthFactor * staminaCostModifier),
-    weight: Math.ceil(40 * growthFactor * weightModifier),
+    scrapPrice: Math.round(scrapPrice * growthFactor),
+    stagger: (stagger.minimum + stagger.attenuation * growthFactor) * staggerModifier,
+    staminaCost: Math.ceil(staminaCost * growthFactor * staminaCostModifier),
+    weight: Math.ceil(weight * growthFactor * weightModifier),
   };
 }
 
@@ -165,6 +167,7 @@ export function generateWeapon({
   modality: WeaponModality;
   tags?: AffixTag[];
 }): Weapon {
+  const { coinPrice, damage, rate, scrapPrice, staminaCost, weight } = WEAPON_BASE;
   const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
   const growthFactor = getGrowthSigmoid(level);
   const ranges = {
@@ -177,24 +180,20 @@ export function generateWeapon({
         (abilityChance[1].minimum - abilityChance[0].minimum) * growthFactor,
     },
     damage: {
-      // TODO - base to /data.
-      maximum: Math.round(1200 * growthFactor),
-      minimum: Math.round(1100 * growthFactor),
+      maximum: Math.round(damage.maximum * growthFactor),
+      minimum: Math.round(damage.minimum * growthFactor),
     },
     rate: {
-      // TODO - base to /data.
-      maximum: 3500 - Math.round(ATTACK_RATE_ATTENUATION * growthFactor),
-      minimum: 3300 - Math.round(ATTACK_RATE_ATTENUATION * growthFactor),
+      maximum: rate.maximum - Math.round(ATTACK_RATE_ATTENUATION * growthFactor),
+      minimum: rate.minimum - Math.round(ATTACK_RATE_ATTENUATION * growthFactor),
     },
   };
 
   return {
     abilityChance: getFromRange(ranges.ability),
-    // TODO - base to /data.
-    coinPrice: Math.round(300 * growthFactor),
+    coinPrice: Math.round(coinPrice * growthFactor),
     damage: getFromRange(ranges.damage),
     gearClass,
-    // TODO
     grip: "one-handed",
     id: nanoid(),
     isEquipped: false,
@@ -213,9 +212,8 @@ export function generateWeapon({
     }),
     ranges,
     rate: getFromRange(ranges.rate),
-    // TODO - base to /data.
-    scrapPrice: Math.round(2500 * growthFactor),
-    staminaCost: Math.ceil(40 * growthFactor),
-    weight: Math.ceil(30 * growthFactor),
+    scrapPrice: Math.round(scrapPrice * growthFactor),
+    staminaCost: Math.ceil(staminaCost * growthFactor),
+    weight: Math.ceil(weight * growthFactor),
   };
 }

@@ -9,7 +9,6 @@ import { ReactComponent as IconTraumatology } from "@neverquest/icons/traumatolo
 import type { SVGIcon } from "@neverquest/types/props";
 import type { Attribute, Mastery, Showing, Skill } from "@neverquest/types/unions";
 
-// TODO - diversify icons.
 export const SKILLS: Record<
   Skill,
   {

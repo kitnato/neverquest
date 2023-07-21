@@ -58,7 +58,6 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
     powerBonus: 0.01,
   },
   perception: {
-    // TODO - move base amount to /data
     base: 1.5,
     description: "Increases critical strike damage.",
     Icon: IconPerception,

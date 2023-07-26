@@ -4,7 +4,7 @@ There are two panels: the [character](#character) (left) and the [encounter](#en
 
 ## Character
 
-The main panel on the left of the UI. View the character's [reserves](#reserves), [statistics](#statistics), [resources](#resources), [ailments](#ailments), and set their name.
+The main panel on the left of the UI displays the character's [reserves](#reserves), [statistics](#statistics), [resources](#resources), [ailments](#ailments), and allows setting their name.
 
 ### Reserves
 
@@ -26,23 +26,23 @@ It is [regenerated](#stamina-regeneration-rate) over time, at a faster initial p
 
 ### Resources
 
-Collected by [looting](#looting) dead monsters and selling or dismantling [gear](#gear) at the [caravan](#caravan).
+Collected by [looting](#looting) dead monsters and trading at the [caravan](#caravan).
 
 #### Coins
 
-Gained from selling scrap and [items](#item) to the [merchant](#merchant) and dropped by certain rare monsters. Used to pay for [caravan](#caravan) crew, some of their services and any item purchases.
+Gained from selling scrap and [items](#item) to the [merchant](#merchant) and dropped by monsters. Used to pay for [caravan](#caravan) crew, some of their services and any item purchases.
 
 #### Essence
 
-Gained from killing monsters and disenchanting gear. Primarily spent on attribute ranks. Essence cost increases for every such rank allocation.
+Gained from killing monsters. Primarily spent on acquiring attribute ranks. Essence cost increases for every allocation of an attribute rank.
 
 #### Scrap
 
-Gained from dismantling [gear](#gear) at the blacksmith and dropped from monsters. Used to craft gear and trade for coins.
+Gained by killing monsters. Primarily used to craft [gear](#gear).
 
 ### Attributes
 
-Attributes each provide a direct increasing effect for each rank. Each rank allocation raises the character's level by 1.
+For each rank, an attribute provides a direct increasing effect and raises the character's power level by 1.
 
 [Essence](#essence) is used to allocate ranks. The cost of allocation is increased for every rank.
 
@@ -72,7 +72,7 @@ Affects [critical damage](#critical-damage). Required skill: [Assassination](#as
 
 #### Speed
 
-Affects [rate of attack](#attack-rate).
+Affects the [rate of attacks](#attack-rate).
 
 #### Strength
 
@@ -80,7 +80,7 @@ Affects [total damage](#total-damage) of an attack.
 
 #### Vigor
 
-Affects [health regeneration rate](#health-regeneration-rate).
+Affects [health regeneration rate](#health-regeneration-rate) and [stamina regeneration rate](#stamina-regeneration-rate).
 
 #### Vitality
 
@@ -90,9 +90,11 @@ Affects maximum [total health](#health).
 
 Derived from the character's [attributes](#attributes), [gear](#gear), and any current [ailments](#ailments).
 
-#### Damage per second
+#### Damage per second (DPS)
 
-Requires toggling on in the global [settings](#settings). If on, shows the expected damage per second the character can deal, taking into account [attack rate](#attack-rate), current [total damage](#total-damage) and [critical strikes](#critical-chance).
+Displays the expected damage per second (DPS) the character can deal, taking into account [attack rate](#attack-rate), current [total damage](#total-damage) and [critical strikes](#critical-chance).
+
+Requires toggling on in the global [settings](#settings) to show.
 
 #### Attack rate
 
@@ -104,13 +106,15 @@ Percentage determining the chance that when attacking, the given [bleed damage](
 
 #### Bleed damage
 
-Percentage of the weapon's total damage that is inflicted over time after a successful attack with bleed. Proportional to this total is taken every 500 milliseconds until duration (2.5 seconds total) is complete.
+Percentage of the weapon's total damage that is inflicted over time after a successful attack with bleed. Proportional damage is taken periodically until the duration is complete.
 
 Can be increased by mastering [Cruelty](#cruelty).
 
 #### Block chance
 
-Percentage determining the chance that when defending, all incoming non-protected damage is blocked.
+Percentage determining the chance that when defending, all incoming damage is blocked.
+
+Determined by the equipped [shield](#shields).
 
 #### Critical chance
 
@@ -130,15 +134,23 @@ Percentage determining the chance of when defending, the character avoids all da
 
 Can be increased with the [Agility](#agility) attribute.
 
+#### Health regeneration amount
+
+Amount of [health](#health) restored per [regeneration rate](#health-regeneration-rate) period.
+
+Can be increased with the [Vigor](#vigor) attribute.
+
 #### Health regeneration rate
 
 Time duration until [health](#health) is restored by one point.
 
-Can be increased with the [Vigor](#vigor) attribute.
+Can be increased with the [Fortitude](#fortitude) attribute.
 
 #### Parry absorption
 
-Percentage of attacking damage after current [protection](#protection) that is subtracted upon a successful parry (base: 33%). Can be increased by mastering [Finesse](#finesse).
+Percentage of attacking damage after current [protection](#protection) that is subtracted upon a successful parry.
+
+Can be increased by mastering [Finesse](#finesse).
 
 #### Parry chance
 
@@ -146,93 +158,49 @@ Percentage chance determining a successful [parry](#parry) when defending.
 
 #### Parry damage
 
-Percentage of attacking damage that is inflicted on the attacker upon a successful parry (base: 25%). Can be increased by mastering [Finesse](#finesse).
+Percentage of attacking damage that is inflicted on the attacker upon a successful parry.
+
+Can be increased by mastering [Finesse](#finesse).
 
 #### Protection
 
-Amount of damage that is discarded from the total when defending. This is determined primarily through [armor](#armor) and other [gear](#gear).
+Amount of damage that is discarded from the total when defending.
+
+Determined primarily through [armor](#armor).
 
 #### Recovery rate
 
-Time until character recovers from a monster's successful attack. This duration can be decreased with the [resilience](#resilience) mastery.
+Time duration until full [recovery](#recovery) from a monster's successful attack.
+
+Can be decreased with the [resilience](#resilience) mastery.
 
 #### Stagger chance
 
-Percentage determining the chance of [staggering](#stagger) the monster when attacking or defending based primarily on the current [gear](#gear) ([shields](#shields) and [blunt weapons](#blunt-weapon)) for a certain [duration](#stagger-duration).
+Percentage determining the chance of [staggering](#stagger) the monster when attacking or defending for a certain [duration](#stagger-duration).
+
+Determined by the equipped [gear](#gear) ([shields](#shields) and [blunt weapons](#blunt-weapon)).
 
 #### Stagger duration
 
-Time until the monster recovers from [staggering](#stagger) until it can continue attacking.
+Time until the monster recovers from being [staggered](#stagger).
 
 Can be increased by mastering [Might](#might).
 
+#### Stamina regeneration amount
+
+Amount of [stamina](#stamina) restored per [regeneration rate](#stamina-regeneration-rate) period.
+
+Can be increased with the [Vigor](#vigor) attribute.
+
 #### Stamina regeneration rate
 
-Time duration until [stamina](#stamina) is restored by one point.
+Time duration until stamina is restored by a certain amount.
 
 Can be increased with the [Fortitude](#fortitude) attribute.
 
 #### Total damage
 
-Damage from [strength](#strength) in addition to [weapon](#weapons) damage along with any other bonuses that is applied on every [attack](#combat).
-
-## Combat
-
-The [wilderness](#wilderness) **stage** initially always has a lurking [monster](#monster). When ready, the character can choose to **attack** continuously based on their [attack rate](#attack-rate), **engaging** the monster in the process. While engaged, the monster will also attack continuously, triggering the character to **defend** themselves. When the monster strikes the character, [recovery](#recovery-rate) is triggered. While recovering, the character won't be able to attack or regenerate their [reserves](#reserves).
-
-Both the character and monster will keep attacking one another until either the character **retreats**, upon which the monster's health instantly regenerates to its maximum, or if the monster or character is dead (one of either's health reaches zero).
-
-Upon a monster's death, the stage's **progress** is incremented, its remains are looted and the next monster is engaged automatically, unless the character retreats.
-
-The character will enter a **resting** state once the stage is complete and there are no more monsters to fight, or when they **travel** to the [caravan](#caravan).
-
-### Combat mechanics
-
-Apart from the ones marked in bold in the [combat](#combat) section, there are several additional mechanics that occur during combat.
-
-Some of the following effects are intrinsic to gear and aren't controlled directly the way [attributes](#attributes) are.
-
-#### Block
-
-A successful block by the character upon a monster's attack will negate all damage done, yet costs [stamina](#stamina). Blocking may also inflict [stagger](#stagger) on the monster, depending on the acquisition of the [Traumatology](#traumatology) skill.
-
-The overall chance to block an attack is determined by the [block chance](#block-chance) statistic and is determined primarily by wielding a [shield](#shields).
-
-#### Critical Strike
-
-An attack might deal extra damage, which is determined by the [chance](#critical-chance) to do so and the overall [damage multiplier](#critical-damage).
-
-#### Deflection
-
-The chance for the character to completely ignore all effects of an incoming [ailment](#ailments).
-
-Deflecting an ailment is only possible after acquiring the [Armorcraft](#armorcraft) skill.
-
-#### Dodge
-
-Dodging an incoming attack negates all damage, but doesn't cost any stamina the way [blocking](#block) does, but only if no [armor](#armor) or [hide](#hide-armor) armor is worn. [Reinforced](#reinforced-armor) armor incurs a stamina cost for dodging, and [plate](#plate-armor) removes the ability to dodge altogether.
-
-The overall chance to dodge an attack is determined by the [dodge chance](#dodge-chance) statistic.
-
-Dodging is only possible after acquiring the [Evasion](#evasion) skill.
-
-#### Exhaustion
-
-When there is not enough [stamina](#stamina) to pay for an attack, [parry](#parry) or [block](#block), sufficient [stamina regeneration](#stamina-regeneration-rate) must occur first before being able to do any of them.
-
-#### Looting
-
-After the monster is defeated, its remains are looted automatically for any [resources](#resources).
-
-The looted resources can only be collected when the stage is completed, i.e. once the [wilderness](#wilderness) is cleared of monsters.
-
-#### Parry
-
-A successful parry [absorbs](#parry-absorption) a percentage of the total damage of an attack and [reflects](#parry-damage) a percentage back to the attacker. These percentages are determined by the [Finesse](#finesse) mastery rank.
-
-The overall chance to parry an attack is determined by the [parry chance](#parry-chance), which is influenced by currently-equipped gear ([slashing weapons](#slashing-weapon). When parrying occurs, the stamina cost of the currently-equipped weapon is paid. If [exhausted](#exhaustion), no parrying can occur.
-
-Parrying is only possible after acquiring the [Escrime](#escrime) skill.
+Damage from [strength](#strength) in addition to [weapon](#weapons) damage along with any other bonuses that together are applied with every [attack](#combat).
 
 ## Encounter
 
@@ -242,7 +210,7 @@ The main panel to the right of the screen. It changes based on one of the two po
 
 Engage and fight monsters. Every wilderness stage has a randomly-generated name and contains a certain amount of monsters whose power is determined by the stage and current progress.
 
-The stage is considered completed when the progress is at its maximum after having killed all the monsters. At this point, all [loot](#looting) can be collected and the character can travel to the [caravan](#caravan).
+The stage is considered completed when the progress is at its maximum, which is after having killed all the monsters. At this point, all [loot](#looting) can be collected and the character can travel to the [caravan](#caravan).
 
 ### Monster
 
@@ -252,13 +220,13 @@ A creature with a randomly generated name that will continuously attack the char
 
 Encountered after completing the current [wilderness](#wilderness) stage.
 
-All goods and services offered by the caravan crew are purchasable with [coins](#coins), [scrap](#scrap) or [essence](#essence), granting various different bonuses. Once at the caravan, the only other option apart from interacting with the crew is to return to the wilderness, which will increase its stage if it was left at its maximum.
+All goods and services offered by the caravan crew are purchasable with [coins](#coins), [scrap](#scrap) or [essence](#essence). Once at the caravan, the only other option apart from interacting with the crew is to return to the wilderness, which will increase its stage (if the previous wilderness was left at the maximum stage).
 
-The [merchant](#merchant) is always present from the start. Other crew members can be acquired at a cost of coins, who then offer more goods and services. Some have additional requirements before they are unlocked for purchase.
+The [merchant](#merchant) is always present from the start. Other crew members can be acquired at a cost of coins, who then offer more goods and services. They become available as the stage increases.
 
 #### Alchemist
 
-Offers conversion of scrap into essence and vice-versa. Buys essence for coins.
+Offers conversion of coins, essence and scrap between one another.
 
 #### Blacksmith
 
@@ -266,7 +234,7 @@ Crafts [armor](#armor), [weapons](#weapons) and [shields](#shields). Requires co
 
 #### Medic
 
-Offers full healing in exchange for coins. Also sells bandages that stem [bleeding](#bleed) and restore health.
+Offers full healing in exchange for coins. Also sells [bandages](#bandages) that fully restore health.
 
 #### Mercenary
 
@@ -274,7 +242,7 @@ Offers acquisition of new [skills](#skills).
 
 #### Merchant
 
-Purchase and sell [items](#item). Coins can then be used to purchase whatever the merchant has available and used for other goods and services of the caravan.
+Purchase and sell [items](#item). Coins are used to purchase whatever the merchant has available.
 
 The merchant's inventory of items will grow and diversify after each new stage.
 
@@ -290,11 +258,65 @@ Sells upgrades for increasing maximum [encumbrance](#encumbrance).
 
 Sells [potions](#potions) in exchange for coins.
 
+## Combat
+
+The [wilderness](#wilderness) **stage** initially always has a lurking [monster](#monster). When ready, the character can choose to **attack** continuously based on their [attack rate](#attack-rate), **engaging** the monster in the process. While engaged, the monster will also attack continuously, triggering the character to **defend** themselves. When the monster strikes the character, [recovery](#recovery-rate) is triggered. While recovering, the character won't be able to attack or regenerate their [reserves](#reserves).
+
+Both the character and monster will keep attacking one another until either the character **retreats**, upon which the monster's health instantly regenerates to its maximum, or if the monster or character is dead (one of either's health reaches zero).
+
+Upon a monster's death, the stage's **progress** is incremented, its remains are looted and the next monster is engaged automatically, unless the character retreats.
+
+The character will enter a **resting** state once the stage is complete and there are no more monsters to fight, or when they **travel** to the [caravan](#caravan).
+
+### Block
+
+A successful block by the character upon a monster's attack will negate all damage done, yet costs [stamina](#stamina). Blocking may also inflict [stagger](#stagger) on the monster, depending on the acquisition of the [Traumatology](#traumatology) skill.
+
+The overall chance to block an attack is determined by the [block chance](#block-chance) statistic and is determined primarily by wielding a [shield](#shields).
+
+### Critical strike
+
+An attack might deal extra damage, which is determined by the [chance](#critical-chance) and the overall [damage multiplier](#critical-damage).
+
+Required skill: [Cruelty](#cruelty).
+
+### Deflection
+
+The chance for the character to completely ignore all effects of an incoming [ailment](#ailments).
+
+Required skill: [Armorcraft](#armorcraft).
+
+### Dodge
+
+Dodging an incoming attack negates all damage. It doesn't cost any stamina the way [blocking](#block) does, but only if no [armor](#armor) or [hide](#hide-armor) armor is worn. [Reinforced](#reinforced-armor) armor incurs a stamina cost for dodging, and [plate](#plate-armor) removes the ability to dodge altogether.
+
+The overall chance to dodge an attack is determined by the [dodge chance](#dodge-chance) statistic.
+
+Required skill: [Evasion](#evasion).
+
+### Exhaustion
+
+When there is not enough [stamina](#stamina) to pay for an attack, [parry](#parry) or [block](#block), sufficient [stamina regeneration](#stamina-regeneration-rate) must occur first before being able to do any of them.
+
+### Looting
+
+After the monster is defeated, its remains are looted automatically for any [resources](#resources).
+
+The looted resources can only be collected when the stage is completed, i.e. once the [wilderness](#wilderness) is cleared of monsters.
+
+### Parry
+
+A successful parry [absorbs](#parry-absorption) a percentage of the total damage of an attack and [reflects](#parry-damage) a percentage back to the attacker. These percentages are determined by the [Finesse](#finesse) mastery rank.
+
+The overall chance to parry an attack is determined by the [parry chance](#parry-chance), which is influenced by currently-equipped gear ([slashing weapons](#slashing-weapon). When parrying occurs, the stamina cost of the currently-equipped weapon is paid. If [exhausted](#exhaustion), no parrying can occur.
+
+Required skill: [Escrime](#escrime).
+
 ## Inventory
 
 The inventory is accessible as soon as the character acquires the [knapsack](#knapsack) from the merchant.
 
-Before acquiring the knapsack, all gear is automatically equipped if possible and all consumables are immediately consumed. Additionally, [encumbrance](#encumbrance) can't be extended via the [tailor](#tailor).
+Before acquiring the knapsack, all gear is automatically equipped if possible and [encumbrance](#encumbrance) can't be extended via the [tailor](#tailor).
 
 ### Item
 
@@ -302,7 +324,9 @@ An item can either be;
 
 - a) a piece of [gear](#gear), or
 - b) a consumable like a [potion](#potions), or
-- c) a [trinket](#trinkets) that grants a special effect and/or an action.
+- c) a [trinket](#trinkets) that grants a special effect and/or an action while part of the inventory.
+
+Every item, apart from the [knapsack](#knapsack), has an associated weight that influences [encumbrance](#encumbrance).
 
 ### Knapsack
 
@@ -310,7 +334,7 @@ Allows for the storage of items. Allows equipping and un-equipping [gear](#gear)
 
 ### Encumbrance
 
-The inventory size is constrained by encumbrance, to which each carried or equipped item adds a certain amount. No further items can be acquired until the remaining encumbrance allows for it.
+The inventory size is constrained by encumbrance, to which each carried or equipped item adds a certain amount based on its weight. No further items can be acquired until the remaining encumbrance allows for it.
 
 Viewing encumbrance and managing it can only be accomplished once the [knapsack](#knapsack) is acquired.
 
@@ -353,15 +377,21 @@ No initial modifiers.
 
 ###### Blunt weapon
 
-Adds chance to [stagger](#stagger) for a certain duration. Required skill: [Traumatology](#traumatology).
+Adds chance to [stagger](#stagger) for a certain duration.
+
+Required skill: [Traumatology](#traumatology).
 
 ###### Piercing weapon
 
-Chance to inflict [bleed](#bleed). Required skill: [Anatomy](#anatomy).
+Chance to inflict [bleed](#bleed).
+
+Required skill: [Anatomy](#anatomy).
 
 ###### Slashing weapon
 
-Chance to [parry](#parry). Required skill: [Escrime](#escrime).
+Chance to [parry](#parry).
+
+Required skill: [Escrime](#escrime).
 
 #### Armor
 
@@ -426,7 +456,7 @@ Grants a percentage [chance to block](#block-chance) all incoming damage. Also g
 
 #### Trinkets
 
-Can grant various [buffs](#buffs), actions and other effects if they are carried in the [inventory](#inventory).
+Can enable various actions or grant certain effects if they are carried in the [inventory](#inventory).
 
 The following are some of the early trinkets available from the merchant.
 
@@ -438,61 +468,77 @@ Allows the character to return to any previous stage to hunt more monsters.
 
 Allows the character to return to the caravan regardless of if the current [wilderness](#wilderness) stage's monsters are cleared out or not. Can only be used if not currently attacking (so that the inventory can be opened to use the hearthstone).
 
-### Potions
+### Consumables
 
-Purchased from the [witch](#witch).
+A single-use item.
 
-#### Antidote
+#### Bandages
+
+Sold by the [medic](#medic).
+
+Fully restores health on use. Does not affect [poison](#poison).
+
+#### Potions
+
+Sold by the [witch](#witch).
+
+##### Antidote
 
 Cures and removes [poison](#poison).
 
-#### Elixir
+##### Elixir
 
 Fully restores [stamina](#stamina). Does not affect [blight](#blight).
 
-#### Salve
+##### Salve
 
 Cures and removes [blight](#blight).
 
+#### Soulstone
+
+Sold by the [occultist](#occultist).
+
+While present in the [inventory](#inventory), automatically revives the character upon death. The item is consumed in the process.
+
 ## Mastery
 
-Using a particular piece of [gear](#gear) increases its associated mastery based on its type and class, which is determined by ranks. Acquiring a mastery to train requires the acquisition of its associated [skill](#skills).
+Using a particular piece of [gear](#gear) increases its associated mastery based on its type and class, determined by its rank. Acquiring a mastery to train requires the acquisition of its associated [skill](#skills).
 
 Each mastery starts at rank 0 and requires a certain amount of accumulated progress before the next rank is achieved.
 
 ### Cruelty
 
-Required skill: [Anatomy](#anatomy).
-
 Progress is gained by using [piercing weapons](#piercing-weapon). Each rank increases [bleed damage](#bleed-damage).
+
+Required skill: [Anatomy](#anatomy).
 
 ### Finesse
 
-Required skill: [Escrime](#escrime).
-
 Progress is gained by using [slashing weapons](#slashing-weapon). Each rank increases [parry absorption](#parry-absorption) & [parry damage](#parry-damage).
+
+Required skill: [Escrime](#escrime).
 
 ### Might
 
-Required skill: [Traumatology](#traumatology).
-
 Progress is gained by using [blunt weapons](#blunt-weapon). Each rank increases [stagger duration](#stagger-duration).
+
+Required skill: [Traumatology](#traumatology).
 
 ### Stability
 
-Required skill: [Shieldcraft](#shieldcraft).
-
 Progress is gained by successfully [blocking](#block) with [shields](#shields). Each rank reduces the [stamina](#stamina) cost of blocking.
+
+Required skill: [Shieldcraft](#shieldcraft).
 
 ### Resilience
 
-Required skill: [Armorcraft](#armorcraft).
-
 Progress is gained when defending. Each rank reduces [recovery](#recovery-rate) .
+
+Required skill: [Armorcraft](#armorcraft).
 
 ## Skills
 
-Skills are acquired from caravan crew and bestow a permanent passive ability.
+Skills are acquired from the [mercenary](#mercenary) and bestow a permanent ability.
 
 ### Passive skills
 
@@ -536,7 +582,7 @@ Unlocks the ability to [stagger](#stagger) when using [blunt](#blunt-weapon) wea
 
 ## Status effects
 
-Temporary or permanent effects granted or changing the current monster or character status.
+Temporary or permanent effects influencing the current monster or character status.
 
 ### Ailments
 
@@ -546,7 +592,7 @@ Negative status effects that dampen the character or monster.
 
 Certain successful attacks by the character can inflict bleeding on the monster, consisting of a total amount of damage inflicted regularly over a certain period of time.
 
-The statistics [bleed chance](#bleed-chance) and [bleed damage](#bleed-damage) determine this mechanic. Inflicting bleed is only possible after acquiring the [Anatomy](#anatomy) skill.
+This is determined by [bleed chance](#bleed-chance) and [bleed damage](#bleed-damage). Inflicting bleed is only possible after acquiring the [Anatomy](#anatomy) skill.
 
 #### Blight
 
@@ -562,48 +608,70 @@ Certain successful attacks by the monster can afflict the character with poison,
 
 The effect gradually wears off as maximum health is restored over time, during which all healing effects can only restore health up to the currently-reduced maximum.
 
-Monsters won't exhibit poison until later [wilderness](#wilderness) stages. Once poisoned, there is also a chance for certain monsters to inflict [blight](#blight), depending on the stage.
+Monsters won't exhibit poison until later [wilderness](#wilderness) stages. Once poisoned, there is also a chance for certain monsters to inflict [blight](#blight).
 
 This effect can be cured by an [antidote](#antidote). It can also be avoided if an attack is successfully [deflected](#deflection).
 
 #### Recovery
 
-Recovery occurs when the character is dealt damage, halting regeneration of [reserves](#reserves) and the [attack meter](#attack-rate). Its duration is determined by the [recovery rate](#recovery-rate).
+Recovery occurs when the character is dealt damage, halting regeneration of [reserves](#reserves) and the [attack meter](#attack-rate). Its duration is determined by the [recovery rate](#recovery-rate), but only for the character.
 
 It functions similarly to its counterpart [stagger](#stagger).
 
 #### Stagger
 
-When staggered, the monster will not be able to attack for a certain duration. It functions similarly to its counterpart [recovery](#recovery).
+When staggered, the monster will not be able to attack for a certain duration. It functions similarly to its counterpart [recovery](#recovery), but only for monsters.
 
 The overall [stagger chance](#stagger-chance) statistic is determined by the current gear ([shields](#shields) and [blunt weapons](#blunt-weapon)). The [stagger duration](#stagger-duration) is determined by the [Might](#might) mastery.
 
 Staggering is only possible after acquiring the [Traumatology](#traumatology) skill.
 
-### Buffs
-
-Temporary or permanent status effects that boost or improve the character or monster that are granted by [trinkets](#trinkets).
-
 ## Settings
 
-These are accessible via the "?" menu on the page header. They allow the activation and deactivation of certain global features.
-
-### NSFW mode
-
-Default: off. Toggles the generation of not-safe-for-work words when generating monster and item names.
-
-### Show damage per second (DPS)
-
-Default: off. Toggles DPS information for the character, gear and monster.
-
-### Auto-equip new items
-
-Default: on. Toggles the automatic equipping of weapons, armor, shields and potions once they are acquired. Cannot be set to off until the [knapsack](#knapsack) is acquired.
+These are accessible via the page header. They allow the activation and deactivation of certain gameplay features.
 
 ### Low health warning
 
-Default: on. Toggles a popover warning to prompt a retreat when the character's health drops below 33% of its maximum.
+Toggles a popover warning to prompt a retreat when the character's [health](#health) drops below 33% of its maximum.
 
-### Show all elements
+Default: on.
 
-Default: off. Once toggled, all elements of the UI will be shown at once instead of being unlocked gradually as gameplay progresses and features become relevant. Suitable for veteran players starting a new run.
+### Confirmation of risky choices
+
+Toggles between hiding and showing modals that confirm certain choices that are seen to be detrimental to gameplay for a beginner, such as leaving the [caravan](#caravan) when not purchasing anything from the [merchant](#merchant) in the first few levels.
+
+Default: on.
+
+### Auto-equip new gear
+
+Toggles the automatic equipping of [weapons](#weapons), [armor](#armor) and [shields](#shields) once they are acquired. Cannot be set to off until the [knapsack](#knapsack) is acquired.
+
+Default: on.
+
+### Show damage per second (DPS)
+
+Toggles DPS displays for the character, weapons and [monster](#monster).
+
+Default: off.
+
+### Show gear comparisons
+
+Toggles icons in the [gear](#gear) details overlays that indicate upgrades or downgrades for each of the properties.
+
+Default: on.
+
+### Show gear level
+
+Toggles between showing and hiding the power level of the gear.
+
+Default: off.
+
+### NSFW mode
+
+Toggles the generation of not-safe-for-work words when generating monster [wilderness](#wilderness) and [item](#item) names.
+
+Default: off.
+
+### Show everything
+
+Once toggled, all elements of the UI will be shown at once instead of being unlocked gradually as gameplay progresses and become relevant. Suitable for veteran players starting a new run.

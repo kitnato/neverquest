@@ -45,10 +45,7 @@ export function Settings() {
 
               <SettingsSwitch atom={lowHealthWarning} label="Low-health warning" />
 
-              <SettingsSwitch
-                atom={confirmationWarnings}
-                label="Confirmation warnings for risky choices"
-              />
+              <SettingsSwitch atom={confirmationWarnings} label="Confirmation of risky choices" />
 
               <h6>Gear</h6>
 

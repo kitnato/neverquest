@@ -8,9 +8,9 @@ For a full breakdown of the game, please consult the [manual](./src/data/manual.
 
 ## LOCRA
 
-The LOCRA (LOcation, CReature, Artifact) system generates a pseudo-random variety of names for different irreverent fantasy-themed items and monsters that the character interacts with.
+The LOCRA (LOcation, CReature, Artifact) system generates a pseudo-random variety of names for different irreverent fantasy-themed wildernesses, items and monsters.
 
-It works by generating a name for a location, creature or artifact based on a JSON library of (loosely) fantasy-world-themed words that can be composed to make (somewhat) coherent names for the three types in question. Parameters for tags and affix composition can be passed to make the generation more specific. If [NSFW mode](./src/data/manual.md#nsfw-mode) is on, the names may also be pornographic or decidedly non-fantasy-themed.
+A JSON library of (loosely) fantasy-world-themed words is the basis for the generation and composition of (somewhat) coherent names for the three namesake types. Parameters for tags and affix composition can be passed to make the generation more specific. If [NSFW mode](./src/data/manual.md#nsfw-mode) is on, the names may also be pornographic or decidedly non-fantasy-themed.
 
 Generating a creature name, for example, depending on the parameters passed, might yield anything from "Intrepid Farmer" to "Voluptuous Manticore of Unmitigated Penetration".
 
@@ -24,7 +24,7 @@ Neverquest is a work-in-progress. Several features are pending ideation, refinem
 
 #### Acumen
 
-Affects [sorcery](./src/data/manual.md#sorceries) casting rate.
+Affects [sorcery](#sorceries) casting rate.
 
 ### Intellect
 
@@ -32,42 +32,30 @@ Affects energy regeneration rate.
 
 #### Wisdom
 
-Affects total [energy](./src/data/manual.md#energy).
+Affects total [energy](#energy).
 
 ### Caravan
 
 #### Cook
 
-Sells hot meals that restore all [energy](./src/data/manual.md#energy) when used.
+Sells hot meals that restore all [energy](#energy) when used.
 
 Grants a Well Fed [buff](./src/data/manual.md#buffs) for the next stage (+10% [mastery](./src/data/manual.md#mastery) gain).
 
 #### Sorcerer
 
-Acquire [sorceries](./src/data/manual.md#sorceries) and [auras](./src/data/manual.md#auras).
+Acquire [sorceries](#sorceries) and [auras](#auras).
 
-### Reserves
+### Journal
 
-#### Energy
+Upon purchasing the Journal trinket, unlocks progression trackers, similar to achievements. Grant bonuses when completed.
 
-Consumed when activating [skills](./src/data/manual.md#skills), [auras](./src/data/manual.md#auras) and [sorceries](./src/data/manual.md#sorceries), regenerated over time.
-
-### Potions
-
-#### Venom
-
-Once applied to a weapon, it adds an effect with each strike, applying damage-over-time effects and potentially other ailments. Has a certain number of charges before it is used up.
-
-## Quests
-
-Progression trackers, similar to achievements. Grant bonuses when completed.
-
-### Challenges
+#### Challenge quests
 
 - Parry, inflict bleed and stagger in one attack
 - Survive the first 4 levels without any gear equipped
 
-### Combat quests
+#### Combat quests
 
 - Kill first monster
 - Kill 5/10/25/50/100/1000 monsters
@@ -82,45 +70,55 @@ Progression trackers, similar to achievements. Grant bonuses when completed.
 - [Stagger](./src/data/manual.md#stagger) 1/5/10/25/50/100 times
 - Stagger 3 times in a row
 
-### Caravan quests
+#### Caravan quests
 
 - Purchase [armor](./src/data/manual.md#armor)
 - Purchase a [shield](./src/data/manual.md#shields)
 - Purchase a [weapon](./src/data/manual.md#weapons)
-- Purchase the [compass](./src/data/manual.md#compass)
-- Purchase the [hearthstone](./src/data/manual.md#hearthstone)
-  Purchase any other key item
+- Purchase key trinket, e.g. [compass](./src/data/manual.md#compass), [hearthstone](./src/data/manual.md#hearthstone) etc.
 - Hire the [alchemist](./src/data/manual.md#alchemist)
 - Hire the [blacksmith](./src/data/manual.md#blacksmith)
-- Hire the [cook](./src/data/manual.md#cook)
+- Hire the [cook](#cook)
 - Hire the [medic](./src/data/manual.md#medic)
 - Hire the [merchant](./src/data/manual.md#merchant)
 - Hire the [mercenary](./src/data/manual.md#mercenary)
 - Hire the [tailor](./src/data/manual.md#tailor)
 - Hire the [witch](./src/data/manual.md#witch)
 
-### Gear quests
+#### Gear quests
 
-- Equip a weapon
-- Equip armor
-- Equip a shield
-- Discover [armor classes](./src/data/manual.md#armor)
+- Equip a [weapon](./src/data/manual.md#weapons)
+- Equip [armor](./src/data/manual.md#armor)
+- Equip a [shield](./src/data/manual.md#shields)
+- Discover armor classes
 - Discover [weapon classes](./src/data/manual.md#weapon-class)
-- Discover [shield types](./src/data/manual.md#shields)
+- Discover shield types
 
-### Meta
+#### Meta quests
 
 - Complete 5/10/25/50/100/all quests
 
+### Reserves
+
+#### Energy
+
+Consumed when activating [skills](./src/data/manual.md#skills), [auras](#auras) and [sorceries](#sorceries), regenerated over time.
+
+### Potions
+
+#### Venom
+
+Once applied to a weapon, it adds an effect with each strike, applying damage-over-time effects and potentially other ailments. Has a certain number of charges before it is used up.
+
 ## Retirement
 
-When reaching a certain power level, the character can retire. This restarts the quest from stage 0 with power level 0, however all hired caravan crew are retained. A [trait](./src/data/manual.md#traits) can be also chosen that confers a permanent bonus.
+When reaching a certain power level, the character can retire. This restarts the quest from stage 0 with power level 0, however all hired caravan crew are retained. A [trait](#traits) can be also chosen that confers a permanent bonus.
 
 ### Skills
 
 #### Activated skills
 
-Once acquired, activating a skill requires [energy](./src/data/manual.md#energy).
+Once acquired, activating a skill requires [energy](#energy).
 
 ##### Auras
 
@@ -146,13 +144,13 @@ Allows the use of a one-handed weapon in the [off-hand](./src/data/manual.md#off
 
 ##### Siegecraft
 
-Allows the use of [two-handed](./src/data/manual.md#two-handed) weapons.
+Allows the use of [two-handed](#two-handed) weapons.
 
 ### Traits
 
 Traits are permanent passive abilities acquired upon retiring for all subsequent new quests.
 
-- Brawler: Wearing no shield adds doubles unarmed damage.
+- Brawler: Wearing no shield doubles unarmed damage.
 - Bruiser: Current stamina adds unarmed bonus damage & unarmed attacks have a chance to stagger.
 - Inoculated: When poisoned, health reduction and recovery rate are halved.
 - Nudist: Double dodge rate when not wearing any armor.
@@ -206,19 +204,19 @@ The linter config can be viewed in `.eslintrc.json`, `.stylelintrc.json` and `.p
 
 ## Implementation
 
-- Built on [Vite](https://vitejs.dev).
-
 - Written in [TypeScript](https://www.typescriptlang.org).
 
-- UI framework is provided by [Bootstrap](https://react-bootstrap.github.io).
+- UI framework is [Bootstrap](https://react-bootstrap.github.io).
 
 - State management library is [Recoil](https://recoiljs.org).
 
-- Code style & linting is provided by [eslint](https://eslint.org), [stylelint](https://stylelint.io) and [prettier](https://prettier.io).
+- Animation library is [Animate.css](https://animate.style).
+
+- Runs on [Vite](https://vitejs.dev).
+
+- Code style & linting is provided by [eslint](https://eslint.org), [stylelint](https://stylelint.io) and [prettier](https://prettier.io), based on the [@cneuro/eslint-config-functional](https://github.com/cneuro/eslint-config-functional) rules.
 
 - Automation is provided by [husky](https://typicode.github.io/husky) and [lint-staged](https://www.npmjs.com/package/lint-staged).
-
-- Animation library is [Animate.css](https://animate.style).
 
 ## License
 
@@ -226,7 +224,7 @@ The linter config can be viewed in `.eslintrc.json`, `.stylelintrc.json` and `.p
 
 This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-## Appendices
+## Appendix
 
 ### 1. Gameplay objectives
 
@@ -234,7 +232,7 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 - No long waits, cliffs or walls
 - No obligatory resets for incremental gains
 - No excessive or repetitive clicking
-- Decisions are frequent and they matter
+- Decisions are frequent and they have immediate gameplay imppact
 - High character build variety
 - Manage an economy of resources and character builds with trade-offs
 

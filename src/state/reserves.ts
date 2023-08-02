@@ -83,6 +83,7 @@ export const isHealthAtMaximum = withStateKey("isHealthAtMaximum", (key) =>
 
 export const isHealthLow = withStateKey("isHealthLow", (key) =>
   selector({
+    // TODO - move to /data
     get: ({ get }) => get(health) <= get(healthMaximumTotal) * 0.33,
     key,
   })

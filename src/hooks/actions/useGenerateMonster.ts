@@ -24,9 +24,10 @@ export function useGenerateMonster() {
           monsterName,
           LOCRA.generateCreature({
             allowNSFW: get(allowNSFW),
+            // TODO - move to /data
             hasPrefix: Math.random() <= 0.6 + 0.4 * growthFactor,
             hasSuffix: Math.random() <= 0.05 + 0.75 * growthFactor,
-            type: "monster",
+            type: ["human", "monster"],
           })
         );
 

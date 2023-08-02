@@ -82,17 +82,6 @@ export function generateArmor({
   };
 }
 
-export function generateWilderness({ allowNSFW, stage }: { allowNSFW: boolean; stage: number }) {
-  const { prefix, suffix } = LOCATION_AFFIX_BASE;
-  const growthFactor = getGrowthSigmoid(stage);
-
-  return LOCRA.generateLocation({
-    allowNSFW,
-    hasPrefix: Math.random() < prefix.minimum + prefix.attenuation * growthFactor,
-    hasSuffix: Math.random() < suffix.minimum + suffix.attenuation * growthFactor,
-  });
-}
-
 export function generateShield({
   allowNSFW,
   gearClass,
@@ -216,4 +205,15 @@ export function generateWeapon({
     staminaCost: Math.ceil(staminaCost * growthFactor),
     weight: Math.ceil(weight * growthFactor),
   };
+}
+
+export function generateWilderness({ allowNSFW, stage }: { allowNSFW: boolean; stage: number }) {
+  const { prefix, suffix } = LOCATION_AFFIX_BASE;
+  const growthFactor = getGrowthSigmoid(stage);
+
+  return LOCRA.generateLocation({
+    allowNSFW,
+    hasPrefix: Math.random() < prefix.minimum + prefix.attenuation * growthFactor,
+    hasSuffix: Math.random() < suffix.minimum + suffix.attenuation * growthFactor,
+  });
 }

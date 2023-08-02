@@ -74,6 +74,7 @@ export function getSellPrice({ coinPrice }: { coinPrice: number }) {
 // https://en.wikipedia.org/wiki/Sigmoid_function
 // f(0) = ~0, f(50) = ~0.6, f(100) = ~1
 export function getGrowthSigmoid(x: number) {
+  // TODO - move to /data
   return 1 / (1 + 100 * Math.pow(Math.E, -0.1 * x));
 }
 

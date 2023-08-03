@@ -118,10 +118,10 @@ Traits are permanent passive abilities acquired upon [retiring](#retirement) for
 - Brawler: Wearing no shield doubles unarmed damage.
 - Bruiser: Current stamina adds unarmed bonus damage & unarmed attacks have a chance to stagger.
 - Colossus: Dual wield two-handed weapons.
+- Field surgeon: Automatically restore health when not in combat.
 - Hoarder: Start with all trinkets.
 - Inoculated: When poisoned, health reduction and recovery rate are halved.
 - Nudist: Double dodge rate when not wearing any armor.
-- Field surgeon: Automatically restore health when not in combat.
 - Shredder: Bleed damage is inflicted all at once.
 - Stalwart: Ignore penalties when wearing armor.
 - Tank: Shields increase protection by 50%.

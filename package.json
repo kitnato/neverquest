@@ -1,9 +1,27 @@
 {
   "name": "neverquest",
   "version": "0.1.0",
-  "private": true,
+  "description": "An irreverent browser-based incremental action role-playing game.",
   "author": "Chris N",
   "license": "cc-by-sa-4.0",
+  "homepage": "https://cneuro.github.io/neverquest",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cneuro/neverquest.git"
+  },
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/cneuro/neverquest/issues"
+  },
+  "keywords": [
+    "action rpg",
+    "arpg",
+    "browser game",
+    "clicker",
+    "game",
+    "incremental",
+    "role-playing"
+  ],
   "dependencies": {
     "animate.css": "4.1.1",
     "bootstrap": "5.3.0",

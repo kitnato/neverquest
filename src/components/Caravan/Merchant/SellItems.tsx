@@ -25,6 +25,7 @@ export function SellItems() {
   const confirmationWarningsValue = useRecoilValue(confirmationWarnings);
   const inventoryValue = useRecoilValue(inventory);
 
+  const [isShowingSellWarning, setShowingSellWarning] = useState(false);
   const [sellConfirmation, setSellConfirmation] = useState<Item | null>(null);
 
   const forfeitItem = useForfeitItem();
@@ -33,6 +34,7 @@ export function SellItems() {
   const sellItem = (item: Item) => {
     forfeitItem(item, "sale");
     merchantTradeItem(item, "sale");
+    setSellConfirmation(null);
   };
 
   const equippedGear = [
@@ -50,6 +52,7 @@ export function SellItems() {
         onClick={() => {
           if (confirmationWarningsValue && showConfirmation) {
             setSellConfirmation(item);
+            setShowingSellWarning(true);
           } else {
             sellItem(item);
           }
@@ -121,8 +124,8 @@ export function SellItems() {
               confirmationLabel="Sell"
               message="It can be bought back at the original purchase price but it will be gone forever once leaving the caravan."
               onConfirm={() => sellItem(sellConfirmation)}
-              setHide={() => setSellConfirmation(null)}
-              show={Boolean(sellConfirmation)}
+              setHidden={() => setShowingSellWarning(false)}
+              show={isShowingSellWarning}
               title="Sell equipped item?"
             />
           )}

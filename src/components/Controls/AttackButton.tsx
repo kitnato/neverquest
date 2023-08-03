@@ -102,7 +102,7 @@ export function AttackButton() {
         confirmationLabel="Attack anyway"
         message="When attacking before spending available essence on attributes, all monsters will need to be defeated before getting another chance."
         onConfirm={toggleAttack}
-        setHide={() => setShowAttackConfirmation(false)}
+        setHidden={() => setShowAttackConfirmation(false)}
         show={showAttackConfirmation}
         title="Unspent attribute points!"
       />

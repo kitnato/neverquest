@@ -50,7 +50,7 @@ export function ActivateHearthstone() {
         confirmationLabel="Warp"
         message="Warping back to the caravan now will forfeit all uncollected loot."
         onConfirm={toggleLocation}
-        setHide={() => setIsShowingConfirmation(false)}
+        setHidden={() => setIsShowingConfirmation(false)}
         show={isShowingConfirmation}
         title="Forfeit loot?"
       />

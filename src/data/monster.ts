@@ -9,7 +9,7 @@ export const LOOT = {
   bonus: 100,
   coinsBase: 200,
   essenceBase: 400,
-  scrapBase: 250,
+  scrapBase: 150,
 };
 
 export const MONSTER_ATTACK_RATE = {

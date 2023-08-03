@@ -77,7 +77,7 @@ export function TravelButton() {
         confirmationLabel="Travel anyway"
         message="Questing will be significantly harder without proper gear."
         onConfirm={toggleLocation}
-        setHide={() => setShowTravelConfirmation(false)}
+        setHidden={() => setShowTravelConfirmation(false)}
         show={showTravelConfirmation}
         title="Nothing purchased from merchant!"
       />

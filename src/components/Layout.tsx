@@ -48,7 +48,7 @@ export function Layout() {
         confirmationLabel="Restart"
         message="Start a new quest?"
         onConfirm={restart}
-        setHide={() => setIsShowingGameOver(false)}
+        setHidden={() => setIsShowingGameOver(false)}
         show={isGameOverValue && isShowingGameOver}
         title="Death has come."
       />

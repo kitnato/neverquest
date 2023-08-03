@@ -14,8 +14,6 @@ export function LootingMeter() {
 
   const progression = useProgression();
 
-  const lootingProgress = lootingRateValue - lootingDurationValue;
-
   useAnimation((delta) => {
     const value = lootingDurationValue - delta;
 
@@ -31,8 +29,8 @@ export function LootingMeter() {
   return (
     <LabelledProgressBar
       disableTransitions
-      label={formatMilliseconds(lootingProgress)}
-      value={(lootingProgress / lootingRateValue) * 100}
+      label={formatMilliseconds(lootingDurationValue)}
+      value={((lootingRateValue - lootingDurationValue) / lootingRateValue) * 100}
       variant="secondary"
     />
   );

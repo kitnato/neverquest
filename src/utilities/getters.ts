@@ -68,7 +68,7 @@ export function getFromRange({ maximum, minimum }: Range) {
 }
 
 export function getSellPrice({ coinPrice }: { coinPrice: number }) {
-  return Math.floor(coinPrice / 2);
+  return Math.ceil(coinPrice / 2);
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function

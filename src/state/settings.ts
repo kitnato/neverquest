@@ -6,7 +6,7 @@ import { handleLocalStorage, withStateKey } from "@neverquest/state";
 
 export const allowNSFW = withStateKey("allowNSFW", (key) =>
   atom({
-    default: true,
+    default: false,
     effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
     key,
   })

@@ -7,9 +7,9 @@ import type { Crew, CrewStatus } from "@neverquest/types/unions";
 
 // SELECTORS
 
-export const isCrewAvailable = withStateKey("isCrewAvailable", (key) =>
+export const isCrewHirable = withStateKey("isCrewHirable", (key) =>
   selector({
-    get: ({ get }) => CREW_ORDER.every((type) => get(hireStatus(type)).status !== "hired"),
+    get: ({ get }) => CREW_ORDER.some((type) => get(hireStatus(type)).status === "hirable"),
     key,
   })
 );

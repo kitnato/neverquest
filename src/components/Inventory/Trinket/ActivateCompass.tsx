@@ -98,7 +98,7 @@ export function ActivateCompass() {
         confirmationLabel="Navigate"
         message="Navigating now will forfeit all uncollected loot."
         onConfirm={() => setIsShowingNavigation(true)}
-        setHide={() => setIsShowingConfirmation(false)}
+        setHidden={() => setIsShowingConfirmation(false)}
         show={isShowingConfirmation}
         title="Forfeit loot?"
       />

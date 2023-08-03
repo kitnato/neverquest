@@ -7,24 +7,24 @@ export function ConfirmationDialog({
   confirmationLabel,
   message,
   onConfirm,
-  setHide,
+  setHidden,
   show,
   title,
 }: {
   confirmationLabel: string;
   message: string;
   onConfirm: () => void;
-  setHide: () => void;
+  setHidden: () => void;
   show: boolean;
   title: string;
 }) {
   const handleConfirmation = () => {
     onConfirm();
-    setHide();
+    setHidden();
   };
 
   return (
-    <Modal backdrop="static" onHide={setHide} show={show}>
+    <Modal backdrop="static" onHide={setHidden} show={show}>
       <Modal.Header closeButton>
         <Modal.Title>
           <IconImage Icon={IconWarning} />

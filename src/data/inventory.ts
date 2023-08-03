@@ -32,8 +32,8 @@ export const ARMOR_BASE = {
   coinPrice: 500,
   protection: 300,
   scrapPrice: 3500,
-  staminaCost: 25,
-  weight: 50,
+  staminaCost: 30,
+  weight: 60,
 };
 
 export const ARMOR_NONE = {
@@ -151,7 +151,7 @@ export const SHIELD_BASE = {
   scrapPrice: 3000,
   stagger: { attenuation: 0.8, minimum: 0.1 },
   staminaCost: 30,
-  weight: 40,
+  weight: 50,
 };
 
 export const SHIELD_NONE = {
@@ -280,8 +280,8 @@ export const WEAPON_BASE = {
     minimum: 3300,
   },
   scrapPrice: 2500,
-  staminaCost: 40,
-  weight: 30,
+  staminaCost: 45,
+  weight: 40,
 };
 
 export const WEAPON_NONE: Omit<Weapon, "coinPrice" | "isEquipped" | "ranges" | "scrapPrice"> = {

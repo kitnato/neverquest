@@ -38,7 +38,7 @@ export function Restart() {
         confirmationLabel="Restart"
         message="This will reset all progress and restart from the beginning."
         onConfirm={restart}
-        setHide={() => setIsShowingRestart(false)}
+        setHidden={() => setIsShowingRestart(false)}
         show={isShowingRestart}
         title="Start a new quest?"
       />

@@ -20,42 +20,24 @@ LOCRA can be considered somewhat independent of Neverquest, as it can be used ou
 
 Neverquest is a work-in-progress. Several features are pending ideation, refinement and implementation.
 
-### Attributes
+### Must-haves
 
-#### Acumen
+Essential features for a v1.0.0 release.
 
-Affects [sorcery](#sorceries) casting rate.
+#### Bosses
 
-### Intellect
+A boss is a monster that is twice as powerful as a standard monster of that stage. They appear every 5 stages, starting at stage 5. There is only one on that stage, and once defeated, it drops a [shard](#shards).
 
-Affects energy regeneration rate.
+#### Journal
 
-#### Wisdom
+Upon purchasing the Journal trinket, unlocks progression trackers that are similar to achievements.
 
-Affects total [energy](#energy).
-
-### Caravan
-
-#### Cook
-
-Sells hot meals that restore all [energy](#energy) when used.
-
-Grants a Well Fed [buff](./src/data/manual.md#buffs) for the next stage (+10% [mastery](./src/data/manual.md#mastery) gain).
-
-#### Sorcerer
-
-Acquire [sorceries](#sorceries) and [auras](#auras).
-
-### Journal
-
-Upon purchasing the Journal trinket, unlocks progression trackers, similar to achievements. Grant bonuses when completed.
-
-#### Challenge quests
+##### Challenge quests
 
 - Parry, inflict bleed and stagger in one attack
 - Survive the first 4 levels without any gear equipped
 
-#### Combat quests
+##### Combat quests
 
 - Kill first monster
 - Kill 5/10/25/50/100/1000 monsters
@@ -70,7 +52,7 @@ Upon purchasing the Journal trinket, unlocks progression trackers, similar to ac
 - [Stagger](./src/data/manual.md#stagger) 1/5/10/25/50/100 times
 - Stagger 3 times in a row
 
-#### Caravan quests
+##### Caravan quests
 
 - Purchase [armor](./src/data/manual.md#armor)
 - Purchase a [shield](./src/data/manual.md#shields)
@@ -85,7 +67,7 @@ Upon purchasing the Journal trinket, unlocks progression trackers, similar to ac
 - Hire the [tailor](./src/data/manual.md#tailor)
 - Hire the [witch](./src/data/manual.md#witch)
 
-#### Gear quests
+##### Gear quests
 
 - Equip a [weapon](./src/data/manual.md#weapons)
 - Equip [armor](./src/data/manual.md#armor)
@@ -94,27 +76,88 @@ Upon purchasing the Journal trinket, unlocks progression trackers, similar to ac
 - Discover [weapon classes](./src/data/manual.md#weapon-class)
 - Discover shield types
 
-#### Meta quests
+##### Meta quests
 
 - Complete 5/10/25/50/100/all quests
 
-### Reserves
+#### Masteries
 
-#### Energy
+The maximum of every mastery is increased at the same time when a new rank is achieved. This should encourage use of a single build rather than striving to become a jack-of-all trades.
 
-Consumed when activating [skills](./src/data/manual.md#skills), [auras](#auras) and [sorceries](#sorceries), regenerated over time.
+#### Passive skills
 
-### Potions
+##### Berserking
 
-#### Venom
+Allows the use of a one-handed weapon in the [off-hand](./src/data/manual.md#off-hand) slot.
 
-Once applied to a weapon, it adds an effect with each strike, applying damage-over-time effects and potentially other ailments. Has a certain number of charges before it is used up.
+##### Siegecraft
 
-## Retirement
+Allows the use of [two-handed](#two-handed) weapons.
 
-When reaching a certain power level, the character can retire. This restarts the quest from stage 0 with power level 0, however all hired caravan crew are retained. A [trait](#traits) can be also chosen that confers a permanent bonus.
+#### Retirement
 
-### Skills
+When reaching a certain power level, the character can retire. This restarts the quest from stage 0 with power level 0, no skills and masteries at rank 0, however all hired caravan crew are retained. A [trait](#traits) can be also chosen that confers a permanent bonus.
+
+#### Shards
+
+Shards are an item that have no weight and can be applied to weapons. They are dropped by [bosses](#bosses), one at stage 10 and one more for each encounter after that (resulting in e.g. four shards being dropped by a stage 25 boss).
+
+When applying the first shard, the weapon gains 1.93% of its damage as extra elemental damage of that type. Every subsequent shard of the same type doubles that damage. Up to 7 shards can be applied to a weapon, regardless of type. This results in an up to 100% elemental damage increase if all shards are of the same type. Once applied, shards are consumed and cannot be removed or moved to another weapon.
+
+The shard types are the following, associated with their corresponding [elemental](#elemental-damage) type:
+
+- Electric (lightning)
+- Frozen (ice)
+- Incendiary (fire)
+- Toxic (poison)
+
+#### Traits
+
+Traits are permanent passive abilities acquired upon [retiring](#retirement) for all subsequent new quests.
+
+- Brawler: Wearing no shield doubles unarmed damage.
+- Bruiser: Current stamina adds unarmed bonus damage & unarmed attacks have a chance to stagger.
+- Colossus: Dual wield two-handed weapons.
+- Hoarder: Start with all trinkets.
+- Inoculated: When poisoned, health reduction and recovery rate are halved.
+- Nudist: Double dodge rate when not wearing any armor.
+- Field surgeon: Automatically restore health when not in combat.
+- Shredder: Bleed damage is inflicted all at once.
+- Stalwart: Ignore penalties when wearing armor.
+- Tank: Shields increase protection by 50%.
+
+#### Weapons
+
+##### Dual wield
+
+A one-handed weapon in each slot. Provides a penalty to damage and attack rate to the [off-hand](./src/data/manual.md#off-hand) weapon.
+
+##### Elemental damage
+
+Once the first [boss](#bosses) is defeated, monsters on subsequent stages will exhibit resistances and vulnerabilities to elemental damage. The elemental damage types are:
+
+- Fire
+- Ice
+- Lightning
+- Poison
+
+This damage is dealt by applying [shards](#shards) to weapons that then benefit from additional damage of that elemental type. A vulnerability means the monster takes double damage of that type, while a resistance results in the monster only receiving 25% of that damage.
+
+As the stages increase, monsters will exhibit less vulnerabilities and more resistances.
+
+##### Two-handed
+
+Takes up both the main and off-hand slots.
+
+- 2 slots
+- High damage
+- Low attack rate
+- High stamina requirement
+- Chance to execute monsters at 20% health or under
+
+### Nice-to-haves
+
+Features that require more ideation and refinement.
 
 #### Activated skills
 
@@ -128,55 +171,53 @@ Cast spells that remain active until dispelled. Provides [buffs](./src/data/manu
 
 Combat skills that can be activated during combat. Acquired from the [Mercenary](./src/data/manual.md#mercenary).
 
-###### Execute
-
-Available if the monster is at or below 20% health and kills it immediately.
-
 ##### Sorceries
 
-Cast spells with immediate and/or over-time effects.
+Cast spells with immediate and/or over-time effects. Acquired from the [sorcerer](#sorcerer).
 
-#### Passive skills
+#### Attributes
 
-##### Berserking
+##### Acumen
 
-Allows the use of a one-handed weapon in the [off-hand](./src/data/manual.md#off-hand) slot.
+Affects [sorcery](#sorceries) casting rate.
 
-##### Siegecraft
+##### Intellect
 
-Allows the use of [two-handed](#two-handed) weapons.
+Affects energy regeneration rate.
 
-### Traits
+##### Wisdom
 
-Traits are permanent passive abilities acquired upon retiring for all subsequent new quests.
+Affects total [energy](#energy).
 
-- Brawler: Wearing no shield doubles unarmed damage.
-- Bruiser: Current stamina adds unarmed bonus damage & unarmed attacks have a chance to stagger.
-- Inoculated: When poisoned, health reduction and recovery rate are halved.
-- Nudist: Double dodge rate when not wearing any armor.
-- Field surgeon: Automatically restore health when not in combat.
-- Shredder: Bleed damage is inflicted all at once.
-- Stalwart: Ignore penalties when wearing armor.
-- Tank: Shields increase protection by 50%.
+#### Caravan
 
-### Weapons
+Along with two more additional hires, the entire crew dialog system needs to be overhauled and expanded to allow for better storytelling and immersion.
 
-#### Dual wield
+##### Cook
 
-A one-handed weapon in each slot. Provides a penalty to damage and attack rate to the [off-hand](./src/data/manual.md#off-hand) weapon.
+Sells hot meals that restore all [energy](#energy) when used.
+
+Grants a Well Fed [buff](./src/data/manual.md#buffs) for the next stage (+10% [mastery](./src/data/manual.md#mastery) gain).
+
+##### Sorcerer
+
+Acquire [sorceries](#sorceries) and [auras](#auras).
+
+#### Energy
+
+A [reserve](./src/data/manual.md#reserves), Consumed when activating [skills](./src/data/manual.md#skills), [auras](#auras) and [sorceries](#sorceries), regenerated over time.
+
+#### Log
+
+A togglable UI element that displays all stateful activities in real-time, e.g. combat details, transactions etc.
 
 #### Ranged
 
-A weapon-type that functions distinctly from melee weapons.
+A [weapon](./src/data/manual.md#weapons) type that functions distinctly from melee weapons.
 
-#### Two-handed
+#### Venom
 
-Takes up both the main and off-hand slots.
-
-- 2 slots
-- High damage
-- Low attack rate
-- High stamina requirement
+A [potion](./src/data/manual.md#potions), that once applied to a weapon, it adds an effect with each strike, applying damage-over-time effects and potentially other ailments. Has a certain number of charges before it is used up.
 
 ## Local set up
 

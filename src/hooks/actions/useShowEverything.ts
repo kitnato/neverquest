@@ -8,6 +8,6 @@ export function useShowEverything() {
     ({ set }) =>
       () =>
         Object.values(SHOWING_TYPES).forEach((showing) => set(isShowing(showing), true)),
-    []
+    [],
   );
 }

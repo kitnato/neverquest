@@ -289,6 +289,6 @@ export function useDefend() {
           set(deltas("stamina"), deltaStamina);
         }
       },
-    [changeHealth, changeMonsterHealth, changeStamina, increaseMastery]
+    [changeHealth, changeMonsterHealth, changeStamina, increaseMastery],
   );
 }

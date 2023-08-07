@@ -8,7 +8,7 @@ export const hasLooted = withStateKey("hasLooted", (key) =>
   selector({
     get: ({ get }) => get(essenceLoot) === 0 && get(coinsLoot) === 0 && get(scrapLoot) === 0,
     key,
-  })
+  }),
 );
 
 // ATOMS
@@ -18,7 +18,7 @@ export const essence = withStateKey("essence", (key) =>
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const essenceLoot = withStateKey("essenceLoot", (key) =>
@@ -26,7 +26,7 @@ export const essenceLoot = withStateKey("essenceLoot", (key) =>
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const coins = withStateKey("coins", (key) =>
@@ -34,7 +34,7 @@ export const coins = withStateKey("coins", (key) =>
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const coinsLoot = withStateKey("coinsLoot", (key) =>
@@ -42,7 +42,7 @@ export const coinsLoot = withStateKey("coinsLoot", (key) =>
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const scrap = withStateKey("scrap", (key) =>
@@ -50,7 +50,7 @@ export const scrap = withStateKey("scrap", (key) =>
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const scrapLoot = withStateKey("scrapLoot", (key) =>
@@ -58,5 +58,5 @@ export const scrapLoot = withStateKey("scrapLoot", (key) =>
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );

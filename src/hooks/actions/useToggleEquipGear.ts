@@ -72,9 +72,9 @@ export function useToggleEquipGear() {
             }
 
             return currentItem;
-          })
+          }),
         );
       },
-    []
+    [],
   );
 }

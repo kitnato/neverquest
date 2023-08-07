@@ -22,6 +22,6 @@ export function useHeal() {
           value: healthDifference,
         });
       },
-    [changeHealth]
+    [changeHealth],
   );
 }

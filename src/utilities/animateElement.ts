@@ -38,6 +38,6 @@ export function animateElement({
         classList.remove(animationSpeedClass);
       }
     },
-    { once: true }
+    { once: true },
   );
 }

@@ -2,7 +2,7 @@ import { atom, selector } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { BLIGHT } from "@neverquest/data/monster";
-import { RESERVES } from "@neverquest/data/reserves";
+import { HEALTH_LOW_THRESHOLD, RESERVES } from "@neverquest/data/reserves";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { attributes } from "@neverquest/state/attributes";
 import { monsterPoisonDuration, monsterPoisonMagnitude } from "@neverquest/state/monster";
@@ -19,7 +19,7 @@ export const blightIncrement = withStateKey("blightIncrement", (key) =>
   selector({
     get: ({ get }) => Math.round(BLIGHT.increment * get(staminaMaximum)),
     key,
-  })
+  }),
 );
 
 export const healthMaximum = withStateKey("healthMaximum", (key) =>
@@ -32,7 +32,7 @@ export const healthMaximum = withStateKey("healthMaximum", (key) =>
       return Math.round(total + total * get(powerBonus("vitality")));
     },
     key,
-  })
+  }),
 );
 
 export const healthMaximumTotal = withStateKey("healthMaximumTotal", (key) =>
@@ -43,7 +43,7 @@ export const healthMaximumTotal = withStateKey("healthMaximumTotal", (key) =>
         Math.round(
           get(healthMaximum) *
             get(monsterPoisonMagnitude) *
-            (get(poisonDuration) / get(monsterPoisonDuration))
+            (get(poisonDuration) / get(monsterPoisonDuration)),
         );
 
       if (newMaximum < 0) {
@@ -53,14 +53,14 @@ export const healthMaximumTotal = withStateKey("healthMaximumTotal", (key) =>
       return newMaximum;
     },
     key,
-  })
+  }),
 );
 
 export const healthRegenerationAmount = withStateKey("healthRegenerationAmount", (key) =>
   selector({
     get: ({ get }) => RESERVES.health.baseRegenerationAmount + get(reserveRegenerationAmount),
     key,
-  })
+  }),
 );
 
 export const healthRegenerationRate = withStateKey("healthRegenerationRate", (key) =>
@@ -71,36 +71,35 @@ export const healthRegenerationRate = withStateKey("healthRegenerationRate", (ke
       return Math.round(baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRate));
     },
     key,
-  })
+  }),
 );
 
 export const isHealthAtMaximum = withStateKey("isHealthAtMaximum", (key) =>
   selector({
     get: ({ get }) => get(health) >= get(healthMaximumTotal),
     key,
-  })
+  }),
 );
 
 export const isHealthLow = withStateKey("isHealthLow", (key) =>
   selector({
-    // TODO - move to /data
-    get: ({ get }) => get(health) <= get(healthMaximumTotal) * 0.33,
+    get: ({ get }) => get(health) <= get(healthMaximumTotal) * HEALTH_LOW_THRESHOLD,
     key,
-  })
+  }),
 );
 
 export const isPoisoned = withStateKey("isPoisoned", (key) =>
   selector({
     get: ({ get }) => get(poisonDuration) > 0,
     key,
-  })
+  }),
 );
 
 export const isStaminaAtMaximum = withStateKey("isStaminaAtMaximum", (key) =>
   selector({
     get: ({ get }) => get(stamina) >= get(staminaMaximumTotal),
     key,
-  })
+  }),
 );
 
 export const staminaMaximum = withStateKey("staminaMaximum", (key) =>
@@ -113,7 +112,7 @@ export const staminaMaximum = withStateKey("staminaMaximum", (key) =>
       return Math.round(total + total * get(powerBonus("endurance")));
     },
     key,
-  })
+  }),
 );
 
 export const staminaMaximumTotal = withStateKey("staminaMaximumTotal", (key) =>
@@ -128,14 +127,14 @@ export const staminaMaximumTotal = withStateKey("staminaMaximumTotal", (key) =>
       return newMaximum;
     },
     key,
-  })
+  }),
 );
 
 export const staminaRegenerationAmount = withStateKey("staminaRegenerationAmount", (key) =>
   selector({
     get: ({ get }) => RESERVES.stamina.baseRegenerationAmount + get(reserveRegenerationAmount),
     key,
-  })
+  }),
 );
 
 export const staminaRegenerationRate = withStateKey("staminaRegenerationRate", (key) =>
@@ -146,7 +145,7 @@ export const staminaRegenerationRate = withStateKey("staminaRegenerationRate", (
       return Math.round(baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRate));
     },
     key,
-  })
+  }),
 );
 
 // ATOMS
@@ -156,7 +155,7 @@ export const blight = withStateKey("blight", (key) =>
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const health = withStateKey("health", (key) =>
@@ -164,7 +163,7 @@ export const health = withStateKey("health", (key) =>
     default: healthMaximumTotal,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const healthRegenerationDuration = withStateKey("healthRegenerationDuration", (key) =>
@@ -172,7 +171,7 @@ export const healthRegenerationDuration = withStateKey("healthRegenerationDurati
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const isImmortal = withStateKey("isImmortal", (key) =>
@@ -180,7 +179,7 @@ export const isImmortal = withStateKey("isImmortal", (key) =>
     default: false,
     effects: [handleLocalStorage<boolean>({ key })],
     key,
-  })
+  }),
 );
 
 export const poisonDuration = withStateKey("poisonDuration", (key) =>
@@ -188,7 +187,7 @@ export const poisonDuration = withStateKey("poisonDuration", (key) =>
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const stamina = withStateKey("stamina", (key) =>
@@ -196,7 +195,7 @@ export const stamina = withStateKey("stamina", (key) =>
     default: staminaMaximumTotal,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const staminaRegenerationDuration = withStateKey("staminaRegenerationDuration", (key) =>
@@ -204,5 +203,5 @@ export const staminaRegenerationDuration = withStateKey("staminaRegenerationDura
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );

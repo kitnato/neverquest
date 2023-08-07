@@ -33,12 +33,12 @@ export function useChangeHealth() {
                 color: isPositive ? "text-success" : "text-danger",
                 value: isPositive ? `+${value}` : value,
               } as DeltaDisplay)
-            : delta
+            : delta,
         );
 
         if (newHealth <= 0) {
           const soulstone = get(inventory).find(
-            (item) => isConsumable(item) && item.type === "soulstone"
+            (item) => isConsumable(item) && item.type === "soulstone",
           );
 
           if (soulstone !== undefined) {
@@ -71,6 +71,6 @@ export function useChangeHealth() {
           set(health, newHealth);
         }
       },
-    []
+    [],
   );
 }

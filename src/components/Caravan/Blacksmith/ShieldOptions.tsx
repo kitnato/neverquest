@@ -96,7 +96,7 @@ export function ShieldOptions() {
 
         <IconDisplay
           contents={`${formatPercentage(ranges.block.minimum)}-${formatPercentage(
-            ranges.block.maximum
+            ranges.block.maximum,
           )}`}
           Icon={IconBlock}
           iconProps={{ overlayPlacement: "left" }}

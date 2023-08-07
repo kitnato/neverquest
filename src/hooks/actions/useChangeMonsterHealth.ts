@@ -32,7 +32,7 @@ export function useChangeMonsterHealth() {
             ({
               color: isPositive ? "text-success" : "text-danger",
               value: isPositive ? `+${value}` : value,
-            } as DeltaDisplay)
+            } as DeltaDisplay),
         );
 
         if (newHealth <= 0) {
@@ -54,6 +54,6 @@ export function useChangeMonsterHealth() {
 
         set(monsterHealth, newHealth);
       },
-    [progression]
+    [progression],
   );
 }

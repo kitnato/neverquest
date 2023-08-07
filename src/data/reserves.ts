@@ -1,5 +1,7 @@
 import type { Delta, Reserve } from "@neverquest/types/unions";
 
+export const HEALTH_LOW_THRESHOLD = 0.33;
+
 export const RESERVES: Record<
   Reserve,
   {
@@ -18,7 +20,7 @@ export const RESERVES: Record<
     regenerationDelta: "healthRegenerationRate",
   },
   stamina: {
-    baseAmount: 10,
+    baseAmount: 8,
     baseRegenerationAmount: 1,
     baseRegenerationRate: 3500,
     label: "Stamina",

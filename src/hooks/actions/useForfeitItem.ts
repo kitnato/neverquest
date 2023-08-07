@@ -28,7 +28,7 @@ export function useForfeitItem() {
             set(inventory, (current) => current.filter((current) => current.id !== id));
           } else {
             const stackIndex = inventoryValue.findIndex(
-              (current) => isConsumable(current) && current.type === type
+              (current) => isConsumable(current) && current.type === type,
             );
 
             set(inventory, (current) => [
@@ -45,6 +45,6 @@ export function useForfeitItem() {
           transactResources({ coinsDifference: getSellPrice(item) });
         }
       },
-    [toggleEquipGear, transactResources]
+    [toggleEquipGear, transactResources],
   );
 }

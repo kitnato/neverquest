@@ -8,5 +8,5 @@ export const isShowing = withStateKey("isShowing", (key) =>
     default: false,
     effects: (parameter) => [handleLocalStorage<boolean>({ key, parameter })],
     key,
-  })
+  }),
 );

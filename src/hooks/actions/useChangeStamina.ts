@@ -28,7 +28,7 @@ export function useChangeStamina() {
                 color: isPositive ? "text-success" : "text-danger",
                 value: isPositive ? `+${value}` : value,
               } as DeltaDisplay)
-            : delta
+            : delta,
         );
 
         if (newStamina < 0) {
@@ -46,6 +46,6 @@ export function useChangeStamina() {
 
         set(stamina, newStamina);
       },
-    []
+    [],
   );
 }

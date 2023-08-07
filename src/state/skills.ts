@@ -18,7 +18,7 @@ export const skillsTrained = withStateKey("skillsTrained", (key) =>
       traumatology: get(skills("traumatology")),
     }),
     key,
-  })
+  }),
 );
 ``;
 
@@ -29,5 +29,5 @@ export const skills = withStateKey("skills", (key) =>
     default: false,
     effects: (parameter) => [handleLocalStorage<boolean>({ key, parameter })],
     key,
-  })
+  }),
 );

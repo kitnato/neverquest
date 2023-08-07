@@ -36,6 +36,6 @@ export function useProgression() {
           generateMonster();
         }
       },
-    [generateMonster]
+    [generateMonster],
   );
 }

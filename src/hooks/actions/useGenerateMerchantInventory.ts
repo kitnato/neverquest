@@ -18,7 +18,7 @@ export function useGenerateMerchantInventory() {
 
         // Remove all previously returned items, so they no longer appear under buy back.
         const inventory: InventoryMerchant = [...get(merchantInventory)].filter(
-          ({ isReturned }) => !isReturned
+          ({ isReturned }) => !isReturned,
         );
         const stageValue = get(stage);
         const allowNSFWValue = get(allowNSFW);
@@ -84,6 +84,6 @@ export function useGenerateMerchantInventory() {
 
         set(merchantInventory, inventory);
       },
-    []
+    [],
   );
 }

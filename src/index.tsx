@@ -11,5 +11,5 @@ ls.config.encrypt = true;
 createRoot(document.getElementById("root") as Element).render(
   <StrictMode>
     <Core />
-  </StrictMode>
+  </StrictMode>,
 );

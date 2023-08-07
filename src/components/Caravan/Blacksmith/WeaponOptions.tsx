@@ -114,7 +114,7 @@ export function WeaponOptions() {
 
         <IconDisplay
           contents={`${formatMilliseconds(ranges.rate.minimum)}-${formatMilliseconds(
-            ranges.rate.maximum
+            ranges.rate.maximum,
           )}`}
           Icon={IconWeaponAttackRate}
           iconProps={{ overlayPlacement: "left" }}
@@ -125,7 +125,7 @@ export function WeaponOptions() {
           contents={
             isShowingValue
               ? `${formatPercentage(ranges.ability.minimum)}-${formatPercentage(
-                  ranges.ability.maximum
+                  ranges.ability.maximum,
                 )}`
               : LABEL_UNKNOWN
           }

@@ -26,7 +26,7 @@ export function useInitialize() {
         }
 
         Object.entries(ATTRIBUTES).forEach(([type, { isUnlocked }]) =>
-          set(attributes(type as Attribute), (current) => ({ ...current, isUnlocked }))
+          set(attributes(type as Attribute), (current) => ({ ...current, isUnlocked })),
         );
 
         Object.entries(CREW).forEach(([type, { requiredStage }]) => {
@@ -39,6 +39,6 @@ export function useInitialize() {
 
         generateMonster();
       },
-    [generateMonster]
+    [generateMonster],
   );
 }

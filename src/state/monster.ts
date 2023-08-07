@@ -20,21 +20,21 @@ export const isMonsterBleeding = withStateKey("isMonsterBleeding", (key) =>
   selector({
     get: ({ get }) => get(monsterBleedingDuration) > 0,
     key,
-  })
+  }),
 );
 
 export const isMonsterDead = withStateKey("isMonsterDead", (key) =>
   selector({
     get: ({ get }) => get(isStageStarted) && get(monsterHealth) === 0,
     key,
-  })
+  }),
 );
 
 export const isMonsterStaggered = withStateKey("isMonsterStaggered", (key) =>
   selector({
     get: ({ get }) => get(monsterStaggerDuration) > 0,
     key,
-  })
+  }),
 );
 
 export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
@@ -45,12 +45,12 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
       return (
         base -
         Math.round(
-          reduction * getGrowthSigmoid(get(stage)) + bonus * getGrowthSigmoid(get(progress))
+          reduction * getGrowthSigmoid(get(stage)) + bonus * getGrowthSigmoid(get(progress)),
         )
       );
     },
     key,
-  })
+  }),
 );
 
 export const monsterBlightChance = withStateKey("monsterBlightChance", (key) =>
@@ -67,7 +67,7 @@ export const monsterBlightChance = withStateKey("monsterBlightChance", (key) =>
       return chanceBase + chanceMaximum * getGrowthSigmoid(stageValue);
     },
     key,
-  })
+  }),
 );
 
 export const monsterDamage = withStateKey("monsterDamage", (key) =>
@@ -76,11 +76,11 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
       const { bonus, maximum } = MONSTER_DAMAGE;
 
       return Math.round(
-        maximum * getGrowthSigmoid(get(stage)) + bonus * getGrowthSigmoid(get(progress))
+        maximum * getGrowthSigmoid(get(stage)) + bonus * getGrowthSigmoid(get(progress)),
       );
     },
     key,
-  })
+  }),
 );
 
 export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (key) =>
@@ -90,10 +90,10 @@ export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (ke
         getDamagePerRate({
           damage: get(monsterDamage),
           rate: get(monsterAttackRate),
-        })
+        }),
       ),
     key,
-  })
+  }),
 );
 
 export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =>
@@ -102,11 +102,11 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
       const { bonus, maximum } = MONSTER_HEALTH;
 
       return Math.round(
-        maximum * getGrowthSigmoid(get(stage)) + bonus * getGrowthSigmoid(get(progress))
+        maximum * getGrowthSigmoid(get(stage)) + bonus * getGrowthSigmoid(get(progress)),
       );
     },
     key,
-  })
+  }),
 );
 
 export const monsterPoisonChance = withStateKey("monsterPoisonChance", (key) =>
@@ -123,7 +123,7 @@ export const monsterPoisonChance = withStateKey("monsterPoisonChance", (key) =>
       return chanceBase + chanceMaximum * getGrowthSigmoid(stageValue);
     },
     key,
-  })
+  }),
 );
 
 export const monsterPoisonDuration = withStateKey("monsterPoisonDuration", (key) =>
@@ -134,7 +134,7 @@ export const monsterPoisonDuration = withStateKey("monsterPoisonDuration", (key)
       return durationBase + durationMaximum * getGrowthSigmoid(get(stage));
     },
     key,
-  })
+  }),
 );
 
 export const monsterPoisonMagnitude = withStateKey("monsterPoisonMagnitude", (key) =>
@@ -145,7 +145,7 @@ export const monsterPoisonMagnitude = withStateKey("monsterPoisonMagnitude", (ke
       return magnitudeBase + magnitudeMaximum * getGrowthSigmoid(get(stage));
     },
     key,
-  })
+  }),
 );
 
 export const monsterLoot = withStateKey("monsterLoot", (key) =>
@@ -165,7 +165,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
       };
     },
     key,
-  })
+  }),
 );
 
 // ATOMS
@@ -175,7 +175,7 @@ export const isMonsterNew = withStateKey("isMonsterNew", (key) =>
     default: false,
     effects: [handleLocalStorage<boolean>({ key })],
     key,
-  })
+  }),
 );
 
 export const monsterAttackDuration = withStateKey("monsterAttackDuration", (key) =>
@@ -183,7 +183,7 @@ export const monsterAttackDuration = withStateKey("monsterAttackDuration", (key)
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const monsterBleedingDuration = withStateKey("monsterBleedingDuration", (key) =>
@@ -191,7 +191,7 @@ export const monsterBleedingDuration = withStateKey("monsterBleedingDuration", (
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const monsterHealth = withStateKey("monsterHealth", (key) =>
@@ -199,7 +199,7 @@ export const monsterHealth = withStateKey("monsterHealth", (key) =>
     default: monsterHealthMaximum,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const monsterName = withStateKey("monsterName", (key) =>
@@ -207,7 +207,7 @@ export const monsterName = withStateKey("monsterName", (key) =>
     default: null,
     effects: [handleLocalStorage<string | null>({ key })],
     key,
-  })
+  }),
 );
 
 export const monsterStaggerDuration = withStateKey("monsterStaggerDuration", (key) =>
@@ -215,7 +215,7 @@ export const monsterStaggerDuration = withStateKey("monsterStaggerDuration", (ke
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const monsterElement = withStateKey("monsterElement", (key) =>
@@ -223,5 +223,5 @@ export const monsterElement = withStateKey("monsterElement", (key) =>
     default: null,
     effects: [handleLocalStorage<HTMLDivElement | null>({ key })],
     key,
-  })
+  }),
 );

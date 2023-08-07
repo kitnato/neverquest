@@ -26,17 +26,24 @@ export function AttackMeter() {
 
   const attack = useAttack();
 
-  useAnimation((delta) => {
-    const value = attackDurationValue - delta;
+  useAnimation(
+    (delta) => {
+      const value = attackDurationValue - delta;
 
-    if (value <= 0) {
-      attack();
+      if (value <= 0) {
+        attack();
 
-      setAttackDuration(attackRateTotalValue);
-    } else {
-      setAttackDuration(value);
-    }
-  }, !canAttackOrParryValue || !isAttackingValue || isLootingValue || isMonsterDeadValue || isRecoveringValue);
+        setAttackDuration(attackRateTotalValue);
+      } else {
+        setAttackDuration(value);
+      }
+    },
+    !canAttackOrParryValue ||
+      !isAttackingValue ||
+      isLootingValue ||
+      isMonsterDeadValue ||
+      isRecoveringValue,
+  );
 
   return (
     <LabelledProgressBar

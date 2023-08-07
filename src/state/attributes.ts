@@ -29,21 +29,21 @@ export const attributePoints = withStateKey("attributePoints", (key) =>
       return points;
     },
     key,
-  })
+  }),
 );
 
 export const attributeCost = withStateKey("attributeCost", (key) =>
   selector({
     get: ({ get }) => getGrowthTriangular(get(level) + 1),
     key,
-  })
+  }),
 );
 
 export const areAttributesIncreasable = withStateKey("areAttributesIncreasable", (key) =>
   selector({
     get: ({ get }) => get(attributeCost) <= get(essence),
     key,
-  })
+  }),
 );
 
 export const essenceAbsorbed = withStateKey("essenceAbsorbed", (key) =>
@@ -58,7 +58,7 @@ export const essenceAbsorbed = withStateKey("essenceAbsorbed", (key) =>
       return total;
     },
     key,
-  })
+  }),
 );
 
 export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =>
@@ -74,7 +74,7 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =
           : maximum === getComputedStatistic({ amount: points, base, increment });
       },
     key,
-  })
+  }),
 );
 
 export const level = withStateKey("level", (key) =>
@@ -82,10 +82,10 @@ export const level = withStateKey("level", (key) =>
     get: ({ get }) =>
       Object.keys(ATTRIBUTES).reduce(
         (current, type) => current + get(attributes(type as Attribute)).points,
-        0
+        0,
       ),
     key,
-  })
+  }),
 );
 
 export const rawAttributeStatistic = withStateKey("rawAttributeStatistic", (key) =>
@@ -99,7 +99,7 @@ export const rawAttributeStatistic = withStateKey("rawAttributeStatistic", (key)
         return getComputedStatistic({ amount: points, base, increment });
       },
     key,
-  })
+  }),
 );
 
 // ATOMS
@@ -112,5 +112,5 @@ export const attributes = withStateKey("attributes", (key) =>
     },
     effects: (parameter) => [handleLocalStorage<AttributeState>({ key, parameter })],
     key,
-  })
+  }),
 );

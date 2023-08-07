@@ -26,6 +26,6 @@ export function useRegenerateMonster() {
 
         reset(monsterHealth);
       },
-    []
+    [],
   );
 }

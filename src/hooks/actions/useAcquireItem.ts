@@ -77,14 +77,14 @@ export function useAcquireItem() {
               set(itemsAcquired, (current) => [...current, { key: id, type: type as Consumable }]);
 
               const existingStack = inventoryValue.find(
-                (current) => isConsumable(current) && current.type === type
+                (current) => isConsumable(current) && current.type === type,
               );
 
               if (existingStack === undefined) {
                 set(inventory, (current) => current.concat({ ...item, stack: 1 }));
               } else if (isConsumable(existingStack)) {
                 const stackIndex = inventoryValue.findIndex(
-                  (current) => isConsumable(current) && current.type === type
+                  (current) => isConsumable(current) && current.type === type,
                 );
 
                 set(inventory, (current) => [
@@ -107,6 +107,6 @@ export function useAcquireItem() {
 
         return status;
       },
-    [toggleEquipGear, transactResources]
+    [toggleEquipGear, transactResources],
   );
 }

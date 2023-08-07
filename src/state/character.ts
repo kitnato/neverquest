@@ -11,35 +11,35 @@ export const canAttackOrParry = withStateKey("canAttackOrParry", (key) =>
   selector({
     get: ({ get }) => get(stamina) >= get(weapon).staminaCost,
     key,
-  })
+  }),
 );
 
 export const canBlock = withStateKey("canBlock", (key) =>
   selector({
     get: ({ get }) => get(stamina) >= get(shield).staminaCost,
     key,
-  })
+  }),
 );
 
 export const canDodge = withStateKey("canDodge", (key) =>
   selector({
     get: ({ get }) => get(stamina) >= get(armor).staminaCost,
     key,
-  })
+  }),
 );
 
 export const isLooting = withStateKey("isLooting", (key) =>
   selector({
     get: ({ get }) => get(lootingDuration) > 0,
     key,
-  })
+  }),
 );
 
 export const isRecovering = withStateKey("isRecovering", (key) =>
   selector({
     get: ({ get }) => get(recoveryDuration) > 0,
     key,
-  })
+  }),
 );
 
 // ATOMS
@@ -49,7 +49,7 @@ export const attackDuration = withStateKey("attackDuration", (key) =>
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const isAttacking = withStateKey("isAttacking", (key) =>
@@ -57,7 +57,7 @@ export const isAttacking = withStateKey("isAttacking", (key) =>
     default: false,
     effects: [handleLocalStorage<boolean>({ key })],
     key,
-  })
+  }),
 );
 
 export const isGameOver = withStateKey("isGameOver", (key) =>
@@ -65,7 +65,7 @@ export const isGameOver = withStateKey("isGameOver", (key) =>
     default: false,
     effects: [handleLocalStorage<boolean>({ key })],
     key,
-  })
+  }),
 );
 
 export const lootingDuration = withStateKey("lootingDuration", (key) =>
@@ -73,7 +73,7 @@ export const lootingDuration = withStateKey("lootingDuration", (key) =>
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const lootingRate = withStateKey("lootingRate", (key) =>
@@ -81,7 +81,7 @@ export const lootingRate = withStateKey("lootingRate", (key) =>
     default: 2500,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const name = withStateKey("name", (key) =>
@@ -89,7 +89,7 @@ export const name = withStateKey("name", (key) =>
     default: LABEL_UNKNOWN,
     effects: [handleLocalStorage<string>({ key })],
     key,
-  })
+  }),
 );
 
 export const recoveryDuration = withStateKey("recoveryDuration", (key) =>
@@ -97,7 +97,7 @@ export const recoveryDuration = withStateKey("recoveryDuration", (key) =>
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const statusElement = withStateKey("statusElement", (key) =>
@@ -105,5 +105,5 @@ export const statusElement = withStateKey("statusElement", (key) =>
     default: null,
     effects: [handleLocalStorage<HTMLDivElement | null>({ key })],
     key,
-  })
+  }),
 );

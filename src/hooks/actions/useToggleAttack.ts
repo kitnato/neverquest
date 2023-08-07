@@ -36,6 +36,6 @@ export function useToggleAttack() {
           set(monsterAttackDuration, get(monsterAttackRate));
         }
       },
-    [regenerateMonster]
+    [regenerateMonster],
   );
 }

@@ -22,7 +22,7 @@ export const masteries = withStateKey("masteries", (key) =>
     },
     effects: (parameter) => [handleLocalStorage<MasteryState>({ key, parameter })],
     key,
-  })
+  }),
 );
 
 // SELECTORS
@@ -38,7 +38,7 @@ export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
         return maximum === getComputedStatistic({ amount: rank, base, increment });
       },
     key,
-  })
+  }),
 );
 
 export const masteryCost = withStateKey("masteryCost", (key) =>
@@ -48,7 +48,7 @@ export const masteryCost = withStateKey("masteryCost", (key) =>
       ({ get }) =>
         getGrowthTriangular(get(masteries(type)).rank + 2),
     key,
-  })
+  }),
 );
 
 export const rawMasteryStatistic = withStateKey("rawMasteryStatistic", (key) =>
@@ -62,5 +62,5 @@ export const rawMasteryStatistic = withStateKey("rawMasteryStatistic", (key) =>
         return getComputedStatistic({ amount: rank, base, increment });
       },
     key,
-  })
+  }),
 );

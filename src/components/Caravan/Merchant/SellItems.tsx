@@ -41,7 +41,7 @@ export function SellItems() {
     ...inventoryValue.filter((current) => isGear(current) && current.isEquipped),
   ];
   const storedItems = inventoryValue.filter(
-    (current) => !isGear(current) || (isGear(current) && !current.isEquipped)
+    (current) => !isGear(current) || (isGear(current) && !current.isEquipped),
   );
 
   const SellItem = ({ item, showConfirmation }: { item: Item; showConfirmation?: boolean }) => (

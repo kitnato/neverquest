@@ -40,6 +40,6 @@ export function useToggleLocation() {
           set(hasBoughtFromMerchant, false);
         }
       },
-    [generateMerchantInventory, increaseStage]
+    [generateMerchantInventory, increaseStage],
   );
 }

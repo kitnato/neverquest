@@ -1,5 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
+import { MONSTER_NAME } from "@neverquest/data/monster";
 import { LOCRA } from "@neverquest/LOCRA";
 import { isAttacking } from "@neverquest/state/character";
 import { stage } from "@neverquest/state/encounter";
@@ -14,6 +15,8 @@ import { allowNSFW } from "@neverquest/state/settings";
 import { getGrowthSigmoid, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useGenerateMonster() {
+  const { prefixBase, prefixFactor, suffixBase, suffixFactor } = MONSTER_NAME;
+
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
       () => {
@@ -24,11 +27,10 @@ export function useGenerateMonster() {
           monsterName,
           LOCRA.generateCreature({
             allowNSFW: get(allowNSFW),
-            // TODO - move to /data
-            hasPrefix: Math.random() <= 0.6 + 0.4 * growthFactor,
-            hasSuffix: Math.random() <= 0.05 + 0.75 * growthFactor,
+            hasPrefix: Math.random() <= prefixBase + prefixFactor * growthFactor,
+            hasSuffix: Math.random() <= suffixBase + suffixFactor * growthFactor,
             type: ["human", "monster"],
-          })
+          }),
         );
 
         reset(monsterHealth);
@@ -39,6 +41,6 @@ export function useGenerateMonster() {
           set(monsterAttackDuration, get(monsterAttackRate));
         }
       },
-    []
+    [],
   );
 }

@@ -19,14 +19,14 @@ export const attackRate = withStateKey("attackRate", (key) =>
       return total + total * get(powerBonus("speed"));
     },
     key,
-  })
+  }),
 );
 
 export const attackRateTotal = withStateKey("attackRateTotal", (key) =>
   selector({
     get: ({ get }) => get(weapon).rate * (1 - get(attackRate)),
     key,
-  })
+  }),
 );
 
 export const bleed = withStateKey("bleed", (key) =>
@@ -37,14 +37,14 @@ export const bleed = withStateKey("bleed", (key) =>
       return gearClass === "piercing" ? abilityChance : 0;
     },
     key,
-  })
+  }),
 );
 
 export const bleedRating = withStateKey("bleedRating", (key) =>
   selector({
     get: ({ get }) => Math.round(get(bleedTick).damage * get(bleed) * 100),
     key,
-  })
+  }),
 );
 
 export const bleedTick = withStateKey("bleedTick", (key) =>
@@ -63,14 +63,14 @@ export const bleedTick = withStateKey("bleedTick", (key) =>
       };
     },
     key,
-  })
+  }),
 );
 
 export const block = withStateKey("block", (key) =>
   selector({
     get: ({ get }) => get(shield).block,
     key,
-  })
+  }),
 );
 
 export const criticalChance = withStateKey("criticalChance", (key) =>
@@ -81,7 +81,7 @@ export const criticalChance = withStateKey("criticalChance", (key) =>
       return total + total * get(powerBonus("dexterity"));
     },
     key,
-  })
+  }),
 );
 
 export const criticalDamage = withStateKey("criticalDamage", (key) =>
@@ -92,14 +92,14 @@ export const criticalDamage = withStateKey("criticalDamage", (key) =>
       return total + total * get(powerBonus("perception"));
     },
     key,
-  })
+  }),
 );
 
 export const criticalRating = withStateKey("criticalRating", (key) =>
   selector({
     get: ({ get }) => Math.round(get(criticalChance) * get(criticalDamage) * 1000),
     key,
-  })
+  }),
 );
 
 export const damage = withStateKey("damage", (key) =>
@@ -110,14 +110,14 @@ export const damage = withStateKey("damage", (key) =>
       return Math.round(total + total * get(powerBonus("strength")));
     },
     key,
-  })
+  }),
 );
 
 export const damageTotal = withStateKey("damageTotal", (key) =>
   selector({
     get: ({ get }) => get(damage) + get(weapon).damage,
     key,
-  })
+  }),
 );
 
 export const damagePerSecond = withStateKey("damagePerSecond", (key) =>
@@ -130,14 +130,14 @@ export const damagePerSecond = withStateKey("damagePerSecond", (key) =>
         rate: get(attackRateTotal),
       }),
     key,
-  })
+  }),
 );
 
 export const deflection = withStateKey("deflection", (key) =>
   selector({
     get: ({ get }) => get(armor).deflection,
     key,
-  })
+  }),
 );
 
 export const dodge = withStateKey("dodge", (key) =>
@@ -153,7 +153,7 @@ export const dodge = withStateKey("dodge", (key) =>
       return total + total * get(powerBonus("agility"));
     },
     key,
-  })
+  }),
 );
 
 export const lootBonus = withStateKey("lootBonus", (key) =>
@@ -164,14 +164,14 @@ export const lootBonus = withStateKey("lootBonus", (key) =>
       return get(hasItem("antique coin")) ? total + total * get(powerBonus("luck")) : 0;
     },
     key,
-  })
+  }),
 );
 
 export const parryAbsorption = withStateKey("parryAbsorption", (key) =>
   selector({
     get: ({ get }) => PARRY_ABSORPTION + get(rawMasteryStatistic("finesse")),
     key,
-  })
+  }),
 );
 
 export const parryChance = withStateKey("parryChance", (key) =>
@@ -182,21 +182,21 @@ export const parryChance = withStateKey("parryChance", (key) =>
       return gearClass === "slashing" ? abilityChance : 0;
     },
     key,
-  })
+  }),
 );
 
 export const parryDamage = withStateKey("parryDamage", (key) =>
   selector({
     get: ({ get }) => PARRY_DAMAGE + get(rawMasteryStatistic("finesse")),
     key,
-  })
+  }),
 );
 
 export const parryRating = withStateKey("parryRating", (key) =>
   selector({
     get: ({ get }) => Math.round(get(parryChance) * get(parryAbsorption) * get(parryDamage) * 1000),
     key,
-  })
+  }),
 );
 
 export const powerBonus = withStateKey("powerBonus", (key) =>
@@ -206,21 +206,21 @@ export const powerBonus = withStateKey("powerBonus", (key) =>
       ({ get }) =>
         get(hasItem("tome of power")) ? get(level) * ATTRIBUTES[type].powerBonus : 0,
     key,
-  })
+  }),
 );
 
 export const protection = withStateKey("protection", (key) =>
   selector({
     get: ({ get }) => get(armor).protection,
     key,
-  })
+  }),
 );
 
 export const recoveryRate = withStateKey("recoveryRate", (key) =>
   selector({
     get: ({ get }) => RECOVERY_RATE - RECOVERY_RATE * get(rawMasteryStatistic("resilience")),
     key,
-  })
+  }),
 );
 
 export const reserveRegenerationAmount = withStateKey("reserveRegenerationAmount", (key) =>
@@ -231,7 +231,7 @@ export const reserveRegenerationAmount = withStateKey("reserveRegenerationAmount
       return Math.round(total + total * get(powerBonus("fortitude")));
     },
     key,
-  })
+  }),
 );
 
 export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (key) =>
@@ -242,7 +242,7 @@ export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (
       return total + total * get(powerBonus("vigor"));
     },
     key,
-  })
+  }),
 );
 
 export const staggerRating = withStateKey("staggerRating", (key) =>
@@ -253,7 +253,7 @@ export const staggerRating = withStateKey("staggerRating", (key) =>
       return Math.round(get(shield).stagger * mightValue + get(staggerWeapon) * mightValue);
     },
     key,
-  })
+  }),
 );
 
 export const staggerWeapon = withStateKey("staggerWeapon", (key) =>
@@ -264,5 +264,5 @@ export const staggerWeapon = withStateKey("staggerWeapon", (key) =>
       return gearClass === "blunt" ? abilityChance : 0;
     },
     key,
-  })
+  }),
 );

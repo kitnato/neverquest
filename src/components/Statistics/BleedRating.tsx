@@ -84,7 +84,7 @@ export function BleedRating() {
                       <td className={CLASS_TABLE_CELL_ITALIC}>Bleed damage:</td>
 
                       <td>{`${Math.round(
-                        damageTotalValue * crueltyValue
+                        damageTotalValue * crueltyValue,
                       )} (${damage} per tick)`}</td>
                     </tr>
                   </DetailsTable>

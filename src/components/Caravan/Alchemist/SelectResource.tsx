@@ -28,7 +28,7 @@ export function SelectResource({
               <option key={resource} value={resource}>
                 {capitalizeAll(resource)}
               </option>
-            )
+            ),
         )}
       </FormSelect>
 

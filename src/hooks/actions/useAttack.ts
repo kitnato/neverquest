@@ -110,6 +110,6 @@ export function useAttack() {
           ]);
         }
       },
-    [changeMonsterHealth, changeStamina, increaseMastery]
+    [changeMonsterHealth, changeStamina, increaseMastery],
   );
 }

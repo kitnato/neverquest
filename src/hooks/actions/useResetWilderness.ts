@@ -14,6 +14,6 @@ export function useResetWilderness() {
 
         generateMonster();
       },
-    [generateMonster]
+    [generateMonster],
   );
 }

@@ -107,7 +107,7 @@ export function ArmorOptions() {
             contents={
               isShowingDeflection
                 ? `${formatPercentage(ranges.deflection.minimum)}-${formatPercentage(
-                    ranges.deflection.maximum
+                    ranges.deflection.maximum,
                   )}`
                 : LABEL_UNKNOWN
             }

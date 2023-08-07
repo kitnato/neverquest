@@ -12,7 +12,7 @@ export const deltas = withStateKey("deltas", (key) =>
     default: DEFAULT_DELTA_DISPLAY,
     effects: (parameter) => [handleLocalStorage<DeltaDisplay>({ key, parameter })],
     key,
-  })
+  }),
 );
 
 export const floatingTextQueues = withStateKey("floatingTextQueues", (key) =>
@@ -20,7 +20,7 @@ export const floatingTextQueues = withStateKey("floatingTextQueues", (key) =>
     default: [],
     effects: (parameter) => [handleLocalStorage<FloatingText[]>({ key, parameter })],
     key,
-  })
+  }),
 );
 
 export const monsterBleedingDelta = withStateKey("monsterBleedingDelta", (key) =>
@@ -28,5 +28,5 @@ export const monsterBleedingDelta = withStateKey("monsterBleedingDelta", (key) =
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );

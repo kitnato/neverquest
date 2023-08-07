@@ -11,7 +11,7 @@ export const isCrewHirable = withStateKey("isCrewHirable", (key) =>
   selector({
     get: ({ get }) => CREW_ORDER.some((type) => get(hireStatus(type)).status === "hirable"),
     key,
-  })
+  }),
 );
 
 // ATOMS
@@ -25,7 +25,7 @@ export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
     },
     effects: [handleLocalStorage<InventoryBlacksmith>({ key })],
     key,
-  })
+  }),
 );
 
 export const crewActive = withStateKey("crewActive", (key) =>
@@ -33,7 +33,7 @@ export const crewActive = withStateKey("crewActive", (key) =>
     default: null,
     effects: [handleLocalStorage<Crew | null>({ key })],
     key,
-  })
+  }),
 );
 
 export const hasBoughtFromMerchant = withStateKey("hasBoughtFromMerchant", (key) =>
@@ -41,7 +41,7 @@ export const hasBoughtFromMerchant = withStateKey("hasBoughtFromMerchant", (key)
     default: false,
     effects: [handleLocalStorage<boolean>({ key })],
     key,
-  })
+  }),
 );
 
 // Must use { status } object instead of just CrewStatus, otherwise onSet() does not trigger in useInitializer().
@@ -50,7 +50,7 @@ export const hireStatus = withStateKey("hireStatus", (key) =>
     default: { status: null },
     effects: (parameter) => [handleLocalStorage<{ status: CrewStatus }>({ key, parameter })],
     key,
-  })
+  }),
 );
 
 export const merchantInventory = withStateKey("merchantInventory", (key) =>
@@ -58,5 +58,5 @@ export const merchantInventory = withStateKey("merchantInventory", (key) =>
     default: [],
     effects: [handleLocalStorage<InventoryMerchant>({ key })],
     key,
-  })
+  }),
 );

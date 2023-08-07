@@ -32,7 +32,7 @@ export const armor = withStateKey("armor", (key) =>
       return equippedArmor as Armor;
     },
     key,
-  })
+  }),
 );
 
 export const canFit = withStateKey("canFit", (key) =>
@@ -42,7 +42,7 @@ export const canFit = withStateKey("canFit", (key) =>
       ({ get }) =>
         get(encumbrance) + weight <= get(encumbranceMaximum),
     key,
-  })
+  }),
 );
 
 export const encumbrance = withStateKey("encumbrance", (key) =>
@@ -53,7 +53,7 @@ export const encumbrance = withStateKey("encumbrance", (key) =>
       return inventoryValue.reduce((current, item) => current + item.weight, 0);
     },
     key,
-  })
+  }),
 );
 
 export const hasItem = withStateKey("hasItem", (key) =>
@@ -63,18 +63,18 @@ export const hasItem = withStateKey("hasItem", (key) =>
       ({ get }) =>
         Boolean(
           get(inventory).find(
-            (item) => (isConsumable(item) || isTrinket(item)) && item.type === type
-          )
+            (item) => (isConsumable(item) || isTrinket(item)) && item.type === type,
+          ),
         ),
     key,
-  })
+  }),
 );
 
 export const isInventoryFull = withStateKey("isInventoryFull", (key) =>
   selector({
     get: ({ get }) => get(encumbrance) >= get(encumbranceMaximum),
     key,
-  })
+  }),
 );
 
 export const shield = withStateKey("shield", (key) =>
@@ -95,7 +95,7 @@ export const shield = withStateKey("shield", (key) =>
       return equippedShield as Shield;
     },
     key,
-  })
+  }),
 );
 
 export const weapon = withStateKey("weapon", (key) =>
@@ -116,7 +116,7 @@ export const weapon = withStateKey("weapon", (key) =>
       return equippedWeapon as Weapon;
     },
     key,
-  })
+  }),
 );
 
 // ATOMS
@@ -126,7 +126,7 @@ export const itemsAcquired = withStateKey("itemsAcquired", (key) =>
     default: [],
     effects: [handleLocalStorage<{ key: string; type: Consumable | Gear }[]>({ key })],
     key,
-  })
+  }),
 );
 
 export const encumbranceMaximum = withStateKey("encumbranceMaximum", (key) =>
@@ -134,7 +134,7 @@ export const encumbranceMaximum = withStateKey("encumbranceMaximum", (key) =>
     default: ENCUMBRANCE,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const hasKnapsack = withStateKey("hasKnapsack", (key) =>
@@ -142,7 +142,7 @@ export const hasKnapsack = withStateKey("hasKnapsack", (key) =>
     default: false,
     effects: [handleLocalStorage<boolean>({ key })],
     key,
-  })
+  }),
 );
 
 export const inventory = withStateKey("inventory", (key) =>
@@ -150,7 +150,7 @@ export const inventory = withStateKey("inventory", (key) =>
     default: [],
     effects: [handleLocalStorage<Item[]>({ key })],
     key,
-  })
+  }),
 );
 
 export const isInventoryOpen = withStateKey("isInventoryOpen", (key) =>
@@ -158,5 +158,5 @@ export const isInventoryOpen = withStateKey("isInventoryOpen", (key) =>
     default: false,
     effects: [handleLocalStorage<boolean>({ key })],
     key,
-  })
+  }),
 );

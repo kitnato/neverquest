@@ -21,11 +21,11 @@ export function useMerchantTradeItem() {
 
             if (stack === 1) {
               set(merchantInventory, (current) =>
-                current.filter(({ item: { id } }) => id !== item.id)
+                current.filter(({ item: { id } }) => id !== item.id),
               );
             } else {
               const merchantStackIndex = merchantInventoryValue.findIndex(
-                ({ item }) => isConsumable(item) && item.type === type
+                ({ item }) => isConsumable(item) && item.type === type,
               );
 
               set(merchantInventory, (current) => [
@@ -36,7 +36,7 @@ export function useMerchantTradeItem() {
             }
           } else {
             set(merchantInventory, (current) =>
-              current.filter(({ item: { id } }) => id !== item.id)
+              current.filter(({ item: { id } }) => id !== item.id),
             );
           }
 
@@ -46,16 +46,16 @@ export function useMerchantTradeItem() {
             const { type } = item;
 
             const stack = merchantInventoryValue.find(
-              (current) => isConsumable(current.item) && current.item.type === type
+              (current) => isConsumable(current.item) && current.item.type === type,
             );
 
             if (stack === undefined) {
               set(merchantInventory, (current) =>
-                current.concat({ isReturned: true, item: { ...item, stack: 1 } })
+                current.concat({ isReturned: true, item: { ...item, stack: 1 } }),
               );
             } else if (isConsumable(stack.item)) {
               const stackIndex = merchantInventoryValue.findIndex(
-                ({ item }) => isConsumable(item) && item.type === type
+                ({ item }) => isConsumable(item) && item.type === type,
               );
               const { item: merchantItem } = stack;
 
@@ -70,11 +70,11 @@ export function useMerchantTradeItem() {
               current.concat({
                 isReturned: true,
                 item: isGear(item) ? { ...item, isEquipped: false } : item,
-              })
+              }),
             );
           }
         }
       },
-    []
+    [],
   );
 }

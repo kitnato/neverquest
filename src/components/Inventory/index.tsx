@@ -44,7 +44,7 @@ export function Inventory() {
 
   const equippedGear = [...inventoryValue.filter((item) => isGear(item) && item.isEquipped)];
   const storedItems = inventoryValue.filter(
-    (item) => !isGear(item) || (isGear(item) && !item.isEquipped)
+    (item) => !isGear(item) || (isGear(item) && !item.isEquipped),
   );
 
   return (

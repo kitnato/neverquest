@@ -11,14 +11,14 @@ export const isStageCompleted = withStateKey("isStageCompleted", (key) =>
   selector({
     get: ({ get }) => get(progress) === get(progressMaximum),
     key,
-  })
+  }),
 );
 
 export const isWilderness = withStateKey("isWilderness", (key) =>
   selector({
     get: ({ get }) => get(mode) === "wilderness",
     key,
-  })
+  }),
 );
 
 export const location = withStateKey("location", (key) =>
@@ -35,21 +35,21 @@ export const location = withStateKey("location", (key) =>
       return "Caravan";
     },
     key,
-  })
+  }),
 );
 
 export const progressMaximum = withStateKey("progressMaximum", (key) =>
   selector({
     get: ({ get }) => 2 + Math.round(98 * getGrowthSigmoid(get(stage))),
     key,
-  })
+  }),
 );
 
 export const stageMaximum = withStateKey("stageMaximum", (key) =>
   selector({
     get: ({ get }) => get(wildernesses).length,
     key,
-  })
+  }),
 );
 
 // ATOMS
@@ -59,7 +59,7 @@ export const isStageStarted = withStateKey("isStageStarted", (key) =>
     default: false,
     effects: [handleLocalStorage<boolean>({ key })],
     key,
-  })
+  }),
 );
 
 export const stage = withStateKey("stage", (key) =>
@@ -67,7 +67,7 @@ export const stage = withStateKey("stage", (key) =>
     default: stageMaximum,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const mode = withStateKey("mode", (key) =>
@@ -75,7 +75,7 @@ export const mode = withStateKey("mode", (key) =>
     default: "wilderness",
     effects: [handleLocalStorage<Location>({ key })],
     key,
-  })
+  }),
 );
 
 export const progress = withStateKey("progress", (key) =>
@@ -83,7 +83,7 @@ export const progress = withStateKey("progress", (key) =>
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
-  })
+  }),
 );
 
 export const wildernesses = withStateKey("wildernesses", (key) =>
@@ -91,5 +91,5 @@ export const wildernesses = withStateKey("wildernesses", (key) =>
     default: [],
     effects: [handleLocalStorage<string[]>({ key })],
     key,
-  })
+  }),
 );

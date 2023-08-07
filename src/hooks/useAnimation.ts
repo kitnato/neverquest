@@ -14,7 +14,7 @@ export function useAnimation(callback: (time: number) => void, stop: boolean) {
       previousTimeRef.current = time;
       frameRef.current = requestAnimationFrame(animate);
     },
-    [callback]
+    [callback],
   );
 
   useEffect(() => {

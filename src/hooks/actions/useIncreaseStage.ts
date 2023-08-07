@@ -39,6 +39,6 @@ export function useIncreaseStage() {
 
         set(stage, nextStage);
       },
-    []
+    [],
   );
 }

@@ -9,8 +9,8 @@ export function useResetAttributes() {
     ({ set }) =>
       () =>
         Object.keys(ATTRIBUTES).forEach((type) =>
-          set(attributes(type as Attribute), (current) => ({ ...current, points: 0 }))
+          set(attributes(type as Attribute), (current) => ({ ...current, points: 0 })),
         ),
-    []
+    [],
   );
 }

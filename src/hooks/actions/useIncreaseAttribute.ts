@@ -41,6 +41,6 @@ export function useIncreaseAttribute() {
           essenceDifference: -get(attributeCost),
         });
       },
-    [transactResources]
+    [transactResources],
   );
 }

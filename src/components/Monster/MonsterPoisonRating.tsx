@@ -55,7 +55,7 @@ export function MonsterPoisonRating() {
         >
           <span>
             {Math.round(
-              monsterPoisonChanceValue * monsterPoisonMagnitudeValue * monsterPoisonDurationValue
+              monsterPoisonChanceValue * monsterPoisonMagnitudeValue * monsterPoisonDurationValue,
             )}
           </span>
         </OverlayTrigger>

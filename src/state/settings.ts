@@ -9,7 +9,7 @@ export const allowNSFW = withStateKey("allowNSFW", (key) =>
     default: false,
     effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
     key,
-  })
+  }),
 );
 
 export const autoEquip = withStateKey("autoEquip", (key) =>
@@ -17,7 +17,7 @@ export const autoEquip = withStateKey("autoEquip", (key) =>
     default: true,
     effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
     key,
-  })
+  }),
 );
 
 export const confirmationWarnings = withStateKey("confirmationWarnings", (key) =>
@@ -25,7 +25,7 @@ export const confirmationWarnings = withStateKey("confirmationWarnings", (key) =
     default: true,
     effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
     key,
-  })
+  }),
 );
 
 export const lowHealthWarning = withStateKey("lowHealthWarning", (key) =>
@@ -33,7 +33,7 @@ export const lowHealthWarning = withStateKey("lowHealthWarning", (key) =>
     default: true,
     effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
     key,
-  })
+  }),
 );
 
 export const showDamagePerSecond = withStateKey("showDamagePerSecond", (key) =>
@@ -41,7 +41,7 @@ export const showDamagePerSecond = withStateKey("showDamagePerSecond", (key) =>
     default: false,
     effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
     key,
-  })
+  }),
 );
 
 export const showGearComparison = withStateKey("showGearComparison", (key) =>
@@ -49,7 +49,7 @@ export const showGearComparison = withStateKey("showGearComparison", (key) =>
     default: true,
     effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
     key,
-  })
+  }),
 );
 
 export const showGearLevel = withStateKey("showGearLevel", (key) =>
@@ -57,5 +57,5 @@ export const showGearLevel = withStateKey("showGearLevel", (key) =>
     default: false,
     effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
     key,
-  })
+  }),
 );

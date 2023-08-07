@@ -35,7 +35,7 @@
     "sass": "1.64.2"
   },
   "devDependencies": {
-    "@cneuro/eslint-config-functional": "1.11.0",
+    "@cneuro/eslint-config-functional": "1.12.1",
     "@types/node": "20.4.8",
     "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",

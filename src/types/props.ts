@@ -1,9 +1,12 @@
 import type { ReactNode } from "react";
-
 import type { Placement } from "react-bootstrap/esm/types";
+
 import type { Showing } from "@neverquest/types/unions";
 
-export type ComparisonProps = { showingType: Showing; subtrahend: number } | null;
+export type ComparisonProps = {
+  showingType: Showing;
+  subtrahend: number;
+} | null;
 
 export type IconImageProps = {
   Icon: SVGIcon;

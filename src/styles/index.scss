@@ -7,12 +7,29 @@
   color: white;
 }
 
+// There is no variable that controls the box-shadow when unfocused (resulting in a dividing line).
+.accordion-button {
+  box-shadow: none !important;
+}
+
 .no-transitions .progress-bar {
   transition: none;
 }
 
 .overlay-highlighted {
   z-index: 1048;
+}
+
+// Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563
+.popover,
+.tooltip {
+  position: fixed;
+}
+
+// Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
+.popover.show,
+.tooltip.show > .tooltip-inner {
+  box-shadow: 0 0 4px 1px rgb(0 0 0 / 20%);
 }
 
 body {
@@ -34,6 +51,10 @@ input {
     transform-origin: center left;
     transition: transform 0.5s;
   }
+}
+
+select {
+  cursor: pointer;
 }
 
 svg.icon-image {

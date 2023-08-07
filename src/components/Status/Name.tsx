@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormControl } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -12,19 +12,27 @@ export function Name() {
   const isGameOverValue = useRecoilValue(isGameOver);
   const [nameValue, setName] = useRecoilState(name);
 
-  const [isEditing, setEditing] = useState(false);
+  const [canEdit, setCanEdit] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    new MutationObserver(() => {
+      setCanEdit(!document.body.classList.contains("modal-open"));
+    }).observe(document.body, { attributes: true });
+  }, []);
 
   return (
     <IconDisplay
       contents={
         <FormControl
-          className="hover-grow"
+          className={canEdit ? "hover-grow" : undefined}
+          disabled={!canEdit}
           onBlur={({ currentTarget: { value } }) => {
             if (!value) {
               setName(LABEL_UNKNOWN);
             }
 
-            setEditing(false);
+            setIsEditing(false);
           }}
           onChange={({ target: { value } }) => setName(value)}
           onClick={({ currentTarget }) => {
@@ -33,9 +41,9 @@ export function Name() {
               currentTarget.select();
             }
 
-            setEditing(true);
+            setIsEditing(true);
           }}
-          onKeyDown={({ key }) => key === "Enter" && setEditing(false)}
+          onKeyDown={({ key }) => key === "Enter" && setIsEditing(false)}
           plaintext={!isEditing}
           value={nameValue}
         />

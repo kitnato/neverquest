@@ -78,6 +78,7 @@ Upon purchasing the Journal trinket, unlocks quests that function similar to ach
 
 ##### Meta quests
 
+- Enter a name
 - Complete 5/10/25/50/100/all quests
 
 #### Passive skills

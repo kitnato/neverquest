@@ -9,6 +9,7 @@ $accordion-border-color: var(--bs-border-color-translucent);
 $accordion-button-active-bg: none;
 $accordion-button-active-color: var(--bs-body-color);
 $component-active-bg: #212529; // var(--bs-gray-900)
+$focus-ring-color: none;
 $font-family-base: "AoboshiOne-Regular", serif;
 $nav-link-hover-color: var(--bs-gray-600);
 $nav-link-color: var(--bs-gray-900);
@@ -17,20 +18,3 @@ $popover-max-width: 360px;
 $progress-height: 1.25rem;
 $tooltip-opacity: 1;
 $zindex-tooltip: 1048;
-
-// There is no variable that controls the box-shadow when unfocused (resulting in a dividing line).
-.accordion-button {
-  box-shadow: none !important;
-}
-
-// Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563
-.popover,
-.tooltip {
-  position: fixed;
-}
-
-// Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
-.popover.show,
-.tooltip.show > .tooltip-inner {
-  box-shadow: 0 0 4px 1px rgb(0 0 0 / 20%);
-}

@@ -1037,6 +1037,11 @@ export const AFFIXES: AffixData[] = [
     name: "damned",
   },
   {
+    creature: "prefix",
+    location: "prefix",
+    name: "damp",
+  },
+  {
     artifact: "suffix",
     creature: "suffix",
     location: "suffix",
@@ -1111,6 +1116,17 @@ export const AFFIXES: AffixData[] = [
     location: "prefix",
     name: "decaying",
     tags: ["lowQuality"],
+  },
+  {
+    artifact: "suffix",
+    creature: "suffix",
+    location: "suffix",
+    name: "deceit",
+  },
+  {
+    creature: "prefix",
+    location: "prefix",
+    name: "deceitful",
   },
   {
     artifact: "prefix",
@@ -1403,6 +1419,11 @@ export const AFFIXES: AffixData[] = [
   {
     creature: "prefix",
     name: "dungeon",
+  },
+  {
+    artifact: "suffix",
+    location: "suffix",
+    name: "duress",
   },
   {
     artifact: "prefix",
@@ -4280,6 +4301,11 @@ export const AFFIXES: AffixData[] = [
     creature: "suffix",
     location: "suffix",
     name: "sorrow",
+  },
+  {
+    creature: "prefix",
+    location: "prefix",
+    name: "sorrowful",
   },
   {
     artifact: "prefix",

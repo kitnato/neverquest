@@ -136,6 +136,10 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "boggit",
+    type: "monster",
+  },
+  {
     name: "boris",
     type: "name",
   },
@@ -456,6 +460,10 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "furniture",
+    type: "monster",
+  },
+  {
+    name: "ghast",
     type: "monster",
   },
   {
@@ -1250,6 +1258,10 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "whale",
+    type: "monster",
+  },
+  {
+    name: "wight",
     type: "monster",
   },
   {

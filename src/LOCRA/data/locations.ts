@@ -2,6 +2,9 @@ import type { BaseData } from "@neverquest/LOCRA/types";
 
 export const LOCATIONS: BaseData[] = [
   {
+    name: "abode",
+  },
+  {
     name: "abyss",
   },
   {
@@ -67,6 +70,9 @@ export const LOCATIONS: BaseData[] = [
     name: "castle",
   },
   {
+    name: "catacomb",
+  },
+  {
     name: "catacombs",
   },
   {
@@ -77,6 +83,9 @@ export const LOCATIONS: BaseData[] = [
   },
   {
     name: "cavern",
+  },
+  {
+    name: "cellar",
   },
   {
     name: "cemetery",
@@ -535,5 +544,8 @@ export const LOCATIONS: BaseData[] = [
   },
   {
     name: "woods",
+  },
+  {
+    name: "ziggurat",
   },
 ];

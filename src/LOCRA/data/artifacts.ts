@@ -412,6 +412,11 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    name: "diadem",
+    subtype: "head",
+    type: "armor",
+  },
+  {
     isNSFW: true,
     name: "diaper",
     type: "trinket",
@@ -615,6 +620,11 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    name: "headpiece",
+    subtype: "head",
+    type: "armor",
+  },
+  {
     name: "heater shield",
     subtype: "medium",
     type: "shield",
@@ -760,6 +770,11 @@ export const ARTIFACTS: ArtifactData[] = [
     name: "mangonel",
     subtype: "ranged",
     type: "weapon",
+  },
+  {
+    name: "mask",
+    subtype: "head",
+    type: "armor",
   },
   {
     artifactClass: "blunt",

@@ -30,7 +30,7 @@ A boss is a monster that is twice as powerful as a standard monster of that stag
 
 #### Journal
 
-Upon purchasing the Journal trinket, unlocks progression trackers that are similar to achievements.
+Upon purchasing the Journal trinket, unlocks quests that function similar to achievements. Completing a quest grants [essence](./src/data/manual.md#essence).
 
 ##### Challenge quests
 
@@ -79,10 +79,6 @@ Upon purchasing the Journal trinket, unlocks progression trackers that are simil
 ##### Meta quests
 
 - Complete 5/10/25/50/100/all quests
-
-#### Masteries
-
-The maximum of every mastery is increased at the same time when a new rank is achieved. This should encourage use of a single build rather than striving to become a jack-of-all trades.
 
 #### Passive skills
 

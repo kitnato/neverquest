@@ -1,10 +1,10 @@
 # Neverquest
 
-_An irreverent UI-based incremental action role-playing game._
+_An irreverent UI-based incremental rogue-like action role-playing game._
 
 `[SCREENSHOT]`
 
-For a full breakdown of the game, please consult the [manual](./src/data/manual.md).
+**For a full breakdown of the game, please consult the [manual](./src/data/manual.md).**
 
 ## LOCRA
 

@@ -26,11 +26,11 @@ Essential features for a v1.0.0 release.
 
 #### Bosses
 
-A boss is a monster that is twice as powerful as a standard monster of that stage. They appear every 5 stages, starting at stage 5. There is only one on that stage, and once defeated, it drops a [shard](#shards).
+A boss is a monster that is twice as powerful as a standard monster of that stage. They appear every 5 stages, starting at stage 10. It's the only monster on that stage, and once defeated, it drops a [shard](#shards), with one extra shard for every boss above stage 10 (e.g. the boss at stage 25 will drop 4 shards).
 
 #### Journal
 
-Upon purchasing the Journal trinket, unlocks quests that function similar to achievements. Completing a quest grants [essence](./src/data/manual.md#essence).
+Upon purchasing the Journal trinket, unlocks quests that function similarly to achievements. Completing a quest grants [essence](./src/data/manual.md#essence).
 
 ##### Challenge quests
 

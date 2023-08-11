@@ -55,6 +55,10 @@ export const CREATURES: CreatureData[] = [
     type: "human",
   },
   {
+    name: "arthropod",
+    type: "monster",
+  },
+  {
     isNSFW: true,
     name: "ass",
     type: "monster",
@@ -133,6 +137,10 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "blister",
+    type: "monster",
+  },
+  {
+    name: "blob",
     type: "monster",
   },
   {
@@ -238,6 +246,10 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "cockroach",
+    type: "monster",
+  },
+  {
+    name: "colossus",
     type: "monster",
   },
   {
@@ -610,6 +622,10 @@ export const CREATURES: CreatureData[] = [
     type: "human",
   },
   {
+    name: "insect",
+    type: "monster",
+  },
+  {
     name: "jailor",
     type: "monster",
   },
@@ -974,6 +990,10 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "revenant",
+    type: "monster",
+  },
+  {
     name: "robot",
     type: "monster",
   },
@@ -999,6 +1019,10 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "sausage",
+    type: "monster",
+  },
+  {
+    name: "savage",
     type: "monster",
   },
   {
@@ -1209,6 +1233,10 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "vermin",
+    type: "monster",
+  },
+  {
     name: "vigilante",
     type: "human",
   },
@@ -1235,6 +1263,10 @@ export const CREATURES: CreatureData[] = [
   {
     name: "warrior",
     type: "human",
+  },
+  {
+    name: "wasp",
+    type: "monster",
   },
   {
     name: "watcher",

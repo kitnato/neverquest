@@ -79,6 +79,15 @@ export const AFFIXES: AffixData[] = [
     tags: ["lowQuality"],
   },
   {
+    creature: "prefix",
+    location: "prefix",
+    name: "agile",
+  },
+  {
+    creature: "prefix",
+    name: "agitated",
+  },
+  {
     artifact: "prefix",
     location: "prefix",
     name: "agonizing",
@@ -128,6 +137,17 @@ export const AFFIXES: AffixData[] = [
     name: "ancient",
   },
   {
+    artifact: "suffix",
+    creature: "suffix",
+    location: "suffix",
+    name: "anguish",
+  },
+  {
+    creature: "prefix",
+    location: "prefix",
+    name: "anguished",
+  },
+  {
     artifact: "prefix",
     name: "animalistic",
   },
@@ -161,6 +181,10 @@ export const AFFIXES: AffixData[] = [
     creature: "prefix",
     location: "prefix",
     name: "arcane",
+  },
+  {
+    location: "prefix",
+    name: "arid",
   },
   {
     artifact: "prefix",
@@ -306,6 +330,10 @@ export const AFFIXES: AffixData[] = [
     tags: ["lowQuality"],
   },
   {
+    location: "prefix",
+    name: "barren",
+  },
+  {
     creature: "prefix",
     name: "barking",
   },
@@ -389,6 +417,12 @@ export const AFFIXES: AffixData[] = [
     name: "benign",
   },
   {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "bewitched",
+  },
+  {
     creature: "prefix",
     name: "bigoted",
   },
@@ -461,6 +495,7 @@ export const AFFIXES: AffixData[] = [
   },
   {
     creature: "prefix",
+    location: "prefix",
     name: "blind",
   },
   {
@@ -513,6 +548,11 @@ export const AFFIXES: AffixData[] = [
   {
     location: "prefix",
     name: "boggy",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    name: "bold",
   },
   {
     artifact: "suffix",
@@ -678,6 +718,10 @@ export const AFFIXES: AffixData[] = [
     name: "cancerous",
   },
   {
+    creature: "prefix",
+    name: "carnivorous",
+  },
+  {
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
@@ -787,6 +831,16 @@ export const AFFIXES: AffixData[] = [
     name: "circus",
   },
   {
+    artifact: "suffix",
+    creature: "suffix",
+    location: "suffix",
+    name: "cinders",
+  },
+  {
+    creature: "prefix",
+    name: "clawed",
+  },
+  {
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
@@ -824,6 +878,12 @@ export const AFFIXES: AffixData[] = [
     creature: "prefix",
     location: "prefix",
     name: "cold",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "colossal",
   },
   {
     artifact: "prefix",
@@ -922,8 +982,12 @@ export const AFFIXES: AffixData[] = [
     name: "cowardly",
   },
   {
+    creature: "prefix",
+    name: "cowering",
+  },
+  {
     location: "prefix",
-    name: "cozy",
+    name: "cosy",
   },
   {
     artifact: "prefix",
@@ -959,6 +1023,12 @@ export const AFFIXES: AffixData[] = [
   {
     artifact: "prefix",
     creature: "prefix",
+    location: "prefix",
+    name: "creepy",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
     name: "crippled",
   },
   {
@@ -970,6 +1040,18 @@ export const AFFIXES: AffixData[] = [
     creature: "prefix",
     isNSFW: true,
     name: "crotch",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "cruel",
+  },
+  {
+    artifact: "suffix",
+    creature: "suffix",
+    location: "suffix",
+    name: "cruelty",
   },
   {
     artifact: "prefix",
@@ -1088,6 +1170,12 @@ export const AFFIXES: AffixData[] = [
     name: "dead",
   },
   {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "deadly",
+  },
+  {
     creature: "prefix",
     name: "deaf",
   },
@@ -1131,6 +1219,11 @@ export const AFFIXES: AffixData[] = [
   {
     artifact: "prefix",
     creature: "prefix",
+    name: "defiant",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
     location: "prefix",
     name: "defiled",
     tags: ["lowQuality"],
@@ -1139,6 +1232,13 @@ export const AFFIXES: AffixData[] = [
     artifact: "suffix",
     location: "prefix",
     name: "defilement",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "deformed",
+    tags: ["lowQuality"],
   },
   {
     artifact: "suffix",
@@ -1155,6 +1255,11 @@ export const AFFIXES: AffixData[] = [
     artifact: "suffix",
     location: "suffix",
     name: "delights",
+  },
+  {
+    creature: "prefix",
+    location: "prefix",
+    name: "delirious",
   },
   {
     artifact: "prefix",
@@ -1265,6 +1370,26 @@ export const AFFIXES: AffixData[] = [
     tags: ["lowQuality"],
   },
   {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "dirty",
+    tags: ["lowQuality"],
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "disastrous",
+    tags: ["lowQuality"],
+  },
+  {
+    artifact: "suffix",
+    creature: "suffix",
+    location: "suffix",
+    name: "disaster",
+  },
+  {
     artifact: "suffix",
     creature: "suffix",
     location: "suffix",
@@ -1274,6 +1399,7 @@ export const AFFIXES: AffixData[] = [
     creature: "prefix",
     location: "prefix",
     name: "diseased",
+    tags: ["lowQuality"],
   },
   {
     creature: "prefix",
@@ -1298,6 +1424,19 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
+    name: "disfigured",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "disgusting",
+    tags: ["lowQuality"],
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
     name: "disintegrating",
     tags: ["lowQuality"],
   },
@@ -1306,6 +1445,13 @@ export const AFFIXES: AffixData[] = [
     creature: "suffix",
     location: "suffix",
     name: "disintegration",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "dismal",
+    tags: ["lowQuality"],
   },
   {
     creature: "prefix",
@@ -1381,6 +1527,18 @@ export const AFFIXES: AffixData[] = [
     artifact: "suffix",
     creature: "suffix",
     location: "suffix",
+    name: "dread",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "dreadful",
+  },
+  {
+    artifact: "suffix",
+    creature: "suffix",
+    location: "suffix",
     name: "dreariness",
   },
   {
@@ -1415,6 +1573,13 @@ export const AFFIXES: AffixData[] = [
   {
     creature: "prefix",
     name: "drunk",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "dull",
+    tags: ["lowQuality"],
   },
   {
     creature: "prefix",
@@ -1477,6 +1642,13 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
+    name: "electric",
+    tags: ["elemental"],
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
     name: "elite",
   },
   {
@@ -1496,12 +1668,20 @@ export const AFFIXES: AffixData[] = [
   },
   {
     location: "prefix",
+    name: "empty",
+  },
+  {
+    location: "prefix",
     name: "endless",
   },
   {
     artifact: "suffix",
     location: "suffix",
     name: "enjoyment",
+  },
+  {
+    creature: "prefix",
+    name: "enraged",
   },
   {
     artifact: "prefix",
@@ -1527,6 +1707,12 @@ export const AFFIXES: AffixData[] = [
     creature: "prefix",
     location: "prefix",
     name: "everlasting",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "evil",
   },
   {
     artifact: "prefix",
@@ -1674,6 +1860,11 @@ export const AFFIXES: AffixData[] = [
     creature: "prefix",
     location: "prefix",
     name: "fetid",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    name: "fickle",
   },
   {
     artifact: "prefix",
@@ -1843,6 +2034,12 @@ export const AFFIXES: AffixData[] = [
   },
   {
     artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "forsaken",
+  },
+  {
+    artifact: "prefix",
     location: "prefix",
     name: "fortified",
   },
@@ -1902,6 +2099,13 @@ export const AFFIXES: AffixData[] = [
     name: "frightful",
   },
   {
+    artifact: "suffix",
+    creature: "suffix",
+    location: "suffix",
+    name: "frost",
+    tags: ["elemental"],
+  },
+  {
     creature: "prefix",
     name: "frugal",
   },
@@ -1924,6 +2128,10 @@ export const AFFIXES: AffixData[] = [
     creature: "prefix",
     location: "prefix",
     name: "fuming",
+  },
+  {
+    creature: "prefix",
+    name: "furious",
   },
   {
     artifact: "prefix",
@@ -2135,6 +2343,10 @@ export const AFFIXES: AffixData[] = [
     name: "great",
   },
   {
+    creature: "prefix",
+    name: "greedy",
+  },
+  {
     artifact: "suffix",
     location: "suffix",
     name: "grief",
@@ -2225,6 +2437,11 @@ export const AFFIXES: AffixData[] = [
     name: "haunted",
   },
   {
+    artifact: "prefix",
+    location: "prefix",
+    name: "haunting",
+  },
+  {
     creature: "prefix",
     location: "prefix",
     name: "heaving",
@@ -2254,6 +2471,11 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     name: "hexproof",
+  },
+  {
+    creature: "prefix",
+    location: "prefix",
+    name: "hidden",
   },
   {
     artifact: "prefix",
@@ -2368,6 +2590,12 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
+    name: "hungry",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
     name: "hunting",
   },
   {
@@ -2466,6 +2694,18 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
+    name: "infamous",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "infernal",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
     name: "infested",
     tags: ["lowQuality"],
   },
@@ -2506,6 +2746,12 @@ export const AFFIXES: AffixData[] = [
     name: "insectoid",
   },
   {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "insidious",
+  },
+  {
     creature: "prefix",
     name: "insincere",
   },
@@ -2539,6 +2785,12 @@ export const AFFIXES: AffixData[] = [
     creature: "prefix",
     location: "prefix",
     name: "intrepid",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "jagged",
   },
   {
     creature: "prefix",
@@ -2594,6 +2846,10 @@ export const AFFIXES: AffixData[] = [
     creature: "prefix",
     location: "prefix",
     name: "lackadaisical",
+  },
+  {
+    creature: "prefix",
+    name: "lanky",
   },
   {
     artifact: "prefix",
@@ -2684,6 +2940,11 @@ export const AFFIXES: AffixData[] = [
     name: "living",
   },
   {
+    creature: "prefix",
+    location: "prefix",
+    name: "lonely",
+  },
+  {
     artifact: "prefix",
     creature: "prefix",
     name: "long",
@@ -2739,6 +3000,11 @@ export const AFFIXES: AffixData[] = [
   },
   {
     creature: "prefix",
+    location: "prefix",
+    name: "mad",
+  },
+  {
+    creature: "prefix",
     name: "maddened",
   },
   {
@@ -2773,6 +3039,12 @@ export const AFFIXES: AffixData[] = [
     creature: "prefix",
     location: "prefix",
     name: "malefic",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "malformed",
   },
   {
     artifact: "suffix",
@@ -2871,6 +3143,12 @@ export const AFFIXES: AffixData[] = [
     creature: "prefix",
     location: "suffix",
     name: "mayhem",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    name: "meager",
+    tags: ["lowQuality"],
   },
   {
     creature: "prefix",
@@ -3020,8 +3298,14 @@ export const AFFIXES: AffixData[] = [
   },
   {
     creature: "prefix",
-    location: "prefix",
+    location: "suffix",
     name: "mourning",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "mournful",
   },
   {
     artifact: "prefix",
@@ -3054,6 +3338,16 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     name: "mutated",
+  },
+  {
+    creature: "prefix",
+    name: "mute",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "muted",
   },
   {
     artifact: "prefix",
@@ -3269,6 +3563,12 @@ export const AFFIXES: AffixData[] = [
   },
   {
     artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "outlandish",
+  },
+  {
+    artifact: "prefix",
     isNSFW: true,
     name: "ovarian",
   },
@@ -3428,7 +3728,7 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
-    name: "plague",
+    name: "plagued",
   },
   {
     artifact: "prefix",
@@ -3834,6 +4134,13 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
+    name: "sacred",
+    tags: ["highQuality"],
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
     name: "sacrilegious",
   },
   {
@@ -4100,6 +4407,14 @@ export const AFFIXES: AffixData[] = [
     creature: "prefix",
     location: "prefix",
     name: "shrouded",
+  },
+  {
+    creature: "prefix",
+    name: "sick",
+  },
+  {
+    creature: "prefix",
+    name: "sickly",
   },
   {
     creature: "prefix",
@@ -4393,6 +4708,12 @@ export const AFFIXES: AffixData[] = [
     name: "starry",
   },
   {
+    creature: "prefix",
+    isNSFW: true,
+    location: "prefix",
+    name: "steamy",
+  },
+  {
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
@@ -4584,6 +4905,11 @@ export const AFFIXES: AffixData[] = [
   {
     artifact: "prefix",
     creature: "prefix",
+    name: "tall",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
     location: "prefix",
     name: "tasteless",
   },
@@ -4637,12 +4963,29 @@ export const AFFIXES: AffixData[] = [
   },
   {
     artifact: "suffix",
+    creature: "suffix",
+    location: "suffix",
+    name: "the abyss",
+  },
+  {
+    artifact: "suffix",
+    creature: "suffix",
+    location: "suffix",
+    name: "the void",
+  },
+  {
+    artifact: "suffix",
     location: "suffix",
     name: "thievery",
   },
   {
     creature: "prefix",
     name: "thieving",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    name: "thin",
   },
   {
     artifact: "prefix",
@@ -4734,6 +5077,13 @@ export const AFFIXES: AffixData[] = [
     creature: "prefix",
     location: "prefix",
     name: "twitching",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "ugly",
+    tags: ["lowQuality"],
   },
   {
     artifact: "prefix",
@@ -4926,6 +5276,11 @@ export const AFFIXES: AffixData[] = [
     name: "voracious",
   },
   {
+    creature: "prefix",
+    location: "prefix",
+    name: "wailing",
+  },
+  {
     artifact: "suffix",
     creature: "suffix",
     location: "suffix",
@@ -5024,6 +5379,10 @@ export const AFFIXES: AffixData[] = [
   },
   {
     creature: "prefix",
+    name: "winged",
+  },
+  {
+    creature: "prefix",
     name: "winking",
   },
   {
@@ -5074,6 +5433,12 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     name: "wooden",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "wormy",
   },
   {
     creature: "prefix",

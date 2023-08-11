@@ -1,11 +1,14 @@
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
+import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { RESERVES } from "@neverquest/data/reserves";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
+import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
+import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { isRecovering } from "@neverquest/state/character";
 import {
   healthRegenerationAmount,
@@ -44,6 +47,7 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
   const changeReserve = RESERVE_CHANGE[type]();
 
   const { label } = RESERVES[type];
+  const ReserveIcon = isHealth ? IconHealth : IconStamina;
   const regenerationProgress =
     regenerationDurationValue === 0 ? 0 : regenerationRateValue - regenerationDurationValue;
 
@@ -76,7 +80,8 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
         <span>
           {`${label} regeneration`}
           <br />
-          {`${regenerationAmountValue} per ${formatMilliseconds(regenerationRateValue)}`}
+          <IconImage Icon={ReserveIcon} size="tiny" />
+          &nbsp;{`${regenerationAmountValue} per ${formatMilliseconds(regenerationRateValue)}`}
         </span>
       );
     }
@@ -85,6 +90,8 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
       <span>
         {`Regenerating ${type}`}
         <br />
+        <IconImage Icon={ReserveIcon} size="tiny" />
+        &nbsp;
         {`${regenerationAmountValue} in ${formatMilliseconds(
           regenerationRateValue - regenerationProgress,
         )}`}

@@ -11,6 +11,10 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "trinket",
   },
   {
+    name: "amphora",
+    type: "trinket",
+  },
+  {
     name: "anklet",
     type: "trinket",
   },
@@ -489,6 +493,10 @@ export const ARTIFACTS: ArtifactData[] = [
     name: "fish",
     subtype: "melee",
     type: "weapon",
+  },
+  {
+    name: "flagon",
+    type: "trinket",
   },
   {
     artifactClass: "blunt",

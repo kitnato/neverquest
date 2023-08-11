@@ -21,6 +21,7 @@ export function useGenerateMonster() {
     ({ reset, set, snapshot }) =>
       () => {
         const get = getSnapshotGetter(snapshot);
+
         const growthFactor = getGrowthSigmoid(get(stage));
 
         set(

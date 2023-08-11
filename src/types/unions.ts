@@ -184,6 +184,7 @@ export type StateKey =
   | "isAttacking"
   | "isAttributeAtMaximum"
   | "isBlighted"
+  | "isBoss"
   | "isCrewHirable"
   | "isGameOver"
   | "isHealthAtMaximum"

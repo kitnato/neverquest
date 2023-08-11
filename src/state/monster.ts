@@ -9,7 +9,7 @@ import {
   POISON,
 } from "@neverquest/data/monster";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import { isStageStarted, progress, stage } from "@neverquest/state/encounter";
+import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
 import { lootBonus } from "@neverquest/state/statistics";
 import { formatFloat } from "@neverquest/utilities/formatters";
 import { getDamagePerRate, getGrowthSigmoid } from "@neverquest/utilities/getters";
@@ -40,13 +40,13 @@ export const isMonsterStaggered = withStateKey("isMonsterStaggered", (key) =>
 export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, bonus, reduction } = MONSTER_ATTACK_RATE;
+      const { base, bonus, boss, reduction } = MONSTER_ATTACK_RATE;
 
-      return (
-        base -
-        Math.round(
-          reduction * getGrowthSigmoid(get(stage)) + bonus * getGrowthSigmoid(get(progress)),
-        )
+      return Math.round(
+        (base -
+          reduction * getGrowthSigmoid(get(stage)) +
+          bonus * getGrowthSigmoid(get(progress))) *
+          (1 - (get(isBoss) ? boss : 0)),
       );
     },
     key,
@@ -58,13 +58,15 @@ export const monsterBlightChance = withStateKey("monsterBlightChance", (key) =>
     get: ({ get }) => {
       const stageValue = get(stage);
 
-      const { chanceBase, chanceMaximum, stageRequired } = BLIGHT;
+      const { boss, chanceBase, chanceMaximum, stageRequired } = BLIGHT;
 
       if (stageValue < stageRequired) {
         return 0;
       }
 
-      return chanceBase + chanceMaximum * getGrowthSigmoid(stageValue);
+      return (
+        (chanceBase + chanceMaximum * getGrowthSigmoid(stageValue)) * (1 + (get(isBoss) ? boss : 0))
+      );
     },
     key,
   }),
@@ -73,10 +75,11 @@ export const monsterBlightChance = withStateKey("monsterBlightChance", (key) =>
 export const monsterDamage = withStateKey("monsterDamage", (key) =>
   selector({
     get: ({ get }) => {
-      const { bonus, maximum } = MONSTER_DAMAGE;
+      const { bonus, boss, maximum } = MONSTER_DAMAGE;
 
       return Math.round(
-        maximum * getGrowthSigmoid(get(stage)) + bonus * getGrowthSigmoid(get(progress)),
+        (maximum * getGrowthSigmoid(get(stage)) + bonus * getGrowthSigmoid(get(progress))) *
+          (1 + (get(isBoss) ? boss : 0)),
       );
     },
     key,
@@ -99,10 +102,11 @@ export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (ke
 export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =>
   selector({
     get: ({ get }) => {
-      const { bonus, maximum } = MONSTER_HEALTH;
+      const { bonus, boss, maximum } = MONSTER_HEALTH;
 
       return Math.round(
-        maximum * getGrowthSigmoid(get(stage)) + bonus * getGrowthSigmoid(get(progress)),
+        (maximum * getGrowthSigmoid(get(stage)) + bonus * getGrowthSigmoid(get(progress))) *
+          (1 + (get(isBoss) ? boss : 0)),
       );
     },
     key,
@@ -114,13 +118,15 @@ export const monsterPoisonChance = withStateKey("monsterPoisonChance", (key) =>
     get: ({ get }) => {
       const stageValue = get(stage);
 
-      const { chanceBase, chanceMaximum, stageRequired } = POISON;
+      const { boss, chanceBase, chanceMaximum, stageRequired } = POISON;
 
       if (stageValue < stageRequired) {
         return 0;
       }
 
-      return chanceBase + chanceMaximum * getGrowthSigmoid(stageValue);
+      return (
+        (chanceBase + chanceMaximum * getGrowthSigmoid(stageValue)) * (1 + (get(isBoss) ? boss : 0))
+      );
     },
     key,
   }),
@@ -151,17 +157,17 @@ export const monsterPoisonMagnitude = withStateKey("monsterPoisonMagnitude", (ke
 export const monsterLoot = withStateKey("monsterLoot", (key) =>
   selector({
     get: ({ get }) => {
-      const { bonus, coinsBase, essenceBase, scrapBase } = LOOT;
+      const { bonus, boss, coinsBase, essenceBase, scrapBase } = LOOT;
 
-      const luckBonus = 1 + get(lootBonus);
       const stageValue = get(stage);
       const growthFactor = getGrowthSigmoid(stageValue);
       const progressBonus = getGrowthSigmoid(get(progress)) * bonus;
+      const totalBonus = (1 + get(lootBonus)) * (1 + (get(isBoss) ? boss : 0));
 
       return {
-        coins: Math.round((progressBonus + coinsBase * growthFactor) * luckBonus),
-        essence: Math.round((progressBonus + essenceBase * growthFactor) * luckBonus),
-        scrap: Math.round((progressBonus + scrapBase * growthFactor) * luckBonus),
+        coins: Math.round((progressBonus + coinsBase * growthFactor) * totalBonus),
+        essence: Math.round((progressBonus + essenceBase * growthFactor) * totalBonus),
+        scrap: Math.round((progressBonus + scrapBase * growthFactor) * totalBonus),
       };
     },
     key,

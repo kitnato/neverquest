@@ -11,6 +11,9 @@ export const LOCATIONS: BaseData[] = [
     name: "alcove",
   },
   {
+    name: "antechambers",
+  },
+  {
     name: "archipelago",
   },
   {
@@ -82,6 +85,9 @@ export const LOCATIONS: BaseData[] = [
     name: "cave",
   },
   {
+    name: "caves",
+  },
+  {
     name: "cavern",
   },
   {
@@ -92,6 +98,9 @@ export const LOCATIONS: BaseData[] = [
   },
   {
     name: "cesspool",
+  },
+  {
+    name: "chamber",
   },
   {
     name: "chambers",

@@ -7,6 +7,17 @@ import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 // SELECTORS
 
+export const isBoss = withStateKey("isBoss", (key) =>
+  selector({
+    get: ({ get }) => {
+      const stageValue = get(stage);
+
+      return stageValue >= 10 && stageValue % 5 === 0;
+    },
+    key,
+  }),
+);
+
 export const isStageCompleted = withStateKey("isStageCompleted", (key) =>
   selector({
     get: ({ get }) => get(progress) === get(progressMaximum),
@@ -40,7 +51,7 @@ export const location = withStateKey("location", (key) =>
 
 export const progressMaximum = withStateKey("progressMaximum", (key) =>
   selector({
-    get: ({ get }) => 2 + Math.round(98 * getGrowthSigmoid(get(stage))),
+    get: ({ get }) => (get(isBoss) ? 1 : 2 + Math.round(98 * getGrowthSigmoid(get(stage)))),
     key,
   }),
 );

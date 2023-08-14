@@ -1,6 +1,6 @@
-import type { BaseData } from "@neverquest/LOCRA/types";
+import type { LocationData } from "@neverquest/LOCRA/types";
 
-export const LOCATIONS: BaseData[] = [
+export const LOCATIONS: LocationData[] = [
   {
     name: "abode",
   },
@@ -11,7 +11,8 @@ export const LOCATIONS: BaseData[] = [
     name: "alcove",
   },
   {
-    name: "antechambers",
+    canPluralize: true,
+    name: "antechamber",
   },
   {
     name: "archipelago",
@@ -73,10 +74,8 @@ export const LOCATIONS: BaseData[] = [
     name: "castle",
   },
   {
+    canPluralize: true,
     name: "catacomb",
-  },
-  {
-    name: "catacombs",
   },
   {
     name: "cathedral",
@@ -85,9 +84,7 @@ export const LOCATIONS: BaseData[] = [
     name: "cave",
   },
   {
-    name: "caves",
-  },
-  {
+    canPluralize: true,
     name: "cavern",
   },
   {
@@ -100,10 +97,8 @@ export const LOCATIONS: BaseData[] = [
     name: "cesspool",
   },
   {
+    canPluralize: true,
     name: "chamber",
-  },
-  {
-    name: "chambers",
   },
   {
     name: "chapel",
@@ -184,9 +179,7 @@ export const LOCATIONS: BaseData[] = [
     name: "dune",
   },
   {
-    name: "dunes",
-  },
-  {
+    canPluralize: true,
     name: "dungeon",
   },
   {
@@ -217,9 +210,6 @@ export const LOCATIONS: BaseData[] = [
     name: "field",
   },
   {
-    name: "fields",
-  },
-  {
     name: "flats",
   },
   {
@@ -232,10 +222,8 @@ export const LOCATIONS: BaseData[] = [
     name: "fortress",
   },
   {
+    canPluralize: true,
     name: "garden",
-  },
-  {
-    name: "gardens",
   },
   {
     name: "glen",
@@ -259,10 +247,8 @@ export const LOCATIONS: BaseData[] = [
     name: "hideout",
   },
   {
+    canPluralize: true,
     name: "hill",
-  },
-  {
-    name: "hills",
   },
   {
     name: "hinterland",
@@ -280,16 +266,11 @@ export const LOCATIONS: BaseData[] = [
     name: "immolation",
   },
   {
-    name: "inferior",
-  },
-  {
     name: "island",
   },
   {
+    canPluralize: true,
     name: "isle",
-  },
-  {
-    name: "isles",
   },
   {
     name: "islet",
@@ -319,7 +300,8 @@ export const LOCATIONS: BaseData[] = [
     name: "lake",
   },
   {
-    name: "lands",
+    canPluralize: true,
+    name: "land",
   },
   {
     name: "landscape",
@@ -356,10 +338,8 @@ export const LOCATIONS: BaseData[] = [
     name: "morass",
   },
   {
+    canPluralize: true,
     name: "mountain",
-  },
-  {
-    name: "mountains",
   },
   {
     name: "murk",
@@ -377,6 +357,7 @@ export const LOCATIONS: BaseData[] = [
     name: "oubliette",
   },
   {
+    isNSFW: true,
     name: "outhouse",
   },
   {
@@ -389,18 +370,18 @@ export const LOCATIONS: BaseData[] = [
     name: "paradise",
   },
   {
+    canPluralize: true,
     name: "passage",
-  },
-  {
-    name: "passages",
   },
   {
     name: "passageway",
   },
   {
-    name: "peaks",
+    canPluralize: true,
+    name: "peak",
   },
   {
+    canPluralize: true,
     name: "pit",
   },
   {
@@ -419,7 +400,8 @@ export const LOCATIONS: BaseData[] = [
     name: "pond",
   },
   {
-    name: "pools",
+    canPluralize: true,
+    name: "pool",
   },
   {
     name: "prairie",
@@ -446,10 +428,8 @@ export const LOCATIONS: BaseData[] = [
     name: "river",
   },
   {
+    canPluralize: true,
     name: "ruin",
-  },
-  {
-    name: "ruins",
   },
   {
     name: "sanctuary",
@@ -464,10 +444,8 @@ export const LOCATIONS: BaseData[] = [
     name: "settlement",
   },
   {
+    canPluralize: true,
     name: "sewer",
-  },
-  {
-    name: "sewers",
   },
   {
     name: "ship",
@@ -522,9 +500,7 @@ export const LOCATIONS: BaseData[] = [
     name: "tunnel",
   },
   {
-    name: "tunnels",
-  },
-  {
+    isNSFW: true,
     name: "urinal",
   },
   {
@@ -534,16 +510,18 @@ export const LOCATIONS: BaseData[] = [
     name: "void",
   },
   {
-    name: "warren",
+    name: "volcano",
   },
   {
-    name: "warrens",
+    canPluralize: true,
+    name: "warren",
   },
   {
     name: "wasteland",
   },
   {
-    name: "wastes",
+    canPluralize: true,
+    name: "waste",
   },
   {
     name: "wilderness",

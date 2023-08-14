@@ -2698,6 +2698,11 @@ export const AFFIXES: AffixData[] = [
   },
   {
     artifact: "prefix",
+    name: "inferior",
+    tags: ["lowQuality"],
+  },
+  {
+    artifact: "prefix",
     creature: "prefix",
     location: "prefix",
     name: "infernal",

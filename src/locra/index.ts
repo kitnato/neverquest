@@ -177,9 +177,10 @@ export const LOCRA = {
 
       return allowNSFW ? isNSFW || !isNSFW : !isNSFW;
     });
-    const { name } = filteredLocations[Math.floor(Math.random() * filteredLocations.length)];
-
-    return LOCRA.generate({
+    const { canPluralize, name } =
+      filteredLocations[Math.floor(Math.random() * filteredLocations.length)];
+    const isPluralized = Math.random() < 0.5;
+    const location = LOCRA.generate({
       category: "location",
       name,
       parameters: {
@@ -190,5 +191,25 @@ export const LOCRA = {
         suffixTags: tags,
       },
     });
+
+    if (canPluralize && isPluralized) {
+      const { length } = location;
+
+      switch (location.substring(length - 1)) {
+        case "o":
+        case "h":
+        case "s": {
+          return location + "es";
+        }
+        case "y": {
+          return location.substring(0, length - 1) + "ies";
+        }
+        default: {
+          return location + "s";
+        }
+      }
+    }
+
+    return location;
   },
 };

@@ -65,6 +65,10 @@ export type GeneratorParameters = {
   suffixTags: AffixTag[];
 };
 
+export type LocationData = BaseData & {
+  canPluralize?: boolean;
+};
+
 export const SHIELD_CLASSES = ["small", "medium", "tower"] as const;
 export type ShieldClass = (typeof SHIELD_CLASSES)[number];
 

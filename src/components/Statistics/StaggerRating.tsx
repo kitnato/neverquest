@@ -30,7 +30,7 @@ export function StaggerRating() {
   useDeltaText({
     atomDelta: deltas("staggerRating"),
     atomValue: staggerRating,
-    stop: (previous) => previous === null || !skillTraumatology,
+    stop: ({ previous }) => previous === null || !skillTraumatology,
   });
 
   if (!isShowingStagger) {

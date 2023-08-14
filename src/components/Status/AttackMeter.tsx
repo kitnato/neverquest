@@ -26,8 +26,8 @@ export function AttackMeter() {
 
   const attack = useAttack();
 
-  useAnimation(
-    (delta) => {
+  useAnimation({
+    callback: (delta) => {
       const value = attackDurationValue - delta;
 
       if (value <= 0) {
@@ -38,12 +38,13 @@ export function AttackMeter() {
         setAttackDuration(value);
       }
     },
-    !canAttackOrParryValue ||
+    stop:
+      !canAttackOrParryValue ||
       !isAttackingValue ||
       isLootingValue ||
       isMonsterDeadValue ||
       isRecoveringValue,
-  );
+  });
 
   return (
     <LabelledProgressBar

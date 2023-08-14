@@ -35,7 +35,7 @@ export function ParryRating() {
   useDeltaText({
     atomDelta: deltas("parry"),
     atomValue: parryRating,
-    stop: (previous) => previous === null || !skillEscrime,
+    stop: ({ previous }) => previous === null || !skillEscrime,
   });
 
   if (!isShowingParry) {

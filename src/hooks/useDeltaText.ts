@@ -23,7 +23,7 @@ export function useDeltaText({
 }: {
   atomDelta: RecoilState<DeltaDisplay>;
   atomValue: RecoilValueReadOnly<number>;
-  stop?: (previous: number | null, current: number) => boolean;
+  stop?: ({ current, previous }: { current: number; previous: number | null }) => boolean;
   type?: DeltaText;
 }) {
   const currentValue = useRecoilValue(atomValue);
@@ -36,7 +36,7 @@ export function useDeltaText({
   const positiveColor: BootstrapTextVariant = isTime ? "text-danger" : "text-success";
 
   useEffect(() => {
-    if (stop(previousValue, currentValue)) {
+    if (stop({ current: currentValue, previous: previousValue })) {
       return;
     }
 

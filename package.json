@@ -14,13 +14,17 @@
     "url": "https://github.com/cneuro/neverquest/issues"
   },
   "keywords": [
-    "action rpg",
+    "absurd",
+    "action",
     "arpg",
-    "browser game",
+    "browser",
     "clicker",
     "game",
     "incremental",
-    "role-playing"
+    "rogue-like",
+    "rogue-lite",
+    "role-playing",
+    "rpg"
   ],
   "dependencies": {
     "animate.css": "4.1.1",

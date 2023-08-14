@@ -23,17 +23,20 @@ export function HealthMeter() {
 
   const penalty = healthMaximumValue - healthMaximumTotalValue;
 
-  useAnimation((delta) => {
-    setPoisonDuration((current) => {
-      const value = current - delta;
+  useAnimation({
+    callback: (delta) => {
+      setPoisonDuration((current) => {
+        const value = current - delta;
 
-      if (value < 0) {
-        return 0;
-      }
+        if (value < 0) {
+          return 0;
+        }
 
-      return value;
-    });
-  }, !isPoisonedValue);
+        return value;
+      });
+    },
+    stop: !isPoisonedValue,
+  });
 
   useEffect(() => {
     if (healthValue > healthMaximumTotalValue) {

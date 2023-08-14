@@ -19,33 +19,36 @@ export function MonsterBleedingMeter() {
 
   const changeMonsterHealth = useChangeMonsterHealth();
 
-  useAnimation((delta) => {
-    const newDelta = monsterBleedingDeltaValue + delta;
+  useAnimation({
+    callback: (delta) => {
+      const newDelta = monsterBleedingDeltaValue + delta;
 
-    if (newDelta >= duration) {
-      changeMonsterHealth({
-        delta: {
-          color: "text-danger",
-          value: `BLEEDING -${damage}`,
-        },
-        value: -damage,
-      });
+      if (newDelta >= duration) {
+        changeMonsterHealth({
+          delta: {
+            color: "text-danger",
+            value: `BLEEDING -${damage}`,
+          },
+          value: -damage,
+        });
 
-      resetMonsterBleedingDelta();
-    } else {
-      setMonsterBleedingDelta(newDelta);
-    }
-
-    setMonsterBleedingDuration((current) => {
-      const value = current - delta;
-
-      if (value < 0) {
-        return 0;
+        resetMonsterBleedingDelta();
+      } else {
+        setMonsterBleedingDelta(newDelta);
       }
 
-      return value;
-    });
-  }, !isMonsterBleedingValue);
+      setMonsterBleedingDuration((current) => {
+        const value = current - delta;
+
+        if (value < 0) {
+          return 0;
+        }
+
+        return value;
+      });
+    },
+    stop: !isMonsterBleedingValue,
+  });
 
   return (
     <LabelledProgressBar

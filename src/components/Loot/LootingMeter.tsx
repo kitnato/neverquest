@@ -14,17 +14,20 @@ export function LootingMeter() {
 
   const progression = useProgression();
 
-  useAnimation((delta) => {
-    const value = lootingDurationValue - delta;
+  useAnimation({
+    callback: (delta) => {
+      const value = lootingDurationValue - delta;
 
-    if (value <= 0) {
-      progression();
+      if (value <= 0) {
+        progression();
 
-      setLootingDuration(0);
-    } else {
-      setLootingDuration(value);
-    }
-  }, !isLootingValue);
+        setLootingDuration(0);
+      } else {
+        setLootingDuration(value);
+      }
+    },
+    stop: !isLootingValue,
+  });
 
   return (
     <LabelledProgressBar

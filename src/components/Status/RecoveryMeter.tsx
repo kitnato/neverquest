@@ -12,17 +12,20 @@ export function RecoveryMeter() {
 
   const hasRecovered = recoveryDurationValue === 0;
 
-  useAnimation((delta) => {
-    setRecoveryDuration((current) => {
-      const value = current - delta;
+  useAnimation({
+    callback: (delta) => {
+      setRecoveryDuration((current) => {
+        const value = current - delta;
 
-      if (value < 0) {
-        return 0;
-      }
+        if (value < 0) {
+          return 0;
+        }
 
-      return value;
-    });
-  }, hasRecovered);
+        return value;
+      });
+    },
+    stop: hasRecovered,
+  });
 
   return (
     <LabelledProgressBar

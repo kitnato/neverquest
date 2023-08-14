@@ -176,18 +176,18 @@ export const SHIELD_SPECIFICATIONS: Record<
 > = {
   medium: {
     blockRange: [
-      { maximum: 0.3, minimum: 0.25 },
-      { maximum: 0.45, minimum: 0.4 },
+      { maximum: 0.3, minimum: 0.2 },
+      { maximum: 0.4, minimum: 0.3 },
     ],
     Icon: IconShieldMedium,
     staggerModifier: 0.4,
-    staminaCostModifier: 0.5,
-    weightModifier: 0.5,
+    staminaCostModifier: 0.6,
+    weightModifier: 0.6,
   },
   small: {
     blockRange: [
-      { maximum: 0.2, minimum: 0.13 },
-      { maximum: 0.24, minimum: 0.2 },
+      { maximum: 0.15, minimum: 0.1 },
+      { maximum: 0.2, minimum: 0.15 },
     ],
     Icon: IconShieldSmall,
     staggerModifier: 0.2,
@@ -196,8 +196,8 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   tower: {
     blockRange: [
-      { maximum: 0.55, minimum: 0.45 },
-      { maximum: 0.75, minimum: 0.7 },
+      { maximum: 0.5, minimum: 0.4 },
+      { maximum: 0.6, minimum: 0.5 },
     ],
     Icon: IconShieldTower,
     staggerModifier: 1,

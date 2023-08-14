@@ -15,17 +15,20 @@ export function MonsterStaggeredMeter() {
 
   const staggeringProgress = mightValue - monsterStaggerDurationValue;
 
-  useAnimation((delta) => {
-    setMonsterStaggerDuration((current) => {
-      const value = current - delta;
+  useAnimation({
+    callback: (delta) => {
+      setMonsterStaggerDuration((current) => {
+        const value = current - delta;
 
-      if (value < 0) {
-        return 0;
-      }
+        if (value < 0) {
+          return 0;
+        }
 
-      return value;
-    });
-  }, !isMonsterStaggeredValue);
+        return value;
+      });
+    },
+    stop: !isMonsterStaggeredValue,
+  });
 
   return (
     <LabelledProgressBar

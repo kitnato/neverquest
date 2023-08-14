@@ -39,7 +39,7 @@ export function CriticalRating() {
   useDeltaText({
     atomDelta: deltas("criticalRating"),
     atomValue: criticalRating,
-    stop: (previous) => previous === null || !skillAssassination,
+    stop: ({ previous }) => previous === null || !skillAssassination,
   });
 
   if (!isShowingCriticalRating) {

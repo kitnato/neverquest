@@ -49,7 +49,7 @@ export function Wilderness() {
         <IconDisplay
           contents={
             <span className="fst-italic">
-              {isBossValue ? "A powerful presence waits." : "The darkness stirs."}
+              {isBossValue ? "A powerful presence looms." : "The darkness stirs."}
             </span>
           }
           Icon={IconHiding}

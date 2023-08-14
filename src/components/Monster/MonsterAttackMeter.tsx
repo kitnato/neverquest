@@ -23,8 +23,8 @@ export function MonsterAttackMeter() {
 
   const defend = useDefend();
 
-  useAnimation(
-    (delta) => {
+  useAnimation({
+    callback: (delta) => {
       const value = monsterAttackDurationValue - delta;
 
       if (value <= 0) {
@@ -35,8 +35,8 @@ export function MonsterAttackMeter() {
         setMonsterAttackDuration(value);
       }
     },
-    !isAttackingValue || isMonsterDeadValue || isMonsterStaggeredValue,
-  );
+    stop: !isAttackingValue || isMonsterDeadValue || isMonsterStaggeredValue,
+  });
 
   return (
     <LabelledProgressBar

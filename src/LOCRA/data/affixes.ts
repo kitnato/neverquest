@@ -4593,7 +4593,7 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
-    name: "sombre",
+    name: "somber",
   },
   {
     creature: "prefix",

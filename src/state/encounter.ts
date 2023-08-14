@@ -1,5 +1,6 @@
 import { atom, selector } from "recoil";
 
+import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { Location } from "@neverquest/types/unions";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
@@ -12,7 +13,7 @@ export const isBoss = withStateKey("isBoss", (key) =>
     get: ({ get }) => {
       const stageValue = get(stage);
 
-      return stageValue >= 10 && stageValue % 5 === 0;
+      return stageValue >= BOSS_STAGE_START && stageValue % BOSS_STAGE_INTERVAL === 0;
     },
     key,
   }),

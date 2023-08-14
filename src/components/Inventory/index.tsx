@@ -83,19 +83,15 @@ export function Inventory() {
         {storedItems
           .filter(isGear)
           .sort((a, b) => a.name.localeCompare(b.name))
-          .map((item) => {
-            const { id } = item;
+          .map((item) => (
+            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.id}>
+              <ItemDisplay item={item} />
 
-            return (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-                <ItemDisplay item={item} />
-
-                <Button onClick={() => toggleEquipGear(item)} variant="outline-dark">
-                  Equip
-                </Button>
-              </div>
-            );
-          })}
+              <Button onClick={() => toggleEquipGear(item)} variant="outline-dark">
+                Equip
+              </Button>
+            </div>
+          ))}
 
         {[...storedItems.filter(isTrinket), ...storedItems.filter(isConsumable)]
           .sort((a, b) => a.type.localeCompare(b.type))

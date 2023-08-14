@@ -2,7 +2,7 @@ import { useRecoilCallback } from "recoil";
 
 import { useRegenerateMonster } from "@neverquest/hooks/actions/useRegenerateMonster";
 import { attackDuration, isAttacking } from "@neverquest/state/character";
-import { isStageStarted } from "@neverquest/state/encounter";
+import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMonsterDead, monsterAttackDuration, monsterAttackRate } from "@neverquest/state/monster";
 import { attackRateTotal } from "@neverquest/state/statistics";
@@ -17,6 +17,10 @@ export function useToggleAttack() {
         const get = getSnapshotGetter(snapshot);
 
         const isAttackingValue = get(isAttacking);
+
+        if (get(isStageCompleted) && !isAttackingValue) {
+          return;
+        }
 
         set(isAttacking, !isAttackingValue);
         set(isStageStarted, true);

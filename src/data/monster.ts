@@ -6,6 +6,9 @@ export const BLIGHT = {
   stageRequired: 20,
 };
 
+export const BOSS_STAGE_INTERVAL = 5;
+export const BOSS_STAGE_START = 10;
+
 export const LOOT = {
   bonus: 100,
   boss: 0.66,
@@ -17,13 +20,14 @@ export const LOOT = {
 export const MONSTER_ATTACK_RATE = {
   base: 4700,
   bonus: 200,
-  boss: 0.1,
+  // TODO - revise
+  boss: 0,
   reduction: 4000,
 };
 
 export const MONSTER_DAMAGE = {
   bonus: 60,
-  boss: 0.25,
+  boss: 0.2,
   maximum: 750,
 };
 

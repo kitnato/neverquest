@@ -2,6 +2,8 @@ import { atom, selector } from "recoil";
 
 import {
   BLIGHT,
+  BOSS_STAGE_INTERVAL,
+  BOSS_STAGE_START,
   LOOT,
   MONSTER_ATTACK_RATE,
   MONSTER_DAMAGE,
@@ -159,15 +161,17 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
     get: ({ get }) => {
       const { bonus, boss, coinsBase, essenceBase, scrapBase } = LOOT;
 
+      const isBossValue = get(isBoss);
       const stageValue = get(stage);
       const growthFactor = getGrowthSigmoid(stageValue);
       const progressBonus = getGrowthSigmoid(get(progress)) * bonus;
-      const totalBonus = (1 + get(lootBonus)) * (1 + (get(isBoss) ? boss : 0));
+      const totalBonus = (1 + get(lootBonus)) * (1 + (isBossValue ? boss : 0));
 
       return {
         coins: Math.round((progressBonus + coinsBase * growthFactor) * totalBonus),
         essence: Math.round((progressBonus + essenceBase * growthFactor) * totalBonus),
         scrap: Math.round((progressBonus + scrapBase * growthFactor) * totalBonus),
+        shards: isBossValue ? 1 + (stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL : 0,
       };
     },
     key,
@@ -200,6 +204,14 @@ export const monsterBleedingDuration = withStateKey("monsterBleedingDuration", (
   }),
 );
 
+export const monsterElement = withStateKey("monsterElement", (key) =>
+  atom<HTMLDivElement | null>({
+    default: null,
+    effects: [handleLocalStorage<HTMLDivElement | null>({ key })],
+    key,
+  }),
+);
+
 export const monsterHealth = withStateKey("monsterHealth", (key) =>
   atom({
     default: monsterHealthMaximum,
@@ -220,14 +232,6 @@ export const monsterStaggerDuration = withStateKey("monsterStaggerDuration", (ke
   atom({
     default: 0,
     effects: [handleLocalStorage<number>({ key })],
-    key,
-  }),
-);
-
-export const monsterElement = withStateKey("monsterElement", (key) =>
-  atom<HTMLDivElement | null>({
-    default: null,
-    effects: [handleLocalStorage<HTMLDivElement | null>({ key })],
     key,
   }),
 );

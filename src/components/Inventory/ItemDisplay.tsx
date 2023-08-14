@@ -7,11 +7,18 @@ import { ShieldName } from "@neverquest/components/Inventory/Shield/ShieldName";
 import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
 import { CONSUMABLES, TRINKETS } from "@neverquest/data/inventory";
 import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
+import { ReactComponent as IconShard } from "@neverquest/icons/shard.svg";
 import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
 import { ReactComponent as IconWeapon } from "@neverquest/icons/weapon.svg";
 import type { Item } from "@neverquest/types";
 import type { IconImageDOMProps } from "@neverquest/types/props";
-import { isArmor, isShield, isTrinket, isWeapon } from "@neverquest/types/type-guards";
+import {
+  isArmor,
+  isConsumable,
+  isShield,
+  isTrinket,
+  isWeapon,
+} from "@neverquest/types/type-guards";
 
 export function ItemDisplay({
   iconProps,
@@ -29,6 +36,19 @@ export function ItemDisplay({
         Icon={IconArmor}
         iconProps={iconProps}
         tooltip="Armor"
+      />
+    );
+  }
+
+  if (isConsumable(item)) {
+    const { stack, type } = item;
+
+    return (
+      <IconDisplay
+        contents={<ItemName item={item} placement={overlayPlacement} stack={stack} />}
+        Icon={CONSUMABLES[type].Icon}
+        iconProps={iconProps}
+        tooltip="Consumable"
       />
     );
   }
@@ -66,14 +86,12 @@ export function ItemDisplay({
     );
   }
 
-  const { stack, type } = item;
-
   return (
     <IconDisplay
-      contents={<ItemName item={item} placement={overlayPlacement} stack={stack} />}
-      Icon={CONSUMABLES[type].Icon}
+      contents={<ItemName item={item} placement={overlayPlacement} stack={item.stack} />}
+      Icon={IconShard}
       iconProps={iconProps}
-      tooltip="Consumable"
+      tooltip="Shard"
     />
   );
 }

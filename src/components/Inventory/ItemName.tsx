@@ -3,7 +3,8 @@ import type { Placement } from "react-bootstrap/esm/types";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
-import type { ConsumableItem, TrinketItem } from "@neverquest/types";
+import type { ConsumableItem, ShardItem, TrinketItem } from "@neverquest/types";
+import { isShard } from "@neverquest/types/type-guards";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function ItemName({
@@ -11,12 +12,12 @@ export function ItemName({
   placement,
   stack,
 }: {
-  item: ConsumableItem | TrinketItem;
+  item: ConsumableItem | ShardItem | TrinketItem;
   placement?: Placement;
   stack?: number;
 }) {
   const { description, type, weight } = item;
-  const name = capitalizeAll(type);
+  const name = `${capitalizeAll(type)}${isShard(item) ? " shard" : ""}`;
 
   return (
     <OverlayTrigger

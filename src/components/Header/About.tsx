@@ -38,11 +38,11 @@ export function About() {
         <Modal.Body>
           <ReactMarkdown
             components={HEADERS.reduce(
-              (aggregator, Current) => ({
-                ...aggregator,
-                [Current]: ({ children, node: _, ...props }: HeadingProps) => {
+              (current, Tag) => ({
+                ...current,
+                [Tag]: ({ children, node: _, ...props }: HeadingProps) => {
                   return (
-                    <Current
+                    <Tag
                       id={
                         Array.isArray(children) && typeof children[0] === "string"
                           ? formatSlug(children[0])

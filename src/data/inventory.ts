@@ -26,7 +26,8 @@ import { ReactComponent as IconWeaponStagger } from "@neverquest/icons/weapon-st
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRA/types";
 import type { ConsumableItem, Range, TrinketItem, Weapon } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Showing, Trinket } from "@neverquest/types/unions";
+import type { Consumable, Elemental, Shard, Showing, Trinket } from "@neverquest/types/unions";
+import { TEMPLATE_PATTERN } from "@neverquest/utilities/constants";
 
 export const ARMOR_BASE = {
   coinPrice: 500,
@@ -144,7 +145,20 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
 
 export const ENCUMBRANCE = 3;
 
-export const KNAPSACK_SIZE = 3;
+export const KNAPSACK_SIZE = 2;
+
+export const SHARD_BASE = {
+  coinPrice: 100,
+  descriptionTemplate: `Adds ${TEMPLATE_PATTERN} damage to a weapon.`,
+  weight: 1,
+};
+
+export const SHARDS: Record<Shard, Elemental> = {
+  frozen: "ice",
+  incendiary: "fire",
+  lightning: "electric",
+  toxic: "poison",
+};
 
 export const SHIELD_BASE = {
   coinPrice: 400,

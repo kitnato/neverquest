@@ -18,7 +18,7 @@ import {
 export function useDeltaText({
   atomDelta,
   atomValue,
-  stop = (previous) => previous === null,
+  stop = ({ previous }) => previous === null,
   type = "integer",
 }: {
   atomDelta: RecoilState<DeltaDisplay>;

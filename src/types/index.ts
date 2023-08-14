@@ -1,6 +1,6 @@
 import type { ArmorClass, ShieldClass, WeaponClass, WeaponModality } from "@neverquest/LOCRA/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Showing, Trinket, WeaponGrip } from "@neverquest/types/unions";
+import type { Consumable, Shard, Showing, Trinket, WeaponGrip } from "@neverquest/types/unions";
 
 export type Armor = GearBase & {
   deflection: number;
@@ -42,7 +42,7 @@ export type InventoryMerchant = {
   item: Item;
 }[];
 
-export type Item = ConsumableItem | GearItem | TrinketItem;
+export type Item = ConsumableItem | GearItem | ShardItem | TrinketItem;
 
 type ItemBase = {
   coinPrice: number;
@@ -62,6 +62,12 @@ export type MasteryData = AttributeOrMasteryBaseData & {
 export type Range = {
   maximum: number;
   minimum: number;
+};
+
+export type ShardItem = ItemBase & {
+  description: string;
+  stack: number;
+  type: Shard;
 };
 
 export type Shield = GearBase & {

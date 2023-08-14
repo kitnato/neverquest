@@ -103,9 +103,9 @@ When applying the first shard, the weapon gains 1.93% of its damage as extra ele
 
 The shard types are the following, associated with their corresponding [elemental](#elemental-damage) type:
 
-- Electric (lightning)
 - Frozen (ice)
 - Incendiary (fire)
+- Lightning (electric)
 - Toxic (poison)
 
 #### Traits

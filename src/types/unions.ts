@@ -64,6 +64,8 @@ export type Delta =
   | "stamina"
   | "staminaRegenerationRate";
 
+export type Elemental = "electric" | "fire" | "ice" | "poison";
+
 export type Gear = "armor" | "shield" | "weapon";
 
 export type Location = "caravan" | "wilderness";
@@ -74,6 +76,9 @@ export type Reserve = "health" | "stamina";
 
 export const RESOURCE_TYPES = ["coins", "essence", "scrap"] as const;
 export type Resource = (typeof RESOURCE_TYPES)[number];
+
+export const SHARD_TYPES = ["frozen", "incendiary", "lightning", "toxic"] as const;
+export type Shard = (typeof SHARD_TYPES)[number];
 
 export const SHOWING_TYPES = [
   "armor",
@@ -207,6 +212,7 @@ export type StateKey =
   | "isStaminaAtMaximum"
   | "isWilderness"
   | "itemsAcquired"
+  | "itemsLoot"
   | "level"
   | "location"
   | "lootBonus"

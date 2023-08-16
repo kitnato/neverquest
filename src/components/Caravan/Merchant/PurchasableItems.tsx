@@ -3,10 +3,10 @@ import { Stack } from "react-bootstrap";
 import { PurchaseItem } from "@neverquest/components/Caravan/Merchant/PurchaseItem";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
-import type { Item } from "@neverquest/types";
+import type { InventoryItem } from "@neverquest/types";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 
-export function PurchasableItems({ items }: { items: Item[] }) {
+export function PurchasableItems({ items }: { items: InventoryItem[] }) {
   return (
     <>
       {items.map((item) => {

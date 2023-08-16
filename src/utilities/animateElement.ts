@@ -1,4 +1,4 @@
-import type { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
+import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/utilities/constants";
 
 export function animateElement({
@@ -8,7 +8,7 @@ export function animateElement({
 }: {
   element: HTMLElement | null;
   speed?: AnimationSpeed;
-  type: AnimationType;
+  type: Animation;
 }) {
   if (element === null) {
     return;

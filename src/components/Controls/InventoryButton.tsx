@@ -1,5 +1,5 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { ButtonBadge } from "@neverquest/components/Controls/ButtonBadge";
 import { ItemAcquisition } from "@neverquest/components/Controls/ItemAcquisition";
@@ -9,15 +9,22 @@ import { Inventory } from "@neverquest/components/Inventory";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconInventory } from "@neverquest/icons/knapsack.svg";
 import { isAttacking, isGameOver } from "@neverquest/state/character";
-import { hasKnapsack, isInventoryFull, isInventoryOpen } from "@neverquest/state/inventory";
+import {
+  hasKnapsack,
+  isInventoryFull,
+  isInventoryOpen,
+  notifyOverEncumbrance,
+} from "@neverquest/state/inventory";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function InventoryButton() {
+  const [isInventoryOpenValue, setIsInventoryOpen] = useRecoilState(isInventoryOpen);
+  const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isGameOverValue = useRecoilValue(isGameOver);
   const isInventoryFullValue = useRecoilValue(isInventoryFull);
-  const hasKnapsackValue = useRecoilValue(hasKnapsack);
-  const [isInventoryOpenValue, setIsInventoryOpen] = useRecoilState(isInventoryOpen);
+  const notifyOverEncumbranceValue = useRecoilValue(notifyOverEncumbrance);
+  const resetNotifyEncumbranceValue = useResetRecoilState(notifyOverEncumbrance);
 
   if (!hasKnapsackValue) {
     return null;
@@ -34,7 +41,12 @@ export function InventoryButton() {
           >
             <IconImage Icon={IconInventory} />
 
-            <ButtonBadge Icon={IconEncumbrance} isShowing={isInventoryFullValue} />
+            <ButtonBadge
+              animation={notifyOverEncumbranceValue ? "headShake" : undefined}
+              Icon={IconEncumbrance}
+              isShowing={isInventoryFullValue || notifyOverEncumbranceValue}
+              onAnimationEnd={resetNotifyEncumbranceValue}
+            />
 
             <ItemAcquisition />
           </Button>

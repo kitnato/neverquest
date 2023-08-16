@@ -7,9 +7,10 @@ import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { useForfeitItem } from "@neverquest/hooks/actions/useForfeitItem";
 import { useMerchantTradeItem } from "@neverquest/hooks/actions/useMerchantTradeItem";
+import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { inventory } from "@neverquest/state/inventory";
 import { confirmationWarnings } from "@neverquest/state/settings";
-import type { Item } from "@neverquest/types";
+import type { InventoryItem } from "@neverquest/types";
 import {
   isArmor,
   isConsumable,
@@ -26,13 +27,15 @@ export function SellItems() {
   const inventoryValue = useRecoilValue(inventory);
 
   const [isShowingSellWarning, setShowingSellWarning] = useState(false);
-  const [sellConfirmation, setSellConfirmation] = useState<Item | null>(null);
+  const [sellConfirmation, setSellConfirmation] = useState<InventoryItem | null>(null);
 
   const forfeitItem = useForfeitItem();
   const merchantTradeItem = useMerchantTradeItem();
+  const transactResources = useTransactResources();
 
-  const sellItem = (item: Item) => {
-    forfeitItem(item, "sale");
+  const sellItem = (item: InventoryItem) => {
+    forfeitItem(item);
+    transactResources({ coinsDifference: getSellPrice(item) });
     merchantTradeItem(item, "sale");
     setSellConfirmation(null);
   };
@@ -44,7 +47,13 @@ export function SellItems() {
     (current) => !isGear(current) || (isGear(current) && !current.isEquipped),
   );
 
-  const SellItem = ({ item, showConfirmation }: { item: Item; showConfirmation?: boolean }) => (
+  const SellItem = ({
+    item,
+    showConfirmation,
+  }: {
+    item: InventoryItem;
+    showConfirmation?: boolean;
+  }) => (
     <Stack direction="horizontal" gap={3}>
       <ResourceDisplay tooltip="Value (coins)" type="coins" value={getSellPrice(item)} />
 

@@ -11,22 +11,14 @@ import {
   hasKnapsack,
   inventory,
   itemsAcquired,
+  notifyOverEncumbrance,
   shield,
   weapon,
 } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { autoEquip } from "@neverquest/state/settings";
-import type { Item } from "@neverquest/types";
-import type { ItemAcquisition, ItemAcquisitionResult } from "@neverquest/types/props";
-import {
-  isArmor,
-  isConsumable,
-  isGear,
-  isShard,
-  isShield,
-  isWeapon,
-} from "@neverquest/types/type-guards";
-import type { Consumable } from "@neverquest/types/unions";
+import type { InventoryItem } from "@neverquest/types";
+import { isArmor, isGear, isShield, isStackable, isWeapon } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useAcquireItem() {
@@ -35,84 +27,76 @@ export function useAcquireItem() {
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      (item: Item, type: ItemAcquisition): ItemAcquisitionResult => {
+      (item: InventoryItem): "autoEquip" | "noFit" | "success" => {
         const get = getSnapshotGetter(snapshot);
 
         const inventoryValue = get(inventory);
 
-        let status: ItemAcquisitionResult = "noFit";
+        if (!get(canFit(item.weight))) {
+          set(notifyOverEncumbrance, true);
 
-        const { coinPrice, id, weight } = item;
-
-        if (!get(canFit(weight))) {
-          return status;
+          return "noFit";
         }
 
+        set(itemsAcquired, (current) => [...current, item]);
+
         if (isGear(item)) {
+          set(inventory, (current) => current.concat(item));
+
           if (
             get(autoEquip) &&
             ((get(armor) === ARMOR_NONE && isArmor(item)) ||
               (get(shield) === SHIELD_NONE && isShield(item)) ||
               (get(weapon) === WEAPON_NONE && isWeapon(item)))
           ) {
-            status = "autoEquip";
+            return "autoEquip";
           } else {
-            status = "success";
+            return "success";
+          }
+        }
+
+        const { type } = item;
+
+        if (type === "knapsack") {
+          set(encumbranceMaximum, (current) => current + KNAPSACK_SIZE);
+          set(hasKnapsack, true);
+
+          set(isShowing("weight"), true);
+        } else {
+          if (type === "antique coin") {
+            set(isShowing("lootBonus"), true);
+
+            set(attributes("luck"), (current) => ({ ...current, isUnlocked: true }));
           }
 
-          set(inventory, (current) => current.concat(item));
-        } else {
-          const itemType = isShard(item) ? "shard" : item.type;
+          if (type === "tome of power") {
+            set(isShowing("lootBonusDetails"), true);
+          }
 
-          if (itemType === "knapsack") {
-            set(encumbranceMaximum, (current) => current + KNAPSACK_SIZE);
-            set(hasKnapsack, true);
+          if (isStackable(item)) {
+            const existingStack = inventoryValue.find(
+              (current) => isStackable(current) && current.type === type,
+            );
 
-            set(isShowing("weight"), true);
-          } else {
-            if (itemType === "antique coin") {
-              set(isShowing("lootBonus"), true);
-
-              set(attributes("luck"), (current) => ({ ...current, isUnlocked: true }));
-            }
-
-            if (itemType === "tome of power") {
-              set(isShowing("lootBonusDetails"), true);
-            }
-
-            if (isConsumable(item)) {
-              set(itemsAcquired, (current) => [...current, { key: id, type: type as Consumable }]);
-
-              const existingStack = inventoryValue.find(
-                (current) => isConsumable(current) && current.type === itemType,
+            if (existingStack === undefined) {
+              set(inventory, (current) => current.concat({ ...item, stack: 1 }));
+            } else if (isStackable(existingStack)) {
+              const stackIndex = inventoryValue.findIndex(
+                (current) => isStackable(current) && current.type === type,
               );
 
-              if (existingStack === undefined) {
-                set(inventory, (current) => current.concat({ ...item, stack: 1 }));
-              } else if (isConsumable(existingStack)) {
-                const stackIndex = inventoryValue.findIndex(
-                  (current) => isConsumable(current) && current.type === itemType,
-                );
-
-                set(inventory, (current) => [
-                  ...current.slice(0, stackIndex),
-                  { ...item, stack: existingStack.stack + 1 },
-                  ...current.slice(stackIndex + 1),
-                ]);
-              }
-            } else {
-              set(inventory, (current) => current.concat(item));
+              set(inventory, (current) => [
+                ...current.slice(0, stackIndex),
+                { ...item, stack: existingStack.stack + 1 },
+                ...current.slice(stackIndex + 1),
+              ]);
             }
+          } else {
+            set(inventory, (current) => current.concat(item));
           }
-
-          status = "success";
         }
 
-        if (type === "purchase") {
-          transactResources({ coinsDifference: -coinPrice });
-        }
-
-        return status;
+        return "success";
       },
     [toggleEquipGear, transactResources],
   );

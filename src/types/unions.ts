@@ -68,6 +68,8 @@ export type Elemental = "electric" | "fire" | "ice" | "poison";
 
 export type Gear = "armor" | "shield" | "weapon";
 
+export type Item = Consumable | Gear | Shard | Trinket;
+
 export type Location = "caravan" | "wilderness";
 
 export type Mastery = "cruelty" | "finesse" | "might" | "resilience" | "stability";
@@ -240,6 +242,7 @@ export type StateKey =
   | "monsterPoisonMagnitude"
   | "monsterStaggerDuration"
   | "name"
+  | "notifyOverEncumbrance"
   | "parryAbsorption"
   | "parryChance"
   | "parryDamage"

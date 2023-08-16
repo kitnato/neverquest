@@ -16,25 +16,30 @@ import {
   isArmor,
   isConsumable,
   isGear,
+  isShard,
   isShield,
   isTrinket,
   isWeapon,
 } from "@neverquest/types/type-guards";
-import type { Consumable, Trinket } from "@neverquest/types/unions";
+import type { Consumable, Shard, Trinket } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 
-const ITEM_ACTIONS: Record<Consumable | Trinket, FunctionComponent<{ itemID: string }>> = {
+const ITEM_ACTIONS: Record<Consumable | Shard | Trinket, FunctionComponent<{ itemID: string }>> = {
   antidote: ConsumeAntidote,
   "antique coin": () => null,
   bandages: ConsumeBandages,
   compass: ActivateCompass,
   elixir: ConsumeElixir,
+  frozen: () => null,
   hearthstone: ActivateHearthstone,
+  incendiary: () => null,
   knapsack: () => null,
+  lightning: () => null,
   "monkey paw": () => null,
   salve: ConsumeSalve,
   soulstone: () => null,
   "tome of power": () => null,
+  toxic: () => null,
 };
 
 export function Inventory() {
@@ -93,20 +98,22 @@ export function Inventory() {
             </div>
           ))}
 
-        {[...storedItems.filter(isTrinket), ...storedItems.filter(isConsumable)]
-          .sort((a, b) => a.type.localeCompare(b.type))
-          .map((item) => {
-            const { id, type } = item;
-            const ItemAction = ITEM_ACTIONS[type];
+        {[
+          ...storedItems.filter(isTrinket).sort((a, b) => a.type.localeCompare(b.type)),
+          ...storedItems.filter(isConsumable).sort((a, b) => a.type.localeCompare(b.type)),
+          ...storedItems.filter(isShard).sort((a, b) => a.type.localeCompare(b.type)),
+        ].map((item) => {
+          const { id, type } = item;
+          const ItemAction = ITEM_ACTIONS[type];
 
-            return (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-                <ItemDisplay item={item} />
+          return (
+            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
+              <ItemDisplay item={item} />
 
-                <ItemAction itemID={id} />
-              </div>
-            );
-          })}
+              <ItemAction itemID={id} />
+            </div>
+          );
+        })}
       </Stack>
     </Stack>
   );

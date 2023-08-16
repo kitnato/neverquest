@@ -1,7 +1,7 @@
 import type { RecoilValue, Snapshot } from "recoil";
 
 import type { Range } from "@neverquest/types";
-import type { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
+import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/utilities/constants";
 
 export function getAnimationClass({
@@ -11,7 +11,7 @@ export function getAnimationClass({
 }: {
   isInfinite?: boolean;
   speed?: AnimationSpeed;
-  type: AnimationType;
+  type: Animation;
 }) {
   return `${CLASS_ANIMATED} ${CLASS_ANIMATE_PREFIX}${type}${
     isInfinite ? ` ${CLASS_ANIMATE_PREFIX}infinite` : ""

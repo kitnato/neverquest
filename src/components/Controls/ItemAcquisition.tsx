@@ -1,48 +1,73 @@
 import { useRecoilState } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { ReactComponent as IconAntidote } from "@neverquest/icons/antidote.svg";
+import { CONSUMABLES, TRINKETS } from "@neverquest/data/inventory";
 import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
-import { ReactComponent as IconBandages } from "@neverquest/icons/bandages.svg";
-import { ReactComponent as IconElixir } from "@neverquest/icons/elixir.svg";
-import { ReactComponent as IconSalve } from "@neverquest/icons/salve.svg";
+import { ReactComponent as IconShard } from "@neverquest/icons/shard.svg";
 import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
-import { ReactComponent as IconSoulstone } from "@neverquest/icons/soulstone.svg";
+import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { ReactComponent as IconWeapon } from "@neverquest/icons/weapon.svg";
 import { itemsAcquired } from "@neverquest/state/inventory";
-import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Gear } from "@neverquest/types/unions";
+import {
+  isArmor,
+  isConsumable,
+  isShard,
+  isShield,
+  isTrinket,
+  isWeapon,
+} from "@neverquest/types/type-guards";
 import { getAnimationClass } from "@neverquest/utilities/getters";
-
-const ICONS: Record<Consumable | Gear, SVGIcon> = {
-  antidote: IconAntidote,
-  armor: IconArmor,
-  bandages: IconBandages,
-  elixir: IconElixir,
-  salve: IconSalve,
-  shield: IconShield,
-  soulstone: IconSoulstone,
-  weapon: IconWeapon,
-};
 
 export function ItemAcquisition() {
   const [itemsAcquiredValue, setItemsAcquired] = useRecoilState(itemsAcquired);
 
-  const handleAnimationEnd = (id: string) => () =>
-    setItemsAcquired((current) => current.filter(({ key }) => key !== id));
+  const handleAnimationEnd = (key: string) => () =>
+    setItemsAcquired((current) => current.filter(({ id }) => key !== id));
 
   if (itemsAcquiredValue.length === 0) {
     return null;
   }
 
-  return itemsAcquiredValue.map(({ key, type }) => (
-    <div
-      className={`position-absolute ${getAnimationClass({ speed: "slower", type: "zoomOut" })}`}
-      key={key}
-      onAnimationEnd={handleAnimationEnd(key)}
-      style={{ left: -12, top: 12 }}
-    >
-      <IconImage Icon={ICONS[type]} size="small" />
-    </div>
-  ));
+  return itemsAcquiredValue.map((item) => {
+    const { id } = item;
+
+    const Icon = (() => {
+      if (isArmor(item)) {
+        return IconArmor;
+      }
+
+      if (isConsumable(item)) {
+        return CONSUMABLES[item.type].Icon;
+      }
+
+      if (isShard(item)) {
+        return IconShard;
+      }
+
+      if (isShield(item)) {
+        return IconShield;
+      }
+
+      if (isTrinket(item)) {
+        return TRINKETS[item.type].Icon;
+      }
+
+      if (isWeapon(item)) {
+        return IconWeapon;
+      }
+
+      return IconUnknown;
+    })();
+
+    return (
+      <div
+        className={`position-absolute ${getAnimationClass({ speed: "slower", type: "zoomOut" })}`}
+        key={id}
+        onAnimationEnd={handleAnimationEnd(id)}
+        style={{ left: -12, top: 12 }}
+      >
+        <IconImage Icon={Icon} size="small" />
+      </div>
+    );
+  });
 }

@@ -3,10 +3,9 @@ import { useRecoilCallback } from "recoil";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { inventory } from "@neverquest/state/inventory";
-import type { Item } from "@neverquest/types";
-import type { ItemForfeiture } from "@neverquest/types/props";
-import { isConsumable } from "@neverquest/types/type-guards";
-import { getSellPrice, getSnapshotGetter } from "@neverquest/utilities/getters";
+import type { InventoryItem } from "@neverquest/types";
+import { isStackable } from "@neverquest/types/type-guards";
+import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useForfeitItem() {
   const toggleEquipGear = useToggleEquipGear();
@@ -14,21 +13,21 @@ export function useForfeitItem() {
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      (item: Item, type: ItemForfeiture) => {
+      (item: InventoryItem) => {
         const get = getSnapshotGetter(snapshot);
 
         const inventoryValue = get(inventory);
 
         const { id } = item;
 
-        if (isConsumable(item)) {
+        if (isStackable(item)) {
           const { stack, type } = item;
 
           if (stack === 1) {
             set(inventory, (current) => current.filter((current) => current.id !== id));
           } else {
             const stackIndex = inventoryValue.findIndex(
-              (current) => isConsumable(current) && current.type === type,
+              (current) => isStackable(current) && current.type === type,
             );
 
             set(inventory, (current) => [
@@ -39,10 +38,6 @@ export function useForfeitItem() {
           }
         } else {
           set(inventory, (current) => current.filter((current) => current.id !== id));
-        }
-
-        if (type === "sale") {
-          transactResources({ coinsDifference: getSellPrice(item) });
         }
       },
     [toggleEquipGear, transactResources],

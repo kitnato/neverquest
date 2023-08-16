@@ -1,13 +1,13 @@
 import { atom, selector } from "recoil";
 
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import type { Item } from "@neverquest/types";
+import type { InventoryItem } from "@neverquest/types";
 
 // SELECTORS
 
 export const hasLooted = withStateKey("hasLooted", (key) =>
   selector({
-    get: ({ get }) => get(essenceLoot) === 0 && get(coinsLoot) === 0 && get(scrapLoot) === 0,
+    get: ({ get }) => get(coinsLoot) === 0 && get(essenceLoot) === 0 && get(scrapLoot) === 0,
     key,
   }),
 );
@@ -49,7 +49,7 @@ export const coinsLoot = withStateKey("coinsLoot", (key) =>
 export const itemsLoot = withStateKey("itemsLoot", (key) =>
   atom({
     default: [],
-    effects: [handleLocalStorage<Item[]>({ key })],
+    effects: [handleLocalStorage<InventoryItem[]>({ key })],
     key,
   }),
 );

@@ -21,14 +21,6 @@ export type IconImageProps = {
 
 export type IconImageDOMProps = Omit<IconImageProps, "Icon">;
 
-export type ItemAcquisitionResult = "autoEquip" | "noFit" | "success";
-
-export type ItemAcquisition = "donation" | "purchase";
-
-export type ItemForfeiture = "consumption" | "sale";
-
-export type ItemTrade = "purchase" | "sale";
-
 export type ResourceTransaction = Partial<{
   coinsDifference: number;
   essenceDifference: number;

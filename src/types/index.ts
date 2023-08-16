@@ -25,24 +25,17 @@ type AttributeOrMasteryBaseData = UnlockedState & {
   increment: number;
 };
 
-export type ConsumableItem = ItemBase & {
-  description: string;
-  stack: number;
-  type: Consumable;
-};
-
-export type InventoryBlacksmith = {
+export type BlacksmithInventory = {
   armor: Armor | null;
   shield: Shield | null;
   weapon: Weapon | null;
 };
 
-export type InventoryMerchant = {
-  isReturned: boolean;
-  item: Item;
-}[];
+export type ConsumableItem = StackableItem & {
+  type: Consumable;
+};
 
-export type Item = ConsumableItem | GearItem | ShardItem | TrinketItem;
+export type InventoryItem = ConsumableItem | GearItem | ShardItem | TrinketItem;
 
 type ItemBase = {
   coinPrice: number;
@@ -59,14 +52,17 @@ export type MasteryData = AttributeOrMasteryBaseData & {
   maximum: number;
 };
 
+export type MerchantInventory = {
+  isReturned: boolean;
+  item: InventoryItem;
+}[];
+
 export type Range = {
   maximum: number;
   minimum: number;
 };
 
-export type ShardItem = ItemBase & {
-  description: string;
-  stack: number;
+export type ShardItem = StackableItem & {
   type: Shard;
 };
 
@@ -78,6 +74,12 @@ export type Shield = GearBase & {
   };
   stagger: number;
   staminaCost: number;
+};
+
+export type StackableItem = ItemBase & {
+  description: string;
+  stack: number;
+  type: Consumable | Shard;
 };
 
 export type TrinketItem = ItemBase & {

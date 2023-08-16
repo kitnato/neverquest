@@ -22,7 +22,7 @@ export function LootDisplay() {
       {progressValue > 0 && (
         <Card className={getAnimationClass({ type: "flipInX" })}>
           <Card.Body>
-            {hasLootedValue ? (
+            {hasLootedValue && itemsLootValue.length === 0 ? (
               <IconDisplay
                 contents={<span className="fst-italic">Nothing remains.</span>}
                 Icon={IconLooted}
@@ -31,19 +31,21 @@ export function LootDisplay() {
               />
             ) : (
               <Stack gap={3}>
-                <Row>
-                  <Col>
-                    <Loot type="essence" />
-                  </Col>
+                {!hasLootedValue && (
+                  <Row>
+                    <Col>
+                      <Loot type="essence" />
+                    </Col>
 
-                  <Col>
-                    <Loot type="scrap" />
-                  </Col>
+                    <Col>
+                      <Loot type="scrap" />
+                    </Col>
 
-                  <Col>
-                    <Loot type="coins" />
-                  </Col>
-                </Row>
+                    <Col>
+                      <Loot type="coins" />
+                    </Col>
+                  </Row>
+                )}
 
                 {itemsLootValue.map((item) => (
                   <ItemDisplay item={item} key={item.id} />

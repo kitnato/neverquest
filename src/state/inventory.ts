@@ -2,7 +2,7 @@ import { atom, selector, selectorFamily } from "recoil";
 
 import { ARMOR_NONE, ENCUMBRANCE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import type { Armor, Item, Shield, Weapon } from "@neverquest/types";
+import type { Armor, InventoryItem, Shield, Weapon } from "@neverquest/types";
 import {
   isArmor,
   isConsumable,
@@ -10,7 +10,7 @@ import {
   isTrinket,
   isWeapon,
 } from "@neverquest/types/type-guards";
-import type { Consumable, Gear, Trinket } from "@neverquest/types/unions";
+import type { Consumable, Trinket } from "@neverquest/types/unions";
 
 // SELECTORS
 
@@ -121,14 +121,6 @@ export const weapon = withStateKey("weapon", (key) =>
 
 // ATOMS
 
-export const itemsAcquired = withStateKey("itemsAcquired", (key) =>
-  atom({
-    default: [],
-    effects: [handleLocalStorage<{ key: string; type: Consumable | Gear }[]>({ key })],
-    key,
-  }),
-);
-
 export const encumbranceMaximum = withStateKey("encumbranceMaximum", (key) =>
   atom({
     default: ENCUMBRANCE,
@@ -146,14 +138,30 @@ export const hasKnapsack = withStateKey("hasKnapsack", (key) =>
 );
 
 export const inventory = withStateKey("inventory", (key) =>
-  atom<Item[]>({
+  atom<InventoryItem[]>({
     default: [],
-    effects: [handleLocalStorage<Item[]>({ key })],
+    effects: [handleLocalStorage<InventoryItem[]>({ key })],
     key,
   }),
 );
 
 export const isInventoryOpen = withStateKey("isInventoryOpen", (key) =>
+  atom({
+    default: false,
+    effects: [handleLocalStorage<boolean>({ key })],
+    key,
+  }),
+);
+
+export const itemsAcquired = withStateKey("itemsAcquired", (key) =>
+  atom({
+    default: [],
+    effects: [handleLocalStorage<InventoryItem[]>({ key })],
+    key,
+  }),
+);
+
+export const notifyOverEncumbrance = withStateKey("notifyOverEncumbrance", (key) =>
   atom({
     default: false,
     effects: [handleLocalStorage<boolean>({ key })],

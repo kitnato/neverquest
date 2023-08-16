@@ -2,21 +2,22 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
+import { useCollectLoot } from "@neverquest/hooks/actions/useCollectLoot";
 import { ReactComponent as IconLoot } from "@neverquest/icons/loot.svg";
 import { isGameOver } from "@neverquest/state/character";
 import { isStageCompleted } from "@neverquest/state/encounter";
-import { hasLooted } from "@neverquest/state/resources";
+import { hasLooted, itemsLoot } from "@neverquest/state/resources";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function CollectLootButton() {
-  const isGameOverValue = useRecoilValue(isGameOver);
   const hasLootedValue = useRecoilValue(hasLooted);
+  const isGameOverValue = useRecoilValue(isGameOver);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
+  const itemsLootValue = useRecoilValue(itemsLoot);
 
-  const transactResources = useTransactResources();
+  const gatherLoot = useCollectLoot();
 
-  if (hasLootedValue || !isStageCompletedValue) {
+  if ((hasLootedValue && itemsLootValue.length === 0) || !isStageCompletedValue) {
     return null;
   }
 
@@ -24,9 +25,13 @@ export function CollectLootButton() {
     <OverlayTrigger overlay={<Tooltip>Collect loot</Tooltip>}>
       <span className={getAnimationClass({ type: "bounceIn" })}>
         <Button
-          className={`${getAnimationClass({ isInfinite: true, type: "pulse" })}`}
+          className={
+            !hasLootedValue
+              ? `${getAnimationClass({ isInfinite: true, type: "pulse" })}`
+              : undefined
+          }
           disabled={isGameOverValue}
-          onClick={() => transactResources({})}
+          onClick={gatherLoot}
           variant="outline-dark"
         >
           <IconImage Icon={IconLoot} />

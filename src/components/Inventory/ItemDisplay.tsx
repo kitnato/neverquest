@@ -10,7 +10,7 @@ import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
 import { ReactComponent as IconShard } from "@neverquest/icons/shard.svg";
 import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
 import { ReactComponent as IconWeapon } from "@neverquest/icons/weapon.svg";
-import type { Item } from "@neverquest/types";
+import type { InventoryItem } from "@neverquest/types";
 import type { IconImageDOMProps } from "@neverquest/types/props";
 import {
   isArmor,
@@ -26,7 +26,7 @@ export function ItemDisplay({
   overlayPlacement,
 }: {
   iconProps?: IconImageDOMProps;
-  item: Item;
+  item: InventoryItem;
   overlayPlacement?: Placement;
 }) {
   if (isArmor(item)) {

@@ -137,6 +137,7 @@ export type Skill = (typeof SKILL_TYPES)[number];
 
 export type StateKey =
   | "allowNSFW"
+  | "appliedShards"
   | "areAttributesIncreasable"
   | "armor"
   | "attackDuration"
@@ -153,6 +154,7 @@ export type StateKey =
   | "blight"
   | "blightIncrement"
   | "block"
+  | "canApplyShard"
   | "canAttackOrParry"
   | "canBlock"
   | "canDodge"

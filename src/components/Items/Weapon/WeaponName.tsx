@@ -4,10 +4,10 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconImage } from "@neverquest/components/IconImage";
-import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
-import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
-import { StaminaCostDetail } from "@neverquest/components/Inventory/StaminaCostDetail";
-import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
+import { GearComparison } from "@neverquest/components/Items/GearComparison";
+import { GearLevelDetail } from "@neverquest/components/Items/GearLevelDetail";
+import { StaminaCostDetail } from "@neverquest/components/Items/StaminaCostDetail";
+import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
 import { type WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
 import { ReactComponent as IconWeaponDamagePerSecond } from "@neverquest/icons/weapon-damage-per-second.svg";

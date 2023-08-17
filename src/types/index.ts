@@ -31,7 +31,8 @@ export type BlacksmithInventory = {
   weapon: Weapon | null;
 };
 
-export type ConsumableItem = StackableItem & {
+export type ConsumableItem = ItemBase & {
+  description: string;
   type: Consumable;
 };
 
@@ -62,7 +63,8 @@ export type Range = {
   minimum: number;
 };
 
-export type ShardItem = StackableItem & {
+export type ShardItem = ItemBase & {
+  description: string;
   type: Shard;
 };
 
@@ -74,12 +76,6 @@ export type Shield = GearBase & {
   };
   stagger: number;
   staminaCost: number;
-};
-
-export type StackableItem = ItemBase & {
-  description: string;
-  stack: number;
-  type: Consumable | Shard;
 };
 
 export type TrinketItem = ItemBase & {
@@ -103,5 +99,6 @@ export type Weapon = GearBase & {
     rate: Range;
   };
   rate: number;
+  shards: ShardItem[];
   staminaCost: number;
 };

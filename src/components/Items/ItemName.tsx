@@ -2,7 +2,7 @@ import { OverlayTrigger, Popover } from "react-bootstrap";
 import type { Placement } from "react-bootstrap/esm/types";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
+import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
 import type { ConsumableItem, ShardItem, TrinketItem } from "@neverquest/types";
 import { isShard } from "@neverquest/types/type-guards";
 import { capitalizeAll } from "@neverquest/utilities/formatters";

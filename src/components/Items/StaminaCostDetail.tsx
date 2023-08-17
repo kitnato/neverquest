@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
+import { GearComparison } from "@neverquest/components/Items/GearComparison";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import type { ComparisonProps } from "@neverquest/types/props";

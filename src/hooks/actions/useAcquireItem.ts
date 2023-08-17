@@ -18,7 +18,7 @@ import {
 import { isShowing } from "@neverquest/state/isShowing";
 import { autoEquip } from "@neverquest/state/settings";
 import type { InventoryItem } from "@neverquest/types";
-import { isArmor, isGear, isShield, isStackable, isWeapon } from "@neverquest/types/type-guards";
+import { isArmor, isGear, isShield, isWeapon } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useAcquireItem() {
@@ -29,8 +29,6 @@ export function useAcquireItem() {
     ({ set, snapshot }) =>
       (item: InventoryItem): "autoEquip" | "noFit" | "success" => {
         const get = getSnapshotGetter(snapshot);
-
-        const inventoryValue = get(inventory);
 
         if (!get(canFit(item.weight))) {
           set(notifyOverEncumbrance, true);
@@ -73,27 +71,7 @@ export function useAcquireItem() {
             set(isShowing("lootBonusDetails"), true);
           }
 
-          if (isStackable(item)) {
-            const existingStack = inventoryValue.find(
-              (current) => isStackable(current) && current.type === type,
-            );
-
-            if (existingStack === undefined) {
-              set(inventory, (current) => current.concat({ ...item, stack: 1 }));
-            } else if (isStackable(existingStack)) {
-              const stackIndex = inventoryValue.findIndex(
-                (current) => isStackable(current) && current.type === type,
-              );
-
-              set(inventory, (current) => [
-                ...current.slice(0, stackIndex),
-                { ...item, stack: existingStack.stack + 1 },
-                ...current.slice(stackIndex + 1),
-              ]);
-            }
-          } else {
-            set(inventory, (current) => current.concat(item));
-          }
+          set(inventory, (current) => current.concat(item));
         }
 
         return "success";

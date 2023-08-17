@@ -4,7 +4,6 @@ import type {
   GearItem,
   ShardItem,
   Shield,
-  StackableItem,
   TrinketItem,
   Weapon,
 } from "@neverquest/types";
@@ -34,8 +33,8 @@ export function isShield(gear: unknown): gear is Shield {
   return isObject(gear) && gear.block !== undefined;
 }
 
-export function isStackable(stackable: unknown): stackable is StackableItem {
-  return isObject(stackable) && stackable.stack !== undefined;
+export function isStackable(stackable: unknown): stackable is ConsumableItem | ShardItem {
+  return isConsumable(stackable) || isShard(stackable);
 }
 
 export function isTrinket(trinket: unknown): trinket is TrinketItem {

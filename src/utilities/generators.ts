@@ -202,6 +202,7 @@ export function generateWeapon({
     ranges,
     rate: getFromRange(ranges.rate),
     scrapPrice: Math.round(scrapPrice * growthFactor),
+    shards: [],
     staminaCost: Math.ceil(staminaCost * growthFactor),
     weight: Math.ceil(weight * growthFactor),
   };

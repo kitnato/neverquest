@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 
 import { PurchaseItem } from "@neverquest/components/Caravan/Merchant/PurchaseItem";
-import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
+import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
 import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import type { InventoryItem } from "@neverquest/types";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";

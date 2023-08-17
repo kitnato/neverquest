@@ -4,8 +4,9 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useHeal } from "@neverquest/hooks/actions/useHeal";
 import { inventory } from "@neverquest/state/inventory";
 import { isHealthAtMaximum } from "@neverquest/state/reserves";
+import type { ConsumableItem } from "@neverquest/types";
 
-export function ConsumeBandages({ itemID }: { itemID: string }) {
+export function ConsumeBandages({ consumable }: { consumable: ConsumableItem }) {
   const isHealthAtMaximumValue = useRecoilValue(isHealthAtMaximum);
   const setInventory = useSetRecoilState(inventory);
 
@@ -14,7 +15,7 @@ export function ConsumeBandages({ itemID }: { itemID: string }) {
   const apply = () => {
     heal();
 
-    setInventory((current) => current.filter(({ id }) => itemID !== id));
+    setInventory((current) => current.filter((current) => current.id !== consumable.id));
   };
 
   return (

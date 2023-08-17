@@ -38,10 +38,8 @@ export const MONSTER_HEALTH = {
 };
 
 export const MONSTER_NAME = {
-  prefixBase: 0.65,
-  prefixFactor: 0.35,
-  suffixBase: 0.05,
-  suffixFactor: 0.75,
+  prefix: 0.75,
+  suffix: 0.05,
 };
 
 export const POISON = {

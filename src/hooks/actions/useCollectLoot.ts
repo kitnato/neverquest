@@ -2,6 +2,7 @@ import { useRecoilCallback } from "recoil";
 
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
+import { isShowing } from "@neverquest/state/isShowing";
 import { coinsLoot, essenceLoot, itemsLoot, scrapLoot } from "@neverquest/state/resources";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -21,6 +22,8 @@ export function useCollectLoot() {
           essenceDifference: get(essenceLoot),
           scrapDifference: get(scrapLoot),
         });
+
+        set(isShowing("attributesButton"), true);
 
         reset(coinsLoot);
         reset(essenceLoot);

@@ -96,7 +96,6 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         coinPrice: 15,
         description: "Cures poison.",
-        stack: Infinity,
         type: "antidote",
         weight: 1,
       },
@@ -106,7 +105,6 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         coinPrice: 10,
         description: "Restores all health.",
-        stack: Infinity,
         type: "bandages",
         weight: 1,
       },
@@ -116,7 +114,6 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         coinPrice: 8,
         description: "Restores all stamina.",
-        stack: Infinity,
         type: "elixir",
         weight: 1,
       },
@@ -126,7 +123,6 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         coinPrice: 25,
         description: "Cures blight.",
-        stack: Infinity,
         type: "salve",
         weight: 2,
       },
@@ -136,7 +132,6 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         coinPrice: 100,
         description: "Resurrects the carrier upon death.",
-        stack: Infinity,
         type: "soulstone",
         weight: 5,
       },
@@ -145,13 +140,15 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
 
 export const ENCUMBRANCE = 3;
 
-export const KNAPSACK_SIZE = 2;
+export const KNAPSACK_SIZE = 3;
 
 export const SHARD_BASE = {
   coinPrice: 100,
   descriptionTemplate: `Adds ${TEMPLATE_PATTERN} damage to a weapon.`,
   weight: 1,
 };
+
+export const SHARD_MAXIMUM = 7;
 
 export const SHARDS: Record<Shard, Elemental> = {
   frozen: "ice",
@@ -308,6 +305,7 @@ export const WEAPON_NONE: Omit<Weapon, "coinPrice" | "isEquipped" | "ranges" | "
   modality: "melee",
   name: "Unarmed",
   rate: 2500,
+  shards: [],
   staminaCost: 0,
   weight: 0,
 };

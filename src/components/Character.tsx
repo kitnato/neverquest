@@ -1,6 +1,6 @@
 import { Stack } from "react-bootstrap";
 
-import { Gear } from "@neverquest/components/Inventory/Gear";
+import { Gear } from "@neverquest/components/Items/Gear";
 import { Resources } from "@neverquest/components/Resources";
 import { Statistics } from "@neverquest/components/Statistics";
 import { Status } from "@neverquest/components/Status";

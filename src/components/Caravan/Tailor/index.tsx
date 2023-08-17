@@ -2,7 +2,7 @@ import { Stack } from "react-bootstrap";
 
 import { ExpandInventory } from "@neverquest/components/Caravan/Tailor/ExpandInventory";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
+import { Encumbrance } from "@neverquest/components/Items/Encumbrance";
 import { ReactComponent as IconTailoring } from "@neverquest/icons/tailoring.svg";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 

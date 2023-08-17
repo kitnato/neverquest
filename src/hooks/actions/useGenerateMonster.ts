@@ -15,7 +15,7 @@ import { allowNSFW } from "@neverquest/state/settings";
 import { getGrowthSigmoid, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useGenerateMonster() {
-  const { prefixBase, prefixFactor, suffixBase, suffixFactor } = MONSTER_NAME;
+  const { prefix, suffix } = MONSTER_NAME;
 
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
@@ -28,8 +28,8 @@ export function useGenerateMonster() {
           monsterName,
           LOCRA.generateCreature({
             allowNSFW: get(allowNSFW),
-            hasPrefix: Math.random() <= prefixBase + prefixFactor * growthFactor,
-            hasSuffix: Math.random() <= suffixBase + suffixFactor * growthFactor,
+            hasPrefix: Math.random() <= prefix + (1 - prefix) * growthFactor,
+            hasSuffix: Math.random() <= suffix + (1 - suffix) * growthFactor,
             type: ["human", "monster"],
           }),
         );

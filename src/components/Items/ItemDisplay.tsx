@@ -1,10 +1,10 @@
 import type { Placement } from "react-bootstrap/esm/types";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ArmorName } from "@neverquest/components/Inventory/Armor/ArmorName";
-import { ItemName } from "@neverquest/components/Inventory/ItemName";
-import { ShieldName } from "@neverquest/components/Inventory/Shield/ShieldName";
-import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
+import { ArmorName } from "@neverquest/components/Items/Armor/ArmorName";
+import { ItemName } from "@neverquest/components/Items/ItemName";
+import { ShieldName } from "@neverquest/components/Items/Shield/ShieldName";
+import { WeaponName } from "@neverquest/components/Items/Weapon/WeaponName";
 import { CONSUMABLES, TRINKETS } from "@neverquest/data/inventory";
 import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
 import { ReactComponent as IconShard } from "@neverquest/icons/shard.svg";
@@ -24,10 +24,12 @@ export function ItemDisplay({
   iconProps,
   item,
   overlayPlacement,
+  stack,
 }: {
   iconProps?: IconImageDOMProps;
   item: InventoryItem;
   overlayPlacement?: Placement;
+  stack?: number;
 }) {
   if (isArmor(item)) {
     return (
@@ -41,7 +43,7 @@ export function ItemDisplay({
   }
 
   if (isConsumable(item)) {
-    const { stack, type } = item;
+    const { type } = item;
 
     return (
       <IconDisplay
@@ -88,7 +90,7 @@ export function ItemDisplay({
 
   return (
     <IconDisplay
-      contents={<ItemName item={item} placement={overlayPlacement} stack={item.stack} />}
+      contents={<ItemName item={item} placement={overlayPlacement} stack={stack} />}
       Icon={IconShard}
       iconProps={iconProps}
       tooltip="Shard"

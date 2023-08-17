@@ -1,6 +1,12 @@
 import { atom, selector, selectorFamily } from "recoil";
 
-import { ARMOR_NONE, ENCUMBRANCE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
+import {
+  ARMOR_NONE,
+  ENCUMBRANCE,
+  SHARD_MAXIMUM,
+  SHIELD_NONE,
+  WEAPON_NONE,
+} from "@neverquest/data/inventory";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { Armor, InventoryItem, Shield, Weapon } from "@neverquest/types";
 import {
@@ -31,6 +37,13 @@ export const armor = withStateKey("armor", (key) =>
 
       return equippedArmor as Armor;
     },
+    key,
+  }),
+);
+
+export const canApplyShard = withStateKey("canApplyShard", (key) =>
+  selector({
+    get: ({ get }) => get(weapon).shards.length < SHARD_MAXIMUM,
     key,
   }),
 );

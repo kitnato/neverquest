@@ -1,15 +1,15 @@
-import type { FunctionComponent } from "react";
 import { Button, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { ConsumeAntidote } from "@neverquest/components/Inventory/Consumable/ConsumeAntidote";
-import { ConsumeBandages } from "@neverquest/components/Inventory/Consumable/ConsumeBandages";
-import { ConsumeElixir } from "@neverquest/components/Inventory/Consumable/ConsumeElixir";
-import { ConsumeSalve } from "@neverquest/components/Inventory/Consumable/ConsumeSalve";
-import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
-import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
-import { ActivateCompass } from "@neverquest/components/Inventory/Trinket/ActivateCompass";
-import { ActivateHearthstone } from "@neverquest/components/Inventory/Trinket/ActivateHearthstone";
+import { ApplyShard } from "@neverquest/components/Items/ApplyShard";
+import { ConsumeAntidote } from "@neverquest/components/Items/Consumable/ConsumeAntidote";
+import { ConsumeBandages } from "@neverquest/components/Items/Consumable/ConsumeBandages";
+import { ConsumeElixir } from "@neverquest/components/Items/Consumable/ConsumeElixir";
+import { ConsumeSalve } from "@neverquest/components/Items/Consumable/ConsumeSalve";
+import { Encumbrance } from "@neverquest/components/Items/Encumbrance";
+import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
+import { ActivateCompass } from "@neverquest/components/Items/Trinket/ActivateCompass";
+import { ActivateHearthstone } from "@neverquest/components/Items/Trinket/ActivateHearthstone";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { inventory } from "@neverquest/state/inventory";
 import {
@@ -21,26 +21,7 @@ import {
   isTrinket,
   isWeapon,
 } from "@neverquest/types/type-guards";
-import type { Consumable, Shard, Trinket } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
-
-const ITEM_ACTIONS: Record<Consumable | Shard | Trinket, FunctionComponent<{ itemID: string }>> = {
-  antidote: ConsumeAntidote,
-  "antique coin": () => null,
-  bandages: ConsumeBandages,
-  compass: ActivateCompass,
-  elixir: ConsumeElixir,
-  frozen: () => null,
-  hearthstone: ActivateHearthstone,
-  incendiary: () => null,
-  knapsack: () => null,
-  lightning: () => null,
-  "monkey paw": () => null,
-  salve: ConsumeSalve,
-  soulstone: () => null,
-  "tome of power": () => null,
-  toxic: () => null,
-};
 
 export function Inventory() {
   const inventoryValue = useRecoilValue(inventory);
@@ -99,18 +80,53 @@ export function Inventory() {
           ))}
 
         {[
-          ...storedItems.filter(isTrinket).sort((a, b) => a.type.localeCompare(b.type)),
           ...storedItems.filter(isConsumable).sort((a, b) => a.type.localeCompare(b.type)),
+          ...storedItems.filter(isTrinket).sort((a, b) => a.type.localeCompare(b.type)),
           ...storedItems.filter(isShard).sort((a, b) => a.type.localeCompare(b.type)),
         ].map((item) => {
           const { id, type } = item;
-          const ItemAction = ITEM_ACTIONS[type];
+
+          const action = (() => {
+            if (isConsumable(item)) {
+              switch (type) {
+                case "antidote": {
+                  return <ConsumeAntidote consumable={item} />;
+                }
+                case "bandages": {
+                  return <ConsumeBandages consumable={item} />;
+                }
+                case "elixir": {
+                  return <ConsumeElixir consumable={item} />;
+                }
+                case "salve": {
+                  return <ConsumeSalve consumable={item} />;
+                }
+              }
+            }
+
+            if (isTrinket(item)) {
+              switch (type) {
+                case "compass": {
+                  return <ActivateCompass />;
+                }
+                case "hearthstone": {
+                  return <ActivateHearthstone />;
+                }
+              }
+            }
+
+            if (isShard(item)) {
+              return <ApplyShard shard={item} />;
+            }
+
+            return null;
+          })();
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
               <ItemDisplay item={item} />
 
-              <ItemAction itemID={id} />
+              {action}
             </div>
           );
         })}

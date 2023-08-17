@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Button, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
-import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
+import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
 import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
-import { useForfeitItem } from "@neverquest/hooks/actions/useForfeitItem";
 import { useMerchantTradeItem } from "@neverquest/hooks/actions/useMerchantTradeItem";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { inventory } from "@neverquest/state/inventory";
@@ -23,20 +22,20 @@ import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { getSellPrice } from "@neverquest/utilities/getters";
 
 export function SellItems() {
+  const [inventoryValue, setInventory] = useRecoilState(inventory);
   const confirmationWarningsValue = useRecoilValue(confirmationWarnings);
-  const inventoryValue = useRecoilValue(inventory);
 
   const [isShowingSellWarning, setShowingSellWarning] = useState(false);
   const [sellConfirmation, setSellConfirmation] = useState<InventoryItem | null>(null);
 
-  const forfeitItem = useForfeitItem();
   const merchantTradeItem = useMerchantTradeItem();
   const transactResources = useTransactResources();
 
   const sellItem = (item: InventoryItem) => {
-    forfeitItem(item);
     transactResources({ coinsDifference: getSellPrice(item) });
     merchantTradeItem(item, "sale");
+
+    setInventory((current) => current.filter((current) => current.id !== item.id));
     setSellConfirmation(null);
   };
 

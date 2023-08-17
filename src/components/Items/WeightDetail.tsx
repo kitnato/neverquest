@@ -13,9 +13,11 @@ import {
 
 export function WeightDetail({
   comparison = null,
+  stack,
   weight,
 }: {
   comparison?: ComparisonProps;
+  stack?: number;
   weight: number;
 }) {
   const isShowingWeight = useRecoilValue(isShowing("weight"));
@@ -36,6 +38,7 @@ export function WeightDetail({
                 showingType={comparison.showingType}
               />
             )}
+            {stack !== undefined && stack > 1 && <>{` (${weight * stack})`}</>}
           </td>
         </>
       ) : (

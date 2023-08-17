@@ -29,16 +29,14 @@ export function ItemName({
             <span>{description}</span>
 
             <DetailsTable>
-              <WeightDetail weight={weight} />
+              <WeightDetail stack={stack} weight={weight} />
             </DetailsTable>
           </Popover.Body>
         </Popover>
       }
       placement={placement}
     >
-      <span>{`${name}${
-        stack !== undefined && stack > 1 && stack !== Infinity ? ` x${stack}` : ""
-      }`}</span>
+      <span>{`${name}${stack !== undefined && stack > 1 ? ` x${stack}` : ""}`}</span>
     </OverlayTrigger>
   );
 }

@@ -17,8 +17,8 @@ import {
 import { skills } from "@neverquest/state/skills";
 import { bleed, criticalChance, criticalDamage, damageTotal } from "@neverquest/state/statistics";
 import type { DeltaDisplay } from "@neverquest/types/ui";
-import { animateElement } from "@neverquest/utilities/animateElement";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
+import { animateElement } from "@neverquest/utilities/helpers";
 
 export function useAttack() {
   const changeMonsterHealth = useChangeMonsterHealth();

@@ -8,7 +8,7 @@ import { Attack } from "@neverquest/components/Status/Attack";
 import { Name } from "@neverquest/components/Status/Name";
 import { Recovery } from "@neverquest/components/Status/Recovery";
 import { statusElement } from "@neverquest/state/character";
-import { animateElement } from "@neverquest/utilities/animateElement";
+import { animateElement } from "@neverquest/utilities/helpers";
 
 export function Status() {
   const element = useRef(null);

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
@@ -16,6 +17,7 @@ import {
   notifyOverEncumbrance,
 } from "@neverquest/state/inventory";
 import { getAnimationClass } from "@neverquest/utilities/getters";
+import { animateElement } from "@neverquest/utilities/helpers";
 
 export function InventoryButton() {
   const [isInventoryOpenValue, setIsInventoryOpen] = useRecoilState(isInventoryOpen);
@@ -25,6 +27,18 @@ export function InventoryButton() {
   const isInventoryFullValue = useRecoilValue(isInventoryFull);
   const notifyOverEncumbranceValue = useRecoilValue(notifyOverEncumbrance);
   const resetNotifyEncumbranceValue = useResetRecoilState(notifyOverEncumbrance);
+
+  const badgeElement = useRef(null);
+
+  useEffect(() => {
+    const { current } = badgeElement;
+
+    animateElement({
+      element: current,
+      onEnd: resetNotifyEncumbranceValue,
+      type: "headShake",
+    });
+  }, [badgeElement, resetNotifyEncumbranceValue]);
 
   if (!hasKnapsackValue) {
     return null;
@@ -41,12 +55,12 @@ export function InventoryButton() {
           >
             <IconImage Icon={IconInventory} />
 
-            <ButtonBadge
-              animation={notifyOverEncumbranceValue ? "headShake" : undefined}
-              Icon={IconEncumbrance}
-              isShowing={isInventoryFullValue || notifyOverEncumbranceValue}
-              onAnimationEnd={resetNotifyEncumbranceValue}
-            />
+            <span ref={badgeElement}>
+              <ButtonBadge
+                Icon={IconEncumbrance}
+                isShowing={isInventoryFullValue || notifyOverEncumbranceValue}
+              />
+            </span>
 
             <ItemAcquisition />
           </Button>

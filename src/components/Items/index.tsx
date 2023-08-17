@@ -18,10 +18,12 @@ import {
   isGear,
   isShard,
   isShield,
+  isStackable,
   isTrinket,
   isWeapon,
 } from "@neverquest/types/type-guards";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
+import { stackItems } from "@neverquest/utilities/helpers";
 
 export function Inventory() {
   const inventoryValue = useRecoilValue(inventory);
@@ -79,32 +81,11 @@ export function Inventory() {
             </div>
           ))}
 
-        {[
-          ...storedItems.filter(isConsumable).sort((a, b) => a.type.localeCompare(b.type)),
-          ...storedItems.filter(isTrinket).sort((a, b) => a.type.localeCompare(b.type)),
-          ...storedItems.filter(isShard).sort((a, b) => a.type.localeCompare(b.type)),
-        ].map((item) => {
-          const { id, type } = item;
+        {[...storedItems.filter(isTrinket).sort((a, b) => a.type.localeCompare(b.type))].map(
+          (item) => {
+            const { id, type } = item;
 
-          const action = (() => {
-            if (isConsumable(item)) {
-              switch (type) {
-                case "antidote": {
-                  return <ConsumeAntidote consumable={item} />;
-                }
-                case "bandages": {
-                  return <ConsumeBandages consumable={item} />;
-                }
-                case "elixir": {
-                  return <ConsumeElixir consumable={item} />;
-                }
-                case "salve": {
-                  return <ConsumeSalve consumable={item} />;
-                }
-              }
-            }
-
-            if (isTrinket(item)) {
+            const action = (() => {
               switch (type) {
                 case "compass": {
                   return <ActivateCompass />;
@@ -113,24 +94,68 @@ export function Inventory() {
                   return <ActivateHearthstone />;
                 }
               }
-            }
 
-            if (isShard(item)) {
-              return <ApplyShard shard={item} />;
-            }
+              return null;
+            })();
 
-            return null;
-          })();
+            return (
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
+                <ItemDisplay item={item} />
 
-          return (
-            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-              <ItemDisplay item={item} />
-
-              {action}
-            </div>
-          );
-        })}
+                {action}
+              </div>
+            );
+          },
+        )}
       </Stack>
+
+      {[
+        ...stackItems(
+          storedItems.filter(isConsumable).sort((a, b) => a.type.localeCompare(b.type)),
+        ),
+        ...stackItems(storedItems.filter(isShard).sort((a, b) => a.type.localeCompare(b.type))),
+      ].map((stackedItem) => {
+        const { item, stack } = stackedItem;
+
+        if (!isStackable(item)) {
+          return null;
+        }
+
+        const { id, type } = item;
+
+        const action = (() => {
+          if (isConsumable(item)) {
+            switch (type) {
+              case "antidote": {
+                return <ConsumeAntidote consumable={item} />;
+              }
+              case "bandages": {
+                return <ConsumeBandages consumable={item} />;
+              }
+              case "elixir": {
+                return <ConsumeElixir consumable={item} />;
+              }
+              case "salve": {
+                return <ConsumeSalve consumable={item} />;
+              }
+            }
+          }
+
+          if (isShard(item)) {
+            return <ApplyShard shard={item} />;
+          }
+
+          return null;
+        })();
+
+        return (
+          <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
+            <ItemDisplay item={item} stack={stack} />
+
+            {action}
+          </div>
+        );
+      })}
     </Stack>
   );
 }

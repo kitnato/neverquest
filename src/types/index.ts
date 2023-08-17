@@ -78,6 +78,8 @@ export type Shield = GearBase & {
   staminaCost: number;
 };
 
+export type StackableItem = ConsumableItem | ShardItem;
+
 export type TrinketItem = ItemBase & {
   description: string;
   type: Trinket;

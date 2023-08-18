@@ -133,13 +133,13 @@ export const LOCRA = {
     hasPrefix = false,
     hasSuffix = false,
     tags = [],
-    type = ["human", "monster", "name"],
+    type,
   }: {
     allowNSFW?: boolean;
     hasPrefix?: boolean;
     hasSuffix?: boolean;
     tags?: AffixTag[];
-    type?: Creature[];
+    type: Creature[];
   }) => {
     const filteredCreatures = CREATURES.filter((creature) => {
       const isNSFW = Boolean(creature.isNSFW);

@@ -1152,6 +1152,10 @@ export const CREATURES: CreatureData[] = [
     type: "name",
   },
   {
+    name: "sybil",
+    type: "name",
+  },
+  {
     isNSFW: true,
     name: "tampon",
     type: "monster",

@@ -36,6 +36,7 @@ Upon purchasing the Journal trinket, unlocks quests that function similarly to a
 
 - Parry, inflict bleed and stagger in one attack
 - Survive the first 4 levels without any gear equipped
+- Survive the first 10 levels while upgrading at most 1 attribute
 
 ##### Combat quests
 

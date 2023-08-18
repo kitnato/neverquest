@@ -27,6 +27,14 @@ export function SellItem({
   const merchantTradeItem = useMerchantTradeItem();
   const transactResources = useTransactResources();
 
+  const handleSale = () => {
+    if (confirmationWarningsValue && showConfirmation) {
+      setSellConfirmation(true);
+      setShowingSellWarning(true);
+    } else {
+      sellItem();
+    }
+  };
   const sellItem = () => {
     transactResources({ coinsDifference: getSellPrice(item) });
     merchantTradeItem(item, "sale");
@@ -40,17 +48,7 @@ export function SellItem({
       <Stack direction="horizontal" gap={3}>
         <ResourceDisplay tooltip="Value (coins)" type="coins" value={getSellPrice(item)} />
 
-        <Button
-          onClick={() => {
-            if (confirmationWarningsValue && showConfirmation) {
-              setSellConfirmation(true);
-              setShowingSellWarning(true);
-            } else {
-              sellItem();
-            }
-          }}
-          variant="outline-dark"
-        >
+        <Button onClick={handleSale} variant="outline-dark">
           Sell
         </Button>
       </Stack>
@@ -59,7 +57,7 @@ export function SellItem({
         <ConfirmationDialog
           confirmationLabel="Sell"
           message="It can be bought back at the original purchase price but it will be gone forever once leaving the caravan."
-          onConfirm={() => sellItem()}
+          onConfirm={sellItem}
           setHidden={() => setShowingSellWarning(false)}
           show={isShowingSellWarning}
           title="Sell equipped item?"

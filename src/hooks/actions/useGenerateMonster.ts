@@ -30,7 +30,7 @@ export function useGenerateMonster() {
             allowNSFW: get(allowNSFW),
             hasPrefix: Math.random() <= prefix + (1 - prefix) * growthFactor,
             hasSuffix: Math.random() <= suffix + (1 - suffix) * growthFactor,
-            type: ["human", "monster"],
+            type: ["monster"],
           }),
         );
 

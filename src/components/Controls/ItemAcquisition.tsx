@@ -31,6 +31,10 @@ export function ItemAcquisition() {
   return itemsAcquiredValue.map((item) => {
     const { id } = item;
 
+    if (isTrinket(item) && item.type === "knapsack") {
+      return;
+    }
+
     const Icon = (() => {
       if (isArmor(item)) {
         return IconArmor;

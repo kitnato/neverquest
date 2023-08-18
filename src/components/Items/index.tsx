@@ -107,55 +107,55 @@ export function Inventory() {
             );
           },
         )}
-      </Stack>
 
-      {[
-        ...stackItems(
-          storedItems.filter(isConsumable).sort((a, b) => a.type.localeCompare(b.type)),
-        ),
-        ...stackItems(storedItems.filter(isShard).sort((a, b) => a.type.localeCompare(b.type))),
-      ].map((stackedItem) => {
-        const { item, stack } = stackedItem;
+        {[
+          ...stackItems(
+            storedItems.filter(isConsumable).sort((a, b) => a.type.localeCompare(b.type)),
+          ),
+          ...stackItems(storedItems.filter(isShard).sort((a, b) => a.type.localeCompare(b.type))),
+        ].map((stackedItem) => {
+          const { item, stack } = stackedItem;
 
-        if (!isStackable(item)) {
-          return null;
-        }
+          if (!isStackable(item)) {
+            return null;
+          }
 
-        const { id, type } = item;
+          const { id, type } = item;
 
-        const action = (() => {
-          if (isConsumable(item)) {
-            switch (type) {
-              case "antidote": {
-                return <ConsumeAntidote consumable={item} />;
-              }
-              case "bandages": {
-                return <ConsumeBandages consumable={item} />;
-              }
-              case "elixir": {
-                return <ConsumeElixir consumable={item} />;
-              }
-              case "salve": {
-                return <ConsumeSalve consumable={item} />;
+          const action = (() => {
+            if (isConsumable(item)) {
+              switch (type) {
+                case "antidote": {
+                  return <ConsumeAntidote consumable={item} />;
+                }
+                case "bandages": {
+                  return <ConsumeBandages consumable={item} />;
+                }
+                case "elixir": {
+                  return <ConsumeElixir consumable={item} />;
+                }
+                case "salve": {
+                  return <ConsumeSalve consumable={item} />;
+                }
               }
             }
-          }
 
-          if (isShard(item)) {
-            return <ApplyShard shard={item} />;
-          }
+            if (isShard(item)) {
+              return <ApplyShard shard={item} />;
+            }
 
-          return null;
-        })();
+            return null;
+          })();
 
-        return (
-          <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-            <ItemDisplay item={item} stack={stack} />
+          return (
+            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
+              <ItemDisplay item={item} stack={stack} />
 
-            {action}
-          </div>
-        );
-      })}
+              {action}
+            </div>
+          );
+        })}
+      </Stack>
     </Stack>
   );
 }

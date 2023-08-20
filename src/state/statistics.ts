@@ -4,7 +4,7 @@ import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { BLEED, PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/combat";
 import { withStateKey } from "@neverquest/state";
 import { level, rawAttributeStatistic } from "@neverquest/state/attributes";
-import { armor, hasItem, shield, weapon } from "@neverquest/state/inventory";
+import { armor, hasItem, shield, weapon, weaponDamageElemental } from "@neverquest/state/inventory";
 import { rawMasteryStatistic } from "@neverquest/state/masteries";
 import type { Attribute } from "@neverquest/types/unions";
 import { getDamagePerRate, getDamagePerTick } from "@neverquest/utilities/getters";
@@ -115,7 +115,13 @@ export const damage = withStateKey("damage", (key) =>
 
 export const damageTotal = withStateKey("damageTotal", (key) =>
   selector({
-    get: ({ get }) => get(damage) + get(weapon).damage,
+    get: ({ get }) =>
+      get(damage) +
+      get(weapon).damage +
+      Object.values(get(weaponDamageElemental)).reduce(
+        (current, elementalDamage) => current + elementalDamage,
+        0,
+      ),
     key,
   }),
 );

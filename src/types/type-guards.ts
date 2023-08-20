@@ -8,7 +8,7 @@ import type {
   TrinketItem,
   Weapon,
 } from "@neverquest/types";
-import { CONSUMABLE_TYPES, SHARD_TYPES, TRINKET_TYPES } from "@neverquest/types/unions";
+import { CONSUMABLE_TYPES, ELEMENTAL_TYPES, TRINKET_TYPES } from "@neverquest/types/unions";
 
 export function isArmor(gear: unknown): gear is Armor {
   return isObject(gear) && gear.protection !== undefined;
@@ -27,7 +27,7 @@ function isObject(value: unknown): value is Record<string, unknown> {
 }
 
 export function isShard(shard: unknown): shard is ShardItem {
-  return isObject(shard) && SHARD_TYPES.some((type) => type === shard.type);
+  return isObject(shard) && ELEMENTAL_TYPES.some((type) => type === shard.type);
 }
 
 export function isShield(gear: unknown): gear is Shield {

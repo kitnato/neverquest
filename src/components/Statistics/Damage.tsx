@@ -6,6 +6,7 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSecond";
+import { ELEMENTALS } from "@neverquest/data/inventory";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
 import { ReactComponent as IconStrength } from "@neverquest/icons/strength.svg";
@@ -13,11 +14,13 @@ import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
 import { rawAttributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
-import { weapon } from "@neverquest/state/inventory";
+import { weapon, weaponDamageElemental } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { damage, damageTotal, powerBonus } from "@neverquest/state/statistics";
+import type { ShardItem } from "@neverquest/types";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
+import { stackItems } from "@neverquest/utilities/helpers";
 
 export function Damage() {
   const damageValue = useRecoilValue(damage);
@@ -25,7 +28,10 @@ export function Damage() {
   const isShowingDamageDetails = useRecoilValue(isShowing("damageDetails"));
   const powerBonusValue = useRecoilValue(powerBonus("strength"));
   const strengthValue = useRecoilValue(rawAttributeStatistic("strength"));
-  const weaponValue = useRecoilValue(weapon);
+  const { damage: weaponDamage, shards } = useRecoilValue(weapon);
+  const weaponDamageElementalValue = useRecoilValue(weaponDamageElemental);
+
+  const appliedShards = shards.length;
 
   useDeltaText({
     atomDelta: deltas("damage"),
@@ -48,9 +54,32 @@ export function Damage() {
 
                       <td>
                         <IconImage Icon={IconWeaponDamage} size="tiny" />
-                        &nbsp;{weaponValue.damage}
+                        &nbsp;{weaponDamage}
                       </td>
                     </tr>
+
+                    {appliedShards > 0 && (
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Shards:</td>
+
+                        <td>
+                          {stackItems(shards.sort((a, b) => a.type.localeCompare(b.type))).map(
+                            ({ item }) => {
+                              const { id, type } = item as ShardItem;
+
+                              return (
+                                <div key={id}>
+                                  <IconImage Icon={ELEMENTALS[type].Icon} size="tiny" />
+                                  <span
+                                    className={ELEMENTALS[type].color}
+                                  >{` +${weaponDamageElementalValue[type]}`}</span>
+                                </div>
+                              );
+                            },
+                          )}
+                        </td>
+                      </tr>
+                    )}
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>

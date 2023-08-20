@@ -1,13 +1,12 @@
 import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
-import { SHARDS, SHARD_BASE } from "@neverquest/data/inventory";
+import { SHARD_BASE } from "@neverquest/data/inventory";
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
 import { progress, progressMaximum } from "@neverquest/state/encounter";
 import { monsterLoot } from "@neverquest/state/monster";
 import { coinsLoot, essenceLoot, itemsLoot, scrapLoot } from "@neverquest/state/resources";
-import { SHARD_TYPES } from "@neverquest/types/unions";
-import { TEMPLATE_PATTERN } from "@neverquest/utilities/constants";
+import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
 import { getFromRange, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useProgression() {
@@ -33,19 +32,15 @@ export function useProgression() {
         }
 
         if (shards > 0) {
-          const { coinPrice, descriptionTemplate, weight } = SHARD_BASE;
-
           set(itemsLoot, (current) =>
             current.concat(
               Array.from(Array(shards)).map(() => {
-                const type = SHARD_TYPES[getFromRange({ maximum: 3, minimum: 0 })];
+                const type = ELEMENTAL_TYPES[getFromRange({ maximum: 3, minimum: 0 })];
 
                 return {
-                  coinPrice,
-                  description: descriptionTemplate.replace(TEMPLATE_PATTERN, SHARDS[type]),
+                  ...SHARD_BASE,
                   id: nanoid(),
                   type,
-                  weight,
                 };
               }),
             ),

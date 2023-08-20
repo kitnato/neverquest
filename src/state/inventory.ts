@@ -3,12 +3,13 @@ import { atom, selector, selectorFamily } from "recoil";
 import {
   ARMOR_NONE,
   ENCUMBRANCE,
-  SHARD_MAXIMUM,
+  SHARDS_MAXIMUM,
+  SHARD_DAMAGE,
   SHIELD_NONE,
   WEAPON_NONE,
 } from "@neverquest/data/inventory";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import type { Armor, InventoryItem, Shield, Weapon } from "@neverquest/types";
+import type { Armor, InventoryItem, ShardItem, Shield, Weapon } from "@neverquest/types";
 import {
   isArmor,
   isConsumable,
@@ -16,7 +17,8 @@ import {
   isTrinket,
   isWeapon,
 } from "@neverquest/types/type-guards";
-import type { Consumable, Trinket } from "@neverquest/types/unions";
+import type { Consumable, Elemental, Trinket } from "@neverquest/types/unions";
+import { stackItems } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
@@ -43,7 +45,7 @@ export const armor = withStateKey("armor", (key) =>
 
 export const canApplyShard = withStateKey("canApplyShard", (key) =>
   selector({
-    get: ({ get }) => get(weapon).shards.length < SHARD_MAXIMUM,
+    get: ({ get }) => get(weapon).shards.length < SHARDS_MAXIMUM,
     key,
   }),
 );
@@ -127,6 +129,25 @@ export const weapon = withStateKey("weapon", (key) =>
       }
 
       return equippedWeapon as Weapon;
+    },
+    key,
+  }),
+);
+
+export const weaponDamageElemental = withStateKey("weaponDamageElemental", (key) =>
+  selector<Record<Elemental, number>>({
+    get: ({ get }) => {
+      const { damage, shards } = get(weapon);
+
+      return stackItems(shards).reduce(
+        (current, { item, stack }) => ({
+          ...current,
+          [(item as ShardItem).type]: Math.ceil(
+            damage * (Math.round(Math.pow(SHARD_DAMAGE, stack)) / 100),
+          ),
+        }),
+        { electric: 0, fire: 0, ice: 0 },
+      );
     },
     key,
   }),

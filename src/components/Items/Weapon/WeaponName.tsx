@@ -8,14 +8,20 @@ import { GearComparison } from "@neverquest/components/Items/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Items/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Items/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
-import { type WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
+import {
+  ELEMENTALS,
+  SHARDS_MAXIMUM,
+  type WEAPON_NONE,
+  WEAPON_SPECIFICATIONS,
+} from "@neverquest/data/inventory";
+import { ReactComponent as IconShard } from "@neverquest/icons/shard.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
 import { ReactComponent as IconWeaponDamagePerSecond } from "@neverquest/icons/weapon-damage-per-second.svg";
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
-import { weapon as weaponEquipped } from "@neverquest/state/inventory";
+import { weaponDamageElemental, weapon as weaponEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { showDamagePerSecond } from "@neverquest/state/settings";
-import type { Weapon } from "@neverquest/types";
+import type { ShardItem, Weapon } from "@neverquest/types";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import {
   capitalizeAll,
@@ -24,6 +30,7 @@ import {
   formatPercentage,
 } from "@neverquest/utilities/formatters";
 import { getDamagePerRate } from "@neverquest/utilities/getters";
+import { stackItems } from "@neverquest/utilities/helpers";
 
 export function WeaponName({
   placement,
@@ -34,10 +41,13 @@ export function WeaponName({
 }) {
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
   const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
+  const weaponDamageElementalValue = useRecoilValue(weaponDamageElemental);
   const weaponEquippedValue = useRecoilValue(weaponEquipped);
 
-  const { abilityChance, damage, gearClass, level, name, rate, staminaCost, weight } = weapon;
+  const { abilityChance, damage, gearClass, level, name, rate, shards, staminaCost, weight } =
+    weapon;
   const { abilityName, IconAbility, IconGearClass, showingType } = WEAPON_SPECIFICATIONS[gearClass];
+  const appliedShards = shards.length;
   const damagePerSecond = getDamagePerRate({
     damage,
     rate,
@@ -77,6 +87,33 @@ export function WeaponName({
                   )}
                 </td>
               </tr>
+
+              {appliedShards > 0 && (
+                <tr>
+                  <td
+                    className={CLASS_TABLE_CELL_ITALIC}
+                  >{`Shards (${appliedShards}/${SHARDS_MAXIMUM}):`}</td>
+
+                  <td>
+                    {stackItems(shards.sort((a, b) => a.type.localeCompare(b.type))).map(
+                      ({ item, stack }) => {
+                        const { id, type } = item as ShardItem;
+
+                        return (
+                          <div key={id}>
+                            <IconImage Icon={ELEMENTALS[type].Icon} size="tiny" />
+                            <span
+                              className={ELEMENTALS[type].color}
+                            >{` +${weaponDamageElementalValue[type]}`}</span>
+                            {` (${stack}`}
+                            <IconImage Icon={IconShard} size="tiny" />)
+                          </div>
+                        );
+                      },
+                    )}
+                  </td>
+                </tr>
+              )}
 
               <tr>
                 <td className={CLASS_TABLE_CELL_ITALIC}>Attack rate:</td>

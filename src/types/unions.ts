@@ -64,11 +64,12 @@ export type Delta =
   | "stamina"
   | "staminaRegenerationRate";
 
-export type Elemental = "electric" | "fire" | "ice" | "poison";
+export const ELEMENTAL_TYPES = ["electric", "fire", "ice"] as const;
+export type Elemental = (typeof ELEMENTAL_TYPES)[number];
 
 export type Gear = "armor" | "shield" | "weapon";
 
-export type Item = Consumable | Gear | Shard | Trinket;
+export type Item = Consumable | Gear | Trinket;
 
 export type Location = "caravan" | "wilderness";
 
@@ -78,9 +79,6 @@ export type Reserve = "health" | "stamina";
 
 export const RESOURCE_TYPES = ["coins", "essence", "scrap"] as const;
 export type Resource = (typeof RESOURCE_TYPES)[number];
-
-export const SHARD_TYPES = ["frozen", "incendiary", "lightning", "toxic"] as const;
-export type Shard = (typeof SHARD_TYPES)[number];
 
 export const SHOWING_TYPES = [
   "armor",
@@ -281,6 +279,7 @@ export type StateKey =
   | "staminaRegenerationRate"
   | "statusElement"
   | "weapon"
+  | "weaponDamageElemental"
   | "wildernesses";
 
 export const TRINKET_TYPES = [

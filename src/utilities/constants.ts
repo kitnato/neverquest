@@ -17,5 +17,3 @@ export const KEY_SETTINGS = `${KEY_STORAGE_PREFIX}-settings`;
 export const LABEL_AT_MAXIMUM = "MAX";
 export const LABEL_EMPTY = "--";
 export const LABEL_UNKNOWN = "???";
-
-export const TEMPLATE_PATTERN = "###";

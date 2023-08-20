@@ -1,6 +1,6 @@
 import type { ArmorClass, ShieldClass, WeaponClass, WeaponModality } from "@neverquest/LOCRA/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Shard, Showing, Trinket, WeaponGrip } from "@neverquest/types/unions";
+import type { Consumable, Elemental, Showing, Trinket, WeaponGrip } from "@neverquest/types/unions";
 
 export type Armor = GearBase & {
   deflection: number;
@@ -64,8 +64,7 @@ export type Range = {
 };
 
 export type ShardItem = ItemBase & {
-  description: string;
-  type: Shard;
+  type: Elemental;
 };
 
 export type Shield = GearBase & {

@@ -6,9 +6,12 @@ import { ReactComponent as IconPlate } from "@neverquest/icons/armor-plate.svg";
 import { ReactComponent as IconReinforced } from "@neverquest/icons/armor-reinforced.svg";
 import { ReactComponent as IconBandages } from "@neverquest/icons/bandages.svg";
 import { ReactComponent as IconCompass } from "@neverquest/icons/compass.svg";
+import { ReactComponent as IconElectric } from "@neverquest/icons/electric.svg";
 import { ReactComponent as IconElixir } from "@neverquest/icons/elixir.svg";
+import { ReactComponent as IconFire } from "@neverquest/icons/fire.svg";
 import { ReactComponent as IconStone } from "@neverquest/icons/hearthstone.svg";
 import { ReactComponent as IconHide } from "@neverquest/icons/hide.svg";
+import { ReactComponent as IconIce } from "@neverquest/icons/ice.svg";
 import { ReactComponent as IconKnapsack } from "@neverquest/icons/knapsack.svg";
 import { ReactComponent as IconMonkeyPaw } from "@neverquest/icons/monkey-paw.svg";
 import { ReactComponent as IconParry } from "@neverquest/icons/parry.svg";
@@ -26,8 +29,7 @@ import { ReactComponent as IconWeaponStagger } from "@neverquest/icons/weapon-st
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRA/types";
 import type { ConsumableItem, Range, TrinketItem, Weapon } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Elemental, Shard, Showing, Trinket } from "@neverquest/types/unions";
-import { TEMPLATE_PATTERN } from "@neverquest/utilities/constants";
+import type { Consumable, Elemental, Showing, Trinket } from "@neverquest/types/unions";
 
 export const ARMOR_BASE = {
   coinPrice: 500,
@@ -138,24 +140,27 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
     },
   };
 
+export const ELEMENTALS: Record<
+  Elemental,
+  { ailment: string; color: string; Icon: SVGIcon; shard: string }
+> = {
+  electric: { ailment: "shocked", color: "text-purple", Icon: IconElectric, shard: "lightning" },
+  fire: { ailment: "burning", color: "text-orange", Icon: IconFire, shard: "incendiary" },
+  ice: { ailment: "frozen", color: "text-blue", Icon: IconIce, shard: "frozen" },
+};
+
 export const ENCUMBRANCE = 3;
 
 export const KNAPSACK_SIZE = 3;
 
 export const SHARD_BASE = {
   coinPrice: 100,
-  descriptionTemplate: `Adds ${TEMPLATE_PATTERN} damage to a weapon.`,
   weight: 1,
 };
 
-export const SHARD_MAXIMUM = 7;
+export const SHARD_DAMAGE = 4.64158883361278;
 
-export const SHARDS: Record<Shard, Elemental> = {
-  frozen: "ice",
-  incendiary: "fire",
-  lightning: "electric",
-  toxic: "poison",
-};
+export const SHARDS_MAXIMUM = 3;
 
 export const SHIELD_BASE = {
   coinPrice: 400,

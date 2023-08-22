@@ -5,6 +5,7 @@ import {
   ENCUMBRANCE,
   SHARDS_MAXIMUM,
   SHARD_DAMAGE,
+  SHARD_DURATION,
   SHIELD_NONE,
   WEAPON_NONE,
 } from "@neverquest/data/inventory";
@@ -134,19 +135,24 @@ export const weapon = withStateKey("weapon", (key) =>
   }),
 );
 
-export const weaponDamageElemental = withStateKey("weaponDamageElemental", (key) =>
-  selector<Record<Elemental, number>>({
+export const weaponElementalEffects = withStateKey("weaponElementalEffects", (key) =>
+  selector<Record<Elemental, { damage: number; duration: number }>>({
     get: ({ get }) => {
       const { damage, shards } = get(weapon);
 
       return stackItems(shards).reduce(
         (current, { item, stack }) => ({
           ...current,
-          [(item as ShardItem).type]: Math.ceil(
-            damage * (Math.round(Math.pow(SHARD_DAMAGE, stack)) / 100),
-          ),
+          [(item as ShardItem).type]: {
+            damage: Math.ceil(damage * SHARD_DAMAGE[stack - 1]),
+            duration: SHARD_DURATION[stack - 1],
+          },
         }),
-        { electric: 0, fire: 0, ice: 0 },
+        {
+          electric: { damage: 0, duration: 0 },
+          fire: { damage: 0, duration: 0 },
+          ice: { damage: 0, duration: 0 },
+        },
       );
     },
     key,

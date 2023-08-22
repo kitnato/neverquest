@@ -14,7 +14,7 @@ import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
 import { rawAttributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
-import { weapon, weaponDamageElemental } from "@neverquest/state/inventory";
+import { weapon, weaponElementalEffects } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { damage, damageTotal, powerBonus } from "@neverquest/state/statistics";
 import type { ShardItem } from "@neverquest/types";
@@ -29,7 +29,7 @@ export function Damage() {
   const powerBonusValue = useRecoilValue(powerBonus("strength"));
   const strengthValue = useRecoilValue(rawAttributeStatistic("strength"));
   const { damage: weaponDamage, shards } = useRecoilValue(weapon);
-  const weaponDamageElementalValue = useRecoilValue(weaponDamageElemental);
+  const weaponElementalEffectsValue = useRecoilValue(weaponElementalEffects);
 
   const appliedShards = shards.length;
 
@@ -68,11 +68,8 @@ export function Damage() {
                               const { id, type } = item as ShardItem;
 
                               return (
-                                <div key={id}>
-                                  <IconImage Icon={ELEMENTALS[type].Icon} size="tiny" />
-                                  <span
-                                    className={ELEMENTALS[type].color}
-                                  >{` +${weaponDamageElementalValue[type]}`}</span>
+                                <div className={ELEMENTALS[type].color} key={id}>
+                                  {` +${weaponElementalEffectsValue[type].damage}`}
                                 </div>
                               );
                             },

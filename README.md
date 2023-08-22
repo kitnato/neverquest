@@ -207,7 +207,7 @@ A [reserve](./src/data/manual.md#reserves), Consumed when activating [skills](./
 
 #### Log
 
-A togglable UI element that displays all stateful activities in real-time, e.g. combat details, transactions etc.
+A toggle-able UI element that displays all stateful activities in real-time, e.g. combat details, transactions etc.
 
 #### Ranged
 
@@ -245,6 +245,8 @@ The linter config can be viewed in `.eslintrc.json`, `.stylelintrc.json` and `.p
 
 - Written in [TypeScript](https://www.typescriptlang.org).
 
+- Icons and art assets are provided under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) by the talented [authors](https://game-icons.net/about.html#authors) of [game-icons.net](https://game-icons.net).
+
 - UI framework is [Bootstrap](https://react-bootstrap.github.io).
 
 - State management library is [Recoil](https://recoiljs.org).
@@ -271,7 +273,7 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 - No long waits, cliffs or walls
 - No obligatory resets for incremental gains
 - No excessive or repetitive clicking
-- Decisions are frequent and they have immediate gameplay imppact
+- Decisions are frequent and they have immediate gameplay impact
 - High character build variety
 - Manage an economy of resources and character builds with trade-offs
 

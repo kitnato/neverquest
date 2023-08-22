@@ -75,6 +75,15 @@ export type Location = "caravan" | "wilderness";
 
 export type Mastery = "cruelty" | "finesse" | "might" | "resilience" | "stability";
 
+export const MONSTER_AILMENT_TYPES = [
+  "bleeding",
+  "burning",
+  "frozen",
+  "shocked",
+  "staggered",
+] as const;
+export type MonsterAilment = (typeof MONSTER_AILMENT_TYPES)[number];
+
 export type Reserve = "health" | "stamina";
 
 export const RESOURCE_TYPES = ["coins", "essence", "scrap"] as const;
@@ -157,6 +166,8 @@ export type StateKey =
   | "canBlock"
   | "canDodge"
   | "canFit"
+  | "canReceiveAilment"
+  | "canReceiveAilments"
   | "coins"
   | "coinsLoot"
   | "confirmationWarnings"
@@ -201,10 +212,9 @@ export type StateKey =
   | "isInventoryOpen"
   | "isLooting"
   | "isMasteryAtMaximum"
-  | "isMonsterBleeding"
+  | "isMonsterAiling"
   | "isMonsterDead"
   | "isMonsterNew"
-  | "isMonsterStaggered"
   | "isPoisoned"
   | "isRecovering"
   | "isShowing"
@@ -225,10 +235,10 @@ export type StateKey =
   | "masteryCost"
   | "merchantInventory"
   | "mode"
+  | "monsterAilmentDuration"
   | "monsterAttackDuration"
   | "monsterAttackRate"
   | "monsterBleedingDelta"
-  | "monsterBleedingDuration"
   | "monsterBlightChance"
   | "monsterDamage"
   | "monsterDamagePerSecond"
@@ -240,7 +250,6 @@ export type StateKey =
   | "monsterPoisonChance"
   | "monsterPoisonDuration"
   | "monsterPoisonMagnitude"
-  | "monsterStaggerDuration"
   | "name"
   | "notifyOverEncumbrance"
   | "parryAbsorption"
@@ -279,7 +288,7 @@ export type StateKey =
   | "staminaRegenerationRate"
   | "statusElement"
   | "weapon"
-  | "weaponDamageElemental"
+  | "weaponElementalEffects"
   | "wildernesses";
 
 export const TRINKET_TYPES = [

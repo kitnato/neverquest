@@ -3,12 +3,12 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterStaggeredMeter } from "@neverquest/components/Monster/MonsterStaggeredMeter";
 import { ReactComponent as IconStaggered } from "@neverquest/icons/monster-staggered.svg";
-import { isShowing } from "@neverquest/state/isShowing";
+import { canReceiveAilment } from "@neverquest/state/monster";
 
 export function MonsterStaggered() {
-  const isShowingStagger = useRecoilValue(isShowing("stagger"));
+  const canReceiveStaggered = useRecoilValue(canReceiveAilment("staggered"));
 
-  if (!isShowingStagger) {
+  if (!canReceiveStaggered) {
     return null;
   }
 

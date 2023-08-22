@@ -29,7 +29,13 @@ import { ReactComponent as IconWeaponStagger } from "@neverquest/icons/weapon-st
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRA/types";
 import type { ConsumableItem, Range, TrinketItem, Weapon } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Elemental, Showing, Trinket } from "@neverquest/types/unions";
+import type {
+  Consumable,
+  Elemental,
+  MonsterAilment,
+  Showing,
+  Trinket,
+} from "@neverquest/types/unions";
 
 export const ARMOR_BASE = {
   coinPrice: 500,
@@ -142,7 +148,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
 
 export const ELEMENTALS: Record<
   Elemental,
-  { ailment: string; color: string; Icon: SVGIcon; shard: string }
+  { ailment: MonsterAilment; color: string; Icon: SVGIcon; shard: string }
 > = {
   electric: { ailment: "shocked", color: "text-purple", Icon: IconElectric, shard: "lightning" },
   fire: { ailment: "burning", color: "text-orange", Icon: IconFire, shard: "incendiary" },
@@ -158,7 +164,9 @@ export const SHARD_BASE = {
   weight: 1,
 };
 
-export const SHARD_DAMAGE = 4.64158883361278;
+export const SHARD_DAMAGE = [0.05, 0.25, 1];
+
+export const SHARD_DURATION = [750, 1500, 2500];
 
 export const SHARDS_MAXIMUM = 3;
 

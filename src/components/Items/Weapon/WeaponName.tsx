@@ -18,7 +18,7 @@ import { ReactComponent as IconShard } from "@neverquest/icons/shard.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
 import { ReactComponent as IconWeaponDamagePerSecond } from "@neverquest/icons/weapon-damage-per-second.svg";
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
-import { weaponDamageElemental, weapon as weaponEquipped } from "@neverquest/state/inventory";
+import { weaponElementalEffects, weapon as weaponEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { showDamagePerSecond } from "@neverquest/state/settings";
 import type { ShardItem, Weapon } from "@neverquest/types";
@@ -41,7 +41,7 @@ export function WeaponName({
 }) {
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
   const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
-  const weaponDamageElementalValue = useRecoilValue(weaponDamageElemental);
+  const weaponElementalEffectsValue = useRecoilValue(weaponElementalEffects);
   const weaponEquippedValue = useRecoilValue(weaponEquipped);
 
   const { abilityChance, damage, gearClass, level, name, rate, shards, staminaCost, weight } =
@@ -98,15 +98,17 @@ export function WeaponName({
                     {stackItems(shards.sort((a, b) => a.type.localeCompare(b.type))).map(
                       ({ item, stack }) => {
                         const { id, type } = item as ShardItem;
+                        const { damage, duration } = weaponElementalEffectsValue[type];
 
                         return (
                           <div key={id}>
+                            <span className={ELEMENTALS[type].color}>{`+${damage}`}</span>
+                            {" · "}
                             <IconImage Icon={ELEMENTALS[type].Icon} size="tiny" />
-                            <span
-                              className={ELEMENTALS[type].color}
-                            >{` +${weaponDamageElementalValue[type]}`}</span>
-                            {` (${stack}`}
-                            <IconImage Icon={IconShard} size="tiny" />)
+                            {` ${formatMilliseconds(duration)} · `}
+                            <IconImage Icon={IconShard} size="tiny" />
+                            &nbsp;
+                            {stack}
                           </div>
                         );
                       },

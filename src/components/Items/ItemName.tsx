@@ -17,7 +17,7 @@ const ShardDescription = ({ type }: { type: Elemental }) => {
     <>
       Adds elemental&nbsp;
       <IconImage Icon={Icon} size="tiny" />
-      &nbsp;<span className={color}>{type}</span> effect to gear.
+      &nbsp;<span className={color}>{type}</span> effect to a weapon, shield, or armor.
     </>
   );
 };
@@ -32,11 +32,10 @@ export function ItemName({
   stack?: number;
 }) {
   const { type, weight } = item;
+  const description = isShard(item) ? <ShardDescription type={item.type} /> : item.description;
   const name = isShard(item)
     ? `${capitalizeAll(ELEMENTALS[item.type].shard)} shard`
     : capitalizeAll(type);
-
-  const description = isShard(item) ? <ShardDescription type={item.type} /> : item.description;
 
   return (
     <OverlayTrigger

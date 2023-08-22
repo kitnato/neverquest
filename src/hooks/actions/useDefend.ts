@@ -16,12 +16,12 @@ import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { rawMasteryStatistic } from "@neverquest/state/masteries";
 import {
+  monsterAilmentDuration,
   monsterBlightChance,
   monsterDamage,
   monsterElement,
   monsterPoisonChance,
   monsterPoisonDuration,
-  monsterStaggerDuration,
 } from "@neverquest/state/monster";
 import { blight, isPoisoned, poisonDuration } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
@@ -194,7 +194,7 @@ export function useDefend() {
             // If monster is staggered, also increase Might mastery.
             if (hasStaggered) {
               set(isShowing("monsterAilments"), true);
-              set(monsterStaggerDuration, get(rawMasteryStatistic("might")));
+              set(monsterAilmentDuration("staggered"), get(rawMasteryStatistic("might")));
 
               increaseMastery("might");
 

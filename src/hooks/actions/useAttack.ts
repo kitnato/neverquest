@@ -4,19 +4,17 @@ import { BLEED } from "@neverquest/data/combat";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
+import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment";
 import { canAttackOrParry } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { rawMasteryStatistic } from "@neverquest/state/masteries";
-import {
-  monsterBleedingDuration,
-  monsterElement,
-  monsterStaggerDuration,
-} from "@neverquest/state/monster";
+import { monsterAilmentDuration, monsterElement } from "@neverquest/state/monster";
 import { skills } from "@neverquest/state/skills";
 import { bleed, criticalChance, criticalDamage, damageTotal } from "@neverquest/state/statistics";
 import type { DeltaDisplay } from "@neverquest/types/ui";
+import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 import { animateElement } from "@neverquest/utilities/helpers";
 
@@ -24,6 +22,7 @@ export function useAttack() {
   const changeMonsterHealth = useChangeMonsterHealth();
   const changeStamina = useChangeStamina();
   const increaseMastery = useIncreaseMastery();
+  const inflictElementalAilment = useInflictElementalAilment();
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
@@ -32,13 +31,14 @@ export function useAttack() {
 
         const { abilityChance, gearClass, staminaCost } = get(weapon);
 
+        // TODO - make into a selector based on constituents like canReceiveAilments
         set(isShowing("statistics"), true);
 
         if (get(canAttackOrParry)) {
           const hasInflictedCritical =
             get(skills("assassination")) && Math.random() <= get(criticalChance);
           const hasInflictedBleed =
-            get(monsterBleedingDuration) === 0 &&
+            get(monsterAilmentDuration("bleeding")) === 0 &&
             get(skills("anatomy")) &&
             Math.random() <= get(bleed);
           const hasInflictedStagger =
@@ -68,7 +68,7 @@ export function useAttack() {
 
           if (hasInflictedBleed) {
             set(isShowing("monsterAilments"), true);
-            set(monsterBleedingDuration, BLEED.duration);
+            set(monsterAilmentDuration("bleeding"), BLEED.duration);
 
             increaseMastery("cruelty");
 
@@ -80,7 +80,7 @@ export function useAttack() {
 
           if (hasInflictedStagger) {
             set(isShowing("monsterAilments"), true);
-            set(monsterStaggerDuration, get(rawMasteryStatistic("might")));
+            set(monsterAilmentDuration("staggered"), get(rawMasteryStatistic("might")));
 
             increaseMastery("might");
 
@@ -89,6 +89,8 @@ export function useAttack() {
               value: "STAGGER",
             });
           }
+
+          ELEMENTAL_TYPES.forEach((elemental) => inflictElementalAilment(elemental));
 
           changeMonsterHealth({ delta: monsterDeltas, value: totalDamage });
 
@@ -110,6 +112,6 @@ export function useAttack() {
           ]);
         }
       },
-    [changeMonsterHealth, changeStamina, increaseMastery],
+    [changeMonsterHealth, changeStamina, increaseMastery, inflictElementalAilment],
   );
 }

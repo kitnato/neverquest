@@ -5,8 +5,8 @@ import { useDefend } from "@neverquest/hooks/actions/useDefend";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { isAttacking } from "@neverquest/state/character";
 import {
+  isMonsterAiling,
   isMonsterDead,
-  isMonsterStaggered,
   monsterAttackDuration,
   monsterAttackRate,
 } from "@neverquest/state/monster";
@@ -18,7 +18,7 @@ export function MonsterAttackMeter() {
     useRecoilState(monsterAttackDuration);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
-  const isMonsterStaggeredValue = useRecoilValue(isMonsterStaggered);
+  const isMonsterStaggeredValue = useRecoilValue(isMonsterAiling("staggered"));
   const monsterAttackRateValue = useRecoilValue(monsterAttackRate);
 
   const defend = useDefend();

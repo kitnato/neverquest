@@ -3,12 +3,12 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterBleedingMeter } from "@neverquest/components/Monster/MonsterBleedingMeter";
 import { ReactComponent as IconBleeding } from "@neverquest/icons/bleeding.svg";
-import { isShowing } from "@neverquest/state/isShowing";
+import { canReceiveAilment } from "@neverquest/state/monster";
 
 export function MonsterBleeding() {
-  const isShowingBleed = useRecoilValue(isShowing("bleed"));
+  const canReceiveBleeding = useRecoilValue(canReceiveAilment("bleeding"));
 
-  if (!isShowingBleed) {
+  if (!canReceiveBleeding) {
     return null;
   }
 

@@ -1,3 +1,5 @@
+export const AILMENT_DURATION_MAXIMUM = 3000;
+
 export const BLIGHT = {
   boss: 0.33,
   chanceBase: 0.1,

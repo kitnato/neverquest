@@ -64,12 +64,13 @@ export type Delta =
   | "stamina"
   | "staminaRegenerationRate";
 
-export const ELEMENTAL_TYPES = ["electric", "fire", "ice"] as const;
+export const ELEMENTAL_TYPES = ["lightning", "fire", "ice"] as const;
 export type Elemental = (typeof ELEMENTAL_TYPES)[number];
 
 export type Gear = "armor" | "shield" | "weapon";
 
-export type Gem = "ruby" | "sapphire" | "topaz";
+export const GEM_TYPES = ["ruby", "sapphire", "topaz"] as const;
+export type Gem = (typeof GEM_TYPES)[number];
 
 export type Item = Consumable | Gear | Trinket;
 

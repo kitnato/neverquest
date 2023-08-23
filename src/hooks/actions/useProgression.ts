@@ -6,7 +6,7 @@ import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster
 import { progress, progressMaximum } from "@neverquest/state/encounter";
 import { monsterLoot } from "@neverquest/state/monster";
 import { coinsLoot, essenceLoot, itemsLoot, scrapLoot } from "@neverquest/state/resources";
-import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
+import { GEM_TYPES } from "@neverquest/types/unions";
 import { getFromRange, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useProgression() {
@@ -34,15 +34,11 @@ export function useProgression() {
         if (gems > 0) {
           set(itemsLoot, (current) =>
             current.concat(
-              Array.from(Array(gems)).map(() => {
-                const type = ELEMENTAL_TYPES[getFromRange({ maximum: 3, minimum: 0 })];
-
-                return {
-                  ...GEM_BASE,
-                  id: nanoid(),
-                  type,
-                };
-              }),
+              Array.from(Array(gems)).map(() => ({
+                ...GEM_BASE,
+                id: nanoid(),
+                type: GEM_TYPES[getFromRange({ maximum: 3, minimum: 0 })],
+              })),
             ),
           );
         }

@@ -11,6 +11,7 @@ import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
 import {
   ELEMENTALS,
   GEMS_MAXIMUM,
+  GEM_ELEMENTALS,
   type WEAPON_NONE,
   WEAPON_SPECIFICATIONS,
 } from "@neverquest/data/inventory";
@@ -97,13 +98,14 @@ export function WeaponName({
                     {stackItems(gems.sort((a, b) => a.type.localeCompare(b.type))).map(
                       ({ item, stack }) => {
                         const { id, type } = item as GemItem;
-                        const { damage, duration } = weaponElementalEffectsValue[type];
+                        const elemental = GEM_ELEMENTALS[type];
+                        const { damage, duration } = weaponElementalEffectsValue[elemental];
 
                         return (
                           <div key={id}>
-                            <span className={ELEMENTALS[type].color}>{`+${damage}`}</span>
+                            <span className={ELEMENTALS[elemental].color}>{`+${damage}`}</span>
                             {" · "}
-                            <IconImage Icon={ELEMENTALS[type].Icon} size="tiny" />
+                            <IconImage Icon={ELEMENTALS[elemental].Icon} size="tiny" />
                             {` ${formatMilliseconds(duration)} · `}
                             <IconImage Icon={IconGem} size="tiny" />
                             &nbsp;

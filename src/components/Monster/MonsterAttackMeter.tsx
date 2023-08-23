@@ -1,6 +1,7 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
+import { ELEMENTAL_AILMENT_PENALTY } from "@neverquest/data/combat";
 import { useDefend } from "@neverquest/hooks/actions/useDefend";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { isAttacking } from "@neverquest/state/character";
@@ -18,6 +19,7 @@ export function MonsterAttackMeter() {
     useRecoilState(monsterAttackDuration);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
+  const isMonsterFrozenValue = useRecoilValue(isMonsterAiling("frozen"));
   const isMonsterStaggeredValue = useRecoilValue(isMonsterAiling("staggered"));
   const monsterAttackRateValue = useRecoilValue(monsterAttackRate);
 
@@ -25,7 +27,9 @@ export function MonsterAttackMeter() {
 
   useAnimation({
     callback: (delta) => {
-      const value = monsterAttackDurationValue - delta;
+      const value =
+        monsterAttackDurationValue -
+        delta * (isMonsterFrozenValue ? ELEMENTAL_AILMENT_PENALTY.frozen : 1);
 
       if (value <= 0) {
         defend();

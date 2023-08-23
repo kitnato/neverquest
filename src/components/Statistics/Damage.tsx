@@ -6,7 +6,7 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSecond";
-import { ELEMENTALS } from "@neverquest/data/inventory";
+import { ELEMENTALS, GEM_ELEMENTALS } from "@neverquest/data/inventory";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
 import { ReactComponent as IconStrength } from "@neverquest/icons/strength.svg";
@@ -66,10 +66,11 @@ export function Damage() {
                           {stackItems(gems.sort((a, b) => a.type.localeCompare(b.type))).map(
                             ({ item }) => {
                               const { id, type } = item as GemItem;
+                              const elemental = GEM_ELEMENTALS[type];
 
                               return (
-                                <div className={ELEMENTALS[type].color} key={id}>
-                                  {` +${weaponElementalEffectsValue[type].damage}`}
+                                <div className={ELEMENTALS[elemental].color} key={id}>
+                                  {` +${weaponElementalEffectsValue[elemental].damage}`}
                                 </div>
                               );
                             },

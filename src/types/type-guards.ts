@@ -8,7 +8,7 @@ import type {
   TrinketItem,
   Weapon,
 } from "@neverquest/types";
-import { CONSUMABLE_TYPES, ELEMENTAL_TYPES, TRINKET_TYPES } from "@neverquest/types/unions";
+import { CONSUMABLE_TYPES, GEM_TYPES, TRINKET_TYPES } from "@neverquest/types/unions";
 
 export function isArmor(gear: unknown): gear is Armor {
   return isObject(gear) && gear.protection !== undefined;
@@ -27,7 +27,7 @@ function isObject(value: unknown): value is Record<string, unknown> {
 }
 
 export function isGem(gem: unknown): gem is GemItem {
-  return isObject(gem) && ELEMENTAL_TYPES.some((type) => type === gem.type);
+  return isObject(gem) && GEM_TYPES.some((type) => type === gem.type);
 }
 
 export function isShield(gear: unknown): gear is Shield {

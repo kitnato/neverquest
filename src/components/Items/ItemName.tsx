@@ -1,26 +1,12 @@
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import type { Placement } from "react-bootstrap/esm/types";
 
-import { IconImage } from "../IconImage";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
+import { GemDescription } from "@neverquest/components/Items/GemDescription";
 import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
-import { ELEMENTALS } from "@neverquest/data/inventory";
 import type { ConsumableItem, GemItem, TrinketItem } from "@neverquest/types";
 import { isGem } from "@neverquest/types/type-guards";
-import type { Elemental } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
-
-const GemDescription = ({ type }: { type: Elemental }) => {
-  const { color, Icon } = ELEMENTALS[type];
-
-  return (
-    <>
-      Adds elemental&nbsp;
-      <IconImage Icon={Icon} size="tiny" />
-      &nbsp;<span className={color}>{type}</span> effect to a weapon, shield, or armor.
-    </>
-  );
-};
 
 export function ItemName({
   item,

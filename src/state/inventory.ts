@@ -6,6 +6,7 @@ import {
   GEMS_MAXIMUM,
   GEM_DAMAGE,
   GEM_DURATION,
+  GEM_ELEMENTALS,
   SHIELD_NONE,
   WEAPON_NONE,
 } from "@neverquest/data/inventory";
@@ -143,15 +144,15 @@ export const weaponElementalEffects = withStateKey("weaponElementalEffects", (ke
       return stackItems(gems).reduce(
         (current, { item, stack }) => ({
           ...current,
-          [(item as GemItem).type]: {
+          [GEM_ELEMENTALS[(item as GemItem).type]]: {
             damage: Math.ceil(damage * GEM_DAMAGE * stack),
             duration: GEM_DURATION * stack,
           },
         }),
         {
-          electric: { damage: 0, duration: 0 },
           fire: { damage: 0, duration: 0 },
           ice: { damage: 0, duration: 0 },
+          lightning: { damage: 0, duration: 0 },
         },
       );
     },

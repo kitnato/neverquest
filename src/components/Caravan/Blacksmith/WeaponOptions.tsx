@@ -40,22 +40,22 @@ export function WeaponOptions() {
 
   const isShowingValue = useRecoilValue(isShowing(showingType));
 
+  const maximumWeaponLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
   const weapon = generateWeapon({
     allowNSFW: allowNSFWValue,
     gearClass: weaponClass,
     hasPrefix: true,
-    hasSuffix: Math.random() < getGrowthSigmoid(weaponLevel),
+    hasSuffix: Math.random() <= getGrowthSigmoid(weaponLevel),
     level: weaponLevel,
     modality: "melee",
     tags:
       weaponLevel < stageValue - 1
         ? ["lowQuality"]
-        : weaponLevel > stageValue + 1
+        : weaponLevel > maximumWeaponLevel
         ? ["highQuality"]
         : undefined,
   });
   const { ranges, staminaCost, weight } = weapon;
-  const maximumWeaponLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
 
   return (
     <>

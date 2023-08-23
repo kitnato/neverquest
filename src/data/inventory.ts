@@ -6,13 +6,13 @@ import { ReactComponent as IconPlate } from "@neverquest/icons/armor-plate.svg";
 import { ReactComponent as IconReinforced } from "@neverquest/icons/armor-reinforced.svg";
 import { ReactComponent as IconBandages } from "@neverquest/icons/bandages.svg";
 import { ReactComponent as IconCompass } from "@neverquest/icons/compass.svg";
-import { ReactComponent as IconElectric } from "@neverquest/icons/electric.svg";
 import { ReactComponent as IconElixir } from "@neverquest/icons/elixir.svg";
 import { ReactComponent as IconFire } from "@neverquest/icons/fire.svg";
 import { ReactComponent as IconStone } from "@neverquest/icons/hearthstone.svg";
 import { ReactComponent as IconHide } from "@neverquest/icons/hide.svg";
 import { ReactComponent as IconIce } from "@neverquest/icons/ice.svg";
 import { ReactComponent as IconKnapsack } from "@neverquest/icons/knapsack.svg";
+import { ReactComponent as IconLightning } from "@neverquest/icons/lightning.svg";
 import { ReactComponent as IconMonkeyPaw } from "@neverquest/icons/monkey-paw.svg";
 import { ReactComponent as IconParry } from "@neverquest/icons/parry.svg";
 import { ReactComponent as IconPhylactery } from "@neverquest/icons/phylactery.svg";
@@ -149,11 +149,11 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
 
 export const ELEMENTALS: Record<
   Elemental,
-  { ailment: MonsterAilment; color: string; gem: Gem; Icon: SVGIcon }
+  { ailment: MonsterAilment; color: string; Icon: SVGIcon }
 > = {
-  electric: { ailment: "shocked", color: "text-yellow", gem: "topaz", Icon: IconElectric },
-  fire: { ailment: "burning", color: "text-red", gem: "ruby", Icon: IconFire },
-  ice: { ailment: "frozen", color: "text-blue", gem: "sapphire", Icon: IconIce },
+  fire: { ailment: "burning", color: "text-orange", Icon: IconFire },
+  ice: { ailment: "frozen", color: "text-blue", Icon: IconIce },
+  lightning: { ailment: "shocked", color: "text-yellow", Icon: IconLightning },
 };
 
 export const ENCUMBRANCE = 3;
@@ -165,7 +165,13 @@ export const GEM_BASE = {
 
 export const GEM_DAMAGE = 0.2;
 
-export const GEM_DURATION = 750;
+export const GEM_DURATION = 1000;
+
+export const GEM_ELEMENTALS: Record<Gem, Elemental> = {
+  ruby: "fire",
+  sapphire: "ice",
+  topaz: "lightning",
+};
 
 export const KNAPSACK_SIZE = 3;
 

@@ -93,7 +93,7 @@ export const CREW: Record<
     coinPrice: 40,
     description: "Expands inventory space.",
     Icon: IconTailor,
-    interaction: "Upgrade",
+    interaction: "Sow",
     monologues: { 1: "Allow me to deepen your pockets." },
     requiredStage: 8,
   },

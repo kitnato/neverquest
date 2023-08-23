@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { BLEED } from "@neverquest/data/combat";
+import { BLEED, ELEMENTAL_AILMENT_PENALTY } from "@neverquest/data/combat";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
@@ -10,7 +10,7 @@ import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { rawMasteryStatistic } from "@neverquest/state/masteries";
-import { monsterAilmentDuration, monsterElement } from "@neverquest/state/monster";
+import { isMonsterAiling, monsterAilmentDuration, monsterElement } from "@neverquest/state/monster";
 import { skills } from "@neverquest/state/skills";
 import { bleed, criticalChance, criticalDamage, damageTotal } from "@neverquest/state/statistics";
 import type { DeltaDisplay } from "@neverquest/types/ui";
@@ -45,9 +45,9 @@ export function useAttack() {
             get(skills("traumatology")) && gearClass === "blunt" && Math.random() <= abilityChance;
 
           const baseDamage = -get(damageTotal);
-          const totalDamage = hasInflictedCritical
-            ? baseDamage + baseDamage * get(criticalDamage)
-            : baseDamage;
+          const totalDamage =
+            (hasInflictedCritical ? baseDamage + baseDamage * get(criticalDamage) : baseDamage) *
+            (get(isMonsterAiling("burning")) ? ELEMENTAL_AILMENT_PENALTY.burning : 1);
           const monsterDeltas: DeltaDisplay = [
             {
               color: "text-danger",

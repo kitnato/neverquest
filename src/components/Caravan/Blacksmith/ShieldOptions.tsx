@@ -39,7 +39,7 @@ export function ShieldOptions() {
     allowNSFW: allowNSFWValue,
     gearClass: shieldClass,
     hasPrefix: true,
-    hasSuffix: Math.random() < getGrowthSigmoid(shieldLevel),
+    hasSuffix: Math.random() <= getGrowthSigmoid(shieldLevel),
     level: shieldLevel,
   });
   const { ranges, stagger, staminaCost, weight } = shield;

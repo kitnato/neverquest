@@ -1,6 +1,6 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import { weapon, weaponElementalEffects } from "./inventory";
+import { ELEMENTAL_AILMENT_PENALTY } from "@neverquest/data/combat";
 import { ELEMENTALS } from "@neverquest/data/inventory";
 import {
   BLIGHT,
@@ -14,7 +14,8 @@ import {
 } from "@neverquest/data/monster";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
-import { isShowing } from "@neverquest/state/isShowing";
+import { weapon, weaponElementalEffects } from "@neverquest/state/inventory";
+import { skills } from "@neverquest/state/skills";
 import { lootBonus } from "@neverquest/state/statistics";
 import {
   ELEMENTAL_TYPES,
@@ -35,16 +36,16 @@ export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
 
         switch (type) {
           case "bleeding": {
-            return get(isShowing("bleed")) && abilityChance > 0 && gearClass === "piercing";
+            return get(skills("anatomy")) && abilityChance > 0 && gearClass === "piercing";
           }
 
           case "staggered": {
-            return get(isShowing("stagger")) && abilityChance > 0 && gearClass === "blunt";
+            return get(skills("traumatology")) && abilityChance > 0 && gearClass === "blunt";
           }
 
           default: {
             const elemental = ELEMENTAL_TYPES.find(
-              (elemental) => ELEMENTALS[elemental].ailment === type,
+              (current) => ELEMENTALS[current].ailment === type,
             );
 
             // TODO - add armor thorns check
@@ -124,7 +125,8 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
 
       return Math.round(
         (maximum * getGrowthSigmoid(get(stage)) + bonus * getGrowthSigmoid(get(progress))) *
-          (1 + (get(isBoss) ? boss : 0)),
+          (1 + (get(isBoss) ? boss : 0)) *
+          (get(isMonsterAiling("shocked")) ? ELEMENTAL_AILMENT_PENALTY.shocked : 1),
       );
     },
     key,

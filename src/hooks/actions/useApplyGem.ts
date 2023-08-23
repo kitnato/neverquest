@@ -1,25 +1,25 @@
 import { useRecoilCallback } from "recoil";
 
-import { canApplyShard, inventory, weapon } from "@neverquest/state/inventory";
-import type { ShardItem } from "@neverquest/types";
+import { canApplyGem, inventory, weapon } from "@neverquest/state/inventory";
+import type { GemItem } from "@neverquest/types";
 import { isWeapon } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export function useApplyShard() {
+export function useApplyGem() {
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      (shard: ShardItem) => {
+      (gem: GemItem) => {
         const get = getSnapshotGetter(snapshot);
 
-        if (get(canApplyShard)) {
+        if (get(canApplyGem)) {
           const weaponValue = get(weapon);
 
           set(inventory, (current) =>
             current
-              .filter((current) => current.id !== shard.id)
+              .filter((current) => current.id !== gem.id)
               .map((item) => {
                 if (isWeapon(item) && item.id === weaponValue.id) {
-                  return { ...item, shards: item.shards.concat(shard) };
+                  return { ...item, gems: item.gems.concat(gem) };
                 }
 
                 return item;

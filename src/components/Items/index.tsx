@@ -1,7 +1,7 @@
 import { Button, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { ApplyShard } from "@neverquest/components/Items/ApplyShard";
+import { ApplyGem } from "@neverquest/components/Items/ApplyGem";
 import { ConsumeAntidote } from "@neverquest/components/Items/Consumable/ConsumeAntidote";
 import { ConsumeBandages } from "@neverquest/components/Items/Consumable/ConsumeBandages";
 import { ConsumeElixir } from "@neverquest/components/Items/Consumable/ConsumeElixir";
@@ -16,7 +16,7 @@ import {
   isArmor,
   isConsumable,
   isGear,
-  isShard,
+  isGem,
   isShield,
   isStackable,
   isTrinket,
@@ -112,7 +112,7 @@ export function Inventory() {
           ...stackItems(
             storedItems.filter(isConsumable).sort((a, b) => a.type.localeCompare(b.type)),
           ),
-          ...stackItems(storedItems.filter(isShard).sort((a, b) => a.type.localeCompare(b.type))),
+          ...stackItems(storedItems.filter(isGem).sort((a, b) => a.type.localeCompare(b.type))),
         ].map((stackedItem) => {
           const { item, stack } = stackedItem;
 
@@ -140,8 +140,8 @@ export function Inventory() {
               }
             }
 
-            if (isShard(item)) {
-              return <ApplyShard shard={item} />;
+            if (isGem(item)) {
+              return <ApplyGem gem={item} />;
             }
 
             return null;

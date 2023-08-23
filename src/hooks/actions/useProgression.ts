@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
-import { SHARD_BASE } from "@neverquest/data/inventory";
+import { GEM_BASE } from "@neverquest/data/inventory";
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
 import { progress, progressMaximum } from "@neverquest/state/encounter";
 import { monsterLoot } from "@neverquest/state/monster";
@@ -17,7 +17,7 @@ export function useProgression() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const { coins, essence, scrap, shards } = get(monsterLoot);
+        const { coins, essence, gems, scrap } = get(monsterLoot);
 
         if (coins > 0) {
           set(coinsLoot, (current) => current + coins);
@@ -31,14 +31,14 @@ export function useProgression() {
           set(scrapLoot, (current) => current + scrap);
         }
 
-        if (shards > 0) {
+        if (gems > 0) {
           set(itemsLoot, (current) =>
             current.concat(
-              Array.from(Array(shards)).map(() => {
+              Array.from(Array(gems)).map(() => {
                 const type = ELEMENTAL_TYPES[getFromRange({ maximum: 3, minimum: 0 })];
 
                 return {
-                  ...SHARD_BASE,
+                  ...GEM_BASE,
                   id: nanoid(),
                   type,
                 };

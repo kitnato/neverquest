@@ -10,7 +10,7 @@ export type Attribute =
   | "vigor"
   | "vitality";
 
-export const CONSUMABLE_TYPES = ["antidote", "bandages", "elixir", "salve", "soulstone"] as const;
+export const CONSUMABLE_TYPES = ["antidote", "bandages", "elixir", "salve", "phylactery"] as const;
 export type Consumable = (typeof CONSUMABLE_TYPES)[number];
 
 export type Crew =
@@ -68,6 +68,8 @@ export const ELEMENTAL_TYPES = ["electric", "fire", "ice"] as const;
 export type Elemental = (typeof ELEMENTAL_TYPES)[number];
 
 export type Gear = "armor" | "shield" | "weapon";
+
+export type Gem = "ruby" | "sapphire" | "topaz";
 
 export type Item = Consumable | Gear | Trinket;
 
@@ -144,7 +146,7 @@ export type Skill = (typeof SKILL_TYPES)[number];
 
 export type StateKey =
   | "allowNSFW"
-  | "appliedShards"
+  | "appliedGems"
   | "areAttributesIncreasable"
   | "armor"
   | "attackDuration"
@@ -161,7 +163,7 @@ export type StateKey =
   | "blight"
   | "blightIncrement"
   | "block"
-  | "canApplyShard"
+  | "canApplyGem"
   | "canAttackOrParry"
   | "canBlock"
   | "canDodge"

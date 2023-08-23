@@ -183,6 +183,7 @@ export function generateWeapon({
     coinPrice: Math.round(coinPrice * growthFactor),
     damage: getFromRange(ranges.damage),
     gearClass,
+    gems: [],
     grip: "one-handed",
     id: nanoid(),
     isEquipped: false,
@@ -202,7 +203,6 @@ export function generateWeapon({
     ranges,
     rate: getFromRange(ranges.rate),
     scrapPrice: Math.round(scrapPrice * growthFactor),
-    shards: [],
     staminaCost: Math.ceil(staminaCost * growthFactor),
     weight: Math.ceil(weight * growthFactor),
   };
@@ -214,7 +214,7 @@ export function generateWilderness({ allowNSFW, stage }: { allowNSFW: boolean; s
 
   return LOCRA.generateLocation({
     allowNSFW,
-    hasPrefix: Math.random() < prefix.minimum + prefix.attenuation * growthFactor,
-    hasSuffix: Math.random() < suffix.minimum + suffix.attenuation * growthFactor,
+    hasPrefix: Math.random() <= prefix.minimum + prefix.attenuation * growthFactor,
+    hasSuffix: Math.random() <= suffix.minimum + suffix.attenuation * growthFactor,
   });
 }

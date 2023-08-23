@@ -248,7 +248,7 @@ The merchant's inventory of items will grow and diversify after each new stage.
 
 #### Occultist
 
-Offers a reset of all acquired [attribute](#attributes) points in exchange for coins and essence. Also sells soulstones that resurrect the character upon death.
+Offers a reset of all acquired [attribute](#attributes) points in exchange for coins and essence. Also sells phylacteries that resurrect the character upon death.
 
 #### Tailor
 
@@ -494,7 +494,7 @@ Fully restores [stamina](#stamina). Does not affect [blight](#blight).
 
 Cures and removes [blight](#blight).
 
-#### Soulstone
+#### Phylactery
 
 Sold by the [occultist](#occultist).
 

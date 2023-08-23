@@ -5,12 +5,12 @@ import { IconImage } from "../IconImage";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
 import { ELEMENTALS } from "@neverquest/data/inventory";
-import type { ConsumableItem, ShardItem, TrinketItem } from "@neverquest/types";
-import { isShard } from "@neverquest/types/type-guards";
+import type { ConsumableItem, GemItem, TrinketItem } from "@neverquest/types";
+import { isGem } from "@neverquest/types/type-guards";
 import type { Elemental } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
-const ShardDescription = ({ type }: { type: Elemental }) => {
+const GemDescription = ({ type }: { type: Elemental }) => {
   const { color, Icon } = ELEMENTALS[type];
 
   return (
@@ -27,15 +27,13 @@ export function ItemName({
   placement,
   stack,
 }: {
-  item: ConsumableItem | ShardItem | TrinketItem;
+  item: ConsumableItem | GemItem | TrinketItem;
   placement?: Placement;
   stack?: number;
 }) {
   const { type, weight } = item;
-  const description = isShard(item) ? <ShardDescription type={item.type} /> : item.description;
-  const name = isShard(item)
-    ? `${capitalizeAll(ELEMENTALS[item.type].shard)} shard`
-    : capitalizeAll(type);
+  const description = isGem(item) ? <GemDescription type={item.type} /> : item.description;
+  const name = capitalizeAll(type);
 
   return (
     <OverlayTrigger

@@ -25,7 +25,7 @@ export function ConsumeBandages({ consumable }: { consumable: ConsumableItem }) 
     >
       <span>
         <Button disabled={isHealthAtMaximumValue} onClick={apply} variant="outline-dark">
-          Apply
+          Use
         </Button>
       </span>
     </OverlayTrigger>

@@ -3,14 +3,14 @@ import { atom, selector, selectorFamily } from "recoil";
 import {
   ARMOR_NONE,
   ENCUMBRANCE,
-  SHARDS_MAXIMUM,
-  SHARD_DAMAGE,
-  SHARD_DURATION,
+  GEMS_MAXIMUM,
+  GEM_DAMAGE,
+  GEM_DURATION,
   SHIELD_NONE,
   WEAPON_NONE,
 } from "@neverquest/data/inventory";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import type { Armor, InventoryItem, ShardItem, Shield, Weapon } from "@neverquest/types";
+import type { Armor, GemItem, InventoryItem, Shield, Weapon } from "@neverquest/types";
 import {
   isArmor,
   isConsumable,
@@ -44,9 +44,9 @@ export const armor = withStateKey("armor", (key) =>
   }),
 );
 
-export const canApplyShard = withStateKey("canApplyShard", (key) =>
+export const canApplyGem = withStateKey("canApplyGem", (key) =>
   selector({
-    get: ({ get }) => get(weapon).shards.length < SHARDS_MAXIMUM,
+    get: ({ get }) => get(weapon).gems.length < GEMS_MAXIMUM,
     key,
   }),
 );
@@ -138,14 +138,14 @@ export const weapon = withStateKey("weapon", (key) =>
 export const weaponElementalEffects = withStateKey("weaponElementalEffects", (key) =>
   selector<Record<Elemental, { damage: number; duration: number }>>({
     get: ({ get }) => {
-      const { damage, shards } = get(weapon);
+      const { damage, gems } = get(weapon);
 
-      return stackItems(shards).reduce(
+      return stackItems(gems).reduce(
         (current, { item, stack }) => ({
           ...current,
-          [(item as ShardItem).type]: {
-            damage: Math.ceil(damage * SHARD_DAMAGE[stack - 1]),
-            duration: SHARD_DURATION[stack - 1],
+          [(item as GemItem).type]: {
+            damage: Math.ceil(damage * GEM_DAMAGE * stack),
+            duration: GEM_DURATION * stack,
           },
         }),
         {

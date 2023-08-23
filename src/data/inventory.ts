@@ -15,11 +15,11 @@ import { ReactComponent as IconIce } from "@neverquest/icons/ice.svg";
 import { ReactComponent as IconKnapsack } from "@neverquest/icons/knapsack.svg";
 import { ReactComponent as IconMonkeyPaw } from "@neverquest/icons/monkey-paw.svg";
 import { ReactComponent as IconParry } from "@neverquest/icons/parry.svg";
+import { ReactComponent as IconPhylactery } from "@neverquest/icons/phylactery.svg";
 import { ReactComponent as IconSalve } from "@neverquest/icons/salve.svg";
 import { ReactComponent as IconShieldMedium } from "@neverquest/icons/shield-medium.svg";
 import { ReactComponent as IconShieldSmall } from "@neverquest/icons/shield-small.svg";
 import { ReactComponent as IconShieldTower } from "@neverquest/icons/shield-tower.svg";
-import { ReactComponent as IconSoulstone } from "@neverquest/icons/soulstone.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconWeaponBleed } from "@neverquest/icons/weapon-bleed.svg";
 import { ReactComponent as IconBlunt } from "@neverquest/icons/weapon-blunt.svg";
@@ -32,6 +32,7 @@ import type { SVGIcon } from "@neverquest/types/props";
 import type {
   Consumable,
   Elemental,
+  Gem,
   MonsterAilment,
   Showing,
   Trinket,
@@ -126,6 +127,15 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
         weight: 1,
       },
     },
+    phylactery: {
+      Icon: IconPhylactery,
+      item: {
+        coinPrice: 100,
+        description: "Resurrects the carrier upon death.",
+        type: "phylactery",
+        weight: 5,
+      },
+    },
     salve: {
       Icon: IconSalve,
       item: {
@@ -135,40 +145,31 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
         weight: 2,
       },
     },
-    soulstone: {
-      Icon: IconSoulstone,
-      item: {
-        coinPrice: 100,
-        description: "Resurrects the carrier upon death.",
-        type: "soulstone",
-        weight: 5,
-      },
-    },
   };
 
 export const ELEMENTALS: Record<
   Elemental,
-  { ailment: MonsterAilment; color: string; Icon: SVGIcon; shard: string }
+  { ailment: MonsterAilment; color: string; gem: Gem; Icon: SVGIcon }
 > = {
-  electric: { ailment: "shocked", color: "text-purple", Icon: IconElectric, shard: "lightning" },
-  fire: { ailment: "burning", color: "text-orange", Icon: IconFire, shard: "incendiary" },
-  ice: { ailment: "frozen", color: "text-blue", Icon: IconIce, shard: "frozen" },
+  electric: { ailment: "shocked", color: "text-yellow", gem: "topaz", Icon: IconElectric },
+  fire: { ailment: "burning", color: "text-red", gem: "ruby", Icon: IconFire },
+  ice: { ailment: "frozen", color: "text-blue", gem: "sapphire", Icon: IconIce },
 };
 
 export const ENCUMBRANCE = 3;
 
-export const KNAPSACK_SIZE = 3;
-
-export const SHARD_BASE = {
+export const GEM_BASE = {
   coinPrice: 100,
   weight: 1,
 };
 
-export const SHARD_DAMAGE = [0.05, 0.25, 1];
+export const GEM_DAMAGE = 0.2;
 
-export const SHARD_DURATION = [750, 1500, 2500];
+export const GEM_DURATION = 750;
 
-export const SHARDS_MAXIMUM = 3;
+export const KNAPSACK_SIZE = 3;
+
+export const GEMS_MAXIMUM = 3;
 
 export const SHIELD_BASE = {
   coinPrice: 400,
@@ -312,13 +313,13 @@ export const WEAPON_NONE: Omit<Weapon, "coinPrice" | "isEquipped" | "ranges" | "
   abilityChance: 0,
   damage: 10,
   gearClass: "blunt",
+  gems: [],
   grip: "one-handed",
   id: nanoid(),
   level: 0,
   modality: "melee",
   name: "Unarmed",
   rate: 2500,
-  shards: [],
   staminaCost: 0,
   weight: 0,
 };

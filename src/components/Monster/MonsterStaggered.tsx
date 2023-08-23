@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterStaggeredMeter } from "@neverquest/components/Monster/MonsterStaggeredMeter";
-import { ReactComponent as IconStaggered } from "@neverquest/icons/monster-staggered.svg";
+import { ReactComponent as IconStaggered } from "@neverquest/icons/staggered.svg";
 import { canReceiveAilment } from "@neverquest/state/monster";
 
 export function MonsterStaggered() {

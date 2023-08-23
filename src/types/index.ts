@@ -36,7 +36,7 @@ export type ConsumableItem = ItemBase & {
   type: Consumable;
 };
 
-export type InventoryItem = ConsumableItem | GearItem | ShardItem | TrinketItem;
+export type InventoryItem = ConsumableItem | GearItem | GemItem | TrinketItem;
 
 type ItemBase = {
   coinPrice: number;
@@ -63,7 +63,7 @@ export type Range = {
   minimum: number;
 };
 
-export type ShardItem = ItemBase & {
+export type GemItem = ItemBase & {
   type: Elemental;
 };
 
@@ -77,7 +77,7 @@ export type Shield = GearBase & {
   staminaCost: number;
 };
 
-export type StackableItem = ConsumableItem | ShardItem;
+export type StackableItem = ConsumableItem | GemItem;
 
 export type TrinketItem = ItemBase & {
   description: string;
@@ -92,6 +92,7 @@ export type Weapon = GearBase & {
   abilityChance: number;
   damage: number;
   gearClass: WeaponClass;
+  gems: GemItem[];
   grip: WeaponGrip;
   modality: WeaponModality;
   ranges: {
@@ -100,6 +101,5 @@ export type Weapon = GearBase & {
     rate: Range;
   };
   rate: number;
-  shards: ShardItem[];
   staminaCost: number;
 };

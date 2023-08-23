@@ -2,7 +2,7 @@ import type {
   Armor,
   ConsumableItem,
   GearItem,
-  ShardItem,
+  GemItem,
   Shield,
   StackableItem,
   TrinketItem,
@@ -26,8 +26,8 @@ function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }
 
-export function isShard(shard: unknown): shard is ShardItem {
-  return isObject(shard) && ELEMENTAL_TYPES.some((type) => type === shard.type);
+export function isGem(gem: unknown): gem is GemItem {
+  return isObject(gem) && ELEMENTAL_TYPES.some((type) => type === gem.type);
 }
 
 export function isShield(gear: unknown): gear is Shield {
@@ -35,7 +35,7 @@ export function isShield(gear: unknown): gear is Shield {
 }
 
 export function isStackable(stackable: unknown): stackable is StackableItem {
-  return isConsumable(stackable) || isShard(stackable);
+  return isConsumable(stackable) || isGem(stackable);
 }
 
 export function isTrinket(trinket: unknown): trinket is TrinketItem {

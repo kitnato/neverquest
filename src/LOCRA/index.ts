@@ -179,7 +179,7 @@ export const LOCRA = {
     });
     const { canPluralize, name } =
       filteredLocations[Math.floor(Math.random() * filteredLocations.length)];
-    const isPluralized = Math.random() < 0.5;
+    const isPluralized = Math.random() <= 0.5;
     const location = LOCRA.generate({
       category: "location",
       name,

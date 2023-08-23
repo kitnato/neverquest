@@ -213,8 +213,8 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
       return {
         coins: Math.round((progressBonus + coinsBase * growthFactor) * totalBonus),
         essence: Math.round((progressBonus + essenceBase * growthFactor) * totalBonus),
+        gems: isBossValue ? 1 + (stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL : 0,
         scrap: Math.round((progressBonus + scrapBase * growthFactor) * totalBonus),
-        shards: isBossValue ? 1 + (stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL : 0,
       };
     },
     key,

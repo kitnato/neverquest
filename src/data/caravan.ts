@@ -83,7 +83,7 @@ export const CREW: Record<
   },
   occultist: {
     coinPrice: 200,
-    description: "Sells soulstones and offers purging rituals.",
+    description: "Sells phylacteries and offers purging rituals.",
     Icon: IconOccultist,
     interaction: "Ritual",
     monologues: { 1: "Prepared to pierce the veil?" },

@@ -40,7 +40,7 @@ export function ArmorOptions() {
     allowNSFW: allowNSFWValue,
     gearClass: armorClass,
     hasPrefix: true,
-    hasSuffix: Math.random() < getGrowthSigmoid(armorLevel),
+    hasSuffix: Math.random() <= getGrowthSigmoid(armorLevel),
     level: armorLevel,
   });
   const { protection, ranges, staminaCost, weight } = armor;

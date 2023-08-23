@@ -7,7 +7,7 @@ import { ShieldName } from "@neverquest/components/Items/Shield/ShieldName";
 import { WeaponName } from "@neverquest/components/Items/Weapon/WeaponName";
 import { CONSUMABLES, TRINKETS } from "@neverquest/data/inventory";
 import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
-import { ReactComponent as IconShard } from "@neverquest/icons/shard.svg";
+import { ReactComponent as IconGem } from "@neverquest/icons/gem.svg";
 import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
 import { ReactComponent as IconWeapon } from "@neverquest/icons/weapon.svg";
 import type { InventoryItem } from "@neverquest/types";
@@ -91,9 +91,9 @@ export function ItemDisplay({
   return (
     <IconDisplay
       contents={<ItemName item={item} placement={overlayPlacement} stack={stack} />}
-      Icon={IconShard}
+      Icon={IconGem}
       iconProps={iconProps}
-      tooltip="Shard"
+      tooltip="Gem"
     />
   );
 }

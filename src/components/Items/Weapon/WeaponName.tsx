@@ -10,18 +10,18 @@ import { StaminaCostDetail } from "@neverquest/components/Items/StaminaCostDetai
 import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
 import {
   ELEMENTALS,
-  SHARDS_MAXIMUM,
+  GEMS_MAXIMUM,
   type WEAPON_NONE,
   WEAPON_SPECIFICATIONS,
 } from "@neverquest/data/inventory";
-import { ReactComponent as IconShard } from "@neverquest/icons/shard.svg";
+import { ReactComponent as IconGem } from "@neverquest/icons/gem.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
 import { ReactComponent as IconWeaponDamagePerSecond } from "@neverquest/icons/weapon-damage-per-second.svg";
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
 import { weaponElementalEffects, weapon as weaponEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { showDamagePerSecond } from "@neverquest/state/settings";
-import type { ShardItem, Weapon } from "@neverquest/types";
+import type { GemItem, Weapon } from "@neverquest/types";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import {
   capitalizeAll,
@@ -44,10 +44,9 @@ export function WeaponName({
   const weaponElementalEffectsValue = useRecoilValue(weaponElementalEffects);
   const weaponEquippedValue = useRecoilValue(weaponEquipped);
 
-  const { abilityChance, damage, gearClass, level, name, rate, shards, staminaCost, weight } =
-    weapon;
+  const { abilityChance, damage, gearClass, gems, level, name, rate, staminaCost, weight } = weapon;
   const { abilityName, IconAbility, IconGearClass, showingType } = WEAPON_SPECIFICATIONS[gearClass];
-  const appliedShards = shards.length;
+  const appliedGems = gems.length;
   const damagePerSecond = getDamagePerRate({
     damage,
     rate,
@@ -88,16 +87,16 @@ export function WeaponName({
                 </td>
               </tr>
 
-              {appliedShards > 0 && (
+              {appliedGems > 0 && (
                 <tr>
                   <td
                     className={CLASS_TABLE_CELL_ITALIC}
-                  >{`Shards (${appliedShards}/${SHARDS_MAXIMUM}):`}</td>
+                  >{`Gems (${appliedGems}/${GEMS_MAXIMUM}):`}</td>
 
                   <td>
-                    {stackItems(shards.sort((a, b) => a.type.localeCompare(b.type))).map(
+                    {stackItems(gems.sort((a, b) => a.type.localeCompare(b.type))).map(
                       ({ item, stack }) => {
-                        const { id, type } = item as ShardItem;
+                        const { id, type } = item as GemItem;
                         const { damage, duration } = weaponElementalEffectsValue[type];
 
                         return (
@@ -106,7 +105,7 @@ export function WeaponName({
                             {" · "}
                             <IconImage Icon={ELEMENTALS[type].Icon} size="tiny" />
                             {` ${formatMilliseconds(duration)} · `}
-                            <IconImage Icon={IconShard} size="tiny" />
+                            <IconImage Icon={IconGem} size="tiny" />
                             &nbsp;
                             {stack}
                           </div>

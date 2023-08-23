@@ -114,15 +114,16 @@ The shard types are the following, associated with their corresponding [elementa
 Traits are permanent passive abilities acquired upon [retiring](#retirement) for all subsequent new quests.
 
 - Brawler: Wearing no shield doubles unarmed damage.
-- Bruiser: Current stamina adds unarmed bonus damage & unarmed attacks have a chance to stagger.
+- Bruiser: Current stamina adds unarmed bonus damage & unarmed attacks have a 25% chance to stagger.
 - Colossus: Dual wield two-handed weapons.
 - Field surgeon: Automatically restore health when not in combat.
 - Hoarder: Start with all trinkets.
-- Inoculated: When poisoned, health reduction and recovery rate are halved.
+- Inoculated: Can no longer be poisoned or blighted.
 - Nudist: Double dodge rate when not wearing any armor.
 - Shredder: Bleed damage is inflicted all at once.
-- Stalwart: Ignore penalties when wearing armor.
-- Tank: Shields increase protection by 50%.
+- Stalwart: Ignore all penalties when wearing armor.
+- Tank: Shields double total protection.
+- Tormentor: Monsters no longer regenerate out of combat.
 
 #### Weapons
 

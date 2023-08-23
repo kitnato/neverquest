@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import { CONSUMABLES, TRINKETS } from "@neverquest/data/inventory";
 import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
-import { ReactComponent as IconShard } from "@neverquest/icons/shard.svg";
+import { ReactComponent as IconGem } from "@neverquest/icons/gem.svg";
 import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { ReactComponent as IconWeapon } from "@neverquest/icons/weapon.svg";
@@ -11,7 +11,7 @@ import { itemsAcquired } from "@neverquest/state/inventory";
 import {
   isArmor,
   isConsumable,
-  isShard,
+  isGem,
   isShield,
   isTrinket,
   isWeapon,
@@ -44,8 +44,8 @@ export function ItemAcquisition() {
         return CONSUMABLES[item.type].Icon;
       }
 
-      if (isShard(item)) {
-        return IconShard;
+      if (isGem(item)) {
+        return IconGem;
       }
 
       if (isShield(item)) {

@@ -37,11 +37,11 @@ export function useChangeHealth() {
         );
 
         if (newHealth <= 0) {
-          const soulstone = get(inventory).find(
-            (item) => isConsumable(item) && item.type === "soulstone",
+          const phylactery = get(inventory).find(
+            (item) => isConsumable(item) && item.type === "phylactery",
           );
 
-          if (soulstone !== undefined) {
+          if (phylactery !== undefined) {
             newHealth = healthMaximumTotalValue;
 
             set(deltas("health"), {
@@ -49,7 +49,7 @@ export function useChangeHealth() {
               value: "RESURRECTED",
             });
 
-            set(inventory, (current) => current.filter((item) => item.id !== soulstone.id));
+            set(inventory, (current) => current.filter((item) => item.id !== phylactery.id));
           } else {
             newHealth = 0;
 

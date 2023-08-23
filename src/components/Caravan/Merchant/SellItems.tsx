@@ -8,7 +8,7 @@ import {
   isArmor,
   isConsumable,
   isGear,
-  isShard,
+  isGem,
   isShield,
   isTrinket,
   isWeapon,
@@ -81,7 +81,7 @@ export function SellItems() {
             ...stackItems(
               storedItems.filter(isConsumable).sort((a, b) => a.type.localeCompare(b.type)),
             ),
-            ...stackItems(storedItems.filter(isShard).sort((a, b) => a.type.localeCompare(b.type))),
+            ...stackItems(storedItems.filter(isGem).sort((a, b) => a.type.localeCompare(b.type))),
           ].map((stackedItem) => {
             const { item, stack } = stackedItem;
 

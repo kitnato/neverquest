@@ -17,7 +17,7 @@ import { deltas } from "@neverquest/state/deltas";
 import { weapon, weaponElementalEffects } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { damage, damageTotal, powerBonus } from "@neverquest/state/statistics";
-import type { ShardItem } from "@neverquest/types";
+import type { GemItem } from "@neverquest/types";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
@@ -28,10 +28,10 @@ export function Damage() {
   const isShowingDamageDetails = useRecoilValue(isShowing("damageDetails"));
   const powerBonusValue = useRecoilValue(powerBonus("strength"));
   const strengthValue = useRecoilValue(rawAttributeStatistic("strength"));
-  const { damage: weaponDamage, shards } = useRecoilValue(weapon);
+  const { damage: weaponDamage, gems } = useRecoilValue(weapon);
   const weaponElementalEffectsValue = useRecoilValue(weaponElementalEffects);
 
-  const appliedShards = shards.length;
+  const appliedGems = gems.length;
 
   useDeltaText({
     atomDelta: deltas("damage"),
@@ -58,14 +58,14 @@ export function Damage() {
                       </td>
                     </tr>
 
-                    {appliedShards > 0 && (
+                    {appliedGems > 0 && (
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Shards:</td>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Gems:</td>
 
                         <td>
-                          {stackItems(shards.sort((a, b) => a.type.localeCompare(b.type))).map(
+                          {stackItems(gems.sort((a, b) => a.type.localeCompare(b.type))).map(
                             ({ item }) => {
-                              const { id, type } = item as ShardItem;
+                              const { id, type } = item as GemItem;
 
                               return (
                                 <div className={ELEMENTALS[type].color} key={id}>

@@ -3,7 +3,7 @@ import { ProgressBar } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { BLIGHT } from "@neverquest/data/monster";
+import { BLIGHT } from "@neverquest/data/combat";
 import { blight, stamina, staminaMaximum, staminaMaximumTotal } from "@neverquest/state/reserves";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 

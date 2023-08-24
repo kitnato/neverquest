@@ -1,16 +1,14 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import { ELEMENTAL_AILMENT_PENALTY } from "@neverquest/data/combat";
+import { BLIGHT, ELEMENTAL_AILMENT_PENALTY, POISON } from "@neverquest/data/combat";
 import { ELEMENTALS } from "@neverquest/data/inventory";
 import {
-  BLIGHT,
   BOSS_STAGE_INTERVAL,
   BOSS_STAGE_START,
   LOOT,
   MONSTER_ATTACK_RATE,
   MONSTER_DAMAGE,
   MONSTER_HEALTH,
-  POISON,
 } from "@neverquest/data/monster";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";

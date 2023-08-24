@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import { BLIGHT } from "@neverquest/data/monster";
+import { BLIGHT } from "@neverquest/data/combat";
 import { HEALTH_LOW_THRESHOLD, RESERVES } from "@neverquest/data/reserves";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { attributes } from "@neverquest/state/attributes";

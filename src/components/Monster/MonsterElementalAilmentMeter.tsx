@@ -1,7 +1,7 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { AILMENT_DURATION_MAXIMUM } from "@neverquest/data/monster";
+import { ELEMENTAL_AILMENT_DURATION_MAXIMUM } from "@neverquest/data/combat";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { isMonsterAiling, monsterAilmentDuration } from "@neverquest/state/monster";
 import type { MonsterAilment } from "@neverquest/types/unions";
@@ -31,7 +31,9 @@ export function MonsterElementalAilmentMeter({ type }: { type: MonsterAilment })
     <LabelledProgressBar
       disableTransitions
       label={isMonsterAilingValue ? formatMilliseconds(monsterAilmentValue) : LABEL_EMPTY}
-      value={isMonsterAilingValue ? (monsterAilmentValue / AILMENT_DURATION_MAXIMUM) * 100 : 0}
+      value={
+        isMonsterAilingValue ? (monsterAilmentValue / ELEMENTAL_AILMENT_DURATION_MAXIMUM) * 100 : 0
+      }
       variant="secondary"
     />
   );

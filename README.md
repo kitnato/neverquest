@@ -116,6 +116,7 @@ Traits are permanent passive abilities acquired upon [retiring](#retirement) for
 - Brawler: Wearing no shield doubles unarmed damage.
 - Bruiser: Current stamina adds unarmed bonus damage & unarmed attacks have a 25% chance to stagger.
 - Colossus: Dual wield two-handed weapons.
+- Executioner: Critical strikes with a two-handed weapon execute the monster.
 - Field surgeon: Automatically restore health when not in combat.
 - Hoarder: Start with all trinkets.
 - Inoculated: Can no longer be poisoned or blighted.

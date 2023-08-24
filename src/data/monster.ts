@@ -1,13 +1,3 @@
-export const AILMENT_DURATION_MAXIMUM = 3000;
-
-export const BLIGHT = {
-  boss: 0.33,
-  chanceBase: 0.1,
-  chanceMaximum: 0.4,
-  increment: 0.1,
-  stageRequired: 20,
-};
-
 export const BOSS_STAGE_INTERVAL = 5;
 export const BOSS_STAGE_START = 10;
 
@@ -42,15 +32,4 @@ export const MONSTER_HEALTH = {
 export const MONSTER_NAME = {
   prefix: 0.75,
   suffix: 0.05,
-};
-
-export const POISON = {
-  boss: 0.33,
-  chanceBase: 0.05,
-  chanceMaximum: 0.33,
-  durationBase: 30000,
-  durationMaximum: 170000,
-  magnitudeBase: 0.15,
-  magnitudeMaximum: 0.4,
-  stageRequired: 15,
 };

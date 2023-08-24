@@ -4,11 +4,13 @@ import { useRecoilValue } from "recoil";
 
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { IconImage } from "@neverquest/components/IconImage";
+import { CREW } from "@neverquest/data/caravan";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { ReactComponent as IconTravel } from "@neverquest/icons/travel.svg";
 import { hasBoughtFromMerchant } from "@neverquest/state/caravan";
 import { isGameOver } from "@neverquest/state/character";
 import { isStageCompleted, isWilderness, stageMaximum } from "@neverquest/state/encounter";
+import { isInventoryFull } from "@neverquest/state/inventory";
 import { hasLooted } from "@neverquest/state/resources";
 import { confirmationWarnings } from "@neverquest/state/settings";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
@@ -19,25 +21,30 @@ export function TravelButton() {
   const hasBoughtFromMerchantValue = useRecoilValue(hasBoughtFromMerchant);
   const hasLootedValue = useRecoilValue(hasLooted);
   const isGameOverValue = useRecoilValue(isGameOver);
+  const isInventoryFullValue = useRecoilValue(isInventoryFull);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isWildernessValue = useRecoilValue(isWilderness);
   const stageMaximumValue = useRecoilValue(stageMaximum);
 
   const toggleLocation = useToggleLocation();
 
-  const [showTravelConfirmation, setShowTravelConfirmation] = useState(false);
+  const [showPurchaseConfirmation, setShowPurchaseConfirmation] = useState(false);
+  const [showOverburdenedConfirmation, setShowOverburdenedConfirmation] = useState(false);
 
   const handleTravel = () => {
-    if (
-      confirmationWarningsValue &&
-      !hasBoughtFromMerchantValue &&
-      !isWildernessValue &&
-      stageMaximumValue <= 3
-    ) {
-      setShowTravelConfirmation(true);
-    } else {
-      toggleLocation();
+    if (confirmationWarningsValue && !isWildernessValue) {
+      if (!hasBoughtFromMerchantValue && stageMaximumValue <= 3) {
+        setShowPurchaseConfirmation(true);
+        return;
+      }
+
+      if (isInventoryFullValue && stageMaximumValue >= CREW.tailor.requiredStage) {
+        setShowOverburdenedConfirmation(true);
+        return;
+      }
     }
+
+    toggleLocation();
   };
 
   if (!(hasLootedValue && isStageCompletedValue) && isWildernessValue) {
@@ -77,9 +84,18 @@ export function TravelButton() {
         confirmationLabel="Travel anyway"
         message="Questing will be significantly harder without proper gear."
         onConfirm={toggleLocation}
-        setHidden={() => setShowTravelConfirmation(false)}
-        show={showTravelConfirmation}
+        setHidden={() => setShowPurchaseConfirmation(false)}
+        show={showPurchaseConfirmation}
         title="Nothing purchased from merchant!"
+      />
+
+      <ConfirmationDialog
+        confirmationLabel="Travel anyway"
+        message="Gathering weighty items in the wilderness will be tricky."
+        onConfirm={toggleLocation}
+        setHidden={() => setShowOverburdenedConfirmation(false)}
+        show={showOverburdenedConfirmation}
+        title="Overburdened!"
       />
     </>
   );

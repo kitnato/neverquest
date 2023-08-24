@@ -8,7 +8,7 @@ export const BLEED = {
 export const BLIGHT = {
   boss: 0.33,
   chanceBase: 0.1,
-  chanceMaximum: 0.4,
+  chanceMaximum: 0.6,
   increment: 0.1,
   stageRequired: 20,
 };
@@ -23,7 +23,7 @@ export const ELEMENTAL_AILMENT_PENALTY = {
 export const POISON = {
   boss: 0.33,
   chanceBase: 0.05,
-  chanceMaximum: 0.33,
+  chanceMaximum: 0.5,
   durationBase: 30000,
   durationMaximum: 170000,
   magnitudeBase: 0.15,

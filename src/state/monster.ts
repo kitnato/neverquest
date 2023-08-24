@@ -21,7 +21,11 @@ import {
   type MonsterAilment,
 } from "@neverquest/types/unions";
 import { formatFloat } from "@neverquest/utilities/formatters";
-import { getDamagePerRate, getGrowthSigmoid } from "@neverquest/utilities/getters";
+import {
+  getDamagePerRate,
+  getGrowthMonsterPower,
+  getGrowthSigmoid,
+} from "@neverquest/utilities/getters";
 
 // SELECTORS
 
@@ -86,11 +90,13 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
     get: ({ get }) => {
       const { base, bonus, boss, reduction } = MONSTER_ATTACK_RATE;
 
-      return Math.round(
-        (base -
-          reduction * getGrowthSigmoid(get(stage)) +
-          bonus * getGrowthSigmoid(get(progress))) *
-          (1 - (get(isBoss) ? boss : 0)),
+      return (
+        base -
+        Math.round(
+          (reduction * getGrowthMonsterPower(get(stage)) +
+            bonus * getGrowthSigmoid(get(progress))) *
+            (1 - (get(isBoss) ? boss : 0)),
+        )
       );
     },
     key,
@@ -109,7 +115,8 @@ export const monsterBlightChance = withStateKey("monsterBlightChance", (key) =>
       }
 
       return (
-        (chanceBase + chanceMaximum * getGrowthSigmoid(stageValue)) * (1 + (get(isBoss) ? boss : 0))
+        (chanceBase + chanceMaximum * getGrowthMonsterPower(stageValue)) *
+        (1 + (get(isBoss) ? boss : 0))
       );
     },
     key,
@@ -119,12 +126,15 @@ export const monsterBlightChance = withStateKey("monsterBlightChance", (key) =>
 export const monsterDamage = withStateKey("monsterDamage", (key) =>
   selector({
     get: ({ get }) => {
-      const { bonus, boss, maximum } = MONSTER_DAMAGE;
+      const { base, bonus, boss, maximum } = MONSTER_DAMAGE;
 
-      return Math.round(
-        (maximum * getGrowthSigmoid(get(stage)) + bonus * getGrowthSigmoid(get(progress))) *
-          (1 + (get(isBoss) ? boss : 0)) *
-          (get(isMonsterAiling("shocked")) ? ELEMENTAL_AILMENT_PENALTY.shocked : 1),
+      return (
+        base +
+        Math.round(
+          (maximum * getGrowthMonsterPower(get(stage)) + bonus * getGrowthSigmoid(get(progress))) *
+            (1 + (get(isBoss) ? boss : 0)) *
+            (get(isMonsterAiling("shocked")) ? ELEMENTAL_AILMENT_PENALTY.shocked : 1),
+        )
       );
     },
     key,
@@ -147,11 +157,14 @@ export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (ke
 export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =>
   selector({
     get: ({ get }) => {
-      const { bonus, boss, maximum } = MONSTER_HEALTH;
+      const { base, bonus, boss, maximum } = MONSTER_HEALTH;
 
-      return Math.round(
-        (maximum * getGrowthSigmoid(get(stage)) + bonus * getGrowthSigmoid(get(progress))) *
-          (1 + (get(isBoss) ? boss : 0)),
+      return (
+        base +
+        Math.round(
+          (maximum * getGrowthMonsterPower(get(stage)) + bonus * getGrowthSigmoid(get(progress))) *
+            (1 + (get(isBoss) ? boss : 0)),
+        )
       );
     },
     key,
@@ -170,7 +183,8 @@ export const monsterPoisonChance = withStateKey("monsterPoisonChance", (key) =>
       }
 
       return (
-        (chanceBase + chanceMaximum * getGrowthSigmoid(stageValue)) * (1 + (get(isBoss) ? boss : 0))
+        (chanceBase + chanceMaximum * getGrowthMonsterPower(stageValue)) *
+        (1 + (get(isBoss) ? boss : 0))
       );
     },
     key,
@@ -182,7 +196,7 @@ export const monsterPoisonDuration = withStateKey("monsterPoisonDuration", (key)
     get: ({ get }) => {
       const { durationBase, durationMaximum } = POISON;
 
-      return durationBase + durationMaximum * getGrowthSigmoid(get(stage));
+      return durationBase + durationMaximum * getGrowthMonsterPower(get(stage));
     },
     key,
   }),
@@ -193,7 +207,7 @@ export const monsterPoisonMagnitude = withStateKey("monsterPoisonMagnitude", (ke
     get: ({ get }) => {
       const { magnitudeBase, magnitudeMaximum } = POISON;
 
-      return magnitudeBase + magnitudeMaximum * getGrowthSigmoid(get(stage));
+      return magnitudeBase + magnitudeMaximum * getGrowthMonsterPower(get(stage));
     },
     key,
   }),
@@ -206,7 +220,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
 
       const isBossValue = get(isBoss);
       const stageValue = get(stage);
-      const growthFactor = getGrowthSigmoid(stageValue);
+      const growthFactor = getGrowthMonsterPower(stageValue);
       const progressBonus = getGrowthSigmoid(get(progress)) * bonus;
       const totalBonus = (1 + get(lootBonus)) * (1 + (isBossValue ? boss : 0));
 

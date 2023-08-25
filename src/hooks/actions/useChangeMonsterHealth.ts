@@ -1,7 +1,8 @@
 import { useRecoilCallback } from "recoil";
 
+import { LOOTING_RATE } from "@neverquest/data/resources";
 import { useProgression } from "@neverquest/hooks/actions/useProgression";
-import { attackDuration, lootingDuration, lootingRate } from "@neverquest/state/character";
+import { attackDuration, lootingDuration } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { hasItem } from "@neverquest/state/inventory";
 import {
@@ -41,7 +42,7 @@ export function useChangeMonsterHealth() {
           if (get(hasItem("monkey paw"))) {
             progression();
           } else {
-            set(lootingDuration, get(lootingRate));
+            set(lootingDuration, LOOTING_RATE);
           }
 
           reset(attackDuration);

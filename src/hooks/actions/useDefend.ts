@@ -21,7 +21,7 @@ import {
   monsterDamage,
   monsterElement,
   monsterPoisonChance,
-  monsterPoisonDuration,
+  monsterPoisonLength,
 } from "@neverquest/state/monster";
 import { blight, isPoisoned, poisonDuration } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
@@ -273,7 +273,7 @@ export function useDefend() {
               value: "DEFLECTED POISON",
             });
           } else {
-            set(poisonDuration, get(monsterPoisonDuration));
+            set(poisonDuration, get(monsterPoisonLength));
 
             deltaHealth.push({
               color: "text-danger",

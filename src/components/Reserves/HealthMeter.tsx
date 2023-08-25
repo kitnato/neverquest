@@ -3,7 +3,7 @@ import { ProgressBar } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { useAnimation } from "@neverquest/hooks/useAnimation";
+import { useAnimate } from "@neverquest/hooks/useAnimate";
 import {
   health,
   healthMaximum,
@@ -23,18 +23,8 @@ export function HealthMeter() {
 
   const penalty = healthMaximumValue - healthMaximumTotalValue;
 
-  useAnimation({
-    callback: (delta) => {
-      setPoisonDuration((current) => {
-        const value = current - delta;
-
-        if (value < 0) {
-          return 0;
-        }
-
-        return value;
-      });
-    },
+  useAnimate({
+    deltas: [setPoisonDuration],
     stop: !isPoisonedValue,
   });
 

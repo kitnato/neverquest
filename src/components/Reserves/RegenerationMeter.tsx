@@ -6,7 +6,7 @@ import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { RESERVES } from "@neverquest/data/reserves";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
-import { useAnimation } from "@neverquest/hooks/useAnimation";
+import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { isRecovering } from "@neverquest/state/character";
@@ -14,7 +14,9 @@ import {
   healthRegenerationAmount,
   healthRegenerationDuration,
   healthRegenerationRate,
+  isBlighted,
   isHealthAtMaximum,
+  isPoisoned,
   isStaminaAtMaximum,
   staminaRegenerationAmount,
   staminaRegenerationDuration,
@@ -41,37 +43,45 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
   const regenerationRateValue = useRecoilValue(
     isHealth ? healthRegenerationRate : staminaRegenerationRate,
   );
+  const isBlightedValue = useRecoilValue(isBlighted);
+  const isPoisonedValue = useRecoilValue(isPoisoned);
   const isRecoveringValue = useRecoilValue(isRecovering);
   const resetRegenerationDuration = useResetRecoilState(regenerationDuration);
 
   const changeReserve = RESERVE_CHANGE[type]();
 
   const { label } = RESERVES[type];
+  const isAiling = isHealth ? isPoisonedValue : isBlightedValue;
   const ReserveIcon = isHealth ? IconHealth : IconStamina;
   const regenerationProgress =
     regenerationDurationValue === 0 ? 0 : regenerationRateValue - regenerationDurationValue;
 
-  useAnimation({
-    callback: (delta) => {
-      const value = regenerationDurationValue - delta;
-
-      if (value <= 0) {
-        changeReserve({ value: regenerationAmountValue });
-
-        setRegenerationDuration(regenerationRateValue);
-      } else {
-        setRegenerationDuration(value);
-      }
-    },
+  useAnimate({
+    deltas: [setRegenerationDuration],
     stop: isReserveAtMaximum || isRecoveringValue,
   });
 
   // Needed to catch attribute resets and poison/blight penalties.
   useEffect(() => {
-    if (isReserveAtMaximum) {
+    if (isAiling && isReserveAtMaximum) {
       resetRegenerationDuration();
     }
-  }, [isReserveAtMaximum, resetRegenerationDuration]);
+  }, [isAiling, isReserveAtMaximum, resetRegenerationDuration]);
+
+  useEffect(() => {
+    if (!isReserveAtMaximum && regenerationDurationValue === 0) {
+      changeReserve({ value: regenerationAmountValue });
+
+      setRegenerationDuration(regenerationRateValue);
+    }
+  }, [
+    changeReserve,
+    isReserveAtMaximum,
+    regenerationAmountValue,
+    regenerationDurationValue,
+    regenerationRateValue,
+    setRegenerationDuration,
+  ]);
 
   const details = (() => {
     if (isRecoveringValue) {

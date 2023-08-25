@@ -1,7 +1,7 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { useAnimation } from "@neverquest/hooks/useAnimation";
+import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { recoveryDuration } from "@neverquest/state/character";
 import { recoveryRate } from "@neverquest/state/statistics";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
@@ -12,18 +12,8 @@ export function RecoveryMeter() {
 
   const hasRecovered = recoveryDurationValue === 0;
 
-  useAnimation({
-    callback: (delta) => {
-      setRecoveryDuration((current) => {
-        const value = current - delta;
-
-        if (value < 0) {
-          return 0;
-        }
-
-        return value;
-      });
-    },
+  useAnimate({
+    deltas: [setRecoveryDuration],
     stop: hasRecovered,
   });
 

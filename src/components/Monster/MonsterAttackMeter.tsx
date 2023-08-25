@@ -1,9 +1,10 @@
+import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { ELEMENTAL_AILMENT_PENALTY } from "@neverquest/data/combat";
 import { useDefend } from "@neverquest/hooks/actions/useDefend";
-import { useAnimation } from "@neverquest/hooks/useAnimation";
+import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { isAttacking } from "@neverquest/state/character";
 import {
   isMonsterAiling,
@@ -25,22 +26,29 @@ export function MonsterAttackMeter() {
 
   const defend = useDefend();
 
-  useAnimation({
-    callback: (delta) => {
-      const value =
-        monsterAttackDurationValue -
-        delta * (isMonsterFrozenValue ? ELEMENTAL_AILMENT_PENALTY.frozen : 1);
-
-      if (value <= 0) {
-        defend();
-
-        setMonsterAttackDuration(monsterAttackRateValue);
-      } else {
-        setMonsterAttackDuration(value);
-      }
-    },
+  useAnimate({
+    deltas: [setMonsterAttackDuration],
     stop: !isAttackingValue || isMonsterDeadValue || isMonsterStaggeredValue,
   });
+
+  useEffect(() => {
+    if (isAttackingValue && monsterAttackDurationValue === 0) {
+      defend();
+      setMonsterAttackDuration(monsterAttackRateValue);
+    }
+  }, [
+    defend,
+    isAttackingValue,
+    monsterAttackDurationValue,
+    monsterAttackRateValue,
+    setMonsterAttackDuration,
+  ]);
+
+  useEffect(() => {
+    if (isMonsterFrozenValue) {
+      setMonsterAttackDuration((current) => current * ELEMENTAL_AILMENT_PENALTY.frozen);
+    }
+  }, [isMonsterFrozenValue, setMonsterAttackDuration]);
 
   return (
     <LabelledProgressBar

@@ -5,7 +5,7 @@ import { BLIGHT } from "@neverquest/data/combat";
 import { HEALTH_LOW_THRESHOLD, RESERVES } from "@neverquest/data/reserves";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { attributes } from "@neverquest/state/attributes";
-import { monsterPoisonDuration, monsterPoisonMagnitude } from "@neverquest/state/monster";
+import { monsterPoisonLength, monsterPoisonMagnitude } from "@neverquest/state/monster";
 import {
   powerBonus,
   reserveRegenerationAmount,
@@ -43,7 +43,7 @@ export const healthMaximumTotal = withStateKey("healthMaximumTotal", (key) =>
         Math.round(
           get(healthMaximum) *
             get(monsterPoisonMagnitude) *
-            (get(poisonDuration) / get(monsterPoisonDuration)),
+            (get(poisonDuration) / get(monsterPoisonLength)),
         );
 
       if (newMaximum < 0) {
@@ -70,6 +70,13 @@ export const healthRegenerationRate = withStateKey("healthRegenerationRate", (ke
 
       return Math.round(baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRate));
     },
+    key,
+  }),
+);
+
+export const isBlighted = withStateKey("isBlighted", (key) =>
+  selector({
+    get: ({ get }) => get(poisonDuration) > 0,
     key,
   }),
 );

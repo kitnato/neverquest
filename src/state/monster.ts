@@ -91,12 +91,13 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
       const { base, bonus, boss, reduction } = MONSTER_ATTACK_RATE;
 
       return (
-        base -
-        Math.round(
-          (reduction * getGrowthMonsterPower(get(stage)) +
-            bonus * getGrowthSigmoid(get(progress))) *
-            (1 - (get(isBoss) ? boss : 0)),
-        )
+        (base -
+          Math.round(
+            (reduction * getGrowthMonsterPower(get(stage)) +
+              bonus * getGrowthSigmoid(get(progress))) *
+              (1 - (get(isBoss) ? boss : 0)),
+          )) *
+        (get(isMonsterAiling("frozen")) ? ELEMENTAL_AILMENT_PENALTY.frozen : 1)
       );
     },
     key,
@@ -191,7 +192,7 @@ export const monsterPoisonChance = withStateKey("monsterPoisonChance", (key) =>
   }),
 );
 
-export const monsterPoisonDuration = withStateKey("monsterPoisonDuration", (key) =>
+export const monsterPoisonLength = withStateKey("monsterPoisonLength", (key) =>
   selector({
     get: ({ get }) => {
       const { durationBase, durationMaximum } = POISON;

@@ -1,7 +1,7 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { useAnimation } from "@neverquest/hooks/useAnimation";
+import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { rawMasteryStatistic } from "@neverquest/state/masteries";
 import { isMonsterAiling, monsterAilmentDuration } from "@neverquest/state/monster";
 import { LABEL_EMPTY } from "@neverquest/utilities/constants";
@@ -16,18 +16,8 @@ export function MonsterStaggeredMeter() {
 
   const staggeringProgress = mightValue - monsterStaggerDurationValue;
 
-  useAnimation({
-    callback: (delta) => {
-      setMonsterStaggerDuration((current) => {
-        const value = current - delta;
-
-        if (value < 0) {
-          return 0;
-        }
-
-        return value;
-      });
-    },
+  useAnimate({
+    deltas: [setMonsterStaggerDuration],
     stop: !isMonsterStaggeredValue,
   });
 

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { type SetterOrUpdater, useRecoilValue } from "recoil";
+import { clearInterval, setInterval } from "worker-timers";
 
 import { isGameOver } from "@neverquest/state/character";
 
@@ -23,16 +24,18 @@ export function useAnimate({
 }) {
   const isGameOverValue = useRecoilValue(isGameOver);
 
-  const interval = useRef<NodeJS.Timer>();
+  const interval = useRef(-1);
   const previousTime = useRef(0);
 
   const [hasTicked, setHasTicked] = useState(false);
 
   const clear = () => {
-    clearInterval(interval.current);
+    if (interval.current !== -1) {
+      clearInterval(interval.current);
 
-    interval.current = undefined;
-    previousTime.current = 0;
+      interval.current = -1;
+      previousTime.current = 0;
+    }
   };
 
   useEffect(() => {
@@ -45,7 +48,7 @@ export function useAnimate({
   useEffect(() => {
     if (isGameOverValue || stop) {
       clear();
-    } else if (interval.current === undefined) {
+    } else if (interval.current === -1) {
       interval.current = setInterval(() => {
         const now = Date.now();
 

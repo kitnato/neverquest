@@ -5,14 +5,20 @@ import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonst
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
 import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment";
-import { canAttackOrParry } from "@neverquest/state/character";
+import { attackDuration, canAttackOrParry, isAttacking } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { rawMasteryStatistic } from "@neverquest/state/masteries";
+import { masteryStatistic } from "@neverquest/state/masteries";
 import { isMonsterAiling, monsterAilmentDuration, monsterElement } from "@neverquest/state/monster";
 import { skills } from "@neverquest/state/skills";
-import { bleed, criticalChance, criticalDamage, damageTotal } from "@neverquest/state/statistics";
+import {
+  attackRateTotal,
+  bleed,
+  criticalChance,
+  criticalDamage,
+  damageTotal,
+} from "@neverquest/state/statistics";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -56,7 +62,7 @@ export function useAttack() {
           ];
 
           if (staminaCost > 0) {
-            changeStamina({ value: -staminaCost });
+            changeStamina({ isRegeneration: false, value: -staminaCost });
           }
 
           if (hasInflictedCritical) {
@@ -80,7 +86,7 @@ export function useAttack() {
 
           if (hasInflictedStagger) {
             set(isShowing("monsterAilments"), true);
-            set(monsterAilmentDuration("staggered"), get(rawMasteryStatistic("might")));
+            set(monsterAilmentDuration("staggered"), get(masteryStatistic("might")));
 
             increaseMastery("might");
 
@@ -90,7 +96,9 @@ export function useAttack() {
             });
           }
 
-          ELEMENTAL_TYPES.forEach((elemental) => inflictElementalAilment(elemental));
+          ELEMENTAL_TYPES.forEach((elemental) =>
+            inflictElementalAilment({ elemental, slot: "weapon" }),
+          );
 
           changeMonsterHealth({ delta: monsterDeltas, value: totalDamage });
 
@@ -107,9 +115,13 @@ export function useAttack() {
             },
             {
               color: "text-danger",
-              value: ` (${staminaCost})`,
+              value: `(${staminaCost})`,
             },
           ]);
+        }
+
+        if (get(isAttacking) && get(attackDuration) === 0) {
+          set(attackDuration, get(attackRateTotal));
         }
       },
     [changeMonsterHealth, changeStamina, increaseMastery, inflictElementalAilment],

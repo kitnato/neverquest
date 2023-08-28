@@ -74,6 +74,8 @@ export const CREW: Record<
       5: "Got a fresh shipment of gear, care to see?",
       6: "Heard there are other travelers looking to sell their services.",
       7: "Your headway in the wilderness is helping business.",
+      9: "There is something dark looming on the horizon ...",
+      10: "I can't believe you came out of that in one piece.",
       14: "I recently came into possession of a few curiosities.",
       15: "Can I interest you in anything else?",
       25: "A dark wanderer passed by and sold me a strange book ...",

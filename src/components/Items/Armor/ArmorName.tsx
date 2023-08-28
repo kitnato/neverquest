@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconImage } from "@neverquest/components/IconImage";
+import { AppliedGems } from "@neverquest/components/Items/AppliedGems";
 import { DodgePenaltyContents } from "@neverquest/components/Items/Armor/DodgePenaltyContents";
 import { GearComparison } from "@neverquest/components/Items/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Items/GearLevelDetail";
@@ -64,6 +65,8 @@ export function ArmorName({
                   )}
                 </td>
               </tr>
+
+              <AppliedGems slot="armor" />
 
               <tr>
                 {isShowingGearClass ? (

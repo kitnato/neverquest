@@ -2,21 +2,21 @@ import { useRecoilCallback } from "recoil";
 
 import { ELEMENTAL_AILMENT_DURATION_MAXIMUM } from "@neverquest/data/combat";
 import { ELEMENTALS } from "@neverquest/data/inventory";
-import { weaponElementalEffects } from "@neverquest/state/inventory";
+import { gearElementalEffects } from "@neverquest/state/inventory";
 import { canReceiveAilment, monsterAilmentDuration } from "@neverquest/state/monster";
-import type { Elemental } from "@neverquest/types/unions";
+import type { Elemental, Gear } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useInflictElementalAilment() {
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      (elemental: Elemental) => {
+      ({ elemental, slot }: { elemental: Elemental; slot: Exclude<Gear, "shield"> }) => {
         const get = getSnapshotGetter(snapshot);
 
         const { ailment } = ELEMENTALS[elemental];
-        const { duration } = get(weaponElementalEffects)[elemental];
+        const { duration } = get(gearElementalEffects(slot))[elemental];
 
-        if (get(canReceiveAilment(ailment))) {
+        if (get(canReceiveAilment(ailment)) && duration > 0) {
           set(monsterAilmentDuration(ailment), (current) => {
             const newDuration = current + duration;
 

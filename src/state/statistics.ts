@@ -4,14 +4,8 @@ import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { BLEED, PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/combat";
 import { withStateKey } from "@neverquest/state";
 import { level, rawAttributeStatistic } from "@neverquest/state/attributes";
-import {
-  armor,
-  hasItem,
-  shield,
-  weapon,
-  weaponElementalEffects,
-} from "@neverquest/state/inventory";
-import { rawMasteryStatistic } from "@neverquest/state/masteries";
+import { armor, gearElementalEffects, hasItem, shield, weapon } from "@neverquest/state/inventory";
+import { masteryStatistic } from "@neverquest/state/masteries";
 import type { Attribute } from "@neverquest/types/unions";
 import { getDamagePerRate, getDamagePerTick } from "@neverquest/utilities/getters";
 
@@ -62,7 +56,7 @@ export const bleedTick = withStateKey("bleedTick", (key) =>
         damage: getDamagePerTick({
           damage: get(damageTotal),
           duration,
-          proportion: get(rawMasteryStatistic("cruelty")),
+          proportion: get(masteryStatistic("cruelty")),
           ticks,
         }),
         duration: duration / ticks,
@@ -124,7 +118,7 @@ export const damageTotal = withStateKey("damageTotal", (key) =>
     get: ({ get }) =>
       get(damage) +
       get(weapon).damage +
-      Object.values(get(weaponElementalEffects)).reduce(
+      Object.values(get(gearElementalEffects("weapon"))).reduce(
         (current, { damage }) => current + damage,
         0,
       ),
@@ -181,7 +175,7 @@ export const lootBonus = withStateKey("lootBonus", (key) =>
 
 export const parryAbsorption = withStateKey("parryAbsorption", (key) =>
   selector({
-    get: ({ get }) => PARRY_ABSORPTION + get(rawMasteryStatistic("finesse")),
+    get: ({ get }) => PARRY_ABSORPTION + get(masteryStatistic("finesse")),
     key,
   }),
 );
@@ -199,7 +193,7 @@ export const parryChance = withStateKey("parryChance", (key) =>
 
 export const parryDamage = withStateKey("parryDamage", (key) =>
   selector({
-    get: ({ get }) => PARRY_DAMAGE + get(rawMasteryStatistic("finesse")),
+    get: ({ get }) => PARRY_DAMAGE + get(masteryStatistic("finesse")),
     key,
   }),
 );
@@ -230,7 +224,7 @@ export const protection = withStateKey("protection", (key) =>
 
 export const recoveryRate = withStateKey("recoveryRate", (key) =>
   selector({
-    get: ({ get }) => RECOVERY_RATE - RECOVERY_RATE * get(rawMasteryStatistic("resilience")),
+    get: ({ get }) => RECOVERY_RATE - RECOVERY_RATE * get(masteryStatistic("resilience")),
     key,
   }),
 );
@@ -260,7 +254,7 @@ export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (
 export const staggerRating = withStateKey("staggerRating", (key) =>
   selector({
     get: ({ get }) => {
-      const mightValue = get(rawMasteryStatistic("might"));
+      const mightValue = get(masteryStatistic("might"));
 
       return Math.round(get(shield).stagger * mightValue + get(staggerWeapon) * mightValue);
     },

@@ -62,12 +62,14 @@ export type Delta =
   | "stage"
   | "staggerRating"
   | "stamina"
-  | "staminaRegenerationRate";
+  | "staminaRegenerationRate"
+  | "thorns";
 
 export const ELEMENTAL_TYPES = ["lightning", "fire", "ice"] as const;
 export type Elemental = (typeof ELEMENTAL_TYPES)[number];
 
-export type Gear = "armor" | "shield" | "weapon";
+export const GEAR_TYPES = ["armor", "shield", "weapon"] as const;
+export type Gear = (typeof GEAR_TYPES)[number];
 
 export const GEM_TYPES = ["ruby", "sapphire", "topaz"] as const;
 export type Gem = (typeof GEM_TYPES)[number];
@@ -127,6 +129,7 @@ export const SHOWING_TYPES = [
   "stamina",
   "staminaDetails",
   "statistics",
+  "thorns",
   "weapon",
   "weight",
   "wildernessStatus",
@@ -190,6 +193,7 @@ export type StateKey =
   | "essenceAbsorbed"
   | "essenceLoot"
   | "floatingTextQueues"
+  | "gearElementalEffects"
   | "hasBoughtFromMerchant"
   | "hasItem"
   | "hasKnapsack"
@@ -197,9 +201,6 @@ export type StateKey =
   | "health"
   | "healthMaximum"
   | "healthMaximumTotal"
-  | "healthRegenerationAmount"
-  | "healthRegenerationDuration"
-  | "healthRegenerationRate"
   | "hireStatus"
   | "inventory"
   | "isAttacking"
@@ -235,6 +236,7 @@ export type StateKey =
   | "lowHealthWarning"
   | "masteries"
   | "masteryCost"
+  | "masteryStatistic"
   | "merchantInventory"
   | "mode"
   | "monsterAilmentDuration"
@@ -264,9 +266,11 @@ export type StateKey =
   | "progressMaximum"
   | "protection"
   | "rawAttributeStatistic"
-  | "rawMasteryStatistic"
   | "recoveryDuration"
   | "recoveryRate"
+  | "regenerationAmount"
+  | "regenerationDuration"
+  | "regenerationRate"
   | "reserveRegenerationAmount"
   | "reserveRegenerationRate"
   | "scrap"
@@ -285,12 +289,9 @@ export type StateKey =
   | "stamina"
   | "staminaMaximum"
   | "staminaMaximumTotal"
-  | "staminaRegenerationAmount"
-  | "staminaRegenerationDuration"
-  | "staminaRegenerationRate"
   | "statusElement"
+  | "thorns"
   | "weapon"
-  | "weaponElementalEffects"
   | "wildernesses";
 
 export const TRINKET_TYPES = [

@@ -1,5 +1,5 @@
 import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
@@ -7,20 +7,30 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { RecoveryMeter } from "@neverquest/components/Status/RecoveryMeter";
 import { RECOVERY_RATE } from "@neverquest/data/combat";
+import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconRecovery } from "@neverquest/icons/recovery.svg";
 import { ReactComponent as IconResilience } from "@neverquest/icons/resilience.svg";
+import { isRecovering, recoveryDuration } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
-import { masteries, rawMasteryStatistic } from "@neverquest/state/masteries";
+import { masteries, masteryStatistic } from "@neverquest/state/masteries";
 import { recoveryRate } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Recovery() {
+  const isRecoveringValue = useRecoilValue(isRecovering);
   const isShowingRecovery = useRecoilValue(isShowing("recovery"));
   const { isUnlocked } = useRecoilValue(masteries("resilience"));
-  const resilienceValue = useRecoilValue(rawMasteryStatistic("resilience"));
+  const resilienceValue = useRecoilValue(masteryStatistic("resilience"));
+  const setRecoveryDuration = useSetRecoilState(recoveryDuration);
+
+  useAnimate({
+    delta: setRecoveryDuration,
+    stop: !isRecoveringValue,
+    tmp: "Recovery",
+  });
 
   useDeltaText({
     atomDelta: deltas("recoveryRate"),

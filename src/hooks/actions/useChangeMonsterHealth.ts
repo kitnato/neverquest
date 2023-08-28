@@ -10,7 +10,7 @@ import {
   monsterHealth,
   monsterHealthMaximum,
 } from "@neverquest/state/monster";
-import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
+import type { DeltaDisplay, DeltaReserveBase } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeMonsterHealth() {
@@ -18,7 +18,7 @@ export function useChangeMonsterHealth() {
 
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
-      (change: DeltaReserve) => {
+      (change: DeltaReserveBase) => {
         const get = getSnapshotGetter(snapshot);
 
         const { delta, value } = change;

@@ -7,9 +7,10 @@ import { isShowing } from "@neverquest/state/isShowing";
 import {
   health,
   healthMaximumTotal,
-  healthRegenerationDuration,
-  healthRegenerationRate,
   isImmortal,
+  regenerationAmount,
+  regenerationDuration,
+  regenerationRate,
 } from "@neverquest/state/reserves";
 import { isConsumable } from "@neverquest/types/type-guards";
 import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
@@ -18,22 +19,27 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 export function useChangeHealth() {
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
-      ({ delta, value }: DeltaReserve) => {
+      (deltaReserve: DeltaReserve) => {
         const get = getSnapshotGetter(snapshot);
 
         const healthMaximumTotalValue = get(healthMaximumTotal);
+        const value = deltaReserve.isRegeneration
+          ? get(regenerationAmount("health"))
+          : deltaReserve.value;
         const isPositive = value > 0;
 
         let newHealth = get(health) + value;
 
         set(
           deltas("health"),
-          delta === undefined || (Array.isArray(delta) && delta.length === 0)
+          deltaReserve.isRegeneration === true ||
+            deltaReserve.delta === undefined ||
+            (Array.isArray(deltaReserve.delta) && deltaReserve.delta.length === 0)
             ? ({
-                color: isPositive ? "text-success" : "text-danger",
+                color: isPositive ? "text-success" : value === 0 ? "text-muted" : "text-danger",
                 value: isPositive ? `+${value}` : value,
               } as DeltaDisplay)
-            : delta,
+            : deltaReserve.delta,
         );
 
         if (newHealth <= 0) {
@@ -60,11 +66,11 @@ export function useChangeHealth() {
 
         if (newHealth >= healthMaximumTotalValue) {
           newHealth = healthMaximumTotalValue;
-          reset(healthRegenerationDuration);
+          reset(regenerationDuration("health"));
         }
 
-        if (newHealth < healthMaximumTotalValue && get(healthRegenerationDuration) === 0) {
-          set(healthRegenerationDuration, get(healthRegenerationRate));
+        if (newHealth < healthMaximumTotalValue && get(regenerationDuration("health")) === 0) {
+          set(regenerationDuration("health"), get(regenerationRate("health")));
         }
 
         if (isPositive || !get(isImmortal)) {

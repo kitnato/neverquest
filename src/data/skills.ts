@@ -32,7 +32,7 @@ export const SKILLS: Record<
   armorcraft: {
     coinPrice: 135,
     description:
-      "Unlocks the use of plate armor, the ability to deflect ailments & improves recovery.",
+      "Unlocks the use of plate armor & the ability to deflect ailments. Also improves recovery.",
     Icon: IconArmorcraft,
     requiredLevel: 45,
     shows: ["deflection"],

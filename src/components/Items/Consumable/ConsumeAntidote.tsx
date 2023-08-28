@@ -21,6 +21,7 @@ export function ConsumeAntidote({ consumable }: { consumable: ConsumableItem }) 
         color: "text-success",
         value: "CURED",
       },
+      isRegeneration: false,
       value: 0,
     });
 

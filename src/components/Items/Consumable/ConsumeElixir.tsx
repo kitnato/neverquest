@@ -22,6 +22,7 @@ export function ConsumeElixir({ consumable }: { consumable: ConsumableItem }) {
         color: "text-success",
         value: `RECOVER +${staminaDifference}`,
       },
+      isRegeneration: false,
       value: staminaDifference,
     });
 

@@ -19,13 +19,13 @@ import {
   isTrinket,
   isWeapon,
 } from "@neverquest/types/type-guards";
-import type { Consumable, Elemental, Trinket } from "@neverquest/types/unions";
+import type { Consumable, Elemental, Gear, Trinket } from "@neverquest/types/unions";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
 export const armor = withStateKey("armor", (key) =>
-  selector<Armor | typeof ARMOR_NONE>({
+  selector({
     get: ({ get }) => {
       const equippedArmor = get(inventory).find((item) => {
         if (isArmor(item)) {
@@ -46,8 +46,15 @@ export const armor = withStateKey("armor", (key) =>
 );
 
 export const canApplyGem = withStateKey("canApplyGem", (key) =>
-  selector({
-    get: ({ get }) => get(weapon).gems.length < GEMS_MAXIMUM,
+  selectorFamily<boolean, Gear>({
+    get:
+      (slot) =>
+      ({ get }) =>
+        (slot === "armor"
+          ? get(armor).gems.length
+          : slot === "shield"
+          ? get(shield).gems.length
+          : get(weapon).gems.length) < GEMS_MAXIMUM,
     key,
   }),
 );
@@ -69,6 +76,33 @@ export const encumbrance = withStateKey("encumbrance", (key) =>
 
       return inventoryValue.reduce((current, item) => current + item.weight, 0);
     },
+    key,
+  }),
+);
+
+export const gearElementalEffects = withStateKey("gearElementalEffects", (key) =>
+  selectorFamily<Record<Elemental, { damage: number; duration: number }>, Exclude<Gear, "shield">>({
+    get:
+      (gear) =>
+      ({ get }) => {
+        const { damage, gems } =
+          gear === "armor" ? { ...get(armor), damage: get(armor).protection } : get(weapon);
+
+        return stackItems(gems).reduce(
+          (current, { item, stack }) => ({
+            ...current,
+            [GEM_ELEMENTALS[(item as GemItem).type]]: {
+              damage: Math.ceil(damage * GEM_DAMAGE * stack),
+              duration: GEM_DURATION * stack,
+            },
+          }),
+          {
+            fire: { damage: 0, duration: 0 },
+            ice: { damage: 0, duration: 0 },
+            lightning: { damage: 0, duration: 0 },
+          },
+        );
+      },
     key,
   }),
 );
@@ -95,7 +129,7 @@ export const isInventoryFull = withStateKey("isInventoryFull", (key) =>
 );
 
 export const shield = withStateKey("shield", (key) =>
-  selector<Shield | typeof SHIELD_NONE>({
+  selector({
     get: ({ get }) => {
       const equippedShield = get(inventory).find((item) => {
         if (isShield(item)) {
@@ -115,8 +149,19 @@ export const shield = withStateKey("shield", (key) =>
   }),
 );
 
+export const thorns = withStateKey("thorns", (key) =>
+  selector({
+    get: ({ get }) =>
+      Object.values(get(gearElementalEffects("armor"))).reduce(
+        (current, { damage }) => current + damage,
+        0,
+      ),
+    key,
+  }),
+);
+
 export const weapon = withStateKey("weapon", (key) =>
-  selector<Weapon | typeof WEAPON_NONE>({
+  selector({
     get: ({ get }) => {
       const equippedWeapon = get(inventory).find((item) => {
         if (isWeapon(item)) {
@@ -131,30 +176,6 @@ export const weapon = withStateKey("weapon", (key) =>
       }
 
       return equippedWeapon as Weapon;
-    },
-    key,
-  }),
-);
-
-export const weaponElementalEffects = withStateKey("weaponElementalEffects", (key) =>
-  selector<Record<Elemental, { damage: number; duration: number }>>({
-    get: ({ get }) => {
-      const { damage, gems } = get(weapon);
-
-      return stackItems(gems).reduce(
-        (current, { item, stack }) => ({
-          ...current,
-          [GEM_ELEMENTALS[(item as GemItem).type]]: {
-            damage: Math.ceil(damage * GEM_DAMAGE * stack),
-            duration: GEM_DURATION * stack,
-          },
-        }),
-        {
-          fire: { damage: 0, duration: 0 },
-          ice: { damage: 0, duration: 0 },
-          lightning: { damage: 0, duration: 0 },
-        },
-      );
     },
     key,
   }),

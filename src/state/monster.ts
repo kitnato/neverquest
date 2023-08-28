@@ -12,7 +12,7 @@ import {
 } from "@neverquest/data/monster";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
-import { weapon, weaponElementalEffects } from "@neverquest/state/inventory";
+import { gearElementalEffects, weapon } from "@neverquest/state/inventory";
 import { skills } from "@neverquest/state/skills";
 import { lootBonus } from "@neverquest/state/statistics";
 import {
@@ -53,7 +53,7 @@ export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
             // TODO - add armor thorns check
             return elemental === undefined
               ? false
-              : get(weaponElementalEffects)[elemental].duration > 0;
+              : get(gearElementalEffects("armor"))[elemental].duration > 0;
           }
         }
       },
@@ -127,12 +127,12 @@ export const monsterBlightChance = withStateKey("monsterBlightChance", (key) =>
 export const monsterDamage = withStateKey("monsterDamage", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, bonus, boss, maximum } = MONSTER_DAMAGE;
+      const { base, bonus, boss, minimum } = MONSTER_DAMAGE;
 
       return (
-        base +
+        minimum +
         Math.round(
-          (maximum * getGrowthMonsterPower(get(stage)) + bonus * getGrowthSigmoid(get(progress))) *
+          (base * getGrowthMonsterPower(get(stage)) + bonus * getGrowthSigmoid(get(progress))) *
             (1 + (get(isBoss) ? boss : 0)) *
             (get(isMonsterAiling("shocked")) ? ELEMENTAL_AILMENT_PENALTY.shocked : 1),
         )
@@ -158,15 +158,37 @@ export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (ke
 export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, bonus, boss, maximum } = MONSTER_HEALTH;
+      const { base, bonus, boss, minimum } = MONSTER_HEALTH;
 
       return (
-        base +
+        minimum +
         Math.round(
-          (maximum * getGrowthMonsterPower(get(stage)) + bonus * getGrowthSigmoid(get(progress))) *
+          (base * getGrowthMonsterPower(get(stage)) + bonus * getGrowthSigmoid(get(progress))) *
             (1 + (get(isBoss) ? boss : 0)),
         )
       );
+    },
+    key,
+  }),
+);
+
+export const monsterLoot = withStateKey("monsterLoot", (key) =>
+  selector({
+    get: ({ get }) => {
+      const { bonus, boss, coinsBase, essenceBase, scrapBase } = LOOT;
+
+      const isBossValue = get(isBoss);
+      const stageValue = get(stage);
+      const growthFactor = getGrowthSigmoid(stageValue);
+      const progressBonus = getGrowthSigmoid(get(progress)) * bonus;
+      const totalBonus = (1 + get(lootBonus)) * (1 + (isBossValue ? boss : 0));
+
+      return {
+        coins: Math.round((progressBonus + coinsBase * growthFactor) * totalBonus),
+        essence: Math.round((progressBonus + essenceBase * growthFactor) * totalBonus),
+        gems: isBossValue ? 1 + (stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL : 0,
+        scrap: Math.round((progressBonus + scrapBase * growthFactor) * totalBonus),
+      };
     },
     key,
   }),
@@ -209,28 +231,6 @@ export const monsterPoisonMagnitude = withStateKey("monsterPoisonMagnitude", (ke
       const { magnitudeBase, magnitudeMaximum } = POISON;
 
       return magnitudeBase + magnitudeMaximum * getGrowthMonsterPower(get(stage));
-    },
-    key,
-  }),
-);
-
-export const monsterLoot = withStateKey("monsterLoot", (key) =>
-  selector({
-    get: ({ get }) => {
-      const { bonus, boss, coinsBase, essenceBase, scrapBase } = LOOT;
-
-      const isBossValue = get(isBoss);
-      const stageValue = get(stage);
-      const growthFactor = getGrowthMonsterPower(stageValue);
-      const progressBonus = getGrowthSigmoid(get(progress)) * bonus;
-      const totalBonus = (1 + get(lootBonus)) * (1 + (isBossValue ? boss : 0));
-
-      return {
-        coins: Math.round((progressBonus + coinsBase * growthFactor) * totalBonus),
-        essence: Math.round((progressBonus + essenceBase * growthFactor) * totalBonus),
-        gems: isBossValue ? 1 + (stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL : 0,
-        scrap: Math.round((progressBonus + scrapBase * growthFactor) * totalBonus),
-      };
     },
     key,
   }),

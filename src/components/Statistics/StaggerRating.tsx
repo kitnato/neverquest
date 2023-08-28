@@ -13,7 +13,7 @@ import { ReactComponent as IconWeaponStagger } from "@neverquest/icons/weapon-st
 import { deltas } from "@neverquest/state/deltas";
 import { shield } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { rawMasteryStatistic } from "@neverquest/state/masteries";
+import { masteryStatistic } from "@neverquest/state/masteries";
 import { skills } from "@neverquest/state/skills";
 import { staggerRating, staggerWeapon } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
@@ -22,7 +22,7 @@ import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/form
 export function StaggerRating() {
   const { stagger } = useRecoilValue(shield);
   const isShowingStagger = useRecoilValue(isShowing("stagger"));
-  const mightValue = useRecoilValue(rawMasteryStatistic("might"));
+  const mightValue = useRecoilValue(masteryStatistic("might"));
   const skillTraumatology = useRecoilValue(skills("traumatology"));
   const staggerRatingValue = useRecoilValue(staggerRating);
   const staggerWeaponValue = useRecoilValue(staggerWeapon);

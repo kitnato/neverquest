@@ -4,25 +4,19 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconImage } from "@neverquest/components/IconImage";
+import { AppliedGems } from "@neverquest/components/Items/AppliedGems";
 import { GearComparison } from "@neverquest/components/Items/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Items/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Items/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
-import {
-  ELEMENTALS,
-  GEMS_MAXIMUM,
-  GEM_ELEMENTALS,
-  type WEAPON_NONE,
-  WEAPON_SPECIFICATIONS,
-} from "@neverquest/data/inventory";
-import { ReactComponent as IconGem } from "@neverquest/icons/gem.svg";
+import { type WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
 import { ReactComponent as IconWeaponDamagePerSecond } from "@neverquest/icons/weapon-damage-per-second.svg";
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
-import { weaponElementalEffects, weapon as weaponEquipped } from "@neverquest/state/inventory";
+import { weapon as weaponEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { showDamagePerSecond } from "@neverquest/state/settings";
-import type { GemItem, Weapon } from "@neverquest/types";
+import type { Weapon } from "@neverquest/types";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import {
   capitalizeAll,
@@ -31,7 +25,6 @@ import {
   formatPercentage,
 } from "@neverquest/utilities/formatters";
 import { getDamagePerRate } from "@neverquest/utilities/getters";
-import { stackItems } from "@neverquest/utilities/helpers";
 
 export function WeaponName({
   placement,
@@ -42,12 +35,10 @@ export function WeaponName({
 }) {
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
   const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
-  const weaponElementalEffectsValue = useRecoilValue(weaponElementalEffects);
   const weaponEquippedValue = useRecoilValue(weaponEquipped);
 
-  const { abilityChance, damage, gearClass, gems, level, name, rate, staminaCost, weight } = weapon;
+  const { abilityChance, damage, gearClass, level, name, rate, staminaCost, weight } = weapon;
   const { abilityName, IconAbility, IconGearClass, showingType } = WEAPON_SPECIFICATIONS[gearClass];
-  const appliedGems = gems.length;
   const damagePerSecond = getDamagePerRate({
     damage,
     rate,
@@ -88,35 +79,7 @@ export function WeaponName({
                 </td>
               </tr>
 
-              {appliedGems > 0 && (
-                <tr>
-                  <td
-                    className={CLASS_TABLE_CELL_ITALIC}
-                  >{`Gems (${appliedGems}/${GEMS_MAXIMUM}):`}</td>
-
-                  <td>
-                    {stackItems(gems.sort((a, b) => a.type.localeCompare(b.type))).map(
-                      ({ item, stack }) => {
-                        const { id, type } = item as GemItem;
-                        const elemental = GEM_ELEMENTALS[type];
-                        const { damage, duration } = weaponElementalEffectsValue[elemental];
-
-                        return (
-                          <div key={id}>
-                            <span className={ELEMENTALS[elemental].color}>{`+${damage}`}</span>
-                            {" · "}
-                            <IconImage Icon={ELEMENTALS[elemental].Icon} size="tiny" />
-                            {` ${formatMilliseconds(duration)} · `}
-                            <IconImage Icon={IconGem} size="tiny" />
-                            &nbsp;
-                            {stack}
-                          </div>
-                        );
-                      },
-                    )}
-                  </td>
-                </tr>
-              )}
+              <AppliedGems slot="weapon" />
 
               <tr>
                 <td className={CLASS_TABLE_CELL_ITALIC}>Attack rate:</td>

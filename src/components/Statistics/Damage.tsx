@@ -6,7 +6,7 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSecond";
-import { ELEMENTALS, GEM_ELEMENTALS } from "@neverquest/data/inventory";
+import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDetails";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
 import { ReactComponent as IconStrength } from "@neverquest/icons/strength.svg";
@@ -14,13 +14,11 @@ import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
 import { rawAttributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
-import { weapon, weaponElementalEffects } from "@neverquest/state/inventory";
+import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { damage, damageTotal, powerBonus } from "@neverquest/state/statistics";
-import type { GemItem } from "@neverquest/types";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
-import { stackItems } from "@neverquest/utilities/helpers";
 
 export function Damage() {
   const damageValue = useRecoilValue(damage);
@@ -29,7 +27,6 @@ export function Damage() {
   const powerBonusValue = useRecoilValue(powerBonus("strength"));
   const strengthValue = useRecoilValue(rawAttributeStatistic("strength"));
   const { damage: weaponDamage, gems } = useRecoilValue(weapon);
-  const weaponElementalEffectsValue = useRecoilValue(weaponElementalEffects);
 
   const appliedGems = gems.length;
 
@@ -58,26 +55,7 @@ export function Damage() {
                       </td>
                     </tr>
 
-                    {appliedGems > 0 && (
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Gems:</td>
-
-                        <td>
-                          {stackItems(gems.sort((a, b) => a.type.localeCompare(b.type))).map(
-                            ({ item }) => {
-                              const { id, type } = item as GemItem;
-                              const elemental = GEM_ELEMENTALS[type];
-
-                              return (
-                                <div className={ELEMENTALS[elemental].color} key={id}>
-                                  {` +${weaponElementalEffectsValue[elemental].damage}`}
-                                </div>
-                              );
-                            },
-                          )}
-                        </td>
-                      </tr>
-                    )}
+                    {appliedGems > 0 && <ElementalDetails slot="weapon" />}
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>

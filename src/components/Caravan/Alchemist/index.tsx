@@ -44,6 +44,7 @@ export function Alchemist() {
     }
   };
 
+  // TODO - hook useTransmute
   useEffect(() => {
     if (source === result) {
       const resource = RESOURCE_TYPES.find((resource) => resource !== source);

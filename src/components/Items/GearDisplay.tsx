@@ -8,7 +8,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function Gear() {
+export function GearDisplay() {
   const isShowingArmor = useRecoilValue(isShowing("armor"));
   const isShowingShield = useRecoilValue(isShowing("shield"));
   const isShowingWeapon = useRecoilValue(isShowing("weapon"));

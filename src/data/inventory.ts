@@ -27,7 +27,7 @@ import { ReactComponent as IconPiercing } from "@neverquest/icons/weapon-piercin
 import { ReactComponent as IconSlashing } from "@neverquest/icons/weapon-slashing.svg";
 import { ReactComponent as IconWeaponStagger } from "@neverquest/icons/weapon-stagger.svg";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRA/types";
-import type { ConsumableItem, Range, TrinketItem, Weapon } from "@neverquest/types";
+import type { Armor, ConsumableItem, Range, Shield, TrinketItem, Weapon } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
 import type {
   Consumable,
@@ -46,8 +46,9 @@ export const ARMOR_BASE = {
   weight: 60,
 };
 
-export const ARMOR_NONE = {
+export const ARMOR_NONE: Omit<Armor, "coinPrice" | "isEquipped" | "ranges" | "scrapPrice"> = {
   deflection: 0,
+  gems: [],
   id: nanoid(),
   level: 0,
   name: "Unarmored",
@@ -185,8 +186,9 @@ export const SHIELD_BASE = {
   weight: 50,
 };
 
-export const SHIELD_NONE = {
+export const SHIELD_NONE: Omit<Shield, "coinPrice" | "isEquipped" | "ranges" | "scrapPrice"> = {
   block: 0,
+  gems: [],
   id: nanoid(),
   level: 0,
   name: "Unshielded",
@@ -241,7 +243,7 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
   "antique coin": {
     Icon: IconAntiqueCoin,
     item: {
-      coinPrice: 150,
+      coinPrice: 200,
       description: "Unlocks the Luck attribute.",
       id: nanoid(),
       type: "antique coin",
@@ -281,7 +283,7 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
   "monkey paw": {
     Icon: IconMonkeyPaw,
     item: {
-      coinPrice: 200,
+      coinPrice: 300,
       description: "Looting a corpse is instantaneous.",
       id: nanoid(),
       type: "monkey paw",

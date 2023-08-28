@@ -51,7 +51,7 @@ export const masteryCost = withStateKey("masteryCost", (key) =>
   }),
 );
 
-export const rawMasteryStatistic = withStateKey("rawMasteryStatistic", (key) =>
+export const masteryStatistic = withStateKey("masteryStatistic", (key) =>
   selectorFamily<number, Mastery>({
     get:
       (type) =>

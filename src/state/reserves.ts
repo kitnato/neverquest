@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { BLIGHT } from "@neverquest/data/combat";
@@ -11,6 +11,7 @@ import {
   reserveRegenerationAmount,
   reserveRegenerationRate,
 } from "@neverquest/state/statistics";
+import type { Reserve } from "@neverquest/types/unions";
 import { getComputedStatistic } from "@neverquest/utilities/getters";
 
 // SELECTORS
@@ -56,20 +57,27 @@ export const healthMaximumTotal = withStateKey("healthMaximumTotal", (key) =>
   }),
 );
 
-export const healthRegenerationAmount = withStateKey("healthRegenerationAmount", (key) =>
-  selector({
-    get: ({ get }) => RESERVES.health.baseRegenerationAmount + get(reserveRegenerationAmount),
+export const regenerationAmount = withStateKey("regenerationAmount", (key) =>
+  selectorFamily<number, Reserve>({
+    get:
+      (parameter) =>
+      ({ get }) =>
+        RESERVES[parameter].baseRegenerationAmount + get(reserveRegenerationAmount),
     key,
   }),
 );
 
-export const healthRegenerationRate = withStateKey("healthRegenerationRate", (key) =>
-  selector({
-    get: ({ get }) => {
-      const { baseRegenerationRate } = RESERVES.health;
+export const regenerationRate = withStateKey("regenerationRate", (key) =>
+  selectorFamily<number, Reserve>({
+    get:
+      (parameter) =>
+      ({ get }) => {
+        const { baseRegenerationRate } = RESERVES[parameter];
 
-      return Math.round(baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRate));
-    },
+        return Math.round(
+          baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRate),
+        );
+      },
     key,
   }),
 );
@@ -137,24 +145,6 @@ export const staminaMaximumTotal = withStateKey("staminaMaximumTotal", (key) =>
   }),
 );
 
-export const staminaRegenerationAmount = withStateKey("staminaRegenerationAmount", (key) =>
-  selector({
-    get: ({ get }) => RESERVES.stamina.baseRegenerationAmount + get(reserveRegenerationAmount),
-    key,
-  }),
-);
-
-export const staminaRegenerationRate = withStateKey("staminaRegenerationRate", (key) =>
-  selector({
-    get: ({ get }) => {
-      const { baseRegenerationRate } = RESERVES.stamina;
-
-      return Math.round(baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRate));
-    },
-    key,
-  }),
-);
-
 // ATOMS
 
 export const blight = withStateKey("blight", (key) =>
@@ -173,10 +163,10 @@ export const health = withStateKey("health", (key) =>
   }),
 );
 
-export const healthRegenerationDuration = withStateKey("healthRegenerationDuration", (key) =>
-  atom({
+export const regenerationDuration = withStateKey("regenerationDuration", (key) =>
+  atomFamily<number, Reserve>({
     default: 0,
-    effects: [handleLocalStorage<number>({ key })],
+    effects: (parameter) => [handleLocalStorage<number>({ key, parameter })],
     key,
   }),
 );
@@ -200,14 +190,6 @@ export const poisonDuration = withStateKey("poisonDuration", (key) =>
 export const stamina = withStateKey("stamina", (key) =>
   atom({
     default: staminaMaximumTotal,
-    effects: [handleLocalStorage<number>({ key })],
-    key,
-  }),
-);
-
-export const staminaRegenerationDuration = withStateKey("staminaRegenerationDuration", (key) =>
-  atom({
-    default: 0,
     effects: [handleLocalStorage<number>({ key })],
     key,
   }),

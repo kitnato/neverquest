@@ -2,10 +2,11 @@ import { useRecoilCallback } from "recoil";
 
 import { deltas } from "@neverquest/state/deltas";
 import {
+  regenerationAmount,
+  regenerationDuration,
+  regenerationRate,
   stamina,
   staminaMaximumTotal,
-  staminaRegenerationDuration,
-  staminaRegenerationRate,
 } from "@neverquest/state/reserves";
 import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -13,9 +14,12 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 export function useChangeStamina() {
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
-      ({ delta, value }: DeltaReserve) => {
+      (deltaReserve: DeltaReserve) => {
         const get = getSnapshotGetter(snapshot);
 
+        const value = deltaReserve.isRegeneration
+          ? get(regenerationAmount("stamina"))
+          : deltaReserve.value;
         const isPositive = value > 0;
         const staminaMaximumTotalValue = get(staminaMaximumTotal);
 
@@ -23,12 +27,14 @@ export function useChangeStamina() {
 
         set(
           deltas("stamina"),
-          delta === undefined || (Array.isArray(delta) && delta.length === 0)
+          deltaReserve.isRegeneration === true ||
+            deltaReserve.delta === undefined ||
+            (Array.isArray(deltaReserve.delta) && deltaReserve.delta.length === 0)
             ? ({
                 color: isPositive ? "text-success" : "text-danger",
                 value: isPositive ? `+${value}` : value,
               } as DeltaDisplay)
-            : delta,
+            : deltaReserve.delta,
         );
 
         if (newStamina < 0) {
@@ -37,11 +43,11 @@ export function useChangeStamina() {
 
         if (newStamina >= staminaMaximumTotalValue) {
           newStamina = staminaMaximumTotalValue;
-          reset(staminaRegenerationDuration);
+          reset(regenerationDuration("stamina"));
         }
 
-        if (newStamina < staminaMaximumTotalValue && get(staminaRegenerationDuration) === 0) {
-          set(staminaRegenerationDuration, get(staminaRegenerationRate));
+        if (newStamina < staminaMaximumTotalValue && get(regenerationDuration("stamina")) === 0) {
+          set(regenerationDuration("stamina"), get(regenerationRate("stamina")));
         }
 
         set(stamina, newStamina);

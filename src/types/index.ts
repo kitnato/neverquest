@@ -5,6 +5,7 @@ import type { Consumable, Gem, Showing, Trinket, WeaponGrip } from "@neverquest/
 export type Armor = GearBase & {
   deflection: number;
   gearClass?: ArmorClass;
+  gems: GemItem[];
   protection: number;
   ranges: {
     deflection: Range;
@@ -46,7 +47,13 @@ type ItemBase = {
 
 export type GearItem = Armor | Shield | Weapon;
 
-type GearBase = ItemBase & { isEquipped: boolean; level: number; name: string; scrapPrice: number };
+type GearBase = ItemBase & {
+  gems: GemItem[];
+  isEquipped: boolean;
+  level: number;
+  name: string;
+  scrapPrice: number;
+};
 
 export type MasteryData = AttributeOrMasteryBaseData & {
   instructions: string;
@@ -70,6 +77,7 @@ export type GemItem = ItemBase & {
 export type Shield = GearBase & {
   block: number;
   gearClass?: ShieldClass;
+  gems: GemItem[];
   ranges: {
     block: Range;
   };

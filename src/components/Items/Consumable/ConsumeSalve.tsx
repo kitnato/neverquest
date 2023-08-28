@@ -23,6 +23,7 @@ export function ConsumeSalve({ consumable }: { consumable: ConsumableItem }) {
         color: "text-success",
         value: "CURED",
       },
+      isRegeneration: false,
       value: 0,
     });
 

@@ -19,6 +19,7 @@ export function useHeal() {
             color: "text-success",
             value: `HEAL +${healthDifference}`,
           },
+          isRegeneration: false,
           value: healthDifference,
         });
       },

@@ -63,7 +63,7 @@ export function stackItems<ItemType>(items: ItemType[]) {
       } else {
         stacker.splice(existingStackIndex, 1, {
           item,
-          stack: stacker[existingStackIndex].stack + 1,
+          stack: (stacker[existingStackIndex] ?? { stack: 1 }).stack + 1,
         });
       }
     } else {

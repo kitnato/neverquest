@@ -30,7 +30,7 @@ export function useIncreaseStage() {
           }
         });
 
-        if (!get(wildernesses)[nextStage - 1]) {
+        if (get(wildernesses)[nextStage - 1] !== undefined) {
           set(wildernesses, (current) => [
             ...current,
             generateWilderness({ allowNSFW: get(allowNSFW), stage: nextStage }),

@@ -54,6 +54,10 @@ export const LOCRA = {
 
       const prefix = filteredPrefixes[Math.floor(Math.random() * filteredPrefixes.length)];
 
+      if (prefix === undefined) {
+        throw Error("Invalid prefix.");
+      }
+
       finalName.unshift(capitalizeAll(prefix.name));
     }
 
@@ -77,6 +81,10 @@ export const LOCRA = {
       });
 
       const suffix = filteredSuffixes[Math.floor(Math.random() * filteredSuffixes.length)];
+
+      if (suffix === undefined) {
+        throw Error("Invalid suffix.");
+      }
 
       finalName.push("of", capitalizeAll(suffix.name));
     }
@@ -115,11 +123,16 @@ export const LOCRA = {
         (allowNSFW ? isNSFW || !isNSFW : !isNSFW)
       );
     });
-    const { name } = filteredArtifacts[Math.floor(Math.random() * filteredArtifacts.length)];
+    const filteredArtifact =
+      filteredArtifacts[Math.floor(Math.random() * filteredArtifacts.length)];
+
+    if (filteredArtifact === undefined) {
+      throw Error("Invalid artifact.");
+    }
 
     return LOCRA.generate({
       category: "artifact",
-      name,
+      name: filteredArtifact.name,
       parameters: {
         allowNSFW,
         hasPrefix,
@@ -148,11 +161,17 @@ export const LOCRA = {
 
       return type.includes(creature.type) && (allowNSFW ? isNSFW || !isNSFW : !isNSFW);
     });
-    const { name } = filteredCreatures[Math.floor(Math.random() * filteredCreatures.length)];
+
+    const filteredCreature =
+      filteredCreatures[Math.floor(Math.random() * filteredCreatures.length)];
+
+    if (filteredCreature === undefined) {
+      throw Error("Invalid creature.");
+    }
 
     return LOCRA.generate({
       category: "creature",
-      name,
+      name: filteredCreature.name,
       parameters: {
         allowNSFW,
         hasPrefix,
@@ -179,8 +198,14 @@ export const LOCRA = {
 
       return allowNSFW ? isNSFW || !isNSFW : !isNSFW;
     });
-    const { canPluralize, name } =
+    const filteredLocation =
       filteredLocations[Math.floor(Math.random() * filteredLocations.length)];
+
+    if (filteredLocation === undefined) {
+      throw Error("Invalid location.");
+    }
+
+    const { canPluralize, name } = filteredLocation;
     const isPluralized = Math.random() <= 0.5;
     const location = LOCRA.generate({
       category: "location",

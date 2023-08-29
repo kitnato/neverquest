@@ -21,11 +21,13 @@ import {
 } from "@neverquest/types/type-guards";
 
 export function ItemDisplay({
+  hideDescription = false,
   iconProps,
   item,
   overlayPlacement,
   stack,
 }: {
+  hideDescription?: boolean;
   iconProps?: IconImageDOMProps;
   item: InventoryItem;
   overlayPlacement?: Placement;
@@ -90,7 +92,14 @@ export function ItemDisplay({
 
   return (
     <IconDisplay
-      contents={<ItemName item={item} placement={overlayPlacement} stack={stack} />}
+      contents={
+        <ItemName
+          hideOverlay={hideDescription}
+          item={item}
+          placement={overlayPlacement}
+          stack={stack}
+        />
+      }
       Icon={IconGem}
       iconProps={iconProps}
       tooltip="Gem"

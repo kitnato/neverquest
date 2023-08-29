@@ -12,7 +12,7 @@ import { withStateKey } from "@neverquest/state";
 import { level, rawAttributeStatistic } from "@neverquest/state/attributes";
 import { armor, hasItem, shield, weapon } from "@neverquest/state/inventory";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import type { ElementalGearEffects, GemItem } from "@neverquest/types";
+import type { ElementalGearEffects } from "@neverquest/types";
 import type { Attribute, ElementalGear } from "@neverquest/types/unions";
 import { getDamagePerRate, getDamagePerTick } from "@neverquest/utilities/getters";
 import { stackItems } from "@neverquest/utilities/helpers";
@@ -181,7 +181,7 @@ export const gearElementalEffects = withStateKey("gearElementalEffects", (key) =
         return stackItems(gems).reduce(
           (current, { item, stack }) => ({
             ...current,
-            [GEM_ELEMENTALS[(item as GemItem).type]]: {
+            [GEM_ELEMENTALS[item.type]]: {
               damage: Math.ceil(damage * GEM_DAMAGE * stack),
               duration: GEM_DURATION * stack,
             },
@@ -294,7 +294,7 @@ export const shieldElementalEffects = withStateKey("shieldElementalEffects", (ke
       return stackItems(gems).reduce(
         (current, { item, stack }) => ({
           ...current,
-          [GEM_ELEMENTALS[(item as GemItem).type]]: GEM_ENHANCEMENT * stack,
+          [GEM_ELEMENTALS[item.type]]: GEM_ENHANCEMENT * stack,
         }),
         {
           fire: 0,

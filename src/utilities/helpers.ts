@@ -1,9 +1,6 @@
-import type { InventoryItem } from "@neverquest/types";
 import { isStackable } from "@neverquest/types/type-guards";
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/utilities/constants";
-
-type ItemStack = { item: InventoryItem; stack: number }[];
 
 export function animateElement({
   element,
@@ -52,8 +49,8 @@ export function animateElement({
   );
 }
 
-export function stackItems(items: InventoryItem[]) {
-  const stacker: ItemStack = [];
+export function stackItems<ItemType>(items: ItemType[]) {
+  const stacker: { item: ItemType; stack: number }[] = [];
 
   items.forEach((item) => {
     if (isStackable(item)) {

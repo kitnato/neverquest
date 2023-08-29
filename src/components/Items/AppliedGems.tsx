@@ -5,7 +5,6 @@ import { ELEMENTALS, GEMS_MAXIMUM, GEM_ELEMENTALS } from "@neverquest/data/inven
 import { ReactComponent as IconGem } from "@neverquest/icons/gem.svg";
 import { armor, weapon } from "@neverquest/state/inventory";
 import { gearElementalEffects } from "@neverquest/state/statistics";
-import type { GemItem } from "@neverquest/types";
 import type { ElementalGear } from "@neverquest/types/unions";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
@@ -30,7 +29,7 @@ export function AppliedGems({ slot }: { slot: ElementalGear }) {
       <td>
         {stackItems(gems.slice().sort((a, b) => a.type.localeCompare(b.type))).map(
           ({ item, stack }) => {
-            const { id, type } = item as GemItem;
+            const { id, type } = item;
             const elemental = GEM_ELEMENTALS[type];
             const { damage, duration } = gearElementalEffectsValue[elemental];
 

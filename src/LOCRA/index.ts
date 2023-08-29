@@ -1,3 +1,5 @@
+import { plural } from "pluralize";
+
 import { AFFIXES } from "@neverquest/LOCRA/data/affixes";
 import { ARTIFACTS } from "@neverquest/LOCRA/data/artifacts";
 import { CREATURES } from "@neverquest/LOCRA/data/creatures";
@@ -193,21 +195,7 @@ export const LOCRA = {
     });
 
     if (canPluralize && isPluralized) {
-      const { length } = location;
-
-      switch (location.substring(length - 1)) {
-        case "o":
-        case "h":
-        case "s": {
-          return location + "es";
-        }
-        case "y": {
-          return location.substring(0, length - 1) + "ies";
-        }
-        default: {
-          return location + "s";
-        }
-      }
+      return plural(location);
     }
 
     return location;

@@ -14,7 +14,7 @@ import {
   statusElement,
 } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { armor, shield, thorns, weapon } from "@neverquest/state/inventory";
+import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
@@ -38,6 +38,7 @@ import {
   parryDamage,
   protection,
   recoveryRate,
+  thorns,
 } from "@neverquest/state/statistics";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions";

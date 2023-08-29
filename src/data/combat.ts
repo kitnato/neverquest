@@ -16,7 +16,7 @@ export const BLIGHT = {
 export const ELEMENTAL_AILMENT_DURATION_MAXIMUM = 5000;
 export const ELEMENTAL_AILMENT_PENALTY = {
   burning: 1.25, // damage taken increased by 25%
-  frozen: 0.5, // attack rate halved
+  frozen: 0.5, // attack rate slowed by half
   shocked: 0.75, // damage dealt decreased by 25%
 };
 

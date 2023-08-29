@@ -8,8 +8,8 @@ import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDet
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconThorns } from "@neverquest/icons/thorns.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { thorns } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { thorns } from "@neverquest/state/statistics";
 
 export function Thorns() {
   const isShowingThornsValue = useRecoilValue(isShowing("thorns"));
@@ -40,6 +40,7 @@ export function Thorns() {
                 </Popover.Body>
               </Popover>
             }
+            trigger={thornsValue === 0 ? [] : ["hover", "focus"]}
           >
             <span>{thornsValue}</span>
           </OverlayTrigger>

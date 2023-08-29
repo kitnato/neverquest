@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconImage } from "@neverquest/components/IconImage";
+import { AppliedGemsShield } from "@neverquest/components/Items/AppliedGemsShield";
 import { GearComparison } from "@neverquest/components/Items/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Items/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Items/StaminaCostDetail";
@@ -48,6 +49,8 @@ export function ShieldName({
                 }
                 level={level}
               />
+
+              <AppliedGemsShield />
 
               <tr>
                 <td className={CLASS_TABLE_CELL_ITALIC}>Block chance:</td>

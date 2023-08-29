@@ -30,10 +30,10 @@ export const masteries = withStateKey("masteries", (key) =>
 export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
   selectorFamily<boolean, Mastery>({
     get:
-      (type) =>
+      (parameter) =>
       ({ get }) => {
-        const { base, increment, maximum } = MASTERIES[type];
-        const { rank } = get(masteries(type));
+        const { base, increment, maximum } = MASTERIES[parameter];
+        const { rank } = get(masteries(parameter));
 
         return maximum === getComputedStatistic({ amount: rank, base, increment });
       },
@@ -44,9 +44,9 @@ export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
 export const masteryCost = withStateKey("masteryCost", (key) =>
   selectorFamily<number, Mastery>({
     get:
-      (type) =>
+      (parameter) =>
       ({ get }) =>
-        getGrowthTriangular(get(masteries(type)).rank + 2),
+        getGrowthTriangular(get(masteries(parameter)).rank + 2),
     key,
   }),
 );
@@ -54,10 +54,10 @@ export const masteryCost = withStateKey("masteryCost", (key) =>
 export const masteryStatistic = withStateKey("masteryStatistic", (key) =>
   selectorFamily<number, Mastery>({
     get:
-      (type) =>
+      (parameter) =>
       ({ get }) => {
-        const { base, increment } = MASTERIES[type];
-        const { rank } = get(masteries(type));
+        const { base, increment } = MASTERIES[parameter];
+        const { rank } = get(masteries(parameter));
 
         return getComputedStatistic({ amount: rank, base, increment });
       },

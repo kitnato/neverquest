@@ -18,6 +18,8 @@ export function MonsterBleedingMeter() {
 
   const changeMonsterHealth = useChangeMonsterHealth();
 
+  // TODO - move to onDelta in useAnimate.
+  // TODO - burning affects bleed damage taken.
   useEffect(() => {
     if (monsterBleedingDeltaValue >= duration) {
       changeMonsterHealth({

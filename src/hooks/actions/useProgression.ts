@@ -3,14 +3,18 @@ import { useRecoilCallback } from "recoil";
 
 import { GEM_BASE } from "@neverquest/data/inventory";
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
+import { useToggleAttack } from "@neverquest/hooks/actions/useToggleAttack";
+import { isAttacking } from "@neverquest/state/character";
 import { progress, progressMaximum } from "@neverquest/state/encounter";
 import { monsterLoot } from "@neverquest/state/monster";
 import { coinsLoot, essenceLoot, itemsLoot, scrapLoot } from "@neverquest/state/resources";
+import type { GemItem } from "@neverquest/types";
 import { GEM_TYPES } from "@neverquest/types/unions";
 import { getFromRange, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useProgression() {
   const generateMonster = useGenerateMonster();
+  const toggleAttack = useToggleAttack();
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
@@ -32,15 +36,13 @@ export function useProgression() {
         }
 
         if (gems > 0) {
-          set(itemsLoot, (current) =>
-            current.concat(
-              Array.from(Array(gems)).map(() => ({
-                ...GEM_BASE,
-                id: nanoid(),
-                type: GEM_TYPES[getFromRange({ maximum: 3, minimum: 0 })],
-              })),
-            ),
-          );
+          const gemsLoot: GemItem[] = Array.from(Array(gems)).map(() => ({
+            ...GEM_BASE,
+            id: nanoid(),
+            type: GEM_TYPES[getFromRange({ maximum: 3, minimum: 0 })],
+          }));
+
+          set(itemsLoot, (current) => current.concat(gemsLoot));
         }
 
         const nextProgress = get(progress) + 1;
@@ -49,8 +51,10 @@ export function useProgression() {
 
         if (nextProgress < get(progressMaximum)) {
           generateMonster();
+        } else if (get(isAttacking)) {
+          toggleAttack();
         }
       },
-    [generateMonster],
+    [generateMonster, toggleAttack],
   );
 }

@@ -12,9 +12,9 @@ import {
 } from "@neverquest/data/monster";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
-import { gearElementalEffects, weapon } from "@neverquest/state/inventory";
+import { weapon } from "@neverquest/state/inventory";
 import { skills } from "@neverquest/state/skills";
-import { lootBonus } from "@neverquest/state/statistics";
+import { lootBonus, totalElementalEffects } from "@neverquest/state/statistics";
 import {
   ELEMENTAL_TYPES,
   MONSTER_AILMENT_TYPES,
@@ -32,11 +32,11 @@ import {
 export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
   selectorFamily<boolean, MonsterAilment>({
     get:
-      (type) =>
+      (parameter) =>
       ({ get }) => {
         const { abilityChance, gearClass } = get(weapon);
 
-        switch (type) {
+        switch (parameter) {
           case "bleeding": {
             return get(skills("anatomy")) && abilityChance > 0 && gearClass === "piercing";
           }
@@ -47,13 +47,13 @@ export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
 
           default: {
             const elemental = ELEMENTAL_TYPES.find(
-              (current) => ELEMENTALS[current].ailment === type,
+              (current) => ELEMENTALS[current].ailment === parameter,
             );
 
-            // TODO - add armor thorns check
             return elemental === undefined
               ? false
-              : get(gearElementalEffects("armor"))[elemental].duration > 0;
+              : get(totalElementalEffects("armor"))[elemental].duration > 0 ||
+                  get(totalElementalEffects("weapon"))[elemental].duration > 0;
           }
         }
       },
@@ -71,9 +71,9 @@ export const canReceiveAilments = withStateKey("canReceiveAilments", (key) =>
 export const isMonsterAiling = withStateKey("isMonsterAiling", (key) =>
   selectorFamily<boolean, MonsterAilment>({
     get:
-      (type) =>
+      (parameter) =>
       ({ get }) =>
-        get(monsterAilmentDuration(type)) > 0,
+        get(monsterAilmentDuration(parameter)) > 0,
     key,
   }),
 );
@@ -91,13 +91,12 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
       const { base, bonus, boss, reduction } = MONSTER_ATTACK_RATE;
 
       return (
-        (base -
-          Math.round(
-            (reduction * getGrowthMonsterPower(get(stage)) +
-              bonus * getGrowthSigmoid(get(progress))) *
-              (1 - (get(isBoss) ? boss : 0)),
-          )) *
-        (get(isMonsterAiling("frozen")) ? ELEMENTAL_AILMENT_PENALTY.frozen : 1)
+        base -
+        Math.round(
+          (reduction * getGrowthMonsterPower(get(stage)) +
+            bonus * getGrowthSigmoid(get(progress))) *
+            (1 - (get(isBoss) ? boss : 0)),
+        )
       );
     },
     key,

@@ -64,10 +64,10 @@ export const essenceAbsorbed = withStateKey("essenceAbsorbed", (key) =>
 export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =>
   selectorFamily<boolean, Attribute>({
     get:
-      (type) =>
+      (parameter) =>
       ({ get }) => {
-        const { base, increment, maximum } = ATTRIBUTES[type];
-        const { points } = get(attributes(type));
+        const { base, increment, maximum } = ATTRIBUTES[parameter];
+        const { points } = get(attributes(parameter));
 
         return maximum === undefined
           ? false
@@ -91,10 +91,10 @@ export const level = withStateKey("level", (key) =>
 export const rawAttributeStatistic = withStateKey("rawAttributeStatistic", (key) =>
   selectorFamily<number, Attribute>({
     get:
-      (type) =>
+      (parameter) =>
       ({ get }) => {
-        const { base, increment } = ATTRIBUTES[type];
-        const { points } = get(attributes(type));
+        const { base, increment } = ATTRIBUTES[parameter];
+        const { points } = get(attributes(parameter));
 
         return getComputedStatistic({ amount: points, base, increment });
       },

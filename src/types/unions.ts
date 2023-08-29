@@ -68,6 +68,8 @@ export type Delta =
 export const ELEMENTAL_TYPES = ["lightning", "fire", "ice"] as const;
 export type Elemental = (typeof ELEMENTAL_TYPES)[number];
 
+export type ElementalGear = Exclude<Gear, "shield">;
+
 export const GEAR_TYPES = ["armor", "shield", "weapon"] as const;
 export type Gear = (typeof GEAR_TYPES)[number];
 
@@ -276,6 +278,7 @@ export type StateKey =
   | "scrap"
   | "scrapLoot"
   | "shield"
+  | "shieldElementalEffects"
   | "showDamagePerSecond"
   | "showGearComparison"
   | "showGearLevel"
@@ -291,6 +294,7 @@ export type StateKey =
   | "staminaMaximumTotal"
   | "statusElement"
   | "thorns"
+  | "totalElementalEffects"
   | "weapon"
   | "wildernesses";
 

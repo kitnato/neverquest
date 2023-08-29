@@ -3,20 +3,17 @@ import { useRecoilValue } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import { ELEMENTALS, GEMS_MAXIMUM, GEM_ELEMENTALS } from "@neverquest/data/inventory";
 import { ReactComponent as IconGem } from "@neverquest/icons/gem.svg";
-import { armor, weapon } from "@neverquest/state/inventory";
-import { gearElementalEffects } from "@neverquest/state/statistics";
+import { shield } from "@neverquest/state/inventory";
+import { shieldElementalEffects } from "@neverquest/state/statistics";
 import type { GemItem } from "@neverquest/types";
-import type { ElementalGear } from "@neverquest/types/unions";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
-import { formatMilliseconds } from "@neverquest/utilities/formatters";
+import { formatPercentage } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
-export function AppliedGems({ slot }: { slot: ElementalGear }) {
-  const armorValue = useRecoilValue(armor);
-  const gearElementalEffectsValue = useRecoilValue(gearElementalEffects(slot));
-  const weaponValue = useRecoilValue(weapon);
+export function AppliedGemsShield() {
+  const { gems } = useRecoilValue(shield);
+  const shieldElementalEffectsValue = useRecoilValue(shieldElementalEffects);
 
-  const { gems } = slot === "armor" ? armorValue : weaponValue;
   const appliedGems = gems.length;
 
   if (appliedGems === 0) {
@@ -32,14 +29,14 @@ export function AppliedGems({ slot }: { slot: ElementalGear }) {
           ({ item, stack }) => {
             const { id, type } = item as GemItem;
             const elemental = GEM_ELEMENTALS[type];
-            const { damage, duration } = gearElementalEffectsValue[elemental];
+            const enhancement = formatPercentage(shieldElementalEffectsValue[elemental], 0);
 
             return (
               <div key={id}>
-                <span className={ELEMENTALS[elemental].color}>{`${damage}`}</span>
+                <span className={ELEMENTALS[elemental].color}>{`+${enhancement}`}</span>
                 {" · "}
                 <IconImage Icon={ELEMENTALS[elemental].Icon} size="tiny" />
-                {` ${formatMilliseconds(duration)} · `}
+                {` +${enhancement} · `}
                 <IconImage Icon={IconGem} size="tiny" />
                 &nbsp;
                 {stack}

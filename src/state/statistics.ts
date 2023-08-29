@@ -2,12 +2,20 @@ import { selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { BLEED, PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/combat";
+import {
+  GEM_DAMAGE,
+  GEM_DURATION,
+  GEM_ELEMENTALS,
+  GEM_ENHANCEMENT,
+} from "@neverquest/data/inventory";
 import { withStateKey } from "@neverquest/state";
 import { level, rawAttributeStatistic } from "@neverquest/state/attributes";
-import { armor, gearElementalEffects, hasItem, shield, weapon } from "@neverquest/state/inventory";
+import { armor, hasItem, shield, weapon } from "@neverquest/state/inventory";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import type { Attribute } from "@neverquest/types/unions";
+import type { ElementalGearEffects, GemItem } from "@neverquest/types";
+import type { Attribute, ElementalGear } from "@neverquest/types/unions";
 import { getDamagePerRate, getDamagePerTick } from "@neverquest/utilities/getters";
+import { stackItems } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
@@ -118,7 +126,7 @@ export const damageTotal = withStateKey("damageTotal", (key) =>
     get: ({ get }) =>
       get(damage) +
       get(weapon).damage +
-      Object.values(get(gearElementalEffects("weapon"))).reduce(
+      Object.values(get(totalElementalEffects("weapon"))).reduce(
         (current, { damage }) => current + damage,
         0,
       ),
@@ -158,6 +166,33 @@ export const dodge = withStateKey("dodge", (key) =>
 
       return total + total * get(powerBonus("agility"));
     },
+    key,
+  }),
+);
+
+export const gearElementalEffects = withStateKey("gearElementalEffects", (key) =>
+  selectorFamily<ElementalGearEffects, ElementalGear>({
+    get:
+      (parameter) =>
+      ({ get }) => {
+        const { damage, gems } =
+          parameter === "armor" ? { ...get(armor), damage: get(armor).protection } : get(weapon);
+
+        return stackItems(gems).reduce(
+          (current, { item, stack }) => ({
+            ...current,
+            [GEM_ELEMENTALS[(item as GemItem).type]]: {
+              damage: Math.ceil(damage * GEM_DAMAGE * stack),
+              duration: GEM_DURATION * stack,
+            },
+          }),
+          {
+            fire: { damage: 0, duration: 0 },
+            ice: { damage: 0, duration: 0 },
+            lightning: { damage: 0, duration: 0 },
+          },
+        );
+      },
     key,
   }),
 );
@@ -208,9 +243,9 @@ export const parryRating = withStateKey("parryRating", (key) =>
 export const powerBonus = withStateKey("powerBonus", (key) =>
   selectorFamily<number, Attribute>({
     get:
-      (type) =>
+      (parameter) =>
       ({ get }) =>
-        get(hasItem("tome of power")) ? get(level) * ATTRIBUTES[type].powerBonus : 0,
+        get(hasItem("tome of power")) ? get(level) * ATTRIBUTES[parameter].powerBonus : 0,
     key,
   }),
 );
@@ -251,6 +286,27 @@ export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (
   }),
 );
 
+export const shieldElementalEffects = withStateKey("shieldElementalEffects", (key) =>
+  selector({
+    get: ({ get }) => {
+      const { gems } = get(shield);
+
+      return stackItems(gems).reduce(
+        (current, { item, stack }) => ({
+          ...current,
+          [GEM_ELEMENTALS[(item as GemItem).type]]: GEM_ENHANCEMENT * stack,
+        }),
+        {
+          fire: 0,
+          ice: 0,
+          lightning: 0,
+        },
+      );
+    },
+    key,
+  }),
+);
+
 export const staggerRating = withStateKey("staggerRating", (key) =>
   selector({
     get: ({ get }) => {
@@ -269,6 +325,48 @@ export const staggerWeapon = withStateKey("staggerWeapon", (key) =>
 
       return gearClass === "blunt" ? abilityChance : 0;
     },
+    key,
+  }),
+);
+
+export const thorns = withStateKey("thorns", (key) =>
+  selector({
+    get: ({ get }) =>
+      Object.values(get(gearElementalEffects("armor"))).reduce(
+        (current, { damage }) => current + damage,
+        0,
+      ),
+    key,
+  }),
+);
+
+export const totalElementalEffects = withStateKey("totalElementalEffects", (key) =>
+  selectorFamily<ElementalGearEffects, ElementalGear>({
+    get:
+      (parameter) =>
+      ({ get }) => {
+        const { fire, ice, lightning } = get(gearElementalEffects(parameter));
+        const {
+          fire: fireEnhancement,
+          ice: iceEnhancement,
+          lightning: lightningEnhancement,
+        } = get(shieldElementalEffects);
+
+        return {
+          fire: {
+            damage: Math.round(fire.damage + fire.damage * fireEnhancement),
+            duration: Math.round(fire.duration + fire.duration * fireEnhancement),
+          },
+          ice: {
+            damage: Math.round(ice.damage + ice.damage * iceEnhancement),
+            duration: Math.round(ice.duration + ice.duration * iceEnhancement),
+          },
+          lightning: {
+            damage: Math.round(lightning.damage + lightning.damage * lightningEnhancement),
+            duration: Math.round(lightning.duration + lightning.duration * lightningEnhancement),
+          },
+        };
+      },
     key,
   }),
 );

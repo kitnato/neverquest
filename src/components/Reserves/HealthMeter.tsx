@@ -22,6 +22,7 @@ export function HealthMeter() {
 
   const penalty = healthMaximumValue - healthMaximumTotalValue;
 
+  // Needed to catch attribute resets and poison/blight penalties.
   useEffect(() => {
     if (healthValue > healthMaximumTotalValue) {
       resetHealth();

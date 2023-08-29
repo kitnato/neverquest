@@ -16,6 +16,7 @@ export function StaminaMeter() {
 
   const penalty = staminaMaximumValue - staminaMaximumTotalValue;
 
+  // Needed to catch attribute resets and poison/blight penalties.
   useEffect(() => {
     if (staminaValue > staminaMaximumTotalValue) {
       resetStamina();

@@ -1,6 +1,13 @@
 import type { ArmorClass, ShieldClass, WeaponClass, WeaponModality } from "@neverquest/LOCRA/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Gem, Showing, Trinket, WeaponGrip } from "@neverquest/types/unions";
+import type {
+  Consumable,
+  Elemental,
+  Gem,
+  Showing,
+  Trinket,
+  WeaponGrip,
+} from "@neverquest/types/unions";
 
 export type Armor = GearBase & {
   deflection: number;
@@ -37,14 +44,6 @@ export type ConsumableItem = ItemBase & {
   type: Consumable;
 };
 
-export type InventoryItem = ConsumableItem | GearItem | GemItem | TrinketItem;
-
-type ItemBase = {
-  coinPrice: number;
-  id: string;
-  weight: number;
-};
-
 export type GearItem = Armor | Shield | Weapon;
 
 type GearBase = ItemBase & {
@@ -53,6 +52,20 @@ type GearBase = ItemBase & {
   level: number;
   name: string;
   scrapPrice: number;
+};
+
+export type GemItem = ItemBase & {
+  type: Gem;
+};
+
+export type ElementalGearEffects = Record<Elemental, { damage: number; duration: number }>;
+
+export type InventoryItem = ConsumableItem | GearItem | GemItem | TrinketItem;
+
+type ItemBase = {
+  coinPrice: number;
+  id: string;
+  weight: number;
 };
 
 export type MasteryData = AttributeOrMasteryBaseData & {
@@ -68,10 +81,6 @@ export type MerchantInventory = {
 export type Range = {
   maximum: number;
   minimum: number;
-};
-
-export type GemItem = ItemBase & {
-  type: Gem;
 };
 
 export type Shield = GearBase & {

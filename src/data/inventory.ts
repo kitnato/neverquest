@@ -168,6 +168,8 @@ export const GEM_DAMAGE = 0.2;
 
 export const GEM_DURATION = 1000;
 
+export const GEM_ENHANCEMENT = 0.33;
+
 export const GEM_ELEMENTALS: Record<Gem, Elemental> = {
   ruby: "fire",
   sapphire: "ice",

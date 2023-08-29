@@ -2,11 +2,11 @@ export const BOSS_STAGE_INTERVAL = 5;
 export const BOSS_STAGE_START = 10;
 
 export const LOOT = {
-  bonus: 100,
+  bonus: 50,
   boss: 1.5,
-  coinsBase: 400,
-  essenceBase: 500,
-  scrapBase: 300,
+  coinsBase: 250,
+  essenceBase: 400,
+  scrapBase: 200,
 };
 
 export const MONSTER_ATTACK_RATE = {

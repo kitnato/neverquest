@@ -6,7 +6,6 @@ import { isGameOver } from "@neverquest/state/character";
 
 const FRAMERATE = 1000 / 60;
 
-// TODO - restore back to using requestAnimationFrame and implement away time calculator.
 export function useAnimate({
   delta,
   factor = 1,
@@ -51,8 +50,6 @@ export function useAnimate({
     } else if (interval.current === -1) {
       interval.current = setInterval(() => {
         const now = Date.now();
-
-        setHasTicked(false);
 
         delta((current) => {
           const newDelta = current - (now - (previousTime.current || now)) * factor;

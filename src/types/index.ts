@@ -1,4 +1,9 @@
-import type { ArmorClass, ShieldClass, WeaponClass, WeaponModality } from "@neverquest/LOCRA/types";
+import type {
+  ArmorClass,
+  ShieldClass,
+  WeaponClass,
+  WeaponModality,
+} from "@neverquest/LOCRAN/types";
 import type { SVGIcon } from "@neverquest/types/props";
 import type {
   Consumable,

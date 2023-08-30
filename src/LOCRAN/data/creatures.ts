@@ -1,4 +1,4 @@
-import type { CreatureData } from "@neverquest/LOCRA/types";
+import type { CreatureData } from "@neverquest/LOCRAN/types";
 
 export const CREATURES: CreatureData[] = [
   {
@@ -96,6 +96,10 @@ export const CREATURES: CreatureData[] = [
     type: "name",
   },
   {
+    name: "barnacle",
+    type: "monster",
+  },
+  {
     name: "bastard",
     type: "monster",
   },
@@ -113,6 +117,10 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "beefcake",
+    type: "monster",
+  },
+  {
+    name: "beetle",
     type: "monster",
   },
   {
@@ -190,6 +198,10 @@ export const CREATURES: CreatureData[] = [
   {
     isNSFW: true,
     name: "butthole",
+    type: "monster",
+  },
+  {
+    name: "cacodemon",
     type: "monster",
   },
   {
@@ -278,6 +290,11 @@ export const CREATURES: CreatureData[] = [
     type: "human",
   },
   {
+    isNSFW: true,
+    name: "crackhead",
+    type: "monster",
+  },
+  {
     name: "cripple",
     type: "monster",
   },
@@ -288,6 +305,11 @@ export const CREATURES: CreatureData[] = [
   {
     name: "crusader",
     type: "human",
+  },
+  {
+    isNSFW: true,
+    name: "cuckold",
+    type: "monster",
   },
   {
     name: "cyborg",
@@ -311,6 +333,10 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "desecrator",
+    type: "monster",
+  },
+  {
+    name: "despoiler",
     type: "monster",
   },
   {
@@ -537,6 +563,10 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "gorgon",
+    type: "monster",
+  },
+  {
     name: "griffin",
     type: "monster",
   },
@@ -618,6 +648,14 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "impaler",
+    type: "monster",
+  },
+  {
+    name: "incubus",
+    type: "monster",
+  },
+  {
     name: "initiate",
     type: "human",
   },
@@ -658,6 +696,11 @@ export const CREATURES: CreatureData[] = [
     type: "human",
   },
   {
+    isNSFW: true,
+    name: "junkie",
+    type: "monster",
+  },
+  {
     name: "killer",
     type: "monster",
   },
@@ -688,6 +731,10 @@ export const CREATURES: CreatureData[] = [
   {
     name: "liberator",
     type: "human",
+  },
+  {
+    name: "lich",
+    type: "monster",
   },
   {
     isNSFW: true,
@@ -731,6 +778,10 @@ export const CREATURES: CreatureData[] = [
     type: "human",
   },
   {
+    name: "mancubus",
+    type: "monster",
+  },
+  {
     name: "maniac",
     type: "monster",
   },
@@ -764,6 +815,10 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "masochist",
+    type: "monster",
+  },
+  {
+    name: "mermaid",
     type: "monster",
   },
   {
@@ -841,6 +896,10 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "narwhal",
+    type: "monster",
+  },
+  {
+    name: "necromancer",
     type: "monster",
   },
   {
@@ -1006,6 +1065,10 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "sadomasochist",
+    type: "monster",
+  },
+  {
     name: "saint",
     type: "human",
   },
@@ -1061,6 +1124,10 @@ export const CREATURES: CreatureData[] = [
   {
     name: "sire",
     type: "human",
+  },
+  {
+    name: "siren",
+    type: "monster",
   },
   {
     name: "skeleton",
@@ -1146,6 +1213,10 @@ export const CREATURES: CreatureData[] = [
   {
     name: "stranger",
     type: "human",
+  },
+  {
+    name: "succubus",
+    type: "monster",
   },
   {
     name: "susan",

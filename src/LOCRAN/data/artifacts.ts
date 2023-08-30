@@ -1,4 +1,4 @@
-import type { ArtifactData } from "@neverquest/LOCRA/types";
+import type { ArtifactData } from "@neverquest/LOCRAN/types";
 
 export const ARTIFACTS: ArtifactData[] = [
   {
@@ -209,6 +209,11 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "armor",
   },
   {
+    name: "bucket",
+    subtype: "head",
+    type: "armor",
+  },
+  {
     name: "buckler",
     subtype: "small",
     type: "shield",
@@ -299,12 +304,6 @@ export const ARTIFACTS: ArtifactData[] = [
   {
     artifactClass: "slashing",
     name: "claymore",
-    subtype: "melee",
-    type: "weapon",
-  },
-  {
-    artifactClass: "slashing",
-    name: "cleaver",
     subtype: "melee",
     type: "weapon",
   },
@@ -931,6 +930,12 @@ export const ARTIFACTS: ArtifactData[] = [
   {
     artifactClass: "blunt",
     name: "pipe",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "piercing",
+    name: "pitchfork",
     subtype: "melee",
     type: "weapon",
   },

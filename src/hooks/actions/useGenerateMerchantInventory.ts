@@ -2,7 +2,7 @@ import { useRecoilCallback } from "recoil";
 
 import { MERCHANT_OFFERS } from "@neverquest/data/caravan";
 import { TRINKETS } from "@neverquest/data/inventory";
-import type { AffixTag } from "@neverquest/LOCRA/types";
+import type { AffixTag } from "@neverquest/LOCRAN/types";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { stage, stageMaximum } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";

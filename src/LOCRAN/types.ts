@@ -69,6 +69,10 @@ export type LocationData = BaseData & {
   canPluralize?: boolean;
 };
 
+export type NameData = BaseData & {
+  type: Affix[];
+};
+
 export const SHIELD_CLASSES = ["small", "medium", "tower"] as const;
 export type ShieldClass = (typeof SHIELD_CLASSES)[number];
 

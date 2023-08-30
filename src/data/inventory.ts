@@ -26,7 +26,7 @@ import { ReactComponent as IconBlunt } from "@neverquest/icons/weapon-blunt.svg"
 import { ReactComponent as IconPiercing } from "@neverquest/icons/weapon-piercing.svg";
 import { ReactComponent as IconSlashing } from "@neverquest/icons/weapon-slashing.svg";
 import { ReactComponent as IconWeaponStagger } from "@neverquest/icons/weapon-stagger.svg";
-import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRA/types";
+import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type { Armor, ConsumableItem, Range, Shield, TrinketItem, Weapon } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
 import type {
@@ -40,7 +40,7 @@ import type {
 
 export const ARMOR_BASE = {
   coinPrice: 500,
-  protection: 300,
+  protection: 400,
   scrapPrice: 3500,
   staminaCost: 30,
   weight: 60,
@@ -160,25 +160,20 @@ export const ELEMENTALS: Record<
 export const ENCUMBRANCE = 3;
 
 export const GEM_BASE = {
-  coinPrice: 100,
+  coinPrice: 10,
   weight: 1,
 };
-
 export const GEM_DAMAGE = 0.2;
-
 export const GEM_DURATION = 1000;
-
-export const GEM_ENHANCEMENT = 0.33;
-
 export const GEM_ELEMENTALS: Record<Gem, Elemental> = {
   ruby: "fire",
   sapphire: "ice",
   topaz: "lightning",
 };
+export const GEM_ENHANCEMENT = 0.33;
+export const GEMS_MAXIMUM = 3;
 
 export const KNAPSACK_SIZE = 3;
-
-export const GEMS_MAXIMUM = 3;
 
 export const SHIELD_BASE = {
   coinPrice: 400,

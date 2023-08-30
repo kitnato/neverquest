@@ -10,14 +10,15 @@ import {
   WEAPON_SPECIFICATIONS,
 } from "@neverquest/data/inventory";
 import { LOCATION_AFFIX_BASE } from "@neverquest/data/location";
-import { LOCRA } from "@neverquest/LOCRA";
+import { generateArtifact } from "@neverquest/LOCRAN/generate/generateArtifact";
+import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
 import type {
   AffixTag,
   ArmorClass,
   ShieldClass,
   WeaponClass,
   WeaponModality,
-} from "@neverquest/LOCRA/types";
+} from "@neverquest/LOCRAN/types";
 import type { Armor, Shield, Weapon } from "@neverquest/types";
 import { getFromRange, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
@@ -66,7 +67,7 @@ export function generateArmor({
     level,
     name:
       name ??
-      LOCRA.generateArtifact({
+      generateArtifact({
         allowNSFW,
         hasPrefix,
         hasSuffix,
@@ -123,7 +124,7 @@ export function generateShield({
     level,
     name:
       name ??
-      LOCRA.generateArtifact({
+      generateArtifact({
         allowNSFW,
         hasPrefix,
         hasSuffix,
@@ -191,7 +192,7 @@ export function generateWeapon({
     isEquipped: false,
     level,
     modality,
-    name: LOCRA.generateArtifact({
+    name: generateArtifact({
       allowNSFW,
       hasPrefix,
       hasSuffix,
@@ -214,7 +215,7 @@ export function generateWilderness({ allowNSFW, stage }: { allowNSFW: boolean; s
   const { prefix, suffix } = LOCATION_AFFIX_BASE;
   const growthFactor = getGrowthSigmoid(stage);
 
-  return LOCRA.generateLocation({
+  return generateLocation({
     allowNSFW,
     hasPrefix: Math.random() <= prefix.minimum + prefix.attenuation * growthFactor,
     hasSuffix: Math.random() <= suffix.minimum + suffix.attenuation * growthFactor,

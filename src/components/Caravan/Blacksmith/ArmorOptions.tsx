@@ -14,7 +14,7 @@ import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { ReactComponent as IconArmorProtection } from "@neverquest/icons/protection.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
-import { ARMOR_CLASSES, type ArmorClass } from "@neverquest/LOCRA/types";
+import { ARMOR_CLASSES, type ArmorClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";

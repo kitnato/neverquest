@@ -13,7 +13,7 @@ import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
-import { WEAPON_CLASSES, type WeaponClass } from "@neverquest/LOCRA/types";
+import { WEAPON_CLASSES, type WeaponClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";

@@ -1,4 +1,4 @@
-import type { LocationData } from "@neverquest/LOCRA/types";
+import type { LocationData } from "@neverquest/LOCRAN/types";
 
 export const LOCATIONS: LocationData[] = [
   {
@@ -210,6 +210,10 @@ export const LOCATIONS: LocationData[] = [
     name: "field",
   },
   {
+    canPluralize: true,
+    name: "fissure",
+  },
+  {
     name: "flats",
   },
   {
@@ -235,7 +239,12 @@ export const LOCATIONS: LocationData[] = [
     name: "grounds",
   },
   {
+    canPluralize: true,
     name: "grove",
+  },
+  {
+    canPluralize: true,
+    name: "gulch",
   },
   {
     name: "hedge",
@@ -258,6 +267,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "hole",
+  },
+  {
+    name: "house",
   },
   {
     name: "hovel",
@@ -332,6 +344,10 @@ export const LOCATIONS: LocationData[] = [
     name: "mire",
   },
   {
+    canPluralize: true,
+    name: "moor",
+  },
+  {
     name: "monastery",
   },
   {
@@ -343,6 +359,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "murk",
+  },
+  {
+    name: "netherworld",
   },
   {
     name: "nightclub",
@@ -476,6 +495,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "taiga",
+  },
+  {
+    name: "tavern",
   },
   {
     name: "temple",

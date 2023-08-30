@@ -12,7 +12,7 @@ import type {
   ShieldClass,
   WeaponClass,
   WeaponModality,
-} from "@neverquest/LOCRA/types";
+} from "@neverquest/LOCRAN/types";
 import type { SVGIcon } from "@neverquest/types/props";
 import type { Consumable, Crew, Trinket } from "@neverquest/types/unions";
 

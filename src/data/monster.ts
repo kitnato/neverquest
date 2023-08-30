@@ -17,7 +17,7 @@ export const MONSTER_ATTACK_RATE = {
 };
 
 export const MONSTER_DAMAGE = {
-  base: 800,
+  base: 850,
   bonus: 80,
   boss: 0.3,
   minimum: 6,

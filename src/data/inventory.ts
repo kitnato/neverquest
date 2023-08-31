@@ -165,7 +165,7 @@ export const GEM_BASE = {
   weight: 1,
 };
 export const GEM_DAMAGE = [0.1, 0.2, 0.4, 0.7, 1];
-export const GEM_DURATION = [300, 600, 1000, 2000, 3000];
+export const GEM_DURATION = [500, 800, 1300, 2000, 3000];
 export const GEM_ELEMENTALS: Record<Gem, Elemental> = {
   ruby: "fire",
   sapphire: "ice",

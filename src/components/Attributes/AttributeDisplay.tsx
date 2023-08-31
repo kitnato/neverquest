@@ -20,7 +20,7 @@ import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
 import type { Attribute } from "@neverquest/types/unions";
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
-  LABEL_AT_MAXIMUM,
+  LABEL_MAXIMUM,
   LABEL_UNKNOWN,
 } from "@neverquest/utilities/constants";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
@@ -50,7 +50,7 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
             <span>{points}</span>
 
             {isAttributeAtMaximumValue ? (
-              <Badge bg="secondary">{LABEL_AT_MAXIMUM}</Badge>
+              <Badge bg="secondary">{LABEL_MAXIMUM}</Badge>
             ) : (
               <OverlayTrigger
                 overlay={

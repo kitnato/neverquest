@@ -3,13 +3,15 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { IconImage } from "@neverquest/components/IconImage";
+import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
 import { ReactComponent as IconPoisonRating } from "@neverquest/icons/poison-rating.svg";
 import {
   monsterPoisonChance,
   monsterPoisonLength,
   monsterPoisonMagnitude,
 } from "@neverquest/state/monster";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_MAXIMUM } from "@neverquest/utilities/constants";
 import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
 
 export function MonsterPoisonRating() {
@@ -40,7 +42,11 @@ export function MonsterPoisonRating() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
 
-                    <td>{`-${formatPercentage(monsterPoisonMagnitudeValue)} health`}</td>
+                    <td>
+                      {`-${formatPercentage(monsterPoisonMagnitudeValue)}`}&nbsp;
+                      <IconImage Icon={IconHealth} size="tiny" />
+                      &nbsp;{LABEL_MAXIMUM}
+                    </td>
                   </tr>
 
                   <tr>

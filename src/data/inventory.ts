@@ -158,22 +158,21 @@ export const ELEMENTALS: Record<
 };
 
 export const ENCUMBRANCE = 3;
+export const KNAPSACK_SIZE = 3;
 
 export const GEM_BASE = {
   coinPrice: 10,
   weight: 1,
 };
-export const GEM_DAMAGE = 0.2;
-export const GEM_DURATION = 1000;
+export const GEM_DAMAGE = [0.1, 0.2, 0.4, 0.7, 1];
+export const GEM_DURATION = [300, 600, 1000, 2000, 3000];
 export const GEM_ELEMENTALS: Record<Gem, Elemental> = {
   ruby: "fire",
   sapphire: "ice",
   topaz: "lightning",
 };
-export const GEM_ENHANCEMENT = 0.33;
-export const GEMS_MAXIMUM = 3;
-
-export const KNAPSACK_SIZE = 3;
+export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
+export const GEMS_MAXIMUM = 5;
 
 export const SHIELD_BASE = {
   coinPrice: 400,

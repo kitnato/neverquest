@@ -182,8 +182,8 @@ export const gearElementalEffects = withStateKey("gearElementalEffects", (key) =
           (current, { item, stack }) => ({
             ...current,
             [GEM_ELEMENTALS[item.type]]: {
-              damage: Math.ceil(damage * GEM_DAMAGE * stack),
-              duration: GEM_DURATION * stack,
+              damage: Math.ceil(damage * (GEM_DAMAGE[stack - 1] ?? 0)),
+              duration: GEM_DURATION[stack - 1] ?? 0,
             },
           }),
           {
@@ -294,7 +294,7 @@ export const shieldElementalEffects = withStateKey("shieldElementalEffects", (ke
       return stackItems(gems).reduce(
         (current, { item, stack }) => ({
           ...current,
-          [GEM_ELEMENTALS[item.type]]: GEM_ENHANCEMENT * stack,
+          [GEM_ELEMENTALS[item.type]]: GEM_ENHANCEMENT[stack - 1] ?? 0,
         }),
         {
           fire: 0,

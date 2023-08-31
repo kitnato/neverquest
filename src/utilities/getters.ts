@@ -1,7 +1,8 @@
 import type { RecoilValue, Snapshot } from "recoil";
 
+import { MONSTER_POWER_SCALAR } from "@neverquest/data/monster";
 import type { Range } from "@neverquest/types";
-import type { AnimationSpeed, AnimationType } from "@neverquest/types/ui";
+import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/utilities/constants";
 
 export function getAnimationClass({
@@ -11,7 +12,7 @@ export function getAnimationClass({
 }: {
   isInfinite?: boolean;
   speed?: AnimationSpeed;
-  type: AnimationType;
+  type: Animation;
 }) {
   return `${CLASS_ANIMATED} ${CLASS_ANIMATE_PREFIX}${type}${
     isInfinite ? ` ${CLASS_ANIMATE_PREFIX}infinite` : ""
@@ -69,6 +70,10 @@ export function getFromRange({ maximum, minimum }: Range) {
 
 export function getSellPrice({ coinPrice }: { coinPrice: number }) {
   return Math.ceil(coinPrice / 2);
+}
+
+export function getGrowthMonsterPower(x: number) {
+  return getGrowthTriangular(x) / MONSTER_POWER_SCALAR;
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function

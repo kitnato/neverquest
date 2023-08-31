@@ -2,15 +2,17 @@ import { Card, Col, Row, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
 import { Loot } from "@neverquest/components/Loot";
 import { Looting } from "@neverquest/components/Loot/Looting";
 import { ReactComponent as IconLooted } from "@neverquest/icons/loot.svg";
 import { progress } from "@neverquest/state/encounter";
-import { hasLooted } from "@neverquest/state/resources";
+import { hasLooted, itemsLoot } from "@neverquest/state/resources";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function LootDisplay() {
   const hasLootedValue = useRecoilValue(hasLooted);
+  const itemsLootValue = useRecoilValue(itemsLoot);
   const progressValue = useRecoilValue(progress);
 
   return (
@@ -20,7 +22,7 @@ export function LootDisplay() {
       {progressValue > 0 && (
         <Card className={getAnimationClass({ type: "flipInX" })}>
           <Card.Body>
-            {hasLootedValue ? (
+            {hasLootedValue && itemsLootValue.length === 0 ? (
               <IconDisplay
                 contents={<span className="fst-italic">Nothing remains.</span>}
                 Icon={IconLooted}
@@ -28,19 +30,27 @@ export function LootDisplay() {
                 tooltip="Loot"
               />
             ) : (
-              <Row>
-                <Col>
-                  <Loot type="essence" />
-                </Col>
+              <Stack gap={3}>
+                {!hasLootedValue && (
+                  <Row>
+                    <Col>
+                      <Loot type="essence" />
+                    </Col>
 
-                <Col>
-                  <Loot type="scrap" />
-                </Col>
+                    <Col>
+                      <Loot type="scrap" />
+                    </Col>
 
-                <Col>
-                  <Loot type="coins" />
-                </Col>
-              </Row>
+                    <Col>
+                      <Loot type="coins" />
+                    </Col>
+                  </Row>
+                )}
+
+                {itemsLootValue.map((item) => (
+                  <ItemDisplay item={item} key={item.id} />
+                ))}
+              </Stack>
             )}
           </Card.Body>
         </Card>

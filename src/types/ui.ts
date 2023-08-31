@@ -1,6 +1,4 @@
-export type AnimationSpeed = "fast" | "faster" | "slow" | "slower";
-
-export type AnimationType =
+export type Animation =
   | "bounceIn"
   | "fadeOutUp"
   | "flipInX"
@@ -9,6 +7,8 @@ export type AnimationType =
   | "zoomIn"
   | "zoomInRight"
   | "zoomOut";
+
+export type AnimationSpeed = "fast" | "faster" | "slow" | "slower";
 
 export type BootstrapColorVariant = "dark" | "outline-dark" | "secondary";
 
@@ -21,7 +21,11 @@ type DeltaDisplayContents = {
   value: number | string;
 };
 
-export type DeltaReserve = {
+export type DeltaReserve =
+  | { isRegeneration: true }
+  | (DeltaReserveBase & { isRegeneration: false });
+
+export type DeltaReserveBase = {
   delta?: DeltaDisplay;
   value: number;
 };

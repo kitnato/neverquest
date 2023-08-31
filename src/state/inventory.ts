@@ -1,8 +1,14 @@
 import { atom, selector, selectorFamily } from "recoil";
 
-import { ARMOR_NONE, ENCUMBRANCE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
+import {
+  ARMOR_NONE,
+  ENCUMBRANCE,
+  GEMS_MAXIMUM,
+  SHIELD_NONE,
+  WEAPON_NONE,
+} from "@neverquest/data/inventory";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import type { Armor, Item, Shield, Weapon } from "@neverquest/types";
+import type { Armor, InventoryItem, Shield, Weapon } from "@neverquest/types";
 import {
   isArmor,
   isConsumable,
@@ -15,7 +21,7 @@ import type { Consumable, Gear, Trinket } from "@neverquest/types/unions";
 // SELECTORS
 
 export const armor = withStateKey("armor", (key) =>
-  selector<Armor | typeof ARMOR_NONE>({
+  selector({
     get: ({ get }) => {
       const equippedArmor = get(inventory).find((item) => {
         if (isArmor(item)) {
@@ -35,12 +41,26 @@ export const armor = withStateKey("armor", (key) =>
   }),
 );
 
+export const canApplyGem = withStateKey("canApplyGem", (key) =>
+  selectorFamily<boolean, Gear>({
+    get:
+      (parameter) =>
+      ({ get }) =>
+        (parameter === "armor"
+          ? get(armor).gems.length
+          : parameter === "shield"
+          ? get(shield).gems.length
+          : get(weapon).gems.length) < GEMS_MAXIMUM,
+    key,
+  }),
+);
+
 export const canFit = withStateKey("canFit", (key) =>
   selectorFamily<boolean, number>({
     get:
-      (weight) =>
+      (parameter) =>
       ({ get }) =>
-        get(encumbrance) + weight <= get(encumbranceMaximum),
+        get(encumbrance) + parameter <= get(encumbranceMaximum),
     key,
   }),
 );
@@ -59,11 +79,11 @@ export const encumbrance = withStateKey("encumbrance", (key) =>
 export const hasItem = withStateKey("hasItem", (key) =>
   selectorFamily<boolean, Consumable | Trinket>({
     get:
-      (type) =>
+      (parameter) =>
       ({ get }) =>
         Boolean(
           get(inventory).find(
-            (item) => (isConsumable(item) || isTrinket(item)) && item.type === type,
+            (item) => (isConsumable(item) || isTrinket(item)) && item.type === parameter,
           ),
         ),
     key,
@@ -78,7 +98,7 @@ export const isInventoryFull = withStateKey("isInventoryFull", (key) =>
 );
 
 export const shield = withStateKey("shield", (key) =>
-  selector<Shield | typeof SHIELD_NONE>({
+  selector({
     get: ({ get }) => {
       const equippedShield = get(inventory).find((item) => {
         if (isShield(item)) {
@@ -99,7 +119,7 @@ export const shield = withStateKey("shield", (key) =>
 );
 
 export const weapon = withStateKey("weapon", (key) =>
-  selector<Weapon | typeof WEAPON_NONE>({
+  selector({
     get: ({ get }) => {
       const equippedWeapon = get(inventory).find((item) => {
         if (isWeapon(item)) {
@@ -121,14 +141,6 @@ export const weapon = withStateKey("weapon", (key) =>
 
 // ATOMS
 
-export const itemsAcquired = withStateKey("itemsAcquired", (key) =>
-  atom({
-    default: [],
-    effects: [handleLocalStorage<{ key: string; type: Consumable | Gear }[]>({ key })],
-    key,
-  }),
-);
-
 export const encumbranceMaximum = withStateKey("encumbranceMaximum", (key) =>
   atom({
     default: ENCUMBRANCE,
@@ -146,14 +158,30 @@ export const hasKnapsack = withStateKey("hasKnapsack", (key) =>
 );
 
 export const inventory = withStateKey("inventory", (key) =>
-  atom<Item[]>({
+  atom<InventoryItem[]>({
     default: [],
-    effects: [handleLocalStorage<Item[]>({ key })],
+    effects: [handleLocalStorage<InventoryItem[]>({ key })],
     key,
   }),
 );
 
 export const isInventoryOpen = withStateKey("isInventoryOpen", (key) =>
+  atom({
+    default: false,
+    effects: [handleLocalStorage<boolean>({ key })],
+    key,
+  }),
+);
+
+export const itemsAcquired = withStateKey("itemsAcquired", (key) =>
+  atom({
+    default: [],
+    effects: [handleLocalStorage<InventoryItem[]>({ key })],
+    key,
+  }),
+);
+
+export const notifyOverEncumbrance = withStateKey("notifyOverEncumbrance", (key) =>
   atom({
     default: false,
     effects: [handleLocalStorage<boolean>({ key })],

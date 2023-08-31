@@ -13,7 +13,7 @@ import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
-import { WEAPON_CLASSES, type WeaponClass } from "@neverquest/LOCRA/types";
+import { WEAPON_CLASSES, type WeaponClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -40,22 +40,22 @@ export function WeaponOptions() {
 
   const isShowingValue = useRecoilValue(isShowing(showingType));
 
+  const maximumWeaponLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
   const weapon = generateWeapon({
     allowNSFW: allowNSFWValue,
     gearClass: weaponClass,
     hasPrefix: true,
-    hasSuffix: Math.random() < getGrowthSigmoid(weaponLevel),
+    hasSuffix: Math.random() <= getGrowthSigmoid(weaponLevel),
     level: weaponLevel,
     modality: "melee",
     tags:
       weaponLevel < stageValue - 1
         ? ["lowQuality"]
-        : weaponLevel > stageValue + 1
+        : weaponLevel > maximumWeaponLevel
         ? ["highQuality"]
         : undefined,
   });
   const { ranges, staminaCost, weight } = weapon;
-  const maximumWeaponLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
 
   return (
     <>

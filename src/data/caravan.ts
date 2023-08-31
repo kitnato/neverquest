@@ -12,7 +12,7 @@ import type {
   ShieldClass,
   WeaponClass,
   WeaponModality,
-} from "@neverquest/LOCRA/types";
+} from "@neverquest/LOCRAN/types";
 import type { SVGIcon } from "@neverquest/types/props";
 import type { Consumable, Crew, Trinket } from "@neverquest/types/unions";
 
@@ -38,28 +38,28 @@ export const CREW: Record<
     requiredStage: 16,
   },
   blacksmith: {
-    coinPrice: 35,
+    coinPrice: 60,
     description: "Crafts superior gear.",
     Icon: IconBlacksmith,
     interaction: "Craft",
     monologues: { 1: "In need of better gear?" },
-    requiredStage: 8,
+    requiredStage: 10,
   },
   medic: {
-    coinPrice: 80,
+    coinPrice: 20,
     description: "Heals wounds and sells bandages.",
     Icon: IconMedic,
     interaction: "Heal",
     monologues: { 1: "Allow me to patch you up." },
-    requiredStage: 12,
+    requiredStage: 6,
   },
   mercenary: {
-    coinPrice: 60,
+    coinPrice: 80,
     description: "Trains new skills and attributes.",
     Icon: IconMercenary,
     interaction: "Train",
     monologues: { 1: "Perhaps I can teach you something." },
-    requiredStage: 10,
+    requiredStage: 12,
   },
   merchant: {
     coinPrice: 0,
@@ -74,6 +74,8 @@ export const CREW: Record<
       5: "Got a fresh shipment of gear, care to see?",
       6: "Heard there are other travelers looking to sell their services.",
       7: "Your headway in the wilderness is helping business.",
+      9: "There is something dark looming on the horizon ...",
+      10: "I can't believe you came out of that in one piece.",
       14: "I recently came into possession of a few curiosities.",
       15: "Can I interest you in anything else?",
       25: "A dark wanderer passed by and sold me a strange book ...",
@@ -83,19 +85,19 @@ export const CREW: Record<
   },
   occultist: {
     coinPrice: 200,
-    description: "Sells soulstones and offers purging rituals.",
+    description: "Sells phylacteries and offers purging rituals.",
     Icon: IconOccultist,
     interaction: "Ritual",
     monologues: { 1: "Prepared to pierce the veil?" },
     requiredStage: 30,
   },
   tailor: {
-    coinPrice: 20,
+    coinPrice: 40,
     description: "Expands inventory space.",
     Icon: IconTailor,
-    interaction: "Upgrade",
+    interaction: "Sow",
     monologues: { 1: "Allow me to deepen your pockets." },
-    requiredStage: 6,
+    requiredStage: 8,
   },
   witch: {
     coinPrice: 150,

@@ -2,11 +2,11 @@ import { useRecoilCallback } from "recoil";
 
 import { MERCHANT_OFFERS } from "@neverquest/data/caravan";
 import { TRINKETS } from "@neverquest/data/inventory";
-import type { AffixTag } from "@neverquest/LOCRA/types";
+import type { AffixTag } from "@neverquest/LOCRAN/types";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { stage, stageMaximum } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
-import type { InventoryMerchant } from "@neverquest/types";
+import type { MerchantInventory } from "@neverquest/types";
 import { generateArmor, generateShield, generateWeapon } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -17,7 +17,7 @@ export function useGenerateMerchantInventory() {
         const get = getSnapshotGetter(snapshot);
 
         // Remove all previously returned items, so they no longer appear under buy back.
-        const inventory: InventoryMerchant = [...get(merchantInventory)].filter(
+        const inventory: MerchantInventory = [...get(merchantInventory)].filter(
           ({ isReturned }) => !isReturned,
         );
         const stageValue = get(stage);

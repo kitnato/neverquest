@@ -13,7 +13,7 @@ import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.sv
 import { ReactComponent as IconShieldStagger } from "@neverquest/icons/shield-stagger.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
-import { SHIELD_CLASSES, type ShieldClass } from "@neverquest/LOCRA/types";
+import { SHIELD_CLASSES, type ShieldClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -39,7 +39,7 @@ export function ShieldOptions() {
     allowNSFW: allowNSFWValue,
     gearClass: shieldClass,
     hasPrefix: true,
-    hasSuffix: Math.random() < getGrowthSigmoid(shieldLevel),
+    hasSuffix: Math.random() <= getGrowthSigmoid(shieldLevel),
     level: shieldLevel,
   });
   const { ranges, stagger, staminaCost, weight } = shield;

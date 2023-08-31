@@ -4,24 +4,28 @@ import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
+import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment";
 import {
   canAttackOrParry,
   canBlock,
   canDodge,
+  isAttacking,
   recoveryDuration,
   statusElement,
 } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { rawMasteryStatistic } from "@neverquest/state/masteries";
+import { masteryStatistic } from "@neverquest/state/masteries";
 import {
+  monsterAilmentDuration,
+  monsterAttackDuration,
+  monsterAttackRate,
   monsterBlightChance,
   monsterDamage,
   monsterElement,
   monsterPoisonChance,
-  monsterPoisonDuration,
-  monsterStaggerDuration,
+  monsterPoisonLength,
 } from "@neverquest/state/monster";
 import { blight, isPoisoned, poisonDuration } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
@@ -34,16 +38,19 @@ import {
   parryDamage,
   protection,
   recoveryRate,
+  thorns,
 } from "@neverquest/state/statistics";
 import type { DeltaDisplay } from "@neverquest/types/ui";
-import { animateElement } from "@neverquest/utilities/animateElement";
+import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
+import { animateElement } from "@neverquest/utilities/helpers";
 
 export function useDefend() {
   const changeHealth = useChangeHealth();
   const changeMonsterHealth = useChangeMonsterHealth();
   const changeStamina = useChangeStamina();
   const increaseMastery = useIncreaseMastery();
+  const inflictElementalAilment = useInflictElementalAilment();
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
@@ -84,18 +91,11 @@ export function useDefend() {
 
           return damage < 0 ? damage : 0;
         })();
+        let monsterHealthDamage = 0;
 
-        if (healthDamage === 0) {
-          set(deltas("health"), {
-            color: "text-muted",
-            value: healthDamage,
-          });
-
-          return;
-        }
-
-        let deltaHealth: DeltaDisplay = [];
-        let deltaStamina: DeltaDisplay = [];
+        const deltaHealth: DeltaDisplay = [];
+        const deltaMonsterHealth: DeltaDisplay = [];
+        const deltaStamina: DeltaDisplay = [];
 
         const hasParried = get(skills("escrime")) && Math.random() <= get(parryChance);
 
@@ -104,56 +104,48 @@ export function useDefend() {
           const { staminaCost } = get(weapon);
 
           if (get(canAttackOrParry)) {
-            healthDamage = Math.floor(healthDamage * get(parryAbsorption));
+            set(isShowing("monsterAilments"), true);
 
             const parryReflected = -Math.floor(monsterDamageValue * get(parryDamage));
 
-            set(isShowing("monsterAilments"), true);
+            healthDamage += Math.floor(healthDamage * get(parryAbsorption));
+            monsterHealthDamage += parryReflected;
 
-            changeMonsterHealth({
-              delta: [
-                {
-                  color: "text-muted",
-                  value: "PARRIED",
-                },
-                {
-                  color: "text-danger",
-                  value: ` (${parryReflected})`,
-                },
-              ],
-              value: parryReflected,
-            });
-
-            deltaHealth = [
+            deltaMonsterHealth.push(
               {
                 color: "text-muted",
                 value: "PARRIED",
               },
               {
                 color: "text-danger",
-                value: ` (${healthDamage})`,
+                value: `(${parryReflected})`,
               },
-            ];
+            );
 
-            changeStamina({ value: -staminaCost });
+            deltaHealth.push(
+              {
+                color: "text-muted",
+                value: "PARRIED",
+              },
+              {
+                color: "text-danger",
+                value: `(${healthDamage})`,
+              },
+            );
+
+            changeStamina({ isRegeneration: false, value: -staminaCost });
             increaseMastery("finesse");
-
-            animateElement({
-              element: get(monsterElement),
-              speed: "fast",
-              type: "headShake",
-            });
           } else {
-            deltaStamina = [
+            deltaStamina.push(
               {
                 color: "text-muted",
                 value: "CANNOT PARRY",
               },
               {
                 color: "text-danger",
-                value: ` (${staminaCost})`,
+                value: `(${staminaCost})`,
               },
-            ];
+            );
           }
         }
 
@@ -166,24 +158,19 @@ export function useDefend() {
           if (get(canBlock)) {
             healthDamage = 0;
 
-            deltaHealth = [
-              {
-                color: "text-muted",
-                value: "BLOCKED",
-              },
-            ];
+            deltaHealth.push({
+              color: "text-muted",
+              value: "BLOCKED",
+            });
 
             // If Shieldcraft skill is acquired, check if a free block occurs, otherwise spend stamina blocking.
-            if (
-              get(skills("shieldcraft")) &&
-              Math.random() <= get(rawMasteryStatistic("stability"))
-            ) {
+            if (get(skills("shieldcraft")) && Math.random() <= get(masteryStatistic("stability"))) {
               deltaStamina.push({
                 color: "text-muted",
                 value: "STABILIZED",
               });
             } else {
-              changeStamina({ value: -staminaCost });
+              changeStamina({ isRegeneration: false, value: -staminaCost });
             }
 
             increaseMastery("stability");
@@ -194,7 +181,7 @@ export function useDefend() {
             // If monster is staggered, also increase Might mastery.
             if (hasStaggered) {
               set(isShowing("monsterAilments"), true);
-              set(monsterStaggerDuration, get(rawMasteryStatistic("might")));
+              set(monsterAilmentDuration("staggered"), get(masteryStatistic("might")));
 
               increaseMastery("might");
 
@@ -207,39 +194,38 @@ export function useDefend() {
               });
             }
           } else {
-            deltaStamina = [
+            deltaStamina.push(
               {
                 color: "text-muted",
                 value: "CANNOT BLOCK",
               },
               {
                 color: "text-danger",
-                value: ` (${staminaCost})`,
+                value: `(${staminaCost})`,
               },
-            ];
+            );
           }
         }
 
         // If neither parried nor blocked, show damage with protection.
         if (!hasBlocked && !hasParried && protectionValue > 0) {
-          deltaHealth = [
+          deltaHealth.push(
             {
               color: "text-danger",
               value: healthDamage,
             },
             {
               color: "text-muted",
-              value: ` (${protectionValue})`,
+              value: `(${protectionValue})`,
             },
-          ];
+          );
         }
 
-        // If Resilience hasn't been triggered, activate recovery.
-        if (
-          !(get(skills("armorcraft")) && Math.random() <= get(rawMasteryStatistic("resilience")))
-        ) {
+        const recoveryRateValue = get(recoveryRate);
+
+        if (recoveryRateValue > 0) {
           set(isShowing("recovery"), true);
-          set(recoveryDuration, get(recoveryRate));
+          set(recoveryDuration, recoveryRateValue);
         }
 
         increaseMastery("resilience");
@@ -273,7 +259,7 @@ export function useDefend() {
               value: "DEFLECTED POISON",
             });
           } else {
-            set(poisonDuration, get(monsterPoisonDuration));
+            set(poisonDuration, get(monsterPoisonLength));
 
             deltaHealth.push({
               color: "text-danger",
@@ -282,11 +268,49 @@ export function useDefend() {
           }
         }
 
+        // Inflict thorns, if present.
+        const thornsValue = get(thorns);
+
+        if (thornsValue > 0) {
+          monsterHealthDamage += thornsValue;
+
+          deltaMonsterHealth.push(
+            {
+              color: "text-muted",
+              value: "THORNS",
+            },
+            {
+              color: "text-danger",
+              value: `(${-thornsValue})`,
+            },
+          );
+        }
+
+        // Inflict any armor elemental effects.
+        ELEMENTAL_TYPES.forEach((elemental) =>
+          inflictElementalAilment({ elemental, slot: "armor" }),
+        );
+
         // The attack went through, apply damage and any stamina costs.
-        changeHealth({ delta: deltaHealth, value: healthDamage });
+        changeHealth({ delta: deltaHealth, isRegeneration: false, value: healthDamage });
+
+        // Apply and show any parry and thorns damage.
+        if (monsterHealthDamage > 0) {
+          changeMonsterHealth({ delta: deltaMonsterHealth, value: -monsterHealthDamage });
+
+          animateElement({
+            element: get(monsterElement),
+            speed: "fast",
+            type: "headShake",
+          });
+        }
 
         if (deltaStamina.length > 0) {
           set(deltas("stamina"), deltaStamina);
+        }
+
+        if (get(isAttacking) && get(monsterAttackDuration) === 0) {
+          set(monsterAttackDuration, get(monsterAttackRate));
         }
       },
     [changeHealth, changeMonsterHealth, changeStamina, increaseMastery],

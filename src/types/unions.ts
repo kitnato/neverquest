@@ -10,7 +10,7 @@ export type Attribute =
   | "vigor"
   | "vitality";
 
-export const CONSUMABLE_TYPES = ["antidote", "bandages", "elixir", "salve", "soulstone"] as const;
+export const CONSUMABLE_TYPES = ["antidote", "bandages", "elixir", "salve", "phylactery"] as const;
 export type Consumable = (typeof CONSUMABLE_TYPES)[number];
 
 export type Crew =
@@ -62,13 +62,34 @@ export type Delta =
   | "stage"
   | "staggerRating"
   | "stamina"
-  | "staminaRegenerationRate";
+  | "staminaRegenerationRate"
+  | "thorns";
 
-export type Gear = "armor" | "shield" | "weapon";
+export const ELEMENTAL_TYPES = ["lightning", "fire", "ice"] as const;
+export type Elemental = (typeof ELEMENTAL_TYPES)[number];
+
+export type ElementalGear = Exclude<Gear, "shield">;
+
+export const GEAR_TYPES = ["armor", "shield", "weapon"] as const;
+export type Gear = (typeof GEAR_TYPES)[number];
+
+export const GEM_TYPES = ["ruby", "sapphire", "topaz"] as const;
+export type Gem = (typeof GEM_TYPES)[number];
+
+export type Item = Consumable | Gear | Trinket;
 
 export type Location = "caravan" | "wilderness";
 
 export type Mastery = "cruelty" | "finesse" | "might" | "resilience" | "stability";
+
+export const MONSTER_AILMENT_TYPES = [
+  "bleeding",
+  "burning",
+  "frozen",
+  "shocked",
+  "staggered",
+] as const;
+export type MonsterAilment = (typeof MONSTER_AILMENT_TYPES)[number];
 
 export type Reserve = "health" | "stamina";
 
@@ -110,6 +131,7 @@ export const SHOWING_TYPES = [
   "stamina",
   "staminaDetails",
   "statistics",
+  "thorns",
   "weapon",
   "weight",
   "wildernessStatus",
@@ -130,6 +152,7 @@ export type Skill = (typeof SKILL_TYPES)[number];
 
 export type StateKey =
   | "allowNSFW"
+  | "appliedGems"
   | "areAttributesIncreasable"
   | "armor"
   | "attackDuration"
@@ -146,10 +169,13 @@ export type StateKey =
   | "blight"
   | "blightIncrement"
   | "block"
+  | "canApplyGem"
   | "canAttackOrParry"
   | "canBlock"
   | "canDodge"
   | "canFit"
+  | "canReceiveAilment"
+  | "canReceiveAilments"
   | "coins"
   | "coinsLoot"
   | "confirmationWarnings"
@@ -169,6 +195,7 @@ export type StateKey =
   | "essenceAbsorbed"
   | "essenceLoot"
   | "floatingTextQueues"
+  | "gearElementalEffects"
   | "hasBoughtFromMerchant"
   | "hasItem"
   | "hasKnapsack"
@@ -176,15 +203,13 @@ export type StateKey =
   | "health"
   | "healthMaximum"
   | "healthMaximumTotal"
-  | "healthRegenerationAmount"
-  | "healthRegenerationDuration"
-  | "healthRegenerationRate"
   | "hireStatus"
   | "inventory"
   | "isAttacking"
   | "isAttributeAtMaximum"
   | "isBlighted"
-  | "isCrewHirable"
+  | "isBoss"
+  | "isCrewHired"
   | "isGameOver"
   | "isHealthAtMaximum"
   | "isHealthLow"
@@ -193,10 +218,9 @@ export type StateKey =
   | "isInventoryOpen"
   | "isLooting"
   | "isMasteryAtMaximum"
-  | "isMonsterBleeding"
+  | "isMonsterAiling"
   | "isMonsterDead"
   | "isMonsterNew"
-  | "isMonsterStaggered"
   | "isPoisoned"
   | "isRecovering"
   | "isShowing"
@@ -206,20 +230,21 @@ export type StateKey =
   | "isStaminaAtMaximum"
   | "isWilderness"
   | "itemsAcquired"
+  | "itemsLoot"
   | "level"
   | "location"
   | "lootBonus"
   | "lootingDuration"
-  | "lootingRate"
   | "lowHealthWarning"
   | "masteries"
   | "masteryCost"
+  | "masteryStatistic"
   | "merchantInventory"
   | "mode"
+  | "monsterAilmentDuration"
   | "monsterAttackDuration"
   | "monsterAttackRate"
   | "monsterBleedingDelta"
-  | "monsterBleedingDuration"
   | "monsterBlightChance"
   | "monsterDamage"
   | "monsterDamagePerSecond"
@@ -229,10 +254,10 @@ export type StateKey =
   | "monsterLoot"
   | "monsterName"
   | "monsterPoisonChance"
-  | "monsterPoisonDuration"
+  | "monsterPoisonLength"
   | "monsterPoisonMagnitude"
-  | "monsterStaggerDuration"
   | "name"
+  | "notifyOverEncumbrance"
   | "parryAbsorption"
   | "parryChance"
   | "parryDamage"
@@ -243,14 +268,17 @@ export type StateKey =
   | "progressMaximum"
   | "protection"
   | "rawAttributeStatistic"
-  | "rawMasteryStatistic"
   | "recoveryDuration"
   | "recoveryRate"
+  | "regenerationAmount"
+  | "regenerationDuration"
+  | "regenerationRate"
   | "reserveRegenerationAmount"
   | "reserveRegenerationRate"
   | "scrap"
   | "scrapLoot"
   | "shield"
+  | "shieldElementalEffects"
   | "showDamagePerSecond"
   | "showGearComparison"
   | "showGearLevel"
@@ -264,10 +292,9 @@ export type StateKey =
   | "stamina"
   | "staminaMaximum"
   | "staminaMaximumTotal"
-  | "staminaRegenerationAmount"
-  | "staminaRegenerationDuration"
-  | "staminaRegenerationRate"
   | "statusElement"
+  | "thorns"
+  | "totalElementalEffects"
   | "weapon"
   | "wildernesses";
 

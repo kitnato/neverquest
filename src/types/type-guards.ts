@@ -2,11 +2,13 @@ import type {
   Armor,
   ConsumableItem,
   GearItem,
+  GemItem,
   Shield,
+  StackableItem,
   TrinketItem,
   Weapon,
 } from "@neverquest/types";
-import { CONSUMABLE_TYPES, TRINKET_TYPES } from "@neverquest/types/unions";
+import { CONSUMABLE_TYPES, GEM_TYPES, TRINKET_TYPES } from "@neverquest/types/unions";
 
 export function isArmor(gear: unknown): gear is Armor {
   return isObject(gear) && gear.protection !== undefined;
@@ -24,8 +26,16 @@ function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }
 
+export function isGem(gem: unknown): gem is GemItem {
+  return isObject(gem) && GEM_TYPES.some((type) => type === gem.type);
+}
+
 export function isShield(gear: unknown): gear is Shield {
   return isObject(gear) && gear.block !== undefined;
+}
+
+export function isStackable(stackable: unknown): stackable is StackableItem {
+  return isConsumable(stackable) || isGem(stackable);
 }
 
 export function isTrinket(trinket: unknown): trinket is TrinketItem {

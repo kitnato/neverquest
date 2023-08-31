@@ -6,6 +6,7 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSecond";
+import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDetails";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
 import { ReactComponent as IconStrength } from "@neverquest/icons/strength.svg";
@@ -25,7 +26,9 @@ export function Damage() {
   const isShowingDamageDetails = useRecoilValue(isShowing("damageDetails"));
   const powerBonusValue = useRecoilValue(powerBonus("strength"));
   const strengthValue = useRecoilValue(rawAttributeStatistic("strength"));
-  const weaponValue = useRecoilValue(weapon);
+  const { damage: weaponDamage, gems } = useRecoilValue(weapon);
+
+  const appliedGems = gems.length;
 
   useDeltaText({
     atomDelta: deltas("damage"),
@@ -48,9 +51,11 @@ export function Damage() {
 
                       <td>
                         <IconImage Icon={IconWeaponDamage} size="tiny" />
-                        &nbsp;{weaponValue.damage}
+                        &nbsp;{weaponDamage}
                       </td>
                     </tr>
+
+                    {appliedGems > 0 && <ElementalDetails slot="weapon" />}
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>

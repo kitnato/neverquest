@@ -1,8 +1,7 @@
-import { nanoid } from "nanoid";
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
+import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { blacksmithInventory } from "@neverquest/state/caravan";
@@ -21,28 +20,25 @@ export function CraftedGear({ gear }: { gear: GearItem }) {
   const toggleEquipGear = useToggleEquipGear();
 
   const handleAcquire = () => {
-    const acquisitionStatus = acquireItem(gear, "donation");
+    const acquisitionStatus = acquireItem(gear);
 
     if (acquisitionStatus === "noFit") {
       return;
     }
 
-    const id = nanoid();
-
     if (isArmor(gear)) {
-      setItemsAcquired((current) => [...current, { key: id, type: "armor" }]);
       setBlacksmithInventory((current) => ({ ...current, armor: null }));
     }
 
     if (isShield(gear)) {
-      setItemsAcquired((current) => [...current, { key: id, type: "shield" }]);
       setBlacksmithInventory((current) => ({ ...current, shield: null }));
     }
 
     if (isWeapon(gear)) {
-      setItemsAcquired((current) => [...current, { key: id, type: "weapon" }]);
       setBlacksmithInventory((current) => ({ ...current, weapon: null }));
     }
+
+    setItemsAcquired((current) => [...current, gear]);
 
     if (acquisitionStatus === "autoEquip") {
       toggleEquipGear(gear);

@@ -1,11 +1,23 @@
 import { atom, selector } from "recoil";
 
+import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { Location } from "@neverquest/types/unions";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 // SELECTORS
+
+export const isBoss = withStateKey("isBoss", (key) =>
+  selector({
+    get: ({ get }) => {
+      const stageValue = get(stage);
+
+      return stageValue >= BOSS_STAGE_START && stageValue % BOSS_STAGE_INTERVAL === 0;
+    },
+    key,
+  }),
+);
 
 export const isStageCompleted = withStateKey("isStageCompleted", (key) =>
   selector({
@@ -40,7 +52,7 @@ export const location = withStateKey("location", (key) =>
 
 export const progressMaximum = withStateKey("progressMaximum", (key) =>
   selector({
-    get: ({ get }) => 2 + Math.round(98 * getGrowthSigmoid(get(stage))),
+    get: ({ get }) => (get(isBoss) ? 1 : 2 + Math.round(98 * getGrowthSigmoid(get(stage)))),
     key,
   }),
 );

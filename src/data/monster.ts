@@ -1,46 +1,38 @@
-export const BLIGHT = {
-  chanceBase: 0.1,
-  chanceMaximum: 0.4,
-  increment: 0.1,
-  stageRequired: 20,
-};
+export const BOSS_STAGE_INTERVAL = 5;
+export const BOSS_STAGE_START = 10;
 
 export const LOOT = {
-  bonus: 100,
-  coinsBase: 200,
+  bonus: 50,
+  boss: 1.5,
+  coinsBase: 250,
   essenceBase: 400,
-  scrapBase: 150,
+  scrapBase: 200,
 };
 
 export const MONSTER_ATTACK_RATE = {
-  base: 4700,
-  bonus: 200,
-  reduction: 4000,
+  base: 4000,
+  bonus: 100,
+  boss: 0.1,
+  reduction: 3700,
 };
 
 export const MONSTER_DAMAGE = {
-  bonus: 60,
-  maximum: 750,
+  base: 850,
+  bonus: 80,
+  boss: 0.3,
+  minimum: 6,
 };
 
 export const MONSTER_HEALTH = {
-  bonus: 100,
-  maximum: 2400,
+  base: 3000,
+  bonus: 500,
+  boss: 2,
+  minimum: 12,
 };
 
 export const MONSTER_NAME = {
-  prefixBase: 0.65,
-  prefixFactor: 0.35,
-  suffixBase: 0.05,
-  suffixFactor: 0.75,
+  prefix: 0.75,
+  suffix: 0.05,
 };
 
-export const POISON = {
-  chanceBase: 0.05,
-  chanceMaximum: 0.33,
-  durationBase: 30000,
-  durationMaximum: 170000,
-  magnitudeBase: 0.15,
-  magnitudeMaximum: 0.4,
-  stageRequired: 15,
-};
+export const MONSTER_POWER_SCALAR = 5000;

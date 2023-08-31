@@ -14,6 +14,8 @@ import {
 import type { SVGIcon } from "@neverquest/types/props";
 import type { Delta, Resource, Showing } from "@neverquest/types/unions";
 
+export const LOOTING_RATE = 2500;
+
 export const RESOURCES: Record<
   Resource,
   {

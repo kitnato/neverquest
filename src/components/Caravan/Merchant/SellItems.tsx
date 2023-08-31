@@ -1,67 +1,29 @@
-import { useState } from "react";
-import { Button, Stack } from "react-bootstrap";
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
-import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
-import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
-import { useForfeitItem } from "@neverquest/hooks/actions/useForfeitItem";
-import { useMerchantTradeItem } from "@neverquest/hooks/actions/useMerchantTradeItem";
+import { SellItem } from "@neverquest/components/Caravan/Merchant/SellItem";
+import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
 import { inventory } from "@neverquest/state/inventory";
-import { confirmationWarnings } from "@neverquest/state/settings";
-import type { Item } from "@neverquest/types";
 import {
   isArmor,
   isConsumable,
   isGear,
+  isGem,
   isShield,
   isTrinket,
   isWeapon,
 } from "@neverquest/types/type-guards";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
-import { getSellPrice } from "@neverquest/utilities/getters";
+import { stackItems } from "@neverquest/utilities/helpers";
 
 export function SellItems() {
-  const confirmationWarningsValue = useRecoilValue(confirmationWarnings);
   const inventoryValue = useRecoilValue(inventory);
-
-  const [isShowingSellWarning, setShowingSellWarning] = useState(false);
-  const [sellConfirmation, setSellConfirmation] = useState<Item | null>(null);
-
-  const forfeitItem = useForfeitItem();
-  const merchantTradeItem = useMerchantTradeItem();
-
-  const sellItem = (item: Item) => {
-    forfeitItem(item, "sale");
-    merchantTradeItem(item, "sale");
-    setSellConfirmation(null);
-  };
 
   const equippedGear = [
     ...inventoryValue.filter((current) => isGear(current) && current.isEquipped),
   ];
   const storedItems = inventoryValue.filter(
     (current) => !isGear(current) || (isGear(current) && !current.isEquipped),
-  );
-
-  const SellItem = ({ item, showConfirmation }: { item: Item; showConfirmation?: boolean }) => (
-    <Stack direction="horizontal" gap={3}>
-      <ResourceDisplay tooltip="Value (coins)" type="coins" value={getSellPrice(item)} />
-
-      <Button
-        onClick={() => {
-          if (confirmationWarningsValue && showConfirmation) {
-            setSellConfirmation(item);
-            setShowingSellWarning(true);
-          } else {
-            sellItem(item);
-          }
-        }}
-        variant="outline-dark"
-      >
-        Sell
-      </Button>
-    </Stack>
   );
 
   return (
@@ -74,13 +36,13 @@ export function SellItems() {
         <Stack gap={3}>
           {[equippedGear.find(isWeapon), equippedGear.find(isArmor), equippedGear.find(isShield)]
             .filter(isGear)
-            .map((current) => {
-              const { id, isEquipped } = current;
+            .map((item) => {
+              const { id, isEquipped } = item;
 
               return (
                 <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
                   <Stack direction="horizontal">
-                    <ItemDisplay item={current} overlayPlacement="right" />
+                    <ItemDisplay item={item} overlayPlacement="right" />
 
                     {isEquipped && (
                       <span className="fst-italic" style={{ width: "max-content" }}>
@@ -89,7 +51,7 @@ export function SellItems() {
                     )}
                   </Stack>
 
-                  <SellItem item={current} showConfirmation={isEquipped} />
+                  <SellItem item={item} showConfirmation={isEquipped} />
                 </div>
               );
             })}
@@ -97,38 +59,40 @@ export function SellItems() {
           {storedItems
             .filter(isGear)
             .sort((a, b) => a.name.localeCompare(b.name))
-            .map((current) => {
-              return (
-                <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.id}>
-                  <ItemDisplay item={current} overlayPlacement="right" />
+            .map((item) => (
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.id}>
+                <ItemDisplay item={item} overlayPlacement="right" />
 
-                  <SellItem item={current} />
-                </div>
-              );
-            })}
+                <SellItem item={item} />
+              </div>
+            ))}
 
-          {[...storedItems.filter(isTrinket), ...storedItems.filter(isConsumable)]
+          {[...storedItems.filter(isTrinket)]
             .sort((a, b) => a.type.localeCompare(b.type))
-            .map((current) => {
-              return (
-                <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.id}>
-                  <ItemDisplay item={current} overlayPlacement="right" />
+            .map((item) => (
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.id}>
+                <ItemDisplay item={item} overlayPlacement="right" />
 
-                  <SellItem item={current} />
-                </div>
-              );
-            })}
+                <SellItem item={item} />
+              </div>
+            ))}
 
-          {sellConfirmation !== null && (
-            <ConfirmationDialog
-              confirmationLabel="Sell"
-              message="It can be bought back at the original purchase price but it will be gone forever once leaving the caravan."
-              onConfirm={() => sellItem(sellConfirmation)}
-              setHidden={() => setShowingSellWarning(false)}
-              show={isShowingSellWarning}
-              title="Sell equipped item?"
-            />
-          )}
+          {[
+            ...stackItems(
+              storedItems.filter(isConsumable).sort((a, b) => a.type.localeCompare(b.type)),
+            ),
+            ...stackItems(storedItems.filter(isGem).sort((a, b) => a.type.localeCompare(b.type))),
+          ].map((stackedItem) => {
+            const { item, stack } = stackedItem;
+
+            return (
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.id}>
+                <ItemDisplay item={item} overlayPlacement="right" stack={stack} />
+
+                <SellItem item={item} />
+              </div>
+            );
+          })}
         </Stack>
       )}
     </Stack>

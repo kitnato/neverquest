@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { ProgressBar } from "react-bootstrap";
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { useAnimation } from "@neverquest/hooks/useAnimation";
 import {
   health,
   healthMaximum,
@@ -14,7 +13,7 @@ import {
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export function HealthMeter() {
-  const [poisonDurationValue, setPoisonDuration] = useRecoilState(poisonDuration);
+  const poisonDurationValue = useRecoilValue(poisonDuration);
   const healthValue = useRecoilValue(health);
   const healthMaximumValue = useRecoilValue(healthMaximum);
   const healthMaximumTotalValue = useRecoilValue(healthMaximumTotal);
@@ -23,18 +22,7 @@ export function HealthMeter() {
 
   const penalty = healthMaximumValue - healthMaximumTotalValue;
 
-  useAnimation((delta) => {
-    setPoisonDuration((current) => {
-      const value = current - delta;
-
-      if (value < 0) {
-        return 0;
-      }
-
-      return value;
-    });
-  }, !isPoisonedValue);
-
+  // Needed to catch attribute resets and poison/blight penalties.
   useEffect(() => {
     if (healthValue > healthMaximumTotalValue) {
       resetHealth();

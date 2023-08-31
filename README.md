@@ -6,15 +6,13 @@ _An irreverent UI-based incremental rogue-like action role-playing game._
 
 **For a full breakdown of the game, please consult the [manual](./src/data/manual.md).**
 
-## LOCRA
+## LOCRAN
 
-The LOCRA (LOcation, CReature, Artifact) system generates a pseudo-random variety of names for different irreverent fantasy-themed wildernesses, items and monsters.
+The LOCRAN (LOcation, CReature, Artifact, Name) system generates a pseudo-random variety of names for different irreverent fantasy-themed wildernesses, items and monsters.
 
 A JSON library of (loosely) fantasy-world-themed words is the basis for the generation and composition of (somewhat) coherent names for the three namesake types. Parameters for tags and affix composition can be passed to make the generation more specific. If [NSFW mode](./src/data/manual.md#nsfw-mode) is on, the names may also be pornographic or decidedly non-fantasy-themed.
 
-Generating a creature name, for example, depending on the parameters passed, might yield anything from "Intrepid Farmer" to "Voluptuous Manticore of Unmitigated Penetration".
-
-LOCRA can be considered somewhat independent of Neverquest, as it can be used outside of the game's implementation. Nevertheless, it is bundled as part of the same codebase, accessible under `src/locra`.
+LOCRAN can be considered somewhat independent of Neverquest, as it can be used outside of the game's implementation. Nevertheless, it is bundled as part of the same codebase, accessible under `src/LOCRAN`.
 
 ## Roadmap
 
@@ -24,10 +22,6 @@ Neverquest is a work-in-progress. Several features are pending ideation, refinem
 
 Essential features for a v1.0.0 release.
 
-#### Bosses
-
-A boss is a monster that is twice as powerful as a standard monster of that stage. They appear every 5 stages, starting at stage 10. It's the only monster on that stage, and once defeated, it drops a [shard](#shards), with one extra shard for every boss above stage 10 (e.g. the boss at stage 25 will drop 4 shards).
-
 #### Journal
 
 Upon purchasing the Journal trinket, unlocks quests that function similarly to achievements. Completing a quest grants [essence](./src/data/manual.md#essence).
@@ -36,6 +30,7 @@ Upon purchasing the Journal trinket, unlocks quests that function similarly to a
 
 - Parry, inflict bleed and stagger in one attack
 - Survive the first 4 levels without any gear equipped
+- Survive the first 10 levels while upgrading at most 1 attribute
 
 ##### Combat quests
 
@@ -95,52 +90,28 @@ Allows the use of [two-handed](#two-handed) weapons.
 
 When reaching a certain power level, the character can retire. This restarts the quest from stage 0 with power level 0, no skills and masteries at rank 0, however all hired caravan crew are retained. A [trait](#traits) can be also chosen that confers a permanent bonus.
 
-#### Shards
-
-Shards are an item that have no weight and can be applied to weapons. They are dropped by [bosses](#bosses), one at stage 10 and one more for each encounter after that (resulting in e.g. four shards being dropped by a stage 25 boss).
-
-When applying the first shard, the weapon gains 1.93% of its damage as extra elemental damage of that type. Every subsequent shard of the same type doubles that damage. Up to 7 shards can be applied to a weapon, regardless of type. This results in an up to 100% elemental damage increase if all shards are of the same type. Once applied, shards are consumed and cannot be removed or moved to another weapon.
-
-The shard types are the following, associated with their corresponding [elemental](#elemental-damage) type:
-
-- Electric (lightning)
-- Frozen (ice)
-- Incendiary (fire)
-- Toxic (poison)
-
 #### Traits
 
 Traits are permanent passive abilities acquired upon [retiring](#retirement) for all subsequent new quests.
 
 - Brawler: Wearing no shield doubles unarmed damage.
-- Bruiser: Current stamina adds unarmed bonus damage & unarmed attacks have a chance to stagger.
+- Bruiser: Current stamina adds unarmed bonus damage & unarmed attacks have a 25% chance to stagger.
 - Colossus: Dual wield two-handed weapons.
+- Executioner: Critical strikes with a two-handed weapon execute the monster.
 - Field surgeon: Automatically restore health when not in combat.
 - Hoarder: Start with all trinkets.
-- Inoculated: When poisoned, health reduction and recovery rate are halved.
+- Inoculated: Can no longer be poisoned or blighted.
 - Nudist: Double dodge rate when not wearing any armor.
 - Shredder: Bleed damage is inflicted all at once.
-- Stalwart: Ignore penalties when wearing armor.
-- Tank: Shields increase protection by 50%.
+- Stalwart: Ignore all penalties when wearing armor.
+- Tank: Shields double total protection.
+- Tormentor: Monsters no longer regenerate out of combat.
 
 #### Weapons
 
 ##### Dual wield
 
 A one-handed weapon in each slot. Provides a penalty to damage and attack rate to the [off-hand](./src/data/manual.md#off-hand) weapon.
-
-##### Elemental damage
-
-Once the first [boss](#bosses) is defeated, monsters on subsequent stages will exhibit resistances and vulnerabilities to elemental damage. The elemental damage types are:
-
-- Fire
-- Ice
-- Lightning
-- Poison
-
-This damage is dealt by applying [shards](#shards) to weapons that then benefit from additional damage of that elemental type. A vulnerability means the monster takes double damage of that type, while a resistance results in the monster only receiving 25% of that damage.
-
-As the stages increase, monsters will exhibit less vulnerabilities and more resistances.
 
 ##### Two-handed
 
@@ -206,7 +177,7 @@ A [reserve](./src/data/manual.md#reserves), Consumed when activating [skills](./
 
 #### Log
 
-A togglable UI element that displays all stateful activities in real-time, e.g. combat details, transactions etc.
+A toggle-able UI element that displays all stateful activities in real-time, e.g. combat details, transactions etc.
 
 #### Ranged
 
@@ -244,6 +215,8 @@ The linter config can be viewed in `.eslintrc.json`, `.stylelintrc.json` and `.p
 
 - Written in [TypeScript](https://www.typescriptlang.org).
 
+- Icons and art assets are provided under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) by the talented [authors](https://game-icons.net/about.html#authors) of [game-icons.net](https://game-icons.net).
+
 - UI framework is [Bootstrap](https://react-bootstrap.github.io).
 
 - State management library is [Recoil](https://recoiljs.org).
@@ -270,7 +243,7 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 - No long waits, cliffs or walls
 - No obligatory resets for incremental gains
 - No excessive or repetitive clicking
-- Decisions are frequent and they have immediate gameplay imppact
+- Decisions are frequent and they have immediate gameplay impact
 - High character build variety
 - Manage an economy of resources and character builds with trade-offs
 

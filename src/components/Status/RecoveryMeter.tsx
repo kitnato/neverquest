@@ -1,35 +1,22 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { useAnimation } from "@neverquest/hooks/useAnimation";
-import { recoveryDuration } from "@neverquest/state/character";
+import { isRecovering, recoveryDuration } from "@neverquest/state/character";
 import { recoveryRate } from "@neverquest/state/statistics";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export function RecoveryMeter() {
-  const [recoveryDurationValue, setRecoveryDuration] = useRecoilState(recoveryDuration);
+  const isRecoveringValue = useRecoilValue(isRecovering);
+  const recoveryDurationValue = useRecoilValue(recoveryDuration);
   const recoveryRateValue = useRecoilValue(recoveryRate);
-
-  const hasRecovered = recoveryDurationValue === 0;
-
-  useAnimation((delta) => {
-    setRecoveryDuration((current) => {
-      const value = current - delta;
-
-      if (value < 0) {
-        return 0;
-      }
-
-      return value;
-    });
-  }, hasRecovered);
 
   return (
     <LabelledProgressBar
       disableTransitions
       label={formatMilliseconds(recoveryDurationValue || recoveryRateValue)}
       value={
-        ((hasRecovered ? 0 : recoveryRateValue - recoveryDurationValue) / recoveryRateValue) * 100
+        ((isRecoveringValue ? recoveryRateValue - recoveryDurationValue : 0) / recoveryRateValue) *
+        100
       }
       variant="secondary"
     />

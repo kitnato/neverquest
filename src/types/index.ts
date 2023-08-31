@@ -1,10 +1,23 @@
-import type { ArmorClass, ShieldClass, WeaponClass, WeaponModality } from "@neverquest/LOCRA/types";
+import type {
+  ArmorClass,
+  ShieldClass,
+  WeaponClass,
+  WeaponModality,
+} from "@neverquest/LOCRAN/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Showing, Trinket, WeaponGrip } from "@neverquest/types/unions";
+import type {
+  Consumable,
+  Elemental,
+  Gem,
+  Showing,
+  Trinket,
+  WeaponGrip,
+} from "@neverquest/types/unions";
 
 export type Armor = GearBase & {
   deflection: number;
   gearClass?: ArmorClass;
+  gems: GemItem[];
   protection: number;
   ranges: {
     deflection: Range;
@@ -25,24 +38,34 @@ type AttributeOrMasteryBaseData = UnlockedState & {
   increment: number;
 };
 
-export type ConsumableItem = ItemBase & {
-  description: string;
-  stack: number;
-  type: Consumable;
-};
-
-export type InventoryBlacksmith = {
+export type BlacksmithInventory = {
   armor: Armor | null;
   shield: Shield | null;
   weapon: Weapon | null;
 };
 
-export type InventoryMerchant = {
-  isReturned: boolean;
-  item: Item;
-}[];
+export type ConsumableItem = ItemBase & {
+  description: string;
+  type: Consumable;
+};
 
-export type Item = ConsumableItem | GearItem | TrinketItem;
+export type GearItem = Armor | Shield | Weapon;
+
+type GearBase = ItemBase & {
+  gems: GemItem[];
+  isEquipped: boolean;
+  level: number;
+  name: string;
+  scrapPrice: number;
+};
+
+export type GemItem = ItemBase & {
+  type: Gem;
+};
+
+export type ElementalGearEffects = Record<Elemental, { damage: number; duration: number }>;
+
+export type InventoryItem = ConsumableItem | GearItem | GemItem | TrinketItem;
 
 type ItemBase = {
   coinPrice: number;
@@ -50,14 +73,15 @@ type ItemBase = {
   weight: number;
 };
 
-export type GearItem = Armor | Shield | Weapon;
-
-type GearBase = ItemBase & { isEquipped: boolean; level: number; name: string; scrapPrice: number };
-
 export type MasteryData = AttributeOrMasteryBaseData & {
   instructions: string;
   maximum: number;
 };
+
+export type MerchantInventory = {
+  isReturned: boolean;
+  item: InventoryItem;
+}[];
 
 export type Range = {
   maximum: number;
@@ -67,12 +91,15 @@ export type Range = {
 export type Shield = GearBase & {
   block: number;
   gearClass?: ShieldClass;
+  gems: GemItem[];
   ranges: {
     block: Range;
   };
   stagger: number;
   staminaCost: number;
 };
+
+export type StackableItem = ConsumableItem | GemItem;
 
 export type TrinketItem = ItemBase & {
   description: string;
@@ -87,6 +114,7 @@ export type Weapon = GearBase & {
   abilityChance: number;
   damage: number;
   gearClass: WeaponClass;
+  gems: GemItem[];
   grip: WeaponGrip;
   modality: WeaponModality;
   ranges: {

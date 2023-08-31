@@ -7,37 +7,48 @@ import { ReactComponent as IconReinforced } from "@neverquest/icons/armor-reinfo
 import { ReactComponent as IconBandages } from "@neverquest/icons/bandages.svg";
 import { ReactComponent as IconCompass } from "@neverquest/icons/compass.svg";
 import { ReactComponent as IconElixir } from "@neverquest/icons/elixir.svg";
+import { ReactComponent as IconFire } from "@neverquest/icons/fire.svg";
 import { ReactComponent as IconStone } from "@neverquest/icons/hearthstone.svg";
 import { ReactComponent as IconHide } from "@neverquest/icons/hide.svg";
+import { ReactComponent as IconIce } from "@neverquest/icons/ice.svg";
 import { ReactComponent as IconKnapsack } from "@neverquest/icons/knapsack.svg";
+import { ReactComponent as IconLightning } from "@neverquest/icons/lightning.svg";
 import { ReactComponent as IconMonkeyPaw } from "@neverquest/icons/monkey-paw.svg";
 import { ReactComponent as IconParry } from "@neverquest/icons/parry.svg";
+import { ReactComponent as IconPhylactery } from "@neverquest/icons/phylactery.svg";
 import { ReactComponent as IconSalve } from "@neverquest/icons/salve.svg";
 import { ReactComponent as IconShieldMedium } from "@neverquest/icons/shield-medium.svg";
 import { ReactComponent as IconShieldSmall } from "@neverquest/icons/shield-small.svg";
 import { ReactComponent as IconShieldTower } from "@neverquest/icons/shield-tower.svg";
-import { ReactComponent as IconSoulstone } from "@neverquest/icons/soulstone.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconWeaponBleed } from "@neverquest/icons/weapon-bleed.svg";
 import { ReactComponent as IconBlunt } from "@neverquest/icons/weapon-blunt.svg";
 import { ReactComponent as IconPiercing } from "@neverquest/icons/weapon-piercing.svg";
 import { ReactComponent as IconSlashing } from "@neverquest/icons/weapon-slashing.svg";
 import { ReactComponent as IconWeaponStagger } from "@neverquest/icons/weapon-stagger.svg";
-import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRA/types";
-import type { ConsumableItem, Range, TrinketItem, Weapon } from "@neverquest/types";
+import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
+import type { Armor, ConsumableItem, Range, Shield, TrinketItem, Weapon } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Showing, Trinket } from "@neverquest/types/unions";
+import type {
+  Consumable,
+  Elemental,
+  Gem,
+  MonsterAilment,
+  Showing,
+  Trinket,
+} from "@neverquest/types/unions";
 
 export const ARMOR_BASE = {
   coinPrice: 500,
-  protection: 300,
+  protection: 400,
   scrapPrice: 3500,
   staminaCost: 30,
   weight: 60,
 };
 
-export const ARMOR_NONE = {
+export const ARMOR_NONE: Omit<Armor, "coinPrice" | "isEquipped" | "ranges" | "scrapPrice"> = {
   deflection: 0,
+  gems: [],
   id: nanoid(),
   level: 0,
   name: "Unarmored",
@@ -95,7 +106,6 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         coinPrice: 15,
         description: "Cures poison.",
-        stack: Infinity,
         type: "antidote",
         weight: 1,
       },
@@ -105,7 +115,6 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         coinPrice: 10,
         description: "Restores all health.",
-        stack: Infinity,
         type: "bandages",
         weight: 1,
       },
@@ -115,9 +124,17 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         coinPrice: 8,
         description: "Restores all stamina.",
-        stack: Infinity,
         type: "elixir",
         weight: 1,
+      },
+    },
+    phylactery: {
+      Icon: IconPhylactery,
+      item: {
+        coinPrice: 100,
+        description: "Resurrects the carrier upon death.",
+        type: "phylactery",
+        weight: 5,
       },
     },
     salve: {
@@ -125,26 +142,37 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         coinPrice: 25,
         description: "Cures blight.",
-        stack: Infinity,
         type: "salve",
         weight: 2,
       },
     },
-    soulstone: {
-      Icon: IconSoulstone,
-      item: {
-        coinPrice: 100,
-        description: "Resurrects the carrier upon death.",
-        stack: Infinity,
-        type: "soulstone",
-        weight: 5,
-      },
-    },
   };
 
-export const ENCUMBRANCE = 3;
+export const ELEMENTALS: Record<
+  Elemental,
+  { ailment: MonsterAilment; color: string; Icon: SVGIcon }
+> = {
+  fire: { ailment: "burning", color: "text-orange", Icon: IconFire },
+  ice: { ailment: "frozen", color: "text-blue", Icon: IconIce },
+  lightning: { ailment: "shocked", color: "text-yellow", Icon: IconLightning },
+};
 
+export const ENCUMBRANCE = 3;
 export const KNAPSACK_SIZE = 3;
+
+export const GEM_BASE = {
+  coinPrice: 10,
+  weight: 1,
+};
+export const GEM_DAMAGE = [0.1, 0.2, 0.4, 0.7, 1];
+export const GEM_DURATION = [300, 600, 1000, 2000, 3000];
+export const GEM_ELEMENTALS: Record<Gem, Elemental> = {
+  ruby: "fire",
+  sapphire: "ice",
+  topaz: "lightning",
+};
+export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
+export const GEMS_MAXIMUM = 5;
 
 export const SHIELD_BASE = {
   coinPrice: 400,
@@ -154,8 +182,9 @@ export const SHIELD_BASE = {
   weight: 50,
 };
 
-export const SHIELD_NONE = {
+export const SHIELD_NONE: Omit<Shield, "coinPrice" | "isEquipped" | "ranges" | "scrapPrice"> = {
   block: 0,
+  gems: [],
   id: nanoid(),
   level: 0,
   name: "Unshielded",
@@ -176,18 +205,18 @@ export const SHIELD_SPECIFICATIONS: Record<
 > = {
   medium: {
     blockRange: [
-      { maximum: 0.3, minimum: 0.25 },
-      { maximum: 0.45, minimum: 0.4 },
+      { maximum: 0.3, minimum: 0.2 },
+      { maximum: 0.4, minimum: 0.3 },
     ],
     Icon: IconShieldMedium,
     staggerModifier: 0.4,
-    staminaCostModifier: 0.5,
-    weightModifier: 0.5,
+    staminaCostModifier: 0.6,
+    weightModifier: 0.6,
   },
   small: {
     blockRange: [
-      { maximum: 0.2, minimum: 0.13 },
-      { maximum: 0.24, minimum: 0.2 },
+      { maximum: 0.15, minimum: 0.1 },
+      { maximum: 0.2, minimum: 0.15 },
     ],
     Icon: IconShieldSmall,
     staggerModifier: 0.2,
@@ -196,8 +225,8 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   tower: {
     blockRange: [
-      { maximum: 0.55, minimum: 0.45 },
-      { maximum: 0.75, minimum: 0.7 },
+      { maximum: 0.5, minimum: 0.4 },
+      { maximum: 0.6, minimum: 0.5 },
     ],
     Icon: IconShieldTower,
     staggerModifier: 1,
@@ -210,7 +239,7 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
   "antique coin": {
     Icon: IconAntiqueCoin,
     item: {
-      coinPrice: 150,
+      coinPrice: 200,
       description: "Unlocks the Luck attribute.",
       id: nanoid(),
       type: "antique coin",
@@ -250,7 +279,7 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
   "monkey paw": {
     Icon: IconMonkeyPaw,
     item: {
-      coinPrice: 200,
+      coinPrice: 300,
       description: "Looting a corpse is instantaneous.",
       id: nanoid(),
       type: "monkey paw",
@@ -288,6 +317,7 @@ export const WEAPON_NONE: Omit<Weapon, "coinPrice" | "isEquipped" | "ranges" | "
   abilityChance: 0,
   damage: 10,
   gearClass: "blunt",
+  gems: [],
   grip: "one-handed",
   id: nanoid(),
   level: 0,

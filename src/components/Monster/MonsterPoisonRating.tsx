@@ -6,7 +6,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ReactComponent as IconPoisonRating } from "@neverquest/icons/poison-rating.svg";
 import {
   monsterPoisonChance,
-  monsterPoisonDuration,
+  monsterPoisonLength,
   monsterPoisonMagnitude,
 } from "@neverquest/state/monster";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
@@ -14,7 +14,7 @@ import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/form
 
 export function MonsterPoisonRating() {
   const monsterPoisonChanceValue = useRecoilValue(monsterPoisonChance);
-  const monsterPoisonDurationValue = useRecoilValue(monsterPoisonDuration);
+  const monsterPoisonLengthValue = useRecoilValue(monsterPoisonLength);
   const monsterPoisonMagnitudeValue = useRecoilValue(monsterPoisonMagnitude);
 
   if (monsterPoisonChanceValue === 0) {
@@ -46,7 +46,7 @@ export function MonsterPoisonRating() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
 
-                    <td>{formatMilliseconds(monsterPoisonDurationValue)}</td>
+                    <td>{formatMilliseconds(monsterPoisonLengthValue)}</td>
                   </tr>
                 </DetailsTable>
               </Popover.Body>
@@ -55,7 +55,7 @@ export function MonsterPoisonRating() {
         >
           <span>
             {Math.round(
-              monsterPoisonChanceValue * monsterPoisonMagnitudeValue * monsterPoisonDurationValue,
+              monsterPoisonChanceValue * monsterPoisonMagnitudeValue * monsterPoisonLengthValue,
             )}
           </span>
         </OverlayTrigger>

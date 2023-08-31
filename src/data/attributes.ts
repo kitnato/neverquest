@@ -69,7 +69,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
     base: 0,
     description: "Reduces attack rate.",
     Icon: IconSpeed,
-    increment: 0.05,
+    increment: 0.03,
     isUnlocked: true,
     maximum: 0.9,
     powerBonus: 0.005,

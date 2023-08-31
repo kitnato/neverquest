@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { Thorns } from "@neverquest/components/Statistics/Thorns";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconProtection } from "@neverquest/icons/protection.svg";
 import { deltas } from "@neverquest/state/deltas";
@@ -31,6 +32,7 @@ export function Protection() {
           <FloatingText deltaType="protection" />
         </Stack>
       }
+      description={<Thorns />}
       Icon={IconProtection}
       isAnimated
       tooltip="Protection"

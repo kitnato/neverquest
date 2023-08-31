@@ -14,7 +14,7 @@ export const RESERVES: Record<
 > = {
   health: {
     baseAmount: 50,
-    baseRegenerationAmount: 3,
+    baseRegenerationAmount: 2,
     baseRegenerationRate: 4000,
     label: "Health",
     regenerationDelta: "healthRegenerationRate",

@@ -216,6 +216,10 @@ The stage is considered completed when the progress is at its maximum, which is 
 
 A creature with a randomly generated name that will continuously attack the character as soon as it's [engaged](#combat). It has health and a certain attack rate both determined by the current stage.
 
+#### Bosses
+
+A boss is a monster that is much more powerful than a standard monster of that stage. They appear every 5 stages, starting at stage 10. It's the only monster on that stage, and once defeated, it drops a [gem](#gems), with one extra gem for every boss above stage 10 (e.g. the boss at stage 25 will drop 4 gems).
+
 ### Caravan
 
 Encountered after completing the current [wilderness](#wilderness) stage.
@@ -226,7 +230,7 @@ The [merchant](#merchant) is always present from the start. Other crew members c
 
 #### Alchemist
 
-Offers conversion of coins, essence and scrap between one another.
+Offers conversion of coins, essence, [gems](#gems) and scrap between one another.
 
 #### Blacksmith
 
@@ -248,7 +252,7 @@ The merchant's inventory of items will grow and diversify after each new stage.
 
 #### Occultist
 
-Offers a reset of all acquired [attribute](#attributes) points in exchange for coins and essence. Also sells soulstones that resurrect the character upon death.
+Offers a reset of all acquired [attribute](#attributes) points in exchange for coins and essence. Also sells phylacteries that resurrect the character upon death.
 
 #### Tailor
 
@@ -395,7 +399,7 @@ Required skill: [Escrime](#escrime).
 
 #### Armor
 
-Armor provides [protection](#protection). When defending, the protection value is subtracted from total damage received.
+Armor provides [protection](#protection). When defending, the protection value is subtracted from total damage received. When receiving damage, if the armor has thorns, then that damage is simultaneously inflicted upon the attacker.
 
 Each of the following armor classes increases the protection value and adds certain modifiers.
 
@@ -454,6 +458,36 @@ Grants a percentage [chance to block](#block-chance) all incoming damage. Also g
 - +% [protection](#protection)
 - High cost
 
+#### Gems
+
+Gems are items that can be applied to gear. They are dropped by [bosses](#bosses), one at stage 10 and one more for each boss encounter after that (resulting in e.g. four gems being dropped by a stage 25 boss).
+
+Up to 5 gems can be applied to a piece of gear. Once applied, gems are consumed and cannot be removed or moved to different gear.
+
+The gem types are the following, associated with their corresponding [elemental types](#elemental-types):
+
+- Ruby (fire)
+- Sapphire (ice)
+- Topaz (electric)
+
+Gems add the following benefits to gear:
+
+- Armor: adds [thorns](#armor) damage based on protection. If thorns are applied, the corresponding elemental effect is also.
+- Weapon: adds damage based on base damage. If an attack hits, the corresponding elemental effect is also applied.
+- Shield: increases the potency of the elemental damage and duration of the elemental effect of both armor and weapon gems.
+
+Every applied gem of the same type exponentially increases its corresponding elemental potency.
+
+##### Elemental types
+
+The elemental types are the following, associated with their corresponding effect:
+
+- Fire: inflicts burning effect, taking increased damage
+- Ice: inflicts frozen effect, attacking less frequently
+- Lightning: inflicts shocked effect, dealing less damage
+
+A monster can be afflicted by any combination of elemental effects, the everity of which is determined how [gems](#gems) are applied to gear.
+
 #### Trinkets
 
 Can enable various actions or grant certain effects if they are carried in the [inventory](#inventory).
@@ -494,7 +528,7 @@ Fully restores [stamina](#stamina). Does not affect [blight](#blight).
 
 Cures and removes [blight](#blight).
 
-#### Soulstone
+#### Phylactery
 
 Sold by the [occultist](#occultist).
 

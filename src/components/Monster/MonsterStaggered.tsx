@@ -1,14 +1,27 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterStaggeredMeter } from "@neverquest/components/Monster/MonsterStaggeredMeter";
-import { ReactComponent as IconStaggered } from "@neverquest/icons/monster-staggered.svg";
-import { isShowing } from "@neverquest/state/isShowing";
+import { useAnimate } from "@neverquest/hooks/useAnimate";
+import { ReactComponent as IconStaggered } from "@neverquest/icons/staggered.svg";
+import {
+  canReceiveAilment,
+  isMonsterAiling,
+  monsterAilmentDuration,
+} from "@neverquest/state/monster";
 
 export function MonsterStaggered() {
-  const isShowingStagger = useRecoilValue(isShowing("stagger"));
+  const canBeStaggered = useRecoilValue(canReceiveAilment("staggered"));
+  const isMonsterStaggeredValue = useRecoilValue(isMonsterAiling("staggered"));
+  const setMonsterStaggerDuration = useSetRecoilState(monsterAilmentDuration("staggered"));
 
-  if (!isShowingStagger) {
+  useAnimate({
+    delta: setMonsterStaggerDuration,
+    stop: !isMonsterStaggeredValue,
+    tmp: "MonsterStaggered",
+  });
+
+  if (!canBeStaggered) {
     return null;
   }
 

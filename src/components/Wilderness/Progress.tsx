@@ -17,7 +17,7 @@ export function Progress() {
   useDeltaText({
     atomDelta: deltas("progress"),
     atomValue: progress,
-    stop: (_, current) => current === 0,
+    stop: ({ current, previous }) => previous === null || current === 0,
   });
 
   if (!isWildernessValue) {

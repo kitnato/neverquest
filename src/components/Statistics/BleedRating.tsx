@@ -12,7 +12,7 @@ import { ReactComponent as IconCruelty } from "@neverquest/icons/cruelty.svg";
 import { ReactComponent as IconWeaponBleed } from "@neverquest/icons/weapon-bleed.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
-import { rawMasteryStatistic } from "@neverquest/state/masteries";
+import { masteryStatistic } from "@neverquest/state/masteries";
 import { skills } from "@neverquest/state/skills";
 import { bleed, bleedRating, bleedTick, damageTotal } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
@@ -24,7 +24,7 @@ export function BleedRating() {
   const { damage, duration: bleedTickDuration } = useRecoilValue(bleedTick);
   const damageTotalValue = useRecoilValue(damageTotal);
   const isShowingBleed = useRecoilValue(isShowing("bleed"));
-  const crueltyValue = useRecoilValue(rawMasteryStatistic("cruelty"));
+  const crueltyValue = useRecoilValue(masteryStatistic("cruelty"));
   const skillAnatomy = useRecoilValue(skills("anatomy"));
 
   const { duration, ticks } = BLEED;
@@ -32,7 +32,7 @@ export function BleedRating() {
   useDeltaText({
     atomDelta: deltas("bleedRating"),
     atomValue: bleedRating,
-    stop: (previous) => previous === null || !skillAnatomy,
+    stop: ({ previous }) => previous === null || !skillAnatomy,
   });
 
   if (!isShowingBleed) {

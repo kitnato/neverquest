@@ -1,6 +1,6 @@
 import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
@@ -8,21 +8,31 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { HealthMeter } from "@neverquest/components/Reserves/HealthMeter";
 import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
 import { RESERVES } from "@neverquest/data/reserves";
+import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconVitality } from "@neverquest/icons/vitality.svg";
 import { rawAttributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
+import { isPoisoned, poisonDuration } from "@neverquest/state/reserves";
 import { powerBonus } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Health() {
+  const isPoisonedValue = useRecoilValue(isPoisoned);
   const isShowingHealthDetails = useRecoilValue(isShowing("healthDetails"));
   const powerBonusValue = useRecoilValue(powerBonus("vitality"));
   const vitalityValue = useRecoilValue(rawAttributeStatistic("vitality"));
+  const setPoisonDuration = useSetRecoilState(poisonDuration);
 
   const { baseAmount } = RESERVES.health;
+
+  useAnimate({
+    delta: setPoisonDuration,
+    stop: !isPoisonedValue,
+    tmp: "Health",
+  });
 
   return (
     <IconDisplay

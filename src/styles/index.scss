@@ -32,6 +32,18 @@
   box-shadow: 0 0 4px 1px rgb(0 0 0 / 20%);
 }
 
+.text-blue {
+  color: var(--bs-blue);
+}
+
+.text-orange {
+  color: var(--bs-orange);
+}
+
+.text-yellow {
+  color: var(--bs-yellow);
+}
+
 body {
   user-select: none;
 }

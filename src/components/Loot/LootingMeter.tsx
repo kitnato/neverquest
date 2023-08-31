@@ -1,36 +1,18 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { useProgression } from "@neverquest/hooks/actions/useProgression";
-import { useAnimation } from "@neverquest/hooks/useAnimation";
-import { isLooting, lootingDuration, lootingRate } from "@neverquest/state/character";
-
+import { LOOTING_RATE } from "@neverquest/data/resources";
+import { lootingDuration } from "@neverquest/state/character";
 import { formatMilliseconds } from "@neverquest/utilities/formatters";
 
 export function LootingMeter() {
-  const [lootingDurationValue, setLootingDuration] = useRecoilState(lootingDuration);
-  const isLootingValue = useRecoilValue(isLooting);
-  const lootingRateValue = useRecoilValue(lootingRate);
-
-  const progression = useProgression();
-
-  useAnimation((delta) => {
-    const value = lootingDurationValue - delta;
-
-    if (value <= 0) {
-      progression();
-
-      setLootingDuration(0);
-    } else {
-      setLootingDuration(value);
-    }
-  }, !isLootingValue);
+  const lootingDurationValue = useRecoilValue(lootingDuration);
 
   return (
     <LabelledProgressBar
       disableTransitions
       label={formatMilliseconds(lootingDurationValue)}
-      value={((lootingRateValue - lootingDurationValue) / lootingRateValue) * 100}
+      value={((LOOTING_RATE - lootingDurationValue) / LOOTING_RATE) * 100}
       variant="secondary"
     />
   );

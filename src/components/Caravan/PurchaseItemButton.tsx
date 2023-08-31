@@ -3,20 +3,21 @@ import { useRecoilValue } from "recoil";
 
 import { canFit } from "@neverquest/state/inventory";
 import { coins } from "@neverquest/state/resources";
-import type { Item } from "@neverquest/types";
+import type { InventoryItem } from "@neverquest/types";
 
 export function PurchaseItemButton({
   handlePurchase,
   item,
 }: {
   handlePurchase: () => void;
-  item: Item;
+  item: InventoryItem;
 }) {
   const coinsValue = useRecoilValue(coins);
 
   const { coinPrice, weight } = item;
-  const isAffordable = coinPrice <= coinsValue;
   const canFitValue = useRecoilValue(canFit(weight));
+
+  const isAffordable = coinPrice <= coinsValue;
   const isPurchasable = isAffordable && canFitValue;
 
   return (

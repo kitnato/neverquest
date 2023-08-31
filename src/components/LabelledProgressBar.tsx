@@ -6,6 +6,7 @@ import type { BootstrapColorVariant, UIAttachment, UISize } from "@neverquest/ty
 export function LabelledProgressBar({
   attached,
   disableTransitions = false,
+  isStriped = false,
   label,
   sibling = null,
   size = "normal",
@@ -14,6 +15,7 @@ export function LabelledProgressBar({
 }: {
   attached?: UIAttachment;
   disableTransitions?: boolean;
+  isStriped?: boolean;
   label: ReactNode;
   sibling?: ReactNode;
   size?: UISize;
@@ -42,12 +44,14 @@ export function LabelledProgressBar({
     }
   }
 
+  const progressAppearance = isStriped ? { animated: true, striped: true } : {};
+
   return (
     <div className={`position-relative w-100 ${disableTransitions ? "no-transitions" : ""}`}>
       {isSizeNormal ? (
         <>
           <ProgressBar style={style}>
-            <ProgressBar key={1} now={value} variant={variant} />
+            <ProgressBar {...progressAppearance} key={1} now={value} variant={variant} />
 
             {sibling}
           </ProgressBar>
@@ -68,7 +72,7 @@ export function LabelledProgressBar({
       ) : (
         <OverlayTrigger overlay={<Tooltip>{label}</Tooltip>} placement="bottom">
           <ProgressBar style={style}>
-            <ProgressBar key={1} now={value} variant={variant} />
+            <ProgressBar {...progressAppearance} key={1} now={value} variant={variant} />
           </ProgressBar>
         </OverlayTrigger>
       )}

@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil";
 import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGear";
 import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { DodgePenaltyContents } from "@neverquest/components/Inventory/DodgePenaltyContents";
+import { DodgePenaltyContents } from "@neverquest/components/Items/Armor/DodgePenaltyContents";
 import { BLACKSMITH_GEAR_LEVEL_MAXIMUM } from "@neverquest/data/caravan";
 import { ARMOR_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
@@ -14,7 +14,7 @@ import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { ReactComponent as IconArmorProtection } from "@neverquest/icons/protection.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
-import { ARMOR_CLASSES, type ArmorClass } from "@neverquest/LOCRA/types";
+import { ARMOR_CLASSES, type ArmorClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -40,7 +40,7 @@ export function ArmorOptions() {
     allowNSFW: allowNSFWValue,
     gearClass: armorClass,
     hasPrefix: true,
-    hasSuffix: Math.random() < getGrowthSigmoid(armorLevel),
+    hasSuffix: Math.random() <= getGrowthSigmoid(armorLevel),
     level: armorLevel,
   });
   const { protection, ranges, staminaCost, weight } = armor;

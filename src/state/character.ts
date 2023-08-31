@@ -76,14 +76,6 @@ export const lootingDuration = withStateKey("lootingDuration", (key) =>
   }),
 );
 
-export const lootingRate = withStateKey("lootingRate", (key) =>
-  atom({
-    default: 2500,
-    effects: [handleLocalStorage<number>({ key })],
-    key,
-  }),
-);
-
 export const name = withStateKey("name", (key) =>
   atom({
     default: LABEL_UNKNOWN,

@@ -7,23 +7,30 @@ import { blacksmithInventory } from "@neverquest/state/caravan";
 import { coins, scrap } from "@neverquest/state/resources";
 import type { GearItem } from "@neverquest/types";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
-import { getSellPrice } from "@neverquest/utilities/getters";
 
-export function CraftGear({ gear }: { gear: GearItem }) {
+export function CraftGear({
+  coinPrice,
+  onCraft,
+  scrapPrice,
+}: {
+  coinPrice: number;
+  onCraft: () => GearItem;
+  scrapPrice: number;
+}) {
   const coinsValue = useRecoilValue(coins);
   const scrapValue = useRecoilValue(scrap);
   const setBlacksmithInventory = useSetRecoilState(blacksmithInventory);
 
   const transactResources = useTransactResources();
 
-  const { scrapPrice } = gear;
-  const coinsCraftPrice = getSellPrice(gear);
-  const hasCoins = coinsCraftPrice <= coinsValue;
+  const hasCoins = coinPrice <= coinsValue;
   const hasScrap = scrapPrice <= scrapValue;
   const isCraftable = hasCoins && hasScrap;
 
   const handleCraft = () => {
-    transactResources({ coinsDifference: -coinsCraftPrice, scrapDifference: -scrapPrice });
+    const gear = onCraft();
+
+    transactResources({ coinsDifference: -coinPrice, scrapDifference: -scrapPrice });
 
     if (isArmor(gear)) {
       setBlacksmithInventory((current) => ({ ...current, armor: gear }));
@@ -42,7 +49,7 @@ export function CraftGear({ gear }: { gear: GearItem }) {
     <Stack direction="horizontal" gap={5}>
       <ResourceDisplay tooltip="Cost (scrap)" type="scrap" value={scrapPrice} />
 
-      <ResourceDisplay tooltip="Price (coins)" type="coins" value={coinsCraftPrice} />
+      <ResourceDisplay tooltip="Price (coins)" type="coins" value={coinPrice} />
 
       <OverlayTrigger
         overlay={

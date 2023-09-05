@@ -14,14 +14,11 @@ import type {
   WeaponGrip,
 } from "@neverquest/types/unions";
 
-export type Armor = GearBase & {
+export type Armor = GearItemBase & {
   deflection: number;
   gearClass?: ArmorClass;
   gems: GemItem[];
   protection: number;
-  ranges: {
-    deflection: Range;
-  } | null;
   staminaCost: number;
 };
 
@@ -49,9 +46,18 @@ export type ConsumableItem = ItemBase & {
   type: Consumable;
 };
 
+export type ElementalGearEffects = Record<Elemental, { damage: number; duration: number }>;
+
+export type GearBase = {
+  coinPrice: number;
+  scrapPrice: number;
+  staminaCost: [GeneratorRange, GeneratorRange];
+  weight: [GeneratorRange, GeneratorRange];
+};
+
 export type GearItem = Armor | Shield | Weapon;
 
-type GearBase = ItemBase & {
+type GearItemBase = ItemBase & {
   gems: GemItem[];
   isEquipped: boolean;
   level: number;
@@ -63,7 +69,10 @@ export type GemItem = ItemBase & {
   type: Gem;
 };
 
-export type ElementalGearEffects = Record<Elemental, { damage: number; duration: number }>;
+export type GeneratorRange = {
+  maximum: number;
+  minimum: number;
+};
 
 export type InventoryItem = ConsumableItem | GearItem | GemItem | TrinketItem;
 
@@ -83,18 +92,10 @@ export type MerchantInventory = {
   item: InventoryItem;
 }[];
 
-export type Range = {
-  maximum: number;
-  minimum: number;
-};
-
-export type Shield = GearBase & {
+export type Shield = GearItemBase & {
   block: number;
   gearClass?: ShieldClass;
   gems: GemItem[];
-  ranges: {
-    block: Range;
-  };
   stagger: number;
   staminaCost: number;
 };
@@ -110,18 +111,14 @@ export type UnlockedState = {
   isUnlocked: boolean;
 };
 
-export type Weapon = GearBase & {
+export type Weapon = GearItemBase & {
   abilityChance: number;
   damage: number;
   gearClass: WeaponClass;
   gems: GemItem[];
   grip: WeaponGrip;
   modality: WeaponModality;
-  ranges: {
-    ability: Range;
-    damage: Range;
-    rate: Range;
-  };
+  range: number;
   rate: number;
   staminaCost: number;
 };

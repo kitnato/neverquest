@@ -115,26 +115,28 @@ export function ShieldName({
                 )}
               </tr>
 
-              <tr>
-                {isShowingStagger ? (
-                  <>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance:</td>
+              {stagger > 0 && (
+                <tr>
+                  {isShowingStagger ? (
+                    <>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance:</td>
 
-                    <td>
-                      <IconImage Icon={IconStagger} size="tiny" />
-                      &nbsp;{formatPercentage(stagger)}
-                      {showComparison && (
-                        <GearComparison
-                          difference={stagger - shieldEquippedValue.stagger}
-                          showingType="shield"
-                        />
-                      )}
-                    </td>
-                  </>
-                ) : (
-                  <td className="text-end">{LABEL_UNKNOWN}</td>
-                )}
-              </tr>
+                      <td>
+                        <IconImage Icon={IconStagger} size="tiny" />
+                        &nbsp;{formatPercentage(stagger)}
+                        {showComparison && (
+                          <GearComparison
+                            difference={stagger - shieldEquippedValue.stagger}
+                            showingType="shield"
+                          />
+                        )}
+                      </td>
+                    </>
+                  ) : (
+                    <td className="text-end">{LABEL_UNKNOWN}</td>
+                  )}
+                </tr>
+              )}
 
               <WeightDetail
                 comparison={

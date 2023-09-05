@@ -27,7 +27,15 @@ import { ReactComponent as IconPiercing } from "@neverquest/icons/weapon-piercin
 import { ReactComponent as IconSlashing } from "@neverquest/icons/weapon-slashing.svg";
 import { ReactComponent as IconWeaponStagger } from "@neverquest/icons/weapon-stagger.svg";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
-import type { Armor, ConsumableItem, Range, Shield, TrinketItem, Weapon } from "@neverquest/types";
+import type {
+  Armor,
+  ConsumableItem,
+  GearBase,
+  GeneratorRange,
+  Shield,
+  TrinketItem,
+  Weapon,
+} from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
 import type {
   Consumable,
@@ -38,15 +46,7 @@ import type {
   Trinket,
 } from "@neverquest/types/unions";
 
-export const ARMOR_BASE = {
-  coinPrice: 500,
-  protection: 400,
-  scrapPrice: 3500,
-  staminaCost: 30,
-  weight: 60,
-};
-
-export const ARMOR_NONE: Omit<Armor, "coinPrice" | "isEquipped" | "ranges" | "scrapPrice"> = {
+export const ARMOR_NONE: Omit<Armor, "coinPrice" | "isEquipped" | "scrapPrice"> = {
   deflection: 0,
   gems: [],
   id: nanoid(),
@@ -59,43 +59,66 @@ export const ARMOR_NONE: Omit<Armor, "coinPrice" | "isEquipped" | "ranges" | "sc
 
 export const ARMOR_SPECIFICATIONS: Record<
   ArmorClass,
-  {
-    deflectionRange?: [Range, Range];
-    dodgeCostModifier: number;
+  Omit<GearBase, "staminaCost"> & {
+    deflection: [GeneratorRange, GeneratorRange] | null;
     Icon: SVGIcon;
-    priceModifier: number;
-    protectionModifier: number;
-    weightModifier: number;
+    protection: [GeneratorRange, GeneratorRange];
+    staminaCost: 0 | [GeneratorRange, GeneratorRange] | null;
   }
 > = {
   hide: {
-    dodgeCostModifier: 0,
+    coinPrice: 250,
+    deflection: null,
     Icon: IconHide,
-    priceModifier: 0.2,
-    protectionModifier: 0.25,
-    weightModifier: 0.2,
+    protection: [
+      { maximum: 2, minimum: 1 },
+      { maximum: 400, minimum: 350 },
+    ],
+    scrapPrice: 2500,
+    staminaCost: 0,
+    weight: [
+      { maximum: 2, minimum: 1 },
+      { maximum: 60, minimum: 55 },
+    ],
   },
   plate: {
-    deflectionRange: [
-      { maximum: 0.4, minimum: 0.33 },
-      { maximum: 0.65, minimum: 0.55 },
+    coinPrice: 550,
+    deflection: [
+      { maximum: 0.25, minimum: 0.2 },
+      { maximum: 0.65, minimum: 0.6 },
     ],
-    dodgeCostModifier: Infinity,
     Icon: IconPlate,
-    priceModifier: 1,
-    protectionModifier: 1,
-    weightModifier: 1,
+    protection: [
+      { maximum: 15, minimum: 10 },
+      { maximum: 800, minimum: 750 },
+    ],
+    scrapPrice: 4000,
+    staminaCost: null,
+    weight: [
+      { maximum: 7, minimum: 5 },
+      { maximum: 120, minimum: 110 },
+    ],
   },
   reinforced: {
-    deflectionRange: [
-      { maximum: 0.2, minimum: 0.13 },
-      { maximum: 0.32, minimum: 0.25 },
+    coinPrice: 400,
+    deflection: [
+      { maximum: 0.15, minimum: 0.1 },
+      { maximum: 0.35, minimum: 0.3 },
     ],
-    dodgeCostModifier: 1,
     Icon: IconReinforced,
-    priceModifier: 0.5,
-    protectionModifier: 0.5,
-    weightModifier: 0.5,
+    protection: [
+      { maximum: 10, minimum: 5 },
+      { maximum: 500, minimum: 450 },
+    ],
+    scrapPrice: 3000,
+    staminaCost: [
+      { maximum: 5, minimum: 3 },
+      { maximum: 50, minimum: 45 },
+    ],
+    weight: [
+      { maximum: 5, minimum: 3 },
+      { maximum: 90, minimum: 80 },
+    ],
   },
 };
 
@@ -107,7 +130,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
         coinPrice: 15,
         description: "Cures poison.",
         type: "antidote",
-        weight: 1,
+        weight: 5,
       },
     },
     bandages: {
@@ -125,7 +148,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
         coinPrice: 8,
         description: "Restores all stamina.",
         type: "elixir",
-        weight: 1,
+        weight: 2,
       },
     },
     phylactery: {
@@ -134,7 +157,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
         coinPrice: 100,
         description: "Resurrects the carrier upon death.",
         type: "phylactery",
-        weight: 5,
+        weight: 10,
       },
     },
     salve: {
@@ -143,7 +166,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
         coinPrice: 25,
         description: "Cures blight.",
         type: "salve",
-        weight: 2,
+        weight: 3,
       },
     },
   };
@@ -157,8 +180,8 @@ export const ELEMENTALS: Record<
   lightning: { ailment: "shocked", color: "text-yellow", Icon: IconLightning },
 };
 
-export const ENCUMBRANCE = 3;
-export const KNAPSACK_SIZE = 3;
+export const ENCUMBRANCE = 6;
+export const KNAPSACK_SIZE = 4;
 
 export const GEM_BASE = {
   coinPrice: 10,
@@ -174,14 +197,6 @@ export const GEM_ELEMENTALS: Record<Gem, Elemental> = {
 export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
 export const GEMS_MAXIMUM = 5;
 
-export const SHIELD_BASE = {
-  coinPrice: 400,
-  scrapPrice: 3000,
-  stagger: { attenuation: 0.8, minimum: 0.1 },
-  staminaCost: 30,
-  weight: 50,
-};
-
 export const SHIELD_NONE: Omit<Shield, "coinPrice" | "isEquipped" | "ranges" | "scrapPrice"> = {
   block: 0,
   gems: [],
@@ -195,43 +210,71 @@ export const SHIELD_NONE: Omit<Shield, "coinPrice" | "isEquipped" | "ranges" | "
 
 export const SHIELD_SPECIFICATIONS: Record<
   ShieldClass,
-  {
-    blockRange: [Range, Range];
+  GearBase & {
+    block: [GeneratorRange, GeneratorRange];
     Icon: SVGIcon;
-    staggerModifier: number;
-    staminaCostModifier: number;
-    weightModifier: number;
+    stagger: [GeneratorRange, GeneratorRange] | null;
   }
 > = {
   medium: {
-    blockRange: [
-      { maximum: 0.3, minimum: 0.2 },
-      { maximum: 0.4, minimum: 0.3 },
+    block: [
+      { maximum: 0.3, minimum: 0.25 },
+      { maximum: 0.4, minimum: 0.35 },
     ],
+    coinPrice: 400,
     Icon: IconShieldMedium,
-    staggerModifier: 0.4,
-    staminaCostModifier: 0.6,
-    weightModifier: 0.6,
+    scrapPrice: 3000,
+    stagger: [
+      { maximum: 0.25, minimum: 0.2 },
+      { maximum: 0.35, minimum: 0.3 },
+    ],
+    staminaCost: [
+      { maximum: 4, minimum: 2 },
+      { maximum: 30, minimum: 25 },
+    ],
+    weight: [
+      { maximum: 5, minimum: 3 },
+      { maximum: 45, minimum: 40 },
+    ],
   },
   small: {
-    blockRange: [
-      { maximum: 0.15, minimum: 0.1 },
-      { maximum: 0.2, minimum: 0.15 },
+    block: [
+      { maximum: 0.25, minimum: 0.2 },
+      { maximum: 0.35, minimum: 0.3 },
     ],
+    coinPrice: 300,
     Icon: IconShieldSmall,
-    staggerModifier: 0.2,
-    staminaCostModifier: 0.25,
-    weightModifier: 0.25,
+    scrapPrice: 2000,
+    stagger: null,
+    staminaCost: [
+      { maximum: 2, minimum: 1 },
+      { maximum: 25, minimum: 20 },
+    ],
+    weight: [
+      { maximum: 2, minimum: 1 },
+      { maximum: 30, minimum: 25 },
+    ],
   },
   tower: {
-    blockRange: [
-      { maximum: 0.5, minimum: 0.4 },
-      { maximum: 0.6, minimum: 0.5 },
+    block: [
+      { maximum: 0.55, minimum: 0.5 },
+      { maximum: 0.65, minimum: 0.6 },
     ],
+    coinPrice: 600,
     Icon: IconShieldTower,
-    staggerModifier: 1,
-    staminaCostModifier: 1,
-    weightModifier: 1,
+    scrapPrice: 3000,
+    stagger: [
+      { maximum: 0.35, minimum: 0.3 },
+      { maximum: 0.55, minimum: 0.5 },
+    ],
+    staminaCost: [
+      { maximum: 10, minimum: 7 },
+      { maximum: 45, minimum: 40 },
+    ],
+    weight: [
+      { maximum: 8, minimum: 5 },
+      { maximum: 60, minimum: 55 },
+    ],
   },
 };
 
@@ -253,7 +296,7 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
       description: "Navigate the wilderness to hunt in previous locations.",
       id: nanoid(),
       type: "compass",
-      weight: 1,
+      weight: 2,
     },
   },
   hearthstone: {
@@ -263,7 +306,7 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
       description: "Travel back to the caravan even if there are still lurking monsters.",
       id: nanoid(),
       type: "hearthstone",
-      weight: 1,
+      weight: 2,
     },
   },
   knapsack: {
@@ -283,7 +326,7 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
       description: "Looting a corpse is instantaneous.",
       id: nanoid(),
       type: "monkey paw",
-      weight: 2,
+      weight: 3,
     },
   },
   "tome of power": {
@@ -293,27 +336,47 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
       description: "Grants a bonus to all attributes based on power level.",
       id: nanoid(),
       type: "tome of power",
-      weight: 6,
+      weight: 10,
     },
   },
 };
 
-export const WEAPON_BASE = {
-  coinPrice: 300,
-  damage: {
-    maximum: 1200,
-    minimum: 1100,
-  },
-  rate: {
-    maximum: 3500,
-    minimum: 3300,
-  },
+export const WEAPON_BASE: GearBase & {
+  damage: [GeneratorRange, GeneratorRange];
+  range: [GeneratorRange, GeneratorRange];
+  rate: [GeneratorRange, GeneratorRange];
+} = {
+  coinPrice: 500,
+  damage: [
+    { maximum: 13, minimum: 11 },
+    { maximum: 850, minimum: 800 },
+  ],
+  range: [
+    { maximum: 4000, minimum: 3500 },
+    { maximum: 8000, minimum: 7500 },
+  ],
+  rate: [
+    { maximum: 3500, minimum: 3300 },
+    { maximum: 2200, minimum: 2000 },
+  ],
   scrapPrice: 2500,
-  staminaCost: 45,
-  weight: 40,
+  staminaCost: [
+    { maximum: 2, minimum: 1 },
+    { maximum: 60, minimum: 50 },
+  ],
+  weight: [
+    { maximum: 2, minimum: 1 },
+    { maximum: 80, minimum: 70 },
+  ],
 };
 
-export const WEAPON_NONE: Omit<Weapon, "coinPrice" | "isEquipped" | "ranges" | "scrapPrice"> = {
+export const WEAPON_MODIFIER = {
+  "one-handed": { damage: 1, rate: 1 },
+  ranged: { damage: 1.2, rate: 1 },
+  "two-handed": { damage: 1.5, rate: 1.5 },
+};
+
+export const WEAPON_NONE: Omit<Weapon, "coinPrice" | "isEquipped" | "scrapPrice"> = {
   abilityChance: 0,
   damage: 10,
   gearClass: "blunt",
@@ -323,6 +386,7 @@ export const WEAPON_NONE: Omit<Weapon, "coinPrice" | "isEquipped" | "ranges" | "
   level: 0,
   modality: "melee",
   name: "Unarmed",
+  range: 0,
   rate: 2500,
   staminaCost: 0,
   weight: 0,
@@ -331,7 +395,7 @@ export const WEAPON_NONE: Omit<Weapon, "coinPrice" | "isEquipped" | "ranges" | "
 export const WEAPON_SPECIFICATIONS: Record<
   WeaponClass,
   {
-    abilityChance: [Range, Range];
+    abilityChance: [GeneratorRange, GeneratorRange];
     abilityName: string;
     IconAbility: SVGIcon;
     IconGearClass: SVGIcon;
@@ -340,8 +404,8 @@ export const WEAPON_SPECIFICATIONS: Record<
 > = {
   blunt: {
     abilityChance: [
-      { maximum: 0.2, minimum: 0.13 },
-      { maximum: 0.5, minimum: 0.43 },
+      { maximum: 0.2, minimum: 0.15 },
+      { maximum: 0.4, minimum: 0.35 },
     ],
     abilityName: "Stagger",
     IconAbility: IconWeaponStagger,
@@ -350,8 +414,8 @@ export const WEAPON_SPECIFICATIONS: Record<
   },
   piercing: {
     abilityChance: [
-      { maximum: 0.25, minimum: 0.2 },
-      { maximum: 0.6, minimum: 0.53 },
+      { maximum: 0.3, minimum: 0.25 },
+      { maximum: 0.5, minimum: 0.45 },
     ],
     abilityName: "Bleed",
     IconAbility: IconWeaponBleed,
@@ -360,8 +424,8 @@ export const WEAPON_SPECIFICATIONS: Record<
   },
   slashing: {
     abilityChance: [
-      { maximum: 0.2, minimum: 0.12 },
-      { maximum: 0.6, minimum: 0.53 },
+      { maximum: 0.35, minimum: 0.3 },
+      { maximum: 0.5, minimum: 0.45 },
     ],
     abilityName: "Parry",
     IconAbility: IconParry,

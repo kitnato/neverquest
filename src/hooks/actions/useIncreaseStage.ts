@@ -14,9 +14,7 @@ export function useIncreaseStage() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const stageValue = get(stage);
-
-        const nextStage = stageValue + 1;
+        const nextStage = get(stage) + 1;
 
         CREW_ORDER.forEach((type) => {
           const { status: hireStatusValue } = get(hireStatus(type));
@@ -30,12 +28,10 @@ export function useIncreaseStage() {
           }
         });
 
-        if (get(wildernesses)[nextStage - 1] !== undefined) {
-          set(wildernesses, (current) => [
-            ...current,
-            generateWilderness({ allowNSFW: get(allowNSFW), stage: nextStage }),
-          ]);
-        }
+        set(wildernesses, (current) => [
+          ...current,
+          generateWilderness({ allowNSFW: get(allowNSFW), stage: nextStage }),
+        ]);
 
         set(stage, nextStage);
       },

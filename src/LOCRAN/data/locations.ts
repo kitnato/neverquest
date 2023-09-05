@@ -18,6 +18,9 @@ export const LOCATIONS: LocationData[] = [
     name: "archipelago",
   },
   {
+    name: "arena",
+  },
+  {
     name: "attic",
   },
   {

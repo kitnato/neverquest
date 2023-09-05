@@ -7,7 +7,7 @@ import { hasBoughtFromMerchant } from "@neverquest/state/caravan";
 import {
   isStageCompleted,
   isWilderness,
-  mode,
+  location,
   stage,
   stageMaximum,
 } from "@neverquest/state/encounter";
@@ -28,7 +28,7 @@ export function useToggleLocation() {
         if (isWildernessValue) {
           generateMerchantInventory();
 
-          set(mode, "caravan");
+          set(location, "caravan");
         } else {
           if (get(isStageCompleted) && get(stage) === get(stageMaximum)) {
             increaseStage();
@@ -36,7 +36,7 @@ export function useToggleLocation() {
 
           resetWilderness();
 
-          set(mode, "wilderness");
+          set(location, "wilderness");
           set(hasBoughtFromMerchant, false);
         }
       },

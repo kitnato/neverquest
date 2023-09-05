@@ -14,7 +14,7 @@ import type {
   WeaponModality,
 } from "@neverquest/LOCRAN/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Crew, Trinket } from "@neverquest/types/unions";
+import type { Consumable, Crew, Trinket, WeaponGrip } from "@neverquest/types/unions";
 
 export const BLACKSMITH_GEAR_LEVEL_MAXIMUM = 3;
 
@@ -30,36 +30,36 @@ export const CREW: Record<
   }
 > = {
   alchemist: {
-    coinPrice: 100,
+    coinPrice: 200,
     description: "Converts resources between one another.",
     Icon: IconAlchemist,
     interaction: "Transmute",
     monologues: { 1: "Things are not always what they seem." },
-    requiredStage: 16,
+    requiredStage: 30,
   },
   blacksmith: {
-    coinPrice: 60,
+    coinPrice: 40,
     description: "Crafts superior gear.",
     Icon: IconBlacksmith,
     interaction: "Craft",
     monologues: { 1: "In need of better gear?" },
-    requiredStage: 10,
+    requiredStage: 8,
   },
   medic: {
-    coinPrice: 20,
+    coinPrice: 80,
     description: "Heals wounds and sells bandages.",
     Icon: IconMedic,
     interaction: "Heal",
     monologues: { 1: "Allow me to patch you up." },
-    requiredStage: 6,
+    requiredStage: 12,
   },
   mercenary: {
-    coinPrice: 80,
+    coinPrice: 20,
     description: "Trains new skills and attributes.",
     Icon: IconMercenary,
     interaction: "Train",
     monologues: { 1: "Perhaps I can teach you something." },
-    requiredStage: 12,
+    requiredStage: 6,
   },
   merchant: {
     coinPrice: 0,
@@ -84,28 +84,28 @@ export const CREW: Record<
     requiredStage: 0,
   },
   occultist: {
-    coinPrice: 200,
+    coinPrice: 150,
     description: "Sells phylacteries and offers purging rituals.",
     Icon: IconOccultist,
     interaction: "Ritual",
     monologues: { 1: "Prepared to pierce the veil?" },
-    requiredStage: 30,
+    requiredStage: 20,
   },
   tailor: {
-    coinPrice: 40,
+    coinPrice: 60,
     description: "Expands inventory space.",
     Icon: IconTailor,
-    interaction: "Sow",
+    interaction: "Tailoring",
     monologues: { 1: "Allow me to deepen your pockets." },
-    requiredStage: 8,
+    requiredStage: 10,
   },
   witch: {
-    coinPrice: 150,
+    coinPrice: 100,
     description: "Sells potions that cure ailments.",
     Icon: IconWitch,
     interaction: "Brew",
     monologues: { 1: "Gaze deep into my cauldron ..." },
-    requiredStage: 20,
+    requiredStage: 16,
   },
 };
 
@@ -132,6 +132,7 @@ export const MERCHANT_OFFERS: Record<
         })
       | (ArtifactType<"weapon"> & {
           gearClass: WeaponClass;
+          grip: WeaponGrip;
           modality: WeaponModality;
         })
     )[]
@@ -140,6 +141,7 @@ export const MERCHANT_OFFERS: Record<
   1: [
     {
       gearClass: "piercing",
+      grip: "one-handed",
       modality: "melee",
       type: "weapon",
     },
@@ -164,11 +166,13 @@ export const MERCHANT_OFFERS: Record<
   5: [
     {
       gearClass: "slashing",
+      grip: "one-handed",
       modality: "melee",
       type: "weapon",
     },
     {
       gearClass: "blunt",
+      grip: "one-handed",
       modality: "melee",
       type: "weapon",
     },

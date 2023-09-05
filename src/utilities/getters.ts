@@ -1,8 +1,22 @@
 import type { RecoilValue, Snapshot } from "recoil";
 
+import {
+  ARMOR_SPECIFICATIONS,
+  SHIELD_SPECIFICATIONS,
+  WEAPON_BASE,
+  WEAPON_MODIFIER,
+  WEAPON_SPECIFICATIONS,
+} from "@neverquest/data/inventory";
 import { MONSTER_POWER_SCALAR } from "@neverquest/data/monster";
-import type { Range } from "@neverquest/types";
+import type {
+  ArmorClass,
+  ShieldClass,
+  WeaponClass,
+  WeaponModality,
+} from "@neverquest/LOCRAN/types";
+import type { GeneratorRange } from "@neverquest/types";
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
+import type { WeaponGrip } from "@neverquest/types/unions";
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/utilities/constants";
 
 export function getAnimationClass({
@@ -17,6 +31,31 @@ export function getAnimationClass({
   return `${CLASS_ANIMATED} ${CLASS_ANIMATE_PREFIX}${type}${
     isInfinite ? ` ${CLASS_ANIMATE_PREFIX}infinite` : ""
   }${speed ? ` ${CLASS_ANIMATE_PREFIX}${speed}` : ""}`;
+}
+
+export function getArmorPrices({ factor, gearClass }: { factor: number; gearClass: ArmorClass }) {
+  const { coinPrice, scrapPrice } = ARMOR_SPECIFICATIONS[gearClass];
+
+  return {
+    coinPrice: Math.ceil(coinPrice * factor),
+    scrapPrice: Math.ceil(scrapPrice * factor),
+  };
+}
+
+export function getArmorRanges({ factor, gearClass }: { factor: number; gearClass: ArmorClass }) {
+  const { deflection, protection, staminaCost, weight } = ARMOR_SPECIFICATIONS[gearClass];
+
+  return {
+    deflection: deflection === null ? null : getRange({ factor, ranges: deflection }),
+    protection: getRange({ factor, ranges: protection }),
+    staminaCost:
+      staminaCost === null
+        ? null
+        : staminaCost === 0
+        ? 0
+        : getRange({ factor, ranges: staminaCost }),
+    weight: getRange({ factor, ranges: weight }),
+  };
 }
 
 export function getComputedStatistic({
@@ -62,14 +101,10 @@ export function getDamagePerTick({
   return Math.round(((damage * proportion) / duration) * (duration / ticks)) || 1;
 }
 
-export function getFromRange({ maximum, minimum }: Range) {
+export function getFromRange({ maximum, minimum }: GeneratorRange) {
   const result = Math.random() * (maximum - minimum) + minimum;
 
-  return Number.isInteger(maximum) && Number.isInteger(minimum) ? Math.round(result) : result;
-}
-
-export function getSellPrice({ coinPrice }: { coinPrice: number }) {
-  return Math.ceil(coinPrice / 2);
+  return Number.isInteger(minimum) && Number.isInteger(maximum) ? Math.round(result) : result;
 }
 
 export function getGrowthMonsterPower(x: number) {
@@ -87,6 +122,91 @@ export function getGrowthTriangular(number: number) {
   return (number * (number + 1)) / 2;
 }
 
+export function getRange({
+  factor,
+  modifier = 1,
+  ranges,
+}: {
+  factor: number;
+  modifier?: number;
+  ranges: [GeneratorRange, GeneratorRange];
+}): GeneratorRange {
+  const maximumResult =
+    (ranges[0].maximum + (ranges[1].maximum - ranges[0].maximum) * factor) * modifier;
+  const minimumResult =
+    (ranges[0].minimum + (ranges[1].minimum - ranges[0].minimum) * factor) * modifier;
+
+  return {
+    maximum:
+      Number.isInteger(ranges[0].maximum) && Number.isInteger(ranges[1].maximum)
+        ? Math.round(maximumResult)
+        : maximumResult,
+    minimum:
+      Number.isInteger(ranges[0].minimum) && Number.isInteger(ranges[1].minimum)
+        ? Math.round(minimumResult)
+        : minimumResult,
+  };
+}
+
+export function getSellPrice({ coinPrice }: { coinPrice: number }) {
+  return Math.ceil(coinPrice / 2);
+}
+
+export function getShieldPrices({ factor, gearClass }: { factor: number; gearClass: ShieldClass }) {
+  const { coinPrice, scrapPrice } = SHIELD_SPECIFICATIONS[gearClass];
+
+  return {
+    coinPrice: Math.ceil(coinPrice * factor),
+    scrapPrice: Math.ceil(scrapPrice * factor),
+  };
+}
+
+export function getShieldRanges({ factor, gearClass }: { factor: number; gearClass: ShieldClass }) {
+  const { block, stagger, staminaCost, weight } = SHIELD_SPECIFICATIONS[gearClass];
+
+  return {
+    block: getRange({ factor, ranges: block }),
+    stagger: stagger === null ? null : getRange({ factor, ranges: stagger }),
+    staminaCost: getRange({ factor, ranges: staminaCost }),
+    weight: getRange({ factor, ranges: weight }),
+  };
+}
+
 export function getSnapshotGetter({ getLoadable }: Snapshot) {
   return <T>(state: RecoilValue<T>) => getLoadable(state).getValue();
+}
+
+export function getWeaponPrices({ factor }: { factor: number }) {
+  const { coinPrice, scrapPrice } = WEAPON_BASE;
+
+  return {
+    coinPrice: Math.ceil(coinPrice * factor),
+    scrapPrice: Math.ceil(scrapPrice * factor),
+  };
+}
+
+export function getWeaponRanges({
+  factor,
+  gearClass,
+  grip,
+  modality,
+}: {
+  factor: number;
+  gearClass: WeaponClass;
+  grip: WeaponGrip;
+  modality: WeaponModality;
+}) {
+  const { damage: damageModifier, rate: rateModifier } =
+    modality === "melee" ? WEAPON_MODIFIER[grip] : WEAPON_MODIFIER.ranged;
+  const { damage, range, rate, staminaCost, weight } = WEAPON_BASE;
+  const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
+
+  return {
+    abilityChance: getRange({ factor, ranges: abilityChance }),
+    damage: getRange({ factor, modifier: damageModifier, ranges: damage }),
+    range: getRange({ factor, ranges: range }),
+    rate: getRange({ factor, modifier: rateModifier, ranges: rate }),
+    staminaCost: getRange({ factor, ranges: staminaCost }),
+    weight: getRange({ factor, ranges: weight }),
+  };
 }

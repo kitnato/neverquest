@@ -1,5 +1,3 @@
-export const ATTACK_RATE_ATTENUATION = 2000;
-
 export const BLEED = {
   duration: 3000,
   ticks: 6,

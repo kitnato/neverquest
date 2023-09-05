@@ -22,7 +22,7 @@ import { skills } from "@neverquest/state/skills";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 import { generateShield } from "@neverquest/utilities/generators";
-import { getGrowthSigmoid } from "@neverquest/utilities/getters";
+import { getGrowthSigmoid, getShieldPrices, getShieldRanges } from "@neverquest/utilities/getters";
 
 export function ShieldOptions() {
   const allowNSFWValue = useRecoilValue(allowNSFW);
@@ -35,16 +35,32 @@ export function ShieldOptions() {
   const isShowingStagger = useRecoilValue(isShowing("stagger"));
   const skillShieldcraft = useRecoilValue(skills("shieldcraft"));
 
-  const shield = generateShield({
-    allowNSFW: allowNSFWValue,
+  const factor = getGrowthSigmoid(shieldLevel);
+  const { coinPrice, scrapPrice } = getShieldPrices({
+    factor,
     gearClass: shieldClass,
-    hasPrefix: true,
-    hasSuffix: Math.random() <= getGrowthSigmoid(shieldLevel),
-    level: shieldLevel,
   });
-  const { ranges, stagger, staminaCost, weight } = shield;
+  const { block, stagger, staminaCost, weight } = getShieldRanges({
+    factor,
+    gearClass: shieldClass,
+  });
   const { Icon } = SHIELD_SPECIFICATIONS[shieldClass];
   const maximumShieldLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
+
+  const craftShield = () =>
+    generateShield({
+      allowNSFW: allowNSFWValue,
+      gearClass: shieldClass,
+      hasPrefix: true,
+      hasSuffix: Math.random() <= getGrowthSigmoid(shieldLevel),
+      level: shieldLevel,
+      tags:
+        shieldLevel < stageValue - 1
+          ? ["lowQuality"]
+          : shieldLevel > maximumShieldLevel
+          ? ["highQuality"]
+          : undefined,
+    });
 
   return (
     <>
@@ -95,30 +111,34 @@ export function ShieldOptions() {
         />
 
         <IconDisplay
-          contents={`${formatPercentage(ranges.block.minimum)}-${formatPercentage(
-            ranges.block.maximum,
-          )}`}
+          contents={`${formatPercentage(block.minimum)}-${formatPercentage(block.maximum)}`}
           Icon={IconBlock}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Block chance"
         />
 
-        <IconDisplay
-          contents={isShowingStagger ? formatPercentage(stagger) : LABEL_UNKNOWN}
-          Icon={isShowingStagger ? IconShieldStagger : IconUnknown}
-          iconProps={{ overlayPlacement: "left" }}
-          tooltip={isShowingStagger ? "Stagger chance" : LABEL_UNKNOWN}
-        />
+        {stagger !== null && (
+          <IconDisplay
+            contents={
+              isShowingStagger
+                ? `${formatPercentage(stagger.minimum)}-${formatPercentage(stagger.maximum)}`
+                : LABEL_UNKNOWN
+            }
+            Icon={isShowingStagger ? IconShieldStagger : IconUnknown}
+            iconProps={{ overlayPlacement: "left" }}
+            tooltip={isShowingStagger ? "Stagger chance" : LABEL_UNKNOWN}
+          />
+        )}
 
         <IconDisplay
-          contents={staminaCost}
+          contents={`${staminaCost.minimum}-${staminaCost.maximum}`}
           Icon={IconStamina}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Stamina cost"
         />
 
         <IconDisplay
-          contents={weight}
+          contents={`${weight.minimum}-${weight.maximum}`}
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
@@ -130,7 +150,7 @@ export function ShieldOptions() {
       {!skillShieldcraft && shieldClass === "tower" ? (
         <span className="text-center">Cannot use without training.</span>
       ) : craftedShield === null ? (
-        <CraftGear gear={shield} />
+        <CraftGear coinPrice={coinPrice} onCraft={craftShield} scrapPrice={scrapPrice} />
       ) : (
         <CraftedGear gear={craftedShield} />
       )}

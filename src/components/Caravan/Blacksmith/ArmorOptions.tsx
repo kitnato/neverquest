@@ -23,7 +23,7 @@ import { skills } from "@neverquest/state/skills";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 import { generateArmor } from "@neverquest/utilities/generators";
-import { getGrowthSigmoid } from "@neverquest/utilities/getters";
+import { getArmorPrices, getArmorRanges, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function ArmorOptions() {
   const allowNSFWValue = useRecoilValue(allowNSFW);
@@ -36,16 +36,32 @@ export function ArmorOptions() {
   const [armorClass, setArmorClass] = useState<ArmorClass>("hide");
   const [armorLevel, setArmorLevel] = useState(stageValue);
 
-  const armor = generateArmor({
-    allowNSFW: allowNSFWValue,
+  const factor = getGrowthSigmoid(armorLevel);
+  const { coinPrice, scrapPrice } = getArmorPrices({
+    factor,
     gearClass: armorClass,
-    hasPrefix: true,
-    hasSuffix: Math.random() <= getGrowthSigmoid(armorLevel),
-    level: armorLevel,
   });
-  const { protection, ranges, staminaCost, weight } = armor;
+  const { deflection, protection, staminaCost, weight } = getArmorRanges({
+    factor,
+    gearClass: armorClass,
+  });
   const { Icon } = ARMOR_SPECIFICATIONS[armorClass];
   const maximumArmorLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
+
+  const craftArmor = () =>
+    generateArmor({
+      allowNSFW: allowNSFWValue,
+      gearClass: armorClass,
+      hasPrefix: true,
+      hasSuffix: Math.random() <= getGrowthSigmoid(armorLevel),
+      level: armorLevel,
+      tags:
+        armorLevel < stageValue - 1
+          ? ["lowQuality"]
+          : armorLevel > maximumArmorLevel
+          ? ["highQuality"]
+          : undefined,
+    });
 
   return (
     <>
@@ -96,19 +112,17 @@ export function ArmorOptions() {
         />
 
         <IconDisplay
-          contents={protection}
+          contents={`${protection.minimum}-${protection.maximum}`}
           Icon={IconArmorProtection}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Protection"
         />
 
-        {ranges !== null && (
+        {deflection !== null && (
           <IconDisplay
             contents={
               isShowingDeflection
-                ? `${formatPercentage(ranges.deflection.minimum)}-${formatPercentage(
-                    ranges.deflection.maximum,
-                  )}`
+                ? `${formatPercentage(deflection.minimum)}-${formatPercentage(deflection.maximum)}`
                 : LABEL_UNKNOWN
             }
             Icon={isShowingDeflection ? IconDeflection : IconUnknown}
@@ -117,7 +131,7 @@ export function ArmorOptions() {
           />
         )}
 
-        {staminaCost > 0 && (
+        {staminaCost !== 0 && (
           <IconDisplay
             contents={
               isShowingDodge ? <DodgePenaltyContents staminaCost={staminaCost} /> : LABEL_UNKNOWN
@@ -129,7 +143,7 @@ export function ArmorOptions() {
         )}
 
         <IconDisplay
-          contents={weight}
+          contents={`${weight.minimum}-${weight.maximum}`}
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
@@ -141,7 +155,7 @@ export function ArmorOptions() {
       {!skillArmorcraft && armorClass === "plate" ? (
         <span className="text-center">Cannot use without training.</span>
       ) : craftedArmor === null ? (
-        <CraftGear gear={armor} />
+        <CraftGear coinPrice={coinPrice} onCraft={craftArmor} scrapPrice={scrapPrice} />
       ) : (
         <CraftedGear gear={craftedArmor} />
       )}

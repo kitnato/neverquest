@@ -1,14 +1,5 @@
 import { nanoid } from "nanoid";
 
-import { ATTACK_RATE_ATTENUATION } from "@neverquest/data/combat";
-import {
-  ARMOR_BASE,
-  ARMOR_SPECIFICATIONS,
-  SHIELD_BASE,
-  SHIELD_SPECIFICATIONS,
-  WEAPON_BASE,
-  WEAPON_SPECIFICATIONS,
-} from "@neverquest/data/inventory";
 import { LOCATION_AFFIX_BASE } from "@neverquest/data/location";
 import { generateArtifact } from "@neverquest/LOCRAN/generate/generateArtifact";
 import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
@@ -20,7 +11,17 @@ import type {
   WeaponModality,
 } from "@neverquest/LOCRAN/types";
 import type { Armor, Shield, Weapon } from "@neverquest/types";
-import { getFromRange, getGrowthSigmoid } from "@neverquest/utilities/getters";
+import type { WeaponGrip } from "@neverquest/types/unions";
+import {
+  getArmorPrices,
+  getArmorRanges,
+  getFromRange,
+  getGrowthSigmoid,
+  getShieldPrices,
+  getShieldRanges,
+  getWeaponPrices,
+  getWeaponRanges,
+} from "@neverquest/utilities/getters";
 
 export function generateArmor({
   allowNSFW,
@@ -39,27 +40,19 @@ export function generateArmor({
   name?: string;
   tags?: AffixTag[];
 }): Armor {
-  const { coinPrice, protection, scrapPrice, staminaCost, weight } = ARMOR_BASE;
-  const { deflectionRange, dodgeCostModifier, priceModifier, protectionModifier, weightModifier } =
-    ARMOR_SPECIFICATIONS[gearClass];
-  const growthFactor = getGrowthSigmoid(level);
-  const ranges =
-    deflectionRange === undefined
-      ? null
-      : {
-          deflection: {
-            maximum:
-              deflectionRange[0].maximum +
-              (deflectionRange[1].maximum - deflectionRange[0].maximum) * growthFactor,
-            minimum:
-              deflectionRange[0].minimum +
-              (deflectionRange[1].minimum - deflectionRange[0].minimum) * growthFactor,
-          },
-        };
+  const factor = getGrowthSigmoid(level);
+  const { coinPrice, scrapPrice } = getArmorPrices({
+    factor,
+    gearClass,
+  });
+  const { deflection, protection, staminaCost, weight } = getArmorRanges({
+    factor,
+    gearClass,
+  });
 
   return {
-    coinPrice: Math.round(coinPrice * growthFactor * priceModifier),
-    deflection: ranges === null ? 0 : getFromRange(ranges.deflection),
+    coinPrice,
+    deflection: deflection === null ? 0 : getFromRange(deflection),
     gearClass,
     gems: [],
     id: nanoid(),
@@ -76,11 +69,15 @@ export function generateArmor({
         },
         tags,
       }),
-    protection: Math.round(protection * growthFactor * protectionModifier),
-    ranges,
-    scrapPrice: Math.round(scrapPrice * growthFactor * priceModifier),
-    staminaCost: Math.ceil(staminaCost * growthFactor * dodgeCostModifier),
-    weight: Math.ceil(weight * growthFactor * weightModifier),
+    protection: getFromRange(protection),
+    scrapPrice,
+    staminaCost:
+      staminaCost === null
+        ? Infinity
+        : typeof staminaCost === "number"
+        ? staminaCost
+        : getFromRange(staminaCost),
+    weight: getFromRange(weight),
   };
 }
 
@@ -101,22 +98,19 @@ export function generateShield({
   name?: string;
   tags?: AffixTag[];
 }): Shield {
-  const { coinPrice, scrapPrice, stagger, staminaCost, weight } = SHIELD_BASE;
-  const { blockRange, staggerModifier, staminaCostModifier, weightModifier } =
-    SHIELD_SPECIFICATIONS[gearClass];
-  const growthFactor = getGrowthSigmoid(level);
-  const ranges = {
-    block: {
-      maximum:
-        blockRange[0].maximum + (blockRange[1].maximum - blockRange[0].maximum) * growthFactor,
-      minimum:
-        blockRange[0].minimum + (blockRange[1].minimum - blockRange[0].minimum) * growthFactor,
-    },
-  };
+  const factor = getGrowthSigmoid(level);
+  const { coinPrice, scrapPrice } = getShieldPrices({
+    factor,
+    gearClass,
+  });
+  const { block, stagger, staminaCost, weight } = getShieldRanges({
+    factor,
+    gearClass,
+  });
 
   return {
-    block: getFromRange(ranges.block),
-    coinPrice: Math.round(coinPrice * growthFactor),
+    block: getFromRange(block),
+    coinPrice,
     gearClass,
     gems: [],
     id: nanoid(),
@@ -134,17 +128,17 @@ export function generateShield({
         },
         tags,
       }),
-    ranges,
-    scrapPrice: Math.round(scrapPrice * growthFactor),
-    stagger: (stagger.minimum + stagger.attenuation * growthFactor) * staggerModifier,
-    staminaCost: Math.ceil(staminaCost * growthFactor * staminaCostModifier),
-    weight: Math.ceil(weight * growthFactor * weightModifier),
+    scrapPrice,
+    stagger: stagger === null ? 0 : getFromRange(stagger),
+    staminaCost: getFromRange(staminaCost),
+    weight: getFromRange(weight),
   };
 }
 
 export function generateWeapon({
   allowNSFW,
   gearClass,
+  grip,
   hasPrefix,
   hasSuffix,
   level,
@@ -153,41 +147,29 @@ export function generateWeapon({
 }: {
   allowNSFW: boolean;
   gearClass: WeaponClass;
+  grip: WeaponGrip;
   hasPrefix?: boolean;
   hasSuffix?: boolean;
   level: number;
   modality: WeaponModality;
   tags?: AffixTag[];
 }): Weapon {
-  const { coinPrice, damage, rate, scrapPrice, staminaCost, weight } = WEAPON_BASE;
-  const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
-  const growthFactor = getGrowthSigmoid(level);
-  const ranges = {
-    ability: {
-      maximum:
-        abilityChance[0].maximum +
-        (abilityChance[1].maximum - abilityChance[0].maximum) * growthFactor,
-      minimum:
-        abilityChance[0].minimum +
-        (abilityChance[1].minimum - abilityChance[0].minimum) * growthFactor,
-    },
-    damage: {
-      maximum: Math.round(damage.maximum * growthFactor),
-      minimum: Math.round(damage.minimum * growthFactor),
-    },
-    rate: {
-      maximum: rate.maximum - Math.round(ATTACK_RATE_ATTENUATION * growthFactor),
-      minimum: rate.minimum - Math.round(ATTACK_RATE_ATTENUATION * growthFactor),
-    },
-  };
+  const factor = getGrowthSigmoid(level);
+  const { coinPrice, scrapPrice } = getWeaponPrices({ factor });
+  const { abilityChance, damage, range, rate, staminaCost, weight } = getWeaponRanges({
+    factor,
+    gearClass,
+    grip,
+    modality,
+  });
 
   return {
-    abilityChance: getFromRange(ranges.ability),
-    coinPrice: Math.round(coinPrice * growthFactor),
-    damage: getFromRange(ranges.damage),
+    abilityChance: getFromRange(abilityChance),
+    coinPrice,
+    damage: getFromRange(damage),
     gearClass,
     gems: [],
-    grip: "one-handed",
+    grip,
     id: nanoid(),
     isEquipped: false,
     level,
@@ -203,11 +185,11 @@ export function generateWeapon({
       },
       tags,
     }),
-    ranges,
-    rate: getFromRange(ranges.rate),
-    scrapPrice: Math.round(scrapPrice * growthFactor),
-    staminaCost: Math.ceil(staminaCost * growthFactor),
-    weight: Math.ceil(weight * growthFactor),
+    range: modality === "melee" ? 0 : getFromRange(range),
+    rate: getFromRange(rate),
+    scrapPrice,
+    staminaCost: getFromRange(staminaCost),
+    weight: getFromRange(weight),
   };
 }
 

@@ -390,6 +390,10 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "wart",
+    type: ["prefix", "suffix"],
+  },
+  {
     isNSFW: true,
     name: "whore",
     type: ["prefix", "suffix"],

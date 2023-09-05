@@ -5,7 +5,7 @@ export const LOOT = {
   bonus: 50,
   boss: 1.5,
   coinsBase: 250,
-  essenceBase: 400,
+  essenceBase: 300,
   scrapBase: 200,
 };
 
@@ -17,10 +17,10 @@ export const MONSTER_ATTACK_RATE = {
 };
 
 export const MONSTER_DAMAGE = {
-  base: 850,
-  bonus: 80,
+  base: 1000,
+  bonus: 100,
   boss: 0.3,
-  minimum: 6,
+  minimum: 10,
 };
 
 export const MONSTER_HEALTH = {

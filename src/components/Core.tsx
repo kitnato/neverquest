@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { RecoilRoot } from "recoil";
 
@@ -10,11 +9,6 @@ import { SeedContext, useSeed } from "@neverquest/state/seed";
 
 export function Core() {
   const { resetSeed, seed } = useSeed();
-
-  useEffect(() => {
-    // Only works for non-nested routes.
-    window.history.replaceState(null, "", "/");
-  }, []);
 
   return (
     <SeedContext.Provider value={resetSeed}>

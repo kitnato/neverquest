@@ -18,6 +18,7 @@ import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
+import type { WeaponGrip } from "@neverquest/types/unions";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import {
   capitalizeAll,
@@ -25,7 +26,7 @@ import {
   formatPercentage,
 } from "@neverquest/utilities/formatters";
 import { generateWeapon } from "@neverquest/utilities/generators";
-import { getGrowthSigmoid } from "@neverquest/utilities/getters";
+import { getGrowthSigmoid, getWeaponPrices, getWeaponRanges } from "@neverquest/utilities/getters";
 
 export function WeaponOptions() {
   const { weapon: craftedWeapon } = useRecoilValue(blacksmithInventory);
@@ -33,6 +34,7 @@ export function WeaponOptions() {
   const stageValue = useRecoilValue(stage);
 
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
+  const [weaponGrip] = useState<WeaponGrip>("one-handed");
   const [weaponLevel, setWeaponLevel] = useState(stageValue);
 
   const { abilityName, IconAbility, IconGearClass, showingType } =
@@ -40,22 +42,32 @@ export function WeaponOptions() {
 
   const isShowingValue = useRecoilValue(isShowing(showingType));
 
-  const maximumWeaponLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
-  const weapon = generateWeapon({
-    allowNSFW: allowNSFWValue,
+  const factor = getGrowthSigmoid(weaponLevel);
+  const { coinPrice, scrapPrice } = getWeaponPrices({ factor });
+  const { abilityChance, damage, rate, staminaCost, weight } = getWeaponRanges({
+    factor,
     gearClass: weaponClass,
-    hasPrefix: true,
-    hasSuffix: Math.random() <= getGrowthSigmoid(weaponLevel),
-    level: weaponLevel,
+    grip: weaponGrip,
     modality: "melee",
-    tags:
-      weaponLevel < stageValue - 1
-        ? ["lowQuality"]
-        : weaponLevel > maximumWeaponLevel
-        ? ["highQuality"]
-        : undefined,
   });
-  const { ranges, staminaCost, weight } = weapon;
+  const maximumWeaponLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
+
+  const craftWeapon = () =>
+    generateWeapon({
+      allowNSFW: allowNSFWValue,
+      gearClass: weaponClass,
+      grip: weaponGrip,
+      hasPrefix: true,
+      hasSuffix: Math.random() <= getGrowthSigmoid(weaponLevel),
+      level: weaponLevel,
+      modality: "melee",
+      tags:
+        weaponLevel < stageValue - 1
+          ? ["lowQuality"]
+          : weaponLevel > maximumWeaponLevel
+          ? ["highQuality"]
+          : undefined,
+    });
 
   return (
     <>
@@ -106,16 +118,14 @@ export function WeaponOptions() {
         />
 
         <IconDisplay
-          contents={`${ranges.damage.minimum}-${ranges.damage.maximum}`}
+          contents={`${damage.minimum}-${damage.maximum}`}
           Icon={IconWeaponDamage}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Damage"
         />
 
         <IconDisplay
-          contents={`${formatMilliseconds(ranges.rate.minimum)}-${formatMilliseconds(
-            ranges.rate.maximum,
-          )}`}
+          contents={`${formatMilliseconds(rate.minimum)}-${formatMilliseconds(rate.maximum)}`}
           Icon={IconWeaponAttackRate}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Attack rate"
@@ -124,8 +134,8 @@ export function WeaponOptions() {
         <IconDisplay
           contents={
             isShowingValue
-              ? `${formatPercentage(ranges.ability.minimum)}-${formatPercentage(
-                  ranges.ability.maximum,
+              ? `${formatPercentage(abilityChance.minimum)}-${formatPercentage(
+                  abilityChance.maximum,
                 )}`
               : LABEL_UNKNOWN
           }
@@ -135,14 +145,14 @@ export function WeaponOptions() {
         />
 
         <IconDisplay
-          contents={staminaCost}
+          contents={`${staminaCost.minimum}-${staminaCost.maximum}`}
           Icon={IconStamina}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Stamina cost"
         />
 
         <IconDisplay
-          contents={weight}
+          contents={`${weight.minimum}-${weight.maximum}`}
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
@@ -151,7 +161,11 @@ export function WeaponOptions() {
 
       <hr />
 
-      {craftedWeapon === null ? <CraftGear gear={weapon} /> : <CraftedGear gear={craftedWeapon} />}
+      {craftedWeapon === null ? (
+        <CraftGear coinPrice={coinPrice} onCraft={craftWeapon} scrapPrice={scrapPrice} />
+      ) : (
+        <CraftedGear gear={craftedWeapon} />
+      )}
     </>
   );
 }

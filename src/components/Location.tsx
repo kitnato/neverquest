@@ -2,14 +2,14 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ReactComponent as IconLocation } from "@neverquest/icons/location.svg";
-import { location } from "@neverquest/state/encounter";
+import { locationName } from "@neverquest/state/encounter";
 
 export function Location() {
-  const locationValue = useRecoilValue(location);
+  const locationNameValue = useRecoilValue(locationName);
 
   return (
     <IconDisplay
-      contents={locationValue}
+      contents={locationNameValue}
       Icon={IconLocation}
       iconProps={{ overlayPlacement: "bottom" }}
       isAnimated

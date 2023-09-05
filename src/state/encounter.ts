@@ -28,12 +28,12 @@ export const isStageCompleted = withStateKey("isStageCompleted", (key) =>
 
 export const isWilderness = withStateKey("isWilderness", (key) =>
   selector({
-    get: ({ get }) => get(mode) === "wilderness",
+    get: ({ get }) => get(location) === "wilderness",
     key,
   }),
 );
 
-export const location = withStateKey("location", (key) =>
+export const locationName = withStateKey("locationName", (key) =>
   selector({
     get: ({ get }) => {
       if (get(isWilderness)) {
@@ -74,15 +74,7 @@ export const isStageStarted = withStateKey("isStageStarted", (key) =>
   }),
 );
 
-export const stage = withStateKey("stage", (key) =>
-  atom({
-    default: stageMaximum,
-    effects: [handleLocalStorage<number>({ key })],
-    key,
-  }),
-);
-
-export const mode = withStateKey("mode", (key) =>
+export const location = withStateKey("location", (key) =>
   atom<Location>({
     default: "wilderness",
     effects: [handleLocalStorage<Location>({ key })],
@@ -93,6 +85,14 @@ export const mode = withStateKey("mode", (key) =>
 export const progress = withStateKey("progress", (key) =>
   atom({
     default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  }),
+);
+
+export const stage = withStateKey("stage", (key) =>
+  atom({
+    default: stageMaximum,
     effects: [handleLocalStorage<number>({ key })],
     key,
   }),

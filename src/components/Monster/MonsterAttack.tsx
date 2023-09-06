@@ -23,7 +23,6 @@ export function MonsterAttack() {
     factor: isMonsterFrozenValue ? ELEMENTAL_AILMENT_PENALTY.frozen : 1,
     onDelta: defend,
     stop: !isAttackingValue || isMonsterDeadValue || isMonsterStaggeredValue,
-    tmp: "MonsterAttack",
   });
 
   return (

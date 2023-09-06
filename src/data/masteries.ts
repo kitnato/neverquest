@@ -61,3 +61,5 @@ export const MASTERIES_ORDER: Mastery[] = [
   "resilience",
   "stability",
 ];
+
+export const MASTERY_PROGRESS = 1;

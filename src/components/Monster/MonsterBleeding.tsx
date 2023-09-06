@@ -20,13 +20,11 @@ export function MonsterBleeding() {
   useAnimate({
     delta: setMonsterBleedingDelta,
     stop: !isMonsterBleedingValue,
-    tmp: "MonsterBleedingDelta",
   });
 
   useAnimate({
     delta: setMonsterBleedingDuration,
     stop: !isMonsterBleedingValue,
-    tmp: "MonsterBleedingDuration",
   });
 
   if (!canReceiveBleeding) {

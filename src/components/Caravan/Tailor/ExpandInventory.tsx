@@ -2,11 +2,11 @@ import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
+import { TAILORING_EXPANSION, TAILORING_MAXIMUM_PRICE } from "@neverquest/data/caravan";
 import { ENCUMBRANCE } from "@neverquest/data/inventory";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { encumbranceMaximum, hasKnapsack } from "@neverquest/state/inventory";
 import { coins } from "@neverquest/state/resources";
-
 import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function ExpandInventory() {
@@ -16,13 +16,16 @@ export function ExpandInventory() {
 
   const transactResources = useTransactResources();
 
-  const price = Math.round(300 * getGrowthSigmoid(encumbranceMaximumValue - (ENCUMBRANCE - 1)) * 2);
+  const price = Math.ceil(
+    TAILORING_MAXIMUM_PRICE *
+      getGrowthSigmoid((encumbranceMaximumValue - (ENCUMBRANCE - 1)) / TAILORING_EXPANSION),
+  );
   const isAffordable = price <= coinsValue;
   const canExpand = isAffordable && hasKnapsackValue;
 
   const handleExpansion = () => {
     transactResources({ coinsDifference: -price });
-    setEncumbranceMaximum((current) => current + 3);
+    setEncumbranceMaximum((current) => current + TAILORING_EXPANSION);
   };
 
   return (

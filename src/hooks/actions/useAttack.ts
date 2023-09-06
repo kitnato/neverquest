@@ -51,9 +51,10 @@ export function useAttack() {
             get(skills("traumatology")) && gearClass === "blunt" && Math.random() <= abilityChance;
 
           const baseDamage = -get(damageTotal);
-          const totalDamage =
+          const totalDamage = Math.round(
             (hasInflictedCritical ? baseDamage + baseDamage * get(criticalDamage) : baseDamage) *
-            (get(isMonsterAiling("burning")) ? ELEMENTAL_AILMENT_PENALTY.burning : 1);
+              (get(isMonsterAiling("burning")) ? ELEMENTAL_AILMENT_PENALTY.burning : 1),
+          );
           const monsterDeltas: DeltaDisplay = [
             {
               color: "text-danger",

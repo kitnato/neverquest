@@ -5,7 +5,7 @@ import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { blacksmithInventory } from "@neverquest/state/caravan";
-import { canFit, itemsAcquired } from "@neverquest/state/inventory";
+import { canFit } from "@neverquest/state/inventory";
 import type { GearItem } from "@neverquest/types";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 
@@ -14,7 +14,6 @@ export function CraftedGear({ gear }: { gear: GearItem }) {
 
   const canFitValue = useRecoilValue(canFit(weight));
   const setBlacksmithInventory = useSetRecoilState(blacksmithInventory);
-  const setItemsAcquired = useSetRecoilState(itemsAcquired);
 
   const acquireItem = useAcquireItem();
   const toggleEquipGear = useToggleEquipGear();
@@ -37,8 +36,6 @@ export function CraftedGear({ gear }: { gear: GearItem }) {
     if (isWeapon(gear)) {
       setBlacksmithInventory((current) => ({ ...current, weapon: null }));
     }
-
-    setItemsAcquired((current) => [...current, gear]);
 
     if (acquisitionStatus === "autoEquip") {
       toggleEquipGear(gear);

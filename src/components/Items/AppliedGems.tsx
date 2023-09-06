@@ -7,7 +7,7 @@ import { armor, weapon } from "@neverquest/state/inventory";
 import { gearElementalEffects } from "@neverquest/state/statistics";
 import type { ElementalGear } from "@neverquest/types/unions";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
-import { formatMilliseconds } from "@neverquest/utilities/formatters";
+import { formatTime } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function AppliedGems({ slot }: { slot: ElementalGear }) {
@@ -38,7 +38,7 @@ export function AppliedGems({ slot }: { slot: ElementalGear }) {
                 <span className={ELEMENTALS[elemental].color}>{`${damage}`}</span>
                 {" · "}
                 <IconImage Icon={ELEMENTALS[elemental].Icon} size="tiny" />
-                {` ${formatMilliseconds(duration)} · `}
+                {` ${formatTime(duration)} · `}
                 <IconImage Icon={IconGem} size="tiny" />
                 &nbsp;
                 {stack}

@@ -28,7 +28,7 @@ import {
 import { powerBonus } from "@neverquest/state/statistics";
 import type { Reserve } from "@neverquest/types/unions";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
-import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
+import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 
 const RESERVE_CHANGE = {
   health: useChangeHealth,
@@ -53,10 +53,10 @@ export function Regeneration({ type }: { type: Reserve }) {
   useAnimate({
     delta: setRegenerationDuration,
     onDelta: () => {
+      console.log("regen");
       changeReserve({ isRegeneration: true });
     },
-    stop: isReserveAtMaximum || isRecoveringValue,
-    tmp: "Regeneration",
+    stop: isRecoveringValue || isReserveAtMaximum,
   });
 
   useDeltaText({
@@ -79,7 +79,7 @@ export function Regeneration({ type }: { type: Reserve }) {
 
                   <td>
                     <IconImage Icon={IconRegenerationRate} size="tiny" />
-                    &nbsp;{formatMilliseconds(baseRegenerationRate)}
+                    &nbsp;{formatTime(baseRegenerationRate)}
                   </td>
                 </tr>
 

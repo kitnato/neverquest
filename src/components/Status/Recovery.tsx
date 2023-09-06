@@ -17,7 +17,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { masteries, masteryStatistic } from "@neverquest/state/masteries";
 import { recoveryRate } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
-import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
+import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 
 export function Recovery() {
   const isRecoveringValue = useRecoilValue(isRecovering);
@@ -29,7 +29,6 @@ export function Recovery() {
   useAnimate({
     delta: setRecoveryDuration,
     stop: !isRecoveringValue,
-    tmp: "Recovery",
   });
 
   useDeltaText({
@@ -56,7 +55,7 @@ export function Recovery() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
 
-                      <td>{formatMilliseconds(RECOVERY_RATE)}</td>
+                      <td>{formatTime(RECOVERY_RATE)}</td>
                     </tr>
 
                     <tr>

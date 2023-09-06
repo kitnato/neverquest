@@ -67,7 +67,7 @@ export const bleedTick = withStateKey("bleedTick", (key) =>
           proportion: get(masteryStatistic("cruelty")),
           ticks,
         }),
-        duration: duration / ticks,
+        duration: Math.round(duration / ticks),
       };
     },
     key,

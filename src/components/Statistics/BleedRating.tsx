@@ -16,7 +16,7 @@ import { masteryStatistic } from "@neverquest/state/masteries";
 import { skills } from "@neverquest/state/skills";
 import { bleed, bleedRating, bleedTick, damageTotal } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
+import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 
 export function BleedRating() {
   const bleedValue = useRecoilValue(bleed);
@@ -71,13 +71,13 @@ export function BleedRating() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
 
-                      <td>{formatMilliseconds(duration)}</td>
+                      <td>{formatTime(duration)}</td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Ticks:</td>
 
-                      <td>{`${ticks} (every ${formatMilliseconds(bleedTickDuration)})`}</td>
+                      <td>{`${ticks} (every ${formatTime(bleedTickDuration)})`}</td>
                     </tr>
 
                     <tr>

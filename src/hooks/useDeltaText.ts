@@ -9,11 +9,7 @@ import {
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
 import type { BootstrapTextVariant, DeltaDisplay } from "@neverquest/types/ui";
 import type { DeltaText } from "@neverquest/types/unions";
-import {
-  formatFloat,
-  formatMilliseconds,
-  formatPercentage,
-} from "@neverquest/utilities/formatters";
+import { formatFloat, formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 
 export function useDeltaText({
   atomDelta,
@@ -52,7 +48,7 @@ export function useDeltaText({
       color: isPositive ? positiveColor : negativeColor,
       value: `${isPositive ? "+" : isTime ? "-" : ""}${
         isTime
-          ? formatMilliseconds(Math.abs(difference))
+          ? formatTime(Math.abs(difference))
           : type === "percentage"
           ? formatPercentage(difference)
           : type === "float"

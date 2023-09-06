@@ -5,8 +5,8 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { HealthMeter } from "@neverquest/components/Reserves/HealthMeter";
 import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
+import { ReserveMeter } from "@neverquest/components/Reserves/ReserveMeter";
 import { RESERVES } from "@neverquest/data/reserves";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
@@ -31,7 +31,6 @@ export function Health() {
   useAnimate({
     delta: setPoisonDuration,
     stop: !isPoisonedValue,
-    tmp: "Health",
   });
 
   return (
@@ -79,7 +78,7 @@ export function Health() {
               trigger={isShowingHealthDetails ? ["hover", "focus"] : []}
             >
               <div className="w-100">
-                <HealthMeter />
+                <ReserveMeter type="health" />
               </div>
             </OverlayTrigger>
 

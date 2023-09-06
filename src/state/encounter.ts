@@ -1,5 +1,6 @@
 import { atom, selector } from "recoil";
 
+import { PROGRESS } from "@neverquest/data/location";
 import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { Location } from "@neverquest/types/unions";
@@ -52,7 +53,12 @@ export const locationName = withStateKey("locationName", (key) =>
 
 export const progressMaximum = withStateKey("progressMaximum", (key) =>
   selector({
-    get: ({ get }) => (get(isBoss) ? 1 : 2 + Math.round(98 * getGrowthSigmoid(get(stage)))),
+    get: ({ get }) =>
+      get(isBoss)
+        ? 1
+        : Math.round(
+            PROGRESS.minimum + (PROGRESS.maximum - PROGRESS.minimum) * getGrowthSigmoid(get(stage)),
+          ),
     key,
   }),
 );

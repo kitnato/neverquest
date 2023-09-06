@@ -17,3 +17,7 @@ export const KEY_SETTINGS = `${KEY_STORAGE_PREFIX}-settings`;
 export const LABEL_MAXIMUM = "MAX";
 export const LABEL_EMPTY = "--";
 export const LABEL_UNKNOWN = "???";
+
+export const MILLISECONDS_IN_HOUR = 3600000;
+export const MILLISECONDS_IN_MINUTE = 60000;
+export const MILLISECONDS_IN_SECOND = 1000;

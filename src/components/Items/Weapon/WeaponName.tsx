@@ -21,8 +21,8 @@ import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/co
 import {
   capitalizeAll,
   formatFloat,
-  formatMilliseconds,
   formatPercentage,
+  formatTime,
 } from "@neverquest/utilities/formatters";
 import { getDamagePerRate } from "@neverquest/utilities/getters";
 
@@ -86,7 +86,7 @@ export function WeaponName({
 
                 <td>
                   <IconImage Icon={IconWeaponAttackRate} size="tiny" />
-                  &nbsp;{formatMilliseconds(rate)}
+                  &nbsp;{formatTime(rate)}
                   {showComparison && (
                     <GearComparison
                       difference={rate - weaponEquippedValue.rate}

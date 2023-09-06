@@ -17,7 +17,7 @@ import { masteryStatistic } from "@neverquest/state/masteries";
 import { skills } from "@neverquest/state/skills";
 import { staggerRating, staggerWeapon } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
+import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 
 export function StaggerRating() {
   const { stagger } = useRecoilValue(shield);
@@ -75,7 +75,7 @@ export function StaggerRating() {
                         &nbsp;Might:
                       </td>
 
-                      <td>{`${formatMilliseconds(mightValue)}`}</td>
+                      <td>{`${formatTime(mightValue)}`}</td>
                     </tr>
                   </DetailsTable>
                 </Popover.Body>

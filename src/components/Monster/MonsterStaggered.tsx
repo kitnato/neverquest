@@ -18,7 +18,6 @@ export function MonsterStaggered() {
   useAnimate({
     delta: setMonsterStaggerDuration,
     stop: !isMonsterStaggeredValue,
-    tmp: "MonsterStaggered",
   });
 
   if (!canBeStaggered) {

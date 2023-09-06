@@ -24,7 +24,7 @@ export function useGenerateMonster() {
         const get = getSnapshotGetter(snapshot);
 
         const allowNSFWValue = get(allowNSFW);
-        const growthFactor = getGrowthSigmoid(get(stage));
+        const factor = getGrowthSigmoid(get(stage));
 
         set(
           monsterName,
@@ -32,8 +32,10 @@ export function useGenerateMonster() {
             ? generateName({ allowNSFW: allowNSFWValue, hasTitle: true })
             : generateCreature({
                 allowNSFW: allowNSFWValue,
-                hasPrefix: Math.random() <= prefix + (1 - prefix) * growthFactor,
-                hasSuffix: Math.random() <= suffix + (1 - suffix) * growthFactor,
+                hasPrefix:
+                  Math.random() <= prefix.minimum + (prefix.maximum - prefix.minimum) * factor,
+                hasSuffix:
+                  Math.random() <= suffix.minimum + (suffix.maximum - suffix.minimum) * factor,
                 type: ["monster"],
               }),
         );

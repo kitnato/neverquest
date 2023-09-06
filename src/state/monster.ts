@@ -1,14 +1,16 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import { BLIGHT, ELEMENTAL_AILMENT_PENALTY, POISON } from "@neverquest/data/combat";
+import { ELEMENTAL_AILMENT_PENALTY } from "@neverquest/data/combat";
 import { ELEMENTALS } from "@neverquest/data/inventory";
 import {
+  BLIGHT,
   BOSS_STAGE_INTERVAL,
   BOSS_STAGE_START,
   LOOT,
   MONSTER_ATTACK_RATE,
   MONSTER_DAMAGE,
   MONSTER_HEALTH,
+  POISON,
 } from "@neverquest/data/monster";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
@@ -88,12 +90,12 @@ export const isMonsterDead = withStateKey("isMonsterDead", (key) =>
 export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, bonus, boss, reduction } = MONSTER_ATTACK_RATE;
+      const { bonus, boss, maximum, minimum } = MONSTER_ATTACK_RATE;
 
       return (
-        base -
+        maximum -
         Math.round(
-          (reduction * getGrowthMonsterPower(get(stage)) +
+          ((maximum - minimum) * getGrowthMonsterPower(get(stage)) +
             bonus * getGrowthSigmoid(get(progress))) *
             (1 - (get(isBoss) ? boss : 0)),
         )
@@ -108,15 +110,18 @@ export const monsterBlightChance = withStateKey("monsterBlightChance", (key) =>
     get: ({ get }) => {
       const stageValue = get(stage);
 
-      const { boss, chanceBase, chanceMaximum, stageRequired } = BLIGHT;
+      const {
+        boss,
+        chance: { maximum, minimum },
+        stageRequired,
+      } = BLIGHT;
 
       if (stageValue < stageRequired) {
         return 0;
       }
 
       return (
-        (chanceBase + chanceMaximum * getGrowthMonsterPower(stageValue)) *
-        (1 + (get(isBoss) ? boss : 0))
+        (minimum + maximum * getGrowthMonsterPower(stageValue)) * (1 + (get(isBoss) ? boss : 0))
       );
     },
     key,
@@ -126,12 +131,13 @@ export const monsterBlightChance = withStateKey("monsterBlightChance", (key) =>
 export const monsterDamage = withStateKey("monsterDamage", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, bonus, boss, minimum } = MONSTER_DAMAGE;
+      const { bonus, boss, maximum, minimum } = MONSTER_DAMAGE;
 
       return (
         minimum +
         Math.round(
-          (base * getGrowthMonsterPower(get(stage)) + bonus * getGrowthSigmoid(get(progress))) *
+          ((maximum - minimum) * getGrowthMonsterPower(get(stage)) +
+            bonus * getGrowthSigmoid(get(progress))) *
             (1 + (get(isBoss) ? boss : 0)) *
             (get(isMonsterAiling("shocked")) ? ELEMENTAL_AILMENT_PENALTY.shocked : 1),
         )
@@ -157,12 +163,13 @@ export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (ke
 export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, bonus, boss, minimum } = MONSTER_HEALTH;
+      const { bonus, boss, maximum, minimum } = MONSTER_HEALTH;
 
       return (
         minimum +
         Math.round(
-          (base * getGrowthMonsterPower(get(stage)) + bonus * getGrowthSigmoid(get(progress))) *
+          ((maximum - minimum) * getGrowthMonsterPower(get(stage)) +
+            bonus * getGrowthSigmoid(get(progress))) *
             (1 + (get(isBoss) ? boss : 0)),
         )
       );
@@ -174,19 +181,21 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
 export const monsterLoot = withStateKey("monsterLoot", (key) =>
   selector({
     get: ({ get }) => {
-      const { bonus, boss, coinsBase, essenceBase, scrapBase } = LOOT;
+      const { bonus, boss, coins, essence, scrap } = LOOT;
 
       const isBossValue = get(isBoss);
       const stageValue = get(stage);
-      const growthFactor = getGrowthSigmoid(stageValue);
+      const factor = getGrowthSigmoid(stageValue);
       const progressBonus = getGrowthSigmoid(get(progress)) * bonus;
       const totalBonus = (1 + get(lootBonus)) * (1 + (isBossValue ? boss : 0));
 
       return {
-        coins: Math.round((progressBonus + coinsBase * growthFactor) * totalBonus),
-        essence: Math.round((progressBonus + essenceBase * growthFactor) * totalBonus),
-        gems: isBossValue ? 1 + (stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL : 0,
-        scrap: Math.round((progressBonus + scrapBase * growthFactor) * totalBonus),
+        coins: Math.round((progressBonus + coins * factor) * totalBonus),
+        essence: Math.round((progressBonus + essence * factor) * totalBonus),
+        gems: isBossValue
+          ? 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL)
+          : 0,
+        scrap: Math.round((progressBonus + scrap * factor) * totalBonus),
       };
     },
     key,
@@ -198,15 +207,18 @@ export const monsterPoisonChance = withStateKey("monsterPoisonChance", (key) =>
     get: ({ get }) => {
       const stageValue = get(stage);
 
-      const { boss, chanceBase, chanceMaximum, stageRequired } = POISON;
+      const {
+        boss,
+        chance: { maximum, minimum },
+        stageRequired,
+      } = POISON;
 
       if (stageValue < stageRequired) {
         return 0;
       }
 
       return (
-        (chanceBase + chanceMaximum * getGrowthMonsterPower(stageValue)) *
-        (1 + (get(isBoss) ? boss : 0))
+        (minimum + maximum * getGrowthMonsterPower(stageValue)) * (1 + (get(isBoss) ? boss : 0))
       );
     },
     key,
@@ -216,9 +228,11 @@ export const monsterPoisonChance = withStateKey("monsterPoisonChance", (key) =>
 export const monsterPoisonLength = withStateKey("monsterPoisonLength", (key) =>
   selector({
     get: ({ get }) => {
-      const { durationBase, durationMaximum } = POISON;
+      const {
+        duration: { maximum, minimum },
+      } = POISON;
 
-      return durationBase + durationMaximum * getGrowthMonsterPower(get(stage));
+      return minimum + maximum * getGrowthMonsterPower(get(stage));
     },
     key,
   }),
@@ -227,9 +241,11 @@ export const monsterPoisonLength = withStateKey("monsterPoisonLength", (key) =>
 export const monsterPoisonMagnitude = withStateKey("monsterPoisonMagnitude", (key) =>
   selector({
     get: ({ get }) => {
-      const { magnitudeBase, magnitudeMaximum } = POISON;
+      const {
+        magnitude: { maximum, minimum },
+      } = POISON;
 
-      return magnitudeBase + magnitudeMaximum * getGrowthMonsterPower(get(stage));
+      return minimum + maximum * getGrowthMonsterPower(get(stage));
     },
     key,
   }),

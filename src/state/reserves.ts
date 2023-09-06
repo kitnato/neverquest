@@ -1,7 +1,7 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import { BLIGHT } from "@neverquest/data/combat";
+import { BLIGHT } from "@neverquest/data/monster";
 import { HEALTH_LOW_THRESHOLD, RESERVES } from "@neverquest/data/reserves";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { attributes } from "@neverquest/state/attributes";
@@ -11,14 +11,29 @@ import {
   reserveRegenerationAmount,
   reserveRegenerationRate,
 } from "@neverquest/state/statistics";
+import type { BlightMagnitude } from "@neverquest/types";
 import type { Reserve } from "@neverquest/types/unions";
 import { getComputedStatistic } from "@neverquest/utilities/getters";
 
 // SELECTORS
 
-export const blightIncrement = withStateKey("blightIncrement", (key) =>
+export const blightAmount = withStateKey("blightAmount", (key) =>
   selector({
     get: ({ get }) => Math.round(BLIGHT.increment * get(staminaMaximum)),
+    key,
+  }),
+);
+
+export const blightMagnitude = withStateKey("blightMagnitude", (key) =>
+  selector<BlightMagnitude>({
+    get: ({ get }) => {
+      const blightValue = get(blight);
+
+      return {
+        amount: blightValue * get(blightAmount),
+        percentage: blightValue * BLIGHT.increment,
+      };
+    },
     key,
   }),
 );
@@ -84,7 +99,7 @@ export const regenerationRate = withStateKey("regenerationRate", (key) =>
 
 export const isBlighted = withStateKey("isBlighted", (key) =>
   selector({
-    get: ({ get }) => get(poisonDuration) > 0,
+    get: ({ get }) => get(blight) > 0,
     key,
   }),
 );
@@ -133,7 +148,7 @@ export const staminaMaximum = withStateKey("staminaMaximum", (key) =>
 export const staminaMaximumTotal = withStateKey("staminaMaximumTotal", (key) =>
   selector({
     get: ({ get }) => {
-      const newMaximum = get(staminaMaximum) - get(blight) * get(blightIncrement);
+      const newMaximum = get(staminaMaximum) - get(blightMagnitude).amount;
 
       if (newMaximum < 0) {
         return 0;

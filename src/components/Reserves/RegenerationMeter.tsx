@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useRecoilValue, useResetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
@@ -17,32 +17,48 @@ import {
   regenerationRate,
 } from "@neverquest/state/reserves";
 import type { Reserve } from "@neverquest/types/unions";
-import { formatMilliseconds } from "@neverquest/utilities/formatters";
+import { formatTime } from "@neverquest/utilities/formatters";
 
 export function RegenerationMeter({ type }: { type: Reserve }) {
   const isHealth = type === "health";
 
-  const regenerationDurationValue = useRecoilValue(regenerationDuration(type));
+  const [regenerationDurationValue, setRegenerationDuration] = useRecoilState(
+    regenerationDuration(type),
+  );
   const isReserveAtMaximum = useRecoilValue(isHealth ? isHealthAtMaximum : isStaminaAtMaximum);
+  const isAiling = useRecoilValue(isHealth ? isPoisoned : isBlighted);
   const regenerationAmountValue = useRecoilValue(regenerationAmount(type));
   const regenerationRateValue = useRecoilValue(regenerationRate(type));
-  const isBlightedValue = useRecoilValue(isBlighted);
-  const isPoisonedValue = useRecoilValue(isPoisoned);
   const isRecoveringValue = useRecoilValue(isRecovering);
   const resetRegenerationDuration = useResetRecoilState(regenerationDuration(type));
 
   const { label } = RESERVES[type];
-  const isAiling = isHealth ? isPoisonedValue : isBlightedValue;
   const ReserveIcon = isHealth ? IconHealth : IconStamina;
   const regenerationProgress =
     regenerationDurationValue === 0 ? 0 : regenerationRateValue - regenerationDurationValue;
 
-  // Needed to catch attribute resets and poison/blight penalties.
   useEffect(() => {
-    if (isAiling && isReserveAtMaximum) {
-      resetRegenerationDuration();
+    if (isAiling) {
+      // Catches attribute resets and poison/blight penalties.
+      if (isReserveAtMaximum && regenerationDurationValue !== 0) {
+        console.log("reset regen");
+        resetRegenerationDuration();
+      }
+
+      // TODO - Catches poison/blight penalty changes.
+      else if (!isReserveAtMaximum && regenerationDurationValue === 0) {
+        console.log("ailment change");
+        setRegenerationDuration(regenerationAmountValue);
+      }
     }
-  }, [isAiling, isReserveAtMaximum, resetRegenerationDuration]);
+  }, [
+    isAiling,
+    isReserveAtMaximum,
+    regenerationAmountValue,
+    regenerationDurationValue,
+    resetRegenerationDuration,
+    setRegenerationDuration,
+  ]);
 
   const details = (() => {
     if (isRecoveringValue) {
@@ -55,7 +71,7 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
           {`${label} regeneration`}
           <br />
           <IconImage Icon={ReserveIcon} size="tiny" />
-          &nbsp;{`${regenerationAmountValue} per ${formatMilliseconds(regenerationRateValue)}`}
+          &nbsp;{`${regenerationAmountValue} per ${formatTime(regenerationRateValue)}`}
         </span>
       );
     }
@@ -66,7 +82,7 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
         <br />
         <IconImage Icon={ReserveIcon} size="tiny" />
         &nbsp;
-        {`${regenerationAmountValue} in ${formatMilliseconds(
+        {`${regenerationAmountValue} in ${formatTime(
           regenerationRateValue - regenerationProgress,
         )}`}
       </span>

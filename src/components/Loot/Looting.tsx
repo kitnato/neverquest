@@ -22,7 +22,6 @@ export function Looting() {
     delta: setLootingDuration,
     onDelta: progression,
     stop: !isLootingValue,
-    tmp: "Looting",
   });
 
   if (!isMonsterDeadValue || isStageCompletedValue) {

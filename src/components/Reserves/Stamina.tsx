@@ -6,7 +6,7 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
-import { StaminaMeter } from "@neverquest/components/Reserves/StaminaMeter";
+import { ReserveMeter } from "@neverquest/components/Reserves/ReserveMeter";
 import { RESERVES } from "@neverquest/data/reserves";
 import { ReactComponent as IconEndurance } from "@neverquest/icons/endurance.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
@@ -74,7 +74,7 @@ export function Stamina() {
               trigger={isShowingStaminaDetails ? ["hover", "focus"] : []}
             >
               <div className="w-100">
-                <StaminaMeter />
+                <ReserveMeter type="stamina" />
               </div>
             </OverlayTrigger>
 

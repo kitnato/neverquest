@@ -28,7 +28,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { isMonsterDead } from "@neverquest/state/monster";
 import { attackRate, attackRateTotal, powerBonus } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
-import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
+import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 
 export function Attack() {
   const attackRateValue = useRecoilValue(attackRate);
@@ -55,7 +55,6 @@ export function Attack() {
       isLootingValue ||
       isMonsterDeadValue ||
       isRecoveringValue,
-    tmp: "Attack",
   });
 
   useDeltaText({
@@ -86,7 +85,7 @@ export function Attack() {
 
                       <td>
                         <IconImage Icon={IconWeaponAttackRate} size="tiny" />
-                        &nbsp;{formatMilliseconds(weaponValue.rate)}
+                        &nbsp;{formatTime(weaponValue.rate)}
                       </td>
                     </tr>
 

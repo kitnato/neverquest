@@ -3,19 +3,17 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { inventory } from "@neverquest/state/inventory";
-import { blight } from "@neverquest/state/reserves";
+import { blight, isBlighted } from "@neverquest/state/reserves";
 import type { ConsumableItem } from "@neverquest/types";
 
 export function ConsumeSalve({ consumable }: { consumable: ConsumableItem }) {
-  const blightValue = useRecoilValue(blight);
   const resetBlight = useResetRecoilState(blight);
+  const isBlightedValue = useRecoilValue(isBlighted);
   const setInventory = useSetRecoilState(inventory);
 
   const changeStamina = useChangeStamina();
 
-  const isBlighted = blightValue > 0;
-
-  const cure = () => {
+  const handleCure = () => {
     resetBlight();
 
     changeStamina({
@@ -32,11 +30,11 @@ export function ConsumeSalve({ consumable }: { consumable: ConsumableItem }) {
 
   return (
     <OverlayTrigger
-      overlay={<Tooltip>{!isBlighted && <div>Not blighted!</div>}</Tooltip>}
-      trigger={!isBlighted ? ["hover", "focus"] : []}
+      overlay={<Tooltip>{!isBlightedValue && <div>Not blighted!</div>}</Tooltip>}
+      trigger={!isBlightedValue ? ["hover", "focus"] : []}
     >
       <span>
-        <Button disabled={!isBlighted} onClick={cure} variant="outline-dark">
+        <Button disabled={!isBlightedValue} onClick={handleCure} variant="outline-dark">
           Apply
         </Button>
       </span>

@@ -96,7 +96,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     staminaCost: null,
     weight: [
       { maximum: 7, minimum: 5 },
-      { maximum: 120, minimum: 110 },
+      { maximum: 100, minimum: 90 },
     ],
   },
   reinforced: {
@@ -113,11 +113,11 @@ export const ARMOR_SPECIFICATIONS: Record<
     scrapPrice: 3000,
     staminaCost: [
       { maximum: 5, minimum: 3 },
-      { maximum: 50, minimum: 45 },
+      { maximum: 40, minimum: 35 },
     ],
     weight: [
       { maximum: 5, minimum: 3 },
-      { maximum: 90, minimum: 80 },
+      { maximum: 80, minimum: 70 },
     ],
   },
 };
@@ -333,7 +333,7 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
     Icon: IconPower,
     item: {
       coinPrice: 500,
-      description: "Grants a bonus to all attributes based on power level.",
+      description: "Boosts all attributes based on power level.",
       id: nanoid(),
       type: "tome of power",
       weight: 10,

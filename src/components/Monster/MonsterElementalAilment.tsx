@@ -20,7 +20,6 @@ export function MonsterElementalAilment({ type }: { type: Elemental }) {
   useAnimate({
     delta: setMonsterAilment,
     stop: !isMonsterAilingValue,
-    tmp: "MonsterElementalAilment",
   });
 
   if (armorElementalEffects[type].duration === 0 && weaponElementalEffects[type].duration === 0) {

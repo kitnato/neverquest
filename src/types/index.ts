@@ -41,6 +41,11 @@ export type BlacksmithInventory = {
   weapon: Weapon | null;
 };
 
+export type BlightMagnitude = {
+  amount: number;
+  percentage: number;
+};
+
 export type ConsumableItem = ItemBase & {
   description: string;
   type: Consumable;

@@ -20,11 +20,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
 import type { WeaponGrip } from "@neverquest/types/unions";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
-import {
-  capitalizeAll,
-  formatMilliseconds,
-  formatPercentage,
-} from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 import { generateWeapon } from "@neverquest/utilities/generators";
 import { getGrowthSigmoid, getWeaponPrices, getWeaponRanges } from "@neverquest/utilities/getters";
 
@@ -125,7 +121,7 @@ export function WeaponOptions() {
         />
 
         <IconDisplay
-          contents={`${formatMilliseconds(rate.minimum)}-${formatMilliseconds(rate.maximum)}`}
+          contents={`${formatTime(rate.minimum)}-${formatTime(rate.maximum)}`}
           Icon={IconWeaponAttackRate}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Attack rate"

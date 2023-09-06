@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
 
-import { LOCATION_AFFIX_BASE } from "@neverquest/data/location";
+import { LOCATION_NAME } from "@neverquest/data/location";
 import { generateArtifact } from "@neverquest/LOCRAN/generate/generateArtifact";
 import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
 import type {
@@ -194,12 +194,12 @@ export function generateWeapon({
 }
 
 export function generateWilderness({ allowNSFW, stage }: { allowNSFW: boolean; stage: number }) {
-  const { prefix, suffix } = LOCATION_AFFIX_BASE;
-  const growthFactor = getGrowthSigmoid(stage);
+  const { prefix, suffix } = LOCATION_NAME;
+  const factor = getGrowthSigmoid(stage);
 
   return generateLocation({
     allowNSFW,
-    hasPrefix: Math.random() <= prefix.minimum + prefix.attenuation * growthFactor,
-    hasSuffix: Math.random() <= suffix.minimum + suffix.attenuation * growthFactor,
+    hasPrefix: Math.random() <= prefix.minimum + (prefix.maximum - prefix.minimum) * factor,
+    hasSuffix: Math.random() <= suffix.minimum + (suffix.maximum - suffix.minimum) * factor,
   });
 }

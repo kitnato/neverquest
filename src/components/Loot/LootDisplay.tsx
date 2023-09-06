@@ -8,12 +8,20 @@ import { Looting } from "@neverquest/components/Loot/Looting";
 import { ReactComponent as IconLooted } from "@neverquest/icons/loot.svg";
 import { progress } from "@neverquest/state/encounter";
 import { hasLooted, itemsLoot } from "@neverquest/state/resources";
+import { isGear, isStackable, isTrinket } from "@neverquest/types/type-guards";
 import { getAnimationClass } from "@neverquest/utilities/getters";
+import { stackItems } from "@neverquest/utilities/helpers";
 
 export function LootDisplay() {
   const hasLootedValue = useRecoilValue(hasLooted);
   const itemsLootValue = useRecoilValue(itemsLoot);
   const progressValue = useRecoilValue(progress);
+
+  const stackItemsLoot = [
+    ...stackItems(itemsLootValue.filter(isGear).sort((a, b) => a.name.localeCompare(b.name))),
+    ...stackItems(itemsLootValue.filter(isTrinket).sort((a, b) => a.type.localeCompare(b.type))),
+    ...stackItems(itemsLootValue.filter(isStackable).sort((a, b) => a.type.localeCompare(b.type))),
+  ];
 
   return (
     <Stack gap={3}>
@@ -47,8 +55,8 @@ export function LootDisplay() {
                   </Row>
                 )}
 
-                {itemsLootValue.map((item) => (
-                  <ItemDisplay item={item} key={item.id} />
+                {stackItemsLoot.map(({ item, stack }) => (
+                  <ItemDisplay item={item} key={item.id} stack={stack} />
                 ))}
               </Stack>
             )}

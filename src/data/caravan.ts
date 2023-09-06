@@ -113,7 +113,7 @@ export const CREW_ORDER: Crew[] = Object.entries(CREW)
   .sort(([, a], [, b]) => a.requiredStage - b.requiredStage)
   .map(([type]) => type as Crew);
 
-export const OCCULTIST_PURGE_PRICE_MULTIPLIER = 0.33;
+export const OCCULTIST_PURGE_PRICE_MULTIPLIER = 0.1;
 
 export const MEDIC_PRICE_SURGERY = 6;
 export const MEDIC_PRICE_SURGERY_CRITICAL = 15;
@@ -191,6 +191,9 @@ export const MERCHANT_OFFERS: Record<
   ],
   25: [{ name: "tome of power", type: "trinket" }],
 };
+
+export const TAILORING_EXPANSION = 3;
+export const TAILORING_MAXIMUM_PRICE = 300;
 
 export const TRANSMUTE_COST = 3;
 export const TRANSMUTE_YIELD = 1;

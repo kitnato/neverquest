@@ -7,7 +7,7 @@ import { monsterBleedingDelta } from "@neverquest/state/deltas";
 import { isMonsterAiling, monsterAilmentDuration } from "@neverquest/state/monster";
 import { bleedTick } from "@neverquest/state/statistics";
 import { LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatMilliseconds } from "@neverquest/utilities/formatters";
+import { formatTime } from "@neverquest/utilities/formatters";
 
 export function MonsterBleedingMeter() {
   const { damage, duration } = useRecoilValue(bleedTick);
@@ -37,9 +37,7 @@ export function MonsterBleedingMeter() {
   return (
     <LabelledProgressBar
       disableTransitions
-      label={
-        isMonsterBleedingValue ? formatMilliseconds(monsterBleedingDurationValue) : LABEL_EMPTY
-      }
+      label={isMonsterBleedingValue ? formatTime(monsterBleedingDurationValue) : LABEL_EMPTY}
       value={(monsterBleedingDurationValue / duration) * 100}
       variant="secondary"
     />

@@ -5,14 +5,14 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
-import { ReactComponent as IconPoisonRating } from "@neverquest/icons/poison-rating.svg";
+import { ReactComponent as IconPoison } from "@neverquest/icons/poison.svg";
 import {
   monsterPoisonChance,
   monsterPoisonLength,
   monsterPoisonMagnitude,
 } from "@neverquest/state/monster";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_MAXIMUM } from "@neverquest/utilities/constants";
-import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
+import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 
 export function MonsterPoisonRating() {
   const monsterPoisonChanceValue = useRecoilValue(monsterPoisonChance);
@@ -52,7 +52,7 @@ export function MonsterPoisonRating() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
 
-                    <td>{formatMilliseconds(monsterPoisonLengthValue)}</td>
+                    <td>{formatTime(monsterPoisonLengthValue)}</td>
                   </tr>
                 </DetailsTable>
               </Popover.Body>
@@ -66,7 +66,7 @@ export function MonsterPoisonRating() {
           </span>
         </OverlayTrigger>
       }
-      Icon={IconPoisonRating}
+      Icon={IconPoison}
       isAnimated
       tooltip="Poison rating"
     />

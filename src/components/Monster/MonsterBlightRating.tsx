@@ -4,10 +4,10 @@ import { useRecoilValue } from "recoil";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { ReactComponent as IconBlightRating } from "@neverquest/icons/blight-rating.svg";
+import { ReactComponent as IconBlight } from "@neverquest/icons/blight.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { monsterBlightChance } from "@neverquest/state/monster";
-import { blightIncrement, isPoisoned } from "@neverquest/state/reserves";
+import { blightAmount, isPoisoned } from "@neverquest/state/reserves";
 import {
   CLASS_TABLE_CELL_ITALIC,
   LABEL_EMPTY,
@@ -16,7 +16,7 @@ import {
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function MonsterBlightRating() {
-  const blightIncrementValue = useRecoilValue(blightIncrement);
+  const blightAmountValue = useRecoilValue(blightAmount);
   const isPoisonedValue = useRecoilValue(isPoisoned);
   const monsterBlightChanceValue = useRecoilValue(monsterBlightChance);
 
@@ -44,7 +44,8 @@ export function MonsterBlightRating() {
                     <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
 
                     <td>
-                      {-blightIncrementValue}&nbsp;
+                      {`-${blightAmountValue}`}
+                      &nbsp;
                       <IconImage Icon={IconStamina} size="tiny" />
                       &nbsp;{LABEL_MAXIMUM}
                     </td>
@@ -56,12 +57,12 @@ export function MonsterBlightRating() {
         >
           <span>
             {isPoisonedValue
-              ? Math.round(monsterBlightChanceValue * blightIncrementValue * 100)
+              ? Math.round(monsterBlightChanceValue * blightAmountValue * 100)
               : LABEL_EMPTY}
           </span>
         </OverlayTrigger>
       }
-      Icon={IconBlightRating}
+      Icon={IconBlight}
       isAnimated
       tooltip="Blight rating"
     />

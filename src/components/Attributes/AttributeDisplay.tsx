@@ -16,7 +16,7 @@ import {
   attributes,
   isAttributeAtMaximum,
 } from "@neverquest/state/attributes";
-import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
+import { isStageCompleted, isStageStarted, isWilderness } from "@neverquest/state/encounter";
 import type { Attribute } from "@neverquest/types/unions";
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
@@ -32,12 +32,13 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
   const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(type));
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isStageStartedValue = useRecoilValue(isStageStarted);
+  const isWildernessValue = useRecoilValue(isWilderness);
 
   const increaseAttribute = useIncreaseAttribute();
 
   const { description, Icon } = ATTRIBUTES[type];
-  const canIncrease =
-    areAttributesIncreasableValue && (isStageCompletedValue || !isStageStartedValue);
+  const isUnsafe = isStageStartedValue && !isStageCompletedValue && isWildernessValue;
+  const canIncrease = areAttributesIncreasableValue && !isUnsafe;
   const name = capitalizeAll(type);
 
   return (
@@ -63,9 +64,7 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
                       &nbsp;{attributeCostValue}
                     </div>
 
-                    {isStageStartedValue && !isStageCompletedValue && (
-                      <div>Monsters are lurking!</div>
-                    )}
+                    {isUnsafe && <div>Monsters are lurking!</div>}
                   </Tooltip>
                 }
               >

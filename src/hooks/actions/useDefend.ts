@@ -243,7 +243,7 @@ export function useDefend() {
             set(blight, (current) => current + 1);
 
             deltaStamina.push({
-              color: "text-danger",
+              color: "text-muted",
               value: "BLIGHTED",
             });
           }
@@ -255,14 +255,14 @@ export function useDefend() {
 
           if (hasDeflected) {
             deltaHealth.push({
-              color: "text-success",
+              color: "text-muted",
               value: "DEFLECTED POISON",
             });
           } else {
             set(poisonDuration, get(monsterPoisonLength));
 
             deltaHealth.push({
-              color: "text-danger",
+              color: "text-muted",
               value: "POISONED",
             });
           }

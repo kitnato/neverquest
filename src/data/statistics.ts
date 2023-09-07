@@ -1,7 +1,9 @@
 export const BLEED = {
-  duration: 3000,
-  ticks: 6,
+  duration: 5000,
+  ticks: 5,
 };
+
+export const BLEED_DELTA = Math.round(BLEED.duration / BLEED.ticks);
 
 export const ELEMENTAL_AILMENT_DURATION_MAXIMUM = 5000;
 export const ELEMENTAL_AILMENT_PENALTY = {

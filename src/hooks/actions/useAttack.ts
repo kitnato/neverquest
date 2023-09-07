@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { BLEED, ELEMENTAL_AILMENT_PENALTY } from "@neverquest/data/combat";
+import { BLEED, ELEMENTAL_AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
@@ -50,8 +50,8 @@ export function useAttack() {
           const hasInflictedStagger =
             get(skills("traumatology")) && gearClass === "blunt" && Math.random() <= abilityChance;
 
-          const baseDamage = -get(damageTotal);
-          const totalDamage = Math.round(
+          const baseDamage = get(damageTotal);
+          const totalDamage = -Math.round(
             (hasInflictedCritical ? baseDamage + baseDamage * get(criticalDamage) : baseDamage) *
               (get(isMonsterAiling("burning")) ? ELEMENTAL_AILMENT_PENALTY.burning : 1),
           );

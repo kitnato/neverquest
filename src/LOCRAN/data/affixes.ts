@@ -4046,7 +4046,7 @@ export const AFFIXES: AffixData[] = [
   },
   {
     artifact: "suffix",
-    creature: "prefix",
+    creature: "suffix",
     location: "suffix",
     name: "redemption",
   },
@@ -4584,6 +4584,11 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     name: "slobbery",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    name: "sloppy",
   },
   {
     artifact: "prefix",

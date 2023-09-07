@@ -17,8 +17,7 @@ export function ExpandInventory() {
   const transactResources = useTransactResources();
 
   const price = Math.ceil(
-    TAILORING_MAXIMUM_PRICE *
-      getGrowthSigmoid((encumbranceMaximumValue - (ENCUMBRANCE - 1)) / TAILORING_EXPANSION),
+    TAILORING_MAXIMUM_PRICE * getGrowthSigmoid(encumbranceMaximumValue - (ENCUMBRANCE - 1)),
   );
   const isAffordable = price <= coinsValue;
   const canExpand = isAffordable && hasKnapsackValue;

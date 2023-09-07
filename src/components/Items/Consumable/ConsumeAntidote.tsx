@@ -18,8 +18,8 @@ export function ConsumeAntidote({ consumable }: { consumable: ConsumableItem }) 
 
     changeHealth({
       delta: {
-        color: "text-success",
-        value: "CURED",
+        color: "text-muted",
+        value: "REMEDIED",
       },
       isRegeneration: false,
       value: 0,

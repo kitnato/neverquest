@@ -18,10 +18,16 @@ export function ConsumeElixir({ consumable }: { consumable: ConsumableItem }) {
     const staminaDifference = staminaMaximumTotalValue - staminaValue;
 
     changeStamina({
-      delta: {
-        color: "text-success",
-        value: `RECOVER +${staminaDifference}`,
-      },
+      delta: [
+        {
+          color: "text-muted",
+          value: "RECOVER",
+        },
+        {
+          color: "text-success",
+          value: `+${staminaDifference}`,
+        },
+      ],
       isRegeneration: false,
       value: staminaDifference,
     });

@@ -1,3 +1,13 @@
+import type { MonsterAilment } from "@neverquest/types/unions";
+
+export const AILMENT_DESCRIPTION: Record<MonsterAilment, string> = {
+  bleeding: "Suffering periodic damage.",
+  burning: "Taking increased damage.",
+  frozen: "Attack rate & movement speed slowed.",
+  shocked: "Dealing decreased damage",
+  staggered: "Cannot attack.",
+};
+
 export const BOSS_STAGE_INTERVAL = 5;
 export const BOSS_STAGE_START = 10;
 
@@ -12,32 +22,32 @@ export const BLIGHT = {
 };
 
 export const LOOT = {
-  bonus: 50,
-  boss: 1.5,
+  bonus: 0.03,
+  boss: 1.2,
   coins: 250,
-  essence: 400,
-  scrap: 200,
+  essence: 2000,
+  scrap: 500,
 };
 
 export const MONSTER_ATTACK_RATE = {
-  bonus: 100,
-  boss: 0.1,
+  bonus: 0.01,
+  boss: 1.1,
   maximum: 4000,
   minimum: 1500,
 };
 
 export const MONSTER_DAMAGE = {
-  bonus: 100,
-  boss: 0.3,
-  maximum: 1100,
-  minimum: 10,
+  bonus: 0.02,
+  boss: 1.25,
+  maximum: 1000,
+  minimum: 8,
 };
 
 export const MONSTER_HEALTH = {
-  bonus: 500,
-  boss: 2,
-  maximum: 4500,
-  minimum: 12,
+  bonus: 0.03,
+  boss: 1.75,
+  maximum: 3000,
+  minimum: 25,
 };
 
 export const MONSTER_NAME = {
@@ -45,7 +55,7 @@ export const MONSTER_NAME = {
   suffix: { maximum: 0.7, minimum: 0.01 },
 };
 
-export const MONSTER_POWER_SCALAR = 5000;
+export const MONSTER_POWER_SCALAR = 2500;
 
 export const POISON = {
   boss: 0.33,

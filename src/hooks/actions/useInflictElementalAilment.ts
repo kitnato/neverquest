@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
-import { ELEMENTAL_AILMENT_DURATION_MAXIMUM } from "@neverquest/data/combat";
 import { ELEMENTALS } from "@neverquest/data/inventory";
+import { ELEMENTAL_AILMENT_DURATION_MAXIMUM } from "@neverquest/data/statistics";
 import { canReceiveAilment, monsterAilmentDuration } from "@neverquest/state/monster";
 import { totalElementalEffects } from "@neverquest/state/statistics";
 import type { Elemental, ElementalGear } from "@neverquest/types/unions";

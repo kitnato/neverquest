@@ -37,8 +37,8 @@ export function getArmorPrices({ factor, gearClass }: { factor: number; gearClas
   const { coinPrice, scrapPrice } = ARMOR_SPECIFICATIONS[gearClass];
 
   return {
-    coinPrice: Math.ceil(coinPrice * factor),
-    scrapPrice: Math.ceil(scrapPrice * factor),
+    coinPrice: Math.round(coinPrice * factor),
+    scrapPrice: Math.round(scrapPrice * factor),
   };
 }
 
@@ -90,15 +90,13 @@ export function getDamagePerRate({
 export function getDamagePerTick({
   damage,
   duration,
-  proportion,
   ticks,
 }: {
   damage: number;
   duration: number;
-  proportion: number;
   ticks: number;
 }) {
-  return Math.round(((damage * proportion) / duration) * (duration / ticks)) || 1;
+  return Math.ceil((damage / duration) * (duration / ticks));
 }
 
 export function getFromRange({ maximum, minimum }: GeneratorRange) {
@@ -107,19 +105,19 @@ export function getFromRange({ maximum, minimum }: GeneratorRange) {
   return Number.isInteger(minimum) && Number.isInteger(maximum) ? Math.round(result) : result;
 }
 
-export function getGrowthMonsterPower(x: number) {
-  return getGrowthTriangular(x) / MONSTER_POWER_SCALAR;
+export function getGrowthMonsterPower(extent: number) {
+  return getGrowthTriangular(extent) / MONSTER_POWER_SCALAR;
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
-// f(0) = ~0, f(50) = ~0.6, f(100) = ~1
+// f(0) = ~0, f(50) = ~0.78, f(100) = ~1
 export function getGrowthSigmoid(x: number) {
-  return 1 / (1 + 100 * Math.pow(Math.E, -0.1 * x));
+  return 1 / (1 + 300 * Math.pow(Math.E, -0.11 * x));
 }
 
 // https://en.wikipedia.org/wiki/Triangular_number
-export function getGrowthTriangular(number: number) {
-  return (number * (number + 1)) / 2;
+export function getGrowthTriangular(x: number) {
+  return (x * (x + 1)) / 2;
 }
 
 export function getRange({
@@ -156,8 +154,8 @@ export function getShieldPrices({ factor, gearClass }: { factor: number; gearCla
   const { coinPrice, scrapPrice } = SHIELD_SPECIFICATIONS[gearClass];
 
   return {
-    coinPrice: Math.ceil(coinPrice * factor),
-    scrapPrice: Math.ceil(scrapPrice * factor),
+    coinPrice: Math.round(coinPrice * factor),
+    scrapPrice: Math.round(scrapPrice * factor),
   };
 }
 
@@ -180,8 +178,8 @@ export function getWeaponPrices({ factor }: { factor: number }) {
   const { coinPrice, scrapPrice } = WEAPON_BASE;
 
   return {
-    coinPrice: Math.ceil(coinPrice * factor),
-    scrapPrice: Math.ceil(scrapPrice * factor),
+    coinPrice: Math.round(coinPrice * factor),
+    scrapPrice: Math.round(scrapPrice * factor),
   };
 }
 

@@ -14,6 +14,10 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "bilge",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "blood",
     type: ["prefix", "suffix"],
   },

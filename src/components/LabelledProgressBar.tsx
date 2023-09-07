@@ -61,7 +61,7 @@ export function LabelledProgressBar({
             style={{
               left: "50%",
               textShadow:
-                "-1px 1px 1px #212529, 1px 1px 1px #212529, 1px -1px 1px #212529, -1px -1px 1px #212529",
+                "-1px 1px 1px var(--bs-gray-900), 1px 1px 1px var(--bs-gray-900), 1px -1px 1px var(--bs-gray-900), -1px -1px 1px var(--bs-gray-900)",
               top: 0,
               transform: "translateX(-50%)",
               width: "max-content",

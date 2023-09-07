@@ -67,12 +67,12 @@ export const ARMOR_SPECIFICATIONS: Record<
   }
 > = {
   hide: {
-    coinPrice: 250,
+    coinPrice: 400,
     deflection: null,
     Icon: IconHide,
     protection: [
       { maximum: 2, minimum: 1 },
-      { maximum: 400, minimum: 350 },
+      { maximum: 500, minimum: 450 },
     ],
     scrapPrice: 2500,
     staminaCost: 0,
@@ -82,7 +82,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     ],
   },
   plate: {
-    coinPrice: 550,
+    coinPrice: 800,
     deflection: [
       { maximum: 0.25, minimum: 0.2 },
       { maximum: 0.65, minimum: 0.6 },
@@ -90,7 +90,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     Icon: IconPlate,
     protection: [
       { maximum: 15, minimum: 10 },
-      { maximum: 800, minimum: 750 },
+      { maximum: 1000, minimum: 950 },
     ],
     scrapPrice: 4000,
     staminaCost: null,
@@ -100,7 +100,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     ],
   },
   reinforced: {
-    coinPrice: 400,
+    coinPrice: 600,
     deflection: [
       { maximum: 0.15, minimum: 0.1 },
       { maximum: 0.35, minimum: 0.3 },
@@ -108,12 +108,12 @@ export const ARMOR_SPECIFICATIONS: Record<
     Icon: IconReinforced,
     protection: [
       { maximum: 10, minimum: 5 },
-      { maximum: 500, minimum: 450 },
+      { maximum: 800, minimum: 750 },
     ],
     scrapPrice: 3000,
     staminaCost: [
       { maximum: 5, minimum: 3 },
-      { maximum: 40, minimum: 35 },
+      { maximum: 35, minimum: 30 },
     ],
     weight: [
       { maximum: 5, minimum: 3 },
@@ -175,9 +175,21 @@ export const ELEMENTALS: Record<
   Elemental,
   { ailment: MonsterAilment; color: string; Icon: SVGIcon }
 > = {
-  fire: { ailment: "burning", color: "text-orange", Icon: IconFire },
-  ice: { ailment: "frozen", color: "text-blue", Icon: IconIce },
-  lightning: { ailment: "shocked", color: "text-yellow", Icon: IconLightning },
+  fire: {
+    ailment: "burning",
+    color: "text-orange",
+    Icon: IconFire,
+  },
+  ice: {
+    ailment: "frozen",
+    color: "text-blue",
+    Icon: IconIce,
+  },
+  lightning: {
+    ailment: "shocked",
+    color: "text-yellow",
+    Icon: IconLightning,
+  },
 };
 
 export const ENCUMBRANCE = 6;
@@ -218,14 +230,14 @@ export const SHIELD_SPECIFICATIONS: Record<
 > = {
   medium: {
     block: [
-      { maximum: 0.3, minimum: 0.25 },
+      { maximum: 0.28, minimum: 0.25 },
       { maximum: 0.4, minimum: 0.35 },
     ],
-    coinPrice: 400,
+    coinPrice: 450,
     Icon: IconShieldMedium,
     scrapPrice: 3000,
     stagger: [
-      { maximum: 0.25, minimum: 0.2 },
+      { maximum: 0.22, minimum: 0.2 },
       { maximum: 0.35, minimum: 0.3 },
     ],
     staminaCost: [
@@ -234,12 +246,12 @@ export const SHIELD_SPECIFICATIONS: Record<
     ],
     weight: [
       { maximum: 5, minimum: 3 },
-      { maximum: 45, minimum: 40 },
+      { maximum: 50, minimum: 45 },
     ],
   },
   small: {
     block: [
-      { maximum: 0.25, minimum: 0.2 },
+      { maximum: 0.2, minimum: 0.18 },
       { maximum: 0.35, minimum: 0.3 },
     ],
     coinPrice: 300,
@@ -248,28 +260,28 @@ export const SHIELD_SPECIFICATIONS: Record<
     stagger: null,
     staminaCost: [
       { maximum: 2, minimum: 1 },
-      { maximum: 25, minimum: 20 },
+      { maximum: 20, minimum: 15 },
     ],
     weight: [
       { maximum: 2, minimum: 1 },
-      { maximum: 30, minimum: 25 },
+      { maximum: 35, minimum: 30 },
     ],
   },
   tower: {
     block: [
-      { maximum: 0.55, minimum: 0.5 },
+      { maximum: 0.52, minimum: 0.5 },
       { maximum: 0.65, minimum: 0.6 },
     ],
     coinPrice: 600,
     Icon: IconShieldTower,
     scrapPrice: 3000,
     stagger: [
-      { maximum: 0.35, minimum: 0.3 },
+      { maximum: 0.32, minimum: 0.3 },
       { maximum: 0.55, minimum: 0.5 },
     ],
     staminaCost: [
       { maximum: 10, minimum: 7 },
-      { maximum: 45, minimum: 40 },
+      { maximum: 40, minimum: 35 },
     ],
     weight: [
       { maximum: 8, minimum: 5 },
@@ -346,17 +358,17 @@ export const WEAPON_BASE: GearBase & {
   range: [GeneratorRange, GeneratorRange];
   rate: [GeneratorRange, GeneratorRange];
 } = {
-  coinPrice: 500,
+  coinPrice: 800,
   damage: [
-    { maximum: 13, minimum: 11 },
-    { maximum: 850, minimum: 800 },
+    { maximum: 14, minimum: 12 },
+    { maximum: 1000, minimum: 950 },
   ],
   range: [
-    { maximum: 4000, minimum: 3500 },
+    { maximum: 4500, minimum: 3000 },
     { maximum: 8000, minimum: 7500 },
   ],
   rate: [
-    { maximum: 3500, minimum: 3300 },
+    { maximum: 3700, minimum: 3500 },
     { maximum: 2200, minimum: 2000 },
   ],
   scrapPrice: 2500,

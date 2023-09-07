@@ -18,7 +18,7 @@ export function ConsumeSalve({ consumable }: { consumable: ConsumableItem }) {
 
     changeStamina({
       delta: {
-        color: "text-success",
+        color: "text-muted",
         value: "CURED",
       },
       isRegeneration: false,

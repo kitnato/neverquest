@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil";
 import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGear";
 import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { BLACKSMITH_GEAR_LEVEL_MAXIMUM } from "@neverquest/data/caravan";
+import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { SHIELD_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
@@ -45,7 +45,7 @@ export function ShieldOptions() {
     gearClass: shieldClass,
   });
   const { Icon } = SHIELD_SPECIFICATIONS[shieldClass];
-  const maximumShieldLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
+  const maximumShieldLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
 
   const craftShield = () =>
     generateShield({

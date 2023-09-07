@@ -1,13 +1,13 @@
 import { selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import { BLEED, PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/combat";
 import {
   GEM_DAMAGE,
   GEM_DURATION,
   GEM_ELEMENTALS,
   GEM_ENHANCEMENT,
 } from "@neverquest/data/inventory";
+import { BLEED, PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/statistics";
 import { withStateKey } from "@neverquest/state";
 import { level, rawAttributeStatistic } from "@neverquest/state/attributes";
 import { armor, hasItem, shield, weapon } from "@neverquest/state/inventory";
@@ -48,28 +48,26 @@ export const bleed = withStateKey("bleed", (key) =>
   }),
 );
 
-export const bleedRating = withStateKey("bleedRating", (key) =>
-  selector({
-    get: ({ get }) => Math.round(get(bleedTick).damage * get(bleed) * 100),
-    key,
-  }),
-);
-
-export const bleedTick = withStateKey("bleedTick", (key) =>
+export const bleedDamage = withStateKey("bleedDamage", (key) =>
   selector({
     get: ({ get }) => {
       const { duration, ticks } = BLEED;
 
-      return {
-        damage: getDamagePerTick({
-          damage: get(damageTotal),
+      return Math.round(
+        getDamagePerTick({
+          damage: Math.round(get(damageTotal)) * get(masteryStatistic("cruelty")),
           duration,
-          proportion: get(masteryStatistic("cruelty")),
           ticks,
         }),
-        duration: Math.round(duration / ticks),
-      };
+      );
     },
+    key,
+  }),
+);
+
+export const bleedRating = withStateKey("bleedRating", (key) =>
+  selector({
+    get: ({ get }) => Math.round(get(bleedDamage) * get(bleed) * 100),
     key,
   }),
 );

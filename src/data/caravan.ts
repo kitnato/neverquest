@@ -16,7 +16,8 @@ import type {
 import type { SVGIcon } from "@neverquest/types/props";
 import type { Consumable, Crew, Trinket, WeaponGrip } from "@neverquest/types/unions";
 
-export const BLACKSMITH_GEAR_LEVEL_MAXIMUM = 3;
+export const GEAR_LEVEL_MAXIMUM = 100;
+export const GEAR_LEVEL_RANGE_MAXIMUM = 3;
 
 export const CREW: Record<
   Crew,
@@ -38,12 +39,12 @@ export const CREW: Record<
     requiredStage: 30,
   },
   blacksmith: {
-    coinPrice: 40,
+    coinPrice: 60,
     description: "Crafts superior gear.",
     Icon: IconBlacksmith,
     interaction: "Craft",
     monologues: { 1: "In need of better gear?" },
-    requiredStage: 8,
+    requiredStage: 10,
   },
   medic: {
     coinPrice: 80,
@@ -54,12 +55,12 @@ export const CREW: Record<
     requiredStage: 12,
   },
   mercenary: {
-    coinPrice: 20,
+    coinPrice: 40,
     description: "Trains new skills and attributes.",
     Icon: IconMercenary,
     interaction: "Train",
     monologues: { 1: "Perhaps I can teach you something." },
-    requiredStage: 6,
+    requiredStage: 8,
   },
   merchant: {
     coinPrice: 0,
@@ -92,12 +93,12 @@ export const CREW: Record<
     requiredStage: 20,
   },
   tailor: {
-    coinPrice: 60,
+    coinPrice: 20,
     description: "Expands inventory space.",
     Icon: IconTailor,
     interaction: "Tailoring",
     monologues: { 1: "Allow me to deepen your pockets." },
-    requiredStage: 10,
+    requiredStage: 6,
   },
   witch: {
     coinPrice: 100,

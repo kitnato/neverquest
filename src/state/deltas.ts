@@ -1,4 +1,4 @@
-import { atom, atomFamily } from "recoil";
+import { atomFamily } from "recoil";
 
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { DeltaDisplay, FloatingText } from "@neverquest/types/ui";
@@ -19,14 +19,6 @@ export const floatingTextQueues = withStateKey("floatingTextQueues", (key) =>
   atomFamily<FloatingText[], Delta>({
     default: [],
     effects: (parameter) => [handleLocalStorage<FloatingText[]>({ key, parameter })],
-    key,
-  }),
-);
-
-export const monsterBleedingDelta = withStateKey("monsterBleedingDelta", (key) =>
-  atom({
-    default: 0,
-    effects: [handleLocalStorage<number>({ key })],
     key,
   }),
 );

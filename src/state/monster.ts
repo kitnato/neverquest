@@ -1,6 +1,5 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import { ELEMENTAL_AILMENT_PENALTY } from "@neverquest/data/combat";
 import { ELEMENTALS } from "@neverquest/data/inventory";
 import {
   BLIGHT,
@@ -12,24 +11,29 @@ import {
   MONSTER_HEALTH,
   POISON,
 } from "@neverquest/data/monster";
+import { BLEED_DELTA, ELEMENTAL_AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
 import { weapon } from "@neverquest/state/inventory";
 import { skills } from "@neverquest/state/skills";
-import { lootBonus, totalElementalEffects } from "@neverquest/state/statistics";
+import { bleedDamage, lootBonus, totalElementalEffects } from "@neverquest/state/statistics";
 import {
   ELEMENTAL_TYPES,
   MONSTER_AILMENT_TYPES,
   type MonsterAilment,
 } from "@neverquest/types/unions";
 import { formatFloat } from "@neverquest/utilities/formatters";
-import {
-  getDamagePerRate,
-  getGrowthMonsterPower,
-  getGrowthSigmoid,
-} from "@neverquest/utilities/getters";
+import { getDamagePerRate, getGrowthMonsterPower } from "@neverquest/utilities/getters";
 
 // SELECTORS
+
+export const bleedDamageTotal = withStateKey("bleedDamageTotal", (key) =>
+  selector({
+    get: ({ get }) =>
+      get(bleedDamage) * (get(isMonsterAiling("burning")) ? ELEMENTAL_AILMENT_PENALTY.burning : 1),
+    key,
+  }),
+);
 
 export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
   selectorFamily<boolean, MonsterAilment>({
@@ -95,9 +99,10 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
       return (
         maximum -
         Math.round(
-          ((maximum - minimum) * getGrowthMonsterPower(get(stage)) +
-            bonus * getGrowthSigmoid(get(progress))) *
-            (1 - (get(isBoss) ? boss : 0)),
+          (maximum - minimum) *
+            getGrowthMonsterPower(get(stage)) *
+            (1 + get(progress) * bonus) *
+            (get(isBoss) ? boss : 1),
         )
       );
     },
@@ -136,9 +141,10 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
       return (
         minimum +
         Math.round(
-          ((maximum - minimum) * getGrowthMonsterPower(get(stage)) +
-            bonus * getGrowthSigmoid(get(progress))) *
-            (1 + (get(isBoss) ? boss : 0)) *
+          (maximum - minimum) *
+            getGrowthMonsterPower(get(stage)) *
+            (1 + get(progress) * bonus) *
+            (get(isBoss) ? boss : 1) *
             (get(isMonsterAiling("shocked")) ? ELEMENTAL_AILMENT_PENALTY.shocked : 1),
         )
       );
@@ -168,9 +174,10 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
       return (
         minimum +
         Math.round(
-          ((maximum - minimum) * getGrowthMonsterPower(get(stage)) +
-            bonus * getGrowthSigmoid(get(progress))) *
-            (1 + (get(isBoss) ? boss : 0)),
+          (maximum - minimum) *
+            getGrowthMonsterPower(get(stage)) *
+            (1 + get(progress) * bonus) *
+            (get(isBoss) ? boss : 1),
         )
       );
     },
@@ -185,17 +192,17 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
 
       const isBossValue = get(isBoss);
       const stageValue = get(stage);
-      const factor = getGrowthSigmoid(stageValue);
-      const progressBonus = getGrowthSigmoid(get(progress)) * bonus;
-      const totalBonus = (1 + get(lootBonus)) * (1 + (isBossValue ? boss : 0));
+      const factor = getGrowthMonsterPower(stageValue);
+      const totalBonus =
+        1 + get(progress) * bonus + (1 + get(lootBonus)) + (1 + (isBossValue ? boss : 0));
 
       return {
-        coins: Math.round((progressBonus + coins * factor) * totalBonus),
-        essence: Math.round((progressBonus + essence * factor) * totalBonus),
+        coins: Math.ceil(coins * factor * totalBonus),
+        essence: Math.ceil(essence * factor * totalBonus),
         gems: isBossValue
           ? 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL)
           : 0,
-        scrap: Math.round((progressBonus + scrap * factor) * totalBonus),
+        scrap: Math.ceil(scrap * factor * totalBonus),
       };
     },
     key,
@@ -272,6 +279,14 @@ export const monsterAilmentDuration = withStateKey("monsterAilmentDuration", (ke
 export const monsterAttackDuration = withStateKey("monsterAttackDuration", (key) =>
   atom({
     default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  }),
+);
+
+export const monsterBleedingDelta = withStateKey("monsterBleedingDelta", (key) =>
+  atom({
+    default: BLEED_DELTA,
     effects: [handleLocalStorage<number>({ key })],
     key,
   }),

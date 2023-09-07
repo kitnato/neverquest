@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil";
 import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGear";
 import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { BLACKSMITH_GEAR_LEVEL_MAXIMUM } from "@neverquest/data/caravan";
+import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
@@ -46,7 +46,7 @@ export function WeaponOptions() {
     grip: weaponGrip,
     modality: "melee",
   });
-  const maximumWeaponLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
+  const maximumWeaponLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
 
   const craftWeapon = () =>
     generateWeapon({

@@ -1,8 +1,9 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { MonsterElementalAilmentMeter } from "@neverquest/components/Monster/MonsterElementalAilmentMeter";
+import { MonsterAilmentMeter } from "@neverquest/components/Monster/MonsterAilmentMeter";
 import { ELEMENTALS } from "@neverquest/data/inventory";
+import { ELEMENTAL_AILMENT_DURATION_MAXIMUM } from "@neverquest/data/statistics";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { isMonsterAiling, monsterAilmentDuration } from "@neverquest/state/monster";
 import { totalElementalEffects } from "@neverquest/state/statistics";
@@ -28,7 +29,9 @@ export function MonsterElementalAilment({ type }: { type: Elemental }) {
 
   return (
     <IconDisplay
-      contents={<MonsterElementalAilmentMeter type={ailment} />}
+      contents={
+        <MonsterAilmentMeter totalDuration={ELEMENTAL_AILMENT_DURATION_MAXIMUM} type={ailment} />
+      }
       Icon={Icon}
       isAnimated
       tooltip={capitalizeAll(ailment)}

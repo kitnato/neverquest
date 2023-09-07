@@ -14,6 +14,7 @@ import {
   isBlighted,
   isPoisoned,
   poisonDuration,
+  regenerationDuration,
   stamina,
   staminaMaximum,
   staminaMaximumTotal,
@@ -35,15 +36,19 @@ export function ReserveMeter({ type }: { type: Reserve }) {
     isHealth ? healthMaximumTotal : staminaMaximumTotal,
   );
   const resetReserve = useResetRecoilState(isHealth ? health : stamina);
+  const resetRegenerationDuration = useResetRecoilState(regenerationDuration(type));
 
-  const penalty = reserveMaximumValue - reserveMaximumTotalValue;
+  const penalty = Math.round(
+    ((reserveMaximumValue - reserveMaximumTotalValue) / reserveMaximumValue) * 100,
+  );
 
   // Catches attribute resets and poison/blight penalties.
   useEffect(() => {
     if (reserveValue > reserveMaximumTotalValue) {
       resetReserve();
+      resetRegenerationDuration();
     }
-  }, [reserveMaximumTotalValue, reserveValue, resetReserve]);
+  }, [reserveMaximumTotalValue, reserveValue, resetRegenerationDuration, resetReserve]);
 
   return (
     <LabelledProgressBar
@@ -58,7 +63,7 @@ export function ReserveMeter({ type }: { type: Reserve }) {
               {` ${
                 typeof ailmentValue === "number"
                   ? formatTime(ailmentValue)
-                  : formatPercentage(ailmentValue.percentage)
+                  : formatPercentage(ailmentValue.percentage, 0)
               }`}
             </>
           )}

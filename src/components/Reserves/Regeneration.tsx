@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
@@ -21,6 +22,7 @@ import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import {
   isHealthAtMaximum,
+  isRegenerating,
   isStaminaAtMaximum,
   regenerationDuration,
   regenerationRate,
@@ -36,24 +38,26 @@ const RESERVE_CHANGE = {
 };
 
 export function Regeneration({ type }: { type: Reserve }) {
-  const { baseRegenerationAmount, baseRegenerationRate, label, regenerationDelta } = RESERVES[type];
   const isHealth = type === "health";
 
   const isRecoveringValue = useRecoilValue(isRecovering);
+  const isRegeneratingValue = useRecoilValue(isRegenerating(type));
   const isReserveAtMaximum = useRecoilValue(isHealth ? isHealthAtMaximum : isStaminaAtMaximum);
   const isShowingReserveDetails = useRecoilValue(isShowing("reserveDetails"));
   const powerBonusAmountValue = useRecoilValue(powerBonus("fortitude"));
   const powerBonusRateValue = useRecoilValue(powerBonus("vigor"));
   const fortitudeValue = useRecoilValue(rawAttributeStatistic("fortitude"));
   const vigorValue = useRecoilValue(rawAttributeStatistic("vigor"));
+  const regenerationRateValue = useRecoilValue(regenerationRate(type));
   const setRegenerationDuration = useSetRecoilState(regenerationDuration(type));
+
+  const { baseRegenerationAmount, baseRegenerationRate, label, regenerationDelta } = RESERVES[type];
 
   const changeReserve = RESERVE_CHANGE[type]();
 
   useAnimate({
     delta: setRegenerationDuration,
     onDelta: () => {
-      console.log("regen");
       changeReserve({ isRegeneration: true });
     },
     stop: isRecoveringValue || isReserveAtMaximum,
@@ -64,6 +68,12 @@ export function Regeneration({ type }: { type: Reserve }) {
     atomValue: regenerationRate(type),
     type: "time",
   });
+
+  useEffect(() => {
+    if (!isReserveAtMaximum && !isRegeneratingValue) {
+      setRegenerationDuration(regenerationRateValue);
+    }
+  }, [isRegeneratingValue, isReserveAtMaximum, regenerationRateValue, setRegenerationDuration]);
 
   return (
     <Stack className="w-100" direction="horizontal">

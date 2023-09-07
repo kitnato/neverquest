@@ -38,10 +38,9 @@ export function ReserveMeter({ type }: { type: Reserve }) {
 
   const penalty = reserveMaximumValue - reserveMaximumTotalValue;
 
-  // Needed to catch attribute resets and poison/blight penalties.
+  // Catches attribute resets and poison/blight penalties.
   useEffect(() => {
     if (reserveValue > reserveMaximumTotalValue) {
-      console.log("reset reserve");
       resetReserve();
     }
   }, [reserveMaximumTotalValue, reserveValue, resetReserve]);

@@ -72,31 +72,6 @@ export const healthMaximumTotal = withStateKey("healthMaximumTotal", (key) =>
   }),
 );
 
-export const regenerationAmount = withStateKey("regenerationAmount", (key) =>
-  selectorFamily<number, Reserve>({
-    get:
-      (parameter) =>
-      ({ get }) =>
-        RESERVES[parameter].baseRegenerationAmount + get(reserveRegenerationAmount),
-    key,
-  }),
-);
-
-export const regenerationRate = withStateKey("regenerationRate", (key) =>
-  selectorFamily<number, Reserve>({
-    get:
-      (parameter) =>
-      ({ get }) => {
-        const { baseRegenerationRate } = RESERVES[parameter];
-
-        return Math.round(
-          baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRate),
-        );
-      },
-    key,
-  }),
-);
-
 export const isBlighted = withStateKey("isBlighted", (key) =>
   selector({
     get: ({ get }) => get(blight) > 0,
@@ -125,9 +100,44 @@ export const isPoisoned = withStateKey("isPoisoned", (key) =>
   }),
 );
 
+export const isRegenerating = withStateKey("isRegenerating", (key) =>
+  selectorFamily<boolean, Reserve>({
+    get:
+      (parameter) =>
+      ({ get }) =>
+        get(regenerationDuration(parameter)) > 0,
+    key,
+  }),
+);
+
 export const isStaminaAtMaximum = withStateKey("isStaminaAtMaximum", (key) =>
   selector({
     get: ({ get }) => get(stamina) >= get(staminaMaximumTotal),
+    key,
+  }),
+);
+
+export const regenerationAmount = withStateKey("regenerationAmount", (key) =>
+  selectorFamily<number, Reserve>({
+    get:
+      (parameter) =>
+      ({ get }) =>
+        RESERVES[parameter].baseRegenerationAmount + get(reserveRegenerationAmount),
+    key,
+  }),
+);
+
+export const regenerationRate = withStateKey("regenerationRate", (key) =>
+  selectorFamily<number, Reserve>({
+    get:
+      (parameter) =>
+      ({ get }) => {
+        const { baseRegenerationRate } = RESERVES[parameter];
+
+        return Math.round(
+          baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRate),
+        );
+      },
     key,
   }),
 );

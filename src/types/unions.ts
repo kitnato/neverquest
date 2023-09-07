@@ -224,6 +224,7 @@ export type StateKey =
   | "isMonsterNew"
   | "isPoisoned"
   | "isRecovering"
+  | "isRegenerating"
   | "isShowing"
   | "isShowingEverything"
   | "isStageCompleted"

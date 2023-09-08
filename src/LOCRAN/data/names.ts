@@ -2,6 +2,10 @@ import type { NameData } from "@neverquest/LOCRAN/types";
 
 export const NAMES: NameData[] = [
   {
+    name: "anger",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "axe",
     type: ["prefix", "suffix"],
   },
@@ -54,6 +58,11 @@ export const NAMES: NameData[] = [
     type: ["suffix"],
   },
   {
+    isNSFW: true,
+    name: "cock",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "coffin",
     type: ["prefix", "suffix"],
   },
@@ -94,6 +103,10 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "fiend",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "finger",
     type: ["suffix"],
   },
@@ -126,6 +139,10 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "gash",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "gobbler",
     type: ["suffix"],
   },
@@ -143,6 +160,10 @@ export const NAMES: NameData[] = [
   },
   {
     name: "grime",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "grub",
     type: ["prefix", "suffix"],
   },
   {
@@ -253,6 +274,10 @@ export const NAMES: NameData[] = [
     type: ["suffix"],
   },
   {
+    name: "munch",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "noodle",
     type: ["prefix", "suffix"],
   },
@@ -293,6 +318,10 @@ export const NAMES: NameData[] = [
   },
   {
     name: "rat",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "rider",
     type: ["prefix", "suffix"],
   },
   {
@@ -399,6 +428,10 @@ export const NAMES: NameData[] = [
   },
   {
     name: "vomit",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "wail",
     type: ["prefix", "suffix"],
   },
   {

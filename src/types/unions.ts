@@ -185,6 +185,7 @@ export type StateKey =
   | "criticalChance"
   | "criticalDamage"
   | "criticalRating"
+  | "criticalStrike"
   | "damage"
   | "damagePerSecond"
   | "damageTotal"

@@ -2,7 +2,6 @@ import { type ChangeEvent, useState } from "react";
 import { Button, Form, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
-import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
@@ -16,12 +15,8 @@ import {
   wildernesses,
 } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
-import { hasLooted } from "@neverquest/state/resources";
-import { confirmationWarnings } from "@neverquest/state/settings";
 
 export function ActivateCompass() {
-  const confirmationWarningsValue = useRecoilValue(confirmationWarnings);
-  const hasLootedValue = useRecoilValue(hasLooted);
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isStageStartedValue = useRecoilValue(isStageStarted);
@@ -29,7 +24,6 @@ export function ActivateCompass() {
   const [stageValue, setStage] = useRecoilState(stage);
   const wildernessesValue = useRecoilValue(wildernesses);
 
-  const [isShowingConfirmation, setIsShowingConfirmation] = useState(false);
   const [isShowingNavigation, setIsShowingNavigation] = useState(false);
 
   const resetWilderness = useResetWilderness();
@@ -53,13 +47,7 @@ export function ActivateCompass() {
         <span>
           <Button
             disabled={!canNavigate}
-            onClick={() => {
-              if (confirmationWarningsValue && !hasLootedValue && isStageCompletedValue) {
-                setIsShowingConfirmation(true);
-              } else {
-                setIsShowingNavigation(true);
-              }
-            }}
+            onClick={() => setIsShowingNavigation(true)}
             variant="outline-dark"
           >
             Use
@@ -93,15 +81,6 @@ export function ActivateCompass() {
           />
         </Modal.Body>
       </Modal>
-
-      <ConfirmationDialog
-        confirmationLabel="Navigate"
-        message="Navigating now will forfeit all uncollected loot."
-        onConfirm={() => setIsShowingNavigation(true)}
-        setHidden={() => setIsShowingConfirmation(false)}
-        show={isShowingConfirmation}
-        title="Forfeit loot?"
-      />
     </>
   );
 }

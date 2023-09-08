@@ -38,14 +38,14 @@ export const MONSTER_ATTACK_RATE = {
 
 export const MONSTER_DAMAGE = {
   bonus: 0.02,
-  boss: 1.25,
+  boss: 1.2,
   maximum: 1000,
   minimum: 8,
 };
 
 export const MONSTER_HEALTH = {
   bonus: 0.03,
-  boss: 1.75,
+  boss: 1.6,
   maximum: 3000,
   minimum: 25,
 };

@@ -16,7 +16,7 @@ import {
   attackRateTotal,
   bleed,
   criticalChance,
-  criticalDamage,
+  criticalStrike,
   damageTotal,
 } from "@neverquest/state/statistics";
 import type { DeltaDisplay } from "@neverquest/types/ui";
@@ -52,7 +52,7 @@ export function useAttack() {
 
           const baseDamage = get(damageTotal);
           const totalDamage = -Math.round(
-            (hasInflictedCritical ? baseDamage + baseDamage * get(criticalDamage) : baseDamage) *
+            (hasInflictedCritical ? get(criticalStrike) : baseDamage) *
               (get(isMonsterAiling("burning")) ? ELEMENTAL_AILMENT_PENALTY.burning : 1),
           );
           const monsterDeltas: DeltaDisplay = [

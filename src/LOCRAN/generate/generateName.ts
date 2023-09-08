@@ -25,17 +25,15 @@ export function generateName({
 
   const connector = prefix.name[prefix.name.length - 1] === suffix.name[0] ? "-" : "";
   const filteredTitles = AFFIXES.filter((current) => {
-    const filterNSFW = allowNSFW ? Boolean(current.isNSFW) || !current.isNSFW : !current.isNSFW;
+    const { creature, isNSFW, name } = current;
 
-    if (
-      current.name === prefix.name ||
-      current.name === suffix.name ||
-      current.name.slice(-3) === "ing"
-    ) {
+    const filterNSFW = allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW;
+
+    if (name === prefix.name || name === suffix.name || name.slice(-3) === "ing") {
       return false;
     }
 
-    return current.creature === "prefix" && filterNSFW;
+    return (creature === "prefix" || creature === "suffix") && filterNSFW;
   });
   const title = hasTitle && filteredTitles[Math.floor(Math.random() * filteredTitles.length)];
 

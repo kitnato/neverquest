@@ -20,6 +20,7 @@ import {
   criticalChance,
   criticalDamage,
   criticalRating,
+  criticalStrike,
   powerBonus,
 } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
@@ -29,6 +30,7 @@ export function CriticalRating() {
   const criticalChanceValue = useRecoilValue(criticalChance);
   const criticalDamageValue = useRecoilValue(criticalDamage);
   const criticalRatingValue = useRecoilValue(criticalRating);
+  const criticalStrikeValue = useRecoilValue(criticalStrike);
   const isShowingCriticalRating = useRecoilValue(isShowing("criticalRating"));
   const powerBonusChanceValue = useRecoilValue(powerBonus("dexterity"));
   const powerBonusDamageValue = useRecoilValue(powerBonus("perception"));
@@ -99,7 +101,8 @@ export function CriticalRating() {
 
                       <td>
                         <IconImage Icon={IconCriticalDamage} size="tiny" />
-                        &nbsp;{`${formatPercentage(perceptionValue, 0)} damage`}
+                        &nbsp;{`${formatPercentage(perceptionValue, 0)} damage`}&nbsp;
+                        {`(${criticalStrikeValue})`}
                       </td>
                     </tr>
 

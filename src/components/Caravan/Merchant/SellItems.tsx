@@ -51,7 +51,7 @@ export function SellItems() {
                     )}
                   </Stack>
 
-                  <SellItem item={item} showConfirmation={isEquipped} />
+                  <SellItem item={item} />
                 </div>
               );
             })}

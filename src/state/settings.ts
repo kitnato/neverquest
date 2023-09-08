@@ -20,14 +20,6 @@ export const autoEquip = withStateKey("autoEquip", (key) =>
   }),
 );
 
-export const confirmationWarnings = withStateKey("confirmationWarnings", (key) =>
-  atom({
-    default: true,
-    effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
-    key,
-  }),
-);
-
 export const lowHealthWarning = withStateKey("lowHealthWarning", (key) =>
   atom({
     default: true,

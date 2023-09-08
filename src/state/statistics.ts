@@ -108,6 +108,13 @@ export const criticalRating = withStateKey("criticalRating", (key) =>
   }),
 );
 
+export const criticalStrike = withStateKey("criticalStrike", (key) =>
+  selector({
+    get: ({ get }) => Math.round(get(damageTotal) * get(criticalDamage)),
+    key,
+  }),
+);
+
 export const damage = withStateKey("damage", (key) =>
   selector({
     get: ({ get }) => {

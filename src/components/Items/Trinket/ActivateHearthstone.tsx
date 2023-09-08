@@ -1,36 +1,23 @@
-import { useState } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 
-import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { isAttacking } from "@neverquest/state/character";
-import { isStageCompleted, isWilderness } from "@neverquest/state/encounter";
+import { isWilderness } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
-import { hasLooted } from "@neverquest/state/resources";
-import { confirmationWarnings } from "@neverquest/state/settings";
 
 export function ActivateHearthstone() {
-  const confirmationWarningsValue = useRecoilValue(confirmationWarnings);
-  const hasLootedValue = useRecoilValue(hasLooted);
   const isAttackingValue = useRecoilValue(isAttacking);
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
-  const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isWildernessValue = useRecoilValue(isWilderness);
-
-  const [isShowingConfirmation, setIsShowingConfirmation] = useState(false);
 
   const toggleLocation = useToggleLocation();
 
   const canWarp = !isAttackingValue && isWildernessValue;
 
   const handleWarp = () => {
-    if (confirmationWarningsValue && isStageCompletedValue && !hasLootedValue) {
-      setIsShowingConfirmation(true);
-    } else {
-      resetIsInventoryOpen();
-      toggleLocation();
-    }
+    resetIsInventoryOpen();
+    toggleLocation();
   };
 
   return (
@@ -45,15 +32,6 @@ export function ActivateHearthstone() {
           </Button>
         </span>
       </OverlayTrigger>
-
-      <ConfirmationDialog
-        confirmationLabel="Warp"
-        message="Warping back to the caravan now will forfeit all uncollected loot."
-        onConfirm={toggleLocation}
-        setHidden={() => setIsShowingConfirmation(false)}
-        show={isShowingConfirmation}
-        title="Forfeit loot?"
-      />
     </>
   );
 }

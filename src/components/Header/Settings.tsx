@@ -10,7 +10,6 @@ import { hasKnapsack } from "@neverquest/state/inventory";
 import {
   allowNSFW,
   autoEquip,
-  confirmationWarnings,
   lowHealthWarning,
   showDamagePerSecond,
   showGearComparison,
@@ -41,13 +40,7 @@ export function Settings() {
         <Modal.Body>
           <Form>
             <Stack gap={3}>
-              <h6>Safeguards</h6>
-
               <SettingsSwitch atom={lowHealthWarning} label="Low-health warning" />
-
-              <SettingsSwitch atom={confirmationWarnings} label="Confirmation of risky choices" />
-
-              <h6>Gear</h6>
 
               <SettingsSwitch
                 atom={autoEquip}
@@ -60,8 +53,6 @@ export function Settings() {
               <SettingsSwitch atom={showGearComparison} label="Show gear comparisons" />
 
               <SettingsSwitch atom={showGearLevel} label="Show gear level" />
-
-              <h6>Spoilers</h6>
 
               <SettingsSwitch atom={allowNSFW} label="NSFW mode (profanity)" />
 

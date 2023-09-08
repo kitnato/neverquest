@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { Button, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { IconImage } from "@neverquest/components/IconImage";
 import { useToggleAttack } from "@neverquest/hooks/actions/useToggleAttack";
 import { ReactComponent as IconAttack } from "@neverquest/icons/attack.svg";
@@ -10,26 +8,22 @@ import { ReactComponent as IconResting } from "@neverquest/icons/resting.svg";
 import { ReactComponent as IconRetreat } from "@neverquest/icons/retreat.svg";
 import { areAttributesIncreasable } from "@neverquest/state/attributes";
 import { isAttacking, isGameOver } from "@neverquest/state/character";
-import { isStageCompleted, isStageStarted, isWilderness } from "@neverquest/state/encounter";
+import { isStageCompleted, isWilderness } from "@neverquest/state/encounter";
 import { isHealthLow } from "@neverquest/state/reserves";
-import { confirmationWarnings, lowHealthWarning } from "@neverquest/state/settings";
+import { lowHealthWarning } from "@neverquest/state/settings";
 import type { SVGIcon } from "@neverquest/types/props";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function AttackButton() {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
-  const confirmationWarningsValue = useRecoilValue(confirmationWarnings);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isHealthLowValue = useRecoilValue(isHealthLow);
   const isGameOverValue = useRecoilValue(isGameOver);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
-  const isStageStartedValue = useRecoilValue(isStageStarted);
   const isWildernessValue = useRecoilValue(isWilderness);
   const showLowHealthWarningValue = useRecoilValue(lowHealthWarning);
 
   const toggleAttack = useToggleAttack();
-
-  const [showAttackConfirmation, setShowAttackConfirmation] = useState(false);
 
   const pulseAnimation = getAnimationClass({
     isInfinite: true,
@@ -60,14 +54,6 @@ export function AttackButton() {
       };
     })();
 
-  const handleAttack = () => {
-    if (areAttributesIncreasableValue && confirmationWarningsValue && !isStageStartedValue) {
-      setShowAttackConfirmation(true);
-    } else {
-      toggleAttack();
-    }
-  };
-
   return (
     <>
       <OverlayTrigger
@@ -90,22 +76,13 @@ export function AttackButton() {
           <Button
             className={animation}
             disabled={isResting}
-            onClick={handleAttack}
+            onClick={toggleAttack}
             variant="outline-dark"
           >
             <IconImage Icon={Icon} />
           </Button>
         </span>
       </OverlayTrigger>
-
-      <ConfirmationDialog
-        confirmationLabel="Attack anyway"
-        message="When attacking before spending available essence on attributes, all monsters will need to be defeated before getting another chance."
-        onConfirm={toggleAttack}
-        setHidden={() => setShowAttackConfirmation(false)}
-        show={showAttackConfirmation}
-        title="Unspent attribute points!"
-      />
     </>
   );
 }

@@ -207,6 +207,7 @@ export const GEM_ELEMENTALS: Record<Gem, Elemental> = {
   topaz: "lightning",
 };
 export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
+export const GEM_FITTING_COST = [20, 40, 70, 120, 200];
 export const GEMS_MAXIMUM = 5;
 
 export const SHIELD_NONE: Omit<Shield, "coinPrice" | "isEquipped" | "ranges" | "scrapPrice"> = {

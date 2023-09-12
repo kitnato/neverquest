@@ -77,6 +77,7 @@ export const CREW: Record<
       7: "Your headway in the wilderness is helping business.",
       9: "There is something dark looming on the horizon ...",
       10: "I can't believe you came out of that in one piece.",
+      11: "Ah, back again.",
       14: "I recently came into possession of a few curiosities.",
       15: "Can I interest you in anything else?",
       25: "A dark wanderer passed by and sold me a strange book ...",

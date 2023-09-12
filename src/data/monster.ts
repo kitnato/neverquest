@@ -55,7 +55,7 @@ export const MONSTER_HEALTH = {
 };
 
 export const MONSTER_NAME = {
-  prefix: { maximum: 1, minimum: 0.6 },
+  prefix: { maximum: 1, minimum: 0.75 },
   suffix: { maximum: 0.6, minimum: 0.01 },
 };
 

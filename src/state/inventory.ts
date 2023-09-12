@@ -1,9 +1,11 @@
 import { atom, selector, selectorFamily } from "recoil";
 
+import { scrap } from "./resources";
 import {
   ARMOR_NONE,
   ENCUMBRANCE,
   GEMS_MAXIMUM,
+  GEM_FITTING_COST,
   SHIELD_NONE,
   WEAPON_NONE,
 } from "@neverquest/data/inventory";
@@ -45,12 +47,16 @@ export const canApplyGem = withStateKey("canApplyGem", (key) =>
   selectorFamily<boolean, Gear>({
     get:
       (parameter) =>
-      ({ get }) =>
-        (parameter === "armor"
-          ? get(armor).gems.length
-          : parameter === "shield"
-          ? get(shield).gems.length
-          : get(weapon).gems.length) < GEMS_MAXIMUM,
+      ({ get }) => {
+        const { length } =
+          parameter === "armor"
+            ? get(armor).gems
+            : parameter === "shield"
+            ? get(shield).gems
+            : get(weapon).gems;
+
+        return length < GEMS_MAXIMUM && (GEM_FITTING_COST[length] ?? Infinity) <= get(scrap);
+      },
     key,
   }),
 );

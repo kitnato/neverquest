@@ -67,14 +67,14 @@ export const ARMOR_SPECIFICATIONS: Record<
   }
 > = {
   hide: {
-    coinPrice: 400,
+    coinPrice: { maximum: 400, minimum: 1 },
     deflection: null,
     Icon: IconHide,
     protection: [
       { maximum: 2, minimum: 1 },
       { maximum: 500, minimum: 450 },
     ],
-    scrapPrice: 2500,
+    scrapPrice: { maximum: 2000, minimum: 5 },
     staminaCost: 0,
     weight: [
       { maximum: 2, minimum: 1 },
@@ -82,17 +82,17 @@ export const ARMOR_SPECIFICATIONS: Record<
     ],
   },
   plate: {
-    coinPrice: 800,
+    coinPrice: { maximum: 800, minimum: 8 },
     deflection: [
       { maximum: 0.25, minimum: 0.2 },
       { maximum: 0.65, minimum: 0.6 },
     ],
     Icon: IconPlate,
     protection: [
-      { maximum: 15, minimum: 10 },
+      { maximum: 10, minimum: 8 },
       { maximum: 1000, minimum: 950 },
     ],
-    scrapPrice: 4000,
+    scrapPrice: { maximum: 4000, minimum: 25 },
     staminaCost: null,
     weight: [
       { maximum: 7, minimum: 5 },
@@ -100,19 +100,19 @@ export const ARMOR_SPECIFICATIONS: Record<
     ],
   },
   reinforced: {
-    coinPrice: 600,
+    coinPrice: { maximum: 600, minimum: 3 },
     deflection: [
       { maximum: 0.15, minimum: 0.1 },
       { maximum: 0.35, minimum: 0.3 },
     ],
     Icon: IconReinforced,
     protection: [
-      { maximum: 10, minimum: 5 },
+      { maximum: 6, minimum: 4 },
       { maximum: 800, minimum: 750 },
     ],
-    scrapPrice: 3000,
+    scrapPrice: { maximum: 3000, minimum: 15 },
     staminaCost: [
-      { maximum: 5, minimum: 3 },
+      { maximum: 3, minimum: 1 },
       { maximum: 35, minimum: 30 },
     ],
     weight: [
@@ -193,7 +193,7 @@ export const ELEMENTALS: Record<
 };
 
 export const ENCUMBRANCE = 6;
-export const KNAPSACK_SIZE = 4;
+export const KNAPSACK_SIZE = 6;
 
 export const GEM_BASE = {
   coinPrice: 10,
@@ -233,9 +233,9 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 0.28, minimum: 0.25 },
       { maximum: 0.4, minimum: 0.35 },
     ],
-    coinPrice: 450,
+    coinPrice: { maximum: 450, minimum: 4 },
     Icon: IconShieldMedium,
-    scrapPrice: 3000,
+    scrapPrice: { maximum: 3000, minimum: 15 },
     stagger: [
       { maximum: 0.22, minimum: 0.2 },
       { maximum: 0.35, minimum: 0.3 },
@@ -254,9 +254,9 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 0.2, minimum: 0.18 },
       { maximum: 0.35, minimum: 0.3 },
     ],
-    coinPrice: 300,
+    coinPrice: { maximum: 300, minimum: 2 },
     Icon: IconShieldSmall,
-    scrapPrice: 2000,
+    scrapPrice: { maximum: 2000, minimum: 5 },
     stagger: null,
     staminaCost: [
       { maximum: 2, minimum: 1 },
@@ -272,9 +272,9 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 0.52, minimum: 0.5 },
       { maximum: 0.65, minimum: 0.6 },
     ],
-    coinPrice: 600,
+    coinPrice: { maximum: 600, minimum: 7 },
     Icon: IconShieldTower,
-    scrapPrice: 3000,
+    scrapPrice: { maximum: 4000, minimum: 20 },
     stagger: [
       { maximum: 0.32, minimum: 0.3 },
       { maximum: 0.55, minimum: 0.5 },
@@ -358,7 +358,7 @@ export const WEAPON_BASE: GearBase & {
   range: [GeneratorRange, GeneratorRange];
   rate: [GeneratorRange, GeneratorRange];
 } = {
-  coinPrice: 800,
+  coinPrice: { maximum: 600, minimum: 1 },
   damage: [
     { maximum: 14, minimum: 12 },
     { maximum: 1000, minimum: 950 },
@@ -371,10 +371,10 @@ export const WEAPON_BASE: GearBase & {
     { maximum: 3700, minimum: 3500 },
     { maximum: 2200, minimum: 2000 },
   ],
-  scrapPrice: 2500,
+  scrapPrice: { maximum: 3000, minimum: 15 },
   staminaCost: [
     { maximum: 2, minimum: 1 },
-    { maximum: 60, minimum: 50 },
+    { maximum: 60, minimum: 55 },
   ],
   weight: [
     { maximum: 2, minimum: 1 },
@@ -383,9 +383,9 @@ export const WEAPON_BASE: GearBase & {
 };
 
 export const WEAPON_MODIFIER = {
-  "one-handed": { damage: 1, rate: 1 },
-  ranged: { damage: 1.2, rate: 1 },
-  "two-handed": { damage: 1.5, rate: 1.5 },
+  "one-handed": { damage: 1, price: 1, rate: 1 },
+  ranged: { damage: 1.2, price: 1.1, rate: 1 },
+  "two-handed": { damage: 1.5, price: 1.25, rate: 1.5 },
 };
 
 export const WEAPON_NONE: Omit<Weapon, "coinPrice" | "isEquipped" | "scrapPrice"> = {

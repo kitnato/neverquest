@@ -23,7 +23,7 @@ import { skills } from "@neverquest/state/skills";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 import { generateArmor } from "@neverquest/utilities/generators";
-import { getArmorPrices, getArmorRanges, getGrowthSigmoid } from "@neverquest/utilities/getters";
+import { getArmorRanges, getGearPrices, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function ArmorOptions() {
   const allowNSFWValue = useRecoilValue(allowNSFW);
@@ -36,16 +36,16 @@ export function ArmorOptions() {
   const [armorClass, setArmorClass] = useState<ArmorClass>("hide");
   const [armorLevel, setArmorLevel] = useState(stageValue);
 
+  const { Icon } = ARMOR_SPECIFICATIONS[armorClass];
   const factor = getGrowthSigmoid(armorLevel);
-  const { coinPrice, scrapPrice } = getArmorPrices({
-    factor,
-    gearClass: armorClass,
-  });
   const { deflection, protection, staminaCost, weight } = getArmorRanges({
     factor,
     gearClass: armorClass,
   });
-  const { Icon } = ARMOR_SPECIFICATIONS[armorClass];
+  const { coinPrice, scrapPrice } = getGearPrices({
+    factor,
+    ...ARMOR_SPECIFICATIONS[armorClass],
+  });
   const maximumArmorLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
 
   const craftArmor = () =>

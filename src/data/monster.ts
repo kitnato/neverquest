@@ -22,40 +22,42 @@ export const BLIGHT = {
 };
 
 export const LOOT = {
-  bonus: 0.03,
-  boss: 1.2,
-  coins: 250,
-  essence: 2000,
-  scrap: 500,
+  bonus: 0.02,
+  boss: 0.2,
+  coins: 2,
+  essence: 4,
+  scrap: 3,
 };
 
 export const MONSTER_ATTACK_RATE = {
+  base: 4000,
   bonus: 0.01,
   boss: 1.1,
-  maximum: 4000,
-  minimum: 1500,
+};
+
+export const MONSTER_ATTENUATION = {
+  damage: 50,
+  health: 80,
+  loot: 20,
+  rate: 1000,
 };
 
 export const MONSTER_DAMAGE = {
+  base: 10,
   bonus: 0.02,
   boss: 1.2,
-  maximum: 1000,
-  minimum: 8,
 };
 
 export const MONSTER_HEALTH = {
+  base: 25,
   bonus: 0.03,
-  boss: 1.6,
-  maximum: 3000,
-  minimum: 25,
+  boss: 1.7,
 };
 
 export const MONSTER_NAME = {
-  prefix: { maximum: 1, minimum: 0.5 },
-  suffix: { maximum: 0.7, minimum: 0.01 },
+  prefix: { maximum: 1, minimum: 0.6 },
+  suffix: { maximum: 0.6, minimum: 0.01 },
 };
-
-export const MONSTER_POWER_SCALAR = 2500;
 
 export const POISON = {
   boss: 0.33,

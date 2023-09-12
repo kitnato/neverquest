@@ -22,7 +22,7 @@ import { skills } from "@neverquest/state/skills";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 import { generateShield } from "@neverquest/utilities/generators";
-import { getGrowthSigmoid, getShieldPrices, getShieldRanges } from "@neverquest/utilities/getters";
+import { getGearPrices, getGrowthSigmoid, getShieldRanges } from "@neverquest/utilities/getters";
 
 export function ShieldOptions() {
   const allowNSFWValue = useRecoilValue(allowNSFW);
@@ -35,17 +35,17 @@ export function ShieldOptions() {
   const isShowingStagger = useRecoilValue(isShowing("stagger"));
   const skillShieldcraft = useRecoilValue(skills("shieldcraft"));
 
+  const { Icon } = SHIELD_SPECIFICATIONS[shieldClass];
   const factor = getGrowthSigmoid(shieldLevel);
-  const { coinPrice, scrapPrice } = getShieldPrices({
+  const { coinPrice, scrapPrice } = getGearPrices({
     factor,
-    gearClass: shieldClass,
+    ...SHIELD_SPECIFICATIONS[shieldClass],
   });
+  const maximumShieldLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
   const { block, stagger, staminaCost, weight } = getShieldRanges({
     factor,
     gearClass: shieldClass,
   });
-  const { Icon } = SHIELD_SPECIFICATIONS[shieldClass];
-  const maximumShieldLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
 
   const craftShield = () =>
     generateShield({

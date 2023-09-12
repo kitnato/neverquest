@@ -56,7 +56,7 @@ export function FloatingText({ deltaType }: { deltaType: Delta }) {
             {Array.isArray(delta) ? (
               <Stack className={animationClass} onAnimationEnd={handleAnimationEnd(key)}>
                 {delta.map(({ color, value }) => (
-                  <span className={color ?? undefined} key={value}>
+                  <span className={color ?? undefined} key={value} style={{ whiteSpace: "nowrap" }}>
                     {value}
                   </span>
                 ))}

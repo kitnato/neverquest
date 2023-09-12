@@ -7,7 +7,6 @@ import {
   WEAPON_MODIFIER,
   WEAPON_SPECIFICATIONS,
 } from "@neverquest/data/inventory";
-import { MONSTER_POWER_SCALAR } from "@neverquest/data/monster";
 import type {
   ArmorClass,
   ShieldClass,
@@ -31,15 +30,6 @@ export function getAnimationClass({
   return `${CLASS_ANIMATED} ${CLASS_ANIMATE_PREFIX}${type}${
     isInfinite ? ` ${CLASS_ANIMATE_PREFIX}infinite` : ""
   }${speed ? ` ${CLASS_ANIMATE_PREFIX}${speed}` : ""}`;
-}
-
-export function getArmorPrices({ factor, gearClass }: { factor: number; gearClass: ArmorClass }) {
-  const { coinPrice, scrapPrice } = ARMOR_SPECIFICATIONS[gearClass];
-
-  return {
-    coinPrice: Math.round(coinPrice * factor),
-    scrapPrice: Math.round(scrapPrice * factor),
-  };
 }
 
 export function getArmorRanges({ factor, gearClass }: { factor: number; gearClass: ArmorClass }) {
@@ -105,8 +95,19 @@ export function getFromRange({ maximum, minimum }: GeneratorRange) {
   return Number.isInteger(minimum) && Number.isInteger(maximum) ? Math.round(result) : result;
 }
 
-export function getGrowthMonsterPower(extent: number) {
-  return getGrowthTriangular(extent) / MONSTER_POWER_SCALAR;
+export function getGearPrices({
+  coinPrice,
+  factor,
+  scrapPrice,
+}: {
+  coinPrice: GeneratorRange;
+  factor: number;
+  scrapPrice: GeneratorRange;
+}) {
+  return {
+    coinPrice: Math.round(coinPrice.minimum + coinPrice.maximum * factor),
+    scrapPrice: Math.round(scrapPrice.minimum + scrapPrice.maximum * factor),
+  };
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
@@ -150,15 +151,6 @@ export function getSellPrice({ coinPrice }: { coinPrice: number }) {
   return Math.ceil(coinPrice / 2);
 }
 
-export function getShieldPrices({ factor, gearClass }: { factor: number; gearClass: ShieldClass }) {
-  const { coinPrice, scrapPrice } = SHIELD_SPECIFICATIONS[gearClass];
-
-  return {
-    coinPrice: Math.round(coinPrice * factor),
-    scrapPrice: Math.round(scrapPrice * factor),
-  };
-}
-
 export function getShieldRanges({ factor, gearClass }: { factor: number; gearClass: ShieldClass }) {
   const { block, stagger, staminaCost, weight } = SHIELD_SPECIFICATIONS[gearClass];
 
@@ -172,15 +164,6 @@ export function getShieldRanges({ factor, gearClass }: { factor: number; gearCla
 
 export function getSnapshotGetter({ getLoadable }: Snapshot) {
   return <T>(state: RecoilValue<T>) => getLoadable(state).getValue();
-}
-
-export function getWeaponPrices({ factor }: { factor: number }) {
-  const { coinPrice, scrapPrice } = WEAPON_BASE;
-
-  return {
-    coinPrice: Math.round(coinPrice * factor),
-    scrapPrice: Math.round(scrapPrice * factor),
-  };
 }
 
 export function getWeaponRanges({

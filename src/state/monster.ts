@@ -7,6 +7,7 @@ import {
   BOSS_STAGE_START,
   LOOT,
   MONSTER_ATTACK_RATE,
+  MONSTER_ATTENUATION,
   MONSTER_DAMAGE,
   MONSTER_HEALTH,
   POISON,
@@ -23,7 +24,11 @@ import {
   type MonsterAilment,
 } from "@neverquest/types/unions";
 import { formatFloat } from "@neverquest/utilities/formatters";
-import { getDamagePerRate, getGrowthMonsterPower } from "@neverquest/utilities/getters";
+import {
+  getDamagePerRate,
+  getGrowthSigmoid,
+  getGrowthTriangular,
+} from "@neverquest/utilities/getters";
 
 // SELECTORS
 
@@ -94,16 +99,11 @@ export const isMonsterDead = withStateKey("isMonsterDead", (key) =>
 export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   selector({
     get: ({ get }) => {
-      const { bonus, boss, maximum, minimum } = MONSTER_ATTACK_RATE;
+      const { base, bonus, boss } = MONSTER_ATTACK_RATE;
+      const factor = getGrowthTriangular(get(stage)) / MONSTER_ATTENUATION.rate;
 
-      return (
-        maximum -
-        Math.round(
-          (maximum - minimum) *
-            getGrowthMonsterPower(get(stage)) *
-            (1 + get(progress) * bonus) *
-            (get(isBoss) ? boss : 1),
-        )
+      return Math.round(
+        (base - base * factor) * (1 + get(progress) * bonus) * (get(isBoss) ? boss : 1),
       );
     },
     key,
@@ -125,9 +125,7 @@ export const monsterBlightChance = withStateKey("monsterBlightChance", (key) =>
         return 0;
       }
 
-      return (
-        (minimum + maximum * getGrowthMonsterPower(stageValue)) * (1 + (get(isBoss) ? boss : 0))
-      );
+      return (minimum + maximum * getGrowthSigmoid(stageValue)) * (get(isBoss) ? boss : 1);
     },
     key,
   }),
@@ -136,17 +134,16 @@ export const monsterBlightChance = withStateKey("monsterBlightChance", (key) =>
 export const monsterDamage = withStateKey("monsterDamage", (key) =>
   selector({
     get: ({ get }) => {
-      const { bonus, boss, maximum, minimum } = MONSTER_DAMAGE;
+      const { base, bonus, boss } = MONSTER_DAMAGE;
+      const factor = getGrowthTriangular(get(stage)) / MONSTER_ATTENUATION.damage;
 
-      return (
-        minimum +
-        Math.round(
-          (maximum - minimum) *
-            getGrowthMonsterPower(get(stage)) *
+      return Math.round(
+        (base +
+          base *
+            factor *
             (1 + get(progress) * bonus) *
-            (get(isBoss) ? boss : 1) *
-            (get(isMonsterAiling("shocked")) ? ELEMENTAL_AILMENT_PENALTY.shocked : 1),
-        )
+            (get(isMonsterAiling("shocked")) ? ELEMENTAL_AILMENT_PENALTY.shocked : 1)) *
+          (get(isBoss) ? boss : 1),
       );
     },
     key,
@@ -169,16 +166,11 @@ export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (ke
 export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =>
   selector({
     get: ({ get }) => {
-      const { bonus, boss, maximum, minimum } = MONSTER_HEALTH;
+      const { base, bonus, boss } = MONSTER_HEALTH;
+      const factor = getGrowthTriangular(get(stage)) / MONSTER_ATTENUATION.health;
 
-      return (
-        minimum +
-        Math.round(
-          (maximum - minimum) *
-            getGrowthMonsterPower(get(stage)) *
-            (1 + get(progress) * bonus) *
-            (get(isBoss) ? boss : 1),
-        )
+      return Math.round(
+        (base + base * factor * (1 + get(progress) * bonus)) * (get(isBoss) ? boss : 1),
       );
     },
     key,
@@ -192,17 +184,16 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
 
       const isBossValue = get(isBoss);
       const stageValue = get(stage);
-      const factor = getGrowthMonsterPower(stageValue);
-      const totalBonus =
-        1 + get(progress) * bonus + (1 + get(lootBonus)) + (1 + (isBossValue ? boss : 0));
+      const factor = getGrowthTriangular(stageValue) / MONSTER_ATTENUATION.loot;
+      const totalBonus = 1 + get(progress) * bonus + get(lootBonus) + (isBossValue ? boss : 0);
 
       return {
-        coins: Math.ceil(coins * factor * totalBonus),
-        essence: Math.ceil(essence * factor * totalBonus),
+        coins: Math.round((coins + coins * factor) * totalBonus),
+        essence: Math.round((essence + essence * factor) * totalBonus),
         gems: isBossValue
           ? 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL)
           : 0,
-        scrap: Math.ceil(scrap * factor * totalBonus),
+        scrap: Math.round((scrap + scrap * factor) * totalBonus),
       };
     },
     key,
@@ -224,9 +215,7 @@ export const monsterPoisonChance = withStateKey("monsterPoisonChance", (key) =>
         return 0;
       }
 
-      return (
-        (minimum + maximum * getGrowthMonsterPower(stageValue)) * (1 + (get(isBoss) ? boss : 0))
-      );
+      return (minimum + maximum * getGrowthSigmoid(stageValue)) * (get(isBoss) ? boss : 1);
     },
     key,
   }),
@@ -239,7 +228,7 @@ export const monsterPoisonLength = withStateKey("monsterPoisonLength", (key) =>
         duration: { maximum, minimum },
       } = POISON;
 
-      return minimum + maximum * getGrowthMonsterPower(get(stage));
+      return Math.round(minimum + maximum * getGrowthSigmoid(get(stage)));
     },
     key,
   }),
@@ -252,7 +241,7 @@ export const monsterPoisonMagnitude = withStateKey("monsterPoisonMagnitude", (ke
         magnitude: { maximum, minimum },
       } = POISON;
 
-      return minimum + maximum * getGrowthMonsterPower(get(stage));
+      return minimum + maximum * getGrowthSigmoid(get(stage));
     },
     key,
   }),

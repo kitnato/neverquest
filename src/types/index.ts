@@ -54,8 +54,8 @@ export type ConsumableItem = ItemBase & {
 export type ElementalGearEffects = Record<Elemental, { damage: number; duration: number }>;
 
 export type GearBase = {
-  coinPrice: number;
-  scrapPrice: number;
+  coinPrice: GeneratorRange;
+  scrapPrice: GeneratorRange;
   staminaCost: [GeneratorRange, GeneratorRange];
   weight: [GeneratorRange, GeneratorRange];
 };

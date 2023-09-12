@@ -6,7 +6,7 @@ import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGe
 import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
-import { WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
+import { WEAPON_BASE, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
@@ -22,7 +22,7 @@ import type { WeaponGrip } from "@neverquest/types/unions";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 import { generateWeapon } from "@neverquest/utilities/generators";
-import { getGrowthSigmoid, getWeaponPrices, getWeaponRanges } from "@neverquest/utilities/getters";
+import { getGearPrices, getGrowthSigmoid, getWeaponRanges } from "@neverquest/utilities/getters";
 
 export function WeaponOptions() {
   const { weapon: craftedWeapon } = useRecoilValue(blacksmithInventory);
@@ -39,7 +39,7 @@ export function WeaponOptions() {
   const isShowingValue = useRecoilValue(isShowing(showingType));
 
   const factor = getGrowthSigmoid(weaponLevel);
-  const { coinPrice, scrapPrice } = getWeaponPrices({ factor });
+  const { coinPrice, scrapPrice } = getGearPrices({ factor, ...WEAPON_BASE });
   const { abilityChance, damage, rate, staminaCost, weight } = getWeaponRanges({
     factor,
     gearClass: weaponClass,

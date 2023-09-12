@@ -1,5 +1,10 @@
 import { nanoid } from "nanoid";
 
+import {
+  ARMOR_SPECIFICATIONS,
+  SHIELD_SPECIFICATIONS,
+  WEAPON_BASE,
+} from "@neverquest/data/inventory";
 import { LOCATION_NAME } from "@neverquest/data/location";
 import { generateArtifact } from "@neverquest/LOCRAN/generate/generateArtifact";
 import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
@@ -13,13 +18,11 @@ import type {
 import type { Armor, Shield, Weapon } from "@neverquest/types";
 import type { WeaponGrip } from "@neverquest/types/unions";
 import {
-  getArmorPrices,
   getArmorRanges,
   getFromRange,
+  getGearPrices,
   getGrowthSigmoid,
-  getShieldPrices,
   getShieldRanges,
-  getWeaponPrices,
   getWeaponRanges,
 } from "@neverquest/utilities/getters";
 
@@ -41,9 +44,9 @@ export function generateArmor({
   tags?: AffixTag[];
 }): Armor {
   const factor = getGrowthSigmoid(level);
-  const { coinPrice, scrapPrice } = getArmorPrices({
+  const { coinPrice, scrapPrice } = getGearPrices({
     factor,
-    gearClass,
+    ...ARMOR_SPECIFICATIONS[gearClass],
   });
   const { deflection, protection, staminaCost, weight } = getArmorRanges({
     factor,
@@ -99,9 +102,9 @@ export function generateShield({
   tags?: AffixTag[];
 }): Shield {
   const factor = getGrowthSigmoid(level);
-  const { coinPrice, scrapPrice } = getShieldPrices({
+  const { coinPrice, scrapPrice } = getGearPrices({
     factor,
-    gearClass,
+    ...SHIELD_SPECIFICATIONS[gearClass],
   });
   const { block, stagger, staminaCost, weight } = getShieldRanges({
     factor,
@@ -155,7 +158,7 @@ export function generateWeapon({
   tags?: AffixTag[];
 }): Weapon {
   const factor = getGrowthSigmoid(level);
-  const { coinPrice, scrapPrice } = getWeaponPrices({ factor });
+  const { coinPrice, scrapPrice } = getGearPrices({ factor, ...WEAPON_BASE });
   const { abilityChance, damage, range, rate, staminaCost, weight } = getWeaponRanges({
     factor,
     gearClass,

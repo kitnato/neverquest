@@ -30,10 +30,11 @@ export function useToggleEquipGear() {
         if (isShield(gear)) {
           set(isShowing("block"), true);
           set(isShowing("shield"), true);
+          set(isShowing("stamina"), true);
         }
 
         if (isWeapon(gear)) {
-          if (gear.staminaCost) {
+          if (gear.staminaCost > 0) {
             set(isShowing("stamina"), true);
 
             if (!get(attributes("endurance")).isUnlocked) {

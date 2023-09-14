@@ -11,7 +11,7 @@ import { RESERVES } from "@neverquest/data/reserves";
 import { ReactComponent as IconEndurance } from "@neverquest/icons/endurance.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
-import { rawAttributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
 import { powerBonus } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
@@ -21,7 +21,7 @@ export function Stamina() {
   const isShowingStamina = useRecoilValue(isShowing("stamina"));
   const isShowingStaminaDetails = useRecoilValue(isShowing("staminaDetails"));
   const powerBonusValue = useRecoilValue(powerBonus("endurance"));
-  const enduranceValue = useRecoilValue(rawAttributeStatistic("endurance"));
+  const enduranceValue = useRecoilValue(attributeStatistic("endurance"));
 
   const { baseAmount } = RESERVES.stamina;
 

@@ -15,6 +15,7 @@ export const skillsTrained = withStateKey("skillsTrained", (key) =>
       escrime: get(skills("escrime")),
       evasion: get(skills("evasion")),
       shieldcraft: get(skills("shieldcraft")),
+      siegecraft: get(skills("siegecraft")),
       traumatology: get(skills("traumatology")),
     }),
     key,

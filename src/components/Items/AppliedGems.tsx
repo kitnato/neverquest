@@ -3,19 +3,17 @@ import { useRecoilValue } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import { ELEMENTALS, GEMS_MAXIMUM, GEM_ELEMENTALS } from "@neverquest/data/inventory";
 import { ReactComponent as IconGem } from "@neverquest/icons/gem.svg";
-import { armor, weapon } from "@neverquest/state/inventory";
-import { gearElementalEffects } from "@neverquest/state/statistics";
-import type { ElementalGear } from "@neverquest/types/unions";
+import { elementalEffects } from "@neverquest/state/statistics";
+import type { GearItem, GearItemUnequipped } from "@neverquest/types";
+import { isArmor, isShield } from "@neverquest/types/type-guards";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
-import { formatTime } from "@neverquest/utilities/formatters";
+import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
-export function AppliedGems({ slot }: { slot: ElementalGear }) {
-  const armorValue = useRecoilValue(armor);
-  const gearElementalEffectsValue = useRecoilValue(gearElementalEffects(slot));
-  const weaponValue = useRecoilValue(weapon);
+export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequipped }) {
+  const elementalEffectsValue = useRecoilValue(elementalEffects);
 
-  const { gems } = slot === "armor" ? armorValue : weaponValue;
+  const { gems } = gearItem;
   const appliedGems = gems.length;
 
   if (appliedGems === 0) {
@@ -31,14 +29,23 @@ export function AppliedGems({ slot }: { slot: ElementalGear }) {
           ({ item, stack }) => {
             const { id, type } = item;
             const elemental = GEM_ELEMENTALS[type];
-            const { damage, duration } = gearElementalEffectsValue[elemental];
+            const effect =
+              elementalEffectsValue[
+                isArmor(gearItem) ? "armor" : isShield(gearItem) ? "shield" : "weapon"
+              ][elemental];
 
             return (
               <div key={id}>
-                <span className={ELEMENTALS[elemental].color}>{`${damage}`}</span>
+                <span className={ELEMENTALS[elemental].color}>{`${
+                  typeof effect === "number" ? `+${formatPercentage(effect, 0)}` : effect.damage
+                }`}</span>
                 {" · "}
                 <IconImage Icon={ELEMENTALS[elemental].Icon} size="tiny" />
-                {` ${formatTime(duration)} · `}
+                {` ${
+                  typeof effect === "number"
+                    ? `+${formatPercentage(effect, 0)}`
+                    : formatTime(effect.duration)
+                } · `}
                 <IconImage Icon={IconGem} size="tiny" />
                 &nbsp;
                 {stack}

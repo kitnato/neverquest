@@ -39,8 +39,11 @@ export function Blacksmith() {
           {DATA_TABS.map(({ Icon, key, label }) => (
             <Nav.Item key={key}>
               <Nav.Link eventKey={key}>
-                <IconImage Icon={Icon} />
-                &nbsp;{label}
+                <Stack className="justify-content-center" direction="horizontal" gap={3}>
+                  <IconImage Icon={Icon} />
+
+                  <span>{label}</span>
+                </Stack>
               </Nav.Link>
             </Nav.Item>
           ))}

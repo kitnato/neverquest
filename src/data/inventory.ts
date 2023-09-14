@@ -374,8 +374,8 @@ export const WEAPON_BASE: GearBase & {
   ],
   scrapPrice: { maximum: 3000, minimum: 15 },
   staminaCost: [
-    { maximum: 2, minimum: 1 },
-    { maximum: 60, minimum: 55 },
+    { maximum: 3, minimum: 1 },
+    { maximum: 65, minimum: 60 },
   ],
   weight: [
     { maximum: 2, minimum: 1 },
@@ -384,9 +384,9 @@ export const WEAPON_BASE: GearBase & {
 };
 
 export const WEAPON_MODIFIER = {
-  "one-handed": { damage: 1, price: 1, rate: 1 },
-  ranged: { damage: 1.2, price: 1.1, rate: 1 },
-  "two-handed": { damage: 1.5, price: 1.25, rate: 1.5 },
+  "one-handed": { ability: 1, damage: 1, price: 1, rate: 1, stamina: 1, weight: 1 },
+  ranged: { ability: 1, damage: 1.2, price: 1.1, rate: 1, stamina: 1.1, weight: 1.15 },
+  "two-handed": { ability: 1.1, damage: 1.25, price: 1.2, rate: 1.33, stamina: 1.15, weight: 1.2 },
 };
 
 export const WEAPON_NONE: Omit<Weapon, "coinPrice" | "isEquipped" | "scrapPrice"> = {

@@ -13,7 +13,7 @@ import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.sv
 import { ReactComponent as IconShieldStagger } from "@neverquest/icons/shield-stagger.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
-import { SHIELD_CLASSES, type ShieldClass } from "@neverquest/LOCRAN/types";
+import { SHIELD_CLASS_TYPES, type ShieldClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -98,7 +98,7 @@ export function ShieldOptions() {
               onChange={({ target: { value } }) => setShieldClass(value as ShieldClass)}
               value={shieldClass}
             >
-              {SHIELD_CLASSES.map((shieldClass) => (
+              {SHIELD_CLASS_TYPES.map((shieldClass) => (
                 <option key={shieldClass} value={shieldClass}>
                   {capitalizeAll(shieldClass)}
                 </option>
@@ -152,7 +152,7 @@ export function ShieldOptions() {
       ) : craftedShield === null ? (
         <CraftGear coinPrice={coinPrice} onCraft={craftShield} scrapPrice={scrapPrice} />
       ) : (
-        <CraftedGear gear={craftedShield} />
+        <CraftedGear gearItem={craftedShield} />
       )}
     </>
   );

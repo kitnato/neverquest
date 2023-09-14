@@ -4,23 +4,23 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
+import { ReactComponent as IconDeflection } from "@neverquest/icons/execution.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
-import { deflection } from "@neverquest/state/statistics";
+import { execution } from "@neverquest/state/statistics";
 import { LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
-export function Deflection() {
-  const deflectionValue = useRecoilValue(deflection);
-  const isShowingValue = useRecoilValue(isShowing("deflection"));
-  const skillArmorcraft = useRecoilValue(skills("armorcraft"));
+export function Execution() {
+  const executionValue = useRecoilValue(execution);
+  const isShowingValue = useRecoilValue(isShowing("execution"));
+  const skillSiegecraft = useRecoilValue(skills("siegecraft"));
 
   useDeltaText({
-    atomDelta: deltas("deflection"),
-    atomValue: deflection,
-    stop: ({ previous }) => previous === null || !skillArmorcraft,
+    atomDelta: deltas("execution"),
+    atomValue: execution,
+    stop: ({ previous }) => previous === null || !skillSiegecraft,
   });
 
   if (!isShowingValue) {
@@ -31,14 +31,20 @@ export function Deflection() {
     <IconDisplay
       contents={
         <Stack direction="horizontal">
-          <span>{skillArmorcraft ? formatPercentage(deflectionValue) : LABEL_EMPTY}</span>
+          <span>
+            {skillSiegecraft
+              ? executionValue === 0
+                ? LABEL_EMPTY
+                : formatPercentage(executionValue, 0)
+              : LABEL_EMPTY}
+          </span>
 
-          <FloatingText deltaType="deflection" />
+          <FloatingText deltaType="execution" />
         </Stack>
       }
       Icon={IconDeflection}
       isAnimated
-      tooltip="Deflection chance"
+      tooltip="Execution threshold"
     />
   );
 }

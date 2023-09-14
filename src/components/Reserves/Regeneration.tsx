@@ -16,7 +16,7 @@ import { ReactComponent as IconRegenerationAmount } from "@neverquest/icons/rege
 import { ReactComponent as IconRegenerationRate } from "@neverquest/icons/regeneration-rate.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconVigor } from "@neverquest/icons/vigor.svg";
-import { rawAttributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import { isRecovering } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -46,8 +46,8 @@ export function Regeneration({ type }: { type: Reserve }) {
   const isShowingReserveDetails = useRecoilValue(isShowing("reserveDetails"));
   const powerBonusAmountValue = useRecoilValue(powerBonus("fortitude"));
   const powerBonusRateValue = useRecoilValue(powerBonus("vigor"));
-  const fortitudeValue = useRecoilValue(rawAttributeStatistic("fortitude"));
-  const vigorValue = useRecoilValue(rawAttributeStatistic("vigor"));
+  const fortitudeValue = useRecoilValue(attributeStatistic("fortitude"));
+  const vigorValue = useRecoilValue(attributeStatistic("vigor"));
   const regenerationRateValue = useRecoilValue(regenerationRate(type));
   const setRegenerationDuration = useSetRecoilState(regenerationDuration(type));
 

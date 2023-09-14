@@ -3,7 +3,7 @@ import type { Placement } from "react-bootstrap/esm/types";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ArmorName } from "@neverquest/components/Items/Armor/ArmorName";
 import { ItemName } from "@neverquest/components/Items/ItemName";
-import { ShieldName } from "@neverquest/components/Items/Shield/ShieldName";
+import { ShieldName } from "@neverquest/components/Items/Offhand/ShieldName";
 import { WeaponName } from "@neverquest/components/Items/Weapon/WeaponName";
 import { CONSUMABLES, TRINKETS } from "@neverquest/data/inventory";
 import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";

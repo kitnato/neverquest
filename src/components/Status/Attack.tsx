@@ -14,7 +14,7 @@ import { ReactComponent as IconAttackRate } from "@neverquest/icons/attack-rate.
 import { ReactComponent as IconWeaponSpeed } from "@neverquest/icons/speed.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
-import { rawAttributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import {
   attackDuration,
   canAttackOrParry,
@@ -40,7 +40,7 @@ export function Attack() {
   const isShowingAttackRate = useRecoilValue(isShowing("attackRate"));
   const isShowingAttackRateDetails = useRecoilValue(isShowing("attackRateDetails"));
   const powerBonusValue = useRecoilValue(powerBonus("speed"));
-  const speedValue = useRecoilValue(rawAttributeStatistic("speed"));
+  const speedValue = useRecoilValue(attributeStatistic("speed"));
   const weaponValue = useRecoilValue(weapon);
   const setAttackDuration = useSetRecoilState(attackDuration);
 

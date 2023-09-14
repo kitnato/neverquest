@@ -12,7 +12,7 @@ import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
 import { ReactComponent as IconStrength } from "@neverquest/icons/strength.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
-import { rawAttributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -25,7 +25,7 @@ export function Damage() {
   const damageTotalValue = useRecoilValue(damageTotal);
   const isShowingDamageDetails = useRecoilValue(isShowing("damageDetails"));
   const powerBonusValue = useRecoilValue(powerBonus("strength"));
-  const strengthValue = useRecoilValue(rawAttributeStatistic("strength"));
+  const strengthValue = useRecoilValue(attributeStatistic("strength"));
   const { damage: weaponDamage, gems } = useRecoilValue(weapon);
 
   const appliedGems = gems.length;

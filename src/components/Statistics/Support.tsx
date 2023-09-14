@@ -2,6 +2,7 @@ import { Col, Row } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { Deflection } from "@neverquest/components/Statistics/Deflection";
+import { Execution } from "@neverquest/components/Statistics/Execution";
 import { FreeBlock } from "@neverquest/components/Statistics/FreeBlock";
 import { LootBonus } from "@neverquest/components/Statistics/LootBonus";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -17,6 +18,10 @@ export function Support() {
 
   return (
     <Row>
+      <Col>
+        <Execution />
+      </Col>
+
       <Col>
         <Deflection />
       </Col>

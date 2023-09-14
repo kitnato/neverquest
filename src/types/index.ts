@@ -1,3 +1,4 @@
+import type { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import type {
   ArmorClass,
   ShieldClass,
@@ -5,14 +6,7 @@ import type {
   WeaponModality,
 } from "@neverquest/LOCRAN/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type {
-  Consumable,
-  Elemental,
-  Gem,
-  Showing,
-  Trinket,
-  WeaponGrip,
-} from "@neverquest/types/unions";
+import type { Consumable, Gem, Showing, Trinket, WeaponGrip } from "@neverquest/types/unions";
 
 export type Armor = GearItemBase & {
   deflection: number;
@@ -51,8 +45,6 @@ export type ConsumableItem = ItemBase & {
   type: Consumable;
 };
 
-export type ElementalGearEffects = Record<Elemental, { damage: number; duration: number }>;
-
 export type GearBase = {
   coinPrice: GeneratorRange;
   scrapPrice: GeneratorRange;
@@ -69,6 +61,8 @@ type GearItemBase = ItemBase & {
   name: string;
   scrapPrice: number;
 };
+
+export type GearItemUnequipped = typeof ARMOR_NONE | typeof SHIELD_NONE | typeof WEAPON_NONE;
 
 export type GemItem = ItemBase & {
   type: Gem;

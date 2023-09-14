@@ -12,7 +12,7 @@ import { ReactComponent as IconCriticalRating } from "@neverquest/icons/critical
 import { ReactComponent as IconDexterity } from "@neverquest/icons/dexterity.svg";
 import { ReactComponent as IconPerception } from "@neverquest/icons/perception.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
-import { rawAttributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
@@ -35,8 +35,8 @@ export function CriticalRating() {
   const powerBonusChanceValue = useRecoilValue(powerBonus("dexterity"));
   const powerBonusDamageValue = useRecoilValue(powerBonus("perception"));
   const skillAssassination = useRecoilValue(skills("assassination"));
-  const dexterityValue = useRecoilValue(rawAttributeStatistic("dexterity"));
-  const perceptionValue = useRecoilValue(rawAttributeStatistic("perception"));
+  const dexterityValue = useRecoilValue(attributeStatistic("dexterity"));
+  const perceptionValue = useRecoilValue(attributeStatistic("perception"));
 
   useDeltaText({
     atomDelta: deltas("criticalRating"),

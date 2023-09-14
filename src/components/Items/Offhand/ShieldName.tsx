@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconImage } from "@neverquest/components/IconImage";
-import { AppliedGemsShield } from "@neverquest/components/Items/AppliedGemsShield";
+import { AppliedGems } from "@neverquest/components/Items/AppliedGems";
 import { GearComparison } from "@neverquest/components/Items/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Items/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Items/StaminaCostDetail";
@@ -44,13 +44,13 @@ export function ShieldName({
               <GearLevelDetail
                 comparison={
                   showComparison
-                    ? { showingType: "shield", subtrahend: shieldEquippedValue.level }
+                    ? { showingType: "offhand", subtrahend: shieldEquippedValue.level }
                     : null
                 }
                 level={level}
               />
 
-              <AppliedGemsShield />
+              <AppliedGems gearItem={shield} />
 
               <tr>
                 <td className={CLASS_TABLE_CELL_ITALIC}>Block chance:</td>
@@ -61,7 +61,7 @@ export function ShieldName({
                   {showComparison && (
                     <GearComparison
                       difference={block - shieldEquippedValue.block}
-                      showingType="shield"
+                      showingType="offhand"
                     />
                   )}
                 </td>
@@ -71,7 +71,7 @@ export function ShieldName({
                 comparison={
                   showComparison
                     ? {
-                        showingType: "shield",
+                        showingType: "offhand",
                         subtrahend: shieldEquippedValue.staminaCost,
                       }
                     : null
@@ -127,7 +127,7 @@ export function ShieldName({
                         {showComparison && (
                           <GearComparison
                             difference={stagger - shieldEquippedValue.stagger}
-                            showingType="shield"
+                            showingType="offhand"
                           />
                         )}
                       </td>
@@ -141,7 +141,7 @@ export function ShieldName({
               <WeightDetail
                 comparison={
                   showComparison
-                    ? { showingType: "shield", subtrahend: shieldEquippedValue.weight }
+                    ? { showingType: "offhand", subtrahend: shieldEquippedValue.weight }
                     : null
                 }
                 weight={weight}

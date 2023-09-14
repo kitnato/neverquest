@@ -11,7 +11,7 @@ import { ReactComponent as IconAgility } from "@neverquest/icons/agility.svg";
 import { ReactComponent as IconDodgePenalty } from "@neverquest/icons/dodge-penalty.svg";
 import { ReactComponent as IconDodge } from "@neverquest/icons/dodge.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
-import { rawAttributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { armor, hasItem } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -31,7 +31,7 @@ export function Dodge() {
   const isShowingDodgePenalty = useRecoilValue(isShowing("dodgePenalty"));
   const hasTomeOfPower = useRecoilValue(hasItem("tome of power"));
   const powerBonusValue = useRecoilValue(powerBonus("agility"));
-  const statisticValue = useRecoilValue(rawAttributeStatistic("agility"));
+  const statisticValue = useRecoilValue(attributeStatistic("agility"));
   const skillEvasion = useRecoilValue(skills("evasion"));
 
   useDeltaText({

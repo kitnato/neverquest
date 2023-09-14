@@ -88,7 +88,7 @@ export const level = withStateKey("level", (key) =>
   }),
 );
 
-export const rawAttributeStatistic = withStateKey("rawAttributeStatistic", (key) =>
+export const attributeStatistic = withStateKey("attributeStatistic", (key) =>
   selectorFamily<number, Attribute>({
     get:
       (parameter) =>

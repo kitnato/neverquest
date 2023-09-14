@@ -9,8 +9,8 @@ export type AffixData = BaseData & {
   tags?: AffixTag[];
 };
 
-export const ARMOR_CLASSES = ["hide", "reinforced", "plate"] as const;
-export type ArmorClass = (typeof ARMOR_CLASSES)[number];
+export const ARMOR_CLASS_TYPES = ["hide", "reinforced", "plate"] as const;
+export type ArmorClass = (typeof ARMOR_CLASS_TYPES)[number];
 
 type ArmorSlot = "chest" | "feet" | "hands" | "head" | "legs" | "shoulders" | "waist";
 
@@ -73,10 +73,10 @@ export type NameData = BaseData & {
   type: Affix[];
 };
 
-export const SHIELD_CLASSES = ["small", "medium", "tower"] as const;
-export type ShieldClass = (typeof SHIELD_CLASSES)[number];
+export const SHIELD_CLASS_TYPES = ["small", "medium", "tower"] as const;
+export type ShieldClass = (typeof SHIELD_CLASS_TYPES)[number];
 
-export const WEAPON_CLASSES = ["blunt", "piercing", "slashing"] as const;
-export type WeaponClass = (typeof WEAPON_CLASSES)[number];
+export const WEAPON_CLASS_TYPES = ["blunt", "piercing", "slashing"] as const;
+export type WeaponClass = (typeof WEAPON_CLASS_TYPES)[number];
 
 export type WeaponModality = "melee" | "ranged";

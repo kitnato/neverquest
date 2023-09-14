@@ -33,13 +33,14 @@ export const MONSTER_ATTACK_RATE = {
   base: 4000,
   bonus: 0.01,
   boss: 1.1,
+  minimum: 500,
 };
 
 export const MONSTER_ATTENUATION = {
   damage: 50,
   health: 80,
   loot: 20,
-  rate: 1000,
+  rate: 1500,
 };
 
 export const MONSTER_DAMAGE = {

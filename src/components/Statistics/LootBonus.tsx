@@ -9,7 +9,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconLootBonus } from "@neverquest/icons/loot-bonus.svg";
 import { ReactComponent as IconLuck } from "@neverquest/icons/luck.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
-import { rawAttributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { hasItem } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -23,7 +23,7 @@ export function LootBonus() {
   const isShowingLootBonusDetails = useRecoilValue(isShowing("lootBonusDetails"));
   const lootBonusValue = useRecoilValue(lootBonus);
   const powerBonusValue = useRecoilValue(powerBonus("luck"));
-  const luckValue = useRecoilValue(rawAttributeStatistic("luck"));
+  const luckValue = useRecoilValue(attributeStatistic("luck"));
 
   useDeltaText({
     atomDelta: deltas("lootBonus"),

@@ -14,8 +14,7 @@ export function MonsterElementalAilment({ type }: { type: Elemental }) {
   const { ailment, Icon } = ELEMENTALS[type];
 
   const isMonsterAilingValue = useRecoilValue(isMonsterAiling(ailment));
-  const armorElementalEffects = useRecoilValue(totalElementalEffects("armor"));
-  const weaponElementalEffects = useRecoilValue(totalElementalEffects("weapon"));
+  const { armor, weapon } = useRecoilValue(totalElementalEffects);
   const setMonsterAilment = useSetRecoilState(monsterAilmentDuration(ailment));
 
   useAnimate({
@@ -23,7 +22,7 @@ export function MonsterElementalAilment({ type }: { type: Elemental }) {
     stop: !isMonsterAilingValue,
   });
 
-  if (armorElementalEffects[type].duration === 0 && weaponElementalEffects[type].duration === 0) {
+  if (armor[type].duration === 0 && weapon[type].duration === 0) {
     return null;
   }
 

@@ -32,6 +32,7 @@ export type Delta =
   | "attributePoints"
   | "bleedRating"
   | "block"
+  | "butchery"
   | "coins"
   | "coinsLoot"
   | "criticalRating"
@@ -44,6 +45,7 @@ export type Delta =
   | "essence"
   | "essenceAbsorbed"
   | "essenceLoot"
+  | "execution"
   | "finesse"
   | "health"
   | "healthRegenerationRate"
@@ -68,8 +70,6 @@ export type Delta =
 export const ELEMENTAL_TYPES = ["lightning", "fire", "ice"] as const;
 export type Elemental = (typeof ELEMENTAL_TYPES)[number];
 
-export type ElementalGear = Exclude<Gear, "shield">;
-
 export const GEAR_TYPES = ["armor", "shield", "weapon"] as const;
 export type Gear = (typeof GEAR_TYPES)[number];
 
@@ -80,7 +80,7 @@ export type Item = Consumable | Gear | Trinket;
 
 export type Location = "caravan" | "wilderness";
 
-export type Mastery = "cruelty" | "finesse" | "might" | "resilience" | "stability";
+export type Mastery = "butchery" | "cruelty" | "finesse" | "might" | "resilience" | "stability";
 
 export const MONSTER_AILMENT_TYPES = [
   "bleeding",
@@ -111,6 +111,7 @@ export const SHOWING_TYPES = [
   "dodge",
   "dodgePenalty",
   "essence",
+  "execution",
   "gameOver",
   "gearClass",
   "healthDetails",
@@ -125,7 +126,7 @@ export const SHOWING_TYPES = [
   "recovery",
   "reserveDetails",
   "scrap",
-  "shield",
+  "offhand",
   "stability",
   "stagger",
   "stamina",
@@ -145,6 +146,7 @@ export const SKILL_TYPES = [
   "calisthenics",
   "escrime",
   "evasion",
+  "siegecraft",
   "shieldcraft",
   "traumatology",
 ] as const;
@@ -161,6 +163,7 @@ export type StateKey =
   | "attributeCost"
   | "attributePoints"
   | "attributes"
+  | "attributeStatistic"
   | "autoEquip"
   | "blacksmithInventory"
   | "bleed"
@@ -192,13 +195,14 @@ export type StateKey =
   | "deflection"
   | "deltas"
   | "dodge"
+  | "elementalEffects"
   | "encumbrance"
   | "encumbranceMaximum"
   | "essence"
   | "essenceAbsorbed"
   | "essenceLoot"
+  | "execution"
   | "floatingTextQueues"
-  | "gearElementalEffects"
   | "hasBoughtFromMerchant"
   | "hasItem"
   | "hasKnapsack"
@@ -271,7 +275,6 @@ export type StateKey =
   | "progress"
   | "progressMaximum"
   | "protection"
-  | "rawAttributeStatistic"
   | "recoveryDuration"
   | "recoveryRate"
   | "regenerationAmount"
@@ -282,7 +285,6 @@ export type StateKey =
   | "scrap"
   | "scrapLoot"
   | "shield"
-  | "shieldElementalEffects"
   | "showDamagePerSecond"
   | "showGearComparison"
   | "showGearLevel"
@@ -312,4 +314,5 @@ export const TRINKET_TYPES = [
 ] as const;
 export type Trinket = (typeof TRINKET_TYPES)[number];
 
-export type WeaponGrip = "one-handed" | "two-handed";
+export const WEAPON_GRIP_TYPES = ["one-handed", "two-handed"] as const;
+export type WeaponGrip = (typeof WEAPON_GRIP_TYPES)[number];

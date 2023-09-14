@@ -6,31 +6,34 @@ import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGe
 import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
-import { WEAPON_BASE, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
+import { WEAPON_BASE, WEAPON_MODIFIER, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
+import { ReactComponent as IconGrip } from "@neverquest/icons/grip.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
-import { WEAPON_CLASSES, type WeaponClass } from "@neverquest/LOCRAN/types";
+import { WEAPON_CLASS_TYPES, type WeaponClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
-import type { WeaponGrip } from "@neverquest/types/unions";
+import { skills } from "@neverquest/state/skills";
+import { WEAPON_GRIP_TYPES, type WeaponGrip } from "@neverquest/types/unions";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 import { generateWeapon } from "@neverquest/utilities/generators";
 import { getGearPrices, getGrowthSigmoid, getWeaponRanges } from "@neverquest/utilities/getters";
 
 export function WeaponOptions() {
-  const { weapon: craftedWeapon } = useRecoilValue(blacksmithInventory);
   const allowNSFWValue = useRecoilValue(allowNSFW);
+  const { weapon: craftedWeapon } = useRecoilValue(blacksmithInventory);
+  const siegecraftSkillValue = useRecoilValue(skills("siegecraft"));
   const stageValue = useRecoilValue(stage);
 
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
-  const [weaponGrip] = useState<WeaponGrip>("one-handed");
+  const [weaponGrip, setWeaponGrip] = useState<WeaponGrip>("one-handed");
   const [weaponLevel, setWeaponLevel] = useState(stageValue);
 
   const { abilityName, IconAbility, IconGearClass, showingType } =
@@ -39,7 +42,11 @@ export function WeaponOptions() {
   const isShowingValue = useRecoilValue(isShowing(showingType));
 
   const factor = getGrowthSigmoid(weaponLevel);
-  const { coinPrice, scrapPrice } = getGearPrices({ factor, ...WEAPON_BASE });
+  const { coinPrice, scrapPrice } = getGearPrices({
+    factor,
+    ...WEAPON_BASE,
+    modifier: WEAPON_MODIFIER[weaponGrip].price,
+  });
   const { abilityChance, damage, rate, staminaCost, weight } = getWeaponRanges({
     factor,
     gearClass: weaponClass,
@@ -101,9 +108,9 @@ export function WeaponOptions() {
               onChange={({ target: { value } }) => setWeaponClass(value as WeaponClass)}
               value={weaponClass}
             >
-              {WEAPON_CLASSES.map((weaponClass) => (
-                <option key={weaponClass} value={weaponClass}>
-                  {capitalizeAll(weaponClass)}
+              {WEAPON_CLASS_TYPES.map((current) => (
+                <option key={current} value={current}>
+                  {capitalizeAll(current)}
                 </option>
               ))}
             </FormSelect>
@@ -112,6 +119,26 @@ export function WeaponOptions() {
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Class"
         />
+
+        {siegecraftSkillValue && (
+          <IconDisplay
+            contents={
+              <FormSelect
+                onChange={({ target: { value } }) => setWeaponGrip(value as WeaponGrip)}
+                value={weaponGrip}
+              >
+                {WEAPON_GRIP_TYPES.map((current) => (
+                  <option key={current} value={current}>
+                    {capitalizeAll(current)}
+                  </option>
+                ))}
+              </FormSelect>
+            }
+            Icon={IconGrip}
+            iconProps={{ overlayPlacement: "left" }}
+            tooltip="Grip"
+          />
+        )}
 
         <IconDisplay
           contents={`${damage.minimum}-${damage.maximum}`}
@@ -160,7 +187,7 @@ export function WeaponOptions() {
       {craftedWeapon === null ? (
         <CraftGear coinPrice={coinPrice} onCraft={craftWeapon} scrapPrice={scrapPrice} />
       ) : (
-        <CraftedGear gear={craftedWeapon} />
+        <CraftedGear gearItem={craftedWeapon} />
       )}
     </>
   );

@@ -14,7 +14,7 @@ import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { ReactComponent as IconArmorProtection } from "@neverquest/icons/protection.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
-import { ARMOR_CLASSES, type ArmorClass } from "@neverquest/LOCRAN/types";
+import { ARMOR_CLASS_TYPES, type ArmorClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -99,7 +99,7 @@ export function ArmorOptions() {
               onChange={({ target: { value } }) => setArmorClass(value as ArmorClass)}
               value={armorClass}
             >
-              {ARMOR_CLASSES.map((armorClass) => (
+              {ARMOR_CLASS_TYPES.map((armorClass) => (
                 <option key={armorClass} value={armorClass}>
                   {capitalizeAll(armorClass)}
                 </option>
@@ -157,7 +157,7 @@ export function ArmorOptions() {
       ) : craftedArmor === null ? (
         <CraftGear coinPrice={coinPrice} onCraft={craftArmor} scrapPrice={scrapPrice} />
       ) : (
-        <CraftedGear gear={craftedArmor} />
+        <CraftedGear gearItem={craftedArmor} />
       )}
     </>
   );

@@ -60,11 +60,11 @@ export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
             const elemental = ELEMENTAL_TYPES.find(
               (current) => ELEMENTALS[current].ailment === parameter,
             );
+            const { armor, weapon } = get(totalElementalEffects);
 
             return elemental === undefined
               ? false
-              : get(totalElementalEffects("armor"))[elemental].duration > 0 ||
-                  get(totalElementalEffects("weapon"))[elemental].duration > 0;
+              : armor[elemental].duration > 0 || weapon[elemental].duration > 0;
           }
         }
       },
@@ -99,11 +99,14 @@ export const isMonsterDead = withStateKey("isMonsterDead", (key) =>
 export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, bonus, boss } = MONSTER_ATTACK_RATE;
+      const { base, bonus, boss, minimum } = MONSTER_ATTACK_RATE;
       const factor = getGrowthTriangular(get(stage)) / MONSTER_ATTENUATION.rate;
 
       return Math.round(
-        (base - base * factor) * (1 + get(progress) * bonus) * (get(isBoss) ? boss : 1),
+        Math.max(
+          base - base * factor * (1 + get(progress) * bonus) * (get(isBoss) ? boss : 1),
+          minimum,
+        ),
       );
     },
     key,

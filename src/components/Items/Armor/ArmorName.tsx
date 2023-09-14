@@ -66,7 +66,7 @@ export function ArmorName({
                 </td>
               </tr>
 
-              <AppliedGems slot="armor" />
+              <AppliedGems gearItem={armor} />
 
               <tr>
                 {isShowingGearClass ? (

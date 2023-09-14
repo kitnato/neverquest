@@ -12,7 +12,7 @@ import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconVitality } from "@neverquest/icons/vitality.svg";
-import { rawAttributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isPoisoned, poisonDuration } from "@neverquest/state/reserves";
 import { powerBonus } from "@neverquest/state/statistics";
@@ -23,7 +23,7 @@ export function Health() {
   const isPoisonedValue = useRecoilValue(isPoisoned);
   const isShowingHealthDetails = useRecoilValue(isShowing("healthDetails"));
   const powerBonusValue = useRecoilValue(powerBonus("vitality"));
-  const vitalityValue = useRecoilValue(rawAttributeStatistic("vitality"));
+  const vitalityValue = useRecoilValue(attributeStatistic("vitality"));
   const setPoisonDuration = useSetRecoilState(poisonDuration);
 
   const { baseAmount } = RESERVES.health;

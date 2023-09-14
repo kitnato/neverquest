@@ -89,6 +89,19 @@ export function getDamagePerTick({
   return Math.ceil((damage / duration) * (duration / ticks));
 }
 
+export function getElementalEffects({
+  base,
+  modifier,
+}: {
+  base: { damage: number; duration: number };
+  modifier: number;
+}) {
+  return {
+    damage: Math.round(base.damage + base.damage * modifier),
+    duration: Math.round(base.duration + base.duration * modifier),
+  };
+}
+
 export function getFromRange({ maximum, minimum }: GeneratorRange) {
   const result = Math.random() * (maximum - minimum) + minimum;
 
@@ -98,15 +111,17 @@ export function getFromRange({ maximum, minimum }: GeneratorRange) {
 export function getGearPrices({
   coinPrice,
   factor,
+  modifier = 1,
   scrapPrice,
 }: {
   coinPrice: GeneratorRange;
   factor: number;
+  modifier?: number;
   scrapPrice: GeneratorRange;
 }) {
   return {
-    coinPrice: Math.round(coinPrice.minimum + coinPrice.maximum * factor),
-    scrapPrice: Math.round(scrapPrice.minimum + scrapPrice.maximum * factor),
+    coinPrice: Math.round((coinPrice.minimum + coinPrice.maximum * factor) * modifier),
+    scrapPrice: Math.round((scrapPrice.minimum + scrapPrice.maximum * factor) * modifier),
   };
 }
 
@@ -177,17 +192,22 @@ export function getWeaponRanges({
   grip: WeaponGrip;
   modality: WeaponModality;
 }) {
-  const { damage: damageModifier, rate: rateModifier } =
-    modality === "melee" ? WEAPON_MODIFIER[grip] : WEAPON_MODIFIER.ranged;
+  const {
+    ability: abilityModifier,
+    damage: damageModifier,
+    rate: rateModifier,
+    stamina: staminaModifier,
+    weight: weightModifier,
+  } = modality === "melee" ? WEAPON_MODIFIER[grip] : WEAPON_MODIFIER.ranged;
   const { damage, range, rate, staminaCost, weight } = WEAPON_BASE;
   const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
 
   return {
-    abilityChance: getRange({ factor, ranges: abilityChance }),
+    abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
     damage: getRange({ factor, modifier: damageModifier, ranges: damage }),
     range: getRange({ factor, ranges: range }),
     rate: getRange({ factor, modifier: rateModifier, ranges: rate }),
-    staminaCost: getRange({ factor, ranges: staminaCost }),
-    weight: getRange({ factor, ranges: weight }),
+    staminaCost: getRange({ factor, modifier: staminaModifier, ranges: staminaCost }),
+    weight: getRange({ factor, modifier: weightModifier, ranges: weight }),
   };
 }

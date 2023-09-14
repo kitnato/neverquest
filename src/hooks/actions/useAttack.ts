@@ -10,7 +10,13 @@ import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import { isMonsterAiling, monsterAilmentDuration, monsterElement } from "@neverquest/state/monster";
+import {
+  isMonsterAiling,
+  monsterAilmentDuration,
+  monsterElement,
+  monsterHealth,
+  monsterHealthMaximum,
+} from "@neverquest/state/monster";
 import { skills } from "@neverquest/state/skills";
 import {
   attackRateTotal,
@@ -18,6 +24,7 @@ import {
   criticalChance,
   criticalStrike,
   damageTotal,
+  execution,
 } from "@neverquest/state/statistics";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
@@ -35,12 +42,55 @@ export function useAttack() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const { abilityChance, gearClass, staminaCost } = get(weapon);
+        const { abilityChance, gearClass, grip, staminaCost } = get(weapon);
 
         // TODO - make into a selector based on constituents like canReceiveAilments
         set(isShowing("statistics"), true);
 
+        if (get(isAttacking) && get(attackDuration) === 0) {
+          set(attackDuration, get(attackRateTotal));
+        }
+
         if (get(canAttackOrParry)) {
+          if (staminaCost > 0) {
+            changeStamina({ isRegeneration: false, value: -staminaCost });
+          }
+
+          animateElement({
+            element: get(monsterElement),
+            speed: "fast",
+            type: "headShake",
+          });
+
+          const isTwoHanded = grip === "two-handed";
+          const monsterHealthValue = get(monsterHealth);
+          const hasExecuted =
+            get(skills("siegecraft")) &&
+            isTwoHanded &&
+            monsterHealthValue / get(monsterHealthMaximum) <= get(execution);
+
+          if (isTwoHanded) {
+            increaseMastery("butchery");
+          }
+
+          if (hasExecuted) {
+            changeMonsterHealth({
+              delta: [
+                {
+                  color: "text-muted",
+                  value: "EXECUTE",
+                },
+                {
+                  color: "text-danger",
+                  value: `-${monsterHealthValue}`,
+                },
+              ],
+              value: -monsterHealthValue,
+            });
+
+            return;
+          }
+
           const hasInflictedCritical =
             get(skills("assassination")) && Math.random() <= get(criticalChance);
           const hasInflictedBleed =
@@ -61,10 +111,6 @@ export function useAttack() {
               value: totalDamage,
             },
           ];
-
-          if (staminaCost > 0) {
-            changeStamina({ isRegeneration: false, value: -staminaCost });
-          }
 
           if (hasInflictedCritical) {
             monsterDeltas.push({
@@ -102,12 +148,6 @@ export function useAttack() {
           );
 
           changeMonsterHealth({ delta: monsterDeltas, value: totalDamage });
-
-          animateElement({
-            element: get(monsterElement),
-            speed: "fast",
-            type: "headShake",
-          });
         } else {
           set(deltas("stamina"), [
             {
@@ -119,10 +159,6 @@ export function useAttack() {
               value: `(${staminaCost})`,
             },
           ]);
-        }
-
-        if (get(isAttacking) && get(attackDuration) === 0) {
-          set(attackDuration, get(attackRateTotal));
         }
       },
     [changeMonsterHealth, changeStamina, increaseMastery, inflictElementalAilment],

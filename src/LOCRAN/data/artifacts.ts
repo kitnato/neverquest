@@ -74,6 +74,12 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    artifactClass: "slashing",
+    name: "battleaxe",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
     name: "bauble",
     type: "trinket",
   },
@@ -224,6 +230,12 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "shield",
   },
   {
+    artifactClass: "slashing",
+    name: "bullwhip",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
     artifactClass: "blunt",
     name: "burger",
     subtype: "melee",
@@ -356,6 +368,12 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "armor",
   },
   {
+    artifactClass: "piercing",
+    name: "crucifix",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
     name: "cube",
     type: "trinket",
   },
@@ -432,6 +450,12 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    artifactClass: "piercing",
+    name: "dirk",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
     name: "doll",
     type: "trinket",
   },
@@ -442,6 +466,12 @@ export const ARTIFACTS: ArtifactData[] = [
   {
     artifactClass: "piercing",
     name: "drill",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "blunt",
+    name: "dumbbell",
     subtype: "melee",
     type: "weapon",
   },
@@ -473,6 +503,12 @@ export const ARTIFACTS: ArtifactData[] = [
   {
     artifactClass: "piercing",
     name: "falx",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "slashing",
+    name: "fan",
     subtype: "melee",
     type: "weapon",
   },
@@ -560,9 +596,10 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "trinket",
   },
   {
-    name: "greatshield",
-    subtype: "tower",
-    type: "shield",
+    artifactClass: "slashing",
+    name: "greataxe",
+    subtype: "melee",
+    type: "weapon",
   },
   {
     name: "greatshield",
@@ -700,6 +737,12 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    artifactClass: "slashing",
+    name: "labrys",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
     artifactClass: "blunt",
     name: "ladle",
     subtype: "melee",
@@ -748,6 +791,12 @@ export const ARTIFACTS: ArtifactData[] = [
     artifactClass: "piercing",
     name: "longbow",
     subtype: "ranged",
+    type: "weapon",
+  },
+  {
+    artifactClass: "slashing",
+    name: "longsword",
+    subtype: "melee",
     type: "weapon",
   },
   {
@@ -942,6 +991,18 @@ export const ARTIFACTS: ArtifactData[] = [
   {
     artifactClass: "blunt",
     name: "pizza",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "piercing",
+    name: "polearm",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "slashing",
+    name: "poleaxe",
     subtype: "melee",
     type: "weapon",
   },
@@ -1216,6 +1277,12 @@ export const ARTIFACTS: ArtifactData[] = [
   {
     artifactClass: "slashing",
     name: "talon",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "piercing",
+    name: "tanto",
     subtype: "melee",
     type: "weapon",
   },

@@ -1012,6 +1012,10 @@ export const CREATURES: CreatureData[] = [
     type: "human",
   },
   {
+    name: "protoplasm",
+    type: "monster",
+  },
+  {
     name: "psycho",
     type: "monster",
   },

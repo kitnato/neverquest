@@ -5,6 +5,7 @@ import { ReactComponent as IconCalisthenics } from "@neverquest/icons/calistheni
 import { ReactComponent as IconEscrime } from "@neverquest/icons/escrime.svg";
 import { ReactComponent as IconEvasion } from "@neverquest/icons/evasion.svg";
 import { ReactComponent as IconShieldcraft } from "@neverquest/icons/shieldcraft.svg";
+import { ReactComponent as IconSiegecraft } from "@neverquest/icons/siegecraft.svg";
 import { ReactComponent as IconTraumatology } from "@neverquest/icons/traumatology.svg";
 import type { SVGIcon } from "@neverquest/types/props";
 import type { Attribute, Mastery, Showing, Skill } from "@neverquest/types/unions";
@@ -77,6 +78,14 @@ export const SKILLS: Record<
     requiredLevel: 22,
     shows: ["stability"],
     unlocksMasteries: ["stability"],
+  },
+  siegecraft: {
+    coinPrice: 150,
+    description: "Unlocks the use of two-handed melee weapons that have a chance to execute.",
+    Icon: IconSiegecraft,
+    requiredLevel: 34,
+    shows: ["execution"],
+    unlocksMasteries: ["butchery"],
   },
   traumatology: {
     coinPrice: 60,

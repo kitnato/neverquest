@@ -40,7 +40,7 @@ export const MONSTER_ATTENUATION = {
   damage: 50,
   health: 80,
   loot: 20,
-  rate: 1500,
+  rate: 1400,
 };
 
 export const MONSTER_DAMAGE = {

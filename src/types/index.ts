@@ -22,7 +22,7 @@ export type AttributeData = AttributeOrMasteryBaseData & {
   shows?: Showing;
 };
 
-type AttributeOrMasteryBaseData = UnlockedState & {
+export type AttributeOrMasteryBaseData = UnlockedState & {
   base: number;
   description: string;
   Icon: SVGIcon;
@@ -79,11 +79,6 @@ type ItemBase = {
   coinPrice: number;
   id: string;
   weight: number;
-};
-
-export type MasteryData = AttributeOrMasteryBaseData & {
-  instructions: string;
-  maximum: number;
 };
 
 export type MerchantInventory = {

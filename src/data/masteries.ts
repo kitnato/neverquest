@@ -4,12 +4,18 @@ import { ReactComponent as IconFinesse } from "@neverquest/icons/finesse.svg";
 import { ReactComponent as IconMight } from "@neverquest/icons/might.svg";
 import { ReactComponent as IconResilience } from "@neverquest/icons/resilience.svg";
 import { ReactComponent as IconStability } from "@neverquest/icons/stability.svg";
-import type { MasteryData } from "@neverquest/types";
+import type { AttributeOrMasteryBaseData } from "@neverquest/types";
 import type { Mastery } from "@neverquest/types/unions";
 
-export const MASTERIES: Record<Mastery, MasteryData> = {
+export const MASTERIES: Record<
+  Mastery,
+  AttributeOrMasteryBaseData & {
+    instructions: string;
+    maximum: number;
+  }
+> = {
   butchery: {
-    base: 0.1,
+    base: 0.15,
     description: "Determines monster health threshold for execution.",
     Icon: IconButchery,
     increment: 0.01,
@@ -63,14 +69,5 @@ export const MASTERIES: Record<Mastery, MasteryData> = {
     maximum: 0.66,
   },
 };
-
-export const MASTERIES_ORDER: Mastery[] = [
-  "might",
-  "finesse",
-  "cruelty",
-  "resilience",
-  "butchery",
-  "stability",
-];
 
 export const MASTERY_PROGRESS = 1;

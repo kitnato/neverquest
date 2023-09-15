@@ -1,4 +1,3 @@
-import { CREW } from "@neverquest/data/caravan";
 import { ReactComponent as IconAnatomy } from "@neverquest/icons/anatomy.svg";
 import { ReactComponent as IconArmorcraft } from "@neverquest/icons/armorcraft.svg";
 import { ReactComponent as IconAssassination } from "@neverquest/icons/assassination.svg";
@@ -90,8 +89,3 @@ export const SKILLS: Record<
     unlocksMasteries: ["might"],
   },
 };
-
-export const SKILLS_ORDER: Skill[] = Object.entries(SKILLS)
-  .sort(([a], [b]) => a.localeCompare(b))
-  .sort(([, a], [, b]) => CREW[a.requiredCrew].requiredStage - CREW[b.requiredCrew].requiredStage)
-  .map(([type]) => type as Skill);

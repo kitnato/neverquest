@@ -15,6 +15,8 @@ export function useAcquireSkill() {
 
         set(skills(skill), true);
 
+        set(isShowing("skills"), true);
+
         shows?.forEach((show) => {
           set(isShowing(show), true);
         });

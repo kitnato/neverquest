@@ -2,38 +2,36 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { TrainableSkill } from "@neverquest/components/Caravan/Mercenary/TrainableSkill";
-import { TrainedSkill } from "@neverquest/components/Caravan/Mercenary/TrainedSkill";
-import { SKILLS_ORDER } from "@neverquest/data/skills";
+import { Skills } from "@neverquest/components/Skills";
+import { CREW } from "@neverquest/data/caravan";
+import { SKILLS } from "@neverquest/data/skills";
 import { skillsTrained } from "@neverquest/state/skills";
+import type { Skill } from "@neverquest/types/unions";
+
+const ALL_SKILLS = Object.entries(SKILLS)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .sort(([, a], [, b]) => CREW[a.requiredCrew].requiredStage - CREW[b.requiredCrew].requiredStage)
+  .map(([type]) => type as Skill);
 
 export function Mercenary() {
-  const skillsTrainedAll = Object.values(useRecoilValue(skillsTrained));
-
-  const allTrained = skillsTrainedAll.every((isSkillTrained) => isSkillTrained);
-  const noneTrained = skillsTrainedAll.every((isSkillTrained) => !isSkillTrained);
+  const skillsTrainedValue = Object.values(useRecoilValue(skillsTrained));
 
   return (
     <Stack gap={5}>
       <Stack gap={3}>
         <h6>Acquire new skills</h6>
 
-        {allTrained ? (
+        {skillsTrainedValue.every((isSkillTrained) => isSkillTrained) ? (
           <span className="fst-italic">None available.</span>
         ) : (
-          SKILLS_ORDER.map((type) => <TrainableSkill key={type} type={type} />)
+          ALL_SKILLS.map((type) => <TrainableSkill key={type} type={type} />)
         )}
       </Stack>
 
       <Stack gap={3}>
         <h6>Trained skills</h6>
 
-        {noneTrained ? (
-          <span className="fst-italic">None.</span>
-        ) : (
-          SKILLS_ORDER.sort((a, b) => a.localeCompare(b)).map((type) => (
-            <TrainedSkill key={type} type={type} />
-          ))
-        )}
+        <Skills />
       </Stack>
     </Stack>
   );

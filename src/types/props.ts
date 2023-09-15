@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { FunctionComponent, ReactNode, SVGProps } from "react";
 import type { Placement } from "react-bootstrap/esm/types";
 
 import type { Showing } from "@neverquest/types/unions";
@@ -27,4 +27,10 @@ export type ResourceTransaction = Partial<{
   scrapDifference: number;
 }>;
 
-export type SVGIcon = React.FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string }>;
+export type SVGIcon = FunctionComponent<SVGProps<SVGSVGElement> & { title?: string }>;
+
+export type TabData = {
+  Component: FunctionComponent;
+  Icon: SVGIcon;
+  label: string;
+}[];

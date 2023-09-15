@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 
 import { AttackButton } from "@neverquest/components/Controls/AttackButton";
-import { AttributesButton } from "@neverquest/components/Controls/AttributesButton";
+import { CapabilitiesButton } from "@neverquest/components/Controls/CapabilitiesButton";
 import { CollectLootButton } from "@neverquest/components/Controls/CollectLootButton";
 import { InventoryButton } from "@neverquest/components/Controls/InventoryButton";
 import { RetireButton } from "@neverquest/components/Controls/RetireButton";
@@ -14,7 +14,7 @@ export function Control() {
 
       <AttackButton />
 
-      <AttributesButton />
+      <CapabilitiesButton />
 
       <InventoryButton />
 

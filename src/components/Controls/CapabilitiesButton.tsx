@@ -6,7 +6,11 @@ import { Attributes } from "@neverquest/components/Attributes";
 import { ButtonBadge } from "@neverquest/components/Controls/ButtonBadge";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { IconImage } from "@neverquest/components/IconImage";
+import { IconTabs } from "@neverquest/components/IconTabs";
+import { Skills } from "@neverquest/components/Skills";
 import { ReactComponent as IconAttributes } from "@neverquest/icons/attributes.svg";
+import { ReactComponent as IconCapabilities } from "@neverquest/icons/capabilities.svg";
+import { ReactComponent as IconSkills } from "@neverquest/icons/skills.svg";
 import { ReactComponent as IconUpgrade } from "@neverquest/icons/upgrade.svg";
 import { areAttributesIncreasable } from "@neverquest/state/attributes";
 import { isAttacking, isGameOver } from "@neverquest/state/character";
@@ -14,23 +18,26 @@ import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function AttributesButton() {
+export function CapabilitiesButton() {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isGameOverValue = useRecoilValue(isGameOver);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isStageStartedValue = useRecoilValue(isStageStarted);
-  const isShowingAttributesButton = useRecoilValue(isShowing("attributesButton"));
+  const isShowingCapabilitiesButton = useRecoilValue(isShowing("capabilitiesButton"));
+  const isShowingSkills = useRecoilValue(isShowing("skills"));
 
   const [isScreenShowing, setScreenShowing] = useState(false);
 
-  if (!isShowingAttributesButton) {
+  if (!isShowingCapabilitiesButton) {
     return null;
   }
 
   return (
     <>
-      <OverlayTrigger overlay={<Tooltip>Attributes</Tooltip>}>
+      <OverlayTrigger
+        overlay={<Tooltip>{`Attributes${isShowingSkills ? " & skills" : ""}`}</Tooltip>}
+      >
         <span className={getAnimationClass({ type: "bounceIn" })}>
           <Button
             className={`position-relative${
@@ -45,7 +52,7 @@ export function AttributesButton() {
             onClick={() => setScreenShowing(true)}
             variant="outline-dark"
           >
-            <IconImage Icon={IconAttributes} />
+            <IconImage Icon={IconCapabilities} />
 
             <ButtonBadge Icon={IconUpgrade} isShowing={areAttributesIncreasableValue} />
           </Button>
@@ -55,9 +62,27 @@ export function AttributesButton() {
       <DismissableScreen
         isShowing={isScreenShowing}
         onClose={() => setScreenShowing(false)}
-        title="Attributes"
+        title={`${isShowingSkills ? "Capabilities" : "Attributes"}`}
       >
-        <Attributes />
+        {isShowingSkills ? (
+          <IconTabs
+            defaultTab="attributes"
+            tabs={[
+              {
+                Component: Attributes,
+                Icon: IconAttributes,
+                label: "attributes",
+              },
+              {
+                Component: Skills,
+                Icon: IconSkills,
+                label: "skills",
+              },
+            ]}
+          />
+        ) : (
+          <Attributes />
+        )}
       </DismissableScreen>
     </>
   );

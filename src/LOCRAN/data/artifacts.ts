@@ -1180,6 +1180,10 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    name: "relic",
+    type: "trinket",
+  },
+  {
     artifactClass: "piercing",
     name: "revolver",
     subtype: "ranged",
@@ -1330,6 +1334,12 @@ export const ARTIFACTS: ArtifactData[] = [
     artifactClass: "blunt",
     name: "sledgehammer",
     subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "blunt",
+    name: "sling",
+    subtype: "ranged",
     type: "weapon",
   },
   {

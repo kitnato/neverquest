@@ -3776,6 +3776,12 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
+    name: "perturbed",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
     name: "perverse",
   },
   {
@@ -4944,6 +4950,13 @@ export const AFFIXES: AffixData[] = [
     isNSFW: true,
     location: "prefix",
     name: "sultry",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "sundered",
+    tags: ["lowQuality"],
   },
   {
     artifact: "prefix",

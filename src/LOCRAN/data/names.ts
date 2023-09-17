@@ -6,7 +6,16 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    isNSFW: true,
+    name: "anus",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "axe",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "balls",
     type: ["prefix", "suffix"],
   },
   {
@@ -38,11 +47,19 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "bucket",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "bug",
     type: ["suffix"],
   },
   {
     name: "bulge",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "bungle",
     type: ["prefix", "suffix"],
   },
   {
@@ -75,6 +92,11 @@ export const NAMES: NameData[] = [
     type: ["suffix"],
   },
   {
+    isNSFW: true,
+    name: "cum",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "cut",
     type: ["suffix"],
   },
@@ -97,6 +119,11 @@ export const NAMES: NameData[] = [
   {
     name: "face",
     type: ["suffix"],
+  },
+  {
+    isNSFW: true,
+    name: "fart",
+    type: ["prefix", "suffix"],
   },
   {
     name: "fester",
@@ -140,6 +167,10 @@ export const NAMES: NameData[] = [
   },
   {
     name: "gash",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "gobble",
     type: ["prefix", "suffix"],
   },
   {
@@ -278,6 +309,11 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    isNSFW: true,
+    name: "nipple",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "noodle",
     type: ["prefix", "suffix"],
   },
@@ -329,7 +365,15 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "sack",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "sausage",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "scum",
     type: ["prefix", "suffix"],
   },
   {
@@ -347,6 +391,10 @@ export const NAMES: NameData[] = [
   },
   {
     name: "slime",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "sling",
     type: ["prefix", "suffix"],
   },
   {
@@ -403,6 +451,10 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "squeak",
+    type: ["prefix", "suffix"],
+  },
+  {
     isNSFW: true,
     name: "succ",
     type: ["prefix", "suffix"],
@@ -411,6 +463,10 @@ export const NAMES: NameData[] = [
     isNSFW: true,
     name: "sucker",
     type: ["suffix"],
+  },
+  {
+    name: "sunder",
+    type: ["prefix", "suffix"],
   },
   {
     isNSFW: true,
@@ -461,6 +517,10 @@ export const NAMES: NameData[] = [
   },
   {
     name: "wrath",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "wrinkle",
     type: ["prefix", "suffix"],
   },
 ];

@@ -5,9 +5,14 @@ import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonst
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
 import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment";
-import { attackDuration, canAttackOrParry, isAttacking } from "@neverquest/state/character";
+import {
+  attackDuration,
+  canAttackOrParry,
+  hasEnoughAmmunition,
+  isAttacking,
+} from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { weapon } from "@neverquest/state/inventory";
+import { ammunition, weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
@@ -26,6 +31,7 @@ import {
   damageTotal,
   execution,
 } from "@neverquest/state/statistics";
+import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -42,7 +48,10 @@ export function useAttack() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const { abilityChance, gearClass, grip, staminaCost } = get(weapon);
+        const canAttackOrParryValue = get(canAttackOrParry);
+        const hasEnoughAmmunitionValue = get(hasEnoughAmmunition);
+        const weaponValue = get(weapon);
+        const { abilityChance, gearClass, staminaCost } = weaponValue;
 
         // TODO - make into a selector based on constituents like canReceiveAilments
         set(isShowing("statistics"), true);
@@ -51,7 +60,7 @@ export function useAttack() {
           set(attackDuration, get(attackRateTotal));
         }
 
-        if (get(canAttackOrParry)) {
+        if (canAttackOrParryValue && hasEnoughAmmunitionValue) {
           if (staminaCost > 0) {
             changeStamina({ isRegeneration: false, value: -staminaCost });
           }
@@ -62,7 +71,7 @@ export function useAttack() {
             type: "headShake",
           });
 
-          const isTwoHanded = grip === "two-handed";
+          const isTwoHanded = isMelee(weaponValue) && weaponValue.grip === "two-handed";
           const monsterHealthValue = get(monsterHealth);
           const hasExecuted =
             get(skills("siegecraft")) &&
@@ -89,6 +98,11 @@ export function useAttack() {
             });
 
             return;
+          }
+
+          if (isRanged(weaponValue)) {
+            set(ammunition, (current) => current - weaponValue.ammunitionCost);
+            increaseMastery("marksmanship");
           }
 
           const hasInflictedCritical =
@@ -153,10 +167,6 @@ export function useAttack() {
             {
               color: "text-muted",
               value: "CANNOT ATTACK",
-            },
-            {
-              color: "text-danger",
-              value: `(${staminaCost})`,
             },
           ]);
         }

@@ -6,7 +6,7 @@ import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDispla
 import { OCCULTIST_PURGE_PRICE_MULTIPLIER } from "@neverquest/data/caravan";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
-import { ReactComponent as IconPurge } from "@neverquest/icons/ritual-purge.svg";
+import { ReactComponent as IconPurge } from "@neverquest/icons/purge.svg";
 import { essenceAbsorbed } from "@neverquest/state/attributes";
 import { coins } from "@neverquest/state/resources";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";

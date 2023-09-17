@@ -16,6 +16,7 @@ export type Consumable = (typeof CONSUMABLE_TYPES)[number];
 export type Crew =
   | "alchemist"
   | "blacksmith"
+  | "fletcher"
   | "medic"
   | "mercenary"
   | "merchant"
@@ -51,6 +52,7 @@ export type Delta =
   | "healthRegenerationRate"
   | "level"
   | "lootBonus"
+  | "marksmanship"
   | "might"
   | "monsterHealth"
   | "parry"
@@ -76,11 +78,21 @@ export type Gear = (typeof GEAR_TYPES)[number];
 export const GEM_TYPES = ["ruby", "sapphire", "topaz"] as const;
 export type Gem = (typeof GEM_TYPES)[number];
 
+export const GRIP_TYPES = ["one-handed", "two-handed"] as const;
+export type Grip = (typeof GRIP_TYPES)[number];
+
 export type Item = Consumable | Gear | Trinket;
 
 export type Location = "caravan" | "wilderness";
 
-export type Mastery = "butchery" | "cruelty" | "finesse" | "might" | "resilience" | "stability";
+export type Mastery =
+  | "butchery"
+  | "cruelty"
+  | "finesse"
+  | "marksmanship"
+  | "might"
+  | "resilience"
+  | "stability";
 
 export const MONSTER_AILMENT_TYPES = [
   "bleeding",
@@ -133,6 +145,7 @@ export const SHOWING_TYPES = [
   "stamina",
   "staminaDetails",
   "statistics",
+  "range",
   "thorns",
   "weapon",
   "weight",
@@ -142,6 +155,7 @@ export type Showing = (typeof SHOWING_TYPES)[number];
 
 export const SKILL_TYPES = [
   "anatomy",
+  "archery",
   "armorcraft",
   "assassination",
   "calisthenics",
@@ -155,6 +169,8 @@ export type Skill = (typeof SKILL_TYPES)[number];
 
 export type StateKey =
   | "allowNSFW"
+  | "ammunition"
+  | "ammunitionMaximum"
   | "appliedGems"
   | "areAttributesIncreasable"
   | "armor"
@@ -203,11 +219,14 @@ export type StateKey =
   | "essenceAbsorbed"
   | "essenceLoot"
   | "execution"
+  | "fletcherInventory"
   | "floatingTextQueues"
   | "hasBoughtFromMerchant"
+  | "hasEnoughAmmunition"
   | "hasItem"
   | "hasKnapsack"
   | "hasLooted"
+  | "hasMonsterClosed"
   | "health"
   | "healthMaximum"
   | "healthMaximumTotal"
@@ -258,6 +277,7 @@ export type StateKey =
   | "monsterBlightChance"
   | "monsterDamage"
   | "monsterDamagePerSecond"
+  | "monsterDistance"
   | "monsterElement"
   | "monsterHealth"
   | "monsterHealthMaximum"
@@ -277,6 +297,7 @@ export type StateKey =
   | "progress"
   | "progressMaximum"
   | "protection"
+  | "range"
   | "recoveryDuration"
   | "recoveryRate"
   | "regenerationAmount"
@@ -309,6 +330,7 @@ export type StateKey =
 
 export const TRINKET_TYPES = [
   "antique coin",
+  "ammunition pouch",
   "compass",
   "hearthstone",
   "knapsack",
@@ -316,6 +338,3 @@ export const TRINKET_TYPES = [
   "tome of power",
 ] as const;
 export type Trinket = (typeof TRINKET_TYPES)[number];
-
-export const WEAPON_GRIP_TYPES = ["one-handed", "two-handed"] as const;
-export type WeaponGrip = (typeof WEAPON_GRIP_TYPES)[number];

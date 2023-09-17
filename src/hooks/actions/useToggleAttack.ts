@@ -10,6 +10,7 @@ import {
   monsterAttackDuration,
   monsterAttackRate,
   monsterBleedingDelta,
+  monsterDistance,
   monsterHealth,
   monsterHealthMaximum,
 } from "@neverquest/state/monster";
@@ -41,6 +42,7 @@ export function useToggleAttack() {
           if (!get(isMonsterDead)) {
             reset(monsterAilmentDuration("bleeding"));
             reset(monsterBleedingDelta);
+            reset(monsterDistance);
 
             const difference = get(monsterHealthMaximum) - get(monsterHealth);
 

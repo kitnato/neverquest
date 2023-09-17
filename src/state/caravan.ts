@@ -2,7 +2,7 @@ import { atom, atomFamily, selector } from "recoil";
 
 import { CREW_ORDER } from "@neverquest/data/caravan";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import type { BlacksmithInventory, MerchantInventory } from "@neverquest/types";
+import type { BlacksmithInventory, MerchantInventory, Weapon } from "@neverquest/types";
 import type { Crew, CrewStatus } from "@neverquest/types/unions";
 
 // SELECTORS
@@ -49,6 +49,14 @@ export const hireStatus = withStateKey("hireStatus", (key) =>
   atomFamily<{ status: CrewStatus }, Crew>({
     default: { status: null },
     effects: (parameter) => [handleLocalStorage<{ status: CrewStatus }>({ key, parameter })],
+    key,
+  }),
+);
+
+export const fletcherInventory = withStateKey("fletcherInventory", (key) =>
+  atom<Weapon | null>({
+    default: null,
+    effects: [handleLocalStorage<Weapon | null>({ key })],
     key,
   }),
 );

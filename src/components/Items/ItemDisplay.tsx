@@ -8,13 +8,15 @@ import { WeaponName } from "@neverquest/components/Items/Weapon/WeaponName";
 import { CONSUMABLES, TRINKETS } from "@neverquest/data/inventory";
 import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
 import { ReactComponent as IconGem } from "@neverquest/icons/gem.svg";
+import { ReactComponent as IconMelee } from "@neverquest/icons/melee.svg";
+import { ReactComponent as IconRanged } from "@neverquest/icons/ranged.svg";
 import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
-import { ReactComponent as IconWeapon } from "@neverquest/icons/weapon.svg";
 import type { InventoryItem } from "@neverquest/types";
 import type { IconImageDOMProps } from "@neverquest/types/props";
 import {
   isArmor,
   isConsumable,
+  isMelee,
   isShield,
   isTrinket,
   isWeapon,
@@ -71,7 +73,7 @@ export function ItemDisplay({
   if (isTrinket(item)) {
     return (
       <IconDisplay
-        contents={<ItemName item={item} placement={overlayPlacement} />}
+        contents={<ItemName item={item} placement={overlayPlacement} stack={stack} />}
         Icon={TRINKETS[item.type].Icon}
         iconProps={iconProps}
         tooltip="Trinket"
@@ -83,7 +85,7 @@ export function ItemDisplay({
     return (
       <IconDisplay
         contents={<WeaponName placement={overlayPlacement} weapon={item} />}
-        Icon={IconWeapon}
+        Icon={isMelee(item) ? IconMelee : IconRanged}
         iconProps={iconProps}
         tooltip="Weapon"
       />

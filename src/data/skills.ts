@@ -1,4 +1,5 @@
 import { ReactComponent as IconAnatomy } from "@neverquest/icons/anatomy.svg";
+import { ReactComponent as IconArchery } from "@neverquest/icons/archery.svg";
 import { ReactComponent as IconArmorcraft } from "@neverquest/icons/armorcraft.svg";
 import { ReactComponent as IconAssassination } from "@neverquest/icons/assassination.svg";
 import { ReactComponent as IconCalisthenics } from "@neverquest/icons/calisthenics.svg";
@@ -21,7 +22,7 @@ export const SKILLS: Record<
     requiredCrew: Crew;
     shows?: Showing[];
     unlocksAttributes?: Attribute[];
-    unlocksMasteries?: Mastery[];
+    unlocksMastery?: Mastery;
   }
 > = {
   anatomy: {
@@ -29,15 +30,21 @@ export const SKILLS: Record<
     Icon: IconAnatomy,
     requiredCrew: "merchant",
     shows: ["bleed"],
-    unlocksMasteries: ["cruelty"],
+    unlocksMastery: "cruelty",
+  },
+  archery: {
+    description: "Unlocks the use of ranged weapons.",
+    Icon: IconArchery,
+    requiredCrew: "fletcher",
+    shows: ["range"],
+    unlocksMastery: "marksmanship",
   },
   armorcraft: {
-    description:
-      "Unlocks the use of plate armor & the ability to deflect ailments. Also improves recovery.",
+    description: "Unlocks the use of plate armor & the ability to deflect ailments.",
     Icon: IconArmorcraft,
     requiredCrew: "blacksmith",
     shows: ["deflection"],
-    unlocksMasteries: ["resilience"],
+    unlocksMastery: "resilience",
   },
   assassination: {
     description: "Unlocks the ability to deal critical strikes.",
@@ -58,7 +65,7 @@ export const SKILLS: Record<
     Icon: IconEscrime,
     requiredCrew: "merchant",
     shows: ["parry"],
-    unlocksMasteries: ["finesse"],
+    unlocksMastery: "finesse",
   },
   evasion: {
     description: "Unlocks the ability to dodge attacks, negating all damage.",
@@ -68,24 +75,24 @@ export const SKILLS: Record<
     unlocksAttributes: ["agility"],
   },
   shieldcraft: {
-    description: "Unlocks the use of tower shields & stabilizes blocking.",
+    description: "Unlocks the use of tower shields.",
     Icon: IconShieldcraft,
     requiredCrew: "blacksmith",
     shows: ["stability"],
-    unlocksMasteries: ["stability"],
+    unlocksMastery: "stability",
   },
   siegecraft: {
     description: "Unlocks the use of two-handed melee weapons that have a chance to execute.",
     Icon: IconSiegecraft,
     requiredCrew: "blacksmith",
     shows: ["execution"],
-    unlocksMasteries: ["butchery"],
+    unlocksMastery: "butchery",
   },
   traumatology: {
     description: "Unlocks the ability to stagger monsters.",
     Icon: IconTraumatology,
     requiredCrew: "merchant",
     shows: ["stagger"],
-    unlocksMasteries: ["might"],
+    unlocksMastery: "might",
   },
 };

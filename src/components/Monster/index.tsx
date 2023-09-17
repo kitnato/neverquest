@@ -4,6 +4,7 @@ import { useRecoilState } from "recoil";
 
 import { MonsterAilments } from "@neverquest/components/Monster/MonsterAilments";
 import { MonsterAttack } from "@neverquest/components/Monster/MonsterAttack";
+import { MonsterDistance } from "@neverquest/components/Monster/MonsterDistance";
 import { MonsterHealth } from "@neverquest/components/Monster/MonsterHealth";
 import { MonsterName } from "@neverquest/components/Monster/MonsterName";
 import { MonsterOffense } from "@neverquest/components/Monster/MonsterOffense";
@@ -51,6 +52,8 @@ export function Monster() {
           </Stack>
         </Card.Body>
       </Card>
+
+      <MonsterDistance />
 
       <MonsterAilments />
     </Stack>

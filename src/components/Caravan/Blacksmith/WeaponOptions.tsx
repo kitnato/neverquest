@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { FormControl, FormSelect, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
-import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGear";
-import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
+import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
+import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { WEAPON_BASE, WEAPON_MODIFIER, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
@@ -20,20 +20,20 @@ import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
-import { WEAPON_GRIP_TYPES, type WeaponGrip } from "@neverquest/types/unions";
+import { GRIP_TYPES, type Grip } from "@neverquest/types/unions";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage, formatTime } from "@neverquest/utilities/formatters";
-import { generateWeapon } from "@neverquest/utilities/generators";
-import { getGearPrices, getGrowthSigmoid, getWeaponRanges } from "@neverquest/utilities/getters";
+import { generateMeleeWeapon } from "@neverquest/utilities/generators";
+import { getGearPrices, getGrowthSigmoid, getMeleeRanges } from "@neverquest/utilities/getters";
 
 export function WeaponOptions() {
+  const [{ weapon: craftedWeapon }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const allowNSFWValue = useRecoilValue(allowNSFW);
-  const { weapon: craftedWeapon } = useRecoilValue(blacksmithInventory);
-  const siegecraftSkillValue = useRecoilValue(skills("siegecraft"));
+  const siegecraftValue = useRecoilValue(skills("siegecraft"));
   const stageValue = useRecoilValue(stage);
 
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
-  const [weaponGrip, setWeaponGrip] = useState<WeaponGrip>("one-handed");
+  const [weaponGrip, setWeaponGrip] = useState<Grip>("one-handed");
   const [weaponLevel, setWeaponLevel] = useState(stageValue);
 
   const { abilityName, IconAbility, IconGearClass, showingType } =
@@ -47,33 +47,35 @@ export function WeaponOptions() {
     ...WEAPON_BASE,
     modifier: WEAPON_MODIFIER[weaponGrip].price,
   });
-  const { abilityChance, damage, rate, staminaCost, weight } = getWeaponRanges({
+  const { abilityChance, damage, rate, staminaCost, weight } = getMeleeRanges({
     factor,
     gearClass: weaponClass,
     grip: weaponGrip,
-    modality: "melee",
   });
   const maximumWeaponLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
 
-  const craftWeapon = () =>
-    generateWeapon({
-      allowNSFW: allowNSFWValue,
-      gearClass: weaponClass,
-      grip: weaponGrip,
-      hasPrefix: true,
-      hasSuffix: Math.random() <= getGrowthSigmoid(weaponLevel),
-      level: weaponLevel,
-      modality: "melee",
-      tags:
-        weaponLevel < stageValue - 1
-          ? ["lowQuality"]
-          : weaponLevel > maximumWeaponLevel
-          ? ["highQuality"]
-          : undefined,
-    });
+  const handleCraft = () =>
+    setBlacksmithInventory((current) => ({
+      ...current,
+      weapon: generateMeleeWeapon({
+        allowNSFW: allowNSFWValue,
+        gearClass: weaponClass,
+        grip: weaponGrip,
+        hasPrefix: true,
+        hasSuffix: Math.random() <= getGrowthSigmoid(weaponLevel),
+        level: weaponLevel,
+        tags:
+          weaponLevel < stageValue - 1
+            ? ["lowQuality"]
+            : weaponLevel > maximumWeaponLevel
+            ? ["highQuality"]
+            : undefined,
+      }),
+    }));
+  const handleTransfer = () => setBlacksmithInventory((current) => ({ ...current, weapon: null }));
 
   return (
-    <>
+    <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
         <IconDisplay
           contents={
@@ -120,14 +122,14 @@ export function WeaponOptions() {
           tooltip="Class"
         />
 
-        {siegecraftSkillValue && (
+        {siegecraftValue && (
           <IconDisplay
             contents={
               <FormSelect
-                onChange={({ target: { value } }) => setWeaponGrip(value as WeaponGrip)}
+                onChange={({ target: { value } }) => setWeaponGrip(value as Grip)}
                 value={weaponGrip}
               >
-                {WEAPON_GRIP_TYPES.map((current) => (
+                {GRIP_TYPES.map((current) => (
                   <option key={current} value={current}>
                     {capitalizeAll(current)}
                   </option>
@@ -185,10 +187,10 @@ export function WeaponOptions() {
       <hr />
 
       {craftedWeapon === null ? (
-        <CraftGear coinPrice={coinPrice} onCraft={craftWeapon} scrapPrice={scrapPrice} />
+        <CraftGear coinPrice={coinPrice} onCraft={handleCraft} scrapPrice={scrapPrice} />
       ) : (
-        <CraftedGear gearItem={craftedWeapon} />
+        <CraftedGear gearItem={craftedWeapon} onTransfer={handleTransfer} />
       )}
-    </>
+    </Stack>
   );
 }

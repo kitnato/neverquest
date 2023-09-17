@@ -3,6 +3,8 @@ import type {
   ConsumableItem,
   GearItem,
   GemItem,
+  Melee,
+  Ranged,
   Shield,
   StackableItem,
   TrinketItem,
@@ -22,12 +24,20 @@ export function isGear(gearItem: unknown): gearItem is GearItem {
   return isObject(gearItem) && (isArmor(gearItem) || isShield(gearItem) || isWeapon(gearItem));
 }
 
+export function isGem(gem: unknown): gem is GemItem {
+  return isObject(gem) && GEM_TYPES.some((type) => type === gem.type);
+}
+
 function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }
 
-export function isGem(gem: unknown): gem is GemItem {
-  return isObject(gem) && GEM_TYPES.some((type) => type === gem.type);
+export function isMelee(gearItem: unknown): gearItem is Melee {
+  return isObject(gearItem) && gearItem.grip !== undefined;
+}
+
+export function isRanged(gearItem: unknown): gearItem is Ranged {
+  return isObject(gearItem) && gearItem.range !== undefined;
 }
 
 export function isShield(gearItem: unknown): gearItem is Shield {
@@ -43,5 +53,5 @@ export function isTrinket(trinket: unknown): trinket is TrinketItem {
 }
 
 export function isWeapon(gearItem: unknown): gearItem is Weapon {
-  return isObject(gearItem) && gearItem.damage !== undefined;
+  return isMelee(gearItem) || isRanged(gearItem);
 }

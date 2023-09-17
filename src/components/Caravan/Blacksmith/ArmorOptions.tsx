@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { FormControl, FormSelect, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
-import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGear";
-import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
+import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
+import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DodgePenaltyContents } from "@neverquest/components/Items/Armor/DodgePenaltyContents";
 import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
@@ -26,8 +26,8 @@ import { generateArmor } from "@neverquest/utilities/generators";
 import { getArmorRanges, getGearPrices, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function ArmorOptions() {
+  const [{ armor: craftedArmor }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const allowNSFWValue = useRecoilValue(allowNSFW);
-  const { armor: craftedArmor } = useRecoilValue(blacksmithInventory);
   const isShowingDeflection = useRecoilValue(isShowing("deflection"));
   const isShowingDodge = useRecoilValue(isShowing("dodge"));
   const skillArmorcraft = useRecoilValue(skills("armorcraft"));
@@ -48,23 +48,27 @@ export function ArmorOptions() {
   });
   const maximumArmorLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
 
-  const craftArmor = () =>
-    generateArmor({
-      allowNSFW: allowNSFWValue,
-      gearClass: armorClass,
-      hasPrefix: true,
-      hasSuffix: Math.random() <= getGrowthSigmoid(armorLevel),
-      level: armorLevel,
-      tags:
-        armorLevel < stageValue - 1
-          ? ["lowQuality"]
-          : armorLevel > maximumArmorLevel
-          ? ["highQuality"]
-          : undefined,
-    });
+  const handleCraft = () =>
+    setBlacksmithInventory((current) => ({
+      ...current,
+      armor: generateArmor({
+        allowNSFW: allowNSFWValue,
+        gearClass: armorClass,
+        hasPrefix: true,
+        hasSuffix: Math.random() <= getGrowthSigmoid(armorLevel),
+        level: armorLevel,
+        tags:
+          armorLevel < stageValue - 1
+            ? ["lowQuality"]
+            : armorLevel > maximumArmorLevel
+            ? ["highQuality"]
+            : undefined,
+      }),
+    }));
+  const handleTransfer = () => setBlacksmithInventory((current) => ({ ...current, armor: null }));
 
   return (
-    <>
+    <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
         <IconDisplay
           contents={
@@ -99,9 +103,9 @@ export function ArmorOptions() {
               onChange={({ target: { value } }) => setArmorClass(value as ArmorClass)}
               value={armorClass}
             >
-              {ARMOR_CLASS_TYPES.map((armorClass) => (
-                <option key={armorClass} value={armorClass}>
-                  {capitalizeAll(armorClass)}
+              {ARMOR_CLASS_TYPES.map((current) => (
+                <option key={current} value={current}>
+                  {capitalizeAll(current)}
                 </option>
               ))}
             </FormSelect>
@@ -155,10 +159,10 @@ export function ArmorOptions() {
       {!skillArmorcraft && armorClass === "plate" ? (
         <span className="text-center">Cannot use without training.</span>
       ) : craftedArmor === null ? (
-        <CraftGear coinPrice={coinPrice} onCraft={craftArmor} scrapPrice={scrapPrice} />
+        <CraftGear coinPrice={coinPrice} onCraft={handleCraft} scrapPrice={scrapPrice} />
       ) : (
-        <CraftedGear gearItem={craftedArmor} />
+        <CraftedGear gearItem={craftedArmor} onTransfer={handleTransfer} />
       )}
-    </>
+    </Stack>
   );
 }

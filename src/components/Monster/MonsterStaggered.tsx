@@ -8,18 +8,20 @@ import { masteryStatistic } from "@neverquest/state/masteries";
 import {
   canReceiveAilment,
   isMonsterAiling,
+  isMonsterDead,
   monsterAilmentDuration,
 } from "@neverquest/state/monster";
 
 export function MonsterStaggered() {
   const canBeStaggered = useRecoilValue(canReceiveAilment("staggered"));
   const isMonsterStaggeredValue = useRecoilValue(isMonsterAiling("staggered"));
+  const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const mightValue = useRecoilValue(masteryStatistic("might"));
   const setMonsterStaggerDuration = useSetRecoilState(monsterAilmentDuration("staggered"));
 
   useAnimate({
     delta: setMonsterStaggerDuration,
-    stop: !isMonsterStaggeredValue,
+    stop: !isMonsterStaggeredValue || isMonsterDeadValue,
   });
 
   if (!canBeStaggered) {

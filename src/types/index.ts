@@ -1,12 +1,7 @@
 import type { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
-import type {
-  ArmorClass,
-  ShieldClass,
-  WeaponClass,
-  WeaponModality,
-} from "@neverquest/LOCRAN/types";
+import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Gem, Showing, Trinket, WeaponGrip } from "@neverquest/types/unions";
+import type { Consumable, Gem, Grip, Showing, Trinket } from "@neverquest/types/unions";
 
 export type Armor = GearItemBase & {
   deflection: number;
@@ -45,6 +40,8 @@ export type ConsumableItem = ItemBase & {
   type: Consumable;
 };
 
+export type FletcherInventory = Weapon | null;
+
 export type GearBase = {
   coinPrice: GeneratorRange;
   scrapPrice: GeneratorRange;
@@ -81,10 +78,19 @@ type ItemBase = {
   weight: number;
 };
 
+export type Melee = WeaponBase & {
+  grip: Grip;
+};
+
 export type MerchantInventory = {
   isReturned: boolean;
   item: InventoryItem;
 }[];
+
+export type Ranged = WeaponBase & {
+  ammunitionCost: number;
+  range: number;
+};
 
 export type Shield = GearItemBase & {
   block: number;
@@ -105,14 +111,13 @@ export type UnlockedState = {
   isUnlocked: boolean;
 };
 
-export type Weapon = GearItemBase & {
+type WeaponBase = GearItemBase & {
   abilityChance: number;
   damage: number;
   gearClass: WeaponClass;
   gems: GemItem[];
-  grip: WeaponGrip;
-  modality: WeaponModality;
-  range: number;
   rate: number;
   staminaCost: number;
 };
+
+export type Weapon = Melee | Ranged;

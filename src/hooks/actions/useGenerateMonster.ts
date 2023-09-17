@@ -7,12 +7,15 @@ import { isAttacking } from "@neverquest/state/character";
 import { isBoss, stage } from "@neverquest/state/encounter";
 import {
   isMonsterNew,
+  monsterAilmentDuration,
   monsterAttackDuration,
   monsterAttackRate,
+  monsterDistance,
   monsterHealth,
   monsterName,
 } from "@neverquest/state/monster";
 import { allowNSFW } from "@neverquest/state/settings";
+import { MONSTER_AILMENT_TYPES } from "@neverquest/types/unions";
 import { getGrowthSigmoid, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useGenerateMonster() {
@@ -41,6 +44,9 @@ export function useGenerateMonster() {
         );
 
         reset(monsterHealth);
+        reset(monsterDistance);
+
+        MONSTER_AILMENT_TYPES.forEach((current) => reset(monsterAilmentDuration(current)));
 
         set(isMonsterNew, true);
 

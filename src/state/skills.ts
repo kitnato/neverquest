@@ -22,6 +22,7 @@ export const skillsTrained = withStateKey("skillsTrained", (key) =>
   selector<Record<Skill, boolean>>({
     get: ({ get }) => ({
       anatomy: get(skills("anatomy")),
+      archery: get(skills("archery")),
       armorcraft: get(skills("armorcraft")),
       assassination: get(skills("assassination")),
       calisthenics: get(skills("calisthenics")),

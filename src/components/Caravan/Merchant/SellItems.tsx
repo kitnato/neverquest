@@ -36,13 +36,13 @@ export function SellItems() {
         <Stack gap={3}>
           {[equippedGear.find(isWeapon), equippedGear.find(isArmor), equippedGear.find(isShield)]
             .filter(isGear)
-            .map((item) => {
-              const { id, isEquipped } = item;
+            .map((current) => {
+              const { id, isEquipped } = current;
 
               return (
                 <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
                   <Stack direction="horizontal">
-                    <ItemDisplay item={item} overlayPlacement="right" />
+                    <ItemDisplay item={current} overlayPlacement="right" />
 
                     {isEquipped && (
                       <span className="fst-italic" style={{ width: "max-content" }}>
@@ -51,7 +51,7 @@ export function SellItems() {
                     )}
                   </Stack>
 
-                  <SellItem item={item} />
+                  <SellItem item={current} />
                 </div>
               );
             })}
@@ -59,21 +59,21 @@ export function SellItems() {
           {storedItems
             .filter(isGear)
             .sort((a, b) => a.name.localeCompare(b.name))
-            .map((item) => (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.id}>
-                <ItemDisplay item={item} overlayPlacement="right" />
+            .map((current) => (
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.id}>
+                <ItemDisplay item={current} overlayPlacement="right" />
 
-                <SellItem item={item} />
+                <SellItem item={current} />
               </div>
             ))}
 
           {[...storedItems.filter(isTrinket)]
             .sort((a, b) => a.type.localeCompare(b.type))
-            .map((item) => (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.id}>
-                <ItemDisplay item={item} overlayPlacement="right" />
+            .map((current) => (
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.id}>
+                <ItemDisplay item={current} overlayPlacement="right" />
 
-                <SellItem item={item} />
+                <SellItem item={current} />
               </div>
             ))}
 
@@ -82,8 +82,8 @@ export function SellItems() {
               storedItems.filter(isConsumable).sort((a, b) => a.type.localeCompare(b.type)),
             ),
             ...stackItems(storedItems.filter(isGem).sort((a, b) => a.type.localeCompare(b.type))),
-          ].map((stackedItem) => {
-            const { item, stack } = stackedItem;
+          ].map((current) => {
+            const { item, stack } = current;
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.id}>

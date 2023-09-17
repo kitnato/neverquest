@@ -7,7 +7,6 @@ import {
   BOSS_STAGE_START,
   LOOT,
   MONSTER_ATTACK_RATE,
-  MONSTER_ATTENUATION,
   MONSTER_DAMAGE,
   MONSTER_HEALTH,
   POISON,
@@ -17,7 +16,7 @@ import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
 import { weapon } from "@neverquest/state/inventory";
 import { skills } from "@neverquest/state/skills";
-import { bleedDamage, lootBonus, totalElementalEffects } from "@neverquest/state/statistics";
+import { bleedDamage, lootBonus, range, totalElementalEffects } from "@neverquest/state/statistics";
 import {
   ELEMENTAL_TYPES,
   MONSTER_AILMENT_TYPES,
@@ -79,6 +78,13 @@ export const canReceiveAilments = withStateKey("canReceiveAilments", (key) =>
   }),
 );
 
+export const hasMonsterClosed = withStateKey("hasMonsterClosed", (key) =>
+  selector({
+    get: ({ get }) => get(monsterDistance) === 0,
+    key,
+  }),
+);
+
 export const isMonsterAiling = withStateKey("isMonsterAiling", (key) =>
   selectorFamily<boolean, MonsterAilment>({
     get:
@@ -99,8 +105,8 @@ export const isMonsterDead = withStateKey("isMonsterDead", (key) =>
 export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, bonus, boss, minimum } = MONSTER_ATTACK_RATE;
-      const factor = getGrowthTriangular(get(stage)) / MONSTER_ATTENUATION.rate;
+      const { attenuation, base, bonus, boss, minimum } = MONSTER_ATTACK_RATE;
+      const factor = getGrowthTriangular(get(stage)) / attenuation;
 
       return Math.round(
         Math.max(
@@ -137,8 +143,8 @@ export const monsterBlightChance = withStateKey("monsterBlightChance", (key) =>
 export const monsterDamage = withStateKey("monsterDamage", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, bonus, boss } = MONSTER_DAMAGE;
-      const factor = getGrowthTriangular(get(stage)) / MONSTER_ATTENUATION.damage;
+      const { attenuation, base, bonus, boss } = MONSTER_DAMAGE;
+      const factor = getGrowthTriangular(get(stage)) / attenuation;
 
       return Math.round(
         (base +
@@ -169,8 +175,8 @@ export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (ke
 export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, bonus, boss } = MONSTER_HEALTH;
-      const factor = getGrowthTriangular(get(stage)) / MONSTER_ATTENUATION.health;
+      const { attenuation, base, bonus, boss } = MONSTER_HEALTH;
+      const factor = getGrowthTriangular(get(stage)) / attenuation;
 
       return Math.round(
         (base + base * factor * (1 + get(progress) * bonus)) * (get(isBoss) ? boss : 1),
@@ -183,11 +189,11 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
 export const monsterLoot = withStateKey("monsterLoot", (key) =>
   selector({
     get: ({ get }) => {
-      const { bonus, boss, coins, essence, scrap } = LOOT;
+      const { attenuation, bonus, boss, coins, essence, scrap } = LOOT;
 
       const isBossValue = get(isBoss);
       const stageValue = get(stage);
-      const factor = getGrowthTriangular(stageValue) / MONSTER_ATTENUATION.loot;
+      const factor = getGrowthTriangular(stageValue) / attenuation;
       const totalBonus = 1 + get(progress) * bonus + get(lootBonus) + (isBossValue ? boss : 0);
 
       return {
@@ -279,6 +285,14 @@ export const monsterAttackDuration = withStateKey("monsterAttackDuration", (key)
 export const monsterBleedingDelta = withStateKey("monsterBleedingDelta", (key) =>
   atom({
     default: BLEED_DELTA,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  }),
+);
+
+export const monsterDistance = withStateKey("monsterDistance", (key) =>
+  atom({
+    default: range,
     effects: [handleLocalStorage<number>({ key })],
     key,
   }),

@@ -15,8 +15,8 @@ export function Skills() {
   return skillsTrainedValue.every((isSkillTrained) => !isSkillTrained) ? (
     <span className="fst-italic">None.</span>
   ) : (
-    ALL_SKILLS.sort((a, b) => a.localeCompare(b)).map((type) => (
-      <TrainedSkill key={type} type={type} />
+    ALL_SKILLS.sort((a, b) => a.localeCompare(b)).map((current) => (
+      <TrainedSkill key={current} type={current} />
     ))
   );
 }

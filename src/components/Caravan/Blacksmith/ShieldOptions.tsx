@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { FormControl, FormSelect, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
-import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGear";
-import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
+import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
+import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { SHIELD_SPECIFICATIONS } from "@neverquest/data/inventory";
@@ -25,8 +25,8 @@ import { generateShield } from "@neverquest/utilities/generators";
 import { getGearPrices, getGrowthSigmoid, getShieldRanges } from "@neverquest/utilities/getters";
 
 export function ShieldOptions() {
+  const [{ shield: craftedShield }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const allowNSFWValue = useRecoilValue(allowNSFW);
-  const { shield: craftedShield } = useRecoilValue(blacksmithInventory);
   const stageValue = useRecoilValue(stage);
 
   const [shieldClass, setShieldClass] = useState<ShieldClass>("small");
@@ -47,23 +47,27 @@ export function ShieldOptions() {
     gearClass: shieldClass,
   });
 
-  const craftShield = () =>
-    generateShield({
-      allowNSFW: allowNSFWValue,
-      gearClass: shieldClass,
-      hasPrefix: true,
-      hasSuffix: Math.random() <= getGrowthSigmoid(shieldLevel),
-      level: shieldLevel,
-      tags:
-        shieldLevel < stageValue - 1
-          ? ["lowQuality"]
-          : shieldLevel > maximumShieldLevel
-          ? ["highQuality"]
-          : undefined,
-    });
+  const handleCraft = () =>
+    setBlacksmithInventory((current) => ({
+      ...current,
+      shield: generateShield({
+        allowNSFW: allowNSFWValue,
+        gearClass: shieldClass,
+        hasPrefix: true,
+        hasSuffix: Math.random() <= getGrowthSigmoid(shieldLevel),
+        level: shieldLevel,
+        tags:
+          shieldLevel < stageValue - 1
+            ? ["lowQuality"]
+            : shieldLevel > maximumShieldLevel
+            ? ["highQuality"]
+            : undefined,
+      }),
+    }));
+  const handleTransfer = () => setBlacksmithInventory((current) => ({ ...current, shield: null }));
 
   return (
-    <>
+    <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
         <IconDisplay
           contents={
@@ -98,9 +102,9 @@ export function ShieldOptions() {
               onChange={({ target: { value } }) => setShieldClass(value as ShieldClass)}
               value={shieldClass}
             >
-              {SHIELD_CLASS_TYPES.map((shieldClass) => (
-                <option key={shieldClass} value={shieldClass}>
-                  {capitalizeAll(shieldClass)}
+              {SHIELD_CLASS_TYPES.map((current) => (
+                <option key={current} value={current}>
+                  {capitalizeAll(current)}
                 </option>
               ))}
             </FormSelect>
@@ -150,10 +154,10 @@ export function ShieldOptions() {
       {!skillShieldcraft && shieldClass === "tower" ? (
         <span className="text-center">Cannot use without training.</span>
       ) : craftedShield === null ? (
-        <CraftGear coinPrice={coinPrice} onCraft={craftShield} scrapPrice={scrapPrice} />
+        <CraftGear coinPrice={coinPrice} onCraft={handleCraft} scrapPrice={scrapPrice} />
       ) : (
-        <CraftedGear gearItem={craftedShield} />
+        <CraftedGear gearItem={craftedShield} onTransfer={handleTransfer} />
       )}
-    </>
+    </Stack>
   );
 }

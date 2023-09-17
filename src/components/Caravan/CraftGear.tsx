@@ -1,12 +1,9 @@
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
-import { blacksmithInventory } from "@neverquest/state/caravan";
 import { coins, scrap } from "@neverquest/state/resources";
-import type { GearItem } from "@neverquest/types";
-import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 
 export function CraftGear({
   coinPrice,
@@ -14,12 +11,11 @@ export function CraftGear({
   scrapPrice,
 }: {
   coinPrice: number;
-  onCraft: () => GearItem;
+  onCraft: () => void;
   scrapPrice: number;
 }) {
   const coinsValue = useRecoilValue(coins);
   const scrapValue = useRecoilValue(scrap);
-  const setBlacksmithInventory = useSetRecoilState(blacksmithInventory);
 
   const transactResources = useTransactResources();
 
@@ -28,21 +24,8 @@ export function CraftGear({
   const isCraftable = hasCoins && hasScrap;
 
   const handleCraft = () => {
-    const gear = onCraft();
-
+    onCraft();
     transactResources({ coinsDifference: -coinPrice, scrapDifference: -scrapPrice });
-
-    if (isArmor(gear)) {
-      setBlacksmithInventory((current) => ({ ...current, armor: gear }));
-    }
-
-    if (isShield(gear)) {
-      setBlacksmithInventory((current) => ({ ...current, shield: gear }));
-    }
-
-    if (isWeapon(gear)) {
-      setBlacksmithInventory((current) => ({ ...current, weapon: gear }));
-    }
   };
 
   return (

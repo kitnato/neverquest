@@ -39,12 +39,12 @@ export function useApplyGem() {
           set(inventory, (current) =>
             current
               .filter((current) => current.id !== gem.id)
-              .map((item) => {
-                if (isGear(item) && item.id === id) {
-                  return { ...item, gems: item.gems.concat(gem) };
+              .map((current) => {
+                if (isGear(current) && current.id === id) {
+                  return { ...current, gems: current.gems.concat(gem) };
                 }
 
-                return item;
+                return current;
               }),
           );
 

@@ -1,6 +1,7 @@
 import { ReactComponent as IconButchery } from "@neverquest/icons/butchery.svg";
 import { ReactComponent as IconCruelty } from "@neverquest/icons/cruelty.svg";
 import { ReactComponent as IconFinesse } from "@neverquest/icons/finesse.svg";
+import { ReactComponent as IconMarksmanship } from "@neverquest/icons/marksmanship.svg";
 import { ReactComponent as IconMight } from "@neverquest/icons/might.svg";
 import { ReactComponent as IconResilience } from "@neverquest/icons/resilience.svg";
 import { ReactComponent as IconStability } from "@neverquest/icons/stability.svg";
@@ -34,10 +35,19 @@ export const MASTERIES: Record<
   },
   finesse: {
     base: 0,
-    description: "Increases damage absorbed and reflected when parrying.",
+    description: "Influences damage absorbed and reflected when parrying.",
     Icon: IconFinesse,
     increment: 0.02,
     instructions: "Trains when parrying.",
+    isUnlocked: false,
+    maximum: 0.9,
+  },
+  marksmanship: {
+    base: 0,
+    description: "Influences the distance a monster must close before it can attack.",
+    Icon: IconMarksmanship,
+    increment: 0.03,
+    instructions: "Trains when dealing damage with a ranged weapon.",
     isUnlocked: false,
     maximum: 0.9,
   },
@@ -52,10 +62,10 @@ export const MASTERIES: Record<
   },
   resilience: {
     base: 0,
-    description: "Reduces recovery rate.",
+    description: "Influences recovery rate.",
     Icon: IconResilience,
     increment: 0.01,
-    instructions: "Trains when defending.",
+    instructions: "Trains when getting hit.",
     isUnlocked: false,
     maximum: 0.9,
   },

@@ -34,18 +34,18 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
       <Dropdown.Toggle variant="outline-dark">Apply</Dropdown.Toggle>
 
       <Dropdown.Menu>
-        {GEAR_TYPES.map((gear) => (
+        {GEAR_TYPES.map((current) => (
           <Dropdown.Item
             className={CLASS_FULL_WIDTH_JUSTIFIED}
-            disabled={!gemFitting[gear].canApply}
-            eventKey={gear}
-            key={gear}
+            disabled={!gemFitting[current].canApply}
+            eventKey={current}
+            key={current}
           >
-            <span>{capitalizeAll(gear)}</span>
+            <span>{capitalizeAll(current)}</span>
 
             <span>
               <IconImage Icon={IconScrap} size="tiny" />
-              &nbsp;{GEM_FITTING_COST[gemFitting[gear].fittedGems] ?? LABEL_EMPTY}
+              &nbsp;{GEM_FITTING_COST[gemFitting[current].fittedGems] ?? LABEL_EMPTY}
             </span>
           </Dropdown.Item>
         ))}

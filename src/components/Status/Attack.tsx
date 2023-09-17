@@ -132,7 +132,7 @@ export function Attack() {
       }
       Icon={IconAttackRate}
       isAnimated
-      tooltip="Attack rate"
+      tooltip="Total attack rate"
     />
   );
 }

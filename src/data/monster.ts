@@ -22,6 +22,7 @@ export const BLIGHT = {
 };
 
 export const LOOT = {
+  attenuation: 20,
   bonus: 0.02,
   boss: 0.2,
   coins: 2,
@@ -30,26 +31,22 @@ export const LOOT = {
 };
 
 export const MONSTER_ATTACK_RATE = {
+  attenuation: 1000,
   base: 4000,
   bonus: 0.01,
   boss: 1.1,
-  minimum: 500,
-};
-
-export const MONSTER_ATTENUATION = {
-  damage: 50,
-  health: 80,
-  loot: 20,
-  rate: 1400,
+  minimum: 666,
 };
 
 export const MONSTER_DAMAGE = {
+  attenuation: 50,
   base: 8,
   bonus: 0.02,
   boss: 1.2,
 };
 
 export const MONSTER_HEALTH = {
+  attenuation: 80,
   base: 25,
   bonus: 0.03,
   boss: 1.7,

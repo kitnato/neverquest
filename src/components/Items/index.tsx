@@ -8,10 +8,11 @@ import { ConsumeElixir } from "@neverquest/components/Items/Consumable/ConsumeEl
 import { ConsumeSalve } from "@neverquest/components/Items/Consumable/ConsumeSalve";
 import { Encumbrance } from "@neverquest/components/Items/Encumbrance";
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
+import { StoredGear } from "@neverquest/components/Items/StoredGear";
 import { ActivateCompass } from "@neverquest/components/Items/Trinket/ActivateCompass";
 import { ActivateHearthstone } from "@neverquest/components/Items/Trinket/ActivateHearthstone";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
-import { inventory } from "@neverquest/state/inventory";
+import { ammunition, inventory } from "@neverquest/state/inventory";
 import {
   isArmor,
   isConsumable,
@@ -26,6 +27,7 @@ import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function Inventory() {
+  const ammunitionValue = useRecoilValue(ammunition);
   const inventoryValue = useRecoilValue(inventory);
 
   const toggleEquipGear = useToggleEquipGear();
@@ -48,14 +50,14 @@ export function Inventory() {
 
         {[equippedGear.find(isWeapon), equippedGear.find(isArmor), equippedGear.find(isShield)]
           .filter(isGear)
-          .map((item) => {
-            const { id } = item;
+          .map((current) => {
+            const { id } = current;
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-                <ItemDisplay item={item} overlayPlacement="right" />
+                <ItemDisplay item={current} overlayPlacement="right" />
 
-                <Button onClick={() => toggleEquipGear(item)} variant="outline-dark">
+                <Button onClick={() => toggleEquipGear(current)} variant="outline-dark">
                   Unequip
                 </Button>
               </div>
@@ -68,22 +70,11 @@ export function Inventory() {
 
         {storedItems.length === 0 && <span className="fst-italic">Nothing stored.</span>}
 
-        {storedItems
-          .filter(isGear)
-          .sort((a, b) => a.name.localeCompare(b.name))
-          .map((item) => (
-            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.id}>
-              <ItemDisplay item={item} />
-
-              <Button onClick={() => toggleEquipGear(item)} variant="outline-dark">
-                Equip
-              </Button>
-            </div>
-          ))}
+        <StoredGear />
 
         {[...storedItems.filter(isTrinket).sort((a, b) => a.type.localeCompare(b.type))].map(
-          (item) => {
-            const { id, type } = item;
+          (current) => {
+            const { id, type } = current;
 
             const action = (() => {
               switch (type) {
@@ -100,7 +91,10 @@ export function Inventory() {
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-                <ItemDisplay item={item} />
+                <ItemDisplay
+                  item={current}
+                  stack={type === "ammunition pouch" ? ammunitionValue : undefined}
+                />
 
                 {action}
               </div>
@@ -113,8 +107,8 @@ export function Inventory() {
             storedItems.filter(isConsumable).sort((a, b) => a.type.localeCompare(b.type)),
           ),
           ...stackItems(storedItems.filter(isGem).sort((a, b) => a.type.localeCompare(b.type))),
-        ].map((stackedItem) => {
-          const { item, stack } = stackedItem;
+        ].map((current) => {
+          const { item, stack } = current;
 
           if (!isStackable(item)) {
             return null;

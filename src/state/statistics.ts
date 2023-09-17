@@ -12,6 +12,7 @@ import { withStateKey } from "@neverquest/state";
 import { attributeStatistic, level } from "@neverquest/state/attributes";
 import { armor, hasItem, shield, weapon } from "@neverquest/state/inventory";
 import { masteryStatistic } from "@neverquest/state/masteries";
+import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import type { Attribute } from "@neverquest/types/unions";
 import {
   getDamagePerRate,
@@ -180,7 +181,13 @@ export const dodge = withStateKey("dodge", (key) =>
 
 export const execution = withStateKey("execution", (key) =>
   selector({
-    get: ({ get }) => (get(weapon).grip === "two-handed" ? get(masteryStatistic("butchery")) : 0),
+    get: ({ get }) => {
+      const weaponValue = get(weapon);
+
+      return isMelee(weaponValue) && weaponValue.grip === "two-handed"
+        ? get(masteryStatistic("butchery"))
+        : 0;
+    },
     key,
   }),
 );
@@ -293,6 +300,19 @@ export const powerBonus = withStateKey("powerBonus", (key) =>
 export const protection = withStateKey("protection", (key) =>
   selector({
     get: ({ get }) => get(armor).protection,
+    key,
+  }),
+);
+
+export const range = withStateKey("range", (key) =>
+  selector({
+    get: ({ get }) => {
+      const weaponValue = get(weapon);
+
+      return isRanged(weaponValue)
+        ? weaponValue.range * (1 + get(masteryStatistic("marksmanship")))
+        : 0;
+    },
     key,
   }),
 );

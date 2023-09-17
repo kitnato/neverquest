@@ -26,7 +26,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
     base: 0,
     description: "Increases critical strike chance.",
     Icon: IconDexterity,
-    increment: 0.03,
+    increment: 0.02,
     isUnlocked: false,
     maximum: 0.6,
     powerBonus: 0.005,

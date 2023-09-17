@@ -5,8 +5,8 @@ import { ShieldOptions } from "@neverquest/components/Caravan/Blacksmith/ShieldO
 import { WeaponOptions } from "@neverquest/components/Caravan/Blacksmith/WeaponOptions";
 import { IconTabs } from "@neverquest/components/IconTabs";
 import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
+import { ReactComponent as IconMelee } from "@neverquest/icons/melee.svg";
 import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
-import { ReactComponent as IconWeapon } from "@neverquest/icons/weapon.svg";
 
 export function Blacksmith() {
   return (
@@ -15,11 +15,10 @@ export function Blacksmith() {
 
       <IconTabs
         defaultTab="weapon"
-        isNarrow
         tabs={[
           {
             Component: WeaponOptions,
-            Icon: IconWeapon,
+            Icon: IconMelee,
             label: "weapon",
           },
           {

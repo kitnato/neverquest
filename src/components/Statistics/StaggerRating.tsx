@@ -9,7 +9,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconMight } from "@neverquest/icons/might.svg";
 import { ReactComponent as IconShieldStagger } from "@neverquest/icons/shield-stagger.svg";
 import { ReactComponent as IconStaggerRating } from "@neverquest/icons/stagger-rating.svg";
-import { ReactComponent as IconWeaponStagger } from "@neverquest/icons/weapon-stagger.svg";
+import { ReactComponent as IconStagger } from "@neverquest/icons/stagger.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { shield } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -52,7 +52,7 @@ export function StaggerRating() {
                       <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
 
                       <td>
-                        <IconImage Icon={IconWeaponStagger} size="tiny" />
+                        <IconImage Icon={IconStagger} size="tiny" />
                         &nbsp;
                         {staggerWeaponValue === 0
                           ? LABEL_EMPTY

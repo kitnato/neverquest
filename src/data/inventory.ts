@@ -1,10 +1,13 @@
 import { nanoid } from "nanoid";
 
+import { ReactComponent as IconAmmunitionPouch } from "@neverquest/icons/ammunition-pouch.svg";
 import { ReactComponent as IconAntidote } from "@neverquest/icons/antidote.svg";
 import { ReactComponent as IconAntiqueCoin } from "@neverquest/icons/antique-coin.svg";
 import { ReactComponent as IconPlate } from "@neverquest/icons/armor-plate.svg";
 import { ReactComponent as IconReinforced } from "@neverquest/icons/armor-reinforced.svg";
 import { ReactComponent as IconBandages } from "@neverquest/icons/bandages.svg";
+import { ReactComponent as IconBleed } from "@neverquest/icons/bleed.svg";
+import { ReactComponent as IconBlunt } from "@neverquest/icons/blunt.svg";
 import { ReactComponent as IconCompass } from "@neverquest/icons/compass.svg";
 import { ReactComponent as IconElixir } from "@neverquest/icons/elixir.svg";
 import { ReactComponent as IconFire } from "@neverquest/icons/fire.svg";
@@ -16,25 +19,23 @@ import { ReactComponent as IconLightning } from "@neverquest/icons/lightning.svg
 import { ReactComponent as IconMonkeyPaw } from "@neverquest/icons/monkey-paw.svg";
 import { ReactComponent as IconParry } from "@neverquest/icons/parry.svg";
 import { ReactComponent as IconPhylactery } from "@neverquest/icons/phylactery.svg";
+import { ReactComponent as IconPiercing } from "@neverquest/icons/piercing.svg";
 import { ReactComponent as IconSalve } from "@neverquest/icons/salve.svg";
 import { ReactComponent as IconShieldMedium } from "@neverquest/icons/shield-medium.svg";
 import { ReactComponent as IconShieldSmall } from "@neverquest/icons/shield-small.svg";
 import { ReactComponent as IconShieldTower } from "@neverquest/icons/shield-tower.svg";
+import { ReactComponent as IconSlashing } from "@neverquest/icons/slashing.svg";
+import { ReactComponent as IconStagger } from "@neverquest/icons/stagger.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
-import { ReactComponent as IconWeaponBleed } from "@neverquest/icons/weapon-bleed.svg";
-import { ReactComponent as IconBlunt } from "@neverquest/icons/weapon-blunt.svg";
-import { ReactComponent as IconPiercing } from "@neverquest/icons/weapon-piercing.svg";
-import { ReactComponent as IconSlashing } from "@neverquest/icons/weapon-slashing.svg";
-import { ReactComponent as IconWeaponStagger } from "@neverquest/icons/weapon-stagger.svg";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type {
   Armor,
   ConsumableItem,
   GearBase,
   GeneratorRange,
+  Melee,
   Shield,
   TrinketItem,
-  Weapon,
 } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
 import type {
@@ -45,6 +46,8 @@ import type {
   Showing,
   Trinket,
 } from "@neverquest/types/unions";
+
+export const AMMUNITION_MAXIMUM = 100;
 
 export const ARMOR_NONE: Omit<Armor, "coinPrice" | "isEquipped" | "scrapPrice"> = {
   deflection: 0,
@@ -292,10 +295,20 @@ export const SHIELD_SPECIFICATIONS: Record<
 };
 
 export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
+  "ammunition pouch": {
+    Icon: IconAmmunitionPouch,
+    item: {
+      coinPrice: 250,
+      description: "Essential for using ranged weapons.",
+      id: nanoid(),
+      type: "ammunition pouch",
+      weight: 5,
+    },
+  },
   "antique coin": {
     Icon: IconAntiqueCoin,
     item: {
-      coinPrice: 200,
+      coinPrice: 300,
       description: "Unlocks the Luck attribute.",
       id: nanoid(),
       type: "antique coin",
@@ -335,7 +348,7 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
   "monkey paw": {
     Icon: IconMonkeyPaw,
     item: {
-      coinPrice: 300,
+      coinPrice: 400,
       description: "Looting a corpse is instantaneous.",
       id: nanoid(),
       type: "monkey paw",
@@ -355,18 +368,23 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
 };
 
 export const WEAPON_BASE: GearBase & {
+  ammunitionCost: [GeneratorRange, GeneratorRange];
   damage: [GeneratorRange, GeneratorRange];
   range: [GeneratorRange, GeneratorRange];
   rate: [GeneratorRange, GeneratorRange];
 } = {
+  ammunitionCost: [
+    { maximum: 2, minimum: 1 },
+    { maximum: 50, minimum: 45 },
+  ],
   coinPrice: { maximum: 600, minimum: 1 },
   damage: [
     { maximum: 14, minimum: 12 },
     { maximum: 1000, minimum: 950 },
   ],
   range: [
-    { maximum: 4500, minimum: 3000 },
-    { maximum: 8000, minimum: 7500 },
+    { maximum: 3000, minimum: 2500 },
+    { maximum: 7000, minimum: 6800 },
   ],
   rate: [
     { maximum: 3700, minimum: 3500 },
@@ -389,7 +407,7 @@ export const WEAPON_MODIFIER = {
   "two-handed": { ability: 1.1, damage: 1.25, price: 1.2, rate: 1.33, stamina: 1.15, weight: 1.2 },
 };
 
-export const WEAPON_NONE: Omit<Weapon, "coinPrice" | "isEquipped" | "scrapPrice"> = {
+export const WEAPON_NONE: Omit<Melee, "coinPrice" | "isEquipped" | "scrapPrice"> = {
   abilityChance: 0,
   damage: 10,
   gearClass: "blunt",
@@ -397,9 +415,7 @@ export const WEAPON_NONE: Omit<Weapon, "coinPrice" | "isEquipped" | "scrapPrice"
   grip: "one-handed",
   id: nanoid(),
   level: 0,
-  modality: "melee",
   name: "Unarmed",
-  range: 0,
   rate: 2500,
   staminaCost: 0,
   weight: 0,
@@ -421,7 +437,7 @@ export const WEAPON_SPECIFICATIONS: Record<
       { maximum: 0.4, minimum: 0.35 },
     ],
     abilityName: "Stagger",
-    IconAbility: IconWeaponStagger,
+    IconAbility: IconStagger,
     IconGearClass: IconBlunt,
     showingType: "stagger",
   },
@@ -431,7 +447,7 @@ export const WEAPON_SPECIFICATIONS: Record<
       { maximum: 0.5, minimum: 0.45 },
     ],
     abilityName: "Bleed",
-    IconAbility: IconWeaponBleed,
+    IconAbility: IconBleed,
     IconGearClass: IconPiercing,
     showingType: "bleed",
   },

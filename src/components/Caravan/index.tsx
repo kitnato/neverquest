@@ -6,6 +6,7 @@ import { Alchemist } from "@neverquest/components/Caravan/Alchemist";
 import { Blacksmith } from "@neverquest/components/Caravan/Blacksmith";
 import { CrewHirable } from "@neverquest/components/Caravan/CrewHirable";
 import { CrewHired } from "@neverquest/components/Caravan/CrewHired";
+import { Fletcher } from "@neverquest/components/Caravan/Fletcher";
 import { Medic } from "@neverquest/components/Caravan/Medic";
 import { Mercenary } from "@neverquest/components/Caravan/Mercenary";
 import { Merchant } from "@neverquest/components/Caravan/Merchant";
@@ -23,6 +24,7 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 const CREW_COMPONENTS: Record<Crew, FunctionComponent> = {
   alchemist: Alchemist,
   blacksmith: Blacksmith,
+  fletcher: Fletcher,
   medic: Medic,
   mercenary: Mercenary,
   merchant: Merchant,
@@ -51,8 +53,12 @@ export function Caravan() {
             <Stack gap={3}>
               {isShowingCrewHiring && <h6>Hired crew</h6>}
 
-              {CREW_ORDER.map((type, index) => (
-                <CrewHired key={index} setActive={() => toggleCrewActive(true, type)} type={type} />
+              {CREW_ORDER.map((current, index) => (
+                <CrewHired
+                  key={index}
+                  setActive={() => toggleCrewActive(true, current)}
+                  type={current}
+                />
               ))}
             </Stack>
 
@@ -62,8 +68,8 @@ export function Caravan() {
 
                 {isCrewHiredValue && <span className="fst-italic">None available.</span>}
 
-                {CREW_ORDER.map((type, index) => (
-                  <CrewHirable key={index} type={type} />
+                {CREW_ORDER.map((current, index) => (
+                  <CrewHirable key={index} type={current} />
                 ))}
               </Stack>
             )}

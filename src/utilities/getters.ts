@@ -7,15 +7,10 @@ import {
   WEAPON_MODIFIER,
   WEAPON_SPECIFICATIONS,
 } from "@neverquest/data/inventory";
-import type {
-  ArmorClass,
-  ShieldClass,
-  WeaponClass,
-  WeaponModality,
-} from "@neverquest/LOCRAN/types";
+import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type { GeneratorRange } from "@neverquest/types";
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
-import type { WeaponGrip } from "@neverquest/types/unions";
+import type { Grip } from "@neverquest/types/unions";
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/utilities/constants";
 
 export function getAnimationClass({
@@ -181,16 +176,14 @@ export function getSnapshotGetter({ getLoadable }: Snapshot) {
   return <T>(state: RecoilValue<T>) => getLoadable(state).getValue();
 }
 
-export function getWeaponRanges({
+export function getMeleeRanges({
   factor,
   gearClass,
   grip,
-  modality,
 }: {
   factor: number;
   gearClass: WeaponClass;
-  grip: WeaponGrip;
-  modality: WeaponModality;
+  grip: Grip;
 }) {
   const {
     ability: abilityModifier,
@@ -198,12 +191,33 @@ export function getWeaponRanges({
     rate: rateModifier,
     stamina: staminaModifier,
     weight: weightModifier,
-  } = modality === "melee" ? WEAPON_MODIFIER[grip] : WEAPON_MODIFIER.ranged;
-  const { damage, range, rate, staminaCost, weight } = WEAPON_BASE;
+  } = WEAPON_MODIFIER[grip];
+  const { damage, rate, staminaCost, weight } = WEAPON_BASE;
   const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
 
   return {
     abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
+    damage: getRange({ factor, modifier: damageModifier, ranges: damage }),
+    rate: getRange({ factor, modifier: rateModifier, ranges: rate }),
+    staminaCost: getRange({ factor, modifier: staminaModifier, ranges: staminaCost }),
+    weight: getRange({ factor, modifier: weightModifier, ranges: weight }),
+  };
+}
+
+export function getRangedRanges({ factor, gearClass }: { factor: number; gearClass: WeaponClass }) {
+  const {
+    ability: abilityModifier,
+    damage: damageModifier,
+    rate: rateModifier,
+    stamina: staminaModifier,
+    weight: weightModifier,
+  } = WEAPON_MODIFIER.ranged;
+  const { ammunitionCost, damage, range, rate, staminaCost, weight } = WEAPON_BASE;
+  const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
+
+  return {
+    abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
+    ammunitionCost: getRange({ factor, ranges: ammunitionCost }),
     damage: getRange({ factor, modifier: damageModifier, ranges: damage }),
     range: getRange({ factor, ranges: range }),
     rate: getRange({ factor, modifier: rateModifier, ranges: rate }),

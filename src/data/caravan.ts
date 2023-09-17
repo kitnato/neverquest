@@ -1,5 +1,6 @@
 import { ReactComponent as IconAlchemist } from "@neverquest/icons/alchemist.svg";
 import { ReactComponent as IconBlacksmith } from "@neverquest/icons/blacksmith.svg";
+import { ReactComponent as IconFletcher } from "@neverquest/icons/fletcher.svg";
 import { ReactComponent as IconMedic } from "@neverquest/icons/medic.svg";
 import { ReactComponent as IconMercenary } from "@neverquest/icons/mercenary.svg";
 import { ReactComponent as IconMerchant } from "@neverquest/icons/merchant.svg";
@@ -14,7 +15,9 @@ import type {
   WeaponModality,
 } from "@neverquest/LOCRAN/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Crew, Trinket, WeaponGrip } from "@neverquest/types/unions";
+import type { Consumable, Crew, Grip, Trinket } from "@neverquest/types/unions";
+
+export const AMMUNITION_PRICE = 10;
 
 export const GEAR_LEVEL_MAXIMUM = 100;
 export const GEAR_LEVEL_RANGE_MAXIMUM = 3;
@@ -31,7 +34,7 @@ export const CREW: Record<
   }
 > = {
   alchemist: {
-    coinPrice: 200,
+    coinPrice: 300,
     description: "Converts resources between one another.",
     Icon: IconAlchemist,
     interaction: "Transmute",
@@ -45,6 +48,14 @@ export const CREW: Record<
     interaction: "Craft",
     monologues: { 1: "In need of better gear?" },
     requiredStage: 10,
+  },
+  fletcher: {
+    coinPrice: 200,
+    description: "Crafts ranges weapons and provides ammunition.",
+    Icon: IconFletcher,
+    interaction: "Craft",
+    monologues: { 1: "Tired of monster breath?" },
+    requiredStage: 25,
   },
   medic: {
     coinPrice: 80,
@@ -134,7 +145,7 @@ export const MERCHANT_OFFERS: Record<
         })
       | (ArtifactType<"weapon"> & {
           gearClass: WeaponClass;
-          grip: WeaponGrip;
+          grip: Grip;
           modality: WeaponModality;
         })
     )[]

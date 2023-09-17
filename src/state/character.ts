@@ -1,8 +1,9 @@
 import { atom, selector } from "recoil";
 
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import { armor, shield, weapon } from "@neverquest/state/inventory";
+import { ammunition, armor, shield, weapon } from "@neverquest/state/inventory";
 import { stamina } from "@neverquest/state/reserves";
+import { isRanged } from "@neverquest/types/type-guards";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 
 // SELECTORS
@@ -10,6 +11,17 @@ import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 export const canAttackOrParry = withStateKey("canAttackOrParry", (key) =>
   selector({
     get: ({ get }) => get(stamina) >= get(weapon).staminaCost,
+    key,
+  }),
+);
+
+export const hasEnoughAmmunition = withStateKey("hasEnoughAmmunition", (key) =>
+  selector({
+    get: ({ get }) => {
+      const weaponValue = get(weapon);
+
+      return isRanged(weaponValue) ? get(ammunition) >= weaponValue.ammunitionCost : true;
+    },
     key,
   }),
 );

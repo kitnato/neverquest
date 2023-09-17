@@ -10,6 +10,7 @@ import {
   bleedDamageTotal,
   canReceiveAilment,
   isMonsterAiling,
+  isMonsterDead,
   monsterAilmentDuration,
   monsterBleedingDelta,
 } from "@neverquest/state/monster";
@@ -18,6 +19,7 @@ export function MonsterBleeding() {
   const bleedDamageTotalValue = useRecoilValue(bleedDamageTotal);
   const canReceiveBleeding = useRecoilValue(canReceiveAilment("bleeding"));
   const isMonsterBleedingValue = useRecoilValue(isMonsterAiling("bleeding"));
+  const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const resetMonsterBleedingDelta = useResetRecoilState(monsterBleedingDelta);
   const setMonsterBleedingDelta = useSetRecoilState(monsterBleedingDelta);
   const setMonsterBleedingDuration = useSetRecoilState(monsterAilmentDuration("bleeding"));
@@ -43,7 +45,7 @@ export function MonsterBleeding() {
 
       resetMonsterBleedingDelta();
     },
-    stop: !isMonsterBleedingValue,
+    stop: !isMonsterBleedingValue || isMonsterDeadValue,
   });
 
   useAnimate({

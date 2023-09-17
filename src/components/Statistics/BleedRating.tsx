@@ -8,8 +8,8 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { BLEED, BLEED_DELTA } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconBleedRating } from "@neverquest/icons/bleed-rating.svg";
+import { ReactComponent as IconBleed } from "@neverquest/icons/bleed.svg";
 import { ReactComponent as IconCruelty } from "@neverquest/icons/cruelty.svg";
-import { ReactComponent as IconWeaponBleed } from "@neverquest/icons/weapon-bleed.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { masteryStatistic } from "@neverquest/state/masteries";
@@ -54,7 +54,7 @@ export function BleedRating() {
                       <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
 
                       <td>
-                        <IconImage Icon={IconWeaponBleed} size="tiny" />
+                        <IconImage Icon={IconBleed} size="tiny" />
                         &nbsp;{`${bleedValue === 0 ? LABEL_EMPTY : formatPercentage(bleedValue)}`}
                       </td>
                     </tr>

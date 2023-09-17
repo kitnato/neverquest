@@ -6,8 +6,8 @@ import { ATTRIBUTES_ORDER } from "@neverquest/data/attributes";
 export function AttributesList() {
   return (
     <Stack gap={3}>
-      {ATTRIBUTES_ORDER.map((type, index) => (
-        <AttributeDisplay key={index} type={type} />
+      {ATTRIBUTES_ORDER.map((current, index) => (
+        <AttributeDisplay key={index} type={current} />
       ))}
     </Stack>
   );

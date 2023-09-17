@@ -4,15 +4,7 @@ import { IconImage } from "@neverquest/components/IconImage";
 import type { TabData } from "@neverquest/types/props";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
-export function IconTabs({
-  defaultTab,
-  isNarrow = false,
-  tabs,
-}: {
-  defaultTab: string;
-  isNarrow?: boolean;
-  tabs: TabData;
-}) {
+export function IconTabs({ defaultTab, tabs }: { defaultTab: string; tabs: TabData }) {
   return (
     <>
       <Tab.Container defaultActiveKey={defaultTab}>
@@ -36,7 +28,7 @@ export function IconTabs({
               <Stack gap={3}>
                 <hr />
 
-                <Stack className={isNarrow ? "mx-auto w-50" : undefined} gap={3}>
+                <Stack gap={3}>
                   <Component />
                 </Stack>
               </Stack>

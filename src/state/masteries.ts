@@ -33,6 +33,7 @@ export const masteriesAcquired = withStateKey("masteriesAcquired", (key) =>
       butchery: get(masteries("butchery")).isUnlocked,
       cruelty: get(masteries("cruelty")).isUnlocked,
       finesse: get(masteries("finesse")).isUnlocked,
+      marksmanship: get(masteries("marksmanship")).isUnlocked,
       might: get(masteries("might")).isUnlocked,
       resilience: get(masteries("resilience")).isUnlocked,
       stability: get(masteries("stability")).isUnlocked,

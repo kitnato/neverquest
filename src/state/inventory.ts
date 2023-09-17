@@ -2,6 +2,7 @@ import { atom, selector, selectorFamily } from "recoil";
 
 import { scrap } from "./resources";
 import {
+  AMMUNITION_MAXIMUM,
   ARMOR_NONE,
   ENCUMBRANCE,
   GEMS_MAXIMUM,
@@ -125,7 +126,7 @@ export const shield = withStateKey("shield", (key) =>
 );
 
 export const weapon = withStateKey("weapon", (key) =>
-  selector({
+  selector<Weapon | typeof WEAPON_NONE>({
     get: ({ get }) => {
       const equippedWeapon = get(inventory).find((item) => {
         if (isWeapon(item)) {
@@ -146,6 +147,22 @@ export const weapon = withStateKey("weapon", (key) =>
 );
 
 // ATOMS
+
+export const ammunition = withStateKey("ammunition", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  }),
+);
+
+export const ammunitionMaximum = withStateKey("ammunitionMaximum", (key) =>
+  atom({
+    default: AMMUNITION_MAXIMUM,
+    effects: [handleLocalStorage<number>({ key })],
+    key,
+  }),
+);
 
 export const encumbranceMaximum = withStateKey("encumbranceMaximum", (key) =>
   atom({

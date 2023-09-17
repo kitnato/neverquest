@@ -7,7 +7,11 @@ import { merchantInventory } from "@neverquest/state/caravan";
 import { stage, stageMaximum } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
 import type { MerchantInventory } from "@neverquest/types";
-import { generateArmor, generateShield, generateWeapon } from "@neverquest/utilities/generators";
+import {
+  generateArmor,
+  generateMeleeWeapon,
+  generateShield,
+} from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useGenerateMerchantInventory() {
@@ -63,7 +67,7 @@ export function useGenerateMerchantInventory() {
 
                 if (type === "weapon") {
                   return {
-                    ...generateWeapon({
+                    ...generateMeleeWeapon({
                       ...SETTINGS_GEAR,
                       ...offer,
                     }),

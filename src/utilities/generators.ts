@@ -8,22 +8,17 @@ import {
 import { LOCATION_NAME } from "@neverquest/data/location";
 import { generateArtifact } from "@neverquest/LOCRAN/generate/generateArtifact";
 import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
-import type {
-  AffixTag,
-  ArmorClass,
-  ShieldClass,
-  WeaponClass,
-  WeaponModality,
-} from "@neverquest/LOCRAN/types";
-import type { Armor, Shield, Weapon } from "@neverquest/types";
-import type { WeaponGrip } from "@neverquest/types/unions";
+import type { AffixTag, ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
+import type { Armor, Melee, Ranged, Shield } from "@neverquest/types";
+import type { Grip } from "@neverquest/types/unions";
 import {
   getArmorRanges,
   getFromRange,
   getGearPrices,
   getGrowthSigmoid,
+  getMeleeRanges,
+  getRangedRanges,
   getShieldRanges,
-  getWeaponRanges,
 } from "@neverquest/utilities/getters";
 
 export function generateArmor({
@@ -84,6 +79,111 @@ export function generateArmor({
   };
 }
 
+export function generateMeleeWeapon({
+  allowNSFW,
+  gearClass,
+  grip,
+  hasPrefix,
+  hasSuffix,
+  level,
+  tags,
+}: {
+  allowNSFW: boolean;
+  gearClass: WeaponClass;
+  grip: Grip;
+  hasPrefix?: boolean;
+  hasSuffix?: boolean;
+  level: number;
+  tags?: AffixTag[];
+}): Melee {
+  const factor = getGrowthSigmoid(level);
+  const { coinPrice, scrapPrice } = getGearPrices({ factor, ...WEAPON_BASE });
+  const { abilityChance, damage, rate, staminaCost, weight } = getMeleeRanges({
+    factor,
+    gearClass,
+    grip,
+  });
+
+  return {
+    abilityChance: getFromRange(abilityChance),
+    coinPrice,
+    damage: getFromRange(damage),
+    gearClass,
+    gems: [],
+    grip,
+    id: nanoid(),
+    isEquipped: false,
+    level,
+    name: generateArtifact({
+      allowNSFW,
+      hasPrefix,
+      hasSuffix,
+      query: {
+        artifactClass: gearClass,
+        subtype: "melee",
+        type: "weapon",
+      },
+      tags,
+    }),
+    rate: getFromRange(rate),
+    scrapPrice,
+    staminaCost: getFromRange(staminaCost),
+    weight: getFromRange(weight),
+  };
+}
+
+export function generateRangedWeapon({
+  allowNSFW,
+  gearClass,
+  hasPrefix,
+  hasSuffix,
+  level,
+  tags,
+}: {
+  allowNSFW: boolean;
+  gearClass: WeaponClass;
+  hasPrefix?: boolean;
+  hasSuffix?: boolean;
+  level: number;
+  tags?: AffixTag[];
+}): Ranged {
+  const factor = getGrowthSigmoid(level);
+  const { coinPrice, scrapPrice } = getGearPrices({ factor, ...WEAPON_BASE });
+  const { abilityChance, ammunitionCost, damage, range, rate, staminaCost, weight } =
+    getRangedRanges({
+      factor,
+      gearClass,
+    });
+
+  return {
+    abilityChance: getFromRange(abilityChance),
+    ammunitionCost: getFromRange(ammunitionCost),
+    coinPrice,
+    damage: getFromRange(damage),
+    gearClass,
+    gems: [],
+    id: nanoid(),
+    isEquipped: false,
+    level,
+    name: generateArtifact({
+      allowNSFW,
+      hasPrefix,
+      hasSuffix,
+      query: {
+        artifactClass: gearClass,
+        subtype: "ranged",
+        type: "weapon",
+      },
+      tags,
+    }),
+    range: getFromRange(range),
+    rate: getFromRange(rate),
+    scrapPrice,
+    staminaCost: getFromRange(staminaCost),
+    weight: getFromRange(weight),
+  };
+}
+
 export function generateShield({
   allowNSFW,
   gearClass,
@@ -133,64 +233,6 @@ export function generateShield({
       }),
     scrapPrice,
     stagger: stagger === null ? 0 : getFromRange(stagger),
-    staminaCost: getFromRange(staminaCost),
-    weight: getFromRange(weight),
-  };
-}
-
-export function generateWeapon({
-  allowNSFW,
-  gearClass,
-  grip,
-  hasPrefix,
-  hasSuffix,
-  level,
-  modality,
-  tags,
-}: {
-  allowNSFW: boolean;
-  gearClass: WeaponClass;
-  grip: WeaponGrip;
-  hasPrefix?: boolean;
-  hasSuffix?: boolean;
-  level: number;
-  modality: WeaponModality;
-  tags?: AffixTag[];
-}): Weapon {
-  const factor = getGrowthSigmoid(level);
-  const { coinPrice, scrapPrice } = getGearPrices({ factor, ...WEAPON_BASE });
-  const { abilityChance, damage, range, rate, staminaCost, weight } = getWeaponRanges({
-    factor,
-    gearClass,
-    grip,
-    modality,
-  });
-
-  return {
-    abilityChance: getFromRange(abilityChance),
-    coinPrice,
-    damage: getFromRange(damage),
-    gearClass,
-    gems: [],
-    grip,
-    id: nanoid(),
-    isEquipped: false,
-    level,
-    modality,
-    name: generateArtifact({
-      allowNSFW,
-      hasPrefix,
-      hasSuffix,
-      query: {
-        artifactClass: gearClass,
-        subtype: modality,
-        type: "weapon",
-      },
-      tags,
-    }),
-    range: modality === "melee" ? 0 : getFromRange(range),
-    rate: getFromRange(rate),
-    scrapPrice,
     staminaCost: getFromRange(staminaCost),
     weight: getFromRange(weight),
   };

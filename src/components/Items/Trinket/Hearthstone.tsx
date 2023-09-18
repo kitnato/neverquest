@@ -6,7 +6,7 @@ import { isAttacking } from "@neverquest/state/character";
 import { isWilderness } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
 
-export function ActivateHearthstone() {
+export function Hearthstone() {
   const isAttackingValue = useRecoilValue(isAttacking);
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
   const isWildernessValue = useRecoilValue(isWilderness);
@@ -21,17 +21,15 @@ export function ActivateHearthstone() {
   };
 
   return (
-    <>
-      <OverlayTrigger
-        overlay={<Tooltip>The hearthstone is cold.</Tooltip>}
-        trigger={canWarp ? [] : ["focus", "hover"]}
-      >
-        <span>
-          <Button disabled={!canWarp} onClick={handleWarp} variant="outline-dark">
-            Use
-          </Button>
-        </span>
-      </OverlayTrigger>
-    </>
+    <OverlayTrigger
+      overlay={<Tooltip>The hearthstone is cold.</Tooltip>}
+      trigger={canWarp ? [] : ["focus", "hover"]}
+    >
+      <span>
+        <Button disabled={!canWarp} onClick={handleWarp} variant="outline-dark">
+          Use
+        </Button>
+      </span>
+    </OverlayTrigger>
   );
 }

@@ -88,11 +88,12 @@ export const CREW: Record<
       7: "Your headway in the wilderness is helping business.",
       9: "There is something dark looming on the horizon ...",
       10: "I can't believe you came out of that in one piece.",
-      11: "Ah, back again.",
-      14: "I recently came into possession of a few curiosities.",
-      15: "Can I interest you in anything else?",
-      25: "A dark wanderer passed by and sold me a strange book ...",
-      26: "Welcome back. Always a sight for sore eyes.",
+      11: "Ah, back again I see.",
+      20: "I recently came into possession of a few curiosities.",
+      21: "Can I interest you in anything else?",
+      25: "I have something suitable for marksmen.",
+      30: "A dark wanderer passed by and sold me a strange book ...",
+      31: "Welcome back. Always a sight for sore eyes.",
     },
     requiredStage: 0,
   },
@@ -198,15 +199,22 @@ export const MERCHANT_OFFERS: Record<
       type: "armor",
     },
   ],
-  14: [
+  20: [
     { name: "antique coin", type: "trinket" },
     { name: "monkey paw", type: "trinket" },
   ],
-  25: [{ name: "tome of power", type: "trinket" }],
+  25: [{ name: "ammunition pouch", type: "trinket" }],
+  30: [{ name: "tome of power", type: "trinket" }],
 };
 
-export const TAILORING_EXPANSION = 3;
-export const TAILORING_MAXIMUM_PRICE = 300;
+export const TAILORING_EXPANSION = {
+  ammunitionPouch: 20,
+  knapsack: 3,
+};
+export const TAILORING_PRICES_MAXIMUM = {
+  ammunitionPouch: 300,
+  knapsack: 500,
+};
 
 export const TRANSMUTE_COST = 3;
 export const TRANSMUTE_YIELD = 1;

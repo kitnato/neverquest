@@ -9,17 +9,15 @@ import { ConsumeSalve } from "@neverquest/components/Items/Consumable/ConsumeSal
 import { Encumbrance } from "@neverquest/components/Items/Encumbrance";
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
 import { StoredGear } from "@neverquest/components/Items/StoredGear";
-import { ActivateCompass } from "@neverquest/components/Items/Trinket/ActivateCompass";
-import { ActivateHearthstone } from "@neverquest/components/Items/Trinket/ActivateHearthstone";
+import { Trinket } from "@neverquest/components/Items/Trinket";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
-import { ammunition, inventory } from "@neverquest/state/inventory";
+import { inventory } from "@neverquest/state/inventory";
 import {
   isArmor,
   isConsumable,
   isGear,
   isGem,
   isShield,
-  isStackable,
   isTrinket,
   isWeapon,
 } from "@neverquest/types/type-guards";
@@ -27,12 +25,11 @@ import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function Inventory() {
-  const ammunitionValue = useRecoilValue(ammunition);
   const inventoryValue = useRecoilValue(inventory);
 
   const toggleEquipGear = useToggleEquipGear();
 
-  const equippedGear = [...inventoryValue.filter((item) => isGear(item) && item.isEquipped)];
+  const equippedGear = inventoryValue.filter((item) => isGear(item) && item.isEquipped);
   const storedItems = inventoryValue.filter(
     (item) => !isGear(item) || (isGear(item) && !item.isEquipped),
   );
@@ -72,35 +69,12 @@ export function Inventory() {
 
         <StoredGear />
 
-        {[...storedItems.filter(isTrinket).sort((a, b) => a.type.localeCompare(b.type))].map(
-          (current) => {
-            const { id, type } = current;
-
-            const action = (() => {
-              switch (type) {
-                case "compass": {
-                  return <ActivateCompass />;
-                }
-                case "hearthstone": {
-                  return <ActivateHearthstone />;
-                }
-              }
-
-              return null;
-            })();
-
-            return (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-                <ItemDisplay
-                  item={current}
-                  stack={type === "ammunition pouch" ? ammunitionValue : undefined}
-                />
-
-                {action}
-              </div>
-            );
-          },
-        )}
+        {storedItems
+          .filter(isTrinket)
+          .sort((a, b) => a.type.localeCompare(b.type))
+          .map((current) => (
+            <Trinket item={current} key={current.id} />
+          ))}
 
         {[
           ...stackItems(
@@ -109,11 +83,6 @@ export function Inventory() {
           ...stackItems(storedItems.filter(isGem).sort((a, b) => a.type.localeCompare(b.type))),
         ].map((current) => {
           const { item, stack } = current;
-
-          if (!isStackable(item)) {
-            return null;
-          }
-
           const { id, type } = item;
 
           const action = (() => {

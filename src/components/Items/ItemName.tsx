@@ -5,7 +5,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { GemDescription } from "@neverquest/components/Items/GemDescription";
 import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
 import type { ConsumableItem, GemItem, TrinketItem } from "@neverquest/types";
-import { isGem, isTrinket } from "@neverquest/types/type-guards";
+import { isGem } from "@neverquest/types/type-guards";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function ItemName({
@@ -21,8 +21,6 @@ export function ItemName({
 }) {
   const { type, weight } = item;
   const description = isGem(item) ? <GemDescription type={item.type} /> : item.description;
-  const isStack = stack !== undefined && stack > 1;
-  const isTrinketWithStack = isTrinket(item) && isStack;
   const name = capitalizeAll(type);
 
   return (
@@ -35,7 +33,7 @@ export function ItemName({
             <span>{description}</span>
 
             <DetailsTable>
-              <WeightDetail stack={isTrinketWithStack ? undefined : stack} weight={weight} />
+              <WeightDetail stack={stack} weight={weight} />
             </DetailsTable>
           </Popover.Body>
         </Popover>
@@ -43,7 +41,7 @@ export function ItemName({
       placement={placement}
       trigger={hideOverlay ? [] : ["focus", "hover"]}
     >
-      <span>{`${name}${isTrinketWithStack ? ` (${stack})` : isStack ? ` x${stack}` : ""}`}</span>
+      <span>{`${name}${stack !== undefined && stack > 1 ? ` x${stack}` : ""}`}</span>
     </OverlayTrigger>
   );
 }

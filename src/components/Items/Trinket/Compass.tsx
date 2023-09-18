@@ -16,7 +16,7 @@ import {
 } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
 
-export function ActivateCompass() {
+export function Compass() {
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isStageStartedValue = useRecoilValue(isStageStarted);

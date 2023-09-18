@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil";
 
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import { ammunition, armor, shield, weapon } from "@neverquest/state/inventory";
+import { ammunition, armor, hasItem, shield, weapon } from "@neverquest/state/inventory";
 import { stamina } from "@neverquest/state/reserves";
 import { isRanged } from "@neverquest/types/type-guards";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
@@ -20,7 +20,9 @@ export const hasEnoughAmmunition = withStateKey("hasEnoughAmmunition", (key) =>
     get: ({ get }) => {
       const weaponValue = get(weapon);
 
-      return isRanged(weaponValue) ? get(ammunition) >= weaponValue.ammunitionCost : true;
+      return isRanged(weaponValue)
+        ? get(hasItem("ammunition pouch")) && get(ammunition) >= weaponValue.ammunitionCost
+        : true;
     },
     key,
   }),

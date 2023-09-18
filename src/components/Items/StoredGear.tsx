@@ -38,11 +38,8 @@ export function StoredGear() {
     return true;
   };
 
-  const storedItems = inventoryValue.filter(
-    (item) => !isGear(item) || (isGear(item) && !item.isEquipped),
-  );
-
-  return storedItems
+  return inventoryValue
+    .filter((item) => !isGear(item) || (isGear(item) && !item.isEquipped))
     .filter(isGear)
     .sort((a, b) => a.name.localeCompare(b.name))
     .map((current) => {

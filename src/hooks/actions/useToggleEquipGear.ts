@@ -54,6 +54,7 @@ export function useToggleEquipGear() {
 
           if (isRanged(gearItem)) {
             set(isShowing("offhand"), true);
+            set(isShowing("range"), true);
           }
 
           set(isShowing("attackRateDetails"), true);

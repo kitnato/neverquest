@@ -5,6 +5,7 @@ import { Deflection } from "@neverquest/components/Statistics/Deflection";
 import { Execution } from "@neverquest/components/Statistics/Execution";
 import { FreeBlock } from "@neverquest/components/Statistics/FreeBlock";
 import { LootBonus } from "@neverquest/components/Statistics/LootBonus";
+import { Range } from "@neverquest/components/Statistics/Range";
 import { isShowing } from "@neverquest/state/isShowing";
 
 export function Support() {
@@ -20,6 +21,10 @@ export function Support() {
     <Row>
       <Col>
         <Execution />
+      </Col>
+
+      <Col>
+        <Range />
       </Col>
 
       <Col>

@@ -58,6 +58,7 @@ export type Delta =
   | "parry"
   | "progress"
   | "protection"
+  | "range"
   | "recoveryRate"
   | "resilience"
   | "scrap"

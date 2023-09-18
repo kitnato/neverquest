@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconDeflection } from "@neverquest/icons/execution.svg";
+import { ReactComponent as IconExecution } from "@neverquest/icons/execution.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
@@ -42,7 +42,7 @@ export function Execution() {
           <FloatingText deltaType="execution" />
         </Stack>
       }
-      Icon={IconDeflection}
+      Icon={IconExecution}
       isAnimated
       tooltip="Execution threshold"
     />

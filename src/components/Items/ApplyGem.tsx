@@ -15,15 +15,15 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
   const gemFitting = {
     armor: {
       canApply: useRecoilValue(canApplyGem("armor")),
-      fittedGems: useRecoilValue(armor).gems.length,
+      gear: useRecoilValue(armor),
     },
     shield: {
       canApply: useRecoilValue(canApplyGem("shield")),
-      fittedGems: useRecoilValue(shield).gems.length,
+      gear: useRecoilValue(shield),
     },
     weapon: {
       canApply: useRecoilValue(canApplyGem("weapon")),
-      fittedGems: useRecoilValue(weapon).gems.length,
+      gear: useRecoilValue(weapon),
     },
   };
 
@@ -34,21 +34,25 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
       <Dropdown.Toggle variant="outline-dark">Apply</Dropdown.Toggle>
 
       <Dropdown.Menu>
-        {GEAR_TYPES.map((current) => (
-          <Dropdown.Item
-            className={CLASS_FULL_WIDTH_JUSTIFIED}
-            disabled={!gemFitting[current].canApply}
-            eventKey={current}
-            key={current}
-          >
-            <span>{capitalizeAll(current)}</span>
+        {GEAR_TYPES.map((current) => {
+          const { canApply, gear } = gemFitting[current];
+          const { gems, name } = gear;
 
-            <span>
-              <IconImage Icon={IconScrap} size="tiny" />
-              &nbsp;{GEM_FITTING_COST[gemFitting[current].fittedGems] ?? LABEL_EMPTY}
-            </span>
-          </Dropdown.Item>
-        ))}
+          return (
+            <Dropdown.Item
+              className={CLASS_FULL_WIDTH_JUSTIFIED}
+              disabled={!canApply}
+              eventKey={current}
+              key={current}
+            >
+              <span>{capitalizeAll(name)}</span>&nbsp;
+              <span>
+                <IconImage Icon={IconScrap} size="tiny" />
+                &nbsp;{GEM_FITTING_COST[gems.length] ?? LABEL_EMPTY}
+              </span>
+            </Dropdown.Item>
+          );
+        })}
       </Dropdown.Menu>
     </Dropdown>
   );

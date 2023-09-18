@@ -73,7 +73,7 @@ export type Delta =
 export const ELEMENTAL_TYPES = ["lightning", "fire", "ice"] as const;
 export type Elemental = (typeof ELEMENTAL_TYPES)[number];
 
-export const GEAR_TYPES = ["armor", "shield", "weapon"] as const;
+export const GEAR_TYPES = ["weapon", "armor", "shield"] as const;
 export type Gear = (typeof GEAR_TYPES)[number];
 
 export const GEM_TYPES = ["ruby", "sapphire", "topaz"] as const;

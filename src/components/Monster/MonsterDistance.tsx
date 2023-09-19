@@ -5,7 +5,7 @@ import { MonsterDistanceMeter } from "@neverquest/components/Monster/MonsterDist
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { ReactComponent as IconDistance } from "@neverquest/icons/distance.svg";
 import { isAttacking } from "@neverquest/state/character";
-import { weapon } from "@neverquest/state/inventory";
+import { weapon } from "@neverquest/state/items";
 import { hasMonsterClosed, isMonsterDead, monsterDistance } from "@neverquest/state/monster";
 import { isRanged } from "@neverquest/types/type-guards";
 

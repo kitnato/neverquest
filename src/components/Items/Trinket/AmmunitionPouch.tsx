@@ -2,23 +2,31 @@ import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
-import { ammunition, ammunitionMaximum } from "@neverquest/state/inventory";
-import type { TrinketItem } from "@neverquest/types";
+import { merchantInventory } from "@neverquest/state/caravan";
+import { ownedItem } from "@neverquest/state/items";
+import type { TrinketItemAmmunitionPouch } from "@neverquest/types";
+import { isTrinket } from "@neverquest/types/type-guards";
 
-export function AmmunitionPouch({
-  item,
-  overlayPlacement,
-}: {
-  item: TrinketItem;
-  overlayPlacement?: Placement;
-}) {
-  const ammunitionValue = useRecoilValue(ammunition);
-  const ammunitionMaximumValue = useRecoilValue(ammunitionMaximum);
+export function AmmunitionPouch({ overlayPlacement }: { overlayPlacement?: Placement }) {
+  const ownedAmmunitionPouch = useRecoilValue(ownedItem("ammunition pouch"));
+  const merchantInventoryValue = useRecoilValue(merchantInventory);
+
+  const ammunitionPouch =
+    ownedAmmunitionPouch ??
+    merchantInventoryValue.find(({ item }) => isTrinket(item) && item.type === "ammunition pouch")
+      ?.item ??
+    null;
+
+  if (ammunitionPouch === null) {
+    return null;
+  }
+
+  const { current, maximum } = ammunitionPouch as TrinketItemAmmunitionPouch;
 
   return (
     <ItemDisplay
-      extra={` (${ammunitionValue}/${ammunitionMaximumValue})`}
-      item={item}
+      extra={` (${current}/${maximum})`}
+      item={ammunitionPouch}
       overlayPlacement={overlayPlacement}
     />
   );

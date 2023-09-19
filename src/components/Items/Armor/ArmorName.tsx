@@ -13,8 +13,8 @@ import { type ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/inventor
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
 import { ReactComponent as IconNone } from "@neverquest/icons/none.svg";
 import { ReactComponent as IconProtection } from "@neverquest/icons/protection.svg";
-import { armor as armorEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { armor as armorEquipped } from "@neverquest/state/items";
 import type { Armor } from "@neverquest/types";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";

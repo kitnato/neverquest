@@ -170,8 +170,6 @@ export type Skill = (typeof SKILL_TYPES)[number];
 
 export type StateKey =
   | "allowNSFW"
-  | "ammunition"
-  | "ammunitionMaximum"
   | "appliedGems"
   | "areAttributesIncreasable"
   | "armor"
@@ -224,7 +222,6 @@ export type StateKey =
   | "floatingTextQueues"
   | "hasBoughtFromMerchant"
   | "hasEnoughAmmunition"
-  | "hasItem"
   | "hasKnapsack"
   | "hasLooted"
   | "hasMonsterClosed"
@@ -289,6 +286,7 @@ export type StateKey =
   | "monsterPoisonMagnitude"
   | "name"
   | "notifyOverEncumbrance"
+  | "ownedItem"
   | "parryAbsorption"
   | "parryChance"
   | "parryDamage"
@@ -326,6 +324,7 @@ export type StateKey =
   | "statusElement"
   | "thorns"
   | "totalElementalEffects"
+  | "trinketProperties"
   | "weapon"
   | "wildernesses";
 

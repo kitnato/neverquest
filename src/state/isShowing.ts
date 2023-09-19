@@ -6,7 +6,7 @@ import { SHOWING_TYPES, type Showing } from "@neverquest/types/unions";
 export const isShowing = withStateKey("isShowing", (key) =>
   atomFamily<boolean, Showing>({
     default: false,
-    effects: (parameter) => [handleLocalStorage<boolean>({ key, parameter })],
+    effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),
 );

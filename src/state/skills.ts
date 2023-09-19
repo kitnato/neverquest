@@ -41,7 +41,7 @@ export const skillsTrained = withStateKey("skillsTrained", (key) =>
 export const skills = withStateKey("skills", (key) =>
   atomFamily<boolean, Skill>({
     default: false,
-    effects: (parameter) => [handleLocalStorage<boolean>({ key, parameter })],
+    effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),
 );

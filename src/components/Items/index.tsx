@@ -1,11 +1,14 @@
 import { Button, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { AmmunitionPouch } from "./Trinket/AmmunitionPouch";
+import { Compass } from "./Trinket/Compass";
+import { Hearthstone } from "./Trinket/Hearthstone";
 import { ApplyGem } from "@neverquest/components/Items/ApplyGem";
-import { ConsumeAntidote } from "@neverquest/components/Items/Consumable/ConsumeAntidote";
-import { ConsumeBandages } from "@neverquest/components/Items/Consumable/ConsumeBandages";
-import { ConsumeElixir } from "@neverquest/components/Items/Consumable/ConsumeElixir";
-import { ConsumeSalve } from "@neverquest/components/Items/Consumable/ConsumeSalve";
+import { Antidote } from "@neverquest/components/Items/Consumable/Antidote";
+import { Bandages } from "@neverquest/components/Items/Consumable/Bandages";
+import { Elixir } from "@neverquest/components/Items/Consumable/Elixir";
+import { Salve } from "@neverquest/components/Items/Consumable/Salve";
 import { Encumbrance } from "@neverquest/components/Items/Encumbrance";
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
 import { StoredGear } from "@neverquest/components/Items/StoredGear";
@@ -72,9 +75,35 @@ export function Inventory() {
         {storedItems
           .filter(isTrinket)
           .sort((a, b) => a.type.localeCompare(b.type))
-          .map((current) => (
-            <Trinket item={current} key={current.id} />
-          ))}
+          .map((current) => {
+            const { id, type } = current;
+
+            return (
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
+                <Trinket item={current} />
+
+                {(() => {
+                  switch (type) {
+                    case "ammunition pouch": {
+                      return <AmmunitionPouch />;
+                    }
+
+                    case "compass": {
+                      return <Compass />;
+                    }
+
+                    case "hearthstone": {
+                      return <Hearthstone />;
+                    }
+
+                    default: {
+                      return null;
+                    }
+                  }
+                })()}
+              </div>
+            );
+          })}
 
         {[
           ...stackItems(
@@ -85,36 +114,34 @@ export function Inventory() {
           const { item, stack } = current;
           const { id, type } = item;
 
-          const action = (() => {
-            if (isConsumable(item)) {
-              switch (type) {
-                case "antidote": {
-                  return <ConsumeAntidote consumable={item} />;
-                }
-                case "bandages": {
-                  return <ConsumeBandages consumable={item} />;
-                }
-                case "elixir": {
-                  return <ConsumeElixir consumable={item} />;
-                }
-                case "salve": {
-                  return <ConsumeSalve consumable={item} />;
-                }
-              }
-            }
-
-            if (isGem(item)) {
-              return <ApplyGem gem={item} />;
-            }
-
-            return null;
-          })();
-
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
               <ItemDisplay item={item} stack={stack} />
 
-              {action}
+              {(() => {
+                if (isConsumable(item)) {
+                  switch (type) {
+                    case "antidote": {
+                      return <Antidote id={id} />;
+                    }
+                    case "bandages": {
+                      return <Bandages id={id} />;
+                    }
+                    case "elixir": {
+                      return <Elixir id={id} />;
+                    }
+                    case "salve": {
+                      return <Salve id={id} />;
+                    }
+                  }
+                }
+
+                if (isGem(item)) {
+                  return <ApplyGem gem={item} />;
+                }
+
+                return null;
+              })()}
             </div>
           );
         })}

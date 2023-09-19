@@ -4,9 +4,8 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { inventory } from "@neverquest/state/inventory";
 import { isStaminaAtMaximum, stamina, staminaMaximumTotal } from "@neverquest/state/reserves";
-import type { ConsumableItem } from "@neverquest/types";
 
-export function ConsumeElixir({ consumable }: { consumable: ConsumableItem }) {
+export function Elixir({ id }: { id: string }) {
   const isStaminaAtMaximumValue = useRecoilValue(isStaminaAtMaximum);
   const staminaValue = useRecoilValue(stamina);
   const staminaMaximumTotalValue = useRecoilValue(staminaMaximumTotal);
@@ -32,7 +31,7 @@ export function ConsumeElixir({ consumable }: { consumable: ConsumableItem }) {
       value: staminaDifference,
     });
 
-    setInventory((current) => current.filter((current) => current.id !== consumable.id));
+    setInventory((current) => current.filter((current) => current.id !== id));
   };
 
   return (

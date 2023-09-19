@@ -9,10 +9,10 @@ import { ReactComponent as IconLevel } from "@neverquest/icons/level.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
 import { level } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
-import { hasItem } from "@neverquest/state/inventory";
+import { ownedItem } from "@neverquest/state/items";
 
 export function Level() {
-  const hasTomeOfPower = useRecoilValue(hasItem("tome of power"));
+  const hasTomeOfPower = Boolean(useRecoilValue(ownedItem("tome of power")));
   const levelValue = useRecoilValue(level);
 
   useDeltaText({

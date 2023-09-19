@@ -4,9 +4,8 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { inventory } from "@neverquest/state/inventory";
 import { isPoisoned, poisonDuration } from "@neverquest/state/reserves";
-import type { ConsumableItem } from "@neverquest/types";
 
-export function ConsumeAntidote({ consumable }: { consumable: ConsumableItem }) {
+export function Antidote({ id }: { id: string }) {
   const isPoisonedValue = useRecoilValue(isPoisoned);
   const resetPoisonDuration = useResetRecoilState(poisonDuration);
   const setInventory = useSetRecoilState(inventory);
@@ -25,7 +24,7 @@ export function ConsumeAntidote({ consumable }: { consumable: ConsumableItem }) 
       value: 0,
     });
 
-    setInventory((current) => current.filter((current) => current.id !== consumable.id));
+    setInventory((current) => current.filter((current) => current.id !== id));
   };
 
   return (

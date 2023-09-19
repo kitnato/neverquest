@@ -13,8 +13,8 @@ import { type SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/invent
 import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
 import { ReactComponent as IconNone } from "@neverquest/icons/none.svg";
 import { ReactComponent as IconStagger } from "@neverquest/icons/shield-stagger.svg";
-import { shield as shieldEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { shield as shieldEquipped } from "@neverquest/state/items";
 import type { Shield } from "@neverquest/types";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";

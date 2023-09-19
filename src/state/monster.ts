@@ -14,7 +14,7 @@ import {
 import { BLEED_DELTA, ELEMENTAL_AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
-import { weapon } from "@neverquest/state/inventory";
+import { weapon } from "@neverquest/state/items";
 import { skills } from "@neverquest/state/skills";
 import { bleedDamage, lootBonus, range, totalElementalEffects } from "@neverquest/state/statistics";
 import {
@@ -261,7 +261,7 @@ export const monsterPoisonMagnitude = withStateKey("monsterPoisonMagnitude", (ke
 export const isMonsterNew = withStateKey("isMonsterNew", (key) =>
   atom({
     default: false,
-    effects: [handleLocalStorage<boolean>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -269,7 +269,7 @@ export const isMonsterNew = withStateKey("isMonsterNew", (key) =>
 export const monsterAilmentDuration = withStateKey("monsterAilmentDuration", (key) =>
   atomFamily<number, MonsterAilment>({
     default: 0,
-    effects: (parameter) => [handleLocalStorage<number>({ key, parameter })],
+    effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),
 );
@@ -277,7 +277,7 @@ export const monsterAilmentDuration = withStateKey("monsterAilmentDuration", (ke
 export const monsterAttackDuration = withStateKey("monsterAttackDuration", (key) =>
   atom({
     default: 0,
-    effects: [handleLocalStorage<number>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -285,7 +285,7 @@ export const monsterAttackDuration = withStateKey("monsterAttackDuration", (key)
 export const monsterBleedingDelta = withStateKey("monsterBleedingDelta", (key) =>
   atom({
     default: BLEED_DELTA,
-    effects: [handleLocalStorage<number>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -293,7 +293,7 @@ export const monsterBleedingDelta = withStateKey("monsterBleedingDelta", (key) =
 export const monsterDistance = withStateKey("monsterDistance", (key) =>
   atom({
     default: range,
-    effects: [handleLocalStorage<number>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -301,7 +301,7 @@ export const monsterDistance = withStateKey("monsterDistance", (key) =>
 export const monsterElement = withStateKey("monsterElement", (key) =>
   atom<HTMLDivElement | null>({
     default: null,
-    effects: [handleLocalStorage<HTMLDivElement | null>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -309,15 +309,15 @@ export const monsterElement = withStateKey("monsterElement", (key) =>
 export const monsterHealth = withStateKey("monsterHealth", (key) =>
   atom({
     default: monsterHealthMaximum,
-    effects: [handleLocalStorage<number>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
 
 export const monsterName = withStateKey("monsterName", (key) =>
-  atom({
+  atom<string | null>({
     default: null,
-    effects: [handleLocalStorage<string | null>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );

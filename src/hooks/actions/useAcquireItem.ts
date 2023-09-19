@@ -5,17 +5,15 @@ import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { attributes } from "@neverquest/state/attributes";
 import {
-  armor,
   canFit,
   encumbranceMaximum,
   hasKnapsack,
   inventory,
   itemsAcquired,
   notifyOverEncumbrance,
-  shield,
-  weapon,
 } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { armor, shield, weapon } from "@neverquest/state/items";
 import { autoEquip } from "@neverquest/state/settings";
 import type { InventoryItem } from "@neverquest/types";
 import { isArmor, isGear, isShield, isWeapon } from "@neverquest/types/type-guards";

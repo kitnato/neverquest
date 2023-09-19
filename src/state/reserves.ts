@@ -175,7 +175,7 @@ export const staminaMaximumTotal = withStateKey("staminaMaximumTotal", (key) =>
 export const blight = withStateKey("blight", (key) =>
   atom({
     default: 0,
-    effects: [handleLocalStorage<number>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -183,7 +183,7 @@ export const blight = withStateKey("blight", (key) =>
 export const health = withStateKey("health", (key) =>
   atom({
     default: healthMaximumTotal,
-    effects: [handleLocalStorage<number>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -191,7 +191,7 @@ export const health = withStateKey("health", (key) =>
 export const regenerationDuration = withStateKey("regenerationDuration", (key) =>
   atomFamily<number, Reserve>({
     default: 0,
-    effects: (parameter) => [handleLocalStorage<number>({ key, parameter })],
+    effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),
 );
@@ -199,7 +199,7 @@ export const regenerationDuration = withStateKey("regenerationDuration", (key) =
 export const isImmortal = withStateKey("isImmortal", (key) =>
   atom({
     default: false,
-    effects: [handleLocalStorage<boolean>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -207,7 +207,7 @@ export const isImmortal = withStateKey("isImmortal", (key) =>
 export const poisonDuration = withStateKey("poisonDuration", (key) =>
   atom({
     default: 0,
-    effects: [handleLocalStorage<number>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -215,7 +215,7 @@ export const poisonDuration = withStateKey("poisonDuration", (key) =>
 export const stamina = withStateKey("stamina", (key) =>
   atom({
     default: staminaMaximumTotal,
-    effects: [handleLocalStorage<number>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );

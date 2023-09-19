@@ -14,8 +14,8 @@ import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
 import { attributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
-import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { weapon } from "@neverquest/state/items";
 import { damage, damageTotal, powerBonus } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";

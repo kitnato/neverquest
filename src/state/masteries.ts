@@ -6,11 +6,6 @@ import type { UnlockedState } from "@neverquest/types";
 import type { Mastery } from "@neverquest/types/unions";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 
-type MasteryState = UnlockedState & {
-  progress: number;
-  rank: number;
-};
-
 // SELECTORS
 
 export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
@@ -69,13 +64,19 @@ export const masteryStatistic = withStateKey("masteryStatistic", (key) =>
 // ATOMS
 
 export const masteries = withStateKey("masteries", (key) =>
-  atomFamily<MasteryState, Mastery>({
+  atomFamily<
+    UnlockedState & {
+      progress: number;
+      rank: number;
+    },
+    Mastery
+  >({
     default: {
       isUnlocked: false,
       progress: 0,
       rank: 0,
     },
-    effects: (parameter) => [handleLocalStorage<MasteryState>({ key, parameter })],
+    effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),
 );

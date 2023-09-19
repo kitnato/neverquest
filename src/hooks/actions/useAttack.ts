@@ -12,8 +12,9 @@ import {
   isAttacking,
 } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { ammunition, weapon } from "@neverquest/state/inventory";
+import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { ownedItem, weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
   isMonsterAiling,
@@ -31,6 +32,7 @@ import {
   damageTotal,
   execution,
 } from "@neverquest/state/statistics";
+import type { TrinketItemAmmunitionPouch } from "@neverquest/types";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
@@ -101,7 +103,20 @@ export function useAttack() {
           }
 
           if (isRanged(weaponValue)) {
-            set(ammunition, (current) => current - weaponValue.ammunitionCost);
+            set(inventory, (currentInventory) =>
+              currentInventory.map((currentItem) => {
+                const ownedAmmunitionPouch = get(ownedItem("ammunition pouch"));
+
+                return ownedAmmunitionPouch !== null && currentItem.id === ownedAmmunitionPouch.id
+                  ? {
+                      ...currentItem,
+                      current:
+                        (currentItem as TrinketItemAmmunitionPouch).current -
+                        weaponValue.ammunitionCost,
+                    }
+                  : currentItem;
+              }),
+            );
             increaseMastery("marksmanship");
           }
 

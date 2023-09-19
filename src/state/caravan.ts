@@ -23,7 +23,7 @@ export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
       shield: null,
       weapon: null,
     },
-    effects: [handleLocalStorage<BlacksmithInventory>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -31,7 +31,7 @@ export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
 export const crewActive = withStateKey("crewActive", (key) =>
   atom<Crew | null>({
     default: null,
-    effects: [handleLocalStorage<Crew | null>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -39,7 +39,7 @@ export const crewActive = withStateKey("crewActive", (key) =>
 export const hasBoughtFromMerchant = withStateKey("hasBoughtFromMerchant", (key) =>
   atom({
     default: false,
-    effects: [handleLocalStorage<boolean>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -48,7 +48,7 @@ export const hasBoughtFromMerchant = withStateKey("hasBoughtFromMerchant", (key)
 export const hireStatus = withStateKey("hireStatus", (key) =>
   atomFamily<{ status: CrewStatus }, Crew>({
     default: { status: null },
-    effects: (parameter) => [handleLocalStorage<{ status: CrewStatus }>({ key, parameter })],
+    effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),
 );
@@ -56,7 +56,7 @@ export const hireStatus = withStateKey("hireStatus", (key) =>
 export const fletcherInventory = withStateKey("fletcherInventory", (key) =>
   atom<Weapon | null>({
     default: null,
-    effects: [handleLocalStorage<Weapon | null>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -64,7 +64,7 @@ export const fletcherInventory = withStateKey("fletcherInventory", (key) =>
 export const merchantInventory = withStateKey("merchantInventory", (key) =>
   atom<MerchantInventory>({
     default: [],
-    effects: [handleLocalStorage<MerchantInventory>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );

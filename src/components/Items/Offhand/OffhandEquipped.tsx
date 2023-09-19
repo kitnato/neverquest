@@ -7,8 +7,8 @@ import { SHIELD_NONE } from "@neverquest/data/inventory";
 import { ReactComponent as IconFist } from "@neverquest/icons/fist.svg";
 import { ReactComponent as IconMelee } from "@neverquest/icons/melee.svg";
 import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
-import { shield, weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { shield, weapon } from "@neverquest/state/items";
 import { isRanged } from "@neverquest/types/type-guards";
 
 export function OffhandEquipped() {

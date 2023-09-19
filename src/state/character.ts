@@ -1,8 +1,9 @@
 import { atom, selector } from "recoil";
 
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import { ammunition, armor, hasItem, shield, weapon } from "@neverquest/state/inventory";
+import { armor, ownedItem, shield, weapon } from "@neverquest/state/items";
 import { stamina } from "@neverquest/state/reserves";
+import type { TrinketItemAmmunitionPouch } from "@neverquest/types";
 import { isRanged } from "@neverquest/types/type-guards";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 
@@ -18,10 +19,13 @@ export const canAttackOrParry = withStateKey("canAttackOrParry", (key) =>
 export const hasEnoughAmmunition = withStateKey("hasEnoughAmmunition", (key) =>
   selector({
     get: ({ get }) => {
+      const ownedAmmunitionPouch = get(ownedItem("ammunition pouch"));
       const weaponValue = get(weapon);
 
       return isRanged(weaponValue)
-        ? get(hasItem("ammunition pouch")) && get(ammunition) >= weaponValue.ammunitionCost
+        ? ownedAmmunitionPouch !== null &&
+            (ownedAmmunitionPouch as TrinketItemAmmunitionPouch).current >=
+              weaponValue.ammunitionCost
         : true;
     },
     key,
@@ -61,7 +65,7 @@ export const isRecovering = withStateKey("isRecovering", (key) =>
 export const attackDuration = withStateKey("attackDuration", (key) =>
   atom({
     default: 0,
-    effects: [handleLocalStorage<number>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -69,7 +73,7 @@ export const attackDuration = withStateKey("attackDuration", (key) =>
 export const isAttacking = withStateKey("isAttacking", (key) =>
   atom({
     default: false,
-    effects: [handleLocalStorage<boolean>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -77,7 +81,7 @@ export const isAttacking = withStateKey("isAttacking", (key) =>
 export const isGameOver = withStateKey("isGameOver", (key) =>
   atom({
     default: false,
-    effects: [handleLocalStorage<boolean>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -85,7 +89,7 @@ export const isGameOver = withStateKey("isGameOver", (key) =>
 export const lootingDuration = withStateKey("lootingDuration", (key) =>
   atom({
     default: 0,
-    effects: [handleLocalStorage<number>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -93,7 +97,7 @@ export const lootingDuration = withStateKey("lootingDuration", (key) =>
 export const name = withStateKey("name", (key) =>
   atom({
     default: LABEL_UNKNOWN,
-    effects: [handleLocalStorage<string>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -101,7 +105,7 @@ export const name = withStateKey("name", (key) =>
 export const recoveryDuration = withStateKey("recoveryDuration", (key) =>
   atom({
     default: 0,
-    effects: [handleLocalStorage<number>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -109,7 +113,7 @@ export const recoveryDuration = withStateKey("recoveryDuration", (key) =>
 export const statusElement = withStateKey("statusElement", (key) =>
   atom<HTMLDivElement | null>({
     default: null,
-    effects: [handleLocalStorage<HTMLDivElement | null>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );

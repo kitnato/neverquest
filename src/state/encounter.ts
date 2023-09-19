@@ -75,7 +75,7 @@ export const stageMaximum = withStateKey("stageMaximum", (key) =>
 export const isStageStarted = withStateKey("isStageStarted", (key) =>
   atom({
     default: false,
-    effects: [handleLocalStorage<boolean>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -83,7 +83,7 @@ export const isStageStarted = withStateKey("isStageStarted", (key) =>
 export const location = withStateKey("location", (key) =>
   atom<Location>({
     default: "wilderness",
-    effects: [handleLocalStorage<Location>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -91,7 +91,7 @@ export const location = withStateKey("location", (key) =>
 export const progress = withStateKey("progress", (key) =>
   atom({
     default: 0,
-    effects: [handleLocalStorage<number>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -99,7 +99,7 @@ export const progress = withStateKey("progress", (key) =>
 export const stage = withStateKey("stage", (key) =>
   atom({
     default: stageMaximum,
-    effects: [handleLocalStorage<number>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -107,7 +107,7 @@ export const stage = withStateKey("stage", (key) =>
 export const wildernesses = withStateKey("wildernesses", (key) =>
   atom<string[]>({
     default: [],
-    effects: [handleLocalStorage<string[]>({ key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );

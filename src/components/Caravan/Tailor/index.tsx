@@ -5,14 +5,10 @@ import { ExpandAmmunitionPouch } from "@neverquest/components/Caravan/Tailor/Exp
 import { ExpandKnapsack } from "@neverquest/components/Caravan/Tailor/ExpandKnapsack";
 import { Encumbrance } from "@neverquest/components/Items/Encumbrance";
 import { AmmunitionPouch } from "@neverquest/components/Items/Trinket/AmmunitionPouch";
-import { inventory } from "@neverquest/state/inventory";
-import type { TrinketItem } from "@neverquest/types";
-import { isTrinket } from "@neverquest/types/type-guards";
+import { ownedItem } from "@neverquest/state/items";
 
 export function Tailor() {
-  const ammunitionPouch = useRecoilValue(inventory).find(
-    (current) => isTrinket(current) && current.type === "ammunition pouch",
-  ) as TrinketItem;
+  const ownedAmmunitionPouch = useRecoilValue(ownedItem("ammunition pouch"));
 
   return (
     <Stack gap={5}>
@@ -26,12 +22,12 @@ export function Tailor() {
         <ExpandKnapsack />
       </Stack>
 
-      {ammunitionPouch !== undefined && (
+      {ownedAmmunitionPouch !== null && (
         <>
           <Stack gap={3}>
             <h6>Current ammunition pouch</h6>
 
-            <AmmunitionPouch item={ammunitionPouch} />
+            <AmmunitionPouch />
 
             <h6>Expand ammunition pouch</h6>
 

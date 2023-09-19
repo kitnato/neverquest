@@ -7,10 +7,6 @@ import type { UnlockedState } from "@neverquest/types";
 import type { Attribute } from "@neverquest/types/unions";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 
-type AttributeState = UnlockedState & {
-  points: number;
-};
-
 // SELECTORS
 
 export const attributePoints = withStateKey("attributePoints", (key) =>
@@ -105,12 +101,17 @@ export const attributeStatistic = withStateKey("attributeStatistic", (key) =>
 // ATOMS
 
 export const attributes = withStateKey("attributes", (key) =>
-  atomFamily<AttributeState, Attribute>({
+  atomFamily<
+    UnlockedState & {
+      points: number;
+    },
+    Attribute
+  >({
     default: {
       isUnlocked: false,
       points: 0,
     },
-    effects: (parameter) => [handleLocalStorage<AttributeState>({ key, parameter })],
+    effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),
 );

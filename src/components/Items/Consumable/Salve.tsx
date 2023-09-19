@@ -4,9 +4,8 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { inventory } from "@neverquest/state/inventory";
 import { blight, isBlighted } from "@neverquest/state/reserves";
-import type { ConsumableItem } from "@neverquest/types";
 
-export function ConsumeSalve({ consumable }: { consumable: ConsumableItem }) {
+export function Salve({ id }: { id: string }) {
   const resetBlight = useResetRecoilState(blight);
   const isBlightedValue = useRecoilValue(isBlighted);
   const setInventory = useSetRecoilState(inventory);
@@ -25,7 +24,7 @@ export function ConsumeSalve({ consumable }: { consumable: ConsumableItem }) {
       value: 0,
     });
 
-    setInventory((current) => current.filter((current) => current.id !== consumable.id));
+    setInventory((current) => current.filter((current) => current.id !== id));
   };
 
   return (

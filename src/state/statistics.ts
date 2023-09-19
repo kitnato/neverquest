@@ -10,7 +10,7 @@ import {
 import { BLEED, PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/statistics";
 import { withStateKey } from "@neverquest/state";
 import { attributeStatistic, level } from "@neverquest/state/attributes";
-import { armor, hasItem, shield, weapon } from "@neverquest/state/inventory";
+import { armor, ownedItem, shield, weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import type { Attribute } from "@neverquest/types/unions";
@@ -249,7 +249,7 @@ export const lootBonus = withStateKey("lootBonus", (key) =>
     get: ({ get }) => {
       const total = get(attributeStatistic("luck"));
 
-      return get(hasItem("antique coin")) ? total + total * get(powerBonus("luck")) : 0;
+      return get(ownedItem("antique coin")) !== null ? total + total * get(powerBonus("luck")) : 0;
     },
     key,
   }),
@@ -292,7 +292,9 @@ export const powerBonus = withStateKey("powerBonus", (key) =>
     get:
       (parameter) =>
       ({ get }) =>
-        get(hasItem("tome of power")) ? get(level) * ATTRIBUTES[parameter].powerBonus : 0,
+        get(ownedItem("tome of power")) !== null
+          ? get(level) * ATTRIBUTES[parameter].powerBonus
+          : 0,
     key,
   }),
 );

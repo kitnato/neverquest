@@ -299,8 +299,10 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
     Icon: IconAmmunitionPouch,
     item: {
       coinPrice: 250,
+      current: 0,
       description: "Essential for using ranged weapons.",
       id: nanoid(),
+      maximum: AMMUNITION_MAXIMUM,
       type: "ammunition pouch",
       weight: 5,
     },
@@ -383,8 +385,8 @@ export const WEAPON_BASE: GearBase & {
     { maximum: 1000, minimum: 950 },
   ],
   range: [
-    { maximum: 3000, minimum: 2500 },
-    { maximum: 7000, minimum: 6800 },
+    { maximum: 4500, minimum: 3000 },
+    { maximum: 8000, minimum: 7500 },
   ],
   rate: [
     { maximum: 3700, minimum: 3500 },

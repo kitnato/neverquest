@@ -1,5 +1,5 @@
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
@@ -7,26 +7,44 @@ import { TAILORING_EXPANSION, TAILORING_PRICES_MAXIMUM } from "@neverquest/data/
 import { AMMUNITION_MAXIMUM } from "@neverquest/data/inventory";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
 import { ReactComponent as IconTailoring } from "@neverquest/icons/tailoring.svg";
-import { ammunitionMaximum } from "@neverquest/state/inventory";
+import { inventory } from "@neverquest/state/inventory";
+import { ownedItem } from "@neverquest/state/items";
 import { coins } from "@neverquest/state/resources";
+import type { TrinketItemAmmunitionPouch } from "@neverquest/types";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function ExpandAmmunitionPouch() {
   const coinsValue = useRecoilValue(coins);
-  const [ammunitionMaximumValue, setAmmunitionMaximum] = useRecoilState(ammunitionMaximum);
+  const ownedAmmunitionPouch = useRecoilValue(ownedItem("ammunition pouch"));
+  const setInventory = useSetRecoilState(inventory);
 
   const transactResources = useTransactResources();
 
+  if (ownedAmmunitionPouch === null) {
+    return null;
+  }
+
+  const { id, maximum } = ownedAmmunitionPouch as TrinketItemAmmunitionPouch;
   const price = Math.ceil(
-    TAILORING_PRICES_MAXIMUM.ammunitionPouch *
-      getGrowthSigmoid(ammunitionMaximumValue - (AMMUNITION_MAXIMUM - 1)),
+    TAILORING_PRICES_MAXIMUM.ammunitionPouch * getGrowthSigmoid(maximum - (AMMUNITION_MAXIMUM - 1)),
   );
   const isAffordable = price <= coinsValue;
 
   const handleExpansion = () => {
     transactResources({ coinsDifference: -price });
-    setAmmunitionMaximum((current) => current + TAILORING_EXPANSION.ammunitionPouch);
+    setInventory((currentInventory) =>
+      currentInventory.map((currentItem) =>
+        currentItem.id === id
+          ? {
+              ...currentItem,
+              maximum:
+                (currentItem as TrinketItemAmmunitionPouch).maximum +
+                TAILORING_EXPANSION.ammunitionPouch,
+            }
+          : currentItem,
+      ),
+    );
   };
 
   return (

@@ -23,8 +23,8 @@ import {
   isRecovering,
 } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { weapon } from "@neverquest/state/items";
 import { isMonsterDead } from "@neverquest/state/monster";
 import { attackRate, attackRateTotal, powerBonus } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";

@@ -43,6 +43,7 @@ export function ItemDisplay({
         contents={
           <span>
             <ArmorName armor={item} placement={overlayPlacement} />
+
             {extra}
           </span>
         }
@@ -61,6 +62,7 @@ export function ItemDisplay({
         contents={
           <span>
             <ItemName item={item} placement={overlayPlacement} stack={stack} />
+
             {extra}
           </span>
         }
@@ -77,6 +79,7 @@ export function ItemDisplay({
         contents={
           <span>
             <ShieldName placement={overlayPlacement} shield={item} />
+
             {extra}
           </span>
         }
@@ -93,6 +96,7 @@ export function ItemDisplay({
         contents={
           <span>
             <ItemName item={item} placement={overlayPlacement} />
+
             {extra}
           </span>
         }
@@ -109,6 +113,7 @@ export function ItemDisplay({
         contents={
           <span>
             <WeaponName placement={overlayPlacement} weapon={item} />
+
             {extra}
           </span>
         }
@@ -129,6 +134,7 @@ export function ItemDisplay({
             placement={overlayPlacement}
             stack={stack}
           />
+
           {extra}
         </span>
       }

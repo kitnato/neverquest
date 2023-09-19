@@ -37,8 +37,8 @@ export function CraftGear({
       <OverlayTrigger
         overlay={
           <Tooltip>
-            {!hasCoins && <div>Not enough coins!</div>}
-            {!hasScrap && <div>Not enough scrap!</div>}
+            {!hasCoins && <div>Insufficient coins!</div>}
+            {!hasScrap && <div>Insufficient scrap!</div>}
           </Tooltip>
         }
         trigger={isCraftable ? [] : ["hover", "focus"]}

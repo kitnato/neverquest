@@ -16,8 +16,8 @@ export function Level() {
   const levelValue = useRecoilValue(level);
 
   useDeltaText({
-    atomDelta: deltas("level"),
-    atomValue: level,
+    delta: deltas("level"),
+    value: level,
   });
 
   return (

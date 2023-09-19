@@ -1,9 +1,6 @@
 import { Button, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { AmmunitionPouch } from "./Trinket/AmmunitionPouch";
-import { Compass } from "./Trinket/Compass";
-import { Hearthstone } from "./Trinket/Hearthstone";
 import { ApplyGem } from "@neverquest/components/Items/ApplyGem";
 import { Antidote } from "@neverquest/components/Items/Consumable/Antidote";
 import { Bandages } from "@neverquest/components/Items/Consumable/Bandages";
@@ -13,6 +10,8 @@ import { Encumbrance } from "@neverquest/components/Items/Encumbrance";
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
 import { StoredGear } from "@neverquest/components/Items/StoredGear";
 import { Trinket } from "@neverquest/components/Items/Trinket";
+import { Compass } from "@neverquest/components/Items/Trinket/Compass";
+import { Hearthstone } from "@neverquest/components/Items/Trinket/Hearthstone";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { inventory } from "@neverquest/state/inventory";
 import {
@@ -84,10 +83,6 @@ export function Inventory() {
 
                 {(() => {
                   switch (type) {
-                    case "ammunition pouch": {
-                      return <AmmunitionPouch />;
-                    }
-
                     case "compass": {
                       return <Compass />;
                     }
@@ -116,7 +111,7 @@ export function Inventory() {
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-              <ItemDisplay item={item} stack={stack} />
+              <ItemDisplay item={item} overlayPlacement="right" stack={stack} />
 
               {(() => {
                 if (isConsumable(item)) {

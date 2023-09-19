@@ -7,7 +7,6 @@ import type { IconImageDOMProps, SVGIcon } from "@neverquest/types/props";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function IconDisplay({
-  className,
   contents,
   description,
   Icon,
@@ -16,7 +15,6 @@ export function IconDisplay({
   isSpaced = false,
   tooltip,
 }: {
-  className?: string;
   contents: ReactNode;
   description?: ReactNode;
   Icon: SVGIcon;
@@ -25,13 +23,9 @@ export function IconDisplay({
   isSpaced?: boolean;
   tooltip?: string;
 }) {
-  const classNameFinal = `${className ?? ""}${
-    isAnimated ? getAnimationClass({ type: "flipInX" }) : ""
-  }`;
-
   return (
     <Stack
-      className={classNameFinal === "" ? undefined : classNameFinal}
+      className={isAnimated ? getAnimationClass({ type: "flipInX" }) : undefined}
       direction="horizontal"
       gap={isSpaced ? 5 : iconProps?.size === "tiny" ? 1 : 3}
     >

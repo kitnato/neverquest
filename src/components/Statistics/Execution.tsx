@@ -18,9 +18,9 @@ export function Execution() {
   const skillSiegecraft = useRecoilValue(skills("siegecraft"));
 
   useDeltaText({
-    atomDelta: deltas("execution"),
-    atomValue: execution,
+    delta: deltas("execution"),
     stop: ({ previous }) => previous === null || !skillSiegecraft,
+    value: execution,
   });
 
   if (!isShowingValue) {

@@ -33,9 +33,9 @@ export function ParryRating() {
   const skillEscrime = useRecoilValue(skills("escrime"));
 
   useDeltaText({
-    atomDelta: deltas("parry"),
-    atomValue: parryRating,
+    delta: deltas("parry"),
     stop: ({ previous }) => previous === null || !skillEscrime,
+    value: parryRating,
   });
 
   if (!isShowingParry) {

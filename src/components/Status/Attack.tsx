@@ -58,9 +58,9 @@ export function Attack() {
   });
 
   useDeltaText({
-    atomDelta: deltas("attackRate"),
-    atomValue: attackRateTotal,
+    delta: deltas("attackRate"),
     type: "time",
+    value: attackRateTotal,
   });
 
   if (!isShowingAttackRate) {

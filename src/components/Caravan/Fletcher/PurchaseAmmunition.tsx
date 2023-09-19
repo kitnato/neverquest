@@ -64,7 +64,7 @@ export function PurchaseAmmunition() {
                     return (
                       <OverlayTrigger
                         key={label}
-                        overlay={<Tooltip>Not enough coins!</Tooltip>}
+                        overlay={<Tooltip>Insufficient coins!</Tooltip>}
                         trigger={canPurchase ? [] : ["hover", "focus"]}
                       >
                         <span>

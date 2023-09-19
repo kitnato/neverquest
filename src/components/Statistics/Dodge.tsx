@@ -35,9 +35,9 @@ export function Dodge() {
   const skillEvasion = useRecoilValue(skills("evasion"));
 
   useDeltaText({
-    atomDelta: deltas("dodge"),
-    atomValue: dodge,
+    delta: deltas("dodge"),
     type: "percentage",
+    value: dodge,
   });
 
   if (!isShowingDodge) {

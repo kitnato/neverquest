@@ -3,5 +3,9 @@ import { AmmunitionPouch } from "@neverquest/components/Items/Trinket/Ammunition
 import type { TrinketItem } from "@neverquest/types";
 
 export function Trinket({ item }: { item: TrinketItem }) {
-  return item.type === "ammunition pouch" ? <AmmunitionPouch /> : <ItemDisplay item={item} />;
+  return item.type === "ammunition pouch" ? (
+    <AmmunitionPouch />
+  ) : (
+    <ItemDisplay item={item} overlayPlacement="right" />
+  );
 }

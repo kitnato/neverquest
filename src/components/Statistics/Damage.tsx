@@ -31,8 +31,8 @@ export function Damage() {
   const appliedGems = gems.length;
 
   useDeltaText({
-    atomDelta: deltas("damage"),
-    atomValue: damageTotal,
+    delta: deltas("damage"),
+    value: damageTotal,
   });
 
   return (

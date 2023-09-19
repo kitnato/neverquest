@@ -15,9 +15,9 @@ export function Block() {
   const blockValue = useRecoilValue(block);
 
   useDeltaText({
-    atomDelta: deltas("block"),
-    atomValue: block,
+    delta: deltas("block"),
     type: "percentage",
+    value: block,
   });
 
   if (!isShowingBlock) {

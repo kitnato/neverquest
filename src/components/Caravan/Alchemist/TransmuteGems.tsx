@@ -61,7 +61,7 @@ export function TransmuteGems() {
       </Stack>
 
       <OverlayTrigger
-        overlay={<Tooltip>{`Not enough ${plural(source)}!`}</Tooltip>}
+        overlay={<Tooltip>{`Insufficient ${plural(source)}!`}</Tooltip>}
         trigger={isAffordable ? [] : ["hover", "focus"]}
       >
         <span>

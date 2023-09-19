@@ -60,7 +60,7 @@ export function ExpandAmmunitionPouch() {
         <ResourceDisplay tooltip="Price (coins)" type="coins" value={price} />
 
         <OverlayTrigger
-          overlay={<Tooltip>Not enough coins!</Tooltip>}
+          overlay={<Tooltip>Insufficient coins!</Tooltip>}
           trigger={isAffordable ? [] : ["hover", "focus"]}
         >
           <span>

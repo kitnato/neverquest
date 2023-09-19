@@ -47,7 +47,7 @@ export function ExpandKnapsack() {
           overlay={
             <Tooltip>
               {!hasKnapsackValue && <div>Knapsack required!</div>}
-              {!isAffordable && <div>Not enough coins!</div>}
+              {!isAffordable && <div>Insufficient coins!</div>}
             </Tooltip>
           }
           trigger={canExpand ? [] : ["hover", "focus"]}

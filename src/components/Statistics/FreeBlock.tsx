@@ -20,8 +20,8 @@ export function FreeBlock() {
   const stabilityValue = useRecoilValue(stability);
 
   useDeltaText({
-    atomDelta: deltas("stability"),
-    atomValue: stability,
+    delta: deltas("stability"),
+    value: stability,
   });
 
   if (!isShowingStability) {

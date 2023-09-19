@@ -64,9 +64,9 @@ export function Regeneration({ type }: { type: Reserve }) {
   });
 
   useDeltaText({
-    atomDelta: deltas(regenerationDelta),
-    atomValue: regenerationRate(type),
+    delta: deltas(regenerationDelta),
     type: "time",
+    value: regenerationRate(type),
   });
 
   useEffect(() => {

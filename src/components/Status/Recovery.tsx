@@ -32,9 +32,9 @@ export function Recovery() {
   });
 
   useDeltaText({
-    atomDelta: deltas("recoveryRate"),
-    atomValue: recoveryRate,
+    delta: deltas("recoveryRate"),
     type: "time",
+    value: recoveryRate,
   });
 
   if (!isShowingRecovery) {

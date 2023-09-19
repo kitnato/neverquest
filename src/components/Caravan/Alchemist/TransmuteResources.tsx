@@ -65,7 +65,7 @@ export function TransmuteResources() {
       </Stack>
 
       <OverlayTrigger
-        overlay={<Tooltip>{`Not enough ${source}!`}</Tooltip>}
+        overlay={<Tooltip>{`Insufficient ${source}!`}</Tooltip>}
         trigger={isAffordable ? [] : ["hover", "focus"]}
       >
         <span>

@@ -29,6 +29,7 @@ export type CrewStatus = "hirable" | "hired" | null;
 export type DeltaText = "float" | "integer" | "percentage" | "time";
 
 export type Delta =
+  | "ammunition"
   | "attackRate"
   | "attributePoints"
   | "bleedRating"

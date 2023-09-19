@@ -17,8 +17,8 @@ export function Resource({ type }: { type: Resource }) {
   const showValue = useRecoilValue(isShowing(showing));
 
   useDeltaText({
-    atomDelta: deltas(delta),
-    atomValue: atom,
+    delta: deltas(delta),
+    value: atom,
   });
 
   if (!showValue) {

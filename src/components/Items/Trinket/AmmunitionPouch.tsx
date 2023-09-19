@@ -1,4 +1,3 @@
-import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
@@ -7,7 +6,7 @@ import { ownedItem } from "@neverquest/state/items";
 import type { TrinketItemAmmunitionPouch } from "@neverquest/types";
 import { isTrinket } from "@neverquest/types/type-guards";
 
-export function AmmunitionPouch({ overlayPlacement }: { overlayPlacement?: Placement }) {
+export function AmmunitionPouch() {
   const ownedAmmunitionPouch = useRecoilValue(ownedItem("ammunition pouch"));
   const merchantInventoryValue = useRecoilValue(merchantInventory);
 
@@ -27,7 +26,7 @@ export function AmmunitionPouch({ overlayPlacement }: { overlayPlacement?: Place
     <ItemDisplay
       extra={` (${current}/${maximum})`}
       item={ammunitionPouch}
-      overlayPlacement={overlayPlacement}
+      overlayPlacement="right"
     />
   );
 }

@@ -18,10 +18,10 @@ export function Range() {
   const skillArchery = useRecoilValue(skills("archery"));
 
   useDeltaText({
-    atomDelta: deltas("range"),
-    atomValue: range,
+    delta: deltas("range"),
     stop: ({ previous }) => previous === null || !skillArchery,
     type: "time",
+    value: range,
   });
 
   if (!isShowingValue) {

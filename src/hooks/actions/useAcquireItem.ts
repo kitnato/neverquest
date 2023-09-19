@@ -15,8 +15,9 @@ import {
 import { isShowing } from "@neverquest/state/isShowing";
 import { armor, shield, weapon } from "@neverquest/state/items";
 import { autoEquip } from "@neverquest/state/settings";
+import { skills } from "@neverquest/state/skills";
 import type { InventoryItem } from "@neverquest/types";
-import { isArmor, isGear, isShield, isWeapon } from "@neverquest/types/type-guards";
+import { isArmor, isGear, isMelee, isRanged, isShield } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useAcquireItem() {
@@ -43,7 +44,8 @@ export function useAcquireItem() {
             get(autoEquip) &&
             ((get(armor) === ARMOR_NONE && isArmor(item)) ||
               (get(shield) === SHIELD_NONE && isShield(item)) ||
-              (get(weapon) === WEAPON_NONE && isWeapon(item)))
+              (get(weapon) === WEAPON_NONE &&
+                (isMelee(item) || (get(skills("archery")) && isRanged(item)))))
           ) {
             return "autoEquip";
           } else {

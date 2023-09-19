@@ -39,9 +39,9 @@ export function CriticalRating() {
   const perceptionValue = useRecoilValue(attributeStatistic("perception"));
 
   useDeltaText({
-    atomDelta: deltas("criticalRating"),
-    atomValue: criticalRating,
+    delta: deltas("criticalRating"),
     stop: ({ previous }) => previous === null || !skillAssassination,
+    value: criticalRating,
   });
 
   if (!isShowingCriticalRating) {

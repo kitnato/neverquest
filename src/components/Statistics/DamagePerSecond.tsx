@@ -15,9 +15,9 @@ export function DamagePerSecond() {
   const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
 
   useDeltaText({
-    atomDelta: deltas("damagePerSecond"),
-    atomValue: damagePerSecond,
+    delta: deltas("damagePerSecond"),
     type: "float",
+    value: damagePerSecond,
   });
 
   if (!showDamagePerSecondValue) {

@@ -7,7 +7,7 @@ import { ReactComponent as IconAttack } from "@neverquest/icons/attack.svg";
 import { ReactComponent as IconResting } from "@neverquest/icons/resting.svg";
 import { ReactComponent as IconRetreat } from "@neverquest/icons/retreat.svg";
 import { areAttributesIncreasable } from "@neverquest/state/attributes";
-import { isAttacking, isGameOver } from "@neverquest/state/character";
+import { hasEnoughAmmunition, isAttacking, isGameOver } from "@neverquest/state/character";
 import { isStageCompleted, isWilderness } from "@neverquest/state/encounter";
 import { isHealthLow } from "@neverquest/state/reserves";
 import { lowHealthWarning } from "@neverquest/state/settings";
@@ -21,6 +21,7 @@ export function AttackButton() {
   const isGameOverValue = useRecoilValue(isGameOver);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isWildernessValue = useRecoilValue(isWilderness);
+  const hasEnoughAmmunitionValue = useRecoilValue(hasEnoughAmmunition);
   const showLowHealthWarningValue = useRecoilValue(lowHealthWarning);
 
   const toggleAttack = useToggleAttack();
@@ -48,9 +49,10 @@ export function AttackButton() {
       }
 
       return {
-        animation: areAttributesIncreasableValue ? undefined : pulseAnimation,
+        animation:
+          areAttributesIncreasableValue || !hasEnoughAmmunitionValue ? undefined : pulseAnimation,
         Icon: IconAttack,
-        tooltip: "Attack",
+        tooltip: hasEnoughAmmunitionValue ? "Attack" : "Insufficient ammunition!",
       };
     })();
 
@@ -75,7 +77,7 @@ export function AttackButton() {
         <span className={getAnimationClass({ type: "bounceIn" })}>
           <Button
             className={animation}
-            disabled={isResting}
+            disabled={isResting || !hasEnoughAmmunitionValue}
             onClick={toggleAttack}
             variant="outline-dark"
           >

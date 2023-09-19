@@ -28,9 +28,9 @@ export function StaggerRating() {
   const staggerWeaponValue = useRecoilValue(staggerWeapon);
 
   useDeltaText({
-    atomDelta: deltas("staggerRating"),
-    atomValue: staggerRating,
+    delta: deltas("staggerRating"),
     stop: ({ previous }) => previous === null || !skillTraumatology,
+    value: staggerRating,
   });
 
   if (!isShowingStagger) {

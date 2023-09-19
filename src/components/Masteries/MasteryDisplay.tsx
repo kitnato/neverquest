@@ -26,7 +26,7 @@ export function MasteryDisplay({ type }: { type: Mastery }) {
       {isUnlocked ? (
         <IconDisplay
           contents={
-            <Stack>
+            <Stack gap={1}>
               <div>
                 <OverlayTrigger overlay={<Tooltip>{description}</Tooltip>} placement="right">
                   <span>{capitalizeAll(type)}</span>
@@ -35,7 +35,7 @@ export function MasteryDisplay({ type }: { type: Mastery }) {
 
               <Stack direction="horizontal">
                 <Stack className="w-100" direction="horizontal" gap={3}>
-                  <span>{rank}</span>
+                  <small style={{ whiteSpace: "nowrap" }}>Rank {rank}</small>
 
                   <OverlayTrigger overlay={<Tooltip>{instructions}</Tooltip>}>
                     <span className="w-100">

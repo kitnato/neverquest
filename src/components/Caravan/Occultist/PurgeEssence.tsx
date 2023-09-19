@@ -45,7 +45,7 @@ export function PurgeEssence() {
           <OverlayTrigger
             overlay={
               <Tooltip>
-                {!isAffordable && <div>Not enough coins!</div>}
+                {!isAffordable && <div>Insufficient coins!</div>}
                 {price === 0 && <div>No essence to purge!</div>}
               </Tooltip>
             }

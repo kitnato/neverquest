@@ -18,9 +18,9 @@ export function Deflection() {
   const skillArmorcraft = useRecoilValue(skills("armorcraft"));
 
   useDeltaText({
-    atomDelta: deltas("deflection"),
-    atomValue: deflection,
+    delta: deltas("deflection"),
     stop: ({ previous }) => previous === null || !skillArmorcraft,
+    value: deflection,
   });
 
   if (!isShowingValue) {

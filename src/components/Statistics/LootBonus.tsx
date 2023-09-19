@@ -26,9 +26,9 @@ export function LootBonus() {
   const luckValue = useRecoilValue(attributeStatistic("luck"));
 
   useDeltaText({
-    atomDelta: deltas("lootBonus"),
-    atomValue: lootBonus,
+    delta: deltas("lootBonus"),
     type: "percentage",
+    value: lootBonus,
   });
 
   if (!isShowingLootBonus) {

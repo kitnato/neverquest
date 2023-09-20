@@ -9,15 +9,15 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconMight } from "@neverquest/icons/might.svg";
 import { ReactComponent as IconShieldStagger } from "@neverquest/icons/shield-stagger.svg";
 import { ReactComponent as IconStaggerRating } from "@neverquest/icons/stagger-rating.svg";
-import { ReactComponent as IconWeaponStagger } from "@neverquest/icons/weapon-stagger.svg";
+import { ReactComponent as IconStagger } from "@neverquest/icons/stagger.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { shield } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { shield } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { skills } from "@neverquest/state/skills";
 import { staggerRating, staggerWeapon } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
+import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 
 export function StaggerRating() {
   const { stagger } = useRecoilValue(shield);
@@ -28,9 +28,9 @@ export function StaggerRating() {
   const staggerWeaponValue = useRecoilValue(staggerWeapon);
 
   useDeltaText({
-    atomDelta: deltas("staggerRating"),
-    atomValue: staggerRating,
+    delta: deltas("staggerRating"),
     stop: ({ previous }) => previous === null || !skillTraumatology,
+    value: staggerRating,
   });
 
   if (!isShowingStagger) {
@@ -52,7 +52,7 @@ export function StaggerRating() {
                       <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
 
                       <td>
-                        <IconImage Icon={IconWeaponStagger} size="tiny" />
+                        <IconImage Icon={IconStagger} size="tiny" />
                         &nbsp;
                         {staggerWeaponValue === 0
                           ? LABEL_EMPTY
@@ -75,7 +75,7 @@ export function StaggerRating() {
                         &nbsp;Might:
                       </td>
 
-                      <td>{`${formatMilliseconds(mightValue)}`}</td>
+                      <td>{`${formatTime(mightValue)}`}</td>
                     </tr>
                   </DetailsTable>
                 </Popover.Body>

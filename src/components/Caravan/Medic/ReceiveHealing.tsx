@@ -43,7 +43,7 @@ export function ReceiveHealing() {
           <OverlayTrigger
             overlay={
               <Tooltip>
-                {!isAffordable && <div>Not enough coins!</div>}
+                {!isAffordable && <div>Insufficient coins!</div>}
                 {isHealthAtMaximumValue && <div>Already at full health!</div>}
               </Tooltip>
             }

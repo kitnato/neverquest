@@ -1,34 +1,40 @@
 import { Stack } from "react-bootstrap";
+import { useRecoilValue } from "recoil";
 
-import { ExpandInventory } from "@neverquest/components/Caravan/Tailor/ExpandInventory";
-import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { ExpandAmmunitionPouch } from "@neverquest/components/Caravan/Tailor/ExpandAmmunitionPouch";
+import { ExpandKnapsack } from "@neverquest/components/Caravan/Tailor/ExpandKnapsack";
 import { Encumbrance } from "@neverquest/components/Items/Encumbrance";
-import { ReactComponent as IconTailoring } from "@neverquest/icons/tailoring.svg";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
+import { AmmunitionPouch } from "@neverquest/components/Items/Trinket/AmmunitionPouch";
+import { ownedItem } from "@neverquest/state/items";
 
 export function Tailor() {
+  const ownedAmmunitionPouch = useRecoilValue(ownedItem("ammunition pouch"));
+
   return (
     <Stack gap={5}>
       <Stack gap={3}>
         <h6>Current knapsack</h6>
 
         <Encumbrance />
-      </Stack>
 
-      <Stack gap={3}>
         <h6>Expand knapsack</h6>
 
-        <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-          <IconDisplay
-            contents="Sow pockets"
-            description="Increases maximum encumbrance by 3."
-            Icon={IconTailoring}
-            tooltip="Tailoring"
-          />
-
-          <ExpandInventory />
-        </div>
+        <ExpandKnapsack />
       </Stack>
+
+      {ownedAmmunitionPouch !== null && (
+        <>
+          <Stack gap={3}>
+            <h6>Current ammunition pouch</h6>
+
+            <AmmunitionPouch />
+
+            <h6>Expand ammunition pouch</h6>
+
+            <ExpandAmmunitionPouch />
+          </Stack>
+        </>
+      )}
     </Stack>
   );
 }

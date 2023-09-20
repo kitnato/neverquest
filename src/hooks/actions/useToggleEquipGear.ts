@@ -5,19 +5,26 @@ import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import type { GearItem } from "@neverquest/types";
-import { isArmor, isGear, isShield, isWeapon } from "@neverquest/types/type-guards";
+import {
+  isArmor,
+  isGear,
+  isMelee,
+  isRanged,
+  isShield,
+  isWeapon,
+} from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleEquipGear() {
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      (gear: GearItem) => {
+      (gearItem: GearItem) => {
         const get = getSnapshotGetter(snapshot);
 
         set(isShowing("statistics"), true);
 
-        if (isArmor(gear)) {
-          const { staminaCost } = gear;
+        if (isArmor(gearItem)) {
+          const { staminaCost } = gearItem;
 
           set(isShowing("armor"), true);
           set(isShowing("protection"), true);
@@ -27,13 +34,14 @@ export function useToggleEquipGear() {
           }
         }
 
-        if (isShield(gear)) {
+        if (isShield(gearItem)) {
           set(isShowing("block"), true);
-          set(isShowing("shield"), true);
+          set(isShowing("offhand"), true);
+          set(isShowing("stamina"), true);
         }
 
-        if (isWeapon(gear)) {
-          if (gear.staminaCost) {
+        if (isWeapon(gearItem)) {
+          if (gearItem.staminaCost > 0) {
             set(isShowing("stamina"), true);
 
             if (!get(attributes("endurance")).isUnlocked) {
@@ -44,25 +52,42 @@ export function useToggleEquipGear() {
             }
           }
 
+          if (isRanged(gearItem)) {
+            set(isShowing("offhand"), true);
+            set(isShowing("range"), true);
+          }
+
           set(isShowing("attackRateDetails"), true);
           set(isShowing("damageDetails"), true);
           set(isShowing("weapon"), true);
         }
 
-        set(inventory, (current) =>
-          current.map((currentItem) => {
+        set(inventory, (currentInventory) =>
+          currentInventory.map((currentItem) => {
             if (isGear(currentItem)) {
-              if (currentItem.id === gear.id) {
+              if (currentItem.id === gearItem.id) {
                 return {
                   ...currentItem,
                   isEquipped: !currentItem.isEquipped,
                 };
               } else if (
-                currentItem.isEquipped &&
-                !gear.isEquipped &&
-                ((isArmor(currentItem) && isArmor(gear)) ||
-                  (isShield(currentItem) && isShield(gear)) ||
-                  (isWeapon(currentItem) && isWeapon(gear)))
+                // Equipping a ranged or two-handed weapon while a shield is equipped.
+                (((isMelee(gearItem) && gearItem.grip === "two-handed") || isRanged(gearItem)) &&
+                  !gearItem.isEquipped &&
+                  isShield(currentItem) &&
+                  currentItem.isEquipped) ||
+                // Equipping a shield while a ranged or two-handed weapon is equipped.
+                (isShield(gearItem) &&
+                  !gearItem.isEquipped &&
+                  ((isMelee(currentItem) && currentItem.grip === "two-handed") ||
+                    isRanged(currentItem)) &&
+                  currentItem.isEquipped) ||
+                // Equipping in an already-occupied slot.
+                (currentItem.isEquipped &&
+                  !gearItem.isEquipped &&
+                  ((isArmor(currentItem) && isArmor(gearItem)) ||
+                    (isShield(currentItem) && isShield(gearItem)) ||
+                    (isWeapon(currentItem) && isWeapon(gearItem))))
               ) {
                 return {
                   ...currentItem,

@@ -3,12 +3,14 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MasteryDisplay } from "@neverquest/components/Masteries/MasteryDisplay";
-import { MASTERIES_ORDER } from "@neverquest/data/masteries";
 import { ReactComponent as IconMasteries } from "@neverquest/icons/masteries.svg";
 import { isShowing } from "@neverquest/state/isShowing";
+import { masteriesAcquired } from "@neverquest/state/masteries";
+import type { Mastery } from "@neverquest/types/unions";
 
 export function Masteries() {
   const isShowingMasteries = useRecoilValue(isShowing("masteries"));
+  const masteriesAcquiredValue = useRecoilValue(masteriesAcquired);
 
   if (!isShowingMasteries) {
     return null;
@@ -23,9 +25,12 @@ export function Masteries() {
 
         <Accordion.Body>
           <Stack gap={3}>
-            {MASTERIES_ORDER.map((type) => (
-              <MasteryDisplay key={type} type={type} />
-            ))}
+            {Object.entries(masteriesAcquiredValue)
+              .sort(([a], [b]) => a.localeCompare(b))
+              .sort(([, a], [, b]) => Number(b) - Number(a))
+              .map(([type]) => (
+                <MasteryDisplay key={type} type={type as Mastery} />
+              ))}
           </Stack>
         </Accordion.Body>
       </Accordion.Item>

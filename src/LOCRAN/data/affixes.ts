@@ -837,6 +837,10 @@ export const AFFIXES: AffixData[] = [
     name: "cinders",
   },
   {
+    location: "prefix",
+    name: "claustrophobic",
+  },
+  {
     creature: "prefix",
     name: "clawed",
   },
@@ -1646,6 +1650,19 @@ export const AFFIXES: AffixData[] = [
   {
     creature: "prefix",
     name: "ecstatic",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "effluent",
+    tags: ["lowQuality"],
+  },
+  {
+    artifact: "suffix",
+    creature: "suffix",
+    location: "suffix",
+    name: "effluence",
   },
   {
     artifact: "prefix",
@@ -2807,6 +2824,10 @@ export const AFFIXES: AffixData[] = [
     name: "insolent",
   },
   {
+    creature: "prefix",
+    name: "insufferable",
+  },
+  {
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
@@ -2883,6 +2904,15 @@ export const AFFIXES: AffixData[] = [
     name: "lackadaisical",
   },
   {
+    artifact: "suffix",
+    location: "suffix",
+    name: "lament",
+  },
+  {
+    creature: "prefix",
+    name: "lamenting",
+  },
+  {
     creature: "prefix",
     name: "lanky",
   },
@@ -2899,6 +2929,7 @@ export const AFFIXES: AffixData[] = [
     creature: "prefix",
     location: "prefix",
     name: "leaking",
+    tags: ["lowQuality"],
   },
   {
     artifact: "prefix",
@@ -3746,6 +3777,12 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
+    name: "perturbed",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
     name: "perverse",
   },
   {
@@ -4580,6 +4617,11 @@ export const AFFIXES: AffixData[] = [
   {
     artifact: "prefix",
     creature: "prefix",
+    name: "sloppy",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
     name: "smart",
   },
   {
@@ -4909,6 +4951,13 @@ export const AFFIXES: AffixData[] = [
     isNSFW: true,
     location: "prefix",
     name: "sultry",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "sundered",
+    tags: ["lowQuality"],
   },
   {
     artifact: "prefix",

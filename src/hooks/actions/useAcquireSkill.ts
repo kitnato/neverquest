@@ -11,9 +11,11 @@ export function useAcquireSkill() {
   return useRecoilCallback(
     ({ set }) =>
       (skill: Skill) => {
-        const { shows, unlocksAttributes, unlocksMasteries } = SKILLS[skill];
+        const { shows, unlocksAttributes, unlocksMastery } = SKILLS[skill];
 
         set(skills(skill), true);
+
+        set(isShowing("skills"), true);
 
         shows?.forEach((show) => {
           set(isShowing(show), true);
@@ -23,12 +25,9 @@ export function useAcquireSkill() {
           set(attributes(attribute), (current) => ({ ...current, isUnlocked: true }));
         });
 
-        if (Array.isArray(unlocksMasteries)) {
+        if (unlocksMastery !== undefined) {
           set(isShowing("masteries"), true);
-
-          unlocksMasteries.forEach((mastery) => {
-            set(masteries(mastery), (current) => ({ ...current, isUnlocked: true }));
-          });
+          set(masteries(unlocksMastery), (current) => ({ ...current, isUnlocked: true }));
         }
       },
     [],

@@ -7,7 +7,7 @@ import { handleLocalStorage, withStateKey } from "@neverquest/state";
 export const allowNSFW = withStateKey("allowNSFW", (key) =>
   atom({
     default: true,
-    effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
+    effects: [handleLocalStorage({ isSetting: true, key })],
     key,
   }),
 );
@@ -15,15 +15,7 @@ export const allowNSFW = withStateKey("allowNSFW", (key) =>
 export const autoEquip = withStateKey("autoEquip", (key) =>
   atom({
     default: true,
-    effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
-    key,
-  }),
-);
-
-export const confirmationWarnings = withStateKey("confirmationWarnings", (key) =>
-  atom({
-    default: true,
-    effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
+    effects: [handleLocalStorage({ isSetting: true, key })],
     key,
   }),
 );
@@ -31,7 +23,7 @@ export const confirmationWarnings = withStateKey("confirmationWarnings", (key) =
 export const lowHealthWarning = withStateKey("lowHealthWarning", (key) =>
   atom({
     default: true,
-    effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
+    effects: [handleLocalStorage({ isSetting: true, key })],
     key,
   }),
 );
@@ -39,7 +31,7 @@ export const lowHealthWarning = withStateKey("lowHealthWarning", (key) =>
 export const showDamagePerSecond = withStateKey("showDamagePerSecond", (key) =>
   atom({
     default: false,
-    effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
+    effects: [handleLocalStorage({ isSetting: true, key })],
     key,
   }),
 );
@@ -47,7 +39,7 @@ export const showDamagePerSecond = withStateKey("showDamagePerSecond", (key) =>
 export const showGearComparison = withStateKey("showGearComparison", (key) =>
   atom({
     default: true,
-    effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
+    effects: [handleLocalStorage({ isSetting: true, key })],
     key,
   }),
 );
@@ -55,7 +47,7 @@ export const showGearComparison = withStateKey("showGearComparison", (key) =>
 export const showGearLevel = withStateKey("showGearLevel", (key) =>
   atom({
     default: false,
-    effects: [handleLocalStorage<boolean>({ isSetting: true, key })],
+    effects: [handleLocalStorage({ isSetting: true, key })],
     key,
   }),
 );

@@ -14,7 +14,7 @@ import { ReactComponent as IconAttackRate } from "@neverquest/icons/attack-rate.
 import { ReactComponent as IconWeaponSpeed } from "@neverquest/icons/speed.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
-import { rawAttributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import {
   attackDuration,
   canAttackOrParry,
@@ -23,12 +23,12 @@ import {
   isRecovering,
 } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { weapon } from "@neverquest/state/items";
 import { isMonsterDead } from "@neverquest/state/monster";
 import { attackRate, attackRateTotal, powerBonus } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
-import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
+import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 
 export function Attack() {
   const attackRateValue = useRecoilValue(attackRate);
@@ -40,7 +40,7 @@ export function Attack() {
   const isShowingAttackRate = useRecoilValue(isShowing("attackRate"));
   const isShowingAttackRateDetails = useRecoilValue(isShowing("attackRateDetails"));
   const powerBonusValue = useRecoilValue(powerBonus("speed"));
-  const speedValue = useRecoilValue(rawAttributeStatistic("speed"));
+  const speedValue = useRecoilValue(attributeStatistic("speed"));
   const weaponValue = useRecoilValue(weapon);
   const setAttackDuration = useSetRecoilState(attackDuration);
 
@@ -55,13 +55,12 @@ export function Attack() {
       isLootingValue ||
       isMonsterDeadValue ||
       isRecoveringValue,
-    tmp: "Attack",
   });
 
   useDeltaText({
-    atomDelta: deltas("attackRate"),
-    atomValue: attackRateTotal,
+    delta: deltas("attackRate"),
     type: "time",
+    value: attackRateTotal,
   });
 
   if (!isShowingAttackRate) {
@@ -86,7 +85,7 @@ export function Attack() {
 
                       <td>
                         <IconImage Icon={IconWeaponAttackRate} size="tiny" />
-                        &nbsp;{formatMilliseconds(weaponValue.rate)}
+                        &nbsp;{formatTime(weaponValue.rate)}
                       </td>
                     </tr>
 
@@ -133,7 +132,7 @@ export function Attack() {
       }
       Icon={IconAttackRate}
       isAnimated
-      tooltip="Attack rate"
+      tooltip="Total attack rate"
     />
   );
 }

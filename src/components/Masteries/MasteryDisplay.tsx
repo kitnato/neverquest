@@ -8,7 +8,7 @@ import { MASTERIES } from "@neverquest/data/masteries";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { isMasteryAtMaximum, masteries, masteryCost } from "@neverquest/state/masteries";
 import type { Mastery } from "@neverquest/types/unions";
-import { LABEL_AT_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
+import { LABEL_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -18,7 +18,7 @@ export function MasteryDisplay({ type }: { type: Mastery }) {
   const masteryCostValue = useRecoilValue(masteryCost(type));
 
   const { description, Icon, instructions } = MASTERIES[type];
-  const label = isMasteryAtMaximumValue ? LABEL_AT_MAXIMUM : `${progress}/${masteryCostValue}`;
+  const label = isMasteryAtMaximumValue ? LABEL_MAXIMUM : `${progress}/${masteryCostValue}`;
   const value = isMasteryAtMaximumValue ? 100 : (progress / masteryCostValue) * 100;
 
   return (
@@ -26,7 +26,7 @@ export function MasteryDisplay({ type }: { type: Mastery }) {
       {isUnlocked ? (
         <IconDisplay
           contents={
-            <Stack>
+            <Stack gap={1}>
               <div>
                 <OverlayTrigger overlay={<Tooltip>{description}</Tooltip>} placement="right">
                   <span>{capitalizeAll(type)}</span>
@@ -35,7 +35,7 @@ export function MasteryDisplay({ type }: { type: Mastery }) {
 
               <Stack direction="horizontal">
                 <Stack className="w-100" direction="horizontal" gap={3}>
-                  <span>{rank}</span>
+                  <small style={{ whiteSpace: "nowrap" }}>Rank {rank}</small>
 
                   <OverlayTrigger overlay={<Tooltip>{instructions}</Tooltip>}>
                     <span className="w-100">

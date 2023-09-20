@@ -4,14 +4,16 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { CONSUMABLES, TRINKETS } from "@neverquest/data/inventory";
 import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
 import { ReactComponent as IconGem } from "@neverquest/icons/gem.svg";
+import { ReactComponent as IconMelee } from "@neverquest/icons/melee.svg";
+import { ReactComponent as IconRanged } from "@neverquest/icons/ranged.svg";
 import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
-import { ReactComponent as IconWeapon } from "@neverquest/icons/weapon.svg";
 import { itemsAcquired } from "@neverquest/state/inventory";
 import {
   isArmor,
   isConsumable,
   isGem,
+  isMelee,
   isShield,
   isTrinket,
   isWeapon,
@@ -28,36 +30,40 @@ export function ItemAcquisition() {
     return null;
   }
 
-  return itemsAcquiredValue.map((item) => {
-    const { id } = item;
+  return itemsAcquiredValue.map((current) => {
+    const { id } = current;
 
-    if (isTrinket(item) && item.type === "knapsack") {
+    if (isTrinket(current) && current.type === "knapsack") {
       return;
     }
 
     const Icon = (() => {
-      if (isArmor(item)) {
+      if (isArmor(current)) {
         return IconArmor;
       }
 
-      if (isConsumable(item)) {
-        return CONSUMABLES[item.type].Icon;
+      if (isConsumable(current)) {
+        return CONSUMABLES[current.type].Icon;
       }
 
-      if (isGem(item)) {
+      if (isGem(current)) {
         return IconGem;
       }
 
-      if (isShield(item)) {
+      if (isShield(current)) {
         return IconShield;
       }
 
-      if (isTrinket(item)) {
-        return TRINKETS[item.type].Icon;
+      if (isTrinket(current)) {
+        return TRINKETS[current.type].Icon;
       }
 
-      if (isWeapon(item)) {
-        return IconWeapon;
+      if (isWeapon(current)) {
+        if (isMelee(current)) {
+          return IconMelee;
+        }
+
+        return IconRanged;
       }
 
       return IconUnknown;

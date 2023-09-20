@@ -7,12 +7,15 @@ import { isAttacking } from "@neverquest/state/character";
 import { isBoss, stage } from "@neverquest/state/encounter";
 import {
   isMonsterNew,
+  monsterAilmentDuration,
   monsterAttackDuration,
   monsterAttackRate,
+  monsterDistance,
   monsterHealth,
   monsterName,
 } from "@neverquest/state/monster";
 import { allowNSFW } from "@neverquest/state/settings";
+import { MONSTER_AILMENT_TYPES } from "@neverquest/types/unions";
 import { getGrowthSigmoid, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useGenerateMonster() {
@@ -24,7 +27,7 @@ export function useGenerateMonster() {
         const get = getSnapshotGetter(snapshot);
 
         const allowNSFWValue = get(allowNSFW);
-        const growthFactor = getGrowthSigmoid(get(stage));
+        const factor = getGrowthSigmoid(get(stage));
 
         set(
           monsterName,
@@ -32,13 +35,18 @@ export function useGenerateMonster() {
             ? generateName({ allowNSFW: allowNSFWValue, hasTitle: true })
             : generateCreature({
                 allowNSFW: allowNSFWValue,
-                hasPrefix: Math.random() <= prefix + (1 - prefix) * growthFactor,
-                hasSuffix: Math.random() <= suffix + (1 - suffix) * growthFactor,
+                hasPrefix:
+                  Math.random() <= prefix.minimum + (prefix.maximum - prefix.minimum) * factor,
+                hasSuffix:
+                  Math.random() <= suffix.minimum + (suffix.maximum - suffix.minimum) * factor,
                 type: ["monster"],
               }),
         );
 
         reset(monsterHealth);
+        reset(monsterDistance);
+
+        MONSTER_AILMENT_TYPES.forEach((current) => reset(monsterAilmentDuration(current)));
 
         set(isMonsterNew, true);
 

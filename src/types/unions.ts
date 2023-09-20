@@ -16,6 +16,7 @@ export type Consumable = (typeof CONSUMABLE_TYPES)[number];
 export type Crew =
   | "alchemist"
   | "blacksmith"
+  | "fletcher"
   | "medic"
   | "mercenary"
   | "merchant"
@@ -28,10 +29,12 @@ export type CrewStatus = "hirable" | "hired" | null;
 export type DeltaText = "float" | "integer" | "percentage" | "time";
 
 export type Delta =
+  | "ammunition"
   | "attackRate"
   | "attributePoints"
   | "bleedRating"
   | "block"
+  | "butchery"
   | "coins"
   | "coinsLoot"
   | "criticalRating"
@@ -44,16 +47,19 @@ export type Delta =
   | "essence"
   | "essenceAbsorbed"
   | "essenceLoot"
+  | "execution"
   | "finesse"
   | "health"
   | "healthRegenerationRate"
   | "level"
   | "lootBonus"
+  | "marksmanship"
   | "might"
   | "monsterHealth"
   | "parry"
   | "progress"
   | "protection"
+  | "range"
   | "recoveryRate"
   | "resilience"
   | "scrap"
@@ -68,19 +74,27 @@ export type Delta =
 export const ELEMENTAL_TYPES = ["lightning", "fire", "ice"] as const;
 export type Elemental = (typeof ELEMENTAL_TYPES)[number];
 
-export type ElementalGear = Exclude<Gear, "shield">;
-
-export const GEAR_TYPES = ["armor", "shield", "weapon"] as const;
+export const GEAR_TYPES = ["weapon", "armor", "shield"] as const;
 export type Gear = (typeof GEAR_TYPES)[number];
 
 export const GEM_TYPES = ["ruby", "sapphire", "topaz"] as const;
 export type Gem = (typeof GEM_TYPES)[number];
 
+export const GRIP_TYPES = ["one-handed", "two-handed"] as const;
+export type Grip = (typeof GRIP_TYPES)[number];
+
 export type Item = Consumable | Gear | Trinket;
 
 export type Location = "caravan" | "wilderness";
 
-export type Mastery = "cruelty" | "finesse" | "might" | "resilience" | "stability";
+export type Mastery =
+  | "butchery"
+  | "cruelty"
+  | "finesse"
+  | "marksmanship"
+  | "might"
+  | "resilience"
+  | "stability";
 
 export const MONSTER_AILMENT_TYPES = [
   "bleeding",
@@ -100,7 +114,7 @@ export const SHOWING_TYPES = [
   "armor",
   "attackRate",
   "attackRateDetails",
-  "attributesButton",
+  "capabilitiesButton",
   "bleed",
   "block",
   "coins",
@@ -111,6 +125,7 @@ export const SHOWING_TYPES = [
   "dodge",
   "dodgePenalty",
   "essence",
+  "execution",
   "gameOver",
   "gearClass",
   "healthDetails",
@@ -125,12 +140,14 @@ export const SHOWING_TYPES = [
   "recovery",
   "reserveDetails",
   "scrap",
-  "shield",
+  "offhand",
+  "skills",
   "stability",
   "stagger",
   "stamina",
   "staminaDetails",
   "statistics",
+  "range",
   "thorns",
   "weapon",
   "weight",
@@ -140,11 +157,13 @@ export type Showing = (typeof SHOWING_TYPES)[number];
 
 export const SKILL_TYPES = [
   "anatomy",
+  "archery",
   "armorcraft",
   "assassination",
   "calisthenics",
   "escrime",
   "evasion",
+  "siegecraft",
   "shieldcraft",
   "traumatology",
 ] as const;
@@ -161,13 +180,16 @@ export type StateKey =
   | "attributeCost"
   | "attributePoints"
   | "attributes"
+  | "attributeStatistic"
   | "autoEquip"
   | "blacksmithInventory"
   | "bleed"
+  | "bleedDamage"
+  | "bleedDamageTotal"
   | "bleedRating"
-  | "bleedTick"
   | "blight"
-  | "blightIncrement"
+  | "blightAmount"
+  | "blightMagnitude"
   | "block"
   | "canApplyGem"
   | "canAttackOrParry"
@@ -183,23 +205,27 @@ export type StateKey =
   | "criticalChance"
   | "criticalDamage"
   | "criticalRating"
+  | "criticalStrike"
   | "damage"
   | "damagePerSecond"
   | "damageTotal"
   | "deflection"
   | "deltas"
   | "dodge"
+  | "elementalEffects"
   | "encumbrance"
   | "encumbranceMaximum"
   | "essence"
   | "essenceAbsorbed"
   | "essenceLoot"
+  | "execution"
+  | "fletcherInventory"
   | "floatingTextQueues"
-  | "gearElementalEffects"
   | "hasBoughtFromMerchant"
-  | "hasItem"
+  | "hasEnoughAmmunition"
   | "hasKnapsack"
   | "hasLooted"
+  | "hasMonsterClosed"
   | "health"
   | "healthMaximum"
   | "healthMaximumTotal"
@@ -223,6 +249,7 @@ export type StateKey =
   | "isMonsterNew"
   | "isPoisoned"
   | "isRecovering"
+  | "isRegenerating"
   | "isShowing"
   | "isShowingEverything"
   | "isStageCompleted"
@@ -233,14 +260,15 @@ export type StateKey =
   | "itemsLoot"
   | "level"
   | "location"
+  | "locationName"
   | "lootBonus"
   | "lootingDuration"
   | "lowHealthWarning"
   | "masteries"
+  | "masteriesAcquired"
   | "masteryCost"
   | "masteryStatistic"
   | "merchantInventory"
-  | "mode"
   | "monsterAilmentDuration"
   | "monsterAttackDuration"
   | "monsterAttackRate"
@@ -248,6 +276,7 @@ export type StateKey =
   | "monsterBlightChance"
   | "monsterDamage"
   | "monsterDamagePerSecond"
+  | "monsterDistance"
   | "monsterElement"
   | "monsterHealth"
   | "monsterHealthMaximum"
@@ -258,6 +287,7 @@ export type StateKey =
   | "monsterPoisonMagnitude"
   | "name"
   | "notifyOverEncumbrance"
+  | "ownedItem"
   | "parryAbsorption"
   | "parryChance"
   | "parryDamage"
@@ -267,7 +297,7 @@ export type StateKey =
   | "progress"
   | "progressMaximum"
   | "protection"
-  | "rawAttributeStatistic"
+  | "range"
   | "recoveryDuration"
   | "recoveryRate"
   | "regenerationAmount"
@@ -278,10 +308,10 @@ export type StateKey =
   | "scrap"
   | "scrapLoot"
   | "shield"
-  | "shieldElementalEffects"
   | "showDamagePerSecond"
   | "showGearComparison"
   | "showGearLevel"
+  | "skillPrice"
   | "skills"
   | "skillsTrained"
   | "stability"
@@ -295,11 +325,13 @@ export type StateKey =
   | "statusElement"
   | "thorns"
   | "totalElementalEffects"
+  | "trinketProperties"
   | "weapon"
   | "wildernesses";
 
 export const TRINKET_TYPES = [
   "antique coin",
+  "ammunition pouch",
   "compass",
   "hearthstone",
   "knapsack",
@@ -307,5 +339,3 @@ export const TRINKET_TYPES = [
   "tome of power",
 ] as const;
 export type Trinket = (typeof TRINKET_TYPES)[number];
-
-export type WeaponGrip = "one-handed" | "two-handed";

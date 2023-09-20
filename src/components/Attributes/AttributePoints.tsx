@@ -14,8 +14,8 @@ export function AttributePoints() {
   const deltaAttributePoints = deltas("attributePoints");
 
   useDeltaText({
-    atomDelta: deltaAttributePoints,
-    atomValue: attributePoints,
+    delta: deltaAttributePoints,
+    value: attributePoints,
   });
 
   return (

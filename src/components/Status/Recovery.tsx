@@ -6,7 +6,7 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { RecoveryMeter } from "@neverquest/components/Status/RecoveryMeter";
-import { RECOVERY_RATE } from "@neverquest/data/combat";
+import { RECOVERY_RATE } from "@neverquest/data/statistics";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconRecovery } from "@neverquest/icons/recovery.svg";
@@ -17,7 +17,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { masteries, masteryStatistic } from "@neverquest/state/masteries";
 import { recoveryRate } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
-import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
+import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 
 export function Recovery() {
   const isRecoveringValue = useRecoilValue(isRecovering);
@@ -29,13 +29,12 @@ export function Recovery() {
   useAnimate({
     delta: setRecoveryDuration,
     stop: !isRecoveringValue,
-    tmp: "Recovery",
   });
 
   useDeltaText({
-    atomDelta: deltas("recoveryRate"),
-    atomValue: recoveryRate,
+    delta: deltas("recoveryRate"),
     type: "time",
+    value: recoveryRate,
   });
 
   if (!isShowingRecovery) {
@@ -56,7 +55,7 @@ export function Recovery() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
 
-                      <td>{formatMilliseconds(RECOVERY_RATE)}</td>
+                      <td>{formatTime(RECOVERY_RATE)}</td>
                     </tr>
 
                     <tr>

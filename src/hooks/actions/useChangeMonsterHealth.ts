@@ -4,7 +4,7 @@ import { LOOTING_RATE } from "@neverquest/data/resources";
 import { useProgression } from "@neverquest/hooks/actions/useProgression";
 import { attackDuration, lootingDuration } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { hasItem } from "@neverquest/state/inventory";
+import { ownedItem } from "@neverquest/state/items";
 import {
   monsterAttackDuration,
   monsterHealth,
@@ -39,7 +39,7 @@ export function useChangeMonsterHealth() {
         if (newHealth <= 0) {
           newHealth = 0;
 
-          if (get(hasItem("monkey paw"))) {
+          if (get(ownedItem("monkey paw")) !== null) {
             progression();
           } else {
             set(lootingDuration, LOOTING_RATE);

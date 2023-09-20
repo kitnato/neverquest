@@ -16,8 +16,8 @@ export function Encumbrance() {
   const deltaEncumbrance = deltas("encumbrance");
 
   useDeltaText({
-    atomDelta: deltaEncumbrance,
-    atomValue: encumbranceMaximum,
+    delta: deltaEncumbrance,
+    value: encumbranceMaximum,
   });
 
   return (

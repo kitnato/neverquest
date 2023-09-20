@@ -7,6 +7,12 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "shield",
   },
   {
+    artifactClass: "piercing",
+    name: "air rifle",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
     name: "amulet",
     type: "trinket",
   },
@@ -36,6 +42,18 @@ export const ARTIFACTS: ArtifactData[] = [
   {
     name: "artifact",
     type: "trinket",
+  },
+  {
+    artifactClass: "blunt",
+    name: "artillery",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
+    artifactClass: "piercing",
+    name: "atlatl",
+    subtype: "ranged",
+    type: "weapon",
   },
   {
     artifactClass: "slashing",
@@ -74,6 +92,22 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    name: "battle armor",
+    subtype: "chest",
+    type: "armor",
+  },
+  {
+    artifactClass: "slashing",
+    name: "battleaxe",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
+    name: "battlegarb",
+    subtype: "chest",
+    type: "armor",
+  },
+  {
     name: "bauble",
     type: "trinket",
   },
@@ -105,9 +139,27 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    artifactClass: "piercing",
+    name: "blowgun",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
     artifactClass: "blunt",
     name: "bludgeon",
     subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "blunt",
+    name: "blunderbuss",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
+    artifactClass: "blunt",
+    name: "bolter",
+    subtype: "ranged",
     type: "weapon",
   },
   {
@@ -187,7 +239,7 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "armor",
   },
   {
-    artifactClass: "slashing",
+    artifactClass: "blunt",
     name: "brass knuckles",
     subtype: "melee",
     type: "weapon",
@@ -222,6 +274,12 @@ export const ARTIFACTS: ArtifactData[] = [
     name: "bulwark",
     subtype: "tower",
     type: "shield",
+  },
+  {
+    artifactClass: "slashing",
+    name: "bullwhip",
+    subtype: "melee",
+    type: "weapon",
   },
   {
     artifactClass: "blunt",
@@ -268,6 +326,12 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    artifactClass: "piercing",
+    name: "chaingun",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
     name: "chainmail",
     subtype: "chest",
     type: "armor",
@@ -297,6 +361,12 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "armor",
   },
   {
+    artifactClass: "piercing",
+    name: "cho ko nu",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
     name: "circlet",
     subtype: "head",
     type: "armor",
@@ -323,6 +393,18 @@ export const ARTIFACTS: ArtifactData[] = [
     name: "coif",
     subtype: "head",
     type: "armor",
+  },
+  {
+    artifactClass: "piercing",
+    name: "composite bow",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
+    artifactClass: "piercing",
+    name: "compound bow",
+    subtype: "ranged",
+    type: "weapon",
   },
   {
     name: "conundrum",
@@ -354,6 +436,12 @@ export const ARTIFACTS: ArtifactData[] = [
     name: "crown",
     subtype: "head",
     type: "armor",
+  },
+  {
+    artifactClass: "piercing",
+    name: "crucifix",
+    subtype: "melee",
+    type: "weapon",
   },
   {
     name: "cube",
@@ -432,6 +520,12 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    artifactClass: "piercing",
+    name: "dirk",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
     name: "doll",
     type: "trinket",
   },
@@ -442,6 +536,12 @@ export const ARTIFACTS: ArtifactData[] = [
   {
     artifactClass: "piercing",
     name: "drill",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "blunt",
+    name: "dumbbell",
     subtype: "melee",
     type: "weapon",
   },
@@ -473,6 +573,12 @@ export const ARTIFACTS: ArtifactData[] = [
   {
     artifactClass: "piercing",
     name: "falx",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "slashing",
+    name: "fan",
     subtype: "melee",
     type: "weapon",
   },
@@ -560,9 +666,10 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "trinket",
   },
   {
-    name: "greatshield",
-    subtype: "tower",
-    type: "shield",
+    artifactClass: "slashing",
+    name: "greataxe",
+    subtype: "melee",
+    type: "weapon",
   },
   {
     name: "greatshield",
@@ -581,8 +688,14 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "armor",
   },
   {
-    artifactClass: "piercing",
-    name: "grenade",
+    artifactClass: "blunt",
+    name: "grenades",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
+    artifactClass: "blunt",
+    name: "grenade launcher",
     subtype: "ranged",
     type: "weapon",
   },
@@ -608,6 +721,12 @@ export const ARTIFACTS: ArtifactData[] = [
     artifactClass: "blunt",
     name: "hammer",
     subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "piercing",
+    name: "handgun",
+    subtype: "ranged",
     type: "weapon",
   },
   {
@@ -700,6 +819,12 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    artifactClass: "slashing",
+    name: "labrys",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
     artifactClass: "blunt",
     name: "ladle",
     subtype: "melee",
@@ -751,6 +876,12 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    artifactClass: "slashing",
+    name: "longsword",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
     artifactClass: "blunt",
     name: "mace",
     subtype: "melee",
@@ -764,6 +895,12 @@ export const ARTIFACTS: ArtifactData[] = [
     artifactClass: "slashing",
     name: "machete",
     subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "piercing",
+    name: "machine gun",
+    subtype: "ranged",
     type: "weapon",
   },
   {
@@ -784,9 +921,21 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "armor",
   },
   {
+    artifactClass: "piercing",
+    name: "matchlock",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
     artifactClass: "blunt",
     name: "maul",
     subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "piercing",
+    name: "minigun",
+    subtype: "ranged",
     type: "weapon",
   },
   {
@@ -801,7 +950,7 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
-    artifactClass: "piercing",
+    artifactClass: "blunt",
     name: "mortar",
     subtype: "ranged",
     type: "weapon",
@@ -812,8 +961,14 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "armor",
   },
   {
-    artifactClass: "piercing",
+    artifactClass: "blunt",
     name: "musket",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
+    artifactClass: "blunt",
+    name: "musketoon",
     subtype: "ranged",
     type: "weapon",
   },
@@ -831,6 +986,18 @@ export const ARTIFACTS: ArtifactData[] = [
     artifactClass: "piercing",
     name: "needle",
     subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "piercing",
+    name: "needles",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "piercing",
+    name: "needler",
+    subtype: "ranged",
     type: "weapon",
   },
   {
@@ -886,6 +1053,12 @@ export const ARTIFACTS: ArtifactData[] = [
   },
   {
     artifactClass: "piercing",
+    name: "pellet gun",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
+    artifactClass: "piercing",
     isNSFW: true,
     name: "penetrator",
     subtype: "melee",
@@ -928,9 +1101,21 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    artifactClass: "piercing",
+    name: "pilum",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
     artifactClass: "blunt",
     name: "pipe",
     subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "piercing",
+    name: "pistol",
+    subtype: "ranged",
     type: "weapon",
   },
   {
@@ -942,6 +1127,24 @@ export const ARTIFACTS: ArtifactData[] = [
   {
     artifactClass: "blunt",
     name: "pizza",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "piercing",
+    name: "plumbata",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
+    artifactClass: "piercing",
+    name: "polearm",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "slashing",
+    name: "poleaxe",
     subtype: "melee",
     type: "weapon",
   },
@@ -982,6 +1185,22 @@ export const ARTIFACTS: ArtifactData[] = [
   },
   {
     artifactClass: "piercing",
+    name: "recurve bow",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
+    name: "relic",
+    type: "trinket",
+  },
+  {
+    artifactClass: "piercing",
+    name: "revolver",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
+    artifactClass: "piercing",
     name: "rifle",
     subtype: "ranged",
     type: "weapon",
@@ -1004,6 +1223,12 @@ export const ARTIFACTS: ArtifactData[] = [
     artifactClass: "blunt",
     name: "rock",
     subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "blunt",
+    name: "rocket launcher",
+    subtype: "ranged",
     type: "weapon",
   },
   {
@@ -1047,9 +1272,21 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    artifactClass: "piercing",
+    name: "semi-automatic",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
     name: "shield",
     subtype: "medium",
     type: "shield",
+  },
+  {
+    artifactClass: "piercing",
+    name: "shortbow",
+    subtype: "ranged",
+    type: "weapon",
   },
   {
     artifactClass: "piercing",
@@ -1076,7 +1313,7 @@ export const ARTIFACTS: ArtifactData[] = [
   },
   {
     artifactClass: "piercing",
-    name: "shuriken",
+    name: "shurikens",
     subtype: "ranged",
     type: "weapon",
   },
@@ -1111,7 +1348,19 @@ export const ARTIFACTS: ArtifactData[] = [
   },
   {
     artifactClass: "blunt",
+    name: "sling",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
+    artifactClass: "blunt",
     name: "slingshot",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
+    artifactClass: "piercing",
+    name: "sniper rifle",
     subtype: "ranged",
     type: "weapon",
   },
@@ -1193,6 +1442,12 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    artifactClass: "piercing",
+    name: "submachine gun",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
     name: "suit",
     subtype: "chest",
     type: "armor",
@@ -1220,9 +1475,21 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    artifactClass: "piercing",
+    name: "tanto",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
     name: "targe",
     subtype: "small",
     type: "shield",
+  },
+  {
+    artifactClass: "blunt",
+    name: "taser",
+    subtype: "ranged",
+    type: "weapon",
   },
   {
     artifactClass: "slashing",
@@ -1258,7 +1525,7 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "trinket",
   },
   {
-    artifactClass: "slashing",
+    artifactClass: "piercing",
     name: "tomahawk",
     subtype: "ranged",
     type: "weapon",

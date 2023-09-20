@@ -7,7 +7,7 @@ import {
   monsterAttackRate,
 } from "@neverquest/state/monster";
 
-import { formatMilliseconds } from "@neverquest/utilities/formatters";
+import { formatTime } from "@neverquest/utilities/formatters";
 
 export function MonsterAttackMeter() {
   const monsterAttackDurationValue = useRecoilValue(monsterAttackDuration);
@@ -18,7 +18,7 @@ export function MonsterAttackMeter() {
     <LabelledProgressBar
       disableTransitions
       isStriped={isMonsterFrozen}
-      label={formatMilliseconds(monsterAttackDurationValue || monsterAttackRateValue)}
+      label={formatTime(monsterAttackDurationValue || monsterAttackRateValue)}
       value={
         ((monsterAttackDurationValue === 0
           ? 0

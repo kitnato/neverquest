@@ -3,14 +3,20 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ReactComponent as IconBlightRating } from "@neverquest/icons/blight-rating.svg";
+import { IconImage } from "@neverquest/components/IconImage";
+import { ReactComponent as IconBlight } from "@neverquest/icons/blight.svg";
+import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { monsterBlightChance } from "@neverquest/state/monster";
-import { blightIncrement, isPoisoned } from "@neverquest/state/reserves";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
+import { blightAmount, isPoisoned } from "@neverquest/state/reserves";
+import {
+  CLASS_TABLE_CELL_ITALIC,
+  LABEL_EMPTY,
+  LABEL_MAXIMUM,
+} from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function MonsterBlightRating() {
-  const blightIncrementValue = useRecoilValue(blightIncrement);
+  const blightAmountValue = useRecoilValue(blightAmount);
   const isPoisonedValue = useRecoilValue(isPoisoned);
   const monsterBlightChanceValue = useRecoilValue(monsterBlightChance);
 
@@ -37,21 +43,27 @@ export function MonsterBlightRating() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
 
-                    <td>{`-${blightIncrementValue} stamina`}</td>
+                    <td>
+                      {`-${blightAmountValue}`}
+                      &nbsp;
+                      <IconImage Icon={IconStamina} size="tiny" />
+                      &nbsp;{LABEL_MAXIMUM}
+                    </td>
                   </tr>
                 </DetailsTable>
               </Popover.Body>
             </Popover>
           }
+          trigger={isPoisonedValue ? ["hover", "focus"] : []}
         >
           <span>
             {isPoisonedValue
-              ? Math.round(monsterBlightChanceValue * blightIncrementValue * 100)
+              ? Math.round(monsterBlightChanceValue * blightAmountValue * 100)
               : LABEL_EMPTY}
           </span>
         </OverlayTrigger>
       }
-      Icon={IconBlightRating}
+      Icon={IconBlight}
       isAnimated
       tooltip="Blight rating"
     />

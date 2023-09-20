@@ -24,8 +24,8 @@ export function PurchaseItemButton({
     <OverlayTrigger
       overlay={
         <Tooltip>
-          {!isAffordable && <div>Not enough coins!</div>}
-          {!canFitValue && <div>Over-encumbered!</div>}
+          {!isAffordable && <div>Insufficient coins!</div>}
+          {!canFitValue && <div>Too heavy!</div>}
         </Tooltip>
       }
       trigger={isPurchasable ? [] : ["hover", "focus"]}

@@ -5,14 +5,14 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { HealthMeter } from "@neverquest/components/Reserves/HealthMeter";
 import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
+import { ReserveMeter } from "@neverquest/components/Reserves/ReserveMeter";
 import { RESERVES } from "@neverquest/data/reserves";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconVitality } from "@neverquest/icons/vitality.svg";
-import { rawAttributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isPoisoned, poisonDuration } from "@neverquest/state/reserves";
 import { powerBonus } from "@neverquest/state/statistics";
@@ -23,7 +23,7 @@ export function Health() {
   const isPoisonedValue = useRecoilValue(isPoisoned);
   const isShowingHealthDetails = useRecoilValue(isShowing("healthDetails"));
   const powerBonusValue = useRecoilValue(powerBonus("vitality"));
-  const vitalityValue = useRecoilValue(rawAttributeStatistic("vitality"));
+  const vitalityValue = useRecoilValue(attributeStatistic("vitality"));
   const setPoisonDuration = useSetRecoilState(poisonDuration);
 
   const { baseAmount } = RESERVES.health;
@@ -31,7 +31,6 @@ export function Health() {
   useAnimate({
     delta: setPoisonDuration,
     stop: !isPoisonedValue,
-    tmp: "Health",
   });
 
   return (
@@ -79,7 +78,7 @@ export function Health() {
               trigger={isShowingHealthDetails ? ["hover", "focus"] : []}
             >
               <div className="w-100">
-                <HealthMeter />
+                <ReserveMeter type="health" />
               </div>
             </OverlayTrigger>
 

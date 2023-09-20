@@ -5,7 +5,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { PARRY_ABSORPTION, PARRY_DAMAGE } from "@neverquest/data/combat";
+import { PARRY_ABSORPTION, PARRY_DAMAGE } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconFinesse } from "@neverquest/icons/finesse.svg";
 import { ReactComponent as IconParryRating } from "@neverquest/icons/parry-rating.svg";
@@ -33,9 +33,9 @@ export function ParryRating() {
   const skillEscrime = useRecoilValue(skills("escrime"));
 
   useDeltaText({
-    atomDelta: deltas("parry"),
-    atomValue: parryRating,
+    delta: deltas("parry"),
     stop: ({ previous }) => previous === null || !skillEscrime,
+    value: parryRating,
   });
 
   if (!isShowingParry) {

@@ -2,7 +2,7 @@ import { Card, Col, Row } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { ArmorEquipped } from "@neverquest/components/Items/Armor/ArmorEquipped";
-import { ShieldEquipped } from "@neverquest/components/Items/Shield/ShieldEquipped";
+import { OffhandEquipped } from "@neverquest/components/Items/Offhand/OffhandEquipped";
 import { WeaponEquipped } from "@neverquest/components/Items/Weapon/WeaponEquipped";
 import { isShowing } from "@neverquest/state/isShowing";
 
@@ -10,10 +10,10 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function GearDisplay() {
   const isShowingArmor = useRecoilValue(isShowing("armor"));
-  const isShowingShield = useRecoilValue(isShowing("shield"));
+  const isShowingOffhand = useRecoilValue(isShowing("offhand"));
   const isShowingWeapon = useRecoilValue(isShowing("weapon"));
 
-  if (!isShowingArmor && !isShowingShield && !isShowingWeapon) {
+  if (!isShowingArmor && !isShowingOffhand && !isShowingWeapon) {
     return null;
   }
 
@@ -30,7 +30,7 @@ export function GearDisplay() {
           </Col>
 
           <Col>
-            <ShieldEquipped />
+            <OffhandEquipped />
           </Col>
         </Row>
       </Card.Body>

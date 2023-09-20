@@ -12,7 +12,7 @@ import { ReactComponent as IconCriticalRating } from "@neverquest/icons/critical
 import { ReactComponent as IconDexterity } from "@neverquest/icons/dexterity.svg";
 import { ReactComponent as IconPerception } from "@neverquest/icons/perception.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
-import { rawAttributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
@@ -20,6 +20,7 @@ import {
   criticalChance,
   criticalDamage,
   criticalRating,
+  criticalStrike,
   powerBonus,
 } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
@@ -29,17 +30,18 @@ export function CriticalRating() {
   const criticalChanceValue = useRecoilValue(criticalChance);
   const criticalDamageValue = useRecoilValue(criticalDamage);
   const criticalRatingValue = useRecoilValue(criticalRating);
+  const criticalStrikeValue = useRecoilValue(criticalStrike);
   const isShowingCriticalRating = useRecoilValue(isShowing("criticalRating"));
   const powerBonusChanceValue = useRecoilValue(powerBonus("dexterity"));
   const powerBonusDamageValue = useRecoilValue(powerBonus("perception"));
   const skillAssassination = useRecoilValue(skills("assassination"));
-  const dexterityValue = useRecoilValue(rawAttributeStatistic("dexterity"));
-  const perceptionValue = useRecoilValue(rawAttributeStatistic("perception"));
+  const dexterityValue = useRecoilValue(attributeStatistic("dexterity"));
+  const perceptionValue = useRecoilValue(attributeStatistic("perception"));
 
   useDeltaText({
-    atomDelta: deltas("criticalRating"),
-    atomValue: criticalRating,
+    delta: deltas("criticalRating"),
     stop: ({ previous }) => previous === null || !skillAssassination,
+    value: criticalRating,
   });
 
   if (!isShowingCriticalRating) {
@@ -99,7 +101,8 @@ export function CriticalRating() {
 
                       <td>
                         <IconImage Icon={IconCriticalDamage} size="tiny" />
-                        &nbsp;{`${formatPercentage(perceptionValue, 0)} damage`}
+                        &nbsp;{`${formatPercentage(perceptionValue, 0)} damage`}&nbsp;
+                        {`(${criticalStrikeValue})`}
                       </td>
                     </tr>
 

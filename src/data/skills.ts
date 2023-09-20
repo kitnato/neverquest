@@ -1,93 +1,98 @@
 import { ReactComponent as IconAnatomy } from "@neverquest/icons/anatomy.svg";
+import { ReactComponent as IconArchery } from "@neverquest/icons/archery.svg";
 import { ReactComponent as IconArmorcraft } from "@neverquest/icons/armorcraft.svg";
 import { ReactComponent as IconAssassination } from "@neverquest/icons/assassination.svg";
 import { ReactComponent as IconCalisthenics } from "@neverquest/icons/calisthenics.svg";
 import { ReactComponent as IconEscrime } from "@neverquest/icons/escrime.svg";
 import { ReactComponent as IconEvasion } from "@neverquest/icons/evasion.svg";
 import { ReactComponent as IconShieldcraft } from "@neverquest/icons/shieldcraft.svg";
+import { ReactComponent as IconSiegecraft } from "@neverquest/icons/siegecraft.svg";
 import { ReactComponent as IconTraumatology } from "@neverquest/icons/traumatology.svg";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Attribute, Mastery, Showing, Skill } from "@neverquest/types/unions";
+import type { Attribute, Crew, Mastery, Showing, Skill } from "@neverquest/types/unions";
+
+export const SKILL_PRICE_BASE = 100;
+export const SKILL_PRICE_FACTOR = 2;
 
 export const SKILLS: Record<
   Skill,
   {
-    coinPrice: number;
     description: string;
     Icon: SVGIcon;
-    requiredLevel: number;
+    requiredCrew: Crew;
     shows?: Showing[];
     unlocksAttributes?: Attribute[];
-    unlocksMasteries?: Mastery[];
+    unlocksMastery?: Mastery;
   }
 > = {
   anatomy: {
-    coinPrice: 120,
     description: "Unlocks the ability to inflict bleeding.",
     Icon: IconAnatomy,
-    requiredLevel: 40,
+    requiredCrew: "merchant",
     shows: ["bleed"],
-    unlocksMasteries: ["cruelty"],
+    unlocksMastery: "cruelty",
+  },
+  archery: {
+    description: "Unlocks the use of ranged weapons.",
+    Icon: IconArchery,
+    requiredCrew: "fletcher",
+    shows: ["range"],
+    unlocksMastery: "marksmanship",
   },
   armorcraft: {
-    coinPrice: 135,
-    description:
-      "Unlocks the use of plate armor & the ability to deflect ailments. Also improves recovery.",
+    description: "Unlocks the use of plate armor & the ability to deflect ailments.",
     Icon: IconArmorcraft,
-    requiredLevel: 45,
+    requiredCrew: "blacksmith",
     shows: ["deflection"],
-    unlocksMasteries: ["resilience"],
+    unlocksMastery: "resilience",
   },
   assassination: {
-    coinPrice: 45,
     description: "Unlocks the ability to deal critical strikes.",
     Icon: IconAssassination,
-    requiredLevel: 15,
+    requiredCrew: "merchant",
     shows: ["criticalRating"],
     unlocksAttributes: ["dexterity", "perception"],
   },
   calisthenics: {
-    coinPrice: 30,
     description: "Unlocks attributes that improve health & stamina regeneration.",
     Icon: IconCalisthenics,
-    requiredLevel: 10,
+    requiredCrew: "merchant",
     shows: ["reserveDetails"],
     unlocksAttributes: ["fortitude", "vigor"],
   },
   escrime: {
-    coinPrice: 75,
     description: "Unlocks the ability to parry attacks, partially reflecting damage.",
     Icon: IconEscrime,
-    requiredLevel: 25,
+    requiredCrew: "merchant",
     shows: ["parry"],
-    unlocksMasteries: ["finesse"],
+    unlocksMastery: "finesse",
   },
   evasion: {
-    coinPrice: 105,
     description: "Unlocks the ability to dodge attacks, negating all damage.",
     Icon: IconEvasion,
-    requiredLevel: 35,
+    requiredCrew: "merchant",
     shows: ["dodge"],
     unlocksAttributes: ["agility"],
   },
   shieldcraft: {
-    coinPrice: 90,
-    description: "Unlocks the use of tower shields & stabilizes blocking.",
+    description: "Unlocks the use of tower shields.",
     Icon: IconShieldcraft,
-    requiredLevel: 30,
+    requiredCrew: "blacksmith",
     shows: ["stability"],
-    unlocksMasteries: ["stability"],
+    unlocksMastery: "stability",
+  },
+  siegecraft: {
+    description: "Unlocks the use of two-handed melee weapons that have a chance to execute.",
+    Icon: IconSiegecraft,
+    requiredCrew: "blacksmith",
+    shows: ["execution"],
+    unlocksMastery: "butchery",
   },
   traumatology: {
-    coinPrice: 60,
     description: "Unlocks the ability to stagger monsters.",
     Icon: IconTraumatology,
-    requiredLevel: 20,
+    requiredCrew: "merchant",
     shows: ["stagger"],
-    unlocksMasteries: ["might"],
+    unlocksMastery: "might",
   },
 };
-
-export const SKILLS_ORDER: Skill[] = Object.entries(SKILLS)
-  .sort(([, a], [, b]) => a.requiredLevel - b.requiredLevel)
-  .map(([type]) => type as Skill);

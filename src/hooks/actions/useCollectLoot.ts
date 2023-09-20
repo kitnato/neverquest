@@ -23,15 +23,15 @@ export function useCollectLoot() {
           scrapDifference: get(scrapLoot),
         });
 
-        set(isShowing("attributesButton"), true);
+        set(isShowing("capabilitiesButton"), true);
 
         reset(coinsLoot);
         reset(essenceLoot);
         reset(scrapLoot);
 
         if (itemsLootValue.length > 0) {
-          const acquiredItemIDs = itemsLootValue.map((item) =>
-            acquireItem(item) !== "noFit" ? item.id : null,
+          const acquiredItemIDs = itemsLootValue.map((current) =>
+            acquireItem(current) !== "noFit" ? current.id : null,
           );
 
           set(itemsLoot, (current) => current.filter(({ id }) => !acquiredItemIDs.includes(id)));

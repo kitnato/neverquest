@@ -2,7 +2,20 @@ import type { NameData } from "@neverquest/LOCRAN/types";
 
 export const NAMES: NameData[] = [
   {
+    name: "anger",
+    type: ["prefix", "suffix"],
+  },
+  {
+    isNSFW: true,
+    name: "anus",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "axe",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "balls",
     type: ["prefix", "suffix"],
   },
   {
@@ -11,6 +24,10 @@ export const NAMES: NameData[] = [
   },
   {
     name: "bile",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "bilge",
     type: ["prefix", "suffix"],
   },
   {
@@ -30,11 +47,19 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "bucket",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "bug",
     type: ["suffix"],
   },
   {
     name: "bulge",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "bungle",
     type: ["prefix", "suffix"],
   },
   {
@@ -50,6 +75,11 @@ export const NAMES: NameData[] = [
     type: ["suffix"],
   },
   {
+    isNSFW: true,
+    name: "cock",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "coffin",
     type: ["prefix", "suffix"],
   },
@@ -60,6 +90,11 @@ export const NAMES: NameData[] = [
   {
     name: "crumpet",
     type: ["suffix"],
+  },
+  {
+    isNSFW: true,
+    name: "cum",
+    type: ["prefix", "suffix"],
   },
   {
     name: "cut",
@@ -86,7 +121,16 @@ export const NAMES: NameData[] = [
     type: ["suffix"],
   },
   {
+    isNSFW: true,
+    name: "fart",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "fester",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "fiend",
     type: ["prefix", "suffix"],
   },
   {
@@ -102,6 +146,10 @@ export const NAMES: NameData[] = [
     type: ["suffix"],
   },
   {
+    name: "flame",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "flesh",
     type: ["prefix", "suffix"],
   },
@@ -114,8 +162,24 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "gargle",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "gash",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "gobble",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "gobbler",
     type: ["suffix"],
+  },
+  {
+    name: "gore",
+    type: ["prefix", "suffix"],
   },
   {
     name: "gout",
@@ -127,6 +191,10 @@ export const NAMES: NameData[] = [
   },
   {
     name: "grime",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "grub",
     type: ["prefix", "suffix"],
   },
   {
@@ -237,6 +305,15 @@ export const NAMES: NameData[] = [
     type: ["suffix"],
   },
   {
+    name: "munch",
+    type: ["prefix", "suffix"],
+  },
+  {
+    isNSFW: true,
+    name: "nipple",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "noodle",
     type: ["prefix", "suffix"],
   },
@@ -263,6 +340,10 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "punch",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "pus",
     type: ["prefix", "suffix"],
   },
@@ -276,11 +357,23 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "rider",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "rot",
     type: ["prefix", "suffix"],
   },
   {
+    name: "sack",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "sausage",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "scum",
     type: ["prefix", "suffix"],
   },
   {
@@ -298,6 +391,10 @@ export const NAMES: NameData[] = [
   },
   {
     name: "slime",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "sling",
     type: ["prefix", "suffix"],
   },
   {
@@ -354,6 +451,10 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "squeak",
+    type: ["prefix", "suffix"],
+  },
+  {
     isNSFW: true,
     name: "succ",
     type: ["prefix", "suffix"],
@@ -362,6 +463,10 @@ export const NAMES: NameData[] = [
     isNSFW: true,
     name: "sucker",
     type: ["suffix"],
+  },
+  {
+    name: "sunder",
+    type: ["prefix", "suffix"],
   },
   {
     isNSFW: true,
@@ -382,11 +487,23 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "wail",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "walker",
     type: ["suffix"],
   },
   {
+    name: "wank",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "war",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "wart",
     type: ["prefix", "suffix"],
   },
   {
@@ -404,6 +521,10 @@ export const NAMES: NameData[] = [
   },
   {
     name: "wrath",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "wrinkle",
     type: ["prefix", "suffix"],
   },
 ];

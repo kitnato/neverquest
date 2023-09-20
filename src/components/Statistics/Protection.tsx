@@ -15,8 +15,8 @@ export function Protection() {
   const protectionValue = useRecoilValue(protection);
 
   useDeltaText({
-    atomDelta: deltas("protection"),
-    atomValue: protection,
+    delta: deltas("protection"),
+    value: protection,
   });
 
   if (!isShowingProtection) {

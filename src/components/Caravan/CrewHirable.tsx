@@ -46,7 +46,7 @@ export function CrewHirable({ type }: { type: Crew }) {
           <ResourceDisplay tooltip="Price (coins)" type="coins" value={coinPrice} />
 
           <OverlayTrigger
-            overlay={<Tooltip>Not enough coins!</Tooltip>}
+            overlay={<Tooltip>Insufficient coins!</Tooltip>}
             trigger={isAffordable ? [] : ["hover", "focus"]}
           >
             <span>

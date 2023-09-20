@@ -12,8 +12,8 @@ export function EssenceAbsorbed() {
   const essenceAbsorbedValue = useRecoilValue(essenceAbsorbed);
 
   useDeltaText({
-    atomDelta: deltas("essenceAbsorbed"),
-    atomValue: essenceAbsorbed,
+    delta: deltas("essenceAbsorbed"),
+    value: essenceAbsorbed,
   });
 
   return (

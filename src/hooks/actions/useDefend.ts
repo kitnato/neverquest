@@ -14,8 +14,8 @@ import {
   statusElement,
 } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { armor, shield, weapon } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { armor, shield, weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
   monsterAilmentDuration,
@@ -27,7 +27,7 @@ import {
   monsterPoisonChance,
   monsterPoisonLength,
 } from "@neverquest/state/monster";
-import { blight, isPoisoned, poisonDuration } from "@neverquest/state/reserves";
+import { blight, blightMagnitude, isPoisoned, poisonDuration } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
 import {
   block,
@@ -231,7 +231,11 @@ export function useDefend() {
         increaseMastery("resilience");
 
         // If already poisoned, check if blighting has occurred and if it's been deflected.
-        if (get(isPoisoned) && Math.random() <= get(monsterBlightChance)) {
+        if (
+          get(isPoisoned) &&
+          Math.random() <= get(monsterBlightChance) &&
+          get(blightMagnitude).percentage < 1
+        ) {
           const hasDeflected = get(skills("armorcraft")) && Math.random() <= get(deflection);
 
           if (hasDeflected) {
@@ -243,7 +247,7 @@ export function useDefend() {
             set(blight, (current) => current + 1);
 
             deltaStamina.push({
-              color: "text-danger",
+              color: "text-muted",
               value: "BLIGHTED",
             });
           }
@@ -255,14 +259,14 @@ export function useDefend() {
 
           if (hasDeflected) {
             deltaHealth.push({
-              color: "text-success",
+              color: "text-muted",
               value: "DEFLECTED POISON",
             });
           } else {
             set(poisonDuration, get(monsterPoisonLength));
 
             deltaHealth.push({
-              color: "text-danger",
+              color: "text-muted",
               value: "POISONED",
             });
           }

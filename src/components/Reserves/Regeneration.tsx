@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
@@ -15,12 +16,13 @@ import { ReactComponent as IconRegenerationAmount } from "@neverquest/icons/rege
 import { ReactComponent as IconRegenerationRate } from "@neverquest/icons/regeneration-rate.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconVigor } from "@neverquest/icons/vigor.svg";
-import { rawAttributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import { isRecovering } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import {
   isHealthAtMaximum,
+  isRegenerating,
   isStaminaAtMaximum,
   regenerationDuration,
   regenerationRate,
@@ -28,7 +30,7 @@ import {
 import { powerBonus } from "@neverquest/state/statistics";
 import type { Reserve } from "@neverquest/types/unions";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
-import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
+import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 
 const RESERVE_CHANGE = {
   health: useChangeHealth,
@@ -36,17 +38,20 @@ const RESERVE_CHANGE = {
 };
 
 export function Regeneration({ type }: { type: Reserve }) {
-  const { baseRegenerationAmount, baseRegenerationRate, label, regenerationDelta } = RESERVES[type];
   const isHealth = type === "health";
 
   const isRecoveringValue = useRecoilValue(isRecovering);
+  const isRegeneratingValue = useRecoilValue(isRegenerating(type));
   const isReserveAtMaximum = useRecoilValue(isHealth ? isHealthAtMaximum : isStaminaAtMaximum);
   const isShowingReserveDetails = useRecoilValue(isShowing("reserveDetails"));
   const powerBonusAmountValue = useRecoilValue(powerBonus("fortitude"));
   const powerBonusRateValue = useRecoilValue(powerBonus("vigor"));
-  const fortitudeValue = useRecoilValue(rawAttributeStatistic("fortitude"));
-  const vigorValue = useRecoilValue(rawAttributeStatistic("vigor"));
+  const fortitudeValue = useRecoilValue(attributeStatistic("fortitude"));
+  const vigorValue = useRecoilValue(attributeStatistic("vigor"));
+  const regenerationRateValue = useRecoilValue(regenerationRate(type));
   const setRegenerationDuration = useSetRecoilState(regenerationDuration(type));
+
+  const { baseRegenerationAmount, baseRegenerationRate, label, regenerationDelta } = RESERVES[type];
 
   const changeReserve = RESERVE_CHANGE[type]();
 
@@ -55,15 +60,20 @@ export function Regeneration({ type }: { type: Reserve }) {
     onDelta: () => {
       changeReserve({ isRegeneration: true });
     },
-    stop: isReserveAtMaximum || isRecoveringValue,
-    tmp: "Regeneration",
+    stop: isRecoveringValue || isReserveAtMaximum,
   });
 
   useDeltaText({
-    atomDelta: deltas(regenerationDelta),
-    atomValue: regenerationRate(type),
+    delta: deltas(regenerationDelta),
     type: "time",
+    value: regenerationRate(type),
   });
+
+  useEffect(() => {
+    if (!isReserveAtMaximum && !isRegeneratingValue) {
+      setRegenerationDuration(regenerationRateValue);
+    }
+  }, [isRegeneratingValue, isReserveAtMaximum, regenerationRateValue, setRegenerationDuration]);
 
   return (
     <Stack className="w-100" direction="horizontal">
@@ -79,7 +89,7 @@ export function Regeneration({ type }: { type: Reserve }) {
 
                   <td>
                     <IconImage Icon={IconRegenerationRate} size="tiny" />
-                    &nbsp;{formatMilliseconds(baseRegenerationRate)}
+                    &nbsp;{formatTime(baseRegenerationRate)}
                   </td>
                 </tr>
 

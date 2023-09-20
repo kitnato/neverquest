@@ -3,6 +3,8 @@ import type {
   ConsumableItem,
   GearItem,
   GemItem,
+  Melee,
+  Ranged,
   Shield,
   StackableItem,
   TrinketItem,
@@ -10,28 +12,36 @@ import type {
 } from "@neverquest/types";
 import { CONSUMABLE_TYPES, GEM_TYPES, TRINKET_TYPES } from "@neverquest/types/unions";
 
-export function isArmor(gear: unknown): gear is Armor {
-  return isObject(gear) && gear.protection !== undefined;
+export function isArmor(gearItem: unknown): gearItem is Armor {
+  return isObject(gearItem) && gearItem.protection !== undefined;
 }
 
 export function isConsumable(consumable: unknown): consumable is ConsumableItem {
   return isObject(consumable) && CONSUMABLE_TYPES.some((type) => type === consumable.type);
 }
 
-export function isGear(gear: unknown): gear is GearItem {
-  return isObject(gear) && (isArmor(gear) || isShield(gear) || isWeapon(gear));
-}
-
-function isObject(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null;
+export function isGear(gearItem: unknown): gearItem is GearItem {
+  return isObject(gearItem) && (isArmor(gearItem) || isShield(gearItem) || isWeapon(gearItem));
 }
 
 export function isGem(gem: unknown): gem is GemItem {
   return isObject(gem) && GEM_TYPES.some((type) => type === gem.type);
 }
 
-export function isShield(gear: unknown): gear is Shield {
-  return isObject(gear) && gear.block !== undefined;
+function isObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
+
+export function isMelee(gearItem: unknown): gearItem is Melee {
+  return isObject(gearItem) && gearItem.grip !== undefined;
+}
+
+export function isRanged(gearItem: unknown): gearItem is Ranged {
+  return isObject(gearItem) && gearItem.range !== undefined;
+}
+
+export function isShield(gearItem: unknown): gearItem is Shield {
+  return isObject(gearItem) && gearItem.block !== undefined;
 }
 
 export function isStackable(stackable: unknown): stackable is StackableItem {
@@ -42,6 +52,6 @@ export function isTrinket(trinket: unknown): trinket is TrinketItem {
   return isObject(trinket) && TRINKET_TYPES.some((type) => type === trinket.type);
 }
 
-export function isWeapon(gear: unknown): gear is Weapon {
-  return isObject(gear) && gear.damage !== undefined;
+export function isWeapon(gearItem: unknown): gearItem is Weapon {
+  return isMelee(gearItem) || isRanged(gearItem);
 }

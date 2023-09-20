@@ -1,12 +1,29 @@
+import { ReactComponent as IconButchery } from "@neverquest/icons/butchery.svg";
 import { ReactComponent as IconCruelty } from "@neverquest/icons/cruelty.svg";
 import { ReactComponent as IconFinesse } from "@neverquest/icons/finesse.svg";
+import { ReactComponent as IconMarksmanship } from "@neverquest/icons/marksmanship.svg";
 import { ReactComponent as IconMight } from "@neverquest/icons/might.svg";
 import { ReactComponent as IconResilience } from "@neverquest/icons/resilience.svg";
 import { ReactComponent as IconStability } from "@neverquest/icons/stability.svg";
-import type { MasteryData } from "@neverquest/types";
+import type { AttributeOrMasteryBaseData } from "@neverquest/types";
 import type { Mastery } from "@neverquest/types/unions";
 
-export const MASTERIES: Record<Mastery, MasteryData> = {
+export const MASTERIES: Record<
+  Mastery,
+  AttributeOrMasteryBaseData & {
+    instructions: string;
+    maximum: number;
+  }
+> = {
+  butchery: {
+    base: 0.15,
+    description: "Determines monster health threshold for execution.",
+    Icon: IconButchery,
+    increment: 0.01,
+    instructions: "Trains when dealing damage with a two-handed weapon.",
+    isUnlocked: false,
+    maximum: 0.33,
+  },
   cruelty: {
     base: 0.2,
     description: "Determines bleed damage.",
@@ -18,10 +35,19 @@ export const MASTERIES: Record<Mastery, MasteryData> = {
   },
   finesse: {
     base: 0,
-    description: "Increases damage absorbed and reflected when parrying.",
+    description: "Affects damage absorbed and reflected when parrying.",
     Icon: IconFinesse,
     increment: 0.02,
     instructions: "Trains when parrying.",
+    isUnlocked: false,
+    maximum: 0.9,
+  },
+  marksmanship: {
+    base: 0,
+    description: "Affects the distance a monster must close before it can attack.",
+    Icon: IconMarksmanship,
+    increment: 0.03,
+    instructions: "Trains when dealing damage with a ranged weapon.",
     isUnlocked: false,
     maximum: 0.9,
   },
@@ -36,10 +62,10 @@ export const MASTERIES: Record<Mastery, MasteryData> = {
   },
   resilience: {
     base: 0,
-    description: "Reduces recovery rate.",
+    description: "Affects recovery rate.",
     Icon: IconResilience,
     increment: 0.01,
-    instructions: "Trains when defending.",
+    instructions: "Trains when getting hit.",
     isUnlocked: false,
     maximum: 0.9,
   },
@@ -54,10 +80,4 @@ export const MASTERIES: Record<Mastery, MasteryData> = {
   },
 };
 
-export const MASTERIES_ORDER: Mastery[] = [
-  "might",
-  "finesse",
-  "cruelty",
-  "resilience",
-  "stability",
-];
+export const MASTERY_PROGRESS = 1;

@@ -1,16 +1,23 @@
 import { useRecoilCallback } from "recoil";
 
-import { useRegenerateMonster } from "@neverquest/hooks/actions/useRegenerateMonster";
 import { attackDuration, isAttacking } from "@neverquest/state/character";
+import { deltas } from "@neverquest/state/deltas";
 import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
-import { isMonsterDead, monsterAttackDuration, monsterAttackRate } from "@neverquest/state/monster";
+import {
+  isMonsterDead,
+  monsterAilmentDuration,
+  monsterAttackDuration,
+  monsterAttackRate,
+  monsterBleedingDelta,
+  monsterDistance,
+  monsterHealth,
+  monsterHealthMaximum,
+} from "@neverquest/state/monster";
 import { attackRateTotal } from "@neverquest/state/statistics";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleAttack() {
-  const regenerateMonster = useRegenerateMonster();
-
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
       () => {
@@ -33,13 +40,32 @@ export function useToggleAttack() {
           reset(monsterAttackDuration);
 
           if (!get(isMonsterDead)) {
-            regenerateMonster();
+            reset(monsterAilmentDuration("bleeding"));
+            reset(monsterBleedingDelta);
+            reset(monsterDistance);
+
+            const difference = get(monsterHealthMaximum) - get(monsterHealth);
+
+            if (difference > 0) {
+              set(deltas("monsterHealth"), [
+                {
+                  color: "text-muted",
+                  value: "REGENERATE",
+                },
+                {
+                  color: "text-success",
+                  value: `+${difference}`,
+                },
+              ]);
+
+              reset(monsterHealth);
+            }
           }
         } else {
           set(attackDuration, get(attackRateTotal));
           set(monsterAttackDuration, get(monsterAttackRate));
         }
       },
-    [regenerateMonster],
+    [],
   );
 }

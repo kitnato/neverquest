@@ -21,7 +21,7 @@ export function IconDisplay({
   iconProps?: IconImageDOMProps;
   isAnimated?: boolean;
   isSpaced?: boolean;
-  tooltip: string;
+  tooltip?: string;
 }) {
   return (
     <Stack

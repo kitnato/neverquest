@@ -13,7 +13,7 @@ import { ReactComponent as IconRegenerationAmount } from "@neverquest/icons/rege
 import { ReactComponent as IconRegenerationRate } from "@neverquest/icons/regeneration-rate.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
-import { hasItem } from "@neverquest/state/inventory";
+import { ownedItem } from "@neverquest/state/items";
 import type { SVGIcon } from "@neverquest/types/props";
 import type { Attribute } from "@neverquest/types/unions";
 import { formatPercentage } from "@neverquest/utilities/formatters";
@@ -32,7 +32,7 @@ const STATISTIC_ICON: Record<Attribute, SVGIcon> = {
 };
 
 export function AttributeIncreaseDetails({ type }: { type: Attribute }) {
-  const hasTomeOfPower = useRecoilValue(hasItem("tome of power"));
+  const hasTomeOfPower = Boolean(useRecoilValue(ownedItem("tome of power")));
 
   const { increment, powerBonus } = ATTRIBUTES[type];
   const Icon = STATISTIC_ICON[type];

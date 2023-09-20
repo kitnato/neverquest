@@ -5,23 +5,23 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { BLEED } from "@neverquest/data/combat";
+import { BLEED, BLEED_DELTA } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconBleedRating } from "@neverquest/icons/bleed-rating.svg";
+import { ReactComponent as IconBleed } from "@neverquest/icons/bleed.svg";
 import { ReactComponent as IconCruelty } from "@neverquest/icons/cruelty.svg";
-import { ReactComponent as IconWeaponBleed } from "@neverquest/icons/weapon-bleed.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { skills } from "@neverquest/state/skills";
-import { bleed, bleedRating, bleedTick, damageTotal } from "@neverquest/state/statistics";
+import { bleed, bleedDamage, bleedRating, damageTotal } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatMilliseconds, formatPercentage } from "@neverquest/utilities/formatters";
+import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 
 export function BleedRating() {
   const bleedValue = useRecoilValue(bleed);
   const bleedRatingValue = useRecoilValue(bleedRating);
-  const { damage, duration: bleedTickDuration } = useRecoilValue(bleedTick);
+  const bleedDamageValue = useRecoilValue(bleedDamage);
   const damageTotalValue = useRecoilValue(damageTotal);
   const isShowingBleed = useRecoilValue(isShowing("bleed"));
   const crueltyValue = useRecoilValue(masteryStatistic("cruelty"));
@@ -30,9 +30,9 @@ export function BleedRating() {
   const { duration, ticks } = BLEED;
 
   useDeltaText({
-    atomDelta: deltas("bleedRating"),
-    atomValue: bleedRating,
+    delta: deltas("bleedRating"),
     stop: ({ previous }) => previous === null || !skillAnatomy,
+    value: bleedRating,
   });
 
   if (!isShowingBleed) {
@@ -54,7 +54,7 @@ export function BleedRating() {
                       <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
 
                       <td>
-                        <IconImage Icon={IconWeaponBleed} size="tiny" />
+                        <IconImage Icon={IconBleed} size="tiny" />
                         &nbsp;{`${bleedValue === 0 ? LABEL_EMPTY : formatPercentage(bleedValue)}`}
                       </td>
                     </tr>
@@ -71,13 +71,13 @@ export function BleedRating() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
 
-                      <td>{formatMilliseconds(duration)}</td>
+                      <td>{formatTime(duration)}</td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Ticks:</td>
 
-                      <td>{`${ticks} (every ${formatMilliseconds(bleedTickDuration)})`}</td>
+                      <td>{`${ticks} (every ${formatTime(BLEED_DELTA)})`}</td>
                     </tr>
 
                     <tr>
@@ -85,7 +85,7 @@ export function BleedRating() {
 
                       <td>{`${Math.round(
                         damageTotalValue * crueltyValue,
-                      )} (${damage} per tick)`}</td>
+                      )} (${bleedDamageValue} per tick)`}</td>
                     </tr>
                   </DetailsTable>
                 </Popover.Body>

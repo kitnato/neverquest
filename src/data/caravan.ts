@@ -1,5 +1,6 @@
 import { ReactComponent as IconAlchemist } from "@neverquest/icons/alchemist.svg";
 import { ReactComponent as IconBlacksmith } from "@neverquest/icons/blacksmith.svg";
+import { ReactComponent as IconFletcher } from "@neverquest/icons/fletcher.svg";
 import { ReactComponent as IconMedic } from "@neverquest/icons/medic.svg";
 import { ReactComponent as IconMercenary } from "@neverquest/icons/mercenary.svg";
 import { ReactComponent as IconMerchant } from "@neverquest/icons/merchant.svg";
@@ -14,9 +15,12 @@ import type {
   WeaponModality,
 } from "@neverquest/LOCRAN/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Crew, Trinket } from "@neverquest/types/unions";
+import type { Consumable, Crew, Grip, Trinket } from "@neverquest/types/unions";
 
-export const BLACKSMITH_GEAR_LEVEL_MAXIMUM = 3;
+export const AMMUNITION_PRICE = 10;
+
+export const GEAR_LEVEL_MAXIMUM = 100;
+export const GEAR_LEVEL_RANGE_MAXIMUM = 3;
 
 export const CREW: Record<
   Crew,
@@ -30,12 +34,12 @@ export const CREW: Record<
   }
 > = {
   alchemist: {
-    coinPrice: 100,
+    coinPrice: 300,
     description: "Converts resources between one another.",
     Icon: IconAlchemist,
     interaction: "Transmute",
     monologues: { 1: "Things are not always what they seem." },
-    requiredStage: 16,
+    requiredStage: 30,
   },
   blacksmith: {
     coinPrice: 60,
@@ -45,21 +49,29 @@ export const CREW: Record<
     monologues: { 1: "In need of better gear?" },
     requiredStage: 10,
   },
+  fletcher: {
+    coinPrice: 200,
+    description: "Crafts ranges weapons and provides ammunition.",
+    Icon: IconFletcher,
+    interaction: "Craft",
+    monologues: { 1: "Tired of monster breath?" },
+    requiredStage: 25,
+  },
   medic: {
-    coinPrice: 20,
+    coinPrice: 80,
     description: "Heals wounds and sells bandages.",
     Icon: IconMedic,
     interaction: "Heal",
     monologues: { 1: "Allow me to patch you up." },
-    requiredStage: 6,
+    requiredStage: 12,
   },
   mercenary: {
-    coinPrice: 80,
+    coinPrice: 40,
     description: "Trains new skills and attributes.",
     Icon: IconMercenary,
     interaction: "Train",
     monologues: { 1: "Perhaps I can teach you something." },
-    requiredStage: 12,
+    requiredStage: 8,
   },
   merchant: {
     coinPrice: 0,
@@ -76,36 +88,38 @@ export const CREW: Record<
       7: "Your headway in the wilderness is helping business.",
       9: "There is something dark looming on the horizon ...",
       10: "I can't believe you came out of that in one piece.",
-      14: "I recently came into possession of a few curiosities.",
-      15: "Can I interest you in anything else?",
-      25: "A dark wanderer passed by and sold me a strange book ...",
-      26: "Welcome back. Always a sight for sore eyes.",
+      11: "Ah, back again I see.",
+      20: "I recently came into possession of a few curiosities.",
+      21: "Can I interest you in anything else?",
+      25: "I have something suitable for marksmen.",
+      30: "A dark wanderer passed by and sold me a strange book ...",
+      31: "Welcome back. Always a sight for sore eyes.",
     },
     requiredStage: 0,
   },
   occultist: {
-    coinPrice: 200,
+    coinPrice: 150,
     description: "Sells phylacteries and offers purging rituals.",
     Icon: IconOccultist,
     interaction: "Ritual",
     monologues: { 1: "Prepared to pierce the veil?" },
-    requiredStage: 30,
+    requiredStage: 20,
   },
   tailor: {
-    coinPrice: 40,
+    coinPrice: 20,
     description: "Expands inventory space.",
     Icon: IconTailor,
-    interaction: "Sow",
+    interaction: "Tailoring",
     monologues: { 1: "Allow me to deepen your pockets." },
-    requiredStage: 8,
+    requiredStage: 6,
   },
   witch: {
-    coinPrice: 150,
+    coinPrice: 100,
     description: "Sells potions that cure ailments.",
     Icon: IconWitch,
     interaction: "Brew",
     monologues: { 1: "Gaze deep into my cauldron ..." },
-    requiredStage: 20,
+    requiredStage: 16,
   },
 };
 
@@ -113,7 +127,7 @@ export const CREW_ORDER: Crew[] = Object.entries(CREW)
   .sort(([, a], [, b]) => a.requiredStage - b.requiredStage)
   .map(([type]) => type as Crew);
 
-export const OCCULTIST_PURGE_PRICE_MULTIPLIER = 0.33;
+export const OCCULTIST_PURGE_PRICE_MULTIPLIER = 0.1;
 
 export const MEDIC_PRICE_SURGERY = 6;
 export const MEDIC_PRICE_SURGERY_CRITICAL = 15;
@@ -132,6 +146,7 @@ export const MERCHANT_OFFERS: Record<
         })
       | (ArtifactType<"weapon"> & {
           gearClass: WeaponClass;
+          grip: Grip;
           modality: WeaponModality;
         })
     )[]
@@ -140,6 +155,7 @@ export const MERCHANT_OFFERS: Record<
   1: [
     {
       gearClass: "piercing",
+      grip: "one-handed",
       modality: "melee",
       type: "weapon",
     },
@@ -164,11 +180,13 @@ export const MERCHANT_OFFERS: Record<
   5: [
     {
       gearClass: "slashing",
+      grip: "one-handed",
       modality: "melee",
       type: "weapon",
     },
     {
       gearClass: "blunt",
+      grip: "one-handed",
       modality: "melee",
       type: "weapon",
     },
@@ -181,11 +199,21 @@ export const MERCHANT_OFFERS: Record<
       type: "armor",
     },
   ],
-  14: [
+  20: [
     { name: "antique coin", type: "trinket" },
     { name: "monkey paw", type: "trinket" },
   ],
-  25: [{ name: "tome of power", type: "trinket" }],
+  25: [{ name: "ammunition pouch", type: "trinket" }],
+  30: [{ name: "tome of power", type: "trinket" }],
+};
+
+export const TAILORING_EXPANSION = {
+  ammunitionPouch: 20,
+  knapsack: 3,
+};
+export const TAILORING_PRICES_MAXIMUM = {
+  ammunitionPouch: 300,
+  knapsack: 500,
 };
 
 export const TRANSMUTE_COST = 3;

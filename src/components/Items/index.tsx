@@ -2,14 +2,16 @@ import { Button, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { ApplyGem } from "@neverquest/components/Items/ApplyGem";
-import { ConsumeAntidote } from "@neverquest/components/Items/Consumable/ConsumeAntidote";
-import { ConsumeBandages } from "@neverquest/components/Items/Consumable/ConsumeBandages";
-import { ConsumeElixir } from "@neverquest/components/Items/Consumable/ConsumeElixir";
-import { ConsumeSalve } from "@neverquest/components/Items/Consumable/ConsumeSalve";
+import { Antidote } from "@neverquest/components/Items/Consumable/Antidote";
+import { Bandages } from "@neverquest/components/Items/Consumable/Bandages";
+import { Elixir } from "@neverquest/components/Items/Consumable/Elixir";
+import { Salve } from "@neverquest/components/Items/Consumable/Salve";
 import { Encumbrance } from "@neverquest/components/Items/Encumbrance";
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
-import { ActivateCompass } from "@neverquest/components/Items/Trinket/ActivateCompass";
-import { ActivateHearthstone } from "@neverquest/components/Items/Trinket/ActivateHearthstone";
+import { StoredGear } from "@neverquest/components/Items/StoredGear";
+import { Trinket } from "@neverquest/components/Items/Trinket";
+import { Compass } from "@neverquest/components/Items/Trinket/Compass";
+import { Hearthstone } from "@neverquest/components/Items/Trinket/Hearthstone";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { inventory } from "@neverquest/state/inventory";
 import {
@@ -18,7 +20,6 @@ import {
   isGear,
   isGem,
   isShield,
-  isStackable,
   isTrinket,
   isWeapon,
 } from "@neverquest/types/type-guards";
@@ -30,7 +31,7 @@ export function Inventory() {
 
   const toggleEquipGear = useToggleEquipGear();
 
-  const equippedGear = [...inventoryValue.filter((item) => isGear(item) && item.isEquipped)];
+  const equippedGear = inventoryValue.filter((item) => isGear(item) && item.isEquipped);
   const storedItems = inventoryValue.filter(
     (item) => !isGear(item) || (isGear(item) && !item.isEquipped),
   );
@@ -48,14 +49,14 @@ export function Inventory() {
 
         {[equippedGear.find(isWeapon), equippedGear.find(isArmor), equippedGear.find(isShield)]
           .filter(isGear)
-          .map((item) => {
-            const { id } = item;
+          .map((current) => {
+            const { id } = current;
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-                <ItemDisplay item={item} overlayPlacement="right" />
+                <ItemDisplay item={current} overlayPlacement="right" />
 
-                <Button onClick={() => toggleEquipGear(item)} variant="outline-dark">
+                <Button onClick={() => toggleEquipGear(current)} variant="outline-dark">
                   Unequip
                 </Button>
               </div>
@@ -68,90 +69,74 @@ export function Inventory() {
 
         {storedItems.length === 0 && <span className="fst-italic">Nothing stored.</span>}
 
+        <StoredGear />
+
         {storedItems
-          .filter(isGear)
-          .sort((a, b) => a.name.localeCompare(b.name))
-          .map((item) => (
-            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.id}>
-              <ItemDisplay item={item} />
-
-              <Button onClick={() => toggleEquipGear(item)} variant="outline-dark">
-                Equip
-              </Button>
-            </div>
-          ))}
-
-        {[...storedItems.filter(isTrinket).sort((a, b) => a.type.localeCompare(b.type))].map(
-          (item) => {
-            const { id, type } = item;
-
-            const action = (() => {
-              switch (type) {
-                case "compass": {
-                  return <ActivateCompass />;
-                }
-                case "hearthstone": {
-                  return <ActivateHearthstone />;
-                }
-              }
-
-              return null;
-            })();
+          .filter(isTrinket)
+          .sort((a, b) => a.type.localeCompare(b.type))
+          .map((current) => {
+            const { id, type } = current;
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-                <ItemDisplay item={item} />
+                <Trinket item={current} />
 
-                {action}
+                {(() => {
+                  switch (type) {
+                    case "compass": {
+                      return <Compass />;
+                    }
+
+                    case "hearthstone": {
+                      return <Hearthstone />;
+                    }
+
+                    default: {
+                      return null;
+                    }
+                  }
+                })()}
               </div>
             );
-          },
-        )}
+          })}
 
         {[
           ...stackItems(
             storedItems.filter(isConsumable).sort((a, b) => a.type.localeCompare(b.type)),
           ),
           ...stackItems(storedItems.filter(isGem).sort((a, b) => a.type.localeCompare(b.type))),
-        ].map((stackedItem) => {
-          const { item, stack } = stackedItem;
-
-          if (!isStackable(item)) {
-            return null;
-          }
-
+        ].map((current) => {
+          const { item, stack } = current;
           const { id, type } = item;
-
-          const action = (() => {
-            if (isConsumable(item)) {
-              switch (type) {
-                case "antidote": {
-                  return <ConsumeAntidote consumable={item} />;
-                }
-                case "bandages": {
-                  return <ConsumeBandages consumable={item} />;
-                }
-                case "elixir": {
-                  return <ConsumeElixir consumable={item} />;
-                }
-                case "salve": {
-                  return <ConsumeSalve consumable={item} />;
-                }
-              }
-            }
-
-            if (isGem(item)) {
-              return <ApplyGem gem={item} />;
-            }
-
-            return null;
-          })();
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-              <ItemDisplay item={item} stack={stack} />
+              <ItemDisplay item={item} overlayPlacement="right" stack={stack} />
 
-              {action}
+              {(() => {
+                if (isConsumable(item)) {
+                  switch (type) {
+                    case "antidote": {
+                      return <Antidote id={id} />;
+                    }
+                    case "bandages": {
+                      return <Bandages id={id} />;
+                    }
+                    case "elixir": {
+                      return <Elixir id={id} />;
+                    }
+                    case "salve": {
+                      return <Salve id={id} />;
+                    }
+                  }
+                }
+
+                if (isGem(item)) {
+                  return <ApplyGem gem={item} />;
+                }
+
+                return null;
+              })()}
             </div>
           );
         })}

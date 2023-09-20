@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { FormControl, FormSelect, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
-import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGear";
-import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
+import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
+import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DodgePenaltyContents } from "@neverquest/components/Items/Armor/DodgePenaltyContents";
-import { BLACKSMITH_GEAR_LEVEL_MAXIMUM } from "@neverquest/data/caravan";
+import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { ARMOR_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
 import { ReactComponent as IconDodgePenalty } from "@neverquest/icons/dodge-penalty.svg";
@@ -14,7 +14,7 @@ import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { ReactComponent as IconArmorProtection } from "@neverquest/icons/protection.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
-import { ARMOR_CLASSES, type ArmorClass } from "@neverquest/LOCRAN/types";
+import { ARMOR_CLASS_TYPES, type ArmorClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -23,11 +23,11 @@ import { skills } from "@neverquest/state/skills";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 import { generateArmor } from "@neverquest/utilities/generators";
-import { getGrowthSigmoid } from "@neverquest/utilities/getters";
+import { getArmorRanges, getGearPrices, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function ArmorOptions() {
+  const [{ armor: craftedArmor }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const allowNSFWValue = useRecoilValue(allowNSFW);
-  const { armor: craftedArmor } = useRecoilValue(blacksmithInventory);
   const isShowingDeflection = useRecoilValue(isShowing("deflection"));
   const isShowingDodge = useRecoilValue(isShowing("dodge"));
   const skillArmorcraft = useRecoilValue(skills("armorcraft"));
@@ -36,19 +36,39 @@ export function ArmorOptions() {
   const [armorClass, setArmorClass] = useState<ArmorClass>("hide");
   const [armorLevel, setArmorLevel] = useState(stageValue);
 
-  const armor = generateArmor({
-    allowNSFW: allowNSFWValue,
-    gearClass: armorClass,
-    hasPrefix: true,
-    hasSuffix: Math.random() <= getGrowthSigmoid(armorLevel),
-    level: armorLevel,
-  });
-  const { protection, ranges, staminaCost, weight } = armor;
   const { Icon } = ARMOR_SPECIFICATIONS[armorClass];
-  const maximumArmorLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
+  const factor = getGrowthSigmoid(armorLevel);
+  const { deflection, protection, staminaCost, weight } = getArmorRanges({
+    factor,
+    gearClass: armorClass,
+  });
+  const { coinPrice, scrapPrice } = getGearPrices({
+    factor,
+    ...ARMOR_SPECIFICATIONS[armorClass],
+  });
+  const maximumArmorLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
+
+  const handleCraft = () =>
+    setBlacksmithInventory((current) => ({
+      ...current,
+      armor: generateArmor({
+        allowNSFW: allowNSFWValue,
+        gearClass: armorClass,
+        hasPrefix: true,
+        hasSuffix: Math.random() <= getGrowthSigmoid(armorLevel),
+        level: armorLevel,
+        tags:
+          armorLevel < stageValue - 1
+            ? ["lowQuality"]
+            : armorLevel > maximumArmorLevel
+            ? ["highQuality"]
+            : undefined,
+      }),
+    }));
+  const handleTransfer = () => setBlacksmithInventory((current) => ({ ...current, armor: null }));
 
   return (
-    <>
+    <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
         <IconDisplay
           contents={
@@ -83,9 +103,9 @@ export function ArmorOptions() {
               onChange={({ target: { value } }) => setArmorClass(value as ArmorClass)}
               value={armorClass}
             >
-              {ARMOR_CLASSES.map((armorClass) => (
-                <option key={armorClass} value={armorClass}>
-                  {capitalizeAll(armorClass)}
+              {ARMOR_CLASS_TYPES.map((current) => (
+                <option key={current} value={current}>
+                  {capitalizeAll(current)}
                 </option>
               ))}
             </FormSelect>
@@ -96,19 +116,17 @@ export function ArmorOptions() {
         />
 
         <IconDisplay
-          contents={protection}
+          contents={`${protection.minimum}-${protection.maximum}`}
           Icon={IconArmorProtection}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Protection"
         />
 
-        {ranges !== null && (
+        {deflection !== null && (
           <IconDisplay
             contents={
               isShowingDeflection
-                ? `${formatPercentage(ranges.deflection.minimum)}-${formatPercentage(
-                    ranges.deflection.maximum,
-                  )}`
+                ? `${formatPercentage(deflection.minimum)}-${formatPercentage(deflection.maximum)}`
                 : LABEL_UNKNOWN
             }
             Icon={isShowingDeflection ? IconDeflection : IconUnknown}
@@ -117,7 +135,7 @@ export function ArmorOptions() {
           />
         )}
 
-        {staminaCost > 0 && (
+        {staminaCost !== 0 && (
           <IconDisplay
             contents={
               isShowingDodge ? <DodgePenaltyContents staminaCost={staminaCost} /> : LABEL_UNKNOWN
@@ -129,7 +147,7 @@ export function ArmorOptions() {
         )}
 
         <IconDisplay
-          contents={weight}
+          contents={`${weight.minimum}-${weight.maximum}`}
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
@@ -141,10 +159,10 @@ export function ArmorOptions() {
       {!skillArmorcraft && armorClass === "plate" ? (
         <span className="text-center">Cannot use without training.</span>
       ) : craftedArmor === null ? (
-        <CraftGear gear={armor} />
+        <CraftGear coinPrice={coinPrice} onCraft={handleCraft} scrapPrice={scrapPrice} />
       ) : (
-        <CraftedGear gear={craftedArmor} />
+        <CraftedGear gearItem={craftedArmor} onTransfer={handleTransfer} />
       )}
-    </>
+    </Stack>
   );
 }

@@ -4,7 +4,6 @@ import { deltas } from "@neverquest/state/deltas";
 import {
   regenerationAmount,
   regenerationDuration,
-  regenerationRate,
   stamina,
   staminaMaximumTotal,
 } from "@neverquest/state/reserves";
@@ -44,10 +43,6 @@ export function useChangeStamina() {
         if (newStamina >= staminaMaximumTotalValue) {
           newStamina = staminaMaximumTotalValue;
           reset(regenerationDuration("stamina"));
-        }
-
-        if (newStamina < staminaMaximumTotalValue && get(regenerationDuration("stamina")) === 0) {
-          set(regenerationDuration("stamina"), get(regenerationRate("stamina")));
         }
 
         set(stamina, newStamina);

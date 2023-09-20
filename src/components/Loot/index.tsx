@@ -15,8 +15,8 @@ export function Loot({ type }: { type: Resource }) {
   const resourceValue = useRecoilValue(atomLoot);
 
   useDeltaText({
-    atomDelta: deltas(deltaLoot),
-    atomValue: atomLoot,
+    delta: deltas(deltaLoot),
+    value: atomLoot,
   });
 
   if (resourceValue === 0) {

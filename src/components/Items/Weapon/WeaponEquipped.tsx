@@ -4,9 +4,11 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { WeaponName } from "@neverquest/components/Items/Weapon/WeaponName";
 import { WEAPON_NONE } from "@neverquest/data/inventory";
 import { ReactComponent as IconUnequipped } from "@neverquest/icons/fist.svg";
-import { ReactComponent as IconWeapon } from "@neverquest/icons/weapon.svg";
-import { weapon } from "@neverquest/state/inventory";
+import { ReactComponent as IconMelee } from "@neverquest/icons/melee.svg";
+import { ReactComponent as IconRanged } from "@neverquest/icons/ranged.svg";
 import { isShowing } from "@neverquest/state/isShowing";
+import { weapon } from "@neverquest/state/items";
+import { isMelee } from "@neverquest/types/type-guards";
 
 export function WeaponEquipped() {
   const isShowingWeapon = useRecoilValue(isShowing("weapon"));
@@ -21,7 +23,7 @@ export function WeaponEquipped() {
   return (
     <IconDisplay
       contents={<WeaponName weapon={weaponValue} />}
-      Icon={isUnarmed ? IconUnequipped : IconWeapon}
+      Icon={isUnarmed ? IconUnequipped : isMelee(weaponValue) ? IconMelee : IconRanged}
       iconProps={{ isMirrored: isUnarmed }}
       isAnimated
       tooltip="Equipped weapon"

@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { isRecovering, recoveryDuration } from "@neverquest/state/character";
 import { recoveryRate } from "@neverquest/state/statistics";
-import { formatMilliseconds } from "@neverquest/utilities/formatters";
+import { formatTime } from "@neverquest/utilities/formatters";
 
 export function RecoveryMeter() {
   const isRecoveringValue = useRecoilValue(isRecovering);
@@ -13,7 +13,7 @@ export function RecoveryMeter() {
   return (
     <LabelledProgressBar
       disableTransitions
-      label={formatMilliseconds(recoveryDurationValue || recoveryRateValue)}
+      label={formatTime(recoveryDurationValue || recoveryRateValue)}
       value={
         ((isRecoveringValue ? recoveryRateValue - recoveryDurationValue : 0) / recoveryRateValue) *
         100

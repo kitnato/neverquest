@@ -12,9 +12,9 @@ export function Stage() {
   const stageValue = useRecoilValue(stage);
 
   useDeltaText({
-    atomDelta: deltas("stage"),
-    atomValue: stage,
+    delta: deltas("stage"),
     stop: ({ current, previous }) => previous === null || current === 1,
+    value: stage,
   });
 
   return (

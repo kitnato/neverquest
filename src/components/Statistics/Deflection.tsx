@@ -14,16 +14,16 @@ import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Deflection() {
   const deflectionValue = useRecoilValue(deflection);
-  const isShowingDeflection = useRecoilValue(isShowing("deflection"));
+  const isShowingValue = useRecoilValue(isShowing("deflection"));
   const skillArmorcraft = useRecoilValue(skills("armorcraft"));
 
   useDeltaText({
-    atomDelta: deltas("deflection"),
-    atomValue: deflection,
+    delta: deltas("deflection"),
     stop: ({ previous }) => previous === null || !skillArmorcraft,
+    value: deflection,
   });
 
-  if (!isShowingDeflection) {
+  if (!isShowingValue) {
     return null;
   }
 

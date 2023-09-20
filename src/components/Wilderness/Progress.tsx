@@ -15,9 +15,9 @@ export function Progress() {
   const progressMaximumValue = useRecoilValue(progressMaximum);
 
   useDeltaText({
-    atomDelta: deltas("progress"),
-    atomValue: progress,
+    delta: deltas("progress"),
     stop: ({ current, previous }) => previous === null || current === 0,
+    value: progress,
   });
 
   if (!isWildernessValue) {

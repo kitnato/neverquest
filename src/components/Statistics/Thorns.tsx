@@ -16,8 +16,8 @@ export function Thorns() {
   const thornsValue = useRecoilValue(thorns);
 
   useDeltaText({
-    atomDelta: deltas("thorns"),
-    atomValue: thorns,
+    delta: deltas("thorns"),
+    value: thorns,
   });
 
   if (!isShowingThornsValue) {

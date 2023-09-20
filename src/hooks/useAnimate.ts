@@ -13,13 +13,11 @@ export function useAnimate({
     return;
   },
   stop,
-  tmp,
 }: {
   delta: SetterOrUpdater<number>;
   factor?: number;
   onDelta?: () => void;
   stop: boolean;
-  tmp: string;
 }) {
   const isGameOverValue = useRecoilValue(isGameOver);
 
@@ -42,7 +40,7 @@ export function useAnimate({
       onDelta();
       setHasTicked(false);
     }
-  }, [hasTicked, onDelta, tmp]);
+  }, [hasTicked, onDelta]);
 
   useEffect(() => {
     if (isGameOverValue || stop) {
@@ -68,5 +66,5 @@ export function useAnimate({
     }
 
     return clear;
-  }, [delta, factor, isGameOverValue, stop, tmp]);
+  }, [delta, factor, isGameOverValue, stop]);
 }

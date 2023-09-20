@@ -18,6 +18,9 @@ export const LOCATIONS: LocationData[] = [
     name: "archipelago",
   },
   {
+    name: "arena",
+  },
+  {
     name: "attic",
   },
   {
@@ -176,6 +179,9 @@ export const LOCATIONS: LocationData[] = [
     name: "dream",
   },
   {
+    name: "dump",
+  },
+  {
     name: "dune",
   },
   {
@@ -245,6 +251,9 @@ export const LOCATIONS: LocationData[] = [
   {
     canPluralize: true,
     name: "gulch",
+  },
+  {
+    name: "heap",
   },
   {
     name: "hedge",

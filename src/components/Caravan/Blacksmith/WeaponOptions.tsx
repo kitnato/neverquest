@@ -1,38 +1,39 @@
 import { useState } from "react";
 import { FormControl, FormSelect, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
-import { CraftedGear } from "@neverquest/components/Caravan/Blacksmith/CraftedGear";
-import { CraftGear } from "@neverquest/components/Caravan/Blacksmith/CraftGear";
+import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
+import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { BLACKSMITH_GEAR_LEVEL_MAXIMUM } from "@neverquest/data/caravan";
-import { WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
+import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
+import { WEAPON_BASE, WEAPON_MODIFIER, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
+import { ReactComponent as IconGrip } from "@neverquest/icons/grip.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
-import { WEAPON_CLASSES, type WeaponClass } from "@neverquest/LOCRAN/types";
+import { WEAPON_CLASS_TYPES, type WeaponClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
+import { skills } from "@neverquest/state/skills";
+import { GRIP_TYPES, type Grip } from "@neverquest/types/unions";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
-import {
-  capitalizeAll,
-  formatMilliseconds,
-  formatPercentage,
-} from "@neverquest/utilities/formatters";
-import { generateWeapon } from "@neverquest/utilities/generators";
-import { getGrowthSigmoid } from "@neverquest/utilities/getters";
+import { capitalizeAll, formatPercentage, formatTime } from "@neverquest/utilities/formatters";
+import { generateMeleeWeapon } from "@neverquest/utilities/generators";
+import { getGearPrices, getGrowthSigmoid, getMeleeRanges } from "@neverquest/utilities/getters";
 
 export function WeaponOptions() {
-  const { weapon: craftedWeapon } = useRecoilValue(blacksmithInventory);
+  const [{ weapon: craftedWeapon }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const allowNSFWValue = useRecoilValue(allowNSFW);
+  const siegecraftValue = useRecoilValue(skills("siegecraft"));
   const stageValue = useRecoilValue(stage);
 
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
+  const [weaponGrip, setWeaponGrip] = useState<Grip>("one-handed");
   const [weaponLevel, setWeaponLevel] = useState(stageValue);
 
   const { abilityName, IconAbility, IconGearClass, showingType } =
@@ -40,25 +41,41 @@ export function WeaponOptions() {
 
   const isShowingValue = useRecoilValue(isShowing(showingType));
 
-  const maximumWeaponLevel = stageValue + BLACKSMITH_GEAR_LEVEL_MAXIMUM;
-  const weapon = generateWeapon({
-    allowNSFW: allowNSFWValue,
-    gearClass: weaponClass,
-    hasPrefix: true,
-    hasSuffix: Math.random() <= getGrowthSigmoid(weaponLevel),
-    level: weaponLevel,
-    modality: "melee",
-    tags:
-      weaponLevel < stageValue - 1
-        ? ["lowQuality"]
-        : weaponLevel > maximumWeaponLevel
-        ? ["highQuality"]
-        : undefined,
+  const factor = getGrowthSigmoid(weaponLevel);
+  const { coinPrice, scrapPrice } = getGearPrices({
+    factor,
+    ...WEAPON_BASE,
+    modifier: WEAPON_MODIFIER[weaponGrip].price,
   });
-  const { ranges, staminaCost, weight } = weapon;
+  const { abilityChance, damage, rate, staminaCost, weight } = getMeleeRanges({
+    factor,
+    gearClass: weaponClass,
+    grip: weaponGrip,
+  });
+  const maximumWeaponLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
+
+  const handleCraft = () =>
+    setBlacksmithInventory((current) => ({
+      ...current,
+      weapon: generateMeleeWeapon({
+        allowNSFW: allowNSFWValue,
+        gearClass: weaponClass,
+        grip: weaponGrip,
+        hasPrefix: true,
+        hasSuffix: Math.random() <= getGrowthSigmoid(weaponLevel),
+        level: weaponLevel,
+        tags:
+          weaponLevel < stageValue - 1
+            ? ["lowQuality"]
+            : weaponLevel > maximumWeaponLevel
+            ? ["highQuality"]
+            : undefined,
+      }),
+    }));
+  const handleTransfer = () => setBlacksmithInventory((current) => ({ ...current, weapon: null }));
 
   return (
-    <>
+    <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
         <IconDisplay
           contents={
@@ -93,9 +110,9 @@ export function WeaponOptions() {
               onChange={({ target: { value } }) => setWeaponClass(value as WeaponClass)}
               value={weaponClass}
             >
-              {WEAPON_CLASSES.map((weaponClass) => (
-                <option key={weaponClass} value={weaponClass}>
-                  {capitalizeAll(weaponClass)}
+              {WEAPON_CLASS_TYPES.map((current) => (
+                <option key={current} value={current}>
+                  {capitalizeAll(current)}
                 </option>
               ))}
             </FormSelect>
@@ -105,17 +122,35 @@ export function WeaponOptions() {
           tooltip="Class"
         />
 
+        {siegecraftValue && (
+          <IconDisplay
+            contents={
+              <FormSelect
+                onChange={({ target: { value } }) => setWeaponGrip(value as Grip)}
+                value={weaponGrip}
+              >
+                {GRIP_TYPES.map((current) => (
+                  <option key={current} value={current}>
+                    {capitalizeAll(current)}
+                  </option>
+                ))}
+              </FormSelect>
+            }
+            Icon={IconGrip}
+            iconProps={{ overlayPlacement: "left" }}
+            tooltip="Grip"
+          />
+        )}
+
         <IconDisplay
-          contents={`${ranges.damage.minimum}-${ranges.damage.maximum}`}
+          contents={`${damage.minimum}-${damage.maximum}`}
           Icon={IconWeaponDamage}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Damage"
         />
 
         <IconDisplay
-          contents={`${formatMilliseconds(ranges.rate.minimum)}-${formatMilliseconds(
-            ranges.rate.maximum,
-          )}`}
+          contents={`${formatTime(rate.minimum)}-${formatTime(rate.maximum)}`}
           Icon={IconWeaponAttackRate}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Attack rate"
@@ -124,8 +159,8 @@ export function WeaponOptions() {
         <IconDisplay
           contents={
             isShowingValue
-              ? `${formatPercentage(ranges.ability.minimum)}-${formatPercentage(
-                  ranges.ability.maximum,
+              ? `${formatPercentage(abilityChance.minimum)}-${formatPercentage(
+                  abilityChance.maximum,
                 )}`
               : LABEL_UNKNOWN
           }
@@ -135,14 +170,14 @@ export function WeaponOptions() {
         />
 
         <IconDisplay
-          contents={staminaCost}
+          contents={`${staminaCost.minimum}-${staminaCost.maximum}`}
           Icon={IconStamina}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Stamina cost"
         />
 
         <IconDisplay
-          contents={weight}
+          contents={`${weight.minimum}-${weight.maximum}`}
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
@@ -151,7 +186,11 @@ export function WeaponOptions() {
 
       <hr />
 
-      {craftedWeapon === null ? <CraftGear gear={weapon} /> : <CraftedGear gear={craftedWeapon} />}
-    </>
+      {craftedWeapon === null ? (
+        <CraftGear coinPrice={coinPrice} onCraft={handleCraft} scrapPrice={scrapPrice} />
+      ) : (
+        <CraftedGear gearItem={craftedWeapon} onTransfer={handleTransfer} />
+      )}
+    </Stack>
   );
 }

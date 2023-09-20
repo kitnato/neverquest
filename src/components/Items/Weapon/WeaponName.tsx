@@ -10,19 +10,22 @@ import { GearLevelDetail } from "@neverquest/components/Items/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Items/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
 import { type WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
+import { ReactComponent as IconAmmunition } from "@neverquest/icons/ammunition.svg";
+import { ReactComponent as IconGrip } from "@neverquest/icons/grip.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
 import { ReactComponent as IconWeaponDamagePerSecond } from "@neverquest/icons/weapon-damage-per-second.svg";
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
-import { weapon as weaponEquipped } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { weapon as weaponEquipped } from "@neverquest/state/items";
 import { showDamagePerSecond } from "@neverquest/state/settings";
 import type { Weapon } from "@neverquest/types";
+import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import {
   capitalizeAll,
   formatFloat,
-  formatMilliseconds,
   formatPercentage,
+  formatTime,
 } from "@neverquest/utilities/formatters";
 import { getDamagePerRate } from "@neverquest/utilities/getters";
 
@@ -79,14 +82,14 @@ export function WeaponName({
                 </td>
               </tr>
 
-              <AppliedGems slot="weapon" />
+              <AppliedGems gearItem={weapon} />
 
               <tr>
                 <td className={CLASS_TABLE_CELL_ITALIC}>Attack rate:</td>
 
                 <td>
                   <IconImage Icon={IconWeaponAttackRate} size="tiny" />
-                  &nbsp;{formatMilliseconds(rate)}
+                  &nbsp;{formatTime(rate)}
                   {showComparison && (
                     <GearComparison
                       difference={rate - weaponEquippedValue.rate}
@@ -117,6 +120,28 @@ export function WeaponName({
                         showingType="weapon"
                       />
                     )}
+                  </td>
+                </tr>
+              )}
+
+              {isMelee(weapon) && (
+                <tr>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Grip:</td>
+
+                  <td>
+                    <IconImage Icon={IconGrip} size="tiny" />
+                    &nbsp;{capitalizeAll(weapon.grip)}
+                  </td>
+                </tr>
+              )}
+
+              {isRanged(weapon) && (
+                <tr>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Ammunition cost:</td>
+
+                  <td>
+                    <IconImage Icon={IconAmmunition} size="tiny" />
+                    &nbsp;{weapon.ammunitionCost}
                   </td>
                 </tr>
               )}

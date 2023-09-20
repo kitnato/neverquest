@@ -76,16 +76,6 @@ Upon purchasing the Journal trinket, unlocks quests that function similarly to a
 - Enter a name
 - Complete 5/10/25/50/100/all quests
 
-#### Passive skills
-
-##### Berserking
-
-Allows the use of a one-handed weapon in the [off-hand](./src/data/manual.md#off-hand) slot.
-
-##### Siegecraft
-
-Allows the use of [two-handed](#two-handed) weapons.
-
 #### Retirement
 
 When reaching a certain power level, the character can retire. This restarts the quest from stage 0 with power level 0, no skills and masteries at rank 0, however all hired caravan crew are retained. A [trait](#traits) can be also chosen that confers a permanent bonus.
@@ -107,23 +97,7 @@ Traits are permanent passive abilities acquired upon [retiring](#retirement) for
 - Tank: Shields double total protection.
 - Tormentor: Monsters no longer regenerate out of combat.
 
-#### Weapons
-
-##### Dual wield
-
-A one-handed weapon in each slot. Provides a penalty to damage and attack rate to the [off-hand](./src/data/manual.md#off-hand) weapon.
-
-##### Two-handed
-
-Takes up both the main and off-hand slots.
-
-- 2 slots
-- High damage
-- Low attack rate
-- High stamina requirement
-- Chance to execute monsters at 20% health or under
-
-### Nice-to-haves
+### Future development
 
 Features that require more ideation and refinement.
 

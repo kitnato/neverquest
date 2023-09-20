@@ -168,6 +168,12 @@ Amount of damage that is discarded from the total when defending.
 
 Determined primarily through [armor](#armor).
 
+#### Range
+
+The distance the monster needs to travel once engaged before it can start attacking.
+
+Determined by the currently-equipped [ranged weapon](#ranged-weapons) and affected by the [marksmanship](#marksmanship) mastery.
+
 #### Recovery rate
 
 Time duration until full [recovery](#recovery) from a monster's successful attack.
@@ -312,7 +318,7 @@ The looted resources can only be collected when the stage is completed, i.e. onc
 
 A successful parry [absorbs](#parry-absorption) a percentage of the total damage of an attack and [reflects](#parry-damage) a percentage back to the attacker. These percentages are determined by the [Finesse](#finesse) mastery rank.
 
-The overall chance to parry an attack is determined by the [parry chance](#parry-chance), which is influenced by currently-equipped gear ([slashing weapons](#slashing-weapon). When parrying occurs, the stamina cost of the currently-equipped weapon is paid. If [exhausted](#exhaustion), no parrying can occur.
+The overall chance to parry an attack is determined by the [parry chance](#parry-chance), which is affected by currently-equipped gear ([slashing weapons](#slashing-weapon). When parrying occurs, the stamina cost of the currently-equipped weapon is paid. If [exhausted](#exhaustion), no parrying can occur.
 
 Required skill: [Escrime](#escrime).
 
@@ -330,7 +336,7 @@ An item can either be;
 - b) a consumable like a [potion](#potions), or
 - c) a [trinket](#trinkets) that grants a special effect and/or an action while part of the inventory.
 
-Every item, apart from the [knapsack](#knapsack), has an associated weight that influences [encumbrance](#encumbrance).
+Every item, apart from the [knapsack](#knapsack), has an associated weight that affects [encumbrance](#encumbrance).
 
 ### Knapsack
 
@@ -356,9 +362,13 @@ Weapons are the main way of fighting monsters. Every weapon type and class has s
 
 The type of weapon determines how combat occurs.
 
-###### Melee
+###### Melee weapons
 
-Standard type that has no special features.
+Close-quarter combat starts the moment the monster is engaged, with either party's [attack rate](#attack-rate) determining the pace of combat.
+
+###### Ranged weapons
+
+All ranged weapons have a certain [range](#range) that determines how long the monster must travel before it can start attacking once it's engaged. Ranged weapons can only be used once the [archery](#archery) skill has been acquired.
 
 ##### Weapon grip
 
@@ -371,9 +381,19 @@ A weapon can either by one-handed or two-handed, taking up the corresponding gea
 - High attack rate
 - Low stamina requirement
 
+###### Two-handed
+
+Takes up both the main and off-hand slots.
+
+- 2 slots
+- High damage
+- Low attack rate
+- High stamina requirement
+- Chance to execute monsters at 20% health or under
+
 ##### Weapon class
 
-Whatever its [type](#weapon-type) or [grip](#weapon-grip), a weapon falls into one of several classes that intrinsically grants certain modifiers. These modifiers are only relevant if the associated [passive skill](#passive-skills) is acquired.
+Whatever its [type](#weapon-type) or [grip](#weapon-grip), a weapon falls into one of several classes that intrinsically grants certain modifiers. These modifiers are only relevant if the associated [skill](#skills) is acquired.
 
 ###### Unarmed
 
@@ -552,6 +572,12 @@ Progress is gained by using [slashing weapons](#slashing-weapon). Each rank incr
 
 Required skill: [Escrime](#escrime).
 
+### Marksmanship
+
+Progress is gained by using [ranged weapons](#ranged-weapons). Each rank increases [range](#range) and thus distance of the monster when first engaged.
+
+Required skill: [Archery](#archery).
+
 ### Might
 
 Progress is gained by using [blunt weapons](#blunt-weapon). Each rank increases [stagger duration](#stagger-duration).
@@ -572,45 +598,45 @@ Required skill: [Armorcraft](#armorcraft).
 
 ## Skills
 
-Skills are acquired from the [mercenary](#mercenary) and bestow a permanent ability.
+Skills are acquired from the [mercenary](#mercenary) and bestow a permanent ability. They can unlock certain [attributes](#attributes), [statistics](#statistics) or [masteries](#mastery).
 
-### Passive skills
-
-Permanent effects that always provide their benefits once they are acquired.
-
-#### Physical (passive)
-
-Skills that unlock certain [attributes](#attributes), [statistics](#statistics) or [masteries](#mastery). Acquired from the [Mercenary](#mercenary).
-
-##### Anatomy
+### Anatomy
 
 Unlocks [bleed](#bleed) when using [piercing](#piercing-weapon) weapons. Also unlocks the [Cruelty](#cruelty) mastery.
 
-##### Armorcraft
+### Archery
 
-Allows the use and knowledge of [plate](#plate-armor) armor. Also unlocks the [resilience](#resilience) mastery and the [deflection](#deflection) ability.
+Allows the use of [ranged weapons](#ranged-weapons). Also unlocks the [marksmanship](#marksmanship) mastery.
 
-##### Assassination
+### Armorcraft
+
+Allows the use of [plate](#plate-armor) armor. Also unlocks the [resilience](#resilience) mastery and the [deflection](#deflection) ability.
+
+### Assassination
 
 Unlocks [dexterity](#dexterity) and [perception](#perception) attributes.
 
-##### Calisthenics
+### Calisthenics
 
 Unlocks the [fortitude](#fortitude) and [vigor](#vigor) attributes.
 
-##### Escrime
+### Escrime
 
 Unlocks the ability to [parry](#parry) when using [slashing](#slashing-weapon) weapons. Also unlocks the [Finesse](#finesse) mastery.
 
-##### Evasion
+### Evasion
 
 Unlocks [agility](#agility) attribute and [dodge chance](#dodge-chance) modifiers on gear.
 
-##### Shieldcraft
+### Siegecraft
+
+Allows the use of [two-handed](#two-handed) weapons.
+
+### Shieldcraft
 
 Allows the use and knowledge of [medium](#medium-shield) and [tower](#tower-shield) shields. Also unlocks the [Stability](#stability) mastery.
 
-##### Traumatology
+### Traumatology
 
 Unlocks the ability to [stagger](#stagger) when using [blunt](#blunt-weapon) weapons and [blocking](#block) with shields. Also unlocks the [Might](#might) mastery.
 

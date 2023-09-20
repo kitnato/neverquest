@@ -35,7 +35,7 @@ export const MASTERIES: Record<
   },
   finesse: {
     base: 0,
-    description: "Influences damage absorbed and reflected when parrying.",
+    description: "Affects damage absorbed and reflected when parrying.",
     Icon: IconFinesse,
     increment: 0.02,
     instructions: "Trains when parrying.",
@@ -44,7 +44,7 @@ export const MASTERIES: Record<
   },
   marksmanship: {
     base: 0,
-    description: "Influences the distance a monster must close before it can attack.",
+    description: "Affects the distance a monster must close before it can attack.",
     Icon: IconMarksmanship,
     increment: 0.03,
     instructions: "Trains when dealing damage with a ranged weapon.",
@@ -62,7 +62,7 @@ export const MASTERIES: Record<
   },
   resilience: {
     base: 0,
-    description: "Influences recovery rate.",
+    description: "Affects recovery rate.",
     Icon: IconResilience,
     increment: 0.01,
     instructions: "Trains when getting hit.",

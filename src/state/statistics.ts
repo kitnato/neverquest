@@ -120,7 +120,7 @@ export const damageTotal = withStateKey("damageTotal", (key) =>
       get(damage) +
       get(weapon).damage +
       Object.values(get(totalElementalEffects).weapon).reduce(
-        (current, { damage }) => current + damage,
+        (aggregator, { damage }) => aggregator + damage,
         0,
       ),
     key,
@@ -334,7 +334,7 @@ export const thorns = withStateKey("thorns", (key) =>
   selector({
     get: ({ get }) =>
       Object.values(get(elementalEffects).armor).reduce(
-        (current, { damage }) => current + damage,
+        (aggregator, { damage }) => aggregator + damage,
         0,
       ),
     key,

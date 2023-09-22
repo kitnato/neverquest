@@ -1,8 +1,10 @@
 import { atom, selector, selectorFamily } from "recoil";
 
+import { skills } from "./skills";
 import { ENCUMBRANCE } from "@neverquest/data/inventory";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { InventoryItem } from "@neverquest/types";
+import { isArmor, isGear, isMelee, isRanged, isShield } from "@neverquest/types/type-guards";
 
 // SELECTORS
 
@@ -18,11 +20,38 @@ export const canFit = withStateKey("canFit", (key) =>
 
 export const encumbrance = withStateKey("encumbrance", (key) =>
   selector({
-    get: ({ get }) => {
-      const inventoryValue = get(inventory);
+    get: ({ get }) => get(inventory).reduce((aggregator, { weight }) => aggregator + weight, 0),
+    key,
+  }),
+);
 
-      return inventoryValue.reduce((current, item) => current + item.weight, 0);
-    },
+export const equippableItems = withStateKey("equippableItems", (key) =>
+  selector<Record<string, boolean>>({
+    get: ({ get }) =>
+      get(inventory).reduce((aggregator, { id, ...current }) => {
+        let canEquip = isGear(current) ? !current.isEquipped : false;
+
+        if (isArmor(current) && current.gearClass === "plate") {
+          canEquip = get(skills("armorcraft"));
+        }
+
+        if (isMelee(current) && current.grip === "two-handed") {
+          canEquip = get(skills("siegecraft"));
+        }
+
+        if (isRanged(current)) {
+          canEquip = get(skills("archery"));
+        }
+
+        if (isShield(current) && current.gearClass === "tower") {
+          canEquip = get(skills("shieldcraft"));
+        }
+
+        return {
+          ...aggregator,
+          [id]: canEquip,
+        };
+      }, {}),
     key,
   }),
 );

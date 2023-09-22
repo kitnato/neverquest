@@ -112,13 +112,14 @@ export const SHOWING_TYPES = [
   "armor",
   "attackRate",
   "attackRateDetails",
-  "statistics",
+  "bleed",
   "capabilities",
   "coins",
   "conditional",
   "crewHiring",
   "criticalRating",
   "damageDetails",
+  "deflection",
   "dodge",
   "dodgePenalty",
   "essence",
@@ -129,13 +130,16 @@ export const SHOWING_TYPES = [
   "masteries",
   "monsterAilments",
   "monsterOffense",
+  "parry",
   "protection",
   "recovery",
   "scrap",
   "offhand",
   "skills",
+  "stagger",
   "stamina",
   "staminaDetails",
+  "statistics",
   "thorns",
   "weapon",
   "weight",
@@ -204,6 +208,7 @@ export type StateKey =
   | "elementalEffects"
   | "encumbrance"
   | "encumbranceMaximum"
+  | "equippableItems"
   | "essence"
   | "essenceAbsorbed"
   | "essenceLoot"

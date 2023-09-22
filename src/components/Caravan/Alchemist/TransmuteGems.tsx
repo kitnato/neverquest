@@ -24,9 +24,9 @@ export function TransmuteGems() {
   );
 
   const transmutation = GEM_TYPES.reduce(
-    (current, gem) => ({
-      ...current,
-      [gem]: gems.find(({ item: { type }, stack }) => (type === gem ? stack : 0)),
+    (aggregator, current) => ({
+      ...aggregator,
+      [current]: gems.find(({ item: { type }, stack }) => (type === current ? stack : 0)),
     }),
     { ruby: 0, sapphire: 0, topaz: 0 },
   );

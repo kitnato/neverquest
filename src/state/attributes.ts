@@ -1,6 +1,6 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
-import { ATTRIBUTES } from "@neverquest/data/attributes";
+import { ATTRIBUTES, ATTRIBUTES_ORDER } from "@neverquest/data/attributes";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { essence } from "@neverquest/state/resources";
 import type { UnlockedState } from "@neverquest/types";
@@ -76,8 +76,8 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =
 export const level = withStateKey("level", (key) =>
   selector({
     get: ({ get }) =>
-      Object.keys(ATTRIBUTES).reduce(
-        (current, type) => current + get(attributes(type as Attribute)).points,
+      ATTRIBUTES_ORDER.reduce(
+        (aggregator, current) => aggregator + get(attributes(current)).points,
         0,
       ),
     key,

@@ -16,7 +16,6 @@ import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { SHIELD_CLASS_TYPES, type ShieldClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
-import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
@@ -25,15 +24,13 @@ import { generateShield } from "@neverquest/utilities/generators";
 import { getGearPrices, getGrowthSigmoid, getShieldRanges } from "@neverquest/utilities/getters";
 
 export function ShieldOptions() {
-  const [{ shield: craftedShield }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const allowNSFWValue = useRecoilValue(allowNSFW);
+  const [{ shield: craftedShield }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
+  const shieldcraftValue = useRecoilValue(skills("shieldcraft"));
   const stageValue = useRecoilValue(stage);
 
   const [shieldClass, setShieldClass] = useState<ShieldClass>("small");
   const [shieldLevel, setShieldLevel] = useState(stageValue);
-
-  const isShowingStagger = useRecoilValue(isShowing("stagger"));
-  const skillShieldcraft = useRecoilValue(skills("shieldcraft"));
 
   const { Icon } = SHIELD_SPECIFICATIONS[shieldClass];
   const factor = getGrowthSigmoid(shieldLevel);
@@ -124,13 +121,13 @@ export function ShieldOptions() {
         {stagger !== null && (
           <IconDisplay
             contents={
-              isShowingStagger
+              shieldcraftValue
                 ? `${formatPercentage(stagger.minimum)}-${formatPercentage(stagger.maximum)}`
                 : LABEL_UNKNOWN
             }
-            Icon={isShowingStagger ? IconShieldStagger : IconUnknown}
+            Icon={shieldcraftValue ? IconShieldStagger : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
-            tooltip={isShowingStagger ? "Stagger chance" : LABEL_UNKNOWN}
+            tooltip={shieldcraftValue ? "Stagger chance" : LABEL_UNKNOWN}
           />
         )}
 
@@ -151,7 +148,7 @@ export function ShieldOptions() {
 
       <hr />
 
-      {!skillShieldcraft && shieldClass === "tower" ? (
+      {!shieldcraftValue && shieldClass === "tower" ? (
         <span className="text-center">Cannot use without training.</span>
       ) : craftedShield === null ? (
         <CraftGear coinPrice={coinPrice} onCraft={handleCraft} scrapPrice={scrapPrice} />

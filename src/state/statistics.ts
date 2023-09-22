@@ -25,11 +25,7 @@ import { stackItems } from "@neverquest/utilities/helpers";
 
 export const attackRate = withStateKey("attackRate", (key) =>
   selector({
-    get: ({ get }) => {
-      const total = get(attributeStatistic("speed"));
-
-      return total + total * get(powerBonus("speed"));
-    },
+    get: ({ get }) => get(attributeStatistic("speed")) * get(powerBonus("speed")),
     key,
   }),
 );
@@ -85,22 +81,14 @@ export const block = withStateKey("block", (key) =>
 
 export const criticalChance = withStateKey("criticalChance", (key) =>
   selector({
-    get: ({ get }) => {
-      const total = get(attributeStatistic("dexterity"));
-
-      return total + total * get(powerBonus("dexterity"));
-    },
+    get: ({ get }) => get(attributeStatistic("dexterity")) * (1 + get(powerBonus("dexterity"))),
     key,
   }),
 );
 
 export const criticalDamage = withStateKey("criticalDamage", (key) =>
   selector({
-    get: ({ get }) => {
-      const total = get(attributeStatistic("perception"));
-
-      return total + total * get(powerBonus("perception"));
-    },
+    get: ({ get }) => get(attributeStatistic("perception")) * (1 + get(powerBonus("perception"))),
     key,
   }),
 );
@@ -121,11 +109,7 @@ export const criticalStrike = withStateKey("criticalStrike", (key) =>
 
 export const damage = withStateKey("damage", (key) =>
   selector({
-    get: ({ get }) => {
-      const total = get(attributeStatistic("strength"));
-
-      return Math.round(total + total * get(powerBonus("strength")));
-    },
+    get: ({ get }) => get(attributeStatistic("strength")) * (1 + get(powerBonus("strength"))),
     key,
   }),
 );
@@ -165,16 +149,10 @@ export const deflection = withStateKey("deflection", (key) =>
 
 export const dodge = withStateKey("dodge", (key) =>
   selector({
-    get: ({ get }) => {
-      const { staminaCost } = get(armor);
-      const total = get(attributeStatistic("agility"));
-
-      if (staminaCost === Infinity) {
-        return 0;
-      }
-
-      return total + total * get(powerBonus("agility"));
-    },
+    get: ({ get }) =>
+      get(armor).staminaCost === Infinity
+        ? 0
+        : get(attributeStatistic("agility")) * (1 + get(powerBonus("agility"))),
     key,
   }),
 );
@@ -244,17 +222,6 @@ export const elementalEffects = withStateKey("elementalEffects", (key) =>
   }),
 );
 
-export const lootBonus = withStateKey("lootBonus", (key) =>
-  selector({
-    get: ({ get }) => {
-      const total = get(attributeStatistic("luck"));
-
-      return get(ownedItem("antique coin")) !== null ? total + total * get(powerBonus("luck")) : 0;
-    },
-    key,
-  }),
-);
-
 export const parryAbsorption = withStateKey("parryAbsorption", (key) =>
   selector({
     get: ({ get }) => PARRY_ABSORPTION + get(masteryStatistic("finesse")),
@@ -262,7 +229,7 @@ export const parryAbsorption = withStateKey("parryAbsorption", (key) =>
   }),
 );
 
-export const parryChance = withStateKey("parryChance", (key) =>
+export const parry = withStateKey("parry", (key) =>
   selector({
     get: ({ get }) => {
       const { abilityChance, gearClass } = get(weapon);
@@ -282,7 +249,7 @@ export const parryDamage = withStateKey("parryDamage", (key) =>
 
 export const parryRating = withStateKey("parryRating", (key) =>
   selector({
-    get: ({ get }) => Math.round(get(parryChance) * get(parryAbsorption) * get(parryDamage) * 1000),
+    get: ({ get }) => Math.round(get(parry) * get(parryAbsorption) * get(parryDamage) * 1000),
     key,
   }),
 );
@@ -328,22 +295,15 @@ export const recoveryRate = withStateKey("recoveryRate", (key) =>
 
 export const reserveRegenerationAmount = withStateKey("reserveRegenerationAmount", (key) =>
   selector({
-    get: ({ get }) => {
-      const total = get(attributeStatistic("fortitude"));
-
-      return Math.round(total + total * get(powerBonus("fortitude")));
-    },
+    get: ({ get }) =>
+      Math.round(get(attributeStatistic("fortitude")) * (1 + get(powerBonus("fortitude")))),
     key,
   }),
 );
 
 export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (key) =>
   selector({
-    get: ({ get }) => {
-      const total = get(attributeStatistic("vigor"));
-
-      return total + total * get(powerBonus("vigor"));
-    },
+    get: ({ get }) => get(attributeStatistic("vigor")) * (1 + get(powerBonus("vigor"))),
     key,
   }),
 );
@@ -353,13 +313,13 @@ export const staggerRating = withStateKey("staggerRating", (key) =>
     get: ({ get }) => {
       const mightValue = get(masteryStatistic("might"));
 
-      return Math.round(get(shield).stagger * mightValue + get(staggerWeapon) * mightValue);
+      return Math.round(get(shield).stagger * mightValue + get(stagger) * mightValue);
     },
     key,
   }),
 );
 
-export const staggerWeapon = withStateKey("staggerWeapon", (key) =>
+export const stagger = withStateKey("stagger", (key) =>
   selector({
     get: ({ get }) => {
       const { abilityChance, gearClass } = get(weapon);

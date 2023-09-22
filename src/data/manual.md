@@ -62,10 +62,6 @@ Affects maximum [total stamina](#stamina).
 
 Affects [stamina regeneration rate](#stamina-regeneration-rate).
 
-#### Luck
-
-Affects the amount of loot dropped by monsters. Must be included with a special [trinket](#trinkets).
-
 #### Perception
 
 Affects [critical damage](#critical-damage). Required skill: [Assassination](#assassination).

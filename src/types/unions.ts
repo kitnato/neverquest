@@ -3,7 +3,6 @@ export type Attribute =
   | "dexterity"
   | "endurance"
   | "fortitude"
-  | "luck"
   | "perception"
   | "speed"
   | "strength"
@@ -52,7 +51,6 @@ export type Delta =
   | "health"
   | "healthRegenerationRate"
   | "level"
-  | "lootBonus"
   | "marksmanship"
   | "might"
   | "monsterHealth"
@@ -114,40 +112,30 @@ export const SHOWING_TYPES = [
   "armor",
   "attackRate",
   "attackRateDetails",
-  "capabilitiesButton",
-  "bleed",
-  "block",
+  "statistics",
+  "capabilities",
   "coins",
+  "conditional",
   "crewHiring",
   "criticalRating",
   "damageDetails",
-  "deflection",
   "dodge",
   "dodgePenalty",
   "essence",
-  "execution",
   "gameOver",
   "gearClass",
   "healthDetails",
   "loot",
-  "lootBonus",
-  "lootBonusDetails",
   "masteries",
   "monsterAilments",
   "monsterOffense",
-  "parry",
   "protection",
   "recovery",
-  "reserveDetails",
   "scrap",
   "offhand",
   "skills",
-  "stability",
-  "stagger",
   "stamina",
   "staminaDetails",
-  "statistics",
-  "range",
   "thorns",
   "weapon",
   "weight",
@@ -171,6 +159,7 @@ export type Skill = (typeof SKILL_TYPES)[number];
 
 export type StateKey =
   | "allowNSFW"
+  | "ammunition"
   | "appliedGems"
   | "areAttributesIncreasable"
   | "armor"
@@ -261,7 +250,6 @@ export type StateKey =
   | "level"
   | "location"
   | "locationName"
-  | "lootBonus"
   | "lootingDuration"
   | "lowHealthWarning"
   | "masteries"
@@ -288,8 +276,8 @@ export type StateKey =
   | "name"
   | "notifyOverEncumbrance"
   | "ownedItem"
+  | "parry"
   | "parryAbsorption"
-  | "parryChance"
   | "parryDamage"
   | "parryRating"
   | "poisonDuration"
@@ -317,8 +305,8 @@ export type StateKey =
   | "stability"
   | "stage"
   | "stageMaximum"
+  | "stagger"
   | "staggerRating"
-  | "staggerWeapon"
   | "stamina"
   | "staminaMaximum"
   | "staminaMaximumTotal"
@@ -339,3 +327,5 @@ export const TRINKET_TYPES = [
   "tome of power",
 ] as const;
 export type Trinket = (typeof TRINKET_TYPES)[number];
+
+export type WeaponAbility = "bleed" | "parry" | "stagger";

@@ -3,7 +3,6 @@ import { useRecoilCallback } from "recoil";
 import { ARMOR_NONE, KNAPSACK_SIZE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
-import { attributes } from "@neverquest/state/attributes";
 import {
   canFit,
   encumbranceMaximum,
@@ -61,16 +60,6 @@ export function useAcquireItem() {
 
           set(isShowing("weight"), true);
         } else {
-          if (type === "antique coin") {
-            set(isShowing("lootBonus"), true);
-
-            set(attributes("luck"), (current) => ({ ...current, isUnlocked: true }));
-          }
-
-          if (type === "tome of power") {
-            set(isShowing("lootBonusDetails"), true);
-          }
-
           set(inventory, (current) => current.concat(item));
         }
 

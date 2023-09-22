@@ -7,6 +7,7 @@ import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { WEAPON_BASE, WEAPON_MODIFIER, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
+import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { ReactComponent as IconRange } from "@neverquest/icons/range.svg";
@@ -17,8 +18,8 @@ import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-dam
 import { WEAPON_CLASS_TYPES, type WeaponClass } from "@neverquest/LOCRAN/types";
 import { fletcherInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
-import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
+import { skills } from "@neverquest/state/skills";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 import { generateRangedWeapon } from "@neverquest/utilities/generators";
@@ -33,10 +34,9 @@ export function RangedWeaponOptions() {
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
   const [weaponLevel, setWeaponLevel] = useState(stageValue);
 
-  const { abilityName, IconAbility, IconGearClass, showingType } =
-    WEAPON_SPECIFICATIONS[weaponClass];
+  const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[weaponClass];
 
-  const isShowingValue = useRecoilValue(isShowing(showingType));
+  const skillValue = useRecoilValue(skills(WEAPON_ABILITY_SKILLS[ability]));
 
   const factor = getGrowthSigmoid(weaponLevel);
   const { coinPrice, scrapPrice } = getGearPrices({
@@ -138,15 +138,15 @@ export function RangedWeaponOptions() {
 
         <IconDisplay
           contents={
-            isShowingValue
+            skillValue
               ? `${formatPercentage(abilityChance.minimum)}-${formatPercentage(
                   abilityChance.maximum,
                 )}`
               : LABEL_UNKNOWN
           }
-          Icon={isShowingValue ? IconAbility : IconUnknown}
+          Icon={skillValue ? IconAbility : IconUnknown}
           iconProps={{ overlayPlacement: "left" }}
-          tooltip={isShowingValue ? `${abilityName} chance` : LABEL_UNKNOWN}
+          tooltip={skillValue ? `${capitalizeAll(ability)} chance` : LABEL_UNKNOWN}
         />
 
         <IconDisplay

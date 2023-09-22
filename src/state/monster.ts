@@ -16,7 +16,7 @@ import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
 import { weapon } from "@neverquest/state/items";
 import { skills } from "@neverquest/state/skills";
-import { bleedDamage, lootBonus, range, totalElementalEffects } from "@neverquest/state/statistics";
+import { bleedDamage, range, totalElementalEffects } from "@neverquest/state/statistics";
 import {
   ELEMENTAL_TYPES,
   MONSTER_AILMENT_TYPES,
@@ -194,7 +194,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
       const isBossValue = get(isBoss);
       const stageValue = get(stage);
       const factor = getGrowthTriangular(stageValue) / attenuation;
-      const totalBonus = 1 + get(progress) * bonus + get(lootBonus) + (isBossValue ? boss : 0);
+      const totalBonus = 1 + get(progress) * bonus + (isBossValue ? boss : 0);
 
       return {
         coins: Math.round((coins + coins * factor) * totalBonus),

@@ -33,8 +33,8 @@ import {
   block,
   deflection,
   dodge,
+  parry,
   parryAbsorption,
-  parryChance,
   parryDamage,
   protection,
   recoveryRate,
@@ -97,7 +97,7 @@ export function useDefend() {
         const deltaMonsterHealth: DeltaDisplay = [];
         const deltaStamina: DeltaDisplay = [];
 
-        const hasParried = get(skills("escrime")) && Math.random() <= get(parryChance);
+        const hasParried = get(skills("escrime")) && Math.random() <= get(parry);
 
         // If parrying occurs, check & apply stamina cost.
         if (hasParried) {

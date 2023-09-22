@@ -28,9 +28,8 @@ import { getArmorRanges, getGearPrices, getGrowthSigmoid } from "@neverquest/uti
 export function ArmorOptions() {
   const [{ armor: craftedArmor }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const allowNSFWValue = useRecoilValue(allowNSFW);
-  const isShowingDeflection = useRecoilValue(isShowing("deflection"));
   const isShowingDodge = useRecoilValue(isShowing("dodge"));
-  const skillArmorcraft = useRecoilValue(skills("armorcraft"));
+  const armorcraftValue = useRecoilValue(skills("armorcraft"));
   const stageValue = useRecoilValue(stage);
 
   const [armorClass, setArmorClass] = useState<ArmorClass>("hide");
@@ -125,13 +124,13 @@ export function ArmorOptions() {
         {deflection !== null && (
           <IconDisplay
             contents={
-              isShowingDeflection
+              armorcraftValue
                 ? `${formatPercentage(deflection.minimum)}-${formatPercentage(deflection.maximum)}`
                 : LABEL_UNKNOWN
             }
-            Icon={isShowingDeflection ? IconDeflection : IconUnknown}
+            Icon={armorcraftValue ? IconDeflection : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
-            tooltip={isShowingDeflection ? "Deflection chance" : LABEL_UNKNOWN}
+            tooltip={armorcraftValue ? "Deflection chance" : LABEL_UNKNOWN}
           />
         )}
 
@@ -156,7 +155,7 @@ export function ArmorOptions() {
 
       <hr />
 
-      {!skillArmorcraft && armorClass === "plate" ? (
+      {!armorcraftValue && armorClass === "plate" ? (
         <span className="text-center">Cannot use without training.</span>
       ) : craftedArmor === null ? (
         <CraftGear coinPrice={coinPrice} onCraft={handleCraft} scrapPrice={scrapPrice} />

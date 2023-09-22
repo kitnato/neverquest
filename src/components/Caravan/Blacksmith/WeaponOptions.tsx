@@ -7,6 +7,7 @@ import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { WEAPON_BASE, WEAPON_MODIFIER, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
+import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { ReactComponent as IconGrip } from "@neverquest/icons/grip.svg";
@@ -17,7 +18,6 @@ import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-dam
 import { WEAPON_CLASS_TYPES, type WeaponClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
-import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
 import { GRIP_TYPES, type Grip } from "@neverquest/types/unions";
@@ -36,10 +36,9 @@ export function WeaponOptions() {
   const [weaponGrip, setWeaponGrip] = useState<Grip>("one-handed");
   const [weaponLevel, setWeaponLevel] = useState(stageValue);
 
-  const { abilityName, IconAbility, IconGearClass, showingType } =
-    WEAPON_SPECIFICATIONS[weaponClass];
+  const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[weaponClass];
 
-  const isShowingValue = useRecoilValue(isShowing(showingType));
+  const skillValue = useRecoilValue(skills(WEAPON_ABILITY_SKILLS[ability]));
 
   const factor = getGrowthSigmoid(weaponLevel);
   const { coinPrice, scrapPrice } = getGearPrices({
@@ -158,15 +157,15 @@ export function WeaponOptions() {
 
         <IconDisplay
           contents={
-            isShowingValue
+            skillValue
               ? `${formatPercentage(abilityChance.minimum)}-${formatPercentage(
                   abilityChance.maximum,
                 )}`
               : LABEL_UNKNOWN
           }
-          Icon={isShowingValue ? IconAbility : IconUnknown}
+          Icon={skillValue ? IconAbility : IconUnknown}
           iconProps={{ overlayPlacement: "left" }}
-          tooltip={isShowingValue ? `${abilityName} chance` : LABEL_UNKNOWN}
+          tooltip={skillValue ? `${capitalizeAll(ability)} chance` : LABEL_UNKNOWN}
         />
 
         <IconDisplay

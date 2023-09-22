@@ -14,12 +14,11 @@ export function useAcquireSkill() {
         const { shows, unlocksAttributes, unlocksMastery } = SKILLS[skill];
 
         set(skills(skill), true);
-
         set(isShowing("skills"), true);
 
-        shows?.forEach((show) => {
-          set(isShowing(show), true);
-        });
+        if (shows !== undefined) {
+          set(isShowing(shows), true);
+        }
 
         unlocksAttributes?.forEach((attribute) => {
           set(attributes(attribute), (current) => ({ ...current, isUnlocked: true }));

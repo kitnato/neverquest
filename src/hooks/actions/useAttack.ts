@@ -55,7 +55,6 @@ export function useAttack() {
         const weaponValue = get(weapon);
         const { abilityChance, gearClass, staminaCost } = weaponValue;
 
-        // TODO - make into a selector based on constituents like canReceiveAilments
         set(isShowing("statistics"), true);
 
         if (get(isAttacking) && get(attackDuration) === 0) {

@@ -43,14 +43,15 @@ import type {
   Elemental,
   Gem,
   MonsterAilment,
-  Showing,
   Trinket,
+  WeaponAbility,
 } from "@neverquest/types/unions";
 
 export const AMMUNITION_MAXIMUM = 100;
 
 export const ARMOR_NONE: Omit<Armor, "coinPrice" | "isEquipped" | "scrapPrice"> = {
   deflection: 0,
+  gearClass: "hide",
   gems: [],
   id: nanoid(),
   level: 0,
@@ -213,8 +214,9 @@ export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
 export const GEM_FITTING_COST = [20, 40, 70, 120, 200];
 export const GEMS_MAXIMUM = 5;
 
-export const SHIELD_NONE: Omit<Shield, "coinPrice" | "isEquipped" | "ranges" | "scrapPrice"> = {
+export const SHIELD_NONE: Omit<Shield, "coinPrice" | "isEquipped" | "scrapPrice"> = {
   block: 0,
+  gearClass: "small",
   gems: [],
   id: nanoid(),
   level: 0,
@@ -311,7 +313,7 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
     Icon: IconAntiqueCoin,
     item: {
       coinPrice: 300,
-      description: "Unlocks the Luck attribute.",
+      description: "The wielder may experience extreme fortune.",
       id: nanoid(),
       type: "antique coin",
       weight: 2,
@@ -426,41 +428,37 @@ export const WEAPON_NONE: Omit<Melee, "coinPrice" | "isEquipped" | "scrapPrice">
 export const WEAPON_SPECIFICATIONS: Record<
   WeaponClass,
   {
+    ability: WeaponAbility;
     abilityChance: [GeneratorRange, GeneratorRange];
-    abilityName: string;
     IconAbility: SVGIcon;
     IconGearClass: SVGIcon;
-    showingType: Showing;
   }
 > = {
   blunt: {
+    ability: "stagger",
     abilityChance: [
       { maximum: 0.2, minimum: 0.15 },
       { maximum: 0.4, minimum: 0.35 },
     ],
-    abilityName: "Stagger",
     IconAbility: IconStagger,
     IconGearClass: IconBlunt,
-    showingType: "stagger",
   },
   piercing: {
+    ability: "bleed",
     abilityChance: [
       { maximum: 0.3, minimum: 0.25 },
       { maximum: 0.5, minimum: 0.45 },
     ],
-    abilityName: "Bleed",
     IconAbility: IconBleed,
     IconGearClass: IconPiercing,
-    showingType: "bleed",
   },
   slashing: {
+    ability: "parry",
     abilityChance: [
       { maximum: 0.35, minimum: 0.3 },
       { maximum: 0.5, minimum: 0.45 },
     ],
-    abilityName: "Parry",
     IconAbility: IconParry,
     IconGearClass: IconSlashing,
-    showingType: "parry",
   },
 };

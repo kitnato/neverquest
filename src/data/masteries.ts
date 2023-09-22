@@ -21,7 +21,6 @@ export const MASTERIES: Record<
     Icon: IconButchery,
     increment: 0.01,
     instructions: "Trains when dealing damage with a two-handed weapon.",
-    isUnlocked: false,
     maximum: 0.33,
   },
   cruelty: {
@@ -30,7 +29,6 @@ export const MASTERIES: Record<
     Icon: IconCruelty,
     increment: 0.02,
     instructions: "Trains when dealing damage with a piercing weapon.",
-    isUnlocked: false,
     maximum: 1,
   },
   finesse: {
@@ -39,7 +37,6 @@ export const MASTERIES: Record<
     Icon: IconFinesse,
     increment: 0.02,
     instructions: "Trains when parrying.",
-    isUnlocked: false,
     maximum: 0.9,
   },
   marksmanship: {
@@ -48,7 +45,6 @@ export const MASTERIES: Record<
     Icon: IconMarksmanship,
     increment: 0.03,
     instructions: "Trains when dealing damage with a ranged weapon.",
-    isUnlocked: false,
     maximum: 0.9,
   },
   might: {
@@ -57,7 +53,6 @@ export const MASTERIES: Record<
     Icon: IconMight,
     increment: 100,
     instructions: "Trains when dealing damage with a blunt weapon.",
-    isUnlocked: false,
     maximum: 3500,
   },
   resilience: {
@@ -66,7 +61,6 @@ export const MASTERIES: Record<
     Icon: IconResilience,
     increment: 0.01,
     instructions: "Trains when getting hit.",
-    isUnlocked: false,
     maximum: 0.9,
   },
   stability: {
@@ -75,7 +69,6 @@ export const MASTERIES: Record<
     Icon: IconStability,
     increment: 0.03,
     instructions: "Trains when blocking.",
-    isUnlocked: false,
     maximum: 0.66,
   },
 };

@@ -34,13 +34,13 @@ export function CriticalRating() {
   const isShowingCriticalRating = useRecoilValue(isShowing("criticalRating"));
   const powerBonusChanceValue = useRecoilValue(powerBonus("dexterity"));
   const powerBonusDamageValue = useRecoilValue(powerBonus("perception"));
-  const skillAssassination = useRecoilValue(skills("assassination"));
+  const assassinationValue = useRecoilValue(skills("assassination"));
   const dexterityValue = useRecoilValue(attributeStatistic("dexterity"));
   const perceptionValue = useRecoilValue(attributeStatistic("perception"));
 
   useDeltaText({
     delta: deltas("criticalRating"),
-    stop: ({ previous }) => previous === null || !skillAssassination,
+    stop: ({ previous }) => previous === null || !assassinationValue,
     value: criticalRating,
   });
 
@@ -131,9 +131,9 @@ export function CriticalRating() {
                 </Popover.Body>
               </Popover>
             }
-            trigger={skillAssassination ? ["hover", "focus"] : []}
+            trigger={assassinationValue ? ["hover", "focus"] : []}
           >
-            <span>{skillAssassination ? criticalRatingValue : LABEL_EMPTY}</span>
+            <span>{assassinationValue ? criticalRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
           <FloatingText deltaType="criticalRating" />

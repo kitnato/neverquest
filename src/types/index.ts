@@ -5,19 +5,20 @@ import type { Consumable, Gem, Grip, Showing, Trinket } from "@neverquest/types/
 
 export type Armor = GearItemBase & {
   deflection: number;
-  gearClass?: ArmorClass;
+  gearClass: ArmorClass;
   gems: GemItem[];
   protection: number;
   staminaCost: number;
 };
 
-export type AttributeData = AttributeOrMasteryBaseData & {
-  maximum?: number;
-  powerBonus: number;
-  shows?: Showing;
-};
+export type AttributeData = AttributeOrMasteryBaseData &
+  UnlockedState & {
+    maximum?: number;
+    powerBonus: number;
+    shows?: Showing;
+  };
 
-export type AttributeOrMasteryBaseData = UnlockedState & {
+export type AttributeOrMasteryBaseData = {
   base: number;
   description: string;
   Icon: SVGIcon;
@@ -94,7 +95,7 @@ export type Ranged = WeaponBase & {
 
 export type Shield = GearItemBase & {
   block: number;
-  gearClass?: ShieldClass;
+  gearClass: ShieldClass;
   gems: GemItem[];
   stagger: number;
   staminaCost: number;

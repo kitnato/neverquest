@@ -23,7 +23,7 @@ export function useCollectLoot() {
           scrapDifference: get(scrapLoot),
         });
 
-        set(isShowing("capabilitiesButton"), true);
+        set(isShowing("capabilities"), true);
 
         reset(coinsLoot);
         reset(essenceLoot);

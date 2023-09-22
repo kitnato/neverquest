@@ -8,7 +8,6 @@ import { ReactComponent as IconCriticalDamage } from "@neverquest/icons/critical
 import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
 import { ReactComponent as IconDodge } from "@neverquest/icons/dodge.svg";
 import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
-import { ReactComponent as IconLootBonus } from "@neverquest/icons/loot-bonus.svg";
 import { ReactComponent as IconRegenerationAmount } from "@neverquest/icons/regeneration-amount.svg";
 import { ReactComponent as IconRegenerationRate } from "@neverquest/icons/regeneration-rate.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
@@ -23,7 +22,6 @@ const STATISTIC_ICON: Record<Attribute, SVGIcon> = {
   dexterity: IconCriticalChance,
   endurance: IconStamina,
   fortitude: IconRegenerationAmount,
-  luck: IconLootBonus,
   perception: IconCriticalDamage,
   speed: IconAttackRate,
   strength: IconDamage,

@@ -1,11 +1,12 @@
-import { Card, Stack } from "react-bootstrap";
+import { Card, Col, Row, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { Defense } from "@neverquest/components/Statistics/Defense";
-import { Offense } from "@neverquest/components/Statistics/Offense";
-import { Support } from "@neverquest/components/Statistics/Support";
+import { Conditional } from "@neverquest/components/Statistics/Conditional";
+import { CriticalRating } from "@neverquest/components/Statistics/CriticalRating";
+import { Damage } from "@neverquest/components/Statistics/Damage";
+import { Dodge } from "@neverquest/components/Statistics/Dodge";
+import { Protection } from "@neverquest/components/Statistics/Protection";
 import { isShowing } from "@neverquest/state/isShowing";
-
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Statistics() {
@@ -19,11 +20,25 @@ export function Statistics() {
     <Card className={getAnimationClass({ type: "flipInX" })}>
       <Card.Body>
         <Stack gap={3}>
-          <Offense />
+          <Row>
+            <Col>
+              <Damage />
+            </Col>
 
-          <Defense />
+            <Col>
+              <CriticalRating />
+            </Col>
 
-          <Support />
+            <Col>
+              <Protection />
+            </Col>
+
+            <Col>
+              <Dodge />
+            </Col>
+          </Row>
+
+          <Conditional />
         </Stack>
       </Card.Body>
     </Card>

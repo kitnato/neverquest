@@ -5029,6 +5029,10 @@ export const AFFIXES: AffixData[] = [
     name: "tasteless",
   },
   {
+    creature: "prefix",
+    name: "tearful",
+  },
+  {
     location: "prefix",
     name: "tempestuous",
   },
@@ -5430,6 +5434,7 @@ export const AFFIXES: AffixData[] = [
     name: "wasting",
   },
   {
+    creature: "prefix",
     location: "prefix",
     name: "watery",
   },

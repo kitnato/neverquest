@@ -10,7 +10,13 @@ import {
 import { withStateKey } from "@neverquest/state";
 import { inventory } from "@neverquest/state/inventory";
 import { scrap } from "@neverquest/state/resources";
-import type { Armor, InventoryItem, Shield, Weapon } from "@neverquest/types";
+import type {
+  Armor,
+  InventoryItem,
+  Shield,
+  TrinketItemAmmunitionPouch,
+  Weapon,
+} from "@neverquest/types";
 import {
   isArmor,
   isConsumable,
@@ -21,6 +27,19 @@ import {
 import type { Consumable, Gear, Trinket } from "@neverquest/types/unions";
 
 // SELECTORS
+
+export const ammunition = withStateKey("ammunition", (key) =>
+  selector({
+    get: ({ get }) => {
+      const ownedAmmunitionPouch = get(ownedItem("ammunition pouch"));
+
+      return ownedAmmunitionPouch === null
+        ? 0
+        : (ownedAmmunitionPouch as TrinketItemAmmunitionPouch).current;
+    },
+    key,
+  }),
+);
 
 export const armor = withStateKey("armor", (key) =>
   selector({

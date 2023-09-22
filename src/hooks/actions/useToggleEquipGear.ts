@@ -1,5 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
+import { WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
+import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import { attributes } from "@neverquest/state/attributes";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -21,6 +23,9 @@ export function useToggleEquipGear() {
       (gearItem: GearItem) => {
         const get = getSnapshotGetter(snapshot);
 
+        const isRangedWeapon = isRanged(gearItem);
+        const isTwoHandedWeapon = isMelee(gearItem) && gearItem.grip === "two-handed";
+
         set(isShowing("statistics"), true);
 
         if (isArmor(gearItem)) {
@@ -35,13 +40,15 @@ export function useToggleEquipGear() {
         }
 
         if (isShield(gearItem)) {
-          set(isShowing("block"), true);
+          set(isShowing("conditional"), true);
           set(isShowing("offhand"), true);
           set(isShowing("stamina"), true);
         }
 
         if (isWeapon(gearItem)) {
-          if (gearItem.staminaCost > 0) {
+          const { gearClass, staminaCost } = gearItem;
+
+          if (staminaCost > 0) {
             set(isShowing("stamina"), true);
 
             if (!get(attributes("endurance")).isUnlocked) {
@@ -52,9 +59,13 @@ export function useToggleEquipGear() {
             }
           }
 
-          if (isRanged(gearItem)) {
+          if (get(skills(WEAPON_ABILITY_SKILLS[WEAPON_SPECIFICATIONS[gearClass].ability]))) {
+            set(isShowing("conditional"), true);
+          }
+
+          if (isRangedWeapon || isTwoHandedWeapon) {
+            set(isShowing("conditional"), true);
             set(isShowing("offhand"), true);
-            set(isShowing("range"), true);
           }
 
           set(isShowing("attackRateDetails"), true);
@@ -72,7 +83,7 @@ export function useToggleEquipGear() {
                 };
               } else if (
                 // Equipping a ranged or two-handed weapon while a shield is equipped.
-                (((isMelee(gearItem) && gearItem.grip === "two-handed") || isRanged(gearItem)) &&
+                ((isRangedWeapon || isTwoHandedWeapon) &&
                   !gearItem.isEquipped &&
                   isShield(currentItem) &&
                   currentItem.isEquipped) ||

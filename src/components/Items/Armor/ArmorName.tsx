@@ -15,6 +15,7 @@ import { ReactComponent as IconNone } from "@neverquest/icons/none.svg";
 import { ReactComponent as IconProtection } from "@neverquest/icons/protection.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import { armor as armorEquipped } from "@neverquest/state/items";
+import { skills } from "@neverquest/state/skills";
 import type { Armor } from "@neverquest/types";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
@@ -27,9 +28,9 @@ export function ArmorName({
   placement?: Placement;
 }) {
   const armorEquippedValue = useRecoilValue(armorEquipped);
-  const isShowingDeflection = useRecoilValue(isShowing("deflection"));
   const isShowingDodgePenalty = useRecoilValue(isShowing("dodgePenalty"));
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
+  const armorcraftValue = useRecoilValue(skills("armorcraft"));
 
   const { deflection, level, name, protection, staminaCost, weight } = armor;
   const showComparison = armorEquippedValue.id !== armor.id;
@@ -106,7 +107,7 @@ export function ArmorName({
 
               {deflection > 0 && (
                 <tr>
-                  {isShowingDeflection ? (
+                  {armorcraftValue ? (
                     <>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Deflection chance:</td>
 

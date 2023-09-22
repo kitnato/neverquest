@@ -32,7 +32,7 @@ export function Dodge() {
   const hasTomeOfPower = Boolean(useRecoilValue(ownedItem("tome of power")));
   const powerBonusValue = useRecoilValue(powerBonus("agility"));
   const statisticValue = useRecoilValue(attributeStatistic("agility"));
-  const skillEvasion = useRecoilValue(skills("evasion"));
+  const evasionValue = useRecoilValue(skills("evasion"));
 
   useDeltaText({
     delta: deltas("dodge"),
@@ -93,10 +93,10 @@ export function Dodge() {
               </Popover>
             }
             trigger={
-              skillEvasion && (isShowingDodgePenalty || hasTomeOfPower) ? ["hover", "focus"] : []
+              evasionValue && (isShowingDodgePenalty || hasTomeOfPower) ? ["hover", "focus"] : []
             }
           >
-            <span>{skillEvasion ? formatPercentage(dodgeValue) : LABEL_EMPTY}</span>
+            <span>{evasionValue ? formatPercentage(dodgeValue) : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
           <FloatingText deltaType="dodge" />

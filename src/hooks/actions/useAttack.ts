@@ -148,11 +148,13 @@ export function useAttack() {
             });
           }
 
+          if (gearClass === "piercing") {
+            increaseMastery("cruelty");
+          }
+
           if (hasInflictedBleed) {
             set(isShowing("monsterAilments"), true);
             set(monsterAilmentDuration("bleeding"), BLEED.duration);
-
-            increaseMastery("cruelty");
 
             monsterDeltas.push({
               color: "text-muted",
@@ -160,11 +162,13 @@ export function useAttack() {
             });
           }
 
+          if (gearClass === "blunt") {
+            increaseMastery("might");
+          }
+
           if (hasInflictedStagger) {
             set(isShowing("monsterAilments"), true);
             set(monsterAilmentDuration("staggered"), get(masteryStatistic("might")));
-
-            increaseMastery("might");
 
             monsterDeltas.push({
               color: "text-muted",

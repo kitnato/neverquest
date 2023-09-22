@@ -21,11 +21,11 @@ import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatPercentage } from "@neverquest/utilities/formatters";
 
 export function Damage() {
+  const strengthValue = useRecoilValue(attributeStatistic("strength"));
   const damageValue = useRecoilValue(damage);
   const damageTotalValue = useRecoilValue(damageTotal);
   const isShowingDamageDetails = useRecoilValue(isShowing("damageDetails"));
   const powerBonusValue = useRecoilValue(powerBonus("strength"));
-  const strengthValue = useRecoilValue(attributeStatistic("strength"));
   const { damage: weaponDamage, gems } = useRecoilValue(weapon);
 
   const appliedGems = gems.length;

@@ -45,12 +45,10 @@ export function useAcquireItem() {
           set(encumbranceMaximum, (current) => current + KNAPSACK_SIZE);
           set(hasKnapsack, true);
           set(isShowing("weight"), true);
-          console.log("get knapsack");
 
           return "success";
         }
 
-        console.log("acquired");
         set(inventory, (current) => current.concat(item));
         set(itemsAcquired, (current) => [...current, item]);
 

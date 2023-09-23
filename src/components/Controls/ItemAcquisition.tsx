@@ -26,8 +26,6 @@ export function ItemAcquisition() {
   const handleAnimationEnd = (key: string) => () =>
     setItemsAcquired((current) => current.filter(({ id }) => key !== id));
 
-  console.log(itemsAcquiredValue);
-
   if (itemsAcquiredValue.length === 0) {
     return null;
   }

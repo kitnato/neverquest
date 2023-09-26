@@ -12,7 +12,7 @@ import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
 import { type SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
 import { ReactComponent as IconNone } from "@neverquest/icons/none.svg";
-import { ReactComponent as IconStagger } from "@neverquest/icons/shield-stagger.svg";
+import { ReactComponent as IconStagger } from "@neverquest/icons/stagger.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import { shield as shieldEquipped } from "@neverquest/state/items";
 import type { Shield } from "@neverquest/types";
@@ -79,41 +79,43 @@ export function ShieldName({
                 cost={staminaCost}
               />
 
-              <tr>
-                {isShowingGearClass ? (
-                  <>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
+              {level !== 0 && (
+                <tr>
+                  {isShowingGearClass ? (
+                    <>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 
-                    <td>
-                      {(() => {
-                        if ("gearClass" in shield) {
-                          const { gearClass } = shield;
+                      <td>
+                        {(() => {
+                          if ("gearClass" in shield) {
+                            const { gearClass } = shield;
 
-                          if (gearClass) {
-                            const { Icon } = SHIELD_SPECIFICATIONS[gearClass];
+                            if (gearClass) {
+                              const { Icon } = SHIELD_SPECIFICATIONS[gearClass];
 
-                            return (
-                              <>
-                                <IconImage Icon={Icon} size="tiny" />
-                                &nbsp;{capitalizeAll(gearClass)}
-                              </>
-                            );
+                              return (
+                                <>
+                                  <IconImage Icon={Icon} size="tiny" />
+                                  &nbsp;{capitalizeAll(gearClass)}
+                                </>
+                              );
+                            }
                           }
-                        }
 
-                        return (
-                          <>
-                            <IconImage Icon={IconNone} size="tiny" />
-                            &nbsp;None
-                          </>
-                        );
-                      })()}
-                    </td>
-                  </>
-                ) : (
-                  <td className="text-end">{LABEL_UNKNOWN}</td>
-                )}
-              </tr>
+                          return (
+                            <>
+                              <IconImage Icon={IconNone} size="tiny" />
+                              &nbsp;None
+                            </>
+                          );
+                        })()}
+                      </td>
+                    </>
+                  ) : (
+                    <td className="text-end">{LABEL_UNKNOWN}</td>
+                  )}
+                </tr>
+              )}
 
               {stagger > 0 && (
                 <tr>

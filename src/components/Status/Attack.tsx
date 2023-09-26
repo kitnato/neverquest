@@ -59,7 +59,7 @@ export function Attack() {
 
   useDeltaText({
     delta: deltas("attackRate"),
-    type: "time",
+    format: "time",
     value: attackRateTotal,
   });
 

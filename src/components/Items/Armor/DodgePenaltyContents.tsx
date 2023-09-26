@@ -2,14 +2,10 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import type { GeneratorRange } from "@neverquest/types";
 
-export function DodgePenaltyContents({
-  staminaCost,
-}: {
-  staminaCost: GeneratorRange | number | null;
-}) {
+export function DodgePenaltyContents({ staminaCost }: { staminaCost: GeneratorRange | number }) {
   return (
     <span>
-      {staminaCost === null ? (
+      {staminaCost === Infinity ? (
         <>Cannot dodge.</>
       ) : staminaCost === 0 ? (
         <>None.</>

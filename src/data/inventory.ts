@@ -25,7 +25,7 @@ import { ReactComponent as IconShieldMedium } from "@neverquest/icons/shield-med
 import { ReactComponent as IconShieldSmall } from "@neverquest/icons/shield-small.svg";
 import { ReactComponent as IconShieldTower } from "@neverquest/icons/shield-tower.svg";
 import { ReactComponent as IconSlashing } from "@neverquest/icons/slashing.svg";
-import { ReactComponent as IconStagger } from "@neverquest/icons/stagger.svg";
+import { ReactComponent as IconStun } from "@neverquest/icons/stun.svg";
 import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type {
@@ -67,7 +67,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     deflection: [GeneratorRange, GeneratorRange] | null;
     Icon: SVGIcon;
     protection: [GeneratorRange, GeneratorRange];
-    staminaCost: 0 | [GeneratorRange, GeneratorRange] | null;
+    staminaCost: number | [GeneratorRange, GeneratorRange];
   }
 > = {
   hide: {
@@ -97,7 +97,7 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 1000, minimum: 950 },
     ],
     scrapPrice: { maximum: 4000, minimum: 25 },
-    staminaCost: null,
+    staminaCost: Infinity,
     weight: [
       { maximum: 7, minimum: 5 },
       { maximum: 100, minimum: 90 },
@@ -408,7 +408,7 @@ export const WEAPON_BASE: GearBase & {
 export const WEAPON_MODIFIER = {
   "one-handed": { ability: 1, damage: 1, price: 1, rate: 1, stamina: 1, weight: 1 },
   ranged: { ability: 1, damage: 1.2, price: 1.1, rate: 1, stamina: 1.1, weight: 1.15 },
-  "two-handed": { ability: 1.1, damage: 1.25, price: 1.2, rate: 1.33, stamina: 1.15, weight: 1.2 },
+  "two-handed": { ability: 1.1, damage: 1.25, price: 1.2, rate: 1.3, stamina: 1.15, weight: 1.2 },
 };
 
 export const WEAPON_NONE: Omit<Melee, "coinPrice" | "isEquipped" | "scrapPrice"> = {
@@ -435,12 +435,12 @@ export const WEAPON_SPECIFICATIONS: Record<
   }
 > = {
   blunt: {
-    ability: "stagger",
+    ability: "stun",
     abilityChance: [
-      { maximum: 0.2, minimum: 0.15 },
-      { maximum: 0.4, minimum: 0.35 },
+      { maximum: 0.3, minimum: 0.25 },
+      { maximum: 0.7, minimum: 0.65 },
     ],
-    IconAbility: IconStagger,
+    IconAbility: IconStun,
     IconGearClass: IconBlunt,
   },
   piercing: {

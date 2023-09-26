@@ -36,7 +36,7 @@ export const MASTERIES: Record<
     description: "Affects damage absorbed and reflected when parrying.",
     Icon: IconFinesse,
     increment: 0.02,
-    instructions: "Trains when parrying.",
+    instructions: "Trains when dealing damage with a slashing weapon.",
     maximum: 0.9,
   },
   marksmanship: {
@@ -48,12 +48,12 @@ export const MASTERIES: Record<
     maximum: 0.9,
   },
   might: {
-    base: 1200,
-    description: "Determines stagger duration.",
+    base: 3,
+    description: "Affects stun length.",
     Icon: IconMight,
-    increment: 100,
+    increment: 1,
     instructions: "Trains when dealing damage with a blunt weapon.",
-    maximum: 3500,
+    maximum: 20,
   },
   resilience: {
     base: 0,
@@ -64,13 +64,18 @@ export const MASTERIES: Record<
     maximum: 0.9,
   },
   stability: {
-    base: 0,
-    description: "Determines chance for 0-stamina blocks.",
+    base: 1500,
+    description: "Affects stagger duration.",
     Icon: IconStability,
-    increment: 0.03,
+    increment: 100,
     instructions: "Trains when blocking.",
-    maximum: 0.66,
+    maximum: 3500,
   },
 };
 
-export const MASTERY_PROGRESS = 1;
+export const MASTERY_COST = 4;
+
+export const MASTERY_PROGRESS = {
+  increment: 1,
+  rank: 1,
+};

@@ -16,7 +16,7 @@ export function DamagePerSecond() {
 
   useDeltaText({
     delta: deltas("damagePerSecond"),
-    type: "float",
+    format: "float",
     value: damagePerSecond,
   });
 

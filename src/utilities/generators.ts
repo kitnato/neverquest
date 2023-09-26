@@ -10,6 +10,7 @@ import { generateArtifact } from "@neverquest/LOCRAN/generate/generateArtifact";
 import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
 import type { AffixTag, ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type { Armor, Melee, Ranged, Shield } from "@neverquest/types";
+import { isGeneratorRange } from "@neverquest/types/type-guards";
 import type { Grip } from "@neverquest/types/unions";
 import {
   getArmorRanges,
@@ -69,12 +70,7 @@ export function generateArmor({
       }),
     protection: getFromRange(protection),
     scrapPrice,
-    staminaCost:
-      staminaCost === null
-        ? Infinity
-        : typeof staminaCost === "number"
-        ? staminaCost
-        : getFromRange(staminaCost),
+    staminaCost: isGeneratorRange(staminaCost) ? getFromRange(staminaCost) : staminaCost,
     weight: getFromRange(weight),
   };
 }

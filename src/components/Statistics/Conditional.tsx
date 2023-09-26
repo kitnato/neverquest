@@ -6,9 +6,9 @@ import { Block } from "@neverquest/components/Statistics/Block";
 import { CombatRange } from "@neverquest/components/Statistics/CombatRange";
 import { Deflection } from "@neverquest/components/Statistics/Deflection";
 import { Execution } from "@neverquest/components/Statistics/Execution";
-import { FreeBlock } from "@neverquest/components/Statistics/FreeBlock";
 import { ParryRating } from "@neverquest/components/Statistics/ParryRating";
 import { StaggerRating } from "@neverquest/components/Statistics/StaggerRating";
+import { StunRating } from "@neverquest/components/Statistics/StunRating";
 import { isShowing } from "@neverquest/state/isShowing";
 
 export function Conditional() {
@@ -19,22 +19,22 @@ export function Conditional() {
   }
 
   return (
-    <Stack direction="horizontal" gap={3}>
+    <Stack direction="horizontal" gap={5}>
       <Block />
-
-      <FreeBlock />
-
-      <Deflection />
 
       <StaggerRating />
 
-      <BleedRating />
-
-      <ParryRating />
+      <Deflection />
 
       <Execution />
 
       <CombatRange />
+
+      <StunRating />
+
+      <BleedRating />
+
+      <ParryRating />
     </Stack>
   );
 }

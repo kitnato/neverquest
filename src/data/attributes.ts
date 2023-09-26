@@ -22,12 +22,12 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
     powerBonus: 0.005,
   },
   dexterity: {
-    base: 0,
+    base: 0.03,
     description: "Increases critical strike chance.",
     Icon: IconDexterity,
     increment: 0.02,
     isUnlocked: false,
-    maximum: 0.6,
+    maximum: 0.61,
     powerBonus: 0.005,
   },
   endurance: {

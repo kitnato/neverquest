@@ -9,6 +9,7 @@ import {
 } from "@neverquest/data/inventory";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type { GeneratorRange } from "@neverquest/types";
+import { isGeneratorRanges } from "@neverquest/types/type-guards";
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
 import type { Grip } from "@neverquest/types/unions";
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/utilities/constants";
@@ -33,12 +34,9 @@ export function getArmorRanges({ factor, gearClass }: { factor: number; gearClas
   return {
     deflection: deflection === null ? null : getRange({ factor, ranges: deflection }),
     protection: getRange({ factor, ranges: protection }),
-    staminaCost:
-      staminaCost === null
-        ? null
-        : staminaCost === 0
-        ? 0
-        : getRange({ factor, ranges: staminaCost }),
+    staminaCost: isGeneratorRanges(staminaCost)
+      ? getRange({ factor, ranges: staminaCost })
+      : staminaCost,
     weight: getRange({ factor, ranges: weight }),
   };
 }

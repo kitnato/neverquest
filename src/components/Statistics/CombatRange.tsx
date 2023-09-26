@@ -28,7 +28,7 @@ export function CombatRange() {
 
   useDeltaText({
     delta: deltas("range"),
-    type: "time",
+    format: "time",
     value: range,
   });
 

@@ -36,7 +36,7 @@ export function Dodge() {
 
   useDeltaText({
     delta: deltas("dodge"),
-    type: "percentage",
+    format: "percentage",
     value: dodge,
   });
 

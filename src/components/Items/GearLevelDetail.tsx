@@ -16,7 +16,7 @@ export function GearLevelDetail({
 }) {
   const showGearLevelValue = useRecoilValue(showGearLevel);
 
-  if (!showGearLevelValue) {
+  if (level === 0 || !showGearLevelValue) {
     return null;
   }
 

@@ -1,5 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
+import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
@@ -18,11 +19,12 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { armor, shield, weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
+  isMonsterAiling,
   monsterAilmentDuration,
   monsterAttackDuration,
   monsterAttackRate,
   monsterBlightChance,
-  monsterDamage,
+  monsterDamageTotal,
   monsterElement,
   monsterPoisonChance,
   monsterPoisonLength,
@@ -65,6 +67,22 @@ export function useDefend() {
           type: "headShake",
         });
 
+        // If stunned, check if hit and decrease its duration.
+        if (get(isMonsterAiling("stunned"))) {
+          set(monsterAilmentDuration("stunned"), (current) => current - 1);
+
+          if (Math.random() <= AILMENT_PENALTY.stunned) {
+            set(deltas("health"), {
+              color: "text-muted",
+              value: "MISS",
+            });
+
+            return;
+          }
+        }
+
+        const deltaHealth: DeltaDisplay = [];
+
         // If attack is dodged, nothing else happens (all damage is negated).
         if (get(skills("evasion")) && Math.random() <= get(dodge)) {
           if (get(canDodge)) {
@@ -75,7 +93,7 @@ export function useDefend() {
 
             return;
           } else {
-            set(deltas("health"), {
+            deltaHealth.push({
               color: "text-muted",
               value: `CANNOT DODGE (${get(armor).staminaCost})`,
             });
@@ -85,15 +103,14 @@ export function useDefend() {
         const protectionValue = get(protection);
 
         // If health damage (protection minus monster damage) is 0 or less, nothing else happens.
-        const monsterDamageValue = get(monsterDamage);
+        const monsterDamageTotalValue = get(monsterDamageTotal);
         let healthDamage = (() => {
-          const damage = protectionValue - monsterDamageValue;
+          const damage = protectionValue - monsterDamageTotalValue;
 
           return damage < 0 ? damage : 0;
         })();
         let monsterHealthDamage = 0;
 
-        const deltaHealth: DeltaDisplay = [];
         const deltaMonsterHealth: DeltaDisplay = [];
         const deltaStamina: DeltaDisplay = [];
 
@@ -106,7 +123,7 @@ export function useDefend() {
           if (get(canAttackOrParry)) {
             set(isShowing("monsterAilments"), true);
 
-            const parryReflected = -Math.floor(monsterDamageValue * get(parryDamage));
+            const parryReflected = -Math.floor(monsterDamageTotalValue * get(parryDamage));
 
             healthDamage += Math.floor(healthDamage * get(parryAbsorption));
             monsterHealthDamage += parryReflected;

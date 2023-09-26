@@ -16,6 +16,7 @@ export function Deflection() {
 
   useDeltaText({
     delta: deltas("deflection"),
+    format: "percentage",
     value: deflection,
   });
 

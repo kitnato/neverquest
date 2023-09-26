@@ -10,7 +10,7 @@ import { SHIELD_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
-import { ReactComponent as IconShieldStagger } from "@neverquest/icons/shield-stagger.svg";
+import { ReactComponent as IconStagger } from "@neverquest/icons/stagger.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { SHIELD_CLASS_TYPES, type ShieldClass } from "@neverquest/LOCRAN/types";
@@ -125,7 +125,7 @@ export function ShieldOptions() {
                 ? `${formatPercentage(stagger.minimum)}-${formatPercentage(stagger.maximum)}`
                 : LABEL_UNKNOWN
             }
-            Icon={shieldcraftValue ? IconShieldStagger : IconUnknown}
+            Icon={shieldcraftValue ? IconStagger : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
             tooltip={shieldcraftValue ? "Stagger chance" : LABEL_UNKNOWN}
           />

@@ -310,21 +310,19 @@ export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (
 
 export const staggerRating = withStateKey("staggerRating", (key) =>
   selector({
-    get: ({ get }) => {
-      const mightValue = get(masteryStatistic("might"));
-
-      return Math.round(get(shield).stagger * mightValue + get(stagger) * mightValue);
-    },
+    get: ({ get }) => Math.round(get(shield).stagger * get(masteryStatistic("stability"))),
     key,
   }),
 );
 
-export const stagger = withStateKey("stagger", (key) =>
+export const stunRating = withStateKey("stunRating", (key) =>
   selector({
     get: ({ get }) => {
       const { abilityChance, gearClass } = get(weapon);
 
-      return gearClass === "blunt" ? abilityChance : 0;
+      return gearClass === "blunt"
+        ? Math.round(abilityChance * get(masteryStatistic("might")) * 100)
+        : 0;
     },
     key,
   }),

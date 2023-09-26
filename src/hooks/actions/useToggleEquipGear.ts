@@ -3,7 +3,7 @@ import { useRecoilCallback } from "recoil";
 import { WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import { attributes } from "@neverquest/state/attributes";
-import { equippableItems, inventory } from "@neverquest/state/inventory";
+import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import type { GearItem } from "@neverquest/types";
@@ -23,11 +23,7 @@ export function useToggleEquipGear() {
       (gearItem: GearItem) => {
         const get = getSnapshotGetter(snapshot);
 
-        const { id, isEquipped, staminaCost } = gearItem;
-
-        if (!get(equippableItems)[id]) {
-          return;
-        }
+        const { isEquipped, staminaCost } = gearItem;
 
         const isRangedWeapon = isRanged(gearItem);
         const isTwoHandedWeapon = isMelee(gearItem) && gearItem.grip === "two-handed";

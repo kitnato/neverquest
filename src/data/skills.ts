@@ -77,7 +77,7 @@ export const SKILLS: Record<
     unlocksAttributes: ["agility"],
   },
   shieldcraft: {
-    description: "Unlocks the use of tower shields.",
+    description: "Unlocks the use of tower shields & the ability to stagger monsters.",
     Icon: IconShieldcraft,
     requiredCrew: "blacksmith",
     unlocksMastery: "stability",
@@ -89,7 +89,7 @@ export const SKILLS: Record<
     unlocksMastery: "butchery",
   },
   traumatology: {
-    description: "Unlocks the ability to stagger monsters.",
+    description: "Unlocks the ability to stun monsters.",
     Icon: IconTraumatology,
     requiredCrew: "merchant",
     unlocksMastery: "might",
@@ -99,5 +99,5 @@ export const SKILLS: Record<
 export const WEAPON_ABILITY_SKILLS: Record<WeaponAbility, Skill> = {
   bleed: "anatomy",
   parry: "escrime",
-  stagger: "traumatology",
+  stun: "traumatology",
 };

@@ -11,10 +11,10 @@ import {
   MONSTER_HEALTH,
   POISON,
 } from "@neverquest/data/monster";
-import { BLEED_DELTA, ELEMENTAL_AILMENT_PENALTY } from "@neverquest/data/statistics";
+import { AILMENT_PENALTY, BLEED_DELTA } from "@neverquest/data/statistics";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
-import { weapon } from "@neverquest/state/items";
+import { shield, weapon } from "@neverquest/state/items";
 import { skills } from "@neverquest/state/skills";
 import { bleedDamage, range, totalElementalEffects } from "@neverquest/state/statistics";
 import {
@@ -34,7 +34,7 @@ import {
 export const bleedDamageTotal = withStateKey("bleedDamageTotal", (key) =>
   selector({
     get: ({ get }) =>
-      get(bleedDamage) * (get(isMonsterAiling("burning")) ? ELEMENTAL_AILMENT_PENALTY.burning : 1),
+      get(bleedDamage) * (get(isMonsterAiling("burning")) ? AILMENT_PENALTY.burning : 1),
     key,
   }),
 );
@@ -52,10 +52,16 @@ export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
           }
 
           case "staggered": {
+            return get(skills("shieldcraft")) && get(shield).stagger > 0;
+          }
+
+          case "stunned": {
             return get(skills("traumatology")) && abilityChance > 0 && gearClass === "blunt";
           }
 
-          default: {
+          case "burning":
+          case "frozen":
+          case "shocked": {
             const elemental = ELEMENTAL_TYPES.find(
               (current) => ELEMENTALS[current].ailment === parameter,
             );
@@ -147,12 +153,7 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
       const factor = getGrowthTriangular(get(stage)) / attenuation;
 
       return Math.round(
-        (base +
-          base *
-            factor *
-            (1 + get(progress) * bonus) *
-            (get(isMonsterAiling("shocked")) ? ELEMENTAL_AILMENT_PENALTY.shocked : 1)) *
-          (get(isBoss) ? boss : 1),
+        (base + base * factor * (1 + get(progress) * bonus)) * (get(isBoss) ? boss : 1),
       );
     },
     key,
@@ -168,6 +169,31 @@ export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (ke
           rate: get(monsterAttackRate),
         }),
       ),
+    key,
+  }),
+);
+
+export const monsterDamageTotal = withStateKey("monsterDamageTotal", (key) =>
+  selector({
+    get: ({ get }) =>
+      get(monsterDamage) * (get(isMonsterAiling("shocked")) ? AILMENT_PENALTY.shocked : 1),
+    key,
+  }),
+);
+
+export const monsterDamageTotalPerSecond = withStateKey("monsterDamageTotalPerSecond", (key) =>
+  selector({
+    get: ({ get }) =>
+      get(isMonsterAiling("stunned"))
+        ? formatFloat(
+            getDamagePerRate({
+              damage: get(monsterDamageTotal),
+              damageModifier: 0,
+              damageModifierChance: AILMENT_PENALTY.stunned,
+              rate: get(monsterAttackRate),
+            }),
+          )
+        : get(monsterDamagePerSecond),
     key,
   }),
 );

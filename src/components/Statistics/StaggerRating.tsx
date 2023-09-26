@@ -6,32 +6,37 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconMight } from "@neverquest/icons/might.svg";
-import { ReactComponent as IconShieldStagger } from "@neverquest/icons/shield-stagger.svg";
+import { ReactComponent as IconStability } from "@neverquest/icons/stability.svg";
 import { ReactComponent as IconStaggerRating } from "@neverquest/icons/stagger-rating.svg";
 import { ReactComponent as IconStagger } from "@neverquest/icons/stagger.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { shield } from "@neverquest/state/items";
+import { shield, weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { skills } from "@neverquest/state/skills";
-import { stagger, staggerRating } from "@neverquest/state/statistics";
+import { staggerRating } from "@neverquest/state/statistics";
+import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 
 export function StaggerRating() {
-  const { stagger: shieldStagger } = useRecoilValue(shield);
-  const mightValue = useRecoilValue(masteryStatistic("might"));
-  const traumatologyValue = useRecoilValue(skills("traumatology"));
+  const stabilityValue = useRecoilValue(masteryStatistic("stability"));
+  const { stagger } = useRecoilValue(shield);
+  const shieldcraftValue = useRecoilValue(skills("shieldcraft"));
   const staggerRatingValue = useRecoilValue(staggerRating);
-  const staggerValue = useRecoilValue(stagger);
+  const weaponValue = useRecoilValue(weapon);
 
   useDeltaText({
     delta: deltas("staggerRating"),
-    stop: ({ previous }) => previous === null || !traumatologyValue,
+    stop: ({ previous }) => previous === null || !shieldcraftValue,
     value: staggerRating,
   });
 
-  if (!traumatologyValue || (shieldStagger === 0 && staggerValue === 0)) {
+  if (
+    isRanged(weaponValue) ||
+    (isMelee(weaponValue) && weaponValue.grip === "two-handed") ||
+    !shieldcraftValue ||
+    staggerRatingValue === 0
+  ) {
     return null;
   }
 
@@ -47,39 +52,30 @@ export function StaggerRating() {
                 <Popover.Body>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
 
                       <td>
                         <IconImage Icon={IconStagger} size="tiny" />
                         &nbsp;
-                        {staggerValue === 0 ? LABEL_EMPTY : formatPercentage(staggerValue)}
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance on block:</td>
-
-                      <td>
-                        <IconImage Icon={IconShieldStagger} size="tiny" />
-                        &nbsp;{formatPercentage(shieldStagger)}
+                        {formatPercentage(stagger)}
                       </td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <IconImage Icon={IconMight} size="tiny" />
-                        &nbsp;Might:
+                        <IconImage Icon={IconStability} size="tiny" />
+                        &nbsp;Stability:
                       </td>
 
-                      <td>{`${formatTime(mightValue)}`}</td>
+                      <td>{`${formatTime(stabilityValue)} duration`}</td>
                     </tr>
                   </DetailsTable>
                 </Popover.Body>
               </Popover>
             }
-            trigger={traumatologyValue ? ["hover", "focus"] : []}
+            trigger={shieldcraftValue ? ["hover", "focus"] : []}
           >
-            <span>{traumatologyValue ? staggerRatingValue : LABEL_EMPTY}</span>
+            <span>{shieldcraftValue ? staggerRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
           <FloatingText deltaType="staggerRating" />

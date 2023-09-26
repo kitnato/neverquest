@@ -183,7 +183,7 @@ export function WeaponName({
                     <td>
                       <IconImage Icon={IconAbility} size="tiny" />
                       &nbsp;{formatPercentage(abilityChance)}
-                      {showComparison && (
+                      {showComparison && gearClass === weaponEquippedValue.gearClass && (
                         <GearComparison
                           difference={abilityChance - weaponEquippedValue.abilityChance}
                           showingType="weapon"

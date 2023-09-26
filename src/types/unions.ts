@@ -25,8 +25,6 @@ export type Crew =
 
 export type CrewStatus = "hirable" | "hired" | null;
 
-export type DeltaText = "float" | "integer" | "percentage" | "time";
-
 export type Delta =
   | "ammunition"
   | "attackRate"
@@ -67,6 +65,7 @@ export type Delta =
   | "staggerRating"
   | "stamina"
   | "staminaRegenerationRate"
+  | "stunRating"
   | "thorns";
 
 export const ELEMENTAL_TYPES = ["lightning", "fire", "ice"] as const;
@@ -100,8 +99,11 @@ export const MONSTER_AILMENT_TYPES = [
   "frozen",
   "shocked",
   "staggered",
+  "stunned",
 ] as const;
 export type MonsterAilment = (typeof MONSTER_AILMENT_TYPES)[number];
+
+export type NumberFormat = "float" | "integer" | "percentage" | "time";
 
 export type Reserve = "health" | "stamina";
 
@@ -140,6 +142,7 @@ export const SHOWING_TYPES = [
   "stamina",
   "staminaDetails",
   "statistics",
+  "stun",
   "thorns",
   "weapon",
   "weight",
@@ -269,6 +272,8 @@ export type StateKey =
   | "monsterBlightChance"
   | "monsterDamage"
   | "monsterDamagePerSecond"
+  | "monsterDamageTotal"
+  | "monsterDamageTotalPerSecond"
   | "monsterDistance"
   | "monsterElement"
   | "monsterHealth"
@@ -316,6 +321,7 @@ export type StateKey =
   | "staminaMaximum"
   | "staminaMaximumTotal"
   | "statusElement"
+  | "stunRating"
   | "thorns"
   | "totalElementalEffects"
   | "trinketProperties"
@@ -333,4 +339,4 @@ export const TRINKET_TYPES = [
 ] as const;
 export type Trinket = (typeof TRINKET_TYPES)[number];
 
-export type WeaponAbility = "bleed" | "parry" | "stagger";
+export type WeaponAbility = "bleed" | "parry" | "stun";

@@ -17,7 +17,7 @@ export function Block() {
 
   useDeltaText({
     delta: deltas("block"),
-    type: "percentage",
+    format: "percentage",
     value: block,
   });
 

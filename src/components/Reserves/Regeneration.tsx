@@ -65,7 +65,7 @@ export function Regeneration({ type }: { type: Reserve }) {
 
   useDeltaText({
     delta: deltas(regenerationDelta),
-    type: "time",
+    format: "time",
     value: regenerationRate(type),
   });
 

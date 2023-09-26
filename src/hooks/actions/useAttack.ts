@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { BLEED, ELEMENTAL_AILMENT_PENALTY } from "@neverquest/data/statistics";
+import { AILMENT_PENALTY, BLEED } from "@neverquest/data/statistics";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
@@ -125,13 +125,13 @@ export function useAttack() {
             get(monsterAilmentDuration("bleeding")) === 0 &&
             get(skills("anatomy")) &&
             Math.random() <= get(bleed);
-          const hasInflictedStagger =
+          const hasInflictedStun =
             get(skills("traumatology")) && gearClass === "blunt" && Math.random() <= abilityChance;
 
           const baseDamage = get(damageTotal);
           const totalDamage = -Math.round(
             (hasInflictedCritical ? get(criticalStrike) : baseDamage) *
-              (get(isMonsterAiling("burning")) ? ELEMENTAL_AILMENT_PENALTY.burning : 1),
+              (get(isMonsterAiling("burning")) ? AILMENT_PENALTY.burning : 1),
           );
           const monsterDeltas: DeltaDisplay = [
             {
@@ -140,15 +140,16 @@ export function useAttack() {
             },
           ];
 
-          if (hasInflictedCritical) {
-            monsterDeltas.push({
-              color: "text-muted",
-              value: "CRITICAL",
-            });
+          if (gearClass === "blunt") {
+            increaseMastery("might");
           }
 
           if (gearClass === "piercing") {
             increaseMastery("cruelty");
+          }
+
+          if (gearClass === "slashing") {
+            increaseMastery("finesse");
           }
 
           if (hasInflictedBleed) {
@@ -161,17 +162,20 @@ export function useAttack() {
             });
           }
 
-          if (gearClass === "blunt") {
-            increaseMastery("might");
+          if (hasInflictedCritical) {
+            monsterDeltas.push({
+              color: "text-muted",
+              value: "CRITICAL",
+            });
           }
 
-          if (hasInflictedStagger) {
+          if (hasInflictedStun) {
             set(isShowing("monsterAilments"), true);
-            set(monsterAilmentDuration("staggered"), get(masteryStatistic("might")));
+            set(monsterAilmentDuration("stunned"), get(masteryStatistic("might")));
 
             monsterDeltas.push({
               color: "text-muted",
-              value: "STAGGER",
+              value: "STUN",
             });
           }
 

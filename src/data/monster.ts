@@ -34,7 +34,6 @@ export const LOOT = {
 };
 
 export const MONSTER_ATTACK_RATE = {
-  attenuation: 900,
   base: 4000,
   bonus: 0.01,
   boss: 1.1,
@@ -42,7 +41,7 @@ export const MONSTER_ATTACK_RATE = {
 };
 
 export const MONSTER_DAMAGE = {
-  attenuation: 50,
+  attenuation: 40,
   base: 8,
   bonus: 0.02,
   boss: 1.2,

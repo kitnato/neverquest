@@ -111,8 +111,8 @@ export const isMonsterDead = withStateKey("isMonsterDead", (key) =>
 export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   selector({
     get: ({ get }) => {
-      const { attenuation, base, bonus, boss, minimum } = MONSTER_ATTACK_RATE;
-      const factor = getGrowthTriangular(get(stage)) / attenuation;
+      const { base, bonus, boss, minimum } = MONSTER_ATTACK_RATE;
+      const factor = getGrowthSigmoid(get(stage));
 
       return Math.round(
         Math.max(

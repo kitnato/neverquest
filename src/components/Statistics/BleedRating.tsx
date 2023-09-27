@@ -16,7 +16,7 @@ import { masteryStatistic } from "@neverquest/state/masteries";
 import { skills } from "@neverquest/state/skills";
 import { bleed, bleedDamage, bleedRating, damageTotal } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function BleedRating() {
   const bleedValue = useRecoilValue(bleed);
@@ -54,7 +54,12 @@ export function BleedRating() {
 
                       <td>
                         <IconImage Icon={IconBleed} size="tiny" />
-                        &nbsp;{`${bleedValue === 0 ? LABEL_EMPTY : formatPercentage(bleedValue)}`}
+                        &nbsp;
+                        {`${
+                          bleedValue === 0
+                            ? LABEL_EMPTY
+                            : formatValue({ format: "percentage", value: bleedValue })
+                        }`}
                       </td>
                     </tr>
 
@@ -64,27 +69,35 @@ export function BleedRating() {
                         &nbsp;Cruelty:
                       </td>
 
-                      <td>{`${formatPercentage(crueltyValue)} of total damage`}</td>
+                      <td>{`${formatValue({
+                        format: "percentage",
+                        value: crueltyValue,
+                      })} of total damage`}</td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
 
-                      <td>{formatTime(duration)}</td>
+                      <td>{formatValue({ format: "time", value: duration })}</td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Ticks:</td>
 
-                      <td>{`${ticks} (every ${formatTime(BLEED_DELTA)})`}</td>
+                      <td>{`${ticks} (every ${formatValue({
+                        format: "time",
+                        value: BLEED_DELTA,
+                      })})`}</td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Bleed damage:</td>
 
-                      <td>{`${Math.round(
-                        damageTotalValue * crueltyValue,
-                      )} (${bleedDamageValue} per tick)`}</td>
+                      <td>{`${formatValue({
+                        value: damageTotalValue * crueltyValue,
+                      })} (${formatValue({
+                        value: bleedDamageValue,
+                      })} per tick)`}</td>
                     </tr>
                   </DetailsTable>
                 </Popover.Body>

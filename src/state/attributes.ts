@@ -12,14 +12,12 @@ import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities
 export const attributePoints = withStateKey("attributePoints", (key) =>
   selector({
     get: ({ get }) => {
-      const nextLevel = get(level) + 1;
-
       let points = 0;
       let requiredEssence = get(attributeCost);
 
       while (requiredEssence <= get(essence)) {
         points += 1;
-        requiredEssence += getGrowthTriangular(nextLevel + points);
+        requiredEssence += getGrowthTriangular(get(level) + 1 + ATTRIBUTE_COST_BASE + points);
       }
 
       return points;

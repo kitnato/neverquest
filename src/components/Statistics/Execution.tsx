@@ -11,7 +11,7 @@ import { skills } from "@neverquest/state/skills";
 import { execution } from "@neverquest/state/statistics";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatPercentage } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Execution() {
   const executionValue = useRecoilValue(execution);
@@ -39,7 +39,7 @@ export function Execution() {
             {siegecraftValue
               ? executionValue === 0
                 ? LABEL_EMPTY
-                : formatPercentage(executionValue, 0)
+                : formatValue({ decimals: 0, format: "percentage", value: executionValue })
               : LABEL_EMPTY}
           </span>
 

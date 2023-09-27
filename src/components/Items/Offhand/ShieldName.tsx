@@ -18,7 +18,7 @@ import { shield as shieldEquipped } from "@neverquest/state/items";
 import { skills } from "@neverquest/state/skills";
 import type { Shield } from "@neverquest/types";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
-import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 
 export function ShieldName({
   placement,
@@ -58,7 +58,7 @@ export function ShieldName({
 
                 <td>
                   <IconImage Icon={IconBlock} size="tiny" />
-                  &nbsp;{formatPercentage(block)}
+                  &nbsp;{formatValue({ format: "percentage", value: block })}
                   {showComparison && (
                     <GearComparison
                       difference={block - shieldEquippedValue.block}
@@ -126,7 +126,7 @@ export function ShieldName({
 
                       <td>
                         <IconImage Icon={IconStagger} size="tiny" />
-                        &nbsp;{formatPercentage(stagger)}
+                        &nbsp;{formatValue({ format: "percentage", value: stagger })}
                         {showComparison && (
                           <GearComparison
                             difference={stagger - shieldEquippedValue.stagger}

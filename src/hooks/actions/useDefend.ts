@@ -100,19 +100,15 @@ export function useDefend() {
           }
         }
 
-        const protectionValue = get(protection);
-
-        // If health damage (protection minus monster damage) is 0 or less, nothing else happens.
         const monsterDamageTotalValue = get(monsterDamageTotal);
-        let healthDamage = (() => {
-          const damage = protectionValue - monsterDamageTotalValue;
-
-          return damage < 0 ? damage : 0;
-        })();
-        let monsterHealthDamage = 0;
+        const protectionValue = get(protection);
 
         const deltaMonsterHealth: DeltaDisplay = [];
         const deltaStamina: DeltaDisplay = [];
+        const totalDamage = protectionValue - monsterDamageTotalValue;
+        let healthDamage = totalDamage < 0 ? totalDamage : 0;
+
+        let monsterHealthDamage = 0;
 
         const hasParried = get(skills("escrime")) && Math.random() <= get(parry);
 
@@ -123,9 +119,9 @@ export function useDefend() {
           if (get(canAttackOrParry)) {
             set(isShowing("monsterAilments"), true);
 
-            const parryReflected = -Math.floor(monsterDamageTotalValue * get(parryDamage));
+            const parryReflected = -Math.round(monsterDamageTotalValue * get(parryDamage));
 
-            healthDamage += Math.floor(healthDamage * get(parryAbsorption));
+            healthDamage -= Math.round(healthDamage * get(parryAbsorption));
             monsterHealthDamage += parryReflected;
 
             deltaMonsterHealth.push(
@@ -224,7 +220,7 @@ export function useDefend() {
           }
         }
 
-        // If neither parried nor blocked, show damage with protection.
+        // If neither parried nor blocked, show damage with protection
         if (!hasBlocked && !hasParried && protectionValue > 0) {
           deltaHealth.push(
             {
@@ -233,7 +229,8 @@ export function useDefend() {
             },
             {
               color: "text-muted",
-              value: `(${protectionValue})`,
+              // In the case of 0 damage, show only inflicted.
+              value: `(${Math.min(protectionValue, totalDamage)})`,
             },
           );
         }
@@ -289,7 +286,7 @@ export function useDefend() {
           }
         }
 
-        // Inflict thorns, if present.
+        // Calculate thorns damage.
         const thornsValue = get(thorns);
 
         if (thornsValue > 0) {
@@ -307,15 +304,15 @@ export function useDefend() {
           );
         }
 
+        // Take any damage and any stamina costs.
+        changeHealth({ delta: deltaHealth, isRegeneration: false, value: healthDamage });
+
         // Inflict any armor elemental effects.
         ELEMENTAL_TYPES.forEach((elemental) =>
           inflictElementalAilment({ elemental, slot: "armor" }),
         );
 
-        // The attack went through, apply damage and any stamina costs.
-        changeHealth({ delta: deltaHealth, isRegeneration: false, value: healthDamage });
-
-        // Apply and show any parry and thorns damage.
+        // Inflict any parry and/or thorns damage.
         if (monsterHealthDamage > 0) {
           changeMonsterHealth({ delta: deltaMonsterHealth, value: -monsterHealthDamage });
 

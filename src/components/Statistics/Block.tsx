@@ -6,13 +6,15 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
 import { deltas } from "@neverquest/state/deltas";
+import { isShowing } from "@neverquest/state/isShowing";
 import { weapon } from "@neverquest/state/items";
 import { block } from "@neverquest/state/statistics";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
-import { formatPercentage } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Block() {
   const blockValue = useRecoilValue(block);
+  const isShowingBlock = useRecoilValue(isShowing("block"));
   const weaponValue = useRecoilValue(weapon);
 
   useDeltaText({
@@ -21,7 +23,11 @@ export function Block() {
     value: block,
   });
 
-  if (isRanged(weaponValue) || (isMelee(weaponValue) && weaponValue.grip === "two-handed")) {
+  if (
+    !isShowingBlock ||
+    isRanged(weaponValue) ||
+    (isMelee(weaponValue) && weaponValue.grip === "two-handed")
+  ) {
     return null;
   }
 
@@ -29,7 +35,7 @@ export function Block() {
     <IconDisplay
       contents={
         <Stack direction="horizontal">
-          <span>{formatPercentage(blockValue)}</span>
+          <span>{formatValue({ format: "percentage", value: blockValue })}</span>
 
           <FloatingText deltaType="block" />
         </Stack>

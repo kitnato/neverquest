@@ -16,7 +16,7 @@ import { masteryStatistic } from "@neverquest/state/masteries";
 import { skills } from "@neverquest/state/skills";
 import { parry, parryAbsorption, parryDamage, parryRating } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatPercentage } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function ParryRating() {
   const finesseValue = useRecoilValue(masteryStatistic("finesse"));
@@ -52,20 +52,28 @@ export function ParryRating() {
 
                       <td>
                         <IconImage Icon={IconParry} size="tiny" />
-                        &nbsp;{formatPercentage(parryValue)}
+                        &nbsp;{formatValue({ format: "percentage", value: parryValue })}
                       </td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Damage reflected:</td>
 
-                      <td>{formatPercentage(PARRY_DAMAGE, 0)}</td>
+                      <td>
+                        {formatValue({ decimals: 0, format: "percentage", value: PARRY_DAMAGE })}
+                      </td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Damage absorbed:</td>
 
-                      <td>{formatPercentage(PARRY_ABSORPTION, 0)}</td>
+                      <td>
+                        {formatValue({
+                          decimals: 0,
+                          format: "percentage",
+                          value: PARRY_ABSORPTION,
+                        })}
+                      </td>
                     </tr>
 
                     <tr>
@@ -74,7 +82,11 @@ export function ParryRating() {
                         &nbsp;Finesse:
                       </td>
 
-                      <td>{`+${formatPercentage(finesseValue, 0)}`}</td>
+                      <td>{`+${formatValue({
+                        decimals: 0,
+                        format: "percentage",
+                        value: finesseValue,
+                      })}`}</td>
                     </tr>
 
                     {finesseValue > 0 && (
@@ -82,13 +94,15 @@ export function ParryRating() {
                         <tr>
                           <td className={CLASS_TABLE_CELL_ITALIC}>Total reflected:</td>
 
-                          <td>{formatPercentage(parryDamageValue)}</td>
+                          <td>{formatValue({ format: "percentage", value: parryDamageValue })}</td>
                         </tr>
 
                         <tr>
                           <td className={CLASS_TABLE_CELL_ITALIC}>Total absorbed:</td>
 
-                          <td>{formatPercentage(parryAbsorptionValue)}</td>
+                          <td>
+                            {formatValue({ format: "percentage", value: parryAbsorptionValue })}
+                          </td>
                         </tr>
                       </>
                     )}

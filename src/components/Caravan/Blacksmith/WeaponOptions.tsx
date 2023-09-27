@@ -22,7 +22,7 @@ import { allowNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
 import { GRIP_TYPES, type Grip } from "@neverquest/types/unions";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
-import { capitalizeAll, formatPercentage, formatTime } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { generateMeleeWeapon } from "@neverquest/utilities/generators";
 import { getGearPrice, getGrowthSigmoid, getMeleeRanges } from "@neverquest/utilities/getters";
 
@@ -90,7 +90,7 @@ export function WeaponOptions() {
                 setWeaponLevel(parsedValue);
               }}
               type="number"
-              value={weaponLevel}
+              value={formatValue({ value: weaponLevel })}
             />
           }
           Icon={IconGearLevel}
@@ -137,14 +137,19 @@ export function WeaponOptions() {
         )}
 
         <IconDisplay
-          contents={`${damage.minimum}-${damage.maximum}`}
+          contents={`${formatValue({ value: damage.minimum })}-${formatValue({
+            value: damage.maximum,
+          })}`}
           Icon={IconWeaponDamage}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Damage"
         />
 
         <IconDisplay
-          contents={`${formatTime(rate.minimum)}-${formatTime(rate.maximum)}`}
+          contents={`${formatValue({ format: "time", value: rate.minimum })}-${formatValue({
+            format: "time",
+            value: rate.maximum,
+          })}`}
           Icon={IconWeaponAttackRate}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Attack rate"
@@ -153,9 +158,10 @@ export function WeaponOptions() {
         <IconDisplay
           contents={
             skillValue
-              ? `${formatPercentage(abilityChance.minimum)}-${formatPercentage(
-                  abilityChance.maximum,
-                )}`
+              ? `${formatValue({
+                  format: "percentage",
+                  value: abilityChance.minimum,
+                })}-${formatValue({ format: "percentage", value: abilityChance.maximum })}`
               : LABEL_UNKNOWN
           }
           Icon={skillValue ? IconAbility : IconUnknown}
@@ -164,14 +170,18 @@ export function WeaponOptions() {
         />
 
         <IconDisplay
-          contents={`${staminaCost.minimum}-${staminaCost.maximum}`}
+          contents={`${formatValue({ value: staminaCost.minimum })}-${formatValue({
+            value: staminaCost.maximum,
+          })}`}
           Icon={IconStamina}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Stamina cost"
         />
 
         <IconDisplay
-          contents={`${weight.minimum}-${weight.maximum}`}
+          contents={`${formatValue({ value: weight.minimum })}-${formatValue({
+            value: weight.maximum,
+          })}`}
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"

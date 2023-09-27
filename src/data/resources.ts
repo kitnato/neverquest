@@ -1,1 +1,1 @@
-export const LOOTING_RATE = 2500;
+export const LOOTING_RATE = 2000;

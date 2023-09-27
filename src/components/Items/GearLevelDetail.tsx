@@ -6,6 +6,7 @@ import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.sv
 import { showGearLevel } from "@neverquest/state/settings";
 import type { ComparisonProps } from "@neverquest/types/props";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function GearLevelDetail({
   comparison,
@@ -26,7 +27,7 @@ export function GearLevelDetail({
 
       <td>
         <IconImage Icon={IconGearLevel} size="tiny" />
-        &nbsp;{level}
+        &nbsp;{formatValue({ value: level })}
         {comparison !== null && (
           <GearComparison
             difference={level - comparison.subtrahend}

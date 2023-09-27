@@ -21,7 +21,7 @@ import {
 } from "@neverquest/state/reserves";
 import type { BlightMagnitude } from "@neverquest/types";
 import type { Reserve } from "@neverquest/types/unions";
-import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function ReserveMeter({ type }: { type: Reserve }) {
   const isHealth = type === "health";
@@ -55,15 +55,21 @@ export function ReserveMeter({ type }: { type: Reserve }) {
       attached="below"
       label={
         <>
-          {`${reserveValue}/${reserveMaximumTotalValue}`}
+          {`${formatValue({ value: reserveValue })}/${formatValue({
+            value: reserveMaximumTotalValue,
+          })}`}
           {isAiling && (
             <>
-              {` (${reserveMaximumValue}) `}
+              {` (${formatValue({ value: reserveMaximumValue })} `}
               <IconImage Icon={isHealth ? IconPoison : IconBlight} size="tiny" />
               {` ${
                 typeof ailmentValue === "number"
-                  ? formatTime(ailmentValue)
-                  : formatPercentage(ailmentValue.percentage, 0)
+                  ? formatValue({ format: "time", value: ailmentValue })
+                  : formatValue({
+                      decimals: 0,
+                      format: "percentage",
+                      value: ailmentValue.percentage,
+                    })
               }`}
             </>
           )}

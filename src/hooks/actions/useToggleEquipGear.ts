@@ -42,6 +42,7 @@ export function useToggleEquipGear() {
         }
 
         if (isShield(gearItem) && !isEquipped) {
+          set(isShowing("block"), true);
           set(isShowing("offhand"), true);
           set(isShowing("stamina"), true);
         }

@@ -13,6 +13,7 @@ import {
 } from "@neverquest/state/reserves";
 import { isConsumable } from "@neverquest/types/type-guards";
 import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
+import { formatValue } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeHealth() {
@@ -25,6 +26,8 @@ export function useChangeHealth() {
         const value = deltaReserve.isRegeneration
           ? get(regenerationAmount("health"))
           : deltaReserve.value;
+
+        const formattedValue = formatValue({ value });
         const isPositive = value > 0;
 
         let newHealth = get(health) + value;
@@ -36,7 +39,7 @@ export function useChangeHealth() {
             (Array.isArray(deltaReserve.delta) && deltaReserve.delta.length === 0)
             ? ({
                 color: isPositive ? "text-success" : value === 0 ? "text-muted" : "text-danger",
-                value: isPositive ? `+${value}` : value,
+                value: isPositive ? `+${formattedValue}` : formattedValue,
               } as DeltaDisplay)
             : deltaReserve.delta,
         );

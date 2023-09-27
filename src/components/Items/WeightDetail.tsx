@@ -10,6 +10,7 @@ import {
   LABEL_EMPTY,
   LABEL_UNKNOWN,
 } from "@neverquest/utilities/constants";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function WeightDetail({
   comparison = null,
@@ -30,7 +31,7 @@ export function WeightDetail({
 
           <td>
             <IconImage Icon={IconEncumbrance} size="tiny" />
-            &nbsp;{weight || LABEL_EMPTY}
+            &nbsp;{formatValue({ value: weight }) || LABEL_EMPTY}
             {comparison !== null && (
               <GearComparison
                 difference={weight - comparison.subtrahend}
@@ -38,7 +39,9 @@ export function WeightDetail({
                 showingType={comparison.showingType}
               />
             )}
-            {stack !== undefined && stack > 1 && <>{` (${weight * stack})`}</>}
+            {stack !== undefined && stack > 1 && (
+              <>{` (${formatValue({ value: weight * stack })}`}</>
+            )}
           </td>
         </>
       ) : (

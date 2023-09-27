@@ -8,7 +8,7 @@ import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.s
 import { deltas } from "@neverquest/state/deltas";
 import { skills } from "@neverquest/state/skills";
 import { deflection } from "@neverquest/state/statistics";
-import { formatPercentage } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Deflection() {
   const deflectionValue = useRecoilValue(deflection);
@@ -28,7 +28,7 @@ export function Deflection() {
     <IconDisplay
       contents={
         <Stack direction="horizontal">
-          <span>{formatPercentage(deflectionValue)}</span>
+          <span>{formatValue({ format: "percentage", value: deflectionValue })}</span>
 
           <FloatingText deltaType="deflection" />
         </Stack>

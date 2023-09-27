@@ -11,7 +11,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { essence } from "@neverquest/state/resources";
 import type { Crew } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
-import { capitalizeAll } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 
 export function CrewHirable({ type }: { type: Crew }) {
   const essenceValue = useRecoilValue(essence);
@@ -43,7 +43,11 @@ export function CrewHirable({ type }: { type: Crew }) {
         <IconDisplay contents={name} description={description} Icon={Icon} tooltip="Caravan crew" />
 
         <Stack direction="horizontal" gap={3}>
-          <IconDisplay contents={price} Icon={IconEssence} tooltip="Price" />
+          <IconDisplay
+            contents={formatValue({ value: price })}
+            Icon={IconEssence}
+            tooltip="Price"
+          />
 
           <OverlayTrigger
             overlay={<Tooltip>Insufficient essence!</Tooltip>}

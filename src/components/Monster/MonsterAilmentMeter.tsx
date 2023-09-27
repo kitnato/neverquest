@@ -6,7 +6,7 @@ import { AILMENT_DESCRIPTION } from "@neverquest/data/monster";
 import { isMonsterAiling, monsterAilmentDuration } from "@neverquest/state/monster";
 import type { MonsterAilment, NumberFormat } from "@neverquest/types/unions";
 import { LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatTime } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function MonsterAilmentMeter({
   format = "time",
@@ -28,7 +28,7 @@ export function MonsterAilmentMeter({
           label={
             isMonsterAilingValue
               ? format === "time"
-                ? formatTime(monsterAilmentDurationValue)
+                ? formatValue({ format: "time", value: monsterAilmentDurationValue })
                 : monsterAilmentDurationValue
               : LABEL_EMPTY
           }

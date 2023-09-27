@@ -18,7 +18,7 @@ import { armor as armorEquipped } from "@neverquest/state/items";
 import { skills } from "@neverquest/state/skills";
 import type { Armor } from "@neverquest/types";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
-import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 
 export function ArmorName({
   armor,
@@ -57,7 +57,7 @@ export function ArmorName({
 
                 <td>
                   <IconImage Icon={IconProtection} size="tiny" />
-                  &nbsp;{protection}
+                  &nbsp;{formatValue({ value: protection })}
                   {showComparison && (
                     <GearComparison
                       difference={protection - armorEquippedValue.protection}
@@ -113,7 +113,7 @@ export function ArmorName({
 
                       <td>
                         <IconImage Icon={IconDeflection} size="tiny" />
-                        &nbsp;{formatPercentage(deflection)}
+                        &nbsp;{formatValue({ format: "percentage", value: deflection })}
                         {showComparison && (
                           <GearComparison
                             difference={deflection - armorEquippedValue.deflection}

@@ -21,7 +21,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
-import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { generateArmor } from "@neverquest/utilities/generators";
 import { getArmorRanges, getGearPrice, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
@@ -83,7 +83,7 @@ export function ArmorOptions() {
                 setArmorLevel(parsedValue);
               }}
               type="number"
-              value={armorLevel}
+              value={formatValue({ value: armorLevel })}
             />
           }
           Icon={IconGearLevel}
@@ -110,7 +110,9 @@ export function ArmorOptions() {
         />
 
         <IconDisplay
-          contents={`${protection.minimum}-${protection.maximum}`}
+          contents={`${formatValue({ value: protection.minimum })}-${formatValue({
+            value: protection.maximum,
+          })}`}
           Icon={IconArmorProtection}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Protection"
@@ -120,7 +122,10 @@ export function ArmorOptions() {
           <IconDisplay
             contents={
               armorcraftValue
-                ? `${formatPercentage(deflection.minimum)}-${formatPercentage(deflection.maximum)}`
+                ? `${formatValue({
+                    format: "percentage",
+                    value: deflection.minimum,
+                  })}-${formatValue({ format: "percentage", value: deflection.maximum })}`
                 : LABEL_UNKNOWN
             }
             Icon={armorcraftValue ? IconDeflection : IconUnknown}
@@ -141,7 +146,9 @@ export function ArmorOptions() {
         )}
 
         <IconDisplay
-          contents={`${weight.minimum}-${weight.maximum}`}
+          contents={`${formatValue({ value: weight.minimum })}-${formatValue({
+            value: weight.maximum,
+          })}`}
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"

@@ -8,6 +8,7 @@ import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { essence } from "@neverquest/state/resources";
+import { formatValue } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Essence() {
@@ -32,7 +33,7 @@ export function Essence() {
         }}
       >
         <IconDisplay
-          contents={essenceValue}
+          contents={formatValue({ value: essenceValue })}
           Icon={IconEssence}
           iconProps={{ overlayPlacement: "bottom" }}
           tooltip="Essence"

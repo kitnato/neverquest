@@ -15,6 +15,7 @@ import {
   wildernesses,
 } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Compass() {
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
@@ -71,7 +72,9 @@ export function Compass() {
                   const stageIndex = index + 1;
 
                   return (
-                    <option key={name} value={stageIndex}>{`Level ${stageIndex} - ${name}`}</option>
+                    <option key={name} value={stageIndex}>{`Stage ${formatValue({
+                      value: stageIndex,
+                    })} - ${name}`}</option>
                   );
                 })}
               </Form.Select>

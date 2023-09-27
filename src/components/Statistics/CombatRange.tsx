@@ -16,7 +16,7 @@ import { skills } from "@neverquest/state/skills";
 import { range } from "@neverquest/state/statistics";
 import { isRanged } from "@neverquest/types/type-guards";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function CombatRange() {
   const marksmanshipValue = useRecoilValue(masteryStatistic("marksmanship"));
@@ -52,7 +52,10 @@ export function CombatRange() {
 
                       <td>
                         <IconImage Icon={IconRanged} size="tiny" />
-                        &nbsp;{isWeaponRanged ? formatTime(weaponValue.range) : LABEL_EMPTY}
+                        &nbsp;
+                        {isWeaponRanged
+                          ? formatValue({ format: "time", value: weaponValue.range })
+                          : LABEL_EMPTY}
                       </td>
                     </tr>
 
@@ -62,7 +65,10 @@ export function CombatRange() {
                         &nbsp;Marksmanship:
                       </td>
 
-                      <td>{`+${formatPercentage(marksmanshipValue)}`}</td>
+                      <td>{`+${formatValue({
+                        format: "percentage",
+                        value: marksmanshipValue,
+                      })}`}</td>
                     </tr>
                   </DetailsTable>
                 </Popover.Body>
@@ -74,7 +80,7 @@ export function CombatRange() {
               {archeryValue
                 ? rangeValue === 0
                   ? LABEL_EMPTY
-                  : formatTime(rangeValue)
+                  : formatValue({ format: "time", value: rangeValue })
                 : LABEL_EMPTY}
             </span>
           </OverlayTrigger>

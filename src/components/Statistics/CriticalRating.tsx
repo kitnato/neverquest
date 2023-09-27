@@ -24,7 +24,7 @@ import {
   powerBonus,
 } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatPercentage } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function CriticalRating() {
   const criticalChanceValue = useRecoilValue(criticalChance);
@@ -67,7 +67,12 @@ export function CriticalRating() {
 
                       <td>
                         <IconImage Icon={IconCriticalChance} size="tiny" />
-                        &nbsp;{`${formatPercentage(dexterityValue, 0)} chance`}
+                        &nbsp;
+                        {`${formatValue({
+                          decimals: 0,
+                          format: "percentage",
+                          value: dexterityValue,
+                        })} chance`}
                       </td>
                     </tr>
 
@@ -79,7 +84,10 @@ export function CriticalRating() {
                             &nbsp;Empowered:
                           </td>
 
-                          <td>{`+${formatPercentage(powerBonusChanceValue)}`}</td>
+                          <td>{`+${formatValue({
+                            format: "percentage",
+                            value: powerBonusChanceValue,
+                          })}`}</td>
                         </tr>
 
                         <tr>
@@ -87,7 +95,8 @@ export function CriticalRating() {
 
                           <td>
                             <IconImage Icon={IconCriticalChance} size="tiny" />
-                            &nbsp;{formatPercentage(criticalChanceValue)}
+                            &nbsp;
+                            {formatValue({ format: "percentage", value: criticalChanceValue })}
                           </td>
                         </tr>
                       </>
@@ -101,7 +110,13 @@ export function CriticalRating() {
 
                       <td>
                         <IconImage Icon={IconCriticalDamage} size="tiny" />
-                        &nbsp;{`${formatPercentage(perceptionValue, 0)} damage`}&nbsp;
+                        &nbsp;
+                        {`${formatValue({
+                          decimals: 0,
+                          format: "percentage",
+                          value: perceptionValue,
+                        })} damage`}
+                        &nbsp;
                         {`(${criticalStrikeValue})`}
                       </td>
                     </tr>
@@ -114,7 +129,10 @@ export function CriticalRating() {
                             &nbsp;Empowered:
                           </td>
 
-                          <td>{`+${formatPercentage(powerBonusDamageValue)}`}</td>
+                          <td>{`+${formatValue({
+                            format: "percentage",
+                            value: powerBonusDamageValue,
+                          })}`}</td>
                         </tr>
 
                         <tr>
@@ -122,7 +140,8 @@ export function CriticalRating() {
 
                           <td>
                             <IconImage Icon={IconCriticalDamage} size="tiny" />
-                            &nbsp;{formatPercentage(criticalDamageValue)}
+                            &nbsp;
+                            {formatValue({ format: "percentage", value: criticalDamageValue })}
                           </td>
                         </tr>
                       </>

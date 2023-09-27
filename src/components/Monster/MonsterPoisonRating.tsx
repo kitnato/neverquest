@@ -12,7 +12,7 @@ import {
   monsterPoisonMagnitude,
 } from "@neverquest/state/monster";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_MAXIMUM } from "@neverquest/utilities/constants";
-import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function MonsterPoisonRating() {
   const monsterPoisonChanceValue = useRecoilValue(monsterPoisonChance);
@@ -36,14 +36,20 @@ export function MonsterPoisonRating() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
 
-                    <td>{formatPercentage(monsterPoisonChanceValue)}</td>
+                    <td>
+                      {formatValue({ format: "percentage", value: monsterPoisonChanceValue })}
+                    </td>
                   </tr>
 
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
 
                     <td>
-                      {`-${formatPercentage(monsterPoisonMagnitudeValue)}`}&nbsp;
+                      {`-${formatValue({
+                        format: "percentage",
+                        value: monsterPoisonMagnitudeValue,
+                      })}`}
+                      &nbsp;
                       <IconImage Icon={IconHealth} size="tiny" />
                       &nbsp;{LABEL_MAXIMUM}
                     </td>
@@ -52,7 +58,7 @@ export function MonsterPoisonRating() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
 
-                    <td>{formatTime(monsterPoisonLengthValue)}</td>
+                    <td>{formatValue({ format: "time", value: monsterPoisonLengthValue })}</td>
                   </tr>
                 </DetailsTable>
               </Popover.Body>
@@ -60,9 +66,10 @@ export function MonsterPoisonRating() {
           }
         >
           <span>
-            {Math.round(
-              monsterPoisonChanceValue * monsterPoisonMagnitudeValue * monsterPoisonLengthValue,
-            )}
+            {formatValue({
+              value:
+                monsterPoisonChanceValue * monsterPoisonMagnitudeValue * monsterPoisonLengthValue,
+            })}
           </span>
         </OverlayTrigger>
       }

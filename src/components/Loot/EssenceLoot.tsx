@@ -7,6 +7,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { essenceLoot } from "@neverquest/state/resources";
+import { formatValue } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function EssenceLoot() {
@@ -23,7 +24,11 @@ export function EssenceLoot() {
 
   return (
     <Stack className={getAnimationClass({ type: "flipInX" })} direction="horizontal">
-      <IconDisplay contents={essenceLootValue} Icon={IconEssence} tooltip="Looted essence" />
+      <IconDisplay
+        contents={formatValue({ value: essenceLootValue })}
+        Icon={IconEssence}
+        tooltip="Looted essence"
+      />
 
       <FloatingText deltaType="essenceLoot" />
     </Stack>

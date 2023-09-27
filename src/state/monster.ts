@@ -22,7 +22,7 @@ import {
   MONSTER_AILMENT_TYPES,
   type MonsterAilment,
 } from "@neverquest/types/unions";
-import { formatFloat } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 import {
   getDamagePerRate,
   getGrowthSigmoid,
@@ -163,12 +163,13 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
 export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (key) =>
   selector({
     get: ({ get }) =>
-      formatFloat(
-        getDamagePerRate({
+      formatValue({
+        format: "float",
+        value: getDamagePerRate({
           damage: get(monsterDamage),
           rate: get(monsterAttackRate),
         }),
-      ),
+      }),
     key,
   }),
 );
@@ -176,7 +177,9 @@ export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (ke
 export const monsterDamageTotal = withStateKey("monsterDamageTotal", (key) =>
   selector({
     get: ({ get }) =>
-      get(monsterDamage) * (get(isMonsterAiling("shocked")) ? AILMENT_PENALTY.shocked : 1),
+      Math.round(
+        get(monsterDamage) * (get(isMonsterAiling("shocked")) ? AILMENT_PENALTY.shocked : 1),
+      ),
     key,
   }),
 );
@@ -185,14 +188,15 @@ export const monsterDamageTotalPerSecond = withStateKey("monsterDamageTotalPerSe
   selector({
     get: ({ get }) =>
       get(isMonsterAiling("stunned"))
-        ? formatFloat(
-            getDamagePerRate({
+        ? formatValue({
+            format: "float",
+            value: getDamagePerRate({
               damage: get(monsterDamageTotal),
               damageModifier: 0,
               damageModifierChance: AILMENT_PENALTY.stunned,
               rate: get(monsterAttackRate),
             }),
-          )
+          })
         : get(monsterDamagePerSecond),
     key,
   }),

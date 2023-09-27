@@ -10,6 +10,7 @@ import {
   monsterDamageTotalPerSecond,
 } from "@neverquest/state/monster";
 import { showDamagePerSecond } from "@neverquest/state/settings";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function MonsterDamage() {
   const monsterDamageValue = useRecoilValue(monsterDamage);
@@ -20,7 +21,7 @@ export function MonsterDamage() {
 
   return (
     <IconDisplay
-      contents={`${monsterDamageTotalValue}${
+      contents={`${formatValue({ value: monsterDamageTotalValue })}${
         monsterDamageValue === monsterDamageTotalValue ? "" : ` (${monsterDamageValue})`
       }`}
       description={

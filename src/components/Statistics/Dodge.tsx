@@ -22,7 +22,7 @@ import {
   LABEL_EMPTY,
   LABEL_UNKNOWN,
 } from "@neverquest/utilities/constants";
-import { formatPercentage } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Dodge() {
   const { staminaCost } = useRecoilValue(armor);
@@ -61,7 +61,11 @@ export function Dodge() {
                         &nbsp;Agility:
                       </td>
 
-                      <td>{`${formatPercentage(statisticValue, 0)}`}</td>
+                      <td>{`${formatValue({
+                        decimals: 0,
+                        format: "percentage",
+                        value: statisticValue,
+                      })}`}</td>
                     </tr>
 
                     {powerBonusValue > 0 && (
@@ -71,7 +75,10 @@ export function Dodge() {
                           &nbsp;Empowered:
                         </td>
 
-                        <td>{`+${formatPercentage(powerBonusValue)}`}</td>
+                        <td>{`+${formatValue({
+                          format: "percentage",
+                          value: powerBonusValue,
+                        })}`}</td>
                       </tr>
                     )}
 
@@ -96,7 +103,11 @@ export function Dodge() {
               evasionValue && (isShowingDodgePenalty || hasTomeOfPower) ? ["hover", "focus"] : []
             }
           >
-            <span>{evasionValue ? formatPercentage(dodgeValue) : LABEL_EMPTY}</span>
+            <span>
+              {evasionValue
+                ? formatValue({ format: "percentage", value: dodgeValue })
+                : LABEL_EMPTY}
+            </span>
           </OverlayTrigger>
 
           <FloatingText deltaType="dodge" />

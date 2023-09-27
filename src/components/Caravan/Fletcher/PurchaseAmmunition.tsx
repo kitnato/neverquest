@@ -11,6 +11,7 @@ import { ownedItem } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import type { TrinketItemAmmunitionPouch } from "@neverquest/types";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_MAXIMUM } from "@neverquest/utilities/constants";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function PurchaseAmmunition() {
   const essenceValue = useRecoilValue(essence);
@@ -44,7 +45,11 @@ export function PurchaseAmmunition() {
         <IconDisplay contents="Ammunition (each)" Icon={IconAmmunition} tooltip="Ammunition" />
 
         <Stack direction="horizontal" gap={3}>
-          <IconDisplay contents={AMMUNITION_PRICE} Icon={IconEssence} tooltip="Price" />
+          <IconDisplay
+            contents={formatValue({ value: AMMUNITION_PRICE })}
+            Icon={IconEssence}
+            tooltip="Price"
+          />
 
           {ownedAmmunitionPouch === null ? (
             <span className="fst-italic">Nowhere to store ammunition.</span>

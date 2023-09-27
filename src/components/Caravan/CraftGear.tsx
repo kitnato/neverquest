@@ -5,6 +5,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { essence } from "@neverquest/state/resources";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function CraftGear({ onCraft, price }: { onCraft: () => void; price: number }) {
   const essenceValue = useRecoilValue(essence);
@@ -20,7 +21,7 @@ export function CraftGear({ onCraft, price }: { onCraft: () => void; price: numb
 
   return (
     <Stack className="mx-auto" direction="horizontal" gap={5}>
-      <IconDisplay contents={essenceValue} Icon={IconEssence} tooltip="Cost" />
+      <IconDisplay contents={formatValue({ value: price })} Icon={IconEssence} tooltip="Cost" />
 
       <OverlayTrigger
         overlay={<Tooltip>Insufficient essence!</Tooltip>}

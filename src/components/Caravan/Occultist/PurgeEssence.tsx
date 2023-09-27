@@ -10,6 +10,7 @@ import { ReactComponent as IconPurge } from "@neverquest/icons/purge.svg";
 import { essenceAbsorbed } from "@neverquest/state/attributes";
 import { essence } from "@neverquest/state/resources";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function PurgeEssence() {
   const essenceValue = useRecoilValue(essence);
@@ -42,7 +43,11 @@ export function PurgeEssence() {
         />
 
         <Stack direction="horizontal" gap={3}>
-          <IconDisplay contents={price} Icon={IconEssence} tooltip="Price" />
+          <IconDisplay
+            contents={formatValue({ value: price })}
+            Icon={IconEssence}
+            tooltip="Price"
+          />
 
           <OverlayTrigger
             overlay={

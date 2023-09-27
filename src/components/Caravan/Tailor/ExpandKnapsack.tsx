@@ -10,6 +10,7 @@ import { ReactComponent as IconTailoring } from "@neverquest/icons/tailoring.svg
 import { encumbranceMaximum, hasKnapsack } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
+import { formatValue } from "@neverquest/utilities/formatters";
 import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function ExpandKnapsack() {
@@ -41,7 +42,7 @@ export function ExpandKnapsack() {
       />
 
       <Stack direction="horizontal" gap={3}>
-        <IconDisplay contents={price} Icon={IconEssence} tooltip="Price" />
+        <IconDisplay contents={formatValue({ value: price })} Icon={IconEssence} tooltip="Price" />
 
         <OverlayTrigger
           overlay={

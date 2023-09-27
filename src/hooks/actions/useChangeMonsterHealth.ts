@@ -11,6 +11,7 @@ import {
   monsterHealthMaximum,
 } from "@neverquest/state/monster";
 import type { DeltaDisplay, DeltaReserveBase } from "@neverquest/types/ui";
+import { formatValue } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeMonsterHealth() {
@@ -22,22 +23,23 @@ export function useChangeMonsterHealth() {
         const get = getSnapshotGetter(snapshot);
 
         const { delta, value } = change;
-        const max = get(monsterHealthMaximum);
+        const formattedValue = formatValue({ value });
         const isPositive = value > 0;
 
-        let newHealth = get(monsterHealth) + value;
+        const newHealth = get(monsterHealth) + value;
+        const max = get(monsterHealthMaximum);
 
         set(
           deltas("monsterHealth"),
           delta ??
             ({
               color: isPositive ? "text-success" : "text-danger",
-              value: isPositive ? `+${value}` : value,
+              value: isPositive ? `+${formattedValue}` : formattedValue,
             } as DeltaDisplay),
         );
 
         if (newHealth <= 0) {
-          newHealth = 0;
+          set(monsterHealth, 0);
 
           if (get(ownedItem("monkey paw")) !== null) {
             progression();
@@ -47,10 +49,14 @@ export function useChangeMonsterHealth() {
 
           reset(attackDuration);
           reset(monsterAttackDuration);
+
+          return;
         }
 
         if (newHealth > max) {
-          newHealth = max;
+          set(monsterHealth, max);
+
+          return;
         }
 
         set(monsterHealth, newHealth);

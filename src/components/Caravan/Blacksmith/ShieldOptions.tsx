@@ -19,7 +19,7 @@ import { stage } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
-import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { generateShield } from "@neverquest/utilities/generators";
 import { getGearPrice, getGrowthSigmoid, getShieldRanges } from "@neverquest/utilities/getters";
 
@@ -80,7 +80,7 @@ export function ShieldOptions() {
                 setShieldLevel(parsedValue);
               }}
               type="number"
-              value={shieldLevel}
+              value={formatValue({ value: shieldLevel })}
             />
           }
           Icon={IconGearLevel}
@@ -107,7 +107,10 @@ export function ShieldOptions() {
         />
 
         <IconDisplay
-          contents={`${formatPercentage(block.minimum)}-${formatPercentage(block.maximum)}`}
+          contents={`${formatValue({ format: "percentage", value: block.minimum })}-${formatValue({
+            format: "percentage",
+            value: block.maximum,
+          })}`}
           Icon={IconBlock}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Block chance"
@@ -117,7 +120,10 @@ export function ShieldOptions() {
           <IconDisplay
             contents={
               shieldcraftValue
-                ? `${formatPercentage(stagger.minimum)}-${formatPercentage(stagger.maximum)}`
+                ? `${formatValue({ format: "percentage", value: stagger.minimum })}-${formatValue({
+                    format: "percentage",
+                    value: stagger.maximum,
+                  })}`
                 : LABEL_UNKNOWN
             }
             Icon={shieldcraftValue ? IconStagger : IconUnknown}
@@ -127,14 +133,18 @@ export function ShieldOptions() {
         )}
 
         <IconDisplay
-          contents={`${staminaCost.minimum}-${staminaCost.maximum}`}
+          contents={`${formatValue({ value: staminaCost.minimum })}-${formatValue({
+            value: staminaCost.maximum,
+          })}`}
           Icon={IconStamina}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Stamina cost"
         />
 
         <IconDisplay
-          contents={`${weight.minimum}-${weight.maximum}`}
+          contents={`${formatValue({ value: weight.minimum })}-${formatValue({
+            value: weight.maximum,
+          })}`}
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"

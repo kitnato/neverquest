@@ -8,6 +8,7 @@ import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import type { InventoryItem } from "@neverquest/types";
 import { isGear, isTrinket } from "@neverquest/types/type-guards";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
+import { formatValue } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function PurchasableItems({ items }: { items: InventoryItem[] }) {
@@ -29,7 +30,11 @@ export function PurchasableItems({ items }: { items: InventoryItem[] }) {
             )}
 
             <Stack direction="horizontal" gap={3}>
-              <IconDisplay contents={price} Icon={IconEssence} tooltip="Price" />
+              <IconDisplay
+                contents={formatValue({ value: price })}
+                Icon={IconEssence}
+                tooltip="Price"
+              />
 
               <PurchaseItem item={item} />
             </Stack>

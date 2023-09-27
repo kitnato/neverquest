@@ -16,7 +16,7 @@ import { skills } from "@neverquest/state/skills";
 import { staggerRating } from "@neverquest/state/statistics";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function StaggerRating() {
   const stabilityValue = useRecoilValue(masteryStatistic("stability"));
@@ -57,7 +57,7 @@ export function StaggerRating() {
                       <td>
                         <IconImage Icon={IconStagger} size="tiny" />
                         &nbsp;
-                        {formatPercentage(stagger)}
+                        {formatValue({ format: "percentage", value: stagger })}
                       </td>
                     </tr>
 
@@ -67,7 +67,10 @@ export function StaggerRating() {
                         &nbsp;Stability:
                       </td>
 
-                      <td>{`${formatTime(stabilityValue)} duration`}</td>
+                      <td>{`${formatValue({
+                        format: "time",
+                        value: stabilityValue,
+                      })} duration`}</td>
                     </tr>
                   </DetailsTable>
                 </Popover.Body>

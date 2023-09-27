@@ -15,7 +15,7 @@ import { attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
 import { powerBonus } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
-import { formatPercentage } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Stamina() {
   const isShowingStamina = useRecoilValue(isShowing("stamina"));
@@ -63,7 +63,11 @@ export function Stamina() {
                             &nbsp;Empowered:
                           </td>
 
-                          <td>{`+${formatPercentage(powerBonusValue, 0)}`}</td>
+                          <td>{`+${formatValue({
+                            decimals: 0,
+                            format: "percentage",
+                            value: powerBonusValue,
+                          })}`}</td>
                         </tr>
                       )}
                     </DetailsTable>

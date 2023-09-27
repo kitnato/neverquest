@@ -7,6 +7,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconEssenceAbsorbed } from "@neverquest/icons/essence-absorbed.svg";
 import { essenceAbsorbed } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function EssenceAbsorbed() {
   const essenceAbsorbedValue = useRecoilValue(essenceAbsorbed);
@@ -20,7 +21,7 @@ export function EssenceAbsorbed() {
     <IconDisplay
       contents={
         <Stack direction="horizontal">
-          <span>{essenceAbsorbedValue}</span>
+          <span>{formatValue({ value: essenceAbsorbedValue })}</span>
 
           <FloatingText deltaType="essenceAbsorbed" />
         </Stack>

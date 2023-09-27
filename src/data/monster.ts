@@ -1,14 +1,26 @@
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import type { MonsterAilment } from "@neverquest/types/unions";
-import { formatPercentage } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export const AILMENT_DESCRIPTION: Record<MonsterAilment, string> = {
   bleeding: "Suffering periodic damage.",
-  burning: `Taking ${formatPercentage(1 - AILMENT_PENALTY.burning)} increased damage.`,
-  frozen: `Attack rate & movement speed slowed by ${formatPercentage(1 - AILMENT_PENALTY.frozen)}.`,
-  shocked: `Dealing ${formatPercentage(1 - AILMENT_PENALTY.shocked)} decreased damage.`,
+  burning: `Taking ${formatValue({
+    format: "percentage",
+    value: 1 - AILMENT_PENALTY.burning,
+  })} increased damage.`,
+  frozen: `Attack rate & movement speed slowed by ${formatValue({
+    format: "percentage",
+    value: 1 - AILMENT_PENALTY.frozen,
+  })}.`,
+  shocked: `Dealing ${formatValue({
+    format: "percentage",
+    value: 1 - AILMENT_PENALTY.shocked,
+  })} decreased damage.`,
   staggered: "Cannot attack.",
-  stunned: `Hit accuracy reduced to ${formatPercentage(AILMENT_PENALTY.stunned)}.`,
+  stunned: `Hit accuracy reduced to ${formatValue({
+    format: "percentage",
+    value: AILMENT_PENALTY.stunned,
+  })}.`,
 };
 
 export const BOSS_STAGE_INTERVAL = 5;

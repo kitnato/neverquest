@@ -11,6 +11,7 @@ import { hireStatus } from "@neverquest/state/caravan";
 import { skillPrice, skills } from "@neverquest/state/skills";
 import type { Skill } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function TrainableSkill({ type }: { type: Skill }) {
   const { requiredCrew } = SKILLS[type];
@@ -30,7 +31,11 @@ export function TrainableSkill({ type }: { type: Skill }) {
           <SkillDisplay type={type} />
 
           <Stack direction="horizontal" gap={3}>
-            <IconDisplay contents={skillPriceValue} Icon={IconEssence} tooltip="Price" />
+            <IconDisplay
+              contents={formatValue({ value: skillPriceValue })}
+              Icon={IconEssence}
+              tooltip="Price"
+            />
 
             <TrainSkillButton type={type} />
           </Stack>

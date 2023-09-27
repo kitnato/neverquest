@@ -8,7 +8,7 @@ import { ReactComponent as IconDamagePerSecond } from "@neverquest/icons/damage-
 import { deltas } from "@neverquest/state/deltas";
 import { showDamagePerSecond } from "@neverquest/state/settings";
 import { damagePerSecond } from "@neverquest/state/statistics";
-import { formatFloat } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function DamagePerSecond() {
   const damagePerSecondValue = useRecoilValue(damagePerSecond);
@@ -28,7 +28,7 @@ export function DamagePerSecond() {
     <IconDisplay
       contents={
         <Stack direction="horizontal">
-          <span>{formatFloat(damagePerSecondValue)}</span>
+          <span>{formatValue({ format: "float", value: damagePerSecondValue })}</span>
 
           <FloatingText deltaType="damagePerSecond" />
         </Stack>

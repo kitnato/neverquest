@@ -17,7 +17,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { isPoisoned, poisonDuration } from "@neverquest/state/reserves";
 import { powerBonus } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
-import { formatPercentage } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Health() {
   const isPoisonedValue = useRecoilValue(isPoisoned);
@@ -57,7 +57,7 @@ export function Health() {
                           &nbsp;Vitality:
                         </td>
 
-                        <td>{`+${vitalityValue - baseAmount}`}</td>
+                        <td>{`+${formatValue({ value: vitalityValue - baseAmount })}`}</td>
                       </tr>
 
                       {powerBonusValue > 0 && (
@@ -67,7 +67,11 @@ export function Health() {
                             &nbsp;Empowered:
                           </td>
 
-                          <td>{`+${formatPercentage(powerBonusValue, 0)}`}</td>
+                          <td>{`+${formatValue({
+                            decimals: 0,
+                            format: "percentage",
+                            value: powerBonusValue,
+                          })}`}</td>
                         </tr>
                       )}
                     </DetailsTable>

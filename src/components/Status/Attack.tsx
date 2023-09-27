@@ -28,7 +28,7 @@ import { weapon } from "@neverquest/state/items";
 import { isMonsterDead } from "@neverquest/state/monster";
 import { attackRate, attackRateTotal, powerBonus } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
-import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Attack() {
   const attackRateValue = useRecoilValue(attackRate);
@@ -85,7 +85,7 @@ export function Attack() {
 
                       <td>
                         <IconImage Icon={IconWeaponAttackRate} size="tiny" />
-                        &nbsp;{formatTime(weaponValue.rate)}
+                        &nbsp;{formatValue({ format: "time", value: weaponValue.rate })}
                       </td>
                     </tr>
 
@@ -95,7 +95,11 @@ export function Attack() {
                         &nbsp;Speed:
                       </td>
 
-                      <td>{`-${formatPercentage(speedValue, 0)}`}</td>
+                      <td>{`-${formatValue({
+                        decimals: 0,
+                        format: "percentage",
+                        value: speedValue,
+                      })}`}</td>
                     </tr>
 
                     {powerBonusValue > 0 && (
@@ -106,13 +110,19 @@ export function Attack() {
                             &nbsp;Empowered:
                           </td>
 
-                          <td>{`+${formatPercentage(powerBonusValue)}`}</td>
+                          <td>{`+${formatValue({
+                            format: "percentage",
+                            value: powerBonusValue,
+                          })}`}</td>
                         </tr>
 
                         <tr>
                           <td className={CLASS_TABLE_CELL_ITALIC}>Total:</td>
 
-                          <td>{`-${formatPercentage(attackRateValue)}`}</td>
+                          <td>{`-${formatValue({
+                            format: "percentage",
+                            value: attackRateValue,
+                          })}`}</td>
                         </tr>
                       </>
                     )}

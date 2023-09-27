@@ -15,7 +15,7 @@ import { masteryStatistic } from "@neverquest/state/masteries";
 import { skills } from "@neverquest/state/skills";
 import { stunRating } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatPercentage } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function StunRating() {
   const mightValue = useRecoilValue(masteryStatistic("might"));
@@ -50,7 +50,7 @@ export function StunRating() {
                       <td>
                         <IconImage Icon={IconStun} size="tiny" />
                         &nbsp;
-                        {formatPercentage(abilityChance)}
+                        {formatValue({ format: "percentage", value: abilityChance })}
                       </td>
                     </tr>
 

@@ -23,12 +23,7 @@ import { skills } from "@neverquest/state/skills";
 import type { Weapon } from "@neverquest/types";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
-import {
-  capitalizeAll,
-  formatFloat,
-  formatPercentage,
-  formatTime,
-} from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { getDamagePerRate } from "@neverquest/utilities/getters";
 
 export function WeaponName({
@@ -91,7 +86,7 @@ export function WeaponName({
 
                 <td>
                   <IconImage Icon={IconWeaponAttackRate} size="tiny" />
-                  &nbsp;{formatTime(rate)}
+                  &nbsp;{formatValue({ format: "time", value: rate })}
                   {showComparison && (
                     <GearComparison
                       difference={rate - weaponEquippedValue.rate}
@@ -109,7 +104,7 @@ export function WeaponName({
                   <td>
                     <IconImage Icon={IconWeaponDamagePerSecond} size="tiny" />
                     &nbsp;
-                    {formatFloat(damagePerSecond)}
+                    {formatValue({ format: "float", value: damagePerSecond })}
                     {showComparison && (
                       <GearComparison
                         difference={
@@ -182,7 +177,7 @@ export function WeaponName({
 
                     <td>
                       <IconImage Icon={IconAbility} size="tiny" />
-                      &nbsp;{formatPercentage(abilityChance)}
+                      &nbsp;{formatValue({ format: "percentage", value: abilityChance })}
                       {showComparison && gearClass === weaponEquippedValue.gearClass && (
                         <GearComparison
                           difference={abilityChance - weaponEquippedValue.abilityChance}

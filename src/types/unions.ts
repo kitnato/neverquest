@@ -107,6 +107,7 @@ export const SHOWING_TYPES = [
   "armor",
   "attackRate",
   "attackRateDetails",
+  "block",
   "capabilities",
   "crewHiring",
   "criticalRating",

@@ -12,6 +12,7 @@ import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import type { ConsumableItem } from "@neverquest/types";
 import type { Consumable } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function PurchaseConsumable({ type }: { type: Consumable }) {
   const [id, setID] = useState(nanoid());
@@ -38,7 +39,7 @@ export function PurchaseConsumable({ type }: { type: Consumable }) {
       <ItemDisplay item={itemWithID} overlayPlacement="right" />
 
       <Stack direction="horizontal" gap={3}>
-        <IconDisplay contents={price} Icon={IconEssence} tooltip="Price" />
+        <IconDisplay contents={formatValue({ value: price })} Icon={IconEssence} tooltip="Price" />
 
         <PurchaseItemButton handlePurchase={handlePurchase} item={itemWithID} />
       </Stack>

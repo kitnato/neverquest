@@ -30,7 +30,7 @@ import { skills } from "@neverquest/state/skills";
 import { powerBonus } from "@neverquest/state/statistics";
 import type { Reserve } from "@neverquest/types/unions";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
-import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 const RESERVE_CHANGE = {
   health: useChangeHealth,
@@ -89,7 +89,7 @@ export function Regeneration({ type }: { type: Reserve }) {
 
                   <td>
                     <IconImage Icon={IconRegenerationRate} size="tiny" />
-                    &nbsp;{formatTime(baseRegenerationRate)}
+                    &nbsp;{formatValue({ format: "time", value: baseRegenerationRate })}
                   </td>
                 </tr>
 
@@ -99,7 +99,7 @@ export function Regeneration({ type }: { type: Reserve }) {
                     &nbsp;Vigor:
                   </td>
 
-                  <td>{`-${formatPercentage(vigorValue)}`}</td>
+                  <td>{`-${formatValue({ format: "percentage", value: vigorValue })}`}</td>
                 </tr>
 
                 {powerBonusRateValue > 0 && (
@@ -109,7 +109,10 @@ export function Regeneration({ type }: { type: Reserve }) {
                       &nbsp;Empowered:
                     </td>
 
-                    <td>{`+${formatPercentage(powerBonusRateValue)}`}</td>
+                    <td>{`+${formatValue({
+                      format: "percentage",
+                      value: powerBonusRateValue,
+                    })}`}</td>
                   </tr>
                 )}
 
@@ -138,7 +141,11 @@ export function Regeneration({ type }: { type: Reserve }) {
                       &nbsp;Empowered:
                     </td>
 
-                    <td>{`+${formatPercentage(powerBonusAmountValue, 0)}`}</td>
+                    <td>{`+${formatValue({
+                      decimals: 0,
+                      format: "percentage",
+                      value: powerBonusAmountValue,
+                    })}`}</td>
                   </tr>
                 )}
               </DetailsTable>

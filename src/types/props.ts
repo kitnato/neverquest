@@ -21,12 +21,6 @@ export type IconImageProps = {
 
 export type IconImageDOMProps = Omit<IconImageProps, "Icon">;
 
-export type ResourceTransaction = Partial<{
-  coinsDifference: number;
-  essenceDifference: number;
-  scrapDifference: number;
-}>;
-
 export type SVGIcon = FunctionComponent<SVGProps<SVGSVGElement> & { title?: string }>;
 
 export type TabData = {

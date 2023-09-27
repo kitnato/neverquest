@@ -44,8 +44,7 @@ export type ConsumableItem = ItemBase & {
 export type FletcherInventory = Weapon | null;
 
 export type GearBase = {
-  coinPrice: GeneratorRange;
-  scrapPrice: GeneratorRange;
+  price: GeneratorRange;
   staminaCost: [GeneratorRange, GeneratorRange];
   weight: [GeneratorRange, GeneratorRange];
 };
@@ -57,7 +56,7 @@ type GearItemBase = ItemBase & {
   isEquipped: boolean;
   level: number;
   name: string;
-  scrapPrice: number;
+  price: number;
 };
 
 export type GearItemUnequipped = typeof ARMOR_NONE | typeof SHIELD_NONE | typeof WEAPON_NONE;
@@ -74,8 +73,8 @@ export type GeneratorRange = {
 export type InventoryItem = ConsumableItem | GearItem | GemItem | TrinketItem;
 
 type ItemBase = {
-  coinPrice: number;
   id: string;
+  price: number;
   weight: number;
 };
 

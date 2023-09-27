@@ -1,9 +1,10 @@
 import { Button, Stack } from "react-bootstrap";
 import { useSetRecoilState } from "recoil";
 
-import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useMerchantTradeItem } from "@neverquest/hooks/actions/useMerchantTradeItem";
-import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
+import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { inventory } from "@neverquest/state/inventory";
 import type { InventoryItem } from "@neverquest/types";
 import { getSellPrice } from "@neverquest/utilities/getters";
@@ -12,10 +13,10 @@ export function SellItem({ item }: { item: InventoryItem }) {
   const setInventory = useSetRecoilState(inventory);
 
   const merchantTradeItem = useMerchantTradeItem();
-  const transactResources = useTransactResources();
+  const transactEssence = useTransactEssence();
 
   const handleSale = () => {
-    transactResources({ coinsDifference: getSellPrice(item) });
+    transactEssence(getSellPrice(item));
     merchantTradeItem(item, "sale");
 
     setInventory((current) => current.filter((current) => current.id !== item.id));
@@ -24,7 +25,7 @@ export function SellItem({ item }: { item: InventoryItem }) {
   return (
     <>
       <Stack direction="horizontal" gap={3}>
-        <ResourceDisplay tooltip="Value (coins)" type="coins" value={getSellPrice(item)} />
+        <IconDisplay contents={getSellPrice(item)} Icon={IconEssence} tooltip="Value" />
 
         <Button onClick={handleSale} variant="outline-dark">
           Sell

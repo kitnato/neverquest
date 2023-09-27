@@ -1,52 +1,35 @@
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
-import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
-import { coins, scrap } from "@neverquest/state/resources";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
+import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
+import { essence } from "@neverquest/state/resources";
 
-export function CraftGear({
-  coinPrice,
-  onCraft,
-  scrapPrice,
-}: {
-  coinPrice: number;
-  onCraft: () => void;
-  scrapPrice: number;
-}) {
-  const coinsValue = useRecoilValue(coins);
-  const scrapValue = useRecoilValue(scrap);
+export function CraftGear({ onCraft, price }: { onCraft: () => void; price: number }) {
+  const essenceValue = useRecoilValue(essence);
 
-  const transactResources = useTransactResources();
+  const transactEssence = useTransactEssence();
 
-  const hasCoins = coinPrice <= coinsValue;
-  const hasScrap = scrapPrice <= scrapValue;
-  const isCraftable = hasCoins && hasScrap;
+  const isAffordable = price <= essenceValue;
 
   const handleCraft = () => {
     onCraft();
-    transactResources({ coinsDifference: -coinPrice, scrapDifference: -scrapPrice });
+    transactEssence(-price);
   };
 
   return (
     <Stack direction="horizontal" gap={5}>
-      <ResourceDisplay tooltip="Cost (scrap)" type="scrap" value={scrapPrice} />
-
-      <ResourceDisplay tooltip="Price (coins)" type="coins" value={coinPrice} />
+      <IconDisplay contents={essenceValue} Icon={IconEssence} tooltip="Cost" />
 
       <OverlayTrigger
-        overlay={
-          <Tooltip>
-            {!hasCoins && <div>Insufficient coins!</div>}
-            {!hasScrap && <div>Insufficient scrap!</div>}
-          </Tooltip>
-        }
-        trigger={isCraftable ? [] : ["hover", "focus"]}
+        overlay={<Tooltip>Insufficient essence!</Tooltip>}
+        trigger={isAffordable ? [] : ["hover", "focus"]}
       >
         <span>
           <Button
             className="w-100"
-            disabled={!isCraftable}
+            disabled={!isAffordable}
             onClick={handleCraft}
             variant="outline-dark"
           >

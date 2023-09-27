@@ -9,7 +9,7 @@ import {
 } from "@neverquest/data/inventory";
 import { withStateKey } from "@neverquest/state";
 import { inventory } from "@neverquest/state/inventory";
-import { scrap } from "@neverquest/state/resources";
+import { essence } from "@neverquest/state/resources";
 import type {
   Armor,
   InventoryItem,
@@ -74,7 +74,7 @@ export const canApplyGem = withStateKey("canApplyGem", (key) =>
             ? get(shield).gems
             : get(weapon).gems;
 
-        return length < GEMS_MAXIMUM && (GEM_FITTING_COST[length] ?? Infinity) <= get(scrap);
+        return length < GEMS_MAXIMUM && (GEM_FITTING_COST[length] ?? Infinity) <= get(essence);
       },
     key,
   }),

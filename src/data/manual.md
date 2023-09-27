@@ -4,7 +4,7 @@ There are two panels: the [character](#character) (left) and the [encounter](#en
 
 ## Character
 
-The main panel on the left of the UI displays the character's [reserves](#reserves), [statistics](#statistics), [resources](#resources), [ailments](#ailments), and allows setting their name.
+The main panel on the left of the UI displays the character's [reserves](#reserves), [statistics](#statistics), [essence](#essence), [ailments](#ailments), and allows setting their name.
 
 ### Reserves
 
@@ -24,21 +24,11 @@ If there isn't enough stamina in reserve when attacking or blocking, the charact
 
 It is [regenerated](#stamina-regeneration-rate) over time, at a faster initial pace than health.
 
-### Resources
+### Essence
 
-Collected by [looting](#looting) dead monsters and trading at the [caravan](#caravan).
+Collected by [looting](#looting) dead monsters.
 
-#### Coins
-
-Gained from selling scrap and [items](#item) to the [merchant](#merchant) and dropped by monsters. Used to pay for [caravan](#caravan) crew, some of their services and any item purchases.
-
-#### Essence
-
-Gained from killing monsters. Primarily spent on acquiring attribute ranks. Essence cost increases for every allocation of an attribute rank.
-
-#### Scrap
-
-Gained by killing monsters. Primarily used to craft [gear](#gear).
+Primarily spent on acquiring attribute ranks. Also used to trade at the [caravan](#caravan). Essence cost increases for every allocation of an attribute rank.
 
 ### Attributes
 
@@ -226,21 +216,21 @@ A boss is a monster that is much more powerful than a standard monster of that s
 
 Encountered after completing the current [wilderness](#wilderness) stage.
 
-All goods and services offered by the caravan crew are purchasable with [coins](#coins), [scrap](#scrap) or [essence](#essence). Once at the caravan, the only other option apart from interacting with the crew is to return to the wilderness, which will increase its stage (if the previous wilderness was left at the maximum stage).
+All goods and services offered by the caravan crew are purchasable with [essence](#essence). Once at the caravan, the only other option apart from interacting with the crew is to return to the wilderness, which will increase its stage (if the previous wilderness was left at the maximum stage).
 
-The [merchant](#merchant) is always present from the start. Other crew members can be acquired at a cost of coins, who then offer more goods and services. They become available as the stage increases.
+The [merchant](#merchant) is always present from the start. Other crew members can be acquired at a cost of essence, who then offer more goods and services. They become available as the stage increases.
 
 #### Alchemist
 
-Offers conversion of coins, essence, [gems](#gems) and scrap between one another.
+Offers conversion of [gems](#gems) between one another.
 
 #### Blacksmith
 
-Crafts [armor](#armor), [weapons](#weapons) and [shields](#shields). Requires coins as well as scrap.
+Crafts [armor](#armor), [weapons](#weapons) and [shields](#shields). Requires essence.
 
 #### Medic
 
-Offers full healing in exchange for coins. Also sells [bandages](#bandages) that fully restore health.
+Offers full healing in exchange for essence. Also sells [bandages](#bandages) that fully restore health.
 
 #### Mercenary
 
@@ -248,13 +238,13 @@ Offers acquisition of new [skills](#skills).
 
 #### Merchant
 
-Purchase and sell [items](#item). Coins are used to purchase whatever the merchant has available.
+Purchase and sell [items](#item). [Essence](#essence) is used to purchase whatever the merchant has available.
 
 The merchant's inventory of items will grow and diversify after each new stage.
 
 #### Occultist
 
-Offers a reset of all acquired [attribute](#attributes) points in exchange for coins and essence. Also sells phylacteries that resurrect the character upon death.
+Offers a reset of all acquired [attribute](#attributes) points in exchange for essence. Also sells phylacteries that resurrect the character upon death.
 
 #### Tailor
 
@@ -262,7 +252,7 @@ Sells upgrades for increasing maximum [encumbrance](#encumbrance).
 
 #### Witch
 
-Sells [potions](#potions) in exchange for coins.
+Sells [potions](#potions) in exchange for essence.
 
 ## Combat
 
@@ -306,7 +296,7 @@ When there is not enough [stamina](#stamina) to pay for an attack, [parry](#parr
 
 ### Looting
 
-After the monster is defeated, its remains are looted automatically for any [resources](#resources).
+After the monster is defeated, its remains are looted automatically for [essence](#essence) and any [gems](#gems).
 
 The looted resources can only be collected when the stage is completed, i.e. once the [wilderness](#wilderness) is cleared of monsters.
 

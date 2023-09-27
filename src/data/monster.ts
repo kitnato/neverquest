@@ -24,13 +24,11 @@ export const BLIGHT = {
   stageRequired: 20,
 };
 
-export const LOOT = {
-  attenuation: 20,
+export const ESSENCE = {
+  attenuation: 10,
   bonus: 0.02,
   boss: 0.2,
-  coins: 2,
   essence: 4,
-  scrap: 3,
 };
 
 export const MONSTER_ATTACK_RATE = {

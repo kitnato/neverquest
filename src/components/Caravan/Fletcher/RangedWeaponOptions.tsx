@@ -23,7 +23,7 @@ import { skills } from "@neverquest/state/skills";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 import { generateRangedWeapon } from "@neverquest/utilities/generators";
-import { getGearPrices, getGrowthSigmoid, getRangedRanges } from "@neverquest/utilities/getters";
+import { getGearPrice, getGrowthSigmoid, getRangedRanges } from "@neverquest/utilities/getters";
 
 export function RangedWeaponOptions() {
   const allowNSFWValue = useRecoilValue(allowNSFW);
@@ -39,11 +39,6 @@ export function RangedWeaponOptions() {
   const skillValue = useRecoilValue(skills(WEAPON_ABILITY_SKILLS[ability]));
 
   const factor = getGrowthSigmoid(weaponLevel);
-  const { coinPrice, scrapPrice } = getGearPrices({
-    factor,
-    ...WEAPON_BASE,
-    modifier: WEAPON_MODIFIER.ranged.price,
-  });
   const { abilityChance, damage, range, rate, staminaCost, weight } = getRangedRanges({
     factor,
     gearClass: weaponClass,
@@ -167,7 +162,14 @@ export function RangedWeaponOptions() {
       <hr />
 
       {fletcherInventoryValue === null ? (
-        <CraftGear coinPrice={coinPrice} onCraft={handleCraft} scrapPrice={scrapPrice} />
+        <CraftGear
+          onCraft={handleCraft}
+          price={getGearPrice({
+            factor,
+            ...WEAPON_BASE,
+            modifier: WEAPON_MODIFIER.ranged.price,
+          })}
+        />
       ) : (
         <CraftedGear gearItem={fletcherInventoryValue} onTransfer={resetFletcherInventory} />
       )}

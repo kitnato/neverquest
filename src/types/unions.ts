@@ -32,8 +32,6 @@ export type Delta =
   | "bleedRating"
   | "block"
   | "butchery"
-  | "coins"
-  | "coinsLoot"
   | "criticalRating"
   | "cruelty"
   | "damage"
@@ -58,8 +56,6 @@ export type Delta =
   | "range"
   | "recoveryRate"
   | "resilience"
-  | "scrap"
-  | "scrapLoot"
   | "stability"
   | "stage"
   | "staggerRating"
@@ -107,16 +103,12 @@ export type NumberFormat = "float" | "integer" | "percentage" | "time";
 
 export type Reserve = "health" | "stamina";
 
-export const RESOURCE_TYPES = ["coins", "essence", "scrap"] as const;
-export type Resource = (typeof RESOURCE_TYPES)[number];
-
 export const SHOWING_TYPES = [
   "armor",
   "attackRate",
   "attackRateDetails",
   "bleed",
   "capabilities",
-  "coins",
   "conditional",
   "crewHiring",
   "criticalRating",
@@ -135,7 +127,6 @@ export const SHOWING_TYPES = [
   "parry",
   "protection",
   "recovery",
-  "scrap",
   "offhand",
   "skills",
   "stagger",
@@ -194,8 +185,6 @@ export type StateKey =
   | "canFit"
   | "canReceiveAilment"
   | "canReceiveAilments"
-  | "coins"
-  | "coinsLoot"
   | "confirmationWarnings"
   | "crewActive"
   | "criticalChance"
@@ -303,8 +292,6 @@ export type StateKey =
   | "regenerationRate"
   | "reserveRegenerationAmount"
   | "reserveRegenerationRate"
-  | "scrap"
-  | "scrapLoot"
   | "shield"
   | "showDamagePerSecond"
   | "showGearComparison"

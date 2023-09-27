@@ -2,7 +2,7 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { canFit } from "@neverquest/state/inventory";
-import { coins } from "@neverquest/state/resources";
+import { essence } from "@neverquest/state/resources";
 import type { InventoryItem } from "@neverquest/types";
 
 export function PurchaseItemButton({
@@ -12,19 +12,19 @@ export function PurchaseItemButton({
   handlePurchase: () => void;
   item: InventoryItem;
 }) {
-  const coinsValue = useRecoilValue(coins);
+  const essenceValue = useRecoilValue(essence);
 
-  const { coinPrice, weight } = item;
+  const { price, weight } = item;
   const canFitValue = useRecoilValue(canFit(weight));
 
-  const isAffordable = coinPrice <= coinsValue;
+  const isAffordable = price <= essenceValue;
   const isPurchasable = isAffordable && canFitValue;
 
   return (
     <OverlayTrigger
       overlay={
         <Tooltip>
-          {!isAffordable && <div>Insufficient coins!</div>}
+          {!isAffordable && <div>Insufficient essence!</div>}
           {!canFitValue && <div>Too heavy!</div>}
         </Tooltip>
       }

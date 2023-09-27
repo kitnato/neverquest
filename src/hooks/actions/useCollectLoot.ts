@@ -1,14 +1,14 @@
 import { useRecoilCallback } from "recoil";
 
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
-import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { isShowing } from "@neverquest/state/isShowing";
-import { coinsLoot, essenceLoot, itemsLoot, scrapLoot } from "@neverquest/state/resources";
+import { essenceLoot, itemsLoot } from "@neverquest/state/resources";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useCollectLoot() {
   const acquireItem = useAcquireItem();
-  const transactResources = useTransactResources();
+  const transactEssence = useTransactEssence();
 
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
@@ -17,17 +17,11 @@ export function useCollectLoot() {
 
         const itemsLootValue = get(itemsLoot);
 
-        transactResources({
-          coinsDifference: get(coinsLoot),
-          essenceDifference: get(essenceLoot),
-          scrapDifference: get(scrapLoot),
-        });
+        transactEssence(get(essenceLoot));
 
         set(isShowing("capabilities"), true);
 
-        reset(coinsLoot);
         reset(essenceLoot);
-        reset(scrapLoot);
 
         if (itemsLootValue.length > 0) {
           const acquiredItemIDs = itemsLootValue.map((current) =>
@@ -39,6 +33,6 @@ export function useCollectLoot() {
 
         return true;
       },
-    [acquireItem, transactResources],
+    [acquireItem, transactEssence],
   );
 }

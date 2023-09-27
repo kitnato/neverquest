@@ -6,11 +6,11 @@ import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGener
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
-import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { isAttacking } from "@neverquest/state/character";
 import { isWilderness, progress, progressMaximum, stage } from "@neverquest/state/encounter";
 import { isImmortal } from "@neverquest/state/reserves";
-import { coinsLoot, essenceLoot, scrapLoot } from "@neverquest/state/resources";
+import { essenceLoot } from "@neverquest/state/resources";
 import { SKILL_TYPES } from "@neverquest/types/unions";
 
 declare const window: Window & {
@@ -22,9 +22,7 @@ export function CheatQuest() {
   const stageValue = useRecoilValue(stage);
   const progressMaximumValue = useRecoilValue(progressMaximum);
 
-  const resetCoinsLoot = useResetRecoilState(coinsLoot);
   const resetEssenceLoot = useResetRecoilState(essenceLoot);
-  const resetScrapLoot = useResetRecoilState(scrapLoot);
 
   const setIsAttacking = useSetRecoilState(isAttacking);
   const setIsImmortal = useSetRecoilState(isImmortal);
@@ -35,19 +33,11 @@ export function CheatQuest() {
   const increaseStage = useIncreaseStage();
   const resetWilderness = useResetWilderness();
   const toggleLocation = useToggleLocation();
-  const transactResources = useTransactResources();
+  const transactEssence = useTransactEssence();
 
   useEffect(() => {
     window.cheatQuest = (state, value) => {
       switch (state) {
-        // Age of Empires
-        case "COINAGE": {
-          if (Number.isInteger(value)) {
-            transactResources({ coinsDifference: value });
-          }
-
-          break;
-        }
         // Doom
         case "IDBEHOLDV": {
           setIsImmortal((current) => !current);
@@ -68,18 +58,10 @@ export function CheatQuest() {
 
           break;
         }
-        // The Sims
-        case "rosebud": {
-          if (Number.isInteger(value)) {
-            transactResources({ scrapDifference: value });
-          }
-
-          break;
-        }
         // Starcraft
         case "something for nothing": {
-          if (Number.isInteger(value)) {
-            transactResources({ essenceDifference: value });
+          if (Number.isInteger(value) && value !== undefined) {
+            transactEssence(value);
           }
 
           break;
@@ -98,9 +80,7 @@ export function CheatQuest() {
 
             if (isWildernessValue) {
               setIsAttacking(false);
-              resetCoinsLoot();
               resetEssenceLoot();
-              resetScrapLoot();
               toggleLocation();
             }
           }
@@ -121,13 +101,11 @@ export function CheatQuest() {
     isWildernessValue,
     stageValue,
     progressMaximumValue,
-    resetCoinsLoot,
     resetEssenceLoot,
-    resetScrapLoot,
     resetWilderness,
     setProgress,
     toggleLocation,
-    transactResources,
+    transactEssence,
     setIsAttacking,
     setIsImmortal,
   ]);

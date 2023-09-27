@@ -21,7 +21,7 @@ import { skills } from "@neverquest/state/skills";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 import { generateShield } from "@neverquest/utilities/generators";
-import { getGearPrices, getGrowthSigmoid, getShieldRanges } from "@neverquest/utilities/getters";
+import { getGearPrice, getGrowthSigmoid, getShieldRanges } from "@neverquest/utilities/getters";
 
 export function ShieldOptions() {
   const allowNSFWValue = useRecoilValue(allowNSFW);
@@ -32,12 +32,7 @@ export function ShieldOptions() {
   const [shieldClass, setShieldClass] = useState<ShieldClass>("small");
   const [shieldLevel, setShieldLevel] = useState(stageValue);
 
-  const { Icon } = SHIELD_SPECIFICATIONS[shieldClass];
   const factor = getGrowthSigmoid(shieldLevel);
-  const { coinPrice, scrapPrice } = getGearPrices({
-    factor,
-    ...SHIELD_SPECIFICATIONS[shieldClass],
-  });
   const maximumShieldLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
   const { block, stagger, staminaCost, weight } = getShieldRanges({
     factor,
@@ -106,7 +101,7 @@ export function ShieldOptions() {
               ))}
             </FormSelect>
           }
-          Icon={Icon}
+          Icon={SHIELD_SPECIFICATIONS[shieldClass].Icon}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Class"
         />
@@ -151,7 +146,13 @@ export function ShieldOptions() {
       {!shieldcraftValue && shieldClass === "tower" ? (
         <span className="text-center">Cannot use without training.</span>
       ) : craftedShield === null ? (
-        <CraftGear coinPrice={coinPrice} onCraft={handleCraft} scrapPrice={scrapPrice} />
+        <CraftGear
+          onCraft={handleCraft}
+          price={getGearPrice({
+            factor,
+            ...SHIELD_SPECIFICATIONS[shieldClass],
+          })}
+        />
       ) : (
         <CraftedGear gearItem={craftedShield} onTransfer={handleTransfer} />
       )}

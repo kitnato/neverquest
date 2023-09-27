@@ -5,7 +5,7 @@ import {
   BLIGHT,
   BOSS_STAGE_INTERVAL,
   BOSS_STAGE_START,
-  LOOT,
+  ESSENCE,
   MONSTER_ATTACK_RATE,
   MONSTER_DAMAGE,
   MONSTER_HEALTH,
@@ -215,7 +215,7 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
 export const monsterLoot = withStateKey("monsterLoot", (key) =>
   selector({
     get: ({ get }) => {
-      const { attenuation, bonus, boss, coins, essence, scrap } = LOOT;
+      const { attenuation, bonus, boss, essence } = ESSENCE;
 
       const isBossValue = get(isBoss);
       const stageValue = get(stage);
@@ -223,12 +223,10 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
       const totalBonus = 1 + get(progress) * bonus + (isBossValue ? boss : 0);
 
       return {
-        coins: Math.round((coins + coins * factor) * totalBonus),
         essence: Math.round((essence + essence * factor) * totalBonus),
         gems: isBossValue
           ? 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL)
           : 0,
-        scrap: Math.round((scrap + scrap * factor) * totalBonus),
       };
     },
     key,

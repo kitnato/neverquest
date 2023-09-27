@@ -49,7 +49,7 @@ import type {
 
 export const AMMUNITION_MAXIMUM = 100;
 
-export const ARMOR_NONE: Omit<Armor, "coinPrice" | "isEquipped" | "scrapPrice"> = {
+export const ARMOR_NONE: Omit<Armor, "isEquipped" | "price"> = {
   deflection: 0,
   gearClass: "hide",
   gems: [],
@@ -71,14 +71,13 @@ export const ARMOR_SPECIFICATIONS: Record<
   }
 > = {
   hide: {
-    coinPrice: { maximum: 400, minimum: 1 },
     deflection: null,
     Icon: IconHide,
+    price: { maximum: 800, minimum: 1 },
     protection: [
       { maximum: 2, minimum: 1 },
       { maximum: 500, minimum: 450 },
     ],
-    scrapPrice: { maximum: 2000, minimum: 5 },
     staminaCost: 0,
     weight: [
       { maximum: 2, minimum: 1 },
@@ -86,17 +85,16 @@ export const ARMOR_SPECIFICATIONS: Record<
     ],
   },
   plate: {
-    coinPrice: { maximum: 800, minimum: 8 },
     deflection: [
       { maximum: 0.25, minimum: 0.2 },
       { maximum: 0.65, minimum: 0.6 },
     ],
     Icon: IconPlate,
+    price: { maximum: 1600, minimum: 8 },
     protection: [
       { maximum: 10, minimum: 8 },
       { maximum: 1000, minimum: 950 },
     ],
-    scrapPrice: { maximum: 4000, minimum: 25 },
     staminaCost: Infinity,
     weight: [
       { maximum: 7, minimum: 5 },
@@ -104,17 +102,16 @@ export const ARMOR_SPECIFICATIONS: Record<
     ],
   },
   reinforced: {
-    coinPrice: { maximum: 600, minimum: 3 },
     deflection: [
       { maximum: 0.15, minimum: 0.1 },
       { maximum: 0.35, minimum: 0.3 },
     ],
     Icon: IconReinforced,
+    price: { maximum: 1200, minimum: 3 },
     protection: [
       { maximum: 6, minimum: 4 },
       { maximum: 800, minimum: 750 },
     ],
-    scrapPrice: { maximum: 3000, minimum: 15 },
     staminaCost: [
       { maximum: 3, minimum: 1 },
       { maximum: 35, minimum: 30 },
@@ -131,8 +128,8 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
     antidote: {
       Icon: IconAntidote,
       item: {
-        coinPrice: 15,
         description: "Cures poison.",
+        price: 15,
         type: "antidote",
         weight: 5,
       },
@@ -140,8 +137,8 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
     bandages: {
       Icon: IconBandages,
       item: {
-        coinPrice: 10,
         description: "Restores all health.",
+        price: 10,
         type: "bandages",
         weight: 1,
       },
@@ -149,8 +146,8 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
     elixir: {
       Icon: IconElixir,
       item: {
-        coinPrice: 8,
         description: "Restores all stamina.",
+        price: 8,
         type: "elixir",
         weight: 2,
       },
@@ -158,8 +155,8 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
     phylactery: {
       Icon: IconPhylactery,
       item: {
-        coinPrice: 100,
         description: "Resurrects the carrier upon death.",
+        price: 100,
         type: "phylactery",
         weight: 10,
       },
@@ -167,8 +164,8 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
     salve: {
       Icon: IconSalve,
       item: {
-        coinPrice: 25,
         description: "Cures blight.",
+        price: 25,
         type: "salve",
         weight: 3,
       },
@@ -200,7 +197,7 @@ export const ENCUMBRANCE = 6;
 export const KNAPSACK_SIZE = 6;
 
 export const GEM_BASE = {
-  coinPrice: 10,
+  price: 10,
   weight: 1,
 };
 export const GEM_DAMAGE = [0.1, 0.2, 0.4, 0.7, 1];
@@ -214,7 +211,7 @@ export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
 export const GEM_FITTING_COST = [20, 40, 70, 120, 200];
 export const GEMS_MAXIMUM = 5;
 
-export const SHIELD_NONE: Omit<Shield, "coinPrice" | "isEquipped" | "scrapPrice"> = {
+export const SHIELD_NONE: Omit<Shield, "isEquipped" | "price"> = {
   block: 0,
   gearClass: "small",
   gems: [],
@@ -239,9 +236,8 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 0.28, minimum: 0.25 },
       { maximum: 0.4, minimum: 0.35 },
     ],
-    coinPrice: { maximum: 450, minimum: 4 },
     Icon: IconShieldMedium,
-    scrapPrice: { maximum: 3000, minimum: 15 },
+    price: { maximum: 900, minimum: 4 },
     stagger: [
       { maximum: 0.22, minimum: 0.2 },
       { maximum: 0.35, minimum: 0.3 },
@@ -260,9 +256,8 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 0.2, minimum: 0.18 },
       { maximum: 0.35, minimum: 0.3 },
     ],
-    coinPrice: { maximum: 300, minimum: 2 },
     Icon: IconShieldSmall,
-    scrapPrice: { maximum: 2000, minimum: 5 },
+    price: { maximum: 600, minimum: 2 },
     stagger: null,
     staminaCost: [
       { maximum: 2, minimum: 1 },
@@ -278,9 +273,8 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 0.52, minimum: 0.5 },
       { maximum: 0.65, minimum: 0.6 },
     ],
-    coinPrice: { maximum: 600, minimum: 7 },
     Icon: IconShieldTower,
-    scrapPrice: { maximum: 4000, minimum: 20 },
+    price: { maximum: 1200, minimum: 7 },
     stagger: [
       { maximum: 0.32, minimum: 0.3 },
       { maximum: 0.55, minimum: 0.5 },
@@ -300,11 +294,11 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
   "ammunition pouch": {
     Icon: IconAmmunitionPouch,
     item: {
-      coinPrice: 250,
       current: 0,
       description: "Essential for using ranged weapons.",
       id: nanoid(),
       maximum: AMMUNITION_MAXIMUM,
+      price: 250,
       type: "ammunition pouch",
       weight: 5,
     },
@@ -312,9 +306,9 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
   "antique coin": {
     Icon: IconAntiqueCoin,
     item: {
-      coinPrice: 300,
       description: "The wielder may experience extreme fortune.",
       id: nanoid(),
+      price: 300,
       type: "antique coin",
       weight: 2,
     },
@@ -322,9 +316,9 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
   compass: {
     Icon: IconCompass,
     item: {
-      coinPrice: 20,
       description: "Navigate the wilderness to hunt in previous locations.",
       id: nanoid(),
+      price: 20,
       type: "compass",
       weight: 2,
     },
@@ -332,9 +326,9 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
   hearthstone: {
     Icon: IconStone,
     item: {
-      coinPrice: 40,
       description: "Travel back to the caravan even if there are still lurking monsters.",
       id: nanoid(),
+      price: 40,
       type: "hearthstone",
       weight: 2,
     },
@@ -342,9 +336,9 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
   knapsack: {
     Icon: IconKnapsack,
     item: {
-      coinPrice: 10,
       description: "Carry more items and manage gear.",
       id: nanoid(),
+      price: 10,
       type: "knapsack",
       weight: 0,
     },
@@ -352,9 +346,9 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
   "monkey paw": {
     Icon: IconMonkeyPaw,
     item: {
-      coinPrice: 400,
       description: "Looting a corpse is instantaneous.",
       id: nanoid(),
+      price: 400,
       type: "monkey paw",
       weight: 3,
     },
@@ -362,9 +356,9 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
   "tome of power": {
     Icon: IconPower,
     item: {
-      coinPrice: 500,
       description: "Boosts all attributes based on power level.",
       id: nanoid(),
+      price: 500,
       type: "tome of power",
       weight: 10,
     },
@@ -381,11 +375,11 @@ export const WEAPON_BASE: GearBase & {
     { maximum: 2, minimum: 1 },
     { maximum: 50, minimum: 45 },
   ],
-  coinPrice: { maximum: 600, minimum: 1 },
   damage: [
     { maximum: 14, minimum: 12 },
     { maximum: 1000, minimum: 950 },
   ],
+  price: { maximum: 1000, minimum: 1 },
   range: [
     { maximum: 4500, minimum: 3000 },
     { maximum: 8000, minimum: 7500 },
@@ -394,7 +388,6 @@ export const WEAPON_BASE: GearBase & {
     { maximum: 3700, minimum: 3500 },
     { maximum: 2200, minimum: 2000 },
   ],
-  scrapPrice: { maximum: 3000, minimum: 15 },
   staminaCost: [
     { maximum: 3, minimum: 1 },
     { maximum: 65, minimum: 60 },
@@ -411,7 +404,7 @@ export const WEAPON_MODIFIER = {
   "two-handed": { ability: 1.1, damage: 1.25, price: 1.2, rate: 1.3, stamina: 1.15, weight: 1.2 },
 };
 
-export const WEAPON_NONE: Omit<Melee, "coinPrice" | "isEquipped" | "scrapPrice"> = {
+export const WEAPON_NONE: Omit<Melee, "isEquipped" | "price"> = {
   abilityChance: 0,
   damage: 10,
   gearClass: "blunt",

@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { GEM_FITTING_COST } from "@neverquest/data/inventory";
-import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { armor, canApplyGem, shield, weapon } from "@neverquest/state/items";
@@ -11,7 +11,7 @@ import type { Gear } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useApplyGem() {
-  const transactResources = useTransactResources();
+  const transactEssence = useTransactEssence();
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
@@ -49,9 +49,9 @@ export function useApplyGem() {
               }),
           );
 
-          transactResources({ scrapDifference: GEM_FITTING_COST[gems.length] ?? 0 });
+          transactEssence(-(GEM_FITTING_COST[gems.length] ?? 0));
         }
       },
-    [transactResources],
+    [transactEssence],
   );
 }

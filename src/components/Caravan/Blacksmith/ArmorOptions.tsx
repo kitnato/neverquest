@@ -23,7 +23,7 @@ import { skills } from "@neverquest/state/skills";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
 import { generateArmor } from "@neverquest/utilities/generators";
-import { getArmorRanges, getGearPrices, getGrowthSigmoid } from "@neverquest/utilities/getters";
+import { getArmorRanges, getGearPrice, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function ArmorOptions() {
   const [{ armor: craftedArmor }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
@@ -35,15 +35,10 @@ export function ArmorOptions() {
   const [armorClass, setArmorClass] = useState<ArmorClass>("hide");
   const [armorLevel, setArmorLevel] = useState(stageValue);
 
-  const { Icon } = ARMOR_SPECIFICATIONS[armorClass];
   const factor = getGrowthSigmoid(armorLevel);
   const { deflection, protection, staminaCost, weight } = getArmorRanges({
     factor,
     gearClass: armorClass,
-  });
-  const { coinPrice, scrapPrice } = getGearPrices({
-    factor,
-    ...ARMOR_SPECIFICATIONS[armorClass],
   });
   const maximumArmorLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
 
@@ -109,7 +104,7 @@ export function ArmorOptions() {
               ))}
             </FormSelect>
           }
-          Icon={Icon}
+          Icon={ARMOR_SPECIFICATIONS[armorClass].Icon}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Class"
         />
@@ -158,7 +153,13 @@ export function ArmorOptions() {
       {!armorcraftValue && armorClass === "plate" ? (
         <span className="text-center">Cannot use without training.</span>
       ) : craftedArmor === null ? (
-        <CraftGear coinPrice={coinPrice} onCraft={handleCraft} scrapPrice={scrapPrice} />
+        <CraftGear
+          onCraft={handleCraft}
+          price={getGearPrice({
+            factor,
+            ...ARMOR_SPECIFICATIONS[armorClass],
+          })}
+        />
       ) : (
         <CraftedGear gearItem={craftedArmor} onTransfer={handleTransfer} />
       )}

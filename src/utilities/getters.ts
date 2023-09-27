@@ -101,21 +101,16 @@ export function getFromRange({ maximum, minimum }: GeneratorRange) {
   return Number.isInteger(minimum) && Number.isInteger(maximum) ? Math.round(result) : result;
 }
 
-export function getGearPrices({
-  coinPrice,
+export function getGearPrice({
   factor,
   modifier = 1,
-  scrapPrice,
+  price,
 }: {
-  coinPrice: GeneratorRange;
   factor: number;
   modifier?: number;
-  scrapPrice: GeneratorRange;
+  price: GeneratorRange;
 }) {
-  return {
-    coinPrice: Math.round((coinPrice.minimum + coinPrice.maximum * factor) * modifier),
-    scrapPrice: Math.round((scrapPrice.minimum + scrapPrice.maximum * factor) * modifier),
-  };
+  return Math.round((price.minimum + price.maximum * factor) * modifier);
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
@@ -155,8 +150,8 @@ export function getRange({
   };
 }
 
-export function getSellPrice({ coinPrice }: { coinPrice: number }) {
-  return Math.ceil(coinPrice / 2);
+export function getSellPrice({ price }: { price: number }) {
+  return Math.ceil(price / 2);
 }
 
 export function getShieldRanges({ factor, gearClass }: { factor: number; gearClass: ShieldClass }) {

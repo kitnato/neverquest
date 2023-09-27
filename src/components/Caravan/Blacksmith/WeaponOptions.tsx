@@ -24,7 +24,7 @@ import { GRIP_TYPES, type Grip } from "@neverquest/types/unions";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage, formatTime } from "@neverquest/utilities/formatters";
 import { generateMeleeWeapon } from "@neverquest/utilities/generators";
-import { getGearPrices, getGrowthSigmoid, getMeleeRanges } from "@neverquest/utilities/getters";
+import { getGearPrice, getGrowthSigmoid, getMeleeRanges } from "@neverquest/utilities/getters";
 
 export function WeaponOptions() {
   const [{ weapon: craftedWeapon }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
@@ -41,11 +41,6 @@ export function WeaponOptions() {
   const skillValue = useRecoilValue(skills(WEAPON_ABILITY_SKILLS[ability]));
 
   const factor = getGrowthSigmoid(weaponLevel);
-  const { coinPrice, scrapPrice } = getGearPrices({
-    factor,
-    ...WEAPON_BASE,
-    modifier: WEAPON_MODIFIER[weaponGrip].price,
-  });
   const { abilityChance, damage, rate, staminaCost, weight } = getMeleeRanges({
     factor,
     gearClass: weaponClass,
@@ -186,7 +181,14 @@ export function WeaponOptions() {
       <hr />
 
       {craftedWeapon === null ? (
-        <CraftGear coinPrice={coinPrice} onCraft={handleCraft} scrapPrice={scrapPrice} />
+        <CraftGear
+          onCraft={handleCraft}
+          price={getGearPrice({
+            factor,
+            ...WEAPON_BASE,
+            modifier: WEAPON_MODIFIER[weaponGrip].price,
+          })}
+        />
       ) : (
         <CraftedGear gearItem={craftedWeapon} onTransfer={handleTransfer} />
       )}

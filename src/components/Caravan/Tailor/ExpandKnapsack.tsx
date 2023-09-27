@@ -2,32 +2,32 @@ import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { TAILORING_EXPANSION, TAILORING_PRICES_MAXIMUM } from "@neverquest/data/caravan";
 import { ENCUMBRANCE } from "@neverquest/data/inventory";
-import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
+import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { ReactComponent as IconTailoring } from "@neverquest/icons/tailoring.svg";
 import { encumbranceMaximum, hasKnapsack } from "@neverquest/state/inventory";
-import { coins } from "@neverquest/state/resources";
+import { essence } from "@neverquest/state/resources";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function ExpandKnapsack() {
-  const coinsValue = useRecoilValue(coins);
+  const essenceValue = useRecoilValue(essence);
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const [encumbranceMaximumValue, setEncumbranceMaximum] = useRecoilState(encumbranceMaximum);
 
-  const transactResources = useTransactResources();
+  const transactEssence = useTransactEssence();
 
   const price = Math.ceil(
     TAILORING_PRICES_MAXIMUM.knapsack *
       getGrowthSigmoid(encumbranceMaximumValue - (ENCUMBRANCE - 1)),
   );
-  const isAffordable = price <= coinsValue;
+  const isAffordable = price <= essenceValue;
   const canExpand = isAffordable && hasKnapsackValue;
 
   const handleExpansion = () => {
-    transactResources({ coinsDifference: -price });
+    transactEssence(-price);
     setEncumbranceMaximum((current) => current + TAILORING_EXPANSION.knapsack);
   };
 
@@ -41,13 +41,13 @@ export function ExpandKnapsack() {
       />
 
       <Stack direction="horizontal" gap={3}>
-        <ResourceDisplay tooltip="Price (coins)" type="coins" value={price} />
+        <IconDisplay contents={price} Icon={IconEssence} tooltip="Price" />
 
         <OverlayTrigger
           overlay={
             <Tooltip>
               {!hasKnapsackValue && <div>Knapsack required!</div>}
-              {!isAffordable && <div>Insufficient coins!</div>}
+              {!isAffordable && <div>Insufficient essence!</div>}
             </Tooltip>
           }
           trigger={canExpand ? [] : ["hover", "focus"]}

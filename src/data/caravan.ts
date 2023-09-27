@@ -25,56 +25,55 @@ export const GEAR_LEVEL_RANGE_MAXIMUM = 3;
 export const CREW: Record<
   Crew,
   {
-    coinPrice: number;
     description: string;
     Icon: SVGIcon;
     interaction: string;
     monologues: Record<number, string | undefined>;
+    price: number;
     requiredStage: number;
   }
 > = {
   alchemist: {
-    coinPrice: 300,
     description: "Converts resources between one another.",
     Icon: IconAlchemist,
     interaction: "Transmute",
     monologues: { 1: "Things are not always what they seem." },
+    price: 300,
     requiredStage: 30,
   },
   blacksmith: {
-    coinPrice: 60,
     description: "Crafts superior gear.",
     Icon: IconBlacksmith,
     interaction: "Craft",
     monologues: { 1: "In need of better gear?" },
+    price: 60,
     requiredStage: 10,
   },
   fletcher: {
-    coinPrice: 200,
     description: "Crafts ranges weapons and provides ammunition.",
     Icon: IconFletcher,
     interaction: "Craft",
     monologues: { 1: "Tired of monster breath?" },
+    price: 200,
     requiredStage: 25,
   },
   medic: {
-    coinPrice: 80,
     description: "Heals wounds and sells bandages.",
     Icon: IconMedic,
     interaction: "Heal",
     monologues: { 1: "Allow me to patch you up." },
+    price: 80,
     requiredStage: 12,
   },
   mercenary: {
-    coinPrice: 40,
     description: "Trains new skills and attributes.",
     Icon: IconMercenary,
     interaction: "Train",
     monologues: { 1: "Perhaps I can teach you something." },
+    price: 40,
     requiredStage: 8,
   },
   merchant: {
-    coinPrice: 0,
     description: "Offers various items for purchase and buys unwanted items.",
     Icon: IconMerchant,
     interaction: "Trade",
@@ -95,30 +94,31 @@ export const CREW: Record<
       30: "A dark wanderer passed by and sold me a strange book ...",
       31: "Welcome back. Always a sight for sore eyes.",
     },
+    price: 0,
     requiredStage: 0,
   },
   occultist: {
-    coinPrice: 150,
     description: "Sells phylacteries and offers purging rituals.",
     Icon: IconOccultist,
     interaction: "Ritual",
     monologues: { 1: "Prepared to pierce the veil?" },
+    price: 150,
     requiredStage: 20,
   },
   tailor: {
-    coinPrice: 20,
     description: "Expands inventory space.",
     Icon: IconTailor,
     interaction: "Tailoring",
     monologues: { 1: "Allow me to deepen your pockets." },
+    price: 20,
     requiredStage: 6,
   },
   witch: {
-    coinPrice: 100,
     description: "Sells potions that cure ailments.",
     Icon: IconWitch,
     interaction: "Brew",
     monologues: { 1: "Gaze deep into my cauldron ..." },
+    price: 100,
     requiredStage: 16,
   },
 };

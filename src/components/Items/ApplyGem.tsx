@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import { GEM_FITTING_COST } from "@neverquest/data/inventory";
 import { useApplyGem } from "@neverquest/hooks/actions/useApplyGem";
-import { ReactComponent as IconScrap } from "@neverquest/icons/scrap.svg";
+import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { armor, canApplyGem, shield, weapon } from "@neverquest/state/items";
 import type { GemItem } from "@neverquest/types";
 import { GEAR_TYPES, type Gear } from "@neverquest/types/unions";
@@ -47,7 +47,7 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
             >
               <span>{capitalizeAll(name)}</span>&nbsp;
               <span>
-                <IconImage Icon={IconScrap} size="tiny" />
+                <IconImage Icon={IconEssence} size="tiny" />
                 &nbsp;{GEM_FITTING_COST[gems.length] ?? LABEL_EMPTY}
               </span>
             </Dropdown.Item>

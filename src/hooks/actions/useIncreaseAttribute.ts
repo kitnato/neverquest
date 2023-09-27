@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import {
   areAttributesIncreasable,
   attributeCost,
@@ -13,7 +13,7 @@ import type { Attribute } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useIncreaseAttribute() {
-  const transactResources = useTransactResources();
+  const transactEssence = useTransactEssence();
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
@@ -37,10 +37,8 @@ export function useIncreaseAttribute() {
           points: current.points + 1,
         }));
 
-        transactResources({
-          essenceDifference: -get(attributeCost),
-        });
+        transactEssence(-get(attributeCost));
       },
-    [transactResources],
+    [transactEssence],
   );
 }

@@ -2,27 +2,27 @@ import { Button, ButtonGroup, OverlayTrigger, Stack, Tooltip } from "react-boots
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { AMMUNITION_PRICE } from "@neverquest/data/caravan";
-import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { ReactComponent as IconAmmunition } from "@neverquest/icons/ammunition.svg";
+import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { inventory } from "@neverquest/state/inventory";
 import { ownedItem } from "@neverquest/state/items";
-import { coins } from "@neverquest/state/resources";
+import { essence } from "@neverquest/state/resources";
 import type { TrinketItemAmmunitionPouch } from "@neverquest/types";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_MAXIMUM } from "@neverquest/utilities/constants";
 
 export function PurchaseAmmunition() {
-  const coinsValue = useRecoilValue(coins);
+  const essenceValue = useRecoilValue(essence);
   const ownedAmmunitionPouch = useRecoilValue(ownedItem("ammunition pouch"));
   const setInventory = useSetRecoilState(inventory);
 
-  const transactResources = useTransactResources();
-  const isAffordable = (amount: number) => AMMUNITION_PRICE * amount <= coinsValue;
+  const transactEssence = useTransactEssence();
+  const isAffordable = (amount: number) => AMMUNITION_PRICE * amount <= essenceValue;
 
   const handlePurchase = (amount: number) => {
     if (isAffordable(amount) && ownedAmmunitionPouch !== null) {
-      transactResources({ coinsDifference: -AMMUNITION_PRICE * amount });
+      transactEssence(-AMMUNITION_PRICE * amount);
       setInventory((currentInventory) =>
         currentInventory.map((currentItem) =>
           currentItem.id === ownedAmmunitionPouch.id
@@ -44,7 +44,7 @@ export function PurchaseAmmunition() {
         <IconDisplay contents="Ammunition (each)" Icon={IconAmmunition} tooltip="Ammunition" />
 
         <Stack direction="horizontal" gap={3}>
-          <ResourceDisplay tooltip="Price (coins)" type="coins" value={AMMUNITION_PRICE} />
+          <IconDisplay contents={AMMUNITION_PRICE} Icon={IconEssence} tooltip="Price" />
 
           {ownedAmmunitionPouch === null ? (
             <span className="fst-italic">Nowhere to store ammunition.</span>
@@ -64,7 +64,7 @@ export function PurchaseAmmunition() {
                     return (
                       <OverlayTrigger
                         key={label}
-                        overlay={<Tooltip>Insufficient coins!</Tooltip>}
+                        overlay={<Tooltip>Insufficient essence!</Tooltip>}
                         trigger={canPurchase ? [] : ["hover", "focus"]}
                       >
                         <span>

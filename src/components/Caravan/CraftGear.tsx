@@ -19,7 +19,7 @@ export function CraftGear({ onCraft, price }: { onCraft: () => void; price: numb
   };
 
   return (
-    <Stack direction="horizontal" gap={5}>
+    <Stack className="mx-auto" direction="horizontal" gap={5}>
       <IconDisplay contents={essenceValue} Icon={IconEssence} tooltip="Cost" />
 
       <OverlayTrigger

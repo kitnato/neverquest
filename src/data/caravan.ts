@@ -34,7 +34,7 @@ export const CREW: Record<
   }
 > = {
   alchemist: {
-    description: "Converts resources between one another.",
+    description: "Converts gems between one another.",
     Icon: IconAlchemist,
     interaction: "Transmute",
     monologues: { 1: "Things are not always what they seem." },

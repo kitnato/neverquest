@@ -1,7 +1,5 @@
 import { useRecoilCallback } from "recoil";
 
-import { WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
-import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import { attributes } from "@neverquest/state/attributes";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -44,19 +42,11 @@ export function useToggleEquipGear() {
         }
 
         if (isShield(gearItem) && !isEquipped) {
-          set(isShowing("conditional"), true);
           set(isShowing("offhand"), true);
           set(isShowing("stamina"), true);
-
-          if (get(skills("traumatology"))) {
-            set(isShowing("stagger"), true);
-          }
         }
 
         if (isWeapon(gearItem) && !isEquipped) {
-          const { gearClass } = gearItem;
-          const { ability } = WEAPON_SPECIFICATIONS[gearClass];
-
           if (staminaCost > 0) {
             set(isShowing("stamina"), true);
 
@@ -68,13 +58,7 @@ export function useToggleEquipGear() {
             }
           }
 
-          if (get(skills(WEAPON_ABILITY_SKILLS[ability]))) {
-            set(isShowing(ability), true);
-            set(isShowing("conditional"), true);
-          }
-
           if (isRangedWeapon || isTwoHandedWeapon) {
-            set(isShowing("conditional"), true);
             set(isShowing("offhand"), true);
           }
 

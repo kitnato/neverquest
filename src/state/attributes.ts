@@ -1,6 +1,6 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
-import { ATTRIBUTES, ATTRIBUTES_ORDER } from "@neverquest/data/attributes";
+import { ATTRIBUTES, ATTRIBUTES_ORDER, ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { essence } from "@neverquest/state/resources";
 import type { UnlockedState } from "@neverquest/types";
@@ -30,7 +30,7 @@ export const attributePoints = withStateKey("attributePoints", (key) =>
 
 export const attributeCost = withStateKey("attributeCost", (key) =>
   selector({
-    get: ({ get }) => getGrowthTriangular(get(level) + 1),
+    get: ({ get }) => getGrowthTriangular(get(level) + ATTRIBUTE_COST_BASE),
     key,
   }),
 );

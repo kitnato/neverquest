@@ -37,7 +37,9 @@ export function CraftedGear({
 
   return (
     <Stack gap={3}>
-      <ItemDisplay item={gearItem} />
+      <div className="mx-auto">
+        <ItemDisplay item={gearItem} />
+      </div>
 
       <OverlayTrigger
         overlay={<Tooltip>Too heavy!</Tooltip>}

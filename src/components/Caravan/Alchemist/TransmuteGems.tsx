@@ -32,8 +32,8 @@ export function TransmuteGems() {
   );
   const isAffordable = transmutation[source] >= TRANSMUTE_COST;
 
-  const handleSelect = (setSelection: (value: SetStateAction<Gem>) => void) => (resource: Gem) =>
-    setSelection(resource);
+  const handleSelect = (setSelection: (value: SetStateAction<Gem>) => void) => (gem: Gem) =>
+    setSelection(gem);
   const handleTransmute = () => {
     if (isAffordable) {
       // TODO

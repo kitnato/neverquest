@@ -26,7 +26,7 @@ export function CrewHirable({ type }: { type: Crew }) {
 
   const handleHire = () => {
     setHireStatus({ status: "hired" });
-    transactEssence(-essenceValue);
+    transactEssence(-price);
 
     if (type === "blacksmith") {
       setIsShowingGearClass(true);

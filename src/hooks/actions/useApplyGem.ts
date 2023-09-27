@@ -3,7 +3,6 @@ import { useRecoilCallback } from "recoil";
 import { GEM_FITTING_COST } from "@neverquest/data/inventory";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { inventory } from "@neverquest/state/inventory";
-import { isShowing } from "@neverquest/state/isShowing";
 import { armor, canApplyGem, shield, weapon } from "@neverquest/state/items";
 import type { GemItem } from "@neverquest/types";
 import { isGear } from "@neverquest/types/type-guards";
@@ -22,8 +21,6 @@ export function useApplyGem() {
           const { gems, id } = (() => {
             switch (slot) {
               case "armor": {
-                set(isShowing("thorns"), true);
-
                 return get(armor);
               }
 

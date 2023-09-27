@@ -1,11 +1,18 @@
 import { Card, Col, Row, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { Conditional } from "@neverquest/components/Statistics/Conditional";
+import { BleedRating } from "@neverquest/components/Statistics/BleedRating";
+import { Block } from "@neverquest/components/Statistics/Block";
+import { CombatRange } from "@neverquest/components/Statistics/CombatRange";
 import { CriticalRating } from "@neverquest/components/Statistics/CriticalRating";
 import { Damage } from "@neverquest/components/Statistics/Damage";
+import { Deflection } from "@neverquest/components/Statistics/Deflection";
 import { Dodge } from "@neverquest/components/Statistics/Dodge";
+import { Execution } from "@neverquest/components/Statistics/Execution";
+import { ParryRating } from "@neverquest/components/Statistics/ParryRating";
 import { Protection } from "@neverquest/components/Statistics/Protection";
+import { StaggerRating } from "@neverquest/components/Statistics/StaggerRating";
+import { StunRating } from "@neverquest/components/Statistics/StunRating";
 import { isShowing } from "@neverquest/state/isShowing";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -19,27 +26,43 @@ export function Statistics() {
   return (
     <Card className={getAnimationClass({ type: "flipInX" })}>
       <Card.Body>
-        <Stack gap={3}>
-          <Row>
-            <Col>
+        <Row>
+          <Col>
+            <Stack gap={3}>
               <Damage />
-            </Col>
 
-            <Col>
               <CriticalRating />
-            </Col>
 
-            <Col>
+              <StunRating />
+
+              <BleedRating />
+
+              <ParryRating />
+
+              <Execution />
+
+              <CombatRange />
+            </Stack>
+          </Col>
+
+          <Col>
+            <Stack gap={3}>
               <Protection />
-            </Col>
 
-            <Col>
+              <Deflection />
+
               <Dodge />
-            </Col>
-          </Row>
+            </Stack>
+          </Col>
 
-          <Conditional />
-        </Stack>
+          <Col>
+            <Stack gap={3}>
+              <Block />
+
+              <StaggerRating />
+            </Stack>
+          </Col>
+        </Row>
       </Card.Body>
     </Card>
   );

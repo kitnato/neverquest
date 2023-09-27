@@ -11,6 +11,8 @@ import { ReactComponent as IconVitality } from "@neverquest/icons/vitality.svg";
 import type { AttributeData } from "@neverquest/types";
 import type { Attribute } from "@neverquest/types/unions";
 
+export const ATTRIBUTE_COST_BASE = 2;
+
 export const ATTRIBUTES: Record<Attribute, AttributeData> = {
   agility: {
     base: 0,

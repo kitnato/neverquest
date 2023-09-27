@@ -23,7 +23,7 @@ export function Wilderness() {
             contents={<span className="fst-italic">Everything is dead.</span>}
             Icon={IconRemains}
             isSpaced
-            tooltip="Monster remains"
+            tooltip="Remains"
           />
         </Card.Body>
       </Card>

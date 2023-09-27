@@ -15,6 +15,7 @@ import { ReactComponent as IconNone } from "@neverquest/icons/none.svg";
 import { ReactComponent as IconStagger } from "@neverquest/icons/stagger.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import { shield as shieldEquipped } from "@neverquest/state/items";
+import { skills } from "@neverquest/state/skills";
 import type { Shield } from "@neverquest/types";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
@@ -27,8 +28,8 @@ export function ShieldName({
   shield: Shield | typeof SHIELD_NONE;
 }) {
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
-  const isShowingStagger = useRecoilValue(isShowing("stagger"));
   const shieldEquippedValue = useRecoilValue(shieldEquipped);
+  const shieldcraftSkill = useRecoilValue(skills("shieldcraft"));
 
   const { block, level, name, stagger, staminaCost, weight } = shield;
   const showComparison = shieldEquippedValue.id !== shield.id;
@@ -119,7 +120,7 @@ export function ShieldName({
 
               {stagger > 0 && (
                 <tr>
-                  {isShowingStagger ? (
+                  {shieldcraftSkill ? (
                     <>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance:</td>
 

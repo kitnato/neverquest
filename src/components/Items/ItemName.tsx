@@ -19,15 +19,15 @@ export function ItemName({
   placement?: Placement;
   stack?: number;
 }) {
-  const { type, weight } = item;
-  const description = isGem(item) ? <GemDescription type={item.type} /> : item.description;
-  const name = capitalizeAll(type);
+  const { name, weight } = item;
+  const description = isGem(item) ? <GemDescription name={item.name} /> : item.description;
+  const displayName = capitalizeAll(name);
 
   return (
     <OverlayTrigger
       overlay={
         <Popover>
-          <Popover.Header className="text-center">{name}</Popover.Header>
+          <Popover.Header className="text-center">{displayName}</Popover.Header>
 
           <Popover.Body className="text-center">
             <span>{description}</span>
@@ -41,7 +41,7 @@ export function ItemName({
       placement={placement}
       trigger={hideOverlay ? [] : ["focus", "hover"]}
     >
-      <span>{`${name}${
+      <span>{`${displayName}${
         stack !== undefined && stack > 1 ? ` x${formatValue({ value: stack })}` : ""
       }`}</span>
     </OverlayTrigger>

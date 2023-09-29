@@ -99,7 +99,7 @@ export const ownedItem = withStateKey("ownedItem", (key) =>
       (parameter) =>
       ({ get }) =>
         get(inventory).find(
-          (current) => (isConsumable(current) || isTrinket(current)) && current.type === parameter,
+          (current) => (isConsumable(current) || isTrinket(current)) && current.name === parameter,
         ) ?? null,
     key,
   }),

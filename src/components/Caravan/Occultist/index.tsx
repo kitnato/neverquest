@@ -9,7 +9,7 @@ export function Occultist() {
       <Stack gap={3}>
         <h6>Purchase phylacteries</h6>
 
-        <PurchaseConsumable type="phylactery" />
+        <PurchaseConsumable consumable="phylactery" />
       </Stack>
 
       <PurgeEssence />

@@ -78,14 +78,14 @@ export function Stamina() {
               trigger={isShowingStaminaDetails ? ["hover", "focus"] : []}
             >
               <div className="w-100">
-                <ReserveMeter type="stamina" />
+                <ReserveMeter reserve="stamina" />
               </div>
             </OverlayTrigger>
 
             <FloatingText deltaType="stamina" />
           </Stack>
 
-          <Regeneration type="stamina" />
+          <Regeneration reserve="stamina" />
         </Stack>
       }
       Icon={IconStamina}

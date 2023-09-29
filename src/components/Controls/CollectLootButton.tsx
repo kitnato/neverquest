@@ -28,11 +28,11 @@ export function CollectLootButton() {
 
   return (
     <OverlayTrigger overlay={<Tooltip>Collect loot</Tooltip>}>
-      <span className={getAnimationClass({ type: "bounceIn" })}>
+      <span className={getAnimationClass({ name: "bounceIn" })}>
         <Button
           className={
             !hasLootedValue
-              ? `${getAnimationClass({ isInfinite: true, type: "pulse" })}`
+              ? `${getAnimationClass({ isInfinite: true, name: "pulse" })}`
               : undefined
           }
           disabled={isGameOverValue}

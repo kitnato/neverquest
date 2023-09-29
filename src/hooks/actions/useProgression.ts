@@ -31,7 +31,7 @@ export function useProgression() {
           const gemsLoot: GemItem[] = Array.from(Array(gems)).map(() => ({
             ...GEM_BASE,
             id: nanoid(),
-            type: GEM_TYPES[getFromRange({ maximum: GEM_TYPES.length - 1, minimum: 0 })] ?? "ruby",
+            name: GEM_TYPES[getFromRange({ maximum: GEM_TYPES.length - 1, minimum: 0 })] ?? "ruby",
           }));
 
           set(itemsLoot, (current) => current.concat(gemsLoot));

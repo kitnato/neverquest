@@ -55,7 +55,7 @@ export function ItemDisplay({
   }
 
   if (isConsumable(item)) {
-    const { type } = item;
+    const { name } = item;
 
     return (
       <IconDisplay
@@ -66,7 +66,7 @@ export function ItemDisplay({
             {extra}
           </span>
         }
-        Icon={CONSUMABLES[type].Icon}
+        Icon={CONSUMABLES[name].Icon}
         iconProps={iconProps}
         tooltip="Consumable"
       />
@@ -100,7 +100,7 @@ export function ItemDisplay({
             {extra}
           </span>
         }
-        Icon={TRINKETS[item.type].Icon}
+        Icon={TRINKETS[item.name].Icon}
         iconProps={iconProps}
         tooltip="Trinket"
       />

@@ -18,7 +18,7 @@ export function Gear() {
   }
 
   return (
-    <Card className={getAnimationClass({ type: "flipInX" })}>
+    <Card className={getAnimationClass({ name: "flipInX" })}>
       <Card.Body>
         <Row className="align-items-center">
           <Col>

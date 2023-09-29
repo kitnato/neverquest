@@ -82,14 +82,14 @@ export function Health() {
               trigger={isShowingHealthDetails ? ["hover", "focus"] : []}
             >
               <div className="w-100">
-                <ReserveMeter type="health" />
+                <ReserveMeter reserve="health" />
               </div>
             </OverlayTrigger>
 
             <FloatingText deltaType="health" />
           </Stack>
 
-          <Regeneration type="health" />
+          <Regeneration reserve="health" />
         </Stack>
       }
       Icon={IconHealth}

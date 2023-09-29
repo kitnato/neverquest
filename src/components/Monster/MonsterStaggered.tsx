@@ -30,7 +30,7 @@ export function MonsterStaggered() {
 
   return (
     <IconDisplay
-      contents={<MonsterAilmentMeter totalDuration={stabilityValue} type="staggered" />}
+      contents={<MonsterAilmentMeter ailment="staggered" totalDuration={stabilityValue} />}
       Icon={IconStaggered}
       isAnimated
       tooltip="Staggered"

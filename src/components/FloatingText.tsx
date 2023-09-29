@@ -16,8 +16,8 @@ export function FloatingText({ deltaType }: { deltaType: Delta }) {
   const resetFloatingTextQueue = useResetRecoilState(floatingTextQueues(deltaType));
 
   const animationClass = getAnimationClass({
+    name: "fadeOutUp",
     speed: "slower",
-    type: "fadeOutUp",
   });
 
   const handleAnimationEnd = (id: string) => () =>

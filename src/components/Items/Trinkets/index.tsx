@@ -8,7 +8,7 @@ import type {
 } from "@neverquest/types";
 
 export function Trinket({ item }: { item: TrinketItem }) {
-  switch (item.type) {
+  switch (item.name) {
     case "ammunition pouch": {
       return <AmmunitionPouch item={item as TrinketItemAmmunitionPouch} />;
     }

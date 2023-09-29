@@ -20,13 +20,13 @@ export function TransmuteGems() {
   const [result, setResult] = useState<Gem>("sapphire");
 
   const gems = stackItems(
-    inventoryValue.filter(isGem).sort((a, b) => a.type.localeCompare(b.type)),
+    inventoryValue.filter(isGem).sort((a, b) => a.name.localeCompare(b.name)),
   );
 
   const transmutation = GEM_TYPES.reduce(
     (aggregator, current) => ({
       ...aggregator,
-      [current]: gems.find(({ item: { type }, stack }) => (type === current ? stack : 0)),
+      [current]: gems.find(({ item: { name }, stack }) => (name === current ? stack : 0)),
     }),
     { ruby: 0, sapphire: 0, topaz: 0 },
   );

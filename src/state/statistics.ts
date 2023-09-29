@@ -218,7 +218,7 @@ export const elementalEffects = withStateKey("elementalEffects", (key) =>
 
       stackItems(armorValue.gems).forEach(
         ({ item, stack }) =>
-          (effects.armor[GEM_ELEMENTALS[item.type]] = {
+          (effects.armor[GEM_ELEMENTALS[item.name]] = {
             damage: Math.ceil(armorValue.protection * (GEM_DAMAGE[stack - 1] ?? 0)),
             duration: GEM_DURATION[stack - 1] ?? 0,
           }),
@@ -226,14 +226,14 @@ export const elementalEffects = withStateKey("elementalEffects", (key) =>
 
       stackItems(get(shield).gems).forEach(
         ({ item, stack }) =>
-          (effects.shield[GEM_ELEMENTALS[item.type]] = GEM_ENHANCEMENT[stack - 1] ?? 0),
+          (effects.shield[GEM_ELEMENTALS[item.name]] = GEM_ENHANCEMENT[stack - 1] ?? 0),
       );
 
       const weaponValue = get(weapon);
 
       stackItems(weaponValue.gems).forEach(
         ({ item, stack }) =>
-          (effects.weapon[GEM_ELEMENTALS[item.type]] = {
+          (effects.weapon[GEM_ELEMENTALS[item.name]] = {
             damage: Math.ceil(weaponValue.damage * (GEM_DAMAGE[stack - 1] ?? 0)),
             duration: GEM_DURATION[stack - 1] ?? 0,
           }),

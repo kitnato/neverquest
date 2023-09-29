@@ -9,41 +9,41 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 export function useIncreaseMastery() {
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      (type: Mastery) => {
+      (mastery: Mastery) => {
         const get = getSnapshotGetter(snapshot);
 
-        if (get(isMasteryAtMaximum(type))) {
+        if (get(isMasteryAtMaximum(mastery))) {
           return;
         }
 
-        const { isUnlocked, progress } = get(masteries(type));
+        const { isUnlocked, progress } = get(masteries(mastery));
 
         if (!isUnlocked) {
           return;
         }
 
-        const masteryCostValue = get(masteryCost(type));
+        const masteryCostValue = get(masteryCost(mastery));
         const { increment } = MASTERY_PROGRESS;
         const newProgress = progress + increment;
 
         if (newProgress === masteryCostValue) {
-          set(masteries(type), ({ rank, ...current }) => ({
+          set(masteries(mastery), ({ rank, ...current }) => ({
             ...current,
             progress: 0,
             rank: rank + MASTERY_PROGRESS.rank,
           }));
 
-          set(deltas(type), {
+          set(deltas(mastery), {
             color: "text-success",
             value: "RANK UP",
           });
         } else {
-          set(masteries(type), (current) => ({
+          set(masteries(mastery), (current) => ({
             ...current,
             progress: newProgress,
           }));
 
-          set(deltas(type), {
+          set(deltas(mastery), {
             color: "text-success",
             value: `+${increment}`,
           });

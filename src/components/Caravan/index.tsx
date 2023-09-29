@@ -47,7 +47,7 @@ export function Caravan() {
 
   return (
     <>
-      <Card className={getAnimationClass({ speed: "fast", type: "zoomIn" })}>
+      <Card className={getAnimationClass({ name: "zoomIn", speed: "fast" })}>
         <Card.Body>
           <Stack gap={5}>
             <Stack gap={3}>
@@ -55,9 +55,9 @@ export function Caravan() {
 
               {CREW_ORDER.map((current, index) => (
                 <CrewHired
+                  crew={current}
                   key={index}
                   setActive={() => toggleCrewActive(true, current)}
-                  type={current}
                 />
               ))}
             </Stack>
@@ -69,7 +69,7 @@ export function Caravan() {
                 {isCrewHiredValue && <span className="fst-italic">None available.</span>}
 
                 {CREW_ORDER.map((current, index) => (
-                  <CrewHirable key={index} type={current} />
+                  <CrewHirable crew={current} key={index} />
                 ))}
               </Stack>
             )}

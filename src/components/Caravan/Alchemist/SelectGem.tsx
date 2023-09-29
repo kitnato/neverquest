@@ -39,7 +39,7 @@ export function SelectGem({
         item={{
           ...GEM_BASE,
           id: nanoid(),
-          type: gem,
+          name: gem,
         }}
         stack={omit === undefined ? TRANSMUTE_COST : TRANSMUTE_YIELD}
       />

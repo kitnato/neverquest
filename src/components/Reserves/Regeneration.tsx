@@ -37,23 +37,24 @@ const RESERVE_CHANGE = {
   stamina: useChangeStamina,
 };
 
-export function Regeneration({ type }: { type: Reserve }) {
-  const isHealth = type === "health";
+export function Regeneration({ reserve }: { reserve: Reserve }) {
+  const isHealth = reserve === "health";
 
   const fortitudeValue = useRecoilValue(attributeStatistic("fortitude"));
   const vigorValue = useRecoilValue(attributeStatistic("vigor"));
   const isReserveAtMaximum = useRecoilValue(isHealth ? isHealthAtMaximum : isStaminaAtMaximum);
   const isRecoveringValue = useRecoilValue(isRecovering);
-  const isRegeneratingValue = useRecoilValue(isRegenerating(type));
+  const isRegeneratingValue = useRecoilValue(isRegenerating(reserve));
   const powerBonusAmountValue = useRecoilValue(powerBonus("fortitude"));
   const powerBonusRateValue = useRecoilValue(powerBonus("vigor"));
-  const regenerationRateValue = useRecoilValue(regenerationRate(type));
+  const regenerationRateValue = useRecoilValue(regenerationRate(reserve));
   const calisthenicsValue = useRecoilValue(skills("calisthenics"));
-  const setRegenerationDuration = useSetRecoilState(regenerationDuration(type));
+  const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve));
 
-  const { baseRegenerationAmount, baseRegenerationRate, label, regenerationDelta } = RESERVES[type];
+  const { baseRegenerationAmount, baseRegenerationRate, label, regenerationDelta } =
+    RESERVES[reserve];
 
-  const changeReserve = RESERVE_CHANGE[type]();
+  const changeReserve = RESERVE_CHANGE[reserve]();
 
   useAnimate({
     delta: setRegenerationDuration,
@@ -66,7 +67,7 @@ export function Regeneration({ type }: { type: Reserve }) {
   useDeltaText({
     delta: deltas(regenerationDelta),
     format: "time",
-    value: regenerationRate(type),
+    value: regenerationRate(reserve),
   });
 
   useEffect(() => {
@@ -156,7 +157,7 @@ export function Regeneration({ type }: { type: Reserve }) {
         trigger={calisthenicsValue ? ["hover", "focus"] : []}
       >
         <div className="w-100">
-          <RegenerationMeter type={type} />
+          <RegenerationMeter reserve={reserve} />
         </div>
       </OverlayTrigger>
 

@@ -12,24 +12,24 @@ import { LABEL_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function MasteryDisplay({ type }: { type: Mastery }) {
-  const isMasteryAtMaximumValue = useRecoilValue(isMasteryAtMaximum(type));
-  const { isUnlocked, progress, rank } = useRecoilValue(masteries(type));
-  const masteryCostValue = useRecoilValue(masteryCost(type));
+export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
+  const isMasteryAtMaximumValue = useRecoilValue(isMasteryAtMaximum(mastery));
+  const { isUnlocked, progress, rank } = useRecoilValue(masteries(mastery));
+  const masteryCostValue = useRecoilValue(masteryCost(mastery));
 
-  const { description, Icon, instructions } = MASTERIES[type];
+  const { description, Icon, instructions } = MASTERIES[mastery];
   const label = isMasteryAtMaximumValue ? LABEL_MAXIMUM : `${progress}/${masteryCostValue}`;
   const value = isMasteryAtMaximumValue ? 100 : (progress / masteryCostValue) * 100;
 
   return (
-    <div className={getAnimationClass({ type: "flipInX" })}>
+    <div className={getAnimationClass({ name: "flipInX" })}>
       {isUnlocked ? (
         <IconDisplay
           contents={
             <Stack gap={1}>
               <div>
                 <OverlayTrigger overlay={<Tooltip>{description}</Tooltip>} placement="right">
-                  <span>{capitalizeAll(type)}</span>
+                  <span>{capitalizeAll(mastery)}</span>
                 </OverlayTrigger>
               </div>
 
@@ -44,7 +44,7 @@ export function MasteryDisplay({ type }: { type: Mastery }) {
                   </OverlayTrigger>
                 </Stack>
 
-                <FloatingText deltaType={type} />
+                <FloatingText deltaType={mastery} />
               </Stack>
             </Stack>
           }

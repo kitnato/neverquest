@@ -14,13 +14,13 @@ import type { Consumable } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
-export function PurchaseConsumable({ type }: { type: Consumable }) {
+export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
   const [id, setID] = useState(nanoid());
 
   const acquireItem = useAcquireItem();
   const transactEssence = useTransactEssence();
 
-  const { item } = CONSUMABLES[type];
+  const { item } = CONSUMABLES[consumable];
   const itemWithID: ConsumableItem = {
     ...item,
     id,

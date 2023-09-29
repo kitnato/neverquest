@@ -70,7 +70,7 @@ export function SellItems() {
 
           {storedItems
             .filter(isTrinket)
-            .sort((a, b) => a.type.localeCompare(b.type))
+            .sort((a, b) => a.name.localeCompare(b.name))
             .map((current) => (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.id}>
                 <Trinket item={current} />
@@ -81,9 +81,9 @@ export function SellItems() {
 
           {[
             ...stackItems(
-              storedItems.filter(isConsumable).sort((a, b) => a.type.localeCompare(b.type)),
+              storedItems.filter(isConsumable).sort((a, b) => a.name.localeCompare(b.name)),
             ),
-            ...stackItems(storedItems.filter(isGem).sort((a, b) => a.type.localeCompare(b.type))),
+            ...stackItems(storedItems.filter(isGem).sort((a, b) => a.name.localeCompare(b.name))),
           ].map((current) => {
             const { item, stack } = current;
 

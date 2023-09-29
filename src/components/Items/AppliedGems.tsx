@@ -25,10 +25,10 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
       <td className={CLASS_TABLE_CELL_ITALIC}>{`Gems (${appliedGems}/${GEMS_MAXIMUM}):`}</td>
 
       <td>
-        {stackItems(gems.slice().sort((a, b) => a.type.localeCompare(b.type))).map(
+        {stackItems(gems.slice().sort((a, b) => a.name.localeCompare(b.name))).map(
           ({ item, stack }) => {
-            const { id, type } = item;
-            const elemental = GEM_ELEMENTALS[type];
+            const { id, name } = item;
+            const elemental = GEM_ELEMENTALS[name];
             const effect =
               elementalEffectsValue[
                 isArmor(gearItem) ? "armor" : isShield(gearItem) ? "shield" : "weapon"

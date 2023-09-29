@@ -29,14 +29,14 @@ const STATISTIC_ICON: Record<Attribute, SVGIcon> = {
   vitality: IconHealth,
 };
 
-export function AttributeIncreaseDetails({ type }: { type: Attribute }) {
+export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }) {
   const hasTomeOfPower = Boolean(useRecoilValue(ownedItem("tome of power")));
 
-  const { increment, powerBonus } = ATTRIBUTES[type];
-  const Icon = STATISTIC_ICON[type];
+  const { increment, powerBonus } = ATTRIBUTES[attribute];
+  const Icon = STATISTIC_ICON[attribute];
   const formattedIncrement =
     increment < 1 ? formatValue({ format: "percentage", value: increment }) : increment;
-  const operand = ["speed", "vigor"].includes(type) ? "-" : "+";
+  const operand = ["speed", "vigor"].includes(attribute) ? "-" : "+";
 
   return (
     <>

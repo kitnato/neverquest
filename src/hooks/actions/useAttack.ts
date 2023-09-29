@@ -68,8 +68,8 @@ export function useAttack() {
 
           animateElement({
             element: get(monsterElement),
+            name: "headShake",
             speed: "fast",
-            type: "headShake",
           });
 
           const isTwoHanded = isMelee(weaponValue) && weaponValue.grip === "two-handed";

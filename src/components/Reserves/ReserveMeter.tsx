@@ -23,8 +23,8 @@ import type { BlightMagnitude } from "@neverquest/types";
 import type { Reserve } from "@neverquest/types/unions";
 import { formatValue } from "@neverquest/utilities/formatters";
 
-export function ReserveMeter({ type }: { type: Reserve }) {
-  const isHealth = type === "health";
+export function ReserveMeter({ reserve }: { reserve: Reserve }) {
+  const isHealth = reserve === "health";
 
   const ailmentValue = useRecoilValue<BlightMagnitude | number>(
     isHealth ? poisonDuration : blightMagnitude,
@@ -36,7 +36,7 @@ export function ReserveMeter({ type }: { type: Reserve }) {
     isHealth ? healthMaximumTotal : staminaMaximumTotal,
   );
   const resetReserve = useResetRecoilState(isHealth ? health : stamina);
-  const resetRegenerationDuration = useResetRecoilState(regenerationDuration(type));
+  const resetRegenerationDuration = useResetRecoilState(regenerationDuration(reserve));
 
   const penalty = Math.round(
     ((reserveMaximumValue - reserveMaximumTotalValue) / reserveMaximumValue) * 100,

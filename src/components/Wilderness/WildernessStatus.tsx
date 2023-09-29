@@ -13,7 +13,7 @@ export function WildernessStatus() {
   return (
     <Stack
       className={
-        isShowingWildernessStatus ? ` ${getAnimationClass({ type: "flipInX" })}` : undefined
+        isShowingWildernessStatus ? ` ${getAnimationClass({ name: "flipInX" })}` : undefined
       }
       direction="horizontal"
       gap={5}

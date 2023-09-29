@@ -8,7 +8,7 @@ import { skillPrice } from "@neverquest/state/skills";
 import type { Skill } from "@neverquest/types/unions";
 import { LABEL_NO_ESSENCE } from "@neverquest/utilities/constants";
 
-export function TrainSkillButton({ type }: { type: Skill }) {
+export function TrainSkillButton({ skill }: { skill: Skill }) {
   const essenceValue = useRecoilValue(essence);
   const skillPriceValue = useRecoilValue(skillPrice);
 
@@ -18,7 +18,7 @@ export function TrainSkillButton({ type }: { type: Skill }) {
   const isAffordable = skillPriceValue <= essenceValue;
 
   const handleTrain = () => {
-    acquireSkill(type);
+    acquireSkill(skill);
     transactEssence(-skillPriceValue);
   };
 

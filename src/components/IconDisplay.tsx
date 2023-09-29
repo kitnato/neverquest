@@ -25,7 +25,7 @@ export function IconDisplay({
 }) {
   return (
     <Stack
-      className={isAnimated ? getAnimationClass({ type: "flipInX" }) : undefined}
+      className={isAnimated ? getAnimationClass({ name: "flipInX" }) : undefined}
       direction="horizontal"
       gap={isSpaced ? 5 : iconProps?.size === "tiny" ? 1 : 3}
     >

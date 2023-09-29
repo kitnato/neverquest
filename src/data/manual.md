@@ -296,7 +296,7 @@ When there is not enough [stamina](#stamina) to pay for an attack, [parry](#parr
 
 ### Looting
 
-After the monster is defeated, its remains are looted automatically for [essence](#essence) and any [gems](#gems).
+After the monster is defeated, its remains are looted for [essence](#essence) and any [gems](#gems).
 
 The looted resources can only be collected when the stage is completed, i.e. once the [wilderness](#wilderness) is cleared of monsters.
 

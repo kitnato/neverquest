@@ -38,7 +38,7 @@ export type BlightMagnitude = {
 
 export type ConsumableItem = ItemBase & {
   description: string;
-  type: Consumable;
+  name: Consumable;
 };
 
 export type FletcherInventory = Weapon | null;
@@ -62,7 +62,7 @@ type GearItemBase = ItemBase & {
 export type GearItemUnequipped = typeof ARMOR_NONE | typeof SHIELD_NONE | typeof WEAPON_NONE;
 
 export type GemItem = ItemBase & {
-  type: Gem;
+  name: Gem;
 };
 
 export type GeneratorRange = {
@@ -107,17 +107,17 @@ export type TrinketItem = TrinketItemAmmunitionPouch | TrinketItemDefault | Trin
 export type TrinketItemAmmunitionPouch = TrinketItemDefault & {
   current: number;
   maximum: number;
-  type: "ammunition pouch";
+  name: "ammunition pouch";
 };
 
 export type TrinketItemDefault = ItemBase & {
   description: string;
-  type: Trinket;
+  name: Trinket;
 };
 
 export type TrinketItemMonkeyPaw = TrinketItemDefault & {
   level: number;
-  type: "monkey paw";
+  name: "monkey paw";
 };
 
 export type UnlockedState = {

@@ -25,21 +25,21 @@ import {
 } from "@neverquest/utilities/constants";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
-export function AttributeDisplay({ type }: { type: Attribute }) {
-  const { isUnlocked, points } = useRecoilValue(attributes(type));
+export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
+  const { isUnlocked, points } = useRecoilValue(attributes(attribute));
   const attributeCostValue = useRecoilValue(attributeCost);
   const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
-  const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(type));
+  const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(attribute));
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isStageStartedValue = useRecoilValue(isStageStarted);
   const isWildernessValue = useRecoilValue(isWilderness);
 
   const increaseAttribute = useIncreaseAttribute();
 
-  const { description, Icon } = ATTRIBUTES[type];
+  const { description, Icon } = ATTRIBUTES[attribute];
   const isUnsafe = isStageStartedValue && !isStageCompletedValue && isWildernessValue;
   const canIncrease = areAttributesIncreasableValue && !isUnsafe;
-  const name = capitalizeAll(type);
+  const name = capitalizeAll(attribute);
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
@@ -56,7 +56,7 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
               <OverlayTrigger
                 overlay={
                   <Tooltip>
-                    <AttributeIncreaseDetails type={type} />
+                    <AttributeIncreaseDetails attribute={attribute} />
 
                     <div>
                       Cost:&nbsp;
@@ -71,7 +71,7 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
                 <span>
                   <Button
                     disabled={!canIncrease}
-                    onClick={() => increaseAttribute(type)}
+                    onClick={() => increaseAttribute(attribute)}
                     variant="outline-dark"
                   >
                     <IconImage Icon={canIncrease ? IconIncrease : IconWait} />

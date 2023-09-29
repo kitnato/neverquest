@@ -29,7 +29,7 @@ export function Masteries() {
               .sort(([a], [b]) => a.localeCompare(b))
               .sort(([, a], [, b]) => Number(b) - Number(a))
               .map(([type]) => (
-                <MasteryDisplay key={type} type={type as Mastery} />
+                <MasteryDisplay key={type} mastery={type as Mastery} />
               ))}
           </Stack>
         </Accordion.Body>

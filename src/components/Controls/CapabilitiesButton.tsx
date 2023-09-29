@@ -38,13 +38,13 @@ export function CapabilitiesButton() {
       <OverlayTrigger
         overlay={<Tooltip>{`Attributes${isShowingSkills ? " & skills" : ""}`}</Tooltip>}
       >
-        <span className={getAnimationClass({ type: "bounceIn" })}>
+        <span className={getAnimationClass({ name: "bounceIn" })}>
           <Button
             className={`position-relative${
               areAttributesIncreasableValue && (isStageCompletedValue || !isStageStartedValue)
                 ? ` ${getAnimationClass({
                     isInfinite: true,
-                    type: "pulse",
+                    name: "pulse",
                   })}`
                 : ""
             }`}

@@ -24,7 +24,7 @@ export function Mercenary() {
         {skillsTrainedValue.every((isSkillTrained) => isSkillTrained) ? (
           <span className="fst-italic">None available.</span>
         ) : (
-          ALL_SKILLS.map((current) => <TrainableSkill key={current} type={current} />)
+          ALL_SKILLS.map((current) => <TrainableSkill key={current} skill={current} />)
         )}
       </Stack>
 

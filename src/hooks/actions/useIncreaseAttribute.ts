@@ -17,14 +17,14 @@ export function useIncreaseAttribute() {
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      (type: Attribute) => {
+      (attribute: Attribute) => {
         const get = getSnapshotGetter(snapshot);
 
-        if (!get(areAttributesIncreasable) || get(isAttributeAtMaximum(type))) {
+        if (!get(areAttributesIncreasable) || get(isAttributeAtMaximum(attribute))) {
           return;
         }
 
-        const { shows } = ATTRIBUTES[type];
+        const { shows } = ATTRIBUTES[attribute];
 
         if (shows !== undefined) {
           set(isShowing(shows), true);
@@ -32,7 +32,7 @@ export function useIncreaseAttribute() {
 
         set(isShowing("statistics"), true);
 
-        set(attributes(type), (current) => ({
+        set(attributes(attribute), (current) => ({
           ...current,
           points: current.points + 1,
         }));

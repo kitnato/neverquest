@@ -25,7 +25,7 @@ export const merchantItem = withStateKey("merchantItem", (key) =>
     get:
       (parameter) =>
       ({ get }) =>
-        get(merchantInventory).find(({ item }) => isTrinket(item) && item.type === parameter)
+        get(merchantInventory).find(({ item }) => isTrinket(item) && item.name === parameter)
           ?.item ?? null,
     key,
   }),

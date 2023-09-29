@@ -9,7 +9,7 @@ export function Medic() {
       <Stack gap={3}>
         <h6>Purchase bandages</h6>
 
-        <PurchaseConsumable type="bandages" />
+        <PurchaseConsumable consumable="bandages" />
       </Stack>
 
       <ReceiveHealing />

@@ -4,21 +4,21 @@ import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/utilities/cons
 
 export function animateElement({
   element,
+  name,
   onEnd,
   speed,
-  type,
 }: {
   element: HTMLElement | null;
+  name: Animation;
   onEnd?: () => void;
   speed?: AnimationSpeed;
-  type: Animation;
 }) {
   if (element === null) {
     return;
   }
 
   const { classList } = element;
-  const animationName = `${CLASS_ANIMATE_PREFIX}${type}`;
+  const animationName = `${CLASS_ANIMATE_PREFIX}${name}`;
   const animationSpeedClass = speed ? `${CLASS_ANIMATE_PREFIX}${speed}` : null;
 
   if (classList.contains("d-none")) {
@@ -55,7 +55,7 @@ export function stackItems<ItemType>(items: ItemType[]) {
   items.forEach((item) => {
     if (isStackable(item)) {
       const existingStackIndex = stacker.findIndex(
-        ({ item: stackedItem }) => isStackable(stackedItem) && stackedItem.type === item.type,
+        ({ item: stackedItem }) => isStackable(stackedItem) && stackedItem.name === item.name,
       );
 
       if (existingStackIndex === -1) {

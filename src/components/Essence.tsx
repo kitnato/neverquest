@@ -32,7 +32,7 @@ export function Essence() {
       }}
     >
       <Stack
-        className={isShowingEssence ? ` ${getAnimationClass({ type: "flipInX" })}` : undefined}
+        className={isShowingEssence ? ` ${getAnimationClass({ name: "flipInX" })}` : undefined}
         direction="horizontal"
         style={{
           visibility: isShowingEssence ? "visible" : "hidden",

@@ -29,8 +29,8 @@ export function Monster() {
     if (isMonsterNewValue && monsterElementValue !== null) {
       animateElement({
         element: monsterElementValue,
+        name: "zoomInRight",
         speed: "faster",
-        type: "zoomInRight",
       });
 
       setMonsterNew(false);

@@ -14,15 +14,15 @@ import {
 import type { Reserve } from "@neverquest/types/unions";
 import { formatValue } from "@neverquest/utilities/formatters";
 
-export function RegenerationMeter({ type }: { type: Reserve }) {
-  const isHealth = type === "health";
+export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
+  const isHealth = reserve === "health";
 
-  const regenerationAmountValue = useRecoilValue(regenerationAmount(type));
-  const regenerationDurationValue = useRecoilValue(regenerationDuration(type));
-  const regenerationRateValue = useRecoilValue(regenerationRate(type));
+  const regenerationAmountValue = useRecoilValue(regenerationAmount(reserve));
+  const regenerationDurationValue = useRecoilValue(regenerationDuration(reserve));
+  const regenerationRateValue = useRecoilValue(regenerationRate(reserve));
   const isRecoveringValue = useRecoilValue(isRecovering);
 
-  const { label } = RESERVES[type];
+  const { label } = RESERVES[reserve];
   const ReserveIcon = isHealth ? IconHealth : IconStamina;
   const regenerationProgress =
     regenerationDurationValue === 0 ? 0 : regenerationRateValue - regenerationDurationValue;
@@ -49,7 +49,7 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
 
     return (
       <span>
-        {`Regenerating ${type}`}
+        {`Regenerating ${reserve}`}
         <br />
         <IconImage Icon={ReserveIcon} size="tiny" />
         &nbsp;

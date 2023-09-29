@@ -16,14 +16,14 @@ import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/utilities/cons
 
 export function getAnimationClass({
   isInfinite,
+  name,
   speed,
-  type,
 }: {
   isInfinite?: boolean;
+  name: Animation;
   speed?: AnimationSpeed;
-  type: Animation;
 }) {
-  return `${CLASS_ANIMATED} ${CLASS_ANIMATE_PREFIX}${type}${
+  return `${CLASS_ANIMATED} ${CLASS_ANIMATE_PREFIX}${name}${
     isInfinite ? ` ${CLASS_ANIMATE_PREFIX}infinite` : ""
   }${speed ? ` ${CLASS_ANIMATE_PREFIX}${speed}` : ""}`;
 }

@@ -60,7 +60,7 @@ export function MonsterBleeding() {
 
   return (
     <IconDisplay
-      contents={<MonsterAilmentMeter totalDuration={BLEED.duration} type="bleeding" />}
+      contents={<MonsterAilmentMeter ailment="bleeding" totalDuration={BLEED.duration} />}
       Icon={IconBleeding}
       tooltip="Bleeding"
     />

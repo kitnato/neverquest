@@ -13,11 +13,11 @@ import type { Skill } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
-export function TrainableSkill({ type }: { type: Skill }) {
-  const { requiredCrew } = SKILLS[type];
+export function TrainableSkill({ skill }: { skill: Skill }) {
+  const { requiredCrew } = SKILLS[skill];
 
   const skillPriceValue = useRecoilValue(skillPrice);
-  const skillValue = useRecoilValue(skills(type));
+  const skillValue = useRecoilValue(skills(skill));
   const { status } = useRecoilValue(hireStatus(requiredCrew));
 
   if (skillValue) {
@@ -28,7 +28,7 @@ export function TrainableSkill({ type }: { type: Skill }) {
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       {status === "hired" ? (
         <>
-          <SkillDisplay type={type} />
+          <SkillDisplay skill={skill} />
 
           <Stack direction="horizontal" gap={3}>
             <IconDisplay
@@ -37,7 +37,7 @@ export function TrainableSkill({ type }: { type: Skill }) {
               tooltip="Price"
             />
 
-            <TrainSkillButton type={type} />
+            <TrainSkillButton skill={skill} />
           </Stack>
         </>
       ) : (

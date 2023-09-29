@@ -74,16 +74,16 @@ export function Inventory() {
 
         {storedItems
           .filter(isTrinket)
-          .sort((a, b) => a.type.localeCompare(b.type))
+          .sort((a, b) => a.name.localeCompare(b.name))
           .map((current) => {
-            const { id, type } = current;
+            const { id, name } = current;
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
                 <Trinket item={current} />
 
                 {(() => {
-                  switch (type) {
+                  switch (name) {
                     case "compass": {
                       return <CompassNavigate />;
                     }
@@ -107,12 +107,12 @@ export function Inventory() {
 
         {[
           ...stackItems(
-            storedItems.filter(isConsumable).sort((a, b) => a.type.localeCompare(b.type)),
+            storedItems.filter(isConsumable).sort((a, b) => a.name.localeCompare(b.name)),
           ),
-          ...stackItems(storedItems.filter(isGem).sort((a, b) => a.type.localeCompare(b.type))),
+          ...stackItems(storedItems.filter(isGem).sort((a, b) => a.name.localeCompare(b.name))),
         ].map((current) => {
           const { item, stack } = current;
-          const { id, type } = item;
+          const { id, name } = item;
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
@@ -120,7 +120,7 @@ export function Inventory() {
 
               {(() => {
                 if (isConsumable(item)) {
-                  switch (type) {
+                  switch (name) {
                     case "antidote": {
                       return <Antidote id={id} />;
                     }

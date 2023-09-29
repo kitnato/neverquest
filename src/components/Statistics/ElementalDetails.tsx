@@ -18,9 +18,9 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
       <td className={CLASS_TABLE_CELL_ITALIC}>Elemental:</td>
 
       <td>
-        {stackItems(gems.slice().sort((a, b) => a.type.localeCompare(b.type))).map(({ item }) => {
-          const { id, type } = item;
-          const elemental = GEM_ELEMENTALS[type];
+        {stackItems(gems.slice().sort((a, b) => a.name.localeCompare(b.name))).map(({ item }) => {
+          const { id, name } = item;
+          const elemental = GEM_ELEMENTALS[name];
           const { damage, duration } = totalElementalEffectsValue[slot][elemental];
 
           return (

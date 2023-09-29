@@ -3,7 +3,7 @@ import { Stack } from "react-bootstrap";
 import { PurchaseItem } from "@neverquest/components/Caravan/Merchant/PurchaseItem";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
-import { Trinket } from "@neverquest/components/Items/Trinket";
+import { Trinket } from "@neverquest/components/Items/Trinkets";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import type { InventoryItem } from "@neverquest/types";
 import { isGear, isTrinket } from "@neverquest/types/type-guards";

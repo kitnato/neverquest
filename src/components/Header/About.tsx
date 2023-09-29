@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Button, Modal, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import type { HeadingProps } from "react-markdown/lib/ast-to-react";
 
@@ -30,8 +30,10 @@ export function About() {
       <Modal onHide={handleHide} show={isShowing} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>
-            <IconImage Icon={IconAbout} />
-            &nbsp;About
+            <Stack direction="horizontal" gap={3}>
+              <IconImage Icon={IconAbout} />
+              About
+            </Stack>
           </Modal.Title>
         </Modal.Header>
 

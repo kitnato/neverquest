@@ -38,15 +38,15 @@ export function Layout() {
               <Essence />
             </div>
 
-            <Stack className="overlay-highlighted" gap={3}>
+            <Stack className="overlay-offcanvas" gap={3}>
               <Status />
 
               <Statistics />
 
               <Gear />
-            </Stack>
 
-            <Masteries />
+              <Masteries />
+            </Stack>
           </Stack>
         </Col>
 

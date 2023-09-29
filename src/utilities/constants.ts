@@ -10,14 +10,24 @@ export const DEFAULT_DELTA_DISPLAY: DeltaDisplay = {
   value: "",
 };
 
+export const FRAMERATE = 1000 / 60;
+
 const KEY_STORAGE_PREFIX = "neverquest";
 export const KEY_SESSION = `${KEY_STORAGE_PREFIX}-session`;
 export const KEY_SETTINGS = `${KEY_STORAGE_PREFIX}-settings`;
 
-export const LABEL_MAXIMUM = "MAX";
+export const INFUSION_DELTA = FRAMERATE * 3;
+export const INFUSION_DURATION = 4000;
+
 export const LABEL_EMPTY = "--";
+export const LABEL_FULL_HEALTH = "Already at full health.";
+export const LABEL_MAXIMUM = "MAX";
+export const LABEL_NO_ESSENCE = "Insufficient essence.";
+export const LABEL_OVER_ENCUMBERED = "Too heavy.";
 export const LABEL_UNKNOWN = "???";
 
 export const MILLISECONDS_IN_HOUR = 3600000;
 export const MILLISECONDS_IN_MINUTE = 60000;
 export const MILLISECONDS_IN_SECOND = 1000;
+
+export const SIGMOID_X_FINAL = 100;

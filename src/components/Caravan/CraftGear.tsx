@@ -5,6 +5,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { essence } from "@neverquest/state/resources";
+import { LABEL_NO_ESSENCE } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function CraftGear({ onCraft, price }: { onCraft: () => void; price: number }) {
@@ -24,7 +25,7 @@ export function CraftGear({ onCraft, price }: { onCraft: () => void; price: numb
       <IconDisplay contents={formatValue({ value: price })} Icon={IconEssence} tooltip="Cost" />
 
       <OverlayTrigger
-        overlay={<Tooltip>Insufficient essence!</Tooltip>}
+        overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
         trigger={isAffordable ? [] : ["hover", "focus"]}
       >
         <span>

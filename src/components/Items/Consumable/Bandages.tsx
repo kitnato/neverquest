@@ -4,6 +4,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useHeal } from "@neverquest/hooks/actions/useHeal";
 import { inventory } from "@neverquest/state/inventory";
 import { isHealthAtMaximum } from "@neverquest/state/reserves";
+import { LABEL_FULL_HEALTH } from "@neverquest/utilities/constants";
 
 export function Bandages({ id }: { id: string }) {
   const isHealthAtMaximumValue = useRecoilValue(isHealthAtMaximum);
@@ -19,7 +20,7 @@ export function Bandages({ id }: { id: string }) {
 
   return (
     <OverlayTrigger
-      overlay={<Tooltip>{isHealthAtMaximumValue && <div>Already at full health!</div>}</Tooltip>}
+      overlay={<Tooltip>{isHealthAtMaximumValue && <div>{LABEL_FULL_HEALTH}</div>}</Tooltip>}
       trigger={isHealthAtMaximumValue ? ["hover", "focus"] : []}
     >
       <span>

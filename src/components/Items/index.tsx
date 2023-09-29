@@ -9,9 +9,10 @@ import { Salve } from "@neverquest/components/Items/Consumable/Salve";
 import { Encumbrance } from "@neverquest/components/Items/Encumbrance";
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
 import { StoredGear } from "@neverquest/components/Items/StoredGear";
-import { Trinket } from "@neverquest/components/Items/Trinket";
-import { Compass } from "@neverquest/components/Items/Trinket/Compass";
-import { Hearthstone } from "@neverquest/components/Items/Trinket/Hearthstone";
+import { Trinket } from "@neverquest/components/Items/Trinkets";
+import { CompassNavigate } from "@neverquest/components/Items/Trinkets/CompassNavigate";
+import { HearthstoneWarp } from "@neverquest/components/Items/Trinkets/HearthstoneWarp";
+import { MonkeyPawControl } from "@neverquest/components/Items/Trinkets/MonkeyPaw/MonkeyPawControl";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { inventory } from "@neverquest/state/inventory";
 import {
@@ -84,11 +85,15 @@ export function Inventory() {
                 {(() => {
                   switch (type) {
                     case "compass": {
-                      return <Compass />;
+                      return <CompassNavigate />;
                     }
 
                     case "hearthstone": {
-                      return <Hearthstone />;
+                      return <HearthstoneWarp />;
+                    }
+
+                    case "monkey paw": {
+                      return <MonkeyPawControl />;
                     }
 
                     default: {

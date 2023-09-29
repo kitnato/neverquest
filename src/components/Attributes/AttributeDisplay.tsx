@@ -64,7 +64,7 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
                       &nbsp;{attributeCostValue}
                     </div>
 
-                    {isUnsafe && <div>Monsters are lurking!</div>}
+                    {isUnsafe && <div>Monsters are lurking.</div>}
                   </Tooltip>
                 }
               >

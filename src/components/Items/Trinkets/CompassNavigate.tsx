@@ -1,5 +1,5 @@
 import { type ChangeEvent, useState } from "react";
-import { Button, Form, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Button, Form, Modal, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
@@ -17,7 +17,7 @@ import {
 import { isInventoryOpen } from "@neverquest/state/inventory";
 import { formatValue } from "@neverquest/utilities/formatters";
 
-export function Compass() {
+export function CompassNavigate() {
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isStageStartedValue = useRecoilValue(isStageStarted);
@@ -51,7 +51,7 @@ export function Compass() {
             onClick={() => setIsShowingNavigation(true)}
             variant="outline-dark"
           >
-            Use
+            Navigate
           </Button>
         </span>
       </OverlayTrigger>
@@ -59,8 +59,10 @@ export function Compass() {
       <Modal onHide={() => setIsShowingNavigation(false)} show={isShowingNavigation}>
         <Modal.Header closeButton>
           <Modal.Title>
-            <IconImage Icon={IconCompass} />
-            &nbsp;Navigate the wilderness
+            <Stack direction="horizontal" gap={3}>
+              <IconImage Icon={IconCompass} />
+              Navigate the wilderness
+            </Stack>
           </Modal.Title>
         </Modal.Header>
 

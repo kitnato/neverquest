@@ -7,7 +7,7 @@ export function useTransactEssence() {
   return useRecoilCallback(
     ({ set }) =>
       (difference: number) => {
-        if (difference !== undefined && difference !== 0) {
+        if (difference !== 0) {
           set(essence, (current) => current + difference);
           set(isShowing("essence"), true);
         }

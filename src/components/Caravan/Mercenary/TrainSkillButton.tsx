@@ -6,6 +6,7 @@ import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence
 import { essence } from "@neverquest/state/resources";
 import { skillPrice } from "@neverquest/state/skills";
 import type { Skill } from "@neverquest/types/unions";
+import { LABEL_NO_ESSENCE } from "@neverquest/utilities/constants";
 
 export function TrainSkillButton({ type }: { type: Skill }) {
   const essenceValue = useRecoilValue(essence);
@@ -23,7 +24,7 @@ export function TrainSkillButton({ type }: { type: Skill }) {
 
   return (
     <OverlayTrigger
-      overlay={<Tooltip>Insufficient essence!</Tooltip>}
+      overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
       trigger={isAffordable ? [] : ["hover", "focus"]}
     >
       <span>

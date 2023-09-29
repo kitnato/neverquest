@@ -9,7 +9,7 @@ import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { ReactComponent as IconTailoring } from "@neverquest/icons/tailoring.svg";
 import { encumbranceMaximum, hasKnapsack } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
@@ -47,8 +47,8 @@ export function ExpandKnapsack() {
         <OverlayTrigger
           overlay={
             <Tooltip>
-              {!hasKnapsackValue && <div>Knapsack required!</div>}
-              {!isAffordable && <div>Insufficient essence!</div>}
+              {!hasKnapsackValue && <div>Knapsack required.</div>}
+              {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
             </Tooltip>
           }
           trigger={canExpand ? [] : ["hover", "focus"]}

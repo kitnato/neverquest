@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { LOOTING_RATE } from "@neverquest/data/resources";
+import { LOOTING_RATE } from "@neverquest/data/statistics";
 import { useProgression } from "@neverquest/hooks/actions/useProgression";
 import { attackDuration, lootingDuration } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";

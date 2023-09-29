@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { canFit } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
 import type { InventoryItem } from "@neverquest/types";
+import { LABEL_NO_ESSENCE, LABEL_OVER_ENCUMBERED } from "@neverquest/utilities/constants";
 
 export function PurchaseItemButton({
   handlePurchase,
@@ -24,8 +25,8 @@ export function PurchaseItemButton({
     <OverlayTrigger
       overlay={
         <Tooltip>
-          {!isAffordable && <div>Insufficient essence!</div>}
-          {!canFitValue && <div>Too heavy!</div>}
+          {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
+          {!canFitValue && <div>{LABEL_OVER_ENCUMBERED}</div>}
         </Tooltip>
       }
       trigger={isPurchasable ? [] : ["hover", "focus"]}

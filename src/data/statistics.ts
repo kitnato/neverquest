@@ -14,6 +14,8 @@ export const BLEED_DELTA = Math.round(BLEED.duration / BLEED.ticks);
 
 export const ELEMENTAL_AILMENT_DURATION_MAXIMUM = 5000;
 
+export const LOOTING_RATE = 2000;
+
 export const PARRY_ABSORPTION = 0.33;
 export const PARRY_DAMAGE = 0.25;
 

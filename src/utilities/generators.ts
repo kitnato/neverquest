@@ -232,7 +232,9 @@ export function generateWilderness({ allowNSFW, stage }: { allowNSFW: boolean; s
 
   return generateLocation({
     allowNSFW,
-    hasPrefix: Math.random() <= prefix.minimum + (prefix.maximum - prefix.minimum) * factor,
-    hasSuffix: Math.random() <= suffix.minimum + (suffix.maximum - suffix.minimum) * factor,
+    hasPrefix:
+      Math.random() <= getFromRange({ factor, maximum: prefix.maximum, minimum: prefix.minimum }),
+    hasSuffix:
+      Math.random() <= getFromRange({ factor, maximum: suffix.maximum, minimum: suffix.minimum }),
   });
 }

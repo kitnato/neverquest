@@ -9,7 +9,11 @@ import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { ReactComponent as IconSurgery } from "@neverquest/icons/surgery.svg";
 import { isHealthAtMaximum, isHealthLow } from "@neverquest/state/reserves";
 import { essence } from "@neverquest/state/resources";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
+import {
+  CLASS_FULL_WIDTH_JUSTIFIED,
+  LABEL_FULL_HEALTH,
+  LABEL_NO_ESSENCE,
+} from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function ReceiveHealing() {
@@ -48,8 +52,8 @@ export function ReceiveHealing() {
           <OverlayTrigger
             overlay={
               <Tooltip>
-                {!isAffordable && <div>Insufficient essence!</div>}
-                {isHealthAtMaximumValue && <div>Already at full health!</div>}
+                {!isAffordable && <div> {LABEL_NO_ESSENCE}</div>}
+                {isHealthAtMaximumValue && <div>{LABEL_FULL_HEALTH}</div>}
               </Tooltip>
             }
             trigger={isPurchasable ? [] : ["hover", "focus"]}

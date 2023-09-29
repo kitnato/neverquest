@@ -61,7 +61,7 @@ export function ReserveMeter({ type }: { type: Reserve }) {
           {isAiling && (
             <>
               {` (${formatValue({ value: reserveMaximumValue })} `}
-              <IconImage Icon={isHealth ? IconPoison : IconBlight} size="tiny" />
+              <IconImage Icon={isHealth ? IconPoison : IconBlight} isStencilled size="tiny" />
               {` ${
                 typeof ailmentValue === "number"
                   ? formatValue({ format: "time", value: ailmentValue })

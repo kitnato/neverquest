@@ -6,18 +6,22 @@ import {
   GEM_DURATION,
   GEM_ELEMENTALS,
   GEM_ENHANCEMENT,
+  MONKEY_PAW_BONUS,
 } from "@neverquest/data/inventory";
 import { BLEED, PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/statistics";
 import { withStateKey } from "@neverquest/state";
 import { attributeStatistic, level } from "@neverquest/state/attributes";
 import { armor, ownedItem, shield, weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
+import type { TrinketItemMonkeyPaw } from "@neverquest/types";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import type { Attribute } from "@neverquest/types/unions";
 import {
   getDamagePerRate,
   getDamagePerTick,
   getElementalEffects,
+  getFromRange,
+  getGrowthSigmoid,
 } from "@neverquest/utilities/getters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
@@ -153,6 +157,25 @@ export const dodge = withStateKey("dodge", (key) =>
       get(armor).staminaCost === Infinity
         ? 0
         : get(attributeStatistic("agility")) * (1 + get(powerBonus("agility"))),
+    key,
+  }),
+);
+
+export const essenceBonus = withStateKey("essenceBonus", (key) =>
+  selector({
+    get: ({ get }) => {
+      const ownedMonkeyPaw = get(ownedItem("monkey paw"));
+
+      if (ownedMonkeyPaw === null) {
+        return 0;
+      }
+
+      return getFromRange({
+        factor: getGrowthSigmoid((ownedMonkeyPaw as TrinketItemMonkeyPaw).level),
+        maximum: MONKEY_PAW_BONUS.maximum,
+        minimum: MONKEY_PAW_BONUS.minimum,
+      });
+    },
     key,
   }),
 );

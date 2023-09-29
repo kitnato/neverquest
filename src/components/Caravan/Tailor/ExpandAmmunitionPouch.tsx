@@ -11,7 +11,7 @@ import { inventory } from "@neverquest/state/inventory";
 import { ownedItem } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import type { TrinketItemAmmunitionPouch } from "@neverquest/types";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
@@ -61,7 +61,7 @@ export function ExpandAmmunitionPouch() {
         <IconDisplay contents={formatValue({ value: price })} Icon={IconEssence} tooltip="Price" />
 
         <OverlayTrigger
-          overlay={<Tooltip>Insufficient essence!</Tooltip>}
+          overlay={<Tooltip> {LABEL_NO_ESSENCE}</Tooltip>}
           trigger={isAffordable ? [] : ["hover", "focus"]}
         >
           <span>

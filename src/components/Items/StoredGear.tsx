@@ -26,7 +26,7 @@ export function StoredGear() {
           <ItemDisplay item={current} />
 
           <OverlayTrigger
-            overlay={<Tooltip>Skill required!</Tooltip>}
+            overlay={<Tooltip>Skill required.</Tooltip>}
             trigger={canEquipGear ? [] : ["hover", "focus"]}
           >
             <span>

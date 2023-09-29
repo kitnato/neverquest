@@ -6,7 +6,7 @@ import { isAttacking } from "@neverquest/state/character";
 import { isWilderness } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
 
-export function Hearthstone() {
+export function HearthstoneWarp() {
   const isAttackingValue = useRecoilValue(isAttacking);
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
   const isWildernessValue = useRecoilValue(isWilderness);
@@ -27,7 +27,7 @@ export function Hearthstone() {
     >
       <span>
         <Button disabled={!canWarp} onClick={handleWarp} variant="outline-dark">
-          Use
+          Warp
         </Button>
       </span>
     </OverlayTrigger>

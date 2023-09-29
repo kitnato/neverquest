@@ -211,6 +211,12 @@ export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
 export const GEM_FITTING_COST = [20, 40, 70, 120, 200];
 export const GEMS_MAXIMUM = 5;
 
+export const MONKEY_PAW_BONUS = {
+  maximum: 1,
+  minimum: 0.2,
+};
+export const MONKEY_PAW_GROWTH = 14;
+
 export const SHIELD_NONE: Omit<Shield, "isEquipped" | "price"> = {
   block: 0,
   gearClass: "small",
@@ -295,20 +301,20 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
     Icon: IconAmmunitionPouch,
     item: {
       current: 0,
-      description: "Essential for using ranged weapons.",
+      description: "Store ammunition for ranged weapons.",
       id: nanoid(),
       maximum: AMMUNITION_MAXIMUM,
       price: 250,
       type: "ammunition pouch",
-      weight: 5,
+      weight: 6,
     },
   },
   "antique coin": {
     Icon: IconAntiqueCoin,
     item: {
-      description: "The wielder may experience extreme fortune.",
+      description: "The wielder is bestowed with extreme fortune.",
       id: nanoid(),
-      price: 300,
+      price: 1000,
       type: "antique coin",
       weight: 2,
     },
@@ -318,7 +324,7 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
     item: {
       description: "Navigate the wilderness to hunt in previous locations.",
       id: nanoid(),
-      price: 20,
+      price: 50,
       type: "compass",
       weight: 2,
     },
@@ -328,7 +334,7 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
     item: {
       description: "Travel back to the caravan even if there are still lurking monsters.",
       id: nanoid(),
-      price: 40,
+      price: 20,
       type: "hearthstone",
       weight: 2,
     },
@@ -346,11 +352,12 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
   "monkey paw": {
     Icon: IconMonkeyPaw,
     item: {
-      description: "Looting a corpse is instantaneous.",
+      description: "Boosts amount of essence looted. Can be infused to increase its potency.",
       id: nanoid(),
-      price: 400,
+      level: 1,
+      price: 500,
       type: "monkey paw",
-      weight: 3,
+      weight: 4,
     },
   },
   "tome of power": {
@@ -358,7 +365,7 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
     item: {
       description: "Boosts all attributes based on power level.",
       id: nanoid(),
-      price: 500,
+      price: 5000,
       type: "tome of power",
       weight: 10,
     },

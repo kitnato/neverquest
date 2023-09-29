@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { LOOTING_RATE } from "@neverquest/data/resources";
+import { LOOTING_RATE } from "@neverquest/data/statistics";
 import { lootingDuration } from "@neverquest/state/character";
 import { formatValue } from "@neverquest/utilities/formatters";
 

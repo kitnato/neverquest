@@ -102,17 +102,22 @@ export type Shield = GearItemBase & {
 
 export type StackableItem = ConsumableItem | GemItem;
 
-export type TrinketItem = TrinketItemAmmunitionPouch | TrinketItemDefault;
+export type TrinketItem = TrinketItemAmmunitionPouch | TrinketItemDefault | TrinketItemMonkeyPaw;
+
+export type TrinketItemAmmunitionPouch = TrinketItemDefault & {
+  current: number;
+  maximum: number;
+  type: "ammunition pouch";
+};
 
 export type TrinketItemDefault = ItemBase & {
   description: string;
   type: Trinket;
 };
 
-export type TrinketItemAmmunitionPouch = TrinketItemDefault & {
-  current: number;
-  maximum: number;
-  type: "ammunition pouch";
+export type TrinketItemMonkeyPaw = TrinketItemDefault & {
+  level: number;
+  type: "monkey paw";
 };
 
 export type UnlockedState = {

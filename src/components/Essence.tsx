@@ -22,8 +22,14 @@ export function Essence() {
 
   return (
     <Card
-      className="overlay-highlighted"
-      style={{ border: "none", paddingBottom: 4, paddingLeft: 8, paddingRight: 8, paddingTop: 4 }}
+      style={{
+        border: "none",
+        paddingBottom: 4,
+        paddingLeft: 8,
+        paddingRight: 8,
+        paddingTop: 4,
+        zIndex: 1055,
+      }}
     >
       <Stack
         className={isShowingEssence ? ` ${getAnimationClass({ type: "flipInX" })}` : undefined}

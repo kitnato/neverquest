@@ -95,8 +95,8 @@ export function getElementalEffects({
   };
 }
 
-export function getFromRange({ maximum, minimum }: GeneratorRange) {
-  const result = Math.random() * (maximum - minimum) + minimum;
+export function getFromRange({ factor, maximum, minimum }: GeneratorRange & { factor?: number }) {
+  const result = (factor ?? Math.random()) * (maximum - minimum) + minimum;
 
   return Number.isInteger(minimum) && Number.isInteger(maximum) ? Math.round(result) : result;
 }
@@ -134,9 +134,9 @@ export function getRange({
   ranges: [GeneratorRange, GeneratorRange];
 }): GeneratorRange {
   const maximumResult =
-    (ranges[0].maximum + (ranges[1].maximum - ranges[0].maximum) * factor) * modifier;
+    getFromRange({ factor, maximum: ranges[1].maximum, minimum: ranges[0].maximum }) * modifier;
   const minimumResult =
-    (ranges[0].minimum + (ranges[1].minimum - ranges[0].minimum) * factor) * modifier;
+    getFromRange({ factor, maximum: ranges[1].minimum, minimum: ranges[0].minimum }) * modifier;
 
   return {
     maximum:

@@ -9,7 +9,7 @@ import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { ReactComponent as IconPurge } from "@neverquest/icons/purge.svg";
 import { essenceAbsorbed } from "@neverquest/state/attributes";
 import { essence } from "@neverquest/state/resources";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function PurgeEssence() {
@@ -52,8 +52,8 @@ export function PurgeEssence() {
           <OverlayTrigger
             overlay={
               <Tooltip>
-                {!isAffordable && <div>Insufficient essence!</div>}
-                {price === 0 && <div>No essence to purge!</div>}
+                {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
+                {price === 0 && <div>No essence to purge.</div>}
               </Tooltip>
             }
             trigger={isPurchasable ? [] : ["hover", "focus"]}

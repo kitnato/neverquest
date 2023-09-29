@@ -13,6 +13,7 @@ export type IconImageProps = {
   ignoreColor?: boolean;
   isFlipped?: boolean;
   isMirrored?: boolean;
+  isStencilled?: boolean;
   onClick?: () => void;
   overlayPlacement?: Placement;
   size?: "small" | "tiny";

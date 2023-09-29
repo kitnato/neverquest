@@ -5,7 +5,7 @@ import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster"
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { Location } from "@neverquest/types/unions";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
-import { getGrowthSigmoid } from "@neverquest/utilities/getters";
+import { getFromRange, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 // SELECTORS
 
@@ -53,12 +53,13 @@ export const locationName = withStateKey("locationName", (key) =>
 
 export const progressMaximum = withStateKey("progressMaximum", (key) =>
   selector({
-    get: ({ get }) =>
-      get(isBoss)
+    get: ({ get }) => {
+      const { maximum, minimum } = PROGRESS;
+
+      return get(isBoss)
         ? 1
-        : Math.round(
-            PROGRESS.minimum + (PROGRESS.maximum - PROGRESS.minimum) * getGrowthSigmoid(get(stage)),
-          ),
+        : getFromRange({ factor: getGrowthSigmoid(get(stage)), maximum, minimum });
+    },
     key,
   }),
 );

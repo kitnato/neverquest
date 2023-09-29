@@ -1,9 +1,9 @@
 @import "~animate.css";
-@import "bootstrap-custom";
+@import "bootstrap-theme";
 @import "~bootstrap/scss/bootstrap";
 
 ::selection {
-  background: var(--bs-gray-600);
+  background: $gray-600;
   color: white;
 }
 
@@ -16,8 +16,12 @@
   transition: none;
 }
 
-.overlay-highlighted {
-  z-index: 1048;
+.overlay-offcanvas {
+  z-index: calc($zindex-offcanvas + 1);
+}
+
+.overlay-modal-backdrop {
+  z-index: calc($zindex-modal-backdrop + 1);
 }
 
 // Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563
@@ -32,16 +36,20 @@
   box-shadow: 0 0 4px 1px rgb(0 0 0 / 20%);
 }
 
+.stencilled {
+  filter: drop-shadow(0 0 2px rgb(0 0 0));
+}
+
 .text-blue {
-  color: var(--bs-blue);
+  color: $blue;
 }
 
 .text-orange {
-  color: var(--bs-orange);
+  color: $orange;
 }
 
 .text-yellow {
-  color: var(--bs-yellow);
+  color: $yellow;
 }
 
 body {

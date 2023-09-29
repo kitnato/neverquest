@@ -16,15 +16,22 @@ import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
 import { shield, weapon } from "@neverquest/state/items";
 import { skills } from "@neverquest/state/skills";
-import { bleedDamage, range, totalElementalEffects } from "@neverquest/state/statistics";
+import {
+  bleedDamage,
+  essenceBonus,
+  range,
+  totalElementalEffects,
+} from "@neverquest/state/statistics";
 import {
   ELEMENTAL_TYPES,
   MONSTER_AILMENT_TYPES,
   type MonsterAilment,
 } from "@neverquest/types/unions";
+import { SIGMOID_X_FINAL } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 import {
   getDamagePerRate,
+  getFromRange,
   getGrowthSigmoid,
   getGrowthTriangular,
 } from "@neverquest/utilities/getters";
@@ -140,7 +147,10 @@ export const monsterBlightChance = withStateKey("monsterBlightChance", (key) =>
         return 0;
       }
 
-      return (minimum + maximum * getGrowthSigmoid(stageValue)) * (get(isBoss) ? boss : 1);
+      return (
+        getFromRange({ factor: getGrowthSigmoid(stageValue), maximum, minimum }) *
+        (get(isBoss) ? boss : 1)
+      );
     },
     key,
   }),
@@ -224,10 +234,13 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
       const isBossValue = get(isBoss);
       const stageValue = get(stage);
       const factor = getGrowthTriangular(stageValue) / attenuation;
-      const totalBonus = 1 + get(progress) * bonus + (isBossValue ? boss : 0);
 
       return {
-        essence: Math.round((essence + essence * factor) * totalBonus),
+        essence: Math.round(
+          (essence + essence * factor) * 1 +
+            get(progress) * bonus +
+            (isBossValue ? boss : 0) * (1 + get(essenceBonus)),
+        ),
         gems: isBossValue
           ? 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL)
           : 0,
@@ -252,7 +265,10 @@ export const monsterPoisonChance = withStateKey("monsterPoisonChance", (key) =>
         return 0;
       }
 
-      return (minimum + maximum * getGrowthSigmoid(stageValue)) * (get(isBoss) ? boss : 1);
+      return (
+        getFromRange({ factor: getGrowthSigmoid(stageValue), maximum, minimum }) *
+        (get(isBoss) ? boss : 1)
+      );
     },
     key,
   }),
@@ -263,9 +279,16 @@ export const monsterPoisonLength = withStateKey("monsterPoisonLength", (key) =>
     get: ({ get }) => {
       const {
         duration: { maximum, minimum },
+        stageRequired,
       } = POISON;
 
-      return Math.round(minimum + maximum * getGrowthSigmoid(get(stage)));
+      return getFromRange({
+        factor: getGrowthSigmoid(
+          (SIGMOID_X_FINAL / stageRequired) * (get(stage) + 1 - stageRequired),
+        ),
+        maximum,
+        minimum,
+      });
     },
     key,
   }),
@@ -276,9 +299,16 @@ export const monsterPoisonMagnitude = withStateKey("monsterPoisonMagnitude", (ke
     get: ({ get }) => {
       const {
         magnitude: { maximum, minimum },
+        stageRequired,
       } = POISON;
 
-      return minimum + maximum * getGrowthSigmoid(get(stage));
+      return getFromRange({
+        factor: getGrowthSigmoid(
+          (SIGMOID_X_FINAL / stageRequired) * (get(stage) + 1 - stageRequired),
+        ),
+        maximum,
+        minimum,
+      });
     },
     key,
   }),

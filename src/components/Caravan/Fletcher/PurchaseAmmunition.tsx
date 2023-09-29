@@ -10,7 +10,11 @@ import { inventory } from "@neverquest/state/inventory";
 import { ownedItem } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import type { TrinketItemAmmunitionPouch } from "@neverquest/types";
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_MAXIMUM } from "@neverquest/utilities/constants";
+import {
+  CLASS_FULL_WIDTH_JUSTIFIED,
+  LABEL_MAXIMUM,
+  LABEL_NO_ESSENCE,
+} from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function PurchaseAmmunition() {
@@ -19,7 +23,6 @@ export function PurchaseAmmunition() {
   const setInventory = useSetRecoilState(inventory);
 
   const transactEssence = useTransactEssence();
-  const isAffordable = (amount: number) => AMMUNITION_PRICE * amount <= essenceValue;
 
   const handlePurchase = (amount: number) => {
     if (isAffordable(amount) && ownedAmmunitionPouch !== null) {
@@ -36,6 +39,7 @@ export function PurchaseAmmunition() {
       );
     }
   };
+  const isAffordable = (amount: number) => AMMUNITION_PRICE * amount <= essenceValue;
 
   return (
     <Stack gap={3}>
@@ -69,7 +73,7 @@ export function PurchaseAmmunition() {
                     return (
                       <OverlayTrigger
                         key={label}
-                        overlay={<Tooltip>Insufficient essence!</Tooltip>}
+                        overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
                         trigger={canPurchase ? [] : ["hover", "focus"]}
                       >
                         <span>

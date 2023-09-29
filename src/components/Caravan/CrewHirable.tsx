@@ -10,7 +10,11 @@ import { hireStatus } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import { essence } from "@neverquest/state/resources";
 import type { Crew } from "@neverquest/types/unions";
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
+import {
+  CLASS_FULL_WIDTH_JUSTIFIED,
+  LABEL_NO_ESSENCE,
+  LABEL_UNKNOWN,
+} from "@neverquest/utilities/constants";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 
 export function CrewHirable({ type }: { type: Crew }) {
@@ -50,7 +54,7 @@ export function CrewHirable({ type }: { type: Crew }) {
           />
 
           <OverlayTrigger
-            overlay={<Tooltip>Insufficient essence!</Tooltip>}
+            overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
             trigger={isAffordable ? [] : ["hover", "focus"]}
           >
             <span>

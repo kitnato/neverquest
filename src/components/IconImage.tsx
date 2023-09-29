@@ -7,6 +7,7 @@ export function IconImage({
   ignoreColor = false,
   isFlipped = false,
   isMirrored = false,
+  isStencilled = false,
   onClick,
   overlayPlacement,
   size,
@@ -14,7 +15,9 @@ export function IconImage({
 }: IconImageProps) {
   const IconStyled = () => (
     <Icon
-      className={`icon-image ${size ?? ""} ${ignoreColor ? "text-body" : ""}`}
+      className={`icon-image${` ${size}` ?? ""}${ignoreColor ? " text-body" : ""}${
+        isStencilled ? " stencilled" : ""
+      }`}
       onClick={onClick}
       style={{
         cursor: onClick !== undefined ? "pointer" : "inherit",

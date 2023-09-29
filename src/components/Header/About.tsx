@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Button, Modal, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import type { HeadingProps } from "react-markdown/lib/ast-to-react";
 
@@ -30,19 +30,21 @@ export function About() {
       <Modal onHide={handleHide} show={isShowing} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>
-            <IconImage Icon={IconAbout} />
-            &nbsp;About
+            <Stack direction="horizontal" gap={3}>
+              <IconImage Icon={IconAbout} />
+              About
+            </Stack>
           </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           <ReactMarkdown
             components={HEADERS.reduce(
-              (current, Tag) => ({
-                ...current,
-                [Tag]: ({ children, node: _, ...props }: HeadingProps) => {
+              (aggregator, Current) => ({
+                ...aggregator,
+                [Current]: ({ children, node: _, ...props }: HeadingProps) => {
                   return (
-                    <Tag
+                    <Current
                       id={
                         Array.isArray(children) && typeof children[0] === "string"
                           ? formatSlug(children[0])

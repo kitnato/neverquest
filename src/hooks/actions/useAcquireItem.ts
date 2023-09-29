@@ -2,8 +2,7 @@ import { useRecoilCallback } from "recoil";
 
 import { ARMOR_NONE, KNAPSACK_SIZE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
-import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
-import { attributes } from "@neverquest/state/attributes";
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import {
   canFit,
   encumbranceMaximum,
@@ -17,12 +16,19 @@ import { armor, shield, weapon } from "@neverquest/state/items";
 import { autoEquip } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
 import type { InventoryItem } from "@neverquest/types";
-import { isArmor, isGear, isMelee, isRanged, isShield } from "@neverquest/types/type-guards";
+import {
+  isArmor,
+  isGear,
+  isMelee,
+  isRanged,
+  isShield,
+  isTrinket,
+} from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useAcquireItem() {
   const toggleEquipGear = useToggleEquipGear();
-  const transactResources = useTransactResources();
+  const transactEssence = useTransactEssence();
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
@@ -35,47 +41,30 @@ export function useAcquireItem() {
           return "noFit";
         }
 
-        set(itemsAcquired, (current) => [...current, item]);
-
-        if (isGear(item)) {
-          set(inventory, (current) => current.concat(item));
-
-          if (
-            get(autoEquip) &&
-            ((get(armor) === ARMOR_NONE && isArmor(item)) ||
-              (get(shield) === SHIELD_NONE && isShield(item)) ||
-              (get(weapon) === WEAPON_NONE &&
-                (isMelee(item) || (get(skills("archery")) && isRanged(item)))))
-          ) {
-            return "autoEquip";
-          } else {
-            return "success";
-          }
-        }
-
-        const { type } = item;
-
-        if (type === "knapsack") {
+        if (isTrinket(item) && item.type === "knapsack") {
           set(encumbranceMaximum, (current) => current + KNAPSACK_SIZE);
           set(hasKnapsack, true);
-
           set(isShowing("weight"), true);
-        } else {
-          if (type === "antique coin") {
-            set(isShowing("lootBonus"), true);
 
-            set(attributes("luck"), (current) => ({ ...current, isUnlocked: true }));
-          }
+          return "success";
+        }
 
-          if (type === "tome of power") {
-            set(isShowing("lootBonusDetails"), true);
-          }
+        set(inventory, (current) => current.concat(item));
+        set(itemsAcquired, (current) => [...current, item]);
 
-          set(inventory, (current) => current.concat(item));
+        if (
+          isGear(item) &&
+          get(autoEquip) &&
+          ((get(armor) === ARMOR_NONE && isArmor(item)) ||
+            (get(shield) === SHIELD_NONE && isShield(item)) ||
+            (get(weapon) === WEAPON_NONE &&
+              (isMelee(item) || (get(skills("archery")) && isRanged(item)))))
+        ) {
+          return "autoEquip";
         }
 
         return "success";
       },
-    [toggleEquipGear, transactResources],
+    [toggleEquipGear, transactEssence],
   );
 }

@@ -3,7 +3,6 @@ import { ReactComponent as IconAgility } from "@neverquest/icons/agility.svg";
 import { ReactComponent as IconDexterity } from "@neverquest/icons/dexterity.svg";
 import { ReactComponent as IconEndurance } from "@neverquest/icons/endurance.svg";
 import { ReactComponent as IconFortitude } from "@neverquest/icons/fortitude.svg";
-import { ReactComponent as IconLuck } from "@neverquest/icons/luck.svg";
 import { ReactComponent as IconPerception } from "@neverquest/icons/perception.svg";
 import { ReactComponent as IconSpeed } from "@neverquest/icons/speed.svg";
 import { ReactComponent as IconStrength } from "@neverquest/icons/strength.svg";
@@ -11,6 +10,8 @@ import { ReactComponent as IconVigor } from "@neverquest/icons/vigor.svg";
 import { ReactComponent as IconVitality } from "@neverquest/icons/vitality.svg";
 import type { AttributeData } from "@neverquest/types";
 import type { Attribute } from "@neverquest/types/unions";
+
+export const ATTRIBUTE_COST_BASE = 2;
 
 export const ATTRIBUTES: Record<Attribute, AttributeData> = {
   agility: {
@@ -23,12 +24,12 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
     powerBonus: 0.005,
   },
   dexterity: {
-    base: 0,
+    base: 0.03,
     description: "Increases critical strike chance.",
     Icon: IconDexterity,
     increment: 0.02,
     isUnlocked: false,
-    maximum: 0.6,
+    maximum: 0.61,
     powerBonus: 0.005,
   },
   endurance: {
@@ -47,14 +48,6 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
     increment: 1,
     isUnlocked: false,
     maximum: 50,
-    powerBonus: 0.01,
-  },
-  luck: {
-    base: 0,
-    description: "Increases amount of loot dropped by monsters.",
-    Icon: IconLuck,
-    increment: 0.03,
-    isUnlocked: false,
     powerBonus: 0.01,
   },
   perception: {
@@ -114,5 +107,4 @@ export const ATTRIBUTES_ORDER: Attribute[] = [
   "dexterity",
   "perception",
   "agility",
-  "luck",
 ];

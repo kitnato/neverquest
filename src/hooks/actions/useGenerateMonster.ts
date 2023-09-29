@@ -16,7 +16,7 @@ import {
 } from "@neverquest/state/monster";
 import { allowNSFW } from "@neverquest/state/settings";
 import { MONSTER_AILMENT_TYPES } from "@neverquest/types/unions";
-import { getGrowthSigmoid, getSnapshotGetter } from "@neverquest/utilities/getters";
+import { getFromRange, getGrowthSigmoid, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useGenerateMonster() {
   const { prefix, suffix } = MONSTER_NAME;
@@ -36,9 +36,19 @@ export function useGenerateMonster() {
             : generateCreature({
                 allowNSFW: allowNSFWValue,
                 hasPrefix:
-                  Math.random() <= prefix.minimum + (prefix.maximum - prefix.minimum) * factor,
+                  Math.random() <=
+                  getFromRange({
+                    factor,
+                    maximum: prefix.maximum,
+                    minimum: prefix.minimum,
+                  }),
                 hasSuffix:
-                  Math.random() <= suffix.minimum + (suffix.maximum - suffix.minimum) * factor,
+                  Math.random() <=
+                  getFromRange({
+                    factor,
+                    maximum: suffix.maximum,
+                    minimum: suffix.minimum,
+                  }),
                 type: ["monster"],
               }),
         );

@@ -71,6 +71,9 @@ export const LOCATIONS: LocationData[] = [
     name: "cage",
   },
   {
+    name: "campsite",
+  },
+  {
     name: "caravan",
   },
   {
@@ -338,6 +341,10 @@ export const LOCATIONS: LocationData[] = [
     name: "mansion",
   },
   {
+    canPluralize: true,
+    name: "market",
+  },
+  {
     name: "mausoleum",
   },
   {
@@ -396,6 +403,16 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "paradise",
+  },
+  {
+    canPluralize: true,
+    name: "parapet",
+  },
+  {
+    name: "park",
+  },
+  {
+    name: "parking lot",
   },
   {
     canPluralize: true,
@@ -500,6 +517,9 @@ export const LOCATIONS: LocationData[] = [
     name: "sub-basement",
   },
   {
+    name: "supermarket",
+  },
+  {
     name: "swamp",
   },
   {
@@ -513,6 +533,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "territory",
+  },
+  {
+    name: "themepark",
   },
   {
     isNSFW: true,

@@ -5,19 +5,20 @@ import type { Consumable, Gem, Grip, Showing, Trinket } from "@neverquest/types/
 
 export type Armor = GearItemBase & {
   deflection: number;
-  gearClass?: ArmorClass;
+  gearClass: ArmorClass;
   gems: GemItem[];
   protection: number;
   staminaCost: number;
 };
 
-export type AttributeData = AttributeOrMasteryBaseData & {
-  maximum?: number;
-  powerBonus: number;
-  shows?: Showing;
-};
+export type AttributeData = AttributeOrMasteryBaseData &
+  UnlockedState & {
+    maximum?: number;
+    powerBonus: number;
+    shows?: Showing;
+  };
 
-export type AttributeOrMasteryBaseData = UnlockedState & {
+export type AttributeOrMasteryBaseData = {
   base: number;
   description: string;
   Icon: SVGIcon;
@@ -43,8 +44,7 @@ export type ConsumableItem = ItemBase & {
 export type FletcherInventory = Weapon | null;
 
 export type GearBase = {
-  coinPrice: GeneratorRange;
-  scrapPrice: GeneratorRange;
+  price: GeneratorRange;
   staminaCost: [GeneratorRange, GeneratorRange];
   weight: [GeneratorRange, GeneratorRange];
 };
@@ -56,7 +56,7 @@ type GearItemBase = ItemBase & {
   isEquipped: boolean;
   level: number;
   name: string;
-  scrapPrice: number;
+  price: number;
 };
 
 export type GearItemUnequipped = typeof ARMOR_NONE | typeof SHIELD_NONE | typeof WEAPON_NONE;
@@ -73,8 +73,8 @@ export type GeneratorRange = {
 export type InventoryItem = ConsumableItem | GearItem | GemItem | TrinketItem;
 
 type ItemBase = {
-  coinPrice: number;
   id: string;
+  price: number;
   weight: number;
 };
 
@@ -94,7 +94,7 @@ export type Ranged = WeaponBase & {
 
 export type Shield = GearItemBase & {
   block: number;
-  gearClass?: ShieldClass;
+  gearClass: ShieldClass;
   gems: GemItem[];
   stagger: number;
   staminaCost: number;
@@ -102,17 +102,22 @@ export type Shield = GearItemBase & {
 
 export type StackableItem = ConsumableItem | GemItem;
 
-export type TrinketItem = TrinketItemAmmunitionPouch | TrinketItemDefault;
+export type TrinketItem = TrinketItemAmmunitionPouch | TrinketItemDefault | TrinketItemMonkeyPaw;
+
+export type TrinketItemAmmunitionPouch = TrinketItemDefault & {
+  current: number;
+  maximum: number;
+  type: "ammunition pouch";
+};
 
 export type TrinketItemDefault = ItemBase & {
   description: string;
   type: Trinket;
 };
 
-export type TrinketItemAmmunitionPouch = TrinketItemDefault & {
-  current: number;
-  maximum: number;
-  type: "ammunition pouch";
+export type TrinketItemMonkeyPaw = TrinketItemDefault & {
+  level: number;
+  type: "monkey paw";
 };
 
 export type UnlockedState = {

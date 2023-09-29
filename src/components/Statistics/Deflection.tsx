@@ -6,24 +6,21 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { deflection } from "@neverquest/state/statistics";
-import { LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatPercentage } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Deflection() {
   const deflectionValue = useRecoilValue(deflection);
-  const isShowingValue = useRecoilValue(isShowing("deflection"));
-  const skillArmorcraft = useRecoilValue(skills("armorcraft"));
+  const armorcraftValue = useRecoilValue(skills("armorcraft"));
 
   useDeltaText({
     delta: deltas("deflection"),
-    stop: ({ previous }) => previous === null || !skillArmorcraft,
+    format: "percentage",
     value: deflection,
   });
 
-  if (!isShowingValue) {
+  if (!armorcraftValue || deflectionValue === 0) {
     return null;
   }
 
@@ -31,7 +28,7 @@ export function Deflection() {
     <IconDisplay
       contents={
         <Stack direction="horizontal">
-          <span>{skillArmorcraft ? formatPercentage(deflectionValue) : LABEL_EMPTY}</span>
+          <span>{formatValue({ format: "percentage", value: deflectionValue })}</span>
 
           <FloatingText deltaType="deflection" />
         </Stack>

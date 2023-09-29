@@ -22,7 +22,7 @@ import {
   LABEL_EMPTY,
   LABEL_UNKNOWN,
 } from "@neverquest/utilities/constants";
-import { formatPercentage } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Dodge() {
   const { staminaCost } = useRecoilValue(armor);
@@ -32,11 +32,11 @@ export function Dodge() {
   const hasTomeOfPower = Boolean(useRecoilValue(ownedItem("tome of power")));
   const powerBonusValue = useRecoilValue(powerBonus("agility"));
   const statisticValue = useRecoilValue(attributeStatistic("agility"));
-  const skillEvasion = useRecoilValue(skills("evasion"));
+  const evasionValue = useRecoilValue(skills("evasion"));
 
   useDeltaText({
     delta: deltas("dodge"),
-    type: "percentage",
+    format: "percentage",
     value: dodge,
   });
 
@@ -61,7 +61,11 @@ export function Dodge() {
                         &nbsp;Agility:
                       </td>
 
-                      <td>{`${formatPercentage(statisticValue, 0)}`}</td>
+                      <td>{`${formatValue({
+                        decimals: 0,
+                        format: "percentage",
+                        value: statisticValue,
+                      })}`}</td>
                     </tr>
 
                     {powerBonusValue > 0 && (
@@ -71,7 +75,10 @@ export function Dodge() {
                           &nbsp;Empowered:
                         </td>
 
-                        <td>{`+${formatPercentage(powerBonusValue)}`}</td>
+                        <td>{`+${formatValue({
+                          format: "percentage",
+                          value: powerBonusValue,
+                        })}`}</td>
                       </tr>
                     )}
 
@@ -93,10 +100,14 @@ export function Dodge() {
               </Popover>
             }
             trigger={
-              skillEvasion && (isShowingDodgePenalty || hasTomeOfPower) ? ["hover", "focus"] : []
+              evasionValue && (isShowingDodgePenalty || hasTomeOfPower) ? ["hover", "focus"] : []
             }
           >
-            <span>{skillEvasion ? formatPercentage(dodgeValue) : LABEL_EMPTY}</span>
+            <span>
+              {evasionValue
+                ? formatValue({ format: "percentage", value: dodgeValue })
+                : LABEL_EMPTY}
+            </span>
           </OverlayTrigger>
 
           <FloatingText deltaType="dodge" />

@@ -1,6 +1,6 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
-import { ATTRIBUTES } from "@neverquest/data/attributes";
+import { ATTRIBUTES, ATTRIBUTES_ORDER, ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { essence } from "@neverquest/state/resources";
 import type { UnlockedState } from "@neverquest/types";
@@ -12,14 +12,12 @@ import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities
 export const attributePoints = withStateKey("attributePoints", (key) =>
   selector({
     get: ({ get }) => {
-      const nextLevel = get(level) + 1;
-
       let points = 0;
       let requiredEssence = get(attributeCost);
 
       while (requiredEssence <= get(essence)) {
         points += 1;
-        requiredEssence += getGrowthTriangular(nextLevel + points);
+        requiredEssence += getGrowthTriangular(get(level) + 1 + ATTRIBUTE_COST_BASE + points);
       }
 
       return points;
@@ -30,7 +28,7 @@ export const attributePoints = withStateKey("attributePoints", (key) =>
 
 export const attributeCost = withStateKey("attributeCost", (key) =>
   selector({
-    get: ({ get }) => getGrowthTriangular(get(level) + 1),
+    get: ({ get }) => getGrowthTriangular(get(level) + ATTRIBUTE_COST_BASE),
     key,
   }),
 );
@@ -76,8 +74,8 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =
 export const level = withStateKey("level", (key) =>
   selector({
     get: ({ get }) =>
-      Object.keys(ATTRIBUTES).reduce(
-        (current, type) => current + get(attributes(type as Attribute)).points,
+      ATTRIBUTES_ORDER.reduce(
+        (aggregator, current) => aggregator + get(attributes(current)).points,
         0,
       ),
     key,

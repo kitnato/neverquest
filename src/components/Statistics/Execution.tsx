@@ -6,24 +6,28 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconExecution } from "@neverquest/icons/execution.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { isShowing } from "@neverquest/state/isShowing";
+import { weapon } from "@neverquest/state/items";
 import { skills } from "@neverquest/state/skills";
 import { execution } from "@neverquest/state/statistics";
+import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatPercentage } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Execution() {
   const executionValue = useRecoilValue(execution);
-  const isShowingValue = useRecoilValue(isShowing("execution"));
-  const skillSiegecraft = useRecoilValue(skills("siegecraft"));
+  const siegecraftValue = useRecoilValue(skills("siegecraft"));
+  const weaponValue = useRecoilValue(weapon);
 
   useDeltaText({
     delta: deltas("execution"),
-    stop: ({ previous }) => previous === null || !skillSiegecraft,
     value: execution,
   });
 
-  if (!isShowingValue) {
+  if (
+    !siegecraftValue ||
+    isRanged(weaponValue) ||
+    (isMelee(weaponValue) && weaponValue.grip !== "two-handed")
+  ) {
     return null;
   }
 
@@ -32,10 +36,10 @@ export function Execution() {
       contents={
         <Stack direction="horizontal">
           <span>
-            {skillSiegecraft
+            {siegecraftValue
               ? executionValue === 0
                 ? LABEL_EMPTY
-                : formatPercentage(executionValue, 0)
+                : formatValue({ decimals: 0, format: "percentage", value: executionValue })
               : LABEL_EMPTY}
           </span>
 

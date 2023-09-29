@@ -6,7 +6,7 @@ import { GemDescription } from "@neverquest/components/Items/GemDescription";
 import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
 import type { ConsumableItem, GemItem, TrinketItem } from "@neverquest/types";
 import { isGem } from "@neverquest/types/type-guards";
-import { capitalizeAll } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 
 export function ItemName({
   hideOverlay = false,
@@ -41,7 +41,9 @@ export function ItemName({
       placement={placement}
       trigger={hideOverlay ? [] : ["focus", "hover"]}
     >
-      <span>{`${name}${stack !== undefined && stack > 1 ? ` x${stack}` : ""}`}</span>
+      <span>{`${name}${
+        stack !== undefined && stack > 1 ? ` x${formatValue({ value: stack })}` : ""
+      }`}</span>
     </OverlayTrigger>
   );
 }

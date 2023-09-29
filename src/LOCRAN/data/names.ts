@@ -194,6 +194,10 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "grin",
+    type: ["suffix"],
+  },
+  {
     name: "grub",
     type: ["prefix", "suffix"],
   },
@@ -278,6 +282,10 @@ export const NAMES: NameData[] = [
   {
     name: "mayhem",
     type: ["prefix"],
+  },
+  {
+    name: "mind",
+    type: ["prefix", "suffix"],
   },
   {
     isNSFW: true,
@@ -380,6 +388,11 @@ export const NAMES: NameData[] = [
     isNSFW: true,
     name: "semen",
     type: ["prefix"],
+  },
+  {
+    isNSFW: true,
+    name: "shit",
+    type: ["prefix", "suffix"],
   },
   {
     name: "skull",

@@ -7,7 +7,7 @@ import { useToggleAttack } from "@neverquest/hooks/actions/useToggleAttack";
 import { isAttacking } from "@neverquest/state/character";
 import { progress, progressMaximum } from "@neverquest/state/encounter";
 import { monsterLoot } from "@neverquest/state/monster";
-import { coinsLoot, essenceLoot, itemsLoot, scrapLoot } from "@neverquest/state/resources";
+import { essenceLoot, itemsLoot } from "@neverquest/state/resources";
 import type { GemItem } from "@neverquest/types";
 import { GEM_TYPES } from "@neverquest/types/unions";
 import { getFromRange, getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -21,18 +21,10 @@ export function useProgression() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const { coins, essence, gems, scrap } = get(monsterLoot);
-
-        if (coins > 0) {
-          set(coinsLoot, (current) => current + coins);
-        }
+        const { essence, gems } = get(monsterLoot);
 
         if (essence > 0) {
           set(essenceLoot, (current) => current + essence);
-        }
-
-        if (scrap > 0) {
-          set(scrapLoot, (current) => current + scrap);
         }
 
         if (gems > 0) {

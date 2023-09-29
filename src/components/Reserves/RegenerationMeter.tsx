@@ -12,7 +12,7 @@ import {
   regenerationRate,
 } from "@neverquest/state/reserves";
 import type { Reserve } from "@neverquest/types/unions";
-import { formatTime } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function RegenerationMeter({ type }: { type: Reserve }) {
   const isHealth = type === "health";
@@ -38,7 +38,11 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
           {`${label} regeneration`}
           <br />
           <IconImage Icon={ReserveIcon} size="tiny" />
-          &nbsp;{`${regenerationAmountValue} per ${formatTime(regenerationRateValue)}`}
+          &nbsp;
+          {`${regenerationAmountValue} per ${formatValue({
+            format: "time",
+            value: regenerationRateValue,
+          })}`}
         </span>
       );
     }
@@ -49,9 +53,10 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
         <br />
         <IconImage Icon={ReserveIcon} size="tiny" />
         &nbsp;
-        {`${regenerationAmountValue} in ${formatTime(
-          regenerationRateValue - regenerationProgress,
-        )}`}
+        {`${regenerationAmountValue} in ${formatValue({
+          format: "time",
+          value: regenerationRateValue - regenerationProgress,
+        })}`}
       </span>
     );
   })();

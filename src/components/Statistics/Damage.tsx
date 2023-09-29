@@ -18,7 +18,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { weapon } from "@neverquest/state/items";
 import { damage, damageTotal, powerBonus } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
-import { formatPercentage } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Damage() {
   const strengthValue = useRecoilValue(attributeStatistic("strength"));
@@ -74,7 +74,11 @@ export function Damage() {
                             &nbsp;Empowered:
                           </td>
 
-                          <td>{`+${formatPercentage(powerBonusValue, 0)}`}</td>
+                          <td>{`+${formatValue({
+                            decimals: 0,
+                            format: "percentage",
+                            value: powerBonusValue,
+                          })}`}</td>
                         </tr>
 
                         <tr>

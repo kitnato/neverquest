@@ -19,7 +19,6 @@ import { ReactComponent as IconVigor } from "@neverquest/icons/vigor.svg";
 import { attributeStatistic } from "@neverquest/state/attributes";
 import { isRecovering } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { isShowing } from "@neverquest/state/isShowing";
 import {
   isHealthAtMaximum,
   isRegenerating,
@@ -27,10 +26,11 @@ import {
   regenerationDuration,
   regenerationRate,
 } from "@neverquest/state/reserves";
+import { skills } from "@neverquest/state/skills";
 import { powerBonus } from "@neverquest/state/statistics";
 import type { Reserve } from "@neverquest/types/unions";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
-import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 const RESERVE_CHANGE = {
   health: useChangeHealth,
@@ -40,15 +40,15 @@ const RESERVE_CHANGE = {
 export function Regeneration({ type }: { type: Reserve }) {
   const isHealth = type === "health";
 
-  const isRecoveringValue = useRecoilValue(isRecovering);
-  const isRegeneratingValue = useRecoilValue(isRegenerating(type));
-  const isReserveAtMaximum = useRecoilValue(isHealth ? isHealthAtMaximum : isStaminaAtMaximum);
-  const isShowingReserveDetails = useRecoilValue(isShowing("reserveDetails"));
-  const powerBonusAmountValue = useRecoilValue(powerBonus("fortitude"));
-  const powerBonusRateValue = useRecoilValue(powerBonus("vigor"));
   const fortitudeValue = useRecoilValue(attributeStatistic("fortitude"));
   const vigorValue = useRecoilValue(attributeStatistic("vigor"));
+  const isReserveAtMaximum = useRecoilValue(isHealth ? isHealthAtMaximum : isStaminaAtMaximum);
+  const isRecoveringValue = useRecoilValue(isRecovering);
+  const isRegeneratingValue = useRecoilValue(isRegenerating(type));
+  const powerBonusAmountValue = useRecoilValue(powerBonus("fortitude"));
+  const powerBonusRateValue = useRecoilValue(powerBonus("vigor"));
   const regenerationRateValue = useRecoilValue(regenerationRate(type));
+  const calisthenicsValue = useRecoilValue(skills("calisthenics"));
   const setRegenerationDuration = useSetRecoilState(regenerationDuration(type));
 
   const { baseRegenerationAmount, baseRegenerationRate, label, regenerationDelta } = RESERVES[type];
@@ -65,7 +65,7 @@ export function Regeneration({ type }: { type: Reserve }) {
 
   useDeltaText({
     delta: deltas(regenerationDelta),
-    type: "time",
+    format: "time",
     value: regenerationRate(type),
   });
 
@@ -89,7 +89,7 @@ export function Regeneration({ type }: { type: Reserve }) {
 
                   <td>
                     <IconImage Icon={IconRegenerationRate} size="tiny" />
-                    &nbsp;{formatTime(baseRegenerationRate)}
+                    &nbsp;{formatValue({ format: "time", value: baseRegenerationRate })}
                   </td>
                 </tr>
 
@@ -99,7 +99,7 @@ export function Regeneration({ type }: { type: Reserve }) {
                     &nbsp;Vigor:
                   </td>
 
-                  <td>{`-${formatPercentage(vigorValue)}`}</td>
+                  <td>{`-${formatValue({ format: "percentage", value: vigorValue })}`}</td>
                 </tr>
 
                 {powerBonusRateValue > 0 && (
@@ -109,7 +109,10 @@ export function Regeneration({ type }: { type: Reserve }) {
                       &nbsp;Empowered:
                     </td>
 
-                    <td>{`+${formatPercentage(powerBonusRateValue)}`}</td>
+                    <td>{`+${formatValue({
+                      format: "percentage",
+                      value: powerBonusRateValue,
+                    })}`}</td>
                   </tr>
                 )}
 
@@ -138,7 +141,11 @@ export function Regeneration({ type }: { type: Reserve }) {
                       &nbsp;Empowered:
                     </td>
 
-                    <td>{`+${formatPercentage(powerBonusAmountValue, 0)}`}</td>
+                    <td>{`+${formatValue({
+                      decimals: 0,
+                      format: "percentage",
+                      value: powerBonusAmountValue,
+                    })}`}</td>
                   </tr>
                 )}
               </DetailsTable>
@@ -146,7 +153,7 @@ export function Regeneration({ type }: { type: Reserve }) {
           </Popover>
         }
         placement="right"
-        trigger={isShowingReserveDetails ? ["hover", "focus"] : []}
+        trigger={calisthenicsValue ? ["hover", "focus"] : []}
       >
         <div className="w-100">
           <RegenerationMeter type={type} />

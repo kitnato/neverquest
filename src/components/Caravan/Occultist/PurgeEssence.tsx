@@ -2,28 +2,31 @@ import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { OCCULTIST_PURGE_PRICE_MULTIPLIER } from "@neverquest/data/caravan";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
-import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
+import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { ReactComponent as IconPurge } from "@neverquest/icons/purge.svg";
 import { essenceAbsorbed } from "@neverquest/state/attributes";
-import { coins } from "@neverquest/state/resources";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
+import { essence } from "@neverquest/state/resources";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/utilities/constants";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function PurgeEssence() {
-  const coinsValue = useRecoilValue(coins);
+  const essenceValue = useRecoilValue(essence);
   const essenceAbsorbedValue = useRecoilValue(essenceAbsorbed);
 
   const resetAttributes = useResetAttributes();
-  const transactResources = useTransactResources();
+  const transactEssence = useTransactEssence();
 
   const price = Math.round(essenceAbsorbedValue * OCCULTIST_PURGE_PRICE_MULTIPLIER);
-  const isAffordable = price <= coinsValue;
+  const isAffordable = price <= essenceValue;
   const isPurchasable = isAffordable && price > 0;
 
   const handlePurge = () => {
-    transactResources({ coinsDifference: -price, essenceDifference: essenceAbsorbedValue });
+    transactEssence(-price);
+    transactEssence(essenceAbsorbedValue);
+
     resetAttributes();
   };
 
@@ -40,13 +43,17 @@ export function PurgeEssence() {
         />
 
         <Stack direction="horizontal" gap={3}>
-          <ResourceDisplay tooltip="Price (coins)" type="coins" value={price} />
+          <IconDisplay
+            contents={formatValue({ value: price })}
+            Icon={IconEssence}
+            tooltip="Price"
+          />
 
           <OverlayTrigger
             overlay={
               <Tooltip>
-                {!isAffordable && <div>Insufficient coins!</div>}
-                {price === 0 && <div>No essence to purge!</div>}
+                {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
+                {price === 0 && <div>No essence to purge.</div>}
               </Tooltip>
             }
             trigger={isPurchasable ? [] : ["hover", "focus"]}

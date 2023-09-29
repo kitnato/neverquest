@@ -10,11 +10,12 @@ import { generateArtifact } from "@neverquest/LOCRAN/generate/generateArtifact";
 import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
 import type { AffixTag, ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type { Armor, Melee, Ranged, Shield } from "@neverquest/types";
+import { isGeneratorRange } from "@neverquest/types/type-guards";
 import type { Grip } from "@neverquest/types/unions";
 import {
   getArmorRanges,
   getFromRange,
-  getGearPrices,
+  getGearPrice,
   getGrowthSigmoid,
   getMeleeRanges,
   getRangedRanges,
@@ -39,17 +40,12 @@ export function generateArmor({
   tags?: AffixTag[];
 }): Armor {
   const factor = getGrowthSigmoid(level);
-  const { coinPrice, scrapPrice } = getGearPrices({
-    factor,
-    ...ARMOR_SPECIFICATIONS[gearClass],
-  });
   const { deflection, protection, staminaCost, weight } = getArmorRanges({
     factor,
     gearClass,
   });
 
   return {
-    coinPrice,
     deflection: deflection === null ? 0 : getFromRange(deflection),
     gearClass,
     gems: [],
@@ -67,14 +63,12 @@ export function generateArmor({
         },
         tags,
       }),
+    price: getGearPrice({
+      factor,
+      ...ARMOR_SPECIFICATIONS[gearClass],
+    }),
     protection: getFromRange(protection),
-    scrapPrice,
-    staminaCost:
-      staminaCost === null
-        ? Infinity
-        : typeof staminaCost === "number"
-        ? staminaCost
-        : getFromRange(staminaCost),
+    staminaCost: isGeneratorRange(staminaCost) ? getFromRange(staminaCost) : staminaCost,
     weight: getFromRange(weight),
   };
 }
@@ -97,7 +91,6 @@ export function generateMeleeWeapon({
   tags?: AffixTag[];
 }): Melee {
   const factor = getGrowthSigmoid(level);
-  const { coinPrice, scrapPrice } = getGearPrices({ factor, ...WEAPON_BASE });
   const { abilityChance, damage, rate, staminaCost, weight } = getMeleeRanges({
     factor,
     gearClass,
@@ -106,7 +99,6 @@ export function generateMeleeWeapon({
 
   return {
     abilityChance: getFromRange(abilityChance),
-    coinPrice,
     damage: getFromRange(damage),
     gearClass,
     gems: [],
@@ -125,8 +117,8 @@ export function generateMeleeWeapon({
       },
       tags,
     }),
+    price: getGearPrice({ factor, ...WEAPON_BASE }),
     rate: getFromRange(rate),
-    scrapPrice,
     staminaCost: getFromRange(staminaCost),
     weight: getFromRange(weight),
   };
@@ -148,7 +140,6 @@ export function generateRangedWeapon({
   tags?: AffixTag[];
 }): Ranged {
   const factor = getGrowthSigmoid(level);
-  const { coinPrice, scrapPrice } = getGearPrices({ factor, ...WEAPON_BASE });
   const { abilityChance, ammunitionCost, damage, range, rate, staminaCost, weight } =
     getRangedRanges({
       factor,
@@ -158,7 +149,6 @@ export function generateRangedWeapon({
   return {
     abilityChance: getFromRange(abilityChance),
     ammunitionCost: getFromRange(ammunitionCost),
-    coinPrice,
     damage: getFromRange(damage),
     gearClass,
     gems: [],
@@ -176,9 +166,9 @@ export function generateRangedWeapon({
       },
       tags,
     }),
+    price: getGearPrice({ factor, ...WEAPON_BASE }),
     range: getFromRange(range),
     rate: getFromRange(rate),
-    scrapPrice,
     staminaCost: getFromRange(staminaCost),
     weight: getFromRange(weight),
   };
@@ -202,10 +192,6 @@ export function generateShield({
   tags?: AffixTag[];
 }): Shield {
   const factor = getGrowthSigmoid(level);
-  const { coinPrice, scrapPrice } = getGearPrices({
-    factor,
-    ...SHIELD_SPECIFICATIONS[gearClass],
-  });
   const { block, stagger, staminaCost, weight } = getShieldRanges({
     factor,
     gearClass,
@@ -213,7 +199,6 @@ export function generateShield({
 
   return {
     block: getFromRange(block),
-    coinPrice,
     gearClass,
     gems: [],
     id: nanoid(),
@@ -231,7 +216,10 @@ export function generateShield({
         },
         tags,
       }),
-    scrapPrice,
+    price: getGearPrice({
+      factor,
+      ...SHIELD_SPECIFICATIONS[gearClass],
+    }),
     stagger: stagger === null ? 0 : getFromRange(stagger),
     staminaCost: getFromRange(staminaCost),
     weight: getFromRange(weight),
@@ -244,7 +232,9 @@ export function generateWilderness({ allowNSFW, stage }: { allowNSFW: boolean; s
 
   return generateLocation({
     allowNSFW,
-    hasPrefix: Math.random() <= prefix.minimum + (prefix.maximum - prefix.minimum) * factor,
-    hasSuffix: Math.random() <= suffix.minimum + (suffix.maximum - suffix.minimum) * factor,
+    hasPrefix:
+      Math.random() <= getFromRange({ factor, maximum: prefix.maximum, minimum: prefix.minimum }),
+    hasSuffix:
+      Math.random() <= getFromRange({ factor, maximum: suffix.maximum, minimum: suffix.minimum }),
   });
 }

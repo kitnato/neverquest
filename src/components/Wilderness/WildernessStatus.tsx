@@ -12,10 +12,16 @@ export function WildernessStatus() {
 
   return (
     <Stack
-      className={isShowingWildernessStatus ? ` ${getAnimationClass({ type: "flipInX" })}` : ""}
+      className={
+        isShowingWildernessStatus ? ` ${getAnimationClass({ type: "flipInX" })}` : undefined
+      }
       direction="horizontal"
       gap={5}
-      style={{ visibility: isShowingWildernessStatus ? "visible" : "hidden" }}
+      style={{
+        marginBottom: 4,
+        marginTop: 4,
+        visibility: isShowingWildernessStatus ? "visible" : "hidden",
+      }}
     >
       <Stage />
 

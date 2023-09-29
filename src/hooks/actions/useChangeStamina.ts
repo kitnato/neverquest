@@ -8,6 +8,7 @@ import {
   staminaMaximumTotal,
 } from "@neverquest/state/reserves";
 import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
+import { formatValue } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeStamina() {
@@ -20,9 +21,10 @@ export function useChangeStamina() {
           ? get(regenerationAmount("stamina"))
           : deltaReserve.value;
         const isPositive = value > 0;
-        const staminaMaximumTotalValue = get(staminaMaximumTotal);
+        const formattedValue = formatValue({ value });
 
-        let newStamina = get(stamina) + value;
+        const newStamina = get(stamina) + value;
+        const staminaMaximumTotalValue = get(staminaMaximumTotal);
 
         set(
           deltas("stamina"),
@@ -31,17 +33,17 @@ export function useChangeStamina() {
             (Array.isArray(deltaReserve.delta) && deltaReserve.delta.length === 0)
             ? ({
                 color: isPositive ? "text-success" : "text-danger",
-                value: isPositive ? `+${value}` : value,
+                value: isPositive ? `+${formattedValue}` : formattedValue,
               } as DeltaDisplay)
             : deltaReserve.delta,
         );
 
         if (newStamina < 0) {
-          newStamina = 0;
+          set(stamina, 0);
         }
 
         if (newStamina >= staminaMaximumTotalValue) {
-          newStamina = staminaMaximumTotalValue;
+          set(stamina, staminaMaximumTotalValue);
           reset(regenerationDuration("stamina"));
         }
 

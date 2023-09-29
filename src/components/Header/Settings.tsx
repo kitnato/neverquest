@@ -32,8 +32,10 @@ export function Settings() {
       <Modal onHide={() => setIsShowing(false)} show={isShowing}>
         <Modal.Header closeButton>
           <Modal.Title>
-            <IconImage Icon={IconSettings} />
-            &nbsp;Settings
+            <Stack direction="horizontal" gap={3}>
+              <IconImage Icon={IconSettings} />
+              Settings
+            </Stack>
           </Modal.Title>
         </Modal.Header>
 

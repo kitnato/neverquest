@@ -13,7 +13,7 @@ import {
   LABEL_EMPTY,
   LABEL_MAXIMUM,
 } from "@neverquest/utilities/constants";
-import { formatPercentage } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function MonsterBlightRating() {
   const blightAmountValue = useRecoilValue(blightAmount);
@@ -37,14 +37,16 @@ export function MonsterBlightRating() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
 
-                    <td>{formatPercentage(monsterBlightChanceValue)}</td>
+                    <td>
+                      {formatValue({ format: "percentage", value: monsterBlightChanceValue })}
+                    </td>
                   </tr>
 
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
 
                     <td>
-                      {`-${blightAmountValue}`}
+                      {`-${formatValue({ value: blightAmountValue })}`}
                       &nbsp;
                       <IconImage Icon={IconStamina} size="tiny" />
                       &nbsp;{LABEL_MAXIMUM}
@@ -58,7 +60,7 @@ export function MonsterBlightRating() {
         >
           <span>
             {isPoisonedValue
-              ? Math.round(monsterBlightChanceValue * blightAmountValue * 100)
+              ? formatValue({ value: monsterBlightChanceValue * blightAmountValue * 100 })
               : LABEL_EMPTY}
           </span>
         </OverlayTrigger>

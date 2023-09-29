@@ -24,12 +24,12 @@ export function CapabilitiesButton() {
   const isGameOverValue = useRecoilValue(isGameOver);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isStageStartedValue = useRecoilValue(isStageStarted);
-  const isShowingCapabilitiesButton = useRecoilValue(isShowing("capabilitiesButton"));
+  const isShowingCapabilities = useRecoilValue(isShowing("capabilities"));
   const isShowingSkills = useRecoilValue(isShowing("skills"));
 
   const [isScreenShowing, setScreenShowing] = useState(false);
 
-  if (!isShowingCapabilitiesButton) {
+  if (!isShowingCapabilities) {
     return null;
   }
 

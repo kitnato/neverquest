@@ -1,11 +1,19 @@
-import { Card, Stack } from "react-bootstrap";
+import { Card, Col, Row, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { Defense } from "@neverquest/components/Statistics/Defense";
-import { Offense } from "@neverquest/components/Statistics/Offense";
-import { Support } from "@neverquest/components/Statistics/Support";
+import { BleedRating } from "@neverquest/components/Statistics/BleedRating";
+import { Block } from "@neverquest/components/Statistics/Block";
+import { CombatRange } from "@neverquest/components/Statistics/CombatRange";
+import { CriticalRating } from "@neverquest/components/Statistics/CriticalRating";
+import { Damage } from "@neverquest/components/Statistics/Damage";
+import { Deflection } from "@neverquest/components/Statistics/Deflection";
+import { Dodge } from "@neverquest/components/Statistics/Dodge";
+import { Execution } from "@neverquest/components/Statistics/Execution";
+import { ParryRating } from "@neverquest/components/Statistics/ParryRating";
+import { Protection } from "@neverquest/components/Statistics/Protection";
+import { StaggerRating } from "@neverquest/components/Statistics/StaggerRating";
+import { StunRating } from "@neverquest/components/Statistics/StunRating";
 import { isShowing } from "@neverquest/state/isShowing";
-
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Statistics() {
@@ -18,13 +26,43 @@ export function Statistics() {
   return (
     <Card className={getAnimationClass({ type: "flipInX" })}>
       <Card.Body>
-        <Stack gap={3}>
-          <Offense />
+        <Row>
+          <Col>
+            <Stack gap={3}>
+              <Damage />
 
-          <Defense />
+              <CriticalRating />
 
-          <Support />
-        </Stack>
+              <StunRating />
+
+              <BleedRating />
+
+              <ParryRating />
+
+              <Execution />
+
+              <CombatRange />
+            </Stack>
+          </Col>
+
+          <Col>
+            <Stack gap={3}>
+              <Protection />
+
+              <Deflection />
+
+              <Dodge />
+            </Stack>
+          </Col>
+
+          <Col>
+            <Stack gap={3}>
+              <Block />
+
+              <StaggerRating />
+            </Stack>
+          </Col>
+        </Row>
       </Card.Body>
     </Card>
   );

@@ -10,30 +10,29 @@ import { ReactComponent as IconMarksmanship } from "@neverquest/icons/marksmansh
 import { ReactComponent as IconRange } from "@neverquest/icons/range.svg";
 import { ReactComponent as IconRanged } from "@neverquest/icons/ranged.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { isShowing } from "@neverquest/state/isShowing";
 import { weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { skills } from "@neverquest/state/skills";
 import { range } from "@neverquest/state/statistics";
 import { isRanged } from "@neverquest/types/type-guards";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
-export function Range() {
-  const isShowingValue = useRecoilValue(isShowing("range"));
+export function CombatRange() {
   const marksmanshipValue = useRecoilValue(masteryStatistic("marksmanship"));
-  const skillArchery = useRecoilValue(skills("archery"));
+  const archeryValue = useRecoilValue(skills("archery"));
   const rangeValue = useRecoilValue(range);
   const weaponValue = useRecoilValue(weapon);
 
+  const isWeaponRanged = isRanged(weaponValue);
+
   useDeltaText({
     delta: deltas("range"),
-    stop: ({ previous }) => previous === null || !skillArchery,
-    type: "time",
+    format: "time",
     value: range,
   });
 
-  if (!isShowingValue) {
+  if (!archeryValue || !isWeaponRanged) {
     return null;
   }
 
@@ -53,7 +52,10 @@ export function Range() {
 
                       <td>
                         <IconImage Icon={IconRanged} size="tiny" />
-                        &nbsp;{isRanged(weaponValue) ? formatTime(weaponValue.range) : LABEL_EMPTY}
+                        &nbsp;
+                        {isWeaponRanged
+                          ? formatValue({ format: "time", value: weaponValue.range })
+                          : LABEL_EMPTY}
                       </td>
                     </tr>
 
@@ -63,19 +65,22 @@ export function Range() {
                         &nbsp;Marksmanship:
                       </td>
 
-                      <td>{`+${formatPercentage(marksmanshipValue)}`}</td>
+                      <td>{`+${formatValue({
+                        format: "percentage",
+                        value: marksmanshipValue,
+                      })}`}</td>
                     </tr>
                   </DetailsTable>
                 </Popover.Body>
               </Popover>
             }
-            trigger={skillArchery ? ["hover", "focus"] : []}
+            trigger={archeryValue ? ["hover", "focus"] : []}
           >
             <span>
-              {skillArchery
+              {archeryValue
                 ? rangeValue === 0
                   ? LABEL_EMPTY
-                  : formatTime(rangeValue)
+                  : formatValue({ format: "time", value: rangeValue })
                 : LABEL_EMPTY}
             </span>
           </OverlayTrigger>

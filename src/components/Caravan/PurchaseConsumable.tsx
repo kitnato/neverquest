@@ -3,31 +3,33 @@ import { useState } from "react";
 import { Stack } from "react-bootstrap";
 
 import { PurchaseItemButton } from "@neverquest/components/Caravan/PurchaseItemButton";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
-import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { CONSUMABLES } from "@neverquest/data/inventory";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
-import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
+import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import type { ConsumableItem } from "@neverquest/types";
 import type { Consumable } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function PurchaseConsumable({ type }: { type: Consumable }) {
   const [id, setID] = useState(nanoid());
 
   const acquireItem = useAcquireItem();
-  const transactResources = useTransactResources();
+  const transactEssence = useTransactEssence();
 
   const { item } = CONSUMABLES[type];
   const itemWithID: ConsumableItem = {
     ...item,
     id,
   };
-  const { coinPrice } = itemWithID;
+  const { price } = itemWithID;
 
   const handlePurchase = () => {
     acquireItem(itemWithID);
-    transactResources({ coinsDifference: -itemWithID.coinPrice });
+    transactEssence(-itemWithID.price);
 
     setID(nanoid());
   };
@@ -37,7 +39,7 @@ export function PurchaseConsumable({ type }: { type: Consumable }) {
       <ItemDisplay item={itemWithID} overlayPlacement="right" />
 
       <Stack direction="horizontal" gap={3}>
-        <ResourceDisplay tooltip="Price (coins)" type="coins" value={coinPrice} />
+        <IconDisplay contents={formatValue({ value: price })} Icon={IconEssence} tooltip="Price" />
 
         <PurchaseItemButton handlePurchase={handlePurchase} item={itemWithID} />
       </Stack>

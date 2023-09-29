@@ -11,31 +11,30 @@ import { ReactComponent as IconBleedRating } from "@neverquest/icons/bleed-ratin
 import { ReactComponent as IconBleed } from "@neverquest/icons/bleed.svg";
 import { ReactComponent as IconCruelty } from "@neverquest/icons/cruelty.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { isShowing } from "@neverquest/state/isShowing";
+import { weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { skills } from "@neverquest/state/skills";
 import { bleed, bleedDamage, bleedRating, damageTotal } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function BleedRating() {
   const bleedValue = useRecoilValue(bleed);
-  const bleedRatingValue = useRecoilValue(bleedRating);
   const bleedDamageValue = useRecoilValue(bleedDamage);
+  const bleedRatingValue = useRecoilValue(bleedRating);
   const damageTotalValue = useRecoilValue(damageTotal);
-  const isShowingBleed = useRecoilValue(isShowing("bleed"));
   const crueltyValue = useRecoilValue(masteryStatistic("cruelty"));
-  const skillAnatomy = useRecoilValue(skills("anatomy"));
+  const anatomyValue = useRecoilValue(skills("anatomy"));
+  const { gearClass } = useRecoilValue(weapon);
 
   const { duration, ticks } = BLEED;
 
   useDeltaText({
     delta: deltas("bleedRating"),
-    stop: ({ previous }) => previous === null || !skillAnatomy,
     value: bleedRating,
   });
 
-  if (!isShowingBleed) {
+  if (!anatomyValue || gearClass !== "piercing") {
     return null;
   }
 
@@ -55,7 +54,12 @@ export function BleedRating() {
 
                       <td>
                         <IconImage Icon={IconBleed} size="tiny" />
-                        &nbsp;{`${bleedValue === 0 ? LABEL_EMPTY : formatPercentage(bleedValue)}`}
+                        &nbsp;
+                        {`${
+                          bleedValue === 0
+                            ? LABEL_EMPTY
+                            : formatValue({ format: "percentage", value: bleedValue })
+                        }`}
                       </td>
                     </tr>
 
@@ -65,35 +69,43 @@ export function BleedRating() {
                         &nbsp;Cruelty:
                       </td>
 
-                      <td>{`${formatPercentage(crueltyValue)} of total damage`}</td>
+                      <td>{`${formatValue({
+                        format: "percentage",
+                        value: crueltyValue,
+                      })} of total damage`}</td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
 
-                      <td>{formatTime(duration)}</td>
+                      <td>{formatValue({ format: "time", value: duration })}</td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Ticks:</td>
 
-                      <td>{`${ticks} (every ${formatTime(BLEED_DELTA)})`}</td>
+                      <td>{`${ticks} (every ${formatValue({
+                        format: "time",
+                        value: BLEED_DELTA,
+                      })})`}</td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Bleed damage:</td>
 
-                      <td>{`${Math.round(
-                        damageTotalValue * crueltyValue,
-                      )} (${bleedDamageValue} per tick)`}</td>
+                      <td>{`${formatValue({
+                        value: damageTotalValue * crueltyValue,
+                      })} (${formatValue({
+                        value: bleedDamageValue,
+                      })} per tick)`}</td>
                     </tr>
                   </DetailsTable>
                 </Popover.Body>
               </Popover>
             }
-            trigger={skillAnatomy ? ["hover", "focus"] : []}
+            trigger={anatomyValue ? ["hover", "focus"] : []}
           >
-            <span>{skillAnatomy ? bleedRatingValue : LABEL_EMPTY}</span>
+            <span>{anatomyValue ? bleedRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
           <FloatingText deltaType="bleedRating" />

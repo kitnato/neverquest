@@ -8,18 +8,18 @@ import {
 
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
 import type { BootstrapTextVariant, DeltaDisplay } from "@neverquest/types/ui";
-import type { DeltaText } from "@neverquest/types/unions";
-import { formatFloat, formatPercentage, formatTime } from "@neverquest/utilities/formatters";
+import type { NumberFormat } from "@neverquest/types/unions";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function useDeltaText({
   delta,
+  format = "integer",
   stop = ({ previous }) => previous === null,
-  type = "integer",
   value,
 }: {
   delta: RecoilState<DeltaDisplay>;
+  format?: NumberFormat;
   stop?: ({ current, previous }: { current: number; previous: number | null }) => boolean;
-  type?: DeltaText;
   value: RecoilValueReadOnly<number>;
 }) {
   const currentValue = useRecoilValue(value);
@@ -27,7 +27,7 @@ export function useDeltaText({
 
   const previousValue = usePreviousValue(currentValue);
 
-  const isTime = type === "time";
+  const isTime = format === "time";
   const negativeColor: BootstrapTextVariant = isTime ? "text-success" : "text-danger";
   const positiveColor: BootstrapTextVariant = isTime ? "text-danger" : "text-success";
 
@@ -46,15 +46,10 @@ export function useDeltaText({
 
     setDelta({
       color: isPositive ? positiveColor : negativeColor,
-      value: `${isPositive ? "+" : isTime ? "-" : ""}${
-        isTime
-          ? formatTime(Math.abs(difference))
-          : type === "percentage"
-          ? formatPercentage(difference)
-          : type === "float"
-          ? formatFloat(difference)
-          : difference
-      }`,
+      value: `${isPositive ? "+" : isTime ? "-" : ""}${formatValue({
+        format,
+        value: isTime ? Math.abs(difference) : difference,
+      })}`,
     });
-  }, [currentValue, isTime, negativeColor, positiveColor, previousValue, setDelta, stop, type]);
+  }, [currentValue, format, isTime, negativeColor, positiveColor, previousValue, setDelta, stop]);
 }

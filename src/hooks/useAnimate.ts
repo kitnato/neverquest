@@ -3,15 +3,12 @@ import { type SetterOrUpdater, useRecoilValue } from "recoil";
 import { clearInterval, setInterval } from "worker-timers";
 
 import { isGameOver } from "@neverquest/state/character";
-
-const FRAMERATE = 1000 / 60;
+import { FRAMERATE } from "@neverquest/utilities/constants";
 
 export function useAnimate({
   delta,
   factor = 1,
-  onDelta = () => {
-    return;
-  },
+  onDelta,
   stop,
 }: {
   delta: SetterOrUpdater<number>;
@@ -37,7 +34,10 @@ export function useAnimate({
 
   useEffect(() => {
     if (hasTicked) {
-      onDelta();
+      if (onDelta !== undefined) {
+        onDelta();
+      }
+
       setHasTicked(false);
     }
   }, [hasTicked, onDelta]);

@@ -64,7 +64,7 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
                       &nbsp;{attributeCostValue}
                     </div>
 
-                    {isUnsafe && <div>Monsters are lurking!</div>}
+                    {isUnsafe && <div>Monsters are lurking.</div>}
                   </Tooltip>
                 }
               >
@@ -84,7 +84,7 @@ export function AttributeDisplay({ type }: { type: Attribute }) {
       ) : (
         <IconDisplay
           contents={LABEL_UNKNOWN}
-          description={type === "luck" ? LABEL_UNKNOWN : "Unlocked by acquiring a skill."}
+          description="Unlocked by acquiring a skill."
           Icon={IconUnknown}
           tooltip="Attribute"
         />

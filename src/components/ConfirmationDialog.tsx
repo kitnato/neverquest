@@ -1,4 +1,4 @@
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Stack } from "react-bootstrap";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { ReactComponent as IconWarning } from "@neverquest/icons/warning.svg";
@@ -27,8 +27,11 @@ export function ConfirmationDialog({
     <Modal backdrop="static" onHide={setHidden} show={show}>
       <Modal.Header closeButton>
         <Modal.Title>
-          <IconImage Icon={IconWarning} />
-          &nbsp;{title}
+          <Stack direction="horizontal" gap={3}>
+            <IconImage Icon={IconWarning} />
+
+            {title}
+          </Stack>
         </Modal.Title>
       </Modal.Header>
 

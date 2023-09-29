@@ -2,7 +2,7 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { Caravan } from "@neverquest/components/Caravan";
-import { LootDisplay } from "@neverquest/components/Loot/LootDisplay";
+import { Loot } from "@neverquest/components/Loot";
 import { Wilderness } from "@neverquest/components/Wilderness";
 import { isWilderness } from "@neverquest/state/encounter";
 
@@ -15,7 +15,7 @@ export function Encounter() {
         <>
           <Wilderness />
 
-          <LootDisplay />
+          <Loot />
         </>
       ) : (
         <Caravan />

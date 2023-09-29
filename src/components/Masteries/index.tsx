@@ -17,7 +17,7 @@ export function Masteries() {
   }
 
   return (
-    <Accordion className="overlay-highlighted" defaultActiveKey="0">
+    <Accordion defaultActiveKey="0">
       <Accordion.Item eventKey="0">
         <Accordion.Header>
           <IconDisplay contents="Masteries" Icon={IconMasteries} tooltip="Masteries" />

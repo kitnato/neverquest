@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { SellItem } from "@neverquest/components/Caravan/Merchant/SellItem";
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
-import { Trinket } from "@neverquest/components/Items/Trinket";
+import { Trinket } from "@neverquest/components/Items/Trinkets";
 import { inventory } from "@neverquest/state/inventory";
 import {
   isArmor,

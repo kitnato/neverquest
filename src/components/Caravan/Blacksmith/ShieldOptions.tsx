@@ -10,37 +10,29 @@ import { SHIELD_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
-import { ReactComponent as IconShieldStagger } from "@neverquest/icons/shield-stagger.svg";
+import { ReactComponent as IconStagger } from "@neverquest/icons/stagger.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { SHIELD_CLASS_TYPES, type ShieldClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
-import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
-import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { generateShield } from "@neverquest/utilities/generators";
-import { getGearPrices, getGrowthSigmoid, getShieldRanges } from "@neverquest/utilities/getters";
+import { getGearPrice, getGrowthSigmoid, getShieldRanges } from "@neverquest/utilities/getters";
 
 export function ShieldOptions() {
-  const [{ shield: craftedShield }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const allowNSFWValue = useRecoilValue(allowNSFW);
+  const [{ shield: craftedShield }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
+  const shieldcraftValue = useRecoilValue(skills("shieldcraft"));
   const stageValue = useRecoilValue(stage);
 
   const [shieldClass, setShieldClass] = useState<ShieldClass>("small");
   const [shieldLevel, setShieldLevel] = useState(stageValue);
 
-  const isShowingStagger = useRecoilValue(isShowing("stagger"));
-  const skillShieldcraft = useRecoilValue(skills("shieldcraft"));
-
-  const { Icon } = SHIELD_SPECIFICATIONS[shieldClass];
   const factor = getGrowthSigmoid(shieldLevel);
-  const { coinPrice, scrapPrice } = getGearPrices({
-    factor,
-    ...SHIELD_SPECIFICATIONS[shieldClass],
-  });
   const maximumShieldLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
   const { block, stagger, staminaCost, weight } = getShieldRanges({
     factor,
@@ -88,7 +80,7 @@ export function ShieldOptions() {
                 setShieldLevel(parsedValue);
               }}
               type="number"
-              value={shieldLevel}
+              value={formatValue({ value: shieldLevel })}
             />
           }
           Icon={IconGearLevel}
@@ -109,13 +101,16 @@ export function ShieldOptions() {
               ))}
             </FormSelect>
           }
-          Icon={Icon}
+          Icon={SHIELD_SPECIFICATIONS[shieldClass].Icon}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Class"
         />
 
         <IconDisplay
-          contents={`${formatPercentage(block.minimum)}-${formatPercentage(block.maximum)}`}
+          contents={`${formatValue({ format: "percentage", value: block.minimum })}-${formatValue({
+            format: "percentage",
+            value: block.maximum,
+          })}`}
           Icon={IconBlock}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Block chance"
@@ -124,25 +119,32 @@ export function ShieldOptions() {
         {stagger !== null && (
           <IconDisplay
             contents={
-              isShowingStagger
-                ? `${formatPercentage(stagger.minimum)}-${formatPercentage(stagger.maximum)}`
+              shieldcraftValue
+                ? `${formatValue({ format: "percentage", value: stagger.minimum })}-${formatValue({
+                    format: "percentage",
+                    value: stagger.maximum,
+                  })}`
                 : LABEL_UNKNOWN
             }
-            Icon={isShowingStagger ? IconShieldStagger : IconUnknown}
+            Icon={shieldcraftValue ? IconStagger : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
-            tooltip={isShowingStagger ? "Stagger chance" : LABEL_UNKNOWN}
+            tooltip={shieldcraftValue ? "Stagger chance" : LABEL_UNKNOWN}
           />
         )}
 
         <IconDisplay
-          contents={`${staminaCost.minimum}-${staminaCost.maximum}`}
+          contents={`${formatValue({ value: staminaCost.minimum })}-${formatValue({
+            value: staminaCost.maximum,
+          })}`}
           Icon={IconStamina}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Stamina cost"
         />
 
         <IconDisplay
-          contents={`${weight.minimum}-${weight.maximum}`}
+          contents={`${formatValue({ value: weight.minimum })}-${formatValue({
+            value: weight.maximum,
+          })}`}
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
@@ -151,10 +153,16 @@ export function ShieldOptions() {
 
       <hr />
 
-      {!skillShieldcraft && shieldClass === "tower" ? (
+      {!shieldcraftValue && shieldClass === "tower" ? (
         <span className="text-center">Cannot use without training.</span>
       ) : craftedShield === null ? (
-        <CraftGear coinPrice={coinPrice} onCraft={handleCraft} scrapPrice={scrapPrice} />
+        <CraftGear
+          onCraft={handleCraft}
+          price={getGearPrice({
+            factor,
+            ...SHIELD_SPECIFICATIONS[shieldClass],
+          })}
+        />
       ) : (
         <CraftedGear gearItem={craftedShield} onTransfer={handleTransfer} />
       )}

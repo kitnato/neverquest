@@ -21,30 +21,24 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
-import { capitalizeAll, formatPercentage } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { generateArmor } from "@neverquest/utilities/generators";
-import { getArmorRanges, getGearPrices, getGrowthSigmoid } from "@neverquest/utilities/getters";
+import { getArmorRanges, getGearPrice, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function ArmorOptions() {
   const [{ armor: craftedArmor }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const allowNSFWValue = useRecoilValue(allowNSFW);
-  const isShowingDeflection = useRecoilValue(isShowing("deflection"));
   const isShowingDodge = useRecoilValue(isShowing("dodge"));
-  const skillArmorcraft = useRecoilValue(skills("armorcraft"));
+  const armorcraftValue = useRecoilValue(skills("armorcraft"));
   const stageValue = useRecoilValue(stage);
 
   const [armorClass, setArmorClass] = useState<ArmorClass>("hide");
   const [armorLevel, setArmorLevel] = useState(stageValue);
 
-  const { Icon } = ARMOR_SPECIFICATIONS[armorClass];
   const factor = getGrowthSigmoid(armorLevel);
   const { deflection, protection, staminaCost, weight } = getArmorRanges({
     factor,
     gearClass: armorClass,
-  });
-  const { coinPrice, scrapPrice } = getGearPrices({
-    factor,
-    ...ARMOR_SPECIFICATIONS[armorClass],
   });
   const maximumArmorLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
 
@@ -89,7 +83,7 @@ export function ArmorOptions() {
                 setArmorLevel(parsedValue);
               }}
               type="number"
-              value={armorLevel}
+              value={formatValue({ value: armorLevel })}
             />
           }
           Icon={IconGearLevel}
@@ -110,13 +104,15 @@ export function ArmorOptions() {
               ))}
             </FormSelect>
           }
-          Icon={Icon}
+          Icon={ARMOR_SPECIFICATIONS[armorClass].Icon}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Class"
         />
 
         <IconDisplay
-          contents={`${protection.minimum}-${protection.maximum}`}
+          contents={`${formatValue({ value: protection.minimum })}-${formatValue({
+            value: protection.maximum,
+          })}`}
           Icon={IconArmorProtection}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Protection"
@@ -125,13 +121,16 @@ export function ArmorOptions() {
         {deflection !== null && (
           <IconDisplay
             contents={
-              isShowingDeflection
-                ? `${formatPercentage(deflection.minimum)}-${formatPercentage(deflection.maximum)}`
+              armorcraftValue
+                ? `${formatValue({
+                    format: "percentage",
+                    value: deflection.minimum,
+                  })}-${formatValue({ format: "percentage", value: deflection.maximum })}`
                 : LABEL_UNKNOWN
             }
-            Icon={isShowingDeflection ? IconDeflection : IconUnknown}
+            Icon={armorcraftValue ? IconDeflection : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
-            tooltip={isShowingDeflection ? "Deflection chance" : LABEL_UNKNOWN}
+            tooltip={armorcraftValue ? "Deflection chance" : LABEL_UNKNOWN}
           />
         )}
 
@@ -147,7 +146,9 @@ export function ArmorOptions() {
         )}
 
         <IconDisplay
-          contents={`${weight.minimum}-${weight.maximum}`}
+          contents={`${formatValue({ value: weight.minimum })}-${formatValue({
+            value: weight.maximum,
+          })}`}
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
@@ -156,10 +157,16 @@ export function ArmorOptions() {
 
       <hr />
 
-      {!skillArmorcraft && armorClass === "plate" ? (
+      {!armorcraftValue && armorClass === "plate" ? (
         <span className="text-center">Cannot use without training.</span>
       ) : craftedArmor === null ? (
-        <CraftGear coinPrice={coinPrice} onCraft={handleCraft} scrapPrice={scrapPrice} />
+        <CraftGear
+          onCraft={handleCraft}
+          price={getGearPrice({
+            factor,
+            ...ARMOR_SPECIFICATIONS[armorClass],
+          })}
+        />
       ) : (
         <CraftedGear gearItem={craftedArmor} onTransfer={handleTransfer} />
       )}

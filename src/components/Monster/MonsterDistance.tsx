@@ -2,7 +2,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterDistanceMeter } from "@neverquest/components/Monster/MonsterDistanceMeter";
-import { ELEMENTAL_AILMENT_PENALTY } from "@neverquest/data/statistics";
+import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { ReactComponent as IconDistance } from "@neverquest/icons/distance.svg";
 import { isAttacking } from "@neverquest/state/character";
@@ -26,7 +26,7 @@ export function MonsterDistance() {
 
   useAnimate({
     delta: setMonsterDistance,
-    factor: isMonsterFrozenValue ? ELEMENTAL_AILMENT_PENALTY.frozen : 1,
+    factor: isMonsterFrozenValue ? AILMENT_PENALTY.frozen : 1,
     stop:
       !isAttackingValue || isMonsterDeadValue || isMonsterStaggeredValue || hasMonsterClosedValue,
   });

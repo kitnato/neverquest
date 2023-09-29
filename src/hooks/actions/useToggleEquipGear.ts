@@ -21,27 +21,34 @@ export function useToggleEquipGear() {
       (gearItem: GearItem) => {
         const get = getSnapshotGetter(snapshot);
 
+        const { isEquipped, staminaCost } = gearItem;
+
+        const isRangedWeapon = isRanged(gearItem);
+        const isTwoHandedWeapon = isMelee(gearItem) && gearItem.grip === "two-handed";
+
         set(isShowing("statistics"), true);
 
-        if (isArmor(gearItem)) {
-          const { staminaCost } = gearItem;
-
+        if (isArmor(gearItem) && !isEquipped) {
           set(isShowing("armor"), true);
           set(isShowing("protection"), true);
 
           if (get(skills("evasion")) && staminaCost) {
             set(isShowing("dodgePenalty"), true);
           }
+
+          if (gearItem.deflection > 0) {
+            set(isShowing("deflection"), true);
+          }
         }
 
-        if (isShield(gearItem)) {
+        if (isShield(gearItem) && !isEquipped) {
           set(isShowing("block"), true);
           set(isShowing("offhand"), true);
           set(isShowing("stamina"), true);
         }
 
-        if (isWeapon(gearItem)) {
-          if (gearItem.staminaCost > 0) {
+        if (isWeapon(gearItem) && !isEquipped) {
+          if (staminaCost > 0) {
             set(isShowing("stamina"), true);
 
             if (!get(attributes("endurance")).isUnlocked) {
@@ -52,9 +59,8 @@ export function useToggleEquipGear() {
             }
           }
 
-          if (isRanged(gearItem)) {
+          if (isRangedWeapon || isTwoHandedWeapon) {
             set(isShowing("offhand"), true);
-            set(isShowing("range"), true);
           }
 
           set(isShowing("attackRateDetails"), true);
@@ -72,19 +78,19 @@ export function useToggleEquipGear() {
                 };
               } else if (
                 // Equipping a ranged or two-handed weapon while a shield is equipped.
-                (((isMelee(gearItem) && gearItem.grip === "two-handed") || isRanged(gearItem)) &&
-                  !gearItem.isEquipped &&
+                ((isRangedWeapon || isTwoHandedWeapon) &&
+                  !isEquipped &&
                   isShield(currentItem) &&
                   currentItem.isEquipped) ||
                 // Equipping a shield while a ranged or two-handed weapon is equipped.
                 (isShield(gearItem) &&
-                  !gearItem.isEquipped &&
+                  !isEquipped &&
                   ((isMelee(currentItem) && currentItem.grip === "two-handed") ||
                     isRanged(currentItem)) &&
                   currentItem.isEquipped) ||
                 // Equipping in an already-occupied slot.
                 (currentItem.isEquipped &&
-                  !gearItem.isEquipped &&
+                  !isEquipped &&
                   ((isArmor(currentItem) && isArmor(gearItem)) ||
                     (isShield(currentItem) && isShield(gearItem)) ||
                     (isWeapon(currentItem) && isWeapon(gearItem))))

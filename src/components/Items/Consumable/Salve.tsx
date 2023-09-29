@@ -29,7 +29,7 @@ export function Salve({ id }: { id: string }) {
 
   return (
     <OverlayTrigger
-      overlay={<Tooltip>{!isBlightedValue && <div>Not blighted!</div>}</Tooltip>}
+      overlay={<Tooltip>{!isBlightedValue && <div>Not blighted.</div>}</Tooltip>}
       trigger={!isBlightedValue ? ["hover", "focus"] : []}
     >
       <span>

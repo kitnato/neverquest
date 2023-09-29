@@ -7,7 +7,7 @@ import type { InventoryItem } from "@neverquest/types";
 
 export const hasLooted = withStateKey("hasLooted", (key) =>
   selector({
-    get: ({ get }) => get(coinsLoot) === 0 && get(essenceLoot) === 0 && get(scrapLoot) === 0,
+    get: ({ get }) => get(essenceLoot) === 0,
     key,
   }),
 );
@@ -30,41 +30,9 @@ export const essenceLoot = withStateKey("essenceLoot", (key) =>
   }),
 );
 
-export const coins = withStateKey("coins", (key) =>
-  atom({
-    default: 0,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
-export const coinsLoot = withStateKey("coinsLoot", (key) =>
-  atom({
-    default: 0,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
 export const itemsLoot = withStateKey("itemsLoot", (key) =>
   atom<InventoryItem[]>({
     default: [],
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
-export const scrap = withStateKey("scrap", (key) =>
-  atom({
-    default: 0,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
-export const scrapLoot = withStateKey("scrapLoot", (key) =>
-  atom({
-    default: 0,
     effects: [handleLocalStorage({ key })],
     key,
   }),

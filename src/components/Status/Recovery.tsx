@@ -17,7 +17,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { masteries, masteryStatistic } from "@neverquest/state/masteries";
 import { recoveryRate } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
-import { formatPercentage, formatTime } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Recovery() {
   const isRecoveringValue = useRecoilValue(isRecovering);
@@ -33,7 +33,7 @@ export function Recovery() {
 
   useDeltaText({
     delta: deltas("recoveryRate"),
-    type: "time",
+    format: "time",
     value: recoveryRate,
   });
 
@@ -55,7 +55,7 @@ export function Recovery() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
 
-                      <td>{formatTime(RECOVERY_RATE)}</td>
+                      <td>{formatValue({ format: "time", value: RECOVERY_RATE })}</td>
                     </tr>
 
                     <tr>
@@ -64,7 +64,11 @@ export function Recovery() {
                         &nbsp;Resilience:
                       </td>
 
-                      <td>{`-${formatPercentage(resilienceValue, 0)}`}</td>
+                      <td>{`-${formatValue({
+                        decimals: 0,
+                        format: "percentage",
+                        value: resilienceValue,
+                      })}`}</td>
                     </tr>
                   </DetailsTable>
                 </Popover.Body>

@@ -10,6 +10,7 @@ import { GearLevelDetail } from "@neverquest/components/Items/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Items/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
 import { type WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
+import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import { ReactComponent as IconAmmunition } from "@neverquest/icons/ammunition.svg";
 import { ReactComponent as IconGrip } from "@neverquest/icons/grip.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
@@ -18,15 +19,11 @@ import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-dam
 import { isShowing } from "@neverquest/state/isShowing";
 import { weapon as weaponEquipped } from "@neverquest/state/items";
 import { showDamagePerSecond } from "@neverquest/state/settings";
+import { skills } from "@neverquest/state/skills";
 import type { Weapon } from "@neverquest/types";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
-import {
-  capitalizeAll,
-  formatFloat,
-  formatPercentage,
-  formatTime,
-} from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { getDamagePerRate } from "@neverquest/utilities/getters";
 
 export function WeaponName({
@@ -41,14 +38,14 @@ export function WeaponName({
   const weaponEquippedValue = useRecoilValue(weaponEquipped);
 
   const { abilityChance, damage, gearClass, level, name, rate, staminaCost, weight } = weapon;
-  const { abilityName, IconAbility, IconGearClass, showingType } = WEAPON_SPECIFICATIONS[gearClass];
+  const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[gearClass];
   const damagePerSecond = getDamagePerRate({
     damage,
     rate,
   });
   const showComparison = weaponEquippedValue.id !== weapon.id;
 
-  const isShowingAbility = useRecoilValue(isShowing(showingType));
+  const skillValue = useRecoilValue(skills(WEAPON_ABILITY_SKILLS[ability]));
 
   return (
     <OverlayTrigger
@@ -89,7 +86,7 @@ export function WeaponName({
 
                 <td>
                   <IconImage Icon={IconWeaponAttackRate} size="tiny" />
-                  &nbsp;{formatTime(rate)}
+                  &nbsp;{formatValue({ format: "time", value: rate })}
                   {showComparison && (
                     <GearComparison
                       difference={rate - weaponEquippedValue.rate}
@@ -107,7 +104,7 @@ export function WeaponName({
                   <td>
                     <IconImage Icon={IconWeaponDamagePerSecond} size="tiny" />
                     &nbsp;
-                    {formatFloat(damagePerSecond)}
+                    {formatValue({ format: "float", value: damagePerSecond })}
                     {showComparison && (
                       <GearComparison
                         difference={
@@ -174,14 +171,14 @@ export function WeaponName({
               </tr>
 
               <tr>
-                {isShowingAbility ? (
+                {skillValue ? (
                   <>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>{abilityName} chance:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>{capitalizeAll(ability)} chance:</td>
 
                     <td>
                       <IconImage Icon={IconAbility} size="tiny" />
-                      &nbsp;{formatPercentage(abilityChance)}
-                      {showComparison && (
+                      &nbsp;{formatValue({ format: "percentage", value: abilityChance })}
+                      {showComparison && gearClass === weaponEquippedValue.gearClass && (
                         <GearComparison
                           difference={abilityChance - weaponEquippedValue.abilityChance}
                           showingType="weapon"

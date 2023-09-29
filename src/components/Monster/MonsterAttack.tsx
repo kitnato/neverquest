@@ -2,7 +2,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterAttackMeter } from "@neverquest/components/Monster/MonsterAttackMeter";
-import { ELEMENTAL_AILMENT_PENALTY } from "@neverquest/data/statistics";
+import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useDefend } from "@neverquest/hooks/actions/useDefend";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { ReactComponent as IconAttackRate } from "@neverquest/icons/attack-rate.svg";
@@ -26,7 +26,7 @@ export function MonsterAttack() {
 
   useAnimate({
     delta: setMonsterAttackDuration,
-    factor: isMonsterFrozenValue ? ELEMENTAL_AILMENT_PENALTY.frozen : 1,
+    factor: isMonsterFrozenValue ? AILMENT_PENALTY.frozen : 1,
     onDelta: defend,
     stop:
       !isAttackingValue || !hasMonsterClosedValue || isMonsterDeadValue || isMonsterStaggeredValue,

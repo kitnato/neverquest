@@ -30,6 +30,10 @@ export const CREATURES: CreatureData[] = [
     type: "human",
   },
   {
+    name: "amoeba",
+    type: "monster",
+  },
+  {
     name: "animal",
     type: "monster",
   },
@@ -457,6 +461,11 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    isNSFW: true,
+    name: "feces",
+    type: "monster",
+  },
+  {
     name: "felix",
     type: "name",
   },
@@ -763,6 +772,10 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "machine",
+    type: "monster",
+  },
+  {
+    name: "mage",
     type: "monster",
   },
   {
@@ -1183,6 +1196,10 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "somnambulist",
+    type: "monster",
+  },
+  {
     name: "sorcerer",
     type: "monster",
   },
@@ -1245,6 +1262,10 @@ export const CREATURES: CreatureData[] = [
   {
     isNSFW: true,
     name: "tampon",
+    type: "monster",
+  },
+  {
+    name: "tarantula",
     type: "monster",
   },
   {
@@ -1406,6 +1427,10 @@ export const CREATURES: CreatureData[] = [
   {
     name: "wizard",
     type: "human",
+  },
+  {
+    name: "warg",
+    type: "monster",
   },
   {
     name: "woman",

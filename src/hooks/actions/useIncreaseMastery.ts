@@ -23,13 +23,14 @@ export function useIncreaseMastery() {
         }
 
         const masteryCostValue = get(masteryCost(type));
-        const newProgress = progress + MASTERY_PROGRESS;
+        const { increment } = MASTERY_PROGRESS;
+        const newProgress = progress + increment;
 
         if (newProgress === masteryCostValue) {
           set(masteries(type), ({ rank, ...current }) => ({
             ...current,
             progress: 0,
-            rank: rank + 1,
+            rank: rank + MASTERY_PROGRESS.rank,
           }));
 
           set(deltas(type), {
@@ -44,7 +45,7 @@ export function useIncreaseMastery() {
 
           set(deltas(type), {
             color: "text-success",
-            value: `+${MASTERY_PROGRESS}`,
+            value: `+${increment}`,
           });
         }
       },

@@ -4,7 +4,7 @@ import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { attackDuration, canAttackOrParry } from "@neverquest/state/character";
 import { attackRateTotal } from "@neverquest/state/statistics";
 
-import { formatTime } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function AttackMeter() {
   const attackDurationValue = useRecoilValue(attackDuration);
@@ -16,7 +16,7 @@ export function AttackMeter() {
       disableTransitions
       label={
         canAttackOrParryValue
-          ? formatTime(attackDurationValue || attackRateTotalValue)
+          ? formatValue({ format: "time", value: attackDurationValue || attackRateTotalValue })
           : "EXHAUSTED"
       }
       value={

@@ -7,6 +7,7 @@ import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { WEAPON_BASE, WEAPON_MODIFIER, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
+import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { ReactComponent as IconRange } from "@neverquest/icons/range.svg";
@@ -17,12 +18,12 @@ import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-dam
 import { WEAPON_CLASS_TYPES, type WeaponClass } from "@neverquest/LOCRAN/types";
 import { fletcherInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
-import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
+import { skills } from "@neverquest/state/skills";
 import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
-import { capitalizeAll, formatPercentage, formatTime } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { generateRangedWeapon } from "@neverquest/utilities/generators";
-import { getGearPrices, getGrowthSigmoid, getRangedRanges } from "@neverquest/utilities/getters";
+import { getGearPrice, getGrowthSigmoid, getRangedRanges } from "@neverquest/utilities/getters";
 
 export function RangedWeaponOptions() {
   const allowNSFWValue = useRecoilValue(allowNSFW);
@@ -33,17 +34,11 @@ export function RangedWeaponOptions() {
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
   const [weaponLevel, setWeaponLevel] = useState(stageValue);
 
-  const { abilityName, IconAbility, IconGearClass, showingType } =
-    WEAPON_SPECIFICATIONS[weaponClass];
+  const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[weaponClass];
 
-  const isShowingValue = useRecoilValue(isShowing(showingType));
+  const skillValue = useRecoilValue(skills(WEAPON_ABILITY_SKILLS[ability]));
 
   const factor = getGrowthSigmoid(weaponLevel);
-  const { coinPrice, scrapPrice } = getGearPrices({
-    factor,
-    ...WEAPON_BASE,
-    modifier: WEAPON_MODIFIER.ranged.price,
-  });
   const { abilityChance, damage, range, rate, staminaCost, weight } = getRangedRanges({
     factor,
     gearClass: weaponClass,
@@ -89,7 +84,7 @@ export function RangedWeaponOptions() {
                 setWeaponLevel(parsedValue);
               }}
               type="number"
-              value={weaponLevel}
+              value={formatValue({ value: weaponLevel })}
             />
           }
           Icon={IconGearLevel}
@@ -116,21 +111,29 @@ export function RangedWeaponOptions() {
         />
 
         <IconDisplay
-          contents={`${damage.minimum}-${damage.maximum}`}
+          contents={`${formatValue({ value: damage.minimum })}-${formatValue({
+            value: damage.maximum,
+          })}`}
           Icon={IconWeaponDamage}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Damage"
         />
 
         <IconDisplay
-          contents={`${formatTime(rate.minimum)}-${formatTime(rate.maximum)}`}
+          contents={`${formatValue({ format: "time", value: rate.minimum })}-${formatValue({
+            format: "time",
+            value: rate.maximum,
+          })}`}
           Icon={IconWeaponAttackRate}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Attack rate"
         />
 
         <IconDisplay
-          contents={`${formatTime(range.minimum)}-${formatTime(range.maximum)}`}
+          contents={`${formatValue({ format: "time", value: range.minimum })}-${formatValue({
+            format: "time",
+            value: range.maximum,
+          })}`}
           Icon={IconRange}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Range"
@@ -138,26 +141,31 @@ export function RangedWeaponOptions() {
 
         <IconDisplay
           contents={
-            isShowingValue
-              ? `${formatPercentage(abilityChance.minimum)}-${formatPercentage(
-                  abilityChance.maximum,
-                )}`
+            skillValue
+              ? `${formatValue({
+                  format: "percentage",
+                  value: abilityChance.minimum,
+                })}-${formatValue({ format: "percentage", value: abilityChance.maximum })}`
               : LABEL_UNKNOWN
           }
-          Icon={isShowingValue ? IconAbility : IconUnknown}
+          Icon={skillValue ? IconAbility : IconUnknown}
           iconProps={{ overlayPlacement: "left" }}
-          tooltip={isShowingValue ? `${abilityName} chance` : LABEL_UNKNOWN}
+          tooltip={skillValue ? `${capitalizeAll(ability)} chance` : LABEL_UNKNOWN}
         />
 
         <IconDisplay
-          contents={`${staminaCost.minimum}-${staminaCost.maximum}`}
+          contents={`${formatValue({ value: staminaCost.minimum })}-${formatValue({
+            value: staminaCost.maximum,
+          })}`}
           Icon={IconStamina}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Stamina cost"
         />
 
         <IconDisplay
-          contents={`${weight.minimum}-${weight.maximum}`}
+          contents={`${formatValue({ value: weight.minimum })}-${formatValue({
+            value: weight.maximum,
+          })}`}
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
@@ -167,7 +175,14 @@ export function RangedWeaponOptions() {
       <hr />
 
       {fletcherInventoryValue === null ? (
-        <CraftGear coinPrice={coinPrice} onCraft={handleCraft} scrapPrice={scrapPrice} />
+        <CraftGear
+          onCraft={handleCraft}
+          price={getGearPrice({
+            factor,
+            ...WEAPON_BASE,
+            modifier: WEAPON_MODIFIER.ranged.price,
+          })}
+        />
       ) : (
         <CraftedGear gearItem={fletcherInventoryValue} onTransfer={resetFletcherInventory} />
       )}

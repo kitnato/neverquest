@@ -2,24 +2,29 @@ import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
 import { MEDIC_PRICE_SURGERY, MEDIC_PRICE_SURGERY_CRITICAL } from "@neverquest/data/caravan";
 import { useHeal } from "@neverquest/hooks/actions/useHeal";
-import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
+import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { ReactComponent as IconSurgery } from "@neverquest/icons/surgery.svg";
 import { isHealthAtMaximum, isHealthLow } from "@neverquest/state/reserves";
-import { coins } from "@neverquest/state/resources";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
+import { essence } from "@neverquest/state/resources";
+import {
+  CLASS_FULL_WIDTH_JUSTIFIED,
+  LABEL_FULL_HEALTH,
+  LABEL_NO_ESSENCE,
+} from "@neverquest/utilities/constants";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function ReceiveHealing() {
-  const coinsValue = useRecoilValue(coins);
+  const essenceValue = useRecoilValue(essence);
   const isHealthAtMaximumValue = useRecoilValue(isHealthAtMaximum);
   const isHealthLowValue = useRecoilValue(isHealthLow);
 
-  const transactResources = useTransactResources();
+  const transactEssence = useTransactEssence();
 
   const price = isHealthLowValue ? MEDIC_PRICE_SURGERY_CRITICAL : MEDIC_PRICE_SURGERY;
-  const isAffordable = price <= coinsValue;
+  const isAffordable = price <= essenceValue;
   const isPurchasable = isAffordable && !isHealthAtMaximumValue;
 
   const heal = useHeal();
@@ -27,7 +32,7 @@ export function ReceiveHealing() {
   const handleHeal = () => {
     heal();
 
-    transactResources({ coinsDifference: -price });
+    transactEssence(-price);
   };
 
   return (
@@ -38,13 +43,17 @@ export function ReceiveHealing() {
         <IconDisplay contents="Regain full health" Icon={IconSurgery} tooltip="Surgery" />
 
         <Stack direction="horizontal" gap={3}>
-          <ResourceDisplay tooltip="Price (coins)" type="coins" value={price} />
+          <IconDisplay
+            contents={formatValue({ value: price })}
+            Icon={IconEssence}
+            tooltip="Price"
+          />
 
           <OverlayTrigger
             overlay={
               <Tooltip>
-                {!isAffordable && <div>Insufficient coins!</div>}
-                {isHealthAtMaximumValue && <div>Already at full health!</div>}
+                {!isAffordable && <div> {LABEL_NO_ESSENCE}</div>}
+                {isHealthAtMaximumValue && <div>{LABEL_FULL_HEALTH}</div>}
               </Tooltip>
             }
             trigger={isPurchasable ? [] : ["hover", "focus"]}

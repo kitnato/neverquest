@@ -11,34 +11,28 @@ import { ReactComponent as IconFinesse } from "@neverquest/icons/finesse.svg";
 import { ReactComponent as IconParryRating } from "@neverquest/icons/parry-rating.svg";
 import { ReactComponent as IconParry } from "@neverquest/icons/parry.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { isShowing } from "@neverquest/state/isShowing";
+import { weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { skills } from "@neverquest/state/skills";
-import {
-  parryAbsorption,
-  parryChance,
-  parryDamage,
-  parryRating,
-} from "@neverquest/state/statistics";
+import { parry, parryAbsorption, parryDamage, parryRating } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
-import { formatPercentage } from "@neverquest/utilities/formatters";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function ParryRating() {
-  const parryChanceValue = useRecoilValue(parryChance);
+  const finesseValue = useRecoilValue(masteryStatistic("finesse"));
+  const parryValue = useRecoilValue(parry);
   const parryAbsorptionValue = useRecoilValue(parryAbsorption);
   const parryDamageValue = useRecoilValue(parryDamage);
   const parryRatingValue = useRecoilValue(parryRating);
-  const isShowingParry = useRecoilValue(isShowing("parry"));
-  const finesseValue = useRecoilValue(masteryStatistic("finesse"));
-  const skillEscrime = useRecoilValue(skills("escrime"));
+  const escrimeValue = useRecoilValue(skills("escrime"));
+  const { gearClass } = useRecoilValue(weapon);
 
   useDeltaText({
     delta: deltas("parry"),
-    stop: ({ previous }) => previous === null || !skillEscrime,
     value: parryRating,
   });
 
-  if (!isShowingParry) {
+  if (!escrimeValue || gearClass !== "slashing") {
     return null;
   }
 
@@ -58,20 +52,28 @@ export function ParryRating() {
 
                       <td>
                         <IconImage Icon={IconParry} size="tiny" />
-                        &nbsp;{formatPercentage(parryChanceValue)}
+                        &nbsp;{formatValue({ format: "percentage", value: parryValue })}
                       </td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Damage reflected:</td>
 
-                      <td>{formatPercentage(PARRY_DAMAGE, 0)}</td>
+                      <td>
+                        {formatValue({ decimals: 0, format: "percentage", value: PARRY_DAMAGE })}
+                      </td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Damage absorbed:</td>
 
-                      <td>{formatPercentage(PARRY_ABSORPTION, 0)}</td>
+                      <td>
+                        {formatValue({
+                          decimals: 0,
+                          format: "percentage",
+                          value: PARRY_ABSORPTION,
+                        })}
+                      </td>
                     </tr>
 
                     <tr>
@@ -80,7 +82,11 @@ export function ParryRating() {
                         &nbsp;Finesse:
                       </td>
 
-                      <td>{`+${formatPercentage(finesseValue, 0)}`}</td>
+                      <td>{`+${formatValue({
+                        decimals: 0,
+                        format: "percentage",
+                        value: finesseValue,
+                      })}`}</td>
                     </tr>
 
                     {finesseValue > 0 && (
@@ -88,13 +94,15 @@ export function ParryRating() {
                         <tr>
                           <td className={CLASS_TABLE_CELL_ITALIC}>Total reflected:</td>
 
-                          <td>{formatPercentage(parryDamageValue)}</td>
+                          <td>{formatValue({ format: "percentage", value: parryDamageValue })}</td>
                         </tr>
 
                         <tr>
                           <td className={CLASS_TABLE_CELL_ITALIC}>Total absorbed:</td>
 
-                          <td>{formatPercentage(parryAbsorptionValue)}</td>
+                          <td>
+                            {formatValue({ format: "percentage", value: parryAbsorptionValue })}
+                          </td>
                         </tr>
                       </>
                     )}
@@ -102,9 +110,9 @@ export function ParryRating() {
                 </Popover.Body>
               </Popover>
             }
-            trigger={skillEscrime ? ["hover", "focus"] : []}
+            trigger={escrimeValue ? ["hover", "focus"] : []}
           >
-            <span>{skillEscrime ? parryRatingValue : LABEL_EMPTY}</span>
+            <span>{escrimeValue ? parryRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
           <FloatingText deltaType="parry" />

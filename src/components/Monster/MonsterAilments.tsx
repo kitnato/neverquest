@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { MonsterBleeding } from "@neverquest/components/Monster/MonsterBleeding";
 import { MonsterElementalAilment } from "@neverquest/components/Monster/MonsterElementalAilment";
 import { MonsterStaggered } from "@neverquest/components/Monster/MonsterStaggered";
+import { MonsterStunned } from "@neverquest/components/Monster/MonsterStunned";
 import { canReceiveAilments } from "@neverquest/state/monster";
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
 
@@ -21,6 +22,8 @@ export function MonsterAilments() {
           {ELEMENTAL_TYPES.map((current) => (
             <MonsterElementalAilment key={current} type={current} />
           ))}
+
+          <MonsterStunned />
 
           <MonsterStaggered />
 

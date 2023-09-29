@@ -3,7 +3,6 @@ export type Attribute =
   | "dexterity"
   | "endurance"
   | "fortitude"
-  | "luck"
   | "perception"
   | "speed"
   | "strength"
@@ -26,8 +25,6 @@ export type Crew =
 
 export type CrewStatus = "hirable" | "hired" | null;
 
-export type DeltaText = "float" | "integer" | "percentage" | "time";
-
 export type Delta =
   | "ammunition"
   | "attackRate"
@@ -35,8 +32,6 @@ export type Delta =
   | "bleedRating"
   | "block"
   | "butchery"
-  | "coins"
-  | "coinsLoot"
   | "criticalRating"
   | "cruelty"
   | "damage"
@@ -46,15 +41,16 @@ export type Delta =
   | "encumbrance"
   | "essence"
   | "essenceAbsorbed"
+  | "essenceBonus"
   | "essenceLoot"
   | "execution"
   | "finesse"
   | "health"
   | "healthRegenerationRate"
   | "level"
-  | "lootBonus"
   | "marksmanship"
   | "might"
+  | "monkeyPawLevel"
   | "monsterHealth"
   | "parry"
   | "progress"
@@ -62,13 +58,12 @@ export type Delta =
   | "range"
   | "recoveryRate"
   | "resilience"
-  | "scrap"
-  | "scrapLoot"
   | "stability"
   | "stage"
   | "staggerRating"
   | "stamina"
   | "staminaRegenerationRate"
+  | "stunRating"
   | "thorns";
 
 export const ELEMENTAL_TYPES = ["lightning", "fire", "ice"] as const;
@@ -102,22 +97,20 @@ export const MONSTER_AILMENT_TYPES = [
   "frozen",
   "shocked",
   "staggered",
+  "stunned",
 ] as const;
 export type MonsterAilment = (typeof MONSTER_AILMENT_TYPES)[number];
 
-export type Reserve = "health" | "stamina";
+export type NumberFormat = "float" | "integer" | "percentage" | "time";
 
-export const RESOURCE_TYPES = ["coins", "essence", "scrap"] as const;
-export type Resource = (typeof RESOURCE_TYPES)[number];
+export type Reserve = "health" | "stamina";
 
 export const SHOWING_TYPES = [
   "armor",
   "attackRate",
   "attackRateDetails",
-  "capabilitiesButton",
-  "bleed",
   "block",
-  "coins",
+  "capabilities",
   "crewHiring",
   "criticalRating",
   "damageDetails",
@@ -125,29 +118,20 @@ export const SHOWING_TYPES = [
   "dodge",
   "dodgePenalty",
   "essence",
-  "execution",
   "gameOver",
   "gearClass",
   "healthDetails",
   "loot",
-  "lootBonus",
-  "lootBonusDetails",
   "masteries",
   "monsterAilments",
   "monsterOffense",
-  "parry",
   "protection",
   "recovery",
-  "reserveDetails",
-  "scrap",
   "offhand",
   "skills",
-  "stability",
-  "stagger",
   "stamina",
   "staminaDetails",
   "statistics",
-  "range",
   "thorns",
   "weapon",
   "weight",
@@ -171,6 +155,7 @@ export type Skill = (typeof SKILL_TYPES)[number];
 
 export type StateKey =
   | "allowNSFW"
+  | "ammunition"
   | "appliedGems"
   | "areAttributesIncreasable"
   | "armor"
@@ -191,6 +176,7 @@ export type StateKey =
   | "blightAmount"
   | "blightMagnitude"
   | "block"
+  | "canAffordInfusion"
   | "canApplyGem"
   | "canAttackOrParry"
   | "canBlock"
@@ -198,8 +184,6 @@ export type StateKey =
   | "canFit"
   | "canReceiveAilment"
   | "canReceiveAilments"
-  | "coins"
-  | "coinsLoot"
   | "confirmationWarnings"
   | "crewActive"
   | "criticalChance"
@@ -215,8 +199,10 @@ export type StateKey =
   | "elementalEffects"
   | "encumbrance"
   | "encumbranceMaximum"
+  | "equippableItems"
   | "essence"
   | "essenceAbsorbed"
+  | "essenceBonus"
   | "essenceLoot"
   | "execution"
   | "fletcherInventory"
@@ -230,6 +216,7 @@ export type StateKey =
   | "healthMaximum"
   | "healthMaximumTotal"
   | "hireStatus"
+  | "infusionDelta"
   | "inventory"
   | "isAttacking"
   | "isAttributeAtMaximum"
@@ -261,7 +248,6 @@ export type StateKey =
   | "level"
   | "location"
   | "locationName"
-  | "lootBonus"
   | "lootingDuration"
   | "lowHealthWarning"
   | "masteries"
@@ -269,6 +255,10 @@ export type StateKey =
   | "masteryCost"
   | "masteryStatistic"
   | "merchantInventory"
+  | "merchantItem"
+  | "monkeyPawInfusion"
+  | "monkeyPawLevel"
+  | "monkeyPawMaximum"
   | "monsterAilmentDuration"
   | "monsterAttackDuration"
   | "monsterAttackRate"
@@ -276,6 +266,8 @@ export type StateKey =
   | "monsterBlightChance"
   | "monsterDamage"
   | "monsterDamagePerSecond"
+  | "monsterDamageTotal"
+  | "monsterDamageTotalPerSecond"
   | "monsterDistance"
   | "monsterElement"
   | "monsterHealth"
@@ -288,8 +280,8 @@ export type StateKey =
   | "name"
   | "notifyOverEncumbrance"
   | "ownedItem"
+  | "parry"
   | "parryAbsorption"
-  | "parryChance"
   | "parryDamage"
   | "parryRating"
   | "poisonDuration"
@@ -305,8 +297,6 @@ export type StateKey =
   | "regenerationRate"
   | "reserveRegenerationAmount"
   | "reserveRegenerationRate"
-  | "scrap"
-  | "scrapLoot"
   | "shield"
   | "showDamagePerSecond"
   | "showGearComparison"
@@ -317,12 +307,13 @@ export type StateKey =
   | "stability"
   | "stage"
   | "stageMaximum"
+  | "stagger"
   | "staggerRating"
-  | "staggerWeapon"
   | "stamina"
   | "staminaMaximum"
   | "staminaMaximumTotal"
   | "statusElement"
+  | "stunRating"
   | "thorns"
   | "totalElementalEffects"
   | "trinketProperties"
@@ -339,3 +330,5 @@ export const TRINKET_TYPES = [
   "tome of power",
 ] as const;
 export type Trinket = (typeof TRINKET_TYPES)[number];
+
+export type WeaponAbility = "bleed" | "parry" | "stun";

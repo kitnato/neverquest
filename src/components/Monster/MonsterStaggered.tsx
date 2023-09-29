@@ -16,7 +16,7 @@ export function MonsterStaggered() {
   const canBeStaggered = useRecoilValue(canReceiveAilment("staggered"));
   const isMonsterStaggeredValue = useRecoilValue(isMonsterAiling("staggered"));
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
-  const mightValue = useRecoilValue(masteryStatistic("might"));
+  const stabilityValue = useRecoilValue(masteryStatistic("stability"));
   const setMonsterStaggerDuration = useSetRecoilState(monsterAilmentDuration("staggered"));
 
   useAnimate({
@@ -30,7 +30,7 @@ export function MonsterStaggered() {
 
   return (
     <IconDisplay
-      contents={<MonsterAilmentMeter totalDuration={mightValue} type="staggered" />}
+      contents={<MonsterAilmentMeter totalDuration={stabilityValue} type="staggered" />}
       Icon={IconStaggered}
       isAnimated
       tooltip="Staggered"

@@ -2,28 +2,29 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill";
-import { useTransactResources } from "@neverquest/hooks/actions/useTransactResources";
-import { coins } from "@neverquest/state/resources";
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
+import { essence } from "@neverquest/state/resources";
 import { skillPrice } from "@neverquest/state/skills";
 import type { Skill } from "@neverquest/types/unions";
+import { LABEL_NO_ESSENCE } from "@neverquest/utilities/constants";
 
 export function TrainSkillButton({ type }: { type: Skill }) {
-  const coinsValue = useRecoilValue(coins);
+  const essenceValue = useRecoilValue(essence);
   const skillPriceValue = useRecoilValue(skillPrice);
 
   const acquireSkill = useAcquireSkill();
-  const transactResources = useTransactResources();
+  const transactEssence = useTransactEssence();
 
-  const isAffordable = skillPriceValue <= coinsValue;
+  const isAffordable = skillPriceValue <= essenceValue;
 
   const handleTrain = () => {
     acquireSkill(type);
-    transactResources({ coinsDifference: -skillPriceValue });
+    transactEssence(-skillPriceValue);
   };
 
   return (
     <OverlayTrigger
-      overlay={<Tooltip>Insufficient coins!</Tooltip>}
+      overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
       trigger={isAffordable ? [] : ["hover", "focus"]}
     >
       <span>

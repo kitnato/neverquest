@@ -8,6 +8,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconProgress } from "@neverquest/icons/progress.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isWilderness, progress, progressMaximum } from "@neverquest/state/encounter";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Progress() {
   const isWildernessValue = useRecoilValue(isWilderness);
@@ -30,7 +31,9 @@ export function Progress() {
         contents={
           <Stack className="w-100" direction="horizontal">
             <LabelledProgressBar
-              label={`${progressValue}/${progressMaximumValue}`}
+              label={`${formatValue({ value: progressValue })}/${formatValue({
+                value: progressMaximumValue,
+              })}`}
               value={(progressValue / progressMaximumValue) * 100}
               variant="dark"
             />

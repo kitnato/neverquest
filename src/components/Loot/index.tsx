@@ -1,33 +1,54 @@
-import { Stack } from "react-bootstrap";
+import { Card, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "@neverquest/components/FloatingText";
-import { ResourceDisplay } from "@neverquest/components/Resources/ResourceDisplay";
-import { RESOURCES } from "@neverquest/data/resources";
-import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { deltas } from "@neverquest/state/deltas";
-import type { Resource } from "@neverquest/types/unions";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
+import { EssenceLoot } from "@neverquest/components/Loot/EssenceLoot";
+import { Looting } from "@neverquest/components/Loot/Looting";
+import { ReactComponent as IconLooted } from "@neverquest/icons/looted.svg";
+import { progress } from "@neverquest/state/encounter";
+import { hasLooted, itemsLoot } from "@neverquest/state/resources";
+import { isGear, isStackable, isTrinket } from "@neverquest/types/type-guards";
 import { getAnimationClass } from "@neverquest/utilities/getters";
+import { stackItems } from "@neverquest/utilities/helpers";
 
-export function Loot({ type }: { type: Resource }) {
-  const { atomLoot, deltaLoot } = RESOURCES[type];
+export function Loot() {
+  const hasLootedValue = useRecoilValue(hasLooted);
+  const itemsLootValue = useRecoilValue(itemsLoot);
+  const progressValue = useRecoilValue(progress);
 
-  const resourceValue = useRecoilValue(atomLoot);
-
-  useDeltaText({
-    delta: deltas(deltaLoot),
-    value: atomLoot,
-  });
-
-  if (resourceValue === 0) {
-    return null;
-  }
+  const stackItemsLoot = [
+    ...stackItems(itemsLootValue.filter(isGear).sort((a, b) => a.name.localeCompare(b.name))),
+    ...stackItems(itemsLootValue.filter(isTrinket).sort((a, b) => a.type.localeCompare(b.type))),
+    ...stackItems(itemsLootValue.filter(isStackable).sort((a, b) => a.type.localeCompare(b.type))),
+  ];
 
   return (
-    <Stack className={getAnimationClass({ type: "flipInX" })} direction="horizontal">
-      <ResourceDisplay tooltip={`Looted ${type}`} type={type} value={resourceValue} />
+    <Stack gap={3}>
+      <Looting />
 
-      <FloatingText deltaType={deltaLoot} />
+      {progressValue > 0 && (
+        <Card className={getAnimationClass({ type: "flipInX" })}>
+          <Card.Body>
+            {hasLootedValue && itemsLootValue.length === 0 ? (
+              <IconDisplay
+                contents={<span className="fst-italic">Nothing remains.</span>}
+                Icon={IconLooted}
+                isSpaced
+                tooltip="Loot"
+              />
+            ) : (
+              <Stack gap={3}>
+                {!hasLootedValue && <EssenceLoot />}
+
+                {stackItemsLoot.map(({ item, stack }) => (
+                  <ItemDisplay item={item} key={item.id} stack={stack} />
+                ))}
+              </Stack>
+            )}
+          </Card.Body>
+        </Card>
+      )}
     </Stack>
   );
 }

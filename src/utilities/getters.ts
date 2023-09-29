@@ -9,6 +9,7 @@ import {
 } from "@neverquest/data/inventory";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type { GeneratorRange } from "@neverquest/types";
+import { isGeneratorRanges } from "@neverquest/types/type-guards";
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
 import type { Grip } from "@neverquest/types/unions";
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/utilities/constants";
@@ -33,12 +34,9 @@ export function getArmorRanges({ factor, gearClass }: { factor: number; gearClas
   return {
     deflection: deflection === null ? null : getRange({ factor, ranges: deflection }),
     protection: getRange({ factor, ranges: protection }),
-    staminaCost:
-      staminaCost === null
-        ? null
-        : staminaCost === 0
-        ? 0
-        : getRange({ factor, ranges: staminaCost }),
+    staminaCost: isGeneratorRanges(staminaCost)
+      ? getRange({ factor, ranges: staminaCost })
+      : staminaCost,
     weight: getRange({ factor, ranges: weight }),
   };
 }
@@ -97,27 +95,22 @@ export function getElementalEffects({
   };
 }
 
-export function getFromRange({ maximum, minimum }: GeneratorRange) {
-  const result = Math.random() * (maximum - minimum) + minimum;
+export function getFromRange({ factor, maximum, minimum }: GeneratorRange & { factor?: number }) {
+  const result = (factor ?? Math.random()) * (maximum - minimum) + minimum;
 
   return Number.isInteger(minimum) && Number.isInteger(maximum) ? Math.round(result) : result;
 }
 
-export function getGearPrices({
-  coinPrice,
+export function getGearPrice({
   factor,
   modifier = 1,
-  scrapPrice,
+  price,
 }: {
-  coinPrice: GeneratorRange;
   factor: number;
   modifier?: number;
-  scrapPrice: GeneratorRange;
+  price: GeneratorRange;
 }) {
-  return {
-    coinPrice: Math.round((coinPrice.minimum + coinPrice.maximum * factor) * modifier),
-    scrapPrice: Math.round((scrapPrice.minimum + scrapPrice.maximum * factor) * modifier),
-  };
+  return Math.round((price.minimum + price.maximum * factor) * modifier);
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
@@ -141,9 +134,9 @@ export function getRange({
   ranges: [GeneratorRange, GeneratorRange];
 }): GeneratorRange {
   const maximumResult =
-    (ranges[0].maximum + (ranges[1].maximum - ranges[0].maximum) * factor) * modifier;
+    getFromRange({ factor, maximum: ranges[1].maximum, minimum: ranges[0].maximum }) * modifier;
   const minimumResult =
-    (ranges[0].minimum + (ranges[1].minimum - ranges[0].minimum) * factor) * modifier;
+    getFromRange({ factor, maximum: ranges[1].minimum, minimum: ranges[0].minimum }) * modifier;
 
   return {
     maximum:
@@ -157,8 +150,8 @@ export function getRange({
   };
 }
 
-export function getSellPrice({ coinPrice }: { coinPrice: number }) {
-  return Math.ceil(coinPrice / 2);
+export function getSellPrice({ price }: { price: number }) {
+  return Math.ceil(price / 2);
 }
 
 export function getShieldRanges({ factor, gearClass }: { factor: number; gearClass: ShieldClass }) {

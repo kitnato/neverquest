@@ -2,8 +2,9 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { canFit } from "@neverquest/state/inventory";
-import { coins } from "@neverquest/state/resources";
+import { essence } from "@neverquest/state/resources";
 import type { InventoryItem } from "@neverquest/types";
+import { LABEL_NO_ESSENCE, LABEL_OVER_ENCUMBERED } from "@neverquest/utilities/constants";
 
 export function PurchaseItemButton({
   handlePurchase,
@@ -12,20 +13,20 @@ export function PurchaseItemButton({
   handlePurchase: () => void;
   item: InventoryItem;
 }) {
-  const coinsValue = useRecoilValue(coins);
+  const essenceValue = useRecoilValue(essence);
 
-  const { coinPrice, weight } = item;
+  const { price, weight } = item;
   const canFitValue = useRecoilValue(canFit(weight));
 
-  const isAffordable = coinPrice <= coinsValue;
+  const isAffordable = price <= essenceValue;
   const isPurchasable = isAffordable && canFitValue;
 
   return (
     <OverlayTrigger
       overlay={
         <Tooltip>
-          {!isAffordable && <div>Insufficient coins!</div>}
-          {!canFitValue && <div>Too heavy!</div>}
+          {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
+          {!canFitValue && <div>{LABEL_OVER_ENCUMBERED}</div>}
         </Tooltip>
       }
       trigger={isPurchasable ? [] : ["hover", "focus"]}

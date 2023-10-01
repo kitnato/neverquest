@@ -32,7 +32,7 @@ export function ArmorOptions() {
   const armorcraftValue = useRecoilValue(skills("armorcraft"));
   const stageValue = useRecoilValue(stage);
 
-  const [armorClass, setArmorClass] = useState<ArmorClass>("hide");
+  const [armorClass, setArmorClass] = useState<ArmorClass>("light");
   const [armorLevel, setArmorLevel] = useState(stageValue);
 
   const factor = getGrowthSigmoid(armorLevel);
@@ -157,7 +157,7 @@ export function ArmorOptions() {
 
       <hr />
 
-      {!armorcraftValue && armorClass === "plate" ? (
+      {!armorcraftValue && armorClass === "heavy" ? (
         <span className="text-center">Cannot use without training.</span>
       ) : craftedArmor === null ? (
         <CraftGear

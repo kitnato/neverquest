@@ -3,7 +3,8 @@ import { nanoid } from "nanoid";
 import { ReactComponent as IconAmmunitionPouch } from "@neverquest/icons/ammunition-pouch.svg";
 import { ReactComponent as IconAntidote } from "@neverquest/icons/antidote.svg";
 import { ReactComponent as IconAntiqueCoin } from "@neverquest/icons/antique-coin.svg";
-import { ReactComponent as IconPlate } from "@neverquest/icons/armor-plate.svg";
+import { ReactComponent as IconArmorHeavy } from "@neverquest/icons/armor-heavy.svg";
+import { ReactComponent as IconArmorLight } from "@neverquest/icons/armor-light.svg";
 import { ReactComponent as IconReinforced } from "@neverquest/icons/armor-reinforced.svg";
 import { ReactComponent as IconBandages } from "@neverquest/icons/bandages.svg";
 import { ReactComponent as IconBleed } from "@neverquest/icons/bleed.svg";
@@ -12,7 +13,6 @@ import { ReactComponent as IconCompass } from "@neverquest/icons/compass.svg";
 import { ReactComponent as IconElixir } from "@neverquest/icons/elixir.svg";
 import { ReactComponent as IconFire } from "@neverquest/icons/fire.svg";
 import { ReactComponent as IconStone } from "@neverquest/icons/hearthstone.svg";
-import { ReactComponent as IconHide } from "@neverquest/icons/hide.svg";
 import { ReactComponent as IconIce } from "@neverquest/icons/ice.svg";
 import { ReactComponent as IconKnapsack } from "@neverquest/icons/knapsack.svg";
 import { ReactComponent as IconLightning } from "@neverquest/icons/lightning.svg";
@@ -51,7 +51,7 @@ export const AMMUNITION_MAXIMUM = 100;
 
 export const ARMOR_NONE: Omit<Armor, "isEquipped" | "price"> = {
   deflection: 0,
-  gearClass: "hide",
+  gearClass: "light",
   gems: [],
   id: nanoid(),
   level: 0,
@@ -70,26 +70,12 @@ export const ARMOR_SPECIFICATIONS: Record<
     staminaCost: number | [GeneratorRange, GeneratorRange];
   }
 > = {
-  hide: {
-    deflection: null,
-    Icon: IconHide,
-    price: { maximum: 800, minimum: 1 },
-    protection: [
-      { maximum: 2, minimum: 1 },
-      { maximum: 500, minimum: 450 },
-    ],
-    staminaCost: 0,
-    weight: [
-      { maximum: 2, minimum: 1 },
-      { maximum: 60, minimum: 55 },
-    ],
-  },
-  plate: {
+  heavy: {
     deflection: [
       { maximum: 0.25, minimum: 0.2 },
       { maximum: 0.65, minimum: 0.6 },
     ],
-    Icon: IconPlate,
+    Icon: IconArmorHeavy,
     price: { maximum: 1600, minimum: 8 },
     protection: [
       { maximum: 10, minimum: 8 },
@@ -99,6 +85,20 @@ export const ARMOR_SPECIFICATIONS: Record<
     weight: [
       { maximum: 7, minimum: 5 },
       { maximum: 100, minimum: 90 },
+    ],
+  },
+  light: {
+    deflection: null,
+    Icon: IconArmorLight,
+    price: { maximum: 800, minimum: 1 },
+    protection: [
+      { maximum: 2, minimum: 1 },
+      { maximum: 500, minimum: 450 },
+    ],
+    staminaCost: 0,
+    weight: [
+      { maximum: 2, minimum: 1 },
+      { maximum: 60, minimum: 55 },
     ],
   },
   reinforced: {
@@ -212,7 +212,7 @@ export const GEM_FITTING_COST = [20, 40, 70, 120, 200];
 export const GEMS_MAXIMUM = 5;
 
 export const MONKEY_PAW_BONUS = {
-  maximum: 1,
+  maximum: 2,
   minimum: 0.2,
 };
 export const MONKEY_PAW_GROWTH = 14;

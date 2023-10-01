@@ -21,7 +21,7 @@ export function EssenceBonus() {
   return (
     <Stack direction="horizontal">
       <IconDisplay
-        contents={formatValue({ format: "percentage", value: essenceBonusValue })}
+        contents={`+${formatValue({ format: "percentage", value: essenceBonusValue })}`}
         Icon={IconEssenceBonus}
         tooltip="Essence loot bonus"
       />

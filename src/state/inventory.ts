@@ -31,7 +31,7 @@ export const equippableItems = withStateKey("equippableItems", (key) =>
       get(inventory).reduce((aggregator, { id, ...current }) => {
         let canEquip = isGear(current) ? !current.isEquipped : false;
 
-        if (isArmor(current) && current.gearClass === "plate") {
+        if (isArmor(current) && current.gearClass === "heavy") {
           canEquip = get(skills("armorcraft"));
         }
 

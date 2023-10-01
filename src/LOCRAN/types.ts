@@ -9,7 +9,7 @@ export type AffixData = BaseData & {
   tags?: AffixTag[];
 };
 
-export const ARMOR_CLASS_TYPES = ["hide", "reinforced", "plate"] as const;
+export const ARMOR_CLASS_TYPES = ["light", "reinforced", "heavy"] as const;
 export type ArmorClass = (typeof ARMOR_CLASS_TYPES)[number];
 
 type ArmorSlot = "chest" | "feet" | "hands" | "head" | "legs" | "shoulders" | "waist";

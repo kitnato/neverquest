@@ -162,7 +162,7 @@ export const MERCHANT_OFFERS: Record<
   ],
   2: [
     {
-      gearClass: "hide",
+      gearClass: "light",
       type: "armor",
     },
   ],

@@ -284,7 +284,7 @@ Required skill: [Armorcraft](#armorcraft).
 
 ### Dodge
 
-Dodging an incoming attack negates all damage. It doesn't cost any stamina the way [blocking](#block) does, but only if no [armor](#armor) or [hide](#hide-armor) armor is worn. [Reinforced](#reinforced-armor) armor incurs a stamina cost for dodging, and [plate](#plate-armor) removes the ability to dodge altogether.
+Dodging an incoming attack negates all damage. It doesn't cost any stamina the way [blocking](#block) does, but only if no [armor](#armor) or [light](#light-armor) armor is worn. [Reinforced](#reinforced-armor) armor incurs a stamina cost for dodging, and [heavy](#heavy-armor) removes the ability to dodge altogether.
 
 The overall chance to dodge an attack is determined by the [dodge chance](#dodge-chance) statistic.
 
@@ -413,7 +413,7 @@ Each of the following armor classes increases the protection value and adds cert
 
 No initial modifiers.
 
-##### Hide armor
+##### Light armor
 
 - Low protection
 - Low cost
@@ -425,7 +425,7 @@ No initial modifiers.
 - Low [deflection](#deflection) chance
 - Medium cost
 
-##### Plate armor
+##### Heavy armor
 
 - High protection
 - Cannot dodge
@@ -596,7 +596,7 @@ Allows the use of [ranged weapons](#ranged-weapons). Also unlocks the [marksmans
 
 ### Armorcraft
 
-Allows the use of [plate](#plate-armor) armor. Also unlocks the [resilience](#resilience) mastery and the [deflection](#deflection) ability.
+Allows the use of [heavy](#heavy-armor) armor. Also unlocks the [resilience](#resilience) mastery and the [deflection](#deflection) ability.
 
 ### Assassination
 

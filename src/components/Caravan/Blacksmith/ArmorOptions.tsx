@@ -52,9 +52,9 @@ export function ArmorOptions() {
         hasSuffix: Math.random() <= getGrowthSigmoid(armorLevel),
         level: armorLevel,
         tags:
-          armorLevel < stageValue - 1
+          armorLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
             ? ["lowQuality"]
-            : armorLevel > maximumArmorLevel
+            : armorLevel === maximumArmorLevel
             ? ["highQuality"]
             : undefined,
       }),

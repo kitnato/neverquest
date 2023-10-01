@@ -59,9 +59,9 @@ export function WeaponOptions() {
         hasSuffix: Math.random() <= getGrowthSigmoid(weaponLevel),
         level: weaponLevel,
         tags:
-          weaponLevel < stageValue - 1
+          weaponLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
             ? ["lowQuality"]
-            : weaponLevel > maximumWeaponLevel
+            : weaponLevel === maximumWeaponLevel
             ? ["highQuality"]
             : undefined,
       }),

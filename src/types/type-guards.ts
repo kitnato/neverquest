@@ -18,7 +18,7 @@ export function isArmor(gearItem: unknown): gearItem is Armor {
 }
 
 export function isConsumable(consumable: unknown): consumable is ConsumableItem {
-  return isObject(consumable) && CONSUMABLE_TYPES.some((type) => type === consumable.type);
+  return isObject(consumable) && CONSUMABLE_TYPES.some((current) => current === consumable.name);
 }
 
 export function isGear(gearItem: unknown): gearItem is GearItem {
@@ -26,7 +26,7 @@ export function isGear(gearItem: unknown): gearItem is GearItem {
 }
 
 export function isGem(gem: unknown): gem is GemItem {
-  return isObject(gem) && GEM_TYPES.some((type) => type === gem.type);
+  return isObject(gem) && GEM_TYPES.some((current) => current === gem.name);
 }
 
 export function isGeneratorRange(range: unknown): range is GeneratorRange {
@@ -58,7 +58,7 @@ export function isStackable(stackable: unknown): stackable is StackableItem {
 }
 
 export function isTrinket(trinket: unknown): trinket is TrinketItem {
-  return isObject(trinket) && TRINKET_TYPES.some((type) => type === trinket.type);
+  return isObject(trinket) && TRINKET_TYPES.some((current) => current === trinket.name);
 }
 
 export function isWeapon(gearItem: unknown): gearItem is Weapon {

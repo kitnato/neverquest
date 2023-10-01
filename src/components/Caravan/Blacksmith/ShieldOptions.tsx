@@ -49,9 +49,9 @@ export function ShieldOptions() {
         hasSuffix: Math.random() <= getGrowthSigmoid(shieldLevel),
         level: shieldLevel,
         tags:
-          shieldLevel < stageValue - 1
+          shieldLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
             ? ["lowQuality"]
-            : shieldLevel > maximumShieldLevel
+            : shieldLevel === maximumShieldLevel
             ? ["highQuality"]
             : undefined,
       }),

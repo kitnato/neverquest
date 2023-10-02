@@ -19,17 +19,16 @@ export function MonsterAttack() {
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isMonsterFrozenValue = useRecoilValue(isMonsterAiling("frozen"));
-  const isMonsterStaggeredValue = useRecoilValue(isMonsterAiling("staggered"));
+  const isMonsterStaggered = useRecoilValue(isMonsterAiling("staggered"));
   const setMonsterAttackDuration = useSetRecoilState(monsterAttackDuration);
 
   const defend = useDefend();
 
   useAnimate({
     delta: setMonsterAttackDuration,
-    factor: isMonsterFrozenValue ? AILMENT_PENALTY.frozen : 1,
+    factor: isMonsterStaggered ? AILMENT_PENALTY.staggered : 1,
     onDelta: defend,
-    stop:
-      !isAttackingValue || !hasMonsterClosedValue || isMonsterDeadValue || isMonsterStaggeredValue,
+    stop: !isAttackingValue || !hasMonsterClosedValue || isMonsterDeadValue || isMonsterFrozenValue,
   });
 
   return (

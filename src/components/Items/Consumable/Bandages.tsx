@@ -20,7 +20,7 @@ export function Bandages({ id }: { id: string }) {
 
   return (
     <OverlayTrigger
-      overlay={<Tooltip>{isHealthAtMaximumValue && <div>{LABEL_FULL_HEALTH}</div>}</Tooltip>}
+      overlay={<Tooltip>{LABEL_FULL_HEALTH}</Tooltip>}
       trigger={isHealthAtMaximumValue ? ["hover", "focus"] : []}
     >
       <span>

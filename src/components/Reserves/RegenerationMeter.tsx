@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
@@ -34,30 +35,34 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
 
     if (regenerationProgress === 0) {
       return (
-        <span>
+        <Stack>
           {`${label} regeneration`}
-          <br />
-          <IconImage Icon={ReserveIcon} size="tiny" />
-          &nbsp;
-          {`${regenerationAmountValue} per ${formatValue({
-            format: "time",
-            value: regenerationRateValue,
-          })}`}
-        </span>
+
+          <Stack direction="horizontal" gap={1}>
+            <IconImage Icon={ReserveIcon} size="small" />
+
+            {`${regenerationAmountValue} per ${formatValue({
+              format: "time",
+              value: regenerationRateValue,
+            })}`}
+          </Stack>
+        </Stack>
       );
     }
 
     return (
-      <span>
+      <Stack>
         {`Regenerating ${reserve}`}
-        <br />
-        <IconImage Icon={ReserveIcon} size="tiny" />
-        &nbsp;
-        {`${regenerationAmountValue} in ${formatValue({
-          format: "time",
-          value: regenerationRateValue - regenerationProgress,
-        })}`}
-      </span>
+
+        <Stack direction="horizontal" gap={1}>
+          <IconImage Icon={ReserveIcon} size="small" />
+
+          {`${regenerationAmountValue} in ${formatValue({
+            format: "time",
+            value: regenerationRateValue - regenerationProgress,
+          })}`}
+        </Stack>
+      </Stack>
     );
   })();
 
@@ -66,7 +71,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
       attached="above"
       disableTransitions
       label={details}
-      size="tiny"
+      size="small"
       value={(regenerationProgress / regenerationRateValue) * 100}
       variant="secondary"
     />

@@ -10,13 +10,13 @@ import type { Showing } from "@neverquest/types/unions";
 export function GearComparison({
   difference,
   isDownPositive = false,
-  showingType,
+  showing,
 }: {
   difference: number;
   isDownPositive?: boolean;
-  showingType: Showing;
+  showing: Showing;
 }) {
-  const isShowingGearComparison = useRecoilValue(isShowing(showingType));
+  const isShowingGearComparison = useRecoilValue(isShowing(showing));
   const showGearComparisonValue = useRecoilValue(showGearComparison);
 
   // NaN here is only produced by subtracting Infinity from Infinity, therefore it can be assumed as equal.
@@ -25,18 +25,15 @@ export function GearComparison({
 
   if (isShowingGearComparison && showGearComparisonValue) {
     return (
-      <>
-        &nbsp;
-        <span
-          className={isDifferenceEqual ? "text-muted" : isPositive ? "text-success" : "text-danger"}
-        >
-          <IconImage
-            Icon={isDifferenceEqual ? IconEquals : IconIncrease}
-            isFlipped={difference < 0}
-            size="tiny"
-          />
-        </span>
-      </>
+      <span
+        className={isDifferenceEqual ? "text-muted" : isPositive ? "text-success" : "text-danger"}
+      >
+        <IconImage
+          Icon={isDifferenceEqual ? IconEquals : IconIncrease}
+          isFlipped={difference < 0}
+          size="small"
+        />
+      </span>
     );
   }
 

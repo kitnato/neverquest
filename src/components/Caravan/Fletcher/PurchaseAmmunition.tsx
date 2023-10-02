@@ -2,6 +2,7 @@ import { Button, ButtonGroup, OverlayTrigger, Stack, Tooltip } from "react-boots
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { AmmunitionPouchCapacity } from "@neverquest/components/Items/Trinkets/AmmunitionPouchCapacity";
 import { AMMUNITION_PRICE } from "@neverquest/data/caravan";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { ReactComponent as IconAmmunition } from "@neverquest/icons/ammunition.svg";
@@ -44,6 +45,8 @@ export function PurchaseAmmunition() {
   return (
     <Stack gap={3}>
       <h6>Purchase ammunition</h6>
+
+      {ownedAmmunitionPouch !== null && <AmmunitionPouchCapacity />}
 
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay contents="Ammunition (each)" Icon={IconAmmunition} tooltip="Ammunition" />

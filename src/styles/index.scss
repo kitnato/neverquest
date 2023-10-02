@@ -78,14 +78,10 @@ select {
 }
 
 svg.icon-image {
-  width: 36px;
+  display: block;
+  width: 40px;
 
   &.small {
-    width: 24px;
-  }
-
-  &.tiny {
-    margin-bottom: 4px;
-    width: 16px;
+    width: 20px;
   }
 }

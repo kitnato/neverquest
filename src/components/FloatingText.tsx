@@ -8,17 +8,17 @@ import type { Delta } from "@neverquest/types/unions";
 import { DEFAULT_DELTA_DISPLAY } from "@neverquest/utilities/constants";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function FloatingText({ deltaType }: { deltaType: Delta }) {
-  const delta = deltas(deltaType);
-  const deltaValue = useRecoilValue(delta);
-  const [floatingTextQueue, setFloatingTextQueue] = useRecoilState(floatingTextQueues(deltaType));
-  const resetDeltaValue = useResetRecoilState(delta);
-  const resetFloatingTextQueue = useResetRecoilState(floatingTextQueues(deltaType));
+const ANIMATION_FLOATING_TEXT = getAnimationClass({
+  name: "fadeOutUp",
+  speed: "slower",
+});
 
-  const animationClass = getAnimationClass({
-    name: "fadeOutUp",
-    speed: "slower",
-  });
+export function FloatingText({ delta }: { delta: Delta }) {
+  const deltaState = deltas(delta);
+  const deltaValue = useRecoilValue(deltaState);
+  const [floatingTextQueue, setFloatingTextQueue] = useRecoilState(floatingTextQueues(delta));
+  const resetDeltaValue = useResetRecoilState(deltaState);
+  const resetFloatingTextQueue = useResetRecoilState(floatingTextQueues(delta));
 
   const handleAnimationEnd = (id: string) => () =>
     setFloatingTextQueue((current) => current.filter(({ key }) => key !== id));
@@ -57,7 +57,7 @@ export function FloatingText({ deltaType }: { deltaType: Delta }) {
             }}
           >
             {Array.isArray(delta) ? (
-              <Stack className={animationClass} onAnimationEnd={handleAnimationEnd(key)}>
+              <Stack className={ANIMATION_FLOATING_TEXT} onAnimationEnd={handleAnimationEnd(key)}>
                 {delta.map(({ color, value }) => (
                   <span className={color ?? undefined} key={value} style={{ whiteSpace: "nowrap" }}>
                     {value}
@@ -66,7 +66,7 @@ export function FloatingText({ deltaType }: { deltaType: Delta }) {
               </Stack>
             ) : (
               <div
-                className={`${animationClass}${delta.color ? ` ${delta.color}` : ""}`}
+                className={`${ANIMATION_FLOATING_TEXT}${delta.color ? ` ${delta.color}` : ""}`}
                 onAnimationEnd={handleAnimationEnd(key)}
               >
                 {delta.value}

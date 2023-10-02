@@ -44,23 +44,39 @@ export function Stamina() {
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
 
-                        <td>{baseAmount}</td>
+                        <td>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconStamina} size="small" />
+
+                            {baseAmount}
+                          </Stack>
+                        </td>
                       </tr>
 
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
-                          <IconImage Icon={IconEndurance} size="tiny" />
-                          &nbsp;Endurance:
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconEndurance} size="small" />
+                            Endurance:
+                          </Stack>
                         </td>
 
-                        <td>{`+${enduranceValue - baseAmount}`}</td>
+                        <td>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconStamina} size="small" />
+
+                            {`+${enduranceValue - baseAmount}`}
+                          </Stack>
+                        </td>
                       </tr>
 
                       {powerBonusValue > 0 && (
                         <tr>
                           <td className={CLASS_TABLE_CELL_ITALIC}>
-                            <IconImage Icon={IconPower} size="tiny" />
-                            &nbsp;Empowered:
+                            <Stack direction="horizontal" gap={1}>
+                              <IconImage Icon={IconPower} size="small" />
+                              Empowered:
+                            </Stack>
                           </td>
 
                           <td>{`+${formatValue({
@@ -82,7 +98,7 @@ export function Stamina() {
               </div>
             </OverlayTrigger>
 
-            <FloatingText deltaType="stamina" />
+            <FloatingText delta="stamina" />
           </Stack>
 
           <Regeneration reserve="stamina" />

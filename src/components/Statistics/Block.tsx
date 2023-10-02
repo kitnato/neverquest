@@ -37,7 +37,7 @@ export function Block() {
         <Stack direction="horizontal">
           <span>{formatValue({ format: "percentage", value: blockValue })}</span>
 
-          <FloatingText deltaType="block" />
+          <FloatingText delta="block" />
         </Stack>
       }
       Icon={IconBlock}

@@ -30,7 +30,7 @@ export function EssenceLoot() {
         tooltip="Looted essence"
       />
 
-      <FloatingText deltaType="essenceLoot" />
+      <FloatingText delta="essenceLoot" />
     </Stack>
   );
 }

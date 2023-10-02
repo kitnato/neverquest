@@ -19,18 +19,20 @@ export function AmmunitionPouchCapacity() {
   });
 
   return (
-    <Stack className="w-100" direction="horizontal">
+    <Stack direction="horizontal">
       <IconDisplay contents="" Icon={IconAmmunitionPouch} tooltip="Ammunition pouch capacity" />
 
-      <FloatingText deltaType="ammunitionMaximum" />
+      <LabelledProgressBar
+        label={
+          <Stack direction="horizontal">
+            {`${ammunitionValue}/${ammunitionMaximumValue}`}
 
-      <div className="w-100">
-        <LabelledProgressBar
-          label={`${ammunitionValue}/${ammunitionMaximumValue}`}
-          value={(ammunitionValue / ammunitionMaximumValue) * 100}
-          variant="dark"
-        />
-      </div>
+            <FloatingText delta="ammunitionMaximum" />
+          </Stack>
+        }
+        value={(ammunitionValue / ammunitionMaximumValue) * 100}
+        variant="dark"
+      />
     </Stack>
   );
 }

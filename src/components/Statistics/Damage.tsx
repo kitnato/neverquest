@@ -50,8 +50,11 @@ export function Damage() {
                       <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
 
                       <td>
-                        <IconImage Icon={IconWeaponDamage} size="tiny" />
-                        &nbsp;{weaponDamage}
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconWeaponDamage} size="small" />
+
+                          {weaponDamage}
+                        </Stack>
                       </td>
                     </tr>
 
@@ -59,8 +62,10 @@ export function Damage() {
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <IconImage Icon={IconStrength} size="tiny" />
-                        &nbsp;Strength:
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconStrength} size="small" />
+                          Strength:
+                        </Stack>
                       </td>
 
                       <td>{`+${strengthValue}`}</td>
@@ -70,8 +75,10 @@ export function Damage() {
                       <>
                         <tr>
                           <td className={CLASS_TABLE_CELL_ITALIC}>
-                            <IconImage Icon={IconPower} size="tiny" />
-                            &nbsp;Empowered:
+                            <Stack direction="horizontal" gap={1}>
+                              <IconImage Icon={IconPower} size="small" />
+                              Empowered:
+                            </Stack>
                           </td>
 
                           <td>{`+${formatValue({
@@ -97,7 +104,7 @@ export function Damage() {
             <span>{damageTotalValue}</span>
           </OverlayTrigger>
 
-          <FloatingText deltaType="damage" />
+          <FloatingText delta="damage" />
         </Stack>
       }
       description={<DamagePerSecond />}

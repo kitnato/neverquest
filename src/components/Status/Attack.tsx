@@ -84,15 +84,20 @@ export function Attack() {
                       }:`}</td>
 
                       <td>
-                        <IconImage Icon={IconWeaponAttackRate} size="tiny" />
-                        &nbsp;{formatValue({ format: "time", value: weaponValue.rate })}
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconWeaponAttackRate} size="small" />
+
+                          {formatValue({ format: "time", value: weaponValue.rate })}
+                        </Stack>
                       </td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <IconImage Icon={IconWeaponSpeed} size="tiny" />
-                        &nbsp;Speed:
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconWeaponSpeed} size="small" />
+                          Speed:
+                        </Stack>
                       </td>
 
                       <td>{`-${formatValue({
@@ -106,8 +111,10 @@ export function Attack() {
                       <>
                         <tr>
                           <td className={CLASS_TABLE_CELL_ITALIC}>
-                            <IconImage Icon={IconPower} size="tiny" />
-                            &nbsp;Empowered:
+                            <Stack direction="horizontal" gap={1}>
+                              <IconImage Icon={IconPower} size="small" />
+                              Empowered:
+                            </Stack>
                           </td>
 
                           <td>{`+${formatValue({
@@ -137,7 +144,7 @@ export function Attack() {
             </div>
           </OverlayTrigger>
 
-          <FloatingText deltaType="attackRate" />
+          <FloatingText delta="attackRate" />
         </Stack>
       }
       Icon={IconAttackRate}

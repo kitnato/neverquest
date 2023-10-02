@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover } from "react-bootstrap";
+import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -46,10 +46,13 @@ export function MonsterBlightRating() {
                     <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
 
                     <td>
-                      {`-${formatValue({ value: blightAmountValue })}`}
-                      &nbsp;
-                      <IconImage Icon={IconStamina} size="tiny" />
-                      &nbsp;{LABEL_MAXIMUM}
+                      <Stack direction="horizontal" gap={1}>
+                        {`-${formatValue({ value: blightAmountValue })}`}
+
+                        <IconImage Icon={IconStamina} size="small" />
+
+                        {LABEL_MAXIMUM}
+                      </Stack>
                     </td>
                   </tr>
                 </DetailsTable>

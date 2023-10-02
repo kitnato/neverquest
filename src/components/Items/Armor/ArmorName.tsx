@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover } from "react-bootstrap";
+import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
@@ -45,9 +45,7 @@ export function ArmorName({
             <DetailsTable>
               <GearLevelDetail
                 comparison={
-                  showComparison
-                    ? { showingType: "armor", subtrahend: armorEquippedValue.level }
-                    : null
+                  showComparison ? { showing: "armor", subtrahend: armorEquippedValue.level } : null
                 }
                 level={level}
               />
@@ -56,14 +54,18 @@ export function ArmorName({
                 <td className={CLASS_TABLE_CELL_ITALIC}>Protection:</td>
 
                 <td>
-                  <IconImage Icon={IconProtection} size="tiny" />
-                  &nbsp;{formatValue({ value: protection })}
-                  {showComparison && (
-                    <GearComparison
-                      difference={protection - armorEquippedValue.protection}
-                      showingType="armor"
-                    />
-                  )}
+                  <Stack direction="horizontal" gap={1}>
+                    <IconImage Icon={IconProtection} size="small" />
+
+                    {formatValue({ value: protection })}
+
+                    {showComparison && (
+                      <GearComparison
+                        difference={protection - armorEquippedValue.protection}
+                        showing="armor"
+                      />
+                    )}
+                  </Stack>
                 </td>
               </tr>
 
@@ -83,19 +85,20 @@ export function ArmorName({
                             const { Icon } = ARMOR_SPECIFICATIONS[gearClass];
 
                             return (
-                              <>
-                                <IconImage Icon={Icon} size="tiny" />
-                                &nbsp;{capitalizeAll(gearClass)}
-                              </>
+                              <Stack direction="horizontal" gap={1}>
+                                <IconImage Icon={Icon} size="small" />
+
+                                {capitalizeAll(gearClass)}
+                              </Stack>
                             );
                           }
                         }
 
                         return (
-                          <>
-                            <IconImage Icon={IconNone} size="tiny" />
-                            &nbsp;None
-                          </>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconNone} size="small" />
+                            None
+                          </Stack>
                         );
                       })()}
                     </td>
@@ -112,14 +115,18 @@ export function ArmorName({
                       <td className={CLASS_TABLE_CELL_ITALIC}>Deflection chance:</td>
 
                       <td>
-                        <IconImage Icon={IconDeflection} size="tiny" />
-                        &nbsp;{formatValue({ format: "percentage", value: deflection })}
-                        {showComparison && (
-                          <GearComparison
-                            difference={deflection - armorEquippedValue.deflection}
-                            showingType="armor"
-                          />
-                        )}
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconDeflection} size="small" />
+
+                          {formatValue({ format: "percentage", value: deflection })}
+
+                          {showComparison && (
+                            <GearComparison
+                              difference={deflection - armorEquippedValue.deflection}
+                              showing="armor"
+                            />
+                          )}
+                        </Stack>
                       </td>
                     </>
                   ) : (
@@ -135,15 +142,17 @@ export function ArmorName({
                       <td className={CLASS_TABLE_CELL_ITALIC}>Dodge penalty:</td>
 
                       <td>
-                        <DodgePenaltyContents staminaCost={staminaCost} />
+                        <Stack direction="horizontal" gap={1}>
+                          <DodgePenaltyContents staminaCost={staminaCost} />
 
-                        {showComparison && (
-                          <GearComparison
-                            difference={staminaCost - armorEquippedValue.staminaCost}
-                            isDownPositive
-                            showingType="armor"
-                          />
-                        )}
+                          {showComparison && (
+                            <GearComparison
+                              difference={staminaCost - armorEquippedValue.staminaCost}
+                              isDownPositive
+                              showing="armor"
+                            />
+                          )}
+                        </Stack>
                       </td>
                     </>
                   ) : (
@@ -155,7 +164,7 @@ export function ArmorName({
               <WeightDetail
                 comparison={
                   showComparison
-                    ? { showingType: "armor", subtrahend: armorEquippedValue.weight }
+                    ? { showing: "armor", subtrahend: armorEquippedValue.weight }
                     : null
                 }
                 weight={weight}

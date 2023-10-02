@@ -48,6 +48,7 @@ export function ExpandKnapsack() {
           overlay={
             <Tooltip>
               {!hasKnapsackValue && <div>Knapsack required.</div>}
+
               {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
             </Tooltip>
           }

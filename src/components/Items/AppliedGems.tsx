@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
@@ -6,7 +7,7 @@ import { ReactComponent as IconGem } from "@neverquest/icons/gem.svg";
 import { elementalEffects } from "@neverquest/state/statistics";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
 import { isArmor, isShield } from "@neverquest/types/type-guards";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
@@ -35,23 +36,29 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
               ][elemental];
 
             return (
-              <div key={id}>
+              <Stack direction="horizontal" gap={1} key={id}>
                 <span className={ELEMENTALS[elemental].color}>{`${
                   typeof effect === "number"
                     ? `+${formatValue({ decimals: 0, format: "percentage", value: effect })}`
                     : formatValue({ value: effect.damage })
                 }`}</span>
-                {" · "}
-                <IconImage Icon={ELEMENTALS[elemental].Icon} size="tiny" />
-                {` ${
+
+                {LABEL_SEPARATOR}
+
+                <IconImage Icon={ELEMENTALS[elemental].Icon} size="small" />
+
+                {`${
                   typeof effect === "number"
                     ? `+${formatValue({ decimals: 0, format: "percentage", value: effect })}`
                     : formatValue({ format: "time", value: effect.duration })
-                } · `}
-                <IconImage Icon={IconGem} size="tiny" />
-                &nbsp;
+                }`}
+
+                {LABEL_SEPARATOR}
+
+                <IconImage Icon={IconGem} size="small" />
+
                 {stack}
-              </div>
+              </Stack>
             );
           },
         )}

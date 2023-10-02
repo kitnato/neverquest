@@ -13,8 +13,8 @@ export function AmmunitionPouch({ item }: { item: TrinketItemAmmunitionPouch }) 
         <IconDisplay
           contents={`${formatValue({ value: current })}/${formatValue({ value: maximum })}`}
           Icon={IconAmmunition}
-          iconProps={{ overlayPlacement: "bottom", size: "tiny" }}
-          tooltip="Ammunition"
+          iconProps={{ overlayPlacement: "bottom", size: "small" }}
+          tooltip="Ammunition pouch"
         />
       }
       item={item}

@@ -61,18 +61,22 @@ export function CriticalRating() {
                   <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <IconImage Icon={IconDexterity} size="tiny" />
-                        &nbsp;Dexterity:
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconDexterity} size="small" />
+                          Dexterity:
+                        </Stack>
                       </td>
 
                       <td>
-                        <IconImage Icon={IconCriticalChance} size="tiny" />
-                        &nbsp;
-                        {`${formatValue({
-                          decimals: 0,
-                          format: "percentage",
-                          value: dexterityValue,
-                        })} chance`}
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconCriticalChance} size="small" />
+
+                          {`${formatValue({
+                            decimals: 0,
+                            format: "percentage",
+                            value: dexterityValue,
+                          })} chance`}
+                        </Stack>
                       </td>
                     </tr>
 
@@ -80,8 +84,10 @@ export function CriticalRating() {
                       <>
                         <tr>
                           <td className={CLASS_TABLE_CELL_ITALIC}>
-                            <IconImage Icon={IconPower} size="tiny" />
-                            &nbsp;Empowered:
+                            <Stack direction="horizontal" gap={1}>
+                              <IconImage Icon={IconPower} size="small" />
+                              Empowered:
+                            </Stack>
                           </td>
 
                           <td>{`+${formatValue({
@@ -94,9 +100,11 @@ export function CriticalRating() {
                           <td className={CLASS_TABLE_CELL_ITALIC}>Total chance:</td>
 
                           <td>
-                            <IconImage Icon={IconCriticalChance} size="tiny" />
-                            &nbsp;
-                            {formatValue({ format: "percentage", value: criticalChanceValue })}
+                            <Stack direction="horizontal" gap={1}>
+                              <IconImage Icon={IconCriticalChance} size="small" />
+
+                              {formatValue({ format: "percentage", value: criticalChanceValue })}
+                            </Stack>
                           </td>
                         </tr>
                       </>
@@ -104,20 +112,24 @@ export function CriticalRating() {
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <IconImage Icon={IconPerception} size="tiny" />
-                        &nbsp;Perception:
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconPerception} size="small" />
+                          Perception:
+                        </Stack>
                       </td>
 
                       <td>
-                        <IconImage Icon={IconCriticalDamage} size="tiny" />
-                        &nbsp;
-                        {`${formatValue({
-                          decimals: 0,
-                          format: "percentage",
-                          value: perceptionValue,
-                        })} damage`}
-                        &nbsp;
-                        {`(${criticalStrikeValue})`}
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconCriticalDamage} size="small" />
+
+                          {`${formatValue({
+                            decimals: 0,
+                            format: "percentage",
+                            value: perceptionValue,
+                          })} damage`}
+
+                          {`(${criticalStrikeValue})`}
+                        </Stack>
                       </td>
                     </tr>
 
@@ -125,8 +137,10 @@ export function CriticalRating() {
                       <>
                         <tr>
                           <td className={CLASS_TABLE_CELL_ITALIC}>
-                            <IconImage Icon={IconPower} size="tiny" />
-                            &nbsp;Empowered:
+                            <Stack direction="horizontal" gap={1}>
+                              <IconImage Icon={IconPower} size="small" />
+                              Empowered:
+                            </Stack>
                           </td>
 
                           <td>{`+${formatValue({
@@ -139,9 +153,11 @@ export function CriticalRating() {
                           <td className={CLASS_TABLE_CELL_ITALIC}>Total damage:</td>
 
                           <td>
-                            <IconImage Icon={IconCriticalDamage} size="tiny" />
-                            &nbsp;
-                            {formatValue({ format: "percentage", value: criticalDamageValue })}
+                            <Stack direction="horizontal" gap={1}>
+                              <IconImage Icon={IconCriticalDamage} size="small" />
+
+                              {formatValue({ format: "percentage", value: criticalDamageValue })}
+                            </Stack>
                           </td>
                         </tr>
                       </>
@@ -155,7 +171,7 @@ export function CriticalRating() {
             <span>{assassinationValue ? criticalRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
-          <FloatingText deltaType="criticalRating" />
+          <FloatingText delta="criticalRating" />
         </Stack>
       }
       Icon={IconCriticalRating}

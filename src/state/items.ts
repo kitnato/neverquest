@@ -118,7 +118,7 @@ export const ownedItem = withStateKey("ownedItem", (key) =>
   }),
 );
 
-export const monkeyPawInfusionStep = withStateKey("monkeyPawLevel", (key) =>
+export const monkeyPawInfusionStep = withStateKey("monkeyPawInfusionStep", (key) =>
   selector({
     get: ({ get }) => Math.ceil((get(monkeyPawMaximum) / INFUSION_DURATION) * INFUSION_DELTA),
     key,

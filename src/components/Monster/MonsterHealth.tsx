@@ -12,7 +12,7 @@ export function MonsterHealth() {
         <Stack className="w-100" direction="horizontal">
           <MonsterHealthMeter />
 
-          <FloatingText deltaType="monsterHealth" />
+          <FloatingText delta="monsterHealth" />
         </Stack>
       }
       Icon={IconHealth}

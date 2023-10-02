@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
@@ -40,17 +41,18 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
 
   return (
     <>
-      <div>
-        <IconImage Icon={Icon} size="tiny" />
-        &nbsp;{operand}
-        {formattedIncrement}
-      </div>
+      <Stack className="justify-content-center" direction="horizontal" gap={1}>
+        <IconImage Icon={Icon} size="small" />
+
+        <span>{`${operand}${formattedIncrement}`}</span>
+      </Stack>
 
       {hasTomeOfPower && (
-        <div>
-          <IconImage Icon={IconPower} size="tiny" />
-          &nbsp;{`+${formatValue({ format: "percentage", value: powerBonus })}`}
-        </div>
+        <Stack className="justify-content-center" direction="horizontal" gap={1}>
+          <IconImage Icon={IconPower} size="small" />
+
+          {`+${formatValue({ format: "percentage", value: powerBonus })}`}
+        </Stack>
       )}
     </>
   );

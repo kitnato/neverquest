@@ -1,16 +1,13 @@
 import { useRecoilCallback } from "recoil";
 
-import { ATTRIBUTES } from "@neverquest/data/attributes";
-import { attributes } from "@neverquest/state/attributes";
-import type { Attribute } from "@neverquest/types/unions";
+import { attributeRank } from "@neverquest/state/attributes";
+import { ATTRIBUTE_TYPES } from "@neverquest/types/unions";
 
 export function useResetAttributes() {
   return useRecoilCallback(
-    ({ set }) =>
+    ({ reset }) =>
       () =>
-        Object.keys(ATTRIBUTES).forEach((type) =>
-          set(attributes(type as Attribute), (current) => ({ ...current, points: 0 })),
-        ),
+        ATTRIBUTE_TYPES.forEach((current) => reset(attributeRank(current))),
     [],
   );
 }

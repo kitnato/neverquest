@@ -1,14 +1,18 @@
 import { useRecoilCallback } from "recoil";
 
-import { MASTERY_PROGRESS } from "@neverquest/data/masteries";
-import { deltas } from "@neverquest/state/deltas";
-import { isMasteryAtMaximum, masteries, masteryCost } from "@neverquest/state/masteries";
+import {
+  isMasteryAtMaximum,
+  isMasteryUnlocked,
+  masteryCost,
+  masteryProgress,
+  masteryRank,
+} from "@neverquest/state/masteries";
 import type { Mastery } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useIncreaseMastery() {
   return useRecoilCallback(
-    ({ set, snapshot }) =>
+    ({ reset, set, snapshot }) =>
       (mastery: Mastery) => {
         const get = getSnapshotGetter(snapshot);
 
@@ -16,37 +20,21 @@ export function useIncreaseMastery() {
           return;
         }
 
-        const { isUnlocked, progress } = get(masteries(mastery));
+        const isMasteryUnlockedValue = get(isMasteryUnlocked(mastery));
+        const masteryProgressValue = get(masteryProgress(mastery));
 
-        if (!isUnlocked) {
+        if (!isMasteryUnlockedValue) {
           return;
         }
 
         const masteryCostValue = get(masteryCost(mastery));
-        const { increment } = MASTERY_PROGRESS;
-        const newProgress = progress + increment;
+        const newProgress = masteryProgressValue + 1;
+
+        set(masteryProgress(mastery), newProgress);
 
         if (newProgress === masteryCostValue) {
-          set(masteries(mastery), ({ rank, ...current }) => ({
-            ...current,
-            progress: 0,
-            rank: rank + MASTERY_PROGRESS.rank,
-          }));
-
-          set(deltas(mastery), {
-            color: "text-success",
-            value: "RANK UP",
-          });
-        } else {
-          set(masteries(mastery), (current) => ({
-            ...current,
-            progress: newProgress,
-          }));
-
-          set(deltas(mastery), {
-            color: "text-success",
-            value: `+${increment}`,
-          });
+          set(masteryRank(mastery), (current) => current + 1);
+          reset(masteryProgress(mastery));
         }
       },
     [],

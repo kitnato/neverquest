@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { MonkeyPawInfusion } from "@neverquest/components/Items/Trinkets/MonkeyPaw/MonkeyPawInfusion";
-import { MonkeyPawInfusionMeter } from "@neverquest/components/Items/Trinkets/MonkeyPaw/MonkeyPawInfusionMeter";
+import { MonkeyPawInfusionProgress } from "@neverquest/components/Items/Trinkets/MonkeyPaw/MonkeyPawInfusionProgress";
 import { MonkeyPawLevel } from "@neverquest/components/Items/Trinkets/MonkeyPaw/MonkeyPawLevel";
 import { EssenceBonus } from "@neverquest/components/Statistics/EssenceBonus";
 import { TRINKETS } from "@neverquest/data/inventory";
@@ -52,7 +52,7 @@ export function MonkeyPawControl() {
             <Stack className="w-100" direction="horizontal" gap={3}>
               <MonkeyPawLevel />
 
-              <MonkeyPawInfusionMeter />
+              <MonkeyPawInfusionProgress />
 
               <MonkeyPawInfusion />
             </Stack>

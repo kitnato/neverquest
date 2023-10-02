@@ -11,12 +11,12 @@ export type Armor = GearItemBase & {
   staminaCost: number;
 };
 
-export type AttributeData = AttributeOrMasteryBaseData &
-  UnlockedState & {
-    maximum?: number;
-    powerBonus: number;
-    shows?: Showing;
-  };
+export type AttributeData = AttributeOrMasteryBaseData & {
+  isUnlocked: boolean;
+  maximum?: number;
+  powerBonus: number;
+  shows?: Showing;
+};
 
 export type AttributeOrMasteryBaseData = {
   base: number;
@@ -118,10 +118,6 @@ export type TrinketItemDefault = ItemBase & {
 export type TrinketItemMonkeyPaw = TrinketItemDefault & {
   level: number;
   name: "monkey paw";
-};
-
-export type UnlockedState = {
-  isUnlocked: boolean;
 };
 
 type WeaponBase = GearItemBase & {

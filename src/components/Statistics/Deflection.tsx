@@ -30,7 +30,7 @@ export function Deflection() {
         <Stack direction="horizontal">
           <span>{formatValue({ format: "percentage", value: deflectionValue })}</span>
 
-          <FloatingText deltaType="deflection" />
+          <FloatingText delta="deflection" />
         </Stack>
       }
       Icon={IconDeflection}

@@ -48,23 +48,39 @@ export function Health() {
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
 
-                        <td>{baseAmount}</td>
+                        <td>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconHealth} size="small" />
+
+                            {baseAmount}
+                          </Stack>
+                        </td>
                       </tr>
 
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
-                          <IconImage Icon={IconVitality} size="tiny" />
-                          &nbsp;Vitality:
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconVitality} size="small" />
+                            Vitality:
+                          </Stack>
                         </td>
 
-                        <td>{`+${formatValue({ value: vitalityValue - baseAmount })}`}</td>
+                        <td>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconHealth} size="small" />
+
+                            {`+${formatValue({ value: vitalityValue - baseAmount })}`}
+                          </Stack>
+                        </td>
                       </tr>
 
                       {powerBonusValue > 0 && (
                         <tr>
                           <td className={CLASS_TABLE_CELL_ITALIC}>
-                            <IconImage Icon={IconPower} size="tiny" />
-                            &nbsp;Empowered:
+                            <Stack direction="horizontal" gap={1}>
+                              <IconImage Icon={IconPower} size="small" />
+                              Empowered:
+                            </Stack>
                           </td>
 
                           <td>{`+${formatValue({
@@ -86,7 +102,7 @@ export function Health() {
               </div>
             </OverlayTrigger>
 
-            <FloatingText deltaType="health" />
+            <FloatingText delta="health" />
           </Stack>
 
           <Regeneration reserve="health" />

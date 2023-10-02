@@ -6,7 +6,7 @@ import { useToggleAttack } from "@neverquest/hooks/actions/useToggleAttack";
 import { ReactComponent as IconAttack } from "@neverquest/icons/attack.svg";
 import { ReactComponent as IconResting } from "@neverquest/icons/resting.svg";
 import { ReactComponent as IconRetreat } from "@neverquest/icons/retreat.svg";
-import { areAttributesIncreasable } from "@neverquest/state/attributes";
+import { areAttributesAffordable } from "@neverquest/state/attributes";
 import { hasEnoughAmmunition, isAttacking, isGameOver } from "@neverquest/state/character";
 import { isStageCompleted, isWilderness } from "@neverquest/state/encounter";
 import { isHealthLow } from "@neverquest/state/reserves";
@@ -15,7 +15,7 @@ import type { SVGIcon } from "@neverquest/types/props";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function AttackButton() {
-  const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
+  const areAttributesIncreasableValue = useRecoilValue(areAttributesAffordable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isHealthLowValue = useRecoilValue(isHealthLow);
   const isGameOverValue = useRecoilValue(isGameOver);
@@ -52,39 +52,35 @@ export function AttackButton() {
         animation:
           areAttributesIncreasableValue || !hasEnoughAmmunitionValue ? undefined : pulseAnimation,
         Icon: IconAttack,
-        tooltip: hasEnoughAmmunitionValue ? "Attack" : "Insufficient ammunition!",
+        tooltip: hasEnoughAmmunitionValue ? "Attack" : "Insufficient ammunition.",
       };
     })();
 
   return (
-    <>
-      <OverlayTrigger
-        overlay={
-          showWarning ? (
-            <Popover>
-              <Popover.Header className="text-center">
-                <strong>Low health</strong>
-              </Popover.Header>
+    <OverlayTrigger
+      overlay={
+        showWarning ? (
+          <Popover>
+            <Popover.Header className="text-center">Low health</Popover.Header>
 
-              <Popover.Body>Retreat now!</Popover.Body>
-            </Popover>
-          ) : (
-            <Tooltip>{tooltip}</Tooltip>
-          )
-        }
-        show={showWarning || undefined}
-      >
-        <span className={getAnimationClass({ name: "bounceIn" })}>
-          <Button
-            className={animation}
-            disabled={isResting || !hasEnoughAmmunitionValue}
-            onClick={toggleAttack}
-            variant="outline-dark"
-          >
-            <IconImage Icon={Icon} />
-          </Button>
-        </span>
-      </OverlayTrigger>
-    </>
+            <Popover.Body>Retreat now!</Popover.Body>
+          </Popover>
+        ) : (
+          <Tooltip>{tooltip}</Tooltip>
+        )
+      }
+      show={showWarning || undefined}
+    >
+      <span className={getAnimationClass({ name: "bounceIn" })}>
+        <Button
+          className={animation}
+          disabled={isResting || !hasEnoughAmmunitionValue}
+          onClick={toggleAttack}
+          variant="outline-dark"
+        >
+          <IconImage Icon={Icon} />
+        </Button>
+      </span>
+    </OverlayTrigger>
   );
 }

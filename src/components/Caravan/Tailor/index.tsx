@@ -1,10 +1,10 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { AmmunitionPouchCapacity } from "@neverquest/components/Caravan/Tailor/AmmunitionPouchCapacity";
 import { ExpandAmmunitionPouch } from "@neverquest/components/Caravan/Tailor/ExpandAmmunitionPouch";
 import { ExpandKnapsack } from "@neverquest/components/Caravan/Tailor/ExpandKnapsack";
 import { Encumbrance } from "@neverquest/components/Items/Encumbrance";
+import { AmmunitionPouchCapacity } from "@neverquest/components/Items/Trinkets/AmmunitionPouchCapacity";
 import { ownedItem } from "@neverquest/state/items";
 
 export function Tailor() {

@@ -30,11 +30,11 @@ export function DamagePerSecond() {
         <Stack direction="horizontal">
           <span>{formatValue({ format: "float", value: damagePerSecondValue })}</span>
 
-          <FloatingText deltaType="damagePerSecond" />
+          <FloatingText delta="damagePerSecond" />
         </Stack>
       }
       Icon={IconDamagePerSecond}
-      iconProps={{ ignoreColor: true, overlayPlacement: "bottom", size: "tiny" }}
+      iconProps={{ overlayPlacement: "bottom", size: "small" }}
       tooltip="Total damage per second"
     />
   );

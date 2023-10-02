@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
@@ -6,7 +7,7 @@ import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { monkeyPawInfusion, monkeyPawMaximum } from "@neverquest/state/items";
 import { formatValue } from "@neverquest/utilities/formatters";
 
-export function MonkeyPawInfusionMeter() {
+export function MonkeyPawInfusionProgress() {
   const monkeyPawInfusionValue = useRecoilValue(monkeyPawInfusion);
   const monkeyPawMaximumValue = useRecoilValue(monkeyPawMaximum);
 
@@ -14,13 +15,13 @@ export function MonkeyPawInfusionMeter() {
     <LabelledProgressBar
       disableTransitions
       label={
-        <>
-          <IconImage Icon={IconEssence} isStencilled size="tiny" />
-          &nbsp;
+        <Stack direction="horizontal" gap={1}>
+          <IconImage Icon={IconEssence} isStencilled size="small" />
+
           {`${formatValue({ value: monkeyPawInfusionValue })}/${formatValue({
             value: monkeyPawMaximumValue,
           })}`}
-        </>
+        </Stack>
       }
       value={(monkeyPawInfusionValue / monkeyPawMaximumValue) * 100}
       variant="secondary"

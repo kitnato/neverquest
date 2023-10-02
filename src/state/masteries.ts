@@ -2,7 +2,6 @@ import { atomFamily, selector, selectorFamily } from "recoil";
 
 import { MASTERIES, MASTERY_COST } from "@neverquest/data/masteries";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import type { UnlockedState } from "@neverquest/types";
 import type { Mastery } from "@neverquest/types/unions";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 
@@ -14,9 +13,9 @@ export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
       (parameter) =>
       ({ get }) => {
         const { base, increment, maximum } = MASTERIES[parameter];
-        const { rank } = get(masteries(parameter));
+        const masteryRankValue = get(masteryRank(parameter));
 
-        return maximum === getComputedStatistic({ amount: rank, base, increment });
+        return maximum === getComputedStatistic({ amount: masteryRankValue, base, increment });
       },
     key,
   }),
@@ -25,13 +24,13 @@ export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
 export const masteriesAcquired = withStateKey("masteriesAcquired", (key) =>
   selector<Record<Mastery, boolean>>({
     get: ({ get }) => ({
-      butchery: get(masteries("butchery")).isUnlocked,
-      cruelty: get(masteries("cruelty")).isUnlocked,
-      finesse: get(masteries("finesse")).isUnlocked,
-      marksmanship: get(masteries("marksmanship")).isUnlocked,
-      might: get(masteries("might")).isUnlocked,
-      resilience: get(masteries("resilience")).isUnlocked,
-      stability: get(masteries("stability")).isUnlocked,
+      butchery: get(isMasteryUnlocked("butchery")),
+      cruelty: get(isMasteryUnlocked("cruelty")),
+      finesse: get(isMasteryUnlocked("finesse")),
+      marksmanship: get(isMasteryUnlocked("marksmanship")),
+      might: get(isMasteryUnlocked("might")),
+      resilience: get(isMasteryUnlocked("resilience")),
+      stability: get(isMasteryUnlocked("stability")),
     }),
     key,
   }),
@@ -42,7 +41,7 @@ export const masteryCost = withStateKey("masteryCost", (key) =>
     get:
       (parameter) =>
       ({ get }) =>
-        getGrowthTriangular(get(masteries(parameter)).rank + MASTERY_COST),
+        getGrowthTriangular(get(masteryRank(parameter)) + MASTERY_COST),
     key,
   }),
 );
@@ -53,9 +52,9 @@ export const masteryStatistic = withStateKey("masteryStatistic", (key) =>
       (parameter) =>
       ({ get }) => {
         const { base, increment } = MASTERIES[parameter];
-        const { rank } = get(masteries(parameter));
+        const masteryRankValue = get(masteryRank(parameter));
 
-        return getComputedStatistic({ amount: rank, base, increment });
+        return getComputedStatistic({ amount: masteryRankValue, base, increment });
       },
     key,
   }),
@@ -63,19 +62,25 @@ export const masteryStatistic = withStateKey("masteryStatistic", (key) =>
 
 // ATOMS
 
-export const masteries = withStateKey("masteries", (key) =>
-  atomFamily<
-    UnlockedState & {
-      progress: number;
-      rank: number;
-    },
-    Mastery
-  >({
-    default: {
-      isUnlocked: false,
-      progress: 0,
-      rank: 0,
-    },
+export const isMasteryUnlocked = withStateKey("isMasteryUnlocked", (key) =>
+  atomFamily<boolean, Mastery>({
+    default: false,
+    effects: (parameter) => [handleLocalStorage({ key, parameter })],
+    key,
+  }),
+);
+
+export const masteryProgress = withStateKey("masteryProgress", (key) =>
+  atomFamily<number, Mastery>({
+    default: 0,
+    effects: (parameter) => [handleLocalStorage({ key, parameter })],
+    key,
+  }),
+);
+
+export const masteryRank = withStateKey("masteryRank", (key) =>
+  atomFamily<number, Mastery>({
+    default: 0,
     effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),

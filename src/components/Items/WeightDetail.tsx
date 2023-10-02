@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
@@ -30,18 +31,23 @@ export function WeightDetail({
           <td className={CLASS_TABLE_CELL_ITALIC}>Weight:</td>
 
           <td>
-            <IconImage Icon={IconEncumbrance} size="tiny" />
-            &nbsp;{formatValue({ value: weight }) || LABEL_EMPTY}
-            {comparison !== null && (
-              <GearComparison
-                difference={weight - comparison.subtrahend}
-                isDownPositive
-                showingType={comparison.showingType}
-              />
-            )}
-            {stack !== undefined && stack > 1 && (
-              <>{` (${formatValue({ value: weight * stack })})`}</>
-            )}
+            <Stack direction="horizontal" gap={1}>
+              <IconImage Icon={IconEncumbrance} size="small" />
+
+              {formatValue({ value: weight }) || LABEL_EMPTY}
+
+              {comparison !== null && (
+                <GearComparison
+                  difference={weight - comparison.subtrahend}
+                  isDownPositive
+                  showing={comparison.showing}
+                />
+              )}
+
+              {stack !== undefined && stack > 1 && (
+                <>{`(${formatValue({ value: weight * stack })})`}</>
+              )}
+            </Stack>
           </td>
         </>
       ) : (

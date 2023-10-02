@@ -89,15 +89,20 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                   <td className={CLASS_TABLE_CELL_ITALIC}>Base rate:</td>
 
                   <td>
-                    <IconImage Icon={IconRegenerationRate} size="tiny" />
-                    &nbsp;{formatValue({ format: "time", value: baseRegenerationRate })}
+                    <Stack direction="horizontal" gap={1}>
+                      <IconImage Icon={IconRegenerationRate} size="small" />
+
+                      {formatValue({ format: "time", value: baseRegenerationRate })}
+                    </Stack>
                   </td>
                 </tr>
 
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>
-                    <IconImage Icon={IconVigor} size="tiny" />
-                    &nbsp;Vigor:
+                    <Stack direction="horizontal" gap={1}>
+                      <IconImage Icon={IconVigor} size="small" />
+                      Vigor:
+                    </Stack>
                   </td>
 
                   <td>{`-${formatValue({ format: "percentage", value: vigorValue })}`}</td>
@@ -106,8 +111,10 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                 {powerBonusRateValue > 0 && (
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>
-                      <IconImage Icon={IconPower} size="tiny" />
-                      &nbsp;Empowered:
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconPower} size="small" />
+                        Empowered:
+                      </Stack>
                     </td>
 
                     <td>{`+${formatValue({
@@ -121,15 +128,20 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                   <td className={CLASS_TABLE_CELL_ITALIC}>Base amount:</td>
 
                   <td>
-                    <IconImage Icon={IconRegenerationAmount} size="tiny" />
-                    &nbsp;{baseRegenerationAmount}
+                    <Stack direction="horizontal" gap={1}>
+                      <IconImage Icon={IconRegenerationAmount} size="small" />
+
+                      {baseRegenerationAmount}
+                    </Stack>
                   </td>
                 </tr>
 
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>
-                    <IconImage Icon={IconFortitude} size="tiny" />
-                    &nbsp;Fortitude:
+                    <Stack direction="horizontal" gap={1}>
+                      <IconImage Icon={IconFortitude} size="small" />
+                      Fortitude:
+                    </Stack>
                   </td>
 
                   <td>{`+${fortitudeValue}`}</td>
@@ -138,8 +150,10 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                 {powerBonusAmountValue > 0 && (
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>
-                      <IconImage Icon={IconPower} size="tiny" />
-                      &nbsp;Empowered:
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconPower} size="small" />
+                        Empowered:
+                      </Stack>
                     </td>
 
                     <td>{`+${formatValue({
@@ -161,7 +175,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
         </div>
       </OverlayTrigger>
 
-      <FloatingText deltaType={isHealth ? "healthRegenerationRate" : "staminaRegenerationRate"} />
+      <FloatingText delta={isHealth ? "healthRegenerationRate" : "staminaRegenerationRate"} />
     </Stack>
   );
 }

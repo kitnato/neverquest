@@ -26,7 +26,7 @@ export function EssenceBonus() {
         tooltip="Essence loot bonus"
       />
 
-      <FloatingText deltaType="essenceBonus" />
+      <FloatingText delta="essenceBonus" />
     </Stack>
   );
 }

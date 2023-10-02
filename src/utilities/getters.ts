@@ -1,5 +1,6 @@
 import type { RecoilValue, Snapshot } from "recoil";
 
+import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
 import {
   ARMOR_SPECIFICATIONS,
   SHIELD_SPECIFICATIONS,
@@ -39,6 +40,10 @@ export function getArmorRanges({ factor, gearClass }: { factor: number; gearClas
       : staminaCost,
     weight: getRange({ factor, ranges: weight }),
   };
+}
+
+export function getAttributePointCost(level: number) {
+  return getGrowthTriangular(ATTRIBUTE_COST_BASE + level);
 }
 
 export function getComputedStatistic({

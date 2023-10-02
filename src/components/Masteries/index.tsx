@@ -28,8 +28,8 @@ export function Masteries() {
             {Object.entries(masteriesAcquiredValue)
               .sort(([a], [b]) => a.localeCompare(b))
               .sort(([, a], [, b]) => Number(b) - Number(a))
-              .map(([type]) => (
-                <MasteryDisplay key={type} mastery={type as Mastery} />
+              .map(([current]) => (
+                <MasteryDisplay key={current} mastery={current as Mastery} />
               ))}
           </Stack>
         </Accordion.Body>

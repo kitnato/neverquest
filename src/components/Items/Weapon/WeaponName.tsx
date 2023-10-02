@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover } from "react-bootstrap";
+import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
@@ -58,7 +58,7 @@ export function WeaponName({
               <GearLevelDetail
                 comparison={
                   showComparison
-                    ? { showingType: "weapon", subtrahend: weaponEquippedValue.level }
+                    ? { showing: "weapon", subtrahend: weaponEquippedValue.level }
                     : null
                 }
                 level={level}
@@ -68,14 +68,17 @@ export function WeaponName({
                 <td className={CLASS_TABLE_CELL_ITALIC}>Damage:</td>
 
                 <td>
-                  <IconImage Icon={IconWeaponDamage} size="tiny" />
-                  &nbsp;{damage}
-                  {showComparison && (
-                    <GearComparison
-                      difference={damage - weaponEquippedValue.damage}
-                      showingType="weapon"
-                    />
-                  )}
+                  <Stack direction="horizontal" gap={1}>
+                    <IconImage Icon={IconWeaponDamage} size="small" />
+                    {damage}
+
+                    {showComparison && (
+                      <GearComparison
+                        difference={damage - weaponEquippedValue.damage}
+                        showing="weapon"
+                      />
+                    )}
+                  </Stack>
                 </td>
               </tr>
 
@@ -85,15 +88,19 @@ export function WeaponName({
                 <td className={CLASS_TABLE_CELL_ITALIC}>Attack rate:</td>
 
                 <td>
-                  <IconImage Icon={IconWeaponAttackRate} size="tiny" />
-                  &nbsp;{formatValue({ format: "time", value: rate })}
-                  {showComparison && (
-                    <GearComparison
-                      difference={rate - weaponEquippedValue.rate}
-                      isDownPositive
-                      showingType="weapon"
-                    />
-                  )}
+                  <Stack direction="horizontal" gap={1}>
+                    <IconImage Icon={IconWeaponAttackRate} size="small" />
+
+                    {formatValue({ format: "time", value: rate })}
+
+                    {showComparison && (
+                      <GearComparison
+                        difference={rate - weaponEquippedValue.rate}
+                        isDownPositive
+                        showing="weapon"
+                      />
+                    )}
+                  </Stack>
                 </td>
               </tr>
 
@@ -102,21 +109,24 @@ export function WeaponName({
                   <td className={CLASS_TABLE_CELL_ITALIC}>Damage per second:</td>
 
                   <td>
-                    <IconImage Icon={IconWeaponDamagePerSecond} size="tiny" />
-                    &nbsp;
-                    {formatValue({ format: "float", value: damagePerSecond })}
-                    {showComparison && (
-                      <GearComparison
-                        difference={
-                          damagePerSecond -
-                          getDamagePerRate({
-                            damage: weaponEquippedValue.damage,
-                            rate: weaponEquippedValue.rate,
-                          })
-                        }
-                        showingType="weapon"
-                      />
-                    )}
+                    <Stack direction="horizontal" gap={1}>
+                      <IconImage Icon={IconWeaponDamagePerSecond} size="small" />
+
+                      {formatValue({ format: "float", value: damagePerSecond })}
+
+                      {showComparison && (
+                        <GearComparison
+                          difference={
+                            damagePerSecond -
+                            getDamagePerRate({
+                              damage: weaponEquippedValue.damage,
+                              rate: weaponEquippedValue.rate,
+                            })
+                          }
+                          showing="weapon"
+                        />
+                      )}
+                    </Stack>
                   </td>
                 </tr>
               )}
@@ -126,8 +136,11 @@ export function WeaponName({
                   <td className={CLASS_TABLE_CELL_ITALIC}>Grip:</td>
 
                   <td>
-                    <IconImage Icon={IconGrip} size="tiny" />
-                    &nbsp;{capitalizeAll(weapon.grip)}
+                    <Stack direction="horizontal" gap={1}>
+                      <IconImage Icon={IconGrip} size="small" />
+
+                      {capitalizeAll(weapon.grip)}
+                    </Stack>
                   </td>
                 </tr>
               )}
@@ -137,8 +150,10 @@ export function WeaponName({
                   <td className={CLASS_TABLE_CELL_ITALIC}>Ammunition cost:</td>
 
                   <td>
-                    <IconImage Icon={IconAmmunition} size="tiny" />
-                    &nbsp;{weapon.ammunitionCost}
+                    <Stack direction="horizontal" gap={1}>
+                      <IconImage Icon={IconAmmunition} size="small" />
+                      {weapon.ammunitionCost}
+                    </Stack>
                   </td>
                 </tr>
               )}
@@ -147,7 +162,7 @@ export function WeaponName({
                 comparison={
                   showComparison
                     ? {
-                        showingType: "weapon",
+                        showing: "weapon",
                         subtrahend: weaponEquippedValue.staminaCost,
                       }
                     : null
@@ -161,8 +176,11 @@ export function WeaponName({
                     <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
 
                     <td>
-                      <IconImage Icon={IconGearClass} size="tiny" />
-                      &nbsp;{capitalizeAll(gearClass)}
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconGearClass} size="small" />
+
+                        {capitalizeAll(gearClass)}
+                      </Stack>
                     </td>
                   </>
                 ) : (
@@ -176,14 +194,18 @@ export function WeaponName({
                     <td className={CLASS_TABLE_CELL_ITALIC}>{capitalizeAll(ability)} chance:</td>
 
                     <td>
-                      <IconImage Icon={IconAbility} size="tiny" />
-                      &nbsp;{formatValue({ format: "percentage", value: abilityChance })}
-                      {showComparison && gearClass === weaponEquippedValue.gearClass && (
-                        <GearComparison
-                          difference={abilityChance - weaponEquippedValue.abilityChance}
-                          showingType="weapon"
-                        />
-                      )}
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconAbility} size="small" />
+
+                        {formatValue({ format: "percentage", value: abilityChance })}
+
+                        {showComparison && gearClass === weaponEquippedValue.gearClass && (
+                          <GearComparison
+                            difference={abilityChance - weaponEquippedValue.abilityChance}
+                            showing="weapon"
+                          />
+                        )}
+                      </Stack>
                     </td>
                   </>
                 ) : (
@@ -194,7 +216,7 @@ export function WeaponName({
               <WeightDetail
                 comparison={
                   showComparison
-                    ? { showingType: "weapon", subtrahend: weaponEquippedValue.weight }
+                    ? { showing: "weapon", subtrahend: weaponEquippedValue.weight }
                     : null
                 }
                 weight={weight}

@@ -45,7 +45,7 @@ export function Essence() {
           tooltip="Essence"
         />
 
-        <FloatingText deltaType="essence" />
+        <FloatingText delta="essence" />
       </Stack>
     </Card>
   );

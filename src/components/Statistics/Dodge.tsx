@@ -57,8 +57,10 @@ export function Dodge() {
                   <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <IconImage Icon={IconAgility} size="tiny" />
-                        &nbsp;Agility:
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconAgility} size="small" />
+                          Agility:
+                        </Stack>
                       </td>
 
                       <td>{`${formatValue({
@@ -71,8 +73,10 @@ export function Dodge() {
                     {powerBonusValue > 0 && (
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
-                          <IconImage Icon={IconPower} size="tiny" />
-                          &nbsp;Empowered:
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconPower} size="small" />
+                            Empowered:
+                          </Stack>
                         </td>
 
                         <td>{`+${formatValue({
@@ -87,9 +91,11 @@ export function Dodge() {
                         <td className={CLASS_TABLE_CELL_ITALIC}>Armor penalty:</td>
 
                         <td>
-                          <IconImage Icon={IconDodgePenalty} size="tiny" />
-                          &nbsp;
-                          <DodgePenaltyContents staminaCost={staminaCost} />
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconDodgePenalty} size="small" />
+
+                            <DodgePenaltyContents staminaCost={staminaCost} />
+                          </Stack>
                         </td>
                       </tr>
                     ) : (
@@ -110,7 +116,7 @@ export function Dodge() {
             </span>
           </OverlayTrigger>
 
-          <FloatingText deltaType="dodge" />
+          <FloatingText delta="dodge" />
         </Stack>
       }
       Icon={IconDodge}

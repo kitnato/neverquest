@@ -27,7 +27,7 @@ export function IconDisplay({
     <Stack
       className={isAnimated ? getAnimationClass({ name: "flipInX" }) : undefined}
       direction="horizontal"
-      gap={isSpaced ? 5 : iconProps?.size === "tiny" ? 1 : 3}
+      gap={isSpaced ? 5 : iconProps?.size === "small" ? 1 : 3}
     >
       <IconImage Icon={Icon} tooltip={tooltip} {...iconProps} />
 
@@ -35,13 +35,11 @@ export function IconDisplay({
       description !== null &&
       description !== false &&
       description !== "" ? (
-        <div className="w-100">
-          <div>{contents}</div>
+        <Stack gap={1}>
+          {contents}
 
           <small className="text-muted">{description}</small>
-        </div>
-      ) : typeof contents === "string" || Number.isInteger(contents) ? (
-        <span>{contents}</span>
+        </Stack>
       ) : (
         contents
       )}

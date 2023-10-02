@@ -1,11 +1,14 @@
 import { useEffect } from "react";
-import { ProgressBar } from "react-bootstrap";
+import { ProgressBar, Stack } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 
+import { FloatingText } from "../FloatingText";
 import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
+import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconBlight } from "@neverquest/icons/blight.svg";
 import { ReactComponent as IconPoison } from "@neverquest/icons/poison.svg";
+import { deltas } from "@neverquest/state/deltas";
 import {
   blightMagnitude,
   health,
@@ -25,22 +28,29 @@ import { formatValue } from "@neverquest/utilities/formatters";
 
 export function ReserveMeter({ reserve }: { reserve: Reserve }) {
   const isHealth = reserve === "health";
+  const reserveMaximum = isHealth ? healthMaximum : staminaMaximum;
 
   const ailmentValue = useRecoilValue<BlightMagnitude | number>(
     isHealth ? poisonDuration : blightMagnitude,
   );
   const isAiling = useRecoilValue(isHealth ? isPoisoned : isBlighted);
   const reserveValue = useRecoilValue(isHealth ? health : stamina);
-  const reserveMaximumValue = useRecoilValue(isHealth ? healthMaximum : staminaMaximum);
+  const reserveMaximumValue = useRecoilValue(reserveMaximum);
   const reserveMaximumTotalValue = useRecoilValue(
     isHealth ? healthMaximumTotal : staminaMaximumTotal,
   );
   const resetReserve = useResetRecoilState(isHealth ? health : stamina);
   const resetRegenerationDuration = useResetRecoilState(regenerationDuration(reserve));
 
+  const deltaReserveMaximum = isHealth ? "healthMaximum" : "staminaMaximum";
   const penalty = Math.round(
     ((reserveMaximumValue - reserveMaximumTotalValue) / reserveMaximumValue) * 100,
   );
+
+  useDeltaText({
+    delta: deltas(deltaReserveMaximum),
+    value: reserveMaximum,
+  });
 
   // Catches attribute resets and poison/blight penalties.
   useEffect(() => {
@@ -54,15 +64,24 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
     <LabelledProgressBar
       attached="below"
       label={
-        <>
-          {`${formatValue({ value: reserveValue })}/${formatValue({
-            value: reserveMaximumTotalValue,
-          })}`}
+        <Stack direction="horizontal" gap={1}>
+          <Stack direction="horizontal">
+            {`${formatValue({ value: reserveValue })}/`}
+
+            {formatValue({
+              value: reserveMaximumTotalValue,
+            })}
+
+            <FloatingText delta={deltaReserveMaximum} />
+          </Stack>
+
           {isAiling && (
             <>
-              {` (${formatValue({ value: reserveMaximumValue })} `}
-              <IconImage Icon={isHealth ? IconPoison : IconBlight} isStencilled size="tiny" />
-              {` ${
+              {`(${formatValue({ value: reserveMaximumValue })}`}
+
+              <IconImage Icon={isHealth ? IconPoison : IconBlight} isStencilled size="small" />
+
+              {`${
                 typeof ailmentValue === "number"
                   ? formatValue({ format: "time", value: ailmentValue })
                   : formatValue({
@@ -73,7 +92,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
               }`}
             </>
           )}
-        </>
+        </Stack>
       }
       sibling={
         isAiling ? <ProgressBar animated key={2} now={penalty} striped variant="secondary" /> : null

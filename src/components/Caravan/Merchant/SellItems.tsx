@@ -42,14 +42,12 @@ export function SellItems() {
 
               return (
                 <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-                  <Stack direction="horizontal">
-                    <ItemDisplay item={current} overlayPlacement="right" />
-
-                    {isEquipped && (
-                      <span className="fst-italic" style={{ width: "max-content" }}>
-                        &nbsp;(Equipped)
-                      </span>
-                    )}
+                  <Stack direction="horizontal" gap={1}>
+                    <ItemDisplay
+                      description={isEquipped ? "Equipped" : null}
+                      item={current}
+                      overlayPlacement="right"
+                    />
                   </Stack>
 
                   <SellItem item={current} />

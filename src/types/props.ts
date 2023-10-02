@@ -1,22 +1,22 @@
 import type { FunctionComponent, ReactNode, SVGProps } from "react";
 import type { Placement } from "react-bootstrap/esm/types";
 
+import type { UISize } from "@neverquest/types/ui";
 import type { Showing } from "@neverquest/types/unions";
 
 export type ComparisonProps = {
-  showingType: Showing;
+  showing: Showing;
   subtrahend: number;
 } | null;
 
 export type IconImageProps = {
   Icon: SVGIcon;
-  ignoreColor?: boolean;
   isFlipped?: boolean;
   isMirrored?: boolean;
   isStencilled?: boolean;
   onClick?: () => void;
   overlayPlacement?: Placement;
-  size?: "small" | "tiny";
+  size?: UISize;
   tooltip?: ReactNode;
 };
 

@@ -43,7 +43,7 @@ export function Execution() {
               : LABEL_EMPTY}
           </span>
 
-          <FloatingText deltaType="execution" />
+          <FloatingText delta="execution" />
         </Stack>
       }
       Icon={IconExecution}

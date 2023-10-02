@@ -19,18 +19,20 @@ export function Encumbrance() {
   });
 
   return (
-    <Stack className="w-100" direction="horizontal">
+    <Stack direction="horizontal">
       <IconDisplay contents="" Icon={IconEncumbrance} tooltip="Encumbrance" />
 
-      <FloatingText deltaType="encumbranceMaximum" />
+      <LabelledProgressBar
+        label={
+          <Stack direction="horizontal">
+            {`${encumbranceValue}/${encumbranceMaximumValue}`}
 
-      <div className="w-100">
-        <LabelledProgressBar
-          label={`${encumbranceValue}/${encumbranceMaximumValue}`}
-          value={(encumbranceValue / encumbranceMaximumValue) * 100}
-          variant="dark"
-        />
-      </div>
+            <FloatingText delta="encumbranceMaximum" />
+          </Stack>
+        }
+        value={(encumbranceValue / encumbranceMaximumValue) * 100}
+        variant="dark"
+      />
     </Stack>
   );
 }

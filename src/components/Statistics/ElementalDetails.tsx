@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
@@ -5,7 +6,7 @@ import { ELEMENTALS, GEM_ELEMENTALS } from "@neverquest/data/inventory";
 import { armor, weapon } from "@neverquest/state/items";
 import { totalElementalEffects } from "@neverquest/state/statistics";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
@@ -24,12 +25,15 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
           const { damage, duration } = totalElementalEffectsValue[slot][elemental];
 
           return (
-            <div key={id}>
+            <Stack direction="horizontal" gap={1} key={id}>
               <span className={ELEMENTALS[elemental].color}>{`+${damage}`}</span>
-              {" · "}
-              <IconImage Icon={ELEMENTALS[elemental].Icon} size="tiny" />
-              {` ${formatValue({ format: "time", value: duration })}`}
-            </div>
+
+              {LABEL_SEPARATOR}
+
+              <IconImage Icon={ELEMENTALS[elemental].Icon} size="small" />
+
+              {`${formatValue({ format: "time", value: duration })}`}
+            </Stack>
           );
         })}
       </td>

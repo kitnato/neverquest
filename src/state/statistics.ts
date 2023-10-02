@@ -29,7 +29,7 @@ import { stackItems } from "@neverquest/utilities/helpers";
 
 export const attackRate = withStateKey("attackRate", (key) =>
   selector({
-    get: ({ get }) => get(attributeStatistic("speed")) * get(powerBonus("speed")),
+    get: ({ get }) => get(attributeStatistic("speed")) * (1 + get(powerBonus("speed"))),
     key,
   }),
 );
@@ -282,9 +282,9 @@ export const powerBonus = withStateKey("powerBonus", (key) =>
     get:
       (parameter) =>
       ({ get }) =>
-        get(ownedItem("tome of power")) !== null
-          ? get(level) * ATTRIBUTES[parameter].powerBonus
-          : 0,
+        get(ownedItem("tome of power")) === null
+          ? 0
+          : get(level) * ATTRIBUTES[parameter].powerBonus,
     key,
   }),
 );

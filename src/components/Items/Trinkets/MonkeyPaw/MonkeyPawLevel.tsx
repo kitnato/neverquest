@@ -2,6 +2,7 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
+import { InfusionLevel } from "@neverquest/components/Items/Trinkets/InfusionLevel";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { deltas } from "@neverquest/state/deltas";
 import { monkeyPawLevel } from "@neverquest/state/items";
@@ -16,9 +17,9 @@ export function MonkeyPawLevel() {
 
   return (
     <Stack direction="horizontal">
-      <span style={{ whiteSpace: "nowrap" }}>Level {monkeyPawLevelValue}</span>
+      <InfusionLevel level={monkeyPawLevelValue} />
 
-      <FloatingText deltaType="monkeyPawLevel" />
+      <FloatingText delta="monkeyPawLevel" />
     </Stack>
   );
 }

@@ -53,20 +53,24 @@ export function BleedRating() {
                       <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
 
                       <td>
-                        <IconImage Icon={IconBleed} size="tiny" />
-                        &nbsp;
-                        {`${
-                          bleedValue === 0
-                            ? LABEL_EMPTY
-                            : formatValue({ format: "percentage", value: bleedValue })
-                        }`}
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconBleed} size="small" />
+
+                          {`${
+                            bleedValue === 0
+                              ? LABEL_EMPTY
+                              : formatValue({ format: "percentage", value: bleedValue })
+                          }`}
+                        </Stack>
                       </td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <IconImage Icon={IconCruelty} size="tiny" />
-                        &nbsp;Cruelty:
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconCruelty} size="small" />
+                          Cruelty:
+                        </Stack>
                       </td>
 
                       <td>{`${formatValue({
@@ -108,7 +112,7 @@ export function BleedRating() {
             <span>{anatomyValue ? bleedRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
-          <FloatingText deltaType="bleedRating" />
+          <FloatingText delta="bleedRating" />
         </Stack>
       }
       Icon={IconBleedRating}

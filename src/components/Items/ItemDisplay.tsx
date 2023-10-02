@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { Placement } from "react-bootstrap/esm/types";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
@@ -23,15 +24,14 @@ import {
 } from "@neverquest/types/type-guards";
 
 export function ItemDisplay({
-  extra = "",
-  hideDescription = false,
+  description,
   iconProps,
   item,
   overlayPlacement,
   stack,
 }: {
+  description?: ReactNode;
   extra?: string;
-  hideDescription?: boolean;
   iconProps?: IconImageDOMProps;
   item: InventoryItem;
   overlayPlacement?: Placement;
@@ -40,13 +40,8 @@ export function ItemDisplay({
   if (isArmor(item)) {
     return (
       <IconDisplay
-        contents={
-          <span>
-            <ArmorName armor={item} placement={overlayPlacement} />
-
-            {extra}
-          </span>
-        }
+        contents={<ArmorName armor={item} placement={overlayPlacement} />}
+        description={description}
         Icon={IconArmor}
         iconProps={iconProps}
         tooltip="Armor"
@@ -59,13 +54,8 @@ export function ItemDisplay({
 
     return (
       <IconDisplay
-        contents={
-          <span>
-            <ItemName item={item} placement={overlayPlacement} stack={stack} />
-
-            {extra}
-          </span>
-        }
+        contents={<ItemName item={item} placement={overlayPlacement} stack={stack} />}
+        description={description}
         Icon={CONSUMABLES[name].Icon}
         iconProps={iconProps}
         tooltip="Consumable"
@@ -76,13 +66,8 @@ export function ItemDisplay({
   if (isShield(item)) {
     return (
       <IconDisplay
-        contents={
-          <span>
-            <ShieldName placement={overlayPlacement} shield={item} />
-
-            {extra}
-          </span>
-        }
+        contents={<ShieldName placement={overlayPlacement} shield={item} />}
+        description={description}
         Icon={IconShield}
         iconProps={iconProps}
         tooltip="Shield"
@@ -93,13 +78,8 @@ export function ItemDisplay({
   if (isTrinket(item)) {
     return (
       <IconDisplay
-        contents={
-          <span>
-            <ItemName item={item} placement={overlayPlacement} />
-
-            {extra}
-          </span>
-        }
+        contents={<ItemName item={item} placement={overlayPlacement} />}
+        description={description}
         Icon={TRINKETS[item.name].Icon}
         iconProps={iconProps}
         tooltip="Trinket"
@@ -110,13 +90,8 @@ export function ItemDisplay({
   if (isWeapon(item)) {
     return (
       <IconDisplay
-        contents={
-          <span>
-            <WeaponName placement={overlayPlacement} weapon={item} />
-
-            {extra}
-          </span>
-        }
+        contents={<WeaponName placement={overlayPlacement} weapon={item} />}
+        description={description}
         Icon={isMelee(item) ? IconMelee : IconRanged}
         iconProps={iconProps}
         tooltip="Weapon"
@@ -126,18 +101,8 @@ export function ItemDisplay({
 
   return (
     <IconDisplay
-      contents={
-        <span>
-          <ItemName
-            hideOverlay={hideDescription}
-            item={item}
-            placement={overlayPlacement}
-            stack={stack}
-          />
-
-          {extra}
-        </span>
-      }
+      contents={<ItemName item={item} placement={overlayPlacement} stack={stack} />}
+      description={description}
       Icon={IconGem}
       iconProps={iconProps}
       tooltip="Gem"

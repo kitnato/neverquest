@@ -10,7 +10,6 @@ import { ReactComponent as IconTransmute } from "@neverquest/icons/transmute.svg
 import { inventory } from "@neverquest/state/inventory";
 import { isGem } from "@neverquest/types/type-guards";
 import { GEM_TYPES, type Gem } from "@neverquest/types/unions";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function TransmuteGems() {
@@ -51,7 +50,7 @@ export function TransmuteGems() {
   }, [result, source]);
 
   return (
-    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+    <Stack className="mx-auto" gap={3}>
       <Stack direction="horizontal" gap={5}>
         <SelectGem gem={source} handleSelect={handleSelect(setSource)} />
 
@@ -62,14 +61,15 @@ export function TransmuteGems() {
 
       <OverlayTrigger
         overlay={<Tooltip>{`Insufficient ${plural(source)}!`}</Tooltip>}
+        placement="bottom"
         trigger={isAffordable ? [] : ["hover", "focus"]}
       >
-        <span>
+        <span className="mx-auto">
           <Button disabled={!isAffordable} onClick={handleTransmute} variant="outline-dark">
             Transmute
           </Button>
         </span>
       </OverlayTrigger>
-    </div>
+    </Stack>
   );
 }

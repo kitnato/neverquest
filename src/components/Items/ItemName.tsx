@@ -9,12 +9,10 @@ import { isGem } from "@neverquest/types/type-guards";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 
 export function ItemName({
-  hideOverlay = false,
   item,
   placement,
   stack,
 }: {
-  hideOverlay?: boolean;
   item: ConsumableItem | GemItem | TrinketItem;
   placement?: Placement;
   stack?: number;
@@ -39,7 +37,6 @@ export function ItemName({
         </Popover>
       }
       placement={placement}
-      trigger={hideOverlay ? [] : ["focus", "hover"]}
     >
       <span>{`${displayName}${
         stack !== undefined && stack > 1 ? ` x${formatValue({ value: stack })}` : ""

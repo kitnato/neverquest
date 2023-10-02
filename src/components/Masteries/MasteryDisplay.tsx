@@ -1,15 +1,16 @@
-import { OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
+import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { MASTERIES } from "@neverquest/data/masteries";
+import { ReactComponent as IconRank } from "@neverquest/icons/rank.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { isMasteryAtMaximum, masteries, masteryCost } from "@neverquest/state/masteries";
 import type { Mastery } from "@neverquest/types/unions";
 import { LABEL_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
-import { capitalizeAll } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
@@ -28,16 +29,34 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
           contents={
             <Stack gap={1}>
               <div>
-                <OverlayTrigger overlay={<Tooltip>{description}</Tooltip>} placement="right">
+                <OverlayTrigger
+                  overlay={
+                    <Popover>
+                      <Popover.Body>{description}</Popover.Body>
+                    </Popover>
+                  }
+                  placement="right"
+                >
                   <span>{capitalizeAll(mastery)}</span>
                 </OverlayTrigger>
               </div>
 
               <Stack direction="horizontal">
                 <Stack className="w-100" direction="horizontal" gap={3}>
-                  <small style={{ whiteSpace: "nowrap" }}>Rank {rank}</small>
+                  <IconDisplay
+                    contents={formatValue({ value: rank })}
+                    Icon={IconRank}
+                    iconProps={{ overlayPlacement: "bottom", size: "tiny" }}
+                    tooltip="Rank"
+                  />
 
-                  <OverlayTrigger overlay={<Tooltip>{instructions}</Tooltip>}>
+                  <OverlayTrigger
+                    overlay={
+                      <Popover>
+                        <Popover.Body>{instructions}</Popover.Body>
+                      </Popover>
+                    }
+                  >
                     <span className="w-100">
                       <LabelledProgressBar label={label} value={value} variant="secondary" />
                     </span>

@@ -1260,6 +1260,10 @@ export const CREATURES: CreatureData[] = [
     type: "human",
   },
   {
+    name: "stabber",
+    type: "monster",
+  },
+  {
     name: "stalker",
     type: "monster",
   },

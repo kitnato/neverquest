@@ -13,10 +13,8 @@ export function Encumbrance() {
   const encumbranceValue = useRecoilValue(encumbrance);
   const encumbranceMaximumValue = useRecoilValue(encumbranceMaximum);
 
-  const deltaEncumbrance = deltas("encumbrance");
-
   useDeltaText({
-    delta: deltaEncumbrance,
+    delta: deltas("encumbranceMaximum"),
     value: encumbranceMaximum,
   });
 
@@ -24,7 +22,7 @@ export function Encumbrance() {
     <Stack className="w-100" direction="horizontal">
       <IconDisplay contents="" Icon={IconEncumbrance} tooltip="Encumbrance" />
 
-      <FloatingText deltaType="encumbrance" />
+      <FloatingText deltaType="encumbranceMaximum" />
 
       <div className="w-100">
         <LabelledProgressBar

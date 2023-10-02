@@ -46,6 +46,19 @@ export const ammunition = withStateKey("ammunition", (key) =>
   }),
 );
 
+export const ammunitionMaximum = withStateKey("ammunitionMaximum", (key) =>
+  selector({
+    get: ({ get }) => {
+      const ownedAmmunitionPouch = get(ownedItem("ammunition pouch"));
+
+      return ownedAmmunitionPouch === null
+        ? 0
+        : (ownedAmmunitionPouch as TrinketItemAmmunitionPouch).maximum;
+    },
+    key,
+  }),
+);
+
 export const armor = withStateKey("armor", (key) =>
   selector({
     get: ({ get }) => {

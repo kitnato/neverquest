@@ -40,7 +40,7 @@ export function WeightDetail({
               />
             )}
             {stack !== undefined && stack > 1 && (
-              <>{` (${formatValue({ value: weight * stack })}`}</>
+              <>{` (${formatValue({ value: weight * stack })})`}</>
             )}
           </td>
         </>

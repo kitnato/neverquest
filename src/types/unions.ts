@@ -27,6 +27,7 @@ export type CrewStatus = "hirable" | "hired" | null;
 
 export type Delta =
   | "ammunition"
+  | "ammunitionMaximum"
   | "attackRate"
   | "attributePoints"
   | "bleedRating"
@@ -38,7 +39,7 @@ export type Delta =
   | "damagePerSecond"
   | "deflection"
   | "dodge"
-  | "encumbrance"
+  | "encumbranceMaximum"
   | "essence"
   | "essenceAbsorbed"
   | "essenceBonus"
@@ -156,6 +157,7 @@ export type Skill = (typeof SKILL_TYPES)[number];
 export type StateKey =
   | "allowNSFW"
   | "ammunition"
+  | "ammunitionMaximum"
   | "appliedGems"
   | "areAttributesIncreasable"
   | "armor"

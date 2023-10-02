@@ -169,6 +169,12 @@ export const ARTIFACTS: ArtifactData[] = [
   },
   {
     artifactClass: "blunt",
+    name: "boulder",
+    subtype: "ranged",
+    type: "weapon",
+  },
+  {
+    artifactClass: "blunt",
     name: "bomb",
     subtype: "ranged",
     type: "weapon",
@@ -516,6 +522,12 @@ export const ARTIFACTS: ArtifactData[] = [
     name: "diadem",
     subtype: "head",
     type: "armor",
+  },
+  {
+    artifactClass: "slashing",
+    name: "dervish",
+    subtype: "melee",
+    type: "weapon",
   },
   {
     isNSFW: true,

@@ -144,6 +144,10 @@ export const CREATURES: CreatureData[] = [
     type: "name",
   },
   {
+    name: "betrayer",
+    type: "monster",
+  },
+  {
     name: "bigfoot",
     type: "monster",
   },

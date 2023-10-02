@@ -48,6 +48,9 @@ export const LOCATIONS: LocationData[] = [
     name: "beach",
   },
   {
+    name: "black hole",
+  },
+  {
     name: "bog",
   },
   {
@@ -142,6 +145,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "coliseum",
+  },
+  {
+    name: "comet",
   },
   {
     name: "copse",
@@ -250,6 +256,12 @@ export const LOCATIONS: LocationData[] = [
     name: "garden",
   },
   {
+    name: "galaxy",
+  },
+  {
+    name: "gas giant",
+  },
+  {
     name: "glen",
   },
   {
@@ -355,6 +367,9 @@ export const LOCATIONS: LocationData[] = [
     name: "lavatory",
   },
   {
+    name: "maelstrom",
+  },
+  {
     name: "mangrove",
   },
   {
@@ -378,6 +393,9 @@ export const LOCATIONS: LocationData[] = [
     name: "maze",
   },
   {
+    name: "meteor",
+  },
+  {
     name: "midden",
   },
   {
@@ -399,6 +417,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "murk",
+  },
+  {
+    name: "nebula",
   },
   {
     name: "netherworld",

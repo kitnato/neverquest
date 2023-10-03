@@ -5,21 +5,22 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { InfusionLevel } from "@neverquest/components/Items/Trinkets/InfusionLevel";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { deltas } from "@neverquest/state/deltas";
-import { monkeyPawLevel } from "@neverquest/state/items";
+import { infusionLevel } from "@neverquest/state/items";
 
 export function MonkeyPawLevel() {
-  const monkeyPawLevelValue = useRecoilValue(monkeyPawLevel);
+  const infusionLevelState = infusionLevel("monkey paw");
+  const infusionLevelValue = useRecoilValue(infusionLevelState);
 
   useDeltaText({
-    delta: deltas("monkeyPawLevel"),
-    value: monkeyPawLevel,
+    delta: deltas("infusionLevel"),
+    value: infusionLevelState,
   });
 
   return (
     <Stack direction="horizontal">
-      <InfusionLevel level={monkeyPawLevelValue} />
+      <InfusionLevel level={infusionLevelValue} />
 
-      <FloatingText delta="monkeyPawLevel" />
+      <FloatingText delta="infusionLevel" />
     </Stack>
   );
 }

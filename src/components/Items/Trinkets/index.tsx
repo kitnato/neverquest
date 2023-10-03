@@ -4,7 +4,7 @@ import { AmmunitionPouch } from "@neverquest/components/Items/Trinkets/Ammunitio
 import type {
   TrinketItem,
   TrinketItemAmmunitionPouch,
-  TrinketItemMonkeyPaw,
+  TrinketItemInfusable,
 } from "@neverquest/types";
 
 export function Trinket({ item }: { item: TrinketItem }) {
@@ -13,7 +13,7 @@ export function Trinket({ item }: { item: TrinketItem }) {
       return <AmmunitionPouch item={item as TrinketItemAmmunitionPouch} />;
     }
     case "monkey paw": {
-      return <MonkeyPaw item={item as TrinketItemMonkeyPaw} />;
+      return <MonkeyPaw item={item as TrinketItemInfusable} />;
     }
     default: {
       return <ItemDisplay item={item} overlayPlacement="right" />;

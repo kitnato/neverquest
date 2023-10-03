@@ -17,12 +17,13 @@ import type {
   InventoryItem,
   Shield,
   TrinketItemAmmunitionPouch,
-  TrinketItemMonkeyPaw,
+  TrinketItemInfusable,
   Weapon,
 } from "@neverquest/types";
 import {
   isArmor,
   isConsumable,
+  isInfusable,
   isShield,
   isTrinket,
   isWeapon,
@@ -125,17 +126,19 @@ export const monkeyPawInfusionStep = withStateKey("monkeyPawInfusionStep", (key)
   }),
 );
 
-export const monkeyPawLevel = withStateKey("monkeyPawLevel", (key) =>
-  selector({
-    get: ({ get }) => {
-      const monkeyPaw = get(merchantItem("monkey paw")) ?? get(ownedItem("monkey paw"));
+export const infusionLevel = withStateKey("infusionLevel", (key) =>
+  selectorFamily<number, Trinket>({
+    get:
+      (parameter) =>
+      ({ get }) => {
+        const trinket = get(merchantItem(parameter)) ?? get(ownedItem(parameter));
 
-      if (monkeyPaw === null) {
-        return 0;
-      }
+        if (trinket === null || !isInfusable(trinket)) {
+          return 0;
+        }
 
-      return (monkeyPaw as TrinketItemMonkeyPaw).level;
-    },
+        return trinket.level;
+      },
     key,
   }),
 );
@@ -149,7 +152,7 @@ export const monkeyPawMaximum = withStateKey("monkeyPawMaximum", (key) =>
         return 0;
       }
 
-      return getGrowthTriangular((monkeyPaw as TrinketItemMonkeyPaw).level + MONKEY_PAW_GROWTH);
+      return getGrowthTriangular((monkeyPaw as TrinketItemInfusable).level + MONKEY_PAW_GROWTH);
     },
     key,
   }),

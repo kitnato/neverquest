@@ -1,8 +1,8 @@
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
 import { InfusionLevel } from "@neverquest/components/Items/Trinkets/InfusionLevel";
-import type { TrinketItemMonkeyPaw } from "@neverquest/types";
+import type { TrinketItemInfusable } from "@neverquest/types";
 
-export function MonkeyPaw({ item }: { item: TrinketItemMonkeyPaw }) {
+export function MonkeyPaw({ item }: { item: TrinketItemInfusable }) {
   const { level } = item;
 
   return (

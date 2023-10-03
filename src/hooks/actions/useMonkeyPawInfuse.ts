@@ -10,7 +10,7 @@ import {
   ownedItem,
 } from "@neverquest/state/items";
 
-import type { TrinketItemMonkeyPaw } from "@neverquest/types";
+import type { TrinketItemInfusable } from "@neverquest/types";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useMonkeyPawInfuse() {
@@ -37,7 +37,7 @@ export function useMonkeyPawInfuse() {
                 if (currentItem.id === ownedMonkeyPaw.id) {
                   return {
                     ...currentItem,
-                    level: (currentItem as TrinketItemMonkeyPaw).level + 1,
+                    level: (currentItem as TrinketItemInfusable).level + 1,
                   };
                 }
 

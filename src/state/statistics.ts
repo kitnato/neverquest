@@ -13,7 +13,7 @@ import { withStateKey } from "@neverquest/state";
 import { attributeStatistic, level } from "@neverquest/state/attributes";
 import { armor, ownedItem, shield, weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import type { TrinketItemMonkeyPaw } from "@neverquest/types";
+import type { TrinketItemInfusable } from "@neverquest/types";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import type { Attribute } from "@neverquest/types/unions";
 import {
@@ -171,7 +171,7 @@ export const essenceBonus = withStateKey("essenceBonus", (key) =>
       }
 
       return getFromRange({
-        factor: getGrowthSigmoid((ownedMonkeyPaw as TrinketItemMonkeyPaw).level),
+        factor: getGrowthSigmoid((ownedMonkeyPaw as TrinketItemInfusable).level),
         maximum: MONKEY_PAW_BONUS.maximum,
         minimum: MONKEY_PAW_BONUS.minimum,
       });

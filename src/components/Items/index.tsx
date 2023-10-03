@@ -12,7 +12,7 @@ import { StoredGear } from "@neverquest/components/Items/StoredGear";
 import { Trinket } from "@neverquest/components/Items/Trinkets";
 import { CompassNavigate } from "@neverquest/components/Items/Trinkets/CompassNavigate";
 import { HearthstoneWarp } from "@neverquest/components/Items/Trinkets/HearthstoneWarp";
-import { MonkeyPawControl } from "@neverquest/components/Items/Trinkets/MonkeyPaw/MonkeyPawControl";
+import { InfusionInspect } from "@neverquest/components/Items/Trinkets/Infusion/InfusionInspect";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { inventory } from "@neverquest/state/inventory";
 import {
@@ -93,7 +93,7 @@ export function Inventory() {
                     }
 
                     case "monkey paw": {
-                      return <MonkeyPawControl />;
+                      return <InfusionInspect trinket="monkey paw" />;
                     }
 
                     default: {

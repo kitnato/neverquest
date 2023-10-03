@@ -41,7 +41,7 @@ export function isGeneratorRanges(unknown: unknown): unknown is [GeneratorRange,
 }
 
 export function isInfusable(unknown: unknown): unknown is TrinketItemInfusable {
-  return isObject(unknown) && typeof unknown.level === "string";
+  return isObject(unknown) && typeof unknown.level === "number";
 }
 
 function isObject(value: unknown): value is Record<string, unknown> {

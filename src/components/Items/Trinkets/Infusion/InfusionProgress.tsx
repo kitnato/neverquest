@@ -4,12 +4,13 @@ import { useRecoilValue } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
-import { monkeyPawInfusion, monkeyPawMaximum } from "@neverquest/state/items";
+import { infusionCurrent, infusionMaximum } from "@neverquest/state/items";
+import type { Trinket } from "@neverquest/types/unions";
 import { formatValue } from "@neverquest/utilities/formatters";
 
-export function MonkeyPawInfusionProgress() {
-  const monkeyPawInfusionValue = useRecoilValue(monkeyPawInfusion);
-  const monkeyPawMaximumValue = useRecoilValue(monkeyPawMaximum);
+export function InfusionProgress({ trinket }: { trinket: Trinket }) {
+  const infusionCurrentValue = useRecoilValue(infusionCurrent(trinket));
+  const infusionMaximumValue = useRecoilValue(infusionMaximum(trinket));
 
   return (
     <LabelledProgressBar
@@ -18,12 +19,12 @@ export function MonkeyPawInfusionProgress() {
         <Stack direction="horizontal" gap={1}>
           <IconImage Icon={IconEssence} isStencilled size="small" />
 
-          {`${formatValue({ value: monkeyPawInfusionValue })}/${formatValue({
-            value: monkeyPawMaximumValue,
+          {`${formatValue({ value: infusionCurrentValue })}/${formatValue({
+            value: infusionMaximumValue,
           })}`}
         </Stack>
       }
-      value={(monkeyPawInfusionValue / monkeyPawMaximumValue) * 100}
+      value={(infusionCurrentValue / infusionMaximumValue) * 100}
       variant="secondary"
     />
   );

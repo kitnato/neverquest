@@ -1,11 +1,10 @@
-import { atom, selector, selectorFamily } from "recoil";
+import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import { merchantItem } from "./caravan";
 import {
   ARMOR_NONE,
   GEMS_MAXIMUM,
   GEM_FITTING_COST,
-  MONKEY_PAW_GROWTH,
+  GROWTH,
   SHIELD_NONE,
   WEAPON_NONE,
 } from "@neverquest/data/inventory";
@@ -17,7 +16,6 @@ import type {
   InventoryItem,
   Shield,
   TrinketItemAmmunitionPouch,
-  TrinketItemInfusable,
   Weapon,
 } from "@neverquest/types";
 import {
@@ -99,14 +97,6 @@ export const canApplyGem = withStateKey("canApplyGem", (key) =>
   }),
 );
 
-export const canAffordInfusion = withStateKey("canAffordInfusion", (key) =>
-  selector({
-    // TODO - make into selectorFamilies for new infusion trinkets.
-    get: ({ get }) => get(essence) >= get(monkeyPawInfusionStep),
-    key,
-  }),
-);
-
 export const ownedItem = withStateKey("ownedItem", (key) =>
   selectorFamily<InventoryItem | null, Consumable | Trinket>({
     get:
@@ -119,9 +109,15 @@ export const ownedItem = withStateKey("ownedItem", (key) =>
   }),
 );
 
-export const monkeyPawInfusionStep = withStateKey("monkeyPawInfusionStep", (key) =>
-  selector({
-    get: ({ get }) => Math.ceil((get(monkeyPawMaximum) / INFUSION_DURATION) * INFUSION_DELTA),
+export const infusionStep = withStateKey("infusionStep", (key) =>
+  selectorFamily<number, Trinket>({
+    get:
+      (parameter) =>
+      ({ get }) =>
+        Math.min(
+          get(essence),
+          Math.ceil((get(infusionMaximum(parameter)) / INFUSION_DURATION) * INFUSION_DELTA),
+        ),
     key,
   }),
 );
@@ -131,7 +127,7 @@ export const infusionLevel = withStateKey("infusionLevel", (key) =>
     get:
       (parameter) =>
       ({ get }) => {
-        const trinket = get(merchantItem(parameter)) ?? get(ownedItem(parameter));
+        const trinket = get(ownedItem(parameter));
 
         if (trinket === null || !isInfusable(trinket)) {
           return 0;
@@ -143,17 +139,19 @@ export const infusionLevel = withStateKey("infusionLevel", (key) =>
   }),
 );
 
-export const monkeyPawMaximum = withStateKey("monkeyPawMaximum", (key) =>
-  selector({
-    get: ({ get }) => {
-      const monkeyPaw = get(ownedItem("monkey paw"));
+export const infusionMaximum = withStateKey("infusionMaximum", (key) =>
+  selectorFamily<number, Trinket>({
+    get:
+      (parameter) =>
+      ({ get }) => {
+        const trinket = get(ownedItem(parameter));
 
-      if (monkeyPaw === null) {
-        return 0;
-      }
+        if (trinket === null || !isInfusable(trinket)) {
+          return 0;
+        }
 
-      return getGrowthTriangular((monkeyPaw as TrinketItemInfusable).level + MONKEY_PAW_GROWTH);
-    },
+        return getGrowthTriangular(trinket.level + (GROWTH[parameter] ?? 0));
+      },
     key,
   }),
 );
@@ -202,17 +200,17 @@ export const weapon = withStateKey("weapon", (key) =>
 
 // ATOMS
 
-export const infusionDelta = withStateKey("infusionDelta", (key) =>
-  atom({
-    default: INFUSION_DELTA,
-    effects: [handleLocalStorage({ key })],
+export const infusionCurrent = withStateKey("infusionCurrent", (key) =>
+  atomFamily<number, Trinket>({
+    default: 0,
     key,
   }),
 );
 
-export const monkeyPawInfusion = withStateKey("monkeyPawInfusion", (key) =>
+export const infusionDelta = withStateKey("infusionDelta", (key) =>
   atom({
-    default: 0,
+    default: INFUSION_DELTA,
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );

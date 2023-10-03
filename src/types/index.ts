@@ -117,6 +117,7 @@ export type TrinketItemDefault = ItemBase & {
 
 export type TrinketItemInfusable = TrinketItemDefault & {
   level: number;
+  name: "monkey paw";
 };
 
 type WeaponBase = GearItemBase & {

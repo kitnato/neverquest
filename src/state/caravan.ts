@@ -1,32 +1,15 @@
-import { atom, atomFamily, selector, selectorFamily } from "recoil";
+import { atom, atomFamily, selector } from "recoil";
 
 import { CREW_ORDER } from "@neverquest/data/caravan";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import type {
-  BlacksmithInventory,
-  InventoryItem,
-  MerchantInventory,
-  Weapon,
-} from "@neverquest/types";
-import { isTrinket } from "@neverquest/types/type-guards";
-import type { Consumable, Crew, CrewStatus, Trinket } from "@neverquest/types/unions";
+import type { BlacksmithInventory, MerchantInventory, Weapon } from "@neverquest/types";
+import type { Crew, CrewStatus } from "@neverquest/types/unions";
 
 // SELECTORS
 
 export const isCrewHired = withStateKey("isCrewHired", (key) =>
   selector({
     get: ({ get }) => CREW_ORDER.every((type) => get(hireStatus(type)).status === "hired"),
-    key,
-  }),
-);
-
-export const merchantItem = withStateKey("merchantItem", (key) =>
-  selectorFamily<InventoryItem | null, Consumable | Trinket>({
-    get:
-      (parameter) =>
-      ({ get }) =>
-        get(merchantInventory).find(({ item }) => isTrinket(item) && item.name === parameter)
-          ?.item ?? null,
     key,
   }),
 );

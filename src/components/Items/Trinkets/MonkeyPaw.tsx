@@ -1,5 +1,5 @@
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
-import { InfusionLevel } from "@neverquest/components/Items/Trinkets/InfusionLevel";
+import { InfusionLevelDisplay } from "@neverquest/components/Items/Trinkets/InfusionLevelDisplay";
 import type { TrinketItemInfusable } from "@neverquest/types";
 
 export function MonkeyPaw({ item }: { item: TrinketItemInfusable }) {
@@ -7,7 +7,7 @@ export function MonkeyPaw({ item }: { item: TrinketItemInfusable }) {
 
   return (
     <ItemDisplay
-      description={<InfusionLevel level={level} overlayPlacement="bottom" />}
+      description={<InfusionLevelDisplay level={level} />}
       item={item}
       overlayPlacement="right"
     />

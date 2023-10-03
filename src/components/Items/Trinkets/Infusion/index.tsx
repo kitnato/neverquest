@@ -2,19 +2,20 @@ import { useState } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
-import { useMonkeyPawInfuse } from "@neverquest/hooks/actions/useMonkeyPawInfuse";
+import { useInfuse } from "@neverquest/hooks/actions/useInfuse";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
-import { canAffordInfusion, infusionDelta } from "@neverquest/state/items";
+import { infusionDelta, infusionStep } from "@neverquest/state/items";
+import type { Trinket } from "@neverquest/types/unions";
 import { LABEL_NO_ESSENCE } from "@neverquest/utilities/constants";
 
-export function MonkeyPawInfusion() {
-  const canAffordInfusionValue = useRecoilValue(canAffordInfusion);
+export function Infusion({ trinket }: { trinket: Trinket }) {
+  const canInfuse = useRecoilValue(infusionStep(trinket)) > 0;
   const setInfusionDelta = useSetRecoilState(infusionDelta);
   const resetInfusionDelta = useResetRecoilState(infusionDelta);
 
   const [isInfusing, setIsInfusing] = useState(false);
 
-  const monkeyPawInfuse = useMonkeyPawInfuse();
+  const infuse = useInfuse();
 
   const handleStop = () => {
     setIsInfusing(false);
@@ -24,7 +25,7 @@ export function MonkeyPawInfusion() {
   useAnimate({
     delta: setInfusionDelta,
     onDelta: () => {
-      monkeyPawInfuse();
+      infuse(trinket);
 
       resetInfusionDelta();
     },
@@ -34,11 +35,11 @@ export function MonkeyPawInfusion() {
   return (
     <OverlayTrigger
       overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
-      trigger={canAffordInfusionValue ? [] : ["focus", "hover"]}
+      trigger={canInfuse ? [] : ["focus", "hover"]}
     >
       <span>
         <Button
-          disabled={!canAffordInfusionValue}
+          disabled={!canInfuse}
           onMouseDown={() => setIsInfusing(true)}
           onMouseOut={handleStop}
           onMouseUp={handleStop}

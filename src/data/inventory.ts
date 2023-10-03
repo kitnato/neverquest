@@ -215,7 +215,7 @@ export const MONKEY_PAW_BONUS = {
   maximum: 2,
   minimum: 0.2,
 };
-export const MONKEY_PAW_GROWTH = 14;
+export const GROWTH: Partial<Record<Trinket, number>> = { "monkey paw": 14 };
 
 export const SHIELD_NONE: Omit<Shield, "isEquipped" | "price"> = {
   block: 0,

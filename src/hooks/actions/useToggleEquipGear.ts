@@ -50,7 +50,7 @@ export function useToggleEquipGear() {
         if (isWeapon(gearItem) && !isEquipped) {
           if (staminaCost > 0) {
             set(isShowing("stamina"), true);
-            set(isAttributeUnlocked("endurance"), true);
+            set(isAttributeUnlocked("endurance"), { isUnlocked: true });
           }
 
           if (isRangedWeapon || isTwoHandedWeapon) {

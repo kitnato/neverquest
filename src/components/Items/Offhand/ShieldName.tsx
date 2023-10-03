@@ -9,7 +9,7 @@ import { GearComparison } from "@neverquest/components/Items/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Items/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Items/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
-import { type SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/inventory";
+import { SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
 import { ReactComponent as IconNone } from "@neverquest/icons/none.svg";
 import { ReactComponent as IconStagger } from "@neverquest/icons/stagger.svg";
@@ -150,14 +150,16 @@ export function ShieldName({
                 </tr>
               )}
 
-              <WeightDetail
-                comparison={
-                  showComparison
-                    ? { showing: "offhand", subtrahend: shieldEquippedValue.weight }
-                    : null
-                }
-                weight={weight}
-              />
+              {shield.name !== SHIELD_NONE.name && (
+                <WeightDetail
+                  comparison={
+                    showComparison
+                      ? { showing: "offhand", subtrahend: shieldEquippedValue.weight }
+                      : null
+                  }
+                  weight={weight}
+                />
+              )}
             </DetailsTable>
           </Popover.Body>
         </Popover>

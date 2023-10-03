@@ -9,7 +9,7 @@ import { GearComparison } from "@neverquest/components/Items/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Items/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Items/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
-import { type WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
+import { WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import { ReactComponent as IconAmmunition } from "@neverquest/icons/ammunition.svg";
 import { ReactComponent as IconGrip } from "@neverquest/icons/grip.svg";
@@ -43,6 +43,7 @@ export function WeaponName({
     damage,
     rate,
   });
+  const isUnarmed = weapon.name === WEAPON_NONE.name;
   const showComparison = weaponEquippedValue.id !== weapon.id;
 
   const skillValue = useRecoilValue(skills(WEAPON_ABILITY_SKILLS[ability]));
@@ -131,7 +132,7 @@ export function WeaponName({
                 </tr>
               )}
 
-              {isMelee(weapon) && (
+              {isMelee(weapon) && !isUnarmed && (
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Grip:</td>
 
@@ -213,14 +214,16 @@ export function WeaponName({
                 )}
               </tr>
 
-              <WeightDetail
-                comparison={
-                  showComparison
-                    ? { showing: "weapon", subtrahend: weaponEquippedValue.weight }
-                    : null
-                }
-                weight={weight}
-              />
+              {!isUnarmed && (
+                <WeightDetail
+                  comparison={
+                    showComparison
+                      ? { showing: "weapon", subtrahend: weaponEquippedValue.weight }
+                      : null
+                  }
+                  weight={weight}
+                />
+              )}
             </DetailsTable>
           </Popover.Body>
         </Popover>

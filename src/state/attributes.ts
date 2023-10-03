@@ -95,8 +95,9 @@ export const attributeRank = withStateKey("attributeRank", (key) =>
 );
 
 export const isAttributeUnlocked = withStateKey("isAttributeUnlocked", (key) =>
-  atomFamily<boolean, Attribute>({
-    default: false,
+  // TODO - if it's just boolean, it won't initialize.
+  atomFamily<{ isUnlocked: boolean }, Attribute>({
+    default: { isUnlocked: false },
     effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),

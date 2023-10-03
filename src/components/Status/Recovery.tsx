@@ -78,9 +78,9 @@ export function Recovery() {
             }
             trigger={isMasteryUnlockedValue ? ["hover", "focus"] : []}
           >
-            <div className="w-100">
+            <span className="w-100">
               <RecoveryMeter />
-            </div>
+            </span>
           </OverlayTrigger>
 
           <FloatingText delta="recoveryRate" />

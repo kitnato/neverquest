@@ -26,7 +26,7 @@ export function useInitialize() {
         }
 
         ATTRIBUTE_TYPES.forEach((current) =>
-          set(isAttributeUnlocked(current), ATTRIBUTES[current].isUnlocked),
+          set(isAttributeUnlocked(current), { isUnlocked: ATTRIBUTES[current].isUnlocked }),
         );
 
         CREW_TYPES.forEach((current) => {

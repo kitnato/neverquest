@@ -2,6 +2,11 @@ import type { NameData } from "@neverquest/LOCRAN/types";
 
 export const NAMES: NameData[] = [
   {
+    isNSFW: true,
+    name: "anal",
+    type: ["prefix"],
+  },
+  {
     name: "anger",
     type: ["prefix", "suffix"],
   },

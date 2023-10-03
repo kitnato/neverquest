@@ -170,9 +170,9 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
         placement="right"
         trigger={calisthenicsValue ? ["hover", "focus"] : []}
       >
-        <div className="w-100">
+        <span className="w-100">
           <RegenerationMeter reserve={reserve} />
-        </div>
+        </span>
       </OverlayTrigger>
 
       <FloatingText delta={isHealth ? "healthRegenerationRate" : "staminaRegenerationRate"} />

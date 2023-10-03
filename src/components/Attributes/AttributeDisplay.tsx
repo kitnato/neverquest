@@ -25,7 +25,7 @@ import {
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
-  const isAttributeUnlockedValue = useRecoilValue(isAttributeUnlocked(attribute));
+  const { isUnlocked } = useRecoilValue(isAttributeUnlocked(attribute));
   const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable);
   const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(attribute));
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
@@ -39,7 +39,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
   const canIncrease = areAttributesAffordableValue && !isUnsafe;
   const name = capitalizeAll(attribute);
 
-  if (isAttributeUnlockedValue) {
+  if (isUnlocked) {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay contents={name} description={description} Icon={Icon} tooltip="Attribute" />
@@ -59,7 +59,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
 
                       {!areAttributesAffordableValue && "No attribute points."}
 
-                      {isUnsafe && "Monsters are lurking."}
+                      {isUnsafe && "Cannot concentrate."}
                     </Stack>
                   </Popover.Body>
                 </Popover>

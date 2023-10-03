@@ -6,11 +6,7 @@ import { GearComparison } from "@neverquest/components/Items/GearComparison";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import type { ComparisonProps } from "@neverquest/types/props";
-import {
-  CLASS_TABLE_CELL_ITALIC,
-  LABEL_EMPTY,
-  LABEL_UNKNOWN,
-} from "@neverquest/utilities/constants";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function WeightDetail({
@@ -34,7 +30,7 @@ export function WeightDetail({
             <Stack direction="horizontal" gap={1}>
               <IconImage Icon={IconEncumbrance} size="small" />
 
-              {formatValue({ value: weight }) || LABEL_EMPTY}
+              {formatValue({ value: weight })}
 
               {comparison !== null && (
                 <GearComparison

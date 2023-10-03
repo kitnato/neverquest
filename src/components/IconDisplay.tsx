@@ -23,6 +23,7 @@ export function IconDisplay({
   isSpaced?: boolean;
   tooltip?: string;
 }) {
+  // TODO - find a way to not render small when description renders null.
   return (
     <Stack
       className={isAnimated ? getAnimationClass({ name: "flipInX" }) : undefined}
@@ -31,18 +32,11 @@ export function IconDisplay({
     >
       <IconImage Icon={Icon} tooltip={tooltip} {...iconProps} />
 
-      {description !== undefined &&
-      description !== null &&
-      description !== false &&
-      description !== "" ? (
-        <Stack gap={1}>
-          {contents}
+      <Stack gap={1}>
+        {contents}
 
-          <small className="text-muted">{description}</small>
-        </Stack>
-      ) : (
-        contents
-      )}
+        <small className="text-muted">{description}</small>
+      </Stack>
     </Stack>
   );
 }

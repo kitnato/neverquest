@@ -139,9 +139,9 @@ export function Attack() {
             }
             trigger={isShowingAttackRateDetails ? ["hover", "focus"] : []}
           >
-            <div className="w-100">
+            <span className="w-100">
               <AttackMeter />
-            </div>
+            </span>
           </OverlayTrigger>
 
           <FloatingText delta="attackRate" />

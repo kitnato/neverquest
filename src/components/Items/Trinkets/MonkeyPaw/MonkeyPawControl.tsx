@@ -49,7 +49,7 @@ export function MonkeyPawControl() {
           <Stack gap={3}>
             <EssenceBonus />
 
-            <Stack className="w-100" direction="horizontal" gap={3}>
+            <Stack direction="horizontal" gap={3}>
               <MonkeyPawLevel />
 
               <MonkeyPawInfusionProgress />

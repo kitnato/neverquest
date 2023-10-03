@@ -97,9 +97,9 @@ export function Health() {
               placement="right"
               trigger={isShowingHealthDetails ? ["hover", "focus"] : []}
             >
-              <div className="w-100">
+              <span className="w-100">
                 <ReserveMeter reserve="health" />
-              </div>
+              </span>
             </OverlayTrigger>
 
             <FloatingText delta="health" />

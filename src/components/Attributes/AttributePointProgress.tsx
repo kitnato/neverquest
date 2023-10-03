@@ -21,7 +21,7 @@ export function AttributePointProgress() {
 
   return (
     <OverlayTrigger overlay={<Tooltip>Essence required for next attribute point.</Tooltip>}>
-      <div className="w-100">
+      <span className="w-100">
         <LabelledProgressBar
           label={
             <Stack direction="horizontal" gap={1}>
@@ -35,7 +35,7 @@ export function AttributePointProgress() {
           value={(essenceValue / nextTotalCost) * 100}
           variant="secondary"
         />
-      </div>
+      </span>
     </OverlayTrigger>
   );
 }

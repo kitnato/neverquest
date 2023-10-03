@@ -21,7 +21,7 @@ export function useAcquireSkill() {
         }
 
         unlocksAttributes?.forEach((attribute) => {
-          set(isAttributeUnlocked(attribute), true);
+          set(isAttributeUnlocked(attribute), { isUnlocked: true });
         });
 
         if (unlocksMastery !== undefined) {

@@ -1,3 +1,4 @@
+import { INFUSABLES, TRINKETS } from "./inventory";
 import { ReactComponent as IconAlchemist } from "@neverquest/icons/alchemist.svg";
 import { ReactComponent as IconBlacksmith } from "@neverquest/icons/blacksmith.svg";
 import { ReactComponent as IconFletcher } from "@neverquest/icons/fletcher.svg";
@@ -14,8 +15,9 @@ import type {
   WeaponClass,
   WeaponModality,
 } from "@neverquest/LOCRAN/types";
+import type { UsableItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Crew, Grip, Trinket } from "@neverquest/types/unions";
+import type { Consumable, Crew, Grip } from "@neverquest/types/unions";
 
 export const AMMUNITION_PRICE = 10;
 
@@ -142,7 +144,7 @@ export const MERCHANT_OFFERS: Record<
           gearClass: ShieldClass;
         })
       | (ArtifactType<"trinket"> & {
-          name: Trinket;
+          item: UsableItem;
         })
       | (ArtifactType<"weapon"> & {
           gearClass: WeaponClass;
@@ -173,9 +175,9 @@ export const MERCHANT_OFFERS: Record<
     },
   ],
   4: [
-    { name: "knapsack", type: "trinket" },
-    { name: "compass", type: "trinket" },
-    { name: "hearthstone", type: "trinket" },
+    { item: TRINKETS["knapsack"].item, type: "trinket" },
+    { item: TRINKETS["compass"].item, type: "trinket" },
+    { item: TRINKETS["hearthstone"].item, type: "trinket" },
   ],
   5: [
     {
@@ -200,11 +202,11 @@ export const MERCHANT_OFFERS: Record<
     },
   ],
   20: [
-    { name: "antique coin", type: "trinket" },
-    { name: "monkey paw", type: "trinket" },
+    { item: TRINKETS["antique coin"].item, type: "trinket" },
+    { item: INFUSABLES["monkey paw"].item, type: "trinket" },
   ],
-  25: [{ name: "ammunition pouch", type: "trinket" }],
-  30: [{ name: "tome of power", type: "trinket" }],
+  25: [{ item: TRINKETS["ammunition pouch"].item, type: "trinket" }],
+  30: [{ item: INFUSABLES["tome of power"].item, type: "trinket" }],
 };
 
 export const TAILORING_EXPANSION = {

@@ -9,10 +9,10 @@ import { Salve } from "@neverquest/components/Items/Consumable/Salve";
 import { Encumbrance } from "@neverquest/components/Items/Encumbrance";
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
 import { StoredGear } from "@neverquest/components/Items/StoredGear";
-import { Trinket } from "@neverquest/components/Items/Trinkets";
-import { CompassNavigate } from "@neverquest/components/Items/Trinkets/CompassNavigate";
-import { HearthstoneWarp } from "@neverquest/components/Items/Trinkets/HearthstoneWarp";
-import { InfusionInspect } from "@neverquest/components/Items/Trinkets/Infusion/InfusionInspect";
+import { Usable } from "@neverquest/components/Items/Usable";
+import { CompassNavigate } from "@neverquest/components/Items/Usable/CompassNavigate";
+import { HearthstoneWarp } from "@neverquest/components/Items/Usable/HearthstoneWarp";
+import { InfusionInspect } from "@neverquest/components/Items/Usable/Infusion/InfusionInspect";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { inventory } from "@neverquest/state/inventory";
 import {
@@ -20,6 +20,7 @@ import {
   isConsumable,
   isGear,
   isGem,
+  isInfusable,
   isShield,
   isTrinket,
   isWeapon,
@@ -80,7 +81,7 @@ export function Inventory() {
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-                <Trinket item={current} />
+                <Usable item={current} />
 
                 {(() => {
                   switch (name) {
@@ -92,10 +93,6 @@ export function Inventory() {
                       return <HearthstoneWarp />;
                     }
 
-                    case "monkey paw": {
-                      return <InfusionInspect trinket="monkey paw" />;
-                    }
-
                     default: {
                       return null;
                     }
@@ -104,6 +101,17 @@ export function Inventory() {
               </div>
             );
           })}
+
+        {storedItems
+          .filter(isInfusable)
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map((current) => (
+            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.id}>
+              <Usable item={current} />
+
+              <InfusionInspect infusable={current.name} />
+            </div>
+          ))}
 
         {[
           ...stackItems(

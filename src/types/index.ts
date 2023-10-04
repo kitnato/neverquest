@@ -3,6 +3,13 @@ import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/ty
 import type { SVGIcon } from "@neverquest/types/props";
 import type { Consumable, Gem, Grip, Showing, Trinket } from "@neverquest/types/unions";
 
+export type AmmunitionPouchItem = TrinketItem & {
+  current: number;
+  description: string;
+  maximum: number;
+  name: "ammunition pouch";
+};
+
 export type Armor = GearItemBase & {
   deflection: number;
   gearClass: ArmorClass;
@@ -70,7 +77,13 @@ export type GeneratorRange = {
   minimum: number;
 };
 
-export type InventoryItem = ConsumableItem | GearItem | GemItem | TrinketItem;
+export type InfusableItem = ItemBase & {
+  description: string;
+  level: number;
+  name: "monkey paw" | "tome of power";
+};
+
+export type InventoryItem = ConsumableItem | GearItem | GemItem | UsableItem;
 
 type ItemBase = {
   id: string;
@@ -102,23 +115,12 @@ export type Shield = GearItemBase & {
 
 export type StackableItem = ConsumableItem | GemItem;
 
-export type TrinketItem = TrinketItemAmmunitionPouch | TrinketItemDefault | TrinketItemInfusable;
-
-export type TrinketItemAmmunitionPouch = TrinketItemDefault & {
-  current: number;
-  maximum: number;
-  name: "ammunition pouch";
-};
-
-export type TrinketItemDefault = ItemBase & {
+export type TrinketItem = ItemBase & {
   description: string;
   name: Trinket;
 };
 
-export type TrinketItemInfusable = TrinketItemDefault & {
-  level: number;
-  name: "monkey paw";
-};
+export type UsableItem = AmmunitionPouchItem | InfusableItem | TrinketItem;
 
 type WeaponBase = GearItemBase & {
   abilityChance: number;

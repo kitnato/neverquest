@@ -7,7 +7,7 @@ import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { attributeRank } from "@neverquest/state/attributes";
 import { monsterPoisonLength, monsterPoisonMagnitude } from "@neverquest/state/monster";
 import {
-  powerBonus,
+  attributePowerBonus,
   reserveRegenerationAmount,
   reserveRegenerationRate,
 } from "@neverquest/state/statistics";
@@ -45,7 +45,7 @@ export const healthMaximum = withStateKey("healthMaximum", (key) =>
       const attributeRankValue = get(attributeRank("vitality"));
       const total = getComputedStatistic({ amount: attributeRankValue, base, increment });
 
-      return Math.round(total * (1 + get(powerBonus("vitality"))));
+      return Math.round(total * (1 + get(attributePowerBonus("vitality"))));
     },
     key,
   }),
@@ -149,7 +149,7 @@ export const staminaMaximum = withStateKey("staminaMaximum", (key) =>
       const attributeRankValue = get(attributeRank("endurance"));
       const total = getComputedStatistic({ amount: attributeRankValue, base, increment });
 
-      return Math.round(total * (1 + get(powerBonus("endurance"))));
+      return Math.round(total * (1 + get(attributePowerBonus("endurance"))));
     },
     key,
   }),

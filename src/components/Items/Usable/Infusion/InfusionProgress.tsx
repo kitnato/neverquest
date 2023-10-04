@@ -5,12 +5,12 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { infusionCurrent, infusionMaximum } from "@neverquest/state/items";
-import type { Trinket } from "@neverquest/types/unions";
+import type { Infusable } from "@neverquest/types/unions";
 import { formatValue } from "@neverquest/utilities/formatters";
 
-export function InfusionProgress({ trinket }: { trinket: Trinket }) {
-  const infusionCurrentValue = useRecoilValue(infusionCurrent(trinket));
-  const infusionMaximumValue = useRecoilValue(infusionMaximum(trinket));
+export function InfusionProgress({ infusable }: { infusable: Infusable }) {
+  const infusionCurrentValue = useRecoilValue(infusionCurrent(infusable));
+  const infusionMaximumValue = useRecoilValue(infusionMaximum(infusable));
 
   return (
     <LabelledProgressBar

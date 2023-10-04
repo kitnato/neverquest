@@ -65,6 +65,7 @@ export type Delta =
   | "monsterHealth"
   | "parry"
   | "perception"
+  | "powerBonusBoost"
   | "progress"
   | "protection"
   | "range"
@@ -94,6 +95,9 @@ export type Gem = (typeof GEM_TYPES)[number];
 
 export const GRIP_TYPES = ["one-handed", "two-handed"] as const;
 export type Grip = (typeof GRIP_TYPES)[number];
+
+export const INFUSABLE_TYPES = ["monkey paw", "tome of power"] as const;
+export type Infusable = (typeof INFUSABLE_TYPES)[number];
 
 export type Item = Consumable | Gear | Trinket;
 
@@ -183,6 +187,7 @@ export type StateKey =
   | "attackRateTotal"
   | "attributePointCost"
   | "attributePoints"
+  | "attributePowerBonus"
   | "attributeRank"
   | "attributeStatistic"
   | "autoEquip"
@@ -307,7 +312,7 @@ export type StateKey =
   | "parryDamage"
   | "parryRating"
   | "poisonDuration"
-  | "powerBonus"
+  | "powerBonusBoost"
   | "progress"
   | "progressMaximum"
   | "protection"
@@ -343,13 +348,11 @@ export type StateKey =
   | "wildernesses";
 
 export const TRINKET_TYPES = [
-  "antique coin",
   "ammunition pouch",
+  "antique coin",
   "compass",
   "hearthstone",
   "knapsack",
-  "monkey paw",
-  "tome of power",
 ] as const;
 export type Trinket = (typeof TRINKET_TYPES)[number];
 

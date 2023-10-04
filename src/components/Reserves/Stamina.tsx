@@ -10,18 +10,18 @@ import { ReserveMeter } from "@neverquest/components/Reserves/ReserveMeter";
 import { RESERVES } from "@neverquest/data/reserves";
 import { ReactComponent as IconEndurance } from "@neverquest/icons/endurance.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
-import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
+import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
 import { attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
-import { powerBonus } from "@neverquest/state/statistics";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
+import { attributePowerBonus } from "@neverquest/state/statistics";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Stamina() {
+  const endurancePowerBonus = useRecoilValue(attributePowerBonus("endurance"));
+  const endurance = useRecoilValue(attributeStatistic("endurance"));
   const isShowingStamina = useRecoilValue(isShowing("stamina"));
   const isShowingStaminaDetails = useRecoilValue(isShowing("staminaDetails"));
-  const powerBonusValue = useRecoilValue(powerBonus("endurance"));
-  const enduranceValue = useRecoilValue(attributeStatistic("endurance"));
 
   const { baseAmount } = RESERVES.stamina;
 
@@ -65,27 +65,23 @@ export function Stamina() {
                           <Stack direction="horizontal" gap={1}>
                             <IconImage Icon={IconStamina} size="small" />
 
-                            {`+${enduranceValue - baseAmount}`}
+                            {`+${formatValue({ value: endurance - baseAmount })} `}
+
+                            {endurancePowerBonus > 0 && (
+                              <>
+                                {LABEL_SEPARATOR}
+
+                                <IconImage Icon={IconTomeOfPower} size="small" />
+
+                                {`+${formatValue({
+                                  format: "percentage",
+                                  value: endurancePowerBonus,
+                                })}`}
+                              </>
+                            )}
                           </Stack>
                         </td>
                       </tr>
-
-                      {powerBonusValue > 0 && (
-                        <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>
-                            <Stack direction="horizontal" gap={1}>
-                              <IconImage Icon={IconPower} size="small" />
-                              Empowered:
-                            </Stack>
-                          </td>
-
-                          <td>{`+${formatValue({
-                            decimals: 0,
-                            format: "percentage",
-                            value: powerBonusValue,
-                          })}`}</td>
-                        </tr>
-                      )}
                     </DetailsTable>
                   </Popover.Body>
                 </Popover>

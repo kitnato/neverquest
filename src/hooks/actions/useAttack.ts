@@ -32,7 +32,7 @@ import {
   damageTotal,
   execution,
 } from "@neverquest/state/statistics";
-import type { TrinketItemAmmunitionPouch } from "@neverquest/types";
+import type { AmmunitionPouchItem } from "@neverquest/types";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
@@ -110,12 +110,12 @@ export function useAttack() {
                   ? {
                       ...currentItem,
                       current:
-                        (currentItem as TrinketItemAmmunitionPouch).current -
-                        weaponValue.ammunitionCost,
+                        (currentItem as AmmunitionPouchItem).current - weaponValue.ammunitionCost,
                     }
                   : currentItem;
               }),
             );
+
             increaseMastery("marksmanship");
           }
 

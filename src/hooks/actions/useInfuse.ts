@@ -4,8 +4,8 @@ import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence
 import { inventory } from "@neverquest/state/inventory";
 import { infusionCurrent, infusionMaximum, infusionStep, ownedItem } from "@neverquest/state/items";
 
-import type { TrinketItemInfusable } from "@neverquest/types";
-import type { Trinket } from "@neverquest/types/unions";
+import { isInfusable } from "@neverquest/types/type-guards";
+import type { Infusable } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useInfuse() {
@@ -13,26 +13,31 @@ export function useInfuse() {
 
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
-      (trinket: Trinket) => {
+      (infusable: Infusable) => {
         const get = getSnapshotGetter(snapshot);
 
-        const ownedTrinket = get(ownedItem(trinket));
+        const ownedInfusable = get(ownedItem(infusable));
 
-        if (ownedTrinket === null) {
+        if (ownedInfusable === null) {
           return;
         }
 
-        const infusionStepValue = get(infusionStep(trinket));
-        const infusionCurrentState = infusionCurrent(trinket);
+        const infusionStepValue = get(infusionStep(infusable));
+
+        if (infusionStepValue === 0) {
+          return;
+        }
+
+        const infusionCurrentState = infusionCurrent(infusable);
         const newInfusion = get(infusionCurrentState) + infusionStepValue;
 
-        if (newInfusion >= get(infusionMaximum(trinket))) {
+        if (newInfusion >= get(infusionMaximum(infusable))) {
           set(inventory, (currentInventory) =>
             currentInventory.map((currentItem) => {
-              if (currentItem.id === ownedTrinket.id) {
+              if (currentItem.id === ownedInfusable.id && isInfusable(currentItem)) {
                 return {
                   ...currentItem,
-                  level: (currentItem as TrinketItemInfusable).level + 1,
+                  level: currentItem.level + 1,
                 };
               }
 

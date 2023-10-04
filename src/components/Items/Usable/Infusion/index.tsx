@@ -5,11 +5,11 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 import { useInfuse } from "@neverquest/hooks/actions/useInfuse";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { infusionDelta, infusionStep } from "@neverquest/state/items";
-import type { Trinket } from "@neverquest/types/unions";
+import type { Infusable } from "@neverquest/types/unions";
 import { LABEL_NO_ESSENCE } from "@neverquest/utilities/constants";
 
-export function Infusion({ trinket }: { trinket: Trinket }) {
-  const canInfuse = useRecoilValue(infusionStep(trinket)) > 0;
+export function Infusion({ infusable }: { infusable: Infusable }) {
+  const canInfuse = useRecoilValue(infusionStep(infusable)) > 0;
   const setInfusionDelta = useSetRecoilState(infusionDelta);
   const resetInfusionDelta = useResetRecoilState(infusionDelta);
 
@@ -25,7 +25,7 @@ export function Infusion({ trinket }: { trinket: Trinket }) {
   useAnimate({
     delta: setInfusionDelta,
     onDelta: () => {
-      infuse(trinket);
+      infuse(infusable);
 
       resetInfusionDelta();
     },

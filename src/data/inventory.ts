@@ -26,13 +26,15 @@ import { ReactComponent as IconShieldSmall } from "@neverquest/icons/shield-smal
 import { ReactComponent as IconShieldTower } from "@neverquest/icons/shield-tower.svg";
 import { ReactComponent as IconSlashing } from "@neverquest/icons/slashing.svg";
 import { ReactComponent as IconStun } from "@neverquest/icons/stun.svg";
-import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
+import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type {
+  AmmunitionPouchItem,
   Armor,
   ConsumableItem,
   GearBase,
   GeneratorRange,
+  InfusableItem,
   Melee,
   Shield,
   TrinketItem,
@@ -42,6 +44,7 @@ import type {
   Consumable,
   Elemental,
   Gem,
+  Infusable,
   MonsterAilment,
   Trinket,
   WeaponAbility,
@@ -54,7 +57,7 @@ export const ARMOR_NONE: Omit<Armor, "isEquipped" | "price"> = {
   gearClass: "light",
   gems: [],
   id: nanoid(),
-  level: 0,
+  level: 1,
   name: "Unarmored",
   protection: 0,
   staminaCost: 0,
@@ -211,18 +214,54 @@ export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
 export const GEM_FITTING_COST = [20, 40, 70, 120, 200];
 export const GEMS_MAXIMUM = 5;
 
-export const MONKEY_PAW_BONUS = {
-  maximum: 2,
-  minimum: 0.2,
+export const INFUSABLES: Record<
+  Infusable,
+  {
+    Icon: SVGIcon;
+    item: InfusableItem & {
+      growth: number;
+      maximum: number;
+      minimum: number;
+    };
+  }
+> = {
+  "monkey paw": {
+    Icon: IconMonkeyPaw,
+    item: {
+      description: "Boosts amount of essence looted. Can be infused to increase its potency.",
+      growth: 12,
+      id: nanoid(),
+      level: 1,
+      maximum: 2,
+      minimum: 0.2,
+      name: "monkey paw",
+      price: 500,
+      weight: 4,
+    },
+  },
+  "tome of power": {
+    Icon: IconTomeOfPower,
+    item: {
+      description:
+        "Boosts all attribute effects based on power level. Can be infused to increase its potency.",
+      growth: 14,
+      id: nanoid(),
+      level: 1,
+      maximum: 1.5,
+      minimum: 0,
+      name: "tome of power",
+      price: 5000,
+      weight: 10,
+    },
+  },
 };
-export const GROWTH: Partial<Record<Trinket, number>> = { "monkey paw": 14 };
 
 export const SHIELD_NONE: Omit<Shield, "isEquipped" | "price"> = {
   block: 0,
   gearClass: "small",
   gems: [],
   id: nanoid(),
-  level: 0,
+  level: 1,
   name: "Unshielded",
   stagger: 0,
   staminaCost: 0,
@@ -296,81 +335,61 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
 };
 
-export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
-  "ammunition pouch": {
-    Icon: IconAmmunitionPouch,
-    item: {
-      current: 0,
-      description: "Store ammunition for ranged weapons.",
-      id: nanoid(),
-      maximum: AMMUNITION_MAXIMUM,
-      name: "ammunition pouch",
-      price: 250,
-      weight: 6,
+export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: AmmunitionPouchItem | TrinketItem }> =
+  {
+    "ammunition pouch": {
+      Icon: IconAmmunitionPouch,
+      item: {
+        current: 0,
+        description: "Store ammunition for ranged weapons.",
+        id: nanoid(),
+        maximum: AMMUNITION_MAXIMUM,
+        name: "ammunition pouch",
+        price: 250,
+        weight: 6,
+      },
     },
-  },
-  "antique coin": {
-    Icon: IconAntiqueCoin,
-    item: {
-      description: "The wielder is bestowed with extreme fortune.",
-      id: nanoid(),
-      name: "antique coin",
-      price: 1000,
-      weight: 2,
+    "antique coin": {
+      Icon: IconAntiqueCoin,
+      item: {
+        description: "The wielder is bestowed with extreme fortune.",
+        id: nanoid(),
+        name: "antique coin",
+        price: 1000,
+        weight: 2,
+      },
     },
-  },
-  compass: {
-    Icon: IconCompass,
-    item: {
-      description: "Navigate the wilderness to hunt in previous locations.",
-      id: nanoid(),
-      name: "compass",
-      price: 50,
-      weight: 2,
+    compass: {
+      Icon: IconCompass,
+      item: {
+        description: "Navigate the wilderness to hunt in previous locations.",
+        id: nanoid(),
+        name: "compass",
+        price: 50,
+        weight: 2,
+      },
     },
-  },
-  hearthstone: {
-    Icon: IconStone,
-    item: {
-      description: "Travel back to the caravan even if there are still lurking monsters.",
-      id: nanoid(),
-      name: "hearthstone",
-      price: 20,
-      weight: 2,
+    hearthstone: {
+      Icon: IconStone,
+      item: {
+        description: "Travel back to the caravan even if there are still lurking monsters.",
+        id: nanoid(),
+        name: "hearthstone",
+        price: 20,
+        weight: 2,
+      },
     },
-  },
-  knapsack: {
-    Icon: IconKnapsack,
-    item: {
-      description: "Carry more items and manage gear.",
-      id: nanoid(),
-      name: "knapsack",
-      price: 10,
-      weight: 0,
+    knapsack: {
+      Icon: IconKnapsack,
+      item: {
+        description: "Carry more items and manage gear.",
+        id: nanoid(),
+        name: "knapsack",
+        price: 10,
+        weight: 0,
+      },
     },
-  },
-  "monkey paw": {
-    Icon: IconMonkeyPaw,
-    item: {
-      description: "Boosts amount of essence looted. Can be infused to increase its potency.",
-      id: nanoid(),
-      level: 1,
-      name: "monkey paw",
-      price: 500,
-      weight: 4,
-    },
-  },
-  "tome of power": {
-    Icon: IconPower,
-    item: {
-      description: "Boosts all attributes based on power level.",
-      id: nanoid(),
-      name: "tome of power",
-      price: 5000,
-      weight: 10,
-    },
-  },
-};
+  };
 
 export const WEAPON_BASE: GearBase & {
   ammunitionCost: [GeneratorRange, GeneratorRange];
@@ -418,7 +437,7 @@ export const WEAPON_NONE: Omit<Melee, "isEquipped" | "price"> = {
   gems: [],
   grip: "one-handed",
   id: nanoid(),
-  level: 0,
+  level: 1,
   name: "Unarmed",
   rate: 2500,
   staminaCost: 0,

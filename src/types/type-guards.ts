@@ -4,15 +4,21 @@ import type {
   GearItem,
   GemItem,
   GeneratorRange,
+  InfusableItem,
   Melee,
   Ranged,
   Shield,
   StackableItem,
   TrinketItem,
-  TrinketItemInfusable,
+  UsableItem,
   Weapon,
 } from "@neverquest/types";
-import { CONSUMABLE_TYPES, GEM_TYPES, TRINKET_TYPES } from "@neverquest/types/unions";
+import {
+  CONSUMABLE_TYPES,
+  GEM_TYPES,
+  INFUSABLE_TYPES,
+  TRINKET_TYPES,
+} from "@neverquest/types/unions";
 
 export function isArmor(unknown: unknown): unknown is Armor {
   return isObject(unknown) && typeof unknown.protection === "number";
@@ -40,8 +46,8 @@ export function isGeneratorRanges(unknown: unknown): unknown is [GeneratorRange,
   return Array.isArray(unknown) && isGeneratorRange(unknown[0]) && isGeneratorRange(unknown[1]);
 }
 
-export function isInfusable(unknown: unknown): unknown is TrinketItemInfusable {
-  return isObject(unknown) && typeof unknown.level === "number";
+export function isInfusable(unknown: unknown): unknown is InfusableItem {
+  return isObject(unknown) && INFUSABLE_TYPES.some((current) => current === unknown.name);
 }
 
 function isObject(value: unknown): value is Record<string, unknown> {
@@ -66,6 +72,10 @@ export function isStackable(unknown: unknown): unknown is StackableItem {
 
 export function isTrinket(unknown: unknown): unknown is TrinketItem {
   return isObject(unknown) && TRINKET_TYPES.some((current) => current === unknown.name);
+}
+
+export function isUsable(unknown: unknown): unknown is UsableItem {
+  return isInfusable(unknown) || isTrinket(unknown);
 }
 
 export function isWeapon(unknown: unknown): unknown is Weapon {

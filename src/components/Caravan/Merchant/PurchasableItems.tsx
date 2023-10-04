@@ -3,10 +3,10 @@ import { Stack } from "react-bootstrap";
 import { PurchaseItem } from "@neverquest/components/Caravan/Merchant/PurchaseItem";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
-import { Trinket } from "@neverquest/components/Items/Trinkets";
+import { Usable } from "@neverquest/components/Items/Usable";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import type { InventoryItem } from "@neverquest/types";
-import { isGear, isTrinket } from "@neverquest/types/type-guards";
+import { isGear, isUsable } from "@neverquest/types/type-guards";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
@@ -19,8 +19,8 @@ export function PurchasableItems({ items }: { items: InventoryItem[] }) {
 
         return (
           <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-            {isTrinket(item) ? (
-              <Trinket item={item} />
+            {isUsable(item) ? (
+              <Usable item={item} />
             ) : (
               <ItemDisplay
                 item={item}

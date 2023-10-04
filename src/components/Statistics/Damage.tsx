@@ -10,22 +10,21 @@ import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDet
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
 import { ReactComponent as IconStrength } from "@neverquest/icons/strength.svg";
-import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
+import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
 import { attributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { weapon } from "@neverquest/state/items";
-import { damage, damageTotal, powerBonus } from "@neverquest/state/statistics";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
+import { attributePowerBonus, damageTotal } from "@neverquest/state/statistics";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Damage() {
-  const strengthValue = useRecoilValue(attributeStatistic("strength"));
-  const damageValue = useRecoilValue(damage);
+  const strengthPowerBonus = useRecoilValue(attributePowerBonus("strength"));
+  const strength = useRecoilValue(attributeStatistic("strength"));
   const damageTotalValue = useRecoilValue(damageTotal);
   const isShowingDamageDetails = useRecoilValue(isShowing("damageDetails"));
-  const powerBonusValue = useRecoilValue(powerBonus("strength"));
   const { damage: weaponDamage, gems } = useRecoilValue(weapon);
 
   const appliedGems = gems.length;
@@ -53,7 +52,7 @@ export function Damage() {
                         <Stack direction="horizontal" gap={1}>
                           <IconImage Icon={IconWeaponDamage} size="small" />
 
-                          {weaponDamage}
+                          {formatValue({ value: weaponDamage })}
                         </Stack>
                       </td>
                     </tr>
@@ -68,33 +67,25 @@ export function Damage() {
                         </Stack>
                       </td>
 
-                      <td>{`+${strengthValue}`}</td>
+                      <td>
+                        <Stack direction="horizontal" gap={1}>
+                          {`+${formatValue({ value: strength })} `}
+
+                          {strengthPowerBonus > 0 && (
+                            <>
+                              {LABEL_SEPARATOR}
+
+                              <IconImage Icon={IconTomeOfPower} size="small" />
+
+                              {`+${formatValue({
+                                format: "percentage",
+                                value: strengthPowerBonus,
+                              })}`}
+                            </>
+                          )}
+                        </Stack>
+                      </td>
                     </tr>
-
-                    {powerBonusValue > 0 && (
-                      <>
-                        <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>
-                            <Stack direction="horizontal" gap={1}>
-                              <IconImage Icon={IconPower} size="small" />
-                              Empowered:
-                            </Stack>
-                          </td>
-
-                          <td>{`+${formatValue({
-                            decimals: 0,
-                            format: "percentage",
-                            value: powerBonusValue,
-                          })}`}</td>
-                        </tr>
-
-                        <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Total:</td>
-
-                          <td>{`+${damageValue}`}</td>
-                        </tr>
-                      </>
-                    )}
                   </DetailsTable>
                 </Popover.Body>
               </Popover>

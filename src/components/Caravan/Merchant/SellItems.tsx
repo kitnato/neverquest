@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { SellItem } from "@neverquest/components/Caravan/Merchant/SellItem";
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
-import { Trinket } from "@neverquest/components/Items/Trinkets";
+import { Usable } from "@neverquest/components/Items/Usable";
 import { inventory } from "@neverquest/state/inventory";
 import {
   isArmor,
@@ -11,7 +11,7 @@ import {
   isGear,
   isGem,
   isShield,
-  isTrinket,
+  isUsable,
   isWeapon,
 } from "@neverquest/types/type-guards";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
@@ -67,11 +67,11 @@ export function SellItems() {
             ))}
 
           {storedItems
-            .filter(isTrinket)
+            .filter(isUsable)
             .sort((a, b) => a.name.localeCompare(b.name))
             .map((current) => (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.id}>
-                <Trinket item={current} />
+                <Usable item={current} />
 
                 <SellItem item={current} />
               </div>

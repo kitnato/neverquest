@@ -6,15 +6,15 @@ import {
   GEM_DURATION,
   GEM_ELEMENTALS,
   GEM_ENHANCEMENT,
-  MONKEY_PAW_BONUS,
+  INFUSABLES,
 } from "@neverquest/data/inventory";
 import { BLEED, PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/statistics";
 import { withStateKey } from "@neverquest/state";
 import { attributeStatistic, level } from "@neverquest/state/attributes";
 import { armor, ownedItem, shield, weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import type { TrinketItemInfusable } from "@neverquest/types";
-import { isMelee, isRanged } from "@neverquest/types/type-guards";
+import type { InfusableItem } from "@neverquest/types";
+import { isInfusable, isMelee, isRanged } from "@neverquest/types/type-guards";
 import type { Attribute } from "@neverquest/types/unions";
 import {
   getDamagePerRate,
@@ -29,7 +29,7 @@ import { stackItems } from "@neverquest/utilities/helpers";
 
 export const attackRate = withStateKey("attackRate", (key) =>
   selector({
-    get: ({ get }) => get(attributeStatistic("speed")) * (1 + get(powerBonus("speed"))),
+    get: ({ get }) => get(attributeStatistic("speed")) * (1 + get(attributePowerBonus("speed"))),
     key,
   }),
 );
@@ -37,6 +37,23 @@ export const attackRate = withStateKey("attackRate", (key) =>
 export const attackRateTotal = withStateKey("attackRateTotal", (key) =>
   selector({
     get: ({ get }) => get(weapon).rate * (1 - get(attackRate)),
+    key,
+  }),
+);
+
+export const attributePowerBonus = withStateKey("attributePowerBonus", (key) =>
+  selectorFamily<number, Attribute>({
+    get:
+      (parameter) =>
+      ({ get }) => {
+        const powerBonusBoostValue = get(powerBonusBoost);
+
+        return (
+          get(level) *
+          ATTRIBUTES[parameter].powerBonus *
+          (powerBonusBoostValue === 0 ? 0 : 1 + powerBonusBoostValue)
+        );
+      },
     key,
   }),
 );
@@ -85,14 +102,16 @@ export const block = withStateKey("block", (key) =>
 
 export const criticalChance = withStateKey("criticalChance", (key) =>
   selector({
-    get: ({ get }) => get(attributeStatistic("dexterity")) * (1 + get(powerBonus("dexterity"))),
+    get: ({ get }) =>
+      get(attributeStatistic("dexterity")) * (1 + get(attributePowerBonus("dexterity"))),
     key,
   }),
 );
 
 export const criticalDamage = withStateKey("criticalDamage", (key) =>
   selector({
-    get: ({ get }) => get(attributeStatistic("perception")) * (1 + get(powerBonus("perception"))),
+    get: ({ get }) =>
+      get(attributeStatistic("perception")) * (1 + get(attributePowerBonus("perception"))),
     key,
   }),
 );
@@ -113,7 +132,8 @@ export const criticalStrike = withStateKey("criticalStrike", (key) =>
 
 export const damage = withStateKey("damage", (key) =>
   selector({
-    get: ({ get }) => get(attributeStatistic("strength")) * (1 + get(powerBonus("strength"))),
+    get: ({ get }) =>
+      Math.round(get(attributeStatistic("strength")) * (1 + get(attributePowerBonus("strength")))),
     key,
   }),
 );
@@ -156,7 +176,7 @@ export const dodge = withStateKey("dodge", (key) =>
     get: ({ get }) =>
       get(armor).staminaCost === Infinity
         ? 0
-        : get(attributeStatistic("agility")) * (1 + get(powerBonus("agility"))),
+        : get(attributeStatistic("agility")) * (1 + get(attributePowerBonus("agility"))),
     key,
   }),
 );
@@ -170,10 +190,12 @@ export const essenceBonus = withStateKey("essenceBonus", (key) =>
         return 0;
       }
 
+      const { maximum, minimum } = INFUSABLES["monkey paw"].item;
+
       return getFromRange({
-        factor: getGrowthSigmoid((ownedMonkeyPaw as TrinketItemInfusable).level),
-        maximum: MONKEY_PAW_BONUS.maximum,
-        minimum: MONKEY_PAW_BONUS.minimum,
+        factor: getGrowthSigmoid((ownedMonkeyPaw as InfusableItem).level),
+        maximum,
+        minimum,
       });
     },
     key,
@@ -277,14 +299,23 @@ export const parryRating = withStateKey("parryRating", (key) =>
   }),
 );
 
-export const powerBonus = withStateKey("powerBonus", (key) =>
-  selectorFamily<number, Attribute>({
-    get:
-      (parameter) =>
-      ({ get }) =>
-        get(ownedItem("tome of power")) === null
-          ? 0
-          : get(level) * ATTRIBUTES[parameter].powerBonus,
+export const powerBonusBoost = withStateKey("powerBonusBoost", (key) =>
+  selector({
+    get: ({ get }) => {
+      const ownedTomeOfPower = get(ownedItem("tome of power"));
+
+      if (ownedTomeOfPower === null || !isInfusable(ownedTomeOfPower)) {
+        return 0;
+      }
+
+      const { maximum, minimum } = INFUSABLES["tome of power"].item;
+
+      return getFromRange({
+        factor: getGrowthSigmoid(ownedTomeOfPower.level),
+        maximum,
+        minimum,
+      });
+    },
     key,
   }),
 );
@@ -319,14 +350,16 @@ export const recoveryRate = withStateKey("recoveryRate", (key) =>
 export const reserveRegenerationAmount = withStateKey("reserveRegenerationAmount", (key) =>
   selector({
     get: ({ get }) =>
-      Math.round(get(attributeStatistic("fortitude")) * (1 + get(powerBonus("fortitude")))),
+      Math.round(
+        get(attributeStatistic("fortitude")) * (1 + get(attributePowerBonus("fortitude"))),
+      ),
     key,
   }),
 );
 
 export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (key) =>
   selector({
-    get: ({ get }) => get(attributeStatistic("vigor")) * (1 + get(powerBonus("vigor"))),
+    get: ({ get }) => get(attributeStatistic("vigor")) * (1 + get(attributePowerBonus("vigor"))),
     key,
   }),
 );

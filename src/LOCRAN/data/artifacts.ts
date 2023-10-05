@@ -272,6 +272,11 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "armor",
   },
   {
+    name: "brogues",
+    subtype: "feet",
+    type: "armor",
+  },
+  {
     name: "bucket",
     subtype: "head",
     type: "armor",
@@ -653,6 +658,11 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    name: "flip-flop",
+    subtype: "feet",
+    type: "armor",
+  },
+  {
     artifactClass: "blunt",
     name: "flowerpot",
     subtype: "melee",
@@ -800,6 +810,11 @@ export const ARTIFACTS: ArtifactData[] = [
   {
     name: "hide",
     subtype: "chest",
+    type: "armor",
+  },
+  {
+    name: "high-heels",
+    subtype: "feet",
     type: "armor",
   },
   {
@@ -1317,6 +1332,11 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    name: "sandals",
+    subtype: "feet",
+    type: "armor",
+  },
+  {
     artifactClass: "blunt",
     name: "sausage",
     subtype: "melee",
@@ -1366,6 +1386,11 @@ export const ARTIFACTS: ArtifactData[] = [
     name: "shield",
     subtype: "medium",
     type: "shield",
+  },
+  {
+    name: "shoes",
+    subtype: "feet",
+    type: "armor",
   },
   {
     artifactClass: "piercing",
@@ -1452,6 +1477,11 @@ export const ARTIFACTS: ArtifactData[] = [
     name: "slingshot",
     subtype: "ranged",
     type: "weapon",
+  },
+  {
+    name: "slippers",
+    subtype: "feet",
+    type: "armor",
   },
   {
     artifactClass: "piercing",
@@ -1680,7 +1710,11 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
-    isNSFW: true,
+    name: "underpants",
+    subtype: "legs",
+    type: "armor",
+  },
+  {
     name: "underwear",
     subtype: "legs",
     type: "armor",

@@ -1,4 +1,4 @@
-# Manual
+# Neverquest manual
 
 There are two panels: the [character](#character) (left) and the [encounter](#encounter) (right), with interactions between the two taking place via a column of control buttons in between them.
 
@@ -496,17 +496,15 @@ A monster can be afflicted by any combination of elemental effects, the everity 
 
 #### Trinkets
 
-Can enable various actions or grant certain effects if they are carried in the [inventory](#inventory).
+Enable various actions or grant certain effects if they are carried in the [inventory](#inventory).
 
-The following are some of the early trinkets available from the merchant.
+##### Static trinkets
 
-##### Compass
+These provide a permanent effect of some sort while they are carried in the inventory. If they are sold or lost, the effect goes with it.
 
-Allows the character to return to any previous stage to hunt more monsters.
+##### Usable trinkets
 
-##### Hearthstone
-
-Allows the character to return to the caravan regardless of if the current [wilderness](#wilderness) stage's monsters are cleared out or not. Can only be used if not currently attacking (so that the inventory can be opened to use the hearthstone).
+In addition to maybe providing a [static](#static-trinkets) effect, these trinkets also allow direct interaction, usually granting a new action. Some of these trinkets are infusable, meaning they allow [essence](#essence) to be spent on them to upgrade their effect.
 
 ### Consumables
 

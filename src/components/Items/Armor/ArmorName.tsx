@@ -80,20 +80,18 @@ export function ArmorName({
 
                       <td>
                         {(() => {
-                          if ("gearClass" in armor) {
-                            const { gearClass } = armor;
+                          const { gearClass } = armor;
 
-                            if (gearClass) {
-                              const { Icon } = ARMOR_SPECIFICATIONS[gearClass];
+                          if (gearClass) {
+                            const { Icon } = ARMOR_SPECIFICATIONS[gearClass];
 
-                              return (
-                                <Stack direction="horizontal" gap={1}>
-                                  <IconImage Icon={Icon} size="small" />
+                            return (
+                              <Stack direction="horizontal" gap={1}>
+                                <IconImage Icon={Icon} size="small" />
 
-                                  {capitalizeAll(gearClass)}
-                                </Stack>
-                              );
-                            }
+                                {capitalizeAll(gearClass)}
+                              </Stack>
+                            );
                           }
 
                           return (

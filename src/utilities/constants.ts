@@ -27,6 +27,9 @@ export const LABEL_OVER_ENCUMBERED = "Too heavy.";
 export const LABEL_SEPARATOR = "·";
 export const LABEL_UNKNOWN = "???";
 
+// Growth factor for ranges that scale evenly from level 1 to 100.
+export const LINEAR_LEVEL_FACTOR = 100;
+
 export const MILLISECONDS_IN_HOUR = 3600000;
 export const MILLISECONDS_IN_MINUTE = 60000;
 export const MILLISECONDS_IN_SECOND = 1000;

@@ -92,20 +92,18 @@ export function ShieldName({
 
                       <td>
                         {(() => {
-                          if ("gearClass" in shield) {
-                            const { gearClass } = shield;
+                          const { gearClass } = shield;
 
-                            if (gearClass) {
-                              const { Icon } = SHIELD_SPECIFICATIONS[gearClass];
+                          if (gearClass) {
+                            const { Icon } = SHIELD_SPECIFICATIONS[gearClass];
 
-                              return (
-                                <Stack direction="horizontal" gap={1}>
-                                  <IconImage Icon={Icon} size="small" />
+                            return (
+                              <Stack direction="horizontal" gap={1}>
+                                <IconImage Icon={Icon} size="small" />
 
-                                  {capitalizeAll(gearClass)}
-                                </Stack>
-                              );
-                            }
+                                {capitalizeAll(gearClass)}
+                              </Stack>
+                            );
                           }
 
                           return (

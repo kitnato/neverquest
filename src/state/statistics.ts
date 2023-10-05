@@ -13,15 +13,14 @@ import { withStateKey } from "@neverquest/state";
 import { attributeStatistic, level } from "@neverquest/state/attributes";
 import { armor, ownedItem, shield, weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import type { InfusableItem } from "@neverquest/types";
 import { isInfusable, isMelee, isRanged } from "@neverquest/types/type-guards";
 import type { Attribute } from "@neverquest/types/unions";
+import { LINEAR_LEVEL_FACTOR } from "@neverquest/utilities/constants";
 import {
   getDamagePerRate,
   getDamagePerTick,
   getElementalEffects,
   getFromRange,
-  getGrowthSigmoid,
 } from "@neverquest/utilities/getters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
@@ -186,14 +185,14 @@ export const essenceBonus = withStateKey("essenceBonus", (key) =>
     get: ({ get }) => {
       const ownedMonkeyPaw = get(ownedItem("monkey paw"));
 
-      if (ownedMonkeyPaw === null) {
+      if (ownedMonkeyPaw === null || !isInfusable(ownedMonkeyPaw)) {
         return 0;
       }
 
       const { maximum, minimum } = INFUSABLES["monkey paw"].item;
 
       return getFromRange({
-        factor: getGrowthSigmoid((ownedMonkeyPaw as InfusableItem).level),
+        factor: ownedMonkeyPaw.level / LINEAR_LEVEL_FACTOR,
         maximum,
         minimum,
       });
@@ -311,7 +310,7 @@ export const powerBonusBoost = withStateKey("powerBonusBoost", (key) =>
       const { maximum, minimum } = INFUSABLES["tome of power"].item;
 
       return getFromRange({
-        factor: getGrowthSigmoid(ownedTomeOfPower.level),
+        factor: ownedTomeOfPower.level / LINEAR_LEVEL_FACTOR,
         maximum,
         minimum,
       });

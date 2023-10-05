@@ -4,10 +4,10 @@ import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { BLIGHT } from "@neverquest/data/monster";
 import { HEALTH_LOW_THRESHOLD, RESERVES } from "@neverquest/data/reserves";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import { attributes } from "@neverquest/state/attributes";
+import { attributeRank } from "@neverquest/state/attributes";
 import { monsterPoisonLength, monsterPoisonMagnitude } from "@neverquest/state/monster";
 import {
-  powerBonus,
+  attributePowerBonus,
   reserveRegenerationAmount,
   reserveRegenerationRate,
 } from "@neverquest/state/statistics";
@@ -42,10 +42,10 @@ export const healthMaximum = withStateKey("healthMaximum", (key) =>
   selector({
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.vitality;
-      const { points } = get(attributes("vitality"));
-      const total = getComputedStatistic({ amount: points, base, increment });
+      const attributeRankValue = get(attributeRank("vitality"));
+      const total = getComputedStatistic({ amount: attributeRankValue, base, increment });
 
-      return Math.round(total + total * get(powerBonus("vitality")));
+      return Math.round(total * (1 + get(attributePowerBonus("vitality"))));
     },
     key,
   }),
@@ -146,10 +146,10 @@ export const staminaMaximum = withStateKey("staminaMaximum", (key) =>
   selector({
     get: ({ get }) => {
       const { base, increment } = ATTRIBUTES.endurance;
-      const { points } = get(attributes("endurance"));
-      const total = getComputedStatistic({ amount: points, base, increment });
+      const attributeRankValue = get(attributeRank("endurance"));
+      const total = getComputedStatistic({ amount: attributeRankValue, base, increment });
 
-      return Math.round(total + total * get(powerBonus("endurance")));
+      return Math.round(total * (1 + get(attributePowerBonus("endurance"))));
     },
     key,
   }),

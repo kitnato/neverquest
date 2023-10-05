@@ -46,7 +46,7 @@ export function CheatQuest() {
         }
         // Heretic
         case "gimmee": {
-          if (typeof value === "string" && value in SKILL_TYPES) {
+          if (typeof value === "string" && SKILL_TYPES.includes(value)) {
             acquireSkill(value);
           }
 

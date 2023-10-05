@@ -24,7 +24,7 @@ export function Stage() {
         <Stack direction="horizontal">
           <span>{formatValue({ value: stageValue })}</span>
 
-          <FloatingText deltaType="stage" />
+          <FloatingText delta="stage" />
         </Stack>
       }
       Icon={IconStage}

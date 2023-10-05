@@ -13,6 +13,7 @@ import { ParryRating } from "@neverquest/components/Statistics/ParryRating";
 import { Protection } from "@neverquest/components/Statistics/Protection";
 import { StaggerRating } from "@neverquest/components/Statistics/StaggerRating";
 import { StunRating } from "@neverquest/components/Statistics/StunRating";
+import { Thorns } from "@neverquest/components/Statistics/Thorns";
 import { isShowing } from "@neverquest/state/isShowing";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -24,7 +25,7 @@ export function Statistics() {
   }
 
   return (
-    <Card className={getAnimationClass({ type: "flipInX" })}>
+    <Card className={getAnimationClass({ name: "flipInX" })}>
       <Card.Body>
         <Row>
           <Col>
@@ -48,6 +49,8 @@ export function Statistics() {
           <Col>
             <Stack gap={3}>
               <Protection />
+
+              <Thorns />
 
               <Deflection />
 

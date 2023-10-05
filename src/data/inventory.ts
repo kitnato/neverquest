@@ -3,7 +3,8 @@ import { nanoid } from "nanoid";
 import { ReactComponent as IconAmmunitionPouch } from "@neverquest/icons/ammunition-pouch.svg";
 import { ReactComponent as IconAntidote } from "@neverquest/icons/antidote.svg";
 import { ReactComponent as IconAntiqueCoin } from "@neverquest/icons/antique-coin.svg";
-import { ReactComponent as IconPlate } from "@neverquest/icons/armor-plate.svg";
+import { ReactComponent as IconArmorHeavy } from "@neverquest/icons/armor-heavy.svg";
+import { ReactComponent as IconArmorLight } from "@neverquest/icons/armor-light.svg";
 import { ReactComponent as IconReinforced } from "@neverquest/icons/armor-reinforced.svg";
 import { ReactComponent as IconBandages } from "@neverquest/icons/bandages.svg";
 import { ReactComponent as IconBleed } from "@neverquest/icons/bleed.svg";
@@ -12,7 +13,6 @@ import { ReactComponent as IconCompass } from "@neverquest/icons/compass.svg";
 import { ReactComponent as IconElixir } from "@neverquest/icons/elixir.svg";
 import { ReactComponent as IconFire } from "@neverquest/icons/fire.svg";
 import { ReactComponent as IconStone } from "@neverquest/icons/hearthstone.svg";
-import { ReactComponent as IconHide } from "@neverquest/icons/hide.svg";
 import { ReactComponent as IconIce } from "@neverquest/icons/ice.svg";
 import { ReactComponent as IconKnapsack } from "@neverquest/icons/knapsack.svg";
 import { ReactComponent as IconLightning } from "@neverquest/icons/lightning.svg";
@@ -26,13 +26,15 @@ import { ReactComponent as IconShieldSmall } from "@neverquest/icons/shield-smal
 import { ReactComponent as IconShieldTower } from "@neverquest/icons/shield-tower.svg";
 import { ReactComponent as IconSlashing } from "@neverquest/icons/slashing.svg";
 import { ReactComponent as IconStun } from "@neverquest/icons/stun.svg";
-import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
+import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type {
+  AmmunitionPouchItem,
   Armor,
   ConsumableItem,
   GearBase,
   GeneratorRange,
+  InfusableItem,
   Melee,
   Shield,
   TrinketItem,
@@ -42,6 +44,7 @@ import type {
   Consumable,
   Elemental,
   Gem,
+  Infusable,
   MonsterAilment,
   Trinket,
   WeaponAbility,
@@ -51,10 +54,10 @@ export const AMMUNITION_MAXIMUM = 100;
 
 export const ARMOR_NONE: Omit<Armor, "isEquipped" | "price"> = {
   deflection: 0,
-  gearClass: "hide",
+  gearClass: "light",
   gems: [],
   id: nanoid(),
-  level: 0,
+  level: 1,
   name: "Unarmored",
   protection: 0,
   staminaCost: 0,
@@ -70,26 +73,12 @@ export const ARMOR_SPECIFICATIONS: Record<
     staminaCost: number | [GeneratorRange, GeneratorRange];
   }
 > = {
-  hide: {
-    deflection: null,
-    Icon: IconHide,
-    price: { maximum: 800, minimum: 1 },
-    protection: [
-      { maximum: 2, minimum: 1 },
-      { maximum: 500, minimum: 450 },
-    ],
-    staminaCost: 0,
-    weight: [
-      { maximum: 2, minimum: 1 },
-      { maximum: 60, minimum: 55 },
-    ],
-  },
-  plate: {
+  heavy: {
     deflection: [
       { maximum: 0.25, minimum: 0.2 },
       { maximum: 0.65, minimum: 0.6 },
     ],
-    Icon: IconPlate,
+    Icon: IconArmorHeavy,
     price: { maximum: 1600, minimum: 8 },
     protection: [
       { maximum: 10, minimum: 8 },
@@ -99,6 +88,20 @@ export const ARMOR_SPECIFICATIONS: Record<
     weight: [
       { maximum: 7, minimum: 5 },
       { maximum: 100, minimum: 90 },
+    ],
+  },
+  light: {
+    deflection: null,
+    Icon: IconArmorLight,
+    price: { maximum: 800, minimum: 1 },
+    protection: [
+      { maximum: 2, minimum: 1 },
+      { maximum: 500, minimum: 450 },
+    ],
+    staminaCost: 0,
+    weight: [
+      { maximum: 2, minimum: 1 },
+      { maximum: 60, minimum: 55 },
     ],
   },
   reinforced: {
@@ -129,8 +132,8 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       Icon: IconAntidote,
       item: {
         description: "Cures poison.",
+        name: "antidote",
         price: 15,
-        type: "antidote",
         weight: 5,
       },
     },
@@ -138,8 +141,8 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       Icon: IconBandages,
       item: {
         description: "Restores all health.",
+        name: "bandages",
         price: 10,
-        type: "bandages",
         weight: 1,
       },
     },
@@ -147,8 +150,8 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       Icon: IconElixir,
       item: {
         description: "Restores all stamina.",
+        name: "elixir",
         price: 8,
-        type: "elixir",
         weight: 2,
       },
     },
@@ -156,8 +159,8 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       Icon: IconPhylactery,
       item: {
         description: "Resurrects the carrier upon death.",
+        name: "phylactery",
         price: 100,
-        type: "phylactery",
         weight: 10,
       },
     },
@@ -165,8 +168,8 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       Icon: IconSalve,
       item: {
         description: "Cures blight.",
+        name: "salve",
         price: 25,
-        type: "salve",
         weight: 3,
       },
     },
@@ -211,18 +214,54 @@ export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
 export const GEM_FITTING_COST = [20, 40, 70, 120, 200];
 export const GEMS_MAXIMUM = 5;
 
-export const MONKEY_PAW_BONUS = {
-  maximum: 1,
-  minimum: 0.2,
+export const INFUSABLES: Record<
+  Infusable,
+  {
+    Icon: SVGIcon;
+    item: InfusableItem & {
+      growth: number;
+      maximum: number;
+      minimum: number;
+    };
+  }
+> = {
+  "monkey paw": {
+    Icon: IconMonkeyPaw,
+    item: {
+      description: "Boosts amount of essence looted. Can be infused to increase its potency.",
+      growth: 12,
+      id: nanoid(),
+      level: 1,
+      maximum: 2,
+      minimum: 0.2,
+      name: "monkey paw",
+      price: 500,
+      weight: 4,
+    },
+  },
+  "tome of power": {
+    Icon: IconTomeOfPower,
+    item: {
+      description:
+        "Boosts all attribute effects based on power level. Can be infused to increase its potency.",
+      growth: 14,
+      id: nanoid(),
+      level: 1,
+      maximum: 1.5,
+      minimum: 0,
+      name: "tome of power",
+      price: 5000,
+      weight: 10,
+    },
+  },
 };
-export const MONKEY_PAW_GROWTH = 14;
 
 export const SHIELD_NONE: Omit<Shield, "isEquipped" | "price"> = {
   block: 0,
   gearClass: "small",
   gems: [],
   id: nanoid(),
-  level: 0,
+  level: 1,
   name: "Unshielded",
   stagger: 0,
   staminaCost: 0,
@@ -296,81 +335,61 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
 };
 
-export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: TrinketItem }> = {
-  "ammunition pouch": {
-    Icon: IconAmmunitionPouch,
-    item: {
-      current: 0,
-      description: "Store ammunition for ranged weapons.",
-      id: nanoid(),
-      maximum: AMMUNITION_MAXIMUM,
-      price: 250,
-      type: "ammunition pouch",
-      weight: 6,
+export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: AmmunitionPouchItem | TrinketItem }> =
+  {
+    "ammunition pouch": {
+      Icon: IconAmmunitionPouch,
+      item: {
+        current: 0,
+        description: "Store ammunition for ranged weapons.",
+        id: nanoid(),
+        maximum: AMMUNITION_MAXIMUM,
+        name: "ammunition pouch",
+        price: 250,
+        weight: 6,
+      },
     },
-  },
-  "antique coin": {
-    Icon: IconAntiqueCoin,
-    item: {
-      description: "The wielder is bestowed with extreme fortune.",
-      id: nanoid(),
-      price: 1000,
-      type: "antique coin",
-      weight: 2,
+    "antique coin": {
+      Icon: IconAntiqueCoin,
+      item: {
+        description: "The wielder is bestowed with extreme fortune.",
+        id: nanoid(),
+        name: "antique coin",
+        price: 1000,
+        weight: 2,
+      },
     },
-  },
-  compass: {
-    Icon: IconCompass,
-    item: {
-      description: "Navigate the wilderness to hunt in previous locations.",
-      id: nanoid(),
-      price: 50,
-      type: "compass",
-      weight: 2,
+    compass: {
+      Icon: IconCompass,
+      item: {
+        description: "Navigate the wilderness to hunt in previous locations.",
+        id: nanoid(),
+        name: "compass",
+        price: 50,
+        weight: 2,
+      },
     },
-  },
-  hearthstone: {
-    Icon: IconStone,
-    item: {
-      description: "Travel back to the caravan even if there are still lurking monsters.",
-      id: nanoid(),
-      price: 20,
-      type: "hearthstone",
-      weight: 2,
+    hearthstone: {
+      Icon: IconStone,
+      item: {
+        description: "Travel back to the caravan even if there are still lurking monsters.",
+        id: nanoid(),
+        name: "hearthstone",
+        price: 20,
+        weight: 2,
+      },
     },
-  },
-  knapsack: {
-    Icon: IconKnapsack,
-    item: {
-      description: "Carry more items and manage gear.",
-      id: nanoid(),
-      price: 10,
-      type: "knapsack",
-      weight: 0,
+    knapsack: {
+      Icon: IconKnapsack,
+      item: {
+        description: "Carry more items and manage gear.",
+        id: nanoid(),
+        name: "knapsack",
+        price: 10,
+        weight: 0,
+      },
     },
-  },
-  "monkey paw": {
-    Icon: IconMonkeyPaw,
-    item: {
-      description: "Boosts amount of essence looted. Can be infused to increase its potency.",
-      id: nanoid(),
-      level: 1,
-      price: 500,
-      type: "monkey paw",
-      weight: 4,
-    },
-  },
-  "tome of power": {
-    Icon: IconPower,
-    item: {
-      description: "Boosts all attributes based on power level.",
-      id: nanoid(),
-      price: 5000,
-      type: "tome of power",
-      weight: 10,
-    },
-  },
-};
+  };
 
 export const WEAPON_BASE: GearBase & {
   ammunitionCost: [GeneratorRange, GeneratorRange];
@@ -418,7 +437,7 @@ export const WEAPON_NONE: Omit<Melee, "isEquipped" | "price"> = {
   gems: [],
   grip: "one-handed",
   id: nanoid(),
-  level: 0,
+  level: 1,
   name: "Unarmed",
   rate: 2500,
   staminaCost: 0,

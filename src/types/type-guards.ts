@@ -4,63 +4,80 @@ import type {
   GearItem,
   GemItem,
   GeneratorRange,
+  InfusableItem,
   Melee,
   Ranged,
   Shield,
   StackableItem,
   TrinketItem,
+  UsableItem,
   Weapon,
 } from "@neverquest/types";
-import { CONSUMABLE_TYPES, GEM_TYPES, TRINKET_TYPES } from "@neverquest/types/unions";
+import {
+  CONSUMABLE_TYPES,
+  GEM_TYPES,
+  INFUSABLE_TYPES,
+  TRINKET_TYPES,
+} from "@neverquest/types/unions";
 
-export function isArmor(gearItem: unknown): gearItem is Armor {
-  return isObject(gearItem) && typeof gearItem.protection === "number";
+export function isArmor(unknown: unknown): unknown is Armor {
+  return isObject(unknown) && typeof unknown.protection === "number";
 }
 
-export function isConsumable(consumable: unknown): consumable is ConsumableItem {
-  return isObject(consumable) && CONSUMABLE_TYPES.some((type) => type === consumable.type);
+export function isConsumable(unknown: unknown): unknown is ConsumableItem {
+  return isObject(unknown) && CONSUMABLE_TYPES.some((current) => current === unknown.name);
 }
 
-export function isGear(gearItem: unknown): gearItem is GearItem {
-  return isObject(gearItem) && (isArmor(gearItem) || isShield(gearItem) || isWeapon(gearItem));
+export function isGear(unknown: unknown): unknown is GearItem {
+  return isObject(unknown) && (isArmor(unknown) || isShield(unknown) || isWeapon(unknown));
 }
 
-export function isGem(gem: unknown): gem is GemItem {
-  return isObject(gem) && GEM_TYPES.some((type) => type === gem.type);
+export function isGem(unknown: unknown): unknown is GemItem {
+  return isObject(unknown) && GEM_TYPES.some((current) => current === unknown.name);
 }
 
-export function isGeneratorRange(range: unknown): range is GeneratorRange {
-  return isObject(range) && typeof range.minimum === "number" && typeof range.maximum === "number";
+export function isGeneratorRange(unknown: unknown): unknown is GeneratorRange {
+  return (
+    isObject(unknown) && typeof unknown.minimum === "number" && typeof unknown.maximum === "number"
+  );
 }
 
-export function isGeneratorRanges(ranges: unknown): ranges is [GeneratorRange, GeneratorRange] {
-  return Array.isArray(ranges) && isGeneratorRange(ranges[0]) && isGeneratorRange(ranges[1]);
+export function isGeneratorRanges(unknown: unknown): unknown is [GeneratorRange, GeneratorRange] {
+  return Array.isArray(unknown) && isGeneratorRange(unknown[0]) && isGeneratorRange(unknown[1]);
+}
+
+export function isInfusable(unknown: unknown): unknown is InfusableItem {
+  return isObject(unknown) && INFUSABLE_TYPES.some((current) => current === unknown.name);
 }
 
 function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }
 
-export function isMelee(gearItem: unknown): gearItem is Melee {
-  return isObject(gearItem) && typeof gearItem.grip === "string";
+export function isMelee(unknown: unknown): unknown is Melee {
+  return isObject(unknown) && typeof unknown.grip === "string";
 }
 
-export function isRanged(gearItem: unknown): gearItem is Ranged {
-  return isObject(gearItem) && typeof gearItem.range === "number";
+export function isRanged(unknown: unknown): unknown is Ranged {
+  return isObject(unknown) && typeof unknown.range === "number";
 }
 
-export function isShield(gearItem: unknown): gearItem is Shield {
-  return isObject(gearItem) && typeof gearItem.block === "number";
+export function isShield(unknown: unknown): unknown is Shield {
+  return isObject(unknown) && typeof unknown.block === "number";
 }
 
-export function isStackable(stackable: unknown): stackable is StackableItem {
-  return isConsumable(stackable) || isGem(stackable);
+export function isStackable(unknown: unknown): unknown is StackableItem {
+  return isConsumable(unknown) || isGem(unknown);
 }
 
-export function isTrinket(trinket: unknown): trinket is TrinketItem {
-  return isObject(trinket) && TRINKET_TYPES.some((type) => type === trinket.type);
+export function isTrinket(unknown: unknown): unknown is TrinketItem {
+  return isObject(unknown) && TRINKET_TYPES.some((current) => current === unknown.name);
 }
 
-export function isWeapon(gearItem: unknown): gearItem is Weapon {
-  return isMelee(gearItem) || isRanged(gearItem);
+export function isUsable(unknown: unknown): unknown is UsableItem {
+  return isInfusable(unknown) || isTrinket(unknown);
+}
+
+export function isWeapon(unknown: unknown): unknown is Weapon {
+  return isMelee(unknown) || isRanged(unknown);
 }

@@ -6,14 +6,14 @@ import { range } from "@neverquest/state/statistics";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function MonsterDistanceMeter() {
-  const isMonsterFrozen = useRecoilValue(isMonsterAiling("frozen"));
+  const isMonsterStaggered = useRecoilValue(isMonsterAiling("staggered"));
   const monsterDistanceValue = useRecoilValue(monsterDistance);
   const rangeValue = useRecoilValue(range);
 
   return (
     <LabelledProgressBar
       disableTransitions
-      isStriped={isMonsterFrozen}
+      isStriped={isMonsterStaggered}
       label={formatValue({ format: "time", value: monsterDistanceValue })}
       value={(monsterDistanceValue / rangeValue) * 100}
       variant="secondary"

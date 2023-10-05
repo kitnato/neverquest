@@ -14,7 +14,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconFortitude } from "@neverquest/icons/fortitude.svg";
 import { ReactComponent as IconRegenerationAmount } from "@neverquest/icons/regeneration-amount.svg";
 import { ReactComponent as IconRegenerationRate } from "@neverquest/icons/regeneration-rate.svg";
-import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
+import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconVigor } from "@neverquest/icons/vigor.svg";
 import { attributeStatistic } from "@neverquest/state/attributes";
 import { isRecovering } from "@neverquest/state/character";
@@ -27,9 +27,9 @@ import {
   regenerationRate,
 } from "@neverquest/state/reserves";
 import { skills } from "@neverquest/state/skills";
-import { powerBonus } from "@neverquest/state/statistics";
+import { attributePowerBonus } from "@neverquest/state/statistics";
 import type { Reserve } from "@neverquest/types/unions";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 const RESERVE_CHANGE = {
@@ -37,23 +37,24 @@ const RESERVE_CHANGE = {
   stamina: useChangeStamina,
 };
 
-export function Regeneration({ type }: { type: Reserve }) {
-  const isHealth = type === "health";
+export function Regeneration({ reserve }: { reserve: Reserve }) {
+  const isHealth = reserve === "health";
 
-  const fortitudeValue = useRecoilValue(attributeStatistic("fortitude"));
-  const vigorValue = useRecoilValue(attributeStatistic("vigor"));
+  const fortitudePowerBonus = useRecoilValue(attributePowerBonus("fortitude"));
+  const vigorPowerBonus = useRecoilValue(attributePowerBonus("vigor"));
+  const fortitude = useRecoilValue(attributeStatistic("fortitude"));
+  const vigor = useRecoilValue(attributeStatistic("vigor"));
   const isReserveAtMaximum = useRecoilValue(isHealth ? isHealthAtMaximum : isStaminaAtMaximum);
   const isRecoveringValue = useRecoilValue(isRecovering);
-  const isRegeneratingValue = useRecoilValue(isRegenerating(type));
-  const powerBonusAmountValue = useRecoilValue(powerBonus("fortitude"));
-  const powerBonusRateValue = useRecoilValue(powerBonus("vigor"));
-  const regenerationRateValue = useRecoilValue(regenerationRate(type));
+  const isRegeneratingValue = useRecoilValue(isRegenerating(reserve));
+  const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve));
+  const regenerationRateValue = useRecoilValue(regenerationRate(reserve));
   const calisthenicsValue = useRecoilValue(skills("calisthenics"));
-  const setRegenerationDuration = useSetRecoilState(regenerationDuration(type));
 
-  const { baseRegenerationAmount, baseRegenerationRate, label, regenerationDelta } = RESERVES[type];
+  const { baseRegenerationAmount, baseRegenerationRate, label, regenerationDelta } =
+    RESERVES[reserve];
 
-  const changeReserve = RESERVE_CHANGE[type]();
+  const changeReserve = RESERVE_CHANGE[reserve]();
 
   useAnimate({
     delta: setRegenerationDuration,
@@ -66,7 +67,7 @@ export function Regeneration({ type }: { type: Reserve }) {
   useDeltaText({
     delta: deltas(regenerationDelta),
     format: "time",
-    value: regenerationRate(type),
+    value: regenerationRate(reserve),
   });
 
   useEffect(() => {
@@ -88,66 +89,81 @@ export function Regeneration({ type }: { type: Reserve }) {
                   <td className={CLASS_TABLE_CELL_ITALIC}>Base rate:</td>
 
                   <td>
-                    <IconImage Icon={IconRegenerationRate} size="tiny" />
-                    &nbsp;{formatValue({ format: "time", value: baseRegenerationRate })}
+                    <Stack direction="horizontal" gap={1}>
+                      <IconImage Icon={IconRegenerationRate} size="small" />
+
+                      {formatValue({ format: "time", value: baseRegenerationRate })}
+                    </Stack>
                   </td>
                 </tr>
 
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>
-                    <IconImage Icon={IconVigor} size="tiny" />
-                    &nbsp;Vigor:
+                    <Stack direction="horizontal" gap={1}>
+                      <IconImage Icon={IconVigor} size="small" />
+                      Vigor:
+                    </Stack>
                   </td>
 
-                  <td>{`-${formatValue({ format: "percentage", value: vigorValue })}`}</td>
+                  <td>
+                    <Stack direction="horizontal" gap={1}>
+                      {`-${formatValue({ decimals: 0, format: "percentage", value: vigor })} `}
+
+                      {vigorPowerBonus > 0 && (
+                        <>
+                          {LABEL_SEPARATOR}
+
+                          <IconImage Icon={IconTomeOfPower} size="small" />
+
+                          {`+${formatValue({
+                            format: "percentage",
+                            value: vigorPowerBonus,
+                          })}`}
+                        </>
+                      )}
+                    </Stack>
+                  </td>
                 </tr>
-
-                {powerBonusRateValue > 0 && (
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
-                      <IconImage Icon={IconPower} size="tiny" />
-                      &nbsp;Empowered:
-                    </td>
-
-                    <td>{`+${formatValue({
-                      format: "percentage",
-                      value: powerBonusRateValue,
-                    })}`}</td>
-                  </tr>
-                )}
 
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Base amount:</td>
 
                   <td>
-                    <IconImage Icon={IconRegenerationAmount} size="tiny" />
-                    &nbsp;{baseRegenerationAmount}
+                    <Stack direction="horizontal" gap={1}>
+                      <IconImage Icon={IconRegenerationAmount} size="small" />
+
+                      {baseRegenerationAmount}
+                    </Stack>
                   </td>
                 </tr>
 
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>
-                    <IconImage Icon={IconFortitude} size="tiny" />
-                    &nbsp;Fortitude:
+                    <Stack direction="horizontal" gap={1}>
+                      <IconImage Icon={IconFortitude} size="small" />
+                      Fortitude:
+                    </Stack>
                   </td>
 
-                  <td>{`+${fortitudeValue}`}</td>
+                  <td>
+                    <Stack direction="horizontal" gap={1}>
+                      {`+${fortitude} `}
+
+                      {vigorPowerBonus > 0 && (
+                        <>
+                          {LABEL_SEPARATOR}
+
+                          <IconImage Icon={IconTomeOfPower} size="small" />
+
+                          {`+${formatValue({
+                            format: "percentage",
+                            value: fortitudePowerBonus,
+                          })}`}
+                        </>
+                      )}
+                    </Stack>
+                  </td>
                 </tr>
-
-                {powerBonusAmountValue > 0 && (
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
-                      <IconImage Icon={IconPower} size="tiny" />
-                      &nbsp;Empowered:
-                    </td>
-
-                    <td>{`+${formatValue({
-                      decimals: 0,
-                      format: "percentage",
-                      value: powerBonusAmountValue,
-                    })}`}</td>
-                  </tr>
-                )}
               </DetailsTable>
             </Popover.Body>
           </Popover>
@@ -155,12 +171,12 @@ export function Regeneration({ type }: { type: Reserve }) {
         placement="right"
         trigger={calisthenicsValue ? ["hover", "focus"] : []}
       >
-        <div className="w-100">
-          <RegenerationMeter type={type} />
-        </div>
+        <span className="w-100">
+          <RegenerationMeter reserve={reserve} />
+        </span>
       </OverlayTrigger>
 
-      <FloatingText deltaType={isHealth ? "healthRegenerationRate" : "staminaRegenerationRate"} />
+      <FloatingText delta={isHealth ? "healthRegenerationRate" : "staminaRegenerationRate"} />
     </Stack>
   );
 }

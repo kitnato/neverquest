@@ -23,7 +23,7 @@ export function Ammunition() {
         <Stack direction="horizontal">
           <span>{formatValue({ value: ammunitionValue })}</span>
 
-          <FloatingText deltaType="ammunition" />
+          <FloatingText delta="ammunition" />
         </Stack>
       }
       Icon={IconAmmunition}

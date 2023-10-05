@@ -20,7 +20,7 @@ export function MonsterAilments() {
       <Card.Body>
         <Stack gap={3}>
           {ELEMENTAL_TYPES.map((current) => (
-            <MonsterElementalAilment key={current} type={current} />
+            <MonsterElementalAilment elemental={current} key={current} />
           ))}
 
           <MonsterStunned />

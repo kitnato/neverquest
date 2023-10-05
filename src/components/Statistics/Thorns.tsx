@@ -42,7 +42,7 @@ export function Thorns() {
             <span>{thornsValue}</span>
           </OverlayTrigger>
 
-          <FloatingText deltaType="thorns" />
+          <FloatingText delta="thorns" />
         </Stack>
       }
       Icon={IconThorns}

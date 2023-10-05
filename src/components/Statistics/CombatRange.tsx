@@ -51,18 +51,22 @@ export function CombatRange() {
                       <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
 
                       <td>
-                        <IconImage Icon={IconRanged} size="tiny" />
-                        &nbsp;
-                        {isWeaponRanged
-                          ? formatValue({ format: "time", value: weaponValue.range })
-                          : LABEL_EMPTY}
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconRanged} size="small" />
+
+                          {isWeaponRanged
+                            ? formatValue({ format: "time", value: weaponValue.range })
+                            : LABEL_EMPTY}
+                        </Stack>
                       </td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <IconImage Icon={IconMarksmanship} size="tiny" />
-                        &nbsp;Marksmanship:
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconMarksmanship} size="small" />
+                          Marksmanship:
+                        </Stack>
                       </td>
 
                       <td>{`+${formatValue({
@@ -85,7 +89,7 @@ export function CombatRange() {
             </span>
           </OverlayTrigger>
 
-          <FloatingText deltaType="range" />
+          <FloatingText delta="range" />
         </Stack>
       }
       Icon={IconRange}

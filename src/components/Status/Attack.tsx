@@ -12,7 +12,7 @@ import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconAttackRate } from "@neverquest/icons/attack-rate.svg";
 import { ReactComponent as IconWeaponSpeed } from "@neverquest/icons/speed.svg";
-import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
+import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
 import { attributeStatistic } from "@neverquest/state/attributes";
 import {
@@ -26,12 +26,13 @@ import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { weapon } from "@neverquest/state/items";
 import { isMonsterDead } from "@neverquest/state/monster";
-import { attackRate, attackRateTotal, powerBonus } from "@neverquest/state/statistics";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
+import { attackRateTotal, attributePowerBonus } from "@neverquest/state/statistics";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Attack() {
-  const attackRateValue = useRecoilValue(attackRate);
+  const speedPowerBonus = useRecoilValue(attributePowerBonus("speed"));
+  const speed = useRecoilValue(attributeStatistic("speed"));
   const canAttackOrParryValue = useRecoilValue(canAttackOrParry);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isLootingValue = useRecoilValue(isLooting);
@@ -39,8 +40,6 @@ export function Attack() {
   const isRecoveringValue = useRecoilValue(isRecovering);
   const isShowingAttackRate = useRecoilValue(isShowing("attackRate"));
   const isShowingAttackRateDetails = useRecoilValue(isShowing("attackRateDetails"));
-  const powerBonusValue = useRecoilValue(powerBonus("speed"));
-  const speedValue = useRecoilValue(attributeStatistic("speed"));
   const weaponValue = useRecoilValue(weapon);
   const setAttackDuration = useSetRecoilState(attackDuration);
 
@@ -84,60 +83,57 @@ export function Attack() {
                       }:`}</td>
 
                       <td>
-                        <IconImage Icon={IconWeaponAttackRate} size="tiny" />
-                        &nbsp;{formatValue({ format: "time", value: weaponValue.rate })}
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconWeaponAttackRate} size="small" />
+
+                          {formatValue({ format: "time", value: weaponValue.rate })}
+                        </Stack>
                       </td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <IconImage Icon={IconWeaponSpeed} size="tiny" />
-                        &nbsp;Speed:
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconWeaponSpeed} size="small" />
+                          Speed:
+                        </Stack>
                       </td>
 
-                      <td>{`-${formatValue({
-                        decimals: 0,
-                        format: "percentage",
-                        value: speedValue,
-                      })}`}</td>
+                      <td>
+                        <Stack direction="horizontal" gap={1}>
+                          {`-${formatValue({
+                            decimals: 0,
+                            format: "percentage",
+                            value: speed,
+                          })} `}
+
+                          {speedPowerBonus > 0 && (
+                            <>
+                              {LABEL_SEPARATOR}
+
+                              <IconImage Icon={IconTomeOfPower} size="small" />
+
+                              {`+${formatValue({
+                                format: "percentage",
+                                value: speedPowerBonus,
+                              })}`}
+                            </>
+                          )}
+                        </Stack>
+                      </td>
                     </tr>
-
-                    {powerBonusValue > 0 && (
-                      <>
-                        <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>
-                            <IconImage Icon={IconPower} size="tiny" />
-                            &nbsp;Empowered:
-                          </td>
-
-                          <td>{`+${formatValue({
-                            format: "percentage",
-                            value: powerBonusValue,
-                          })}`}</td>
-                        </tr>
-
-                        <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Total:</td>
-
-                          <td>{`-${formatValue({
-                            format: "percentage",
-                            value: attackRateValue,
-                          })}`}</td>
-                        </tr>
-                      </>
-                    )}
                   </DetailsTable>
                 </Popover.Body>
               </Popover>
             }
             trigger={isShowingAttackRateDetails ? ["hover", "focus"] : []}
           >
-            <div className="w-100">
+            <span className="w-100">
               <AttackMeter />
-            </div>
+            </span>
           </OverlayTrigger>
 
-          <FloatingText deltaType="attackRate" />
+          <FloatingText delta="attackRate" />
         </Stack>
       }
       Icon={IconAttackRate}

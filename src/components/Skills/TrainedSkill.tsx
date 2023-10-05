@@ -4,12 +4,12 @@ import { SkillDisplay } from "@neverquest/components/Caravan/Mercenary/SkillDisp
 import { skills } from "@neverquest/state/skills";
 import type { Skill } from "@neverquest/types/unions";
 
-export function TrainedSkill({ type }: { type: Skill }) {
-  const skillValue = useRecoilValue(skills(type));
+export function TrainedSkill({ skill }: { skill: Skill }) {
+  const skillValue = useRecoilValue(skills(skill));
 
   if (!skillValue) {
     return null;
   }
 
-  return <SkillDisplay type={type} />;
+  return <SkillDisplay skill={skill} />;
 }

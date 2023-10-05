@@ -10,8 +10,8 @@ import { totalElementalEffects } from "@neverquest/state/statistics";
 import type { Elemental } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
-export function MonsterElementalAilment({ type }: { type: Elemental }) {
-  const { ailment, Icon } = ELEMENTALS[type];
+export function MonsterElementalAilment({ elemental }: { elemental: Elemental }) {
+  const { ailment, Icon } = ELEMENTALS[elemental];
 
   const isMonsterAilingValue = useRecoilValue(isMonsterAiling(ailment));
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
@@ -23,14 +23,14 @@ export function MonsterElementalAilment({ type }: { type: Elemental }) {
     stop: !isMonsterAilingValue || isMonsterDeadValue,
   });
 
-  if (armor[type].duration === 0 && weapon[type].duration === 0) {
+  if (armor[elemental].duration === 0 && weapon[elemental].duration === 0) {
     return null;
   }
 
   return (
     <IconDisplay
       contents={
-        <MonsterAilmentMeter totalDuration={ELEMENTAL_AILMENT_DURATION_MAXIMUM} type={ailment} />
+        <MonsterAilmentMeter ailment={ailment} totalDuration={ELEMENTAL_AILMENT_DURATION_MAXIMUM} />
       }
       Icon={Icon}
       isAnimated

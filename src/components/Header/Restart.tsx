@@ -24,7 +24,7 @@ export function Restart() {
         <Button
           className={
             isGameOverValue && !isShowingGameOver && !isShowingRestart
-              ? getAnimationClass({ isInfinite: true, type: "pulse" })
+              ? getAnimationClass({ isInfinite: true, name: "pulse" })
               : undefined
           }
           onClick={() => setIsShowingRestart(true)}

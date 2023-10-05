@@ -4,7 +4,6 @@ import type { IconImageProps } from "@neverquest/types/props";
 
 export function IconImage({
   Icon,
-  ignoreColor = false,
   isFlipped = false,
   isMirrored = false,
   isStencilled = false,
@@ -15,9 +14,7 @@ export function IconImage({
 }: IconImageProps) {
   const IconStyled = () => (
     <Icon
-      className={`icon-image${` ${size}` ?? ""}${ignoreColor ? " text-body" : ""}${
-        isStencilled ? " stencilled" : ""
-      }`}
+      className={`icon-image${` ${size}` ?? ""}${isStencilled ? " stencilled" : ""}`}
       onClick={onClick}
       style={{
         cursor: onClick !== undefined ? "pointer" : "inherit",

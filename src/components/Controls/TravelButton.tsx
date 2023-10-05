@@ -38,10 +38,10 @@ export function TravelButton() {
           </Tooltip>
         }
       >
-        <span className={getAnimationClass({ type: "bounceIn" })}>
+        <span className={getAnimationClass({ name: "bounceIn" })}>
           <Button
             className={
-              isWildernessValue ? getAnimationClass({ isInfinite: true, type: "pulse" }) : undefined
+              isWildernessValue ? getAnimationClass({ isInfinite: true, name: "pulse" }) : undefined
             }
             disabled={isGameOverValue}
             onClick={toggleLocation}

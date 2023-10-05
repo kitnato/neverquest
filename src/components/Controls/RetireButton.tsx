@@ -18,7 +18,7 @@ export function RetireButton() {
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>Retire</Tooltip>} trigger={[]}>
-        <span className={getAnimationClass({ type: "bounceIn" })}>
+        <span className={getAnimationClass({ name: "bounceIn" })}>
           <Button
             className="invisible"
             disabled={isGameOverValue || isWildernessValue}

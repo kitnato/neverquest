@@ -10,7 +10,7 @@ import { ReactComponent as IconTailoring } from "@neverquest/icons/tailoring.svg
 import { inventory } from "@neverquest/state/inventory";
 import { ownedItem } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
-import type { TrinketItemAmmunitionPouch } from "@neverquest/types";
+import type { AmmunitionPouchItem } from "@neverquest/types";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 import { getGrowthSigmoid } from "@neverquest/utilities/getters";
@@ -26,7 +26,7 @@ export function ExpandAmmunitionPouch() {
     return null;
   }
 
-  const { id, maximum } = ownedAmmunitionPouch as TrinketItemAmmunitionPouch;
+  const { id, maximum } = ownedAmmunitionPouch as AmmunitionPouchItem;
   const price = Math.ceil(
     TAILORING_PRICES_MAXIMUM.ammunitionPouch * getGrowthSigmoid(maximum - (AMMUNITION_MAXIMUM - 1)),
   );
@@ -40,8 +40,7 @@ export function ExpandAmmunitionPouch() {
           ? {
               ...currentItem,
               maximum:
-                (currentItem as TrinketItemAmmunitionPouch).maximum +
-                TAILORING_EXPANSION.ammunitionPouch,
+                (currentItem as AmmunitionPouchItem).maximum + TAILORING_EXPANSION.ammunitionPouch,
             }
           : currentItem,
       ),

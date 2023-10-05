@@ -9,19 +9,19 @@ import { LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function MonsterAilmentMeter({
+  ailment,
   format = "time",
   totalDuration,
-  type,
 }: {
+  ailment: MonsterAilment;
   format?: NumberFormat;
   totalDuration: number;
-  type: MonsterAilment;
 }) {
-  const isMonsterAilingValue = useRecoilValue(isMonsterAiling(type));
-  const monsterAilmentDurationValue = useRecoilValue(monsterAilmentDuration(type));
+  const isMonsterAilingValue = useRecoilValue(isMonsterAiling(ailment));
+  const monsterAilmentDurationValue = useRecoilValue(monsterAilmentDuration(ailment));
 
   return (
-    <OverlayTrigger overlay={<Tooltip>{AILMENT_DESCRIPTION[type]}</Tooltip>}>
+    <OverlayTrigger overlay={<Tooltip>{AILMENT_DESCRIPTION[ailment]}</Tooltip>}>
       <span className="w-100">
         <LabelledProgressBar
           disableTransitions

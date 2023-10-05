@@ -8,15 +8,15 @@ export const AILMENT_DESCRIPTION: Record<MonsterAilment, string> = {
     format: "percentage",
     value: 1 - AILMENT_PENALTY.burning,
   })} increased damage.`,
-  frozen: `Attack rate & movement speed slowed by ${formatValue({
-    format: "percentage",
-    value: 1 - AILMENT_PENALTY.frozen,
-  })}.`,
+  frozen: "Cannot attack or move.",
   shocked: `Dealing ${formatValue({
     format: "percentage",
     value: 1 - AILMENT_PENALTY.shocked,
   })} decreased damage.`,
-  staggered: "Cannot attack.",
+  staggered: `Attack rate & movement speed slowed by ${formatValue({
+    format: "percentage",
+    value: 1 - AILMENT_PENALTY.staggered,
+  })}.`,
   stunned: `Hit accuracy reduced to ${formatValue({
     format: "percentage",
     value: AILMENT_PENALTY.stunned,

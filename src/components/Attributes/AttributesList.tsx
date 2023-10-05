@@ -7,7 +7,7 @@ export function AttributesList() {
   return (
     <Stack gap={3}>
       {ATTRIBUTES_ORDER.map((current, index) => (
-        <AttributeDisplay key={index} type={current} />
+        <AttributeDisplay attribute={current} key={index} />
       ))}
     </Stack>
   );

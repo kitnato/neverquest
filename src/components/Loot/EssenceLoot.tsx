@@ -23,14 +23,14 @@ export function EssenceLoot() {
   }
 
   return (
-    <Stack className={getAnimationClass({ type: "flipInX" })} direction="horizontal">
+    <Stack className={getAnimationClass({ name: "flipInX" })} direction="horizontal">
       <IconDisplay
         contents={formatValue({ value: essenceLootValue })}
         Icon={IconEssence}
         tooltip="Looted essence"
       />
 
-      <FloatingText deltaType="essenceLoot" />
+      <FloatingText delta="essenceLoot" />
     </Stack>
   );
 }

@@ -37,4 +37,4 @@ export type FloatingText = {
 
 export type UIAttachment = "above" | "below";
 
-export type UISize = "normal" | "tiny";
+export type UISize = "normal" | "small";

@@ -53,6 +53,7 @@ export function ReceiveHealing() {
             overlay={
               <Tooltip>
                 {!isAffordable && <div> {LABEL_NO_ESSENCE}</div>}
+
                 {isHealthAtMaximumValue && <div>{LABEL_FULL_HEALTH}</div>}
               </Tooltip>
             }

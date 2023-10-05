@@ -41,7 +41,7 @@ export function useAcquireItem() {
           return "noFit";
         }
 
-        if (isTrinket(item) && item.type === "knapsack") {
+        if (isTrinket(item) && item.name === "knapsack") {
           set(encumbranceMaximum, (current) => current + KNAPSACK_SIZE);
           set(hasKnapsack, true);
           set(isShowing("weight"), true);

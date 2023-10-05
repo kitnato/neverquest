@@ -9,7 +9,8 @@ export function Witch() {
       <h6>Purchase potions</h6>
 
       {WITCH_POTIONS.map(
-        (type) => type !== "bandages" && <PurchaseConsumable key={type} type={type} />,
+        (current) =>
+          current !== "bandages" && <PurchaseConsumable consumable={current} key={current} />,
       )}
     </Stack>
   );

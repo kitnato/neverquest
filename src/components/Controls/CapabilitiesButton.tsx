@@ -12,14 +12,14 @@ import { ReactComponent as IconAttributes } from "@neverquest/icons/attributes.s
 import { ReactComponent as IconCapabilities } from "@neverquest/icons/capabilities.svg";
 import { ReactComponent as IconSkills } from "@neverquest/icons/skills.svg";
 import { ReactComponent as IconUpgrade } from "@neverquest/icons/upgrade.svg";
-import { areAttributesIncreasable } from "@neverquest/state/attributes";
+import { areAttributesAffordable } from "@neverquest/state/attributes";
 import { isAttacking, isGameOver } from "@neverquest/state/character";
 import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function CapabilitiesButton() {
-  const areAttributesIncreasableValue = useRecoilValue(areAttributesIncreasable);
+  const areAttributesIncreasableValue = useRecoilValue(areAttributesAffordable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isGameOverValue = useRecoilValue(isGameOver);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
@@ -38,13 +38,13 @@ export function CapabilitiesButton() {
       <OverlayTrigger
         overlay={<Tooltip>{`Attributes${isShowingSkills ? " & skills" : ""}`}</Tooltip>}
       >
-        <span className={getAnimationClass({ type: "bounceIn" })}>
+        <span className={getAnimationClass({ name: "bounceIn" })}>
           <Button
             className={`position-relative${
               areAttributesIncreasableValue && (isStageCompletedValue || !isStageStartedValue)
                 ? ` ${getAnimationClass({
                     isInfinite: true,
-                    type: "pulse",
+                    name: "pulse",
                   })}`
                 : ""
             }`}

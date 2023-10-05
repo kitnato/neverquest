@@ -1,5 +1,6 @@
 import type { RecoilValue, Snapshot } from "recoil";
 
+import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
 import {
   ARMOR_SPECIFICATIONS,
   SHIELD_SPECIFICATIONS,
@@ -16,14 +17,14 @@ import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/utilities/cons
 
 export function getAnimationClass({
   isInfinite,
+  name,
   speed,
-  type,
 }: {
   isInfinite?: boolean;
+  name: Animation;
   speed?: AnimationSpeed;
-  type: Animation;
 }) {
-  return `${CLASS_ANIMATED} ${CLASS_ANIMATE_PREFIX}${type}${
+  return `${CLASS_ANIMATED} ${CLASS_ANIMATE_PREFIX}${name}${
     isInfinite ? ` ${CLASS_ANIMATE_PREFIX}infinite` : ""
   }${speed ? ` ${CLASS_ANIMATE_PREFIX}${speed}` : ""}`;
 }
@@ -39,6 +40,10 @@ export function getArmorRanges({ factor, gearClass }: { factor: number; gearClas
       : staminaCost,
     weight: getRange({ factor, ranges: weight }),
   };
+}
+
+export function getAttributePointCost(level: number) {
+  return getGrowthTriangular(ATTRIBUTE_COST_BASE + level);
 }
 
 export function getComputedStatistic({

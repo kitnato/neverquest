@@ -16,7 +16,7 @@ export function Skills() {
     <span className="fst-italic">None.</span>
   ) : (
     ALL_SKILLS.sort((a, b) => a.localeCompare(b)).map((current) => (
-      <TrainedSkill key={current} type={current} />
+      <TrainedSkill key={current} skill={current} />
     ))
   );
 }

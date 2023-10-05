@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
@@ -24,15 +25,19 @@ export function StaminaCostDetail({
           <td className={CLASS_TABLE_CELL_ITALIC}>Stamina cost:</td>
 
           <td>
-            <IconImage Icon={IconStamina} size="tiny" />
-            &nbsp;{formatValue({ value: cost })}
-            {comparison !== null && (
-              <GearComparison
-                difference={cost - comparison.subtrahend}
-                isDownPositive
-                showingType={comparison.showingType}
-              />
-            )}
+            <Stack direction="horizontal" gap={1}>
+              <IconImage Icon={IconStamina} size="small" />
+
+              {formatValue({ value: cost })}
+
+              {comparison !== null && (
+                <GearComparison
+                  difference={cost - comparison.subtrahend}
+                  isDownPositive
+                  showing={comparison.showing}
+                />
+              )}
+            </Stack>
           </td>
         </>
       ) : (

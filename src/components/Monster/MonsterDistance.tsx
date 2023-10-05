@@ -19,16 +19,15 @@ export function MonsterDistance() {
   const hasMonsterClosedValue = useRecoilValue(hasMonsterClosed);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterFrozenValue = useRecoilValue(isMonsterAiling("frozen"));
-  const isMonsterStaggeredValue = useRecoilValue(isMonsterAiling("staggered"));
+  const isMonsterStaggered = useRecoilValue(isMonsterAiling("staggered"));
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const weaponValue = useRecoilValue(weapon);
   const setMonsterDistance = useSetRecoilState(monsterDistance);
 
   useAnimate({
     delta: setMonsterDistance,
-    factor: isMonsterFrozenValue ? AILMENT_PENALTY.frozen : 1,
-    stop:
-      !isAttackingValue || isMonsterDeadValue || isMonsterStaggeredValue || hasMonsterClosedValue,
+    factor: isMonsterStaggered ? AILMENT_PENALTY.staggered : 1,
+    stop: !isAttackingValue || isMonsterDeadValue || hasMonsterClosedValue || isMonsterFrozenValue,
   });
 
   if (!isRanged(weaponValue)) {

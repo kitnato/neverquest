@@ -48,6 +48,9 @@ export const LOCATIONS: LocationData[] = [
     name: "beach",
   },
   {
+    name: "black hole",
+  },
+  {
     name: "bog",
   },
   {
@@ -131,10 +134,20 @@ export const LOCATIONS: LocationData[] = [
     name: "club",
   },
   {
+    name: "clubhouse",
+  },
+  {
     name: "coast",
   },
   {
+    canPluralize: true,
     name: "colony",
+  },
+  {
+    name: "coliseum",
+  },
+  {
+    name: "comet",
   },
   {
     name: "copse",
@@ -182,9 +195,13 @@ export const LOCATIONS: LocationData[] = [
     name: "dream",
   },
   {
+    name: "dreamscape",
+  },
+  {
     name: "dump",
   },
   {
+    canPluralize: true,
     name: "dune",
   },
   {
@@ -239,6 +256,12 @@ export const LOCATIONS: LocationData[] = [
     name: "garden",
   },
   {
+    name: "galaxy",
+  },
+  {
+    name: "gas giant",
+  },
+  {
     name: "glen",
   },
   {
@@ -259,10 +282,16 @@ export const LOCATIONS: LocationData[] = [
     name: "heap",
   },
   {
+    name: "heaven",
+  },
+  {
     name: "hedge",
   },
   {
     name: "hell",
+  },
+  {
+    name: "hellscape",
   },
   {
     name: "hideout",
@@ -328,11 +357,17 @@ export const LOCATIONS: LocationData[] = [
     name: "land",
   },
   {
+    name: "landfill",
+  },
+  {
     name: "landscape",
   },
   {
     isNSFW: true,
     name: "lavatory",
+  },
+  {
+    name: "maelstrom",
   },
   {
     name: "mangrove",
@@ -345,6 +380,10 @@ export const LOCATIONS: LocationData[] = [
     name: "market",
   },
   {
+    canPluralize: true,
+    name: "marsh",
+  },
+  {
     name: "mausoleum",
   },
   {
@@ -352,6 +391,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "maze",
+  },
+  {
+    name: "meteor",
   },
   {
     name: "midden",
@@ -375,6 +417,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "murk",
+  },
+  {
+    name: "nebula",
   },
   {
     name: "netherworld",
@@ -440,6 +485,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "platform",
+  },
+  {
+    name: "playground",
   },
   {
     name: "pond",
@@ -508,10 +556,15 @@ export const LOCATIONS: LocationData[] = [
     name: "star",
   },
   {
-    name: "steppes",
+    canPluralize: true,
+    name: "steppe",
   },
   {
+    canPluralize: true,
     name: "strand",
+  },
+  {
+    name: "strip-mine",
   },
   {
     name: "sub-basement",
@@ -542,6 +595,9 @@ export const LOCATIONS: LocationData[] = [
     name: "toilet",
   },
   {
+    name: "tornado",
+  },
+  {
     name: "tower",
   },
   {
@@ -565,6 +621,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "volcano",
+  },
+  {
+    name: "vortex",
   },
   {
     canPluralize: true,

@@ -2,6 +2,7 @@ import { Button, ButtonGroup, OverlayTrigger, Stack, Tooltip } from "react-boots
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { AmmunitionPouchCapacity } from "@neverquest/components/Items/Usable/AmmunitionPouchCapacity";
 import { AMMUNITION_PRICE } from "@neverquest/data/caravan";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { ReactComponent as IconAmmunition } from "@neverquest/icons/ammunition.svg";
@@ -9,7 +10,7 @@ import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { inventory } from "@neverquest/state/inventory";
 import { ownedItem } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
-import type { TrinketItemAmmunitionPouch } from "@neverquest/types";
+import type { AmmunitionPouchItem } from "@neverquest/types";
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
   LABEL_MAXIMUM,
@@ -32,7 +33,7 @@ export function PurchaseAmmunition() {
           currentItem.id === ownedAmmunitionPouch.id
             ? {
                 ...currentItem,
-                current: (currentItem as TrinketItemAmmunitionPouch).current + amount,
+                current: (currentItem as AmmunitionPouchItem).current + amount,
               }
             : currentItem,
         ),
@@ -44,6 +45,8 @@ export function PurchaseAmmunition() {
   return (
     <Stack gap={3}>
       <h6>Purchase ammunition</h6>
+
+      {ownedAmmunitionPouch !== null && <AmmunitionPouchCapacity />}
 
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay contents="Ammunition (each)" Icon={IconAmmunition} tooltip="Ammunition" />
@@ -59,7 +62,7 @@ export function PurchaseAmmunition() {
             <span className="fst-italic">Nowhere to store ammunition.</span>
           ) : (
             (() => {
-              const { current, maximum } = ownedAmmunitionPouch as TrinketItemAmmunitionPouch;
+              const { current, maximum } = ownedAmmunitionPouch as AmmunitionPouchItem;
 
               return (
                 <ButtonGroup>

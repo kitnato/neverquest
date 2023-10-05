@@ -52,6 +52,10 @@
   color: $yellow;
 }
 
+.vstack {
+  align-self: initial;
+}
+
 body {
   user-select: none;
 }
@@ -78,14 +82,14 @@ select {
 }
 
 svg.icon-image {
-  width: 36px;
+  display: block;
+  width: 40px;
 
   &.small {
-    width: 24px;
+    width: 20px;
   }
+}
 
-  &.tiny {
-    margin-bottom: 4px;
-    width: 16px;
-  }
+td.text-end > .hstack {
+  justify-content: end;
 }

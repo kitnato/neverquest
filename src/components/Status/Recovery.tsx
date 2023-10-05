@@ -14,15 +14,15 @@ import { ReactComponent as IconResilience } from "@neverquest/icons/resilience.s
 import { isRecovering, recoveryDuration } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
-import { masteries, masteryStatistic } from "@neverquest/state/masteries";
+import { isMasteryUnlocked, masteryStatistic } from "@neverquest/state/masteries";
 import { recoveryRate } from "@neverquest/state/statistics";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Recovery() {
   const isRecoveringValue = useRecoilValue(isRecovering);
+  const isMasteryUnlockedValue = useRecoilValue(isMasteryUnlocked("resilience"));
   const isShowingRecovery = useRecoilValue(isShowing("recovery"));
-  const { isUnlocked } = useRecoilValue(masteries("resilience"));
   const resilienceValue = useRecoilValue(masteryStatistic("resilience"));
   const setRecoveryDuration = useSetRecoilState(recoveryDuration);
 
@@ -60,8 +60,10 @@ export function Recovery() {
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <IconImage Icon={IconResilience} size="tiny" />
-                        &nbsp;Resilience:
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconResilience} size="small" />
+                          Resilience:
+                        </Stack>
                       </td>
 
                       <td>{`-${formatValue({
@@ -74,14 +76,14 @@ export function Recovery() {
                 </Popover.Body>
               </Popover>
             }
-            trigger={isUnlocked ? ["hover", "focus"] : []}
+            trigger={isMasteryUnlockedValue ? ["hover", "focus"] : []}
           >
-            <div className="w-100">
+            <span className="w-100">
               <RecoveryMeter />
-            </div>
+            </span>
           </OverlayTrigger>
 
-          <FloatingText deltaType="recoveryRate" />
+          <FloatingText delta="recoveryRate" />
         </Stack>
       }
       Icon={IconRecovery}

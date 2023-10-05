@@ -1,43 +1,21 @@
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ReactComponent as IconDamagePerSecond } from "@neverquest/icons/damage-per-second.svg";
+import { MonsterDamagePerSecond } from "@neverquest/components/Monster/MonsterDamagePerSecond";
 import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
-import {
-  monsterDamage,
-  monsterDamagePerSecond,
-  monsterDamageTotal,
-  monsterDamageTotalPerSecond,
-} from "@neverquest/state/monster";
-import { showDamagePerSecond } from "@neverquest/state/settings";
+import { monsterDamage, monsterDamageTotal } from "@neverquest/state/monster";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function MonsterDamage() {
   const monsterDamageValue = useRecoilValue(monsterDamage);
-  const monsterDamagePerSecondValue = useRecoilValue(monsterDamagePerSecond);
   const monsterDamageTotalValue = useRecoilValue(monsterDamageTotal);
-  const monsterDamageTotalPerSecondValue = useRecoilValue(monsterDamageTotalPerSecond);
-  const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
 
   return (
     <IconDisplay
       contents={`${formatValue({ value: monsterDamageTotalValue })}${
         monsterDamageValue === monsterDamageTotalValue ? "" : ` (${monsterDamageValue})`
       }`}
-      description={
-        showDamagePerSecondValue && (
-          <IconDisplay
-            contents={`${monsterDamageTotalPerSecondValue}${
-              monsterDamagePerSecondValue === monsterDamageTotalPerSecondValue
-                ? ""
-                : ` (${monsterDamagePerSecondValue})`
-            }`}
-            Icon={IconDamagePerSecond}
-            iconProps={{ ignoreColor: true, overlayPlacement: "bottom", size: "tiny" }}
-            tooltip="Damage per second"
-          />
-        )
-      }
+      description={<MonsterDamagePerSecond />}
       Icon={IconDamage}
       isAnimated
       tooltip="Monster damage"

@@ -9,10 +9,10 @@ import { Salve } from "@neverquest/components/Items/Consumable/Salve";
 import { Encumbrance } from "@neverquest/components/Items/Encumbrance";
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
 import { StoredGear } from "@neverquest/components/Items/StoredGear";
-import { Trinket } from "@neverquest/components/Items/Trinkets";
-import { CompassNavigate } from "@neverquest/components/Items/Trinkets/CompassNavigate";
-import { HearthstoneWarp } from "@neverquest/components/Items/Trinkets/HearthstoneWarp";
-import { MonkeyPawControl } from "@neverquest/components/Items/Trinkets/MonkeyPaw/MonkeyPawControl";
+import { Usable } from "@neverquest/components/Items/Usable";
+import { CompassNavigate } from "@neverquest/components/Items/Usable/CompassNavigate";
+import { HearthstoneWarp } from "@neverquest/components/Items/Usable/HearthstoneWarp";
+import { InfusionInspect } from "@neverquest/components/Items/Usable/Infusion/InfusionInspect";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { inventory } from "@neverquest/state/inventory";
 import {
@@ -20,6 +20,7 @@ import {
   isConsumable,
   isGear,
   isGem,
+  isInfusable,
   isShield,
   isTrinket,
   isWeapon,
@@ -74,26 +75,22 @@ export function Inventory() {
 
         {storedItems
           .filter(isTrinket)
-          .sort((a, b) => a.type.localeCompare(b.type))
+          .sort((a, b) => a.name.localeCompare(b.name))
           .map((current) => {
-            const { id, type } = current;
+            const { id, name } = current;
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-                <Trinket item={current} />
+                <Usable item={current} />
 
                 {(() => {
-                  switch (type) {
+                  switch (name) {
                     case "compass": {
                       return <CompassNavigate />;
                     }
 
                     case "hearthstone": {
                       return <HearthstoneWarp />;
-                    }
-
-                    case "monkey paw": {
-                      return <MonkeyPawControl />;
                     }
 
                     default: {
@@ -105,14 +102,25 @@ export function Inventory() {
             );
           })}
 
+        {storedItems
+          .filter(isInfusable)
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map((current) => (
+            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.id}>
+              <Usable item={current} />
+
+              <InfusionInspect infusable={current.name} />
+            </div>
+          ))}
+
         {[
           ...stackItems(
-            storedItems.filter(isConsumable).sort((a, b) => a.type.localeCompare(b.type)),
+            storedItems.filter(isConsumable).sort((a, b) => a.name.localeCompare(b.name)),
           ),
-          ...stackItems(storedItems.filter(isGem).sort((a, b) => a.type.localeCompare(b.type))),
+          ...stackItems(storedItems.filter(isGem).sort((a, b) => a.name.localeCompare(b.name))),
         ].map((current) => {
           const { item, stack } = current;
-          const { id, type } = item;
+          const { id, name } = item;
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
@@ -120,7 +128,7 @@ export function Inventory() {
 
               {(() => {
                 if (isConsumable(item)) {
-                  switch (type) {
+                  switch (name) {
                     case "antidote": {
                       return <Antidote id={id} />;
                     }

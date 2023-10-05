@@ -4,11 +4,11 @@ import { useRecoilCallback } from "recoil";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { CREW } from "@neverquest/data/caravan";
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
-import { attributes } from "@neverquest/state/attributes";
+import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import { hireStatus } from "@neverquest/state/caravan";
 import { stage, wildernesses } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
-import type { Attribute, Crew } from "@neverquest/types/unions";
+import { ATTRIBUTE_TYPES, CREW_TYPES } from "@neverquest/types/unions";
 import { KEY_SESSION } from "@neverquest/utilities/constants";
 import { generateWilderness } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -25,13 +25,13 @@ export function useInitialize() {
           return;
         }
 
-        Object.entries(ATTRIBUTES).forEach(([type, { isUnlocked }]) =>
-          set(attributes(type as Attribute), (current) => ({ ...current, isUnlocked })),
+        ATTRIBUTE_TYPES.forEach((current) =>
+          set(isAttributeUnlocked(current), { isUnlocked: ATTRIBUTES[current].isUnlocked }),
         );
 
-        Object.entries(CREW).forEach(([type, { requiredStage }]) => {
-          if (requiredStage === 0) {
-            set(hireStatus(type as Crew), { status: "hired" });
+        CREW_TYPES.forEach((current) => {
+          if (CREW[current].requiredStage === 0) {
+            set(hireStatus(current), { status: "hired" });
           }
         });
 

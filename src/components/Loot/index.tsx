@@ -19,8 +19,8 @@ export function Loot() {
 
   const stackItemsLoot = [
     ...stackItems(itemsLootValue.filter(isGear).sort((a, b) => a.name.localeCompare(b.name))),
-    ...stackItems(itemsLootValue.filter(isTrinket).sort((a, b) => a.type.localeCompare(b.type))),
-    ...stackItems(itemsLootValue.filter(isStackable).sort((a, b) => a.type.localeCompare(b.type))),
+    ...stackItems(itemsLootValue.filter(isTrinket).sort((a, b) => a.name.localeCompare(b.name))),
+    ...stackItems(itemsLootValue.filter(isStackable).sort((a, b) => a.name.localeCompare(b.name))),
   ];
 
   return (
@@ -28,7 +28,7 @@ export function Loot() {
       <Looting />
 
       {progressValue > 0 && (
-        <Card className={getAnimationClass({ type: "flipInX" })}>
+        <Card className={getAnimationClass({ name: "flipInX" })}>
           <Card.Body>
             {hasLootedValue && itemsLootValue.length === 0 ? (
               <IconDisplay

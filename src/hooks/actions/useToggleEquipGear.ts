@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { attributes } from "@neverquest/state/attributes";
+import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
@@ -50,13 +50,7 @@ export function useToggleEquipGear() {
         if (isWeapon(gearItem) && !isEquipped) {
           if (staminaCost > 0) {
             set(isShowing("stamina"), true);
-
-            if (!get(attributes("endurance")).isUnlocked) {
-              set(attributes("endurance"), (current) => ({
-                ...current,
-                isUnlocked: true,
-              }));
-            }
+            set(isAttributeUnlocked("endurance"), { isUnlocked: true });
           }
 
           if (isRangedWeapon || isTwoHandedWeapon) {

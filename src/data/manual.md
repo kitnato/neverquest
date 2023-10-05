@@ -1,4 +1,4 @@
-# Manual
+# Neverquest manual
 
 There are two panels: the [character](#character) (left) and the [encounter](#encounter) (right), with interactions between the two taking place via a column of control buttons in between them.
 
@@ -284,7 +284,7 @@ Required skill: [Armorcraft](#armorcraft).
 
 ### Dodge
 
-Dodging an incoming attack negates all damage. It doesn't cost any stamina the way [blocking](#block) does, but only if no [armor](#armor) or [hide](#hide-armor) armor is worn. [Reinforced](#reinforced-armor) armor incurs a stamina cost for dodging, and [plate](#plate-armor) removes the ability to dodge altogether.
+Dodging an incoming attack negates all damage. It doesn't cost any stamina the way [blocking](#block) does, but only if no [armor](#armor) or [light](#light-armor) armor is worn. [Reinforced](#reinforced-armor) armor incurs a stamina cost for dodging, and [heavy](#heavy-armor) removes the ability to dodge altogether.
 
 The overall chance to dodge an attack is determined by the [dodge chance](#dodge-chance) statistic.
 
@@ -296,7 +296,7 @@ When there is not enough [stamina](#stamina) to pay for an attack, [parry](#parr
 
 ### Looting
 
-After the monster is defeated, its remains are looted automatically for [essence](#essence) and any [gems](#gems).
+After the monster is defeated, its remains are looted for [essence](#essence) and any [gems](#gems).
 
 The looted resources can only be collected when the stage is completed, i.e. once the [wilderness](#wilderness) is cleared of monsters.
 
@@ -413,7 +413,7 @@ Each of the following armor classes increases the protection value and adds cert
 
 No initial modifiers.
 
-##### Hide armor
+##### Light armor
 
 - Low protection
 - Low cost
@@ -425,7 +425,7 @@ No initial modifiers.
 - Low [deflection](#deflection) chance
 - Medium cost
 
-##### Plate armor
+##### Heavy armor
 
 - High protection
 - Cannot dodge
@@ -496,17 +496,15 @@ A monster can be afflicted by any combination of elemental effects, the everity 
 
 #### Trinkets
 
-Can enable various actions or grant certain effects if they are carried in the [inventory](#inventory).
+Enable various actions or grant certain effects if they are carried in the [inventory](#inventory).
 
-The following are some of the early trinkets available from the merchant.
+##### Static trinkets
 
-##### Compass
+These provide a permanent effect of some sort while they are carried in the inventory. If they are sold or lost, the effect goes with it.
 
-Allows the character to return to any previous stage to hunt more monsters.
+##### Usable trinkets
 
-##### Hearthstone
-
-Allows the character to return to the caravan regardless of if the current [wilderness](#wilderness) stage's monsters are cleared out or not. Can only be used if not currently attacking (so that the inventory can be opened to use the hearthstone).
+In addition to maybe providing a [static](#static-trinkets) effect, these trinkets also allow direct interaction, usually granting a new action. Some of these trinkets are infusable, meaning they allow [essence](#essence) to be spent on them to upgrade their effect.
 
 ### Consumables
 
@@ -596,7 +594,7 @@ Allows the use of [ranged weapons](#ranged-weapons). Also unlocks the [marksmans
 
 ### Armorcraft
 
-Allows the use of [plate](#plate-armor) armor. Also unlocks the [resilience](#resilience) mastery and the [deflection](#deflection) ability.
+Allows the use of [heavy](#heavy-armor) armor. Also unlocks the [resilience](#resilience) mastery and the [deflection](#deflection) ability.
 
 ### Assassination
 

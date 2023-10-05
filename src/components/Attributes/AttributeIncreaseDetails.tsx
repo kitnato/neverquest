@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
@@ -11,7 +12,8 @@ import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
 import { ReactComponent as IconRegenerationAmount } from "@neverquest/icons/regeneration-amount.svg";
 import { ReactComponent as IconRegenerationRate } from "@neverquest/icons/regeneration-rate.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
-import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
+import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
+import { level } from "@neverquest/state/attributes";
 import { ownedItem } from "@neverquest/state/items";
 import type { SVGIcon } from "@neverquest/types/props";
 import type { Attribute } from "@neverquest/types/unions";
@@ -29,28 +31,30 @@ const STATISTIC_ICON: Record<Attribute, SVGIcon> = {
   vitality: IconHealth,
 };
 
-export function AttributeIncreaseDetails({ type }: { type: Attribute }) {
+export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }) {
   const hasTomeOfPower = Boolean(useRecoilValue(ownedItem("tome of power")));
+  const levelValue = useRecoilValue(level);
 
-  const { increment, powerBonus } = ATTRIBUTES[type];
-  const Icon = STATISTIC_ICON[type];
+  const { increment, powerBonus } = ATTRIBUTES[attribute];
+  const Icon = STATISTIC_ICON[attribute];
   const formattedIncrement =
     increment < 1 ? formatValue({ format: "percentage", value: increment }) : increment;
-  const operand = ["speed", "vigor"].includes(type) ? "-" : "+";
+  const operand = ["speed", "vigor"].includes(attribute) ? "-" : "+";
 
   return (
     <>
-      <div>
-        <IconImage Icon={Icon} size="tiny" />
-        &nbsp;{operand}
-        {formattedIncrement}
-      </div>
+      <Stack className="justify-content-center" direction="horizontal" gap={1}>
+        <IconImage Icon={Icon} size="small" />
+
+        <span>{`${operand}${formattedIncrement}`}</span>
+      </Stack>
 
       {hasTomeOfPower && (
-        <div>
-          <IconImage Icon={IconPower} size="tiny" />
-          &nbsp;{`+${formatValue({ format: "percentage", value: powerBonus })}`}
-        </div>
+        <Stack className="justify-content-center" direction="horizontal" gap={1}>
+          <IconImage Icon={IconTomeOfPower} size="small" />
+
+          {`+${formatValue({ format: "percentage", value: powerBonus })} (x${levelValue})`}
+        </Stack>
       )}
     </>
   );

@@ -9,15 +9,15 @@ import type { Crew } from "@neverquest/types/unions";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
-export function CrewHired({ setActive, type }: { setActive: () => void; type: Crew }) {
-  const { status } = useRecoilValue(hireStatus(type));
+export function CrewHired({ crew, setActive }: { crew: Crew; setActive: () => void }) {
+  const { status } = useRecoilValue(hireStatus(crew));
   const stageValue = useRecoilValue(stage);
 
   if (status !== "hired") {
     return null;
   }
 
-  const { Icon, interaction, monologues } = CREW[type];
+  const { Icon, interaction, monologues } = CREW[crew];
   const monologue =
     monologues[stageValue] ??
     (() => {
@@ -34,7 +34,7 @@ export function CrewHired({ setActive, type }: { setActive: () => void; type: Cr
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <IconDisplay
-        contents={capitalizeAll(type)}
+        contents={capitalizeAll(crew)}
         description={`"${monologue}"`}
         Icon={Icon}
         tooltip="Caravan crew"

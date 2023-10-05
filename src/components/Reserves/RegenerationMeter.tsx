@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
@@ -14,15 +15,15 @@ import {
 import type { Reserve } from "@neverquest/types/unions";
 import { formatValue } from "@neverquest/utilities/formatters";
 
-export function RegenerationMeter({ type }: { type: Reserve }) {
-  const isHealth = type === "health";
+export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
+  const isHealth = reserve === "health";
 
-  const regenerationAmountValue = useRecoilValue(regenerationAmount(type));
-  const regenerationDurationValue = useRecoilValue(regenerationDuration(type));
-  const regenerationRateValue = useRecoilValue(regenerationRate(type));
+  const regenerationAmountValue = useRecoilValue(regenerationAmount(reserve));
+  const regenerationDurationValue = useRecoilValue(regenerationDuration(reserve));
+  const regenerationRateValue = useRecoilValue(regenerationRate(reserve));
   const isRecoveringValue = useRecoilValue(isRecovering);
 
-  const { label } = RESERVES[type];
+  const { label } = RESERVES[reserve];
   const ReserveIcon = isHealth ? IconHealth : IconStamina;
   const regenerationProgress =
     regenerationDurationValue === 0 ? 0 : regenerationRateValue - regenerationDurationValue;
@@ -34,30 +35,34 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
 
     if (regenerationProgress === 0) {
       return (
-        <span>
+        <Stack>
           {`${label} regeneration`}
-          <br />
-          <IconImage Icon={ReserveIcon} size="tiny" />
-          &nbsp;
-          {`${regenerationAmountValue} per ${formatValue({
-            format: "time",
-            value: regenerationRateValue,
-          })}`}
-        </span>
+
+          <Stack direction="horizontal" gap={1}>
+            <IconImage Icon={ReserveIcon} size="small" />
+
+            {`${regenerationAmountValue} per ${formatValue({
+              format: "time",
+              value: regenerationRateValue,
+            })}`}
+          </Stack>
+        </Stack>
       );
     }
 
     return (
-      <span>
-        {`Regenerating ${type}`}
-        <br />
-        <IconImage Icon={ReserveIcon} size="tiny" />
-        &nbsp;
-        {`${regenerationAmountValue} in ${formatValue({
-          format: "time",
-          value: regenerationRateValue - regenerationProgress,
-        })}`}
-      </span>
+      <Stack>
+        {`Regenerating ${reserve}`}
+
+        <Stack direction="horizontal" gap={1}>
+          <IconImage Icon={ReserveIcon} size="small" />
+
+          {`${regenerationAmountValue} in ${formatValue({
+            format: "time",
+            value: regenerationRateValue - regenerationProgress,
+          })}`}
+        </Stack>
+      </Stack>
     );
   })();
 
@@ -66,7 +71,7 @@ export function RegenerationMeter({ type }: { type: Reserve }) {
       attached="above"
       disableTransitions
       label={details}
-      size="tiny"
+      size="small"
       value={(regenerationProgress / regenerationRateValue) * 100}
       variant="secondary"
     />

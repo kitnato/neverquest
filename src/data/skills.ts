@@ -45,7 +45,7 @@ export const SKILLS: Record<
     unlocksMastery: "marksmanship",
   },
   armorcraft: {
-    description: "Unlocks the use of plate armor & the ability to deflect ailments.",
+    description: "Unlocks the use of heavy armor & the ability to deflect ailments.",
     Icon: IconArmorcraft,
     requiredCrew: "blacksmith",
     unlocksMastery: "resilience",

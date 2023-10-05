@@ -1,4 +1,4 @@
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
@@ -45,11 +45,13 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
               eventKey={current}
               key={current}
             >
-              <span>{capitalizeAll(name)}</span>&nbsp;
-              <span>
-                <IconImage Icon={IconEssence} size="tiny" />
-                &nbsp;{GEM_FITTING_COST[gems.length] ?? LABEL_EMPTY}
-              </span>
+              <Stack direction="horizontal" gap={1}>
+                <span>{capitalizeAll(name)}</span>
+
+                <IconImage Icon={IconEssence} size="small" />
+
+                {GEM_FITTING_COST[gems.length] ?? LABEL_EMPTY}
+              </Stack>
             </Dropdown.Item>
           );
         })}

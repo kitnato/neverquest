@@ -28,7 +28,7 @@ export function Protection() {
         <Stack direction="horizontal">
           <span>{protectionValue}</span>
 
-          <FloatingText deltaType="protection" />
+          <FloatingText delta="protection" />
         </Stack>
       }
       Icon={IconProtection}

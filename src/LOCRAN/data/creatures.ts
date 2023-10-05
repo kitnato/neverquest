@@ -128,6 +128,10 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "behemoth",
+    type: "monster",
+  },
+  {
     name: "belcher",
     type: "monster",
   },
@@ -138,6 +142,10 @@ export const CREATURES: CreatureData[] = [
   {
     name: "bernie",
     type: "name",
+  },
+  {
+    name: "betrayer",
+    type: "monster",
   },
   {
     name: "bigfoot",
@@ -261,6 +269,10 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "clown parade",
+    type: "monster",
+  },
+  {
     name: "cockroach",
     type: "monster",
   },
@@ -324,10 +336,6 @@ export const CREATURES: CreatureData[] = [
     type: "name",
   },
   {
-    name: "dealer",
-    type: "human",
-  },
-  {
     name: "defiler",
     type: "monster",
   },
@@ -344,8 +352,16 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "destroyer",
+    type: "human",
+  },
+  {
     isNSFW: true,
     name: "diarrhea",
+    type: "monster",
+  },
+  {
+    name: "dinosaur",
     type: "monster",
   },
   {
@@ -742,6 +758,10 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "leviathan",
+    type: "monster",
+  },
+  {
     name: "liberator",
     type: "human",
   },
@@ -1066,7 +1086,15 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "raptor",
+    type: "monster",
+  },
+  {
     name: "raver",
+    type: "monster",
+  },
+  {
+    name: "reaper",
     type: "monster",
   },
   {
@@ -1232,6 +1260,10 @@ export const CREATURES: CreatureData[] = [
     type: "human",
   },
   {
+    name: "stabber",
+    type: "monster",
+  },
+  {
     name: "stalker",
     type: "monster",
   },
@@ -1258,6 +1290,10 @@ export const CREATURES: CreatureData[] = [
   {
     name: "sybil",
     type: "name",
+  },
+  {
+    name: "t-rex",
+    type: "monster",
   },
   {
     isNSFW: true,
@@ -1370,6 +1406,10 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "warlock",
+    type: "monster",
+  },
+  {
+    name: "warmonger",
     type: "monster",
   },
   {

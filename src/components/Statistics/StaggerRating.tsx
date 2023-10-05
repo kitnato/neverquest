@@ -55,16 +55,20 @@ export function StaggerRating() {
                       <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
 
                       <td>
-                        <IconImage Icon={IconStagger} size="tiny" />
-                        &nbsp;
-                        {formatValue({ format: "percentage", value: stagger })}
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconStagger} size="small" />
+
+                          {formatValue({ format: "percentage", value: stagger })}
+                        </Stack>
                       </td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <IconImage Icon={IconStability} size="tiny" />
-                        &nbsp;Stability:
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconStability} size="small" />
+                          Stability:
+                        </Stack>
                       </td>
 
                       <td>{`${formatValue({
@@ -81,7 +85,7 @@ export function StaggerRating() {
             <span>{shieldcraftValue ? staggerRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
-          <FloatingText deltaType="staggerRating" />
+          <FloatingText delta="staggerRating" />
         </Stack>
       }
       Icon={IconStaggerRating}

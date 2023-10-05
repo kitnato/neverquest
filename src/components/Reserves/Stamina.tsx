@@ -10,18 +10,18 @@ import { ReserveMeter } from "@neverquest/components/Reserves/ReserveMeter";
 import { RESERVES } from "@neverquest/data/reserves";
 import { ReactComponent as IconEndurance } from "@neverquest/icons/endurance.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
-import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
+import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
 import { attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
-import { powerBonus } from "@neverquest/state/statistics";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
+import { attributePowerBonus } from "@neverquest/state/statistics";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Stamina() {
+  const endurancePowerBonus = useRecoilValue(attributePowerBonus("endurance"));
+  const endurance = useRecoilValue(attributeStatistic("endurance"));
   const isShowingStamina = useRecoilValue(isShowing("stamina"));
   const isShowingStaminaDetails = useRecoilValue(isShowing("staminaDetails"));
-  const powerBonusValue = useRecoilValue(powerBonus("endurance"));
-  const enduranceValue = useRecoilValue(attributeStatistic("endurance"));
 
   const { baseAmount } = RESERVES.stamina;
 
@@ -44,32 +44,44 @@ export function Stamina() {
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
 
-                        <td>{baseAmount}</td>
+                        <td>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconStamina} size="small" />
+
+                            {baseAmount}
+                          </Stack>
+                        </td>
                       </tr>
 
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
-                          <IconImage Icon={IconEndurance} size="tiny" />
-                          &nbsp;Endurance:
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconEndurance} size="small" />
+                            Endurance:
+                          </Stack>
                         </td>
 
-                        <td>{`+${enduranceValue - baseAmount}`}</td>
+                        <td>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconStamina} size="small" />
+
+                            {`+${formatValue({ value: endurance - baseAmount })} `}
+
+                            {endurancePowerBonus > 0 && (
+                              <>
+                                {LABEL_SEPARATOR}
+
+                                <IconImage Icon={IconTomeOfPower} size="small" />
+
+                                {`+${formatValue({
+                                  format: "percentage",
+                                  value: endurancePowerBonus,
+                                })}`}
+                              </>
+                            )}
+                          </Stack>
+                        </td>
                       </tr>
-
-                      {powerBonusValue > 0 && (
-                        <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>
-                            <IconImage Icon={IconPower} size="tiny" />
-                            &nbsp;Empowered:
-                          </td>
-
-                          <td>{`+${formatValue({
-                            decimals: 0,
-                            format: "percentage",
-                            value: powerBonusValue,
-                          })}`}</td>
-                        </tr>
-                      )}
                     </DetailsTable>
                   </Popover.Body>
                 </Popover>
@@ -77,15 +89,15 @@ export function Stamina() {
               placement="right"
               trigger={isShowingStaminaDetails ? ["hover", "focus"] : []}
             >
-              <div className="w-100">
-                <ReserveMeter type="stamina" />
-              </div>
+              <span className="w-100">
+                <ReserveMeter reserve="stamina" />
+              </span>
             </OverlayTrigger>
 
-            <FloatingText deltaType="stamina" />
+            <FloatingText delta="stamina" />
           </Stack>
 
-          <Regeneration type="stamina" />
+          <Regeneration reserve="stamina" />
         </Stack>
       }
       Icon={IconStamina}

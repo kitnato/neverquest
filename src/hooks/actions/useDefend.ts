@@ -63,8 +63,8 @@ export function useDefend() {
 
         animateElement({
           element: get(statusElement),
+          name: "headShake",
           speed: "fast",
-          type: "headShake",
         });
 
         // If stunned, check if hit and decrease its duration.
@@ -318,8 +318,8 @@ export function useDefend() {
 
           animateElement({
             element: get(monsterElement),
+            name: "headShake",
             speed: "fast",
-            type: "headShake",
           });
         }
 

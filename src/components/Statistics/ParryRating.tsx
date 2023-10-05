@@ -51,8 +51,11 @@ export function ParryRating() {
                       <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
 
                       <td>
-                        <IconImage Icon={IconParry} size="tiny" />
-                        &nbsp;{formatValue({ format: "percentage", value: parryValue })}
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconParry} size="small" />
+
+                          {formatValue({ format: "percentage", value: parryValue })}
+                        </Stack>
                       </td>
                     </tr>
 
@@ -78,8 +81,10 @@ export function ParryRating() {
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <IconImage Icon={IconFinesse} size="tiny" />
-                        &nbsp;Finesse:
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconFinesse} size="small" />
+                          Finesse:
+                        </Stack>
                       </td>
 
                       <td>{`+${formatValue({
@@ -115,7 +120,7 @@ export function ParryRating() {
             <span>{escrimeValue ? parryRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
-          <FloatingText deltaType="parry" />
+          <FloatingText delta="parry" />
         </Stack>
       }
       Icon={IconParryRating}

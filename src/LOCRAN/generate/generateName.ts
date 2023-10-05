@@ -1,4 +1,5 @@
 import { AFFIXES } from "@neverquest/LOCRAN/data/affixes";
+import { CREATURES } from "@neverquest/LOCRAN/data/creatures";
 import { NAMES } from "@neverquest/LOCRAN/data/names";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
@@ -24,7 +25,7 @@ export function generateName({
   }
 
   const connector = prefix.name[prefix.name.length - 1] === suffix.name[0] ? "-" : "";
-  const filteredTitles = AFFIXES.filter((current) => {
+  const filteredAffixes = AFFIXES.filter((current) => {
     const { creature, isNSFW, name } = current;
 
     const filterNSFW = allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW;
@@ -35,6 +36,14 @@ export function generateName({
 
     return (creature === "prefix" || creature === "suffix") && filterNSFW;
   });
+  const filteredCreatures = CREATURES.filter((current) => {
+    const { isNSFW, type } = current;
+
+    const filterNSFW = allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW;
+
+    return type === "monster" && filterNSFW;
+  });
+  const filteredTitles = filteredAffixes.concat(filteredCreatures);
   const title = hasTitle && filteredTitles[Math.floor(Math.random() * filteredTitles.length)];
 
   if (title === undefined) {

@@ -33,7 +33,7 @@ export function ItemAcquisition() {
   return itemsAcquiredValue.map((current) => {
     const { id } = current;
 
-    if (isTrinket(current) && current.type === "knapsack") {
+    if (isTrinket(current) && current.name === "knapsack") {
       return;
     }
 
@@ -43,7 +43,7 @@ export function ItemAcquisition() {
       }
 
       if (isConsumable(current)) {
-        return CONSUMABLES[current.type].Icon;
+        return CONSUMABLES[current.name].Icon;
       }
 
       if (isGem(current)) {
@@ -55,7 +55,7 @@ export function ItemAcquisition() {
       }
 
       if (isTrinket(current)) {
-        return TRINKETS[current.type].Icon;
+        return TRINKETS[current.name].Icon;
       }
 
       if (isWeapon(current)) {
@@ -71,7 +71,7 @@ export function ItemAcquisition() {
 
     return (
       <div
-        className={`position-absolute ${getAnimationClass({ speed: "slower", type: "zoomOut" })}`}
+        className={`position-absolute ${getAnimationClass({ name: "zoomOut", speed: "slower" })}`}
         key={id}
         onAnimationEnd={handleAnimationEnd(id)}
         style={{ left: -12, top: 12 }}

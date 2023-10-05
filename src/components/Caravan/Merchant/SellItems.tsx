@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { SellItem } from "@neverquest/components/Caravan/Merchant/SellItem";
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
-import { Trinket } from "@neverquest/components/Items/Trinkets";
+import { Usable } from "@neverquest/components/Items/Usable";
 import { inventory } from "@neverquest/state/inventory";
 import {
   isArmor,
@@ -11,7 +11,7 @@ import {
   isGear,
   isGem,
   isShield,
-  isTrinket,
+  isUsable,
   isWeapon,
 } from "@neverquest/types/type-guards";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
@@ -42,14 +42,12 @@ export function SellItems() {
 
               return (
                 <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-                  <Stack direction="horizontal">
-                    <ItemDisplay item={current} overlayPlacement="right" />
-
-                    {isEquipped && (
-                      <span className="fst-italic" style={{ width: "max-content" }}>
-                        &nbsp;(Equipped)
-                      </span>
-                    )}
+                  <Stack direction="horizontal" gap={1}>
+                    <ItemDisplay
+                      description={isEquipped ? "Equipped" : null}
+                      item={current}
+                      overlayPlacement="right"
+                    />
                   </Stack>
 
                   <SellItem item={current} />
@@ -69,11 +67,11 @@ export function SellItems() {
             ))}
 
           {storedItems
-            .filter(isTrinket)
-            .sort((a, b) => a.type.localeCompare(b.type))
+            .filter(isUsable)
+            .sort((a, b) => a.name.localeCompare(b.name))
             .map((current) => (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.id}>
-                <Trinket item={current} />
+                <Usable item={current} />
 
                 <SellItem item={current} />
               </div>
@@ -81,9 +79,9 @@ export function SellItems() {
 
           {[
             ...stackItems(
-              storedItems.filter(isConsumable).sort((a, b) => a.type.localeCompare(b.type)),
+              storedItems.filter(isConsumable).sort((a, b) => a.name.localeCompare(b.name)),
             ),
-            ...stackItems(storedItems.filter(isGem).sort((a, b) => a.type.localeCompare(b.type))),
+            ...stackItems(storedItems.filter(isGem).sort((a, b) => a.name.localeCompare(b.name))),
           ].map((current) => {
             const { item, stack } = current;
 

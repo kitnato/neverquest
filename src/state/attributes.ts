@@ -1,23 +1,36 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
-import { ATTRIBUTES, ATTRIBUTES_ORDER, ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
+import { ATTRIBUTES, ATTRIBUTES_ORDER } from "@neverquest/data/attributes";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { essence } from "@neverquest/state/resources";
-import type { UnlockedState } from "@neverquest/types";
 import type { Attribute } from "@neverquest/types/unions";
-import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
+import { getAttributePointCost, getComputedStatistic } from "@neverquest/utilities/getters";
 
 // SELECTORS
+
+export const absorbedEssence = withStateKey("absorbedEssence", (key) =>
+  selector({
+    get: ({ get }) =>
+      Array.from<number>(Array(get(level))).reduce(
+        (aggregator, _, index) => aggregator + getAttributePointCost(index),
+        0,
+      ),
+    key,
+  }),
+);
 
 export const attributePoints = withStateKey("attributePoints", (key) =>
   selector({
     get: ({ get }) => {
-      let points = 0;
-      let requiredEssence = get(attributeCost);
+      const essenceValue = get(essence);
+      const levelValue = get(level);
 
-      while (requiredEssence <= get(essence)) {
+      let points = 0;
+      let requiredEssence = getAttributePointCost(levelValue);
+
+      while (requiredEssence <= essenceValue) {
         points += 1;
-        requiredEssence += getGrowthTriangular(get(level) + 1 + ATTRIBUTE_COST_BASE + points);
+        requiredEssence += getAttributePointCost(levelValue + points);
       }
 
       return points;
@@ -26,31 +39,9 @@ export const attributePoints = withStateKey("attributePoints", (key) =>
   }),
 );
 
-export const attributeCost = withStateKey("attributeCost", (key) =>
+export const areAttributesAffordable = withStateKey("areAttributesAffordable", (key) =>
   selector({
-    get: ({ get }) => getGrowthTriangular(get(level) + ATTRIBUTE_COST_BASE),
-    key,
-  }),
-);
-
-export const areAttributesIncreasable = withStateKey("areAttributesIncreasable", (key) =>
-  selector({
-    get: ({ get }) => get(attributeCost) <= get(essence),
-    key,
-  }),
-);
-
-export const essenceAbsorbed = withStateKey("essenceAbsorbed", (key) =>
-  selector({
-    get: ({ get }) => {
-      let total = 0;
-
-      for (let i = 0; i <= get(level); i++) {
-        total += getGrowthTriangular(i);
-      }
-
-      return total;
-    },
+    get: ({ get }) => get(attributePoints) > 0,
     key,
   }),
 );
@@ -61,11 +52,11 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =
       (parameter) =>
       ({ get }) => {
         const { base, increment, maximum } = ATTRIBUTES[parameter];
-        const { points } = get(attributes(parameter));
+        const attributeRankValue = get(attributeRank(parameter));
 
         return maximum === undefined
           ? false
-          : maximum === getComputedStatistic({ amount: points, base, increment });
+          : maximum === getComputedStatistic({ amount: attributeRankValue, base, increment });
       },
     key,
   }),
@@ -74,10 +65,7 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =
 export const level = withStateKey("level", (key) =>
   selector({
     get: ({ get }) =>
-      ATTRIBUTES_ORDER.reduce(
-        (aggregator, current) => aggregator + get(attributes(current)).points,
-        0,
-      ),
+      ATTRIBUTES_ORDER.reduce((aggregator, current) => aggregator + get(attributeRank(current)), 0),
     key,
   }),
 );
@@ -88,9 +76,9 @@ export const attributeStatistic = withStateKey("attributeStatistic", (key) =>
       (parameter) =>
       ({ get }) => {
         const { base, increment } = ATTRIBUTES[parameter];
-        const { points } = get(attributes(parameter));
+        const attributeRankValue = get(attributeRank(parameter));
 
-        return getComputedStatistic({ amount: points, base, increment });
+        return getComputedStatistic({ amount: attributeRankValue, base, increment });
       },
     key,
   }),
@@ -98,17 +86,18 @@ export const attributeStatistic = withStateKey("attributeStatistic", (key) =>
 
 // ATOMS
 
-export const attributes = withStateKey("attributes", (key) =>
-  atomFamily<
-    UnlockedState & {
-      points: number;
-    },
-    Attribute
-  >({
-    default: {
-      isUnlocked: false,
-      points: 0,
-    },
+export const attributeRank = withStateKey("attributeRank", (key) =>
+  atomFamily<number, Attribute>({
+    default: 0,
+    effects: (parameter) => [handleLocalStorage({ key, parameter })],
+    key,
+  }),
+);
+
+export const isAttributeUnlocked = withStateKey("isAttributeUnlocked", (key) =>
+  // TODO - if it's just boolean, it won't initialize.
+  atomFamily<{ isUnlocked: boolean }, Attribute>({
+    default: { isUnlocked: false },
     effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),

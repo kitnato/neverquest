@@ -1,32 +1,38 @@
-export type Attribute =
-  | "agility"
-  | "dexterity"
-  | "endurance"
-  | "fortitude"
-  | "perception"
-  | "speed"
-  | "strength"
-  | "vigor"
-  | "vitality";
+export const ATTRIBUTE_TYPES = [
+  "agility",
+  "dexterity",
+  "endurance",
+  "fortitude",
+  "perception",
+  "speed",
+  "strength",
+  "vigor",
+  "vitality",
+] as const;
+export type Attribute = (typeof ATTRIBUTE_TYPES)[number];
 
 export const CONSUMABLE_TYPES = ["antidote", "bandages", "elixir", "salve", "phylactery"] as const;
 export type Consumable = (typeof CONSUMABLE_TYPES)[number];
 
-export type Crew =
-  | "alchemist"
-  | "blacksmith"
-  | "fletcher"
-  | "medic"
-  | "mercenary"
-  | "merchant"
-  | "occultist"
-  | "tailor"
-  | "witch";
+export const CREW_TYPES = [
+  "alchemist",
+  "blacksmith",
+  "fletcher",
+  "medic",
+  "mercenary",
+  "merchant",
+  "occultist",
+  "tailor",
+  "witch",
+] as const;
+export type Crew = (typeof CREW_TYPES)[number];
 
 export type CrewStatus = "hirable" | "hired" | null;
 
 export type Delta =
+  | "agility"
   | "ammunition"
+  | "ammunitionMaximum"
   | "attackRate"
   | "attributePoints"
   | "bleedRating"
@@ -37,34 +43,46 @@ export type Delta =
   | "damage"
   | "damagePerSecond"
   | "deflection"
+  | "dexterity"
   | "dodge"
-  | "encumbrance"
+  | "encumbranceMaximum"
+  | "endurance"
   | "essence"
-  | "essenceAbsorbed"
   | "essenceBonus"
   | "essenceLoot"
   | "execution"
   | "finesse"
+  | "fortitude"
   | "health"
+  | "healthMaximum"
   | "healthRegenerationRate"
+  | "infusionLevel"
   | "level"
   | "marksmanship"
+  | "masteryProgress"
+  | "masteryRank"
   | "might"
-  | "monkeyPawLevel"
   | "monsterHealth"
   | "parry"
+  | "perception"
+  | "powerBonusBoost"
   | "progress"
   | "protection"
   | "range"
   | "recoveryRate"
   | "resilience"
+  | "speed"
   | "stability"
   | "stage"
   | "staggerRating"
   | "stamina"
+  | "staminaMaximum"
   | "staminaRegenerationRate"
+  | "strength"
   | "stunRating"
-  | "thorns";
+  | "thorns"
+  | "vigor"
+  | "vitality";
 
 export const ELEMENTAL_TYPES = ["lightning", "fire", "ice"] as const;
 export type Elemental = (typeof ELEMENTAL_TYPES)[number];
@@ -77,6 +95,9 @@ export type Gem = (typeof GEM_TYPES)[number];
 
 export const GRIP_TYPES = ["one-handed", "two-handed"] as const;
 export type Grip = (typeof GRIP_TYPES)[number];
+
+export const INFUSABLE_TYPES = ["monkey paw", "tome of power"] as const;
+export type Infusable = (typeof INFUSABLE_TYPES)[number];
 
 export type Item = Consumable | Gear | Trinket;
 
@@ -154,17 +175,20 @@ export const SKILL_TYPES = [
 export type Skill = (typeof SKILL_TYPES)[number];
 
 export type StateKey =
+  | "absorbedEssence"
   | "allowNSFW"
   | "ammunition"
+  | "ammunitionMaximum"
   | "appliedGems"
-  | "areAttributesIncreasable"
+  | "areAttributesAffordable"
   | "armor"
   | "attackDuration"
   | "attackRate"
   | "attackRateTotal"
-  | "attributeCost"
+  | "attributePointCost"
   | "attributePoints"
-  | "attributes"
+  | "attributePowerBonus"
+  | "attributeRank"
   | "attributeStatistic"
   | "autoEquip"
   | "blacksmithInventory"
@@ -201,7 +225,6 @@ export type StateKey =
   | "encumbranceMaximum"
   | "equippableItems"
   | "essence"
-  | "essenceAbsorbed"
   | "essenceBonus"
   | "essenceLoot"
   | "execution"
@@ -216,10 +239,15 @@ export type StateKey =
   | "healthMaximum"
   | "healthMaximumTotal"
   | "hireStatus"
+  | "infusionCurrent"
   | "infusionDelta"
+  | "infusionLevel"
+  | "infusionMaximum"
+  | "infusionStep"
   | "inventory"
   | "isAttacking"
   | "isAttributeAtMaximum"
+  | "isAttributeUnlocked"
   | "isBlighted"
   | "isBoss"
   | "isCrewHired"
@@ -231,6 +259,7 @@ export type StateKey =
   | "isInventoryOpen"
   | "isLooting"
   | "isMasteryAtMaximum"
+  | "isMasteryUnlocked"
   | "isMonsterAiling"
   | "isMonsterDead"
   | "isMonsterNew"
@@ -250,15 +279,12 @@ export type StateKey =
   | "locationName"
   | "lootingDuration"
   | "lowHealthWarning"
-  | "masteries"
   | "masteriesAcquired"
   | "masteryCost"
+  | "masteryProgress"
+  | "masteryRank"
   | "masteryStatistic"
   | "merchantInventory"
-  | "merchantItem"
-  | "monkeyPawInfusion"
-  | "monkeyPawLevel"
-  | "monkeyPawMaximum"
   | "monsterAilmentDuration"
   | "monsterAttackDuration"
   | "monsterAttackRate"
@@ -278,6 +304,7 @@ export type StateKey =
   | "monsterPoisonLength"
   | "monsterPoisonMagnitude"
   | "name"
+  | "nextAttributePoint"
   | "notifyOverEncumbrance"
   | "ownedItem"
   | "parry"
@@ -285,7 +312,7 @@ export type StateKey =
   | "parryDamage"
   | "parryRating"
   | "poisonDuration"
-  | "powerBonus"
+  | "powerBonusBoost"
   | "progress"
   | "progressMaximum"
   | "protection"
@@ -321,13 +348,11 @@ export type StateKey =
   | "wildernesses";
 
 export const TRINKET_TYPES = [
-  "antique coin",
   "ammunition pouch",
+  "antique coin",
   "compass",
   "hearthstone",
   "knapsack",
-  "monkey paw",
-  "tome of power",
 ] as const;
 export type Trinket = (typeof TRINKET_TYPES)[number];
 

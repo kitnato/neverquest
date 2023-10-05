@@ -26,6 +26,7 @@ export function PurchaseItemButton({
       overlay={
         <Tooltip>
           {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
+
           {!canFitValue && <div>{LABEL_OVER_ENCUMBERED}</div>}
         </Tooltip>
       }

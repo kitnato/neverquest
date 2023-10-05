@@ -46,7 +46,7 @@ export function useChangeHealth() {
 
         if (newHealth <= 0) {
           const phylactery = get(inventory).find(
-            (item) => isConsumable(item) && item.type === "phylactery",
+            (item) => isConsumable(item) && item.name === "phylactery",
           );
 
           if (phylactery !== undefined) {

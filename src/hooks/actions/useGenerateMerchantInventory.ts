@@ -1,7 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
 import { MERCHANT_OFFERS } from "@neverquest/data/caravan";
-import { TRINKETS } from "@neverquest/data/inventory";
 import type { AffixTag } from "@neverquest/LOCRAN/types";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { stage, stageMaximum } from "@neverquest/state/encounter";
@@ -75,7 +74,7 @@ export function useGenerateMerchantInventory() {
                   };
                 }
 
-                return TRINKETS[offer.name].item;
+                return offer.item;
               })();
 
               inventory.push({

@@ -7,25 +7,25 @@ import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { ReactComponent as IconPurge } from "@neverquest/icons/purge.svg";
-import { essenceAbsorbed } from "@neverquest/state/attributes";
+import { absorbedEssence } from "@neverquest/state/attributes";
 import { essence } from "@neverquest/state/resources";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function PurgeEssence() {
   const essenceValue = useRecoilValue(essence);
-  const essenceAbsorbedValue = useRecoilValue(essenceAbsorbed);
+  const absorbedEssenceValue = useRecoilValue(absorbedEssence);
 
   const resetAttributes = useResetAttributes();
   const transactEssence = useTransactEssence();
 
-  const price = Math.round(essenceAbsorbedValue * OCCULTIST_PURGE_PRICE_MULTIPLIER);
+  const price = Math.round(absorbedEssenceValue * OCCULTIST_PURGE_PRICE_MULTIPLIER);
   const isAffordable = price <= essenceValue;
   const isPurchasable = isAffordable && price > 0;
 
   const handlePurge = () => {
     transactEssence(-price);
-    transactEssence(essenceAbsorbedValue);
+    transactEssence(absorbedEssenceValue);
 
     resetAttributes();
   };
@@ -53,6 +53,7 @@ export function PurgeEssence() {
             overlay={
               <Tooltip>
                 {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
+
                 {price === 0 && <div>No essence to purge.</div>}
               </Tooltip>
             }

@@ -38,7 +38,7 @@ export function Progress() {
               variant="dark"
             />
 
-            <FloatingText deltaType="progress" />
+            <FloatingText delta="progress" />
           </Stack>
         }
         Icon={IconProgress}

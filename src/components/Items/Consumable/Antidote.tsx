@@ -29,7 +29,7 @@ export function Antidote({ id }: { id: string }) {
 
   return (
     <OverlayTrigger
-      overlay={<Tooltip>{!isPoisonedValue && <div>Not poisoned.</div>}</Tooltip>}
+      overlay={<Tooltip>Not poisoned.</Tooltip>}
       trigger={!isPoisonedValue ? ["hover", "focus"] : []}
     >
       <span>

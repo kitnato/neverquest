@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover } from "react-bootstrap";
+import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -45,13 +45,16 @@ export function MonsterPoisonRating() {
                     <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
 
                     <td>
-                      {`-${formatValue({
-                        format: "percentage",
-                        value: monsterPoisonMagnitudeValue,
-                      })}`}
-                      &nbsp;
-                      <IconImage Icon={IconHealth} size="tiny" />
-                      &nbsp;{LABEL_MAXIMUM}
+                      <Stack direction="horizontal" gap={1}>
+                        {`-${formatValue({
+                          format: "percentage",
+                          value: monsterPoisonMagnitudeValue,
+                        })}`}
+
+                        <IconImage Icon={IconHealth} size="small" />
+
+                        {LABEL_MAXIMUM}
+                      </Stack>
                     </td>
                   </tr>
 

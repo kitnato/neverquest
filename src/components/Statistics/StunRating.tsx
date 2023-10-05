@@ -48,16 +48,20 @@ export function StunRating() {
                       <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
 
                       <td>
-                        <IconImage Icon={IconStun} size="tiny" />
-                        &nbsp;
-                        {formatValue({ format: "percentage", value: abilityChance })}
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconStun} size="small" />
+
+                          {formatValue({ format: "percentage", value: abilityChance })}
+                        </Stack>
                       </td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <IconImage Icon={IconMight} size="tiny" />
-                        &nbsp;Might:
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconMight} size="small" />
+                          Might:
+                        </Stack>
                       </td>
 
                       <td>{`${mightValue} hits`}</td>
@@ -71,7 +75,7 @@ export function StunRating() {
             <span>{traumatologyValue ? stunRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
-          <FloatingText deltaType="stunRating" />
+          <FloatingText delta="stunRating" />
         </Stack>
       }
       Icon={IconStunRating}

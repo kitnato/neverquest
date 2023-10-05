@@ -74,8 +74,3 @@ export const MASTERIES: Record<
 };
 
 export const MASTERY_COST = 4;
-
-export const MASTERY_PROGRESS = {
-  increment: 1,
-  rank: 1,
-};

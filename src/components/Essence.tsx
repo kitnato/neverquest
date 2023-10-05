@@ -22,17 +22,17 @@ export function Essence() {
 
   return (
     <Card
+      className="overlay-modal-backdrop"
       style={{
         border: "none",
         paddingBottom: 4,
         paddingLeft: 8,
         paddingRight: 8,
         paddingTop: 4,
-        zIndex: 1055,
       }}
     >
       <Stack
-        className={isShowingEssence ? ` ${getAnimationClass({ type: "flipInX" })}` : undefined}
+        className={isShowingEssence ? ` ${getAnimationClass({ name: "flipInX" })}` : undefined}
         direction="horizontal"
         style={{
           visibility: isShowingEssence ? "visible" : "hidden",
@@ -45,7 +45,7 @@ export function Essence() {
           tooltip="Essence"
         />
 
-        <FloatingText deltaType="essence" />
+        <FloatingText delta="essence" />
       </Stack>
     </Card>
   );

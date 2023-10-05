@@ -10,20 +10,20 @@ import { ReserveMeter } from "@neverquest/components/Reserves/ReserveMeter";
 import { RESERVES } from "@neverquest/data/reserves";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
-import { ReactComponent as IconPower } from "@neverquest/icons/tome-of-power.svg";
+import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconVitality } from "@neverquest/icons/vitality.svg";
 import { attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isPoisoned, poisonDuration } from "@neverquest/state/reserves";
-import { powerBonus } from "@neverquest/state/statistics";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
+import { attributePowerBonus } from "@neverquest/state/statistics";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Health() {
+  const vitalityPowerBonus = useRecoilValue(attributePowerBonus("vitality"));
+  const vitality = useRecoilValue(attributeStatistic("vitality"));
   const isPoisonedValue = useRecoilValue(isPoisoned);
   const isShowingHealthDetails = useRecoilValue(isShowing("healthDetails"));
-  const powerBonusValue = useRecoilValue(powerBonus("vitality"));
-  const vitalityValue = useRecoilValue(attributeStatistic("vitality"));
   const setPoisonDuration = useSetRecoilState(poisonDuration);
 
   const { baseAmount } = RESERVES.health;
@@ -48,32 +48,44 @@ export function Health() {
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
 
-                        <td>{baseAmount}</td>
+                        <td>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconHealth} size="small" />
+
+                            {baseAmount}
+                          </Stack>
+                        </td>
                       </tr>
 
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
-                          <IconImage Icon={IconVitality} size="tiny" />
-                          &nbsp;Vitality:
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconVitality} size="small" />
+                            Vitality:
+                          </Stack>
                         </td>
 
-                        <td>{`+${formatValue({ value: vitalityValue - baseAmount })}`}</td>
+                        <td>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconHealth} size="small" />
+
+                            {`+${formatValue({ value: vitality - baseAmount })} `}
+
+                            {vitalityPowerBonus > 0 && (
+                              <>
+                                {LABEL_SEPARATOR}
+
+                                <IconImage Icon={IconTomeOfPower} size="small" />
+
+                                {`+${formatValue({
+                                  format: "percentage",
+                                  value: vitalityPowerBonus,
+                                })}`}
+                              </>
+                            )}
+                          </Stack>
+                        </td>
                       </tr>
-
-                      {powerBonusValue > 0 && (
-                        <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>
-                            <IconImage Icon={IconPower} size="tiny" />
-                            &nbsp;Empowered:
-                          </td>
-
-                          <td>{`+${formatValue({
-                            decimals: 0,
-                            format: "percentage",
-                            value: powerBonusValue,
-                          })}`}</td>
-                        </tr>
-                      )}
                     </DetailsTable>
                   </Popover.Body>
                 </Popover>
@@ -81,15 +93,15 @@ export function Health() {
               placement="right"
               trigger={isShowingHealthDetails ? ["hover", "focus"] : []}
             >
-              <div className="w-100">
-                <ReserveMeter type="health" />
-              </div>
+              <span className="w-100">
+                <ReserveMeter reserve="health" />
+              </span>
             </OverlayTrigger>
 
-            <FloatingText deltaType="health" />
+            <FloatingText delta="health" />
           </Stack>
 
-          <Regeneration type="health" />
+          <Regeneration reserve="health" />
         </Stack>
       }
       Icon={IconHealth}

@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover } from "react-bootstrap";
+import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
@@ -9,7 +9,7 @@ import { GearComparison } from "@neverquest/components/Items/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Items/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Items/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
-import { type SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/inventory";
+import { SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
 import { ReactComponent as IconNone } from "@neverquest/icons/none.svg";
 import { ReactComponent as IconStagger } from "@neverquest/icons/stagger.svg";
@@ -45,7 +45,7 @@ export function ShieldName({
               <GearLevelDetail
                 comparison={
                   showComparison
-                    ? { showingType: "offhand", subtrahend: shieldEquippedValue.level }
+                    ? { showing: "offhand", subtrahend: shieldEquippedValue.level }
                     : null
                 }
                 level={level}
@@ -57,14 +57,18 @@ export function ShieldName({
                 <td className={CLASS_TABLE_CELL_ITALIC}>Block chance:</td>
 
                 <td>
-                  <IconImage Icon={IconBlock} size="tiny" />
-                  &nbsp;{formatValue({ format: "percentage", value: block })}
-                  {showComparison && (
-                    <GearComparison
-                      difference={block - shieldEquippedValue.block}
-                      showingType="offhand"
-                    />
-                  )}
+                  <Stack direction="horizontal" gap={1}>
+                    <IconImage Icon={IconBlock} size="small" />
+
+                    {formatValue({ format: "percentage", value: block })}
+
+                    {showComparison && (
+                      <GearComparison
+                        difference={block - shieldEquippedValue.block}
+                        showing="offhand"
+                      />
+                    )}
+                  </Stack>
                 </td>
               </tr>
 
@@ -72,7 +76,7 @@ export function ShieldName({
                 comparison={
                   showComparison
                     ? {
-                        showingType: "offhand",
+                        showing: "offhand",
                         subtrahend: shieldEquippedValue.staminaCost,
                       }
                     : null
@@ -88,26 +92,25 @@ export function ShieldName({
 
                       <td>
                         {(() => {
-                          if ("gearClass" in shield) {
-                            const { gearClass } = shield;
+                          const { gearClass } = shield;
 
-                            if (gearClass) {
-                              const { Icon } = SHIELD_SPECIFICATIONS[gearClass];
+                          if (gearClass) {
+                            const { Icon } = SHIELD_SPECIFICATIONS[gearClass];
 
-                              return (
-                                <>
-                                  <IconImage Icon={Icon} size="tiny" />
-                                  &nbsp;{capitalizeAll(gearClass)}
-                                </>
-                              );
-                            }
+                            return (
+                              <Stack direction="horizontal" gap={1}>
+                                <IconImage Icon={Icon} size="small" />
+
+                                {capitalizeAll(gearClass)}
+                              </Stack>
+                            );
                           }
 
                           return (
-                            <>
-                              <IconImage Icon={IconNone} size="tiny" />
-                              &nbsp;None
-                            </>
+                            <Stack direction="horizontal" gap={1}>
+                              <IconImage Icon={IconNone} size="small" />
+                              None
+                            </Stack>
                           );
                         })()}
                       </td>
@@ -125,14 +128,18 @@ export function ShieldName({
                       <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance:</td>
 
                       <td>
-                        <IconImage Icon={IconStagger} size="tiny" />
-                        &nbsp;{formatValue({ format: "percentage", value: stagger })}
-                        {showComparison && (
-                          <GearComparison
-                            difference={stagger - shieldEquippedValue.stagger}
-                            showingType="offhand"
-                          />
-                        )}
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconStagger} size="small" />
+
+                          {formatValue({ format: "percentage", value: stagger })}
+
+                          {showComparison && (
+                            <GearComparison
+                              difference={stagger - shieldEquippedValue.stagger}
+                              showing="offhand"
+                            />
+                          )}
+                        </Stack>
                       </td>
                     </>
                   ) : (
@@ -141,14 +148,16 @@ export function ShieldName({
                 </tr>
               )}
 
-              <WeightDetail
-                comparison={
-                  showComparison
-                    ? { showingType: "offhand", subtrahend: shieldEquippedValue.weight }
-                    : null
-                }
-                weight={weight}
-              />
+              {shield.name !== SHIELD_NONE.name && (
+                <WeightDetail
+                  comparison={
+                    showComparison
+                      ? { showing: "offhand", subtrahend: shieldEquippedValue.weight }
+                      : null
+                  }
+                  weight={weight}
+                />
+              )}
             </DetailsTable>
           </Popover.Body>
         </Popover>

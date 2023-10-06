@@ -1,10 +1,10 @@
-import type { NumberFormat } from "@neverquest/types/unions";
 import {
   LABEL_EMPTY,
   MILLISECONDS_IN_HOUR,
   MILLISECONDS_IN_MINUTE,
   MILLISECONDS_IN_SECOND,
-} from "@neverquest/utilities/constants";
+} from "@neverquest/data/general";
+import type { NumberFormat } from "@neverquest/types/unions";
 
 export function capitalizeAll(string: string) {
   // ^\w{1} matches the first letter of the word, or (|) \s+ matches any amount of whitespace between the words.

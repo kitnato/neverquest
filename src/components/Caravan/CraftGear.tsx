@@ -2,10 +2,10 @@ import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { LABEL_NO_ESSENCE } from "@neverquest/data/general";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { essence } from "@neverquest/state/resources";
-import { LABEL_NO_ESSENCE } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function CraftGear({ onCraft, price }: { onCraft: () => void; price: number }) {

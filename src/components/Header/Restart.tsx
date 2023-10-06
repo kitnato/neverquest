@@ -36,7 +36,8 @@ export function Restart() {
 
       <ConfirmationDialog
         confirmationLabel="Restart"
-        message="This will reset all progress and restart from the beginning."
+        contents="This will reset all progress and restart from the beginning."
+        Icon={IconRestart}
         onConfirm={restart}
         setHidden={() => setIsShowingRestart(false)}
         show={isShowingRestart}

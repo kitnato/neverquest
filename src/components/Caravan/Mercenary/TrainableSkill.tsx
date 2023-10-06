@@ -4,13 +4,13 @@ import { useRecoilValue } from "recoil";
 import { SkillDisplay } from "@neverquest/components/Caravan/Mercenary/SkillDisplay";
 import { TrainSkillButton } from "@neverquest/components/Caravan/Mercenary/TrainSkillButton";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { SKILLS } from "@neverquest/data/skills";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { hireStatus } from "@neverquest/state/caravan";
 import { skillPrice, skills } from "@neverquest/state/skills";
 import type { Skill } from "@neverquest/types/unions";
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function TrainableSkill({ skill }: { skill: Skill }) {

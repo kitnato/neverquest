@@ -3,12 +3,12 @@ import { useRecoilValue } from "recoil";
 
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
+import { LABEL_MAXIMUM } from "@neverquest/data/general";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { deltas } from "@neverquest/state/deltas";
 import { isMasteryAtMaximum, masteryCost, masteryProgress } from "@neverquest/state/masteries";
 import type { Mastery } from "@neverquest/types/unions";
-import { LABEL_MAXIMUM } from "@neverquest/utilities/constants";
 
 export function MasteryProgress({ mastery }: { mastery: Mastery }) {
   const masteryProgressState = masteryProgress(mastery);

@@ -1,6 +1,13 @@
 import type { RecoilValue, Snapshot } from "recoil";
 
 import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
+import { PROGRESS_REDUCTION } from "@neverquest/data/encounter";
+import {
+  CLASS_ANIMATED,
+  CLASS_ANIMATE_PREFIX,
+  GROWTH_MAXIMUM,
+  RETIREMENT_MINIMUM,
+} from "@neverquest/data/general";
 import {
   ARMOR_SPECIFICATIONS,
   SHIELD_SPECIFICATIONS,
@@ -13,7 +20,6 @@ import type { GeneratorRange } from "@neverquest/types";
 import { isGeneratorRanges } from "@neverquest/types/type-guards";
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
 import type { Grip } from "@neverquest/types/unions";
-import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/utilities/constants";
 
 export function getAnimationClass({
   isInfinite,
@@ -127,6 +133,18 @@ export function getGrowthSigmoid(x: number) {
 // https://en.wikipedia.org/wiki/Triangular_number
 export function getGrowthTriangular(x: number) {
   return (x * (x + 1)) / 2;
+}
+
+export function getProgressReduction(value: number) {
+  const { maximum, minimum } = PROGRESS_REDUCTION;
+
+  return getFromRange({
+    factor: getGrowthSigmoid(
+      (GROWTH_MAXIMUM / RETIREMENT_MINIMUM) * (value + 1 - RETIREMENT_MINIMUM),
+    ),
+    maximum,
+    minimum,
+  });
 }
 
 export function getRange({

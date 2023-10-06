@@ -1,18 +1,21 @@
+import type { ReactNode } from "react";
 import { Button, Modal, Stack } from "react-bootstrap";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { ReactComponent as IconWarning } from "@neverquest/icons/warning.svg";
+import type { SVGIcon } from "@neverquest/types/props";
 
 export function ConfirmationDialog({
   confirmationLabel,
-  message,
+  contents,
+  Icon,
   onConfirm,
   setHidden,
   show,
   title,
 }: {
   confirmationLabel: string;
-  message: string;
+  contents: ReactNode;
+  Icon: SVGIcon;
   onConfirm: () => void;
   setHidden: () => void;
   show: boolean;
@@ -28,14 +31,14 @@ export function ConfirmationDialog({
       <Modal.Header closeButton>
         <Modal.Title>
           <Stack direction="horizontal" gap={3}>
-            <IconImage Icon={IconWarning} />
+            <IconImage Icon={Icon} />
 
             {title}
           </Stack>
         </Modal.Title>
       </Modal.Header>
 
-      <Modal.Body>{message}</Modal.Body>
+      <Modal.Body>{contents}</Modal.Body>
 
       <Modal.Footer>
         <Button onClick={handleConfirmation} variant="outline-dark">

@@ -6,6 +6,12 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { DodgePenaltyContents } from "@neverquest/components/Items/Armor/DodgePenaltyContents";
+import {
+  CLASS_TABLE_CELL_ITALIC,
+  LABEL_EMPTY,
+  LABEL_SEPARATOR,
+  LABEL_UNKNOWN,
+} from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconAgility } from "@neverquest/icons/agility.svg";
 import { ReactComponent as IconDodgePenalty } from "@neverquest/icons/dodge-penalty.svg";
@@ -17,12 +23,6 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { armor, ownedItem } from "@neverquest/state/items";
 import { skills } from "@neverquest/state/skills";
 import { attributePowerBonus, dodge } from "@neverquest/state/statistics";
-import {
-  CLASS_TABLE_CELL_ITALIC,
-  LABEL_EMPTY,
-  LABEL_SEPARATOR,
-  LABEL_UNKNOWN,
-} from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Dodge() {

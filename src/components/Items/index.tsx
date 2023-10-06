@@ -13,6 +13,7 @@ import { Usable } from "@neverquest/components/Items/Usable";
 import { CompassNavigate } from "@neverquest/components/Items/Usable/CompassNavigate";
 import { HearthstoneWarp } from "@neverquest/components/Items/Usable/HearthstoneWarp";
 import { InfusionInspect } from "@neverquest/components/Items/Usable/Infusion/InfusionInspect";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { inventory } from "@neverquest/state/inventory";
 import {
@@ -25,7 +26,6 @@ import {
   isTrinket,
   isWeapon,
 } from "@neverquest/types/type-guards";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function Inventory() {

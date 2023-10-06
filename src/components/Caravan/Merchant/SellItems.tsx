@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { SellItem } from "@neverquest/components/Caravan/Merchant/SellItem";
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
 import { Usable } from "@neverquest/components/Items/Usable";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { inventory } from "@neverquest/state/inventory";
 import {
   isArmor,
@@ -14,7 +15,6 @@ import {
   isUsable,
   isWeapon,
 } from "@neverquest/types/type-guards";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function SellItems() {

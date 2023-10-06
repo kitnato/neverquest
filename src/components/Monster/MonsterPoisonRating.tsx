@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_MAXIMUM } from "@neverquest/data/general";
 import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
 import { ReactComponent as IconPoison } from "@neverquest/icons/poison.svg";
 import {
@@ -11,7 +12,6 @@ import {
   monsterPoisonLength,
   monsterPoisonMagnitude,
 } from "@neverquest/state/monster";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_MAXIMUM } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function MonsterPoisonRating() {

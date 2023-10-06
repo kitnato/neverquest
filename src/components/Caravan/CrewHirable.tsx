@@ -3,6 +3,11 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CREW } from "@neverquest/data/caravan";
+import {
+  CLASS_FULL_WIDTH_JUSTIFIED,
+  LABEL_NO_ESSENCE,
+  LABEL_UNKNOWN,
+} from "@neverquest/data/general";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
@@ -10,11 +15,6 @@ import { hireStatus } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import { essence } from "@neverquest/state/resources";
 import type { Crew } from "@neverquest/types/unions";
-import {
-  CLASS_FULL_WIDTH_JUSTIFIED,
-  LABEL_NO_ESSENCE,
-  LABEL_UNKNOWN,
-} from "@neverquest/utilities/constants";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 
 export function CrewHirable({ crew }: { crew: Crew }) {

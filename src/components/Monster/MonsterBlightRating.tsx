@@ -4,15 +4,11 @@ import { useRecoilValue } from "recoil";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY, LABEL_MAXIMUM } from "@neverquest/data/general";
 import { ReactComponent as IconBlight } from "@neverquest/icons/blight.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { monsterBlightChance } from "@neverquest/state/monster";
 import { blightAmount, isPoisoned } from "@neverquest/state/reserves";
-import {
-  CLASS_TABLE_CELL_ITALIC,
-  LABEL_EMPTY,
-  LABEL_MAXIMUM,
-} from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function MonsterBlightRating() {

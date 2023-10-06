@@ -3,6 +3,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { TAILORING_EXPANSION, TAILORING_PRICES_MAXIMUM } from "@neverquest/data/caravan";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/data/general";
 import { AMMUNITION_MAXIMUM } from "@neverquest/data/inventory";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
@@ -11,7 +12,6 @@ import { inventory } from "@neverquest/state/inventory";
 import { ownedItem } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import type { AmmunitionPouchItem } from "@neverquest/types";
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 

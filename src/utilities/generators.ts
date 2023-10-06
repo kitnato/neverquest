@@ -1,11 +1,11 @@
 import { nanoid } from "nanoid";
 
+import { LOCATION_NAME } from "@neverquest/data/encounter";
 import {
   ARMOR_SPECIFICATIONS,
   SHIELD_SPECIFICATIONS,
   WEAPON_BASE,
 } from "@neverquest/data/inventory";
-import { LOCATION_NAME } from "@neverquest/data/location";
 import { generateArtifact } from "@neverquest/LOCRAN/generate/generateArtifact";
 import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
 import type { AffixTag, ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";

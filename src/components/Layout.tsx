@@ -16,10 +16,11 @@ import { Masteries } from "@neverquest/components/Masteries";
 import { Statistics } from "@neverquest/components/Statistics";
 import { Status } from "@neverquest/components/Status";
 import { WildernessStatus } from "@neverquest/components/Wilderness/WildernessStatus";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
+import { ReactComponent as IconWarning } from "@neverquest/icons/warning.svg";
 import { isGameOver } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
 import { useRestart } from "@neverquest/state/seed";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 
 export function Layout() {
   const isGameOverValue = useRecoilValue(isGameOver);
@@ -77,7 +78,8 @@ export function Layout() {
 
       <ConfirmationDialog
         confirmationLabel="Restart"
-        message="Start a new quest?"
+        contents="Start a new quest?"
+        Icon={IconWarning}
         onConfirm={restart}
         setHidden={() => setIsShowingGameOver(false)}
         show={isGameOverValue && isShowingGameOver}

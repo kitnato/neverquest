@@ -3,13 +3,13 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { TAILORING_EXPANSION, TAILORING_PRICES_MAXIMUM } from "@neverquest/data/caravan";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/data/general";
 import { ENCUMBRANCE } from "@neverquest/data/inventory";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { ReactComponent as IconTailoring } from "@neverquest/icons/tailoring.svg";
 import { encumbranceMaximum, hasKnapsack } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 

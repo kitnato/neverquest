@@ -3,17 +3,17 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MEDIC_PRICE_SURGERY, MEDIC_PRICE_SURGERY_CRITICAL } from "@neverquest/data/caravan";
+import {
+  CLASS_FULL_WIDTH_JUSTIFIED,
+  LABEL_FULL_HEALTH,
+  LABEL_NO_ESSENCE,
+} from "@neverquest/data/general";
 import { useHeal } from "@neverquest/hooks/actions/useHeal";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { ReactComponent as IconSurgery } from "@neverquest/icons/surgery.svg";
 import { isHealthAtMaximum, isHealthLow } from "@neverquest/state/reserves";
 import { essence } from "@neverquest/state/resources";
-import {
-  CLASS_FULL_WIDTH_JUSTIFIED,
-  LABEL_FULL_HEALTH,
-  LABEL_NO_ESSENCE,
-} from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function ReceiveHealing() {

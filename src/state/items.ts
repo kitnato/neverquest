@@ -1,5 +1,6 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
+import { INFUSION_DELTA, INFUSION_DURATION } from "@neverquest/data/general";
 import {
   ARMOR_NONE,
   GEMS_MAXIMUM,
@@ -21,7 +22,6 @@ import {
   isWeapon,
 } from "@neverquest/types/type-guards";
 import type { Consumable, Gear, Infusable, Trinket } from "@neverquest/types/unions";
-import { INFUSION_DELTA, INFUSION_DURATION } from "@neverquest/utilities/constants";
 import { getGrowthTriangular } from "@neverquest/utilities/getters";
 
 // SELECTORS

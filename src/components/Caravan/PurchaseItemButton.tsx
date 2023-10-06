@@ -1,10 +1,10 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { LABEL_NO_ESSENCE, LABEL_OVER_ENCUMBERED } from "@neverquest/data/general";
 import { canFit } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
 import type { InventoryItem } from "@neverquest/types";
-import { LABEL_NO_ESSENCE, LABEL_OVER_ENCUMBERED } from "@neverquest/utilities/constants";
 
 export function PurchaseItemButton({
   handlePurchase,

@@ -2,11 +2,11 @@ import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
+import { LABEL_OVER_ENCUMBERED } from "@neverquest/data/general";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { canFit } from "@neverquest/state/inventory";
 import type { GearItem } from "@neverquest/types";
-import { LABEL_OVER_ENCUMBERED } from "@neverquest/utilities/constants";
 
 export function CraftedGear({
   gearItem,

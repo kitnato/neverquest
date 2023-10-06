@@ -3,10 +3,10 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { GearComparison } from "@neverquest/components/Items/GearComparison";
+import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
 import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { showGearLevel } from "@neverquest/state/settings";
 import type { ComparisonProps } from "@neverquest/types/props";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function GearLevelDetail({

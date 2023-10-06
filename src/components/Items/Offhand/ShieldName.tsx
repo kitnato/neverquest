@@ -9,6 +9,7 @@ import { GearComparison } from "@neverquest/components/Items/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Items/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Items/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
 import { ReactComponent as IconNone } from "@neverquest/icons/none.svg";
@@ -17,7 +18,6 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { shield as shieldEquipped } from "@neverquest/state/items";
 import { skills } from "@neverquest/state/skills";
 import type { Shield } from "@neverquest/types";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 
 export function ShieldName({

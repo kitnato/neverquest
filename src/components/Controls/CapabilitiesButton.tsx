@@ -14,7 +14,7 @@ import { ReactComponent as IconSkills } from "@neverquest/icons/skills.svg";
 import { ReactComponent as IconUpgrade } from "@neverquest/icons/upgrade.svg";
 import { areAttributesAffordable } from "@neverquest/state/attributes";
 import { isAttacking, isGameOver } from "@neverquest/state/character";
-import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
+import { isStageStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -22,7 +22,6 @@ export function CapabilitiesButton() {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesAffordable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isGameOverValue = useRecoilValue(isGameOver);
-  const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isStageStartedValue = useRecoilValue(isStageStarted);
   const isShowingCapabilities = useRecoilValue(isShowing("capabilities"));
   const isShowingSkills = useRecoilValue(isShowing("skills"));
@@ -41,7 +40,7 @@ export function CapabilitiesButton() {
         <span className={getAnimationClass({ name: "bounceIn" })}>
           <Button
             className={`position-relative${
-              areAttributesIncreasableValue && (isStageCompletedValue || !isStageStartedValue)
+              areAttributesIncreasableValue && !isStageStartedValue
                 ? ` ${getAnimationClass({
                     isInfinite: true,
                     name: "pulse",

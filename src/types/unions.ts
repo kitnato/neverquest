@@ -316,6 +316,7 @@ export type StateKey =
   | "powerBonusBoost"
   | "progress"
   | "progressMaximum"
+  | "progressReduction"
   | "protection"
   | "range"
   | "recoveryDuration"

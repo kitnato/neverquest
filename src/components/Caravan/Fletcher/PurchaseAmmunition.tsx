@@ -4,6 +4,11 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { AmmunitionPouchCapacity } from "@neverquest/components/Items/Usable/AmmunitionPouch/AmmunitionPouchCapacity";
 import { AMMUNITION_PRICE } from "@neverquest/data/caravan";
+import {
+  CLASS_FULL_WIDTH_JUSTIFIED,
+  LABEL_MAXIMUM,
+  LABEL_NO_ESSENCE,
+} from "@neverquest/data/general";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { ReactComponent as IconAmmunition } from "@neverquest/icons/ammunition.svg";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
@@ -11,11 +16,6 @@ import { inventory } from "@neverquest/state/inventory";
 import { ownedItem } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import type { AmmunitionPouchItem } from "@neverquest/types";
-import {
-  CLASS_FULL_WIDTH_JUSTIFIED,
-  LABEL_MAXIMUM,
-  LABEL_NO_ESSENCE,
-} from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function PurchaseAmmunition() {

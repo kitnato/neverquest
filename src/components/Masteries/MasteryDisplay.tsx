@@ -5,11 +5,11 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MasteryProgress } from "@neverquest/components/Masteries/MasteryProgress";
 import { MasteryRank } from "@neverquest/components/Masteries/MasteryRank";
+import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { isMasteryUnlocked } from "@neverquest/state/masteries";
 import type { Mastery } from "@neverquest/types/unions";
-import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 

@@ -6,6 +6,7 @@ import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { AttackMeter } from "@neverquest/components/Status/AttackMeter";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { WEAPON_NONE } from "@neverquest/data/inventory";
 import { useAttack } from "@neverquest/hooks/actions/useAttack";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
@@ -27,7 +28,6 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { weapon } from "@neverquest/state/items";
 import { isMonsterDead } from "@neverquest/state/monster";
 import { attackRateTotal, attributePowerBonus } from "@neverquest/state/statistics";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Attack() {

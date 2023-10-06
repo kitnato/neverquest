@@ -2,10 +2,10 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
+import { LABEL_EMPTY } from "@neverquest/data/general";
 import { AILMENT_DESCRIPTION } from "@neverquest/data/monster";
 import { isMonsterAiling, monsterAilmentDuration } from "@neverquest/state/monster";
 import type { MonsterAilment, NumberFormat } from "@neverquest/types/unions";
-import { LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function MonsterAilmentMeter({

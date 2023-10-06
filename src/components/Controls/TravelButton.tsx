@@ -2,12 +2,12 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
+import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { ReactComponent as IconTravel } from "@neverquest/icons/travel.svg";
 import { isGameOver } from "@neverquest/state/character";
 import { isStageCompleted, isWilderness, stageMaximum } from "@neverquest/state/encounter";
 import { hasLooted } from "@neverquest/state/resources";
-import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function TravelButton() {

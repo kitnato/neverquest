@@ -1,10 +1,10 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
+import { LABEL_FULL_HEALTH } from "@neverquest/data/general";
 import { useHeal } from "@neverquest/hooks/actions/useHeal";
 import { inventory } from "@neverquest/state/inventory";
 import { isHealthAtMaximum } from "@neverquest/state/reserves";
-import { LABEL_FULL_HEALTH } from "@neverquest/utilities/constants";
 
 export function Bandages({ id }: { id: string }) {
   const isHealthAtMaximumValue = useRecoilValue(isHealthAtMaximum);

@@ -1,10 +1,10 @@
 import { atom, selector } from "recoil";
 
-import { PROGRESS } from "@neverquest/data/location";
+import { PROGRESS } from "@neverquest/data/encounter";
+import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { Location } from "@neverquest/types/unions";
-import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { getFromRange, getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 // SELECTORS
@@ -58,7 +58,10 @@ export const progressMaximum = withStateKey("progressMaximum", (key) =>
 
       return get(isBoss)
         ? 1
-        : getFromRange({ factor: getGrowthSigmoid(get(stage)), maximum, minimum });
+        : Math.round(
+            getFromRange({ factor: getGrowthSigmoid(get(stage)), maximum, minimum }) *
+              (1 - get(progressReduction)),
+          );
     },
     key,
   }),
@@ -90,6 +93,14 @@ export const location = withStateKey("location", (key) =>
 );
 
 export const progress = withStateKey("progress", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
+export const progressReduction = withStateKey("progressReduction", (key) =>
   atom({
     default: 0,
     effects: [handleLocalStorage({ key })],

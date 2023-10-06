@@ -4,10 +4,10 @@ import { PurchaseItem } from "@neverquest/components/Caravan/Merchant/PurchaseIt
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
 import { Usable } from "@neverquest/components/Items/Usable";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import type { InventoryItem } from "@neverquest/types";
 import { isGear, isUsable } from "@neverquest/types/type-guards";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 

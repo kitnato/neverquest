@@ -2,11 +2,11 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { ELEMENTALS, GEM_ELEMENTALS } from "@neverquest/data/inventory";
 import { armor, weapon } from "@neverquest/state/items";
 import { totalElementalEffects } from "@neverquest/state/statistics";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 

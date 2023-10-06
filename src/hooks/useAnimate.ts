@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { type SetterOrUpdater, useRecoilValue } from "recoil";
 import { clearInterval, setInterval } from "worker-timers";
 
+import { FRAMERATE } from "@neverquest/data/general";
 import { isGameOver } from "@neverquest/state/character";
-import { FRAMERATE } from "@neverquest/utilities/constants";
 
 export function useAnimate({
   delta,

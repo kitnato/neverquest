@@ -6,6 +6,7 @@ import { AttributeRank } from "@neverquest/components/Attributes/AttributeRank";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { useIncreaseAttribute } from "@neverquest/hooks/actions/useIncreaseAttribute";
 import { ReactComponent as IconWait } from "@neverquest/icons/hourglass.svg";
 import { ReactComponent as IconIncrease } from "@neverquest/icons/increase.svg";
@@ -17,11 +18,6 @@ import {
 } from "@neverquest/state/attributes";
 import { isStageCompleted, isStageStarted, isWilderness } from "@neverquest/state/encounter";
 import type { Attribute } from "@neverquest/types/unions";
-import {
-  CLASS_FULL_WIDTH_JUSTIFIED,
-  LABEL_MAXIMUM,
-  LABEL_UNKNOWN,
-} from "@neverquest/utilities/constants";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function AttributeDisplay({ attribute }: { attribute: Attribute }) {

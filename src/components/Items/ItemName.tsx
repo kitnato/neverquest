@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover } from "react-bootstrap";
+import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import type { Placement } from "react-bootstrap/esm/types";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -28,11 +28,13 @@ export function ItemName({
           <Popover.Header className="text-center">{displayName}</Popover.Header>
 
           <Popover.Body className="text-center">
-            <div style={{ maxWidth: 350 }}>{description}</div>
+            <Stack gap={2} style={{ maxWidth: 350 }}>
+              {description}
 
-            <DetailsTable>
-              <WeightDetail stack={stack} weight={weight} />
-            </DetailsTable>
+              <DetailsTable>
+                <WeightDetail stack={stack} weight={weight} />
+              </DetailsTable>
+            </Stack>
           </Popover.Body>
         </Popover>
       }

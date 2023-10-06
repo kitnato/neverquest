@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
+import { DEFAULT_DELTA_DISPLAY } from "@neverquest/data/general";
 import { deltas, floatingTextQueues } from "@neverquest/state/deltas";
 import type { Delta } from "@neverquest/types/unions";
-import { DEFAULT_DELTA_DISPLAY } from "@neverquest/utilities/constants";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 const ANIMATION_FLOATING_TEXT = getAnimationClass({

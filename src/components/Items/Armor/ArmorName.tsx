@@ -9,6 +9,7 @@ import { DodgePenaltyContents } from "@neverquest/components/Items/Armor/DodgePe
 import { GearComparison } from "@neverquest/components/Items/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Items/GearLevelDetail";
 import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
 import { ReactComponent as IconNone } from "@neverquest/icons/none.svg";
@@ -17,7 +18,6 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { armor as armorEquipped } from "@neverquest/state/items";
 import { skills } from "@neverquest/state/skills";
 import type { Armor } from "@neverquest/types";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 
 export function ArmorName({

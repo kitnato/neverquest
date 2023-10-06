@@ -3,13 +3,13 @@ import { useRecoilCallback } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { CREW } from "@neverquest/data/caravan";
+import { KEY_SESSION } from "@neverquest/data/general";
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
 import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import { hireStatus } from "@neverquest/state/caravan";
 import { stage, wildernesses } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
 import { ATTRIBUTE_TYPES, CREW_TYPES } from "@neverquest/types/unions";
-import { KEY_SESSION } from "@neverquest/utilities/constants";
 import { generateWilderness } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 

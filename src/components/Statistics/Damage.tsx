@@ -7,6 +7,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSecond";
 import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDetails";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
 import { ReactComponent as IconStrength } from "@neverquest/icons/strength.svg";
@@ -17,7 +18,6 @@ import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { weapon } from "@neverquest/state/items";
 import { attributePowerBonus, damageTotal } from "@neverquest/state/statistics";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Damage() {

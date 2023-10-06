@@ -7,6 +7,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
 import { ReserveMeter } from "@neverquest/components/Reserves/ReserveMeter";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
 import { ReactComponent as IconEndurance } from "@neverquest/icons/endurance.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
@@ -14,7 +15,6 @@ import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-pow
 import { attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
 import { attributePowerBonus } from "@neverquest/state/statistics";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Stamina() {

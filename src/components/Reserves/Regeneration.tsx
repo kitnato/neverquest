@@ -6,6 +6,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconImage } from "@neverquest/components/IconImage";
 import { RegenerationMeter } from "@neverquest/components/Reserves/RegenerationMeter";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
@@ -29,7 +30,6 @@ import {
 import { skills } from "@neverquest/state/skills";
 import { attributePowerBonus } from "@neverquest/state/statistics";
 import type { Reserve } from "@neverquest/types/unions";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 const RESERVE_CHANGE = {

@@ -1,8 +1,8 @@
 import ls from "localstorage-slim";
 import type { AtomEffect } from "recoil";
 
+import { KEY_SESSION, KEY_SETTINGS } from "@neverquest/data/general";
 import type { StateKey } from "@neverquest/types/unions";
-import { KEY_SESSION, KEY_SETTINGS } from "@neverquest/utilities/constants";
 
 export function handleLocalStorage<ValueType>({
   isSetting,

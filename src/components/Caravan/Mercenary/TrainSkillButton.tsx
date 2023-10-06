@@ -1,12 +1,12 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { LABEL_NO_ESSENCE } from "@neverquest/data/general";
 import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { essence } from "@neverquest/state/resources";
 import { skillPrice } from "@neverquest/state/skills";
 import type { Skill } from "@neverquest/types/unions";
-import { LABEL_NO_ESSENCE } from "@neverquest/utilities/constants";
 
 export function TrainSkillButton({ skill }: { skill: Skill }) {
   const essenceValue = useRecoilValue(essence);

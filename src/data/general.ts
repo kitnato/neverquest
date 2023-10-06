@@ -12,6 +12,8 @@ export const DEFAULT_DELTA_DISPLAY: DeltaDisplay = {
 
 export const FRAMERATE = 1000 / 60;
 
+export const GROWTH_MAXIMUM = 100;
+
 const KEY_STORAGE_PREFIX = "neverquest";
 export const KEY_SESSION = `${KEY_STORAGE_PREFIX}-session`;
 export const KEY_SETTINGS = `${KEY_STORAGE_PREFIX}-settings`;
@@ -27,11 +29,8 @@ export const LABEL_OVER_ENCUMBERED = "Too heavy.";
 export const LABEL_SEPARATOR = "·";
 export const LABEL_UNKNOWN = "???";
 
-// Growth factor for ranges that scale evenly from level 1 to 100.
-export const LINEAR_LEVEL_FACTOR = 100;
-
 export const MILLISECONDS_IN_HOUR = 3600000;
 export const MILLISECONDS_IN_MINUTE = 60000;
 export const MILLISECONDS_IN_SECOND = 1000;
 
-export const SIGMOID_X_FINAL = 100;
+export const RETIREMENT_MINIMUM = 50;

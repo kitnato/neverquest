@@ -1,5 +1,6 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
+import { GROWTH_MAXIMUM } from "@neverquest/data/general";
 import { ELEMENTALS } from "@neverquest/data/inventory";
 import {
   BLIGHT,
@@ -27,7 +28,6 @@ import {
   MONSTER_AILMENT_TYPES,
   type MonsterAilment,
 } from "@neverquest/types/unions";
-import { SIGMOID_X_FINAL } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 import {
   getDamagePerRate,
@@ -284,7 +284,7 @@ export const monsterPoisonLength = withStateKey("monsterPoisonLength", (key) =>
 
       return getFromRange({
         factor: getGrowthSigmoid(
-          (SIGMOID_X_FINAL / stageRequired) * (get(stage) + 1 - stageRequired),
+          (GROWTH_MAXIMUM / stageRequired) * (get(stage) + 1 - stageRequired),
         ),
         maximum,
         minimum,
@@ -304,7 +304,7 @@ export const monsterPoisonMagnitude = withStateKey("monsterPoisonMagnitude", (ke
 
       return getFromRange({
         factor: getGrowthSigmoid(
-          (SIGMOID_X_FINAL / stageRequired) * (get(stage) + 1 - stageRequired),
+          (GROWTH_MAXIMUM / stageRequired) * (get(stage) + 1 - stageRequired),
         ),
         maximum,
         minimum,

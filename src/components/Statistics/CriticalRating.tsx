@@ -5,6 +5,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconCriticalChance } from "@neverquest/icons/critical-chance.svg";
 import { ReactComponent as IconCriticalDamage } from "@neverquest/icons/critical-damage.svg";
@@ -18,11 +19,6 @@ import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { skills } from "@neverquest/state/skills";
 import { attributePowerBonus, criticalRating, criticalStrike } from "@neverquest/state/statistics";
-import {
-  CLASS_TABLE_CELL_ITALIC,
-  LABEL_EMPTY,
-  LABEL_SEPARATOR,
-} from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function CriticalRating() {

@@ -4,6 +4,11 @@ export const LOCATION_NAME = {
 };
 
 export const PROGRESS = {
-  maximum: 12,
+  maximum: 30,
   minimum: 3,
+};
+
+export const PROGRESS_REDUCTION = {
+  maximum: 0.75,
+  minimum: 0.25,
 };

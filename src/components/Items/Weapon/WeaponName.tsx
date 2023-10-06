@@ -9,6 +9,7 @@ import { GearComparison } from "@neverquest/components/Items/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Items/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Items/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import { ReactComponent as IconAmmunition } from "@neverquest/icons/ammunition.svg";
@@ -22,7 +23,6 @@ import { showDamagePerSecond } from "@neverquest/state/settings";
 import { skills } from "@neverquest/state/skills";
 import type { Weapon } from "@neverquest/types";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { getDamagePerRate } from "@neverquest/utilities/getters";
 

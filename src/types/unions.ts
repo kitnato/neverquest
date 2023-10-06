@@ -255,6 +255,7 @@ export type StateKey =
   | "isHealthAtMaximum"
   | "isHealthLow"
   | "isImmortal"
+  | "isInfusionAtMaximum"
   | "isInventoryFull"
   | "isInventoryOpen"
   | "isLooting"

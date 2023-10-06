@@ -52,7 +52,7 @@ export const CREW: Record<
     requiredStage: 10,
   },
   fletcher: {
-    description: "Crafts ranges weapons and provides ammunition.",
+    description: "Crafts ranged weapons and provides ammunition.",
     Icon: IconFletcher,
     interaction: "Craft",
     monologues: { 1: "Tired of monster breath?" },

@@ -12,6 +12,10 @@
   box-shadow: none !important;
 }
 
+.hstack.gap-1 {
+  gap: 0.4rem !important;
+}
+
 .no-transitions .progress-bar {
   transition: none;
 }
@@ -38,6 +42,12 @@
 
 .stencilled {
   filter: drop-shadow(0 0 2px rgb(0 0 0));
+}
+
+.table-details {
+  tr > td:nth-child(2) {
+    vertical-align: bottom;
+  }
 }
 
 .text-blue {
@@ -79,6 +89,10 @@ input {
 
 select {
   cursor: pointer;
+}
+
+small:empty {
+  display: contents;
 }
 
 svg.icon-image {

@@ -2,7 +2,7 @@ import { Button, ButtonGroup, OverlayTrigger, Stack, Tooltip } from "react-boots
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { AmmunitionPouchCapacity } from "@neverquest/components/Items/Usable/AmmunitionPouchCapacity";
+import { AmmunitionPouchCapacity } from "@neverquest/components/Items/Usable/AmmunitionPouch/AmmunitionPouchCapacity";
 import { AMMUNITION_PRICE } from "@neverquest/data/caravan";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { ReactComponent as IconAmmunition } from "@neverquest/icons/ammunition.svg";

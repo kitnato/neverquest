@@ -7,6 +7,7 @@ import {
   GEM_ELEMENTALS,
   GEM_ENHANCEMENT,
   INFUSABLES,
+  INFUSABLE_LEVEL_MAXIMUM,
 } from "@neverquest/data/inventory";
 import { BLEED, PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/statistics";
 import { withStateKey } from "@neverquest/state";
@@ -15,7 +16,6 @@ import { armor, ownedItem, shield, weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isInfusable, isMelee, isRanged } from "@neverquest/types/type-guards";
 import type { Attribute } from "@neverquest/types/unions";
-import { LINEAR_LEVEL_FACTOR } from "@neverquest/utilities/constants";
 import {
   getDamagePerRate,
   getDamagePerTick,
@@ -192,7 +192,7 @@ export const essenceBonus = withStateKey("essenceBonus", (key) =>
       const { maximum, minimum } = INFUSABLES["monkey paw"].item;
 
       return getFromRange({
-        factor: ownedMonkeyPaw.level / LINEAR_LEVEL_FACTOR,
+        factor: ownedMonkeyPaw.level / INFUSABLE_LEVEL_MAXIMUM,
         maximum,
         minimum,
       });
@@ -310,7 +310,7 @@ export const powerBonusBoost = withStateKey("powerBonusBoost", (key) =>
       const { maximum, minimum } = INFUSABLES["tome of power"].item;
 
       return getFromRange({
-        factor: ownedTomeOfPower.level / LINEAR_LEVEL_FACTOR,
+        factor: ownedTomeOfPower.level / INFUSABLE_LEVEL_MAXIMUM,
         maximum,
         minimum,
       });

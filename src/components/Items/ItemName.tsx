@@ -28,7 +28,7 @@ export function ItemName({
           <Popover.Header className="text-center">{displayName}</Popover.Header>
 
           <Popover.Body className="text-center">
-            <span>{description}</span>
+            <div style={{ maxWidth: 350 }}>{description}</div>
 
             <DetailsTable>
               <WeightDetail stack={stack} weight={weight} />

@@ -3,14 +3,21 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
+import { INFUSABLE_LEVEL_MAXIMUM } from "@neverquest/data/inventory";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
-import { infusionCurrent, infusionMaximum } from "@neverquest/state/items";
+import { infusionCurrent, infusionLevel, infusionMaximum } from "@neverquest/state/items";
 import type { Infusable } from "@neverquest/types/unions";
+import { LABEL_MAXIMUM } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function InfusionProgress({ infusable }: { infusable: Infusable }) {
   const infusionCurrentValue = useRecoilValue(infusionCurrent(infusable));
   const infusionMaximumValue = useRecoilValue(infusionMaximum(infusable));
+  const infusionLevelValue = useRecoilValue(infusionLevel(infusable));
+
+  if (infusionLevelValue >= INFUSABLE_LEVEL_MAXIMUM) {
+    return <span className="text-center w-100">{LABEL_MAXIMUM}</span>;
+  }
 
   return (
     <LabelledProgressBar

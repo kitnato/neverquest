@@ -214,6 +214,7 @@ export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
 export const GEM_FITTING_COST = [20, 40, 70, 120, 200];
 export const GEMS_MAXIMUM = 5;
 
+export const INFUSABLE_LEVEL_MAXIMUM = 22;
 export const INFUSABLES: Record<
   Infusable,
   {
@@ -228,7 +229,7 @@ export const INFUSABLES: Record<
   "monkey paw": {
     Icon: IconMonkeyPaw,
     item: {
-      description: "Boosts amount of essence looted. Can be infused to increase its potency.",
+      description: "Boosts amount of essence looted.",
       growth: 12,
       id: nanoid(),
       level: 1,
@@ -242,8 +243,7 @@ export const INFUSABLES: Record<
   "tome of power": {
     Icon: IconTomeOfPower,
     item: {
-      description:
-        "Boosts all attribute effects based on power level. Can be infused to increase its potency.",
+      description: "Boosts all attribute effects based on power level.",
       growth: 14,
       id: nanoid(),
       level: 1,

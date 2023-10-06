@@ -92,11 +92,12 @@ select {
 }
 
 small:empty {
-  display: contents;
+  display: none;
 }
 
 svg.icon-image {
   display: block;
+  fill: currentcolor;
   width: 40px;
 
   &.small {

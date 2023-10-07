@@ -7,21 +7,7 @@ import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities
 
 // SELECTORS
 
-export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
-  selectorFamily<boolean, Mastery>({
-    get:
-      (parameter) =>
-      ({ get }) => {
-        const { base, increment, maximum } = MASTERIES[parameter];
-        const masteryRankValue = get(masteryRank(parameter));
-
-        return maximum === getComputedStatistic({ amount: masteryRankValue, base, increment });
-      },
-    key,
-  }),
-);
-
-export const masteriesAcquired = withStateKey("masteriesAcquired", (key) =>
+export const acquiredMasteries = withStateKey("acquiredMasteries", (key) =>
   selector<Record<Mastery, boolean>>({
     get: ({ get }) => ({
       butchery: get(isMasteryUnlocked("butchery")),
@@ -32,6 +18,20 @@ export const masteriesAcquired = withStateKey("masteriesAcquired", (key) =>
       resilience: get(isMasteryUnlocked("resilience")),
       stability: get(isMasteryUnlocked("stability")),
     }),
+    key,
+  }),
+);
+
+export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
+  selectorFamily<boolean, Mastery>({
+    get:
+      (parameter) =>
+      ({ get }) => {
+        const { base, increment, maximum } = MASTERIES[parameter];
+        const masteryRankValue = get(masteryRank(parameter));
+
+        return maximum === getComputedStatistic({ amount: masteryRankValue, base, increment });
+      },
     key,
   }),
 );

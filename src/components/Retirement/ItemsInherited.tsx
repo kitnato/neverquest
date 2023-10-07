@@ -6,13 +6,13 @@ import { TRINKETS } from "@neverquest/data/inventory";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { ownedItem } from "@neverquest/state/items";
 
-export function ItemsKept() {
+export function ItemsInherited() {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const ownedAntiqueCoin = useRecoilValue(ownedItem("antique coin"));
 
   return (
     <Stack gap={3}>
-      <h6>Items kept</h6>
+      <h6>Items inherited</h6>
 
       {hasKnapsackValue && <ItemDisplay item={TRINKETS.knapsack.item} />}
 

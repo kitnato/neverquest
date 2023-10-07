@@ -1,7 +1,7 @@
 import type { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Gem, Grip, Showing, Trinket } from "@neverquest/types/unions";
+import type { Consumable, Gem, Grip, Trinket } from "@neverquest/types/unions";
 
 export type AmmunitionPouchItem = TrinketItem & {
   current: number;
@@ -18,18 +18,12 @@ export type Armor = GearItemBase & {
   staminaCost: number;
 };
 
-export type AttributeData = AttributeOrMasteryBaseData & {
-  isUnlocked: boolean;
-  maximum?: number;
-  powerBonus: number;
-  shows?: Showing;
-};
-
 export type AttributeOrMasteryBaseData = {
   base: number;
   description: string;
   Icon: SVGIcon;
   increment: number;
+  maximum?: number;
 };
 
 export type BlacksmithInventory = {

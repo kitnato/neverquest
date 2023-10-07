@@ -1,11 +1,27 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useRecoilCallback } from "recoil";
+
+import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 // TODO
 export function useRetire() {
   return useRecoilCallback(
-    () => () => {
-      return null;
-    },
+    ({ set, snapshot }) =>
+      () => {
+        const get = getSnapshotGetter(snapshot);
+
+        // Reset essence
+        // Reset stage & progress
+        // Reset name
+        // Reset masteries
+        // Reset attributes
+        // Reset skills
+        // Reset crew
+        // Reset merchant inventory
+        // Empty inventory (except knapsack, antique coin, egg)
+
+        return null;
+      },
     [],
   );
 }

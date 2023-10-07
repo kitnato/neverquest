@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
 
-import { SkillDisplay } from "@neverquest/components/Caravan/Mercenary/SkillDisplay";
+import { SkillDisplay } from "@neverquest/components/Skills/SkillDisplay";
 import { skills } from "@neverquest/state/skills";
 import type { Skill } from "@neverquest/types/unions";
 

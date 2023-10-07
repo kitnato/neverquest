@@ -32,7 +32,7 @@ export function IconDisplay({
       <IconImage Icon={Icon} tooltip={tooltip} {...iconProps} />
 
       <Stack gap={1}>
-        <div>{contents}</div>
+        {contents}
 
         <small className="text-muted">{description}</small>
       </Stack>

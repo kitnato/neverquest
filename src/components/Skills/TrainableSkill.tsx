@@ -1,9 +1,9 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { SkillDisplay } from "@neverquest/components/Caravan/Mercenary/SkillDisplay";
-import { TrainSkillButton } from "@neverquest/components/Caravan/Mercenary/TrainSkillButton";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { SkillDisplay } from "@neverquest/components/Skills/SkillDisplay";
+import { TrainSkillButton } from "@neverquest/components/Skills/TrainSkillButton";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { SKILLS } from "@neverquest/data/skills";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";

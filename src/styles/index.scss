@@ -87,6 +87,21 @@ input {
   }
 }
 
+.form-check {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+
+  .form-check-input,
+  .form-check-label {
+    cursor: pointer;
+  }
+
+  .form-check-input {
+    margin-top: initial;
+  }
+}
+
 select {
   cursor: pointer;
 }

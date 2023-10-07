@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Button, Modal, Stack } from "react-bootstrap";
+import { Button, Modal, type ModalProps, Stack } from "react-bootstrap";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import type { SVGIcon } from "@neverquest/types/props";
@@ -11,6 +11,7 @@ export function ConfirmationDialog({
   onConfirm,
   setHidden,
   show,
+  size,
   title,
 }: {
   confirmationLabel: string;
@@ -19,6 +20,7 @@ export function ConfirmationDialog({
   onConfirm: () => void;
   setHidden: () => void;
   show: boolean;
+  size?: ModalProps["size"];
   title: string;
 }) {
   const handleConfirmation = () => {
@@ -27,7 +29,7 @@ export function ConfirmationDialog({
   };
 
   return (
-    <Modal backdrop="static" onHide={setHidden} show={show}>
+    <Modal backdrop="static" onHide={setHidden} show={show} size={size}>
       <Modal.Header closeButton>
         <Modal.Title>
           <Stack direction="horizontal" gap={3}>

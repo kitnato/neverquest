@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ItemsKept } from "@neverquest/components/Retirement/ItemsKept";
+import { ItemsInherited } from "@neverquest/components/Retirement/ItemsInherited";
 import { TraitSelection } from "@neverquest/components/Retirement/TraitSelection";
 import { useRetire } from "@neverquest/hooks/actions/useRetire";
 import { ReactComponent as IconProgress } from "@neverquest/icons/progress.svg";
@@ -44,7 +44,7 @@ export function Retirement({
             />
           </Stack>
 
-          <ItemsKept />
+          <ItemsInherited />
 
           <TraitSelection />
         </Stack>
@@ -53,6 +53,7 @@ export function Retirement({
       onConfirm={handleRetirement}
       setHidden={() => setIsShowing(false)}
       show={isShowing}
+      size="lg"
       title="Retirement"
     />
   );

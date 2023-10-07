@@ -176,6 +176,8 @@ export type Skill = (typeof SKILL_TYPES)[number];
 
 export type StateKey =
   | "absorbedEssence"
+  | "acquiredMasteries"
+  | "acquiredTraits"
   | "allowNSFW"
   | "ammunition"
   | "ammunitionMaximum"
@@ -272,6 +274,7 @@ export type StateKey =
   | "isStageCompleted"
   | "isStageStarted"
   | "isStaminaAtMaximum"
+  | "isTraitAcquired"
   | "isWilderness"
   | "itemsAcquired"
   | "itemsLoot"
@@ -280,7 +283,6 @@ export type StateKey =
   | "locationName"
   | "lootingDuration"
   | "lowHealthWarning"
-  | "masteriesAcquired"
   | "masteryCost"
   | "masteryProgress"
   | "masteryRank"
@@ -348,6 +350,22 @@ export type StateKey =
   | "trinketProperties"
   | "weapon"
   | "wildernesses";
+
+export const TRAIT_TYPES = [
+  "brawler",
+  "bruiser",
+  "colossus",
+  "executioner",
+  "field surgeon",
+  "inoculated",
+  "nudist",
+  "sharpshooter",
+  "shredder",
+  "stalwart",
+  "tank",
+  "tormentor",
+] as const;
+export type Trait = (typeof TRAIT_TYPES)[number];
 
 export const TRINKET_TYPES = [
   "ammunition pouch",

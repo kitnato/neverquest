@@ -5,12 +5,12 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MasteryDisplay } from "@neverquest/components/Masteries/MasteryDisplay";
 import { ReactComponent as IconMasteries } from "@neverquest/icons/masteries.svg";
 import { isShowing } from "@neverquest/state/isShowing";
-import { masteriesAcquired } from "@neverquest/state/masteries";
+import { acquiredMasteries } from "@neverquest/state/masteries";
 import type { Mastery } from "@neverquest/types/unions";
 
 export function Masteries() {
   const isShowingMasteries = useRecoilValue(isShowing("masteries"));
-  const masteriesAcquiredValue = useRecoilValue(masteriesAcquired);
+  const acquiredMasteriesValue = useRecoilValue(acquiredMasteries);
 
   if (!isShowingMasteries) {
     return null;
@@ -25,7 +25,7 @@ export function Masteries() {
 
         <Accordion.Body>
           <Stack gap={3}>
-            {Object.entries(masteriesAcquiredValue)
+            {Object.entries(acquiredMasteriesValue)
               .sort(([a], [b]) => a.localeCompare(b))
               .sort(([, a], [, b]) => Number(b) - Number(a))
               .map(([current]) => (

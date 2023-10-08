@@ -1,9 +1,10 @@
+import { title } from "process";
 import type { Dispatch, SetStateAction } from "react";
-import { Stack } from "react-bootstrap";
+import { Button, Modal, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { IconImage } from "@neverquest/components/IconImage";
 import { ItemsInherited } from "@neverquest/components/Retirement/ItemsInherited";
 import { TraitSelection } from "@neverquest/components/Retirement/TraitSelection";
 import { useRetire } from "@neverquest/hooks/actions/useRetire";
@@ -22,18 +23,25 @@ export function Retirement({
 
   const retire = useRetire();
 
-  const handleRetirement = () => {
-    retire();
-  };
+  const handleHide = () => setIsShowing(false);
 
   return (
-    <ConfirmationDialog
-      confirmationLabel="Retire"
-      contents={
+    <Modal onHide={handleHide} show={isShowing} size="lg">
+      <Modal.Header closeButton>
+        <Modal.Title>
+          <Stack direction="horizontal" gap={3}>
+            <IconImage Icon={IconRetire} />
+
+            {title}
+          </Stack>
+        </Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body>
         <Stack gap={5}>
           <Stack gap={3}>
-            Retiring gives up on all essence and gear and starts a new quest with quicker progress
-            alongside a powerful trait.
+            Retiring resets all accumulated progress, essence, attributes, skills, masteries and
+            gear, starting a new quest with quicker progress alongside a powerful trait.
             <IconDisplay
               contents={`-${formatValue({
                 format: "percentage",
@@ -48,13 +56,19 @@ export function Retirement({
 
           <TraitSelection />
         </Stack>
-      }
-      Icon={IconRetire}
-      onConfirm={handleRetirement}
-      setHidden={() => setIsShowing(false)}
-      show={isShowing}
-      size="lg"
-      title="Retirement"
-    />
+      </Modal.Body>
+
+      <Modal.Footer>
+        <Button
+          onClick={() => {
+            handleHide();
+            retire();
+          }}
+          variant="outline-dark"
+        >
+          Retire
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 }

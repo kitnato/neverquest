@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Button, Modal, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { ConfirmationDialog } from "@neverquest/components/ConfirmationDialog";
 import { IconImage } from "@neverquest/components/IconImage";
 import { ReactComponent as IconRestart } from "@neverquest/icons/restart.svg";
+import { ReactComponent as IconWarning } from "@neverquest/icons/warning.svg";
 import { isGameOver } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
 import { useRestart } from "@neverquest/state/seed";
@@ -17,6 +17,8 @@ export function Restart() {
   const [isShowingRestart, setIsShowingRestart] = useState(false);
 
   const restart = useRestart();
+
+  const handleHide = () => setIsShowingRestart(false);
 
   return (
     <>
@@ -34,15 +36,30 @@ export function Restart() {
         </Button>
       </OverlayTrigger>
 
-      <ConfirmationDialog
-        confirmationLabel="Restart"
-        contents="This will reset all progress and restart from the beginning."
-        Icon={IconRestart}
-        onConfirm={restart}
-        setHidden={() => setIsShowingRestart(false)}
-        show={isShowingRestart}
-        title="Start a new quest?"
-      />
+      <Modal onHide={handleHide} show={isShowingRestart}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <Stack direction="horizontal" gap={3}>
+              <IconImage Icon={IconWarning} />
+              Start a new quest?
+            </Stack>
+          </Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>This will reset everything and restart from the beginning.</Modal.Body>
+
+        <Modal.Footer>
+          <Button
+            onClick={() => {
+              handleHide();
+              restart();
+            }}
+            variant="outline-dark"
+          >
+            Restart
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

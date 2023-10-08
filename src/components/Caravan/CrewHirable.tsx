@@ -28,15 +28,6 @@ export function CrewHirable({ crew }: { crew: Crew }) {
   const isAffordable = price <= essenceValue;
   const name = capitalizeAll(crew);
 
-  const handleHire = () => {
-    setHireStatus({ status: "hired" });
-    transactEssence(-price);
-
-    if (crew === "blacksmith") {
-      setIsShowingGearClass(true);
-    }
-  };
-
   if (hireStatusValue === "hired") {
     return null;
   }
@@ -58,7 +49,18 @@ export function CrewHirable({ crew }: { crew: Crew }) {
             trigger={isAffordable ? [] : ["hover", "focus"]}
           >
             <span>
-              <Button disabled={!isAffordable} onClick={handleHire} variant="outline-dark">
+              <Button
+                disabled={!isAffordable}
+                onClick={() => {
+                  setHireStatus({ status: "hired" });
+                  transactEssence(-price);
+
+                  if (crew === "blacksmith") {
+                    setIsShowingGearClass(true);
+                  }
+                }}
+                variant="outline-dark"
+              >
                 Hire
               </Button>
             </span>

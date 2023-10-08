@@ -13,12 +13,6 @@ const HEADERS = ["h2", "h3", "h4", "h5", "h6"];
 export function About() {
   const [isShowing, setIsShowing] = useState(false);
 
-  const handleHide = () => {
-    setIsShowing(false);
-
-    window.history.replaceState(null, "", " ");
-  };
-
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>About</Tooltip>} placement="bottom">
@@ -27,7 +21,15 @@ export function About() {
         </Button>
       </OverlayTrigger>
 
-      <Modal onHide={handleHide} show={isShowing} size="lg">
+      <Modal
+        onHide={() => {
+          setIsShowing(false);
+
+          window.history.replaceState(null, "", " ");
+        }}
+        show={isShowing}
+        size="lg"
+      >
         <Modal.Header closeButton>
           <Modal.Title>
             <Stack direction="horizontal" gap={3}>

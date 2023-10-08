@@ -7,11 +7,11 @@ import { essence } from "@neverquest/state/resources";
 import type { InventoryItem } from "@neverquest/types";
 
 export function PurchaseItemButton({
-  handlePurchase,
   item,
+  onPurchase,
 }: {
-  handlePurchase: () => void;
   item: InventoryItem;
+  onPurchase: () => void;
 }) {
   const essenceValue = useRecoilValue(essence);
 
@@ -33,7 +33,7 @@ export function PurchaseItemButton({
       trigger={isPurchasable ? [] : ["hover", "focus"]}
     >
       <span>
-        <Button disabled={!isPurchasable} onClick={handlePurchase} variant="outline-dark">
+        <Button disabled={!isPurchasable} onClick={onPurchase} variant="outline-dark">
           Buy
         </Button>
       </span>

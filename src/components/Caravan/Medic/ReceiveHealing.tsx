@@ -29,12 +29,6 @@ export function ReceiveHealing() {
 
   const heal = useHeal();
 
-  const handleHeal = () => {
-    heal();
-
-    transactEssence(-price);
-  };
-
   return (
     <Stack gap={3}>
       <h6>Receive healing</h6>
@@ -60,7 +54,15 @@ export function ReceiveHealing() {
             trigger={isPurchasable ? [] : ["hover", "focus"]}
           >
             <span>
-              <Button disabled={!isPurchasable} onClick={handleHeal} variant="outline-dark">
+              <Button
+                disabled={!isPurchasable}
+                onClick={() => {
+                  heal();
+
+                  transactEssence(-price);
+                }}
+                variant="outline-dark"
+              >
                 Heal
               </Button>
             </span>

@@ -39,25 +39,6 @@ export function ShieldOptions() {
     gearClass: shieldClass,
   });
 
-  const handleCraft = () =>
-    setBlacksmithInventory((current) => ({
-      ...current,
-      shield: generateShield({
-        allowNSFW: allowNSFWValue,
-        gearClass: shieldClass,
-        hasPrefix: true,
-        hasSuffix: Math.random() <= getGrowthSigmoid(shieldLevel),
-        level: shieldLevel,
-        tags:
-          shieldLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
-            ? ["lowQuality"]
-            : shieldLevel === maximumShieldLevel
-            ? ["highQuality"]
-            : undefined,
-      }),
-    }));
-  const handleTransfer = () => setBlacksmithInventory((current) => ({ ...current, shield: null }));
-
   return (
     <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
@@ -157,14 +138,34 @@ export function ShieldOptions() {
         <span className="text-center">Cannot use without training.</span>
       ) : craftedShield === null ? (
         <CraftGear
-          onCraft={handleCraft}
+          onCraft={() =>
+            setBlacksmithInventory((current) => ({
+              ...current,
+              shield: generateShield({
+                allowNSFW: allowNSFWValue,
+                gearClass: shieldClass,
+                hasPrefix: true,
+                hasSuffix: Math.random() <= getGrowthSigmoid(shieldLevel),
+                level: shieldLevel,
+                tags:
+                  shieldLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
+                    ? ["lowQuality"]
+                    : shieldLevel === maximumShieldLevel
+                    ? ["highQuality"]
+                    : undefined,
+              }),
+            }))
+          }
           price={getGearPrice({
             factor,
             ...SHIELD_SPECIFICATIONS[shieldClass],
           })}
         />
       ) : (
-        <CraftedGear gearItem={craftedShield} onTransfer={handleTransfer} />
+        <CraftedGear
+          gearItem={craftedShield}
+          onTransfer={() => setBlacksmithInventory((current) => ({ ...current, shield: null }))}
+        />
       )}
     </Stack>
   );

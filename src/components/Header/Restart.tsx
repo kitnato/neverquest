@@ -18,7 +18,7 @@ export function Restart() {
 
   const restart = useRestart();
 
-  const handleHide = () => setIsShowingRestart(false);
+  const onHide = () => setIsShowingRestart(false);
 
   return (
     <>
@@ -36,7 +36,7 @@ export function Restart() {
         </Button>
       </OverlayTrigger>
 
-      <Modal onHide={handleHide} show={isShowingRestart}>
+      <Modal onHide={onHide} show={isShowingRestart}>
         <Modal.Header closeButton>
           <Modal.Title>
             <Stack direction="horizontal" gap={3}>
@@ -51,7 +51,7 @@ export function Restart() {
         <Modal.Footer>
           <Button
             onClick={() => {
-              handleHide();
+              onHide();
               restart();
             }}
             variant="outline-dark"

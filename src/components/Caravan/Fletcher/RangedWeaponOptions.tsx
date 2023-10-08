@@ -45,23 +45,6 @@ export function RangedWeaponOptions() {
   });
   const maximumWeaponLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
 
-  const handleCraft = () =>
-    setFletcherInventory(
-      generateRangedWeapon({
-        allowNSFW: allowNSFWValue,
-        gearClass: weaponClass,
-        hasPrefix: true,
-        hasSuffix: Math.random() <= getGrowthSigmoid(weaponLevel),
-        level: weaponLevel,
-        tags:
-          weaponLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
-            ? ["lowQuality"]
-            : weaponLevel === maximumWeaponLevel
-            ? ["highQuality"]
-            : undefined,
-      }),
-    );
-
   return (
     <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
@@ -176,7 +159,23 @@ export function RangedWeaponOptions() {
 
       {fletcherInventoryValue === null ? (
         <CraftGear
-          onCraft={handleCraft}
+          onCraft={() =>
+            setFletcherInventory(
+              generateRangedWeapon({
+                allowNSFW: allowNSFWValue,
+                gearClass: weaponClass,
+                hasPrefix: true,
+                hasSuffix: Math.random() <= getGrowthSigmoid(weaponLevel),
+                level: weaponLevel,
+                tags:
+                  weaponLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
+                    ? ["lowQuality"]
+                    : weaponLevel === maximumWeaponLevel
+                    ? ["highQuality"]
+                    : undefined,
+              }),
+            )
+          }
           price={getGearPrice({
             factor,
             ...WEAPON_BASE,

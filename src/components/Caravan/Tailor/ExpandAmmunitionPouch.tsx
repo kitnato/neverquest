@@ -32,21 +32,6 @@ export function ExpandAmmunitionPouch() {
   );
   const isAffordable = price <= essenceValue;
 
-  const handleExpansion = () => {
-    transactEssence(-price);
-    setInventory((currentInventory) =>
-      currentInventory.map((currentItem) =>
-        currentItem.id === id
-          ? {
-              ...currentItem,
-              maximum:
-                (currentItem as AmmunitionPouchItem).maximum + TAILORING_EXPANSION.ammunitionPouch,
-            }
-          : currentItem,
-      ),
-    );
-  };
-
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <IconDisplay
@@ -64,7 +49,25 @@ export function ExpandAmmunitionPouch() {
           trigger={isAffordable ? [] : ["hover", "focus"]}
         >
           <span>
-            <Button disabled={!isAffordable} onClick={handleExpansion} variant="outline-dark">
+            <Button
+              disabled={!isAffordable}
+              onClick={() => {
+                transactEssence(-price);
+                setInventory((currentInventory) =>
+                  currentInventory.map((currentItem) =>
+                    currentItem.id === id
+                      ? {
+                          ...currentItem,
+                          maximum:
+                            (currentItem as AmmunitionPouchItem).maximum +
+                            TAILORING_EXPANSION.ammunitionPouch,
+                        }
+                      : currentItem,
+                  ),
+                );
+              }}
+              variant="outline-dark"
+            >
               Expand
             </Button>
           </span>

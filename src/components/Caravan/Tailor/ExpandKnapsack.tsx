@@ -27,11 +27,6 @@ export function ExpandKnapsack() {
   const isAffordable = price <= essenceValue;
   const canExpand = isAffordable && hasKnapsackValue;
 
-  const handleExpansion = () => {
-    transactEssence(-price);
-    setEncumbranceMaximum((current) => current + TAILORING_EXPANSION.knapsack);
-  };
-
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <IconDisplay
@@ -55,7 +50,14 @@ export function ExpandKnapsack() {
           trigger={canExpand ? [] : ["hover", "focus"]}
         >
           <span>
-            <Button disabled={!canExpand} onClick={handleExpansion} variant="outline-dark">
+            <Button
+              disabled={!canExpand}
+              onClick={() => {
+                transactEssence(-price);
+                setEncumbranceMaximum((current) => current + TAILORING_EXPANSION.knapsack);
+              }}
+              variant="outline-dark"
+            >
               Expand
             </Button>
           </span>

@@ -27,13 +27,6 @@ export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
   };
   const { price } = itemWithID;
 
-  const handlePurchase = () => {
-    acquireItem(itemWithID);
-    transactEssence(-itemWithID.price);
-
-    setID(nanoid());
-  };
-
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <ItemDisplay item={itemWithID} overlayPlacement="right" />
@@ -41,7 +34,15 @@ export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
       <Stack direction="horizontal" gap={3}>
         <IconDisplay contents={formatValue({ value: price })} Icon={IconEssence} tooltip="Price" />
 
-        <PurchaseItemButton handlePurchase={handlePurchase} item={itemWithID} />
+        <PurchaseItemButton
+          item={itemWithID}
+          onPurchase={() => {
+            acquireItem(itemWithID);
+            transactEssence(-itemWithID.price);
+
+            setID(nanoid());
+          }}
+        />
       </Stack>
     </div>
   );

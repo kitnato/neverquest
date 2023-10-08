@@ -31,13 +31,8 @@ export function TransmuteGems() {
   );
   const isAffordable = transmutation[source] >= TRANSMUTE_COST;
 
-  const handleSelect = (setSelection: (value: SetStateAction<Gem>) => void) => (gem: Gem) =>
+  const onSelect = (setSelection: (value: SetStateAction<Gem>) => void) => (gem: Gem) =>
     setSelection(gem);
-  const handleTransmute = () => {
-    if (isAffordable) {
-      // TODO
-    }
-  };
 
   useEffect(() => {
     if (source === result) {
@@ -52,11 +47,11 @@ export function TransmuteGems() {
   return (
     <Stack className="mx-auto" gap={3}>
       <Stack direction="horizontal" gap={5}>
-        <SelectGem gem={source} handleSelect={handleSelect(setSource)} />
+        <SelectGem gem={source} onSelect={onSelect(setSource)} />
 
         <IconImage Icon={IconTransmute} />
 
-        <SelectGem gem={result} handleSelect={handleSelect(setResult)} omit={source} />
+        <SelectGem gem={result} omit={source} onSelect={onSelect(setResult)} />
       </Stack>
 
       <OverlayTrigger
@@ -65,7 +60,15 @@ export function TransmuteGems() {
         trigger={isAffordable ? [] : ["hover", "focus"]}
       >
         <span className="mx-auto">
-          <Button disabled={!isAffordable} onClick={handleTransmute} variant="outline-dark">
+          <Button
+            disabled={!isAffordable}
+            onClick={() => {
+              if (isAffordable) {
+                // TODO
+              }
+            }}
+            variant="outline-dark"
+          >
             Transmute
           </Button>
         </span>

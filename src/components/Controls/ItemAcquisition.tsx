@@ -23,7 +23,7 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 export function ItemAcquisition() {
   const [itemsAcquiredValue, setItemsAcquired] = useRecoilState(itemsAcquired);
 
-  const handleAnimationEnd = (key: string) => () =>
+  const onAnimationEnd = (key: string) => () =>
     setItemsAcquired((current) => current.filter(({ id }) => key !== id));
 
   if (itemsAcquiredValue.length === 0) {
@@ -73,7 +73,7 @@ export function ItemAcquisition() {
       <div
         className={`position-absolute ${getAnimationClass({ name: "zoomOut", speed: "slower" })}`}
         key={id}
-        onAnimationEnd={handleAnimationEnd(id)}
+        onAnimationEnd={onAnimationEnd(id)}
         style={{ left: -12, top: 12 }}
       >
         <IconImage Icon={Icon} size="small" />

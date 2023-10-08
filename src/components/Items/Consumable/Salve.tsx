@@ -12,28 +12,30 @@ export function Salve({ id }: { id: string }) {
 
   const changeStamina = useChangeStamina();
 
-  const handleCure = () => {
-    resetBlight();
-
-    changeStamina({
-      delta: {
-        color: "text-muted",
-        value: "CURED",
-      },
-      isRegeneration: false,
-      value: 0,
-    });
-
-    setInventory((current) => current.filter((current) => current.id !== id));
-  };
-
   return (
     <OverlayTrigger
       overlay={<Tooltip>Not blighted.</Tooltip>}
       trigger={!isBlightedValue ? ["hover", "focus"] : []}
     >
       <span>
-        <Button disabled={!isBlightedValue} onClick={handleCure} variant="outline-dark">
+        <Button
+          disabled={!isBlightedValue}
+          onClick={() => {
+            resetBlight();
+
+            changeStamina({
+              delta: {
+                color: "text-muted",
+                value: "CURED",
+              },
+              isRegeneration: false,
+              value: 0,
+            });
+
+            setInventory((current) => current.filter((current) => current.id !== id));
+          }}
+          variant="outline-dark"
+        >
           Apply
         </Button>
       </span>

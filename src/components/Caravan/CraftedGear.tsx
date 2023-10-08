@@ -22,20 +22,6 @@ export function CraftedGear({
   const acquireItem = useAcquireItem();
   const toggleEquipGear = useToggleEquipGear();
 
-  const handleAcquire = () => {
-    const acquisitionStatus = acquireItem(gearItem);
-
-    if (acquisitionStatus === "noFit") {
-      return;
-    }
-
-    onTransfer();
-
-    if (acquisitionStatus === "autoEquip") {
-      toggleEquipGear(gearItem);
-    }
-  };
-
   return (
     <Stack gap={3}>
       <div className="mx-auto">
@@ -50,7 +36,19 @@ export function CraftedGear({
           <Button
             className="w-100"
             disabled={!canFitValue}
-            onClick={handleAcquire}
+            onClick={() => {
+              const acquisitionStatus = acquireItem(gearItem);
+
+              if (acquisitionStatus === "noFit") {
+                return;
+              }
+
+              onTransfer();
+
+              if (acquisitionStatus === "autoEquip") {
+                toggleEquipGear(gearItem);
+              }
+            }}
             variant="outline-dark"
           >
             Acquire

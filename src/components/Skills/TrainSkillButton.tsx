@@ -17,18 +17,20 @@ export function TrainSkillButton({ skill }: { skill: Skill }) {
 
   const isAffordable = skillPriceValue <= essenceValue;
 
-  const handleTrain = () => {
-    acquireSkill(skill);
-    transactEssence(-skillPriceValue);
-  };
-
   return (
     <OverlayTrigger
       overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
       trigger={isAffordable ? [] : ["hover", "focus"]}
     >
       <span>
-        <Button disabled={!isAffordable} onClick={handleTrain} variant="outline-dark">
+        <Button
+          disabled={!isAffordable}
+          onClick={() => {
+            acquireSkill(skill);
+            transactEssence(-skillPriceValue);
+          }}
+          variant="outline-dark"
+        >
           Train
         </Button>
       </span>

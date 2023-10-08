@@ -42,25 +42,6 @@ export function ArmorOptions() {
   });
   const maximumArmorLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
 
-  const handleCraft = () =>
-    setBlacksmithInventory((current) => ({
-      ...current,
-      armor: generateArmor({
-        allowNSFW: allowNSFWValue,
-        gearClass: armorClass,
-        hasPrefix: true,
-        hasSuffix: Math.random() <= getGrowthSigmoid(armorLevel),
-        level: armorLevel,
-        tags:
-          armorLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
-            ? ["lowQuality"]
-            : armorLevel === maximumArmorLevel
-            ? ["highQuality"]
-            : undefined,
-      }),
-    }));
-  const handleTransfer = () => setBlacksmithInventory((current) => ({ ...current, armor: null }));
-
   return (
     <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
@@ -161,14 +142,34 @@ export function ArmorOptions() {
         <span className="text-center">Cannot use without training.</span>
       ) : craftedArmor === null ? (
         <CraftGear
-          onCraft={handleCraft}
+          onCraft={() =>
+            setBlacksmithInventory((current) => ({
+              ...current,
+              armor: generateArmor({
+                allowNSFW: allowNSFWValue,
+                gearClass: armorClass,
+                hasPrefix: true,
+                hasSuffix: Math.random() <= getGrowthSigmoid(armorLevel),
+                level: armorLevel,
+                tags:
+                  armorLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
+                    ? ["lowQuality"]
+                    : armorLevel === maximumArmorLevel
+                    ? ["highQuality"]
+                    : undefined,
+              }),
+            }))
+          }
           price={getGearPrice({
             factor,
             ...ARMOR_SPECIFICATIONS[armorClass],
           })}
         />
       ) : (
-        <CraftedGear gearItem={craftedArmor} onTransfer={handleTransfer} />
+        <CraftedGear
+          gearItem={craftedArmor}
+          onTransfer={() => setBlacksmithInventory((current) => ({ ...current, armor: null }))}
+        />
       )}
     </Stack>
   );

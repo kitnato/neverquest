@@ -1,4 +1,3 @@
-import { title } from "process";
 import type { Dispatch, SetStateAction } from "react";
 import { Button, Modal, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
@@ -23,16 +22,15 @@ export function Retirement({
 
   const retire = useRetire();
 
-  const handleHide = () => setIsShowing(false);
+  const onHide = () => setIsShowing(false);
 
   return (
-    <Modal onHide={handleHide} show={isShowing} size="lg">
+    <Modal onHide={onHide} show={isShowing} size="lg">
       <Modal.Header closeButton>
         <Modal.Title>
           <Stack direction="horizontal" gap={3}>
             <IconImage Icon={IconRetire} />
-
-            {title}
+            Retirement
           </Stack>
         </Modal.Title>
       </Modal.Header>
@@ -61,7 +59,7 @@ export function Retirement({
       <Modal.Footer>
         <Button
           onClick={() => {
-            handleHide();
+            onHide();
             retire();
           }}
           variant="outline-dark"

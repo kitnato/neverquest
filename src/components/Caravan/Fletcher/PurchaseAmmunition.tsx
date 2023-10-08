@@ -25,7 +25,7 @@ export function PurchaseAmmunition() {
 
   const transactEssence = useTransactEssence();
 
-  const handlePurchase = (amount: number) => {
+  const onPurchase = (amount: number) => {
     if (isAffordable(amount) && ownedAmmunitionPouch !== null) {
       transactEssence(-AMMUNITION_PRICE * amount);
       setInventory((currentInventory) =>
@@ -82,7 +82,7 @@ export function PurchaseAmmunition() {
                         <span>
                           <Button
                             disabled={!canPurchase}
-                            onClick={() => handlePurchase(amount)}
+                            onClick={() => onPurchase(amount)}
                             variant="outline-dark"
                           >
                             {label}

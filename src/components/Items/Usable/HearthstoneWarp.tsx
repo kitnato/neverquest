@@ -15,18 +15,20 @@ export function HearthstoneWarp() {
 
   const canWarp = !isAttackingValue && isWildernessValue;
 
-  const handleWarp = () => {
-    resetIsInventoryOpen();
-    toggleLocation();
-  };
-
   return (
     <OverlayTrigger
       overlay={<Tooltip>The hearthstone is cold.</Tooltip>}
       trigger={canWarp ? [] : ["focus", "hover"]}
     >
       <span>
-        <Button disabled={!canWarp} onClick={handleWarp} variant="outline-dark">
+        <Button
+          disabled={!canWarp}
+          onClick={() => {
+            resetIsInventoryOpen();
+            toggleLocation();
+          }}
+          variant="outline-dark"
+        >
           Warp
         </Button>
       </span>

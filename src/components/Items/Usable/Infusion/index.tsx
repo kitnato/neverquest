@@ -22,7 +22,7 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
   const isInfusionPossible = infusionStepValue > 0;
   const canInfuse = isInfusionPossible && !isInfusionAtMaximum;
 
-  const handleStop = () => {
+  const onStop = () => {
     setIsInfusing(false);
     resetInfusionDelta();
   };
@@ -52,8 +52,8 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
         <Button
           disabled={!canInfuse}
           onMouseDown={() => setIsInfusing(true)}
-          onMouseOut={handleStop}
-          onMouseUp={handleStop}
+          onMouseOut={onStop}
+          onMouseUp={onStop}
           variant="outline-dark"
         >
           Infuse

@@ -8,12 +8,12 @@ import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function SelectGem({
   gem,
-  handleSelect,
   omit,
+  onSelect,
 }: {
   gem: Gem;
-  handleSelect: (gem: Gem) => void;
   omit?: Gem;
+  onSelect: (gem: Gem) => void;
 }) {
   return (
     <Stack direction="horizontal" gap={1}>
@@ -21,7 +21,7 @@ export function SelectGem({
         contents={
           <FormSelect
             onChange={({ target: { value } }) => {
-              handleSelect(value as Gem);
+              onSelect(value as Gem);
             }}
             value={gem}
           >

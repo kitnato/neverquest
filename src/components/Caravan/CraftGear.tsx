@@ -15,11 +15,6 @@ export function CraftGear({ onCraft, price }: { onCraft: () => void; price: numb
 
   const isAffordable = price <= essenceValue;
 
-  const handleCraft = () => {
-    onCraft();
-    transactEssence(-price);
-  };
-
   return (
     <Stack className="mx-auto" direction="horizontal" gap={5}>
       <IconDisplay contents={formatValue({ value: price })} Icon={IconEssence} tooltip="Cost" />
@@ -32,7 +27,10 @@ export function CraftGear({ onCraft, price }: { onCraft: () => void; price: numb
           <Button
             className="w-100"
             disabled={!isAffordable}
-            onClick={handleCraft}
+            onClick={() => {
+              onCraft();
+              transactEssence(-price);
+            }}
             variant="outline-dark"
           >
             Craft

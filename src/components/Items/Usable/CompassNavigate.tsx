@@ -31,14 +31,6 @@ export function CompassNavigate() {
 
   const canNavigate = (!isStageStartedValue || isStageCompletedValue) && isWildernessValue;
 
-  const handleNavigate = ({ target: { value } }: ChangeEvent<HTMLSelectElement>) => {
-    setIsShowingNavigation(false);
-    setStage(Number(value));
-
-    resetIsInventoryOpen();
-    resetWilderness();
-  };
-
   return (
     <>
       <OverlayTrigger
@@ -69,7 +61,17 @@ export function CompassNavigate() {
         <Modal.Body>
           <IconDisplay
             contents={
-              <Form.Select disabled={!canNavigate} onChange={handleNavigate} value={stageValue}>
+              <Form.Select
+                disabled={!canNavigate}
+                onChange={({ target: { value } }: ChangeEvent<HTMLSelectElement>) => {
+                  setIsShowingNavigation(false);
+                  setStage(Number(value));
+
+                  resetIsInventoryOpen();
+                  resetWilderness();
+                }}
+                value={stageValue}
+              >
                 {wildernessesValue.map((name, index) => {
                   const stageIndex = index + 1;
 

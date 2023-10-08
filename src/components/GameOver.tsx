@@ -13,10 +13,10 @@ export function GameOver() {
 
   const restart = useRestart();
 
-  const handleHide = () => setIsShowingGameOver(false);
+  const onHide = () => setIsShowingGameOver(false);
 
   return (
-    <Modal onHide={handleHide} show={isGameOverValue && isShowingGameOver}>
+    <Modal onHide={onHide} show={isGameOverValue && isShowingGameOver}>
       <Modal.Header closeButton>
         <Modal.Title>
           <Stack direction="horizontal" gap={3}>
@@ -31,7 +31,7 @@ export function GameOver() {
       <Modal.Footer>
         <Button
           onClick={() => {
-            handleHide();
+            onHide();
             restart();
           }}
           variant="outline-dark"

@@ -16,13 +16,6 @@ export function SellItem({ item }: { item: InventoryItem }) {
   const merchantTradeItem = useMerchantTradeItem();
   const transactEssence = useTransactEssence();
 
-  const handleSale = () => {
-    transactEssence(getSellPrice(item));
-    merchantTradeItem(item, "sale");
-
-    setInventory((current) => current.filter((current) => current.id !== item.id));
-  };
-
   return (
     <>
       <Stack direction="horizontal" gap={3}>
@@ -32,7 +25,15 @@ export function SellItem({ item }: { item: InventoryItem }) {
           tooltip="Value"
         />
 
-        <Button onClick={handleSale} variant="outline-dark">
+        <Button
+          onClick={() => {
+            transactEssence(getSellPrice(item));
+            merchantTradeItem(item, "sale");
+
+            setInventory((current) => current.filter((current) => current.id !== item.id));
+          }}
+          variant="outline-dark"
+        >
           Sell
         </Button>
       </Stack>

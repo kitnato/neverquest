@@ -48,26 +48,6 @@ export function WeaponOptions() {
   });
   const maximumWeaponLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
 
-  const handleCraft = () =>
-    setBlacksmithInventory((current) => ({
-      ...current,
-      weapon: generateMeleeWeapon({
-        allowNSFW: allowNSFWValue,
-        gearClass: weaponClass,
-        grip: weaponGrip,
-        hasPrefix: true,
-        hasSuffix: Math.random() <= getGrowthSigmoid(weaponLevel),
-        level: weaponLevel,
-        tags:
-          weaponLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
-            ? ["lowQuality"]
-            : weaponLevel === maximumWeaponLevel
-            ? ["highQuality"]
-            : undefined,
-      }),
-    }));
-  const handleTransfer = () => setBlacksmithInventory((current) => ({ ...current, weapon: null }));
-
   return (
     <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
@@ -192,7 +172,25 @@ export function WeaponOptions() {
 
       {craftedWeapon === null ? (
         <CraftGear
-          onCraft={handleCraft}
+          onCraft={() =>
+            setBlacksmithInventory((current) => ({
+              ...current,
+              weapon: generateMeleeWeapon({
+                allowNSFW: allowNSFWValue,
+                gearClass: weaponClass,
+                grip: weaponGrip,
+                hasPrefix: true,
+                hasSuffix: Math.random() <= getGrowthSigmoid(weaponLevel),
+                level: weaponLevel,
+                tags:
+                  weaponLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
+                    ? ["lowQuality"]
+                    : weaponLevel === maximumWeaponLevel
+                    ? ["highQuality"]
+                    : undefined,
+              }),
+            }))
+          }
           price={getGearPrice({
             factor,
             ...WEAPON_BASE,
@@ -200,7 +198,10 @@ export function WeaponOptions() {
           })}
         />
       ) : (
-        <CraftedGear gearItem={craftedWeapon} onTransfer={handleTransfer} />
+        <CraftedGear
+          gearItem={craftedWeapon}
+          onTransfer={() => setBlacksmithInventory((current) => ({ ...current, weapon: null }))}
+        />
       )}
     </Stack>
   );

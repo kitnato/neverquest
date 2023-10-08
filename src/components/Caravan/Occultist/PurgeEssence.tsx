@@ -23,13 +23,6 @@ export function PurgeEssence() {
   const isAffordable = price <= essenceValue;
   const isPurchasable = isAffordable && price > 0;
 
-  const handlePurge = () => {
-    transactEssence(-price);
-    transactEssence(absorbedEssenceValue);
-
-    resetAttributes();
-  };
-
   return (
     <Stack gap={3}>
       <h6>Rituals</h6>
@@ -60,7 +53,16 @@ export function PurgeEssence() {
             trigger={isPurchasable ? [] : ["hover", "focus"]}
           >
             <span>
-              <Button disabled={!isPurchasable} onClick={handlePurge} variant="outline-dark">
+              <Button
+                disabled={!isPurchasable}
+                onClick={() => {
+                  transactEssence(-price);
+                  transactEssence(absorbedEssenceValue);
+
+                  resetAttributes();
+                }}
+                variant="outline-dark"
+              >
                 Purge
               </Button>
             </span>

@@ -12,21 +12,24 @@ export function PurchaseItem({ item }: { item: InventoryItem }) {
   const toggleEquipGear = useToggleEquipGear();
   const transactEssence = useTransactEssence();
 
-  const handlePurchase = () => {
-    const acquisitionStatus = acquireItem(item);
+  return (
+    <PurchaseItemButton
+      item={item}
+      onPurchase={() => {
+        const acquisitionStatus = acquireItem(item);
 
-    if (acquisitionStatus === "noFit") {
-      return;
-    }
+        if (acquisitionStatus === "noFit") {
+          return;
+        }
 
-    transactEssence(-item.price);
+        transactEssence(-item.price);
 
-    if (acquisitionStatus === "autoEquip" && isGear(item)) {
-      toggleEquipGear(item);
-    }
+        if (acquisitionStatus === "autoEquip" && isGear(item)) {
+          toggleEquipGear(item);
+        }
 
-    merchantTradeItem(item, "purchase");
-  };
-
-  return <PurchaseItemButton handlePurchase={handlePurchase} item={item} />;
+        merchantTradeItem(item, "purchase");
+      }}
+    />
+  );
 }

@@ -20,7 +20,7 @@ export function FloatingText({ delta }: { delta: Delta }) {
   const resetDeltaValue = useResetRecoilState(deltaState);
   const resetFloatingTextQueue = useResetRecoilState(floatingTextQueues(delta));
 
-  const handleAnimationEnd = (id: string) => () =>
+  const onAnimationEnd = (id: string) => () =>
     setFloatingTextQueue((current) => current.filter(({ key }) => key !== id));
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export function FloatingText({ delta }: { delta: Delta }) {
             }}
           >
             {Array.isArray(delta) ? (
-              <Stack className={ANIMATION_FLOATING_TEXT} onAnimationEnd={handleAnimationEnd(key)}>
+              <Stack className={ANIMATION_FLOATING_TEXT} onAnimationEnd={onAnimationEnd(key)}>
                 {delta.map(({ color, value }) => (
                   <span className={color ?? undefined} key={value} style={{ whiteSpace: "nowrap" }}>
                     {value}
@@ -67,7 +67,7 @@ export function FloatingText({ delta }: { delta: Delta }) {
             ) : (
               <div
                 className={`${ANIMATION_FLOATING_TEXT}${delta.color ? ` ${delta.color}` : ""}`}
-                onAnimationEnd={handleAnimationEnd(key)}
+                onAnimationEnd={onAnimationEnd(key)}
               >
                 {delta.value}
               </div>

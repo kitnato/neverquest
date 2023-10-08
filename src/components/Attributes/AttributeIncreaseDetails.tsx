@@ -13,7 +13,6 @@ import { ReactComponent as IconRegenerationAmount } from "@neverquest/icons/rege
 import { ReactComponent as IconRegenerationRate } from "@neverquest/icons/regeneration-rate.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
-import { level } from "@neverquest/state/attributes";
 import { ownedItem } from "@neverquest/state/items";
 import type { SVGIcon } from "@neverquest/types/props";
 import type { Attribute } from "@neverquest/types/unions";
@@ -33,7 +32,6 @@ const STATISTIC_ICON: Record<Attribute, SVGIcon> = {
 
 export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }) {
   const hasTomeOfPower = Boolean(useRecoilValue(ownedItem("tome of power")));
-  const levelValue = useRecoilValue(level);
 
   const { increment, powerBonus } = ATTRIBUTES[attribute];
   const Icon = STATISTIC_ICON[attribute];
@@ -53,7 +51,7 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
         <Stack className="justify-content-center" direction="horizontal" gap={1}>
           <IconImage Icon={IconTomeOfPower} size="small" />
 
-          {`+${formatValue({ format: "percentage", value: powerBonus })} (x${levelValue})`}
+          {`+${formatValue({ format: "percentage", value: powerBonus })}`}
         </Stack>
       )}
     </>

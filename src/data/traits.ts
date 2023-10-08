@@ -30,7 +30,7 @@ export const TRAITS: Record<
     Icon: IconBruiser,
   },
   colossus: {
-    description: "Two-handed weapons can be dual-wielded.",
+    description: "Two-handed weapons can be equipped alongside a shield.",
     Icon: IconColossus,
   },
   executioner: {
@@ -58,7 +58,7 @@ export const TRAITS: Record<
     Icon: IconShredder,
   },
   stalwart: {
-    description: "All penalties are ignored when wearing armor.",
+    description: "There are no penalties for wearing armor.",
     Icon: IconStalwart,
   },
   tank: {
@@ -66,7 +66,7 @@ export const TRAITS: Record<
     Icon: IconTank,
   },
   tormentor: {
-    description: "Monsters no longer regenerate out of combat.",
+    description: "Monsters can no longer regenerate.",
     Icon: IconTormentor,
   },
 };

@@ -23,7 +23,7 @@ export function StoredGear() {
 
       return (
         <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
-          <ItemDisplay item={current} />
+          <ItemDisplay item={current} overlayPlacement="right" />
 
           <OverlayTrigger
             overlay={<Tooltip>Skill required.</Tooltip>}

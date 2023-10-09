@@ -18,8 +18,9 @@ type Artifact = "armor" | "shield" | "trinket" | "weapon";
 
 export type ArtifactType<T extends Artifact> = { type: T };
 
-export type ArtifactData = BaseData &
-  (
+export type ArtifactData = BaseData & {
+  canPluralize?: boolean;
+} & (
     | ArtifactType<"trinket">
     | (ArtifactType<"armor"> & {
         subtype: ArmorSlot;

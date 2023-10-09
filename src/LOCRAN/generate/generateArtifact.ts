@@ -1,5 +1,6 @@
+import { plural } from "pluralize";
 import { ARTIFACTS } from "@neverquest/LOCRAN/data/artifacts";
-import { generate } from "@neverquest/LOCRAN/generate";
+import { PLURALIZE_CHANCE, generate } from "@neverquest/LOCRAN/generate";
 import type { AffixTag, ArtifactQuery } from "@neverquest/LOCRAN/types";
 
 export function generateArtifact({
@@ -39,9 +40,11 @@ export function generateArtifact({
     throw Error("Invalid artifact.");
   }
 
-  return generate({
+  const { canPluralize, name } = filteredArtifact;
+
+  const artifact = generate({
     category: "artifact",
-    name: filteredArtifact.name,
+    name,
     parameters: {
       allowNSFW,
       hasPrefix,
@@ -50,4 +53,11 @@ export function generateArtifact({
       suffixTags: tags,
     },
   });
+  const isPluralized = Math.random() <= PLURALIZE_CHANCE;
+
+  if (canPluralize && isPluralized) {
+    return plural(artifact);
+  }
+
+  return artifact;
 }

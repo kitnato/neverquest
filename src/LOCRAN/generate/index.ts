@@ -2,6 +2,8 @@ import { AFFIXES } from "@neverquest/LOCRAN/data/affixes";
 import type { Category, GeneratorParameters } from "@neverquest/LOCRAN/types";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
+export const PLURALIZE_CHANCE = 0.5;
+
 export function generate({
   category,
   name,

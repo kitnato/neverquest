@@ -1,7 +1,7 @@
 import { plural } from "pluralize";
 
 import { LOCATIONS } from "@neverquest/LOCRAN/data/locations";
-import { generate } from "@neverquest/LOCRAN/generate";
+import { PLURALIZE_CHANCE, generate } from "@neverquest/LOCRAN/generate";
 import type { AffixTag } from "@neverquest/LOCRAN/types";
 
 export function generateLocation({
@@ -27,7 +27,7 @@ export function generateLocation({
   }
 
   const { canPluralize, name } = filteredLocation;
-  const isPluralized = Math.random() <= 0.5;
+  const isPluralized = Math.random() <= PLURALIZE_CHANCE;
   const location = generate({
     category: "location",
     name,

@@ -2,25 +2,10 @@ import { atomFamily, selector, selectorFamily } from "recoil";
 
 import { MASTERIES, MASTERY_COST } from "@neverquest/data/masteries";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import type { Mastery } from "@neverquest/types/unions";
+import { MASTERY_TYPES, type Mastery } from "@neverquest/types/unions";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 
 // SELECTORS
-
-export const acquiredMasteries = withStateKey("acquiredMasteries", (key) =>
-  selector<Record<Mastery, boolean>>({
-    get: ({ get }) => ({
-      butchery: get(isMasteryUnlocked("butchery")),
-      cruelty: get(isMasteryUnlocked("cruelty")),
-      finesse: get(isMasteryUnlocked("finesse")),
-      marksmanship: get(isMasteryUnlocked("marksmanship")),
-      might: get(isMasteryUnlocked("might")),
-      resilience: get(isMasteryUnlocked("resilience")),
-      stability: get(isMasteryUnlocked("stability")),
-    }),
-    key,
-  }),
-);
 
 export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
   selectorFamily<boolean, Mastery>({
@@ -56,6 +41,17 @@ export const masteryStatistic = withStateKey("masteryStatistic", (key) =>
 
         return getComputedStatistic({ amount: masteryRankValue, base, increment });
       },
+    key,
+  }),
+);
+
+export const unlockedMasteries = withStateKey("unlockedMasteries", (key) =>
+  selector({
+    get: ({ get }) =>
+      MASTERY_TYPES.reduce(
+        (aggregator, current) => ({ ...aggregator, current: get(isMasteryUnlocked(current)) }),
+        {} as Record<Mastery, boolean>,
+      ),
     key,
   }),
 );

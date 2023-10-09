@@ -14,13 +14,13 @@ import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
-  const masteryIsUnlockedValue = useRecoilValue(isMasteryUnlocked(mastery));
+  const isMasteryUnlockedValue = useRecoilValue(isMasteryUnlocked(mastery));
 
   const { description, Icon } = MASTERIES[mastery];
 
   return (
     <div className={getAnimationClass({ name: "flipInX" })}>
-      {masteryIsUnlockedValue ? (
+      {isMasteryUnlockedValue ? (
         <IconDisplay
           contents={
             <OverlayTrigger

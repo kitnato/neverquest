@@ -180,7 +180,6 @@ export type Skill = (typeof SKILL_TYPES)[number];
 
 export type StateKey =
   | "absorbedEssence"
-  | "acquiredMasteries"
   | "acquiredTraits"
   | "allowNSFW"
   | "ammunition"
@@ -353,6 +352,7 @@ export type StateKey =
   | "totalElementalEffects"
   | "trainedSkills"
   | "trinketProperties"
+  | "unlockedMasteries"
   | "weapon"
   | "wildernesses";
 

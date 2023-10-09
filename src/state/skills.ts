@@ -2,7 +2,7 @@ import { atomFamily, selector } from "recoil";
 
 import { SKILL_PRICE_BASE, SKILL_PRICE_FACTOR } from "@neverquest/data/skills";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import type { Skill } from "@neverquest/types/unions";
+import { SKILL_TYPES, type Skill } from "@neverquest/types/unions";
 
 // SELECTORS
 
@@ -19,19 +19,12 @@ export const skillPrice = withStateKey("skillPrice", (key) =>
 );
 
 export const trainedSkills = withStateKey("trainedSkills", (key) =>
-  selector<Record<Skill, boolean>>({
-    get: ({ get }) => ({
-      anatomy: get(isSkillAcquired("anatomy")),
-      archery: get(isSkillAcquired("archery")),
-      armorcraft: get(isSkillAcquired("armorcraft")),
-      assassination: get(isSkillAcquired("assassination")),
-      calisthenics: get(isSkillAcquired("calisthenics")),
-      escrime: get(isSkillAcquired("escrime")),
-      evasion: get(isSkillAcquired("evasion")),
-      shieldcraft: get(isSkillAcquired("shieldcraft")),
-      siegecraft: get(isSkillAcquired("siegecraft")),
-      traumatology: get(isSkillAcquired("traumatology")),
-    }),
+  selector({
+    get: ({ get }) =>
+      SKILL_TYPES.reduce(
+        (aggregator, current) => ({ ...aggregator, current: get(isSkillAcquired(current)) }),
+        {} as Record<Skill, boolean>,
+      ),
     key,
   }),
 );

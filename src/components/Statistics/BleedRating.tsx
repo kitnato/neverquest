@@ -14,7 +14,7 @@ import { ReactComponent as IconCruelty } from "@neverquest/icons/cruelty.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { bleed, bleedDamage, bleedRating, damageTotal } from "@neverquest/state/statistics";
 import { formatValue } from "@neverquest/utilities/formatters";
 
@@ -24,7 +24,7 @@ export function BleedRating() {
   const bleedRatingValue = useRecoilValue(bleedRating);
   const damageTotalValue = useRecoilValue(damageTotal);
   const crueltyValue = useRecoilValue(masteryStatistic("cruelty"));
-  const anatomyValue = useRecoilValue(skills("anatomy"));
+  const anatomyValue = useRecoilValue(isSkillAcquired("anatomy"));
   const { gearClass } = useRecoilValue(weapon);
 
   const { duration, ticks } = BLEED;

@@ -1,17 +1,15 @@
-import { useState } from "react";
 import { Form, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { TraitDisplay } from "@neverquest/components/Traits/TraitDisplay";
-import { acquiredTraits } from "@neverquest/state/traits";
-import { TRAIT_TYPES } from "@neverquest/types/unions";
+import { acquiredTraits, selectedTrait } from "@neverquest/state/traits";
+import { TRAIT_TYPES, type Trait } from "@neverquest/types/unions";
 
 const FORM_NAME = "trait-selection";
 
 export function TraitSelection() {
   const acquiredTraitsValue = useRecoilValue(acquiredTraits);
-
-  const [selectedTrait, setSelectedTrait] = useState("none");
+  const [selectedTraitValue, setSelectedTrait] = useRecoilState(selectedTrait);
 
   const areAllTraitsAcquired = Object.values(acquiredTraitsValue).every(Boolean);
 
@@ -24,25 +22,24 @@ export function TraitSelection() {
       ) : (
         <Stack gap={3}>
           <Form.Check
-            checked={selectedTrait === "none"}
+            checked={selectedTraitValue === null}
             id="none"
             label={<span className="fst-italic">None.</span>}
             name={FORM_NAME}
-            onChange={({ target: { value } }) => setSelectedTrait(value)}
+            onChange={() => setSelectedTrait(null)}
             type="radio"
-            value="none"
           />
 
           {TRAIT_TYPES.map(
             (current) =>
               !acquiredTraitsValue[current] && (
                 <Form.Check
-                  checked={selectedTrait === current}
+                  checked={selectedTraitValue === current}
                   id={current}
                   key={current}
                   label={<TraitDisplay key={current} trait={current} />}
                   name={FORM_NAME}
-                  onChange={({ target: { value } }) => setSelectedTrait(value)}
+                  onChange={({ target: { value } }) => setSelectedTrait(value as Trait)}
                   type="radio"
                   value={current}
                 />

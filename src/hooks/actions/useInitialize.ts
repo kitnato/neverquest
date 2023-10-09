@@ -18,26 +18,24 @@ export function useInitialize() {
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      () => {
+      (isRetiring?: boolean) => {
         const get = getSnapshotGetter(snapshot);
 
-        if (ls.get(KEY_SESSION) !== null) {
-          return;
+        if (isRetiring || ls.get(KEY_SESSION) === null) {
+          ATTRIBUTE_TYPES.forEach((current) =>
+            set(isAttributeUnlocked(current), { isUnlocked: ATTRIBUTES[current].isUnlocked }),
+          );
+
+          CREW_TYPES.forEach((current) => {
+            if (CREW[current].requiredStage === 0) {
+              set(hireStatus(current), { status: "hired" });
+            }
+          });
+
+          set(wildernesses, [generateWilderness({ allowNSFW: get(allowNSFW), stage: get(stage) })]);
+
+          generateMonster();
         }
-
-        ATTRIBUTE_TYPES.forEach((current) =>
-          set(isAttributeUnlocked(current), { isUnlocked: ATTRIBUTES[current].isUnlocked }),
-        );
-
-        CREW_TYPES.forEach((current) => {
-          if (CREW[current].requiredStage === 0) {
-            set(hireStatus(current), { status: "hired" });
-          }
-        });
-
-        set(wildernesses, [generateWilderness({ allowNSFW: get(allowNSFW), stage: get(stage) })]);
-
-        generateMonster();
       },
     [generateMonster],
   );

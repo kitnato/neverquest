@@ -103,14 +103,16 @@ export type Item = Consumable | Gear | Trinket;
 
 export type Location = "caravan" | "wilderness";
 
-export type Mastery =
-  | "butchery"
-  | "cruelty"
-  | "finesse"
-  | "marksmanship"
-  | "might"
-  | "resilience"
-  | "stability";
+export const MASTERY_TYPES = [
+  "butchery",
+  "cruelty",
+  "finesse",
+  "marksmanship",
+  "might",
+  "resilience",
+  "stability",
+] as const;
+export type Mastery = (typeof MASTERY_TYPES)[number];
 
 export const MONSTER_AILMENT_TYPES = [
   "bleeding",
@@ -142,6 +144,7 @@ export const SHOWING_TYPES = [
   "gameOver",
   "gearClass",
   "healthDetails",
+  "location",
   "loot",
   "masteries",
   "monsterAilments",
@@ -153,6 +156,7 @@ export const SHOWING_TYPES = [
   "stamina",
   "staminaDetails",
   "statistics",
+  "traits",
   "thorns",
   "weapon",
   "weight",
@@ -271,6 +275,7 @@ export type StateKey =
   | "isRegenerating"
   | "isShowing"
   | "isShowingEverything"
+  | "isSkillAcquired"
   | "isStageCompleted"
   | "isStageStarted"
   | "isStaminaAtMaximum"
@@ -328,13 +333,12 @@ export type StateKey =
   | "regenerationRate"
   | "reserveRegenerationAmount"
   | "reserveRegenerationRate"
+  | "selectedTrait"
   | "shield"
   | "showDamagePerSecond"
   | "showGearComparison"
   | "showGearLevel"
   | "skillPrice"
-  | "skills"
-  | "skillsTrained"
   | "stability"
   | "stage"
   | "stageMaximum"
@@ -347,6 +351,7 @@ export type StateKey =
   | "stunRating"
   | "thorns"
   | "totalElementalEffects"
+  | "trainedSkills"
   | "trinketProperties"
   | "weapon"
   | "wildernesses";

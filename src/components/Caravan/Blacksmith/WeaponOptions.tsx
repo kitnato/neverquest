@@ -20,7 +20,7 @@ import { WEAPON_CLASS_TYPES, type WeaponClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { GRIP_TYPES, type Grip } from "@neverquest/types/unions";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { generateMeleeWeapon } from "@neverquest/utilities/generators";
@@ -29,7 +29,7 @@ import { getGearPrice, getGrowthSigmoid, getMeleeRanges } from "@neverquest/util
 export function WeaponOptions() {
   const [{ weapon: craftedWeapon }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const allowNSFWValue = useRecoilValue(allowNSFW);
-  const siegecraftValue = useRecoilValue(skills("siegecraft"));
+  const siegecraftValue = useRecoilValue(isSkillAcquired("siegecraft"));
   const stageValue = useRecoilValue(stage);
 
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
@@ -38,7 +38,7 @@ export function WeaponOptions() {
 
   const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[weaponClass];
 
-  const skillValue = useRecoilValue(skills(WEAPON_ABILITY_SKILLS[ability]));
+  const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
   const factor = getGrowthSigmoid(weaponLevel);
   const { abilityChance, damage, rate, staminaCost, weight } = getMeleeRanges({

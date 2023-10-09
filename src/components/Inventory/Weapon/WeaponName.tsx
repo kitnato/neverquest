@@ -20,7 +20,7 @@ import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-dam
 import { isShowing } from "@neverquest/state/isShowing";
 import { weapon as weaponEquipped } from "@neverquest/state/items";
 import { showDamagePerSecond } from "@neverquest/state/settings";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Weapon } from "@neverquest/types";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
@@ -46,7 +46,7 @@ export function WeaponName({
   const isUnarmed = weapon.name === WEAPON_NONE.name;
   const showComparison = weaponEquippedValue.id !== weapon.id;
 
-  const skillValue = useRecoilValue(skills(WEAPON_ABILITY_SKILLS[ability]));
+  const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
   return (
     <OverlayTrigger

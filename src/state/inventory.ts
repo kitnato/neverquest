@@ -1,8 +1,8 @@
 import { atom, selector, selectorFamily } from "recoil";
 
-import { skills } from "./skills";
 import { ENCUMBRANCE } from "@neverquest/data/inventory";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import type { InventoryItem } from "@neverquest/types";
 import { isArmor, isGear, isMelee, isRanged, isShield } from "@neverquest/types/type-guards";
 
@@ -32,19 +32,19 @@ export const equippableItems = withStateKey("equippableItems", (key) =>
         let canEquip = isGear(current) ? !current.isEquipped : false;
 
         if (isArmor(current) && current.gearClass === "heavy") {
-          canEquip = get(skills("armorcraft"));
+          canEquip = get(isSkillAcquired("armorcraft"));
         }
 
         if (isMelee(current) && current.grip === "two-handed") {
-          canEquip = get(skills("siegecraft"));
+          canEquip = get(isSkillAcquired("siegecraft"));
         }
 
         if (isRanged(current)) {
-          canEquip = get(skills("archery"));
+          canEquip = get(isSkillAcquired("archery"));
         }
 
         if (isShield(current) && current.gearClass === "tower") {
-          canEquip = get(skills("shieldcraft"));
+          canEquip = get(isSkillAcquired("shieldcraft"));
         }
 
         return {

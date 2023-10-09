@@ -13,14 +13,14 @@ import { ReactComponent as IconRanged } from "@neverquest/icons/ranged.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { range } from "@neverquest/state/statistics";
 import { isRanged } from "@neverquest/types/type-guards";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function CombatRange() {
   const marksmanshipValue = useRecoilValue(masteryStatistic("marksmanship"));
-  const archeryValue = useRecoilValue(skills("archery"));
+  const archeryValue = useRecoilValue(isSkillAcquired("archery"));
   const rangeValue = useRecoilValue(range);
   const weaponValue = useRecoilValue(weapon);
 

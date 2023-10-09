@@ -8,14 +8,14 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconExecution } from "@neverquest/icons/execution.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/items";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { execution } from "@neverquest/state/statistics";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Execution() {
   const executionValue = useRecoilValue(execution);
-  const siegecraftValue = useRecoilValue(skills("siegecraft"));
+  const siegecraftValue = useRecoilValue(isSkillAcquired("siegecraft"));
   const weaponValue = useRecoilValue(weapon);
 
   useDeltaText({

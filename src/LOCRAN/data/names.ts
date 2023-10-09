@@ -20,6 +20,7 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    isNSFW: true,
     name: "balls",
     type: ["prefix", "suffix"],
   },

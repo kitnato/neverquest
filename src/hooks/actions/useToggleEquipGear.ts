@@ -3,7 +3,7 @@ import { useRecoilCallback } from "recoil";
 import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import type { GearItem } from "@neverquest/types";
 import {
   isArmor,
@@ -32,7 +32,7 @@ export function useToggleEquipGear() {
           set(isShowing("armor"), true);
           set(isShowing("protection"), true);
 
-          if (get(skills("evasion")) && staminaCost) {
+          if (get(isSkillAcquired("evasion")) && staminaCost) {
             set(isShowing("dodgePenalty"), true);
           }
 

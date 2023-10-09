@@ -13,14 +13,14 @@ import { ReactComponent as IconStun } from "@neverquest/icons/stun.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { stunRating } from "@neverquest/state/statistics";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function StunRating() {
   const mightValue = useRecoilValue(masteryStatistic("might"));
   const stunRatingValue = useRecoilValue(stunRating);
-  const traumatologyValue = useRecoilValue(skills("traumatology"));
+  const traumatologyValue = useRecoilValue(isSkillAcquired("traumatology"));
   const { abilityChance, gearClass } = useRecoilValue(weapon);
 
   useDeltaText({

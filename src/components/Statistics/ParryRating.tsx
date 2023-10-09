@@ -14,7 +14,7 @@ import { ReactComponent as IconParry } from "@neverquest/icons/parry.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { parry, parryAbsorption, parryDamage, parryRating } from "@neverquest/state/statistics";
 import { formatValue } from "@neverquest/utilities/formatters";
 
@@ -24,7 +24,7 @@ export function ParryRating() {
   const parryAbsorptionValue = useRecoilValue(parryAbsorption);
   const parryDamageValue = useRecoilValue(parryDamage);
   const parryRatingValue = useRecoilValue(parryRating);
-  const escrimeValue = useRecoilValue(skills("escrime"));
+  const escrimeValue = useRecoilValue(isSkillAcquired("escrime"));
   const { gearClass } = useRecoilValue(weapon);
 
   useDeltaText({

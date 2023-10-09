@@ -7,13 +7,13 @@ import { Retirement } from "@neverquest/components/Retirement";
 import { RETIREMENT_MINIMUM } from "@neverquest/data/general";
 import { ReactComponent as IconRetire } from "@neverquest/icons/retire.svg";
 import { isGameOver } from "@neverquest/state/character";
-import { isWilderness, stage } from "@neverquest/state/encounter";
+import { isWilderness, stageMaximum } from "@neverquest/state/encounter";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function RetireButton() {
   const isGameOverValue = useRecoilValue(isGameOver);
   const isWildernessValue = useRecoilValue(isWilderness);
-  const stageValue = useRecoilValue(stage);
+  const stageMaximumValue = useRecoilValue(stageMaximum);
 
   const [isShowingRetire, setIsShowingRetire] = useState(false);
 
@@ -22,7 +22,9 @@ export function RetireButton() {
       <OverlayTrigger overlay={<Tooltip>Retire</Tooltip>}>
         <span
           className={`${
-            stageValue >= RETIREMENT_MINIMUM ? getAnimationClass({ name: "bounceIn" }) : "invisible"
+            stageMaximumValue >= RETIREMENT_MINIMUM
+              ? getAnimationClass({ name: "bounceIn" })
+              : "invisible"
           }`}
         >
           <Button

@@ -16,7 +16,7 @@ import { ReactComponent as IconNone } from "@neverquest/icons/none.svg";
 import { ReactComponent as IconProtection } from "@neverquest/icons/protection.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import { armor as armorEquipped } from "@neverquest/state/items";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Armor } from "@neverquest/types";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 
@@ -30,7 +30,7 @@ export function ArmorName({
   const armorEquippedValue = useRecoilValue(armorEquipped);
   const isShowingDodgePenalty = useRecoilValue(isShowing("dodgePenalty"));
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
-  const armorcraftValue = useRecoilValue(skills("armorcraft"));
+  const armorcraftValue = useRecoilValue(isSkillAcquired("armorcraft"));
 
   const { deflection, level, name, protection, staminaCost, weight } = armor;
   const isUnshielded = armor.name === ARMOR_NONE.name;

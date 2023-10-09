@@ -16,7 +16,7 @@ import { ReactComponent as IconNone } from "@neverquest/icons/none.svg";
 import { ReactComponent as IconStagger } from "@neverquest/icons/stagger.svg";
 import { isShowing } from "@neverquest/state/isShowing";
 import { shield as shieldEquipped } from "@neverquest/state/items";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Shield } from "@neverquest/types";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 
@@ -29,7 +29,7 @@ export function ShieldName({
 }) {
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
   const shieldEquippedValue = useRecoilValue(shieldEquipped);
-  const shieldcraftSkill = useRecoilValue(skills("shieldcraft"));
+  const shieldcraftSkill = useRecoilValue(isSkillAcquired("shieldcraft"));
 
   const { block, level, name, stagger, staminaCost, weight } = shield;
   const showComparison = shieldEquippedValue.id !== shield.id;

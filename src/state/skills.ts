@@ -12,25 +12,25 @@ export const skillPrice = withStateKey("skillPrice", (key) =>
       SKILL_PRICE_BASE *
       Math.pow(
         SKILL_PRICE_FACTOR,
-        Object.values(get(skillsTrained)).filter((current) => current).length,
+        Object.values(get(trainedSkills)).filter((current) => current).length,
       ),
     key,
   }),
 );
 
-export const skillsTrained = withStateKey("skillsTrained", (key) =>
+export const trainedSkills = withStateKey("trainedSkills", (key) =>
   selector<Record<Skill, boolean>>({
     get: ({ get }) => ({
-      anatomy: get(skills("anatomy")),
-      archery: get(skills("archery")),
-      armorcraft: get(skills("armorcraft")),
-      assassination: get(skills("assassination")),
-      calisthenics: get(skills("calisthenics")),
-      escrime: get(skills("escrime")),
-      evasion: get(skills("evasion")),
-      shieldcraft: get(skills("shieldcraft")),
-      siegecraft: get(skills("siegecraft")),
-      traumatology: get(skills("traumatology")),
+      anatomy: get(isSkillAcquired("anatomy")),
+      archery: get(isSkillAcquired("archery")),
+      armorcraft: get(isSkillAcquired("armorcraft")),
+      assassination: get(isSkillAcquired("assassination")),
+      calisthenics: get(isSkillAcquired("calisthenics")),
+      escrime: get(isSkillAcquired("escrime")),
+      evasion: get(isSkillAcquired("evasion")),
+      shieldcraft: get(isSkillAcquired("shieldcraft")),
+      siegecraft: get(isSkillAcquired("siegecraft")),
+      traumatology: get(isSkillAcquired("traumatology")),
     }),
     key,
   }),
@@ -38,7 +38,7 @@ export const skillsTrained = withStateKey("skillsTrained", (key) =>
 
 // ATOMS
 
-export const skills = withStateKey("skills", (key) =>
+export const isSkillAcquired = withStateKey("isSkillAcquired", (key) =>
   atomFamily<boolean, Skill>({
     default: false,
     effects: (parameter) => [handleLocalStorage({ key, parameter })],

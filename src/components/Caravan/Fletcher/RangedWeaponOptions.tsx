@@ -20,7 +20,7 @@ import { WEAPON_CLASS_TYPES, type WeaponClass } from "@neverquest/LOCRAN/types";
 import { fletcherInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { generateRangedWeapon } from "@neverquest/utilities/generators";
 import { getGearPrice, getGrowthSigmoid, getRangedRanges } from "@neverquest/utilities/getters";
@@ -36,7 +36,7 @@ export function RangedWeaponOptions() {
 
   const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[weaponClass];
 
-  const skillValue = useRecoilValue(skills(WEAPON_ABILITY_SKILLS[ability]));
+  const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
   const factor = getGrowthSigmoid(weaponLevel);
   const { abilityChance, damage, range, rate, staminaCost, weight } = getRangedRanges({

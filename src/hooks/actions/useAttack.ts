@@ -23,7 +23,7 @@ import {
   monsterHealth,
   monsterHealthMaximum,
 } from "@neverquest/state/monster";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import {
   attackRateTotal,
   bleed,
@@ -75,7 +75,7 @@ export function useAttack() {
           const isTwoHanded = isMelee(weaponValue) && weaponValue.grip === "two-handed";
           const monsterHealthValue = get(monsterHealth);
           const hasExecuted =
-            get(skills("siegecraft")) &&
+            get(isSkillAcquired("siegecraft")) &&
             isTwoHanded &&
             monsterHealthValue / get(monsterHealthMaximum) <= get(execution);
 
@@ -120,13 +120,15 @@ export function useAttack() {
           }
 
           const hasInflictedCritical =
-            get(skills("assassination")) && Math.random() <= get(criticalChance);
+            get(isSkillAcquired("assassination")) && Math.random() <= get(criticalChance);
           const hasInflictedBleed =
             get(monsterAilmentDuration("bleeding")) === 0 &&
-            get(skills("anatomy")) &&
+            get(isSkillAcquired("anatomy")) &&
             Math.random() <= get(bleed);
           const hasInflictedStun =
-            get(skills("traumatology")) && gearClass === "blunt" && Math.random() <= abilityChance;
+            get(isSkillAcquired("traumatology")) &&
+            gearClass === "blunt" &&
+            Math.random() <= abilityChance;
 
           const baseDamage = get(damageTotal);
           const totalDamage = -Math.round(

@@ -17,7 +17,7 @@ import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-pow
 import { attributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { attributePowerBonus, criticalRating, criticalStrike } from "@neverquest/state/statistics";
 import { formatValue } from "@neverquest/utilities/formatters";
 
@@ -29,7 +29,7 @@ export function CriticalRating() {
   const criticalRatingValue = useRecoilValue(criticalRating);
   const criticalStrikeValue = useRecoilValue(criticalStrike);
   const isShowingCriticalRating = useRecoilValue(isShowing("criticalRating"));
-  const assassinationValue = useRecoilValue(skills("assassination"));
+  const assassinationValue = useRecoilValue(isSkillAcquired("assassination"));
 
   useDeltaText({
     delta: deltas("criticalRating"),

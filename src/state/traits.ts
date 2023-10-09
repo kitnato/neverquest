@@ -1,4 +1,4 @@
-import { atomFamily, selector } from "recoil";
+import { atom, atomFamily, selector } from "recoil";
 
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { Trait } from "@neverquest/types/unions";
@@ -31,6 +31,14 @@ export const isTraitAcquired = withStateKey("isTraitAcquired", (key) =>
   atomFamily<boolean, Trait>({
     default: false,
     effects: (parameter) => [handleLocalStorage({ key, parameter })],
+    key,
+  }),
+);
+
+export const selectedTrait = withStateKey("selectedTrait", (key) =>
+  atom<Trait | null>({
+    default: null,
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );

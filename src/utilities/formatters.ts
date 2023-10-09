@@ -11,6 +11,29 @@ export function capitalizeAll(string: string) {
   return string.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
 }
 
+export function formatEnumeration(list: string[]) {
+  const formatter = new Intl.ListFormat("en", { style: "short", type: "conjunction" });
+
+  return formatter.format(list);
+}
+
+// Correctly does the rounding as opposed to .toFixed().
+function formatFloat({ decimals = 2, value }: { decimals?: number; value: number }) {
+  const multiplier = 10 ** decimals;
+  const result = parseFloat((value * multiplier).toFixed(11));
+
+  return (Math.round(result) / multiplier).toFixed(decimals).toLocaleString();
+}
+
+export function formatSlug(string: string) {
+  return string
+    .replace(/^\s+|\s+$/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9 -]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
+
 export function formatValue({
   decimals,
   format = "integer",
@@ -52,21 +75,4 @@ export function formatValue({
       );
     }
   }
-}
-
-// Correctly does the rounding as opposed to .toFixed().
-function formatFloat({ decimals = 2, value }: { decimals?: number; value: number }) {
-  const multiplier = 10 ** decimals;
-  const result = parseFloat((value * multiplier).toFixed(11));
-
-  return (Math.round(result) / multiplier).toFixed(decimals).toLocaleString();
-}
-
-export function formatSlug(string: string) {
-  return string
-    .replace(/^\s+|\s+$/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9 -]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
 }

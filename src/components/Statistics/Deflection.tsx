@@ -6,13 +6,13 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { deflection } from "@neverquest/state/statistics";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Deflection() {
   const deflectionValue = useRecoilValue(deflection);
-  const armorcraftValue = useRecoilValue(skills("armorcraft"));
+  const armorcraftValue = useRecoilValue(isSkillAcquired("armorcraft"));
 
   useDeltaText({
     delta: deltas("deflection"),

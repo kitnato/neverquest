@@ -2,24 +2,22 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { Caravan } from "@neverquest/components/Caravan";
+import { Wilderness } from "@neverquest/components/Encounter/Wilderness";
 import { Loot } from "@neverquest/components/Loot";
-import { Wilderness } from "@neverquest/components/Wilderness";
 import { isWilderness } from "@neverquest/state/encounter";
 
 export function Encounter() {
   const isWildernessValue = useRecoilValue(isWilderness);
 
-  return (
-    <Stack gap={3}>
-      {isWildernessValue ? (
-        <>
-          <Wilderness />
+  if (isWildernessValue) {
+    return (
+      <Stack gap={3}>
+        <Wilderness />
 
-          <Loot />
-        </>
-      ) : (
-        <Caravan />
-      )}
-    </Stack>
-  );
+        <Loot />
+      </Stack>
+    );
+  }
+
+  return <Caravan />;
 }

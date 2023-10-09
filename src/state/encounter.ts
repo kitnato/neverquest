@@ -1,7 +1,6 @@
 import { atom, selector } from "recoil";
 
 import { PROGRESS } from "@neverquest/data/encounter";
-import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import type { Location } from "@neverquest/types/unions";
@@ -38,10 +37,6 @@ export const locationName = withStateKey("locationName", (key) =>
   selector({
     get: ({ get }) => {
       if (get(isWilderness)) {
-        if (get(stageMaximum) === 1) {
-          return LABEL_UNKNOWN;
-        }
-
         return get(wildernesses)[get(stage) - 1];
       }
 

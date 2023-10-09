@@ -27,7 +27,7 @@ import {
   regenerationDuration,
   regenerationRate,
 } from "@neverquest/state/reserves";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { attributePowerBonus } from "@neverquest/state/statistics";
 import type { Reserve } from "@neverquest/types/unions";
 import { formatValue } from "@neverquest/utilities/formatters";
@@ -49,7 +49,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
   const isRegeneratingValue = useRecoilValue(isRegenerating(reserve));
   const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve));
   const regenerationRateValue = useRecoilValue(regenerationRate(reserve));
-  const calisthenicsValue = useRecoilValue(skills("calisthenics"));
+  const calisthenicsValue = useRecoilValue(isSkillAcquired("calisthenics"));
 
   const { baseRegenerationAmount, baseRegenerationRate, label, regenerationDelta } =
     RESERVES[reserve];

@@ -5,7 +5,7 @@ import { Skills } from "@neverquest/components/Skills";
 import { TrainableSkill } from "@neverquest/components/Skills/TrainableSkill";
 import { CREW } from "@neverquest/data/caravan";
 import { SKILLS } from "@neverquest/data/skills";
-import { skillsTrained } from "@neverquest/state/skills";
+import { trainedSkills } from "@neverquest/state/skills";
 import type { Skill } from "@neverquest/types/unions";
 
 const ALL_SKILLS = Object.entries(SKILLS)
@@ -14,14 +14,14 @@ const ALL_SKILLS = Object.entries(SKILLS)
   .map(([type]) => type as Skill);
 
 export function Mercenary() {
-  const skillsTrainedValue = Object.values(useRecoilValue(skillsTrained));
+  const trainedSkillsValues = Object.values(useRecoilValue(trainedSkills));
 
   return (
     <Stack gap={5}>
       <Stack gap={3}>
         <h6>Acquire new skills</h6>
 
-        {skillsTrainedValue.every((isSkillTrained) => isSkillTrained) ? (
+        {trainedSkillsValues.every(Boolean) ? (
           <span className="fst-italic">None available.</span>
         ) : (
           ALL_SKILLS.map((current) => <TrainableSkill key={current} skill={current} />)

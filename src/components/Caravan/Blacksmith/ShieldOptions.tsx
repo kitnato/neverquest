@@ -18,7 +18,7 @@ import { SHIELD_CLASS_TYPES, type ShieldClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { generateShield } from "@neverquest/utilities/generators";
 import { getGearPrice, getGrowthSigmoid, getShieldRanges } from "@neverquest/utilities/getters";
@@ -26,7 +26,7 @@ import { getGearPrice, getGrowthSigmoid, getShieldRanges } from "@neverquest/uti
 export function ShieldOptions() {
   const allowNSFWValue = useRecoilValue(allowNSFW);
   const [{ shield: craftedShield }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
-  const shieldcraftValue = useRecoilValue(skills("shieldcraft"));
+  const shieldcraftValue = useRecoilValue(isSkillAcquired("shieldcraft"));
   const stageValue = useRecoilValue(stage);
 
   const [shieldClass, setShieldClass] = useState<ShieldClass>("small");

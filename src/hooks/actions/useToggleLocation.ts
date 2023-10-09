@@ -11,6 +11,7 @@ import {
   stage,
   stageMaximum,
 } from "@neverquest/state/encounter";
+import { isShowing } from "@neverquest/state/isShowing";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleLocation() {
@@ -29,6 +30,7 @@ export function useToggleLocation() {
           generateMerchantInventory();
 
           set(location, "caravan");
+          set(isShowing("location"), true);
         } else {
           if (get(isStageCompleted) && get(stage) === get(stageMaximum)) {
             increaseStage();

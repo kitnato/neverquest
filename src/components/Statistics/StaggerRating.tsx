@@ -13,7 +13,7 @@ import { ReactComponent as IconStagger } from "@neverquest/icons/stagger.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { shield, weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { staggerRating } from "@neverquest/state/statistics";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { formatValue } from "@neverquest/utilities/formatters";
@@ -21,7 +21,7 @@ import { formatValue } from "@neverquest/utilities/formatters";
 export function StaggerRating() {
   const stabilityValue = useRecoilValue(masteryStatistic("stability"));
   const { stagger } = useRecoilValue(shield);
-  const shieldcraftValue = useRecoilValue(skills("shieldcraft"));
+  const shieldcraftValue = useRecoilValue(isSkillAcquired("shieldcraft"));
   const staggerRatingValue = useRecoilValue(staggerRating);
   const weaponValue = useRecoilValue(weapon);
 

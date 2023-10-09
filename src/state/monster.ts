@@ -16,7 +16,7 @@ import { AILMENT_PENALTY, BLEED_DELTA } from "@neverquest/data/statistics";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
 import { shield, weapon } from "@neverquest/state/items";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import {
   bleedDamage,
   essenceBonus,
@@ -55,15 +55,17 @@ export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
 
         switch (parameter) {
           case "bleeding": {
-            return get(skills("anatomy")) && abilityChance > 0 && gearClass === "piercing";
+            return get(isSkillAcquired("anatomy")) && abilityChance > 0 && gearClass === "piercing";
           }
 
           case "staggered": {
-            return get(skills("shieldcraft")) && get(shield).stagger > 0;
+            return get(isSkillAcquired("shieldcraft")) && get(shield).stagger > 0;
           }
 
           case "stunned": {
-            return get(skills("traumatology")) && abilityChance > 0 && gearClass === "blunt";
+            return (
+              get(isSkillAcquired("traumatology")) && abilityChance > 0 && gearClass === "blunt"
+            );
           }
 
           case "burning":

@@ -20,7 +20,7 @@ import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { generateArmor } from "@neverquest/utilities/generators";
 import { getArmorRanges, getGearPrice, getGrowthSigmoid } from "@neverquest/utilities/getters";
@@ -29,7 +29,7 @@ export function ArmorOptions() {
   const [{ armor: craftedArmor }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const allowNSFWValue = useRecoilValue(allowNSFW);
   const isShowingDodge = useRecoilValue(isShowing("dodge"));
-  const armorcraftValue = useRecoilValue(skills("armorcraft"));
+  const armorcraftValue = useRecoilValue(isSkillAcquired("armorcraft"));
   const stageValue = useRecoilValue(stage);
 
   const [armorClass, setArmorClass] = useState<ArmorClass>("light");

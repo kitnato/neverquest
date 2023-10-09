@@ -21,7 +21,7 @@ import { attributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { armor, ownedItem } from "@neverquest/state/items";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { attributePowerBonus, dodge } from "@neverquest/state/statistics";
 import { formatValue } from "@neverquest/utilities/formatters";
 
@@ -33,7 +33,7 @@ export function Dodge() {
   const isShowingDodge = useRecoilValue(isShowing("dodge"));
   const isShowingDodgePenalty = useRecoilValue(isShowing("dodgePenalty"));
   const hasTomeOfPower = Boolean(useRecoilValue(ownedItem("tome of power")));
-  const evasionValue = useRecoilValue(skills("evasion"));
+  const evasionValue = useRecoilValue(isSkillAcquired("evasion"));
 
   useDeltaText({
     delta: deltas("dodge"),

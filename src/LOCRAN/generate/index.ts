@@ -17,29 +17,31 @@ export function generate({
   const { allowNSFW, hasPrefix, hasSuffix, prefixTags, suffixTags } = parameters;
 
   if (hasPrefix) {
-    const filteredPrefixes = AFFIXES.filter((current) => {
-      const filterNSFW = allowNSFW ? Boolean(current.isNSFW) || !current.isNSFW : !current.isNSFW;
+    const filteredPrefixes = AFFIXES.filter((currentAffix) => {
+      const filterNSFW = allowNSFW
+        ? Boolean(currentAffix.isNSFW) || !currentAffix.isNSFW
+        : !currentAffix.isNSFW;
 
       // Discard prefix if it's the same as the main name (e.g. "Fungus Fungus").
-      if (current.name === name) {
+      if (currentAffix.name === name) {
         return false;
       }
 
       // If we want a tagged prefix, check if the current affix has all of them (with NSFW filter), otherwise discard it.
       if (prefixTags.length > 0) {
-        if (current.tags === undefined) {
+        if (currentAffix.tags === undefined) {
           return false;
         }
 
         return (
-          current[category] === "prefix" &&
-          prefixTags.every((tag) => current.tags?.includes(tag)) &&
+          currentAffix[category] === "prefix" &&
+          prefixTags.every((currentPrefixTag) => currentAffix.tags?.includes(currentPrefixTag)) &&
           filterNSFW
         );
       }
 
       // Otherwise, return any prefix (with NSFW filter).
-      return current[category] === "prefix" && filterNSFW;
+      return currentAffix[category] === "prefix" && filterNSFW;
     });
 
     const prefix = filteredPrefixes[Math.floor(Math.random() * filteredPrefixes.length)];
@@ -60,7 +62,7 @@ export function generate({
         if (affix.tags !== undefined) {
           return (
             affix[category] === "suffix" &&
-            suffixTags.every((tag) => affix.tags?.includes(tag)) &&
+            suffixTags.every((current) => affix.tags?.includes(current)) &&
             filterNSFW
           );
         }

@@ -7,6 +7,7 @@ import { InventoryButton } from "@neverquest/components/Controls/InventoryButton
 import { RetireButton } from "@neverquest/components/Controls/RetireButton";
 import { TravelButton } from "@neverquest/components/Controls/TravelButton";
 import { Encounter } from "@neverquest/components/Encounter";
+import { WildernessStatus } from "@neverquest/components/Encounter/WildernessStatus";
 import { Essence } from "@neverquest/components/Essence";
 import { GameOver } from "@neverquest/components/GameOver";
 import { Gear } from "@neverquest/components/Inventory/Gear";
@@ -14,7 +15,6 @@ import { Location } from "@neverquest/components/Location";
 import { Masteries } from "@neverquest/components/Masteries";
 import { Statistics } from "@neverquest/components/Statistics";
 import { Status } from "@neverquest/components/Status";
-import { WildernessStatus } from "@neverquest/components/Wilderness/WildernessStatus";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 
 export function Layout() {

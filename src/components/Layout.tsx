@@ -9,7 +9,7 @@ import { TravelButton } from "@neverquest/components/Controls/TravelButton";
 import { Encounter } from "@neverquest/components/Encounter";
 import { Essence } from "@neverquest/components/Essence";
 import { GameOver } from "@neverquest/components/GameOver";
-import { Gear } from "@neverquest/components/Items/Gear";
+import { Gear } from "@neverquest/components/Inventory/Gear";
 import { Location } from "@neverquest/components/Location";
 import { Masteries } from "@neverquest/components/Masteries";
 import { Statistics } from "@neverquest/components/Statistics";

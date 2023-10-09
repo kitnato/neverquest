@@ -69,11 +69,11 @@ export function Health() {
                           <Stack direction="horizontal" gap={1}>
                             <IconImage Icon={IconHealth} size="small" />
 
-                            {`+${formatValue({ value: vitality - baseAmount })} `}
+                            {`+${formatValue({ value: vitality - baseAmount })}`}
 
                             {vitalityPowerBonus > 0 && (
                               <>
-                                {LABEL_SEPARATOR}
+                                <span>{LABEL_SEPARATOR}</span>
 
                                 <IconImage Icon={IconTomeOfPower} size="small" />
 

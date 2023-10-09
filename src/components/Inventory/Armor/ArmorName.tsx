@@ -4,11 +4,11 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconImage } from "@neverquest/components/IconImage";
-import { AppliedGems } from "@neverquest/components/Items/AppliedGems";
-import { DodgePenaltyContents } from "@neverquest/components/Items/Armor/DodgePenaltyContents";
-import { GearComparison } from "@neverquest/components/Items/GearComparison";
-import { GearLevelDetail } from "@neverquest/components/Items/GearLevelDetail";
-import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
+import { AppliedGems } from "@neverquest/components/Inventory/AppliedGems";
+import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/DodgePenaltyContents";
+import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
+import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
+import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";

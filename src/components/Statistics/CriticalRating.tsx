@@ -68,11 +68,11 @@ export function CriticalRating() {
                             decimals: 0,
                             format: "percentage",
                             value: dexterity,
-                          })} chance `}
+                          })} chance`}
 
                           {dexterityPowerBonus > 0 && (
                             <>
-                              {LABEL_SEPARATOR}
+                              <span>{LABEL_SEPARATOR}</span>
 
                               <IconImage Icon={IconTomeOfPower} size="small" />
 
@@ -102,11 +102,11 @@ export function CriticalRating() {
                             decimals: 0,
                             format: "percentage",
                             value: perception,
-                          })} damage `}
+                          })} damage`}
 
                           {perceptionPowerBonus > 0 && (
                             <>
-                              {LABEL_SEPARATOR}
+                              <span>{LABEL_SEPARATOR}</span>
 
                               <IconImage Icon={IconTomeOfPower} size="small" />
 

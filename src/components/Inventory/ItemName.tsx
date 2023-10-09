@@ -2,8 +2,8 @@ import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import type { Placement } from "react-bootstrap/esm/types";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { GemDescription } from "@neverquest/components/Items/GemDescription";
-import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
+import { GemDescription } from "@neverquest/components/Inventory/GemDescription";
+import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import type { ConsumableItem, GemItem, UsableItem } from "@neverquest/types";
 import { isGem } from "@neverquest/types/type-guards";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";

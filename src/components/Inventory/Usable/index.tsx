@@ -1,6 +1,6 @@
-import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
-import { AmmunitionPouch } from "@neverquest/components/Items/Usable/AmmunitionPouch";
-import { Infusable } from "@neverquest/components/Items/Usable/Infusable";
+import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
+import { AmmunitionPouch } from "@neverquest/components/Inventory/Usable/AmmunitionPouch";
+import { Infusable } from "@neverquest/components/Inventory/Usable/Infusable";
 import type { UsableItem } from "@neverquest/types";
 import { isInfusable, isTrinket } from "@neverquest/types/type-guards";
 

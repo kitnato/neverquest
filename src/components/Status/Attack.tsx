@@ -105,11 +105,11 @@ export function Attack() {
                             decimals: 0,
                             format: "percentage",
                             value: speed,
-                          })} `}
+                          })}`}
 
                           {speedPowerBonus > 0 && (
                             <>
-                              {LABEL_SEPARATOR}
+                              <span>{LABEL_SEPARATOR}</span>
 
                               <IconImage Icon={IconTomeOfPower} size="small" />
 

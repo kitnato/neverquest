@@ -1,5 +1,5 @@
-import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
-import { InfusionLevelDisplay } from "@neverquest/components/Items/Usable/Infusion/InfusionLevelDisplay";
+import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
+import { InfusionLevelDisplay } from "@neverquest/components/Inventory/Usable/Infusion/InfusionLevelDisplay";
 import type { InfusableItem } from "@neverquest/types";
 
 export function Infusable({ item }: { item: InfusableItem }) {

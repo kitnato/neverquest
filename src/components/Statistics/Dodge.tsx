@@ -5,7 +5,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { FloatingText } from "@neverquest/components/FloatingText";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { DodgePenaltyContents } from "@neverquest/components/Items/Armor/DodgePenaltyContents";
+import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/DodgePenaltyContents";
 import {
   CLASS_TABLE_CELL_ITALIC,
   LABEL_EMPTY,
@@ -70,11 +70,11 @@ export function Dodge() {
                             decimals: 0,
                             format: "percentage",
                             value: agility,
-                          })} `}
+                          })}`}
 
                           {agilityPowerBonus > 0 && (
                             <>
-                              {LABEL_SEPARATOR}
+                              <span>{LABEL_SEPARATOR}</span>
 
                               <IconImage Icon={IconTomeOfPower} size="small" />
 

@@ -65,11 +65,11 @@ export function Stamina() {
                           <Stack direction="horizontal" gap={1}>
                             <IconImage Icon={IconStamina} size="small" />
 
-                            {`+${formatValue({ value: endurance - baseAmount })} `}
+                            {`+${formatValue({ value: endurance - baseAmount })}`}
 
                             {endurancePowerBonus > 0 && (
                               <>
-                                {LABEL_SEPARATOR}
+                                <span>{LABEL_SEPARATOR}</span>
 
                                 <IconImage Icon={IconTomeOfPower} size="small" />
 

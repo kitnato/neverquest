@@ -2,10 +2,10 @@ import type { ReactNode } from "react";
 import type { Placement } from "react-bootstrap/esm/types";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ArmorName } from "@neverquest/components/Items/Armor/ArmorName";
-import { ItemName } from "@neverquest/components/Items/ItemName";
-import { ShieldName } from "@neverquest/components/Items/Offhand/ShieldName";
-import { WeaponName } from "@neverquest/components/Items/Weapon/WeaponName";
+import { ArmorName } from "@neverquest/components/Inventory/Armor/ArmorName";
+import { ItemName } from "@neverquest/components/Inventory/ItemName";
+import { ShieldName } from "@neverquest/components/Inventory/Offhand/ShieldName";
+import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
 import { CONSUMABLES, INFUSABLES, TRINKETS } from "@neverquest/data/inventory";
 import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
 import { ReactComponent as IconGem } from "@neverquest/icons/gem.svg";

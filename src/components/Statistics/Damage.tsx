@@ -69,11 +69,11 @@ export function Damage() {
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          {`+${formatValue({ value: strength })} `}
+                          {`+${formatValue({ value: strength })}`}
 
                           {strengthPowerBonus > 0 && (
                             <>
-                              {LABEL_SEPARATOR}
+                              <span>{LABEL_SEPARATOR}</span>
 
                               <IconImage Icon={IconTomeOfPower} size="small" />
 

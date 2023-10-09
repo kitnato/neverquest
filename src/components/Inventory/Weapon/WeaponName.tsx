@@ -4,11 +4,11 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconImage } from "@neverquest/components/IconImage";
-import { AppliedGems } from "@neverquest/components/Items/AppliedGems";
-import { GearComparison } from "@neverquest/components/Items/GearComparison";
-import { GearLevelDetail } from "@neverquest/components/Items/GearLevelDetail";
-import { StaminaCostDetail } from "@neverquest/components/Items/StaminaCostDetail";
-import { WeightDetail } from "@neverquest/components/Items/WeightDetail";
+import { AppliedGems } from "@neverquest/components/Inventory/AppliedGems";
+import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
+import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
+import { StaminaCostDetail } from "@neverquest/components/Inventory/StaminaCostDetail";
+import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";

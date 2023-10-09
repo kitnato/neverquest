@@ -2,7 +2,7 @@ import { Card, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
+import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { EssenceLoot } from "@neverquest/components/Loot/EssenceLoot";
 import { Looting } from "@neverquest/components/Loot/Looting";
 import { ReactComponent as IconLooted } from "@neverquest/icons/looted.svg";

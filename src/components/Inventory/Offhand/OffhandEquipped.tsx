@@ -1,8 +1,8 @@
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { Ammunition } from "@neverquest/components/Items/Offhand/Ammunition";
-import { ShieldName } from "@neverquest/components/Items/Offhand/ShieldName";
+import { Ammunition } from "@neverquest/components/Inventory/Offhand/Ammunition";
+import { ShieldName } from "@neverquest/components/Inventory/Offhand/ShieldName";
 import { SHIELD_NONE } from "@neverquest/data/inventory";
 import { ReactComponent as IconFist } from "@neverquest/icons/fist.svg";
 import { ReactComponent as IconMelee } from "@neverquest/icons/melee.svg";

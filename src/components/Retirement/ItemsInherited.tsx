@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
+import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { TRINKETS } from "@neverquest/data/inventory";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import { ownedItem } from "@neverquest/state/items";

@@ -1,9 +1,9 @@
 import { Card, Col, Row } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { ArmorEquipped } from "@neverquest/components/Items/Armor/ArmorEquipped";
-import { OffhandEquipped } from "@neverquest/components/Items/Offhand/OffhandEquipped";
-import { WeaponEquipped } from "@neverquest/components/Items/Weapon/WeaponEquipped";
+import { ArmorEquipped } from "@neverquest/components/Inventory/Armor/ArmorEquipped";
+import { OffhandEquipped } from "@neverquest/components/Inventory/Offhand/OffhandEquipped";
+import { WeaponEquipped } from "@neverquest/components/Inventory/Weapon/WeaponEquipped";
 import { isShowing } from "@neverquest/state/isShowing";
 
 import { getAnimationClass } from "@neverquest/utilities/getters";

@@ -107,11 +107,11 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      {`-${formatValue({ decimals: 0, format: "percentage", value: vigor })} `}
+                      {`-${formatValue({ decimals: 0, format: "percentage", value: vigor })}`}
 
                       {vigorPowerBonus > 0 && (
                         <>
-                          {LABEL_SEPARATOR}
+                          <span>{LABEL_SEPARATOR}</span>
 
                           <IconImage Icon={IconTomeOfPower} size="small" />
 
@@ -147,11 +147,11 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      {`+${fortitude} `}
+                      {`+${fortitude}`}
 
                       {vigorPowerBonus > 0 && (
                         <>
-                          {LABEL_SEPARATOR}
+                          <span>{LABEL_SEPARATOR}</span>
 
                           <IconImage Icon={IconTomeOfPower} size="small" />
 

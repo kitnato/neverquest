@@ -8,10 +8,13 @@ export function GemDescription({ name }: { name: Gem }) {
   const { color, Icon } = ELEMENTALS[elemental];
 
   return (
-    <Stack direction="horizontal" gap={1}>
-      Adds elemental
-      <IconImage Icon={Icon} size="small" />
-      <span className={color}>{elemental}</span> effect to a weapon, shield, or armor.
-    </Stack>
+    <span>
+      <Stack className="d-inline-flex text-center" direction="horizontal" gap={1}>
+        Adds elemental
+        <IconImage Icon={Icon} size="small" />
+        <span className={color}>{elemental}</span>
+      </Stack>{" "}
+      effect to a weapon, shield, or armor.
+    </span>
   );
 }

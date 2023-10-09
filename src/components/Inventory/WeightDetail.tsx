@@ -2,7 +2,7 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { GearComparison } from "@neverquest/components/Items/GearComparison";
+import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
 import { isShowing } from "@neverquest/state/isShowing";

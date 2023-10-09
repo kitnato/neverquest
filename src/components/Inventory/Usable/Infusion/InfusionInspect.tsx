@@ -2,9 +2,9 @@ import { type FunctionComponent, useState } from "react";
 import { Button, Modal, Stack } from "react-bootstrap";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { Infusion } from "@neverquest/components/Items/Usable/Infusion";
-import { InfusionLevel } from "@neverquest/components/Items/Usable/Infusion/InfusionLevel";
-import { InfusionProgress } from "@neverquest/components/Items/Usable/Infusion/InfusionProgress";
+import { Infusion } from "@neverquest/components/Inventory/Usable/Infusion";
+import { InfusionLevel } from "@neverquest/components/Inventory/Usable/Infusion/InfusionLevel";
+import { InfusionProgress } from "@neverquest/components/Inventory/Usable/Infusion/InfusionProgress";
 import { EssenceBonus } from "@neverquest/components/Statistics/EssenceBonus";
 import { PowerBonusBoost } from "@neverquest/components/Statistics/PowerBonusBoost";
 import { INFUSABLES } from "@neverquest/data/inventory";

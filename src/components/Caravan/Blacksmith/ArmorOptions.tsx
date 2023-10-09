@@ -5,7 +5,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
 import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { DodgePenaltyContents } from "@neverquest/components/Items/Armor/DodgePenaltyContents";
+import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/DodgePenaltyContents";
 import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { ARMOR_SPECIFICATIONS } from "@neverquest/data/inventory";

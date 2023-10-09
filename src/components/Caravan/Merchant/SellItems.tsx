@@ -2,8 +2,8 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { SellItem } from "@neverquest/components/Caravan/Merchant/SellItem";
-import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
-import { Usable } from "@neverquest/components/Items/Usable";
+import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
+import { Usable } from "@neverquest/components/Inventory/Usable";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { inventory } from "@neverquest/state/inventory";
 import {

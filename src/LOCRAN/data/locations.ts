@@ -74,6 +74,9 @@ export const LOCATIONS: LocationData[] = [
     name: "cage",
   },
   {
+    name: "caliphate",
+  },
+  {
     name: "campsite",
   },
   {
@@ -114,6 +117,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "chasm",
+  },
+  {
+    name: "church",
   },
   {
     name: "circus",
@@ -171,6 +177,10 @@ export const LOCATIONS: LocationData[] = [
     name: "crematorium",
   },
   {
+    canPluralize: true,
+    name: "crypt",
+  },
+  {
     name: "den",
   },
   {
@@ -190,6 +200,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "dominion",
+  },
+  {
+    name: "dreadlands",
   },
   {
     name: "dream",
@@ -412,6 +425,9 @@ export const LOCATIONS: LocationData[] = [
     name: "morass",
   },
   {
+    name: "mosque",
+  },
+  {
     canPluralize: true,
     name: "mountain",
   },
@@ -518,6 +534,9 @@ export const LOCATIONS: LocationData[] = [
     name: "retreat",
   },
   {
+    name: "rift",
+  },
+  {
     name: "river",
   },
   {
@@ -525,7 +544,13 @@ export const LOCATIONS: LocationData[] = [
     name: "ruin",
   },
   {
+    name: "sacristy",
+  },
+  {
     name: "sanctuary",
+  },
+  {
+    name: "sanctum",
   },
   {
     name: "savannah",

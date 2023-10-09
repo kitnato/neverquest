@@ -2044,6 +2044,11 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "trinket",
   },
   {
+    name: "splint",
+    subtype: "hands",
+    type: "armor",
+  },
+  {
     artifactClass: "piercing",
     name: "spontoon",
     subtype: "melee",

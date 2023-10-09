@@ -22,6 +22,11 @@ export const CREATURES: CreatureData[] = [
     type: "human",
   },
   {
+    isNSFW: true,
+    name: "alcoholic",
+    type: "monster",
+  },
+  {
     name: "alien",
     type: "monster",
   },
@@ -48,7 +53,7 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "apostate",
-    type: "human",
+    type: "monster",
   },
   {
     name: "apparition",
@@ -217,6 +222,10 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "cabalist",
+    type: "monster",
+  },
+  {
     name: "cacodemon",
     type: "monster",
   },
@@ -332,6 +341,10 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "cultist",
+    type: "monster",
+  },
+  {
     name: "cyborg",
     type: "monster",
   },
@@ -358,6 +371,10 @@ export const CREATURES: CreatureData[] = [
   {
     name: "destroyer",
     type: "human",
+  },
+  {
+    name: "devil",
+    type: "monster",
   },
   {
     isNSFW: true,
@@ -407,6 +424,10 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "dryad",
+    type: "monster",
+  },
+  {
     name: "dungpile",
     type: "monster",
   },
@@ -423,6 +444,10 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "elemental",
+    type: "monster",
+  },
+  {
     name: "elf",
     type: "human",
   },
@@ -432,6 +457,10 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "embryo",
+    type: "monster",
+  },
+  {
+    name: "ent",
     type: "monster",
   },
   {
@@ -530,14 +559,6 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
-    name: "ghast",
-    type: "monster",
-  },
-  {
-    name: "ghoul",
-    type: "monster",
-  },
-  {
     name: "gangster",
     type: "human",
   },
@@ -554,11 +575,23 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "ghast",
+    type: "monster",
+  },
+  {
     name: "gherkin",
     type: "monster",
   },
   {
     name: "ghost",
+    type: "monster",
+  },
+  {
+    name: "ghoul",
+    type: "monster",
+  },
+  {
+    name: "giant",
     type: "monster",
   },
   {
@@ -628,6 +661,10 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "heathen",
+    type: "monster",
+  },
+  {
     name: "hedonist",
     type: "human",
   },
@@ -637,7 +674,7 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "heretic",
-    type: "human",
+    type: "monster",
   },
   {
     name: "hierophant",
@@ -973,7 +1010,7 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "occultist",
-    type: "human",
+    type: "monster",
   },
   {
     name: "octopus",
@@ -1049,6 +1086,10 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "predator",
+    type: "monster",
+  },
+  {
     name: "priest",
     type: "human",
   },
@@ -1114,6 +1155,10 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "ritualist",
+    type: "monster",
+  },
+  {
     name: "robot",
     type: "monster",
   },
@@ -1148,6 +1193,10 @@ export const CREATURES: CreatureData[] = [
   {
     name: "savage",
     type: "monster",
+  },
+  {
+    name: "scoundrel",
+    type: "human",
   },
   {
     name: "scratcher",
@@ -1413,7 +1462,15 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "warg",
+    type: "monster",
+  },
+  {
     name: "warlock",
+    type: "monster",
+  },
+  {
+    name: "warlord",
     type: "monster",
   },
   {
@@ -1475,10 +1532,6 @@ export const CREATURES: CreatureData[] = [
   {
     name: "wizard",
     type: "human",
-  },
-  {
-    name: "warg",
-    type: "monster",
   },
   {
     name: "woman",

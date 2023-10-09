@@ -49,7 +49,7 @@ export function useGenerateMonster() {
                     maximum: suffix.maximum,
                     minimum: suffix.minimum,
                   }),
-                type: ["monster"],
+                type: ["human", "monster"],
               }),
         );
 

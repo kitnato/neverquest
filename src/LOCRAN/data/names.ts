@@ -135,6 +135,14 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "dire",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "dread",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "drinker",
     type: ["suffix"],
   },
@@ -152,6 +160,14 @@ export const NAMES: NameData[] = [
   },
   {
     name: "face",
+    type: ["suffix"],
+  },
+  {
+    name: "fang",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "fang",
     type: ["suffix"],
   },
   {
@@ -419,6 +435,10 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "rip",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "rot",
     type: ["prefix", "suffix"],
   },
@@ -497,12 +517,20 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "spittle",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "splatter",
     type: ["prefix", "suffix"],
   },
   {
     isNSFW: true,
     name: "spunk",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "squeak",
     type: ["prefix", "suffix"],
   },
   {
@@ -534,10 +562,6 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
-    name: "squeak",
-    type: ["prefix", "suffix"],
-  },
-  {
     isNSFW: true,
     name: "succ",
     type: ["prefix", "suffix"],
@@ -559,6 +583,10 @@ export const NAMES: NameData[] = [
   {
     name: "tiny",
     type: ["prefix"],
+  },
+  {
+    name: "tooth",
+    type: ["suffix"],
   },
   {
     isNSFW: true,
@@ -594,16 +622,16 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    isNSFW: true,
+    name: "whore",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "willy",
     type: ["prefix", "suffix"],
   },
   {
     name: "wizz",
-    type: ["prefix", "suffix"],
-  },
-  {
-    isNSFW: true,
-    name: "whore",
     type: ["prefix", "suffix"],
   },
   {
@@ -616,6 +644,10 @@ export const NAMES: NameData[] = [
   },
   {
     name: "wrath",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "wrench",
     type: ["prefix", "suffix"],
   },
   {

@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { RETIREMENT_MINIMUM } from "@neverquest/data/general";
-import { INHERITED_ITEMS } from "@neverquest/data/inventory";
+import { ENCUMBRANCE, INHERITED_ITEMS, KNAPSACK_SIZE } from "@neverquest/data/inventory";
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
 import {
@@ -18,7 +18,7 @@ import {
   stage,
   stageMaximum,
 } from "@neverquest/state/encounter";
-import { encumbranceMaximum, inventory } from "@neverquest/state/inventory";
+import { encumbranceMaximum, hasKnapsack, inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { infusionCurrent } from "@neverquest/state/items";
 import { isMasteryUnlocked, masteryProgress, masteryRank } from "@neverquest/state/masteries";
@@ -84,7 +84,11 @@ export function useRetire() {
           ),
         );
 
-        reset(encumbranceMaximum);
+        if (get(hasKnapsack)) {
+          set(encumbranceMaximum, ENCUMBRANCE + KNAPSACK_SIZE);
+        } else {
+          reset(encumbranceMaximum);
+        }
 
         INFUSABLE_TYPES.forEach((current) => reset(infusionCurrent(current)));
       },

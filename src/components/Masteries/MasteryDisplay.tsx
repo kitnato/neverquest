@@ -31,7 +31,7 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
               }
               placement="right"
             >
-              <span>{capitalizeAll(mastery)}</span>
+              <span style={{ width: "max-content" }}>{capitalizeAll(mastery)}</span>
             </OverlayTrigger>
           }
           description={

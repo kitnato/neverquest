@@ -24,10 +24,6 @@ export function FloatingText({ delta }: { delta: Delta }) {
     setFloatingTextQueue((current) => current.filter(({ key }) => key !== id));
 
   useEffect(() => {
-    resetFloatingTextQueue();
-  }, [resetFloatingTextQueue]);
-
-  useEffect(() => {
     if (deltaValue === DEFAULT_DELTA_DISPLAY) {
       return;
     }
@@ -41,7 +37,7 @@ export function FloatingText({ delta }: { delta: Delta }) {
     ]);
 
     resetDeltaValue();
-  }, [deltaValue, resetDeltaValue, setFloatingTextQueue]);
+  }, [delta, deltaValue, resetDeltaValue, resetFloatingTextQueue, setFloatingTextQueue]);
 
   return (
     <div

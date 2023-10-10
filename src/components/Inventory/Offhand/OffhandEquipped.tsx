@@ -9,10 +9,12 @@ import { ReactComponent as IconMelee } from "@neverquest/icons/melee.svg";
 import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
 import { shield, weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
+import { isTraitAcquired } from "@neverquest/state/traits";
 import { isRanged } from "@neverquest/types/type-guards";
 
 export function OffhandEquipped() {
   const isShowingOffhand = useRecoilValue(isShowing("offhand"));
+  const isTraitAcquiredColossus = useRecoilValue(isTraitAcquired("colossus"));
   const shieldValue = useRecoilValue(shield);
   const weaponValue = useRecoilValue(weapon);
 
@@ -24,7 +26,7 @@ export function OffhandEquipped() {
     return <Ammunition />;
   }
 
-  if (weaponValue.grip === "two-handed") {
+  if (!isTraitAcquiredColossus && weaponValue.grip === "two-handed") {
     return (
       <span style={{ opacity: 0.5 }}>
         <IconDisplay contents={weaponValue.name} Icon={IconMelee} isAnimated />

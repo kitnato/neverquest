@@ -7,7 +7,7 @@ import type { Crew, CrewStatus } from "@neverquest/types/unions";
 
 // SELECTORS
 
-export const isCrewHired = withStateKey("isCrewHired", (key) =>
+export const isCaravanHired = withStateKey("isCaravanHired", (key) =>
   selector({
     get: ({ get }) => CREW_ORDER.every((current) => get(hireStatus(current)).status === "hired"),
     key,
@@ -16,6 +16,14 @@ export const isCrewHired = withStateKey("isCrewHired", (key) =>
 
 // ATOMS
 
+export const activeCrew = withStateKey("activeCrew", (key) =>
+  atom<Crew | null>({
+    default: null,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
 export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
   atom<BlacksmithInventory>({
     default: {
@@ -23,14 +31,6 @@ export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
       shield: null,
       weapon: null,
     },
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
-export const crewActive = withStateKey("crewActive", (key) =>
-  atom<Crew | null>({
-    default: null,
     effects: [handleLocalStorage({ key })],
     key,
   }),

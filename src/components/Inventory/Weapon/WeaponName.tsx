@@ -71,7 +71,8 @@ export function WeaponName({
                 <td>
                   <Stack direction="horizontal" gap={1}>
                     <IconImage Icon={IconWeaponDamage} size="small" />
-                    {damage}
+
+                    {formatValue({ value: damage })}
 
                     {showComparison && (
                       <GearComparison
@@ -153,7 +154,8 @@ export function WeaponName({
                   <td>
                     <Stack direction="horizontal" gap={1}>
                       <IconImage Icon={IconAmmunition} size="small" />
-                      {weapon.ammunitionCost}
+
+                      {formatValue({ value: weapon.ammunitionCost })}
                     </Stack>
                   </td>
                 </tr>

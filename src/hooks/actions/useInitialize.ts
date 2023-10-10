@@ -9,7 +9,7 @@ import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import { hireStatus } from "@neverquest/state/caravan";
 import { stage, wildernesses } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
-import { ATTRIBUTE_TYPES, CREW_TYPES } from "@neverquest/types/unions";
+import { ATTRIBUTE_TYPES, CREW_TYPES, type CrewStatus } from "@neverquest/types/unions";
 import { generateWilderness } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -26,11 +26,11 @@ export function useInitialize() {
             set(isAttributeUnlocked(current), { isUnlocked: ATTRIBUTES[current].isUnlocked }),
           );
 
-          CREW_TYPES.forEach((current) => {
-            if (CREW[current].requiredStage === 0) {
-              set(hireStatus(current), { status: "hired" });
-            }
-          });
+          CREW_TYPES.forEach((current) =>
+            set(hireStatus(current), {
+              status: CREW[current].requiredStage === 0 ? ("hired" as CrewStatus) : null,
+            }),
+          );
 
           set(wildernesses, [generateWilderness({ allowNSFW: get(allowNSFW), stage: get(stage) })]);
 

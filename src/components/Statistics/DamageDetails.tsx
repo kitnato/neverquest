@@ -5,7 +5,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconImage } from "@neverquest/components/IconImage";
 import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDetails";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
-import { SHIELD_NONE } from "@neverquest/data/inventory";
+import { SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import { ReactComponent as IconBrawler } from "@neverquest/icons/brawler.svg";
 import { ReactComponent as IconBruiser } from "@neverquest/icons/bruiser.svg";
 import { ReactComponent as IconStrength } from "@neverquest/icons/strength.svg";
@@ -24,7 +24,7 @@ export function DamageDetails() {
   const isTraitAcquiredBrawler = useRecoilValue(isTraitAcquired("brawler"));
   const isTraitAcquiredBruiser = useRecoilValue(isTraitAcquired("bruiser"));
   const isUnshielded = useRecoilValue(shield).name === SHIELD_NONE.name;
-  const { damage, gems } = useRecoilValue(weapon);
+  const { damage, gems, name } = useRecoilValue(weapon);
 
   return (
     <DetailsTable>
@@ -70,7 +70,7 @@ export function DamageDetails() {
         </td>
       </tr>
 
-      {isTraitAcquiredBruiser && (
+      {isTraitAcquiredBruiser && name === WEAPON_NONE.name && (
         <tr>
           <td className={CLASS_TABLE_CELL_ITALIC}>
             <Stack direction="horizontal" gap={1}>

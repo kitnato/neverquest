@@ -7,7 +7,7 @@ import {
 } from "recoil";
 
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
-import type { BootstrapTextVariant, DeltaDisplay } from "@neverquest/types/ui";
+import type { DeltaDisplay } from "@neverquest/types/ui";
 import type { NumberFormat } from "@neverquest/types/unions";
 import { formatValue } from "@neverquest/utilities/formatters";
 
@@ -28,8 +28,6 @@ export function useDeltaText({
   const previousValue = usePreviousValue(currentValue);
 
   const isTime = format === "time";
-  const negativeColor: BootstrapTextVariant = isTime ? "text-success" : "text-danger";
-  const positiveColor: BootstrapTextVariant = isTime ? "text-danger" : "text-success";
 
   useEffect(() => {
     if (stop({ current: currentValue, previous: previousValue })) {
@@ -45,11 +43,17 @@ export function useDeltaText({
     const isPositive = difference > 0;
 
     setDelta({
-      color: isPositive ? positiveColor : negativeColor,
-      value: `${isPositive ? "+" : isTime ? "-" : ""}${formatValue({
+      color: isPositive
+        ? isTime
+          ? "text-danger"
+          : "text-success"
+        : isTime
+        ? "text-success"
+        : "text-danger",
+      value: `${isPositive ? "+" : ""}${formatValue({
         format,
-        value: isTime ? Math.abs(difference) : difference,
+        value: difference,
       })}`,
     });
-  }, [currentValue, format, isTime, negativeColor, positiveColor, previousValue, setDelta, stop]);
+  }, [currentValue, format, isTime, previousValue, setDelta, stop]);
 }

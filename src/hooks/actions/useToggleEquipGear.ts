@@ -4,6 +4,7 @@ import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isSkillAcquired } from "@neverquest/state/skills";
+import { isTraitAcquired } from "@neverquest/state/traits";
 import type { GearItem } from "@neverquest/types";
 import {
   isArmor,
@@ -29,6 +30,10 @@ export function useToggleEquipGear() {
         set(isShowing("statistics"), true);
 
         if (isArmor(gearItem) && !isEquipped) {
+          if (gearItem.gearClass === "heavy" && !get(isSkillAcquired("armorcraft"))) {
+            return;
+          }
+
           set(isShowing("armor"), true);
           set(isShowing("protection"), true);
 
@@ -42,12 +47,28 @@ export function useToggleEquipGear() {
         }
 
         if (isShield(gearItem) && !isEquipped) {
+          if (gearItem.gearClass === "tower" && !get(isSkillAcquired("shieldcraft"))) {
+            return;
+          }
+
           set(isShowing("block"), true);
           set(isShowing("offhand"), true);
           set(isShowing("stamina"), true);
         }
 
         if (isWeapon(gearItem) && !isEquipped) {
+          if (
+            isMelee(gearItem) &&
+            gearItem.grip === "two-handed" &&
+            !get(isSkillAcquired("siegecraft"))
+          ) {
+            return;
+          }
+
+          if (isRanged(gearItem) && !get(isSkillAcquired("archery"))) {
+            return;
+          }
+
           if (staminaCost > 0) {
             set(isShowing("stamina"), true);
             set(isAttributeUnlocked("endurance"), { isUnlocked: true });
@@ -79,7 +100,9 @@ export function useToggleEquipGear() {
                 // Equipping a shield while a ranged or two-handed weapon is equipped.
                 (isShield(gearItem) &&
                   !isEquipped &&
-                  ((isMelee(currentItem) && currentItem.grip === "two-handed") ||
+                  ((isMelee(currentItem) &&
+                    currentItem.grip === "two-handed" &&
+                    !get(isTraitAcquired("colossus"))) ||
                     isRanged(currentItem)) &&
                   currentItem.isEquipped) ||
                 // Equipping in an already-occupied slot.

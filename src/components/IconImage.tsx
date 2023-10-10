@@ -7,30 +7,23 @@ export function IconImage({
   isFlipped = false,
   isMirrored = false,
   isStencilled = false,
-  onClick,
   overlayPlacement,
   size,
   tooltip,
 }: IconImageProps) {
-  const IconStyled = () => (
-    <Icon
-      className={`icon-image${` ${size}` ?? ""}${isStencilled ? " stencilled" : ""}`}
-      onClick={onClick}
-      style={{
-        cursor: onClick !== undefined ? "pointer" : "inherit",
-        transform: `scaleX(${isMirrored ? -1 : 1}) scaleY(${isFlipped ? -1 : 1})`,
-      }}
-    />
-  );
-
-  if (tooltip === undefined) {
-    return <IconStyled />;
-  }
-
   return (
-    <OverlayTrigger overlay={<Tooltip>{tooltip}</Tooltip>} placement={overlayPlacement}>
+    <OverlayTrigger
+      overlay={<Tooltip>{tooltip}</Tooltip>}
+      placement={overlayPlacement}
+      trigger={tooltip === undefined ? [] : ["focus", "hover"]}
+    >
       <span>
-        <IconStyled />
+        <Icon
+          className={`icon-image${size ? ` ${size}` : ""}${isStencilled ? " stencilled" : ""}`}
+          style={{
+            transform: `scaleX(${isMirrored ? -1 : 1}) scaleY(${isFlipped ? -1 : 1})`,
+          }}
+        />
       </span>
     </OverlayTrigger>
   );

@@ -10,6 +10,7 @@ import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { damageTotal } from "@neverquest/state/statistics";
+import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Damage() {
   const damageTotalValue = useRecoilValue(damageTotal);
@@ -36,7 +37,7 @@ export function Damage() {
             }
             trigger={isShowingDamageDetails ? ["hover", "focus"] : []}
           >
-            <span>{damageTotalValue}</span>
+            <span>{formatValue({ value: damageTotalValue })}</span>
           </OverlayTrigger>
 
           <FloatingText delta="damage" />

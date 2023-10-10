@@ -1,6 +1,6 @@
 import { selector } from "recoil";
 
-import { SHIELD_NONE } from "@neverquest/data/inventory";
+import { SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import {
   AILMENT_PENALTY,
   BLEED,
@@ -130,15 +130,20 @@ export const damage = withStateKey("damage", (key) =>
 
 export const damageTotal = withStateKey("damageTotal", (key) =>
   selector({
-    get: ({ get }) =>
-      (get(damage) +
-        get(weapon).damage +
-        Object.values(get(totalElementalEffects).weapon).reduce(
-          (aggregator, { damage }) => aggregator + damage,
-          0,
-        ) +
-        (get(isTraitAcquired("bruiser")) ? get(stamina) : 0)) *
-      (get(isTraitAcquired("brawler")) && get(shield).name === SHIELD_NONE.name ? 2 : 1),
+    get: ({ get }) => {
+      const { damage: weaponDamage, name } = get(weapon);
+
+      return (
+        (get(damage) +
+          weaponDamage +
+          Object.values(get(totalElementalEffects).weapon).reduce(
+            (aggregator, { damage }) => aggregator + damage,
+            0,
+          ) +
+          (get(isTraitAcquired("bruiser")) && name === WEAPON_NONE.name ? get(stamina) : 0)) *
+        (get(isTraitAcquired("brawler")) && get(shield).name === SHIELD_NONE.name ? 2 : 1)
+      );
+    },
     key,
   }),
 );

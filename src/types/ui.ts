@@ -12,12 +12,10 @@ export type AnimationSpeed = "fast" | "faster" | "slow" | "slower";
 
 export type BootstrapColorVariant = "dark" | "outline-dark" | "secondary";
 
-export type BootstrapTextVariant = "text-danger" | "text-muted" | "text-success";
-
 export type DeltaDisplay = DeltaDisplayContents | DeltaDisplayContents[];
 
 type DeltaDisplayContents = {
-  color: BootstrapTextVariant | null;
+  color: "text-danger" | "text-muted" | "text-success" | null;
   value: number | string;
 };
 

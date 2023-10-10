@@ -20,6 +20,7 @@ export function Execution() {
 
   useDeltaText({
     delta: deltas("execution"),
+    format: "percentage",
     value: execution,
   });
 

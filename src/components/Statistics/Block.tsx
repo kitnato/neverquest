@@ -9,12 +9,14 @@ import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { block } from "@neverquest/state/statistics";
+import { isTraitAcquired } from "@neverquest/state/traits";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Block() {
   const blockValue = useRecoilValue(block);
   const isShowingBlock = useRecoilValue(isShowing("block"));
+  const isTraitAcquiredColossus = useRecoilValue(isTraitAcquired("colossus"));
   const weaponValue = useRecoilValue(weapon);
 
   useDeltaText({
@@ -26,7 +28,7 @@ export function Block() {
   if (
     !isShowingBlock ||
     isRanged(weaponValue) ||
-    (isMelee(weaponValue) && weaponValue.grip === "two-handed")
+    (isMelee(weaponValue) && !isTraitAcquiredColossus && weaponValue.grip === "two-handed")
   ) {
     return null;
   }

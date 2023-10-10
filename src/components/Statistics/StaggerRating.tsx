@@ -15,10 +15,12 @@ import { shield, weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { staggerRating } from "@neverquest/state/statistics";
+import { isTraitAcquired } from "@neverquest/state/traits";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function StaggerRating() {
+  const isTraitAcquiredColossus = useRecoilValue(isTraitAcquired("colossus"));
   const stabilityValue = useRecoilValue(masteryStatistic("stability"));
   const { stagger } = useRecoilValue(shield);
   const shieldcraftValue = useRecoilValue(isSkillAcquired("shieldcraft"));
@@ -33,7 +35,7 @@ export function StaggerRating() {
 
   if (
     isRanged(weaponValue) ||
-    (isMelee(weaponValue) && weaponValue.grip === "two-handed") ||
+    (isMelee(weaponValue) && !isTraitAcquiredColossus && weaponValue.grip === "two-handed") ||
     !shieldcraftValue ||
     staggerRatingValue === 0
   ) {

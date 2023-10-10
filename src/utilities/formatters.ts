@@ -1,5 +1,4 @@
 import {
-  LABEL_EMPTY,
   MILLISECONDS_IN_HOUR,
   MILLISECONDS_IN_MINUTE,
   MILLISECONDS_IN_SECOND,
@@ -57,22 +56,18 @@ export function formatValue({
     }
 
     case "time": {
-      if (value < 0 || Number.isNaN(value)) {
-        return LABEL_EMPTY;
-      }
+      const absoluteValue = Math.abs(value);
+      const hours = Math.floor(absoluteValue / MILLISECONDS_IN_HOUR);
+      const minutes = Math.floor((absoluteValue % MILLISECONDS_IN_HOUR) / MILLISECONDS_IN_MINUTE);
+      const seconds = Math.floor((absoluteValue % MILLISECONDS_IN_MINUTE) / MILLISECONDS_IN_SECOND);
 
-      const hours = Math.floor(value / MILLISECONDS_IN_HOUR);
-      const minutes = Math.floor((value % MILLISECONDS_IN_HOUR) / MILLISECONDS_IN_MINUTE);
-      const seconds = Math.floor((value % MILLISECONDS_IN_MINUTE) / MILLISECONDS_IN_SECOND);
-
-      return (
-        (hours > 0 ? `${hours}h` : "") +
-        (hours > 0 || minutes > 0 ? `${minutes}m` : "") +
-        (minutes > 0 || seconds >= 10 ? `${seconds}s` : "") +
-        (hours === 0 && minutes === 0 && seconds < 10
-          ? `${formatFloat({ decimals, value: value / MILLISECONDS_IN_SECOND })}s`
-          : "")
-      );
+      return `${value < 0 ? "-" : ""}${hours > 0 ? `${hours}h` : ""}${
+        hours > 0 || minutes > 0 ? `${minutes}m` : ""
+      }${minutes > 0 || seconds >= 10 ? `${seconds}s` : ""}${
+        hours === 0 && minutes === 0 && seconds < 10
+          ? `${formatFloat({ decimals, value: absoluteValue / MILLISECONDS_IN_SECOND })}s`
+          : ""
+      }`;
     }
   }
 }

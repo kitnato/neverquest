@@ -4,13 +4,12 @@ import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { BLIGHT } from "@neverquest/data/monster";
 import { HEALTH_LOW_THRESHOLD, RESERVES } from "@neverquest/data/reserves";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
-import { attributeRank } from "@neverquest/state/attributes";
-import { monsterPoisonLength, monsterPoisonMagnitude } from "@neverquest/state/monster";
 import {
   attributePowerBonus,
-  reserveRegenerationAmount,
-  reserveRegenerationRate,
-} from "@neverquest/state/statistics";
+  attributeRank,
+  attributeStatistic,
+} from "@neverquest/state/attributes";
+import { monsterPoisonLength, monsterPoisonMagnitude } from "@neverquest/state/monster";
 import type { BlightMagnitude } from "@neverquest/types";
 import type { Reserve } from "@neverquest/types/unions";
 import { getComputedStatistic } from "@neverquest/utilities/getters";
@@ -138,6 +137,23 @@ export const regenerationRate = withStateKey("regenerationRate", (key) =>
           baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRate),
         );
       },
+    key,
+  }),
+);
+
+export const reserveRegenerationAmount = withStateKey("reserveRegenerationAmount", (key) =>
+  selector({
+    get: ({ get }) =>
+      Math.round(
+        get(attributeStatistic("fortitude")) * (1 + get(attributePowerBonus("fortitude"))),
+      ),
+    key,
+  }),
+);
+
+export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (key) =>
+  selector({
+    get: ({ get }) => get(attributeStatistic("vigor")) * (1 + get(attributePowerBonus("vigor"))),
     key,
   }),
 );

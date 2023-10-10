@@ -2,8 +2,8 @@ import { useRecoilCallback } from "recoil";
 
 import { GEM_FITTING_COST } from "@neverquest/data/inventory";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
+import { armor, canApplyGem, shield, weapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
-import { armor, canApplyGem, shield, weapon } from "@neverquest/state/items";
 import type { GemItem } from "@neverquest/types";
 import { isGear } from "@neverquest/types/type-guards";
 import type { Gear } from "@neverquest/types/unions";

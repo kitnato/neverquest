@@ -13,10 +13,9 @@ import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
 import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconVitality } from "@neverquest/icons/vitality.svg";
-import { attributeStatistic } from "@neverquest/state/attributes";
+import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isPoisoned, poisonDuration } from "@neverquest/state/reserves";
-import { attributePowerBonus } from "@neverquest/state/statistics";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Health() {

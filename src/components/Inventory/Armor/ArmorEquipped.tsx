@@ -5,8 +5,8 @@ import { ArmorName } from "@neverquest/components/Inventory/Armor/ArmorName";
 import { ARMOR_NONE } from "@neverquest/data/inventory";
 import { ReactComponent as IconArmorNone } from "@neverquest/icons/armor-none.svg";
 import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
+import { armor } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
-import { armor } from "@neverquest/state/items";
 
 export function ArmorEquipped() {
   const armorValue = useRecoilValue(armor);

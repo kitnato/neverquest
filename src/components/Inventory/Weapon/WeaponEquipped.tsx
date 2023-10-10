@@ -6,8 +6,8 @@ import { WEAPON_NONE } from "@neverquest/data/inventory";
 import { ReactComponent as IconUnequipped } from "@neverquest/icons/fist.svg";
 import { ReactComponent as IconMelee } from "@neverquest/icons/melee.svg";
 import { ReactComponent as IconRanged } from "@neverquest/icons/ranged.svg";
+import { weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
-import { weapon } from "@neverquest/state/items";
 import { isMelee } from "@neverquest/types/type-guards";
 
 export function WeaponEquipped() {

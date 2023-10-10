@@ -12,7 +12,7 @@ import { ReactComponent as IconBleedRating } from "@neverquest/icons/bleed-ratin
 import { ReactComponent as IconBleed } from "@neverquest/icons/bleed.svg";
 import { ReactComponent as IconCruelty } from "@neverquest/icons/cruelty.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { weapon } from "@neverquest/state/items";
+import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { bleed, bleedDamage, bleedRating, damageTotal } from "@neverquest/state/statistics";

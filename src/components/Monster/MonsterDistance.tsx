@@ -6,7 +6,7 @@ import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { ReactComponent as IconDistance } from "@neverquest/icons/distance.svg";
 import { isAttacking } from "@neverquest/state/character";
-import { weapon } from "@neverquest/state/items";
+import { weapon } from "@neverquest/state/gear";
 import {
   hasMonsterClosed,
   isMonsterAiling,

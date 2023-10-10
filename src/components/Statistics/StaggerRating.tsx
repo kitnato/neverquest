@@ -11,7 +11,7 @@ import { ReactComponent as IconStability } from "@neverquest/icons/stability.svg
 import { ReactComponent as IconStaggerRating } from "@neverquest/icons/stagger-rating.svg";
 import { ReactComponent as IconStagger } from "@neverquest/icons/stagger.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { shield, weapon } from "@neverquest/state/items";
+import { shield, weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { staggerRating } from "@neverquest/state/statistics";

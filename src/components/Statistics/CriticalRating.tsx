@@ -14,11 +14,11 @@ import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
 import { ReactComponent as IconDexterity } from "@neverquest/icons/dexterity.svg";
 import { ReactComponent as IconPerception } from "@neverquest/icons/perception.svg";
 import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
-import { attributeStatistic } from "@neverquest/state/attributes";
+import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import { attributePowerBonus, criticalRating, criticalStrike } from "@neverquest/state/statistics";
+import { criticalRating, criticalStrike } from "@neverquest/state/statistics";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function CriticalRating() {

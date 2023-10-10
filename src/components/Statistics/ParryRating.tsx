@@ -12,7 +12,7 @@ import { ReactComponent as IconFinesse } from "@neverquest/icons/finesse.svg";
 import { ReactComponent as IconParryRating } from "@neverquest/icons/parry-rating.svg";
 import { ReactComponent as IconParry } from "@neverquest/icons/parry.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { weapon } from "@neverquest/state/items";
+import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { parry, parryAbsorption, parryDamage, parryRating } from "@neverquest/state/statistics";

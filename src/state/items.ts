@@ -1,28 +1,14 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { INFUSION_DELTA, INFUSION_DURATION } from "@neverquest/data/general";
-import {
-  ARMOR_NONE,
-  GEMS_MAXIMUM,
-  GEM_FITTING_COST,
-  INFUSABLES,
-  SHIELD_NONE,
-  WEAPON_NONE,
-} from "@neverquest/data/inventory";
+import { INFUSABLES, INFUSABLE_LEVEL_MAXIMUM } from "@neverquest/data/inventory";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { inventory } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
-import type { AmmunitionPouchItem, Armor, InventoryItem, Shield, Weapon } from "@neverquest/types";
-import {
-  isArmor,
-  isConsumable,
-  isInfusable,
-  isShield,
-  isTrinket,
-  isWeapon,
-} from "@neverquest/types/type-guards";
-import type { Consumable, Gear, Infusable, Trinket } from "@neverquest/types/unions";
-import { getGrowthTriangular } from "@neverquest/utilities/getters";
+import type { AmmunitionPouchItem, InventoryItem } from "@neverquest/types";
+import { isConsumable, isInfusable, isTrinket } from "@neverquest/types/type-guards";
+import type { Consumable, Infusable, Trinket } from "@neverquest/types/unions";
+import { getFromRange, getGrowthTriangular } from "@neverquest/utilities/getters";
 
 // SELECTORS
 
@@ -52,41 +38,23 @@ export const ammunitionMaximum = withStateKey("ammunitionMaximum", (key) =>
   }),
 );
 
-export const armor = withStateKey("armor", (key) =>
+export const essenceBonus = withStateKey("essenceBonus", (key) =>
   selector({
     get: ({ get }) => {
-      const equippedArmor = get(inventory).find((item) => {
-        if (isArmor(item)) {
-          return item.isEquipped;
-        }
+      const ownedMonkeyPaw = get(ownedItem("monkey paw"));
 
-        return;
-      });
-
-      if (equippedArmor === undefined) {
-        return ARMOR_NONE;
+      if (ownedMonkeyPaw === null || !isInfusable(ownedMonkeyPaw)) {
+        return 0;
       }
 
-      return equippedArmor as Armor;
+      const { maximum, minimum } = INFUSABLES["monkey paw"].item;
+
+      return getFromRange({
+        factor: ownedMonkeyPaw.level / INFUSABLE_LEVEL_MAXIMUM,
+        maximum,
+        minimum,
+      });
     },
-    key,
-  }),
-);
-
-export const canApplyGem = withStateKey("canApplyGem", (key) =>
-  selectorFamily<boolean, Gear>({
-    get:
-      (parameter) =>
-      ({ get }) => {
-        const { length } =
-          parameter === "armor"
-            ? get(armor).gems
-            : parameter === "shield"
-            ? get(shield).gems
-            : get(weapon).gems;
-
-        return length < GEMS_MAXIMUM && (GEM_FITTING_COST[length] ?? Infinity) <= get(essence);
-      },
     key,
   }),
 );
@@ -152,43 +120,22 @@ export const infusionMaximum = withStateKey("infusionMaximum", (key) =>
   }),
 );
 
-export const shield = withStateKey("shield", (key) =>
+export const powerBonusBoost = withStateKey("powerBonusBoost", (key) =>
   selector({
     get: ({ get }) => {
-      const equippedShield = get(inventory).find((item) => {
-        if (isShield(item)) {
-          return item.isEquipped;
-        }
+      const ownedTomeOfPower = get(ownedItem("tome of power"));
 
-        return;
-      });
-
-      if (equippedShield === undefined) {
-        return SHIELD_NONE;
+      if (ownedTomeOfPower === null || !isInfusable(ownedTomeOfPower)) {
+        return 0;
       }
 
-      return equippedShield as Shield;
-    },
-    key,
-  }),
-);
+      const { maximum, minimum } = INFUSABLES["tome of power"].item;
 
-export const weapon = withStateKey("weapon", (key) =>
-  selector<Weapon | typeof WEAPON_NONE>({
-    get: ({ get }) => {
-      const equippedWeapon = get(inventory).find((item) => {
-        if (isWeapon(item)) {
-          return item.isEquipped;
-        }
-
-        return;
+      return getFromRange({
+        factor: ownedTomeOfPower.level / INFUSABLE_LEVEL_MAXIMUM,
+        maximum,
+        minimum,
       });
-
-      if (equippedWeapon === undefined) {
-        return WEAPON_NONE;
-      }
-
-      return equippedWeapon as Weapon;
     },
     key,
   }),

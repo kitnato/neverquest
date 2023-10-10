@@ -7,19 +7,22 @@ import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDet
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { SHIELD_NONE } from "@neverquest/data/inventory";
 import { ReactComponent as IconBrawler } from "@neverquest/icons/brawler.svg";
+import { ReactComponent as IconBruiser } from "@neverquest/icons/bruiser.svg";
 import { ReactComponent as IconStrength } from "@neverquest/icons/strength.svg";
 import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
-import { attributeStatistic } from "@neverquest/state/attributes";
-import { shield, weapon } from "@neverquest/state/items";
-import { attributePowerBonus } from "@neverquest/state/statistics";
+import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
+import { shield, weapon } from "@neverquest/state/gear";
+import { stamina } from "@neverquest/state/reserves";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function DamageDetails() {
+  const staminaValue = useRecoilValue(stamina);
   const strengthPowerBonus = useRecoilValue(attributePowerBonus("strength"));
   const strength = useRecoilValue(attributeStatistic("strength"));
   const isTraitAcquiredBrawler = useRecoilValue(isTraitAcquired("brawler"));
+  const isTraitAcquiredBruiser = useRecoilValue(isTraitAcquired("bruiser"));
   const isUnshielded = useRecoilValue(shield).name === SHIELD_NONE.name;
   const { damage, gems } = useRecoilValue(weapon);
 
@@ -66,6 +69,19 @@ export function DamageDetails() {
           </Stack>
         </td>
       </tr>
+
+      {isTraitAcquiredBruiser && (
+        <tr>
+          <td className={CLASS_TABLE_CELL_ITALIC}>
+            <Stack direction="horizontal" gap={1}>
+              <IconImage Icon={IconBruiser} size="small" />
+              Bruiser:
+            </Stack>
+          </td>
+
+          <td>{`+${staminaValue}`}</td>
+        </tr>
+      )}
 
       {isTraitAcquiredBrawler && isUnshielded && (
         <tr>

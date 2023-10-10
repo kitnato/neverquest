@@ -15,14 +15,9 @@ import {
 import { AILMENT_PENALTY, BLEED_DELTA } from "@neverquest/data/statistics";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
-import { shield, weapon } from "@neverquest/state/items";
+import { range, shield, totalElementalEffects, weapon } from "@neverquest/state/gear";
+import { essenceBonus } from "@neverquest/state/items";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import {
-  bleedDamage,
-  essenceBonus,
-  range,
-  totalElementalEffects,
-} from "@neverquest/state/statistics";
 import {
   ELEMENTAL_TYPES,
   MONSTER_AILMENT_TYPES,
@@ -37,14 +32,6 @@ import {
 } from "@neverquest/utilities/getters";
 
 // SELECTORS
-
-export const bleedDamageTotal = withStateKey("bleedDamageTotal", (key) =>
-  selector({
-    get: ({ get }) =>
-      get(bleedDamage) * (get(isMonsterAiling("burning")) ? AILMENT_PENALTY.burning : 1),
-    key,
-  }),
-);
 
 export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
   selectorFamily<boolean, MonsterAilment>({

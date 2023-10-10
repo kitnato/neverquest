@@ -6,7 +6,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconPowerBonusBoost } from "@neverquest/icons/power-bonus-boost.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { powerBonusBoost } from "@neverquest/state/statistics";
+import { powerBonusBoost } from "@neverquest/state/items";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function PowerBonusBoost() {

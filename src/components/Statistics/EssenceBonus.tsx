@@ -6,7 +6,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconEssenceBonus } from "@neverquest/icons/essence-bonus.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { essenceBonus } from "@neverquest/state/statistics";
+import { essenceBonus } from "@neverquest/state/items";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function EssenceBonus() {

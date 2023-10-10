@@ -1,30 +1,28 @@
-import { selector, selectorFamily } from "recoil";
+import { selector } from "recoil";
 
-import { isTraitAcquired } from "./traits";
-import { ATTRIBUTES } from "@neverquest/data/attributes";
+import { SHIELD_NONE } from "@neverquest/data/inventory";
 import {
-  GEM_DAMAGE,
-  GEM_DURATION,
-  GEM_ELEMENTALS,
-  GEM_ENHANCEMENT,
-  INFUSABLES,
-  INFUSABLE_LEVEL_MAXIMUM,
-  SHIELD_NONE,
-} from "@neverquest/data/inventory";
-import { BLEED, PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/statistics";
+  AILMENT_PENALTY,
+  BLEED,
+  PARRY_ABSORPTION,
+  PARRY_DAMAGE,
+  RECOVERY_RATE,
+} from "@neverquest/data/statistics";
 import { withStateKey } from "@neverquest/state";
-import { attributeStatistic, level } from "@neverquest/state/attributes";
-import { armor, ownedItem, shield, weapon } from "@neverquest/state/items";
-import { masteryStatistic } from "@neverquest/state/masteries";
-import { isInfusable, isMelee, isRanged } from "@neverquest/types/type-guards";
-import type { Attribute } from "@neverquest/types/unions";
+import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import {
-  getDamagePerRate,
-  getDamagePerTick,
-  getElementalEffects,
-  getFromRange,
-} from "@neverquest/utilities/getters";
-import { stackItems } from "@neverquest/utilities/helpers";
+  armor,
+  elementalEffects,
+  shield,
+  totalElementalEffects,
+  weapon,
+} from "@neverquest/state/gear";
+import { masteryStatistic } from "@neverquest/state/masteries";
+import { isMonsterAiling } from "@neverquest/state/monster";
+import { stamina } from "@neverquest/state/reserves";
+import { isTraitAcquired } from "@neverquest/state/traits";
+import { isMelee } from "@neverquest/types/type-guards";
+import { getDamagePerRate, getDamagePerTick } from "@neverquest/utilities/getters";
 
 // SELECTORS
 
@@ -38,23 +36,6 @@ export const attackRate = withStateKey("attackRate", (key) =>
 export const attackRateTotal = withStateKey("attackRateTotal", (key) =>
   selector({
     get: ({ get }) => get(weapon).rate * (1 - get(attackRate)),
-    key,
-  }),
-);
-
-export const attributePowerBonus = withStateKey("attributePowerBonus", (key) =>
-  selectorFamily<number, Attribute>({
-    get:
-      (parameter) =>
-      ({ get }) => {
-        const powerBonusBoostValue = get(powerBonusBoost);
-
-        return (
-          get(level) *
-          ATTRIBUTES[parameter].powerBonus *
-          (powerBonusBoostValue === 0 ? 0 : 1 + powerBonusBoostValue)
-        );
-      },
     key,
   }),
 );
@@ -83,6 +64,14 @@ export const bleedDamage = withStateKey("bleedDamage", (key) =>
         }),
       );
     },
+    key,
+  }),
+);
+
+export const bleedDamageTotal = withStateKey("bleedDamageTotal", (key) =>
+  selector({
+    get: ({ get }) =>
+      get(bleedDamage) * (get(isMonsterAiling("burning")) ? AILMENT_PENALTY.burning : 1),
     key,
   }),
 );
@@ -147,7 +136,8 @@ export const damageTotal = withStateKey("damageTotal", (key) =>
         Object.values(get(totalElementalEffects).weapon).reduce(
           (aggregator, { damage }) => aggregator + damage,
           0,
-        )) *
+        ) +
+        (get(isTraitAcquired("bruiser")) ? get(stamina) : 0)) *
       (get(isTraitAcquired("brawler")) && get(shield).name === SHIELD_NONE.name ? 2 : 1),
     key,
   }),
@@ -183,27 +173,6 @@ export const dodge = withStateKey("dodge", (key) =>
   }),
 );
 
-export const essenceBonus = withStateKey("essenceBonus", (key) =>
-  selector({
-    get: ({ get }) => {
-      const ownedMonkeyPaw = get(ownedItem("monkey paw"));
-
-      if (ownedMonkeyPaw === null || !isInfusable(ownedMonkeyPaw)) {
-        return 0;
-      }
-
-      const { maximum, minimum } = INFUSABLES["monkey paw"].item;
-
-      return getFromRange({
-        factor: ownedMonkeyPaw.level / INFUSABLE_LEVEL_MAXIMUM,
-        maximum,
-        minimum,
-      });
-    },
-    key,
-  }),
-);
-
 export const execution = withStateKey("execution", (key) =>
   selector({
     get: ({ get }) => {
@@ -212,58 +181,6 @@ export const execution = withStateKey("execution", (key) =>
       return isMelee(weaponValue) && weaponValue.grip === "two-handed"
         ? get(masteryStatistic("butchery"))
         : 0;
-    },
-    key,
-  }),
-);
-
-export const elementalEffects = withStateKey("elementalEffects", (key) =>
-  selector({
-    get: ({ get }) => {
-      const effects = {
-        armor: {
-          fire: { damage: 0, duration: 0 },
-          ice: { damage: 0, duration: 0 },
-          lightning: { damage: 0, duration: 0 },
-        },
-        shield: {
-          fire: 0,
-          ice: 0,
-          lightning: 0,
-        },
-        weapon: {
-          fire: { damage: 0, duration: 0 },
-          ice: { damage: 0, duration: 0 },
-          lightning: { damage: 0, duration: 0 },
-        },
-      };
-
-      const armorValue = get(armor);
-
-      stackItems(armorValue.gems).forEach(
-        ({ item, stack }) =>
-          (effects.armor[GEM_ELEMENTALS[item.name]] = {
-            damage: Math.ceil(armorValue.protection * (GEM_DAMAGE[stack - 1] ?? 0)),
-            duration: GEM_DURATION[stack - 1] ?? 0,
-          }),
-      );
-
-      stackItems(get(shield).gems).forEach(
-        ({ item, stack }) =>
-          (effects.shield[GEM_ELEMENTALS[item.name]] = GEM_ENHANCEMENT[stack - 1] ?? 0),
-      );
-
-      const weaponValue = get(weapon);
-
-      stackItems(weaponValue.gems).forEach(
-        ({ item, stack }) =>
-          (effects.weapon[GEM_ELEMENTALS[item.name]] = {
-            damage: Math.ceil(weaponValue.damage * (GEM_DAMAGE[stack - 1] ?? 0)),
-            duration: GEM_DURATION[stack - 1] ?? 0,
-          }),
-      );
-
-      return effects;
     },
     key,
   }),
@@ -301,27 +218,6 @@ export const parryRating = withStateKey("parryRating", (key) =>
   }),
 );
 
-export const powerBonusBoost = withStateKey("powerBonusBoost", (key) =>
-  selector({
-    get: ({ get }) => {
-      const ownedTomeOfPower = get(ownedItem("tome of power"));
-
-      if (ownedTomeOfPower === null || !isInfusable(ownedTomeOfPower)) {
-        return 0;
-      }
-
-      const { maximum, minimum } = INFUSABLES["tome of power"].item;
-
-      return getFromRange({
-        factor: ownedTomeOfPower.level / INFUSABLE_LEVEL_MAXIMUM,
-        maximum,
-        minimum,
-      });
-    },
-    key,
-  }),
-);
-
 export const protection = withStateKey("protection", (key) =>
   selector({
     get: ({ get }) => get(armor).protection,
@@ -329,39 +225,9 @@ export const protection = withStateKey("protection", (key) =>
   }),
 );
 
-export const range = withStateKey("range", (key) =>
-  selector({
-    get: ({ get }) => {
-      const weaponValue = get(weapon);
-
-      return isRanged(weaponValue)
-        ? weaponValue.range * (1 + get(masteryStatistic("marksmanship")))
-        : 0;
-    },
-    key,
-  }),
-);
-
 export const recoveryRate = withStateKey("recoveryRate", (key) =>
   selector({
     get: ({ get }) => RECOVERY_RATE - RECOVERY_RATE * get(masteryStatistic("resilience")),
-    key,
-  }),
-);
-
-export const reserveRegenerationAmount = withStateKey("reserveRegenerationAmount", (key) =>
-  selector({
-    get: ({ get }) =>
-      Math.round(
-        get(attributeStatistic("fortitude")) * (1 + get(attributePowerBonus("fortitude"))),
-      ),
-    key,
-  }),
-);
-
-export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (key) =>
-  selector({
-    get: ({ get }) => get(attributeStatistic("vigor")) * (1 + get(attributePowerBonus("vigor"))),
     key,
   }),
 );
@@ -393,28 +259,6 @@ export const thorns = withStateKey("thorns", (key) =>
         (aggregator, { damage }) => aggregator + damage,
         0,
       ),
-    key,
-  }),
-);
-
-export const totalElementalEffects = withStateKey("totalElementalEffects", (key) =>
-  selector({
-    get: ({ get }) => {
-      const { armor, shield, weapon } = get(elementalEffects);
-
-      return {
-        armor: {
-          fire: getElementalEffects({ base: armor.fire, modifier: shield.fire }),
-          ice: getElementalEffects({ base: armor.ice, modifier: shield.ice }),
-          lightning: getElementalEffects({ base: armor.lightning, modifier: shield.lightning }),
-        },
-        weapon: {
-          fire: getElementalEffects({ base: weapon.fire, modifier: shield.fire }),
-          ice: getElementalEffects({ base: weapon.ice, modifier: shield.ice }),
-          lightning: getElementalEffects({ base: weapon.lightning, modifier: shield.lightning }),
-        },
-      };
-    },
     key,
   }),
 );

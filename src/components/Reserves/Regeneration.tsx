@@ -17,7 +17,7 @@ import { ReactComponent as IconRegenerationAmount } from "@neverquest/icons/rege
 import { ReactComponent as IconRegenerationRate } from "@neverquest/icons/regeneration-rate.svg";
 import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconVigor } from "@neverquest/icons/vigor.svg";
-import { attributeStatistic } from "@neverquest/state/attributes";
+import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { isRecovering } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import {
@@ -28,7 +28,6 @@ import {
   regenerationRate,
 } from "@neverquest/state/reserves";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import { attributePowerBonus } from "@neverquest/state/statistics";
 import type { Reserve } from "@neverquest/types/unions";
 import { formatValue } from "@neverquest/utilities/formatters";
 

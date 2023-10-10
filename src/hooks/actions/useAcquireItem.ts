@@ -3,6 +3,7 @@ import { useRecoilCallback } from "recoil";
 import { ARMOR_NONE, KNAPSACK_SIZE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
+import { armor, shield, weapon } from "@neverquest/state/gear";
 import {
   canFit,
   encumbranceMaximum,
@@ -12,7 +13,6 @@ import {
   notifyOverEncumbrance,
 } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { armor, shield, weapon } from "@neverquest/state/items";
 import { autoEquip } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { InventoryItem } from "@neverquest/types";

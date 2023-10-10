@@ -15,8 +15,8 @@ import {
   statusElement,
 } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
+import { armor, shield, weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
-import { armor, shield, weapon } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
   isMonsterAiling,

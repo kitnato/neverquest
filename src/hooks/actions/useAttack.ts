@@ -12,9 +12,10 @@ import {
   isAttacking,
 } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
+import { weapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { ownedItem, weapon } from "@neverquest/state/items";
+import { ownedItem } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
   isMonsterAiling,

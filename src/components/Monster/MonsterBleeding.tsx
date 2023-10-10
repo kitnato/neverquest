@@ -7,13 +7,13 @@ import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonst
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { ReactComponent as IconBleeding } from "@neverquest/icons/bleeding.svg";
 import {
-  bleedDamageTotal,
   canReceiveAilment,
   isMonsterAiling,
   isMonsterDead,
   monsterAilmentDuration,
   monsterBleedingDelta,
 } from "@neverquest/state/monster";
+import { bleedDamageTotal } from "@neverquest/state/statistics";
 
 export function MonsterBleeding() {
   const bleedDamageTotalValue = useRecoilValue(bleedDamageTotal);

@@ -2,6 +2,7 @@ import { atomFamily, selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES, ATTRIBUTES_ORDER } from "@neverquest/data/attributes";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
+import { powerBonusBoost } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import type { Attribute } from "@neverquest/types/unions";
 import { getAttributePointCost, getComputedStatistic } from "@neverquest/utilities/getters";
@@ -42,6 +43,23 @@ export const attributePoints = withStateKey("attributePoints", (key) =>
 export const areAttributesAffordable = withStateKey("areAttributesAffordable", (key) =>
   selector({
     get: ({ get }) => get(attributePoints) > 0,
+    key,
+  }),
+);
+
+export const attributePowerBonus = withStateKey("attributePowerBonus", (key) =>
+  selectorFamily<number, Attribute>({
+    get:
+      (parameter) =>
+      ({ get }) => {
+        const powerBonusBoostValue = get(powerBonusBoost);
+
+        return (
+          get(level) *
+          ATTRIBUTES[parameter].powerBonus *
+          (powerBonusBoostValue === 0 ? 0 : 1 + powerBonusBoostValue)
+        );
+      },
     key,
   }),
 );

@@ -11,10 +11,9 @@ import { ReactComponent as IconMarksmanship } from "@neverquest/icons/marksmansh
 import { ReactComponent as IconRange } from "@neverquest/icons/range.svg";
 import { ReactComponent as IconRanged } from "@neverquest/icons/ranged.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { weapon } from "@neverquest/state/items";
+import { range, weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import { range } from "@neverquest/state/statistics";
 import { isRanged } from "@neverquest/types/type-guards";
 import { formatValue } from "@neverquest/utilities/formatters";
 

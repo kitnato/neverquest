@@ -11,7 +11,7 @@ import { ReactComponent as IconMight } from "@neverquest/icons/might.svg";
 import { ReactComponent as IconStunRating } from "@neverquest/icons/stun-rating.svg";
 import { ReactComponent as IconStun } from "@neverquest/icons/stun.svg";
 import { deltas } from "@neverquest/state/deltas";
-import { weapon } from "@neverquest/state/items";
+import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { stunRating } from "@neverquest/state/statistics";

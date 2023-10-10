@@ -17,12 +17,13 @@ import { ReactComponent as IconAgility } from "@neverquest/icons/agility.svg";
 import { ReactComponent as IconDodgePenalty } from "@neverquest/icons/dodge-penalty.svg";
 import { ReactComponent as IconDodge } from "@neverquest/icons/dodge.svg";
 import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
-import { attributeStatistic } from "@neverquest/state/attributes";
+import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { deltas } from "@neverquest/state/deltas";
+import { armor } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
-import { armor, ownedItem } from "@neverquest/state/items";
+import { ownedItem } from "@neverquest/state/items";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import { attributePowerBonus, dodge } from "@neverquest/state/statistics";
+import { dodge } from "@neverquest/state/statistics";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Dodge() {

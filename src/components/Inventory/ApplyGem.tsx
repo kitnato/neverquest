@@ -6,7 +6,7 @@ import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_EMPTY } from "@neverquest/data/genera
 import { GEM_FITTING_COST } from "@neverquest/data/inventory";
 import { useApplyGem } from "@neverquest/hooks/actions/useApplyGem";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
-import { armor, canApplyGem, shield, weapon } from "@neverquest/state/items";
+import { armor, canApplyGem, shield, weapon } from "@neverquest/state/gear";
 import type { GemItem } from "@neverquest/types";
 import { GEAR_TYPES, type Gear } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";

@@ -15,7 +15,7 @@ import { ReactComponent as IconAttackRate } from "@neverquest/icons/attack-rate.
 import { ReactComponent as IconWeaponSpeed } from "@neverquest/icons/speed.svg";
 import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
 import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
-import { attributeStatistic } from "@neverquest/state/attributes";
+import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import {
   attackDuration,
   canAttackOrParry,
@@ -24,10 +24,10 @@ import {
   isRecovering,
 } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
+import { weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
-import { weapon } from "@neverquest/state/items";
 import { isMonsterDead } from "@neverquest/state/monster";
-import { attackRateTotal, attributePowerBonus } from "@neverquest/state/statistics";
+import { attackRateTotal } from "@neverquest/state/statistics";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Attack() {

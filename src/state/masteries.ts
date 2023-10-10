@@ -49,7 +49,7 @@ export const unlockedMasteries = withStateKey("unlockedMasteries", (key) =>
   selector({
     get: ({ get }) =>
       MASTERY_TYPES.reduce(
-        (aggregator, current) => ({ ...aggregator, current: get(isMasteryUnlocked(current)) }),
+        (aggregator, current) => ({ ...aggregator, [current]: get(isMasteryUnlocked(current)) }),
         {} as Record<Mastery, boolean>,
       ),
     key,

@@ -12,9 +12,9 @@ export function capitalizeAll(string: string) {
 }
 
 export function formatEnumeration(list: string[]) {
-  const formatter = new Intl.ListFormat("en", { style: "short", type: "conjunction" });
+  const formatter = new Intl.ListFormat("en", { style: "short" });
 
-  return formatter.format(list);
+  return formatter.format(list).replace(", &", " &");
 }
 
 // Correctly does the rounding as opposed to .toFixed().

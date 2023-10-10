@@ -9,7 +9,7 @@ export const acquiredTraits = withStateKey("acquiredTraits", (key) =>
   selector({
     get: ({ get }) =>
       TRAIT_TYPES.reduce(
-        (aggregator, current) => ({ ...aggregator, current: get(isTraitAcquired(current)) }),
+        (aggregator, current) => ({ ...aggregator, [current]: get(isTraitAcquired(current)) }),
         {} as Record<Trait, boolean>,
       ),
     key,

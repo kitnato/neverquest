@@ -22,7 +22,7 @@ export const trainedSkills = withStateKey("trainedSkills", (key) =>
   selector({
     get: ({ get }) =>
       SKILL_TYPES.reduce(
-        (aggregator, current) => ({ ...aggregator, current: get(isSkillAcquired(current)) }),
+        (aggregator, current) => ({ ...aggregator, [current]: get(isSkillAcquired(current)) }),
         {} as Record<Skill, boolean>,
       ),
     key,

@@ -53,7 +53,7 @@ export const progressMaximum = withStateKey("progressMaximum", (key) =>
 
       return get(isBoss)
         ? 1
-        : Math.round(
+        : Math.ceil(
             getFromRange({ factor: getGrowthSigmoid(get(stage)), maximum, minimum }) *
               (1 - get(progressReduction)),
           );

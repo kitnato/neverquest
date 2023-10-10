@@ -4,7 +4,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { TAILORING_EXPANSION, TAILORING_PRICES_MAXIMUM } from "@neverquest/data/caravan";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/data/general";
-import { AMMUNITION_MAXIMUM } from "@neverquest/data/inventory";
+import { AMMUNITION_CAPACITY } from "@neverquest/data/inventory";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { ReactComponent as IconTailoring } from "@neverquest/icons/tailoring.svg";
@@ -28,7 +28,8 @@ export function ExpandAmmunitionPouch() {
 
   const { id, maximum } = ownedAmmunitionPouch as AmmunitionPouchItem;
   const price = Math.ceil(
-    TAILORING_PRICES_MAXIMUM.ammunitionPouch * getGrowthSigmoid(maximum - (AMMUNITION_MAXIMUM - 1)),
+    TAILORING_PRICES_MAXIMUM.ammunitionPouch *
+      getGrowthSigmoid(maximum - (AMMUNITION_CAPACITY - 1)),
   );
   const isAffordable = price <= essenceValue;
 

@@ -589,7 +589,7 @@ export const LOCATIONS: LocationData[] = [
     name: "strand",
   },
   {
-    name: "strip-mine",
+    name: "stripmine",
   },
   {
     name: "sub-basement",

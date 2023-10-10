@@ -50,7 +50,7 @@ import type {
   WeaponAbility,
 } from "@neverquest/types/unions";
 
-export const AMMUNITION_MAXIMUM = 100;
+export const AMMUNITION_CAPACITY = 100;
 
 export const ARMOR_NONE: Omit<Armor, "isEquipped" | "price"> = {
   deflection: 0,
@@ -79,7 +79,7 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 0.65, minimum: 0.6 },
     ],
     Icon: IconArmorHeavy,
-    price: { maximum: 1600, minimum: 8 },
+    price: { maximum: 10000, minimum: 8 },
     protection: [
       { maximum: 10, minimum: 8 },
       { maximum: 1000, minimum: 950 },
@@ -93,7 +93,7 @@ export const ARMOR_SPECIFICATIONS: Record<
   light: {
     deflection: null,
     Icon: IconArmorLight,
-    price: { maximum: 800, minimum: 1 },
+    price: { maximum: 5000, minimum: 1 },
     protection: [
       { maximum: 2, minimum: 1 },
       { maximum: 500, minimum: 450 },
@@ -110,7 +110,7 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 0.35, minimum: 0.3 },
     ],
     Icon: IconReinforced,
-    price: { maximum: 1200, minimum: 3 },
+    price: { maximum: 7500, minimum: 3 },
     protection: [
       { maximum: 6, minimum: 4 },
       { maximum: 800, minimum: 750 },
@@ -133,7 +133,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         description: "Cures poison.",
         name: "antidote",
-        price: 15,
+        price: 150,
         weight: 5,
       },
     },
@@ -142,7 +142,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         description: "Restores all health.",
         name: "bandages",
-        price: 10,
+        price: 50,
         weight: 1,
       },
     },
@@ -151,7 +151,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         description: "Restores all stamina.",
         name: "elixir",
-        price: 8,
+        price: 80,
         weight: 2,
       },
     },
@@ -160,7 +160,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         description: "Resurrects the carrier upon death.",
         name: "phylactery",
-        price: 100,
+        price: 500,
         weight: 10,
       },
     },
@@ -215,10 +215,10 @@ export const GEM_ELEMENTALS: Record<Gem, Elemental> = {
   topaz: "lightning",
 };
 export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
-export const GEM_FITTING_COST = [20, 40, 70, 120, 200];
+export const GEM_FITTING_COST = [20, 40, 100, 200, 500];
 export const GEMS_MAXIMUM = 5;
 
-export const INFUSABLE_LEVEL_MAXIMUM = 22;
+export const INFUSABLE_LEVEL_MAXIMUM = 100;
 export const INFUSABLES: Record<
   Infusable,
   {
@@ -286,7 +286,7 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 0.4, minimum: 0.35 },
     ],
     Icon: IconShieldMedium,
-    price: { maximum: 900, minimum: 4 },
+    price: { maximum: 4500, minimum: 4 },
     stagger: [
       { maximum: 0.22, minimum: 0.2 },
       { maximum: 0.35, minimum: 0.3 },
@@ -306,7 +306,7 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 0.35, minimum: 0.3 },
     ],
     Icon: IconShieldSmall,
-    price: { maximum: 600, minimum: 2 },
+    price: { maximum: 2500, minimum: 2 },
     stagger: null,
     staminaCost: [
       { maximum: 2, minimum: 1 },
@@ -323,7 +323,7 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 0.65, minimum: 0.6 },
     ],
     Icon: IconShieldTower,
-    price: { maximum: 1200, minimum: 7 },
+    price: { maximum: 6000, minimum: 7 },
     stagger: [
       { maximum: 0.32, minimum: 0.3 },
       { maximum: 0.55, minimum: 0.5 },
@@ -347,7 +347,7 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: AmmunitionPouchIte
         current: 0,
         description: "Store ammunition for ranged weapons.",
         id: nanoid(),
-        maximum: AMMUNITION_MAXIMUM,
+        maximum: AMMUNITION_CAPACITY,
         name: "ammunition pouch",
         price: 250,
         weight: 6,
@@ -409,7 +409,7 @@ export const WEAPON_BASE: GearBase & {
     { maximum: 14, minimum: 12 },
     { maximum: 1000, minimum: 950 },
   ],
-  price: { maximum: 1000, minimum: 1 },
+  price: { maximum: 12000, minimum: 1 },
   range: [
     { maximum: 4500, minimum: 3000 },
     { maximum: 8000, minimum: 7500 },

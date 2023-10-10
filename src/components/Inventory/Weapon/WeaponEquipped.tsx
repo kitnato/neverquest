@@ -14,7 +14,7 @@ export function WeaponEquipped() {
   const isShowingWeapon = useRecoilValue(isShowing("weapon"));
   const weaponValue = useRecoilValue(weapon);
 
-  const isUnarmed = weaponValue === WEAPON_NONE;
+  const isUnarmed = weaponValue.name === WEAPON_NONE.name;
 
   if (!isShowingWeapon) {
     return null;

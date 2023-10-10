@@ -19,7 +19,7 @@ export function ArmorEquipped() {
   return (
     <IconDisplay
       contents={<ArmorName armor={armorValue} />}
-      Icon={armorValue === ARMOR_NONE ? IconArmorNone : IconArmor}
+      Icon={armorValue.name === ARMOR_NONE.name ? IconArmorNone : IconArmor}
       isAnimated
       tooltip="Equipped armor"
     />

@@ -18,7 +18,7 @@ export const ATTRIBUTES: Record<
   AttributeOrMasteryBaseData & {
     isUnlocked: boolean;
     powerBonus: number;
-    shows?: Showing;
+    shows?: Showing[];
   }
 > = {
   agility: {
@@ -46,7 +46,7 @@ export const ATTRIBUTES: Record<
     increment: 5,
     isUnlocked: true,
     powerBonus: 0.01,
-    shows: "staminaDetails",
+    shows: ["stamina", "staminaDetails"],
   },
   fortitude: {
     base: 0,
@@ -73,7 +73,7 @@ export const ATTRIBUTES: Record<
     isUnlocked: true,
     maximum: 0.9,
     powerBonus: 0.005,
-    shows: "attackRateDetails",
+    shows: ["attackRateDetails"],
   },
   strength: {
     base: 0,
@@ -82,7 +82,7 @@ export const ATTRIBUTES: Record<
     increment: 2,
     isUnlocked: true,
     powerBonus: 0.01,
-    shows: "damageDetails",
+    shows: ["damageDetails"],
   },
   vigor: {
     base: 0,
@@ -100,7 +100,7 @@ export const ATTRIBUTES: Record<
     increment: 10,
     isUnlocked: true,
     powerBonus: 0.01,
-    shows: "healthDetails",
+    shows: ["healthDetails"],
   },
 };
 

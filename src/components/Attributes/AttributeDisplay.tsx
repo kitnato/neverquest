@@ -17,7 +17,6 @@ import {
   isAttributeUnlocked,
 } from "@neverquest/state/attributes";
 import { isStageCompleted, isStageStarted, isWilderness } from "@neverquest/state/encounter";
-import { isShowing } from "@neverquest/state/isShowing";
 import type { Attribute } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
@@ -25,7 +24,6 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
   const { isUnlocked } = useRecoilValue(isAttributeUnlocked(attribute));
   const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable);
   const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(attribute));
-  const isShowingStamina = useRecoilValue(isShowing("stamina"));
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isStageStartedValue = useRecoilValue(isStageStarted);
   const isWildernessValue = useRecoilValue(isWilderness);
@@ -36,10 +34,6 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
   const isUnsafe = isStageStartedValue && !isStageCompletedValue && isWildernessValue;
   const canIncrease = areAttributesAffordableValue && !isUnsafe;
   const name = capitalizeAll(attribute);
-
-  if (attribute === "endurance" && !isShowingStamina) {
-    return null;
-  }
 
   if (isUnlocked) {
     return (

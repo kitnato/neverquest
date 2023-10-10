@@ -35,7 +35,7 @@ export function OffhandEquipped() {
   return (
     <IconDisplay
       contents={<ShieldName shield={shieldValue} />}
-      Icon={shieldValue === SHIELD_NONE ? IconFist : IconShield}
+      Icon={shieldValue.name === SHIELD_NONE.name ? IconFist : IconShield}
       isAnimated
       tooltip="Equipped shield"
     />

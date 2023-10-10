@@ -55,9 +55,9 @@ export function useAcquireItem() {
         if (
           isGear(item) &&
           get(autoEquip) &&
-          ((get(armor) === ARMOR_NONE && isArmor(item)) ||
-            (get(shield) === SHIELD_NONE && isShield(item)) ||
-            (get(weapon) === WEAPON_NONE &&
+          ((get(armor).name === ARMOR_NONE.name && isArmor(item)) ||
+            (get(shield).name === SHIELD_NONE.name && isShield(item)) ||
+            (get(weapon).name === WEAPON_NONE.name &&
               (isMelee(item) || (get(isSkillAcquired("archery")) && isRanged(item)))))
         ) {
           return "autoEquip";

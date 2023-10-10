@@ -79,7 +79,7 @@ export function Attack() {
                   <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>{`${
-                        weaponValue === WEAPON_NONE ? "Base" : "Weapon"
+                        weaponValue.name === WEAPON_NONE.name ? "Base" : "Weapon"
                       }:`}</td>
 
                       <td>

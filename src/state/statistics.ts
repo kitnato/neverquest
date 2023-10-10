@@ -1,5 +1,6 @@
 import { selector, selectorFamily } from "recoil";
 
+import { isTraitAcquired } from "./traits";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import {
   GEM_DAMAGE,
@@ -8,6 +9,7 @@ import {
   GEM_ENHANCEMENT,
   INFUSABLES,
   INFUSABLE_LEVEL_MAXIMUM,
+  SHIELD_NONE,
 } from "@neverquest/data/inventory";
 import { BLEED, PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/statistics";
 import { withStateKey } from "@neverquest/state";
@@ -140,12 +142,13 @@ export const damage = withStateKey("damage", (key) =>
 export const damageTotal = withStateKey("damageTotal", (key) =>
   selector({
     get: ({ get }) =>
-      get(damage) +
-      get(weapon).damage +
-      Object.values(get(totalElementalEffects).weapon).reduce(
-        (aggregator, { damage }) => aggregator + damage,
-        0,
-      ),
+      (get(damage) +
+        get(weapon).damage +
+        Object.values(get(totalElementalEffects).weapon).reduce(
+          (aggregator, { damage }) => aggregator + damage,
+          0,
+        )) *
+      (get(isTraitAcquired("brawler")) && get(shield).name === SHIELD_NONE.name ? 2 : 1),
     key,
   }),
 );

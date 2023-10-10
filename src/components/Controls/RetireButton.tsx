@@ -37,7 +37,7 @@ export function RetireButton() {
         </span>
       </OverlayTrigger>
 
-      <Retirement showing={[isShowingRetire, setIsShowingRetire]} />
+      <Retirement state={[isShowingRetire, setIsShowingRetire]} />
     </>
   );
 }

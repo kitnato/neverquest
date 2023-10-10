@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { FormControl, FormSelect, Stack } from "react-bootstrap";
+import { FormSelect, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
 import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
+import { SetGearLevel } from "@neverquest/components/Caravan/SetGearLevel";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/DodgePenaltyContents";
 import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
@@ -12,7 +13,6 @@ import { ARMOR_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
 import { ReactComponent as IconDodgePenalty } from "@neverquest/icons/dodge-penalty.svg";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
-import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { ReactComponent as IconArmorProtection } from "@neverquest/icons/protection.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
 import { ARMOR_CLASS_TYPES, type ArmorClass } from "@neverquest/LOCRAN/types";
@@ -45,32 +45,7 @@ export function ArmorOptions() {
   return (
     <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
-        <IconDisplay
-          contents={
-            <FormControl
-              max={maximumArmorLevel}
-              min={1}
-              onChange={({ target: { value } }) => {
-                if (!value) {
-                  return;
-                }
-
-                const parsedValue = Number.parseInt(value);
-
-                if (isNaN(parsedValue) || parsedValue < 1 || parsedValue > maximumArmorLevel) {
-                  return;
-                }
-
-                setArmorLevel(parsedValue);
-              }}
-              type="number"
-              value={formatValue({ value: armorLevel })}
-            />
-          }
-          Icon={IconGearLevel}
-          iconProps={{ overlayPlacement: "left" }}
-          tooltip="Level"
-        />
+        <SetGearLevel state={[armorLevel, setArmorLevel]} />
 
         <IconDisplay
           contents={

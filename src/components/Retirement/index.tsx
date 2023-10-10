@@ -14,9 +14,9 @@ import { formatValue } from "@neverquest/utilities/formatters";
 import { getProgressReduction } from "@neverquest/utilities/getters";
 
 export function Retirement({
-  showing: [isShowing, setIsShowing],
+  state: [isShowing, setIsShowing],
 }: {
-  showing: [boolean, Dispatch<SetStateAction<boolean>>];
+  state: [boolean, Dispatch<SetStateAction<boolean>>];
 }) {
   const stageValue = useRecoilValue(stage);
 

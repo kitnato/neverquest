@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { FormControl, FormSelect, Stack } from "react-bootstrap";
+import { FormSelect, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
 import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
+import { SetGearLevel } from "@neverquest/components/Caravan/SetGearLevel";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { SHIELD_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
-import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { ReactComponent as IconStagger } from "@neverquest/icons/stagger.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
@@ -42,32 +42,7 @@ export function ShieldOptions() {
   return (
     <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
-        <IconDisplay
-          contents={
-            <FormControl
-              max={maximumShieldLevel}
-              min={1}
-              onChange={({ target: { value } }) => {
-                if (!value) {
-                  return;
-                }
-
-                const parsedValue = Number.parseInt(value);
-
-                if (isNaN(parsedValue) || parsedValue < 1 || parsedValue > maximumShieldLevel) {
-                  return;
-                }
-
-                setShieldLevel(parsedValue);
-              }}
-              type="number"
-              value={formatValue({ value: shieldLevel })}
-            />
-          }
-          Icon={IconGearLevel}
-          iconProps={{ overlayPlacement: "left" }}
-          tooltip="Level"
-        />
+        <SetGearLevel state={[shieldLevel, setShieldLevel]} />
 
         <IconDisplay
           contents={

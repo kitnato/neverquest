@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { FormControl, FormSelect, Stack } from "react-bootstrap";
+import { FormSelect, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
 import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
+import { SetGearLevel } from "@neverquest/components/Caravan/SetGearLevel";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { WEAPON_BASE, WEAPON_MODIFIER, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
-import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
 import { ReactComponent as IconRange } from "@neverquest/icons/range.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
 import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
@@ -48,32 +48,7 @@ export function RangedWeaponOptions() {
   return (
     <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
-        <IconDisplay
-          contents={
-            <FormControl
-              max={maximumWeaponLevel}
-              min={1}
-              onChange={({ target: { value } }) => {
-                if (!value) {
-                  return;
-                }
-
-                const parsedValue = Number.parseInt(value);
-
-                if (isNaN(parsedValue) || parsedValue < 1 || parsedValue > maximumWeaponLevel) {
-                  return;
-                }
-
-                setWeaponLevel(parsedValue);
-              }}
-              type="number"
-              value={formatValue({ value: weaponLevel })}
-            />
-          }
-          Icon={IconGearLevel}
-          iconProps={{ overlayPlacement: "left" }}
-          tooltip="Level"
-        />
+        <SetGearLevel state={[weaponLevel, setWeaponLevel]} />
 
         <IconDisplay
           contents={

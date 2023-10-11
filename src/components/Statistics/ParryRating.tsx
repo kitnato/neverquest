@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -42,9 +42,9 @@ export function ParryRating() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header className="text-center">Parry rating details</Popover.Header>
+                <PopoverHeader className="text-center">Parry rating details</PopoverHeader>
 
-                <Popover.Body>
+                <PopoverBody>
                   <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
@@ -111,7 +111,7 @@ export function ParryRating() {
                       </>
                     )}
                   </DetailsTable>
-                </Popover.Body>
+                </PopoverBody>
               </Popover>
             }
             trigger={escrimeValue ? ["hover", "focus"] : []}

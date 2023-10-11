@@ -29,8 +29,8 @@ export const blightMagnitude = withStateKey("blightMagnitude", (key) =>
       const blightValue = get(blight);
 
       return {
-        amount: blightValue * get(blightAmount),
-        percentage: blightValue * BLIGHT.increment,
+        amount: Math.min(blightValue * get(blightAmount), get(staminaMaximum)),
+        percentage: Math.min(blightValue * BLIGHT.increment, 1),
       };
     },
     key,

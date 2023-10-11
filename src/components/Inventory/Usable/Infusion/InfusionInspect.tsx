@@ -1,5 +1,5 @@
 import { type FunctionComponent, useState } from "react";
-import { Button, Modal, Stack } from "react-bootstrap";
+import { Button, Modal, ModalBody, ModalHeader, ModalTitle, Stack } from "react-bootstrap";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { Infusion } from "@neverquest/components/Inventory/Usable/Infusion";
@@ -28,16 +28,16 @@ export function InfusionInspect({ infusable }: { infusable: Infusable }) {
       </Button>
 
       <Modal centered onHide={() => setIsShowingInfusion(false)} show={isShowingInfusion}>
-        <Modal.Header closeButton>
-          <Modal.Title>
+        <ModalHeader closeButton>
+          <ModalTitle>
             <Stack direction="horizontal" gap={3}>
               <IconImage Icon={Icon} />
               Essence infusion
             </Stack>
-          </Modal.Title>
-        </Modal.Header>
+          </ModalTitle>
+        </ModalHeader>
 
-        <Modal.Body>
+        <ModalBody>
           <Stack gap={3}>
             <EffectComponent />
 
@@ -49,7 +49,7 @@ export function InfusionInspect({ infusable }: { infusable: Infusable }) {
               <Infusion infusable={infusable} />
             </Stack>
           </Stack>
-        </Modal.Body>
+        </ModalBody>
       </Modal>
     </>
   );

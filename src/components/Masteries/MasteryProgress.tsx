@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
@@ -26,7 +26,7 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
       <OverlayTrigger
         overlay={
           <Popover>
-            <Popover.Body>{MASTERIES[mastery].instructions}</Popover.Body>
+            <PopoverBody>{MASTERIES[mastery].instructions}</PopoverBody>
           </Popover>
         }
       >

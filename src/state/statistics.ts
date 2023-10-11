@@ -1,5 +1,6 @@
 import { selector } from "recoil";
 
+import { isSkillAcquired } from "./skills";
 import { SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import {
   AILMENT_PENALTY,
@@ -45,7 +46,7 @@ export const bleed = withStateKey("bleed", (key) =>
     get: ({ get }) => {
       const { abilityChance, gearClass } = get(weapon);
 
-      return gearClass === "piercing" ? abilityChance : 0;
+      return get(isSkillAcquired("anatomy")) && gearClass === "piercing" ? abilityChance : 0;
     },
     key,
   }),
@@ -93,7 +94,9 @@ export const block = withStateKey("block", (key) =>
 export const criticalChance = withStateKey("criticalChance", (key) =>
   selector({
     get: ({ get }) =>
-      get(attributeStatistic("dexterity")) * (1 + get(attributePowerBonus("dexterity"))),
+      get(isSkillAcquired("assassination"))
+        ? get(attributeStatistic("dexterity")) * (1 + get(attributePowerBonus("dexterity")))
+        : 0,
     key,
   }),
 );
@@ -163,7 +166,10 @@ export const damagePerSecond = withStateKey("damagePerSecond", (key) =>
 
 export const deflection = withStateKey("deflection", (key) =>
   selector({
-    get: ({ get }) => get(armor).deflection,
+    get: ({ get }) =>
+      get(isSkillAcquired("armorcraft"))
+        ? Math.min(get(armor).deflection * (get(isTraitAcquired("inoculated")) ? 2 : 1), 1)
+        : 0,
     key,
   }),
 );
@@ -171,7 +177,7 @@ export const deflection = withStateKey("deflection", (key) =>
 export const dodge = withStateKey("dodge", (key) =>
   selector({
     get: ({ get }) =>
-      get(armor).staminaCost === Infinity
+      get(armor).staminaCost === Infinity || !get(isSkillAcquired("evasion"))
         ? 0
         : get(attributeStatistic("agility")) * (1 + get(attributePowerBonus("agility"))),
     key,
@@ -203,7 +209,7 @@ export const parry = withStateKey("parry", (key) =>
     get: ({ get }) => {
       const { abilityChance, gearClass } = get(weapon);
 
-      return gearClass === "slashing" ? abilityChance : 0;
+      return get(isSkillAcquired("escrime")) && gearClass === "slashing" ? abilityChance : 0;
     },
     key,
   }),
@@ -232,14 +238,22 @@ export const protection = withStateKey("protection", (key) =>
 
 export const recoveryRate = withStateKey("recoveryRate", (key) =>
   selector({
-    get: ({ get }) => RECOVERY_RATE - RECOVERY_RATE * get(masteryStatistic("resilience")),
+    get: ({ get }) =>
+      Math.min(RECOVERY_RATE - RECOVERY_RATE * get(masteryStatistic("resilience")), 0),
+    key,
+  }),
+);
+
+export const stagger = withStateKey("stagger", (key) =>
+  selector({
+    get: ({ get }) => (get(isSkillAcquired("traumatology")) ? get(shield).stagger : 0),
     key,
   }),
 );
 
 export const staggerRating = withStateKey("staggerRating", (key) =>
   selector({
-    get: ({ get }) => Math.round(get(shield).stagger * get(masteryStatistic("stability"))),
+    get: ({ get }) => Math.round(get(stagger) * get(masteryStatistic("stability"))),
     key,
   }),
 );
@@ -249,7 +263,7 @@ export const stun = withStateKey("stun", (key) =>
     get: ({ get }) => {
       const { abilityChance, gearClass } = get(weapon);
 
-      return gearClass === "blunt" ? abilityChance : 0;
+      return get(isSkillAcquired("traumatology")) && gearClass === "blunt" ? abilityChance : 0;
     },
     key,
   }),

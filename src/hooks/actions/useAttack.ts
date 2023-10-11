@@ -24,7 +24,6 @@ import {
   monsterHealth,
   monsterHealthMaximum,
 } from "@neverquest/state/monster";
-import { isSkillAcquired } from "@neverquest/state/skills";
 import {
   attackRateTotal,
   bleed,
@@ -112,8 +111,7 @@ export function useAttack() {
             increaseMastery("butchery");
           }
 
-          const hasInflictedCritical =
-            get(isSkillAcquired("assassination")) && Math.random() <= get(criticalChance);
+          const hasInflictedCritical = Math.random() < get(criticalChance);
           const inExecutionRange =
             isTwoHanded && monsterHealthValue / get(monsterHealthMaximum) <= get(execution);
 
@@ -135,23 +133,13 @@ export function useAttack() {
             return;
           }
 
-          const baseDamage = get(damageTotal);
-          const totalDamage = -Math.round(
-            (hasInflictedCritical ? get(criticalStrike) : baseDamage) *
+          const inflictedDamage = -Math.round(
+            (hasInflictedCritical ? get(criticalStrike) : get(damageTotal)) *
               (get(isMonsterAiling("burning")) ? AILMENT_PENALTY.burning : 1),
           );
-          const monsterDeltas: DeltaDisplay = [
-            {
-              color: "text-danger",
-              value: totalDamage,
-            },
-          ];
+          const monsterDeltas: DeltaDisplay = [];
 
-          if (
-            Math.random() < get(bleed) &&
-            get(monsterAilmentDuration("bleeding")) === 0 &&
-            get(isSkillAcquired("anatomy"))
-          ) {
+          if (get(monsterAilmentDuration("bleeding")) === 0 && Math.random() < get(bleed)) {
             set(isShowing("monsterAilments"), true);
             set(monsterAilmentDuration("bleeding"), BLEED.duration);
 
@@ -168,7 +156,7 @@ export function useAttack() {
             });
           }
 
-          if (Math.random() < get(stun) && get(isSkillAcquired("traumatology"))) {
+          if (Math.random() < get(stun)) {
             set(isShowing("monsterAilments"), true);
             set(monsterAilmentDuration("stunned"), get(masteryStatistic("might")));
 
@@ -182,7 +170,10 @@ export function useAttack() {
             inflictElementalAilment({ elemental, slot: "weapon" }),
           );
 
-          changeMonsterHealth({ delta: monsterDeltas, value: totalDamage });
+          changeMonsterHealth({
+            delta: monsterDeltas,
+            value: inflictedDamage,
+          });
         } else {
           set(deltas("stamina"), [
             {

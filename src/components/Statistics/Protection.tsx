@@ -32,7 +32,7 @@ export function Protection() {
       }
       Icon={IconProtection}
       isAnimated
-      tooltip="Protection"
+      tooltip="Total protection"
     />
   );
 }

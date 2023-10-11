@@ -42,7 +42,7 @@ export const TRAITS: Record<
     Icon: IconFieldSurgeon,
   },
   inoculated: {
-    description: "Can no longer be poisoned or blighted.",
+    description: "Deflection chance is doubled.",
     Icon: IconInoculated,
   },
   nudist: {

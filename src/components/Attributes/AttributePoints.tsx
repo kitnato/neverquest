@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
@@ -31,15 +31,15 @@ export function AttributePoints() {
       <OverlayTrigger
         overlay={
           <Popover>
-            <Popover.Header className="text-center">Attribute point cost</Popover.Header>
+            <PopoverHeader className="text-center">Attribute point cost</PopoverHeader>
 
-            <Popover.Body>
+            <PopoverBody>
               <Stack className="justify-content-center" direction="horizontal" gap={1}>
                 <IconImage Icon={IconEssence} size="small" />
 
                 {formatValue({ value: getAttributePointCost(levelValue) })}
               </Stack>
-            </Popover.Body>
+            </PopoverBody>
           </Popover>
         }
       >

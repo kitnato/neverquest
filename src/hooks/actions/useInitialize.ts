@@ -34,7 +34,9 @@ export function useInitialize() {
 
           set(wildernesses, [generateWilderness({ allowNSFW: get(allowNSFW), stage: get(stage) })]);
 
-          generateMonster();
+          if (!isRetiring) {
+            generateMonster();
+          }
         }
       },
     [generateMonster],

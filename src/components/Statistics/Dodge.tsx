@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -32,8 +32,8 @@ export function Dodge() {
   const dodgeValue = useRecoilValue(dodge);
   const isShowingDodge = useRecoilValue(isShowing("dodge"));
   const isShowingDodgePenalty = useRecoilValue(isShowing("dodgePenalty"));
+  const isSkillAcquiredEvasion = useRecoilValue(isSkillAcquired("evasion"));
   const hasTomeOfPower = Boolean(useRecoilValue(ownedItem("tome of power")));
-  const evasionValue = useRecoilValue(isSkillAcquired("evasion"));
 
   useDeltaText({
     delta: "dodge",
@@ -52,9 +52,9 @@ export function Dodge() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header className="text-center">Dodge chance details</Popover.Header>
+                <PopoverHeader className="text-center">Dodge chance details</PopoverHeader>
 
-                <Popover.Body>
+                <PopoverBody>
                   <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
@@ -105,15 +105,17 @@ export function Dodge() {
                       <td className="text-end">{LABEL_UNKNOWN}</td>
                     )}
                   </DetailsTable>
-                </Popover.Body>
+                </PopoverBody>
               </Popover>
             }
             trigger={
-              evasionValue && (isShowingDodgePenalty || hasTomeOfPower) ? ["hover", "focus"] : []
+              isSkillAcquiredEvasion && (isShowingDodgePenalty || hasTomeOfPower)
+                ? ["hover", "focus"]
+                : []
             }
           >
             <span>
-              {evasionValue
+              {isSkillAcquiredEvasion
                 ? formatValue({ format: "percentage", value: dodgeValue })
                 : LABEL_EMPTY}
             </span>

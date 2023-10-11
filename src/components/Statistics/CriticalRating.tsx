@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -47,9 +47,9 @@ export function CriticalRating() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header className="text-center">Critical rating details</Popover.Header>
+                <PopoverHeader className="text-center">Critical rating details</PopoverHeader>
 
-                <Popover.Body>
+                <PopoverBody>
                   <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
@@ -131,7 +131,7 @@ export function CriticalRating() {
                       </td>
                     </tr>
                   </DetailsTable>
-                </Popover.Body>
+                </PopoverBody>
               </Popover>
             }
             trigger={assassinationValue ? ["hover", "focus"] : []}

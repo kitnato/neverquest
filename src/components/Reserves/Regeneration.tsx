@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -79,9 +79,9 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
       <OverlayTrigger
         overlay={
           <Popover>
-            <Popover.Header className="text-center">{label} regeneration details</Popover.Header>
+            <PopoverHeader className="text-center">{label} regeneration details</PopoverHeader>
 
-            <Popover.Body>
+            <PopoverBody>
               <DetailsTable>
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Base rate:</td>
@@ -163,7 +163,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                   </td>
                 </tr>
               </DetailsTable>
-            </Popover.Body>
+            </PopoverBody>
           </Popover>
         }
         placement="right"

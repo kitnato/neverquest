@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -36,9 +36,9 @@ export function Stamina() {
             <OverlayTrigger
               overlay={
                 <Popover>
-                  <Popover.Header className="text-center">Stamina details</Popover.Header>
+                  <PopoverHeader className="text-center">Stamina details</PopoverHeader>
 
-                  <Popover.Body>
+                  <PopoverBody>
                     <DetailsTable>
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
@@ -82,7 +82,7 @@ export function Stamina() {
                         </td>
                       </tr>
                     </DetailsTable>
-                  </Popover.Body>
+                  </PopoverBody>
                 </Popover>
               }
               placement="right"

@@ -15,10 +15,9 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 export function useChangeMonsterHealth() {
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
-      (change: DeltaReserveBase) => {
+      ({ delta, value }: DeltaReserveBase) => {
         const get = getSnapshotGetter(snapshot);
 
-        const { delta, value } = change;
         const formattedValue = formatValue({ value });
         const isPositive = value > 0;
 
@@ -27,11 +26,12 @@ export function useChangeMonsterHealth() {
 
         set(
           deltas("monsterHealth"),
-          delta ??
-            ({
-              color: isPositive ? "text-success" : "text-danger",
-              value: isPositive ? `+${formattedValue}` : formattedValue,
-            } as DeltaDisplay),
+          delta === undefined || (Array.isArray(delta) && delta.length === 0)
+            ? ({
+                color: isPositive ? "text-success" : "text-danger",
+                value: isPositive ? `+${formattedValue}` : formattedValue,
+              } as DeltaDisplay)
+            : delta,
         );
 
         if (newHealth <= 0) {

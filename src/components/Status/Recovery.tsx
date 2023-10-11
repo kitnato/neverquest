@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -47,9 +47,9 @@ export function Recovery() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header className="text-center">Recovery rate details</Popover.Header>
+                <PopoverHeader className="text-center">Recovery rate details</PopoverHeader>
 
-                <Popover.Body>
+                <PopoverBody>
                   <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
@@ -72,7 +72,7 @@ export function Recovery() {
                       })}`}</td>
                     </tr>
                   </DetailsTable>
-                </Popover.Body>
+                </PopoverBody>
               </Popover>
             }
             trigger={isMasteryUnlockedValue ? ["hover", "focus"] : []}

@@ -5606,6 +5606,17 @@ export const AFFIXES: AffixData[] = [
     name: "vengeful",
   },
   {
+    artifact: "suffix",
+    location: "suffix",
+    name: "venom",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "venomous",
+  },
+  {
     creature: "prefix",
     name: "vexed",
   },

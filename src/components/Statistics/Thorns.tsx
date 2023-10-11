@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -28,13 +28,13 @@ export function Thorns() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header className="text-center">Thorns details</Popover.Header>
+                <PopoverHeader className="text-center">Thorns details</PopoverHeader>
 
-                <Popover.Body>
+                <PopoverBody>
                   <DetailsTable>
                     <ElementalDetails slot="armor" />
                   </DetailsTable>
-                </Popover.Body>
+                </PopoverBody>
               </Popover>
             }
           >

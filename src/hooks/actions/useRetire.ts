@@ -29,7 +29,6 @@ import { isTrinket } from "@neverquest/types/type-guards";
 import { INFUSABLE_TYPES, MASTERY_TYPES, SKILL_TYPES } from "@neverquest/types/unions";
 import { getProgressReduction, getSnapshotGetter } from "@neverquest/utilities/getters";
 
-// TODO
 export function useRetire() {
   const initialize = useInitialize();
   const resetAttributes = useResetAttributes();

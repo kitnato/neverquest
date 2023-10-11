@@ -1,4 +1,4 @@
-import { Badge, Button, OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { Badge, Button, OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { AttributeIncreaseDetails } from "@neverquest/components/Attributes/AttributeIncreaseDetails";
@@ -49,7 +49,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
             <OverlayTrigger
               overlay={
                 <Popover>
-                  <Popover.Body>
+                  <PopoverBody>
                     <Stack gap={1}>
                       <AttributeIncreaseDetails attribute={attribute} />
 
@@ -57,7 +57,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
 
                       {isUnsafe && "Cannot concentrate."}
                     </Stack>
-                  </Popover.Body>
+                  </PopoverBody>
                 </Popover>
               }
             >

@@ -1,5 +1,15 @@
 import { type ChangeEvent, useState } from "react";
-import { Button, Form, Modal, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalTitle,
+  OverlayTrigger,
+  Stack,
+  Tooltip,
+} from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
@@ -49,16 +59,16 @@ export function CompassNavigate() {
       </OverlayTrigger>
 
       <Modal onHide={() => setIsShowingNavigation(false)} show={isShowingNavigation}>
-        <Modal.Header closeButton>
-          <Modal.Title>
+        <ModalHeader closeButton>
+          <ModalTitle>
             <Stack direction="horizontal" gap={3}>
               <IconImage Icon={IconCompass} />
               Navigate the wilderness
             </Stack>
-          </Modal.Title>
-        </Modal.Header>
+          </ModalTitle>
+        </ModalHeader>
 
-        <Modal.Body>
+        <ModalBody>
           <IconDisplay
             contents={
               <Form.Select
@@ -86,7 +96,7 @@ export function CompassNavigate() {
             Icon={IconNavigation}
             tooltip="Navigation"
           />
-        </Modal.Body>
+        </ModalBody>
       </Modal>
     </>
   );

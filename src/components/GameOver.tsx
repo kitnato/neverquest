@@ -1,4 +1,12 @@
-import { Button, Modal, Stack } from "react-bootstrap";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  ModalTitle,
+  Stack,
+} from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
@@ -17,18 +25,18 @@ export function GameOver() {
 
   return (
     <Modal onHide={onHide} show={isGameOverValue && isShowingGameOver}>
-      <Modal.Header closeButton>
-        <Modal.Title>
+      <ModalHeader closeButton>
+        <ModalTitle>
           <Stack direction="horizontal" gap={3}>
             <IconImage Icon={IconDead} />
             Death has come.
           </Stack>
-        </Modal.Title>
-      </Modal.Header>
+        </ModalTitle>
+      </ModalHeader>
 
-      <Modal.Body>Start a new quest?</Modal.Body>
+      <ModalBody>Start a new quest?</ModalBody>
 
-      <Modal.Footer>
+      <ModalFooter>
         <Button
           onClick={() => {
             onHide();
@@ -38,7 +46,7 @@ export function GameOver() {
         >
           Restart
         </Button>
-      </Modal.Footer>
+      </ModalFooter>
     </Modal>
   );
 }

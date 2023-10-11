@@ -29,8 +29,7 @@ import {
   monsterPoisonChance,
   monsterPoisonLength,
 } from "@neverquest/state/monster";
-import { blight, blightMagnitude, isPoisoned, poisonDuration } from "@neverquest/state/reserves";
-import { isSkillAcquired } from "@neverquest/state/skills";
+import { blight, isPoisoned, poisonDuration } from "@neverquest/state/reserves";
 import {
   block,
   deflection,
@@ -40,6 +39,7 @@ import {
   parryDamage,
   protection,
   recoveryRate,
+  stagger,
   thorns,
 } from "@neverquest/state/statistics";
 import type { DeltaDisplay } from "@neverquest/types/ui";
@@ -67,7 +67,7 @@ export function useDefend() {
           speed: "fast",
         });
 
-        // If stunned, check if hit and decrease its duration.
+        // If stunned, check if hit connects and decrease its duration.
         if (get(isMonsterAiling("stunned"))) {
           set(monsterAilmentDuration("stunned"), (current) => current - 1);
 
@@ -84,7 +84,7 @@ export function useDefend() {
         const deltaHealth: DeltaDisplay = [];
 
         // If attack is dodged, nothing else happens (all damage is negated).
-        if (get(isSkillAcquired("evasion")) && Math.random() <= get(dodge)) {
+        if (Math.random() < get(dodge)) {
           if (get(canDodge)) {
             set(deltas("health"), {
               color: "text-muted",
@@ -110,7 +110,7 @@ export function useDefend() {
 
         let monsterHealthDamage = 0;
 
-        const hasParried = get(isSkillAcquired("escrime")) && Math.random() <= get(parry);
+        const hasParried = Math.random() < get(parry);
 
         // If parrying occurs, check & apply stamina cost.
         if (hasParried) {
@@ -162,7 +162,7 @@ export function useDefend() {
           }
         }
 
-        const hasBlocked = Math.random() <= get(block);
+        const hasBlocked = Math.random() < get(block);
 
         // If not parried and blocking occurs, check & apply stamina cost.
         if (hasBlocked && !hasParried) {
@@ -177,10 +177,7 @@ export function useDefend() {
             });
 
             // If Shieldcraft skill is acquired, check if a free block occurs, otherwise spend stamina blocking.
-            if (
-              get(isSkillAcquired("shieldcraft")) &&
-              Math.random() <= get(masteryStatistic("stability"))
-            ) {
+            if (Math.random() < get(masteryStatistic("stability"))) {
               deltaStamina.push({
                 color: "text-muted",
                 value: "STABILIZED",
@@ -191,11 +188,8 @@ export function useDefend() {
 
             increaseMastery("stability");
 
-            const hasStaggered =
-              get(isSkillAcquired("traumatology")) && Math.random() <= get(shield).stagger;
-
             // If monster is staggered, also increase Might mastery.
-            if (hasStaggered) {
+            if (Math.random() < get(stagger)) {
               set(isShowing("monsterAilments"), true);
               set(monsterAilmentDuration("staggered"), get(masteryStatistic("might")));
 
@@ -238,25 +232,14 @@ export function useDefend() {
           );
         }
 
-        const recoveryRateValue = get(recoveryRate);
-
-        if (recoveryRateValue > 0) {
-          set(isShowing("recovery"), true);
-          set(recoveryDuration, recoveryRateValue);
-        }
+        set(isShowing("recovery"), true);
+        set(recoveryDuration, get(recoveryRate));
 
         increaseMastery("resilience");
 
         // If already poisoned, check if blighting has occurred and if it's been deflected.
-        if (
-          get(isPoisoned) &&
-          Math.random() <= get(monsterBlightChance) &&
-          get(blightMagnitude).percentage < 1
-        ) {
-          const hasDeflected =
-            get(isSkillAcquired("armorcraft")) && Math.random() <= get(deflection);
-
-          if (hasDeflected) {
+        if (get(isPoisoned) && Math.random() < get(monsterBlightChance)) {
+          if (Math.random() < get(deflection)) {
             deltaStamina.push({
               color: "text-success",
               value: "DEFLECTED BLIGHT",
@@ -272,11 +255,8 @@ export function useDefend() {
         }
 
         // If poisoning occurs, check if has been deflected, otherwise apply poison.
-        if (Math.random() <= get(monsterPoisonChance)) {
-          const hasDeflected =
-            get(isSkillAcquired("armorcraft")) && Math.random() <= get(deflection);
-
-          if (hasDeflected) {
+        if (Math.random() < get(monsterPoisonChance)) {
+          if (Math.random() < get(deflection)) {
             deltaHealth.push({
               color: "text-muted",
               value: "DEFLECTED POISON",
@@ -291,7 +271,7 @@ export function useDefend() {
           }
         }
 
-        // Calculate thorns damage.
+        // Calculate & apply thorns damage.
         const thornsValue = get(thorns);
 
         if (thornsValue > 0) {
@@ -304,7 +284,7 @@ export function useDefend() {
             },
             {
               color: "text-danger",
-              value: `(${-thornsValue})`,
+              value: `(-${thornsValue})`,
             },
           );
         }

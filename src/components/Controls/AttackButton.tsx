@@ -1,4 +1,11 @@
-import { Button, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";
+import {
+  Button,
+  OverlayTrigger,
+  Popover,
+  PopoverBody,
+  PopoverHeader,
+  Tooltip,
+} from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
@@ -61,9 +68,9 @@ export function AttackButton() {
       overlay={
         showWarning ? (
           <Popover>
-            <Popover.Header className="text-center">Low health</Popover.Header>
+            <PopoverHeader className="text-center">Low health</PopoverHeader>
 
-            <Popover.Body>Retreat now!</Popover.Body>
+            <PopoverBody>Retreat now!</PopoverBody>
           </Popover>
         ) : (
           <Tooltip>{tooltip}</Tooltip>

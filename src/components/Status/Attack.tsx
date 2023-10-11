@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -77,9 +77,9 @@ export function Attack() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header className="text-center">Attack rate details</Popover.Header>
+                <PopoverHeader className="text-center">Attack rate details</PopoverHeader>
 
-                <Popover.Body>
+                <PopoverBody>
                   <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>{`${
@@ -127,7 +127,7 @@ export function Attack() {
                       </td>
                     </tr>
                   </DetailsTable>
-                </Popover.Body>
+                </PopoverBody>
               </Popover>
             }
             trigger={isShowingAttackRateDetails ? ["hover", "focus"] : []}

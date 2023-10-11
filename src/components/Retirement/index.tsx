@@ -1,11 +1,20 @@
 import type { Dispatch, SetStateAction } from "react";
-import { Button, Modal, Stack } from "react-bootstrap";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  ModalTitle,
+  Stack,
+} from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { ItemsInherited } from "@neverquest/components/Retirement/ItemsInherited";
 import { TraitSelection } from "@neverquest/components/Retirement/TraitSelection";
+import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
 import { useRetire } from "@neverquest/hooks/actions/useRetire";
 import { ReactComponent as IconProgress } from "@neverquest/icons/progress.svg";
 import { ReactComponent as IconRetire } from "@neverquest/icons/retire.svg";
@@ -20,22 +29,23 @@ export function Retirement({
 }) {
   const stageValue = useRecoilValue(stage);
 
+  const generateMonster = useGenerateMonster();
   const retire = useRetire();
 
   const onHide = () => setIsShowing(false);
 
   return (
     <Modal onHide={onHide} show={isShowing} size="lg">
-      <Modal.Header closeButton>
-        <Modal.Title>
+      <ModalHeader closeButton>
+        <ModalTitle>
           <Stack direction="horizontal" gap={3}>
             <IconImage Icon={IconRetire} />
             Retirement
           </Stack>
-        </Modal.Title>
-      </Modal.Header>
+        </ModalTitle>
+      </ModalHeader>
 
-      <Modal.Body>
+      <ModalBody>
         <Stack gap={5}>
           <Stack gap={3}>
             Retiring resets all accumulated progress, essence, attributes, skills, masteries and
@@ -54,19 +64,20 @@ export function Retirement({
 
           <TraitSelection />
         </Stack>
-      </Modal.Body>
+      </ModalBody>
 
-      <Modal.Footer>
+      <ModalFooter>
         <Button
           onClick={() => {
             onHide();
             retire();
+            generateMonster();
           }}
           variant="outline-dark"
         >
           Retire
         </Button>
-      </Modal.Footer>
+      </ModalFooter>
     </Modal>
   );
 }

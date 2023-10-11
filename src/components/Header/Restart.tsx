@@ -1,5 +1,15 @@
 import { useState } from "react";
-import { Button, Modal, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  ModalTitle,
+  OverlayTrigger,
+  Stack,
+  Tooltip,
+} from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
@@ -37,18 +47,18 @@ export function Restart() {
       </OverlayTrigger>
 
       <Modal onHide={onHide} show={isShowingRestart}>
-        <Modal.Header closeButton>
-          <Modal.Title>
+        <ModalHeader closeButton>
+          <ModalTitle>
             <Stack direction="horizontal" gap={3}>
               <IconImage Icon={IconWarning} />
               Start a new quest?
             </Stack>
-          </Modal.Title>
-        </Modal.Header>
+          </ModalTitle>
+        </ModalHeader>
 
-        <Modal.Body>This will reset everything and restart from the beginning.</Modal.Body>
+        <ModalBody>This will reset everything and restart from the beginning.</ModalBody>
 
-        <Modal.Footer>
+        <ModalFooter>
           <Button
             onClick={() => {
               onHide();
@@ -58,7 +68,7 @@ export function Restart() {
           >
             Restart
           </Button>
-        </Modal.Footer>
+        </ModalFooter>
       </Modal>
     </>
   );

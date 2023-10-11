@@ -1,5 +1,14 @@
 import { useState } from "react";
-import { Button, Modal, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalTitle,
+  OverlayTrigger,
+  Stack,
+  Tooltip,
+} from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import type { HeadingProps } from "react-markdown/lib/ast-to-react";
 
@@ -30,16 +39,16 @@ export function About() {
         show={isShowing}
         size="lg"
       >
-        <Modal.Header closeButton>
-          <Modal.Title>
+        <ModalHeader closeButton>
+          <ModalTitle>
             <Stack direction="horizontal" gap={3}>
               <IconImage Icon={IconAbout} />
               About
             </Stack>
-          </Modal.Title>
-        </Modal.Header>
+          </ModalTitle>
+        </ModalHeader>
 
-        <Modal.Body>
+        <ModalBody>
           <ReactMarkdown
             components={HEADERS.reduce(
               (aggregator, Current) => ({
@@ -62,7 +71,7 @@ export function About() {
           >
             {manual}
           </ReactMarkdown>
-        </Modal.Body>
+        </ModalBody>
       </Modal>
     </>
   );

@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -29,9 +29,9 @@ export function MonsterPoisonRating() {
         <OverlayTrigger
           overlay={
             <Popover>
-              <Popover.Header className="text-center">Poison rating details</Popover.Header>
+              <PopoverHeader className="text-center">Poison rating details</PopoverHeader>
 
-              <Popover.Body>
+              <PopoverBody>
                 <DetailsTable>
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
@@ -64,7 +64,7 @@ export function MonsterPoisonRating() {
                     <td>{formatValue({ format: "time", value: monsterPoisonLengthValue })}</td>
                   </tr>
                 </DetailsTable>
-              </Popover.Body>
+              </PopoverBody>
             </Popover>
           }
         >

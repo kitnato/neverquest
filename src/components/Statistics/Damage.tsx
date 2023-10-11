@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
@@ -27,11 +27,11 @@ export function Damage() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header className="text-center">Total damage details</Popover.Header>
+                <PopoverHeader className="text-center">Total damage details</PopoverHeader>
 
-                <Popover.Body>
+                <PopoverBody>
                   <DamageDetails />
-                </Popover.Body>
+                </PopoverBody>
               </Popover>
             }
             trigger={isShowingDamageDetails ? ["hover", "focus"] : []}

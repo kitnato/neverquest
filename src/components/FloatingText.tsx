@@ -17,7 +17,6 @@ export function FloatingText({ delta }: { delta: Delta }) {
   const deltaState = deltas(delta);
   const deltaValue = useRecoilValue(deltaState);
   const [floatingTextQueue, setFloatingTextQueue] = useRecoilState(floatingTextQueues(delta));
-  const resetDeltaValue = useResetRecoilState(deltaState);
   const resetFloatingTextQueue = useResetRecoilState(floatingTextQueues(delta));
 
   const onAnimationEnd = (id: string) => () =>
@@ -36,8 +35,8 @@ export function FloatingText({ delta }: { delta: Delta }) {
       },
     ]);
 
-    resetDeltaValue();
-  }, [delta, deltaValue, resetDeltaValue, resetFloatingTextQueue, setFloatingTextQueue]);
+    return resetFloatingTextQueue;
+  }, [deltaValue, resetFloatingTextQueue, setFloatingTextQueue]);
 
   return (
     <div

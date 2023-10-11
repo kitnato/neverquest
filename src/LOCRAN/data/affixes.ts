@@ -2663,6 +2663,10 @@ export const AFFIXES: AffixData[] = [
     name: "honking",
   },
   {
+    creature: "prefix",
+    name: "hoofed",
+  },
+  {
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",

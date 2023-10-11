@@ -27,7 +27,6 @@ export function Elixir({ id }: { id: string }) {
           value: `+${staminaDifference}`,
         },
       ],
-      isRegeneration: false,
       value: staminaDifference,
     });
 

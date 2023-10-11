@@ -146,7 +146,7 @@ export function useDefend() {
               },
             );
 
-            changeStamina({ isRegeneration: false, value: -staminaCost });
+            changeStamina({ value: -staminaCost });
             increaseMastery("finesse");
           } else {
             deltaStamina.push(
@@ -186,7 +186,7 @@ export function useDefend() {
                 value: "STABILIZED",
               });
             } else {
-              changeStamina({ isRegeneration: false, value: -staminaCost });
+              changeStamina({ value: -staminaCost });
             }
 
             increaseMastery("stability");
@@ -310,7 +310,7 @@ export function useDefend() {
         }
 
         // Take any damage and any stamina costs.
-        changeHealth({ delta: deltaHealth, isRegeneration: false, value: healthDamage });
+        changeHealth({ delta: deltaHealth, value: healthDamage });
 
         // Inflict any armor elemental effects.
         ELEMENTAL_TYPES.forEach((elemental) =>

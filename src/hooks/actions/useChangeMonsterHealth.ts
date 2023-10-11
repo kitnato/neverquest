@@ -1,10 +1,8 @@
 import { useRecoilCallback } from "recoil";
 
 import { LOOTING_RATE } from "@neverquest/data/statistics";
-import { useProgression } from "@neverquest/hooks/actions/useProgression";
 import { attackDuration, lootingDuration } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { ownedItem } from "@neverquest/state/items";
 import {
   monsterAttackDuration,
   monsterHealth,
@@ -15,8 +13,6 @@ import { formatValue } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeMonsterHealth() {
-  const progression = useProgression();
-
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
       (change: DeltaReserveBase) => {
@@ -40,12 +36,7 @@ export function useChangeMonsterHealth() {
 
         if (newHealth <= 0) {
           set(monsterHealth, 0);
-
-          if (get(ownedItem("monkey paw")) !== null) {
-            progression();
-          } else {
-            set(lootingDuration, LOOTING_RATE);
-          }
+          set(lootingDuration, LOOTING_RATE);
 
           reset(attackDuration);
           reset(monsterAttackDuration);
@@ -61,6 +52,6 @@ export function useChangeMonsterHealth() {
 
         set(monsterHealth, newHealth);
       },
-    [progression],
+    [],
   );
 }

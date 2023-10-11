@@ -28,7 +28,6 @@ export function Salve({ id }: { id: string }) {
                 color: "text-muted",
                 value: "CURED",
               },
-              isRegeneration: false,
               value: 0,
             });
 

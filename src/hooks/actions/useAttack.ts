@@ -66,7 +66,7 @@ export function useAttack() {
 
         if (canAttackOrParryValue && hasEnoughAmmunitionValue) {
           if (staminaCost > 0) {
-            changeStamina({ isRegeneration: false, value: -staminaCost });
+            changeStamina({ value: -staminaCost });
           }
 
           animateElement({

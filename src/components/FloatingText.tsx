@@ -17,10 +17,13 @@ export function FloatingText({ delta }: { delta: Delta }) {
   const deltaState = deltas(delta);
   const deltaValue = useRecoilValue(deltaState);
   const [floatingTextQueue, setFloatingTextQueue] = useRecoilState(floatingTextQueues(delta));
+  const resetDelta = useResetRecoilState(deltaState);
   const resetFloatingTextQueue = useResetRecoilState(floatingTextQueues(delta));
 
-  const onAnimationEnd = (id: string) => () =>
+  const onAnimationEnd = (id: string) => () => {
     setFloatingTextQueue((current) => current.filter(({ key }) => key !== id));
+    resetDelta();
+  };
 
   useEffect(() => {
     if (deltaValue === DEFAULT_DELTA_DISPLAY) {

@@ -61,11 +61,8 @@ export function useAcquireItem() {
           get(autoEquip) &&
           ((get(armor).name === ARMOR_NONE.name && isArmor(item)) ||
             // Acquiring a shield while no shield equipped and not wielding a ranged or two-handed weapon (unless colossus).
-            (isShieldUnequipped &&
-              isShield(item) &&
-              !isRanged(weaponValue) &&
-              weaponValue.grip === "two-handed" &&
-              get(isTraitAcquired("colossus"))) ||
+            (isShieldUnequipped && isShield(item) && !isRanged(weaponValue)) ||
+            get(isTraitAcquired("colossus")) ||
             // Acquiring a weapon while no weapon equipped, and if ranged or two-handed, no shield equipped.
             (weaponValue.name === WEAPON_NONE.name &&
               ((isMelee(item) && item.grip === "one-handed") ||

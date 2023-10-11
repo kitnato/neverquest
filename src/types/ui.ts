@@ -21,7 +21,7 @@ type DeltaDisplayContents = {
 
 export type DeltaReserve =
   | { isRegeneration: true }
-  | (DeltaReserveBase & { isRegeneration: false });
+  | (DeltaReserveBase & { isRegeneration?: false });
 
 export type DeltaReserveBase = {
   delta?: DeltaDisplay;

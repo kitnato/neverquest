@@ -20,7 +20,6 @@ export function Antidote({ id }: { id: string }) {
         color: "text-muted",
         value: "REMEDIED",
       },
-      isRegeneration: false,
       value: 0,
     });
 

@@ -1,12 +1,11 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconRank } from "@neverquest/icons/rank.svg";
 import { attributeRank } from "@neverquest/state/attributes";
-import { deltas } from "@neverquest/state/deltas";
 import type { Attribute } from "@neverquest/types/unions";
 import { formatValue } from "@neverquest/utilities/formatters";
 
@@ -15,7 +14,7 @@ export function AttributeRank({ attribute }: { attribute: Attribute }) {
   const attributeRankValue = useRecoilValue(attributeRankState);
 
   useDeltaText({
-    delta: deltas(attribute),
+    delta: attribute,
     value: attributeRankState,
   });
 
@@ -27,7 +26,7 @@ export function AttributeRank({ attribute }: { attribute: Attribute }) {
         tooltip="Rank"
       />
 
-      <FloatingText delta={attribute} />
+      <FloatingTextQueue delta={attribute} />
     </Stack>
   );
 }

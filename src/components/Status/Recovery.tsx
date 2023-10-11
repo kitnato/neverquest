@@ -2,7 +2,7 @@ import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { RecoveryMeter } from "@neverquest/components/Status/RecoveryMeter";
@@ -13,7 +13,6 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconRecovery } from "@neverquest/icons/recovery.svg";
 import { ReactComponent as IconResilience } from "@neverquest/icons/resilience.svg";
 import { isRecovering, recoveryDuration } from "@neverquest/state/character";
-import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMasteryUnlocked, masteryStatistic } from "@neverquest/state/masteries";
 import { recoveryRate } from "@neverquest/state/statistics";
@@ -32,7 +31,7 @@ export function Recovery() {
   });
 
   useDeltaText({
-    delta: deltas("recoveryRate"),
+    delta: "recoveryRate",
     format: "time",
     value: recoveryRate,
   });
@@ -83,7 +82,7 @@ export function Recovery() {
             </span>
           </OverlayTrigger>
 
-          <FloatingText delta="recoveryRate" />
+          <FloatingTextQueue delta="recoveryRate" />
         </Stack>
       }
       Icon={IconRecovery}

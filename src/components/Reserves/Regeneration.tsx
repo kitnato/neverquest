@@ -3,7 +3,7 @@ import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconImage } from "@neverquest/components/IconImage";
 import { RegenerationMeter } from "@neverquest/components/Reserves/RegenerationMeter";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
@@ -19,7 +19,6 @@ import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-pow
 import { ReactComponent as IconVigor } from "@neverquest/icons/vigor.svg";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { isRecovering } from "@neverquest/state/character";
-import { deltas } from "@neverquest/state/deltas";
 import {
   isHealthAtMaximum,
   isRegenerating,
@@ -64,7 +63,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
   });
 
   useDeltaText({
-    delta: deltas(regenerationDelta),
+    delta: regenerationDelta,
     format: "time",
     value: regenerationRate(reserve),
   });
@@ -175,7 +174,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
         </span>
       </OverlayTrigger>
 
-      <FloatingText delta={isHealth ? "healthRegenerationRate" : "staminaRegenerationRate"} />
+      <FloatingTextQueue delta={isHealth ? "healthRegenerationRate" : "staminaRegenerationRate"} />
     </Stack>
   );
 }

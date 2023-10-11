@@ -1,12 +1,11 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
-import { deltas } from "@neverquest/state/deltas";
 import { encumbrance, encumbranceMaximum } from "@neverquest/state/inventory";
 
 export function Encumbrance() {
@@ -14,7 +13,7 @@ export function Encumbrance() {
   const encumbranceMaximumValue = useRecoilValue(encumbranceMaximum);
 
   useDeltaText({
-    delta: deltas("encumbranceMaximum"),
+    delta: "encumbranceMaximum",
     value: encumbranceMaximum,
   });
 
@@ -27,7 +26,7 @@ export function Encumbrance() {
           <Stack direction="horizontal">
             {`${encumbranceValue}/${encumbranceMaximumValue}`}
 
-            <FloatingText delta="encumbranceMaximum" />
+            <FloatingTextQueue delta="encumbranceMaximum" />
           </Stack>
         }
         value={(encumbranceValue / encumbranceMaximumValue) * 100}

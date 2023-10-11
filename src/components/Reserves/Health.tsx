@@ -2,7 +2,7 @@ import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
@@ -97,7 +97,7 @@ export function Health() {
               </span>
             </OverlayTrigger>
 
-            <FloatingText delta="health" />
+            <FloatingTextQueue delta="health" />
           </Stack>
 
           <Regeneration reserve="health" />

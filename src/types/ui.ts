@@ -28,11 +28,6 @@ export type DeltaReserveBase = {
   value: number;
 };
 
-export type FloatingText = {
-  delta: DeltaDisplay;
-  key: string;
-};
-
 export type UIAttachment = "above" | "below";
 
 export type UISize = "normal" | "small";

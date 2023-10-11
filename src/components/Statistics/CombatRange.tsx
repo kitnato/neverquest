@@ -2,7 +2,7 @@ import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
@@ -10,7 +10,6 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconMarksmanship } from "@neverquest/icons/marksmanship.svg";
 import { ReactComponent as IconRange } from "@neverquest/icons/range.svg";
 import { ReactComponent as IconRanged } from "@neverquest/icons/ranged.svg";
-import { deltas } from "@neverquest/state/deltas";
 import { range, weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -26,7 +25,7 @@ export function CombatRange() {
   const isWeaponRanged = isRanged(weaponValue);
 
   useDeltaText({
-    delta: deltas("range"),
+    delta: "range",
     format: "time",
     value: range,
   });
@@ -88,7 +87,7 @@ export function CombatRange() {
             </span>
           </OverlayTrigger>
 
-          <FloatingText delta="range" />
+          <FloatingTextQueue delta="range" />
         </Stack>
       }
       Icon={IconRange}

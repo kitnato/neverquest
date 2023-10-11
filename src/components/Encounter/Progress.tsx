@@ -1,12 +1,11 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconProgress } from "@neverquest/icons/progress.svg";
-import { deltas } from "@neverquest/state/deltas";
 import { isWilderness, progress, progressMaximum } from "@neverquest/state/encounter";
 import { formatValue } from "@neverquest/utilities/formatters";
 
@@ -16,8 +15,8 @@ export function Progress() {
   const progressMaximumValue = useRecoilValue(progressMaximum);
 
   useDeltaText({
-    delta: deltas("progress"),
-    stop: ({ current, previous }) => previous === null || current === 0,
+    delta: "progress",
+    stop: ({ current }) => current === 0,
     value: progress,
   });
 
@@ -38,7 +37,7 @@ export function Progress() {
               variant="dark"
             />
 
-            <FloatingText delta="progress" />
+            <FloatingTextQueue delta="progress" />
           </Stack>
         }
         Icon={IconProgress}

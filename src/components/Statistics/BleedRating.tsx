@@ -2,7 +2,7 @@ import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
@@ -11,7 +11,6 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconBleedRating } from "@neverquest/icons/bleed-rating.svg";
 import { ReactComponent as IconBleed } from "@neverquest/icons/bleed.svg";
 import { ReactComponent as IconCruelty } from "@neverquest/icons/cruelty.svg";
-import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -30,7 +29,7 @@ export function BleedRating() {
   const { duration, ticks } = BLEED;
 
   useDeltaText({
-    delta: deltas("bleedRating"),
+    delta: "bleedRating",
     value: bleedRating,
   });
 
@@ -112,7 +111,7 @@ export function BleedRating() {
             <span>{anatomyValue ? bleedRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
-          <FloatingText delta="bleedRating" />
+          <FloatingTextQueue delta="bleedRating" />
         </Stack>
       }
       Icon={IconBleedRating}

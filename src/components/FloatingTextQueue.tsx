@@ -1,10 +1,11 @@
 import { nanoid } from "nanoid";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Stack } from "react-bootstrap";
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 
 import { DEFAULT_DELTA_DISPLAY } from "@neverquest/data/general";
-import { deltas, floatingTextQueues } from "@neverquest/state/deltas";
+import { deltas } from "@neverquest/state/deltas";
+import type { DeltaDisplay } from "@neverquest/types/ui";
 import type { Delta } from "@neverquest/types/unions";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -13,12 +14,18 @@ const ANIMATION_FLOATING_TEXT = getAnimationClass({
   speed: "slower",
 });
 
-export function FloatingText({ delta }: { delta: Delta }) {
+export function FloatingTextQueue({ delta }: { delta: Delta }) {
   const deltaState = deltas(delta);
+
   const deltaValue = useRecoilValue(deltaState);
-  const [floatingTextQueue, setFloatingTextQueue] = useRecoilState(floatingTextQueues(delta));
   const resetDelta = useResetRecoilState(deltaState);
-  const resetFloatingTextQueue = useResetRecoilState(floatingTextQueues(delta));
+
+  const [floatingTextQueue, setFloatingTextQueue] = useState<
+    {
+      delta: DeltaDisplay;
+      key: string;
+    }[]
+  >([]);
 
   const onAnimationEnd = (id: string) => () => {
     setFloatingTextQueue((current) => current.filter(({ key }) => key !== id));
@@ -37,9 +44,7 @@ export function FloatingText({ delta }: { delta: Delta }) {
         key: nanoid(),
       },
     ]);
-
-    return resetFloatingTextQueue;
-  }, [deltaValue, resetFloatingTextQueue, setFloatingTextQueue]);
+  }, [delta, deltaValue, resetDelta, setFloatingTextQueue]);
 
   return (
     <div

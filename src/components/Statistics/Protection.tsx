@@ -1,11 +1,10 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconProtection } from "@neverquest/icons/protection.svg";
-import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { protection } from "@neverquest/state/statistics";
 
@@ -14,7 +13,7 @@ export function Protection() {
   const protectionValue = useRecoilValue(protection);
 
   useDeltaText({
-    delta: deltas("protection"),
+    delta: "protection",
     value: protection,
   });
 
@@ -28,7 +27,7 @@ export function Protection() {
         <Stack direction="horizontal">
           <span>{protectionValue}</span>
 
-          <FloatingText delta="protection" />
+          <FloatingTextQueue delta="protection" />
         </Stack>
       }
       Icon={IconProtection}

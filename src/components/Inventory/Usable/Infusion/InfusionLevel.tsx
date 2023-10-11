@@ -1,10 +1,9 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { InfusionLevelDisplay } from "@neverquest/components/Inventory/Usable/Infusion/InfusionLevelDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { deltas } from "@neverquest/state/deltas";
 import { infusionLevel } from "@neverquest/state/items";
 import type { Infusable } from "@neverquest/types/unions";
 
@@ -13,7 +12,7 @@ export function InfusionLevel({ infusable }: { infusable: Infusable }) {
   const infusionLevelValue = useRecoilValue(infusionLevelState);
 
   useDeltaText({
-    delta: deltas("infusionLevel"),
+    delta: "infusionLevel",
     value: infusionLevelState,
   });
 
@@ -21,7 +20,7 @@ export function InfusionLevel({ infusable }: { infusable: Infusable }) {
     <Stack direction="horizontal">
       <InfusionLevelDisplay level={infusionLevelValue} overlayPlacement="bottom" />
 
-      <FloatingText delta="infusionLevel" />
+      <FloatingTextQueue delta="infusionLevel" />
     </Stack>
   );
 }

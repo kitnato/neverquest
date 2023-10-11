@@ -2,7 +2,7 @@ import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/DodgePenaltyContents";
@@ -18,7 +18,6 @@ import { ReactComponent as IconDodgePenalty } from "@neverquest/icons/dodge-pena
 import { ReactComponent as IconDodge } from "@neverquest/icons/dodge.svg";
 import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
-import { deltas } from "@neverquest/state/deltas";
 import { armor } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ownedItem } from "@neverquest/state/items";
@@ -37,7 +36,7 @@ export function Dodge() {
   const evasionValue = useRecoilValue(isSkillAcquired("evasion"));
 
   useDeltaText({
-    delta: deltas("dodge"),
+    delta: "dodge",
     format: "percentage",
     value: dodge,
   });
@@ -120,7 +119,7 @@ export function Dodge() {
             </span>
           </OverlayTrigger>
 
-          <FloatingText delta="dodge" />
+          <FloatingTextQueue delta="dodge" />
         </Stack>
       }
       Icon={IconDodge}

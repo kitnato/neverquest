@@ -2,7 +2,7 @@ import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
@@ -93,7 +93,7 @@ export function Stamina() {
               </span>
             </OverlayTrigger>
 
-            <FloatingText delta="stamina" />
+            <FloatingTextQueue delta="stamina" />
           </Stack>
 
           <Regeneration reserve="stamina" />

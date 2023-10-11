@@ -1,14 +1,13 @@
 import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconAttributePoints } from "@neverquest/icons/attribute-points.svg";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { attributePoints, level } from "@neverquest/state/attributes";
-import { deltas } from "@neverquest/state/deltas";
 import { formatValue } from "@neverquest/utilities/formatters";
 import { getAttributePointCost } from "@neverquest/utilities/getters";
 
@@ -16,10 +15,8 @@ export function AttributePoints() {
   const attributePointsValue = useRecoilValue(attributePoints);
   const levelValue = useRecoilValue(level);
 
-  const deltaAttributePoints = deltas("attributePoints");
-
   useDeltaText({
-    delta: deltaAttributePoints,
+    delta: "attributePoints",
     value: attributePoints,
   });
 
@@ -28,7 +25,7 @@ export function AttributePoints() {
       <Stack direction="horizontal">
         <IconDisplay contents="" Icon={IconAttributePoints} tooltip="Available attribute points" />
 
-        <FloatingText delta="attributePoints" />
+        <FloatingTextQueue delta="attributePoints" />
       </Stack>
 
       <OverlayTrigger

@@ -2,13 +2,12 @@ import { useEffect } from "react";
 import { ProgressBar, Stack } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 
-import { FloatingText } from "../FloatingText";
+import { FloatingTextQueue } from "../FloatingTextQueue";
 import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconBlight } from "@neverquest/icons/blight.svg";
 import { ReactComponent as IconPoison } from "@neverquest/icons/poison.svg";
-import { deltas } from "@neverquest/state/deltas";
 import {
   blightMagnitude,
   health,
@@ -48,7 +47,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
   );
 
   useDeltaText({
-    delta: deltas(deltaReserveMaximum),
+    delta: deltaReserveMaximum,
     value: reserveMaximum,
   });
 
@@ -72,7 +71,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
               value: reserveMaximumTotalValue,
             })}
 
-            <FloatingText delta={deltaReserveMaximum} />
+            <FloatingTextQueue delta={deltaReserveMaximum} />
           </Stack>
 
           {isAiling && (

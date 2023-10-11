@@ -2,7 +2,7 @@ import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY, LABEL_SEPARATOR } from "@neverquest/data/general";
@@ -15,7 +15,6 @@ import { ReactComponent as IconDexterity } from "@neverquest/icons/dexterity.svg
 import { ReactComponent as IconPerception } from "@neverquest/icons/perception.svg";
 import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
-import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { criticalRating, criticalStrike } from "@neverquest/state/statistics";
@@ -32,8 +31,8 @@ export function CriticalRating() {
   const assassinationValue = useRecoilValue(isSkillAcquired("assassination"));
 
   useDeltaText({
-    delta: deltas("criticalRating"),
-    stop: ({ previous }) => previous === null || !assassinationValue,
+    delta: "criticalRating",
+    stop: () => !assassinationValue,
     value: criticalRating,
   });
 
@@ -140,7 +139,7 @@ export function CriticalRating() {
             <span>{assassinationValue ? criticalRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
-          <FloatingText delta="criticalRating" />
+          <FloatingTextQueue delta="criticalRating" />
         </Stack>
       }
       Icon={IconCriticalRating}

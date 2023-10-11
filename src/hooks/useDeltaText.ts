@@ -1,36 +1,31 @@
 import { useEffect } from "react";
-import {
-  type RecoilState,
-  type RecoilValueReadOnly,
-  useRecoilValue,
-  useSetRecoilState,
-} from "recoil";
+import { type RecoilValueReadOnly, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
-import type { DeltaDisplay } from "@neverquest/types/ui";
-import type { NumberFormat } from "@neverquest/types/unions";
+import { deltas } from "@neverquest/state/deltas";
+import type { Delta, NumberFormat } from "@neverquest/types/unions";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function useDeltaText({
   delta,
   format = "integer",
-  stop = ({ previous }) => previous === null,
+  stop = () => false,
   value,
 }: {
-  delta: RecoilState<DeltaDisplay>;
+  delta: Delta;
   format?: NumberFormat;
   stop?: ({ current, previous }: { current: number; previous: number | null }) => boolean;
   value: RecoilValueReadOnly<number>;
 }) {
   const currentValue = useRecoilValue(value);
-  const setDelta = useSetRecoilState(delta);
+  const setDelta = useSetRecoilState(deltas(delta));
 
   const previousValue = usePreviousValue(currentValue);
 
   const isTime = format === "time";
 
   useEffect(() => {
-    if (stop({ current: currentValue, previous: previousValue })) {
+    if (previousValue === null || stop({ current: currentValue, previous: previousValue })) {
       return;
     }
 
@@ -55,5 +50,5 @@ export function useDeltaText({
         value: difference,
       })}`,
     });
-  }, [currentValue, format, isTime, previousValue, setDelta, stop]);
+  }, [currentValue, delta, format, isTime, previousValue, setDelta, stop]);
 }

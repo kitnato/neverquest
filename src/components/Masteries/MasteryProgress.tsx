@@ -1,12 +1,11 @@
 import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { LABEL_MAXIMUM } from "@neverquest/data/general";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { deltas } from "@neverquest/state/deltas";
 import { isMasteryAtMaximum, masteryCost, masteryProgress } from "@neverquest/state/masteries";
 import type { Mastery } from "@neverquest/types/unions";
 
@@ -17,8 +16,8 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
   const masteryProgressValue = useRecoilValue(masteryProgressState);
 
   useDeltaText({
-    delta: deltas("masteryProgress"),
-    stop: ({ current, previous }) => previous === null || current === 0,
+    delta: "masteryProgress",
+    stop: ({ current }) => current === 0,
     value: masteryProgressState,
   });
 
@@ -44,7 +43,7 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
         </span>
       </OverlayTrigger>
 
-      <FloatingText delta="masteryProgress" />
+      <FloatingTextQueue delta="masteryProgress" />
     </Stack>
   );
 }

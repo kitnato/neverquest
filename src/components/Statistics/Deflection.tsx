@@ -1,11 +1,10 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
-import { deltas } from "@neverquest/state/deltas";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { deflection } from "@neverquest/state/statistics";
 import { formatValue } from "@neverquest/utilities/formatters";
@@ -15,7 +14,7 @@ export function Deflection() {
   const armorcraftValue = useRecoilValue(isSkillAcquired("armorcraft"));
 
   useDeltaText({
-    delta: deltas("deflection"),
+    delta: "deflection",
     format: "percentage",
     value: deflection,
   });
@@ -30,7 +29,7 @@ export function Deflection() {
         <Stack direction="horizontal">
           <span>{formatValue({ format: "percentage", value: deflectionValue })}</span>
 
-          <FloatingText delta="deflection" />
+          <FloatingTextQueue delta="deflection" />
         </Stack>
       }
       Icon={IconDeflection}

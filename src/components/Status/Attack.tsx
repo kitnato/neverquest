@@ -3,7 +3,7 @@ import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { AttackMeter } from "@neverquest/components/Status/AttackMeter";
@@ -25,7 +25,6 @@ import {
   isLooting,
   isRecovering,
 } from "@neverquest/state/character";
-import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMonsterDead } from "@neverquest/state/monster";
@@ -60,7 +59,7 @@ export function Attack() {
   });
 
   useDeltaText({
-    delta: deltas("attackRate"),
+    delta: "attackRate",
     format: "time",
     value: attackRateTotal,
   });
@@ -138,7 +137,7 @@ export function Attack() {
             </span>
           </OverlayTrigger>
 
-          <FloatingText delta="attackRate" />
+          <FloatingTextQueue delta="attackRate" />
         </Stack>
       }
       Icon={IconAttackRate}

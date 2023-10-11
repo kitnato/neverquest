@@ -1,12 +1,11 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LABEL_EMPTY } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconExecution } from "@neverquest/icons/execution.svg";
-import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/gear";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { execution } from "@neverquest/state/statistics";
@@ -18,17 +17,19 @@ export function Execution() {
   const siegecraftValue = useRecoilValue(isSkillAcquired("siegecraft"));
   const weaponValue = useRecoilValue(weapon);
 
+  const isEmpty =
+    !siegecraftValue ||
+    isRanged(weaponValue) ||
+    (isMelee(weaponValue) && weaponValue.grip !== "two-handed");
+
   useDeltaText({
-    delta: deltas("execution"),
+    delta: "execution",
     format: "percentage",
+    stop: () => isEmpty,
     value: execution,
   });
 
-  if (
-    !siegecraftValue ||
-    isRanged(weaponValue) ||
-    (isMelee(weaponValue) && weaponValue.grip !== "two-handed")
-  ) {
+  if (isEmpty) {
     return null;
   }
 
@@ -44,7 +45,7 @@ export function Execution() {
               : LABEL_EMPTY}
           </span>
 
-          <FloatingText delta="execution" />
+          <FloatingTextQueue delta="execution" />
         </Stack>
       }
       Icon={IconExecution}

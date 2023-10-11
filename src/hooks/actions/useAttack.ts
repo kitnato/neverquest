@@ -32,7 +32,9 @@ import {
   criticalStrike,
   damageTotal,
   execution,
+  stun,
 } from "@neverquest/state/statistics";
+import { isTraitAcquired } from "@neverquest/state/traits";
 import type { AmmunitionPouchItem } from "@neverquest/types";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import type { DeltaDisplay } from "@neverquest/types/ui";
@@ -54,7 +56,7 @@ export function useAttack() {
         const canAttackOrParryValue = get(canAttackOrParry);
         const hasEnoughAmmunitionValue = get(hasEnoughAmmunition);
         const weaponValue = get(weapon);
-        const { abilityChance, gearClass, staminaCost } = weaponValue;
+        const { gearClass, staminaCost } = weaponValue;
 
         set(isShowing("statistics"), true);
 
@@ -75,32 +77,6 @@ export function useAttack() {
 
           const isTwoHanded = isMelee(weaponValue) && weaponValue.grip === "two-handed";
           const monsterHealthValue = get(monsterHealth);
-          const hasExecuted =
-            get(isSkillAcquired("siegecraft")) &&
-            isTwoHanded &&
-            monsterHealthValue / get(monsterHealthMaximum) <= get(execution);
-
-          if (isTwoHanded) {
-            increaseMastery("butchery");
-          }
-
-          if (hasExecuted) {
-            changeMonsterHealth({
-              delta: [
-                {
-                  color: "text-muted",
-                  value: "EXECUTE",
-                },
-                {
-                  color: "text-danger",
-                  value: `-${monsterHealthValue}`,
-                },
-              ],
-              value: -monsterHealthValue,
-            });
-
-            return;
-          }
 
           if (isRanged(weaponValue)) {
             set(inventory, (currentInventory) =>
@@ -120,16 +96,44 @@ export function useAttack() {
             increaseMastery("marksmanship");
           }
 
+          if (gearClass === "blunt") {
+            increaseMastery("might");
+          }
+
+          if (gearClass === "piercing") {
+            increaseMastery("cruelty");
+          }
+
+          if (gearClass === "slashing") {
+            increaseMastery("finesse");
+          }
+
+          if (isTwoHanded) {
+            increaseMastery("butchery");
+          }
+
           const hasInflictedCritical =
             get(isSkillAcquired("assassination")) && Math.random() <= get(criticalChance);
-          const hasInflictedBleed =
-            get(monsterAilmentDuration("bleeding")) === 0 &&
-            get(isSkillAcquired("anatomy")) &&
-            Math.random() <= get(bleed);
-          const hasInflictedStun =
-            get(isSkillAcquired("traumatology")) &&
-            gearClass === "blunt" &&
-            Math.random() <= abilityChance;
+          const inExecutionRange =
+            isTwoHanded && monsterHealthValue / get(monsterHealthMaximum) <= get(execution);
+
+          if (inExecutionRange || (hasInflictedCritical && get(isTraitAcquired("executioner")))) {
+            changeMonsterHealth({
+              delta: [
+                {
+                  color: "text-muted",
+                  value: "EXECUTE",
+                },
+                {
+                  color: "text-danger",
+                  value: `-${monsterHealthValue}`,
+                },
+              ],
+              value: -monsterHealthValue,
+            });
+
+            return;
+          }
 
           const baseDamage = get(damageTotal);
           const totalDamage = -Math.round(
@@ -143,19 +147,11 @@ export function useAttack() {
             },
           ];
 
-          if (gearClass === "blunt") {
-            increaseMastery("might");
-          }
-
-          if (gearClass === "piercing") {
-            increaseMastery("cruelty");
-          }
-
-          if (gearClass === "slashing") {
-            increaseMastery("finesse");
-          }
-
-          if (hasInflictedBleed) {
+          if (
+            Math.random() < get(bleed) &&
+            get(monsterAilmentDuration("bleeding")) === 0 &&
+            get(isSkillAcquired("anatomy"))
+          ) {
             set(isShowing("monsterAilments"), true);
             set(monsterAilmentDuration("bleeding"), BLEED.duration);
 
@@ -172,7 +168,7 @@ export function useAttack() {
             });
           }
 
-          if (hasInflictedStun) {
+          if (Math.random() < get(stun) && get(isSkillAcquired("traumatology"))) {
             set(isShowing("monsterAilments"), true);
             set(monsterAilmentDuration("stunned"), get(masteryStatistic("might")));
 

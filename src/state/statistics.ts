@@ -244,15 +244,20 @@ export const staggerRating = withStateKey("staggerRating", (key) =>
   }),
 );
 
-export const stunRating = withStateKey("stunRating", (key) =>
+export const stun = withStateKey("stun", (key) =>
   selector({
     get: ({ get }) => {
       const { abilityChance, gearClass } = get(weapon);
 
-      return gearClass === "blunt"
-        ? Math.round(abilityChance * get(masteryStatistic("might")) * 100)
-        : 0;
+      return gearClass === "blunt" ? abilityChance : 0;
     },
+    key,
+  }),
+);
+
+export const stunRating = withStateKey("stunRating", (key) =>
+  selector({
+    get: ({ get }) => Math.round(get(stun) * get(masteryStatistic("might")) * 100),
     key,
   }),
 );

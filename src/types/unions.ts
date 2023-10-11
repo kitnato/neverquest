@@ -347,6 +347,7 @@ export type StateKey =
   | "staminaMaximum"
   | "staminaMaximumTotal"
   | "statusElement"
+  | "stun"
   | "stunRating"
   | "thorns"
   | "totalElementalEffects"

@@ -49,14 +49,12 @@ export function TransmuteGems() {
   }, [result, source]);
 
   return (
-    <Stack className="mx-auto" gap={3}>
-      <Stack direction="horizontal" gap={5}>
-        <SelectGem gem={source} onSelect={onSelect(setSource)} />
+    <Stack direction="horizontal" gap={5}>
+      <SelectGem gem={source} onSelect={onSelect(setSource)} />
 
-        <IconImage Icon={IconTransmute} />
+      <IconImage Icon={IconTransmute} />
 
-        <SelectGem gem={result} omit={source} onSelect={onSelect(setResult)} />
-      </Stack>
+      <SelectGem gem={result} omit={source} onSelect={onSelect(setResult)} />
 
       <OverlayTrigger
         overlay={<Tooltip>{`Insufficient ${plural(source)}.`}</Tooltip>}

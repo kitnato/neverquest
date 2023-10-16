@@ -33,10 +33,9 @@ export function Inventory() {
 
   const toggleEquipGear = useToggleEquipGear();
 
-  const equippedGear = inventoryValue.filter((item) => isGear(item) && item.isEquipped);
-  const storedItems = inventoryValue.filter(
-    (item) => !isGear(item) || (isGear(item) && !item.isEquipped),
-  );
+  const equippedGear = inventoryValue.filter((current) => isGear(current) && current.isEquipped);
+  const equippedGearIDs = equippedGear.map(({ id }) => id);
+  const storedItems = inventoryValue.filter(({ id }) => !equippedGearIDs.includes(id));
 
   return (
     <Stack gap={5}>
@@ -118,8 +117,7 @@ export function Inventory() {
             storedItems.filter(isConsumable).sort((a, b) => a.name.localeCompare(b.name)),
           ),
           ...stackItems(storedItems.filter(isGem).sort((a, b) => a.name.localeCompare(b.name))),
-        ].map((current) => {
-          const { item, stack } = current;
+        ].map(({ item, stack }) => {
           const { id, name } = item;
 
           return (

@@ -7,7 +7,7 @@ import { merchantInventory } from "@neverquest/state/caravan";
 export function BuybackItems() {
   const merchantInventoryValue = useRecoilValue(merchantInventory);
 
-  const returnedItems = merchantInventoryValue.filter((item) => item.isReturned);
+  const returnedItems = merchantInventoryValue.filter(({ isReturned }) => isReturned);
 
   if (returnedItems.length === 0) {
     return null;

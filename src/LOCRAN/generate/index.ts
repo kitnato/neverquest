@@ -54,22 +54,24 @@ export function generate({
   }
 
   if (hasSuffix) {
-    const filteredSuffixes = AFFIXES.filter((affix) => {
-      const filterNSFW = allowNSFW ? Boolean(affix.isNSFW) || !affix.isNSFW : !affix.isNSFW;
+    const filteredSuffixes = AFFIXES.filter((currentAffix) => {
+      const filterNSFW = allowNSFW
+        ? Boolean(currentAffix.isNSFW) || !currentAffix.isNSFW
+        : !currentAffix.isNSFW;
 
       // If we want a tagged suffix, check if the current affix has all of them (with NSFW filter).
       if (suffixTags.length > 0) {
-        if (affix.tags !== undefined) {
+        if (currentAffix.tags !== undefined) {
           return (
-            affix[category] === "suffix" &&
-            suffixTags.every((current) => affix.tags?.includes(current)) &&
+            currentAffix[category] === "suffix" &&
+            suffixTags.every((currentSuffix) => currentAffix.tags?.includes(currentSuffix)) &&
             filterNSFW
           );
         }
       }
 
       // Otherwise, return any suffix (with NSFW filter).
-      return affix[category] === "suffix" && filterNSFW;
+      return currentAffix[category] === "suffix" && filterNSFW;
     });
 
     const suffix = filteredSuffixes[Math.floor(Math.random() * filteredSuffixes.length)];

@@ -14,7 +14,7 @@ export function StoredGear() {
   const toggleEquipGear = useToggleEquipGear();
 
   return inventoryValue
-    .filter((item) => !isGear(item) || (isGear(item) && !item.isEquipped))
+    .filter((current) => isGear(current) && !current.isEquipped)
     .filter(isGear)
     .sort((a, b) => a.name.localeCompare(b.name))
     .map((current) => {

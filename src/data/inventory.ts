@@ -224,7 +224,7 @@ export const INFUSABLES: Record<
   {
     Icon: SVGIcon;
     item: InfusableItem & {
-      growth: number;
+      growthBase: number;
       maximum: number;
       minimum: number;
     };
@@ -234,7 +234,7 @@ export const INFUSABLES: Record<
     Icon: IconMonkeyPaw,
     item: {
       description: "Boosts amount of essence looted.",
-      growth: 12,
+      growthBase: 8,
       id: nanoid(),
       level: 1,
       maximum: 2,
@@ -248,7 +248,7 @@ export const INFUSABLES: Record<
     Icon: IconTomeOfPower,
     item: {
       description: "Boosts all attribute effects based on power level.",
-      growth: 14,
+      growthBase: 10,
       id: nanoid(),
       level: 1,
       maximum: 1.5,

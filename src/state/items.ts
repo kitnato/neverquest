@@ -114,7 +114,7 @@ export const infusionMaximum = withStateKey("infusionMaximum", (key) =>
           return 0;
         }
 
-        return getGrowthTriangular(infusable.level + INFUSABLES[parameter].item.growth);
+        return getGrowthTriangular(infusable.level + INFUSABLES[parameter].item.growthBase);
       },
     key,
   }),

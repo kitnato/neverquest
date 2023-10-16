@@ -19,15 +19,15 @@ import { armor, shield, weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
+  blightChance,
   isMonsterAiling,
   monsterAilmentDuration,
   monsterAttackDuration,
   monsterAttackRate,
-  monsterBlightChance,
   monsterDamageTotal,
   monsterElement,
-  monsterPoisonChance,
-  monsterPoisonLength,
+  poison,
+  poisonLength,
 } from "@neverquest/state/monster";
 import { blight, isPoisoned, poisonDuration } from "@neverquest/state/reserves";
 import {
@@ -238,7 +238,7 @@ export function useDefend() {
         increaseMastery("resilience");
 
         // If already poisoned, check if blighting has occurred and if it's been deflected.
-        if (get(isPoisoned) && Math.random() < get(monsterBlightChance)) {
+        if (get(isPoisoned) && Math.random() < get(blightChance)) {
           if (Math.random() < get(deflection)) {
             deltaStamina.push({
               color: "text-success",
@@ -255,14 +255,14 @@ export function useDefend() {
         }
 
         // If poisoning occurs, check if has been deflected, otherwise apply poison.
-        if (Math.random() < get(monsterPoisonChance)) {
+        if (Math.random() < get(poison)) {
           if (Math.random() < get(deflection)) {
             deltaHealth.push({
               color: "text-muted",
               value: "DEFLECTED POISON",
             });
           } else {
-            set(poisonDuration, get(monsterPoisonLength));
+            set(poisonDuration, get(poisonLength));
 
             deltaHealth.push({
               color: "text-muted",

@@ -4538,9 +4538,9 @@ export const AFFIXES: AffixData[] = [
     tags: ["highQuality"],
   },
   {
-    artifact: "suffix",
-    creature: "suffix",
-    location: "suffix",
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
     name: "sclerotic",
   },
   {

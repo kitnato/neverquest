@@ -124,6 +124,10 @@ export function getGearPrice({
   return Math.round((price.minimum + price.maximum * factor) * modifier);
 }
 
+export function getGrowthLinearMapping({ offset, stage }: { offset: number; stage: number }) {
+  return ((stage - offset) * (GROWTH_MAXIMUM - 1)) / (GROWTH_MAXIMUM - offset - 1) + 1;
+}
+
 // https://en.wikipedia.org/wiki/Sigmoid_function
 // f(0) = ~0, f(50) = ~0.78, f(100) = ~1
 export function getGrowthSigmoid(x: number) {
@@ -135,12 +139,15 @@ export function getGrowthTriangular(x: number) {
   return (x * (x + 1)) / 2;
 }
 
-export function getProgressReduction(value: number) {
+export function getProgressReduction(stage: number) {
   const { maximum, minimum } = PROGRESS_REDUCTION;
 
   return getFromRange({
     factor: getGrowthSigmoid(
-      (GROWTH_MAXIMUM / RETIREMENT_MINIMUM) * (value + 1 - RETIREMENT_MINIMUM),
+      getGrowthLinearMapping({
+        offset: RETIREMENT_MINIMUM,
+        stage: stage,
+      }),
     ),
     maximum,
     minimum,

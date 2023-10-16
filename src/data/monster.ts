@@ -27,7 +27,7 @@ export const BOSS_STAGE_INTERVAL = 5;
 export const BOSS_STAGE_START = 10;
 
 export const BLIGHT = {
-  boss: 0.33,
+  boss: 1.33,
   chance: {
     maximum: 0.6,
     minimum: 0.1,
@@ -39,7 +39,7 @@ export const BLIGHT = {
 export const ESSENCE = {
   attenuation: 10,
   bonus: 0.02,
-  boss: 0.2,
+  boss: 1.2,
   essence: 4,
 };
 
@@ -58,7 +58,7 @@ export const MONSTER_DAMAGE = {
 };
 
 export const MONSTER_HEALTH = {
-  attenuation: 80,
+  attenuation: 50,
   base: 25,
   bonus: 0.03,
   boss: 1.7,
@@ -70,17 +70,17 @@ export const MONSTER_NAME = {
 };
 
 export const POISON = {
-  boss: 0.33,
+  boss: 1.33,
   chance: {
     maximum: 0.5,
     minimum: 0.1,
   },
   duration: {
-    maximum: 200000,
+    maximum: 250000,
     minimum: 20000,
   },
   magnitude: {
-    maximum: 0.2,
+    maximum: 0.25,
     minimum: 0.05,
   },
   stageRequired: 15,

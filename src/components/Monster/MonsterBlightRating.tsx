@@ -4,17 +4,17 @@ import { useRecoilValue } from "recoil";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY, LABEL_MAXIMUM } from "@neverquest/data/general";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
 import { ReactComponent as IconBlight } from "@neverquest/icons/blight.svg";
 import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
-import { monsterBlightChance } from "@neverquest/state/monster";
+import { blightChance } from "@neverquest/state/monster";
 import { blightAmount, isPoisoned } from "@neverquest/state/reserves";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function MonsterBlightRating() {
   const blightAmountValue = useRecoilValue(blightAmount);
   const isPoisonedValue = useRecoilValue(isPoisoned);
-  const monsterBlightChanceValue = useRecoilValue(monsterBlightChance);
+  const monsterBlightChanceValue = useRecoilValue(blightChance);
 
   if (monsterBlightChanceValue === 0) {
     return null;
@@ -43,11 +43,9 @@ export function MonsterBlightRating() {
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        {`-${formatValue({ value: blightAmountValue })}`}
-
                         <IconImage Icon={IconStamina} size="small" />
 
-                        {LABEL_MAXIMUM}
+                        {`-${formatValue({ value: blightAmountValue })}`}
                       </Stack>
                     </td>
                   </tr>

@@ -2,6 +2,7 @@ import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
 import { TAILORING_EXPANSION, TAILORING_PRICES_MAXIMUM } from "@neverquest/data/caravan";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/data/general";
 import { ENCUMBRANCE } from "@neverquest/data/inventory";
@@ -28,41 +29,51 @@ export function ExpandKnapsack() {
   const canExpand = isAffordable && hasKnapsackValue;
 
   return (
-    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-      <IconDisplay
-        contents="Add pockets"
-        description={`Increases maximum encumbrance by ${TAILORING_EXPANSION.knapsack}.`}
-        Icon={IconTailoring}
-        tooltip="Tailoring"
-      />
+    <Stack gap={3}>
+      <h6>Knapsack</h6>
 
-      <Stack direction="horizontal" gap={3}>
-        <IconDisplay contents={formatValue({ value: price })} Icon={IconEssence} tooltip="Price" />
+      <Encumbrance />
 
-        <OverlayTrigger
-          overlay={
-            <Tooltip>
-              {!hasKnapsackValue && <div>Knapsack required.</div>}
+      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+        <IconDisplay
+          contents="Add pockets"
+          description={`Increases maximum encumbrance by ${TAILORING_EXPANSION.knapsack}.`}
+          Icon={IconTailoring}
+          tooltip="Tailoring"
+        />
 
-              {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
-            </Tooltip>
-          }
-          trigger={canExpand ? [] : ["hover", "focus"]}
-        >
-          <span>
-            <Button
-              disabled={!canExpand}
-              onClick={() => {
-                transactEssence(-price);
-                setEncumbranceMaximum((current) => current + TAILORING_EXPANSION.knapsack);
-              }}
-              variant="outline-dark"
-            >
-              Expand
-            </Button>
-          </span>
-        </OverlayTrigger>
-      </Stack>
-    </div>
+        <Stack direction="horizontal" gap={3}>
+          <IconDisplay
+            contents={formatValue({ value: price })}
+            Icon={IconEssence}
+            tooltip="Price"
+          />
+
+          <OverlayTrigger
+            overlay={
+              <Tooltip>
+                {!hasKnapsackValue && <div>Knapsack required.</div>}
+
+                {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
+              </Tooltip>
+            }
+            trigger={canExpand ? [] : ["hover", "focus"]}
+          >
+            <span>
+              <Button
+                disabled={!canExpand}
+                onClick={() => {
+                  transactEssence(-price);
+                  setEncumbranceMaximum((current) => current + TAILORING_EXPANSION.knapsack);
+                }}
+                variant="outline-dark"
+              >
+                Expand
+              </Button>
+            </span>
+          </OverlayTrigger>
+        </Stack>
+      </div>
+    </Stack>
   );
 }

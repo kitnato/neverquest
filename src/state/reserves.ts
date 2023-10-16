@@ -9,7 +9,7 @@ import {
   attributeRank,
   attributeStatistic,
 } from "@neverquest/state/attributes";
-import { monsterPoisonLength, monsterPoisonMagnitude } from "@neverquest/state/monster";
+import { poisonLength, poisonMagnitude } from "@neverquest/state/monster";
 import type { BlightMagnitude } from "@neverquest/types";
 import type { Reserve } from "@neverquest/types/unions";
 import { getComputedStatistic } from "@neverquest/utilities/getters";
@@ -56,9 +56,7 @@ export const healthMaximumTotal = withStateKey("healthMaximumTotal", (key) =>
       const newMaximum =
         get(healthMaximum) -
         Math.round(
-          get(healthMaximum) *
-            get(monsterPoisonMagnitude) *
-            (get(poisonDuration) / get(monsterPoisonLength)),
+          get(healthMaximum) * get(poisonMagnitude) * (get(poisonDuration) / get(poisonLength)),
         );
 
       if (newMaximum < 0) {

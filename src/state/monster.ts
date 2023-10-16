@@ -1,6 +1,5 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import { GROWTH_MAXIMUM } from "@neverquest/data/general";
 import { ELEMENTALS } from "@neverquest/data/inventory";
 import {
   BLIGHT,
@@ -27,11 +26,41 @@ import { formatValue } from "@neverquest/utilities/formatters";
 import {
   getDamagePerRate,
   getFromRange,
+  getGrowthLinearMapping,
   getGrowthSigmoid,
   getGrowthTriangular,
 } from "@neverquest/utilities/getters";
 
 // SELECTORS
+
+export const blightChance = withStateKey("blightChance", (key) =>
+  selector({
+    get: ({ get }) => {
+      const stageValue = get(stage);
+
+      const {
+        boss,
+        chance: { maximum, minimum },
+        stageRequired,
+      } = BLIGHT;
+
+      if (stageValue < stageRequired) {
+        return 0;
+      }
+
+      return (
+        getFromRange({
+          factor: getGrowthSigmoid(
+            getGrowthLinearMapping({ offset: stageRequired, stage: stageValue }),
+          ),
+          maximum,
+          minimum,
+        }) * (get(isBoss) ? boss : 1)
+      );
+    },
+    key,
+  }),
+);
 
 export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
   selectorFamily<boolean, MonsterAilment>({
@@ -121,30 +150,6 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   }),
 );
 
-export const monsterBlightChance = withStateKey("monsterBlightChance", (key) =>
-  selector({
-    get: ({ get }) => {
-      const stageValue = get(stage);
-
-      const {
-        boss,
-        chance: { maximum, minimum },
-        stageRequired,
-      } = BLIGHT;
-
-      if (stageValue < stageRequired) {
-        return 0;
-      }
-
-      return (
-        getFromRange({ factor: getGrowthSigmoid(stageValue), maximum, minimum }) *
-        (get(isBoss) ? boss : 1)
-      );
-    },
-    key,
-  }),
-);
-
 export const monsterDamage = withStateKey("monsterDamage", (key) =>
   selector({
     get: ({ get }) => {
@@ -227,8 +232,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
       return {
         essence: Math.round(
           (essence + essence * factor) * 1 +
-            get(progress) * bonus +
-            (isBossValue ? boss : 0) * (1 + get(essenceBonus)),
+            get(progress) * bonus * (isBossValue ? boss : 1) * (1 + get(essenceBonus)),
         ),
         gems: isBossValue
           ? 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL)
@@ -239,7 +243,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
   }),
 );
 
-export const monsterPoisonChance = withStateKey("monsterPoisonChance", (key) =>
+export const poison = withStateKey("poison", (key) =>
   selector({
     get: ({ get }) => {
       const stageValue = get(stage);
@@ -255,15 +259,20 @@ export const monsterPoisonChance = withStateKey("monsterPoisonChance", (key) =>
       }
 
       return (
-        getFromRange({ factor: getGrowthSigmoid(stageValue), maximum, minimum }) *
-        (get(isBoss) ? boss : 1)
+        getFromRange({
+          factor: getGrowthSigmoid(
+            getGrowthLinearMapping({ offset: stageRequired, stage: stageValue }),
+          ),
+          maximum,
+          minimum,
+        }) * (get(isBoss) ? boss : 1)
       );
     },
     key,
   }),
 );
 
-export const monsterPoisonLength = withStateKey("monsterPoisonLength", (key) =>
+export const poisonLength = withStateKey("poisonLength", (key) =>
   selector({
     get: ({ get }) => {
       const {
@@ -273,7 +282,10 @@ export const monsterPoisonLength = withStateKey("monsterPoisonLength", (key) =>
 
       return getFromRange({
         factor: getGrowthSigmoid(
-          (GROWTH_MAXIMUM / stageRequired) * (get(stage) + 1 - stageRequired),
+          getGrowthLinearMapping({
+            offset: stageRequired,
+            stage: get(stage),
+          }),
         ),
         maximum,
         minimum,
@@ -283,7 +295,7 @@ export const monsterPoisonLength = withStateKey("monsterPoisonLength", (key) =>
   }),
 );
 
-export const monsterPoisonMagnitude = withStateKey("monsterPoisonMagnitude", (key) =>
+export const poisonMagnitude = withStateKey("poisonMagnitude", (key) =>
   selector({
     get: ({ get }) => {
       const {
@@ -293,7 +305,10 @@ export const monsterPoisonMagnitude = withStateKey("monsterPoisonMagnitude", (ke
 
       return getFromRange({
         factor: getGrowthSigmoid(
-          (GROWTH_MAXIMUM / stageRequired) * (get(stage) + 1 - stageRequired),
+          getGrowthLinearMapping({
+            offset: stageRequired,
+            stage: get(stage),
+          }),
         ),
         maximum,
         minimum,

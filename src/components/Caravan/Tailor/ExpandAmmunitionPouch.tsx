@@ -1,6 +1,7 @@
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
+import { AmmunitionPouchCapacity } from "@neverquest/components/Caravan/Tailor/AmmunitionPouchCapacity";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { TAILORING_EXPANSION, TAILORING_PRICES_MAXIMUM } from "@neverquest/data/caravan";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/data/general";
@@ -34,46 +35,56 @@ export function ExpandAmmunitionPouch() {
   const isAffordable = price <= essenceValue;
 
   return (
-    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-      <IconDisplay
-        contents="Add quiver"
-        description={`Increases maximum ammunition by ${TAILORING_EXPANSION.ammunitionPouch}.`}
-        Icon={IconTailoring}
-        tooltip="Tailoring"
-      />
+    <Stack gap={3}>
+      <h6>Ammunition pouch</h6>
 
-      <Stack direction="horizontal" gap={3}>
-        <IconDisplay contents={formatValue({ value: price })} Icon={IconEssence} tooltip="Price" />
+      <AmmunitionPouchCapacity />
 
-        <OverlayTrigger
-          overlay={<Tooltip> {LABEL_NO_ESSENCE}</Tooltip>}
-          trigger={isAffordable ? [] : ["hover", "focus"]}
-        >
-          <span>
-            <Button
-              disabled={!isAffordable}
-              onClick={() => {
-                transactEssence(-price);
-                setInventory((currentInventory) =>
-                  currentInventory.map((currentItem) =>
-                    currentItem.id === id
-                      ? {
-                          ...currentItem,
-                          maximum:
-                            (currentItem as AmmunitionPouchItem).maximum +
-                            TAILORING_EXPANSION.ammunitionPouch,
-                        }
-                      : currentItem,
-                  ),
-                );
-              }}
-              variant="outline-dark"
-            >
-              Expand
-            </Button>
-          </span>
-        </OverlayTrigger>
-      </Stack>
-    </div>
+      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+        <IconDisplay
+          contents="Add quiver"
+          description={`Increases maximum ammunition by ${TAILORING_EXPANSION.ammunitionPouch}.`}
+          Icon={IconTailoring}
+          tooltip="Tailoring"
+        />
+
+        <Stack direction="horizontal" gap={3}>
+          <IconDisplay
+            contents={formatValue({ value: price })}
+            Icon={IconEssence}
+            tooltip="Price"
+          />
+
+          <OverlayTrigger
+            overlay={<Tooltip> {LABEL_NO_ESSENCE}</Tooltip>}
+            trigger={isAffordable ? [] : ["hover", "focus"]}
+          >
+            <span>
+              <Button
+                disabled={!isAffordable}
+                onClick={() => {
+                  transactEssence(-price);
+                  setInventory((currentInventory) =>
+                    currentInventory.map((currentItem) =>
+                      currentItem.id === id
+                        ? {
+                            ...currentItem,
+                            maximum:
+                              (currentItem as AmmunitionPouchItem).maximum +
+                              TAILORING_EXPANSION.ammunitionPouch,
+                          }
+                        : currentItem,
+                    ),
+                  );
+                }}
+                variant="outline-dark"
+              >
+                Expand
+              </Button>
+            </span>
+          </OverlayTrigger>
+        </Stack>
+      </div>
+    </Stack>
   );
 }

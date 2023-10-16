@@ -20,6 +20,7 @@ import { masteryStatistic } from "@neverquest/state/masteries";
 import {
   isMonsterAiling,
   monsterAilmentDuration,
+  monsterDistance,
   monsterElement,
   monsterHealth,
   monsterHealthMaximum,
@@ -53,9 +54,16 @@ export function useAttack() {
         const get = getSnapshotGetter(snapshot);
 
         const canAttackOrParryValue = get(canAttackOrParry);
-        const hasEnoughAmmunitionValue = get(hasEnoughAmmunition);
+        const monsterHealthValue = get(monsterHealth);
         const weaponValue = get(weapon);
         const { gearClass, staminaCost } = weaponValue;
+        const isWeaponRanged = isRanged(weaponValue);
+        const isWeaponTwoHanded = isMelee(weaponValue) && weaponValue.grip === "two-handed";
+        const hasInflictedCritical =
+          (isWeaponRanged && get(isTraitAcquired("sharpshooter")) && get(monsterDistance) > 0) ||
+          Math.random() < get(criticalChance);
+        const inExecutionRange =
+          isWeaponTwoHanded && monsterHealthValue / get(monsterHealthMaximum) <= get(execution);
 
         set(isShowing("statistics"), true);
 
@@ -63,7 +71,7 @@ export function useAttack() {
           set(attackDuration, get(attackRateTotal));
         }
 
-        if (canAttackOrParryValue && hasEnoughAmmunitionValue) {
+        if (canAttackOrParryValue && get(hasEnoughAmmunition)) {
           if (staminaCost > 0) {
             changeStamina({ value: -staminaCost });
           }
@@ -74,10 +82,7 @@ export function useAttack() {
             speed: "fast",
           });
 
-          const isTwoHanded = isMelee(weaponValue) && weaponValue.grip === "two-handed";
-          const monsterHealthValue = get(monsterHealth);
-
-          if (isRanged(weaponValue)) {
+          if (isWeaponRanged) {
             set(inventory, (currentInventory) =>
               currentInventory.map((currentItem) => {
                 const ownedAmmunitionPouch = get(ownedItem("ammunition pouch"));
@@ -107,13 +112,9 @@ export function useAttack() {
             increaseMastery("finesse");
           }
 
-          if (isTwoHanded) {
+          if (isWeaponTwoHanded) {
             increaseMastery("butchery");
           }
-
-          const hasInflictedCritical = Math.random() < get(criticalChance);
-          const inExecutionRange =
-            isTwoHanded && monsterHealthValue / get(monsterHealthMaximum) <= get(execution);
 
           if (inExecutionRange || (hasInflictedCritical && get(isTraitAcquired("executioner")))) {
             changeMonsterHealth({

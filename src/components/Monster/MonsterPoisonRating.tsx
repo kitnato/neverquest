@@ -7,19 +7,15 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_MAXIMUM } from "@neverquest/data/general";
 import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
 import { ReactComponent as IconPoison } from "@neverquest/icons/poison.svg";
-import {
-  monsterPoisonChance,
-  monsterPoisonLength,
-  monsterPoisonMagnitude,
-} from "@neverquest/state/monster";
+import { poison, poisonLength, poisonMagnitude } from "@neverquest/state/monster";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function MonsterPoisonRating() {
-  const monsterPoisonChanceValue = useRecoilValue(monsterPoisonChance);
-  const monsterPoisonLengthValue = useRecoilValue(monsterPoisonLength);
-  const monsterPoisonMagnitudeValue = useRecoilValue(monsterPoisonMagnitude);
+  const poisonValue = useRecoilValue(poison);
+  const poisonLengthValue = useRecoilValue(poisonLength);
+  const poisonMagnitudeValue = useRecoilValue(poisonMagnitude);
 
-  if (monsterPoisonChanceValue === 0) {
+  if (poisonValue === 0) {
     return null;
   }
 
@@ -36,9 +32,7 @@ export function MonsterPoisonRating() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
 
-                    <td>
-                      {formatValue({ format: "percentage", value: monsterPoisonChanceValue })}
-                    </td>
+                    <td>{formatValue({ format: "percentage", value: poisonValue })}</td>
                   </tr>
 
                   <tr>
@@ -48,7 +42,7 @@ export function MonsterPoisonRating() {
                       <Stack direction="horizontal" gap={1}>
                         {`-${formatValue({
                           format: "percentage",
-                          value: monsterPoisonMagnitudeValue,
+                          value: poisonMagnitudeValue,
                         })}`}
 
                         <IconImage Icon={IconHealth} size="small" />
@@ -61,7 +55,7 @@ export function MonsterPoisonRating() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
 
-                    <td>{formatValue({ format: "time", value: monsterPoisonLengthValue })}</td>
+                    <td>{formatValue({ format: "time", value: poisonLengthValue })}</td>
                   </tr>
                 </DetailsTable>
               </PopoverBody>
@@ -70,8 +64,7 @@ export function MonsterPoisonRating() {
         >
           <span>
             {formatValue({
-              value:
-                monsterPoisonChanceValue * monsterPoisonMagnitudeValue * monsterPoisonLengthValue,
+              value: poisonValue * poisonMagnitudeValue * poisonLengthValue,
             })}
           </span>
         </OverlayTrigger>

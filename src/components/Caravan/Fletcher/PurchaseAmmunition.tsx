@@ -1,8 +1,9 @@
-import { Button, ButtonGroup, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
+import { useState } from "react";
+import { Button, ButtonGroup, Dropdown, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { AmmunitionPouchCapacity } from "@neverquest/components/Inventory/Usable/AmmunitionPouch/AmmunitionPouchCapacity";
+import { IconImage } from "@neverquest/components/IconImage";
 import { AMMUNITION_PRICE } from "@neverquest/data/caravan";
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
@@ -13,90 +14,104 @@ import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence
 import { ReactComponent as IconAmmunition } from "@neverquest/icons/ammunition.svg";
 import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
 import { inventory } from "@neverquest/state/inventory";
-import { ownedItem } from "@neverquest/state/items";
+import { ammunition, ammunitionMaximum, ownedItem } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import type { AmmunitionPouchItem } from "@neverquest/types";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function PurchaseAmmunition() {
+  const ammunitionValue = useRecoilValue(ammunition);
+  const ammunitionMaximumValue = useRecoilValue(ammunitionMaximum);
   const essenceValue = useRecoilValue(essence);
   const ownedAmmunitionPouch = useRecoilValue(ownedItem("ammunition pouch"));
   const setInventory = useSetRecoilState(inventory);
 
+  const [amount, setAmount] = useState(1);
+
   const transactEssence = useTransactEssence();
 
-  const onPurchase = (amount: number) => {
-    if (isAffordable(amount) && ownedAmmunitionPouch !== null) {
-      transactEssence(-AMMUNITION_PRICE * amount);
-      setInventory((currentInventory) =>
-        currentInventory.map((currentItem) =>
-          currentItem.id === ownedAmmunitionPouch.id
-            ? {
-                ...currentItem,
-                current: (currentItem as AmmunitionPouchItem).current + amount,
-              }
-            : currentItem,
-        ),
-      );
-    }
-  };
-  const isAffordable = (amount: number) => AMMUNITION_PRICE * amount <= essenceValue;
+  const totalPrice = AMMUNITION_PRICE * amount;
+  const isAffordable = totalPrice <= essenceValue;
+  const isFull = ammunitionValue >= ammunitionMaximumValue;
+  const canPurchase = isAffordable && !isFull;
 
   return (
-    <Stack gap={3}>
-      <h6>Purchase ammunition</h6>
+    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+      <IconDisplay contents="Ammunition" Icon={IconAmmunition} tooltip="Ammunition" />
 
-      {ownedAmmunitionPouch !== null && <AmmunitionPouchCapacity />}
+      <Stack direction="horizontal" gap={3}>
+        <IconDisplay
+          contents={formatValue({ value: totalPrice })}
+          Icon={IconEssence}
+          tooltip="Price"
+        />
 
-      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        <IconDisplay contents="Ammunition (each)" Icon={IconAmmunition} tooltip="Ammunition" />
+        {ownedAmmunitionPouch === null ? (
+          <span className="fst-italic">Nowhere to store ammunition.</span>
+        ) : (
+          (() => {
+            const { current, maximum } = ownedAmmunitionPouch as AmmunitionPouchItem;
 
-        <Stack direction="horizontal" gap={3}>
-          <IconDisplay
-            contents={formatValue({ value: AMMUNITION_PRICE })}
-            Icon={IconEssence}
-            tooltip="Price"
-          />
+            return (
+              <OverlayTrigger
+                overlay={
+                  <Tooltip>
+                    {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
 
-          {ownedAmmunitionPouch === null ? (
-            <span className="fst-italic">Nowhere to store ammunition.</span>
-          ) : (
-            (() => {
-              const { current, maximum } = ownedAmmunitionPouch as AmmunitionPouchItem;
+                    {isFull && <div>Pouch is full.</div>}
+                  </Tooltip>
+                }
+                trigger={canPurchase ? [] : ["hover", "focus"]}
+              >
+                <span>
+                  <Dropdown as={ButtonGroup}>
+                    <Button
+                      disabled={!canPurchase}
+                      onClick={() => {
+                        if (isAffordable && !isFull && ownedAmmunitionPouch !== null) {
+                          transactEssence(-totalPrice);
 
-              return (
-                <ButtonGroup>
-                  {[
-                    { amount: 1, label: "1" },
-                    { amount: 10, label: "10" },
-                    { amount: maximum - current, label: LABEL_MAXIMUM },
-                  ].map(({ amount, label }) => {
-                    const canPurchase = isAffordable(amount);
+                          setInventory((currentInventory) =>
+                            currentInventory.map((currentItem) =>
+                              currentItem.id === ownedAmmunitionPouch.id
+                                ? {
+                                    ...currentItem,
+                                    current: (currentItem as AmmunitionPouchItem).current + amount,
+                                  }
+                                : currentItem,
+                            ),
+                          );
+                        }
+                      }}
+                      variant="outline-dark"
+                    >
+                      Purchase {amount}
+                    </Button>
 
-                    return (
-                      <OverlayTrigger
-                        key={label}
-                        overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
-                        trigger={canPurchase ? [] : ["hover", "focus"]}
-                      >
-                        <span>
-                          <Button
-                            disabled={!canPurchase}
-                            onClick={() => onPurchase(amount)}
-                            variant="outline-dark"
-                          >
+                    <Dropdown.Toggle split variant="outline-dark" />
+
+                    <Dropdown.Menu>
+                      {[
+                        { amount: 1, label: "1" },
+                        { amount: 10, label: "10" },
+                        { amount: maximum - current, label: LABEL_MAXIMUM },
+                      ].map(({ amount, label }) => (
+                        <Dropdown.Item key={label} onClick={() => setAmount(amount)}>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconAmmunition} size="small" />
+
                             {label}
-                          </Button>
-                        </span>
-                      </OverlayTrigger>
-                    );
-                  })}
-                </ButtonGroup>
-              );
-            })()
-          )}
-        </Stack>
-      </div>
-    </Stack>
+                          </Stack>
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </span>
+              </OverlayTrigger>
+            );
+          })()
+        )}
+      </Stack>
+    </div>
   );
 }

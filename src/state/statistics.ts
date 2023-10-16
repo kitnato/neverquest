@@ -1,7 +1,7 @@
 import { selector } from "recoil";
 
 import { isSkillAcquired } from "./skills";
-import { SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
+import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import {
   AILMENT_PENALTY,
   BLEED,
@@ -179,7 +179,9 @@ export const dodge = withStateKey("dodge", (key) =>
     get: ({ get }) =>
       get(armor).staminaCost === Infinity || !get(isSkillAcquired("evasion"))
         ? 0
-        : get(attributeStatistic("agility")) * (1 + get(attributePowerBonus("agility"))),
+        : get(attributeStatistic("agility")) *
+          (1 + get(attributePowerBonus("agility"))) *
+          (get(isTraitAcquired("nudist")) && get(armor).name === ARMOR_NONE.name ? 2 : 1),
     key,
   }),
 );

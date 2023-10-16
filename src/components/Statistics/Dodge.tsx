@@ -12,10 +12,12 @@ import {
   LABEL_SEPARATOR,
   LABEL_UNKNOWN,
 } from "@neverquest/data/general";
+import { ARMOR_NONE } from "@neverquest/data/inventory";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconAgility } from "@neverquest/icons/agility.svg";
 import { ReactComponent as IconDodgePenalty } from "@neverquest/icons/dodge-penalty.svg";
 import { ReactComponent as IconDodge } from "@neverquest/icons/dodge.svg";
+import { ReactComponent as IconNudist } from "@neverquest/icons/nudist.svg";
 import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { armor } from "@neverquest/state/gear";
@@ -23,16 +25,18 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { ownedItem } from "@neverquest/state/items";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { dodge } from "@neverquest/state/statistics";
+import { isTraitAcquired } from "@neverquest/state/traits";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Dodge() {
-  const { staminaCost } = useRecoilValue(armor);
+  const { name, staminaCost } = useRecoilValue(armor);
   const agilityPowerBonus = useRecoilValue(attributePowerBonus("agility"));
   const agility = useRecoilValue(attributeStatistic("agility"));
   const dodgeValue = useRecoilValue(dodge);
   const isShowingDodge = useRecoilValue(isShowing("dodge"));
   const isShowingDodgePenalty = useRecoilValue(isShowing("dodgePenalty"));
   const isSkillAcquiredEvasion = useRecoilValue(isSkillAcquired("evasion"));
+  const isTraitAcquiredNudist = useRecoilValue(isTraitAcquired("nudist"));
   const hasTomeOfPower = Boolean(useRecoilValue(ownedItem("tome of power")));
 
   useDeltaText({
@@ -87,6 +91,19 @@ export function Dodge() {
                         </Stack>
                       </td>
                     </tr>
+
+                    {isTraitAcquiredNudist && name === ARMOR_NONE.name && (
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconNudist} size="small" />
+                            Nudist:
+                          </Stack>
+                        </td>
+
+                        <td>x2</td>
+                      </tr>
+                    )}
 
                     {isShowingDodgePenalty ? (
                       <tr>

@@ -18,7 +18,7 @@ import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster
 import { useRetire } from "@neverquest/hooks/actions/useRetire";
 import { ReactComponent as IconProgress } from "@neverquest/icons/progress.svg";
 import { ReactComponent as IconRetire } from "@neverquest/icons/retire.svg";
-import { stage } from "@neverquest/state/encounter";
+import { stageMaximum } from "@neverquest/state/encounter";
 import { formatValue } from "@neverquest/utilities/formatters";
 import { getProgressReduction } from "@neverquest/utilities/getters";
 
@@ -27,7 +27,7 @@ export function Retirement({
 }: {
   state: [boolean, Dispatch<SetStateAction<boolean>>];
 }) {
-  const stageValue = useRecoilValue(stage);
+  const stageMaximumValue = useRecoilValue(stageMaximum);
 
   const generateMonster = useGenerateMonster();
   const retire = useRetire();
@@ -53,7 +53,7 @@ export function Retirement({
             <IconDisplay
               contents={`-${formatValue({
                 format: "percentage",
-                value: getProgressReduction(stageValue),
+                value: getProgressReduction(stageMaximumValue),
               })}`}
               Icon={IconProgress}
               tooltip="Progress discount"

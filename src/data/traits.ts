@@ -4,6 +4,7 @@ import { ReactComponent as IconColossus } from "@neverquest/icons/colossus.svg";
 import { ReactComponent as IconExecutioner } from "@neverquest/icons/executioner.svg";
 import { ReactComponent as IconFieldSurgeon } from "@neverquest/icons/field-surgeon.svg";
 import { ReactComponent as IconInoculated } from "@neverquest/icons/inoculated.svg";
+import { ReactComponent as IconNinja } from "@neverquest/icons/ninja.svg";
 import { ReactComponent as IconNudist } from "@neverquest/icons/nudist.svg";
 import { ReactComponent as IconSharpshooter } from "@neverquest/icons/sharpshooter.svg";
 import { ReactComponent as IconShredder } from "@neverquest/icons/shredder.svg";
@@ -44,6 +45,10 @@ export const TRAITS: Record<
   inoculated: {
     description: "Deflection chance is doubled.",
     Icon: IconInoculated,
+  },
+  ninja: {
+    description: "Monsters are looted immediately.",
+    Icon: IconNinja,
   },
   nudist: {
     description: "Dodge rate is doubled when not wearing any armor.",

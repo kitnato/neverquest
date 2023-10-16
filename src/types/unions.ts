@@ -364,6 +364,7 @@ export const TRAIT_TYPES = [
   "executioner",
   "field surgeon",
   "inoculated",
+  "ninja",
   "nudist",
   "sharpshooter",
   "shredder",

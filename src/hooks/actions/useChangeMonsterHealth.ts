@@ -8,6 +8,7 @@ import {
   monsterHealth,
   monsterHealthMaximum,
 } from "@neverquest/state/monster";
+import { isTraitAcquired } from "@neverquest/state/traits";
 import type { DeltaDisplay, DeltaReserveBase } from "@neverquest/types/ui";
 import { formatValue } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -36,7 +37,7 @@ export function useChangeMonsterHealth() {
 
         if (newHealth <= 0) {
           set(monsterHealth, 0);
-          set(lootingDuration, LOOTING_RATE);
+          set(lootingDuration, get(isTraitAcquired("ninja")) ? 1 : LOOTING_RATE);
 
           reset(attackDuration);
           reset(monsterAttackDuration);

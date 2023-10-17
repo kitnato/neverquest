@@ -34,6 +34,7 @@ export function WeaponName({
   weapon: Weapon | typeof WEAPON_NONE;
 }) {
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
+  const isShowingGrip = useRecoilValue(isShowing("grip"));
   const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
   const weaponEquippedValue = useRecoilValue(weaponEquipped);
 
@@ -133,7 +134,7 @@ export function WeaponName({
                 </tr>
               )}
 
-              {isMelee(weapon) && !isUnarmed && (
+              {isMelee(weapon) && isShowingGrip && (
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Grip:</td>
 

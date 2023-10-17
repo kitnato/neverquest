@@ -6,11 +6,11 @@ import { generateName } from "@neverquest/LOCRAN/generate/generateName";
 import { isAttacking } from "@neverquest/state/character";
 import { isBoss, stage } from "@neverquest/state/encounter";
 import {
+  distance,
   isMonsterNew,
   monsterAilmentDuration,
   monsterAttackDuration,
   monsterAttackRate,
-  monsterDistance,
   monsterHealth,
   monsterName,
 } from "@neverquest/state/monster";
@@ -54,7 +54,7 @@ export function useGenerateMonster() {
         );
 
         reset(monsterHealth);
-        reset(monsterDistance);
+        reset(distance);
 
         MONSTER_AILMENT_TYPES.forEach((current) => reset(monsterAilmentDuration(current)));
 

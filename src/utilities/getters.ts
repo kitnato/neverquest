@@ -129,9 +129,9 @@ export function getGrowthLinearMapping({ offset, stage }: { offset: number; stag
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
-// f(0) = ~0, f(50) = ~0.78, f(100) = ~1
+// f(1) = 0, f(50) = ~0.6, f(100) = ~1
 export function getGrowthSigmoid(x: number) {
-  return 1 / (1 + 300 * Math.pow(Math.E, -0.11 * x));
+  return 1 / (1 + Math.pow(Math.E, -0.13 * (x - 47))) - 0.0026 * Math.pow(Math.E, -0.08 * x);
 }
 
 // https://en.wikipedia.org/wiki/Triangular_number

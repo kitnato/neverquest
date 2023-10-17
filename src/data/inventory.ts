@@ -406,20 +406,20 @@ export const WEAPON_BASE: GearBase & {
     { maximum: 50, minimum: 45 },
   ],
   damage: [
-    { maximum: 14, minimum: 12 },
+    { maximum: 15, minimum: 12 },
     { maximum: 1000, minimum: 950 },
   ],
   price: { maximum: 12000, minimum: 1 },
   range: [
-    { maximum: 4500, minimum: 3000 },
-    { maximum: 8000, minimum: 7500 },
+    { maximum: 4000, minimum: 3500 },
+    { maximum: 7000, minimum: 6500 },
   ],
   rate: [
-    { maximum: 3700, minimum: 3500 },
+    { maximum: 3700, minimum: 3600 },
     { maximum: 2200, minimum: 2000 },
   ],
   staminaCost: [
-    { maximum: 3, minimum: 1 },
+    { maximum: 2, minimum: 1 },
     { maximum: 65, minimum: 60 },
   ],
   weight: [

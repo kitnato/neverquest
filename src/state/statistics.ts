@@ -4,7 +4,6 @@ import { isSkillAcquired } from "./skills";
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import {
   AILMENT_PENALTY,
-  BLEED,
   PARRY_ABSORPTION,
   PARRY_DAMAGE,
   RECOVERY_RATE,
@@ -19,7 +18,7 @@ import {
   weapon,
 } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import { isMonsterAiling } from "@neverquest/state/monster";
+import { bleed, isMonsterAiling } from "@neverquest/state/monster";
 import { stamina } from "@neverquest/state/reserves";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isMelee } from "@neverquest/types/type-guards";
@@ -41,7 +40,7 @@ export const attackRateTotal = withStateKey("attackRateTotal", (key) =>
   }),
 );
 
-export const bleed = withStateKey("bleed", (key) =>
+export const bleedChance = withStateKey("bleedChance", (key) =>
   selector({
     get: ({ get }) => {
       const { abilityChance, gearClass } = get(weapon);
@@ -55,7 +54,7 @@ export const bleed = withStateKey("bleed", (key) =>
 export const bleedDamage = withStateKey("bleedDamage", (key) =>
   selector({
     get: ({ get }) => {
-      const { duration, ticks } = BLEED;
+      const { duration, ticks } = get(bleed);
 
       return Math.round(
         getDamagePerTick({
@@ -79,7 +78,7 @@ export const bleedDamageTotal = withStateKey("bleedDamageTotal", (key) =>
 
 export const bleedRating = withStateKey("bleedRating", (key) =>
   selector({
-    get: ({ get }) => Math.round(get(bleedDamage) * get(bleed) * 100),
+    get: ({ get }) => Math.round(get(bleedDamage) * get(bleedChance) * 100),
     key,
   }),
 );
@@ -241,7 +240,7 @@ export const protection = withStateKey("protection", (key) =>
 export const recoveryRate = withStateKey("recoveryRate", (key) =>
   selector({
     get: ({ get }) =>
-      Math.min(RECOVERY_RATE - RECOVERY_RATE * get(masteryStatistic("resilience")), 0),
+      Math.max(RECOVERY_RATE - RECOVERY_RATE * get(masteryStatistic("resilience")), 0),
     key,
   }),
 );

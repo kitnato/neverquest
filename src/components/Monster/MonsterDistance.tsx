@@ -8,10 +8,10 @@ import { ReactComponent as IconDistance } from "@neverquest/icons/distance.svg";
 import { isAttacking } from "@neverquest/state/character";
 import { weapon } from "@neverquest/state/gear";
 import {
+  distance,
   hasMonsterClosed,
   isMonsterAiling,
   isMonsterDead,
-  monsterDistance,
 } from "@neverquest/state/monster";
 import { isRanged } from "@neverquest/types/type-guards";
 
@@ -22,7 +22,7 @@ export function MonsterDistance() {
   const isMonsterStaggered = useRecoilValue(isMonsterAiling("staggered"));
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const weaponValue = useRecoilValue(weapon);
-  const setMonsterDistance = useSetRecoilState(monsterDistance);
+  const setMonsterDistance = useSetRecoilState(distance);
 
   useAnimate({
     delta: setMonsterDistance,

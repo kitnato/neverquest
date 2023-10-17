@@ -4,12 +4,12 @@ import { attackDuration, isAttacking } from "@neverquest/state/character";
 import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import {
+  bleedingDelta,
+  distance,
   isMonsterDead,
   monsterAilmentDuration,
   monsterAttackDuration,
   monsterAttackRate,
-  monsterBleedingDelta,
-  monsterDistance,
 } from "@neverquest/state/monster";
 import { attackRateTotal } from "@neverquest/state/statistics";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -35,8 +35,8 @@ export function useToggleAttack() {
 
           if (!get(isMonsterDead)) {
             reset(monsterAilmentDuration("bleeding"));
-            reset(monsterBleedingDelta);
-            reset(monsterDistance);
+            reset(bleedingDelta);
+            reset(distance);
           }
         } else {
           set(attackDuration, get(attackRateTotal));

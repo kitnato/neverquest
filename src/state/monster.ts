@@ -11,12 +11,13 @@ import {
   MONSTER_HEALTH,
   POISON,
 } from "@neverquest/data/monster";
-import { AILMENT_PENALTY, BLEED_DELTA } from "@neverquest/data/statistics";
+import { AILMENT_PENALTY, BLEED } from "@neverquest/data/statistics";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
 import { range, shield, totalElementalEffects, weapon } from "@neverquest/state/gear";
 import { essenceBonus } from "@neverquest/state/items";
 import { isSkillAcquired } from "@neverquest/state/skills";
+import { isTraitAcquired } from "@neverquest/state/traits";
 import {
   ELEMENTAL_TYPES,
   MONSTER_AILMENT_TYPES,
@@ -32,6 +33,24 @@ import {
 } from "@neverquest/utilities/getters";
 
 // SELECTORS
+
+export const bleed = withStateKey("bleed", (key) =>
+  selector({
+    get: ({ get }) => BLEED[get(isTraitAcquired("shredder")) ? "shredder" : "default"],
+    key,
+  }),
+);
+
+export const bleedingDeltaLength = withStateKey("bleedingDeltaLength", (key) =>
+  selector({
+    get: ({ get }) => {
+      const { duration, ticks } = get(bleed);
+
+      return Math.round(duration / ticks);
+    },
+    key,
+  }),
+);
 
 export const blightChance = withStateKey("blightChance", (key) =>
   selector({
@@ -111,7 +130,7 @@ export const canReceiveAilments = withStateKey("canReceiveAilments", (key) =>
 
 export const hasMonsterClosed = withStateKey("hasMonsterClosed", (key) =>
   selector({
-    get: ({ get }) => get(monsterDistance) === 0,
+    get: ({ get }) => get(distance) === 0,
     key,
   }),
 );
@@ -320,6 +339,22 @@ export const poisonMagnitude = withStateKey("poisonMagnitude", (key) =>
 
 // ATOMS
 
+export const bleedingDelta = withStateKey("bleedingDelta", (key) =>
+  atom({
+    default: bleedingDeltaLength,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
+export const distance = withStateKey("distance", (key) =>
+  atom({
+    default: range,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
 export const isMonsterNew = withStateKey("isMonsterNew", (key) =>
   atom({
     default: false,
@@ -339,22 +374,6 @@ export const monsterAilmentDuration = withStateKey("monsterAilmentDuration", (ke
 export const monsterAttackDuration = withStateKey("monsterAttackDuration", (key) =>
   atom({
     default: 0,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
-export const monsterBleedingDelta = withStateKey("monsterBleedingDelta", (key) =>
-  atom({
-    default: BLEED_DELTA,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
-export const monsterDistance = withStateKey("monsterDistance", (key) =>
-  atom({
-    default: range,
     effects: [handleLocalStorage({ key })],
     key,
   }),

@@ -86,6 +86,7 @@ export const SKILLS: Record<
     description: "Unlocks the use of two-handed melee weapons that have a chance to execute.",
     Icon: IconSiegecraft,
     requiredCrew: "blacksmith",
+    shows: "grip",
     unlocksMastery: "butchery",
   },
   traumatology: {

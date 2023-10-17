@@ -6,27 +6,27 @@ import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
-import { BLEED, BLEED_DELTA } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { ReactComponent as IconBleedRating } from "@neverquest/icons/bleed-rating.svg";
 import { ReactComponent as IconBleed } from "@neverquest/icons/bleed.svg";
 import { ReactComponent as IconCruelty } from "@neverquest/icons/cruelty.svg";
 import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
+import { bleed, bleedingDeltaLength } from "@neverquest/state/monster";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import { bleed, bleedDamage, bleedRating, damageTotal } from "@neverquest/state/statistics";
+import { bleedChance, bleedDamage, bleedRating, damageTotal } from "@neverquest/state/statistics";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function BleedRating() {
-  const bleedValue = useRecoilValue(bleed);
+  const { duration, ticks } = useRecoilValue(bleed);
+  const bleedChanceValue = useRecoilValue(bleedChance);
   const bleedDamageValue = useRecoilValue(bleedDamage);
+  const bleedingDeltaLengthValue = useRecoilValue(bleedingDeltaLength);
   const bleedRatingValue = useRecoilValue(bleedRating);
   const damageTotalValue = useRecoilValue(damageTotal);
   const crueltyValue = useRecoilValue(masteryStatistic("cruelty"));
   const anatomyValue = useRecoilValue(isSkillAcquired("anatomy"));
   const { gearClass } = useRecoilValue(weapon);
-
-  const { duration, ticks } = BLEED;
 
   useDeltaText({
     delta: "bleedRating",
@@ -56,9 +56,9 @@ export function BleedRating() {
                           <IconImage Icon={IconBleed} size="small" />
 
                           {`${
-                            bleedValue === 0
+                            bleedChanceValue === 0
                               ? LABEL_EMPTY
-                              : formatValue({ format: "percentage", value: bleedValue })
+                              : formatValue({ format: "percentage", value: bleedChanceValue })
                           }`}
                         </Stack>
                       </td>
@@ -89,7 +89,7 @@ export function BleedRating() {
 
                       <td>{`${ticks} (every ${formatValue({
                         format: "time",
-                        value: BLEED_DELTA,
+                        value: bleedingDeltaLengthValue,
                       })})`}</td>
                     </tr>
 

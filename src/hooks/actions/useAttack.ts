@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { AILMENT_PENALTY, BLEED } from "@neverquest/data/statistics";
+import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
@@ -18,16 +18,17 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { ownedItem } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
+  bleed,
+  distance,
   isMonsterAiling,
   monsterAilmentDuration,
-  monsterDistance,
   monsterElement,
   monsterHealth,
   monsterHealthMaximum,
 } from "@neverquest/state/monster";
 import {
   attackRateTotal,
-  bleed,
+  bleedChance,
   criticalChance,
   criticalStrike,
   damageTotal,
@@ -60,7 +61,7 @@ export function useAttack() {
         const isWeaponRanged = isRanged(weaponValue);
         const isWeaponTwoHanded = isMelee(weaponValue) && weaponValue.grip === "two-handed";
         const hasInflictedCritical =
-          (isWeaponRanged && get(isTraitAcquired("sharpshooter")) && get(monsterDistance) > 0) ||
+          (isWeaponRanged && get(isTraitAcquired("sharpshooter")) && get(distance) > 0) ||
           Math.random() < get(criticalChance);
         const inExecutionRange =
           isWeaponTwoHanded && monsterHealthValue / get(monsterHealthMaximum) <= get(execution);
@@ -140,9 +141,9 @@ export function useAttack() {
           );
           const monsterDeltas: DeltaDisplay = [];
 
-          if (get(monsterAilmentDuration("bleeding")) === 0 && Math.random() < get(bleed)) {
+          if (get(monsterAilmentDuration("bleeding")) === 0 && Math.random() < get(bleedChance)) {
             set(isShowing("monsterAilments"), true);
-            set(monsterAilmentDuration("bleeding"), BLEED.duration);
+            set(monsterAilmentDuration("bleeding"), get(bleed).duration);
 
             monsterDeltas.push({
               color: "text-muted",

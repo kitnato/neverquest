@@ -143,6 +143,7 @@ export const SHOWING_TYPES = [
   "essence",
   "gameOver",
   "gearClass",
+  "grip",
   "healthDetails",
   "location",
   "loot",
@@ -199,8 +200,11 @@ export type StateKey =
   | "autoEquip"
   | "blacksmithInventory"
   | "bleed"
+  | "bleedChance"
   | "bleedDamage"
   | "bleedDamageTotal"
+  | "bleedingDelta"
+  | "bleedingDeltaLength"
   | "bleedRating"
   | "blight"
   | "blightAmount"
@@ -225,6 +229,7 @@ export type StateKey =
   | "damageTotal"
   | "deflection"
   | "deltas"
+  | "distance"
   | "dodge"
   | "elementalEffects"
   | "encumbrance"
@@ -296,12 +301,10 @@ export type StateKey =
   | "monsterAilmentDuration"
   | "monsterAttackDuration"
   | "monsterAttackRate"
-  | "monsterBleedingDelta"
   | "monsterDamage"
   | "monsterDamagePerSecond"
   | "monsterDamageTotal"
   | "monsterDamageTotalPerSecond"
-  | "monsterDistance"
   | "monsterElement"
   | "monsterHealth"
   | "monsterHealthMaximum"

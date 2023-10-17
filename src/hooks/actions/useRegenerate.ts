@@ -4,10 +4,10 @@ import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { isAttacking } from "@neverquest/state/character";
 import {
+  bleedingDelta,
+  distance,
   isMonsterDead,
   monsterAilmentDuration,
-  monsterBleedingDelta,
-  monsterDistance,
   monsterHealth,
   monsterHealthMaximum,
 } from "@neverquest/state/monster";
@@ -27,8 +27,8 @@ export function useRegenerate() {
         if (!get(isAttacking)) {
           if (!get(isMonsterDead) && !get(isTraitAcquired("tormentor"))) {
             reset(monsterAilmentDuration("bleeding"));
-            reset(monsterBleedingDelta);
-            reset(monsterDistance);
+            reset(bleedingDelta);
+            reset(distance);
 
             const difference = get(monsterHealthMaximum) - get(monsterHealth);
 

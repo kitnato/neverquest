@@ -233,7 +233,9 @@ export const parryRating = withStateKey("parryRating", (key) =>
 
 export const protection = withStateKey("protection", (key) =>
   selector({
-    get: ({ get }) => get(armor).protection,
+    get: ({ get }) =>
+      get(armor).protection *
+      (get(isTraitAcquired("tank")) && get(shield).name !== SHIELD_NONE.name ? 2 : 1),
     key,
   }),
 );

@@ -176,7 +176,8 @@ export const deflection = withStateKey("deflection", (key) =>
 export const dodge = withStateKey("dodge", (key) =>
   selector({
     get: ({ get }) =>
-      get(armor).staminaCost === Infinity || !get(isSkillAcquired("evasion"))
+      (get(armor).staminaCost === Infinity && !get(isTraitAcquired("stalwart"))) ||
+      !get(isSkillAcquired("evasion"))
         ? 0
         : get(attributeStatistic("agility")) *
           (1 + get(attributePowerBonus("agility"))) *

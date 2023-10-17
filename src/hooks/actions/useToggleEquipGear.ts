@@ -36,14 +36,6 @@ export function useToggleEquipGear() {
 
           set(isShowing("armor"), true);
           set(isShowing("protection"), true);
-
-          if (get(isSkillAcquired("evasion")) && staminaCost) {
-            set(isShowing("dodgePenalty"), true);
-          }
-
-          if (gearItem.deflection > 0) {
-            set(isShowing("deflection"), true);
-          }
         }
 
         if (isShield(gearItem) && !isEquipped) {

@@ -5,6 +5,7 @@ import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import { ownedItem } from "@neverquest/state/items";
 import { stamina } from "@neverquest/state/reserves";
+import { isTraitAcquired } from "@neverquest/state/traits";
 import type { AmmunitionPouchItem } from "@neverquest/types";
 import { isRanged } from "@neverquest/types/type-guards";
 
@@ -41,7 +42,7 @@ export const canBlock = withStateKey("canBlock", (key) =>
 
 export const canDodge = withStateKey("canDodge", (key) =>
   selector({
-    get: ({ get }) => get(stamina) >= get(armor).staminaCost,
+    get: ({ get }) => get(isTraitAcquired("stalwart")) || get(stamina) >= get(armor).staminaCost,
     key,
   }),
 );

@@ -22,10 +22,10 @@ export const ATTRIBUTES: Record<
   }
 > = {
   agility: {
-    base: 0,
+    base: 0.03,
     description: "Increases chance to dodge an attack.",
     Icon: IconAgility,
-    increment: 0.04,
+    increment: 0.03,
     isUnlocked: false,
     maximum: 0.8,
     powerBonus: 0.005,

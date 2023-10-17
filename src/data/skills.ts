@@ -27,7 +27,7 @@ export const SKILLS: Record<
     description: string;
     Icon: SVGIcon;
     requiredCrew: Crew;
-    shows?: Showing;
+    shows?: Showing[];
     unlocksAttributes?: Attribute[];
     unlocksMastery?: Mastery;
   }
@@ -48,13 +48,14 @@ export const SKILLS: Record<
     description: "Unlocks the use of heavy armor & the ability to deflect ailments.",
     Icon: IconArmorcraft,
     requiredCrew: "blacksmith",
+    shows: ["deflection"],
     unlocksMastery: "resilience",
   },
   assassination: {
     description: "Unlocks the ability to deal critical strikes.",
     Icon: IconAssassination,
     requiredCrew: "merchant",
-    shows: "criticalRating",
+    shows: ["criticalRating"],
     unlocksAttributes: ["dexterity", "perception"],
   },
   calisthenics: {
@@ -73,7 +74,7 @@ export const SKILLS: Record<
     description: "Unlocks the ability to dodge attacks, negating all damage.",
     Icon: IconEvasion,
     requiredCrew: "merchant",
-    shows: "dodge",
+    shows: ["dodge", "dodgePenalty"],
     unlocksAttributes: ["agility"],
   },
   shieldcraft: {
@@ -86,7 +87,7 @@ export const SKILLS: Record<
     description: "Unlocks the use of two-handed melee weapons that have a chance to execute.",
     Icon: IconSiegecraft,
     requiredCrew: "blacksmith",
-    shows: "grip",
+    shows: ["grip"],
     unlocksMastery: "butchery",
   },
   traumatology: {

@@ -17,7 +17,7 @@ export function useAcquireSkill() {
         set(isShowing("skills"), true);
 
         if (shows !== undefined) {
-          set(isShowing(shows), true);
+          shows.forEach((current) => set(isShowing(current), true));
         }
 
         unlocksAttributes?.forEach((attribute) => {

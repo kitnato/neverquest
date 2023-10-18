@@ -18,10 +18,10 @@ export function useInitialize() {
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      (isRetiring?: boolean) => {
+      () => {
         const get = getSnapshotGetter(snapshot);
 
-        if (isRetiring || ls.get(KEY_SESSION) === null) {
+        if (ls.get(KEY_SESSION) === null) {
           ATTRIBUTE_TYPES.forEach((current) =>
             set(isAttributeUnlocked(current), { isUnlocked: ATTRIBUTES[current].isUnlocked }),
           );
@@ -34,9 +34,7 @@ export function useInitialize() {
 
           set(wildernesses, [generateWilderness({ allowNSFW: get(allowNSFW), stage: get(stage) })]);
 
-          if (!isRetiring) {
-            generateMonster();
-          }
+          generateMonster();
         }
       },
     [generateMonster],

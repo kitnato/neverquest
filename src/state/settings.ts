@@ -36,6 +36,14 @@ export const showDamagePerSecond = withStateKey("showDamagePerSecond", (key) =>
   }),
 );
 
+export const showEssenceRequired = withStateKey("showEssenceRequired", (key) =>
+  atom({
+    default: false,
+    effects: [handleLocalStorage({ isSetting: true, key })],
+    key,
+  }),
+);
+
 export const showGearComparison = withStateKey("showGearComparison", (key) =>
   atom({
     default: true,

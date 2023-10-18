@@ -338,6 +338,7 @@ export type StateKey =
   | "selectedTrait"
   | "shield"
   | "showDamagePerSecond"
+  | "showEssenceRequired"
   | "showGearComparison"
   | "showGearLevel"
   | "skillPrice"

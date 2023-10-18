@@ -1,6 +1,6 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
-import { MASTERIES, MASTERY_COST } from "@neverquest/data/masteries";
+import { MASTERIES, MASTERY_COST_BASE } from "@neverquest/data/masteries";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { MASTERY_TYPES, type Mastery } from "@neverquest/types/unions";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
@@ -26,7 +26,7 @@ export const masteryCost = withStateKey("masteryCost", (key) =>
     get:
       (parameter) =>
       ({ get }) =>
-        getGrowthTriangular(get(masteryRank(parameter)) + MASTERY_COST),
+        getGrowthTriangular(get(masteryRank(parameter)) + MASTERY_COST_BASE),
     key,
   }),
 );

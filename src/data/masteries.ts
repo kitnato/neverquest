@@ -73,4 +73,4 @@ export const MASTERIES: Record<
   },
 };
 
-export const MASTERY_COST = 4;
+export const MASTERY_COST_BASE = 4;

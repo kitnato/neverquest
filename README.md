@@ -76,27 +76,6 @@ Upon purchasing the Journal trinket, unlocks quests that function similarly to a
 - Enter a name
 - Complete 5/10/25/50/100/all quests
 
-#### Retirement
-
-When reaching a certain power level, the character can retire. This restarts the quest from stage 0 with power level 0, no skills and masteries at rank 0, however all hired caravan crew are retained. A [trait](#traits) can be also chosen that confers a permanent bonus.
-
-#### Traits
-
-Traits are permanent passive abilities acquired upon [retiring](#retirement) for all subsequent new quests.
-
-- Brawler: Wearing no shield doubles unarmed damage.
-- Bruiser: Current stamina adds unarmed bonus damage & unarmed attacks have a 25% chance to stagger.
-- Colossus: Dual wield two-handed weapons.
-- Executioner: Critical strikes with a two-handed weapon execute the monster.
-- Field surgeon: Automatically restore health when not in combat.
-- Hoarder: Start with all trinkets.
-- Inoculated: Can no longer be poisoned or blighted.
-- Nudist: Double dodge rate when not wearing any armor.
-- Shredder: Bleed damage is inflicted all at once.
-- Stalwart: Ignore all penalties when wearing armor.
-- Tank: Shields double total protection.
-- Tormentor: Monsters no longer regenerate out of combat.
-
 ### Future development
 
 Features that require more ideation and refinement.

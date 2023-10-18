@@ -13,6 +13,9 @@ import { ReactComponent as IconTank } from "@neverquest/icons/tank.svg";
 import { ReactComponent as IconTormentor } from "@neverquest/icons/tormentor.svg";
 import type { SVGIcon } from "@neverquest/types/props";
 import type { Trait } from "@neverquest/types/unions";
+import { formatValue } from "@neverquest/utilities/formatters";
+
+export const BRUISER_STUN_CHANCE = 0.25;
 
 export const TRAITS: Record<
   Trait,
@@ -26,8 +29,10 @@ export const TRAITS: Record<
     Icon: IconBrawler,
   },
   bruiser: {
-    description:
-      "Current stamina adds to unarmed damage & unarmed attacks have a 25% chance to stun.",
+    description: `Current stamina adds to unarmed damage & unarmed attacks have a ${formatValue({
+      format: "percentage",
+      value: BRUISER_STUN_CHANCE,
+    })} chance to stun.`,
     Icon: IconBruiser,
   },
   colossus: {
@@ -63,11 +68,11 @@ export const TRAITS: Record<
     Icon: IconShredder,
   },
   stalwart: {
-    description: "There are no penalties for wearing armor.",
+    description: "There are no penalties when wearing armor.",
     Icon: IconStalwart,
   },
   tank: {
-    description: "Equipping a shield doubles total protection.",
+    description: "Having a shield equipped doubles total protection.",
     Icon: IconTank,
   },
   tormentor: {

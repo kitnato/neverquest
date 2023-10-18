@@ -8,6 +8,7 @@ import {
   PARRY_DAMAGE,
   RECOVERY_RATE,
 } from "@neverquest/data/statistics";
+import { BRUISER_STUN_CHANCE } from "@neverquest/data/traits";
 import { withStateKey } from "@neverquest/state";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import {
@@ -265,9 +266,13 @@ export const staggerRating = withStateKey("staggerRating", (key) =>
 export const stun = withStateKey("stun", (key) =>
   selector({
     get: ({ get }) => {
-      const { abilityChance, gearClass } = get(weapon);
+      const { abilityChance, gearClass, name } = get(weapon);
 
-      return get(isSkillAcquired("traumatology")) && gearClass === "blunt" ? abilityChance : 0;
+      return get(isSkillAcquired("traumatology")) && gearClass === "blunt"
+        ? get(isTraitAcquired("bruiser")) && name === WEAPON_NONE.name
+          ? BRUISER_STUN_CHANCE
+          : abilityChance
+        : 0;
     },
     key,
   }),

@@ -1,7 +1,7 @@
 import type { RecoilValue, Snapshot } from "recoil";
 
 import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
-import { PROGRESS_REDUCTION } from "@neverquest/data/encounter";
+import { NAME_STRUCTURE, PROGRESS_REDUCTION } from "@neverquest/data/encounter";
 import {
   CLASS_ANIMATED,
   CLASS_ANIMATE_PREFIX,
@@ -15,7 +15,7 @@ import {
   WEAPON_MODIFIER,
   WEAPON_SPECIFICATIONS,
 } from "@neverquest/data/inventory";
-import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
+import type { ArmorClass, NameStructure, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type { GeneratorRange } from "@neverquest/types";
 import { isGeneratorRanges } from "@neverquest/types/type-guards";
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
@@ -137,6 +137,23 @@ export function getGrowthSigmoid(x: number) {
 // https://en.wikipedia.org/wiki/Triangular_number
 export function getGrowthTriangular(x: number) {
   return (x * (x + 1)) / 2;
+}
+
+export function getNameStructure(): NameStructure {
+  const chance = Math.random();
+  let cumulativeProbability = 0;
+
+  for (const [key, probability] of Object.entries(NAME_STRUCTURE).sort(
+    ([, current1], [, current2]) => current1 - current2,
+  )) {
+    cumulativeProbability += probability;
+
+    if (chance <= cumulativeProbability) {
+      return key as NameStructure;
+    }
+  }
+
+  return "none";
 }
 
 export function getProgressReduction(stage: number) {

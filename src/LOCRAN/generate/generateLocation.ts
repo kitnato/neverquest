@@ -2,19 +2,14 @@ import { plural } from "pluralize";
 
 import { LOCATIONS } from "@neverquest/LOCRAN/data/locations";
 import { PLURALIZE_CHANCE, generate } from "@neverquest/LOCRAN/generate";
-import type { AffixTag } from "@neverquest/LOCRAN/types";
+import type { GeneratorParameters } from "@neverquest/LOCRAN/types";
 
 export function generateLocation({
-  allowNSFW = false,
-  hasPrefix = false,
-  hasSuffix = false,
-  tags = [],
-}: {
-  allowNSFW?: boolean;
-  hasPrefix?: boolean;
-  hasSuffix?: boolean;
-  tags?: AffixTag[];
-}) {
+  allowNSFW,
+  nameStructure,
+  prefixTags,
+  suffixTags,
+}: GeneratorParameters) {
   const filteredLocations = LOCATIONS.filter((current) => {
     const isNSFW = Boolean(current.isNSFW);
 
@@ -29,15 +24,12 @@ export function generateLocation({
   const { canPluralize, name } = filteredLocation;
   const isPluralized = Math.random() <= PLURALIZE_CHANCE;
   const location = generate({
+    allowNSFW,
     category: "location",
     name,
-    parameters: {
-      allowNSFW,
-      hasPrefix,
-      hasSuffix,
-      prefixTags: tags,
-      suffixTags: tags,
-    },
+    nameStructure,
+    prefixTags,
+    suffixTags,
   });
 
   if (canPluralize && isPluralized) {

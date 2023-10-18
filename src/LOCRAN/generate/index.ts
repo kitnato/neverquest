@@ -5,18 +5,19 @@ import { capitalizeAll } from "@neverquest/utilities/formatters";
 export const PLURALIZE_CHANCE = 0.5;
 
 export function generate({
+  allowNSFW = false,
   category,
   name,
-  parameters,
-}: {
+  nameStructure = "none",
+  prefixTags = [],
+  suffixTags = [],
+}: GeneratorParameters & {
   category: Category;
   name: string;
-  parameters: GeneratorParameters;
 }) {
   const finalName = [capitalizeAll(name)];
-  const { allowNSFW, hasPrefix, hasSuffix, prefixTags, suffixTags } = parameters;
 
-  if (hasPrefix) {
+  if (nameStructure === "prefix" || nameStructure === "prefixAndSuffix") {
     const filteredPrefixes = AFFIXES.filter((currentAffix) => {
       const filterNSFW = allowNSFW
         ? Boolean(currentAffix.isNSFW) || !currentAffix.isNSFW
@@ -53,7 +54,7 @@ export function generate({
     finalName.unshift(capitalizeAll(prefix.name));
   }
 
-  if (hasSuffix) {
+  if (nameStructure === "suffix" || nameStructure === "prefixAndSuffix") {
     const filteredSuffixes = AFFIXES.filter((currentAffix) => {
       const filterNSFW = allowNSFW
         ? Boolean(currentAffix.isNSFW) || !currentAffix.isNSFW

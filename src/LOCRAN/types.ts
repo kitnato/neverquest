@@ -58,13 +58,12 @@ export type CreatureData = BaseData & {
   type: Creature;
 };
 
-export type GeneratorParameters = {
+export type GeneratorParameters = Partial<{
   allowNSFW: boolean;
-  hasPrefix: boolean;
-  hasSuffix: boolean;
+  nameStructure: NameStructure;
   prefixTags: AffixTag[];
   suffixTags: AffixTag[];
-};
+}>;
 
 export type LocationData = BaseData & {
   canPluralize?: boolean;
@@ -73,6 +72,9 @@ export type LocationData = BaseData & {
 export type NameData = BaseData & {
   type: Affix[];
 };
+
+export const NAME_STRUCTURE_TYPES = ["none", "prefix", "prefixAndSuffix", "suffix"] as const;
+export type NameStructure = (typeof NAME_STRUCTURE_TYPES)[number];
 
 export const SHIELD_CLASS_TYPES = ["small", "medium", "tower"] as const;
 export type ShieldClass = (typeof SHIELD_CLASS_TYPES)[number];

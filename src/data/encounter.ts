@@ -1,6 +1,10 @@
-export const LOCATION_NAME = {
-  prefix: { maximum: 1, minimum: 0.8 },
-  suffix: { maximum: 0.5, minimum: 0.05 },
+import type { NameStructure } from "@neverquest/LOCRAN/types";
+
+export const NAME_STRUCTURE: Record<NameStructure, number> = {
+  none: 0.05,
+  prefix: 0.7,
+  prefixAndSuffix: 0.1,
+  suffix: 0.15,
 };
 
 export const PROGRESS = {

@@ -21,7 +21,12 @@ import { allowNSFW } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { generateShield } from "@neverquest/utilities/generators";
-import { getGearPrice, getGrowthSigmoid, getShieldRanges } from "@neverquest/utilities/getters";
+import {
+  getGearPrice,
+  getGrowthSigmoid,
+  getNameStructure,
+  getShieldRanges,
+} from "@neverquest/utilities/getters";
 
 export function ShieldOptions() {
   const allowNSFWValue = useRecoilValue(allowNSFW);
@@ -119,10 +124,9 @@ export function ShieldOptions() {
               shield: generateShield({
                 allowNSFW: allowNSFWValue,
                 gearClass: shieldClass,
-                hasPrefix: true,
-                hasSuffix: Math.random() <= getGrowthSigmoid(shieldLevel),
                 level: shieldLevel,
-                tags:
+                nameStructure: getNameStructure(),
+                prefixTags:
                   shieldLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
                     ? ["lowQuality"]
                     : shieldLevel === maximumShieldLevel

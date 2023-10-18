@@ -64,11 +64,6 @@ export const MONSTER_HEALTH = {
   boss: 1.7,
 };
 
-export const MONSTER_NAME = {
-  prefix: { maximum: 1, minimum: 0.75 },
-  suffix: { maximum: 0.6, minimum: 0.01 },
-};
-
 export const POISON = {
   boss: 1.33,
   chance: {

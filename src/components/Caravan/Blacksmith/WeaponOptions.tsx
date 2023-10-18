@@ -24,7 +24,12 @@ import { isSkillAcquired } from "@neverquest/state/skills";
 import { GRIP_TYPES, type Grip } from "@neverquest/types/unions";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { generateMeleeWeapon } from "@neverquest/utilities/generators";
-import { getGearPrice, getGrowthSigmoid, getMeleeRanges } from "@neverquest/utilities/getters";
+import {
+  getGearPrice,
+  getGrowthSigmoid,
+  getMeleeRanges,
+  getNameStructure,
+} from "@neverquest/utilities/getters";
 
 export function WeaponOptions() {
   const [{ weapon: craftedWeapon }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
@@ -154,10 +159,9 @@ export function WeaponOptions() {
                 allowNSFW: allowNSFWValue,
                 gearClass: weaponClass,
                 grip: weaponGrip,
-                hasPrefix: true,
-                hasSuffix: Math.random() <= getGrowthSigmoid(weaponLevel),
                 level: weaponLevel,
-                tags:
+                nameStructure: getNameStructure(),
+                prefixTags:
                   weaponLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
                     ? ["lowQuality"]
                     : weaponLevel === maximumWeaponLevel

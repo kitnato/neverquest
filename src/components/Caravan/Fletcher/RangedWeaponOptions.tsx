@@ -23,7 +23,12 @@ import { allowNSFW } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { generateRangedWeapon } from "@neverquest/utilities/generators";
-import { getGearPrice, getGrowthSigmoid, getRangedRanges } from "@neverquest/utilities/getters";
+import {
+  getGearPrice,
+  getGrowthSigmoid,
+  getNameStructure,
+  getRangedRanges,
+} from "@neverquest/utilities/getters";
 
 export function RangedWeaponOptions() {
   const allowNSFWValue = useRecoilValue(allowNSFW);
@@ -139,10 +144,9 @@ export function RangedWeaponOptions() {
               generateRangedWeapon({
                 allowNSFW: allowNSFWValue,
                 gearClass: weaponClass,
-                hasPrefix: true,
-                hasSuffix: Math.random() <= getGrowthSigmoid(weaponLevel),
                 level: weaponLevel,
-                tags:
+                nameStructure: getNameStructure(),
+                prefixTags:
                   weaponLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
                     ? ["lowQuality"]
                     : weaponLevel === maximumWeaponLevel

@@ -5,13 +5,13 @@ import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { CREW } from "@neverquest/data/caravan";
 import { KEY_SESSION } from "@neverquest/data/general";
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
+import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
 import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import { hireStatus } from "@neverquest/state/caravan";
-import { stage, wildernesses } from "@neverquest/state/encounter";
+import { wildernesses } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
 import { ATTRIBUTE_TYPES, CREW_TYPES, type CrewStatus } from "@neverquest/types/unions";
-import { generateWilderness } from "@neverquest/utilities/generators";
-import { getSnapshotGetter } from "@neverquest/utilities/getters";
+import { getNameStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useInitialize() {
   const generateMonster = useGenerateMonster();
@@ -32,7 +32,12 @@ export function useInitialize() {
             }),
           );
 
-          set(wildernesses, [generateWilderness({ allowNSFW: get(allowNSFW), stage: get(stage) })]);
+          set(wildernesses, [
+            generateLocation({
+              allowNSFW: get(allowNSFW),
+              nameStructure: getNameStructure(),
+            }),
+          ]);
 
           generateMonster();
         }

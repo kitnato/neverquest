@@ -1,14 +1,17 @@
 import { nanoid } from "nanoid";
 
-import { LOCATION_NAME } from "@neverquest/data/encounter";
 import {
   ARMOR_SPECIFICATIONS,
   SHIELD_SPECIFICATIONS,
   WEAPON_BASE,
 } from "@neverquest/data/inventory";
 import { generateArtifact } from "@neverquest/LOCRAN/generate/generateArtifact";
-import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
-import type { AffixTag, ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
+import type {
+  ArmorClass,
+  GeneratorParameters,
+  ShieldClass,
+  WeaponClass,
+} from "@neverquest/LOCRAN/types";
 import type { Armor, Melee, Ranged, Shield } from "@neverquest/types";
 import { isGeneratorRange } from "@neverquest/types/type-guards";
 import type { Grip } from "@neverquest/types/unions";
@@ -23,21 +26,12 @@ import {
 } from "@neverquest/utilities/getters";
 
 export function generateArmor({
-  allowNSFW,
   gearClass,
-  hasPrefix,
-  hasSuffix,
   level,
-  name,
-  tags,
-}: {
-  allowNSFW: boolean;
+  ...generatorParameters
+}: GeneratorParameters & {
   gearClass: ArmorClass;
-  hasPrefix?: boolean;
-  hasSuffix?: boolean;
   level: number;
-  name?: string;
-  tags?: AffixTag[];
 }): Armor {
   const factor = getGrowthSigmoid(level);
   const { deflection, protection, staminaCost, weight } = getArmorRanges({
@@ -52,17 +46,12 @@ export function generateArmor({
     id: nanoid(),
     isEquipped: false,
     level,
-    name:
-      name ??
-      generateArtifact({
-        allowNSFW,
-        hasPrefix,
-        hasSuffix,
-        query: {
-          type: "armor",
-        },
-        tags,
-      }),
+    name: generateArtifact({
+      query: {
+        type: "armor",
+      },
+      ...generatorParameters,
+    }),
     price: getGearPrice({
       factor,
       ...ARMOR_SPECIFICATIONS[gearClass],
@@ -74,21 +63,14 @@ export function generateArmor({
 }
 
 export function generateMeleeWeapon({
-  allowNSFW,
   gearClass,
   grip,
-  hasPrefix,
-  hasSuffix,
   level,
-  tags,
-}: {
-  allowNSFW: boolean;
+  ...generatorParameters
+}: GeneratorParameters & {
   gearClass: WeaponClass;
   grip: Grip;
-  hasPrefix?: boolean;
-  hasSuffix?: boolean;
   level: number;
-  tags?: AffixTag[];
 }): Melee {
   const factor = getGrowthSigmoid(level);
   const { abilityChance, damage, rate, staminaCost, weight } = getMeleeRanges({
@@ -107,15 +89,12 @@ export function generateMeleeWeapon({
     isEquipped: false,
     level,
     name: generateArtifact({
-      allowNSFW,
-      hasPrefix,
-      hasSuffix,
       query: {
         artifactClass: gearClass,
         subtype: "melee",
         type: "weapon",
       },
-      tags,
+      ...generatorParameters,
     }),
     price: getGearPrice({ factor, ...WEAPON_BASE }),
     rate: getFromRange(rate),
@@ -125,19 +104,12 @@ export function generateMeleeWeapon({
 }
 
 export function generateRangedWeapon({
-  allowNSFW,
   gearClass,
-  hasPrefix,
-  hasSuffix,
   level,
-  tags,
-}: {
-  allowNSFW: boolean;
+  ...generatorParameters
+}: GeneratorParameters & {
   gearClass: WeaponClass;
-  hasPrefix?: boolean;
-  hasSuffix?: boolean;
   level: number;
-  tags?: AffixTag[];
 }): Ranged {
   const factor = getGrowthSigmoid(level);
   const { abilityChance, ammunitionCost, damage, range, rate, staminaCost, weight } =
@@ -156,15 +128,12 @@ export function generateRangedWeapon({
     isEquipped: false,
     level,
     name: generateArtifact({
-      allowNSFW,
-      hasPrefix,
-      hasSuffix,
       query: {
         artifactClass: gearClass,
         subtype: "ranged",
         type: "weapon",
       },
-      tags,
+      ...generatorParameters,
     }),
     price: getGearPrice({ factor, ...WEAPON_BASE }),
     range: getFromRange(range),
@@ -175,21 +144,12 @@ export function generateRangedWeapon({
 }
 
 export function generateShield({
-  allowNSFW,
   gearClass,
-  hasPrefix,
-  hasSuffix,
   level,
-  name,
-  tags,
-}: {
-  allowNSFW: boolean;
+  ...generatorParameters
+}: GeneratorParameters & {
   gearClass: ShieldClass;
-  hasPrefix?: boolean;
-  hasSuffix?: boolean;
   level: number;
-  name?: string;
-  tags?: AffixTag[];
 }): Shield {
   const factor = getGrowthSigmoid(level);
   const { block, stagger, staminaCost, weight } = getShieldRanges({
@@ -204,18 +164,13 @@ export function generateShield({
     id: nanoid(),
     isEquipped: false,
     level,
-    name:
-      name ??
-      generateArtifact({
-        allowNSFW,
-        hasPrefix,
-        hasSuffix,
-        query: {
-          subtype: gearClass,
-          type: "shield",
-        },
-        tags,
-      }),
+    name: generateArtifact({
+      query: {
+        subtype: gearClass,
+        type: "shield",
+      },
+      ...generatorParameters,
+    }),
     price: getGearPrice({
       factor,
       ...SHIELD_SPECIFICATIONS[gearClass],
@@ -224,17 +179,4 @@ export function generateShield({
     staminaCost: getFromRange(staminaCost),
     weight: getFromRange(weight),
   };
-}
-
-export function generateWilderness({ allowNSFW, stage }: { allowNSFW: boolean; stage: number }) {
-  const { prefix, suffix } = LOCATION_NAME;
-  const factor = getGrowthSigmoid(stage);
-
-  return generateLocation({
-    allowNSFW,
-    hasPrefix:
-      Math.random() <= getFromRange({ factor, maximum: prefix.maximum, minimum: prefix.minimum }),
-    hasSuffix:
-      Math.random() <= getFromRange({ factor, maximum: suffix.maximum, minimum: suffix.minimum }),
-  });
 }

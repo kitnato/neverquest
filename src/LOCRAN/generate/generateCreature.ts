@@ -1,18 +1,14 @@
 import { CREATURES } from "@neverquest/LOCRAN/data/creatures";
 import { generate } from "@neverquest/LOCRAN/generate";
-import type { AffixTag, Creature } from "@neverquest/LOCRAN/types";
+import type { Creature, GeneratorParameters } from "@neverquest/LOCRAN/types";
 
 export function generateCreature({
-  allowNSFW = false,
-  hasPrefix = false,
-  hasSuffix = false,
-  tags = [],
+  allowNSFW,
+  nameStructure,
+  prefixTags,
+  suffixTags,
   type,
-}: {
-  allowNSFW?: boolean;
-  hasPrefix?: boolean;
-  hasSuffix?: boolean;
-  tags?: AffixTag[];
+}: GeneratorParameters & {
   type: Creature[];
 }) {
   const filteredCreatures = CREATURES.filter((current) => {
@@ -28,14 +24,11 @@ export function generateCreature({
   }
 
   return generate({
+    allowNSFW,
     category: "creature",
     name: filteredCreature.name,
-    parameters: {
-      allowNSFW,
-      hasPrefix,
-      hasSuffix,
-      prefixTags: tags,
-      suffixTags: tags,
-    },
+    nameStructure,
+    prefixTags,
+    suffixTags,
   });
 }

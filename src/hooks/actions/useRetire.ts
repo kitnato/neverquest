@@ -5,6 +5,7 @@ import { RETIREMENT_MINIMUM } from "@neverquest/data/general";
 import { ENCUMBRANCE, INHERITED_ITEMS, KNAPSACK_SIZE } from "@neverquest/data/inventory";
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
+import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
 import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import {
   blacksmithInventory,
@@ -38,8 +39,11 @@ import {
   MASTERY_TYPES,
   SKILL_TYPES,
 } from "@neverquest/types/unions";
-import { generateWilderness } from "@neverquest/utilities/generators";
-import { getProgressReduction, getSnapshotGetter } from "@neverquest/utilities/getters";
+import {
+  getNameStructure,
+  getProgressReduction,
+  getSnapshotGetter,
+} from "@neverquest/utilities/getters";
 
 export function useRetire() {
   const generateMonster = useGenerateMonster();
@@ -111,7 +115,12 @@ export function useRetire() {
 
         INFUSABLE_TYPES.forEach((current) => reset(infusionCurrent(current)));
 
-        set(wildernesses, [generateWilderness({ allowNSFW: get(allowNSFW), stage: get(stage) })]);
+        set(wildernesses, [
+          generateLocation({
+            allowNSFW: get(allowNSFW),
+            nameStructure: getNameStructure(),
+          }),
+        ]);
 
         generateMonster();
       },

@@ -23,7 +23,12 @@ import { allowNSFW } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { generateArmor } from "@neverquest/utilities/generators";
-import { getArmorRanges, getGearPrice, getGrowthSigmoid } from "@neverquest/utilities/getters";
+import {
+  getArmorRanges,
+  getGearPrice,
+  getGrowthSigmoid,
+  getNameStructure,
+} from "@neverquest/utilities/getters";
 
 export function ArmorOptions() {
   const [{ armor: craftedArmor }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
@@ -123,10 +128,9 @@ export function ArmorOptions() {
               armor: generateArmor({
                 allowNSFW: allowNSFWValue,
                 gearClass: armorClass,
-                hasPrefix: true,
-                hasSuffix: Math.random() <= getGrowthSigmoid(armorLevel),
                 level: armorLevel,
-                tags:
+                nameStructure: getNameStructure(),
+                prefixTags:
                   armorLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
                     ? ["lowQuality"]
                     : armorLevel === maximumArmorLevel

@@ -153,6 +153,10 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    name: "blasphemer",
+    type: "monster",
+  },
+  {
     name: "blister",
     type: "monster",
   },
@@ -813,6 +817,11 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "mannequin",
+    type: "monster",
+  },
+  {
+    isNSFW: true,
+    name: "manspreader",
     type: "monster",
   },
   {

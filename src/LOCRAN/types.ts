@@ -1,11 +1,11 @@
-type Affix = "prefix" | "suffix";
+type Affix = "articledSuffix" | "prefix" | "suffix";
 
 export type AffixTag = "elemental" | "highQuality" | "lowQuality";
 
 export type AffixData = BaseData & {
-  artifact?: Affix;
-  creature?: Affix;
-  location?: Affix;
+  artifact?: Affix[];
+  creature?: Affix[];
+  location?: Affix[];
   tags?: AffixTag[];
 };
 

@@ -2,9 +2,9 @@ import type { NameStructure } from "@neverquest/LOCRAN/types";
 
 export const NAME_STRUCTURE: Record<NameStructure, number> = {
   none: 0.05,
-  prefix: 0.7,
+  prefix: 0.65,
   prefixAndSuffix: 0.1,
-  suffix: 0.15,
+  suffix: 0.2,
 };
 
 export const PROGRESS = {

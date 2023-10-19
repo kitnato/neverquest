@@ -366,6 +366,7 @@ export const LOCATIONS: LocationData[] = [
     name: "lair",
   },
   {
+    canPluralize: true,
     name: "lake",
   },
   {
@@ -487,6 +488,13 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "passageway",
+  },
+  {
+    name: "path",
+  },
+  {
+    canPluralize: true,
+    name: "pathway",
   },
   {
     canPluralize: true,

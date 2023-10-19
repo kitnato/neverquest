@@ -18,31 +18,24 @@ export function generate({
   const finalName = [capitalizeAll(name)];
 
   if (nameStructure === "prefix" || nameStructure === "prefixAndSuffix") {
-    const filteredPrefixes = AFFIXES.filter((currentAffix) => {
-      const filterNSFW = allowNSFW
-        ? Boolean(currentAffix.isNSFW) || !currentAffix.isNSFW
-        : !currentAffix.isNSFW;
-
+    const filteredPrefixes = AFFIXES.filter(({ isNSFW, name: affixName, tags, ...categories }) => {
       // Discard prefix if it's the same as the main name (e.g. "Fungus Fungus").
-      if (currentAffix.name === name) {
+      if (affixName === name) {
         return false;
       }
 
-      // If we want a tagged prefix, check if the current affix has all of them (with NSFW filter), otherwise discard it.
-      if (prefixTags.length > 0) {
-        if (currentAffix.tags === undefined) {
-          return false;
-        }
+      // Filter out only prefixes with NSFW filter.
+      const filteredPrefix =
+        (allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW) &&
+        categories[category]?.includes("prefix");
 
-        return (
-          currentAffix[category] === "prefix" &&
-          prefixTags.every((currentPrefixTag) => currentAffix.tags?.includes(currentPrefixTag)) &&
-          filterNSFW
-        );
+      // If we want a tagged prefix, check if the current affix has all of them, otherwise discard it.
+      if (prefixTags.length > 0 && tags !== undefined) {
+        return filteredPrefix && prefixTags.every((current) => tags?.includes(current));
       }
 
-      // Otherwise, return any prefix (with NSFW filter).
-      return currentAffix[category] === "prefix" && filterNSFW;
+      // Otherwise, return any prefix.
+      return filteredPrefix;
     });
 
     const prefix = filteredPrefixes[Math.floor(Math.random() * filteredPrefixes.length)];
@@ -55,24 +48,24 @@ export function generate({
   }
 
   if (nameStructure === "suffix" || nameStructure === "prefixAndSuffix") {
-    const filteredSuffixes = AFFIXES.filter((currentAffix) => {
-      const filterNSFW = allowNSFW
-        ? Boolean(currentAffix.isNSFW) || !currentAffix.isNSFW
-        : !currentAffix.isNSFW;
-
-      // If we want a tagged suffix, check if the current affix has all of them (with NSFW filter).
-      if (suffixTags.length > 0) {
-        if (currentAffix.tags !== undefined) {
-          return (
-            currentAffix[category] === "suffix" &&
-            suffixTags.every((currentSuffix) => currentAffix.tags?.includes(currentSuffix)) &&
-            filterNSFW
-          );
-        }
+    const filteredSuffixes = AFFIXES.filter(({ isNSFW, name: affixName, tags, ...categories }) => {
+      if (affixName === name) {
+        return false;
       }
 
-      // Otherwise, return any suffix (with NSFW filter).
-      return currentAffix[category] === "suffix" && filterNSFW;
+      // Filter out only suffixes with NSFW filter.
+      const filteredSuffix =
+        (allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW) &&
+        (categories[category]?.includes("articledSuffix") ||
+          categories[category]?.includes("suffix"));
+
+      // If suffix is tagged, check if the current affix has all of them (with NSFW filter).
+      if (suffixTags.length > 0 && tags !== undefined) {
+        return filteredSuffix && suffixTags.every((current) => tags?.includes(current));
+      }
+
+      // Otherwise, return any suffix.
+      return filteredSuffix;
     });
 
     const suffix = filteredSuffixes[Math.floor(Math.random() * filteredSuffixes.length)];
@@ -81,7 +74,16 @@ export function generate({
       throw Error("Invalid suffix.");
     }
 
-    finalName.push("of", capitalizeAll(suffix.name));
+    finalName.push(
+      "of",
+      `${
+        suffix[category]?.includes("articledSuffix")
+          ? suffix[category]?.includes("suffix") && Math.random() < 0.5
+            ? ""
+            : "the "
+          : ""
+      }${capitalizeAll(suffix.name)}`,
+    );
   }
 
   return finalName.join(" ");

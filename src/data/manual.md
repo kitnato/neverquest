@@ -46,11 +46,11 @@ For each rank, an attribute provides a direct increasing effect and raises the c
 
 #### Agility
 
-Affects [dodge chance](#dodge-chance). Required skill: [Evasion](#evasion).
+Affects [dodge chance](#dodge-chance). Requires the [evasion](#evasion) skill.
 
 #### Dexterity
 
-Affects [critical](#critical-rating) chance. Required skill: [Assassination](#assassination).
+Affects [critical](#critical-rating) chance. Requires the [assassination](#assassination) skill.
 
 #### Endurance
 
@@ -62,7 +62,7 @@ Affects [health](#health-regeneration) and [stamina](#stamina-regeneration) rege
 
 #### Perception
 
-Affects [critical](#critical-rating) damage. Required skill: [Assassination](#assassination).
+Affects [critical](#critical-rating) damage. Requires the [assassination](#assassination) skill.
 
 #### Speed
 
@@ -100,7 +100,7 @@ A value determined by the chance of inflicting [bleed](#bleed) alongside its tot
 
 The bleed damage is increased by mastering [cruelty](#cruelty).
 
-Required skill: [Anatomy](#anatomy).
+Requires the [anatomy](#anatomy) skill.
 
 #### Block chance
 
@@ -114,13 +114,13 @@ A value determined by the chance that upon attacking, increased (critical) damag
 
 Critical chance can be increased with the [dexterity](#dexterity) attribute and its damage with the [perception](#perception) attribute.
 
-Required skill: [Assassination](#assassination).
+Requires the [assassination](#assassination) skill.
 
 ### Deflection chance
 
 The chance for the character to completely ignore all effects of an incoming [ailment](#monster-ailments). Only applies if suitable [armor](#armor) is equipped.
 
-Required skill: [Armorcraft](#armorcraft).
+Requires the [armorcraft](#armorcraft) skill.
 
 #### Dodge chance
 
@@ -128,7 +128,7 @@ Percentage determining the chance of when defending, the character avoids all da
 
 The dodge chance can be increased with the [agility](#agility) attribute.
 
-Required skill: [Evasion](#evasion).
+Requires the [evasion](#evasion) skill.
 
 #### Execution threshold
 
@@ -136,7 +136,7 @@ Percentage determining the amount of monster health required before the next att
 
 The threshold is increased by mastering [butchery](#butchery).
 
-Required skill: [Siegecraft](#siegecraft).
+Requires the [siegecraft](#siegecraft) skill.
 
 #### Health regeneration
 
@@ -144,7 +144,7 @@ Amount of [health](#health) restored according to a certain rate.
 
 The restoration amount can be increased with the [vigor](#vigor) attribute and its rate with the [fortitude](#fortitude) attribute.
 
-Required skill: [Calisthenics](#calisthenics).
+Requires the [calisthenics](#calisthenics) skill.
 
 #### Parry rating
 
@@ -152,7 +152,7 @@ A value determined by the chance of successfully parrying when defending, along 
 
 The absorbed & reflected damage is increased by mastering [finesse](#finesse).
 
-Required skill: [Escrime](#escrime).
+Requires the [escrime](#escrime) skill.
 
 #### Protection
 
@@ -166,7 +166,7 @@ The distance the monster needs to travel once engaged before it can start attack
 
 Determined by the equipped [ranged weapon](#ranged-weapons) and affected by the [marksmanship](#marksmanship) mastery.
 
-Required skill: [Archery](#archery).
+Requires the [archery](#archery) skill.
 
 #### Recovery rate
 
@@ -174,7 +174,7 @@ Time duration until full [recovery](#recovery) from a monster's successful attac
 
 Can be decreased by mastering [resilience](#resilience).
 
-Required skill: [Armorcraft](#armorcraft).
+Requires the [armorcraft](#armorcraft) skill.
 
 #### Stagger rating
 
@@ -182,7 +182,7 @@ A value determined by the chance to [stagger](#stagger)and its duration. Only ap
 
 The stagger duration can be increased by mastering [stability](#stability).
 
-Required skill: [Shieldcraft](#shieldcraft).
+Requires the [shieldcraft](#shieldcraft) skill.
 
 #### Stun rating
 
@@ -190,7 +190,7 @@ A value determined by the chance to [stun](#stun) and its length. Only applies i
 
 The stun length can be increased by mastering [might](#might).
 
-Required skill: [Traumatology](#traumatology).
+Requires the [traumatology](#traumatology) skill.
 
 #### Stamina regeneration
 
@@ -198,7 +198,7 @@ Amount of [stamina](#stamina) restored according to a certain rate.
 
 The restoration amount can be increased with the [vigor](#vigor) attribute and its rate with the [fortitude](#fortitude) attribute.
 
-Required skill: [Calisthenics](#calisthenics).
+Requires the [calisthenics](#calisthenics) skill.
 
 #### Total damage
 
@@ -345,19 +345,19 @@ No initial modifiers.
 
 Adds chance to [stun](#stun) for a certain duration.
 
-Required skill: [Traumatology](#traumatology).
+Requires the [traumatology](#traumatology) skill.
 
 ###### Piercing weapons
 
 Chance to inflict [bleed](#bleed).
 
-Required skill: [Anatomy](#anatomy).
+Requires the [anatomy](#anatomy) skill.
 
 ###### Slashing weapons
 
 Chance to [parry](#parry-rating).
 
-Required skill: [Escrime](#escrime).
+Requires the [escrime](#escrime) skill.
 
 #### Armor
 
@@ -502,43 +502,43 @@ Each mastery starts at rank 0 and requires a certain amount of accumulated progr
 
 Progress is gained by using [two-handed](#two-handed) weapons. Each rank increases the [execution](#execution-threshold) threshold.
 
-Required skill: [Siegecraft](#siegecraft).
+Requires the [siegecraft](#siegecraft) skill.
 
 ### Cruelty
 
 Progress is gained by using [piercing](#piercing-weapons) weapons. Each rank increases [bleed](#bleed) damage.
 
-Required skill: [Anatomy](#anatomy).
+Requires the [anatomy](#anatomy) skill.
 
 ### Finesse
 
 Progress is gained by using [slashing](#slashing-weapons) weapons. Each rank increases [parry](#parry-rating) & damage.
 
-Required skill: [Escrime](#escrime).
+Requires the [escrime](#escrime) skill.
 
 ### Marksmanship
 
 Progress is gained by using [ranged weapons](#ranged-weapons). Each rank increases [range](#range) and thus distance of the monster it's when first engaged.
 
-Required skill: [Archery](#archery).
+Requires the [archery](#archery) skill.
 
 ### Might
 
 Progress is gained by using [blunt](#blunt-weapons) weapons. Each rank increases how many of its attacks the monster is [stunned](#stun) for.
 
-Required skill: [Traumatology](#traumatology).
+Requires the [traumatology](#traumatology) skill.
 
 ### Stability
 
 Progress is gained by successfully [blocking](#block-chance) with [shields](#shields). Each rank increases the [stagger](#stagger) duration.
 
-Required skill: [Shieldcraft](#shieldcraft).
+Requires the [shieldcraft](#shieldcraft) skill.
 
 ### Resilience
 
 Progress is gained when defending. Each rank reduces [recovery](#recovery-rate) .
 
-Required skill: [Armorcraft](#armorcraft).
+Requires the [armorcraft](#armorcraft) skill.
 
 ## Skills
 
@@ -622,7 +622,7 @@ Ailments that are inflicted by the character when attacking.
 
 Certain successful attacks with a [piercing](#piercing-weapons) weapon can inflict bleeding on the monster, consisting of a proportional amount of damage inflicted regularly over a certain period of time. The extent of this is determined by the [bleed-rating](#bleed-rating).
 
-Required skill: [Anatomy](#anatomy).
+Requires the [anatomy](#anatomy) skill.
 
 #### Burning
 
@@ -640,13 +640,13 @@ Inflicted by lightning [elemental](#elemental-damage) damage. When shocked, dama
 
 When staggered, the monster's attack rate and movement speed (time to close [distance](#range)) is slowed. The extent of this is determined by the [stagger rating](#stagger-rating).
 
-Required skill: [Shieldcraft](#shieldcraft).
+Requires the [shieldcraft](#shieldcraft) skill.
 
 #### Stun
 
 When stunned, the monster's hit accuracy is reduced for a certain number of attacks (its length), meaning it may miss completely. The extent of this is determined by the [stun rating](#stun-rating).
 
-Required skill: [Traumatology](#traumatology).
+Requires the [traumatology](#traumatology) skill.
 
 ## Retirement
 

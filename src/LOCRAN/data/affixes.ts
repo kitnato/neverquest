@@ -5244,6 +5244,12 @@ export const AFFIXES: AffixData[] = [
   {
     artifact: ["prefix"],
     creature: ["prefix"],
+    location: ["prefix"],
+    name: "spritely",
+  },
+  {
+    artifact: ["prefix"],
+    creature: ["prefix"],
     isNSFW: true,
     location: ["prefix"],
     name: "squirting",

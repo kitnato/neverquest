@@ -614,11 +614,11 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "guardian",
-    type: "human",
+    type: "monster",
   },
   {
     name: "hag",
-    type: "human",
+    type: "monster",
   },
   {
     name: "halfling",
@@ -1251,6 +1251,10 @@ export const CREATURES: CreatureData[] = [
   },
   {
     name: "spider",
+    type: "monster",
+  },
+  {
+    name: "sprite",
     type: "monster",
   },
   {

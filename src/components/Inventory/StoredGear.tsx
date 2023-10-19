@@ -16,7 +16,7 @@ export function StoredGear() {
   return inventoryValue
     .filter((current) => isGear(current) && !current.isEquipped)
     .filter(isGear)
-    .sort((a, b) => a.name.localeCompare(b.name))
+    .sort((current1, current2) => current1.name.localeCompare(current2.name))
     .map((current) => {
       const { id } = current;
       const canEquipGear = equippableItemsValue[id];

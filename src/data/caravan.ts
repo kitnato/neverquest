@@ -126,8 +126,8 @@ export const CREW: Record<
 };
 
 export const CREW_ORDER: Crew[] = Object.entries(CREW)
-  .sort(([, a], [, b]) => a.requiredStage - b.requiredStage)
-  .map(([type]) => type as Crew);
+  .sort(([, current1], [, current2]) => current1.requiredStage - current2.requiredStage)
+  .map(([current]) => current as Crew);
 
 export const OCCULTIST_PURGE_PRICE_MULTIPLIER = 0.1;
 

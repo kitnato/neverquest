@@ -15,11 +15,13 @@ export function Alchemist() {
       <Stack gap={3}>
         <h6>Inventory</h6>
 
-        {stackItems(inventoryValue.filter(isGem).sort((a, b) => a.name.localeCompare(b.name))).map(
-          ({ item, stack }) => (
-            <ItemDisplay item={item} key={item.id} overlayPlacement="right" stack={stack} />
-          ),
-        )}
+        {stackItems(
+          inventoryValue
+            .filter(isGem)
+            .sort((current1, current2) => current1.name.localeCompare(current2.name)),
+        ).map(({ item, stack }) => (
+          <ItemDisplay item={item} key={item.id} overlayPlacement="right" stack={stack} />
+        ))}
       </Stack>
 
       <Stack gap={3}>

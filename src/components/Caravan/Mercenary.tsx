@@ -9,9 +9,12 @@ import { trainedSkills } from "@neverquest/state/skills";
 import type { Skill } from "@neverquest/types/unions";
 
 const ALL_SKILLS = Object.entries(SKILLS)
-  .sort(([a], [b]) => a.localeCompare(b))
-  .sort(([, a], [, b]) => CREW[a.requiredCrew].requiredStage - CREW[b.requiredCrew].requiredStage)
-  .map(([type]) => type as Skill);
+  .sort(([current1], [current2]) => current1.localeCompare(current2))
+  .sort(
+    ([, current1], [, current2]) =>
+      CREW[current1.requiredCrew].requiredStage - CREW[current2.requiredCrew].requiredStage,
+  )
+  .map(([current]) => current as Skill);
 
 export function Mercenary() {
   const trainedSkillsValues = Object.values(useRecoilValue(trainedSkills));

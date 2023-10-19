@@ -24,7 +24,9 @@ export function TransmuteGems() {
   const acquireItem = useAcquireItem();
 
   const gems = stackItems(
-    inventoryValue.filter(isGem).sort((a, b) => a.name.localeCompare(b.name)),
+    inventoryValue
+      .filter(isGem)
+      .sort((current1, current2) => current1.name.localeCompare(current2.name)),
   );
   const transmutation = GEM_TYPES.reduce(
     (aggregator, current) => ({

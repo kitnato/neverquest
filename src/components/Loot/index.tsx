@@ -18,9 +18,21 @@ export function Loot() {
   const progressValue = useRecoilValue(progress);
 
   const stackItemsLoot = [
-    ...stackItems(itemsLootValue.filter(isGear).sort((a, b) => a.name.localeCompare(b.name))),
-    ...stackItems(itemsLootValue.filter(isTrinket).sort((a, b) => a.name.localeCompare(b.name))),
-    ...stackItems(itemsLootValue.filter(isStackable).sort((a, b) => a.name.localeCompare(b.name))),
+    ...stackItems(
+      itemsLootValue
+        .filter(isGear)
+        .sort((current1, current2) => current1.name.localeCompare(current2.name)),
+    ),
+    ...stackItems(
+      itemsLootValue
+        .filter(isTrinket)
+        .sort((current1, current2) => current1.name.localeCompare(current2.name)),
+    ),
+    ...stackItems(
+      itemsLootValue
+        .filter(isStackable)
+        .sort((current1, current2) => current1.name.localeCompare(current2.name)),
+    ),
   ];
 
   return (

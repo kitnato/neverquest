@@ -35,10 +35,13 @@ export function generateName({
         : (creature?.includes("prefix") || creature?.includes("suffix")) &&
           (allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW),
     );
-    const filteredCreatures = CREATURES.filter(({ isNSFW, type }) =>
-      type === "monster" && allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW,
+    const filteredCreatures = CREATURES.filter(
+      ({ isNSFW, type }) =>
+        type === "monster" && (allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW),
     );
-    const filteredTitles = filteredAffixes.concat(filteredCreatures);
+    const filteredTitles = filteredAffixes
+      .concat(filteredCreatures)
+      .sort((current1, current2) => current1.name.localeCompare(current2.name));
     title = filteredTitles[Math.floor(Math.random() * filteredTitles.length)];
 
     if (title === undefined) {

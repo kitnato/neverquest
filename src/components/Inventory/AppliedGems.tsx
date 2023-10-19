@@ -26,42 +26,42 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
       <td className={CLASS_TABLE_CELL_ITALIC}>{`Gems (${appliedGems}/${GEMS_MAXIMUM}):`}</td>
 
       <td>
-        {stackItems(gems.slice().sort((a, b) => a.name.localeCompare(b.name))).map(
-          ({ item, stack }) => {
-            const { id, name } = item;
-            const elemental = GEM_ELEMENTALS[name];
-            const effect =
-              elementalEffectsValue[
-                isArmor(gearItem) ? "armor" : isShield(gearItem) ? "shield" : "weapon"
-              ][elemental];
+        {stackItems(
+          gems.slice().sort((current1, current2) => current1.name.localeCompare(current2.name)),
+        ).map(({ item, stack }) => {
+          const { id, name } = item;
+          const elemental = GEM_ELEMENTALS[name];
+          const effect =
+            elementalEffectsValue[
+              isArmor(gearItem) ? "armor" : isShield(gearItem) ? "shield" : "weapon"
+            ][elemental];
 
-            return (
-              <Stack direction="horizontal" gap={1} key={id}>
-                <span className={ELEMENTALS[elemental].color}>{`${
-                  typeof effect === "number"
-                    ? `+${formatValue({ decimals: 0, format: "percentage", value: effect })}`
-                    : formatValue({ value: effect.damage })
-                }`}</span>
+          return (
+            <Stack direction="horizontal" gap={1} key={id}>
+              <span className={ELEMENTALS[elemental].color}>{`${
+                typeof effect === "number"
+                  ? `+${formatValue({ decimals: 0, format: "percentage", value: effect })}`
+                  : formatValue({ value: effect.damage })
+              }`}</span>
 
-                {LABEL_SEPARATOR}
+              {LABEL_SEPARATOR}
 
-                <IconImage Icon={ELEMENTALS[elemental].Icon} size="small" />
+              <IconImage Icon={ELEMENTALS[elemental].Icon} size="small" />
 
-                {`${
-                  typeof effect === "number"
-                    ? `+${formatValue({ decimals: 0, format: "percentage", value: effect })}`
-                    : formatValue({ format: "time", value: effect.duration })
-                }`}
+              {`${
+                typeof effect === "number"
+                  ? `+${formatValue({ decimals: 0, format: "percentage", value: effect })}`
+                  : formatValue({ format: "time", value: effect.duration })
+              }`}
 
-                {LABEL_SEPARATOR}
+              {LABEL_SEPARATOR}
 
-                <IconImage Icon={IconGem} size="small" />
+              <IconImage Icon={IconGem} size="small" />
 
-                {stack}
-              </Stack>
-            );
-          },
-        )}
+              {stack}
+            </Stack>
+          );
+        })}
       </td>
     </tr>
   );

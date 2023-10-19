@@ -57,7 +57,7 @@ export function SellItems() {
 
           {storedItems
             .filter(isGear)
-            .sort((a, b) => a.name.localeCompare(b.name))
+            .sort((current1, current2) => current1.name.localeCompare(current2.name))
             .map((current) => (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.id}>
                 <ItemDisplay item={current} overlayPlacement="right" />
@@ -68,7 +68,7 @@ export function SellItems() {
 
           {storedItems
             .filter(isUsable)
-            .sort((a, b) => a.name.localeCompare(b.name))
+            .sort((current1, current2) => current1.name.localeCompare(current2.name))
             .map((current) => (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.id}>
                 <Usable item={current} />
@@ -79,9 +79,15 @@ export function SellItems() {
 
           {[
             ...stackItems(
-              storedItems.filter(isConsumable).sort((a, b) => a.name.localeCompare(b.name)),
+              storedItems
+                .filter(isConsumable)
+                .sort((current1, current2) => current1.name.localeCompare(current2.name)),
             ),
-            ...stackItems(storedItems.filter(isGem).sort((a, b) => a.name.localeCompare(b.name))),
+            ...stackItems(
+              storedItems
+                .filter(isGem)
+                .sort((current1, current2) => current1.name.localeCompare(current2.name)),
+            ),
           ].map((current) => {
             const { item, stack } = current;
 

@@ -1653,6 +1653,11 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "armor",
   },
   {
+    name: "raiment",
+    subtype: "chest",
+    type: "armor",
+  },
+  {
     artifactClass: "blunt",
     name: "ram",
     subtype: "melee",
@@ -1757,6 +1762,12 @@ export const ARTIFACTS: ArtifactData[] = [
   {
     artifactClass: "slashing",
     name: "saber",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
+    artifactClass: "piercing",
+    name: "sai",
     subtype: "melee",
     type: "weapon",
   },

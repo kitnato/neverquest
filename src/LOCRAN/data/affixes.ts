@@ -2,9 +2,9 @@ import type { AffixData } from "@neverquest/LOCRAN/types";
 
 export const AFFIXES: AffixData[] = [
   {
+    creature: "prefix",
     location: "prefix",
     name: "abandoned",
-    tags: ["lowQuality"],
   },
   {
     artifact: "prefix",
@@ -123,6 +123,11 @@ export const AFFIXES: AffixData[] = [
   {
     creature: "prefix",
     name: "altruistic",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    name: "ambitious",
   },
   {
     artifact: "prefix",
@@ -489,6 +494,13 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
+    name: "blazing",
+    tags: ["elemental"],
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
     name: "bleached",
   },
   {
@@ -658,6 +670,11 @@ export const AFFIXES: AffixData[] = [
     isNSFW: true,
     location: "prefix",
     name: "bukkake",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    name: "bulbous",
   },
   {
     creature: "prefix",
@@ -1336,6 +1353,10 @@ export const AFFIXES: AffixData[] = [
     tags: ["lowQuality"],
   },
   {
+    location: "prefix",
+    name: "deserted",
+  },
+  {
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
@@ -1346,6 +1367,11 @@ export const AFFIXES: AffixData[] = [
     artifact: "suffix",
     location: "suffix",
     name: "desire",
+  },
+  {
+    creature: "prefix",
+    location: "prefix",
+    name: "desolate",
   },
   {
     location: "suffix",
@@ -1968,6 +1994,13 @@ export const AFFIXES: AffixData[] = [
     creature: "prefix",
     location: "prefix",
     name: "feral",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "festering",
+    tags: ["lowQuality"],
   },
   {
     artifact: "prefix",
@@ -3179,6 +3212,11 @@ export const AFFIXES: AffixData[] = [
     name: "living",
   },
   {
+    creature: "suffix",
+    location: "suffix",
+    name: "loneliness",
+  },
+  {
     creature: "prefix",
     location: "prefix",
     name: "lonely",
@@ -3218,6 +3256,11 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     name: "lurid",
+  },
+  {
+    creature: "prefix",
+    location: "prefix",
+    name: "lurking",
   },
   {
     artifact: "suffix",
@@ -3479,6 +3522,10 @@ export const AFFIXES: AffixData[] = [
     tags: ["lowQuality"],
   },
   {
+    location: "suffix",
+    name: "mist",
+  },
+  {
     location: "prefix",
     name: "misty",
   },
@@ -3560,6 +3607,11 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     name: "mummified",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    name: "murderous",
   },
   {
     location: "prefix",
@@ -3738,6 +3790,12 @@ export const AFFIXES: AffixData[] = [
     artifact: "prefix",
     creature: "prefix",
     name: "obstinate",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "occult",
   },
   {
     artifact: "suffix",
@@ -4000,6 +4058,12 @@ export const AFFIXES: AffixData[] = [
   {
     location: "prefix",
     name: "picturesque",
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "plague",
   },
   {
     artifact: "prefix",
@@ -4355,6 +4419,10 @@ export const AFFIXES: AffixData[] = [
     artifact: "suffix",
     location: "suffix",
     name: "rituals",
+  },
+  {
+    location: "prefix",
+    name: "rocky",
   },
   {
     creature: "prefix",
@@ -4943,6 +5011,11 @@ export const AFFIXES: AffixData[] = [
     tags: ["lowQuality"],
   },
   {
+    artifact: "suffix",
+    location: "suffix",
+    name: "solitude",
+  },
+  {
     artifact: "prefix",
     creature: "prefix",
     location: "prefix",
@@ -5398,7 +5471,13 @@ export const AFFIXES: AffixData[] = [
   {
     artifact: "prefix",
     name: "totalled",
-    tags: ["highQuality"],
+    tags: ["lowQuality"],
+  },
+  {
+    artifact: "prefix",
+    creature: "prefix",
+    location: "prefix",
+    name: "toxic",
   },
   {
     artifact: "prefix",

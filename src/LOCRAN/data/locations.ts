@@ -181,6 +181,9 @@ export const LOCATIONS: LocationData[] = [
     name: "crypt",
   },
   {
+    name: "cul-de-sac",
+  },
+  {
     name: "den",
   },
   {
@@ -438,6 +441,9 @@ export const LOCATIONS: LocationData[] = [
     name: "nebula",
   },
   {
+    name: "necropolis",
+  },
+  {
     name: "netherworld",
   },
   {
@@ -551,6 +557,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "sanctum",
+  },
+  {
+    name: "sands",
   },
   {
     name: "savannah",

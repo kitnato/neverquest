@@ -122,6 +122,10 @@ export const NAMES: NameData[] = [
     type: ["suffix"],
   },
   {
+    name: "cruncher",
+    type: ["suffix"],
+  },
+  {
     isNSFW: true,
     name: "cum",
     type: ["prefix", "suffix"],
@@ -129,6 +133,10 @@ export const NAMES: NameData[] = [
   {
     name: "cut",
     type: ["suffix"],
+  },
+  {
+    name: "dead",
+    type: ["prefix"],
   },
   {
     isNSFW: true,
@@ -253,6 +261,10 @@ export const NAMES: NameData[] = [
     type: ["suffix"],
   },
   {
+    name: "grind",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "grub",
     type: ["prefix", "suffix"],
   },
@@ -287,6 +299,10 @@ export const NAMES: NameData[] = [
   {
     name: "huge",
     type: ["prefix"],
+  },
+  {
+    name: "jaw",
+    type: ["suffix"],
   },
   {
     isNSFW: true,
@@ -333,6 +349,10 @@ export const NAMES: NameData[] = [
   {
     name: "mangler",
     type: ["suffix"],
+  },
+  {
+    name: "marrow",
+    type: ["prefix", "suffix"],
   },
   {
     name: "maul",
@@ -415,6 +435,10 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "pulp",
+    type: ["suffix"],
+  },
+  {
     name: "punch",
     type: ["prefix", "suffix"],
   },
@@ -440,6 +464,10 @@ export const NAMES: NameData[] = [
     type: ["prefix", "suffix"],
   },
   {
+    name: "rock",
+    type: ["prefix", "suffix"],
+  },
+  {
     name: "rot",
     type: ["prefix", "suffix"],
   },
@@ -459,6 +487,15 @@ export const NAMES: NameData[] = [
     isNSFW: true,
     name: "semen",
     type: ["prefix"],
+  },
+  {
+    isNSFW: true,
+    name: "shart",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "shatter",
+    type: ["prefix", "suffix"],
   },
   {
     isNSFW: true,
@@ -507,6 +544,10 @@ export const NAMES: NameData[] = [
   },
   {
     name: "sorrow",
+    type: ["prefix", "suffix"],
+  },
+  {
+    name: "spine",
     type: ["prefix", "suffix"],
   },
   {
@@ -575,6 +616,10 @@ export const NAMES: NameData[] = [
   {
     name: "sunder",
     type: ["prefix", "suffix"],
+  },
+  {
+    name: "tear",
+    type: ["suffix"],
   },
   {
     isNSFW: true,

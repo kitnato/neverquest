@@ -52,7 +52,7 @@ export type BaseData = { isNSFW?: boolean; name: string };
 
 export type Category = "artifact" | "creature" | "location";
 
-export type Creature = "human" | "monster" | "name";
+export type Creature = "human" | "monster";
 
 export type CreatureData = BaseData & {
   type: Creature;

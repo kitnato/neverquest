@@ -59,33 +59,6 @@ export const essenceBonus = withStateKey("essenceBonus", (key) =>
   }),
 );
 
-export const ownedItem = withStateKey("ownedItem", (key) =>
-  selectorFamily<InventoryItem | null, Consumable | Infusable | Trinket>({
-    get:
-      (parameter) =>
-      ({ get }) =>
-        get(inventory).find(
-          (current) =>
-            (isConsumable(current) || isInfusable(current) || isTrinket(current)) &&
-            current.name === parameter,
-        ) ?? null,
-    key,
-  }),
-);
-
-export const infusionStep = withStateKey("infusionStep", (key) =>
-  selectorFamily<number, Infusable>({
-    get:
-      (parameter) =>
-      ({ get }) =>
-        Math.min(
-          get(essence),
-          Math.ceil((get(infusionMaximum(parameter)) / INFUSION_DURATION) * INFUSION_DELTA),
-        ),
-    key,
-  }),
-);
-
 export const infusionLevel = withStateKey("infusionLevel", (key) =>
   selectorFamily<number, Infusable>({
     get:
@@ -116,6 +89,33 @@ export const infusionMaximum = withStateKey("infusionMaximum", (key) =>
 
         return getGrowthTriangular(infusable.level + INFUSABLES[parameter].item.growthBase);
       },
+    key,
+  }),
+);
+
+export const infusionStep = withStateKey("infusionStep", (key) =>
+  selectorFamily<number, Infusable>({
+    get:
+      (parameter) =>
+      ({ get }) =>
+        Math.min(
+          get(essence),
+          Math.ceil((get(infusionMaximum(parameter)) / INFUSION_DURATION) * INFUSION_DELTA),
+        ),
+    key,
+  }),
+);
+
+export const ownedItem = withStateKey("ownedItem", (key) =>
+  selectorFamily<InventoryItem | null, Consumable | Infusable | Trinket>({
+    get:
+      (parameter) =>
+      ({ get }) =>
+        get(inventory).find(
+          (current) =>
+            (isConsumable(current) || isInfusable(current) || isTrinket(current)) &&
+            current.name === parameter,
+        ) ?? null,
     key,
   }),
 );

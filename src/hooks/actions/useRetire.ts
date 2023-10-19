@@ -2,7 +2,7 @@ import { useRecoilCallback } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { RETIREMENT_MINIMUM } from "@neverquest/data/general";
-import { ENCUMBRANCE, INHERITED_ITEMS, KNAPSACK_SIZE } from "@neverquest/data/inventory";
+import { ENCUMBRANCE, KNAPSACK_SIZE } from "@neverquest/data/inventory";
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
 import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
@@ -25,20 +25,13 @@ import {
 } from "@neverquest/state/encounter";
 import { encumbranceMaximum, hasKnapsack, inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { infusionCurrent } from "@neverquest/state/items";
 import { isMasteryUnlocked, masteryProgress, masteryRank } from "@neverquest/state/masteries";
 import { essence } from "@neverquest/state/resources";
 import { allowNSFW } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits";
-import { isTrinket } from "@neverquest/types/type-guards";
-import {
-  ATTRIBUTE_TYPES,
-  CREW_TYPES,
-  INFUSABLE_TYPES,
-  MASTERY_TYPES,
-  SKILL_TYPES,
-} from "@neverquest/types/unions";
+import { isInfusable } from "@neverquest/types/type-guards";
+import { ATTRIBUTE_TYPES, CREW_TYPES, MASTERY_TYPES, SKILL_TYPES } from "@neverquest/types/unions";
 import {
   getNameStructure,
   getProgressReduction,
@@ -101,19 +94,20 @@ export function useRetire() {
 
         SKILL_TYPES.forEach((current) => reset(isSkillAcquired(current)));
 
+        let extraEncumbrance = 0;
+
         set(inventory, (currentInventory) =>
-          currentInventory.filter(
-            (currentItem) => isTrinket(currentItem) && INHERITED_ITEMS.includes(currentItem.name),
-          ),
+          currentInventory.filter((currentItem) => {
+            extraEncumbrance += currentItem.weight;
+
+            return isInfusable(currentItem);
+          }),
         );
 
-        if (get(hasKnapsack)) {
-          set(encumbranceMaximum, ENCUMBRANCE + KNAPSACK_SIZE);
-        } else {
-          reset(encumbranceMaximum);
-        }
-
-        INFUSABLE_TYPES.forEach((current) => reset(infusionCurrent(current)));
+        set(
+          encumbranceMaximum,
+          extraEncumbrance + ENCUMBRANCE + (get(hasKnapsack) ? KNAPSACK_SIZE : 0),
+        );
 
         set(wildernesses, [
           generateLocation({

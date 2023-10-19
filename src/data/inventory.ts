@@ -196,10 +196,7 @@ export const ELEMENTALS: Record<
   },
 };
 
-export const ENCUMBRANCE = 6;
-
-// TODO
-export const INHERITED_ITEMS: Trinket[] = ["antique coin"];
+export const ENCUMBRANCE = 4;
 
 export const KNAPSACK_SIZE = 6;
 

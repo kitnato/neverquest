@@ -6,7 +6,7 @@ import { formatValue } from "@neverquest/utilities/formatters";
 
 export function InfusionLevelDisplay({
   level,
-  overlayPlacement,
+  overlayPlacement = "bottom",
 }: {
   level: number;
   overlayPlacement?: Placement;

@@ -74,7 +74,7 @@ export function Inventory() {
 
         {storedItems
           .filter(isTrinket)
-          .sort((current1, current2) => current1.name.localeCompare(current2.name))
+          .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
           .map((current) => {
             const { id, name } = current;
 
@@ -103,7 +103,7 @@ export function Inventory() {
 
         {storedItems
           .filter(isInfusable)
-          .sort((current1, current2) => current1.name.localeCompare(current2.name))
+          .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
           .map((current) => (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.id}>
               <Usable item={current} />
@@ -116,12 +116,12 @@ export function Inventory() {
           ...stackItems(
             storedItems
               .filter(isConsumable)
-              .sort((current1, current2) => current1.name.localeCompare(current2.name)),
+              .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
           ),
           ...stackItems(
             storedItems
               .filter(isGem)
-              .sort((current1, current2) => current1.name.localeCompare(current2.name)),
+              .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
           ),
         ].map(({ item, stack }) => {
           const { id, name } = item;

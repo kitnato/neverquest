@@ -41,7 +41,7 @@ export function generateName({
     );
     const filteredTitles = filteredAffixes
       .concat(filteredCreatures)
-      .sort((current1, current2) => current1.name.localeCompare(current2.name));
+      .toSorted((current1, current2) => current1.name.localeCompare(current2.name));
     title = filteredTitles[Math.floor(Math.random() * filteredTitles.length)];
 
     if (title === undefined) {

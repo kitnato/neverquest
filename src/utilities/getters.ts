@@ -143,7 +143,7 @@ export function getNameStructure(): NameStructure {
   const chance = Math.random();
   let cumulativeProbability = 0;
 
-  for (const [key, probability] of Object.entries(NAME_STRUCTURE).sort(
+  for (const [key, probability] of Object.entries(NAME_STRUCTURE).toSorted(
     ([, current1], [, current2]) => current1 - current2,
   )) {
     cumulativeProbability += probability;

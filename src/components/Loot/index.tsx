@@ -21,17 +21,17 @@ export function Loot() {
     ...stackItems(
       itemsLootValue
         .filter(isGear)
-        .sort((current1, current2) => current1.name.localeCompare(current2.name)),
+        .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
     ),
     ...stackItems(
       itemsLootValue
         .filter(isTrinket)
-        .sort((current1, current2) => current1.name.localeCompare(current2.name)),
+        .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
     ),
     ...stackItems(
       itemsLootValue
         .filter(isStackable)
-        .sort((current1, current2) => current1.name.localeCompare(current2.name)),
+        .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
     ),
   ];
 

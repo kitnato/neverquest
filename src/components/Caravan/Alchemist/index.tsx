@@ -18,7 +18,7 @@ export function Alchemist() {
         {stackItems(
           inventoryValue
             .filter(isGem)
-            .sort((current1, current2) => current1.name.localeCompare(current2.name)),
+            .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
         ).map(({ item, stack }) => (
           <ItemDisplay item={item} key={item.id} overlayPlacement="right" stack={stack} />
         ))}

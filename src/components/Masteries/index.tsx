@@ -26,8 +26,8 @@ export function Masteries() {
         <Accordion.Body>
           <Stack gap={3}>
             {Object.entries(unlockedMasteriesValue)
-              .sort(([current1], [current2]) => current1.localeCompare(current2))
-              .sort(([, current1], [, current2]) => Number(current2) - Number(current1))
+              .toSorted(([current1], [current2]) => current1.localeCompare(current2))
+              .toSorted(([, current1], [, current2]) => Number(current2) - Number(current1))
               .map(([current]) => (
                 <MasteryDisplay key={current} mastery={current as Mastery} />
               ))}

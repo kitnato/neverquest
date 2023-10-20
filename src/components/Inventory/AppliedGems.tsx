@@ -27,7 +27,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 
       <td>
         {stackItems(
-          gems.slice().sort((current1, current2) => current1.name.localeCompare(current2.name)),
+          gems.toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
         ).map(({ item, stack }) => {
           const { id, name } = item;
           const elemental = GEM_ELEMENTALS[name];

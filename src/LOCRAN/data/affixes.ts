@@ -2233,11 +2233,6 @@ export const AFFIXES: AffixData[] = [
   },
   {
     artifact: ["prefix"],
-    location: ["prefix"],
-    name: "fool's",
-  },
-  {
-    artifact: ["prefix"],
     creature: ["articledSuffix"],
     location: ["prefix"],
     name: "forbidden",
@@ -3461,11 +3456,6 @@ export const AFFIXES: AffixData[] = [
   },
   {
     artifact: ["prefix"],
-    location: ["prefix"],
-    name: "maniac's",
-  },
-  {
-    artifact: ["prefix"],
     creature: ["prefix"],
     name: "maniacal",
   },
@@ -3485,11 +3475,6 @@ export const AFFIXES: AffixData[] = [
   },
   {
     artifact: ["prefix"],
-    location: ["prefix"],
-    name: "masochist's",
-  },
-  {
-    artifact: ["prefix"],
     creature: ["prefix"],
     name: "masochistic",
   },
@@ -3498,11 +3483,6 @@ export const AFFIXES: AffixData[] = [
     creature: ["prefix"],
     location: ["prefix"],
     name: "massive",
-  },
-  {
-    artifact: ["prefix"],
-    location: ["prefix"],
-    name: "master's",
   },
   {
     artifact: ["suffix"],
@@ -4357,11 +4337,6 @@ export const AFFIXES: AffixData[] = [
   },
   {
     artifact: ["prefix"],
-    location: ["prefix"],
-    name: "pyromaniac's",
-  },
-  {
-    artifact: ["prefix"],
     creature: ["prefix"],
     name: "quilled",
   },
@@ -4540,12 +4515,6 @@ export const AFFIXES: AffixData[] = [
     creature: ["prefix"],
     location: ["prefix"],
     name: "rogue",
-  },
-  {
-    artifact: ["prefix"],
-    creature: ["prefix"],
-    location: ["prefix"],
-    name: "rogue's",
   },
   {
     artifact: ["suffix"],

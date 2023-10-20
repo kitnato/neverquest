@@ -1,8 +1,10 @@
+import pluralize from "pluralize";
+
+import { APOSTROPHE_CHANCE, ARTICLE_CHANCE, PLURALIZE_CHANCE } from "@neverquest/LOCRAN/constants";
 import { AFFIXES } from "@neverquest/LOCRAN/data/affixes";
+import { CREATURES } from "@neverquest/LOCRAN/data/creatures";
 import type { Category, GeneratorParameters } from "@neverquest/LOCRAN/types";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
-
-export const PLURALIZE_CHANCE = 0.5;
 
 export function generate({
   allowNSFW = false,
@@ -15,7 +17,11 @@ export function generate({
   category: Category;
   name: string;
 }) {
-  const finalName = [capitalizeAll(name)];
+  const canIncludeCreatureName = ["artifact", "location"].includes(category);
+  const filteredCreatureNamePrefixes: string[] = [];
+
+  let prefix = "";
+  let suffix = "";
 
   if (nameStructure === "prefix" || nameStructure === "prefixAndSuffix") {
     const filteredPrefixes = AFFIXES.filter(({ isNSFW, name: affixName, tags, ...categories }) => {
@@ -30,21 +36,32 @@ export function generate({
         categories[category]?.includes("prefix");
 
       // If we want a tagged prefix, check if the current affix has all of them, otherwise discard it.
-      if (prefixTags.length > 0 && tags !== undefined) {
+      if (prefixTags.length > 0) {
         return filteredPrefix && prefixTags.every((current) => tags?.includes(current));
       }
 
       // Otherwise, return any prefix.
       return filteredPrefix;
-    });
+    }).map((current) => current.name);
 
-    const prefix = filteredPrefixes[Math.floor(Math.random() * filteredPrefixes.length)];
+    // Artifacts and locations can also have a creature name prefix.
+    if (canIncludeCreatureName) {
+      filteredCreatureNamePrefixes.push(
+        ...CREATURES.filter(({ isNSFW }) => (allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW)).map(
+          (current) => {
+            const apostrophe = Math.random() <= APOSTROPHE_CHANCE;
 
-    if (prefix === undefined) {
-      throw Error("Invalid prefix.");
+            return `${current.name}${apostrophe ? "'s" : ""}`;
+          },
+        ),
+      );
     }
 
-    finalName.unshift(capitalizeAll(prefix.name));
+    prefix = capitalizeAll(
+      [...filteredPrefixes, ...filteredCreatureNamePrefixes][
+        Math.floor(Math.random() * filteredPrefixes.length)
+      ] ?? "",
+    );
   }
 
   if (nameStructure === "suffix" || nameStructure === "prefixAndSuffix") {
@@ -60,7 +77,7 @@ export function generate({
           categories[category]?.includes("suffix"));
 
       // If suffix is tagged, check if the current affix has all of them (with NSFW filter).
-      if (suffixTags.length > 0 && tags !== undefined) {
+      if (suffixTags.length > 0) {
         return filteredSuffix && suffixTags.every((current) => tags?.includes(current));
       }
 
@@ -68,23 +85,44 @@ export function generate({
       return filteredSuffix;
     });
 
-    const suffix = filteredSuffixes[Math.floor(Math.random() * filteredSuffixes.length)];
+    const filteredCreatureNameSuffixes = [];
 
-    if (suffix === undefined) {
-      throw Error("Invalid suffix.");
+    // Artifacts and locations can also have a creature name suffix, but only if the prefix isn't already one.
+    if (canIncludeCreatureName && !filteredCreatureNamePrefixes.includes(prefix)) {
+      filteredCreatureNameSuffixes.push(
+        ...CREATURES.filter(({ isNSFW }) => (allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW)).map(
+          (current) => current.name,
+        ),
+      );
     }
 
-    finalName.push(
-      "of",
-      `${
-        suffix[category]?.includes("articledSuffix")
-          ? suffix[category]?.includes("suffix") && Math.random() < 0.5
+    const suffixChoice =
+      [...filteredSuffixes, ...filteredCreatureNameSuffixes][
+        Math.floor(Math.random() * filteredSuffixes.length)
+      ] ?? "";
+    let formattedSuffix = "";
+
+    // If the chosen suffix is a creature name is can be plural alongside an article.
+    if (typeof suffixChoice === "string") {
+      formattedSuffix = `${Math.random() <= ARTICLE_CHANCE ? "the " : ""}${capitalizeAll(
+        Math.random() <= PLURALIZE_CHANCE ? pluralize(suffixChoice) : suffixChoice,
+      )}`;
+    } else {
+      formattedSuffix = `${
+        suffixChoice[category]?.includes("articledSuffix")
+          ? suffixChoice[category]?.includes("suffix") && Math.random() <= ARTICLE_CHANCE
             ? ""
             : "the "
           : ""
-      }${capitalizeAll(suffix.name)}`,
-    );
+      }${capitalizeAll(suffixChoice.name)}`;
+    }
+
+    if (formattedSuffix !== "") {
+      suffix = `of ${formattedSuffix}`;
+    }
   }
 
-  return finalName.join(" ");
+  return `${prefix !== "" ? `${prefix} ` : ""}${capitalizeAll(name)}${
+    suffix !== "" ? ` ${suffix}` : ""
+  }`;
 }

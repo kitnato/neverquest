@@ -39,9 +39,7 @@ export function generateName({
       ({ isNSFW, type }) =>
         type === "monster" && (allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW),
     );
-    const filteredTitles = filteredAffixes
-      .concat(filteredCreatures)
-      .toSorted((current1, current2) => current1.name.localeCompare(current2.name));
+    const filteredTitles = [...filteredAffixes, ...filteredCreatures];
     title = filteredTitles[Math.floor(Math.random() * filteredTitles.length)];
 
     if (title === undefined) {

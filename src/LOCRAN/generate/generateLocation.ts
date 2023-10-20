@@ -1,7 +1,8 @@
 import { plural } from "pluralize";
 
+import { PLURALIZE_CHANCE } from "@neverquest/LOCRAN/constants";
 import { LOCATIONS } from "@neverquest/LOCRAN/data/locations";
-import { PLURALIZE_CHANCE, generate } from "@neverquest/LOCRAN/generate";
+import { generate } from "@neverquest/LOCRAN/generate";
 import type { GeneratorParameters } from "@neverquest/LOCRAN/types";
 
 export function generateLocation({

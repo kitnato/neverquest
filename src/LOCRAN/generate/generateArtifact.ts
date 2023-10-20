@@ -1,6 +1,7 @@
 import { plural } from "pluralize";
+import { PLURALIZE_CHANCE } from "@neverquest/LOCRAN/constants";
 import { ARTIFACTS } from "@neverquest/LOCRAN/data/artifacts";
-import { PLURALIZE_CHANCE, generate } from "@neverquest/LOCRAN/generate";
+import { generate } from "@neverquest/LOCRAN/generate";
 import type { ArtifactQuery, GeneratorParameters } from "@neverquest/LOCRAN/types";
 
 export function generateArtifact({
@@ -46,9 +47,8 @@ export function generateArtifact({
     prefixTags,
     suffixTags,
   });
-  const isPluralized = Math.random() <= PLURALIZE_CHANCE;
 
-  if (canPluralize && isPluralized) {
+  if (canPluralize && Math.random() <= PLURALIZE_CHANCE) {
     return plural(artifact);
   }
 

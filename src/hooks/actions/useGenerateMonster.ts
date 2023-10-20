@@ -32,7 +32,6 @@ export function useGenerateMonster() {
             : generateCreature({
                 allowNSFW: allowNSFWValue,
                 nameStructure: getNameStructure(),
-                type: ["human", "monster"],
               }),
         );
 

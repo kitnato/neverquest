@@ -1162,7 +1162,7 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
-    name: "knight shield",
+    name: "knight-shield",
     subtype: "medium",
     type: "shield",
   },

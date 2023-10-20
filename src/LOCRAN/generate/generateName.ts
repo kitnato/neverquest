@@ -15,9 +15,9 @@ export function generateName({
 
     return allowNSFW ? isNSFW || !isNSFW : !isNSFW;
   });
-  const prefixes = filteredNames.filter(({ type }) => type.includes("prefix"));
+  const prefixes = filteredNames.filter(({ affix }) => affix.includes("prefix"));
   const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-  const suffixes = filteredNames.filter(({ type }) => type.includes("suffix"));
+  const suffixes = filteredNames.filter(({ affix }) => affix.includes("suffix"));
   const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
 
   if (prefix === undefined || suffix === undefined) {
@@ -35,9 +35,8 @@ export function generateName({
         : (creature?.includes("prefix") || creature?.includes("suffix")) &&
           (allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW),
     );
-    const filteredCreatures = CREATURES.filter(
-      ({ isNSFW, type }) =>
-        type === "monster" && (allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW),
+    const filteredCreatures = CREATURES.filter(({ isNSFW }) =>
+      allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW,
     );
     const filteredTitles = [...filteredAffixes, ...filteredCreatures];
     title = filteredTitles[Math.floor(Math.random() * filteredTitles.length)];

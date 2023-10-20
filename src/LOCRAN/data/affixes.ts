@@ -1804,6 +1804,12 @@ export const AFFIXES: AffixData[] = [
     artifact: ["prefix"],
     creature: ["prefix"],
     location: ["prefix"],
+    name: "elven",
+  },
+  {
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    location: ["prefix"],
     name: "elvish",
   },
   {
@@ -2435,17 +2441,6 @@ export const AFFIXES: AffixData[] = [
     creature: ["prefix"],
     location: ["prefix"],
     name: "ghoulish",
-  },
-  {
-    artifact: ["prefix"],
-    creature: ["prefix"],
-    location: ["prefix"],
-    name: "giant",
-  },
-  {
-    artifact: ["suffix"],
-    location: ["suffix"],
-    name: "giants",
   },
   {
     artifact: ["prefix"],

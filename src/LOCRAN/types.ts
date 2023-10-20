@@ -52,12 +52,6 @@ export type BaseData = { isNSFW?: boolean; name: string };
 
 export type Category = "artifact" | "creature" | "location";
 
-export type Creature = "human" | "monster";
-
-export type CreatureData = BaseData & {
-  type: Creature;
-};
-
 export type GeneratorParameters = Partial<{
   allowNSFW: boolean;
   nameStructure: NameStructure;
@@ -70,7 +64,7 @@ export type LocationData = BaseData & {
 };
 
 export type NameData = BaseData & {
-  type: Affix[];
+  affix: Affix[];
 };
 
 export const NAME_STRUCTURE_TYPES = ["none", "prefix", "prefixAndSuffix", "suffix"] as const;

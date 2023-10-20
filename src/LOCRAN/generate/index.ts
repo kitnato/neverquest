@@ -1,6 +1,11 @@
 import pluralize from "pluralize";
 
-import { APOSTROPHE_CHANCE, ARTICLE_CHANCE, PLURALIZE_CHANCE } from "@neverquest/LOCRAN/constants";
+import {
+  APOSTROPHE_CHANCE,
+  ARTICLE_CHANCE,
+  CREATURE_NAME_AFFIX_CHANCE,
+  PLURALIZE_CHANCE,
+} from "@neverquest/LOCRAN/constants";
 import { AFFIXES } from "@neverquest/LOCRAN/data/affixes";
 import { CREATURES } from "@neverquest/LOCRAN/data/creatures";
 import type { Category, GeneratorParameters } from "@neverquest/LOCRAN/types";
@@ -17,7 +22,8 @@ export function generate({
   category: Category;
   name: string;
 }) {
-  const canIncludeCreatureName = ["artifact", "location"].includes(category);
+  const canIncludeCreatureName =
+    ["artifact", "location"].includes(category) && Math.random() <= CREATURE_NAME_AFFIX_CHANCE;
   const filteredCreatureNamePrefixes: string[] = [];
 
   let prefix = "";
@@ -57,11 +63,9 @@ export function generate({
       );
     }
 
-    prefix = capitalizeAll(
-      [...filteredPrefixes, ...filteredCreatureNamePrefixes][
-        Math.floor(Math.random() * filteredPrefixes.length)
-      ] ?? "",
-    );
+    const prefixes = [...filteredPrefixes, ...filteredCreatureNamePrefixes];
+
+    prefix = capitalizeAll(prefixes[Math.floor(Math.random() * prefixes.length)] ?? "");
   }
 
   if (nameStructure === "suffix" || nameStructure === "prefixAndSuffix") {
@@ -96,21 +100,23 @@ export function generate({
       );
     }
 
-    const suffixChoice =
-      [...filteredSuffixes, ...filteredCreatureNameSuffixes][
-        Math.floor(Math.random() * filteredSuffixes.length)
-      ] ?? "";
+    const suffixes = [...filteredSuffixes, ...filteredCreatureNameSuffixes];
+    const suffixChoice = suffixes[Math.floor(Math.random() * suffixes.length)] ?? "";
     let formattedSuffix = "";
 
     // If the chosen suffix is a creature name is can be plural alongside an article.
     if (typeof suffixChoice === "string") {
-      formattedSuffix = `${Math.random() <= ARTICLE_CHANCE ? "the " : ""}${capitalizeAll(
-        Math.random() <= PLURALIZE_CHANCE ? pluralize(suffixChoice) : suffixChoice,
-      )}`;
+      if (Math.random() <= PLURALIZE_CHANCE) {
+        formattedSuffix = `${Math.random() <= ARTICLE_CHANCE ? "the " : ""}${capitalizeAll(
+          pluralize(suffixChoice),
+        )}`;
+      } else {
+        formattedSuffix = `the ${capitalizeAll(suffixChoice)}`;
+      }
     } else {
       formattedSuffix = `${
         suffixChoice[category]?.includes("articledSuffix")
-          ? suffixChoice[category]?.includes("suffix") && Math.random() <= ARTICLE_CHANCE
+          ? suffixChoice[category]?.includes("suffix") && Math.random() >= ARTICLE_CHANCE
             ? ""
             : "the "
           : ""

@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconDamagePerSecond } from "@neverquest/icons/damage-per-second.svg";
+import IconDamagePerSecond from "@neverquest/icons/damage-per-second.svg?react";
 import { showDamagePerSecond } from "@neverquest/state/settings";
 import { damagePerSecond } from "@neverquest/state/statistics";
 import { formatValue } from "@neverquest/utilities/formatters";

@@ -278,6 +278,7 @@ export const CREATURES: CreatureData[] = [
     type: "monster",
   },
   {
+    isNSFW: true,
     name: "coprolite",
     type: "monster",
   },

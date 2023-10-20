@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
-import { ReactComponent as IconTravel } from "@neverquest/icons/travel.svg";
+import IconTravel from "@neverquest/icons/travel.svg?react";
 import { isGameOver } from "@neverquest/state/character";
 import { isStageCompleted, isWilderness } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";

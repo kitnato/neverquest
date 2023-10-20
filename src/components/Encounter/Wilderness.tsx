@@ -4,9 +4,9 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Monster } from "@neverquest/components/Monster";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
-import { ReactComponent as IconBossHiding } from "@neverquest/icons/boss-hiding.svg";
-import { ReactComponent as IconMonsterHiding } from "@neverquest/icons/monster-hiding.svg";
-import { ReactComponent as IconRemains } from "@neverquest/icons/remains.svg";
+import IconBossHiding from "@neverquest/icons/boss-hiding.svg?react";
+import IconMonsterHiding from "@neverquest/icons/monster-hiding.svg?react";
+import IconRemains from "@neverquest/icons/remains.svg?react";
 import { isBoss, isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 

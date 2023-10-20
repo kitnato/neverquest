@@ -6,8 +6,8 @@ import { FloatingTextQueue } from "../FloatingTextQueue";
 import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconBlight } from "@neverquest/icons/blight.svg";
-import { ReactComponent as IconPoison } from "@neverquest/icons/poison.svg";
+import IconBlight from "@neverquest/icons/blight.svg?react";
+import IconPoison from "@neverquest/icons/poison.svg?react";
 import {
   blightMagnitude,
   health,

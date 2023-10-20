@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
-import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
+import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { isShowing } from "@neverquest/state/isShowing";
 import type { ComparisonProps } from "@neverquest/types/props";
 import { formatValue } from "@neverquest/utilities/formatters";

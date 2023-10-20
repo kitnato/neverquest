@@ -16,8 +16,8 @@ import { ItemsInherited } from "@neverquest/components/Retirement/ItemsInherited
 import { TraitSelection } from "@neverquest/components/Retirement/TraitSelection";
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
 import { useRetire } from "@neverquest/hooks/actions/useRetire";
-import { ReactComponent as IconProgress } from "@neverquest/icons/progress.svg";
-import { ReactComponent as IconRetire } from "@neverquest/icons/retire.svg";
+import IconProgress from "@neverquest/icons/progress.svg?react";
+import IconRetire from "@neverquest/icons/retire.svg?react";
 import { stageMaximum } from "@neverquest/state/encounter";
 import { formatValue } from "@neverquest/utilities/formatters";
 import { getProgressReduction } from "@neverquest/utilities/getters";

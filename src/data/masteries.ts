@@ -1,10 +1,10 @@
-import { ReactComponent as IconButchery } from "@neverquest/icons/butchery.svg";
-import { ReactComponent as IconCruelty } from "@neverquest/icons/cruelty.svg";
-import { ReactComponent as IconFinesse } from "@neverquest/icons/finesse.svg";
-import { ReactComponent as IconMarksmanship } from "@neverquest/icons/marksmanship.svg";
-import { ReactComponent as IconMight } from "@neverquest/icons/might.svg";
-import { ReactComponent as IconResilience } from "@neverquest/icons/resilience.svg";
-import { ReactComponent as IconStability } from "@neverquest/icons/stability.svg";
+import IconButchery from "@neverquest/icons/butchery.svg?react";
+import IconCruelty from "@neverquest/icons/cruelty.svg?react";
+import IconFinesse from "@neverquest/icons/finesse.svg?react";
+import IconMarksmanship from "@neverquest/icons/marksmanship.svg?react";
+import IconMight from "@neverquest/icons/might.svg?react";
+import IconResilience from "@neverquest/icons/resilience.svg?react";
+import IconStability from "@neverquest/icons/stability.svg?react";
 import type { AttributeOrMasteryBaseData } from "@neverquest/types";
 import type { Mastery } from "@neverquest/types/unions";
 

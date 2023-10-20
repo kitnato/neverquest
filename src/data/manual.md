@@ -1,16 +1,18 @@
-# Neverquest manual
+# Neverquest
 
-The [wilderness](#wilderness) **stage** initially always has a lurking [monster](#monster). When ready, the character can choose to **attack** continuously based on their [attack rate](#attack-rate), **engaging** the monster in the process. While engaged, the monster will also attack continuously, triggering the character to **defend** themselves. When the monster strikes the character, [recovery](#recovery-rate) is triggered. While recovering, the character won't be able to attack or regenerate their [reserves](#reserves).
+The [wilderness](#wilderness) **stage** initially always has a lurking [monster](#monster). When choosing to **attack**, this is done continuously based on the [attack rate](#attack-rate), **engaging** the monster in the process.
+
+While engaged, the monster will also attack continuously, triggering **defense**. When the monster successfully strikes, [recovery](#recovery-rate) is triggered. While recovering, the character can't attack or regenerate their [reserves](#reserves).
 
 Both the character and monster will keep attacking one another until either the character **retreats**, upon which the monster's health instantly regenerates to its maximum, or if the monster or character is dead (one of either's health reaches zero).
 
-Upon a monster's death, the stage's **progress** is incremented, its remains are looted and the next monster is engaged automatically, unless the character retreats.
+Upon a monster's death, the stage's **progress** is incremented, its remains are looted and the next monster is engaged, unless the character retreats.
 
 After a monster is defeated, its remains are **looted** for [essence](#essence) and any [gems](#gems).
 
-Once the wilderness is cleared of monsters, all looted resources can be **collected** and a **resting** state is entered. At this point, **travel** to the [caravan](#caravan).becomes possible.
+Once the wilderness is cleared of monsters, all looted resources can be **collected** and a **resting** state is entered. At this point, **travel** to the [caravan](#caravan) becomes possible.
 
-The caravan allows interacting with a crew that provides essential services to progress to higher stages.
+The caravan allows interacting with a crew that provides essential services for accessing higher stages and unlocking new capabilities.
 
 ## Character
 

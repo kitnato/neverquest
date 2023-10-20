@@ -5,7 +5,7 @@ import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconAmmunitionPouch } from "@neverquest/icons/ammunition-pouch.svg";
+import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
 import { ammunition, ammunitionMaximum } from "@neverquest/state/items";
 
 export function AmmunitionPouchCapacity() {

@@ -8,9 +8,9 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { useIncreaseAttribute } from "@neverquest/hooks/actions/useIncreaseAttribute";
-import { ReactComponent as IconWait } from "@neverquest/icons/hourglass.svg";
-import { ReactComponent as IconIncrease } from "@neverquest/icons/increase.svg";
-import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
+import IconWait from "@neverquest/icons/hourglass.svg?react";
+import IconIncrease from "@neverquest/icons/increase.svg?react";
+import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import {
   areAttributesAffordable,
   isAttributeAtMaximum,

@@ -1,8 +1,8 @@
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { ReactComponent as IconEquals } from "@neverquest/icons/equals.svg";
-import { ReactComponent as IconIncrease } from "@neverquest/icons/increase.svg";
+import IconEquals from "@neverquest/icons/equals.svg?react";
+import IconIncrease from "@neverquest/icons/increase.svg?react";
 import { isShowing } from "@neverquest/state/isShowing";
 import { showGearComparison } from "@neverquest/state/settings";
 import type { Showing } from "@neverquest/types/unions";

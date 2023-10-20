@@ -10,11 +10,11 @@ import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/Dod
 import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { ARMOR_SPECIFICATIONS } from "@neverquest/data/inventory";
-import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
-import { ReactComponent as IconDodgePenalty } from "@neverquest/icons/dodge-penalty.svg";
-import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
-import { ReactComponent as IconArmorProtection } from "@neverquest/icons/protection.svg";
-import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
+import IconDeflection from "@neverquest/icons/deflection.svg?react";
+import IconDodgePenalty from "@neverquest/icons/dodge-penalty.svg?react";
+import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
+import IconArmorProtection from "@neverquest/icons/protection.svg?react";
+import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { ARMOR_CLASS_TYPES, type ArmorClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";

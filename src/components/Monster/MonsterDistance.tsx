@@ -4,7 +4,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterDistanceMeter } from "@neverquest/components/Monster/MonsterDistanceMeter";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
-import { ReactComponent as IconDistance } from "@neverquest/icons/distance.svg";
+import IconDistance from "@neverquest/icons/distance.svg?react";
 import { isAttacking } from "@neverquest/state/character";
 import { weapon } from "@neverquest/state/gear";
 import {

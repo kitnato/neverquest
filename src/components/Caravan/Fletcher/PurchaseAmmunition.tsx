@@ -11,8 +11,8 @@ import {
   LABEL_NO_ESSENCE,
 } from "@neverquest/data/general";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
-import { ReactComponent as IconAmmunition } from "@neverquest/icons/ammunition.svg";
-import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
+import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
+import IconEssence from "@neverquest/icons/essence.svg?react";
 import { inventory } from "@neverquest/state/inventory";
 import { ammunition, ammunitionMaximum, ownedItem } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";

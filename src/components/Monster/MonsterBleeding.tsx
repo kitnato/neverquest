@@ -4,7 +4,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterAilmentMeter } from "@neverquest/components/Monster/MonsterAilmentMeter";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
-import { ReactComponent as IconBleeding } from "@neverquest/icons/bleeding.svg";
+import IconBleeding from "@neverquest/icons/bleeding.svg?react";
 import {
   bleed,
   bleedingDelta,

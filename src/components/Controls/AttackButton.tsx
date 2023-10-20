@@ -10,9 +10,9 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { useToggleAttack } from "@neverquest/hooks/actions/useToggleAttack";
-import { ReactComponent as IconAttack } from "@neverquest/icons/attack.svg";
-import { ReactComponent as IconResting } from "@neverquest/icons/resting.svg";
-import { ReactComponent as IconRetreat } from "@neverquest/icons/retreat.svg";
+import IconAttack from "@neverquest/icons/attack.svg?react";
+import IconResting from "@neverquest/icons/resting.svg?react";
+import IconRetreat from "@neverquest/icons/retreat.svg?react";
 import { areAttributesAffordable } from "@neverquest/state/attributes";
 import { hasEnoughAmmunition, isAttacking, isGameOver } from "@neverquest/state/character";
 import { isStageCompleted, isWilderness } from "@neverquest/state/encounter";

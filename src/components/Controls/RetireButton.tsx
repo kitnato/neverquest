@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import { Retirement } from "@neverquest/components/Retirement";
 import { RETIREMENT_MINIMUM } from "@neverquest/data/general";
-import { ReactComponent as IconRetire } from "@neverquest/icons/retire.svg";
+import IconRetire from "@neverquest/icons/retire.svg?react";
 import { isGameOver } from "@neverquest/state/character";
 import { isWilderness, stageMaximum } from "@neverquest/state/encounter";
 import { getAnimationClass } from "@neverquest/utilities/getters";

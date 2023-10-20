@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
+import IconBlock from "@neverquest/icons/block.svg?react";
 import { weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { block } from "@neverquest/state/statistics";

@@ -9,7 +9,7 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { TRANSMUTE_COST } from "@neverquest/data/caravan";
 import { GEM_BASE } from "@neverquest/data/inventory";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
-import { ReactComponent as IconTransmute } from "@neverquest/icons/transmute.svg";
+import IconTransmute from "@neverquest/icons/transmute.svg?react";
 import { inventory } from "@neverquest/state/inventory";
 import { isGem } from "@neverquest/types/type-guards";
 import { GEM_TYPES, type Gem } from "@neverquest/types/unions";

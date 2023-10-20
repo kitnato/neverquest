@@ -7,8 +7,8 @@ import { TAILORING_EXPANSION, TAILORING_PRICES_MAXIMUM } from "@neverquest/data/
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/data/general";
 import { AMMUNITION_CAPACITY } from "@neverquest/data/inventory";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
-import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
-import { ReactComponent as IconTailoring } from "@neverquest/icons/tailoring.svg";
+import IconEssence from "@neverquest/icons/essence.svg?react";
+import IconTailoring from "@neverquest/icons/tailoring.svg?react";
 import { inventory } from "@neverquest/state/inventory";
 import { ownedItem } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";

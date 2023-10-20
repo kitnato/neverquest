@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconAmmunition } from "@neverquest/icons/ammunition.svg";
+import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import { ammunition } from "@neverquest/state/items";
 import { formatValue } from "@neverquest/utilities/formatters";
 

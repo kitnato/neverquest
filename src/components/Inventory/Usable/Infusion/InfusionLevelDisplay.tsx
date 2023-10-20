@@ -1,7 +1,7 @@
 import type { Placement } from "react-bootstrap/esm/types";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ReactComponent as IconInfusionLevel } from "@neverquest/icons/infusion-level.svg";
+import IconInfusionLevel from "@neverquest/icons/infusion-level.svg?react";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function InfusionLevelDisplay({

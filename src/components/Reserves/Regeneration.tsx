@@ -12,11 +12,11 @@ import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconFortitude } from "@neverquest/icons/fortitude.svg";
-import { ReactComponent as IconRegenerationAmount } from "@neverquest/icons/regeneration-amount.svg";
-import { ReactComponent as IconRegenerationRate } from "@neverquest/icons/regeneration-rate.svg";
-import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
-import { ReactComponent as IconVigor } from "@neverquest/icons/vigor.svg";
+import IconFortitude from "@neverquest/icons/fortitude.svg?react";
+import IconRegenerationAmount from "@neverquest/icons/regeneration-amount.svg?react";
+import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react";
+import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
+import IconVigor from "@neverquest/icons/vigor.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { isRecovering } from "@neverquest/state/character";
 import {

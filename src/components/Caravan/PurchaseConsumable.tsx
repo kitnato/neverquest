@@ -9,7 +9,7 @@ import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { CONSUMABLES } from "@neverquest/data/inventory";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
-import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
+import IconEssence from "@neverquest/icons/essence.svg?react";
 import type { ConsumableItem } from "@neverquest/types";
 import type { Consumable } from "@neverquest/types/unions";
 import { formatValue } from "@neverquest/utilities/formatters";

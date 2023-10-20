@@ -10,7 +10,7 @@ import {
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { ReactComponent as IconDead } from "@neverquest/icons/dead.svg";
+import IconDead from "@neverquest/icons/dead.svg?react";
 import { isGameOver } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
 import { useRestart } from "@neverquest/state/seed";

@@ -1,13 +1,13 @@
 import { RESERVES } from "@neverquest/data/reserves";
-import { ReactComponent as IconAgility } from "@neverquest/icons/agility.svg";
-import { ReactComponent as IconDexterity } from "@neverquest/icons/dexterity.svg";
-import { ReactComponent as IconEndurance } from "@neverquest/icons/endurance.svg";
-import { ReactComponent as IconFortitude } from "@neverquest/icons/fortitude.svg";
-import { ReactComponent as IconPerception } from "@neverquest/icons/perception.svg";
-import { ReactComponent as IconSpeed } from "@neverquest/icons/speed.svg";
-import { ReactComponent as IconStrength } from "@neverquest/icons/strength.svg";
-import { ReactComponent as IconVigor } from "@neverquest/icons/vigor.svg";
-import { ReactComponent as IconVitality } from "@neverquest/icons/vitality.svg";
+import IconAgility from "@neverquest/icons/agility.svg?react";
+import IconDexterity from "@neverquest/icons/dexterity.svg?react";
+import IconEndurance from "@neverquest/icons/endurance.svg?react";
+import IconFortitude from "@neverquest/icons/fortitude.svg?react";
+import IconPerception from "@neverquest/icons/perception.svg?react";
+import IconSpeed from "@neverquest/icons/speed.svg?react";
+import IconStrength from "@neverquest/icons/strength.svg?react";
+import IconVigor from "@neverquest/icons/vigor.svg?react";
+import IconVitality from "@neverquest/icons/vitality.svg?react";
 import type { AttributeOrMasteryBaseData } from "@neverquest/types";
 import type { Attribute, Showing } from "@neverquest/types/unions";
 

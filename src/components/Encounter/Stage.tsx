@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconStage } from "@neverquest/icons/stage.svg";
+import IconStage from "@neverquest/icons/stage.svg?react";
 import { stage } from "@neverquest/state/encounter";
 import { formatValue } from "@neverquest/utilities/formatters";
 

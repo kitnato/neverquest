@@ -131,28 +131,26 @@ export function Inventory() {
               <ItemDisplay item={item} overlayPlacement="right" stack={stack} />
 
               {(() => {
-                if (isConsumable(item)) {
-                  switch (name) {
-                    case "antidote": {
-                      return <Antidote id={id} />;
-                    }
-                    case "bandages": {
-                      return <Bandages id={id} />;
-                    }
-                    case "elixir": {
-                      return <Elixir id={id} />;
-                    }
-                    case "salve": {
-                      return <Salve id={id} />;
-                    }
+                switch (name) {
+                  case "antidote": {
+                    return <Antidote id={id} />;
+                  }
+                  case "bandages": {
+                    return <Bandages id={id} />;
+                  }
+                  case "elixir": {
+                    return <Elixir id={id} />;
+                  }
+                  case "salve": {
+                    return <Salve id={id} />;
+                  }
+                  case "phylactery": {
+                    return null;
+                  }
+                  default: {
+                    return <ApplyGem gem={item} />;
                   }
                 }
-
-                if (isGem(item)) {
-                  return <ApplyGem gem={item} />;
-                }
-
-                return null;
               })()}
             </div>
           );

@@ -4,7 +4,7 @@ import { useSetRecoilState } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useMerchantTradeItem } from "@neverquest/hooks/actions/useMerchantTradeItem";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
-import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
+import IconEssence from "@neverquest/icons/essence.svg?react";
 import { inventory } from "@neverquest/state/inventory";
 import type { InventoryItem } from "@neverquest/types";
 import { formatValue } from "@neverquest/utilities/formatters";

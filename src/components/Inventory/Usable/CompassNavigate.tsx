@@ -15,8 +15,8 @@ import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
-import { ReactComponent as IconCompass } from "@neverquest/icons/compass.svg";
-import { ReactComponent as IconNavigation } from "@neverquest/icons/navigation.svg";
+import IconCompass from "@neverquest/icons/compass.svg?react";
+import IconNavigation from "@neverquest/icons/navigation.svg?react";
 import {
   isStageCompleted,
   isStageStarted,

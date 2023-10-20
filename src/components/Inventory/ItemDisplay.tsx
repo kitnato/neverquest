@@ -7,11 +7,11 @@ import { ItemName } from "@neverquest/components/Inventory/ItemName";
 import { ShieldName } from "@neverquest/components/Inventory/Offhand/ShieldName";
 import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
 import { CONSUMABLES, INFUSABLES, TRINKETS } from "@neverquest/data/inventory";
-import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
-import { ReactComponent as IconGem } from "@neverquest/icons/gem.svg";
-import { ReactComponent as IconMelee } from "@neverquest/icons/melee.svg";
-import { ReactComponent as IconRanged } from "@neverquest/icons/ranged.svg";
-import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
+import IconArmor from "@neverquest/icons/armor.svg?react";
+import IconGem from "@neverquest/icons/gem.svg?react";
+import IconMelee from "@neverquest/icons/melee.svg?react";
+import IconRanged from "@neverquest/icons/ranged.svg?react";
+import IconShield from "@neverquest/icons/shield.svg?react";
 import type { InventoryItem } from "@neverquest/types";
 import type { IconImageDOMProps } from "@neverquest/types/props";
 import {

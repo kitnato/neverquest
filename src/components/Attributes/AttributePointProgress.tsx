@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
+import IconEssence from "@neverquest/icons/essence.svg?react";
 import { attributePoints, level } from "@neverquest/state/attributes";
 import { essence } from "@neverquest/state/resources";
 import { formatValue } from "@neverquest/utilities/formatters";

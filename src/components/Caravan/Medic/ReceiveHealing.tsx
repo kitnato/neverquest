@@ -10,8 +10,8 @@ import {
 } from "@neverquest/data/general";
 import { useHeal } from "@neverquest/hooks/actions/useHeal";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
-import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
-import { ReactComponent as IconSurgery } from "@neverquest/icons/surgery.svg";
+import IconEssence from "@neverquest/icons/essence.svg?react";
+import IconSurgery from "@neverquest/icons/surgery.svg?react";
 import { isHealthAtMaximum, isHealthLow } from "@neverquest/state/reserves";
 import { essence } from "@neverquest/state/resources";
 import { formatValue } from "@neverquest/utilities/formatters";

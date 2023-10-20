@@ -5,7 +5,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { Usable } from "@neverquest/components/Inventory/Usable";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
-import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
+import IconEssence from "@neverquest/icons/essence.svg?react";
 import type { InventoryItem } from "@neverquest/types";
 import { isGear, isUsable } from "@neverquest/types/type-guards";
 import { formatValue } from "@neverquest/utilities/formatters";

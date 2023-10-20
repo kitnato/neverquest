@@ -11,9 +11,9 @@ import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetai
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/inventory";
-import { ReactComponent as IconDeflection } from "@neverquest/icons/deflection.svg";
-import { ReactComponent as IconNone } from "@neverquest/icons/none.svg";
-import { ReactComponent as IconProtection } from "@neverquest/icons/protection.svg";
+import IconDeflection from "@neverquest/icons/deflection.svg?react";
+import IconNone from "@neverquest/icons/none.svg?react";
+import IconProtection from "@neverquest/icons/protection.svg?react";
 import { armor as armorEquipped } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import type { Armor } from "@neverquest/types";

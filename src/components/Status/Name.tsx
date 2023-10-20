@@ -4,8 +4,8 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
-import { ReactComponent as IconDead } from "@neverquest/icons/dead.svg";
-import { ReactComponent as IconAlive } from "@neverquest/icons/name.svg";
+import IconDead from "@neverquest/icons/dead.svg?react";
+import IconAlive from "@neverquest/icons/name.svg?react";
 import { isGameOver, name } from "@neverquest/state/character";
 
 export function Name() {

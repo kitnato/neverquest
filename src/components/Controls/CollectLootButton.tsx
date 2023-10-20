@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { useCollectLoot } from "@neverquest/hooks/actions/useCollectLoot";
-import { ReactComponent as IconLoot } from "@neverquest/icons/loot.svg";
+import IconLoot from "@neverquest/icons/loot.svg?react";
 import { isGameOver } from "@neverquest/state/character";
 import { isStageCompleted, isWilderness } from "@neverquest/state/encounter";
 import { hasLooted, itemsLoot } from "@neverquest/state/resources";

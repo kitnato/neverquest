@@ -14,11 +14,11 @@ import {
 } from "@neverquest/data/general";
 import { ARMOR_NONE } from "@neverquest/data/inventory";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconAgility } from "@neverquest/icons/agility.svg";
-import { ReactComponent as IconDodgePenalty } from "@neverquest/icons/dodge-penalty.svg";
-import { ReactComponent as IconDodge } from "@neverquest/icons/dodge.svg";
-import { ReactComponent as IconNudist } from "@neverquest/icons/nudist.svg";
-import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
+import IconAgility from "@neverquest/icons/agility.svg?react";
+import IconDodgePenalty from "@neverquest/icons/dodge-penalty.svg?react";
+import IconDodge from "@neverquest/icons/dodge.svg?react";
+import IconNudist from "@neverquest/icons/nudist.svg?react";
+import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { armor } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";

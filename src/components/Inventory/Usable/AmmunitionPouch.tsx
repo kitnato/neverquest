@@ -1,6 +1,6 @@
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
-import { ReactComponent as IconAmmunition } from "@neverquest/icons/ammunition.svg";
+import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import type { AmmunitionPouchItem } from "@neverquest/types";
 import { formatValue } from "@neverquest/utilities/formatters";
 

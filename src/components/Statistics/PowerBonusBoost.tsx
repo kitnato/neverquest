@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconPowerBonusBoost } from "@neverquest/icons/power-bonus-boost.svg";
+import IconPowerBonusBoost from "@neverquest/icons/power-bonus-boost.svg?react";
 import { powerBonusBoost } from "@neverquest/state/items";
 import { formatValue } from "@neverquest/utilities/formatters";
 

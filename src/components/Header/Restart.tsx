@@ -13,8 +13,8 @@ import {
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { ReactComponent as IconRestart } from "@neverquest/icons/restart.svg";
-import { ReactComponent as IconWarning } from "@neverquest/icons/warning.svg";
+import IconRestart from "@neverquest/icons/restart.svg?react";
+import IconWarning from "@neverquest/icons/warning.svg?react";
 import { isGameOver } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
 import { useRestart } from "@neverquest/state/seed";

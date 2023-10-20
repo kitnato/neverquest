@@ -5,7 +5,7 @@ import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
+import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import { encumbrance, encumbranceMaximum } from "@neverquest/state/inventory";
 
 export function Encumbrance() {

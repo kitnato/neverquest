@@ -10,12 +10,12 @@ import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/c
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { WEAPON_BASE, WEAPON_MODIFIER, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
-import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
-import { ReactComponent as IconRange } from "@neverquest/icons/range.svg";
-import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
-import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
-import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
-import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
+import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
+import IconRange from "@neverquest/icons/range.svg?react";
+import IconStamina from "@neverquest/icons/stamina.svg?react";
+import IconUnknown from "@neverquest/icons/unknown.svg?react";
+import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react";
+import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
 import { WEAPON_CLASS_TYPES, type WeaponClass } from "@neverquest/LOCRAN/types";
 import { fletcherInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";

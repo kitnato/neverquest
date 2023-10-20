@@ -3,8 +3,8 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ArmorName } from "@neverquest/components/Inventory/Armor/ArmorName";
 import { ARMOR_NONE } from "@neverquest/data/inventory";
-import { ReactComponent as IconArmorNone } from "@neverquest/icons/armor-none.svg";
-import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
+import IconArmorNone from "@neverquest/icons/armor-none.svg?react";
+import IconArmor from "@neverquest/icons/armor.svg?react";
 import { armor } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 

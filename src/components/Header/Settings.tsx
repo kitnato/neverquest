@@ -15,7 +15,7 @@ import { useRecoilValue } from "recoil";
 import { SettingsSwitch } from "@neverquest/components/Header/SettingsSwitch";
 import { ShowEverything } from "@neverquest/components/Header/ShowEverything";
 import { IconImage } from "@neverquest/components/IconImage";
-import { ReactComponent as IconSettings } from "@neverquest/icons/settings.svg";
+import IconSettings from "@neverquest/icons/settings.svg?react";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import {
   allowNSFW,

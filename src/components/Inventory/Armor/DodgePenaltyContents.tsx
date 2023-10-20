@@ -3,8 +3,8 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { LABEL_NONE } from "@neverquest/data/general";
-import { ReactComponent as IconStalwart } from "@neverquest/icons/stalwart.svg";
-import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
+import IconStalwart from "@neverquest/icons/stalwart.svg?react";
+import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import type { GeneratorRange } from "@neverquest/types";
 import { formatValue } from "@neverquest/utilities/formatters";

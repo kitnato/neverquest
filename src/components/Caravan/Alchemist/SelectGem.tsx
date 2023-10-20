@@ -2,7 +2,7 @@ import { FormSelect, Stack } from "react-bootstrap";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { TRANSMUTE_COST, TRANSMUTE_YIELD } from "@neverquest/data/caravan";
-import { ReactComponent as IconGem } from "@neverquest/icons/gem.svg";
+import IconGem from "@neverquest/icons/gem.svg?react";
 import { GEM_TYPES, type Gem } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 

@@ -5,7 +5,7 @@ import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconProgress } from "@neverquest/icons/progress.svg";
+import IconProgress from "@neverquest/icons/progress.svg?react";
 import { isWilderness, progress, progressMaximum } from "@neverquest/state/encounter";
 import { formatValue } from "@neverquest/utilities/formatters";
 

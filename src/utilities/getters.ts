@@ -163,7 +163,7 @@ export function getProgressReduction(stage: number) {
     factor: getGrowthSigmoid(
       getGrowthLinearMapping({
         offset: RETIREMENT_MINIMUM,
-        stage: stage,
+        stage,
       }),
     ),
     maximum,

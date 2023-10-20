@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type JSX, useState } from "react";
 import {
   Button,
   Modal,
@@ -10,14 +10,13 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
-import type { HeadingProps } from "react-markdown/lib/ast-to-react";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import manual from "@neverquest/data/manual.md?raw";
-import { ReactComponent as IconAbout } from "@neverquest/icons/about.svg";
+import IconAbout from "@neverquest/icons/about.svg?react";
 import { formatSlug } from "@neverquest/utilities/formatters";
 
-const HEADERS = ["h2", "h3", "h4", "h5", "h6"];
+const HEADERS = ["h2", "h3", "h4", "h5", "h6"] as const;
 
 export function About() {
   const [isShowing, setIsShowing] = useState(false);
@@ -53,18 +52,12 @@ export function About() {
             components={HEADERS.reduce(
               (aggregator, Current) => ({
                 ...aggregator,
-                [Current]: ({ children, node: _, ...props }: HeadingProps) => {
-                  return (
-                    <Current
-                      id={
-                        Array.isArray(children) && typeof children[0] === "string"
-                          ? formatSlug(children[0])
-                          : null
-                      }
-                      {...{ children, ...props }}
-                    />
-                  );
-                },
+                [Current]: ({ children, ...props }: JSX.IntrinsicElements[typeof Current]) => (
+                  <Current
+                    id={typeof children === "string" ? formatSlug(children) : undefined}
+                    {...{ children, ...props }}
+                  />
+                ),
               }),
               {},
             )}

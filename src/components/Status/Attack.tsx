@@ -13,10 +13,10 @@ import { useAttack } from "@neverquest/hooks/actions/useAttack";
 import { useRegenerate } from "@neverquest/hooks/actions/useRegenerate";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconAttackRate } from "@neverquest/icons/attack-rate.svg";
-import { ReactComponent as IconWeaponSpeed } from "@neverquest/icons/speed.svg";
-import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
-import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
+import IconAttackRate from "@neverquest/icons/attack-rate.svg?react";
+import IconWeaponSpeed from "@neverquest/icons/speed.svg?react";
+import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
+import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import {
   attackDuration,

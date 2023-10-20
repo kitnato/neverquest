@@ -11,9 +11,9 @@ import { StaminaCostDetail } from "@neverquest/components/Inventory/StaminaCostD
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/inventory";
-import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
-import { ReactComponent as IconNone } from "@neverquest/icons/none.svg";
-import { ReactComponent as IconStagger } from "@neverquest/icons/stagger.svg";
+import IconBlock from "@neverquest/icons/block.svg?react";
+import IconNone from "@neverquest/icons/none.svg?react";
+import IconStagger from "@neverquest/icons/stagger.svg?react";
 import { shield as shieldEquipped } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isSkillAcquired } from "@neverquest/state/skills";

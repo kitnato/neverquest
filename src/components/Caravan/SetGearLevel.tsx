@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
-import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
+import IconGearLevel from "@neverquest/icons/gear-level.svg?react";
 import { stage } from "@neverquest/state/encounter";
 import { formatValue } from "@neverquest/utilities/formatters";
 

@@ -5,8 +5,8 @@ import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
-import { ReactComponent as IconLevel } from "@neverquest/icons/level.svg";
+import IconEssence from "@neverquest/icons/essence.svg?react";
+import IconLevel from "@neverquest/icons/level.svg?react";
 import { absorbedEssence, level } from "@neverquest/state/attributes";
 import { formatValue } from "@neverquest/utilities/formatters";
 

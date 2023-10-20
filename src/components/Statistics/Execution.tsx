@@ -5,7 +5,7 @@ import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LABEL_EMPTY } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconExecution } from "@neverquest/icons/execution.svg";
+import IconExecution from "@neverquest/icons/execution.svg?react";
 import { weapon } from "@neverquest/state/gear";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { execution } from "@neverquest/state/statistics";

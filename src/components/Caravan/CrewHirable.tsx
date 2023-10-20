@@ -9,8 +9,8 @@ import {
   LABEL_UNKNOWN,
 } from "@neverquest/data/general";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
-import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
-import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
+import IconEssence from "@neverquest/icons/essence.svg?react";
+import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { hireStatus } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import { essence } from "@neverquest/state/resources";

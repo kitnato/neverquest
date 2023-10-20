@@ -3,7 +3,7 @@ import { Stack } from "react-bootstrap";
 import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterHealthMeter } from "@neverquest/components/Monster/MonsterHealthMeter";
-import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
+import IconHealth from "@neverquest/icons/health.svg?react";
 
 export function MonsterHealth() {
   return (

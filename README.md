@@ -147,7 +147,7 @@ To run the app locally from source, you will need to use a command-line interfac
 ### Install & run the app
 
 1. Open the CLI and change into a suitable directory
-1. Run `git clone git@github.com:cneuro/neverquest.git`
+1. Run `git clone git@github.com:kitstigator/neverquest.git`
 1. Run `cd neverquest`
 1. Run `npm install`
 1. Run `npm start`
@@ -178,7 +178,7 @@ The linter config can be viewed in `.eslintrc.json`, `.stylelintrc.json` and `.p
 
 - Runs on [Vite](https://vitejs.dev).
 
-- Code style & linting is provided by [eslint](https://eslint.org), [stylelint](https://stylelint.io) and [prettier](https://prettier.io), based on the [@cneuro/eslint-config-functional](https://github.com/cneuro/eslint-config-functional) rules.
+- Code style & linting is provided by [eslint](https://eslint.org), [stylelint](https://stylelint.io) and [prettier](https://prettier.io), based on the [@kitstigator/eslint-config-functional](https://github.com/kitstigator/eslint-config-functional) rules.
 
 - Automation is provided by [husky](https://typicode.github.io/husky) and [lint-staged](https://www.npmjs.com/package/lint-staged).
 

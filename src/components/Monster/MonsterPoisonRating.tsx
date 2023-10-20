@@ -5,8 +5,8 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_MAXIMUM } from "@neverquest/data/general";
-import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
-import { ReactComponent as IconPoison } from "@neverquest/icons/poison.svg";
+import IconHealth from "@neverquest/icons/health.svg?react";
+import IconPoison from "@neverquest/icons/poison.svg?react";
 import { poison, poisonLength, poisonMagnitude } from "@neverquest/state/monster";
 import { formatValue } from "@neverquest/utilities/formatters";
 

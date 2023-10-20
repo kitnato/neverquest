@@ -5,7 +5,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { EssenceLoot } from "@neverquest/components/Loot/EssenceLoot";
 import { Looting } from "@neverquest/components/Loot/Looting";
-import { ReactComponent as IconLooted } from "@neverquest/icons/looted.svg";
+import IconLooted from "@neverquest/icons/looted.svg?react";
 import { progress } from "@neverquest/state/encounter";
 import { hasLooted, itemsLoot } from "@neverquest/state/resources";
 import { isGear, isStackable, isTrinket } from "@neverquest/types/type-guards";

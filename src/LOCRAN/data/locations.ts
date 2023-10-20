@@ -15,7 +15,15 @@ export const LOCATIONS: LocationData[] = [
     name: "antechamber",
   },
   {
+    canPluralize: true,
+    name: "apartment",
+  },
+  {
     name: "archipelago",
+  },
+  {
+    canPluralize: true,
+    name: "archive",
   },
   {
     name: "arena",
@@ -63,6 +71,10 @@ export const LOCATIONS: LocationData[] = [
   {
     isNSFW: true,
     name: "brothel",
+  },
+  {
+    canPluralize: true,
+    name: "building",
   },
   {
     name: "bunker",
@@ -123,6 +135,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "circus",
+  },
+  {
+    name: "citadel",
   },
   {
     name: "city",
@@ -190,6 +205,9 @@ export const LOCATIONS: LocationData[] = [
     name: "depths",
   },
   {
+    name: "descent",
+  },
+  {
     name: "desert",
   },
   {
@@ -237,6 +255,7 @@ export const LOCATIONS: LocationData[] = [
     name: "enclosure",
   },
   {
+    canPluralize: true,
     name: "estate",
   },
   {
@@ -293,6 +312,9 @@ export const LOCATIONS: LocationData[] = [
   {
     canPluralize: true,
     name: "gulch",
+  },
+  {
+    name: "hamlet",
   },
   {
     name: "heap",
@@ -382,6 +404,10 @@ export const LOCATIONS: LocationData[] = [
   {
     isNSFW: true,
     name: "lavatory",
+  },
+  {
+    canPluralize: true,
+    name: "library",
   },
   {
     name: "maelstrom",

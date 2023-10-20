@@ -1524,6 +1524,20 @@ export const AFFIXES: AffixData[] = [
     tags: ["lowQuality"],
   },
   {
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    location: ["prefix"],
+    name: "discombobulated",
+    tags: ["lowQuality"],
+  },
+  {
+    artifact: ["suffix"],
+    creature: ["suffix"],
+    location: ["suffix"],
+    name: "discombobulation",
+    tags: ["lowQuality"],
+  },
+  {
     artifact: ["suffix"],
     creature: ["suffix"],
     location: ["suffix"],
@@ -5838,6 +5852,12 @@ export const AFFIXES: AffixData[] = [
     artifact: ["suffix"],
     location: ["suffix"],
     name: "villainy",
+  },
+  {
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    location: ["prefix"],
+    name: "virtuous",
   },
   {
     creature: ["prefix"],

@@ -1,19 +1,18 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconPowerBonusBoost } from "@neverquest/icons/power-bonus-boost.svg";
-import { deltas } from "@neverquest/state/deltas";
-import { powerBonusBoost } from "@neverquest/state/statistics";
+import IconPowerBonusBoost from "@neverquest/icons/power-bonus-boost.svg?react";
+import { powerBonusBoost } from "@neverquest/state/items";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function PowerBonusBoost() {
   const powerBonusBoostValue = useRecoilValue(powerBonusBoost);
 
   useDeltaText({
-    delta: deltas("powerBonusBoost"),
+    delta: "powerBonusBoost",
     format: "percentage",
     value: powerBonusBoost,
   });
@@ -26,7 +25,7 @@ export function PowerBonusBoost() {
         tooltip="Power bonus boost"
       />
 
-      <FloatingText delta="powerBonusBoost" />
+      <FloatingTextQueue delta="powerBonusBoost" />
     </Stack>
   );
 }

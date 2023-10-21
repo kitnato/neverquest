@@ -1,12 +1,12 @@
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ReactComponent as IconBossAttacking } from "@neverquest/icons/boss-attacking.svg";
-import { ReactComponent as IconBossCorpse } from "@neverquest/icons/boss-corpse.svg";
-import { ReactComponent as IconBossLurking } from "@neverquest/icons/boss-lurking.svg";
-import { ReactComponent as IconAttacking } from "@neverquest/icons/monster-attacking.svg";
-import { ReactComponent as IconMonsterCorpse } from "@neverquest/icons/monster-corpse.svg";
-import { ReactComponent as IconLurking } from "@neverquest/icons/monster-lurking.svg";
+import IconBossAttacking from "@neverquest/icons/boss-attacking.svg?react";
+import IconBossCorpse from "@neverquest/icons/boss-corpse.svg?react";
+import IconBossLurking from "@neverquest/icons/boss-lurking.svg?react";
+import IconAttacking from "@neverquest/icons/monster-attacking.svg?react";
+import IconMonsterCorpse from "@neverquest/icons/monster-corpse.svg?react";
+import IconLurking from "@neverquest/icons/monster-lurking.svg?react";
 import { isAttacking } from "@neverquest/state/character";
 import { isBoss } from "@neverquest/state/encounter";
 import { isMonsterDead, monsterName } from "@neverquest/state/monster";

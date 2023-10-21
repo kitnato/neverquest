@@ -1,13 +1,13 @@
-import { ReactComponent as IconAnatomy } from "@neverquest/icons/anatomy.svg";
-import { ReactComponent as IconArchery } from "@neverquest/icons/archery.svg";
-import { ReactComponent as IconArmorcraft } from "@neverquest/icons/armorcraft.svg";
-import { ReactComponent as IconAssassination } from "@neverquest/icons/assassination.svg";
-import { ReactComponent as IconCalisthenics } from "@neverquest/icons/calisthenics.svg";
-import { ReactComponent as IconEscrime } from "@neverquest/icons/escrime.svg";
-import { ReactComponent as IconEvasion } from "@neverquest/icons/evasion.svg";
-import { ReactComponent as IconShieldcraft } from "@neverquest/icons/shieldcraft.svg";
-import { ReactComponent as IconSiegecraft } from "@neverquest/icons/siegecraft.svg";
-import { ReactComponent as IconTraumatology } from "@neverquest/icons/traumatology.svg";
+import IconAnatomy from "@neverquest/icons/anatomy.svg?react";
+import IconArchery from "@neverquest/icons/archery.svg?react";
+import IconArmorcraft from "@neverquest/icons/armorcraft.svg?react";
+import IconAssassination from "@neverquest/icons/assassination.svg?react";
+import IconCalisthenics from "@neverquest/icons/calisthenics.svg?react";
+import IconEscrime from "@neverquest/icons/escrime.svg?react";
+import IconEvasion from "@neverquest/icons/evasion.svg?react";
+import IconShieldcraft from "@neverquest/icons/shieldcraft.svg?react";
+import IconSiegecraft from "@neverquest/icons/siegecraft.svg?react";
+import IconTraumatology from "@neverquest/icons/traumatology.svg?react";
 import type { SVGIcon } from "@neverquest/types/props";
 import type {
   Attribute,
@@ -27,7 +27,7 @@ export const SKILLS: Record<
     description: string;
     Icon: SVGIcon;
     requiredCrew: Crew;
-    shows?: Showing;
+    shows?: Showing[];
     unlocksAttributes?: Attribute[];
     unlocksMastery?: Mastery;
   }
@@ -48,13 +48,14 @@ export const SKILLS: Record<
     description: "Unlocks the use of heavy armor & the ability to deflect ailments.",
     Icon: IconArmorcraft,
     requiredCrew: "blacksmith",
+    shows: ["deflection"],
     unlocksMastery: "resilience",
   },
   assassination: {
     description: "Unlocks the ability to deal critical strikes.",
     Icon: IconAssassination,
     requiredCrew: "merchant",
-    shows: "criticalRating",
+    shows: ["criticalRating"],
     unlocksAttributes: ["dexterity", "perception"],
   },
   calisthenics: {
@@ -73,7 +74,7 @@ export const SKILLS: Record<
     description: "Unlocks the ability to dodge attacks, negating all damage.",
     Icon: IconEvasion,
     requiredCrew: "merchant",
-    shows: "dodge",
+    shows: ["dodge", "dodgePenalty"],
     unlocksAttributes: ["agility"],
   },
   shieldcraft: {
@@ -86,6 +87,7 @@ export const SKILLS: Record<
     description: "Unlocks the use of two-handed melee weapons that have a chance to execute.",
     Icon: IconSiegecraft,
     requiredCrew: "blacksmith",
+    shows: ["grip"],
     unlocksMastery: "butchery",
   },
   traumatology: {

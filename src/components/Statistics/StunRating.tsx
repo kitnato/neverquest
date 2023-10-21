@@ -1,31 +1,30 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconMight } from "@neverquest/icons/might.svg";
-import { ReactComponent as IconStunRating } from "@neverquest/icons/stun-rating.svg";
-import { ReactComponent as IconStun } from "@neverquest/icons/stun.svg";
-import { deltas } from "@neverquest/state/deltas";
-import { weapon } from "@neverquest/state/items";
+import IconMight from "@neverquest/icons/might.svg?react";
+import IconStunRating from "@neverquest/icons/stun-rating.svg?react";
+import IconStun from "@neverquest/icons/stun.svg?react";
+import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { stunRating } from "@neverquest/state/statistics";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function StunRating() {
   const mightValue = useRecoilValue(masteryStatistic("might"));
   const stunRatingValue = useRecoilValue(stunRating);
-  const traumatologyValue = useRecoilValue(skills("traumatology"));
+  const traumatologyValue = useRecoilValue(isSkillAcquired("traumatology"));
   const { abilityChance, gearClass } = useRecoilValue(weapon);
 
   useDeltaText({
-    delta: deltas("stunRating"),
-    stop: ({ previous }) => previous === null || !traumatologyValue,
+    delta: "stunRating",
+    stop: () => !traumatologyValue,
     value: stunRating,
   });
 
@@ -40,9 +39,9 @@ export function StunRating() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header className="text-center">Stun rating details</Popover.Header>
+                <PopoverHeader className="text-center">Stun rating details</PopoverHeader>
 
-                <Popover.Body>
+                <PopoverBody>
                   <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
@@ -67,7 +66,7 @@ export function StunRating() {
                       <td>{`${mightValue} hits`}</td>
                     </tr>
                   </DetailsTable>
-                </Popover.Body>
+                </PopoverBody>
               </Popover>
             }
             trigger={traumatologyValue ? ["hover", "focus"] : []}
@@ -75,7 +74,7 @@ export function StunRating() {
             <span>{traumatologyValue ? stunRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
-          <FloatingText delta="stunRating" />
+          <FloatingTextQueue delta="stunRating" />
         </Stack>
       }
       Icon={IconStunRating}

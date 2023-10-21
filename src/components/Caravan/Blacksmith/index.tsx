@@ -4,9 +4,9 @@ import { ArmorOptions } from "@neverquest/components/Caravan/Blacksmith/ArmorOpt
 import { ShieldOptions } from "@neverquest/components/Caravan/Blacksmith/ShieldOptions";
 import { WeaponOptions } from "@neverquest/components/Caravan/Blacksmith/WeaponOptions";
 import { IconTabs } from "@neverquest/components/IconTabs";
-import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
-import { ReactComponent as IconMelee } from "@neverquest/icons/melee.svg";
-import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
+import IconArmor from "@neverquest/icons/armor.svg?react";
+import IconMelee from "@neverquest/icons/melee.svg?react";
+import IconShield from "@neverquest/icons/shield.svg?react";
 
 export function Blacksmith() {
   return (

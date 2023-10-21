@@ -7,14 +7,22 @@ import type { Crew, CrewStatus } from "@neverquest/types/unions";
 
 // SELECTORS
 
-export const isCrewHired = withStateKey("isCrewHired", (key) =>
+export const isCaravanHired = withStateKey("isCaravanHired", (key) =>
   selector({
-    get: ({ get }) => CREW_ORDER.every((type) => get(hireStatus(type)).status === "hired"),
+    get: ({ get }) => CREW_ORDER.every((current) => get(hireStatus(current)).status === "hired"),
     key,
   }),
 );
 
 // ATOMS
+
+export const activeCrew = withStateKey("activeCrew", (key) =>
+  atom<Crew | null>({
+    default: null,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
 
 export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
   atom<BlacksmithInventory>({
@@ -28,14 +36,6 @@ export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
   }),
 );
 
-export const crewActive = withStateKey("crewActive", (key) =>
-  atom<Crew | null>({
-    default: null,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
 export const hasBoughtFromMerchant = withStateKey("hasBoughtFromMerchant", (key) =>
   atom({
     default: false,
@@ -44,7 +44,7 @@ export const hasBoughtFromMerchant = withStateKey("hasBoughtFromMerchant", (key)
   }),
 );
 
-// Must use { status } object instead of just CrewStatus, otherwise onSet() does not trigger in useInitializer().
+// TODO - Must use { status } object instead of just CrewStatus, otherwise onSet() does not trigger in useInitializer().
 export const hireStatus = withStateKey("hireStatus", (key) =>
   atomFamily<{ status: CrewStatus }, Crew>({
     default: { status: null },

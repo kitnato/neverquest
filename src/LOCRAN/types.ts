@@ -1,11 +1,11 @@
-type Affix = "prefix" | "suffix";
+type Affix = "articledSuffix" | "prefix" | "suffix";
 
 export type AffixTag = "elemental" | "highQuality" | "lowQuality";
 
 export type AffixData = BaseData & {
-  artifact?: Affix;
-  creature?: Affix;
-  location?: Affix;
+  artifact?: Affix[];
+  creature?: Affix[];
+  location?: Affix[];
   tags?: AffixTag[];
 };
 
@@ -18,8 +18,9 @@ type Artifact = "armor" | "shield" | "trinket" | "weapon";
 
 export type ArtifactType<T extends Artifact> = { type: T };
 
-export type ArtifactData = BaseData &
-  (
+export type ArtifactData = BaseData & {
+  canPluralize?: boolean;
+} & (
     | ArtifactType<"trinket">
     | (ArtifactType<"armor"> & {
         subtype: ArmorSlot;
@@ -51,27 +52,23 @@ export type BaseData = { isNSFW?: boolean; name: string };
 
 export type Category = "artifact" | "creature" | "location";
 
-export type Creature = "human" | "monster" | "name";
-
-export type CreatureData = BaseData & {
-  type: Creature;
-};
-
-export type GeneratorParameters = {
+export type GeneratorParameters = Partial<{
   allowNSFW: boolean;
-  hasPrefix: boolean;
-  hasSuffix: boolean;
+  nameStructure: NameStructure;
   prefixTags: AffixTag[];
   suffixTags: AffixTag[];
-};
+}>;
 
 export type LocationData = BaseData & {
   canPluralize?: boolean;
 };
 
 export type NameData = BaseData & {
-  type: Affix[];
+  affix: Affix[];
 };
+
+export const NAME_STRUCTURE_TYPES = ["none", "prefix", "prefixAndSuffix", "suffix"] as const;
+export type NameStructure = (typeof NAME_STRUCTURE_TYPES)[number];
 
 export const SHIELD_CLASS_TYPES = ["small", "medium", "tower"] as const;
 export type ShieldClass = (typeof SHIELD_CLASS_TYPES)[number];

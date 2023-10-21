@@ -15,7 +15,7 @@ import { Tailor } from "@neverquest/components/Caravan/Tailor";
 import { Witch } from "@neverquest/components/Caravan/Witch";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { CREW_ORDER } from "@neverquest/data/caravan";
-import { crewActive, isCrewHired } from "@neverquest/state/caravan";
+import { activeCrew, isCaravanHired } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import type { Crew } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
@@ -34,8 +34,8 @@ const CREW_COMPONENTS: Record<Crew, FunctionComponent> = {
 };
 
 export function Caravan() {
-  const [crewActiveValue, setCrewActive] = useRecoilState(crewActive);
-  const isCrewHiredValue = useRecoilValue(isCrewHired);
+  const [activeCrewValue, setCrewActive] = useRecoilState(activeCrew);
+  const isCaravanHiredValue = useRecoilValue(isCaravanHired);
   const isShowingCrewHiring = useRecoilValue(isShowing("crewHiring"));
 
   const [isScreenShowing, setScreenShowing] = useState(false);
@@ -66,7 +66,7 @@ export function Caravan() {
               <Stack gap={3}>
                 <h6>Crew for hire</h6>
 
-                {isCrewHiredValue && <span className="fst-italic">None available.</span>}
+                {isCaravanHiredValue && <span className="fst-italic">None available.</span>}
 
                 {CREW_ORDER.map((current, index) => (
                   <CrewHirable crew={current} key={index} />
@@ -77,15 +77,15 @@ export function Caravan() {
         </Card.Body>
       </Card>
 
-      {crewActiveValue !== null &&
+      {activeCrewValue !== null &&
         (() => {
-          const Component = CREW_COMPONENTS[crewActiveValue];
+          const Component = CREW_COMPONENTS[activeCrewValue];
 
           return (
             <DismissableScreen
               isShowing={isScreenShowing}
               onClose={() => toggleCrewActive(false)}
-              title={capitalizeAll(crewActiveValue)}
+              title={capitalizeAll(activeCrewValue)}
             >
               <Component />
             </DismissableScreen>

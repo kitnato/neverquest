@@ -2,624 +2,702 @@ import type { NameData } from "@neverquest/LOCRAN/types";
 
 export const NAMES: NameData[] = [
   {
+    affix: ["prefix"],
     isNSFW: true,
     name: "anal",
-    type: ["prefix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "anger",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     isNSFW: true,
     name: "anus",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "axe",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
+    isNSFW: true,
     name: "balls",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix"],
     name: "big",
-    type: ["prefix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "bile",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "bilge",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "blast",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "bloat",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "blood",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "boil",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "bone",
-    type: ["suffix"],
   },
   {
+    affix: ["suffix"],
     name: "bottom",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "brain",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "bucket",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "bug",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "bulge",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "bungle",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "cheeks",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "chomp",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "chomper",
-    type: ["suffix"],
   },
   {
+    affix: ["suffix"],
     name: "cleave",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     isNSFW: true,
     name: "cock",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "coffin",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix"],
     name: "corpse",
-    type: ["prefix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "cough",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "crud",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "crumpet",
-    type: ["suffix"],
   },
   {
+    affix: ["suffix"],
+    name: "cruncher",
+  },
+  {
+    affix: ["prefix", "suffix"],
     isNSFW: true,
     name: "cum",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "cut",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix"],
+    name: "dead",
+  },
+  {
+    affix: ["prefix", "suffix"],
     isNSFW: true,
     name: "dick",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
+    name: "dire",
+  },
+  {
+    affix: ["prefix", "suffix"],
+    name: "dread",
+  },
+  {
+    affix: ["suffix"],
     name: "drinker",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "drool",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "eater",
-    type: ["suffix"],
   },
   {
+    affix: ["suffix"],
     name: "eye",
-    type: ["suffix"],
   },
   {
+    affix: ["suffix"],
     name: "face",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
+    name: "fang",
+  },
+  {
+    affix: ["suffix"],
+    name: "fang",
+  },
+  {
+    affix: ["prefix", "suffix"],
     isNSFW: true,
     name: "fart",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "fester",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "fiend",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "finger",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "fire",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "fist",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "flame",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "flesh",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "foot",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "frenzy",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "gargle",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "gash",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "gobble",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "gobbler",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "goober",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "gore",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "gout",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "grim",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "grime",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "grin",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
+    name: "grind",
+  },
+  {
+    affix: ["prefix", "suffix"],
     name: "grub",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "gut",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "guzzler",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "hack",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "hand",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "hate",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "hide",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "hook",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix"],
     name: "huge",
-    type: ["prefix"],
   },
   {
+    affix: ["suffix"],
+    name: "jaw",
+  },
+  {
+    affix: ["prefix", "suffix"],
     isNSFW: true,
     name: "jizz",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "juice",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "juicer",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "junk",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "kill",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "leg",
-    type: ["suffix"],
   },
   {
+    affix: ["suffix"],
     isNSFW: true,
     name: "licker",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "limp",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix"],
     name: "little",
-    type: ["prefix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "mangle",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "mangler",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
+    name: "marrow",
+  },
+  {
+    affix: ["suffix"],
     name: "maul",
-    type: ["suffix"],
   },
   {
+    affix: ["suffix"],
     name: "mauler",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix"],
     name: "mayhem",
-    type: ["prefix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "mind",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     isNSFW: true,
     name: "minge",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "monger",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "moon",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "mourn",
-    type: ["suffix"],
   },
   {
+    affix: ["suffix"],
     name: "mouth",
-    type: ["suffix"],
   },
   {
+    affix: ["suffix"],
     name: "muffin",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "munch",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     isNSFW: true,
     name: "nipple",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "noodle",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "noodler",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "phlegm",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     isNSFW: true,
     name: "piss",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     isNSFW: true,
     name: "poop",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "puff",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "puke",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
+    name: "pulp",
+  },
+  {
+    affix: ["prefix", "suffix"],
     name: "punch",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "pus",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     isNSFW: true,
     name: "queef",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "rat",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "rider",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
+    name: "rip",
+  },
+  {
+    affix: ["prefix", "suffix"],
+    name: "rock",
+  },
+  {
+    affix: ["prefix", "suffix"],
     name: "rot",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "sack",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "sausage",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "scum",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix"],
     isNSFW: true,
     name: "semen",
-    type: ["prefix"],
   },
   {
+    affix: ["prefix", "suffix"],
+    isNSFW: true,
+    name: "shart",
+  },
+  {
+    affix: ["prefix", "suffix"],
+    name: "shatter",
+  },
+  {
+    affix: ["prefix", "suffix"],
     isNSFW: true,
     name: "shit",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "sing",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "skin",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "skull",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "slash",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "slime",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "sling",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix"],
     name: "small",
-    type: ["prefix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "sneeze",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "snot",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "snout",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "sorrow",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
+    name: "spine",
+  },
+  {
+    affix: ["prefix", "suffix"],
     name: "spit",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "spite",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
+    name: "spittle",
+  },
+  {
+    affix: ["prefix", "suffix"],
     name: "splatter",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     isNSFW: true,
     name: "spunk",
-    type: ["prefix", "suffix"],
   },
   {
-    name: "stab",
-    type: ["prefix", "suffix"],
-  },
-  {
-    name: "stabber",
-    type: ["suffix"],
-  },
-  {
-    name: "stain",
-    type: ["suffix"],
-  },
-  {
-    name: "stink",
-    type: ["prefix", "suffix"],
-  },
-  {
-    name: "stomp",
-    type: ["prefix", "suffix"],
-  },
-  {
-    name: "stone",
-    type: ["prefix", "suffix"],
-  },
-  {
-    name: "storm",
-    type: ["prefix", "suffix"],
-  },
-  {
+    affix: ["prefix", "suffix"],
     name: "squeak",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
+    name: "stab",
+  },
+  {
+    affix: ["suffix"],
+    name: "stabber",
+  },
+  {
+    affix: ["suffix"],
+    name: "stain",
+  },
+  {
+    affix: ["prefix", "suffix"],
+    name: "stink",
+  },
+  {
+    affix: ["prefix", "suffix"],
+    name: "stomp",
+  },
+  {
+    affix: ["prefix", "suffix"],
+    name: "stone",
+  },
+  {
+    affix: ["prefix", "suffix"],
+    name: "storm",
+  },
+  {
+    affix: ["prefix", "suffix"],
     isNSFW: true,
     name: "succ",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     isNSFW: true,
     name: "sucker",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "sunder",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
+    name: "tear",
+  },
+  {
+    affix: ["prefix", "suffix"],
     isNSFW: true,
     name: "thicc",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix"],
     name: "tiny",
-    type: ["prefix"],
   },
   {
+    affix: ["suffix"],
+    name: "tooth",
+  },
+  {
+    affix: ["prefix", "suffix"],
     isNSFW: true,
     name: "turd",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix"],
     name: "vile",
-    type: ["prefix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "vomit",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "wail",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["suffix"],
     name: "walker",
-    type: ["suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "wank",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "war",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "wart",
-    type: ["prefix", "suffix"],
   },
   {
-    name: "willy",
-    type: ["prefix", "suffix"],
-  },
-  {
-    name: "wizz",
-    type: ["prefix", "suffix"],
-  },
-  {
+    affix: ["prefix", "suffix"],
     isNSFW: true,
     name: "whore",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
+    name: "willy",
+  },
+  {
+    affix: ["prefix", "suffix"],
+    name: "wizz",
+  },
+  {
+    affix: ["prefix", "suffix"],
     name: "worm",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "wound",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
     name: "wrath",
-    type: ["prefix", "suffix"],
   },
   {
+    affix: ["prefix", "suffix"],
+    name: "wrench",
+  },
+  {
+    affix: ["prefix", "suffix"],
     name: "wrinkle",
-    type: ["prefix", "suffix"],
   },
 ];

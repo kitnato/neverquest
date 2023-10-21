@@ -1,17 +1,17 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { LABEL_NO_ESSENCE, LABEL_OVER_ENCUMBERED } from "@neverquest/data/general";
 import { canFit } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
 import type { InventoryItem } from "@neverquest/types";
-import { LABEL_NO_ESSENCE, LABEL_OVER_ENCUMBERED } from "@neverquest/utilities/constants";
 
 export function PurchaseItemButton({
-  handlePurchase,
   item,
+  onPurchase,
 }: {
-  handlePurchase: () => void;
   item: InventoryItem;
+  onPurchase: () => void;
 }) {
   const essenceValue = useRecoilValue(essence);
 
@@ -33,7 +33,7 @@ export function PurchaseItemButton({
       trigger={isPurchasable ? [] : ["hover", "focus"]}
     >
       <span>
-        <Button disabled={!isPurchasable} onClick={handlePurchase} variant="outline-dark">
+        <Button disabled={!isPurchasable} onClick={onPurchase} variant="outline-dark">
           Buy
         </Button>
       </span>

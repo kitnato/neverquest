@@ -2,26 +2,27 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterAilmentMeter } from "@neverquest/components/Monster/MonsterAilmentMeter";
-import { BLEED } from "@neverquest/data/statistics";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
-import { ReactComponent as IconBleeding } from "@neverquest/icons/bleeding.svg";
+import IconBleeding from "@neverquest/icons/bleeding.svg?react";
 import {
-  bleedDamageTotal,
+  bleed,
+  bleedingDelta,
   canReceiveAilment,
   isMonsterAiling,
   isMonsterDead,
   monsterAilmentDuration,
-  monsterBleedingDelta,
 } from "@neverquest/state/monster";
+import { bleedDamageTotal } from "@neverquest/state/statistics";
 
 export function MonsterBleeding() {
+  const bleedValue = useRecoilValue(bleed);
   const bleedDamageTotalValue = useRecoilValue(bleedDamageTotal);
   const canReceiveBleeding = useRecoilValue(canReceiveAilment("bleeding"));
   const isMonsterBleedingValue = useRecoilValue(isMonsterAiling("bleeding"));
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
-  const resetMonsterBleedingDelta = useResetRecoilState(monsterBleedingDelta);
-  const setMonsterBleedingDelta = useSetRecoilState(monsterBleedingDelta);
+  const resetMonsterBleedingDelta = useResetRecoilState(bleedingDelta);
+  const setMonsterBleedingDelta = useSetRecoilState(bleedingDelta);
   const setMonsterBleedingDuration = useSetRecoilState(monsterAilmentDuration("bleeding"));
 
   const changeMonsterHealth = useChangeMonsterHealth();
@@ -60,7 +61,7 @@ export function MonsterBleeding() {
 
   return (
     <IconDisplay
-      contents={<MonsterAilmentMeter ailment="bleeding" totalDuration={BLEED.duration} />}
+      contents={<MonsterAilmentMeter ailment="bleeding" totalDuration={bleedValue.duration} />}
       Icon={IconBleeding}
       tooltip="Bleeding"
     />

@@ -5,8 +5,8 @@ import { MonsterAilmentMeter } from "@neverquest/components/Monster/MonsterAilme
 import { ELEMENTALS } from "@neverquest/data/inventory";
 import { ELEMENTAL_AILMENT_DURATION_MAXIMUM } from "@neverquest/data/statistics";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
+import { totalElementalEffects } from "@neverquest/state/gear";
 import { isMonsterAiling, isMonsterDead, monsterAilmentDuration } from "@neverquest/state/monster";
-import { totalElementalEffects } from "@neverquest/state/statistics";
 import type { Elemental } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 

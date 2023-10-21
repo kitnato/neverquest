@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { MERCHANT_OFFERS } from "@neverquest/data/caravan";
-import type { AffixTag } from "@neverquest/LOCRAN/types";
+import type { GeneratorParameters } from "@neverquest/LOCRAN/types";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { stage, stageMaximum } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
@@ -27,54 +27,54 @@ export function useGenerateMerchantInventory() {
         const allowNSFWValue = get(allowNSFW);
 
         if (stageValue === get(stageMaximum)) {
-          const SETTINGS_GEAR: {
-            allowNSFW: boolean;
-            hasPrefix: boolean;
-            level: number;
-            tags: AffixTag[];
-          } = {
+          const SETTINGS_GEAR: GeneratorParameters & { level: number } = {
             allowNSFW: allowNSFWValue,
-            hasPrefix: true,
             level: stageValue,
-            tags: ["lowQuality"],
+            nameStructure: "prefix",
+            prefixTags: ["lowQuality"],
           };
           const merchantOffers = MERCHANT_OFFERS[stageValue];
 
           if (merchantOffers !== undefined) {
             merchantOffers.forEach((offer) => {
               const { type } = offer;
+
               const item = (() => {
-                if (type === "armor") {
-                  return {
-                    ...generateArmor({
-                      ...SETTINGS_GEAR,
-                      ...offer,
-                    }),
-                    isEquipped: false,
-                  };
-                }
+                switch (type) {
+                  case "armor": {
+                    return {
+                      ...generateArmor({
+                        ...SETTINGS_GEAR,
+                        ...offer,
+                      }),
+                      isEquipped: false,
+                    };
+                  }
 
-                if (type === "shield") {
-                  return {
-                    ...generateShield({
-                      ...SETTINGS_GEAR,
-                      ...offer,
-                    }),
-                    isEquipped: false,
-                  };
-                }
+                  case "shield": {
+                    return {
+                      ...generateShield({
+                        ...SETTINGS_GEAR,
+                        ...offer,
+                      }),
+                      isEquipped: false,
+                    };
+                  }
 
-                if (type === "weapon") {
-                  return {
-                    ...generateMeleeWeapon({
-                      ...SETTINGS_GEAR,
-                      ...offer,
-                    }),
-                    isEquipped: false,
-                  };
-                }
+                  case "trinket": {
+                    return offer.item;
+                  }
 
-                return offer.item;
+                  case "weapon": {
+                    return {
+                      ...generateMeleeWeapon({
+                        ...SETTINGS_GEAR,
+                        ...offer,
+                      }),
+                      isEquipped: false,
+                    };
+                  }
+                }
               })();
 
               inventory.push({

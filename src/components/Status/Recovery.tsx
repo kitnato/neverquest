@@ -1,22 +1,21 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { RecoveryMeter } from "@neverquest/components/Status/RecoveryMeter";
+import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
 import { RECOVERY_RATE } from "@neverquest/data/statistics";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconRecovery } from "@neverquest/icons/recovery.svg";
-import { ReactComponent as IconResilience } from "@neverquest/icons/resilience.svg";
+import IconRecovery from "@neverquest/icons/recovery.svg?react";
+import IconResilience from "@neverquest/icons/resilience.svg?react";
 import { isRecovering, recoveryDuration } from "@neverquest/state/character";
-import { deltas } from "@neverquest/state/deltas";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMasteryUnlocked, masteryStatistic } from "@neverquest/state/masteries";
 import { recoveryRate } from "@neverquest/state/statistics";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Recovery() {
@@ -32,7 +31,7 @@ export function Recovery() {
   });
 
   useDeltaText({
-    delta: deltas("recoveryRate"),
+    delta: "recoveryRate",
     format: "time",
     value: recoveryRate,
   });
@@ -48,9 +47,9 @@ export function Recovery() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header className="text-center">Recovery rate details</Popover.Header>
+                <PopoverHeader className="text-center">Recovery rate details</PopoverHeader>
 
-                <Popover.Body>
+                <PopoverBody>
                   <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
@@ -73,7 +72,7 @@ export function Recovery() {
                       })}`}</td>
                     </tr>
                   </DetailsTable>
-                </Popover.Body>
+                </PopoverBody>
               </Popover>
             }
             trigger={isMasteryUnlockedValue ? ["hover", "focus"] : []}
@@ -83,7 +82,7 @@ export function Recovery() {
             </span>
           </OverlayTrigger>
 
-          <FloatingText delta="recoveryRate" />
+          <FloatingTextQueue delta="recoveryRate" />
         </Stack>
       }
       Icon={IconRecovery}

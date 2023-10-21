@@ -1,17 +1,28 @@
 import { useState } from "react";
-import { Button, Form, Modal, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalTitle,
+  OverlayTrigger,
+  Stack,
+  Tooltip,
+} from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { SettingsSwitch } from "@neverquest/components/Header/SettingsSwitch";
 import { ShowEverything } from "@neverquest/components/Header/ShowEverything";
 import { IconImage } from "@neverquest/components/IconImage";
-import { ReactComponent as IconSettings } from "@neverquest/icons/settings.svg";
+import IconSettings from "@neverquest/icons/settings.svg?react";
 import { hasKnapsack } from "@neverquest/state/inventory";
 import {
   allowNSFW,
   autoEquip,
   lowHealthWarning,
   showDamagePerSecond,
+  showEssenceRequired,
   showGearComparison,
   showGearLevel,
 } from "@neverquest/state/settings";
@@ -30,16 +41,16 @@ export function Settings() {
       </OverlayTrigger>
 
       <Modal onHide={() => setIsShowing(false)} show={isShowing}>
-        <Modal.Header closeButton>
-          <Modal.Title>
+        <ModalHeader closeButton>
+          <ModalTitle>
             <Stack direction="horizontal" gap={3}>
               <IconImage Icon={IconSettings} />
               Settings
             </Stack>
-          </Modal.Title>
-        </Modal.Header>
+          </ModalTitle>
+        </ModalHeader>
 
-        <Modal.Body>
+        <ModalBody>
           <Form>
             <Stack gap={3}>
               <SettingsSwitch atom={lowHealthWarning} label="Low-health warning" />
@@ -56,12 +67,17 @@ export function Settings() {
 
               <SettingsSwitch atom={showGearLevel} label="Show gear level" />
 
+              <SettingsSwitch
+                atom={showEssenceRequired}
+                label="Show attribute point essence progress"
+              />
+
               <SettingsSwitch atom={allowNSFW} label="NSFW mode (profanity)" />
 
               <ShowEverything />
             </Stack>
           </Form>
-        </Modal.Body>
+        </ModalBody>
       </Modal>
     </>
   );

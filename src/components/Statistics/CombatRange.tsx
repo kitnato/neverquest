@@ -1,33 +1,31 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconMarksmanship } from "@neverquest/icons/marksmanship.svg";
-import { ReactComponent as IconRange } from "@neverquest/icons/range.svg";
-import { ReactComponent as IconRanged } from "@neverquest/icons/ranged.svg";
-import { deltas } from "@neverquest/state/deltas";
-import { weapon } from "@neverquest/state/items";
+import IconMarksmanship from "@neverquest/icons/marksmanship.svg?react";
+import IconRange from "@neverquest/icons/range.svg?react";
+import IconRanged from "@neverquest/icons/ranged.svg?react";
+import { range, weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import { skills } from "@neverquest/state/skills";
-import { range } from "@neverquest/state/statistics";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { isRanged } from "@neverquest/types/type-guards";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function CombatRange() {
   const marksmanshipValue = useRecoilValue(masteryStatistic("marksmanship"));
-  const archeryValue = useRecoilValue(skills("archery"));
+  const archeryValue = useRecoilValue(isSkillAcquired("archery"));
   const rangeValue = useRecoilValue(range);
   const weaponValue = useRecoilValue(weapon);
 
   const isWeaponRanged = isRanged(weaponValue);
 
   useDeltaText({
-    delta: deltas("range"),
+    delta: "range",
     format: "time",
     value: range,
   });
@@ -43,9 +41,9 @@ export function CombatRange() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header className="text-center">Range details</Popover.Header>
+                <PopoverHeader className="text-center">Range details</PopoverHeader>
 
-                <Popover.Body>
+                <PopoverBody>
                   <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
@@ -75,7 +73,7 @@ export function CombatRange() {
                       })}`}</td>
                     </tr>
                   </DetailsTable>
-                </Popover.Body>
+                </PopoverBody>
               </Popover>
             }
             trigger={archeryValue ? ["hover", "focus"] : []}
@@ -89,7 +87,7 @@ export function CombatRange() {
             </span>
           </OverlayTrigger>
 
-          <FloatingText delta="range" />
+          <FloatingTextQueue delta="range" />
         </Stack>
       }
       Icon={IconRange}

@@ -1,29 +1,34 @@
 import { useState } from "react";
-import { FormControl, FormSelect, Stack } from "react-bootstrap";
+import { FormSelect, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
 import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
+import { SetGearLevel } from "@neverquest/components/Caravan/SetGearLevel";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
+import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { WEAPON_BASE, WEAPON_MODIFIER, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
-import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
-import { ReactComponent as IconGearLevel } from "@neverquest/icons/gear-level.svg";
-import { ReactComponent as IconRange } from "@neverquest/icons/range.svg";
-import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
-import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
-import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
-import { ReactComponent as IconWeaponDamage } from "@neverquest/icons/weapon-damage.svg";
+import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
+import IconRange from "@neverquest/icons/range.svg?react";
+import IconStamina from "@neverquest/icons/stamina.svg?react";
+import IconUnknown from "@neverquest/icons/unknown.svg?react";
+import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react";
+import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
 import { WEAPON_CLASS_TYPES, type WeaponClass } from "@neverquest/LOCRAN/types";
 import { fletcherInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
-import { skills } from "@neverquest/state/skills";
-import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
 import { generateRangedWeapon } from "@neverquest/utilities/generators";
-import { getGearPrice, getGrowthSigmoid, getRangedRanges } from "@neverquest/utilities/getters";
+import {
+  getGearPrice,
+  getGrowthSigmoid,
+  getNameStructure,
+  getRangedRanges,
+} from "@neverquest/utilities/getters";
 
 export function RangedWeaponOptions() {
   const allowNSFWValue = useRecoilValue(allowNSFW);
@@ -36,7 +41,7 @@ export function RangedWeaponOptions() {
 
   const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[weaponClass];
 
-  const skillValue = useRecoilValue(skills(WEAPON_ABILITY_SKILLS[ability]));
+  const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
   const factor = getGrowthSigmoid(weaponLevel);
   const { abilityChance, damage, range, rate, staminaCost, weight } = getRangedRanges({
@@ -45,52 +50,10 @@ export function RangedWeaponOptions() {
   });
   const maximumWeaponLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
 
-  const handleCraft = () =>
-    setFletcherInventory(
-      generateRangedWeapon({
-        allowNSFW: allowNSFWValue,
-        gearClass: weaponClass,
-        hasPrefix: true,
-        hasSuffix: Math.random() <= getGrowthSigmoid(weaponLevel),
-        level: weaponLevel,
-        tags:
-          weaponLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
-            ? ["lowQuality"]
-            : weaponLevel === maximumWeaponLevel
-            ? ["highQuality"]
-            : undefined,
-      }),
-    );
-
   return (
     <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
-        <IconDisplay
-          contents={
-            <FormControl
-              max={maximumWeaponLevel}
-              min={1}
-              onChange={({ target: { value } }) => {
-                if (!value) {
-                  return;
-                }
-
-                const parsedValue = Number.parseInt(value);
-
-                if (isNaN(parsedValue) || parsedValue < 1 || parsedValue > maximumWeaponLevel) {
-                  return;
-                }
-
-                setWeaponLevel(parsedValue);
-              }}
-              type="number"
-              value={formatValue({ value: weaponLevel })}
-            />
-          }
-          Icon={IconGearLevel}
-          iconProps={{ overlayPlacement: "left" }}
-          tooltip="Level"
-        />
+        <SetGearLevel state={[weaponLevel, setWeaponLevel]} />
 
         <IconDisplay
           contents={
@@ -176,7 +139,22 @@ export function RangedWeaponOptions() {
 
       {fletcherInventoryValue === null ? (
         <CraftGear
-          onCraft={handleCraft}
+          onCraft={() =>
+            setFletcherInventory(
+              generateRangedWeapon({
+                allowNSFW: allowNSFWValue,
+                gearClass: weaponClass,
+                level: weaponLevel,
+                nameStructure: getNameStructure(),
+                prefixTags:
+                  weaponLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
+                    ? ["lowQuality"]
+                    : weaponLevel === maximumWeaponLevel
+                    ? ["highQuality"]
+                    : undefined,
+              }),
+            )
+          }
           price={getGearPrice({
             factor,
             ...WEAPON_BASE,

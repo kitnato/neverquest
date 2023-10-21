@@ -1,20 +1,23 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { useEffect } from "react";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { AttackMeter } from "@neverquest/components/Status/AttackMeter";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { WEAPON_NONE } from "@neverquest/data/inventory";
 import { useAttack } from "@neverquest/hooks/actions/useAttack";
+import { useRegenerate } from "@neverquest/hooks/actions/useRegenerate";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconAttackRate } from "@neverquest/icons/attack-rate.svg";
-import { ReactComponent as IconWeaponSpeed } from "@neverquest/icons/speed.svg";
-import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
-import { ReactComponent as IconWeaponAttackRate } from "@neverquest/icons/weapon-attack-rate.svg";
-import { attributeStatistic } from "@neverquest/state/attributes";
+import IconAttackRate from "@neverquest/icons/attack-rate.svg?react";
+import IconWeaponSpeed from "@neverquest/icons/speed.svg?react";
+import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
+import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react";
+import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import {
   attackDuration,
   canAttackOrParry,
@@ -22,12 +25,10 @@ import {
   isLooting,
   isRecovering,
 } from "@neverquest/state/character";
-import { deltas } from "@neverquest/state/deltas";
+import { weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
-import { weapon } from "@neverquest/state/items";
 import { isMonsterDead } from "@neverquest/state/monster";
-import { attackRateTotal, attributePowerBonus } from "@neverquest/state/statistics";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/utilities/constants";
+import { attackRateTotal } from "@neverquest/state/statistics";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Attack() {
@@ -44,6 +45,7 @@ export function Attack() {
   const setAttackDuration = useSetRecoilState(attackDuration);
 
   const attack = useAttack();
+  const regenerate = useRegenerate();
 
   useAnimate({
     delta: setAttackDuration,
@@ -57,10 +59,12 @@ export function Attack() {
   });
 
   useDeltaText({
-    delta: deltas("attackRate"),
+    delta: "attackRate",
     format: "time",
     value: attackRateTotal,
   });
+
+  useEffect(regenerate, [isAttackingValue, regenerate]);
 
   if (!isShowingAttackRate) {
     return null;
@@ -73,13 +77,13 @@ export function Attack() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header className="text-center">Attack rate details</Popover.Header>
+                <PopoverHeader className="text-center">Attack rate details</PopoverHeader>
 
-                <Popover.Body>
+                <PopoverBody>
                   <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>{`${
-                        weaponValue === WEAPON_NONE ? "Base" : "Weapon"
+                        weaponValue.name === WEAPON_NONE.name ? "Base" : "Weapon"
                       }:`}</td>
 
                       <td>
@@ -105,11 +109,11 @@ export function Attack() {
                             decimals: 0,
                             format: "percentage",
                             value: speed,
-                          })} `}
+                          })}`}
 
                           {speedPowerBonus > 0 && (
                             <>
-                              {LABEL_SEPARATOR}
+                              <span>{LABEL_SEPARATOR}</span>
 
                               <IconImage Icon={IconTomeOfPower} size="small" />
 
@@ -123,7 +127,7 @@ export function Attack() {
                       </td>
                     </tr>
                   </DetailsTable>
-                </Popover.Body>
+                </PopoverBody>
               </Popover>
             }
             trigger={isShowingAttackRateDetails ? ["hover", "focus"] : []}
@@ -133,7 +137,7 @@ export function Attack() {
             </span>
           </OverlayTrigger>
 
-          <FloatingText delta="attackRate" />
+          <FloatingTextQueue delta="attackRate" />
         </Stack>
       }
       Icon={IconAttackRate}

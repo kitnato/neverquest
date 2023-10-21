@@ -4,7 +4,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LootingMeter } from "@neverquest/components/Loot/LootingMeter";
 import { useProgression } from "@neverquest/hooks/actions/useProgression";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
-import { ReactComponent as IconLooting } from "@neverquest/icons/looting.svg";
+import IconLooting from "@neverquest/icons/looting.svg?react";
 import { isLooting, lootingDuration } from "@neverquest/state/character";
 import { isStageCompleted, progress } from "@neverquest/state/encounter";
 import { isMonsterDead } from "@neverquest/state/monster";

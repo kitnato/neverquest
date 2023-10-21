@@ -3,7 +3,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterAilmentMeter } from "@neverquest/components/Monster/MonsterAilmentMeter";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
-import { ReactComponent as IconStaggered } from "@neverquest/icons/staggered.svg";
+import IconStaggered from "@neverquest/icons/staggered.svg?react";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
   canReceiveAilment,

@@ -2,20 +2,21 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
+import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
-import { ReactComponent as IconTravel } from "@neverquest/icons/travel.svg";
+import IconTravel from "@neverquest/icons/travel.svg?react";
 import { isGameOver } from "@neverquest/state/character";
-import { isStageCompleted, isWilderness, stageMaximum } from "@neverquest/state/encounter";
+import { isStageCompleted, isWilderness } from "@neverquest/state/encounter";
+import { isShowing } from "@neverquest/state/isShowing";
 import { hasLooted } from "@neverquest/state/resources";
-import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function TravelButton() {
   const hasLootedValue = useRecoilValue(hasLooted);
   const isGameOverValue = useRecoilValue(isGameOver);
+  const isShowingLocation = useRecoilValue(isShowing("location"));
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isWildernessValue = useRecoilValue(isWilderness);
-  const stageMaximumValue = useRecoilValue(stageMaximum);
 
   const toggleLocation = useToggleLocation();
 
@@ -29,11 +30,7 @@ export function TravelButton() {
         overlay={
           <Tooltip>
             {`${isWildernessValue ? "Go to" : "Return to"} ${
-              stageMaximumValue === 1 && isWildernessValue
-                ? LABEL_UNKNOWN
-                : isWildernessValue
-                ? "Caravan"
-                : "Wilderness"
+              isWildernessValue ? (isShowingLocation ? "Caravan" : LABEL_UNKNOWN) : "Wilderness"
             }`}
           </Tooltip>
         }

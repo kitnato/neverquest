@@ -1,4 +1,4 @@
-import { Badge, Button, OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { Badge, Button, OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { AttributeIncreaseDetails } from "@neverquest/components/Attributes/AttributeIncreaseDetails";
@@ -6,10 +6,11 @@ import { AttributeRank } from "@neverquest/components/Attributes/AttributeRank";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { useIncreaseAttribute } from "@neverquest/hooks/actions/useIncreaseAttribute";
-import { ReactComponent as IconWait } from "@neverquest/icons/hourglass.svg";
-import { ReactComponent as IconIncrease } from "@neverquest/icons/increase.svg";
-import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
+import IconWait from "@neverquest/icons/hourglass.svg?react";
+import IconIncrease from "@neverquest/icons/increase.svg?react";
+import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import {
   areAttributesAffordable,
   isAttributeAtMaximum,
@@ -17,11 +18,6 @@ import {
 } from "@neverquest/state/attributes";
 import { isStageCompleted, isStageStarted, isWilderness } from "@neverquest/state/encounter";
 import type { Attribute } from "@neverquest/types/unions";
-import {
-  CLASS_FULL_WIDTH_JUSTIFIED,
-  LABEL_MAXIMUM,
-  LABEL_UNKNOWN,
-} from "@neverquest/utilities/constants";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
@@ -53,7 +49,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
             <OverlayTrigger
               overlay={
                 <Popover>
-                  <Popover.Body>
+                  <PopoverBody>
                     <Stack gap={1}>
                       <AttributeIncreaseDetails attribute={attribute} />
 
@@ -61,7 +57,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
 
                       {isUnsafe && "Cannot concentrate."}
                     </Stack>
-                  </Popover.Body>
+                  </PopoverBody>
                 </Popover>
               }
             >

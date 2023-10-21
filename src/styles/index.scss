@@ -12,6 +12,10 @@
   box-shadow: none !important;
 }
 
+.hstack.gap-1 {
+  gap: 0.35rem !important;
+}
+
 .no-transitions .progress-bar {
   transition: none;
 }
@@ -38,6 +42,12 @@
 
 .stencilled {
   filter: drop-shadow(0 0 2px rgb(0 0 0));
+}
+
+.table-details {
+  tr > td:nth-child(2) {
+    vertical-align: bottom;
+  }
 }
 
 .text-blue {
@@ -77,12 +87,32 @@ input {
   }
 }
 
+.form-check {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+
+  .form-check-input,
+  .form-check-label {
+    cursor: pointer;
+  }
+
+  .form-check-input {
+    margin-top: initial;
+  }
+}
+
 select {
   cursor: pointer;
 }
 
+small:empty {
+  display: none;
+}
+
 svg.icon-image {
   display: block;
+  fill: currentcolor;
   width: 40px;
 
   &.small {

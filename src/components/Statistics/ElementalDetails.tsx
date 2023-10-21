@@ -2,11 +2,10 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { ELEMENTALS, GEM_ELEMENTALS } from "@neverquest/data/inventory";
-import { armor, weapon } from "@neverquest/state/items";
-import { totalElementalEffects } from "@neverquest/state/statistics";
+import { armor, totalElementalEffects, weapon } from "@neverquest/state/gear";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
@@ -19,7 +18,9 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
       <td className={CLASS_TABLE_CELL_ITALIC}>Elemental:</td>
 
       <td>
-        {stackItems(gems.slice().sort((a, b) => a.name.localeCompare(b.name))).map(({ item }) => {
+        {stackItems(
+          gems.toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
+        ).map(({ item }) => {
           const { id, name } = item;
           const elemental = GEM_ELEMENTALS[name];
           const { damage, duration } = totalElementalEffectsValue[slot][elemental];

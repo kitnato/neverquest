@@ -1,32 +1,32 @@
 import { nanoid } from "nanoid";
 
-import { ReactComponent as IconAmmunitionPouch } from "@neverquest/icons/ammunition-pouch.svg";
-import { ReactComponent as IconAntidote } from "@neverquest/icons/antidote.svg";
-import { ReactComponent as IconAntiqueCoin } from "@neverquest/icons/antique-coin.svg";
-import { ReactComponent as IconArmorHeavy } from "@neverquest/icons/armor-heavy.svg";
-import { ReactComponent as IconArmorLight } from "@neverquest/icons/armor-light.svg";
-import { ReactComponent as IconReinforced } from "@neverquest/icons/armor-reinforced.svg";
-import { ReactComponent as IconBandages } from "@neverquest/icons/bandages.svg";
-import { ReactComponent as IconBleed } from "@neverquest/icons/bleed.svg";
-import { ReactComponent as IconBlunt } from "@neverquest/icons/blunt.svg";
-import { ReactComponent as IconCompass } from "@neverquest/icons/compass.svg";
-import { ReactComponent as IconElixir } from "@neverquest/icons/elixir.svg";
-import { ReactComponent as IconFire } from "@neverquest/icons/fire.svg";
-import { ReactComponent as IconStone } from "@neverquest/icons/hearthstone.svg";
-import { ReactComponent as IconIce } from "@neverquest/icons/ice.svg";
-import { ReactComponent as IconKnapsack } from "@neverquest/icons/knapsack.svg";
-import { ReactComponent as IconLightning } from "@neverquest/icons/lightning.svg";
-import { ReactComponent as IconMonkeyPaw } from "@neverquest/icons/monkey-paw.svg";
-import { ReactComponent as IconParry } from "@neverquest/icons/parry.svg";
-import { ReactComponent as IconPhylactery } from "@neverquest/icons/phylactery.svg";
-import { ReactComponent as IconPiercing } from "@neverquest/icons/piercing.svg";
-import { ReactComponent as IconSalve } from "@neverquest/icons/salve.svg";
-import { ReactComponent as IconShieldMedium } from "@neverquest/icons/shield-medium.svg";
-import { ReactComponent as IconShieldSmall } from "@neverquest/icons/shield-small.svg";
-import { ReactComponent as IconShieldTower } from "@neverquest/icons/shield-tower.svg";
-import { ReactComponent as IconSlashing } from "@neverquest/icons/slashing.svg";
-import { ReactComponent as IconStun } from "@neverquest/icons/stun.svg";
-import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
+import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
+import IconAntidote from "@neverquest/icons/antidote.svg?react";
+import IconAntiqueCoin from "@neverquest/icons/antique-coin.svg?react";
+import IconArmorHeavy from "@neverquest/icons/armor-heavy.svg?react";
+import IconArmorLight from "@neverquest/icons/armor-light.svg?react";
+import IconReinforced from "@neverquest/icons/armor-reinforced.svg?react";
+import IconBandages from "@neverquest/icons/bandages.svg?react";
+import IconBleed from "@neverquest/icons/bleed.svg?react";
+import IconBlunt from "@neverquest/icons/blunt.svg?react";
+import IconCompass from "@neverquest/icons/compass.svg?react";
+import IconElixir from "@neverquest/icons/elixir.svg?react";
+import IconFire from "@neverquest/icons/fire.svg?react";
+import IconStone from "@neverquest/icons/hearthstone.svg?react";
+import IconIce from "@neverquest/icons/ice.svg?react";
+import IconKnapsack from "@neverquest/icons/knapsack.svg?react";
+import IconLightning from "@neverquest/icons/lightning.svg?react";
+import IconMonkeyPaw from "@neverquest/icons/monkey-paw.svg?react";
+import IconParry from "@neverquest/icons/parry.svg?react";
+import IconPhylactery from "@neverquest/icons/phylactery.svg?react";
+import IconPiercing from "@neverquest/icons/piercing.svg?react";
+import IconSalve from "@neverquest/icons/salve.svg?react";
+import IconShieldMedium from "@neverquest/icons/shield-medium.svg?react";
+import IconShieldSmall from "@neverquest/icons/shield-small.svg?react";
+import IconShieldTower from "@neverquest/icons/shield-tower.svg?react";
+import IconSlashing from "@neverquest/icons/slashing.svg?react";
+import IconStun from "@neverquest/icons/stun.svg?react";
+import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type {
   AmmunitionPouchItem,
@@ -50,7 +50,7 @@ import type {
   WeaponAbility,
 } from "@neverquest/types/unions";
 
-export const AMMUNITION_MAXIMUM = 100;
+export const AMMUNITION_CAPACITY = 100;
 
 export const ARMOR_NONE: Omit<Armor, "isEquipped" | "price"> = {
   deflection: 0,
@@ -79,7 +79,7 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 0.65, minimum: 0.6 },
     ],
     Icon: IconArmorHeavy,
-    price: { maximum: 1600, minimum: 8 },
+    price: { maximum: 10000, minimum: 8 },
     protection: [
       { maximum: 10, minimum: 8 },
       { maximum: 1000, minimum: 950 },
@@ -93,7 +93,7 @@ export const ARMOR_SPECIFICATIONS: Record<
   light: {
     deflection: null,
     Icon: IconArmorLight,
-    price: { maximum: 800, minimum: 1 },
+    price: { maximum: 5000, minimum: 1 },
     protection: [
       { maximum: 2, minimum: 1 },
       { maximum: 500, minimum: 450 },
@@ -110,7 +110,7 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 0.35, minimum: 0.3 },
     ],
     Icon: IconReinforced,
-    price: { maximum: 1200, minimum: 3 },
+    price: { maximum: 7500, minimum: 3 },
     protection: [
       { maximum: 6, minimum: 4 },
       { maximum: 800, minimum: 750 },
@@ -133,7 +133,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         description: "Cures poison.",
         name: "antidote",
-        price: 15,
+        price: 150,
         weight: 5,
       },
     },
@@ -142,7 +142,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         description: "Restores all health.",
         name: "bandages",
-        price: 10,
+        price: 50,
         weight: 1,
       },
     },
@@ -151,7 +151,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         description: "Restores all stamina.",
         name: "elixir",
-        price: 8,
+        price: 80,
         weight: 2,
       },
     },
@@ -160,7 +160,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         description: "Resurrects the carrier upon death.",
         name: "phylactery",
-        price: 100,
+        price: 500,
         weight: 10,
       },
     },
@@ -196,7 +196,8 @@ export const ELEMENTALS: Record<
   },
 };
 
-export const ENCUMBRANCE = 6;
+export const ENCUMBRANCE = 4;
+
 export const KNAPSACK_SIZE = 6;
 
 export const GEM_BASE = {
@@ -211,15 +212,16 @@ export const GEM_ELEMENTALS: Record<Gem, Elemental> = {
   topaz: "lightning",
 };
 export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
-export const GEM_FITTING_COST = [20, 40, 70, 120, 200];
+export const GEM_FITTING_COST = [20, 40, 100, 200, 500];
 export const GEMS_MAXIMUM = 5;
 
+export const INFUSABLE_LEVEL_MAXIMUM = 100;
 export const INFUSABLES: Record<
   Infusable,
   {
     Icon: SVGIcon;
     item: InfusableItem & {
-      growth: number;
+      growthBase: number;
       maximum: number;
       minimum: number;
     };
@@ -228,8 +230,8 @@ export const INFUSABLES: Record<
   "monkey paw": {
     Icon: IconMonkeyPaw,
     item: {
-      description: "Boosts amount of essence looted. Can be infused to increase its potency.",
-      growth: 12,
+      description: "Boosts amount of essence looted.",
+      growthBase: 8,
       id: nanoid(),
       level: 1,
       maximum: 2,
@@ -242,9 +244,8 @@ export const INFUSABLES: Record<
   "tome of power": {
     Icon: IconTomeOfPower,
     item: {
-      description:
-        "Boosts all attribute effects based on power level. Can be infused to increase its potency.",
-      growth: 14,
+      description: "Boosts all attribute effects based on power level.",
+      growthBase: 10,
       id: nanoid(),
       level: 1,
       maximum: 1.5,
@@ -282,7 +283,7 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 0.4, minimum: 0.35 },
     ],
     Icon: IconShieldMedium,
-    price: { maximum: 900, minimum: 4 },
+    price: { maximum: 4500, minimum: 4 },
     stagger: [
       { maximum: 0.22, minimum: 0.2 },
       { maximum: 0.35, minimum: 0.3 },
@@ -302,7 +303,7 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 0.35, minimum: 0.3 },
     ],
     Icon: IconShieldSmall,
-    price: { maximum: 600, minimum: 2 },
+    price: { maximum: 2500, minimum: 2 },
     stagger: null,
     staminaCost: [
       { maximum: 2, minimum: 1 },
@@ -319,7 +320,7 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 0.65, minimum: 0.6 },
     ],
     Icon: IconShieldTower,
-    price: { maximum: 1200, minimum: 7 },
+    price: { maximum: 6000, minimum: 7 },
     stagger: [
       { maximum: 0.32, minimum: 0.3 },
       { maximum: 0.55, minimum: 0.5 },
@@ -343,7 +344,7 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: AmmunitionPouchIte
         current: 0,
         description: "Store ammunition for ranged weapons.",
         id: nanoid(),
-        maximum: AMMUNITION_MAXIMUM,
+        maximum: AMMUNITION_CAPACITY,
         name: "ammunition pouch",
         price: 250,
         weight: 6,
@@ -402,20 +403,20 @@ export const WEAPON_BASE: GearBase & {
     { maximum: 50, minimum: 45 },
   ],
   damage: [
-    { maximum: 14, minimum: 12 },
+    { maximum: 15, minimum: 12 },
     { maximum: 1000, minimum: 950 },
   ],
-  price: { maximum: 1000, minimum: 1 },
+  price: { maximum: 12000, minimum: 1 },
   range: [
-    { maximum: 4500, minimum: 3000 },
-    { maximum: 8000, minimum: 7500 },
+    { maximum: 4000, minimum: 3500 },
+    { maximum: 7000, minimum: 6500 },
   ],
   rate: [
-    { maximum: 3700, minimum: 3500 },
+    { maximum: 3700, minimum: 3600 },
     { maximum: 2200, minimum: 2000 },
   ],
   staminaCost: [
-    { maximum: 3, minimum: 1 },
+    { maximum: 2, minimum: 1 },
     { maximum: 65, minimum: 60 },
   ],
   weight: [

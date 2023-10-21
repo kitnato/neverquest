@@ -6,9 +6,9 @@ import { ButtonBadge } from "@neverquest/components/Controls/ButtonBadge";
 import { ItemAcquisition } from "@neverquest/components/Controls/ItemAcquisition";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { IconImage } from "@neverquest/components/IconImage";
-import { Inventory } from "@neverquest/components/Items";
-import { ReactComponent as IconEncumbrance } from "@neverquest/icons/encumbrance.svg";
-import { ReactComponent as IconInventory } from "@neverquest/icons/knapsack.svg";
+import { Inventory } from "@neverquest/components/Inventory";
+import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
+import IconInventory from "@neverquest/icons/knapsack.svg?react";
 import { isAttacking, isGameOver } from "@neverquest/state/character";
 import {
   hasKnapsack,

@@ -4,8 +4,8 @@ import { useRecoilValue } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { RESERVES } from "@neverquest/data/reserves";
-import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
-import { ReactComponent as IconStamina } from "@neverquest/icons/stamina.svg";
+import IconHealth from "@neverquest/icons/health.svg?react";
+import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { isRecovering } from "@neverquest/state/character";
 import {
   regenerationAmount,

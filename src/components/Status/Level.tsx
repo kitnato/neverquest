@@ -1,14 +1,13 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
-import { ReactComponent as IconLevel } from "@neverquest/icons/level.svg";
+import IconEssence from "@neverquest/icons/essence.svg?react";
+import IconLevel from "@neverquest/icons/level.svg?react";
 import { absorbedEssence, level } from "@neverquest/state/attributes";
-import { deltas } from "@neverquest/state/deltas";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Level() {
@@ -16,7 +15,7 @@ export function Level() {
   const levelValue = useRecoilValue(level);
 
   useDeltaText({
-    delta: deltas("level"),
+    delta: "level",
     value: level,
   });
 
@@ -27,22 +26,22 @@ export function Level() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header className="text-center">Absorbed essence</Popover.Header>
+                <PopoverHeader className="text-center">Absorbed essence</PopoverHeader>
 
-                <Popover.Body>
+                <PopoverBody>
                   <Stack className="justify-content-center" direction="horizontal" gap={1}>
                     <IconImage Icon={IconEssence} size="small" />
 
                     {formatValue({ value: absorbedEssenceValue })}
                   </Stack>
-                </Popover.Body>
+                </PopoverBody>
               </Popover>
             }
           >
             <span>{levelValue}</span>
           </OverlayTrigger>
 
-          <FloatingText delta="level" />
+          <FloatingTextQueue delta="level" />
         </Stack>
       }
       Icon={IconLevel}

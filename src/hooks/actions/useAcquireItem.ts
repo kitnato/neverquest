@@ -3,6 +3,7 @@ import { useRecoilCallback } from "recoil";
 import { ARMOR_NONE, KNAPSACK_SIZE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
+import { armor, shield, weapon } from "@neverquest/state/gear";
 import {
   canFit,
   encumbranceMaximum,
@@ -12,9 +13,9 @@ import {
   notifyOverEncumbrance,
 } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { armor, shield, weapon } from "@neverquest/state/items";
 import { autoEquip } from "@neverquest/state/settings";
-import { skills } from "@neverquest/state/skills";
+import { isSkillAcquired } from "@neverquest/state/skills";
+import { isTraitAcquired } from "@neverquest/state/traits";
 import type { InventoryItem } from "@neverquest/types";
 import {
   isArmor,
@@ -52,13 +53,23 @@ export function useAcquireItem() {
         set(inventory, (current) => current.concat(item));
         set(itemsAcquired, (current) => [...current, item]);
 
+        const isShieldUnequipped = get(shield).name === SHIELD_NONE.name;
+        const weaponValue = get(weapon);
+
         if (
           isGear(item) &&
           get(autoEquip) &&
-          ((get(armor) === ARMOR_NONE && isArmor(item)) ||
-            (get(shield) === SHIELD_NONE && isShield(item)) ||
-            (get(weapon) === WEAPON_NONE &&
-              (isMelee(item) || (get(skills("archery")) && isRanged(item)))))
+          ((get(armor).name === ARMOR_NONE.name && isArmor(item)) ||
+            // Acquiring a shield while no shield equipped and not wielding a ranged or two-handed weapon (unless colossus).
+            (isShieldUnequipped && isShield(item) && !isRanged(weaponValue)) ||
+            get(isTraitAcquired("colossus")) ||
+            // Acquiring a weapon while no weapon equipped, and if ranged or two-handed, no shield equipped.
+            (weaponValue.name === WEAPON_NONE.name &&
+              ((isMelee(item) && item.grip === "one-handed") ||
+                get(isTraitAcquired("colossus")) ||
+                (((isMelee(item) && item.grip === "two-handed") ||
+                  (get(isSkillAcquired("archery")) && isRanged(item))) &&
+                  isShieldUnequipped))))
         ) {
           return "autoEquip";
         }

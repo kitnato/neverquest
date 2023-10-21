@@ -1,11 +1,10 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconRank } from "@neverquest/icons/rank.svg";
-import { deltas } from "@neverquest/state/deltas";
+import IconRank from "@neverquest/icons/rank.svg?react";
 import { masteryRank } from "@neverquest/state/masteries";
 import type { Mastery } from "@neverquest/types/unions";
 import { formatValue } from "@neverquest/utilities/formatters";
@@ -15,7 +14,7 @@ export function MasteryRank({ mastery }: { mastery: Mastery }) {
   const masteryRankValue = useRecoilValue(masteryRankState);
 
   useDeltaText({
-    delta: deltas("masteryRank"),
+    delta: "masteryRank",
     value: masteryRankState,
   });
 
@@ -28,7 +27,7 @@ export function MasteryRank({ mastery }: { mastery: Mastery }) {
         tooltip="Rank"
       />
 
-      <FloatingText delta="masteryRank" />
+      <FloatingTextQueue delta="masteryRank" />
     </Stack>
   );
 }

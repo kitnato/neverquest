@@ -1,11 +1,10 @@
 import { Card, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
-import { deltas } from "@neverquest/state/deltas";
+import IconEssence from "@neverquest/icons/essence.svg?react";
 import { isShowing } from "@neverquest/state/isShowing";
 import { essence } from "@neverquest/state/resources";
 import { formatValue } from "@neverquest/utilities/formatters";
@@ -16,7 +15,7 @@ export function Essence() {
   const isShowingEssence = useRecoilValue(isShowing("essence"));
 
   useDeltaText({
-    delta: deltas("essence"),
+    delta: "essence",
     value: essence,
   });
 
@@ -45,7 +44,7 @@ export function Essence() {
           tooltip="Essence"
         />
 
-        <FloatingText delta="essence" />
+        <FloatingTextQueue delta="essence" />
       </Stack>
     </Card>
   );

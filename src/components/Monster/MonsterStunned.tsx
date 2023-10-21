@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterAilmentMeter } from "@neverquest/components/Monster/MonsterAilmentMeter";
-import { ReactComponent as IconStunned } from "@neverquest/icons/stunned.svg";
+import IconStunned from "@neverquest/icons/stunned.svg?react";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { canReceiveAilment } from "@neverquest/state/monster";
 

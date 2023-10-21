@@ -27,7 +27,7 @@ export function useIncreaseAttribute() {
         const { shows } = ATTRIBUTES[attribute];
 
         if (shows !== undefined) {
-          set(isShowing(shows), true);
+          shows.forEach((current) => set(isShowing(current), true));
         }
 
         set(isShowing("statistics"), true);

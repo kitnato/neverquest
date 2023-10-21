@@ -1,37 +1,37 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MasteryProgress } from "@neverquest/components/Masteries/MasteryProgress";
 import { MasteryRank } from "@neverquest/components/Masteries/MasteryRank";
+import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { MASTERIES } from "@neverquest/data/masteries";
-import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
+import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { isMasteryUnlocked } from "@neverquest/state/masteries";
 import type { Mastery } from "@neverquest/types/unions";
-import { LABEL_UNKNOWN } from "@neverquest/utilities/constants";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
-  const masteryIsUnlockedValue = useRecoilValue(isMasteryUnlocked(mastery));
+  const isMasteryUnlockedValue = useRecoilValue(isMasteryUnlocked(mastery));
 
   const { description, Icon } = MASTERIES[mastery];
 
   return (
     <div className={getAnimationClass({ name: "flipInX" })}>
-      {masteryIsUnlockedValue ? (
+      {isMasteryUnlockedValue ? (
         <IconDisplay
           contents={
             <OverlayTrigger
               overlay={
                 <Popover>
-                  <Popover.Body>{description}</Popover.Body>
+                  <PopoverBody>{description}</PopoverBody>
                 </Popover>
               }
               placement="right"
             >
-              <span>{capitalizeAll(mastery)}</span>
+              <span style={{ width: "max-content" }}>{capitalizeAll(mastery)}</span>
             </OverlayTrigger>
           }
           description={
@@ -42,7 +42,7 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
                 <MasteryProgress mastery={mastery} />
               </Stack>
 
-              <FloatingText delta={mastery} />
+              <FloatingTextQueue delta={mastery} />
             </Stack>
           }
           Icon={Icon}

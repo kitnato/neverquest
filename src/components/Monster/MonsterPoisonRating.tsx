@@ -1,25 +1,21 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { ReactComponent as IconHealth } from "@neverquest/icons/health.svg";
-import { ReactComponent as IconPoison } from "@neverquest/icons/poison.svg";
-import {
-  monsterPoisonChance,
-  monsterPoisonLength,
-  monsterPoisonMagnitude,
-} from "@neverquest/state/monster";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_MAXIMUM } from "@neverquest/utilities/constants";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_MAXIMUM } from "@neverquest/data/general";
+import IconHealth from "@neverquest/icons/health.svg?react";
+import IconPoison from "@neverquest/icons/poison.svg?react";
+import { poison, poisonLength, poisonMagnitude } from "@neverquest/state/monster";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function MonsterPoisonRating() {
-  const monsterPoisonChanceValue = useRecoilValue(monsterPoisonChance);
-  const monsterPoisonLengthValue = useRecoilValue(monsterPoisonLength);
-  const monsterPoisonMagnitudeValue = useRecoilValue(monsterPoisonMagnitude);
+  const poisonValue = useRecoilValue(poison);
+  const poisonLengthValue = useRecoilValue(poisonLength);
+  const poisonMagnitudeValue = useRecoilValue(poisonMagnitude);
 
-  if (monsterPoisonChanceValue === 0) {
+  if (poisonValue === 0) {
     return null;
   }
 
@@ -29,16 +25,14 @@ export function MonsterPoisonRating() {
         <OverlayTrigger
           overlay={
             <Popover>
-              <Popover.Header className="text-center">Poison rating details</Popover.Header>
+              <PopoverHeader className="text-center">Poison rating details</PopoverHeader>
 
-              <Popover.Body>
+              <PopoverBody>
                 <DetailsTable>
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
 
-                    <td>
-                      {formatValue({ format: "percentage", value: monsterPoisonChanceValue })}
-                    </td>
+                    <td>{formatValue({ format: "percentage", value: poisonValue })}</td>
                   </tr>
 
                   <tr>
@@ -48,7 +42,7 @@ export function MonsterPoisonRating() {
                       <Stack direction="horizontal" gap={1}>
                         {`-${formatValue({
                           format: "percentage",
-                          value: monsterPoisonMagnitudeValue,
+                          value: poisonMagnitudeValue,
                         })}`}
 
                         <IconImage Icon={IconHealth} size="small" />
@@ -61,17 +55,16 @@ export function MonsterPoisonRating() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
 
-                    <td>{formatValue({ format: "time", value: monsterPoisonLengthValue })}</td>
+                    <td>{formatValue({ format: "time", value: poisonLengthValue })}</td>
                   </tr>
                 </DetailsTable>
-              </Popover.Body>
+              </PopoverBody>
             </Popover>
           }
         >
           <span>
             {formatValue({
-              value:
-                monsterPoisonChanceValue * monsterPoisonMagnitudeValue * monsterPoisonLengthValue,
+              value: poisonValue * poisonMagnitudeValue * poisonLengthValue,
             })}
           </span>
         </OverlayTrigger>

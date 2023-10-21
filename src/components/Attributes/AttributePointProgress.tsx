@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
+import IconEssence from "@neverquest/icons/essence.svg?react";
 import { attributePoints, level } from "@neverquest/state/attributes";
 import { essence } from "@neverquest/state/resources";
 import { formatValue } from "@neverquest/utilities/formatters";
@@ -14,10 +14,12 @@ export function AttributePointProgress() {
   const essenceValue = useRecoilValue(essence);
   const levelValue = useRecoilValue(level);
 
-  const nextTotalCost = Array.from<number>(Array(attributePointsValue + levelValue + 1)).reduce(
-    (aggregator, _, index) => aggregator + getAttributePointCost(index),
-    0,
-  );
+  const nextTotalCost =
+    getAttributePointCost(levelValue) +
+    Array.from<number>(Array(attributePointsValue)).reduce(
+      (aggregator, _, index) => aggregator + getAttributePointCost(levelValue + index + 1),
+      0,
+    );
 
   return (
     <OverlayTrigger overlay={<Tooltip>Essence required for next attribute point.</Tooltip>}>

@@ -2,10 +2,10 @@ import { Card, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
+import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { EssenceLoot } from "@neverquest/components/Loot/EssenceLoot";
 import { Looting } from "@neverquest/components/Loot/Looting";
-import { ReactComponent as IconLooted } from "@neverquest/icons/looted.svg";
+import IconLooted from "@neverquest/icons/looted.svg?react";
 import { progress } from "@neverquest/state/encounter";
 import { hasLooted, itemsLoot } from "@neverquest/state/resources";
 import { isGear, isStackable, isTrinket } from "@neverquest/types/type-guards";
@@ -18,9 +18,21 @@ export function Loot() {
   const progressValue = useRecoilValue(progress);
 
   const stackItemsLoot = [
-    ...stackItems(itemsLootValue.filter(isGear).sort((a, b) => a.name.localeCompare(b.name))),
-    ...stackItems(itemsLootValue.filter(isTrinket).sort((a, b) => a.name.localeCompare(b.name))),
-    ...stackItems(itemsLootValue.filter(isStackable).sort((a, b) => a.name.localeCompare(b.name))),
+    ...stackItems(
+      itemsLootValue
+        .filter(isGear)
+        .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
+    ),
+    ...stackItems(
+      itemsLootValue
+        .filter(isTrinket)
+        .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
+    ),
+    ...stackItems(
+      itemsLootValue
+        .filter(isStackable)
+        .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
+    ),
   ];
 
   return (

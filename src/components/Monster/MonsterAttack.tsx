@@ -5,7 +5,7 @@ import { MonsterAttackMeter } from "@neverquest/components/Monster/MonsterAttack
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useDefend } from "@neverquest/hooks/actions/useDefend";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
-import { ReactComponent as IconAttackRate } from "@neverquest/icons/attack-rate.svg";
+import IconAttackRate from "@neverquest/icons/attack-rate.svg?react";
 import { isAttacking } from "@neverquest/state/character";
 import {
   hasMonsterClosed,

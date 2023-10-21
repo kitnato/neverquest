@@ -3,15 +3,15 @@ import { useRecoilCallback } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { CREW } from "@neverquest/data/caravan";
+import { KEY_SESSION } from "@neverquest/data/general";
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
+import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
 import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import { hireStatus } from "@neverquest/state/caravan";
-import { stage, wildernesses } from "@neverquest/state/encounter";
+import { wildernesses } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
-import { ATTRIBUTE_TYPES, CREW_TYPES } from "@neverquest/types/unions";
-import { KEY_SESSION } from "@neverquest/utilities/constants";
-import { generateWilderness } from "@neverquest/utilities/generators";
-import { getSnapshotGetter } from "@neverquest/utilities/getters";
+import { ATTRIBUTE_TYPES, CREW_TYPES, type CrewStatus } from "@neverquest/types/unions";
+import { getNameStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useInitialize() {
   const generateMonster = useGenerateMonster();
@@ -21,23 +21,26 @@ export function useInitialize() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        if (ls.get(KEY_SESSION) !== null) {
-          return;
+        if (ls.get(KEY_SESSION) === null) {
+          ATTRIBUTE_TYPES.forEach((current) =>
+            set(isAttributeUnlocked(current), { isUnlocked: ATTRIBUTES[current].isUnlocked }),
+          );
+
+          CREW_TYPES.forEach((current) =>
+            set(hireStatus(current), {
+              status: CREW[current].requiredStage === 0 ? ("hired" as CrewStatus) : null,
+            }),
+          );
+
+          set(wildernesses, [
+            generateLocation({
+              allowNSFW: get(allowNSFW),
+              nameStructure: getNameStructure(),
+            }),
+          ]);
+
+          generateMonster();
         }
-
-        ATTRIBUTE_TYPES.forEach((current) =>
-          set(isAttributeUnlocked(current), { isUnlocked: ATTRIBUTES[current].isUnlocked }),
-        );
-
-        CREW_TYPES.forEach((current) => {
-          if (CREW[current].requiredStage === 0) {
-            set(hireStatus(current), { status: "hired" });
-          }
-        });
-
-        set(wildernesses, [generateWilderness({ allowNSFW: get(allowNSFW), stage: get(stage) })]);
-
-        generateMonster();
       },
     [generateMonster],
   );

@@ -2,12 +2,12 @@ import { useRecoilState } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { CONSUMABLES, TRINKETS } from "@neverquest/data/inventory";
-import { ReactComponent as IconArmor } from "@neverquest/icons/armor.svg";
-import { ReactComponent as IconGem } from "@neverquest/icons/gem.svg";
-import { ReactComponent as IconMelee } from "@neverquest/icons/melee.svg";
-import { ReactComponent as IconRanged } from "@neverquest/icons/ranged.svg";
-import { ReactComponent as IconShield } from "@neverquest/icons/shield.svg";
-import { ReactComponent as IconUnknown } from "@neverquest/icons/unknown.svg";
+import IconArmor from "@neverquest/icons/armor.svg?react";
+import IconGem from "@neverquest/icons/gem.svg?react";
+import IconMelee from "@neverquest/icons/melee.svg?react";
+import IconRanged from "@neverquest/icons/ranged.svg?react";
+import IconShield from "@neverquest/icons/shield.svg?react";
+import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { itemsAcquired } from "@neverquest/state/inventory";
 import {
   isArmor,
@@ -23,7 +23,7 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 export function ItemAcquisition() {
   const [itemsAcquiredValue, setItemsAcquired] = useRecoilState(itemsAcquired);
 
-  const handleAnimationEnd = (key: string) => () =>
+  const onAnimationEnd = (key: string) => () =>
     setItemsAcquired((current) => current.filter(({ id }) => key !== id));
 
   if (itemsAcquiredValue.length === 0) {
@@ -73,7 +73,7 @@ export function ItemAcquisition() {
       <div
         className={`position-absolute ${getAnimationClass({ name: "zoomOut", speed: "slower" })}`}
         key={id}
-        onAnimationEnd={handleAnimationEnd(id)}
+        onAnimationEnd={onAnimationEnd(id)}
         style={{ left: -12, top: 12 }}
       >
         <IconImage Icon={Icon} size="small" />

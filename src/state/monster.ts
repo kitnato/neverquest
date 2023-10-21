@@ -11,37 +11,72 @@ import {
   MONSTER_HEALTH,
   POISON,
 } from "@neverquest/data/monster";
-import { AILMENT_PENALTY, BLEED_DELTA } from "@neverquest/data/statistics";
+import { AILMENT_PENALTY, BLEED } from "@neverquest/data/statistics";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
-import { shield, weapon } from "@neverquest/state/items";
-import { skills } from "@neverquest/state/skills";
-import {
-  bleedDamage,
-  essenceBonus,
-  range,
-  totalElementalEffects,
-} from "@neverquest/state/statistics";
+import { range, shield, totalElementalEffects, weapon } from "@neverquest/state/gear";
+import { essenceBonus } from "@neverquest/state/items";
+import { isSkillAcquired } from "@neverquest/state/skills";
+import { isTraitAcquired } from "@neverquest/state/traits";
 import {
   ELEMENTAL_TYPES,
   MONSTER_AILMENT_TYPES,
   type MonsterAilment,
 } from "@neverquest/types/unions";
-import { SIGMOID_X_FINAL } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 import {
   getDamagePerRate,
   getFromRange,
+  getGrowthLinearMapping,
   getGrowthSigmoid,
   getGrowthTriangular,
 } from "@neverquest/utilities/getters";
 
 // SELECTORS
 
-export const bleedDamageTotal = withStateKey("bleedDamageTotal", (key) =>
+export const bleed = withStateKey("bleed", (key) =>
   selector({
-    get: ({ get }) =>
-      get(bleedDamage) * (get(isMonsterAiling("burning")) ? AILMENT_PENALTY.burning : 1),
+    get: ({ get }) => BLEED[get(isTraitAcquired("shredder")) ? "shredder" : "default"],
+    key,
+  }),
+);
+
+export const bleedingDeltaLength = withStateKey("bleedingDeltaLength", (key) =>
+  selector({
+    get: ({ get }) => {
+      const { duration, ticks } = get(bleed);
+
+      return Math.round(duration / ticks);
+    },
+    key,
+  }),
+);
+
+export const blightChance = withStateKey("blightChance", (key) =>
+  selector({
+    get: ({ get }) => {
+      const stageValue = get(stage);
+
+      const {
+        boss,
+        chance: { maximum, minimum },
+        stageRequired,
+      } = BLIGHT;
+
+      if (stageValue < stageRequired) {
+        return 0;
+      }
+
+      return (
+        getFromRange({
+          factor: getGrowthSigmoid(
+            getGrowthLinearMapping({ offset: stageRequired, stage: stageValue }),
+          ),
+          maximum,
+          minimum,
+        }) * (get(isBoss) ? boss : 1)
+      );
+    },
     key,
   }),
 );
@@ -55,15 +90,17 @@ export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
 
         switch (parameter) {
           case "bleeding": {
-            return get(skills("anatomy")) && abilityChance > 0 && gearClass === "piercing";
+            return get(isSkillAcquired("anatomy")) && abilityChance > 0 && gearClass === "piercing";
           }
 
           case "staggered": {
-            return get(skills("shieldcraft")) && get(shield).stagger > 0;
+            return get(isSkillAcquired("shieldcraft")) && get(shield).stagger > 0;
           }
 
           case "stunned": {
-            return get(skills("traumatology")) && abilityChance > 0 && gearClass === "blunt";
+            return (
+              get(isSkillAcquired("traumatology")) && abilityChance > 0 && gearClass === "blunt"
+            );
           }
 
           case "burning":
@@ -93,7 +130,7 @@ export const canReceiveAilments = withStateKey("canReceiveAilments", (key) =>
 
 export const hasMonsterClosed = withStateKey("hasMonsterClosed", (key) =>
   selector({
-    get: ({ get }) => get(monsterDistance) === 0,
+    get: ({ get }) => get(distance) === 0,
     key,
   }),
 );
@@ -126,30 +163,6 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
           base - base * factor * (1 + get(progress) * bonus) * (get(isBoss) ? boss : 1),
           minimum,
         ),
-      );
-    },
-    key,
-  }),
-);
-
-export const monsterBlightChance = withStateKey("monsterBlightChance", (key) =>
-  selector({
-    get: ({ get }) => {
-      const stageValue = get(stage);
-
-      const {
-        boss,
-        chance: { maximum, minimum },
-        stageRequired,
-      } = BLIGHT;
-
-      if (stageValue < stageRequired) {
-        return 0;
-      }
-
-      return (
-        getFromRange({ factor: getGrowthSigmoid(stageValue), maximum, minimum }) *
-        (get(isBoss) ? boss : 1)
       );
     },
     key,
@@ -238,8 +251,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
       return {
         essence: Math.round(
           (essence + essence * factor) * 1 +
-            get(progress) * bonus +
-            (isBossValue ? boss : 0) * (1 + get(essenceBonus)),
+            get(progress) * bonus * (isBossValue ? boss : 1) * (1 + get(essenceBonus)),
         ),
         gems: isBossValue
           ? 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL)
@@ -250,7 +262,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
   }),
 );
 
-export const monsterPoisonChance = withStateKey("monsterPoisonChance", (key) =>
+export const poison = withStateKey("poison", (key) =>
   selector({
     get: ({ get }) => {
       const stageValue = get(stage);
@@ -266,15 +278,20 @@ export const monsterPoisonChance = withStateKey("monsterPoisonChance", (key) =>
       }
 
       return (
-        getFromRange({ factor: getGrowthSigmoid(stageValue), maximum, minimum }) *
-        (get(isBoss) ? boss : 1)
+        getFromRange({
+          factor: getGrowthSigmoid(
+            getGrowthLinearMapping({ offset: stageRequired, stage: stageValue }),
+          ),
+          maximum,
+          minimum,
+        }) * (get(isBoss) ? boss : 1)
       );
     },
     key,
   }),
 );
 
-export const monsterPoisonLength = withStateKey("monsterPoisonLength", (key) =>
+export const poisonLength = withStateKey("poisonLength", (key) =>
   selector({
     get: ({ get }) => {
       const {
@@ -284,7 +301,10 @@ export const monsterPoisonLength = withStateKey("monsterPoisonLength", (key) =>
 
       return getFromRange({
         factor: getGrowthSigmoid(
-          (SIGMOID_X_FINAL / stageRequired) * (get(stage) + 1 - stageRequired),
+          getGrowthLinearMapping({
+            offset: stageRequired,
+            stage: get(stage),
+          }),
         ),
         maximum,
         minimum,
@@ -294,7 +314,7 @@ export const monsterPoisonLength = withStateKey("monsterPoisonLength", (key) =>
   }),
 );
 
-export const monsterPoisonMagnitude = withStateKey("monsterPoisonMagnitude", (key) =>
+export const poisonMagnitude = withStateKey("poisonMagnitude", (key) =>
   selector({
     get: ({ get }) => {
       const {
@@ -304,7 +324,10 @@ export const monsterPoisonMagnitude = withStateKey("monsterPoisonMagnitude", (ke
 
       return getFromRange({
         factor: getGrowthSigmoid(
-          (SIGMOID_X_FINAL / stageRequired) * (get(stage) + 1 - stageRequired),
+          getGrowthLinearMapping({
+            offset: stageRequired,
+            stage: get(stage),
+          }),
         ),
         maximum,
         minimum,
@@ -315,6 +338,22 @@ export const monsterPoisonMagnitude = withStateKey("monsterPoisonMagnitude", (ke
 );
 
 // ATOMS
+
+export const bleedingDelta = withStateKey("bleedingDelta", (key) =>
+  atom({
+    default: bleedingDeltaLength,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
+export const distance = withStateKey("distance", (key) =>
+  atom({
+    default: range,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
 
 export const isMonsterNew = withStateKey("isMonsterNew", (key) =>
   atom({
@@ -335,22 +374,6 @@ export const monsterAilmentDuration = withStateKey("monsterAilmentDuration", (ke
 export const monsterAttackDuration = withStateKey("monsterAttackDuration", (key) =>
   atom({
     default: 0,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
-export const monsterBleedingDelta = withStateKey("monsterBleedingDelta", (key) =>
-  atom({
-    default: BLEED_DELTA,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
-export const monsterDistance = withStateKey("monsterDistance", (key) =>
-  atom({
-    default: range,
     effects: [handleLocalStorage({ key })],
     key,
   }),

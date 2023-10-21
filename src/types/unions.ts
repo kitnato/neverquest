@@ -103,14 +103,16 @@ export type Item = Consumable | Gear | Trinket;
 
 export type Location = "caravan" | "wilderness";
 
-export type Mastery =
-  | "butchery"
-  | "cruelty"
-  | "finesse"
-  | "marksmanship"
-  | "might"
-  | "resilience"
-  | "stability";
+export const MASTERY_TYPES = [
+  "butchery",
+  "cruelty",
+  "finesse",
+  "marksmanship",
+  "might",
+  "resilience",
+  "stability",
+] as const;
+export type Mastery = (typeof MASTERY_TYPES)[number];
 
 export const MONSTER_AILMENT_TYPES = [
   "bleeding",
@@ -141,7 +143,9 @@ export const SHOWING_TYPES = [
   "essence",
   "gameOver",
   "gearClass",
+  "grip",
   "healthDetails",
+  "location",
   "loot",
   "masteries",
   "monsterAilments",
@@ -153,6 +157,7 @@ export const SHOWING_TYPES = [
   "stamina",
   "staminaDetails",
   "statistics",
+  "traits",
   "thorns",
   "weapon",
   "weight",
@@ -176,6 +181,8 @@ export type Skill = (typeof SKILL_TYPES)[number];
 
 export type StateKey =
   | "absorbedEssence"
+  | "acquiredTraits"
+  | "activeCrew"
   | "allowNSFW"
   | "ammunition"
   | "ammunitionMaximum"
@@ -193,11 +200,15 @@ export type StateKey =
   | "autoEquip"
   | "blacksmithInventory"
   | "bleed"
+  | "bleedChance"
   | "bleedDamage"
   | "bleedDamageTotal"
+  | "bleedingDelta"
+  | "bleedingDeltaLength"
   | "bleedRating"
   | "blight"
   | "blightAmount"
+  | "blightChance"
   | "blightMagnitude"
   | "block"
   | "canAffordInfusion"
@@ -209,7 +220,6 @@ export type StateKey =
   | "canReceiveAilment"
   | "canReceiveAilments"
   | "confirmationWarnings"
-  | "crewActive"
   | "criticalChance"
   | "criticalDamage"
   | "criticalRating"
@@ -219,6 +229,7 @@ export type StateKey =
   | "damageTotal"
   | "deflection"
   | "deltas"
+  | "distance"
   | "dodge"
   | "elementalEffects"
   | "encumbrance"
@@ -250,11 +261,12 @@ export type StateKey =
   | "isAttributeUnlocked"
   | "isBlighted"
   | "isBoss"
-  | "isCrewHired"
+  | "isCaravanHired"
   | "isGameOver"
   | "isHealthAtMaximum"
   | "isHealthLow"
   | "isImmortal"
+  | "isInfusionAtMaximum"
   | "isInventoryFull"
   | "isInventoryOpen"
   | "isLooting"
@@ -268,9 +280,11 @@ export type StateKey =
   | "isRegenerating"
   | "isShowing"
   | "isShowingEverything"
+  | "isSkillAcquired"
   | "isStageCompleted"
   | "isStageStarted"
   | "isStaminaAtMaximum"
+  | "isTraitAcquired"
   | "isWilderness"
   | "itemsAcquired"
   | "itemsLoot"
@@ -279,7 +293,6 @@ export type StateKey =
   | "locationName"
   | "lootingDuration"
   | "lowHealthWarning"
-  | "masteriesAcquired"
   | "masteryCost"
   | "masteryProgress"
   | "masteryRank"
@@ -288,21 +301,15 @@ export type StateKey =
   | "monsterAilmentDuration"
   | "monsterAttackDuration"
   | "monsterAttackRate"
-  | "monsterBleedingDelta"
-  | "monsterBlightChance"
   | "monsterDamage"
   | "monsterDamagePerSecond"
   | "monsterDamageTotal"
   | "monsterDamageTotalPerSecond"
-  | "monsterDistance"
   | "monsterElement"
   | "monsterHealth"
   | "monsterHealthMaximum"
   | "monsterLoot"
   | "monsterName"
-  | "monsterPoisonChance"
-  | "monsterPoisonLength"
-  | "monsterPoisonMagnitude"
   | "name"
   | "nextAttributePoint"
   | "notifyOverEncumbrance"
@@ -311,10 +318,14 @@ export type StateKey =
   | "parryAbsorption"
   | "parryDamage"
   | "parryRating"
+  | "poison"
   | "poisonDuration"
+  | "poisonLength"
+  | "poisonMagnitude"
   | "powerBonusBoost"
   | "progress"
   | "progressMaximum"
+  | "progressReduction"
   | "protection"
   | "range"
   | "recoveryDuration"
@@ -324,13 +335,13 @@ export type StateKey =
   | "regenerationRate"
   | "reserveRegenerationAmount"
   | "reserveRegenerationRate"
+  | "selectedTrait"
   | "shield"
   | "showDamagePerSecond"
+  | "showEssenceRequired"
   | "showGearComparison"
   | "showGearLevel"
   | "skillPrice"
-  | "skills"
-  | "skillsTrained"
   | "stability"
   | "stage"
   | "stageMaximum"
@@ -340,12 +351,32 @@ export type StateKey =
   | "staminaMaximum"
   | "staminaMaximumTotal"
   | "statusElement"
+  | "stun"
   | "stunRating"
   | "thorns"
   | "totalElementalEffects"
+  | "trainedSkills"
   | "trinketProperties"
+  | "unlockedMasteries"
   | "weapon"
   | "wildernesses";
+
+export const TRAIT_TYPES = [
+  "brawler",
+  "bruiser",
+  "colossus",
+  "executioner",
+  "field surgeon",
+  "inoculated",
+  "ninja",
+  "nudist",
+  "sharpshooter",
+  "shredder",
+  "stalwart",
+  "tank",
+  "tormentor",
+] as const;
+export type Trait = (typeof TRAIT_TYPES)[number];
 
 export const TRINKET_TYPES = [
   "ammunition pouch",

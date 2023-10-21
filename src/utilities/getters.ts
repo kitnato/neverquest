@@ -1,6 +1,13 @@
 import type { RecoilValue, Snapshot } from "recoil";
 
 import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
+import { NAME_STRUCTURE, PROGRESS_REDUCTION } from "@neverquest/data/encounter";
+import {
+  CLASS_ANIMATED,
+  CLASS_ANIMATE_PREFIX,
+  GROWTH_MAXIMUM,
+  RETIREMENT_MINIMUM,
+} from "@neverquest/data/general";
 import {
   ARMOR_SPECIFICATIONS,
   SHIELD_SPECIFICATIONS,
@@ -8,12 +15,11 @@ import {
   WEAPON_MODIFIER,
   WEAPON_SPECIFICATIONS,
 } from "@neverquest/data/inventory";
-import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
+import type { ArmorClass, NameStructure, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type { GeneratorRange } from "@neverquest/types";
 import { isGeneratorRanges } from "@neverquest/types/type-guards";
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
 import type { Grip } from "@neverquest/types/unions";
-import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/utilities/constants";
 
 export function getAnimationClass({
   isInfinite,
@@ -118,15 +124,51 @@ export function getGearPrice({
   return Math.round((price.minimum + price.maximum * factor) * modifier);
 }
 
+export function getGrowthLinearMapping({ offset, stage }: { offset: number; stage: number }) {
+  return ((stage - offset) * (GROWTH_MAXIMUM - 1)) / (GROWTH_MAXIMUM - offset - 1) + 1;
+}
+
 // https://en.wikipedia.org/wiki/Sigmoid_function
-// f(0) = ~0, f(50) = ~0.78, f(100) = ~1
+// f(1) = 0, f(50) = ~0.6, f(100) = ~1
 export function getGrowthSigmoid(x: number) {
-  return 1 / (1 + 300 * Math.pow(Math.E, -0.11 * x));
+  return 1 / (1 + Math.pow(Math.E, -0.13 * (x - 47))) - 0.0026 * Math.pow(Math.E, -0.08 * x);
 }
 
 // https://en.wikipedia.org/wiki/Triangular_number
 export function getGrowthTriangular(x: number) {
   return (x * (x + 1)) / 2;
+}
+
+export function getNameStructure(): NameStructure {
+  const chance = Math.random();
+  let cumulativeProbability = 0;
+
+  for (const [key, probability] of Object.entries(NAME_STRUCTURE).toSorted(
+    ([, current1], [, current2]) => current1 - current2,
+  )) {
+    cumulativeProbability += probability;
+
+    if (chance <= cumulativeProbability) {
+      return key as NameStructure;
+    }
+  }
+
+  return "none";
+}
+
+export function getProgressReduction(stage: number) {
+  const { maximum, minimum } = PROGRESS_REDUCTION;
+
+  return getFromRange({
+    factor: getGrowthSigmoid(
+      getGrowthLinearMapping({
+        offset: RETIREMENT_MINIMUM,
+        stage,
+      }),
+    ),
+    maximum,
+    minimum,
+  });
 }
 
 export function getRange({

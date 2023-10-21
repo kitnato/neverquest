@@ -1,13 +1,13 @@
 import { INFUSABLES, TRINKETS } from "./inventory";
-import { ReactComponent as IconAlchemist } from "@neverquest/icons/alchemist.svg";
-import { ReactComponent as IconBlacksmith } from "@neverquest/icons/blacksmith.svg";
-import { ReactComponent as IconFletcher } from "@neverquest/icons/fletcher.svg";
-import { ReactComponent as IconMedic } from "@neverquest/icons/medic.svg";
-import { ReactComponent as IconMercenary } from "@neverquest/icons/mercenary.svg";
-import { ReactComponent as IconMerchant } from "@neverquest/icons/merchant.svg";
-import { ReactComponent as IconOccultist } from "@neverquest/icons/occultist.svg";
-import { ReactComponent as IconTailor } from "@neverquest/icons/tailor.svg";
-import { ReactComponent as IconWitch } from "@neverquest/icons/witch.svg";
+import IconAlchemist from "@neverquest/icons/alchemist.svg?react";
+import IconBlacksmith from "@neverquest/icons/blacksmith.svg?react";
+import IconFletcher from "@neverquest/icons/fletcher.svg?react";
+import IconMedic from "@neverquest/icons/medic.svg?react";
+import IconMercenary from "@neverquest/icons/mercenary.svg?react";
+import IconMerchant from "@neverquest/icons/merchant.svg?react";
+import IconOccultist from "@neverquest/icons/occultist.svg?react";
+import IconTailor from "@neverquest/icons/tailor.svg?react";
+import IconWitch from "@neverquest/icons/witch.svg?react";
 import type {
   ArmorClass,
   ArtifactType,
@@ -52,7 +52,7 @@ export const CREW: Record<
     requiredStage: 10,
   },
   fletcher: {
-    description: "Crafts ranges weapons and provides ammunition.",
+    description: "Crafts ranged weapons and provides ammunition.",
     Icon: IconFletcher,
     interaction: "Craft",
     monologues: { 1: "Tired of monster breath?" },
@@ -126,13 +126,13 @@ export const CREW: Record<
 };
 
 export const CREW_ORDER: Crew[] = Object.entries(CREW)
-  .sort(([, a], [, b]) => a.requiredStage - b.requiredStage)
-  .map(([type]) => type as Crew);
+  .toSorted(([, current1], [, current2]) => current1.requiredStage - current2.requiredStage)
+  .map(([current]) => current as Crew);
 
 export const OCCULTIST_PURGE_PRICE_MULTIPLIER = 0.1;
 
-export const MEDIC_PRICE_SURGERY = 6;
-export const MEDIC_PRICE_SURGERY_CRITICAL = 15;
+export const MEDIC_PRICE_SURGERY = 25;
+export const MEDIC_PRICE_SURGERY_CRITICAL = 100;
 
 export const MERCHANT_OFFERS: Record<
   number,

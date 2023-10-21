@@ -31,16 +31,18 @@ export function LabelledProgressBar({
     height: number;
   }> = isSizeNormal ? {} : { height: 10 };
 
-  switch (attached) {
-    case "above": {
-      style.borderTopLeftRadius = 0;
-      style.borderTopRightRadius = 0;
-      break;
-    }
-    case "below": {
-      style.borderBottomLeftRadius = 0;
-      style.borderBottomRightRadius = 0;
-      break;
+  if (attached) {
+    switch (attached) {
+      case "above": {
+        style.borderTopLeftRadius = 0;
+        style.borderTopRightRadius = 0;
+        break;
+      }
+      case "below": {
+        style.borderBottomLeftRadius = 0;
+        style.borderBottomRightRadius = 0;
+        break;
+      }
     }
   }
 

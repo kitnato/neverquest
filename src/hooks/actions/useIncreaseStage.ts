@@ -1,12 +1,12 @@
 import { useRecoilCallback } from "recoil";
 
 import { CREW, CREW_ORDER } from "@neverquest/data/caravan";
+import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
 import { hireStatus } from "@neverquest/state/caravan";
 import { stage, wildernesses } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
-import { generateWilderness } from "@neverquest/utilities/generators";
-import { getSnapshotGetter } from "@neverquest/utilities/getters";
+import { getNameStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useIncreaseStage() {
   return useRecoilCallback(
@@ -30,7 +30,10 @@ export function useIncreaseStage() {
 
         set(wildernesses, (current) => [
           ...current,
-          generateWilderness({ allowNSFW: get(allowNSFW), stage: nextStage }),
+          generateLocation({
+            allowNSFW: get(allowNSFW),
+            nameStructure: getNameStructure(),
+          }),
         ]);
 
         set(stage, nextStage);

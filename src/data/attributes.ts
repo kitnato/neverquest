@@ -1,24 +1,31 @@
 import { RESERVES } from "@neverquest/data/reserves";
-import { ReactComponent as IconAgility } from "@neverquest/icons/agility.svg";
-import { ReactComponent as IconDexterity } from "@neverquest/icons/dexterity.svg";
-import { ReactComponent as IconEndurance } from "@neverquest/icons/endurance.svg";
-import { ReactComponent as IconFortitude } from "@neverquest/icons/fortitude.svg";
-import { ReactComponent as IconPerception } from "@neverquest/icons/perception.svg";
-import { ReactComponent as IconSpeed } from "@neverquest/icons/speed.svg";
-import { ReactComponent as IconStrength } from "@neverquest/icons/strength.svg";
-import { ReactComponent as IconVigor } from "@neverquest/icons/vigor.svg";
-import { ReactComponent as IconVitality } from "@neverquest/icons/vitality.svg";
-import type { AttributeData } from "@neverquest/types";
-import type { Attribute } from "@neverquest/types/unions";
+import IconAgility from "@neverquest/icons/agility.svg?react";
+import IconDexterity from "@neverquest/icons/dexterity.svg?react";
+import IconEndurance from "@neverquest/icons/endurance.svg?react";
+import IconFortitude from "@neverquest/icons/fortitude.svg?react";
+import IconPerception from "@neverquest/icons/perception.svg?react";
+import IconSpeed from "@neverquest/icons/speed.svg?react";
+import IconStrength from "@neverquest/icons/strength.svg?react";
+import IconVigor from "@neverquest/icons/vigor.svg?react";
+import IconVitality from "@neverquest/icons/vitality.svg?react";
+import type { AttributeOrMasteryBaseData } from "@neverquest/types";
+import type { Attribute, Showing } from "@neverquest/types/unions";
 
 export const ATTRIBUTE_COST_BASE = 2;
 
-export const ATTRIBUTES: Record<Attribute, AttributeData> = {
+export const ATTRIBUTES: Record<
+  Attribute,
+  AttributeOrMasteryBaseData & {
+    isUnlocked: boolean;
+    powerBonus: number;
+    shows?: Showing[];
+  }
+> = {
   agility: {
-    base: 0,
+    base: 0.03,
     description: "Increases chance to dodge an attack.",
     Icon: IconAgility,
-    increment: 0.04,
+    increment: 0.03,
     isUnlocked: false,
     maximum: 0.8,
     powerBonus: 0.005,
@@ -39,7 +46,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
     increment: 5,
     isUnlocked: true,
     powerBonus: 0.01,
-    shows: "staminaDetails",
+    shows: ["stamina", "staminaDetails"],
   },
   fortitude: {
     base: 0,
@@ -66,7 +73,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
     isUnlocked: true,
     maximum: 0.9,
     powerBonus: 0.005,
-    shows: "attackRateDetails",
+    shows: ["attackRateDetails"],
   },
   strength: {
     base: 0,
@@ -75,7 +82,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
     increment: 2,
     isUnlocked: true,
     powerBonus: 0.01,
-    shows: "damageDetails",
+    shows: ["damageDetails"],
   },
   vigor: {
     base: 0,
@@ -93,7 +100,7 @@ export const ATTRIBUTES: Record<Attribute, AttributeData> = {
     increment: 10,
     isUnlocked: true,
     powerBonus: 0.01,
-    shows: "healthDetails",
+    shows: ["healthDetails"],
   },
 };
 

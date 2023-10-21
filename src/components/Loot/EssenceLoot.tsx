@@ -1,11 +1,10 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
-import { deltas } from "@neverquest/state/deltas";
+import IconEssence from "@neverquest/icons/essence.svg?react";
 import { essenceLoot } from "@neverquest/state/resources";
 import { formatValue } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
@@ -14,7 +13,7 @@ export function EssenceLoot() {
   const essenceLootValue = useRecoilValue(essenceLoot);
 
   useDeltaText({
-    delta: deltas("essenceLoot"),
+    delta: "essenceLoot",
     value: essenceLoot,
   });
 
@@ -30,7 +29,7 @@ export function EssenceLoot() {
         tooltip="Looted essence"
       />
 
-      <FloatingText delta="essenceLoot" />
+      <FloatingTextQueue delta="essenceLoot" />
     </Stack>
   );
 }

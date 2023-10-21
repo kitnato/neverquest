@@ -4,14 +4,14 @@ import { Stack } from "react-bootstrap";
 
 import { PurchaseItemButton } from "@neverquest/components/Caravan/PurchaseItemButton";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ItemDisplay } from "@neverquest/components/Items/ItemDisplay";
+import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { CONSUMABLES } from "@neverquest/data/inventory";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
-import { ReactComponent as IconEssence } from "@neverquest/icons/essence.svg";
+import IconEssence from "@neverquest/icons/essence.svg?react";
 import type { ConsumableItem } from "@neverquest/types";
 import type { Consumable } from "@neverquest/types/unions";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
@@ -27,13 +27,6 @@ export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
   };
   const { price } = itemWithID;
 
-  const handlePurchase = () => {
-    acquireItem(itemWithID);
-    transactEssence(-itemWithID.price);
-
-    setID(nanoid());
-  };
-
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <ItemDisplay item={itemWithID} overlayPlacement="right" />
@@ -41,7 +34,15 @@ export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
       <Stack direction="horizontal" gap={3}>
         <IconDisplay contents={formatValue({ value: price })} Icon={IconEssence} tooltip="Price" />
 
-        <PurchaseItemButton handlePurchase={handlePurchase} item={itemWithID} />
+        <PurchaseItemButton
+          item={itemWithID}
+          onPurchase={() => {
+            acquireItem(itemWithID);
+            transactEssence(-itemWithID.price);
+
+            setID(nanoid());
+          }}
+        />
       </Stack>
     </div>
   );

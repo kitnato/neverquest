@@ -2,18 +2,18 @@ import { FormSelect, Stack } from "react-bootstrap";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { TRANSMUTE_COST, TRANSMUTE_YIELD } from "@neverquest/data/caravan";
-import { ReactComponent as IconGem } from "@neverquest/icons/gem.svg";
+import IconGem from "@neverquest/icons/gem.svg?react";
 import { GEM_TYPES, type Gem } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function SelectGem({
   gem,
-  handleSelect,
   omit,
+  onSelect,
 }: {
   gem: Gem;
-  handleSelect: (gem: Gem) => void;
   omit?: Gem;
+  onSelect: (gem: Gem) => void;
 }) {
   return (
     <Stack direction="horizontal" gap={1}>
@@ -21,7 +21,7 @@ export function SelectGem({
         contents={
           <FormSelect
             onChange={({ target: { value } }) => {
-              handleSelect(value as Gem);
+              onSelect(value as Gem);
             }}
             value={gem}
           >

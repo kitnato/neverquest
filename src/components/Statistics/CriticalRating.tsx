@@ -1,28 +1,23 @@
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconCriticalChance } from "@neverquest/icons/critical-chance.svg";
-import { ReactComponent as IconCriticalDamage } from "@neverquest/icons/critical-damage.svg";
-import { ReactComponent as IconCriticalRating } from "@neverquest/icons/critical-rating.svg";
-import { ReactComponent as IconDamage } from "@neverquest/icons/damage.svg";
-import { ReactComponent as IconDexterity } from "@neverquest/icons/dexterity.svg";
-import { ReactComponent as IconPerception } from "@neverquest/icons/perception.svg";
-import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
-import { attributeStatistic } from "@neverquest/state/attributes";
-import { deltas } from "@neverquest/state/deltas";
+import IconCriticalChance from "@neverquest/icons/critical-chance.svg?react";
+import IconCriticalDamage from "@neverquest/icons/critical-damage.svg?react";
+import IconCriticalRating from "@neverquest/icons/critical-rating.svg?react";
+import IconDamage from "@neverquest/icons/damage.svg?react";
+import IconDexterity from "@neverquest/icons/dexterity.svg?react";
+import IconPerception from "@neverquest/icons/perception.svg?react";
+import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
+import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
-import { skills } from "@neverquest/state/skills";
-import { attributePowerBonus, criticalRating, criticalStrike } from "@neverquest/state/statistics";
-import {
-  CLASS_TABLE_CELL_ITALIC,
-  LABEL_EMPTY,
-  LABEL_SEPARATOR,
-} from "@neverquest/utilities/constants";
+import { isSkillAcquired } from "@neverquest/state/skills";
+import { criticalRating, criticalStrike } from "@neverquest/state/statistics";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function CriticalRating() {
@@ -33,11 +28,11 @@ export function CriticalRating() {
   const criticalRatingValue = useRecoilValue(criticalRating);
   const criticalStrikeValue = useRecoilValue(criticalStrike);
   const isShowingCriticalRating = useRecoilValue(isShowing("criticalRating"));
-  const assassinationValue = useRecoilValue(skills("assassination"));
+  const assassinationValue = useRecoilValue(isSkillAcquired("assassination"));
 
   useDeltaText({
-    delta: deltas("criticalRating"),
-    stop: ({ previous }) => previous === null || !assassinationValue,
+    delta: "criticalRating",
+    stop: () => !assassinationValue,
     value: criticalRating,
   });
 
@@ -52,9 +47,9 @@ export function CriticalRating() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <Popover.Header className="text-center">Critical rating details</Popover.Header>
+                <PopoverHeader className="text-center">Critical rating details</PopoverHeader>
 
-                <Popover.Body>
+                <PopoverBody>
                   <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
@@ -72,11 +67,11 @@ export function CriticalRating() {
                             decimals: 0,
                             format: "percentage",
                             value: dexterity,
-                          })} chance `}
+                          })} chance`}
 
                           {dexterityPowerBonus > 0 && (
                             <>
-                              {LABEL_SEPARATOR}
+                              <span>{LABEL_SEPARATOR}</span>
 
                               <IconImage Icon={IconTomeOfPower} size="small" />
 
@@ -106,11 +101,11 @@ export function CriticalRating() {
                             decimals: 0,
                             format: "percentage",
                             value: perception,
-                          })} damage `}
+                          })} damage`}
 
                           {perceptionPowerBonus > 0 && (
                             <>
-                              {LABEL_SEPARATOR}
+                              <span>{LABEL_SEPARATOR}</span>
 
                               <IconImage Icon={IconTomeOfPower} size="small" />
 
@@ -136,7 +131,7 @@ export function CriticalRating() {
                       </td>
                     </tr>
                   </DetailsTable>
-                </Popover.Body>
+                </PopoverBody>
               </Popover>
             }
             trigger={assassinationValue ? ["hover", "focus"] : []}
@@ -144,7 +139,7 @@ export function CriticalRating() {
             <span>{assassinationValue ? criticalRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>
 
-          <FloatingText delta="criticalRating" />
+          <FloatingTextQueue delta="criticalRating" />
         </Stack>
       }
       Icon={IconCriticalRating}

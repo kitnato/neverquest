@@ -1,33 +1,36 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconBlock } from "@neverquest/icons/block.svg";
-import { deltas } from "@neverquest/state/deltas";
+import IconBlock from "@neverquest/icons/block.svg?react";
+import { weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
-import { weapon } from "@neverquest/state/items";
 import { block } from "@neverquest/state/statistics";
+import { isTraitAcquired } from "@neverquest/state/traits";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 export function Block() {
   const blockValue = useRecoilValue(block);
   const isShowingBlock = useRecoilValue(isShowing("block"));
+  const isTraitAcquiredColossus = useRecoilValue(isTraitAcquired("colossus"));
   const weaponValue = useRecoilValue(weapon);
 
+  const isEmpty =
+    !isShowingBlock ||
+    isRanged(weaponValue) ||
+    (isMelee(weaponValue) && !isTraitAcquiredColossus && weaponValue.grip === "two-handed");
+
   useDeltaText({
-    delta: deltas("block"),
+    delta: "block",
     format: "percentage",
+    stop: () => isEmpty,
     value: block,
   });
 
-  if (
-    !isShowingBlock ||
-    isRanged(weaponValue) ||
-    (isMelee(weaponValue) && weaponValue.grip === "two-handed")
-  ) {
+  if (isEmpty) {
     return null;
   }
 
@@ -37,7 +40,7 @@ export function Block() {
         <Stack direction="horizontal">
           <span>{formatValue({ format: "percentage", value: blockValue })}</span>
 
-          <FloatingText delta="block" />
+          <FloatingTextQueue delta="block" />
         </Stack>
       }
       Icon={IconBlock}

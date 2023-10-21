@@ -1,22 +1,17 @@
 import { useRecoilValue } from "recoil";
 
-import { TrainedSkill } from "@neverquest/components/Skills/TrainedSkill";
-import { SKILLS } from "@neverquest/data/skills";
-import { skillsTrained } from "@neverquest/state/skills";
-import type { Skill } from "@neverquest/types/unions";
-
-const ALL_SKILLS = Object.entries(SKILLS)
-  .sort(([a], [b]) => a.localeCompare(b))
-  .map(([type]) => type as Skill);
+import { SkillDisplay } from "@neverquest/components/Skills/SkillDisplay";
+import { trainedSkills } from "@neverquest/state/skills";
+import { SKILL_TYPES } from "@neverquest/types/unions";
 
 export function Skills() {
-  const skillsTrainedValue = Object.values(useRecoilValue(skillsTrained));
+  const trainedSkillsValue = useRecoilValue(trainedSkills);
 
-  return skillsTrainedValue.every((isSkillTrained) => !isSkillTrained) ? (
+  return Object.values(trainedSkillsValue).every((current) => !current) ? (
     <span className="fst-italic">None.</span>
   ) : (
-    ALL_SKILLS.sort((a, b) => a.localeCompare(b)).map((current) => (
-      <TrainedSkill key={current} skill={current} />
-    ))
+    SKILL_TYPES.map(
+      (current) => trainedSkillsValue[current] && <SkillDisplay key={current} skill={current} />,
+    )
   );
 }

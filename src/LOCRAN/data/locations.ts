@@ -15,7 +15,15 @@ export const LOCATIONS: LocationData[] = [
     name: "antechamber",
   },
   {
+    canPluralize: true,
+    name: "apartment",
+  },
+  {
     name: "archipelago",
+  },
+  {
+    canPluralize: true,
+    name: "archive",
   },
   {
     name: "arena",
@@ -65,6 +73,10 @@ export const LOCATIONS: LocationData[] = [
     name: "brothel",
   },
   {
+    canPluralize: true,
+    name: "building",
+  },
+  {
     name: "bunker",
   },
   {
@@ -72,6 +84,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "cage",
+  },
+  {
+    name: "caliphate",
   },
   {
     name: "campsite",
@@ -116,7 +131,13 @@ export const LOCATIONS: LocationData[] = [
     name: "chasm",
   },
   {
+    name: "church",
+  },
+  {
     name: "circus",
+  },
+  {
+    name: "citadel",
   },
   {
     name: "city",
@@ -171,10 +192,20 @@ export const LOCATIONS: LocationData[] = [
     name: "crematorium",
   },
   {
+    canPluralize: true,
+    name: "crypt",
+  },
+  {
+    name: "cul-de-sac",
+  },
+  {
     name: "den",
   },
   {
     name: "depths",
+  },
+  {
+    name: "descent",
   },
   {
     name: "desert",
@@ -190,6 +221,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "dominion",
+  },
+  {
+    name: "dreadlands",
   },
   {
     name: "dream",
@@ -221,6 +255,7 @@ export const LOCATIONS: LocationData[] = [
     name: "enclosure",
   },
   {
+    canPluralize: true,
     name: "estate",
   },
   {
@@ -277,6 +312,9 @@ export const LOCATIONS: LocationData[] = [
   {
     canPluralize: true,
     name: "gulch",
+  },
+  {
+    name: "hamlet",
   },
   {
     name: "heap",
@@ -350,6 +388,7 @@ export const LOCATIONS: LocationData[] = [
     name: "lair",
   },
   {
+    canPluralize: true,
     name: "lake",
   },
   {
@@ -365,6 +404,10 @@ export const LOCATIONS: LocationData[] = [
   {
     isNSFW: true,
     name: "lavatory",
+  },
+  {
+    canPluralize: true,
+    name: "library",
   },
   {
     name: "maelstrom",
@@ -412,6 +455,9 @@ export const LOCATIONS: LocationData[] = [
     name: "morass",
   },
   {
+    name: "mosque",
+  },
+  {
     canPluralize: true,
     name: "mountain",
   },
@@ -420,6 +466,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "nebula",
+  },
+  {
+    name: "necropolis",
   },
   {
     name: "netherworld",
@@ -465,6 +514,13 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "passageway",
+  },
+  {
+    name: "path",
+  },
+  {
+    canPluralize: true,
+    name: "pathway",
   },
   {
     canPluralize: true,
@@ -518,6 +574,9 @@ export const LOCATIONS: LocationData[] = [
     name: "retreat",
   },
   {
+    name: "rift",
+  },
+  {
     name: "river",
   },
   {
@@ -525,7 +584,16 @@ export const LOCATIONS: LocationData[] = [
     name: "ruin",
   },
   {
+    name: "sacristy",
+  },
+  {
     name: "sanctuary",
+  },
+  {
+    name: "sanctum",
+  },
+  {
+    name: "sands",
   },
   {
     name: "savannah",
@@ -564,7 +632,7 @@ export const LOCATIONS: LocationData[] = [
     name: "strand",
   },
   {
-    name: "strip-mine",
+    name: "stripmine",
   },
   {
     name: "sub-basement",

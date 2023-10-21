@@ -1,24 +1,24 @@
 import { useEffect } from "react";
-import { OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingText } from "@neverquest/components/FloatingText";
+import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconImage } from "@neverquest/components/IconImage";
 import { RegenerationMeter } from "@neverquest/components/Reserves/RegenerationMeter";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { ReactComponent as IconFortitude } from "@neverquest/icons/fortitude.svg";
-import { ReactComponent as IconRegenerationAmount } from "@neverquest/icons/regeneration-amount.svg";
-import { ReactComponent as IconRegenerationRate } from "@neverquest/icons/regeneration-rate.svg";
-import { ReactComponent as IconTomeOfPower } from "@neverquest/icons/tome-of-power.svg";
-import { ReactComponent as IconVigor } from "@neverquest/icons/vigor.svg";
-import { attributeStatistic } from "@neverquest/state/attributes";
+import IconFortitude from "@neverquest/icons/fortitude.svg?react";
+import IconRegenerationAmount from "@neverquest/icons/regeneration-amount.svg?react";
+import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react";
+import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
+import IconVigor from "@neverquest/icons/vigor.svg?react";
+import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { isRecovering } from "@neverquest/state/character";
-import { deltas } from "@neverquest/state/deltas";
 import {
   isHealthAtMaximum,
   isRegenerating,
@@ -26,10 +26,8 @@ import {
   regenerationDuration,
   regenerationRate,
 } from "@neverquest/state/reserves";
-import { skills } from "@neverquest/state/skills";
-import { attributePowerBonus } from "@neverquest/state/statistics";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Reserve } from "@neverquest/types/unions";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/utilities/constants";
 import { formatValue } from "@neverquest/utilities/formatters";
 
 const RESERVE_CHANGE = {
@@ -49,7 +47,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
   const isRegeneratingValue = useRecoilValue(isRegenerating(reserve));
   const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve));
   const regenerationRateValue = useRecoilValue(regenerationRate(reserve));
-  const calisthenicsValue = useRecoilValue(skills("calisthenics"));
+  const calisthenicsValue = useRecoilValue(isSkillAcquired("calisthenics"));
 
   const { baseRegenerationAmount, baseRegenerationRate, label, regenerationDelta } =
     RESERVES[reserve];
@@ -65,7 +63,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
   });
 
   useDeltaText({
-    delta: deltas(regenerationDelta),
+    delta: regenerationDelta,
     format: "time",
     value: regenerationRate(reserve),
   });
@@ -81,9 +79,9 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
       <OverlayTrigger
         overlay={
           <Popover>
-            <Popover.Header className="text-center">{label} regeneration details</Popover.Header>
+            <PopoverHeader className="text-center">{label} regeneration details</PopoverHeader>
 
-            <Popover.Body>
+            <PopoverBody>
               <DetailsTable>
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Base rate:</td>
@@ -107,11 +105,11 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      {`-${formatValue({ decimals: 0, format: "percentage", value: vigor })} `}
+                      {`-${formatValue({ decimals: 0, format: "percentage", value: vigor })}`}
 
                       {vigorPowerBonus > 0 && (
                         <>
-                          {LABEL_SEPARATOR}
+                          <span>{LABEL_SEPARATOR}</span>
 
                           <IconImage Icon={IconTomeOfPower} size="small" />
 
@@ -147,11 +145,11 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      {`+${fortitude} `}
+                      {`+${fortitude}`}
 
                       {vigorPowerBonus > 0 && (
                         <>
-                          {LABEL_SEPARATOR}
+                          <span>{LABEL_SEPARATOR}</span>
 
                           <IconImage Icon={IconTomeOfPower} size="small" />
 
@@ -165,7 +163,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                   </td>
                 </tr>
               </DetailsTable>
-            </Popover.Body>
+            </PopoverBody>
           </Popover>
         }
         placement="right"
@@ -176,7 +174,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
         </span>
       </OverlayTrigger>
 
-      <FloatingText delta={isHealth ? "healthRegenerationRate" : "staminaRegenerationRate"} />
+      <FloatingTextQueue delta={isHealth ? "healthRegenerationRate" : "staminaRegenerationRate"} />
     </Stack>
   );
 }

@@ -8,11 +8,9 @@ export const AILMENT_PENALTY = {
 };
 
 export const BLEED = {
-  duration: 5000,
-  ticks: 5,
+  default: { duration: 5000, ticks: 250 },
+  shredder: { duration: 100, ticks: 1 },
 };
-
-export const BLEED_DELTA = Math.round(BLEED.duration / BLEED.ticks);
 
 export const ELEMENTAL_AILMENT_DURATION_MAXIMUM = 5000;
 

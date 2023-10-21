@@ -4,6 +4,7 @@ import { isGameOver } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { ownedItem } from "@neverquest/state/items";
 import {
   health,
   healthMaximumTotal,
@@ -11,7 +12,6 @@ import {
   regenerationAmount,
   regenerationDuration,
 } from "@neverquest/state/reserves";
-import { isConsumable } from "@neverquest/types/type-guards";
 import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
 import { formatValue } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -45,11 +45,14 @@ export function useChangeHealth() {
         );
 
         if (newHealth <= 0) {
-          const phylactery = get(inventory).find(
-            (item) => isConsumable(item) && item.name === "phylactery",
-          );
+          const phylactery = get(ownedItem("phylactery"));
 
-          if (phylactery !== undefined) {
+          if (phylactery === null) {
+            newHealth = 0;
+
+            set(isGameOver, true);
+            set(isShowing("gameOver"), true);
+          } else {
             newHealth = healthMaximumTotalValue;
 
             set(deltas("health"), {
@@ -58,11 +61,6 @@ export function useChangeHealth() {
             });
 
             set(inventory, (current) => current.filter((item) => item.id !== phylactery.id));
-          } else {
-            newHealth = 0;
-
-            set(isGameOver, true);
-            set(isShowing("gameOver"), true);
           }
         }
 

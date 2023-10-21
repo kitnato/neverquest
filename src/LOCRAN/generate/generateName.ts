@@ -15,9 +15,9 @@ export function generateName({
 
     return allowNSFW ? isNSFW || !isNSFW : !isNSFW;
   });
-  const prefixes = filteredNames.filter(({ type }) => type.includes("prefix"));
+  const prefixes = filteredNames.filter(({ affix }) => affix.includes("prefix"));
   const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-  const suffixes = filteredNames.filter(({ type }) => type.includes("suffix"));
+  const suffixes = filteredNames.filter(({ affix }) => affix.includes("suffix"));
   const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
 
   if (prefix === undefined || suffix === undefined) {
@@ -25,32 +25,28 @@ export function generateName({
   }
 
   const connector = prefix.name[prefix.name.length - 1] === suffix.name[0] ? "-" : "";
-  const filteredAffixes = AFFIXES.filter((current) => {
-    const { creature, isNSFW, name } = current;
 
-    const filterNSFW = allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW;
+  let title;
 
-    if (name === prefix.name || name === suffix.name || name.slice(-3) === "ing") {
-      return false;
+  if (hasTitle) {
+    const filteredAffixes = AFFIXES.filter(({ creature, isNSFW, name }) =>
+      name === prefix.name || name === suffix.name || name.slice(-3) === "ing"
+        ? false
+        : (creature?.includes("prefix") || creature?.includes("suffix")) &&
+          (allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW),
+    );
+    const filteredCreatures = CREATURES.filter(({ isNSFW }) =>
+      allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW,
+    );
+    const filteredTitles = [...filteredAffixes, ...filteredCreatures];
+    title = filteredTitles[Math.floor(Math.random() * filteredTitles.length)];
+
+    if (title === undefined) {
+      throw Error("Invalid title.");
     }
-
-    return (creature === "prefix" || creature === "suffix") && filterNSFW;
-  });
-  const filteredCreatures = CREATURES.filter((current) => {
-    const { isNSFW, type } = current;
-
-    const filterNSFW = allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW;
-
-    return type === "monster" && filterNSFW;
-  });
-  const filteredTitles = filteredAffixes.concat(filteredCreatures);
-  const title = hasTitle && filteredTitles[Math.floor(Math.random() * filteredTitles.length)];
-
-  if (title === undefined) {
-    throw Error("Invalid title.");
   }
 
   return `${capitalizeAll(prefix.name)}${connector}${suffix.name}${
-    title === false ? "" : `, the ${capitalizeAll(title.name)}`
+    title === undefined ? "" : `, the ${capitalizeAll(title.name)}`
   }`;
 }

@@ -1,5 +1,5 @@
 import ls from "localstorage-slim";
-import { addUncountableRule } from "pluralize";
+import { addPluralRule, addUncountableRule } from "pluralize";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
@@ -9,6 +9,8 @@ import "@neverquest/styles/index.scss";
 
 ls.config.encrypt = true;
 
+addPluralRule(/ix$/i, "ices");
+addPluralRule(/us$/i, "i");
 addUncountableRule("topaz");
 
 createRoot(document.getElementById("root") as Element).render(

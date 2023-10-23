@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { Infusable } from "@neverquest/components/Inventory/Usable/Infusable";
+import { LABEL_NONE } from "@neverquest/data/general";
 import { TRINKETS } from "@neverquest/data/inventory";
 import { hasKnapsack, inventory } from "@neverquest/state/inventory";
 import type { InfusableItem } from "@neverquest/types";
@@ -12,17 +13,21 @@ export function ItemsInherited() {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const inventoryValue = useRecoilValue(inventory);
 
+  const infusables = inventoryValue.filter((current) => isInfusable(current));
+
   return (
     <Stack gap={3}>
       <h6>Items inherited</h6>
 
+      {infusables.length === 0 && !hasKnapsackValue && (
+        <span className="fst-italic">{LABEL_NONE}</span>
+      )}
+
       {hasKnapsackValue && <ItemDisplay item={TRINKETS.knapsack.item} overlayPlacement="right" />}
 
-      {inventoryValue
-        .filter((current) => isInfusable(current))
-        .map((current) => (
-          <Infusable item={current as InfusableItem} key={current.id} />
-        ))}
+      {infusables.map((current) => (
+        <Infusable item={current as InfusableItem} key={current.id} />
+      ))}
     </Stack>
   );
 }

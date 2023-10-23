@@ -8,27 +8,21 @@ import {
   ModalTitle,
   Stack,
 } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { ItemsInherited } from "@neverquest/components/Retirement/ItemsInherited";
+import { ProgressDiscount } from "@neverquest/components/Retirement/ProgressDiscount";
+import { ResetDetails } from "@neverquest/components/Retirement/ResetDetails";
 import { TraitSelection } from "@neverquest/components/Retirement/TraitSelection";
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
 import { useRetire } from "@neverquest/hooks/actions/useRetire";
-import IconProgress from "@neverquest/icons/progress.svg?react";
 import IconRetire from "@neverquest/icons/retire.svg?react";
-import { stageMaximum } from "@neverquest/state/encounter";
-import { formatValue } from "@neverquest/utilities/formatters";
-import { getProgressReduction } from "@neverquest/utilities/getters";
 
 export function Retirement({
   state: [isShowing, setIsShowing],
 }: {
   state: [boolean, Dispatch<SetStateAction<boolean>>];
 }) {
-  const stageMaximumValue = useRecoilValue(stageMaximum);
-
   const generateMonster = useGenerateMonster();
   const retire = useRetire();
 
@@ -47,21 +41,10 @@ export function Retirement({
 
       <ModalBody>
         <Stack gap={5}>
-          <Stack gap={3}>
-            Retiring resets all accumulated progress, essence, attributes, skills, masteries and
-            gear, starting a new quest with quicker progress alongside a powerful trait.
-            <IconDisplay
-              contents={`-${formatValue({
-                format: "percentage",
-                value: getProgressReduction(stageMaximumValue),
-              })}`}
-              Icon={IconProgress}
-              tooltip="Progress discount"
-            />
-          </Stack>
-
+          Retiring starts a new quest with quicker progress per stage alongside a powerful trait.
+          <ResetDetails />
+          <ProgressDiscount />
           <ItemsInherited />
-
           <TraitSelection />
         </Stack>
       </ModalBody>

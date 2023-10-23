@@ -124,8 +124,10 @@ export function getGearPrice({
   return Math.round((price.minimum + price.maximum * factor) * modifier);
 }
 
-export function getGrowthLinearMapping({ offset, stage }: { offset: number; stage: number }) {
-  return ((stage - offset) * (GROWTH_MAXIMUM - 1)) / (GROWTH_MAXIMUM - offset - 1) + 1;
+// https://en.wikipedia.org/wiki/Natural_logarithm
+// f(1) = 0, f(50) = ~0.7, f(100) = ~1
+export function getGrowthLogarithmic(x: number) {
+  return Math.log(x / 20 + 1) / Math.log(6);
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
@@ -156,12 +158,16 @@ export function getNameStructure(): NameStructure {
   return "none";
 }
 
+export function getLinearMapping({ offset, stage }: { offset: number; stage: number }) {
+  return ((stage - offset) * (GROWTH_MAXIMUM - 1)) / (GROWTH_MAXIMUM - offset - 1) + 1;
+}
+
 export function getProgressReduction(stage: number) {
   const { maximum, minimum } = PROGRESS_REDUCTION;
 
   return getFromRange({
     factor: getGrowthSigmoid(
-      getGrowthLinearMapping({
+      getLinearMapping({
         offset: RETIREMENT_MINIMUM,
         stage,
       }),

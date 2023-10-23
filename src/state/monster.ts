@@ -27,9 +27,9 @@ import { formatValue } from "@neverquest/utilities/formatters";
 import {
   getDamagePerRate,
   getFromRange,
-  getGrowthLinearMapping,
   getGrowthSigmoid,
   getGrowthTriangular,
+  getLinearMapping,
 } from "@neverquest/utilities/getters";
 
 // SELECTORS
@@ -69,9 +69,7 @@ export const blightChance = withStateKey("blightChance", (key) =>
 
       return (
         getFromRange({
-          factor: getGrowthSigmoid(
-            getGrowthLinearMapping({ offset: stageRequired, stage: stageValue }),
-          ),
+          factor: getGrowthSigmoid(getLinearMapping({ offset: stageRequired, stage: stageValue })),
           maximum,
           minimum,
         }) * (get(isBoss) ? boss : 1)
@@ -279,9 +277,7 @@ export const poison = withStateKey("poison", (key) =>
 
       return (
         getFromRange({
-          factor: getGrowthSigmoid(
-            getGrowthLinearMapping({ offset: stageRequired, stage: stageValue }),
-          ),
+          factor: getGrowthSigmoid(getLinearMapping({ offset: stageRequired, stage: stageValue })),
           maximum,
           minimum,
         }) * (get(isBoss) ? boss : 1)
@@ -301,7 +297,7 @@ export const poisonLength = withStateKey("poisonLength", (key) =>
 
       return getFromRange({
         factor: getGrowthSigmoid(
-          getGrowthLinearMapping({
+          getLinearMapping({
             offset: stageRequired,
             stage: get(stage),
           }),
@@ -324,7 +320,7 @@ export const poisonMagnitude = withStateKey("poisonMagnitude", (key) =>
 
       return getFromRange({
         factor: getGrowthSigmoid(
-          getGrowthLinearMapping({
+          getLinearMapping({
             offset: stageRequired,
             stage: get(stage),
           }),

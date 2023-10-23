@@ -1,14 +1,18 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { INFUSION_DELTA, INFUSION_DURATION } from "@neverquest/data/general";
-import { INFUSABLES, INFUSABLE_LEVEL_MAXIMUM } from "@neverquest/data/inventory";
+import { INFUSABLES } from "@neverquest/data/inventory";
 import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { inventory } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
 import type { AmmunitionPouchItem, InventoryItem } from "@neverquest/types";
 import { isConsumable, isInfusable, isTrinket } from "@neverquest/types/type-guards";
 import type { Consumable, Infusable, Trinket } from "@neverquest/types/unions";
-import { getFromRange, getGrowthTriangular } from "@neverquest/utilities/getters";
+import {
+  getFromRange,
+  getGrowthLogarithmic,
+  getGrowthTriangular,
+} from "@neverquest/utilities/getters";
 
 // SELECTORS
 
@@ -50,7 +54,7 @@ export const essenceBonus = withStateKey("essenceBonus", (key) =>
       const { maximum, minimum } = INFUSABLES["monkey paw"].item;
 
       return getFromRange({
-        factor: ownedMonkeyPaw.level / INFUSABLE_LEVEL_MAXIMUM,
+        factor: getGrowthLogarithmic(ownedMonkeyPaw.level),
         maximum,
         minimum,
       });
@@ -132,7 +136,7 @@ export const powerBonusBoost = withStateKey("powerBonusBoost", (key) =>
       const { maximum, minimum } = INFUSABLES["tome of power"].item;
 
       return getFromRange({
-        factor: ownedTomeOfPower.level / INFUSABLE_LEVEL_MAXIMUM,
+        factor: getGrowthLogarithmic(ownedTomeOfPower.level),
         maximum,
         minimum,
       });

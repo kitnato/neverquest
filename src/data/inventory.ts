@@ -196,9 +196,9 @@ export const ELEMENTALS: Record<
   },
 };
 
-export const ENCUMBRANCE = 4;
+export const ENCUMBRANCE = 6;
 
-export const KNAPSACK_SIZE = 6;
+export const KNAPSACK_SIZE = 8;
 
 export const GEM_BASE = {
   price: 10,

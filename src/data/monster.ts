@@ -38,30 +38,30 @@ export const BLIGHT = {
 
 export const ESSENCE = {
   attenuation: 10,
+  base: 5,
   bonus: 0.02,
-  boss: 1.2,
-  essence: 4,
+  boss: 1.5,
 };
 
 export const MONSTER_ATTACK_RATE = {
   base: 4000,
   bonus: 0.01,
-  boss: 1.1,
+  boss: 1.15,
   minimum: 666,
 };
 
 export const MONSTER_DAMAGE = {
   attenuation: 40,
-  base: 8,
+  base: 6,
   bonus: 0.02,
-  boss: 1.2,
+  boss: 1.3,
 };
 
 export const MONSTER_HEALTH = {
   attenuation: 50,
   base: 25,
   bonus: 0.03,
-  boss: 1.7,
+  boss: 1.8,
 };
 
 export const POISON = {
@@ -78,5 +78,5 @@ export const POISON = {
     maximum: 0.25,
     minimum: 0.05,
   },
-  stageRequired: 15,
+  stageRequired: 18,
 };

@@ -240,7 +240,7 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
 export const monsterLoot = withStateKey("monsterLoot", (key) =>
   selector({
     get: ({ get }) => {
-      const { attenuation, bonus, boss, essence } = ESSENCE;
+      const { attenuation, base, bonus, boss } = ESSENCE;
 
       const isBossValue = get(isBoss);
       const stageValue = get(stage);
@@ -248,7 +248,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
 
       return {
         essence: Math.round(
-          (essence + essence * factor) * 1 +
+          (base + base * factor) * 1 +
             get(progress) * bonus * (isBossValue ? boss : 1) * (1 + get(essenceBonus)),
         ),
         gems: isBossValue

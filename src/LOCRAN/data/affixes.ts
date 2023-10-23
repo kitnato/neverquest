@@ -2602,9 +2602,9 @@ export const AFFIXES: AffixData[] = [
     name: "graveyard",
   },
   {
-    artifact: ["articledSuffix", "prefix"],
-    creature: ["articledSuffix", "prefix"],
-    location: ["articledSuffix", "prefix"],
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    location: ["prefix"],
     name: "great",
   },
   {

@@ -33,7 +33,10 @@ export function FloatingTextQueue({ delta }: { delta: Delta }) {
   };
 
   useEffect(() => {
-    if (deltaValue === DEFAULT_DELTA_DISPLAY) {
+    if (
+      (Array.isArray(deltaValue) && deltaValue.length === 0) ||
+      deltaValue === DEFAULT_DELTA_DISPLAY
+    ) {
       return;
     }
 
@@ -44,6 +47,8 @@ export function FloatingTextQueue({ delta }: { delta: Delta }) {
         key: nanoid(),
       },
     ]);
+
+    return resetDelta;
   }, [delta, deltaValue, resetDelta, setFloatingTextQueue]);
 
   return (

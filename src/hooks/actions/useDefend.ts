@@ -95,7 +95,7 @@ export function useDefend() {
             });
 
             if (!get(isTraitAcquired("stalwart"))) {
-              changeStamina({ value: armorStaminaCost });
+              changeStamina({ value: -armorStaminaCost });
             }
 
             return;
@@ -121,8 +121,6 @@ export function useDefend() {
 
         // If parrying occurs, check & apply stamina cost.
         if (hasParried) {
-          const weaponStaminaCost = get(weapon).staminaCost;
-
           if (get(canAttackOrParry)) {
             set(isShowing("monsterAilments"), true);
 
@@ -152,8 +150,6 @@ export function useDefend() {
                 value: `(${healthDamage})`,
               },
             );
-
-            changeStamina({ value: weaponStaminaCost });
           } else {
             deltaStamina.push(
               {
@@ -162,7 +158,7 @@ export function useDefend() {
               },
               {
                 color: "text-danger",
-                value: `(${weaponStaminaCost})`,
+                value: `(${get(weapon).staminaCost})`,
               },
             );
           }
@@ -180,24 +176,13 @@ export function useDefend() {
               value: "BLOCKED",
             });
 
-            // If Shieldcraft skill is acquired, check if a free block occurs, otherwise spend stamina blocking.
-            if (Math.random() < get(masteryStatistic("stability"))) {
-              deltaStamina.push({
-                color: "text-muted",
-                value: "STABILIZED",
-              });
-            } else {
-              changeStamina({ value: shieldStaminaCost });
-            }
+            changeStamina({ value: -shieldStaminaCost });
 
             increaseMastery("stability");
 
-            // If monster is staggered, also increase Might mastery.
             if (Math.random() < get(stagger)) {
               set(isShowing("monsterAilments"), true);
-              set(monsterAilmentDuration("staggered"), get(masteryStatistic("might")));
-
-              increaseMastery("might");
+              set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")));
 
               changeMonsterHealth({
                 delta: {
@@ -221,7 +206,7 @@ export function useDefend() {
           }
         }
 
-        // If neither dodged, parried nor blocked, show damage with protection
+        // If neither dodged, parried nor blocked, show damage with protection and increase resilience.
         if (!hasBlocked && !hasParried && protectionValue > 0) {
           deltaHealth.push(
             {
@@ -230,8 +215,8 @@ export function useDefend() {
             },
             {
               color: "text-muted",
-              // In the case of 0 damage, show only inflicted.
-              value: `(${Math.min(protectionValue, totalDamage)})`,
+              // In the case of 0 health damage, show only inflicted.
+              value: `(${Math.max(protectionValue, healthDamage)})`,
             },
           );
 
@@ -296,7 +281,9 @@ export function useDefend() {
         // Take any damage and show any stamina costs.
         changeHealth({ delta: deltaHealth, value: healthDamage });
 
-        set(deltas("stamina"), deltaStamina);
+        set(deltas("stamina"), (current) =>
+          Array.isArray(current) ? [...current, ...deltaStamina] : [current, ...deltaStamina],
+        );
 
         // Inflict any armor elemental effects.
         ELEMENTAL_TYPES.forEach((elemental) =>

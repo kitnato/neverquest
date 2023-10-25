@@ -10,7 +10,7 @@ import {
 } from "@neverquest/state/monster";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import type { DeltaDisplay, DeltaReserveBase } from "@neverquest/types/ui";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeMonsterHealth() {
@@ -19,7 +19,7 @@ export function useChangeMonsterHealth() {
       ({ delta, value }: DeltaReserveBase) => {
         const get = getSnapshotGetter(snapshot);
 
-        const formattedValue = formatValue({ value });
+        const formattedValue = formatNumber({ value });
         const isPositive = value > 0;
 
         const newHealth = get(monsterHealth) + value;

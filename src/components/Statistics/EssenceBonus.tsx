@@ -6,7 +6,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconEssenceBonus from "@neverquest/icons/essence-bonus.svg?react";
 import { essenceBonus } from "@neverquest/state/items";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function EssenceBonus() {
   const essenceBonusValue = useRecoilValue(essenceBonus);
@@ -19,11 +19,10 @@ export function EssenceBonus() {
 
   return (
     <Stack direction="horizontal">
-      <IconDisplay
-        contents={`+${formatValue({ format: "percentage", value: essenceBonusValue })}`}
-        Icon={IconEssenceBonus}
-        tooltip="Essence loot bonus"
-      />
+      <IconDisplay Icon={IconEssenceBonus} tooltip="Essence loot bonus">{`+${formatNumber({
+        format: "percentage",
+        value: essenceBonusValue,
+      })}`}</IconDisplay>
 
       <FloatingTextQueue delta="essenceBonus" />
     </Stack>

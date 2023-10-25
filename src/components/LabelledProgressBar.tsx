@@ -5,18 +5,19 @@ import type { BootstrapColorVariant, UIAttachment, UISize } from "@neverquest/ty
 
 export function LabelledProgressBar({
   attached,
+  children,
   disableTransitions = false,
+  // TODO - replace label with children
   isStriped = false,
-  label,
   sibling = null,
   size = "normal",
   value,
   variant,
 }: {
   attached?: UIAttachment;
+  children: ReactNode;
   disableTransitions?: boolean;
   isStriped?: boolean;
-  label: ReactNode;
   sibling?: ReactNode;
   size?: UISize;
   value: number;
@@ -69,11 +70,11 @@ export function LabelledProgressBar({
               width: "max-content",
             }}
           >
-            {label}
+            {children}
           </small>
         </>
       ) : (
-        <OverlayTrigger overlay={<Tooltip>{label}</Tooltip>} placement="bottom">
+        <OverlayTrigger overlay={<Tooltip>{children}</Tooltip>} placement="bottom">
           <ProgressBar style={style}>
             <ProgressBar {...progressAppearance} key={1} now={value} variant={variant} />
           </ProgressBar>

@@ -7,5 +7,9 @@ export function SkillDisplay({ skill }: { skill: Skill }) {
   const { description, Icon } = SKILLS[skill];
   const name = capitalizeAll(skill);
 
-  return <IconDisplay contents={name} description={description} Icon={Icon} tooltip="Skill" />;
+  return (
+    <IconDisplay description={description} Icon={Icon} tooltip="Skill">
+      {name}
+    </IconDisplay>
+  );
 }

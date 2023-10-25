@@ -43,12 +43,9 @@ export function Loot() {
         <Card className={getAnimationClass({ name: "flipInX" })}>
           <Card.Body>
             {hasLootedValue && itemsLootValue.length === 0 ? (
-              <IconDisplay
-                contents={<span className="fst-italic">Nothing remains.</span>}
-                Icon={IconLooted}
-                isSpaced
-                tooltip="Loot"
-              />
+              <IconDisplay gap={5} Icon={IconLooted} tooltip="Loot">
+                <span className="fst-italic">Nothing remains.</span>
+              </IconDisplay>
             ) : (
               <Stack gap={3}>
                 {!hasLootedValue && <EssenceLoot />}

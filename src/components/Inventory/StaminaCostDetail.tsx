@@ -7,7 +7,7 @@ import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { isShowing } from "@neverquest/state/isShowing";
 import type { ComparisonProps } from "@neverquest/types/props";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function StaminaCostDetail({
   comparison,
@@ -28,7 +28,7 @@ export function StaminaCostDetail({
             <Stack direction="horizontal" gap={1}>
               <IconImage Icon={IconStamina} size="small" />
 
-              {formatValue({ value: cost })}
+              {formatNumber({ value: cost })}
 
               {comparison !== null && (
                 <GearComparison

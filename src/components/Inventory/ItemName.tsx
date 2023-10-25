@@ -6,7 +6,7 @@ import { GemDescription } from "@neverquest/components/Inventory/GemDescription"
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import type { ConsumableItem, GemItem, UsableItem } from "@neverquest/types";
 import { isGem } from "@neverquest/types/type-guards";
-import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ItemName({
   item,
@@ -41,7 +41,7 @@ export function ItemName({
       placement={placement}
     >
       <span style={{ width: "fit-content" }}>{`${displayName}${
-        stack !== undefined && stack > 1 ? ` x${formatValue({ value: stack })}` : ""
+        stack !== undefined && stack > 1 ? ` x${formatNumber({ value: stack })}` : ""
       }`}</span>
     </OverlayTrigger>
   );

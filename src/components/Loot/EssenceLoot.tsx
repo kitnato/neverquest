@@ -6,7 +6,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import { essenceLoot } from "@neverquest/state/resources";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function EssenceLoot() {
@@ -23,11 +23,9 @@ export function EssenceLoot() {
 
   return (
     <Stack className={getAnimationClass({ name: "flipInX" })} direction="horizontal">
-      <IconDisplay
-        contents={formatValue({ value: essenceLootValue })}
-        Icon={IconEssence}
-        tooltip="Looted essence"
-      />
+      <IconDisplay Icon={IconEssence} tooltip="Looted essence">
+        {formatNumber({ value: essenceLootValue })}
+      </IconDisplay>
 
       <FloatingTextQueue delta="essenceLoot" />
     </Stack>

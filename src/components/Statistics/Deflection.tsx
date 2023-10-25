@@ -13,7 +13,7 @@ import { armor } from "@neverquest/state/gear";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { deflection } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Deflection() {
   const armorValue = useRecoilValue(armor);
@@ -34,57 +34,52 @@ export function Deflection() {
   }
 
   return (
-    <IconDisplay
-      contents={
-        <Stack direction="horizontal">
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverHeader className="text-center">Deflection details</PopoverHeader>
+    <IconDisplay Icon={IconDeflection} isAnimated tooltip="Total deflection chance">
+      <Stack direction="horizontal">
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">Deflection details</PopoverHeader>
 
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Armor:</td>
+              <PopoverBody>
+                <DetailsTable>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Armor:</td>
 
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconDeflection} size="small" />
+                    <td>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconDeflection} size="small" />
 
-                          {formatValue({ format: "percentage", value: armorValue.deflection })}
-                        </Stack>
-                      </td>
-                    </tr>
+                        {formatNumber({ format: "percentage", value: armorValue.deflection })}
+                      </Stack>
+                    </td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconInoculated} size="small" />
-                          Inoculated:
-                        </Stack>
-                      </td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconInoculated} size="small" />
+                        Inoculated:
+                      </Stack>
+                    </td>
 
-                      <td>x2</td>
-                    </tr>
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-            trigger={isTraitAcquiredInoculated ? ["focus", "hover"] : []}
-          >
-            <span>
-              {armorDeflection === 0
-                ? LABEL_EMPTY
-                : formatValue({ format: "percentage", value: deflectionValue })}
-            </span>
-          </OverlayTrigger>
+                    <td>x2</td>
+                  </tr>
+                </DetailsTable>
+              </PopoverBody>
+            </Popover>
+          }
+          trigger={isTraitAcquiredInoculated ? ["focus", "hover"] : []}
+        >
+          <span>
+            {armorDeflection === 0
+              ? LABEL_EMPTY
+              : formatNumber({ format: "percentage", value: deflectionValue })}
+          </span>
+        </OverlayTrigger>
 
-          <FloatingTextQueue delta="deflection" />
-        </Stack>
-      }
-      Icon={IconDeflection}
-      isAnimated
-      tooltip="Total deflection chance"
-    />
+        <FloatingTextQueue delta="deflection" />
+      </Stack>
+    </IconDisplay>
   );
 }

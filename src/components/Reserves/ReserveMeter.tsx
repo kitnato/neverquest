@@ -23,7 +23,7 @@ import {
 } from "@neverquest/state/reserves";
 import type { BlightMagnitude } from "@neverquest/types";
 import type { Reserve } from "@neverquest/types/unions";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function ReserveMeter({ reserve }: { reserve: Reserve }) {
   const isHealth = reserve === "health";
@@ -62,42 +62,41 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
   return (
     <LabelledProgressBar
       attached="below"
-      label={
-        <Stack direction="horizontal" gap={1}>
-          <Stack direction="horizontal">
-            {`${formatValue({ value: reserveValue })}/`}
-
-            {formatValue({
-              value: reserveMaximumTotalValue,
-            })}
-
-            <FloatingTextQueue delta={deltaReserveMaximum} />
-          </Stack>
-
-          {isAiling && (
-            <>
-              {`(${formatValue({ value: reserveMaximumValue })})`}
-
-              <IconImage Icon={isHealth ? IconPoison : IconBlight} isStencilled size="small" />
-
-              {`${
-                typeof ailmentValue === "number"
-                  ? formatValue({ format: "time", value: ailmentValue })
-                  : formatValue({
-                      decimals: 0,
-                      format: "percentage",
-                      value: ailmentValue.percentage,
-                    })
-              }`}
-            </>
-          )}
-        </Stack>
-      }
       sibling={
         isAiling ? <ProgressBar animated key={2} now={penalty} striped variant="secondary" /> : null
       }
       value={(reserveValue / reserveMaximumTotalValue) * (100 - penalty)}
       variant="dark"
-    />
+    >
+      <Stack direction="horizontal" gap={1}>
+        <Stack direction="horizontal">
+          {`${formatNumber({ value: reserveValue })}/`}
+
+          {formatNumber({
+            value: reserveMaximumTotalValue,
+          })}
+
+          <FloatingTextQueue delta={deltaReserveMaximum} />
+        </Stack>
+
+        {isAiling && (
+          <>
+            {`(${formatNumber({ value: reserveMaximumValue })})`}
+
+            <IconImage Icon={isHealth ? IconPoison : IconBlight} isStencilled size="small" />
+
+            {`${
+              typeof ailmentValue === "number"
+                ? formatNumber({ format: "time", value: ailmentValue })
+                : formatNumber({
+                    decimals: 0,
+                    format: "percentage",
+                    value: ailmentValue.percentage,
+                  })
+            }`}
+          </>
+        )}
+      </Stack>
+    </LabelledProgressBar>
   );
 }

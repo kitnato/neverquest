@@ -23,22 +23,14 @@ export function AmmunitionPouchCurrent() {
   }
 
   return (
-    <IconDisplay
-      contents={
-        <LabelledProgressBar
-          label={
-            <Stack direction="horizontal">
-              {`${ammunitionValue}/${ammunitionMaximumValue}`}
+    <IconDisplay Icon={IconAmmunitionPouch} tooltip="Ammunition pouch">
+      <LabelledProgressBar value={(ammunitionValue / ammunitionMaximumValue) * 100} variant="dark">
+        <Stack direction="horizontal">
+          {`${ammunitionValue}/${ammunitionMaximumValue}`}
 
-              <FloatingTextQueue delta="ammunition" />
-            </Stack>
-          }
-          value={(ammunitionValue / ammunitionMaximumValue) * 100}
-          variant="dark"
-        />
-      }
-      Icon={IconAmmunitionPouch}
-      tooltip="Ammunition pouch"
-    />
+          <FloatingTextQueue delta="ammunition" />
+        </Stack>
+      </LabelledProgressBar>
+    </IconDisplay>
   );
 }

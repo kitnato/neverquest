@@ -16,7 +16,7 @@ import { isSkillAcquired } from "@neverquest/state/skills";
 import { staggerRating } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function StaggerRating() {
   const isTraitAcquiredColossus = useRecoilValue(isTraitAcquired("colossus"));
@@ -42,56 +42,51 @@ export function StaggerRating() {
   }
 
   return (
-    <IconDisplay
-      contents={
-        <Stack direction="horizontal">
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverHeader className="text-center">Stagger rating details</PopoverHeader>
+    <IconDisplay Icon={IconStaggerRating} isAnimated tooltip="Stagger rating">
+      <Stack direction="horizontal">
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">Stagger rating details</PopoverHeader>
 
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
+              <PopoverBody>
+                <DetailsTable>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
 
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconStagger} size="small" />
+                    <td>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconStagger} size="small" />
 
-                          {formatValue({ format: "percentage", value: stagger })}
-                        </Stack>
-                      </td>
-                    </tr>
+                        {formatNumber({ format: "percentage", value: stagger })}
+                      </Stack>
+                    </td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconStability} size="small" />
-                          Stability:
-                        </Stack>
-                      </td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconStability} size="small" />
+                        Stability:
+                      </Stack>
+                    </td>
 
-                      <td>{`${formatValue({
-                        format: "time",
-                        value: stabilityValue,
-                      })} duration`}</td>
-                    </tr>
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-            trigger={shieldcraftValue ? ["hover", "focus"] : []}
-          >
-            <span>{shieldcraftValue ? staggerRatingValue : LABEL_EMPTY}</span>
-          </OverlayTrigger>
+                    <td>{`${formatNumber({
+                      format: "time",
+                      value: stabilityValue,
+                    })} duration`}</td>
+                  </tr>
+                </DetailsTable>
+              </PopoverBody>
+            </Popover>
+          }
+          trigger={shieldcraftValue ? ["hover", "focus"] : []}
+        >
+          <span>{shieldcraftValue ? staggerRatingValue : LABEL_EMPTY}</span>
+        </OverlayTrigger>
 
-          <FloatingTextQueue delta="staggerRating" />
-        </Stack>
-      }
-      Icon={IconStaggerRating}
-      isAnimated
-      tooltip="Stagger rating"
-    />
+        <FloatingTextQueue delta="staggerRating" />
+      </Stack>
+    </IconDisplay>
   );
 }

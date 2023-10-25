@@ -10,7 +10,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { block } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Block() {
   const blockValue = useRecoilValue(block);
@@ -35,17 +35,12 @@ export function Block() {
   }
 
   return (
-    <IconDisplay
-      contents={
-        <Stack direction="horizontal">
-          <span>{formatValue({ format: "percentage", value: blockValue })}</span>
+    <IconDisplay Icon={IconBlock} isAnimated tooltip="Block chance">
+      <Stack direction="horizontal">
+        <span>{formatNumber({ format: "percentage", value: blockValue })}</span>
 
-          <FloatingTextQueue delta="block" />
-        </Stack>
-      }
-      Icon={IconBlock}
-      isAnimated
-      tooltip="Block chance"
-    />
+        <FloatingTextQueue delta="block" />
+      </Stack>
+    </IconDisplay>
   );
 }

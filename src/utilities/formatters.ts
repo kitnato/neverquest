@@ -24,16 +24,7 @@ function formatFloat({ decimals = 2, value }: { decimals?: number; value: number
   return (Math.round(result) / multiplier).toFixed(decimals).toLocaleString();
 }
 
-export function formatSlug(string: string) {
-  return string
-    .replace(/^\s+|\s+$/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9 -]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
-}
-
-export function formatValue({
+export function formatNumber({
   decimals,
   format = "integer",
   value,
@@ -70,4 +61,13 @@ export function formatValue({
       }`;
     }
   }
+}
+
+export function formatSlug(string: string) {
+  return string
+    .replace(/^\s+|\s+$/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9 -]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
 }

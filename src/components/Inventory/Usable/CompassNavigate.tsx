@@ -1,4 +1,4 @@
-import { type ChangeEvent, useState } from "react";
+import { useState } from "react";
 import {
   Button,
   Form,
@@ -25,7 +25,7 @@ import {
   wildernesses,
 } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function CompassNavigate() {
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
@@ -69,33 +69,29 @@ export function CompassNavigate() {
         </ModalHeader>
 
         <ModalBody>
-          <IconDisplay
-            contents={
-              <Form.Select
-                disabled={!canNavigate}
-                onChange={({ target: { value } }: ChangeEvent<HTMLSelectElement>) => {
-                  setIsShowingNavigation(false);
-                  setStage(Number(value));
+          <IconDisplay Icon={IconNavigation} tooltip="Navigation">
+            <Form.Select
+              disabled={!canNavigate}
+              onChange={({ target: { value } }) => {
+                setIsShowingNavigation(false);
+                setStage(Number(value));
 
-                  resetIsInventoryOpen();
-                  resetWilderness();
-                }}
-                value={stageValue}
-              >
-                {wildernessesValue.map((name, index) => {
-                  const stageIndex = index + 1;
+                resetIsInventoryOpen();
+                resetWilderness();
+              }}
+              value={stageValue}
+            >
+              {wildernessesValue.map((name, index) => {
+                const stageIndex = index + 1;
 
-                  return (
-                    <option key={name} value={stageIndex}>{`Stage ${formatValue({
-                      value: stageIndex,
-                    })} - ${name}`}</option>
-                  );
-                })}
-              </Form.Select>
-            }
-            Icon={IconNavigation}
-            tooltip="Navigation"
-          />
+                return (
+                  <option key={name} value={stageIndex}>{`Stage ${formatNumber({
+                    value: stageIndex,
+                  })} - ${name}`}</option>
+                );
+              })}
+            </Form.Select>
+          </IconDisplay>
         </ModalBody>
       </Modal>
     </>

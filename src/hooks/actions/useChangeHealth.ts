@@ -13,7 +13,7 @@ import {
   regenerationDuration,
 } from "@neverquest/state/reserves";
 import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeHealth() {
@@ -27,7 +27,7 @@ export function useChangeHealth() {
           ? get(regenerationAmount("health"))
           : deltaReserve.value;
 
-        const formattedValue = formatValue({ value });
+        const formattedValue = formatNumber({ value });
         const isPositive = value > 0;
 
         let newHealth = get(health) + value;

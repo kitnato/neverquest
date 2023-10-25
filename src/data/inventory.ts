@@ -14,6 +14,7 @@ import IconElixir from "@neverquest/icons/elixir.svg?react";
 import IconFire from "@neverquest/icons/fire.svg?react";
 import IconStone from "@neverquest/icons/hearthstone.svg?react";
 import IconIce from "@neverquest/icons/ice.svg?react";
+import IconJournal from "@neverquest/icons/journal.svg?react";
 import IconKnapsack from "@neverquest/icons/knapsack.svg?react";
 import IconLightning from "@neverquest/icons/lightning.svg?react";
 import IconMonkeyPaw from "@neverquest/icons/monkey-paw.svg?react";
@@ -378,6 +379,16 @@ export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: AmmunitionPouchIte
         name: "hearthstone",
         price: 20,
         weight: 2,
+      },
+    },
+    journal: {
+      Icon: IconJournal,
+      item: {
+        description: "A compendium of quests.",
+        id: nanoid(),
+        name: "journal",
+        price: 500,
+        weight: 5,
       },
     },
     knapsack: {

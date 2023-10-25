@@ -10,8 +10,8 @@ export function Skills() {
   return Object.values(trainedSkillsValue).every((current) => !current) ? (
     <span className="fst-italic">None.</span>
   ) : (
-    SKILL_TYPES.map(
-      (current) => trainedSkillsValue[current] && <SkillDisplay key={current} skill={current} />,
+    SKILL_TYPES.map((current) =>
+      trainedSkillsValue[current] ? <SkillDisplay key={current} skill={current} /> : null,
     )
   );
 }

@@ -10,7 +10,7 @@ import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconPurge from "@neverquest/icons/purge.svg?react";
 import { absorbedEssence } from "@neverquest/state/attributes";
 import { essence } from "@neverquest/state/resources";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function PurgeEssence() {
   const essenceValue = useRecoilValue(essence);
@@ -29,18 +29,17 @@ export function PurgeEssence() {
 
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay
-          contents="Purge essence"
           description="Resets power level to 0, refunding all absorbed essence."
           Icon={IconPurge}
           tooltip="Ritual"
-        />
+        >
+          Purge essence
+        </IconDisplay>
 
         <Stack direction="horizontal" gap={3}>
-          <IconDisplay
-            contents={formatValue({ value: price })}
-            Icon={IconEssence}
-            tooltip="Price"
-          />
+          <IconDisplay Icon={IconEssence} tooltip="Price">
+            {formatNumber({ value: price })}
+          </IconDisplay>
 
           <OverlayTrigger
             overlay={

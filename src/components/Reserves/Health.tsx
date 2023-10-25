@@ -16,7 +16,7 @@ import IconVitality from "@neverquest/icons/vitality.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isPoisoned, poisonDuration } from "@neverquest/state/reserves";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Health() {
   const vitalityPowerBonus = useRecoilValue(attributePowerBonus("vitality"));
@@ -33,78 +33,74 @@ export function Health() {
   });
 
   return (
-    <IconDisplay
-      contents={
-        <Stack>
-          <Stack className="w-100" direction="horizontal">
-            <OverlayTrigger
-              overlay={
-                <Popover>
-                  <PopoverHeader className="text-center">Health details</PopoverHeader>
+    <IconDisplay Icon={IconHealth} tooltip="Health">
+      <Stack>
+        <Stack className="w-100" direction="horizontal">
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverHeader className="text-center">Health details</PopoverHeader>
 
-                  <PopoverBody>
-                    <DetailsTable>
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
+                <PopoverBody>
+                  <DetailsTable>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
 
-                        <td>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconHealth} size="small" />
+                      <td>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconHealth} size="small" />
 
-                            {baseAmount}
-                          </Stack>
-                        </td>
-                      </tr>
+                          {baseAmount}
+                        </Stack>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconVitality} size="small" />
-                            Vitality:
-                          </Stack>
-                        </td>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconVitality} size="small" />
+                          Vitality:
+                        </Stack>
+                      </td>
 
-                        <td>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconHealth} size="small" />
+                      <td>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconHealth} size="small" />
 
-                            {`+${formatValue({ value: vitality - baseAmount })}`}
+                          {`+${formatNumber({ value: vitality - baseAmount })}`}
 
-                            {vitalityPowerBonus > 0 && (
-                              <>
-                                <span>{LABEL_SEPARATOR}</span>
+                          {vitalityPowerBonus > 0 && (
+                            <>
+                              <span>{LABEL_SEPARATOR}</span>
 
-                                <IconImage Icon={IconTomeOfPower} size="small" />
+                              <IconImage Icon={IconTomeOfPower} size="small" />
 
-                                {`+${formatValue({
-                                  format: "percentage",
-                                  value: vitalityPowerBonus,
-                                })}`}
-                              </>
-                            )}
-                          </Stack>
-                        </td>
-                      </tr>
-                    </DetailsTable>
-                  </PopoverBody>
-                </Popover>
-              }
-              placement="right"
-              trigger={isShowingHealthDetails ? ["hover", "focus"] : []}
-            >
-              <span className="w-100">
-                <ReserveMeter reserve="health" />
-              </span>
-            </OverlayTrigger>
+                              {`+${formatNumber({
+                                format: "percentage",
+                                value: vitalityPowerBonus,
+                              })}`}
+                            </>
+                          )}
+                        </Stack>
+                      </td>
+                    </tr>
+                  </DetailsTable>
+                </PopoverBody>
+              </Popover>
+            }
+            placement="right"
+            trigger={isShowingHealthDetails ? ["hover", "focus"] : []}
+          >
+            <span className="w-100">
+              <ReserveMeter reserve="health" />
+            </span>
+          </OverlayTrigger>
 
-            <FloatingTextQueue delta="health" />
-          </Stack>
-
-          <Regeneration reserve="health" />
+          <FloatingTextQueue delta="health" />
         </Stack>
-      }
-      Icon={IconHealth}
-      tooltip="Health"
-    />
+
+        <Regeneration reserve="health" />
+      </Stack>
+    </IconDisplay>
   );
 }

@@ -11,7 +11,7 @@ import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { hireStatus } from "@neverquest/state/caravan";
 import { isSkillAcquired, skillPrice } from "@neverquest/state/skills";
 import type { Skill } from "@neverquest/types/unions";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function TrainableSkill({ skill }: { skill: Skill }) {
   const { requiredCrew } = SKILLS[skill];
@@ -31,22 +31,21 @@ export function TrainableSkill({ skill }: { skill: Skill }) {
           <SkillDisplay skill={skill} />
 
           <Stack direction="horizontal" gap={3}>
-            <IconDisplay
-              contents={formatValue({ value: skillPriceValue })}
-              Icon={IconEssence}
-              tooltip="Price"
-            />
+            <IconDisplay Icon={IconEssence} tooltip="Price">
+              {formatNumber({ value: skillPriceValue })}
+            </IconDisplay>
 
             <TrainSkillButton skill={skill} />
           </Stack>
         </>
       ) : (
         <IconDisplay
-          contents={LABEL_UNKNOWN}
           description="Unlocks when acquiring a crew member."
           Icon={IconUnknown}
           tooltip="Skill"
-        />
+        >
+          {LABEL_UNKNOWN}
+        </IconDisplay>
       )}
     </div>
   );

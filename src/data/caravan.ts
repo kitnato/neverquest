@@ -17,7 +17,7 @@ import type {
 } from "@neverquest/LOCRAN/types";
 import type { UsableItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Crew, Grip } from "@neverquest/types/unions";
+import type { Crew, Grip } from "@neverquest/types/unions";
 
 export const AMMUNITION_PRICE = 10;
 
@@ -92,9 +92,12 @@ export const CREW: Record<
       11: "Ah, back again I see.",
       20: "I recently came into possession of a few curiosities.",
       21: "Can I interest you in anything else?",
-      25: "I have something suitable for marksmen.",
-      30: "A dark wanderer passed by and sold me a strange book ...",
+      30: "I have something suitable for marksmen.",
       31: "Welcome back. Always a sight for sore eyes.",
+      35: "You wouldn't be a scribe, would you?",
+      36: "Still on the search for ancient mysteries?",
+      40: "A dark wanderer passed by and sold me a strange book ...",
+      41: "A sea of monsters ... but is it endless?",
     },
     price: 0,
     requiredStage: 0,
@@ -119,7 +122,7 @@ export const CREW: Record<
     description: "Sells potions that cure ailments.",
     Icon: IconWitch,
     interaction: "Brew",
-    monologues: { 1: "Gaze deep into my cauldron ..." },
+    monologues: { 1: "Gaze into my cauldron ..." },
     price: 150,
     requiredStage: 18,
   },
@@ -205,15 +208,16 @@ export const MERCHANT_OFFERS: Record<
     { item: TRINKETS["antique coin"].item, type: "trinket" },
     { item: INFUSABLES["monkey paw"].item, type: "trinket" },
   ],
-  25: [{ item: TRINKETS["ammunition pouch"].item, type: "trinket" }],
-  30: [{ item: INFUSABLES["tome of power"].item, type: "trinket" }],
+  [CREW.fletcher.requiredStage]: [{ item: TRINKETS["ammunition pouch"].item, type: "trinket" }],
+  35: [{ item: TRINKETS["journal"].item, type: "trinket" }],
+  40: [{ item: INFUSABLES["tome of power"].item, type: "trinket" }],
 };
 
 export const TAILORING_EXPANSION = {
   ammunitionPouch: 20,
   knapsack: 3,
 };
-export const TAILORING_PRICES_MAXIMUM = {
+export const TAILORING_PRICE_MAXIMUM = {
   ammunitionPouch: 300,
   knapsack: 500,
 };
@@ -221,4 +225,4 @@ export const TAILORING_PRICES_MAXIMUM = {
 export const TRANSMUTE_COST = 3;
 export const TRANSMUTE_YIELD = 1;
 
-export const WITCH_POTIONS: Consumable[] = ["elixir", "antidote", "salve"];
+export const WITCH_POTIONS = ["elixir", "antidote", "salve"] as const;

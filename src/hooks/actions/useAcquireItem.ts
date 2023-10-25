@@ -1,8 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
 import { ARMOR_NONE, KNAPSACK_SIZE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
-import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
-import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import {
   canFit,
@@ -28,9 +26,6 @@ import {
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useAcquireItem() {
-  const toggleEquipGear = useToggleEquipGear();
-  const transactEssence = useTransactEssence();
-
   return useRecoilCallback(
     ({ set, snapshot }) =>
       (item: InventoryItem): "autoEquip" | "noFit" | "success" => {
@@ -76,6 +71,6 @@ export function useAcquireItem() {
 
         return "success";
       },
-    [toggleEquipGear, transactEssence],
+    [],
   );
 }

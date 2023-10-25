@@ -38,7 +38,9 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
   if (isUnlocked) {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        <IconDisplay contents={name} description={description} Icon={Icon} tooltip="Attribute" />
+        <IconDisplay description={description} Icon={Icon} tooltip="Attribute">
+          {name}
+        </IconDisplay>
 
         <Stack direction="horizontal" gap={5}>
           <AttributeRank attribute={attribute} />
@@ -79,10 +81,11 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
 
   return (
     <IconDisplay
-      contents={LABEL_UNKNOWN}
       description="Unlocked by acquiring a skill."
       Icon={IconUnknown}
       tooltip="Attribute"
-    />
+    >
+      {LABEL_UNKNOWN}
+    </IconDisplay>
   );
 }

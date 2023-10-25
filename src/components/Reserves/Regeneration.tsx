@@ -28,7 +28,7 @@ import {
 } from "@neverquest/state/reserves";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Reserve } from "@neverquest/types/unions";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 const RESERVE_CHANGE = {
   health: useChangeHealth,
@@ -90,7 +90,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                     <Stack direction="horizontal" gap={1}>
                       <IconImage Icon={IconRegenerationRate} size="small" />
 
-                      {formatValue({ format: "time", value: baseRegenerationRate })}
+                      {formatNumber({ format: "time", value: baseRegenerationRate })}
                     </Stack>
                   </td>
                 </tr>
@@ -105,7 +105,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      {`-${formatValue({ decimals: 0, format: "percentage", value: vigor })}`}
+                      {`-${formatNumber({ decimals: 0, format: "percentage", value: vigor })}`}
 
                       {vigorPowerBonus > 0 && (
                         <>
@@ -113,7 +113,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                           <IconImage Icon={IconTomeOfPower} size="small" />
 
-                          {`+${formatValue({
+                          {`+${formatNumber({
                             format: "percentage",
                             value: vigorPowerBonus,
                           })}`}
@@ -153,7 +153,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                           <IconImage Icon={IconTomeOfPower} size="small" />
 
-                          {`+${formatValue({
+                          {`+${formatNumber({
                             format: "percentage",
                             value: fortitudePowerBonus,
                           })}`}

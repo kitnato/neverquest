@@ -1,4 +1,4 @@
-import { type FunctionComponent, useState } from "react";
+import { useState } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
@@ -18,9 +18,18 @@ import { areAttributesAffordable } from "@neverquest/state/attributes";
 import { isAttacking, isGameOver } from "@neverquest/state/character";
 import { isStageStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
-import type { SVGIcon } from "@neverquest/types/props";
+import type { TabsData } from "@neverquest/types/props";
 import { formatEnumeration } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
+
+const TABS: TabsData = [
+  {
+    Component: Attributes,
+    Icon: IconAttributes,
+    label: "attributes",
+  },
+];
+const TOOLTIP = ["Attributes"];
 
 export function CapabilitiesButton() {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesAffordable);
@@ -34,35 +43,23 @@ export function CapabilitiesButton() {
   const [isScreenShowing, setScreenShowing] = useState(false);
 
   const isShowingSkillsOrTraits = isShowingSkills || isShowingTraits;
-  const tabs: {
-    Component: FunctionComponent;
-    Icon: SVGIcon;
-    label: string;
-  }[] = [
-    {
-      Component: Attributes,
-      Icon: IconAttributes,
-      label: "attributes",
-    },
-  ];
-  const tooltip = ["Attributes"];
 
   if (isShowingSkills) {
-    tabs.push({
+    TABS.push({
       Component: Skills,
       Icon: IconSkills,
       label: "skills",
     });
-    tooltip.push("skills");
+    TOOLTIP.push("skills");
   }
 
   if (isShowingTraits) {
-    tabs.push({
+    TABS.push({
       Component: Traits,
       Icon: IconTraits,
       label: "traits",
     });
-    tooltip.push("traits");
+    TOOLTIP.push("traits");
   }
 
   if (!isShowingCapabilities) {
@@ -71,7 +68,7 @@ export function CapabilitiesButton() {
 
   return (
     <>
-      <OverlayTrigger overlay={<Tooltip>{formatEnumeration(tooltip)}</Tooltip>}>
+      <OverlayTrigger overlay={<Tooltip>{formatEnumeration(TOOLTIP)}</Tooltip>}>
         <span className={getAnimationClass({ name: "bounceIn" })}>
           <Button
             className={`position-relative${
@@ -88,7 +85,9 @@ export function CapabilitiesButton() {
           >
             <IconImage Icon={IconCapabilities} />
 
-            <ButtonBadge Icon={IconUpgrade} isShowing={areAttributesIncreasableValue} />
+            <ButtonBadge isShowing={areAttributesIncreasableValue}>
+              <IconImage Icon={IconUpgrade} size="small" />
+            </ButtonBadge>
           </Button>
         </span>
       </OverlayTrigger>
@@ -98,11 +97,7 @@ export function CapabilitiesButton() {
         onClose={() => setScreenShowing(false)}
         title={`${isShowingSkillsOrTraits ? "Capabilities" : "Attributes"}`}
       >
-        {isShowingSkillsOrTraits ? (
-          <IconTabs defaultTab="attributes" tabs={tabs} />
-        ) : (
-          <Attributes />
-        )}
+        {isShowingSkillsOrTraits ? <IconTabs tabs={TABS} /> : <Attributes />}
       </DismissableScreen>
     </>
   );

@@ -8,7 +8,7 @@ import IconGem from "@neverquest/icons/gem.svg?react";
 import { elementalEffects } from "@neverquest/state/gear";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
 import { isArmor, isShield } from "@neverquest/types/type-guards";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequipped }) {
@@ -40,8 +40,8 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
             <Stack direction="horizontal" gap={1} key={id}>
               <span className={ELEMENTALS[elemental].color}>{`${
                 typeof effect === "number"
-                  ? `+${formatValue({ decimals: 0, format: "percentage", value: effect })}`
-                  : formatValue({ value: effect.damage })
+                  ? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
+                  : formatNumber({ value: effect.damage })
               }`}</span>
 
               {LABEL_SEPARATOR}
@@ -50,8 +50,8 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 
               {`${
                 typeof effect === "number"
-                  ? `+${formatValue({ decimals: 0, format: "percentage", value: effect })}`
-                  : formatValue({ format: "time", value: effect.duration })
+                  ? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
+                  : formatNumber({ format: "time", value: effect.duration })
               }`}
 
               {LABEL_SEPARATOR}

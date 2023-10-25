@@ -26,56 +26,6 @@ Essential features for a v1.0.0 release.
 
 Upon purchasing the Journal trinket, unlocks quests that function similarly to achievements. Completing a quest grants [essence](./src/data/manual.md#essence).
 
-##### Challenge quests
-
-- Parry, inflict bleed and stagger in one attack
-- Survive the first 4 levels without any gear equipped
-- Survive the first 10 levels while upgrading at most 1 attribute
-
-##### Combat quests
-
-- Kill first monster
-- Kill 5/10/25/50/100/1000 monsters
-- Kill a monster in one strike
-- Kill a monster with [bleed](./src/data/manual.md#bleed) damage
-- [Block](./src/data/manual.md#block) 1/5/10/25/50/100 strikes
-- Block 3 strikes in a row
-- [Dodge](./src/data/manual.md#dodge) 1/5/10/25/50/100 strikes
-- Dodge 3 strikes in a row
-- [Parry](./src/data/manual.md#parry) 1/5/10/25/50/100 strikes
-- Parry 3 strikes in a row
-- [Stagger](./src/data/manual.md#stagger) 1/5/10/25/50/100 times
-- Stagger 3 times in a row
-
-##### Caravan quests
-
-- Purchase [armor](./src/data/manual.md#armor)
-- Purchase a [shield](./src/data/manual.md#shields)
-- Purchase a [weapon](./src/data/manual.md#weapons)
-- Purchase key trinket, e.g. [compass](./src/data/manual.md#compass), [hearthstone](./src/data/manual.md#hearthstone) etc.
-- Hire the [alchemist](./src/data/manual.md#alchemist)
-- Hire the [blacksmith](./src/data/manual.md#blacksmith)
-- Hire the [cook](#cook)
-- Hire the [medic](./src/data/manual.md#medic)
-- Hire the [merchant](./src/data/manual.md#merchant)
-- Hire the [mercenary](./src/data/manual.md#mercenary)
-- Hire the [tailor](./src/data/manual.md#tailor)
-- Hire the [witch](./src/data/manual.md#witch)
-
-##### Gear quests
-
-- Equip a [weapon](./src/data/manual.md#weapons)
-- Equip [armor](./src/data/manual.md#armor)
-- Equip a [shield](./src/data/manual.md#shields)
-- Discover armor classes
-- Discover [weapon classes](./src/data/manual.md#weapon-class)
-- Discover shield types
-
-##### Meta quests
-
-- Enter a name
-- Complete 5/10/25/50/100/all quests
-
 ### Future development
 
 Features that require more ideation and refinement.

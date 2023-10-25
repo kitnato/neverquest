@@ -9,7 +9,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconDamage from "@neverquest/icons/damage.svg?react";
 import { isShowing } from "@neverquest/state/isShowing";
 import { damageTotal } from "@neverquest/state/statistics";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Damage() {
   const damageTotalValue = useRecoilValue(damageTotal);
@@ -21,30 +21,25 @@ export function Damage() {
   });
 
   return (
-    <IconDisplay
-      contents={
-        <Stack direction="horizontal">
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverHeader className="text-center">Total damage details</PopoverHeader>
+    <IconDisplay description={<DamagePerSecond />} Icon={IconDamage} tooltip="Total damage">
+      <Stack direction="horizontal">
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">Total damage details</PopoverHeader>
 
-                <PopoverBody>
-                  <DamageDetails />
-                </PopoverBody>
-              </Popover>
-            }
-            trigger={isShowingDamageDetails ? ["hover", "focus"] : []}
-          >
-            <span>{formatValue({ value: damageTotalValue })}</span>
-          </OverlayTrigger>
+              <PopoverBody>
+                <DamageDetails />
+              </PopoverBody>
+            </Popover>
+          }
+          trigger={isShowingDamageDetails ? ["hover", "focus"] : []}
+        >
+          <span>{formatNumber({ value: damageTotalValue })}</span>
+        </OverlayTrigger>
 
-          <FloatingTextQueue delta="damage" />
-        </Stack>
-      }
-      description={<DamagePerSecond />}
-      Icon={IconDamage}
-      tooltip="Total damage"
-    />
+        <FloatingTextQueue delta="damage" />
+      </Stack>
+    </IconDisplay>
   );
 }

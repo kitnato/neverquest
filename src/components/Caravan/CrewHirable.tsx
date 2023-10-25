@@ -15,7 +15,7 @@ import { hireStatus } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import { essence } from "@neverquest/state/resources";
 import type { Crew } from "@neverquest/types/unions";
-import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function CrewHirable({ crew }: { crew: Crew }) {
   const essenceValue = useRecoilValue(essence);
@@ -35,14 +35,14 @@ export function CrewHirable({ crew }: { crew: Crew }) {
   if (hireStatusValue === "hirable") {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        <IconDisplay contents={name} description={description} Icon={Icon} tooltip="Caravan crew" />
+        <IconDisplay description={description} Icon={Icon} tooltip="Caravan crew">
+          {name}
+        </IconDisplay>
 
         <Stack direction="horizontal" gap={3}>
-          <IconDisplay
-            contents={formatValue({ value: price })}
-            Icon={IconEssence}
-            tooltip="Price"
-          />
+          <IconDisplay Icon={IconEssence} tooltip="Price">
+            {formatNumber({ value: price })}
+          </IconDisplay>
 
           <OverlayTrigger
             overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
@@ -72,10 +72,11 @@ export function CrewHirable({ crew }: { crew: Crew }) {
 
   return (
     <IconDisplay
-      contents={LABEL_UNKNOWN}
       description={`Unlocks at stage ${requiredStage}.`}
       Icon={IconUnknown}
       tooltip="Caravan crew"
-    />
+    >
+      {LABEL_UNKNOWN}
+    </IconDisplay>
   );
 }

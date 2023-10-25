@@ -8,7 +8,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconAttributePoints from "@neverquest/icons/attribute-points.svg?react";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import { attributePoints, level } from "@neverquest/state/attributes";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAttributePointCost } from "@neverquest/utilities/getters";
 
 export function AttributePoints() {
@@ -23,7 +23,7 @@ export function AttributePoints() {
   return (
     <Stack direction="horizontal" gap={3}>
       <Stack direction="horizontal">
-        <IconDisplay contents="" Icon={IconAttributePoints} tooltip="Available attribute points" />
+        <IconDisplay Icon={IconAttributePoints} tooltip="Available attribute points" />
 
         <FloatingTextQueue delta="attributePoints" />
       </Stack>
@@ -37,7 +37,7 @@ export function AttributePoints() {
               <Stack className="justify-content-center" direction="horizontal" gap={1}>
                 <IconImage Icon={IconEssence} size="small" />
 
-                {formatValue({ value: getAttributePointCost(levelValue) })}
+                {formatNumber({ value: getAttributePointCost(levelValue) })}
               </Stack>
             </PopoverBody>
           </Popover>

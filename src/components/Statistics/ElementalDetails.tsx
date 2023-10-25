@@ -6,7 +6,7 @@ import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/gener
 import { ELEMENTALS, GEM_ELEMENTALS } from "@neverquest/data/inventory";
 import { armor, totalElementalEffects, weapon } from "@neverquest/state/gear";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
@@ -33,7 +33,7 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
 
               <IconImage Icon={ELEMENTALS[elemental].Icon} size="small" />
 
-              {`${formatValue({ format: "time", value: duration })}`}
+              {`${formatNumber({ format: "time", value: duration })}`}
             </Stack>
           );
         })}

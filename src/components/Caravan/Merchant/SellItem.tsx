@@ -7,7 +7,7 @@ import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import { inventory } from "@neverquest/state/inventory";
 import type { InventoryItem } from "@neverquest/types";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import { getSellPrice } from "@neverquest/utilities/getters";
 
 export function SellItem({ item }: { item: InventoryItem }) {
@@ -19,11 +19,9 @@ export function SellItem({ item }: { item: InventoryItem }) {
   return (
     <>
       <Stack direction="horizontal" gap={3}>
-        <IconDisplay
-          contents={formatValue({ value: getSellPrice(item) })}
-          Icon={IconEssence}
-          tooltip="Value"
-        />
+        <IconDisplay Icon={IconEssence} tooltip="Value">
+          {formatNumber({ value: getSellPrice(item) })}
+        </IconDisplay>
 
         <Button
           onClick={() => {

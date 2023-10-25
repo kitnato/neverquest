@@ -7,7 +7,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconDamagePerSecond from "@neverquest/icons/damage-per-second.svg?react";
 import { showDamagePerSecond } from "@neverquest/state/settings";
 import { damagePerSecond } from "@neverquest/state/statistics";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function DamagePerSecond() {
   const damagePerSecondValue = useRecoilValue(damagePerSecond);
@@ -25,16 +25,15 @@ export function DamagePerSecond() {
 
   return (
     <IconDisplay
-      contents={
-        <Stack direction="horizontal">
-          <span>{formatValue({ format: "float", value: damagePerSecondValue })}</span>
-
-          <FloatingTextQueue delta="damagePerSecond" />
-        </Stack>
-      }
       Icon={IconDamagePerSecond}
       iconProps={{ overlayPlacement: "bottom", size: "small" }}
       tooltip="Total damage per second"
-    />
+    >
+      <Stack direction="horizontal">
+        <span>{formatNumber({ format: "float", value: damagePerSecondValue })}</span>
+
+        <FloatingTextQueue delta="damagePerSecond" />
+      </Stack>
+    </IconDisplay>
   );
 }

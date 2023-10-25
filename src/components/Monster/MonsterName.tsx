@@ -38,5 +38,9 @@ export function MonsterName() {
     };
   })();
 
-  return <IconDisplay contents={monsterNameValue} Icon={Icon} tooltip={tooltip} />;
+  return (
+    <IconDisplay Icon={Icon} tooltip={tooltip}>
+      {monsterNameValue}
+    </IconDisplay>
+  );
 }

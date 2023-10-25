@@ -22,34 +22,30 @@ export function Name() {
   }, []);
 
   return (
-    <IconDisplay
-      contents={
-        <FormControl
-          className={canEdit ? "hover-grow" : undefined}
-          disabled={!canEdit}
-          onBlur={({ currentTarget: { value } }) => {
-            if (!value) {
-              setName(LABEL_UNKNOWN);
-            }
+    <IconDisplay Icon={isGameOverValue ? IconDead : IconAlive} tooltip="Name">
+      <FormControl
+        className={canEdit ? "hover-grow" : undefined}
+        disabled={!canEdit}
+        onBlur={({ currentTarget: { value } }) => {
+          if (!value) {
+            setName(LABEL_UNKNOWN);
+          }
 
-            setIsEditing(false);
-          }}
-          onChange={({ target: { value } }) => setName(value)}
-          onClick={({ currentTarget }) => {
-            if (currentTarget.value === LABEL_UNKNOWN) {
-              currentTarget.setSelectionRange(0, 0);
-              currentTarget.select();
-            }
+          setIsEditing(false);
+        }}
+        onChange={({ target: { value } }) => setName(value)}
+        onClick={({ currentTarget }) => {
+          if (currentTarget.value === LABEL_UNKNOWN) {
+            currentTarget.setSelectionRange(0, 0);
+            currentTarget.select();
+          }
 
-            setIsEditing(true);
-          }}
-          onKeyDown={({ key }) => key === "Enter" && setIsEditing(false)}
-          plaintext={!isEditing}
-          value={nameValue}
-        />
-      }
-      Icon={isGameOverValue ? IconDead : IconAlive}
-      tooltip="Name"
-    />
+          setIsEditing(true);
+        }}
+        onKeyDown={({ key }) => key === "Enter" && setIsEditing(false)}
+        plaintext={!isEditing}
+        value={nameValue}
+      />
+    </IconDisplay>
   );
 }

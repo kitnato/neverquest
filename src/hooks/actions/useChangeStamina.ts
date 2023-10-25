@@ -8,7 +8,7 @@ import {
   staminaMaximumTotal,
 } from "@neverquest/state/reserves";
 import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeStamina() {
@@ -21,7 +21,7 @@ export function useChangeStamina() {
           ? get(regenerationAmount("stamina"))
           : deltaReserve.value;
         const isPositive = value > 0;
-        const formattedValue = formatValue({ value });
+        const formattedValue = formatNumber({ value });
 
         const newStamina = get(stamina) + value;
         const staminaMaximumTotalValue = get(staminaMaximumTotal);

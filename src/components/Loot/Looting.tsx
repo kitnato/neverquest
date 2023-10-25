@@ -29,6 +29,8 @@ export function Looting() {
   }
 
   return (
-    <IconDisplay contents={<LootingMeter />} Icon={IconLooting} isAnimated tooltip="Looting" />
+    <IconDisplay Icon={IconLooting} isAnimated tooltip="Looting">
+      <LootingMeter />
+    </IconDisplay>
   );
 }

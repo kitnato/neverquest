@@ -7,7 +7,7 @@ import IconStalwart from "@neverquest/icons/stalwart.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import type { GeneratorRange } from "@neverquest/types";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function DodgePenaltyContents({ staminaCost }: { staminaCost: GeneratorRange | number }) {
   const isTraitAcquiredStalwart = useRecoilValue(isTraitAcquired("stalwart"));
@@ -29,8 +29,8 @@ export function DodgePenaltyContents({ staminaCost }: { staminaCost: GeneratorRa
           <IconImage Icon={IconStamina} size="small" />
 
           {typeof staminaCost === "number"
-            ? formatValue({ value: staminaCost })
-            : `${formatValue({ value: staminaCost.minimum })}-${formatValue({
+            ? formatNumber({ value: staminaCost })
+            : `${formatNumber({ value: staminaCost.minimum })}-${formatNumber({
                 value: staminaCost.maximum,
               })}`}
         </>

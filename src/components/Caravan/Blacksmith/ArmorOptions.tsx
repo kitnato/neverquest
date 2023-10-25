@@ -21,7 +21,7 @@ import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateArmor } from "@neverquest/utilities/generators";
 import {
   getArmorRanges,
@@ -53,67 +53,62 @@ export function ArmorOptions() {
         <SetGearLevel state={[armorLevel, setArmorLevel]} />
 
         <IconDisplay
-          contents={
-            <FormSelect
-              onChange={({ target: { value } }) => setArmorClass(value as ArmorClass)}
-              value={armorClass}
-            >
-              {ARMOR_CLASS_TYPES.map((current) => (
-                <option key={current} value={current}>
-                  {capitalizeAll(current)}
-                </option>
-              ))}
-            </FormSelect>
-          }
           Icon={ARMOR_SPECIFICATIONS[armorClass].Icon}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Class"
-        />
+        >
+          <FormSelect
+            onChange={({ target: { value } }) => setArmorClass(value as ArmorClass)}
+            value={armorClass}
+          >
+            {ARMOR_CLASS_TYPES.map((current) => (
+              <option key={current} value={current}>
+                {capitalizeAll(current)}
+              </option>
+            ))}
+          </FormSelect>
+        </IconDisplay>
 
         <IconDisplay
-          contents={`${formatValue({ value: protection.minimum })}-${formatValue({
-            value: protection.maximum,
-          })}`}
           Icon={IconArmorProtection}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Protection"
-        />
+        >{`${formatNumber({ value: protection.minimum })}-${formatNumber({
+          value: protection.maximum,
+        })}`}</IconDisplay>
 
         {deflection !== null && (
           <IconDisplay
-            contents={
-              armorcraftValue
-                ? `${formatValue({
-                    format: "percentage",
-                    value: deflection.minimum,
-                  })}-${formatValue({ format: "percentage", value: deflection.maximum })}`
-                : LABEL_UNKNOWN
-            }
             Icon={armorcraftValue ? IconDeflection : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
             tooltip={armorcraftValue ? "Deflection chance" : LABEL_UNKNOWN}
-          />
+          >
+            {armorcraftValue
+              ? `${formatNumber({
+                  format: "percentage",
+                  value: deflection.minimum,
+                })}-${formatNumber({ format: "percentage", value: deflection.maximum })}`
+              : LABEL_UNKNOWN}
+          </IconDisplay>
         )}
 
         {staminaCost !== 0 && (
           <IconDisplay
-            contents={
-              isShowingDodge ? <DodgePenaltyContents staminaCost={staminaCost} /> : LABEL_UNKNOWN
-            }
             Icon={isShowingDodge ? IconDodgePenalty : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
             tooltip={isShowingDodge ? "Dodge penalty" : LABEL_UNKNOWN}
-          />
+          >
+            {isShowingDodge ? <DodgePenaltyContents staminaCost={staminaCost} /> : LABEL_UNKNOWN}
+          </IconDisplay>
         )}
 
         <IconDisplay
-          contents={`${formatValue({ value: weight.minimum })}-${formatValue({
-            value: weight.maximum,
-          })}`}
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
-        />
+        >{`${formatNumber({ value: weight.minimum })}-${formatNumber({
+          value: weight.maximum,
+        })}`}</IconDisplay>
       </Stack>
 
       <hr />

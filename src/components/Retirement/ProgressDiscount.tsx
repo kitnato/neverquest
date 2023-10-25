@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import IconProgressDiscount from "@neverquest/icons/progress-discount.svg?react";
 import { stageMaximum } from "@neverquest/state/encounter";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import { getProgressReduction } from "@neverquest/utilities/getters";
 
 export function ProgressDiscount() {
@@ -14,14 +14,10 @@ export function ProgressDiscount() {
     <Stack gap={3}>
       <h6>Progress discount</h6>
 
-      <IconDisplay
-        contents={`-${formatValue({
-          format: "percentage",
-          value: getProgressReduction(stageMaximumValue),
-        })}`}
-        Icon={IconProgressDiscount}
-        tooltip="Progress discount"
-      />
+      <IconDisplay Icon={IconProgressDiscount} tooltip="Progress discount">{`-${formatNumber({
+        format: "percentage",
+        value: getProgressReduction(stageMaximumValue),
+      })}`}</IconDisplay>
     </Stack>
   );
 }

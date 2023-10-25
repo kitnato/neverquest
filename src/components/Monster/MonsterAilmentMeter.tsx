@@ -6,7 +6,7 @@ import { LABEL_EMPTY } from "@neverquest/data/general";
 import { AILMENT_DESCRIPTION } from "@neverquest/data/monster";
 import { isMonsterAiling, monsterAilmentDuration } from "@neverquest/state/monster";
 import type { MonsterAilment, NumberFormat } from "@neverquest/types/unions";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function MonsterAilmentMeter({
   ailment,
@@ -25,16 +25,15 @@ export function MonsterAilmentMeter({
       <span className="w-100">
         <LabelledProgressBar
           disableTransitions
-          label={
-            isMonsterAilingValue
-              ? format === "time"
-                ? formatValue({ format: "time", value: monsterAilmentDurationValue })
-                : monsterAilmentDurationValue
-              : LABEL_EMPTY
-          }
           value={isMonsterAilingValue ? (monsterAilmentDurationValue / totalDuration) * 100 : 0}
           variant="secondary"
-        />
+        >
+          {isMonsterAilingValue
+            ? format === "time"
+              ? formatNumber({ format: "time", value: monsterAilmentDurationValue })
+              : monsterAilmentDurationValue
+            : LABEL_EMPTY}
+        </LabelledProgressBar>
       </span>
     </OverlayTrigger>
   );

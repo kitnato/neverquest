@@ -36,14 +36,6 @@ export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
   }),
 );
 
-export const hasBoughtFromMerchant = withStateKey("hasBoughtFromMerchant", (key) =>
-  atom({
-    default: false,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
 // TODO - Must use { status } object instead of just CrewStatus, otherwise onSet() does not trigger in useInitializer().
 export const hireStatus = withStateKey("hireStatus", (key) =>
   atomFamily<{ status: CrewStatus }, Crew>({

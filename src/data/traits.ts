@@ -13,7 +13,7 @@ import IconTank from "@neverquest/icons/tank.svg?react";
 import IconTormentor from "@neverquest/icons/tormentor.svg?react";
 import type { SVGIcon } from "@neverquest/types/props";
 import type { Trait } from "@neverquest/types/unions";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export const BRUISER_STUN_CHANCE = 0.25;
 
@@ -29,7 +29,7 @@ export const TRAITS: Record<
     Icon: IconBrawler,
   },
   bruiser: {
-    description: `Current stamina adds to unarmed damage & unarmed attacks have a ${formatValue({
+    description: `Current stamina adds to unarmed damage & unarmed attacks have a ${formatNumber({
       format: "percentage",
       value: BRUISER_STUN_CHANCE,
     })} chance to stun.`,

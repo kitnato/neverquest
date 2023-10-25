@@ -14,7 +14,7 @@ import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Stamina() {
   const endurancePowerBonus = useRecoilValue(attributePowerBonus("endurance"));
@@ -29,79 +29,74 @@ export function Stamina() {
   }
 
   return (
-    <IconDisplay
-      contents={
-        <Stack>
-          <Stack className="w-100" direction="horizontal">
-            <OverlayTrigger
-              overlay={
-                <Popover>
-                  <PopoverHeader className="text-center">Stamina details</PopoverHeader>
+    <IconDisplay Icon={IconStamina} isAnimated tooltip="Stamina">
+      <Stack>
+        <Stack className="w-100" direction="horizontal">
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverHeader className="text-center">Stamina details</PopoverHeader>
 
-                  <PopoverBody>
-                    <DetailsTable>
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
+                <PopoverBody>
+                  <DetailsTable>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
 
-                        <td>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconStamina} size="small" />
+                      <td>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconStamina} size="small" />
 
-                            {baseAmount}
-                          </Stack>
-                        </td>
-                      </tr>
+                          {baseAmount}
+                        </Stack>
+                      </td>
+                    </tr>
 
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconEndurance} size="small" />
-                            Endurance:
-                          </Stack>
-                        </td>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconEndurance} size="small" />
+                          Endurance:
+                        </Stack>
+                      </td>
 
-                        <td>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconStamina} size="small" />
+                      <td>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconStamina} size="small" />
 
-                            {`+${formatValue({ value: endurance - baseAmount })}`}
+                          {`+${formatNumber({ value: endurance - baseAmount })}`}
 
-                            {endurancePowerBonus > 0 && (
-                              <>
-                                <span>{LABEL_SEPARATOR}</span>
+                          {endurancePowerBonus > 0 && (
+                            <>
+                              <span>{LABEL_SEPARATOR}</span>
 
-                                <IconImage Icon={IconTomeOfPower} size="small" />
+                              <IconImage Icon={IconTomeOfPower} size="small" />
 
-                                {`+${formatValue({
-                                  format: "percentage",
-                                  value: endurancePowerBonus,
-                                })}`}
-                              </>
-                            )}
-                          </Stack>
-                        </td>
-                      </tr>
-                    </DetailsTable>
-                  </PopoverBody>
-                </Popover>
-              }
-              placement="right"
-              trigger={isShowingStaminaDetails ? ["hover", "focus"] : []}
-            >
-              <span className="w-100">
-                <ReserveMeter reserve="stamina" />
-              </span>
-            </OverlayTrigger>
+                              {`+${formatNumber({
+                                format: "percentage",
+                                value: endurancePowerBonus,
+                              })}`}
+                            </>
+                          )}
+                        </Stack>
+                      </td>
+                    </tr>
+                  </DetailsTable>
+                </PopoverBody>
+              </Popover>
+            }
+            placement="right"
+            trigger={isShowingStaminaDetails ? ["hover", "focus"] : []}
+          >
+            <span className="w-100">
+              <ReserveMeter reserve="stamina" />
+            </span>
+          </OverlayTrigger>
 
-            <FloatingTextQueue delta="stamina" />
-          </Stack>
-
-          <Regeneration reserve="stamina" />
+          <FloatingTextQueue delta="stamina" />
         </Stack>
-      }
-      Icon={IconStamina}
-      isAnimated
-      tooltip="Stamina"
-    />
+
+        <Regeneration reserve="stamina" />
+      </Stack>
+    </IconDisplay>
   );
 }

@@ -32,14 +32,13 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
       >
         <span className="w-100">
           <LabelledProgressBar
-            label={
-              isMasteryAtMaximumValue
-                ? LABEL_MAXIMUM
-                : `${masteryProgressValue}/${masteryCostValue}`
-            }
             value={isMasteryAtMaximumValue ? 100 : (masteryProgressValue / masteryCostValue) * 100}
             variant="secondary"
-          />
+          >
+            {isMasteryAtMaximumValue
+              ? LABEL_MAXIMUM
+              : `${masteryProgressValue}/${masteryCostValue}`}
+          </LabelledProgressBar>
         </span>
       </OverlayTrigger>
 

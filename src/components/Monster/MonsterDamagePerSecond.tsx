@@ -16,14 +16,13 @@ export function MonsterDamagePerSecond() {
 
   return (
     <IconDisplay
-      contents={`${monsterDamageTotalPerSecondValue}${
-        monsterDamagePerSecondValue === monsterDamageTotalPerSecondValue
-          ? ""
-          : ` (${monsterDamagePerSecondValue})`
-      }`}
       Icon={IconDamagePerSecond}
       iconProps={{ overlayPlacement: "bottom", size: "small" }}
       tooltip="Damage per second"
-    />
+    >{`${monsterDamageTotalPerSecondValue}${
+      monsterDamagePerSecondValue === monsterDamageTotalPerSecondValue
+        ? ""
+        : ` (${monsterDamagePerSecondValue})`
+    }`}</IconDisplay>
   );
 }

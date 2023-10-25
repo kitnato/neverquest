@@ -40,83 +40,80 @@ export function ItemDisplay({
 }) {
   if (isArmor(item)) {
     return (
-      <IconDisplay
-        contents={<ArmorName armor={item} placement={overlayPlacement} />}
-        description={description}
-        Icon={IconArmor}
-        iconProps={iconProps}
-        tooltip="Armor"
-      />
+      <IconDisplay description={description} Icon={IconArmor} iconProps={iconProps} tooltip="Armor">
+        <ArmorName armor={item} placement={overlayPlacement} />
+      </IconDisplay>
     );
   }
 
   if (isConsumable(item)) {
     return (
       <IconDisplay
-        contents={<ItemName item={item} placement={overlayPlacement} stack={stack} />}
         description={description}
         Icon={CONSUMABLES[item.name].Icon}
         iconProps={iconProps}
         tooltip="Consumable"
-      />
+      >
+        <ItemName item={item} placement={overlayPlacement} stack={stack} />
+      </IconDisplay>
     );
   }
 
   if (isInfusable(item)) {
     return (
       <IconDisplay
-        contents={<ItemName item={item} placement={overlayPlacement} />}
         description={description}
         Icon={INFUSABLES[item.name].Icon}
         iconProps={iconProps}
         tooltip="Infusable trinket"
-      />
+      >
+        <ItemName item={item} placement={overlayPlacement} />
+      </IconDisplay>
     );
   }
 
   if (isShield(item)) {
     return (
       <IconDisplay
-        contents={<ShieldName placement={overlayPlacement} shield={item} />}
         description={description}
         Icon={IconShield}
         iconProps={iconProps}
         tooltip="Shield"
-      />
+      >
+        <ShieldName placement={overlayPlacement} shield={item} />
+      </IconDisplay>
     );
   }
 
   if (isTrinket(item)) {
     return (
       <IconDisplay
-        contents={<ItemName item={item} placement={overlayPlacement} />}
         description={description}
         Icon={TRINKETS[item.name].Icon}
         iconProps={iconProps}
         tooltip="Trinket"
-      />
+      >
+        <ItemName item={item} placement={overlayPlacement} />
+      </IconDisplay>
     );
   }
 
   if (isWeapon(item)) {
     return (
       <IconDisplay
-        contents={<WeaponName placement={overlayPlacement} weapon={item} />}
         description={description}
         Icon={isMelee(item) ? IconMelee : IconRanged}
         iconProps={iconProps}
         tooltip="Weapon"
-      />
+      >
+        <WeaponName placement={overlayPlacement} weapon={item} />
+      </IconDisplay>
     );
   }
 
   return (
-    <IconDisplay
-      contents={<ItemName item={item} placement={overlayPlacement} stack={stack} />}
-      description={description}
-      Icon={IconGem}
-      iconProps={iconProps}
-      tooltip="Gem"
-    />
+    <IconDisplay description={description} Icon={IconGem} iconProps={iconProps} tooltip="Gem">
+      <ItemName item={item} placement={overlayPlacement} stack={stack} />
+    </IconDisplay>
   );
 }

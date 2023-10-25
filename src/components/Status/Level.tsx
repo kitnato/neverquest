@@ -8,7 +8,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconLevel from "@neverquest/icons/level.svg?react";
 import { absorbedEssence, level } from "@neverquest/state/attributes";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Level() {
   const absorbedEssenceValue = useRecoilValue(absorbedEssence);
@@ -20,32 +20,28 @@ export function Level() {
   });
 
   return (
-    <IconDisplay
-      contents={
-        <Stack direction="horizontal">
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverHeader className="text-center">Absorbed essence</PopoverHeader>
+    <IconDisplay Icon={IconLevel} tooltip="Power level">
+      <Stack direction="horizontal">
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">Absorbed essence</PopoverHeader>
 
-                <PopoverBody>
-                  <Stack className="justify-content-center" direction="horizontal" gap={1}>
-                    <IconImage Icon={IconEssence} size="small" />
+              <PopoverBody>
+                <Stack className="justify-content-center" direction="horizontal" gap={1}>
+                  <IconImage Icon={IconEssence} size="small" />
 
-                    {formatValue({ value: absorbedEssenceValue })}
-                  </Stack>
-                </PopoverBody>
-              </Popover>
-            }
-          >
-            <span>{levelValue}</span>
-          </OverlayTrigger>
+                  {formatNumber({ value: absorbedEssenceValue })}
+                </Stack>
+              </PopoverBody>
+            </Popover>
+          }
+        >
+          <span>{levelValue}</span>
+        </OverlayTrigger>
 
-          <FloatingTextQueue delta="level" />
-        </Stack>
-      }
-      Icon={IconLevel}
-      tooltip="Power level"
-    />
+        <FloatingTextQueue delta="level" />
+      </Stack>
+    </IconDisplay>
   );
 }

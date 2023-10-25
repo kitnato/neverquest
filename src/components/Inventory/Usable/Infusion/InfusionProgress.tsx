@@ -8,7 +8,7 @@ import { INFUSABLE_LEVEL_MAXIMUM } from "@neverquest/data/inventory";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import { infusionCurrent, infusionLevel, infusionMaximum } from "@neverquest/state/items";
 import type { Infusable } from "@neverquest/types/unions";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function InfusionProgress({ infusable }: { infusable: Infusable }) {
   const infusionCurrentValue = useRecoilValue(infusionCurrent(infusable));
@@ -22,17 +22,16 @@ export function InfusionProgress({ infusable }: { infusable: Infusable }) {
   return (
     <LabelledProgressBar
       disableTransitions
-      label={
-        <Stack direction="horizontal" gap={1}>
-          <IconImage Icon={IconEssence} isStencilled size="small" />
-
-          {`${formatValue({ value: infusionCurrentValue })}/${formatValue({
-            value: infusionMaximumValue,
-          })}`}
-        </Stack>
-      }
       value={(infusionCurrentValue / infusionMaximumValue) * 100}
       variant="secondary"
-    />
+    >
+      <Stack direction="horizontal" gap={1}>
+        <IconImage Icon={IconEssence} isStencilled size="small" />
+
+        {`${formatNumber({ value: infusionCurrentValue })}/${formatNumber({
+          value: infusionMaximumValue,
+        })}`}
+      </Stack>
+    </LabelledProgressBar>
   );
 }

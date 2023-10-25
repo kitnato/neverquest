@@ -15,13 +15,8 @@ export function MonsterStunned() {
   }
 
   return (
-    <IconDisplay
-      contents={
-        <MonsterAilmentMeter ailment="stunned" format="integer" totalDuration={mightValue} />
-      }
-      Icon={IconStunned}
-      isAnimated
-      tooltip="Stunned"
-    />
+    <IconDisplay Icon={IconStunned} isAnimated tooltip="Stunned">
+      <MonsterAilmentMeter ailment="stunned" format="integer" totalDuration={mightValue} />
+    </IconDisplay>
   );
 }

@@ -29,7 +29,7 @@ import { weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMonsterDead } from "@neverquest/state/monster";
 import { attackRateTotal } from "@neverquest/state/statistics";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Attack() {
   const speedPowerBonus = useRecoilValue(attributePowerBonus("speed"));
@@ -71,78 +71,73 @@ export function Attack() {
   }
 
   return (
-    <IconDisplay
-      contents={
-        <Stack className="w-100" direction="horizontal">
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverHeader className="text-center">Attack rate details</PopoverHeader>
+    <IconDisplay Icon={IconAttackRate} isAnimated tooltip="Total attack rate">
+      <Stack className="w-100" direction="horizontal">
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">Attack rate details</PopoverHeader>
 
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>{`${
-                        weaponValue.name === WEAPON_NONE.name ? "Base" : "Weapon"
-                      }:`}</td>
+              <PopoverBody>
+                <DetailsTable>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>{`${
+                      weaponValue.name === WEAPON_NONE.name ? "Base" : "Weapon"
+                    }:`}</td>
 
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconWeaponAttackRate} size="small" />
+                    <td>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconWeaponAttackRate} size="small" />
 
-                          {formatValue({ format: "time", value: weaponValue.rate })}
-                        </Stack>
-                      </td>
-                    </tr>
+                        {formatNumber({ format: "time", value: weaponValue.rate })}
+                      </Stack>
+                    </td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconWeaponSpeed} size="small" />
-                          Speed:
-                        </Stack>
-                      </td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconWeaponSpeed} size="small" />
+                        Speed:
+                      </Stack>
+                    </td>
 
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          {`-${formatValue({
-                            decimals: 0,
-                            format: "percentage",
-                            value: speed,
-                          })}`}
+                    <td>
+                      <Stack direction="horizontal" gap={1}>
+                        {`-${formatNumber({
+                          decimals: 0,
+                          format: "percentage",
+                          value: speed,
+                        })}`}
 
-                          {speedPowerBonus > 0 && (
-                            <>
-                              <span>{LABEL_SEPARATOR}</span>
+                        {speedPowerBonus > 0 && (
+                          <>
+                            <span>{LABEL_SEPARATOR}</span>
 
-                              <IconImage Icon={IconTomeOfPower} size="small" />
+                            <IconImage Icon={IconTomeOfPower} size="small" />
 
-                              {`+${formatValue({
-                                format: "percentage",
-                                value: speedPowerBonus,
-                              })}`}
-                            </>
-                          )}
-                        </Stack>
-                      </td>
-                    </tr>
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-            trigger={isShowingAttackRateDetails ? ["hover", "focus"] : []}
-          >
-            <span className="w-100">
-              <AttackMeter />
-            </span>
-          </OverlayTrigger>
+                            {`+${formatNumber({
+                              format: "percentage",
+                              value: speedPowerBonus,
+                            })}`}
+                          </>
+                        )}
+                      </Stack>
+                    </td>
+                  </tr>
+                </DetailsTable>
+              </PopoverBody>
+            </Popover>
+          }
+          trigger={isShowingAttackRateDetails ? ["hover", "focus"] : []}
+        >
+          <span className="w-100">
+            <AttackMeter />
+          </span>
+        </OverlayTrigger>
 
-          <FloatingTextQueue delta="attackRate" />
-        </Stack>
-      }
-      Icon={IconAttackRate}
-      isAnimated
-      tooltip="Total attack rate"
-    />
+        <FloatingTextQueue delta="attackRate" />
+      </Stack>
+    </IconDisplay>
   );
 }

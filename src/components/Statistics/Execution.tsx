@@ -10,7 +10,7 @@ import { weapon } from "@neverquest/state/gear";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { execution } from "@neverquest/state/statistics";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Execution() {
   const executionValue = useRecoilValue(execution);
@@ -34,23 +34,18 @@ export function Execution() {
   }
 
   return (
-    <IconDisplay
-      contents={
-        <Stack direction="horizontal">
-          <span>
-            {siegecraftValue
-              ? executionValue === 0
-                ? LABEL_EMPTY
-                : formatValue({ decimals: 0, format: "percentage", value: executionValue })
-              : LABEL_EMPTY}
-          </span>
+    <IconDisplay Icon={IconExecution} isAnimated tooltip="Execution threshold">
+      <Stack direction="horizontal">
+        <span>
+          {siegecraftValue
+            ? executionValue === 0
+              ? LABEL_EMPTY
+              : formatNumber({ decimals: 0, format: "percentage", value: executionValue })
+            : LABEL_EMPTY}
+        </span>
 
-          <FloatingTextQueue delta="execution" />
-        </Stack>
-      }
-      Icon={IconExecution}
-      isAnimated
-      tooltip="Execution threshold"
-    />
+        <FloatingTextQueue delta="execution" />
+      </Stack>
+    </IconDisplay>
   );
 }

@@ -56,10 +56,9 @@ export function InventoryButton() {
             <IconImage Icon={IconInventory} />
 
             <span ref={badgeElement}>
-              <ButtonBadge
-                Icon={IconEncumbrance}
-                isShowing={isInventoryFullValue || notifyOverEncumbranceValue}
-              />
+              <ButtonBadge isShowing={isInventoryFullValue || notifyOverEncumbranceValue}>
+                <IconImage Icon={IconEncumbrance} size="small" />
+              </ButtonBadge>
             </span>
 
             <ItemAcquisition />

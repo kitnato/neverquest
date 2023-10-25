@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { hasBoughtFromMerchant, merchantInventory } from "@neverquest/state/caravan";
+import { merchantInventory } from "@neverquest/state/caravan";
 import type { InventoryItem } from "@neverquest/types";
 import { isGear } from "@neverquest/types/type-guards";
 
@@ -10,8 +10,6 @@ export function useMerchantTradeItem() {
       (item: InventoryItem, type: "purchase" | "sale") => {
         if (type === "purchase") {
           set(merchantInventory, (current) => current.filter(({ item: { id } }) => id !== item.id));
-
-          set(hasBoughtFromMerchant, true);
         } else {
           set(merchantInventory, (current) =>
             current.concat({

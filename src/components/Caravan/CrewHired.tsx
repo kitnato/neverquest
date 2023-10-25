@@ -33,12 +33,9 @@ export function CrewHired({ crew, setActive }: { crew: Crew; setActive: () => vo
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-      <IconDisplay
-        contents={capitalizeAll(crew)}
-        description={`"${monologue}"`}
-        Icon={Icon}
-        tooltip="Caravan crew"
-      />
+      <IconDisplay description={`"${monologue}"`} Icon={Icon} tooltip="Caravan crew">
+        {capitalizeAll(crew)}
+      </IconDisplay>
 
       <Button onClick={setActive} variant="outline-dark">
         {interaction}

@@ -17,27 +17,23 @@ export function SelectGem({
 }) {
   return (
     <Stack direction="horizontal" gap={1}>
-      <IconDisplay
-        contents={
-          <FormSelect
-            onChange={({ target: { value } }) => {
-              onSelect(value as Gem);
-            }}
-            value={gem}
-          >
-            {GEM_TYPES.map(
-              (gem) =>
-                omit !== gem && (
-                  <option key={gem} value={gem}>
-                    {capitalizeAll(gem)}
-                  </option>
-                ),
-            )}
-          </FormSelect>
-        }
-        Icon={IconGem}
-        tooltip="Gem"
-      />
+      <IconDisplay Icon={IconGem} tooltip="Gem">
+        <FormSelect
+          onChange={({ target: { value } }) => {
+            onSelect(value as Gem);
+          }}
+          value={gem}
+        >
+          {GEM_TYPES.map(
+            (gem) =>
+              omit !== gem && (
+                <option key={gem} value={gem}>
+                  {capitalizeAll(gem)}
+                </option>
+              ),
+          )}
+        </FormSelect>
+      </IconDisplay>
 
       <span>x{omit === undefined ? TRANSMUTE_COST : TRANSMUTE_YIELD}</span>
     </Stack>

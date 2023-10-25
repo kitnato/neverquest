@@ -15,7 +15,7 @@ import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { parry, parryAbsorption, parryDamage, parryRating } from "@neverquest/state/statistics";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function ParryRating() {
   const finesseValue = useRecoilValue(masteryStatistic("finesse"));
@@ -36,95 +36,90 @@ export function ParryRating() {
   }
 
   return (
-    <IconDisplay
-      contents={
-        <Stack direction="horizontal">
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverHeader className="text-center">Parry rating details</PopoverHeader>
+    <IconDisplay Icon={IconParryRating} isAnimated tooltip="Parry rating">
+      <Stack direction="horizontal">
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">Parry rating details</PopoverHeader>
 
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
+              <PopoverBody>
+                <DetailsTable>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
 
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconParry} size="small" />
+                    <td>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconParry} size="small" />
 
-                          {formatValue({ format: "percentage", value: parryValue })}
-                        </Stack>
-                      </td>
-                    </tr>
+                        {formatNumber({ format: "percentage", value: parryValue })}
+                      </Stack>
+                    </td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Damage reflected:</td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Damage reflected:</td>
 
-                      <td>
-                        {formatValue({ decimals: 0, format: "percentage", value: PARRY_DAMAGE })}
-                      </td>
-                    </tr>
+                    <td>
+                      {formatNumber({ decimals: 0, format: "percentage", value: PARRY_DAMAGE })}
+                    </td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Damage absorbed:</td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Damage absorbed:</td>
 
-                      <td>
-                        {formatValue({
-                          decimals: 0,
-                          format: "percentage",
-                          value: PARRY_ABSORPTION,
-                        })}
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconFinesse} size="small" />
-                          Finesse:
-                        </Stack>
-                      </td>
-
-                      <td>{`+${formatValue({
+                    <td>
+                      {formatNumber({
                         decimals: 0,
                         format: "percentage",
-                        value: finesseValue,
-                      })}`}</td>
-                    </tr>
+                        value: PARRY_ABSORPTION,
+                      })}
+                    </td>
+                  </tr>
 
-                    {finesseValue > 0 && (
-                      <>
-                        <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Total reflected:</td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconFinesse} size="small" />
+                        Finesse:
+                      </Stack>
+                    </td>
 
-                          <td>{formatValue({ format: "percentage", value: parryDamageValue })}</td>
-                        </tr>
+                    <td>{`+${formatNumber({
+                      decimals: 0,
+                      format: "percentage",
+                      value: finesseValue,
+                    })}`}</td>
+                  </tr>
 
-                        <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Total absorbed:</td>
+                  {finesseValue > 0 && (
+                    <>
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Total reflected:</td>
 
-                          <td>
-                            {formatValue({ format: "percentage", value: parryAbsorptionValue })}
-                          </td>
-                        </tr>
-                      </>
-                    )}
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-            trigger={escrimeValue ? ["hover", "focus"] : []}
-          >
-            <span>{escrimeValue ? parryRatingValue : LABEL_EMPTY}</span>
-          </OverlayTrigger>
+                        <td>{formatNumber({ format: "percentage", value: parryDamageValue })}</td>
+                      </tr>
 
-          <FloatingTextQueue delta="parry" />
-        </Stack>
-      }
-      Icon={IconParryRating}
-      isAnimated
-      tooltip="Parry rating"
-    />
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Total absorbed:</td>
+
+                        <td>
+                          {formatNumber({ format: "percentage", value: parryAbsorptionValue })}
+                        </td>
+                      </tr>
+                    </>
+                  )}
+                </DetailsTable>
+              </PopoverBody>
+            </Popover>
+          }
+          trigger={escrimeValue ? ["hover", "focus"] : []}
+        >
+          <span>{escrimeValue ? parryRatingValue : LABEL_EMPTY}</span>
+        </OverlayTrigger>
+
+        <FloatingTextQueue delta="parry" />
+      </Stack>
+    </IconDisplay>
   );
 }

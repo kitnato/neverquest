@@ -15,7 +15,7 @@ import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attri
 import { shield, weapon } from "@neverquest/state/gear";
 import { stamina } from "@neverquest/state/reserves";
 import { isTraitAcquired } from "@neverquest/state/traits";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function DamageDetails() {
   const staminaValue = useRecoilValue(stamina);
@@ -35,7 +35,7 @@ export function DamageDetails() {
           <Stack direction="horizontal" gap={1}>
             <IconImage Icon={IconWeaponDamage} size="small" />
 
-            {formatValue({ value: damage })}
+            {formatNumber({ value: damage })}
           </Stack>
         </td>
       </tr>
@@ -52,7 +52,7 @@ export function DamageDetails() {
 
         <td>
           <Stack direction="horizontal" gap={1}>
-            {`+${formatValue({ value: strength })}`}
+            {`+${formatNumber({ value: strength })}`}
 
             {strengthPowerBonus > 0 && (
               <>
@@ -60,7 +60,7 @@ export function DamageDetails() {
 
                 <IconImage Icon={IconTomeOfPower} size="small" />
 
-                {`+${formatValue({
+                {`+${formatNumber({
                   format: "percentage",
                   value: strengthPowerBonus,
                 })}`}

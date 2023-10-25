@@ -22,18 +22,6 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
     <div className={getAnimationClass({ name: "flipInX" })}>
       {isMasteryUnlockedValue ? (
         <IconDisplay
-          contents={
-            <OverlayTrigger
-              overlay={
-                <Popover>
-                  <PopoverBody>{description}</PopoverBody>
-                </Popover>
-              }
-              placement="right"
-            >
-              <span style={{ width: "max-content" }}>{capitalizeAll(mastery)}</span>
-            </OverlayTrigger>
-          }
           description={
             <Stack direction="horizontal">
               <Stack className="w-100" direction="horizontal" gap={3}>
@@ -47,14 +35,26 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
           }
           Icon={Icon}
           tooltip="Mastery"
-        />
+        >
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverBody>{description}</PopoverBody>
+              </Popover>
+            }
+            placement="right"
+          >
+            <span style={{ width: "max-content" }}>{capitalizeAll(mastery)}</span>
+          </OverlayTrigger>
+        </IconDisplay>
       ) : (
         <IconDisplay
-          contents={LABEL_UNKNOWN}
           description="Unlocked by acquiring a skill."
           Icon={IconUnknown}
           tooltip="Mastery"
-        />
+        >
+          {LABEL_UNKNOWN}
+        </IconDisplay>
       )}
     </div>
   );

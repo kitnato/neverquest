@@ -15,7 +15,7 @@ import { armor, shield } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { protection } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Protection() {
   const armorValue = useRecoilValue(armor);
@@ -36,53 +36,48 @@ export function Protection() {
   }
 
   return (
-    <IconDisplay
-      contents={
-        <Stack direction="horizontal">
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverHeader className="text-center">Protection details</PopoverHeader>
+    <IconDisplay Icon={IconProtection} isAnimated tooltip="Total protection">
+      <Stack direction="horizontal">
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">Protection details</PopoverHeader>
 
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Armor:</td>
+              <PopoverBody>
+                <DetailsTable>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Armor:</td>
 
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconArmor} size="small" />
+                    <td>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconArmor} size="small" />
 
-                          {formatValue({ value: armorValue.protection })}
-                        </Stack>
-                      </td>
-                    </tr>
+                        {formatNumber({ value: armorValue.protection })}
+                      </Stack>
+                    </td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconTank} size="small" />
-                          Tank:
-                        </Stack>
-                      </td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconTank} size="small" />
+                        Tank:
+                      </Stack>
+                    </td>
 
-                      <td>x2</td>
-                    </tr>
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-            trigger={showDetails ? ["hover", "focus"] : []}
-          >
-            <span>{protectionValue}</span>
-          </OverlayTrigger>
+                    <td>x2</td>
+                  </tr>
+                </DetailsTable>
+              </PopoverBody>
+            </Popover>
+          }
+          trigger={showDetails ? ["hover", "focus"] : []}
+        >
+          <span>{protectionValue}</span>
+        </OverlayTrigger>
 
-          <FloatingTextQueue delta="protection" />
-        </Stack>
-      }
-      Icon={IconProtection}
-      isAnimated
-      tooltip="Total protection"
-    />
+        <FloatingTextQueue delta="protection" />
+      </Stack>
+    </IconDisplay>
   );
 }

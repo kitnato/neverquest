@@ -28,13 +28,8 @@ export function MonsterElementalAilment({ elemental }: { elemental: Elemental })
   }
 
   return (
-    <IconDisplay
-      contents={
-        <MonsterAilmentMeter ailment={ailment} totalDuration={ELEMENTAL_AILMENT_DURATION_MAXIMUM} />
-      }
-      Icon={Icon}
-      isAnimated
-      tooltip={capitalizeAll(ailment)}
-    />
+    <IconDisplay Icon={Icon} isAnimated tooltip={capitalizeAll(ailment)}>
+      <MonsterAilmentMeter ailment={ailment} totalDuration={ELEMENTAL_AILMENT_DURATION_MAXIMUM} />
+    </IconDisplay>
   );
 }

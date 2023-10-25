@@ -23,7 +23,7 @@ import {
   MONSTER_AILMENT_TYPES,
   type MonsterAilment,
 } from "@neverquest/types/unions";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import {
   getDamagePerRate,
   getFromRange,
@@ -184,7 +184,7 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
 export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (key) =>
   selector({
     get: ({ get }) =>
-      formatValue({
+      formatNumber({
         format: "float",
         value: getDamagePerRate({
           damage: get(monsterDamage),
@@ -209,7 +209,7 @@ export const monsterDamageTotalPerSecond = withStateKey("monsterDamageTotalPerSe
   selector({
     get: ({ get }) =>
       get(isMonsterAiling("stunned"))
-        ? formatValue({
+        ? formatNumber({
             format: "float",
             value: getDamagePerRate({
               damage: get(monsterDamageTotal),

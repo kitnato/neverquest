@@ -15,7 +15,7 @@ import { masteryStatistic } from "@neverquest/state/masteries";
 import { bleed, bleedingDeltaLength } from "@neverquest/state/monster";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { bleedChance, bleedDamage, bleedRating, damageTotal } from "@neverquest/state/statistics";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function BleedRating() {
   const { duration, ticks } = useRecoilValue(bleed);
@@ -38,85 +38,80 @@ export function BleedRating() {
   }
 
   return (
-    <IconDisplay
-      contents={
-        <Stack direction="horizontal">
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverHeader className="text-center">Bleed rating details</PopoverHeader>
+    <IconDisplay Icon={IconBleedRating} isAnimated tooltip="Bleed rating">
+      <Stack direction="horizontal">
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">Bleed rating details</PopoverHeader>
 
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
+              <PopoverBody>
+                <DetailsTable>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
 
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconBleed} size="small" />
+                    <td>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconBleed} size="small" />
 
-                          {`${
-                            bleedChanceValue === 0
-                              ? LABEL_EMPTY
-                              : formatValue({ format: "percentage", value: bleedChanceValue })
-                          }`}
-                        </Stack>
-                      </td>
-                    </tr>
+                        {`${
+                          bleedChanceValue === 0
+                            ? LABEL_EMPTY
+                            : formatNumber({ format: "percentage", value: bleedChanceValue })
+                        }`}
+                      </Stack>
+                    </td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconCruelty} size="small" />
-                          Cruelty:
-                        </Stack>
-                      </td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconCruelty} size="small" />
+                        Cruelty:
+                      </Stack>
+                    </td>
 
-                      <td>{`${formatValue({
-                        format: "percentage",
-                        value: crueltyValue,
-                      })} of total damage`}</td>
-                    </tr>
+                    <td>{`${formatNumber({
+                      format: "percentage",
+                      value: crueltyValue,
+                    })} of total damage`}</td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
 
-                      <td>{formatValue({ format: "time", value: duration })}</td>
-                    </tr>
+                    <td>{formatNumber({ format: "time", value: duration })}</td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Ticks:</td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Ticks:</td>
 
-                      <td>{`${ticks} (every ${formatValue({
-                        format: "time",
-                        value: bleedingDeltaLengthValue,
-                      })})`}</td>
-                    </tr>
+                    <td>{`${ticks} (every ${formatNumber({
+                      format: "time",
+                      value: bleedingDeltaLengthValue,
+                    })})`}</td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Bleed damage:</td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Bleed damage:</td>
 
-                      <td>{`${formatValue({
-                        value: damageTotalValue * crueltyValue,
-                      })} (${formatValue({
-                        value: bleedDamageValue,
-                      })} per tick)`}</td>
-                    </tr>
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-            trigger={anatomyValue ? ["hover", "focus"] : []}
-          >
-            <span>{anatomyValue ? bleedRatingValue : LABEL_EMPTY}</span>
-          </OverlayTrigger>
+                    <td>{`${formatNumber({
+                      value: damageTotalValue * crueltyValue,
+                    })} (${formatNumber({
+                      value: bleedDamageValue,
+                    })} per tick)`}</td>
+                  </tr>
+                </DetailsTable>
+              </PopoverBody>
+            </Popover>
+          }
+          trigger={anatomyValue ? ["hover", "focus"] : []}
+        >
+          <span>{anatomyValue ? bleedRatingValue : LABEL_EMPTY}</span>
+        </OverlayTrigger>
 
-          <FloatingTextQueue delta="bleedRating" />
-        </Stack>
-      }
-      Icon={IconBleedRating}
-      isAnimated
-      tooltip="Bleed rating"
-    />
+        <FloatingTextQueue delta="bleedRating" />
+      </Stack>
+    </IconDisplay>
   );
 }

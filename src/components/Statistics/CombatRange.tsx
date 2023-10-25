@@ -14,7 +14,7 @@ import { range, weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isRanged } from "@neverquest/types/type-guards";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function CombatRange() {
   const marksmanshipValue = useRecoilValue(masteryStatistic("marksmanship"));
@@ -35,64 +35,59 @@ export function CombatRange() {
   }
 
   return (
-    <IconDisplay
-      contents={
-        <Stack direction="horizontal">
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverHeader className="text-center">Range details</PopoverHeader>
+    <IconDisplay Icon={IconRange} isAnimated tooltip="Range">
+      <Stack direction="horizontal">
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">Range details</PopoverHeader>
 
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
+              <PopoverBody>
+                <DetailsTable>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
 
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconRanged} size="small" />
+                    <td>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconRanged} size="small" />
 
-                          {isWeaponRanged
-                            ? formatValue({ format: "time", value: weaponValue.range })
-                            : LABEL_EMPTY}
-                        </Stack>
-                      </td>
-                    </tr>
+                        {isWeaponRanged
+                          ? formatNumber({ format: "time", value: weaponValue.range })
+                          : LABEL_EMPTY}
+                      </Stack>
+                    </td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconMarksmanship} size="small" />
-                          Marksmanship:
-                        </Stack>
-                      </td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconMarksmanship} size="small" />
+                        Marksmanship:
+                      </Stack>
+                    </td>
 
-                      <td>{`+${formatValue({
-                        format: "percentage",
-                        value: marksmanshipValue,
-                      })}`}</td>
-                    </tr>
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-            trigger={archeryValue ? ["hover", "focus"] : []}
-          >
-            <span>
-              {archeryValue
-                ? rangeValue === 0
-                  ? LABEL_EMPTY
-                  : formatValue({ format: "time", value: rangeValue })
-                : LABEL_EMPTY}
-            </span>
-          </OverlayTrigger>
+                    <td>{`+${formatNumber({
+                      format: "percentage",
+                      value: marksmanshipValue,
+                    })}`}</td>
+                  </tr>
+                </DetailsTable>
+              </PopoverBody>
+            </Popover>
+          }
+          trigger={archeryValue ? ["hover", "focus"] : []}
+        >
+          <span>
+            {archeryValue
+              ? rangeValue === 0
+                ? LABEL_EMPTY
+                : formatNumber({ format: "time", value: rangeValue })
+              : LABEL_EMPTY}
+          </span>
+        </OverlayTrigger>
 
-          <FloatingTextQueue delta="range" />
-        </Stack>
-      }
-      Icon={IconRange}
-      isAnimated
-      tooltip="Range"
-    />
+        <FloatingTextQueue delta="range" />
+      </Stack>
+    </IconDisplay>
   );
 }

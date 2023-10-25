@@ -22,30 +22,26 @@ export function Thorns() {
   }
 
   return (
-    <IconDisplay
-      contents={
-        <Stack direction="horizontal">
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverHeader className="text-center">Thorns details</PopoverHeader>
+    <IconDisplay Icon={IconThorns} tooltip="Thorns">
+      <Stack direction="horizontal">
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">Thorns details</PopoverHeader>
 
-                <PopoverBody>
-                  <DetailsTable>
-                    <ElementalDetails slot="armor" />
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-          >
-            <span>{thornsValue}</span>
-          </OverlayTrigger>
+              <PopoverBody>
+                <DetailsTable>
+                  <ElementalDetails slot="armor" />
+                </DetailsTable>
+              </PopoverBody>
+            </Popover>
+          }
+        >
+          <span>{thornsValue}</span>
+        </OverlayTrigger>
 
-          <FloatingTextQueue delta="thorns" />
-        </Stack>
-      }
-      Icon={IconThorns}
-      tooltip="Thorns"
-    />
+        <FloatingTextQueue delta="thorns" />
+      </Stack>
+    </IconDisplay>
   );
 }

@@ -1,7 +1,6 @@
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CompleteQuest } from "@neverquest/components/Journal/CompleteQuest";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
@@ -22,25 +21,18 @@ export function RoutineDisplay({ routine }: { routine: Routine }) {
       <IconDisplay
         description={
           showProgression ? (
-            <Stack className="w-100" direction="horizontal">
-              <LabelledProgressBar
-                value={(routineProgressValue / progression[0]) * 100}
-                variant="dark"
-              >
-                <Stack direction="horizontal">
-                  {`${routineProgressValue}/${progression[0]}`}
-
-                  <FloatingTextQueue delta="routines" />
-                </Stack>
-              </LabelledProgressBar>
-
-              <FloatingTextQueue delta={routine} />
-            </Stack>
+            <LabelledProgressBar
+              value={(routineProgressValue / progression[0]) * 100}
+              variant="dark"
+            >
+              {`${routineProgressValue}/${progression[0]}`}
+            </LabelledProgressBar>
           ) : (
             description
           )
         }
         Icon={IconRoutine}
+        isFullWidth
         tooltip="Routine"
       >
         {showProgression ? (

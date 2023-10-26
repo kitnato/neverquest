@@ -61,7 +61,7 @@ export function Attack() {
   useDeltaText({
     delta: "attackRate",
     format: "time",
-    value: attackRateTotal,
+    state: attackRateTotal,
   });
 
   useEffect(regenerate, [isAttackingValue, regenerate]);

@@ -1,7 +1,6 @@
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CompleteQuest } from "@neverquest/components/Journal/CompleteQuest";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
@@ -19,22 +18,15 @@ export function ConquestDisplay({ conquest }: { conquest: Conquest }) {
     <Stack direction="horizontal" gap={3}>
       <IconDisplay
         description={
-          <Stack direction="horizontal">
-            <LabelledProgressBar
-              value={(conquestProgressValue / progression[0]) * 100}
-              variant="dark"
-            >
-              <Stack direction="horizontal">
-                {`${conquestProgressValue}/${progression[0]}`}
-
-                <FloatingTextQueue delta="conquests" />
-              </Stack>
-            </LabelledProgressBar>
-
-            <FloatingTextQueue delta={conquest} />
-          </Stack>
+          <LabelledProgressBar
+            value={(conquestProgressValue / progression[0]) * 100}
+            variant="dark"
+          >
+            {`${conquestProgressValue}/${progression[0]}`}
+          </LabelledProgressBar>
         }
         Icon={IconConquest}
+        isFullWidth
         tooltip="Conquest"
       >
         <OverlayTrigger

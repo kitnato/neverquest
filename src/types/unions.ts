@@ -65,64 +65,46 @@ export type Crew = (typeof CREW_TYPES)[number];
 export type CrewStatus = "hirable" | "hired" | null;
 
 export type Delta =
-  | Conquest
-  | Routine
-  | "agility"
+  | Attribute
+  | Mastery
+  | QuestBonus
+  | QuestClass
+  | Reserve
   | "ammunition"
   | "ammunitionMaximum"
   | "attackRate"
   | "attributePoints"
   | "bleedRating"
   | "block"
-  | "butchery"
-  | "conquests"
   | "criticalRating"
-  | "cruelty"
   | "damage"
   | "damagePerSecond"
   | "deflection"
-  | "dexterity"
   | "dodge"
   | "encumbranceMaximum"
-  | "endurance"
   | "essence"
   | "essenceBonus"
   | "essenceLoot"
   | "execution"
-  | "finesse"
-  | "fortitude"
-  | "health"
   | "healthMaximum"
   | "healthRegenerationRate"
   | "infusionLevel"
   | "level"
-  | "marksmanship"
   | "masteryProgress"
   | "masteryRank"
-  | "might"
   | "monsterHealth"
   | "parry"
-  | "perception"
   | "powerBonusBoost"
   | "progress"
   | "protection"
   | "range"
   | "recoveryRate"
-  | "resilience"
-  | "routines"
-  | "speed"
-  | "stability"
   | "stage"
   | "staggerRating"
-  | "stamina"
   | "staminaMaximum"
   | "staminaRegenerationRate"
-  | "strength"
   | "stunRating"
-  | "thorns"
-  | "triumphs"
-  | "vigor"
-  | "vitality";
+  | "thorns";
 
 export const ELEMENTAL_TYPES = ["lightning", "fire", "ice"] as const;
 export type Elemental = (typeof ELEMENTAL_TYPES)[number];
@@ -168,7 +150,8 @@ export type NumberFormat = "float" | "integer" | "percentage" | "time";
 
 export type Quest = Conquest | Routine | Triumph;
 
-export type QuestBonus = "damageBonus" | "healthBonus" | "staminaBonus";
+export const QUEST_BONUS_TYPES = ["healthBonus", "staminaBonus", "damageBonus"] as const;
+export type QuestBonus = (typeof QUEST_BONUS_TYPES)[number];
 
 export type QuestClass = "conquest" | "routine" | "triumph";
 
@@ -242,6 +225,7 @@ export const SHOWING_TYPES = [
   "monsterAilments",
   "monsterOffense",
   "protection",
+  "questBonus",
   "recovery",
   "offhand",
   "skills",
@@ -422,8 +406,8 @@ export type StateKey =
   | "progressMaximum"
   | "progressReduction"
   | "protection"
+  | "questBonus"
   | "questCompletion"
-  | "questsBonus"
   | "range"
   | "recoveryDuration"
   | "recoveryRate"

@@ -24,8 +24,8 @@ export function StunRating() {
 
   useDeltaText({
     delta: "stunRating",
+    state: stunRating,
     stop: () => !traumatologyValue,
-    value: stunRating,
   });
 
   if (!traumatologyValue || gearClass !== "blunt") {

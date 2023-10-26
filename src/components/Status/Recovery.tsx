@@ -33,7 +33,7 @@ export function Recovery() {
   useDeltaText({
     delta: "recoveryRate",
     format: "time",
-    value: recoveryRate,
+    state: recoveryRate,
   });
 
   if (!isShowingRecovery) {

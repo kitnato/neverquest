@@ -26,8 +26,8 @@ export function Block() {
   useDeltaText({
     delta: "block",
     format: "percentage",
+    state: block,
     stop: () => isEmpty,
-    value: block,
   });
 
   if (isEmpty) {

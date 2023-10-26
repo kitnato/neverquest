@@ -25,8 +25,8 @@ export function Execution() {
   useDeltaText({
     delta: "execution",
     format: "percentage",
+    state: execution,
     stop: () => isEmpty,
-    value: execution,
   });
 
   if (isEmpty) {

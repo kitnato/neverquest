@@ -13,7 +13,7 @@ export function Ammunition() {
 
   useDeltaText({
     delta: "ammunition",
-    value: ammunition,
+    state: ammunition,
   });
 
   return (

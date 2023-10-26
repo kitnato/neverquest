@@ -32,8 +32,8 @@ export function CriticalRating() {
 
   useDeltaText({
     delta: "criticalRating",
+    state: criticalRating,
     stop: () => !assassinationValue,
-    value: criticalRating,
   });
 
   if (!isShowingCriticalRating) {

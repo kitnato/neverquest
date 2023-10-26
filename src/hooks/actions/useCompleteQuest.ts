@@ -1,5 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
+import { isShowing } from "@neverquest/state/isShowing";
 import { canCompleteQuest, questCompletion } from "@neverquest/state/journal";
 import type { Quest, QuestBonus } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -15,6 +16,7 @@ export function useCompleteQuest() {
         }
 
         set(questCompletion(quest), bonus);
+        set(isShowing("questBonus"), true);
       },
   );
 }

@@ -17,7 +17,7 @@ export function Damage() {
 
   useDeltaText({
     delta: "damage",
-    value: damageTotal,
+    state: damageTotal,
   });
 
   return (

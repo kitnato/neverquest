@@ -39,27 +39,18 @@ export const conquestsCompleted = withStateKey("conquestsCompleted", (key) =>
   }),
 );
 
-export const questsBonus = withStateKey("questsBonus", (key) =>
-  selector<Record<QuestBonus, number>>({
-    get: ({ get }) => {
-      const bonus = {
-        damageBonus: 0,
-        healthBonus: 0,
-        staminaBonus: 0,
-      };
-
-      ALL_QUESTS.forEach((current) => {
-        const questCompletionValue = get(questCompletion(current));
-
-        if (questCompletionValue === false) {
-          return;
-        }
-
-        bonus[questCompletionValue] += QUEST_COMPLETION_BONUS;
-      });
-
-      return bonus;
-    },
+export const questBonus = withStateKey("questBonus", (key) =>
+  selectorFamily<number, QuestBonus>({
+    get:
+      (parameter) =>
+      ({ get }) =>
+        ALL_QUESTS.reduce(
+          (accumulator, current) =>
+            get(questCompletion(current)) === parameter
+              ? (accumulator += QUEST_COMPLETION_BONUS)
+              : accumulator,
+          0,
+        ),
     key,
   }),
 );

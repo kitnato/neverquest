@@ -9,15 +9,15 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 export function useDeltaText({
   delta,
   format = "integer",
+  state,
   stop = () => false,
-  value,
 }: {
   delta: Delta;
   format?: NumberFormat;
+  state: RecoilValueReadOnly<number>;
   stop?: ({ current, previous }: { current: number; previous: number | null }) => boolean;
-  value: RecoilValueReadOnly<number>;
 }) {
-  const currentValue = useRecoilValue(value);
+  const currentValue = useRecoilValue(state);
   const setDelta = useSetRecoilState(deltas(delta));
 
   const previousValue = usePreviousValue(currentValue);

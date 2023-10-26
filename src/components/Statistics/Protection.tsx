@@ -28,7 +28,7 @@ export function Protection() {
 
   useDeltaText({
     delta: "protection",
-    value: protection,
+    state: protection,
   });
 
   if (!isShowingProtection) {

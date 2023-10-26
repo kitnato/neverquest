@@ -28,8 +28,8 @@ export function StaggerRating() {
 
   useDeltaText({
     delta: "staggerRating",
+    state: staggerRating,
     stop: () => !shieldcraftValue,
-    value: staggerRating,
   });
 
   if (

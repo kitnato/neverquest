@@ -14,7 +14,7 @@ export function Thorns() {
 
   useDeltaText({
     delta: "thorns",
-    value: thorns,
+    state: thorns,
   });
 
   if (thornsValue === 0) {

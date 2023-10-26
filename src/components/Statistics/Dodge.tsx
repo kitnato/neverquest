@@ -42,7 +42,7 @@ export function Dodge() {
   useDeltaText({
     delta: "dodge",
     format: "percentage",
-    value: dodge,
+    state: dodge,
   });
 
   if (!isShowingDodge) {

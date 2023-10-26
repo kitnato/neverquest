@@ -14,7 +14,7 @@ export function PowerBonusBoost() {
   useDeltaText({
     delta: "powerBonusBoost",
     format: "percentage",
-    value: powerBonusBoost,
+    state: powerBonusBoost,
   });
 
   return (

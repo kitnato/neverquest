@@ -14,7 +14,7 @@ export function EssenceLoot() {
 
   useDeltaText({
     delta: "essenceLoot",
-    value: essenceLoot,
+    state: essenceLoot,
   });
 
   if (essenceLootValue === 0) {

@@ -27,7 +27,7 @@ export function CombatRange() {
   useDeltaText({
     delta: "range",
     format: "time",
-    value: range,
+    state: range,
   });
 
   if (!archeryValue || !isWeaponRanged) {

@@ -15,7 +15,7 @@ export function AttributeRank({ attribute }: { attribute: Attribute }) {
 
   useDeltaText({
     delta: attribute,
-    value: attributeRankState,
+    state: attributeRankState,
   });
 
   return (

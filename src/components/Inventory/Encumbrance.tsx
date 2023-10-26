@@ -14,7 +14,7 @@ export function Encumbrance() {
 
   useDeltaText({
     delta: "encumbranceMaximum",
-    value: encumbranceMaximum,
+    state: encumbranceMaximum,
   });
 
   return (

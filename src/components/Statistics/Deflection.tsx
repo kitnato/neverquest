@@ -26,7 +26,7 @@ export function Deflection() {
   useDeltaText({
     delta: "deflection",
     format: "percentage",
-    value: deflection,
+    state: deflection,
   });
 
   if (!isSkillAcquiredArmorcraft) {

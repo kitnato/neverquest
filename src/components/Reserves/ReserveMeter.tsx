@@ -48,7 +48,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
 
   useDeltaText({
     delta: deltaReserveMaximum,
-    value: reserveMaximum,
+    state: reserveMaximum,
   });
 
   // Catches attribute resets and poison/blight penalties.

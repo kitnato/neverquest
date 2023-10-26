@@ -16,8 +16,8 @@ export function Progress() {
 
   useDeltaText({
     delta: "progress",
+    state: progress,
     stop: ({ current }) => current === 0,
-    value: progress,
   });
 
   if (!isWildernessValue) {
@@ -25,23 +25,22 @@ export function Progress() {
   }
 
   return (
-    <Stack className="w-100">
-      <IconDisplay
-        Icon={IconProgress}
-        iconProps={{ overlayPlacement: "bottom" }}
-        tooltip="Progress"
-      >
-        <Stack className="w-100" direction="horizontal">
-          <LabelledProgressBar
-            value={(progressValue / progressMaximumValue) * 100}
-            variant="dark"
-          >{`${formatNumber({ value: progressValue })}/${formatNumber({
-            value: progressMaximumValue,
-          })}`}</LabelledProgressBar>
+    <IconDisplay
+      Icon={IconProgress}
+      iconProps={{ overlayPlacement: "bottom" }}
+      isFullWidth
+      tooltip="Progress"
+    >
+      <Stack direction="horizontal">
+        <LabelledProgressBar
+          value={(progressValue / progressMaximumValue) * 100}
+          variant="dark"
+        >{`${formatNumber({ value: progressValue })}/${formatNumber({
+          value: progressMaximumValue,
+        })}`}</LabelledProgressBar>
 
-          <FloatingTextQueue delta="progress" />
-        </Stack>
-      </IconDisplay>
-    </Stack>
+        <FloatingTextQueue delta="progress" />
+      </Stack>
+    </IconDisplay>
   );
 }

@@ -15,7 +15,7 @@ export function MasteryRank({ mastery }: { mastery: Mastery }) {
 
   useDeltaText({
     delta: "masteryRank",
-    value: masteryRankState,
+    state: masteryRankState,
   });
 
   return (

@@ -13,8 +13,8 @@ export function Stage() {
 
   useDeltaText({
     delta: "stage",
+    state: stage,
     stop: ({ current }) => current === 1,
-    value: stage,
   });
 
   return (

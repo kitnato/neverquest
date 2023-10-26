@@ -7,7 +7,6 @@ export function LabelledProgressBar({
   attached,
   children,
   disableTransitions = false,
-  // TODO - replace label with children
   isStriped = false,
   sibling = null,
   size = "normal",
@@ -67,7 +66,6 @@ export function LabelledProgressBar({
                 "-1px 1px 1px var(--bs-gray-900), 1px 1px 1px var(--bs-gray-900), 1px -1px 1px var(--bs-gray-900), -1px -1px 1px var(--bs-gray-900)",
               top: 0,
               transform: "translateX(-50%)",
-              width: "max-content",
             }}
           >
             {children}

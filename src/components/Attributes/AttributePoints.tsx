@@ -17,7 +17,7 @@ export function AttributePoints() {
 
   useDeltaText({
     delta: "attributePoints",
-    value: attributePoints,
+    state: attributePoints,
   });
 
   return (

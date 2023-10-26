@@ -16,7 +16,7 @@ export function Level() {
 
   useDeltaText({
     delta: "level",
-    value: level,
+    state: level,
   });
 
   return (

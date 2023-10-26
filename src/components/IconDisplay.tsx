@@ -15,6 +15,7 @@ export function IconDisplay({
   Icon,
   iconProps,
   isAnimated = false,
+  isFullWidth = false,
   tooltip,
 }: {
   children?: ReactNode;
@@ -23,11 +24,14 @@ export function IconDisplay({
   Icon: SVGIcon;
   iconProps?: IconImageDOMProps;
   isAnimated?: boolean;
+  isFullWidth?: boolean;
   tooltip?: string;
 }) {
   return (
     <Stack
-      className={isAnimated ? getAnimationClass({ name: "flipInX" }) : undefined}
+      className={`${isFullWidth ? "w-100" : undefined} ${
+        isAnimated ? getAnimationClass({ name: "flipInX" }) : undefined
+      }`}
       direction="horizontal"
       gap={iconProps?.size === "small" ? 1 : gap}
     >

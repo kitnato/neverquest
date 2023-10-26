@@ -7,6 +7,7 @@ import { RoutineDisplay } from "@neverquest/components/Journal/RoutineDisplay";
 import { TriumphDisplay } from "@neverquest/components/Journal/TriumphDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { CONQUESTS_COUNT, ROUTINES_COUNT, TRIUMPHS_COUNT } from "@neverquest/data/journal";
+import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import {
   conquestsCompleted,
   routinesCompleted,
@@ -52,6 +53,11 @@ export function Quests({ questClass }: { questClass: QuestClass }) {
 
   const questsCompletedValue = useRecoilValue(completed);
 
+  useDeltaText({
+    delta: questClass,
+    state: completed,
+  });
+
   return (
     <Stack gap={5}>
       <Stack gap={3}>
@@ -61,7 +67,7 @@ export function Quests({ questClass }: { questClass: QuestClass }) {
           <Stack direction="horizontal">
             {`${questsCompletedValue}/${count}`}
 
-            <FloatingTextQueue delta="routines" />
+            <FloatingTextQueue delta={questClass} />
           </Stack>
         </LabelledProgressBar>
       </Stack>

@@ -16,7 +16,7 @@ export function Essence() {
 
   useDeltaText({
     delta: "essence",
-    value: essence,
+    state: essence,
   });
 
   return (

@@ -28,7 +28,7 @@ export function ParryRating() {
 
   useDeltaText({
     delta: "parry",
-    value: parryRating,
+    state: parryRating,
   });
 
   if (!escrimeValue || gearClass !== "slashing") {

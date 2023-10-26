@@ -65,7 +65,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
   useDeltaText({
     delta: regenerationDelta,
     format: "time",
-    value: regenerationRate(reserve),
+    state: regenerationRate(reserve),
   });
 
   useEffect(() => {

@@ -15,7 +15,7 @@ export function AmmunitionPouchCurrent() {
 
   useDeltaText({
     delta: "ammunition",
-    value: ammunition,
+    state: ammunition,
   });
 
   if (ownedAmmunitionPouch === null) {

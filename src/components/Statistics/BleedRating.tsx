@@ -30,7 +30,7 @@ export function BleedRating() {
 
   useDeltaText({
     delta: "bleedRating",
-    value: bleedRating,
+    state: bleedRating,
   });
 
   if (!anatomyValue || gearClass !== "piercing") {

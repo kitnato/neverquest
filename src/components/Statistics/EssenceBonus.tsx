@@ -14,7 +14,7 @@ export function EssenceBonus() {
   useDeltaText({
     delta: "essenceBonus",
     format: "percentage",
-    value: essenceBonus,
+    state: essenceBonus,
   });
 
   return (

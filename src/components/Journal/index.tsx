@@ -2,25 +2,33 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconTabs } from "@neverquest/components/IconTabs";
-import { QuestBonus } from "@neverquest/components/Journal/QuestBonus";
+import { QuestBonusDisplay } from "@neverquest/components/Journal/QuestBonusDisplay";
 import { Quests } from "@neverquest/components/Journal/Quests";
 import IconConquest from "@neverquest/icons/conquest.svg?react";
 import IconRoutine from "@neverquest/icons/routine.svg?react";
 import IconTriumph from "@neverquest/icons/triumph.svg?react";
-import { questsBonus } from "@neverquest/state/journal";
+import { isShowing } from "@neverquest/state/isShowing";
+import { QUEST_BONUS_TYPES } from "@neverquest/types/unions";
 
 export function Journal() {
-  const questsBonusValue = useRecoilValue(questsBonus);
-
-  const showBonus =
-    Object.values(questsBonusValue).reduce((aggregator, current) => aggregator + current, 0) > 0;
+  const isShowingQuestBonus = useRecoilValue(isShowing("questBonus"));
 
   return (
     <Stack gap={5}>
-      {showBonus && <QuestBonus />}
+      {isShowingQuestBonus && (
+        <Stack gap={3}>
+          <h6>Completion bonus</h6>
+
+          <Stack className="mx-auto" direction="horizontal" gap={5}>
+            {QUEST_BONUS_TYPES.map((current) => (
+              <QuestBonusDisplay bonus={current} key={current} />
+            ))}
+          </Stack>
+        </Stack>
+      )}
 
       <Stack gap={3}>
-        {showBonus && <h6>Quests</h6>}
+        {isShowingQuestBonus && <h6>Quests</h6>}
 
         <IconTabs
           tabs={[

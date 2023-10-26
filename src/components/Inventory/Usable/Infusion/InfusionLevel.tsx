@@ -13,7 +13,7 @@ export function InfusionLevel({ infusable }: { infusable: Infusable }) {
 
   useDeltaText({
     delta: "infusionLevel",
-    value: infusionLevelState,
+    state: infusionLevelState,
   });
 
   return (

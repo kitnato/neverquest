@@ -7,15 +7,15 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_MAXIMUM } from "@neverquest/data/general";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconPoison from "@neverquest/icons/poison.svg?react";
-import { poison, poisonLength, poisonMagnitude } from "@neverquest/state/monster";
+import { poisonChance, poisonLength, poisonMagnitude } from "@neverquest/state/monster";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function MonsterPoisonRating() {
-  const poisonValue = useRecoilValue(poison);
+  const poisonChanceValue = useRecoilValue(poisonChance);
   const poisonLengthValue = useRecoilValue(poisonLength);
   const poisonMagnitudeValue = useRecoilValue(poisonMagnitude);
 
-  if (poisonValue === 0) {
+  if (poisonChanceValue === 0) {
     return null;
   }
 
@@ -31,7 +31,7 @@ export function MonsterPoisonRating() {
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
 
-                  <td>{formatNumber({ format: "percentage", value: poisonValue })}</td>
+                  <td>{formatNumber({ format: "percentage", value: poisonChanceValue })}</td>
                 </tr>
 
                 <tr>
@@ -63,7 +63,7 @@ export function MonsterPoisonRating() {
       >
         <span>
           {formatNumber({
-            value: poisonValue * poisonMagnitudeValue * poisonLengthValue,
+            value: poisonChanceValue * poisonMagnitudeValue * poisonLengthValue,
           })}
         </span>
       </OverlayTrigger>

@@ -32,8 +32,8 @@ import {
   criticalChance,
   criticalStrike,
   damageTotal,
-  execution,
-  stun,
+  executionThreshold,
+  stunChance,
 } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import type { AmmunitionPouchItem } from "@neverquest/types";
@@ -64,7 +64,8 @@ export function useAttack() {
           (isWeaponRanged && get(isTraitAcquired("sharpshooter")) && get(distance) > 0) ||
           Math.random() < get(criticalChance);
         const inExecutionRange =
-          isWeaponTwoHanded && monsterHealthValue / get(monsterHealthMaximum) <= get(execution);
+          isWeaponTwoHanded &&
+          monsterHealthValue / get(monsterHealthMaximum) <= get(executionThreshold);
 
         set(isShowing("statistics"), true);
 
@@ -158,7 +159,7 @@ export function useAttack() {
             });
           }
 
-          if (Math.random() < get(stun)) {
+          if (Math.random() < get(stunChance)) {
             set(isShowing("monsterAilments"), true);
             set(monsterAilmentDuration("stunned"), get(masteryStatistic("might")));
 

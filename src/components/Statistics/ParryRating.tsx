@@ -27,7 +27,7 @@ export function ParryRating() {
   const { gearClass } = useRecoilValue(weapon);
 
   useDeltaText({
-    delta: "parry",
+    delta: "parryRating",
     state: parryRating,
   });
 
@@ -118,7 +118,7 @@ export function ParryRating() {
           <span>{escrimeValue ? parryRatingValue : LABEL_EMPTY}</span>
         </OverlayTrigger>
 
-        <FloatingTextQueue delta="parry" />
+        <FloatingTextQueue delta="parryRating" />
       </Stack>
     </IconDisplay>
   );

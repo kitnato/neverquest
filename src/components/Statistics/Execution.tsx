@@ -8,12 +8,12 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconExecution from "@neverquest/icons/execution.svg?react";
 import { weapon } from "@neverquest/state/gear";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import { execution } from "@neverquest/state/statistics";
+import { executionThreshold } from "@neverquest/state/statistics";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Execution() {
-  const executionValue = useRecoilValue(execution);
+  const executionValue = useRecoilValue(executionThreshold);
   const siegecraftValue = useRecoilValue(isSkillAcquired("siegecraft"));
   const weaponValue = useRecoilValue(weapon);
 
@@ -23,9 +23,9 @@ export function Execution() {
     (isMelee(weaponValue) && weaponValue.grip !== "two-handed");
 
   useDeltaText({
-    delta: "execution",
+    delta: "executionThreshold",
     format: "percentage",
-    state: execution,
+    state: executionThreshold,
     stop: () => isEmpty,
   });
 
@@ -44,7 +44,7 @@ export function Execution() {
             : LABEL_EMPTY}
         </span>
 
-        <FloatingTextQueue delta="execution" />
+        <FloatingTextQueue delta="executionThreshold" />
       </Stack>
     </IconDisplay>
   );

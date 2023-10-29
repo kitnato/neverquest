@@ -3,11 +3,6 @@ import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/ty
 import type { SVGIcon } from "@neverquest/types/props";
 import type { Consumable, Gem, Grip, Trinket } from "@neverquest/types/unions";
 
-export type QuestBase = {
-  description: string;
-  title: string;
-};
-
 export type AmmunitionPouchItem = TrinketItem & {
   current: number;
   description: string;
@@ -98,6 +93,13 @@ export type MerchantInventory = {
   isReturned: boolean;
   item: InventoryItem;
 }[];
+
+export type QuestData = {
+  description: string;
+  hidden?: string;
+  progressionMaximum: number;
+  title: string;
+};
 
 export type Ranged = WeaponBase & {
   ammunitionCost: number;

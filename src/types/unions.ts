@@ -14,7 +14,6 @@ export type Attribute = (typeof ATTRIBUTE_TYPES)[number];
 export const CONSUMABLE_TYPES = ["antidote", "bandages", "elixir", "salve", "phylactery"] as const;
 export type Consumable = (typeof CONSUMABLE_TYPES)[number];
 
-// TODO - might not need exported consts.
 export const CONQUEST_TYPES = [
   "killing",
   "looting",
@@ -75,17 +74,17 @@ export type Delta =
   | "attackRate"
   | "attributePoints"
   | "bleedRating"
-  | "block"
+  | "blockChance"
   | "criticalRating"
   | "damage"
   | "damagePerSecond"
   | "deflection"
-  | "dodge"
+  | "dodgeChance"
   | "encumbranceMaximum"
   | "essence"
   | "essenceBonus"
   | "essenceLoot"
-  | "execution"
+  | "executionThreshold"
   | "healthMaximum"
   | "healthRegenerationRate"
   | "infusionLevel"
@@ -93,7 +92,7 @@ export type Delta =
   | "masteryProgress"
   | "masteryRank"
   | "monsterHealth"
-  | "parry"
+  | "parryRating"
   | "powerBonusBoost"
   | "progress"
   | "protection"
@@ -153,7 +152,25 @@ export type Quest = Conquest | Routine | Triumph;
 export const QUEST_BONUS_TYPES = ["healthBonus", "staminaBonus", "damageBonus"] as const;
 export type QuestBonus = (typeof QUEST_BONUS_TYPES)[number];
 
-export type QuestClass = "conquest" | "routine" | "triumph";
+export const QUEST_CLASS_TYPES = ["conquest", "routine", "triumph"] as const;
+export type QuestClass = (typeof QUEST_CLASS_TYPES)[number];
+
+export type QuestProgression =
+  | "1"
+  | "3"
+  | "5"
+  | "10"
+  | "25"
+  | "50"
+  | "100"
+  | "250"
+  | "500"
+  | "1000"
+  | "2500"
+  | "5000"
+  | "10000";
+
+export type QuestStatus = QuestBonus | boolean;
 
 export type Reserve = "health" | "stamina";
 
@@ -206,13 +223,13 @@ export const SHOWING_TYPES = [
   "armor",
   "attackRate",
   "attackRateDetails",
-  "block",
+  "blockChance",
   "capabilities",
   "crewHiring",
   "criticalRating",
   "damageDetails",
   "deflection",
-  "dodge",
+  "dodgeChance",
   "dodgePenalty",
   "essence",
   "gameOver",
@@ -255,6 +272,8 @@ export const SKILL_TYPES = [
 export type Skill = (typeof SKILL_TYPES)[number];
 
 export type StateKey =
+  | Gear
+  | QuestClass
   | "absorbedEssence"
   | "acquiredTraits"
   | "activeCrew"
@@ -263,7 +282,6 @@ export type StateKey =
   | "ammunitionMaximum"
   | "appliedGems"
   | "areAttributesAffordable"
-  | "armor"
   | "attackDuration"
   | "attackRate"
   | "attackRateTotal"
@@ -273,6 +291,7 @@ export type StateKey =
   | "attributeRank"
   | "attributeStatistic"
   | "autoEquip"
+  | "availableQuests"
   | "blacksmithInventory"
   | "bleed"
   | "bleedChance"
@@ -285,20 +304,18 @@ export type StateKey =
   | "blightAmount"
   | "blightChance"
   | "blightMagnitude"
-  | "block"
+  | "blockChance"
   | "canAffordInfusion"
   | "canApplyGem"
   | "canAttackOrParry"
   | "canBlock"
-  | "canCompleteQuest"
   | "canCompleteQuests"
   | "canDodge"
   | "canFit"
   | "canReceiveAilment"
   | "canReceiveAilments"
+  | "completedQuestCount"
   | "confirmationWarnings"
-  | "conquestProgress"
-  | "conquestsCompleted"
   | "criticalChance"
   | "criticalDamage"
   | "criticalRating"
@@ -309,7 +326,7 @@ export type StateKey =
   | "deflection"
   | "deltas"
   | "distance"
-  | "dodge"
+  | "dodgeChance"
   | "elementalEffects"
   | "encumbrance"
   | "encumbranceMaximum"
@@ -317,10 +334,9 @@ export type StateKey =
   | "essence"
   | "essenceBonus"
   | "essenceLoot"
-  | "execution"
+  | "executionThreshold"
   | "fletcherInventory"
   | "floatingTextQueues"
-  | "hasCompletedQuest"
   | "hasEnoughAmmunition"
   | "hasKnapsack"
   | "hasLooted"
@@ -393,11 +409,11 @@ export type StateKey =
   | "nextAttributePoint"
   | "notifyOverEncumbrance"
   | "ownedItem"
-  | "parry"
   | "parryAbsorption"
+  | "parryChance"
   | "parryDamage"
   | "parryRating"
-  | "poison"
+  | "poisonChance"
   | "poisonDuration"
   | "poisonLength"
   | "poisonMagnitude"
@@ -406,8 +422,8 @@ export type StateKey =
   | "progressMaximum"
   | "progressReduction"
   | "protection"
-  | "questBonus"
-  | "questCompletion"
+  | "questProgress"
+  | "questStatus"
   | "range"
   | "recoveryDuration"
   | "recoveryRate"
@@ -416,10 +432,7 @@ export type StateKey =
   | "regenerationRate"
   | "reserveRegenerationAmount"
   | "reserveRegenerationRate"
-  | "routineProgress"
-  | "routinesCompleted"
   | "selectedTrait"
-  | "shield"
   | "showDamagePerSecond"
   | "showEssenceRequired"
   | "showGearComparison"
@@ -428,21 +441,19 @@ export type StateKey =
   | "stability"
   | "stage"
   | "stageMaximum"
-  | "stagger"
+  | "staggerChance"
   | "staggerRating"
   | "stamina"
   | "staminaMaximum"
   | "staminaMaximumTotal"
   | "statusElement"
-  | "stun"
+  | "stunChance"
   | "stunRating"
   | "thorns"
   | "totalElementalEffects"
   | "trainedSkills"
   | "trinketProperties"
-  | "triumphsCompleted"
   | "unlockedMasteries"
-  | "weapon"
   | "wildernesses";
 
 export const TRAIT_TYPES = [

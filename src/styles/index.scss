@@ -1,6 +1,7 @@
 @import "~animate.css";
 @import "bootstrap-theme";
 @import "~bootstrap/scss/bootstrap";
+@import "~react-circular-progressbar/dist/styles";
 
 ::selection {
   background: $gray-600;
@@ -110,13 +111,35 @@ small:empty {
   display: none;
 }
 
-svg.icon-image {
-  display: block;
-  fill: currentcolor;
-  width: 40px;
+svg {
+  /* stylelint-disable-next-line selector-class-pattern */
+  &.CircularProgressbar {
+    width: 60px;
 
-  &.small {
-    width: 20px;
+    /* stylelint-disable-next-line selector-class-pattern */
+    .CircularProgressbar-path {
+      stroke: $dark;
+    }
+
+    /* stylelint-disable-next-line selector-class-pattern */
+    .CircularProgressbar-text {
+      fill: $dark;
+    }
+
+    /* stylelint-disable-next-line selector-class-pattern */
+    .CircularProgressbar-trail {
+      stroke: $body-secondary-bg;
+    }
+  }
+
+  &.icon-image {
+    display: block;
+    fill: currentcolor;
+    width: 40px;
+
+    &.small {
+      width: 20px;
+    }
   }
 }
 

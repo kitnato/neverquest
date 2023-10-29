@@ -74,7 +74,7 @@ export const SKILLS: Record<
     description: "Unlocks the ability to dodge attacks, negating all damage.",
     Icon: IconEvasion,
     requiredCrew: "merchant",
-    shows: ["dodge", "dodgePenalty"],
+    shows: ["dodgeChance", "dodgePenalty"],
     unlocksAttributes: ["agility"],
   },
   shieldcraft: {

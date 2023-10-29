@@ -33,7 +33,7 @@ import {
 export function ArmorOptions() {
   const [{ armor: craftedArmor }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const allowNSFWValue = useRecoilValue(allowNSFW);
-  const isShowingDodge = useRecoilValue(isShowing("dodge"));
+  const isShowingDodgeChance = useRecoilValue(isShowing("dodgeChance"));
   const armorcraftValue = useRecoilValue(isSkillAcquired("armorcraft"));
   const stageValue = useRecoilValue(stage);
 
@@ -94,11 +94,15 @@ export function ArmorOptions() {
 
         {staminaCost !== 0 && (
           <IconDisplay
-            Icon={isShowingDodge ? IconDodgePenalty : IconUnknown}
+            Icon={isShowingDodgeChance ? IconDodgePenalty : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
-            tooltip={isShowingDodge ? "Dodge penalty" : LABEL_UNKNOWN}
+            tooltip={isShowingDodgeChance ? "Dodge penalty" : LABEL_UNKNOWN}
           >
-            {isShowingDodge ? <DodgePenaltyContents staminaCost={staminaCost} /> : LABEL_UNKNOWN}
+            {isShowingDodgeChance ? (
+              <DodgePenaltyContents staminaCost={staminaCost} />
+            ) : (
+              LABEL_UNKNOWN
+            )}
           </IconDisplay>
         )}
 

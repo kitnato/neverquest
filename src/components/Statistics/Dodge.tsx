@@ -24,7 +24,7 @@ import { armor } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { ownedItem } from "@neverquest/state/items";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import { dodge } from "@neverquest/state/statistics";
+import { dodgeChance } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
@@ -32,20 +32,20 @@ export function Dodge() {
   const { name, staminaCost } = useRecoilValue(armor);
   const agilityPowerBonus = useRecoilValue(attributePowerBonus("agility"));
   const agility = useRecoilValue(attributeStatistic("agility"));
-  const dodgeValue = useRecoilValue(dodge);
-  const isShowingDodge = useRecoilValue(isShowing("dodge"));
+  const dodgeChanceValue = useRecoilValue(dodgeChance);
+  const isShowingDodgeChance = useRecoilValue(isShowing("dodgeChance"));
   const isShowingDodgePenalty = useRecoilValue(isShowing("dodgePenalty"));
   const isSkillAcquiredEvasion = useRecoilValue(isSkillAcquired("evasion"));
   const isTraitAcquiredNudist = useRecoilValue(isTraitAcquired("nudist"));
   const hasTomeOfPower = Boolean(useRecoilValue(ownedItem("tome of power")));
 
   useDeltaText({
-    delta: "dodge",
+    delta: "dodgeChance",
     format: "percentage",
-    state: dodge,
+    state: dodgeChance,
   });
 
-  if (!isShowingDodge) {
+  if (!isShowingDodgeChance) {
     return null;
   }
 
@@ -132,12 +132,12 @@ export function Dodge() {
         >
           <span>
             {isSkillAcquiredEvasion
-              ? formatNumber({ format: "percentage", value: dodgeValue })
+              ? formatNumber({ format: "percentage", value: dodgeChanceValue })
               : LABEL_EMPTY}
           </span>
         </OverlayTrigger>
 
-        <FloatingTextQueue delta="dodge" />
+        <FloatingTextQueue delta="dodgeChance" />
       </Stack>
     </IconDisplay>
   );

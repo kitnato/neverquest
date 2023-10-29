@@ -260,7 +260,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
   }),
 );
 
-export const poison = withStateKey("poison", (key) =>
+export const poisonChance = withStateKey("poisonChance", (key) =>
   selector({
     get: ({ get }) => {
       const stageValue = get(stage);

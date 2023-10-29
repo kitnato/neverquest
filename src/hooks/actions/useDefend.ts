@@ -26,20 +26,20 @@ import {
   monsterAttackRate,
   monsterDamageTotal,
   monsterElement,
-  poison,
+  poisonChance,
   poisonLength,
 } from "@neverquest/state/monster";
 import { blight, isPoisoned, poisonDuration } from "@neverquest/state/reserves";
 import {
-  block,
+  blockChance,
   deflection,
-  dodge,
+  dodgeChance,
   parry,
   parryAbsorption,
   parryDamage,
   protection,
   recoveryRate,
-  stagger,
+  staggerChance,
   thorns,
 } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
@@ -85,7 +85,7 @@ export function useDefend() {
         const deltaHealth: DeltaDisplay = [];
 
         // If attack is dodged, nothing else happens (all damage is negated).
-        if (Math.random() < get(dodge)) {
+        if (Math.random() < get(dodgeChance)) {
           const armorStaminaCost = get(armor).staminaCost;
 
           if (get(canDodge)) {
@@ -107,7 +107,7 @@ export function useDefend() {
           }
         }
 
-        const hasBlocked = Math.random() < get(block);
+        const hasBlocked = Math.random() < get(blockChance);
         const hasParried = Math.random() < get(parry);
         const monsterDamageTotalValue = get(monsterDamageTotal);
         const protectionValue = get(protection);
@@ -180,7 +180,7 @@ export function useDefend() {
 
             increaseMastery("stability");
 
-            if (Math.random() < get(stagger)) {
+            if (Math.random() < get(staggerChance)) {
               set(isShowing("monsterAilments"), true);
               set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")));
 
@@ -244,7 +244,7 @@ export function useDefend() {
         }
 
         // If poisoning occurs, check if has been deflected, otherwise apply poison.
-        if (Math.random() < get(poison)) {
+        if (Math.random() < get(poisonChance)) {
           if (Math.random() < get(deflection)) {
             deltaHealth.push({
               color: "text-muted",

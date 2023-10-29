@@ -43,7 +43,7 @@ export function useToggleEquipGear() {
             return;
           }
 
-          set(isShowing("block"), true);
+          set(isShowing("blockChance"), true);
           set(isShowing("offhand"), true);
           set(isShowing("stamina"), true);
         }

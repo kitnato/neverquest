@@ -1,5 +1,10 @@
 import { useEffect } from "react";
-import { type RecoilValueReadOnly, useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  type RecoilValueReadOnly,
+  useRecoilValue,
+  useResetRecoilState,
+  useSetRecoilState,
+} from "recoil";
 
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
 import { deltas } from "@neverquest/state/deltas";
@@ -17,8 +22,11 @@ export function useDeltaText({
   state: RecoilValueReadOnly<number>;
   stop?: ({ current, previous }: { current: number; previous: number | null }) => boolean;
 }) {
+  const deltaState = deltas(delta);
+
   const currentValue = useRecoilValue(state);
-  const setDelta = useSetRecoilState(deltas(delta));
+  const setDelta = useSetRecoilState(deltaState);
+  const resetDelta = useResetRecoilState(deltaState);
 
   const previousValue = usePreviousValue(currentValue);
 
@@ -50,5 +58,7 @@ export function useDeltaText({
         value: difference,
       })}`,
     });
-  }, [currentValue, delta, format, isTime, previousValue, setDelta, stop]);
+
+    return resetDelta;
+  }, [currentValue, format, isTime, previousValue, resetDelta, setDelta, stop]);
 }

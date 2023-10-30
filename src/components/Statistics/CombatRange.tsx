@@ -23,14 +23,16 @@ export function CombatRange() {
   const weaponValue = useRecoilValue(weapon);
 
   const isWeaponRanged = isRanged(weaponValue);
+  const isEmpty = !archeryValue || !isWeaponRanged || rangeValue === 0;
 
   useDeltaText({
     delta: "range",
     format: "time",
     state: range,
+    stop: () => isEmpty,
   });
 
-  if (!archeryValue || !isWeaponRanged) {
+  if (isEmpty) {
     return null;
   }
 

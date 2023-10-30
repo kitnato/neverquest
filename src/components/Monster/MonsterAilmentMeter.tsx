@@ -1,4 +1,4 @@
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
@@ -21,7 +21,13 @@ export function MonsterAilmentMeter({
   const monsterAilmentDurationValue = useRecoilValue(monsterAilmentDuration(ailment));
 
   return (
-    <OverlayTrigger overlay={<Tooltip>{AILMENT_DESCRIPTION[ailment]}</Tooltip>}>
+    <OverlayTrigger
+      overlay={
+        <Popover>
+          <PopoverBody>{AILMENT_DESCRIPTION[ailment]}</PopoverBody>
+        </Popover>
+      }
+    >
       <span className="w-100">
         <LabelledProgressBar
           disableTransitions

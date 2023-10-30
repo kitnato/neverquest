@@ -22,13 +22,15 @@ export function StunRating() {
   const traumatologyValue = useRecoilValue(isSkillAcquired("traumatology"));
   const { abilityChance, gearClass } = useRecoilValue(weapon);
 
+  const isEmpty = !traumatologyValue || gearClass !== "blunt" || stunRatingValue === 0;
+
   useDeltaText({
     delta: "stunRating",
     state: stunRating,
-    stop: () => !traumatologyValue,
+    stop: () => isEmpty,
   });
 
-  if (!traumatologyValue || gearClass !== "blunt") {
+  if (isEmpty) {
     return null;
   }
 

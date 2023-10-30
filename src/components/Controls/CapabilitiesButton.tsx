@@ -22,14 +22,14 @@ import type { TabsData } from "@neverquest/types/props";
 import { formatEnumeration } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-const TABS: TabsData = [
+const BASE_TAB: TabsData = [
   {
     Component: Attributes,
     Icon: IconAttributes,
     label: "attributes",
   },
 ];
-const TOOLTIP = ["Attributes"];
+const BASE_TOOLTIP = ["Attributes"];
 
 export function CapabilitiesButton() {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesAffordable);
@@ -44,22 +44,31 @@ export function CapabilitiesButton() {
 
   const isShowingSkillsOrTraits = isShowingSkills || isShowingTraits;
 
+  let tabs: TabsData = [...BASE_TAB];
+  let tooltip = [...BASE_TOOLTIP];
+
   if (isShowingSkills) {
-    TABS.push({
-      Component: Skills,
-      Icon: IconSkills,
-      label: "skills",
-    });
-    TOOLTIP.push("skills");
+    tabs = [
+      ...tabs,
+      {
+        Component: Skills,
+        Icon: IconSkills,
+        label: "skills",
+      },
+    ];
+    tooltip = [...tooltip, "skills"];
   }
 
   if (isShowingTraits) {
-    TABS.push({
-      Component: Traits,
-      Icon: IconTraits,
-      label: "traits",
-    });
-    TOOLTIP.push("traits");
+    tabs = [
+      ...tabs,
+      {
+        Component: Traits,
+        Icon: IconTraits,
+        label: "traits",
+      },
+    ];
+    tooltip = [...tooltip, "traits"];
   }
 
   if (!isShowingCapabilities) {
@@ -68,7 +77,7 @@ export function CapabilitiesButton() {
 
   return (
     <>
-      <OverlayTrigger overlay={<Tooltip>{formatEnumeration(TOOLTIP)}</Tooltip>}>
+      <OverlayTrigger overlay={<Tooltip>{formatEnumeration(tooltip)}</Tooltip>}>
         <span className={getAnimationClass({ name: "bounceIn" })}>
           <Button
             className={`position-relative${
@@ -97,7 +106,7 @@ export function CapabilitiesButton() {
         onClose={() => setScreenShowing(false)}
         title={`${isShowingSkillsOrTraits ? "Capabilities" : "Attributes"}`}
       >
-        {isShowingSkillsOrTraits ? <IconTabs tabs={TABS} /> : <Attributes />}
+        {isShowingSkillsOrTraits ? <IconTabs tabs={tabs} /> : <Attributes />}
       </DismissableScreen>
     </>
   );

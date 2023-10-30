@@ -28,12 +28,15 @@ export function BleedRating() {
   const anatomyValue = useRecoilValue(isSkillAcquired("anatomy"));
   const { gearClass } = useRecoilValue(weapon);
 
+  const isEmpty = !anatomyValue || gearClass !== "piercing" || bleedRatingValue === 0;
+
   useDeltaText({
     delta: "bleedRating",
     state: bleedRating,
+    stop: () => isEmpty,
   });
 
-  if (!anatomyValue || gearClass !== "piercing") {
+  if (isEmpty) {
     return null;
   }
 

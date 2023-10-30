@@ -16,12 +16,12 @@ import { isTraitAcquired } from "@neverquest/state/traits";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Deflection() {
-  const armorValue = useRecoilValue(armor);
+  const { deflection: armorDeflection } = useRecoilValue(armor);
   const deflectionValue = useRecoilValue(deflection);
   const isSkillAcquiredArmorcraft = useRecoilValue(isSkillAcquired("armorcraft"));
   const isTraitAcquiredInoculated = useRecoilValue(isTraitAcquired("inoculated"));
 
-  const armorDeflection = armorValue.deflection;
+  const isEmpty = !isSkillAcquiredArmorcraft || deflectionValue === 0;
 
   useDeltaText({
     delta: "deflection",
@@ -29,7 +29,7 @@ export function Deflection() {
     state: deflection,
   });
 
-  if (!isSkillAcquiredArmorcraft) {
+  if (isEmpty) {
     return null;
   }
 
@@ -50,7 +50,7 @@ export function Deflection() {
                       <Stack direction="horizontal" gap={1}>
                         <IconImage Icon={IconDeflection} size="small" />
 
-                        {formatNumber({ format: "percentage", value: armorValue.deflection })}
+                        {formatNumber({ format: "percentage", value: armorDeflection })}
                       </Stack>
                     </td>
                   </tr>

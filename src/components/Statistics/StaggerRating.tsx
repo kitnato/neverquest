@@ -26,18 +26,19 @@ export function StaggerRating() {
   const staggerRatingValue = useRecoilValue(staggerRating);
   const weaponValue = useRecoilValue(weapon);
 
-  useDeltaText({
-    delta: "staggerRating",
-    state: staggerRating,
-    stop: () => !shieldcraftValue,
-  });
-
-  if (
+  const isEmpty =
     isRanged(weaponValue) ||
     (isMelee(weaponValue) && !isTraitAcquiredColossus && weaponValue.grip === "two-handed") ||
     !shieldcraftValue ||
-    staggerRatingValue === 0
-  ) {
+    staggerRatingValue === 0;
+
+  useDeltaText({
+    delta: "staggerRating",
+    state: staggerRating,
+    stop: () => isEmpty,
+  });
+
+  if (isEmpty) {
     return null;
   }
 

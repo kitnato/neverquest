@@ -26,12 +26,15 @@ export function ParryRating() {
   const escrimeValue = useRecoilValue(isSkillAcquired("escrime"));
   const { gearClass } = useRecoilValue(weapon);
 
+  const isEmpty = !escrimeValue || gearClass !== "slashing" || parryRatingValue === 0;
+
   useDeltaText({
     delta: "parryRating",
     state: parryRating,
+    stop: () => isEmpty,
   });
 
-  if (!escrimeValue || gearClass !== "slashing") {
+  if (isEmpty) {
     return null;
   }
 

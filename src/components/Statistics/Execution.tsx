@@ -20,7 +20,8 @@ export function Execution() {
   const isEmpty =
     !siegecraftValue ||
     isRanged(weaponValue) ||
-    (isMelee(weaponValue) && weaponValue.grip !== "two-handed");
+    (isMelee(weaponValue) && weaponValue.grip !== "two-handed") ||
+    executionValue === 0;
 
   useDeltaText({
     delta: "executionThreshold",

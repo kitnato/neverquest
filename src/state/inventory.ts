@@ -1,10 +1,11 @@
 import { atom, selector, selectorFamily } from "recoil";
 
 import { ENCUMBRANCE } from "@neverquest/data/inventory";
-import { handleLocalStorage, withStateKey } from "@neverquest/state";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { InventoryItem } from "@neverquest/types";
 import { isArmor, isGear, isMelee, isRanged, isShield } from "@neverquest/types/type-guards";
+import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 

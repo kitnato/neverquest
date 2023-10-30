@@ -7,12 +7,15 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { QUEST_COMPLETION_BONUS } from "@neverquest/data/journal";
 import { useCompleteQuest } from "@neverquest/hooks/actions/useCompleteQuest";
+import IconConquest from "@neverquest/icons/conquest.svg?react";
 import IconDamage from "@neverquest/icons/damage.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconRoutine from "@neverquest/icons/routine.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
+import IconTriumph from "@neverquest/icons/triumph.svg?react";
 import { questProgress } from "@neverquest/state/journal";
 import type { QuestData } from "@neverquest/types";
+import type { SVGIcon } from "@neverquest/types/props";
 import {
   QUEST_BONUS_TYPES,
   type Quest,
@@ -21,7 +24,13 @@ import {
   type QuestProgression,
   type QuestStatus,
 } from "@neverquest/types/unions";
-import { formatNumber } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
+
+const QUEST_CLASS_ICONS: Record<QuestClass, SVGIcon> = {
+  conquest: IconConquest,
+  routine: IconRoutine,
+  triumph: IconTriumph,
+};
 
 export function QuestDisplay({
   data: { description, hidden, progressionMaximum, title },
@@ -38,25 +47,30 @@ export function QuestDisplay({
 
   const completeQuest = useCompleteQuest();
 
+  const cappedProgress = Math.min(questProgressValue, progressionMaximum);
   const questProgression = `${progressionMaximum}`;
   const choiceID = `quest-completion-${quest}-${questProgression}`;
   const hasCompletedQuest = typeof status !== "boolean" && QUEST_BONUS_TYPES.includes(status);
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <IconDisplay description={description} Icon={IconRoutine} isFullWidth tooltip={questClass}>
+      <CircularProgressbar
+        maxValue={progressionMaximum}
+        text={`${formatNumber({ format: "abbreviated", value: cappedProgress })}/${formatNumber({
+          format: "abbreviated",
+          value: progressionMaximum,
+        })}`}
+        value={cappedProgress}
+      />
+
+      <IconDisplay
+        description={description}
+        Icon={QUEST_CLASS_ICONS[questClass]}
+        isFullWidth
+        tooltip={capitalizeAll(questClass)}
+      >
         {hidden !== undefined && hasCompletedQuest ? title.replace(LABEL_UNKNOWN, hidden) : title}
       </IconDisplay>
-
-      {progressionMaximum > 1 && (
-        <CircularProgressbar
-          maxValue={progressionMaximum}
-          text={`${formatNumber({ value: questProgressValue })}/${formatNumber({
-            value: progressionMaximum,
-          })}`}
-          value={questProgressValue}
-        />
-      )}
 
       {status !== false && (
         <ToggleButtonGroup

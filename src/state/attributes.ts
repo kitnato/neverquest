@@ -1,11 +1,12 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES, ATTRIBUTES_ORDER } from "@neverquest/data/attributes";
-import { handleLocalStorage, withStateKey } from "@neverquest/state";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { powerBonusBoost } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import type { Attribute } from "@neverquest/types/unions";
 import { getAttributePointCost, getComputedStatistic } from "@neverquest/utilities/getters";
+import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 

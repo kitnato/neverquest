@@ -8,7 +8,6 @@ import {
   RECOVERY_RATE,
 } from "@neverquest/data/statistics";
 import { BRUISER_STUN_CHANCE } from "@neverquest/data/traits";
-import { withStateKey } from "@neverquest/state";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import {
   armor,
@@ -24,6 +23,7 @@ import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isMelee } from "@neverquest/types/type-guards";
 import { getDamagePerRate, getDamagePerTick } from "@neverquest/utilities/getters";
+import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
@@ -251,7 +251,7 @@ export const recoveryRate = withStateKey("recoveryRate", (key) =>
 
 export const staggerChance = withStateKey("staggerChance", (key) =>
   selector({
-    get: ({ get }) => (get(isSkillAcquired("traumatology")) ? get(shield).stagger : 0),
+    get: ({ get }) => (get(isSkillAcquired("shieldcraft")) ? get(shield).stagger : 0),
     key,
   }),
 );

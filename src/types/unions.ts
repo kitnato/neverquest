@@ -18,33 +18,26 @@ export const CONQUEST_TYPES = [
   "killing",
   "looting",
   "blocking",
-  "blockingInARow",
   "staggering",
-  "staggeringInARow",
   "bleeding",
   "bleedingKill",
-  "bleedingInARow",
   "stunning",
-  "stunningInARow",
   "parrying",
   "parryingKill",
-  "parryingInARow",
+  "deflecting",
   "dodging",
-  "dodgingInARow",
-  "criticals",
-  "criticalsInARow",
+  "critical",
+  "criticalKilling",
   "executing",
-  "executingInARow",
   "bandaging",
   "bosses",
-  "burned",
+  "burning",
   "freezing",
-  "shocked",
+  "shocking",
   "thorns",
   "thornsKill",
-  "poisoned",
-  "blighted",
-  "potions",
+  "poisoning",
+  "blighting",
 ] as const;
 export type Conquest = (typeof CONQUEST_TYPES)[number];
 
@@ -135,17 +128,19 @@ export const MASTERY_TYPES = [
 ] as const;
 export type Mastery = (typeof MASTERY_TYPES)[number];
 
+export const MONSTER_AILMENT_ELEMENTAL_TYPES = ["burning", "frozen", "shocked"] as const;
+export type MonsterAilmentElemental = (typeof MONSTER_AILMENT_ELEMENTAL_TYPES)[number];
+
 export const MONSTER_AILMENT_TYPES = [
   "bleeding",
-  "burning",
-  "frozen",
-  "shocked",
   "staggered",
   "stunned",
+  ...MONSTER_AILMENT_ELEMENTAL_TYPES,
 ] as const;
+
 export type MonsterAilment = (typeof MONSTER_AILMENT_TYPES)[number];
 
-export type NumberFormat = "float" | "integer" | "percentage" | "time";
+export type NumberFormat = "abbreviated" | "float" | "integer" | "percentage" | "time";
 
 export type Quest = Conquest | Routine | Triumph;
 
@@ -185,27 +180,28 @@ export const ROUTINE_TYPES = [
   "purchasingInfusable",
   "acquiringKnapsack",
   "selling",
-  "buyBack",
-  "essenceSpending",
+  "buyingBack",
+  "spendingEssence",
   "warpingWilderness",
   "warpingCaravan",
   "hiringOne",
   "hiringAll",
   "crafting",
   "gems",
-  "gemsOwn",
-  "gemsSocket",
-  "gemsSocketAll",
-  "gemsTransmute",
+  "gemsOwned",
+  "gemsSocketing",
+  "gemsSocketingAll",
+  "gemsTransmuting",
+  "potions",
   "acquiringRanged",
   "acquiringTwoHanded",
   "infusion",
   "infusionMaximum",
   "attributesMaximum",
   "attributesAll",
-  "skillsAcquire",
+  "skillsAcquiring",
   "skillsCraft",
-  "skillAcquireAll",
+  "skillAcquiringAll",
   "masteryRank",
   "masteryAll",
   "masteryRankMaximum",
@@ -273,7 +269,6 @@ export type Skill = (typeof SKILL_TYPES)[number];
 
 export type StateKey =
   | Gear
-  | QuestClass
   | "absorbedEssence"
   | "acquiredTraits"
   | "activeCrew"
@@ -314,7 +309,7 @@ export type StateKey =
   | "canFit"
   | "canReceiveAilment"
   | "canReceiveAilments"
-  | "completedQuestCount"
+  | "completedQuestsCount"
   | "confirmationWarnings"
   | "criticalChance"
   | "criticalDamage"
@@ -423,6 +418,7 @@ export type StateKey =
   | "progressReduction"
   | "protection"
   | "questProgress"
+  | "questsBonus"
   | "questStatus"
   | "range"
   | "recoveryDuration"
@@ -487,6 +483,7 @@ export const TRIUMPH_TYPES = [
   "survivingNoGear",
   "survivingNoAttributes",
   "killingOneStrike",
+  "exhausting",
   "essenceCount",
   "hiringBlacksmithFirst",
   "acquiringArcheryFirst",

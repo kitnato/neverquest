@@ -1,8 +1,9 @@
 import { atomFamily, selector } from "recoil";
 
 import { SKILL_PRICE_BASE, SKILL_PRICE_FACTOR } from "@neverquest/data/skills";
-import { handleLocalStorage, withStateKey } from "@neverquest/state";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { SKILL_TYPES, type Skill } from "@neverquest/types/unions";
+import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 

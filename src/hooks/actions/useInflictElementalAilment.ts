@@ -1,5 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
+import { useProgressQuest } from "./useProgressQuest";
 import { ELEMENTALS } from "@neverquest/data/inventory";
 import { ELEMENTAL_AILMENT_DURATION_MAXIMUM } from "@neverquest/data/statistics";
 import { totalElementalEffects } from "@neverquest/state/gear";
@@ -8,6 +9,8 @@ import type { Elemental } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useInflictElementalAilment() {
+  const progressQuest = useProgressQuest();
+
   return useRecoilCallback(
     ({ set, snapshot }) =>
       ({ elemental, slot }: { elemental: Elemental; slot: "armor" | "weapon" }) => {
@@ -26,8 +29,25 @@ export function useInflictElementalAilment() {
 
             return newDuration;
           });
+
+          switch (ailment) {
+            case "burning": {
+              progressQuest("burning");
+              break;
+            }
+
+            case "frozen": {
+              progressQuest("freezing");
+              break;
+            }
+
+            case "shocked": {
+              progressQuest("shocking");
+              break;
+            }
+          }
         }
       },
-    [],
+    [progressQuest],
   );
 }

@@ -49,7 +49,7 @@ export function FloatingTextQueue({ delta }: { delta: Delta }) {
     ]);
 
     return resetDelta;
-  }, [delta, deltaValue, resetDelta, setFloatingTextQueue]);
+  }, [deltaValue, resetDelta, setFloatingTextQueue]);
 
   return (
     <div

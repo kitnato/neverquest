@@ -3,16 +3,17 @@ import { atom, atomFamily, selector, selectorFamily } from "recoil";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { BLIGHT } from "@neverquest/data/monster";
 import { HEALTH_LOW_THRESHOLD, RESERVES } from "@neverquest/data/reserves";
-import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import {
   attributePowerBonus,
   attributeRank,
   attributeStatistic,
 } from "@neverquest/state/attributes";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { poisonLength, poisonMagnitude } from "@neverquest/state/monster";
 import type { BlightMagnitude } from "@neverquest/types";
 import type { Reserve } from "@neverquest/types/unions";
 import { getComputedStatistic } from "@neverquest/utilities/getters";
+import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 

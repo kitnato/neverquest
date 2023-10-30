@@ -6,7 +6,7 @@ import {
   QUEST_TYPES,
   QUEST_TYPES_BY_CLASS,
 } from "@neverquest/data/journal";
-import { handleLocalStorage, withStateKey } from "@neverquest/state";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import type { QuestData } from "@neverquest/types";
 import {
   QUEST_BONUS_TYPES,
@@ -16,6 +16,7 @@ import {
   type QuestProgression,
   type QuestStatus,
 } from "@neverquest/types/unions";
+import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
@@ -25,22 +26,19 @@ export const availableQuests = withStateKey("availableQuests", (key) =>
       (parameter) =>
       ({ get }) => {
         const questProgressValue = get(questProgress(parameter));
-        let isAtLimit = false;
 
-        return Object.values(QUESTS[parameter]).reduce(
-          (accumulator, current) => {
-            const { progressionMaximum } = current;
-            const isWithinLimit = !isAtLimit && questProgressValue <= progressionMaximum;
+        const quests: Partial<Record<QuestProgression, QuestData>> = {};
 
-            isAtLimit = true;
+        // TODO - achievable with .reduce()?
+        for (const [key, current] of Object.entries(QUESTS[parameter])) {
+          quests[key as QuestProgression] = current;
 
-            return isWithinLimit
-              ? { ...accumulator, [`${progressionMaximum}`]: current }
-              : accumulator;
-          },
+          if (current.progressionMaximum > questProgressValue) {
+            break;
+          }
+        }
 
-          {},
-        );
+        return quests;
       },
     key,
   }),
@@ -61,7 +59,7 @@ export const canCompleteQuests = withStateKey("canCompleteQuests", (key) =>
   }),
 );
 
-export const completedQuestCount = withStateKey("completedQuestCount", (key) =>
+export const completedQuestsCount = withStateKey("completedQuestsCount", (key) =>
   selectorFamily<number, QuestClass>({
     get:
       (parameter) =>
@@ -79,7 +77,7 @@ export const completedQuestCount = withStateKey("completedQuestCount", (key) =>
   }),
 );
 
-export const questBonus = withStateKey("completedQuestCount", (key) =>
+export const questsBonus = withStateKey("questsBonus", (key) =>
   selectorFamily<number, QuestBonus>({
     get:
       (parameter) =>
@@ -88,8 +86,7 @@ export const questBonus = withStateKey("completedQuestCount", (key) =>
           (accumulator, currentQuest) =>
             accumulator +
             Object.values(get(questStatus(currentQuest))).filter(
-              (currentStatus) =>
-                typeof currentStatus !== "boolean" && QUEST_BONUS_TYPES.includes(parameter),
+              (currentStatus) => typeof currentStatus !== "boolean" && parameter === currentStatus,
             ).length,
           0,
         ) * QUEST_COMPLETION_BONUS,

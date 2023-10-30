@@ -7,7 +7,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconDamage from "@neverquest/icons/damage.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
-import { questBonus } from "@neverquest/state/journal";
+import { questsBonus } from "@neverquest/state/journal";
 import type { SVGIcon } from "@neverquest/types/props";
 import type { QuestBonus } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -19,16 +19,16 @@ const QUEST_BONUS: Record<QuestBonus, { Icon: SVGIcon; tooltip: string }> = {
 };
 
 export function QuestBonusDisplay({ bonus }: { bonus: QuestBonus }) {
-  const questBonusState = questBonus(bonus);
+  const questsBonusState = questsBonus(bonus);
 
-  const questBonusValue = useRecoilValue(questBonus(bonus));
+  const questsBonusValue = useRecoilValue(questsBonusState);
 
   const { Icon, tooltip } = QUEST_BONUS[bonus];
 
   useDeltaText({
     delta: bonus,
     format: "percentage",
-    state: questBonusState,
+    state: questsBonusState,
   });
 
   return (
@@ -37,7 +37,7 @@ export function QuestBonusDisplay({ bonus }: { bonus: QuestBonus }) {
         {`+${formatNumber({
           decimals: 0,
           format: "percentage",
-          value: questBonusValue,
+          value: questsBonusValue,
         })}`}
 
         <FloatingTextQueue delta={bonus} />

@@ -5,6 +5,7 @@ import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonst
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
 import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import {
   attackDuration,
   canAttackOrParry,
@@ -48,6 +49,7 @@ export function useAttack() {
   const changeStamina = useChangeStamina();
   const increaseMastery = useIncreaseMastery();
   const inflictElementalAilment = useInflictElementalAilment();
+  const progressQuest = useProgressQuest();
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
@@ -120,6 +122,7 @@ export function useAttack() {
 
           if (inExecutionRange || (hasInflictedCritical && get(isTraitAcquired("executioner")))) {
             changeMonsterHealth({
+              damageType: "execute",
               delta: [
                 {
                   color: "text-muted",
@@ -146,6 +149,8 @@ export function useAttack() {
             set(isShowing("monsterAilments"), true);
             set(monsterAilmentDuration("bleeding"), get(bleed).duration);
 
+            progressQuest("bleeding");
+
             monsterDeltas.push({
               color: "text-muted",
               value: "BLEED",
@@ -153,6 +158,8 @@ export function useAttack() {
           }
 
           if (hasInflictedCritical) {
+            progressQuest("critical");
+
             monsterDeltas.push({
               color: "text-muted",
               value: "CRITICAL",
@@ -162,6 +169,8 @@ export function useAttack() {
           if (Math.random() < get(stunChance)) {
             set(isShowing("monsterAilments"), true);
             set(monsterAilmentDuration("stunned"), get(masteryStatistic("might")));
+
+            progressQuest("stunning");
 
             monsterDeltas.push({
               color: "text-muted",
@@ -174,6 +183,7 @@ export function useAttack() {
           );
 
           changeMonsterHealth({
+            damageType: hasInflictedCritical ? "critical" : undefined,
             delta: monsterDeltas,
             value: inflictedDamage,
           });
@@ -186,6 +196,6 @@ export function useAttack() {
           ]);
         }
       },
-    [changeMonsterHealth, changeStamina, increaseMastery, inflictElementalAilment],
+    [changeMonsterHealth, changeStamina, increaseMastery, inflictElementalAilment, progressQuest],
   );
 }

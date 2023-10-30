@@ -53,6 +53,7 @@ export function JournalButton() {
       </OverlayTrigger>
 
       <DismissableScreen
+        hideScroll
         isShowing={isJournalOpenValue}
         onClose={() => setIsJournalOpen(false)}
         title="Journal"

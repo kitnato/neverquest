@@ -14,6 +14,7 @@ import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import IconCompass from "@neverquest/icons/compass.svg?react";
 import IconNavigation from "@neverquest/icons/navigation.svg?react";
@@ -37,6 +38,7 @@ export function CompassNavigate() {
 
   const [isShowingNavigation, setIsShowingNavigation] = useState(false);
 
+  const progressQuest = useProgressQuest();
   const resetWilderness = useResetWilderness();
 
   const canNavigate = (!isStageStartedValue || isStageCompletedValue) && isWildernessValue;
@@ -73,6 +75,8 @@ export function CompassNavigate() {
             <Form.Select
               disabled={!canNavigate}
               onChange={({ target: { value } }) => {
+                progressQuest("warpingWilderness");
+
                 setIsShowingNavigation(false);
                 setStage(Number(value));
 

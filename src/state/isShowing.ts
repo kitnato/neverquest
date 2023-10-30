@@ -1,7 +1,8 @@
 import { atomFamily, selector } from "recoil";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 
-import { handleLocalStorage, withStateKey } from "@neverquest/state";
 import { SHOWING_TYPES, type Showing } from "@neverquest/types/unions";
+import { withStateKey } from "@neverquest/utilities/helpers";
 
 export const isShowing = withStateKey("isShowing", (key) =>
   atomFamily<boolean, Showing>({

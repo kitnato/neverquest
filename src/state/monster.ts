@@ -12,7 +12,7 @@ import {
   POISON,
 } from "@neverquest/data/monster";
 import { AILMENT_PENALTY, BLEED } from "@neverquest/data/statistics";
-import { handleLocalStorage, withStateKey } from "@neverquest/state";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
 import { range, shield, totalElementalEffects, weapon } from "@neverquest/state/gear";
 import { essenceBonus } from "@neverquest/state/items";
@@ -31,6 +31,7 @@ import {
   getGrowthTriangular,
   getLinearMapping,
 } from "@neverquest/utilities/getters";
+import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 

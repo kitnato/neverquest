@@ -1,9 +1,10 @@
 import { atom, atomFamily, selector } from "recoil";
 
 import { CREW_ORDER } from "@neverquest/data/caravan";
-import { handleLocalStorage, withStateKey } from "@neverquest/state";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import type { BlacksmithInventory, MerchantInventory, Weapon } from "@neverquest/types";
 import type { Crew, CrewStatus } from "@neverquest/types/unions";
+import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 

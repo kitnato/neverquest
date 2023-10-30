@@ -6,11 +6,11 @@ import { QuestListing } from "@neverquest/components/Journal/QuestListing";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { QUESTS_COUNT, QUEST_TYPES_BY_CLASS } from "@neverquest/data/journal";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { completedQuestCount } from "@neverquest/state/journal";
+import { completedQuestsCount } from "@neverquest/state/journal";
 import type { QuestClass } from "@neverquest/types/unions";
 
 export function Quests({ questClass }: { questClass: QuestClass }) {
-  const completedQuestsState = completedQuestCount(questClass);
+  const completedQuestsState = completedQuestsCount(questClass);
 
   const completedQuestsValue = useRecoilValue(completedQuestsState);
 
@@ -35,7 +35,7 @@ export function Quests({ questClass }: { questClass: QuestClass }) {
         </LabelledProgressBar>
       </Stack>
 
-      <Stack gap={3}>
+      <Stack gap={3} style={{ height: "53vh", overflowY: "auto" }}>
         {QUEST_TYPES_BY_CLASS[questClass].map((current) => (
           <QuestListing key={current} quest={current} questClass={questClass} />
         ))}

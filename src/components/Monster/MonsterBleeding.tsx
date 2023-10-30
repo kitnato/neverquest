@@ -31,6 +31,7 @@ export function MonsterBleeding() {
     delta: setMonsterBleedingDelta,
     onDelta: () => {
       changeMonsterHealth({
+        damageType: "bleed",
         delta: [
           {
             color: "text-muted",

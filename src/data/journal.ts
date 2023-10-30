@@ -102,7 +102,7 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
   },
   bleeding: {
     "3": {
-      description: "Inflict bleed thrice.",
+      description: "Inflict bleed 3 times.",
       progressionMaximum: 3,
       title: "Bloodlust I",
     },
@@ -127,16 +127,9 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
       title: "Bloodlust V",
     },
   },
-  bleedingInARow: {
-    "1": {
-      description: "Inflict bleed thrice in a row.",
-      progressionMaximum: 1,
-      title: "Sadism",
-    },
-  },
   bleedingKill: {
     "3": {
-      description: "Kill with bleed damage thrice.",
+      description: "Kill with bleed damage 3 times.",
       progressionMaximum: 3,
       title: "Phlebotomizing I",
     },
@@ -156,9 +149,9 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
       title: "Phlebotomizing IV",
     },
   },
-  blighted: {
+  blighting: {
     "3": {
-      description: "Become blighted thrice.",
+      description: "Become blighted 3 times.",
       progressionMaximum: 3,
       title: "Coughing blood I",
     },
@@ -180,36 +173,29 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
   },
   blocking: {
     "3": {
-      description: "Block attacks thrice.",
+      description: "Block attacks 3 times.",
       progressionMaximum: 3,
-      title: "I like turtles I",
+      title: "None shall pass I",
     },
     "10": {
       description: "Block attacks 10 times.",
       progressionMaximum: 10,
-      title: "I like turtles II",
+      title: "None shall pass II",
     },
     "25": {
       description: "Block attacks 25 times.",
       progressionMaximum: 25,
-      title: "I like turtles III",
+      title: "None shall pass III",
     },
     "50": {
       description: "Block attacks 50 times.",
       progressionMaximum: 50,
-      title: "I like turtles IV",
+      title: "None shall pass IV",
     },
     "100": {
       description: "Block attacks 100 times.",
       progressionMaximum: 100,
-      title: "I like turtles V",
-    },
-  },
-  blockingInARow: {
-    "1": {
-      description: "Block thrice in a row.",
-      progressionMaximum: 1,
-      title: "None shall pass",
+      title: "None shall pass V",
     },
   },
   bosses: {
@@ -234,9 +220,9 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
       title: "Giant killer IV",
     },
   },
-  burned: {
+  burning: {
     "3": {
-      description: "Inflict burning thrice.",
+      description: "Inflict burning 3 times.",
       progressionMaximum: 3,
       title: "Kindling I",
     },
@@ -261,7 +247,7 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
       title: "Kindling V",
     },
   },
-  buyBack: {
+  buyingBack: {
     "1": {
       description: "Buy back an item.",
       progressionMaximum: 1,
@@ -290,7 +276,7 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
       title: "Factory IV",
     },
   },
-  criticals: {
+  critical: {
     "3": {
       description: "Inflict 3 critical strikes.",
       progressionMaximum: 3,
@@ -317,11 +303,43 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
       title: "Brutality V",
     },
   },
-  criticalsInARow: {
+  criticalKilling: {
     "3": {
-      description: "Critically strike thrice in a row.",
+      description: "Kill 3 monster with a critical strike.",
       progressionMaximum: 3,
       title: "Fatality I",
+    },
+    "10": {
+      description: "Kill 10 monster with a critical strike.",
+      progressionMaximum: 10,
+      title: "Fatality II",
+    },
+    "25": {
+      description: "Kill 25 monster with a critical strike.",
+      progressionMaximum: 25,
+      title: "Fatality III",
+    },
+    "50": {
+      description: "Kill 50 monster with a critical strike.",
+      progressionMaximum: 50,
+      title: "Fatality IV",
+    },
+  },
+  deflecting: {
+    "3": {
+      description: "Deflect 3 ailments.",
+      progressionMaximum: 3,
+      title: "Incorruptible I",
+    },
+    "10": {
+      description: "Execute 10 monsters.",
+      progressionMaximum: 10,
+      title: "Incorruptible II",
+    },
+    "25": {
+      description: "Execute 25 monsters.",
+      progressionMaximum: 25,
+      title: "Incorruptible III",
     },
   },
   dodging: {
@@ -349,13 +367,6 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
       description: "Dodge 100 attacks.",
       progressionMaximum: 100,
       title: "Grim fandango V",
-    },
-  },
-  dodgingInARow: {
-    "3": {
-      description: "Dodge thrice in a row.",
-      progressionMaximum: 3,
-      title: "Bunny hop",
     },
   },
   equippingArmor: {
@@ -386,43 +397,6 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
       title: "Jackpot",
     },
   },
-  essenceSpending: {
-    "100": {
-      description: "Spend 100 essence.",
-      progressionMaximum: 100,
-      title: "High roller I",
-    },
-    "250": {
-      description: "Spend 250 essence.",
-      progressionMaximum: 250,
-      title: "High roller I",
-    },
-    "500": {
-      description: "Spend 500 essence.",
-      progressionMaximum: 500,
-      title: "High roller II",
-    },
-    "1000": {
-      description: `Spend ${formatNumber({ value: 1000 })} essence.`,
-      progressionMaximum: 1000,
-      title: "High roller III",
-    },
-    "2500": {
-      description: `Spend ${formatNumber({ value: 2500 })} essence.`,
-      progressionMaximum: 2500,
-      title: "High roller IV",
-    },
-    "5000": {
-      description: `Spend ${formatNumber({ value: 5000 })} essence.`,
-      progressionMaximum: 5000,
-      title: "High roller V",
-    },
-    "10000": {
-      description: `Spend ${formatNumber({ value: 10000 })} essence.`,
-      progressionMaximum: 10000,
-      title: "High roller VI",
-    },
-  },
   executing: {
     "3": {
       description: "Execute 3 monsters.",
@@ -445,16 +419,16 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
       title: "Capital punishment IV",
     },
   },
-  executingInARow: {
-    "3": {
-      description: "Execute 3 monsters in a row.",
-      progressionMaximum: 3,
-      title: "Judge, jury and ...",
+  exhausting: {
+    "1": {
+      description: "Be exhausted when attempting to attack, dodge, parry and block.",
+      progressionMaximum: 4,
+      title: "Out of breath",
     },
   },
   freezing: {
     "3": {
-      description: "Inflict frozen thrice.",
+      description: "Inflict frozen 3 times.",
       progressionMaximum: 3,
       title: "Air conditioning I",
     },
@@ -486,28 +460,28 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
       title: "Shiny",
     },
   },
-  gemsOwn: {
+  gemsOwned: {
     "1": {
       description: "Own a gem of each type.",
       progressionMaximum: 1,
       title: "Collector",
     },
   },
-  gemsSocket: {
+  gemsSocketing: {
     "1": {
       description: "Socket a gem.",
       progressionMaximum: 1,
       title: "Jeweller",
     },
   },
-  gemsSocketAll: {
+  gemsSocketingAll: {
     "1": {
       description: "Socket a gem in every equipped piece of gear.",
       progressionMaximum: 1,
       title: "Trifecta",
     },
   },
-  gemsTransmute: {
+  gemsTransmuting: {
     "1": {
       description: "Transmute gems.",
       progressionMaximum: 1,
@@ -683,13 +657,6 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
       title: "Stop hitting yourself V",
     },
   },
-  parryingInARow: {
-    "3": {
-      description: "Parry thrice in a row.",
-      progressionMaximum: 3,
-      title: "d'Artagnan",
-    },
-  },
   parryingKill: {
     "3": {
       description: "Kill 3 monsters with parry damage.",
@@ -712,9 +679,9 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
       title: "I fart in your general direction IV",
     },
   },
-  poisoned: {
+  poisoning: {
     "3": {
-      description: "Become poisoned thrice.",
+      description: "Become poisoned 3 times.",
       progressionMaximum: 3,
       title: "Just a cough I",
     },
@@ -805,7 +772,7 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
   },
   retiring: {
     "3": {
-      description: "Go into retirement thrice.",
+      description: "Go into retirement 3 times.",
       progressionMaximum: 3,
       title: "Getting too old for this I",
     },
@@ -841,9 +808,9 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
       title: "Hustler",
     },
   },
-  shocked: {
+  shocking: {
     "3": {
-      description: "Inflict shocking thrice.",
+      description: "Inflict shocking 3 times.",
       progressionMaximum: 3,
       title: "Raiden I",
     },
@@ -868,14 +835,14 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
       title: "Raiden V",
     },
   },
-  skillAcquireAll: {
+  skillAcquiringAll: {
     "1": {
       description: "Acquire all skills.",
       progressionMaximum: 1,
       title: "The GOAT",
     },
   },
-  skillsAcquire: {
+  skillsAcquiring: {
     "1": {
       description: "Acquire a skill.",
       progressionMaximum: 1,
@@ -889,72 +856,95 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
       title: "Warcraft",
     },
   },
+  spendingEssence: {
+    "100": {
+      description: "Spend 100 essence.",
+      progressionMaximum: 100,
+      title: "High roller I",
+    },
+    "250": {
+      description: "Spend 250 essence.",
+      progressionMaximum: 250,
+      title: "High roller I",
+    },
+    "500": {
+      description: "Spend 500 essence.",
+      progressionMaximum: 500,
+      title: "High roller II",
+    },
+    "1000": {
+      description: `Spend ${formatNumber({ value: 1000 })} essence.`,
+      progressionMaximum: 1000,
+      title: "High roller III",
+    },
+    "2500": {
+      description: `Spend ${formatNumber({ value: 2500 })} essence.`,
+      progressionMaximum: 2500,
+      title: "High roller IV",
+    },
+    "5000": {
+      description: `Spend ${formatNumber({ value: 5000 })} essence.`,
+      progressionMaximum: 5000,
+      title: "High roller V",
+    },
+    "10000": {
+      description: `Spend ${formatNumber({ value: 10000 })} essence.`,
+      progressionMaximum: 10000,
+      title: "High roller VI",
+    },
+  },
   staggering: {
     "3": {
-      description: "Stagger monsters thrice.",
+      description: "Stagger a monster 3 times.",
       progressionMaximum: 3,
-      title: "Canis canem edit I",
+      title: "Stop wiggling I",
     },
     "10": {
       description: "Stagger monsters 10 times.",
       progressionMaximum: 10,
-      title: "Canis canem edit II",
+      title: "Stop wiggling II",
     },
     "25": {
       description: "Stagger monsters 25 times.",
       progressionMaximum: 25,
-      title: "Canis canem edit III",
+      title: "Stop wiggling III",
     },
     "50": {
       description: "Stagger monsters 50 times.",
       progressionMaximum: 50,
-      title: "Canis canem edit IV",
+      title: "Stop wiggling IV",
     },
     "100": {
       description: "Stagger monsters 100 times.",
       progressionMaximum: 100,
-      title: "Canis canem edit V",
-    },
-  },
-  staggeringInARow: {
-    "3": {
-      description: "Stagger thrice in a row.",
-      progressionMaximum: 3,
-      title: "Stop wiggling I",
+      title: "Stop wiggling V",
     },
   },
   stunning: {
     "3": {
-      description: "Stun monsters thrice.",
+      description: "Stun monsters 3 times.",
       progressionMaximum: 3,
-      title: "Blunt force trauma I",
+      title: "Brain damage I",
     },
     "10": {
       description: "Stun monsters 10 times.",
       progressionMaximum: 10,
-      title: "Blunt force trauma II",
+      title: "Brain damage II",
     },
     "25": {
       description: "Stun monsters 25 times.",
       progressionMaximum: 25,
-      title: "Blunt force trauma III",
+      title: "Brain damage III",
     },
     "50": {
       description: "Stun monsters 50 times.",
       progressionMaximum: 50,
-      title: "Blunt force trauma IV",
+      title: "Brain damage IV",
     },
     "100": {
       description: "Stun monsters 100 times.",
       progressionMaximum: 100,
-      title: "Blunt force trauma V",
-    },
-  },
-  stunningInARow: {
-    "3": {
-      description: "Stun thrice in a row.",
-      progressionMaximum: 3,
-      title: "Brain damage I",
+      title: "Brain damage V",
     },
   },
   survivingNoAttributes: {
@@ -973,7 +963,7 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
   },
   thorns: {
     "3": {
-      description: "Inflict thorns damage thrice.",
+      description: "Inflict thorns damage 3 times.",
       progressionMaximum: 3,
       title: "Cactus I",
     },
@@ -1045,17 +1035,37 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
     },
   },
   warpingCaravan: {
-    "1": {
-      description: "Warp to the caravan.",
-      progressionMaximum: 1,
-      title: "... And Back Again",
+    "3": {
+      description: "Warp to the caravan 3 times.",
+      progressionMaximum: 3,
+      title: "... And Back Again I",
+    },
+    "10": {
+      description: "Warp to the caravan 10 times.",
+      progressionMaximum: 10,
+      title: "... And Back Again II",
+    },
+    "25": {
+      description: "Warp to the caravan 25 times.",
+      progressionMaximum: 25,
+      title: "... And Back Again III",
     },
   },
   warpingWilderness: {
-    "1": {
-      description: "Warp to a different wilderness.",
-      progressionMaximum: 1,
-      title: "There ...",
+    "3": {
+      description: "Warp to a different wilderness 3 times.",
+      progressionMaximum: 3,
+      title: "There ... I",
+    },
+    "10": {
+      description: "Warp to a different wilderness 10 times.",
+      progressionMaximum: 10,
+      title: "There ... II",
+    },
+    "25": {
+      description: "Warp to a different wilderness 25 times.",
+      progressionMaximum: 25,
+      title: "There ... III",
     },
   },
 };

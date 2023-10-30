@@ -1,9 +1,10 @@
 import { atomFamily } from "recoil";
 
 import { DEFAULT_DELTA_DISPLAY } from "@neverquest/data/general";
-import { handleLocalStorage, withStateKey } from "@neverquest/state";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import type { Delta } from "@neverquest/types/unions";
+import { withStateKey } from "@neverquest/utilities/helpers";
 
 // ATOMS
 

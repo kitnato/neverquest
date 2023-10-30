@@ -114,7 +114,7 @@ small:empty {
 svg {
   /* stylelint-disable-next-line selector-class-pattern */
   &.CircularProgressbar {
-    width: 60px;
+    max-width: 60px;
 
     /* stylelint-disable-next-line selector-class-pattern */
     .CircularProgressbar-path {

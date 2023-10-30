@@ -2,7 +2,7 @@ import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { INFUSION_DELTA, INFUSION_DURATION } from "@neverquest/data/general";
 import { INFUSABLES } from "@neverquest/data/inventory";
-import { handleLocalStorage, withStateKey } from "@neverquest/state";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { inventory } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
 import type { AmmunitionPouchItem, InventoryItem } from "@neverquest/types";
@@ -13,6 +13,7 @@ import {
   getGrowthLogarithmic,
   getGrowthTriangular,
 } from "@neverquest/utilities/getters";
+import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 

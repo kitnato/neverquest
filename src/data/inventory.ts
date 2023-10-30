@@ -46,7 +46,7 @@ import type {
   Elemental,
   Gem,
   Infusable,
-  MonsterAilment,
+  MonsterAilmentElemental,
   Trinket,
   WeaponAbility,
 } from "@neverquest/types/unions";
@@ -178,7 +178,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
 
 export const ELEMENTALS: Record<
   Elemental,
-  { ailment: MonsterAilment; color: string; Icon: SVGIcon }
+  { ailment: MonsterAilmentElemental; color: string; Icon: SVGIcon }
 > = {
   fire: {
     ailment: "burning",

@@ -11,7 +11,6 @@ import {
   SHIELD_NONE,
   WEAPON_NONE,
 } from "@neverquest/data/inventory";
-import { withStateKey } from "@neverquest/state";
 import { inventory } from "@neverquest/state/inventory";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { essence } from "@neverquest/state/resources";
@@ -19,7 +18,7 @@ import type { Armor, Shield, Weapon } from "@neverquest/types";
 import { isArmor, isRanged, isShield, isWeapon } from "@neverquest/types/type-guards";
 import type { Gear } from "@neverquest/types/unions";
 import { getElementalEffects } from "@neverquest/utilities/getters";
-import { stackItems } from "@neverquest/utilities/helpers";
+import { stackItems, withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 

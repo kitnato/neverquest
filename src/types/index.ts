@@ -13,7 +13,6 @@ export type AmmunitionPouchItem = TrinketItem & {
 export type Armor = GearItemBase & {
   deflection: number;
   gearClass: ArmorClass;
-  gems: GemItem[];
   protection: number;
   staminaCost: number;
 };
@@ -109,7 +108,6 @@ export type Ranged = WeaponBase & {
 export type Shield = GearItemBase & {
   block: number;
   gearClass: ShieldClass;
-  gems: GemItem[];
   stagger: number;
   staminaCost: number;
 };
@@ -127,7 +125,6 @@ type WeaponBase = GearItemBase & {
   abilityChance: number;
   damage: number;
   gearClass: WeaponClass;
-  gems: GemItem[];
   rate: number;
   staminaCost: number;
 };

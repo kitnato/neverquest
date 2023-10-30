@@ -19,7 +19,7 @@ export function formatEnumeration(list: string[]) {
 // Correctly does the rounding as opposed to .toFixed().
 function formatFloat({ decimals = 2, value }: { decimals?: number; value: number }) {
   const multiplier = 10 ** decimals;
-  const result = parseFloat((value * multiplier).toFixed(11));
+  const result = parseFloat((value * multiplier).toFixed(12));
 
   return (Math.round(result) / multiplier).toFixed(decimals).toLocaleString();
 }
@@ -34,6 +34,12 @@ export function formatNumber({
   value: number;
 }) {
   switch (format) {
+    case "abbreviated": {
+      return Math.abs(value) > 999
+        ? `${(value / 1000).toLocaleString()}k`
+        : Math.round(value).toLocaleString();
+    }
+
     case "float": {
       return formatFloat({ decimals, value });
     }

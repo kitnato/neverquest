@@ -1,9 +1,10 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
 import { MASTERIES, MASTERY_COST_BASE } from "@neverquest/data/masteries";
-import { handleLocalStorage, withStateKey } from "@neverquest/state";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { MASTERY_TYPES, type Mastery } from "@neverquest/types/unions";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
+import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 

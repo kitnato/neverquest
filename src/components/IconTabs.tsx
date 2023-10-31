@@ -1,6 +1,8 @@
 import { Nav, Stack, TabContainer, TabContent, TabPane } from "react-bootstrap";
 
+import { IconBadge } from "@neverquest/components/IconBadge";
 import { IconImage } from "@neverquest/components/IconImage";
+import IconAttention from "@neverquest/icons/attention.svg?react";
 import type { TabsData } from "@neverquest/types/props";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
@@ -8,13 +10,21 @@ export function IconTabs({ tabs }: { tabs: TabsData }) {
   return (
     <TabContainer defaultActiveKey={tabs[0].label}>
       <Nav justify variant="pills">
-        {tabs.map(({ Icon, label }) => (
+        {tabs.map(({ hasWarningBadge, Icon, label }) => (
           <Nav.Item key={label}>
             <Nav.Link eventKey={label}>
               <Stack className="justify-content-center" direction="horizontal" gap={3}>
                 <IconImage Icon={Icon} />
 
-                <span>{capitalizeAll(label)}</span>
+                <Stack direction="horizontal" gap={1}>
+                  <span>{capitalizeAll(label)}</span>
+
+                  {Boolean(hasWarningBadge) && (
+                    <IconBadge>
+                      <IconImage Icon={IconAttention} size="small" />
+                    </IconBadge>
+                  )}
+                </Stack>
               </Stack>
             </Nav.Link>
           </Nav.Item>

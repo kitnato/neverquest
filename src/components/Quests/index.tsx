@@ -8,9 +8,13 @@ import IconConquest from "@neverquest/icons/conquest.svg?react";
 import IconRoutine from "@neverquest/icons/routine.svg?react";
 import IconTriumph from "@neverquest/icons/triumph.svg?react";
 import { isShowing } from "@neverquest/state/isShowing";
+import { canCompleteQuests } from "@neverquest/state/quests";
 import { QUEST_BONUS_TYPES } from "@neverquest/types/unions";
 
 export function Journal() {
+  const canCompleteConquests = useRecoilValue(canCompleteQuests("conquest"));
+  const canCompleteRoutines = useRecoilValue(canCompleteQuests("routine"));
+  const canCompleteTriumphs = useRecoilValue(canCompleteQuests("triumph"));
   const isShowingQuestBonus = useRecoilValue(isShowing("questBonus"));
 
   return (
@@ -34,16 +38,19 @@ export function Journal() {
           tabs={[
             {
               Component: () => <Quests questClass="conquest" />,
+              hasWarningBadge: canCompleteConquests,
               Icon: IconConquest,
               label: "conquests",
             },
             {
               Component: () => <Quests questClass="routine" />,
+              hasWarningBadge: canCompleteRoutines,
               Icon: IconRoutine,
               label: "routines",
             },
             {
               Component: () => <Quests questClass="triumph" />,
+              hasWarningBadge: canCompleteTriumphs,
               Icon: IconTriumph,
               label: "triumphs",
             },

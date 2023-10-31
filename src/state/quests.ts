@@ -1,4 +1,4 @@
-import { atom, atomFamily, selector, selectorFamily } from "recoil";
+import { atom, atomFamily, selectorFamily } from "recoil";
 
 import { ownedItem } from "./items";
 import {
@@ -46,16 +46,18 @@ export const availableQuests = withStateKey("availableQuests", (key) =>
 );
 
 export const canCompleteQuests = withStateKey("canCompleteQuests", (key) =>
-  selector({
-    get: ({ get }) =>
-      QUEST_TYPES.reduce(
-        (accumulator, currentQuest) =>
-          accumulator ||
-          Object.values(get(questStatus(currentQuest))).some(
-            (currentStatus) => currentStatus === true,
-          ),
-        false,
-      ),
+  selectorFamily<boolean, QuestClass>({
+    get:
+      (parameter) =>
+      ({ get }) =>
+        QUEST_TYPES_BY_CLASS[parameter].reduce(
+          (accumulator, currentQuest) =>
+            accumulator ||
+            Object.values(get(questStatus(currentQuest))).some(
+              (currentStatus) => currentStatus === true,
+            ),
+          false,
+        ),
     key,
   }),
 );

@@ -2,9 +2,9 @@ import { useEffect, useRef } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
-import { ButtonBadge } from "@neverquest/components/Controls/ButtonBadge";
 import { ItemAcquisition } from "@neverquest/components/Controls/ItemAcquisition";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
+import { IconBadge } from "@neverquest/components/IconBadge";
 import { IconImage } from "@neverquest/components/IconImage";
 import { Inventory } from "@neverquest/components/Inventory";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
@@ -55,12 +55,14 @@ export function InventoryButton() {
           >
             <IconImage Icon={IconInventory} />
 
-            <span ref={badgeElement}>
-              <ButtonBadge isShowing={isInventoryFullValue || notifyOverEncumbranceValue}>
-                <IconImage Icon={IconEncumbrance} size="small" />
-              </ButtonBadge>
-            </span>
-
+            {isInventoryFullValue ||
+              (notifyOverEncumbranceValue && (
+                <span ref={badgeElement}>
+                  <IconBadge alignToButton>
+                    <IconImage Icon={IconEncumbrance} size="small" />
+                  </IconBadge>
+                </span>
+              ))}
             <ItemAcquisition />
           </Button>
         </span>

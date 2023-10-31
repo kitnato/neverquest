@@ -7,7 +7,7 @@ import { LABEL_MAXIMUM } from "@neverquest/data/general";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { isMasteryAtMaximum, masteryCost, masteryProgress } from "@neverquest/state/masteries";
-import type { Mastery } from "@neverquest/types/unions";
+import type { Delta, Mastery } from "@neverquest/types/unions";
 
 export function MasteryProgress({ mastery }: { mastery: Mastery }) {
   const masteryProgressState = masteryProgress(mastery);
@@ -15,8 +15,10 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
   const masteryCostValue = useRecoilValue(masteryCost(mastery));
   const masteryProgressValue = useRecoilValue(masteryProgressState);
 
+  const delta: Delta = `${mastery}Progress`;
+
   useDeltaText({
-    delta: "masteryProgress",
+    delta,
     state: masteryProgressState,
     stop: ({ current }) => current === 0,
   });
@@ -42,7 +44,7 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
         </span>
       </OverlayTrigger>
 
-      <FloatingTextQueue delta="masteryProgress" />
+      <FloatingTextQueue delta={delta} />
     </Stack>
   );
 }

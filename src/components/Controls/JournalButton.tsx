@@ -11,7 +11,7 @@ import IconJournal from "@neverquest/icons/journal.svg?react";
 import { isAttacking } from "@neverquest/state/character";
 import { isStageStarted } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/items";
-import { canCompleteQuests } from "@neverquest/state/journal";
+import { canCompleteQuests } from "@neverquest/state/quests";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function JournalButton() {

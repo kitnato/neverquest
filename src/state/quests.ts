@@ -1,11 +1,12 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
+import { ownedItem } from "./items";
 import {
   QUESTS,
   QUEST_COMPLETION_BONUS,
   QUEST_TYPES,
   QUEST_TYPES_BY_CLASS,
-} from "@neverquest/data/journal";
+} from "@neverquest/data/quests";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import type { QuestData } from "@neverquest/types";
 import {
@@ -82,14 +83,17 @@ export const questsBonus = withStateKey("questsBonus", (key) =>
     get:
       (parameter) =>
       ({ get }) =>
-        QUEST_TYPES.reduce(
-          (accumulator, currentQuest) =>
-            accumulator +
-            Object.values(get(questStatus(currentQuest))).filter(
-              (currentStatus) => typeof currentStatus !== "boolean" && parameter === currentStatus,
-            ).length,
-          0,
-        ) * QUEST_COMPLETION_BONUS,
+        get(ownedItem("journal")) === null
+          ? 0
+          : QUEST_TYPES.reduce(
+              (accumulator, currentQuest) =>
+                accumulator +
+                Object.values(get(questStatus(currentQuest))).filter(
+                  (currentStatus) =>
+                    typeof currentStatus !== "boolean" && parameter === currentStatus,
+                ).length,
+              0,
+            ) * QUEST_COMPLETION_BONUS,
     key,
   }),
 );

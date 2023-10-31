@@ -36,8 +36,8 @@ export function MonsterAilmentMeter({
         >
           {isMonsterAilingValue
             ? format === "time"
-              ? formatNumber({ format: "time", value: monsterAilmentDurationValue })
-              : monsterAilmentDurationValue
+              ? formatNumber({ format, value: monsterAilmentDurationValue })
+              : `${monsterAilmentDurationValue} hits`
             : LABEL_EMPTY}
         </LabelledProgressBar>
       </span>

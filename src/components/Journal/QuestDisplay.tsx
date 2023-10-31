@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
-import { QUEST_COMPLETION_BONUS } from "@neverquest/data/journal";
+import { QUEST_COMPLETION_BONUS } from "@neverquest/data/quests";
 import { useCompleteQuest } from "@neverquest/hooks/actions/useCompleteQuest";
 import IconConquest from "@neverquest/icons/conquest.svg?react";
 import IconDamage from "@neverquest/icons/damage.svg?react";
@@ -13,7 +13,7 @@ import IconHealth from "@neverquest/icons/health.svg?react";
 import IconRoutine from "@neverquest/icons/routine.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconTriumph from "@neverquest/icons/triumph.svg?react";
-import { questProgress } from "@neverquest/state/journal";
+import { questProgress } from "@neverquest/state/quests";
 import type { QuestData } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
 import {

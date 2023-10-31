@@ -4,9 +4,9 @@ import { useRecoilValue } from "recoil";
 import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { QuestListing } from "@neverquest/components/Journal/QuestListing";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { QUESTS_COUNT, QUEST_TYPES_BY_CLASS } from "@neverquest/data/journal";
+import { QUESTS_COUNT, QUEST_TYPES_BY_CLASS } from "@neverquest/data/quests";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { completedQuestsCount } from "@neverquest/state/journal";
+import { completedQuestsCount } from "@neverquest/state/quests";
 import type { QuestClass } from "@neverquest/types/unions";
 
 export function Quests({ questClass }: { questClass: QuestClass }) {

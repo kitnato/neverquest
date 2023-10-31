@@ -20,7 +20,7 @@ export const AILMENT_DESCRIPTION: Record<MonsterAilment, string> = {
     format: "percentage",
     value: 1 - AILMENT_PENALTY.staggered,
   })}.`,
-  stunned: `Hit accuracy reduced to ${formatNumber({
+  stunned: `Hit chance reduced to ${formatNumber({
     decimals: 0,
     format: "percentage",
     value: AILMENT_PENALTY.stunned,

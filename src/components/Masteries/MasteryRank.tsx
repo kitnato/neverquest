@@ -14,7 +14,7 @@ export function MasteryRank({ mastery }: { mastery: Mastery }) {
   const masteryRankValue = useRecoilValue(masteryRankState);
 
   useDeltaText({
-    delta: "masteryRank",
+    delta: mastery,
     state: masteryRankState,
   });
 
@@ -28,7 +28,7 @@ export function MasteryRank({ mastery }: { mastery: Mastery }) {
         {formatNumber({ value: masteryRankValue })}
       </IconDisplay>
 
-      <FloatingTextQueue delta="masteryRank" />
+      <FloatingTextQueue delta={mastery} />
     </Stack>
   );
 }

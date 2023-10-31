@@ -7,7 +7,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconDamage from "@neverquest/icons/damage.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
-import { questsBonus } from "@neverquest/state/journal";
+import { questsBonus } from "@neverquest/state/quests";
 import type { SVGIcon } from "@neverquest/types/props";
 import type { QuestBonus } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";

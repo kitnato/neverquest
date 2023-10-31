@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { isShowing } from "@neverquest/state/isShowing";
-import { questStatus } from "@neverquest/state/journal";
+import { questStatus } from "@neverquest/state/quests";
 import type { Quest, QuestBonus, QuestProgression } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 

@@ -149,7 +149,7 @@ export function useAttack() {
             set(isShowing("monsterAilments"), true);
             set(monsterAilmentDuration("bleeding"), get(bleed).duration);
 
-            progressQuest("bleeding");
+            progressQuest({ quest: "bleeding" });
 
             monsterDeltas.push({
               color: "text-muted",
@@ -158,7 +158,7 @@ export function useAttack() {
           }
 
           if (hasInflictedCritical) {
-            progressQuest("critical");
+            progressQuest({ quest: "critical" });
 
             monsterDeltas.push({
               color: "text-muted",
@@ -170,7 +170,7 @@ export function useAttack() {
             set(isShowing("monsterAilments"), true);
             set(monsterAilmentDuration("stunned"), get(masteryStatistic("might")));
 
-            progressQuest("stunning");
+            progressQuest({ quest: "stunning" });
 
             monsterDeltas.push({
               color: "text-muted",

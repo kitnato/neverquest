@@ -48,33 +48,33 @@ export function useChangeMonsterHealth() {
           if (damageType !== undefined) {
             switch (damageType) {
               case "bleed": {
-                progressQuest("bleedingKill");
+                progressQuest({ quest: "bleedingKill" });
                 break;
               }
 
               case "critical": {
-                progressQuest("criticalKilling");
+                progressQuest({ quest: "criticalKilling" });
                 break;
               }
 
               case "execute": {
-                progressQuest("executing");
+                progressQuest({ quest: "executing" });
                 break;
               }
 
               case "parry": {
-                progressQuest("parryingKill");
+                progressQuest({ quest: "parryingKill" });
                 break;
               }
 
               case "thorns": {
-                progressQuest("thornsKill");
+                progressQuest({ quest: "thornsKill" });
                 break;
               }
             }
           }
 
-          progressQuest("killing");
+          progressQuest({ quest: "killing" });
           set(monsterHealth, 0);
           set(lootingDuration, get(isTraitAcquired("ninja")) ? 1 : LOOTING_RATE);
 

@@ -28,7 +28,7 @@ export function OffhandEquipped() {
 
   if (!isTraitAcquiredColossus && weaponValue.grip === "two-handed") {
     return (
-      <span style={{ opacity: 0.5 }}>
+      <span className="opacity-50">
         <IconDisplay Icon={IconMelee} isAnimated>
           {weaponValue.name}
         </IconDisplay>

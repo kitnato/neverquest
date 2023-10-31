@@ -2,8 +2,8 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
-import { QuestListing } from "@neverquest/components/Journal/QuestListing";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
+import { QuestListing } from "@neverquest/components/Quests/QuestListing";
 import { QUESTS_COUNT, QUEST_TYPES_BY_CLASS } from "@neverquest/data/quests";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { completedQuestsCount } from "@neverquest/state/quests";
@@ -22,7 +22,7 @@ export function Quests({ questClass }: { questClass: QuestClass }) {
   });
 
   return (
-    <Stack gap={5}>
+    <Stack className="overflow-y-hidden" gap={5}>
       <Stack gap={3}>
         <h6>Completion</h6>
 
@@ -35,7 +35,7 @@ export function Quests({ questClass }: { questClass: QuestClass }) {
         </LabelledProgressBar>
       </Stack>
 
-      <Stack gap={3} style={{ height: "53vh", overflowY: "auto" }}>
+      <Stack className="overflow-y-auto" gap={3}>
         {QUEST_TYPES_BY_CLASS[questClass].map((current) => (
           <QuestListing key={current} quest={current} questClass={questClass} />
         ))}

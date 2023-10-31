@@ -28,7 +28,7 @@ export function ItemName({
           <PopoverHeader className="text-center">{displayName}</PopoverHeader>
 
           <PopoverBody className="text-center">
-            <Stack gap={2} style={{ maxWidth: 350 }}>
+            <Stack gap={2}>
               {description}
 
               <DetailsTable>
@@ -40,7 +40,7 @@ export function ItemName({
       }
       placement={placement}
     >
-      <span style={{ width: "fit-content" }}>{`${displayName}${
+      <span>{`${displayName}${
         stack !== undefined && stack > 1 ? ` x${formatNumber({ value: stack })}` : ""
       }`}</span>
     </OverlayTrigger>

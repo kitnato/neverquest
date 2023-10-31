@@ -32,17 +32,17 @@ export function useInflictElementalAilment() {
 
           switch (ailment) {
             case "burning": {
-              progressQuest("burning");
+              progressQuest({ quest: "burning" });
               break;
             }
 
             case "frozen": {
-              progressQuest("freezing");
+              progressQuest({ quest: "freezing" });
               break;
             }
 
             case "shocked": {
-              progressQuest("shocking");
+              progressQuest({ quest: "shocking" });
               break;
             }
           }

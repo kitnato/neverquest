@@ -26,7 +26,7 @@ export function HearthstoneWarp() {
         <Button
           disabled={!canWarp}
           onClick={() => {
-            progressQuest("warpingCaravan");
+            progressQuest({ quest: "warpingCaravan" });
             resetIsInventoryOpen();
             toggleLocation();
           }}

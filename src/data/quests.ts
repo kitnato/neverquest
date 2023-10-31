@@ -1,14 +1,25 @@
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
+import IconConquest from "@neverquest/icons/conquest.svg?react";
+import IconRoutine from "@neverquest/icons/routine.svg?react";
+import IconTriumph from "@neverquest/icons/triumph.svg?react";
 import type { QuestData } from "@neverquest/types";
+import type { SVGIcon } from "@neverquest/types/props";
 import {
   CONQUEST_TYPES,
   QUEST_CLASS_TYPES,
   type Quest,
+  type QuestClass,
   type QuestProgression,
   ROUTINE_TYPES,
   TRIUMPH_TYPES,
 } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
+
+export const QUEST_CLASS_ICONS: Record<QuestClass, SVGIcon> = {
+  conquest: IconConquest,
+  routine: IconRoutine,
+  triumph: IconTriumph,
+};
 
 export const QUEST_COMPLETION_BONUS = 0.01;
 
@@ -173,27 +184,27 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
   },
   blocking: {
     "3": {
-      description: "Block attacks 3 times.",
+      description: "Block an attack 3 times.",
       progressionMaximum: 3,
       title: "None shall pass I",
     },
     "10": {
-      description: "Block attacks 10 times.",
+      description: "Block an attack 10 times.",
       progressionMaximum: 10,
       title: "None shall pass II",
     },
     "25": {
-      description: "Block attacks 25 times.",
+      description: "Block an attack 25 times.",
       progressionMaximum: 25,
       title: "None shall pass III",
     },
     "50": {
-      description: "Block attacks 50 times.",
+      description: "Block an attack 50 times.",
       progressionMaximum: 50,
       title: "None shall pass IV",
     },
     "100": {
-      description: "Block attacks 100 times.",
+      description: "Block an attack 100 times.",
       progressionMaximum: 100,
       title: "None shall pass V",
     },
@@ -579,34 +590,29 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
   },
   looting: {
     "3": {
-      description: "Loot 3 monsters.",
+      description: "Collect loot 3 times.",
       progressionMaximum: 3,
-      title: "Covetous I",
+      title: "Hoarding I",
     },
     "10": {
-      description: "Loot 10 monsters.",
+      description: "Collect loot 10 times.",
       progressionMaximum: 10,
-      title: "Covetous II",
+      title: "Hoarding II",
     },
     "25": {
-      description: "Loot 25 monsters.",
+      description: "Collect loot 25 times.",
       progressionMaximum: 25,
-      title: "Covetous III",
+      title: "Hoarding III",
     },
     "50": {
-      description: "Loot 50 monsters.",
+      description: "Collect loot 50 times.",
       progressionMaximum: 50,
-      title: "Covetous IV",
+      title: "Hoarding IV",
     },
     "100": {
-      description: "Loot 100 monsters.",
+      description: "Collect loot 100 times.",
       progressionMaximum: 100,
-      title: "Covetous V",
-    },
-    "250": {
-      description: "Loot 250 monsters.",
-      progressionMaximum: 250,
-      title: "Covetous VI",
+      title: "Hoarding V",
     },
   },
   masteryAll: {
@@ -857,39 +863,34 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
     },
   },
   spendingEssence: {
-    "100": {
-      description: "Spend 100 essence.",
-      progressionMaximum: 100,
-      title: "High roller I",
-    },
-    "250": {
-      description: "Spend 250 essence.",
-      progressionMaximum: 250,
-      title: "High roller I",
-    },
     "500": {
       description: "Spend 500 essence.",
       progressionMaximum: 500,
-      title: "High roller II",
+      title: "High roller I",
     },
     "1000": {
       description: `Spend ${formatNumber({ value: 1000 })} essence.`,
       progressionMaximum: 1000,
-      title: "High roller III",
+      title: "High roller II",
     },
     "2500": {
       description: `Spend ${formatNumber({ value: 2500 })} essence.`,
       progressionMaximum: 2500,
-      title: "High roller IV",
+      title: "High roller III",
     },
     "5000": {
       description: `Spend ${formatNumber({ value: 5000 })} essence.`,
       progressionMaximum: 5000,
-      title: "High roller V",
+      title: "High roller IV",
     },
     "10000": {
       description: `Spend ${formatNumber({ value: 10000 })} essence.`,
       progressionMaximum: 10000,
+      title: "High roller V",
+    },
+    "25000": {
+      description: `Spend ${formatNumber({ value: 25000 })} essence.`,
+      progressionMaximum: 25000,
       title: "High roller VI",
     },
   },
@@ -1070,7 +1071,7 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
   },
 };
 
-export const QUESTS_COUNT = QUEST_CLASS_TYPES.reduce(
+export const QUESTS_COUNT: Record<QuestClass, number> = QUEST_CLASS_TYPES.reduce(
   (accumulatorClass, currentClass) => ({
     ...accumulatorClass,
     [currentClass]: QUEST_TYPES_BY_CLASS[currentClass].reduce(

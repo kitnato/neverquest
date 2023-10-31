@@ -8,65 +8,6 @@
   color: white;
 }
 
-// There is no variable that controls the box-shadow when unfocused (resulting in a dividing line).
-.accordion-button {
-  box-shadow: none !important;
-}
-
-.hstack.gap-1 {
-  gap: 0.35rem !important;
-}
-
-.no-transitions .progress-bar {
-  transition: none;
-}
-
-.overlay-offcanvas {
-  z-index: calc($zindex-offcanvas + 1);
-}
-
-.overlay-modal-backdrop {
-  z-index: calc($zindex-modal-backdrop + 1);
-}
-
-// Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563
-.popover,
-.tooltip {
-  position: fixed;
-}
-
-// Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
-.popover.show,
-.tooltip.show > .tooltip-inner {
-  box-shadow: 0 0 4px 1px rgb(0 0 0 / 20%);
-}
-
-.stencilled {
-  filter: drop-shadow(0 0 2px rgb(0 0 0));
-}
-
-.table-details {
-  tr > td:nth-child(2) {
-    vertical-align: bottom;
-  }
-}
-
-.text-blue {
-  color: $blue;
-}
-
-.text-orange {
-  color: $orange;
-}
-
-.text-yellow {
-  color: $yellow;
-}
-
-.vstack {
-  align-self: initial;
-}
-
 body {
   user-select: none;
 }
@@ -85,21 +26,6 @@ input {
     transform: scale(1.1);
     transform-origin: center left;
     transition: transform 0.5s;
-  }
-}
-
-.form-check {
-  display: flex;
-  gap: 0.8rem;
-  align-items: center;
-
-  .form-check-input,
-  .form-check-label {
-    cursor: pointer;
-  }
-
-  .form-check-input {
-    margin-top: initial;
   }
 }
 
@@ -124,6 +50,7 @@ svg {
     /* stylelint-disable-next-line selector-class-pattern */
     .CircularProgressbar-text {
       fill: $dark;
+      font-size: 18px;
     }
 
     /* stylelint-disable-next-line selector-class-pattern */
@@ -140,9 +67,121 @@ svg {
     &.small {
       width: 20px;
     }
+
+    &.stencilled {
+      filter: drop-shadow(0 0 2px rgb(0 0 0));
+    }
   }
 }
 
 td.text-end > .hstack {
   justify-content: end;
+}
+
+.accordion-button {
+  box-shadow: none !important;
+}
+
+.mastery-display span {
+  width: max-content;
+}
+
+.floating-text {
+  z-index: 100;
+
+  strong {
+    text-shadow:
+      -1px 1px 0 white,
+      1px 1px 0 white,
+      1px -1px 0 white,
+      -1px -1px 0 white;
+
+    > span {
+      white-space: nowrap;
+    }
+  }
+}
+
+.form-check {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+
+  .form-check-input,
+  .form-check-label {
+    cursor: pointer;
+  }
+
+  .form-check-input {
+    margin-top: initial;
+  }
+}
+
+.hstack.gap-1 {
+  gap: 0.35rem !important;
+}
+
+.vstack {
+  align-self: initial;
+}
+
+.journal,
+.journal .tab-content,
+.journal .tab-pane.active,
+.journal .tab-pane > .vstack {
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+}
+
+.labelled-progress {
+  &.no-transitions > .progress-bar {
+    transition: none;
+  }
+
+  > small {
+    text-shadow:
+      -1px 1px 1px var(--bs-gray-900),
+      1px 1px 1px var(--bs-gray-900),
+      1px -1px 1px var(--bs-gray-900),
+      -1px -1px 1px var(--bs-gray-900);
+  }
+}
+
+.overlay-offcanvas {
+  z-index: calc($zindex-offcanvas + 1);
+}
+
+.overlay-modal-backdrop {
+  z-index: calc($zindex-modal-backdrop + 1);
+}
+
+// Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563
+.popover,
+.tooltip {
+  position: fixed;
+}
+
+// Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
+.popover.show,
+.tooltip.show > .tooltip-inner {
+  box-shadow: 0 0 4px 1px rgb(0 0 0 / 20%);
+}
+
+.table-details {
+  tr > td:nth-child(2) {
+    vertical-align: bottom;
+  }
+}
+
+.text-blue {
+  color: $blue;
+}
+
+.text-orange {
+  color: $orange;
+}
+
+.text-yellow {
+  color: $yellow;
 }

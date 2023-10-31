@@ -75,7 +75,7 @@ export function CompassNavigate() {
             <Form.Select
               disabled={!canNavigate}
               onChange={({ target: { value } }) => {
-                progressQuest("warpingWilderness");
+                progressQuest({ quest: "warpingWilderness" });
 
                 setIsShowingNavigation(false);
                 setStage(Number(value));

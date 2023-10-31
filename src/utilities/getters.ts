@@ -6,7 +6,7 @@ import {
   CLASS_ANIMATED,
   CLASS_ANIMATE_PREFIX,
   GROWTH_MAXIMUM,
-  RETIREMENT_MINIMUM,
+  RETIREMENT_MINIMUM_LEVEL,
 } from "@neverquest/data/general";
 import {
   ARMOR_SPECIFICATIONS,
@@ -168,7 +168,7 @@ export function getProgressReduction(stage: number) {
   return getFromRange({
     factor: getGrowthSigmoid(
       getLinearMapping({
-        offset: RETIREMENT_MINIMUM,
+        offset: RETIREMENT_MINIMUM_LEVEL,
         stage,
       }),
     ),

@@ -19,7 +19,7 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
   const { description, Icon } = MASTERIES[mastery];
 
   return (
-    <div className={getAnimationClass({ name: "flipInX" })}>
+    <div className={`mastery-display ${getAnimationClass({ name: "flipInX" })}`}>
       {isMasteryUnlockedValue ? (
         <IconDisplay
           description={
@@ -44,7 +44,7 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
             }
             placement="right"
           >
-            <span style={{ width: "max-content" }}>{capitalizeAll(mastery)}</span>
+            <span>{capitalizeAll(mastery)}</span>
           </OverlayTrigger>
         </IconDisplay>
       ) : (

@@ -168,7 +168,8 @@ export type QuestProgression =
   | "1000"
   | "2500"
   | "5000"
-  | "10000";
+  | "10000"
+  | "25000";
 
 export type QuestStatus = QuestBonus | boolean;
 
@@ -422,6 +423,7 @@ export type StateKey =
   | "progressMaximum"
   | "progressReduction"
   | "protection"
+  | "questNotification"
   | "questProgress"
   | "questsBonus"
   | "questStatus"

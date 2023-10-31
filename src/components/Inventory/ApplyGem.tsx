@@ -41,7 +41,7 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
           return (
             <Dropdown.Item disabled={!canApply} eventKey={current} key={current}>
               <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-                <span style={{ marginRight: 8 }}>{capitalizeAll(name)}</span>
+                <span className="mr-2">{capitalizeAll(name)}</span>
 
                 <Stack direction="horizontal" gap={1}>
                   <IconImage Icon={IconEssence} size="small" />

@@ -1,5 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
+import { useProgressQuest } from "./useProgressQuest";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -8,6 +9,7 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useCollectLoot() {
   const acquireItem = useAcquireItem();
+  const progressQuest = useProgressQuest();
   const transactEssence = useTransactEssence();
 
   return useRecoilCallback(
@@ -21,8 +23,6 @@ export function useCollectLoot() {
 
         set(isShowing("capabilities"), true);
 
-        reset(essenceLoot);
-
         if (itemsLootValue.length > 0) {
           const acquiredItemIDs = itemsLootValue.map((current) =>
             acquireItem(current) !== "noFit" ? current.id : null,
@@ -31,8 +31,10 @@ export function useCollectLoot() {
           set(itemsLoot, (current) => current.filter(({ id }) => !acquiredItemIDs.includes(id)));
         }
 
-        return true;
+        reset(essenceLoot);
+
+        progressQuest({ quest: "looting" });
       },
-    [acquireItem, transactEssence],
+    [acquireItem, progressQuest, transactEssence],
   );
 }

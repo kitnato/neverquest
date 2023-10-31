@@ -2,8 +2,8 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconTabs } from "@neverquest/components/IconTabs";
-import { QuestBonusDisplay } from "@neverquest/components/Journal/QuestBonusDisplay";
-import { Quests } from "@neverquest/components/Journal/Quests";
+import { QuestBonusDisplay } from "@neverquest/components/Quests/QuestBonusDisplay";
+import { Quests } from "@neverquest/components/Quests/Quests";
 import IconConquest from "@neverquest/icons/conquest.svg?react";
 import IconRoutine from "@neverquest/icons/routine.svg?react";
 import IconTriumph from "@neverquest/icons/triumph.svg?react";
@@ -14,7 +14,7 @@ export function Journal() {
   const isShowingQuestBonus = useRecoilValue(isShowing("questBonus"));
 
   return (
-    <Stack gap={5}>
+    <Stack className="journal" gap={5}>
       {isShowingQuestBonus && (
         <Stack gap={3}>
           <h6>Completion bonus</h6>
@@ -27,7 +27,7 @@ export function Journal() {
         </Stack>
       )}
 
-      <Stack gap={3}>
+      <Stack className="overflow-y-hidden" gap={3}>
         {isShowingQuestBonus && <h6>Quests</h6>}
 
         <IconTabs

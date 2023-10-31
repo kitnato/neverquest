@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
 
-import { QuestDisplay } from "@neverquest/components/Journal/QuestDisplay";
+import { QuestDisplay } from "@neverquest/components/Quests/QuestDisplay";
 import { QUESTS } from "@neverquest/data/quests";
 import { availableQuests, questStatus } from "@neverquest/state/quests";
 import type { Quest, QuestClass, QuestProgression } from "@neverquest/types/unions";

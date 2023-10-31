@@ -1,4 +1,4 @@
-import { atomFamily, selector, selectorFamily } from "recoil";
+import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { ownedItem } from "./items";
 import {
@@ -99,6 +99,14 @@ export const questsBonus = withStateKey("questsBonus", (key) =>
 );
 
 // ATOMS
+
+export const questNotification = withStateKey("questNotification", (key) =>
+  atom<{ progression: QuestProgression; quest: Quest } | null>({
+    default: null,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
 
 export const questProgress = withStateKey("questProgress", (key) =>
   atomFamily<number, Quest>({

@@ -14,6 +14,7 @@ import { GameOver } from "@neverquest/components/GameOver";
 import { Gear } from "@neverquest/components/Inventory/Gear";
 import { Location } from "@neverquest/components/Location";
 import { Masteries } from "@neverquest/components/Masteries";
+import { QuestNotifications } from "@neverquest/components/Quests/QuestNotifications";
 import { Statistics } from "@neverquest/components/Statistics";
 import { Status } from "@neverquest/components/Status";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
@@ -70,6 +71,8 @@ export function Layout() {
       </Row>
 
       <GameOver />
+
+      <QuestNotifications />
     </>
   );
 }

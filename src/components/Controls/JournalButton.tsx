@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil";
 import { ButtonBadge } from "@neverquest/components/Controls/ButtonBadge";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { IconImage } from "@neverquest/components/IconImage";
-import { Journal } from "@neverquest/components/Journal";
+import { Journal } from "@neverquest/components/Quests";
 import IconAttention from "@neverquest/icons/attention.svg?react";
 import IconJournal from "@neverquest/icons/journal.svg?react";
 import { isAttacking } from "@neverquest/state/character";
@@ -53,7 +53,7 @@ export function JournalButton() {
       </OverlayTrigger>
 
       <DismissableScreen
-        hideScroll
+        hideOverflow
         isShowing={isJournalOpenValue}
         onClose={() => setIsJournalOpen(false)}
         title="Journal"

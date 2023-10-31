@@ -91,7 +91,7 @@ export function useDefend() {
           const armorStaminaCost = get(armor).staminaCost;
 
           if (get(canDodge)) {
-            progressQuest("dodging");
+            progressQuest({ quest: "dodging" });
 
             set(deltas("health"), {
               color: "text-muted",
@@ -136,7 +136,7 @@ export function useDefend() {
             healthDamage -= Math.round(healthDamage * get(parryAbsorption));
             monsterHealthDamage += parryReflected;
 
-            progressQuest("parrying");
+            progressQuest({ quest: "parrying" });
 
             deltaMonsterHealth.push(
               {
@@ -180,7 +180,7 @@ export function useDefend() {
           if (get(canBlock)) {
             healthDamage = 0;
 
-            progressQuest("blocking");
+            progressQuest({ quest: "blocking" });
 
             deltaHealth.push({
               color: "text-muted",
@@ -195,7 +195,7 @@ export function useDefend() {
               set(isShowing("monsterAilments"), true);
               set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")));
 
-              progressQuest("staggering");
+              progressQuest({ quest: "staggering" });
 
               changeMonsterHealth({
                 delta: {
@@ -241,14 +241,14 @@ export function useDefend() {
         // If already poisoned, check if blighting has occurred and if it's been deflected.
         if (get(isPoisoned) && Math.random() < get(blightChance)) {
           if (Math.random() < get(deflection)) {
-            progressQuest("deflecting");
+            progressQuest({ quest: "deflecting" });
 
             deltaStamina.push({
               color: "text-success",
               value: "DEFLECTED BLIGHT",
             });
           } else {
-            progressQuest("blighting");
+            progressQuest({ quest: "blighting" });
 
             set(blight, (current) => current + 1);
 
@@ -262,14 +262,14 @@ export function useDefend() {
         // If poisoning occurs, check if has been deflected, otherwise apply poison.
         if (Math.random() < get(poisonChance)) {
           if (Math.random() < get(deflection)) {
-            progressQuest("deflecting");
+            progressQuest({ quest: "deflecting" });
 
             deltaHealth.push({
               color: "text-muted",
               value: "DEFLECTED POISON",
             });
           } else {
-            progressQuest("poisoning");
+            progressQuest({ quest: "poisoning" });
 
             set(poisonDuration, get(poisonLength));
 
@@ -282,7 +282,7 @@ export function useDefend() {
 
         // Calculate & apply thorns damage.
         if (hasInflictedThorns) {
-          progressQuest("thorns");
+          progressQuest({ quest: "thorns" });
 
           monsterHealthDamage += thornsValue;
 

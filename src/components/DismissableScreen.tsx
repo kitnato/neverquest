@@ -1,17 +1,17 @@
 import type { ReactNode } from "react";
-import { Offcanvas } from "react-bootstrap";
+import { Offcanvas, OffcanvasBody, OffcanvasHeader, OffcanvasTitle } from "react-bootstrap";
 import type { OffcanvasPlacement } from "react-bootstrap/Offcanvas";
 
 export function DismissableScreen({
   children,
-  hideScroll = false,
+  hideOverflow = false,
   isShowing,
   onClose,
   placement = "end",
   title,
 }: {
   children: ReactNode;
-  hideScroll?: boolean;
+  hideOverflow?: boolean;
   isShowing: boolean;
   onClose: () => void;
   placement?: OffcanvasPlacement;
@@ -19,13 +19,13 @@ export function DismissableScreen({
 }) {
   return (
     <Offcanvas onHide={onClose} placement={placement} show={isShowing}>
-      <Offcanvas.Header closeButton>
-        <Offcanvas.Title>{title}</Offcanvas.Title>
-      </Offcanvas.Header>
+      <OffcanvasHeader closeButton>
+        <OffcanvasTitle>{title}</OffcanvasTitle>
+      </OffcanvasHeader>
 
-      <Offcanvas.Body style={{ overflowY: hideScroll ? "hidden" : "auto" }}>
+      <OffcanvasBody className={hideOverflow ? "d-flex overflow-hidden" : "overflow-auto"}>
         {children}
-      </Offcanvas.Body>
+      </OffcanvasBody>
     </Offcanvas>
   );
 }

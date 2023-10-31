@@ -1,4 +1,4 @@
-import { Nav, Stack, Tab } from "react-bootstrap";
+import { Nav, Stack, TabContainer, TabContent, TabPane } from "react-bootstrap";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import type { TabsData } from "@neverquest/types/props";
@@ -6,7 +6,7 @@ import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function IconTabs({ tabs }: { tabs: TabsData }) {
   return (
-    <Tab.Container defaultActiveKey={tabs[0].label}>
+    <TabContainer defaultActiveKey={tabs[0].label}>
       <Nav justify variant="pills">
         {tabs.map(({ Icon, label }) => (
           <Nav.Item key={label}>
@@ -21,19 +21,17 @@ export function IconTabs({ tabs }: { tabs: TabsData }) {
         ))}
       </Nav>
 
-      <Tab.Content>
+      <TabContent>
         {tabs.map(({ Component, label }) => (
-          <Tab.Pane eventKey={label} key={label}>
+          <TabPane eventKey={label} key={label}>
             <Stack gap={3}>
               <hr />
 
-              <Stack gap={3}>
-                <Component />
-              </Stack>
+              <Component />
             </Stack>
-          </Tab.Pane>
+          </TabPane>
         ))}
-      </Tab.Content>
-    </Tab.Container>
+      </TabContent>
+    </TabContainer>
   );
 }

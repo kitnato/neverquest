@@ -27,11 +27,16 @@ export function IconDisplay({
   isFullWidth?: boolean;
   tooltip?: string;
 }) {
+  const classes = [
+    isFullWidth ? "w-100" : null,
+    isAnimated ? getAnimationClass({ name: "flipInX" }) : null,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <Stack
-      className={`${isFullWidth ? "w-100" : undefined} ${
-        isAnimated ? getAnimationClass({ name: "flipInX" }) : undefined
-      }`}
+      className={classes === "" ? undefined : classes}
       direction="horizontal"
       gap={iconProps?.size === "small" ? 1 : gap}
     >

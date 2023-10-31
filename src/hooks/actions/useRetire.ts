@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import { RETIREMENT_MINIMUM } from "@neverquest/data/general";
+import { RETIREMENT_MINIMUM_LEVEL } from "@neverquest/data/general";
 import { ENCUMBRANCE, KNAPSACK_SIZE } from "@neverquest/data/inventory";
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
@@ -47,7 +47,7 @@ export function useRetire() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        if (get(stageMaximum) < RETIREMENT_MINIMUM) {
+        if (get(stageMaximum) < RETIREMENT_MINIMUM_LEVEL) {
           return;
         }
 

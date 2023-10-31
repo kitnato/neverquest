@@ -7,7 +7,7 @@ export function ButtonBadge({ children, isShowing }: { children: ReactNode; isSh
   }
 
   return (
-    <Badge bg="secondary" className="position-absolute" style={{ right: -18, top: 12 }}>
+    <Badge bg="secondary" className="position-absolute top-50 start-100 translate-middle">
       {children}
     </Badge>
   );

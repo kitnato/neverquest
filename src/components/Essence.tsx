@@ -20,22 +20,12 @@ export function Essence() {
   });
 
   return (
-    <Card
-      className="overlay-modal-backdrop"
-      style={{
-        border: "none",
-        paddingBottom: 4,
-        paddingLeft: 8,
-        paddingRight: 8,
-        paddingTop: 4,
-      }}
-    >
+    <Card className="border-0 px-2 py-1 overlay-modal-backdrop">
       <Stack
-        className={isShowingEssence ? ` ${getAnimationClass({ name: "flipInX" })}` : undefined}
+        className={
+          isShowingEssence ? `visible ${getAnimationClass({ name: "flipInX" })}` : "invisible"
+        }
         direction="horizontal"
-        style={{
-          visibility: isShowingEssence ? "visible" : "hidden",
-        }}
       >
         <IconDisplay
           Icon={IconEssence}

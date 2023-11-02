@@ -1,31 +1,21 @@
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LootingMeter } from "@neverquest/components/Loot/LootingMeter";
-import { useProgression } from "@neverquest/hooks/actions/useProgression";
-import { useAnimate } from "@neverquest/hooks/useAnimate";
 import IconLooting from "@neverquest/icons/looting.svg?react";
-import { isLooting, lootingDuration } from "@neverquest/state/character";
-import { isStageCompleted, progress } from "@neverquest/state/encounter";
-import { isMonsterDead } from "@neverquest/state/monster";
+import { isLooting } from "@neverquest/state/character";
+import { isLootAvailable } from "@neverquest/state/resources";
 
 export function Looting() {
   const isLootingValue = useRecoilValue(isLooting);
-  const isMonsterDeadValue = useRecoilValue(isMonsterDead);
-  const isStageCompletedValue = useRecoilValue(isStageCompleted);
-  const progressValue = useRecoilValue(progress);
-  const setLootingDuration = useSetRecoilState(lootingDuration);
+  const isLootAvailableValue = useRecoilValue(isLootAvailable);
 
-  const progression = useProgression();
+  if (!isLootingValue) {
+    if (!isLootAvailableValue) {
+      return null;
+    }
 
-  useAnimate({
-    delta: setLootingDuration,
-    onDelta: progression,
-    stop: !isLootingValue,
-  });
-
-  if (!isMonsterDeadValue || isStageCompletedValue) {
-    return progressValue === 0 ? null : <hr />;
+    return <hr />;
   }
 
   return (

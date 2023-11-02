@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
@@ -10,7 +9,6 @@ import { AttackMeter } from "@neverquest/components/Status/AttackMeter";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { WEAPON_NONE } from "@neverquest/data/inventory";
 import { useAttack } from "@neverquest/hooks/actions/useAttack";
-import { useRegenerate } from "@neverquest/hooks/actions/useRegenerate";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconAttackRate from "@neverquest/icons/attack-rate.svg?react";
@@ -45,7 +43,6 @@ export function Attack() {
   const setAttackDuration = useSetRecoilState(attackDuration);
 
   const attack = useAttack();
-  const regenerate = useRegenerate();
 
   useAnimate({
     delta: setAttackDuration,
@@ -63,8 +60,6 @@ export function Attack() {
     format: "time",
     state: attackRateTotal,
   });
-
-  useEffect(regenerate, [isAttackingValue, regenerate]);
 
   if (!isShowingAttackRate) {
     return null;

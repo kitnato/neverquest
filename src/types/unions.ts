@@ -365,6 +365,7 @@ export type StateKey =
   | "isInfusionAtMaximum"
   | "isInventoryFull"
   | "isInventoryOpen"
+  | "isLootAvailable"
   | "isLooting"
   | "isMasteryAtMaximum"
   | "isMasteryUnlocked"

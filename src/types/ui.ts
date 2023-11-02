@@ -15,7 +15,7 @@ export type BootstrapColorVariant = "dark" | "outline-dark" | "secondary";
 export type DeltaDisplay = DeltaDisplayContents | DeltaDisplayContents[];
 
 type DeltaDisplayContents = {
-  color: "text-danger" | "text-muted" | "text-success" | null;
+  color: "text-danger" | "text-muted" | "text-success";
   value: number | string;
 };
 

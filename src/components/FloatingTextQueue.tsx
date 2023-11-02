@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Stack } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 
-import { DEFAULT_DELTA_DISPLAY } from "@neverquest/data/general";
 import { deltas } from "@neverquest/state/deltas";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import type { Delta } from "@neverquest/types/unions";
@@ -33,10 +32,7 @@ export function FloatingTextQueue({ delta }: { delta: Delta }) {
   };
 
   useEffect(() => {
-    if (
-      (Array.isArray(deltaValue) && deltaValue.length === 0) ||
-      deltaValue === DEFAULT_DELTA_DISPLAY
-    ) {
+    if ((Array.isArray(deltaValue) && deltaValue.length === 0) || deltaValue === null) {
       return;
     }
 
@@ -55,24 +51,22 @@ export function FloatingTextQueue({ delta }: { delta: Delta }) {
     <div className="d-flex flex-nowrap floating-text pe-none position-relative">
       {floatingTextQueue.map(({ delta, key }) => (
         <small className="position-absolute top-50 start-100 translate-middle-y" key={key}>
-          <strong>
-            {Array.isArray(delta) ? (
-              <Stack className={ANIMATION_FLOATING_TEXT} onAnimationEnd={onAnimationEnd(key)}>
-                {delta.map(({ color, value }) => (
-                  <span className={color ?? undefined} key={value}>
-                    {value}
-                  </span>
-                ))}
-              </Stack>
-            ) : (
-              <div
-                className={`${ANIMATION_FLOATING_TEXT}${delta.color ? ` ${delta.color}` : ""}`}
-                onAnimationEnd={onAnimationEnd(key)}
-              >
-                {delta.value}
-              </div>
-            )}
-          </strong>
+          {Array.isArray(delta) ? (
+            <Stack className={ANIMATION_FLOATING_TEXT} onAnimationEnd={onAnimationEnd(key)}>
+              {delta.map(({ color, value }) => (
+                <strong className={color} key={value}>
+                  {value}
+                </strong>
+              ))}
+            </Stack>
+          ) : (
+            <strong
+              className={`d-block ${ANIMATION_FLOATING_TEXT} ${delta.color}`}
+              onAnimationEnd={onAnimationEnd(key)}
+            >
+              {delta.value}
+            </strong>
+          )}
         </small>
       ))}
     </div>

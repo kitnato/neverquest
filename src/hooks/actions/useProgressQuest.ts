@@ -1,6 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { QUESTS } from "@neverquest/data/quests";
+import { ownedItem } from "@neverquest/state/items";
 import { questNotification, questProgress, questStatus } from "@neverquest/state/quests";
 import type { Quest, QuestProgression } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -10,6 +11,10 @@ export function useProgressQuest() {
     ({ set, snapshot }) =>
       ({ amount = 1, quest }: { amount?: number; quest: Quest }) => {
         const get = getSnapshotGetter(snapshot);
+
+        if (get(ownedItem("journal")) === null) {
+          return;
+        }
 
         const questProgressState = questProgress(quest);
         const questStatusState = questStatus(quest);

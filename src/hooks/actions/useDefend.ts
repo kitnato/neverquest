@@ -220,17 +220,18 @@ export function useDefend() {
         } else {
           // If neither dodged, parried nor blocked, show damage with protection and increase resilience.
 
-          deltaHealth.push(
-            {
-              color: "text-danger",
-              value: healthDamage,
-            },
-            {
+          deltaHealth.push({
+            color: "text-danger",
+            value: healthDamage,
+          });
+
+          if (protectionValue > 0) {
+            deltaHealth.push({
               color: "text-muted",
               // In the case of 0 health damage, show only inflicted.
               value: `(${Math.max(protectionValue, healthDamage)})`,
-            },
-          );
+            });
+          }
 
           increaseMastery("resilience");
         }
@@ -301,9 +302,7 @@ export function useDefend() {
         // Take any damage and show any stamina costs.
         changeHealth({ delta: deltaHealth, value: healthDamage });
 
-        set(deltas("stamina"), (current) =>
-          Array.isArray(current) ? [...current, ...deltaStamina] : [current, ...deltaStamina],
-        );
+        set(deltas("stamina"), deltaStamina);
 
         // Inflict any armor elemental effects.
         ELEMENTAL_TYPES.forEach((elemental) =>

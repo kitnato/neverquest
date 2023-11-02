@@ -30,9 +30,7 @@ export function useChangeMonsterHealth() {
 
         const formattedValue = formatNumber({ value });
         const isPositive = value > 0;
-
-        const newHealth = get(monsterHealth) + value;
-        const max = get(monsterHealthMaximum);
+        const newHealth = Math.min(get(monsterHealth) + value, get(monsterHealthMaximum));
 
         set(
           deltas("monsterHealth"),
@@ -80,17 +78,9 @@ export function useChangeMonsterHealth() {
 
           reset(attackDuration);
           reset(monsterAttackDuration);
-
-          return;
+        } else {
+          set(monsterHealth, newHealth);
         }
-
-        if (newHealth > max) {
-          set(monsterHealth, max);
-
-          return;
-        }
-
-        set(monsterHealth, newHealth);
       },
     [progressQuest],
   );

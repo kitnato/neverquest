@@ -5,6 +5,7 @@ import { IconImage } from "@neverquest/components/IconImage";
 import IconAttention from "@neverquest/icons/attention.svg?react";
 import type { TabsData } from "@neverquest/types/props";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function IconTabs({ tabs }: { tabs: TabsData }) {
   return (
@@ -20,9 +21,16 @@ export function IconTabs({ tabs }: { tabs: TabsData }) {
                   <span>{capitalizeAll(label)}</span>
 
                   {Boolean(hasWarningBadge) && (
-                    <IconBadge>
-                      <IconImage Icon={IconAttention} size="small" />
-                    </IconBadge>
+                    <div
+                      className={getAnimationClass({
+                        isInfinite: true,
+                        name: "pulse",
+                      })}
+                    >
+                      <IconBadge>
+                        <IconImage Icon={IconAttention} size="small" />
+                      </IconBadge>
+                    </div>
                   )}
                 </Stack>
               </Stack>

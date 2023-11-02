@@ -95,10 +95,6 @@ td.text-end > .hstack {
       1px 1px 0 white,
       1px -1px 0 white,
       -1px -1px 0 white;
-
-    > span {
-      white-space: nowrap;
-    }
   }
 }
 
@@ -135,7 +131,7 @@ td.text-end > .hstack {
 }
 
 .labelled-progress {
-  &.no-transitions > .progress-bar {
+  &.no-transitions .progress-bar {
     transition: none;
   }
 

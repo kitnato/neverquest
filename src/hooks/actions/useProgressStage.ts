@@ -12,7 +12,7 @@ import type { GemItem } from "@neverquest/types";
 import { GEM_TYPES } from "@neverquest/types/unions";
 import { getFromRange, getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export function useProgression() {
+export function useProgressStage() {
   const generateMonster = useGenerateMonster();
   const toggleAttack = useToggleAttack();
 

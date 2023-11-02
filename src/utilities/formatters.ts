@@ -36,7 +36,8 @@ export function formatNumber({
   switch (format) {
     case "abbreviated": {
       return Math.abs(value) > 999
-        ? `${(value / 1000).toLocaleString()}k`
+        ? // Truncate all floats to 2 decimal places maximum.
+          `${(Math.trunc((value / 1000) * Math.pow(10, 2)) / Math.pow(10, 2)).toLocaleString()}k`
         : Math.round(value).toLocaleString();
     }
 

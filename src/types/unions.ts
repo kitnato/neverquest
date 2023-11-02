@@ -158,6 +158,7 @@ export type QuestClass = (typeof QUEST_CLASS_TYPES)[number];
 export type QuestProgression =
   | "1"
   | "3"
+  | "4"
   | "5"
   | "10"
   | "25"
@@ -492,6 +493,8 @@ export const TRIUMPH_TYPES = [
   "survivingNoAttributes",
   "killingOneStrike",
   "exhausting",
+  "damage",
+  "protection",
   "essenceCount",
   "hiringBlacksmithFirst",
   "acquiringArcheryFirst",

@@ -15,6 +15,7 @@ import { Tailor } from "@neverquest/components/Caravan/Tailor";
 import { Witch } from "@neverquest/components/Caravan/Witch";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { CREW_ORDER } from "@neverquest/data/caravan";
+import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general";
 import { activeCrew, isCaravanHired } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import type { Crew } from "@neverquest/types/unions";
@@ -66,7 +67,7 @@ export function Caravan() {
               <Stack gap={3}>
                 <h6>Crew for hire</h6>
 
-                {isCaravanHiredValue && <span className="fst-italic">None available.</span>}
+                {isCaravanHiredValue && <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>}
 
                 {CREW_ORDER.map((current, index) => (
                   <CrewHirable crew={current} key={index} />

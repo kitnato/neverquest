@@ -336,6 +336,13 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
       title: "Fatality IV",
     },
   },
+  damage: {
+    "1": {
+      description: `Have ${formatNumber({ value: 1000 })} total damage.`,
+      progressionMaximum: 1,
+      title: "Destroyer",
+    },
+  },
   deflecting: {
     "3": {
       description: "Deflect 3 ailments.",
@@ -431,7 +438,7 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
     },
   },
   exhausting: {
-    "1": {
+    "4": {
       description: "Be exhausted when attempting to attack, dodge, parry and block.",
       progressionMaximum: 4,
       title: "Out of breath",
@@ -494,7 +501,7 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
   },
   gemsTransmuting: {
     "1": {
-      description: "Transmute gems.",
+      description: "Transmute any gems.",
       progressionMaximum: 1,
       title: "Better than mining",
     },
@@ -568,7 +575,7 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
   },
   killingOneStrike: {
     "1": {
-      description: "Kill a monster in one strike on the currently highest stage.",
+      description: "Kill a monster in one strike.",
       progressionMaximum: 1,
       title: "One Punch Person",
     },
@@ -732,6 +739,13 @@ export const QUESTS: Record<Quest, Partial<Record<QuestProgression, QuestData>>>
       description: "Use 50 witch's concoctions.",
       progressionMaximum: 50,
       title: "Intestinal discomfort IV",
+    },
+  },
+  protection: {
+    "1": {
+      description: "Have 500 protection.",
+      progressionMaximum: 1,
+      title: "I like turtles",
     },
   },
   purchasingArmor: {

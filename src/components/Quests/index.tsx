@@ -1,26 +1,41 @@
-import { Stack } from "react-bootstrap";
+import { Stack, TabContainer, TabContent, TabPane } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconTabs } from "@neverquest/components/IconTabs";
 import { QuestBonusDisplay } from "@neverquest/components/Quests/QuestBonusDisplay";
 import { Quests } from "@neverquest/components/Quests/Quests";
+import { QuestTabsNav } from "@neverquest/components/Quests/QuestTabsNav";
 import IconConquest from "@neverquest/icons/conquest.svg?react";
 import IconRoutine from "@neverquest/icons/routine.svg?react";
 import IconTriumph from "@neverquest/icons/triumph.svg?react";
 import { isShowing } from "@neverquest/state/isShowing";
-import { canCompleteQuests } from "@neverquest/state/quests";
+import type { TabsData } from "@neverquest/types/props";
 import { QUEST_BONUS_TYPES } from "@neverquest/types/unions";
 
+const TABS: TabsData = [
+  {
+    Component: () => <Quests questClass="conquest" />,
+    Icon: IconConquest,
+    label: "conquests",
+  },
+  {
+    Component: () => <Quests questClass="routine" />,
+    Icon: IconRoutine,
+    label: "routines",
+  },
+  {
+    Component: () => <Quests questClass="triumph" />,
+    Icon: IconTriumph,
+    label: "triumphs",
+  },
+];
+
 export function Journal() {
-  const canCompleteConquests = useRecoilValue(canCompleteQuests("conquest"));
-  const canCompleteRoutines = useRecoilValue(canCompleteQuests("routine"));
-  const canCompleteTriumphs = useRecoilValue(canCompleteQuests("triumph"));
   const isShowingQuestBonus = useRecoilValue(isShowing("questBonus"));
 
   return (
-    <Stack className="journal" gap={5}>
+    <Stack className="journal overflow-y-hidden" gap={3}>
       {isShowingQuestBonus && (
-        <Stack gap={3}>
+        <>
           <h6>Completion bonus</h6>
 
           <Stack className="mx-auto" direction="horizontal" gap={5}>
@@ -28,35 +43,26 @@ export function Journal() {
               <QuestBonusDisplay bonus={current} key={current} />
             ))}
           </Stack>
-        </Stack>
+        </>
       )}
 
-      <Stack className="overflow-y-hidden" gap={3}>
-        {isShowingQuestBonus && <h6>Quests</h6>}
+      {isShowingQuestBonus && <h6>Quests</h6>}
 
-        <IconTabs
-          tabs={[
-            {
-              Component: () => <Quests questClass="conquest" />,
-              hasWarningBadge: canCompleteConquests,
-              Icon: IconConquest,
-              label: "conquests",
-            },
-            {
-              Component: () => <Quests questClass="routine" />,
-              hasWarningBadge: canCompleteRoutines,
-              Icon: IconRoutine,
-              label: "routines",
-            },
-            {
-              Component: () => <Quests questClass="triumph" />,
-              hasWarningBadge: canCompleteTriumphs,
-              Icon: IconTriumph,
-              label: "triumphs",
-            },
-          ]}
-        />
-      </Stack>
+      <TabContainer defaultActiveKey={TABS[0].label}>
+        <Stack className="overflow-y-hidden" gap={1}>
+          <QuestTabsNav tabs={TABS} />
+
+          <hr />
+
+          <TabContent className="d-flex flex-column overflow-y-hidden">
+            {TABS.map(({ Component, label }) => (
+              <TabPane eventKey={label} key={label}>
+                <Component />
+              </TabPane>
+            ))}
+          </TabContent>
+        </Stack>
+      </TabContainer>
     </Stack>
   );
 }

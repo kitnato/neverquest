@@ -3,7 +3,7 @@ import { Stack, Toast, ToastBody, ToastContainer, ToastHeader } from "react-boot
 import { useRecoilValue, useResetRecoilState } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { QUEST_NOTIFICATION_DURATION } from "@neverquest/data/general";
+import { LABEL_UNKNOWN, QUEST_NOTIFICATION_DURATION } from "@neverquest/data/general";
 import { QUESTS, QUEST_CLASS_ICONS } from "@neverquest/data/quests";
 import { questNotification } from "@neverquest/state/quests";
 import type { QuestData } from "@neverquest/types";
@@ -44,35 +44,39 @@ export function QuestNotifications() {
 
   return (
     <ToastContainer className="mb-4" position="bottom-center">
-      {questNotificationQueue.map(({ description, isShowing, questClass, title }, indexQueue) => (
-        <Toast
-          autohide
-          delay={QUEST_NOTIFICATION_DURATION}
-          key={title}
-          onClose={() => {
-            setQuestNotificationQueue((currentQueue) =>
-              currentQueue.map((currentNotification, indexNotification) =>
-                indexQueue === indexNotification
-                  ? { ...currentNotification, isShowing: false }
-                  : currentNotification,
-              ),
-            );
+      {questNotificationQueue.map(
+        ({ description, hidden, isShowing, questClass, title }, indexQueue) => (
+          <Toast
+            autohide
+            delay={QUEST_NOTIFICATION_DURATION}
+            key={title}
+            onClose={() => {
+              setQuestNotificationQueue((currentQueue) =>
+                currentQueue.map((currentNotification, indexNotification) =>
+                  indexQueue === indexNotification
+                    ? { ...currentNotification, isShowing: false }
+                    : currentNotification,
+                ),
+              );
 
-            resetQuestNotification();
-          }}
-          show={isShowing}
-        >
-          <ToastHeader>
-            <Stack className="me-auto" direction="horizontal" gap={1}>
-              <IconImage Icon={QUEST_CLASS_ICONS[questClass]} size="small" />
+              resetQuestNotification();
+            }}
+            show={isShowing}
+          >
+            <ToastHeader>
+              <Stack className="me-auto" direction="horizontal" gap={1}>
+                <IconImage Icon={QUEST_CLASS_ICONS[questClass]} size="small" />
 
-              {`Achieved: ${title}`}
-            </Stack>
-          </ToastHeader>
+                {`Achieved: ${title}`}
+              </Stack>
+            </ToastHeader>
 
-          <ToastBody>{description}</ToastBody>
-        </Toast>
-      ))}
+            <ToastBody>
+              {hidden !== undefined ? description.replace(LABEL_UNKNOWN, hidden) : description}
+            </ToastBody>
+          </Toast>
+        ),
+      )}
     </ToastContainer>
   );
 }

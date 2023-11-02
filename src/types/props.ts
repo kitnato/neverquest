@@ -26,7 +26,6 @@ export type SVGIcon = FunctionComponent<SVGProps<SVGSVGElement> & { title?: stri
 
 type TabData = {
   Component: FunctionComponent;
-  hasWarningBadge?: boolean;
   Icon: SVGIcon;
   label: string;
 };

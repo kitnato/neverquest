@@ -10,30 +10,28 @@ import { completedQuestsCount } from "@neverquest/state/quests";
 import type { QuestClass } from "@neverquest/types/unions";
 
 export function Quests({ questClass }: { questClass: QuestClass }) {
-  const completedQuestsState = completedQuestsCount(questClass);
+  const completedQuestsCountState = completedQuestsCount(questClass);
 
-  const completedQuestsValue = useRecoilValue(completedQuestsState);
+  const completedQuestsValue = useRecoilValue(completedQuestsCountState);
 
   const questCount = QUESTS_COUNT[questClass];
 
   useDeltaText({
     delta: questClass,
-    state: completedQuestsState,
+    state: completedQuestsCountState,
   });
 
   return (
-    <Stack className="overflow-y-hidden" gap={5}>
-      <Stack gap={3}>
-        <h6>Completion</h6>
+    <Stack className="overflow-y-hidden" gap={3}>
+      <h6>Completion</h6>
 
-        <LabelledProgressBar value={(completedQuestsValue / questCount) * 100} variant="dark">
-          <Stack direction="horizontal">
-            {`${completedQuestsValue}/${questCount}`}
+      <LabelledProgressBar value={(completedQuestsValue / questCount) * 100} variant="dark">
+        <Stack direction="horizontal">
+          {`${completedQuestsValue}/${questCount}`}
 
-            <FloatingTextQueue delta={questClass} />
-          </Stack>
-        </LabelledProgressBar>
-      </Stack>
+          <FloatingTextQueue delta={questClass} />
+        </Stack>
+      </LabelledProgressBar>
 
       <Stack className="overflow-y-auto" gap={3}>
         {QUEST_TYPES_BY_CLASS[questClass].map((current) => (

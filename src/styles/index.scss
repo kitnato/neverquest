@@ -121,10 +121,7 @@ td.text-end > .hstack {
   align-self: initial;
 }
 
-.journal,
-.journal .tab-content,
-.journal .tab-pane.active,
-.journal .tab-pane > .vstack {
+.journal .tab-pane.active {
   display: flex;
   flex-direction: column;
   overflow-y: hidden;

@@ -54,12 +54,16 @@ export function QuestDisplay({
       />
 
       <IconDisplay
-        description={description}
+        description={
+          hidden !== undefined && hasCompletedQuest
+            ? description.replace(LABEL_UNKNOWN, hidden)
+            : description
+        }
         Icon={QUEST_CLASS_ICONS[questClass]}
         isFullWidth
         tooltip={capitalizeAll(questClass)}
       >
-        {hidden !== undefined && hasCompletedQuest ? title.replace(LABEL_UNKNOWN, hidden) : title}
+        {title}
       </IconDisplay>
 
       {status !== false && (

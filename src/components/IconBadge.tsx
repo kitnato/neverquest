@@ -11,7 +11,9 @@ export function IconBadge({
   return (
     <Badge
       bg="secondary"
-      className={alignToButton ? "position-absolute top-50 start-100 translate-middle" : undefined}
+      className={
+        alignToButton ? "position-absolute top-50 start-100 translate-middle" : "align-middle"
+      }
     >
       {children}
     </Badge>

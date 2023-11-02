@@ -7,6 +7,7 @@ import { useRecoilState } from "recoil";
 import { SelectGem } from "@neverquest/components/Caravan/Alchemist/SelectGem";
 import { IconImage } from "@neverquest/components/IconImage";
 import { TRANSMUTE_COST } from "@neverquest/data/caravan";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { GEM_BASE } from "@neverquest/data/inventory";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import IconTransmute from "@neverquest/icons/transmute.svg?react";
@@ -51,12 +52,14 @@ export function TransmuteGems() {
   }, [result, source]);
 
   return (
-    <Stack direction="horizontal" gap={5}>
-      <SelectGem gem={source} onSelect={onSelect(setSource)} />
+    <Stack gap={3}>
+      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+        <SelectGem gem={source} onSelect={onSelect(setSource)} />
 
-      <IconImage Icon={IconTransmute} />
+        <IconImage Icon={IconTransmute} />
 
-      <SelectGem gem={result} omit={source} onSelect={onSelect(setResult)} />
+        <SelectGem gem={result} omit={source} onSelect={onSelect(setResult)} />
+      </div>
 
       <OverlayTrigger
         overlay={<Tooltip>{`Insufficient ${plural(source)}.`}</Tooltip>}

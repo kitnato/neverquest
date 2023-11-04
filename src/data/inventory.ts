@@ -83,7 +83,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     price: { maximum: 10000, minimum: 8 },
     protection: [
       { maximum: 10, minimum: 8 },
-      { maximum: 1000, minimum: 950 },
+      { maximum: 1500, minimum: 1450 },
     ],
     staminaCost: Infinity,
     weight: [
@@ -97,7 +97,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     price: { maximum: 5000, minimum: 1 },
     protection: [
       { maximum: 2, minimum: 1 },
-      { maximum: 500, minimum: 450 },
+      { maximum: 800, minimum: 700 },
     ],
     staminaCost: 0,
     weight: [
@@ -114,7 +114,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     price: { maximum: 7500, minimum: 3 },
     protection: [
       { maximum: 6, minimum: 4 },
-      { maximum: 800, minimum: 750 },
+      { maximum: 1000, minimum: 950 },
     ],
     staminaCost: [
       { maximum: 3, minimum: 1 },
@@ -280,8 +280,8 @@ export const SHIELD_SPECIFICATIONS: Record<
 > = {
   medium: {
     block: [
-      { maximum: 0.28, minimum: 0.25 },
-      { maximum: 0.4, minimum: 0.35 },
+      { maximum: 0.3, minimum: 0.25 },
+      { maximum: 0.45, minimum: 0.43 },
     ],
     Icon: IconShieldMedium,
     price: { maximum: 4500, minimum: 4 },
@@ -300,8 +300,8 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   small: {
     block: [
-      { maximum: 0.2, minimum: 0.18 },
-      { maximum: 0.35, minimum: 0.3 },
+      { maximum: 0.2, minimum: 0.15 },
+      { maximum: 0.35, minimum: 0.33 },
     ],
     Icon: IconShieldSmall,
     price: { maximum: 2500, minimum: 2 },
@@ -317,8 +317,8 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   tower: {
     block: [
-      { maximum: 0.52, minimum: 0.5 },
-      { maximum: 0.65, minimum: 0.6 },
+      { maximum: 0.45, minimum: 0.4 },
+      { maximum: 0.7, minimum: 0.65 },
     ],
     Icon: IconShieldTower,
     price: { maximum: 6000, minimum: 7 },
@@ -414,25 +414,25 @@ export const WEAPON_BASE: GearBase & {
     { maximum: 50, minimum: 45 },
   ],
   damage: [
-    { maximum: 15, minimum: 12 },
+    { maximum: 12, minimum: 10 },
     { maximum: 1000, minimum: 950 },
   ],
-  price: { maximum: 12000, minimum: 1 },
+  price: { maximum: 9000, minimum: 1 },
   range: [
     { maximum: 4000, minimum: 3500 },
-    { maximum: 7000, minimum: 6500 },
+    { maximum: 7000, minimum: 6800 },
   ],
   rate: [
     { maximum: 3700, minimum: 3600 },
-    { maximum: 2200, minimum: 2000 },
+    { maximum: 2000, minimum: 1900 },
   ],
   staminaCost: [
     { maximum: 2, minimum: 1 },
-    { maximum: 65, minimum: 60 },
+    { maximum: 80, minimum: 75 },
   ],
   weight: [
     { maximum: 2, minimum: 1 },
-    { maximum: 80, minimum: 70 },
+    { maximum: 80, minimum: 75 },
   ],
 };
 
@@ -468,8 +468,8 @@ export const WEAPON_SPECIFICATIONS: Record<
   blunt: {
     ability: "stun",
     abilityChance: [
-      { maximum: 0.3, minimum: 0.25 },
-      { maximum: 0.7, minimum: 0.65 },
+      { maximum: 0.25, minimum: 0.2 },
+      { maximum: 0.7, minimum: 0.68 },
     ],
     IconAbility: IconStun,
     IconGearClass: IconBlunt,
@@ -478,7 +478,7 @@ export const WEAPON_SPECIFICATIONS: Record<
     ability: "bleed",
     abilityChance: [
       { maximum: 0.3, minimum: 0.25 },
-      { maximum: 0.5, minimum: 0.45 },
+      { maximum: 0.6, minimum: 0.58 },
     ],
     IconAbility: IconBleed,
     IconGearClass: IconPiercing,
@@ -486,8 +486,8 @@ export const WEAPON_SPECIFICATIONS: Record<
   slashing: {
     ability: "parry",
     abilityChance: [
-      { maximum: 0.35, minimum: 0.3 },
-      { maximum: 0.5, minimum: 0.45 },
+      { maximum: 0.3, minimum: 0.25 },
+      { maximum: 0.5, minimum: 0.47 },
     ],
     IconAbility: IconParry,
     IconGearClass: IconSlashing,

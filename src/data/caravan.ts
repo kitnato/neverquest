@@ -41,7 +41,7 @@ export const CREW: Record<
     interaction: "Transmute",
     monologues: { 1: "Things are not always what they seem." },
     price: 500,
-    requiredStage: 35,
+    requiredStage: 30,
   },
   blacksmith: {
     description: "Crafts superior gear.",
@@ -57,7 +57,7 @@ export const CREW: Record<
     interaction: "Craft",
     monologues: { 1: "Tired of monster breath?" },
     price: 300,
-    requiredStage: 30,
+    requiredStage: 23,
   },
   medic: {
     description: "Heals wounds and sells bandages.",
@@ -108,7 +108,7 @@ export const CREW: Record<
     interaction: "Ritual",
     monologues: { 1: "Prepared to pierce the veil?" },
     price: 777,
-    requiredStage: 45,
+    requiredStage: 40,
   },
   tailor: {
     description: "Expands inventory space.",

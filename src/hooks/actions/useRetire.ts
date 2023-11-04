@@ -100,7 +100,7 @@ export function useRetire() {
           currentInventory.filter((currentItem) => {
             extraEncumbrance += currentItem.weight;
 
-            return isInfusable(currentItem);
+            return currentItem.name === "journal" || isInfusable(currentItem);
           }),
         );
 

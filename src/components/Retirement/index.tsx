@@ -41,7 +41,8 @@ export function Retirement({
 
       <ModalBody>
         <Stack gap={5}>
-          Retiring starts a new quest with quicker progress per stage alongside a powerful trait.
+          Retiring starts a new quest with less monsters to fight per stage. A powerful trait can be
+          chosen, bestowing a permanent boon.
           <ResetDetails />
           <ProgressDiscount />
           <ItemsInherited />

@@ -4,43 +4,32 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { QUEST_CLASS_ICONS, QUEST_COMPLETION_BONUS } from "@neverquest/data/quests";
 import { useCompleteQuest } from "@neverquest/hooks/actions/useCompleteQuest";
 import IconDamage from "@neverquest/icons/damage.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { questProgress } from "@neverquest/state/quests";
-import type { QuestData } from "@neverquest/types";
-import {
-  QUEST_BONUS_TYPES,
-  type Quest,
-  type QuestBonus,
-  type QuestClass,
-  type QuestProgression,
-  type QuestStatus,
-} from "@neverquest/types/unions";
+import type { ActiveQuest } from "@neverquest/types";
+import type { Quest, QuestBonus, QuestClass } from "@neverquest/types/unions";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function QuestDisplay({
-  data: { description, hidden, progressionMaximum, title },
+  activeQuest: { description, progressionMaximum, status, title },
   quest,
   questClass,
-  status,
 }: {
-  data: QuestData;
+  activeQuest: ActiveQuest;
   quest: Quest;
   questClass: QuestClass;
-  status: QuestStatus;
 }) {
   const questProgressValue = useRecoilValue(questProgress(quest));
 
   const completeQuest = useCompleteQuest();
 
   const cappedProgress = Math.min(questProgressValue, progressionMaximum);
-  const questProgression = `${progressionMaximum}`;
-  const choiceID = `quest-completion-${quest}-${questProgression}`;
-  const hasCompletedQuest = typeof status !== "boolean" && QUEST_BONUS_TYPES.includes(status);
+  const choiceID = `quest-completion-${quest}-${progressionMaximum}`;
+  const hasCompletedQuest = typeof status === "string";
 
   return (
     <Stack className={hasCompletedQuest ? "opacity-50" : undefined} direction="horizontal" gap={3}>
@@ -54,11 +43,7 @@ export function QuestDisplay({
       />
 
       <IconDisplay
-        description={
-          hidden !== undefined && hasCompletedQuest
-            ? description.replace(LABEL_UNKNOWN, hidden)
-            : description
-        }
+        description={description}
         Icon={QUEST_CLASS_ICONS[questClass]}
         isFullWidth
         tooltip={capitalizeAll(questClass)}
@@ -66,18 +51,18 @@ export function QuestDisplay({
         {title}
       </IconDisplay>
 
-      {status !== false && (
+      {questProgressValue >= progressionMaximum && (
         <ToggleButtonGroup
           name={choiceID}
           onChange={(value) =>
             completeQuest({
               bonus: value as QuestBonus,
-              progression: questProgression as QuestProgression,
+              progress: progressionMaximum,
               quest,
             })
           }
           type="radio"
-          value={status === true ? null : status}
+          value={status}
         >
           {[
             { bonus: "healthBonus", Icon: IconHealth },

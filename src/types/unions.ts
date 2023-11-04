@@ -155,23 +155,6 @@ export type QuestBonus = (typeof QUEST_BONUS_TYPES)[number];
 export const QUEST_CLASS_TYPES = ["conquest", "routine", "triumph"] as const;
 export type QuestClass = (typeof QUEST_CLASS_TYPES)[number];
 
-export type QuestProgression =
-  | "1"
-  | "3"
-  | "4"
-  | "5"
-  | "10"
-  | "25"
-  | "50"
-  | "100"
-  | "250"
-  | "500"
-  | "1000"
-  | "2500"
-  | "5000"
-  | "10000"
-  | "25000";
-
 export type QuestStatus = QuestBonus | boolean;
 
 export type Reserve = "health" | "stamina";
@@ -279,6 +262,7 @@ export type StateKey =
   | "absorbedEssence"
   | "acquiredTraits"
   | "activeCrew"
+  | "activeQuests"
   | "allowNSFW"
   | "ammunition"
   | "ammunitionMaximum"
@@ -293,7 +277,6 @@ export type StateKey =
   | "attributeRank"
   | "attributeStatistic"
   | "autoEquip"
-  | "availableQuests"
   | "blacksmithInventory"
   | "bleed"
   | "bleedChance"

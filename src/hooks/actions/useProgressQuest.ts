@@ -1,9 +1,13 @@
 import { useRecoilCallback } from "recoil";
 
-import { QUESTS } from "@neverquest/data/quests";
 import { ownedItem } from "@neverquest/state/items";
-import { questNotification, questProgress, questStatus } from "@neverquest/state/quests";
-import type { Quest, QuestProgression } from "@neverquest/types/unions";
+import {
+  activeQuests,
+  questNotification,
+  questProgress,
+  questStatus,
+} from "@neverquest/state/quests";
+import type { Quest } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useProgressQuest() {
@@ -17,30 +21,29 @@ export function useProgressQuest() {
         }
 
         const questProgressState = questProgress(quest);
-        const questStatusState = questStatus(quest);
-        const questStatusValue = get(questStatusState);
+        const activeQuestsValue = get(activeQuests(quest));
 
         const newProgress = get(questProgressState) + amount;
 
         set(questProgressState, newProgress);
 
-        Object.keys(questStatusValue).forEach((currentOuterStatus) => {
-          const index = currentOuterStatus as QuestProgression;
-          const data = QUESTS[quest][index];
+        set(questStatus(quest), (current) =>
+          current.map((currentStatus, index) => {
+            const activeQuest = activeQuestsValue[index];
 
-          if (
-            data !== undefined &&
-            questStatusValue[index] === false &&
-            newProgress >= data.progressionMaximum
-          ) {
-            set(questStatusState, (currentInnerStatus) => ({
-              ...currentInnerStatus,
-              [index]: true,
-            }));
+            if (activeQuest === undefined) {
+              return currentStatus;
+            }
 
-            set(questNotification, { progression: index, quest });
-          }
-        });
+            if (currentStatus === false && newProgress >= activeQuest.progressionMaximum) {
+              set(questNotification, activeQuest);
+
+              return true;
+            }
+
+            return currentStatus;
+          }),
+        );
       },
   );
 }

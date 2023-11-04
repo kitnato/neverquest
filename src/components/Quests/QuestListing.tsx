@@ -1,33 +1,13 @@
 import { useRecoilValue } from "recoil";
 
 import { QuestDisplay } from "@neverquest/components/Quests/QuestDisplay";
-import { QUESTS } from "@neverquest/data/quests";
-import { availableQuests, questStatus } from "@neverquest/state/quests";
-import type { Quest, QuestClass, QuestProgression } from "@neverquest/types/unions";
+import { activeQuests } from "@neverquest/state/quests";
+import type { Quest, QuestClass } from "@neverquest/types/unions";
 
 export function QuestListing({ quest, questClass }: { quest: Quest; questClass: QuestClass }) {
-  const availableQuestsValue = useRecoilValue(availableQuests(quest));
-  const questStatusValue = useRecoilValue(questStatus(quest));
+  const activeQuestsValue = useRecoilValue(activeQuests(quest));
 
-  return Object.keys(availableQuestsValue)
-    .toSorted((current1, current2) => parseInt(current1) - parseInt(current2))
-    .map((current) => {
-      const index = current as QuestProgression;
-      const data = QUESTS[quest][index];
-      const status = questStatusValue[index];
-
-      if (data === undefined || status === undefined) {
-        return null;
-      }
-
-      return (
-        <QuestDisplay
-          data={data}
-          key={data.title}
-          quest={quest}
-          questClass={questClass}
-          status={status}
-        />
-      );
-    });
+  return activeQuestsValue.map((current) => (
+    <QuestDisplay activeQuest={current} key={current.title} quest={quest} questClass={questClass} />
+  ));
 }

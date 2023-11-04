@@ -10,7 +10,7 @@ import IconStage from "@neverquest/icons/stage.svg?react";
 export function ResetDetails() {
   return (
     <Stack gap={3}>
-      <h6>Progression reset</h6>
+      <h6>Starting from scratch</h6>
 
       <ListGroup>
         <ListGroupItem>

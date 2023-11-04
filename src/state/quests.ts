@@ -1,6 +1,7 @@
 import { atom, atomFamily, selectorFamily } from "recoil";
 
 import { ownedItem } from "./items";
+import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import {
   QUESTS,
   QUEST_COMPLETION_BONUS,
@@ -8,33 +9,52 @@ import {
   QUEST_TYPES_BY_CLASS,
 } from "@neverquest/data/quests";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import type { QuestData } from "@neverquest/types";
+import type { ActiveQuest } from "@neverquest/types";
+import { isConquest, isRoutine } from "@neverquest/types/type-guards";
 import {
   QUEST_BONUS_TYPES,
   type Quest,
   type QuestBonus,
   type QuestClass,
-  type QuestProgression,
   type QuestStatus,
 } from "@neverquest/types/unions";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
-export const availableQuests = withStateKey("availableQuests", (key) =>
-  selectorFamily<Partial<Record<QuestProgression, QuestData>>, Quest>({
+export const activeQuests = withStateKey("activeQuests", (key) =>
+  selectorFamily<ActiveQuest[], Quest>({
     get:
       (parameter) =>
       ({ get }) => {
+        const questStatusValue = get(questStatus(parameter));
         const questProgressValue = get(questProgress(parameter));
 
-        const quests: Partial<Record<QuestProgression, QuestData>> = {};
+        const quests: ActiveQuest[] = [];
+        const { description, hidden, progression, title } = QUESTS[parameter];
 
-        // TODO - achievable with .reduce()?
-        for (const [key, current] of Object.entries(QUESTS[parameter])) {
-          quests[key as QuestProgression] = current;
+        for (const progressStep of progression) {
+          const index = progression.indexOf(progressStep);
+          const status = questStatusValue[index] ?? false;
 
-          if (current.progressionMaximum > questProgressValue) {
+          quests.push({
+            description: (hidden !== undefined && status !== false
+              ? description.replace(LABEL_UNKNOWN, hidden)
+              : description
+            ).replace("@", `${progressStep}`),
+            progressionMaximum: progressStep,
+            questClass: isConquest(parameter)
+              ? "conquest"
+              : isRoutine(parameter)
+              ? "routine"
+              : "triumph",
+            status,
+            title: `${title}${
+              progression.length > 1 ? [" I", " II", " III", " IV", " V", " VI"][index] : ""
+            }`,
+          });
+
+          if (progressStep > questProgressValue) {
             break;
           }
         }
@@ -103,7 +123,7 @@ export const questsBonus = withStateKey("questsBonus", (key) =>
 // ATOMS
 
 export const questNotification = withStateKey("questNotification", (key) =>
-  atom<{ progression: QuestProgression; quest: Quest } | null>({
+  atom<ActiveQuest | null>({
     default: null,
     effects: [handleLocalStorage({ key })],
     key,
@@ -119,12 +139,8 @@ export const questProgress = withStateKey("questProgress", (key) =>
 );
 
 export const questStatus = withStateKey("questStatus", (key) =>
-  atomFamily<Partial<Record<QuestProgression, QuestStatus>>, Quest>({
-    default: (parameter) =>
-      Object.keys(QUESTS[parameter]).reduce(
-        (accumulator, current) => ({ ...accumulator, [current]: false }),
-        {},
-      ),
+  atomFamily<QuestStatus[], Quest>({
+    default: (parameter) => Object.keys(QUESTS[parameter].progression).map(() => false),
     effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),

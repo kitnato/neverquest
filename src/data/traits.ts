@@ -30,6 +30,7 @@ export const TRAITS: Record<
   },
   bruiser: {
     description: `Current stamina adds to unarmed damage & unarmed attacks have a ${formatNumber({
+      decimals: 0,
       format: "percentage",
       value: BRUISER_STUN_CHANCE,
     })} chance to stun.`,

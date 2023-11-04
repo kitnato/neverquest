@@ -40,7 +40,7 @@ export function ItemName({
       }
       placement={placement}
     >
-      <span>{`${displayName}${
+      <span style={{ width: "max-content" }}>{`${displayName}${
         stack !== undefined && stack > 1 ? ` x${formatNumber({ value: stack })}` : ""
       }`}</span>
     </OverlayTrigger>

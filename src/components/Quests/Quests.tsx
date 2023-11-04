@@ -23,8 +23,6 @@ export function Quests({ questClass }: { questClass: QuestClass }) {
 
   return (
     <Stack className="overflow-y-hidden" gap={3}>
-      <h6>Completion</h6>
-
       <LabelledProgressBar value={(completedQuestsValue / questCount) * 100} variant="dark">
         <Stack direction="horizontal" gap={1}>
           {`${completedQuestsValue}/${questCount}`}

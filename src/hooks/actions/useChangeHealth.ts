@@ -7,7 +7,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { ownedItem } from "@neverquest/state/items";
 import {
   health,
-  healthMaximumTotal,
+  healthMaximumPoisoned,
   isImmortal,
   regenerationAmount,
   regenerationDuration,
@@ -22,7 +22,7 @@ export function useChangeHealth() {
       (deltaReserve: DeltaReserve) => {
         const get = getSnapshotGetter(snapshot);
 
-        const healthMaximumTotalValue = get(healthMaximumTotal);
+        const healthMaximumTotalValue = get(healthMaximumPoisoned);
         const value = deltaReserve.isRegeneration
           ? get(regenerationAmount("health"))
           : deltaReserve.value;

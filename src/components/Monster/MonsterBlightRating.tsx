@@ -42,7 +42,7 @@ export function MonsterBlightRating() {
                     <Stack direction="horizontal" gap={1}>
                       <IconImage Icon={IconStamina} size="small" />
 
-                      {`-${formatNumber({ value: blightAmountValue })}`}
+                      {`-${formatNumber({ value: blightAmountValue })} cumulative`}
                     </Stack>
                   </td>
                 </tr>

@@ -18,6 +18,7 @@ import {
 } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { bleed, isMonsterAiling } from "@neverquest/state/monster";
+import { questsBonus } from "@neverquest/state/quests";
 import { stamina } from "@neverquest/state/reserves";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
@@ -126,7 +127,11 @@ export const criticalStrike = withStateKey("criticalStrike", (key) =>
 export const damage = withStateKey("damage", (key) =>
   selector({
     get: ({ get }) =>
-      Math.round(get(attributeStatistic("strength")) * (1 + get(attributePowerBonus("strength")))),
+      Math.round(
+        get(attributeStatistic("strength")) *
+          (1 + get(attributePowerBonus("strength"))) *
+          (1 + get(questsBonus("damageBonus"))),
+      ),
     key,
   }),
 );

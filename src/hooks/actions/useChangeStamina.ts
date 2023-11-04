@@ -5,7 +5,7 @@ import {
   regenerationAmount,
   regenerationDuration,
   stamina,
-  staminaMaximumTotal,
+  staminaMaximumBlighted,
 } from "@neverquest/state/reserves";
 import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -24,7 +24,7 @@ export function useChangeStamina() {
         const formattedValue = formatNumber({ value });
 
         const newStamina = get(stamina) + value;
-        const staminaMaximumTotalValue = get(staminaMaximumTotal);
+        const staminaMaximumTotalValue = get(staminaMaximumBlighted);
 
         set(
           deltas("stamina"),

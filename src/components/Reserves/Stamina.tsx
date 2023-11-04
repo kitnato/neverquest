@@ -14,13 +14,15 @@ import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
+import { questsBonus } from "@neverquest/state/quests";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Stamina() {
-  const endurancePowerBonus = useRecoilValue(attributePowerBonus("endurance"));
-  const endurance = useRecoilValue(attributeStatistic("endurance"));
+  const attributePowerBonusEndurance = useRecoilValue(attributePowerBonus("endurance"));
+  const attributeStatisticEndurance = useRecoilValue(attributeStatistic("endurance"));
   const isShowingStamina = useRecoilValue(isShowing("stamina"));
   const isShowingStaminaDetails = useRecoilValue(isShowing("staminaDetails"));
+  const questsBonusStamina = useRecoilValue(questsBonus("staminaBonus"));
 
   const { baseAmount } = RESERVES.stamina;
 
@@ -63,9 +65,9 @@ export function Stamina() {
                         <Stack direction="horizontal" gap={1}>
                           <IconImage Icon={IconStamina} size="small" />
 
-                          {`+${formatNumber({ value: endurance - baseAmount })}`}
+                          {`+${formatNumber({ value: attributeStatisticEndurance - baseAmount })}`}
 
-                          {endurancePowerBonus > 0 && (
+                          {attributePowerBonusEndurance > 0 && (
                             <>
                               <span>{LABEL_SEPARATOR}</span>
 
@@ -73,13 +75,31 @@ export function Stamina() {
 
                               {`+${formatNumber({
                                 format: "percentage",
-                                value: endurancePowerBonus,
+                                value: attributePowerBonusEndurance,
                               })}`}
                             </>
                           )}
                         </Stack>
                       </td>
                     </tr>
+
+                    {questsBonusStamina > 0 && (
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Quest bonus:</td>
+
+                        <td>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconStamina} size="small" />
+
+                            {`+${formatNumber({
+                              decimals: 0,
+                              format: "percentage",
+                              value: questsBonusStamina,
+                            })}`}
+                          </Stack>
+                        </td>
+                      </tr>
+                    )}
                   </DetailsTable>
                 </PopoverBody>
               </Popover>

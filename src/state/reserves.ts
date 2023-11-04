@@ -2,7 +2,7 @@ import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { BLIGHT } from "@neverquest/data/monster";
-import { HEALTH_LOW_THRESHOLD, RESERVES } from "@neverquest/data/reserves";
+import { HEALTH_LOW_THRESHOLD, RESERVES, RESERVE_MINIMUM } from "@neverquest/data/reserves";
 import {
   attributePowerBonus,
   attributeRank,
@@ -10,6 +10,7 @@ import {
 } from "@neverquest/state/attributes";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { poisonLength, poisonMagnitude } from "@neverquest/state/monster";
+import { questsBonus } from "@neverquest/state/quests";
 import type { BlightMagnitude } from "@neverquest/types";
 import type { Reserve } from "@neverquest/types/unions";
 import { getComputedStatistic } from "@neverquest/utilities/getters";
@@ -45,27 +46,24 @@ export const healthMaximum = withStateKey("healthMaximum", (key) =>
       const attributeRankValue = get(attributeRank("vitality"));
       const total = getComputedStatistic({ amount: attributeRankValue, base, increment });
 
-      return Math.round(total * (1 + get(attributePowerBonus("vitality"))));
+      return Math.round(
+        total * (1 + get(attributePowerBonus("vitality"))) * (1 + get(questsBonus("healthBonus"))),
+      );
     },
     key,
   }),
 );
 
-export const healthMaximumTotal = withStateKey("healthMaximumTotal", (key) =>
+export const healthMaximumPoisoned = withStateKey("healthMaximumPoisoned", (key) =>
   selector({
-    get: ({ get }) => {
-      const newMaximum =
+    get: ({ get }) =>
+      Math.max(
         get(healthMaximum) -
-        Math.round(
-          get(healthMaximum) * get(poisonMagnitude) * (get(poisonDuration) / get(poisonLength)),
-        );
-
-      if (newMaximum < 0) {
-        return 0;
-      }
-
-      return newMaximum;
-    },
+          Math.round(
+            get(healthMaximum) * get(poisonMagnitude) * (get(poisonDuration) / get(poisonLength)),
+          ),
+        RESERVE_MINIMUM,
+      ),
     key,
   }),
 );
@@ -79,14 +77,14 @@ export const isBlighted = withStateKey("isBlighted", (key) =>
 
 export const isHealthAtMaximum = withStateKey("isHealthAtMaximum", (key) =>
   selector({
-    get: ({ get }) => get(health) >= get(healthMaximumTotal),
+    get: ({ get }) => get(health) >= get(healthMaximumPoisoned),
     key,
   }),
 );
 
 export const isHealthLow = withStateKey("isHealthLow", (key) =>
   selector({
-    get: ({ get }) => get(health) <= get(healthMaximumTotal) * HEALTH_LOW_THRESHOLD,
+    get: ({ get }) => get(health) <= get(healthMaximumPoisoned) * HEALTH_LOW_THRESHOLD,
     key,
   }),
 );
@@ -110,7 +108,7 @@ export const isRegenerating = withStateKey("isRegenerating", (key) =>
 
 export const isStaminaAtMaximum = withStateKey("isStaminaAtMaximum", (key) =>
   selector({
-    get: ({ get }) => get(stamina) >= get(staminaMaximumTotal),
+    get: ({ get }) => get(stamina) >= get(staminaMaximumBlighted),
     key,
   }),
 );
@@ -170,17 +168,9 @@ export const staminaMaximum = withStateKey("staminaMaximum", (key) =>
   }),
 );
 
-export const staminaMaximumTotal = withStateKey("staminaMaximumTotal", (key) =>
+export const staminaMaximumBlighted = withStateKey("staminaMaximumBlighted", (key) =>
   selector({
-    get: ({ get }) => {
-      const newMaximum = get(staminaMaximum) - get(blightMagnitude).amount;
-
-      if (newMaximum < 0) {
-        return 0;
-      }
-
-      return newMaximum;
-    },
+    get: ({ get }) => Math.max(get(staminaMaximum) - get(blightMagnitude).amount, RESERVE_MINIMUM),
     key,
   }),
 );
@@ -197,7 +187,7 @@ export const blight = withStateKey("blight", (key) =>
 
 export const health = withStateKey("health", (key) =>
   atom({
-    default: healthMaximumTotal,
+    default: healthMaximumPoisoned,
     effects: [handleLocalStorage({ key })],
     key,
   }),
@@ -229,7 +219,7 @@ export const poisonDuration = withStateKey("poisonDuration", (key) =>
 
 export const stamina = withStateKey("stamina", (key) =>
   atom({
-    default: staminaMaximumTotal,
+    default: staminaMaximumBlighted,
     effects: [handleLocalStorage({ key })],
     key,
   }),

@@ -3,12 +3,12 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { inventory } from "@neverquest/state/inventory";
-import { isStaminaAtMaximum, stamina, staminaMaximumTotal } from "@neverquest/state/reserves";
+import { isStaminaAtMaximum, stamina, staminaMaximumBlighted } from "@neverquest/state/reserves";
 
 export function Elixir({ id }: { id: string }) {
   const isStaminaAtMaximumValue = useRecoilValue(isStaminaAtMaximum);
   const staminaValue = useRecoilValue(stamina);
-  const staminaMaximumTotalValue = useRecoilValue(staminaMaximumTotal);
+  const staminaMaximumTotalValue = useRecoilValue(staminaMaximumBlighted);
   const setInventory = useSetRecoilState(inventory);
 
   const changeStamina = useChangeStamina();

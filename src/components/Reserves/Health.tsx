@@ -15,14 +15,16 @@ import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import IconVitality from "@neverquest/icons/vitality.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
+import { questsBonus } from "@neverquest/state/quests";
 import { isPoisoned, poisonDuration } from "@neverquest/state/reserves";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Health() {
-  const vitalityPowerBonus = useRecoilValue(attributePowerBonus("vitality"));
-  const vitality = useRecoilValue(attributeStatistic("vitality"));
-  const isPoisonedValue = useRecoilValue(isPoisoned);
+  const attributePowerBonusVitality = useRecoilValue(attributePowerBonus("vitality"));
+  const attributeStatisticVitality = useRecoilValue(attributeStatistic("vitality"));
   const isShowingHealthDetails = useRecoilValue(isShowing("healthDetails"));
+  const isPoisonedValue = useRecoilValue(isPoisoned);
+  const questsBonusHealth = useRecoilValue(questsBonus("healthBonus"));
   const setPoisonDuration = useSetRecoilState(poisonDuration);
 
   const { baseAmount } = RESERVES.health;
@@ -67,9 +69,9 @@ export function Health() {
                         <Stack direction="horizontal" gap={1}>
                           <IconImage Icon={IconHealth} size="small" />
 
-                          {`+${formatNumber({ value: vitality - baseAmount })}`}
+                          {`+${formatNumber({ value: attributeStatisticVitality - baseAmount })}`}
 
-                          {vitalityPowerBonus > 0 && (
+                          {attributePowerBonusVitality > 0 && (
                             <>
                               <span>{LABEL_SEPARATOR}</span>
 
@@ -77,13 +79,31 @@ export function Health() {
 
                               {`+${formatNumber({
                                 format: "percentage",
-                                value: vitalityPowerBonus,
+                                value: attributePowerBonusVitality,
                               })}`}
                             </>
                           )}
                         </Stack>
                       </td>
                     </tr>
+
+                    {questsBonusHealth > 0 && (
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Quest bonus:</td>
+
+                        <td>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconHealth} size="small" />
+
+                            {`+${formatNumber({
+                              decimals: 0,
+                              format: "percentage",
+                              value: questsBonusHealth,
+                            })}`}
+                          </Stack>
+                        </td>
+                      </tr>
+                    )}
                   </DetailsTable>
                 </PopoverBody>
               </Popover>

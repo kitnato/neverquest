@@ -10,7 +10,7 @@ import IconDamage from "@neverquest/icons/damage.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { questProgress } from "@neverquest/state/quests";
-import type { ActiveQuest } from "@neverquest/types";
+import type { QuestData } from "@neverquest/types";
 import type { Quest, QuestBonus, QuestClass } from "@neverquest/types/unions";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
@@ -19,7 +19,7 @@ export function QuestDisplay({
   quest,
   questClass,
 }: {
-  activeQuest: ActiveQuest;
+  activeQuest: QuestData;
   quest: Quest;
   questClass: QuestClass;
 }) {

@@ -6,6 +6,7 @@ import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
 import { TAILORING_EXPANSION, TAILORING_PRICE_MAXIMUM } from "@neverquest/data/caravan";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/data/general";
 import { ENCUMBRANCE } from "@neverquest/data/inventory";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconTailoring from "@neverquest/icons/tailoring.svg?react";
@@ -19,6 +20,7 @@ export function ExpandKnapsack() {
   const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const [encumbranceMaximumValue, setEncumbranceMaximum] = useRecoilState(encumbranceMaximum);
 
+  const progressQuest = useProgressQuest();
   const transactEssence = useTransactEssence();
 
   const price = Math.ceil(
@@ -64,6 +66,10 @@ export function ExpandKnapsack() {
                 onClick={() => {
                   transactEssence(-price);
                   setEncumbranceMaximum((current) => current + TAILORING_EXPANSION.knapsack);
+                  progressQuest({
+                    amount: TAILORING_EXPANSION.knapsack,
+                    quest: "knapsackExpanding",
+                  });
                 }}
                 variant="outline-dark"
               >

@@ -10,14 +10,6 @@ import type {
   Trinket,
 } from "@neverquest/types/unions";
 
-export type ActiveQuest = {
-  description: string;
-  progressionMaximum: number;
-  questClass: QuestClass;
-  status: QuestStatus;
-  title: string;
-};
-
 export type AmmunitionPouchItem = TrinketItem & {
   current: number;
   description: string;
@@ -110,8 +102,9 @@ export type MerchantInventory = {
 
 export type QuestData = {
   description: string;
-  hidden?: string;
-  progression: [number, ...number[]];
+  progressionMaximum: number;
+  questClass: QuestClass;
+  status: QuestStatus;
   title: string;
 };
 

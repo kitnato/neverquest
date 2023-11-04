@@ -2,7 +2,6 @@ import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import IconConquest from "@neverquest/icons/conquest.svg?react";
 import IconRoutine from "@neverquest/icons/routine.svg?react";
 import IconTriumph from "@neverquest/icons/triumph.svg?react";
-import type { QuestData } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
 import {
   CONQUEST_TYPES,
@@ -30,7 +29,15 @@ export const QUEST_TYPES_BY_CLASS = {
 
 export const QUEST_TYPES = Object.values(QUEST_TYPES_BY_CLASS).flat();
 
-export const QUESTS: Record<Quest, QuestData> = {
+export const QUESTS: Record<
+  Quest,
+  {
+    description: string;
+    hidden?: string;
+    progression: [number, ...number[]];
+    title: string;
+  }
+> = {
   acquiringAntiqueCoin: {
     description: "Acquire the antique coin.",
     progression: [1],
@@ -111,6 +118,11 @@ export const QUESTS: Record<Quest, QuestData> = {
     description: "Buy back an item.",
     progression: [1],
     title: "I changed my mind",
+  },
+  completion: {
+    description: "Complete all quests",
+    progression: [180],
+    title: "Completionist",
   },
   crafting: {
     description: "Craft @ items.",
@@ -247,6 +259,11 @@ export const QUESTS: Record<Quest, QuestData> = {
     description: "Defeat the final boss.",
     progression: [1],
     title: "Come back to reality",
+  },
+  knapsackExpanding: {
+    description: "Expand knapsack by @ encumbrance.",
+    progression: [25, 50, 100, 250],
+    title: "Deep pockets",
   },
   looting: {
     description: "Collect loot @ times.",

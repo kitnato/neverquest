@@ -5,53 +5,41 @@ import { useRecoilValue, useResetRecoilState } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import { QUEST_NOTIFICATION_DURATION } from "@neverquest/data/general";
 import { QUEST_CLASS_ICONS } from "@neverquest/data/quests";
-import { questNotification } from "@neverquest/state/quests";
-import type { ActiveQuest } from "@neverquest/types";
-import type { QuestClass } from "@neverquest/types/unions";
+import { questNotifications } from "@neverquest/state/quests";
+import type { QuestData } from "@neverquest/types";
 
 export function QuestNotifications() {
-  const questNotificationValue = useRecoilValue(questNotification);
-  const resetQuestNotification = useResetRecoilState(questNotification);
+  const questNotificationsValue = useRecoilValue(questNotifications);
+  const resetQuestNotifications = useResetRecoilState(questNotifications);
 
-  const [questNotificationQueue, setQuestNotificationQueue] = useState<
-    (ActiveQuest & { isShowing: boolean; questClass: QuestClass })[]
-  >([]);
+  const [questNotificationsQueue, setQuestNotificationsQueue] = useState<QuestData[]>([]);
 
   useEffect(() => {
-    if (questNotificationValue === null) {
+    if (questNotificationsValue.length === 0) {
       return;
     }
 
-    setQuestNotificationQueue((current) => [
-      {
-        ...questNotificationValue,
-        isShowing: true,
-      },
-      ...current,
+    setQuestNotificationsQueue((currentQueue) => [
+      ...questNotificationsValue.map((currentNotification) => currentNotification),
+      ...currentQueue,
     ]);
 
-    return resetQuestNotification;
-  }, [questNotificationValue, resetQuestNotification, setQuestNotificationQueue]);
+    resetQuestNotifications();
+  }, [questNotificationsValue, resetQuestNotifications, setQuestNotificationsQueue]);
 
   return (
     <ToastContainer className="mb-4" position="bottom-center">
-      {questNotificationQueue.map(({ description, isShowing, questClass, title }, indexQueue) => (
+      {questNotificationsQueue.map(({ description, questClass, title }, indexQueue) => (
         <Toast
           autohide
           delay={QUEST_NOTIFICATION_DURATION}
           key={title}
-          onClose={() => {
-            setQuestNotificationQueue((currentQueue) =>
-              currentQueue.map((currentNotification, indexNotification) =>
-                indexQueue === indexNotification
-                  ? { ...currentNotification, isShowing: false }
-                  : currentNotification,
-              ),
-            );
-
-            resetQuestNotification();
-          }}
-          show={isShowing}
+          onClose={() =>
+            setQuestNotificationsQueue((currentQueue) =>
+              currentQueue.filter((_, indexNotification) => indexQueue !== indexNotification),
+            )
+          }
+          show
         >
           <ToastHeader>
             <Stack className="me-auto" direction="horizontal" gap={1}>

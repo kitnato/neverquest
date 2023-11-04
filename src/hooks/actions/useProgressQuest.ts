@@ -1,12 +1,8 @@
 import { useRecoilCallback } from "recoil";
 
 import { ownedItem } from "@neverquest/state/items";
-import {
-  activeQuests,
-  questNotification,
-  questProgress,
-  questStatus,
-} from "@neverquest/state/quests";
+import { questNotifications, questProgress, questStatuses, quests } from "@neverquest/state/quests";
+import type { QuestData } from "@neverquest/types";
 import type { Quest } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -21,22 +17,25 @@ export function useProgressQuest() {
         }
 
         const questProgressState = questProgress(quest);
-        const activeQuestsValue = get(activeQuests(quest));
+        const questStatusesState = questStatuses(quest);
+        const questsValue = get(quests(quest));
 
         const newProgress = get(questProgressState) + amount;
 
         set(questProgressState, newProgress);
 
-        set(questStatus(quest), (current) =>
-          current.map((currentStatus, index) => {
-            const activeQuest = activeQuestsValue[index];
+        const achievedQuests: QuestData[] = [];
 
-            if (activeQuest === undefined) {
-              return currentStatus;
-            }
+        set(questStatusesState, (currentStatuses) =>
+          currentStatuses.map((currentStatus, index) => {
+            const quest = questsValue[index];
 
-            if (currentStatus === false && newProgress >= activeQuest.progressionMaximum) {
-              set(questNotification, activeQuest);
+            if (
+              quest !== undefined &&
+              currentStatus === false &&
+              newProgress >= quest.progressionMaximum
+            ) {
+              achievedQuests.push(quest);
 
               return true;
             }
@@ -44,6 +43,9 @@ export function useProgressQuest() {
             return currentStatus;
           }),
         );
+
+        set(questNotifications, achievedQuests);
       },
+    [],
   );
 }

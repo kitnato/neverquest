@@ -26,10 +26,8 @@ export function FloatingTextQueue({ delta }: { delta: Delta }) {
     }[]
   >([]);
 
-  const onAnimationEnd = (id: string) => () => {
+  const onAnimationEnd = (id: string) => () =>
     setFloatingTextQueue((current) => current.filter(({ key }) => key !== id));
-    resetDelta();
-  };
 
   useEffect(() => {
     if ((Array.isArray(deltaValue) && deltaValue.length === 0) || deltaValue === null) {
@@ -44,7 +42,7 @@ export function FloatingTextQueue({ delta }: { delta: Delta }) {
       },
     ]);
 
-    return resetDelta;
+    resetDelta();
   }, [deltaValue, resetDelta, setFloatingTextQueue]);
 
   return (

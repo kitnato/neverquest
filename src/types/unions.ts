@@ -166,9 +166,10 @@ export const ROUTINE_TYPES = [
   "equippingArmor",
   "purchasingShield",
   "equippingShield",
+  "acquiringKnapsack",
+  "knapsackExpanding",
   "purchasingUsable",
   "purchasingInfusable",
-  "acquiringKnapsack",
   "selling",
   "buyingBack",
   "spendingEssence",
@@ -408,10 +409,11 @@ export type StateKey =
   | "progressMaximum"
   | "progressReduction"
   | "protection"
-  | "questNotification"
+  | "questNotifications"
   | "questProgress"
+  | "quests"
   | "questsBonus"
-  | "questStatus"
+  | "questStatuses"
   | "range"
   | "recoveryDuration"
   | "recoveryRate"
@@ -484,6 +486,7 @@ export const TRIUMPH_TYPES = [
   "killingResDominus",
   "acquiringFamiliar",
   "killingResCogitans",
+  "completion",
 ] as const;
 export type Triumph = (typeof TRIUMPH_TYPES)[number];
 

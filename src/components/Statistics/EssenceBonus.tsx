@@ -18,11 +18,13 @@ export function EssenceBonus() {
   });
 
   return (
-    <Stack direction="horizontal">
-      <IconDisplay Icon={IconEssenceBonus} tooltip="Essence loot bonus">{`+${formatNumber({
-        format: "percentage",
-        value: essenceBonusValue,
-      })}`}</IconDisplay>
+    <Stack direction="horizontal" gap={1}>
+      <IconDisplay Icon={IconEssenceBonus} tooltip="Essence loot bonus">
+        {`+${formatNumber({
+          format: "percentage",
+          value: essenceBonusValue,
+        })}`}
+      </IconDisplay>
 
       <FloatingTextQueue delta="essenceBonus" />
     </Stack>

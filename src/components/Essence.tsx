@@ -26,6 +26,7 @@ export function Essence() {
           isShowingEssence ? `visible ${getAnimationClass({ name: "flipInX" })}` : "invisible"
         }
         direction="horizontal"
+        gap={1}
       >
         <IconDisplay
           Icon={IconEssence}

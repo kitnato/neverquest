@@ -42,7 +42,7 @@ export function BleedRating() {
 
   return (
     <IconDisplay Icon={IconBleedRating} isAnimated tooltip="Bleed rating">
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         <OverlayTrigger
           overlay={
             <Popover>

@@ -42,7 +42,7 @@ export function CriticalRating() {
 
   return (
     <IconDisplay Icon={IconCriticalRating} isAnimated tooltip="Critical rating">
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         <OverlayTrigger
           overlay={
             <Popover>

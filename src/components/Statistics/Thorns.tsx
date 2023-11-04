@@ -24,7 +24,7 @@ export function Thorns() {
 
   return (
     <IconDisplay Icon={IconThorns} tooltip="Thorns">
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         <OverlayTrigger
           overlay={
             <Popover>

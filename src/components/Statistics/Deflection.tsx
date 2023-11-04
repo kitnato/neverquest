@@ -35,7 +35,7 @@ export function Deflection() {
 
   return (
     <IconDisplay Icon={IconDeflection} isAnimated tooltip="Total deflection chance">
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         <OverlayTrigger
           overlay={
             <Popover>

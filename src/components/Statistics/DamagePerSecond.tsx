@@ -29,7 +29,7 @@ export function DamagePerSecond() {
       iconProps={{ overlayPlacement: "bottom", size: "small" }}
       tooltip="Total damage per second"
     >
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         <span>{formatNumber({ format: "float", value: damagePerSecondValue })}</span>
 
         <FloatingTextQueue delta="damagePerSecond" />

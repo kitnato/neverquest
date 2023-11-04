@@ -22,7 +22,7 @@ export function Damage() {
 
   return (
     <IconDisplay description={<DamagePerSecond />} Icon={IconDamage} tooltip="Total damage">
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         <OverlayTrigger
           overlay={
             <Popover>

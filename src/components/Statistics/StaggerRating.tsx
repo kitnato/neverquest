@@ -44,7 +44,7 @@ export function StaggerRating() {
 
   return (
     <IconDisplay Icon={IconStaggerRating} isAnimated tooltip="Stagger rating">
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         <OverlayTrigger
           overlay={
             <Popover>

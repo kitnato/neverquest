@@ -36,7 +36,7 @@ export function StunRating() {
 
   return (
     <IconDisplay Icon={IconStunRating} isAnimated tooltip="Stun rating">
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         <OverlayTrigger
           overlay={
             <Popover>

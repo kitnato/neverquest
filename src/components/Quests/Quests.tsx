@@ -26,7 +26,7 @@ export function Quests({ questClass }: { questClass: QuestClass }) {
       <h6>Completion</h6>
 
       <LabelledProgressBar value={(completedQuestsValue / questCount) * 100} variant="dark">
-        <Stack direction="horizontal">
+        <Stack direction="horizontal" gap={1}>
           {`${completedQuestsValue}/${questCount}`}
 
           <FloatingTextQueue delta={questClass} />

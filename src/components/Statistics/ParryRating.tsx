@@ -40,7 +40,7 @@ export function ParryRating() {
 
   return (
     <IconDisplay Icon={IconParryRating} isAnimated tooltip="Parry rating">
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         <OverlayTrigger
           overlay={
             <Popover>

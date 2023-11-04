@@ -36,7 +36,7 @@ export function Block() {
 
   return (
     <IconDisplay Icon={IconBlock} isAnimated tooltip="Block chance">
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         <span>{formatNumber({ format: "percentage", value: blockChanceValue })}</span>
 
         <FloatingTextQueue delta="blockChance" />

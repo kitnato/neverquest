@@ -25,7 +25,7 @@ export function AmmunitionPouchCurrent() {
   return (
     <IconDisplay Icon={IconAmmunitionPouch} tooltip="Ammunition pouch">
       <LabelledProgressBar value={(ammunitionValue / ammunitionMaximumValue) * 100} variant="dark">
-        <Stack direction="horizontal">
+        <Stack direction="horizontal" gap={1}>
           {`${ammunitionValue}/${ammunitionMaximumValue}`}
 
           <FloatingTextQueue delta="ammunition" />

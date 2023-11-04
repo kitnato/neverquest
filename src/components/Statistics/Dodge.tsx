@@ -51,7 +51,7 @@ export function Dodge() {
 
   return (
     <IconDisplay Icon={IconDodge} isAnimated tooltip="Dodge chance">
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         <OverlayTrigger
           overlay={
             <Popover>

@@ -12,7 +12,7 @@ import { executionThreshold } from "@neverquest/state/statistics";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export function Execution() {
+export function ExecutionThreshold() {
   const executionValue = useRecoilValue(executionThreshold);
   const siegecraftValue = useRecoilValue(isSkillAcquired("siegecraft"));
   const weaponValue = useRecoilValue(weapon);
@@ -36,7 +36,7 @@ export function Execution() {
 
   return (
     <IconDisplay Icon={IconExecution} isAnimated tooltip="Execution threshold">
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         <span>
           {siegecraftValue
             ? executionValue === 0

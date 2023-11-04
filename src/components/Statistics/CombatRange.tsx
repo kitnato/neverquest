@@ -38,7 +38,7 @@ export function CombatRange() {
 
   return (
     <IconDisplay Icon={IconRange} isAnimated tooltip="Range">
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         <OverlayTrigger
           overlay={
             <Popover>

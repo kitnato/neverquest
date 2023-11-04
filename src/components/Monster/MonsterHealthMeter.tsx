@@ -1,5 +1,7 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { FloatingTextQueue } from "../FloatingTextQueue";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { monsterHealth, monsterHealthMaximum } from "@neverquest/state/monster";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -12,8 +14,14 @@ export function MonsterHealthMeter() {
     <LabelledProgressBar
       value={(monsterHealthValue / monsterHealthMaximumValue) * 100}
       variant="dark"
-    >{`${formatNumber({ value: monsterHealthValue })}/${formatNumber({
-      value: monsterHealthMaximumValue,
-    })}`}</LabelledProgressBar>
+    >
+      <Stack direction="horizontal" gap={1}>
+        {`${formatNumber({ value: monsterHealthValue })}/${formatNumber({
+          value: monsterHealthMaximumValue,
+        })}`}
+
+        <FloatingTextQueue delta="monsterHealth" />
+      </Stack>
+    </LabelledProgressBar>
   );
 }

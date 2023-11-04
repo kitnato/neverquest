@@ -33,7 +33,7 @@ export function QuestBonusDisplay({ bonus }: { bonus: QuestBonus }) {
 
   return (
     <IconDisplay Icon={Icon} key={bonus} tooltip={tooltip}>
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         {`+${formatNumber({
           decimals: 0,
           format: "percentage",

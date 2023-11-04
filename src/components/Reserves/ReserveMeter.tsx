@@ -69,15 +69,11 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
       variant="dark"
     >
       <Stack direction="horizontal" gap={1}>
-        <Stack direction="horizontal">
-          {`${formatNumber({ value: reserveValue })}/`}
+        {`${formatNumber({ value: reserveValue })}/${formatNumber({
+          value: reserveMaximumTotalValue,
+        })}`}
 
-          {formatNumber({
-            value: reserveMaximumTotalValue,
-          })}
-
-          <FloatingTextQueue delta={deltaReserveMaximum} />
-        </Stack>
+        <FloatingTextQueue delta={deltaReserveMaximum} />
 
         {isAiling && (
           <>

@@ -19,7 +19,7 @@ export function MasteryRank({ mastery }: { mastery: Mastery }) {
   });
 
   return (
-    <Stack direction="horizontal">
+    <Stack direction="horizontal" gap={1}>
       <IconDisplay
         Icon={IconRank}
         iconProps={{ overlayPlacement: "bottom", size: "small" }}

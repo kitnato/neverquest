@@ -19,7 +19,7 @@ export function Stage() {
 
   return (
     <IconDisplay Icon={IconStage} iconProps={{ overlayPlacement: "bottom" }} tooltip="Stage">
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         <span>{formatNumber({ value: stageValue })}</span>
 
         <FloatingTextQueue delta="stage" />

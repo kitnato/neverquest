@@ -23,7 +23,7 @@ export function Encumbrance() {
         value={(encumbranceValue / encumbranceMaximumValue) * 100}
         variant="dark"
       >
-        <Stack direction="horizontal">
+        <Stack direction="horizontal" gap={1}>
           {`${encumbranceValue}/${encumbranceMaximumValue}`}
 
           <FloatingTextQueue delta="encumbranceMaximum" />

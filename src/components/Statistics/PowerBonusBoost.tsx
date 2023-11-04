@@ -18,7 +18,7 @@ export function PowerBonusBoost() {
   });
 
   return (
-    <Stack direction="horizontal">
+    <Stack direction="horizontal" gap={1}>
       <IconDisplay Icon={IconPowerBonusBoost} tooltip="Power bonus boost">{`+${formatNumber({
         format: "percentage",
         value: powerBonusBoostValue,

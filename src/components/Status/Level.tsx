@@ -21,7 +21,7 @@ export function Level() {
 
   return (
     <IconDisplay Icon={IconLevel} tooltip="Power level">
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         <OverlayTrigger
           overlay={
             <Popover>

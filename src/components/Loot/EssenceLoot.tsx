@@ -22,7 +22,7 @@ export function EssenceLoot() {
   }
 
   return (
-    <Stack className={getAnimationClass({ name: "flipInX" })} direction="horizontal">
+    <Stack className={getAnimationClass({ name: "flipInX" })} direction="horizontal" gap={1}>
       <IconDisplay Icon={IconEssence} tooltip="Looted essence">
         {formatNumber({ value: essenceLootValue })}
       </IconDisplay>

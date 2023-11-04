@@ -17,7 +17,7 @@ export function InfusionLevel({ infusable }: { infusable: Infusable }) {
   });
 
   return (
-    <Stack direction="horizontal">
+    <Stack direction="horizontal" gap={1}>
       <InfusionLevelDisplay level={infusionLevelValue} overlayPlacement="top" />
 
       <FloatingTextQueue delta="infusionLevel" />

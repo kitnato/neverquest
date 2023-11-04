@@ -18,7 +18,7 @@ export function Ammunition() {
 
   return (
     <IconDisplay Icon={IconAmmunition} isAnimated tooltip="Ammunition">
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         <span>{formatNumber({ value: ammunitionValue })}</span>
 
         <FloatingTextQueue delta="ammunition" />

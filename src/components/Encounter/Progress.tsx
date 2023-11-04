@@ -32,14 +32,15 @@ export function Progress() {
       tooltip="Progress"
     >
       <Stack direction="horizontal">
-        <LabelledProgressBar
-          value={(progressValue / progressMaximumValue) * 100}
-          variant="dark"
-        >{`${formatNumber({ value: progressValue })}/${formatNumber({
-          value: progressMaximumValue,
-        })}`}</LabelledProgressBar>
+        <LabelledProgressBar value={(progressValue / progressMaximumValue) * 100} variant="dark">
+          <Stack direction="horizontal" gap={1}>
+            {`${formatNumber({ value: progressValue })}/${formatNumber({
+              value: progressMaximumValue,
+            })}`}
 
-        <FloatingTextQueue delta="progress" />
+            <FloatingTextQueue delta="progress" />
+          </Stack>
+        </LabelledProgressBar>
       </Stack>
     </IconDisplay>
   );

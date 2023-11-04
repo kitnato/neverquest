@@ -37,7 +37,7 @@ export function Protection() {
 
   return (
     <IconDisplay Icon={IconProtection} isAnimated tooltip="Total protection">
-      <Stack direction="horizontal">
+      <Stack direction="horizontal" gap={1}>
         <OverlayTrigger
           overlay={
             <Popover>

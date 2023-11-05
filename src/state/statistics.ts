@@ -30,14 +30,9 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 export const attackRate = withStateKey("attackRate", (key) =>
   selector({
-    get: ({ get }) => get(attributeStatistic("speed")) * (1 + get(attributePowerBonus("speed"))),
-    key,
-  }),
-);
-
-export const attackRateTotal = withStateKey("attackRateTotal", (key) =>
-  selector({
-    get: ({ get }) => get(weapon).rate * (1 - get(attackRate)),
+    get: ({ get }) =>
+      get(weapon).rate *
+      (1 - get(attributeStatistic("speed")) * (1 + get(attributePowerBonus("speed")))),
     key,
   }),
 );
@@ -60,20 +55,12 @@ export const bleedDamage = withStateKey("bleedDamage", (key) =>
 
       return Math.round(
         getDamagePerTick({
-          damage: Math.round(get(damageTotal)) * get(masteryStatistic("cruelty")),
+          damage: get(damage) * get(masteryStatistic("cruelty")),
           duration,
           ticks,
-        }),
+        }) * (get(isMonsterAiling("burning")) ? AILMENT_PENALTY.burning : 1),
       );
     },
-    key,
-  }),
-);
-
-export const bleedDamageTotal = withStateKey("bleedDamageTotal", (key) =>
-  selector({
-    get: ({ get }) =>
-      get(bleedDamage) * (get(isMonsterAiling("burning")) ? AILMENT_PENALTY.burning : 1),
     key,
   }),
 );
@@ -119,30 +106,22 @@ export const criticalRating = withStateKey("criticalRating", (key) =>
 
 export const criticalStrike = withStateKey("criticalStrike", (key) =>
   selector({
-    get: ({ get }) => Math.round(get(damageTotal) * get(criticalDamage)),
+    get: ({ get }) => Math.round(get(damage) * get(criticalDamage)),
     key,
   }),
 );
 
 export const damage = withStateKey("damage", (key) =>
   selector({
-    get: ({ get }) =>
-      Math.round(
-        get(attributeStatistic("strength")) *
-          (1 + get(attributePowerBonus("strength"))) *
-          (1 + get(questsBonus("damageBonus"))),
-      ),
-    key,
-  }),
-);
-
-export const damageTotal = withStateKey("damageTotal", (key) =>
-  selector({
     get: ({ get }) => {
       const { damage: weaponDamage, name } = get(weapon);
 
       return (
-        (get(damage) +
+        (Math.round(
+          get(attributeStatistic("strength")) *
+            (1 + get(attributePowerBonus("strength"))) *
+            (1 + get(questsBonus("damageBonus"))),
+        ) +
           weaponDamage +
           Object.values(get(totalElementalEffects).weapon).reduce(
             (aggregator, { damage }) => aggregator + damage,
@@ -160,10 +139,10 @@ export const damagePerSecond = withStateKey("damagePerSecond", (key) =>
   selector({
     get: ({ get }) =>
       getDamagePerRate({
-        damage: get(damageTotal),
+        damage: get(damage),
         damageModifier: get(criticalDamage),
         damageModifierChance: get(criticalChance),
-        rate: get(attackRateTotal),
+        rate: get(attackRate),
       }),
     key,
   }),

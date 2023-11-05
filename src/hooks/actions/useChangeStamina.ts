@@ -24,7 +24,7 @@ export function useChangeStamina() {
         const formattedValue = formatNumber({ value });
 
         const newStamina = get(stamina) + value;
-        const staminaMaximumTotalValue = get(staminaMaximumBlighted);
+        const staminaMaximumBlightedValue = get(staminaMaximumBlighted);
 
         set(
           deltas("stamina"),
@@ -42,8 +42,8 @@ export function useChangeStamina() {
           set(stamina, 0);
         }
 
-        if (newStamina >= staminaMaximumTotalValue) {
-          set(stamina, staminaMaximumTotalValue);
+        if (newStamina >= staminaMaximumBlightedValue) {
+          set(stamina, staminaMaximumBlightedValue);
           reset(regenerationDuration("stamina"));
         }
 

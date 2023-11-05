@@ -14,7 +14,7 @@ import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { bleed, bleedingDeltaLength } from "@neverquest/state/monster";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import { bleedChance, bleedDamage, bleedRating, damageTotal } from "@neverquest/state/statistics";
+import { bleedChance, bleedDamage, bleedRating, damage } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function BleedRating() {
@@ -23,7 +23,7 @@ export function BleedRating() {
   const bleedDamageValue = useRecoilValue(bleedDamage);
   const bleedingDeltaLengthValue = useRecoilValue(bleedingDeltaLength);
   const bleedRatingValue = useRecoilValue(bleedRating);
-  const damageTotalValue = useRecoilValue(damageTotal);
+  const damageValue = useRecoilValue(damage);
   const crueltyValue = useRecoilValue(masteryStatistic("cruelty"));
   const anatomyValue = useRecoilValue(isSkillAcquired("anatomy"));
   const { gearClass } = useRecoilValue(weapon);
@@ -99,7 +99,7 @@ export function BleedRating() {
                     <td className={CLASS_TABLE_CELL_ITALIC}>Bleed damage:</td>
 
                     <td>{`${formatNumber({
-                      value: damageTotalValue * crueltyValue,
+                      value: damageValue * crueltyValue,
                     })} (${formatNumber({
                       value: bleedDamageValue,
                     })} per tick)`}</td>

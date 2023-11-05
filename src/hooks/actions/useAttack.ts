@@ -28,11 +28,11 @@ import {
   monsterHealthMaximum,
 } from "@neverquest/state/monster";
 import {
-  attackRateTotal,
+  attackRate,
   bleedChance,
   criticalChance,
   criticalStrike,
-  damageTotal,
+  damage,
   executionThreshold,
   stunChance,
 } from "@neverquest/state/statistics";
@@ -72,7 +72,7 @@ export function useAttack() {
         set(isShowing("statistics"), true);
 
         if (get(isAttacking) && get(attackDuration) === 0) {
-          set(attackDuration, get(attackRateTotal));
+          set(attackDuration, get(attackRate));
         }
 
         if (canAttackOrParryValue && get(hasEnoughAmmunition)) {
@@ -140,7 +140,7 @@ export function useAttack() {
           }
 
           const inflictedDamage = -Math.round(
-            (hasInflictedCritical ? get(criticalStrike) : get(damageTotal)) *
+            (hasInflictedCritical ? get(criticalStrike) : get(damage)) *
               (get(isMonsterAiling("burning")) ? AILMENT_PENALTY.burning : 1),
           );
           const monsterDeltas: DeltaDisplay = [];

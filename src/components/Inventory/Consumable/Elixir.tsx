@@ -8,13 +8,13 @@ import { isStaminaAtMaximum, stamina, staminaMaximumBlighted } from "@neverquest
 export function Elixir({ id }: { id: string }) {
   const isStaminaAtMaximumValue = useRecoilValue(isStaminaAtMaximum);
   const staminaValue = useRecoilValue(stamina);
-  const staminaMaximumTotalValue = useRecoilValue(staminaMaximumBlighted);
+  const staminaMaximumBlightedValue = useRecoilValue(staminaMaximumBlighted);
   const setInventory = useSetRecoilState(inventory);
 
   const changeStamina = useChangeStamina();
 
   const recover = () => {
-    const staminaDifference = staminaMaximumTotalValue - staminaValue;
+    const staminaDifference = staminaMaximumBlightedValue - staminaValue;
 
     changeStamina({
       delta: [

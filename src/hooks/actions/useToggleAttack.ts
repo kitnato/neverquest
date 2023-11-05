@@ -16,7 +16,7 @@ import {
   monsterHealthMaximum,
 } from "@neverquest/state/monster";
 import { health, healthMaximum } from "@neverquest/state/reserves";
-import { attackRateTotal } from "@neverquest/state/statistics";
+import { attackRate } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -89,7 +89,7 @@ export function useToggleAttack() {
           }
         } else {
           set(isStageStarted, true);
-          set(attackDuration, get(attackRateTotal));
+          set(attackDuration, get(attackRate));
           set(monsterAttackDuration, get(monsterAttackRate));
         }
       },

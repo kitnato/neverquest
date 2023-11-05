@@ -35,7 +35,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
   const isAiling = useRecoilValue(isHealth ? isPoisoned : isBlighted);
   const reserveValue = useRecoilValue(isHealth ? health : stamina);
   const reserveMaximumValue = useRecoilValue(reserveMaximum);
-  const reserveMaximumTotalValue = useRecoilValue(
+  const reserveMaximumAilingValue = useRecoilValue(
     isHealth ? healthMaximumPoisoned : staminaMaximumBlighted,
   );
   const resetReserve = useResetRecoilState(isHealth ? health : stamina);
@@ -43,7 +43,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
 
   const deltaReserveMaximum = isHealth ? "healthMaximum" : "staminaMaximum";
   const penalty = Math.round(
-    ((reserveMaximumValue - reserveMaximumTotalValue) / reserveMaximumValue) * 100,
+    ((reserveMaximumValue - reserveMaximumAilingValue) / reserveMaximumValue) * 100,
   );
 
   useDeltaText({
@@ -53,11 +53,11 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
 
   // Catches attribute resets and poison/blight penalties.
   useEffect(() => {
-    if (reserveValue > reserveMaximumTotalValue) {
+    if (reserveValue > reserveMaximumAilingValue) {
       resetReserve();
       resetRegenerationDuration();
     }
-  }, [reserveMaximumTotalValue, reserveValue, resetRegenerationDuration, resetReserve]);
+  }, [reserveMaximumAilingValue, reserveValue, resetRegenerationDuration, resetReserve]);
 
   return (
     <LabelledProgressBar
@@ -65,12 +65,12 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
       sibling={
         isAiling ? <ProgressBar animated key={2} now={penalty} striped variant="secondary" /> : null
       }
-      value={(reserveValue / reserveMaximumTotalValue) * (100 - penalty)}
+      value={(reserveValue / reserveMaximumAilingValue) * (100 - penalty)}
       variant="dark"
     >
       <Stack direction="horizontal" gap={1}>
         {`${formatNumber({ value: reserveValue })}/${formatNumber({
-          value: reserveMaximumTotalValue,
+          value: reserveMaximumAilingValue,
         })}`}
 
         <FloatingTextQueue delta={deltaReserveMaximum} />

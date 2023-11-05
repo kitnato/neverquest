@@ -26,7 +26,7 @@ import {
 import { weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMonsterDead } from "@neverquest/state/monster";
-import { attackRateTotal } from "@neverquest/state/statistics";
+import { attackRate } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Attack() {
@@ -58,7 +58,7 @@ export function Attack() {
   useDeltaText({
     delta: "attackRate",
     format: "time",
-    state: attackRateTotal,
+    state: attackRate,
   });
 
   if (!isShowingAttackRate) {

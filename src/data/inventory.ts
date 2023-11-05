@@ -414,7 +414,7 @@ export const WEAPON_BASE: GearBase & {
     { maximum: 50, minimum: 45 },
   ],
   damage: [
-    { maximum: 12, minimum: 10 },
+    { maximum: 12, minimum: 11 },
     { maximum: 1000, minimum: 950 },
   ],
   price: { maximum: 9000, minimum: 1 },

@@ -22,7 +22,7 @@ export function useChangeHealth() {
       (deltaReserve: DeltaReserve) => {
         const get = getSnapshotGetter(snapshot);
 
-        const healthMaximumTotalValue = get(healthMaximumPoisoned);
+        const healthMaximumPoisonedValue = get(healthMaximumPoisoned);
         const value = deltaReserve.isRegeneration
           ? get(regenerationAmount("health"))
           : deltaReserve.value;
@@ -53,7 +53,7 @@ export function useChangeHealth() {
             set(isGameOver, true);
             set(isShowing("gameOver"), true);
           } else {
-            newHealth = healthMaximumTotalValue;
+            newHealth = healthMaximumPoisonedValue;
 
             set(deltas("health"), {
               color: "text-success",
@@ -64,8 +64,8 @@ export function useChangeHealth() {
           }
         }
 
-        if (newHealth >= healthMaximumTotalValue) {
-          newHealth = healthMaximumTotalValue;
+        if (newHealth >= healthMaximumPoisonedValue) {
+          newHealth = healthMaximumPoisonedValue;
           reset(regenerationDuration("health"));
         }
 

@@ -21,25 +21,25 @@ import { shield, weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { questsBonus } from "@neverquest/state/quests";
 import { stamina } from "@neverquest/state/reserves";
-import { damageTotal } from "@neverquest/state/statistics";
+import { damage } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Damage() {
   const attributePowerBonusStrength = useRecoilValue(attributePowerBonus("strength"));
   const attributeStatisticStrength = useRecoilValue(attributeStatistic("strength"));
-  const damageTotalValue = useRecoilValue(damageTotal);
+  const damageValue = useRecoilValue(damage);
   const isShowingDamageDetails = useRecoilValue(isShowing("damageDetails"));
   const isTraitAcquiredBrawler = useRecoilValue(isTraitAcquired("brawler"));
   const isTraitAcquiredBruiser = useRecoilValue(isTraitAcquired("bruiser"));
   const questsBonusDamage = useRecoilValue(questsBonus("damageBonus"));
   const isUnshielded = useRecoilValue(shield).name === SHIELD_NONE.name;
   const staminaValue = useRecoilValue(stamina);
-  const { damage, gems, name } = useRecoilValue(weapon);
+  const { damage: weaponDamage, gems, name } = useRecoilValue(weapon);
 
   useDeltaText({
     delta: "damage",
-    state: damageTotal,
+    state: damage,
   });
 
   return (
@@ -59,7 +59,7 @@ export function Damage() {
                       <Stack direction="horizontal" gap={1}>
                         <IconImage Icon={IconWeaponDamage} size="small" />
 
-                        {formatNumber({ value: damage })}
+                        {formatNumber({ value: weaponDamage })}
                       </Stack>
                     </td>
                   </tr>
@@ -143,7 +143,7 @@ export function Damage() {
           }
           trigger={isShowingDamageDetails ? ["hover", "focus"] : []}
         >
-          <span>{formatNumber({ value: damageTotalValue })}</span>
+          <span>{formatNumber({ value: damageValue })}</span>
         </OverlayTrigger>
 
         <FloatingTextQueue delta="damage" />

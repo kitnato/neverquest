@@ -25,7 +25,7 @@ import {
   monsterAilmentDuration,
   monsterAttackDuration,
   monsterAttackRate,
-  monsterDamageTotal,
+  monsterDamageAiling,
   monsterElement,
   poisonChance,
   poisonLength,
@@ -116,12 +116,12 @@ export function useDefend() {
         const thornsValue = get(thorns);
         const hasInflictedThorns = !hasBlocked && thornsValue > 0;
 
-        const monsterDamageTotalValue = get(monsterDamageTotal);
+        const monsterDamageAilingValue = get(monsterDamageAiling);
         const protectionValue = get(protection);
 
         const deltaMonsterHealth: DeltaDisplay = [];
         const deltaStamina: DeltaDisplay = [];
-        const totalDamage = protectionValue - monsterDamageTotalValue;
+        const totalDamage = protectionValue - monsterDamageAilingValue;
 
         let healthDamage = totalDamage < 0 ? totalDamage : 0;
         let monsterHealthDamage = 0;
@@ -131,7 +131,7 @@ export function useDefend() {
           if (get(canAttackOrParry)) {
             set(isShowing("monsterAilments"), true);
 
-            const parryReflected = -Math.round(monsterDamageTotalValue * get(parryDamage));
+            const parryReflected = -Math.round(monsterDamageAilingValue * get(parryDamage));
 
             healthDamage -= Math.round(healthDamage * get(parryAbsorption));
             monsterHealthDamage += parryReflected;

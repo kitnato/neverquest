@@ -3,12 +3,12 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterDamagePerSecond } from "@neverquest/components/Monster/MonsterDamagePerSecond";
 import IconDamage from "@neverquest/icons/damage.svg?react";
-import { monsterDamage, monsterDamageTotal } from "@neverquest/state/monster";
+import { monsterDamage, monsterDamageAiling } from "@neverquest/state/monster";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function MonsterDamage() {
   const monsterDamageValue = useRecoilValue(monsterDamage);
-  const monsterDamageTotalValue = useRecoilValue(monsterDamageTotal);
+  const monsterDamageAilingValue = useRecoilValue(monsterDamageAiling);
 
   return (
     <IconDisplay
@@ -16,8 +16,8 @@ export function MonsterDamage() {
       Icon={IconDamage}
       isAnimated
       tooltip="Monster damage"
-    >{`${formatNumber({ value: monsterDamageTotalValue })}${
-      monsterDamageValue === monsterDamageTotalValue ? "" : ` (${monsterDamageValue})`
+    >{`${formatNumber({ value: monsterDamageAilingValue })}${
+      monsterDamageValue === monsterDamageAilingValue ? "" : ` (${monsterDamageValue})`
     }`}</IconDisplay>
   );
 }

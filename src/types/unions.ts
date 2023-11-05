@@ -82,6 +82,7 @@ export type Delta =
   | "executionThreshold"
   | "finesseProgress"
   | "healthMaximum"
+  | "healthRegenerationAmount"
   | "healthRegenerationRate"
   | "infusionLevel"
   | "level"
@@ -99,6 +100,7 @@ export type Delta =
   | "stage"
   | "staggerRating"
   | "staminaMaximum"
+  | "staminaRegenerationAmount"
   | "staminaRegenerationRate"
   | "stunRating"
   | "thorns";
@@ -299,6 +301,7 @@ export type StateKey =
   | "canFit"
   | "canReceiveAilment"
   | "canReceiveAilments"
+  | "canUseJournal"
   | "completedQuestsCount"
   | "confirmationWarnings"
   | "criticalChance"
@@ -471,6 +474,8 @@ export const TRINKET_TYPES = [
 export type Trinket = (typeof TRINKET_TYPES)[number];
 
 export const TRIUMPH_TYPES = [
+  "decipheringJournal",
+  "settingName",
   "survivingNoGear",
   "survivingNoAttributes",
   "killingOneStrike",

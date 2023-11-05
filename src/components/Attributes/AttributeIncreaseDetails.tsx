@@ -35,8 +35,6 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
 
   const { increment, powerBonus } = ATTRIBUTES[attribute];
   const Icon = STATISTIC_ICON[attribute];
-  const formattedIncrement =
-    increment < 1 ? formatNumber({ format: "percentage", value: increment }) : increment;
   const operand = ["speed", "vigor"].includes(attribute) ? "-" : "+";
 
   return (
@@ -44,7 +42,11 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
       <Stack className="justify-content-center" direction="horizontal" gap={1}>
         <IconImage Icon={Icon} size="small" />
 
-        {`${operand}${formattedIncrement}`}
+        {`${operand}${
+          increment < 1
+            ? formatNumber({ decimals: 0, format: "percentage", value: increment })
+            : increment
+        }`}
       </Stack>
 
       {hasTomeOfPower && (

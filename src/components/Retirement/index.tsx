@@ -14,7 +14,7 @@ import { ItemsInherited } from "@neverquest/components/Retirement/ItemsInherited
 import { ProgressDiscount } from "@neverquest/components/Retirement/ProgressDiscount";
 import { ResetDetails } from "@neverquest/components/Retirement/ResetDetails";
 import { TraitSelection } from "@neverquest/components/Retirement/TraitSelection";
-import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useRetire } from "@neverquest/hooks/actions/useRetire";
 import IconRetire from "@neverquest/icons/retire.svg?react";
 
@@ -23,7 +23,7 @@ export function Retirement({
 }: {
   state: [boolean, Dispatch<SetStateAction<boolean>>];
 }) {
-  const generateMonster = useGenerateMonster();
+  const progressQuest = useProgressQuest();
   const retire = useRetire();
 
   const onHide = () => setIsShowing(false);
@@ -55,7 +55,8 @@ export function Retirement({
           onClick={() => {
             onHide();
             retire();
-            generateMonster();
+            progressQuest({ quest: "decipheringJournal" });
+            progressQuest({ quest: "retiring" });
           }}
           variant="outline-dark"
         >

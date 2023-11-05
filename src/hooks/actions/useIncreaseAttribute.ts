@@ -1,6 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import {
   areAttributesAffordable,
@@ -13,6 +14,7 @@ import type { Attribute } from "@neverquest/types/unions";
 import { getAttributePointCost, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useIncreaseAttribute() {
+  const progressQuest = useProgressQuest();
   const transactEssence = useTransactEssence();
 
   return useRecoilCallback(
@@ -32,6 +34,8 @@ export function useIncreaseAttribute() {
 
         set(isShowing("statistics"), true);
         set(attributeRank(attribute), (current) => current + 1);
+        progressQuest({ quest: "powerLevel" });
+        progressQuest({ quest: "powerLevelUltra" });
 
         transactEssence(-getAttributePointCost(get(level)));
       },

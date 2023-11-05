@@ -145,6 +145,11 @@ export const QUESTS: Record<
     progression: [1],
     title: "Destroyer",
   },
+  decipheringJournal: {
+    description: "Decipher the journal.",
+    progression: [1],
+    title: "Epiphany",
+  },
   deflecting: {
     description: "Deflect @ ailments.",
     progression: [3, 10, 25],
@@ -370,6 +375,11 @@ export const QUESTS: Record<
     description: "Sell an item.",
     progression: [1],
     title: "Hustler",
+  },
+  settingName: {
+    description: "Set a name.",
+    progression: [1],
+    title: "Humble beginnings",
   },
   shocking: {
     description: "Inflict shocking @ times.",

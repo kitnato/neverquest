@@ -45,7 +45,7 @@ export function QuestNotifications() {
             <Stack className="me-auto" direction="horizontal" gap={1}>
               <IconImage Icon={QUEST_CLASS_ICONS[questClass]} size="small" />
 
-              {`Achieved: ${title}`}
+              {title}
             </Stack>
           </ToastHeader>
 

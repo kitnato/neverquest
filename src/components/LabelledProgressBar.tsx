@@ -50,8 +50,8 @@ export function LabelledProgressBar({
 
   return (
     <div
-      className={`labelled-progress position-relative w-100${
-        disableTransitions ? " no-transitions" : ""
+      className={`progress-labelled position-relative w-100${
+        disableTransitions ? " transitions-none" : ""
       }`}
     >
       {isSizeNormal ? (

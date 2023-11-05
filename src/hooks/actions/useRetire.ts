@@ -26,6 +26,7 @@ import {
 import { encumbranceMaximum, hasKnapsack, inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMasteryUnlocked, masteryProgress, masteryRank } from "@neverquest/state/masteries";
+import { canUseJournal } from "@neverquest/state/quests";
 import { essence } from "@neverquest/state/resources";
 import { allowNSFW } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -98,9 +99,18 @@ export function useRetire() {
 
         set(inventory, (currentInventory) =>
           currentInventory.filter((currentItem) => {
-            extraEncumbrance += currentItem.weight;
+            const isJournal = currentItem.name === "journal";
+            const isInfusableItem = isInfusable(currentItem);
 
-            return currentItem.name === "journal" || isInfusable(currentItem);
+            if (isInfusableItem || isJournal) {
+              extraEncumbrance += currentItem.weight;
+            }
+
+            if (isJournal) {
+              set(canUseJournal, true);
+            }
+
+            return isInfusableItem || isJournal;
           }),
         );
 

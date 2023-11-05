@@ -29,9 +29,9 @@ import { isMonsterDead } from "@neverquest/state/monster";
 import { attackRate } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export function Attack() {
-  const speedPowerBonus = useRecoilValue(attributePowerBonus("speed"));
-  const speed = useRecoilValue(attributeStatistic("speed"));
+export function AttackRate() {
+  const attributePowerBonusSpeed = useRecoilValue(attributePowerBonus("speed"));
+  const attributeStatisticSpeed = useRecoilValue(attributeStatistic("speed"));
   const canAttackOrParryValue = useRecoilValue(canAttackOrParry);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isLootingValue = useRecoilValue(isLooting);
@@ -59,6 +59,7 @@ export function Attack() {
     delta: "attackRate",
     format: "time",
     state: attackRate,
+    stop: ({ current, previous }) => (previous ?? 0) - current < 10,
   });
 
   if (!isShowingAttackRate) {
@@ -102,10 +103,10 @@ export function Attack() {
                         {`-${formatNumber({
                           decimals: 0,
                           format: "percentage",
-                          value: speed,
+                          value: attributePowerBonusSpeed,
                         })}`}
 
-                        {speedPowerBonus > 0 && (
+                        {attributeStatisticSpeed > 0 && (
                           <>
                             <span>{LABEL_SEPARATOR}</span>
 
@@ -113,7 +114,7 @@ export function Attack() {
 
                             {`+${formatNumber({
                               format: "percentage",
-                              value: speedPowerBonus,
+                              value: attributeStatisticSpeed,
                             })}`}
                           </>
                         )}

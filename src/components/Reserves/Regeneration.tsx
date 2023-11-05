@@ -36,36 +36,48 @@ const RESERVE_CHANGE = {
 };
 
 export function Regeneration({ reserve }: { reserve: Reserve }) {
-  const isHealth = reserve === "health";
+  const attributeStatisticFortitudeState = attributeStatistic("fortitude");
+  const regenerateRateState = regenerationRate(reserve);
 
-  const fortitudePowerBonus = useRecoilValue(attributePowerBonus("fortitude"));
-  const vigorPowerBonus = useRecoilValue(attributePowerBonus("vigor"));
-  const fortitude = useRecoilValue(attributeStatistic("fortitude"));
-  const vigor = useRecoilValue(attributeStatistic("vigor"));
-  const isReserveAtMaximum = useRecoilValue(isHealth ? isHealthAtMaximum : isStaminaAtMaximum);
+  const attributePowerBonusFortitude = useRecoilValue(attributePowerBonus("fortitude"));
+  const attributePowerBonusVigor = useRecoilValue(attributePowerBonus("vigor"));
+  const attributeStatisticFortitude = useRecoilValue(attributeStatisticFortitudeState);
+  const attributeStatisticVigor = useRecoilValue(attributeStatistic("vigor"));
+  const isReserveAtMaximum = useRecoilValue(
+    reserve === "health" ? isHealthAtMaximum : isStaminaAtMaximum,
+  );
   const isRecoveringValue = useRecoilValue(isRecovering);
   const isRegeneratingValue = useRecoilValue(isRegenerating(reserve));
   const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve));
-  const regenerationRateValue = useRecoilValue(regenerationRate(reserve));
+  const regenerationRateValue = useRecoilValue(regenerateRateState);
   const calisthenicsValue = useRecoilValue(isSkillAcquired("calisthenics"));
 
-  const { baseRegenerationAmount, baseRegenerationRate, label, regenerationDelta } =
-    RESERVES[reserve];
+  const {
+    baseRegenerationAmount,
+    baseRegenerationRate,
+    label,
+    regenerationDeltaAmount,
+    regenerationDeltaRate,
+  } = RESERVES[reserve];
 
   const changeReserve = RESERVE_CHANGE[reserve]();
 
   useAnimate({
     delta: setRegenerationDuration,
-    onDelta: () => {
-      changeReserve({ isRegeneration: true });
-    },
+    onDelta: () => changeReserve({ isRegeneration: true }),
     stop: isRecoveringValue || isReserveAtMaximum,
   });
 
   useDeltaText({
-    delta: regenerationDelta,
+    delta: regenerationDeltaAmount,
+    state: attributeStatisticFortitudeState,
+  });
+
+  useDeltaText({
+    delta: regenerationDeltaRate,
     format: "time",
-    state: regenerationRate(reserve),
+    state: regenerateRateState,
+    stop: ({ current, previous }) => (previous ?? 0) - current < 10,
   });
 
   useEffect(() => {
@@ -105,9 +117,13 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      {`-${formatNumber({ decimals: 0, format: "percentage", value: vigor })}`}
+                      {`-${formatNumber({
+                        decimals: 0,
+                        format: "percentage",
+                        value: attributeStatisticVigor,
+                      })}`}
 
-                      {vigorPowerBonus > 0 && (
+                      {attributePowerBonusVigor > 0 && (
                         <>
                           <span>{LABEL_SEPARATOR}</span>
 
@@ -115,7 +131,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                           {`+${formatNumber({
                             format: "percentage",
-                            value: vigorPowerBonus,
+                            value: attributePowerBonusVigor,
                           })}`}
                         </>
                       )}
@@ -145,9 +161,9 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      {`+${fortitude}`}
+                      {`+${attributeStatisticFortitude}`}
 
-                      {vigorPowerBonus > 0 && (
+                      {attributePowerBonusFortitude > 0 && (
                         <>
                           <span>{LABEL_SEPARATOR}</span>
 
@@ -155,7 +171,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                           {`+${formatNumber({
                             format: "percentage",
-                            value: fortitudePowerBonus,
+                            value: attributePowerBonusFortitude,
                           })}`}
                         </>
                       )}
@@ -174,7 +190,9 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
         </span>
       </OverlayTrigger>
 
-      <FloatingTextQueue delta={isHealth ? "healthRegenerationRate" : "staminaRegenerationRate"} />
+      <FloatingTextQueue delta={regenerationDeltaAmount} />
+
+      <FloatingTextQueue delta={regenerationDeltaRate} />
     </Stack>
   );
 }

@@ -4,7 +4,7 @@ import { useSetRecoilState } from "recoil";
 
 import { Health } from "@neverquest/components/Reserves/Health";
 import { Stamina } from "@neverquest/components/Reserves/Stamina";
-import { Attack } from "@neverquest/components/Status/Attack";
+import { AttackRate } from "@neverquest/components/Status/AttackRate";
 import { Name } from "@neverquest/components/Status/Name";
 import { Recovery } from "@neverquest/components/Status/Recovery";
 import { statusElement } from "@neverquest/state/character";
@@ -33,7 +33,7 @@ export function Status() {
 
           <Stamina />
 
-          <Attack />
+          <AttackRate />
 
           <Recovery />
         </Stack>

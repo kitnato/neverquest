@@ -82,20 +82,8 @@ td.text-end > .hstack {
   box-shadow: none !important;
 }
 
-.mastery-display span {
+.mastery span {
   width: max-content;
-}
-
-.floating-text {
-  z-index: 100;
-
-  strong {
-    text-shadow:
-      -1px 1px 0 white,
-      1px 1px 0 white,
-      1px -1px 0 white,
-      -1px -1px 0 white;
-  }
 }
 
 .form-check {
@@ -127,8 +115,8 @@ td.text-end > .hstack {
   overflow-y: hidden;
 }
 
-.labelled-progress {
-  &.no-transitions .progress-bar {
+.progress-labelled {
+  &.transitions-none .progress-bar {
     transition: none;
   }
 
@@ -162,6 +150,10 @@ td.text-end > .hstack {
 }
 
 .table-details {
+  tr > td:nth-child(1) {
+    vertical-align: middle;
+  }
+
   tr > td:nth-child(2) {
     vertical-align: bottom;
   }
@@ -169,6 +161,18 @@ td.text-end > .hstack {
 
 .text-blue {
   color: $blue;
+}
+
+.text-floating {
+  z-index: 100;
+
+  strong {
+    text-shadow:
+      -1px 1px 0 white,
+      1px 1px 0 white,
+      1px -1px 0 white,
+      -1px -1px 0 white;
+  }
 }
 
 .text-orange {

@@ -46,7 +46,7 @@ export function FloatingTextQueue({ delta }: { delta: Delta }) {
   }, [deltaValue, resetDelta, setFloatingTextQueue]);
 
   return (
-    <div className="d-flex flex-nowrap floating-text pe-none position-relative">
+    <div className="d-flex flex-nowrap text-floating pe-none position-relative">
       {floatingTextQueue.map(({ delta, key }) => (
         <small className="position-absolute top-50 start-100 translate-middle-y" key={key}>
           {Array.isArray(delta) ? (

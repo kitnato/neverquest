@@ -84,7 +84,7 @@ export const questsBonus = withStateKey("questsBonus", (key) =>
     get:
       (parameter) =>
       ({ get }) =>
-        get(ownedItem("journal")) === null
+        !get(canUseJournal) || get(ownedItem("journal")) === null
           ? 0
           : QUEST_TYPES.reduce(
               (accumulator, currentQuest) =>
@@ -100,6 +100,14 @@ export const questsBonus = withStateKey("questsBonus", (key) =>
 );
 
 // ATOMS
+
+export const canUseJournal = withStateKey("canUseJournal", (key) =>
+  atom<boolean>({
+    default: false,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
 
 export const questNotifications = withStateKey("questNotifications", (key) =>
   atom<QuestData[]>({

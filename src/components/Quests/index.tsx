@@ -8,6 +8,7 @@ import IconConquest from "@neverquest/icons/conquest.svg?react";
 import IconRoutine from "@neverquest/icons/routine.svg?react";
 import IconTriumph from "@neverquest/icons/triumph.svg?react";
 import { isShowing } from "@neverquest/state/isShowing";
+import { canUseJournal } from "@neverquest/state/quests";
 import type { TabsData } from "@neverquest/types/props";
 import { QUEST_BONUS_TYPES } from "@neverquest/types/unions";
 
@@ -30,7 +31,16 @@ const TABS: TabsData = [
 ];
 
 export function Journal() {
+  const canUseJournalValue = useRecoilValue(canUseJournal);
   const isShowingQuestBonus = useRecoilValue(isShowing("questBonus"));
+
+  if (!canUseJournalValue) {
+    return (
+      <span className="fst-italic">
+        This tome is undecipherable. Perhaps the progeny can make better use of it.
+      </span>
+    );
+  }
 
   return (
     <Stack className="journal overflow-y-hidden" gap={3}>
@@ -51,8 +61,6 @@ export function Journal() {
       <TabContainer defaultActiveKey={TABS[0].label}>
         <Stack className="overflow-y-hidden" gap={1}>
           <QuestTabsNav tabs={TABS} />
-
-          <hr />
 
           <TabContent className="d-flex flex-column overflow-y-hidden">
             {TABS.map(({ Component, label }) => (

@@ -37,7 +37,7 @@ export const TRAITS: Record<
     Icon: IconBruiser,
   },
   colossus: {
-    description: "Two-handed weapons can be equipped alongside a shield.",
+    description: "A two-handed weapon can be equipped alongside a shield.",
     Icon: IconColossus,
   },
   executioner: {

@@ -98,7 +98,7 @@ export const CREW: Record<
       36: "You are always welcome here.",
       40: "A dark wanderer passed by and sold me a strange book ...",
       41: "A sea of monsters ... but is it endless?",
-      50: "I wouldn't blame you if you just wanted to retire. But to what?",
+      50: "Retirement? Pretty sure you're trapped here with us.",
       51: "Still you come back for more?",
       52: "There are tales of a mysterious creature that only the most fortunate find.",
       60: "Have you not seen everything by now?",

@@ -22,8 +22,11 @@ export function generate({
   category: Category;
   name: string;
 }) {
-  const canIncludeCreatureName =
-    ["artifact", "location"].includes(category) && Math.random() <= CREATURE_NAME_AFFIX_CHANCE;
+  const canHaveCreatureAffix =
+    prefixTags.length === 0 &&
+    suffixTags.length === 0 &&
+    ["artifact", "location"].includes(category) &&
+    Math.random() <= CREATURE_NAME_AFFIX_CHANCE;
   const filteredCreatureNamePrefixes: string[] = [];
 
   let prefix = "";
@@ -51,7 +54,7 @@ export function generate({
     }).map((current) => current.name);
 
     // Artifacts and locations can also have a creature name prefix.
-    if (canIncludeCreatureName) {
+    if (canHaveCreatureAffix) {
       filteredCreatureNamePrefixes.push(
         ...CREATURES.filter(({ isNSFW }) => (allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW)).map(
           (current) => {
@@ -92,7 +95,7 @@ export function generate({
     const filteredCreatureNameSuffixes = [];
 
     // Artifacts and locations can also have a creature name suffix, but only if the prefix isn't already one.
-    if (canIncludeCreatureName && !filteredCreatureNamePrefixes.includes(prefix)) {
+    if (canHaveCreatureAffix && !filteredCreatureNamePrefixes.includes(prefix)) {
       filteredCreatureNameSuffixes.push(
         ...CREATURES.filter(({ isNSFW }) => (allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW)).map(
           (current) => current.name,

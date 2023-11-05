@@ -1,10 +1,10 @@
 import { useRecoilCallback } from "recoil";
 
 import { ownedItem } from "@neverquest/state/items";
-import { questNotifications, questProgress, questStatuses, quests } from "@neverquest/state/quests";
+import { questNotifications, questProgress, questStatuses } from "@neverquest/state/quests";
 import type { QuestData } from "@neverquest/types";
 import type { Quest } from "@neverquest/types/unions";
-import { getSnapshotGetter } from "@neverquest/utilities/getters";
+import { getQuestsData, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useProgressQuest() {
   return useRecoilCallback(
@@ -18,7 +18,8 @@ export function useProgressQuest() {
 
         const questProgressState = questProgress(quest);
         const questStatusesState = questStatuses(quest);
-        const questsValue = get(quests(quest));
+
+        const quests = getQuestsData(quest);
 
         const newProgress = get(questProgressState) + amount;
 
@@ -28,14 +29,14 @@ export function useProgressQuest() {
 
         set(questStatusesState, (currentStatuses) =>
           currentStatuses.map((currentStatus, index) => {
-            const quest = questsValue[index];
+            const currentQuest = quests[index];
 
             if (
-              quest !== undefined &&
+              currentQuest !== undefined &&
               currentStatus === false &&
-              newProgress >= quest.progressionMaximum
+              newProgress >= currentQuest.progressionMaximum
             ) {
-              achievedQuests.push(quest);
+              achievedQuests.unshift(currentQuest);
 
               return true;
             }

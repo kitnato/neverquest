@@ -3,7 +3,7 @@ import { Stack, Toast, ToastBody, ToastContainer, ToastHeader } from "react-boot
 import { useRecoilValue, useResetRecoilState } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { QUEST_NOTIFICATION_DURATION } from "@neverquest/data/general";
+import { LABEL_UNKNOWN, QUEST_NOTIFICATION_DURATION } from "@neverquest/data/general";
 import { QUEST_CLASS_ICONS } from "@neverquest/data/quests";
 import { questNotifications } from "@neverquest/state/quests";
 import type { QuestData } from "@neverquest/types";
@@ -29,7 +29,7 @@ export function QuestNotifications() {
 
   return (
     <ToastContainer className="mb-4" position="bottom-center">
-      {questNotificationsQueue.map(({ description, questClass, title }, indexQueue) => (
+      {questNotificationsQueue.map(({ description, hidden, questClass, title }, indexQueue) => (
         <Toast
           autohide
           delay={QUEST_NOTIFICATION_DURATION}
@@ -49,7 +49,9 @@ export function QuestNotifications() {
             </Stack>
           </ToastHeader>
 
-          <ToastBody>{description}</ToastBody>
+          <ToastBody>
+            {hidden !== undefined ? description.replace(LABEL_UNKNOWN, hidden) : description}
+          </ToastBody>
         </Toast>
       ))}
     </ToastContainer>

@@ -4,18 +4,19 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
+import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { QUEST_CLASS_ICONS, QUEST_COMPLETION_BONUS } from "@neverquest/data/quests";
 import { useCompleteQuest } from "@neverquest/hooks/actions/useCompleteQuest";
 import IconDamage from "@neverquest/icons/damage.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
-import { questProgress } from "@neverquest/state/quests";
+import { questProgress, questStatuses } from "@neverquest/state/quests";
 import type { QuestData } from "@neverquest/types";
 import type { Quest, QuestBonus, QuestClass } from "@neverquest/types/unions";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function QuestDisplay({
-  activeQuest: { description, progressionMaximum, status, title },
+  activeQuest: { description, hidden, progressionIndex, progressionMaximum, title },
   quest,
   questClass,
 }: {
@@ -24,12 +25,13 @@ export function QuestDisplay({
   questClass: QuestClass;
 }) {
   const questProgressValue = useRecoilValue(questProgress(quest));
+  const questStatus = useRecoilValue(questStatuses(quest))[progressionIndex] ?? false;
 
   const completeQuest = useCompleteQuest();
 
   const cappedProgress = Math.min(questProgressValue, progressionMaximum);
   const choiceID = `quest-completion-${quest}-${progressionMaximum}`;
-  const hasCompletedQuest = typeof status === "string";
+  const hasCompletedQuest = typeof questStatus === "string";
 
   return (
     <Stack className={hasCompletedQuest ? "opacity-50" : undefined} direction="horizontal" gap={3}>
@@ -43,7 +45,11 @@ export function QuestDisplay({
       />
 
       <IconDisplay
-        description={description}
+        description={
+          hidden !== undefined && Boolean(questStatus)
+            ? description.replace(LABEL_UNKNOWN, hidden)
+            : description
+        }
         Icon={QUEST_CLASS_ICONS[questClass]}
         isFullWidth
         tooltip={capitalizeAll(questClass)}
@@ -62,7 +68,7 @@ export function QuestDisplay({
             })
           }
           type="radio"
-          value={status}
+          value={hasCompletedQuest ? questStatus : null}
         >
           {[
             { bonus: "healthBonus", Icon: IconHealth },

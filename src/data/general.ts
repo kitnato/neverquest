@@ -31,3 +31,12 @@ export const MILLISECONDS_IN_SECOND = 1000;
 export const QUEST_NOTIFICATION_DURATION = 5000;
 
 export const RETIREMENT_MINIMUM_LEVEL = 50;
+
+export const ROMAN_NUMERAL_MAXIMUM = 3999;
+
+export const ROMAN_NUMERALS = [
+  ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"], // 1-9
+  ["X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"], // 10-90
+  ["C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"], // 100-900
+  ["M", "MM", "MMM"], // 1000-3000
+] as const;

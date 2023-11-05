@@ -1,7 +1,5 @@
 import { atom, atomFamily, selectorFamily } from "recoil";
 
-import { ownedItem } from "./items";
-import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import {
   QUESTS,
   QUEST_COMPLETION_BONUS,
@@ -9,8 +7,8 @@ import {
   QUEST_TYPES_BY_CLASS,
 } from "@neverquest/data/quests";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { ownedItem } from "@neverquest/state/items";
 import type { QuestData } from "@neverquest/types";
-import { isConquest, isRoutine } from "@neverquest/types/type-guards";
 import {
   QUEST_BONUS_TYPES,
   type Quest,
@@ -18,6 +16,7 @@ import {
   type QuestClass,
   type QuestStatus,
 } from "@neverquest/types/unions";
+import { getQuestsData } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -27,20 +26,19 @@ export const activeQuests = withStateKey("activeQuests", (key) =>
     get:
       (parameter) =>
       ({ get }) => {
-        const questsValue = get(quests(parameter));
         const questProgressValue = get(questProgress(parameter));
 
-        const activeQuests: QuestData[] = [];
+        const quests = [];
 
-        for (const quest of questsValue) {
-          activeQuests.push(quest);
+        for (const quest of getQuestsData(parameter)) {
+          quests.push(quest);
 
           if (quest.progressionMaximum > questProgressValue) {
             break;
           }
         }
 
-        return activeQuests;
+        return quests;
       },
     key,
   }),
@@ -77,41 +75,6 @@ export const completedQuestsCount = withStateKey("completedQuestsCount", (key) =
             ).length,
           0,
         ),
-    key,
-  }),
-);
-
-export const quests = withStateKey("quests", (key) =>
-  selectorFamily<QuestData[], Quest>({
-    get:
-      (parameter) =>
-      ({ get }) => {
-        const questStatusesValue = get(questStatuses(parameter));
-
-        const { description, hidden, progression, title } = QUESTS[parameter];
-
-        return progression.map((current) => {
-          const index = progression.indexOf(current);
-          const status = questStatusesValue[index] ?? false;
-
-          return {
-            description: (hidden !== undefined && status !== false
-              ? description.replace(LABEL_UNKNOWN, hidden)
-              : description
-            ).replace("@", `${current}`),
-            progressionMaximum: current,
-            questClass: isConquest(parameter)
-              ? "conquest"
-              : isRoutine(parameter)
-              ? "routine"
-              : "triumph",
-            status,
-            title: `${title}${
-              progression.length > 1 ? [" I", " II", " III", " IV", " V", " VI"][index] : ""
-            }`,
-          };
-        });
-      },
     key,
   }),
 );

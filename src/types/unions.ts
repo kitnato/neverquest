@@ -168,6 +168,7 @@ export const ROUTINE_TYPES = [
   "equippingShield",
   "acquiringKnapsack",
   "knapsackExpanding",
+  "powerLevel",
   "purchasingUsable",
   "purchasingInfusable",
   "selling",
@@ -411,7 +412,6 @@ export type StateKey =
   | "protection"
   | "questNotifications"
   | "questProgress"
-  | "quests"
   | "questsBonus"
   | "questStatuses"
   | "range"
@@ -483,6 +483,7 @@ export const TRIUMPH_TYPES = [
   "essenceCount",
   "hiringBlacksmithFirst",
   "acquiringArcheryFirst",
+  "powerLevelUltra",
   "killingResDominus",
   "acquiringFamiliar",
   "killingResCogitans",

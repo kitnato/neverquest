@@ -5,6 +5,7 @@ import IconTriumph from "@neverquest/icons/triumph.svg?react";
 import type { SVGIcon } from "@neverquest/types/props";
 import {
   CONQUEST_TYPES,
+  CREW_TYPES,
   QUEST_CLASS_TYPES,
   type Quest,
   type QuestClass,
@@ -190,13 +191,13 @@ export const QUESTS: Record<
     title: "Air conditioning",
   },
   gems: {
-    description: "Acquire a gem.",
-    progression: [1],
+    description: "Acquire @ gem(s).",
+    progression: [1, 10, 25],
     title: "Shiny",
   },
   gemsOwned: {
     description: "Own a gem of each type.",
-    progression: [1],
+    progression: [3],
     title: "Collector",
   },
   gemsSocketing: {
@@ -206,7 +207,7 @@ export const QUESTS: Record<
   },
   gemsSocketingAll: {
     description: "Socket a gem in every equipped piece of gear.",
-    progression: [1],
+    progression: [3],
     title: "Trifecta",
   },
   gemsTransmuting: {
@@ -216,7 +217,7 @@ export const QUESTS: Record<
   },
   hiringAll: {
     description: "Hire all caravan crew.",
-    progression: [1],
+    progression: [CREW_TYPES.length],
     title: "Haven't died of dysentery",
   },
   hiringBlacksmithFirst: {
@@ -304,6 +305,16 @@ export const QUESTS: Record<
     description: "Use @ witch's concoctions.",
     progression: [3, 10, 25, 50],
     title: "Intestinal discomfort",
+  },
+  powerLevel: {
+    description: "Reach power level @.",
+    progression: [3, 10, 25, 50],
+    title: "One up",
+  },
+  powerLevelUltra: {
+    description: "Reach power level 100.",
+    progression: [100],
+    title: `It's over ${formatNumber({ value: 9000 })}!`,
   },
   protection: {
     description: "Have 500 protection.",

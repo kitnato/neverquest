@@ -1,14 +1,7 @@
 import type { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type {
-  Consumable,
-  Gem,
-  Grip,
-  QuestClass,
-  QuestStatus,
-  Trinket,
-} from "@neverquest/types/unions";
+import type { Consumable, Gem, Grip, QuestClass, Trinket } from "@neverquest/types/unions";
 
 export type AmmunitionPouchItem = TrinketItem & {
   current: number;
@@ -102,9 +95,10 @@ export type MerchantInventory = {
 
 export type QuestData = {
   description: string;
+  hidden?: string;
+  progressionIndex: number;
   progressionMaximum: number;
   questClass: QuestClass;
-  status: QuestStatus;
   title: string;
 };
 

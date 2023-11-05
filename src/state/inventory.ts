@@ -1,10 +1,20 @@
 import { atom, selector, selectorFamily } from "recoil";
 
-import { ENCUMBRANCE } from "@neverquest/data/inventory";
+import { ENCUMBRANCE_CAPACITY } from "@neverquest/data/inventory";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import type { InventoryItem } from "@neverquest/types";
-import { isArmor, isGear, isMelee, isRanged, isShield } from "@neverquest/types/type-guards";
+import type { InventoryItem, KnapsackItem } from "@neverquest/types";
+import {
+  isArmor,
+  isConsumableItem,
+  isGear,
+  isInfusableItem,
+  isMelee,
+  isRanged,
+  isShield,
+  isTrinketItem,
+} from "@neverquest/types/type-guards";
+import type { Consumable, Infusable, Trinket } from "@neverquest/types/unions";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -22,6 +32,31 @@ export const canFit = withStateKey("canFit", (key) =>
 export const encumbrance = withStateKey("encumbrance", (key) =>
   selector({
     get: ({ get }) => get(inventory).reduce((aggregator, { weight }) => aggregator + weight, 0),
+    key,
+  }),
+);
+
+export const encumbranceExtent = withStateKey("encumbranceExtent", (key) =>
+  selector({
+    get: ({ get }) =>
+      get(encumbrance) === get(encumbranceMaximum)
+        ? "encumbered"
+        : get(encumbrance) > get(encumbranceMaximum)
+        ? "over-encumbered"
+        : "none",
+    key,
+  }),
+);
+
+export const encumbranceMaximum = withStateKey("encumbranceMaximum", (key) =>
+  selector({
+    get: ({ get }) => {
+      const ownedItemKnapsack = get(ownedItem("knapsack"));
+
+      return ownedItemKnapsack === null
+        ? ENCUMBRANCE_CAPACITY
+        : (ownedItemKnapsack as KnapsackItem).capacity;
+    },
     key,
   }),
 );
@@ -57,30 +92,21 @@ export const equippableItems = withStateKey("equippableItems", (key) =>
   }),
 );
 
-export const isInventoryFull = withStateKey("isInventoryFull", (key) =>
-  selector({
-    get: ({ get }) => get(encumbrance) >= get(encumbranceMaximum),
+export const ownedItem = withStateKey("ownedItem", (key) =>
+  selectorFamily<InventoryItem | null, Consumable | Infusable | Trinket>({
+    get:
+      (parameter) =>
+      ({ get }) =>
+        get(inventory).find(
+          (current) =>
+            (isConsumableItem(current) || isInfusableItem(current) || isTrinketItem(current)) &&
+            current.name === parameter,
+        ) ?? null,
     key,
   }),
 );
 
 // ATOMS
-
-export const encumbranceMaximum = withStateKey("encumbranceMaximum", (key) =>
-  atom({
-    default: ENCUMBRANCE,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
-export const hasKnapsack = withStateKey("hasKnapsack", (key) =>
-  atom({
-    default: false,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
 
 export const inventory = withStateKey("inventory", (key) =>
   atom<InventoryItem[]>({

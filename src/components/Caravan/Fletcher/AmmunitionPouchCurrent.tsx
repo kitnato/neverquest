@@ -6,7 +6,8 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
-import { ammunition, ammunitionMaximum, ownedItem } from "@neverquest/state/items";
+import { ownedItem } from "@neverquest/state/inventory";
+import { ammunition, ammunitionMaximum } from "@neverquest/state/items";
 
 export function AmmunitionPouchCurrent() {
   const ammunitionValue = useRecoilValue(ammunition);

@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { ownedItem } from "@neverquest/state/items";
+import { ownedItem } from "@neverquest/state/inventory";
 import {
   canUseJournal,
   questNotifications,

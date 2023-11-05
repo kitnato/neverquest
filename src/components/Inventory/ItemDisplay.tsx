@@ -16,11 +16,11 @@ import type { InventoryItem } from "@neverquest/types";
 import type { IconImageDOMProps } from "@neverquest/types/props";
 import {
   isArmor,
-  isConsumable,
-  isInfusable,
+  isConsumableItem,
+  isInfusableItem,
   isMelee,
   isShield,
-  isTrinket,
+  isTrinketItem,
   isWeapon,
 } from "@neverquest/types/type-guards";
 
@@ -46,7 +46,7 @@ export function ItemDisplay({
     );
   }
 
-  if (isConsumable(item)) {
+  if (isConsumableItem(item)) {
     return (
       <IconDisplay
         description={description}
@@ -59,7 +59,7 @@ export function ItemDisplay({
     );
   }
 
-  if (isInfusable(item)) {
+  if (isInfusableItem(item)) {
     return (
       <IconDisplay
         description={description}
@@ -85,7 +85,7 @@ export function ItemDisplay({
     );
   }
 
-  if (isTrinket(item)) {
+  if (isTrinketItem(item)) {
     return (
       <IconDisplay
         description={description}

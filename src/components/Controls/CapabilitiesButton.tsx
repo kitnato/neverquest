@@ -36,7 +36,7 @@ export function CapabilitiesButton() {
   const isAttackingValue = useRecoilValue(isAttacking);
   const isGameOverValue = useRecoilValue(isGameOver);
   const isStageStartedValue = useRecoilValue(isStageStarted);
-  const isShowingCapabilities = useRecoilValue(isShowing("capabilities"));
+  const isShowingAttributes = useRecoilValue(isShowing("attributes"));
   const isShowingSkills = useRecoilValue(isShowing("skills"));
   const isShowingTraits = useRecoilValue(isShowing("traits"));
 
@@ -71,7 +71,7 @@ export function CapabilitiesButton() {
     tooltip = [...tooltip, "traits"];
   }
 
-  if (!isShowingCapabilities) {
+  if (!isShowingAttributes && !isShowingSkills && !isShowingTraits) {
     return null;
   }
 

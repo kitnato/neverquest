@@ -1,11 +1,9 @@
 import { useRecoilCallback } from "recoil";
 
-import { ARMOR_NONE, KNAPSACK_SIZE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
+import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import {
   canFit,
-  encumbranceMaximum,
-  hasKnapsack,
   inventory,
   itemsAcquired,
   notifyOverEncumbrance,
@@ -21,7 +19,7 @@ import {
   isMelee,
   isRanged,
   isShield,
-  isTrinket,
+  isTrinketItem,
 } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -37,16 +35,13 @@ export function useAcquireItem() {
           return "noFit";
         }
 
-        if (isTrinket(item) && item.name === "knapsack") {
-          set(encumbranceMaximum, (current) => current + KNAPSACK_SIZE);
-          set(hasKnapsack, true);
+        if (isTrinketItem(item) && item.name === "knapsack") {
           set(isShowing("weight"), true);
-
-          return "success";
+        } else {
+          set(itemsAcquired, (current) => [...current, item]);
         }
 
         set(inventory, (current) => current.concat(item));
-        set(itemsAcquired, (current) => [...current, item]);
 
         const isShieldUnequipped = get(shield).name === SHIELD_NONE.name;
         const weaponValue = get(weapon);

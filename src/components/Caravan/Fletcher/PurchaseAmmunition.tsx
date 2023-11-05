@@ -23,8 +23,8 @@ import {
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import IconEssence from "@neverquest/icons/essence.svg?react";
-import { inventory } from "@neverquest/state/inventory";
-import { ammunition, ammunitionMaximum, ownedItem } from "@neverquest/state/items";
+import { inventory, ownedItem } from "@neverquest/state/inventory";
+import { ammunition, ammunitionMaximum } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import type { AmmunitionPouchItem } from "@neverquest/types";
 import { formatNumber } from "@neverquest/utilities/formatters";

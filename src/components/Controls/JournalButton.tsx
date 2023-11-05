@@ -10,7 +10,7 @@ import IconAttention from "@neverquest/icons/attention.svg?react";
 import IconJournal from "@neverquest/icons/journal.svg?react";
 import { isAttacking } from "@neverquest/state/character";
 import { isStageStarted } from "@neverquest/state/encounter";
-import { ownedItem } from "@neverquest/state/items";
+import { ownedItem } from "@neverquest/state/inventory";
 import { canCompleteQuests } from "@neverquest/state/quests";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 

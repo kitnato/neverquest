@@ -1,13 +1,13 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { INFUSION_DELTA, INFUSION_DURATION } from "@neverquest/data/general";
-import { INFUSABLES } from "@neverquest/data/inventory";
+import { INFUSABLES, INHERITABLE_ITEMS } from "@neverquest/data/inventory";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { inventory } from "@neverquest/state/inventory";
+import { ownedItem } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
-import type { AmmunitionPouchItem, InventoryItem } from "@neverquest/types";
-import { isConsumable, isInfusable, isTrinket } from "@neverquest/types/type-guards";
-import type { Consumable, Infusable, Trinket } from "@neverquest/types/unions";
+import type { AmmunitionPouchItem } from "@neverquest/types";
+import { isInfusableItem } from "@neverquest/types/type-guards";
+import type { Infusable } from "@neverquest/types/unions";
 import {
   getFromRange,
   getGrowthLogarithmic,
@@ -48,7 +48,7 @@ export const essenceBonus = withStateKey("essenceBonus", (key) =>
     get: ({ get }) => {
       const ownedMonkeyPaw = get(ownedItem("monkey paw"));
 
-      if (ownedMonkeyPaw === null || !isInfusable(ownedMonkeyPaw)) {
+      if (ownedMonkeyPaw === null || !isInfusableItem(ownedMonkeyPaw)) {
         return 0;
       }
 
@@ -71,7 +71,7 @@ export const infusionLevel = withStateKey("infusionLevel", (key) =>
       ({ get }) => {
         const infusable = get(ownedItem(parameter));
 
-        if (infusable === null || !isInfusable(infusable)) {
+        if (infusable === null || !isInfusableItem(infusable)) {
           return 0;
         }
 
@@ -88,7 +88,7 @@ export const infusionMaximum = withStateKey("infusionMaximum", (key) =>
       ({ get }) => {
         const infusable = get(ownedItem(parameter));
 
-        if (infusable === null || !isInfusable(infusable)) {
+        if (infusable === null || !isInfusableItem(infusable)) {
           return 0;
         }
 
@@ -111,16 +111,12 @@ export const infusionStep = withStateKey("infusionStep", (key) =>
   }),
 );
 
-export const ownedItem = withStateKey("ownedItem", (key) =>
-  selectorFamily<InventoryItem | null, Consumable | Infusable | Trinket>({
-    get:
-      (parameter) =>
-      ({ get }) =>
-        get(inventory).find(
-          (current) =>
-            (isConsumable(current) || isInfusable(current) || isTrinket(current)) &&
-            current.name === parameter,
-        ) ?? null,
+export const ownsInheritableItems = withStateKey("ownsInheritableItems", (key) =>
+  selector({
+    get: ({ get }) =>
+      Object.fromEntries(
+        INHERITABLE_ITEMS.map((current) => [current, Boolean(get(ownedItem(current)))]),
+      ),
     key,
   }),
 );
@@ -130,7 +126,7 @@ export const powerBonusBoost = withStateKey("powerBonusBoost", (key) =>
     get: ({ get }) => {
       const ownedTomeOfPower = get(ownedItem("tome of power"));
 
-      if (ownedTomeOfPower === null || !isInfusable(ownedTomeOfPower)) {
+      if (ownedTomeOfPower === null || !isInfusableItem(ownedTomeOfPower)) {
         return 0;
       }
 

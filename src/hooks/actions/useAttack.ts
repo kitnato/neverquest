@@ -14,9 +14,8 @@ import {
 } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/gear";
-import { inventory } from "@neverquest/state/inventory";
+import { inventory, ownedItem } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { ownedItem } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
   bleed,

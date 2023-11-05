@@ -36,19 +36,21 @@ import type {
   GearBase,
   GeneratorRange,
   InfusableItem,
+  KnapsackItem,
   Melee,
   Shield,
   TrinketItem,
 } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type {
-  Consumable,
-  Elemental,
-  Gem,
-  Infusable,
-  MonsterAilmentElemental,
-  Trinket,
-  WeaponAbility,
+import {
+  type Consumable,
+  type Elemental,
+  type Gem,
+  INFUSABLE_TYPES,
+  type Infusable,
+  type MonsterAilmentElemental,
+  type Trinket,
+  type WeaponAbility,
 } from "@neverquest/types/unions";
 
 export const AMMUNITION_CAPACITY = 100;
@@ -197,9 +199,16 @@ export const ELEMENTALS: Record<
   },
 };
 
-export const ENCUMBRANCE = 6;
+export const ENCUMBRANCE_CAPACITY = 6;
 
-export const KNAPSACK_SIZE = 8;
+export const INHERITABLE_ITEMS = [
+  "knapsack",
+  "journal",
+  "antique coin",
+  ...INFUSABLE_TYPES,
+] as const;
+
+export const KNAPSACK_CAPACITY = 12;
 
 export const GEM_BASE = {
   price: 10,
@@ -337,71 +346,74 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
 };
 
-export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: AmmunitionPouchItem | TrinketItem }> =
-  {
-    "ammunition pouch": {
-      Icon: IconAmmunitionPouch,
-      item: {
-        current: 0,
-        description: "Store ammunition for ranged weapons.",
-        id: nanoid(),
-        maximum: AMMUNITION_CAPACITY,
-        name: "ammunition pouch",
-        price: 250,
-        weight: 6,
-      },
+export const TRINKETS: Record<
+  Trinket,
+  { Icon: SVGIcon; item: AmmunitionPouchItem | KnapsackItem | TrinketItem }
+> = {
+  "ammunition pouch": {
+    Icon: IconAmmunitionPouch,
+    item: {
+      current: 0,
+      description: "Store ammunition for ranged weapons.",
+      id: nanoid(),
+      maximum: AMMUNITION_CAPACITY,
+      name: "ammunition pouch",
+      price: 250,
+      weight: 6,
     },
-    "antique coin": {
-      Icon: IconAntiqueCoin,
-      item: {
-        description: "The wielder is bestowed with extreme fortune.",
-        id: nanoid(),
-        name: "antique coin",
-        price: 1000,
-        weight: 2,
-      },
+  },
+  "antique coin": {
+    Icon: IconAntiqueCoin,
+    item: {
+      description: "The wielder is bestowed with extreme fortune.",
+      id: nanoid(),
+      name: "antique coin",
+      price: 1000,
+      weight: 2,
     },
-    compass: {
-      Icon: IconCompass,
-      item: {
-        description: "Navigate the wilderness to hunt in previous locations.",
-        id: nanoid(),
-        name: "compass",
-        price: 50,
-        weight: 2,
-      },
+  },
+  compass: {
+    Icon: IconCompass,
+    item: {
+      description: "Navigate the wilderness to hunt in previous locations.",
+      id: nanoid(),
+      name: "compass",
+      price: 50,
+      weight: 2,
     },
-    hearthstone: {
-      Icon: IconStone,
-      item: {
-        description: "Travel back to the caravan even if there are still lurking monsters.",
-        id: nanoid(),
-        name: "hearthstone",
-        price: 20,
-        weight: 2,
-      },
+  },
+  hearthstone: {
+    Icon: IconStone,
+    item: {
+      description: "Travel back to the caravan even if there are still lurking monsters.",
+      id: nanoid(),
+      name: "hearthstone",
+      price: 20,
+      weight: 2,
     },
-    journal: {
-      Icon: IconJournal,
-      item: {
-        description: "A compendium of quests.",
-        id: nanoid(),
-        name: "journal",
-        price: 500,
-        weight: 5,
-      },
+  },
+  journal: {
+    Icon: IconJournal,
+    item: {
+      description: "A compendium of quests.",
+      id: nanoid(),
+      name: "journal",
+      price: 500,
+      weight: 5,
     },
-    knapsack: {
-      Icon: IconKnapsack,
-      item: {
-        description: "Carry more items and manage gear.",
-        id: nanoid(),
-        name: "knapsack",
-        price: 10,
-        weight: 0,
-      },
+  },
+  knapsack: {
+    Icon: IconKnapsack,
+    item: {
+      capacity: KNAPSACK_CAPACITY,
+      description: "Carry more items and manage gear.",
+      id: nanoid(),
+      name: "knapsack",
+      price: 10,
+      weight: 0,
     },
-  };
+  },
+};
 
 export const WEAPON_BASE: GearBase & {
   ammunitionCost: [GeneratorRange, GeneratorRange];

@@ -4,36 +4,42 @@ import { useRecoilValue } from "recoil";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { Infusable } from "@neverquest/components/Inventory/Usable/Infusable";
 import { LABEL_NONE } from "@neverquest/data/general";
-import { TRINKETS } from "@neverquest/data/inventory";
-import { hasKnapsack, inventory } from "@neverquest/state/inventory";
-import { ownedItem } from "@neverquest/state/items";
-import type { InfusableItem } from "@neverquest/types";
-import { isInfusable } from "@neverquest/types/type-guards";
+import { INFUSABLES, TRINKETS } from "@neverquest/data/inventory";
+import { ownsInheritableItems } from "@neverquest/state/items";
+import { isInfusable, isTrinket } from "@neverquest/types/type-guards";
 
 export function ItemsInherited() {
-  const hasKnapsackValue = useRecoilValue(hasKnapsack);
-  const inventoryValue = useRecoilValue(inventory);
-  const ownedItemJournal = useRecoilValue(ownedItem("journal"));
-
-  const infusables = inventoryValue.filter((current) => isInfusable(current));
+  const ownsInheritableItemsValue = useRecoilValue(ownsInheritableItems);
 
   return (
     <Stack gap={3}>
       <h6>Items inherited</h6>
 
-      {infusables.length === 0 && !hasKnapsackValue && ownedItemJournal === null && (
+      {Object.values(ownsInheritableItemsValue).every((current) => current === false) && (
         <span className="fst-italic">{LABEL_NONE}</span>
       )}
 
-      {hasKnapsackValue && <ItemDisplay item={TRINKETS.knapsack.item} overlayPlacement="right" />}
+      {Object.entries(ownsInheritableItemsValue).map(([key, current]) => {
+        if (current === false) {
+          return null;
+        }
 
-      {ownedItemJournal !== null && (
-        <ItemDisplay item={TRINKETS.journal.item} overlayPlacement="right" />
-      )}
+        if (isTrinket(key)) {
+          return (
+            <ItemDisplay
+              item={TRINKETS[key].item}
+              key={TRINKETS[key].item.id}
+              overlayPlacement="right"
+            />
+          );
+        }
 
-      {infusables.map((current) => (
-        <Infusable item={current as InfusableItem} key={current.id} />
-      ))}
+        if (isInfusable(key)) {
+          return <Infusable item={INFUSABLES[key].item} key={INFUSABLES[key].item.id} />;
+        }
+
+        return null;
+      })}
     </Stack>
   );
 }

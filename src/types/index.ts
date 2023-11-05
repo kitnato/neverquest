@@ -5,7 +5,6 @@ import type { Consumable, Gem, Grip, QuestClass, Trinket } from "@neverquest/typ
 
 export type AmmunitionPouchItem = TrinketItem & {
   current: number;
-  description: string;
   maximum: number;
   name: "ammunition pouch";
 };
@@ -82,6 +81,10 @@ type ItemBase = {
   id: string;
   price: number;
   weight: number;
+};
+export type KnapsackItem = TrinketItem & {
+  capacity: number;
+  name: "knapsack";
 };
 
 export type Melee = WeaponBase & {

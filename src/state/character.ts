@@ -3,7 +3,7 @@ import { atom, selector } from "recoil";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { armor, shield, weapon } from "@neverquest/state/gear";
-import { ownedItem } from "@neverquest/state/items";
+import { ownedItem } from "@neverquest/state/inventory";
 import { stamina } from "@neverquest/state/reserves";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import type { AmmunitionPouchItem } from "@neverquest/types";

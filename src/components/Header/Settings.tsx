@@ -16,7 +16,7 @@ import { SettingsSwitch } from "@neverquest/components/Header/SettingsSwitch";
 import { ShowEverything } from "@neverquest/components/Header/ShowEverything";
 import { IconImage } from "@neverquest/components/IconImage";
 import IconSettings from "@neverquest/icons/settings.svg?react";
-import { hasKnapsack } from "@neverquest/state/inventory";
+import { ownedItem } from "@neverquest/state/inventory";
 import {
   allowNSFW,
   autoEquip,
@@ -28,7 +28,7 @@ import {
 } from "@neverquest/state/settings";
 
 export function Settings() {
-  const hasKnapsackValue = useRecoilValue(hasKnapsack);
+  const ownedItemKnapsack = useRecoilValue(ownedItem("knapsack"));
 
   const [isShowing, setIsShowing] = useState(false);
 
@@ -56,7 +56,7 @@ export function Settings() {
               <SettingsSwitch label="Low-health warning" state={lowHealthWarning} />
 
               <SettingsSwitch
-                isDisabled={!hasKnapsackValue}
+                isDisabled={ownedItemKnapsack === null}
                 label="Auto-equip new gear"
                 state={autoEquip}
               />

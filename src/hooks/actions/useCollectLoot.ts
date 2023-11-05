@@ -21,7 +21,7 @@ export function useCollectLoot() {
 
         transactEssence(get(essenceLoot));
 
-        set(isShowing("capabilities"), true);
+        set(isShowing("attributes"), true);
 
         if (itemsLootValue.length > 0) {
           const acquiredItemIDs = itemsLootValue.map((current) =>

@@ -19,10 +19,12 @@ import {
   type Conquest,
   GEM_TYPES,
   INFUSABLE_TYPES,
+  type Infusable,
   ROUTINE_TYPES,
   type Routine,
   TRINKET_TYPES,
   TRIUMPH_TYPES,
+  type Trinket,
   type Triumph,
 } from "@neverquest/types/unions";
 
@@ -34,7 +36,7 @@ export function isConquest(thing: string): thing is Conquest {
   return CONQUEST_TYPES.some((current) => current === thing);
 }
 
-export function isConsumable(thing: unknown): thing is ConsumableItem {
+export function isConsumableItem(thing: unknown): thing is ConsumableItem {
   return isObject(thing) && CONSUMABLE_TYPES.some((current) => current === thing.name);
 }
 
@@ -54,7 +56,11 @@ export function isGeneratorRanges(thing: unknown): thing is [GeneratorRange, Gen
   return Array.isArray(thing) && isGeneratorRange(thing[0]) && isGeneratorRange(thing[1]);
 }
 
-export function isInfusable(thing: unknown): thing is InfusableItem {
+export function isInfusable(thing: string): thing is Infusable {
+  return INFUSABLE_TYPES.some((current) => current === thing);
+}
+
+export function isInfusableItem(thing: unknown): thing is InfusableItem {
   return isObject(thing) && INFUSABLE_TYPES.some((current) => current === thing.name);
 }
 
@@ -79,10 +85,14 @@ export function isShield(thing: unknown): thing is Shield {
 }
 
 export function isStackable(thing: unknown): thing is StackableItem {
-  return isConsumable(thing) || isGem(thing);
+  return isConsumableItem(thing) || isGem(thing);
 }
 
-export function isTrinket(thing: unknown): thing is TrinketItem {
+export function isTrinket(thing: string): thing is Trinket {
+  return TRINKET_TYPES.some((current) => current === thing);
+}
+
+export function isTrinketItem(thing: unknown): thing is TrinketItem {
   return isObject(thing) && TRINKET_TYPES.some((current) => current === thing.name);
 }
 
@@ -91,7 +101,7 @@ export function isTriumph(thing: string): thing is Triumph {
 }
 
 export function isUsable(thing: unknown): thing is UsableItem {
-  return isInfusable(thing) || isTrinket(thing);
+  return isInfusableItem(thing) || isTrinketItem(thing);
 }
 
 export function isWeapon(thing: unknown): thing is Weapon {

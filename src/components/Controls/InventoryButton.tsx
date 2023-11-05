@@ -11,22 +11,22 @@ import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconInventory from "@neverquest/icons/knapsack.svg?react";
 import { isAttacking, isGameOver } from "@neverquest/state/character";
 import {
-  hasKnapsack,
-  isInventoryFull,
+  encumbranceExtent,
   isInventoryOpen,
   notifyOverEncumbrance,
+  ownedItem,
 } from "@neverquest/state/inventory";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 import { animateElement } from "@neverquest/utilities/helpers";
 
 export function InventoryButton() {
+  const encumbranceExtentValue = useRecoilValue(encumbranceExtent);
   const [isInventoryOpenValue, setIsInventoryOpen] = useRecoilState(isInventoryOpen);
-  const hasKnapsackValue = useRecoilValue(hasKnapsack);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isGameOverValue = useRecoilValue(isGameOver);
-  const isInventoryFullValue = useRecoilValue(isInventoryFull);
   const notifyOverEncumbranceValue = useRecoilValue(notifyOverEncumbrance);
   const resetNotifyEncumbranceValue = useResetRecoilState(notifyOverEncumbrance);
+  const ownedItemKnapsack = useRecoilValue(ownedItem("knapsack"));
 
   const badgeElement = useRef(null);
 
@@ -40,7 +40,7 @@ export function InventoryButton() {
     });
   }, [badgeElement, resetNotifyEncumbranceValue]);
 
-  if (!hasKnapsackValue) {
+  if (ownedItemKnapsack === null) {
     return null;
   }
 
@@ -55,14 +55,14 @@ export function InventoryButton() {
           >
             <IconImage Icon={IconInventory} />
 
-            {isInventoryFullValue ||
-              (notifyOverEncumbranceValue && (
-                <span ref={badgeElement}>
-                  <IconBadge alignToButton>
-                    <IconImage Icon={IconEncumbrance} size="small" />
-                  </IconBadge>
-                </span>
-              ))}
+            {(encumbranceExtentValue !== "none" || notifyOverEncumbranceValue) && (
+              <span ref={badgeElement}>
+                <IconBadge alignToButton>
+                  <IconImage Icon={IconEncumbrance} size="small" />
+                </IconBadge>
+              </span>
+            )}
+
             <ItemAcquisition />
           </Button>
         </span>

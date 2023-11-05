@@ -213,8 +213,8 @@ export const SHOWING_TYPES = [
   "armor",
   "attackRate",
   "attackRateDetails",
+  "attributes",
   "blockChance",
-  "capabilities",
   "crewHiring",
   "criticalRating",
   "damageDetails",
@@ -316,6 +316,7 @@ export type StateKey =
   | "dodgeChance"
   | "elementalEffects"
   | "encumbrance"
+  | "encumbranceExtent"
   | "encumbranceMaximum"
   | "equippableItems"
   | "essence"
@@ -325,7 +326,6 @@ export type StateKey =
   | "fletcherInventory"
   | "floatingTextQueues"
   | "hasEnoughAmmunition"
-  | "hasKnapsack"
   | "hasLooted"
   | "hasMonsterClosed"
   | "health"
@@ -349,7 +349,6 @@ export type StateKey =
   | "isHealthLow"
   | "isImmortal"
   | "isInfusionAtMaximum"
-  | "isInventoryFull"
   | "isInventoryOpen"
   | "isLootAvailable"
   | "isLooting"
@@ -397,6 +396,7 @@ export type StateKey =
   | "nextAttributePoint"
   | "notifyOverEncumbrance"
   | "ownedItem"
+  | "ownsInheritableItems"
   | "parryAbsorption"
   | "parryChance"
   | "parryDamage"

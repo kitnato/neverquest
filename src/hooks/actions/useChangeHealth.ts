@@ -2,9 +2,8 @@ import { useRecoilCallback } from "recoil";
 
 import { isGameOver } from "@neverquest/state/character";
 import { deltas } from "@neverquest/state/deltas";
-import { inventory } from "@neverquest/state/inventory";
+import { inventory, ownedItem } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { ownedItem } from "@neverquest/state/items";
 import {
   health,
   healthMaximumPoisoned,

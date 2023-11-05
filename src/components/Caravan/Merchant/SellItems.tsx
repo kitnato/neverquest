@@ -8,7 +8,7 @@ import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { inventory } from "@neverquest/state/inventory";
 import {
   isArmor,
-  isConsumable,
+  isConsumableItem,
   isGear,
   isGem,
   isShield,
@@ -80,7 +80,7 @@ export function SellItems() {
           {[
             ...stackItems(
               storedItems
-                .filter(isConsumable)
+                .filter(isConsumableItem)
                 .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
             ),
             ...stackItems(

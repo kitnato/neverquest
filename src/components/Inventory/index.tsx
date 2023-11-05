@@ -18,12 +18,12 @@ import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear
 import { inventory } from "@neverquest/state/inventory";
 import {
   isArmor,
-  isConsumable,
+  isConsumableItem,
   isGear,
   isGem,
-  isInfusable,
+  isInfusableItem,
   isShield,
-  isTrinket,
+  isTrinketItem,
   isWeapon,
 } from "@neverquest/types/type-guards";
 import { stackItems } from "@neverquest/utilities/helpers";
@@ -73,10 +73,14 @@ export function Inventory() {
         <StoredGear />
 
         {storedItems
-          .filter(isTrinket)
+          .filter(isTrinketItem)
           .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
           .map((current) => {
             const { id, name } = current;
+
+            if (name === "knapsack") {
+              return null;
+            }
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
@@ -102,7 +106,7 @@ export function Inventory() {
           })}
 
         {storedItems
-          .filter(isInfusable)
+          .filter(isInfusableItem)
           .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
           .map((current) => (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.id}>
@@ -115,7 +119,7 @@ export function Inventory() {
         {[
           ...stackItems(
             storedItems
-              .filter(isConsumable)
+              .filter(isConsumableItem)
               .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
           ),
           ...stackItems(

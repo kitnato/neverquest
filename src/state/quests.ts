@@ -7,7 +7,7 @@ import {
   QUEST_TYPES_BY_CLASS,
 } from "@neverquest/data/quests";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { ownedItem } from "@neverquest/state/items";
+import { ownedItem } from "@neverquest/state/inventory";
 import type { QuestData } from "@neverquest/types";
 import {
   QUEST_BONUS_TYPES,

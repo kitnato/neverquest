@@ -2,16 +2,15 @@ import { useRecoilCallback } from "recoil";
 
 import { INFUSABLE_LEVEL_MAXIMUM } from "@neverquest/data/inventory";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
-import { inventory } from "@neverquest/state/inventory";
+import { inventory, ownedItem } from "@neverquest/state/inventory";
 import {
   infusionCurrent,
   infusionLevel,
   infusionMaximum,
   infusionStep,
-  ownedItem,
 } from "@neverquest/state/items";
 
-import { isInfusable } from "@neverquest/types/type-guards";
+import { isInfusableItem } from "@neverquest/types/type-guards";
 import type { Infusable } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -45,7 +44,7 @@ export function useInfuse() {
         if (newInfusion >= get(infusionMaximum(infusable))) {
           set(inventory, (currentInventory) =>
             currentInventory.map((currentItem) => {
-              if (currentItem.id === ownedInfusable.id && isInfusable(currentItem)) {
+              if (currentItem.id === ownedInfusable.id && isInfusableItem(currentItem)) {
                 return {
                   ...currentItem,
                   level: currentItem.level + 1,

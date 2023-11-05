@@ -1,21 +1,24 @@
 import { Form } from "react-bootstrap";
 import { type RecoilState, useRecoilState } from "recoil";
 
+import { formatSlug } from "@neverquest/utilities/formatters";
+
 export function SettingsSwitch({
-  atom,
   isDisabled = false,
   label,
+  state,
 }: {
-  atom: RecoilState<boolean>;
   isDisabled?: boolean;
   label: string;
+  state: RecoilState<boolean>;
 }) {
-  const [toggledValue, setToggle] = useRecoilState(atom);
+  const [toggledValue, setToggle] = useRecoilState(state);
 
   return (
     <Form.Switch
       defaultChecked={toggledValue}
       disabled={isDisabled}
+      id={formatSlug(label)}
       label={label}
       onChange={({ target: { checked } }) => setToggle(checked)}
     />

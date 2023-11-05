@@ -1,5 +1,15 @@
 import { useState } from "react";
-import { Button, ButtonGroup, Dropdown, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
+import {
+  Button,
+  ButtonGroup,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  OverlayTrigger,
+  Stack,
+  Tooltip,
+} from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
@@ -88,23 +98,23 @@ export function PurchaseAmmunition() {
                       Purchase {amount}
                     </Button>
 
-                    <Dropdown.Toggle split variant="outline-dark" />
+                    <DropdownToggle split variant="outline-dark" />
 
-                    <Dropdown.Menu>
+                    <DropdownMenu>
                       {[
                         { amount: 1, label: "1" },
                         { amount: 10, label: "10" },
                         { amount: maximum - current, label: LABEL_MAXIMUM },
                       ].map(({ amount, label }) => (
-                        <Dropdown.Item key={label} onClick={() => setAmount(amount)}>
+                        <DropdownItem key={label} onClick={() => setAmount(amount)}>
                           <Stack direction="horizontal" gap={1}>
                             <IconImage Icon={IconAmmunition} size="small" />
 
                             {label}
                           </Stack>
-                        </Dropdown.Item>
+                        </DropdownItem>
                       ))}
-                    </Dropdown.Menu>
+                    </DropdownMenu>
                   </Dropdown>
                 </span>
               </OverlayTrigger>

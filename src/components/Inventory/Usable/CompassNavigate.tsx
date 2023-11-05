@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
   Button,
-  Form,
+  FormSelect,
   Modal,
   ModalBody,
   ModalHeader,
@@ -72,7 +72,7 @@ export function CompassNavigate() {
 
         <ModalBody>
           <IconDisplay Icon={IconNavigation} tooltip="Navigation">
-            <Form.Select
+            <FormSelect
               disabled={!canNavigate}
               onChange={({ target: { value } }) => {
                 progressQuest({ quest: "warpingWilderness" });
@@ -94,7 +94,7 @@ export function CompassNavigate() {
                   })} - ${name}`}</option>
                 );
               })}
-            </Form.Select>
+            </FormSelect>
           </IconDisplay>
         </ModalBody>
       </Modal>

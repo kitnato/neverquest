@@ -5,7 +5,7 @@ import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { inventory } from "@neverquest/state/inventory";
 import { isStaminaAtMaximum, stamina, staminaMaximumBlighted } from "@neverquest/state/reserves";
 
-export function Elixir({ id }: { id: string }) {
+export function Elixir({ ID }: { ID: string }) {
   const isStaminaAtMaximumValue = useRecoilValue(isStaminaAtMaximum);
   const staminaValue = useRecoilValue(stamina);
   const staminaMaximumBlightedValue = useRecoilValue(staminaMaximumBlighted);
@@ -30,7 +30,7 @@ export function Elixir({ id }: { id: string }) {
       value: staminaDifference,
     });
 
-    setInventory((current) => current.filter((current) => current.id !== id));
+    setInventory((current) => current.filter((current) => current.ID !== ID));
   };
 
   return (

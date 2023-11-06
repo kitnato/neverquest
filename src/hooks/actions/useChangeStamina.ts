@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { deltas } from "@neverquest/state/deltas";
+import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import {
   regenerationAmount,
   regenerationDuration,
@@ -12,6 +12,8 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeStamina() {
+  const addDelta = useAddDelta();
+
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
       (deltaReserve: DeltaReserve) => {
@@ -26,17 +28,18 @@ export function useChangeStamina() {
         const newStamina = get(stamina) + value;
         const staminaMaximumBlightedValue = get(staminaMaximumBlighted);
 
-        set(
-          deltas("stamina"),
-          deltaReserve.isRegeneration === true ||
+        addDelta({
+          contents:
+            deltaReserve.isRegeneration === true ||
             deltaReserve.delta === undefined ||
             (Array.isArray(deltaReserve.delta) && deltaReserve.delta.length === 0)
-            ? ({
-                color: isPositive ? "text-success" : "text-danger",
-                value: isPositive ? `+${formattedValue}` : formattedValue,
-              } as DeltaDisplay)
-            : deltaReserve.delta,
-        );
+              ? ({
+                  color: isPositive ? "text-success" : "text-danger",
+                  value: isPositive ? `+${formattedValue}` : formattedValue,
+                } as DeltaDisplay)
+              : deltaReserve.delta,
+          delta: "stamina",
+        });
 
         if (newStamina < 0) {
           set(stamina, 0);
@@ -49,6 +52,6 @@ export function useChangeStamina() {
 
         set(stamina, newStamina);
       },
-    [],
+    [addDelta],
   );
 }

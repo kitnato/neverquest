@@ -28,7 +28,7 @@ export function SellItem({ item }: { item: InventoryItem }) {
             transactEssence(getSellPrice(item));
             merchantTradeItem(item, "sale");
 
-            setInventory((current) => current.filter((current) => current.id !== item.id));
+            setInventory((current) => current.filter((current) => current.ID !== item.ID));
           }}
           variant="outline-dark"
         >

@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -26,7 +26,7 @@ export function Encumbrance() {
         <Stack direction="horizontal" gap={1}>
           {`${encumbranceValue}/${encumbranceMaximumValue}`}
 
-          <FloatingTextQueue delta="encumbranceMaximum" />
+          <DeltasDisplay delta="encumbranceMaximum" />
         </Stack>
       </LabelledProgressBar>
     </IconDisplay>

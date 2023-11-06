@@ -9,7 +9,7 @@ export function useMerchantTradeItem() {
     ({ set }) =>
       (item: InventoryItem, type: "purchase" | "sale") => {
         if (type === "purchase") {
-          set(merchantInventory, (current) => current.filter(({ item: { id } }) => id !== item.id));
+          set(merchantInventory, (current) => current.filter(({ item: { ID } }) => ID !== item.ID));
         } else {
           set(merchantInventory, (current) =>
             current.concat({

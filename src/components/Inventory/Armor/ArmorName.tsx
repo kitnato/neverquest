@@ -33,7 +33,7 @@ export function ArmorName({
 
   const { deflection, level, name, protection, staminaCost, weight } = armor;
   const isUnshielded = armor.name === ARMOR_NONE.name;
-  const showComparison = armorEquippedValue.id !== armor.id;
+  const showComparison = armorEquippedValue.ID !== armor.ID;
 
   return (
     <OverlayTrigger

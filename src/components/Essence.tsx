@@ -1,7 +1,7 @@
 import { Card, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconEssence from "@neverquest/icons/essence.svg?react";
@@ -36,7 +36,7 @@ export function Essence() {
           {formatNumber({ value: essenceValue })}
         </IconDisplay>
 
-        <FloatingTextQueue delta="essence" />
+        <DeltasDisplay delta="essence" />
       </Stack>
     </Card>
   );

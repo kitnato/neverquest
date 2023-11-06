@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { QuestListing } from "@neverquest/components/Quests/QuestListing";
 import { QUESTS_COUNT, QUEST_TYPES_BY_CLASS } from "@neverquest/data/quests";
@@ -29,7 +29,7 @@ export function Quests({ questClass }: { questClass: QuestClass }) {
         <Stack direction="horizontal" gap={1}>
           {`${completedQuestsValue}/${questCount}`}
 
-          <FloatingTextQueue delta={questClass} />
+          <DeltasDisplay delta={questClass} />
         </Stack>
       </LabelledProgressBar>
 

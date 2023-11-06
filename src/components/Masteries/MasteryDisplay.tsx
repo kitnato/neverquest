@@ -1,7 +1,7 @@
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MasteryProgress } from "@neverquest/components/Masteries/MasteryProgress";
 import { MasteryRank } from "@neverquest/components/Masteries/MasteryRank";
@@ -30,7 +30,7 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
                 <MasteryProgress mastery={mastery} />
               </Stack>
 
-              <FloatingTextQueue delta={mastery} />
+              <DeltasDisplay delta={mastery} />
             </Stack>
           }
           Icon={Icon}

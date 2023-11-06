@@ -78,10 +78,11 @@ export type InfusableItem = ItemBase & {
 export type InventoryItem = ConsumableItem | GearItem | GemItem | UsableItem;
 
 type ItemBase = {
-  id: string;
+  ID: string;
   price: number;
   weight: number;
 };
+
 export type KnapsackItem = TrinketItem & {
   capacity: number;
   name: "knapsack";

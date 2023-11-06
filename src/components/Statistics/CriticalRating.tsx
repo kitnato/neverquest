@@ -1,8 +1,8 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY, LABEL_SEPARATOR } from "@neverquest/data/general";
@@ -138,7 +138,7 @@ export function CriticalRating() {
           <span>{assassinationValue ? criticalRatingValue : LABEL_EMPTY}</span>
         </OverlayTrigger>
 
-        <FloatingTextQueue delta="criticalRating" />
+        <DeltasDisplay delta="criticalRating" />
       </Stack>
     </IconDisplay>
   );

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { ProgressBar, Stack } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 
-import { FloatingTextQueue } from "../FloatingTextQueue";
+import { DeltasDisplay } from "../DeltasDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -73,7 +73,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
           value: reserveMaximumAilingValue,
         })}`}
 
-        <FloatingTextQueue delta={deltaReserveMaximum} />
+        <DeltasDisplay delta={deltaReserveMaximum} />
 
         {isAiling && (
           <>

@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
+import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { isGameOver } from "@neverquest/state/character";
-import { deltas } from "@neverquest/state/deltas";
 import { inventory, ownedItem } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import {
@@ -16,6 +16,8 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeHealth() {
+  const addDelta = useAddDelta();
+
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
       (deltaReserve: DeltaReserve) => {
@@ -31,17 +33,18 @@ export function useChangeHealth() {
 
         let newHealth = get(health) + value;
 
-        set(
-          deltas("health"),
-          deltaReserve.isRegeneration === true ||
+        addDelta({
+          contents:
+            deltaReserve.isRegeneration === true ||
             deltaReserve.delta === undefined ||
             (Array.isArray(deltaReserve.delta) && deltaReserve.delta.length === 0)
-            ? ({
-                color: isPositive ? "text-success" : value === 0 ? "text-muted" : "text-danger",
-                value: isPositive ? `+${formattedValue}` : formattedValue,
-              } as DeltaDisplay)
-            : deltaReserve.delta,
-        );
+              ? ({
+                  color: isPositive ? "text-success" : value === 0 ? "text-muted" : "text-danger",
+                  value: isPositive ? `+${formattedValue}` : formattedValue,
+                } as DeltaDisplay)
+              : deltaReserve.delta,
+          delta: "health",
+        });
 
         if (newHealth <= 0) {
           const phylactery = get(ownedItem("phylactery"));
@@ -54,12 +57,15 @@ export function useChangeHealth() {
           } else {
             newHealth = healthMaximumPoisonedValue;
 
-            set(deltas("health"), {
-              color: "text-success",
-              value: "RESURRECTED",
+            addDelta({
+              contents: {
+                color: "text-success",
+                value: "RESURRECTED",
+              },
+              delta: "health",
             });
 
-            set(inventory, (current) => current.filter((item) => item.id !== phylactery.id));
+            set(inventory, (current) => current.filter((item) => item.ID !== phylactery.ID));
           }
         }
 
@@ -72,6 +78,6 @@ export function useChangeHealth() {
           set(health, newHealth);
         }
       },
-    [],
+    [addDelta],
   );
 }

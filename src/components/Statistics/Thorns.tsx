@@ -1,8 +1,8 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDetails";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -41,7 +41,7 @@ export function Thorns() {
           <span>{thornsValue}</span>
         </OverlayTrigger>
 
-        <FloatingTextQueue delta="thorns" />
+        <DeltasDisplay delta="thorns" />
       </Stack>
     </IconDisplay>
   );

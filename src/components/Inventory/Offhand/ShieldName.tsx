@@ -32,7 +32,7 @@ export function ShieldName({
   const shieldcraftSkill = useRecoilValue(isSkillAcquired("shieldcraft"));
 
   const { block, level, name, stagger, staminaCost, weight } = shield;
-  const showComparison = shieldEquippedValue.id !== shield.id;
+  const showComparison = shieldEquippedValue.ID !== shield.ID;
 
   return (
     <OverlayTrigger

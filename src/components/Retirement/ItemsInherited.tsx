@@ -28,14 +28,14 @@ export function ItemsInherited() {
           return (
             <ItemDisplay
               item={TRINKETS[key].item}
-              key={TRINKETS[key].item.id}
+              key={TRINKETS[key].item.ID}
               overlayPlacement="right"
             />
           );
         }
 
         if (isInfusable(key)) {
-          return <Infusable item={INFUSABLES[key].item} key={INFUSABLES[key].item.id} />;
+          return <Infusable item={INFUSABLES[key].item} key={INFUSABLES[key].item.ID} />;
         }
 
         return null;

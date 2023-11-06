@@ -15,7 +15,7 @@ import type { Consumable } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
-  const [id, setID] = useState(nanoid());
+  const [ID, setID] = useState(nanoid());
 
   const acquireItem = useAcquireItem();
   const transactEssence = useTransactEssence();
@@ -23,7 +23,7 @@ export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
   const { item } = CONSUMABLES[consumable];
   const itemWithID: ConsumableItem = {
     ...item,
-    id,
+    ID,
   };
   const { price } = itemWithID;
 

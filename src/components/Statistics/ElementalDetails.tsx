@@ -21,12 +21,12 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
         {stackItems(
           gems.toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
         ).map(({ item }) => {
-          const { id, name } = item;
+          const { ID, name } = item;
           const elemental = GEM_ELEMENTALS[name];
           const { damage, duration } = totalElementalEffectsValue[slot][elemental];
 
           return (
-            <Stack direction="horizontal" gap={1} key={id}>
+            <Stack direction="horizontal" gap={1} key={ID}>
               <span className={ELEMENTALS[elemental].color}>{`+${damage}`}</span>
 
               {LABEL_SEPARATOR}

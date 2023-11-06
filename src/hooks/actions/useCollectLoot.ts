@@ -25,10 +25,10 @@ export function useCollectLoot() {
 
         if (itemsLootValue.length > 0) {
           const acquiredItemIDs = itemsLootValue.map((current) =>
-            acquireItem(current) !== "noFit" ? current.id : null,
+            acquireItem(current) !== "noFit" ? current.ID : null,
           );
 
-          set(itemsLoot, (current) => current.filter(({ id }) => !acquiredItemIDs.includes(id)));
+          set(itemsLoot, (current) => current.filter(({ ID }) => !acquiredItemIDs.includes(ID)));
         }
 
         reset(essenceLoot);

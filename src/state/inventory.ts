@@ -64,7 +64,7 @@ export const encumbranceMaximum = withStateKey("encumbranceMaximum", (key) =>
 export const equippableItems = withStateKey("equippableItems", (key) =>
   selector<Record<string, boolean>>({
     get: ({ get }) =>
-      get(inventory).reduce((aggregator, { id, ...current }) => {
+      get(inventory).reduce((aggregator, { ID, ...current }) => {
         let canEquip = isGear(current) ? !current.isEquipped : false;
 
         if (isArmor(current) && current.gearClass === "heavy") {
@@ -85,7 +85,7 @@ export const equippableItems = withStateKey("equippableItems", (key) =>
 
         return {
           ...aggregator,
-          [id]: canEquip,
+          [ID]: canEquip,
         };
       }, {}),
     key,

@@ -59,7 +59,7 @@ export const ARMOR_NONE: Omit<Armor, "isEquipped" | "price"> = {
   deflection: 0,
   gearClass: "light",
   gems: [],
-  id: nanoid(),
+  ID: nanoid(),
   level: 1,
   name: "Unarmored",
   protection: 0,
@@ -129,7 +129,7 @@ export const ARMOR_SPECIFICATIONS: Record<
   },
 };
 
-export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<ConsumableItem, "id"> }> =
+export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<ConsumableItem, "ID"> }> =
   {
     antidote: {
       Icon: IconAntidote,
@@ -242,7 +242,7 @@ export const INFUSABLES: Record<
     item: {
       description: "Boosts amount of essence looted.",
       growthBase: 8,
-      id: nanoid(),
+      ID: nanoid(),
       level: 1,
       maximum: 2,
       minimum: 0.2,
@@ -256,7 +256,7 @@ export const INFUSABLES: Record<
     item: {
       description: "Boosts all attribute effects based on power level.",
       growthBase: 10,
-      id: nanoid(),
+      ID: nanoid(),
       level: 1,
       maximum: 1.5,
       minimum: 0,
@@ -271,7 +271,7 @@ export const SHIELD_NONE: Omit<Shield, "isEquipped" | "price"> = {
   block: 0,
   gearClass: "small",
   gems: [],
-  id: nanoid(),
+  ID: nanoid(),
   level: 1,
   name: "Unshielded",
   stagger: 0,
@@ -355,7 +355,7 @@ export const TRINKETS: Record<
     item: {
       current: 0,
       description: "Store ammunition for ranged weapons.",
-      id: nanoid(),
+      ID: nanoid(),
       maximum: AMMUNITION_CAPACITY,
       name: "ammunition pouch",
       price: 250,
@@ -366,7 +366,7 @@ export const TRINKETS: Record<
     Icon: IconAntiqueCoin,
     item: {
       description: "The wielder is bestowed with extreme fortune.",
-      id: nanoid(),
+      ID: nanoid(),
       name: "antique coin",
       price: 1000,
       weight: 2,
@@ -376,7 +376,7 @@ export const TRINKETS: Record<
     Icon: IconCompass,
     item: {
       description: "Navigate the wilderness to hunt in previous locations.",
-      id: nanoid(),
+      ID: nanoid(),
       name: "compass",
       price: 50,
       weight: 2,
@@ -386,7 +386,7 @@ export const TRINKETS: Record<
     Icon: IconStone,
     item: {
       description: "Travel back to the caravan even if there are still lurking monsters.",
-      id: nanoid(),
+      ID: nanoid(),
       name: "hearthstone",
       price: 20,
       weight: 2,
@@ -396,7 +396,7 @@ export const TRINKETS: Record<
     Icon: IconJournal,
     item: {
       description: "A compendium of quests.",
-      id: nanoid(),
+      ID: nanoid(),
       name: "journal",
       price: 500,
       weight: 5,
@@ -407,7 +407,7 @@ export const TRINKETS: Record<
     item: {
       capacity: KNAPSACK_CAPACITY,
       description: "Carry more items and manage gear.",
-      id: nanoid(),
+      ID: nanoid(),
       name: "knapsack",
       price: 10,
       weight: 0,
@@ -460,7 +460,7 @@ export const WEAPON_NONE: Omit<Melee, "isEquipped" | "price"> = {
   gearClass: "blunt",
   gems: [],
   grip: "one-handed",
-  id: nanoid(),
+  ID: nanoid(),
   level: 1,
   name: "Unarmed",
   rate: 2500,

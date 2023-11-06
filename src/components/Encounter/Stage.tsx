@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconStage from "@neverquest/icons/stage.svg?react";
@@ -22,7 +22,7 @@ export function Stage() {
       <Stack direction="horizontal" gap={1}>
         <span>{formatNumber({ value: stageValue })}</span>
 
-        <FloatingTextQueue delta="stage" />
+        <DeltasDisplay delta="stage" />
       </Stack>
     </IconDisplay>
   );

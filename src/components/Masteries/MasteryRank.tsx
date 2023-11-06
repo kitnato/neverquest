@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconRank from "@neverquest/icons/rank.svg?react";
@@ -28,7 +28,7 @@ export function MasteryRank({ mastery }: { mastery: Mastery }) {
         {formatNumber({ value: masteryRankValue })}
       </IconDisplay>
 
-      <FloatingTextQueue delta={mastery} />
+      <DeltasDisplay delta={mastery} />
     </Stack>
   );
 }

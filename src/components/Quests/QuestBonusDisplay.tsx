@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconDamage from "@neverquest/icons/damage.svg?react";
@@ -40,7 +40,7 @@ export function QuestBonusDisplay({ bonus }: { bonus: QuestBonus }) {
           value: questsBonusValue,
         })}`}
 
-        <FloatingTextQueue delta={bonus} />
+        <DeltasDisplay delta={bonus} />
       </Stack>
     </IconDisplay>
   );

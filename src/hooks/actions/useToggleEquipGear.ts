@@ -78,7 +78,7 @@ export function useToggleEquipGear() {
         set(inventory, (currentInventory) =>
           currentInventory.map((currentItem) => {
             if (isGear(currentItem)) {
-              if (currentItem.id === gearItem.id) {
+              if (currentItem.ID === gearItem.ID) {
                 return {
                   ...currentItem,
                   isEquipped: !currentItem.isEquipped,

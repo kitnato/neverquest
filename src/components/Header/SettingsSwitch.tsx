@@ -18,7 +18,7 @@ export function SettingsSwitch({
     <Form.Switch
       defaultChecked={toggledValue}
       disabled={isDisabled}
-      id={formatSlug(label)}
+      ID={formatSlug(label)}
       label={label}
       onChange={({ target: { checked } }) => setToggle(checked)}
     />

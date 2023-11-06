@@ -1,9 +1,9 @@
 import { useRecoilCallback } from "recoil";
 
 import { LOOTING_RATE } from "@neverquest/data/statistics";
+import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { attackDuration, lootingDuration } from "@neverquest/state/character";
-import { deltas } from "@neverquest/state/deltas";
 import {
   monsterAttackDuration,
   monsterHealth,
@@ -15,6 +15,7 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeMonsterHealth() {
+  const addDelta = useAddDelta();
   const progressQuest = useProgressQuest();
 
   return useRecoilCallback(
@@ -32,15 +33,16 @@ export function useChangeMonsterHealth() {
         const isPositive = value > 0;
         const newHealth = Math.min(get(monsterHealth) + value, get(monsterHealthMaximum));
 
-        set(
-          deltas("monsterHealth"),
-          delta === undefined || (Array.isArray(delta) && delta.length === 0)
-            ? ({
-                color: isPositive ? "text-success" : "text-danger",
-                value: isPositive ? `+${formattedValue}` : formattedValue,
-              } as DeltaDisplay)
-            : delta,
-        );
+        addDelta({
+          contents:
+            delta === undefined || (Array.isArray(delta) && delta.length === 0)
+              ? ({
+                  color: isPositive ? "text-success" : "text-danger",
+                  value: isPositive ? `+${formattedValue}` : formattedValue,
+                } as DeltaDisplay)
+              : delta,
+          delta: "monsterHealth",
+        });
 
         if (newHealth <= 0) {
           if (damageType !== undefined) {
@@ -82,6 +84,6 @@ export function useChangeMonsterHealth() {
           set(monsterHealth, newHealth);
         }
       },
-    [progressQuest],
+    [addDelta, progressQuest],
   );
 }

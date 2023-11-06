@@ -73,14 +73,14 @@ export function TransmuteGems() {
               if (isAffordable) {
                 const gemIDs = inventoryValue
                   .filter((current) => isGem(current) && current.name === source)
-                  .map(({ id }) => id)
+                  .map(({ ID }) => ID)
                   .slice(0, TRANSMUTE_COST);
 
-                setInventory(inventoryValue.filter(({ id }) => !gemIDs.includes(id)));
+                setInventory(inventoryValue.filter(({ ID }) => !gemIDs.includes(ID)));
 
                 acquireItem({
                   ...GEM_BASE,
-                  id: nanoid(),
+                  ID: nanoid(),
                   name: result,
                 });
               }

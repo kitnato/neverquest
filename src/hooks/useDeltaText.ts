@@ -1,13 +1,8 @@
 import { useEffect } from "react";
-import {
-  type RecoilValueReadOnly,
-  useRecoilValue,
-  useResetRecoilState,
-  useSetRecoilState,
-} from "recoil";
+import { type RecoilValueReadOnly, useRecoilValue } from "recoil";
 
+import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
-import { deltas } from "@neverquest/state/deltas";
 import type { Delta, NumberFormat } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
@@ -22,12 +17,9 @@ export function useDeltaText({
   state: RecoilValueReadOnly<number>;
   stop?: ({ current, previous }: { current: number; previous: number | null }) => boolean;
 }) {
-  const deltaState = deltas(delta);
-
   const currentValue = useRecoilValue(state);
-  const setDelta = useSetRecoilState(deltaState);
-  const resetDelta = useResetRecoilState(deltaState);
 
+  const addDelta = useAddDelta();
   const previousValue = usePreviousValue(currentValue);
 
   const isTime = format === "time";
@@ -45,20 +37,21 @@ export function useDeltaText({
 
     const isPositive = difference > 0;
 
-    setDelta({
-      color: isPositive
-        ? isTime
-          ? "text-danger"
-          : "text-success"
-        : isTime
-        ? "text-success"
-        : "text-danger",
-      value: `${isPositive ? "+" : ""}${formatNumber({
-        format,
-        value: difference,
-      })}`,
+    addDelta({
+      contents: {
+        color: isPositive
+          ? isTime
+            ? "text-danger"
+            : "text-success"
+          : isTime
+          ? "text-success"
+          : "text-danger",
+        value: `${isPositive ? "+" : ""}${formatNumber({
+          format,
+          value: difference,
+        })}`,
+      },
+      delta,
     });
-
-    return resetDelta;
-  }, [currentValue, format, isTime, previousValue, resetDelta, setDelta, stop]);
+  }, [addDelta, currentValue, delta, format, isTime, previousValue, stop]);
 }

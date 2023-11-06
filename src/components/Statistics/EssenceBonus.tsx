@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconEssenceBonus from "@neverquest/icons/essence-bonus.svg?react";
@@ -26,7 +26,7 @@ export function EssenceBonus() {
         })}`}
       </IconDisplay>
 
-      <FloatingTextQueue delta="essenceBonus" />
+      <DeltasDisplay delta="essenceBonus" />
     </Stack>
   );
 }

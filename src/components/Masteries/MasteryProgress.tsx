@@ -1,7 +1,7 @@
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { LABEL_MAXIMUM } from "@neverquest/data/general";
 import { MASTERIES } from "@neverquest/data/masteries";
@@ -44,7 +44,7 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
         </span>
       </OverlayTrigger>
 
-      <FloatingTextQueue delta={delta} />
+      <DeltasDisplay delta={delta} />
     </Stack>
   );
 }

@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconBlock from "@neverquest/icons/block.svg?react";
@@ -39,7 +39,7 @@ export function Block() {
       <Stack direction="horizontal" gap={1}>
         <span>{formatNumber({ format: "percentage", value: blockChanceValue })}</span>
 
-        <FloatingTextQueue delta="blockChance" />
+        <DeltasDisplay delta="blockChance" />
       </Stack>
     </IconDisplay>
   );

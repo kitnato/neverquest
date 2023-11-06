@@ -29,7 +29,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
         {stackItems(
           gems.toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
         ).map(({ item, stack }) => {
-          const { id, name } = item;
+          const { ID, name } = item;
           const elemental = GEM_ELEMENTALS[name];
           const effect =
             elementalEffectsValue[
@@ -37,7 +37,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
             ][elemental];
 
           return (
-            <Stack direction="horizontal" gap={1} key={id}>
+            <Stack direction="horizontal" gap={1} key={ID}>
               <span className={ELEMENTALS[elemental].color}>{`${
                 typeof effect === "number"
                   ? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`

@@ -1,7 +1,7 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -25,7 +25,7 @@ export function AttributePoints() {
       <Stack direction="horizontal" gap={1}>
         <IconDisplay Icon={IconAttributePoints} tooltip="Available attribute points" />
 
-        <FloatingTextQueue delta="attributePoints" />
+        <DeltasDisplay delta="attributePoints" />
       </Stack>
 
       <OverlayTrigger

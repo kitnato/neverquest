@@ -1,7 +1,7 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -40,7 +40,7 @@ export function Level() {
           <span>{levelValue}</span>
         </OverlayTrigger>
 
-        <FloatingTextQueue delta="level" />
+        <DeltasDisplay delta="level" />
       </Stack>
     </IconDisplay>
   );

@@ -1,8 +1,8 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
@@ -76,7 +76,7 @@ export function Protection() {
           <span>{protectionValue}</span>
         </OverlayTrigger>
 
-        <FloatingTextQueue delta="protection" />
+        <DeltasDisplay delta="protection" />
       </Stack>
     </IconDisplay>
   );

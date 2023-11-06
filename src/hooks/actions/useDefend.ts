@@ -1,6 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
+import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
@@ -15,7 +16,6 @@ import {
   recoveryDuration,
   statusElement,
 } from "@neverquest/state/character";
-import { deltas } from "@neverquest/state/deltas";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { masteryStatistic } from "@neverquest/state/masteries";
@@ -50,6 +50,7 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 import { animateElement } from "@neverquest/utilities/helpers";
 
 export function useDefend() {
+  const addDelta = useAddDelta();
   const changeHealth = useChangeHealth();
   const changeMonsterHealth = useChangeMonsterHealth();
   const changeStamina = useChangeStamina();
@@ -75,16 +76,19 @@ export function useDefend() {
           set(monsterAilmentDuration("stunned"), (current) => current - 1);
 
           if (Math.random() <= AILMENT_PENALTY.stunned) {
-            set(deltas("health"), {
-              color: "text-muted",
-              value: "MISS",
+            addDelta({
+              contents: {
+                color: "text-muted",
+                value: "MISS",
+              },
+              delta: "health",
             });
 
             return;
           }
         }
 
-        const deltaHealth: DeltaDisplay = [];
+        const deltaHealth: DeltaDisplay[] = [];
 
         // If attack is dodged, nothing else happens (all damage is negated).
         if (Math.random() < get(dodgeChance)) {
@@ -93,9 +97,12 @@ export function useDefend() {
           if (get(canDodge)) {
             progressQuest({ quest: "dodging" });
 
-            set(deltas("health"), {
-              color: "text-muted",
-              value: "DODGED",
+            addDelta({
+              contents: {
+                color: "text-muted",
+                value: "DODGED",
+              },
+              delta: "health",
             });
 
             if (!get(isTraitAcquired("stalwart"))) {
@@ -119,8 +126,8 @@ export function useDefend() {
         const monsterDamageAilingValue = get(monsterDamageAiling);
         const protectionValue = get(protection);
 
-        const deltaMonsterHealth: DeltaDisplay = [];
-        const deltaStamina: DeltaDisplay = [];
+        const deltaMonsterHealth: DeltaDisplay[] = [];
+        const deltaStamina: DeltaDisplay[] = [];
         const totalDamage = protectionValue - monsterDamageAilingValue;
 
         let healthDamage = totalDamage < 0 ? totalDamage : 0;
@@ -302,7 +309,10 @@ export function useDefend() {
         // Take any damage and show any stamina costs.
         changeHealth({ delta: deltaHealth, value: healthDamage });
 
-        set(deltas("stamina"), deltaStamina);
+        addDelta({
+          contents: deltaStamina,
+          delta: "stamina",
+        });
 
         // Inflict any armor elemental effects.
         ELEMENTAL_TYPES.forEach((elemental) =>

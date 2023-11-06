@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconImage } from "@neverquest/components/IconImage";
 import { RegenerationMeter } from "@neverquest/components/Reserves/RegenerationMeter";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
@@ -190,9 +190,9 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
         </span>
       </OverlayTrigger>
 
-      <FloatingTextQueue delta={regenerationDeltaAmount} />
+      <DeltasDisplay delta={regenerationDeltaAmount} />
 
-      <FloatingTextQueue delta={regenerationDeltaRate} />
+      <DeltasDisplay delta={regenerationDeltaRate} />
     </Stack>
   );
 }

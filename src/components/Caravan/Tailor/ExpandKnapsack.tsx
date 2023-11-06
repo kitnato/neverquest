@@ -28,7 +28,7 @@ export function ExpandKnapsack() {
     return null;
   }
 
-  const { capacity, id } = ownedItemKnapsack as KnapsackItem;
+  const { capacity, ID } = ownedItemKnapsack as KnapsackItem;
   const price = Math.ceil(
     TAILORING_PRICE_MAXIMUM.knapsack * getGrowthSigmoid(capacity - (ENCUMBRANCE_CAPACITY - 1)),
   );
@@ -72,7 +72,7 @@ export function ExpandKnapsack() {
                   transactEssence(-price);
                   setInventory((currentInventory) =>
                     currentInventory.map((currentItem) =>
-                      currentItem.id === id
+                      currentItem.ID === ID
                         ? {
                             ...currentItem,
                             capacity:

@@ -34,8 +34,8 @@ export function Inventory() {
   const toggleEquipGear = useToggleEquipGear();
 
   const equippedGear = inventoryValue.filter((current) => isGear(current) && current.isEquipped);
-  const equippedGearIDs = equippedGear.map(({ id }) => id);
-  const storedItems = inventoryValue.filter(({ id }) => !equippedGearIDs.includes(id));
+  const equippedGearIDs = equippedGear.map(({ ID }) => ID);
+  const storedItems = inventoryValue.filter(({ ID }) => !equippedGearIDs.includes(ID));
 
   return (
     <Stack gap={5}>
@@ -51,10 +51,10 @@ export function Inventory() {
         {[equippedGear.find(isWeapon), equippedGear.find(isArmor), equippedGear.find(isShield)]
           .filter(isGear)
           .map((current) => {
-            const { id } = current;
+            const { ID } = current;
 
             return (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
                 <ItemDisplay item={current} overlayPlacement="right" />
 
                 <Button onClick={() => toggleEquipGear(current)} variant="outline-dark">
@@ -76,14 +76,14 @@ export function Inventory() {
           .filter(isTrinketItem)
           .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
           .map((current) => {
-            const { id, name } = current;
+            const { ID, name } = current;
 
             if (name === "knapsack") {
               return null;
             }
 
             return (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
                 <Usable item={current} />
 
                 {(() => {
@@ -109,7 +109,7 @@ export function Inventory() {
           .filter(isInfusableItem)
           .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
           .map((current) => (
-            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.id}>
+            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.ID}>
               <Usable item={current} />
 
               <InfusionInspect infusable={current.name} />
@@ -128,25 +128,25 @@ export function Inventory() {
               .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
           ),
         ].map(({ item, stack }) => {
-          const { id, name } = item;
+          const { ID, name } = item;
 
           return (
-            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
+            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
               <ItemDisplay item={item} overlayPlacement="right" stack={stack} />
 
               {(() => {
                 switch (name) {
                   case "antidote": {
-                    return <Antidote id={id} />;
+                    return <Antidote ID={ID} />;
                   }
                   case "bandages": {
-                    return <Bandages id={id} />;
+                    return <Bandages ID={ID} />;
                   }
                   case "elixir": {
-                    return <Elixir id={id} />;
+                    return <Elixir ID={ID} />;
                   }
                   case "salve": {
-                    return <Salve id={id} />;
+                    return <Salve ID={ID} />;
                   }
                   case "phylactery": {
                     return null;

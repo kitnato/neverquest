@@ -15,10 +15,10 @@ export function PurchasableItems({ items }: { items: InventoryItem[] }) {
   return (
     <>
       {stackItems(items).map(({ item, stack }) => {
-        const { id, price } = item;
+        const { ID, price } = item;
 
         return (
-          <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
+          <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
             {isUsable(item) ? (
               <Usable item={item} />
             ) : (

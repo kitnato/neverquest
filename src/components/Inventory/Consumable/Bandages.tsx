@@ -6,7 +6,7 @@ import { useHeal } from "@neverquest/hooks/actions/useHeal";
 import { inventory } from "@neverquest/state/inventory";
 import { isHealthAtMaximum } from "@neverquest/state/reserves";
 
-export function Bandages({ id }: { id: string }) {
+export function Bandages({ ID }: { ID: string }) {
   const isHealthAtMaximumValue = useRecoilValue(isHealthAtMaximum);
   const setInventory = useSetRecoilState(inventory);
 
@@ -15,7 +15,7 @@ export function Bandages({ id }: { id: string }) {
   const apply = () => {
     heal();
 
-    setInventory((current) => current.filter((current) => current.id !== id));
+    setInventory((current) => current.filter((current) => current.ID !== ID));
   };
 
   return (

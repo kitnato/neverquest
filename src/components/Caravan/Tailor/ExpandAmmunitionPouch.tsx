@@ -26,7 +26,7 @@ export function ExpandAmmunitionPouch() {
     return null;
   }
 
-  const { id, maximum } = ownedAmmunitionPouch as AmmunitionPouchItem;
+  const { ID, maximum } = ownedAmmunitionPouch as AmmunitionPouchItem;
   const price = Math.ceil(
     TAILORING_PRICE_MAXIMUM.ammunitionPouch * getGrowthSigmoid(maximum - (AMMUNITION_CAPACITY - 1)),
   );
@@ -63,7 +63,7 @@ export function ExpandAmmunitionPouch() {
                   transactEssence(-price);
                   setInventory((currentInventory) =>
                     currentInventory.map((currentItem) =>
-                      currentItem.id === id
+                      currentItem.ID === ID
                         ? {
                             ...currentItem,
                             maximum:

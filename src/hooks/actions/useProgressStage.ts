@@ -30,7 +30,7 @@ export function useProgressStage() {
         if (gems > 0) {
           const gemsLoot: GemItem[] = Array.from(Array(gems)).map(() => ({
             ...GEM_BASE,
-            id: nanoid(),
+            ID: nanoid(),
             name: GEM_TYPES[getFromRange({ maximum: GEM_TYPES.length - 1, minimum: 0 })] ?? "ruby",
           }));
 

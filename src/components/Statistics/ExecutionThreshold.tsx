@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LABEL_EMPTY } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -45,7 +45,7 @@ export function ExecutionThreshold() {
             : LABEL_EMPTY}
         </span>
 
-        <FloatingTextQueue delta="executionThreshold" />
+        <DeltasDisplay delta="executionThreshold" />
       </Stack>
     </IconDisplay>
   );

@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingTextQueue } from "../FloatingTextQueue";
+import { DeltasDisplay } from "../DeltasDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { monsterHealth, monsterHealthMaximum } from "@neverquest/state/monster";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -20,7 +20,7 @@ export function MonsterHealthMeter() {
           value: monsterHealthMaximumValue,
         })}`}
 
-        <FloatingTextQueue delta="monsterHealth" />
+        <DeltasDisplay delta="monsterHealth" />
       </Stack>
     </LabelledProgressBar>
   );

@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -38,7 +38,7 @@ export function Progress() {
               value: progressMaximumValue,
             })}`}
 
-            <FloatingTextQueue delta="progress" />
+            <DeltasDisplay delta="progress" />
           </Stack>
         </LabelledProgressBar>
       </Stack>

@@ -44,7 +44,7 @@ export function useInfuse() {
         if (newInfusion >= get(infusionMaximum(infusable))) {
           set(inventory, (currentInventory) =>
             currentInventory.map((currentItem) => {
-              if (currentItem.id === ownedInfusable.id && isInfusableItem(currentItem)) {
+              if (currentItem.ID === ownedInfusable.ID && isInfusableItem(currentItem)) {
                 return {
                   ...currentItem,
                   level: currentItem.level + 1,

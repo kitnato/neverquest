@@ -8,8 +8,8 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 // ATOMS
 
 export const deltas = withStateKey("deltas", (key) =>
-  atomFamily<DeltaDisplay | null, Delta>({
-    default: null,
+  atomFamily<{ display: DeltaDisplay[]; ID: string }[], Delta>({
+    default: [],
     effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),

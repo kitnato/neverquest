@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconDamagePerSecond from "@neverquest/icons/damage-per-second.svg?react";
@@ -32,7 +32,7 @@ export function DamagePerSecond() {
       <Stack direction="horizontal" gap={1}>
         <span>{formatNumber({ format: "float", value: damagePerSecondValue })}</span>
 
-        <FloatingTextQueue delta="damagePerSecond" />
+        <DeltasDisplay delta="damagePerSecond" />
       </Stack>
     </IconDisplay>
   );

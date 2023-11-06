@@ -83,7 +83,7 @@ export function PurchaseAmmunition() {
 
                           setInventory((currentInventory) =>
                             currentInventory.map((currentItem) =>
-                              currentItem.id === ownedAmmunitionPouch.id
+                              currentItem.ID === ownedAmmunitionPouch.ID
                                 ? {
                                     ...currentItem,
                                     current: (currentItem as AmmunitionPouchItem).current + amount,

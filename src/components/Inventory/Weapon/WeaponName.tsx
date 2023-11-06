@@ -45,7 +45,7 @@ export function WeaponName({
     rate,
   });
   const isUnarmed = weapon.name === WEAPON_NONE.name;
-  const showComparison = weaponEquippedValue.id !== weapon.id;
+  const showComparison = weaponEquippedValue.ID !== weapon.ID;
 
   const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 

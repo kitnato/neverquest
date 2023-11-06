@@ -25,20 +25,19 @@ export function ItemAcquisition() {
   const [itemsAcquiredValue, setItemsAcquired] = useRecoilState(itemsAcquired);
   const resetItemsAcquired = useResetRecoilState(itemsAcquired);
 
-  const onAnimationEnd = (key: string) => () =>
-    setItemsAcquired((current) => current.filter(({ id }) => key !== id));
-
   useEffect(() => resetItemsAcquired);
 
   return itemsAcquiredValue.map((current) => {
-    const { id } = current;
+    const { ID } = current;
 
     return (
       <div
         className={`position-absolute ${getAnimationClass({ name: "zoomOut", speed: "slower" })}`}
-        key={id}
-        onAnimationEnd={onAnimationEnd(id)}
-        // TODO - Bootstrap positioning utilities do not work with this Animation.css
+        key={ID}
+        onAnimationEnd={() =>
+          setItemsAcquired((current) => current.filter(({ ID: currentID }) => currentID !== ID))
+        }
+        // TODO - Bootstrap positioning utilities do not work with Animation.css zoomOut
         style={{ left: -10, top: 16 }}
       >
         <IconImage

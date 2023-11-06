@@ -1,6 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
+import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
@@ -12,7 +13,6 @@ import {
   hasEnoughAmmunition,
   isAttacking,
 } from "@neverquest/state/character";
-import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/gear";
 import { inventory, ownedItem } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -44,6 +44,7 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 import { animateElement } from "@neverquest/utilities/helpers";
 
 export function useAttack() {
+  const addDelta = useAddDelta();
   const changeMonsterHealth = useChangeMonsterHealth();
   const changeStamina = useChangeStamina();
   const increaseMastery = useIncreaseMastery();
@@ -90,7 +91,7 @@ export function useAttack() {
               currentInventory.map((currentItem) => {
                 const ownedAmmunitionPouch = get(ownedItem("ammunition pouch"));
 
-                return ownedAmmunitionPouch !== null && currentItem.id === ownedAmmunitionPouch.id
+                return ownedAmmunitionPouch !== null && currentItem.ID === ownedAmmunitionPouch.ID
                   ? {
                       ...currentItem,
                       current:
@@ -142,7 +143,7 @@ export function useAttack() {
             (hasInflictedCritical ? get(criticalStrike) : get(damage)) *
               (get(isMonsterAiling("burning")) ? AILMENT_PENALTY.burning : 1),
           );
-          const monsterDeltas: DeltaDisplay = [];
+          const monsterDeltas: DeltaDisplay[] = [];
 
           if (get(monsterAilmentDuration("bleeding")) === 0 && Math.random() < get(bleedChance)) {
             set(isShowing("monsterAilments"), true);
@@ -187,14 +188,22 @@ export function useAttack() {
             value: inflictedDamage,
           });
         } else {
-          set(deltas("stamina"), [
-            {
+          addDelta({
+            contents: {
               color: "text-muted",
               value: "CANNOT ATTACK",
             },
-          ]);
+            delta: "stamina",
+          });
         }
       },
-    [changeMonsterHealth, changeStamina, increaseMastery, inflictElementalAilment, progressQuest],
+    [
+      addDelta,
+      changeMonsterHealth,
+      changeStamina,
+      increaseMastery,
+      inflictElementalAilment,
+      progressQuest,
+    ],
   );
 }

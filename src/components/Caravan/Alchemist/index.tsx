@@ -26,7 +26,7 @@ export function Alchemist() {
           <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
         ) : (
           gemsInventory.map(({ item, stack }) => (
-            <ItemDisplay item={item} key={item.id} overlayPlacement="right" stack={stack} />
+            <ItemDisplay item={item} key={item.ID} overlayPlacement="right" stack={stack} />
           ))
         )}
       </Stack>

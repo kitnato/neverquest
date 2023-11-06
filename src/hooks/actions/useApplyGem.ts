@@ -18,7 +18,7 @@ export function useApplyGem() {
         const get = getSnapshotGetter(snapshot);
 
         if (get(canApplyGem(slot))) {
-          const { gems, id } = (() => {
+          const { gems, ID } = (() => {
             switch (slot) {
               case "armor": {
                 return get(armor);
@@ -36,9 +36,9 @@ export function useApplyGem() {
 
           set(inventory, (current) =>
             current
-              .filter((current) => current.id !== gem.id)
+              .filter((current) => current.ID !== gem.ID)
               .map((current) => {
-                if (isGear(current) && current.id === id) {
+                if (isGear(current) && current.ID === ID) {
                   return { ...current, gems: current.gems.concat(gem) };
                 }
 

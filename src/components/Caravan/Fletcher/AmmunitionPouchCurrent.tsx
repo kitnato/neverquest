@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -29,7 +29,7 @@ export function AmmunitionPouchCurrent() {
         <Stack direction="horizontal" gap={1}>
           {`${ammunitionValue}/${ammunitionMaximumValue}`}
 
-          <FloatingTextQueue delta="ammunition" />
+          <DeltasDisplay delta="ammunition" />
         </Stack>
       </LabelledProgressBar>
     </IconDisplay>

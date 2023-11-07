@@ -406,6 +406,11 @@ export const QUESTS: Record<
     progression: [500, 1000, 2500, 5000, 10000, 25000],
     title: "High roller",
   },
+  stages: {
+    description: "Reach stage @.",
+    progression: [3, 10, 25, 50, 100],
+    title: "Sisyphean expedition",
+  },
   staggering: {
     description: "Stagger monsters @ times.",
     progression: [3, 10, 25, 50, 100],

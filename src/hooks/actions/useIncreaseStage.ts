@@ -1,6 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { CREW, CREW_ORDER } from "@neverquest/data/caravan";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
 import { hireStatus } from "@neverquest/state/caravan";
 import { stage, wildernesses } from "@neverquest/state/encounter";
@@ -9,6 +10,8 @@ import { allowNSFW } from "@neverquest/state/settings";
 import { getNameStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useIncreaseStage() {
+  const progressQuest = useProgressQuest();
+
   return useRecoilCallback(
     ({ set, snapshot }) =>
       () => {
@@ -37,7 +40,9 @@ export function useIncreaseStage() {
         ]);
 
         set(stage, nextStage);
+
+        progressQuest({ quest: "stages" });
       },
-    [],
+    [progressQuest],
   );
 }

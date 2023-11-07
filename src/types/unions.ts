@@ -170,6 +170,7 @@ export const ROUTINE_TYPES = [
   "equippingShield",
   "acquiringKnapsack",
   "knapsackExpanding",
+  "stages",
   "powerLevel",
   "purchasingUsable",
   "purchasingInfusable",

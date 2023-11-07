@@ -1,8 +1,8 @@
 import { useRecoilCallback } from "recoil";
 
-import { useProgressQuest } from "./useProgressQuest";
 import { ELEMENTALS } from "@neverquest/data/inventory";
 import { ELEMENTAL_AILMENT_DURATION_MAXIMUM } from "@neverquest/data/statistics";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { totalElementalEffects } from "@neverquest/state/gear";
 import { canReceiveAilment, monsterAilmentDuration } from "@neverquest/state/monster";
 import type { Elemental } from "@neverquest/types/unions";

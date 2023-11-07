@@ -8,7 +8,7 @@ import {
 } from "@neverquest/data/quests";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { ownedItem } from "@neverquest/state/inventory";
-import type { QuestData } from "@neverquest/types";
+import type { QuestData, QuestNotification } from "@neverquest/types";
 import {
   QUEST_BONUS_TYPES,
   type Quest,
@@ -110,7 +110,7 @@ export const canUseJournal = withStateKey("canUseJournal", (key) =>
 );
 
 export const questNotifications = withStateKey("questNotifications", (key) =>
-  atom<QuestData[]>({
+  atom<QuestNotification[]>({
     default: [],
     effects: [handleLocalStorage({ key })],
     key,

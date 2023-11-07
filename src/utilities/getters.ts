@@ -1,5 +1,6 @@
 import type { RecoilValue, Snapshot } from "recoil";
 
+import { formatNumber } from "./formatters";
 import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
 import { NAME_STRUCTURE, PROGRESS_REDUCTION } from "@neverquest/data/encounter";
 import {
@@ -184,7 +185,7 @@ export function getQuestsData(quest: Quest): QuestData[] {
   const { description, hidden, progression, title } = QUESTS[quest];
 
   return progression.map((current, index) => ({
-    description: description.replace("@", `${current}`),
+    description: description.replace("@", formatNumber({ value: current })),
     hidden,
     progressionIndex: index,
     progressionMaximum: current,

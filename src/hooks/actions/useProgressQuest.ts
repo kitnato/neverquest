@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
 import { ownedItem } from "@neverquest/state/inventory";
@@ -7,7 +8,7 @@ import {
   questProgress,
   questStatuses,
 } from "@neverquest/state/quests";
-import type { QuestData } from "@neverquest/types";
+import type { QuestNotification } from "@neverquest/types";
 import type { Quest } from "@neverquest/types/unions";
 import { getQuestsData, getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -30,7 +31,7 @@ export function useProgressQuest() {
 
         set(questProgressState, newProgress);
 
-        const achievedQuests: QuestData[] = [];
+        const achievedQuests: QuestNotification[] = [];
 
         set(questStatusesState, (currentStatuses) =>
           currentStatuses.map((currentStatus, index) => {
@@ -41,7 +42,7 @@ export function useProgressQuest() {
               currentStatus === false &&
               newProgress >= currentQuest.progressionMaximum
             ) {
-              achievedQuests.unshift(currentQuest);
+              achievedQuests.unshift({ ...currentQuest, ID: nanoid() });
 
               return true;
             }
@@ -50,7 +51,7 @@ export function useProgressQuest() {
           }),
         );
 
-        set(questNotifications, achievedQuests);
+        set(questNotifications, (current) => [...achievedQuests, ...current]);
       },
     [],
   );

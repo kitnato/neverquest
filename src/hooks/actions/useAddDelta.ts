@@ -10,8 +10,8 @@ export function useAddDelta() {
     ({ set }) =>
       ({ contents, delta }: { contents: DeltaDisplay | DeltaDisplay[]; delta: Delta }) => {
         set(deltas(delta), (current) => [
-          { display: Array.isArray(contents) ? contents : [contents], ID: nanoid() },
           ...current,
+          { display: Array.isArray(contents) ? contents : [contents], ID: nanoid() },
         ]);
       },
     [],

@@ -106,6 +106,8 @@ export type QuestData = {
   title: string;
 };
 
+export type QuestNotification = QuestData & { ID: string };
+
 export type Ranged = WeaponBase & {
   ammunitionCost: number;
   range: number;

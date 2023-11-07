@@ -12,7 +12,12 @@ import IconHealth from "@neverquest/icons/health.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { questProgress, questStatuses } from "@neverquest/state/quests";
 import type { QuestData } from "@neverquest/types";
-import type { Quest, QuestBonus, QuestClass } from "@neverquest/types/unions";
+import {
+  QUEST_BONUS_TYPES,
+  type Quest,
+  type QuestBonus,
+  type QuestClass,
+} from "@neverquest/types/unions";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function QuestDisplay({
@@ -31,7 +36,7 @@ export function QuestDisplay({
 
   const cappedProgress = Math.min(questProgressValue, progressionMaximum);
   const choiceID = `quest-completion-${quest}-${progressionMaximum}`;
-  const hasCompletedQuest = typeof questStatus === "string";
+  const hasCompletedQuest = QUEST_BONUS_TYPES.some((current) => current === questStatus);
 
   return (
     <Stack className={hasCompletedQuest ? "opacity-50" : undefined} direction="horizontal" gap={3}>

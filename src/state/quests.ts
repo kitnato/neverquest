@@ -53,7 +53,7 @@ export const canCompleteQuests = withStateKey("canCompleteQuests", (key) =>
           (accumulator, currentQuest) =>
             accumulator ||
             Object.values(get(questStatuses(currentQuest))).some(
-              (currentStatus) => currentStatus === true,
+              (currentStatus) => currentStatus === "achieved",
             ),
           false,
         ),
@@ -69,9 +69,8 @@ export const completedQuestsCount = withStateKey("completedQuestsCount", (key) =
         QUEST_TYPES_BY_CLASS[parameter].reduce(
           (accumulator, currentQuest) =>
             accumulator +
-            Object.values(get(questStatuses(currentQuest))).filter(
-              (currentStatus) =>
-                typeof currentStatus !== "boolean" && QUEST_BONUS_TYPES.includes(currentStatus),
+            Object.values(get(questStatuses(currentQuest))).filter((currentStatus) =>
+              QUEST_BONUS_TYPES.some((currentBonus) => currentBonus === currentStatus),
             ).length,
           0,
         ),
@@ -90,8 +89,7 @@ export const questsBonus = withStateKey("questsBonus", (key) =>
               (accumulator, currentQuest) =>
                 accumulator +
                 Object.values(get(questStatuses(currentQuest))).filter(
-                  (currentStatus) =>
-                    typeof currentStatus !== "boolean" && parameter === currentStatus,
+                  (currentStatus) => parameter === currentStatus,
                 ).length,
               0,
             ) * QUEST_COMPLETION_BONUS,
@@ -127,7 +125,7 @@ export const questProgress = withStateKey("questProgress", (key) =>
 
 export const questStatuses = withStateKey("questStatuses", (key) =>
   atomFamily<QuestStatus[], Quest>({
-    default: (parameter) => Object.keys(QUESTS[parameter].progression).map(() => false),
+    default: (parameter) => Object.keys(QUESTS[parameter].progression).map(() => "incomplete"),
     effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),

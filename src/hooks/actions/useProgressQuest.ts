@@ -39,12 +39,12 @@ export function useProgressQuest() {
 
             if (
               currentQuest !== undefined &&
-              currentStatus === false &&
+              currentStatus === "incomplete" &&
               newProgress >= currentQuest.progressionMaximum
             ) {
               achievedQuests.unshift({ ...currentQuest, ID: nanoid() });
 
-              return true;
+              return "achieved";
             }
 
             return currentStatus;

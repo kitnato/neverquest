@@ -4,33 +4,36 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { OCCULTIST_PURGE_PRICE_MULTIPLIER } from "@neverquest/data/caravan";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/data/general";
-import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
+import { useResetCompletedQuests } from "@neverquest/hooks/actions/useResetCompletedQuests";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconRitual from "@neverquest/icons/ritual.svg?react";
-import { absorbedEssence } from "@neverquest/state/attributes";
+import { completedQuestsCount } from "@neverquest/state/quests";
 import { essence } from "@neverquest/state/resources";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export function PurgeEssence() {
+export function PurgeMemories() {
   const essenceValue = useRecoilValue(essence);
-  const absorbedEssenceValue = useRecoilValue(absorbedEssence);
+  const allCompletedQuestsCount =
+    useRecoilValue(completedQuestsCount("conquest")) +
+    useRecoilValue(completedQuestsCount("routine")) +
+    useRecoilValue(completedQuestsCount("triumph"));
 
-  const resetAttributes = useResetAttributes();
+  const resetCompletedQuests = useResetCompletedQuests();
   const transactEssence = useTransactEssence();
 
-  const price = Math.round(absorbedEssenceValue * OCCULTIST_PURGE_PRICE_MULTIPLIER.essence);
+  const price = Math.round(allCompletedQuestsCount * OCCULTIST_PURGE_PRICE_MULTIPLIER.quests);
   const isAffordable = price <= essenceValue;
-  const isPurchasable = isAffordable && absorbedEssenceValue > 0;
+  const isPurchasable = isAffordable && allCompletedQuestsCount > 0;
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <IconDisplay
-        description="Resets power level to 0, refunding all absorbed essence."
+        description="Resets the bonus of all completed quests, allowing for new choices."
         Icon={IconRitual}
         tooltip="Ritual"
       >
-        Purge essence
+        Purge memories
       </IconDisplay>
 
       <Stack direction="horizontal" gap={3}>
@@ -43,7 +46,7 @@ export function PurgeEssence() {
             <Tooltip>
               {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
 
-              {absorbedEssenceValue === 0 && <div>No essence to purge.</div>}
+              {price === 0 && <div>No completed quests to reset.</div>}
             </Tooltip>
           }
           trigger={isPurchasable ? [] : ["hover", "focus"]}
@@ -53,9 +56,7 @@ export function PurgeEssence() {
               disabled={!isPurchasable}
               onClick={() => {
                 transactEssence(-price);
-                transactEssence(absorbedEssenceValue);
-
-                resetAttributes();
+                resetCompletedQuests();
               }}
               variant="outline-dark"
             >

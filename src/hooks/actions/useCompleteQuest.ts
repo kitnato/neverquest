@@ -17,7 +17,7 @@ export function useCompleteQuest() {
 
         const progressionIndex = QUESTS[quest].progression.indexOf(progress);
 
-        if (get(questStatuses(quest))[progressionIndex] === true) {
+        if (get(questStatuses(quest))[progressionIndex] === "achieved") {
           set(questStatuses(quest), (current) =>
             current.map((currentStatus, index) =>
               index === progressionIndex ? bonus : currentStatus,

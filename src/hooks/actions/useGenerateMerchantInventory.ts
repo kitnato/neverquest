@@ -70,8 +70,8 @@ export function useGenerateMerchantInventory() {
               (item.name === "antique coin" && get(canUseJournal))
             ) {
               merchantInventoryNew.push({
+                ...item,
                 isReturned: false,
-                item,
               });
             }
           }

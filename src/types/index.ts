@@ -21,7 +21,6 @@ export type AttributeOrMasteryBaseData = {
   description: string;
   Icon: SVGIcon;
   increment: number;
-  maximum?: number;
 };
 
 export type BlacksmithInventory = {
@@ -92,10 +91,9 @@ export type Melee = WeaponBase & {
   grip: Grip;
 };
 
-export type MerchantInventory = {
+export type MerchantInventoryItem = InventoryItem & {
   isReturned: boolean;
-  item: InventoryItem;
-}[];
+};
 
 export type QuestData = {
   description: string;

@@ -6,15 +6,15 @@ import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { Usable } from "@neverquest/components/Inventory/Usable";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import IconEssence from "@neverquest/icons/essence.svg?react";
-import type { InventoryItem } from "@neverquest/types";
+import type { MerchantInventoryItem } from "@neverquest/types";
 import { isGear, isUsable } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
-export function PurchasableItems({ items }: { items: InventoryItem[] }) {
+export function PurchasableItems({ merchantItems }: { merchantItems: MerchantInventoryItem[] }) {
   return (
     <>
-      {stackItems(items).map(({ item, stack }) => {
+      {stackItems(merchantItems).map(({ item, stack }) => {
         const { ID, price } = item;
 
         return (
@@ -34,7 +34,7 @@ export function PurchasableItems({ items }: { items: InventoryItem[] }) {
                 {formatNumber({ value: price })}
               </IconDisplay>
 
-              <PurchaseItem item={item} />
+              <PurchaseItem merchantItem={item} />
             </Stack>
           </div>
         );

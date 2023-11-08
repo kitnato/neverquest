@@ -1,15 +1,17 @@
 import { useRecoilCallback } from "recoil";
 
 import { GEM_FITTING_COST } from "@neverquest/data/inventory";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { armor, canApplyGem, shield, weapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
 import type { GemItem } from "@neverquest/types";
 import { isGear } from "@neverquest/types/type-guards";
-import type { Gear } from "@neverquest/types/unions";
+import { GEAR_TYPES, type Gear } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useApplyGem() {
+  const progressQuest = useProgressQuest();
   const transactEssence = useTransactEssence();
 
   return useRecoilCallback(
@@ -18,21 +20,13 @@ export function useApplyGem() {
         const get = getSnapshotGetter(snapshot);
 
         if (get(canApplyGem(slot))) {
-          const { gems, ID } = (() => {
-            switch (slot) {
-              case "armor": {
-                return get(armor);
-              }
+          const equippedGear = {
+            armor: get(armor),
+            shield: get(shield),
+            weapon: get(weapon),
+          };
 
-              case "shield": {
-                return get(shield);
-              }
-
-              default: {
-                return get(weapon);
-              }
-            }
-          })();
+          const { gems, ID } = equippedGear[slot];
 
           set(inventory, (current) =>
             current
@@ -47,8 +41,18 @@ export function useApplyGem() {
           );
 
           transactEssence(-(GEM_FITTING_COST[gems.length] ?? 0));
+
+          progressQuest({ quest: "gemsApplying" });
+
+          if (
+            GEAR_TYPES.filter((current) => current !== slot).every(
+              (current) => equippedGear[current].gems.length > 0,
+            )
+          ) {
+            progressQuest({ quest: "gemsApplyingAll" });
+          }
         }
       },
-    [transactEssence],
+    [progressQuest, transactEssence],
   );
 }

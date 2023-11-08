@@ -4,6 +4,7 @@ import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { RETIREMENT_MINIMUM_LEVEL } from "@neverquest/data/general";
 import { INHERITABLE_ITEMS } from "@neverquest/data/inventory";
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
 import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
 import { isAttributeUnlocked } from "@neverquest/state/attributes";
@@ -32,7 +33,13 @@ import { allowNSFW } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits";
 import { isGear } from "@neverquest/types/type-guards";
-import { ATTRIBUTE_TYPES, CREW_TYPES, MASTERY_TYPES, SKILL_TYPES } from "@neverquest/types/unions";
+import {
+  ATTRIBUTE_TYPES,
+  CREW_TYPES,
+  MASTERY_TYPES,
+  SKILL_TYPES,
+  TRAIT_TYPES,
+} from "@neverquest/types/unions";
 import {
   getNameStructure,
   getProgressReduction,
@@ -41,6 +48,7 @@ import {
 
 export function useRetire() {
   const generateMonster = useGenerateMonster();
+  const progressQuest = useProgressQuest();
   const resetAttributes = useResetAttributes();
 
   return useRecoilCallback(
@@ -57,6 +65,16 @@ export function useRetire() {
         if (selectedTraitValue !== null) {
           set(isTraitAcquired(selectedTraitValue), true);
           reset(selectedTrait);
+
+          progressQuest({ quest: "traits" });
+
+          if (
+            TRAIT_TYPES.filter((current) => current !== selectedTraitValue).every((current) =>
+              get(isTraitAcquired(current)),
+            )
+          ) {
+            progressQuest({ quest: "traitsAll" });
+          }
         }
 
         set(isShowing("traits"), true);
@@ -123,7 +141,9 @@ export function useRetire() {
         ]);
 
         generateMonster();
+
+        progressQuest({ quest: "retiring" });
       },
-    [generateMonster, resetAttributes],
+    [generateMonster, progressQuest, resetAttributes],
   );
 }

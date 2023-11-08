@@ -17,6 +17,7 @@ import type { InventoryItem } from "@neverquest/types";
 import {
   isArmor,
   isGear,
+  isGem,
   isMelee,
   isRanged,
   isShield,
@@ -38,18 +39,18 @@ export function useAcquireItem() {
           return "noFit";
         }
 
-        if (isTrinketItem(item)) {
-          const { name } = item;
-
-          if (name === "antique coin") {
-            progressQuest({ quest: "acquiringAntiqueCoin" });
-          }
-
-          if (name === "knapsack") {
-            set(isShowing("weight"), true);
-          }
+        if (isTrinketItem(item) && item.name === "knapsack") {
+          set(isShowing("weight"), true);
         } else {
           set(itemsAcquired, (current) => [...current, item]);
+        }
+
+        if (isGem(item)) {
+          progressQuest({ quest: "acquiringGems" });
+        }
+
+        if (isTrinketItem(item) && item.name === "antique coin") {
+          progressQuest({ quest: "acquiringAntiqueCoin" });
         }
 
         set(inventory, (current) => current.concat(item));
@@ -57,22 +58,31 @@ export function useAcquireItem() {
         const isShieldUnequipped = get(shield).name === SHIELD_NONE.name;
         const weaponValue = get(weapon);
 
-        if (
-          isGear(item) &&
-          get(autoEquip) &&
-          ((get(armor).name === ARMOR_NONE.name && isArmor(item)) ||
-            // Acquiring a shield while no shield equipped and not wielding a ranged or two-handed weapon (unless colossus).
-            (isShieldUnequipped && isShield(item) && !isRanged(weaponValue)) ||
-            get(isTraitAcquired("colossus")) ||
-            // Acquiring a weapon while no weapon equipped, and if ranged or two-handed, no shield equipped.
-            (weaponValue.name === WEAPON_NONE.name &&
-              ((isMelee(item) && item.grip === "one-handed") ||
-                get(isTraitAcquired("colossus")) ||
-                (((isMelee(item) && item.grip === "two-handed") ||
-                  (get(isSkillAcquired("archery")) && isRanged(item))) &&
-                  isShieldUnequipped))))
-        ) {
-          return "autoEquip";
+        if (isGear(item)) {
+          if (isMelee(item) && item.grip === "two-handed") {
+            progressQuest({ quest: "acquiringTwoHanded" });
+          }
+
+          if (isRanged(item)) {
+            progressQuest({ quest: "acquiringRanged" });
+          }
+
+          if (
+            get(autoEquip) &&
+            ((get(armor).name === ARMOR_NONE.name && isArmor(item)) ||
+              // Acquiring a shield while no shield equipped and not wielding a ranged or two-handed weapon (unless colossus).
+              (isShieldUnequipped && isShield(item) && !isRanged(weaponValue)) ||
+              get(isTraitAcquired("colossus")) ||
+              // Acquiring a weapon while no weapon equipped, and if ranged or two-handed, no shield equipped.
+              (weaponValue.name === WEAPON_NONE.name &&
+                ((isMelee(item) && item.grip === "one-handed") ||
+                  get(isTraitAcquired("colossus")) ||
+                  (((isMelee(item) && item.grip === "two-handed") ||
+                    (get(isSkillAcquired("archery")) && isRanged(item))) &&
+                    isShieldUnequipped))))
+          ) {
+            return "autoEquip";
+          }
         }
 
         return "success";

@@ -1,19 +1,13 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { BLIGHT } from "@neverquest/data/monster";
 import { HEALTH_LOW_THRESHOLD, RESERVES, RESERVE_MINIMUM } from "@neverquest/data/reserves";
-import {
-  attributePowerBonus,
-  attributeRank,
-  attributeStatistic,
-} from "@neverquest/state/attributes";
+import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { poisonLength, poisonMagnitude } from "@neverquest/state/monster";
 import { questsBonus } from "@neverquest/state/quests";
 import type { BlightMagnitude } from "@neverquest/types";
 import type { Reserve } from "@neverquest/types/unions";
-import { getComputedStatistic } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -41,15 +35,12 @@ export const blightMagnitude = withStateKey("blightMagnitude", (key) =>
 
 export const healthMaximum = withStateKey("healthMaximum", (key) =>
   selector({
-    get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES.vitality;
-      const attributeRankValue = get(attributeRank("vitality"));
-      const total = getComputedStatistic({ amount: attributeRankValue, base, increment });
-
-      return Math.round(
-        total * (1 + get(attributePowerBonus("vitality"))) * (1 + get(questsBonus("healthBonus"))),
-      );
-    },
+    get: ({ get }) =>
+      Math.round(
+        get(attributeStatistic("vitality")) *
+          (1 + get(attributePowerBonus("vitality"))) *
+          (1 + get(questsBonus("healthBonus"))),
+      ),
     key,
   }),
 );
@@ -157,13 +148,10 @@ export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (
 
 export const staminaMaximum = withStateKey("staminaMaximum", (key) =>
   selector({
-    get: ({ get }) => {
-      const { base, increment } = ATTRIBUTES.endurance;
-      const attributeRankValue = get(attributeRank("endurance"));
-      const total = getComputedStatistic({ amount: attributeRankValue, base, increment });
-
-      return Math.round(total * (1 + get(attributePowerBonus("endurance"))));
-    },
+    get: ({ get }) =>
+      Math.round(
+        get(attributeStatistic("endurance")) * (1 + get(attributePowerBonus("endurance"))),
+      ),
     key,
   }),
 );

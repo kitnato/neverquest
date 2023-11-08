@@ -54,9 +54,9 @@ export function Retirement({
         <Button
           onClick={() => {
             onHide();
-            retire();
+
             progressQuest({ quest: "decipheringJournal" });
-            progressQuest({ quest: "retiring" });
+            retire();
           }}
           variant="outline-dark"
         >

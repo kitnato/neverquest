@@ -225,7 +225,7 @@ export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
 export const GEM_FITTING_COST = [20, 40, 100, 200, 500];
 export const GEMS_MAXIMUM = 5;
 
-export const INFUSABLE_LEVEL_MAXIMUM = 100;
+export const INFUSION_LEVEL_MAXIMUM = 100;
 export const INFUSABLES: Record<
   Infusable,
   {

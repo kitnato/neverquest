@@ -17,6 +17,7 @@ export const ATTRIBUTES: Record<
   Attribute,
   AttributeOrMasteryBaseData & {
     isUnlocked: boolean;
+    maximum?: number;
     powerBonus: number;
     shows?: Showing[];
   }
@@ -25,18 +26,18 @@ export const ATTRIBUTES: Record<
     base: 0.03,
     description: "Increases chance to dodge an attack.",
     Icon: IconAgility,
-    increment: 0.03,
+    increment: 0.022,
     isUnlocked: false,
-    maximum: 0.8,
+    maximum: 30, // 0.8
     powerBonus: 0.005,
   },
   dexterity: {
     base: 0.03,
     description: "Increases critical strike chance.",
     Icon: IconDexterity,
-    increment: 0.02,
+    increment: 0.01425,
     isUnlocked: false,
-    maximum: 0.61,
+    maximum: 40, // 0.6
     powerBonus: 0.005,
   },
   endurance: {
@@ -71,7 +72,7 @@ export const ATTRIBUTES: Record<
     Icon: IconSpeed,
     increment: 0.02,
     isUnlocked: true,
-    maximum: 0.9,
+    maximum: 40, // 0.8
     powerBonus: 0.005,
     shows: ["attackRateDetails"],
   },
@@ -88,9 +89,9 @@ export const ATTRIBUTES: Record<
     base: 0,
     description: "Reduces health & stamina regeneration rate.",
     Icon: IconVigor,
-    increment: 0.03,
+    increment: 0.0225,
     isUnlocked: false,
-    maximum: 0.9,
+    maximum: 40, // 0.9
     powerBonus: 0.005,
   },
   vitality: {
@@ -103,15 +104,3 @@ export const ATTRIBUTES: Record<
     shows: ["healthDetails"],
   },
 };
-
-export const ATTRIBUTES_ORDER: Attribute[] = [
-  "strength",
-  "speed",
-  "vitality",
-  "endurance",
-  "vigor",
-  "fortitude",
-  "dexterity",
-  "perception",
-  "agility",
-];

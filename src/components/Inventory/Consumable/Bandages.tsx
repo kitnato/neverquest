@@ -12,19 +12,21 @@ export function Bandages({ ID }: { ID: string }) {
 
   const heal = useHeal();
 
-  const apply = () => {
-    heal();
-
-    setInventory((current) => current.filter((current) => current.ID !== ID));
-  };
-
   return (
     <OverlayTrigger
       overlay={<Tooltip>{LABEL_FULL_HEALTH}</Tooltip>}
       trigger={isHealthAtMaximumValue ? ["hover", "focus"] : []}
     >
       <span>
-        <Button disabled={isHealthAtMaximumValue} onClick={apply} variant="outline-dark">
+        <Button
+          disabled={isHealthAtMaximumValue}
+          onClick={() => {
+            heal();
+
+            setInventory((current) => current.filter((current) => current.ID !== ID));
+          }}
+          variant="outline-dark"
+        >
           Use
         </Button>
       </span>

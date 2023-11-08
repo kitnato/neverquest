@@ -8,6 +8,7 @@ import {
   LABEL_NO_ESSENCE,
   LABEL_UNKNOWN,
 } from "@neverquest/data/general";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
@@ -22,6 +23,7 @@ export function CrewHirable({ crew }: { crew: Crew }) {
   const [{ status: hireStatusValue }, setHireStatus] = useRecoilState(hireStatus(crew));
   const setIsShowingGearClass = useSetRecoilState(isShowing("gearClass"));
 
+  const progressQuest = useProgressQuest();
   const transactEssence = useTransactEssence();
 
   const { description, Icon, price, requiredStage } = CREW[crew];
@@ -58,6 +60,9 @@ export function CrewHirable({ crew }: { crew: Crew }) {
                   if (crew === "blacksmith") {
                     setIsShowingGearClass(true);
                   }
+
+                  progressQuest({ quest: "hiringOne" });
+                  progressQuest({ quest: "hiringAll" });
                 }}
                 variant="outline-dark"
               >

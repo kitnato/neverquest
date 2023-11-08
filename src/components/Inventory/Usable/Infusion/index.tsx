@@ -3,7 +3,7 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 import { LABEL_NO_ESSENCE } from "@neverquest/data/general";
-import { INFUSABLE_LEVEL_MAXIMUM } from "@neverquest/data/inventory";
+import { INFUSION_LEVEL_MAXIMUM } from "@neverquest/data/inventory";
 import { useInfuse } from "@neverquest/hooks/actions/useInfuse";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { infusionDelta, infusionLevel, infusionStep } from "@neverquest/state/items";
@@ -13,7 +13,7 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
   const infusionStepValue = useRecoilValue(infusionStep(infusable));
   const setInfusionDelta = useSetRecoilState(infusionDelta);
   const resetInfusionDelta = useResetRecoilState(infusionDelta);
-  const isInfusionAtMaximum = useRecoilValue(infusionLevel(infusable)) >= INFUSABLE_LEVEL_MAXIMUM;
+  const isInfusionAtMaximum = useRecoilValue(infusionLevel(infusable)) >= INFUSION_LEVEL_MAXIMUM;
 
   const [isInfusing, setIsInfusing] = useState(false);
 

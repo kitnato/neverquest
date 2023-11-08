@@ -6,10 +6,13 @@ import type { SVGIcon } from "@neverquest/types/props";
 import {
   CONQUEST_TYPES,
   CREW_TYPES,
+  MASTERY_TYPES,
   QUEST_CLASS_TYPES,
   type Quest,
   type QuestClass,
   ROUTINE_TYPES,
+  SKILL_TYPES,
+  TRAIT_TYPES,
   TRIUMPH_TYPES,
 } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -55,6 +58,11 @@ export const QUESTS: Record<
     progression: [1],
     title: "Companionship",
   },
+  acquiringGems: {
+    description: "Acquire @ gem(s).",
+    progression: [1, 10, 25],
+    title: "Shiny",
+  },
   acquiringRanged: {
     description: "Acquire a ranged weapon.",
     progression: [1],
@@ -66,12 +74,12 @@ export const QUESTS: Record<
     title: "Highlander",
   },
   attributesAll: {
-    description: "Level up all attributes at least once.",
+    description: "Increase all attributes at least once.",
     progression: [1],
     title: "Jack of all",
   },
   attributesMaximum: {
-    description: "Level up an attribute to its maximum.",
+    description: "Increase an attribute to its maximum rank.",
     progression: [1],
     title: "Specialist",
   },
@@ -117,6 +125,7 @@ export const QUESTS: Record<
   },
   completion: {
     description: "Complete all quests",
+    // TODO - revise
     progression: [180],
     title: "Completionist",
   },
@@ -156,17 +165,17 @@ export const QUESTS: Record<
     title: "Grim fandango",
   },
   equippingArmor: {
-    description: "Manually equip armor.",
+    description: "Equip a piece of armor.",
     progression: [1],
     title: "Locked & loaded",
   },
   equippingShield: {
-    description: "Manually equip a shield.",
+    description: "Equip a shield.",
     progression: [1],
     title: "Stop, drop & roll",
   },
   equippingWeapon: {
-    description: "Manually equip a weapon.",
+    description: "Equip a weapon.",
     progression: [1],
     title: "Armed & dangerous",
   },
@@ -190,24 +199,14 @@ export const QUESTS: Record<
     progression: [3, 10, 25, 50, 100],
     title: "Air conditioning",
   },
-  gems: {
-    description: "Acquire @ gem(s).",
-    progression: [1, 10, 25],
-    title: "Shiny",
-  },
-  gemsOwned: {
-    description: "Own a gem of each type.",
-    progression: [3],
-    title: "Collector",
-  },
-  gemsSocketing: {
-    description: "Socket a gem.",
-    progression: [1],
+  gemsApplying: {
+    description: "Socket @ gem.",
+    progression: [1, 3, 10, 25],
     title: "Jeweller",
   },
-  gemsSocketingAll: {
-    description: "Socket a gem in every equipped piece of gear.",
-    progression: [3],
+  gemsApplyingAll: {
+    description: "Have at least one gem in every equipped piece of gear.",
+    progression: [1],
     title: "Trifecta",
   },
   gemsTransmuting: {
@@ -230,13 +229,13 @@ export const QUESTS: Record<
     progression: [1],
     title: "Don't forget the doctor",
   },
-  infusion: {
-    description: "Infuse an item once.",
-    progression: [1],
+  infusing: {
+    description: "Infuse items by @ levels.",
+    progression: [3, 10, 25, 50],
     title: "Shaman",
   },
-  infusionMaximum: {
-    description: "Infuse an item to maximum capacity.",
+  infusingMaximum: {
+    description: "Infuse an item to maximum level.",
     progression: [1],
     title: "Witch doctor",
   },
@@ -271,17 +270,22 @@ export const QUESTS: Record<
     progression: [3, 10, 25, 50, 100],
     title: "Hoarding",
   },
-  masteryAll: {
-    description: "Unlock all masteries.",
+  masteries: {
+    description: "Unlock a mastery.",
     progression: [1],
+    title: "Apprentice",
+  },
+  masteriesAll: {
+    description: "Unlock all masteries.",
+    progression: [MASTERY_TYPES.length],
     title: "Guru",
   },
-  masteryRank: {
-    description: "Rank up a mastery.",
-    progression: [1],
+  masteriesRank: {
+    description: "Rank up masteries @ times.",
+    progression: [3, 10, 25, 50],
     title: "Practice makes perfect",
   },
-  masteryRankMaximum: {
+  masteriesRankMaximum: {
     description: "Rank up a mastery to its maximum.",
     progression: [1],
     title: "Virtuoso",
@@ -302,7 +306,7 @@ export const QUESTS: Record<
     title: "Just a cough",
   },
   potions: {
-    description: "Use @ witch's concoctions.",
+    description: "Consume @ witch's concoctions.",
     progression: [3, 10, 25, 50],
     title: "Intestinal discomfort",
   },
@@ -336,8 +340,8 @@ export const QUESTS: Record<
     progression: [1],
     title: "This doesn't give protection?",
   },
-  purchasingUsable: {
-    description: "Purchase a usable trinket.",
+  purchasingTrinket: {
+    description: "Purchase a trinket.",
     progression: [1],
     title: "Objets d'art",
   },
@@ -345,6 +349,16 @@ export const QUESTS: Record<
     description: "Purchase a weapon.",
     progression: [1],
     title: "Pointy end first",
+  },
+  purgingEssence: {
+    description: "Undergo an essence purge.",
+    progression: [1],
+    title: "Clean as a whistle",
+  },
+  purgingMemories: {
+    description: "Undergo a memory purge.",
+    progression: [1],
+    title: "What? Who? Where?",
   },
   resurrecting: {
     description: "Resurrect with a phylactery.",
@@ -355,16 +369,6 @@ export const QUESTS: Record<
     description: "Go into retirement @ times.",
     progression: [3, 10, 25],
     title: "Getting too old for this",
-  },
-  ritualEssence: {
-    description: "Undergo an essence purge.",
-    progression: [1],
-    title: "Clean as a whistle",
-  },
-  ritualMemories: {
-    description: "Undergo a memory purge.",
-    progression: [1],
-    title: "What? Who? Where?",
   },
   selling: {
     description: "Sell an item.",
@@ -381,15 +385,15 @@ export const QUESTS: Record<
     progression: [3, 10, 25, 50, 100],
     title: "Raiden",
   },
-  skillAcquiringAll: {
-    description: "Acquire all skills.",
-    progression: [1],
-    title: "The GOAT",
-  },
-  skillsAcquiring: {
+  skills: {
     description: "Acquire a skill.",
     progression: [1],
     title: "Future prodigy",
+  },
+  skillsAll: {
+    description: "Acquire all skills.",
+    progression: [SKILL_TYPES.length],
+    title: "The GOAT",
   },
   skillsCraft: {
     description: "Acquire armorcraft, siegecraft and shieldcraft skills.",
@@ -443,7 +447,7 @@ export const QUESTS: Record<
   },
   traitsAll: {
     description: "Acquire all traits.",
-    progression: [1],
+    progression: [TRAIT_TYPES.length],
     title: "Come at me",
   },
   warpingCaravan: {

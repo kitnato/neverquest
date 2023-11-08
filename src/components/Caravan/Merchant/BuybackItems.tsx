@@ -17,7 +17,7 @@ export function BuybackItems() {
     <Stack gap={3}>
       <h6>Buy back items</h6>
 
-      <PurchasableItems items={returnedItems.map(({ item }) => item)} />
+      <PurchasableItems merchantItems={returnedItems} />
     </Stack>
   );
 }

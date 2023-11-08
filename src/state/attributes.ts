@@ -1,10 +1,10 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
-import { ATTRIBUTES, ATTRIBUTES_ORDER } from "@neverquest/data/attributes";
+import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { powerBonusBoost } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
-import type { Attribute } from "@neverquest/types/unions";
+import { ATTRIBUTE_TYPES, type Attribute } from "@neverquest/types/unions";
 import { getAttributePointCost, getComputedStatistic } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
@@ -69,14 +69,8 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =
   selectorFamily<boolean, Attribute>({
     get:
       (parameter) =>
-      ({ get }) => {
-        const { base, increment, maximum } = ATTRIBUTES[parameter];
-        const attributeRankValue = get(attributeRank(parameter));
-
-        return maximum === undefined
-          ? false
-          : maximum === getComputedStatistic({ amount: attributeRankValue, base, increment });
-      },
+      ({ get }) =>
+        ATTRIBUTES[parameter].maximum === get(attributeRank(parameter)),
     key,
   }),
 );
@@ -84,7 +78,7 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =
 export const level = withStateKey("level", (key) =>
   selector({
     get: ({ get }) =>
-      ATTRIBUTES_ORDER.reduce((aggregator, current) => aggregator + get(attributeRank(current)), 0),
+      ATTRIBUTE_TYPES.reduce((aggregator, current) => aggregator + get(attributeRank(current)), 0),
     key,
   }),
 );

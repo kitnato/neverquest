@@ -1,5 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -17,6 +18,8 @@ import {
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleEquipGear() {
+  const progressQuest = useProgressQuest();
+
   return useRecoilCallback(
     ({ set, snapshot }) =>
       (gearItem: GearItem) => {
@@ -36,6 +39,8 @@ export function useToggleEquipGear() {
 
           set(isShowing("armor"), true);
           set(isShowing("protection"), true);
+
+          progressQuest({ quest: "equippingArmor" });
         }
 
         if (isShield(gearItem) && !isEquipped) {
@@ -46,6 +51,8 @@ export function useToggleEquipGear() {
           set(isShowing("blockChance"), true);
           set(isShowing("offhand"), true);
           set(isShowing("stamina"), true);
+
+          progressQuest({ quest: "equippingShield" });
         }
 
         if (isWeapon(gearItem) && !isEquipped) {
@@ -73,6 +80,8 @@ export function useToggleEquipGear() {
           set(isShowing("attackRateDetails"), true);
           set(isShowing("damageDetails"), true);
           set(isShowing("weapon"), true);
+
+          progressQuest({ quest: "equippingWeapon" });
         }
 
         set(inventory, (currentInventory) =>
@@ -115,6 +124,6 @@ export function useToggleEquipGear() {
           }),
         );
       },
-    [],
+    [progressQuest],
   );
 }

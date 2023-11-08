@@ -10,6 +10,7 @@ import { TRANSMUTE_COST } from "@neverquest/data/caravan";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { GEM_BASE } from "@neverquest/data/inventory";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconTransmute from "@neverquest/icons/transmute.svg?react";
 import { inventory } from "@neverquest/state/inventory";
 import { isGem } from "@neverquest/types/type-guards";
@@ -23,6 +24,7 @@ export function TransmuteGems() {
   const [result, setResult] = useState<Gem>("sapphire");
 
   const acquireItem = useAcquireItem();
+  const progressQuest = useProgressQuest();
 
   const gems = stackItems(
     inventoryValue
@@ -83,6 +85,8 @@ export function TransmuteGems() {
                   ID: nanoid(),
                   name: result,
                 });
+
+                progressQuest({ quest: "gemsTransmuting" });
               }
             }}
             variant="outline-dark"

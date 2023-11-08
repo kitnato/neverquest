@@ -30,7 +30,7 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
   const applyGem = useApplyGem();
 
   return (
-    <Dropdown onSelect={(slot) => applyGem({ gem, slot: slot as Gear })}>
+    <Dropdown onSelect={(slot) => slot !== null && applyGem({ gem, slot: slot as Gear })}>
       <Dropdown.Toggle variant="outline-dark">Apply</Dropdown.Toggle>
 
       <Dropdown.Menu>

@@ -10,6 +10,7 @@ import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/Dod
 import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { ARMOR_SPECIFICATIONS } from "@neverquest/data/inventory";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconDeflection from "@neverquest/icons/deflection.svg?react";
 import IconDodgePenalty from "@neverquest/icons/dodge-penalty.svg?react";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
@@ -39,6 +40,8 @@ export function ArmorOptions() {
 
   const [armorClass, setArmorClass] = useState<ArmorClass>("light");
   const [armorLevel, setArmorLevel] = useState(stageValue);
+
+  const progressQuest = useProgressQuest();
 
   const factor = getGrowthSigmoid(armorLevel);
   const { deflection, protection, staminaCost, weight } = getArmorRanges({
@@ -121,7 +124,7 @@ export function ArmorOptions() {
         <span className="text-center">Cannot use without training.</span>
       ) : craftedArmor === null ? (
         <CraftGear
-          onCraft={() =>
+          onCraft={() => {
             setBlacksmithInventory((current) => ({
               ...current,
               armor: generateArmor({
@@ -136,8 +139,10 @@ export function ArmorOptions() {
                     ? ["highQuality"]
                     : undefined,
               }),
-            }))
-          }
+            }));
+
+            progressQuest({ quest: "crafting" });
+          }}
           price={getGearPrice({
             factor,
             ...ARMOR_SPECIFICATIONS[armorClass],

@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { OCCULTIST_PURGE_PRICE_MULTIPLIER } from "@neverquest/data/caravan";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/data/general";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
@@ -16,6 +17,7 @@ export function PurgeEssence() {
   const essenceValue = useRecoilValue(essence);
   const absorbedEssenceValue = useRecoilValue(absorbedEssence);
 
+  const progressQuest = useProgressQuest();
   const resetAttributes = useResetAttributes();
   const transactEssence = useTransactEssence();
 
@@ -56,6 +58,8 @@ export function PurgeEssence() {
                 transactEssence(absorbedEssenceValue);
 
                 resetAttributes();
+
+                progressQuest({ quest: "purgingEssence" });
               }}
               variant="outline-dark"
             >

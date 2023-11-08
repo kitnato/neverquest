@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
@@ -9,6 +10,8 @@ import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSeco
 import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDetails";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
+import { QUEST_REQUIREMENTS } from "@neverquest/data/quests";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconBrawler from "@neverquest/icons/brawler.svg?react";
 import IconBruiser from "@neverquest/icons/bruiser.svg?react";
@@ -37,9 +40,17 @@ export function Damage() {
   const staminaValue = useRecoilValue(stamina);
   const { damage: weaponDamage, gems, name } = useRecoilValue(weapon);
 
+  const progressQuest = useProgressQuest();
+
   useDeltaText({
     delta: "damage",
     state: damage,
+  });
+
+  useEffect(() => {
+    if (damageValue >= QUEST_REQUIREMENTS.damage) {
+      progressQuest({ quest: "damage" });
+    }
   });
 
   return (

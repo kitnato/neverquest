@@ -10,10 +10,10 @@ import type { Crew } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function CrewHired({ crew, setActive }: { crew: Crew; setActive: () => void }) {
-  const { status } = useRecoilValue(hireStatus(crew));
+  const { current } = useRecoilValue(hireStatus(crew));
   const stageValue = useRecoilValue(stage);
 
-  if (status !== "hired") {
+  if (current !== "hired") {
     return null;
   }
 

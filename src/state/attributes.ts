@@ -107,10 +107,10 @@ export const attributeRank = withStateKey("attributeRank", (key) =>
   }),
 );
 
-// TODO - Must use { isUnlocked } object instead of just boolean, otherwise onSet() does not trigger in useInitializer()
+// TODO - Must use { current } object instead of just boolean, otherwise onSet() does not trigger in useInitializer()
 export const isAttributeUnlocked = withStateKey("isAttributeUnlocked", (key) =>
-  atomFamily<{ isUnlocked: boolean }, Attribute>({
-    default: { isUnlocked: false },
+  atomFamily<{ current: boolean }, Attribute>({
+    default: { current: false },
     effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),

@@ -189,12 +189,20 @@ export function useAttack() {
           });
         } else {
           addDelta({
-            contents: {
-              color: "text-muted",
-              value: "CANNOT ATTACK",
-            },
+            contents: [
+              {
+                color: "text-muted",
+                value: "CANNOT ATTACK",
+              },
+              {
+                color: "text-danger",
+                value: `(${staminaCost})`,
+              },
+            ],
             delta: "stamina",
           });
+
+          progressQuest({ quest: "exhausting" });
         }
       },
     [

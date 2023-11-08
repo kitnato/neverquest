@@ -34,7 +34,7 @@ export function GameOver() {
         </ModalTitle>
       </ModalHeader>
 
-      <ModalBody>Darkness has erased all lineage across this world. Start a new quest?</ModalBody>
+      <ModalBody>Darkness has erased all lineage across this world. Start anew?</ModalBody>
 
       <ModalFooter>
         <Button

@@ -18,17 +18,17 @@ export function useInitialize() {
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      () => {
+      (isRetirement?: boolean) => {
         const get = getSnapshotGetter(snapshot);
 
-        if (ls.get(KEY_SESSION) === null) {
+        if (ls.get(KEY_SESSION) === null || isRetirement) {
           ATTRIBUTE_TYPES.forEach((current) =>
-            set(isAttributeUnlocked(current), { isUnlocked: ATTRIBUTES[current].isUnlocked }),
+            set(isAttributeUnlocked(current), { current: ATTRIBUTES[current].isUnlocked }),
           );
 
           CREW_TYPES.forEach((current) =>
             set(hireStatus(current), {
-              status: CREW[current].requiredStage === 0 ? ("hired" as CrewStatus) : null,
+              current: CREW[current].requiredStage === 0 ? ("hired" as CrewStatus) : null,
             }),
           );
 

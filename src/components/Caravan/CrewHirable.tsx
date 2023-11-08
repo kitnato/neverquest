@@ -1,5 +1,5 @@
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CREW } from "@neverquest/data/caravan";
@@ -8,33 +8,29 @@ import {
   LABEL_NO_ESSENCE,
   LABEL_UNKNOWN,
 } from "@neverquest/data/general";
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
+import { useHireCrew } from "@neverquest/hooks/actions/useHireCrew";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { hireStatus } from "@neverquest/state/caravan";
-import { isShowing } from "@neverquest/state/isShowing";
 import { essence } from "@neverquest/state/resources";
 import type { Crew } from "@neverquest/types/unions";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function CrewHirable({ crew }: { crew: Crew }) {
+  const { current: hireStatusCurrent } = useRecoilValue(hireStatus(crew));
   const essenceValue = useRecoilValue(essence);
-  const [{ status: hireStatusValue }, setHireStatus] = useRecoilState(hireStatus(crew));
-  const setIsShowingGearClass = useSetRecoilState(isShowing("gearClass"));
 
-  const progressQuest = useProgressQuest();
-  const transactEssence = useTransactEssence();
+  const hireCrew = useHireCrew();
 
   const { description, Icon, price, requiredStage } = CREW[crew];
   const isAffordable = price <= essenceValue;
   const name = capitalizeAll(crew);
 
-  if (hireStatusValue === "hired") {
+  if (hireStatusCurrent === "hired") {
     return null;
   }
 
-  if (hireStatusValue === "hirable") {
+  if (hireStatusCurrent === "hirable") {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay description={description} Icon={Icon} tooltip="Caravan crew">
@@ -53,17 +49,7 @@ export function CrewHirable({ crew }: { crew: Crew }) {
             <span>
               <Button
                 disabled={!isAffordable}
-                onClick={() => {
-                  setHireStatus({ status: "hired" });
-                  transactEssence(-price);
-
-                  if (crew === "blacksmith") {
-                    setIsShowingGearClass(true);
-                  }
-
-                  progressQuest({ quest: "hiringOne" });
-                  progressQuest({ quest: "hiringAll" });
-                }}
+                onClick={() => hireCrew({ crew, price })}
                 variant="outline-dark"
               >
                 Hire

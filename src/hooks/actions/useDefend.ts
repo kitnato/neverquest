@@ -89,6 +89,7 @@ export function useDefend() {
         }
 
         const deltaHealth: DeltaDisplay[] = [];
+        const deltaStamina: DeltaDisplay[] = [];
 
         // If attack is dodged, nothing else happens (all damage is negated).
         if (Math.random() < get(dodgeChance)) {
@@ -111,10 +112,18 @@ export function useDefend() {
 
             return;
           } else {
-            deltaHealth.push({
-              color: "text-muted",
-              value: `CANNOT DODGE (${armorStaminaCost})`,
-            });
+            deltaStamina.push(
+              {
+                color: "text-muted",
+                value: "CANNOT DODGE",
+              },
+              {
+                color: "text-danger",
+                value: `(${armorStaminaCost})`,
+              },
+            );
+
+            progressQuest({ quest: "exhausting" });
           }
         }
 
@@ -127,7 +136,6 @@ export function useDefend() {
         const protectionValue = get(protection);
 
         const deltaMonsterHealth: DeltaDisplay[] = [];
-        const deltaStamina: DeltaDisplay[] = [];
         const totalDamage = protectionValue - monsterDamageAilingValue;
 
         let healthDamage = totalDamage < 0 ? totalDamage : 0;
@@ -177,6 +185,8 @@ export function useDefend() {
                 value: `(${get(weapon).staminaCost})`,
               },
             );
+
+            progressQuest({ quest: "exhausting" });
           }
         }
 
@@ -223,6 +233,8 @@ export function useDefend() {
                 value: `(${shieldStaminaCost})`,
               },
             );
+
+            progressQuest({ quest: "exhausting" });
           }
         } else {
           // If neither dodged, parried nor blocked, show damage with protection and increase resilience.

@@ -70,7 +70,7 @@ export function useToggleEquipGear() {
 
           if (staminaCost > 0) {
             set(isShowing("stamina"), true);
-            set(isAttributeUnlocked("endurance"), { isUnlocked: true });
+            set(isAttributeUnlocked("endurance"), { current: true });
           }
 
           if (isRangedWeapon || isTwoHandedWeapon) {

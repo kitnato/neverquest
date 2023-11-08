@@ -18,7 +18,7 @@ export function TrainableSkill({ skill }: { skill: Skill }) {
 
   const skillPriceValue = useRecoilValue(skillPrice);
   const skillValue = useRecoilValue(isSkillAcquired(skill));
-  const { status } = useRecoilValue(hireStatus(requiredCrew));
+  const { current } = useRecoilValue(hireStatus(requiredCrew));
 
   if (skillValue) {
     return null;
@@ -26,7 +26,7 @@ export function TrainableSkill({ skill }: { skill: Skill }) {
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-      {status === "hired" ? (
+      {current === "hired" ? (
         <>
           <SkillDisplay skill={skill} />
 

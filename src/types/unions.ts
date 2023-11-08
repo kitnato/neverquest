@@ -30,7 +30,7 @@ export const CONQUEST_TYPES = [
   "criticalKilling",
   "executing",
   "bandaging",
-  "bosses",
+  "killingBoss",
   "burning",
   "freezing",
   "shocking",
@@ -178,7 +178,7 @@ export const ROUTINE_TYPES = [
   "spendingEssence",
   "warpingWilderness",
   "warpingCaravan",
-  "hiringOne",
+  "hiring",
   "hiringAll",
   "crafting",
   "acquiringGems",
@@ -252,8 +252,8 @@ export const SKILL_TYPES = [
   "calisthenics",
   "escrime",
   "evasion",
-  "siegecraft",
   "shieldcraft",
+  "siegecraft",
   "traumatology",
 ] as const;
 export type Skill = (typeof SKILL_TYPES)[number];
@@ -485,9 +485,12 @@ export const TRIUMPH_TYPES = [
   "masteriesAll",
   "traitsAll",
   "powerLevelUltra",
+  "stagesEnd",
   "killingResDominus",
   "acquiringFamiliar",
   "killingResCogitans",
+  "decidingGrind",
+  "decidingDeath",
   "completion",
 ] as const;
 export type Triumph = (typeof TRIUMPH_TYPES)[number];

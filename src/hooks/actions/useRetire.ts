@@ -1,17 +1,14 @@
 import { useRecoilCallback } from "recoil";
 
-import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { RETIREMENT_MINIMUM_LEVEL } from "@neverquest/data/general";
 import { INHERITABLE_ITEMS } from "@neverquest/data/inventory";
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
+import { useInitialize } from "@neverquest/hooks/actions/useInitialize";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
-import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
-import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import {
   blacksmithInventory,
   fletcherInventory,
-  hireStatus,
   merchantInventory,
 } from "@neverquest/state/caravan";
 import { attackDuration, name } from "@neverquest/state/character";
@@ -22,32 +19,21 @@ import {
   progressReduction,
   stage,
   stageMaximum,
-  wildernesses,
 } from "@neverquest/state/encounter";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMasteryUnlocked, masteryProgress, masteryRank } from "@neverquest/state/masteries";
-import { canUseJournal } from "@neverquest/state/quests";
+import { canUseJournal, questProgress } from "@neverquest/state/quests";
 import { essence } from "@neverquest/state/resources";
-import { allowNSFW } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits";
 import { isGear } from "@neverquest/types/type-guards";
-import {
-  ATTRIBUTE_TYPES,
-  CREW_TYPES,
-  MASTERY_TYPES,
-  SKILL_TYPES,
-  TRAIT_TYPES,
-} from "@neverquest/types/unions";
-import {
-  getNameStructure,
-  getProgressReduction,
-  getSnapshotGetter,
-} from "@neverquest/utilities/getters";
+import { MASTERY_TYPES, SKILL_TYPES, TRAIT_TYPES } from "@neverquest/types/unions";
+import { getProgressReduction, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useRetire() {
   const generateMonster = useGenerateMonster();
+  const initialize = useInitialize();
   const progressQuest = useProgressQuest();
   const resetAttributes = useResetAttributes();
 
@@ -86,6 +72,8 @@ export function useRetire() {
         reset(location);
         reset(name);
         reset(stage);
+        reset(questProgress("powerLevel"));
+        reset(questProgress("stages"));
 
         resetAttributes();
 
@@ -94,16 +82,6 @@ export function useRetire() {
         reset(blacksmithInventory);
         reset(fletcherInventory);
         reset(merchantInventory);
-
-        ATTRIBUTE_TYPES.forEach((current) =>
-          set(isAttributeUnlocked(current), { isUnlocked: ATTRIBUTES[current].isUnlocked }),
-        );
-
-        CREW_TYPES.forEach((current) =>
-          set(hireStatus(current), ({ status }) => ({
-            status: status === "hirable" ? null : status,
-          })),
-        );
 
         MASTERY_TYPES.forEach((current) => {
           reset(isMasteryUnlocked(current));
@@ -133,14 +111,7 @@ export function useRetire() {
           }),
         );
 
-        set(wildernesses, [
-          generateLocation({
-            allowNSFW: get(allowNSFW),
-            nameStructure: getNameStructure(),
-          }),
-        ]);
-
-        generateMonster();
+        initialize(true);
 
         progressQuest({ quest: "retiring" });
       },

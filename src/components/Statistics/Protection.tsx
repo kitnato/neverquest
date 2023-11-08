@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
@@ -7,6 +8,8 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
 import { SHIELD_NONE } from "@neverquest/data/inventory";
+import { QUEST_REQUIREMENTS } from "@neverquest/data/quests";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconArmor from "@neverquest/icons/armor.svg?react";
 import IconProtection from "@neverquest/icons/protection.svg?react";
@@ -24,11 +27,19 @@ export function Protection() {
   const protectionValue = useRecoilValue(protection);
   const shieldValue = useRecoilValue(shield);
 
+  const progressQuest = useProgressQuest();
+
   const showDetails = isTraitAcquiredTank && shieldValue.name !== SHIELD_NONE.name;
 
   useDeltaText({
     delta: "protection",
     state: protection,
+  });
+
+  useEffect(() => {
+    if (protectionValue >= QUEST_REQUIREMENTS.protection) {
+      progressQuest({ quest: "protection" });
+    }
   });
 
   if (!isShowingProtection) {

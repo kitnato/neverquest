@@ -5,17 +5,14 @@ import IconTriumph from "@neverquest/icons/triumph.svg?react";
 import type { SVGIcon } from "@neverquest/types/props";
 import {
   CONQUEST_TYPES,
-  CREW_TYPES,
-  MASTERY_TYPES,
   QUEST_CLASS_TYPES,
   type Quest,
   type QuestClass,
   ROUTINE_TYPES,
-  SKILL_TYPES,
-  TRAIT_TYPES,
+  type Skill,
   TRIUMPH_TYPES,
 } from "@neverquest/types/unions";
-import { formatNumber } from "@neverquest/utilities/formatters";
+import { formatEnumeration, formatNumber } from "@neverquest/utilities/formatters";
 
 export const QUEST_CLASS_ICONS: Record<QuestClass, SVGIcon> = {
   conquest: IconConquest,
@@ -24,6 +21,15 @@ export const QUEST_CLASS_ICONS: Record<QuestClass, SVGIcon> = {
 };
 
 export const QUEST_COMPLETION_BONUS = 0.01;
+
+export const QUEST_REQUIREMENTS = {
+  damage: 1500,
+  essenceCount: 777,
+  powerLevelUltra: 100,
+  protection: 1000,
+  skillsCraft: ["armorcraft", "shieldcraft", "siegecraft"] as Skill[],
+  stagesEnd: 100,
+};
 
 export const QUEST_TYPES_BY_CLASS = {
   conquest: CONQUEST_TYPES,
@@ -52,17 +58,20 @@ export const QUESTS: Record<
     progression: [1],
     title: "Ranger",
   },
+  // TODO
   acquiringFamiliar: {
     description: `Acquire the ${LABEL_UNKNOWN}`,
     hidden: "familiar.",
     progression: [1],
     title: "Companionship",
   },
+
   acquiringGems: {
     description: "Acquire @ gem(s).",
     progression: [1, 10, 25],
     title: "Shiny",
   },
+
   acquiringRanged: {
     description: "Acquire a ranged weapon.",
     progression: [1],
@@ -104,14 +113,9 @@ export const QUESTS: Record<
     title: "Coughing blood",
   },
   blocking: {
-    description: "Block an attack @ times.",
+    description: "Block attacks @ times.",
     progression: [3, 10, 25, 50, 100],
     title: "None shall pass",
-  },
-  bosses: {
-    description: "Kill @ boss monsters.",
-    progression: [3, 10, 25, 50],
-    title: "Giant killer",
   },
   burning: {
     description: "Inflict burning @ times.",
@@ -145,9 +149,25 @@ export const QUESTS: Record<
     title: "Fatality",
   },
   damage: {
-    description: `Have ${formatNumber({ value: 1000 })} total damage.`,
+    description: `Have at least ${formatNumber({
+      value: QUEST_REQUIREMENTS.damage,
+    })} total damage.`,
     progression: [1],
     title: "Destroyer",
+  },
+  // TODO
+  decidingDeath: {
+    description: `Decide to ${LABEL_UNKNOWN}`,
+    hidden: " die forever.",
+    progression: [1],
+    title: "The End",
+  },
+  // TODO
+  decidingGrind: {
+    description: `Decide to ${LABEL_UNKNOWN}`,
+    hidden: " keep grinding.",
+    progression: [1],
+    title: "Parable of Stan",
   },
   decipheringJournal: {
     description: "Decipher the journal.",
@@ -180,7 +200,9 @@ export const QUESTS: Record<
     title: "Armed & dangerous",
   },
   essenceCount: {
-    description: "Have exactly 777 essence.",
+    description: `Have exactly ${formatNumber({
+      value: QUEST_REQUIREMENTS.essenceCount,
+    })} essence.`,
     progression: [1],
     title: "Jackpot",
   },
@@ -190,8 +212,8 @@ export const QUESTS: Record<
     title: "Capital punishment",
   },
   exhausting: {
-    description: "Be exhausted when attempting to attack, dodge, parry and block.",
-    progression: [4],
+    description: "Be too exhausted to attack, dodge, parry or block @ times.",
+    progression: [3, 10, 25],
     title: "Out of breath",
   },
   freezing: {
@@ -214,20 +236,20 @@ export const QUESTS: Record<
     progression: [1],
     title: "Better than mining",
   },
+  hiring: {
+    description: "Hire caravan crew members @ times.",
+    progression: [3, 10, 25],
+    title: "Don't forget the doctor",
+  },
   hiringAll: {
     description: "Hire all caravan crew.",
-    progression: [CREW_TYPES.length],
+    progression: [1],
     title: "Haven't died of dysentery",
   },
   hiringBlacksmithFirst: {
     description: "Hire the blacksmith as the first crew member.",
     progression: [1],
     title: "Straight to the good stuff",
-  },
-  hiringOne: {
-    description: "Hire a caravan crew member.",
-    progression: [1],
-    title: "Don't forget the doctor",
   },
   infusing: {
     description: "Infuse items by @ levels.",
@@ -244,17 +266,24 @@ export const QUESTS: Record<
     progression: [3, 10, 25, 50, 100, 250],
     title: "Murder",
   },
+  killingBoss: {
+    description: "Kill @ boss monsters.",
+    progression: [3, 10, 25, 50],
+    title: "Giant killer",
+  },
   killingOneStrike: {
     description: "Kill a monster in one strike.",
     progression: [1],
     title: "One Punch Person",
   },
+  // TODO
   killingResCogitans: {
     description: `Defeat ${LABEL_UNKNOWN}`,
     hidden: "Res Cogitans.",
     progression: [1],
     title: "Veritas tenebris",
   },
+  // TODO
   killingResDominus: {
     description: "Defeat the final boss.",
     progression: [1],
@@ -277,7 +306,7 @@ export const QUESTS: Record<
   },
   masteriesAll: {
     description: "Unlock all masteries.",
-    progression: [MASTERY_TYPES.length],
+    progression: [1],
     title: "Guru",
   },
   masteriesRank: {
@@ -316,12 +345,16 @@ export const QUESTS: Record<
     title: "One up",
   },
   powerLevelUltra: {
-    description: "Reach power level 100.",
-    progression: [100],
+    description: `Reach power level ${formatNumber({
+      value: QUEST_REQUIREMENTS.powerLevelUltra,
+    })}.`,
+    progression: [1],
     title: `It's over ${formatNumber({ value: 9000 })}!`,
   },
   protection: {
-    description: "Have 500 protection.",
+    description: `Have at least ${formatNumber({
+      value: QUEST_REQUIREMENTS.protection,
+    })} protection.`,
     progression: [1],
     title: "I like turtles",
   },
@@ -386,17 +419,17 @@ export const QUESTS: Record<
     title: "Raiden",
   },
   skills: {
-    description: "Acquire a skill.",
-    progression: [1],
+    description: "Acquire skills @ times.",
+    progression: [3, 10, 25],
     title: "Future prodigy",
   },
   skillsAll: {
     description: "Acquire all skills.",
-    progression: [SKILL_TYPES.length],
+    progression: [1],
     title: "The GOAT",
   },
   skillsCraft: {
-    description: "Acquire armorcraft, siegecraft and shieldcraft skills.",
+    description: `Acquire ${formatEnumeration(QUEST_REQUIREMENTS.skillsCraft)} skills.`,
     progression: [1],
     title: "Warcraft",
   },
@@ -407,8 +440,13 @@ export const QUESTS: Record<
   },
   stages: {
     description: "Reach stage @.",
-    progression: [3, 10, 25, 50, 100],
+    progression: [3, 10, 25, 50],
     title: "Sisyphean expedition",
+  },
+  stagesEnd: {
+    description: `Reach stage ${formatNumber({ value: QUEST_REQUIREMENTS.stagesEnd })}.`,
+    progression: [1],
+    title: "That's it?",
   },
   staggering: {
     description: "Stagger monsters @ times.",
@@ -447,7 +485,7 @@ export const QUESTS: Record<
   },
   traitsAll: {
     description: "Acquire all traits.",
-    progression: [TRAIT_TYPES.length],
+    progression: [1],
     title: "Come at me",
   },
   warpingCaravan: {

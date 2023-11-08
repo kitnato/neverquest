@@ -4,6 +4,7 @@ import { LOOTING_RATE } from "@neverquest/data/statistics";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { attackDuration, lootingDuration } from "@neverquest/state/character";
+import { isBoss } from "@neverquest/state/encounter";
 import {
   monsterAttackDuration,
   monsterHealth,
@@ -31,7 +32,9 @@ export function useChangeMonsterHealth() {
 
         const formattedValue = formatNumber({ value });
         const isPositive = value > 0;
-        const newHealth = Math.min(get(monsterHealth) + value, get(monsterHealthMaximum));
+        const monsterHealthValue = get(monsterHealth);
+        const monsterHealthMaximumValue = get(monsterHealthMaximum);
+        const newHealth = Math.min(monsterHealthValue + value, monsterHealthMaximumValue);
 
         addDelta({
           contents:
@@ -45,41 +48,46 @@ export function useChangeMonsterHealth() {
         });
 
         if (newHealth <= 0) {
-          if (damageType !== undefined) {
-            switch (damageType) {
-              case "bleed": {
-                progressQuest({ quest: "bleedingKill" });
-                break;
-              }
-
-              case "critical": {
-                progressQuest({ quest: "criticalKilling" });
-                break;
-              }
-
-              case "execute": {
-                progressQuest({ quest: "executing" });
-                break;
-              }
-
-              case "parry": {
-                progressQuest({ quest: "parryingKill" });
-                break;
-              }
-
-              case "thorns": {
-                progressQuest({ quest: "thornsKill" });
-                break;
-              }
-            }
-          }
-
-          progressQuest({ quest: "killing" });
           set(monsterHealth, 0);
           set(lootingDuration, get(isTraitAcquired("ninja")) ? 1 : LOOTING_RATE);
 
           reset(attackDuration);
           reset(monsterAttackDuration);
+
+          progressQuest({ quest: get(isBoss) ? "killingBoss" : "killing" });
+
+          switch (damageType) {
+            case "bleed": {
+              progressQuest({ quest: "bleedingKill" });
+              break;
+            }
+
+            case "critical": {
+              progressQuest({ quest: "criticalKilling" });
+              break;
+            }
+
+            case "execute": {
+              progressQuest({ quest: "executing" });
+              break;
+            }
+
+            case "parry": {
+              progressQuest({ quest: "parryingKill" });
+              break;
+            }
+
+            case "thorns": {
+              progressQuest({ quest: "thornsKill" });
+              break;
+            }
+
+            default: {
+              if (monsterHealthValue === monsterHealthMaximumValue) {
+                progressQuest({ quest: "killingOneStrike" });
+              }
+            }
+          }
         } else {
           set(monsterHealth, newHealth);
         }

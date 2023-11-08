@@ -1,16 +1,15 @@
 import { atom, atomFamily, selector } from "recoil";
 
-import { CREW_ORDER } from "@neverquest/data/caravan";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import type { BlacksmithInventory, MerchantInventoryItem, Weapon } from "@neverquest/types";
-import type { Crew, CrewStatus } from "@neverquest/types/unions";
+import { CREW_TYPES, type Crew, type CrewStatus } from "@neverquest/types/unions";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
 export const isCaravanHired = withStateKey("isCaravanHired", (key) =>
   selector({
-    get: ({ get }) => CREW_ORDER.every((current) => get(hireStatus(current)).status === "hired"),
+    get: ({ get }) => CREW_TYPES.every((current) => get(hireStatus(current)).current === "hired"),
     key,
   }),
 );
@@ -37,10 +36,10 @@ export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
   }),
 );
 
-// TODO - Must use { status } object instead of just CrewStatus, otherwise onSet() does not trigger in useInitializer().
+// TODO - Must use { current } object instead of just CrewStatus, otherwise onSet() does not trigger in useInitializer().
 export const hireStatus = withStateKey("hireStatus", (key) =>
-  atomFamily<{ status: CrewStatus }, Crew>({
-    default: { status: null },
+  atomFamily<{ current: CrewStatus }, Crew>({
+    default: { current: null },
     effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),

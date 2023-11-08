@@ -1,6 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
+import { QUEST_REQUIREMENTS } from "@neverquest/data/quests";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import {
@@ -41,7 +42,10 @@ export function useIncreaseAttribute() {
         set(attributeRank(attribute), newRank);
 
         progressQuest({ quest: "powerLevel" });
-        progressQuest({ quest: "powerLevelUltra" });
+
+        if (newRank === QUEST_REQUIREMENTS.powerLevelUltra) {
+          progressQuest({ quest: "powerLevelUltra" });
+        }
 
         transactEssence(-getAttributePointCost(get(level)));
 

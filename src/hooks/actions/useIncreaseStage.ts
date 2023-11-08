@@ -1,6 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { CREW, CREW_ORDER } from "@neverquest/data/caravan";
+import { QUEST_REQUIREMENTS } from "@neverquest/data/quests";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
 import { hireStatus } from "@neverquest/state/caravan";
@@ -20,13 +21,13 @@ export function useIncreaseStage() {
         const nextStage = get(stage) + 1;
 
         CREW_ORDER.forEach((type) => {
-          const { status: hireStatusValue } = get(hireStatus(type));
+          const { current: hireStatusCurrent } = get(hireStatus(type));
           const isShowingCrewHiring = isShowing("crewHiring");
 
           const { requiredStage } = CREW[type];
 
-          if (hireStatusValue === null && nextStage >= requiredStage) {
-            set(hireStatus(type), { status: "hirable" });
+          if (hireStatusCurrent === null && nextStage >= requiredStage) {
+            set(hireStatus(type), { current: "hirable" });
             set(isShowingCrewHiring, true);
           }
         });
@@ -42,6 +43,10 @@ export function useIncreaseStage() {
         set(stage, nextStage);
 
         progressQuest({ quest: "stages" });
+
+        if (nextStage === QUEST_REQUIREMENTS.stagesEnd) {
+          progressQuest({ quest: "stagesEnd" });
+        }
       },
     [progressQuest],
   );

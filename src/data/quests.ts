@@ -55,11 +55,6 @@ export const QUESTS: Record<
     progression: [1],
     title: "Companionship",
   },
-  acquiringKnapsack: {
-    description: "Acquire the knapsack.",
-    progression: [1],
-    title: "What do you mean, over-encumbered?",
-  },
   acquiringRanged: {
     description: "Acquire a ranged weapon.",
     progression: [1],

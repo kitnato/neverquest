@@ -1,5 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
+import { useProgressQuest } from "./useProgressQuest";
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import {
@@ -24,6 +25,8 @@ import {
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useAcquireItem() {
+  const progressQuest = useProgressQuest();
+
   return useRecoilCallback(
     ({ set, snapshot }) =>
       (item: InventoryItem): "autoEquip" | "noFit" | "success" => {
@@ -35,8 +38,16 @@ export function useAcquireItem() {
           return "noFit";
         }
 
-        if (isTrinketItem(item) && item.name === "knapsack") {
-          set(isShowing("weight"), true);
+        if (isTrinketItem(item)) {
+          const { name } = item;
+
+          if (name === "antique coin") {
+            progressQuest({ quest: "acquiringAntiqueCoin" });
+          }
+
+          if (name === "knapsack") {
+            set(isShowing("weight"), true);
+          }
         } else {
           set(itemsAcquired, (current) => [...current, item]);
         }

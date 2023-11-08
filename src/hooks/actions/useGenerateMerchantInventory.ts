@@ -5,8 +5,9 @@ import type { GeneratorParameters } from "@neverquest/LOCRAN/types";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { stage, stageMaximum } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
+import { canUseJournal } from "@neverquest/state/quests";
 import { allowNSFW } from "@neverquest/state/settings";
-import { isGear } from "@neverquest/types/type-guards";
+import { isGear, isInfusableItem, isTrinketItem } from "@neverquest/types/type-guards";
 import {
   generateArmor,
   generateMeleeWeapon,
@@ -31,46 +32,48 @@ export function useGenerateMerchantInventory() {
             nameStructure: "prefix",
             prefixTags: ["lowQuality"],
           };
-          const merchantOffers = MERCHANT_OFFERS[stageValue];
+          const offer = MERCHANT_OFFERS[stageValue];
 
-          if (merchantOffers !== undefined) {
-            merchantOffers.forEach((offer) => {
-              const item = (() => {
-                switch (offer.type) {
-                  case "armor": {
-                    return generateArmor({
-                      ...SETTINGS_GEAR,
-                      ...offer,
-                    });
-                  }
-
-                  case "shield": {
-                    return generateShield({
-                      ...SETTINGS_GEAR,
-                      ...offer,
-                    });
-                  }
-
-                  case "trinket": {
-                    return offer.item;
-                  }
-
-                  case "weapon": {
-                    return generateMeleeWeapon({
-                      ...SETTINGS_GEAR,
-                      ...offer,
-                    });
-                  }
-                }
-              })();
-
-              if (isGear(item) || get(ownedItem(item.name)) === null) {
-                merchantInventoryNew.push({
-                  isReturned: false,
-                  item,
-                });
+          if (offer !== undefined) {
+            const item = (() => {
+              if (isInfusableItem(offer) || isTrinketItem(offer)) {
+                return offer;
               }
-            });
+
+              switch (offer.type) {
+                case "armor": {
+                  return generateArmor({
+                    ...SETTINGS_GEAR,
+                    ...offer,
+                  });
+                }
+
+                case "shield": {
+                  return generateShield({
+                    ...SETTINGS_GEAR,
+                    ...offer,
+                  });
+                }
+
+                case "weapon": {
+                  return generateMeleeWeapon({
+                    ...SETTINGS_GEAR,
+                    ...offer,
+                  });
+                }
+              }
+            })();
+
+            if (
+              isGear(item) ||
+              get(ownedItem(item.name)) === null ||
+              (item.name === "antique coin" && get(canUseJournal))
+            ) {
+              merchantInventoryNew.push({
+                isReturned: false,
+                item,
+              });
+            }
           }
         }
 

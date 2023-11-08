@@ -7,7 +7,7 @@ import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMasteryUnlocked } from "@neverquest/state/masteries";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import { MASTERY_TYPES, SKILL_TYPES, type Skill } from "@neverquest/types/unions";
+import { MASTERY_TYPES, type Skill } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useAcquireSkill() {
@@ -36,6 +36,7 @@ export function useAcquireSkill() {
           set(isMasteryUnlocked(unlocksMastery), true);
 
           progressQuest({ quest: "masteries" });
+          progressQuest({ quest: "masteriesAll" });
 
           if (
             MASTERY_TYPES.every((current) => !get(isMasteryUnlocked(current))) &&
@@ -43,17 +44,10 @@ export function useAcquireSkill() {
           ) {
             progressQuest({ quest: "acquiringArcheryFirst" });
           }
-
-          if (
-            MASTERY_TYPES.filter((current) => current !== unlocksMastery).every((current) =>
-              get(isMasteryUnlocked(current)),
-            )
-          ) {
-            progressQuest({ quest: "masteriesAll" });
-          }
         }
 
         progressQuest({ quest: "skills" });
+        progressQuest({ quest: "skillsAll" });
 
         const { skillsCraft } = QUEST_REQUIREMENTS;
 
@@ -64,14 +58,6 @@ export function useAcquireSkill() {
             .every((current) => get(isSkillAcquired(current)))
         ) {
           progressQuest({ quest: "skillsCraft" });
-        }
-
-        if (
-          SKILL_TYPES.filter((current) => current !== skill).every((current) =>
-            get(isSkillAcquired(current)),
-          )
-        ) {
-          progressQuest({ quest: "skillsAll" });
         }
       },
     [progressQuest],

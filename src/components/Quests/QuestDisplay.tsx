@@ -34,9 +34,12 @@ export function QuestDisplay({
 
   const completeQuest = useCompleteQuest();
 
-  const cappedProgress = Math.min(questProgressValue, progressionMaximum);
-  const choiceID = `quest-completion-${quest}-${progressionMaximum}`;
   const hasCompletedQuest = QUEST_BONUS_TYPES.some((current) => current === questStatus);
+  const cappedProgress = Math.min(
+    hasCompletedQuest ? progressionMaximum : questProgressValue,
+    progressionMaximum,
+  );
+  const choiceID = `quest-completion-${quest}-${progressionMaximum}`;
 
   return (
     <Stack className={hasCompletedQuest ? "opacity-50" : undefined} direction="horizontal" gap={3}>

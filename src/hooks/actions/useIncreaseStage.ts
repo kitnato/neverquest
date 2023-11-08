@@ -1,7 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
 import { CREW, CREW_ORDER } from "@neverquest/data/caravan";
-import { QUEST_REQUIREMENTS } from "@neverquest/data/quests";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
 import { hireStatus } from "@neverquest/state/caravan";
@@ -43,10 +42,7 @@ export function useIncreaseStage() {
         set(stage, nextStage);
 
         progressQuest({ quest: "stages" });
-
-        if (nextStage === QUEST_REQUIREMENTS.stagesEnd) {
-          progressQuest({ quest: "stagesEnd" });
-        }
+        progressQuest({ quest: "stagesEnd" });
       },
     [progressQuest],
   );

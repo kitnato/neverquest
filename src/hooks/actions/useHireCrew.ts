@@ -28,13 +28,10 @@ export function useHireCrew() {
         }
 
         progressQuest({ quest: "hiring" });
+        progressQuest({ quest: "hiringAll" });
 
         if (otherHirableCrew.every((current) => get(hireStatus(current)).current !== "hired")) {
           progressQuest({ quest: "hiringBlacksmithFirst" });
-        }
-
-        if (otherHirableCrew.every((current) => get(hireStatus(current)).current === "hired")) {
-          progressQuest({ quest: "hiringAll" });
         }
       },
     [progressQuest],

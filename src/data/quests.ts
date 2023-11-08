@@ -5,11 +5,15 @@ import IconTriumph from "@neverquest/icons/triumph.svg?react";
 import type { SVGIcon } from "@neverquest/types/props";
 import {
   CONQUEST_TYPES,
+  CREW_TYPES,
+  MASTERY_TYPES,
   QUEST_CLASS_TYPES,
   type Quest,
   type QuestClass,
   ROUTINE_TYPES,
+  SKILL_TYPES,
   type Skill,
+  TRAIT_TYPES,
   TRIUMPH_TYPES,
 } from "@neverquest/types/unions";
 import { formatEnumeration, formatNumber } from "@neverquest/utilities/formatters";
@@ -243,7 +247,7 @@ export const QUESTS: Record<
   },
   hiringAll: {
     description: "Hire all caravan crew.",
-    progression: [1],
+    progression: [CREW_TYPES.length],
     title: "Haven't died of dysentery",
   },
   hiringBlacksmithFirst: {
@@ -306,7 +310,7 @@ export const QUESTS: Record<
   },
   masteriesAll: {
     description: "Unlock all masteries.",
-    progression: [1],
+    progression: [MASTERY_TYPES.length],
     title: "Guru",
   },
   masteriesRank: {
@@ -348,7 +352,7 @@ export const QUESTS: Record<
     description: `Reach power level ${formatNumber({
       value: QUEST_REQUIREMENTS.powerLevelUltra,
     })}.`,
-    progression: [1],
+    progression: [QUEST_REQUIREMENTS.powerLevelUltra],
     title: `It's over ${formatNumber({ value: 9000 })}!`,
   },
   protection: {
@@ -425,7 +429,7 @@ export const QUESTS: Record<
   },
   skillsAll: {
     description: "Acquire all skills.",
-    progression: [1],
+    progression: [SKILL_TYPES.length],
     title: "The GOAT",
   },
   skillsCraft: {
@@ -445,7 +449,7 @@ export const QUESTS: Record<
   },
   stagesEnd: {
     description: `Reach stage ${formatNumber({ value: QUEST_REQUIREMENTS.stagesEnd })}.`,
-    progression: [1],
+    progression: [QUEST_REQUIREMENTS.stagesEnd],
     title: "That's it?",
   },
   staggering: {
@@ -458,14 +462,16 @@ export const QUESTS: Record<
     progression: [3, 10, 25, 50, 100],
     title: "Brain damage",
   },
+  // TODO
   survivingNoAttributes: {
     description: "Survive the first 13 levels without spending any attribute points.",
-    progression: [1],
+    progression: [13],
     title: "Deep throat",
   },
+  // TODO
   survivingNoGear: {
     description: "Survive the first 7 levels without any gear equipped.",
-    progression: [1],
+    progression: [7],
     title: "Going commando",
   },
   thorns: {
@@ -474,18 +480,18 @@ export const QUESTS: Record<
     title: "Cactus",
   },
   thornsKill: {
-    description: "Kill 3 monsters with thorns damage.",
+    description: "Kill @ monsters with thorns damage.",
     progression: [3, 10, 25, 50, 100],
     title: "Blue-shelling",
   },
   traits: {
-    description: "Acquire a trait.",
-    progression: [1],
+    description: "Acquire @ traits.",
+    progression: [3, 6],
     title: "Tattoo artiste",
   },
   traitsAll: {
     description: "Acquire all traits.",
-    progression: [1],
+    progression: [TRAIT_TYPES.length],
     title: "Come at me",
   },
   warpingCaravan: {

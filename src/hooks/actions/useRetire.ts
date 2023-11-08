@@ -28,7 +28,7 @@ import { essence } from "@neverquest/state/resources";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits";
 import { isGear } from "@neverquest/types/type-guards";
-import { MASTERY_TYPES, SKILL_TYPES, TRAIT_TYPES } from "@neverquest/types/unions";
+import { MASTERY_TYPES, SKILL_TYPES } from "@neverquest/types/unions";
 import { getProgressReduction, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useRetire() {
@@ -53,14 +53,7 @@ export function useRetire() {
           reset(selectedTrait);
 
           progressQuest({ quest: "traits" });
-
-          if (
-            TRAIT_TYPES.filter((current) => current !== selectedTraitValue).every((current) =>
-              get(isTraitAcquired(current)),
-            )
-          ) {
-            progressQuest({ quest: "traitsAll" });
-          }
+          progressQuest({ quest: "traitsAll" });
         }
 
         set(isShowing("traits"), true);
@@ -73,7 +66,12 @@ export function useRetire() {
         reset(name);
         reset(stage);
         reset(questProgress("powerLevel"));
+        reset(questProgress("powerLevelUltra"));
         reset(questProgress("stages"));
+        reset(questProgress("stagesEnd"));
+        reset(questProgress("hiringAll"));
+        reset(questProgress("masteriesAll"));
+        reset(questProgress("skillsAll"));
 
         resetAttributes();
 

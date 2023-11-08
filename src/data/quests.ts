@@ -267,7 +267,7 @@ export const QUESTS: Record<
     title: "Come back to reality",
   },
   knapsackExpanding: {
-    description: "Expand knapsack by @ encumbrance.",
+    description: "Expand knapsack capacity by @.",
     progression: [25, 50, 100, 250],
     title: "Deep pockets",
   },

@@ -15,7 +15,6 @@ import {
   monsterHealth,
   monsterHealthMaximum,
 } from "@neverquest/state/monster";
-import { health, healthMaximum } from "@neverquest/state/reserves";
 import { attackRate } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -53,26 +52,6 @@ export function useToggleAttack() {
 
             if (difference > 0) {
               changeMonsterHealth({
-                delta: [
-                  {
-                    color: "text-muted",
-                    value: "REGENERATE",
-                  },
-                  {
-                    color: "text-success",
-                    value: `+${difference}`,
-                  },
-                ],
-                value: difference,
-              });
-            }
-          }
-
-          if (get(isTraitAcquired("field surgeon"))) {
-            const difference = get(healthMaximum) - get(health);
-
-            if (difference > 0) {
-              changeHealth({
                 delta: [
                   {
                     color: "text-muted",

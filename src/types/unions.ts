@@ -452,7 +452,6 @@ export const TRAIT_TYPES = [
   "bruiser",
   "colossus",
   "executioner",
-  "field surgeon",
   "inoculated",
   "ninja",
   "nudist",

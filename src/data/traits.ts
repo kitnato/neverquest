@@ -2,7 +2,6 @@ import IconBrawler from "@neverquest/icons/brawler.svg?react";
 import IconBruiser from "@neverquest/icons/bruiser.svg?react";
 import IconColossus from "@neverquest/icons/colossus.svg?react";
 import IconExecutioner from "@neverquest/icons/executioner.svg?react";
-import IconFieldSurgeon from "@neverquest/icons/field-surgeon.svg?react";
 import IconInoculated from "@neverquest/icons/inoculated.svg?react";
 import IconNinja from "@neverquest/icons/ninja.svg?react";
 import IconNudist from "@neverquest/icons/nudist.svg?react";
@@ -43,10 +42,6 @@ export const TRAITS: Record<
   executioner: {
     description: "Critical strikes with a two-handed weapon always execute the monster.",
     Icon: IconExecutioner,
-  },
-  "field surgeon": {
-    description: "Health is fully restored when not in combat.",
-    Icon: IconFieldSurgeon,
   },
   inoculated: {
     description: "Deflection chance is doubled.",

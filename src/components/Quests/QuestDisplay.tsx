@@ -51,7 +51,7 @@ export function QuestDisplay({
 
       <IconDisplay
         description={
-          hidden !== undefined && Boolean(questStatus)
+          hidden !== undefined && (hasCompletedQuest || questStatus === "achieved")
             ? description.replace(LABEL_UNKNOWN, hidden)
             : description
         }

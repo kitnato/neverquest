@@ -341,6 +341,12 @@ export const AFFIXES: AffixData[] = [
     tags: ["lowQuality"],
   },
   {
+    artifact: ["suffix"],
+    creature: ["suffix"],
+    location: ["suffix"],
+    name: "bane",
+  },
+  {
     creature: ["prefix"],
     name: "baffled",
   },
@@ -409,6 +415,11 @@ export const AFFIXES: AffixData[] = [
   {
     creature: ["prefix"],
     name: "batty",
+  },
+  {
+    artifact: ["prefix"],
+    location: ["prefix"],
+    name: "beguiling",
   },
   {
     artifact: ["articledSuffix"],
@@ -811,6 +822,12 @@ export const AFFIXES: AffixData[] = [
     artifact: ["prefix"],
     creature: ["prefix"],
     name: "celebratory",
+  },
+  {
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    location: ["articledSuffix", "prefix"],
+    name: "celestial",
   },
   {
     creature: ["prefix"],
@@ -2085,6 +2102,12 @@ export const AFFIXES: AffixData[] = [
   {
     artifact: ["prefix"],
     creature: ["prefix"],
+    location: ["articledSuffix"],
+    name: "ferocious",
+  },
+  {
+    artifact: ["prefix"],
+    creature: ["prefix"],
     location: ["prefix"],
     name: "festering",
     tags: ["lowQuality"],
@@ -2169,6 +2192,13 @@ export const AFFIXES: AffixData[] = [
     tags: ["lowQuality"],
   },
   {
+    artifact: ["suffix"],
+    creature: ["suffix"],
+    location: ["suffix"],
+    name: "flame",
+    tags: ["elemental"],
+  },
+  {
     artifact: ["prefix"],
     creature: ["prefix"],
     location: ["articledSuffix"],
@@ -2222,7 +2252,7 @@ export const AFFIXES: AffixData[] = [
   },
   {
     artifact: ["suffix"],
-    location: ["prefix"],
+    location: ["prefix", "suffix"],
     name: "flesh",
   },
   {
@@ -2771,6 +2801,12 @@ export const AFFIXES: AffixData[] = [
     artifact: ["prefix"],
     creature: ["prefix"],
     location: ["articledSuffix", "prefix"],
+    name: "hallowed",
+  },
+  {
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    location: ["articledSuffix", "prefix"],
     name: "hollow",
   },
   {
@@ -2812,6 +2848,12 @@ export const AFFIXES: AffixData[] = [
     creature: ["suffix"],
     location: ["suffix"],
     name: "hopelessness",
+  },
+  {
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    location: ["prefix"],
+    name: "horned",
   },
   {
     creature: ["prefix"],
@@ -3128,6 +3170,12 @@ export const AFFIXES: AffixData[] = [
     creature: ["prefix"],
     location: ["articledSuffix", "prefix"],
     name: "intrepid",
+  },
+  {
+    artifact: ["prefix", "suffix"],
+    creature: ["prefix", "suffix"],
+    location: ["prefix", "suffix"],
+    name: "jade",
   },
   {
     artifact: ["prefix"],
@@ -3721,6 +3769,7 @@ export const AFFIXES: AffixData[] = [
   {
     artifact: ["prefix"],
     creature: ["prefix"],
+    location: ["articledSuffix"],
     name: "murderous",
   },
   {
@@ -3963,6 +4012,18 @@ export const AFFIXES: AffixData[] = [
     name: "oozing",
   },
   {
+    artifact: ["suffix"],
+    creature: ["suffix"],
+    location: ["suffix"],
+    name: "oppression",
+  },
+  {
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    location: ["prefix"],
+    name: "oppressive",
+  },
+  {
     artifact: ["prefix"],
     name: "oral",
   },
@@ -4115,6 +4176,10 @@ export const AFFIXES: AffixData[] = [
     name: "perpetuity",
   },
   {
+    creature: ["prefix"],
+    name: "perplexed",
+  },
+  {
     artifact: ["prefix"],
     creature: ["prefix"],
     location: ["prefix"],
@@ -4131,6 +4196,18 @@ export const AFFIXES: AffixData[] = [
     creature: ["prefix"],
     location: ["articledSuffix", "prefix"],
     name: "perverse",
+  },
+  {
+    artifact: ["suffix"],
+    creature: ["suffix"],
+    location: ["suffix"],
+    name: "pestilence",
+  },
+  {
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    location: ["prefix"],
+    name: "pestilent",
   },
   {
     artifact: ["prefix"],
@@ -4222,6 +4299,11 @@ export const AFFIXES: AffixData[] = [
     tags: ["lowQuality"],
   },
   {
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    name: "pounding",
+  },
+  {
     artifact: ["suffix"],
     location: ["suffix"],
     name: "poison",
@@ -4266,6 +4348,17 @@ export const AFFIXES: AffixData[] = [
     creature: ["prefix"],
     location: ["prefix"],
     name: "pretty",
+  },
+  {
+    creature: ["prefix"],
+    location: ["articledSuffix"],
+    name: "prideful",
+  },
+  {
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    location: ["prefix"],
+    name: "primal",
   },
   {
     artifact: ["prefix"],
@@ -4771,6 +4864,18 @@ export const AFFIXES: AffixData[] = [
     artifact: ["prefix"],
     name: "scratched",
     tags: ["lowQuality"],
+  },
+  {
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    location: ["prefix"],
+    name: "screaming",
+  },
+  {
+    artifact: ["suffix"],
+    creature: ["suffix"],
+    location: ["articledSuffix", "suffix"],
+    name: "screams",
   },
   {
     creature: ["prefix"],
@@ -6091,6 +6196,12 @@ export const AFFIXES: AffixData[] = [
     artifact: ["suffix"],
     location: ["suffix"],
     name: "wizardry",
+  },
+  {
+    artifact: ["suffix"],
+    creature: ["suffix"],
+    location: ["suffix"],
+    name: "woe",
   },
   {
     artifact: ["prefix"],

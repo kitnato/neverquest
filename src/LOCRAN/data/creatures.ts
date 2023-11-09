@@ -559,6 +559,9 @@ export const CREATURES: BaseData[] = [
     name: "janitor",
   },
   {
+    name: "jester",
+  },
+  {
     name: "juggernaut",
   },
   {
@@ -837,6 +840,9 @@ export const CREATURES: BaseData[] = [
     name: "queen",
   },
   {
+    name: "rabbit",
+  },
+  {
     name: "raider",
   },
   {
@@ -903,6 +909,9 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "scum",
+  },
+  {
+    name: "sentinel",
   },
   {
     name: "seraph",
@@ -1083,6 +1092,9 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "vixen",
+  },
+  {
+    name: "walrus",
   },
   {
     name: "warden",

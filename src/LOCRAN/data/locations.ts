@@ -572,6 +572,9 @@ export const LOCATIONS: LocationData[] = [
     name: "quagmire",
   },
   {
+    name: "rainforest",
+  },
+  {
     name: "realm",
   },
   {
@@ -671,6 +674,10 @@ export const LOCATIONS: LocationData[] = [
   {
     isNSFW: true,
     name: "toilet",
+  },
+  {
+    canPluralize: true,
+    name: "tomb",
   },
   {
     name: "tornado",

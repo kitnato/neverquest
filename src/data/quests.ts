@@ -33,6 +33,8 @@ export const QUEST_REQUIREMENTS = {
   protection: 1000,
   skillsCraft: ["armorcraft", "shieldcraft", "siegecraft"] as Skill[],
   stagesEnd: 100,
+  survivingNoAttributes: 7,
+  survivingNoGear: 13,
 };
 
 export const QUEST_TYPES_BY_CLASS = {
@@ -131,10 +133,9 @@ export const QUESTS: Record<
     progression: [1],
     title: "I changed my mind",
   },
-  completion: {
+  completing: {
     description: "Complete all quests",
-    // TODO - revise
-    progression: [180],
+    progression: [0],
     title: "Completionist",
   },
   crafting: {
@@ -160,14 +161,7 @@ export const QUESTS: Record<
     title: "Destroyer",
   },
   // TODO
-  decidingDeath: {
-    description: `Decide to ${LABEL_UNKNOWN}`,
-    hidden: " die forever.",
-    progression: [1],
-    title: "The End",
-  },
-  // TODO
-  decidingGrind: {
+  deciding: {
     description: `Decide to ${LABEL_UNKNOWN}`,
     hidden: " keep grinding.",
     progression: [1],
@@ -462,16 +456,18 @@ export const QUESTS: Record<
     progression: [3, 10, 25, 50, 100],
     title: "Brain damage",
   },
-  // TODO
   survivingNoAttributes: {
-    description: "Survive the first 13 levels without spending any attribute points.",
-    progression: [13],
+    description: `Complete the first ${formatNumber({
+      value: QUEST_REQUIREMENTS.survivingNoAttributes,
+    })} levels without spending any attribute points.`,
+    progression: [QUEST_REQUIREMENTS.survivingNoAttributes],
     title: "Deep throat",
   },
-  // TODO
   survivingNoGear: {
-    description: "Survive the first 7 levels without any gear equipped.",
-    progression: [7],
+    description: `Complete the first ${formatNumber({
+      value: QUEST_REQUIREMENTS.survivingNoGear,
+    })} levels without any gear equipped.`,
+    progression: [QUEST_REQUIREMENTS.survivingNoGear],
     title: "Going commando",
   },
   thorns: {
@@ -521,3 +517,7 @@ export const QUESTS_COUNT: Record<QuestClass, number> = QUEST_CLASS_TYPES.reduce
     triumph: 0,
   },
 );
+
+QUESTS.completing.progression = [
+  Object.values(QUESTS_COUNT).reduce((accumulator, current) => accumulator + current, 0),
+];

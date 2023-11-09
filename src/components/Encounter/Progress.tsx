@@ -32,7 +32,10 @@ export function Progress() {
       tooltip="Progress"
     >
       <Stack direction="horizontal">
-        <LabelledProgressBar value={(progressValue / progressMaximumValue) * 100} variant="dark">
+        <LabelledProgressBar
+          value={(progressValue / progressMaximumValue) * 100}
+          variant="secondary"
+        >
           <Stack direction="horizontal" gap={1}>
             {`${formatNumber({ value: progressValue })}/${formatNumber({
               value: progressMaximumValue,

@@ -440,7 +440,7 @@ export const WEAPON_BASE: GearBase & {
   ],
   staminaCost: [
     { maximum: 2, minimum: 1 },
-    { maximum: 80, minimum: 75 },
+    { maximum: 70, minimum: 65 },
   ],
   weight: [
     { maximum: 2, minimum: 1 },

@@ -10,6 +10,7 @@ import {
   level,
 } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
+import { questProgress } from "@neverquest/state/quests";
 import { ATTRIBUTE_TYPES, type Attribute } from "@neverquest/types/unions";
 import {
   getAttributePointCost,
@@ -22,7 +23,7 @@ export function useIncreaseAttribute() {
   const transactEssence = useTransactEssence();
 
   return useRecoilCallback(
-    ({ set, snapshot }) =>
+    ({ reset, set, snapshot }) =>
       (attribute: Attribute) => {
         const get = getSnapshotGetter(snapshot);
 
@@ -59,6 +60,8 @@ export function useIncreaseAttribute() {
         ) {
           progressQuest({ quest: "attributesAll" });
         }
+
+        reset(questProgress("survivingNoAttributes"));
       },
     [progressQuest, transactEssence],
   );

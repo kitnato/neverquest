@@ -2,7 +2,6 @@ import { useRecoilCallback } from "recoil";
 
 import { RETIREMENT_MINIMUM_LEVEL } from "@neverquest/data/general";
 import { INHERITABLE_ITEMS } from "@neverquest/data/inventory";
-import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
@@ -23,7 +22,7 @@ import {
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMasteryUnlocked, masteryProgress, masteryRank } from "@neverquest/state/masteries";
-import { canUseJournal, questProgress } from "@neverquest/state/quests";
+import { questProgress } from "@neverquest/state/quests";
 import { essence } from "@neverquest/state/resources";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits";
@@ -32,7 +31,6 @@ import { MASTERY_TYPES, SKILL_TYPES } from "@neverquest/types/unions";
 import { getProgressReduction, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useRetire() {
-  const generateMonster = useGenerateMonster();
   const initialize = useInitialize();
   const progressQuest = useProgressQuest();
   const resetAttributes = useResetAttributes();
@@ -95,24 +93,16 @@ export function useRetire() {
               return false;
             }
 
-            const { name } = currentItem;
-
-            if (INHERITABLE_ITEMS.some((currentInheritable) => currentInheritable === name)) {
-              if (name === "journal") {
-                set(canUseJournal, true);
-              }
-
-              return true;
-            }
-
-            return false;
+            return INHERITABLE_ITEMS.some(
+              (currentInheritable) => currentInheritable === currentItem.name,
+            );
           }),
         );
 
-        initialize(true);
-
         progressQuest({ quest: "retiring" });
+
+        initialize(true);
       },
-    [generateMonster, progressQuest, resetAttributes],
+    [progressQuest],
   );
 }

@@ -4,6 +4,7 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { questProgress } from "@neverquest/state/quests";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import type { GearItem } from "@neverquest/types";
@@ -21,7 +22,7 @@ export function useToggleEquipGear() {
   const progressQuest = useProgressQuest();
 
   return useRecoilCallback(
-    ({ set, snapshot }) =>
+    ({ reset, set, snapshot }) =>
       (gearItem: GearItem) => {
         const get = getSnapshotGetter(snapshot);
 
@@ -83,6 +84,8 @@ export function useToggleEquipGear() {
 
           progressQuest({ quest: "equippingWeapon" });
         }
+
+        reset(questProgress("survivingNoGear"));
 
         set(inventory, (currentInventory) =>
           currentInventory.map((currentItem) => {

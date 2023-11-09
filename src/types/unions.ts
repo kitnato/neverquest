@@ -489,9 +489,8 @@ export const TRIUMPH_TYPES = [
   "killingResDominus",
   "acquiringFamiliar",
   "killingResCogitans",
-  "decidingGrind",
-  "decidingDeath",
-  "completion",
+  "deciding",
+  "completing",
 ] as const;
 export type Triumph = (typeof TRIUMPH_TYPES)[number];
 

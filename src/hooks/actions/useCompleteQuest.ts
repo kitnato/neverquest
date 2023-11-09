@@ -25,7 +25,7 @@ export function useCompleteQuest() {
           );
           set(isShowing("questBonus"), true);
 
-          progressQuest({ quest: "completion" });
+          progressQuest({ quest: "completing" });
         }
       },
     [progressQuest],

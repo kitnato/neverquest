@@ -454,11 +454,15 @@ Enable various actions or grant certain effects if they are carried in the [inve
 
 ##### Static trinkets
 
-These provide a permanent effect of some sort while they are carried in the inventory. If they are sold or lost, the effect goes with it.
+These provide a permanent effect of some sort while they are carried in the inventory. If one is sold or lost, the effect disappears alongside it.
 
 ##### Usable trinkets
 
-In addition to maybe providing a [static](#static-trinkets) effect, these trinkets also allow direct interaction, usually granting a new action. Some of these trinkets are infusable, meaning they allow [essence](#essence) to be spent on them to upgrade their effect.
+In addition to potentially providing a [static](#static-trinkets) effect, these trinkets also allow direct interaction, usually granting a new action.
+
+##### Infusable trinkets
+
+Some of usable trinkets are infusable, meaning they allow [essence](#essence) to be spent on them to upgrade their effect.
 
 ### Consumables
 
@@ -709,6 +713,24 @@ Having a shield equipped doubles total [protection](#protection).
 #### Tormentor
 
 Monsters can no longer regenerate.
+
+### Quests
+
+Quests are similar to achievements in that they have a set of requirements and progress based on certain gameplay actions and states. They are unlocked only once the journal [trinket](#usable-trinkets) is acquired, then going into [retirement](#retirement). Once a quest's requirements are achieved, it can be completed by choosing a permanent bonus to either [health](#health), [stamina](#stamina) or [total damage](#total-damage) that persists through retirement and while the journal is in the inventory.
+
+They are categorized into the following:
+
+#### Conquests
+
+Tracks combat-based activities.
+
+#### Routines
+
+Tracks all non-combat-related activities.
+
+#### Triumphs
+
+A collection of challenges and hard-to-reach goals.
 
 ## Settings
 

@@ -18,75 +18,63 @@ LOCRAN can be considered somewhat independent of Neverquest, as it can be used o
 
 Neverquest is a work-in-progress. Several features are pending ideation, refinement and implementation.
 
-### Must-haves
-
-Essential features for a v1.0.0 release.
-
-#### Journal
-
-Upon purchasing the Journal trinket, unlocks quests that function similarly to achievements. Completing a quest grants [essence](./src/data/manual.md#essence).
-
-### Future development
-
-Features that require more ideation and refinement.
-
-#### Activated skills
+### Activated skills
 
 Once acquired, activating a skill requires [energy](#energy).
 
-##### Auras
+#### Auras
 
 Cast spells that remain active until dispelled. Provides [buffs](./src/data/manual.md#buffs) in return for reserving a percentage of energy.
 
-##### Physical (activated)
+#### Physical (activated)
 
 Combat skills that can be activated during combat. Acquired from the [Mercenary](./src/data/manual.md#mercenary).
 
-##### Sorceries
+#### Sorceries
 
 Cast spells with immediate and/or over-time effects. Acquired from the [sorcerer](#sorcerer).
 
-#### Attributes
+### Attributes
 
-##### Acumen
+#### Acumen
 
 Affects [sorcery](#sorceries) casting rate.
 
-##### Intellect
+#### Intellect
 
 Affects energy regeneration rate.
 
-##### Wisdom
+#### Wisdom
 
 Affects total [energy](#energy).
 
-#### Caravan
+### Caravan
 
 Along with two more additional hires, the entire crew dialog system needs to be overhauled and expanded to allow for better storytelling and immersion.
 
-##### Cook
+#### Cook
 
 Sells hot meals that restore all [energy](#energy) when used.
 
 Grants a Well Fed [buff](./src/data/manual.md#buffs) for the next stage (+10% [mastery](./src/data/manual.md#mastery) gain).
 
-##### Sorcerer
+#### Sorcerer
 
 Acquire [sorceries](#sorceries) and [auras](#auras).
 
-#### Energy
+### Energy
 
 A [reserve](./src/data/manual.md#reserves), Consumed when activating [skills](./src/data/manual.md#skills), [auras](#auras) and [sorceries](#sorceries), regenerated over time.
 
-#### Log
+### Log
 
 A toggle-able UI element that displays all stateful activities in real-time, e.g. combat details, transactions etc.
 
-#### Ranged
+### Ranged
 
 A [weapon](./src/data/manual.md#weapons) type that functions distinctly from melee weapons.
 
-#### Venom
+### Venom
 
 A [potion](./src/data/manual.md#potions), that once applied to a weapon, it adds an effect with each strike, applying damage-over-time effects and potentially other ailments. Has a certain number of charges before it is used up.
 

@@ -201,12 +201,7 @@ export const ELEMENTALS: Record<
 
 export const ENCUMBRANCE_CAPACITY = 6;
 
-export const INHERITABLE_ITEMS = [
-  "knapsack",
-  "journal",
-  "antique coin",
-  ...INFUSABLE_TYPES,
-] as const;
+export const INHERITABLE_ITEMS = ["knapsack", "journal", ...INFUSABLE_TYPES] as const;
 
 export const KNAPSACK_CAPACITY = 12;
 
@@ -368,7 +363,7 @@ export const TRINKETS: Record<
       description: "The wielder is bestowed with extreme fortune.",
       ID: nanoid(),
       name: "antique coin",
-      price: 1000,
+      price: 999,
       weight: 2,
     },
   },

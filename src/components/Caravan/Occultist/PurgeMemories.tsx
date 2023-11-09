@@ -9,16 +9,19 @@ import { useResetCompletedQuests } from "@neverquest/hooks/actions/useResetCompl
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconRitual from "@neverquest/icons/ritual.svg?react";
-import { completedQuestsCount } from "@neverquest/state/quests";
+import { ownedItem } from "@neverquest/state/inventory";
+import { canUseJournal, completedQuestsCount } from "@neverquest/state/quests";
 import { essence } from "@neverquest/state/resources";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function PurgeMemories() {
-  const essenceValue = useRecoilValue(essence);
+  const canUseJournalValue = useRecoilValue(canUseJournal);
   const allCompletedQuestsCount =
     useRecoilValue(completedQuestsCount("conquest")) +
     useRecoilValue(completedQuestsCount("routine")) +
     useRecoilValue(completedQuestsCount("triumph"));
+  const essenceValue = useRecoilValue(essence);
+  const ownedItemJournal = useRecoilValue(ownedItem("journal"));
 
   const progressQuest = useProgressQuest();
   const resetCompletedQuests = useResetCompletedQuests();
@@ -27,6 +30,10 @@ export function PurgeMemories() {
   const price = Math.round(allCompletedQuestsCount * OCCULTIST_PURGE_PRICE_MULTIPLIER.quests);
   const isAffordable = price <= essenceValue;
   const isPurchasable = isAffordable && allCompletedQuestsCount > 0;
+
+  if (!canUseJournalValue || ownedItemJournal === null) {
+    return null;
+  }
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>

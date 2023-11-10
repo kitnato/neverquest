@@ -7,5 +7,9 @@ export function TraitDisplay({ trait }: { trait: Trait }) {
   const { description, Icon } = TRAITS[trait];
   const name = capitalizeAll(trait);
 
-  return <IconDisplay contents={name} description={description} Icon={Icon} tooltip="Trait" />;
+  return (
+    <IconDisplay description={description} Icon={Icon} tooltip="Trait">
+      {name}
+    </IconDisplay>
+  );
 }

@@ -1,4 +1,4 @@
-import { Form, Stack } from "react-bootstrap";
+import { FormCheck, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { TraitDisplay } from "@neverquest/components/Traits/TraitDisplay";
@@ -21,7 +21,7 @@ export function TraitSelection() {
         <span className="fst-italic">All traits acquired.</span>
       ) : (
         <Stack gap={3}>
-          <Form.Check
+          <FormCheck
             checked={selectedTraitValue === null}
             id="none"
             label={<span className="fst-italic">None.</span>}
@@ -33,7 +33,7 @@ export function TraitSelection() {
           {TRAIT_TYPES.map(
             (current) =>
               !acquiredTraitsValue[current] && (
-                <Form.Check
+                <FormCheck
                   checked={selectedTraitValue === current}
                   id={current}
                   key={current}

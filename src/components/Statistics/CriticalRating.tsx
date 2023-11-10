@@ -1,8 +1,8 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY, LABEL_SEPARATOR } from "@neverquest/data/general";
@@ -18,7 +18,7 @@ import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attri
 import { isShowing } from "@neverquest/state/isShowing";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { criticalRating, criticalStrike } from "@neverquest/state/statistics";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function CriticalRating() {
   const dexterityPowerBonus = useRecoilValue(attributePowerBonus("dexterity"));
@@ -32,8 +32,8 @@ export function CriticalRating() {
 
   useDeltaText({
     delta: "criticalRating",
+    state: criticalRating,
     stop: () => !assassinationValue,
-    value: criticalRating,
   });
 
   if (!isShowingCriticalRating) {
@@ -41,110 +41,105 @@ export function CriticalRating() {
   }
 
   return (
-    <IconDisplay
-      contents={
-        <Stack direction="horizontal">
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverHeader className="text-center">Critical rating details</PopoverHeader>
+    <IconDisplay Icon={IconCriticalRating} isAnimated tooltip="Critical rating">
+      <Stack direction="horizontal" gap={1}>
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">Critical rating details</PopoverHeader>
 
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconDexterity} size="small" />
-                          Dexterity:
-                        </Stack>
-                      </td>
+              <PopoverBody>
+                <DetailsTable>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconDexterity} size="small" />
+                        Dexterity:
+                      </Stack>
+                    </td>
 
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconCriticalChance} size="small" />
+                    <td>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconCriticalChance} size="small" />
 
-                          {`${formatValue({
-                            decimals: 0,
-                            format: "percentage",
-                            value: dexterity,
-                          })} chance`}
+                        {`${formatNumber({
+                          decimals: 0,
+                          format: "percentage",
+                          value: dexterity,
+                        })} chance`}
 
-                          {dexterityPowerBonus > 0 && (
-                            <>
-                              <span>{LABEL_SEPARATOR}</span>
+                        {dexterityPowerBonus > 0 && (
+                          <>
+                            <span>{LABEL_SEPARATOR}</span>
 
-                              <IconImage Icon={IconTomeOfPower} size="small" />
+                            <IconImage Icon={IconTomeOfPower} size="small" />
 
-                              {`+${formatValue({
-                                format: "percentage",
-                                value: dexterityPowerBonus,
-                              })}`}
-                            </>
-                          )}
-                        </Stack>
-                      </td>
-                    </tr>
+                            {`+${formatNumber({
+                              format: "percentage",
+                              value: dexterityPowerBonus,
+                            })}`}
+                          </>
+                        )}
+                      </Stack>
+                    </td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconPerception} size="small" />
-                          Perception:
-                        </Stack>
-                      </td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconPerception} size="small" />
+                        Perception:
+                      </Stack>
+                    </td>
 
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconCriticalDamage} size="small" />
+                    <td>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconCriticalDamage} size="small" />
 
-                          {`${formatValue({
-                            decimals: 0,
-                            format: "percentage",
-                            value: perception,
-                          })} damage`}
+                        {`${formatNumber({
+                          decimals: 0,
+                          format: "percentage",
+                          value: perception,
+                        })} damage`}
 
-                          {perceptionPowerBonus > 0 && (
-                            <>
-                              <span>{LABEL_SEPARATOR}</span>
+                        {perceptionPowerBonus > 0 && (
+                          <>
+                            <span>{LABEL_SEPARATOR}</span>
 
-                              <IconImage Icon={IconTomeOfPower} size="small" />
+                            <IconImage Icon={IconTomeOfPower} size="small" />
 
-                              {`+${formatValue({
-                                format: "percentage",
-                                value: perceptionPowerBonus,
-                              })}`}
-                            </>
-                          )}
-                        </Stack>
-                      </td>
-                    </tr>
+                            {`+${formatNumber({
+                              format: "percentage",
+                              value: perceptionPowerBonus,
+                            })}`}
+                          </>
+                        )}
+                      </Stack>
+                    </td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Critical damage:</td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Critical damage:</td>
 
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconDamage} size="small" />
+                    <td>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconDamage} size="small" />
 
-                          {formatValue({ value: criticalStrikeValue })}
-                        </Stack>
-                      </td>
-                    </tr>
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-            trigger={assassinationValue ? ["hover", "focus"] : []}
-          >
-            <span>{assassinationValue ? criticalRatingValue : LABEL_EMPTY}</span>
-          </OverlayTrigger>
+                        {formatNumber({ value: criticalStrikeValue })}
+                      </Stack>
+                    </td>
+                  </tr>
+                </DetailsTable>
+              </PopoverBody>
+            </Popover>
+          }
+          trigger={assassinationValue ? ["hover", "focus"] : []}
+        >
+          <span>{assassinationValue ? criticalRatingValue : LABEL_EMPTY}</span>
+        </OverlayTrigger>
 
-          <FloatingTextQueue delta="criticalRating" />
-        </Stack>
-      }
-      Icon={IconCriticalRating}
-      isAnimated
-      tooltip="Critical rating"
-    />
+        <DeltasDisplay delta="criticalRating" />
+      </Stack>
+    </IconDisplay>
   );
 }

@@ -1,69 +1,11 @@
 @import "~animate.css";
 @import "bootstrap-theme";
 @import "~bootstrap/scss/bootstrap";
+@import "~react-circular-progressbar/dist/styles";
 
 ::selection {
   background: $gray-600;
   color: white;
-}
-
-// There is no variable that controls the box-shadow when unfocused (resulting in a dividing line).
-.accordion-button {
-  box-shadow: none !important;
-}
-
-.hstack.gap-1 {
-  gap: 0.35rem !important;
-}
-
-.no-transitions .progress-bar {
-  transition: none;
-}
-
-.overlay-offcanvas {
-  z-index: calc($zindex-offcanvas + 1);
-}
-
-.overlay-modal-backdrop {
-  z-index: calc($zindex-modal-backdrop + 1);
-}
-
-// Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563
-.popover,
-.tooltip {
-  position: fixed;
-}
-
-// Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
-.popover.show,
-.tooltip.show > .tooltip-inner {
-  box-shadow: 0 0 4px 1px rgb(0 0 0 / 20%);
-}
-
-.stencilled {
-  filter: drop-shadow(0 0 2px rgb(0 0 0));
-}
-
-.table-details {
-  tr > td:nth-child(2) {
-    vertical-align: bottom;
-  }
-}
-
-.text-blue {
-  color: $blue;
-}
-
-.text-orange {
-  color: $orange;
-}
-
-.text-yellow {
-  color: $yellow;
-}
-
-.vstack {
-  align-self: initial;
 }
 
 body {
@@ -87,6 +29,63 @@ input {
   }
 }
 
+select {
+  cursor: pointer;
+}
+
+small:empty {
+  display: none;
+}
+
+svg {
+  /* stylelint-disable-next-line selector-class-pattern */
+  &.CircularProgressbar {
+    max-width: 60px;
+
+    /* stylelint-disable-next-line selector-class-pattern */
+    .CircularProgressbar-path {
+      stroke: $dark;
+    }
+
+    /* stylelint-disable-next-line selector-class-pattern */
+    .CircularProgressbar-text {
+      fill: $dark;
+      font-size: 18px;
+    }
+
+    /* stylelint-disable-next-line selector-class-pattern */
+    .CircularProgressbar-trail {
+      stroke: $body-secondary-bg;
+    }
+  }
+
+  &.icon-image {
+    display: block;
+    fill: currentcolor;
+    width: 40px;
+
+    &.small {
+      width: 20px;
+    }
+
+    &.stencilled {
+      filter: drop-shadow(0 0 2px rgb(0 0 0));
+    }
+  }
+}
+
+td.text-end > .hstack {
+  justify-content: end;
+}
+
+.accordion-button {
+  box-shadow: none !important;
+}
+
+.mastery span {
+  width: max-content;
+}
+
 .form-check {
   display: flex;
   gap: 0.8rem;
@@ -102,24 +101,84 @@ input {
   }
 }
 
-select {
-  cursor: pointer;
+.hstack.gap-1 {
+  gap: 0.35rem !important;
 }
 
-small:empty {
-  display: none;
+.vstack {
+  align-self: initial;
 }
 
-svg.icon-image {
-  display: block;
-  fill: currentcolor;
-  width: 40px;
+.journal .tab-pane.active {
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+}
 
-  &.small {
-    width: 20px;
+.progress-labelled {
+  &.transitions-none .progress-bar {
+    transition: none;
+  }
+
+  > small {
+    text-shadow:
+      -1px 1px 1px var(--bs-gray-900),
+      1px 1px 1px var(--bs-gray-900),
+      1px -1px 1px var(--bs-gray-900),
+      -1px -1px 1px var(--bs-gray-900);
   }
 }
 
-td.text-end > .hstack {
-  justify-content: end;
+.overlay-offcanvas {
+  z-index: calc($zindex-offcanvas + 1);
+}
+
+.overlay-modal-backdrop {
+  z-index: calc($zindex-modal-backdrop + 1);
+}
+
+// Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563
+.popover,
+.tooltip {
+  position: fixed;
+}
+
+// Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
+.popover.show,
+.tooltip.show > .tooltip-inner {
+  box-shadow: 0 0 4px 1px rgb(0 0 0 / 20%);
+}
+
+.table-details {
+  tr > td:nth-child(1) {
+    vertical-align: middle;
+  }
+
+  tr > td:nth-child(2) {
+    vertical-align: bottom;
+  }
+}
+
+.text-blue {
+  color: $blue;
+}
+
+.text-floating {
+  z-index: 100;
+
+  strong {
+    text-shadow:
+      -1px 1px 0 white,
+      1px 1px 0 white,
+      1px -1px 0 white,
+      -1px -1px 0 white;
+  }
+}
+
+.text-orange {
+  color: $orange;
+}
+
+.text-yellow {
+  color: $yellow;
 }

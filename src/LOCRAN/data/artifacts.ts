@@ -392,6 +392,11 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "armor",
   },
   {
+    name: "cardigan",
+    subtype: "chest",
+    type: "armor",
+  },
+  {
     artifactClass: "slashing",
     name: "carver",
     subtype: "melee",
@@ -1135,6 +1140,11 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "trinket",
   },
   {
+    name: "jumper",
+    subtype: "chest",
+    type: "armor",
+  },
+  {
     artifactClass: "slashing",
     name: "katana",
     subtype: "melee",
@@ -1866,6 +1876,11 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "shield",
   },
   {
+    name: "shirt",
+    subtype: "chest",
+    type: "armor",
+  },
+  {
     canPluralize: true,
     name: "shoe",
     subtype: "feet",
@@ -2117,6 +2132,16 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "armor",
   },
   {
+    name: "sweater",
+    subtype: "chest",
+    type: "armor",
+  },
+  {
+    name: "sweatshirt",
+    subtype: "chest",
+    type: "armor",
+  },
+  {
     artifactClass: "piercing",
     name: "switchblade",
     subtype: "melee",
@@ -2127,6 +2152,11 @@ export const ARTIFACTS: ArtifactData[] = [
     name: "sword",
     subtype: "melee",
     type: "weapon",
+  },
+  {
+    name: "t-shirt",
+    subtype: "chest",
+    type: "armor",
   },
   {
     name: "tabard",

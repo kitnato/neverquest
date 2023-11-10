@@ -19,21 +19,12 @@ export function formatEnumeration(list: string[]) {
 // Correctly does the rounding as opposed to .toFixed().
 function formatFloat({ decimals = 2, value }: { decimals?: number; value: number }) {
   const multiplier = 10 ** decimals;
-  const result = parseFloat((value * multiplier).toFixed(11));
+  const result = parseFloat((value * multiplier).toFixed(12));
 
   return (Math.round(result) / multiplier).toFixed(decimals).toLocaleString();
 }
 
-export function formatSlug(string: string) {
-  return string
-    .replace(/^\s+|\s+$/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9 -]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
-}
-
-export function formatValue({
+export function formatNumber({
   decimals,
   format = "integer",
   value,
@@ -43,6 +34,13 @@ export function formatValue({
   value: number;
 }) {
   switch (format) {
+    case "abbreviated": {
+      return Math.abs(value) > 999
+        ? // Truncate all floats to 2 decimal places maximum.
+          `${(Math.trunc((value / 1000) * Math.pow(10, 2)) / Math.pow(10, 2)).toLocaleString()}k`
+        : Math.round(value).toLocaleString();
+    }
+
     case "float": {
       return formatFloat({ decimals, value });
     }
@@ -70,4 +68,13 @@ export function formatValue({
       }`;
     }
   }
+}
+
+export function formatSlug(string: string) {
+  return string
+    .replace(/^\s+|\s+$/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9 -]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
 }

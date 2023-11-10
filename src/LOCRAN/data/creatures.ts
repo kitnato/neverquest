@@ -55,6 +55,9 @@ export const CREATURES: BaseData[] = [
     name: "archdemon",
   },
   {
+    name: "archer",
+  },
+  {
     name: "archmage",
   },
   {
@@ -556,6 +559,9 @@ export const CREATURES: BaseData[] = [
     name: "janitor",
   },
   {
+    name: "jester",
+  },
+  {
     name: "juggernaut",
   },
   {
@@ -834,6 +840,12 @@ export const CREATURES: BaseData[] = [
     name: "queen",
   },
   {
+    name: "rabbit",
+  },
+  {
+    name: "raider",
+  },
+  {
     name: "ranger",
   },
   {
@@ -899,6 +911,9 @@ export const CREATURES: BaseData[] = [
     name: "scum",
   },
   {
+    name: "sentinel",
+  },
+  {
     name: "seraph",
   },
   {
@@ -927,6 +942,9 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "slave",
+  },
+  {
+    name: "slaver",
   },
   {
     name: "slayer",
@@ -1074,6 +1092,9 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "vixen",
+  },
+  {
+    name: "walrus",
   },
   {
     name: "warden",

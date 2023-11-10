@@ -6,19 +6,19 @@ import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { Usable } from "@neverquest/components/Inventory/Usable";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import IconEssence from "@neverquest/icons/essence.svg?react";
-import type { InventoryItem } from "@neverquest/types";
+import type { MerchantInventoryItem } from "@neverquest/types";
 import { isGear, isUsable } from "@neverquest/types/type-guards";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
-export function PurchasableItems({ items }: { items: InventoryItem[] }) {
+export function PurchasableItems({ merchantItems }: { merchantItems: MerchantInventoryItem[] }) {
   return (
     <>
-      {stackItems(items).map(({ item, stack }) => {
-        const { id, price } = item;
+      {stackItems(merchantItems).map(({ item, stack }) => {
+        const { ID, price } = item;
 
         return (
-          <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
+          <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
             {isUsable(item) ? (
               <Usable item={item} />
             ) : (
@@ -30,13 +30,11 @@ export function PurchasableItems({ items }: { items: InventoryItem[] }) {
             )}
 
             <Stack direction="horizontal" gap={3}>
-              <IconDisplay
-                contents={formatValue({ value: price })}
-                Icon={IconEssence}
-                tooltip="Price"
-              />
+              <IconDisplay Icon={IconEssence} tooltip="Price">
+                {formatNumber({ value: price })}
+              </IconDisplay>
 
-              <PurchaseItem item={item} />
+              <PurchaseItem merchantItem={item} />
             </Stack>
           </div>
         );

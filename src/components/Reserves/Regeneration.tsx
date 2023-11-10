@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconImage } from "@neverquest/components/IconImage";
 import { RegenerationMeter } from "@neverquest/components/Reserves/RegenerationMeter";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
@@ -28,7 +28,7 @@ import {
 } from "@neverquest/state/reserves";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Reserve } from "@neverquest/types/unions";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 const RESERVE_CHANGE = {
   health: useChangeHealth,
@@ -36,36 +36,48 @@ const RESERVE_CHANGE = {
 };
 
 export function Regeneration({ reserve }: { reserve: Reserve }) {
-  const isHealth = reserve === "health";
+  const attributeStatisticFortitudeState = attributeStatistic("fortitude");
+  const regenerateRateState = regenerationRate(reserve);
 
-  const fortitudePowerBonus = useRecoilValue(attributePowerBonus("fortitude"));
-  const vigorPowerBonus = useRecoilValue(attributePowerBonus("vigor"));
-  const fortitude = useRecoilValue(attributeStatistic("fortitude"));
-  const vigor = useRecoilValue(attributeStatistic("vigor"));
-  const isReserveAtMaximum = useRecoilValue(isHealth ? isHealthAtMaximum : isStaminaAtMaximum);
+  const attributePowerBonusFortitude = useRecoilValue(attributePowerBonus("fortitude"));
+  const attributePowerBonusVigor = useRecoilValue(attributePowerBonus("vigor"));
+  const attributeStatisticFortitude = useRecoilValue(attributeStatisticFortitudeState);
+  const attributeStatisticVigor = useRecoilValue(attributeStatistic("vigor"));
+  const isReserveAtMaximum = useRecoilValue(
+    reserve === "health" ? isHealthAtMaximum : isStaminaAtMaximum,
+  );
   const isRecoveringValue = useRecoilValue(isRecovering);
   const isRegeneratingValue = useRecoilValue(isRegenerating(reserve));
   const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve));
-  const regenerationRateValue = useRecoilValue(regenerationRate(reserve));
+  const regenerationRateValue = useRecoilValue(regenerateRateState);
   const calisthenicsValue = useRecoilValue(isSkillAcquired("calisthenics"));
 
-  const { baseRegenerationAmount, baseRegenerationRate, label, regenerationDelta } =
-    RESERVES[reserve];
+  const {
+    baseRegenerationAmount,
+    baseRegenerationRate,
+    label,
+    regenerationDeltaAmount,
+    regenerationDeltaRate,
+  } = RESERVES[reserve];
 
   const changeReserve = RESERVE_CHANGE[reserve]();
 
   useAnimate({
     delta: setRegenerationDuration,
-    onDelta: () => {
-      changeReserve({ isRegeneration: true });
-    },
+    onDelta: () => changeReserve({ isRegeneration: true }),
     stop: isRecoveringValue || isReserveAtMaximum,
   });
 
   useDeltaText({
-    delta: regenerationDelta,
+    delta: regenerationDeltaAmount,
+    state: attributeStatisticFortitudeState,
+  });
+
+  useDeltaText({
+    delta: regenerationDeltaRate,
     format: "time",
-    value: regenerationRate(reserve),
+    state: regenerateRateState,
+    stop: ({ current, previous }) => (previous ?? 0) - current < 10,
   });
 
   useEffect(() => {
@@ -90,7 +102,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                     <Stack direction="horizontal" gap={1}>
                       <IconImage Icon={IconRegenerationRate} size="small" />
 
-                      {formatValue({ format: "time", value: baseRegenerationRate })}
+                      {formatNumber({ format: "time", value: baseRegenerationRate })}
                     </Stack>
                   </td>
                 </tr>
@@ -105,17 +117,21 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      {`-${formatValue({ decimals: 0, format: "percentage", value: vigor })}`}
+                      {`-${formatNumber({
+                        decimals: 0,
+                        format: "percentage",
+                        value: attributeStatisticVigor,
+                      })}`}
 
-                      {vigorPowerBonus > 0 && (
+                      {attributePowerBonusVigor > 0 && (
                         <>
                           <span>{LABEL_SEPARATOR}</span>
 
                           <IconImage Icon={IconTomeOfPower} size="small" />
 
-                          {`+${formatValue({
+                          {`+${formatNumber({
                             format: "percentage",
-                            value: vigorPowerBonus,
+                            value: attributePowerBonusVigor,
                           })}`}
                         </>
                       )}
@@ -145,17 +161,17 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      {`+${fortitude}`}
+                      {`+${attributeStatisticFortitude}`}
 
-                      {vigorPowerBonus > 0 && (
+                      {attributePowerBonusFortitude > 0 && (
                         <>
                           <span>{LABEL_SEPARATOR}</span>
 
                           <IconImage Icon={IconTomeOfPower} size="small" />
 
-                          {`+${formatValue({
+                          {`+${formatNumber({
                             format: "percentage",
-                            value: fortitudePowerBonus,
+                            value: attributePowerBonusFortitude,
                           })}`}
                         </>
                       )}
@@ -174,7 +190,9 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
         </span>
       </OverlayTrigger>
 
-      <FloatingTextQueue delta={isHealth ? "healthRegenerationRate" : "staminaRegenerationRate"} />
+      <DeltasDisplay delta={regenerationDeltaAmount} />
+
+      <DeltasDisplay delta={regenerationDeltaRate} />
     </Stack>
   );
 }

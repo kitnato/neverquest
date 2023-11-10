@@ -3,9 +3,9 @@ import { useRecoilCallback } from "recoil";
 import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGenerateMerchantInventory";
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
-import { hasBoughtFromMerchant } from "@neverquest/state/caravan";
 import {
   isStageCompleted,
+  isStageStarted,
   isWilderness,
   location,
   stage,
@@ -20,7 +20,7 @@ export function useToggleLocation() {
   const resetWilderness = useResetWilderness();
 
   return useRecoilCallback(
-    ({ set, snapshot }) =>
+    ({ reset, set, snapshot }) =>
       () => {
         const get = getSnapshotGetter(snapshot);
 
@@ -28,6 +28,8 @@ export function useToggleLocation() {
 
         if (isWildernessValue) {
           generateMerchantInventory();
+
+          reset(isStageStarted);
 
           set(location, "caravan");
           set(isShowing("location"), true);
@@ -39,7 +41,6 @@ export function useToggleLocation() {
           resetWilderness();
 
           set(location, "wilderness");
-          set(hasBoughtFromMerchant, false);
         }
       },
     [generateMerchantInventory, increaseStage],

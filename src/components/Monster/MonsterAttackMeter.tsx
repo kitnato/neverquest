@@ -7,7 +7,7 @@ import {
   monsterAttackRate,
 } from "@neverquest/state/monster";
 
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function MonsterAttackMeter() {
   const monsterAttackDurationValue = useRecoilValue(monsterAttackDuration);
@@ -18,10 +18,6 @@ export function MonsterAttackMeter() {
     <LabelledProgressBar
       disableTransitions
       isStriped={isMonsterStaggered}
-      label={formatValue({
-        format: "time",
-        value: monsterAttackDurationValue || monsterAttackRateValue,
-      })}
       value={
         ((monsterAttackDurationValue === 0
           ? 0
@@ -30,6 +26,11 @@ export function MonsterAttackMeter() {
         100
       }
       variant="secondary"
-    />
+    >
+      {formatNumber({
+        format: "time",
+        value: monsterAttackDurationValue || monsterAttackRateValue,
+      })}
+    </LabelledProgressBar>
   );
 }

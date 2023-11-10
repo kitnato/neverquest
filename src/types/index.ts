@@ -1,11 +1,10 @@
 import type { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Gem, Grip, Trinket } from "@neverquest/types/unions";
+import type { Consumable, Gem, Grip, QuestClass, Trinket } from "@neverquest/types/unions";
 
 export type AmmunitionPouchItem = TrinketItem & {
   current: number;
-  description: string;
   maximum: number;
   name: "ammunition pouch";
 };
@@ -13,7 +12,6 @@ export type AmmunitionPouchItem = TrinketItem & {
 export type Armor = GearItemBase & {
   deflection: number;
   gearClass: ArmorClass;
-  gems: GemItem[];
   protection: number;
   staminaCost: number;
 };
@@ -23,7 +21,6 @@ export type AttributeOrMasteryBaseData = {
   description: string;
   Icon: SVGIcon;
   increment: number;
-  maximum?: number;
 };
 
 export type BlacksmithInventory = {
@@ -80,19 +77,34 @@ export type InfusableItem = ItemBase & {
 export type InventoryItem = ConsumableItem | GearItem | GemItem | UsableItem;
 
 type ItemBase = {
-  id: string;
+  ID: string;
   price: number;
   weight: number;
+};
+
+export type KnapsackItem = TrinketItem & {
+  capacity: number;
+  name: "knapsack";
 };
 
 export type Melee = WeaponBase & {
   grip: Grip;
 };
 
-export type MerchantInventory = {
+export type MerchantInventoryItem = InventoryItem & {
   isReturned: boolean;
-  item: InventoryItem;
-}[];
+};
+
+export type QuestData = {
+  description: string;
+  hidden?: string;
+  progressionIndex: number;
+  progressionMaximum: number;
+  questClass: QuestClass;
+  title: string;
+};
+
+export type QuestNotification = QuestData & { ID: string };
 
 export type Ranged = WeaponBase & {
   ammunitionCost: number;
@@ -102,7 +114,6 @@ export type Ranged = WeaponBase & {
 export type Shield = GearItemBase & {
   block: number;
   gearClass: ShieldClass;
-  gems: GemItem[];
   stagger: number;
   staminaCost: number;
 };
@@ -120,7 +131,6 @@ type WeaponBase = GearItemBase & {
   abilityChance: number;
   damage: number;
   gearClass: WeaponClass;
-  gems: GemItem[];
   rate: number;
   staminaCost: number;
 };

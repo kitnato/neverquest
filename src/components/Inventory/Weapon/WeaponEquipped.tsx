@@ -22,11 +22,12 @@ export function WeaponEquipped() {
 
   return (
     <IconDisplay
-      contents={<WeaponName weapon={weaponValue} />}
       Icon={isUnarmed ? IconUnequipped : isMelee(weaponValue) ? IconMelee : IconRanged}
       iconProps={{ isMirrored: isUnarmed }}
       isAnimated
       tooltip="Equipped weapon"
-    />
+    >
+      <WeaponName weapon={weaponValue} />
+    </IconDisplay>
   );
 }

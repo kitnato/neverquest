@@ -10,6 +10,7 @@ import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/Dod
 import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { ARMOR_SPECIFICATIONS } from "@neverquest/data/inventory";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconDeflection from "@neverquest/icons/deflection.svg?react";
 import IconDodgePenalty from "@neverquest/icons/dodge-penalty.svg?react";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
@@ -21,7 +22,7 @@ import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { allowNSFW } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateArmor } from "@neverquest/utilities/generators";
 import {
   getArmorRanges,
@@ -33,12 +34,14 @@ import {
 export function ArmorOptions() {
   const [{ armor: craftedArmor }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const allowNSFWValue = useRecoilValue(allowNSFW);
-  const isShowingDodge = useRecoilValue(isShowing("dodge"));
+  const isShowingDodgeChance = useRecoilValue(isShowing("dodgeChance"));
   const armorcraftValue = useRecoilValue(isSkillAcquired("armorcraft"));
   const stageValue = useRecoilValue(stage);
 
   const [armorClass, setArmorClass] = useState<ArmorClass>("light");
   const [armorLevel, setArmorLevel] = useState(stageValue);
+
+  const progressQuest = useProgressQuest();
 
   const factor = getGrowthSigmoid(armorLevel);
   const { deflection, protection, staminaCost, weight } = getArmorRanges({
@@ -53,67 +56,66 @@ export function ArmorOptions() {
         <SetGearLevel state={[armorLevel, setArmorLevel]} />
 
         <IconDisplay
-          contents={
-            <FormSelect
-              onChange={({ target: { value } }) => setArmorClass(value as ArmorClass)}
-              value={armorClass}
-            >
-              {ARMOR_CLASS_TYPES.map((current) => (
-                <option key={current} value={current}>
-                  {capitalizeAll(current)}
-                </option>
-              ))}
-            </FormSelect>
-          }
           Icon={ARMOR_SPECIFICATIONS[armorClass].Icon}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Class"
-        />
+        >
+          <FormSelect
+            onChange={({ target: { value } }) => setArmorClass(value as ArmorClass)}
+            value={armorClass}
+          >
+            {ARMOR_CLASS_TYPES.map((current) => (
+              <option key={current} value={current}>
+                {capitalizeAll(current)}
+              </option>
+            ))}
+          </FormSelect>
+        </IconDisplay>
 
         <IconDisplay
-          contents={`${formatValue({ value: protection.minimum })}-${formatValue({
-            value: protection.maximum,
-          })}`}
           Icon={IconArmorProtection}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Protection"
-        />
+        >{`${formatNumber({ value: protection.minimum })}-${formatNumber({
+          value: protection.maximum,
+        })}`}</IconDisplay>
 
         {deflection !== null && (
           <IconDisplay
-            contents={
-              armorcraftValue
-                ? `${formatValue({
-                    format: "percentage",
-                    value: deflection.minimum,
-                  })}-${formatValue({ format: "percentage", value: deflection.maximum })}`
-                : LABEL_UNKNOWN
-            }
             Icon={armorcraftValue ? IconDeflection : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
             tooltip={armorcraftValue ? "Deflection chance" : LABEL_UNKNOWN}
-          />
+          >
+            {armorcraftValue
+              ? `${formatNumber({
+                  format: "percentage",
+                  value: deflection.minimum,
+                })}-${formatNumber({ format: "percentage", value: deflection.maximum })}`
+              : LABEL_UNKNOWN}
+          </IconDisplay>
         )}
 
         {staminaCost !== 0 && (
           <IconDisplay
-            contents={
-              isShowingDodge ? <DodgePenaltyContents staminaCost={staminaCost} /> : LABEL_UNKNOWN
-            }
-            Icon={isShowingDodge ? IconDodgePenalty : IconUnknown}
+            Icon={isShowingDodgeChance ? IconDodgePenalty : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
-            tooltip={isShowingDodge ? "Dodge penalty" : LABEL_UNKNOWN}
-          />
+            tooltip={isShowingDodgeChance ? "Dodge penalty" : LABEL_UNKNOWN}
+          >
+            {isShowingDodgeChance ? (
+              <DodgePenaltyContents staminaCost={staminaCost} />
+            ) : (
+              LABEL_UNKNOWN
+            )}
+          </IconDisplay>
         )}
 
         <IconDisplay
-          contents={`${formatValue({ value: weight.minimum })}-${formatValue({
-            value: weight.maximum,
-          })}`}
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
-        />
+        >{`${formatNumber({ value: weight.minimum })}-${formatNumber({
+          value: weight.maximum,
+        })}`}</IconDisplay>
       </Stack>
 
       <hr />
@@ -122,7 +124,7 @@ export function ArmorOptions() {
         <span className="text-center">Cannot use without training.</span>
       ) : craftedArmor === null ? (
         <CraftGear
-          onCraft={() =>
+          onCraft={() => {
             setBlacksmithInventory((current) => ({
               ...current,
               armor: generateArmor({
@@ -137,8 +139,10 @@ export function ArmorOptions() {
                     ? ["highQuality"]
                     : undefined,
               }),
-            }))
-          }
+            }));
+
+            progressQuest({ quest: "crafting" });
+          }}
           price={getGearPrice({
             factor,
             ...ARMOR_SPECIFICATIONS[armorClass],

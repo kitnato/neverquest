@@ -15,9 +15,9 @@ import type {
   WeaponClass,
   WeaponModality,
 } from "@neverquest/LOCRAN/types";
-import type { UsableItem } from "@neverquest/types";
+import type { InfusableItem, TrinketItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type { Consumable, Crew, Grip } from "@neverquest/types/unions";
+import type { Crew, Grip } from "@neverquest/types/unions";
 
 export const AMMUNITION_PRICE = 10;
 
@@ -40,7 +40,7 @@ export const CREW: Record<
     Icon: IconAlchemist,
     interaction: "Transmute",
     monologues: { 1: "Things are not always what they seem." },
-    price: 300,
+    price: 500,
     requiredStage: 30,
   },
   blacksmith: {
@@ -49,31 +49,31 @@ export const CREW: Record<
     interaction: "Craft",
     monologues: { 1: "In need of better gear?" },
     price: 60,
-    requiredStage: 10,
+    requiredStage: 12,
   },
   fletcher: {
     description: "Crafts ranged weapons and provides ammunition.",
     Icon: IconFletcher,
     interaction: "Craft",
     monologues: { 1: "Tired of monster breath?" },
-    price: 200,
-    requiredStage: 25,
+    price: 300,
+    requiredStage: 23,
   },
   medic: {
     description: "Heals wounds and sells bandages.",
     Icon: IconMedic,
     interaction: "Heal",
     monologues: { 1: "Allow me to patch you up." },
-    price: 80,
-    requiredStage: 12,
+    price: 90,
+    requiredStage: 15,
   },
   mercenary: {
     description: "Trains new skills and attributes.",
     Icon: IconMercenary,
     interaction: "Train",
     monologues: { 1: "Perhaps I can teach you something." },
-    price: 40,
-    requiredStage: 8,
+    price: 25,
+    requiredStage: 6,
   },
   merchant: {
     description: "Offers various items for purchase and buys unwanted items.",
@@ -84,17 +84,31 @@ export const CREW: Record<
       2: "Hello again. Some threads, perhaps?",
       3: "Ah, you're back. Care for more protection?",
       4: "You must be over-burdened. I have just the thing.",
-      5: "Got a fresh shipment of gear, care to see?",
+      5: "A trinket that allows safe passage. Would that be of interest?",
       6: "Heard there are other travelers looking to sell their services.",
-      7: "Your headway in the wilderness is helping business.",
+      7: "New gear for sale, if you care to peruse.",
       9: "There is something dark looming on the horizon ...",
       10: "I can't believe you came out of that in one piece.",
       11: "Ah, back again I see.",
-      20: "I recently came into possession of a few curiosities.",
+      20: "I recently came into possession of a fine curiosity.",
       21: "Can I interest you in anything else?",
-      25: "I have something suitable for marksmen.",
-      30: "A dark wanderer passed by and sold me a strange book ...",
+      23: "I have something suitable for marksmen.",
       31: "Welcome back. Always a sight for sore eyes.",
+      35: "You wouldn't be a scribe, would you?",
+      36: "Your headway in the wilderness is helping business.",
+      40: "A dark wanderer passed by and sold me a strange book ...",
+      41: "A sea of monsters ... but is it endless?",
+      50: "Retirement? Pretty sure you're trapped here with us.",
+      51: "Still you come back for more?",
+      52: "There are tales of a mysterious creature that only the most fortunate find.",
+      60: "Have you not seen everything by now?",
+      70: "Dark portents signal dark tides are coming.",
+      80: "Still you press on. There must be an answer.",
+      90: "It's so cold ...",
+      99: "I fear the end is imminent.",
+      100: "How are you still here?",
+      101: "You shouldn't be h̷̡̔e̵̖̍r̶͍͝e̵̮͂.",
+      200: "Ṅ̷̲͓̙̖͇͖͇̖̀͐̓̈́͊͐̽̂͝ǒ̵͖̳͕͖͖͖͍̝̳̦̗t̸̖͖͚̬̠͜͝ͅḫ̸̓͋̂̾ȋ̵̜͍̙̠͍̦̲͔̺̈́n̴̞͙̉̃͆͝͝g̷̻͉͓͂̊̊͑͂̋͂̍͒͜ ̴͕̮͉̾i̵̡͙̜̭̦͎̿́͂̈̆̍̀̚͝͝s̶̛̖̯̮̻̾̊̏͑͌̅̋̆͝ ̵̺͖͉̤̰̤͚̀̾͌͆͊̈́̏͝ṟ̷͇̦͓͙̹̟͋̐̈́̅̒͜ë̸́͌͘͜ͅą̴̼͖͉̘͙͝l̸̖̩̖̈̂̀͝ ̸̨̛͍͈͔̥̪̥͖̩̒͂̐̃̀̀̿͝.̴̻͈̠̱̮̇́.̵̩̬̞̬̮̼̙̲̩̇̏̈́͋̒̃̈́̽̂͘͝.̴̼͈͍͈̳͂",
     },
     price: 0,
     requiredStage: 0,
@@ -104,24 +118,24 @@ export const CREW: Record<
     Icon: IconOccultist,
     interaction: "Ritual",
     monologues: { 1: "Prepared to pierce the veil?" },
-    price: 150,
-    requiredStage: 20,
+    price: 777,
+    requiredStage: 40,
   },
   tailor: {
     description: "Expands inventory space.",
     Icon: IconTailor,
     interaction: "Tailoring",
     monologues: { 1: "Allow me to deepen your pockets." },
-    price: 20,
-    requiredStage: 6,
+    price: 40,
+    requiredStage: 9,
   },
   witch: {
     description: "Sells potions that cure ailments.",
     Icon: IconWitch,
     interaction: "Brew",
-    monologues: { 1: "Gaze deep into my cauldron ..." },
-    price: 100,
-    requiredStage: 16,
+    monologues: { 1: "Gaze into my cauldron ..." },
+    price: 150,
+    requiredStage: 18,
   },
 };
 
@@ -129,91 +143,79 @@ export const CREW_ORDER: Crew[] = Object.entries(CREW)
   .toSorted(([, current1], [, current2]) => current1.requiredStage - current2.requiredStage)
   .map(([current]) => current as Crew);
 
-export const OCCULTIST_PURGE_PRICE_MULTIPLIER = 0.1;
+export const OCCULTIST_PURGE_PRICE_MULTIPLIER = {
+  essence: 0.1,
+  quests: 500,
+};
 
 export const MEDIC_PRICE_SURGERY = 25;
 export const MEDIC_PRICE_SURGERY_CRITICAL = 100;
 
 export const MERCHANT_OFFERS: Record<
   number,
-  | (
-      | (ArtifactType<"armor"> & {
-          gearClass: ArmorClass;
-        })
-      | (ArtifactType<"shield"> & {
-          gearClass: ShieldClass;
-        })
-      | (ArtifactType<"trinket"> & {
-          item: UsableItem;
-        })
-      | (ArtifactType<"weapon"> & {
-          gearClass: WeaponClass;
-          grip: Grip;
-          modality: WeaponModality;
-        })
-    )[]
-  | undefined
+  | InfusableItem
+  | TrinketItem
+  | (ArtifactType<"armor"> & {
+      gearClass: ArmorClass;
+    })
+  | (ArtifactType<"shield"> & {
+      gearClass: ShieldClass;
+    })
+  | (ArtifactType<"weapon"> & {
+      gearClass: WeaponClass;
+      grip: Grip;
+      modality: WeaponModality;
+    })
 > = {
-  1: [
-    {
-      gearClass: "piercing",
-      grip: "one-handed",
-      modality: "melee",
-      type: "weapon",
-    },
-  ],
-  2: [
-    {
-      gearClass: "light",
-      type: "armor",
-    },
-  ],
-  3: [
-    {
-      gearClass: "small",
-      type: "shield",
-    },
-  ],
-  4: [
-    { item: TRINKETS["knapsack"].item, type: "trinket" },
-    { item: TRINKETS["compass"].item, type: "trinket" },
-    { item: TRINKETS["hearthstone"].item, type: "trinket" },
-  ],
-  5: [
-    {
-      gearClass: "slashing",
-      grip: "one-handed",
-      modality: "melee",
-      type: "weapon",
-    },
-    {
-      gearClass: "blunt",
-      grip: "one-handed",
-      modality: "melee",
-      type: "weapon",
-    },
-    {
-      gearClass: "medium",
-      type: "shield",
-    },
-    {
-      gearClass: "reinforced",
-      type: "armor",
-    },
-  ],
-  20: [
-    { item: TRINKETS["antique coin"].item, type: "trinket" },
-    { item: INFUSABLES["monkey paw"].item, type: "trinket" },
-  ],
-  25: [{ item: TRINKETS["ammunition pouch"].item, type: "trinket" }],
-  30: [{ item: INFUSABLES["tome of power"].item, type: "trinket" }],
+  1: {
+    gearClass: "piercing",
+    grip: "one-handed",
+    modality: "melee",
+    type: "weapon",
+  },
+  2: {
+    gearClass: "light",
+    type: "armor",
+  },
+  3: {
+    gearClass: "small",
+    type: "shield",
+  },
+  4: TRINKETS["knapsack"].item,
+  5: TRINKETS["hearthstone"].item,
+  6: TRINKETS["compass"].item,
+  7: {
+    gearClass: "slashing",
+    grip: "one-handed",
+    modality: "melee",
+    type: "weapon",
+  },
+  8: {
+    gearClass: "blunt",
+    grip: "one-handed",
+    modality: "melee",
+    type: "weapon",
+  },
+  9: {
+    gearClass: "medium",
+    type: "shield",
+  },
+  10: {
+    gearClass: "reinforced",
+    type: "armor",
+  },
+  20: INFUSABLES["monkey paw"].item,
+  [CREW.fletcher.requiredStage]: TRINKETS["ammunition pouch"].item,
+  35: TRINKETS["journal"].item,
+  40: INFUSABLES["tome of power"].item,
+  50: TRINKETS["antique coin"].item,
 };
 
 export const TAILORING_EXPANSION = {
   ammunitionPouch: 20,
   knapsack: 3,
 };
-export const TAILORING_PRICES_MAXIMUM = {
+export const TAILORING_PRICE_MAXIMUM = {
   ammunitionPouch: 300,
   knapsack: 500,
 };
@@ -221,4 +223,4 @@ export const TAILORING_PRICES_MAXIMUM = {
 export const TRANSMUTE_COST = 3;
 export const TRANSMUTE_YIELD = 1;
 
-export const WITCH_POTIONS: Consumable[] = ["elixir", "antidote", "salve"];
+export const WITCH_POTIONS = ["elixir", "antidote", "salve"] as const;

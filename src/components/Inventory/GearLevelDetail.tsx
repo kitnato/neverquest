@@ -7,7 +7,7 @@ import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
 import IconGearLevel from "@neverquest/icons/gear-level.svg?react";
 import { showGearLevel } from "@neverquest/state/settings";
 import type { ComparisonProps } from "@neverquest/types/props";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function GearLevelDetail({
   comparison,
@@ -30,7 +30,7 @@ export function GearLevelDetail({
         <Stack direction="horizontal" gap={1}>
           <IconImage Icon={IconGearLevel} size="small" />
 
-          {formatValue({ value: level })}
+          {formatNumber({ value: level })}
 
           {comparison !== null && (
             <GearComparison

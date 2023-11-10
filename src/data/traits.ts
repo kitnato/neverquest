@@ -2,7 +2,6 @@ import IconBrawler from "@neverquest/icons/brawler.svg?react";
 import IconBruiser from "@neverquest/icons/bruiser.svg?react";
 import IconColossus from "@neverquest/icons/colossus.svg?react";
 import IconExecutioner from "@neverquest/icons/executioner.svg?react";
-import IconFieldSurgeon from "@neverquest/icons/field-surgeon.svg?react";
 import IconInoculated from "@neverquest/icons/inoculated.svg?react";
 import IconNinja from "@neverquest/icons/ninja.svg?react";
 import IconNudist from "@neverquest/icons/nudist.svg?react";
@@ -13,7 +12,7 @@ import IconTank from "@neverquest/icons/tank.svg?react";
 import IconTormentor from "@neverquest/icons/tormentor.svg?react";
 import type { SVGIcon } from "@neverquest/types/props";
 import type { Trait } from "@neverquest/types/unions";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export const BRUISER_STUN_CHANCE = 0.25;
 
@@ -29,23 +28,20 @@ export const TRAITS: Record<
     Icon: IconBrawler,
   },
   bruiser: {
-    description: `Current stamina adds to unarmed damage & unarmed attacks have a ${formatValue({
+    description: `Current stamina adds to unarmed damage & unarmed attacks have a ${formatNumber({
+      decimals: 0,
       format: "percentage",
       value: BRUISER_STUN_CHANCE,
     })} chance to stun.`,
     Icon: IconBruiser,
   },
   colossus: {
-    description: "Two-handed weapons can be equipped alongside a shield.",
+    description: "A two-handed weapon can be equipped alongside a shield.",
     Icon: IconColossus,
   },
   executioner: {
     description: "Critical strikes with a two-handed weapon always execute the monster.",
     Icon: IconExecutioner,
-  },
-  "field surgeon": {
-    description: "Health is fully restored when not in combat.",
-    Icon: IconFieldSurgeon,
   },
   inoculated: {
     description: "Deflection chance is doubled.",

@@ -1,10 +1,10 @@
-import { type FunctionComponent, useState } from "react";
+import { useState } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { Attributes } from "@neverquest/components/Attributes";
-import { ButtonBadge } from "@neverquest/components/Controls/ButtonBadge";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
+import { IconBadge } from "@neverquest/components/IconBadge";
 import { IconImage } from "@neverquest/components/IconImage";
 import { IconTabs } from "@neverquest/components/IconTabs";
 import { Skills } from "@neverquest/components/Skills";
@@ -18,54 +18,60 @@ import { areAttributesAffordable } from "@neverquest/state/attributes";
 import { isAttacking, isGameOver } from "@neverquest/state/character";
 import { isStageStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
-import type { SVGIcon } from "@neverquest/types/props";
+import type { TabsData } from "@neverquest/types/props";
 import { formatEnumeration } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
+
+const BASE_TAB: TabsData = [
+  {
+    Component: Attributes,
+    Icon: IconAttributes,
+    label: "attributes",
+  },
+];
+const BASE_TOOLTIP = ["Attributes"];
 
 export function CapabilitiesButton() {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesAffordable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isGameOverValue = useRecoilValue(isGameOver);
   const isStageStartedValue = useRecoilValue(isStageStarted);
-  const isShowingCapabilities = useRecoilValue(isShowing("capabilities"));
+  const isShowingAttributes = useRecoilValue(isShowing("attributes"));
   const isShowingSkills = useRecoilValue(isShowing("skills"));
   const isShowingTraits = useRecoilValue(isShowing("traits"));
 
   const [isScreenShowing, setScreenShowing] = useState(false);
 
   const isShowingSkillsOrTraits = isShowingSkills || isShowingTraits;
-  const tabs: {
-    Component: FunctionComponent;
-    Icon: SVGIcon;
-    label: string;
-  }[] = [
-    {
-      Component: Attributes,
-      Icon: IconAttributes,
-      label: "attributes",
-    },
-  ];
-  const tooltip = ["Attributes"];
+
+  let tabs: TabsData = [...BASE_TAB];
+  let tooltip = [...BASE_TOOLTIP];
 
   if (isShowingSkills) {
-    tabs.push({
-      Component: Skills,
-      Icon: IconSkills,
-      label: "skills",
-    });
-    tooltip.push("skills");
+    tabs = [
+      ...tabs,
+      {
+        Component: Skills,
+        Icon: IconSkills,
+        label: "skills",
+      },
+    ];
+    tooltip = [...tooltip, "skills"];
   }
 
   if (isShowingTraits) {
-    tabs.push({
-      Component: Traits,
-      Icon: IconTraits,
-      label: "traits",
-    });
-    tooltip.push("traits");
+    tabs = [
+      ...tabs,
+      {
+        Component: Traits,
+        Icon: IconTraits,
+        label: "traits",
+      },
+    ];
+    tooltip = [...tooltip, "traits"];
   }
 
-  if (!isShowingCapabilities) {
+  if (!isShowingAttributes && !isShowingSkills && !isShowingTraits) {
     return null;
   }
 
@@ -88,7 +94,11 @@ export function CapabilitiesButton() {
           >
             <IconImage Icon={IconCapabilities} />
 
-            <ButtonBadge Icon={IconUpgrade} isShowing={areAttributesIncreasableValue} />
+            {areAttributesIncreasableValue && (
+              <IconBadge alignToButton>
+                <IconImage Icon={IconUpgrade} size="small" />
+              </IconBadge>
+            )}
           </Button>
         </span>
       </OverlayTrigger>
@@ -98,11 +108,7 @@ export function CapabilitiesButton() {
         onClose={() => setScreenShowing(false)}
         title={`${isShowingSkillsOrTraits ? "Capabilities" : "Attributes"}`}
       >
-        {isShowingSkillsOrTraits ? (
-          <IconTabs defaultTab="attributes" tabs={tabs} />
-        ) : (
-          <Attributes />
-        )}
+        {isShowingSkillsOrTraits ? <IconTabs tabs={tabs} /> : <Attributes />}
       </DismissableScreen>
     </>
   );

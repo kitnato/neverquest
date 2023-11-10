@@ -1,7 +1,7 @@
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MasteryProgress } from "@neverquest/components/Masteries/MasteryProgress";
 import { MasteryRank } from "@neverquest/components/Masteries/MasteryRank";
@@ -19,21 +19,9 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
   const { description, Icon } = MASTERIES[mastery];
 
   return (
-    <div className={getAnimationClass({ name: "flipInX" })}>
+    <div className={`mastery ${getAnimationClass({ name: "flipInX" })}`}>
       {isMasteryUnlockedValue ? (
         <IconDisplay
-          contents={
-            <OverlayTrigger
-              overlay={
-                <Popover>
-                  <PopoverBody>{description}</PopoverBody>
-                </Popover>
-              }
-              placement="right"
-            >
-              <span style={{ width: "max-content" }}>{capitalizeAll(mastery)}</span>
-            </OverlayTrigger>
-          }
           description={
             <Stack direction="horizontal">
               <Stack className="w-100" direction="horizontal" gap={3}>
@@ -42,19 +30,31 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
                 <MasteryProgress mastery={mastery} />
               </Stack>
 
-              <FloatingTextQueue delta={mastery} />
+              <DeltasDisplay delta={mastery} />
             </Stack>
           }
           Icon={Icon}
           tooltip="Mastery"
-        />
+        >
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverBody>{description}</PopoverBody>
+              </Popover>
+            }
+            placement="right"
+          >
+            <span>{capitalizeAll(mastery)}</span>
+          </OverlayTrigger>
+        </IconDisplay>
       ) : (
         <IconDisplay
-          contents={LABEL_UNKNOWN}
           description="Unlocked by acquiring a skill."
           Icon={IconUnknown}
           tooltip="Mastery"
-        />
+        >
+          {LABEL_UNKNOWN}
+        </IconDisplay>
       )}
     </div>
   );

@@ -32,10 +32,8 @@ export function MonsterAttack() {
   });
 
   return (
-    <IconDisplay
-      contents={<MonsterAttackMeter />}
-      Icon={IconAttackRate}
-      tooltip="Monster attack rate"
-    />
+    <IconDisplay Icon={IconAttackRate} tooltip="Monster attack rate">
+      <MonsterAttackMeter />
+    </IconDisplay>
   );
 }

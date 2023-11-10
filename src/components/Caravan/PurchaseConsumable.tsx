@@ -12,10 +12,10 @@ import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import type { ConsumableItem } from "@neverquest/types";
 import type { Consumable } from "@neverquest/types/unions";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
-  const [id, setID] = useState(nanoid());
+  const [ID, setID] = useState(nanoid());
 
   const acquireItem = useAcquireItem();
   const transactEssence = useTransactEssence();
@@ -23,7 +23,7 @@ export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
   const { item } = CONSUMABLES[consumable];
   const itemWithID: ConsumableItem = {
     ...item,
-    id,
+    ID,
   };
   const { price } = itemWithID;
 
@@ -32,7 +32,9 @@ export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
       <ItemDisplay item={itemWithID} overlayPlacement="right" />
 
       <Stack direction="horizontal" gap={3}>
-        <IconDisplay contents={formatValue({ value: price })} Icon={IconEssence} tooltip="Price" />
+        <IconDisplay Icon={IconEssence} tooltip="Price">
+          {formatNumber({ value: price })}
+        </IconDisplay>
 
         <PurchaseItemButton
           item={itemWithID}

@@ -1,14 +1,14 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconAttributePoints from "@neverquest/icons/attribute-points.svg?react";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import { attributePoints, level } from "@neverquest/state/attributes";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAttributePointCost } from "@neverquest/utilities/getters";
 
 export function AttributePoints() {
@@ -17,15 +17,15 @@ export function AttributePoints() {
 
   useDeltaText({
     delta: "attributePoints",
-    value: attributePoints,
+    state: attributePoints,
   });
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <Stack direction="horizontal">
-        <IconDisplay contents="" Icon={IconAttributePoints} tooltip="Available attribute points" />
+      <Stack direction="horizontal" gap={1}>
+        <IconDisplay Icon={IconAttributePoints} tooltip="Available attribute points" />
 
-        <FloatingTextQueue delta="attributePoints" />
+        <DeltasDisplay delta="attributePoints" />
       </Stack>
 
       <OverlayTrigger
@@ -37,7 +37,7 @@ export function AttributePoints() {
               <Stack className="justify-content-center" direction="horizontal" gap={1}>
                 <IconImage Icon={IconEssence} size="small" />
 
-                {formatValue({ value: getAttributePointCost(levelValue) })}
+                {formatNumber({ value: getAttributePointCost(levelValue) })}
               </Stack>
             </PopoverBody>
           </Popover>

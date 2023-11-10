@@ -22,8 +22,11 @@ export function generate({
   category: Category;
   name: string;
 }) {
-  const canIncludeCreatureName =
-    ["artifact", "location"].includes(category) && Math.random() <= CREATURE_NAME_AFFIX_CHANCE;
+  const canHaveCreatureAffix =
+    prefixTags.length === 0 &&
+    suffixTags.length === 0 &&
+    ["artifact", "location"].includes(category) &&
+    Math.random() <= CREATURE_NAME_AFFIX_CHANCE;
   const filteredCreatureNamePrefixes: string[] = [];
 
   let prefix = "";
@@ -37,21 +40,21 @@ export function generate({
       }
 
       // Filter out only prefixes with NSFW filter.
-      const filteredPrefix =
+      const isValidPrefix =
         (allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW) &&
         categories[category]?.includes("prefix");
 
       // If we want a tagged prefix, check if the current affix has all of them, otherwise discard it.
       if (prefixTags.length > 0) {
-        return filteredPrefix && prefixTags.every((current) => tags?.includes(current));
+        return isValidPrefix && prefixTags.every((current) => tags?.includes(current));
       }
 
       // Otherwise, return any prefix.
-      return filteredPrefix;
+      return isValidPrefix;
     }).map((current) => current.name);
 
     // Artifacts and locations can also have a creature name prefix.
-    if (canIncludeCreatureName) {
+    if (canHaveCreatureAffix) {
       filteredCreatureNamePrefixes.push(
         ...CREATURES.filter(({ isNSFW }) => (allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW)).map(
           (current) => {
@@ -75,24 +78,24 @@ export function generate({
       }
 
       // Filter out only suffixes with NSFW filter.
-      const filteredSuffix =
+      const isValidSuffix =
         (allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW) &&
         (categories[category]?.includes("articledSuffix") ||
           categories[category]?.includes("suffix"));
 
       // If suffix is tagged, check if the current affix has all of them (with NSFW filter).
       if (suffixTags.length > 0) {
-        return filteredSuffix && suffixTags.every((current) => tags?.includes(current));
+        return isValidSuffix && suffixTags.every((current) => tags?.includes(current));
       }
 
-      // Otherwise, return any suffix.
-      return filteredSuffix;
+      // Otherwise, return any valid suffix.
+      return isValidSuffix;
     });
 
     const filteredCreatureNameSuffixes = [];
 
     // Artifacts and locations can also have a creature name suffix, but only if the prefix isn't already one.
-    if (canIncludeCreatureName && !filteredCreatureNamePrefixes.includes(prefix)) {
+    if (canHaveCreatureAffix && !filteredCreatureNamePrefixes.includes(prefix)) {
       filteredCreatureNameSuffixes.push(
         ...CREATURES.filter(({ isNSFW }) => (allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW)).map(
           (current) => current.name,
@@ -101,26 +104,24 @@ export function generate({
     }
 
     const suffixes = [...filteredSuffixes, ...filteredCreatureNameSuffixes];
-    const suffixChoice = suffixes[Math.floor(Math.random() * suffixes.length)] ?? "";
+    const suffixChoice = suffixes[Math.floor(Math.random() * suffixes.length)];
     let formattedSuffix = "";
 
-    // If the chosen suffix is a creature name is can be plural alongside an article.
-    if (typeof suffixChoice === "string") {
-      if (Math.random() <= PLURALIZE_CHANCE) {
-        formattedSuffix = `${Math.random() <= ARTICLE_CHANCE ? "the " : ""}${capitalizeAll(
-          pluralize(suffixChoice),
-        )}`;
+    if (suffixChoice !== undefined) {
+      // If the chosen suffix is a creature name is can be plural alongside a potential article.
+      if (typeof suffixChoice === "string") {
+        if (Math.random() <= PLURALIZE_CHANCE) {
+          formattedSuffix = `${Math.random() <= ARTICLE_CHANCE ? "the " : ""}${capitalizeAll(
+            pluralize(suffixChoice),
+          )}`;
+        } else {
+          formattedSuffix = `the ${capitalizeAll(suffixChoice)}`;
+        }
       } else {
-        formattedSuffix = `the ${capitalizeAll(suffixChoice)}`;
+        formattedSuffix = `${
+          suffixChoice[category]?.includes("articledSuffix") ? "the " : ""
+        }${capitalizeAll(suffixChoice.name)}`;
       }
-    } else {
-      formattedSuffix = `${
-        suffixChoice[category]?.includes("articledSuffix")
-          ? suffixChoice[category]?.includes("suffix") && Math.random() >= ARTICLE_CHANCE
-            ? ""
-            : "the "
-          : ""
-      }${capitalizeAll(suffixChoice.name)}`;
     }
 
     if (formattedSuffix !== "") {

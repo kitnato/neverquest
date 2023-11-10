@@ -1,11 +1,12 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
-import { ATTRIBUTES, ATTRIBUTES_ORDER } from "@neverquest/data/attributes";
-import { handleLocalStorage, withStateKey } from "@neverquest/state";
+import { ATTRIBUTES } from "@neverquest/data/attributes";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { powerBonusBoost } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
-import type { Attribute } from "@neverquest/types/unions";
+import { ATTRIBUTE_TYPES, type Attribute } from "@neverquest/types/unions";
 import { getAttributePointCost, getComputedStatistic } from "@neverquest/utilities/getters";
+import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
@@ -68,14 +69,8 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =
   selectorFamily<boolean, Attribute>({
     get:
       (parameter) =>
-      ({ get }) => {
-        const { base, increment, maximum } = ATTRIBUTES[parameter];
-        const attributeRankValue = get(attributeRank(parameter));
-
-        return maximum === undefined
-          ? false
-          : maximum === getComputedStatistic({ amount: attributeRankValue, base, increment });
-      },
+      ({ get }) =>
+        ATTRIBUTES[parameter].maximum === get(attributeRank(parameter)),
     key,
   }),
 );
@@ -83,7 +78,7 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =
 export const level = withStateKey("level", (key) =>
   selector({
     get: ({ get }) =>
-      ATTRIBUTES_ORDER.reduce((aggregator, current) => aggregator + get(attributeRank(current)), 0),
+      ATTRIBUTE_TYPES.reduce((aggregator, current) => aggregator + get(attributeRank(current)), 0),
     key,
   }),
 );
@@ -112,10 +107,10 @@ export const attributeRank = withStateKey("attributeRank", (key) =>
   }),
 );
 
-// TODO - Must use { isUnlocked } object instead of just boolean, otherwise onSet() does not trigger in useInitializer()
+// TODO - Must use { current } object instead of just boolean, otherwise onSet() does not trigger in useInitializer()
 export const isAttributeUnlocked = withStateKey("isAttributeUnlocked", (key) =>
-  atomFamily<{ isUnlocked: boolean }, Attribute>({
-    default: { isUnlocked: false },
+  atomFamily<{ current: boolean }, Attribute>({
+    default: { current: false },
     effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),

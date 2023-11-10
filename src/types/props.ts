@@ -24,8 +24,10 @@ export type IconImageDOMProps = Omit<IconImageProps, "Icon">;
 
 export type SVGIcon = FunctionComponent<SVGProps<SVGSVGElement> & { title?: string }>;
 
-export type TabData = {
+type TabData = {
   Component: FunctionComponent;
   Icon: SVGIcon;
   label: string;
-}[];
+};
+
+export type TabsData = [TabData, ...TabData[]];

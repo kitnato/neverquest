@@ -22,7 +22,7 @@ import { stage } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { GRIP_TYPES, type Grip } from "@neverquest/types/unions";
-import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateMeleeWeapon } from "@neverquest/utilities/generators";
 import {
   getGearPrice,
@@ -58,94 +58,79 @@ export function WeaponOptions() {
       <Stack className="mx-auto" gap={3}>
         <SetGearLevel state={[weaponLevel, setWeaponLevel]} />
 
-        <IconDisplay
-          contents={
+        <IconDisplay Icon={IconGearClass} iconProps={{ overlayPlacement: "left" }} tooltip="Class">
+          <FormSelect
+            onChange={({ target: { value } }) => setWeaponClass(value as WeaponClass)}
+            value={weaponClass}
+          >
+            {WEAPON_CLASS_TYPES.map((current) => (
+              <option key={current} value={current}>
+                {capitalizeAll(current)}
+              </option>
+            ))}
+          </FormSelect>
+        </IconDisplay>
+
+        {siegecraftValue && (
+          <IconDisplay Icon={IconGrip} iconProps={{ overlayPlacement: "left" }} tooltip="Grip">
             <FormSelect
-              onChange={({ target: { value } }) => setWeaponClass(value as WeaponClass)}
-              value={weaponClass}
+              onChange={({ target: { value } }) => setWeaponGrip(value as Grip)}
+              value={weaponGrip}
             >
-              {WEAPON_CLASS_TYPES.map((current) => (
+              {GRIP_TYPES.map((current) => (
                 <option key={current} value={current}>
                   {capitalizeAll(current)}
                 </option>
               ))}
             </FormSelect>
-          }
-          Icon={IconGearClass}
-          iconProps={{ overlayPlacement: "left" }}
-          tooltip="Class"
-        />
-
-        {siegecraftValue && (
-          <IconDisplay
-            contents={
-              <FormSelect
-                onChange={({ target: { value } }) => setWeaponGrip(value as Grip)}
-                value={weaponGrip}
-              >
-                {GRIP_TYPES.map((current) => (
-                  <option key={current} value={current}>
-                    {capitalizeAll(current)}
-                  </option>
-                ))}
-              </FormSelect>
-            }
-            Icon={IconGrip}
-            iconProps={{ overlayPlacement: "left" }}
-            tooltip="Grip"
-          />
+          </IconDisplay>
         )}
 
         <IconDisplay
-          contents={`${formatValue({ value: damage.minimum })}-${formatValue({
-            value: damage.maximum,
-          })}`}
           Icon={IconWeaponDamage}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Damage"
-        />
+        >{`${formatNumber({ value: damage.minimum })}-${formatNumber({
+          value: damage.maximum,
+        })}`}</IconDisplay>
 
         <IconDisplay
-          contents={`${formatValue({ format: "time", value: rate.minimum })}-${formatValue({
-            format: "time",
-            value: rate.maximum,
-          })}`}
           Icon={IconWeaponAttackRate}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Attack rate"
-        />
+        >{`${formatNumber({ format: "time", value: rate.minimum })}-${formatNumber({
+          format: "time",
+          value: rate.maximum,
+        })}`}</IconDisplay>
 
         <IconDisplay
-          contents={
-            skillValue
-              ? `${formatValue({
-                  format: "percentage",
-                  value: abilityChance.minimum,
-                })}-${formatValue({ format: "percentage", value: abilityChance.maximum })}`
-              : LABEL_UNKNOWN
-          }
           Icon={skillValue ? IconAbility : IconUnknown}
           iconProps={{ overlayPlacement: "left" }}
           tooltip={skillValue ? `${capitalizeAll(ability)} chance` : LABEL_UNKNOWN}
-        />
+        >
+          {skillValue
+            ? `${formatNumber({
+                format: "percentage",
+                value: abilityChance.minimum,
+              })}-${formatNumber({ format: "percentage", value: abilityChance.maximum })}`
+            : LABEL_UNKNOWN}
+        </IconDisplay>
 
         <IconDisplay
-          contents={`${formatValue({ value: staminaCost.minimum })}-${formatValue({
-            value: staminaCost.maximum,
-          })}`}
           Icon={IconStamina}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Stamina cost"
-        />
+        >{`${formatNumber({ value: staminaCost.minimum })}-${formatNumber({
+          value: staminaCost.maximum,
+        })}`}</IconDisplay>
 
         <IconDisplay
-          contents={`${formatValue({ value: weight.minimum })}-${formatValue({
-            value: weight.maximum,
-          })}`}
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
-        />
+        >{`${formatNumber({ value: weight.minimum })}-${formatNumber({
+          value: weight.maximum,
+        })}`}</IconDisplay>
       </Stack>
 
       <hr />

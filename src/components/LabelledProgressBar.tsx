@@ -5,25 +5,25 @@ import type { BootstrapColorVariant, UIAttachment, UISize } from "@neverquest/ty
 
 export function LabelledProgressBar({
   attached,
+  children,
   disableTransitions = false,
   isStriped = false,
-  label,
   sibling = null,
   size = "normal",
   value,
   variant,
 }: {
   attached?: UIAttachment;
+  children: ReactNode;
   disableTransitions?: boolean;
   isStriped?: boolean;
-  label: ReactNode;
   sibling?: ReactNode;
   size?: UISize;
   value: number;
   variant: BootstrapColorVariant;
 }) {
   const isSizeNormal = size === "normal";
-  const style: Partial<{
+  const borderStyle: Partial<{
     borderBottomLeftRadius: number;
     borderBottomRightRadius: number;
     borderTopLeftRadius: number;
@@ -34,13 +34,13 @@ export function LabelledProgressBar({
   if (attached) {
     switch (attached) {
       case "above": {
-        style.borderTopLeftRadius = 0;
-        style.borderTopRightRadius = 0;
+        borderStyle.borderTopLeftRadius = 0;
+        borderStyle.borderTopRightRadius = 0;
         break;
       }
       case "below": {
-        style.borderBottomLeftRadius = 0;
-        style.borderBottomRightRadius = 0;
+        borderStyle.borderBottomLeftRadius = 0;
+        borderStyle.borderBottomRightRadius = 0;
         break;
       }
     }
@@ -49,32 +49,26 @@ export function LabelledProgressBar({
   const progressAppearance = isStriped ? { animated: true, striped: true } : {};
 
   return (
-    <div className={`position-relative w-100 ${disableTransitions ? "no-transitions" : ""}`}>
+    <div
+      className={`progress-labelled position-relative w-100${
+        disableTransitions ? " transitions-none" : ""
+      }`}
+    >
       {isSizeNormal ? (
         <>
-          <ProgressBar style={style}>
+          <ProgressBar style={borderStyle}>
             <ProgressBar {...progressAppearance} key={1} now={value} variant={variant} />
 
             {sibling}
           </ProgressBar>
 
-          <small
-            className="position-absolute text-light"
-            style={{
-              left: "50%",
-              textShadow:
-                "-1px 1px 1px var(--bs-gray-900), 1px 1px 1px var(--bs-gray-900), 1px -1px 1px var(--bs-gray-900), -1px -1px 1px var(--bs-gray-900)",
-              top: 0,
-              transform: "translateX(-50%)",
-              width: "max-content",
-            }}
-          >
-            {label}
+          <small className="position-absolute text-light top-50 start-50 translate-middle">
+            {children}
           </small>
         </>
       ) : (
-        <OverlayTrigger overlay={<Tooltip>{label}</Tooltip>} placement="bottom">
-          <ProgressBar style={style}>
+        <OverlayTrigger overlay={<Tooltip>{children}</Tooltip>} placement="bottom">
+          <ProgressBar style={borderStyle}>
             <ProgressBar {...progressAppearance} key={1} now={value} variant={variant} />
           </ProgressBar>
         </OverlayTrigger>

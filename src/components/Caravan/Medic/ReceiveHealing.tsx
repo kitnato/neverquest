@@ -14,7 +14,7 @@ import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconSurgery from "@neverquest/icons/surgery.svg?react";
 import { isHealthAtMaximum, isHealthLow } from "@neverquest/state/reserves";
 import { essence } from "@neverquest/state/resources";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function ReceiveHealing() {
   const essenceValue = useRecoilValue(essence);
@@ -34,14 +34,14 @@ export function ReceiveHealing() {
       <h6>Receive healing</h6>
 
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        <IconDisplay contents="Regain full health" Icon={IconSurgery} tooltip="Surgery" />
+        <IconDisplay Icon={IconSurgery} tooltip="Surgery">
+          Regain full health
+        </IconDisplay>
 
         <Stack direction="horizontal" gap={3}>
-          <IconDisplay
-            contents={formatValue({ value: price })}
-            Icon={IconEssence}
-            tooltip="Price"
-          />
+          <IconDisplay Icon={IconEssence} tooltip="Price">
+            {formatNumber({ value: price })}
+          </IconDisplay>
 
           <OverlayTrigger
             overlay={

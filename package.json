@@ -1,6 +1,6 @@
 {
   "name": "neverquest",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "An irreverent browser-based incremental action role-playing game.",
   "author": "Chris N",
   "license": "cc-by-sa-4.0",
@@ -34,6 +34,7 @@
     "pluralize": "8.0.0",
     "react": "18.2.0",
     "react-bootstrap": "2.9.0",
+    "react-circular-progressbar": "^2.1.0",
     "react-dom": "18.2.0",
     "react-markdown": "9.0.0",
     "recoil": "0.7.7",
@@ -94,7 +95,7 @@
     ]
   },
   "engines": {
-    "node": ">=16",
+    "node": ">=18",
     "npm": ">=8"
   }
 }

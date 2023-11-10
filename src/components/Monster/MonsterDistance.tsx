@@ -35,11 +35,8 @@ export function MonsterDistance() {
   }
 
   return (
-    <IconDisplay
-      contents={<MonsterDistanceMeter />}
-      Icon={IconDistance}
-      isAnimated
-      tooltip="Distance"
-    />
+    <IconDisplay Icon={IconDistance} isAnimated tooltip="Distance">
+      <MonsterDistanceMeter />
+    </IconDisplay>
   );
 }

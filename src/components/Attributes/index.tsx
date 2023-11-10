@@ -5,9 +5,9 @@ import { AttributeDisplay } from "@neverquest/components/Attributes/AttributeDis
 import { AttributePointProgress } from "@neverquest/components/Attributes/AttributePointProgress";
 import { AttributePoints } from "@neverquest/components/Attributes/AttributePoints";
 import { Level } from "@neverquest/components/Status/Level";
-import { ATTRIBUTES_ORDER } from "@neverquest/data/attributes";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { showEssenceRequired } from "@neverquest/state/settings";
+import { ATTRIBUTE_TYPES } from "@neverquest/types/unions";
 
 export function Attributes() {
   const showEssenceRequiredValue = useRecoilValue(showEssenceRequired);
@@ -31,7 +31,7 @@ export function Attributes() {
       )}
 
       <Stack gap={3}>
-        {ATTRIBUTES_ORDER.map((current, index) => (
+        {ATTRIBUTE_TYPES.map((current, index) => (
           <AttributeDisplay attribute={current} key={index} />
         ))}
       </Stack>

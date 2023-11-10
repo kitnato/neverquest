@@ -51,12 +51,12 @@ export function Restart() {
           <ModalTitle>
             <Stack direction="horizontal" gap={3}>
               <IconImage Icon={IconWarning} />
-              Start a new quest?
+              Start anew?
             </Stack>
           </ModalTitle>
         </ModalHeader>
 
-        <ModalBody>This will reset everything and restart from the beginning.</ModalBody>
+        <ModalBody>This will reset everything and restart from scratch.</ModalBody>
 
         <ModalFooter>
           <Button

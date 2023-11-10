@@ -18,7 +18,7 @@ import { shield as shieldEquipped } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Shield } from "@neverquest/types";
-import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ShieldName({
   placement,
@@ -32,7 +32,7 @@ export function ShieldName({
   const shieldcraftSkill = useRecoilValue(isSkillAcquired("shieldcraft"));
 
   const { block, level, name, stagger, staminaCost, weight } = shield;
-  const showComparison = shieldEquippedValue.id !== shield.id;
+  const showComparison = shieldEquippedValue.ID !== shield.ID;
 
   return (
     <OverlayTrigger
@@ -60,7 +60,7 @@ export function ShieldName({
                   <Stack direction="horizontal" gap={1}>
                     <IconImage Icon={IconBlock} size="small" />
 
-                    {formatValue({ format: "percentage", value: block })}
+                    {formatNumber({ format: "percentage", value: block })}
 
                     {showComparison && (
                       <GearComparison
@@ -131,7 +131,7 @@ export function ShieldName({
                         <Stack direction="horizontal" gap={1}>
                           <IconImage Icon={IconStagger} size="small" />
 
-                          {formatValue({ format: "percentage", value: stagger })}
+                          {formatNumber({ format: "percentage", value: stagger })}
 
                           {showComparison && (
                             <GearComparison

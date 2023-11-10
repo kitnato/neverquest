@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { range } from "@neverquest/state/gear";
 import { distance, isMonsterAiling } from "@neverquest/state/monster";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function MonsterDistanceMeter() {
   const isMonsterStaggered = useRecoilValue(isMonsterAiling("staggered"));
@@ -14,9 +14,10 @@ export function MonsterDistanceMeter() {
     <LabelledProgressBar
       disableTransitions
       isStriped={isMonsterStaggered}
-      label={formatValue({ format: "time", value: distanceValue })}
       value={(distanceValue / rangeValue) * 100}
       variant="secondary"
-    />
+    >
+      {formatNumber({ format: "time", value: distanceValue })}
+    </LabelledProgressBar>
   );
 }

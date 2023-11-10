@@ -1,7 +1,7 @@
-import { type ChangeEvent, useState } from "react";
+import { useState } from "react";
 import {
   Button,
-  Form,
+  FormSelect,
   Modal,
   ModalBody,
   ModalHeader,
@@ -14,6 +14,7 @@ import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import IconCompass from "@neverquest/icons/compass.svg?react";
 import IconNavigation from "@neverquest/icons/navigation.svg?react";
@@ -25,7 +26,7 @@ import {
   wildernesses,
 } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function CompassNavigate() {
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
@@ -37,6 +38,7 @@ export function CompassNavigate() {
 
   const [isShowingNavigation, setIsShowingNavigation] = useState(false);
 
+  const progressQuest = useProgressQuest();
   const resetWilderness = useResetWilderness();
 
   const canNavigate = (!isStageStartedValue || isStageCompletedValue) && isWildernessValue;
@@ -69,33 +71,31 @@ export function CompassNavigate() {
         </ModalHeader>
 
         <ModalBody>
-          <IconDisplay
-            contents={
-              <Form.Select
-                disabled={!canNavigate}
-                onChange={({ target: { value } }: ChangeEvent<HTMLSelectElement>) => {
-                  setIsShowingNavigation(false);
-                  setStage(Number(value));
+          <IconDisplay Icon={IconNavigation} tooltip="Navigation">
+            <FormSelect
+              disabled={!canNavigate}
+              onChange={({ target: { value } }) => {
+                progressQuest({ quest: "warpingWilderness" });
 
-                  resetIsInventoryOpen();
-                  resetWilderness();
-                }}
-                value={stageValue}
-              >
-                {wildernessesValue.map((name, index) => {
-                  const stageIndex = index + 1;
+                setIsShowingNavigation(false);
+                setStage(Number(value));
 
-                  return (
-                    <option key={name} value={stageIndex}>{`Stage ${formatValue({
-                      value: stageIndex,
-                    })} - ${name}`}</option>
-                  );
-                })}
-              </Form.Select>
-            }
-            Icon={IconNavigation}
-            tooltip="Navigation"
-          />
+                resetIsInventoryOpen();
+                resetWilderness();
+              }}
+              value={stageValue}
+            >
+              {wildernessesValue.map((name, index) => {
+                const stageIndex = index + 1;
+
+                return (
+                  <option key={name} value={stageIndex}>{`Stage ${formatNumber({
+                    value: stageIndex,
+                  })} - ${name}`}</option>
+                );
+              })}
+            </FormSelect>
+          </IconDisplay>
         </ModalBody>
       </Modal>
     </>

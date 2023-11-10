@@ -1,6 +1,7 @@
 import { Stack } from "react-bootstrap";
 
 import { PurgeEssence } from "@neverquest/components/Caravan/Occultist/PurgeEssence";
+import { PurgeMemories } from "@neverquest/components/Caravan/Occultist/PurgeMemories";
 import { PurchaseConsumable } from "@neverquest/components/Caravan/PurchaseConsumable";
 
 export function Occultist() {
@@ -12,7 +13,13 @@ export function Occultist() {
         <PurchaseConsumable consumable="phylactery" />
       </Stack>
 
-      <PurgeEssence />
+      <Stack gap={3}>
+        <h6>Rituals</h6>
+
+        <PurgeEssence />
+
+        <PurgeMemories />
+      </Stack>
     </Stack>
   );
 }

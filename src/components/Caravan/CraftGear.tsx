@@ -6,7 +6,7 @@ import { LABEL_NO_ESSENCE } from "@neverquest/data/general";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import { essence } from "@neverquest/state/resources";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function CraftGear({ onCraft, price }: { onCraft: () => void; price: number }) {
   const essenceValue = useRecoilValue(essence);
@@ -17,7 +17,9 @@ export function CraftGear({ onCraft, price }: { onCraft: () => void; price: numb
 
   return (
     <Stack className="mx-auto" direction="horizontal" gap={5}>
-      <IconDisplay contents={formatValue({ value: price })} Icon={IconEssence} tooltip="Cost" />
+      <IconDisplay Icon={IconEssence} tooltip="Cost">
+        {formatNumber({ value: price })}
+      </IconDisplay>
 
       <OverlayTrigger
         overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}

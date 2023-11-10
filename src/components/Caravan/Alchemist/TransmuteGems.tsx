@@ -7,8 +7,10 @@ import { useRecoilState } from "recoil";
 import { SelectGem } from "@neverquest/components/Caravan/Alchemist/SelectGem";
 import { IconImage } from "@neverquest/components/IconImage";
 import { TRANSMUTE_COST } from "@neverquest/data/caravan";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { GEM_BASE } from "@neverquest/data/inventory";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconTransmute from "@neverquest/icons/transmute.svg?react";
 import { inventory } from "@neverquest/state/inventory";
 import { isGem } from "@neverquest/types/type-guards";
@@ -22,6 +24,7 @@ export function TransmuteGems() {
   const [result, setResult] = useState<Gem>("sapphire");
 
   const acquireItem = useAcquireItem();
+  const progressQuest = useProgressQuest();
 
   const gems = stackItems(
     inventoryValue
@@ -51,12 +54,14 @@ export function TransmuteGems() {
   }, [result, source]);
 
   return (
-    <Stack direction="horizontal" gap={5}>
-      <SelectGem gem={source} onSelect={onSelect(setSource)} />
+    <Stack gap={3}>
+      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+        <SelectGem gem={source} onSelect={onSelect(setSource)} />
 
-      <IconImage Icon={IconTransmute} />
+        <IconImage Icon={IconTransmute} />
 
-      <SelectGem gem={result} omit={source} onSelect={onSelect(setResult)} />
+        <SelectGem gem={result} omit={source} onSelect={onSelect(setResult)} />
+      </div>
 
       <OverlayTrigger
         overlay={<Tooltip>{`Insufficient ${plural(source)}.`}</Tooltip>}
@@ -70,16 +75,18 @@ export function TransmuteGems() {
               if (isAffordable) {
                 const gemIDs = inventoryValue
                   .filter((current) => isGem(current) && current.name === source)
-                  .map(({ id }) => id)
+                  .map(({ ID }) => ID)
                   .slice(0, TRANSMUTE_COST);
 
-                setInventory(inventoryValue.filter(({ id }) => !gemIDs.includes(id)));
+                setInventory(inventoryValue.filter(({ ID }) => !gemIDs.includes(ID)));
 
                 acquireItem({
                   ...GEM_BASE,
-                  id: nanoid(),
+                  ID: nanoid(),
                   name: result,
                 });
+
+                progressQuest({ quest: "gemsTransmuting" });
               }
             }}
             variant="outline-dark"

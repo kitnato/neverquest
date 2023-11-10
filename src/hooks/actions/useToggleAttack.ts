@@ -1,5 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
+import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
+import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { attackDuration, isAttacking } from "@neverquest/state/character";
 import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -10,11 +12,17 @@ import {
   monsterAilmentDuration,
   monsterAttackDuration,
   monsterAttackRate,
+  monsterHealth,
+  monsterHealthMaximum,
 } from "@neverquest/state/monster";
-import { attackRateTotal } from "@neverquest/state/statistics";
+import { attackRate } from "@neverquest/state/statistics";
+import { isTraitAcquired } from "@neverquest/state/traits";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleAttack() {
+  const changeHealth = useChangeHealth();
+  const changeMonsterHealth = useChangeMonsterHealth();
+
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
       () => {
@@ -26,6 +34,8 @@ export function useToggleAttack() {
           return;
         }
 
+        set(isAttacking, (current) => !current);
+
         set(isShowing("attackRate"), true);
         set(isShowing("wildernessStatus"), true);
 
@@ -33,19 +43,35 @@ export function useToggleAttack() {
           reset(attackDuration);
           reset(monsterAttackDuration);
 
-          if (!get(isMonsterDead)) {
+          if (!get(isMonsterDead) && !get(isTraitAcquired("tormentor"))) {
             reset(monsterAilmentDuration("bleeding"));
             reset(bleedingDelta);
             reset(distance);
+
+            const difference = get(monsterHealthMaximum) - get(monsterHealth);
+
+            if (difference > 0) {
+              changeMonsterHealth({
+                delta: [
+                  {
+                    color: "text-muted",
+                    value: "REGENERATE",
+                  },
+                  {
+                    color: "text-success",
+                    value: `+${difference}`,
+                  },
+                ],
+                value: difference,
+              });
+            }
           }
         } else {
-          set(attackDuration, get(attackRateTotal));
+          set(isStageStarted, true);
+          set(attackDuration, get(attackRate));
           set(monsterAttackDuration, get(monsterAttackRate));
         }
-
-        set(isAttacking, !isAttackingValue);
-        set(isStageStarted, true);
       },
-    [],
+    [changeHealth, changeMonsterHealth],
   );
 }

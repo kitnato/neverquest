@@ -16,7 +16,7 @@ import { SettingsSwitch } from "@neverquest/components/Header/SettingsSwitch";
 import { ShowEverything } from "@neverquest/components/Header/ShowEverything";
 import { IconImage } from "@neverquest/components/IconImage";
 import IconSettings from "@neverquest/icons/settings.svg?react";
-import { hasKnapsack } from "@neverquest/state/inventory";
+import { ownedItem } from "@neverquest/state/inventory";
 import {
   allowNSFW,
   autoEquip,
@@ -28,7 +28,7 @@ import {
 } from "@neverquest/state/settings";
 
 export function Settings() {
-  const hasKnapsackValue = useRecoilValue(hasKnapsack);
+  const ownedItemKnapsack = useRecoilValue(ownedItem("knapsack"));
 
   const [isShowing, setIsShowing] = useState(false);
 
@@ -53,26 +53,26 @@ export function Settings() {
         <ModalBody>
           <Form>
             <Stack gap={3}>
-              <SettingsSwitch atom={lowHealthWarning} label="Low-health warning" />
+              <SettingsSwitch label="Low-health warning" state={lowHealthWarning} />
 
               <SettingsSwitch
-                atom={autoEquip}
-                isDisabled={!hasKnapsackValue}
+                isDisabled={ownedItemKnapsack === null}
                 label="Auto-equip new gear"
+                state={autoEquip}
               />
 
-              <SettingsSwitch atom={showDamagePerSecond} label="Show damage per second" />
+              <SettingsSwitch label="Show damage per second" state={showDamagePerSecond} />
 
-              <SettingsSwitch atom={showGearComparison} label="Show gear comparisons" />
+              <SettingsSwitch label="Show gear comparisons" state={showGearComparison} />
 
-              <SettingsSwitch atom={showGearLevel} label="Show gear level" />
+              <SettingsSwitch label="Show gear level" state={showGearLevel} />
 
               <SettingsSwitch
-                atom={showEssenceRequired}
                 label="Show attribute point essence progress"
+                state={showEssenceRequired}
               />
 
-              <SettingsSwitch atom={allowNSFW} label="NSFW mode (profanity)" />
+              <SettingsSwitch label="NSFW mode (profanity)" state={allowNSFW} />
 
               <ShowEverything />
             </Stack>

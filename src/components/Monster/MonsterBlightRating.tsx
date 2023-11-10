@@ -9,7 +9,7 @@ import IconBlight from "@neverquest/icons/blight.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { blightChance } from "@neverquest/state/monster";
 import { blightAmount, isPoisoned } from "@neverquest/state/reserves";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function MonsterBlightRating() {
   const blightAmountValue = useRecoilValue(blightAmount);
@@ -21,50 +21,43 @@ export function MonsterBlightRating() {
   }
 
   return (
-    <IconDisplay
-      contents={
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverHeader className="text-center">Blight rating details</PopoverHeader>
+    <IconDisplay Icon={IconBlight} isAnimated tooltip="Blight rating">
+      <OverlayTrigger
+        overlay={
+          <Popover>
+            <PopoverHeader className="text-center">Blight rating details</PopoverHeader>
 
-              <PopoverBody>
-                <DetailsTable>
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
+            <PopoverBody>
+              <DetailsTable>
+                <tr>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
 
-                    <td>
-                      {formatValue({ format: "percentage", value: monsterBlightChanceValue })}
-                    </td>
-                  </tr>
+                  <td>{formatNumber({ format: "percentage", value: monsterBlightChanceValue })}</td>
+                </tr>
 
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
+                <tr>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
 
-                    <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconStamina} size="small" />
+                  <td>
+                    <Stack direction="horizontal" gap={1}>
+                      <IconImage Icon={IconStamina} size="small" />
 
-                        {`-${formatValue({ value: blightAmountValue })}`}
-                      </Stack>
-                    </td>
-                  </tr>
-                </DetailsTable>
-              </PopoverBody>
-            </Popover>
-          }
-          trigger={isPoisonedValue ? ["hover", "focus"] : []}
-        >
-          <span>
-            {isPoisonedValue
-              ? formatValue({ value: monsterBlightChanceValue * blightAmountValue * 100 })
-              : LABEL_EMPTY}
-          </span>
-        </OverlayTrigger>
-      }
-      Icon={IconBlight}
-      isAnimated
-      tooltip="Blight rating"
-    />
+                      {`-${formatNumber({ value: blightAmountValue })} cumulative`}
+                    </Stack>
+                  </td>
+                </tr>
+              </DetailsTable>
+            </PopoverBody>
+          </Popover>
+        }
+        trigger={isPoisonedValue ? ["hover", "focus"] : []}
+      >
+        <span>
+          {isPoisonedValue
+            ? formatNumber({ value: monsterBlightChanceValue * blightAmountValue * 100 })
+            : LABEL_EMPTY}
+        </span>
+      </OverlayTrigger>
+    </IconDisplay>
   );
 }

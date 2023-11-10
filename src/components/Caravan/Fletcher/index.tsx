@@ -7,7 +7,6 @@ import IconRanged from "@neverquest/icons/ranged.svg?react";
 export function Fletcher() {
   return (
     <IconTabs
-      defaultTab="ranged"
       tabs={[
         { Component: RangedWeaponOptions, Icon: IconRanged, label: "ranged" },
         { Component: FletcherAmmunition, Icon: IconAmmunition, label: "ammunition" },

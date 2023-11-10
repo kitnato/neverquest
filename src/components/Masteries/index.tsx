@@ -20,7 +20,9 @@ export function Masteries() {
     <Accordion defaultActiveKey="0">
       <Accordion.Item eventKey="0">
         <Accordion.Header>
-          <IconDisplay contents="Masteries" Icon={IconMasteries} tooltip="Masteries" />
+          <IconDisplay Icon={IconMasteries} tooltip="Masteries">
+            Masteries
+          </IconDisplay>
         </Accordion.Header>
 
         <Accordion.Body>

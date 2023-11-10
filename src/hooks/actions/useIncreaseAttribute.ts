@@ -1,6 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import {
   areAttributesAffordable,
@@ -9,14 +10,20 @@ import {
   level,
 } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
-import type { Attribute } from "@neverquest/types/unions";
-import { getAttributePointCost, getSnapshotGetter } from "@neverquest/utilities/getters";
+import { questProgress } from "@neverquest/state/quests";
+import { ATTRIBUTE_TYPES, type Attribute } from "@neverquest/types/unions";
+import {
+  getAttributePointCost,
+  getComputedStatistic,
+  getSnapshotGetter,
+} from "@neverquest/utilities/getters";
 
 export function useIncreaseAttribute() {
+  const progressQuest = useProgressQuest();
   const transactEssence = useTransactEssence();
 
   return useRecoilCallback(
-    ({ set, snapshot }) =>
+    ({ reset, set, snapshot }) =>
       (attribute: Attribute) => {
         const get = getSnapshotGetter(snapshot);
 
@@ -24,17 +31,38 @@ export function useIncreaseAttribute() {
           return;
         }
 
-        const { shows } = ATTRIBUTES[attribute];
+        const { base, increment, maximum, shows } = ATTRIBUTES[attribute];
+        const newRank = get(attributeRank(attribute)) + 1;
 
         if (shows !== undefined) {
           shows.forEach((current) => set(isShowing(current), true));
         }
 
         set(isShowing("statistics"), true);
-        set(attributeRank(attribute), (current) => current + 1);
+        set(attributeRank(attribute), newRank);
 
         transactEssence(-getAttributePointCost(get(level)));
+
+        progressQuest({ quest: "powerLevel" });
+        progressQuest({ quest: "powerLevelUltra" });
+
+        if (
+          maximum !== undefined &&
+          getComputedStatistic({ amount: newRank, base, increment }) >= maximum
+        ) {
+          progressQuest({ quest: "attributesMaximum" });
+        }
+
+        if (
+          ATTRIBUTE_TYPES.filter((current) => current !== attribute).every(
+            (current) => get(attributeRank(current)) > 0,
+          )
+        ) {
+          progressQuest({ quest: "attributesAll" });
+        }
+
+        reset(questProgress("survivingNoAttributes"));
       },
-    [transactEssence],
+    [progressQuest, transactEssence],
   );
 }

@@ -1,4 +1,5 @@
-import { useRecoilState } from "recoil";
+import { useEffect } from "react";
+import { useRecoilState, useResetRecoilState } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { CONSUMABLES, TRINKETS } from "@neverquest/data/inventory";
@@ -11,72 +12,68 @@ import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { itemsAcquired } from "@neverquest/state/inventory";
 import {
   isArmor,
-  isConsumable,
+  isConsumableItem,
   isGem,
   isMelee,
   isShield,
-  isTrinket,
+  isTrinketItem,
   isWeapon,
 } from "@neverquest/types/type-guards";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function ItemAcquisition() {
   const [itemsAcquiredValue, setItemsAcquired] = useRecoilState(itemsAcquired);
+  const resetItemsAcquired = useResetRecoilState(itemsAcquired);
 
-  const onAnimationEnd = (key: string) => () =>
-    setItemsAcquired((current) => current.filter(({ id }) => key !== id));
-
-  if (itemsAcquiredValue.length === 0) {
-    return null;
-  }
+  useEffect(() => resetItemsAcquired);
 
   return itemsAcquiredValue.map((current) => {
-    const { id } = current;
-
-    if (isTrinket(current) && current.name === "knapsack") {
-      return;
-    }
-
-    const Icon = (() => {
-      if (isArmor(current)) {
-        return IconArmor;
-      }
-
-      if (isConsumable(current)) {
-        return CONSUMABLES[current.name].Icon;
-      }
-
-      if (isGem(current)) {
-        return IconGem;
-      }
-
-      if (isShield(current)) {
-        return IconShield;
-      }
-
-      if (isTrinket(current)) {
-        return TRINKETS[current.name].Icon;
-      }
-
-      if (isWeapon(current)) {
-        if (isMelee(current)) {
-          return IconMelee;
-        }
-
-        return IconRanged;
-      }
-
-      return IconUnknown;
-    })();
+    const { ID } = current;
 
     return (
       <div
         className={`position-absolute ${getAnimationClass({ name: "zoomOut", speed: "slower" })}`}
-        key={id}
-        onAnimationEnd={onAnimationEnd(id)}
-        style={{ left: -12, top: 12 }}
+        key={ID}
+        onAnimationEnd={() =>
+          setItemsAcquired((current) => current.filter(({ ID: currentID }) => currentID !== ID))
+        }
+        // TODO - Bootstrap positioning utilities do not work with Animation.css zoomOut
+        style={{ left: -10, top: 16 }}
       >
-        <IconImage Icon={Icon} size="small" />
+        <IconImage
+          Icon={(() => {
+            if (isArmor(current)) {
+              return IconArmor;
+            }
+
+            if (isConsumableItem(current)) {
+              return CONSUMABLES[current.name].Icon;
+            }
+
+            if (isGem(current)) {
+              return IconGem;
+            }
+
+            if (isShield(current)) {
+              return IconShield;
+            }
+
+            if (isTrinketItem(current)) {
+              return TRINKETS[current.name].Icon;
+            }
+
+            if (isWeapon(current)) {
+              if (isMelee(current)) {
+                return IconMelee;
+              }
+
+              return IconRanged;
+            }
+
+            return IconUnknown;
+          })()}
+          size="small"
+        />
       </div>
     );
   });

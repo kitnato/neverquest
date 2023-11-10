@@ -12,7 +12,7 @@ import type { GemItem } from "@neverquest/types";
 import { GEM_TYPES } from "@neverquest/types/unions";
 import { getFromRange, getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export function useProgression() {
+export function useProgressStage() {
   const generateMonster = useGenerateMonster();
   const toggleAttack = useToggleAttack();
 
@@ -30,7 +30,7 @@ export function useProgression() {
         if (gems > 0) {
           const gemsLoot: GemItem[] = Array.from(Array(gems)).map(() => ({
             ...GEM_BASE,
-            id: nanoid(),
+            ID: nanoid(),
             name: GEM_TYPES[getFromRange({ maximum: GEM_TYPES.length - 1, minimum: 0 })] ?? "ruby",
           }));
 

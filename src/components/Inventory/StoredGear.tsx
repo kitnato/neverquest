@@ -18,11 +18,11 @@ export function StoredGear() {
     .filter((current) => !current.isEquipped)
     .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
     .map((current) => {
-      const { id } = current;
-      const canEquipGear = equippableItemsValue[id];
+      const { ID } = current;
+      const canEquipGear = equippableItemsValue[ID];
 
       return (
-        <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
+        <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
           <ItemDisplay item={current} overlayPlacement="right" />
 
           <OverlayTrigger

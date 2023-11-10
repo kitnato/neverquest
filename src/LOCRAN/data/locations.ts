@@ -44,6 +44,9 @@ export const LOCATIONS: LocationData[] = [
     name: "basement",
   },
   {
+    name: "bastion",
+  },
+  {
     name: "bathhouse",
   },
   {
@@ -209,6 +212,10 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "desert",
+  },
+  {
+    canPluralize: true,
+    name: "dimension",
   },
   {
     name: "disco",
@@ -503,6 +510,9 @@ export const LOCATIONS: LocationData[] = [
     name: "parapet",
   },
   {
+    name: "parish",
+  },
+  {
     name: "park",
   },
   {
@@ -560,6 +570,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "quagmire",
+  },
+  {
+    name: "rainforest",
   },
   {
     name: "realm",
@@ -663,6 +676,10 @@ export const LOCATIONS: LocationData[] = [
     name: "toilet",
   },
   {
+    canPluralize: true,
+    name: "tomb",
+  },
+  {
     name: "tornado",
   },
   {
@@ -712,6 +729,10 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "woods",
+  },
+  {
+    canPluralize: true,
+    name: "world",
   },
   {
     name: "ziggurat",

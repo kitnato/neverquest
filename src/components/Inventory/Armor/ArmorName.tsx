@@ -17,7 +17,7 @@ import IconProtection from "@neverquest/icons/protection.svg?react";
 import { armor as armorEquipped } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import type { Armor } from "@neverquest/types";
-import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ArmorName({
   armor,
@@ -33,7 +33,7 @@ export function ArmorName({
 
   const { deflection, level, name, protection, staminaCost, weight } = armor;
   const isUnshielded = armor.name === ARMOR_NONE.name;
-  const showComparison = armorEquippedValue.id !== armor.id;
+  const showComparison = armorEquippedValue.ID !== armor.ID;
 
   return (
     <OverlayTrigger
@@ -57,7 +57,7 @@ export function ArmorName({
                   <Stack direction="horizontal" gap={1}>
                     <IconImage Icon={IconProtection} size="small" />
 
-                    {formatValue({ value: protection })}
+                    {formatNumber({ value: protection })}
 
                     {showComparison && (
                       <GearComparison
@@ -118,7 +118,7 @@ export function ArmorName({
                         <Stack direction="horizontal" gap={1}>
                           <IconImage Icon={IconDeflection} size="small" />
 
-                          {formatValue({ format: "percentage", value: deflection })}
+                          {formatNumber({ format: "percentage", value: deflection })}
 
                           {showComparison && (
                             <GearComparison

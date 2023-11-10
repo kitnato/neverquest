@@ -1,8 +1,8 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { RecoveryMeter } from "@neverquest/components/Status/RecoveryMeter";
@@ -16,7 +16,7 @@ import { isRecovering, recoveryDuration } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMasteryUnlocked, masteryStatistic } from "@neverquest/state/masteries";
 import { recoveryRate } from "@neverquest/state/statistics";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Recovery() {
   const isRecoveringValue = useRecoilValue(isRecovering);
@@ -33,7 +33,7 @@ export function Recovery() {
   useDeltaText({
     delta: "recoveryRate",
     format: "time",
-    value: recoveryRate,
+    state: recoveryRate,
   });
 
   if (!isShowingRecovery) {
@@ -41,53 +41,48 @@ export function Recovery() {
   }
 
   return (
-    <IconDisplay
-      contents={
-        <Stack className="w-100" direction="horizontal">
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverHeader className="text-center">Recovery rate details</PopoverHeader>
+    <IconDisplay Icon={IconRecovery} isAnimated tooltip="Recovery rate">
+      <Stack className="w-100" direction="horizontal">
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">Recovery rate details</PopoverHeader>
 
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
+              <PopoverBody>
+                <DetailsTable>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
 
-                      <td>{formatValue({ format: "time", value: RECOVERY_RATE })}</td>
-                    </tr>
+                    <td>{formatNumber({ format: "time", value: RECOVERY_RATE })}</td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconResilience} size="small" />
-                          Resilience:
-                        </Stack>
-                      </td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconResilience} size="small" />
+                        Resilience:
+                      </Stack>
+                    </td>
 
-                      <td>{`-${formatValue({
-                        decimals: 0,
-                        format: "percentage",
-                        value: resilienceValue,
-                      })}`}</td>
-                    </tr>
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-            trigger={isMasteryUnlockedValue ? ["hover", "focus"] : []}
-          >
-            <span className="w-100">
-              <RecoveryMeter />
-            </span>
-          </OverlayTrigger>
+                    <td>{`-${formatNumber({
+                      decimals: 0,
+                      format: "percentage",
+                      value: resilienceValue,
+                    })}`}</td>
+                  </tr>
+                </DetailsTable>
+              </PopoverBody>
+            </Popover>
+          }
+          trigger={isMasteryUnlockedValue ? ["hover", "focus"] : []}
+        >
+          <span className="w-100">
+            <RecoveryMeter />
+          </span>
+        </OverlayTrigger>
 
-          <FloatingTextQueue delta="recoveryRate" />
-        </Stack>
-      }
-      Icon={IconRecovery}
-      isAnimated
-      tooltip="Recovery rate"
-    />
+        <DeltasDisplay delta="recoveryRate" />
+      </Stack>
+    </IconDisplay>
   );
 }

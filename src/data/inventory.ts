@@ -14,6 +14,7 @@ import IconElixir from "@neverquest/icons/elixir.svg?react";
 import IconFire from "@neverquest/icons/fire.svg?react";
 import IconStone from "@neverquest/icons/hearthstone.svg?react";
 import IconIce from "@neverquest/icons/ice.svg?react";
+import IconJournal from "@neverquest/icons/journal.svg?react";
 import IconKnapsack from "@neverquest/icons/knapsack.svg?react";
 import IconLightning from "@neverquest/icons/lightning.svg?react";
 import IconMonkeyPaw from "@neverquest/icons/monkey-paw.svg?react";
@@ -35,19 +36,21 @@ import type {
   GearBase,
   GeneratorRange,
   InfusableItem,
+  KnapsackItem,
   Melee,
   Shield,
   TrinketItem,
 } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/props";
-import type {
-  Consumable,
-  Elemental,
-  Gem,
-  Infusable,
-  MonsterAilment,
-  Trinket,
-  WeaponAbility,
+import {
+  type Consumable,
+  type Elemental,
+  type Gem,
+  INFUSABLE_TYPES,
+  type Infusable,
+  type MonsterAilmentElemental,
+  type Trinket,
+  type WeaponAbility,
 } from "@neverquest/types/unions";
 
 export const AMMUNITION_CAPACITY = 100;
@@ -56,7 +59,7 @@ export const ARMOR_NONE: Omit<Armor, "isEquipped" | "price"> = {
   deflection: 0,
   gearClass: "light",
   gems: [],
-  id: nanoid(),
+  ID: nanoid(),
   level: 1,
   name: "Unarmored",
   protection: 0,
@@ -82,7 +85,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     price: { maximum: 10000, minimum: 8 },
     protection: [
       { maximum: 10, minimum: 8 },
-      { maximum: 1000, minimum: 950 },
+      { maximum: 1500, minimum: 1450 },
     ],
     staminaCost: Infinity,
     weight: [
@@ -96,7 +99,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     price: { maximum: 5000, minimum: 1 },
     protection: [
       { maximum: 2, minimum: 1 },
-      { maximum: 500, minimum: 450 },
+      { maximum: 800, minimum: 700 },
     ],
     staminaCost: 0,
     weight: [
@@ -113,7 +116,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     price: { maximum: 7500, minimum: 3 },
     protection: [
       { maximum: 6, minimum: 4 },
-      { maximum: 800, minimum: 750 },
+      { maximum: 1000, minimum: 950 },
     ],
     staminaCost: [
       { maximum: 3, minimum: 1 },
@@ -126,7 +129,7 @@ export const ARMOR_SPECIFICATIONS: Record<
   },
 };
 
-export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<ConsumableItem, "id"> }> =
+export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<ConsumableItem, "ID"> }> =
   {
     antidote: {
       Icon: IconAntidote,
@@ -177,7 +180,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
 
 export const ELEMENTALS: Record<
   Elemental,
-  { ailment: MonsterAilment; color: string; Icon: SVGIcon }
+  { ailment: MonsterAilmentElemental; color: string; Icon: SVGIcon }
 > = {
   fire: {
     ailment: "burning",
@@ -196,9 +199,11 @@ export const ELEMENTALS: Record<
   },
 };
 
-export const ENCUMBRANCE = 4;
+export const ENCUMBRANCE_CAPACITY = 6;
 
-export const KNAPSACK_SIZE = 6;
+export const INHERITABLE_ITEMS = ["knapsack", "journal", ...INFUSABLE_TYPES] as const;
+
+export const KNAPSACK_CAPACITY = 12;
 
 export const GEM_BASE = {
   price: 10,
@@ -215,7 +220,7 @@ export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
 export const GEM_FITTING_COST = [20, 40, 100, 200, 500];
 export const GEMS_MAXIMUM = 5;
 
-export const INFUSABLE_LEVEL_MAXIMUM = 100;
+export const INFUSION_LEVEL_MAXIMUM = 100;
 export const INFUSABLES: Record<
   Infusable,
   {
@@ -232,7 +237,7 @@ export const INFUSABLES: Record<
     item: {
       description: "Boosts amount of essence looted.",
       growthBase: 8,
-      id: nanoid(),
+      ID: nanoid(),
       level: 1,
       maximum: 2,
       minimum: 0.2,
@@ -246,7 +251,7 @@ export const INFUSABLES: Record<
     item: {
       description: "Boosts all attribute effects based on power level.",
       growthBase: 10,
-      id: nanoid(),
+      ID: nanoid(),
       level: 1,
       maximum: 1.5,
       minimum: 0,
@@ -261,7 +266,7 @@ export const SHIELD_NONE: Omit<Shield, "isEquipped" | "price"> = {
   block: 0,
   gearClass: "small",
   gems: [],
-  id: nanoid(),
+  ID: nanoid(),
   level: 1,
   name: "Unshielded",
   stagger: 0,
@@ -279,8 +284,8 @@ export const SHIELD_SPECIFICATIONS: Record<
 > = {
   medium: {
     block: [
-      { maximum: 0.28, minimum: 0.25 },
-      { maximum: 0.4, minimum: 0.35 },
+      { maximum: 0.3, minimum: 0.25 },
+      { maximum: 0.45, minimum: 0.43 },
     ],
     Icon: IconShieldMedium,
     price: { maximum: 4500, minimum: 4 },
@@ -299,8 +304,8 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   small: {
     block: [
-      { maximum: 0.2, minimum: 0.18 },
-      { maximum: 0.35, minimum: 0.3 },
+      { maximum: 0.2, minimum: 0.15 },
+      { maximum: 0.35, minimum: 0.33 },
     ],
     Icon: IconShieldSmall,
     price: { maximum: 2500, minimum: 2 },
@@ -316,8 +321,8 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   tower: {
     block: [
-      { maximum: 0.52, minimum: 0.5 },
-      { maximum: 0.65, minimum: 0.6 },
+      { maximum: 0.45, minimum: 0.4 },
+      { maximum: 0.7, minimum: 0.65 },
     ],
     Icon: IconShieldTower,
     price: { maximum: 6000, minimum: 7 },
@@ -336,61 +341,74 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
 };
 
-export const TRINKETS: Record<Trinket, { Icon: SVGIcon; item: AmmunitionPouchItem | TrinketItem }> =
-  {
-    "ammunition pouch": {
-      Icon: IconAmmunitionPouch,
-      item: {
-        current: 0,
-        description: "Store ammunition for ranged weapons.",
-        id: nanoid(),
-        maximum: AMMUNITION_CAPACITY,
-        name: "ammunition pouch",
-        price: 250,
-        weight: 6,
-      },
+export const TRINKETS: Record<
+  Trinket,
+  { Icon: SVGIcon; item: AmmunitionPouchItem | KnapsackItem | TrinketItem }
+> = {
+  "ammunition pouch": {
+    Icon: IconAmmunitionPouch,
+    item: {
+      current: 0,
+      description: "Store ammunition for ranged weapons.",
+      ID: nanoid(),
+      maximum: AMMUNITION_CAPACITY,
+      name: "ammunition pouch",
+      price: 250,
+      weight: 6,
     },
-    "antique coin": {
-      Icon: IconAntiqueCoin,
-      item: {
-        description: "The wielder is bestowed with extreme fortune.",
-        id: nanoid(),
-        name: "antique coin",
-        price: 1000,
-        weight: 2,
-      },
+  },
+  "antique coin": {
+    Icon: IconAntiqueCoin,
+    item: {
+      description: "The wielder is bestowed with extreme fortune.",
+      ID: nanoid(),
+      name: "antique coin",
+      price: 999,
+      weight: 2,
     },
-    compass: {
-      Icon: IconCompass,
-      item: {
-        description: "Navigate the wilderness to hunt in previous locations.",
-        id: nanoid(),
-        name: "compass",
-        price: 50,
-        weight: 2,
-      },
+  },
+  compass: {
+    Icon: IconCompass,
+    item: {
+      description: "Navigate the wilderness to hunt in previous locations.",
+      ID: nanoid(),
+      name: "compass",
+      price: 50,
+      weight: 2,
     },
-    hearthstone: {
-      Icon: IconStone,
-      item: {
-        description: "Travel back to the caravan even if there are still lurking monsters.",
-        id: nanoid(),
-        name: "hearthstone",
-        price: 20,
-        weight: 2,
-      },
+  },
+  hearthstone: {
+    Icon: IconStone,
+    item: {
+      description: "Travel back to the caravan even if there are still lurking monsters.",
+      ID: nanoid(),
+      name: "hearthstone",
+      price: 20,
+      weight: 2,
     },
-    knapsack: {
-      Icon: IconKnapsack,
-      item: {
-        description: "Carry more items and manage gear.",
-        id: nanoid(),
-        name: "knapsack",
-        price: 10,
-        weight: 0,
-      },
+  },
+  journal: {
+    Icon: IconJournal,
+    item: {
+      description: "A compendium of quests.",
+      ID: nanoid(),
+      name: "journal",
+      price: 500,
+      weight: 5,
     },
-  };
+  },
+  knapsack: {
+    Icon: IconKnapsack,
+    item: {
+      capacity: KNAPSACK_CAPACITY,
+      description: "Carry more items and manage gear.",
+      ID: nanoid(),
+      name: "knapsack",
+      price: 10,
+      weight: 0,
+    },
+  },
+};
 
 export const WEAPON_BASE: GearBase & {
   ammunitionCost: [GeneratorRange, GeneratorRange];
@@ -403,25 +421,25 @@ export const WEAPON_BASE: GearBase & {
     { maximum: 50, minimum: 45 },
   ],
   damage: [
-    { maximum: 15, minimum: 12 },
+    { maximum: 12, minimum: 11 },
     { maximum: 1000, minimum: 950 },
   ],
-  price: { maximum: 12000, minimum: 1 },
+  price: { maximum: 9000, minimum: 1 },
   range: [
     { maximum: 4000, minimum: 3500 },
-    { maximum: 7000, minimum: 6500 },
+    { maximum: 7000, minimum: 6800 },
   ],
   rate: [
     { maximum: 3700, minimum: 3600 },
-    { maximum: 2200, minimum: 2000 },
+    { maximum: 2000, minimum: 1900 },
   ],
   staminaCost: [
     { maximum: 2, minimum: 1 },
-    { maximum: 65, minimum: 60 },
+    { maximum: 70, minimum: 65 },
   ],
   weight: [
     { maximum: 2, minimum: 1 },
-    { maximum: 80, minimum: 70 },
+    { maximum: 80, minimum: 75 },
   ],
 };
 
@@ -437,7 +455,7 @@ export const WEAPON_NONE: Omit<Melee, "isEquipped" | "price"> = {
   gearClass: "blunt",
   gems: [],
   grip: "one-handed",
-  id: nanoid(),
+  ID: nanoid(),
   level: 1,
   name: "Unarmed",
   rate: 2500,
@@ -457,8 +475,8 @@ export const WEAPON_SPECIFICATIONS: Record<
   blunt: {
     ability: "stun",
     abilityChance: [
-      { maximum: 0.3, minimum: 0.25 },
-      { maximum: 0.7, minimum: 0.65 },
+      { maximum: 0.25, minimum: 0.2 },
+      { maximum: 0.7, minimum: 0.68 },
     ],
     IconAbility: IconStun,
     IconGearClass: IconBlunt,
@@ -467,7 +485,7 @@ export const WEAPON_SPECIFICATIONS: Record<
     ability: "bleed",
     abilityChance: [
       { maximum: 0.3, minimum: 0.25 },
-      { maximum: 0.5, minimum: 0.45 },
+      { maximum: 0.6, minimum: 0.58 },
     ],
     IconAbility: IconBleed,
     IconGearClass: IconPiercing,
@@ -475,8 +493,8 @@ export const WEAPON_SPECIFICATIONS: Record<
   slashing: {
     ability: "parry",
     abilityChance: [
-      { maximum: 0.35, minimum: 0.3 },
-      { maximum: 0.5, minimum: 0.45 },
+      { maximum: 0.3, minimum: 0.25 },
+      { maximum: 0.5, minimum: 0.47 },
     ],
     IconAbility: IconParry,
     IconGearClass: IconSlashing,

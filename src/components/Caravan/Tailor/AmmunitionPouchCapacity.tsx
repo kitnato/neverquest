@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -14,26 +14,18 @@ export function AmmunitionPouchCapacity() {
 
   useDeltaText({
     delta: "ammunitionMaximum",
-    value: ammunitionMaximum,
+    state: ammunitionMaximum,
   });
 
   return (
-    <IconDisplay
-      contents={
-        <LabelledProgressBar
-          label={
-            <Stack direction="horizontal">
-              {`${ammunitionValue}/${ammunitionMaximumValue}`}
+    <IconDisplay Icon={IconAmmunitionPouch} tooltip="Ammunition capacity">
+      <LabelledProgressBar value={(ammunitionValue / ammunitionMaximumValue) * 100} variant="dark">
+        <Stack direction="horizontal" gap={1}>
+          {`${ammunitionValue}/${ammunitionMaximumValue}`}
 
-              <FloatingTextQueue delta="ammunitionMaximum" />
-            </Stack>
-          }
-          value={(ammunitionValue / ammunitionMaximumValue) * 100}
-          variant="dark"
-        />
-      }
-      Icon={IconAmmunitionPouch}
-      tooltip="Ammunition capacity"
-    />
+          <DeltasDisplay delta="ammunitionMaximum" />
+        </Stack>
+      </LabelledProgressBar>
+    </IconDisplay>
   );
 }

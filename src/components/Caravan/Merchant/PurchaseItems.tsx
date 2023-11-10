@@ -16,7 +16,7 @@ export function PurchaseItems() {
       {newItems.length === 0 ? (
         <span className="fst-italic">Nothing available.</span>
       ) : (
-        <PurchasableItems items={newItems.map(({ item }) => item)} />
+        <PurchasableItems merchantItems={newItems} />
       )}
     </Stack>
   );

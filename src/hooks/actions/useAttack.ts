@@ -1,21 +1,21 @@
 import { useRecoilCallback } from "recoil";
 
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
+import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
 import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import {
   attackDuration,
   canAttackOrParry,
   hasEnoughAmmunition,
   isAttacking,
 } from "@neverquest/state/character";
-import { deltas } from "@neverquest/state/deltas";
 import { weapon } from "@neverquest/state/gear";
-import { inventory } from "@neverquest/state/inventory";
+import { inventory, ownedItem } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { ownedItem } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
   bleed,
@@ -27,13 +27,13 @@ import {
   monsterHealthMaximum,
 } from "@neverquest/state/monster";
 import {
-  attackRateTotal,
+  attackRate,
   bleedChance,
   criticalChance,
   criticalStrike,
-  damageTotal,
-  execution,
-  stun,
+  damage,
+  executionThreshold,
+  stunChance,
 } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import type { AmmunitionPouchItem } from "@neverquest/types";
@@ -44,10 +44,12 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 import { animateElement } from "@neverquest/utilities/helpers";
 
 export function useAttack() {
+  const addDelta = useAddDelta();
   const changeMonsterHealth = useChangeMonsterHealth();
   const changeStamina = useChangeStamina();
   const increaseMastery = useIncreaseMastery();
   const inflictElementalAilment = useInflictElementalAilment();
+  const progressQuest = useProgressQuest();
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
@@ -64,12 +66,13 @@ export function useAttack() {
           (isWeaponRanged && get(isTraitAcquired("sharpshooter")) && get(distance) > 0) ||
           Math.random() < get(criticalChance);
         const inExecutionRange =
-          isWeaponTwoHanded && monsterHealthValue / get(monsterHealthMaximum) <= get(execution);
+          isWeaponTwoHanded &&
+          monsterHealthValue / get(monsterHealthMaximum) <= get(executionThreshold);
 
         set(isShowing("statistics"), true);
 
         if (get(isAttacking) && get(attackDuration) === 0) {
-          set(attackDuration, get(attackRateTotal));
+          set(attackDuration, get(attackRate));
         }
 
         if (canAttackOrParryValue && get(hasEnoughAmmunition)) {
@@ -88,7 +91,7 @@ export function useAttack() {
               currentInventory.map((currentItem) => {
                 const ownedAmmunitionPouch = get(ownedItem("ammunition pouch"));
 
-                return ownedAmmunitionPouch !== null && currentItem.id === ownedAmmunitionPouch.id
+                return ownedAmmunitionPouch !== null && currentItem.ID === ownedAmmunitionPouch.ID
                   ? {
                       ...currentItem,
                       current:
@@ -119,6 +122,7 @@ export function useAttack() {
 
           if (inExecutionRange || (hasInflictedCritical && get(isTraitAcquired("executioner")))) {
             changeMonsterHealth({
+              damageType: "execute",
               delta: [
                 {
                   color: "text-muted",
@@ -136,14 +140,16 @@ export function useAttack() {
           }
 
           const inflictedDamage = -Math.round(
-            (hasInflictedCritical ? get(criticalStrike) : get(damageTotal)) *
+            (hasInflictedCritical ? get(criticalStrike) : get(damage)) *
               (get(isMonsterAiling("burning")) ? AILMENT_PENALTY.burning : 1),
           );
-          const monsterDeltas: DeltaDisplay = [];
+          const monsterDeltas: DeltaDisplay[] = [];
 
           if (get(monsterAilmentDuration("bleeding")) === 0 && Math.random() < get(bleedChance)) {
             set(isShowing("monsterAilments"), true);
             set(monsterAilmentDuration("bleeding"), get(bleed).duration);
+
+            progressQuest({ quest: "bleeding" });
 
             monsterDeltas.push({
               color: "text-muted",
@@ -152,15 +158,19 @@ export function useAttack() {
           }
 
           if (hasInflictedCritical) {
+            progressQuest({ quest: "critical" });
+
             monsterDeltas.push({
               color: "text-muted",
               value: "CRITICAL",
             });
           }
 
-          if (Math.random() < get(stun)) {
+          if (Math.random() < get(stunChance)) {
             set(isShowing("monsterAilments"), true);
             set(monsterAilmentDuration("stunned"), get(masteryStatistic("might")));
+
+            progressQuest({ quest: "stunning" });
 
             monsterDeltas.push({
               color: "text-muted",
@@ -173,18 +183,35 @@ export function useAttack() {
           );
 
           changeMonsterHealth({
+            damageType: hasInflictedCritical ? "critical" : undefined,
             delta: monsterDeltas,
             value: inflictedDamage,
           });
         } else {
-          set(deltas("stamina"), [
-            {
-              color: "text-muted",
-              value: "CANNOT ATTACK",
-            },
-          ]);
+          addDelta({
+            contents: [
+              {
+                color: "text-muted",
+                value: "CANNOT ATTACK",
+              },
+              {
+                color: "text-danger",
+                value: `(${staminaCost})`,
+              },
+            ],
+            delta: "stamina",
+          });
+
+          progressQuest({ quest: "exhausting" });
         }
       },
-    [changeMonsterHealth, changeStamina, increaseMastery, inflictElementalAilment],
+    [
+      addDelta,
+      changeMonsterHealth,
+      changeStamina,
+      increaseMastery,
+      inflictElementalAilment,
+      progressQuest,
+    ],
   );
 }

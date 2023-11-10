@@ -14,7 +14,6 @@ export function Blacksmith() {
       <h6>Craft gear</h6>
 
       <IconTabs
-        defaultTab="weapon"
         tabs={[
           {
             Component: WeaponOptions,

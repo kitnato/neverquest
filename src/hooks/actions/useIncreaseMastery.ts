@@ -1,5 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
+import { MASTERY_RANK_MAXIMUM } from "@neverquest/data/masteries";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import {
   isMasteryAtMaximum,
   isMasteryUnlocked,
@@ -11,6 +13,8 @@ import type { Mastery } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useIncreaseMastery() {
+  const progressQuest = useProgressQuest();
+
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
       (mastery: Mastery) => {
@@ -33,10 +37,18 @@ export function useIncreaseMastery() {
         set(masteryProgress(mastery), newProgress);
 
         if (newProgress === masteryCostValue) {
-          set(masteryRank(mastery), (current) => current + 1);
+          const newRank = get(masteryRank(mastery)) + 1;
+
+          set(masteryRank(mastery), newRank);
           reset(masteryProgress(mastery));
+
+          progressQuest({ quest: "masteriesRank" });
+
+          if (newRank === MASTERY_RANK_MAXIMUM) {
+            progressQuest({ quest: "masteriesRankMaximum" });
+          }
         }
       },
-    [],
+    [progressQuest],
   );
 }

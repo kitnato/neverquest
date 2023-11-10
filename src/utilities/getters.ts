@@ -1,12 +1,15 @@
 import type { RecoilValue, Snapshot } from "recoil";
 
+import { formatNumber } from "./formatters";
 import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
 import { NAME_STRUCTURE, PROGRESS_REDUCTION } from "@neverquest/data/encounter";
 import {
   CLASS_ANIMATED,
   CLASS_ANIMATE_PREFIX,
   GROWTH_MAXIMUM,
-  RETIREMENT_MINIMUM,
+  RETIREMENT_MINIMUM_LEVEL,
+  ROMAN_NUMERALS,
+  ROMAN_NUMERAL_MAXIMUM,
 } from "@neverquest/data/general";
 import {
   ARMOR_SPECIFICATIONS,
@@ -15,11 +18,12 @@ import {
   WEAPON_MODIFIER,
   WEAPON_SPECIFICATIONS,
 } from "@neverquest/data/inventory";
+import { QUESTS } from "@neverquest/data/quests";
 import type { ArmorClass, NameStructure, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
-import type { GeneratorRange } from "@neverquest/types";
-import { isGeneratorRanges } from "@neverquest/types/type-guards";
+import type { GeneratorRange, QuestData } from "@neverquest/types";
+import { isConquest, isGeneratorRanges, isRoutine } from "@neverquest/types/type-guards";
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
-import type { Grip } from "@neverquest/types/unions";
+import type { Grip, Quest } from "@neverquest/types/unions";
 
 export function getAnimationClass({
   isInfinite,
@@ -124,8 +128,10 @@ export function getGearPrice({
   return Math.round((price.minimum + price.maximum * factor) * modifier);
 }
 
-export function getGrowthLinearMapping({ offset, stage }: { offset: number; stage: number }) {
-  return ((stage - offset) * (GROWTH_MAXIMUM - 1)) / (GROWTH_MAXIMUM - offset - 1) + 1;
+// https://en.wikipedia.org/wiki/Natural_logarithm
+// f(1) = 0, f(50) = ~0.7, f(100) = ~1
+export function getGrowthLogarithmic(x: number) {
+  return Math.log(x / 20 + 1) / Math.log(6);
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
@@ -156,19 +162,36 @@ export function getNameStructure(): NameStructure {
   return "none";
 }
 
+export function getLinearMapping({ offset, stage }: { offset: number; stage: number }) {
+  return ((stage - offset) * (GROWTH_MAXIMUM - 1)) / (GROWTH_MAXIMUM - offset - 1) + 1;
+}
+
 export function getProgressReduction(stage: number) {
   const { maximum, minimum } = PROGRESS_REDUCTION;
 
   return getFromRange({
     factor: getGrowthSigmoid(
-      getGrowthLinearMapping({
-        offset: RETIREMENT_MINIMUM,
+      getLinearMapping({
+        offset: RETIREMENT_MINIMUM_LEVEL,
         stage,
       }),
     ),
     maximum,
     minimum,
   });
+}
+
+export function getQuestsData(quest: Quest): QuestData[] {
+  const { description, hidden, progression, title } = QUESTS[quest];
+
+  return progression.map((current, index) => ({
+    description: description.replace("@", formatNumber({ value: current })),
+    hidden,
+    progressionIndex: index,
+    progressionMaximum: current,
+    questClass: isConquest(quest) ? "conquest" : isRoutine(quest) ? "routine" : "triumph",
+    title: `${title}${progression.length > 1 ? ` ${getRomanNumeral(index + 1)}` : ""}`,
+  }));
 }
 
 export function getRange({
@@ -195,6 +218,27 @@ export function getRange({
         ? Math.round(minimumResult)
         : minimumResult,
   };
+}
+
+export function getRomanNumeral(value: number) {
+  if (!Number.isInteger(value) || value < 1 || value > ROMAN_NUMERAL_MAXIMUM) {
+    return value;
+  }
+
+  const digits = Math.round(value).toString().split("");
+  let position = digits.length - 1;
+
+  return digits.reduce((accumulator, current) => {
+    const numeral = ROMAN_NUMERALS[position];
+
+    if (numeral !== undefined && current !== "0") {
+      accumulator += numeral[parseInt(current) - 1];
+    }
+
+    position -= 1;
+
+    return accumulator;
+  }, "");
 }
 
 export function getSellPrice({ price }: { price: number }) {

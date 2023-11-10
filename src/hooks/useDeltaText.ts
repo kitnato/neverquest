@@ -1,25 +1,25 @@
 import { useEffect } from "react";
-import { type RecoilValueReadOnly, useRecoilValue, useSetRecoilState } from "recoil";
+import { type RecoilValueReadOnly, useRecoilValue } from "recoil";
 
+import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
-import { deltas } from "@neverquest/state/deltas";
 import type { Delta, NumberFormat } from "@neverquest/types/unions";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function useDeltaText({
   delta,
   format = "integer",
+  state,
   stop = () => false,
-  value,
 }: {
   delta: Delta;
   format?: NumberFormat;
+  state: RecoilValueReadOnly<number>;
   stop?: ({ current, previous }: { current: number; previous: number | null }) => boolean;
-  value: RecoilValueReadOnly<number>;
 }) {
-  const currentValue = useRecoilValue(value);
-  const setDelta = useSetRecoilState(deltas(delta));
+  const currentValue = useRecoilValue(state);
 
+  const addDelta = useAddDelta();
   const previousValue = usePreviousValue(currentValue);
 
   const isTime = format === "time";
@@ -37,18 +37,21 @@ export function useDeltaText({
 
     const isPositive = difference > 0;
 
-    setDelta({
-      color: isPositive
-        ? isTime
-          ? "text-danger"
-          : "text-success"
-        : isTime
-        ? "text-success"
-        : "text-danger",
-      value: `${isPositive ? "+" : ""}${formatValue({
-        format,
-        value: difference,
-      })}`,
+    addDelta({
+      contents: {
+        color: isPositive
+          ? isTime
+            ? "text-danger"
+            : "text-success"
+          : isTime
+          ? "text-success"
+          : "text-danger",
+        value: `${isPositive ? "+" : ""}${formatNumber({
+          format,
+          value: difference,
+        })}`,
+      },
+      delta,
     });
-  }, [currentValue, delta, format, isTime, previousValue, setDelta, stop]);
+  }, [addDelta, currentValue, delta, format, isTime, previousValue, stop]);
 }

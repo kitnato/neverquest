@@ -6,7 +6,7 @@ import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/gener
 import { ELEMENTALS, GEM_ELEMENTALS } from "@neverquest/data/inventory";
 import { armor, totalElementalEffects, weapon } from "@neverquest/state/gear";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
@@ -21,19 +21,19 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
         {stackItems(
           gems.toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
         ).map(({ item }) => {
-          const { id, name } = item;
+          const { ID, name } = item;
           const elemental = GEM_ELEMENTALS[name];
           const { damage, duration } = totalElementalEffectsValue[slot][elemental];
 
           return (
-            <Stack direction="horizontal" gap={1} key={id}>
+            <Stack direction="horizontal" gap={1} key={ID}>
               <span className={ELEMENTALS[elemental].color}>{`+${damage}`}</span>
 
               {LABEL_SEPARATOR}
 
               <IconImage Icon={ELEMENTALS[elemental].Icon} size="small" />
 
-              {`${formatValue({ format: "time", value: duration })}`}
+              {`${formatNumber({ format: "time", value: duration })}`}
             </Stack>
           );
         })}

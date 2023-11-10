@@ -2,12 +2,14 @@ import { useEffect, useRef } from "react";
 import { Card, Stack } from "react-bootstrap";
 import { useRecoilState } from "recoil";
 
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterAilments } from "@neverquest/components/Monster/MonsterAilments";
 import { MonsterAttack } from "@neverquest/components/Monster/MonsterAttack";
 import { MonsterDistance } from "@neverquest/components/Monster/MonsterDistance";
-import { MonsterHealth } from "@neverquest/components/Monster/MonsterHealth";
+import { MonsterHealthMeter } from "@neverquest/components/Monster/MonsterHealthMeter";
 import { MonsterName } from "@neverquest/components/Monster/MonsterName";
 import { MonsterOffense } from "@neverquest/components/Monster/MonsterOffense";
+import IconHealth from "@neverquest/icons/health.svg?react";
 import { isMonsterNew, monsterElement } from "@neverquest/state/monster";
 import { animateElement } from "@neverquest/utilities/helpers";
 
@@ -44,7 +46,9 @@ export function Monster() {
           <Stack gap={3}>
             <MonsterName />
 
-            <MonsterHealth />
+            <IconDisplay Icon={IconHealth} tooltip="Monster health">
+              <MonsterHealthMeter />
+            </IconDisplay>
 
             <MonsterAttack />
 

@@ -3,26 +3,43 @@ import { useRecoilValue } from "recoil";
 
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { Infusable } from "@neverquest/components/Inventory/Usable/Infusable";
-import { TRINKETS } from "@neverquest/data/inventory";
-import { hasKnapsack, inventory } from "@neverquest/state/inventory";
-import type { InfusableItem } from "@neverquest/types";
-import { isInfusable } from "@neverquest/types/type-guards";
+import { LABEL_NONE } from "@neverquest/data/general";
+import { INFUSABLES, TRINKETS } from "@neverquest/data/inventory";
+import { ownsInheritableItems } from "@neverquest/state/items";
+import { isInfusable, isTrinket } from "@neverquest/types/type-guards";
 
 export function ItemsInherited() {
-  const hasKnapsackValue = useRecoilValue(hasKnapsack);
-  const inventoryValue = useRecoilValue(inventory);
+  const ownsInheritableItemsValue = useRecoilValue(ownsInheritableItems);
 
   return (
     <Stack gap={3}>
       <h6>Items inherited</h6>
 
-      {hasKnapsackValue && <ItemDisplay item={TRINKETS.knapsack.item} overlayPlacement="right" />}
+      {Object.values(ownsInheritableItemsValue).every((current) => current === false) && (
+        <span className="fst-italic">{LABEL_NONE}</span>
+      )}
 
-      {inventoryValue
-        .filter((current) => isInfusable(current))
-        .map((current) => (
-          <Infusable item={current as InfusableItem} key={current.id} />
-        ))}
+      {Object.entries(ownsInheritableItemsValue).map(([key, current]) => {
+        if (current === false) {
+          return null;
+        }
+
+        if (isTrinket(key)) {
+          return (
+            <ItemDisplay
+              item={TRINKETS[key].item}
+              key={TRINKETS[key].item.ID}
+              overlayPlacement="right"
+            />
+          );
+        }
+
+        if (isInfusable(key)) {
+          return <Infusable item={INFUSABLES[key].item} key={INFUSABLES[key].item.ID} />;
+        }
+
+        return null;
+      })}
     </Stack>
   );
 }

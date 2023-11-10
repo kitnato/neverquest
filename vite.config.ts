@@ -22,6 +22,10 @@ export default defineConfig({
     alias: {
       "~animate.css": path.resolve(__dirname, "node_modules/animate.css"),
       "~bootstrap": path.resolve(__dirname, "node_modules/bootstrap"),
+      "~react-circular-progressbar": path.resolve(
+        __dirname,
+        "node_modules/react-circular-progressbar",
+      ),
     },
   },
 });

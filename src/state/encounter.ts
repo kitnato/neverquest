@@ -2,9 +2,10 @@ import { atom, selector } from "recoil";
 
 import { PROGRESS } from "@neverquest/data/encounter";
 import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster";
-import { handleLocalStorage, withStateKey } from "@neverquest/state";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import type { Location } from "@neverquest/types/unions";
 import { getFromRange, getGrowthSigmoid } from "@neverquest/utilities/getters";
+import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 

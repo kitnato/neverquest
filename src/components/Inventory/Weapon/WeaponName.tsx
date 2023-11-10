@@ -23,7 +23,7 @@ import { showDamagePerSecond } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Weapon } from "@neverquest/types";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
-import { capitalizeAll, formatValue } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { getDamagePerRate } from "@neverquest/utilities/getters";
 
 export function WeaponName({
@@ -45,7 +45,7 @@ export function WeaponName({
     rate,
   });
   const isUnarmed = weapon.name === WEAPON_NONE.name;
-  const showComparison = weaponEquippedValue.id !== weapon.id;
+  const showComparison = weaponEquippedValue.ID !== weapon.ID;
 
   const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
@@ -73,7 +73,7 @@ export function WeaponName({
                   <Stack direction="horizontal" gap={1}>
                     <IconImage Icon={IconWeaponDamage} size="small" />
 
-                    {formatValue({ value: damage })}
+                    {formatNumber({ value: damage })}
 
                     {showComparison && (
                       <GearComparison
@@ -94,7 +94,7 @@ export function WeaponName({
                   <Stack direction="horizontal" gap={1}>
                     <IconImage Icon={IconWeaponAttackRate} size="small" />
 
-                    {formatValue({ format: "time", value: rate })}
+                    {formatNumber({ format: "time", value: rate })}
 
                     {showComparison && (
                       <GearComparison
@@ -115,7 +115,7 @@ export function WeaponName({
                     <Stack direction="horizontal" gap={1}>
                       <IconImage Icon={IconWeaponDamagePerSecond} size="small" />
 
-                      {formatValue({ format: "float", value: damagePerSecond })}
+                      {formatNumber({ format: "float", value: damagePerSecond })}
 
                       {showComparison && (
                         <GearComparison
@@ -156,7 +156,7 @@ export function WeaponName({
                     <Stack direction="horizontal" gap={1}>
                       <IconImage Icon={IconAmmunition} size="small" />
 
-                      {formatValue({ value: weapon.ammunitionCost })}
+                      {formatNumber({ value: weapon.ammunitionCost })}
                     </Stack>
                   </td>
                 </tr>
@@ -201,7 +201,7 @@ export function WeaponName({
                       <Stack direction="horizontal" gap={1}>
                         <IconImage Icon={IconAbility} size="small" />
 
-                        {formatValue({ format: "percentage", value: abilityChance })}
+                        {formatNumber({ format: "percentage", value: abilityChance })}
 
                         {showComparison && gearClass === weaponEquippedValue.gearClass && (
                           <GearComparison

@@ -1,5 +1,15 @@
 import { useState } from "react";
-import { Button, ButtonGroup, Dropdown, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
+import {
+  Button,
+  ButtonGroup,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  OverlayTrigger,
+  Stack,
+  Tooltip,
+} from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
@@ -13,11 +23,11 @@ import {
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import IconEssence from "@neverquest/icons/essence.svg?react";
-import { inventory } from "@neverquest/state/inventory";
-import { ammunition, ammunitionMaximum, ownedItem } from "@neverquest/state/items";
+import { inventory, ownedItem } from "@neverquest/state/inventory";
+import { ammunition, ammunitionMaximum } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import type { AmmunitionPouchItem } from "@neverquest/types";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function PurchaseAmmunition() {
   const ammunitionValue = useRecoilValue(ammunition);
@@ -37,14 +47,14 @@ export function PurchaseAmmunition() {
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-      <IconDisplay contents="Ammunition" Icon={IconAmmunition} tooltip="Ammunition" />
+      <IconDisplay Icon={IconAmmunition} tooltip="Ammunition">
+        Ammunition
+      </IconDisplay>
 
       <Stack direction="horizontal" gap={3}>
-        <IconDisplay
-          contents={formatValue({ value: totalPrice })}
-          Icon={IconEssence}
-          tooltip="Price"
-        />
+        <IconDisplay Icon={IconEssence} tooltip="Price">
+          {formatNumber({ value: totalPrice })}
+        </IconDisplay>
 
         {ownedAmmunitionPouch === null ? (
           <span className="fst-italic">Nowhere to store ammunition.</span>
@@ -73,7 +83,7 @@ export function PurchaseAmmunition() {
 
                           setInventory((currentInventory) =>
                             currentInventory.map((currentItem) =>
-                              currentItem.id === ownedAmmunitionPouch.id
+                              currentItem.ID === ownedAmmunitionPouch.ID
                                 ? {
                                     ...currentItem,
                                     current: (currentItem as AmmunitionPouchItem).current + amount,
@@ -88,23 +98,23 @@ export function PurchaseAmmunition() {
                       Purchase {amount}
                     </Button>
 
-                    <Dropdown.Toggle split variant="outline-dark" />
+                    <DropdownToggle split variant="outline-dark" />
 
-                    <Dropdown.Menu>
+                    <DropdownMenu>
                       {[
                         { amount: 1, label: "1" },
                         { amount: 10, label: "10" },
                         { amount: maximum - current, label: LABEL_MAXIMUM },
                       ].map(({ amount, label }) => (
-                        <Dropdown.Item key={label} onClick={() => setAmount(amount)}>
+                        <DropdownItem key={label} onClick={() => setAmount(amount)}>
                           <Stack direction="horizontal" gap={1}>
                             <IconImage Icon={IconAmmunition} size="small" />
 
                             {label}
                           </Stack>
-                        </Dropdown.Item>
+                        </DropdownItem>
                       ))}
-                    </Dropdown.Menu>
+                    </DropdownMenu>
                   </Dropdown>
                 </span>
               </OverlayTrigger>

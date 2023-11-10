@@ -1,8 +1,10 @@
 import { useRecoilCallback } from "recoil";
 
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { questProgress } from "@neverquest/state/quests";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import type { GearItem } from "@neverquest/types";
@@ -17,8 +19,10 @@ import {
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleEquipGear() {
+  const progressQuest = useProgressQuest();
+
   return useRecoilCallback(
-    ({ set, snapshot }) =>
+    ({ reset, set, snapshot }) =>
       (gearItem: GearItem) => {
         const get = getSnapshotGetter(snapshot);
 
@@ -36,6 +40,8 @@ export function useToggleEquipGear() {
 
           set(isShowing("armor"), true);
           set(isShowing("protection"), true);
+
+          progressQuest({ quest: "equippingArmor" });
         }
 
         if (isShield(gearItem) && !isEquipped) {
@@ -43,9 +49,11 @@ export function useToggleEquipGear() {
             return;
           }
 
-          set(isShowing("block"), true);
+          set(isShowing("blockChance"), true);
           set(isShowing("offhand"), true);
           set(isShowing("stamina"), true);
+
+          progressQuest({ quest: "equippingShield" });
         }
 
         if (isWeapon(gearItem) && !isEquipped) {
@@ -63,7 +71,7 @@ export function useToggleEquipGear() {
 
           if (staminaCost > 0) {
             set(isShowing("stamina"), true);
-            set(isAttributeUnlocked("endurance"), { isUnlocked: true });
+            set(isAttributeUnlocked("endurance"), { current: true });
           }
 
           if (isRangedWeapon || isTwoHandedWeapon) {
@@ -73,12 +81,16 @@ export function useToggleEquipGear() {
           set(isShowing("attackRateDetails"), true);
           set(isShowing("damageDetails"), true);
           set(isShowing("weapon"), true);
+
+          progressQuest({ quest: "equippingWeapon" });
         }
+
+        reset(questProgress("survivingNoGear"));
 
         set(inventory, (currentInventory) =>
           currentInventory.map((currentItem) => {
             if (isGear(currentItem)) {
-              if (currentItem.id === gearItem.id) {
+              if (currentItem.ID === gearItem.ID) {
                 return {
                   ...currentItem,
                   isEquipped: !currentItem.isEquipped,
@@ -115,6 +127,6 @@ export function useToggleEquipGear() {
           }),
         );
       },
-    [],
+    [progressQuest],
   );
 }

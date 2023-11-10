@@ -1,10 +1,8 @@
 export const AILMENT_PENALTY = {
   burning: 1.25,
-  // attack rate & speed slowed by half
   shocked: 0.75,
-  // damage taken increased by 25%
-  staggered: 0.5, // damage dealt reduced by 25%
-  stunned: 0.6, // hit chance reduced by 40%
+  staggered: 0.5,
+  stunned: 0.5,
 };
 
 export const BLEED = {

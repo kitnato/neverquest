@@ -18,7 +18,7 @@ export function Core() {
 
           <Header />
 
-          <Container style={{ marginBottom: 32 }}>
+          <Container className="mb-4">
             <Layout />
           </Container>
         </Initializer>

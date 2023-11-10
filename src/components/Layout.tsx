@@ -4,6 +4,7 @@ import { AttackButton } from "@neverquest/components/Controls/AttackButton";
 import { CapabilitiesButton } from "@neverquest/components/Controls/CapabilitiesButton";
 import { CollectLootButton } from "@neverquest/components/Controls/CollectLootButton";
 import { InventoryButton } from "@neverquest/components/Controls/InventoryButton";
+import { JournalButton } from "@neverquest/components/Controls/JournalButton";
 import { RetireButton } from "@neverquest/components/Controls/RetireButton";
 import { TravelButton } from "@neverquest/components/Controls/TravelButton";
 import { Encounter } from "@neverquest/components/Encounter";
@@ -13,6 +14,7 @@ import { GameOver } from "@neverquest/components/GameOver";
 import { Gear } from "@neverquest/components/Inventory/Gear";
 import { Location } from "@neverquest/components/Location";
 import { Masteries } from "@neverquest/components/Masteries";
+import { QuestNotifications } from "@neverquest/components/Quests/QuestNotifications";
 import { Statistics } from "@neverquest/components/Statistics";
 import { Status } from "@neverquest/components/Status";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
@@ -51,6 +53,8 @@ export function Layout() {
 
             <InventoryButton />
 
+            <JournalButton />
+
             <CollectLootButton />
 
             <TravelButton />
@@ -67,6 +71,8 @@ export function Layout() {
       </Row>
 
       <GameOver />
+
+      <QuestNotifications />
     </>
   );
 }

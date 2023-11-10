@@ -13,11 +13,12 @@ export function Location() {
   return (
     <div className={`${isShowingLocation ? getAnimationClass({ name: "flipInX" }) : "invisible"}`}>
       <IconDisplay
-        contents={locationNameValue}
         Icon={IconLocation}
         iconProps={{ overlayPlacement: "bottom" }}
         tooltip="Location"
-      />
+      >
+        {locationNameValue}
+      </IconDisplay>
     </div>
   );
 }

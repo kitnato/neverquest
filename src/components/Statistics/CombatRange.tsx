@@ -1,8 +1,8 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
@@ -14,7 +14,7 @@ import { range, weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isRanged } from "@neverquest/types/type-guards";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function CombatRange() {
   const marksmanshipValue = useRecoilValue(masteryStatistic("marksmanship"));
@@ -23,76 +23,73 @@ export function CombatRange() {
   const weaponValue = useRecoilValue(weapon);
 
   const isWeaponRanged = isRanged(weaponValue);
+  const isEmpty = !archeryValue || !isWeaponRanged || rangeValue === 0;
 
   useDeltaText({
     delta: "range",
     format: "time",
-    value: range,
+    state: range,
+    stop: () => isEmpty,
   });
 
-  if (!archeryValue || !isWeaponRanged) {
+  if (isEmpty) {
     return null;
   }
 
   return (
-    <IconDisplay
-      contents={
-        <Stack direction="horizontal">
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverHeader className="text-center">Range details</PopoverHeader>
+    <IconDisplay Icon={IconRange} isAnimated tooltip="Range">
+      <Stack direction="horizontal" gap={1}>
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">Range details</PopoverHeader>
 
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
+              <PopoverBody>
+                <DetailsTable>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
 
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconRanged} size="small" />
+                    <td>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconRanged} size="small" />
 
-                          {isWeaponRanged
-                            ? formatValue({ format: "time", value: weaponValue.range })
-                            : LABEL_EMPTY}
-                        </Stack>
-                      </td>
-                    </tr>
+                        {isWeaponRanged
+                          ? formatNumber({ format: "time", value: weaponValue.range })
+                          : LABEL_EMPTY}
+                      </Stack>
+                    </td>
+                  </tr>
 
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconMarksmanship} size="small" />
-                          Marksmanship:
-                        </Stack>
-                      </td>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconMarksmanship} size="small" />
+                        Marksmanship:
+                      </Stack>
+                    </td>
 
-                      <td>{`+${formatValue({
-                        format: "percentage",
-                        value: marksmanshipValue,
-                      })}`}</td>
-                    </tr>
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-            trigger={archeryValue ? ["hover", "focus"] : []}
-          >
-            <span>
-              {archeryValue
-                ? rangeValue === 0
-                  ? LABEL_EMPTY
-                  : formatValue({ format: "time", value: rangeValue })
-                : LABEL_EMPTY}
-            </span>
-          </OverlayTrigger>
+                    <td>{`+${formatNumber({
+                      format: "percentage",
+                      value: marksmanshipValue,
+                    })}`}</td>
+                  </tr>
+                </DetailsTable>
+              </PopoverBody>
+            </Popover>
+          }
+          trigger={archeryValue ? ["hover", "focus"] : []}
+        >
+          <span>
+            {archeryValue
+              ? rangeValue === 0
+                ? LABEL_EMPTY
+                : formatNumber({ format: "time", value: rangeValue })
+              : LABEL_EMPTY}
+          </span>
+        </OverlayTrigger>
 
-          <FloatingTextQueue delta="range" />
-        </Stack>
-      }
-      Icon={IconRange}
-      isAnimated
-      tooltip="Range"
-    />
+        <DeltasDisplay delta="range" />
+      </Stack>
+    </IconDisplay>
   );
 }

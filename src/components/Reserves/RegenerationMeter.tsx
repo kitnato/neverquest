@@ -13,7 +13,7 @@ import {
   regenerationRate,
 } from "@neverquest/state/reserves";
 import type { Reserve } from "@neverquest/types/unions";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
   const isHealth = reserve === "health";
@@ -41,7 +41,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
           <Stack direction="horizontal" gap={1}>
             <IconImage Icon={ReserveIcon} size="small" />
 
-            {`${regenerationAmountValue} per ${formatValue({
+            {`${regenerationAmountValue} per ${formatNumber({
               format: "time",
               value: regenerationRateValue,
             })}`}
@@ -57,7 +57,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
         <Stack direction="horizontal" gap={1}>
           <IconImage Icon={ReserveIcon} size="small" />
 
-          {`${regenerationAmountValue} in ${formatValue({
+          {`${regenerationAmountValue} in ${formatNumber({
             format: "time",
             value: regenerationRateValue - regenerationProgress,
           })}`}
@@ -70,10 +70,11 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
     <LabelledProgressBar
       attached="above"
       disableTransitions
-      label={details}
       size="small"
       value={(regenerationProgress / regenerationRateValue) * 100}
       variant="secondary"
-    />
+    >
+      {details}
+    </LabelledProgressBar>
   );
 }

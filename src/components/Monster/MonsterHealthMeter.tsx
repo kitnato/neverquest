@@ -1,8 +1,10 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DeltasDisplay } from "../DeltasDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { monsterHealth, monsterHealthMaximum } from "@neverquest/state/monster";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function MonsterHealthMeter() {
   const monsterHealthValue = useRecoilValue(monsterHealth);
@@ -10,11 +12,16 @@ export function MonsterHealthMeter() {
 
   return (
     <LabelledProgressBar
-      label={`${formatValue({ value: monsterHealthValue })}/${formatValue({
-        value: monsterHealthMaximumValue,
-      })}`}
       value={(monsterHealthValue / monsterHealthMaximumValue) * 100}
       variant="dark"
-    />
+    >
+      <Stack direction="horizontal" gap={1}>
+        {`${formatNumber({ value: monsterHealthValue })}/${formatNumber({
+          value: monsterHealthMaximumValue,
+        })}`}
+
+        <DeltasDisplay delta="monsterHealth" />
+      </Stack>
+    </LabelledProgressBar>
   );
 }

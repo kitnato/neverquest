@@ -1,48 +1,52 @@
 import { useRecoilCallback } from "recoil";
 
+import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { isGameOver } from "@neverquest/state/character";
-import { deltas } from "@neverquest/state/deltas";
-import { inventory } from "@neverquest/state/inventory";
+import { inventory, ownedItem } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { ownedItem } from "@neverquest/state/items";
 import {
   health,
-  healthMaximumTotal,
+  healthMaximumPoisoned,
   isImmortal,
   regenerationAmount,
   regenerationDuration,
 } from "@neverquest/state/reserves";
 import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useChangeHealth() {
+  const addDelta = useAddDelta();
+  const progressQuest = useProgressQuest();
+
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
       (deltaReserve: DeltaReserve) => {
         const get = getSnapshotGetter(snapshot);
 
-        const healthMaximumTotalValue = get(healthMaximumTotal);
+        const healthMaximumPoisonedValue = get(healthMaximumPoisoned);
         const value = deltaReserve.isRegeneration
           ? get(regenerationAmount("health"))
           : deltaReserve.value;
 
-        const formattedValue = formatValue({ value });
+        const formattedValue = formatNumber({ value });
         const isPositive = value > 0;
 
         let newHealth = get(health) + value;
 
-        set(
-          deltas("health"),
-          deltaReserve.isRegeneration === true ||
+        addDelta({
+          contents:
+            deltaReserve.isRegeneration === true ||
             deltaReserve.delta === undefined ||
             (Array.isArray(deltaReserve.delta) && deltaReserve.delta.length === 0)
-            ? ({
-                color: isPositive ? "text-success" : value === 0 ? "text-muted" : "text-danger",
-                value: isPositive ? `+${formattedValue}` : formattedValue,
-              } as DeltaDisplay)
-            : deltaReserve.delta,
-        );
+              ? ({
+                  color: isPositive ? "text-success" : value === 0 ? "text-muted" : "text-danger",
+                  value: isPositive ? `+${formattedValue}` : formattedValue,
+                } as DeltaDisplay)
+              : deltaReserve.delta,
+          delta: "health",
+        });
 
         if (newHealth <= 0) {
           const phylactery = get(ownedItem("phylactery"));
@@ -53,19 +57,24 @@ export function useChangeHealth() {
             set(isGameOver, true);
             set(isShowing("gameOver"), true);
           } else {
-            newHealth = healthMaximumTotalValue;
+            newHealth = healthMaximumPoisonedValue;
 
-            set(deltas("health"), {
-              color: "text-success",
-              value: "RESURRECTED",
+            addDelta({
+              contents: {
+                color: "text-success",
+                value: "RESURRECTED",
+              },
+              delta: "health",
             });
 
-            set(inventory, (current) => current.filter((item) => item.id !== phylactery.id));
+            set(inventory, (current) => current.filter((item) => item.ID !== phylactery.ID));
+
+            progressQuest({ quest: "resurrecting" });
           }
         }
 
-        if (newHealth >= healthMaximumTotalValue) {
-          newHealth = healthMaximumTotalValue;
+        if (newHealth >= healthMaximumPoisonedValue) {
+          newHealth = healthMaximumPoisonedValue;
           reset(regenerationDuration("health"));
         }
 
@@ -73,6 +82,6 @@ export function useChangeHealth() {
           set(health, newHealth);
         }
       },
-    [],
+    [addDelta, progressQuest],
   );
 }

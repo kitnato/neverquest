@@ -1,13 +1,22 @@
 import { atom, selector } from "recoil";
 
-import { handleLocalStorage, withStateKey } from "@neverquest/state";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { isStageCompleted } from "@neverquest/state/encounter";
 import type { InventoryItem } from "@neverquest/types";
+import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
 export const hasLooted = withStateKey("hasLooted", (key) =>
   selector({
-    get: ({ get }) => get(essenceLoot) === 0,
+    get: ({ get }) => get(isStageCompleted) && get(essenceLoot) === 0,
+    key,
+  }),
+);
+
+export const isLootAvailable = withStateKey("isLootAvailable", (key) =>
+  selector({
+    get: ({ get }) => get(essenceLoot) > 0 || get(itemsLoot).length > 0,
     key,
   }),
 );

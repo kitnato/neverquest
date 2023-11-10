@@ -12,10 +12,8 @@ export type AnimationSpeed = "fast" | "faster" | "slow" | "slower";
 
 export type BootstrapColorVariant = "dark" | "outline-dark" | "secondary";
 
-export type DeltaDisplay = DeltaDisplayContents | DeltaDisplayContents[];
-
-type DeltaDisplayContents = {
-  color: "text-danger" | "text-muted" | "text-success" | null;
+export type DeltaDisplay = {
+  color: "text-danger" | "text-muted" | "text-success";
   value: number | string;
 };
 
@@ -24,7 +22,7 @@ export type DeltaReserve =
   | (DeltaReserveBase & { isRegeneration?: false });
 
 export type DeltaReserveBase = {
-  delta?: DeltaDisplay;
+  delta?: DeltaDisplay | DeltaDisplay[];
   value: number;
 };
 

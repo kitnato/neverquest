@@ -1,6 +1,7 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { isAttacking } from "@neverquest/state/character";
 import { isWilderness } from "@neverquest/state/encounter";
@@ -11,6 +12,7 @@ export function HearthstoneWarp() {
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
   const isWildernessValue = useRecoilValue(isWilderness);
 
+  const progressQuest = useProgressQuest();
   const toggleLocation = useToggleLocation();
 
   const canWarp = !isAttackingValue && isWildernessValue;
@@ -24,6 +26,7 @@ export function HearthstoneWarp() {
         <Button
           disabled={!canWarp}
           onClick={() => {
+            progressQuest({ quest: "warpingCaravan" });
             resetIsInventoryOpen();
             toggleLocation();
           }}

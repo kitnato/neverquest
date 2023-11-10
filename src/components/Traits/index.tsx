@@ -10,8 +10,8 @@ export function Traits() {
   return Object.values(acquiredTraitsValue).every((current) => !current) ? (
     <span className="fst-italic">None.</span>
   ) : (
-    TRAIT_TYPES.map(
-      (current) => acquiredTraitsValue[current] && <TraitDisplay key={current} trait={current} />,
+    TRAIT_TYPES.map((current) =>
+      acquiredTraitsValue[current] ? <TraitDisplay key={current} trait={current} /> : null,
     )
   );
 }

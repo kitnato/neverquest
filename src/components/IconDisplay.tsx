@@ -1,38 +1,49 @@
 import type { ReactNode } from "react";
 import { Stack } from "react-bootstrap";
 
+import type { ResponsiveUtilityValue } from "react-bootstrap/esm/createUtilityClasses";
+import type { GapValue } from "react-bootstrap/esm/types";
 import { IconImage } from "@neverquest/components/IconImage";
 import type { IconImageDOMProps, SVGIcon } from "@neverquest/types/props";
 
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function IconDisplay({
-  contents,
+  children,
   description,
+  gap = 3,
   Icon,
   iconProps,
   isAnimated = false,
-  isSpaced = false,
+  isFullWidth = false,
   tooltip,
 }: {
-  contents: ReactNode;
+  children?: ReactNode;
   description?: ReactNode;
+  gap?: ResponsiveUtilityValue<GapValue>;
   Icon: SVGIcon;
   iconProps?: IconImageDOMProps;
   isAnimated?: boolean;
-  isSpaced?: boolean;
+  isFullWidth?: boolean;
   tooltip?: string;
 }) {
+  const classes = [
+    isFullWidth ? "w-100" : null,
+    isAnimated ? getAnimationClass({ name: "flipInX" }) : null,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <Stack
-      className={isAnimated ? getAnimationClass({ name: "flipInX" }) : undefined}
+      className={classes === "" ? undefined : classes}
       direction="horizontal"
-      gap={isSpaced ? 5 : iconProps?.size === "small" ? 1 : 3}
+      gap={iconProps?.size === "small" ? 1 : gap}
     >
       <IconImage Icon={Icon} tooltip={tooltip} {...iconProps} />
 
       <Stack gap={1}>
-        {contents}
+        {children}
 
         <small className="text-muted">{description}</small>
       </Stack>

@@ -1,12 +1,12 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { FloatingTextQueue } from "@neverquest/components/FloatingTextQueue";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconEssenceBonus from "@neverquest/icons/essence-bonus.svg?react";
 import { essenceBonus } from "@neverquest/state/items";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function EssenceBonus() {
   const essenceBonusValue = useRecoilValue(essenceBonus);
@@ -14,18 +14,19 @@ export function EssenceBonus() {
   useDeltaText({
     delta: "essenceBonus",
     format: "percentage",
-    value: essenceBonus,
+    state: essenceBonus,
   });
 
   return (
-    <Stack direction="horizontal">
-      <IconDisplay
-        contents={`+${formatValue({ format: "percentage", value: essenceBonusValue })}`}
-        Icon={IconEssenceBonus}
-        tooltip="Essence loot bonus"
-      />
+    <Stack direction="horizontal" gap={1}>
+      <IconDisplay Icon={IconEssenceBonus} tooltip="Essence loot bonus">
+        {`+${formatNumber({
+          format: "percentage",
+          value: essenceBonusValue,
+        })}`}
+      </IconDisplay>
 
-      <FloatingTextQueue delta="essenceBonus" />
+      <DeltasDisplay delta="essenceBonus" />
     </Stack>
   );
 }

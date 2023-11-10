@@ -7,7 +7,7 @@ import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import { isShowing } from "@neverquest/state/isShowing";
 import type { ComparisonProps } from "@neverquest/types/props";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function WeightDetail({
   comparison = null,
@@ -30,7 +30,7 @@ export function WeightDetail({
             <Stack direction="horizontal" gap={1}>
               <IconImage Icon={IconEncumbrance} size="small" />
 
-              {formatValue({ value: weight })}
+              {formatNumber({ value: weight })}
 
               {comparison !== null && (
                 <GearComparison
@@ -41,7 +41,7 @@ export function WeightDetail({
               )}
 
               {stack !== undefined && stack > 1 && (
-                <>{`(${formatValue({ value: weight * stack })})`}</>
+                <>{`(${formatNumber({ value: weight * stack })})`}</>
               )}
             </Stack>
           </td>

@@ -8,7 +8,7 @@ import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { inventory } from "@neverquest/state/inventory";
 import {
   isArmor,
-  isConsumable,
+  isConsumableItem,
   isGear,
   isGem,
   isShield,
@@ -38,10 +38,10 @@ export function SellItems() {
           {[equippedGear.find(isWeapon), equippedGear.find(isArmor), equippedGear.find(isShield)]
             .filter(isGear)
             .map((current) => {
-              const { id, isEquipped } = current;
+              const { ID, isEquipped } = current;
 
               return (
-                <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={id}>
+                <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
                   <Stack direction="horizontal" gap={1}>
                     <ItemDisplay
                       description={isEquipped ? "Equipped" : null}
@@ -59,7 +59,7 @@ export function SellItems() {
             .filter(isGear)
             .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
             .map((current) => (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.id}>
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.ID}>
                 <ItemDisplay item={current} overlayPlacement="right" />
 
                 <SellItem item={current} />
@@ -70,7 +70,7 @@ export function SellItems() {
             .filter(isUsable)
             .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
             .map((current) => (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.id}>
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.ID}>
                 <Usable item={current} />
 
                 <SellItem item={current} />
@@ -80,7 +80,7 @@ export function SellItems() {
           {[
             ...stackItems(
               storedItems
-                .filter(isConsumable)
+                .filter(isConsumableItem)
                 .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
             ),
             ...stackItems(
@@ -92,7 +92,7 @@ export function SellItems() {
             const { item, stack } = current;
 
             return (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.id}>
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.ID}>
                 <ItemDisplay item={item} stack={stack} />
 
                 <SellItem item={item} />

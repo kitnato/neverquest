@@ -41,7 +41,3 @@ export function handleLocalStorage<ValueType>({
     });
   };
 }
-
-export function withStateKey<State>(key: StateKey, assign: (key: StateKey) => State) {
-  return assign(key);
-}

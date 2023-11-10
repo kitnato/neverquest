@@ -13,10 +13,10 @@ import IconRegenerationAmount from "@neverquest/icons/regeneration-amount.svg?re
 import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
-import { ownedItem } from "@neverquest/state/items";
+import { ownedItem } from "@neverquest/state/inventory";
 import type { SVGIcon } from "@neverquest/types/props";
 import type { Attribute } from "@neverquest/types/unions";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 const STATISTIC_ICON: Record<Attribute, SVGIcon> = {
   agility: IconDodge,
@@ -35,8 +35,6 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
 
   const { increment, powerBonus } = ATTRIBUTES[attribute];
   const Icon = STATISTIC_ICON[attribute];
-  const formattedIncrement =
-    increment < 1 ? formatValue({ format: "percentage", value: increment }) : increment;
   const operand = ["speed", "vigor"].includes(attribute) ? "-" : "+";
 
   return (
@@ -44,14 +42,18 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
       <Stack className="justify-content-center" direction="horizontal" gap={1}>
         <IconImage Icon={Icon} size="small" />
 
-        <span>{`${operand}${formattedIncrement}`}</span>
+        {`${operand}${
+          increment < 1
+            ? formatNumber({ decimals: 0, format: "percentage", value: increment })
+            : increment
+        }`}
       </Stack>
 
       {hasTomeOfPower && (
         <Stack className="justify-content-center" direction="horizontal" gap={1}>
           <IconImage Icon={IconTomeOfPower} size="small" />
 
-          {`+${formatValue({ format: "percentage", value: powerBonus })}`}
+          {`+${formatNumber({ format: "percentage", value: powerBonus })}`}
         </Stack>
       )}
     </>

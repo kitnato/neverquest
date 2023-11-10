@@ -1,6 +1,7 @@
 import { atom } from "recoil";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 
-import { handleLocalStorage, withStateKey } from "@neverquest/state";
+import { withStateKey } from "@neverquest/utilities/helpers";
 
 // ATOMS
 

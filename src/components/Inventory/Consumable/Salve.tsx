@@ -2,15 +2,17 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { inventory } from "@neverquest/state/inventory";
 import { blight, isBlighted } from "@neverquest/state/reserves";
 
-export function Salve({ id }: { id: string }) {
+export function Salve({ ID }: { ID: string }) {
   const resetBlight = useResetRecoilState(blight);
   const isBlightedValue = useRecoilValue(isBlighted);
   const setInventory = useSetRecoilState(inventory);
 
   const changeStamina = useChangeStamina();
+  const progressQuest = useProgressQuest();
 
   return (
     <OverlayTrigger
@@ -31,7 +33,9 @@ export function Salve({ id }: { id: string }) {
               value: 0,
             });
 
-            setInventory((current) => current.filter((current) => current.id !== id));
+            setInventory((current) => current.filter((current) => current.ID !== ID));
+
+            progressQuest({ quest: "potions" });
           }}
           variant="outline-dark"
         >

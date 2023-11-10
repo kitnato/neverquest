@@ -1,4 +1,4 @@
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
@@ -6,7 +6,7 @@ import { LABEL_EMPTY } from "@neverquest/data/general";
 import { AILMENT_DESCRIPTION } from "@neverquest/data/monster";
 import { isMonsterAiling, monsterAilmentDuration } from "@neverquest/state/monster";
 import type { MonsterAilment, NumberFormat } from "@neverquest/types/unions";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function MonsterAilmentMeter({
   ailment,
@@ -21,20 +21,25 @@ export function MonsterAilmentMeter({
   const monsterAilmentDurationValue = useRecoilValue(monsterAilmentDuration(ailment));
 
   return (
-    <OverlayTrigger overlay={<Tooltip>{AILMENT_DESCRIPTION[ailment]}</Tooltip>}>
+    <OverlayTrigger
+      overlay={
+        <Popover>
+          <PopoverBody>{AILMENT_DESCRIPTION[ailment]}</PopoverBody>
+        </Popover>
+      }
+    >
       <span className="w-100">
         <LabelledProgressBar
           disableTransitions
-          label={
-            isMonsterAilingValue
-              ? format === "time"
-                ? formatValue({ format: "time", value: monsterAilmentDurationValue })
-                : monsterAilmentDurationValue
-              : LABEL_EMPTY
-          }
           value={isMonsterAilingValue ? (monsterAilmentDurationValue / totalDuration) * 100 : 0}
           variant="secondary"
-        />
+        >
+          {isMonsterAilingValue
+            ? format === "time"
+              ? formatNumber({ format, value: monsterAilmentDurationValue })
+              : `${monsterAilmentDurationValue} hits`
+            : LABEL_EMPTY}
+        </LabelledProgressBar>
       </span>
     </OverlayTrigger>
   );

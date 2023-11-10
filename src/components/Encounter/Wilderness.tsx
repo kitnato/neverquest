@@ -19,12 +19,9 @@ export function Wilderness() {
     return (
       <Card className={getAnimationClass({ name: "flipInX" })}>
         <Card.Body>
-          <IconDisplay
-            contents={<span className="fst-italic">Everything is dead.</span>}
-            Icon={IconRemains}
-            isSpaced
-            tooltip="Remains"
-          />
+          <IconDisplay gap={5} Icon={IconRemains} tooltip="Remains">
+            <span className="fst-italic">Everything is dead.</span>
+          </IconDisplay>
         </Card.Body>
       </Card>
     );
@@ -38,15 +35,14 @@ export function Wilderness() {
     <Card className={getAnimationClass({ name: "zoomIn", speed: "fast" })}>
       <Card.Body>
         <IconDisplay
-          contents={
-            <span className="fst-italic">
-              {isBossValue ? "A powerful presence looms." : "The darkness stirs."}
-            </span>
-          }
+          gap={5}
           Icon={isBossValue ? IconBossHiding : IconMonsterHiding}
-          isSpaced
           tooltip={LABEL_UNKNOWN}
-        />
+        >
+          <span className="fst-italic">
+            {isBossValue ? "A powerful presence looms." : "The darkness stirs."}
+          </span>
+        </IconDisplay>
       </Card.Body>
     </Card>
   );

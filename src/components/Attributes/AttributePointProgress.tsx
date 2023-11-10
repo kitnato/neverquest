@@ -6,7 +6,7 @@ import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import { attributePoints, level } from "@neverquest/state/attributes";
 import { essence } from "@neverquest/state/resources";
-import { formatValue } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAttributePointCost } from "@neverquest/utilities/getters";
 
 export function AttributePointProgress() {
@@ -24,19 +24,15 @@ export function AttributePointProgress() {
   return (
     <OverlayTrigger overlay={<Tooltip>Essence required for next attribute point.</Tooltip>}>
       <span className="w-100">
-        <LabelledProgressBar
-          label={
-            <Stack direction="horizontal" gap={1}>
-              <IconImage Icon={IconEssence} isStencilled size="small" />
+        <LabelledProgressBar value={(essenceValue / nextTotalCost) * 100} variant="secondary">
+          <Stack direction="horizontal" gap={1}>
+            <IconImage Icon={IconEssence} isStencilled size="small" />
 
-              {`${formatValue({ value: essenceValue })}/${formatValue({
-                value: nextTotalCost,
-              })}`}
-            </Stack>
-          }
-          value={(essenceValue / nextTotalCost) * 100}
-          variant="secondary"
-        />
+            {`${formatNumber({ value: essenceValue })}/${formatNumber({
+              value: nextTotalCost,
+            })}`}
+          </Stack>
+        </LabelledProgressBar>
       </span>
     </OverlayTrigger>
   );

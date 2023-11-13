@@ -20,53 +20,51 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 export function Statistics() {
   const isShowingStatistics = useRecoilValue(isShowing("statistics"));
 
-  if (!isShowingStatistics) {
-    return null;
+  if (isShowingStatistics) {
+    return (
+      <Card className={getAnimationClass({ name: "flipInX" })}>
+        <Card.Body>
+          <Row>
+            <Col>
+              <Stack gap={3}>
+                <Damage />
+
+                <CriticalRating />
+
+                <StunRating />
+
+                <BleedRating />
+
+                <ParryRating />
+
+                <ExecutionThreshold />
+
+                <CombatRange />
+              </Stack>
+            </Col>
+
+            <Col>
+              <Stack gap={3}>
+                <Protection />
+
+                <Thorns />
+
+                <Deflection />
+
+                <Dodge />
+              </Stack>
+            </Col>
+
+            <Col>
+              <Stack gap={3}>
+                <Block />
+
+                <StaggerRating />
+              </Stack>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
+    );
   }
-
-  return (
-    <Card className={getAnimationClass({ name: "flipInX" })}>
-      <Card.Body>
-        <Row>
-          <Col>
-            <Stack gap={3}>
-              <Damage />
-
-              <CriticalRating />
-
-              <StunRating />
-
-              <BleedRating />
-
-              <ParryRating />
-
-              <ExecutionThreshold />
-
-              <CombatRange />
-            </Stack>
-          </Col>
-
-          <Col>
-            <Stack gap={3}>
-              <Protection />
-
-              <Thorns />
-
-              <Deflection />
-
-              <Dodge />
-            </Stack>
-          </Col>
-
-          <Col>
-            <Stack gap={3}>
-              <Block />
-
-              <StaggerRating />
-            </Stack>
-          </Col>
-        </Row>
-      </Card.Body>
-    </Card>
-  );
 }

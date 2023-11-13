@@ -13,7 +13,7 @@ addPluralRule(/ix$/i, "ices");
 addPluralRule(/us$/i, "i");
 addUncountableRule("topaz");
 
-createRoot(document.getElementById("root") as Element).render(
+createRoot(document.querySelector("#root") as Element).render(
   <StrictMode>
     <Core />
   </StrictMode>,

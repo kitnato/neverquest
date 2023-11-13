@@ -7,12 +7,12 @@ import { Retirement } from "@neverquest/components/Retirement";
 import { RETIREMENT_MINIMUM_LEVEL } from "@neverquest/data/general";
 import IconRetire from "@neverquest/icons/retire.svg?react";
 import { isGameOver } from "@neverquest/state/character";
-import { isWilderness, stageMaximum } from "@neverquest/state/encounter";
+import { location, stageMaximum } from "@neverquest/state/encounter";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function RetireButton() {
   const isGameOverValue = useRecoilValue(isGameOver);
-  const isWildernessValue = useRecoilValue(isWilderness);
+  const locationValue = useRecoilValue(location);
   const stageMaximumValue = useRecoilValue(stageMaximum);
 
   const [isShowingRetire, setIsShowingRetire] = useState(false);
@@ -28,7 +28,7 @@ export function RetireButton() {
           }`}
         >
           <Button
-            disabled={isGameOverValue || isWildernessValue}
+            disabled={isGameOverValue || locationValue === "wilderness"}
             onClick={() => setIsShowingRetire(true)}
             variant="outline-dark"
           >

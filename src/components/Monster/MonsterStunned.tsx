@@ -10,13 +10,11 @@ export function MonsterStunned() {
   const canBeStunned = useRecoilValue(canReceiveAilment("stunned"));
   const mightValue = useRecoilValue(masteryStatistic("might"));
 
-  if (!canBeStunned) {
-    return null;
+  if (canBeStunned) {
+    return (
+      <IconDisplay Icon={IconStunned} isAnimated tooltip="Stunned">
+        <MonsterAilmentMeter ailment="stunned" format="integer" totalDuration={mightValue} />
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay Icon={IconStunned} isAnimated tooltip="Stunned">
-      <MonsterAilmentMeter ailment="stunned" format="integer" totalDuration={mightValue} />
-    </IconDisplay>
-  );
 }

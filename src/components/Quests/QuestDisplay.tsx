@@ -34,7 +34,7 @@ export function QuestDisplay({
 
   const completeQuest = useCompleteQuest();
 
-  const hasCompletedQuest = QUEST_BONUS_TYPES.some((current) => current === questStatus);
+  const hasCompletedQuest = QUEST_BONUS_TYPES.includes(questStatus as QuestBonus);
   const cappedProgress = Math.min(
     hasCompletedQuest ? progressionMaximum : questProgressValue,
     progressionMaximum,
@@ -76,7 +76,7 @@ export function QuestDisplay({
             })
           }
           type="radio"
-          value={hasCompletedQuest ? questStatus : null}
+          value={hasCompletedQuest ? questStatus : undefined}
         >
           {[
             { bonus: "healthBonus", Icon: IconHealth },

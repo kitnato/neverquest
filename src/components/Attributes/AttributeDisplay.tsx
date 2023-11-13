@@ -16,7 +16,7 @@ import {
   isAttributeAtMaximum,
   isAttributeUnlocked,
 } from "@neverquest/state/attributes";
-import { isStageCompleted, isStageStarted, isWilderness } from "@neverquest/state/encounter";
+import { isStageCompleted, isStageStarted, location } from "@neverquest/state/encounter";
 import type { Attribute } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
@@ -26,16 +26,16 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
   const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(attribute));
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isStageStartedValue = useRecoilValue(isStageStarted);
-  const isWildernessValue = useRecoilValue(isWilderness);
+  const locationValue = useRecoilValue(location);
 
   const increaseAttribute = useIncreaseAttribute();
 
   const { description, Icon } = ATTRIBUTES[attribute];
-  const isUnsafe = isStageStartedValue && !isStageCompletedValue && isWildernessValue;
+  const isUnsafe = isStageStartedValue && !isStageCompletedValue && locationValue === "wilderness";
   const canIncrease = areAttributesAffordableValue && !isUnsafe;
   const name = capitalizeAll(attribute);
 
-  if (isAttributeUnlockedValue.current) {
+  if (isAttributeUnlockedValue) {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay description={description} Icon={Icon} tooltip="Attribute">

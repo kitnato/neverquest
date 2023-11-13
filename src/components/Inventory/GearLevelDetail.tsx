@@ -6,20 +6,14 @@ import { GearComparison } from "@neverquest/components/Inventory/GearComparison"
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
 import IconGearLevel from "@neverquest/icons/gear-level.svg?react";
 import { showGearLevel } from "@neverquest/state/settings";
-import type { ComparisonProps } from "@neverquest/types/props";
+import type { Comparison } from "@neverquest/types/components";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export function GearLevelDetail({
-  comparison,
-  level,
-}: {
-  comparison: ComparisonProps;
-  level: number;
-}) {
+export function GearLevelDetail({ comparison, level }: { comparison: Comparison; level: number }) {
   const showGearLevelValue = useRecoilValue(showGearLevel);
 
   if (level === 0 || !showGearLevelValue) {
-    return null;
+    return;
   }
 
   return (
@@ -32,7 +26,7 @@ export function GearLevelDetail({
 
           {formatNumber({ value: level })}
 
-          {comparison !== null && (
+          {comparison !== undefined && (
             <GearComparison
               difference={level - comparison.subtrahend}
               showing={comparison.showing}

@@ -26,46 +26,44 @@ export function JournalButton() {
 
   const canCompleteQuest = canCompleteConquests || canCompleteRoutines || canCompleteTriumphs;
 
-  if (ownedItemJournal === null) {
-    return null;
+  if (ownedItemJournal !== undefined) {
+    return (
+      <>
+        <OverlayTrigger overlay={<Tooltip>Journal</Tooltip>}>
+          <span className={getAnimationClass({ name: "bounceIn" })}>
+            <Button
+              className={`position-relative${
+                canCompleteQuest && !isStageStartedValue
+                  ? ` ${getAnimationClass({
+                      isInfinite: true,
+                      name: "pulse",
+                    })}`
+                  : ""
+              }`}
+              disabled={isAttackingValue}
+              onClick={() => setIsJournalOpen(true)}
+              variant="outline-dark"
+            >
+              <IconImage Icon={IconJournal} />
+
+              {canCompleteQuest && (
+                <IconBadge alignToButton>
+                  <IconImage Icon={IconAttention} size="small" />
+                </IconBadge>
+              )}
+            </Button>
+          </span>
+        </OverlayTrigger>
+
+        <DismissableScreen
+          hideOverflow
+          isShowing={isJournalOpenValue}
+          onClose={() => setIsJournalOpen(false)}
+          title="Journal"
+        >
+          <Journal />
+        </DismissableScreen>
+      </>
+    );
   }
-
-  return (
-    <>
-      <OverlayTrigger overlay={<Tooltip>Journal</Tooltip>}>
-        <span className={getAnimationClass({ name: "bounceIn" })}>
-          <Button
-            className={`position-relative${
-              canCompleteQuest && !isStageStartedValue
-                ? ` ${getAnimationClass({
-                    isInfinite: true,
-                    name: "pulse",
-                  })}`
-                : ""
-            }`}
-            disabled={isAttackingValue}
-            onClick={() => setIsJournalOpen(true)}
-            variant="outline-dark"
-          >
-            <IconImage Icon={IconJournal} />
-
-            {canCompleteQuest && (
-              <IconBadge alignToButton>
-                <IconImage Icon={IconAttention} size="small" />
-              </IconBadge>
-            )}
-          </Button>
-        </span>
-      </OverlayTrigger>
-
-      <DismissableScreen
-        hideOverflow
-        isShowing={isJournalOpenValue}
-        onClose={() => setIsJournalOpen(false)}
-        title="Journal"
-      >
-        <Journal />
-      </DismissableScreen>
-    </>
-  );
 }

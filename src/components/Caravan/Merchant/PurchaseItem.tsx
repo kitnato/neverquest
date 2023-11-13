@@ -51,12 +51,12 @@ export function PurchaseItem({ merchantItem }: { merchantItem: MerchantInventory
           quest: isArmor(merchantItem)
             ? "purchasingArmor"
             : isShield(merchantItem)
-            ? "purchasingShield"
-            : isWeapon(merchantItem)
-            ? "purchasingWeapon"
-            : isInfusableItem(merchantItem)
-            ? "purchasingInfusable"
-            : "purchasingTrinket",
+              ? "purchasingShield"
+              : isWeapon(merchantItem)
+                ? "purchasingWeapon"
+                : isInfusableItem(merchantItem)
+                  ? "purchasingInfusable"
+                  : "purchasingTrinket",
         });
       }}
     />

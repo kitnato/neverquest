@@ -34,7 +34,7 @@ export function generateArtifact({
   const filteredArtifact = filteredArtifacts[Math.floor(Math.random() * filteredArtifacts.length)];
 
   if (filteredArtifact === undefined) {
-    throw Error("Invalid artifact.");
+    throw new Error("Invalid artifact.");
   }
 
   const { canPluralize, name } = filteredArtifact;

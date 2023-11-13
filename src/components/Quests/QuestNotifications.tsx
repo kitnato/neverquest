@@ -40,7 +40,7 @@ export function QuestNotifications() {
             </ToastHeader>
 
             <ToastBody>
-              {hidden !== undefined ? description.replace(LABEL_UNKNOWN, hidden) : description}
+              {hidden === undefined ? description : description.replace(LABEL_UNKNOWN, hidden)}
             </ToastBody>
           </Toast>
         ),

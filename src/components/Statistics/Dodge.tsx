@@ -45,100 +45,98 @@ export function Dodge() {
     state: dodgeChance,
   });
 
-  if (!isShowingDodgeChance) {
-    return null;
-  }
+  if (isShowingDodgeChance) {
+    return (
+      <IconDisplay Icon={IconDodge} isAnimated tooltip="Dodge chance">
+        <Stack direction="horizontal" gap={1}>
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverHeader className="text-center">Dodge chance details</PopoverHeader>
 
-  return (
-    <IconDisplay Icon={IconDodge} isAnimated tooltip="Dodge chance">
-      <Stack direction="horizontal" gap={1}>
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverHeader className="text-center">Dodge chance details</PopoverHeader>
-
-              <PopoverBody>
-                <DetailsTable>
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconAgility} size="small" />
-                        Agility:
-                      </Stack>
-                    </td>
-
-                    <td>
-                      <Stack direction="horizontal" gap={1}>
-                        {`${formatNumber({
-                          decimals: 0,
-                          format: "percentage",
-                          value: agility,
-                        })}`}
-
-                        {agilityPowerBonus > 0 && (
-                          <>
-                            <span>{LABEL_SEPARATOR}</span>
-
-                            <IconImage Icon={IconTomeOfPower} size="small" />
-
-                            {`+${formatNumber({
-                              format: "percentage",
-                              value: agilityPowerBonus,
-                            })}`}
-                          </>
-                        )}
-                      </Stack>
-                    </td>
-                  </tr>
-
-                  {isTraitAcquiredNudist && name === ARMOR_NONE.name && (
+                <PopoverBody>
+                  <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconNudist} size="small" />
-                          Nudist:
-                        </Stack>
-                      </td>
-
-                      <td>x2</td>
-                    </tr>
-                  )}
-
-                  {isShowingDodgePenalty ? (
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconDodgePenalty} size="small" />
-                          Armor penalty:
+                          <IconImage Icon={IconAgility} size="small" />
+                          Agility:
                         </Stack>
                       </td>
 
                       <td>
-                        <DodgePenaltyContents staminaCost={staminaCost} />
+                        <Stack direction="horizontal" gap={1}>
+                          {`${formatNumber({
+                            decimals: 0,
+                            format: "percentage",
+                            value: agility,
+                          })}`}
+
+                          {agilityPowerBonus > 0 && (
+                            <>
+                              <span>{LABEL_SEPARATOR}</span>
+
+                              <IconImage Icon={IconTomeOfPower} size="small" />
+
+                              {`+${formatNumber({
+                                format: "percentage",
+                                value: agilityPowerBonus,
+                              })}`}
+                            </>
+                          )}
+                        </Stack>
                       </td>
                     </tr>
-                  ) : (
-                    <td className="text-end">{LABEL_UNKNOWN}</td>
-                  )}
-                </DetailsTable>
-              </PopoverBody>
-            </Popover>
-          }
-          trigger={
-            isSkillAcquiredEvasion && (isShowingDodgePenalty || hasTomeOfPower)
-              ? ["hover", "focus"]
-              : []
-          }
-        >
-          <span>
-            {isSkillAcquiredEvasion
-              ? formatNumber({ format: "percentage", value: dodgeChanceValue })
-              : LABEL_EMPTY}
-          </span>
-        </OverlayTrigger>
 
-        <DeltasDisplay delta="dodgeChance" />
-      </Stack>
-    </IconDisplay>
-  );
+                    {isTraitAcquiredNudist && name === ARMOR_NONE.name && (
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconNudist} size="small" />
+                            Nudist:
+                          </Stack>
+                        </td>
+
+                        <td>x2</td>
+                      </tr>
+                    )}
+
+                    {isShowingDodgePenalty ? (
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconDodgePenalty} size="small" />
+                            Armor penalty:
+                          </Stack>
+                        </td>
+
+                        <td>
+                          <DodgePenaltyContents staminaCost={staminaCost} />
+                        </td>
+                      </tr>
+                    ) : (
+                      <td className="text-end">{LABEL_UNKNOWN}</td>
+                    )}
+                  </DetailsTable>
+                </PopoverBody>
+              </Popover>
+            }
+            trigger={
+              isSkillAcquiredEvasion && (isShowingDodgePenalty || hasTomeOfPower)
+                ? ["hover", "focus"]
+                : []
+            }
+          >
+            <span>
+              {isSkillAcquiredEvasion
+                ? formatNumber({ format: "percentage", value: dodgeChanceValue })
+                : LABEL_EMPTY}
+            </span>
+          </OverlayTrigger>
+
+          <DeltasDisplay delta="dodgeChance" />
+        </Stack>
+      </IconDisplay>
+    );
+  }
 }

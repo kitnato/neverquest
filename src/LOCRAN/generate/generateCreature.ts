@@ -15,7 +15,7 @@ export function generateCreature({
   const filteredCreature = filteredCreatures[Math.floor(Math.random() * filteredCreatures.length)];
 
   if (filteredCreature === undefined) {
-    throw Error("Invalid creature.");
+    throw new Error("Invalid creature.");
   }
 
   return generate({

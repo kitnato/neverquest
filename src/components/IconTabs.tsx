@@ -1,7 +1,7 @@
 import { Nav, NavItem, NavLink, Stack, TabContainer, TabContent, TabPane } from "react-bootstrap";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import type { TabsData } from "@neverquest/types/props";
+import type { TabsData } from "@neverquest/types/components";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function IconTabs({ tabs }: { tabs: TabsData }) {

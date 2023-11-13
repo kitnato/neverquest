@@ -63,7 +63,7 @@ export function AttackRate() {
   });
 
   if (!isShowingAttackRate) {
-    return null;
+    return;
   }
 
   return (

@@ -43,7 +43,7 @@ export function getArmorRanges({ factor, gearClass }: { factor: number; gearClas
   const { deflection, protection, staminaCost, weight } = ARMOR_SPECIFICATIONS[gearClass];
 
   return {
-    deflection: deflection === null ? null : getRange({ factor, ranges: deflection }),
+    deflection: deflection === undefined ? undefined : getRange({ factor, ranges: deflection }),
     protection: getRange({ factor, ranges: protection }),
     staminaCost: isGeneratorRanges(staminaCost)
       ? getRange({ factor, ranges: staminaCost })
@@ -225,20 +225,21 @@ export function getRomanNumeral(value: number) {
     return value;
   }
 
-  const digits = Math.round(value).toString().split("");
+  const digits = [...Math.round(value).toString()];
   let position = digits.length - 1;
+  let result = "";
 
-  return digits.reduce((accumulator, current) => {
+  for (const digit of digits) {
     const numeral = ROMAN_NUMERALS[position];
 
-    if (numeral !== undefined && current !== "0") {
-      accumulator += numeral[parseInt(current) - 1];
+    if (numeral !== undefined && digit !== "0") {
+      result += numeral[Number.parseInt(digit) - 1];
     }
 
     position -= 1;
+  }
 
-    return accumulator;
-  }, "");
+  return result;
 }
 
 export function getSellPrice({ price }: { price: number }) {
@@ -250,7 +251,7 @@ export function getShieldRanges({ factor, gearClass }: { factor: number; gearCla
 
   return {
     block: getRange({ factor, ranges: block }),
-    stagger: stagger === null ? null : getRange({ factor, ranges: stagger }),
+    stagger: stagger === undefined ? undefined : getRange({ factor, ranges: stagger }),
     staminaCost: getRange({ factor, ranges: staminaCost }),
     weight: getRange({ factor, ranges: weight }),
   };

@@ -14,7 +14,7 @@ export function Gear() {
   const isShowingWeapon = useRecoilValue(isShowing("weapon"));
 
   if (!isShowingArmor && !isShowingOffhand && !isShowingWeapon) {
-    return null;
+    return;
   }
 
   return (

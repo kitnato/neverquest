@@ -6,7 +6,7 @@ import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import IconTravel from "@neverquest/icons/travel.svg?react";
 import { isGameOver } from "@neverquest/state/character";
-import { isStageCompleted, isWilderness } from "@neverquest/state/encounter";
+import { isStageCompleted, location } from "@neverquest/state/encounter";
 import { encumbranceExtent } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { hasLooted } from "@neverquest/state/resources";
@@ -18,41 +18,44 @@ export function TravelButton() {
   const isGameOverValue = useRecoilValue(isGameOver);
   const isShowingLocation = useRecoilValue(isShowing("location"));
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
-  const isWildernessValue = useRecoilValue(isWilderness);
+  const locationValue = useRecoilValue(location);
 
   const toggleLocation = useToggleLocation();
 
-  // Happens only if the knapsack is sold and carrying more than the weight difference of its absence.
-  const isOverEncumbered = !isWildernessValue && encumbranceExtentValue === "over-encumbered";
+  // Occurs if the knapsack is sold and carrying more than the weight difference of its absence.
+  const isOverEncumbered =
+    locationValue === "caravan" && encumbranceExtentValue === "over-encumbered";
 
-  if (!(hasLootedValue && isStageCompletedValue) && isWildernessValue) {
-    return null;
+  if ((hasLootedValue && isStageCompletedValue) || !locationValue) {
+    return (
+      <OverlayTrigger
+        overlay={
+          <Tooltip>
+            {isOverEncumbered
+              ? "Over-encumbered - cannot move."
+              : `${
+                  locationValue === "wilderness"
+                    ? `Go to ${isShowingLocation ? "Caravan" : LABEL_UNKNOWN}`
+                    : "Return to wilderness"
+                }`}
+          </Tooltip>
+        }
+      >
+        <span className={getAnimationClass({ name: "bounceIn" })}>
+          <Button
+            className={
+              locationValue === "wilderness"
+                ? getAnimationClass({ isInfinite: true, name: "pulse" })
+                : undefined
+            }
+            disabled={isGameOverValue || isOverEncumbered}
+            onClick={toggleLocation}
+            variant="outline-dark"
+          >
+            <IconImage Icon={IconTravel} isMirrored={locationValue === "caravan"} />
+          </Button>
+        </span>
+      </OverlayTrigger>
+    );
   }
-
-  return (
-    <OverlayTrigger
-      overlay={
-        <Tooltip>
-          {isOverEncumbered
-            ? "Over-encumbered - cannot move."
-            : `${isWildernessValue ? "Go to" : "Return to"} ${
-                isWildernessValue ? (isShowingLocation ? "Caravan" : LABEL_UNKNOWN) : "Wilderness"
-              }`}
-        </Tooltip>
-      }
-    >
-      <span className={getAnimationClass({ name: "bounceIn" })}>
-        <Button
-          className={
-            isWildernessValue ? getAnimationClass({ isInfinite: true, name: "pulse" }) : undefined
-          }
-          disabled={isGameOverValue || isOverEncumbered}
-          onClick={toggleLocation}
-          variant="outline-dark"
-        >
-          <IconImage Icon={IconTravel} isMirrored={!isWildernessValue} />
-        </Button>
-      </span>
-    </OverlayTrigger>
-  );
 }

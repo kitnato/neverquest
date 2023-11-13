@@ -40,7 +40,7 @@ export const hasEnoughAmmunition = withStateKey("hasEnoughAmmunition", (key) =>
       const weaponValue = get(weapon);
 
       return isRanged(weaponValue)
-        ? ownedAmmunitionPouch !== null &&
+        ? ownedAmmunitionPouch !== undefined &&
             (ownedAmmunitionPouch as AmmunitionPouchItem).current >= weaponValue.ammunitionCost
         : true;
     },
@@ -114,6 +114,7 @@ export const recoveryDuration = withStateKey("recoveryDuration", (key) =>
 
 export const statusElement = withStateKey("statusElement", (key) =>
   atom<HTMLDivElement | null>({
+    // eslint-disable-next-line unicorn/no-null
     default: null,
     effects: [handleLocalStorage({ key })],
     key,

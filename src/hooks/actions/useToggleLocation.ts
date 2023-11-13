@@ -6,7 +6,6 @@ import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness
 import {
   isStageCompleted,
   isStageStarted,
-  isWilderness,
   location,
   stage,
   stageMaximum,
@@ -24,9 +23,7 @@ export function useToggleLocation() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const isWildernessValue = get(isWilderness);
-
-        if (isWildernessValue) {
+        if (get(location) === "wilderness") {
           generateMerchantInventory();
 
           reset(isStageStarted);

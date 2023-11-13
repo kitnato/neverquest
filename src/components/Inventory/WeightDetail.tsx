@@ -6,15 +6,15 @@ import { GearComparison } from "@neverquest/components/Inventory/GearComparison"
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import { isShowing } from "@neverquest/state/isShowing";
-import type { ComparisonProps } from "@neverquest/types/props";
+import type { Comparison } from "@neverquest/types/components";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function WeightDetail({
-  comparison = null,
+  comparison,
   stack,
   weight,
 }: {
-  comparison?: ComparisonProps;
+  comparison?: Comparison;
   stack?: number;
   weight: number;
 }) {
@@ -32,7 +32,7 @@ export function WeightDetail({
 
               {formatNumber({ value: weight })}
 
-              {comparison !== null && (
+              {comparison !== undefined && (
                 <GearComparison
                   difference={weight - comparison.subtrahend}
                   isDownPositive

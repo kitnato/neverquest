@@ -23,13 +23,11 @@ export function MonsterElementalAilment({ elemental }: { elemental: Elemental })
     stop: !isMonsterAilingValue || isMonsterDeadValue,
   });
 
-  if (armor[elemental].duration === 0 && weapon[elemental].duration === 0) {
-    return null;
+  if (armor[elemental].duration > 0 || weapon[elemental].duration > 0) {
+    return (
+      <IconDisplay Icon={Icon} isAnimated tooltip={capitalizeAll(ailment)}>
+        <MonsterAilmentMeter ailment={ailment} totalDuration={ELEMENTAL_AILMENT_DURATION_MAXIMUM} />
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay Icon={Icon} isAnimated tooltip={capitalizeAll(ailment)}>
-      <MonsterAilmentMeter ailment={ailment} totalDuration={ELEMENTAL_AILMENT_DURATION_MAXIMUM} />
-    </IconDisplay>
-  );
 }

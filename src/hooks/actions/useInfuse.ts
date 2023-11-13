@@ -27,7 +27,7 @@ export function useInfuse() {
 
         const ownedInfusable = get(ownedItem(infusable));
 
-        if (ownedInfusable === null) {
+        if (ownedInfusable === undefined) {
           return;
         }
 

@@ -19,7 +19,7 @@ export function generateLocation({
   const filteredLocation = filteredLocations[Math.floor(Math.random() * filteredLocations.length)];
 
   if (filteredLocation === undefined) {
-    throw Error("Invalid location.");
+    throw new Error("Invalid location.");
   }
 
   const { canPluralize, name } = filteredLocation;

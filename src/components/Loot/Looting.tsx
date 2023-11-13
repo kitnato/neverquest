@@ -10,17 +10,15 @@ export function Looting() {
   const isLootingValue = useRecoilValue(isLooting);
   const isLootAvailableValue = useRecoilValue(isLootAvailable);
 
-  if (!isLootingValue) {
-    if (!isLootAvailableValue) {
-      return null;
-    }
-
-    return <hr />;
+  if (isLootingValue) {
+    return (
+      <IconDisplay Icon={IconLooting} isAnimated tooltip="Looting">
+        <LootingMeter />
+      </IconDisplay>
+    );
   }
 
-  return (
-    <IconDisplay Icon={IconLooting} isAnimated tooltip="Looting">
-      <LootingMeter />
-    </IconDisplay>
-  );
+  if (isLootAvailableValue) {
+    return <hr />;
+  }
 }

@@ -8,7 +8,7 @@ import IconEvasion from "@neverquest/icons/evasion.svg?react";
 import IconShieldcraft from "@neverquest/icons/shieldcraft.svg?react";
 import IconSiegecraft from "@neverquest/icons/siegecraft.svg?react";
 import IconTraumatology from "@neverquest/icons/traumatology.svg?react";
-import type { SVGIcon } from "@neverquest/types/props";
+import type { SVGIcon } from "@neverquest/types/components";
 import type {
   Attribute,
   Crew,

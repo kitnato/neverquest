@@ -30,13 +30,12 @@ export function SellItem({ item }: { item: InventoryItem }) {
           transactEssence(getSellPrice(item));
 
           setInventory((current) => current.filter((current) => current.ID !== item.ID));
-          setMerchantInventory((current) =>
-            current.concat(
-              isGear(item)
-                ? { ...item, isEquipped: false, isReturned: true }
-                : { ...item, isReturned: true },
-            ),
-          );
+          setMerchantInventory((current) => [
+            ...current,
+            isGear(item)
+              ? { ...item, isEquipped: false, isReturned: true }
+              : { ...item, isReturned: true },
+          ]);
 
           progressQuest({ quest: "selling" });
         }}

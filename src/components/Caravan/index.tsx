@@ -43,7 +43,7 @@ export function Caravan() {
 
   const toggleCrewActive = (isShowing: boolean, member?: Crew) => {
     setScreenShowing(isShowing);
-    setCrewActive(member ?? null);
+    setCrewActive(member ?? undefined);
   };
 
   return (
@@ -78,7 +78,7 @@ export function Caravan() {
         </Card.Body>
       </Card>
 
-      {activeCrewValue !== null &&
+      {activeCrewValue !== undefined &&
         (() => {
           const Component = CREW_COMPONENTS[activeCrewValue];
 

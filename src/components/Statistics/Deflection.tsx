@@ -29,57 +29,55 @@ export function Deflection() {
     state: deflection,
   });
 
-  if (isEmpty) {
-    return null;
+  if (!isEmpty) {
+    return (
+      <IconDisplay Icon={IconDeflection} isAnimated tooltip="Total deflection chance">
+        <Stack direction="horizontal" gap={1}>
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverHeader className="text-center">Deflection details</PopoverHeader>
+
+                <PopoverBody>
+                  <DetailsTable>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Armor:</td>
+
+                      <td>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconDeflection} size="small" />
+
+                          {formatNumber({ format: "percentage", value: armorDeflection })}
+                        </Stack>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconInoculated} size="small" />
+                          Inoculated:
+                        </Stack>
+                      </td>
+
+                      <td>x2</td>
+                    </tr>
+                  </DetailsTable>
+                </PopoverBody>
+              </Popover>
+            }
+            trigger={isTraitAcquiredInoculated ? ["focus", "hover"] : []}
+          >
+            <span>
+              {armorDeflection === 0
+                ? LABEL_EMPTY
+                : formatNumber({ format: "percentage", value: deflectionValue })}
+            </span>
+          </OverlayTrigger>
+
+          <DeltasDisplay delta="deflection" />
+        </Stack>
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay Icon={IconDeflection} isAnimated tooltip="Total deflection chance">
-      <Stack direction="horizontal" gap={1}>
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverHeader className="text-center">Deflection details</PopoverHeader>
-
-              <PopoverBody>
-                <DetailsTable>
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Armor:</td>
-
-                    <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconDeflection} size="small" />
-
-                        {formatNumber({ format: "percentage", value: armorDeflection })}
-                      </Stack>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconInoculated} size="small" />
-                        Inoculated:
-                      </Stack>
-                    </td>
-
-                    <td>x2</td>
-                  </tr>
-                </DetailsTable>
-              </PopoverBody>
-            </Popover>
-          }
-          trigger={isTraitAcquiredInoculated ? ["focus", "hover"] : []}
-        >
-          <span>
-            {armorDeflection === 0
-              ? LABEL_EMPTY
-              : formatNumber({ format: "percentage", value: deflectionValue })}
-          </span>
-        </OverlayTrigger>
-
-        <DeltasDisplay delta="deflection" />
-      </Stack>
-    </IconDisplay>
-  );
 }

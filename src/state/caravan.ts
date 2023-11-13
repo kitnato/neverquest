@@ -9,7 +9,7 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 export const isCaravanHired = withStateKey("isCaravanHired", (key) =>
   selector({
-    get: ({ get }) => CREW_TYPES.every((current) => get(hireStatus(current)).current === "hired"),
+    get: ({ get }) => CREW_TYPES.every((current) => get(hireStatus(current)) === "hired"),
     key,
   }),
 );
@@ -17,8 +17,8 @@ export const isCaravanHired = withStateKey("isCaravanHired", (key) =>
 // ATOMS
 
 export const activeCrew = withStateKey("activeCrew", (key) =>
-  atom<Crew | null>({
-    default: null,
+  atom<Crew | undefined>({
+    default: undefined,
     effects: [handleLocalStorage({ key })],
     key,
   }),
@@ -27,27 +27,26 @@ export const activeCrew = withStateKey("activeCrew", (key) =>
 export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
   atom<BlacksmithInventory>({
     default: {
-      armor: null,
-      shield: null,
-      weapon: null,
+      armor: undefined,
+      shield: undefined,
+      weapon: undefined,
     },
     effects: [handleLocalStorage({ key })],
     key,
   }),
 );
 
-// TODO - Must use { current } object instead of just CrewStatus, otherwise onSet() does not trigger in useInitializer().
 export const hireStatus = withStateKey("hireStatus", (key) =>
-  atomFamily<{ current: CrewStatus }, Crew>({
-    default: { current: null },
+  atomFamily<CrewStatus, Crew>({
+    default: "hidden",
     effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),
 );
 
 export const fletcherInventory = withStateKey("fletcherInventory", (key) =>
-  atom<Weapon | null>({
-    default: null,
+  atom<Weapon | undefined>({
+    default: undefined,
     effects: [handleLocalStorage({ key })],
     key,
   }),

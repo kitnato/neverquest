@@ -2,7 +2,7 @@ import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import IconConquest from "@neverquest/icons/conquest.svg?react";
 import IconRoutine from "@neverquest/icons/routine.svg?react";
 import IconTriumph from "@neverquest/icons/triumph.svg?react";
-import type { SVGIcon } from "@neverquest/types/props";
+import type { SVGIcon } from "@neverquest/types/components";
 import {
   CONQUEST_TYPES,
   CREW_TYPES,
@@ -433,7 +433,7 @@ export const QUESTS: Record<
   },
   spendingEssence: {
     description: "Spend @ essence.",
-    progression: [500, 1000, 2500, 5000, 10000, 25000],
+    progression: [500, 1000, 2500, 5000, 10_000, 25_000],
     title: "High roller",
   },
   stages: {
@@ -502,6 +502,7 @@ export const QUESTS: Record<
   },
 };
 
+// eslint-disable-next-line unicorn/no-array-reduce
 export const QUESTS_COUNT: Record<QuestClass, number> = QUEST_CLASS_TYPES.reduce(
   (accumulatorClass, currentClass) => ({
     ...accumulatorClass,

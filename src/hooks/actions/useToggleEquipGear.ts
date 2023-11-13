@@ -26,15 +26,16 @@ export function useToggleEquipGear() {
       (gearItem: GearItem) => {
         const get = getSnapshotGetter(snapshot);
 
-        const { isEquipped, staminaCost } = gearItem;
+        const { gearClass, ID, isEquipped, staminaCost } = gearItem;
 
-        const isRangedWeapon = isRanged(gearItem);
-        const isTwoHandedWeapon = isMelee(gearItem) && gearItem.grip === "two-handed";
+        const isWeaponRanged = isRanged(gearItem);
+        // eslint-disable-next-line unicorn/consistent-destructuring
+        const isWeaponTwoHanded = isMelee(gearItem) && gearItem.grip === "two-handed";
 
         set(isShowing("statistics"), true);
 
         if (isArmor(gearItem) && !isEquipped) {
-          if (gearItem.gearClass === "heavy" && !get(isSkillAcquired("armorcraft"))) {
+          if (gearClass === "heavy" && !get(isSkillAcquired("armorcraft"))) {
             return;
           }
 
@@ -45,7 +46,7 @@ export function useToggleEquipGear() {
         }
 
         if (isShield(gearItem) && !isEquipped) {
-          if (gearItem.gearClass === "tower" && !get(isSkillAcquired("shieldcraft"))) {
+          if (gearClass === "tower" && !get(isSkillAcquired("shieldcraft"))) {
             return;
           }
 
@@ -57,11 +58,7 @@ export function useToggleEquipGear() {
         }
 
         if (isWeapon(gearItem) && !isEquipped) {
-          if (
-            isMelee(gearItem) &&
-            gearItem.grip === "two-handed" &&
-            !get(isSkillAcquired("siegecraft"))
-          ) {
+          if (isWeaponTwoHanded && !get(isSkillAcquired("siegecraft"))) {
             return;
           }
 
@@ -71,10 +68,10 @@ export function useToggleEquipGear() {
 
           if (staminaCost > 0) {
             set(isShowing("stamina"), true);
-            set(isAttributeUnlocked("endurance"), { current: true });
+            set(isAttributeUnlocked("endurance"), true);
           }
 
-          if (isRangedWeapon || isTwoHandedWeapon) {
+          if (isWeaponRanged || isWeaponTwoHanded) {
             set(isShowing("offhand"), true);
           }
 
@@ -90,14 +87,14 @@ export function useToggleEquipGear() {
         set(inventory, (currentInventory) =>
           currentInventory.map((currentItem) => {
             if (isGear(currentItem)) {
-              if (currentItem.ID === gearItem.ID) {
+              if (currentItem.ID === ID) {
                 return {
                   ...currentItem,
                   isEquipped: !currentItem.isEquipped,
                 };
               } else if (
                 // Equipping a ranged or two-handed weapon while a shield is equipped.
-                ((isRangedWeapon || isTwoHandedWeapon) &&
+                ((isWeaponRanged || isWeaponTwoHanded) &&
                   !isEquipped &&
                   isShield(currentItem) &&
                   currentItem.isEquipped) ||

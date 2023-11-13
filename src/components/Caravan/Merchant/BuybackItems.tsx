@@ -9,15 +9,13 @@ export function BuybackItems() {
 
   const returnedItems = merchantInventoryValue.filter(({ isReturned }) => isReturned);
 
-  if (returnedItems.length === 0) {
-    return null;
+  if (returnedItems.length > 0) {
+    return (
+      <Stack gap={3}>
+        <h6>Buy back items</h6>
+
+        <PurchasableItems merchantItems={returnedItems} />
+      </Stack>
+    );
   }
-
-  return (
-    <Stack gap={3}>
-      <h6>Buy back items</h6>
-
-      <PurchasableItems merchantItems={returnedItems} />
-    </Stack>
-  );
 }

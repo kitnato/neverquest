@@ -34,95 +34,93 @@ export function ParryRating() {
     stop: () => isEmpty,
   });
 
-  if (isEmpty) {
-    return null;
-  }
+  if (!isEmpty) {
+    return (
+      <IconDisplay Icon={IconParryRating} isAnimated tooltip="Parry rating">
+        <Stack direction="horizontal" gap={1}>
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverHeader className="text-center">Parry rating details</PopoverHeader>
 
-  return (
-    <IconDisplay Icon={IconParryRating} isAnimated tooltip="Parry rating">
-      <Stack direction="horizontal" gap={1}>
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverHeader className="text-center">Parry rating details</PopoverHeader>
+                <PopoverBody>
+                  <DetailsTable>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
 
-              <PopoverBody>
-                <DetailsTable>
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
+                      <td>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconParry} size="small" />
 
-                    <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconParry} size="small" />
+                          {formatNumber({ format: "percentage", value: parryValue })}
+                        </Stack>
+                      </td>
+                    </tr>
 
-                        {formatNumber({ format: "percentage", value: parryValue })}
-                      </Stack>
-                    </td>
-                  </tr>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Damage reflected:</td>
 
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Damage reflected:</td>
+                      <td>
+                        {formatNumber({ decimals: 0, format: "percentage", value: PARRY_DAMAGE })}
+                      </td>
+                    </tr>
 
-                    <td>
-                      {formatNumber({ decimals: 0, format: "percentage", value: PARRY_DAMAGE })}
-                    </td>
-                  </tr>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Damage absorbed:</td>
 
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Damage absorbed:</td>
+                      <td>
+                        {formatNumber({
+                          decimals: 0,
+                          format: "percentage",
+                          value: PARRY_ABSORPTION,
+                        })}
+                      </td>
+                    </tr>
 
-                    <td>
-                      {formatNumber({
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconFinesse} size="small" />
+                          Finesse:
+                        </Stack>
+                      </td>
+
+                      <td>{`+${formatNumber({
                         decimals: 0,
                         format: "percentage",
-                        value: PARRY_ABSORPTION,
-                      })}
-                    </td>
-                  </tr>
+                        value: finesseValue,
+                      })}`}</td>
+                    </tr>
 
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconFinesse} size="small" />
-                        Finesse:
-                      </Stack>
-                    </td>
+                    {finesseValue > 0 && (
+                      <>
+                        <tr>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Total reflected:</td>
 
-                    <td>{`+${formatNumber({
-                      decimals: 0,
-                      format: "percentage",
-                      value: finesseValue,
-                    })}`}</td>
-                  </tr>
+                          <td>{formatNumber({ format: "percentage", value: parryDamageValue })}</td>
+                        </tr>
 
-                  {finesseValue > 0 && (
-                    <>
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Total reflected:</td>
+                        <tr>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Total absorbed:</td>
 
-                        <td>{formatNumber({ format: "percentage", value: parryDamageValue })}</td>
-                      </tr>
+                          <td>
+                            {formatNumber({ format: "percentage", value: parryAbsorptionValue })}
+                          </td>
+                        </tr>
+                      </>
+                    )}
+                  </DetailsTable>
+                </PopoverBody>
+              </Popover>
+            }
+            trigger={escrimeValue ? ["hover", "focus"] : []}
+          >
+            <span>{escrimeValue ? parryRatingValue : LABEL_EMPTY}</span>
+          </OverlayTrigger>
 
-                      <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Total absorbed:</td>
-
-                        <td>
-                          {formatNumber({ format: "percentage", value: parryAbsorptionValue })}
-                        </td>
-                      </tr>
-                    </>
-                  )}
-                </DetailsTable>
-              </PopoverBody>
-            </Popover>
-          }
-          trigger={escrimeValue ? ["hover", "focus"] : []}
-        >
-          <span>{escrimeValue ? parryRatingValue : LABEL_EMPTY}</span>
-        </OverlayTrigger>
-
-        <DeltasDisplay delta="parryRating" />
-      </Stack>
-    </IconDisplay>
-  );
+          <DeltasDisplay delta="parryRating" />
+        </Stack>
+      </IconDisplay>
+    );
+  }
 }

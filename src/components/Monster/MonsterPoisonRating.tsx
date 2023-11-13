@@ -15,58 +15,56 @@ export function MonsterPoisonRating() {
   const poisonLengthValue = useRecoilValue(poisonLength);
   const poisonMagnitudeValue = useRecoilValue(poisonMagnitude);
 
-  if (poisonChanceValue === 0) {
-    return null;
+  if (poisonChanceValue > 0) {
+    return (
+      <IconDisplay Icon={IconPoison} isAnimated tooltip="Poison rating">
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">Poison rating details</PopoverHeader>
+
+              <PopoverBody>
+                <DetailsTable>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
+
+                    <td>{formatNumber({ format: "percentage", value: poisonChanceValue })}</td>
+                  </tr>
+
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
+
+                    <td>
+                      <Stack direction="horizontal" gap={1}>
+                        {`-${formatNumber({
+                          format: "percentage",
+                          value: poisonMagnitudeValue,
+                        })}`}
+
+                        <IconImage Icon={IconHealth} size="small" />
+
+                        {LABEL_MAXIMUM}
+                      </Stack>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
+
+                    <td>{formatNumber({ format: "time", value: poisonLengthValue })}</td>
+                  </tr>
+                </DetailsTable>
+              </PopoverBody>
+            </Popover>
+          }
+        >
+          <span>
+            {formatNumber({
+              value: poisonChanceValue * poisonMagnitudeValue * poisonLengthValue,
+            })}
+          </span>
+        </OverlayTrigger>
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay Icon={IconPoison} isAnimated tooltip="Poison rating">
-      <OverlayTrigger
-        overlay={
-          <Popover>
-            <PopoverHeader className="text-center">Poison rating details</PopoverHeader>
-
-            <PopoverBody>
-              <DetailsTable>
-                <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
-
-                  <td>{formatNumber({ format: "percentage", value: poisonChanceValue })}</td>
-                </tr>
-
-                <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
-
-                  <td>
-                    <Stack direction="horizontal" gap={1}>
-                      {`-${formatNumber({
-                        format: "percentage",
-                        value: poisonMagnitudeValue,
-                      })}`}
-
-                      <IconImage Icon={IconHealth} size="small" />
-
-                      {LABEL_MAXIMUM}
-                    </Stack>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
-
-                  <td>{formatNumber({ format: "time", value: poisonLengthValue })}</td>
-                </tr>
-              </DetailsTable>
-            </PopoverBody>
-          </Popover>
-        }
-      >
-        <span>
-          {formatNumber({
-            value: poisonChanceValue * poisonMagnitudeValue * poisonLengthValue,
-          })}
-        </span>
-      </OverlayTrigger>
-    </IconDisplay>
-  );
 }

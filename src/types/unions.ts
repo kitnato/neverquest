@@ -54,7 +54,7 @@ export const CREW_TYPES = [
 ] as const;
 export type Crew = (typeof CREW_TYPES)[number];
 
-export type CrewStatus = "hirable" | "hired" | null;
+export type CrewStatus = "hidden" | "hirable" | "hired";
 
 export type Delta =
   | Attribute
@@ -364,7 +364,6 @@ export type StateKey =
   | "isStageStarted"
   | "isStaminaAtMaximum"
   | "isTraitAcquired"
-  | "isWilderness"
   | "itemsAcquired"
   | "itemsLoot"
   | "level"

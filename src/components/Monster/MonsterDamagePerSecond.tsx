@@ -10,19 +10,17 @@ export function MonsterDamagePerSecond() {
   const monsterDamageAilingPerSecondValue = useRecoilValue(monsterDamageAilingPerSecond);
   const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
 
-  if (!showDamagePerSecondValue) {
-    return null;
+  if (showDamagePerSecondValue) {
+    return (
+      <IconDisplay
+        Icon={IconDamagePerSecond}
+        iconProps={{ overlayPlacement: "bottom", size: "small" }}
+        tooltip="Damage per second"
+      >{`${monsterDamageAilingPerSecondValue}${
+        monsterDamagePerSecondValue === monsterDamageAilingPerSecondValue
+          ? ""
+          : ` (${monsterDamagePerSecondValue})`
+      }`}</IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay
-      Icon={IconDamagePerSecond}
-      iconProps={{ overlayPlacement: "bottom", size: "small" }}
-      tooltip="Damage per second"
-    >{`${monsterDamageAilingPerSecondValue}${
-      monsterDamagePerSecondValue === monsterDamageAilingPerSecondValue
-        ? ""
-        : ` (${monsterDamagePerSecondValue})`
-    }`}</IconDisplay>
-  );
 }

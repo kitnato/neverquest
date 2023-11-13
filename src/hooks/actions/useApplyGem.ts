@@ -33,7 +33,7 @@ export function useApplyGem() {
               .filter((current) => current.ID !== gem.ID)
               .map((current) => {
                 if (isGear(current) && current.ID === ID) {
-                  return { ...current, gems: current.gems.concat(gem) };
+                  return { ...current, gems: [...current.gems, gem] };
                 }
 
                 return current;

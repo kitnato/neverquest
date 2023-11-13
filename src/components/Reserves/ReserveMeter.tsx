@@ -63,7 +63,9 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
     <LabelledProgressBar
       attached="below"
       sibling={
-        isAiling ? <ProgressBar animated key={2} now={penalty} striped variant="secondary" /> : null
+        isAiling ? (
+          <ProgressBar animated key={2} now={penalty} striped variant="secondary" />
+        ) : undefined
       }
       value={(reserveValue / reserveMaximumAilingValue) * (100 - penalty)}
       variant="dark"

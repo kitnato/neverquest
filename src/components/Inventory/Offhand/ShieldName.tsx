@@ -31,8 +31,8 @@ export function ShieldName({
   const shieldEquippedValue = useRecoilValue(shieldEquipped);
   const shieldcraftSkill = useRecoilValue(isSkillAcquired("shieldcraft"));
 
-  const { block, level, name, stagger, staminaCost, weight } = shield;
-  const showComparison = shieldEquippedValue.ID !== shield.ID;
+  const { block, ID, level, name, stagger, staminaCost, weight } = shield;
+  const showComparison = ID !== shieldEquippedValue.ID;
 
   return (
     <OverlayTrigger
@@ -46,7 +46,7 @@ export function ShieldName({
                 comparison={
                   showComparison
                     ? { showing: "offhand", subtrahend: shieldEquippedValue.level }
-                    : null
+                    : undefined
                 }
                 level={level}
               />
@@ -79,7 +79,7 @@ export function ShieldName({
                         showing: "offhand",
                         subtrahend: shieldEquippedValue.staminaCost,
                       }
-                    : null
+                    : undefined
                 }
                 cost={staminaCost}
               />
@@ -153,7 +153,7 @@ export function ShieldName({
                   comparison={
                     showComparison
                       ? { showing: "offhand", subtrahend: shieldEquippedValue.weight }
-                      : null
+                      : undefined
                   }
                   weight={weight}
                 />

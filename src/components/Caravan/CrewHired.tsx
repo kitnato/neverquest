@@ -10,36 +10,34 @@ import type { Crew } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function CrewHired({ crew, setActive }: { crew: Crew; setActive: () => void }) {
-  const { current } = useRecoilValue(hireStatus(crew));
+  const hireStatusValue = useRecoilValue(hireStatus(crew));
   const stageValue = useRecoilValue(stage);
 
-  if (current !== "hired") {
-    return null;
-  }
-
-  const { Icon, interaction, monologues } = CREW[crew];
-  const monologue =
-    monologues[stageValue] ??
-    (() => {
-      for (let i = stageValue; i > 0; i--) {
-        if (monologues[i] !== undefined) {
-          return monologues[i];
+  if (hireStatusValue === "hired") {
+    const { Icon, interaction, monologues } = CREW[crew];
+    const monologue =
+      monologues[stageValue] ??
+      (() => {
+        for (let index = stageValue; index > 0; index--) {
+          if (monologues[index] !== undefined) {
+            return monologues[index];
+          }
         }
-      }
 
-      return monologues[1];
-    })() ??
-    "...";
+        return monologues[1];
+      })() ??
+      "...";
 
-  return (
-    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-      <IconDisplay description={`"${monologue}"`} Icon={Icon} tooltip="Caravan crew">
-        {capitalizeAll(crew)}
-      </IconDisplay>
+    return (
+      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+        <IconDisplay description={`"${monologue}"`} Icon={Icon} tooltip="Caravan crew">
+          {capitalizeAll(crew)}
+        </IconDisplay>
 
-      <Button onClick={setActive} variant="outline-dark">
-        {interaction}
-      </Button>
-    </div>
-  );
+        <Button onClick={setActive} variant="outline-dark">
+          {interaction}
+        </Button>
+      </div>
+    );
+  }
 }

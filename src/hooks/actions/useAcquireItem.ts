@@ -53,7 +53,7 @@ export function useAcquireItem() {
           progressQuest({ quest: "acquiringAntiqueCoin" });
         }
 
-        set(inventory, (current) => current.concat(item));
+        set(inventory, (current) => [...current, item]);
 
         const isShieldUnequipped = get(shield).name === SHIELD_NONE.name;
         const weaponValue = get(weapon);

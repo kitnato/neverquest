@@ -32,64 +32,62 @@ export function CombatRange() {
     stop: () => isEmpty,
   });
 
-  if (isEmpty) {
-    return null;
+  if (!isEmpty) {
+    return (
+      <IconDisplay Icon={IconRange} isAnimated tooltip="Range">
+        <Stack direction="horizontal" gap={1}>
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverHeader className="text-center">Range details</PopoverHeader>
+
+                <PopoverBody>
+                  <DetailsTable>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
+
+                      <td>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconRanged} size="small" />
+
+                          {isWeaponRanged
+                            ? formatNumber({ format: "time", value: weaponValue.range })
+                            : LABEL_EMPTY}
+                        </Stack>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconMarksmanship} size="small" />
+                          Marksmanship:
+                        </Stack>
+                      </td>
+
+                      <td>{`+${formatNumber({
+                        format: "percentage",
+                        value: marksmanshipValue,
+                      })}`}</td>
+                    </tr>
+                  </DetailsTable>
+                </PopoverBody>
+              </Popover>
+            }
+            trigger={archeryValue ? ["hover", "focus"] : []}
+          >
+            <span>
+              {archeryValue
+                ? rangeValue === 0
+                  ? LABEL_EMPTY
+                  : formatNumber({ format: "time", value: rangeValue })
+                : LABEL_EMPTY}
+            </span>
+          </OverlayTrigger>
+
+          <DeltasDisplay delta="range" />
+        </Stack>
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay Icon={IconRange} isAnimated tooltip="Range">
-      <Stack direction="horizontal" gap={1}>
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverHeader className="text-center">Range details</PopoverHeader>
-
-              <PopoverBody>
-                <DetailsTable>
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
-
-                    <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconRanged} size="small" />
-
-                        {isWeaponRanged
-                          ? formatNumber({ format: "time", value: weaponValue.range })
-                          : LABEL_EMPTY}
-                      </Stack>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconMarksmanship} size="small" />
-                        Marksmanship:
-                      </Stack>
-                    </td>
-
-                    <td>{`+${formatNumber({
-                      format: "percentage",
-                      value: marksmanshipValue,
-                    })}`}</td>
-                  </tr>
-                </DetailsTable>
-              </PopoverBody>
-            </Popover>
-          }
-          trigger={archeryValue ? ["hover", "focus"] : []}
-        >
-          <span>
-            {archeryValue
-              ? rangeValue === 0
-                ? LABEL_EMPTY
-                : formatNumber({ format: "time", value: rangeValue })
-              : LABEL_EMPTY}
-          </span>
-        </OverlayTrigger>
-
-        <DeltasDisplay delta="range" />
-      </Stack>
-    </IconDisplay>
-  );
 }

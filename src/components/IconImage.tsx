@@ -1,6 +1,6 @@
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-import type { IconImageProps } from "@neverquest/types/props";
+import type { IconImageProperties } from "@neverquest/types/components";
 
 export function IconImage({
   Icon,
@@ -10,7 +10,7 @@ export function IconImage({
   overlayPlacement,
   size,
   tooltip,
-}: IconImageProps) {
+}: IconImageProperties) {
   return (
     <OverlayTrigger
       overlay={<Tooltip>{tooltip}</Tooltip>}

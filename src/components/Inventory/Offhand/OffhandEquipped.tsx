@@ -18,31 +18,29 @@ export function OffhandEquipped() {
   const shieldValue = useRecoilValue(shield);
   const weaponValue = useRecoilValue(weapon);
 
-  if (!isShowingOffhand) {
-    return null;
-  }
+  if (isShowingOffhand) {
+    if (isRanged(weaponValue)) {
+      return <Ammunition />;
+    }
 
-  if (isRanged(weaponValue)) {
-    return <Ammunition />;
-  }
+    if (!isTraitAcquiredColossus && weaponValue.grip === "two-handed") {
+      return (
+        <span className="opacity-50">
+          <IconDisplay Icon={IconMelee} isAnimated>
+            {weaponValue.name}
+          </IconDisplay>
+        </span>
+      );
+    }
 
-  if (!isTraitAcquiredColossus && weaponValue.grip === "two-handed") {
     return (
-      <span className="opacity-50">
-        <IconDisplay Icon={IconMelee} isAnimated>
-          {weaponValue.name}
-        </IconDisplay>
-      </span>
+      <IconDisplay
+        Icon={shieldValue.name === SHIELD_NONE.name ? IconFist : IconShield}
+        isAnimated
+        tooltip="Equipped shield"
+      >
+        <ShieldName shield={shieldValue} />
+      </IconDisplay>
     );
   }
-
-  return (
-    <IconDisplay
-      Icon={shieldValue.name === SHIELD_NONE.name ? IconFist : IconShield}
-      isAnimated
-      tooltip="Equipped shield"
-    >
-      <ShieldName shield={shieldValue} />
-    </IconDisplay>
-  );
 }

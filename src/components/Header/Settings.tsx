@@ -56,7 +56,7 @@ export function Settings() {
               <SettingsSwitch label="Low-health warning" state={lowHealthWarning} />
 
               <SettingsSwitch
-                isDisabled={ownedItemKnapsack === null}
+                isDisabled={ownedItemKnapsack === undefined}
                 label="Auto-equip new gear"
                 state={autoEquip}
               />

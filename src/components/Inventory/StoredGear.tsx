@@ -15,7 +15,7 @@ export function StoredGear() {
 
   return inventoryValue
     .filter(isGear)
-    .filter((current) => !current.isEquipped)
+    .filter((current) => current.isEquipped === false)
     .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
     .map((current) => {
       const { ID } = current;

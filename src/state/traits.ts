@@ -9,6 +9,7 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 export const acquiredTraits = withStateKey("acquiredTraits", (key) =>
   selector({
     get: ({ get }) =>
+      // eslint-disable-next-line unicorn/no-array-reduce
       TRAIT_TYPES.reduce(
         (aggregator, current) => ({ ...aggregator, [current]: get(isTraitAcquired(current)) }),
         {} as Record<Trait, boolean>,
@@ -28,8 +29,8 @@ export const isTraitAcquired = withStateKey("isTraitAcquired", (key) =>
 );
 
 export const selectedTrait = withStateKey("selectedTrait", (key) =>
-  atom<Trait | null>({
-    default: null,
+  atom<Trait | undefined>({
+    default: undefined,
     effects: [handleLocalStorage({ key })],
     key,
   }),

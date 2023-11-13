@@ -36,85 +36,83 @@ export function BleedRating() {
     stop: () => isEmpty,
   });
 
-  if (isEmpty) {
-    return null;
+  if (!isEmpty) {
+    return (
+      <IconDisplay Icon={IconBleedRating} isAnimated tooltip="Bleed rating">
+        <Stack direction="horizontal" gap={1}>
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverHeader className="text-center">Bleed rating details</PopoverHeader>
+
+                <PopoverBody>
+                  <DetailsTable>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
+
+                      <td>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconBleed} size="small" />
+
+                          {`${
+                            bleedChanceValue === 0
+                              ? LABEL_EMPTY
+                              : formatNumber({ format: "percentage", value: bleedChanceValue })
+                          }`}
+                        </Stack>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconCruelty} size="small" />
+                          Cruelty:
+                        </Stack>
+                      </td>
+
+                      <td>{`${formatNumber({
+                        format: "percentage",
+                        value: crueltyValue,
+                      })} of total damage`}</td>
+                    </tr>
+
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
+
+                      <td>{formatNumber({ format: "time", value: duration })}</td>
+                    </tr>
+
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Ticks:</td>
+
+                      <td>{`${ticks} (every ${formatNumber({
+                        format: "time",
+                        value: bleedingDeltaLengthValue,
+                      })})`}</td>
+                    </tr>
+
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Bleed damage:</td>
+
+                      <td>{`${formatNumber({
+                        value: damageValue * crueltyValue,
+                      })} (${formatNumber({
+                        value: bleedDamageValue,
+                      })} per tick)`}</td>
+                    </tr>
+                  </DetailsTable>
+                </PopoverBody>
+              </Popover>
+            }
+            trigger={anatomyValue ? ["hover", "focus"] : []}
+          >
+            <span>{anatomyValue ? bleedRatingValue : LABEL_EMPTY}</span>
+          </OverlayTrigger>
+
+          <DeltasDisplay delta="bleedRating" />
+        </Stack>
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay Icon={IconBleedRating} isAnimated tooltip="Bleed rating">
-      <Stack direction="horizontal" gap={1}>
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverHeader className="text-center">Bleed rating details</PopoverHeader>
-
-              <PopoverBody>
-                <DetailsTable>
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
-
-                    <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconBleed} size="small" />
-
-                        {`${
-                          bleedChanceValue === 0
-                            ? LABEL_EMPTY
-                            : formatNumber({ format: "percentage", value: bleedChanceValue })
-                        }`}
-                      </Stack>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconCruelty} size="small" />
-                        Cruelty:
-                      </Stack>
-                    </td>
-
-                    <td>{`${formatNumber({
-                      format: "percentage",
-                      value: crueltyValue,
-                    })} of total damage`}</td>
-                  </tr>
-
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
-
-                    <td>{formatNumber({ format: "time", value: duration })}</td>
-                  </tr>
-
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Ticks:</td>
-
-                    <td>{`${ticks} (every ${formatNumber({
-                      format: "time",
-                      value: bleedingDeltaLengthValue,
-                    })})`}</td>
-                  </tr>
-
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Bleed damage:</td>
-
-                    <td>{`${formatNumber({
-                      value: damageValue * crueltyValue,
-                    })} (${formatNumber({
-                      value: bleedDamageValue,
-                    })} per tick)`}</td>
-                  </tr>
-                </DetailsTable>
-              </PopoverBody>
-            </Popover>
-          }
-          trigger={anatomyValue ? ["hover", "focus"] : []}
-        >
-          <span>{anatomyValue ? bleedRatingValue : LABEL_EMPTY}</span>
-        </OverlayTrigger>
-
-        <DeltasDisplay delta="bleedRating" />
-      </Stack>
-    </IconDisplay>
-  );
 }

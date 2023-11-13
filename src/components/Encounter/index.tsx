@@ -4,12 +4,12 @@ import { useRecoilValue } from "recoil";
 import { Caravan } from "@neverquest/components/Caravan";
 import { Wilderness } from "@neverquest/components/Encounter/Wilderness";
 import { Loot } from "@neverquest/components/Loot";
-import { isWilderness } from "@neverquest/state/encounter";
+import { location } from "@neverquest/state/encounter";
 
 export function Encounter() {
-  const isWildernessValue = useRecoilValue(isWilderness);
+  const locationValue = useRecoilValue(location);
 
-  if (isWildernessValue) {
+  if (locationValue === "wilderness") {
     return (
       <Stack gap={3}>
         <Wilderness />

@@ -37,7 +37,7 @@ export function Recovery() {
   });
 
   if (!isShowingRecovery) {
-    return null;
+    return;
   }
 
   return (

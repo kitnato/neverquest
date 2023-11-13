@@ -24,76 +24,75 @@ export function ExpandKnapsack() {
   const progressQuest = useProgressQuest();
   const transactEssence = useTransactEssence();
 
-  if (ownedItemKnapsack === null) {
-    return null;
-  }
+  if (ownedItemKnapsack !== undefined) {
+    const { capacity, ID } = ownedItemKnapsack as KnapsackItem;
+    const price = Math.ceil(
+      TAILORING_PRICE_MAXIMUM.knapsack * getGrowthSigmoid(capacity - (ENCUMBRANCE_CAPACITY - 1)),
+    );
+    const isAffordable = price <= essenceValue;
+    const canExpand = isAffordable && ownedItemKnapsack !== undefined;
 
-  const { capacity, ID } = ownedItemKnapsack as KnapsackItem;
-  const price = Math.ceil(
-    TAILORING_PRICE_MAXIMUM.knapsack * getGrowthSigmoid(capacity - (ENCUMBRANCE_CAPACITY - 1)),
-  );
-  const isAffordable = price <= essenceValue;
-  const canExpand = isAffordable && ownedItemKnapsack !== null;
+    return (
+      <Stack gap={3}>
+        <h6>Knapsack</h6>
 
-  return (
-    <Stack gap={3}>
-      <h6>Knapsack</h6>
+        <Encumbrance />
 
-      <Encumbrance />
-
-      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        <IconDisplay
-          description={`Increases maximum encumbrance by ${TAILORING_EXPANSION.knapsack}.`}
-          Icon={IconTailoring}
-          tooltip="Tailoring"
-        >
-          Add pockets
-        </IconDisplay>
-
-        <Stack direction="horizontal" gap={3}>
-          <IconDisplay Icon={IconEssence} tooltip="Price">
-            {formatNumber({ value: price })}
+        <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+          <IconDisplay
+            description={`Increases maximum encumbrance by ${TAILORING_EXPANSION.knapsack}.`}
+            Icon={IconTailoring}
+            tooltip="Tailoring"
+          >
+            Add pockets
           </IconDisplay>
 
-          <OverlayTrigger
-            overlay={
-              <Tooltip>
-                {ownedItemKnapsack === null && <div>Knapsack required.</div>}
+          <Stack direction="horizontal" gap={3}>
+            <IconDisplay Icon={IconEssence} tooltip="Price">
+              {formatNumber({ value: price })}
+            </IconDisplay>
 
-                {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
-              </Tooltip>
-            }
-            trigger={canExpand ? [] : ["hover", "focus"]}
-          >
-            <span>
-              <Button
-                disabled={!canExpand}
-                onClick={() => {
-                  transactEssence(-price);
-                  setInventory((currentInventory) =>
-                    currentInventory.map((currentItem) =>
-                      currentItem.ID === ID
-                        ? {
-                            ...currentItem,
-                            capacity:
-                              (currentItem as KnapsackItem).capacity + TAILORING_EXPANSION.knapsack,
-                          }
-                        : currentItem,
-                    ),
-                  );
-                  progressQuest({
-                    amount: TAILORING_EXPANSION.knapsack,
-                    quest: "knapsackExpanding",
-                  });
-                }}
-                variant="outline-dark"
-              >
-                Expand
-              </Button>
-            </span>
-          </OverlayTrigger>
-        </Stack>
-      </div>
-    </Stack>
-  );
+            <OverlayTrigger
+              overlay={
+                <Tooltip>
+                  {ownedItemKnapsack === undefined && <div>Knapsack required.</div>}
+
+                  {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
+                </Tooltip>
+              }
+              trigger={canExpand ? [] : ["hover", "focus"]}
+            >
+              <span>
+                <Button
+                  disabled={!canExpand}
+                  onClick={() => {
+                    transactEssence(-price);
+                    setInventory((currentInventory) =>
+                      currentInventory.map((currentItem) =>
+                        currentItem.ID === ID
+                          ? {
+                              ...currentItem,
+                              capacity:
+                                (currentItem as KnapsackItem).capacity +
+                                TAILORING_EXPANSION.knapsack,
+                            }
+                          : currentItem,
+                      ),
+                    );
+                    progressQuest({
+                      amount: TAILORING_EXPANSION.knapsack,
+                      quest: "knapsackExpanding",
+                    });
+                  }}
+                  variant="outline-dark"
+                >
+                  Expand
+                </Button>
+              </span>
+            </OverlayTrigger>
+          </Stack>
+        </div>
+      </Stack>
+    );
+  }
 }

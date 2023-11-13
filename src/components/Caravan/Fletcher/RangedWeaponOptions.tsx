@@ -126,7 +126,7 @@ export function RangedWeaponOptions() {
 
       <hr />
 
-      {fletcherInventoryValue === null ? (
+      {fletcherInventoryValue === undefined ? (
         <CraftGear
           onCraft={() =>
             setFletcherInventory(
@@ -139,8 +139,8 @@ export function RangedWeaponOptions() {
                   weaponLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
                     ? ["lowQuality"]
                     : weaponLevel === maximumWeaponLevel
-                    ? ["highQuality"]
-                    : undefined,
+                      ? ["highQuality"]
+                      : undefined,
               }),
             )
           }

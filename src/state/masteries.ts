@@ -45,6 +45,7 @@ export const masteryStatistic = withStateKey("masteryStatistic", (key) =>
 export const unlockedMasteries = withStateKey("unlockedMasteries", (key) =>
   selector({
     get: ({ get }) =>
+      // eslint-disable-next-line unicorn/no-array-reduce
       MASTERY_TYPES.reduce(
         (aggregator, current) => ({ ...aggregator, [current]: get(isMasteryUnlocked(current)) }),
         {} as Record<Mastery, boolean>,

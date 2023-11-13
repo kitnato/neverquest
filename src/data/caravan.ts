@@ -16,7 +16,7 @@ import type {
   WeaponModality,
 } from "@neverquest/LOCRAN/types";
 import type { InfusableItem, TrinketItem } from "@neverquest/types";
-import type { SVGIcon } from "@neverquest/types/props";
+import type { SVGIcon } from "@neverquest/types/components";
 import type { Crew, Grip } from "@neverquest/types/unions";
 
 export const AMMUNITION_PRICE = 10;
@@ -110,7 +110,7 @@ export const CREW: Record<
       101: "You shouldn't be h̷̡̔e̵̖̍r̶͍͝e̵̮͂.",
       200: "Ṅ̷̲͓̙̖͇͖͇̖̀͐̓̈́͊͐̽̂͝ǒ̵͖̳͕͖͖͖͍̝̳̦̗t̸̖͖͚̬̠͜͝ͅḫ̸̓͋̂̾ȋ̵̜͍̙̠͍̦̲͔̺̈́n̴̞͙̉̃͆͝͝g̷̻͉͓͂̊̊͑͂̋͂̍͒͜ ̴͕̮͉̾i̵̡͙̜̭̦͎̿́͂̈̆̍̀̚͝͝s̶̛̖̯̮̻̾̊̏͑͌̅̋̆͝ ̵̺͖͉̤̰̤͚̀̾͌͆͊̈́̏͝ṟ̷͇̦͓͙̹̟͋̐̈́̅̒͜ë̸́͌͘͜ͅą̴̼͖͉̘͙͝l̸̖̩̖̈̂̀͝ ̸̨̛͍͈͔̥̪̥͖̩̒͂̐̃̀̀̿͝.̴̻͈̠̱̮̇́.̵̩̬̞̬̮̼̙̲̩̇̏̈́͋̒̃̈́̽̂͘͝.̴̼͈͍͈̳͂",
     },
-    price: 0,
+    price: 1,
     requiredStage: 0,
   },
   occultist: {

@@ -27,17 +27,10 @@ export const isStageCompleted = withStateKey("isStageCompleted", (key) =>
   }),
 );
 
-export const isWilderness = withStateKey("isWilderness", (key) =>
-  selector({
-    get: ({ get }) => get(location) === "wilderness",
-    key,
-  }),
-);
-
 export const locationName = withStateKey("locationName", (key) =>
   selector({
     get: ({ get }) => {
-      if (get(isWilderness)) {
+      if (get(location) === "wilderness") {
         return get(wildernesses)[get(stage) - 1];
       }
 

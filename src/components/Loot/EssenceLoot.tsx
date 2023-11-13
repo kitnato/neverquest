@@ -17,17 +17,15 @@ export function EssenceLoot() {
     state: essenceLoot,
   });
 
-  if (essenceLootValue === 0) {
-    return null;
+  if (essenceLootValue > 0) {
+    return (
+      <Stack className={getAnimationClass({ name: "flipInX" })} direction="horizontal" gap={1}>
+        <IconDisplay Icon={IconEssence} tooltip="Looted essence">
+          {formatNumber({ value: essenceLootValue })}
+        </IconDisplay>
+
+        <DeltasDisplay delta="essenceLoot" />
+      </Stack>
+    );
   }
-
-  return (
-    <Stack className={getAnimationClass({ name: "flipInX" })} direction="horizontal" gap={1}>
-      <IconDisplay Icon={IconEssence} tooltip="Looted essence">
-        {formatNumber({ value: essenceLootValue })}
-      </IconDisplay>
-
-      <DeltasDisplay delta="essenceLoot" />
-    </Stack>
-  );
 }

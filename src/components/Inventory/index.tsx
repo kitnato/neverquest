@@ -16,6 +16,7 @@ import { InfusionInspect } from "@neverquest/components/Inventory/Usable/Infusio
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { inventory } from "@neverquest/state/inventory";
+import type { GemItem } from "@neverquest/types";
 import {
   isArmor,
   isConsumableItem,
@@ -34,8 +35,8 @@ export function Inventory() {
   const toggleEquipGear = useToggleEquipGear();
 
   const equippedGear = inventoryValue.filter((current) => isGear(current) && current.isEquipped);
-  const equippedGearIDs = equippedGear.map(({ ID }) => ID);
-  const storedItems = inventoryValue.filter(({ ID }) => !equippedGearIDs.includes(ID));
+  const equippedGearIDs = new Set(equippedGear.map(({ ID }) => ID));
+  const storedItems = inventoryValue.filter(({ ID }) => !equippedGearIDs.has(ID));
 
   return (
     <Stack gap={5}>
@@ -79,7 +80,7 @@ export function Inventory() {
             const { ID, name } = current;
 
             if (name === "knapsack") {
-              return null;
+              return;
             }
 
             return (
@@ -97,7 +98,7 @@ export function Inventory() {
                     }
 
                     default: {
-                      return null;
+                      return;
                     }
                   }
                 })()}
@@ -108,23 +109,27 @@ export function Inventory() {
         {storedItems
           .filter(isInfusableItem)
           .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
-          .map((current) => (
-            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.ID}>
-              <Usable item={current} />
+          .map((current) => {
+            const { ID, name } = current;
 
-              <InfusionInspect infusable={current.name} />
-            </div>
-          ))}
+            return (
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
+                <Usable item={current} />
+
+                <InfusionInspect infusable={name} />
+              </div>
+            );
+          })}
 
         {[
           ...stackItems(
             storedItems
-              .filter(isConsumableItem)
+              .filter((element) => isConsumableItem(element))
               .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
           ),
           ...stackItems(
             storedItems
-              .filter(isGem)
+              .filter((element) => isGem(element))
               .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
           ),
         ].map(({ item, stack }) => {
@@ -149,10 +154,10 @@ export function Inventory() {
                     return <Salve ID={ID} />;
                   }
                   case "phylactery": {
-                    return null;
+                    return;
                   }
                   default: {
-                    return <ApplyGem gem={item} />;
+                    return <ApplyGem gem={item as GemItem} />;
                   }
                 }
               })()}

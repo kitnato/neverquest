@@ -15,10 +15,10 @@ import IconResting from "@neverquest/icons/resting.svg?react";
 import IconRetreat from "@neverquest/icons/retreat.svg?react";
 import { areAttributesAffordable } from "@neverquest/state/attributes";
 import { hasEnoughAmmunition, isAttacking, isGameOver } from "@neverquest/state/character";
-import { isStageCompleted, isWilderness } from "@neverquest/state/encounter";
+import { isStageCompleted, location } from "@neverquest/state/encounter";
 import { isHealthLow } from "@neverquest/state/reserves";
 import { lowHealthWarning } from "@neverquest/state/settings";
-import type { SVGIcon } from "@neverquest/types/props";
+import type { SVGIcon } from "@neverquest/types/components";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function AttackButton() {
@@ -27,8 +27,8 @@ export function AttackButton() {
   const isHealthLowValue = useRecoilValue(isHealthLow);
   const isGameOverValue = useRecoilValue(isGameOver);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
-  const isWildernessValue = useRecoilValue(isWilderness);
   const hasEnoughAmmunitionValue = useRecoilValue(hasEnoughAmmunition);
+  const locationValue = useRecoilValue(location);
   const showLowHealthWarningValue = useRecoilValue(lowHealthWarning);
 
   const toggleAttack = useToggleAttack();
@@ -37,7 +37,7 @@ export function AttackButton() {
     isInfinite: true,
     name: "pulse",
   });
-  const isResting = isGameOverValue || isStageCompletedValue || !isWildernessValue;
+  const isResting = isGameOverValue || isStageCompletedValue || locationValue === "caravan";
   const showWarning =
     isAttackingValue && isHealthLowValue && !isResting && showLowHealthWarningValue;
 

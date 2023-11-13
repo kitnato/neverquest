@@ -24,12 +24,16 @@ export function useAcquireSkill() {
         set(isShowing("skills"), true);
 
         if (shows !== undefined) {
-          shows.forEach((current) => set(isShowing(current), true));
+          for (const show of shows) {
+            set(isShowing(show), true);
+          }
         }
 
-        unlocksAttributes?.forEach((attribute) => {
-          set(isAttributeUnlocked(attribute), { current: true });
-        });
+        if (unlocksAttributes !== undefined) {
+          for (const attribute of unlocksAttributes) {
+            set(isAttributeUnlocked(attribute), true);
+          }
+        }
 
         if (unlocksMastery !== undefined) {
           set(isShowing("masteries"), true);

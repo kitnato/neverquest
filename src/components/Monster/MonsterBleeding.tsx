@@ -56,13 +56,11 @@ export function MonsterBleeding() {
     stop: !isMonsterBleedingValue,
   });
 
-  if (!canReceiveBleeding) {
-    return null;
+  if (canReceiveBleeding) {
+    return (
+      <IconDisplay Icon={IconBleeding} tooltip="Bleeding">
+        <MonsterAilmentMeter ailment="bleeding" totalDuration={bleedValue.duration} />
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay Icon={IconBleeding} tooltip="Bleeding">
-      <MonsterAilmentMeter ailment="bleeding" totalDuration={bleedValue.duration} />
-    </IconDisplay>
-  );
 }

@@ -52,10 +52,13 @@ export const canApplyGem = withStateKey("canApplyGem", (key) =>
           parameter === "armor"
             ? get(armor).gems
             : parameter === "shield"
-            ? get(shield).gems
-            : get(weapon).gems;
+              ? get(shield).gems
+              : get(weapon).gems;
 
-        return length < GEMS_MAXIMUM && (GEM_FITTING_COST[length] ?? Infinity) <= get(essence);
+        return (
+          length < GEMS_MAXIMUM &&
+          (GEM_FITTING_COST[length] ?? Number.POSITIVE_INFINITY) <= get(essence)
+        );
       },
     key,
   }),
@@ -84,28 +87,25 @@ export const elementalEffects = withStateKey("elementalEffects", (key) =>
 
       const armorValue = get(armor);
 
-      stackItems(armorValue.gems).forEach(
-        ({ item, stack }) =>
-          (effects.armor[GEM_ELEMENTALS[item.name]] = {
-            damage: Math.ceil(armorValue.protection * (GEM_DAMAGE[stack - 1] ?? 0)),
-            duration: GEM_DURATION[stack - 1] ?? 0,
-          }),
-      );
+      for (const { item, stack } of stackItems(armorValue.gems)) {
+        effects.armor[GEM_ELEMENTALS[item.name]] = {
+          damage: Math.ceil(armorValue.protection * (GEM_DAMAGE[stack - 1] ?? 0)),
+          duration: GEM_DURATION[stack - 1] ?? 0,
+        };
+      }
 
-      stackItems(get(shield).gems).forEach(
-        ({ item, stack }) =>
-          (effects.shield[GEM_ELEMENTALS[item.name]] = GEM_ENHANCEMENT[stack - 1] ?? 0),
-      );
+      for (const { item, stack } of stackItems(get(shield).gems)) {
+        effects.shield[GEM_ELEMENTALS[item.name]] = GEM_ENHANCEMENT[stack - 1] ?? 0;
+      }
 
       const weaponValue = get(weapon);
 
-      stackItems(weaponValue.gems).forEach(
-        ({ item, stack }) =>
-          (effects.weapon[GEM_ELEMENTALS[item.name]] = {
-            damage: Math.ceil(weaponValue.damage * (GEM_DAMAGE[stack - 1] ?? 0)),
-            duration: GEM_DURATION[stack - 1] ?? 0,
-          }),
-      );
+      for (const { item, stack } of stackItems(weaponValue.gems)) {
+        effects.weapon[GEM_ELEMENTALS[item.name]] = {
+          damage: Math.ceil(weaponValue.damage * (GEM_DAMAGE[stack - 1] ?? 0)),
+          duration: GEM_DURATION[stack - 1] ?? 0,
+        };
+      }
 
       return effects;
     },

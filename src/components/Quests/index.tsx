@@ -9,7 +9,7 @@ import IconRoutine from "@neverquest/icons/routine.svg?react";
 import IconTriumph from "@neverquest/icons/triumph.svg?react";
 import { isShowing } from "@neverquest/state/isShowing";
 import { canUseJournal } from "@neverquest/state/quests";
-import type { TabsData } from "@neverquest/types/props";
+import type { TabsData } from "@neverquest/types/components";
 import { QUEST_BONUS_TYPES } from "@neverquest/types/unions";
 
 const TABS: TabsData = [

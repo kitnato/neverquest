@@ -110,13 +110,12 @@ export function generate({
     if (suffixChoice !== undefined) {
       // If the chosen suffix is a creature name is can be plural alongside a potential article.
       if (typeof suffixChoice === "string") {
-        if (Math.random() <= PLURALIZE_CHANCE) {
-          formattedSuffix = `${Math.random() <= ARTICLE_CHANCE ? "the " : ""}${capitalizeAll(
-            pluralize(suffixChoice),
-          )}`;
-        } else {
-          formattedSuffix = `the ${capitalizeAll(suffixChoice)}`;
-        }
+        formattedSuffix =
+          Math.random() <= PLURALIZE_CHANCE
+            ? `${Math.random() <= ARTICLE_CHANCE ? "the " : ""}${capitalizeAll(
+                pluralize(suffixChoice),
+              )}`
+            : `the ${capitalizeAll(suffixChoice)}`;
       } else {
         formattedSuffix = `${
           suffixChoice[category]?.includes("articledSuffix") ? "the " : ""
@@ -129,7 +128,7 @@ export function generate({
     }
   }
 
-  return `${prefix !== "" ? `${prefix} ` : ""}${capitalizeAll(name)}${
-    suffix !== "" ? ` ${suffix}` : ""
+  return `${prefix === "" ? "" : `${prefix} `}${capitalizeAll(name)}${
+    suffix === "" ? "" : ` ${suffix}`
   }`;
 }

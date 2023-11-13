@@ -12,30 +12,28 @@ export function Masteries() {
   const isShowingMasteries = useRecoilValue(isShowing("masteries"));
   const unlockedMasteriesValue = useRecoilValue(unlockedMasteries);
 
-  if (!isShowingMasteries) {
-    return null;
+  if (isShowingMasteries) {
+    return (
+      <Accordion defaultActiveKey="0">
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>
+            <IconDisplay Icon={IconMasteries} tooltip="Masteries">
+              Masteries
+            </IconDisplay>
+          </Accordion.Header>
+
+          <Accordion.Body>
+            <Stack gap={3}>
+              {Object.entries(unlockedMasteriesValue)
+                .toSorted(([current1], [current2]) => current1.localeCompare(current2))
+                .toSorted(([, current1], [, current2]) => Number(current2) - Number(current1))
+                .map(([current]) => (
+                  <MasteryDisplay key={current} mastery={current as Mastery} />
+                ))}
+            </Stack>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+    );
   }
-
-  return (
-    <Accordion defaultActiveKey="0">
-      <Accordion.Item eventKey="0">
-        <Accordion.Header>
-          <IconDisplay Icon={IconMasteries} tooltip="Masteries">
-            Masteries
-          </IconDisplay>
-        </Accordion.Header>
-
-        <Accordion.Body>
-          <Stack gap={3}>
-            {Object.entries(unlockedMasteriesValue)
-              .toSorted(([current1], [current2]) => current1.localeCompare(current2))
-              .toSorted(([, current1], [, current2]) => Number(current2) - Number(current1))
-              .map(([current]) => (
-                <MasteryDisplay key={current} mastery={current as Mastery} />
-              ))}
-          </Stack>
-        </Accordion.Body>
-      </Accordion.Item>
-    </Accordion>
-  );
 }

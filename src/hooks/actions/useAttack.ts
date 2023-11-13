@@ -61,6 +61,7 @@ export function useAttack() {
         const weaponValue = get(weapon);
         const { gearClass, staminaCost } = weaponValue;
         const isWeaponRanged = isRanged(weaponValue);
+        // eslint-disable-next-line unicorn/consistent-destructuring
         const isWeaponTwoHanded = isMelee(weaponValue) && weaponValue.grip === "two-handed";
         const hasInflictedCritical =
           (isWeaponRanged && get(isTraitAcquired("sharpshooter")) && get(distance) > 0) ||
@@ -87,15 +88,17 @@ export function useAttack() {
           });
 
           if (isWeaponRanged) {
+            const { ammunitionCost } = weaponValue;
+
             set(inventory, (currentInventory) =>
               currentInventory.map((currentItem) => {
                 const ownedAmmunitionPouch = get(ownedItem("ammunition pouch"));
 
-                return ownedAmmunitionPouch !== null && currentItem.ID === ownedAmmunitionPouch.ID
+                return ownedAmmunitionPouch !== undefined &&
+                  currentItem.ID === ownedAmmunitionPouch.ID
                   ? {
                       ...currentItem,
-                      current:
-                        (currentItem as AmmunitionPouchItem).current - weaponValue.ammunitionCost,
+                      current: (currentItem as AmmunitionPouchItem).current - ammunitionCost,
                     }
                   : currentItem;
               }),
@@ -178,9 +181,9 @@ export function useAttack() {
             });
           }
 
-          ELEMENTAL_TYPES.forEach((elemental) =>
-            inflictElementalAilment({ elemental, slot: "weapon" }),
-          );
+          for (const elemental of ELEMENTAL_TYPES) {
+            inflictElementalAilment({ elemental, slot: "weapon" });
+          }
 
           changeMonsterHealth({
             damageType: hasInflictedCritical ? "critical" : undefined,

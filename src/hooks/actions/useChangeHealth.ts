@@ -51,7 +51,7 @@ export function useChangeHealth() {
         if (newHealth <= 0) {
           const phylactery = get(ownedItem("phylactery"));
 
-          if (phylactery === null) {
+          if (phylactery === undefined) {
             newHealth = 0;
 
             set(isGameOver, true);

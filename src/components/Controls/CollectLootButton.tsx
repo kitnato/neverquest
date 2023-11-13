@@ -5,7 +5,7 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { useCollectLoot } from "@neverquest/hooks/actions/useCollectLoot";
 import IconLoot from "@neverquest/icons/loot.svg?react";
 import { isGameOver } from "@neverquest/state/character";
-import { isStageCompleted, isWilderness } from "@neverquest/state/encounter";
+import { isStageCompleted, location } from "@neverquest/state/encounter";
 import { hasLooted, itemsLoot } from "@neverquest/state/resources";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -13,7 +13,7 @@ export function CollectLootButton() {
   const hasLootedValue = useRecoilValue(hasLooted);
   const isGameOverValue = useRecoilValue(isGameOver);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
-  const isWildernessValue = useRecoilValue(isWilderness);
+  const locationValue = useRecoilValue(location);
   const itemsLootValue = useRecoilValue(itemsLoot);
 
   const gatherLoot = useCollectLoot();
@@ -21,7 +21,7 @@ export function CollectLootButton() {
   if (
     (!hasLootedValue || itemsLootValue.length > 0) &&
     isStageCompletedValue &&
-    isWildernessValue
+    locationValue === "wilderness"
   ) {
     return (
       <OverlayTrigger overlay={<Tooltip>Collect loot</Tooltip>}>

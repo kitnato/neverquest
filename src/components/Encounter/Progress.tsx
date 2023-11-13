@@ -6,11 +6,11 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconProgress from "@neverquest/icons/progress.svg?react";
-import { isWilderness, progress, progressMaximum } from "@neverquest/state/encounter";
+import { location, progress, progressMaximum } from "@neverquest/state/encounter";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Progress() {
-  const isWildernessValue = useRecoilValue(isWilderness);
+  const locationValue = useRecoilValue(location);
   const progressValue = useRecoilValue(progress);
   const progressMaximumValue = useRecoilValue(progressMaximum);
 
@@ -20,7 +20,7 @@ export function Progress() {
     stop: ({ current }) => current === 0,
   });
 
-  if (isWildernessValue) {
+  if (locationValue === "wilderness") {
     return (
       <IconDisplay
         Icon={IconProgress}

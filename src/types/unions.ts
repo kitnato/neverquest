@@ -364,7 +364,6 @@ export type StateKey =
   | "isStageStarted"
   | "isStaminaAtMaximum"
   | "isTraitAcquired"
-  | "isWilderness"
   | "itemsAcquired"
   | "itemsLoot"
   | "level"

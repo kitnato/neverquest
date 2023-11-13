@@ -8,7 +8,7 @@ import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { isAttacking } from "@neverquest/state/character";
-import { isWilderness, progress, progressMaximum, stage } from "@neverquest/state/encounter";
+import { location, progress, progressMaximum, stage } from "@neverquest/state/encounter";
 import { isImmortal } from "@neverquest/state/reserves";
 import { essenceLoot } from "@neverquest/state/resources";
 import { SKILL_TYPES } from "@neverquest/types/unions";
@@ -18,7 +18,7 @@ declare const window: Window & {
 };
 
 export function CheatQuest() {
-  const isWildernessValue = useRecoilValue(isWilderness);
+  const locationValue = useRecoilValue(location);
   const stageValue = useRecoilValue(stage);
   const progressMaximumValue = useRecoilValue(progressMaximum);
 
@@ -78,7 +78,7 @@ export function CheatQuest() {
 
             resetWilderness();
 
-            if (isWildernessValue) {
+            if (locationValue === "wilderness") {
               setIsAttacking(false);
               resetEssenceLoot();
               toggleLocation();
@@ -98,7 +98,7 @@ export function CheatQuest() {
     acquireSkill,
     generateMerchantInventory,
     increaseStage,
-    isWildernessValue,
+    locationValue,
     stageValue,
     progressMaximumValue,
     resetEssenceLoot,

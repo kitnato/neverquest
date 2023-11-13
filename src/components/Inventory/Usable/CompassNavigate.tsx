@@ -21,7 +21,7 @@ import IconNavigation from "@neverquest/icons/navigation.svg?react";
 import {
   isStageCompleted,
   isStageStarted,
-  isWilderness,
+  location,
   stage,
   wildernesses,
 } from "@neverquest/state/encounter";
@@ -32,7 +32,7 @@ export function CompassNavigate() {
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const isStageStartedValue = useRecoilValue(isStageStarted);
-  const isWildernessValue = useRecoilValue(isWilderness);
+  const locationValue = useRecoilValue(location);
   const [stageValue, setStage] = useRecoilState(stage);
   const wildernessesValue = useRecoilValue(wildernesses);
 
@@ -41,7 +41,8 @@ export function CompassNavigate() {
   const progressQuest = useProgressQuest();
   const resetWilderness = useResetWilderness();
 
-  const canNavigate = (!isStageStartedValue || isStageCompletedValue) && isWildernessValue;
+  const canNavigate =
+    (!isStageStartedValue || isStageCompletedValue) && locationValue === "wilderness";
 
   return (
     <>

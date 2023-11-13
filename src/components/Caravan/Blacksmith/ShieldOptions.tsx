@@ -17,7 +17,7 @@ import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { SHIELD_CLASS_TYPES, type ShieldClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
-import { allowNSFW } from "@neverquest/state/settings";
+import { allowProfanity } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateShield } from "@neverquest/utilities/generators";
@@ -29,7 +29,7 @@ import {
 } from "@neverquest/utilities/getters";
 
 export function ShieldOptions() {
-  const allowNSFWValue = useRecoilValue(allowNSFW);
+  const allowProfanityValue = useRecoilValue(allowProfanity);
   const [{ shield: craftedShield }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const shieldcraftValue = useRecoilValue(isSkillAcquired("shieldcraft"));
   const stageValue = useRecoilValue(stage);
@@ -117,7 +117,7 @@ export function ShieldOptions() {
             setBlacksmithInventory((current) => ({
               ...current,
               shield: generateShield({
-                allowNSFW: allowNSFWValue,
+                allowProfanity: allowProfanityValue,
                 gearClass: shieldClass,
                 level: shieldLevel,
                 nameStructure: getNameStructure(),

@@ -17,7 +17,7 @@ export const CREATURES: BaseData[] = [
     name: "alchemist",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "alcoholic",
   },
   {
@@ -36,7 +36,7 @@ export const CREATURES: BaseData[] = [
     name: "annihilator",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "anus",
   },
   {
@@ -70,7 +70,7 @@ export const CREATURES: BaseData[] = [
     name: "arthropod",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "ass",
   },
   {
@@ -167,7 +167,7 @@ export const CREATURES: BaseData[] = [
     name: "butcher",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "butthole",
   },
   {
@@ -225,7 +225,7 @@ export const CREATURES: BaseData[] = [
     name: "colossus",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "coprolite",
   },
   {
@@ -238,7 +238,7 @@ export const CREATURES: BaseData[] = [
     name: "convict",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "coprophage",
   },
   {
@@ -248,7 +248,7 @@ export const CREATURES: BaseData[] = [
     name: "coward",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "crackhead",
   },
   {
@@ -261,7 +261,7 @@ export const CREATURES: BaseData[] = [
     name: "crusader",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "cuckold",
   },
   {
@@ -289,7 +289,7 @@ export const CREATURES: BaseData[] = [
     name: "devil",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "diarrhea",
   },
   {
@@ -302,14 +302,14 @@ export const CREATURES: BaseData[] = [
     name: "doll",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "dominatrix",
   },
   {
     name: "doorknob",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "douchebag",
   },
   {
@@ -376,15 +376,15 @@ export const CREATURES: BaseData[] = [
     name: "farmer",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "fart",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "farter",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "feces",
   },
   {
@@ -442,7 +442,7 @@ export const CREATURES: BaseData[] = [
     name: "giant",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "gimp",
   },
   {
@@ -458,7 +458,7 @@ export const CREATURES: BaseData[] = [
     name: "goo",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "gooch",
   },
   {
@@ -522,7 +522,7 @@ export const CREATURES: BaseData[] = [
     name: "hothead",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "humper",
   },
   {
@@ -568,7 +568,7 @@ export const CREATURES: BaseData[] = [
     name: "juggler",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "junkie",
   },
   {
@@ -602,7 +602,7 @@ export const CREATURES: BaseData[] = [
     name: "lich",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "licker",
   },
   {
@@ -645,7 +645,7 @@ export const CREATURES: BaseData[] = [
     name: "mannequin",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "manspreader",
   },
   {
@@ -703,7 +703,7 @@ export const CREATURES: BaseData[] = [
     name: "monstrosity",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "muff",
   },
   {
@@ -770,7 +770,7 @@ export const CREATURES: BaseData[] = [
     name: "outsider",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "ovaries",
   },
   {
@@ -849,7 +849,7 @@ export const CREATURES: BaseData[] = [
     name: "ranger",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "rapist",
   },
   {
@@ -904,7 +904,7 @@ export const CREATURES: BaseData[] = [
     name: "scribe",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "scrotum",
   },
   {
@@ -953,7 +953,7 @@ export const CREATURES: BaseData[] = [
     name: "slime",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "smegma",
   },
   {
@@ -1014,7 +1014,7 @@ export const CREATURES: BaseData[] = [
     name: "t-rex",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "tampon",
   },
   {
@@ -1027,7 +1027,7 @@ export const CREATURES: BaseData[] = [
     name: "terrorist",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "testicles",
   },
   {
@@ -1043,7 +1043,7 @@ export const CREATURES: BaseData[] = [
     name: "toadstool",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "toilet",
   },
   {
@@ -1062,11 +1062,11 @@ export const CREATURES: BaseData[] = [
     name: "tumor",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "turd",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "twink",
   },
   {

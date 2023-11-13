@@ -48,12 +48,12 @@ export type ArtifactQuery =
       subtype?: WeaponModality;
     });
 
-export type BaseData = { isNSFW?: boolean; name: string };
+export type BaseData = { isProfanity?: boolean; name: string };
 
 export type Category = "artifact" | "creature" | "location";
 
 export type GeneratorParameters = Partial<{
-  allowNSFW: boolean;
+  allowProfanity: boolean;
   nameStructure: NameStructure;
   prefixTags: AffixTag[];
   suffixTags: AffixTag[];

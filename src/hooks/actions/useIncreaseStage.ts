@@ -7,7 +7,7 @@ import { hireStatus } from "@neverquest/state/caravan";
 import { stage, wildernesses } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { questProgress } from "@neverquest/state/quests";
-import { allowNSFW } from "@neverquest/state/settings";
+import { allowProfanity } from "@neverquest/state/settings";
 import { getNameStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useIncreaseStage() {
@@ -37,7 +37,7 @@ export function useIncreaseStage() {
         set(wildernesses, (current) => [
           ...current,
           generateLocation({
-            allowNSFW: get(allowNSFW),
+            allowProfanity: get(allowProfanity),
             nameStructure: getNameStructure(),
           }),
         ]);

@@ -8,7 +8,7 @@ import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
 import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import { hireStatus } from "@neverquest/state/caravan";
 import { wildernesses } from "@neverquest/state/encounter";
-import { allowNSFW } from "@neverquest/state/settings";
+import { allowProfanity } from "@neverquest/state/settings";
 import { ATTRIBUTE_TYPES, CREW_TYPES } from "@neverquest/types/unions";
 import { getNameStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -41,7 +41,7 @@ export function useInitialize() {
 
           const newWilderness = [
             generateLocation({
-              allowNSFW: get(allowNSFW),
+              allowProfanity: get(allowProfanity),
               nameStructure: getNameStructure(),
             }),
           ];

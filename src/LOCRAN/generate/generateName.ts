@@ -4,16 +4,16 @@ import { NAMES } from "@neverquest/LOCRAN/data/names";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function generateName({
-  allowNSFW = false,
+  allowProfanity = false,
   hasTitle = false,
 }: {
-  allowNSFW?: boolean;
+  allowProfanity?: boolean;
   hasTitle?: boolean;
 }) {
   const filteredNames = NAMES.filter((current) => {
-    const isNSFW = Boolean(current.isNSFW);
+    const isProfanity = Boolean(current.isProfanity);
 
-    return allowNSFW ? isNSFW || !isNSFW : !isNSFW;
+    return allowProfanity ? isProfanity || !isProfanity : !isProfanity;
   });
   const prefixes = filteredNames.filter(({ affix }) => affix.includes("prefix"));
   const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
@@ -29,14 +29,14 @@ export function generateName({
   let title;
 
   if (hasTitle) {
-    const filteredAffixes = AFFIXES.filter(({ creature, isNSFW, name }) =>
+    const filteredAffixes = AFFIXES.filter(({ creature, isProfanity, name }) =>
       name === prefix.name || name === suffix.name || name.slice(-3) === "ing"
         ? false
         : (creature?.includes("prefix") || creature?.includes("suffix")) &&
-          (allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW),
+          (allowProfanity ? Boolean(isProfanity) || !isProfanity : !isProfanity),
     );
-    const filteredCreatures = CREATURES.filter(({ isNSFW }) =>
-      allowNSFW ? Boolean(isNSFW) || !isNSFW : !isNSFW,
+    const filteredCreatures = CREATURES.filter(({ isProfanity }) =>
+      allowProfanity ? Boolean(isProfanity) || !isProfanity : !isProfanity,
     );
     const filteredTitles = [...filteredAffixes, ...filteredCreatures];
     title = filteredTitles[Math.floor(Math.random() * filteredTitles.length)];

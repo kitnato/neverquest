@@ -3,7 +3,7 @@ import type { NameData } from "@neverquest/LOCRAN/types";
 export const NAMES: NameData[] = [
   {
     affix: ["prefix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "anal",
   },
   {
@@ -12,7 +12,7 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "anus",
   },
   {
@@ -21,7 +21,7 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "balls",
   },
   {
@@ -106,7 +106,7 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "cock",
   },
   {
@@ -135,7 +135,7 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "cum",
   },
   {
@@ -148,7 +148,7 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "dick",
   },
   {
@@ -189,7 +189,7 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "fart",
   },
   {
@@ -314,7 +314,7 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "jizz",
   },
   {
@@ -339,7 +339,7 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "licker",
   },
   {
@@ -384,7 +384,7 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "minge",
   },
   {
@@ -417,7 +417,7 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "nipple",
   },
   {
@@ -434,12 +434,12 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "piss",
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "poop",
   },
   {
@@ -464,7 +464,7 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "queef",
   },
   {
@@ -501,12 +501,12 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "semen",
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "shart",
   },
   {
@@ -515,7 +515,7 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "shit",
   },
   {
@@ -584,7 +584,7 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "spunk",
   },
   {
@@ -621,12 +621,12 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "succ",
   },
   {
     affix: ["suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "sucker",
   },
   {
@@ -639,7 +639,7 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "thicc",
   },
   {
@@ -652,7 +652,7 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "turd",
   },
   {
@@ -685,7 +685,7 @@ export const NAMES: NameData[] = [
   },
   {
     affix: ["prefix", "suffix"],
-    isNSFW: true,
+    isProfanity: true,
     name: "whore",
   },
   {

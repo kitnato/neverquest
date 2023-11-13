@@ -6,7 +6,7 @@ import { merchantInventory } from "@neverquest/state/caravan";
 import { stage, stageMaximum } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
 import { canUseJournal } from "@neverquest/state/quests";
-import { allowNSFW } from "@neverquest/state/settings";
+import { allowProfanity } from "@neverquest/state/settings";
 import { isGear, isInfusableItem, isTrinketItem } from "@neverquest/types/type-guards";
 import {
   generateArmor,
@@ -21,13 +21,13 @@ export function useGenerateMerchantInventory() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const allowNSFWValue = get(allowNSFW);
+        const allowProfanityValue = get(allowProfanity);
         const merchantInventoryNew = [...get(merchantInventory)];
         const stageValue = get(stage);
 
         if (stageValue === get(stageMaximum)) {
           const SETTINGS_GEAR: GeneratorParameters & { level: number } = {
-            allowNSFW: allowNSFWValue,
+            allowProfanity: allowProfanityValue,
             level: stageValue,
             nameStructure: "prefix",
             prefixTags: ["lowQuality"],

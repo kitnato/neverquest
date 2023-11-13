@@ -65,14 +65,14 @@ export const LOCATIONS: LocationData[] = [
     name: "bog",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "bordello",
   },
   {
     name: "breach",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "brothel",
   },
   {
@@ -409,7 +409,7 @@ export const LOCATIONS: LocationData[] = [
     name: "landscape",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "lavatory",
   },
   {
@@ -493,7 +493,7 @@ export const LOCATIONS: LocationData[] = [
     name: "oubliette",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "outhouse",
   },
   {
@@ -672,7 +672,7 @@ export const LOCATIONS: LocationData[] = [
     name: "themepark",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "toilet",
   },
   {
@@ -695,7 +695,7 @@ export const LOCATIONS: LocationData[] = [
     name: "tunnel",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "urinal",
   },
   {

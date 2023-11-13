@@ -218,13 +218,13 @@ export const ARTIFACTS: ArtifactData[] = [
   },
   {
     artifactClass: "blunt",
-    isNSFW: true,
+    isProfanity: true,
     name: "bong",
     subtype: "melee",
     type: "weapon",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "bong",
     type: "trinket",
   },
@@ -361,7 +361,7 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "buttplug",
     type: "trinket",
   },
@@ -703,13 +703,13 @@ export const ARTIFACTS: ArtifactData[] = [
   },
   {
     canPluralize: true,
-    isNSFW: true,
+    isProfanity: true,
     name: "diaper",
     type: "trinket",
   },
   {
     artifactClass: "blunt",
-    isNSFW: true,
+    isProfanity: true,
     name: "dildo",
     subtype: "melee",
     type: "weapon",
@@ -1454,7 +1454,7 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "armor",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "ovaries",
     type: "trinket",
   },
@@ -1482,7 +1482,7 @@ export const ARTIFACTS: ArtifactData[] = [
   },
   {
     canPluralize: true,
-    isNSFW: true,
+    isProfanity: true,
     name: "panty",
     subtype: "legs",
     type: "armor",
@@ -1517,7 +1517,7 @@ export const ARTIFACTS: ArtifactData[] = [
   },
   {
     artifactClass: "piercing",
-    isNSFW: true,
+    isProfanity: true,
     name: "penetrator",
     subtype: "melee",
     type: "weapon",
@@ -1536,7 +1536,7 @@ export const ARTIFACTS: ArtifactData[] = [
   },
   {
     artifactClass: "blunt",
-    isNSFW: true,
+    isProfanity: true,
     name: "phallus",
     subtype: "melee",
     type: "weapon",
@@ -2055,7 +2055,7 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "speculum",
     type: "trinket",
   },
@@ -2208,7 +2208,7 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "trinket",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "testicles",
     type: "trinket",
   },
@@ -2302,7 +2302,7 @@ export const ARTIFACTS: ArtifactData[] = [
   },
   {
     artifactClass: "blunt",
-    isNSFW: true,
+    isProfanity: true,
     name: "turd",
     subtype: "ranged",
     type: "weapon",

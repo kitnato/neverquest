@@ -20,7 +20,7 @@ import { ARMOR_CLASS_TYPES, type ArmorClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
-import { allowNSFW } from "@neverquest/state/settings";
+import { allowProfanity } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateArmor } from "@neverquest/utilities/generators";
@@ -33,7 +33,7 @@ import {
 
 export function ArmorOptions() {
   const [{ armor: craftedArmor }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
-  const allowNSFWValue = useRecoilValue(allowNSFW);
+  const allowProfanityValue = useRecoilValue(allowProfanity);
   const isShowingDodgeChance = useRecoilValue(isShowing("dodgeChance"));
   const armorcraftValue = useRecoilValue(isSkillAcquired("armorcraft"));
   const stageValue = useRecoilValue(stage);
@@ -128,7 +128,7 @@ export function ArmorOptions() {
             setBlacksmithInventory((current) => ({
               ...current,
               armor: generateArmor({
-                allowNSFW: allowNSFWValue,
+                allowProfanity: allowProfanityValue,
                 gearClass: armorClass,
                 level: armorLevel,
                 nameStructure: getNameStructure(),

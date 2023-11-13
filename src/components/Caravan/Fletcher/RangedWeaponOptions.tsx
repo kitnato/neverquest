@@ -19,7 +19,7 @@ import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
 import { WEAPON_CLASS_TYPES, type WeaponClass } from "@neverquest/LOCRAN/types";
 import { fletcherInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
-import { allowNSFW } from "@neverquest/state/settings";
+import { allowProfanity } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateRangedWeapon } from "@neverquest/utilities/generators";
@@ -31,7 +31,7 @@ import {
 } from "@neverquest/utilities/getters";
 
 export function RangedWeaponOptions() {
-  const allowNSFWValue = useRecoilValue(allowNSFW);
+  const allowProfanityValue = useRecoilValue(allowProfanity);
   const [fletcherInventoryValue, setFletcherInventory] = useRecoilState(fletcherInventory);
   const stageValue = useRecoilValue(stage);
   const resetFletcherInventory = useResetRecoilState(fletcherInventory);
@@ -131,7 +131,7 @@ export function RangedWeaponOptions() {
           onCraft={() =>
             setFletcherInventory(
               generateRangedWeapon({
-                allowNSFW: allowNSFWValue,
+                allowProfanity: allowProfanityValue,
                 gearClass: weaponClass,
                 level: weaponLevel,
                 nameStructure: getNameStructure(),

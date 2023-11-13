@@ -772,11 +772,11 @@ Toggles between showing and hiding the power level of the gear.
 
 Default: off.
 
-### NSFW mode
+### Allow profanity
 
-Toggles the generation of not-safe-for-work words when generating monster [wilderness](#wilderness) and [item](#item) names.
+Toggles the generation of not-safe-for-work words when generating [monster](#monster), [wilderness](#wilderness) and [item](#item) names.
 
-Default: off.
+Default: on.
 
 ### Show everything
 

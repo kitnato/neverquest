@@ -13,7 +13,7 @@ import {
   monsterHealth,
   monsterName,
 } from "@neverquest/state/monster";
-import { allowNSFW } from "@neverquest/state/settings";
+import { allowProfanity } from "@neverquest/state/settings";
 import { MONSTER_AILMENT_TYPES } from "@neverquest/types/unions";
 import { getNameStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -23,14 +23,14 @@ export function useGenerateMonster() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const allowNSFWValue = get(allowNSFW);
+        const allowProfanityValue = get(allowProfanity);
 
         set(
           monsterName,
           get(isBoss)
-            ? generateName({ allowNSFW: allowNSFWValue, hasTitle: true })
+            ? generateName({ allowProfanity: allowProfanityValue, hasTitle: true })
             : generateCreature({
-                allowNSFW: allowNSFWValue,
+                allowProfanity: allowProfanityValue,
                 nameStructure: getNameStructure(),
               }),
         );

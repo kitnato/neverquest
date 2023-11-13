@@ -264,7 +264,7 @@ export type StateKey =
   | "acquiredTraits"
   | "activeCrew"
   | "activeQuests"
-  | "allowNSFW"
+  | "allowProfanity"
   | "ammunition"
   | "ammunitionMaximum"
   | "appliedGems"

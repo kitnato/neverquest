@@ -5,7 +5,7 @@ import { generate } from "@neverquest/LOCRAN/generate";
 import type { ArtifactQuery, GeneratorParameters } from "@neverquest/LOCRAN/types";
 
 export function generateArtifact({
-  allowNSFW,
+  allowProfanity,
   nameStructure,
   prefixTags,
   query,
@@ -14,7 +14,7 @@ export function generateArtifact({
   query: ArtifactQuery;
 }) {
   const filteredArtifacts = ARTIFACTS.filter((current) => {
-    const isNSFW = Boolean(current.isNSFW);
+    const isProfanity = Boolean(current.isProfanity);
 
     return (
       current.type === query.type &&
@@ -28,7 +28,7 @@ export function generateArtifact({
           ? current.artifactClass === query.artifactClass
           : false
         : true) &&
-      (allowNSFW ? isNSFW || !isNSFW : !isNSFW)
+      (allowProfanity ? isProfanity || !isProfanity : !isProfanity)
     );
   });
   const filteredArtifact = filteredArtifacts[Math.floor(Math.random() * filteredArtifacts.length)];
@@ -40,7 +40,7 @@ export function generateArtifact({
   const { canPluralize, name } = filteredArtifact;
 
   const artifact = generate({
-    allowNSFW,
+    allowProfanity,
     category: "artifact",
     name,
     nameStructure,

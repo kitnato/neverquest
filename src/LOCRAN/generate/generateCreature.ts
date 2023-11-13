@@ -3,13 +3,13 @@ import { generate } from "@neverquest/LOCRAN/generate";
 import type { GeneratorParameters } from "@neverquest/LOCRAN/types";
 
 export function generateCreature({
-  allowNSFW,
+  allowProfanity,
   nameStructure,
   prefixTags,
   suffixTags,
 }: GeneratorParameters) {
-  const filteredCreatures = CREATURES.filter(({ isNSFW }) =>
-    allowNSFW ? isNSFW || !isNSFW : !isNSFW,
+  const filteredCreatures = CREATURES.filter(({ isProfanity }) =>
+    allowProfanity ? isProfanity || !isProfanity : !isProfanity,
   );
 
   const filteredCreature = filteredCreatures[Math.floor(Math.random() * filteredCreatures.length)];
@@ -19,7 +19,7 @@ export function generateCreature({
   }
 
   return generate({
-    allowNSFW,
+    allowProfanity,
     category: "creature",
     name: filteredCreature.name,
     nameStructure,

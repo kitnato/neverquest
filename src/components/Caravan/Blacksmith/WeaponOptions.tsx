@@ -19,7 +19,7 @@ import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
 import { WEAPON_CLASS_TYPES, type WeaponClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
-import { allowNSFW } from "@neverquest/state/settings";
+import { allowProfanity } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { GRIP_TYPES, type Grip } from "@neverquest/types/unions";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
@@ -33,7 +33,7 @@ import {
 
 export function WeaponOptions() {
   const [{ weapon: craftedWeapon }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
-  const allowNSFWValue = useRecoilValue(allowNSFW);
+  const allowProfanityValue = useRecoilValue(allowProfanity);
   const siegecraftValue = useRecoilValue(isSkillAcquired("siegecraft"));
   const stageValue = useRecoilValue(stage);
 
@@ -141,7 +141,7 @@ export function WeaponOptions() {
             setBlacksmithInventory((current) => ({
               ...current,
               weapon: generateMeleeWeapon({
-                allowNSFW: allowNSFWValue,
+                allowProfanity: allowProfanityValue,
                 gearClass: weaponClass,
                 grip: weaponGrip,
                 level: weaponLevel,

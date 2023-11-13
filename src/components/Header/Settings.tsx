@@ -18,7 +18,7 @@ import { IconImage } from "@neverquest/components/IconImage";
 import IconSettings from "@neverquest/icons/settings.svg?react";
 import { ownedItem } from "@neverquest/state/inventory";
 import {
-  allowNSFW,
+  allowProfanity,
   autoEquip,
   lowHealthWarning,
   showDamagePerSecond,
@@ -72,7 +72,7 @@ export function Settings() {
                 state={showEssenceRequired}
               />
 
-              <SettingsSwitch label="NSFW mode (profanity)" state={allowNSFW} />
+              <SettingsSwitch label="Allow profanity" state={allowProfanity} />
 
               <ShowEverything />
             </Stack>

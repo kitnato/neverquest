@@ -9,6 +9,7 @@ import { MonsterDistance } from "@neverquest/components/Monster/MonsterDistance"
 import { MonsterHealthMeter } from "@neverquest/components/Monster/MonsterHealthMeter";
 import { MonsterName } from "@neverquest/components/Monster/MonsterName";
 import { MonsterOffense } from "@neverquest/components/Monster/MonsterOffense";
+import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import { isMonsterNew, monsterElement } from "@neverquest/state/monster";
 import { animateElement } from "@neverquest/utilities/helpers";
@@ -20,6 +21,8 @@ export function Monster() {
 
   const element = useRef(null);
 
+  const generateMonster = useGenerateMonster();
+
   useEffect(() => {
     const { current } = element;
 
@@ -30,6 +33,8 @@ export function Monster() {
 
   useEffect(() => {
     if (isMonsterNewValue && monsterElementValue !== null) {
+      generateMonster();
+
       animateElement({
         element: monsterElementValue,
         name: "zoomInRight",
@@ -38,7 +43,7 @@ export function Monster() {
 
       setMonsterNew(false);
     }
-  }, [isMonsterNewValue, monsterElementValue, setMonsterNew]);
+  }, [generateMonster, isMonsterNewValue, monsterElementValue, setMonsterNew]);
 
   return (
     <Stack gap={3}>

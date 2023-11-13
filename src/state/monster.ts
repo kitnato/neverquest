@@ -354,7 +354,7 @@ export const distance = withStateKey("distance", (key) =>
 
 export const isMonsterNew = withStateKey("isMonsterNew", (key) =>
   atom({
-    default: false,
+    default: true,
     effects: [handleLocalStorage({ key })],
     key,
   }),

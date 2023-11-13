@@ -2,21 +2,19 @@ import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
 import { GEM_BASE } from "@neverquest/data/inventory";
-import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
 import { useToggleAttack } from "@neverquest/hooks/actions/useToggleAttack";
 import { isAttacking } from "@neverquest/state/character";
 import { progress, progressMaximum } from "@neverquest/state/encounter";
-import { monsterLoot } from "@neverquest/state/monster";
+import { isMonsterNew, monsterLoot } from "@neverquest/state/monster";
 import { essenceLoot, itemsLoot } from "@neverquest/state/resources";
 import { GEM_TYPES } from "@neverquest/types/unions";
 import { getFromRange, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useProgressStage() {
-  const generateMonster = useGenerateMonster();
   const toggleAttack = useToggleAttack();
 
   return useRecoilCallback(
-    ({ set, snapshot }) =>
+    ({ reset, set, snapshot }) =>
       () => {
         const get = getSnapshotGetter(snapshot);
 
@@ -43,11 +41,11 @@ export function useProgressStage() {
         set(progress, nextProgress);
 
         if (nextProgress < get(progressMaximum)) {
-          generateMonster();
+          reset(isMonsterNew);
         } else if (get(isAttacking)) {
           toggleAttack();
         }
       },
-    [generateMonster, toggleAttack],
+    [toggleAttack],
   );
 }

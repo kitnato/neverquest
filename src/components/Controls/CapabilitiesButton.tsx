@@ -18,7 +18,7 @@ import { areAttributesAffordable } from "@neverquest/state/attributes";
 import { isAttacking, isGameOver } from "@neverquest/state/character";
 import { isStageStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
-import type { TabsData } from "@neverquest/types/props";
+import type { TabsData } from "@neverquest/types/components";
 import { formatEnumeration } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -71,45 +71,43 @@ export function CapabilitiesButton() {
     tooltip = [...tooltip, "traits"];
   }
 
-  if (!isShowingAttributes && !isShowingSkills && !isShowingTraits) {
-    return null;
+  if (isShowingAttributes || isShowingSkills || isShowingTraits) {
+    return (
+      <>
+        <OverlayTrigger overlay={<Tooltip>{formatEnumeration(tooltip)}</Tooltip>}>
+          <span className={getAnimationClass({ name: "bounceIn" })}>
+            <Button
+              className={`position-relative${
+                areAttributesIncreasableValue && !isStageStartedValue
+                  ? ` ${getAnimationClass({
+                      isInfinite: true,
+                      name: "pulse",
+                    })}`
+                  : ""
+              }`}
+              disabled={isAttackingValue || isGameOverValue}
+              onClick={() => setScreenShowing(true)}
+              variant="outline-dark"
+            >
+              <IconImage Icon={IconCapabilities} />
+
+              {areAttributesIncreasableValue && (
+                <IconBadge alignToButton>
+                  <IconImage Icon={IconUpgrade} size="small" />
+                </IconBadge>
+              )}
+            </Button>
+          </span>
+        </OverlayTrigger>
+
+        <DismissableScreen
+          isShowing={isScreenShowing}
+          onClose={() => setScreenShowing(false)}
+          title={`${isShowingSkillsOrTraits ? "Capabilities" : "Attributes"}`}
+        >
+          {isShowingSkillsOrTraits ? <IconTabs tabs={tabs} /> : <Attributes />}
+        </DismissableScreen>
+      </>
+    );
   }
-
-  return (
-    <>
-      <OverlayTrigger overlay={<Tooltip>{formatEnumeration(tooltip)}</Tooltip>}>
-        <span className={getAnimationClass({ name: "bounceIn" })}>
-          <Button
-            className={`position-relative${
-              areAttributesIncreasableValue && !isStageStartedValue
-                ? ` ${getAnimationClass({
-                    isInfinite: true,
-                    name: "pulse",
-                  })}`
-                : ""
-            }`}
-            disabled={isAttackingValue || isGameOverValue}
-            onClick={() => setScreenShowing(true)}
-            variant="outline-dark"
-          >
-            <IconImage Icon={IconCapabilities} />
-
-            {areAttributesIncreasableValue && (
-              <IconBadge alignToButton>
-                <IconImage Icon={IconUpgrade} size="small" />
-              </IconBadge>
-            )}
-          </Button>
-        </span>
-      </OverlayTrigger>
-
-      <DismissableScreen
-        isShowing={isScreenShowing}
-        onClose={() => setScreenShowing(false)}
-        title={`${isShowingSkillsOrTraits ? "Capabilities" : "Attributes"}`}
-      >
-        {isShowingSkillsOrTraits ? <IconTabs tabs={tabs} /> : <Attributes />}
-      </DismissableScreen>
-    </>
-  );
 }

@@ -71,7 +71,7 @@ export function CheatQuest() {
           if (Number.isInteger(value) && value !== undefined && value > stageValue) {
             const difference = value - stageValue;
 
-            for (let i = 0; i < difference; i++) {
+            for (let step = 0; step < difference; step++) {
               generateMerchantInventory();
               increaseStage();
             }
@@ -110,5 +110,5 @@ export function CheatQuest() {
     setIsImmortal,
   ]);
 
-  return null;
+  return <></>;
 }

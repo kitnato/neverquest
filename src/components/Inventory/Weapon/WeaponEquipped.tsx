@@ -16,18 +16,16 @@ export function WeaponEquipped() {
 
   const isUnarmed = weaponValue.name === WEAPON_NONE.name;
 
-  if (!isShowingWeapon) {
-    return null;
+  if (isShowingWeapon) {
+    return (
+      <IconDisplay
+        Icon={isUnarmed ? IconUnequipped : isMelee(weaponValue) ? IconMelee : IconRanged}
+        iconProps={{ isMirrored: isUnarmed }}
+        isAnimated
+        tooltip="Equipped weapon"
+      >
+        <WeaponName weapon={weaponValue} />
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay
-      Icon={isUnarmed ? IconUnequipped : isMelee(weaponValue) ? IconMelee : IconRanged}
-      iconProps={{ isMirrored: isUnarmed }}
-      isAnimated
-      tooltip="Equipped weapon"
-    >
-      <WeaponName weapon={weaponValue} />
-    </IconDisplay>
-  );
 }

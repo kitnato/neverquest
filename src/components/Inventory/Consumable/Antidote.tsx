@@ -17,7 +17,7 @@ export function Antidote({ ID }: { ID: string }) {
   return (
     <OverlayTrigger
       overlay={<Tooltip>Not poisoned.</Tooltip>}
-      trigger={!isPoisonedValue ? ["hover", "focus"] : []}
+      trigger={isPoisonedValue ? [] : ["hover", "focus"]}
     >
       <span>
         <Button

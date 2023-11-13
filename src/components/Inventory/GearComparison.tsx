@@ -37,5 +37,5 @@ export function GearComparison({
     );
   }
 
-  return null;
+  return;
 }

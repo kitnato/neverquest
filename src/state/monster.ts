@@ -378,6 +378,7 @@ export const monsterAttackDuration = withStateKey("monsterAttackDuration", (key)
 
 export const monsterElement = withStateKey("monsterElement", (key) =>
   atom<HTMLDivElement | null>({
+    // eslint-disable-next-line unicorn/no-null
     default: null,
     effects: [handleLocalStorage({ key })],
     key,
@@ -393,8 +394,8 @@ export const monsterHealth = withStateKey("monsterHealth", (key) =>
 );
 
 export const monsterName = withStateKey("monsterName", (key) =>
-  atom<string | null>({
-    default: null,
+  atom<string | undefined>({
+    default: undefined,
     effects: [handleLocalStorage({ key })],
     key,
   }),

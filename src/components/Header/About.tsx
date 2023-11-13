@@ -33,7 +33,7 @@ export function About() {
         onHide={() => {
           setIsShowing(false);
 
-          window.history.replaceState(null, "", " ");
+          window.history.replaceState(undefined, "", " ");
         }}
         show={isShowing}
         size="lg"
@@ -49,17 +49,16 @@ export function About() {
 
         <ModalBody>
           <ReactMarkdown
-            components={HEADERS.reduce(
-              (aggregator, Current) => ({
-                ...aggregator,
-                [Current]: ({ children, ...props }: JSX.IntrinsicElements[typeof Current]) => (
+            components={Object.fromEntries(
+              HEADERS.map((Current) => [
+                Current,
+                ({ children, ...properties }: JSX.IntrinsicElements[typeof Current]) => (
                   <Current
                     id={typeof children === "string" ? formatSlug(children) : undefined}
-                    {...{ children, ...props }}
+                    {...{ children, ...properties }}
                   />
                 ),
-              }),
-              {},
+              ]),
             )}
           >
             {manual}

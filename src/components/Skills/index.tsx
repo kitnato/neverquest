@@ -11,7 +11,7 @@ export function Skills() {
     <span className="fst-italic">None.</span>
   ) : (
     SKILL_TYPES.map((current) =>
-      trainedSkillsValue[current] ? <SkillDisplay key={current} skill={current} /> : null,
+      trainedSkillsValue[current] ? <SkillDisplay key={current} skill={current} /> : undefined,
     )
   );
 }

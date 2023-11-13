@@ -16,37 +16,35 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 export function TrainableSkill({ skill }: { skill: Skill }) {
   const { requiredCrew } = SKILLS[skill];
 
+  const hireStatusValue = useRecoilValue(hireStatus(requiredCrew));
+  const isSkillAcquiredValue = useRecoilValue(isSkillAcquired(skill));
   const skillPriceValue = useRecoilValue(skillPrice);
-  const skillValue = useRecoilValue(isSkillAcquired(skill));
-  const { current } = useRecoilValue(hireStatus(requiredCrew));
 
-  if (skillValue) {
-    return null;
+  if (!isSkillAcquiredValue) {
+    return (
+      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+        {hireStatusValue === "hired" ? (
+          <>
+            <SkillDisplay skill={skill} />
+
+            <Stack direction="horizontal" gap={3}>
+              <IconDisplay Icon={IconEssence} tooltip="Price">
+                {formatNumber({ value: skillPriceValue })}
+              </IconDisplay>
+
+              <TrainSkillButton skill={skill} />
+            </Stack>
+          </>
+        ) : (
+          <IconDisplay
+            description="Unlocks when acquiring a crew member."
+            Icon={IconUnknown}
+            tooltip="Skill"
+          >
+            {LABEL_UNKNOWN}
+          </IconDisplay>
+        )}
+      </div>
+    );
   }
-
-  return (
-    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-      {current === "hired" ? (
-        <>
-          <SkillDisplay skill={skill} />
-
-          <Stack direction="horizontal" gap={3}>
-            <IconDisplay Icon={IconEssence} tooltip="Price">
-              {formatNumber({ value: skillPriceValue })}
-            </IconDisplay>
-
-            <TrainSkillButton skill={skill} />
-          </Stack>
-        </>
-      ) : (
-        <IconDisplay
-          description="Unlocks when acquiring a crew member."
-          Icon={IconUnknown}
-          tooltip="Skill"
-        >
-          {LABEL_UNKNOWN}
-        </IconDisplay>
-      )}
-    </div>
-  );
 }

@@ -1,5 +1,5 @@
 import { FormCheck, Stack } from "react-bootstrap";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { TraitDisplay } from "@neverquest/components/Traits/TraitDisplay";
 import { acquiredTraits, selectedTrait } from "@neverquest/state/traits";
@@ -10,6 +10,7 @@ const FORM_NAME = "trait-selection";
 export function TraitSelection() {
   const acquiredTraitsValue = useRecoilValue(acquiredTraits);
   const [selectedTraitValue, setSelectedTrait] = useRecoilState(selectedTrait);
+  const resetSelectedTrait = useResetRecoilState(selectedTrait);
 
   const areAllTraitsAcquired = Object.values(acquiredTraitsValue).every(Boolean);
 
@@ -22,11 +23,11 @@ export function TraitSelection() {
       ) : (
         <Stack gap={3}>
           <FormCheck
-            checked={selectedTraitValue === null}
+            checked={selectedTraitValue === undefined}
             id="none"
             label={<span className="fst-italic">None.</span>}
             name={FORM_NAME}
-            onChange={() => setSelectedTrait(null)}
+            onChange={resetSelectedTrait}
             type="radio"
           />
 

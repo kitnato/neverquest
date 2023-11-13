@@ -18,6 +18,7 @@ export function ItemName({
   stack?: number;
 }) {
   const { name, weight } = item;
+  // eslint-disable-next-line unicorn/consistent-destructuring
   const description = isGem(item) ? <GemDescription name={item.name} /> : item.description;
   const displayName = capitalizeAll(name);
 

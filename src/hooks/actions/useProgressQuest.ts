@@ -18,7 +18,7 @@ export function useProgressQuest() {
       ({ amount = 1, quest }: { amount?: number; quest: Quest }) => {
         const get = getSnapshotGetter(snapshot);
 
-        if (!get(canUseJournal) || get(ownedItem("journal")) === null) {
+        if (!get(canUseJournal) || get(ownedItem("journal")) === undefined) {
           return;
         }
 

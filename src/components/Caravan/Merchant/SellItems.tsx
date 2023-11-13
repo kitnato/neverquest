@@ -20,9 +20,7 @@ import { stackItems } from "@neverquest/utilities/helpers";
 export function SellItems() {
   const inventoryValue = useRecoilValue(inventory);
 
-  const equippedGear = [
-    ...inventoryValue.filter((current) => isGear(current) && current.isEquipped),
-  ];
+  const equippedGear = inventoryValue.filter((current) => isGear(current) && current.isEquipped);
   const storedItems = inventoryValue.filter(
     (current) => !isGear(current) || (isGear(current) && !current.isEquipped),
   );
@@ -44,7 +42,7 @@ export function SellItems() {
                 <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
                   <Stack direction="horizontal" gap={1}>
                     <ItemDisplay
-                      description={isEquipped ? "Equipped" : null}
+                      description={isEquipped ? "Equipped" : undefined}
                       item={current}
                       overlayPlacement="right"
                     />

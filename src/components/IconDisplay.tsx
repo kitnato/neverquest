@@ -4,7 +4,7 @@ import { Stack } from "react-bootstrap";
 import type { ResponsiveUtilityValue } from "react-bootstrap/esm/createUtilityClasses";
 import type { GapValue } from "react-bootstrap/esm/types";
 import { IconImage } from "@neverquest/components/IconImage";
-import type { IconImageDOMProps, SVGIcon } from "@neverquest/types/props";
+import type { IconImageDOMProperties, SVGIcon } from "@neverquest/types/components";
 
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -22,14 +22,14 @@ export function IconDisplay({
   description?: ReactNode;
   gap?: ResponsiveUtilityValue<GapValue>;
   Icon: SVGIcon;
-  iconProps?: IconImageDOMProps;
+  iconProps?: IconImageDOMProperties;
   isAnimated?: boolean;
   isFullWidth?: boolean;
   tooltip?: string;
 }) {
   const classes = [
-    isFullWidth ? "w-100" : null,
-    isAnimated ? getAnimationClass({ name: "flipInX" }) : null,
+    isFullWidth ? "w-100" : undefined,
+    isAnimated ? getAnimationClass({ name: "flipInX" }) : undefined,
   ]
     .filter(Boolean)
     .join(" ");

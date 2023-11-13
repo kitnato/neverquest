@@ -30,13 +30,11 @@ export function MonsterDistance() {
     stop: !isAttackingValue || isMonsterDeadValue || hasMonsterClosedValue || isMonsterFrozenValue,
   });
 
-  if (!isRanged(weaponValue)) {
-    return null;
+  if (isRanged(weaponValue)) {
+    return (
+      <IconDisplay Icon={IconDistance} isAnimated tooltip="Distance">
+        <MonsterDistanceMeter />
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay Icon={IconDistance} isAnimated tooltip="Distance">
-      <MonsterDistanceMeter />
-    </IconDisplay>
-  );
 }

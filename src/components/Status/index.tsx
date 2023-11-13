@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Card, Stack } from "react-bootstrap";
-import { useSetRecoilState } from "recoil";
+import { useResetRecoilState, useSetRecoilState } from "recoil";
 
 import { Health } from "@neverquest/components/Reserves/Health";
 import { Stamina } from "@neverquest/components/Reserves/Stamina";
@@ -11,8 +11,10 @@ import { statusElement } from "@neverquest/state/character";
 import { animateElement } from "@neverquest/utilities/helpers";
 
 export function Status() {
-  const element = useRef(null);
   const setStatusElement = useSetRecoilState(statusElement);
+  const resetStatusElement = useResetRecoilState(statusElement);
+
+  const element = useRef(null);
 
   useEffect(() => {
     const { current } = element;
@@ -20,8 +22,8 @@ export function Status() {
     setStatusElement(current);
     animateElement({ element: current, name: "flipInX" });
 
-    return () => setStatusElement(null);
-  }, [setStatusElement]);
+    return resetStatusElement;
+  }, [resetStatusElement, setStatusElement]);
 
   return (
     <Card ref={element}>

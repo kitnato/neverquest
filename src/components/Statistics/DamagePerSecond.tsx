@@ -19,21 +19,19 @@ export function DamagePerSecond() {
     state: damagePerSecond,
   });
 
-  if (!showDamagePerSecondValue) {
-    return null;
+  if (showDamagePerSecondValue) {
+    return (
+      <IconDisplay
+        Icon={IconDamagePerSecond}
+        iconProps={{ overlayPlacement: "bottom", size: "small" }}
+        tooltip="Total damage per second"
+      >
+        <Stack direction="horizontal" gap={1}>
+          <span>{formatNumber({ format: "float", value: damagePerSecondValue })}</span>
+
+          <DeltasDisplay delta="damagePerSecond" />
+        </Stack>
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay
-      Icon={IconDamagePerSecond}
-      iconProps={{ overlayPlacement: "bottom", size: "small" }}
-      tooltip="Total damage per second"
-    >
-      <Stack direction="horizontal" gap={1}>
-        <span>{formatNumber({ format: "float", value: damagePerSecondValue })}</span>
-
-        <DeltasDisplay delta="damagePerSecond" />
-      </Stack>
-    </IconDisplay>
-  );
 }

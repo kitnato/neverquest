@@ -31,9 +31,9 @@ export function ArmorName({
   const isShowingDodgePenalty = useRecoilValue(isShowing("dodgePenalty"));
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
 
-  const { deflection, level, name, protection, staminaCost, weight } = armor;
-  const isUnshielded = armor.name === ARMOR_NONE.name;
-  const showComparison = armorEquippedValue.ID !== armor.ID;
+  const { deflection, ID, level, name, protection, staminaCost, weight } = armor;
+  const isUnshielded = name === ARMOR_NONE.name;
+  const showComparison = ID !== armorEquippedValue.ID;
 
   return (
     <OverlayTrigger
@@ -45,7 +45,9 @@ export function ArmorName({
             <DetailsTable>
               <GearLevelDetail
                 comparison={
-                  showComparison ? { showing: "armor", subtrahend: armorEquippedValue.level } : null
+                  showComparison
+                    ? { showing: "armor", subtrahend: armorEquippedValue.level }
+                    : undefined
                 }
                 level={level}
               />
@@ -166,7 +168,7 @@ export function ArmorName({
                   comparison={
                     showComparison
                       ? { showing: "armor", subtrahend: armorEquippedValue.weight }
-                      : null
+                      : undefined
                   }
                   weight={weight}
                 />

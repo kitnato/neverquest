@@ -1,6 +1,6 @@
 import type { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
-import type { SVGIcon } from "@neverquest/types/props";
+import type { SVGIcon } from "@neverquest/types/components";
 import type { Consumable, Gem, Grip, QuestClass, Trinket } from "@neverquest/types/unions";
 
 export type AmmunitionPouchItem = TrinketItem & {
@@ -24,9 +24,9 @@ export type AttributeOrMasteryBaseData = {
 };
 
 export type BlacksmithInventory = {
-  armor: Armor | null;
-  shield: Shield | null;
-  weapon: Weapon | null;
+  armor: Armor | undefined;
+  shield: Shield | undefined;
+  weapon: Weapon | undefined;
 };
 
 export type BlightMagnitude = {
@@ -39,7 +39,7 @@ export type ConsumableItem = ItemBase & {
   name: Consumable;
 };
 
-export type FletcherInventory = Weapon | null;
+export type FletcherInventory = Weapon | undefined;
 
 export type GearBase = {
   price: GeneratorRange;

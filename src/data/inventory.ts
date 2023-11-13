@@ -41,7 +41,7 @@ import type {
   Shield,
   TrinketItem,
 } from "@neverquest/types";
-import type { SVGIcon } from "@neverquest/types/props";
+import type { SVGIcon } from "@neverquest/types/components";
 import {
   type Consumable,
   type Elemental,
@@ -70,7 +70,7 @@ export const ARMOR_NONE: Omit<Armor, "isEquipped" | "price"> = {
 export const ARMOR_SPECIFICATIONS: Record<
   ArmorClass,
   Omit<GearBase, "staminaCost"> & {
-    deflection: [GeneratorRange, GeneratorRange] | null;
+    deflection: [GeneratorRange, GeneratorRange] | undefined;
     Icon: SVGIcon;
     protection: [GeneratorRange, GeneratorRange];
     staminaCost: number | [GeneratorRange, GeneratorRange];
@@ -82,19 +82,19 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 0.65, minimum: 0.6 },
     ],
     Icon: IconArmorHeavy,
-    price: { maximum: 10000, minimum: 8 },
+    price: { maximum: 10_000, minimum: 8 },
     protection: [
       { maximum: 10, minimum: 8 },
       { maximum: 1500, minimum: 1450 },
     ],
-    staminaCost: Infinity,
+    staminaCost: Number.POSITIVE_INFINITY,
     weight: [
       { maximum: 7, minimum: 5 },
       { maximum: 100, minimum: 90 },
     ],
   },
   light: {
-    deflection: null,
+    deflection: undefined,
     Icon: IconArmorLight,
     price: { maximum: 5000, minimum: 1 },
     protection: [
@@ -279,7 +279,7 @@ export const SHIELD_SPECIFICATIONS: Record<
   GearBase & {
     block: [GeneratorRange, GeneratorRange];
     Icon: SVGIcon;
-    stagger: [GeneratorRange, GeneratorRange] | null;
+    stagger: [GeneratorRange, GeneratorRange] | undefined;
   }
 > = {
   medium: {
@@ -309,7 +309,7 @@ export const SHIELD_SPECIFICATIONS: Record<
     ],
     Icon: IconShieldSmall,
     price: { maximum: 2500, minimum: 2 },
-    stagger: null,
+    stagger: undefined,
     staminaCost: [
       { maximum: 2, minimum: 1 },
       { maximum: 20, minimum: 15 },

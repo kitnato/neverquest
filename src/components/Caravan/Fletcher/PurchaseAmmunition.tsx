@@ -56,7 +56,7 @@ export function PurchaseAmmunition() {
           {formatNumber({ value: totalPrice })}
         </IconDisplay>
 
-        {ownedAmmunitionPouch === null ? (
+        {ownedAmmunitionPouch === undefined ? (
           <span className="fst-italic">Nowhere to store ammunition.</span>
         ) : (
           (() => {
@@ -78,7 +78,7 @@ export function PurchaseAmmunition() {
                     <Button
                       disabled={!canPurchase}
                       onClick={() => {
-                        if (isAffordable && !isFull && ownedAmmunitionPouch !== null) {
+                        if (isAffordable && !isFull && ownedAmmunitionPouch !== undefined) {
                           transactEssence(-totalPrice);
 
                           setInventory((currentInventory) =>

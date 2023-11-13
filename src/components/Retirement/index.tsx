@@ -63,12 +63,14 @@ export function Retirement({
           onClick={() => {
             onHide();
 
-            if (ownedItemJournal !== null) {
+            if (ownedItemJournal !== undefined) {
               setCanUseJournal(true);
               progressQuest({ quest: "decipheringJournal" });
             }
 
             retire();
+
+            // Wait until retire() has reset the stage before generating a monster.
             generateMonster();
           }}
           variant="outline-dark"

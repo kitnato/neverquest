@@ -42,8 +42,8 @@ export const encumbranceExtent = withStateKey("encumbranceExtent", (key) =>
       get(encumbrance) === get(encumbranceMaximum)
         ? "encumbered"
         : get(encumbrance) > get(encumbranceMaximum)
-        ? "over-encumbered"
-        : "none",
+          ? "over-encumbered"
+          : "none",
     key,
   }),
 );
@@ -53,7 +53,7 @@ export const encumbranceMaximum = withStateKey("encumbranceMaximum", (key) =>
     get: ({ get }) => {
       const ownedItemKnapsack = get(ownedItem("knapsack"));
 
-      return ownedItemKnapsack === null
+      return ownedItemKnapsack === undefined
         ? ENCUMBRANCE_CAPACITY
         : (ownedItemKnapsack as KnapsackItem).capacity;
     },
@@ -64,6 +64,7 @@ export const encumbranceMaximum = withStateKey("encumbranceMaximum", (key) =>
 export const equippableItems = withStateKey("equippableItems", (key) =>
   selector<Record<string, boolean>>({
     get: ({ get }) =>
+      // eslint-disable-next-line unicorn/no-array-reduce
       get(inventory).reduce((aggregator, { ID, ...current }) => {
         let canEquip = isGear(current) ? !current.isEquipped : false;
 
@@ -93,7 +94,7 @@ export const equippableItems = withStateKey("equippableItems", (key) =>
 );
 
 export const ownedItem = withStateKey("ownedItem", (key) =>
-  selectorFamily<InventoryItem | null, Consumable | Infusable | Trinket>({
+  selectorFamily<InventoryItem | undefined, Consumable | Infusable | Trinket>({
     get:
       (parameter) =>
       ({ get }) =>
@@ -101,7 +102,7 @@ export const ownedItem = withStateKey("ownedItem", (key) =>
           (current) =>
             (isConsumableItem(current) || isInfusableItem(current) || isTrinketItem(current)) &&
             current.name === parameter,
-        ) ?? null,
+        ) ?? undefined,
     key,
   }),
 );

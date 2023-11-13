@@ -31,50 +31,48 @@ export function PurgeMemories() {
   const isAffordable = price <= essenceValue;
   const isPurchasable = isAffordable && allCompletedQuestsCount > 0;
 
-  if (!canUseJournalValue || ownedItemJournal === null) {
-    return null;
-  }
-
-  return (
-    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-      <IconDisplay
-        description="Resets the bonus of all completed quests, allowing for new choices."
-        Icon={IconRitual}
-        tooltip="Ritual"
-      >
-        Purge memories
-      </IconDisplay>
-
-      <Stack direction="horizontal" gap={3}>
-        <IconDisplay Icon={IconEssence} tooltip="Price">
-          {formatNumber({ value: price })}
+  if (canUseJournalValue && ownedItemJournal !== undefined) {
+    return (
+      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+        <IconDisplay
+          description="Resets the bonus of all completed quests, allowing for new choices."
+          Icon={IconRitual}
+          tooltip="Ritual"
+        >
+          Purge memories
         </IconDisplay>
 
-        <OverlayTrigger
-          overlay={
-            <Tooltip>
-              {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
+        <Stack direction="horizontal" gap={3}>
+          <IconDisplay Icon={IconEssence} tooltip="Price">
+            {formatNumber({ value: price })}
+          </IconDisplay>
 
-              {price === 0 && <div>No completed quests to reset.</div>}
-            </Tooltip>
-          }
-          trigger={isPurchasable ? [] : ["hover", "focus"]}
-        >
-          <span>
-            <Button
-              disabled={!isPurchasable}
-              onClick={() => {
-                transactEssence(-price);
-                resetCompletedQuests();
-                progressQuest({ quest: "purgingEssence" });
-              }}
-              variant="outline-dark"
-            >
-              Purge
-            </Button>
-          </span>
-        </OverlayTrigger>
-      </Stack>
-    </div>
-  );
+          <OverlayTrigger
+            overlay={
+              <Tooltip>
+                {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
+
+                {price === 0 && <div>No completed quests to reset.</div>}
+              </Tooltip>
+            }
+            trigger={isPurchasable ? [] : ["hover", "focus"]}
+          >
+            <span>
+              <Button
+                disabled={!isPurchasable}
+                onClick={() => {
+                  transactEssence(-price);
+                  resetCompletedQuests();
+                  progressQuest({ quest: "purgingEssence" });
+                }}
+                variant="outline-dark"
+              >
+                Purge
+              </Button>
+            </span>
+          </OverlayTrigger>
+        </Stack>
+      </div>
+    );
+  }
 }

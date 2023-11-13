@@ -13,7 +13,7 @@ import IconMelee from "@neverquest/icons/melee.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
 import IconShield from "@neverquest/icons/shield.svg?react";
 import type { InventoryItem } from "@neverquest/types";
-import type { IconImageDOMProps } from "@neverquest/types/props";
+import type { IconImageDOMProperties } from "@neverquest/types/components";
 import {
   isArmor,
   isConsumableItem,
@@ -33,7 +33,7 @@ export function ItemDisplay({
 }: {
   description?: ReactNode;
   extra?: string;
-  iconProps?: IconImageDOMProps;
+  iconProps?: IconImageDOMProperties;
   item: InventoryItem;
   overlayPlacement?: Placement;
   stack?: number;

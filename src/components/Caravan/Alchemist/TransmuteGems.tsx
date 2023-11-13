@@ -31,13 +31,12 @@ export function TransmuteGems() {
       .filter(isGem)
       .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
   );
-  const transmutation = GEM_TYPES.reduce(
-    (aggregator, current) => ({
-      ...aggregator,
-      [current]: gems.find(({ item: { name } }) => name === current)?.stack ?? 0,
-    }),
-    { ruby: 0, sapphire: 0, topaz: 0 },
-  );
+  const transmutation = { ruby: 0, sapphire: 0, topaz: 0 };
+
+  for (const gem of GEM_TYPES) {
+    transmutation[gem] = gems.find(({ item: { name } }) => name === gem)?.stack ?? 0;
+  }
+
   const isAffordable = transmutation[source] >= TRANSMUTE_COST;
 
   const onSelect = (setSelection: (value: SetStateAction<Gem>) => void) => (gem: Gem) =>
@@ -73,12 +72,14 @@ export function TransmuteGems() {
             disabled={!isAffordable}
             onClick={() => {
               if (isAffordable) {
-                const gemIDs = inventoryValue
-                  .filter((current) => isGem(current) && current.name === source)
-                  .map(({ ID }) => ID)
-                  .slice(0, TRANSMUTE_COST);
+                const gemIDs = new Set(
+                  inventoryValue
+                    .filter((current) => isGem(current) && current.name === source)
+                    .map(({ ID }) => ID)
+                    .slice(0, TRANSMUTE_COST),
+                );
 
-                setInventory(inventoryValue.filter(({ ID }) => !gemIDs.includes(ID)));
+                setInventory(inventoryValue.filter(({ ID }) => !gemIDs.has(ID)));
 
                 acquireItem({
                   ...GEM_BASE,

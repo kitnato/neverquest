@@ -22,7 +22,7 @@ export const ammunition = withStateKey("ammunition", (key) =>
     get: ({ get }) => {
       const ownedAmmunitionPouch = get(ownedItem("ammunition pouch"));
 
-      return ownedAmmunitionPouch === null
+      return ownedAmmunitionPouch === undefined
         ? 0
         : (ownedAmmunitionPouch as AmmunitionPouchItem).current;
     },
@@ -35,7 +35,7 @@ export const ammunitionMaximum = withStateKey("ammunitionMaximum", (key) =>
     get: ({ get }) => {
       const ownedAmmunitionPouch = get(ownedItem("ammunition pouch"));
 
-      return ownedAmmunitionPouch === null
+      return ownedAmmunitionPouch === undefined
         ? 0
         : (ownedAmmunitionPouch as AmmunitionPouchItem).maximum;
     },
@@ -48,7 +48,7 @@ export const essenceBonus = withStateKey("essenceBonus", (key) =>
     get: ({ get }) => {
       const ownedMonkeyPaw = get(ownedItem("monkey paw"));
 
-      if (ownedMonkeyPaw === null || !isInfusableItem(ownedMonkeyPaw)) {
+      if (ownedMonkeyPaw === undefined || !isInfusableItem(ownedMonkeyPaw)) {
         return 0;
       }
 
@@ -71,7 +71,7 @@ export const infusionLevel = withStateKey("infusionLevel", (key) =>
       ({ get }) => {
         const infusable = get(ownedItem(parameter));
 
-        if (infusable === null || !isInfusableItem(infusable)) {
+        if (infusable === undefined || !isInfusableItem(infusable)) {
           return 0;
         }
 
@@ -88,7 +88,7 @@ export const infusionMaximum = withStateKey("infusionMaximum", (key) =>
       ({ get }) => {
         const infusable = get(ownedItem(parameter));
 
-        if (infusable === null || !isInfusableItem(infusable)) {
+        if (infusable === undefined || !isInfusableItem(infusable)) {
           return 0;
         }
 
@@ -126,7 +126,7 @@ export const powerBonusBoost = withStateKey("powerBonusBoost", (key) =>
     get: ({ get }) => {
       const ownedTomeOfPower = get(ownedItem("tome of power"));
 
-      if (ownedTomeOfPower === null || !isInfusableItem(ownedTomeOfPower)) {
+      if (ownedTomeOfPower === undefined || !isInfusableItem(ownedTomeOfPower)) {
         return 0;
       }
 

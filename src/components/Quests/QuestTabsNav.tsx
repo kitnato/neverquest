@@ -5,7 +5,7 @@ import { IconBadge } from "@neverquest/components/IconBadge";
 import { IconImage } from "@neverquest/components/IconImage";
 import IconAttention from "@neverquest/icons/attention.svg?react";
 import { canCompleteQuests } from "@neverquest/state/quests";
-import type { TabsData } from "@neverquest/types/props";
+import type { TabsData } from "@neverquest/types/components";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 

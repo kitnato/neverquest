@@ -75,8 +75,8 @@ export const POISON = {
     minimum: 0.1,
   },
   duration: {
-    maximum: 250000,
-    minimum: 20000,
+    maximum: 250_000,
+    minimum: 20_000,
   },
   magnitude: {
     maximum: 0.25,

@@ -75,7 +75,7 @@ export function ShieldOptions() {
           value: block.maximum,
         })}`}</IconDisplay>
 
-        {stagger !== null && (
+        {stagger !== undefined && (
           <IconDisplay
             Icon={shieldcraftValue ? IconStagger : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
@@ -111,7 +111,7 @@ export function ShieldOptions() {
 
       {!shieldcraftValue && shieldClass === "tower" ? (
         <span className="text-center">Cannot use without training.</span>
-      ) : craftedShield === null ? (
+      ) : craftedShield === undefined ? (
         <CraftGear
           onCraft={() =>
             setBlacksmithInventory((current) => ({
@@ -125,8 +125,8 @@ export function ShieldOptions() {
                   shieldLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
                     ? ["lowQuality"]
                     : shieldLevel === maximumShieldLevel
-                    ? ["highQuality"]
-                    : undefined,
+                      ? ["highQuality"]
+                      : undefined,
               }),
             }))
           }
@@ -138,7 +138,9 @@ export function ShieldOptions() {
       ) : (
         <CraftedGear
           gearItem={craftedShield}
-          onTransfer={() => setBlacksmithInventory((current) => ({ ...current, shield: null }))}
+          onTransfer={() =>
+            setBlacksmithInventory((current) => ({ ...current, shield: undefined }))
+          }
         />
       )}
     </Stack>

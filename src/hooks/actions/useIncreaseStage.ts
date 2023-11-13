@@ -21,17 +21,18 @@ export function useIncreaseStage() {
         const stageValue = get(stage);
         const nextStage = stageValue + 1;
 
-        CREW_ORDER.forEach((type) => {
-          const { current: hireStatusCurrent } = get(hireStatus(type));
+        for (const crew of CREW_ORDER) {
+          const hireStatusState = hireStatus(crew);
+          const hireStatusCurrent = get(hireStatusState);
           const isShowingCrewHiring = isShowing("crewHiring");
 
-          const { requiredStage } = CREW[type];
+          const { requiredStage } = CREW[crew];
 
-          if (hireStatusCurrent === null && nextStage >= requiredStage) {
-            set(hireStatus(type), { current: "hirable" });
+          if (hireStatusCurrent === "hidden" && nextStage >= requiredStage) {
+            set(hireStatusState, "hirable");
             set(isShowingCrewHiring, true);
           }
-        });
+        }
 
         set(wildernesses, (current) => [
           ...current,

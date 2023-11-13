@@ -20,7 +20,7 @@ export function useHireCrew() {
           (current) => current !== crew || current !== "merchant",
         );
 
-        set(hireStatus(crew), { current: "hired" });
+        set(hireStatus(crew), "hired");
         transactEssence(-price);
 
         if (crew === "blacksmith") {
@@ -30,7 +30,7 @@ export function useHireCrew() {
         progressQuest({ quest: "hiring" });
         progressQuest({ quest: "hiringAll" });
 
-        if (otherHirableCrew.every((current) => get(hireStatus(current)).current !== "hired")) {
+        if (otherHirableCrew.every((current) => get(hireStatus(current)) !== "hired")) {
           progressQuest({ quest: "hiringBlacksmithFirst" });
         }
       },

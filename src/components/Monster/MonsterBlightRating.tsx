@@ -16,48 +16,48 @@ export function MonsterBlightRating() {
   const isPoisonedValue = useRecoilValue(isPoisoned);
   const monsterBlightChanceValue = useRecoilValue(blightChance);
 
-  if (monsterBlightChanceValue === 0) {
-    return null;
+  if (monsterBlightChanceValue > 0) {
+    return (
+      <IconDisplay Icon={IconBlight} isAnimated tooltip="Blight rating">
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">Blight rating details</PopoverHeader>
+
+              <PopoverBody>
+                <DetailsTable>
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
+
+                    <td>
+                      {formatNumber({ format: "percentage", value: monsterBlightChanceValue })}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
+
+                    <td>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconImage Icon={IconStamina} size="small" />
+
+                        {`-${formatNumber({ value: blightAmountValue })} cumulative`}
+                      </Stack>
+                    </td>
+                  </tr>
+                </DetailsTable>
+              </PopoverBody>
+            </Popover>
+          }
+          trigger={isPoisonedValue ? ["hover", "focus"] : []}
+        >
+          <span>
+            {isPoisonedValue
+              ? formatNumber({ value: monsterBlightChanceValue * blightAmountValue * 100 })
+              : LABEL_EMPTY}
+          </span>
+        </OverlayTrigger>
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay Icon={IconBlight} isAnimated tooltip="Blight rating">
-      <OverlayTrigger
-        overlay={
-          <Popover>
-            <PopoverHeader className="text-center">Blight rating details</PopoverHeader>
-
-            <PopoverBody>
-              <DetailsTable>
-                <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
-
-                  <td>{formatNumber({ format: "percentage", value: monsterBlightChanceValue })}</td>
-                </tr>
-
-                <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
-
-                  <td>
-                    <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconStamina} size="small" />
-
-                      {`-${formatNumber({ value: blightAmountValue })} cumulative`}
-                    </Stack>
-                  </td>
-                </tr>
-              </DetailsTable>
-            </PopoverBody>
-          </Popover>
-        }
-        trigger={isPoisonedValue ? ["hover", "focus"] : []}
-      >
-        <span>
-          {isPoisonedValue
-            ? formatNumber({ value: monsterBlightChanceValue * blightAmountValue * 100 })
-            : LABEL_EMPTY}
-        </span>
-      </OverlayTrigger>
-    </IconDisplay>
-  );
 }

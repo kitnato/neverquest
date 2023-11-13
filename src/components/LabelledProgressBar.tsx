@@ -8,7 +8,7 @@ export function LabelledProgressBar({
   children,
   disableTransitions = false,
   isStriped = false,
-  sibling = null,
+  sibling,
   size = "normal",
   value,
   variant,

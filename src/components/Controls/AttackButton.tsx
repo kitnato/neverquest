@@ -18,7 +18,7 @@ import { hasEnoughAmmunition, isAttacking, isGameOver } from "@neverquest/state/
 import { isStageCompleted, isWilderness } from "@neverquest/state/encounter";
 import { isHealthLow } from "@neverquest/state/reserves";
 import { lowHealthWarning } from "@neverquest/state/settings";
-import type { SVGIcon } from "@neverquest/types/props";
+import type { SVGIcon } from "@neverquest/types/components";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function AttackButton() {

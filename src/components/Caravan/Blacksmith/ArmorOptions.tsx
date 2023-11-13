@@ -80,7 +80,7 @@ export function ArmorOptions() {
           value: protection.maximum,
         })}`}</IconDisplay>
 
-        {deflection !== null && (
+        {deflection !== undefined && (
           <IconDisplay
             Icon={armorcraftValue ? IconDeflection : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
@@ -122,7 +122,7 @@ export function ArmorOptions() {
 
       {!armorcraftValue && armorClass === "heavy" ? (
         <span className="text-center">Cannot use without training.</span>
-      ) : craftedArmor === null ? (
+      ) : craftedArmor === undefined ? (
         <CraftGear
           onCraft={() => {
             setBlacksmithInventory((current) => ({
@@ -136,8 +136,8 @@ export function ArmorOptions() {
                   armorLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
                     ? ["lowQuality"]
                     : armorLevel === maximumArmorLevel
-                    ? ["highQuality"]
-                    : undefined,
+                      ? ["highQuality"]
+                      : undefined,
               }),
             }));
 
@@ -151,7 +151,7 @@ export function ArmorOptions() {
       ) : (
         <CraftedGear
           gearItem={craftedArmor}
-          onTransfer={() => setBlacksmithInventory((current) => ({ ...current, armor: null }))}
+          onTransfer={() => setBlacksmithInventory((current) => ({ ...current, armor: undefined }))}
         />
       )}
     </Stack>

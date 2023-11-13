@@ -35,7 +35,9 @@ export function useIncreaseAttribute() {
         const newRank = get(attributeRank(attribute)) + 1;
 
         if (shows !== undefined) {
-          shows.forEach((current) => set(isShowing(current), true));
+          for (const current of shows) {
+            set(isShowing(current), true);
+          }
         }
 
         set(isShowing("statistics"), true);

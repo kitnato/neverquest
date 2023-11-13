@@ -11,7 +11,7 @@ export function Traits() {
     <span className="fst-italic">None.</span>
   ) : (
     TRAIT_TYPES.map((current) =>
-      acquiredTraitsValue[current] ? <TraitDisplay key={current} trait={current} /> : null,
+      acquiredTraitsValue[current] ? <TraitDisplay key={current} trait={current} /> : undefined,
     )
   );
 }

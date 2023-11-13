@@ -24,13 +24,11 @@ export function MonsterStaggered() {
     stop: !isMonsterStaggeredValue || isMonsterDeadValue,
   });
 
-  if (!canBeStaggered) {
-    return null;
+  if (canBeStaggered) {
+    return (
+      <IconDisplay Icon={IconStaggered} isAnimated tooltip="Staggered">
+        <MonsterAilmentMeter ailment="staggered" totalDuration={stabilityValue} />
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay Icon={IconStaggered} isAnimated tooltip="Staggered">
-      <MonsterAilmentMeter ailment="staggered" totalDuration={stabilityValue} />
-    </IconDisplay>
-  );
 }

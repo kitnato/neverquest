@@ -18,31 +18,29 @@ export function Thorns() {
     stop: () => thornsValue === 0,
   });
 
-  if (thornsValue === 0) {
-    return null;
+  if (thornsValue > 0) {
+    return (
+      <IconDisplay Icon={IconThorns} tooltip="Thorns">
+        <Stack direction="horizontal" gap={1}>
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverHeader className="text-center">Thorns details</PopoverHeader>
+
+                <PopoverBody>
+                  <DetailsTable>
+                    <ElementalDetails slot="armor" />
+                  </DetailsTable>
+                </PopoverBody>
+              </Popover>
+            }
+          >
+            <span>{thornsValue}</span>
+          </OverlayTrigger>
+
+          <DeltasDisplay delta="thorns" />
+        </Stack>
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay Icon={IconThorns} tooltip="Thorns">
-      <Stack direction="horizontal" gap={1}>
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverHeader className="text-center">Thorns details</PopoverHeader>
-
-              <PopoverBody>
-                <DetailsTable>
-                  <ElementalDetails slot="armor" />
-                </DetailsTable>
-              </PopoverBody>
-            </Popover>
-          }
-        >
-          <span>{thornsValue}</span>
-        </OverlayTrigger>
-
-        <DeltasDisplay delta="thorns" />
-      </Stack>
-    </IconDisplay>
-  );
 }

@@ -6,16 +6,10 @@ import { GearComparison } from "@neverquest/components/Inventory/GearComparison"
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { isShowing } from "@neverquest/state/isShowing";
-import type { ComparisonProps } from "@neverquest/types/props";
+import type { Comparison } from "@neverquest/types/components";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export function StaminaCostDetail({
-  comparison,
-  cost,
-}: {
-  comparison: ComparisonProps;
-  cost: number;
-}) {
+export function StaminaCostDetail({ comparison, cost }: { comparison: Comparison; cost: number }) {
   const isShowingStamina = useRecoilValue(isShowing("stamina"));
 
   return (
@@ -30,7 +24,7 @@ export function StaminaCostDetail({
 
               {formatNumber({ value: cost })}
 
-              {comparison !== null && (
+              {comparison !== undefined && (
                 <GearComparison
                   difference={cost - comparison.subtrahend}
                   isDownPositive

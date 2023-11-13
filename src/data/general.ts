@@ -24,8 +24,8 @@ export const LABEL_OVER_ENCUMBERED = "Too heavy.";
 export const LABEL_SEPARATOR = "·";
 export const LABEL_UNKNOWN = "???";
 
-export const MILLISECONDS_IN_HOUR = 3600000;
-export const MILLISECONDS_IN_MINUTE = 60000;
+export const MILLISECONDS_IN_HOUR = 3_600_000;
+export const MILLISECONDS_IN_MINUTE = 60_000;
 export const MILLISECONDS_IN_SECOND = 1000;
 
 export const QUEST_NOTIFICATION_DURATION = 5000;

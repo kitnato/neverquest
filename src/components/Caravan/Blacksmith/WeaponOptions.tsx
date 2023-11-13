@@ -135,7 +135,7 @@ export function WeaponOptions() {
 
       <hr />
 
-      {craftedWeapon === null ? (
+      {craftedWeapon === undefined ? (
         <CraftGear
           onCraft={() =>
             setBlacksmithInventory((current) => ({
@@ -150,8 +150,8 @@ export function WeaponOptions() {
                   weaponLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
                     ? ["lowQuality"]
                     : weaponLevel === maximumWeaponLevel
-                    ? ["highQuality"]
-                    : undefined,
+                      ? ["highQuality"]
+                      : undefined,
               }),
             }))
           }
@@ -164,7 +164,9 @@ export function WeaponOptions() {
       ) : (
         <CraftedGear
           gearItem={craftedWeapon}
-          onTransfer={() => setBlacksmithInventory((current) => ({ ...current, weapon: null }))}
+          onTransfer={() =>
+            setBlacksmithInventory((current) => ({ ...current, weapon: undefined }))
+          }
         />
       )}
     </Stack>

@@ -38,56 +38,54 @@ export function StaggerRating() {
     stop: () => isEmpty,
   });
 
-  if (isEmpty) {
-    return null;
+  if (!isEmpty) {
+    return (
+      <IconDisplay Icon={IconStaggerRating} isAnimated tooltip="Stagger rating">
+        <Stack direction="horizontal" gap={1}>
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverHeader className="text-center">Stagger rating details</PopoverHeader>
+
+                <PopoverBody>
+                  <DetailsTable>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
+
+                      <td>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconStagger} size="small" />
+
+                          {formatNumber({ format: "percentage", value: stagger })}
+                        </Stack>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconStability} size="small" />
+                          Stability:
+                        </Stack>
+                      </td>
+
+                      <td>{`${formatNumber({
+                        format: "time",
+                        value: stabilityValue,
+                      })} duration`}</td>
+                    </tr>
+                  </DetailsTable>
+                </PopoverBody>
+              </Popover>
+            }
+            trigger={shieldcraftValue ? ["hover", "focus"] : []}
+          >
+            <span>{shieldcraftValue ? staggerRatingValue : LABEL_EMPTY}</span>
+          </OverlayTrigger>
+
+          <DeltasDisplay delta="staggerRating" />
+        </Stack>
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay Icon={IconStaggerRating} isAnimated tooltip="Stagger rating">
-      <Stack direction="horizontal" gap={1}>
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverHeader className="text-center">Stagger rating details</PopoverHeader>
-
-              <PopoverBody>
-                <DetailsTable>
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
-
-                    <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconStagger} size="small" />
-
-                        {formatNumber({ format: "percentage", value: stagger })}
-                      </Stack>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconStability} size="small" />
-                        Stability:
-                      </Stack>
-                    </td>
-
-                    <td>{`${formatNumber({
-                      format: "time",
-                      value: stabilityValue,
-                    })} duration`}</td>
-                  </tr>
-                </DetailsTable>
-              </PopoverBody>
-            </Popover>
-          }
-          trigger={shieldcraftValue ? ["hover", "focus"] : []}
-        >
-          <span>{shieldcraftValue ? staggerRatingValue : LABEL_EMPTY}</span>
-        </OverlayTrigger>
-
-        <DeltasDisplay delta="staggerRating" />
-      </Stack>
-    </IconDisplay>
-  );
 }

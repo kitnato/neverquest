@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Card, Stack } from "react-bootstrap";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterAilments } from "@neverquest/components/Monster/MonsterAilments";
@@ -16,6 +16,7 @@ import { animateElement } from "@neverquest/utilities/helpers";
 export function Monster() {
   const [isMonsterNewValue, setMonsterNew] = useRecoilState(isMonsterNew);
   const [monsterElementValue, setMonsterElement] = useRecoilState(monsterElement);
+  const resetMonsterElement = useResetRecoilState(monsterElement);
 
   const element = useRef(null);
 
@@ -24,8 +25,8 @@ export function Monster() {
 
     setMonsterElement(current);
 
-    return () => setMonsterElement(null);
-  }, [element, setMonsterElement]);
+    return resetMonsterElement;
+  }, [resetMonsterElement, setMonsterElement]);
 
   useEffect(() => {
     if (isMonsterNewValue && monsterElementValue !== null) {

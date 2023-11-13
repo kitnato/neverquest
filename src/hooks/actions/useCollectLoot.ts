@@ -24,11 +24,13 @@ export function useCollectLoot() {
         set(isShowing("attributes"), true);
 
         if (itemsLootValue.length > 0) {
-          const acquiredItemIDs = itemsLootValue.map((current) =>
-            acquireItem(current) !== "noFit" ? current.ID : null,
+          const acquiredItemIDs = new Set(
+            itemsLootValue.map((current) =>
+              acquireItem(current) === "noFit" ? undefined : current.ID,
+            ),
           );
 
-          set(itemsLoot, (current) => current.filter(({ ID }) => !acquiredItemIDs.includes(ID)));
+          set(itemsLoot, (current) => current.filter(({ ID }) => !acquiredItemIDs.has(ID)));
         }
 
         reset(essenceLoot);

@@ -40,7 +40,7 @@ export function generateArmor({
   });
 
   return {
-    deflection: deflection === null ? 0 : getFromRange(deflection),
+    deflection: deflection === undefined ? 0 : getFromRange(deflection),
     gearClass,
     gems: [],
     ID: nanoid(),
@@ -175,7 +175,7 @@ export function generateShield({
       factor,
       ...SHIELD_SPECIFICATIONS[gearClass],
     }),
-    stagger: stagger === null ? 0 : getFromRange(stagger),
+    stagger: stagger === undefined ? 0 : getFromRange(stagger),
     staminaCost: getFromRange(staminaCost),
     weight: getFromRange(weight),
   };

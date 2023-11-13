@@ -38,14 +38,14 @@ export function WeaponName({
   const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
   const weaponEquippedValue = useRecoilValue(weaponEquipped);
 
-  const { abilityChance, damage, gearClass, level, name, rate, staminaCost, weight } = weapon;
+  const { abilityChance, damage, gearClass, ID, level, name, rate, staminaCost, weight } = weapon;
   const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[gearClass];
   const damagePerSecond = getDamagePerRate({
     damage,
     rate,
   });
-  const isUnarmed = weapon.name === WEAPON_NONE.name;
-  const showComparison = weaponEquippedValue.ID !== weapon.ID;
+  const isUnarmed = name === WEAPON_NONE.name;
+  const showComparison = ID !== weaponEquippedValue.ID;
 
   const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
@@ -61,7 +61,7 @@ export function WeaponName({
                 comparison={
                   showComparison
                     ? { showing: "weapon", subtrahend: weaponEquippedValue.level }
-                    : null
+                    : undefined
                 }
                 level={level}
               />
@@ -142,6 +142,7 @@ export function WeaponName({
                     <Stack direction="horizontal" gap={1}>
                       <IconImage Icon={IconGrip} size="small" />
 
+                      {/* eslint-disable-next-line unicorn/consistent-destructuring */}
                       {capitalizeAll(weapon.grip)}
                     </Stack>
                   </td>
@@ -156,6 +157,7 @@ export function WeaponName({
                     <Stack direction="horizontal" gap={1}>
                       <IconImage Icon={IconAmmunition} size="small" />
 
+                      {/* eslint-disable-next-line unicorn/consistent-destructuring */}
                       {formatNumber({ value: weapon.ammunitionCost })}
                     </Stack>
                   </td>
@@ -169,7 +171,7 @@ export function WeaponName({
                         showing: "weapon",
                         subtrahend: weaponEquippedValue.staminaCost,
                       }
-                    : null
+                    : undefined
                 }
                 cost={staminaCost}
               />
@@ -222,7 +224,7 @@ export function WeaponName({
                   comparison={
                     showComparison
                       ? { showing: "weapon", subtrahend: weaponEquippedValue.weight }
-                      : null
+                      : undefined
                   }
                   weight={weight}
                 />

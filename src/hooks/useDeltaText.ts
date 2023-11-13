@@ -15,7 +15,7 @@ export function useDeltaText({
   delta: Delta;
   format?: NumberFormat;
   state: RecoilValueReadOnly<number>;
-  stop?: ({ current, previous }: { current: number; previous: number | null }) => boolean;
+  stop?: ({ current, previous }: { current: number; previous: number | undefined }) => boolean;
 }) {
   const currentValue = useRecoilValue(state);
 
@@ -25,7 +25,7 @@ export function useDeltaText({
   const isTime = format === "time";
 
   useEffect(() => {
-    if (previousValue === null || stop({ current: currentValue, previous: previousValue })) {
+    if (previousValue === undefined || stop({ current: currentValue, previous: previousValue })) {
       return;
     }
 
@@ -44,8 +44,8 @@ export function useDeltaText({
             ? "text-danger"
             : "text-success"
           : isTime
-          ? "text-success"
-          : "text-danger",
+            ? "text-success"
+            : "text-danger",
         value: `${isPositive ? "+" : ""}${formatNumber({
           format,
           value: difference,

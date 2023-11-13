@@ -35,7 +35,7 @@ export const ATTRIBUTES: Record<
     base: 0.03,
     description: "Increases critical strike chance.",
     Icon: IconDexterity,
-    increment: 0.01425,
+    increment: 0.014_25,
     isUnlocked: false,
     maximum: 40, // 0.6
     powerBonus: 0.005,

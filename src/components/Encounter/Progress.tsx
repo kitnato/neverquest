@@ -20,31 +20,29 @@ export function Progress() {
     stop: ({ current }) => current === 0,
   });
 
-  if (!isWildernessValue) {
-    return null;
+  if (isWildernessValue) {
+    return (
+      <IconDisplay
+        Icon={IconProgress}
+        iconProps={{ overlayPlacement: "bottom" }}
+        isFullWidth
+        tooltip="Progress"
+      >
+        <Stack direction="horizontal">
+          <LabelledProgressBar
+            value={(progressValue / progressMaximumValue) * 100}
+            variant="secondary"
+          >
+            <Stack direction="horizontal" gap={1}>
+              {`${formatNumber({ value: progressValue })}/${formatNumber({
+                value: progressMaximumValue,
+              })}`}
+
+              <DeltasDisplay delta="progress" />
+            </Stack>
+          </LabelledProgressBar>
+        </Stack>
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay
-      Icon={IconProgress}
-      iconProps={{ overlayPlacement: "bottom" }}
-      isFullWidth
-      tooltip="Progress"
-    >
-      <Stack direction="horizontal">
-        <LabelledProgressBar
-          value={(progressValue / progressMaximumValue) * 100}
-          variant="secondary"
-        >
-          <Stack direction="horizontal" gap={1}>
-            {`${formatNumber({ value: progressValue })}/${formatNumber({
-              value: progressMaximumValue,
-            })}`}
-
-            <DeltasDisplay delta="progress" />
-          </Stack>
-        </LabelledProgressBar>
-      </Stack>
-    </IconDisplay>
-  );
 }

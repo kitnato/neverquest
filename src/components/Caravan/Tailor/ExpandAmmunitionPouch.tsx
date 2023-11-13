@@ -22,66 +22,65 @@ export function ExpandAmmunitionPouch() {
 
   const transactEssence = useTransactEssence();
 
-  if (ownedAmmunitionPouch === null) {
-    return null;
-  }
+  if (ownedAmmunitionPouch !== undefined) {
+    const { ID, maximum } = ownedAmmunitionPouch as AmmunitionPouchItem;
+    const price = Math.ceil(
+      TAILORING_PRICE_MAXIMUM.ammunitionPouch *
+        getGrowthSigmoid(maximum - (AMMUNITION_CAPACITY - 1)),
+    );
+    const isAffordable = price <= essenceValue;
 
-  const { ID, maximum } = ownedAmmunitionPouch as AmmunitionPouchItem;
-  const price = Math.ceil(
-    TAILORING_PRICE_MAXIMUM.ammunitionPouch * getGrowthSigmoid(maximum - (AMMUNITION_CAPACITY - 1)),
-  );
-  const isAffordable = price <= essenceValue;
+    return (
+      <Stack gap={3}>
+        <h6>Ammunition pouch</h6>
 
-  return (
-    <Stack gap={3}>
-      <h6>Ammunition pouch</h6>
+        <AmmunitionPouchCapacity />
 
-      <AmmunitionPouchCapacity />
-
-      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        <IconDisplay
-          description={`Increases maximum ammunition by ${TAILORING_EXPANSION.ammunitionPouch}.`}
-          Icon={IconTailoring}
-          tooltip="Tailoring"
-        >
-          Add quiver
-        </IconDisplay>
-
-        <Stack direction="horizontal" gap={3}>
-          <IconDisplay Icon={IconEssence} tooltip="Price">
-            {formatNumber({ value: price })}
+        <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+          <IconDisplay
+            description={`Increases maximum ammunition by ${TAILORING_EXPANSION.ammunitionPouch}.`}
+            Icon={IconTailoring}
+            tooltip="Tailoring"
+          >
+            Add quiver
           </IconDisplay>
 
-          <OverlayTrigger
-            overlay={<Tooltip> {LABEL_NO_ESSENCE}</Tooltip>}
-            trigger={isAffordable ? [] : ["hover", "focus"]}
-          >
-            <span>
-              <Button
-                disabled={!isAffordable}
-                onClick={() => {
-                  transactEssence(-price);
-                  setInventory((currentInventory) =>
-                    currentInventory.map((currentItem) =>
-                      currentItem.ID === ID
-                        ? {
-                            ...currentItem,
-                            maximum:
-                              (currentItem as AmmunitionPouchItem).maximum +
-                              TAILORING_EXPANSION.ammunitionPouch,
-                          }
-                        : currentItem,
-                    ),
-                  );
-                }}
-                variant="outline-dark"
-              >
-                Expand
-              </Button>
-            </span>
-          </OverlayTrigger>
-        </Stack>
-      </div>
-    </Stack>
-  );
+          <Stack direction="horizontal" gap={3}>
+            <IconDisplay Icon={IconEssence} tooltip="Price">
+              {formatNumber({ value: price })}
+            </IconDisplay>
+
+            <OverlayTrigger
+              overlay={<Tooltip> {LABEL_NO_ESSENCE}</Tooltip>}
+              trigger={isAffordable ? [] : ["hover", "focus"]}
+            >
+              <span>
+                <Button
+                  disabled={!isAffordable}
+                  onClick={() => {
+                    transactEssence(-price);
+                    setInventory((currentInventory) =>
+                      currentInventory.map((currentItem) =>
+                        currentItem.ID === ID
+                          ? {
+                              ...currentItem,
+                              maximum:
+                                (currentItem as AmmunitionPouchItem).maximum +
+                                TAILORING_EXPANSION.ammunitionPouch,
+                            }
+                          : currentItem,
+                      ),
+                    );
+                  }}
+                  variant="outline-dark"
+                >
+                  Expand
+                </Button>
+              </span>
+            </OverlayTrigger>
+          </Stack>
+        </div>
+      </Stack>
+    );
+  }
 }

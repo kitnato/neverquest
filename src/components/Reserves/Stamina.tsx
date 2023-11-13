@@ -26,97 +26,97 @@ export function Stamina() {
 
   const { baseAmount } = RESERVES.stamina;
 
-  if (!isShowingStamina) {
-    return null;
-  }
+  if (isShowingStamina) {
+    return (
+      <IconDisplay Icon={IconStamina} isAnimated tooltip="Stamina">
+        <Stack>
+          <Stack className="w-100" direction="horizontal">
+            <OverlayTrigger
+              overlay={
+                <Popover>
+                  <PopoverHeader className="text-center">Stamina details</PopoverHeader>
 
-  return (
-    <IconDisplay Icon={IconStamina} isAnimated tooltip="Stamina">
-      <Stack>
-        <Stack className="w-100" direction="horizontal">
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverHeader className="text-center">Stamina details</PopoverHeader>
-
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
-
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconStamina} size="small" />
-
-                          {baseAmount}
-                        </Stack>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconEndurance} size="small" />
-                          Endurance:
-                        </Stack>
-                      </td>
-
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconStamina} size="small" />
-
-                          {`+${formatNumber({ value: attributeStatisticEndurance - baseAmount })}`}
-
-                          {attributePowerBonusEndurance > 0 && (
-                            <>
-                              <span>{LABEL_SEPARATOR}</span>
-
-                              <IconImage Icon={IconTomeOfPower} size="small" />
-
-                              {`+${formatNumber({
-                                format: "percentage",
-                                value: attributePowerBonusEndurance,
-                              })}`}
-                            </>
-                          )}
-                        </Stack>
-                      </td>
-                    </tr>
-
-                    {questsBonusStamina > 0 && (
+                  <PopoverBody>
+                    <DetailsTable>
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Quest bonus:</td>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
+
+                        <td>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconStamina} size="small" />
+
+                            {baseAmount}
+                          </Stack>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconEndurance} size="small" />
+                            Endurance:
+                          </Stack>
+                        </td>
 
                         <td>
                           <Stack direction="horizontal" gap={1}>
                             <IconImage Icon={IconStamina} size="small" />
 
                             {`+${formatNumber({
-                              decimals: 0,
-                              format: "percentage",
-                              value: questsBonusStamina,
+                              value: attributeStatisticEndurance - baseAmount,
                             })}`}
+
+                            {attributePowerBonusEndurance > 0 && (
+                              <>
+                                <span>{LABEL_SEPARATOR}</span>
+
+                                <IconImage Icon={IconTomeOfPower} size="small" />
+
+                                {`+${formatNumber({
+                                  format: "percentage",
+                                  value: attributePowerBonusEndurance,
+                                })}`}
+                              </>
+                            )}
                           </Stack>
                         </td>
                       </tr>
-                    )}
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-            placement="right"
-            trigger={isShowingStaminaDetails ? ["hover", "focus"] : []}
-          >
-            <span className="w-100">
-              <ReserveMeter reserve="stamina" />
-            </span>
-          </OverlayTrigger>
 
-          <DeltasDisplay delta="stamina" />
+                      {questsBonusStamina > 0 && (
+                        <tr>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Quest bonus:</td>
+
+                          <td>
+                            <Stack direction="horizontal" gap={1}>
+                              <IconImage Icon={IconStamina} size="small" />
+
+                              {`+${formatNumber({
+                                decimals: 0,
+                                format: "percentage",
+                                value: questsBonusStamina,
+                              })}`}
+                            </Stack>
+                          </td>
+                        </tr>
+                      )}
+                    </DetailsTable>
+                  </PopoverBody>
+                </Popover>
+              }
+              placement="right"
+              trigger={isShowingStaminaDetails ? ["hover", "focus"] : []}
+            >
+              <span className="w-100">
+                <ReserveMeter reserve="stamina" />
+              </span>
+            </OverlayTrigger>
+
+            <DeltasDisplay delta="stamina" />
+          </Stack>
+
+          <Regeneration reserve="stamina" />
         </Stack>
-
-        <Regeneration reserve="stamina" />
-      </Stack>
-    </IconDisplay>
-  );
+      </IconDisplay>
+    );
+  }
 }

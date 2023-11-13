@@ -30,53 +30,51 @@ export function StunRating() {
     stop: () => isEmpty,
   });
 
-  if (isEmpty) {
-    return null;
+  if (!isEmpty) {
+    return (
+      <IconDisplay Icon={IconStunRating} isAnimated tooltip="Stun rating">
+        <Stack direction="horizontal" gap={1}>
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverHeader className="text-center">Stun rating details</PopoverHeader>
+
+                <PopoverBody>
+                  <DetailsTable>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
+
+                      <td>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconStun} size="small" />
+
+                          {formatNumber({ format: "percentage", value: abilityChance })}
+                        </Stack>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconMight} size="small" />
+                          Might:
+                        </Stack>
+                      </td>
+
+                      <td>{`${mightValue} hits`}</td>
+                    </tr>
+                  </DetailsTable>
+                </PopoverBody>
+              </Popover>
+            }
+            trigger={traumatologyValue ? ["hover", "focus"] : []}
+          >
+            <span>{traumatologyValue ? stunRatingValue : LABEL_EMPTY}</span>
+          </OverlayTrigger>
+
+          <DeltasDisplay delta="stunRating" />
+        </Stack>
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay Icon={IconStunRating} isAnimated tooltip="Stun rating">
-      <Stack direction="horizontal" gap={1}>
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverHeader className="text-center">Stun rating details</PopoverHeader>
-
-              <PopoverBody>
-                <DetailsTable>
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
-
-                    <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconStun} size="small" />
-
-                        {formatNumber({ format: "percentage", value: abilityChance })}
-                      </Stack>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconMight} size="small" />
-                        Might:
-                      </Stack>
-                    </td>
-
-                    <td>{`${mightValue} hits`}</td>
-                  </tr>
-                </DetailsTable>
-              </PopoverBody>
-            </Popover>
-          }
-          trigger={traumatologyValue ? ["hover", "focus"] : []}
-        >
-          <span>{traumatologyValue ? stunRatingValue : LABEL_EMPTY}</span>
-        </OverlayTrigger>
-
-        <DeltasDisplay delta="stunRating" />
-      </Stack>
-    </IconDisplay>
-  );
 }

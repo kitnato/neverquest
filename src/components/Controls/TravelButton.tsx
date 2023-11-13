@@ -22,37 +22,35 @@ export function TravelButton() {
 
   const toggleLocation = useToggleLocation();
 
-  // Happens only if the knapsack is sold and carrying more than the weight difference of its absence.
+  // Occurs if the knapsack is sold and carrying more than the weight difference of its absence.
   const isOverEncumbered = !isWildernessValue && encumbranceExtentValue === "over-encumbered";
 
-  if (!(hasLootedValue && isStageCompletedValue) && isWildernessValue) {
-    return null;
+  if ((hasLootedValue && isStageCompletedValue) || !isWildernessValue) {
+    return (
+      <OverlayTrigger
+        overlay={
+          <Tooltip>
+            {isOverEncumbered
+              ? "Over-encumbered - cannot move."
+              : `${isWildernessValue ? "Go to" : "Return to"} ${
+                  isWildernessValue ? (isShowingLocation ? "Caravan" : LABEL_UNKNOWN) : "Wilderness"
+                }`}
+          </Tooltip>
+        }
+      >
+        <span className={getAnimationClass({ name: "bounceIn" })}>
+          <Button
+            className={
+              isWildernessValue ? getAnimationClass({ isInfinite: true, name: "pulse" }) : undefined
+            }
+            disabled={isGameOverValue || isOverEncumbered}
+            onClick={toggleLocation}
+            variant="outline-dark"
+          >
+            <IconImage Icon={IconTravel} isMirrored={!isWildernessValue} />
+          </Button>
+        </span>
+      </OverlayTrigger>
+    );
   }
-
-  return (
-    <OverlayTrigger
-      overlay={
-        <Tooltip>
-          {isOverEncumbered
-            ? "Over-encumbered - cannot move."
-            : `${isWildernessValue ? "Go to" : "Return to"} ${
-                isWildernessValue ? (isShowingLocation ? "Caravan" : LABEL_UNKNOWN) : "Wilderness"
-              }`}
-        </Tooltip>
-      }
-    >
-      <span className={getAnimationClass({ name: "bounceIn" })}>
-        <Button
-          className={
-            isWildernessValue ? getAnimationClass({ isInfinite: true, name: "pulse" }) : undefined
-          }
-          disabled={isGameOverValue || isOverEncumbered}
-          onClick={toggleLocation}
-          variant="outline-dark"
-        >
-          <IconImage Icon={IconTravel} isMirrored={!isWildernessValue} />
-        </Button>
-      </span>
-    </OverlayTrigger>
-  );
 }

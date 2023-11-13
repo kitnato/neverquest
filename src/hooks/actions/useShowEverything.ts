@@ -6,8 +6,11 @@ import { SHOWING_TYPES } from "@neverquest/types/unions";
 export function useShowEverything() {
   return useRecoilCallback(
     ({ set }) =>
-      () =>
-        Object.values(SHOWING_TYPES).forEach((showing) => set(isShowing(showing), true)),
+      () => {
+        for (const showing of Object.values(SHOWING_TYPES)) {
+          set(isShowing(showing), true);
+        }
+      },
     [],
   );
 }

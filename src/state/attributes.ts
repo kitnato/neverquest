@@ -13,7 +13,7 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 export const absorbedEssence = withStateKey("absorbedEssence", (key) =>
   selector({
     get: ({ get }) =>
-      Array.from<number>(Array(get(level))).reduce(
+      [Array.from({ length: get(level) })].reduce(
         (aggregator, _, index) => aggregator + getAttributePointCost(index),
         0,
       ),
@@ -107,10 +107,9 @@ export const attributeRank = withStateKey("attributeRank", (key) =>
   }),
 );
 
-// TODO - Must use { current } object instead of just boolean, otherwise onSet() does not trigger in useInitializer()
 export const isAttributeUnlocked = withStateKey("isAttributeUnlocked", (key) =>
-  atomFamily<{ current: boolean }, Attribute>({
-    default: { current: false },
+  atomFamily<boolean, Attribute>({
+    default: false,
     effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),

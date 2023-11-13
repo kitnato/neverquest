@@ -12,17 +12,15 @@ export function ArmorEquipped() {
   const armorValue = useRecoilValue(armor);
   const isShowingArmor = useRecoilValue(isShowing("armor"));
 
-  if (!isShowingArmor) {
-    return null;
+  if (isShowingArmor) {
+    return (
+      <IconDisplay
+        Icon={armorValue.name === ARMOR_NONE.name ? IconArmorNone : IconArmor}
+        isAnimated
+        tooltip="Equipped armor"
+      >
+        <ArmorName armor={armorValue} />
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay
-      Icon={armorValue.name === ARMOR_NONE.name ? IconArmorNone : IconArmor}
-      isAnimated
-      tooltip="Equipped armor"
-    >
-      <ArmorName armor={armorValue} />
-    </IconDisplay>
-  );
 }

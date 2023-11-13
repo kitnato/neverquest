@@ -10,7 +10,7 @@ import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import { hireStatus } from "@neverquest/state/caravan";
 import { wildernesses } from "@neverquest/state/encounter";
 import { allowNSFW } from "@neverquest/state/settings";
-import { ATTRIBUTE_TYPES, CREW_TYPES, type CrewStatus } from "@neverquest/types/unions";
+import { ATTRIBUTE_TYPES, CREW_TYPES } from "@neverquest/types/unions";
 import { getNameStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useInitialize() {
@@ -21,16 +21,31 @@ export function useInitialize() {
       (isRetirement?: boolean) => {
         const get = getSnapshotGetter(snapshot);
 
-        if (ls.get(KEY_SESSION) === null || isRetirement) {
-          ATTRIBUTE_TYPES.forEach((current) =>
-            set(isAttributeUnlocked(current), { current: ATTRIBUTES[current].isUnlocked }),
-          );
+        const isStoreEmpty = ls.get(KEY_SESSION) === null;
 
-          CREW_TYPES.forEach((current) =>
-            set(hireStatus(current), {
-              current: CREW[current].requiredStage === 0 ? ("hired" as CrewStatus) : null,
-            }),
-          );
+        if (isRetirement || isStoreEmpty) {
+          const initialStore: Record<string, boolean | string> = {};
+
+          for (const attribute of ATTRIBUTE_TYPES) {
+            const { isUnlocked } = ATTRIBUTES[attribute];
+
+            set(isAttributeUnlocked(attribute), isUnlocked);
+
+            initialStore[`isAttributeUnlocked-${attribute}`] = isUnlocked;
+          }
+
+          for (const crew of CREW_TYPES) {
+            const status = CREW[crew].requiredStage === 0 ? "hired" : "hidden";
+
+            set(hireStatus(crew), status);
+
+            initialStore[`hireStatus-${crew}`] = status;
+          }
+
+          // TODO - onSet in handleLocalStorage does not fire properly for initial changes to string and boolean-type Atoms.
+          if (isStoreEmpty) {
+            ls.set(KEY_SESSION, initialStore);
+          }
 
           set(wildernesses, [
             generateLocation({

@@ -17,7 +17,7 @@ import type { Crew } from "@neverquest/types/unions";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function CrewHirable({ crew }: { crew: Crew }) {
-  const { current: hireStatusCurrent } = useRecoilValue(hireStatus(crew));
+  const hireStatusValue = useRecoilValue(hireStatus(crew));
   const essenceValue = useRecoilValue(essence);
 
   const hireCrew = useHireCrew();
@@ -26,11 +26,7 @@ export function CrewHirable({ crew }: { crew: Crew }) {
   const isAffordable = price <= essenceValue;
   const name = capitalizeAll(crew);
 
-  if (hireStatusCurrent === "hired") {
-    return null;
-  }
-
-  if (hireStatusCurrent === "hirable") {
+  if (hireStatusValue === "hirable") {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay description={description} Icon={Icon} tooltip="Caravan crew">
@@ -61,13 +57,15 @@ export function CrewHirable({ crew }: { crew: Crew }) {
     );
   }
 
-  return (
-    <IconDisplay
-      description={`Unlocks at stage ${requiredStage}.`}
-      Icon={IconUnknown}
-      tooltip="Caravan crew"
-    >
-      {LABEL_UNKNOWN}
-    </IconDisplay>
-  );
+  if (hireStatusValue === "hidden") {
+    return (
+      <IconDisplay
+        description={`Unlocks at stage ${requiredStage}.`}
+        Icon={IconUnknown}
+        tooltip="Caravan crew"
+      >
+        {LABEL_UNKNOWN}
+      </IconDisplay>
+    );
+  }
 }

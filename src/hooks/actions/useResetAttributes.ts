@@ -6,8 +6,11 @@ import { ATTRIBUTE_TYPES } from "@neverquest/types/unions";
 export function useResetAttributes() {
   return useRecoilCallback(
     ({ reset }) =>
-      () =>
-        ATTRIBUTE_TYPES.forEach((current) => reset(attributeRank(current))),
+      () => {
+        for (const current of ATTRIBUTE_TYPES) {
+          reset(attributeRank(current));
+        }
+      },
     [],
   );
 }

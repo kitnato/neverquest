@@ -327,9 +327,9 @@ export function useDefend() {
         });
 
         // Inflict any armor elemental effects.
-        ELEMENTAL_TYPES.forEach((elemental) =>
-          inflictElementalAilment({ elemental, slot: "armor" }),
-        );
+        for (const elemental of ELEMENTAL_TYPES) {
+          inflictElementalAilment({ elemental, slot: "armor" });
+        }
 
         // Inflict any parry and/or thorns damage.
         if (monsterHealthDamage > 0) {

@@ -30,17 +30,15 @@ export function Block() {
     stop: () => isEmpty,
   });
 
-  if (isEmpty) {
-    return null;
+  if (!isEmpty) {
+    return (
+      <IconDisplay Icon={IconBlock} isAnimated tooltip="Block chance">
+        <Stack direction="horizontal" gap={1}>
+          <span>{formatNumber({ format: "percentage", value: blockChanceValue })}</span>
+
+          <DeltasDisplay delta="blockChance" />
+        </Stack>
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay Icon={IconBlock} isAnimated tooltip="Block chance">
-      <Stack direction="horizontal" gap={1}>
-        <span>{formatNumber({ format: "percentage", value: blockChanceValue })}</span>
-
-        <DeltasDisplay delta="blockChance" />
-      </Stack>
-    </IconDisplay>
-  );
 }

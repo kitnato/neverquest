@@ -9,23 +9,21 @@ import { isShowing } from "@neverquest/state/isShowing";
 export function MonsterOffense() {
   const isShowingMonsterOffense = useRecoilValue(isShowing("monsterOffense"));
 
-  if (!isShowingMonsterOffense) {
-    return null;
+  if (isShowingMonsterOffense) {
+    return (
+      <Row>
+        <Col>
+          <MonsterDamage />
+        </Col>
+
+        <Col>
+          <MonsterPoisonRating />
+        </Col>
+
+        <Col>
+          <MonsterBlightRating />
+        </Col>
+      </Row>
+    );
   }
-
-  return (
-    <Row>
-      <Col>
-        <MonsterDamage />
-      </Col>
-
-      <Col>
-        <MonsterPoisonRating />
-      </Col>
-
-      <Col>
-        <MonsterBlightRating />
-      </Col>
-    </Row>
-  );
 }

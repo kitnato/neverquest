@@ -48,15 +48,15 @@ export const canCompleteQuests = withStateKey("canCompleteQuests", (key) =>
   selectorFamily<boolean, QuestClass>({
     get:
       (parameter) =>
-      ({ get }) =>
-        QUEST_TYPES_BY_CLASS[parameter].reduce(
-          (accumulator, currentQuest) =>
-            accumulator ||
-            Object.values(get(questStatuses(currentQuest))).some(
-              (currentStatus) => currentStatus === "achieved",
-            ),
-          false,
-        ),
+      ({ get }) => {
+        let result = false;
+
+        for (const quest of QUEST_TYPES_BY_CLASS[parameter]) {
+          result ||= Object.values(get(questStatuses(quest))).includes("achieved");
+        }
+
+        return result;
+      },
     key,
   }),
 );
@@ -70,7 +70,7 @@ export const completedQuestsCount = withStateKey("completedQuestsCount", (key) =
           (accumulator, currentQuest) =>
             accumulator +
             Object.values(get(questStatuses(currentQuest))).filter((currentStatus) =>
-              QUEST_BONUS_TYPES.some((currentBonus) => currentBonus === currentStatus),
+              QUEST_BONUS_TYPES.includes(currentStatus as QuestBonus),
             ).length,
           0,
         ),
@@ -83,7 +83,7 @@ export const questsBonus = withStateKey("questsBonus", (key) =>
     get:
       (parameter) =>
       ({ get }) =>
-        !get(canUseJournal) || get(ownedItem("journal")) === null
+        !get(canUseJournal) || get(ownedItem("journal")) === undefined
           ? 0
           : QUEST_TYPES.reduce(
               (accumulator, currentQuest) =>

@@ -10,7 +10,7 @@ import IconShredder from "@neverquest/icons/shredder.svg?react";
 import IconStalwart from "@neverquest/icons/stalwart.svg?react";
 import IconTank from "@neverquest/icons/tank.svg?react";
 import IconTormentor from "@neverquest/icons/tormentor.svg?react";
-import type { SVGIcon } from "@neverquest/types/props";
+import type { SVGIcon } from "@neverquest/types/components";
 import type { Trait } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 

@@ -11,25 +11,23 @@ import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
 export function MonsterAilments() {
   const canReceiveAilmentsValue = useRecoilValue(canReceiveAilments);
 
-  if (!canReceiveAilmentsValue) {
-    return null;
+  if (canReceiveAilmentsValue) {
+    return (
+      <Card>
+        <Card.Body>
+          <Stack gap={3}>
+            {ELEMENTAL_TYPES.map((current) => (
+              <MonsterElementalAilment elemental={current} key={current} />
+            ))}
+
+            <MonsterStunned />
+
+            <MonsterStaggered />
+
+            <MonsterBleeding />
+          </Stack>
+        </Card.Body>
+      </Card>
+    );
   }
-
-  return (
-    <Card>
-      <Card.Body>
-        <Stack gap={3}>
-          {ELEMENTAL_TYPES.map((current) => (
-            <MonsterElementalAilment elemental={current} key={current} />
-          ))}
-
-          <MonsterStunned />
-
-          <MonsterStaggered />
-
-          <MonsterBleeding />
-        </Stack>
-      </Card.Body>
-    </Card>
-  );
 }

@@ -19,26 +19,20 @@ export function ItemsInherited() {
         <span className="fst-italic">{LABEL_NONE}</span>
       )}
 
-      {Object.entries(ownsInheritableItemsValue).map(([key, current]) => {
-        if (current === false) {
-          return null;
-        }
-
-        if (isTrinket(key)) {
+      {Object.keys(ownsInheritableItemsValue).map((current) => {
+        if (isTrinket(current)) {
           return (
             <ItemDisplay
-              item={TRINKETS[key].item}
-              key={TRINKETS[key].item.ID}
+              item={TRINKETS[current].item}
+              key={TRINKETS[current].item.ID}
               overlayPlacement="right"
             />
           );
         }
 
-        if (isInfusable(key)) {
-          return <Infusable item={INFUSABLES[key].item} key={INFUSABLES[key].item.ID} />;
+        if (isInfusable(current)) {
+          return <Infusable item={INFUSABLES[current].item} key={INFUSABLES[current].item.ID} />;
         }
-
-        return null;
       })}
     </Stack>
   );

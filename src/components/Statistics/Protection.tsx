@@ -42,53 +42,51 @@ export function Protection() {
     }
   });
 
-  if (!isShowingProtection) {
-    return null;
+  if (isShowingProtection) {
+    return (
+      <IconDisplay Icon={IconProtection} isAnimated tooltip="Total protection">
+        <Stack direction="horizontal" gap={1}>
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverHeader className="text-center">Protection details</PopoverHeader>
+
+                <PopoverBody>
+                  <DetailsTable>
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Armor:</td>
+
+                      <td>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconArmor} size="small" />
+
+                          {formatNumber({ value: armorValue.protection })}
+                        </Stack>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconTank} size="small" />
+                          Tank:
+                        </Stack>
+                      </td>
+
+                      <td>x2</td>
+                    </tr>
+                  </DetailsTable>
+                </PopoverBody>
+              </Popover>
+            }
+            trigger={showDetails ? ["hover", "focus"] : []}
+          >
+            <span>{protectionValue}</span>
+          </OverlayTrigger>
+
+          <DeltasDisplay delta="protection" />
+        </Stack>
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay Icon={IconProtection} isAnimated tooltip="Total protection">
-      <Stack direction="horizontal" gap={1}>
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverHeader className="text-center">Protection details</PopoverHeader>
-
-              <PopoverBody>
-                <DetailsTable>
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Armor:</td>
-
-                    <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconArmor} size="small" />
-
-                        {formatNumber({ value: armorValue.protection })}
-                      </Stack>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconTank} size="small" />
-                        Tank:
-                      </Stack>
-                    </td>
-
-                    <td>x2</td>
-                  </tr>
-                </DetailsTable>
-              </PopoverBody>
-            </Popover>
-          }
-          trigger={showDetails ? ["hover", "focus"] : []}
-        >
-          <span>{protectionValue}</span>
-        </OverlayTrigger>
-
-        <DeltasDisplay delta="protection" />
-      </Stack>
-    </IconDisplay>
-  );
 }

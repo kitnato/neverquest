@@ -7,7 +7,7 @@ import type { NumberFormat } from "@neverquest/types/unions";
 
 export function capitalizeAll(string: string) {
   // ^\w{1} matches the first letter of the word, or (|) \s+ matches any amount of whitespace between the words.
-  return string.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
+  return string.replaceAll(/(^\w)|(\s+\w)/g, (letter) => letter.toUpperCase());
 }
 
 export function formatEnumeration(list: string[]) {
@@ -19,7 +19,7 @@ export function formatEnumeration(list: string[]) {
 // Correctly does the rounding as opposed to .toFixed().
 function formatFloat({ decimals = 2, value }: { decimals?: number; value: number }) {
   const multiplier = 10 ** decimals;
-  const result = parseFloat((value * multiplier).toFixed(12));
+  const result = Number.parseFloat((value * multiplier).toFixed(12));
 
   return (Math.round(result) / multiplier).toFixed(decimals).toLocaleString();
 }
@@ -72,9 +72,9 @@ export function formatNumber({
 
 export function formatSlug(string: string) {
   return string
-    .replace(/^\s+|\s+$/g, "")
+    .replaceAll(/^\s+|\s+$/g, "")
     .toLowerCase()
-    .replace(/[^a-z0-9 -]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
+    .replaceAll(/[^\d a-z-]/g, "")
+    .replaceAll(/\s+/g, "-")
+    .replaceAll(/-+/g, "-");
 }

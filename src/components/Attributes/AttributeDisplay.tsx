@@ -35,7 +35,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
   const canIncrease = areAttributesAffordableValue && !isUnsafe;
   const name = capitalizeAll(attribute);
 
-  if (isAttributeUnlockedValue.current) {
+  if (isAttributeUnlockedValue) {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay description={description} Icon={Icon} tooltip="Attribute">

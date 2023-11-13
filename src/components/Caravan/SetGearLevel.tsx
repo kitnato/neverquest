@@ -29,7 +29,7 @@ export function SetGearLevel({
 
           const parsedValue = Number.parseInt(value);
 
-          if (isNaN(parsedValue) || parsedValue < 1 || parsedValue > maximumWeaponLevel) {
+          if (Number.isNaN(parsedValue) || parsedValue < 1 || parsedValue > maximumWeaponLevel) {
             return;
           }
 

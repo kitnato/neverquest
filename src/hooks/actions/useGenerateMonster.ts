@@ -38,7 +38,9 @@ export function useGenerateMonster() {
         reset(monsterHealth);
         reset(distance);
 
-        MONSTER_AILMENT_TYPES.forEach((current) => reset(monsterAilmentDuration(current)));
+        for (const current of MONSTER_AILMENT_TYPES) {
+          reset(monsterAilmentDuration(current));
+        }
 
         set(isMonsterNew, true);
 

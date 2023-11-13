@@ -20,7 +20,7 @@ export function animateElement({
 
   const { classList } = element;
   const animationName = `${CLASS_ANIMATE_PREFIX}${name}`;
-  const animationSpeedClass = speed ? `${CLASS_ANIMATE_PREFIX}${speed}` : null;
+  const animationSpeedClass = speed ? `${CLASS_ANIMATE_PREFIX}${speed}` : undefined;
 
   if (classList.contains("d-none")) {
     classList.remove("d-none");
@@ -28,7 +28,7 @@ export function animateElement({
 
   classList.add(CLASS_ANIMATED, animationName);
 
-  if (animationSpeedClass !== null) {
+  if (animationSpeedClass !== undefined) {
     classList.add(animationSpeedClass);
   }
 
@@ -38,7 +38,7 @@ export function animateElement({
       event.stopPropagation();
       classList.remove(CLASS_ANIMATED, animationName);
 
-      if (animationSpeedClass !== null) {
+      if (animationSpeedClass !== undefined) {
         classList.remove(animationSpeedClass);
       }
 
@@ -53,7 +53,7 @@ export function animateElement({
 export function stackItems<ItemType>(items: ItemType[]) {
   const stacker: { item: ItemType; stack: number }[] = [];
 
-  items.forEach((item) => {
+  for (const item of items) {
     if (isStackable(item)) {
       const existingStackIndex = stacker.findIndex(
         ({ item: stackedItem }) => isStackable(stackedItem) && stackedItem.name === item.name,
@@ -70,7 +70,7 @@ export function stackItems<ItemType>(items: ItemType[]) {
     } else {
       stacker.push({ item, stack: 1 });
     }
-  });
+  }
 
   return stacker;
 }

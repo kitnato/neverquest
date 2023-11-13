@@ -11,10 +11,7 @@ export const skillPrice = withStateKey("skillPrice", (key) =>
   selector({
     get: ({ get }) =>
       SKILL_PRICE_BASE *
-      Math.pow(
-        SKILL_PRICE_FACTOR,
-        Object.values(get(trainedSkills)).filter((current) => current).length,
-      ),
+      Math.pow(SKILL_PRICE_FACTOR, Object.values(get(trainedSkills)).filter(Boolean).length),
     key,
   }),
 );
@@ -22,6 +19,7 @@ export const skillPrice = withStateKey("skillPrice", (key) =>
 export const trainedSkills = withStateKey("trainedSkills", (key) =>
   selector({
     get: ({ get }) =>
+      // eslint-disable-next-line unicorn/no-array-reduce
       SKILL_TYPES.reduce(
         (aggregator, current) => ({ ...aggregator, [current]: get(isSkillAcquired(current)) }),
         {} as Record<Skill, boolean>,

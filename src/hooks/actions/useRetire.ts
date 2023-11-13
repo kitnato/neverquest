@@ -46,7 +46,7 @@ export function useRetire() {
 
         const selectedTraitValue = get(selectedTrait);
 
-        if (selectedTraitValue !== null) {
+        if (selectedTraitValue !== undefined) {
           set(isTraitAcquired(selectedTraitValue), true);
           reset(selectedTrait);
 
@@ -79,13 +79,15 @@ export function useRetire() {
         reset(fletcherInventory);
         reset(merchantInventory);
 
-        MASTERY_TYPES.forEach((current) => {
-          reset(isMasteryUnlocked(current));
-          reset(masteryProgress(current));
-          reset(masteryRank(current));
-        });
+        for (const mastery of MASTERY_TYPES) {
+          reset(isMasteryUnlocked(mastery));
+          reset(masteryProgress(mastery));
+          reset(masteryRank(mastery));
+        }
 
-        SKILL_TYPES.forEach((current) => reset(isSkillAcquired(current)));
+        for (const skill of SKILL_TYPES) {
+          reset(isSkillAcquired(skill));
+        }
 
         set(inventory, (currentInventory) =>
           currentInventory.filter((currentItem) => {
@@ -93,8 +95,8 @@ export function useRetire() {
               return false;
             }
 
-            return INHERITABLE_ITEMS.some(
-              (currentInheritable) => currentInheritable === currentItem.name,
+            return INHERITABLE_ITEMS.includes(
+              currentItem.name as (typeof INHERITABLE_ITEMS)[number],
             );
           }),
         );

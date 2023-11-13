@@ -19,29 +19,27 @@ export function CollectLootButton() {
   const gatherLoot = useCollectLoot();
 
   if (
-    (hasLootedValue && itemsLootValue.length === 0) ||
-    !isStageCompletedValue ||
-    !isWildernessValue
+    (!hasLootedValue || itemsLootValue.length > 0) &&
+    isStageCompletedValue &&
+    isWildernessValue
   ) {
-    return null;
+    return (
+      <OverlayTrigger overlay={<Tooltip>Collect loot</Tooltip>}>
+        <span className={getAnimationClass({ name: "bounceIn" })}>
+          <Button
+            className={
+              hasLootedValue
+                ? undefined
+                : `${getAnimationClass({ isInfinite: true, name: "pulse" })}`
+            }
+            disabled={isGameOverValue}
+            onClick={gatherLoot}
+            variant="outline-dark"
+          >
+            <IconImage Icon={IconLoot} />
+          </Button>
+        </span>
+      </OverlayTrigger>
+    );
   }
-
-  return (
-    <OverlayTrigger overlay={<Tooltip>Collect loot</Tooltip>}>
-      <span className={getAnimationClass({ name: "bounceIn" })}>
-        <Button
-          className={
-            !hasLootedValue
-              ? `${getAnimationClass({ isInfinite: true, name: "pulse" })}`
-              : undefined
-          }
-          disabled={isGameOverValue}
-          onClick={gatherLoot}
-          variant="outline-dark"
-        >
-          <IconImage Icon={IconLoot} />
-        </Button>
-      </span>
-    </OverlayTrigger>
-  );
 }

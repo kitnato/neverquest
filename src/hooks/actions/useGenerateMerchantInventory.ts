@@ -66,7 +66,7 @@ export function useGenerateMerchantInventory() {
 
             if (
               isGear(item) ||
-              get(ownedItem(item.name)) === null ||
+              get(ownedItem(item.name)) === undefined ||
               (item.name === "antique coin" && get(canUseJournal))
             ) {
               merchantInventoryNew.push({

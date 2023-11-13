@@ -40,7 +40,7 @@ export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
           item={itemWithID}
           onPurchase={() => {
             acquireItem(itemWithID);
-            transactEssence(-itemWithID.price);
+            transactEssence(-price);
 
             setID(nanoid());
           }}

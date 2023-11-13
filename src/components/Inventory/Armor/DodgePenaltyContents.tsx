@@ -20,7 +20,7 @@ export function DodgePenaltyContents({ staminaCost }: { staminaCost: GeneratorRa
 
           {LABEL_NONE}
         </>
-      ) : staminaCost === Infinity ? (
+      ) : staminaCost === Number.POSITIVE_INFINITY ? (
         <>Cannot dodge.</>
       ) : staminaCost === 0 ? (
         LABEL_NONE

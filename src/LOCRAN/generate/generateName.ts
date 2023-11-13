@@ -21,10 +21,10 @@ export function generateName({
   const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
 
   if (prefix === undefined || suffix === undefined) {
-    throw Error("Invalid name.");
+    throw new Error("Invalid name.");
   }
 
-  const connector = prefix.name[prefix.name.length - 1] === suffix.name[0] ? "-" : "";
+  const connector = prefix.name.at(-1) === suffix.name[0] ? "-" : "";
 
   let title;
 
@@ -42,7 +42,7 @@ export function generateName({
     title = filteredTitles[Math.floor(Math.random() * filteredTitles.length)];
 
     if (title === undefined) {
-      throw Error("Invalid title.");
+      throw new Error("Invalid title.");
     }
   }
 

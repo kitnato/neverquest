@@ -38,43 +38,41 @@ export function InventoryButton() {
       name: "headShake",
       onEnd: resetNotifyEncumbranceValue,
     });
-  }, [badgeElement, resetNotifyEncumbranceValue]);
+  }, [resetNotifyEncumbranceValue]);
 
-  if (ownedItemKnapsack === null) {
-    return null;
+  if (ownedItemKnapsack !== undefined) {
+    return (
+      <>
+        <OverlayTrigger overlay={<Tooltip>Inventory</Tooltip>}>
+          <span className={getAnimationClass({ name: "bounceIn" })}>
+            <Button
+              disabled={isAttackingValue || isGameOverValue}
+              onClick={() => setIsInventoryOpen(true)}
+              variant="outline-dark"
+            >
+              <IconImage Icon={IconInventory} />
+
+              {(encumbranceExtentValue !== "none" || notifyOverEncumbranceValue) && (
+                <span ref={badgeElement}>
+                  <IconBadge alignToButton>
+                    <IconImage Icon={IconEncumbrance} size="small" />
+                  </IconBadge>
+                </span>
+              )}
+
+              <ItemAcquisition />
+            </Button>
+          </span>
+        </OverlayTrigger>
+
+        <DismissableScreen
+          isShowing={isInventoryOpenValue}
+          onClose={() => setIsInventoryOpen(false)}
+          title="Inventory"
+        >
+          <Inventory />
+        </DismissableScreen>
+      </>
+    );
   }
-
-  return (
-    <>
-      <OverlayTrigger overlay={<Tooltip>Inventory</Tooltip>}>
-        <span className={getAnimationClass({ name: "bounceIn" })}>
-          <Button
-            disabled={isAttackingValue || isGameOverValue}
-            onClick={() => setIsInventoryOpen(true)}
-            variant="outline-dark"
-          >
-            <IconImage Icon={IconInventory} />
-
-            {(encumbranceExtentValue !== "none" || notifyOverEncumbranceValue) && (
-              <span ref={badgeElement}>
-                <IconBadge alignToButton>
-                  <IconImage Icon={IconEncumbrance} size="small" />
-                </IconBadge>
-              </span>
-            )}
-
-            <ItemAcquisition />
-          </Button>
-        </span>
-      </OverlayTrigger>
-
-      <DismissableScreen
-        isShowing={isInventoryOpenValue}
-        onClose={() => setIsInventoryOpen(false)}
-        title="Inventory"
-      >
-        <Inventory />
-      </DismissableScreen>
-    </>
-  );
 }

@@ -4,12 +4,14 @@ import type { Placement } from "react-bootstrap/esm/types";
 import type { UISize } from "@neverquest/types/ui";
 import type { Showing } from "@neverquest/types/unions";
 
-export type ComparisonProps = {
-  showing: Showing;
-  subtrahend: number;
-} | null;
+export type Comparison =
+  | {
+      showing: Showing;
+      subtrahend: number;
+    }
+  | undefined;
 
-export type IconImageProps = {
+export type IconImageProperties = {
   Icon: SVGIcon;
   isFlipped?: boolean;
   isMirrored?: boolean;
@@ -20,7 +22,7 @@ export type IconImageProps = {
   tooltip?: ReactNode;
 };
 
-export type IconImageDOMProps = Omit<IconImageProps, "Icon">;
+export type IconImageDOMProperties = Omit<IconImageProperties, "Icon">;
 
 export type SVGIcon = FunctionComponent<SVGProps<SVGSVGElement> & { title?: string }>;
 

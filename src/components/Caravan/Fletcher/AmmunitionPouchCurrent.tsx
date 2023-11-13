@@ -19,19 +19,20 @@ export function AmmunitionPouchCurrent() {
     state: ammunition,
   });
 
-  if (ownedAmmunitionPouch === null) {
-    return null;
+  if (ownedAmmunitionPouch !== undefined) {
+    return (
+      <IconDisplay Icon={IconAmmunitionPouch} tooltip="Ammunition pouch">
+        <LabelledProgressBar
+          value={(ammunitionValue / ammunitionMaximumValue) * 100}
+          variant="dark"
+        >
+          <Stack direction="horizontal" gap={1}>
+            {`${ammunitionValue}/${ammunitionMaximumValue}`}
+
+            <DeltasDisplay delta="ammunition" />
+          </Stack>
+        </LabelledProgressBar>
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay Icon={IconAmmunitionPouch} tooltip="Ammunition pouch">
-      <LabelledProgressBar value={(ammunitionValue / ammunitionMaximumValue) * 100} variant="dark">
-        <Stack direction="horizontal" gap={1}>
-          {`${ammunitionValue}/${ammunitionMaximumValue}`}
-
-          <DeltasDisplay delta="ammunition" />
-        </Stack>
-      </LabelledProgressBar>
-    </IconDisplay>
-  );
 }

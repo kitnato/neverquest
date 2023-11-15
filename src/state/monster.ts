@@ -1,6 +1,8 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import { ELEMENTALS } from "@neverquest/data/inventory";
+import { ownedItem } from "./inventory";
+import { RETIREMENT_MINIMUM_LEVEL } from "@neverquest/data/general";
+import { DROP_CHANCES, ELEMENTALS, INFUSABLES, TRINKETS } from "@neverquest/data/inventory";
 import {
   BLIGHT,
   BOSS_STAGE_INTERVAL,
@@ -15,7 +17,7 @@ import { AILMENT_PENALTY, BLEED } from "@neverquest/data/statistics";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
 import { range, shield, totalElementalEffects, weapon } from "@neverquest/state/gear";
-import { essenceBonus } from "@neverquest/state/items";
+import { infusablePower } from "@neverquest/state/items";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import {
@@ -250,11 +252,26 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
       return {
         essence: Math.round(
           (base + base * factor) * 1 +
-            get(progress) * bonus * (isBossValue ? boss : 1) * (1 + get(essenceBonus)),
+            get(progress) *
+              bonus *
+              (isBossValue ? boss : 1) *
+              (1 + get(infusablePower("monkey paw"))),
         ),
         gems: isBossValue
           ? 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL)
           : 0,
+        trinket:
+          get(ownedItem("mysterious egg")) === undefined
+            ? stageValue >= RETIREMENT_MINIMUM_LEVEL
+              ? get(ownedItem("antique coin")) !== undefined &&
+                Math.random() <= DROP_CHANCES["mysterious egg"]
+                ? INFUSABLES["mysterious egg"].item
+                : undefined
+              : undefined
+            : get(ownedItem("torn manuscript")) === undefined &&
+                Math.random() <= DROP_CHANCES["torn manuscript"]
+              ? TRINKETS["torn manuscript"].item
+              : undefined,
       };
     },
     key,

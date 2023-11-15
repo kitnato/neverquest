@@ -81,6 +81,7 @@ export type Delta =
   | "essenceLoot"
   | "executionThreshold"
   | "finesseProgress"
+  | "hatchingProgress"
   | "healthMaximum"
   | "healthRegenerationAmount"
   | "healthRegenerationRate"
@@ -117,12 +118,10 @@ export type Gem = (typeof GEM_TYPES)[number];
 export const GRIP_TYPES = ["one-handed", "two-handed"] as const;
 export type Grip = (typeof GRIP_TYPES)[number];
 
-export const INFUSABLE_TYPES = ["monkey paw", "tome of power"] as const;
+export const INFUSABLE_TYPES = ["monkey paw", "mysterious egg", "tome of power"] as const;
 export type Infusable = (typeof INFUSABLE_TYPES)[number];
 
 export type Item = Consumable | Gear | Trinket;
-
-export type Location = "caravan" | "wilderness";
 
 export const MASTERY_TYPES = [
   "butchery",
@@ -317,9 +316,9 @@ export type StateKey =
   | "encumbranceMaximum"
   | "equippableItems"
   | "essence"
-  | "essenceBonus"
   | "essenceLoot"
   | "executionThreshold"
+  | "finality"
   | "fletcherInventory"
   | "floatingTextQueues"
   | "hasEnoughAmmunition"
@@ -329,6 +328,7 @@ export type StateKey =
   | "healthMaximum"
   | "healthMaximumPoisoned"
   | "hireStatus"
+  | "infusablePower"
   | "infusionCurrent"
   | "infusionDelta"
   | "infusionLevel"
@@ -401,7 +401,6 @@ export type StateKey =
   | "poisonDuration"
   | "poisonLength"
   | "poisonMagnitude"
-  | "powerBonusBoost"
   | "progress"
   | "progressMaximum"
   | "progressReduction"
@@ -463,8 +462,10 @@ export const TRINKET_TYPES = [
   "antique coin",
   "compass",
   "hearthstone",
+  "familiar",
   "journal",
   "knapsack",
+  "torn manuscript",
 ] as const;
 export type Trinket = (typeof TRINKET_TYPES)[number];
 

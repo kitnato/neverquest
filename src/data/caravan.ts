@@ -15,13 +15,12 @@ import type {
   WeaponClass,
   WeaponModality,
 } from "@neverquest/LOCRAN/types";
-import type { InfusableItem, TrinketItem } from "@neverquest/types";
+import type { UsableItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
 import type { Crew, Grip } from "@neverquest/types/unions";
 
 export const AMMUNITION_PRICE = 10;
 
-export const GEAR_LEVEL_MAXIMUM = 100;
 export const GEAR_LEVEL_RANGE_MAXIMUM = 3;
 
 export const CREW: Record<
@@ -108,7 +107,11 @@ export const CREW: Record<
       99: "I fear the end is imminent.",
       100: "How are you still here?",
       101: "You shouldn't be h̷̡̔e̵̖̍r̶͍͝e̵̮͂.",
-      200: "Ṅ̷̲͓̙̖͇͖͇̖̀͐̓̈́͊͐̽̂͝ǒ̵͖̳͕͖͖͖͍̝̳̦̗t̸̖͖͚̬̠͜͝ͅḫ̸̓͋̂̾ȋ̵̜͍̙̠͍̦̲͔̺̈́n̴̞͙̉̃͆͝͝g̷̻͉͓͂̊̊͑͂̋͂̍͒͜ ̴͕̮͉̾i̵̡͙̜̭̦͎̿́͂̈̆̍̀̚͝͝s̶̛̖̯̮̻̾̊̏͑͌̅̋̆͝ ̵̺͖͉̤̰̤͚̀̾͌͆͊̈́̏͝ṟ̷͇̦͓͙̹̟͋̐̈́̅̒͜ë̸́͌͘͜ͅą̴̼͖͉̘͙͝l̸̖̩̖̈̂̀͝ ̸̨̛͍͈͔̥̪̥͖̩̒͂̐̃̀̀̿͝.̴̻͈̠̱̮̇́.̵̩̬̞̬̮̼̙̲̩̇̏̈́͋̒̃̈́̽̂͘͝.̴̼͈͍͈̳͂",
+      110: "This is all w̷͚̽r̵̼̀õ̸͖n̶͔̄g̴͎̍. I don't ụ̵́n̵̺̾ḑ̴̂e̸̯͛r̶͖͋s̷̺͆t̸͔͋a̸͍͝ń̵̙d̷̺̽.",
+      120: "Ĺ̷̢̞̗͝ḝ̴̖̠̋̄a̸͕̓̄v̸͍̹̣̍͠è̵͎̜͕̚ ̸̦͒́w̸̮͆̿ĥ̴͙̼̫̕͝i̶͈̩̍l̶̡͕̈́e̸͙͛͠ y̶̗͆̓̂̋ò̵̺̩͒͑͝û̵̮̹̮̺̬͋ ̴̟͚͚̳̏s̵̡͍͚̦̐̓͐̂̍ͅt̶͎͂͋̽ĭ̷͈̱͖̟l̶̖͍̥̙̈́l̷̖̜̼̎̆̀̊͘ ̸̱̄͋c̴̩̳̅͌̚a̴̙͐͂̚n̴̮͕̥̈́̄̈.̴̖͇̑ Please.",
+      130: "I̴͇͝ṅ̶̡̧e̸̫̘͗s̵̓̂͜c̷̬̭̈́ǎ̵͚̭p̸̤͌a̴͇̾͑b̶̎̋͜l̵͎̅̃ḙ̷̢̉.̸̧̣̒ U̶̶̷̡͈͙̣̣̺̯͆͋͂̑͠ͅn̴̶̶̢̢̨͚͈̔̔̿́͌̚f̷̶̸͕͕̖̀̾̈́̈́́̾͋͜à̴̸̶̲̻̣̘̪̻͛̏͘͝ţ̸̷̸̨͈̠̉̈́̊̊̃̕ḣ̴̸̵̲̲̟̙̙̻͔͗́͆͒̂͠͝ǫ̴̵̶̟̠͕̦̤̾̆̀̋́͋͆̋̈͝m̷̸̷̢̥̖̙̈́͆͌͒̾̔͝ą̶̴̷̱̲̲̗̬͔̉̒̈̆͘b̸̷̷̡̝͈͉̤́̍͌̀͝͝ͅl̷̷̷̳̬͚͚͔̬̀̉̽̀͋͝ẽ̵̷̶̡̨̨͉̣̰̰̞̔͑.̵ I̸̦̔͌n̵̛̫s̵̟̉͘i̷̗̙͑̔d̶̢̳́̍ë̴͎̹́̊ ̸̧̽̕ë̴̘̼́v̷̫̭̚ė̸̺̱̾r̴̘̒̓y̷̟̖̽ṱ̵̾h̴̗́ị̵͕̓n̷̪̟̾͛g̶̳̉̿.̴̪̗͆",
+      140: "Why? D̷̪̼͇̾ấ̴̧͎̲͉̝̘̋͝r̵͉̤͍̭̭̳̼̐̋̀͝ͅk̷̗̮͖͓̦͍͓̥̈͗͗̋̚͘͝n̵͎̓͆̔̂̐̅̎̇ȩ̵̛͎̱͙̼̹̼̞͍̉̐̈́͐̕͜s̷̛̠͈͇̐̽̾̈́̆͐͊̈́̅s̴̡̧̼̹̩͖͔͈̟̥̑͒̃͛̊ ̶̼̰̮͉͖̬̜̌̈́̊͝a̵̧̮̼̬͚̰͇̟͋͛̒̾̀̉ǹ̴̨͍̻̩͓̝̱̼ͅd̸̛̹̠͖̦̲̺͔̹̳̼͆͐̈́̇̽̀̇͐̉ ̶̯͖͉̯͇͍̭̥̑́͌̋̽̕ͅm̵̨̨̡̦̺͓̩̟̀͒̂̆̈́̀ȧ̸̬̈́̚d̷̜͈̰̖̤̞̗͎̉͑̔͒̔͜͝n̷̲̄͜e̸̝̬͛̑̀́̕͜͝s̴̘̪̪̓̉͆͗̾̑͘s̸̞͖̖͈̹̜̦͇̗͐̎̏ͅ ̷̼̠̳̣̜̘̮͓̘̇͜ń̸̨͈̞̤͉̝̏̉̃͘e̵̟̯͙͊̀͒̔̊̓͊͝v̶̬̙̓̉̑̅͊̊͊͘͠è̴̀́̏̄̾̚͝ͅr̶̼̥̺̺̪͖̄̀̈́̾͆͒̈́́͠-̶̹͇̪͛̃͑͘͝ȩ̸̧͖̙̍n̶̝̊d̴̨͖̂̈́̅ǐ̷̺̽͝͠n̶̺̩̔̊̂͗̊̽ͅg̶̞͚͘.",
+      150: "Ṅ̷̲͓̙̖͇͖͇̖̀͐̓̈́͊͐̽̂͝ǒ̵͖̳͕͖͖͖͍̝̳̦̗t̸̖͖͚̬̠͜͝ͅḫ̸̓͋̂̾ȋ̵̜͍̙̠͍̦̲͔̺̈́n̴̞͙̉̃͆͝͝g̷̻͉͓͂̊̊͑͂̋͂̍͒͜ ̴͕̮͉̾i̵̡͙̜̭̦͎̿́͂̈̆̍̀̚͝͝s̶̛̖̯̮̻̾̊̏͑͌̅̋̆͝ ̵̺͖͉̤̰̤͚̀̾͌͆͊̈́̏͝ṟ̷͇̦͓͙̹̟͋̐̈́̅̒͜ë̸́͌͘͜ͅą̴̼͖͉̘͙͝l̸̖̩̖̈̂̀͝ ̸̨̛͍͈͔̥̪̥͖̩̒͂̐̃̀̀̿͝.̴̻͈̠̱̮̇́.̵̩̬̞̬̮̼̙̲̩̇̏̈́͋̒̃̈́̽̂͘͝.̴̼͈͍͈̳͂",
     },
     price: 1,
     requiredStage: 0,
@@ -153,8 +156,7 @@ export const MEDIC_PRICE_SURGERY_CRITICAL = 100;
 
 export const MERCHANT_OFFERS: Record<
   number,
-  | InfusableItem
-  | TrinketItem
+  | UsableItem
   | (ArtifactType<"armor"> & {
       gearClass: ArmorClass;
     })

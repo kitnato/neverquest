@@ -11,6 +11,7 @@ import IconBleed from "@neverquest/icons/bleed.svg?react";
 import IconBlunt from "@neverquest/icons/blunt.svg?react";
 import IconCompass from "@neverquest/icons/compass.svg?react";
 import IconElixir from "@neverquest/icons/elixir.svg?react";
+import IconFamiliar from "@neverquest/icons/familiar.svg?react";
 import IconFire from "@neverquest/icons/fire.svg?react";
 import IconStone from "@neverquest/icons/hearthstone.svg?react";
 import IconIce from "@neverquest/icons/ice.svg?react";
@@ -18,6 +19,7 @@ import IconJournal from "@neverquest/icons/journal.svg?react";
 import IconKnapsack from "@neverquest/icons/knapsack.svg?react";
 import IconLightning from "@neverquest/icons/lightning.svg?react";
 import IconMonkeyPaw from "@neverquest/icons/monkey-paw.svg?react";
+import IconMysteriousEgg from "@neverquest/icons/mysterious-egg.svg?react";
 import IconParry from "@neverquest/icons/parry.svg?react";
 import IconPhylactery from "@neverquest/icons/phylactery.svg?react";
 import IconPiercing from "@neverquest/icons/piercing.svg?react";
@@ -28,6 +30,7 @@ import IconShieldTower from "@neverquest/icons/shield-tower.svg?react";
 import IconSlashing from "@neverquest/icons/slashing.svg?react";
 import IconStun from "@neverquest/icons/stun.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
+import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type {
   AmmunitionPouchItem,
@@ -178,6 +181,11 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
     },
   };
 
+export const DROP_CHANCES = {
+  "mysterious egg": 0.1,
+  "torn manuscript": 0.03,
+};
+
 export const ELEMENTALS: Record<
   Elemental,
   { ailment: MonsterAilmentElemental; color: string; Icon: SVGIcon }
@@ -220,16 +228,11 @@ export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
 export const GEM_FITTING_COST = [20, 40, 100, 200, 500];
 export const GEMS_MAXIMUM = 5;
 
-export const INFUSION_LEVEL_MAXIMUM = 100;
 export const INFUSABLES: Record<
   Infusable,
   {
     Icon: SVGIcon;
-    item: InfusableItem & {
-      growthBase: number;
-      maximum: number;
-      minimum: number;
-    };
+    item: InfusableItem;
   }
 > = {
   "monkey paw": {
@@ -243,6 +246,20 @@ export const INFUSABLES: Record<
       minimum: 0.2,
       name: "monkey paw",
       price: 500,
+      weight: 4,
+    },
+  },
+  "mysterious egg": {
+    Icon: IconMysteriousEgg,
+    item: {
+      description: "A perplexing ovum emanating otherworldly energy.",
+      growthBase: 2,
+      ID: nanoid(),
+      level: 1,
+      maximum: 1,
+      minimum: 0,
+      name: "mysterious egg",
+      price: 1000,
       weight: 4,
     },
   },
@@ -377,6 +394,16 @@ export const TRINKETS: Record<
       weight: 2,
     },
   },
+  familiar: {
+    Icon: IconFamiliar,
+    item: {
+      description: "Blessed with the ability to see beyond.",
+      ID: nanoid(),
+      name: "familiar",
+      price: 1,
+      weight: 10,
+    },
+  },
   hearthstone: {
     Icon: IconStone,
     item: {
@@ -384,7 +411,7 @@ export const TRINKETS: Record<
       ID: nanoid(),
       name: "hearthstone",
       price: 20,
-      weight: 2,
+      weight: 3,
     },
   },
   journal: {
@@ -406,6 +433,16 @@ export const TRINKETS: Record<
       name: "knapsack",
       price: 10,
       weight: 0,
+    },
+  },
+  "torn manuscript": {
+    Icon: IconTornManuscript,
+    item: {
+      description: "Alchemical methodologies beyond comprehension.",
+      ID: nanoid(),
+      name: "torn manuscript",
+      price: 5000,
+      weight: 3,
     },
   },
 };

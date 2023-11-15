@@ -65,7 +65,7 @@ export function useAttack() {
         const isWeaponTwoHanded = isMelee(weaponValue) && weaponValue.grip === "two-handed";
         const hasInflictedCritical =
           (isWeaponRanged && get(isTraitAcquired("sharpshooter")) && get(distance) > 0) ||
-          Math.random() < get(criticalChance);
+          Math.random() <= get(criticalChance);
         const inExecutionRange =
           isWeaponTwoHanded &&
           monsterHealthValue / get(monsterHealthMaximum) <= get(executionThreshold);
@@ -148,7 +148,7 @@ export function useAttack() {
           );
           const monsterDeltas: DeltaDisplay[] = [];
 
-          if (get(monsterAilmentDuration("bleeding")) === 0 && Math.random() < get(bleedChance)) {
+          if (get(monsterAilmentDuration("bleeding")) === 0 && Math.random() <= get(bleedChance)) {
             set(isShowing("monsterAilments"), true);
             set(monsterAilmentDuration("bleeding"), get(bleed).duration);
 
@@ -169,7 +169,7 @@ export function useAttack() {
             });
           }
 
-          if (Math.random() < get(stunChance)) {
+          if (Math.random() <= get(stunChance)) {
             set(isShowing("monsterAilments"), true);
             set(monsterAilmentDuration("stunned"), get(masteryStatistic("might")));
 

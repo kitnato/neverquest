@@ -1,9 +1,10 @@
 import { atom, selector } from "recoil";
 
+import { ownedItem } from "./inventory";
 import { PROGRESS } from "@neverquest/data/encounter";
+import { LEVEL_MAXIMUM } from "@neverquest/data/general";
 import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import type { Location } from "@neverquest/types/unions";
 import { getFromRange, getGrowthSigmoid } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
@@ -23,6 +24,18 @@ export const isBoss = withStateKey("isBoss", (key) =>
 export const isStageCompleted = withStateKey("isStageCompleted", (key) =>
   selector({
     get: ({ get }) => get(progress) === get(progressMaximum),
+    key,
+  }),
+);
+
+export const finality = withStateKey("finality", (key) =>
+  selector({
+    get: ({ get }) =>
+      get(stage) === LEVEL_MAXIMUM
+        ? get(ownedItem("familiar")) === undefined
+          ? "res dominus"
+          : "res cogitans"
+        : false,
     key,
   }),
 );
@@ -74,7 +87,7 @@ export const isStageStarted = withStateKey("isStageStarted", (key) =>
 );
 
 export const location = withStateKey("location", (key) =>
-  atom<Location>({
+  atom<"caravan" | "wilderness">({
     default: "wilderness",
     effects: [handleLocalStorage({ key })],
     key,

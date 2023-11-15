@@ -92,7 +92,7 @@ export function useDefend() {
         const deltaStamina: DeltaDisplay[] = [];
 
         // If attack is dodged, nothing else happens (all damage is negated).
-        if (Math.random() < get(dodgeChance)) {
+        if (Math.random() <= get(dodgeChance)) {
           const armorStaminaCost = get(armor).staminaCost;
 
           if (get(canDodge)) {
@@ -127,8 +127,8 @@ export function useDefend() {
           }
         }
 
-        const hasParried = Math.random() < get(parry);
-        const hasBlocked = !hasParried && Math.random() < get(blockChance);
+        const hasParried = Math.random() <= get(parry);
+        const hasBlocked = !hasParried && Math.random() <= get(blockChance);
         const thornsValue = get(thorns);
         const hasInflictedThorns = !hasBlocked && thornsValue > 0;
 
@@ -208,7 +208,7 @@ export function useDefend() {
 
             increaseMastery("stability");
 
-            if (Math.random() < get(staggerChance)) {
+            if (Math.random() <= get(staggerChance)) {
               set(isShowing("monsterAilments"), true);
               set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")));
 
@@ -259,8 +259,8 @@ export function useDefend() {
         set(recoveryDuration, get(recoveryRate));
 
         // If already poisoned, check if blighting has occurred and if it's been deflected.
-        if (get(isPoisoned) && Math.random() < get(blightChance)) {
-          if (Math.random() < get(deflection)) {
+        if (get(isPoisoned) && Math.random() <= get(blightChance)) {
+          if (Math.random() <= get(deflection)) {
             progressQuest({ quest: "deflecting" });
 
             deltaStamina.push({
@@ -280,8 +280,8 @@ export function useDefend() {
         }
 
         // If poisoning occurs, check if has been deflected, otherwise apply poison.
-        if (Math.random() < get(poisonChance)) {
-          if (Math.random() < get(deflection)) {
+        if (Math.random() <= get(poisonChance)) {
+          if (Math.random() <= get(deflection)) {
             progressQuest({ quest: "deflecting" });
 
             deltaHealth.push({

@@ -3,7 +3,7 @@ import { useRecoilCallback } from "recoil";
 import { generateCreature } from "@neverquest/LOCRAN/generate/generateCreature";
 import { generateName } from "@neverquest/LOCRAN/generate/generateName";
 import { isAttacking } from "@neverquest/state/character";
-import { isBoss } from "@neverquest/state/encounter";
+import { finality, isBoss } from "@neverquest/state/encounter";
 import {
   distance,
   isMonsterNew,
@@ -15,6 +15,7 @@ import {
 } from "@neverquest/state/monster";
 import { allowProfanity } from "@neverquest/state/settings";
 import { MONSTER_AILMENT_TYPES } from "@neverquest/types/unions";
+import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getNameStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useGenerateMonster() {
@@ -24,16 +25,21 @@ export function useGenerateMonster() {
         const get = getSnapshotGetter(snapshot);
 
         const allowProfanityValue = get(allowProfanity);
+        const finalityValue = get(finality);
 
-        set(
-          monsterName,
-          get(isBoss)
-            ? generateName({ allowProfanity: allowProfanityValue, hasTitle: true })
-            : generateCreature({
-                allowProfanity: allowProfanityValue,
-                nameStructure: getNameStructure(),
-              }),
-        );
+        if (finalityValue === false) {
+          set(
+            monsterName,
+            get(isBoss)
+              ? generateName({ allowProfanity: allowProfanityValue, hasTitle: true })
+              : generateCreature({
+                  allowProfanity: allowProfanityValue,
+                  nameStructure: getNameStructure(),
+                }),
+          );
+        } else {
+          set(monsterName, capitalizeAll(finalityValue));
+        }
 
         reset(monsterHealth);
         reset(distance);

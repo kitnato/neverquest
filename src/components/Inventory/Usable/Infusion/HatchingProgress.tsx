@@ -4,31 +4,31 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import IconEssenceBonus from "@neverquest/icons/essence-bonus.svg?react";
+import IconHatchingProgress from "@neverquest/icons/hatching-progress.svg?react";
 import { infusablePower } from "@neverquest/state/items";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export function EssenceBonus() {
-  const infusablePowerState = infusablePower("monkey paw");
+export function HatchingProgress() {
+  const infusablePowerState = infusablePower("mysterious egg");
 
   const infusablePowerValue = useRecoilValue(infusablePowerState);
 
   useDeltaText({
-    delta: "essenceBonus",
+    delta: "hatchingProgress",
     format: "percentage",
     state: infusablePowerState,
   });
 
   return (
     <Stack direction="horizontal" gap={1}>
-      <IconDisplay Icon={IconEssenceBonus} tooltip="Essence loot bonus">
-        {`+${formatNumber({
+      <IconDisplay Icon={IconHatchingProgress} tooltip="Hatching progress">
+        {formatNumber({
           format: "percentage",
           value: infusablePowerValue,
-        })}`}
+        })}
       </IconDisplay>
 
-      <DeltasDisplay delta="essenceBonus" />
+      <DeltasDisplay delta="powerBonusBoost" />
     </Stack>
   );
 }

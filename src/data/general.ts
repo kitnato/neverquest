@@ -24,6 +24,8 @@ export const LABEL_OVER_ENCUMBERED = "Too heavy.";
 export const LABEL_SEPARATOR = "·";
 export const LABEL_UNKNOWN = "???";
 
+export const LEVEL_MAXIMUM = 100;
+
 export const MILLISECONDS_IN_HOUR = 3_600_000;
 export const MILLISECONDS_IN_MINUTE = 60_000;
 export const MILLISECONDS_IN_SECOND = 1000;
@@ -33,7 +35,6 @@ export const QUEST_NOTIFICATION_DURATION = 5000;
 export const RETIREMENT_MINIMUM_LEVEL = 50;
 
 export const ROMAN_NUMERAL_MAXIMUM = 3999;
-
 export const ROMAN_NUMERALS = [
   ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"], // 1-9
   ["X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"], // 10-90

@@ -3,7 +3,8 @@ import { FormControl } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
+import { GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
+import { LEVEL_MAXIMUM } from "@neverquest/data/general";
 import IconGearLevel from "@neverquest/icons/gear-level.svg?react";
 import { stage } from "@neverquest/state/encounter";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -15,7 +16,7 @@ export function SetGearLevel({
 }) {
   const stageValue = useRecoilValue(stage);
 
-  const maximumWeaponLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
+  const maximumWeaponLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, LEVEL_MAXIMUM);
 
   return (
     <IconDisplay Icon={IconGearLevel} iconProps={{ overlayPlacement: "left" }} tooltip="Level">

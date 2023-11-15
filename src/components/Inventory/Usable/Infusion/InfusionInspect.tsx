@@ -3,6 +3,7 @@ import { Button, Modal, ModalBody, ModalHeader, ModalTitle, Stack } from "react-
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { Infusion } from "@neverquest/components/Inventory/Usable/Infusion";
+import { HatchingProgress } from "@neverquest/components/Inventory/Usable/Infusion/HatchingProgress";
 import { InfusionLevel } from "@neverquest/components/Inventory/Usable/Infusion/InfusionLevel";
 import { InfusionProgress } from "@neverquest/components/Inventory/Usable/Infusion/InfusionProgress";
 import { EssenceBonus } from "@neverquest/components/Statistics/EssenceBonus";
@@ -12,6 +13,7 @@ import type { Infusable } from "@neverquest/types/unions";
 
 const EFFECT_COMPONENT: Record<Infusable, FunctionComponent> = {
   "monkey paw": EssenceBonus,
+  "mysterious egg": HatchingProgress,
   "tome of power": PowerBonusBoost,
 };
 

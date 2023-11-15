@@ -7,8 +7,8 @@ import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { SetGearLevel } from "@neverquest/components/Caravan/SetGearLevel";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/DodgePenaltyContents";
-import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
-import { LABEL_UNKNOWN } from "@neverquest/data/general";
+import { GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
+import { LABEL_UNKNOWN, LEVEL_MAXIMUM } from "@neverquest/data/general";
 import { ARMOR_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconDeflection from "@neverquest/icons/deflection.svg?react";
@@ -48,7 +48,7 @@ export function ArmorOptions() {
     factor,
     gearClass: armorClass,
   });
-  const maximumArmorLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
+  const maximumArmorLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, LEVEL_MAXIMUM);
 
   return (
     <Stack className="mx-auto w-50">

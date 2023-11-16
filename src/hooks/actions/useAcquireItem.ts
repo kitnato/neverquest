@@ -1,14 +1,10 @@
 import { useRecoilCallback } from "recoil";
 
-import { useProgressQuest } from "./useProgressQuest";
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
+import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { armor, shield, weapon } from "@neverquest/state/gear";
-import {
-  canFit,
-  inventory,
-  itemsAcquired,
-  notifyOverEncumbrance,
-} from "@neverquest/state/inventory";
+import { inventory, itemsAcquired, notifyOverEncumbrance } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { autoEquip } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -26,6 +22,7 @@ import {
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useAcquireItem() {
+  const canFit = useCanFit();
   const progressQuest = useProgressQuest();
 
   return useRecoilCallback(
@@ -33,7 +30,7 @@ export function useAcquireItem() {
       (item: InventoryItem): "autoEquip" | "noFit" | "success" => {
         const get = getSnapshotGetter(snapshot);
 
-        if (!get(canFit(item.weight))) {
+        if (!canFit(item.weight)) {
           set(notifyOverEncumbrance, true);
 
           return "noFit";
@@ -87,6 +84,6 @@ export function useAcquireItem() {
 
         return "success";
       },
-    [],
+    [canFit, progressQuest],
   );
 }

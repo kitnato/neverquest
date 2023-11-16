@@ -155,6 +155,8 @@ export const OCCULTIST_PURGE_PRICE_MULTIPLIER = {
   quests: 500,
 };
 
+export const OVUM_INFUSION_PRICE = 1313;
+
 export const MEDIC_PRICE_SURGERY = 25;
 export const MEDIC_PRICE_SURGERY_CRITICAL = 100;
 

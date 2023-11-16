@@ -19,16 +19,6 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
-export const canFit = withStateKey("canFit", (key) =>
-  selectorFamily<boolean, number>({
-    get:
-      (parameter) =>
-      ({ get }) =>
-        get(encumbrance) + parameter <= get(encumbranceMaximum),
-    key,
-  }),
-);
-
 export const encumbrance = withStateKey("encumbrance", (key) =>
   selector({
     get: ({ get }) => get(inventory).reduce((aggregator, { weight }) => aggregator + weight, 0),
@@ -109,6 +99,14 @@ export const ownedItem = withStateKey("ownedItem", (key) =>
 );
 
 // ATOMS
+
+export const canInfuseMysteriousEgg = withStateKey("canInfuseMysteriousEgg", (key) =>
+  atom({
+    default: false,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
 
 export const inventory = withStateKey("inventory", (key) =>
   atom<InventoryItem[]>({

@@ -1,11 +1,10 @@
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
 
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { LABEL_OVER_ENCUMBERED } from "@neverquest/data/general";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
+import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
-import { canFit } from "@neverquest/state/inventory";
 import type { GearItem } from "@neverquest/types";
 
 export function CraftedGear({
@@ -17,10 +16,11 @@ export function CraftedGear({
 }) {
   const { weight } = gearItem;
 
-  const canFitValue = useRecoilValue(canFit(weight));
-
   const acquireItem = useAcquireItem();
+  const canFit = useCanFit();
   const toggleEquipGear = useToggleEquipGear();
+
+  const canFitItem = canFit(weight);
 
   return (
     <Stack gap={3}>
@@ -30,12 +30,12 @@ export function CraftedGear({
 
       <OverlayTrigger
         overlay={<Tooltip>{LABEL_OVER_ENCUMBERED}</Tooltip>}
-        trigger={canFitValue ? [] : ["hover", "focus"]}
+        trigger={canFitItem ? [] : ["hover", "focus"]}
       >
         <span>
           <Button
             className="w-100"
-            disabled={!canFitValue}
+            disabled={!canFitItem}
             onClick={() => {
               const acquisitionStatus = acquireItem(gearItem);
 

@@ -79,7 +79,7 @@ export function TransmuteGems() {
                     .slice(0, TRANSMUTE_COST),
                 );
 
-                setInventory(inventoryValue.filter(({ ID }) => !gemIDs.has(ID)));
+                setInventory((current) => current.filter(({ ID }) => !gemIDs.has(ID)));
 
                 acquireItem({
                   ...GEM_BASE,

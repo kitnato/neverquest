@@ -1,6 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { LearnOvumInfusion } from "@neverquest/components/Caravan/Alchemist/LearnOvumInfusion";
 import { TransmuteGems } from "@neverquest/components/Caravan/Alchemist/TransmuteGems";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general";
@@ -36,6 +37,8 @@ export function Alchemist() {
 
         <TransmuteGems />
       </Stack>
+
+      <LearnOvumInfusion />
     </Stack>
   );
 }

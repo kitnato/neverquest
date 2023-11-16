@@ -1,3 +1,4 @@
+import { CREW } from "@neverquest/data/caravan";
 import IconAnatomy from "@neverquest/icons/anatomy.svg?react";
 import IconArchery from "@neverquest/icons/archery.svg?react";
 import IconArmorcraft from "@neverquest/icons/armorcraft.svg?react";
@@ -97,6 +98,14 @@ export const SKILLS: Record<
     unlocksMastery: "might",
   },
 };
+
+export const SKILLS_ORDER = Object.entries(SKILLS)
+  .toSorted(([current1], [current2]) => current1.localeCompare(current2))
+  .toSorted(
+    ([, current1], [, current2]) =>
+      CREW[current1.requiredCrew].requiredStage - CREW[current2.requiredCrew].requiredStage,
+  )
+  .map(([current]) => current as Skill);
 
 export const WEAPON_ABILITY_SKILLS: Record<WeaponAbility, Skill> = {
   bleed: "anatomy",

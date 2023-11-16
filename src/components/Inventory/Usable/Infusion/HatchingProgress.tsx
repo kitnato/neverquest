@@ -28,7 +28,7 @@ export function HatchingProgress() {
         })}
       </IconDisplay>
 
-      <DeltasDisplay delta="powerBonusBoost" />
+      <DeltasDisplay delta="hatchingProgress" />
     </Stack>
   );
 }

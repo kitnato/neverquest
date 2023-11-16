@@ -294,7 +294,7 @@ export type StateKey =
   | "canBlock"
   | "canCompleteQuests"
   | "canDodge"
-  | "canFit"
+  | "canInfuseMysteriousEgg"
   | "canReceiveAilment"
   | "canReceiveAilments"
   | "canUseJournal"

@@ -37,7 +37,7 @@ export function isArmor(thing: unknown): thing is Armor {
 }
 
 export function isConquest(thing: unknown): thing is Conquest {
-  return typeof thing === "string" && CONQUEST_TYPES.includes(thing as Conquest);
+  return typeof thing === "string" && new Set<string>(CONQUEST_TYPES).has(thing);
 }
 
 export function isConsumableItem(thing: unknown): thing is ConsumableItem {
@@ -61,7 +61,7 @@ export function isGeneratorRanges(thing: unknown): thing is [GeneratorRange, Gen
 }
 
 export function isInfusable(thing: unknown): thing is Infusable {
-  return typeof thing === "string" && INFUSABLE_TYPES.includes(thing as Infusable);
+  return typeof thing === "string" && new Set<string>(INFUSABLE_TYPES).has(thing);
 }
 
 export function isInfusableItem(thing: unknown): thing is InfusableItem {
@@ -81,7 +81,7 @@ export function isRanged(thing: unknown): thing is Ranged {
 }
 
 export function isRoutine(thing: unknown): thing is Routine {
-  return typeof thing === "string" && ROUTINE_TYPES.includes(thing as Routine);
+  return typeof thing === "string" && new Set<string>(ROUTINE_TYPES).has(thing);
 }
 
 export function isShield(thing: unknown): thing is Shield {
@@ -93,7 +93,7 @@ export function isStackable(thing: unknown): thing is StackableItem {
 }
 
 export function isTrinket(thing: unknown): thing is Trinket {
-  return typeof thing === "string" && TRINKET_TYPES.includes(thing as Trinket);
+  return typeof thing === "string" && new Set<string>(TRINKET_TYPES).has(thing);
 }
 
 export function isTrinketItem(thing: unknown): thing is TrinketItem {
@@ -101,7 +101,7 @@ export function isTrinketItem(thing: unknown): thing is TrinketItem {
 }
 
 export function isTriumph(thing: unknown): thing is Triumph {
-  return typeof thing === "string" && TRIUMPH_TYPES.includes(thing as Triumph);
+  return typeof thing === "string" && new Set<string>(TRIUMPH_TYPES).has(thing);
 }
 
 export function isUsable(thing: unknown): thing is UsableItem {

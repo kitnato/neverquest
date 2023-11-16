@@ -44,6 +44,7 @@ export function useRetire() {
           return;
         }
 
+        const inheritableItems = new Set<string>(INHERITABLE_ITEMS);
         const selectedTraitValue = get(selectedTrait);
 
         if (selectedTraitValue !== undefined) {
@@ -95,9 +96,7 @@ export function useRetire() {
               return false;
             }
 
-            return INHERITABLE_ITEMS.includes(
-              currentItem.name as (typeof INHERITABLE_ITEMS)[number],
-            );
+            return inheritableItems.has(currentItem.name);
           }),
         );
 

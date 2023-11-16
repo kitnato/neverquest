@@ -65,15 +65,18 @@ export const completedQuestsCount = withStateKey("completedQuestsCount", (key) =
   selectorFamily<number, QuestClass>({
     get:
       (parameter) =>
-      ({ get }) =>
-        QUEST_TYPES_BY_CLASS[parameter].reduce(
+      ({ get }) => {
+        const questBonusTypes = new Set<string>(QUEST_BONUS_TYPES);
+
+        return QUEST_TYPES_BY_CLASS[parameter].reduce(
           (accumulator, currentQuest) =>
             accumulator +
             Object.values(get(questStatuses(currentQuest))).filter((currentStatus) =>
-              QUEST_BONUS_TYPES.includes(currentStatus as QuestBonus),
+              questBonusTypes.has(currentStatus),
             ).length,
           0,
-        ),
+        );
+      },
     key,
   }),
 );

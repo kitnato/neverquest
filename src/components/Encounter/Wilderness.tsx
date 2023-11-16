@@ -8,14 +8,13 @@ import IconBossHiding from "@neverquest/icons/boss-hiding.svg?react";
 import IconFinality from "@neverquest/icons/finality.svg?react";
 import IconMonsterHiding from "@neverquest/icons/monster-hiding.svg?react";
 import IconRemains from "@neverquest/icons/remains.svg?react";
-import { finality, isBoss, isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
+import { encounter, isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Wilderness() {
-  const isBossValue = useRecoilValue(isBoss);
+  const encounterValue = useRecoilValue(encounter);
   const isStageStartedValue = useRecoilValue(isStageStarted);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
-  const finalityValue = useRecoilValue(finality);
 
   if (isStageCompletedValue) {
     return (
@@ -39,20 +38,20 @@ export function Wilderness() {
         <IconDisplay
           gap={5}
           Icon={
-            finalityValue === false
-              ? isBossValue
-                ? IconBossHiding
-                : IconMonsterHiding
-              : IconFinality
+            encounterValue === "boss"
+              ? IconBossHiding
+              : encounterValue === "monster"
+                ? IconMonsterHiding
+                : IconFinality
           }
           tooltip={LABEL_UNKNOWN}
         >
           <span className="fst-italic">
-            {finalityValue === false
-              ? isBossValue
-                ? "A powerful presence looms."
-                : "The darkness stirs."
-              : "A grim entity is manifesting."}
+            {encounterValue === "boss"
+              ? "A powerful presence looms."
+              : encounterValue === "monster"
+                ? "The darkness stirs."
+                : "A grim entity is manifesting."}
           </span>
         </IconDisplay>
       </Card.Body>

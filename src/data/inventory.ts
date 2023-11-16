@@ -182,7 +182,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
   };
 
 export const DROP_CHANCES = {
-  "mysterious egg": 0.1,
+  "mysterious egg": 0.05,
   "torn manuscript": 0.03,
 };
 

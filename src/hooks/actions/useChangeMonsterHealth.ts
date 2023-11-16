@@ -4,7 +4,7 @@ import { LOOTING_RATE } from "@neverquest/data/statistics";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { attackDuration, lootingDuration } from "@neverquest/state/character";
-import { isBoss } from "@neverquest/state/encounter";
+import { encounter } from "@neverquest/state/encounter";
 import {
   monsterAttackDuration,
   monsterHealth,
@@ -54,7 +54,7 @@ export function useChangeMonsterHealth() {
           reset(attackDuration);
           reset(monsterAttackDuration);
 
-          progressQuest({ quest: get(isBoss) ? "killingBoss" : "killing" });
+          progressQuest({ quest: get(encounter) === "boss" ? "killingBoss" : "killing" });
 
           switch (damageType) {
             case "bleed": {

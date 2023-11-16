@@ -1,6 +1,5 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import { ownedItem } from "./inventory";
 import { RETIREMENT_MINIMUM_LEVEL } from "@neverquest/data/general";
 import { DROP_CHANCES, ELEMENTALS, INFUSABLES, TRINKETS } from "@neverquest/data/inventory";
 import {
@@ -15,8 +14,9 @@ import {
 } from "@neverquest/data/monster";
 import { AILMENT_PENALTY, BLEED } from "@neverquest/data/statistics";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
+import { encounter, isStageStarted, progress, stage } from "@neverquest/state/encounter";
 import { range, shield, totalElementalEffects, weapon } from "@neverquest/state/gear";
+import { ownedItem } from "@neverquest/state/inventory";
 import { infusablePower } from "@neverquest/state/items";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
@@ -63,6 +63,7 @@ export const blightChance = withStateKey("blightChance", (key) =>
       const {
         boss,
         chance: { maximum, minimum },
+        finality,
         stageRequired,
       } = BLIGHT;
 
@@ -75,7 +76,12 @@ export const blightChance = withStateKey("blightChance", (key) =>
           factor: getGrowthSigmoid(getLinearMapping({ offset: stageRequired, stage: stageValue })),
           maximum,
           minimum,
-        }) * (get(isBoss) ? boss : 1)
+        }) *
+        (get(encounter) === "boss"
+          ? boss
+          : get(encounter) === "res cogitans" || get(encounter) === "res dominus"
+            ? finality
+            : 1)
       );
     },
     key,
@@ -156,12 +162,20 @@ export const isMonsterDead = withStateKey("isMonsterDead", (key) =>
 export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, bonus, boss, minimum } = MONSTER_ATTACK_RATE;
+      const { base, bonus, boss, finality, minimum } = MONSTER_ATTACK_RATE;
       const factor = getGrowthSigmoid(get(stage));
 
       return Math.round(
         Math.max(
-          base - base * factor * (1 + get(progress) * bonus) * (get(isBoss) ? boss : 1),
+          base -
+            base *
+              factor *
+              (1 + get(progress) * bonus) *
+              (get(encounter) === "boss"
+                ? boss
+                : get(encounter) === "res cogitans" || get(encounter) === "res dominus"
+                  ? finality
+                  : 1),
           minimum,
         ),
       );
@@ -173,11 +187,16 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
 export const monsterDamage = withStateKey("monsterDamage", (key) =>
   selector({
     get: ({ get }) => {
-      const { attenuation, base, bonus, boss } = MONSTER_DAMAGE;
+      const { attenuation, base, bonus, boss, finality } = MONSTER_DAMAGE;
       const factor = getGrowthTriangular(get(stage)) / attenuation;
 
       return Math.round(
-        (base + base * factor * (1 + get(progress) * bonus)) * (get(isBoss) ? boss : 1),
+        (base + base * factor * (1 + get(progress) * bonus)) *
+          (get(encounter) === "boss"
+            ? boss
+            : get(encounter) === "res cogitans" || get(encounter) === "res dominus"
+              ? finality
+              : 1),
       );
     },
     key,
@@ -229,11 +248,16 @@ export const monsterDamageAilingPerSecond = withStateKey("monsterDamageAilingPer
 export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =>
   selector({
     get: ({ get }) => {
-      const { attenuation, base, bonus, boss } = MONSTER_HEALTH;
+      const { attenuation, base, bonus, boss, finality } = MONSTER_HEALTH;
       const factor = getGrowthTriangular(get(stage)) / attenuation;
 
       return Math.round(
-        (base + base * factor * (1 + get(progress) * bonus)) * (get(isBoss) ? boss : 1),
+        (base + base * factor * (1 + get(progress) * bonus)) *
+          (get(encounter) === "boss"
+            ? boss
+            : get(encounter) === "res cogitans" || get(encounter) === "res dominus"
+              ? finality
+              : 1),
       );
     },
     key,
@@ -245,33 +269,38 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
     get: ({ get }) => {
       const { attenuation, base, bonus, boss } = ESSENCE;
 
-      const isBossValue = get(isBoss);
+      const encounterValue = get(encounter);
       const stageValue = get(stage);
       const factor = getGrowthTriangular(stageValue) / attenuation;
+
+      const hasMysteriousEggDropped =
+        stageValue >= RETIREMENT_MINIMUM_LEVEL &&
+        get(ownedItem("antique coin")) !== undefined &&
+        get(ownedItem("mysterious egg")) === undefined &&
+        Math.random() <= DROP_CHANCES["mysterious egg"];
+      const hasTornManuscriptDropped =
+        stageValue >= RETIREMENT_MINIMUM_LEVEL &&
+        get(ownedItem("mysterious egg")) !== undefined &&
+        get(ownedItem("torn manuscript")) === undefined &&
+        Math.random() <= DROP_CHANCES["torn manuscript"];
 
       return {
         essence: Math.round(
           (base + base * factor) * 1 +
             get(progress) *
               bonus *
-              (isBossValue ? boss : 1) *
+              (encounterValue === "boss" ? boss : 1) *
               (1 + get(infusablePower("monkey paw"))),
         ),
-        gems: isBossValue
-          ? 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL)
-          : 0,
-        trinket:
-          get(ownedItem("mysterious egg")) === undefined
-            ? stageValue >= RETIREMENT_MINIMUM_LEVEL
-              ? get(ownedItem("antique coin")) !== undefined &&
-                Math.random() <= DROP_CHANCES["mysterious egg"]
-                ? INFUSABLES["mysterious egg"].item
-                : undefined
-              : undefined
-            : get(ownedItem("torn manuscript")) === undefined &&
-                Math.random() <= DROP_CHANCES["torn manuscript"]
-              ? TRINKETS["torn manuscript"].item
-              : undefined,
+        gems:
+          encounterValue === "boss"
+            ? 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL)
+            : 0,
+        trinket: hasMysteriousEggDropped
+          ? INFUSABLES["mysterious egg"].item
+          : hasTornManuscriptDropped
+            ? TRINKETS["torn manuscript"].item
+            : undefined,
       };
     },
     key,
@@ -286,6 +315,7 @@ export const poisonChance = withStateKey("poisonChance", (key) =>
       const {
         boss,
         chance: { maximum, minimum },
+        finality,
         stageRequired,
       } = POISON;
 
@@ -298,7 +328,12 @@ export const poisonChance = withStateKey("poisonChance", (key) =>
           factor: getGrowthSigmoid(getLinearMapping({ offset: stageRequired, stage: stageValue })),
           maximum,
           minimum,
-        }) * (get(isBoss) ? boss : 1)
+        }) *
+        (get(encounter) === "boss"
+          ? boss
+          : get(encounter) === "res cogitans" || get(encounter) === "res dominus"
+            ? finality
+            : 1)
       );
     },
     key,

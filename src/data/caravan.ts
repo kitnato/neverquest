@@ -1,4 +1,4 @@
-import { INFUSABLES, TRINKETS } from "./inventory";
+import { INFUSABLES, TRINKETS } from "@neverquest/data/inventory";
 import IconAlchemist from "@neverquest/icons/alchemist.svg?react";
 import IconBlacksmith from "@neverquest/icons/blacksmith.svg?react";
 import IconFletcher from "@neverquest/icons/fletcher.svg?react";
@@ -38,7 +38,11 @@ export const CREW: Record<
     description: "Converts gems between one another.",
     Icon: IconAlchemist,
     interaction: "Transmute",
-    monologues: { 1: "Things are not always what they seem." },
+    monologues: {
+      1: "Things are not always what they seem.",
+      51: "Come across any long-lost manuscripts lately?",
+      100: "Doesn't make a difference.",
+    },
     price: 500,
     requiredStage: 30,
   },
@@ -46,7 +50,7 @@ export const CREW: Record<
     description: "Crafts superior gear.",
     Icon: IconBlacksmith,
     interaction: "Craft",
-    monologues: { 1: "In need of better gear?" },
+    monologues: { 1: "In need of better gear?", 100: "Doesn't make a difference." },
     price: 60,
     requiredStage: 12,
   },
@@ -54,7 +58,7 @@ export const CREW: Record<
     description: "Crafts ranged weapons and provides ammunition.",
     Icon: IconFletcher,
     interaction: "Craft",
-    monologues: { 1: "Tired of monster breath?" },
+    monologues: { 1: "Tired of monster breath?", 100: "There's too many of them." },
     price: 300,
     requiredStage: 23,
   },
@@ -62,7 +66,7 @@ export const CREW: Record<
     description: "Heals wounds and sells bandages.",
     Icon: IconMedic,
     interaction: "Heal",
-    monologues: { 1: "Allow me to patch you up." },
+    monologues: { 1: "Allow me to patch you up.", 100: "What's the point?" },
     price: 90,
     requiredStage: 15,
   },
@@ -70,7 +74,7 @@ export const CREW: Record<
     description: "Trains new skills and attributes.",
     Icon: IconMercenary,
     interaction: "Train",
-    monologues: { 1: "Perhaps I can teach you something." },
+    monologues: { 1: "Perhaps I can teach you something.", 100: "All is lost." },
     price: 25,
     requiredStage: 6,
   },

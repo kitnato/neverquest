@@ -10,12 +10,18 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
-export const isBoss = withStateKey("isBoss", (key) =>
+export const encounter = withStateKey("encounter", (key) =>
   selector({
     get: ({ get }) => {
       const stageValue = get(stage);
 
-      return stageValue >= BOSS_STAGE_START && stageValue % BOSS_STAGE_INTERVAL === 0;
+      return stageValue === LEVEL_MAXIMUM
+        ? get(ownedItem("familiar")) === undefined
+          ? "res dominus"
+          : "res cogitans"
+        : stageValue >= BOSS_STAGE_START && stageValue % BOSS_STAGE_INTERVAL === 0
+          ? "boss"
+          : "monster";
     },
     key,
   }),
@@ -24,18 +30,6 @@ export const isBoss = withStateKey("isBoss", (key) =>
 export const isStageCompleted = withStateKey("isStageCompleted", (key) =>
   selector({
     get: ({ get }) => get(progress) === get(progressMaximum),
-    key,
-  }),
-);
-
-export const finality = withStateKey("finality", (key) =>
-  selector({
-    get: ({ get }) =>
-      get(stage) === LEVEL_MAXIMUM
-        ? get(ownedItem("familiar")) === undefined
-          ? "res dominus"
-          : "res cogitans"
-        : false,
     key,
   }),
 );
@@ -58,12 +52,12 @@ export const progressMaximum = withStateKey("progressMaximum", (key) =>
     get: ({ get }) => {
       const { maximum, minimum } = PROGRESS;
 
-      return get(isBoss)
-        ? 1
-        : Math.ceil(
+      return get(encounter) === "monster"
+        ? Math.ceil(
             getFromRange({ factor: getGrowthSigmoid(get(stage)), maximum, minimum }) *
               (1 - get(progressReduction)),
-          );
+          )
+        : 1;
     },
     key,
   }),

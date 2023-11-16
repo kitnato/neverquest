@@ -3,7 +3,7 @@ import { useRecoilCallback } from "recoil";
 import { generateCreature } from "@neverquest/LOCRAN/generate/generateCreature";
 import { generateName } from "@neverquest/LOCRAN/generate/generateName";
 import { isAttacking } from "@neverquest/state/character";
-import { finality, isBoss } from "@neverquest/state/encounter";
+import { encounter } from "@neverquest/state/encounter";
 import {
   distance,
   isMonsterNew,
@@ -25,20 +25,28 @@ export function useGenerateMonster() {
         const get = getSnapshotGetter(snapshot);
 
         const allowProfanityValue = get(allowProfanity);
-        const finalityValue = get(finality);
+        const encounterValue = get(encounter);
 
-        if (finalityValue === false) {
-          set(
-            monsterName,
-            get(isBoss)
-              ? generateName({ allowProfanity: allowProfanityValue, hasTitle: true })
-              : generateCreature({
-                  allowProfanity: allowProfanityValue,
-                  nameStructure: getNameStructure(),
-                }),
-          );
-        } else {
-          set(monsterName, capitalizeAll(finalityValue));
+        switch (encounterValue) {
+          case "boss": {
+            set(monsterName, generateName({ allowProfanity: allowProfanityValue, hasTitle: true }));
+            break;
+          }
+
+          case "monster": {
+            set(
+              monsterName,
+              generateCreature({
+                allowProfanity: allowProfanityValue,
+                nameStructure: getNameStructure(),
+              }),
+            );
+            break;
+          }
+
+          default: {
+            set(monsterName, capitalizeAll(encounterValue));
+          }
         }
 
         reset(monsterHealth);

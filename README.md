@@ -1,6 +1,6 @@
 # Neverquest
 
-_An irreverent UI-based action RPG rogue-like with incremental elements._
+_An irreverent UI-based action-RPG with incremental elements._
 
 `[SCREENSHOT]`
 

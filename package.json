@@ -1,10 +1,10 @@
 {
   "name": "neverquest",
-  "version": "0.7.1",
-  "description": "An irreverent browser-based incremental action role-playing game.",
+  "version": "0.8.0",
+  "description": "An irreverent UI-based action-RPG with incremental elements.",
   "author": "kitnato",
   "license": "cc-by-sa-4.0",
-  "homepage": "",
+  "homepage": "https://kitnato.github.io/neverquest",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kitnato/neverquest.git"

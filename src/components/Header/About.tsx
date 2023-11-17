@@ -14,7 +14,7 @@ import ReactMarkdown from "react-markdown";
 import { IconImage } from "@neverquest/components/IconImage";
 import manual from "@neverquest/data/manual.md?raw";
 import IconAbout from "@neverquest/icons/about.svg?react";
-import { formatSlug } from "@neverquest/utilities/formatters";
+import { formatKebabCase } from "@neverquest/utilities/formatters";
 
 const HEADERS = ["h2", "h3", "h4", "h5", "h6"] as const;
 
@@ -54,7 +54,7 @@ export function About() {
                 Current,
                 ({ children, ...properties }: JSX.IntrinsicElements[typeof Current]) => (
                   <Current
-                    id={typeof children === "string" ? formatSlug(children) : undefined}
+                    id={typeof children === "string" ? formatKebabCase(children) : undefined}
                     {...{ children, ...properties }}
                   />
                 ),

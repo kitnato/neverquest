@@ -7,6 +7,7 @@ import { TRINKETS } from "@neverquest/data/inventory";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
 import { useInfuse } from "@neverquest/hooks/actions/useInfuse";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { inventory, ownedItem } from "@neverquest/state/inventory";
 import { infusionDelta, infusionLevel, infusionStep } from "@neverquest/state/items";
@@ -25,6 +26,7 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
   const acquireItem = useAcquireItem();
   const canFit = useCanFit();
   const infuse = useInfuse();
+  const progressQuest = useProgressQuest();
 
   const isInfusionAtMaximum = infusionLevelValue >= LEVEL_MAXIMUM;
   const isInfusionPossible = infusionStepValue > 0;
@@ -65,6 +67,8 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
                 setInventory((current) =>
                   current.filter(({ ID }) => ownedItemMysteriousEgg.ID !== ID),
                 );
+
+                progressQuest({ quest: "acquiringFamiliar" });
               }
             }
           }}

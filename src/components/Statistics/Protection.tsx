@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -8,7 +8,6 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
 import { SHIELD_NONE } from "@neverquest/data/inventory";
-import { QUEST_REQUIREMENTS } from "@neverquest/data/quests";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconArmor from "@neverquest/icons/armor.svg?react";
@@ -16,6 +15,7 @@ import IconProtection from "@neverquest/icons/protection.svg?react";
 import IconTank from "@neverquest/icons/tank.svg?react";
 import { armor, shield } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
+import { questProgress } from "@neverquest/state/quests";
 import { protection } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -26,6 +26,7 @@ export function Protection() {
   const isTraitAcquiredTank = useRecoilValue(isTraitAcquired("tank"));
   const protectionValue = useRecoilValue(protection);
   const shieldValue = useRecoilValue(shield);
+  const resetQuestProgressProtection = useResetRecoilState(questProgress("protection"));
 
   const progressQuest = useProgressQuest();
 
@@ -37,10 +38,9 @@ export function Protection() {
   });
 
   useEffect(() => {
-    if (protectionValue >= QUEST_REQUIREMENTS.protection) {
-      progressQuest({ quest: "protection" });
-    }
-  });
+    resetQuestProgressProtection();
+    progressQuest({ amount: protectionValue, quest: "protection" });
+  }, [progressQuest, protectionValue, resetQuestProgressProtection]);
 
   if (isShowingProtection) {
     return (

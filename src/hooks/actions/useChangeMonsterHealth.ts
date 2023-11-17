@@ -54,7 +54,27 @@ export function useChangeMonsterHealth() {
           reset(attackDuration);
           reset(monsterAttackDuration);
 
-          progressQuest({ quest: get(encounter) === "boss" ? "killingBoss" : "killing" });
+          switch (get(encounter)) {
+            case "boss": {
+              progressQuest({ quest: "killingBoss" });
+              break;
+            }
+
+            case "monster": {
+              progressQuest({ quest: "killing" });
+              break;
+            }
+
+            case "res cogitans": {
+              progressQuest({ quest: "killingResCogitans" });
+              break;
+            }
+
+            case "res dominus": {
+              progressQuest({ quest: "killingResDominus" });
+              break;
+            }
+          }
 
           switch (damageType) {
             case "bleed": {

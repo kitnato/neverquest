@@ -64,14 +64,12 @@ export const QUESTS: Record<
     progression: [1],
     title: "Ranger",
   },
-  // TODO
   acquiringFamiliar: {
     description: `Acquire the ${LABEL_UNKNOWN}`,
     hidden: "familiar.",
     progression: [1],
     title: "Companionship",
   },
-
   acquiringGems: {
     description: "Acquire @ gem(s).",
     progression: [1, 10, 25],
@@ -157,15 +155,14 @@ export const QUESTS: Record<
     description: `Have at least ${formatNumber({
       value: QUEST_REQUIREMENTS.damage,
     })} total damage.`,
-    progression: [1],
+    progression: [QUEST_REQUIREMENTS.damage],
     title: "Destroyer",
   },
-  // TODO
   deciding: {
     description: `Decide to ${LABEL_UNKNOWN}`,
     hidden: " keep grinding.",
     progression: [1],
-    title: "Parable of Stan",
+    title: "Parable of Stanley",
   },
   decipheringJournal: {
     description: "Decipher the journal.",
@@ -274,16 +271,14 @@ export const QUESTS: Record<
     progression: [1],
     title: "One Punch Person",
   },
-  // TODO
   killingResCogitans: {
     description: `Defeat ${LABEL_UNKNOWN}`,
     hidden: "Res Cogitans.",
     progression: [1],
     title: "Veritas tenebris",
   },
-  // TODO
   killingResDominus: {
-    description: "Defeat the final boss.",
+    description: "Defeat the dominant being.",
     progression: [1],
     title: "Come back to reality",
   },
@@ -353,7 +348,7 @@ export const QUESTS: Record<
     description: `Have at least ${formatNumber({
       value: QUEST_REQUIREMENTS.protection,
     })} protection.`,
-    progression: [1],
+    progression: [QUEST_REQUIREMENTS.protection],
     title: "I like turtles",
   },
   purchasingArmor: {

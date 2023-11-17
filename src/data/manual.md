@@ -781,3 +781,63 @@ Default: on.
 ### Show everything
 
 Once toggled, all elements of the UI will be shown at once instead of being unlocked gradually as gameplay progresses and become relevant. Suitable for veteran players starting a new run.
+
+## Roadmap
+
+Neverquest is a work-in-progress. Several features are pending ideation, refinement and implementation.
+
+### Activated skills
+
+Once acquired, activating a skill requires [energy](#energy).
+
+#### Auras
+
+Cast spells that remain active until dispelled. Provides an effect in return for reserving a percentage of energy.
+
+#### Physical (activated)
+
+Combat skills that can be activated during combat. Acquired from the [Mercenary](#mercenary).
+
+#### Sorceries
+
+Cast spells with immediate and/or over-time effects. Acquired from the [sorcerer](#sorcerer).
+
+### Energy
+
+A [reserve](#reserves), Consumed when activating [skills](#skills), [auras](#auras) and [sorceries](#sorceries), regenerated over time.
+
+### New attributes
+
+#### Acumen
+
+Affects [sorcery](#sorceries) casting rate.
+
+#### Intellect
+
+Affects energy regeneration rate.
+
+#### Wisdom
+
+Affects total [energy](#energy).
+
+### New caravan crew
+
+Along with two more additional hires, the entire crew dialog system needs to be overhauled and expanded to allow for better storytelling and immersion.
+
+#### Cook
+
+Sells hot meals that restore all [energy](#energy) when used.
+
+Grants a Well Fed bonus for the next stage (+25% [mastery](#masteries) gain).
+
+#### Sorcerer
+
+Acquire [sorceries](#sorceries) and [auras](#auras).
+
+### Log
+
+A toggle-able UI element that displays all stateful activities in real-time, e.g. combat details, transactions etc.
+
+### Venom
+
+A [potion](#potions), that once applied to a weapon, it adds an effect with each strike, applying damage-over-time effects and potentially other ailments. Has a certain number of charges before it is used up.

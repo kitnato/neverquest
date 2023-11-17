@@ -245,6 +245,9 @@ export const CREATURES: BaseData[] = [
     name: "corpse",
   },
   {
+    name: "cow",
+  },
+  {
     name: "coward",
   },
   {
@@ -453,6 +456,9 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "goblin",
+  },
+  {
+    name: "golem",
   },
   {
     name: "goo",
@@ -735,6 +741,9 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "necrophage",
+  },
+  {
+    name: "neophyte",
   },
   {
     name: "nightmare",

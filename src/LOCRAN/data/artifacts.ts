@@ -1798,6 +1798,12 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    artifactClass: "slashing",
+    name: "saw",
+    subtype: "melee",
+    type: "weapon",
+  },
+  {
     name: "scabbard",
     subtype: "waist",
     type: "armor",

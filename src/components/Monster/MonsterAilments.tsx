@@ -1,4 +1,4 @@
-import { Card, Stack } from "react-bootstrap";
+import { Card, CardBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { MonsterBleeding } from "@neverquest/components/Monster/MonsterBleeding";
@@ -14,7 +14,7 @@ export function MonsterAilments() {
   if (canReceiveAilmentsValue) {
     return (
       <Card>
-        <Card.Body>
+        <CardBody>
           <Stack gap={3}>
             {ELEMENTAL_TYPES.map((current) => (
               <MonsterElementalAilment elemental={current} key={current} />
@@ -26,7 +26,7 @@ export function MonsterAilments() {
 
             <MonsterBleeding />
           </Stack>
-        </Card.Body>
+        </CardBody>
       </Card>
     );
   }

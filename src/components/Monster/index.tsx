@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Card, Stack } from "react-bootstrap";
+import { Card, CardBody, Stack } from "react-bootstrap";
 import { useRecoilState, useResetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
@@ -48,7 +48,7 @@ export function Monster() {
   return (
     <Stack gap={3}>
       <Card ref={element}>
-        <Card.Body>
+        <CardBody>
           <Stack gap={3}>
             <MonsterName />
 
@@ -60,7 +60,7 @@ export function Monster() {
 
             <MonsterOffense />
           </Stack>
-        </Card.Body>
+        </CardBody>
       </Card>
 
       <MonsterDistance />

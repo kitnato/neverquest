@@ -1,4 +1,4 @@
-import { Card } from "react-bootstrap";
+import { Card, CardBody } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
@@ -19,11 +19,11 @@ export function Wilderness() {
   if (isStageCompletedValue) {
     return (
       <Card className={getAnimationClass({ name: "flipInX" })}>
-        <Card.Body>
+        <CardBody>
           <IconDisplay gap={5} Icon={IconRemains} tooltip="Remains">
             <span className="fst-italic">Everything is dead.</span>
           </IconDisplay>
-        </Card.Body>
+        </CardBody>
       </Card>
     );
   }
@@ -34,7 +34,7 @@ export function Wilderness() {
 
   return (
     <Card className={getAnimationClass({ name: "zoomIn", speed: "fast" })}>
-      <Card.Body>
+      <CardBody>
         <IconDisplay
           gap={5}
           Icon={
@@ -54,7 +54,7 @@ export function Wilderness() {
                 : "A grim entity is manifesting."}
           </span>
         </IconDisplay>
-      </Card.Body>
+      </CardBody>
     </Card>
   );
 }

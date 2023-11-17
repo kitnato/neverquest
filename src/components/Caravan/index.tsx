@@ -1,5 +1,5 @@
 import { type FunctionComponent, useState } from "react";
-import { Card, Stack } from "react-bootstrap";
+import { Card, CardBody, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { Alchemist } from "@neverquest/components/Caravan/Alchemist";
@@ -49,7 +49,7 @@ export function Caravan() {
   return (
     <>
       <Card className={getAnimationClass({ name: "zoomIn", speed: "fast" })}>
-        <Card.Body>
+        <CardBody>
           <Stack gap={5}>
             <Stack gap={3}>
               {isShowingCrewHiring && <h6>Hired crew</h6>}
@@ -75,7 +75,7 @@ export function Caravan() {
               </Stack>
             )}
           </Stack>
-        </Card.Body>
+        </CardBody>
       </Card>
 
       {activeCrewValue !== undefined &&

@@ -300,6 +300,7 @@ export type StateKey =
   | "canUseJournal"
   | "completedQuestsCount"
   | "confirmationWarnings"
+  | "consciousness"
   | "criticalChance"
   | "criticalDamage"
   | "criticalRating"

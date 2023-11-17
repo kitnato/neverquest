@@ -1,4 +1,4 @@
-import { Card, Stack } from "react-bootstrap";
+import { Card, CardBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
@@ -18,7 +18,7 @@ export function LootDisplay() {
   if (isLootAvailableValue) {
     return (
       <Card className={getAnimationClass({ name: "flipInX" })}>
-        <Card.Body>
+        <CardBody>
           {hasLootedValue ? (
             <IconDisplay gap={5} Icon={IconLooted} tooltip="Loot">
               <span className="fst-italic">Nothing remains.</span>
@@ -48,7 +48,7 @@ export function LootDisplay() {
               ))}
             </Stack>
           )}
-        </Card.Body>
+        </CardBody>
       </Card>
     );
   }

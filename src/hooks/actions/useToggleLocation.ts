@@ -4,6 +4,8 @@ import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGener
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import {
+  consciousness,
+  encounter,
   isStageCompleted,
   isStageStarted,
   location,
@@ -24,12 +26,16 @@ export function useToggleLocation() {
         const get = getSnapshotGetter(snapshot);
 
         if (get(location) === "wilderness") {
-          generateMerchantInventory();
-
           reset(isStageStarted);
-
-          set(location, "caravan");
           set(isShowing("location"), true);
+
+          if (get(encounter) === "res cogitans") {
+            set(consciousness, "awakened");
+          } else {
+            generateMerchantInventory();
+
+            set(location, "caravan");
+          }
         } else {
           if (get(isStageCompleted) && get(stage) === get(stageMaximum)) {
             increaseStage();

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Card, Stack } from "react-bootstrap";
+import { Card, CardBody, Stack } from "react-bootstrap";
 import { useResetRecoilState, useSetRecoilState } from "recoil";
 
 import { Health } from "@neverquest/components/Reserves/Health";
@@ -27,7 +27,7 @@ export function Status() {
 
   return (
     <Card ref={element}>
-      <Card.Body>
+      <CardBody>
         <Stack gap={3}>
           <Name />
 
@@ -39,7 +39,7 @@ export function Status() {
 
           <Recovery />
         </Stack>
-      </Card.Body>
+      </CardBody>
     </Card>
   );
 }

@@ -72,6 +72,14 @@ export const stageMaximum = withStateKey("stageMaximum", (key) =>
 
 // ATOMS
 
+export const consciousness = withStateKey("consciousness", (key) =>
+  atom<"asleep" | "awakened" | "dead">({
+    default: "awakened",
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
 export const isStageStarted = withStateKey("isStageStarted", (key) =>
   atom({
     default: false,

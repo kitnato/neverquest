@@ -1,5 +1,7 @@
-import { Col, Row, Stack } from "react-bootstrap";
+import { Col, Container, Row, Stack } from "react-bootstrap";
+import { useRecoilValue } from "recoil";
 
+import { Awakening } from "@neverquest/components/Awakening";
 import { AttackButton } from "@neverquest/components/Controls/AttackButton";
 import { CapabilitiesButton } from "@neverquest/components/Controls/CapabilitiesButton";
 import { CollectLootButton } from "@neverquest/components/Controls/CollectLootButton";
@@ -18,61 +20,80 @@ import { QuestNotifications } from "@neverquest/components/Quests/QuestNotificat
 import { Statistics } from "@neverquest/components/Statistics";
 import { Status } from "@neverquest/components/Status";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
+import { consciousness } from "@neverquest/state/encounter";
 
 export function Layout() {
-  return (
-    <>
-      <Row>
-        <Col>
-          <Stack gap={3}>
-            <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-              <Location />
+  const consciousnessValue = useRecoilValue(consciousness);
 
-              <Essence />
-            </div>
+  switch (consciousnessValue) {
+    case "asleep": {
+      return (
+        <Container className="mb-4">
+          <Row>
+            <Col>
+              <Stack gap={3}>
+                <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+                  <Location />
 
-            <Stack className="overlay-offcanvas" gap={3}>
-              <Status />
+                  <Essence />
+                </div>
 
-              <Statistics />
+                <Stack className="overlay-offcanvas" gap={3}>
+                  <Status />
 
-              <Gear />
+                  <Statistics />
 
-              <Masteries />
-            </Stack>
-          </Stack>
-        </Col>
+                  <Gear />
 
-        <Col xs="auto">
-          <Stack gap={3}>
-            <RetireButton />
+                  <Masteries />
+                </Stack>
+              </Stack>
+            </Col>
 
-            <AttackButton />
+            <Col xs="auto">
+              <Stack gap={3}>
+                <RetireButton />
 
-            <CapabilitiesButton />
+                <AttackButton />
 
-            <InventoryButton />
+                <CapabilitiesButton />
 
-            <JournalButton />
+                <InventoryButton />
 
-            <CollectLootButton />
+                <JournalButton />
 
-            <TravelButton />
-          </Stack>
-        </Col>
+                <CollectLootButton />
 
-        <Col>
-          <Stack gap={3}>
-            <WildernessStatus />
+                <TravelButton />
+              </Stack>
+            </Col>
 
-            <Encounter />
-          </Stack>
-        </Col>
-      </Row>
+            <Col>
+              <Stack gap={3}>
+                <WildernessStatus />
 
-      <GameOver />
+                <Encounter />
+              </Stack>
+            </Col>
+          </Row>
 
-      <QuestNotifications />
-    </>
-  );
+          <GameOver />
+
+          <QuestNotifications />
+        </Container>
+      );
+    }
+
+    case "awakened": {
+      return (
+        <Container className="mb-4">
+          <Awakening />
+        </Container>
+      );
+    }
+
+    case "dead": {
+      return <span className="position-absolute top-50 start-50 translate-middle">The End.</span>;
+    }
+  }
 }

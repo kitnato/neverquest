@@ -1,4 +1,4 @@
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, CardBody, Col, Row } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { ArmorEquipped } from "@neverquest/components/Inventory/Armor/ArmorEquipped";
@@ -19,7 +19,7 @@ export function Gear() {
 
   return (
     <Card className={getAnimationClass({ name: "flipInX" })}>
-      <Card.Body>
+      <CardBody>
         <Row className="align-items-center">
           <Col>
             <WeaponEquipped />
@@ -33,7 +33,7 @@ export function Gear() {
             <OffhandEquipped />
           </Col>
         </Row>
-      </Card.Body>
+      </CardBody>
     </Card>
   );
 }

@@ -30,7 +30,7 @@ export function useToggleLocation() {
           set(isShowing("location"), true);
 
           if (get(encounter) === "res cogitans") {
-            set(consciousness, "awakened");
+            set(consciousness, "vigilans");
           } else {
             generateMerchantInventory();
 

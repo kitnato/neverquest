@@ -1,39 +1,58 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-export function Typewriter({ children, delay = 50 }: { children: string; delay?: number }) {
-  const [delta, setDelta] = useState(0);
+const CURSOR = "|";
+const CURSOR_DELAY = 500;
+const SEPARATOR = ".";
+const TEXT_DELAY = 100;
+
+export function Typewriter({ children, delay = TEXT_DELAY }: { children: string; delay?: number }) {
+  const [cursor, setCursor] = useState(CURSOR);
   const [index, setIndex] = useState(0);
   const [text, setText] = useState("");
 
+  const deltaCursorReference = useRef(0);
+  const deltaDelayReference = useRef(0);
   const frameReference = useRef(-1);
-  const previousTimeReference = useRef(0);
+  const timeReference = useRef(0);
 
   const animate = useCallback(
     (time: number) => {
-      setDelta((current) => current + (time - (previousTimeReference.current || time)));
+      const delta = time - (timeReference.current || time);
 
-      if (delta >= delay) {
-        setText((current) => current + children[index]);
-        setIndex((current) => current + 1);
-        setDelta(0);
+      deltaCursorReference.current += delta;
+      deltaDelayReference.current += delta;
+
+      if (index === children.length && deltaCursorReference.current >= CURSOR_DELAY) {
+        setCursor((current) => (current === CURSOR ? "" : CURSOR));
+        deltaCursorReference.current = 0;
       }
 
-      previousTimeReference.current = time;
+      if (
+        index < children.length &&
+        deltaDelayReference.current >= (children[index - 1] === SEPARATOR ? delay * 3 : delay)
+      ) {
+        setText((current) => current + children[index]);
+        setIndex((current) => current + 1);
+
+        deltaDelayReference.current = 0;
+      }
+
       frameReference.current = requestAnimationFrame(animate);
+      timeReference.current = time;
     },
-    [delta, delay, children, index],
+    [children, delay, index],
   );
 
   useEffect(() => {
-    if (index === children.length) {
-      cancelAnimationFrame(frameReference.current);
-      previousTimeReference.current = 0;
-    } else {
-      frameReference.current = requestAnimationFrame(animate);
-    }
+    frameReference.current = requestAnimationFrame(animate);
 
     return () => cancelAnimationFrame(frameReference.current);
-  }, [animate, children.length, index]);
+  }, [animate]);
 
-  return <span>{text}</span>;
+  return (
+    <strong style={{ fontFamily: "monospace" }}>
+      {text}
+      {cursor === "" ? <>&nbsp;</> : cursor}
+    </strong>
+  );
 }

@@ -21,12 +21,26 @@ import { Statistics } from "@neverquest/components/Statistics";
 import { Status } from "@neverquest/components/Status";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { consciousness } from "@neverquest/state/encounter";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Layout() {
   const consciousnessValue = useRecoilValue(consciousness);
 
   switch (consciousnessValue) {
-    case "asleep": {
+    case "mors": {
+      return (
+        <span
+          className={`position-absolute top-50 start-50 translate-middle ${getAnimationClass({
+            name: "zoomIn",
+            speed: "slower",
+          })}`}
+        >
+          Fin.
+        </span>
+      );
+    }
+
+    case "somnium": {
       return (
         <Container className="mb-4">
           <Row>
@@ -84,16 +98,12 @@ export function Layout() {
       );
     }
 
-    case "awakened": {
+    case "vigilans": {
       return (
         <Container className="mb-4">
           <Awakening />
         </Container>
       );
-    }
-
-    case "dead": {
-      return <span className="position-absolute top-50 start-50 translate-middle">The End.</span>;
     }
   }
 }

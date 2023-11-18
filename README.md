@@ -94,14 +94,14 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
    - Trade
 1. Has anyone done this before?
    Not quite in the same way. Clear influences are:
+   - Diablo - and its sequels (gameplay loop of randomized monster slaying, loot collecting and town visiting)
    - Progress Quest (the progenitor of all text-heavy UI-based incremental games, also with a swords & sorcery fantasy theme)
    - Progress Knight (fantasy incremental focused on rags-to-riches career progression)
    - Kingdom of Loathing (one of the first purely browser-based UI-focused adventure RPGs with an irreverent sense of humor)
    - Candybox 1 & 2 (another irreverent UI-heavy fantasy adventure with 2D world elements heavy on player interaction and with player death)
    - Crank (user-interaction-driven adventure/mystery game with gradually expanding storyline and gameplay)
    - NGU Idle (irreverent UI-based fantasy incremental idle game)
-   - Diablo - and its sequels (gameplay loop of randomized monster slaying, loot collecting and town visiting)
 1. What's the one new thing?
-   - Feels like Diablo, but it's a web app.
+   - Feels like text-based Diablo, but it's a web app.
 1. Do you have something to say?
-   - Browser games with only text, UI and no graphics can be just as engaging and can have similar gameplay depth to traditional video games without relying solely on simple deterministic incremental progress.
+   - Browser games with only text and a GUI can be just as engaging and can have similar gameplay depth to traditional video games without relying solely on simple deterministic incremental progress.

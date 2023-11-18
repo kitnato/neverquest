@@ -21,10 +21,11 @@ export function Awakening() {
 
           <Typewriter>... System failure. Patient has awoken. Protocol?</Typewriter>
 
-          <Stack className="justify-content-center" direction="horizontal" gap={3}>
+          <Stack className="mx-auto" direction="horizontal" gap={3} style={{ width: 400 }}>
             <Button
+              className="w-50"
               onClick={() => {
-                setConsciousness("asleep");
+                setConsciousness("somnium");
                 progressQuest({ quest: "deciding" });
               }}
               variant="outline-dark"
@@ -32,7 +33,11 @@ export function Awakening() {
               Keep grinding
             </Button>
 
-            <Button onClick={() => setConsciousness("dead")} variant="outline-dark">
+            <Button
+              className="w-50"
+              onClick={() => setConsciousness("mors")}
+              variant="outline-dark"
+            >
               Die forever
             </Button>
           </Stack>

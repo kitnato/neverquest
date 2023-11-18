@@ -10,7 +10,7 @@ import { isTraitAcquired } from "@neverquest/state/traits";
 import type { GearItem } from "@neverquest/types";
 import {
   isArmor,
-  isGear,
+  isGearItem,
   isMelee,
   isRanged,
   isShield,
@@ -86,7 +86,7 @@ export function useToggleEquipGear() {
 
         set(inventory, (currentInventory) =>
           currentInventory.map((currentItem) => {
-            if (isGear(currentItem)) {
+            if (isGearItem(currentItem)) {
               if (currentItem.ID === ID) {
                 return {
                   ...currentItem,

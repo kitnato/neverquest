@@ -7,7 +7,7 @@ import { Usable } from "@neverquest/components/Inventory/Usable";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import type { MerchantInventoryItem } from "@neverquest/types";
-import { isGear, isUsable } from "@neverquest/types/type-guards";
+import { isGearItem, isUsable } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
@@ -24,7 +24,7 @@ export function PurchasableItems({ merchantItems }: { merchantItems: MerchantInv
             ) : (
               <ItemDisplay
                 item={item}
-                overlayPlacement={isGear(item) ? "right" : undefined}
+                overlayPlacement={isGearItem(item) ? "right" : undefined}
                 stack={stack}
               />
             )}

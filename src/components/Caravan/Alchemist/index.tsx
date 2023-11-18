@@ -6,7 +6,7 @@ import { TransmuteGems } from "@neverquest/components/Caravan/Alchemist/Transmut
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general";
 import { inventory } from "@neverquest/state/inventory";
-import { isGem } from "@neverquest/types/type-guards";
+import { isGemItem } from "@neverquest/types/type-guards";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function Alchemist() {
@@ -14,7 +14,7 @@ export function Alchemist() {
 
   const gemsInventory = stackItems(
     inventoryValue
-      .filter(isGem)
+      .filter(isGemItem)
       .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
   );
 

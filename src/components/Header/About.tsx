@@ -19,23 +19,23 @@ import { formatKebabCase } from "@neverquest/utilities/formatters";
 const HEADERS = ["h2", "h3", "h4", "h5", "h6"] as const;
 
 export function About() {
-  const [isShowing, setIsShowing] = useState(false);
+  const [isShowingModal, setIsShowingModal] = useState(false);
 
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>About</Tooltip>} placement="bottom">
-        <Button onClick={() => setIsShowing(true)} variant="outline-light">
+        <Button onClick={() => setIsShowingModal(true)} variant="outline-light">
           <IconImage Icon={IconAbout} size="small" />
         </Button>
       </OverlayTrigger>
 
       <Modal
         onHide={() => {
-          setIsShowing(false);
+          setIsShowingModal(false);
 
           window.history.replaceState(undefined, "", " ");
         }}
-        show={isShowing}
+        show={isShowingModal}
         size="lg"
       >
         <ModalHeader closeButton>

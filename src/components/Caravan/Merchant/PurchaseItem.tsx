@@ -9,7 +9,7 @@ import { merchantInventory } from "@neverquest/state/caravan";
 import type { MerchantInventoryItem } from "@neverquest/types";
 import {
   isArmor,
-  isGear,
+  isGearItem,
   isInfusableItem,
   isShield,
   isWeapon,
@@ -37,7 +37,7 @@ export function PurchaseItem({ merchantItem }: { merchantItem: MerchantInventory
 
         transactEssence(-price);
 
-        if (acquisitionStatus === "autoEquip" && isGear(merchantItem)) {
+        if (acquisitionStatus === "autoEquip" && isGearItem(merchantItem)) {
           toggleEquipGear(merchantItem);
         }
 

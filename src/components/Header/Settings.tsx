@@ -30,17 +30,17 @@ import {
 export function Settings() {
   const ownedItemKnapsack = useRecoilValue(ownedItem("knapsack"));
 
-  const [isShowing, setIsShowing] = useState(false);
+  const [isShowingModal, setIsShowingModal] = useState(false);
 
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>Settings</Tooltip>} placement="bottom">
-        <Button onClick={() => setIsShowing(true)} variant="outline-light">
+        <Button onClick={() => setIsShowingModal(true)} variant="outline-light">
           <IconImage Icon={IconSettings} size="small" />
         </Button>
       </OverlayTrigger>
 
-      <Modal onHide={() => setIsShowing(false)} show={isShowing}>
+      <Modal onHide={() => setIsShowingModal(false)} show={isShowingModal}>
         <ModalHeader closeButton>
           <ModalTitle>
             <Stack direction="horizontal" gap={3}>

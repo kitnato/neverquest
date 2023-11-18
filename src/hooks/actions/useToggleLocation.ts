@@ -26,16 +26,16 @@ export function useToggleLocation() {
         const get = getSnapshotGetter(snapshot);
 
         if (get(location) === "wilderness") {
-          reset(isStageStarted);
-          set(isShowing("location"), true);
-
           if (get(encounter) === "res cogitans") {
             set(consciousness, "vigilans");
-          } else {
-            generateMerchantInventory();
-
-            set(location, "caravan");
           }
+
+          reset(isStageStarted);
+
+          set(isShowing("location"), true);
+          set(location, "caravan");
+
+          generateMerchantInventory();
         } else {
           if (get(isStageCompleted) && get(stage) === get(stageMaximum)) {
             increaseStage();

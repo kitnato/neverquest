@@ -1,5 +1,5 @@
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/data/general";
-import { isStackable } from "@neverquest/types/type-guards";
+import { isStackableItem } from "@neverquest/types/type-guards";
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
 import type { StateKey } from "@neverquest/types/unions";
 
@@ -54,9 +54,9 @@ export function stackItems<ItemType>(items: ItemType[]) {
   const stacker: { item: ItemType; stack: number }[] = [];
 
   for (const item of items) {
-    if (isStackable(item)) {
+    if (isStackableItem(item)) {
       const existingStackIndex = stacker.findIndex(
-        ({ item: stackedItem }) => isStackable(stackedItem) && stackedItem.name === item.name,
+        ({ item: stackedItem }) => isStackableItem(stackedItem) && stackedItem.name === item.name,
       );
 
       if (existingStackIndex === -1) {

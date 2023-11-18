@@ -5,7 +5,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { GemDescription } from "@neverquest/components/Inventory/GemDescription";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import type { ConsumableItem, GemItem, UsableItem } from "@neverquest/types";
-import { isGem } from "@neverquest/types/type-guards";
+import { isGemItem } from "@neverquest/types/type-guards";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ItemName({
@@ -19,7 +19,7 @@ export function ItemName({
 }) {
   const { name, weight } = item;
   // eslint-disable-next-line unicorn/consistent-destructuring
-  const description = isGem(item) ? <GemDescription name={item.name} /> : item.description;
+  const description = isGemItem(item) ? <GemDescription name={item.name} /> : item.description;
   const displayName = capitalizeAll(name);
 
   return (

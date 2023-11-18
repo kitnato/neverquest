@@ -13,7 +13,7 @@ import { itemsAcquired } from "@neverquest/state/inventory";
 import {
   isArmor,
   isConsumableItem,
-  isGem,
+  isGemItem,
   isMelee,
   isShield,
   isTrinketItem,
@@ -50,7 +50,7 @@ export function ItemAcquisition() {
               return CONSUMABLES[current.name].Icon;
             }
 
-            if (isGem(current)) {
+            if (isGemItem(current)) {
               return IconGem;
             }
 

@@ -742,12 +742,6 @@ Toggles a popover warning to prompt a retreat when the character's [health](#hea
 
 Default: on.
 
-### Confirmation of risky choices
-
-Toggles between hiding and showing modals that confirm certain choices that are seen to be detrimental to gameplay for a beginner, such as leaving the [caravan](#caravan) when not purchasing anything from the [merchant](#merchant) in the first few levels.
-
-Default: on.
-
 ### Auto-equip new gear
 
 Toggles the automatic equipping of [weapons](#weapons), [armor](#armor) and [shields](#shields) once they are acquired. Cannot be set to off until the [knapsack](#knapsack) is acquired.

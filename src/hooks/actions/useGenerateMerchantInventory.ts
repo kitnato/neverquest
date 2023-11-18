@@ -7,7 +7,7 @@ import { stage, stageMaximum } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
 import { canUseJournal } from "@neverquest/state/quests";
 import { allowProfanity } from "@neverquest/state/settings";
-import { isGear, isInfusableItem, isTrinketItem } from "@neverquest/types/type-guards";
+import { isGearItem, isInfusableItem, isTrinketItem } from "@neverquest/types/type-guards";
 import {
   generateArmor,
   generateMeleeWeapon,
@@ -65,7 +65,7 @@ export function useGenerateMerchantInventory() {
             })();
 
             if (
-              isGear(item) ||
+              isGearItem(item) ||
               get(ownedItem(item.name)) === undefined ||
               (item.name === "antique coin" && get(canUseJournal))
             ) {

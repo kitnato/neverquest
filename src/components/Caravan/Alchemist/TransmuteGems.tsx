@@ -13,7 +13,7 @@ import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconTransmute from "@neverquest/icons/transmute.svg?react";
 import { inventory } from "@neverquest/state/inventory";
-import { isGem } from "@neverquest/types/type-guards";
+import { isGemItem } from "@neverquest/types/type-guards";
 import { GEM_TYPES, type Gem } from "@neverquest/types/unions";
 import { stackItems } from "@neverquest/utilities/helpers";
 
@@ -28,7 +28,7 @@ export function TransmuteGems() {
 
   const gems = stackItems(
     inventoryValue
-      .filter(isGem)
+      .filter(isGemItem)
       .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
   );
   const transmutation = { ruby: 0, sapphire: 0, topaz: 0 };
@@ -74,7 +74,7 @@ export function TransmuteGems() {
               if (isAffordable) {
                 const gemIDs = new Set(
                   inventoryValue
-                    .filter((current) => isGem(current) && current.name === source)
+                    .filter((current) => isGemItem(current) && current.name === source)
                     .map(({ ID }) => ID)
                     .slice(0, TRANSMUTE_COST),
                 );

@@ -7,7 +7,7 @@ import type { InventoryItem, KnapsackItem } from "@neverquest/types";
 import {
   isArmor,
   isConsumableItem,
-  isGear,
+  isGearItem,
   isInfusableItem,
   isMelee,
   isRanged,
@@ -56,7 +56,7 @@ export const equippableItems = withStateKey("equippableItems", (key) =>
     get: ({ get }) =>
       // eslint-disable-next-line unicorn/no-array-reduce
       get(inventory).reduce((aggregator, { ID, ...current }) => {
-        let canEquip = isGear(current) ? !current.isEquipped : false;
+        let canEquip = isGearItem(current) ? !current.isEquipped : false;
 
         if (isArmor(current) && current.gearClass === "heavy") {
           canEquip = get(isSkillAcquired("armorcraft"));

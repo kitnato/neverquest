@@ -12,8 +12,8 @@ import { isTraitAcquired } from "@neverquest/state/traits";
 import type { InventoryItem } from "@neverquest/types";
 import {
   isArmor,
-  isGear,
-  isGem,
+  isGearItem,
+  isGemItem,
   isMelee,
   isRanged,
   isShield,
@@ -42,7 +42,7 @@ export function useAcquireItem() {
           set(itemsAcquired, (current) => [...current, item]);
         }
 
-        if (isGem(item)) {
+        if (isGemItem(item)) {
           progressQuest({ quest: "acquiringGems" });
         }
 
@@ -55,7 +55,7 @@ export function useAcquireItem() {
         const isShieldUnequipped = get(shield).name === SHIELD_NONE.name;
         const weaponValue = get(weapon);
 
-        if (isGear(item)) {
+        if (isGearItem(item)) {
           if (isMelee(item) && item.grip === "two-handed") {
             progressQuest({ quest: "acquiringTwoHanded" });
           }

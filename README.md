@@ -20,8 +20,8 @@ To run the app locally from source, you will need to use a command-line interfac
 
 ### Install & run the app
 
-1. Open the CLI and change into a suitable directory
-1. Run `git clone git@github.com:kitstigator/neverquest.git`
+1. Open the CLI and change into a suitable directory (e.g. `cd neverquest`).
+1. Run `git clone git@github.com:kitnato/neverquest.git`
 1. Run `cd neverquest`
 1. Run `npm install`
 1. Run `npm start`
@@ -29,7 +29,7 @@ To run the app locally from source, you will need to use a command-line interfac
 
 ### Local development
 
-After [installation](./src/data/manual.md#install--run-the-app), but before committing any changes, please do the following:
+After [installation](#install--run-the-app), but before committing any changes, do the following:
 
 1. In the CLI, go to the project folder (e.g. `cd neverquest`).
 1. Run `npm run prepare`
@@ -52,7 +52,7 @@ The linter config can be viewed in `.eslintrc.json`, `.stylelintrc.json` and `.p
 
 - Runs on [Vite](https://vitejs.dev).
 
-- Code style & linting is provided by [eslint](https://eslint.org), [stylelint](https://stylelint.io) and [prettier](https://prettier.io), based on the [@kitstigator/eslint-config-functional](https://github.com/kitstigator/eslint-config-functional) rules.
+- Code style & linting is provided by [eslint](https://eslint.org), [stylelint](https://stylelint.io) and [prettier](https://prettier.io), using [@kitnato/eslint-config-succinct](https://github.com/kitnato/eslint-config-succinct).
 
 - Automation is provided by [husky](https://typicode.github.io/husky) and [lint-staged](https://www.npmjs.com/package/lint-staged).
 
@@ -68,7 +68,7 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 
 - Player always has something to do
 - No long waits, cliffs or walls
-- No obligatory resets for incremental gains
+- Can be played in the background
 - No excessive or repetitive clicking
 - Decisions are frequent and they have immediate gameplay impact
 - High character build variety
@@ -76,18 +76,17 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 
 ### 2. [Warren Spector's 6+2+1 questions](https://www.gamedeveloper.com/design/warren-spector-traces-i-deus-ex-i-s-development-back-to-a-game-of-d-d)
 
-1. What’s the core idea? Can you describe the core of the game in 2-3 sentences?
-   - An incremental action RPG, focusing on player interaction, which can be played in any browser on any system. Exploring and fighting through the hostile world yields its secrets, with the only respite being a gradually growing caravan of .
-1. Why do this game?
-   - I want to play it, I can’t find anything like it. Other UI-focused browser-based games are either idle clickers or Flash-based monstrosities.
+1. What's the core idea? Can you describe the core of the game in 2-3 sentences?
+   - An incremental action RPG, focusing on player interaction, which can be played in any browser on any system. Exploring and fighting through the hostile world yields its secrets, with the only respite being a gradually growing caravan of goods and services that enhance, expand and upgrade gameplay.
+1. Why make this game?
+   - I want to play it and I can't find anything like it.
 1. What are the development challenges?
-   - Free time, i.e. funding.
+   - The amount of my free time I can dedicate.
 1. How well-suited to video games is the idea?
-   - It is unique to video games since it requires lots of numerical computation.
+   - It is unique to video games since it requires lots of numerical and state-based computation.
 1. What’s the player fantasy?
    - Ever increasing power and challenge with the freedom to build how said power and challenges are surmounted.
 1. What does the player do? (What are the “verbs” of the game?)
-   - Explore
    - Fight
    - Loot
    - Level up
@@ -96,14 +95,13 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 1. Has anyone done this before?
    Not quite in the same way. Clear influences are:
    - Progress Quest (the progenitor of all text-heavy UI-based incremental games, also with a swords & sorcery fantasy theme)
-   - Trimps (complex idle/incremental all about building )
+   - Progress Knight (fantasy incremental focused on rags-to-riches career progression)
    - Kingdom of Loathing (one of the first purely browser-based UI-focused adventure RPGs with an irreverent sense of humor)
    - Candybox 1 & 2 (another irreverent UI-heavy fantasy adventure with 2D world elements heavy on player interaction and with player death)
    - Crank (user-interaction-driven adventure/mystery game with gradually expanding storyline and gameplay)
-   - Swarm Simulator (the premier Bootstrapped-based incremental/idle browser game all about ever-increasing numbers and progress bars)
-   - NGU Idle (incremental irreverent UI-based fantasy adventure)
-   - Hero Simulator (light-hearted fantasy setting with many upgrades)
-1. What’s the one new thing?
-   - Influence every aspect of your character without the need for tropes and archetypes.
+   - NGU Idle (irreverent UI-based fantasy incremental idle game)
+   - Diablo - and its sequels (gameplay loop of randomized monster slaying, loot collecting and town visiting)
+1. What's the one new thing?
+   - Feels like Diablo, but it's a web app.
 1. Do you have something to say?
-   - Browser games with only text, UI and no graphics can be just as engaging as and can have similar gameplay depth to traditional video games without relying solely on simplistic deterministic incremental progress.
+   - Browser games with only text, UI and no graphics can be just as engaging and can have similar gameplay depth to traditional video games without relying solely on simple deterministic incremental progress.

@@ -36,7 +36,7 @@ export const BLIGHT = {
     maximum: 0.6,
     minimum: 0.1,
   },
-  finality: 2,
+  finality: 0.77,
   increment: 0.075,
   stageRequired: 20,
 };
@@ -46,31 +46,31 @@ export const ESSENCE = {
   base: 5,
   bonus: 0.02,
   boss: 1.5,
-  finality: 2,
+  finality: 77_777,
 };
 
 export const MONSTER_ATTACK_RATE = {
-  base: 4000,
+  base: 3700,
   bonus: 0.01,
   boss: 1.15,
-  finality: 1.3,
-  minimum: 666,
+  finality: 777,
+  minimum: 800,
 };
 
 export const MONSTER_DAMAGE = {
-  attenuation: 40,
-  base: 6,
+  attenuation: 35,
+  base: 7,
   bonus: 0.02,
   boss: 1.3,
-  finality: 2,
+  finality: 7777,
 };
 
 export const MONSTER_HEALTH = {
-  attenuation: 50,
-  base: 25,
+  attenuation: 40,
+  base: 20,
   bonus: 0.03,
   boss: 1.8,
-  finality: 2.5,
+  finality: 7777,
 };
 
 export const POISON = {
@@ -83,7 +83,7 @@ export const POISON = {
     maximum: 250_000,
     minimum: 20_000,
   },
-  finality: 2,
+  finality: 0.77,
   magnitude: {
     maximum: 0.25,
     minimum: 0.05,

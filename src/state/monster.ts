@@ -58,6 +58,7 @@ export const bleedingDeltaLength = withStateKey("bleedingDeltaLength", (key) =>
 export const blightChance = withStateKey("blightChance", (key) =>
   selector({
     get: ({ get }) => {
+      const encounterValue = get(encounter);
       const stageValue = get(stage);
 
       const {
@@ -71,17 +72,16 @@ export const blightChance = withStateKey("blightChance", (key) =>
         return 0;
       }
 
+      if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
+        return finality;
+      }
+
       return (
         getFromRange({
           factor: getGrowthSigmoid(getLinearMapping({ offset: stageRequired, stage: stageValue })),
           maximum,
           minimum,
-        }) *
-        (get(encounter) === "boss"
-          ? boss
-          : get(encounter) === "res cogitans" || get(encounter) === "res dominus"
-            ? finality
-            : 1)
+        }) * (encounterValue === "boss" ? boss : 1)
       );
     },
     key,
@@ -163,19 +163,17 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   selector({
     get: ({ get }) => {
       const { base, bonus, boss, finality, minimum } = MONSTER_ATTACK_RATE;
+      const encounterValue = get(encounter);
       const factor = getGrowthSigmoid(get(stage));
+
+      if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
+        return finality;
+      }
 
       return Math.round(
         Math.max(
           base -
-            base *
-              factor *
-              (1 + get(progress) * bonus) *
-              (get(encounter) === "boss"
-                ? boss
-                : get(encounter) === "res cogitans" || get(encounter) === "res dominus"
-                  ? finality
-                  : 1),
+            base * factor * (1 + get(progress) * bonus) * (encounterValue === "boss" ? boss : 1),
           minimum,
         ),
       );
@@ -188,15 +186,16 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
   selector({
     get: ({ get }) => {
       const { attenuation, base, bonus, boss, finality } = MONSTER_DAMAGE;
+      const encounterValue = get(encounter);
       const factor = getGrowthTriangular(get(stage)) / attenuation;
+
+      if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
+        return finality;
+      }
 
       return Math.round(
         (base + base * factor * (1 + get(progress) * bonus)) *
-          (get(encounter) === "boss"
-            ? boss
-            : get(encounter) === "res cogitans" || get(encounter) === "res dominus"
-              ? finality
-              : 1),
+          (encounterValue === "boss" ? boss : 1),
       );
     },
     key,
@@ -209,8 +208,8 @@ export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (ke
       formatNumber({
         format: "float",
         value: getDamagePerRate({
+          attackRate: get(monsterAttackRate),
           damage: get(monsterDamage),
-          rate: get(monsterAttackRate),
         }),
       }),
     key,
@@ -234,10 +233,10 @@ export const monsterDamageAilingPerSecond = withStateKey("monsterDamageAilingPer
         ? formatNumber({
             format: "float",
             value: getDamagePerRate({
+              attackRate: get(monsterAttackRate),
               damage: get(monsterDamageAiling),
               damageModifier: 0,
               damageModifierChance: AILMENT_PENALTY.stunned,
-              rate: get(monsterAttackRate),
             }),
           })
         : get(monsterDamagePerSecond),
@@ -249,15 +248,16 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
   selector({
     get: ({ get }) => {
       const { attenuation, base, bonus, boss, finality } = MONSTER_HEALTH;
+      const encounterValue = get(encounter);
       const factor = getGrowthTriangular(get(stage)) / attenuation;
+
+      if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
+        return finality;
+      }
 
       return Math.round(
         (base + base * factor * (1 + get(progress) * bonus)) *
-          (get(encounter) === "boss"
-            ? boss
-            : get(encounter) === "res cogitans" || get(encounter) === "res dominus"
-              ? finality
-              : 1),
+          (encounterValue === "boss" ? boss : 1),
       );
     },
     key,
@@ -310,6 +310,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
 export const poisonChance = withStateKey("poisonChance", (key) =>
   selector({
     get: ({ get }) => {
+      const encounterValue = get(encounter);
       const stageValue = get(stage);
 
       const {
@@ -323,17 +324,16 @@ export const poisonChance = withStateKey("poisonChance", (key) =>
         return 0;
       }
 
+      if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
+        return finality;
+      }
+
       return (
         getFromRange({
           factor: getGrowthSigmoid(getLinearMapping({ offset: stageRequired, stage: stageValue })),
           maximum,
           minimum,
-        }) *
-        (get(encounter) === "boss"
-          ? boss
-          : get(encounter) === "res cogitans" || get(encounter) === "res dominus"
-            ? finality
-            : 1)
+        }) * (encounterValue === "boss" ? boss : 1)
       );
     },
     key,

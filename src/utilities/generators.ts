@@ -73,7 +73,7 @@ export function generateMeleeWeapon({
   level: number;
 }): Melee {
   const factor = getGrowthSigmoid(level);
-  const { abilityChance, damage, rate, staminaCost, weight } = getMeleeRanges({
+  const { abilityChance, attackRate, damage, staminaCost, weight } = getMeleeRanges({
     factor,
     gearClass,
     grip,
@@ -81,6 +81,7 @@ export function generateMeleeWeapon({
 
   return {
     abilityChance: getFromRange(abilityChance),
+    attackRate: getFromRange(attackRate),
     damage: getFromRange(damage),
     gearClass,
     gems: [],
@@ -97,7 +98,6 @@ export function generateMeleeWeapon({
       ...generatorParameters,
     }),
     price: getGearPrice({ factor, ...WEAPON_BASE }),
-    rate: getFromRange(rate),
     staminaCost: getFromRange(staminaCost),
     weight: getFromRange(weight),
   };
@@ -112,7 +112,7 @@ export function generateRangedWeapon({
   level: number;
 }): Ranged {
   const factor = getGrowthSigmoid(level);
-  const { abilityChance, ammunitionCost, damage, range, rate, staminaCost, weight } =
+  const { abilityChance, ammunitionCost, attackRate, damage, range, staminaCost, weight } =
     getRangedRanges({
       factor,
       gearClass,
@@ -121,6 +121,7 @@ export function generateRangedWeapon({
   return {
     abilityChance: getFromRange(abilityChance),
     ammunitionCost: getFromRange(ammunitionCost),
+    attackRate: getFromRange(attackRate),
     damage: getFromRange(damage),
     gearClass,
     gems: [],
@@ -137,7 +138,6 @@ export function generateRangedWeapon({
     }),
     price: getGearPrice({ factor, ...WEAPON_BASE }),
     range: getFromRange(range),
-    rate: getFromRange(rate),
     staminaCost: getFromRange(staminaCost),
     weight: getFromRange(weight),
   };

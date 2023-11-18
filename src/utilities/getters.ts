@@ -69,20 +69,20 @@ export function getComputedStatistic({
 }
 
 export function getDamagePerRate({
+  attackRate,
   damage,
   damageModifier = 0,
   damageModifierChance = 0,
-  rate,
 }: {
+  attackRate: number;
   damage: number;
   damageModifier?: number;
   damageModifierChance?: number;
-  rate: number;
 }) {
   const regular = damage * (1 - damageModifierChance);
   const critical = damage * damageModifierChance * damageModifier;
 
-  return (regular + critical) / (rate / 1000);
+  return (regular + critical) / (attackRate / 1000);
 }
 
 export function getDamagePerTick({
@@ -272,18 +272,18 @@ export function getMeleeRanges({
 }) {
   const {
     ability: abilityModifier,
+    attackRate: rateModifier,
     damage: damageModifier,
-    rate: rateModifier,
     stamina: staminaModifier,
     weight: weightModifier,
   } = WEAPON_MODIFIER[grip];
-  const { damage, rate, staminaCost, weight } = WEAPON_BASE;
+  const { attackRate, damage, staminaCost, weight } = WEAPON_BASE;
   const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
 
   return {
     abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
+    attackRate: getRange({ factor, modifier: rateModifier, ranges: attackRate }),
     damage: getRange({ factor, modifier: damageModifier, ranges: damage }),
-    rate: getRange({ factor, modifier: rateModifier, ranges: rate }),
     staminaCost: getRange({ factor, modifier: staminaModifier, ranges: staminaCost }),
     weight: getRange({ factor, modifier: weightModifier, ranges: weight }),
   };
@@ -292,20 +292,20 @@ export function getMeleeRanges({
 export function getRangedRanges({ factor, gearClass }: { factor: number; gearClass: WeaponClass }) {
   const {
     ability: abilityModifier,
+    attackRate: rateModifier,
     damage: damageModifier,
-    rate: rateModifier,
     stamina: staminaModifier,
     weight: weightModifier,
   } = WEAPON_MODIFIER.ranged;
-  const { ammunitionCost, damage, range, rate, staminaCost, weight } = WEAPON_BASE;
+  const { ammunitionCost, attackRate, damage, range, staminaCost, weight } = WEAPON_BASE;
   const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
 
   return {
     abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
     ammunitionCost: getRange({ factor, ranges: ammunitionCost }),
+    attackRate: getRange({ factor, modifier: rateModifier, ranges: attackRate }),
     damage: getRange({ factor, modifier: damageModifier, ranges: damage }),
     range: getRange({ factor, ranges: range }),
-    rate: getRange({ factor, modifier: rateModifier, ranges: rate }),
     staminaCost: getRange({ factor, modifier: staminaModifier, ranges: staminaCost }),
     weight: getRange({ factor, modifier: weightModifier, ranges: weight }),
   };

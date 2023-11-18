@@ -38,11 +38,12 @@ export function WeaponName({
   const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
   const weaponEquippedValue = useRecoilValue(weaponEquipped);
 
-  const { abilityChance, damage, gearClass, ID, level, name, rate, staminaCost, weight } = weapon;
+  const { abilityChance, attackRate, damage, gearClass, ID, level, name, staminaCost, weight } =
+    weapon;
   const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[gearClass];
   const damagePerSecond = getDamagePerRate({
+    attackRate,
     damage,
-    rate,
   });
   const isUnarmed = name === WEAPON_NONE.name;
   const showComparison = ID !== weaponEquippedValue.ID;
@@ -94,11 +95,11 @@ export function WeaponName({
                   <Stack direction="horizontal" gap={1}>
                     <IconImage Icon={IconWeaponAttackRate} size="small" />
 
-                    {formatNumber({ format: "time", value: rate })}
+                    {formatNumber({ format: "time", value: attackRate })}
 
                     {showComparison && (
                       <GearComparison
-                        difference={rate - weaponEquippedValue.rate}
+                        difference={attackRate - weaponEquippedValue.attackRate}
                         isDownPositive
                         showing="weapon"
                       />
@@ -122,8 +123,8 @@ export function WeaponName({
                           difference={
                             damagePerSecond -
                             getDamagePerRate({
+                              attackRate: weaponEquippedValue.attackRate,
                               damage: weaponEquippedValue.damage,
-                              rate: weaponEquippedValue.rate,
                             })
                           }
                           showing="weapon"

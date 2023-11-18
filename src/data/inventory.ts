@@ -449,13 +449,17 @@ export const TRINKETS: Record<
 
 export const WEAPON_BASE: GearBase & {
   ammunitionCost: [GeneratorRange, GeneratorRange];
+  attackRate: [GeneratorRange, GeneratorRange];
   damage: [GeneratorRange, GeneratorRange];
   range: [GeneratorRange, GeneratorRange];
-  rate: [GeneratorRange, GeneratorRange];
 } = {
   ammunitionCost: [
     { maximum: 2, minimum: 1 },
     { maximum: 50, minimum: 45 },
+  ],
+  attackRate: [
+    { maximum: 3200, minimum: 3000 },
+    { maximum: 1600, minimum: 1500 },
   ],
   damage: [
     { maximum: 12, minimum: 11 },
@@ -465,10 +469,6 @@ export const WEAPON_BASE: GearBase & {
   range: [
     { maximum: 4000, minimum: 3500 },
     { maximum: 7000, minimum: 6800 },
-  ],
-  rate: [
-    { maximum: 3700, minimum: 3600 },
-    { maximum: 2000, minimum: 1900 },
   ],
   staminaCost: [
     { maximum: 2, minimum: 1 },
@@ -481,13 +481,21 @@ export const WEAPON_BASE: GearBase & {
 };
 
 export const WEAPON_MODIFIER = {
-  "one-handed": { ability: 1, damage: 1, price: 1, rate: 1, stamina: 1, weight: 1 },
-  ranged: { ability: 1, damage: 1.2, price: 1.1, rate: 1, stamina: 1.1, weight: 1.15 },
-  "two-handed": { ability: 1.1, damage: 1.25, price: 1.2, rate: 1.3, stamina: 1.15, weight: 1.2 },
+  "one-handed": { ability: 1, attackRate: 1, damage: 1, price: 1, stamina: 1, weight: 1 },
+  ranged: { ability: 1, attackRate: 1, damage: 1.2, price: 1.1, stamina: 1.1, weight: 1.15 },
+  "two-handed": {
+    ability: 1.1,
+    attackRate: 1.3,
+    damage: 1.25,
+    price: 1.2,
+    stamina: 1.15,
+    weight: 1.2,
+  },
 };
 
 export const WEAPON_NONE: Omit<Melee, "isEquipped" | "price"> = {
   abilityChance: 0,
+  attackRate: 2500,
   damage: 10,
   gearClass: "blunt",
   gems: [],
@@ -495,7 +503,6 @@ export const WEAPON_NONE: Omit<Melee, "isEquipped" | "price"> = {
   ID: nanoid(),
   level: 1,
   name: "Unarmed",
-  rate: 2500,
   staminaCost: 0,
   weight: 0,
 };

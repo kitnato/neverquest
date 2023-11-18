@@ -39,7 +39,7 @@ export function AttackRate() {
   const isRecoveringValue = useRecoilValue(isRecovering);
   const isShowingAttackRate = useRecoilValue(isShowing("attackRate"));
   const isShowingAttackRateDetails = useRecoilValue(isShowing("attackRateDetails"));
-  const weaponValue = useRecoilValue(weapon);
+  const { attackRate: weaponAttackRate, name } = useRecoilValue(weapon);
   const setAttackDuration = useSetRecoilState(attackDuration);
 
   const attack = useAttack();
@@ -78,14 +78,14 @@ export function AttackRate() {
                 <DetailsTable>
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>{`${
-                      weaponValue.name === WEAPON_NONE.name ? "Base" : "Weapon"
+                      name === WEAPON_NONE.name ? "Base" : "Weapon"
                     }:`}</td>
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
                         <IconImage Icon={IconWeaponAttackRate} size="small" />
 
-                        {formatNumber({ format: "time", value: weaponValue.rate })}
+                        {formatNumber({ format: "time", value: weaponAttackRate })}
                       </Stack>
                     </td>
                   </tr>

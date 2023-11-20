@@ -133,6 +133,8 @@ td.text-end > .hstack {
 
 .progress-labelled {
   .progress {
+    height: 1.6rem;
+
     &.attached-above {
       border-top-left-radius: 0;
       border-top-right-radius: 0;

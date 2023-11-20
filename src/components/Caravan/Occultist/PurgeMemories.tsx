@@ -37,6 +37,7 @@ export function PurgeMemories() {
         <IconDisplay
           description="Resets the bonus of all completed quests, allowing for new choices."
           Icon={IconRitual}
+          iconProps={{ isFlipped: true }}
           tooltip="Ritual"
         >
           Purge memories

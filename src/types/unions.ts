@@ -221,6 +221,7 @@ export const SHOWING_TYPES = [
   "gameOver",
   "gearClass",
   "grip",
+  "health",
   "healthDetails",
   "location",
   "loot",

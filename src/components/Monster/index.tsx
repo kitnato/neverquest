@@ -10,7 +10,7 @@ import { MonsterHealthMeter } from "@neverquest/components/Monster/MonsterHealth
 import { MonsterName } from "@neverquest/components/Monster/MonsterName";
 import { MonsterOffense } from "@neverquest/components/Monster/MonsterOffense";
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
-import IconHealth from "@neverquest/icons/health.svg?react";
+import IconMonsterHealth from "@neverquest/icons/monster-health.svg?react";
 import { isMonsterNew, monsterElement } from "@neverquest/state/monster";
 import { animateElement } from "@neverquest/utilities/helpers";
 
@@ -52,7 +52,7 @@ export function Monster() {
           <Stack gap={3}>
             <MonsterName />
 
-            <IconDisplay Icon={IconHealth} tooltip="Monster health">
+            <IconDisplay Icon={IconMonsterHealth} tooltip="Monster health">
               <MonsterHealthMeter />
             </IconDisplay>
 

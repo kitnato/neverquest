@@ -22,6 +22,7 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 export function Health() {
   const attributePowerBonusVitality = useRecoilValue(attributePowerBonus("vitality"));
   const attributeStatisticVitality = useRecoilValue(attributeStatistic("vitality"));
+  const isShowingHealth = useRecoilValue(isShowing("health"));
   const isShowingHealthDetails = useRecoilValue(isShowing("healthDetails"));
   const isPoisonedValue = useRecoilValue(isPoisoned);
   const questsBonusHealth = useRecoilValue(questsBonus("healthBonus"));
@@ -34,93 +35,95 @@ export function Health() {
     stop: !isPoisonedValue,
   });
 
-  return (
-    <IconDisplay Icon={IconHealth} tooltip="Health">
-      <Stack>
-        <Stack className="w-100" direction="horizontal">
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverHeader className="text-center">Health details</PopoverHeader>
+  if (isShowingHealth) {
+    return (
+      <IconDisplay Icon={IconHealth} tooltip="Health">
+        <Stack>
+          <Stack className="w-100" direction="horizontal">
+            <OverlayTrigger
+              overlay={
+                <Popover>
+                  <PopoverHeader className="text-center">Health details</PopoverHeader>
 
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
-
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconHealth} isSmall />
-
-                          {baseAmount}
-                        </Stack>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconVitality} isSmall />
-                          Vitality:
-                        </Stack>
-                      </td>
-
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconHealth} isSmall />
-
-                          {`+${formatNumber({ value: attributeStatisticVitality - baseAmount })}`}
-
-                          {attributePowerBonusVitality > 0 && (
-                            <>
-                              <span>{LABEL_SEPARATOR}</span>
-
-                              <IconImage Icon={IconTomeOfPower} isSmall />
-
-                              {`+${formatNumber({
-                                format: "percentage",
-                                value: attributePowerBonusVitality,
-                              })}`}
-                            </>
-                          )}
-                        </Stack>
-                      </td>
-                    </tr>
-
-                    {questsBonusHealth > 0 && (
+                  <PopoverBody>
+                    <DetailsTable>
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Quest bonus:</td>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
 
                         <td>
                           <Stack direction="horizontal" gap={1}>
                             <IconImage Icon={IconHealth} isSmall />
 
-                            {`+${formatNumber({
-                              decimals: 0,
-                              format: "percentage",
-                              value: questsBonusHealth,
-                            })}`}
+                            {baseAmount}
                           </Stack>
                         </td>
                       </tr>
-                    )}
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-            placement="right"
-            trigger={isShowingHealthDetails ? ["hover", "focus"] : []}
-          >
-            <span className="w-100">
-              <ReserveMeter reserve="health" />
-            </span>
-          </OverlayTrigger>
 
-          <DeltasDisplay delta="health" />
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconVitality} isSmall />
+                            Vitality:
+                          </Stack>
+                        </td>
+
+                        <td>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage Icon={IconHealth} isSmall />
+
+                            {`+${formatNumber({ value: attributeStatisticVitality - baseAmount })}`}
+
+                            {attributePowerBonusVitality > 0 && (
+                              <>
+                                <span>{LABEL_SEPARATOR}</span>
+
+                                <IconImage Icon={IconTomeOfPower} isSmall />
+
+                                {`+${formatNumber({
+                                  format: "percentage",
+                                  value: attributePowerBonusVitality,
+                                })}`}
+                              </>
+                            )}
+                          </Stack>
+                        </td>
+                      </tr>
+
+                      {questsBonusHealth > 0 && (
+                        <tr>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>Quest bonus:</td>
+
+                          <td>
+                            <Stack direction="horizontal" gap={1}>
+                              <IconImage Icon={IconHealth} isSmall />
+
+                              {`+${formatNumber({
+                                decimals: 0,
+                                format: "percentage",
+                                value: questsBonusHealth,
+                              })}`}
+                            </Stack>
+                          </td>
+                        </tr>
+                      )}
+                    </DetailsTable>
+                  </PopoverBody>
+                </Popover>
+              }
+              placement="right"
+              trigger={isShowingHealthDetails ? ["hover", "focus"] : []}
+            >
+              <span className="w-100">
+                <ReserveMeter reserve="health" />
+              </span>
+            </OverlayTrigger>
+
+            <DeltasDisplay delta="health" />
+          </Stack>
+
+          <Regeneration reserve="health" />
         </Stack>
-
-        <Regeneration reserve="health" />
-      </Stack>
-    </IconDisplay>
-  );
+      </IconDisplay>
+    );
+  }
 }

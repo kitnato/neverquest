@@ -19,7 +19,7 @@ import { attackRate } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export function useToggleAttack() {
+export function useToggleAttacking() {
   const changeHealth = useChangeHealth();
   const changeMonsterHealth = useChangeMonsterHealth();
 
@@ -37,6 +37,7 @@ export function useToggleAttack() {
         set(isAttacking, (current) => !current);
 
         set(isShowing("attackRate"), true);
+        set(isShowing("health"), true);
         set(isShowing("wildernessStatus"), true);
 
         if (isAttackingValue) {

@@ -14,27 +14,24 @@ import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react"
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import { ownedItem } from "@neverquest/state/inventory";
-import type { SVGIcon } from "@neverquest/types/components";
 import type { Attribute } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
-
-const STATISTIC_ICON: Record<Attribute, SVGIcon> = {
-  agility: IconDodge,
-  dexterity: IconCriticalChance,
-  endurance: IconStamina,
-  fortitude: IconRegenerationAmount,
-  perception: IconCriticalDamage,
-  speed: IconAttackRate,
-  strength: IconDamage,
-  vigor: IconRegenerationRate,
-  vitality: IconHealth,
-};
 
 export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }) {
   const hasTomeOfPower = Boolean(useRecoilValue(ownedItem("tome of power")));
 
   const { increment, powerBonus } = ATTRIBUTES[attribute];
-  const Icon = STATISTIC_ICON[attribute];
+  const Icon = {
+    agility: IconDodge,
+    dexterity: IconCriticalChance,
+    endurance: IconStamina,
+    fortitude: IconRegenerationAmount,
+    perception: IconCriticalDamage,
+    speed: IconAttackRate,
+    strength: IconDamage,
+    vigor: IconRegenerationRate,
+    vitality: IconHealth,
+  }[attribute];
   const operand = ["speed", "vigor"].includes(attribute) ? "-" : "+";
 
   return (

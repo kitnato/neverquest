@@ -513,9 +513,6 @@ export const CREATURES: BaseData[] = [
     name: "hierophant",
   },
   {
-    name: "hive",
-  },
-  {
     name: "hoarder",
   },
   {

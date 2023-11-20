@@ -13,10 +13,17 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 export const absorbedEssence = withStateKey("absorbedEssence", (key) =>
   selector({
     get: ({ get }) =>
-      [Array.from({ length: get(level) })].reduce(
+      Array.from<undefined>({ length: get(level) }).reduce(
         (aggregator, _, index) => aggregator + getAttributePointCost(index),
         0,
       ),
+    key,
+  }),
+);
+
+export const areAttributesAffordable = withStateKey("areAttributesAffordable", (key) =>
+  selector({
+    get: ({ get }) => get(attributePoints) > 0,
     key,
   }),
 );
@@ -41,13 +48,6 @@ export const attributePoints = withStateKey("attributePoints", (key) =>
   }),
 );
 
-export const areAttributesAffordable = withStateKey("areAttributesAffordable", (key) =>
-  selector({
-    get: ({ get }) => get(attributePoints) > 0,
-    key,
-  }),
-);
-
 export const attributePowerBonus = withStateKey("attributePowerBonus", (key) =>
   selectorFamily<number, Attribute>({
     get:
@@ -60,6 +60,20 @@ export const attributePowerBonus = withStateKey("attributePowerBonus", (key) =>
           ATTRIBUTES[parameter].powerBonus *
           (infusablePowerTomeOfPower === 0 ? 0 : 1 + infusablePowerTomeOfPower)
         );
+      },
+    key,
+  }),
+);
+
+export const attributeStatistic = withStateKey("attributeStatistic", (key) =>
+  selectorFamily<number, Attribute>({
+    get:
+      (parameter) =>
+      ({ get }) => {
+        const { base, increment } = ATTRIBUTES[parameter];
+        const attributeRankValue = get(attributeRank(parameter));
+
+        return getComputedStatistic({ amount: attributeRankValue, base, increment });
       },
     key,
   }),
@@ -79,20 +93,6 @@ export const level = withStateKey("level", (key) =>
   selector({
     get: ({ get }) =>
       ATTRIBUTE_TYPES.reduce((aggregator, current) => aggregator + get(attributeRank(current)), 0),
-    key,
-  }),
-);
-
-export const attributeStatistic = withStateKey("attributeStatistic", (key) =>
-  selectorFamily<number, Attribute>({
-    get:
-      (parameter) =>
-      ({ get }) => {
-        const { base, increment } = ATTRIBUTES[parameter];
-        const attributeRankValue = get(attributeRank(parameter));
-
-        return getComputedStatistic({ amount: attributeRankValue, base, increment });
-      },
     key,
   }),
 );

@@ -5,7 +5,7 @@ import { MonsterAttackMeter } from "@neverquest/components/Monster/MonsterAttack
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useDefend } from "@neverquest/hooks/actions/useDefend";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
-import IconAttackRate from "@neverquest/icons/attack-rate.svg?react";
+import IconMonsterAttackRate from "@neverquest/icons/monster-attack-rate.svg?react";
 import { isAttacking } from "@neverquest/state/character";
 import {
   hasMonsterClosed,
@@ -32,7 +32,7 @@ export function MonsterAttack() {
   });
 
   return (
-    <IconDisplay Icon={IconAttackRate} tooltip="Monster attack rate">
+    <IconDisplay Icon={IconMonsterAttackRate} tooltip="Monster attack rate">
       <MonsterAttackMeter />
     </IconDisplay>
   );

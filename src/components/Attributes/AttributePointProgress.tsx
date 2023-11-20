@@ -16,7 +16,7 @@ export function AttributePointProgress() {
 
   const nextTotalCost =
     getAttributePointCost(levelValue) +
-    [Array.from({ length: attributePointsValue })].reduce(
+    Array.from<undefined>({ length: attributePointsValue }).reduce(
       (aggregator, _, index) => aggregator + getAttributePointCost(levelValue + index + 1),
       0,
     );

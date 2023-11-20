@@ -36,6 +36,7 @@ export function Level() {
               </PopoverBody>
             </Popover>
           }
+          placement="right"
         >
           <span>{levelValue}</span>
         </OverlayTrigger>

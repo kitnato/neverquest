@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
 import { GEM_BASE } from "@neverquest/data/inventory";
-import { useToggleAttack } from "@neverquest/hooks/actions/useToggleAttack";
+import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
 import { isAttacking } from "@neverquest/state/character";
 import { progress, progressMaximum } from "@neverquest/state/encounter";
 import { isMonsterNew, monsterLoot } from "@neverquest/state/monster";
@@ -12,7 +12,7 @@ import { GEM_TYPES } from "@neverquest/types/unions";
 import { getFromRange, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useProgressStage() {
-  const toggleAttack = useToggleAttack();
+  const toggleAttacking = useToggleAttacking();
 
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
@@ -29,7 +29,7 @@ export function useProgressStage() {
 
         if (gems > 0) {
           lootedItems.push(
-            ...[Array.from({ length: gems })].map(() => ({
+            ...Array.from({ length: gems }).map(() => ({
               ...GEM_BASE,
               ID: nanoid(),
               name:
@@ -53,9 +53,9 @@ export function useProgressStage() {
         if (nextProgress < get(progressMaximum)) {
           reset(isMonsterNew);
         } else if (get(isAttacking)) {
-          toggleAttack();
+          toggleAttacking();
         }
       },
-    [toggleAttack],
+    [toggleAttacking],
   );
 }

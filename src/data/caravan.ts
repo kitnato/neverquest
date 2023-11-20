@@ -151,7 +151,7 @@ export const CREW_ORDER: Crew[] = Object.entries(CREW)
   .map(([current]) => current as Crew);
 
 export const OCCULTIST_PURGE_PRICE_MULTIPLIER = {
-  essence: 0.1,
+  essence: 0.15,
   quests: 500,
 };
 

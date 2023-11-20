@@ -58,7 +58,9 @@ export function Caravan() {
                 <CrewHired
                   crew={current}
                   key={index}
-                  setActive={() => toggleCrewActive(true, current)}
+                  setActive={() => {
+                    toggleCrewActive(true, current);
+                  }}
                 />
               ))}
             </Stack>
@@ -85,7 +87,9 @@ export function Caravan() {
           return (
             <DismissableScreen
               isShowing={isScreenShowing}
-              onClose={() => toggleCrewActive(false)}
+              onClose={() => {
+                toggleCrewActive(false);
+              }}
               title={capitalizeAll(activeCrewValue)}
             >
               <Component />

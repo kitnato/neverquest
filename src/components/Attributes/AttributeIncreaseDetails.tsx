@@ -40,7 +40,7 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
   return (
     <>
       <Stack className="justify-content-center" direction="horizontal" gap={1}>
-        <IconImage Icon={Icon} size="small" />
+        <IconImage Icon={Icon} isSmall />
 
         {`${operand}${
           increment < 1
@@ -51,7 +51,7 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
 
       {hasTomeOfPower && (
         <Stack className="justify-content-center" direction="horizontal" gap={1}>
-          <IconImage Icon={IconTomeOfPower} size="small" />
+          <IconImage Icon={IconTomeOfPower} isSmall />
 
           {`+${formatNumber({ format: "percentage", value: powerBonus })}`}
         </Stack>

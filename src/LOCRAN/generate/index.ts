@@ -83,7 +83,7 @@ export function generate({
         // Filter out only suffixes with Profanity filter.
         const isValidSuffix =
           (allowProfanity ? Boolean(isProfanity) || !isProfanity : !isProfanity) &&
-          (categories[category]?.includes("articledSuffix") ||
+          (categories[category]?.includes("articledSuffix") ??
             categories[category]?.includes("suffix"));
 
         // If suffix is tagged, check if the current affix has all of them (with Profanity filter).

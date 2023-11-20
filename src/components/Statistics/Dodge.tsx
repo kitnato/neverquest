@@ -59,7 +59,7 @@ export function Dodge() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconAgility} size="small" />
+                          <IconImage Icon={IconAgility} isSmall />
                           Agility:
                         </Stack>
                       </td>
@@ -76,7 +76,7 @@ export function Dodge() {
                             <>
                               <span>{LABEL_SEPARATOR}</span>
 
-                              <IconImage Icon={IconTomeOfPower} size="small" />
+                              <IconImage Icon={IconTomeOfPower} isSmall />
 
                               {`+${formatNumber({
                                 format: "percentage",
@@ -92,7 +92,7 @@ export function Dodge() {
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
                           <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconNudist} size="small" />
+                            <IconImage Icon={IconNudist} isSmall />
                             Nudist:
                           </Stack>
                         </td>
@@ -105,7 +105,7 @@ export function Dodge() {
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
                           <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconDodgePenalty} size="small" />
+                            <IconImage Icon={IconDodgePenalty} isSmall />
                             Armor penalty:
                           </Stack>
                         </td>

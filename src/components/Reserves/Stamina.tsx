@@ -43,7 +43,7 @@ export function Stamina() {
 
                         <td>
                           <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconStamina} size="small" />
+                            <IconImage Icon={IconStamina} isSmall />
 
                             {baseAmount}
                           </Stack>
@@ -53,14 +53,14 @@ export function Stamina() {
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
                           <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconEndurance} size="small" />
+                            <IconImage Icon={IconEndurance} isSmall />
                             Endurance:
                           </Stack>
                         </td>
 
                         <td>
                           <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconStamina} size="small" />
+                            <IconImage Icon={IconStamina} isSmall />
 
                             {`+${formatNumber({
                               value: attributeStatisticEndurance - baseAmount,
@@ -70,7 +70,7 @@ export function Stamina() {
                               <>
                                 <span>{LABEL_SEPARATOR}</span>
 
-                                <IconImage Icon={IconTomeOfPower} size="small" />
+                                <IconImage Icon={IconTomeOfPower} isSmall />
 
                                 {`+${formatNumber({
                                   format: "percentage",
@@ -88,7 +88,7 @@ export function Stamina() {
 
                           <td>
                             <Stack direction="horizontal" gap={1}>
-                              <IconImage Icon={IconStamina} size="small" />
+                              <IconImage Icon={IconStamina} isSmall />
 
                               {`+${formatNumber({
                                 decimals: 0,

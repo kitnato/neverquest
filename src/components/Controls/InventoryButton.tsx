@@ -47,7 +47,9 @@ export function InventoryButton() {
           <span className={getAnimationClass({ name: "bounceIn" })}>
             <Button
               disabled={isAttackingValue || isGameOverValue}
-              onClick={() => setIsInventoryOpen(true)}
+              onClick={() => {
+                setIsInventoryOpen(true);
+              }}
               variant="outline-dark"
             >
               <IconImage Icon={IconInventory} />
@@ -55,7 +57,7 @@ export function InventoryButton() {
               {(encumbranceExtentValue !== "none" || notifyOverEncumbranceValue) && (
                 <span ref={badgeElement}>
                   <IconBadge alignToButton>
-                    <IconImage Icon={IconEncumbrance} size="small" />
+                    <IconImage Icon={IconEncumbrance} isSmall />
                   </IconBadge>
                 </span>
               )}
@@ -67,7 +69,9 @@ export function InventoryButton() {
 
         <DismissableScreen
           isShowing={isInventoryOpenValue}
-          onClose={() => setIsInventoryOpen(false)}
+          onClose={() => {
+            setIsInventoryOpen(false);
+          }}
           title="Inventory"
         >
           <Inventory />

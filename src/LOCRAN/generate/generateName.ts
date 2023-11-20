@@ -30,9 +30,9 @@ export function generateName({
 
   if (hasTitle) {
     const filteredAffixes = AFFIXES.filter(({ creature, isProfanity, name }) =>
-      name === prefix.name || name === suffix.name || name.slice(-3) === "ing"
+      name === prefix.name || name === suffix.name || name.endsWith("ing")
         ? false
-        : (creature?.includes("prefix") || creature?.includes("suffix")) &&
+        : (creature?.includes("prefix") ?? creature?.includes("suffix")) &&
           (allowProfanity ? Boolean(isProfanity) || !isProfanity : !isProfanity),
     );
     const filteredCreatures = CREATURES.filter(({ isProfanity }) =>

@@ -30,7 +30,13 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
   const applyGem = useApplyGem();
 
   return (
-    <Dropdown onSelect={(slot) => slot !== undefined && applyGem({ gem, slot: slot as Gear })}>
+    <Dropdown
+      onSelect={(slot) => {
+        if (slot !== null) {
+          applyGem({ gem, slot: slot as Gear });
+        }
+      }}
+    >
       <Dropdown.Toggle variant="outline-dark">Apply</Dropdown.Toggle>
 
       <Dropdown.Menu>
@@ -44,7 +50,7 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
                 <span className="mr-2">{capitalizeAll(name)}</span>
 
                 <Stack direction="horizontal" gap={1}>
-                  <IconImage Icon={IconEssence} size="small" />
+                  <IconImage Icon={IconEssence} isSmall />
 
                   {GEM_FITTING_COST[gems.length] ?? LABEL_EMPTY}
                 </Stack>

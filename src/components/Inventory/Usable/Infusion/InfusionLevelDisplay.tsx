@@ -14,7 +14,7 @@ export function InfusionLevelDisplay({
   return (
     <IconDisplay
       Icon={IconInfusionLevel}
-      iconProps={{ overlayPlacement, size: "small" }}
+      iconProps={{ isSmall: true, overlayPlacement }}
       tooltip="Infusion level"
     >
       {formatNumber({ value: level })}

@@ -45,7 +45,9 @@ export function CrewHirable({ crew }: { crew: Crew }) {
             <span>
               <Button
                 disabled={!isAffordable}
-                onClick={() => hireCrew({ crew, price })}
+                onClick={() => {
+                  hireCrew({ crew, price });
+                }}
                 variant="outline-dark"
               >
                 Hire

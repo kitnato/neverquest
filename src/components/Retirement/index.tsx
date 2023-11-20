@@ -32,7 +32,9 @@ export function Retirement({
   const progressQuest = useProgressQuest();
   const retire = useRetire();
 
-  const onHide = () => setIsShowing(false);
+  const onHide = () => {
+    setIsShowing(false);
+  };
 
   return (
     <Modal onHide={onHide} show={isShowing} size="lg">

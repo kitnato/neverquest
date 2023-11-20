@@ -50,14 +50,14 @@ export function CriticalRating() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconDexterity} size="small" />
+                          <IconImage Icon={IconDexterity} isSmall />
                           Dexterity:
                         </Stack>
                       </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconCriticalChance} size="small" />
+                          <IconImage Icon={IconCriticalChance} isSmall />
 
                           {`${formatNumber({
                             decimals: 0,
@@ -69,7 +69,7 @@ export function CriticalRating() {
                             <>
                               <span>{LABEL_SEPARATOR}</span>
 
-                              <IconImage Icon={IconTomeOfPower} size="small" />
+                              <IconImage Icon={IconTomeOfPower} isSmall />
 
                               {`+${formatNumber({
                                 format: "percentage",
@@ -84,14 +84,14 @@ export function CriticalRating() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconPerception} size="small" />
+                          <IconImage Icon={IconPerception} isSmall />
                           Perception:
                         </Stack>
                       </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconCriticalDamage} size="small" />
+                          <IconImage Icon={IconCriticalDamage} isSmall />
 
                           {`${formatNumber({
                             decimals: 0,
@@ -103,7 +103,7 @@ export function CriticalRating() {
                             <>
                               <span>{LABEL_SEPARATOR}</span>
 
-                              <IconImage Icon={IconTomeOfPower} size="small" />
+                              <IconImage Icon={IconTomeOfPower} isSmall />
 
                               {`+${formatNumber({
                                 format: "percentage",
@@ -120,7 +120,7 @@ export function CriticalRating() {
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconDamage} size="small" />
+                          <IconImage Icon={IconDamage} isSmall />
 
                           {formatNumber({ value: criticalStrikeValue })}
                         </Stack>

@@ -20,7 +20,7 @@ export function StaminaCostDetail({ comparison, cost }: { comparison: Comparison
 
           <td>
             <Stack direction="horizontal" gap={1}>
-              <IconImage Icon={IconStamina} size="small" />
+              <IconImage Icon={IconStamina} isSmall />
 
               {formatNumber({ value: cost })}
 

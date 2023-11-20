@@ -43,7 +43,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 
                 {LABEL_SEPARATOR}
 
-                <IconImage Icon={ELEMENTALS[elemental].Icon} size="small" />
+                <IconImage Icon={ELEMENTALS[elemental].Icon} isSmall />
 
                 {`${
                   typeof effect === "number"
@@ -53,7 +53,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 
                 {LABEL_SEPARATOR}
 
-                <IconImage Icon={IconGem} size="small" />
+                <IconImage Icon={IconGem} isSmall />
 
                 {stack}
               </Stack>

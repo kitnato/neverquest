@@ -52,7 +52,7 @@ export function BleedRating() {
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconBleed} size="small" />
+                          <IconImage Icon={IconBleed} isSmall />
 
                           {`${
                             bleedChanceValue === 0
@@ -66,7 +66,7 @@ export function BleedRating() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconCruelty} size="small" />
+                          <IconImage Icon={IconCruelty} isSmall />
                           Cruelty:
                         </Stack>
                       </td>
@@ -105,9 +105,8 @@ export function BleedRating() {
                 </PopoverBody>
               </Popover>
             }
-            trigger={anatomyValue ? ["hover", "focus"] : []}
           >
-            <span>{anatomyValue ? bleedRatingValue : LABEL_EMPTY}</span>
+            <span>{bleedRatingValue}</span>
           </OverlayTrigger>
 
           <DeltasDisplay delta="bleedRating" />

@@ -33,7 +33,7 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
   const canHatch =
     isInfusionAtMaximum && ownedItemMysteriousEgg !== undefined && infusable === "mysterious egg";
   const canInfuse = isInfusionPossible && !isInfusionAtMaximum;
-  const mysteriousEggItem = TRINKETS["familiar"].item;
+  const mysteriousEggItem = TRINKETS.familiar.item;
   const canFitMysteriousEgg = canFit(mysteriousEggItem.weight);
 
   const onStop = () => {
@@ -60,16 +60,14 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
         <Button
           disabled={!canFitMysteriousEgg}
           onClick={() => {
-            if (canHatch) {
-              const acquiredStatus = acquireItem(mysteriousEggItem);
+            const acquiredStatus = acquireItem(mysteriousEggItem);
 
-              if (acquiredStatus === "success") {
-                setInventory((current) =>
-                  current.filter(({ ID }) => ownedItemMysteriousEgg.ID !== ID),
-                );
+            if (acquiredStatus === "success") {
+              setInventory((current) =>
+                current.filter(({ ID }) => ownedItemMysteriousEgg.ID !== ID),
+              );
 
-                progressQuest({ quest: "acquiringFamiliar" });
-              }
+              progressQuest({ quest: "acquiringFamiliar" });
             }
           }}
           variant="outline-dark"
@@ -92,7 +90,9 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
       <span>
         <Button
           disabled={!canInfuse}
-          onMouseDown={() => setIsInfusing(true)}
+          onMouseDown={() => {
+            setIsInfusing(true);
+          }}
           onMouseOut={onStop}
           onMouseUp={onStop}
           variant="outline-dark"

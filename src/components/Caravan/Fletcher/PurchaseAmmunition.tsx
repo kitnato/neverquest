@@ -45,21 +45,18 @@ export function PurchaseAmmunition() {
   const isFull = ammunitionValue >= ammunitionMaximumValue;
   const canPurchase = isAffordable && !isFull;
 
-  return (
-    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-      <IconDisplay Icon={IconAmmunition} tooltip="Ammunition">
-        Ammunition
-      </IconDisplay>
-
-      <Stack direction="horizontal" gap={3}>
-        <IconDisplay Icon={IconEssence} tooltip="Price">
-          {formatNumber({ value: totalPrice })}
+  if (ownedAmmunitionPouch !== undefined) {
+    return (
+      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+        <IconDisplay Icon={IconAmmunition} tooltip="Ammunition">
+          Ammunition
         </IconDisplay>
 
-        {ownedAmmunitionPouch === undefined ? (
-          <span className="fst-italic">Nowhere to store ammunition.</span>
-        ) : (
-          (() => {
+        <Stack direction="horizontal" gap={3}>
+          <IconDisplay Icon={IconEssence} tooltip="Price">
+            {formatNumber({ value: totalPrice })}
+          </IconDisplay>
+          {(() => {
             const { current, maximum } = ownedAmmunitionPouch as AmmunitionPouchItem;
 
             return (
@@ -78,7 +75,7 @@ export function PurchaseAmmunition() {
                     <Button
                       disabled={!canPurchase}
                       onClick={() => {
-                        if (isAffordable && !isFull && ownedAmmunitionPouch !== undefined) {
+                        if (isAffordable && !isFull) {
                           transactEssence(-totalPrice);
 
                           setInventory((currentInventory) =>
@@ -106,9 +103,14 @@ export function PurchaseAmmunition() {
                         { amount: 10, label: "10" },
                         { amount: maximum - current, label: LABEL_MAXIMUM },
                       ].map(({ amount, label }) => (
-                        <DropdownItem key={label} onClick={() => setAmount(amount)}>
+                        <DropdownItem
+                          key={label}
+                          onClick={() => {
+                            setAmount(amount);
+                          }}
+                        >
                           <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconAmmunition} size="small" />
+                            <IconImage Icon={IconAmmunition} isSmall />
 
                             {label}
                           </Stack>
@@ -119,9 +121,9 @@ export function PurchaseAmmunition() {
                 </span>
               </OverlayTrigger>
             );
-          })()
-        )}
-      </Stack>
-    </div>
-  );
+          })()}
+        </Stack>
+      </div>
+    );
+  }
 }

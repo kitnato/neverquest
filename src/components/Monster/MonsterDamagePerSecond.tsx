@@ -14,7 +14,7 @@ export function MonsterDamagePerSecond() {
     return (
       <IconDisplay
         Icon={IconDamagePerSecond}
-        iconProps={{ overlayPlacement: "bottom", size: "small" }}
+        iconProps={{ isSmall: true, overlayPlacement: "bottom" }}
         tooltip="Damage per second"
       >{`${monsterDamageAilingPerSecondValue}${
         monsterDamagePerSecondValue === monsterDamageAilingPerSecondValue

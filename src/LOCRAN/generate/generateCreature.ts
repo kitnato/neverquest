@@ -9,7 +9,7 @@ export function generateCreature({
   suffixTags,
 }: GeneratorParameters) {
   const filteredCreatures = CREATURES.filter(({ isProfanity }) =>
-    allowProfanity ? isProfanity || !isProfanity : !isProfanity,
+    allowProfanity ? isProfanity === true || !isProfanity : !isProfanity,
   );
 
   const filteredCreature = filteredCreatures[Math.floor(Math.random() * filteredCreatures.length)];

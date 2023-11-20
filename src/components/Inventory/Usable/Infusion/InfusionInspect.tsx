@@ -30,11 +30,22 @@ export function InfusionInspect({ infusable }: { infusable: Infusable }) {
   if (canInfuseMysteriousEggValue || infusable !== "mysterious egg") {
     return (
       <>
-        <Button onClick={() => setIsShowingInfusion(true)} variant="outline-dark">
+        <Button
+          onClick={() => {
+            setIsShowingInfusion(true);
+          }}
+          variant="outline-dark"
+        >
           Inspect
         </Button>
 
-        <Modal centered onHide={() => setIsShowingInfusion(false)} show={isShowingInfusion}>
+        <Modal
+          centered
+          onHide={() => {
+            setIsShowingInfusion(false);
+          }}
+          show={isShowingInfusion}
+        >
           <ModalHeader closeButton>
             <ModalTitle>
               <Stack direction="horizontal" gap={3}>

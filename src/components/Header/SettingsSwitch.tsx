@@ -20,7 +20,9 @@ export function SettingsSwitch({
       disabled={isDisabled}
       id={formatKebabCase(label)}
       label={label}
-      onChange={({ target: { checked } }) => setToggle(checked)}
+      onChange={({ target: { checked } }) => {
+        setToggle(checked);
+      }}
     />
   );
 }

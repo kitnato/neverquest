@@ -50,7 +50,7 @@ export function Health() {
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconHealth} size="small" />
+                          <IconImage Icon={IconHealth} isSmall />
 
                           {baseAmount}
                         </Stack>
@@ -60,14 +60,14 @@ export function Health() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconVitality} size="small" />
+                          <IconImage Icon={IconVitality} isSmall />
                           Vitality:
                         </Stack>
                       </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconHealth} size="small" />
+                          <IconImage Icon={IconHealth} isSmall />
 
                           {`+${formatNumber({ value: attributeStatisticVitality - baseAmount })}`}
 
@@ -75,7 +75,7 @@ export function Health() {
                             <>
                               <span>{LABEL_SEPARATOR}</span>
 
-                              <IconImage Icon={IconTomeOfPower} size="small" />
+                              <IconImage Icon={IconTomeOfPower} isSmall />
 
                               {`+${formatNumber({
                                 format: "percentage",
@@ -93,7 +93,7 @@ export function Health() {
 
                         <td>
                           <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconHealth} size="small" />
+                            <IconImage Icon={IconHealth} isSmall />
 
                             {`+${formatNumber({
                               decimals: 0,

@@ -35,7 +35,9 @@ export function Awakening() {
 
             <Button
               className="w-50"
-              onClick={() => setConsciousness("mors")}
+              onClick={() => {
+                setConsciousness("mors");
+              }}
               variant="outline-dark"
             >
               Die forever

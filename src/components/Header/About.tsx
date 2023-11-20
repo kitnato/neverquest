@@ -24,8 +24,13 @@ export function About() {
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>About</Tooltip>} placement="bottom">
-        <Button onClick={() => setIsShowingModal(true)} variant="outline-light">
-          <IconImage Icon={IconAbout} size="small" />
+        <Button
+          onClick={() => {
+            setIsShowingModal(true);
+          }}
+          variant="outline-light"
+        >
+          <IconImage Icon={IconAbout} isSmall />
         </Button>
       </OverlayTrigger>
 

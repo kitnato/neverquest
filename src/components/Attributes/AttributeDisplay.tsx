@@ -66,7 +66,9 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
               <span>
                 <Button
                   disabled={!canIncrease}
-                  onClick={() => increaseAttribute(attribute)}
+                  onClick={() => {
+                    increaseAttribute(attribute);
+                  }}
                   variant="outline-dark"
                 >
                   <IconImage Icon={canIncrease ? IconIncrease : IconWait} />

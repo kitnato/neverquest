@@ -34,9 +34,9 @@ export function ItemAcquisition() {
       <div
         className={`position-absolute ${getAnimationClass({ name: "zoomOut", speed: "slower" })}`}
         key={ID}
-        onAnimationEnd={() =>
-          setItemsAcquired((current) => current.filter(({ ID: currentID }) => currentID !== ID))
-        }
+        onAnimationEnd={() => {
+          setItemsAcquired((current) => current.filter(({ ID: currentID }) => currentID !== ID));
+        }}
         // TODO - Bootstrap positioning utilities do not work with Animation.css zoomOut
         style={{ left: -10, top: 16 }}
       >
@@ -72,7 +72,7 @@ export function ItemAcquisition() {
 
             return IconUnknown;
           })()}
-          size="small"
+          isSmall
         />
       </div>
     );

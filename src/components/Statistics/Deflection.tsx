@@ -45,7 +45,7 @@ export function Deflection() {
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconDeflection} size="small" />
+                          <IconImage Icon={IconDeflection} isSmall />
 
                           {formatNumber({ format: "percentage", value: armorDeflection })}
                         </Stack>
@@ -55,7 +55,7 @@ export function Deflection() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconInoculated} size="small" />
+                          <IconImage Icon={IconInoculated} isSmall />
                           Inoculated:
                         </Stack>
                       </td>

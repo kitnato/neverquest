@@ -35,11 +35,9 @@ export function ExecutionThreshold() {
       <IconDisplay Icon={IconExecution} isAnimated tooltip="Execution threshold">
         <Stack direction="horizontal" gap={1}>
           <span>
-            {siegecraftValue
-              ? executionValue === 0
-                ? LABEL_EMPTY
-                : formatNumber({ decimals: 0, format: "percentage", value: executionValue })
-              : LABEL_EMPTY}
+            {executionValue === 0
+              ? LABEL_EMPTY
+              : formatNumber({ decimals: 0, format: "percentage", value: executionValue })}
           </span>
 
           <DeltasDisplay delta="executionThreshold" />

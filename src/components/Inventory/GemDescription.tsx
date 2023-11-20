@@ -11,7 +11,7 @@ export function GemDescription({ name }: { name: Gem }) {
     <span>
       <Stack className="d-inline-flex text-center" direction="horizontal" gap={1}>
         Adds elemental
-        <IconImage Icon={Icon} size="small" />
+        <IconImage Icon={Icon} isSmall />
         <span className={color}>{elemental}</span>
       </Stack>{" "}
       effect to a weapon, shield, or armor.

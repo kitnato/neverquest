@@ -67,7 +67,7 @@ export function Damage() {
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconWeaponDamage} size="small" />
+                        <IconImage Icon={IconWeaponDamage} isSmall />
 
                         {formatNumber({ value: weaponDamage })}
                       </Stack>
@@ -79,7 +79,7 @@ export function Damage() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconStrength} size="small" />
+                        <IconImage Icon={IconStrength} isSmall />
                         Strength:
                       </Stack>
                     </td>
@@ -92,7 +92,7 @@ export function Damage() {
                           <>
                             <span>{LABEL_SEPARATOR}</span>
 
-                            <IconImage Icon={IconTomeOfPower} size="small" />
+                            <IconImage Icon={IconTomeOfPower} isSmall />
 
                             {`+${formatNumber({
                               format: "percentage",
@@ -110,7 +110,7 @@ export function Damage() {
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconDamage} size="small" />
+                          <IconImage Icon={IconDamage} isSmall />
 
                           {`+${formatNumber({
                             decimals: 0,
@@ -126,7 +126,7 @@ export function Damage() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconBruiser} size="small" />
+                          <IconImage Icon={IconBruiser} isSmall />
                           Bruiser:
                         </Stack>
                       </td>
@@ -139,7 +139,7 @@ export function Damage() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconBrawler} size="small" />
+                          <IconImage Icon={IconBrawler} isSmall />
                           Brawler:
                         </Stack>
                       </td>

@@ -46,9 +46,12 @@ export function Typewriter({ children, delay = TEXT_DELAY }: { children: string;
   useEffect(() => {
     frameReference.current = requestAnimationFrame(animate);
 
-    return () => cancelAnimationFrame(frameReference.current);
+    return () => {
+      cancelAnimationFrame(frameReference.current);
+    };
   }, [animate]);
 
+  // TODO - check if conditional needed.
   return (
     <strong style={{ fontFamily: "monospace" }}>
       {text}

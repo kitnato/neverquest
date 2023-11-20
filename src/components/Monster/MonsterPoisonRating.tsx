@@ -41,7 +41,7 @@ export function MonsterPoisonRating() {
                           value: poisonMagnitudeValue,
                         })}`}
 
-                        <IconImage Icon={IconHealth} size="small" />
+                        <IconImage Icon={IconHealth} isSmall />
 
                         {LABEL_MAXIMUM}
                       </Stack>

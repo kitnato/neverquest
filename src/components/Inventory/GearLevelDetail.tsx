@@ -22,7 +22,7 @@ export function GearLevelDetail({ comparison, level }: { comparison: Comparison;
 
       <td>
         <Stack direction="horizontal" gap={1}>
-          <IconImage Icon={IconGearLevel} size="small" />
+          <IconImage Icon={IconGearLevel} isSmall />
 
           {formatNumber({ value: level })}
 

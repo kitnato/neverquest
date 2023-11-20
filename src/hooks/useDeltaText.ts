@@ -29,7 +29,7 @@ export function useDeltaText({
       return;
     }
 
-    const difference = currentValue - (previousValue ?? 0);
+    const difference = currentValue - previousValue;
 
     if (difference === 0) {
       return;

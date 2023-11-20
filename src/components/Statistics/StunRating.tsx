@@ -5,7 +5,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
+import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconMight from "@neverquest/icons/might.svg?react";
 import IconStunRating from "@neverquest/icons/stun-rating.svg?react";
@@ -46,7 +46,7 @@ export function StunRating() {
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconStun} size="small" />
+                          <IconImage Icon={IconStun} isSmall />
 
                           {formatNumber({ format: "percentage", value: abilityChance })}
                         </Stack>
@@ -56,7 +56,7 @@ export function StunRating() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconMight} size="small" />
+                          <IconImage Icon={IconMight} isSmall />
                           Might:
                         </Stack>
                       </td>
@@ -67,9 +67,8 @@ export function StunRating() {
                 </PopoverBody>
               </Popover>
             }
-            trigger={traumatologyValue ? ["hover", "focus"] : []}
           >
-            <span>{traumatologyValue ? stunRatingValue : LABEL_EMPTY}</span>
+            <span>{stunRatingValue}</span>
           </OverlayTrigger>
 
           <DeltasDisplay delta="stunRating" />

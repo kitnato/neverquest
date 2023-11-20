@@ -48,11 +48,9 @@ export function CombatRange() {
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconRanged} size="small" />
+                          <IconImage Icon={IconRanged} isSmall />
 
-                          {isWeaponRanged
-                            ? formatNumber({ format: "time", value: weaponValue.range })
-                            : LABEL_EMPTY}
+                          {formatNumber({ format: "time", value: weaponValue.range })}
                         </Stack>
                       </td>
                     </tr>
@@ -60,7 +58,7 @@ export function CombatRange() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconMarksmanship} size="small" />
+                          <IconImage Icon={IconMarksmanship} isSmall />
                           Marksmanship:
                         </Stack>
                       </td>
@@ -74,14 +72,9 @@ export function CombatRange() {
                 </PopoverBody>
               </Popover>
             }
-            trigger={archeryValue ? ["hover", "focus"] : []}
           >
             <span>
-              {archeryValue
-                ? rangeValue === 0
-                  ? LABEL_EMPTY
-                  : formatNumber({ format: "time", value: rangeValue })
-                : LABEL_EMPTY}
+              {rangeValue === 0 ? LABEL_EMPTY : formatNumber({ format: "time", value: rangeValue })}
             </span>
           </OverlayTrigger>
 

@@ -28,7 +28,7 @@ export function TravelButton() {
   const isOverEncumbered =
     locationValue === "caravan" && encumbranceExtentValue === "over-encumbered";
 
-  if ((hasLootedValue && isStageCompletedValue) || !locationValue) {
+  if ((hasLootedValue && isStageCompletedValue) || locationValue === "caravan") {
     return (
       <OverlayTrigger
         overlay={

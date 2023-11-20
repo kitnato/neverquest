@@ -58,9 +58,8 @@ import {
 
 export const AMMUNITION_CAPACITY = 100;
 
-export const ARMOR_NONE: Omit<Armor, "isEquipped" | "price"> = {
+export const ARMOR_NONE: Omit<Armor, "gearClass" | "isEquipped" | "price"> = {
   deflection: 0,
-  gearClass: "light",
   gems: [],
   ID: nanoid(),
   level: 1,
@@ -279,9 +278,8 @@ export const INFUSABLES: Record<
   },
 };
 
-export const SHIELD_NONE: Omit<Shield, "isEquipped" | "price"> = {
+export const SHIELD_NONE: Omit<Shield, "gearClass" | "isEquipped" | "price"> = {
   block: 0,
-  gearClass: "small",
   gems: [],
   ID: nanoid(),
   level: 1,

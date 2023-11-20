@@ -21,7 +21,9 @@ export function GameOver() {
 
   const restart = useRestart();
 
-  const onHide = () => setIsShowingGameOver(false);
+  const onHide = () => {
+    setIsShowingGameOver(false);
+  };
 
   return (
     <Modal onHide={onHide} show={isGameOverValue && isShowingGameOver}>

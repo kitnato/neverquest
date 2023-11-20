@@ -64,7 +64,9 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
   useAnimate({
     delta: setRegenerationDuration,
-    onDelta: () => changeReserve({ isRegeneration: true }),
+    onDelta: () => {
+      changeReserve({ isRegeneration: true });
+    },
     stop: isRecoveringValue || isReserveAtMaximum,
   });
 
@@ -100,7 +102,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconRegenerationRate} size="small" />
+                      <IconImage Icon={IconRegenerationRate} isSmall />
 
                       {formatNumber({ format: "time", value: baseRegenerationRate })}
                     </Stack>
@@ -110,7 +112,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconVigor} size="small" />
+                      <IconImage Icon={IconVigor} isSmall />
                       Vigor:
                     </Stack>
                   </td>
@@ -127,7 +129,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                         <>
                           <span>{LABEL_SEPARATOR}</span>
 
-                          <IconImage Icon={IconTomeOfPower} size="small" />
+                          <IconImage Icon={IconTomeOfPower} isSmall />
 
                           {`+${formatNumber({
                             format: "percentage",
@@ -144,7 +146,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconRegenerationAmount} size="small" />
+                      <IconImage Icon={IconRegenerationAmount} isSmall />
 
                       {baseRegenerationAmount}
                     </Stack>
@@ -154,7 +156,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconFortitude} size="small" />
+                      <IconImage Icon={IconFortitude} isSmall />
                       Fortitude:
                     </Stack>
                   </td>
@@ -167,7 +169,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                         <>
                           <span>{LABEL_SEPARATOR}</span>
 
-                          <IconImage Icon={IconTomeOfPower} size="small" />
+                          <IconImage Icon={IconTomeOfPower} isSmall />
 
                           {`+${formatNumber({
                             format: "percentage",

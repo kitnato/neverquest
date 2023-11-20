@@ -61,7 +61,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
 
   return (
     <LabelledProgressBar
-      attached="below"
+      attachment="below"
       sibling={
         isAiling ? (
           <ProgressBar animated key={2} now={penalty} striped variant="secondary" />
@@ -81,7 +81,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
           <>
             {`(${formatNumber({ value: reserveMaximumValue })})`}
 
-            <IconImage Icon={isHealth ? IconPoison : IconBlight} isStencilled size="small" />
+            <IconImage Icon={isHealth ? IconPoison : IconBlight} isSmall isStencilled />
 
             {`${
               typeof ailmentValue === "number"

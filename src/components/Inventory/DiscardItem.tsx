@@ -21,13 +21,20 @@ export function DiscardItem({ ID }: { ID: string }) {
 
   const [isShowingModal, setIsShowingModal] = useState(false);
 
-  const onHide = () => setIsShowingModal(false);
+  const onHide = () => {
+    setIsShowingModal(false);
+  };
 
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>Discard</Tooltip>}>
-        <Button onClick={() => setIsShowingModal(true)} variant="outline-dark">
-          <IconImage Icon={IconDiscard} size="small" />
+        <Button
+          onClick={() => {
+            setIsShowingModal(true);
+          }}
+          variant="outline-dark"
+        >
+          <IconImage Icon={IconDiscard} isSmall />
         </Button>
       </OverlayTrigger>
 

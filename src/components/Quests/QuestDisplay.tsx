@@ -30,13 +30,20 @@ export function QuestDisplay({
   questClass: QuestClass;
 }) {
   const questProgressValue = useRecoilValue(questProgress(quest));
-  const questStatus = useRecoilValue(questStatuses(quest))[progressionIndex] ?? false;
+  const questStatusValue = useRecoilValue(questStatuses(quest));
 
   const completeQuest = useCompleteQuest();
 
-  const hasCompletedQuest = QUEST_BONUS_TYPES.includes(questStatus as QuestBonus);
+  const questStatus = questStatusValue[progressionIndex];
+
+  if (questStatus === undefined) {
+    return;
+  }
+
+  const hasCompletedQuest = new Set<string>(QUEST_BONUS_TYPES).has(questStatus);
+  const isQuestOver = hasCompletedQuest || questStatus === "achieved";
   const cappedProgress = Math.min(
-    hasCompletedQuest ? progressionMaximum : questProgressValue,
+    isQuestOver ? progressionMaximum : questProgressValue,
     progressionMaximum,
   );
   const choiceID = `quest-completion-${quest}-${progressionMaximum}`;
@@ -54,7 +61,7 @@ export function QuestDisplay({
 
       <IconDisplay
         description={
-          hidden !== undefined && (hasCompletedQuest || questStatus === "achieved")
+          hidden !== undefined && isQuestOver
             ? description.replace(LABEL_UNKNOWN, hidden)
             : description
         }
@@ -68,13 +75,13 @@ export function QuestDisplay({
       {questProgressValue >= progressionMaximum && (
         <ToggleButtonGroup
           name={choiceID}
-          onChange={(value) =>
+          onChange={(value) => {
             completeQuest({
               bonus: value as QuestBonus,
               progress: progressionMaximum,
               quest,
-            })
-          }
+            });
+          }}
           type="radio"
           value={hasCompletedQuest ? questStatus : undefined}
         >
@@ -91,7 +98,7 @@ export function QuestDisplay({
               variant="outline-dark"
             >
               <Stack direction="horizontal" gap={1}>
-                <IconImage Icon={Icon} size="small" />
+                <IconImage Icon={Icon} isSmall />
 
                 {`+${formatNumber({
                   decimals: 0,

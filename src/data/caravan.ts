@@ -84,8 +84,8 @@ export const CREW: Record<
     interaction: "Trade",
     monologues: {
       1: "Greetings. I have what you're looking for.",
-      2: "Hello again. Some threads, perhaps?",
-      3: "Ah, you're back. Care for more protection?",
+      2: "Hello again. Some protection, perhaps?",
+      3: "Ah, you're back. Care for an aegis?",
       4: "You must be over-burdened. I have just the thing.",
       5: "A trinket that allows safe passage. Would that be of interest?",
       6: "Heard there are other travelers looking to sell their services.",
@@ -189,9 +189,9 @@ export const MERCHANT_OFFERS: Record<
     gearClass: "small",
     type: "shield",
   },
-  4: TRINKETS["knapsack"].item,
-  5: TRINKETS["hearthstone"].item,
-  6: TRINKETS["compass"].item,
+  4: TRINKETS.knapsack.item,
+  5: TRINKETS.hearthstone.item,
+  6: TRINKETS.compass.item,
   7: {
     gearClass: "slashing",
     grip: "one-handed",
@@ -214,7 +214,7 @@ export const MERCHANT_OFFERS: Record<
   },
   20: INFUSABLES["monkey paw"].item,
   [CREW.fletcher.requiredStage]: TRINKETS["ammunition pouch"].item,
-  35: TRINKETS["journal"].item,
+  35: TRINKETS.journal.item,
   40: INFUSABLES["tome of power"].item,
   50: TRINKETS["antique coin"].item,
 };

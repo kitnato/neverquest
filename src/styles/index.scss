@@ -132,6 +132,22 @@ td.text-end > .hstack {
 }
 
 .progress-labelled {
+  .progress-bar {
+    &.attached-above {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    &.attached-below {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &.small {
+      height: 0.75rem;
+    }
+  }
+
   &.transitions-none .progress-bar {
     transition: none;
   }

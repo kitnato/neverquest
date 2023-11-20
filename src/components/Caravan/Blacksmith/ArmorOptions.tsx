@@ -61,7 +61,9 @@ export function ArmorOptions() {
           tooltip="Class"
         >
           <FormSelect
-            onChange={({ target: { value } }) => setArmorClass(value as ArmorClass)}
+            onChange={({ target: { value } }) => {
+              setArmorClass(value as ArmorClass);
+            }}
             value={armorClass}
           >
             {ARMOR_CLASS_TYPES.map((current) => (
@@ -151,7 +153,9 @@ export function ArmorOptions() {
       ) : (
         <CraftedGear
           gearItem={craftedArmor}
-          onTransfer={() => setBlacksmithInventory((current) => ({ ...current, armor: undefined }))}
+          onTransfer={() => {
+            setBlacksmithInventory((current) => ({ ...current, armor: undefined }));
+          }}
         />
       )}
     </Stack>

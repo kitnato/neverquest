@@ -15,7 +15,7 @@ export function ItemsInherited() {
     <Stack gap={3}>
       <h6>Items inherited</h6>
 
-      {Object.values(ownsInheritableItemsValue).every((current) => current === false) && (
+      {Object.values(ownsInheritableItemsValue).every((current) => !current) && (
         <span className="fst-italic">{LABEL_NONE}</span>
       )}
 

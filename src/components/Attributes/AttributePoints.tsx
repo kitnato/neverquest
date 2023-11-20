@@ -35,7 +35,7 @@ export function AttributePoints() {
 
             <PopoverBody>
               <Stack className="justify-content-center" direction="horizontal" gap={1}>
-                <IconImage Icon={IconEssence} size="small" />
+                <IconImage Icon={IconEssence} isSmall />
 
                 {formatNumber({ value: getAttributePointCost(levelValue) })}
               </Stack>

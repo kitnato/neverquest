@@ -58,7 +58,7 @@ export function ShieldName({
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconImage Icon={IconBlock} size="small" />
+                    <IconImage Icon={IconBlock} isSmall />
 
                     {formatNumber({ format: "percentage", value: block })}
 
@@ -92,14 +92,13 @@ export function ShieldName({
 
                       <td>
                         {(() => {
-                          const { gearClass } = shield;
-
-                          if (gearClass) {
+                          if ("gearClass" in shield) {
+                            const { gearClass } = shield;
                             const { Icon } = SHIELD_SPECIFICATIONS[gearClass];
 
                             return (
                               <Stack direction="horizontal" gap={1}>
-                                <IconImage Icon={Icon} size="small" />
+                                <IconImage Icon={Icon} isSmall />
 
                                 {capitalizeAll(gearClass)}
                               </Stack>
@@ -108,7 +107,7 @@ export function ShieldName({
 
                           return (
                             <Stack direction="horizontal" gap={1}>
-                              <IconImage Icon={IconNone} size="small" />
+                              <IconImage Icon={IconNone} isSmall />
                               None
                             </Stack>
                           );
@@ -129,7 +128,7 @@ export function ShieldName({
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconStagger} size="small" />
+                          <IconImage Icon={IconStagger} isSmall />
 
                           {formatNumber({ format: "percentage", value: stagger })}
 

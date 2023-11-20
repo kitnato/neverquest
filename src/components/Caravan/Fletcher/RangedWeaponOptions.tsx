@@ -57,7 +57,9 @@ export function RangedWeaponOptions() {
 
         <IconDisplay Icon={IconGearClass} iconProps={{ overlayPlacement: "left" }} tooltip="Class">
           <FormSelect
-            onChange={({ target: { value } }) => setWeaponClass(value as WeaponClass)}
+            onChange={({ target: { value } }) => {
+              setWeaponClass(value as WeaponClass);
+            }}
             value={weaponClass}
           >
             {WEAPON_CLASS_TYPES.filter((current) => current !== "slashing").map((current) => (
@@ -128,7 +130,7 @@ export function RangedWeaponOptions() {
 
       {fletcherInventoryValue === undefined ? (
         <CraftGear
-          onCraft={() =>
+          onCraft={() => {
             setFletcherInventory(
               generateRangedWeapon({
                 allowProfanity: allowProfanityValue,
@@ -142,8 +144,8 @@ export function RangedWeaponOptions() {
                       ? ["highQuality"]
                       : undefined,
               }),
-            )
-          }
+            );
+          }}
           price={getGearPrice({
             factor,
             ...WEAPON_BASE,

@@ -83,7 +83,7 @@ export function AttackRate() {
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconWeaponAttackRate} size="small" />
+                        <IconImage Icon={IconWeaponAttackRate} isSmall />
 
                         {formatNumber({ format: "time", value: weaponAttackRate })}
                       </Stack>
@@ -93,7 +93,7 @@ export function AttackRate() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconWeaponSpeed} size="small" />
+                        <IconImage Icon={IconWeaponSpeed} isSmall />
                         Speed:
                       </Stack>
                     </td>
@@ -110,7 +110,7 @@ export function AttackRate() {
                           <>
                             <span>{LABEL_SEPARATOR}</span>
 
-                            <IconImage Icon={IconTomeOfPower} size="small" />
+                            <IconImage Icon={IconTomeOfPower} isSmall />
 
                             {`+${formatNumber({
                               format: "percentage",

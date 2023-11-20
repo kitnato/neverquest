@@ -35,12 +35,22 @@ export function Settings() {
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>Settings</Tooltip>} placement="bottom">
-        <Button onClick={() => setIsShowingModal(true)} variant="outline-light">
-          <IconImage Icon={IconSettings} size="small" />
+        <Button
+          onClick={() => {
+            setIsShowingModal(true);
+          }}
+          variant="outline-light"
+        >
+          <IconImage Icon={IconSettings} isSmall />
         </Button>
       </OverlayTrigger>
 
-      <Modal onHide={() => setIsShowingModal(false)} show={isShowingModal}>
+      <Modal
+        onHide={() => {
+          setIsShowingModal(false);
+        }}
+        show={isShowingModal}
+      >
         <ModalHeader closeButton>
           <ModalTitle>
             <Stack direction="horizontal" gap={3}>

@@ -25,7 +25,7 @@ export function InfusionProgress({ infusable }: { infusable: Infusable }) {
       variant="secondary"
     >
       <Stack direction="horizontal" gap={1}>
-        <IconImage Icon={IconEssence} isStencilled size="small" />
+        <IconImage Icon={IconEssence} isSmall isStencilled />
 
         {`${formatNumber({ value: infusionCurrentValue })}/${formatNumber({
           value: infusionMaximumValue,

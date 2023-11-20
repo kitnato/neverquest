@@ -22,7 +22,7 @@ export function MasteryRank({ mastery }: { mastery: Mastery }) {
     <Stack direction="horizontal" gap={1}>
       <IconDisplay
         Icon={IconRank}
-        iconProps={{ overlayPlacement: "bottom", size: "small" }}
+        iconProps={{ isSmall: true, overlayPlacement: "bottom" }}
         tooltip="Rank"
       >
         {formatNumber({ value: masteryRankValue })}

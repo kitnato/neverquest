@@ -26,7 +26,7 @@ export function AttributePointProgress() {
       <span className="w-100">
         <LabelledProgressBar value={(essenceValue / nextTotalCost) * 100} variant="secondary">
           <Stack direction="horizontal" gap={1}>
-            <IconImage Icon={IconEssence} isStencilled size="small" />
+            <IconImage Icon={IconEssence} isSmall isStencilled />
 
             {`${formatNumber({ value: essenceValue })}/${formatNumber({
               value: nextTotalCost,

@@ -58,7 +58,7 @@ export function Protection() {
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconArmor} size="small" />
+                          <IconImage Icon={IconArmor} isSmall />
 
                           {formatNumber({ value: armorValue.protection })}
                         </Stack>
@@ -68,7 +68,7 @@ export function Protection() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconTank} size="small" />
+                          <IconImage Icon={IconTank} isSmall />
                           Tank:
                         </Stack>
                       </td>

@@ -39,7 +39,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
           {`${label} regeneration`}
 
           <Stack direction="horizontal" gap={1}>
-            <IconImage Icon={ReserveIcon} size="small" />
+            <IconImage Icon={ReserveIcon} isSmall />
 
             {`${regenerationAmountValue} per ${formatNumber({
               format: "time",
@@ -55,7 +55,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
         {`Regenerating ${reserve}`}
 
         <Stack direction="horizontal" gap={1}>
-          <IconImage Icon={ReserveIcon} size="small" />
+          <IconImage Icon={ReserveIcon} isSmall />
 
           {`${regenerationAmountValue} in ${formatNumber({
             format: "time",
@@ -68,9 +68,9 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
 
   return (
     <LabelledProgressBar
-      attached="above"
+      attachment="above"
       disableTransitions
-      size="small"
+      isSmall
       value={(regenerationProgress / regenerationRateValue) * 100}
       variant="secondary"
     >

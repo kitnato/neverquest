@@ -72,7 +72,7 @@ export function WeaponName({
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconImage Icon={IconWeaponDamage} size="small" />
+                    <IconImage Icon={IconWeaponDamage} isSmall />
 
                     {formatNumber({ value: damage })}
 
@@ -93,7 +93,7 @@ export function WeaponName({
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconImage Icon={IconWeaponAttackRate} size="small" />
+                    <IconImage Icon={IconWeaponAttackRate} isSmall />
 
                     {formatNumber({ format: "time", value: attackRate })}
 
@@ -114,7 +114,7 @@ export function WeaponName({
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconWeaponDamagePerSecond} size="small" />
+                      <IconImage Icon={IconWeaponDamagePerSecond} isSmall />
 
                       {formatNumber({ format: "float", value: damagePerSecond })}
 
@@ -141,7 +141,7 @@ export function WeaponName({
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconGrip} size="small" />
+                      <IconImage Icon={IconGrip} isSmall />
 
                       {/* eslint-disable-next-line unicorn/consistent-destructuring */}
                       {capitalizeAll(weapon.grip)}
@@ -156,7 +156,7 @@ export function WeaponName({
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconAmmunition} size="small" />
+                      <IconImage Icon={IconAmmunition} isSmall />
 
                       {/* eslint-disable-next-line unicorn/consistent-destructuring */}
                       {formatNumber({ value: weapon.ammunitionCost })}
@@ -184,7 +184,7 @@ export function WeaponName({
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconGearClass} size="small" />
+                        <IconImage Icon={IconGearClass} isSmall />
 
                         {capitalizeAll(gearClass)}
                       </Stack>
@@ -202,7 +202,7 @@ export function WeaponName({
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconAbility} size="small" />
+                        <IconImage Icon={IconAbility} isSmall />
 
                         {formatNumber({ format: "percentage", value: abilityChance })}
 

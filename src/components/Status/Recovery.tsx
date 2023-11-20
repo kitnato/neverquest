@@ -59,7 +59,7 @@ export function Recovery() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconResilience} size="small" />
+                        <IconImage Icon={IconResilience} isSmall />
                         Resilience:
                       </Stack>
                     </td>

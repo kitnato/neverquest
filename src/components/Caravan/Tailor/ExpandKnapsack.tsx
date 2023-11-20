@@ -30,7 +30,6 @@ export function ExpandKnapsack() {
       TAILORING_PRICE_MAXIMUM.knapsack * getGrowthSigmoid(capacity - (ENCUMBRANCE_CAPACITY - 1)),
     );
     const isAffordable = price <= essenceValue;
-    const canExpand = isAffordable && ownedItemKnapsack !== undefined;
 
     return (
       <Stack gap={3}>
@@ -53,18 +52,12 @@ export function ExpandKnapsack() {
             </IconDisplay>
 
             <OverlayTrigger
-              overlay={
-                <Tooltip>
-                  {ownedItemKnapsack === undefined && <div>Knapsack required.</div>}
-
-                  {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
-                </Tooltip>
-              }
-              trigger={canExpand ? [] : ["hover", "focus"]}
+              overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
+              trigger={isAffordable ? [] : ["hover", "focus"]}
             >
               <span>
                 <Button
-                  disabled={!canExpand}
+                  disabled={!isAffordable}
                   onClick={() => {
                     transactEssence(-price);
                     setInventory((currentInventory) =>
@@ -79,6 +72,7 @@ export function ExpandKnapsack() {
                           : currentItem,
                       ),
                     );
+
                     progressQuest({
                       amount: TAILORING_EXPANSION.knapsack,
                       quest: "knapsackExpanding",

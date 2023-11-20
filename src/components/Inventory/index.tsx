@@ -63,7 +63,12 @@ export function Inventory() {
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
                 <ItemDisplay item={current} overlayPlacement="right" />
 
-                <Button onClick={() => toggleEquipGear(current)} variant="outline-dark">
+                <Button
+                  onClick={() => {
+                    toggleEquipGear(current);
+                  }}
+                  variant="outline-dark"
+                >
                   Unequip
                 </Button>
               </div>
@@ -95,7 +100,9 @@ export function Inventory() {
                     <span>
                       <Button
                         disabled={!canEquipGear}
-                        onClick={() => toggleEquipGear(current)}
+                        onClick={() => {
+                          toggleEquipGear(current);
+                        }}
                         variant="outline-dark"
                       >
                         Equip

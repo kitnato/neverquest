@@ -20,7 +20,7 @@ export function useInitialize() {
 
         const isStoreEmpty = ls.get(KEY_SESSION) === null;
 
-        if (isRetirement || isStoreEmpty) {
+        if (isRetirement ?? isStoreEmpty) {
           const initialStore: Record<string, string[] | boolean | string> = {};
 
           for (const attribute of ATTRIBUTE_TYPES) {

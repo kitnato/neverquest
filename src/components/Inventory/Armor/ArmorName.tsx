@@ -57,7 +57,7 @@ export function ArmorName({
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconImage Icon={IconProtection} size="small" />
+                    <IconImage Icon={IconProtection} isSmall />
 
                     {formatNumber({ value: protection })}
 
@@ -81,14 +81,13 @@ export function ArmorName({
 
                       <td>
                         {(() => {
-                          const { gearClass } = armor;
-
-                          if (gearClass) {
+                          if ("gearClass" in armor) {
+                            const { gearClass } = armor;
                             const { Icon } = ARMOR_SPECIFICATIONS[gearClass];
 
                             return (
                               <Stack direction="horizontal" gap={1}>
-                                <IconImage Icon={Icon} size="small" />
+                                <IconImage Icon={Icon} isSmall />
 
                                 {capitalizeAll(gearClass)}
                               </Stack>
@@ -97,7 +96,7 @@ export function ArmorName({
 
                           return (
                             <Stack direction="horizontal" gap={1}>
-                              <IconImage Icon={IconNone} size="small" />
+                              <IconImage Icon={IconNone} isSmall />
                               None
                             </Stack>
                           );
@@ -118,7 +117,7 @@ export function ArmorName({
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconDeflection} size="small" />
+                          <IconImage Icon={IconDeflection} isSmall />
 
                           {formatNumber({ format: "percentage", value: deflection })}
 

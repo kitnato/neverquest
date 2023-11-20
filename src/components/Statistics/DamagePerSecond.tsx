@@ -23,7 +23,7 @@ export function DamagePerSecond() {
     return (
       <IconDisplay
         Icon={IconDamagePerSecond}
-        iconProps={{ overlayPlacement: "bottom", size: "small" }}
+        iconProps={{ isSmall: true, overlayPlacement: "bottom" }}
         tooltip="Total damage per second"
       >
         <Stack direction="horizontal" gap={1}>

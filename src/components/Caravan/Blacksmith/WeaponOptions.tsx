@@ -60,7 +60,9 @@ export function WeaponOptions() {
 
         <IconDisplay Icon={IconGearClass} iconProps={{ overlayPlacement: "left" }} tooltip="Class">
           <FormSelect
-            onChange={({ target: { value } }) => setWeaponClass(value as WeaponClass)}
+            onChange={({ target: { value } }) => {
+              setWeaponClass(value as WeaponClass);
+            }}
             value={weaponClass}
           >
             {WEAPON_CLASS_TYPES.map((current) => (
@@ -74,7 +76,9 @@ export function WeaponOptions() {
         {siegecraftValue && (
           <IconDisplay Icon={IconGrip} iconProps={{ overlayPlacement: "left" }} tooltip="Grip">
             <FormSelect
-              onChange={({ target: { value } }) => setWeaponGrip(value as Grip)}
+              onChange={({ target: { value } }) => {
+                setWeaponGrip(value as Grip);
+              }}
               value={weaponGrip}
             >
               {GRIP_TYPES.map((current) => (
@@ -137,7 +141,7 @@ export function WeaponOptions() {
 
       {craftedWeapon === undefined ? (
         <CraftGear
-          onCraft={() =>
+          onCraft={() => {
             setBlacksmithInventory((current) => ({
               ...current,
               weapon: generateMeleeWeapon({
@@ -153,8 +157,8 @@ export function WeaponOptions() {
                       ? ["highQuality"]
                       : undefined,
               }),
-            }))
-          }
+            }));
+          }}
           price={getGearPrice({
             factor,
             ...WEAPON_BASE,
@@ -164,9 +168,9 @@ export function WeaponOptions() {
       ) : (
         <CraftedGear
           gearItem={craftedWeapon}
-          onTransfer={() =>
-            setBlacksmithInventory((current) => ({ ...current, weapon: undefined }))
-          }
+          onTransfer={() => {
+            setBlacksmithInventory((current) => ({ ...current, weapon: undefined }));
+          }}
         />
       )}
     </Stack>

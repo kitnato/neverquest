@@ -55,7 +55,9 @@ export function ShieldOptions() {
           tooltip="Class"
         >
           <FormSelect
-            onChange={({ target: { value } }) => setShieldClass(value as ShieldClass)}
+            onChange={({ target: { value } }) => {
+              setShieldClass(value as ShieldClass);
+            }}
             value={shieldClass}
           >
             {SHIELD_CLASS_TYPES.map((current) => (
@@ -113,7 +115,7 @@ export function ShieldOptions() {
         <span className="text-center">Cannot use without training.</span>
       ) : craftedShield === undefined ? (
         <CraftGear
-          onCraft={() =>
+          onCraft={() => {
             setBlacksmithInventory((current) => ({
               ...current,
               shield: generateShield({
@@ -128,8 +130,8 @@ export function ShieldOptions() {
                       ? ["highQuality"]
                       : undefined,
               }),
-            }))
-          }
+            }));
+          }}
           price={getGearPrice({
             factor,
             ...SHIELD_SPECIFICATIONS[shieldClass],
@@ -138,9 +140,9 @@ export function ShieldOptions() {
       ) : (
         <CraftedGear
           gearItem={craftedShield}
-          onTransfer={() =>
-            setBlacksmithInventory((current) => ({ ...current, shield: undefined }))
-          }
+          onTransfer={() => {
+            setBlacksmithInventory((current) => ({ ...current, shield: undefined }));
+          }}
         />
       )}
     </Stack>

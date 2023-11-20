@@ -15,42 +15,42 @@ export function ResetDetails() {
       <ListGroup>
         <ListGroupItem>
           <Stack direction="horizontal" gap={1}>
-            <IconImage Icon={IconStage} size="small" />
+            <IconImage Icon={IconStage} isSmall />
             Stage
           </Stack>
         </ListGroupItem>
 
         <ListGroupItem>
           <Stack direction="horizontal" gap={1}>
-            <IconImage Icon={IconEssence} size="small" />
+            <IconImage Icon={IconEssence} isSmall />
             Essence
           </Stack>
         </ListGroupItem>
 
         <ListGroupItem>
           <Stack direction="horizontal" gap={1}>
-            <IconImage Icon={IconAttributes} size="small" />
+            <IconImage Icon={IconAttributes} isSmall />
             Attributes
           </Stack>
         </ListGroupItem>
 
         <ListGroupItem>
           <Stack direction="horizontal" gap={1}>
-            <IconImage Icon={IconSkills} size="small" />
+            <IconImage Icon={IconSkills} isSmall />
             Skills
           </Stack>
         </ListGroupItem>
 
         <ListGroupItem>
           <Stack direction="horizontal" gap={1}>
-            <IconImage Icon={IconMasteries} size="small" />
+            <IconImage Icon={IconMasteries} isSmall />
             Masteries
           </Stack>
         </ListGroupItem>
 
         <ListGroupItem>
           <Stack direction="horizontal" gap={1}>
-            <IconImage Icon={IconGear} size="small" />
+            <IconImage Icon={IconGear} isSmall />
             Gear
           </Stack>
         </ListGroupItem>

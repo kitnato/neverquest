@@ -5,7 +5,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
+import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
 import { PARRY_ABSORPTION, PARRY_DAMAGE } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconFinesse from "@neverquest/icons/finesse.svg?react";
@@ -50,7 +50,7 @@ export function ParryRating() {
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconParry} size="small" />
+                          <IconImage Icon={IconParry} isSmall />
 
                           {formatNumber({ format: "percentage", value: parryValue })}
                         </Stack>
@@ -80,7 +80,7 @@ export function ParryRating() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconFinesse} size="small" />
+                          <IconImage Icon={IconFinesse} isSmall />
                           Finesse:
                         </Stack>
                       </td>
@@ -113,9 +113,8 @@ export function ParryRating() {
                 </PopoverBody>
               </Popover>
             }
-            trigger={escrimeValue ? ["hover", "focus"] : []}
           >
-            <span>{escrimeValue ? parryRatingValue : LABEL_EMPTY}</span>
+            <span>{parryRatingValue}</span>
           </OverlayTrigger>
 
           <DeltasDisplay delta="parryRating" />

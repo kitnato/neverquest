@@ -40,7 +40,9 @@ export function TraitSelection() {
                   key={current}
                   label={<TraitDisplay key={current} trait={current} />}
                   name={FORM_NAME}
-                  onChange={({ target: { value } }) => setSelectedTrait(value as Trait)}
+                  onChange={({ target: { value } }) => {
+                    setSelectedTrait(value as Trait);
+                  }}
                   type="radio"
                   value={current}
                 />

@@ -38,7 +38,7 @@ export function IconDisplay({
     <Stack
       className={classes === "" ? undefined : classes}
       direction="horizontal"
-      gap={iconProps?.size === "small" ? 1 : gap}
+      gap={iconProps?.isSmall ? 1 : gap}
     >
       <IconImage Icon={Icon} tooltip={tooltip} {...iconProps} />
 

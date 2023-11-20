@@ -5,7 +5,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
+import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconStability from "@neverquest/icons/stability.svg?react";
 import IconStaggerRating from "@neverquest/icons/stagger-rating.svg?react";
@@ -54,7 +54,7 @@ export function StaggerRating() {
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconStagger} size="small" />
+                          <IconImage Icon={IconStagger} isSmall />
 
                           {formatNumber({ format: "percentage", value: stagger })}
                         </Stack>
@@ -64,7 +64,7 @@ export function StaggerRating() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconStability} size="small" />
+                          <IconImage Icon={IconStability} isSmall />
                           Stability:
                         </Stack>
                       </td>
@@ -78,9 +78,8 @@ export function StaggerRating() {
                 </PopoverBody>
               </Popover>
             }
-            trigger={shieldcraftValue ? ["hover", "focus"] : []}
           >
-            <span>{shieldcraftValue ? staggerRatingValue : LABEL_EMPTY}</span>
+            <span>{staggerRatingValue}</span>
           </OverlayTrigger>
 
           <DeltasDisplay delta="staggerRating" />

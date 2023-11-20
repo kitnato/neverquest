@@ -31,7 +31,7 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
 
               {LABEL_SEPARATOR}
 
-              <IconImage Icon={ELEMENTALS[elemental].Icon} size="small" />
+              <IconImage Icon={ELEMENTALS[elemental].Icon} isSmall />
 
               {`${formatNumber({ format: "time", value: duration })}`}
             </Stack>

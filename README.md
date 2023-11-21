@@ -22,6 +22,7 @@ To run the app locally from source, you will need to use a command-line interfac
 
 Prerequisites:
 
+- [Git](https://git-scm.com/downloads)
 - [NodeJS](https://nodejs.org/en) 18 or later
 - NPM 8 or later
 

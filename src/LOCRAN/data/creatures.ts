@@ -14,6 +14,9 @@ export const CREATURES: BaseData[] = [
     name: "addict",
   },
   {
+    name: "advisor",
+  },
+  {
     name: "alchemist",
   },
   {
@@ -24,10 +27,16 @@ export const CREATURES: BaseData[] = [
     name: "alien",
   },
   {
+    name: "alligator",
+  },
+  {
     name: "altruist",
   },
   {
     name: "amoeba",
+  },
+  {
+    name: "angel",
   },
   {
     name: "animal",
@@ -36,8 +45,14 @@ export const CREATURES: BaseData[] = [
     name: "annihilator",
   },
   {
+    name: "antelope",
+  },
+  {
     isProfanity: true,
     name: "anus",
+  },
+  {
+    name: "ape",
   },
   {
     name: "apostate",
@@ -58,6 +73,9 @@ export const CREATURES: BaseData[] = [
     name: "archer",
   },
   {
+    name: "archon",
+  },
+  {
     name: "archmage",
   },
   {
@@ -70,14 +88,23 @@ export const CREATURES: BaseData[] = [
     name: "arthropod",
   },
   {
+    name: "artificer",
+  },
+  {
     isProfanity: true,
-    name: "ass",
+    name: "asshole",
+  },
+  {
+    name: "assassin",
   },
   {
     name: "automaton",
   },
   {
     name: "autophage",
+  },
+  {
+    name: "avatar",
   },
   {
     name: "ballista",
@@ -92,28 +119,25 @@ export const CREATURES: BaseData[] = [
     name: "banshee",
   },
   {
+    name: "barbarian",
+  },
+  {
     name: "bard",
   },
   {
     name: "barnacle",
   },
   {
-    name: "bastard",
+    name: "basilisk",
   },
   {
-    name: "bat",
+    name: "bastard",
   },
   {
     name: "beast",
   },
   {
-    name: "beauty",
-  },
-  {
     name: "beefcake",
-  },
-  {
-    name: "beetle",
   },
   {
     name: "behemoth",
@@ -122,13 +146,17 @@ export const CREATURES: BaseData[] = [
     name: "belcher",
   },
   {
+    name: "berserker",
+  },
+  {
     name: "betrayer",
   },
   {
     name: "bigfoot",
   },
   {
-    name: "bird",
+    isProfanity: true,
+    name: "bitch",
   },
   {
     name: "blasphemer",
@@ -138,6 +166,9 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "blob",
+  },
+  {
+    name: "boar",
   },
   {
     name: "boggit",
@@ -150,6 +181,9 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "bugbear",
+  },
+  {
+    name: "bureaucrat",
   },
   {
     name: "bully",
@@ -195,13 +229,25 @@ export const CREATURES: BaseData[] = [
     name: "caterpillar",
   },
   {
+    name: "centaur",
+  },
+  {
     name: "centipede",
+  },
+  {
+    name: "cephalid",
   },
   {
     name: "cephalopod",
   },
   {
+    name: "chameleon",
+  },
+  {
     name: "champion",
+  },
+  {
+    name: "chicken",
   },
   {
     name: "chimera",
@@ -223,6 +269,9 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "colossus",
+  },
+  {
+    name: "construct",
   },
   {
     isProfanity: true,
@@ -251,6 +300,12 @@ export const CREATURES: BaseData[] = [
     name: "coward",
   },
   {
+    name: "cowboy",
+  },
+  {
+    name: "crab",
+  },
+  {
     isProfanity: true,
     name: "crackhead",
   },
@@ -259,6 +314,9 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "crone",
+  },
+  {
+    name: "crumpet",
   },
   {
     name: "crusader",
@@ -274,7 +332,16 @@ export const CREATURES: BaseData[] = [
     name: "cyborg",
   },
   {
+    name: "cyclops",
+  },
+  {
     name: "defiler",
+  },
+  {
+    name: "demigod",
+  },
+  {
+    name: "demigorgon",
   },
   {
     name: "demon",
@@ -302,6 +369,9 @@ export const CREATURES: BaseData[] = [
     name: "disciple",
   },
   {
+    name: "djinn",
+  },
+  {
     name: "doll",
   },
   {
@@ -320,6 +390,9 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "drake",
+  },
+  {
+    name: "dreadnought",
   },
   {
     name: "drinker",
@@ -412,6 +485,9 @@ export const CREATURES: BaseData[] = [
     name: "fool",
   },
   {
+    name: "frog",
+  },
+  {
     name: "fungus",
   },
   {
@@ -419,6 +495,12 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "gangster",
+  },
+  {
+    name: "gamer",
+  },
+  {
+    name: "gargoyle",
   },
   {
     name: "gazer",
@@ -449,7 +531,16 @@ export const CREATURES: BaseData[] = [
     name: "gimp",
   },
   {
+    name: "gladiator",
+  },
+  {
     name: "glutton",
+  },
+  {
+    name: "gnoll",
+  },
+  {
+    name: "gnome",
   },
   {
     name: "gobbler",
@@ -475,6 +566,9 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "gorgon",
+  },
+  {
+    name: "gremlin",
   },
   {
     name: "griffin",
@@ -507,19 +601,25 @@ export const CREATURES: BaseData[] = [
     name: "hedonist",
   },
   {
+    name: "hellion",
+  },
+  {
     name: "heretic",
   },
   {
     name: "hierophant",
   },
   {
+    name: "hippogriff",
+  },
+  {
     name: "hoarder",
   },
   {
-    name: "horror",
+    name: "homunculus",
   },
   {
-    name: "horse",
+    name: "horror",
   },
   {
     name: "hothead",
@@ -533,6 +633,12 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "hunter",
+  },
+  {
+    name: "hydra",
+  },
+  {
+    name: "illusion",
   },
   {
     name: "illusionist",
@@ -550,6 +656,9 @@ export const CREATURES: BaseData[] = [
     name: "initiate",
   },
   {
+    name: "inquisitor",
+  },
+  {
     name: "insect",
   },
   {
@@ -560,6 +669,9 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "janitor",
+  },
+  {
+    name: "jellyfish",
   },
   {
     name: "jester",
@@ -581,16 +693,19 @@ export const CREATURES: BaseData[] = [
     name: "king",
   },
   {
-    name: "kitten",
-  },
-  {
     name: "knight",
   },
   {
-    name: "lady",
+    name: "kobold",
+  },
+  {
+    name: "kraken",
   },
   {
     name: "lawyer",
+  },
+  {
+    name: "leech",
   },
   {
     name: "lemon",
@@ -670,6 +785,9 @@ export const CREATURES: BaseData[] = [
     name: "mauler",
   },
   {
+    name: "mercenary",
+  },
+  {
     name: "mermaid",
   },
   {
@@ -685,6 +803,13 @@ export const CREATURES: BaseData[] = [
     name: "mimic",
   },
   {
+    name: "minion",
+  },
+  {
+    name: "minotaur",
+  },
+  {
+    isProfanity: true,
     name: "minx",
   },
   {
@@ -746,6 +871,9 @@ export const CREATURES: BaseData[] = [
     name: "nightmare",
   },
   {
+    name: "ninja",
+  },
+  {
     name: "nomad",
   },
   {
@@ -758,9 +886,6 @@ export const CREATURES: BaseData[] = [
     name: "occultist",
   },
   {
-    name: "octopus",
-  },
-  {
     name: "oddity",
   },
   {
@@ -768,6 +893,9 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "ogre",
+  },
+  {
+    name: "ooze",
   },
   {
     name: "orc",
@@ -798,13 +926,19 @@ export const CREATURES: BaseData[] = [
     name: "phantom",
   },
   {
+    name: "phoenix",
+  },
+  {
+    name: "pirate",
+  },
+  {
     name: "pixie",
   },
   {
-    name: "poltergeist",
+    name: "plant",
   },
   {
-    name: "pony",
+    name: "poltergeist",
   },
   {
     name: "porpoise",
@@ -846,9 +980,6 @@ export const CREATURES: BaseData[] = [
     name: "queen",
   },
   {
-    name: "rabbit",
-  },
-  {
     name: "raider",
   },
   {
@@ -869,6 +1000,12 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "reaver",
+  },
+  {
+    name: "rebel",
+  },
+  {
+    name: "reflection",
   },
   {
     name: "revenant",
@@ -892,13 +1029,22 @@ export const CREATURES: BaseData[] = [
     name: "saint",
   },
   {
+    name: "samurai",
+  },
+  {
     name: "sasquatch",
+  },
+  {
+    name: "satyr",
   },
   {
     name: "sausage",
   },
   {
     name: "savage",
+  },
+  {
+    name: "scarecrow",
   },
   {
     name: "scoundrel",
@@ -932,6 +1078,9 @@ export const CREATURES: BaseData[] = [
     name: "shadow",
   },
   {
+    name: "shark",
+  },
+  {
     name: "shambler",
   },
   {
@@ -947,6 +1096,10 @@ export const CREATURES: BaseData[] = [
     name: "skull",
   },
   {
+    isProfanity: true,
+    name: "slag",
+  },
+  {
     name: "slave",
   },
   {
@@ -960,16 +1113,26 @@ export const CREATURES: BaseData[] = [
   },
   {
     isProfanity: true,
+    name: "slut",
+  },
+  {
+    isProfanity: true,
     name: "smegma",
   },
   {
     name: "smoker",
   },
   {
+    name: "snake",
+  },
+  {
     name: "sniffer",
   },
   {
     name: "snot",
+  },
+  {
+    name: "soldier",
   },
   {
     name: "somnambulist",
@@ -996,13 +1159,31 @@ export const CREATURES: BaseData[] = [
     name: "spider",
   },
   {
+    name: "spirit",
+  },
+  {
+    name: "sphinx",
+  },
+  {
+    name: "sponge",
+  },
+  {
     name: "sprite",
+  },
+  {
+    name: "spy",
+  },
+  {
+    name: "squid",
   },
   {
     name: "squire",
   },
   {
     name: "stabber",
+  },
+  {
+    name: "starfish",
   },
   {
     name: "stalker",
@@ -1017,6 +1198,9 @@ export const CREATURES: BaseData[] = [
     name: "succubus",
   },
   {
+    name: "survivor",
+  },
+  {
     name: "t-rex",
   },
   {
@@ -1024,7 +1208,13 @@ export const CREATURES: BaseData[] = [
     name: "tampon",
   },
   {
+    name: "tardigrade",
+  },
+  {
     name: "tarantula",
+  },
+  {
+    name: "tentacle",
   },
   {
     name: "terror",
@@ -1059,6 +1249,9 @@ export const CREATURES: BaseData[] = [
     name: "tree",
   },
   {
+    name: "trilobite",
+  },
+  {
     name: "troglodyte",
   },
   {
@@ -1074,6 +1267,12 @@ export const CREATURES: BaseData[] = [
   {
     isProfanity: true,
     name: "twink",
+  },
+  {
+    name: "unicorn",
+  },
+  {
+    name: "vampire",
   },
   {
     name: "vanguard",
@@ -1098,9 +1297,6 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "vixen",
-  },
-  {
-    name: "walrus",
   },
   {
     name: "warden",
@@ -1142,9 +1338,6 @@ export const CREATURES: BaseData[] = [
     name: "werewolf",
   },
   {
-    name: "whale",
-  },
-  {
     name: "wight",
   },
   {
@@ -1175,6 +1368,9 @@ export const CREATURES: BaseData[] = [
     name: "wraith",
   },
   {
+    name: "wrestler",
+  },
+  {
     name: "wretch",
   },
   {
@@ -1185,6 +1381,9 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "xenophobe",
+  },
+  {
+    name: "yeti",
   },
   {
     name: "zealot",

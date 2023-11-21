@@ -797,6 +797,11 @@ export const ARTIFACTS: ArtifactData[] = [
     type: "weapon",
   },
   {
+    name: "exoskeleton",
+    subtype: "chest",
+    type: "armor",
+  },
+  {
     name: "eye",
     type: "trinket",
   },
@@ -2322,6 +2327,12 @@ export const ARTIFACTS: ArtifactData[] = [
     name: "underwear",
     subtype: "legs",
     type: "armor",
+  },
+  {
+    artifactClass: "piercing",
+    name: "uzi",
+    subtype: "ranged",
+    type: "weapon",
   },
   {
     name: "vambraces",

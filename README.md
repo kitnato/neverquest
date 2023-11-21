@@ -18,7 +18,12 @@ LOCRAN can be considered somewhat independent of Neverquest, as it can be used o
 
 To run the app locally from source, you will need to use a command-line interface (CLI), as well as have [git](https://git-scm.com/downloads) and [NPM](https://docs.npmjs.com/cli/v8/configuring-npm/install) installed globally.
 
-### Install & run the app
+### Installation
+
+Prerequisites:
+
+- [NodeJS](https://nodejs.org/en) 18 or later
+- NPM 8 or later
 
 1. Open the CLI and change into a suitable directory (e.g. `cd neverquest`).
 1. Run `git clone git@github.com:kitnato/neverquest.git`
@@ -29,7 +34,7 @@ To run the app locally from source, you will need to use a command-line interfac
 
 ### Local development
 
-After [installation](#install--run-the-app), but before committing any changes, do the following:
+After [installation](#installation), but before committing any changes, do the following:
 
 1. In the CLI, go to the project folder (e.g. `cd neverquest`).
 1. Run `npm run prepare`

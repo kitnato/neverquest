@@ -28,7 +28,7 @@ import { dodgeChance } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export function Dodge() {
+export function DodgeChance() {
   const { name, staminaCost } = useRecoilValue(armor);
   const agilityPowerBonus = useRecoilValue(attributePowerBonus("agility"));
   const agility = useRecoilValue(attributeStatistic("agility"));

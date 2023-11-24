@@ -220,8 +220,8 @@ export const monsterDamagePerSecond = withStateKey("monsterDamagePerSecond", (ke
       formatNumber({
         format: "float",
         value: getDamagePerRate({
-          attackRate: get(monsterAttackRate),
           damage: get(monsterDamage),
+          rate: get(monsterAttackRate),
         }),
       }),
     key,
@@ -245,10 +245,10 @@ export const monsterDamageAilingPerSecond = withStateKey("monsterDamageAilingPer
         ? formatNumber({
             format: "float",
             value: getDamagePerRate({
-              attackRate: get(monsterAttackRate),
               damage: get(monsterDamageAiling),
               damageModifier: 0,
               damageModifierChance: AILMENT_PENALTY.stunned,
+              rate: get(monsterAttackRate),
             }),
           })
         : get(monsterDamagePerSecond),

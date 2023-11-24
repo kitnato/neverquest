@@ -185,6 +185,11 @@ export const DROP_CHANCES = {
   "torn manuscript": 0.03,
 };
 
+export const ELEMENTAL_DURATION: Record<Elemental, GeneratorRange> = {
+  fire: { maximum: 2500, minimum: 1000 },
+  ice: { maximum: 1500, minimum: 500 },
+  lightning: { maximum: 3000, minimum: 1500 },
+};
 export const ELEMENTALS: Record<
   Elemental,
   { ailment: MonsterAilmentElemental; color: string; Icon: SVGIcon }
@@ -213,12 +218,11 @@ export const INHERITABLE_ITEMS = ["knapsack", "journal", ...INFUSABLE_TYPES] as 
 export const KNAPSACK_CAPACITY = 12;
 
 export const GEM_BASE = {
-  price: 50,
+  price: 100,
   weight: 1,
 };
 export const GEM_DAMAGE = [0.1, 0.2, 0.4, 0.7, 1];
 export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.5 };
-export const GEM_DURATION = [1000, 1200, 1500, 1900, 2400];
 export const GEM_ELEMENTALS: Record<Gem, Elemental> = {
   ruby: "fire",
   sapphire: "ice",
@@ -300,8 +304,8 @@ export const SHIELD_SPECIFICATIONS: Record<
 > = {
   medium: {
     block: [
-      { maximum: 0.28, minimum: 0.26 },
-      { maximum: 0.4, minimum: 0.38 },
+      { maximum: 0.21, minimum: 0.2 },
+      { maximum: 0.33, minimum: 0.31 },
     ],
     Icon: IconShieldMedium,
     price: { maximum: 4000, minimum: 4 },
@@ -310,7 +314,7 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 0.35, minimum: 0.3 },
     ],
     staminaCost: [
-      { maximum: 4, minimum: 2 },
+      { maximum: 4, minimum: 3 },
       { maximum: 30, minimum: 25 },
     ],
     weight: [
@@ -321,7 +325,7 @@ export const SHIELD_SPECIFICATIONS: Record<
   small: {
     block: [
       { maximum: 0.12, minimum: 0.1 },
-      { maximum: 0.25, minimum: 0.2 },
+      { maximum: 0.22, minimum: 0.2 },
     ],
     Icon: IconShieldSmall,
     price: { maximum: 2000, minimum: 2 },
@@ -337,8 +341,8 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   tower: {
     block: [
-      { maximum: 0.45, minimum: 0.4 },
-      { maximum: 0.6, minimum: 0.57 },
+      { maximum: 0.33, minimum: 0.3 },
+      { maximum: 0.5, minimum: 0.48 },
     ],
     Icon: IconShieldTower,
     price: { maximum: 5500, minimum: 7 },
@@ -347,7 +351,7 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 0.55, minimum: 0.5 },
     ],
     staminaCost: [
-      { maximum: 10, minimum: 7 },
+      { maximum: 7, minimum: 6 },
       { maximum: 40, minimum: 35 },
     ],
     weight: [
@@ -448,17 +452,13 @@ export const TRINKETS: Record<
 
 export const WEAPON_BASE: GearBase & {
   ammunitionCost: [GeneratorRange, GeneratorRange];
-  attackRate: [GeneratorRange, GeneratorRange];
   damage: [GeneratorRange, GeneratorRange];
   range: [GeneratorRange, GeneratorRange];
+  rate: [GeneratorRange, GeneratorRange];
 } = {
   ammunitionCost: [
     { maximum: 2, minimum: 1 },
     { maximum: 50, minimum: 45 },
-  ],
-  attackRate: [
-    { maximum: 3200, minimum: 3000 },
-    { maximum: 1600, minimum: 1500 },
   ],
   damage: [
     { maximum: 12, minimum: 11 },
@@ -468,6 +468,10 @@ export const WEAPON_BASE: GearBase & {
   range: [
     { maximum: 4000, minimum: 3500 },
     { maximum: 7000, minimum: 6800 },
+  ],
+  rate: [
+    { maximum: 2700, minimum: 2500 },
+    { maximum: 700, minimum: 600 },
   ],
   staminaCost: [
     { maximum: 2, minimum: 1 },
@@ -480,13 +484,13 @@ export const WEAPON_BASE: GearBase & {
 };
 
 export const WEAPON_MODIFIER = {
-  "one-handed": { ability: 1, attackRate: 1, damage: 1, price: 1, stamina: 1, weight: 1 },
-  ranged: { ability: 1, attackRate: 1, damage: 1.2, price: 1.1, stamina: 1.1, weight: 1.15 },
+  "one-handed": { ability: 1, damage: 1, price: 1, rate: 1, stamina: 1, weight: 1 },
+  ranged: { ability: 1, damage: 1.2, price: 1.1, rate: 1, stamina: 1.1, weight: 1.15 },
   "two-handed": {
     ability: 1.1,
-    attackRate: 1.3,
     damage: 1.25,
     price: 1.2,
+    rate: 1.3,
     stamina: 1.15,
     weight: 1.2,
   },
@@ -494,7 +498,6 @@ export const WEAPON_MODIFIER = {
 
 export const WEAPON_NONE: Omit<Melee, "isEquipped" | "price"> = {
   abilityChance: 0,
-  attackRate: 2500,
   damage: 10,
   gearClass: "blunt",
   gems: [],
@@ -502,6 +505,7 @@ export const WEAPON_NONE: Omit<Melee, "isEquipped" | "price"> = {
   ID: nanoid(),
   level: 1,
   name: "Unarmed",
+  rate: 2000,
   staminaCost: 0,
   weight: 0,
 };

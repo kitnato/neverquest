@@ -46,7 +46,7 @@ export function WeaponOptions() {
   const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
   const factor = getGrowthSigmoid(weaponLevel);
-  const { abilityChance, attackRate, damage, staminaCost, weight } = getMeleeRanges({
+  const { abilityChance, damage, rate, staminaCost, weight } = getMeleeRanges({
     factor,
     gearClass: weaponClass,
     grip: weaponGrip,
@@ -102,9 +102,9 @@ export function WeaponOptions() {
           Icon={IconWeaponAttackRate}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Attack rate"
-        >{`${formatNumber({ format: "time", value: attackRate.minimum })}-${formatNumber({
+        >{`${formatNumber({ format: "time", value: rate.minimum })}-${formatNumber({
           format: "time",
-          value: attackRate.maximum,
+          value: rate.maximum,
         })}`}</IconDisplay>
 
         <IconDisplay

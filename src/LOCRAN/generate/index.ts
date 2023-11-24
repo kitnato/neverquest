@@ -83,8 +83,10 @@ export function generate({
         // Filter out only suffixes with Profanity filter.
         const isValidSuffix =
           (allowProfanity ? Boolean(isProfanity) || !isProfanity : !isProfanity) &&
-          (categories[category]?.includes("articledSuffix") ??
-            categories[category]?.includes("suffix"));
+          Boolean(
+            categories[category]?.includes("articledSuffix") ??
+              categories[category]?.includes("suffix"),
+          );
 
         // If suffix is tagged, check if the current affix has all of them (with Profanity filter).
         if (suffixTags.length > 0) {
@@ -109,6 +111,7 @@ export function generate({
 
     const suffixes = [...filteredSuffixes, ...filteredCreatureNameSuffixes];
     const suffixChoice = suffixes[Math.floor(Math.random() * suffixes.length)];
+
     let formattedSuffix = "";
 
     if (suffixChoice !== undefined) {

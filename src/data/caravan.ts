@@ -159,8 +159,7 @@ export const OCCULTIST_PURGE_PRICE_MULTIPLIER = {
 
 export const OVUM_INFUSION_PRICE = 1313;
 
-export const MEDIC_PRICE_SURGERY = 25;
-export const MEDIC_PRICE_SURGERY_CRITICAL = 100;
+export const MEDIC_PRICE_SURGERY = { critical: 100, normal: 20 };
 
 export const MERCHANT_OFFERS: Record<
   number,

@@ -1205,7 +1205,7 @@ export const CREATURES: BaseData[] = [
     name: "survivor",
   },
   {
-    name: "t-rex",
+    name: "tyrannosaurus",
   },
   {
     isProfanity: true,

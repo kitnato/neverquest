@@ -44,7 +44,7 @@ export function RangedWeaponOptions() {
   const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
   const factor = getGrowthSigmoid(weaponLevel);
-  const { abilityChance, attackRate, damage, range, staminaCost, weight } = getRangedRanges({
+  const { abilityChance, damage, range, rate, staminaCost, weight } = getRangedRanges({
     factor,
     gearClass: weaponClass,
   });
@@ -82,9 +82,9 @@ export function RangedWeaponOptions() {
           Icon={IconWeaponAttackRate}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Attack rate"
-        >{`${formatNumber({ format: "time", value: attackRate.minimum })}-${formatNumber({
+        >{`${formatNumber({ format: "time", value: rate.minimum })}-${formatNumber({
           format: "time",
-          value: attackRate.maximum,
+          value: rate.maximum,
         })}`}</IconDisplay>
 
         <IconDisplay

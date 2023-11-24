@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import type { RecoilValue, Snapshot } from "recoil";
 
 import { formatNumber } from "./formatters";
@@ -13,6 +14,7 @@ import {
 } from "@neverquest/data/general";
 import {
   ARMOR_SPECIFICATIONS,
+  GEM_BASE,
   SHIELD_SPECIFICATIONS,
   WEAPON_BASE,
   WEAPON_MODIFIER,
@@ -20,8 +22,13 @@ import {
 } from "@neverquest/data/inventory";
 import { QUESTS } from "@neverquest/data/quests";
 import type { ArmorClass, NameStructure, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
-import type { GeneratorRange, QuestData } from "@neverquest/types";
-import { isConquest, isGeneratorRanges, isRoutine } from "@neverquest/types/type-guards";
+import type { GeneratorRange, InventoryItem, QuestData } from "@neverquest/types";
+import {
+  isConquest,
+  isGearItem,
+  isGeneratorRanges,
+  isRoutine,
+} from "@neverquest/types/type-guards";
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
 import type { Grip, Quest } from "@neverquest/types/unions";
 
@@ -69,20 +76,20 @@ export function getComputedStatistic({
 }
 
 export function getDamagePerRate({
-  attackRate,
   damage,
   damageModifier = 0,
   damageModifierChance = 0,
+  rate,
 }: {
-  attackRate: number;
   damage: number;
   damageModifier?: number;
   damageModifierChance?: number;
+  rate: number;
 }) {
   const regular = damage * (1 - damageModifierChance);
   const critical = damage * damageModifierChance * damageModifier;
 
-  return (regular + critical) / (attackRate / 1000);
+  return (regular + critical) / (rate / 1000);
 }
 
 export function getDamagePerTick({
@@ -242,8 +249,25 @@ export function getRomanNumeral(value: number) {
   return result;
 }
 
-export function getSellPrice({ price }: { price: number }) {
-  return Math.ceil(price / 2);
+export function getSellPrice(item: InventoryItem) {
+  const { price } = item;
+  let supplement = 0;
+
+  if (isGearItem(item)) {
+    const { gems } = item;
+    const { length } = gems;
+
+    if (length > 0) {
+      supplement +=
+        getSellPrice({
+          ...GEM_BASE,
+          ID: nanoid(),
+          name: "ruby",
+        }) * length;
+    }
+  }
+
+  return Math.ceil(price / 2) + supplement;
 }
 
 export function getShieldRanges({ factor, gearClass }: { factor: number; gearClass: ShieldClass }) {
@@ -272,18 +296,18 @@ export function getMeleeRanges({
 }) {
   const {
     ability: abilityModifier,
-    attackRate: rateModifier,
     damage: damageModifier,
+    rate: rateModifier,
     stamina: staminaModifier,
     weight: weightModifier,
   } = WEAPON_MODIFIER[grip];
-  const { attackRate, damage, staminaCost, weight } = WEAPON_BASE;
+  const { damage, rate, staminaCost, weight } = WEAPON_BASE;
   const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
 
   return {
     abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
-    attackRate: getRange({ factor, modifier: rateModifier, ranges: attackRate }),
     damage: getRange({ factor, modifier: damageModifier, ranges: damage }),
+    rate: getRange({ factor, modifier: rateModifier, ranges: rate }),
     staminaCost: getRange({ factor, modifier: staminaModifier, ranges: staminaCost }),
     weight: getRange({ factor, modifier: weightModifier, ranges: weight }),
   };
@@ -292,20 +316,20 @@ export function getMeleeRanges({
 export function getRangedRanges({ factor, gearClass }: { factor: number; gearClass: WeaponClass }) {
   const {
     ability: abilityModifier,
-    attackRate: rateModifier,
     damage: damageModifier,
+    rate: rateModifier,
     stamina: staminaModifier,
     weight: weightModifier,
   } = WEAPON_MODIFIER.ranged;
-  const { ammunitionCost, attackRate, damage, range, staminaCost, weight } = WEAPON_BASE;
+  const { ammunitionCost, damage, range, rate, staminaCost, weight } = WEAPON_BASE;
   const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
 
   return {
     abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
     ammunitionCost: getRange({ factor, ranges: ammunitionCost }),
-    attackRate: getRange({ factor, modifier: rateModifier, ranges: attackRate }),
     damage: getRange({ factor, modifier: damageModifier, ranges: damage }),
     range: getRange({ factor, ranges: range }),
+    rate: getRange({ factor, modifier: rateModifier, ranges: rate }),
     staminaCost: getRange({ factor, modifier: staminaModifier, ranges: staminaCost }),
     weight: getRange({ factor, modifier: weightModifier, ranges: weight }),
   };

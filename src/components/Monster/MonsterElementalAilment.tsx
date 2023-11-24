@@ -26,7 +26,10 @@ export function MonsterElementalAilment({ elemental }: { elemental: Elemental })
   if (armor[elemental].duration > 0 || weapon[elemental].duration > 0) {
     return (
       <IconDisplay Icon={Icon} isAnimated tooltip={capitalizeAll(ailment)}>
-        <MonsterAilmentMeter ailment={ailment} totalDuration={ELEMENTAL_AILMENT_DURATION_MAXIMUM} />
+        <MonsterAilmentMeter
+          ailment={ailment}
+          totalDuration={ELEMENTAL_AILMENT_DURATION_MAXIMUM[ailment]}
+        />
       </IconDisplay>
     );
   }

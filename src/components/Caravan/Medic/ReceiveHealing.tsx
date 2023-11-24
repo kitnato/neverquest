@@ -2,7 +2,7 @@ import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { MEDIC_PRICE_SURGERY, MEDIC_PRICE_SURGERY_CRITICAL } from "@neverquest/data/caravan";
+import { MEDIC_PRICE_SURGERY } from "@neverquest/data/caravan";
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
   LABEL_FULL_HEALTH,
@@ -23,7 +23,8 @@ export function ReceiveHealing() {
 
   const transactEssence = useTransactEssence();
 
-  const price = isHealthLowValue ? MEDIC_PRICE_SURGERY_CRITICAL : MEDIC_PRICE_SURGERY;
+  const { critical, normal } = MEDIC_PRICE_SURGERY;
+  const price = isHealthLowValue ? critical : normal;
   const isAffordable = price <= essenceValue;
   const isPurchasable = isAffordable && !isHealthAtMaximumValue;
 

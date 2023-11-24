@@ -20,7 +20,7 @@ export function Thorns() {
 
   if (thornsValue > 0) {
     return (
-      <IconDisplay Icon={IconThorns} tooltip="Thorns">
+      <IconDisplay Icon={IconThorns} isAnimated tooltip="Thorns">
         <Stack direction="horizontal" gap={1}>
           <OverlayTrigger
             overlay={

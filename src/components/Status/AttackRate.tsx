@@ -39,7 +39,7 @@ export function AttackRate() {
   const isRecoveringValue = useRecoilValue(isRecovering);
   const isShowingAttackRate = useRecoilValue(isShowing("attackRate"));
   const isShowingAttackRateDetails = useRecoilValue(isShowing("attackRateDetails"));
-  const { attackRate: weaponAttackRate, name } = useRecoilValue(weapon);
+  const { name, rate: weaponAttackRate } = useRecoilValue(weapon);
   const setAttackDuration = useSetRecoilState(attackDuration);
 
   const attack = useAttack();

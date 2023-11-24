@@ -139,9 +139,9 @@ export type UsableItem = AmmunitionPouchItem | InfusableItem | TrinketItem;
 
 type WeaponBase = GearItemBase & {
   abilityChance: number;
-  attackRate: number;
   damage: number;
   gearClass: WeaponClass;
+  rate: number;
   staminaCost: number;
 };
 

@@ -7,7 +7,7 @@ import { CombatRange } from "@neverquest/components/Statistics/CombatRange";
 import { CriticalRating } from "@neverquest/components/Statistics/CriticalRating";
 import { Damage } from "@neverquest/components/Statistics/Damage";
 import { Deflection } from "@neverquest/components/Statistics/Deflection";
-import { Dodge } from "@neverquest/components/Statistics/Dodge";
+import { DodgeChance } from "@neverquest/components/Statistics/DodgeChance";
 import { ExecutionThreshold } from "@neverquest/components/Statistics/ExecutionThreshold";
 import { ParryRating } from "@neverquest/components/Statistics/ParryRating";
 import { Protection } from "@neverquest/components/Statistics/Protection";
@@ -51,7 +51,7 @@ export function Statistics() {
 
                 <Deflection />
 
-                <Dodge />
+                <DodgeChance />
               </Stack>
             </Col>
 

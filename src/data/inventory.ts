@@ -217,7 +217,7 @@ export const GEM_BASE = {
   weight: 1,
 };
 export const GEM_DAMAGE = [0.1, 0.2, 0.4, 0.7, 1];
-export const GEM_DROP_CHANCE = 0.5;
+export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.5 };
 export const GEM_DURATION = [1000, 1200, 1500, 1900, 2400];
 export const GEM_ELEMENTALS: Record<Gem, Elemental> = {
   ruby: "fire",

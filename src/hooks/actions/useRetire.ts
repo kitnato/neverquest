@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { RETIREMENT_MINIMUM_LEVEL } from "@neverquest/data/general";
+import { LABEL_UNKNOWN, RETIREMENT_MINIMUM_LEVEL } from "@neverquest/data/general";
 import { INHERITABLE_ITEMS } from "@neverquest/data/inventory";
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
@@ -99,6 +99,10 @@ export function useRetire() {
             return inheritableItems.has(currentItem.name);
           }),
         );
+
+        if (get(name) !== LABEL_UNKNOWN) {
+          progressQuest({ quest: "settingName" });
+        }
 
         progressQuest({ quest: "retiring" });
 

@@ -309,11 +309,15 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
         ),
         gems:
           encounterValue === "boss"
-            ? stageValue < stageMaximumValue
-              ? Array.from({ length: maximumGems })
-                  .map(() => (Math.random() <= GEM_DROP_CHANCE ? 1 : 0))
-                  .reduce<number>((aggregated, current) => aggregated + current, 0)
-              : maximumGems
+            ? Array.from({ length: maximumGems })
+                .map(() => {
+                  const { equalStage, lowerStage } = GEM_DROP_CHANCE;
+
+                  return Math.random() <= (stageValue < stageMaximumValue ? lowerStage : equalStage)
+                    ? 1
+                    : 0;
+                })
+                .reduce<number>((aggregated, current) => aggregated + current, 0)
             : 0,
         trinket: hasMysteriousEggDropped
           ? INFUSABLES["mysterious egg"].item

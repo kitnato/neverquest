@@ -37,7 +37,7 @@ export function Health() {
 
   if (isShowingHealth) {
     return (
-      <IconDisplay Icon={IconHealth} tooltip="Health">
+      <IconDisplay Icon={IconHealth} isAnimated tooltip="Health">
         <Stack>
           <Stack className="w-100" direction="horizontal">
             <OverlayTrigger

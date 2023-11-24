@@ -21,12 +21,10 @@ export function AttributePoints() {
   });
 
   return (
-    <Stack direction="horizontal" gap={3}>
-      <Stack direction="horizontal" gap={1}>
-        <IconDisplay Icon={IconAttributePoints} tooltip="Available attribute points" />
+    <Stack direction="horizontal">
+      <IconDisplay Icon={IconAttributePoints} tooltip="Available attribute points" />
 
-        <DeltasDisplay delta="attributePoints" />
-      </Stack>
+      <DeltasDisplay delta="attributePoints" />
 
       <OverlayTrigger
         overlay={

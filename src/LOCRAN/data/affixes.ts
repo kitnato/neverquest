@@ -559,9 +559,9 @@ export const AFFIXES: AffixData[] = [
     name: "bleached",
   },
   {
-    artifact: ["articledSuffix", "prefix"],
-    creature: ["articledSuffix"],
-    location: ["articledSuffix"],
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    location: ["articledSuffix", "prefix"],
     name: "blessed",
     tags: ["highQuality"],
   },
@@ -1902,6 +1902,13 @@ export const AFFIXES: AffixData[] = [
   {
     location: ["articledSuffix", "prefix"],
     name: "empty",
+  },
+  {
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    location: ["prefix"],
+    name: "enchanted",
+    tags: ["highQuality"],
   },
   {
     location: ["prefix"],
@@ -3369,7 +3376,7 @@ export const AFFIXES: AffixData[] = [
   {
     creature: ["prefix"],
     location: ["prefix"],
-    name: "leper",
+    name: "leprous",
   },
   {
     artifact: ["suffix"],
@@ -3419,6 +3426,11 @@ export const AFFIXES: AffixData[] = [
     artifact: ["prefix"],
     creature: ["prefix"],
     name: "limp",
+  },
+  {
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    name: "lithe",
   },
   {
     creature: ["prefix"],
@@ -3531,8 +3543,15 @@ export const AFFIXES: AffixData[] = [
   },
   {
     artifact: ["prefix"],
+    creature: ["prefix"],
+    location: ["prefix"],
+    name: "magical",
+  },
+  {
+    artifact: ["prefix"],
     location: ["prefix"],
     name: "makeshift",
+    tags: ["lowQuality"],
   },
   {
     artifact: ["suffix"],
@@ -3601,6 +3620,10 @@ export const AFFIXES: AffixData[] = [
     artifact: ["prefix"],
     creature: ["prefix"],
     name: "maniacal",
+  },
+  {
+    creature: ["prefix"],
+    name: "mangy",
   },
   {
     artifact: ["prefix"],
@@ -3768,6 +3791,7 @@ export const AFFIXES: AffixData[] = [
     creature: ["prefix"],
     location: ["prefix"],
     name: "molten",
+    tags: ["elemental"],
   },
   {
     artifact: ["articledSuffix"],
@@ -3904,7 +3928,7 @@ export const AFFIXES: AffixData[] = [
     artifact: ["prefix"],
     creature: ["prefix"],
     location: ["prefix"],
-    name: "mythic",
+    name: "mythical",
     tags: ["highQuality"],
   },
   {
@@ -4231,6 +4255,12 @@ export const AFFIXES: AffixData[] = [
   {
     creature: ["prefix"],
     name: "passionate",
+  },
+  {
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    name: "pasty",
+    tags: ["lowQuality"],
   },
   {
     creature: ["prefix"],
@@ -4623,6 +4653,12 @@ export const AFFIXES: AffixData[] = [
     artifact: ["prefix"],
     creature: ["prefix"],
     location: ["prefix"],
+    name: "radioactive",
+  },
+  {
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    location: ["prefix"],
     name: "ragged",
     tags: ["lowQuality"],
   },
@@ -4972,6 +5008,7 @@ export const AFFIXES: AffixData[] = [
     creature: ["prefix"],
     location: ["prefix"],
     name: "sclerotic",
+    tags: ["lowQuality"],
   },
   {
     artifact: ["suffix"],
@@ -5053,6 +5090,13 @@ export const AFFIXES: AffixData[] = [
     creature: ["suffix"],
     location: ["suffix"],
     name: "secrets",
+  },
+  {
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    location: ["prefix"],
+    name: "seeping",
+    tags: ["lowQuality"],
   },
   {
     creature: ["prefix"],
@@ -5356,6 +5400,16 @@ export const AFFIXES: AffixData[] = [
     creature: ["prefix"],
     location: ["prefix"],
     name: "smooth",
+  },
+  {
+    artifact: ["prefix"],
+    location: ["prefix"],
+    name: "snaggled",
+    tags: ["lowQuality"],
+  },
+  {
+    creature: ["prefix"],
+    name: "snaggle-toothed",
   },
   {
     creature: ["prefix"],
@@ -5856,6 +5910,16 @@ export const AFFIXES: AffixData[] = [
     tags: ["highQuality"],
   },
   {
+    artifact: ["prefix"],
+    creature: ["prefix"],
+    name: "toothless",
+    tags: ["lowQuality"],
+  },
+  {
+    creature: ["prefix"],
+    name: "toothy",
+  },
+  {
     artifact: ["suffix"],
     creature: ["suffix"],
     location: ["suffix"],
@@ -5885,7 +5949,6 @@ export const AFFIXES: AffixData[] = [
   },
   {
     artifact: ["prefix"],
-    creature: ["prefix"],
     location: ["prefix"],
     name: "traditional",
   },

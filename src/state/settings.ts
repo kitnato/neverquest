@@ -7,6 +7,7 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 export const allowProfanity = withStateKey("allowProfanity", (key) =>
   atom({
+    // TODO - turn off for v1.0.0
     default: true,
     effects: [handleLocalStorage({ isSetting: true, key })],
     key,
@@ -30,14 +31,6 @@ export const lowHealthWarning = withStateKey("lowHealthWarning", (key) =>
 );
 
 export const showDamagePerSecond = withStateKey("showDamagePerSecond", (key) =>
-  atom({
-    default: false,
-    effects: [handleLocalStorage({ isSetting: true, key })],
-    key,
-  }),
-);
-
-export const showEssenceRequired = withStateKey("showEssenceRequired", (key) =>
   atom({
     default: false,
     effects: [handleLocalStorage({ isSetting: true, key })],

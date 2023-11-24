@@ -22,7 +22,6 @@ import {
   autoEquip,
   lowHealthWarning,
   showDamagePerSecond,
-  showEssenceRequired,
   showGearComparison,
   showGearLevel,
 } from "@neverquest/state/settings";
@@ -76,11 +75,6 @@ export function Settings() {
               <SettingsSwitch label="Show gear comparisons" state={showGearComparison} />
 
               <SettingsSwitch label="Show gear level" state={showGearLevel} />
-
-              <SettingsSwitch
-                label="Show attribute point essence progress"
-                state={showEssenceRequired}
-              />
 
               <SettingsSwitch label="Allow profanity" state={allowProfanity} />
 

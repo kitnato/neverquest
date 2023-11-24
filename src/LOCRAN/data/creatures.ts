@@ -30,9 +30,6 @@ export const CREATURES: BaseData[] = [
     name: "alligator",
   },
   {
-    name: "altruist",
-  },
-  {
     name: "amoeba",
   },
   {
@@ -241,6 +238,9 @@ export const CREATURES: BaseData[] = [
     name: "cephalopod",
   },
   {
+    name: "chad",
+  },
+  {
     name: "chameleon",
   },
   {
@@ -310,6 +310,7 @@ export const CREATURES: BaseData[] = [
     name: "crackhead",
   },
   {
+    isProfanity: true,
     name: "cripple",
   },
   {
@@ -711,6 +712,9 @@ export const CREATURES: BaseData[] = [
     name: "lemon",
   },
   {
+    name: "leper",
+  },
+  {
     name: "leviathan",
   },
   {
@@ -749,9 +753,6 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "maiden",
-  },
-  {
-    name: "man",
   },
   {
     name: "mancubus",
@@ -1112,6 +1113,9 @@ export const CREATURES: BaseData[] = [
     name: "slime",
   },
   {
+    name: "slob",
+  },
+  {
     isProfanity: true,
     name: "slut",
   },
@@ -1354,9 +1358,6 @@ export const CREATURES: BaseData[] = [
   },
   {
     name: "wizard",
-  },
-  {
-    name: "woman",
   },
   {
     name: "worg",

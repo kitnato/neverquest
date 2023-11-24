@@ -19,7 +19,7 @@ export function SetGearLevel({
   const maximumWeaponLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, LEVEL_MAXIMUM);
 
   return (
-    <IconDisplay Icon={IconGearLevel} iconProps={{ overlayPlacement: "left" }} tooltip="Level">
+    <IconDisplay Icon={IconGearLevel} iconProps={{ overlayPlacement: "left" }} tooltip="Gear level">
       <FormControl
         max={maximumWeaponLevel}
         min={1}

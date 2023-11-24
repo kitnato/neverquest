@@ -59,7 +59,7 @@ export function AttackRate() {
     delta: "attackRate",
     format: "time",
     state: attackRate,
-    stop: ({ current, previous }) => (previous ?? 0) - current < 10,
+    stop: ({ current, previous }) => Math.abs((previous ?? 0) - current) < 1,
   });
 
   if (!isShowingAttackRate) {
@@ -103,10 +103,10 @@ export function AttackRate() {
                         {`-${formatNumber({
                           decimals: 0,
                           format: "percentage",
-                          value: attributePowerBonusSpeed,
+                          value: attributeStatisticSpeed,
                         })}`}
 
-                        {attributeStatisticSpeed > 0 && (
+                        {attributePowerBonusSpeed > 0 && (
                           <>
                             <span>{LABEL_SEPARATOR}</span>
 
@@ -114,7 +114,7 @@ export function AttackRate() {
 
                             {`+${formatNumber({
                               format: "percentage",
-                              value: attributeStatisticSpeed,
+                              value: attributePowerBonusSpeed,
                             })}`}
                           </>
                         )}

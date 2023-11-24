@@ -16,7 +16,6 @@ import {
   isAttributeAtMaximum,
   isAttributeUnlocked,
 } from "@neverquest/state/attributes";
-import { isStageCompleted, isStageStarted, location } from "@neverquest/state/encounter";
 import type { Attribute } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
@@ -24,15 +23,10 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
   const isAttributeUnlockedValue = useRecoilValue(isAttributeUnlocked(attribute));
   const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable);
   const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(attribute));
-  const isStageCompletedValue = useRecoilValue(isStageCompleted);
-  const isStageStartedValue = useRecoilValue(isStageStarted);
-  const locationValue = useRecoilValue(location);
 
   const increaseAttribute = useIncreaseAttribute();
 
   const { description, Icon } = ATTRIBUTES[attribute];
-  const isUnsafe = isStageStartedValue && !isStageCompletedValue && locationValue === "wilderness";
-  const canIncrease = areAttributesAffordableValue && !isUnsafe;
   const name = capitalizeAll(attribute);
 
   if (isAttributeUnlockedValue) {
@@ -54,24 +48,21 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
                   <PopoverBody>
                     <Stack gap={1}>
                       <AttributeIncreaseDetails attribute={attribute} />
-
-                      {!areAttributesAffordableValue && "No attribute points."}
-
-                      {isUnsafe && "Cannot concentrate."}
                     </Stack>
                   </PopoverBody>
                 </Popover>
               }
+              placement="bottom"
             >
               <span>
                 <Button
-                  disabled={!canIncrease}
+                  disabled={!areAttributesAffordableValue}
                   onClick={() => {
                     increaseAttribute(attribute);
                   }}
                   variant="outline-dark"
                 >
-                  <IconImage Icon={canIncrease ? IconIncrease : IconWait} />
+                  <IconImage Icon={areAttributesAffordableValue ? IconIncrease : IconWait} />
                 </Button>
               </span>
             </OverlayTrigger>

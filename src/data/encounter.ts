@@ -8,7 +8,7 @@ export const NAME_STRUCTURE: Record<NameStructure, number> = {
 };
 
 export const PROGRESS = {
-  maximum: 30,
+  maximum: 50,
   minimum: 3,
 };
 

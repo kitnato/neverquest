@@ -147,7 +147,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         description: "Restores all health.",
         name: "bandages",
-        price: 50,
+        price: 40,
         weight: 1,
       },
     },
@@ -213,19 +213,20 @@ export const INHERITABLE_ITEMS = ["knapsack", "journal", ...INFUSABLE_TYPES] as 
 export const KNAPSACK_CAPACITY = 12;
 
 export const GEM_BASE = {
-  price: 10,
+  price: 50,
   weight: 1,
 };
 export const GEM_DAMAGE = [0.1, 0.2, 0.4, 0.7, 1];
-export const GEM_DURATION = [500, 800, 1300, 2000, 3000];
+export const GEM_DROP_CHANCE = 0.5;
+export const GEM_DURATION = [1000, 1200, 1500, 1900, 2400];
 export const GEM_ELEMENTALS: Record<Gem, Elemental> = {
   ruby: "fire",
   sapphire: "ice",
   topaz: "lightning",
 };
 export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
-export const GEM_FITTING_COST = [20, 40, 100, 200, 500];
-export const GEMS_MAXIMUM = 5;
+export const GEM_FITTING_COST = [10, 30, 70, 150, 300];
+export const GEMS_MAXIMUM = GEM_DAMAGE.length;
 
 export const INFUSABLES: Record<
   Infusable,
@@ -299,11 +300,11 @@ export const SHIELD_SPECIFICATIONS: Record<
 > = {
   medium: {
     block: [
-      { maximum: 0.3, minimum: 0.25 },
-      { maximum: 0.45, minimum: 0.43 },
+      { maximum: 0.28, minimum: 0.26 },
+      { maximum: 0.4, minimum: 0.38 },
     ],
     Icon: IconShieldMedium,
-    price: { maximum: 4500, minimum: 4 },
+    price: { maximum: 4000, minimum: 4 },
     stagger: [
       { maximum: 0.22, minimum: 0.2 },
       { maximum: 0.35, minimum: 0.3 },
@@ -319,11 +320,11 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   small: {
     block: [
-      { maximum: 0.2, minimum: 0.15 },
-      { maximum: 0.35, minimum: 0.33 },
+      { maximum: 0.12, minimum: 0.1 },
+      { maximum: 0.25, minimum: 0.2 },
     ],
     Icon: IconShieldSmall,
-    price: { maximum: 2500, minimum: 2 },
+    price: { maximum: 2000, minimum: 2 },
     stagger: undefined,
     staminaCost: [
       { maximum: 2, minimum: 1 },
@@ -337,10 +338,10 @@ export const SHIELD_SPECIFICATIONS: Record<
   tower: {
     block: [
       { maximum: 0.45, minimum: 0.4 },
-      { maximum: 0.7, minimum: 0.65 },
+      { maximum: 0.6, minimum: 0.57 },
     ],
     Icon: IconShieldTower,
-    price: { maximum: 6000, minimum: 7 },
+    price: { maximum: 5500, minimum: 7 },
     stagger: [
       { maximum: 0.32, minimum: 0.3 },
       { maximum: 0.55, minimum: 0.5 },
@@ -463,7 +464,7 @@ export const WEAPON_BASE: GearBase & {
     { maximum: 12, minimum: 11 },
     { maximum: 1000, minimum: 950 },
   ],
-  price: { maximum: 9000, minimum: 1 },
+  price: { maximum: 7000, minimum: 1 },
   range: [
     { maximum: 4000, minimum: 3500 },
     { maximum: 7000, minimum: 6800 },

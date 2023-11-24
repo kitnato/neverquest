@@ -770,7 +770,7 @@ Default: off.
 
 Toggles the generation of not-safe-for-work words when generating [monster](#monster), [wilderness](#wilderness) and [item](#item) names.
 
-Default: on.
+Default: off.
 
 ### Show everything
 

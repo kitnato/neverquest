@@ -14,7 +14,7 @@ export function GemDescription({ name }: { name: Gem }) {
         <IconImage Icon={Icon} isSmall />
         <span className={color}>{elemental}</span>
       </Stack>{" "}
-      effect to a weapon, shield, or armor.
+      effect to a weapon, shield or armor.
     </span>
   );
 }

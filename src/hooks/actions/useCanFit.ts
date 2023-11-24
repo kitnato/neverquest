@@ -9,7 +9,7 @@ export function useCanFit() {
       (weight: number) => {
         const get = getSnapshotGetter(snapshot);
 
-        return get(encumbrance) + weight <= get(encumbranceMaximum);
+        return weight === 0 || get(encumbrance) + weight <= get(encumbranceMaximum);
       },
     [],
   );

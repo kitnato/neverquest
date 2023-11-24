@@ -1,7 +1,13 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { RETIREMENT_MINIMUM_LEVEL } from "@neverquest/data/general";
-import { DROP_CHANCES, ELEMENTALS, INFUSABLES, TRINKETS } from "@neverquest/data/inventory";
+import {
+  DROP_CHANCES,
+  ELEMENTALS,
+  GEM_DROP_CHANCE,
+  INFUSABLES,
+  TRINKETS,
+} from "@neverquest/data/inventory";
 import {
   BLIGHT,
   BOSS_STAGE_INTERVAL,
@@ -14,7 +20,13 @@ import {
 } from "@neverquest/data/monster";
 import { AILMENT_PENALTY, BLEED } from "@neverquest/data/statistics";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { encounter, isStageStarted, progress, stage } from "@neverquest/state/encounter";
+import {
+  encounter,
+  isStageStarted,
+  progress,
+  stage,
+  stageMaximum,
+} from "@neverquest/state/encounter";
 import { range, shield, totalElementalEffects, weapon } from "@neverquest/state/gear";
 import { ownedItem } from "@neverquest/state/inventory";
 import { infusablePower } from "@neverquest/state/items";
@@ -271,7 +283,10 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
 
       const encounterValue = get(encounter);
       const stageValue = get(stage);
+      const stageMaximumValue = get(stageMaximum);
+
       const factor = getGrowthTriangular(stageValue) / attenuation;
+      const maximumGems = 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL);
 
       const hasMysteriousEggDropped =
         stageValue >= RETIREMENT_MINIMUM_LEVEL &&
@@ -294,7 +309,11 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
         ),
         gems:
           encounterValue === "boss"
-            ? 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL)
+            ? stageValue < stageMaximumValue
+              ? Array.from({ length: maximumGems })
+                  .map(() => (Math.random() <= GEM_DROP_CHANCE ? 1 : 0))
+                  .reduce<number>((aggregated, current) => aggregated + current, 0)
+              : maximumGems
             : 0,
         trinket: hasMysteriousEggDropped
           ? INFUSABLES["mysterious egg"].item

@@ -50,7 +50,7 @@ export const ESSENCE = {
 };
 
 export const MONSTER_ATTACK_RATE = {
-  base: 3700,
+  base: 4000,
   bonus: 0.01,
   boss: 1.15,
   finality: 777,

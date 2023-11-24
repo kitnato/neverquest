@@ -78,7 +78,7 @@ export const ATTRIBUTES: Record<
   },
   strength: {
     base: 0,
-    description: "Increases attack damage.",
+    description: "Increases damage.",
     Icon: IconStrength,
     increment: 2,
     isUnlocked: true,

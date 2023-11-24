@@ -160,9 +160,9 @@ export const QUESTS: Record<
   },
   deciding: {
     description: `Decide to ${LABEL_UNKNOWN}`,
-    hidden: " keep grinding.",
+    hidden: "keep grinding.",
     progression: [1],
-    title: "Parable of Stanley",
+    title: "Parable of Stanislav",
   },
   decipheringJournal: {
     description: "Decipher the journal.",

@@ -9,19 +9,18 @@ import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconBleedRating from "@neverquest/icons/bleed-rating.svg?react";
 import IconBleed from "@neverquest/icons/bleed.svg?react";
+import IconBleeding from "@neverquest/icons/bleeding.svg?react";
 import IconCruelty from "@neverquest/icons/cruelty.svg?react";
 import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import { bleed, bleedingDeltaLength } from "@neverquest/state/monster";
+import { bleed } from "@neverquest/state/monster";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import { bleedChance, bleedDamage, bleedRating, damage } from "@neverquest/state/statistics";
+import { bleedChance, bleedRating, damage } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function BleedRating() {
-  const { duration, ticks } = useRecoilValue(bleed);
+  const { duration } = useRecoilValue(bleed);
   const bleedChanceValue = useRecoilValue(bleedChance);
-  const bleedDamageValue = useRecoilValue(bleedDamage);
-  const bleedingDeltaLengthValue = useRecoilValue(bleedingDeltaLength);
   const bleedRatingValue = useRecoilValue(bleedRating);
   const damageValue = useRecoilValue(damage);
   const crueltyValue = useRecoilValue(masteryStatistic("cruelty"));
@@ -78,28 +77,20 @@ export function BleedRating() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
-
-                      <td>{formatNumber({ format: "time", value: duration })}</td>
-                    </tr>
-
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Ticks:</td>
-
-                      <td>{`${ticks} (every ${formatNumber({
-                        format: "time",
-                        value: bleedingDeltaLengthValue,
-                      })})`}</td>
-                    </tr>
-
-                    <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>Bleed damage:</td>
 
-                      <td>{`${formatNumber({
-                        value: damageValue * crueltyValue,
-                      })} (${formatNumber({
-                        value: bleedDamageValue,
-                      })} per tick)`}</td>
+                      <td>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage Icon={IconBleeding} isSmall />
+
+                          {`${formatNumber({
+                            value: damageValue * crueltyValue,
+                          })} over ${formatNumber({
+                            format: "time",
+                            value: duration,
+                          })}`}
+                        </Stack>
+                      </td>
                     </tr>
                   </DetailsTable>
                 </PopoverBody>

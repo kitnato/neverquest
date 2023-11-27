@@ -42,7 +42,7 @@ export function ItemName({
       placement={placement}
     >
       <span style={{ width: "max-content" }}>{`${displayName}${
-        stack !== undefined && stack > 1 ? ` x${formatNumber({ value: stack })}` : ""
+        stack !== undefined && stack > 1 ? ` ×${formatNumber({ value: stack })}` : ""
       }`}</span>
     </OverlayTrigger>
   );

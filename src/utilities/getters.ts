@@ -8,6 +8,7 @@ import {
   CLASS_ANIMATED,
   CLASS_ANIMATE_PREFIX,
   GROWTH_MAXIMUM,
+  MILLISECONDS_IN_SECOND,
   RETIREMENT_MINIMUM_LEVEL,
   ROMAN_NUMERALS,
   ROMAN_NUMERAL_MAXIMUM,
@@ -89,7 +90,7 @@ export function getDamagePerRate({
   const regular = damage * (1 - damageModifierChance);
   const critical = damage * damageModifierChance * damageModifier;
 
-  return (regular + critical) / (rate / 1000);
+  return (regular + critical) / (rate / MILLISECONDS_IN_SECOND);
 }
 
 export function getDamagePerTick({

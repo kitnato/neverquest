@@ -14,10 +14,12 @@ import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react"
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import { ownedItem } from "@neverquest/state/inventory";
+import { infusablePower } from "@neverquest/state/items";
 import type { Attribute } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }) {
+  const infusablePowerTomeOfPower = useRecoilValue(infusablePower("tome of power"));
   const hasTomeOfPower = Boolean(useRecoilValue(ownedItem("tome of power")));
 
   const { increment, powerBonus } = ATTRIBUTES[attribute];
@@ -40,9 +42,7 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
         <IconImage Icon={Icon} isSmall />
 
         {`${operand}${
-          increment < 1
-            ? formatNumber({ decimals: 0, format: "percentage", value: increment })
-            : increment
+          increment < 1 ? formatNumber({ format: "percentage", value: increment }) : increment
         }`}
       </Stack>
 
@@ -50,7 +50,10 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
         <Stack className="justify-content-center" direction="horizontal" gap={1}>
           <IconImage Icon={IconTomeOfPower} isSmall />
 
-          {`+${formatNumber({ format: "percentage", value: powerBonus })}`}
+          {`+${formatNumber({
+            format: "percentage",
+            value: powerBonus * (1 + infusablePowerTomeOfPower),
+          })}`}
         </Stack>
       )}
     </>

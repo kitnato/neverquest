@@ -14,16 +14,21 @@ import IconParry from "@neverquest/icons/parry.svg?react";
 import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import { parry, parryAbsorption, parryDamage, parryRating } from "@neverquest/state/statistics";
+import {
+  parryAbsorption,
+  parryChance,
+  parryDamage,
+  parryRating,
+} from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function ParryRating() {
+  const escrimeValue = useRecoilValue(isSkillAcquired("escrime"));
   const finesseValue = useRecoilValue(masteryStatistic("finesse"));
-  const parryValue = useRecoilValue(parry);
   const parryAbsorptionValue = useRecoilValue(parryAbsorption);
+  const parryChanceValue = useRecoilValue(parryChance);
   const parryDamageValue = useRecoilValue(parryDamage);
   const parryRatingValue = useRecoilValue(parryRating);
-  const escrimeValue = useRecoilValue(isSkillAcquired("escrime"));
   const { gearClass } = useRecoilValue(weapon);
 
   const isEmpty = !escrimeValue || gearClass !== "slashing" || parryRatingValue === 0;
@@ -52,7 +57,7 @@ export function ParryRating() {
                         <Stack direction="horizontal" gap={1}>
                           <IconImage Icon={IconParry} isSmall />
 
-                          {formatNumber({ format: "percentage", value: parryValue })}
+                          {formatNumber({ format: "percentage", value: parryChanceValue })}
                         </Stack>
                       </td>
                     </tr>

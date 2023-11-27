@@ -1,6 +1,5 @@
 import { useRecoilCallback } from "recoil";
 
-import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { attackDuration, isAttacking } from "@neverquest/state/character";
 import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
@@ -20,7 +19,6 @@ import { isTraitAcquired } from "@neverquest/state/traits";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleAttacking() {
-  const changeHealth = useChangeHealth();
   const changeMonsterHealth = useChangeMonsterHealth();
 
   return useRecoilCallback(
@@ -73,6 +71,6 @@ export function useToggleAttacking() {
           set(monsterAttackDuration, get(monsterAttackRate));
         }
       },
-    [changeHealth, changeMonsterHealth],
+    [changeMonsterHealth],
   );
 }

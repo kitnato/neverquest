@@ -33,8 +33,14 @@ select {
   cursor: pointer;
 }
 
-small:empty {
-  display: none;
+small {
+  small {
+    font-size: inherit;
+  }
+
+  &:empty {
+    display: none;
+  }
 }
 
 svg {

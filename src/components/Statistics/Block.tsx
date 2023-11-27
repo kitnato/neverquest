@@ -32,7 +32,7 @@ export function Block() {
 
   if (!isEmpty) {
     return (
-      <IconDisplay Icon={IconBlock} isAnimated tooltip="Block chance">
+      <IconDisplay Icon={IconBlock} isAnimated tooltip="Total block chance">
         <Stack direction="horizontal" gap={1}>
           <span>{formatNumber({ format: "percentage", value: blockChanceValue })}</span>
 

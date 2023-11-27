@@ -156,7 +156,7 @@ export function useAttack() {
 
             monsterDeltas.push({
               color: "text-muted",
-              value: "BLEED",
+              value: "BLEEDING",
             });
           }
 

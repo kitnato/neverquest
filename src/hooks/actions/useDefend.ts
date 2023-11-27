@@ -35,8 +35,8 @@ import {
   blockChance,
   deflection,
   dodgeChance,
-  parry,
   parryAbsorption,
+  parryChance,
   parryDamage,
   protection,
   recoveryRate,
@@ -127,7 +127,7 @@ export function useDefend() {
           }
         }
 
-        const hasParried = Math.random() <= get(parry);
+        const hasParried = Math.random() <= get(parryChance);
         const hasBlocked = !hasParried && Math.random() <= get(blockChance);
         const thornsValue = get(thorns);
         const hasInflictedThorns = !hasBlocked && thornsValue > 0;
@@ -146,7 +146,7 @@ export function useDefend() {
           if (get(canAttackOrParry)) {
             set(isShowing("monsterAilments"), true);
 
-            const parryReflected = -Math.round(monsterDamageAilingValue * get(parryDamage));
+            const parryReflected = Math.round(monsterDamageAilingValue * get(parryDamage));
 
             healthDamage -= Math.round(healthDamage * get(parryAbsorption));
             monsterHealthDamage += parryReflected;
@@ -160,7 +160,7 @@ export function useDefend() {
               },
               {
                 color: "text-danger",
-                value: `(${parryReflected})`,
+                value: `(-${parryReflected})`,
               },
             );
 
@@ -236,9 +236,10 @@ export function useDefend() {
 
             progressQuest({ quest: "exhausting" });
           }
-        } else {
-          // If neither dodged, parried nor blocked, show damage with protection and increase resilience.
+        }
 
+        // If neither dodged, parried nor blocked, show damage with protection and increase resilience.
+        if (!hasBlocked && !hasParried) {
           deltaHealth.push({
             color: "text-danger",
             value: healthDamage,
@@ -265,7 +266,7 @@ export function useDefend() {
 
             deltaStamina.push({
               color: "text-success",
-              value: "DEFLECTED BLIGHT",
+              value: "DEFLECTED",
             });
           } else {
             progressQuest({ quest: "blighting" });
@@ -285,8 +286,8 @@ export function useDefend() {
             progressQuest({ quest: "deflecting" });
 
             deltaHealth.push({
-              color: "text-muted",
-              value: "DEFLECTED POISON",
+              color: "text-success",
+              value: "DEFLECTED",
             });
           } else {
             progressQuest({ quest: "poisoning" });

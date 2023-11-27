@@ -46,7 +46,7 @@ export const MASTERIES: Record<
     base: 3,
     description: "Affects stun length.",
     Icon: IconMight,
-    increment: 1, // maximum: 51
+    increment: 1, // maximum: 54
     instructions: "Trains when dealing damage with a blunt weapon.",
   },
   resilience: {
@@ -60,7 +60,7 @@ export const MASTERIES: Record<
     base: 1500,
     description: "Affects stagger duration.",
     Icon: IconStability,
-    increment: 40, // maximum: 3500
+    increment: 50, // maximum: 4000
     instructions: "Trains when blocking.",
   },
 };

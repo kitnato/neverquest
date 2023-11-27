@@ -3,12 +3,12 @@ import type { MonsterAilmentElemental } from "@neverquest/types/unions";
 export const AILMENT_PENALTY = {
   burning: 1.25,
   shocked: 0.75,
-  staggered: 0.5,
+  staggered: 0.4,
   stunned: 0.5,
 };
 
 export const BLEED = {
-  default: { duration: 5000, ticks: 250 },
+  default: { duration: 5000, ticks: 40 },
   shredder: { duration: 100, ticks: 1 },
 };
 

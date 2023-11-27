@@ -1,3 +1,4 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { SkillDisplay } from "@neverquest/components/Skills/SkillDisplay";
@@ -10,8 +11,10 @@ export function Skills() {
   return Object.values(trainedSkillsValue).every((current) => !current) ? (
     <span className="fst-italic">None.</span>
   ) : (
-    SKILL_TYPES.map((current) =>
-      trainedSkillsValue[current] ? <SkillDisplay key={current} skill={current} /> : undefined,
-    )
+    <Stack gap={3}>
+      {SKILL_TYPES.map((current) =>
+        trainedSkillsValue[current] ? <SkillDisplay key={current} skill={current} /> : undefined,
+      )}
+    </Stack>
   );
 }

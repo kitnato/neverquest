@@ -14,7 +14,7 @@ import {
   monsterAttackDuration,
 } from "@neverquest/state/monster";
 
-export function MonsterAttack() {
+export function MonsterAttackRate() {
   const hasMonsterClosedValue = useRecoilValue(hasMonsterClosed);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);

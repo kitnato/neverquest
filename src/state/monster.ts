@@ -77,10 +77,10 @@ export const blightChance = withStateKey("blightChance", (key) =>
         boss,
         chance: { maximum, minimum },
         finality,
-        stageRequired,
+        requiredStage,
       } = BLIGHT;
 
-      if (stageValue < stageRequired) {
+      if (stageValue < requiredStage) {
         return 0;
       }
 
@@ -90,7 +90,7 @@ export const blightChance = withStateKey("blightChance", (key) =>
 
       return (
         getFromRange({
-          factor: getGrowthSigmoid(getLinearMapping({ offset: stageRequired, stage: stageValue })),
+          factor: getGrowthSigmoid(getLinearMapping({ offset: requiredStage, stage: stageValue })),
           maximum,
           minimum,
         }) * (encounterValue === "boss" ? boss : 1)
@@ -340,10 +340,10 @@ export const poisonChance = withStateKey("poisonChance", (key) =>
         boss,
         chance: { maximum, minimum },
         finality,
-        stageRequired,
+        requiredStage,
       } = POISON;
 
-      if (stageValue < stageRequired) {
+      if (stageValue < requiredStage) {
         return 0;
       }
 
@@ -353,7 +353,7 @@ export const poisonChance = withStateKey("poisonChance", (key) =>
 
       return (
         getFromRange({
-          factor: getGrowthSigmoid(getLinearMapping({ offset: stageRequired, stage: stageValue })),
+          factor: getGrowthSigmoid(getLinearMapping({ offset: requiredStage, stage: stageValue })),
           maximum,
           minimum,
         }) * (encounterValue === "boss" ? boss : 1)
@@ -368,13 +368,13 @@ export const poisonLength = withStateKey("poisonLength", (key) =>
     get: ({ get }) => {
       const {
         duration: { maximum, minimum },
-        stageRequired,
+        requiredStage,
       } = POISON;
 
       return getFromRange({
         factor: getGrowthSigmoid(
           getLinearMapping({
-            offset: stageRequired,
+            offset: requiredStage,
             stage: get(stage),
           }),
         ),
@@ -391,13 +391,13 @@ export const poisonMagnitude = withStateKey("poisonMagnitude", (key) =>
     get: ({ get }) => {
       const {
         magnitude: { maximum, minimum },
-        stageRequired,
+        requiredStage,
       } = POISON;
 
       return getFromRange({
         factor: getGrowthSigmoid(
           getLinearMapping({
-            offset: stageRequired,
+            offset: requiredStage,
             stage: get(stage),
           }),
         ),

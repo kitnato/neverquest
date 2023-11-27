@@ -225,8 +225,8 @@ export const TAILORING_EXPANSION = {
   knapsack: 3,
 };
 export const TAILORING_PRICE_MAXIMUM = {
-  ammunitionPouch: 300,
-  knapsack: 500,
+  ammunitionPouch: 200,
+  knapsack: 340,
 };
 
 export const TRANSMUTE_COST = 3;

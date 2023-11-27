@@ -1,6 +1,7 @@
 import { useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
+import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { attackDuration, canAttackOrParry } from "@neverquest/state/character";
 import { attackRate } from "@neverquest/state/statistics";
 
@@ -17,7 +18,7 @@ export function AttackMeter() {
       value={
         ((attackDurationValue === 0 ? 0 : attackRateValue - attackDurationValue) /
           attackRateValue) *
-        100
+        PERCENTAGE_POINTS
       }
       variant="secondary"
     >

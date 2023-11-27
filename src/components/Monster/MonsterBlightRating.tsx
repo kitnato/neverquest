@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY, LABEL_MAXIMUM } from "@neverquest/data/general";
 import IconBlight from "@neverquest/icons/blight.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { blightChance } from "@neverquest/state/monster";
@@ -39,9 +39,11 @@ export function MonsterBlightRating() {
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
+                        {-formatNumber({ value: blightAmountValue })}
+
                         <IconImage Icon={IconStamina} isSmall />
 
-                        {`-${formatNumber({ value: blightAmountValue })} cumulative`}
+                        {LABEL_MAXIMUM}
                       </Stack>
                     </td>
                   </tr>

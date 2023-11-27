@@ -3,7 +3,11 @@ export const CLASS_ANIMATED = `${CLASS_ANIMATE_PREFIX}animated`;
 export const CLASS_FULL_WIDTH_JUSTIFIED = "align-items-center d-flex justify-content-between w-100";
 export const CLASS_TABLE_CELL_ITALIC = "fst-italic text-end";
 
-export const FRAMERATE = 1000 / 60;
+export const MILLISECONDS_IN_HOUR = 3_600_000;
+export const MILLISECONDS_IN_MINUTE = 60_000;
+export const MILLISECONDS_IN_SECOND = 1000;
+
+export const FRAMERATE = MILLISECONDS_IN_SECOND / 60;
 
 export const GROWTH_MAXIMUM = 100;
 
@@ -26,9 +30,7 @@ export const LABEL_UNKNOWN = "???";
 
 export const LEVEL_MAXIMUM = 100;
 
-export const MILLISECONDS_IN_HOUR = 3_600_000;
-export const MILLISECONDS_IN_MINUTE = 60_000;
-export const MILLISECONDS_IN_SECOND = 1000;
+export const PERCENTAGE_POINTS = 100;
 
 export const QUEST_NOTIFICATION_DURATION = 5000;
 

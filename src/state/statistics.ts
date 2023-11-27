@@ -1,5 +1,6 @@
 import { selector } from "recoil";
 
+import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import {
   AILMENT_PENALTY,
@@ -67,7 +68,7 @@ export const bleedDamage = withStateKey("bleedDamage", (key) =>
 
 export const bleedRating = withStateKey("bleedRating", (key) =>
   selector({
-    get: ({ get }) => Math.round(get(bleedDamage) * get(bleedChance) * 100),
+    get: ({ get }) => Math.round(get(bleedDamage) * get(bleedChance) * PERCENTAGE_POINTS),
     key,
   }),
 );
@@ -99,7 +100,7 @@ export const criticalDamage = withStateKey("criticalDamage", (key) =>
 
 export const criticalRating = withStateKey("criticalRating", (key) =>
   selector({
-    get: ({ get }) => Math.round(get(criticalChance) * get(criticalDamage) * 1000),
+    get: ({ get }) => Math.round(get(criticalChance) * PERCENTAGE_POINTS * get(criticalDamage)),
     key,
   }),
 );
@@ -191,7 +192,7 @@ export const parryAbsorption = withStateKey("parryAbsorption", (key) =>
   }),
 );
 
-export const parry = withStateKey("parryChance", (key) =>
+export const parryChance = withStateKey("parryChance", (key) =>
   selector({
     get: ({ get }) => {
       const { abilityChance, gearClass } = get(weapon);
@@ -211,7 +212,14 @@ export const parryDamage = withStateKey("parryDamage", (key) =>
 
 export const parryRating = withStateKey("parryRating", (key) =>
   selector({
-    get: ({ get }) => Math.round(get(parry) * get(parryAbsorption) * get(parryDamage) * 1000),
+    get: ({ get }) =>
+      Math.round(
+        get(parryChance) *
+          PERCENTAGE_POINTS *
+          get(parryAbsorption) *
+          PERCENTAGE_POINTS *
+          get(parryDamage),
+      ),
     key,
   }),
 );

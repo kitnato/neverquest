@@ -16,7 +16,7 @@ import {
 import { bleedDamage } from "@neverquest/state/statistics";
 
 export function MonsterBleeding() {
-  const bleedValue = useRecoilValue(bleed);
+  const { duration } = useRecoilValue(bleed);
   const bleedDamageValue = useRecoilValue(bleedDamage);
   const canReceiveBleeding = useRecoilValue(canReceiveAilment("bleeding"));
   const isMonsterBleedingValue = useRecoilValue(isMonsterAiling("bleeding"));
@@ -32,16 +32,6 @@ export function MonsterBleeding() {
     onDelta: () => {
       changeMonsterHealth({
         damageType: "bleed",
-        delta: [
-          {
-            color: "text-muted",
-            value: "BLEEDING",
-          },
-          {
-            color: "text-danger",
-            value: `-${bleedDamageValue}`,
-          },
-        ],
         value: -bleedDamageValue,
       });
 
@@ -59,7 +49,7 @@ export function MonsterBleeding() {
   if (canReceiveBleeding) {
     return (
       <IconDisplay Icon={IconBleeding} tooltip="Bleeding">
-        <MonsterAilmentMeter ailment="bleeding" totalDuration={bleedValue.duration} />
+        <MonsterAilmentMeter ailment="bleeding" totalDuration={duration} />
       </IconDisplay>
     );
   }

@@ -138,7 +138,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         description: "Cures poison.",
         name: "antidote",
-        price: 150,
+        price: 120,
         weight: 5,
       },
     },
@@ -156,7 +156,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         description: "Restores all stamina.",
         name: "elixir",
-        price: 80,
+        price: 25,
         weight: 2,
       },
     },
@@ -174,7 +174,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
       item: {
         description: "Cures blight.",
         name: "salve",
-        price: 25,
+        price: 80,
         weight: 3,
       },
     },
@@ -356,7 +356,7 @@ export const SHIELD_SPECIFICATIONS: Record<
     ],
     weight: [
       { maximum: 8, minimum: 5 },
-      { maximum: 60, minimum: 55 },
+      { maximum: 65, minimum: 60 },
     ],
   },
 };
@@ -471,15 +471,15 @@ export const WEAPON_BASE: GearBase & {
   ],
   rate: [
     { maximum: 2700, minimum: 2500 },
-    { maximum: 700, minimum: 600 },
+    { maximum: 800, minimum: 700 },
   ],
   staminaCost: [
     { maximum: 2, minimum: 1 },
-    { maximum: 70, minimum: 65 },
+    { maximum: 60, minimum: 55 },
   ],
   weight: [
     { maximum: 2, minimum: 1 },
-    { maximum: 80, minimum: 75 },
+    { maximum: 75, minimum: 70 },
   ],
 };
 
@@ -522,8 +522,8 @@ export const WEAPON_SPECIFICATIONS: Record<
   blunt: {
     ability: "stun",
     abilityChance: [
-      { maximum: 0.25, minimum: 0.2 },
-      { maximum: 0.7, minimum: 0.68 },
+      { maximum: 0.2, minimum: 0.15 },
+      { maximum: 0.5, minimum: 0.48 },
     ],
     IconAbility: IconStun,
     IconGearClass: IconBlunt,
@@ -540,8 +540,8 @@ export const WEAPON_SPECIFICATIONS: Record<
   slashing: {
     ability: "parry",
     abilityChance: [
-      { maximum: 0.3, minimum: 0.25 },
-      { maximum: 0.5, minimum: 0.47 },
+      { maximum: 0.23, minimum: 0.2 },
+      { maximum: 0.4, minimum: 0.38 },
     ],
     IconAbility: IconParry,
     IconGearClass: IconSlashing,

@@ -4,7 +4,7 @@ import { useRecoilState, useResetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterAilments } from "@neverquest/components/Monster/MonsterAilments";
-import { MonsterAttack } from "@neverquest/components/Monster/MonsterAttack";
+import { MonsterAttackRate } from "@neverquest/components/Monster/MonsterAttackRate";
 import { MonsterDistance } from "@neverquest/components/Monster/MonsterDistance";
 import { MonsterHealthMeter } from "@neverquest/components/Monster/MonsterHealthMeter";
 import { MonsterName } from "@neverquest/components/Monster/MonsterName";
@@ -56,7 +56,7 @@ export function Monster() {
               <MonsterHealthMeter />
             </IconDisplay>
 
-            <MonsterAttack />
+            <MonsterAttackRate />
 
             <MonsterOffense />
           </Stack>

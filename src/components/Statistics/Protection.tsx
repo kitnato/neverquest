@@ -81,7 +81,7 @@ export function Protection() {
             }
             trigger={showDetails ? ["hover", "focus"] : []}
           >
-            <span>{protectionValue}</span>
+            <span>{formatNumber({ value: protectionValue })}</span>
           </OverlayTrigger>
 
           <DeltasDisplay delta="protection" />

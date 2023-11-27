@@ -17,15 +17,22 @@ import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import { criticalRating, criticalStrike } from "@neverquest/state/statistics";
+import {
+  criticalChance,
+  criticalDamage,
+  criticalRating,
+  criticalStrike,
+} from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function CriticalRating() {
-  const dexterityPowerBonus = useRecoilValue(attributePowerBonus("dexterity"));
-  const perceptionPowerBonus = useRecoilValue(attributePowerBonus("perception"));
-  const dexterity = useRecoilValue(attributeStatistic("dexterity"));
-  const perception = useRecoilValue(attributeStatistic("perception"));
+  const attributePowerBonusDexterity = useRecoilValue(attributePowerBonus("dexterity"));
+  const attributePowerBonusPerception = useRecoilValue(attributePowerBonus("perception"));
+  const attributeStatisticDexterity = useRecoilValue(attributeStatistic("dexterity"));
+  const attributeStatisticPerception = useRecoilValue(attributeStatistic("perception"));
   const criticalRatingValue = useRecoilValue(criticalRating);
+  const criticalChanceValue = useRecoilValue(criticalChance);
+  const criticalDamageValue = useRecoilValue(criticalDamage);
   const criticalStrikeValue = useRecoilValue(criticalStrike);
   const isShowingCriticalRating = useRecoilValue(isShowing("criticalRating"));
   const assassinationValue = useRecoilValue(isSkillAcquired("assassination"));
@@ -62,10 +69,10 @@ export function CriticalRating() {
                           {`${formatNumber({
                             decimals: 0,
                             format: "percentage",
-                            value: dexterity,
+                            value: attributeStatisticDexterity,
                           })} chance`}
 
-                          {dexterityPowerBonus > 0 && (
+                          {attributePowerBonusDexterity > 0 && (
                             <>
                               <span>{LABEL_SEPARATOR}</span>
 
@@ -73,7 +80,7 @@ export function CriticalRating() {
 
                               {`+${formatNumber({
                                 format: "percentage",
-                                value: dexterityPowerBonus,
+                                value: criticalChanceValue - attributeStatisticDexterity,
                               })}`}
                             </>
                           )}
@@ -96,10 +103,10 @@ export function CriticalRating() {
                           {`${formatNumber({
                             decimals: 0,
                             format: "percentage",
-                            value: perception,
+                            value: attributeStatisticPerception,
                           })} damage`}
 
-                          {perceptionPowerBonus > 0 && (
+                          {attributePowerBonusPerception > 0 && (
                             <>
                               <span>{LABEL_SEPARATOR}</span>
 
@@ -107,7 +114,7 @@ export function CriticalRating() {
 
                               {`+${formatNumber({
                                 format: "percentage",
-                                value: perceptionPowerBonus,
+                                value: criticalDamageValue - attributeStatisticPerception,
                               })}`}
                             </>
                           )}
@@ -116,7 +123,7 @@ export function CriticalRating() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Critical damage:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>Critical strike damage:</td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>

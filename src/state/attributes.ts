@@ -52,15 +52,8 @@ export const attributePowerBonus = withStateKey("attributePowerBonus", (key) =>
   selectorFamily<number, Attribute>({
     get:
       (parameter) =>
-      ({ get }) => {
-        const infusablePowerTomeOfPower = get(infusablePower("tome of power"));
-
-        return (
-          get(level) *
-          ATTRIBUTES[parameter].powerBonus *
-          (infusablePowerTomeOfPower === 0 ? 0 : 1 + infusablePowerTomeOfPower)
-        );
-      },
+      ({ get }) =>
+        get(level) * ATTRIBUTES[parameter].powerBonus * (1 + get(infusablePower("tome of power"))),
     key,
   }),
 );

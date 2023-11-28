@@ -39,7 +39,7 @@ export function WeaponOptions() {
 
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
   const [weaponGrip, setWeaponGrip] = useState<Grip>("one-handed");
-  const [weaponLevel, setWeaponLevel] = useState(stageValue);
+  const [weaponLevel, setWeaponLevel] = useState(Math.min(stageValue, LEVEL_MAXIMUM));
 
   const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[weaponClass];
 
@@ -56,7 +56,7 @@ export function WeaponOptions() {
   return (
     <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
-        <SetGearLevel state={[weaponLevel, setWeaponLevel]} />
+        <SetGearLevel maximum={maximumWeaponLevel} state={[weaponLevel, setWeaponLevel]} />
 
         <IconDisplay Icon={IconGearClass} iconProps={{ overlayPlacement: "left" }} tooltip="Class">
           <FormSelect
@@ -151,7 +151,7 @@ export function WeaponOptions() {
                 level: weaponLevel,
                 nameStructure: getNameStructure(),
                 prefixTags:
-                  weaponLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
+                  weaponLevel <= maximumWeaponLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
                     ? ["lowQuality"]
                     : weaponLevel === maximumWeaponLevel
                       ? ["highQuality"]

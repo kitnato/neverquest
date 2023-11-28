@@ -91,7 +91,6 @@ export function ParryRating() {
                       </td>
 
                       <td>{`+${formatNumber({
-                        decimals: 0,
                         format: "percentage",
                         value: finesseValue,
                       })}`}</td>

@@ -62,6 +62,10 @@ export function formatNumber({
       return Math.round(value).toLocaleString();
     }
 
+    case "multiplier": {
+      return `×${formatFloat({ decimals, value: value + 1 })}`;
+    }
+
     case "time": {
       const absoluteValue = Math.abs(value);
       const hours = Math.floor(absoluteValue / MILLISECONDS_IN_HOUR);

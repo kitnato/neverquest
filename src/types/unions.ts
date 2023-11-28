@@ -146,7 +146,13 @@ export const MONSTER_AILMENT_TYPES = [
 
 export type MonsterAilment = (typeof MONSTER_AILMENT_TYPES)[number];
 
-export type NumberFormat = "abbreviated" | "float" | "integer" | "percentage" | "time";
+export type NumberFormat =
+  | "abbreviated"
+  | "float"
+  | "integer"
+  | "multiplier"
+  | "percentage"
+  | "time";
 
 export type Quest = Conquest | Routine | Triumph;
 
@@ -271,6 +277,7 @@ export type StateKey =
   | "areAttributesAffordable"
   | "attackDuration"
   | "attackRate"
+  | "attackRateReduction"
   | "attributePointCost"
   | "attributePoints"
   | "attributePowerBonus"
@@ -417,7 +424,7 @@ export type StateKey =
   | "regenerationDuration"
   | "regenerationRate"
   | "reserveRegenerationAmount"
-  | "reserveRegenerationRate"
+  | "reserveRegenerationRateReduction"
   | "selectedTrait"
   | "showDamagePerSecond"
   | "showEssenceRequired"

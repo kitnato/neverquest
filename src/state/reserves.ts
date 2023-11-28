@@ -122,7 +122,7 @@ export const regenerationRate = withStateKey("regenerationRate", (key) =>
         const { baseRegenerationRate } = RESERVES[parameter];
 
         return Math.round(
-          baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRate),
+          baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRateReduction),
         );
       },
     key,
@@ -139,11 +139,13 @@ export const reserveRegenerationAmount = withStateKey("reserveRegenerationAmount
   }),
 );
 
-export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (key) =>
-  selector({
-    get: ({ get }) => get(attributeStatistic("vigor")) * (1 + get(attributePowerBonus("vigor"))),
-    key,
-  }),
+export const reserveRegenerationRateReduction = withStateKey(
+  "reserveRegenerationRateReduction",
+  (key) =>
+    selector({
+      get: ({ get }) => get(attributeStatistic("vigor")) * (1 + get(attributePowerBonus("vigor"))),
+      key,
+    }),
 );
 
 export const staminaMaximum = withStateKey("staminaMaximum", (key) =>

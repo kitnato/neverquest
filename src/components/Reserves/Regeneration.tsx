@@ -25,6 +25,7 @@ import {
   isStaminaAtMaximum,
   regenerationDuration,
   regenerationRate,
+  reserveRegenerationRateReduction,
 } from "@neverquest/state/reserves";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Reserve } from "@neverquest/types/unions";
@@ -50,6 +51,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
   const isRegeneratingValue = useRecoilValue(isRegenerating(reserve));
   const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve));
   const regenerationRateValue = useRecoilValue(regenerateRateState);
+  const reserveRegenerationRateReductionValue = useRecoilValue(reserveRegenerationRateReduction);
   const calisthenicsValue = useRecoilValue(isSkillAcquired("calisthenics"));
 
   const {
@@ -120,7 +122,6 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                   <td>
                     <Stack direction="horizontal" gap={1}>
                       {`-${formatNumber({
-                        decimals: 0,
                         format: "percentage",
                         value: attributeStatisticVigor,
                       })}`}
@@ -131,9 +132,9 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                           <IconImage Icon={IconTomeOfPower} isSmall />
 
-                          {`+${formatNumber({
+                          {`-${formatNumber({
                             format: "percentage",
-                            value: attributePowerBonusVigor,
+                            value: reserveRegenerationRateReductionValue - attributeStatisticVigor,
                           })}`}
                         </>
                       )}
@@ -171,10 +172,10 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                           <IconImage Icon={IconTomeOfPower} isSmall />
 
-                          {`+${formatNumber({
-                            format: "percentage",
+                          {formatNumber({
+                            format: "multiplier",
                             value: attributePowerBonusFortitude,
-                          })}`}
+                          })}
                         </>
                       )}
                     </Stack>

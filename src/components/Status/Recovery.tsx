@@ -65,7 +65,6 @@ export function Recovery() {
                     </td>
 
                     <td>{`-${formatNumber({
-                      decimals: 0,
                       format: "percentage",
                       value: resilienceValue,
                     })}`}</td>

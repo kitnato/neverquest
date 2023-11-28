@@ -26,10 +26,11 @@ import {
 import { weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMonsterDead } from "@neverquest/state/monster";
-import { attackRate } from "@neverquest/state/statistics";
+import { attackRate, attackRateReduction } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function AttackRate() {
+  const attackRateReductionValue = useRecoilValue(attackRateReduction);
   const attributePowerBonusSpeed = useRecoilValue(attributePowerBonus("speed"));
   const attributeStatisticSpeed = useRecoilValue(attributeStatistic("speed"));
   const canAttackOrParryValue = useRecoilValue(canAttackOrParry);
@@ -101,7 +102,6 @@ export function AttackRate() {
                     <td>
                       <Stack direction="horizontal" gap={1}>
                         {`-${formatNumber({
-                          decimals: 0,
                           format: "percentage",
                           value: attributeStatisticSpeed,
                         })}`}
@@ -112,9 +112,9 @@ export function AttackRate() {
 
                             <IconImage Icon={IconTomeOfPower} isSmall />
 
-                            {`+${formatNumber({
+                            {`-${formatNumber({
                               format: "percentage",
-                              value: attributePowerBonusSpeed,
+                              value: attackRateReductionValue - attributeStatisticSpeed,
                             })}`}
                           </>
                         )}

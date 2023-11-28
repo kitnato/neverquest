@@ -31,9 +31,14 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 export const attackRate = withStateKey("attackRate", (key) =>
   selector({
-    get: ({ get }) =>
-      get(weapon).rate *
-      (1 - get(attributeStatistic("speed")) * (1 + get(attributePowerBonus("speed")))),
+    get: ({ get }) => get(weapon).rate * (1 - get(attackRateReduction)),
+    key,
+  }),
+);
+
+export const attackRateReduction = withStateKey("attackRateReduction", (key) =>
+  selector({
+    get: ({ get }) => get(attributeStatistic("speed")) * (1 + get(attributePowerBonus("speed"))),
     key,
   }),
 );

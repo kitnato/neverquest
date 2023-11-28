@@ -1,27 +1,21 @@
 import type { Dispatch, SetStateAction } from "react";
 import { FormControl } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
-import { LEVEL_MAXIMUM } from "@neverquest/data/general";
 import IconGearLevel from "@neverquest/icons/gear-level.svg?react";
-import { stage } from "@neverquest/state/encounter";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function SetGearLevel({
+  maximum,
   state: [gearLevel, setGearLevel],
 }: {
+  maximum: number;
   state: [number, Dispatch<SetStateAction<number>>];
 }) {
-  const stageValue = useRecoilValue(stage);
-
-  const maximumWeaponLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, LEVEL_MAXIMUM);
-
   return (
     <IconDisplay Icon={IconGearLevel} iconProps={{ overlayPlacement: "left" }} tooltip="Gear level">
       <FormControl
-        max={maximumWeaponLevel}
+        max={maximum}
         min={1}
         onChange={({ target: { value } }) => {
           if (!value) {
@@ -30,7 +24,7 @@ export function SetGearLevel({
 
           const parsedValue = Number.parseInt(value);
 
-          if (Number.isNaN(parsedValue) || parsedValue < 1 || parsedValue > maximumWeaponLevel) {
+          if (Number.isNaN(parsedValue) || parsedValue < 1 || parsedValue > maximum) {
             return;
           }
 

@@ -92,7 +92,7 @@ export const ATTRIBUTES: Record<
     increment: 0.0225,
     isUnlocked: false,
     maximum: 40, // 0.9
-    powerBonus: 0.005,
+    powerBonus: 0.002,
   },
   vitality: {
     base: RESERVES.health.baseAmount,

@@ -79,10 +79,10 @@ export function Health() {
 
                                 <IconImage Icon={IconTomeOfPower} isSmall />
 
-                                {`+${formatNumber({
-                                  format: "percentage",
+                                {formatNumber({
+                                  format: "multiplier",
                                   value: attributePowerBonusVitality,
-                                })}`}
+                                })}
                               </>
                             )}
                           </Stack>

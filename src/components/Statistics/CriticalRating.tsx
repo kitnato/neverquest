@@ -67,7 +67,6 @@ export function CriticalRating() {
                           <IconImage Icon={IconCriticalChance} isSmall />
 
                           {`${formatNumber({
-                            decimals: 0,
                             format: "percentage",
                             value: attributeStatisticDexterity,
                           })} chance`}

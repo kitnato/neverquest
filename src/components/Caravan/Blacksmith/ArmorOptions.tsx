@@ -39,7 +39,7 @@ export function ArmorOptions() {
   const stageValue = useRecoilValue(stage);
 
   const [armorClass, setArmorClass] = useState<ArmorClass>("light");
-  const [armorLevel, setArmorLevel] = useState(stageValue);
+  const [armorLevel, setArmorLevel] = useState(Math.min(stageValue, LEVEL_MAXIMUM));
 
   const progressQuest = useProgressQuest();
 
@@ -53,7 +53,7 @@ export function ArmorOptions() {
   return (
     <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
-        <SetGearLevel state={[armorLevel, setArmorLevel]} />
+        <SetGearLevel maximum={maximumArmorLevel} state={[armorLevel, setArmorLevel]} />
 
         <IconDisplay
           Icon={ARMOR_SPECIFICATIONS[armorClass].Icon}
@@ -135,7 +135,7 @@ export function ArmorOptions() {
                 level: armorLevel,
                 nameStructure: getNameStructure(),
                 prefixTags:
-                  armorLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
+                  armorLevel <= maximumArmorLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
                     ? ["lowQuality"]
                     : armorLevel === maximumArmorLevel
                       ? ["highQuality"]

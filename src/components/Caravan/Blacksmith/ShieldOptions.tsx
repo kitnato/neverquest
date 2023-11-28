@@ -35,7 +35,7 @@ export function ShieldOptions() {
   const stageValue = useRecoilValue(stage);
 
   const [shieldClass, setShieldClass] = useState<ShieldClass>("small");
-  const [shieldLevel, setShieldLevel] = useState(stageValue);
+  const [shieldLevel, setShieldLevel] = useState(Math.min(stageValue, LEVEL_MAXIMUM));
 
   const factor = getGrowthSigmoid(shieldLevel);
   const maximumShieldLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, LEVEL_MAXIMUM);
@@ -47,7 +47,7 @@ export function ShieldOptions() {
   return (
     <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
-        <SetGearLevel state={[shieldLevel, setShieldLevel]} />
+        <SetGearLevel maximum={maximumShieldLevel} state={[shieldLevel, setShieldLevel]} />
 
         <IconDisplay
           Icon={SHIELD_SPECIFICATIONS[shieldClass].Icon}
@@ -124,7 +124,7 @@ export function ShieldOptions() {
                 level: shieldLevel,
                 nameStructure: getNameStructure(),
                 prefixTags:
-                  shieldLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
+                  shieldLevel <= maximumShieldLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
                     ? ["lowQuality"]
                     : shieldLevel === maximumShieldLevel
                       ? ["highQuality"]

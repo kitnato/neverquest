@@ -94,10 +94,10 @@ export function Damage() {
 
                             <IconImage Icon={IconTomeOfPower} isSmall />
 
-                            {`+${formatNumber({
-                              format: "percentage",
+                            {formatNumber({
+                              format: "multiplier",
                               value: attributePowerBonusStrength,
-                            })}`}
+                            })}
                           </>
                         )}
                       </Stack>

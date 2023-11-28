@@ -27,6 +27,8 @@ export function MonsterBleeding() {
 
   const changeMonsterHealth = useChangeMonsterHealth();
 
+  const hasStoppedBleeding = !isMonsterBleedingValue || isMonsterDeadValue;
+
   useAnimate({
     delta: setMonsterBleedingDelta,
     onDelta: () => {
@@ -37,13 +39,13 @@ export function MonsterBleeding() {
 
       resetMonsterBleedingDelta();
     },
-    stop: !isMonsterBleedingValue || isMonsterDeadValue,
+    stop: hasStoppedBleeding,
   });
 
   useAnimate({
     delta: setMonsterBleedingDuration,
     onDelta: resetMonsterBleedingDelta,
-    stop: !isMonsterBleedingValue,
+    stop: hasStoppedBleeding,
   });
 
   if (canReceiveBleeding) {

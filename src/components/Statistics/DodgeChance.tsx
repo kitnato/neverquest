@@ -67,7 +67,6 @@ export function DodgeChance() {
                       <td>
                         <Stack direction="horizontal" gap={1}>
                           {`${formatNumber({
-                            decimals: 0,
                             format: "percentage",
                             value: agility,
                           })}`}
@@ -78,10 +77,10 @@ export function DodgeChance() {
 
                               <IconImage Icon={IconTomeOfPower} isSmall />
 
-                              {`+${formatNumber({
-                                format: "percentage",
+                              {formatNumber({
+                                format: "multiplier",
                                 value: agilityPowerBonus,
-                              })}`}
+                              })}
                             </>
                           )}
                         </Stack>

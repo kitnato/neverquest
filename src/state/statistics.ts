@@ -167,7 +167,7 @@ export const dodgeChance = withStateKey("dodgeChance", (key) =>
         ? 0
         : get(attributeStatistic("agility")) *
           (1 + get(attributePowerBonus("agility"))) *
-          (get(isTraitAcquired("nudist")) && get(armor).name === ARMOR_NONE.name ? 2 : 1),
+          (get(isTraitAcquired("nudist")) && get(armor).ID === ARMOR_NONE.ID ? 2 : 1),
     key,
   }),
 );

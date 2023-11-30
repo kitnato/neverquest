@@ -55,14 +55,14 @@ export const MASTERIES: Record<
     description: "Affects recovery rate.",
     Icon: IconResilience,
     increment: 0.01, // maximum: 1
-    instructions: "Trains when getting hit.",
+    instructions: "Trains when getting struck.",
   },
   stability: {
     base: 1500,
     description: "Affects stagger duration.",
     Icon: IconStability,
     increment: 50, // maximum: 5500
-    instructions: "Trains when blocking.",
+    instructions: "Trains when getting struck while having a shield equipped.",
   },
 };
 

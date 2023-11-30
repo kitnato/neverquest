@@ -32,7 +32,7 @@ export function ArmorName({
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
 
   const { deflection, ID, level, name, protection, staminaCost, weight } = armor;
-  const isUnshielded = name === ARMOR_NONE.name;
+  const isUnshielded = ID === ARMOR_NONE.ID;
   const showComparison = ID !== armorEquippedValue.ID;
 
   return (

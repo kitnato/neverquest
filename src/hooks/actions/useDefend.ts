@@ -1,5 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
+import { SHIELD_NONE } from "@neverquest/data/inventory";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
@@ -128,6 +129,7 @@ export function useDefend() {
           }
         }
 
+        const { ID: shieldID, staminaCost: shieldStaminaCost } = get(shield);
         const hasParried = Math.random() <= get(parryChance);
         const hasBlocked = !hasParried && Math.random() <= get(blockChance);
         const thornsValue = get(thorns);
@@ -193,8 +195,6 @@ export function useDefend() {
 
         // If not parried and blocking occurs, check & apply stamina cost.
         if (hasBlocked) {
-          const shieldStaminaCost = get(shield).staminaCost;
-
           if (get(canBlock)) {
             healthDamage = 0;
 
@@ -206,8 +206,6 @@ export function useDefend() {
             });
 
             changeStamina({ value: -shieldStaminaCost });
-
-            increaseMastery("stability");
 
             if (Math.random() <= get(staggerChance)) {
               set(isShowing("monsterAilments"), true);
@@ -237,6 +235,10 @@ export function useDefend() {
 
             progressQuest({ quest: "exhausting" });
           }
+        }
+
+        if (shieldID !== SHIELD_NONE.ID) {
+          increaseMastery("stability");
         }
 
         // If neither dodged, parried nor blocked, show damage with protection and increase resilience.

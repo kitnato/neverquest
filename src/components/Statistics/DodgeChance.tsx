@@ -29,7 +29,7 @@ import { isTraitAcquired } from "@neverquest/state/traits";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function DodgeChance() {
-  const { name, staminaCost } = useRecoilValue(armor);
+  const { ID, staminaCost } = useRecoilValue(armor);
   const agilityPowerBonus = useRecoilValue(attributePowerBonus("agility"));
   const agility = useRecoilValue(attributeStatistic("agility"));
   const dodgeChanceValue = useRecoilValue(dodgeChance);
@@ -87,7 +87,7 @@ export function DodgeChance() {
                       </td>
                     </tr>
 
-                    {isTraitAcquiredNudist && name === ARMOR_NONE.name && (
+                    {isTraitAcquiredNudist && ID === ARMOR_NONE.ID && (
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
                           <Stack direction="horizontal" gap={1}>

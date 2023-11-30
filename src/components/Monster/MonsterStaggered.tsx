@@ -14,14 +14,14 @@ import {
 
 export function MonsterStaggered() {
   const canBeStaggered = useRecoilValue(canReceiveAilment("staggered"));
-  const isMonsterStaggeredValue = useRecoilValue(isMonsterAiling("staggered"));
+  const isMonsterStaggered = useRecoilValue(isMonsterAiling("staggered"));
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const stabilityValue = useRecoilValue(masteryStatistic("stability"));
   const setMonsterStaggerDuration = useSetRecoilState(monsterAilmentDuration("staggered"));
 
   useAnimate({
     delta: setMonsterStaggerDuration,
-    stop: !isMonsterStaggeredValue || isMonsterDeadValue,
+    stop: !isMonsterStaggered || isMonsterDeadValue,
   });
 
   if (canBeStaggered) {

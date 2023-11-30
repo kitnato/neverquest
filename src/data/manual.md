@@ -632,11 +632,11 @@ Requires the [anatomy](#anatomy) skill.
 
 #### Burning
 
-Inflicted by fire [elemental](#elemental-damage) damage. When burning, damage taken is increased.
+Inflicted by fire [elemental](#elemental-damage) damage. When burning, the monster cannot regenerate.
 
 #### Frozen
 
-Inflicted by ice [elemental](#elemental-damage) damage. When frozen, attack rate is reduced.
+Inflicted by ice [elemental](#elemental-damage) damage. When frozen, attack rate and movement speed (time to close [distance](#range)) is slowed.
 
 #### Shocked
 
@@ -644,7 +644,7 @@ Inflicted by lightning [elemental](#elemental-damage) damage. When shocked, dama
 
 #### Stagger
 
-When staggered, the monster's attack rate and movement speed (time to close [distance](#range)) is slowed. The extent of this is determined by the [stagger rating](#stagger-rating).
+When staggered, the monster takes more damage from all sources. The extent of this is determined by the [stagger rating](#stagger-rating).
 
 Requires the [shieldcraft](#shieldcraft) skill.
 

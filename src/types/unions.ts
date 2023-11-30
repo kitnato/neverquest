@@ -461,7 +461,6 @@ export const TRAIT_TYPES = [
   "shredder",
   "stalwart",
   "tank",
-  "tormentor",
 ] as const;
 export type Trait = (typeof TRAIT_TYPES)[number];
 

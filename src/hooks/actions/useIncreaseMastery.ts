@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { MASTERY_RANK_MAXIMUM } from "@neverquest/data/masteries";
+import { LEVEL_MAXIMUM } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import {
   isMasteryAtMaximum,
@@ -44,7 +44,7 @@ export function useIncreaseMastery() {
 
           progressQuest({ quest: "masteriesRank" });
 
-          if (newRank === MASTERY_RANK_MAXIMUM) {
+          if (newRank === LEVEL_MAXIMUM) {
             progressQuest({ quest: "masteriesRankMaximum" });
           }
         }

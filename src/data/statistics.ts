@@ -1,9 +1,9 @@
 import type { MonsterAilmentElemental } from "@neverquest/types/unions";
 
 export const AILMENT_PENALTY = {
-  burning: 1.25,
+  frozen: 0.4,
   shocked: 0.75,
-  staggered: 0.4,
+  staggered: 1.25,
   stunned: 0.5,
 };
 
@@ -13,8 +13,8 @@ export const BLEED = {
 };
 
 export const ELEMENTAL_AILMENT_DURATION_MAXIMUM: Record<MonsterAilmentElemental, number> = {
-  burning: 4000,
-  frozen: 2500,
+  burning: 10_000,
+  frozen: 3500,
   shocked: 5000,
 };
 

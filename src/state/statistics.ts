@@ -2,12 +2,7 @@ import { selector } from "recoil";
 
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
-import {
-  AILMENT_PENALTY,
-  PARRY_ABSORPTION,
-  PARRY_DAMAGE,
-  RECOVERY_RATE,
-} from "@neverquest/data/statistics";
+import { PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/statistics";
 import { BRUISER_STUN_CHANCE } from "@neverquest/data/traits";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import {
@@ -18,7 +13,7 @@ import {
   weapon,
 } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import { bleed, isMonsterAiling } from "@neverquest/state/monster";
+import { bleed } from "@neverquest/state/monster";
 import { questsBonus } from "@neverquest/state/quests";
 import { stamina } from "@neverquest/state/reserves";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -64,7 +59,7 @@ export const bleedDamage = withStateKey("bleedDamage", (key) =>
           damage: get(damage) * get(masteryStatistic("cruelty")),
           duration,
           ticks,
-        }) * (get(isMonsterAiling("burning")) ? AILMENT_PENALTY.burning : 1),
+        }),
       );
     },
     key,

@@ -5,22 +5,22 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 
 export const AILMENT_DESCRIPTION: Record<MonsterAilment, string> = {
   bleeding: "Suffering periodic damage.",
-  burning: `Taking ${formatNumber({
+  burning: "Cannot regenerate.",
+  frozen: `Attack rate & movement speed slowed by ${formatNumber({
     decimals: 0,
     format: "percentage",
-    value: 1 - AILMENT_PENALTY.burning,
-  })} increased damage.`,
-  frozen: "Cannot attack or move.",
+    value: 1 - AILMENT_PENALTY.frozen,
+  })}.`,
   shocked: `Dealing ${formatNumber({
     decimals: 0,
     format: "percentage",
     value: 1 - AILMENT_PENALTY.shocked,
   })} decreased damage.`,
-  staggered: `Attack rate & movement slowed by ${formatNumber({
+  staggered: `Taking ${formatNumber({
     decimals: 0,
     format: "percentage",
     value: 1 - AILMENT_PENALTY.staggered,
-  })}.`,
+  })} increased damage.`,
   stunned: `Hit chance reduced to ${formatNumber({
     decimals: 0,
     format: "percentage",

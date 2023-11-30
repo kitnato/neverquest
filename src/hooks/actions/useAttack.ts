@@ -1,6 +1,5 @@
 import { useRecoilCallback } from "recoil";
 
-import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
@@ -20,7 +19,6 @@ import { masteryStatistic } from "@neverquest/state/masteries";
 import {
   bleed,
   distance,
-  isMonsterAiling,
   monsterAilmentDuration,
   monsterElement,
   monsterHealth,
@@ -142,10 +140,6 @@ export function useAttack() {
             return;
           }
 
-          const inflictedDamage = -Math.round(
-            (hasInflictedCritical ? get(criticalStrike) : get(damage)) *
-              (get(isMonsterAiling("burning")) ? AILMENT_PENALTY.burning : 1),
-          );
           const monsterDeltas: DeltaDisplay[] = [];
 
           if (get(monsterAilmentDuration("bleeding")) === 0 && Math.random() <= get(bleedChance)) {
@@ -188,7 +182,7 @@ export function useAttack() {
           changeMonsterHealth({
             damageType: hasInflictedCritical ? "critical" : undefined,
             delta: monsterDeltas,
-            value: inflictedDamage,
+            value: -Math.round(hasInflictedCritical ? get(criticalStrike) : get(damage)),
           });
         } else {
           addDelta({

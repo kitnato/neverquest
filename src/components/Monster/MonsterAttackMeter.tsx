@@ -12,12 +12,12 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 export function MonsterAttackMeter() {
   const monsterAttackDurationValue = useRecoilValue(monsterAttackDuration);
   const monsterAttackRateValue = useRecoilValue(monsterAttackRate);
-  const isMonsterStaggered = useRecoilValue(isMonsterAiling("staggered"));
+  const isMonsterFrozen = useRecoilValue(isMonsterAiling("frozen"));
 
   return (
     <LabelledProgressBar
       disableTransitions
-      isStriped={isMonsterStaggered}
+      isStriped={isMonsterFrozen}
       value={
         ((monsterAttackDurationValue === 0
           ? 0

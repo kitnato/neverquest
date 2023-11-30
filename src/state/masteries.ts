@@ -1,6 +1,7 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
-import { MASTERIES, MASTERY_COST_BASE, MASTERY_RANK_MAXIMUM } from "@neverquest/data/masteries";
+import { LEVEL_MAXIMUM } from "@neverquest/data/general";
+import { MASTERIES, MASTERY_COST_BASE } from "@neverquest/data/masteries";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { MASTERY_TYPES, type Mastery } from "@neverquest/types/unions";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
@@ -13,7 +14,7 @@ export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
     get:
       (parameter) =>
       ({ get }) =>
-        get(masteryRank(parameter)) === MASTERY_RANK_MAXIMUM,
+        get(masteryRank(parameter)) === LEVEL_MAXIMUM,
     key,
   }),
 );

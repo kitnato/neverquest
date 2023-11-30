@@ -11,11 +11,8 @@ import {
   monsterAilmentDuration,
   monsterAttackDuration,
   monsterAttackRate,
-  monsterHealth,
-  monsterHealthMaximum,
 } from "@neverquest/state/monster";
 import { attackRate } from "@neverquest/state/statistics";
-import { isTraitAcquired } from "@neverquest/state/traits";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleAttacking() {
@@ -42,28 +39,12 @@ export function useToggleAttacking() {
           reset(attackDuration);
           reset(monsterAttackDuration);
 
-          if (!get(isMonsterDead) && !get(isTraitAcquired("tormentor"))) {
+          if (!get(isMonsterDead)) {
             reset(monsterAilmentDuration("bleeding"));
             reset(bleedingDelta);
             reset(distance);
 
-            const difference = get(monsterHealthMaximum) - get(monsterHealth);
-
-            if (difference > 0) {
-              changeMonsterHealth({
-                delta: [
-                  {
-                    color: "text-muted",
-                    value: "REGENERATE",
-                  },
-                  {
-                    color: "text-success",
-                    value: `+${difference}`,
-                  },
-                ],
-                value: difference,
-              });
-            }
+            // Regeneration is triggered in MonsterHealth.
           }
         } else {
           set(isStageStarted, true);

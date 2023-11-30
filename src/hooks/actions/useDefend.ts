@@ -73,6 +73,7 @@ export function useDefend() {
 
         // If stunned, check if hit connects and decrease its duration.
         if (get(isMonsterAiling("stunned"))) {
+          // TODO
           set(monsterAilmentDuration("stunned"), (current) => current - 1);
 
           if (Math.random() <= AILMENT_PENALTY.stunned) {

@@ -6,7 +6,7 @@ import { PurchaseItemButton } from "@neverquest/components/Caravan/PurchaseItemB
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
-import { CONSUMABLES } from "@neverquest/data/inventory";
+import { CONSUMABLES } from "@neverquest/data/items";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";

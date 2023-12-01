@@ -1,6 +1,6 @@
 import { atom, selector, selectorFamily } from "recoil";
 
-import { ENCUMBRANCE_CAPACITY } from "@neverquest/data/inventory";
+import { ENCUMBRANCE_CAPACITY } from "@neverquest/data/items";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { InventoryItem, KnapsackItem } from "@neverquest/types";

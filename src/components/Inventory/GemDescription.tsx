@@ -1,6 +1,7 @@
 import { Stack } from "react-bootstrap";
+
 import { IconImage } from "@neverquest/components/IconImage";
-import { ELEMENTALS, GEM_ELEMENTALS } from "@neverquest/data/inventory";
+import { ELEMENTALS, GEM_ELEMENTALS } from "@neverquest/data/items";
 import type { Gem } from "@neverquest/types/unions";
 
 export function GemDescription({ name }: { name: Gem }) {

@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { LABEL_UNKNOWN, RETIREMENT_MINIMUM_LEVEL } from "@neverquest/data/general";
-import { INHERITABLE_ITEMS } from "@neverquest/data/inventory";
+import { INHERITABLE_ITEMS } from "@neverquest/data/items";
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";

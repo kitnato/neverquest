@@ -1,7 +1,7 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { INFUSION_DELTA, INFUSION_DURATION } from "@neverquest/data/general";
-import { INFUSABLES, INHERITABLE_ITEMS } from "@neverquest/data/inventory";
+import { INFUSABLES, INHERITABLE_ITEMS } from "@neverquest/data/items";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { ownedItem } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";

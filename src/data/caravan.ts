@@ -1,4 +1,4 @@
-import { INFUSABLES, TRINKETS } from "@neverquest/data/inventory";
+import { INFUSABLES, TRINKETS } from "@neverquest/data/items";
 import IconAlchemist from "@neverquest/icons/alchemist.svg?react";
 import IconBlacksmith from "@neverquest/icons/blacksmith.svg?react";
 import IconFletcher from "@neverquest/icons/fletcher.svg?react";

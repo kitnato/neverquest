@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
+import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { armor, shield, weapon } from "@neverquest/state/gear";
@@ -66,12 +66,12 @@ export function useAcquireItem() {
 
           if (
             get(autoEquip) &&
-            ((get(armor).name === ARMOR_NONE.name && isArmor(item)) ||
+            ((get(armor).ID === ARMOR_NONE.ID && isArmor(item)) ||
               // Acquiring a shield while no shield equipped and not wielding a ranged or two-handed weapon (unless colossus).
               (isShieldUnequipped && isShield(item) && !isRanged(weaponValue)) ||
               get(isTraitAcquired("colossus")) ||
               // Acquiring a weapon while no weapon equipped, and if ranged or two-handed, no shield equipped.
-              (weaponValue.name === WEAPON_NONE.name &&
+              (weaponValue.ID === WEAPON_NONE.ID &&
                 ((isMelee(item) && item.grip === "one-handed") ||
                   get(isTraitAcquired("colossus")) ||
                   (((isMelee(item) && item.grip === "two-handed") ||

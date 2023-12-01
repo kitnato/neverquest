@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
-import { GEM_BASE } from "@neverquest/data/inventory";
+import { GEM_BASE } from "@neverquest/data/items";
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
 import { isAttacking } from "@neverquest/state/character";
 import { progress, progressMaximum } from "@neverquest/state/encounter";

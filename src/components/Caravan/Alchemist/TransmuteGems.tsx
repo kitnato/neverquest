@@ -8,7 +8,7 @@ import { SelectGem } from "@neverquest/components/Caravan/Alchemist/SelectGem";
 import { IconImage } from "@neverquest/components/IconImage";
 import { TRANSMUTE_COST } from "@neverquest/data/caravan";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
-import { GEM_BASE } from "@neverquest/data/inventory";
+import { GEM_BASE } from "@neverquest/data/items";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconTransmute from "@neverquest/icons/transmute.svg?react";

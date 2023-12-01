@@ -5,7 +5,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
 import { TAILORING_EXPANSION, TAILORING_PRICE_MAXIMUM } from "@neverquest/data/caravan";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/data/general";
-import { ENCUMBRANCE_CAPACITY } from "@neverquest/data/inventory";
+import { ENCUMBRANCE_CAPACITY } from "@neverquest/data/items";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";

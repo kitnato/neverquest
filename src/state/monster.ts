@@ -7,7 +7,7 @@ import {
   GEM_DROP_CHANCE,
   INFUSABLES,
   TRINKETS,
-} from "@neverquest/data/inventory";
+} from "@neverquest/data/items";
 import {
   BLIGHT,
   BOSS_STAGE_INTERVAL,

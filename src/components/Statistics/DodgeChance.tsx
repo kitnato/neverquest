@@ -6,13 +6,13 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/DodgePenaltyContents";
+import { ARMOR_NONE } from "@neverquest/data/gear";
 import {
   CLASS_TABLE_CELL_ITALIC,
   LABEL_EMPTY,
   LABEL_SEPARATOR,
   LABEL_UNKNOWN,
 } from "@neverquest/data/general";
-import { ARMOR_NONE } from "@neverquest/data/inventory";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconAgility from "@neverquest/icons/agility.svg?react";
 import IconDodgePenalty from "@neverquest/icons/dodge-penalty.svg?react";

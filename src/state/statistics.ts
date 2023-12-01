@@ -1,7 +1,7 @@
 import { selector } from "recoil";
 
+import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
-import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
 import { PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/statistics";
 import { BRUISER_STUN_CHANCE } from "@neverquest/data/traits";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";

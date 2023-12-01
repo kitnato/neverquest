@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { SHIELD_NONE } from "@neverquest/data/inventory";
+import { SHIELD_NONE } from "@neverquest/data/gear";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";

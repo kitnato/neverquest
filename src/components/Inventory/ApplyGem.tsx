@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_EMPTY } from "@neverquest/data/general";
-import { GEM_FITTING_COST } from "@neverquest/data/inventory";
+import { GEM_FITTING_COST } from "@neverquest/data/items";
 import { useApplyGem } from "@neverquest/hooks/actions/useApplyGem";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import { armor, canApplyGem, shield, weapon } from "@neverquest/state/gear";

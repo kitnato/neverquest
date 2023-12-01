@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { ELEMENTALS } from "@neverquest/data/inventory";
+import { ELEMENTALS } from "@neverquest/data/items";
 import { ELEMENTAL_AILMENT_DURATION_MAXIMUM } from "@neverquest/data/statistics";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { totalElementalEffects } from "@neverquest/state/gear";

@@ -9,8 +9,8 @@ import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/Dod
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
+import { ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
-import { ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/inventory";
 import IconDeflection from "@neverquest/icons/deflection.svg?react";
 import IconNone from "@neverquest/icons/none.svg?react";
 import IconProtection from "@neverquest/icons/protection.svg?react";

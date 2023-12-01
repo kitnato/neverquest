@@ -5,6 +5,13 @@ import { formatNumber } from "./formatters";
 import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
 import { NAME_STRUCTURE, PROGRESS_REDUCTION } from "@neverquest/data/encounter";
 import {
+  ARMOR_SPECIFICATIONS,
+  SHIELD_SPECIFICATIONS,
+  WEAPON_BASE,
+  WEAPON_MODIFIER,
+  WEAPON_SPECIFICATIONS,
+} from "@neverquest/data/gear";
+import {
   CLASS_ANIMATED,
   CLASS_ANIMATE_PREFIX,
   GROWTH_MAXIMUM,
@@ -13,14 +20,7 @@ import {
   ROMAN_NUMERALS,
   ROMAN_NUMERAL_MAXIMUM,
 } from "@neverquest/data/general";
-import {
-  ARMOR_SPECIFICATIONS,
-  GEM_BASE,
-  SHIELD_SPECIFICATIONS,
-  WEAPON_BASE,
-  WEAPON_MODIFIER,
-  WEAPON_SPECIFICATIONS,
-} from "@neverquest/data/inventory";
+import { GEM_BASE } from "@neverquest/data/items";
 import { QUESTS } from "@neverquest/data/quests";
 import type { ArmorClass, NameStructure, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type { GeneratorRange, InventoryItem, QuestData } from "@neverquest/types";

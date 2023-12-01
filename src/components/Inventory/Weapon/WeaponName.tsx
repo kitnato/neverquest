@@ -9,8 +9,8 @@ import { GearComparison } from "@neverquest/components/Inventory/GearComparison"
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Inventory/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
+import { WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
-import { WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import IconGrip from "@neverquest/icons/grip.svg?react";

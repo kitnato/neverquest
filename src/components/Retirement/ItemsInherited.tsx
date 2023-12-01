@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { Infusable } from "@neverquest/components/Inventory/Usable/Infusable";
 import { LABEL_NONE } from "@neverquest/data/general";
-import { INFUSABLES, TRINKETS } from "@neverquest/data/inventory";
+import { INFUSABLES, TRINKETS } from "@neverquest/data/items";
 import { ownsInheritableItems } from "@neverquest/state/items";
 import { isInfusable, isTrinket } from "@neverquest/types/type-guards";
 

@@ -3,7 +3,7 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 import { LABEL_NO_ESSENCE, LABEL_OVER_ENCUMBERED, LEVEL_MAXIMUM } from "@neverquest/data/general";
-import { TRINKETS } from "@neverquest/data/inventory";
+import { TRINKETS } from "@neverquest/data/items";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
 import { useInfuse } from "@neverquest/hooks/actions/useInfuse";

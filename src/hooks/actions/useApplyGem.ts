@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { GEM_FITTING_COST } from "@neverquest/data/inventory";
+import { GEM_FITTING_COST } from "@neverquest/data/items";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { armor, canApplyGem, shield, weapon } from "@neverquest/state/gear";

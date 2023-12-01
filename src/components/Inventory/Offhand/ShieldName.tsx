@@ -9,8 +9,8 @@ import { GearComparison } from "@neverquest/components/Inventory/GearComparison"
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Inventory/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
+import { SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
-import { SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/inventory";
 import IconBlock from "@neverquest/icons/block.svg?react";
 import IconNone from "@neverquest/icons/none.svg?react";
 import IconStagger from "@neverquest/icons/stagger.svg?react";

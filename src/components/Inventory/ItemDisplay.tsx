@@ -6,7 +6,7 @@ import { ArmorName } from "@neverquest/components/Inventory/Armor/ArmorName";
 import { ItemName } from "@neverquest/components/Inventory/ItemName";
 import { ShieldName } from "@neverquest/components/Inventory/Offhand/ShieldName";
 import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
-import { CONSUMABLES, INFUSABLES, TRINKETS } from "@neverquest/data/inventory";
+import { CONSUMABLES, INFUSABLES, TRINKETS } from "@neverquest/data/items";
 import IconArmor from "@neverquest/icons/armor.svg?react";
 import IconGem from "@neverquest/icons/gem.svg?react";
 import IconMelee from "@neverquest/icons/melee.svg?react";

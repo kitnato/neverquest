@@ -1,16 +1,14 @@
 import { selector, selectorFamily } from "recoil";
 
+import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import {
-  ARMOR_NONE,
   ELEMENTAL_DURATION,
   GEMS_MAXIMUM,
   GEM_DAMAGE,
   GEM_ELEMENTALS,
   GEM_ENHANCEMENT,
   GEM_FITTING_COST,
-  SHIELD_NONE,
-  WEAPON_NONE,
-} from "@neverquest/data/inventory";
+} from "@neverquest/data/items";
 import { inventory } from "@neverquest/state/inventory";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { essence } from "@neverquest/state/resources";

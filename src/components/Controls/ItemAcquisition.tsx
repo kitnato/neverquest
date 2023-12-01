@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRecoilState, useResetRecoilState } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { CONSUMABLES, TRINKETS } from "@neverquest/data/inventory";
+import { CONSUMABLES, TRINKETS } from "@neverquest/data/items";
 import IconArmor from "@neverquest/icons/armor.svg?react";
 import IconGem from "@neverquest/icons/gem.svg?react";
 import IconMelee from "@neverquest/icons/melee.svg?react";

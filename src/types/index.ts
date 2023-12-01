@@ -1,4 +1,4 @@
-import type { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
+import type { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type { SVGIcon } from "@neverquest/types/components";
 import type {

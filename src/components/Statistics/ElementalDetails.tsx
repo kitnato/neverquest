@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
-import { ELEMENTALS, GEM_ELEMENTALS } from "@neverquest/data/inventory";
+import { ELEMENTALS, GEM_ELEMENTALS } from "@neverquest/data/items";
 import { armor, totalElementalEffects, weapon } from "@neverquest/state/gear";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
 import { formatNumber } from "@neverquest/utilities/formatters";

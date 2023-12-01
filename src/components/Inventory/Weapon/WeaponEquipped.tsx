@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
-import { WEAPON_NONE } from "@neverquest/data/inventory";
+import { WEAPON_NONE } from "@neverquest/data/gear";
 import IconUnequipped from "@neverquest/icons/fist.svg?react";
 import IconMelee from "@neverquest/icons/melee.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";

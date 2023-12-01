@@ -2,7 +2,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterAilmentMeter } from "@neverquest/components/Monster/MonsterAilmentMeter";
-import { ELEMENTALS } from "@neverquest/data/inventory";
+import { ELEMENTALS } from "@neverquest/data/items";
 import { ELEMENTAL_AILMENT_DURATION_MAXIMUM } from "@neverquest/data/statistics";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { totalElementalEffects } from "@neverquest/state/gear";

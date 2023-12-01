@@ -9,7 +9,7 @@ import { InfusionLevel } from "@neverquest/components/Inventory/Usable/Infusion/
 import { InfusionProgress } from "@neverquest/components/Inventory/Usable/Infusion/InfusionProgress";
 import { EssenceBonus } from "@neverquest/components/Statistics/EssenceBonus";
 import { PowerBonusBoost } from "@neverquest/components/Statistics/PowerBonusBoost";
-import { INFUSABLES } from "@neverquest/data/inventory";
+import { INFUSABLES } from "@neverquest/data/items";
 import { canInfuseMysteriousEgg } from "@neverquest/state/inventory";
 import type { Infusable } from "@neverquest/types/unions";
 

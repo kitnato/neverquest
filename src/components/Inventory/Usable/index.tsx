@@ -10,7 +10,7 @@ export function Usable({ item }: { item: UsableItem }) {
   }
 
   if (isTrinketItem(item)) {
-    return <ItemDisplay item={item} overlayPlacement="right" />;
+    return <ItemDisplay isInInventory item={item} />;
   }
 
   return <AmmunitionPouch item={item} />;

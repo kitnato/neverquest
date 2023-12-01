@@ -14,6 +14,7 @@ import {
   isMonsterDead,
 } from "@neverquest/state/monster";
 import { isRanged } from "@neverquest/types/type-guards";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function MonsterDistance() {
   const hasMonsterClosedValue = useRecoilValue(hasMonsterClosed);
@@ -31,7 +32,11 @@ export function MonsterDistance() {
 
   if (isRanged(weaponValue)) {
     return (
-      <IconDisplay Icon={IconDistance} isAnimated tooltip="Distance">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconDistance}
+        tooltip="Distance"
+      >
         <MonsterDistanceMeter />
       </IconDisplay>
     );

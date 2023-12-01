@@ -75,7 +75,6 @@ export const QUESTS: Record<
     progression: [1, 10, 25],
     title: "Shiny",
   },
-
   acquiringRanged: {
     description: "Acquire a ranged weapon.",
     progression: [1],
@@ -422,8 +421,8 @@ export const QUESTS: Record<
     title: "The GOAT",
   },
   skillsCraft: {
-    description: `Acquire ${formatEnumeration(QUEST_REQUIREMENTS.skillsCraft)} skills.`,
-    progression: [1],
+    description: `Acquire the ${formatEnumeration(QUEST_REQUIREMENTS.skillsCraft)} skills.`,
+    progression: [3],
     title: "Warcraft",
   },
   spendingEssence: {

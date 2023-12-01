@@ -267,6 +267,7 @@ export type Skill = (typeof SKILL_TYPES)[number];
 export type StateKey =
   | Gear
   | "absorbedEssence"
+  | "acquiredSkills"
   | "acquiredTraits"
   | "activeCrew"
   | "activeQuests"
@@ -305,6 +306,7 @@ export type StateKey =
   | "canInfuseMysteriousEgg"
   | "canReceiveAilment"
   | "canReceiveAilments"
+  | "canTrainMastery"
   | "canUseJournal"
   | "completedQuestsCount"
   | "confirmationWarnings"
@@ -444,7 +446,6 @@ export type StateKey =
   | "stunRating"
   | "thorns"
   | "totalElementalEffects"
-  | "trainedSkills"
   | "trinketProperties"
   | "unlockedMasteries"
   | "wildernesses";

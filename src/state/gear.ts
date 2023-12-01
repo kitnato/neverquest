@@ -10,10 +10,9 @@ import {
   GEM_FITTING_COST,
 } from "@neverquest/data/items";
 import { inventory } from "@neverquest/state/inventory";
-import { masteryStatistic } from "@neverquest/state/masteries";
 import { essence } from "@neverquest/state/resources";
 import type { Armor, Shield, Weapon } from "@neverquest/types";
-import { isArmor, isRanged, isShield, isWeapon } from "@neverquest/types/type-guards";
+import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 import type { Gear } from "@neverquest/types/unions";
 import { getElementalEffects, getFromRange } from "@neverquest/utilities/getters";
 import { stackItems, withStateKey } from "@neverquest/utilities/helpers";
@@ -110,19 +109,6 @@ export const elementalEffects = withStateKey("elementalEffects", (key) =>
       }
 
       return effects;
-    },
-    key,
-  }),
-);
-
-export const range = withStateKey("range", (key) =>
-  selector({
-    get: ({ get }) => {
-      const weaponValue = get(weapon);
-
-      return isRanged(weaponValue)
-        ? weaponValue.range * (1 + get(masteryStatistic("marksmanship")))
-        : 0;
     },
     key,
   }),

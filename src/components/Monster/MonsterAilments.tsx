@@ -5,7 +5,7 @@ import { MonsterBleeding } from "@neverquest/components/Monster/MonsterBleeding"
 import { MonsterElementalAilment } from "@neverquest/components/Monster/MonsterElementalAilment";
 import { MonsterStaggered } from "@neverquest/components/Monster/MonsterStaggered";
 import { MonsterStunned } from "@neverquest/components/Monster/MonsterStunned";
-import { canReceiveAilments } from "@neverquest/state/monster";
+import { canReceiveAilments } from "@neverquest/state/ailments";
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
 
 export function MonsterAilments() {

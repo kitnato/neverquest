@@ -32,7 +32,7 @@ export function WeightDetail({
 
               {formatNumber({ value: weight })}
 
-              {comparison !== undefined && (
+              {comparison !== undefined && comparison !== false && (
                 <GearComparison
                   difference={weight - comparison.subtrahend}
                   isDownPositive

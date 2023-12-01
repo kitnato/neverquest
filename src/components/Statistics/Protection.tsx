@@ -19,6 +19,7 @@ import { questProgress } from "@neverquest/state/quests";
 import { protection } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Protection() {
   const armorValue = useRecoilValue(armor);
@@ -44,7 +45,11 @@ export function Protection() {
 
   if (isShowingProtection) {
     return (
-      <IconDisplay Icon={IconProtection} isAnimated tooltip="Total protection">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconProtection}
+        tooltip="Total protection"
+      >
         <Stack direction="horizontal" gap={1}>
           <OverlayTrigger
             overlay={

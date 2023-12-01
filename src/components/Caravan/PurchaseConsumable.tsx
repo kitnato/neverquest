@@ -29,7 +29,7 @@ export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-      <ItemDisplay item={itemWithID} overlayPlacement="right" />
+      <ItemDisplay item={itemWithID} />
 
       <Stack direction="horizontal" gap={3}>
         <IconDisplay Icon={IconEssence} tooltip="Price">

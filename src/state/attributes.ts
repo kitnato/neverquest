@@ -52,8 +52,13 @@ export const attributePowerBonus = withStateKey("attributePowerBonus", (key) =>
   selectorFamily<number, Attribute>({
     get:
       (parameter) =>
-      ({ get }) =>
-        get(level) * ATTRIBUTES[parameter].powerBonus * (1 + get(infusablePower("tome of power"))),
+      ({ get }) => {
+        const infusablePowerValue = get(infusablePower("tome of power"));
+
+        return infusablePowerValue === 0
+          ? 0
+          : get(level) * ATTRIBUTES[parameter].powerBonus * (1 + infusablePowerValue);
+      },
     key,
   }),
 );
@@ -77,7 +82,8 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =
     get:
       (parameter) =>
       ({ get }) =>
-        ATTRIBUTES[parameter].maximum === get(attributeRank(parameter)),
+        // Percentage-based attributes starting under 100% cannot exceed 100%.
+        ATTRIBUTES[parameter].increment < 1 && get(attributeStatistic(parameter)) >= 1,
     key,
   }),
 );
@@ -95,14 +101,6 @@ export const level = withStateKey("level", (key) =>
 export const attributeRank = withStateKey("attributeRank", (key) =>
   atomFamily<number, Attribute>({
     default: 0,
-    effects: (parameter) => [handleLocalStorage({ key, parameter })],
-    key,
-  }),
-);
-
-export const isAttributeUnlocked = withStateKey("isAttributeUnlocked", (key) =>
-  atomFamily<boolean, Attribute>({
-    default: false,
     effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),

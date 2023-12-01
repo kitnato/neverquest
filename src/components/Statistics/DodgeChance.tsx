@@ -27,6 +27,7 @@ import { isSkillAcquired } from "@neverquest/state/skills";
 import { dodgeChance } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function DodgeChance() {
   const { ID, staminaCost } = useRecoilValue(armor);
@@ -47,7 +48,11 @@ export function DodgeChance() {
 
   if (isShowingDodgeChance) {
     return (
-      <IconDisplay Icon={IconDodge} isAnimated tooltip="Dodge chance">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconDodge}
+        tooltip="Dodge chance"
+      >
         <Stack direction="horizontal" gap={1}>
           <OverlayTrigger
             overlay={

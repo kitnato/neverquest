@@ -11,6 +11,7 @@ import { isSkillAcquired } from "@neverquest/state/skills";
 import { executionThreshold } from "@neverquest/state/statistics";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function ExecutionThreshold() {
   const executionValue = useRecoilValue(executionThreshold);
@@ -32,7 +33,11 @@ export function ExecutionThreshold() {
 
   if (!isEmpty) {
     return (
-      <IconDisplay Icon={IconExecution} isAnimated tooltip="Execution threshold">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconExecution}
+        tooltip="Execution threshold"
+      >
         <Stack direction="horizontal" gap={1}>
           <span>
             {executionValue === 0

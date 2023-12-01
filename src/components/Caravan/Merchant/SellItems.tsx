@@ -45,8 +45,8 @@ export function SellItems() {
                   <Stack direction="horizontal" gap={1}>
                     <ItemDisplay
                       description={isEquipped ? "Equipped" : undefined}
+                      isInInventory
                       item={current}
-                      overlayPlacement="right"
                     />
                   </Stack>
 
@@ -60,7 +60,7 @@ export function SellItems() {
             .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
             .map((current) => (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.ID}>
-                <ItemDisplay item={current} overlayPlacement="right" />
+                <ItemDisplay isInInventory item={current} />
 
                 <SellItem item={current} />
               </div>

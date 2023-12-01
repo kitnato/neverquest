@@ -1,7 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { questProgress } from "@neverquest/state/quests";
@@ -68,7 +67,6 @@ export function useToggleEquipGear() {
 
           if (staminaCost > 0) {
             set(isShowing("stamina"), true);
-            set(isAttributeUnlocked("endurance"), true);
           }
 
           if (isWeaponRanged || isWeaponTwoHanded) {

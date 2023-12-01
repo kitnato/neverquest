@@ -5,10 +5,10 @@ import { Skills } from "@neverquest/components/Skills";
 import { TrainableSkill } from "@neverquest/components/Skills/TrainableSkill";
 import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general";
 import { SKILLS_ORDER } from "@neverquest/data/skills";
-import { trainedSkills } from "@neverquest/state/skills";
+import { acquiredSkills } from "@neverquest/state/skills";
 
 export function Mercenary() {
-  const trainedSkillsValue = useRecoilValue(trainedSkills);
+  const trainedSkillsValue = useRecoilValue(acquiredSkills);
 
   return (
     <Stack gap={5}>

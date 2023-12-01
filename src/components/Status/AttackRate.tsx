@@ -28,6 +28,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { isMonsterDead } from "@neverquest/state/monster";
 import { attackRate, attackRateReduction } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function AttackRate() {
   const attackRateReductionValue = useRecoilValue(attackRateReduction);
@@ -68,7 +69,11 @@ export function AttackRate() {
   }
 
   return (
-    <IconDisplay Icon={IconAttackRate} isAnimated tooltip="Total attack rate">
+    <IconDisplay
+      className={getAnimationClass({ name: "flipInX" })}
+      Icon={IconAttackRate}
+      tooltip="Total attack rate"
+    >
       <Stack className="w-100" direction="horizontal">
         <OverlayTrigger
           overlay={

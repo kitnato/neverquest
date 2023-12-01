@@ -21,6 +21,7 @@ import {
   parryRating,
 } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function ParryRating() {
   const escrimeValue = useRecoilValue(isSkillAcquired("escrime"));
@@ -41,7 +42,11 @@ export function ParryRating() {
 
   if (!isEmpty) {
     return (
-      <IconDisplay Icon={IconParryRating} isAnimated tooltip="Parry rating">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconParryRating}
+        tooltip="Parry rating"
+      >
         <Stack direction="horizontal" gap={1}>
           <OverlayTrigger
             overlay={

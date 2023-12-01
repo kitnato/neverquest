@@ -11,12 +11,13 @@ import IconBleedRating from "@neverquest/icons/bleed-rating.svg?react";
 import IconBleed from "@neverquest/icons/bleed.svg?react";
 import IconBleeding from "@neverquest/icons/bleeding.svg?react";
 import IconCruelty from "@neverquest/icons/cruelty.svg?react";
+import { bleed, bleedChance } from "@neverquest/state/ailments";
 import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import { bleed } from "@neverquest/state/monster";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import { bleedChance, bleedRating, damage } from "@neverquest/state/statistics";
+import { bleedRating, damage } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function BleedRating() {
   const { duration } = useRecoilValue(bleed);
@@ -37,7 +38,11 @@ export function BleedRating() {
 
   if (!isEmpty) {
     return (
-      <IconDisplay Icon={IconBleedRating} isAnimated tooltip="Bleed rating">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconBleedRating}
+        tooltip="Bleed rating"
+      >
         <Stack direction="horizontal" gap={1}>
           <OverlayTrigger
             overlay={

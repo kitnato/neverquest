@@ -15,6 +15,7 @@ import { masteryStatistic } from "@neverquest/state/masteries";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { stunRating } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function StunRating() {
   const mightValue = useRecoilValue(masteryStatistic("might"));
@@ -32,7 +33,11 @@ export function StunRating() {
 
   if (!isEmpty) {
     return (
-      <IconDisplay Icon={IconStunRating} isAnimated tooltip="Stun rating">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconStunRating}
+        tooltip="Stun rating"
+      >
         <Stack direction="horizontal" gap={1}>
           <OverlayTrigger
             overlay={

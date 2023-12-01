@@ -18,6 +18,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { questsBonus } from "@neverquest/state/quests";
 import { isPoisoned, poisonDuration } from "@neverquest/state/reserves";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Health() {
   const attributePowerBonusVitality = useRecoilValue(attributePowerBonus("vitality"));
@@ -37,7 +38,11 @@ export function Health() {
 
   if (isShowingHealth) {
     return (
-      <IconDisplay Icon={IconHealth} isAnimated tooltip="Health">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconHealth}
+        tooltip="Health"
+      >
         <Stack>
           <Stack className="w-100" direction="horizontal">
             <OverlayTrigger

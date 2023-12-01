@@ -1,5 +1,4 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
-import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -27,10 +26,10 @@ import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { getDamagePerRate } from "@neverquest/utilities/getters";
 
 export function WeaponName({
-  placement,
+  isInInventory = false,
   weapon,
 }: {
-  placement?: Placement;
+  isInInventory?: boolean;
   weapon: Weapon | typeof WEAPON_NONE;
 }) {
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
@@ -59,9 +58,7 @@ export function WeaponName({
             <DetailsTable>
               <GearLevelDetail
                 comparison={
-                  showComparison
-                    ? { showing: "weapon", subtrahend: weaponEquippedValue.level }
-                    : undefined
+                  showComparison && { showing: "weapon", subtrahend: weaponEquippedValue.level }
                 }
                 level={level}
               />
@@ -166,12 +163,10 @@ export function WeaponName({
 
               <StaminaCostDetail
                 comparison={
-                  showComparison
-                    ? {
-                        showing: "weapon",
-                        subtrahend: weaponEquippedValue.staminaCost,
-                      }
-                    : undefined
+                  showComparison && {
+                    showing: "weapon",
+                    subtrahend: weaponEquippedValue.staminaCost,
+                  }
                 }
                 cost={staminaCost}
               />
@@ -222,9 +217,7 @@ export function WeaponName({
               {!isUnarmed && (
                 <WeightDetail
                   comparison={
-                    showComparison
-                      ? { showing: "weapon", subtrahend: weaponEquippedValue.weight }
-                      : undefined
+                    showComparison && { showing: "weapon", subtrahend: weaponEquippedValue.weight }
                   }
                   weight={weight}
                 />
@@ -233,7 +226,7 @@ export function WeaponName({
           </PopoverBody>
         </Popover>
       }
-      placement={placement}
+      placement={isInInventory ? "right" : "top"}
     >
       <span>{name}</span>
     </OverlayTrigger>

@@ -16,8 +16,8 @@ export function AmmunitionPouch({ item }: { item: AmmunitionPouchItem }) {
           tooltip="Ammunition pouch"
         >{`${formatNumber({ value: current })}/${formatNumber({ value: maximum })}`}</IconDisplay>
       }
+      isInInventory
       item={item}
-      overlayPlacement="right"
     />
   );
 }

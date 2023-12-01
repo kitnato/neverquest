@@ -5,10 +5,9 @@ import { MonsterAilmentMeter } from "@neverquest/components/Monster/MonsterAilme
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import IconBleeding from "@neverquest/icons/bleeding.svg?react";
+import { bleed, canReceiveAilment } from "@neverquest/state/ailments";
 import {
-  bleed,
   bleedingDelta,
-  canReceiveAilment,
   isMonsterAiling,
   isMonsterDead,
   monsterAilmentDuration,

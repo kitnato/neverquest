@@ -23,9 +23,9 @@ export function Progress() {
   if (locationValue === "wilderness") {
     return (
       <IconDisplay
+        className="w-100"
         Icon={IconProgress}
         iconProps={{ overlayPlacement: "bottom" }}
-        isFullWidth
         tooltip="Progress"
       >
         <Stack direction="horizontal">

@@ -6,9 +6,10 @@ import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
-import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
 import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
+import { useTrainMastery } from "@neverquest/hooks/actions/useTrainMastery";
+import { staggerChance } from "@neverquest/state/ailments";
 import {
   canAttackOrParry,
   canBlock,
@@ -28,10 +29,14 @@ import {
   monsterAttackRate,
   monsterDamageAiling,
   monsterElement,
-  poisonChance,
-  poisonLength,
 } from "@neverquest/state/monster";
-import { blight, isPoisoned, poisonDuration } from "@neverquest/state/reserves";
+import {
+  blight,
+  isPoisoned,
+  poisonChance,
+  poisonDuration,
+  poisonLength,
+} from "@neverquest/state/reserves";
 import {
   blockChance,
   deflection,
@@ -41,7 +46,6 @@ import {
   parryDamage,
   protection,
   recoveryRate,
-  staggerChance,
   thorns,
 } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
@@ -55,7 +59,7 @@ export function useDefend() {
   const changeHealth = useChangeHealth();
   const changeMonsterHealth = useChangeMonsterHealth();
   const changeStamina = useChangeStamina();
-  const increaseMastery = useIncreaseMastery();
+  const trainMastery = useTrainMastery();
   const inflictElementalAilment = useInflictElementalAilment();
   const progressQuest = useProgressQuest();
 
@@ -233,7 +237,7 @@ export function useDefend() {
         }
 
         if (shieldID !== SHIELD_NONE.ID) {
-          increaseMastery("stability");
+          trainMastery("stability");
         }
 
         // If neither dodged, parried nor blocked, show damage with protection and increase resilience.
@@ -251,7 +255,7 @@ export function useDefend() {
             });
           }
 
-          increaseMastery("resilience");
+          trainMastery("resilience");
         }
 
         set(isShowing("recovery"), true);
@@ -349,6 +353,6 @@ export function useDefend() {
           set(monsterAttackDuration, get(monsterAttackRate));
         }
       },
-    [changeHealth, changeMonsterHealth, changeStamina, increaseMastery, progressQuest],
+    [changeHealth, changeMonsterHealth, changeStamina, trainMastery, progressQuest],
   );
 }

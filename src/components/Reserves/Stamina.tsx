@@ -16,6 +16,7 @@ import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attri
 import { isShowing } from "@neverquest/state/isShowing";
 import { questsBonus } from "@neverquest/state/quests";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Stamina() {
   const attributePowerBonusEndurance = useRecoilValue(attributePowerBonus("endurance"));
@@ -28,7 +29,11 @@ export function Stamina() {
 
   if (isShowingStamina) {
     return (
-      <IconDisplay Icon={IconStamina} isAnimated tooltip="Stamina">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconStamina}
+        tooltip="Stamina"
+      >
         <Stack>
           <Stack className="w-100" direction="horizontal">
             <OverlayTrigger

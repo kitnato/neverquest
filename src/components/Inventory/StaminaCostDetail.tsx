@@ -24,7 +24,7 @@ export function StaminaCostDetail({ comparison, cost }: { comparison: Comparison
 
               {formatNumber({ value: cost })}
 
-              {comparison !== undefined && (
+              {comparison !== false && (
                 <GearComparison
                   difference={cost - comparison.subtrahend}
                   isDownPositive

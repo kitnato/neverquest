@@ -21,7 +21,7 @@ import {
 } from "@neverquest/state/encounter";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { isMasteryUnlocked, masteryProgress, masteryRank } from "@neverquest/state/masteries";
+import { masteryProgress, masteryRank } from "@neverquest/state/masteries";
 import { questProgress } from "@neverquest/state/quests";
 import { essence } from "@neverquest/state/resources";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -81,7 +81,6 @@ export function useRetire() {
         reset(merchantInventory);
 
         for (const mastery of MASTERY_TYPES) {
-          reset(isMasteryUnlocked(mastery));
           reset(masteryProgress(mastery));
           reset(masteryRank(mastery));
         }

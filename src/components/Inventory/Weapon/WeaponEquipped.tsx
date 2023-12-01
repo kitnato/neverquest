@@ -9,6 +9,7 @@ import IconRanged from "@neverquest/icons/ranged.svg?react";
 import { weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMelee } from "@neverquest/types/type-guards";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function WeaponEquipped() {
   const isShowingWeapon = useRecoilValue(isShowing("weapon"));
@@ -19,9 +20,9 @@ export function WeaponEquipped() {
   if (isShowingWeapon) {
     return (
       <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
         Icon={isUnarmed ? IconUnequipped : isMelee(weaponValue) ? IconMelee : IconRanged}
         iconProps={{ isMirrored: isUnarmed }}
-        isAnimated
         tooltip="Equipped weapon"
       >
         <WeaponName weapon={weaponValue} />

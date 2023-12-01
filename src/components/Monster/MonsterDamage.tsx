@@ -5,6 +5,7 @@ import { MonsterDamagePerSecond } from "@neverquest/components/Monster/MonsterDa
 import IconMonsterDamage from "@neverquest/icons/monster-damage.svg?react";
 import { monsterDamage, monsterDamageAiling } from "@neverquest/state/monster";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function MonsterDamage() {
   const monsterDamageValue = useRecoilValue(monsterDamage);
@@ -12,9 +13,9 @@ export function MonsterDamage() {
 
   return (
     <IconDisplay
+      className={getAnimationClass({ name: "flipInX" })}
       description={<MonsterDamagePerSecond />}
       Icon={IconMonsterDamage}
-      isAnimated
       tooltip="Monster damage"
     >{`${formatNumber({ value: monsterDamageAilingValue })}${
       monsterDamageValue === monsterDamageAilingValue ? "" : ` (${monsterDamageValue})`

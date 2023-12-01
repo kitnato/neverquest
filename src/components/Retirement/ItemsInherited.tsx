@@ -23,9 +23,9 @@ export function ItemsInherited() {
         if (isTrinket(current)) {
           return (
             <ItemDisplay
+              isInInventory
               item={TRINKETS[current].item}
               key={TRINKETS[current].item.ID}
-              overlayPlacement="right"
             />
           );
         }

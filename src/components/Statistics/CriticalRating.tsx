@@ -24,6 +24,7 @@ import {
   criticalStrike,
 } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function CriticalRating() {
   const attributePowerBonusDexterity = useRecoilValue(attributePowerBonus("dexterity"));
@@ -45,7 +46,11 @@ export function CriticalRating() {
 
   if (isShowingCriticalRating) {
     return (
-      <IconDisplay Icon={IconCriticalRating} isAnimated tooltip="Critical rating">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconCriticalRating}
+        tooltip="Critical rating"
+      >
         <Stack direction="horizontal" gap={1}>
           <OverlayTrigger
             overlay={

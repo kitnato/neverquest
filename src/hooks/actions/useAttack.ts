@@ -3,9 +3,10 @@ import { useRecoilCallback } from "recoil";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
-import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
 import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
+import { useTrainMastery } from "@neverquest/hooks/actions/useTrainMastery";
+import { bleed, bleedChance, stunChance } from "@neverquest/state/ailments";
 import {
   attackDuration,
   canAttackOrParry,
@@ -17,7 +18,6 @@ import { inventory, ownedItem } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
-  bleed,
   distance,
   monsterAilmentDuration,
   monsterElement,
@@ -26,12 +26,10 @@ import {
 } from "@neverquest/state/monster";
 import {
   attackRate,
-  bleedChance,
   criticalChance,
   criticalStrike,
   damage,
   executionThreshold,
-  stunChance,
 } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import type { AmmunitionPouchItem } from "@neverquest/types";
@@ -45,7 +43,7 @@ export function useAttack() {
   const addDelta = useAddDelta();
   const changeMonsterHealth = useChangeMonsterHealth();
   const changeStamina = useChangeStamina();
-  const increaseMastery = useIncreaseMastery();
+  const trainMastery = useTrainMastery();
   const inflictElementalAilment = useInflictElementalAilment();
   const progressQuest = useProgressQuest();
 
@@ -54,19 +52,13 @@ export function useAttack() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const canAttackOrParryValue = get(canAttackOrParry);
         const monsterHealthValue = get(monsterHealth);
         const weaponValue = get(weapon);
-        const { gearClass, staminaCost } = weaponValue;
+        const { staminaCost } = weaponValue;
         const isWeaponRanged = isRanged(weaponValue);
-        // eslint-disable-next-line unicorn/consistent-destructuring
-        const isWeaponTwoHanded = isMelee(weaponValue) && weaponValue.grip === "two-handed";
         const hasInflictedCritical =
           (isWeaponRanged && get(isTraitAcquired("sharpshooter")) && get(distance) > 0) ||
           Math.random() <= get(criticalChance);
-        const inExecutionRange =
-          isWeaponTwoHanded &&
-          monsterHealthValue / get(monsterHealthMaximum) <= get(executionThreshold);
 
         set(isShowing("statistics"), true);
 
@@ -74,7 +66,7 @@ export function useAttack() {
           set(attackDuration, get(attackRate));
         }
 
-        if (canAttackOrParryValue && get(hasEnoughAmmunition)) {
+        if (get(canAttackOrParry) && get(hasEnoughAmmunition)) {
           if (staminaCost > 0) {
             changeStamina({ value: -staminaCost });
           }
@@ -101,27 +93,14 @@ export function useAttack() {
                   : currentItem;
               }),
             );
-
-            increaseMastery("marksmanship");
           }
 
-          if (gearClass === "blunt") {
-            increaseMastery("might");
-          }
-
-          if (gearClass === "piercing") {
-            increaseMastery("cruelty");
-          }
-
-          if (gearClass === "slashing") {
-            increaseMastery("finesse");
-          }
-
-          if (isWeaponTwoHanded) {
-            increaseMastery("butchery");
-          }
-
-          if (inExecutionRange || (hasInflictedCritical && get(isTraitAcquired("executioner")))) {
+          if (
+            (isMelee(weaponValue) &&
+              weaponValue.grip === "two-handed" &&
+              monsterHealthValue / get(monsterHealthMaximum) <= get(executionThreshold)) ||
+            (hasInflictedCritical && get(isTraitAcquired("executioner")))
+          ) {
             changeMonsterHealth({
               damageType: "execute",
               delta: [
@@ -184,6 +163,12 @@ export function useAttack() {
             delta: monsterDeltas,
             value: -Math.round(hasInflictedCritical ? get(criticalStrike) : get(damage)),
           });
+
+          trainMastery("butchery");
+          trainMastery("cruelty");
+          trainMastery("finesse");
+          trainMastery("marksmanship");
+          trainMastery("might");
         } else {
           addDelta({
             contents: [
@@ -206,7 +191,7 @@ export function useAttack() {
       addDelta,
       changeMonsterHealth,
       changeStamina,
-      increaseMastery,
+      trainMastery,
       inflictElementalAilment,
       progressQuest,
     ],

@@ -4,11 +4,11 @@ import type { Placement } from "react-bootstrap/esm/types";
 import type { Showing } from "@neverquest/types/unions";
 
 export type Comparison =
+  | false
   | {
       showing: Showing;
       subtrahend: number;
-    }
-  | undefined;
+    };
 
 export type IconImageProperties = {
   Icon: SVGIcon;

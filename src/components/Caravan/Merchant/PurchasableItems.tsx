@@ -22,11 +22,7 @@ export function PurchasableItems({ merchantItems }: { merchantItems: MerchantInv
             {isUsable(item) ? (
               <Usable item={item} />
             ) : (
-              <ItemDisplay
-                item={item}
-                overlayPlacement={isGearItem(item) ? "right" : undefined}
-                stack={stack}
-              />
+              <ItemDisplay isInInventory={isGearItem(item)} item={item} stack={stack} />
             )}
 
             <Stack direction="horizontal" gap={3}>

@@ -5,6 +5,7 @@ import { LootingMeter } from "@neverquest/components/Loot/LootingMeter";
 import IconLooting from "@neverquest/icons/looting.svg?react";
 import { isLooting } from "@neverquest/state/character";
 import { isLootAvailable } from "@neverquest/state/resources";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Looting() {
   const isLootingValue = useRecoilValue(isLooting);
@@ -12,7 +13,11 @@ export function Looting() {
 
   if (isLootingValue) {
     return (
-      <IconDisplay Icon={IconLooting} isAnimated tooltip="Looting">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconLooting}
+        tooltip="Looting"
+      >
         <LootingMeter />
       </IconDisplay>
     );

@@ -1,5 +1,4 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
-import type { Placement } from "react-bootstrap/esm/types";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { GemDescription } from "@neverquest/components/Inventory/GemDescription";
@@ -10,11 +9,9 @@ import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ItemName({
   item,
-  placement,
   stack,
 }: {
   item: ConsumableItem | GemItem | UsableItem;
-  placement?: Placement;
   stack?: number;
 }) {
   const { name, weight } = item;
@@ -39,9 +36,9 @@ export function ItemName({
           </PopoverBody>
         </Popover>
       }
-      placement={placement}
+      placement="right"
     >
-      <span style={{ width: "max-content" }}>{`${displayName}${
+      <span>{`${displayName}${
         stack !== undefined && stack > 1 ? ` ×${formatNumber({ value: stack })}` : ""
       }`}</span>
     </OverlayTrigger>

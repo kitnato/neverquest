@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import type { Placement } from "react-bootstrap/esm/types";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ArmorName } from "@neverquest/components/Inventory/Armor/ArmorName";
@@ -27,21 +26,21 @@ import {
 export function ItemDisplay({
   description,
   iconProps,
+  isInInventory,
   item,
-  overlayPlacement,
   stack,
 }: {
   description?: ReactNode;
   extra?: string;
   iconProps?: IconImageDOMProperties;
+  isInInventory?: boolean;
   item: InventoryItem;
-  overlayPlacement?: Placement;
   stack?: number;
 }) {
   if (isArmor(item)) {
     return (
       <IconDisplay description={description} Icon={IconArmor} iconProps={iconProps} tooltip="Armor">
-        <ArmorName armor={item} placement={overlayPlacement} />
+        <ArmorName armor={item} isInInventory={isInInventory} />
       </IconDisplay>
     );
   }
@@ -54,7 +53,7 @@ export function ItemDisplay({
         iconProps={iconProps}
         tooltip="Consumable"
       >
-        <ItemName item={item} placement={overlayPlacement} stack={stack} />
+        <ItemName item={item} stack={stack} />
       </IconDisplay>
     );
   }
@@ -67,7 +66,7 @@ export function ItemDisplay({
         iconProps={iconProps}
         tooltip="Infusable trinket"
       >
-        <ItemName item={item} placement={overlayPlacement} />
+        <ItemName item={item} />
       </IconDisplay>
     );
   }
@@ -80,7 +79,7 @@ export function ItemDisplay({
         iconProps={iconProps}
         tooltip="Shield"
       >
-        <ShieldName placement={overlayPlacement} shield={item} />
+        <ShieldName isInInventory={isInInventory} shield={item} />
       </IconDisplay>
     );
   }
@@ -93,7 +92,7 @@ export function ItemDisplay({
         iconProps={iconProps}
         tooltip="Trinket"
       >
-        <ItemName item={item} placement={overlayPlacement} />
+        <ItemName item={item} />
       </IconDisplay>
     );
   }
@@ -106,14 +105,14 @@ export function ItemDisplay({
         iconProps={iconProps}
         tooltip="Weapon"
       >
-        <WeaponName placement={overlayPlacement} weapon={item} />
+        <WeaponName isInInventory={isInInventory} weapon={item} />
       </IconDisplay>
     );
   }
 
   return (
     <IconDisplay description={description} Icon={IconGem} iconProps={iconProps} tooltip="Gem">
-      <ItemName item={item} placement={overlayPlacement} stack={stack} />
+      <ItemName item={item} stack={stack} />
     </IconDisplay>
   );
 }

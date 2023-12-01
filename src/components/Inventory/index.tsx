@@ -61,7 +61,7 @@ export function Inventory() {
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                <ItemDisplay item={current} overlayPlacement="right" />
+                <ItemDisplay isInInventory item={current} />
 
                 <Button
                   onClick={() => {
@@ -90,7 +90,7 @@ export function Inventory() {
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                <ItemDisplay item={current} overlayPlacement="right" />
+                <ItemDisplay isInInventory item={current} />
 
                 <Stack direction="horizontal" gap={3}>
                   <OverlayTrigger
@@ -182,7 +182,7 @@ export function Inventory() {
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-              <ItemDisplay item={item} overlayPlacement="right" stack={stack} />
+              <ItemDisplay item={item} stack={stack} />
 
               <Stack direction="horizontal" gap={3}>
                 {(() => {

@@ -4,16 +4,13 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterAilmentMeter } from "@neverquest/components/Monster/MonsterAilmentMeter";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import IconStunned from "@neverquest/icons/stunned.svg?react";
+import { canReceiveAilment } from "@neverquest/state/ailments";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import {
-  canReceiveAilment,
-  isMonsterAiling,
-  isMonsterDead,
-  monsterAilmentDuration,
-} from "@neverquest/state/monster";
+import { isMonsterAiling, isMonsterDead, monsterAilmentDuration } from "@neverquest/state/monster";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function MonsterStunned() {
-  const canBeStunned = useRecoilValue(canReceiveAilment("stunned"));
+  const canReceiveAilmentStunned = useRecoilValue(canReceiveAilment("stunned"));
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isMonsterStunned = useRecoilValue(isMonsterAiling("stunned"));
   const mightValue = useRecoilValue(masteryStatistic("might"));
@@ -24,9 +21,13 @@ export function MonsterStunned() {
     stop: !isMonsterStunned || isMonsterDeadValue,
   });
 
-  if (canBeStunned) {
+  if (canReceiveAilmentStunned) {
     return (
-      <IconDisplay Icon={IconStunned} isAnimated tooltip="Stunned">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconStunned}
+        tooltip="Stunned"
+      >
         <MonsterAilmentMeter ailment="stunned" format="integer" totalDuration={mightValue} />
       </IconDisplay>
     );

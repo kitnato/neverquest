@@ -1,5 +1,4 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
-import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -21,10 +20,10 @@ import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ArmorName({
   armor,
-  placement,
+  isInInventory = false,
 }: {
   armor: Armor | typeof ARMOR_NONE;
-  placement?: Placement;
+  isInInventory?: boolean;
 }) {
   const armorEquippedValue = useRecoilValue(armorEquipped);
   const isShowingDeflection = useRecoilValue(isShowing("deflection"));
@@ -45,9 +44,7 @@ export function ArmorName({
             <DetailsTable>
               <GearLevelDetail
                 comparison={
-                  showComparison
-                    ? { showing: "armor", subtrahend: armorEquippedValue.level }
-                    : undefined
+                  showComparison && { showing: "armor", subtrahend: armorEquippedValue.level }
                 }
                 level={level}
               />
@@ -165,9 +162,7 @@ export function ArmorName({
               {!isUnshielded && (
                 <WeightDetail
                   comparison={
-                    showComparison
-                      ? { showing: "armor", subtrahend: armorEquippedValue.weight }
-                      : undefined
+                    showComparison && { showing: "armor", subtrahend: armorEquippedValue.weight }
                   }
                   weight={weight}
                 />
@@ -176,7 +171,7 @@ export function ArmorName({
           </PopoverBody>
         </Popover>
       }
-      placement={placement}
+      placement={isInInventory ? "right" : "top"}
     >
       <span>{name}</span>
     </OverlayTrigger>

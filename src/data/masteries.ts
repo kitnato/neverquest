@@ -6,12 +6,13 @@ import IconMight from "@neverquest/icons/might.svg?react";
 import IconResilience from "@neverquest/icons/resilience.svg?react";
 import IconStability from "@neverquest/icons/stability.svg?react";
 import type { AttributeOrMasteryBaseData } from "@neverquest/types";
-import type { Mastery } from "@neverquest/types/unions";
+import type { Mastery, Skill } from "@neverquest/types/unions";
 
 export const MASTERIES: Record<
   Mastery,
   AttributeOrMasteryBaseData & {
     instructions: string;
+    requiredSkill: Skill;
   }
 > = {
   butchery: {
@@ -20,6 +21,7 @@ export const MASTERIES: Record<
     Icon: IconButchery,
     increment: 0.002, // maximum: 0.35
     instructions: "Trains when dealing damage with a two-handed weapon.",
+    requiredSkill: "siegecraft",
   },
   cruelty: {
     base: 0.2,
@@ -27,6 +29,7 @@ export const MASTERIES: Record<
     Icon: IconCruelty,
     increment: 0.0135, // maximum: 1.5
     instructions: "Trains when dealing damage with a piercing weapon.",
+    requiredSkill: "anatomy",
   },
   finesse: {
     base: 0,
@@ -34,6 +37,7 @@ export const MASTERIES: Record<
     Icon: IconFinesse,
     increment: 0.009, // maximum: 0.9
     instructions: "Trains when dealing damage with a slashing weapon.",
+    requiredSkill: "escrime",
   },
   marksmanship: {
     base: 0,
@@ -41,6 +45,7 @@ export const MASTERIES: Record<
     Icon: IconMarksmanship,
     increment: 0.01, // maximum: 1
     instructions: "Trains when dealing damage with a ranged weapon.",
+    requiredSkill: "archery",
   },
   might: {
     base: 2500,
@@ -48,6 +53,7 @@ export const MASTERIES: Record<
     Icon: IconMight,
     increment: 50, // maximum 7500
     instructions: "Trains when dealing damage with a blunt weapon.",
+    requiredSkill: "traumatology",
   },
   resilience: {
     base: 0,
@@ -55,6 +61,7 @@ export const MASTERIES: Record<
     Icon: IconResilience,
     increment: 0.01, // maximum: 1
     instructions: "Trains when getting struck.",
+    requiredSkill: "armorcraft",
   },
   stability: {
     base: 1500,
@@ -62,6 +69,7 @@ export const MASTERIES: Record<
     Icon: IconStability,
     increment: 50, // maximum: 5500
     instructions: "Trains when getting struck while having a shield equipped.",
+    requiredSkill: "shieldcraft",
   },
 };
 

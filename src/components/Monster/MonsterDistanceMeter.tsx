@@ -1,8 +1,8 @@
 import { useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { range } from "@neverquest/state/gear";
 import { distance, isMonsterAiling } from "@neverquest/state/monster";
+import { range } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function MonsterDistanceMeter() {

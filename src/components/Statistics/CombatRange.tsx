@@ -10,11 +10,13 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconMarksmanship from "@neverquest/icons/marksmanship.svg?react";
 import IconRange from "@neverquest/icons/range.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
-import { range, weapon } from "@neverquest/state/gear";
+import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isSkillAcquired } from "@neverquest/state/skills";
+import { range } from "@neverquest/state/statistics";
 import { isRanged } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function CombatRange() {
   const marksmanshipValue = useRecoilValue(masteryStatistic("marksmanship"));
@@ -34,7 +36,11 @@ export function CombatRange() {
 
   if (!isEmpty) {
     return (
-      <IconDisplay Icon={IconRange} isAnimated tooltip="Range">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconRange}
+        tooltip="Range"
+      >
         <Stack direction="horizontal" gap={1}>
           <OverlayTrigger
             overlay={

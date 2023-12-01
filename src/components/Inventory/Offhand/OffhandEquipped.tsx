@@ -11,6 +11,7 @@ import { shield, weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isRanged } from "@neverquest/types/type-guards";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function OffhandEquipped() {
   const isShowingOffhand = useRecoilValue(isShowing("offhand"));
@@ -26,7 +27,7 @@ export function OffhandEquipped() {
     if (!isTraitAcquiredColossus && weaponValue.grip === "two-handed") {
       return (
         <span className="opacity-50">
-          <IconDisplay Icon={IconMelee} isAnimated>
+          <IconDisplay className={getAnimationClass({ name: "flipInX" })} Icon={IconMelee}>
             {weaponValue.name}
           </IconDisplay>
         </span>
@@ -35,8 +36,8 @@ export function OffhandEquipped() {
 
     return (
       <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
         Icon={shieldValue.name === SHIELD_NONE.name ? IconFist : IconShield}
-        isAnimated
         tooltip="Equipped shield"
       >
         <ShieldName shield={shieldValue} />

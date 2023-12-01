@@ -26,7 +26,7 @@ export function GearLevelDetail({ comparison, level }: { comparison: Comparison;
 
           {formatNumber({ value: level })}
 
-          {comparison !== undefined && (
+          {comparison !== false && (
             <GearComparison
               difference={level - comparison.subtrahend}
               showing={comparison.showing}

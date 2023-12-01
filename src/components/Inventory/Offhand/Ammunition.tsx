@@ -7,6 +7,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import { ammunition } from "@neverquest/state/items";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Ammunition() {
   const ammunitionValue = useRecoilValue(ammunition);
@@ -17,7 +18,11 @@ export function Ammunition() {
   });
 
   return (
-    <IconDisplay Icon={IconAmmunition} isAnimated tooltip="Ammunition">
+    <IconDisplay
+      className={getAnimationClass({ name: "flipInX" })}
+      Icon={IconAmmunition}
+      tooltip="Ammunition"
+    >
       <Stack direction="horizontal" gap={1}>
         <span>{formatNumber({ value: ammunitionValue })}</span>
 

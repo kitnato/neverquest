@@ -1,5 +1,4 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
-import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -21,10 +20,10 @@ import type { Shield } from "@neverquest/types";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ShieldName({
-  placement,
+  isInInventory = false,
   shield,
 }: {
-  placement?: Placement;
+  isInInventory?: boolean;
   shield: Shield | typeof SHIELD_NONE;
 }) {
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
@@ -44,9 +43,7 @@ export function ShieldName({
             <DetailsTable>
               <GearLevelDetail
                 comparison={
-                  showComparison
-                    ? { showing: "offhand", subtrahend: shieldEquippedValue.level }
-                    : undefined
+                  showComparison && { showing: "offhand", subtrahend: shieldEquippedValue.level }
                 }
                 level={level}
               />
@@ -74,12 +71,10 @@ export function ShieldName({
 
               <StaminaCostDetail
                 comparison={
-                  showComparison
-                    ? {
-                        showing: "offhand",
-                        subtrahend: shieldEquippedValue.staminaCost,
-                      }
-                    : undefined
+                  showComparison && {
+                    showing: "offhand",
+                    subtrahend: shieldEquippedValue.staminaCost,
+                  }
                 }
                 cost={staminaCost}
               />
@@ -150,9 +145,7 @@ export function ShieldName({
               {shield.name !== SHIELD_NONE.name && (
                 <WeightDetail
                   comparison={
-                    showComparison
-                      ? { showing: "offhand", subtrahend: shieldEquippedValue.weight }
-                      : undefined
+                    showComparison && { showing: "offhand", subtrahend: shieldEquippedValue.weight }
                   }
                   weight={weight}
                 />
@@ -161,7 +154,7 @@ export function ShieldName({
           </PopoverBody>
         </Popover>
       }
-      placement={placement}
+      placement={isInInventory ? "right" : "top"}
     >
       <span>{name}</span>
     </OverlayTrigger>

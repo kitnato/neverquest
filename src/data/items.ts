@@ -241,7 +241,7 @@ export const TRINKETS: Record<
   hearthstone: {
     Icon: IconStone,
     item: {
-      description: "Travel back to the caravan even if there are still lurking monsters.",
+      description: "Travel back to the caravan even when there are still lurking monsters.",
       ID: nanoid(),
       name: "hearthstone",
       price: 20,

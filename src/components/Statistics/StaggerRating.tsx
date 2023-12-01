@@ -17,6 +17,7 @@ import { staggerRating } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function StaggerRating() {
   const isTraitAcquiredColossus = useRecoilValue(isTraitAcquired("colossus"));
@@ -40,7 +41,11 @@ export function StaggerRating() {
 
   if (!isEmpty) {
     return (
-      <IconDisplay Icon={IconStaggerRating} isAnimated tooltip="Stagger rating">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconStaggerRating}
+        tooltip="Stagger rating"
+      >
         <Stack direction="horizontal" gap={1}>
           <OverlayTrigger
             overlay={

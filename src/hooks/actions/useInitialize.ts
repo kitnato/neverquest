@@ -1,15 +1,14 @@
 import ls from "localstorage-slim";
 import { useRecoilCallback } from "recoil";
 
-import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { CREW } from "@neverquest/data/caravan";
 import { KEY_SESSION } from "@neverquest/data/general";
 import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
-import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import { hireStatus } from "@neverquest/state/caravan";
 import { wildernesses } from "@neverquest/state/encounter";
 import { allowProfanity } from "@neverquest/state/settings";
-import { ATTRIBUTE_TYPES, CREW_TYPES } from "@neverquest/types/unions";
+import { isSkillAcquired } from "@neverquest/state/skills";
+import { CREW_TYPES } from "@neverquest/types/unions";
 import { getNameStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useInitialize() {
@@ -23,13 +22,8 @@ export function useInitialize() {
         if (isRetirement ?? isStoreEmpty) {
           const initialStore: Record<string, string[] | boolean | string> = {};
 
-          for (const attribute of ATTRIBUTE_TYPES) {
-            const { isUnlocked } = ATTRIBUTES[attribute];
-
-            set(isAttributeUnlocked(attribute), isUnlocked);
-
-            initialStore[`isAttributeUnlocked-${attribute}`] = isUnlocked;
-          }
+          set(isSkillAcquired("none"), true);
+          initialStore["isSkillAcquired-none"] = true;
 
           for (const crew of CREW_TYPES) {
             const status = CREW[crew].requiredStage === 0 ? "hired" : "hidden";

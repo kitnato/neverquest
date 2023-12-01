@@ -66,7 +66,6 @@ export function QuestDisplay({
             : description
         }
         Icon={QUEST_CLASS_ICONS[questClass]}
-        isFullWidth
         tooltip={capitalizeAll(questClass)}
       >
         {title}

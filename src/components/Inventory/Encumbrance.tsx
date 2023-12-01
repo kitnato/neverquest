@@ -18,7 +18,7 @@ export function Encumbrance() {
   });
 
   return (
-    <IconDisplay Icon={IconEncumbrance} tooltip="Encumbrance">
+    <IconDisplay className="w-100" Icon={IconEncumbrance} tooltip="Encumbrance">
       <LabelledProgressBar
         value={(encumbranceValue / encumbranceMaximumValue) * 100}
         variant="dark"

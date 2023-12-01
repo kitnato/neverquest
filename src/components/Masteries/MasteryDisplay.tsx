@@ -8,20 +8,23 @@ import { MasteryRank } from "@neverquest/components/Masteries/MasteryRank";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { MASTERIES } from "@neverquest/data/masteries";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
-import { isMasteryUnlocked } from "@neverquest/state/masteries";
+import { canTrainMastery } from "@neverquest/state/masteries";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Mastery } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
-  const isMasteryUnlockedValue = useRecoilValue(isMasteryUnlocked(mastery));
+  const canTrainMasteryValue = useRecoilValue(canTrainMastery(mastery));
+  const isSkillAcquiredValue = useRecoilValue(isSkillAcquired(MASTERIES[mastery].requiredSkill));
 
   const { description, Icon } = MASTERIES[mastery];
 
   return (
     <div className={`mastery ${getAnimationClass({ name: "flipInX" })}`}>
-      {isMasteryUnlockedValue ? (
+      {isSkillAcquiredValue ? (
         <IconDisplay
+          className={`${canTrainMasteryValue ? "" : "opacity-50"}`}
           description={
             <Stack direction="horizontal">
               <Stack className="w-100" direction="horizontal" gap={3}>

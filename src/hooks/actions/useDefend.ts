@@ -72,22 +72,17 @@ export function useDefend() {
           speed: "fast",
         });
 
-        // If stunned, check if hit connects and decrease its duration.
-        if (get(isMonsterAiling("stunned"))) {
-          // TODO
-          set(monsterAilmentDuration("stunned"), (current) => current - 1);
+        // If stunned, check if hit connects at all.
+        if (get(isMonsterAiling("stunned")) && Math.random() <= AILMENT_PENALTY.stunned) {
+          addDelta({
+            contents: {
+              color: "text-muted",
+              value: "MISS",
+            },
+            delta: "health",
+          });
 
-          if (Math.random() <= AILMENT_PENALTY.stunned) {
-            addDelta({
-              contents: {
-                color: "text-muted",
-                value: "MISS",
-              },
-              delta: "health",
-            });
-
-            return;
-          }
+          return;
         }
 
         const deltaHealth: DeltaDisplay[] = [];

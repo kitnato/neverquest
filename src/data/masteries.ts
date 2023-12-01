@@ -42,12 +42,11 @@ export const MASTERIES: Record<
     increment: 0.01, // maximum: 1
     instructions: "Trains when dealing damage with a ranged weapon.",
   },
-  // TODO
   might: {
-    base: 3,
+    base: 2500,
     description: "Affects stun length.",
     Icon: IconMight,
-    increment: 1,
+    increment: 50, // maximum 7500
     instructions: "Trains when dealing damage with a blunt weapon.",
   },
   resilience: {

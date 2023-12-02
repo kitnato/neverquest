@@ -16,7 +16,6 @@ import { InfusionInspect } from "@neverquest/components/Inventory/Usable/Infusio
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { equippableItems, inventory } from "@neverquest/state/inventory";
-import type { GemItem } from "@neverquest/types";
 import {
   isArmor,
   isConsumableItem,
@@ -169,12 +168,12 @@ export function Inventory() {
         {[
           ...stackItems(
             storedItems
-              .filter((element) => isConsumableItem(element))
+              .filter(isConsumableItem)
               .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
           ),
           ...stackItems(
             storedItems
-              .filter((element) => isGemItem(element))
+              .filter(isGemItem)
               .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
           ),
         ].map(({ item, stack }) => {
@@ -203,7 +202,7 @@ export function Inventory() {
                       return;
                     }
                     default: {
-                      return <ApplyGem gem={item as GemItem} />;
+                      return <ApplyGem gem={item} />;
                     }
                   }
                 })()}

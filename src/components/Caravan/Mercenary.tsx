@@ -4,8 +4,8 @@ import { useRecoilValue } from "recoil";
 import { Skills } from "@neverquest/components/Skills";
 import { TrainableSkill } from "@neverquest/components/Skills/TrainableSkill";
 import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general";
-import { SKILLS_ORDER } from "@neverquest/data/skills";
 import { acquiredSkills } from "@neverquest/state/skills";
+import { SKILL_TYPES } from "@neverquest/types/unions";
 
 export function Mercenary() {
   const trainedSkillsValue = useRecoilValue(acquiredSkills);
@@ -18,7 +18,7 @@ export function Mercenary() {
         {Object.values(trainedSkillsValue).every(Boolean) ? (
           <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
         ) : (
-          SKILLS_ORDER.map((current) => <TrainableSkill key={current} skill={current} />)
+          SKILL_TYPES.map((current) => <TrainableSkill key={current} skill={current} />)
         )}
       </Stack>
 

@@ -44,16 +44,12 @@ export function useIncreaseAttribute() {
         progressQuest({ quest: "powerLevel" });
         progressQuest({ quest: "powerLevelUltra" });
 
-        if (get(isAttributeAtMaximum(attribute))) {
-          progressQuest({ quest: "attributesMaximum" });
-        }
-
         if (
           ATTRIBUTE_TYPES.filter((current) => current !== attribute).every(
             (current) => get(attributeRank(current)) > 0,
           )
         ) {
-          progressQuest({ quest: "attributesAll" });
+          progressQuest({ quest: "attributesIncreasingAll" });
         }
 
         reset(questProgress("survivingNoAttributes"));

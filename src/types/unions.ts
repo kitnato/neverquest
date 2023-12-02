@@ -42,15 +42,15 @@ export const CONQUEST_TYPES = [
 export type Conquest = (typeof CONQUEST_TYPES)[number];
 
 export const CREW_TYPES = [
-  "alchemist",
-  "blacksmith",
-  "fletcher",
-  "medic",
-  "mercenary",
   "merchant",
-  "occultist",
+  "medic",
   "tailor",
+  "blacksmith",
+  "mercenary",
   "witch",
+  "fletcher",
+  "alchemist",
+  "occultist",
 ] as const;
 export type Crew = (typeof CREW_TYPES)[number];
 
@@ -195,8 +195,7 @@ export const ROUTINE_TYPES = [
   "acquiringTwoHanded",
   "infusing",
   "infusingMaximum",
-  "attributesMaximum",
-  "attributesAll",
+  "attributesIncreasingAll",
   "skills",
   "skillsCraft",
   "masteries",
@@ -252,15 +251,15 @@ export type Showing = (typeof SHOWING_TYPES)[number];
 
 export const SKILL_TYPES = [
   "anatomy",
-  "archery",
-  "armorcraft",
   "assassination",
   "calisthenics",
   "escrime",
   "evasion",
+  "traumatology",
+  "armorcraft",
   "shieldcraft",
   "siegecraft",
-  "traumatology",
+  "archery",
 ] as const;
 export type Skill = (typeof SKILL_TYPES)[number];
 
@@ -348,7 +347,6 @@ export type StateKey =
   | "inventory"
   | "isAttacking"
   | "isAttributeAtMaximum"
-  | "isAttributeUnlocked"
   | "isBlighted"
   | "isCaravanHired"
   | "isGameOver"
@@ -360,7 +358,6 @@ export type StateKey =
   | "isLootAvailable"
   | "isLooting"
   | "isMasteryAtMaximum"
-  | "isMasteryUnlocked"
   | "isMonsterAiling"
   | "isMonsterDead"
   | "isMonsterNew"
@@ -489,6 +486,7 @@ export const TRIUMPH_TYPES = [
   "essenceCount",
   "hiringBlacksmithFirst",
   "acquiringArcheryFirst",
+  "attributesUnlockingAll",
   "skillsAll",
   "masteriesAll",
   "traitsAll",

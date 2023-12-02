@@ -1,9 +1,11 @@
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
+import { DROP_CHANCES_OVERRIDE } from "@neverquest/data/items";
 import IconConquest from "@neverquest/icons/conquest.svg?react";
 import IconRoutine from "@neverquest/icons/routine.svg?react";
 import IconTriumph from "@neverquest/icons/triumph.svg?react";
 import type { SVGIcon } from "@neverquest/types/components";
 import {
+  ATTRIBUTE_TYPES,
   CONQUEST_TYPES,
   CREW_TYPES,
   MASTERY_TYPES,
@@ -85,15 +87,15 @@ export const QUESTS: Record<
     progression: [1],
     title: "Highlander",
   },
-  attributesAll: {
+  attributesIncreasingAll: {
     description: "Increase all attributes at least once.",
-    progression: [1],
+    progression: [ATTRIBUTE_TYPES.length],
     title: "Jack of all",
   },
-  attributesMaximum: {
-    description: "Increase an attribute to its maximum rank.",
-    progression: [1],
-    title: "Specialist",
+  attributesUnlockingAll: {
+    description: "Unlock all attributes.",
+    progression: [ATTRIBUTE_TYPES.length],
+    title: "Jack of one",
   },
   bandaging: {
     description: "Use @ bandages.",
@@ -267,12 +269,12 @@ export const QUESTS: Record<
   },
   killingOneStrike: {
     description: "Kill a monster in one strike.",
-    progression: [1],
+    progression: [1, 3, 10],
     title: "One Punch Person",
   },
   killingResCogitans: {
     description: `Defeat ${LABEL_UNKNOWN}`,
-    hidden: "Res Cogitans.",
+    hidden: "the thinking being.",
     progression: [1],
     title: "Veritas tenebris",
   },
@@ -288,7 +290,7 @@ export const QUESTS: Record<
   },
   looting: {
     description: "Collect loot @ times.",
-    progression: [3, 10, 25, 50, 100],
+    progression: [3, 10, 25, 50, 100, 250],
     title: "Hoarding",
   },
   masteries: {
@@ -328,7 +330,7 @@ export const QUESTS: Record<
   },
   potions: {
     description: "Consume @ witch's concoctions.",
-    progression: [3, 10, 25, 50],
+    progression: [3, 10, 25],
     title: "Intestinal discomfort",
   },
   powerLevel: {
@@ -352,7 +354,7 @@ export const QUESTS: Record<
   },
   purchasingArmor: {
     description: "Purchase armor.",
-    progression: [1],
+    progression: [1, 3, 10],
     title: "Tight fit",
   },
   purchasingInfusable: {
@@ -362,37 +364,37 @@ export const QUESTS: Record<
   },
   purchasingShield: {
     description: "Purchase a shield.",
-    progression: [1],
+    progression: [1, 3, 10],
     title: "This doesn't give protection?",
   },
   purchasingTrinket: {
     description: "Purchase a trinket.",
-    progression: [1],
+    progression: [1, 3, 10],
     title: "Objets d'art",
   },
   purchasingWeapon: {
     description: "Purchase a weapon.",
-    progression: [1],
+    progression: [1, 3, 10],
     title: "Pointy end first",
   },
   purgingEssence: {
     description: "Undergo an essence purge.",
-    progression: [1],
+    progression: [1, 3],
     title: "Clean as a whistle",
   },
   purgingMemories: {
     description: "Undergo a memory purge.",
-    progression: [1],
+    progression: [1, 3],
     title: "What? Who? Where?",
   },
   resurrecting: {
     description: "Resurrect with a phylactery.",
-    progression: [1],
+    progression: [1, 3],
     title: "Lich king",
   },
   retiring: {
     description: "Go into retirement @ times.",
-    progression: [3, 10, 25],
+    progression: [3, 6, TRAIT_TYPES.length],
     title: "Getting too old for this",
   },
   selling: {
@@ -422,7 +424,7 @@ export const QUESTS: Record<
   },
   skillsCraft: {
     description: `Acquire the ${formatEnumeration(QUEST_REQUIREMENTS.skillsCraft)} skills.`,
-    progression: [3],
+    progression: [QUEST_REQUIREMENTS.skillsCraft.length],
     title: "Warcraft",
   },
   spendingEssence: {
@@ -432,7 +434,7 @@ export const QUESTS: Record<
   },
   stages: {
     description: "Reach stage @.",
-    progression: [3, 10, 25, 50],
+    progression: [3, 10, 25, 50, DROP_CHANCES_OVERRIDE.stage],
     title: "Sisyphean expedition",
   },
   stagesEnd: {

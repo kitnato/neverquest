@@ -42,10 +42,7 @@ export function QuestDisplay({
 
   const hasCompletedQuest = new Set<string>(QUEST_BONUS_TYPES).has(questStatus);
   const isQuestOver = hasCompletedQuest || questStatus === "achieved";
-  const cappedProgress = Math.min(
-    isQuestOver ? progressionMaximum : questProgressValue,
-    progressionMaximum,
-  );
+  const cappedProgress = isQuestOver ? progressionMaximum : questProgressValue;
   const choiceID = `quest-completion-${quest}-${progressionMaximum}`;
 
   return (

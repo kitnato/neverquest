@@ -64,13 +64,20 @@ export function useRetire() {
         reset(location);
         reset(name);
         reset(stage);
+        reset(questProgress("attributesIncreasingAll"));
+        reset(questProgress("attributesUnlockingAll"));
+        reset(questProgress("hiringAll"));
+        reset(questProgress("infusingMaximum"));
+        reset(questProgress("masteriesAll"));
+        reset(questProgress("masteriesRankMaximum"));
         reset(questProgress("powerLevel"));
         reset(questProgress("powerLevelUltra"));
         reset(questProgress("stages"));
         reset(questProgress("stagesEnd"));
-        reset(questProgress("hiringAll"));
-        reset(questProgress("masteriesAll"));
+        reset(questProgress("skillsCraft"));
         reset(questProgress("skillsAll"));
+        reset(questProgress("survivingNoAttributes"));
+        reset(questProgress("survivingNoGear"));
 
         resetAttributes();
 

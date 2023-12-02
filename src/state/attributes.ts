@@ -1,6 +1,6 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
-import { ATTRIBUTES } from "@neverquest/data/attributes";
+import { ATTRIBUTES, REDUCTION_MAXIMUM } from "@neverquest/data/attributes";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { infusablePower } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
@@ -82,8 +82,8 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =
     get:
       (parameter) =>
       ({ get }) =>
-        // Percentage-based attributes starting under 100% cannot exceed 100%.
-        ATTRIBUTES[parameter].increment < 1 && get(attributeStatistic(parameter)) >= 1,
+        ATTRIBUTES[parameter].increment < 1 &&
+        get(attributeStatistic(parameter)) >= REDUCTION_MAXIMUM,
     key,
   }),
 );

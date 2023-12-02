@@ -1,5 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
+import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { MASTERIES } from "@neverquest/data/masteries";
 import { QUEST_REQUIREMENTS } from "@neverquest/data/quests";
 import { SKILLS } from "@neverquest/data/skills";
@@ -17,11 +18,12 @@ export function useAcquireSkill() {
       (skill: Skill) => {
         const get = getSnapshotGetter(snapshot);
 
+        const { skillsCraft } = QUEST_REQUIREMENTS;
         const { shows } = SKILLS[skill];
+        const acquiredSkillsValue = get(acquiredSkills);
         const newUnlockedMasteries = Object.entries(MASTERIES)
           .filter(([_, { requiredSkill }]) => requiredSkill === skill)
           .map(([current]) => current as Mastery);
-        const { skillsCraft } = QUEST_REQUIREMENTS;
 
         set(isSkillAcquired(skill), true);
         set(isShowing("skills"), true);
@@ -42,10 +44,28 @@ export function useAcquireSkill() {
         }
 
         if (
-          Object.values(get(acquiredSkills)).every((current) => !current) &&
+          Object.values(acquiredSkillsValue).every((current) => !current) &&
           skill === "archery"
         ) {
           progressQuest({ quest: "acquiringArcheryFirst" });
+        }
+
+        if (
+          [
+            ...Object.entries(acquiredSkillsValue)
+              .filter(([_, current]) => current)
+              .map(([current]) => current),
+            skill,
+          ]
+            .toSorted((current1, current2) => current1.localeCompare(current2))
+            .toString() ===
+          Object.values(ATTRIBUTES)
+            .map(({ requiredSkill }) => requiredSkill)
+            .filter((current): current is Skill => current !== undefined)
+            .toSorted((current1, current2) => current1.localeCompare(current2))
+            .toString()
+        ) {
+          progressQuest({ quest: "attributesUnlockingAll" });
         }
 
         progressQuest({ quest: "skills" });

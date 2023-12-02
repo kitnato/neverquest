@@ -1,7 +1,13 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { RETIREMENT_MINIMUM_LEVEL } from "@neverquest/data/general";
-import { DROP_CHANCES, GEM_DROP_CHANCE, INFUSABLES, TRINKETS } from "@neverquest/data/items";
+import {
+  DROP_CHANCES,
+  DROP_CHANCES_OVERRIDE,
+  GEM_DROP_CHANCE,
+  INFUSABLES,
+  TRINKETS,
+} from "@neverquest/data/items";
 import {
   BLIGHT,
   BOSS_STAGE_INTERVAL,
@@ -211,9 +217,12 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
 export const monsterLoot = withStateKey("monsterLoot", (key) =>
   selector({
     get: ({ get }) => {
+      const { factor: dropChanceOverrideFactor, stage: dropChanceOverrideStage } =
+        DROP_CHANCES_OVERRIDE;
       const { attenuation, base, bonus, boss } = ESSENCE;
 
       const encounterValue = get(encounter);
+      const ownedItemMysteriousEgg = get(ownedItem("mysterious egg"));
       const stageValue = get(stage);
       const stageMaximumValue = get(stageMaximum);
 
@@ -223,13 +232,19 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
       const hasMysteriousEggDropped =
         stageValue >= RETIREMENT_MINIMUM_LEVEL &&
         get(ownedItem("antique coin")) !== undefined &&
-        get(ownedItem("mysterious egg")) === undefined &&
-        Math.random() <= DROP_CHANCES["mysterious egg"];
+        ownedItemMysteriousEgg === undefined &&
+        Math.random() <=
+          (stageValue === dropChanceOverrideStage
+            ? DROP_CHANCES["mysterious egg"] * dropChanceOverrideFactor
+            : DROP_CHANCES["mysterious egg"]);
       const hasTornManuscriptDropped =
         stageValue >= RETIREMENT_MINIMUM_LEVEL &&
-        get(ownedItem("mysterious egg")) !== undefined &&
+        ownedItemMysteriousEgg !== undefined &&
         get(ownedItem("torn manuscript")) === undefined &&
-        Math.random() <= DROP_CHANCES["torn manuscript"];
+        Math.random() <=
+          (stageValue === dropChanceOverrideStage
+            ? DROP_CHANCES["torn manuscript"] * dropChanceOverrideFactor
+            : DROP_CHANCES["torn manuscript"]);
 
       return {
         essence: Math.round(

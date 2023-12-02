@@ -94,3 +94,5 @@ export const ATTRIBUTES: Record<
     shows: ["healthDetails"],
   },
 };
+
+export const REDUCTION_MAXIMUM = 0.85;

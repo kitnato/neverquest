@@ -90,8 +90,12 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
   };
 
 export const DROP_CHANCES = {
-  "mysterious egg": 0.05,
-  "torn manuscript": 0.03,
+  "mysterious egg": 0.03,
+  "torn manuscript": 0.01,
+};
+export const DROP_CHANCES_OVERRIDE = {
+  factor: 15,
+  stage: 77,
 };
 
 export const ELEMENTAL_DURATION: Record<Elemental, GeneratorRange> = {
@@ -131,7 +135,7 @@ export const GEM_BASE = {
   weight: 1,
 };
 export const GEM_DAMAGE = [0.1, 0.2, 0.4, 0.7, 1];
-export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.5 };
+export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.33 };
 export const GEM_ELEMENTALS: Record<Gem, Elemental> = {
   ruby: "fire",
   sapphire: "ice",

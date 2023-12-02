@@ -21,15 +21,16 @@ export function PurgeEssence() {
   const resetAttributes = useResetAttributes();
   const transactEssence = useTransactEssence();
 
-  const price = Math.round(absorbedEssenceValue * OCCULTIST_PURGE_PRICE_MULTIPLIER.essence);
+  const price = Math.ceil(absorbedEssenceValue * OCCULTIST_PURGE_PRICE_MULTIPLIER.essence);
   const isAffordable = price <= essenceValue;
-  const isPurchasable = isAffordable && absorbedEssenceValue > 0;
+  const isPurchasable = absorbedEssenceValue > 0;
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <IconDisplay
         description="Resets power level to 0, refunding all absorbed essence."
         Icon={IconRitual}
+        iconProps={{ isFlipped: true }}
         tooltip="Ritual"
       >
         Purge essence
@@ -45,7 +46,7 @@ export function PurgeEssence() {
             <Tooltip>
               {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
 
-              {absorbedEssenceValue === 0 && <div>No essence to purge.</div>}
+              {!isPurchasable && <div>No essence to purge.</div>}
             </Tooltip>
           }
           trigger={isPurchasable ? [] : ["hover", "focus"]}

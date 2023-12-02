@@ -31,7 +31,7 @@ export function GearComparison({
         <IconImage
           Icon={isDifferenceEqual ? IconEquals : IconIncrease}
           isFlipped={difference < 0}
-          size="small"
+          isSmall
         />
       </span>
     );

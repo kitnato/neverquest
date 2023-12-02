@@ -9,7 +9,7 @@ import {
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { useToggleAttack } from "@neverquest/hooks/actions/useToggleAttack";
+import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
 import IconAttack from "@neverquest/icons/attack.svg?react";
 import IconResting from "@neverquest/icons/resting.svg?react";
 import IconRetreat from "@neverquest/icons/retreat.svg?react";
@@ -31,7 +31,7 @@ export function AttackButton() {
   const locationValue = useRecoilValue(location);
   const showLowHealthWarningValue = useRecoilValue(lowHealthWarning);
 
-  const toggleAttack = useToggleAttack();
+  const toggleAttacking = useToggleAttacking();
 
   const pulseAnimation = getAnimationClass({
     isInfinite: true,
@@ -82,7 +82,7 @@ export function AttackButton() {
         <Button
           className={animation}
           disabled={isResting || !hasEnoughAmmunitionValue}
-          onClick={toggleAttack}
+          onClick={toggleAttacking}
           variant="outline-dark"
         >
           <IconImage Icon={Icon} />

@@ -1,20 +1,27 @@
 import { atom, selector } from "recoil";
 
+import { ownedItem } from "./inventory";
 import { PROGRESS } from "@neverquest/data/encounter";
+import { LEVEL_MAXIMUM } from "@neverquest/data/general";
 import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import type { Location } from "@neverquest/types/unions";
 import { getFromRange, getGrowthSigmoid } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
-export const isBoss = withStateKey("isBoss", (key) =>
+export const encounter = withStateKey("encounter", (key) =>
   selector({
     get: ({ get }) => {
       const stageValue = get(stage);
 
-      return stageValue >= BOSS_STAGE_START && stageValue % BOSS_STAGE_INTERVAL === 0;
+      return stageValue === LEVEL_MAXIMUM
+        ? get(ownedItem("familiar")) === undefined
+          ? "res dominus"
+          : "res cogitans"
+        : stageValue >= BOSS_STAGE_START && stageValue % BOSS_STAGE_INTERVAL === 0
+          ? "boss"
+          : "monster";
     },
     key,
   }),
@@ -45,12 +52,12 @@ export const progressMaximum = withStateKey("progressMaximum", (key) =>
     get: ({ get }) => {
       const { maximum, minimum } = PROGRESS;
 
-      return get(isBoss)
-        ? 1
-        : Math.ceil(
+      return get(encounter) === "monster"
+        ? Math.ceil(
             getFromRange({ factor: getGrowthSigmoid(get(stage)), maximum, minimum }) *
               (1 - get(progressReduction)),
-          );
+          )
+        : 1;
     },
     key,
   }),
@@ -65,6 +72,14 @@ export const stageMaximum = withStateKey("stageMaximum", (key) =>
 
 // ATOMS
 
+export const consciousness = withStateKey("consciousness", (key) =>
+  atom<"mors" | "somnium" | "vigilans">({
+    default: "somnium",
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
 export const isStageStarted = withStateKey("isStageStarted", (key) =>
   atom({
     default: false,
@@ -74,7 +89,7 @@ export const isStageStarted = withStateKey("isStageStarted", (key) =>
 );
 
 export const location = withStateKey("location", (key) =>
-  atom<Location>({
+  atom<"caravan" | "wilderness">({
     default: "wilderness",
     effects: [handleLocalStorage({ key })],
     key,

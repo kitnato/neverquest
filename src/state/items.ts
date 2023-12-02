@@ -1,7 +1,7 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { INFUSION_DELTA, INFUSION_DURATION } from "@neverquest/data/general";
-import { INFUSABLES, INHERITABLE_ITEMS } from "@neverquest/data/inventory";
+import { INFUSABLES, INHERITABLE_ITEMS } from "@neverquest/data/items";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { ownedItem } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
@@ -43,23 +43,25 @@ export const ammunitionMaximum = withStateKey("ammunitionMaximum", (key) =>
   }),
 );
 
-export const essenceBonus = withStateKey("essenceBonus", (key) =>
-  selector({
-    get: ({ get }) => {
-      const ownedMonkeyPaw = get(ownedItem("monkey paw"));
+export const infusablePower = withStateKey("infusablePower", (key) =>
+  selectorFamily<number, Infusable>({
+    get:
+      (parameter) =>
+      ({ get }) => {
+        const ownedItemValue = get(ownedItem(parameter));
 
-      if (ownedMonkeyPaw === undefined || !isInfusableItem(ownedMonkeyPaw)) {
-        return 0;
-      }
+        if (ownedItemValue === undefined || !isInfusableItem(ownedItemValue)) {
+          return 0;
+        }
 
-      const { maximum, minimum } = INFUSABLES["monkey paw"].item;
+        const { maximum, minimum } = INFUSABLES[parameter].item;
 
-      return getFromRange({
-        factor: getGrowthLogarithmic(ownedMonkeyPaw.level),
-        maximum,
-        minimum,
-      });
-    },
+        return getFromRange({
+          factor: getGrowthLogarithmic(ownedItemValue.level),
+          maximum,
+          minimum,
+        });
+      },
     key,
   }),
 );
@@ -117,27 +119,6 @@ export const ownsInheritableItems = withStateKey("ownsInheritableItems", (key) =
       Object.fromEntries(
         INHERITABLE_ITEMS.map((current) => [current, Boolean(get(ownedItem(current)))]),
       ),
-    key,
-  }),
-);
-
-export const powerBonusBoost = withStateKey("powerBonusBoost", (key) =>
-  selector({
-    get: ({ get }) => {
-      const ownedTomeOfPower = get(ownedItem("tome of power"));
-
-      if (ownedTomeOfPower === undefined || !isInfusableItem(ownedTomeOfPower)) {
-        return 0;
-      }
-
-      const { maximum, minimum } = INFUSABLES["tome of power"].item;
-
-      return getFromRange({
-        factor: getGrowthLogarithmic(ownedTomeOfPower.level),
-        maximum,
-        minimum,
-      });
-    },
     key,
   }),
 );

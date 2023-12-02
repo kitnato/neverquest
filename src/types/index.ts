@@ -1,7 +1,14 @@
-import type { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
+import type { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type { SVGIcon } from "@neverquest/types/components";
-import type { Consumable, Gem, Grip, QuestClass, Trinket } from "@neverquest/types/unions";
+import type {
+  Consumable,
+  Gem,
+  Grip,
+  Infusable,
+  QuestClass,
+  Trinket,
+} from "@neverquest/types/unions";
 
 export type AmmunitionPouchItem = TrinketItem & {
   current: number;
@@ -70,8 +77,11 @@ export type GeneratorRange = {
 
 export type InfusableItem = ItemBase & {
   description: string;
+  growthBase: number;
   level: number;
-  name: "monkey paw" | "tome of power";
+  maximum: number;
+  minimum: number;
+  name: Infusable;
 };
 
 export type InventoryItem = ConsumableItem | GearItem | GemItem | UsableItem;

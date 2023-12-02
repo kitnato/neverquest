@@ -65,14 +65,14 @@ export const LOCATIONS: LocationData[] = [
     name: "bog",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "bordello",
   },
   {
     name: "breach",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "brothel",
   },
   {
@@ -86,10 +86,18 @@ export const LOCATIONS: LocationData[] = [
     name: "burrow",
   },
   {
+    canPluralize: true,
+    name: "cabin",
+  },
+  {
     name: "cage",
   },
   {
     name: "caliphate",
+  },
+  {
+    canPluralize: true,
+    name: "camp",
   },
   {
     name: "campsite",
@@ -175,6 +183,9 @@ export const LOCATIONS: LocationData[] = [
   },
   {
     name: "copse",
+  },
+  {
+    name: "cottage",
   },
   {
     name: "country",
@@ -275,6 +286,13 @@ export const LOCATIONS: LocationData[] = [
     name: "farm",
   },
   {
+    name: "festival",
+  },
+  {
+    name: "fiefdom",
+  },
+  {
+    canPluralize: true,
     name: "field",
   },
   {
@@ -349,6 +367,7 @@ export const LOCATIONS: LocationData[] = [
     name: "hinterland",
   },
   {
+    canPluralize: true,
     name: "hive",
   },
   {
@@ -409,7 +428,7 @@ export const LOCATIONS: LocationData[] = [
     name: "landscape",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "lavatory",
   },
   {
@@ -493,8 +512,11 @@ export const LOCATIONS: LocationData[] = [
     name: "oubliette",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "outhouse",
+  },
+  {
+    name: "outpost",
   },
   {
     name: "palace",
@@ -631,6 +653,9 @@ export const LOCATIONS: LocationData[] = [
     name: "sisterhood",
   },
   {
+    name: "space station",
+  },
+  {
     name: "spaceship",
   },
   {
@@ -666,13 +691,16 @@ export const LOCATIONS: LocationData[] = [
     name: "temple",
   },
   {
+    name: "tent",
+  },
+  {
     name: "territory",
   },
   {
     name: "themepark",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "toilet",
   },
   {
@@ -695,7 +723,7 @@ export const LOCATIONS: LocationData[] = [
     name: "tunnel",
   },
   {
-    isNSFW: true,
+    isProfanity: true,
     name: "urinal",
   },
   {

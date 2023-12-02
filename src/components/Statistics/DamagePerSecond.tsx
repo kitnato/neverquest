@@ -8,6 +8,7 @@ import IconDamagePerSecond from "@neverquest/icons/damage-per-second.svg?react";
 import { showDamagePerSecond } from "@neverquest/state/settings";
 import { damagePerSecond } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function DamagePerSecond() {
   const damagePerSecondValue = useRecoilValue(damagePerSecond);
@@ -22,8 +23,9 @@ export function DamagePerSecond() {
   if (showDamagePerSecondValue) {
     return (
       <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
         Icon={IconDamagePerSecond}
-        iconProps={{ overlayPlacement: "bottom", size: "small" }}
+        iconProps={{ isSmall: true, overlayPlacement: "bottom" }}
         tooltip="Total damage per second"
       >
         <Stack direction="horizontal" gap={1}>

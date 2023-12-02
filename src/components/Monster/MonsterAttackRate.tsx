@@ -5,7 +5,7 @@ import { MonsterAttackMeter } from "@neverquest/components/Monster/MonsterAttack
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useDefend } from "@neverquest/hooks/actions/useDefend";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
-import IconAttackRate from "@neverquest/icons/attack-rate.svg?react";
+import IconMonsterAttackRate from "@neverquest/icons/monster-attack-rate.svg?react";
 import { isAttacking } from "@neverquest/state/character";
 import {
   hasMonsterClosed,
@@ -14,25 +14,24 @@ import {
   monsterAttackDuration,
 } from "@neverquest/state/monster";
 
-export function MonsterAttack() {
+export function MonsterAttackRate() {
   const hasMonsterClosedValue = useRecoilValue(hasMonsterClosed);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
-  const isMonsterFrozenValue = useRecoilValue(isMonsterAiling("frozen"));
-  const isMonsterStaggered = useRecoilValue(isMonsterAiling("staggered"));
+  const isMonsterFrozen = useRecoilValue(isMonsterAiling("frozen"));
   const setMonsterAttackDuration = useSetRecoilState(monsterAttackDuration);
 
   const defend = useDefend();
 
   useAnimate({
     delta: setMonsterAttackDuration,
-    factor: isMonsterStaggered ? AILMENT_PENALTY.staggered : 1,
+    factor: isMonsterFrozen ? AILMENT_PENALTY.frozen : 1,
     onDelta: defend,
-    stop: !isAttackingValue || !hasMonsterClosedValue || isMonsterDeadValue || isMonsterFrozenValue,
+    stop: !isAttackingValue || !hasMonsterClosedValue || isMonsterDeadValue,
   });
 
   return (
-    <IconDisplay Icon={IconAttackRate} tooltip="Monster attack rate">
+    <IconDisplay Icon={IconMonsterAttackRate} tooltip="Monster attack rate">
       <MonsterAttackMeter />
     </IconDisplay>
   );

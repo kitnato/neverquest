@@ -1,23 +1,20 @@
 import { selector, selectorFamily } from "recoil";
 
+import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import {
-  ARMOR_NONE,
+  ELEMENTAL_DURATION,
   GEMS_MAXIMUM,
   GEM_DAMAGE,
-  GEM_DURATION,
   GEM_ELEMENTALS,
   GEM_ENHANCEMENT,
   GEM_FITTING_COST,
-  SHIELD_NONE,
-  WEAPON_NONE,
-} from "@neverquest/data/inventory";
+} from "@neverquest/data/items";
 import { inventory } from "@neverquest/state/inventory";
-import { masteryStatistic } from "@neverquest/state/masteries";
 import { essence } from "@neverquest/state/resources";
 import type { Armor, Shield, Weapon } from "@neverquest/types";
-import { isArmor, isRanged, isShield, isWeapon } from "@neverquest/types/type-guards";
+import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 import type { Gear } from "@neverquest/types/unions";
-import { getElementalEffects } from "@neverquest/utilities/getters";
+import { getElementalEffects, getFromRange } from "@neverquest/utilities/getters";
 import { stackItems, withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -88,9 +85,11 @@ export const elementalEffects = withStateKey("elementalEffects", (key) =>
       const armorValue = get(armor);
 
       for (const { item, stack } of stackItems(armorValue.gems)) {
-        effects.armor[GEM_ELEMENTALS[item.name]] = {
+        const elemental = GEM_ELEMENTALS[item.name];
+
+        effects.armor[elemental] = {
           damage: Math.ceil(armorValue.protection * (GEM_DAMAGE[stack - 1] ?? 0)),
-          duration: GEM_DURATION[stack - 1] ?? 0,
+          duration: getFromRange({ factor: 1 / stack, ...ELEMENTAL_DURATION[elemental] }),
         };
       }
 
@@ -101,26 +100,15 @@ export const elementalEffects = withStateKey("elementalEffects", (key) =>
       const weaponValue = get(weapon);
 
       for (const { item, stack } of stackItems(weaponValue.gems)) {
+        const elemental = GEM_ELEMENTALS[item.name];
+
         effects.weapon[GEM_ELEMENTALS[item.name]] = {
           damage: Math.ceil(weaponValue.damage * (GEM_DAMAGE[stack - 1] ?? 0)),
-          duration: GEM_DURATION[stack - 1] ?? 0,
+          duration: getFromRange({ factor: 1 / stack, ...ELEMENTAL_DURATION[elemental] }),
         };
       }
 
       return effects;
-    },
-    key,
-  }),
-);
-
-export const range = withStateKey("range", (key) =>
-  selector({
-    get: ({ get }) => {
-      const weaponValue = get(weapon);
-
-      return isRanged(weaponValue)
-        ? weaponValue.range * (1 + get(masteryStatistic("marksmanship")))
-        : 0;
     },
     key,
   }),

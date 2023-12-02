@@ -1,6 +1,13 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import { ELEMENTALS } from "@neverquest/data/inventory";
+import { RETIREMENT_MINIMUM_LEVEL } from "@neverquest/data/general";
+import {
+  DROP_CHANCES,
+  DROP_CHANCES_OVERRIDE,
+  GEM_DROP_CHANCE,
+  INFUSABLES,
+  TRINKETS,
+} from "@neverquest/data/items";
 import {
   BLIGHT,
   BOSS_STAGE_INTERVAL,
@@ -9,20 +16,21 @@ import {
   MONSTER_ATTACK_RATE,
   MONSTER_DAMAGE,
   MONSTER_HEALTH,
-  POISON,
 } from "@neverquest/data/monster";
-import { AILMENT_PENALTY, BLEED } from "@neverquest/data/statistics";
+import { AILMENT_PENALTY } from "@neverquest/data/statistics";
+import { bleed } from "@neverquest/state/ailments";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { isBoss, isStageStarted, progress, stage } from "@neverquest/state/encounter";
-import { range, shield, totalElementalEffects, weapon } from "@neverquest/state/gear";
-import { essenceBonus } from "@neverquest/state/items";
-import { isSkillAcquired } from "@neverquest/state/skills";
-import { isTraitAcquired } from "@neverquest/state/traits";
 import {
-  ELEMENTAL_TYPES,
-  MONSTER_AILMENT_TYPES,
-  type MonsterAilment,
-} from "@neverquest/types/unions";
+  encounter,
+  isStageStarted,
+  progress,
+  stage,
+  stageMaximum,
+} from "@neverquest/state/encounter";
+import { ownedItem } from "@neverquest/state/inventory";
+import { infusablePower } from "@neverquest/state/items";
+import { range } from "@neverquest/state/statistics";
+import type { MonsterAilment } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import {
   getDamagePerRate,
@@ -34,13 +42,6 @@ import {
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
-
-export const bleed = withStateKey("bleed", (key) =>
-  selector({
-    get: ({ get }) => BLEED[get(isTraitAcquired("shredder")) ? "shredder" : "default"],
-    key,
-  }),
-);
 
 export const bleedingDeltaLength = withStateKey("bleedingDeltaLength", (key) =>
   selector({
@@ -56,73 +57,32 @@ export const bleedingDeltaLength = withStateKey("bleedingDeltaLength", (key) =>
 export const blightChance = withStateKey("blightChance", (key) =>
   selector({
     get: ({ get }) => {
+      const encounterValue = get(encounter);
       const stageValue = get(stage);
 
       const {
         boss,
         chance: { maximum, minimum },
-        stageRequired,
+        finality,
+        requiredStage,
       } = BLIGHT;
 
-      if (stageValue < stageRequired) {
+      if (stageValue < requiredStage) {
         return 0;
+      }
+
+      if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
+        return finality;
       }
 
       return (
         getFromRange({
-          factor: getGrowthSigmoid(getLinearMapping({ offset: stageRequired, stage: stageValue })),
+          factor: getGrowthSigmoid(getLinearMapping({ offset: requiredStage, stage: stageValue })),
           maximum,
           minimum,
-        }) * (get(isBoss) ? boss : 1)
+        }) * (encounterValue === "boss" ? boss : 1)
       );
     },
-    key,
-  }),
-);
-
-export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
-  selectorFamily<boolean, MonsterAilment>({
-    get:
-      (parameter) =>
-      ({ get }) => {
-        const { abilityChance, gearClass } = get(weapon);
-
-        switch (parameter) {
-          case "bleeding": {
-            return get(isSkillAcquired("anatomy")) && abilityChance > 0 && gearClass === "piercing";
-          }
-
-          case "staggered": {
-            return get(isSkillAcquired("shieldcraft")) && get(shield).stagger > 0;
-          }
-
-          case "stunned": {
-            return (
-              get(isSkillAcquired("traumatology")) && abilityChance > 0 && gearClass === "blunt"
-            );
-          }
-
-          case "burning":
-          case "frozen":
-          case "shocked": {
-            const elemental = ELEMENTAL_TYPES.find(
-              (current) => ELEMENTALS[current].ailment === parameter,
-            );
-            const { armor, weapon } = get(totalElementalEffects);
-
-            return elemental === undefined
-              ? false
-              : armor[elemental].duration > 0 || weapon[elemental].duration > 0;
-          }
-        }
-      },
-    key,
-  }),
-);
-
-export const canReceiveAilments = withStateKey("canReceiveAilments", (key) =>
-  selector({
-    get: ({ get }) => MONSTER_AILMENT_TYPES.some((current) => get(canReceiveAilment(current))),
     key,
   }),
 );
@@ -154,12 +114,18 @@ export const isMonsterDead = withStateKey("isMonsterDead", (key) =>
 export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, bonus, boss, minimum } = MONSTER_ATTACK_RATE;
+      const { base, bonus, boss, finality, minimum } = MONSTER_ATTACK_RATE;
+      const encounterValue = get(encounter);
       const factor = getGrowthSigmoid(get(stage));
+
+      if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
+        return finality;
+      }
 
       return Math.round(
         Math.max(
-          base - base * factor * (1 + get(progress) * bonus) * (get(isBoss) ? boss : 1),
+          base -
+            base * factor * (1 + get(progress) * bonus) * (encounterValue === "boss" ? boss : 1),
           minimum,
         ),
       );
@@ -171,11 +137,17 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
 export const monsterDamage = withStateKey("monsterDamage", (key) =>
   selector({
     get: ({ get }) => {
-      const { attenuation, base, bonus, boss } = MONSTER_DAMAGE;
+      const { attenuation, base, bonus, boss, finality } = MONSTER_DAMAGE;
+      const encounterValue = get(encounter);
       const factor = getGrowthTriangular(get(stage)) / attenuation;
 
+      if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
+        return finality;
+      }
+
       return Math.round(
-        (base + base * factor * (1 + get(progress) * bonus)) * (get(isBoss) ? boss : 1),
+        (base + base * factor * (1 + get(progress) * bonus)) *
+          (encounterValue === "boss" ? boss : 1),
       );
     },
     key,
@@ -209,17 +181,15 @@ export const monsterDamageAiling = withStateKey("monsterDamageAiling", (key) =>
 export const monsterDamageAilingPerSecond = withStateKey("monsterDamageAilingPerSecond", (key) =>
   selector({
     get: ({ get }) =>
-      get(isMonsterAiling("stunned"))
-        ? formatNumber({
-            format: "float",
-            value: getDamagePerRate({
-              damage: get(monsterDamageAiling),
-              damageModifier: 0,
-              damageModifierChance: AILMENT_PENALTY.stunned,
-              rate: get(monsterAttackRate),
-            }),
-          })
-        : get(monsterDamagePerSecond),
+      formatNumber({
+        format: "float",
+        value: getDamagePerRate({
+          damage: get(monsterDamageAiling),
+          damageModifier: 0,
+          damageModifierChance: AILMENT_PENALTY.stunned,
+          rate: get(monsterAttackRate),
+        }),
+      }),
     key,
   }),
 );
@@ -227,11 +197,17 @@ export const monsterDamageAilingPerSecond = withStateKey("monsterDamageAilingPer
 export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =>
   selector({
     get: ({ get }) => {
-      const { attenuation, base, bonus, boss } = MONSTER_HEALTH;
+      const { attenuation, base, bonus, boss, finality } = MONSTER_HEALTH;
+      const encounterValue = get(encounter);
       const factor = getGrowthTriangular(get(stage)) / attenuation;
 
+      if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
+        return finality;
+      }
+
       return Math.round(
-        (base + base * factor * (1 + get(progress) * bonus)) * (get(isBoss) ? boss : 1),
+        (base + base * factor * (1 + get(progress) * bonus)) *
+          (encounterValue === "boss" ? boss : 1),
       );
     },
     key,
@@ -241,94 +217,61 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
 export const monsterLoot = withStateKey("monsterLoot", (key) =>
   selector({
     get: ({ get }) => {
+      const { factor: dropChanceOverrideFactor, stage: dropChanceOverrideStage } =
+        DROP_CHANCES_OVERRIDE;
       const { attenuation, base, bonus, boss } = ESSENCE;
 
-      const isBossValue = get(isBoss);
+      const encounterValue = get(encounter);
+      const ownedItemMysteriousEgg = get(ownedItem("mysterious egg"));
       const stageValue = get(stage);
+      const stageMaximumValue = get(stageMaximum);
+
       const factor = getGrowthTriangular(stageValue) / attenuation;
+      const maximumGems = 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL);
+
+      const hasMysteriousEggDropped =
+        stageValue >= RETIREMENT_MINIMUM_LEVEL &&
+        get(ownedItem("antique coin")) !== undefined &&
+        ownedItemMysteriousEgg === undefined &&
+        Math.random() <=
+          (stageValue === dropChanceOverrideStage
+            ? DROP_CHANCES["mysterious egg"] * dropChanceOverrideFactor
+            : DROP_CHANCES["mysterious egg"]);
+      const hasTornManuscriptDropped =
+        stageValue >= RETIREMENT_MINIMUM_LEVEL &&
+        ownedItemMysteriousEgg !== undefined &&
+        get(ownedItem("torn manuscript")) === undefined &&
+        Math.random() <=
+          (stageValue === dropChanceOverrideStage
+            ? DROP_CHANCES["torn manuscript"] * dropChanceOverrideFactor
+            : DROP_CHANCES["torn manuscript"]);
 
       return {
         essence: Math.round(
           (base + base * factor) * 1 +
-            get(progress) * bonus * (isBossValue ? boss : 1) * (1 + get(essenceBonus)),
+            get(progress) *
+              bonus *
+              (encounterValue === "boss" ? boss : 1) *
+              (1 + get(infusablePower("monkey paw"))),
         ),
-        gems: isBossValue
-          ? 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL)
-          : 0,
+        gems:
+          encounterValue === "boss"
+            ? Array.from({ length: maximumGems })
+                .map(() => {
+                  const { equalStage, lowerStage } = GEM_DROP_CHANCE;
+
+                  return Math.random() <= (stageValue < stageMaximumValue ? lowerStage : equalStage)
+                    ? 1
+                    : 0;
+                })
+                .reduce<number>((aggregated, current) => aggregated + current, 0)
+            : 0,
+        trinket: hasMysteriousEggDropped
+          ? INFUSABLES["mysterious egg"].item
+          : hasTornManuscriptDropped
+            ? TRINKETS["torn manuscript"].item
+            : undefined,
       };
-    },
-    key,
-  }),
-);
-
-export const poisonChance = withStateKey("poisonChance", (key) =>
-  selector({
-    get: ({ get }) => {
-      const stageValue = get(stage);
-
-      const {
-        boss,
-        chance: { maximum, minimum },
-        stageRequired,
-      } = POISON;
-
-      if (stageValue < stageRequired) {
-        return 0;
-      }
-
-      return (
-        getFromRange({
-          factor: getGrowthSigmoid(getLinearMapping({ offset: stageRequired, stage: stageValue })),
-          maximum,
-          minimum,
-        }) * (get(isBoss) ? boss : 1)
-      );
-    },
-    key,
-  }),
-);
-
-export const poisonLength = withStateKey("poisonLength", (key) =>
-  selector({
-    get: ({ get }) => {
-      const {
-        duration: { maximum, minimum },
-        stageRequired,
-      } = POISON;
-
-      return getFromRange({
-        factor: getGrowthSigmoid(
-          getLinearMapping({
-            offset: stageRequired,
-            stage: get(stage),
-          }),
-        ),
-        maximum,
-        minimum,
-      });
-    },
-    key,
-  }),
-);
-
-export const poisonMagnitude = withStateKey("poisonMagnitude", (key) =>
-  selector({
-    get: ({ get }) => {
-      const {
-        magnitude: { maximum, minimum },
-        stageRequired,
-      } = POISON;
-
-      return getFromRange({
-        factor: getGrowthSigmoid(
-          getLinearMapping({
-            offset: stageRequired,
-            stage: get(stage),
-          }),
-        ),
-        maximum,
-        minimum,
-      });
     },
     key,
   }),

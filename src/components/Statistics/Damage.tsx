@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -8,9 +8,8 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSecond";
 import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDetails";
+import { SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
-import { SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
-import { QUEST_REQUIREMENTS } from "@neverquest/data/quests";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconBrawler from "@neverquest/icons/brawler.svg?react";
@@ -22,7 +21,7 @@ import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { shield, weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
-import { questsBonus } from "@neverquest/state/quests";
+import { questProgress, questsBonus } from "@neverquest/state/quests";
 import { stamina } from "@neverquest/state/reserves";
 import { damage } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
@@ -39,6 +38,7 @@ export function Damage() {
   const isUnshielded = useRecoilValue(shield).name === SHIELD_NONE.name;
   const staminaValue = useRecoilValue(stamina);
   const { damage: weaponDamage, gems, name } = useRecoilValue(weapon);
+  const resetQuestProgressDamage = useResetRecoilState(questProgress("damage"));
 
   const progressQuest = useProgressQuest();
 
@@ -48,10 +48,9 @@ export function Damage() {
   });
 
   useEffect(() => {
-    if (damageValue >= QUEST_REQUIREMENTS.damage) {
-      progressQuest({ quest: "damage" });
-    }
-  });
+    resetQuestProgressDamage();
+    progressQuest({ amount: damageValue, quest: "damage" });
+  }, [damageValue, progressQuest, resetQuestProgressDamage]);
 
   return (
     <IconDisplay description={<DamagePerSecond />} Icon={IconDamage} tooltip="Total damage">
@@ -68,7 +67,7 @@ export function Damage() {
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconWeaponDamage} size="small" />
+                        <IconImage Icon={IconWeaponDamage} isSmall />
 
                         {formatNumber({ value: weaponDamage })}
                       </Stack>
@@ -80,7 +79,7 @@ export function Damage() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconStrength} size="small" />
+                        <IconImage Icon={IconStrength} isSmall />
                         Strength:
                       </Stack>
                     </td>
@@ -93,12 +92,12 @@ export function Damage() {
                           <>
                             <span>{LABEL_SEPARATOR}</span>
 
-                            <IconImage Icon={IconTomeOfPower} size="small" />
+                            <IconImage Icon={IconTomeOfPower} isSmall />
 
-                            {`+${formatNumber({
-                              format: "percentage",
+                            {formatNumber({
+                              format: "multiplier",
                               value: attributePowerBonusStrength,
-                            })}`}
+                            })}
                           </>
                         )}
                       </Stack>
@@ -111,7 +110,7 @@ export function Damage() {
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconDamage} size="small" />
+                          <IconImage Icon={IconDamage} isSmall />
 
                           {`+${formatNumber({
                             decimals: 0,
@@ -127,7 +126,7 @@ export function Damage() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconBruiser} size="small" />
+                          <IconImage Icon={IconBruiser} isSmall />
                           Bruiser:
                         </Stack>
                       </td>
@@ -140,7 +139,7 @@ export function Damage() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconBrawler} size="small" />
+                          <IconImage Icon={IconBrawler} isSmall />
                           Brawler:
                         </Stack>
                       </td>

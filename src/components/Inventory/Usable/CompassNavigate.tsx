@@ -53,7 +53,9 @@ export function CompassNavigate() {
         <span>
           <Button
             disabled={!canNavigate}
-            onClick={() => setIsShowingNavigation(true)}
+            onClick={() => {
+              setIsShowingNavigation(true);
+            }}
             variant="outline-dark"
           >
             Navigate
@@ -61,7 +63,12 @@ export function CompassNavigate() {
         </span>
       </OverlayTrigger>
 
-      <Modal onHide={() => setIsShowingNavigation(false)} show={isShowingNavigation}>
+      <Modal
+        onHide={() => {
+          setIsShowingNavigation(false);
+        }}
+        show={isShowingNavigation}
+      >
         <ModalHeader closeButton>
           <ModalTitle>
             <Stack direction="horizontal" gap={3}>

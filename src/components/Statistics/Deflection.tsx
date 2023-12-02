@@ -14,6 +14,7 @@ import { isSkillAcquired } from "@neverquest/state/skills";
 import { deflection } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Deflection() {
   const { deflection: armorDeflection } = useRecoilValue(armor);
@@ -31,7 +32,11 @@ export function Deflection() {
 
   if (!isEmpty) {
     return (
-      <IconDisplay Icon={IconDeflection} isAnimated tooltip="Total deflection chance">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconDeflection}
+        tooltip="Total deflection chance"
+      >
         <Stack direction="horizontal" gap={1}>
           <OverlayTrigger
             overlay={
@@ -45,7 +50,7 @@ export function Deflection() {
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconDeflection} size="small" />
+                          <IconImage Icon={IconDeflection} isSmall />
 
                           {formatNumber({ format: "percentage", value: armorDeflection })}
                         </Stack>
@@ -55,7 +60,7 @@ export function Deflection() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconInoculated} size="small" />
+                          <IconImage Icon={IconInoculated} isSmall />
                           Inoculated:
                         </Stack>
                       </td>

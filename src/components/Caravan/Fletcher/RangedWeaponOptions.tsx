@@ -6,9 +6,9 @@ import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
 import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { SetGearLevel } from "@neverquest/components/Caravan/SetGearLevel";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
-import { LABEL_UNKNOWN } from "@neverquest/data/general";
-import { WEAPON_BASE, WEAPON_MODIFIER, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
+import { GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
+import { WEAPON_BASE, WEAPON_MODIFIER, WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
+import { LABEL_UNKNOWN, LEVEL_MAXIMUM } from "@neverquest/data/general";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconRange from "@neverquest/icons/range.svg?react";
@@ -19,7 +19,7 @@ import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
 import { WEAPON_CLASS_TYPES, type WeaponClass } from "@neverquest/LOCRAN/types";
 import { fletcherInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
-import { allowNSFW } from "@neverquest/state/settings";
+import { allowProfanity } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateRangedWeapon } from "@neverquest/utilities/generators";
@@ -31,13 +31,13 @@ import {
 } from "@neverquest/utilities/getters";
 
 export function RangedWeaponOptions() {
-  const allowNSFWValue = useRecoilValue(allowNSFW);
+  const allowProfanityValue = useRecoilValue(allowProfanity);
   const [fletcherInventoryValue, setFletcherInventory] = useRecoilState(fletcherInventory);
   const stageValue = useRecoilValue(stage);
   const resetFletcherInventory = useResetRecoilState(fletcherInventory);
 
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
-  const [weaponLevel, setWeaponLevel] = useState(stageValue);
+  const [weaponLevel, setWeaponLevel] = useState(Math.min(stageValue, LEVEL_MAXIMUM));
 
   const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[weaponClass];
 
@@ -48,16 +48,18 @@ export function RangedWeaponOptions() {
     factor,
     gearClass: weaponClass,
   });
-  const maximumWeaponLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
+  const maximumWeaponLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, LEVEL_MAXIMUM);
 
   return (
     <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
-        <SetGearLevel state={[weaponLevel, setWeaponLevel]} />
+        <SetGearLevel maximum={maximumWeaponLevel} state={[weaponLevel, setWeaponLevel]} />
 
         <IconDisplay Icon={IconGearClass} iconProps={{ overlayPlacement: "left" }} tooltip="Class">
           <FormSelect
-            onChange={({ target: { value } }) => setWeaponClass(value as WeaponClass)}
+            onChange={({ target: { value } }) => {
+              setWeaponClass(value as WeaponClass);
+            }}
             value={weaponClass}
           >
             {WEAPON_CLASS_TYPES.filter((current) => current !== "slashing").map((current) => (
@@ -128,22 +130,22 @@ export function RangedWeaponOptions() {
 
       {fletcherInventoryValue === undefined ? (
         <CraftGear
-          onCraft={() =>
+          onCraft={() => {
             setFletcherInventory(
               generateRangedWeapon({
-                allowNSFW: allowNSFWValue,
+                allowProfanity: allowProfanityValue,
                 gearClass: weaponClass,
                 level: weaponLevel,
                 nameStructure: getNameStructure(),
                 prefixTags:
-                  weaponLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
+                  weaponLevel <= maximumWeaponLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
                     ? ["lowQuality"]
                     : weaponLevel === maximumWeaponLevel
                       ? ["highQuality"]
                       : undefined,
               }),
-            )
-          }
+            );
+          }}
           price={getGearPrice({
             factor,
             ...WEAPON_BASE,

@@ -16,7 +16,7 @@ export function DodgePenaltyContents({ staminaCost }: { staminaCost: GeneratorRa
     <Stack direction="horizontal" gap={1}>
       {isTraitAcquiredStalwart ? (
         <>
-          <IconImage Icon={IconStalwart} size="small" />
+          <IconImage Icon={IconStalwart} isSmall />
 
           {LABEL_NONE}
         </>
@@ -26,7 +26,7 @@ export function DodgePenaltyContents({ staminaCost }: { staminaCost: GeneratorRa
         LABEL_NONE
       ) : (
         <>
-          <IconImage Icon={IconStamina} size="small" />
+          <IconImage Icon={IconStamina} isSmall />
 
           {typeof staminaCost === "number"
             ? formatNumber({ value: staminaCost })

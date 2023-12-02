@@ -5,11 +5,10 @@ import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function SkillDisplay({ skill }: { skill: Skill }) {
   const { description, Icon } = SKILLS[skill];
-  const name = capitalizeAll(skill);
 
   return (
     <IconDisplay description={description} Icon={Icon} tooltip="Skill">
-      {name}
+      {capitalizeAll(skill)}
     </IconDisplay>
   );
 }

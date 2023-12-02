@@ -1,14 +1,10 @@
 import { useRecoilCallback } from "recoil";
 
-import { useProgressQuest } from "./useProgressQuest";
-import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/inventory";
+import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
+import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { armor, shield, weapon } from "@neverquest/state/gear";
-import {
-  canFit,
-  inventory,
-  itemsAcquired,
-  notifyOverEncumbrance,
-} from "@neverquest/state/inventory";
+import { inventory, itemsAcquired, notifyOverEncumbrance } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { autoEquip } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -16,8 +12,8 @@ import { isTraitAcquired } from "@neverquest/state/traits";
 import type { InventoryItem } from "@neverquest/types";
 import {
   isArmor,
-  isGear,
-  isGem,
+  isGearItem,
+  isGemItem,
   isMelee,
   isRanged,
   isShield,
@@ -26,6 +22,7 @@ import {
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useAcquireItem() {
+  const canFit = useCanFit();
   const progressQuest = useProgressQuest();
 
   return useRecoilCallback(
@@ -33,7 +30,7 @@ export function useAcquireItem() {
       (item: InventoryItem): "autoEquip" | "noFit" | "success" => {
         const get = getSnapshotGetter(snapshot);
 
-        if (!get(canFit(item.weight))) {
+        if (!canFit(item.weight)) {
           set(notifyOverEncumbrance, true);
 
           return "noFit";
@@ -45,7 +42,7 @@ export function useAcquireItem() {
           set(itemsAcquired, (current) => [...current, item]);
         }
 
-        if (isGem(item)) {
+        if (isGemItem(item)) {
           progressQuest({ quest: "acquiringGems" });
         }
 
@@ -58,7 +55,7 @@ export function useAcquireItem() {
         const isShieldUnequipped = get(shield).name === SHIELD_NONE.name;
         const weaponValue = get(weapon);
 
-        if (isGear(item)) {
+        if (isGearItem(item)) {
           if (isMelee(item) && item.grip === "two-handed") {
             progressQuest({ quest: "acquiringTwoHanded" });
           }
@@ -69,12 +66,12 @@ export function useAcquireItem() {
 
           if (
             get(autoEquip) &&
-            ((get(armor).name === ARMOR_NONE.name && isArmor(item)) ||
+            ((get(armor).ID === ARMOR_NONE.ID && isArmor(item)) ||
               // Acquiring a shield while no shield equipped and not wielding a ranged or two-handed weapon (unless colossus).
               (isShieldUnequipped && isShield(item) && !isRanged(weaponValue)) ||
               get(isTraitAcquired("colossus")) ||
               // Acquiring a weapon while no weapon equipped, and if ranged or two-handed, no shield equipped.
-              (weaponValue.name === WEAPON_NONE.name &&
+              (weaponValue.ID === WEAPON_NONE.ID &&
                 ((isMelee(item) && item.grip === "one-handed") ||
                   get(isTraitAcquired("colossus")) ||
                   (((isMelee(item) && item.grip === "two-handed") ||
@@ -87,6 +84,6 @@ export function useAcquireItem() {
 
         return "success";
       },
-    [],
+    [canFit, progressQuest],
   );
 }

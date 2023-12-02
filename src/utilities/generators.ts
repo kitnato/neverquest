@@ -1,10 +1,6 @@
 import { nanoid } from "nanoid";
 
-import {
-  ARMOR_SPECIFICATIONS,
-  SHIELD_SPECIFICATIONS,
-  WEAPON_BASE,
-} from "@neverquest/data/inventory";
+import { ARMOR_SPECIFICATIONS, SHIELD_SPECIFICATIONS, WEAPON_BASE } from "@neverquest/data/gear";
 import { generateArtifact } from "@neverquest/LOCRAN/generate/generateArtifact";
 import type {
   ArmorClass,

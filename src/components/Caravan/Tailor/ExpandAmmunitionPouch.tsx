@@ -5,7 +5,7 @@ import { AmmunitionPouchCapacity } from "@neverquest/components/Caravan/Tailor/A
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { TAILORING_EXPANSION, TAILORING_PRICE_MAXIMUM } from "@neverquest/data/caravan";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/data/general";
-import { AMMUNITION_CAPACITY } from "@neverquest/data/inventory";
+import { AMMUNITION_CAPACITY } from "@neverquest/data/items";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconTailoring from "@neverquest/icons/tailoring.svg?react";

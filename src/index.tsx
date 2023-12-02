@@ -13,8 +13,14 @@ addPluralRule(/ix$/i, "ices");
 addPluralRule(/us$/i, "i");
 addUncountableRule("topaz");
 
-createRoot(document.querySelector("#root") as Element).render(
-  <StrictMode>
-    <Core />
-  </StrictMode>,
-);
+const root = document.querySelector("#root");
+
+if (root === null) {
+  throw new Error("Cannot select document root.");
+} else {
+  createRoot(root).render(
+    <StrictMode>
+      <Core />
+    </StrictMode>,
+  );
+}

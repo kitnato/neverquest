@@ -33,8 +33,14 @@ select {
   cursor: pointer;
 }
 
-small:empty {
-  display: none;
+small {
+  small {
+    font-size: inherit;
+  }
+
+  &:empty {
+    display: none;
+  }
 }
 
 svg {
@@ -62,10 +68,10 @@ svg {
   &.icon-image {
     display: block;
     fill: currentcolor;
-    width: 40px;
+    width: 3rem;
 
     &.small {
-      width: 20px;
+      width: 1.5rem;
     }
 
     &.stencilled {
@@ -80,10 +86,6 @@ td.text-end > .hstack {
 
 .accordion-button {
   box-shadow: none !important;
-}
-
-.mastery span {
-  width: max-content;
 }
 
 .form-check {
@@ -105,28 +107,14 @@ td.text-end > .hstack {
   gap: 0.35rem !important;
 }
 
-.vstack {
-  align-self: initial;
-}
-
 .journal .tab-pane.active {
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
 }
 
-.progress-labelled {
-  &.transitions-none .progress-bar {
-    transition: none;
-  }
-
-  > small {
-    text-shadow:
-      -1px 1px 1px var(--bs-gray-900),
-      1px 1px 1px var(--bs-gray-900),
-      1px -1px 1px var(--bs-gray-900),
-      -1px -1px 1px var(--bs-gray-900);
-  }
+.mastery span {
+  width: max-content;
 }
 
 .overlay-offcanvas {
@@ -147,6 +135,38 @@ td.text-end > .hstack {
 .popover.show,
 .tooltip.show > .tooltip-inner {
   box-shadow: 0 0 4px 1px rgb(0 0 0 / 20%);
+}
+
+.progress-labelled {
+  .progress {
+    height: 1.6rem;
+
+    &.attached-above {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    &.attached-below {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &.small {
+      height: 0.75rem;
+    }
+  }
+
+  &.transitions-none .progress-bar {
+    transition: none;
+  }
+
+  > small {
+    text-shadow:
+      -1px 1px 1px var(--bs-gray-900),
+      1px 1px 1px var(--bs-gray-900),
+      1px -1px 1px var(--bs-gray-900),
+      -1px -1px 1px var(--bs-gray-900);
+  }
 }
 
 .table-details {
@@ -181,4 +201,8 @@ td.text-end > .hstack {
 
 .text-yellow {
   color: $yellow;
+}
+
+.vstack {
+  align-self: initial;
 }

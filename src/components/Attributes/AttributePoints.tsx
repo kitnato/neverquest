@@ -21,12 +21,10 @@ export function AttributePoints() {
   });
 
   return (
-    <Stack direction="horizontal" gap={3}>
-      <Stack direction="horizontal" gap={1}>
-        <IconDisplay Icon={IconAttributePoints} tooltip="Available attribute points" />
+    <Stack direction="horizontal">
+      <IconDisplay Icon={IconAttributePoints} tooltip="Available attribute points" />
 
-        <DeltasDisplay delta="attributePoints" />
-      </Stack>
+      <DeltasDisplay delta="attributePoints" />
 
       <OverlayTrigger
         overlay={
@@ -35,7 +33,7 @@ export function AttributePoints() {
 
             <PopoverBody>
               <Stack className="justify-content-center" direction="horizontal" gap={1}>
-                <IconImage Icon={IconEssence} size="small" />
+                <IconImage Icon={IconEssence} isSmall />
 
                 {formatNumber({ value: getAttributePointCost(levelValue) })}
               </Stack>

@@ -6,9 +6,9 @@ export function IconImage({
   Icon,
   isFlipped = false,
   isMirrored = false,
+  isSmall = false,
   isStencilled = false,
   overlayPlacement,
-  size,
   tooltip,
 }: IconImageProperties) {
   return (
@@ -19,7 +19,7 @@ export function IconImage({
     >
       <span>
         <Icon
-          className={`icon-image${size ? ` ${size}` : ""}${isStencilled ? " stencilled" : ""}`}
+          className={`icon-image${isSmall ? " small" : ""}${isStencilled ? " stencilled" : ""}`}
           style={{
             transform: `scaleX(${isMirrored ? -1 : 1}) scaleY(${isFlipped ? -1 : 1})`,
           }}

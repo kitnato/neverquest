@@ -1,8 +1,8 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
-import { ATTRIBUTES } from "@neverquest/data/attributes";
+import { ATTRIBUTES, REDUCTION_MAXIMUM } from "@neverquest/data/attributes";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { powerBonusBoost } from "@neverquest/state/items";
+import { infusablePower } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import { ATTRIBUTE_TYPES, type Attribute } from "@neverquest/types/unions";
 import { getAttributePointCost, getComputedStatistic } from "@neverquest/utilities/getters";
@@ -13,10 +13,17 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 export const absorbedEssence = withStateKey("absorbedEssence", (key) =>
   selector({
     get: ({ get }) =>
-      [Array.from({ length: get(level) })].reduce(
+      Array.from<undefined>({ length: get(level) }).reduce(
         (aggregator, _, index) => aggregator + getAttributePointCost(index),
         0,
       ),
+    key,
+  }),
+);
+
+export const areAttributesAffordable = withStateKey("areAttributesAffordable", (key) =>
+  selector({
+    get: ({ get }) => get(attributePoints) > 0,
     key,
   }),
 );
@@ -41,44 +48,17 @@ export const attributePoints = withStateKey("attributePoints", (key) =>
   }),
 );
 
-export const areAttributesAffordable = withStateKey("areAttributesAffordable", (key) =>
-  selector({
-    get: ({ get }) => get(attributePoints) > 0,
-    key,
-  }),
-);
-
 export const attributePowerBonus = withStateKey("attributePowerBonus", (key) =>
   selectorFamily<number, Attribute>({
     get:
       (parameter) =>
       ({ get }) => {
-        const powerBonusBoostValue = get(powerBonusBoost);
+        const infusablePowerValue = get(infusablePower("tome of power"));
 
-        return (
-          get(level) *
-          ATTRIBUTES[parameter].powerBonus *
-          (powerBonusBoostValue === 0 ? 0 : 1 + powerBonusBoostValue)
-        );
+        return infusablePowerValue === 0
+          ? 0
+          : get(level) * ATTRIBUTES[parameter].powerBonus * (1 + infusablePowerValue);
       },
-    key,
-  }),
-);
-
-export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =>
-  selectorFamily<boolean, Attribute>({
-    get:
-      (parameter) =>
-      ({ get }) =>
-        ATTRIBUTES[parameter].maximum === get(attributeRank(parameter)),
-    key,
-  }),
-);
-
-export const level = withStateKey("level", (key) =>
-  selector({
-    get: ({ get }) =>
-      ATTRIBUTE_TYPES.reduce((aggregator, current) => aggregator + get(attributeRank(current)), 0),
     key,
   }),
 );
@@ -97,19 +77,30 @@ export const attributeStatistic = withStateKey("attributeStatistic", (key) =>
   }),
 );
 
+export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =>
+  selectorFamily<boolean, Attribute>({
+    get:
+      (parameter) =>
+      ({ get }) =>
+        ATTRIBUTES[parameter].increment < 1 &&
+        get(attributeStatistic(parameter)) >= REDUCTION_MAXIMUM,
+    key,
+  }),
+);
+
+export const level = withStateKey("level", (key) =>
+  selector({
+    get: ({ get }) =>
+      ATTRIBUTE_TYPES.reduce((aggregator, current) => aggregator + get(attributeRank(current)), 0),
+    key,
+  }),
+);
+
 // ATOMS
 
 export const attributeRank = withStateKey("attributeRank", (key) =>
   atomFamily<number, Attribute>({
     default: 0,
-    effects: (parameter) => [handleLocalStorage({ key, parameter })],
-    key,
-  }),
-);
-
-export const isAttributeUnlocked = withStateKey("isAttributeUnlocked", (key) =>
-  atomFamily<boolean, Attribute>({
-    default: false,
     effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,
   }),

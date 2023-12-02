@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRecoilState, useResetRecoilState } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { CONSUMABLES, TRINKETS } from "@neverquest/data/inventory";
+import { CONSUMABLES, TRINKETS } from "@neverquest/data/items";
 import IconArmor from "@neverquest/icons/armor.svg?react";
 import IconGem from "@neverquest/icons/gem.svg?react";
 import IconMelee from "@neverquest/icons/melee.svg?react";
@@ -13,7 +13,7 @@ import { itemsAcquired } from "@neverquest/state/inventory";
 import {
   isArmor,
   isConsumableItem,
-  isGem,
+  isGemItem,
   isMelee,
   isShield,
   isTrinketItem,
@@ -34,9 +34,9 @@ export function ItemAcquisition() {
       <div
         className={`position-absolute ${getAnimationClass({ name: "zoomOut", speed: "slower" })}`}
         key={ID}
-        onAnimationEnd={() =>
-          setItemsAcquired((current) => current.filter(({ ID: currentID }) => currentID !== ID))
-        }
+        onAnimationEnd={() => {
+          setItemsAcquired((current) => current.filter(({ ID: currentID }) => currentID !== ID));
+        }}
         // TODO - Bootstrap positioning utilities do not work with Animation.css zoomOut
         style={{ left: -10, top: 16 }}
       >
@@ -50,7 +50,7 @@ export function ItemAcquisition() {
               return CONSUMABLES[current.name].Icon;
             }
 
-            if (isGem(current)) {
+            if (isGemItem(current)) {
               return IconGem;
             }
 
@@ -72,7 +72,7 @@ export function ItemAcquisition() {
 
             return IconUnknown;
           })()}
-          size="small"
+          isSmall
         />
       </div>
     );

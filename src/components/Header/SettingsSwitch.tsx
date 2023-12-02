@@ -1,7 +1,7 @@
 import { Form } from "react-bootstrap";
 import { type RecoilState, useRecoilState } from "recoil";
 
-import { formatSlug } from "@neverquest/utilities/formatters";
+import { formatKebabCase } from "@neverquest/utilities/formatters";
 
 export function SettingsSwitch({
   isDisabled = false,
@@ -18,9 +18,11 @@ export function SettingsSwitch({
     <Form.Switch
       defaultChecked={toggledValue}
       disabled={isDisabled}
-      id={formatSlug(label)}
+      id={formatKebabCase(label)}
       label={label}
-      onChange={({ target: { checked } }) => setToggle(checked)}
+      onChange={({ target: { checked } }) => {
+        setToggle(checked);
+      }}
     />
   );
 }

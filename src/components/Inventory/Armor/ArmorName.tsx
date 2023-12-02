@@ -1,5 +1,4 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
-import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -9,8 +8,8 @@ import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/Dod
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
+import { ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
-import { ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/inventory";
 import IconDeflection from "@neverquest/icons/deflection.svg?react";
 import IconNone from "@neverquest/icons/none.svg?react";
 import IconProtection from "@neverquest/icons/protection.svg?react";
@@ -21,10 +20,10 @@ import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ArmorName({
   armor,
-  placement,
+  isInInventory = false,
 }: {
   armor: Armor | typeof ARMOR_NONE;
-  placement?: Placement;
+  isInInventory?: boolean;
 }) {
   const armorEquippedValue = useRecoilValue(armorEquipped);
   const isShowingDeflection = useRecoilValue(isShowing("deflection"));
@@ -32,7 +31,7 @@ export function ArmorName({
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
 
   const { deflection, ID, level, name, protection, staminaCost, weight } = armor;
-  const isUnshielded = name === ARMOR_NONE.name;
+  const isUnshielded = ID === ARMOR_NONE.ID;
   const showComparison = ID !== armorEquippedValue.ID;
 
   return (
@@ -45,9 +44,7 @@ export function ArmorName({
             <DetailsTable>
               <GearLevelDetail
                 comparison={
-                  showComparison
-                    ? { showing: "armor", subtrahend: armorEquippedValue.level }
-                    : undefined
+                  showComparison && { showing: "armor", subtrahend: armorEquippedValue.level }
                 }
                 level={level}
               />
@@ -57,7 +54,7 @@ export function ArmorName({
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconImage Icon={IconProtection} size="small" />
+                    <IconImage Icon={IconProtection} isSmall />
 
                     {formatNumber({ value: protection })}
 
@@ -81,14 +78,13 @@ export function ArmorName({
 
                       <td>
                         {(() => {
-                          const { gearClass } = armor;
-
-                          if (gearClass) {
+                          if ("gearClass" in armor) {
+                            const { gearClass } = armor;
                             const { Icon } = ARMOR_SPECIFICATIONS[gearClass];
 
                             return (
                               <Stack direction="horizontal" gap={1}>
-                                <IconImage Icon={Icon} size="small" />
+                                <IconImage Icon={Icon} isSmall />
 
                                 {capitalizeAll(gearClass)}
                               </Stack>
@@ -97,7 +93,7 @@ export function ArmorName({
 
                           return (
                             <Stack direction="horizontal" gap={1}>
-                              <IconImage Icon={IconNone} size="small" />
+                              <IconImage Icon={IconNone} isSmall />
                               None
                             </Stack>
                           );
@@ -118,7 +114,7 @@ export function ArmorName({
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconDeflection} size="small" />
+                          <IconImage Icon={IconDeflection} isSmall />
 
                           {formatNumber({ format: "percentage", value: deflection })}
 
@@ -166,9 +162,7 @@ export function ArmorName({
               {!isUnshielded && (
                 <WeightDetail
                   comparison={
-                    showComparison
-                      ? { showing: "armor", subtrahend: armorEquippedValue.weight }
-                      : undefined
+                    showComparison && { showing: "armor", subtrahend: armorEquippedValue.weight }
                   }
                   weight={weight}
                 />
@@ -177,7 +171,7 @@ export function ArmorName({
           </PopoverBody>
         </Popover>
       }
-      placement={placement}
+      placement={isInInventory ? "right" : "top"}
     >
       <span>{name}</span>
     </OverlayTrigger>

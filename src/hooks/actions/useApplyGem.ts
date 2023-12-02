@@ -1,12 +1,12 @@
 import { useRecoilCallback } from "recoil";
 
-import { GEM_FITTING_COST } from "@neverquest/data/inventory";
+import { GEM_FITTING_COST } from "@neverquest/data/items";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { armor, canApplyGem, shield, weapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
 import type { GemItem } from "@neverquest/types";
-import { isGear } from "@neverquest/types/type-guards";
+import { isGearItem } from "@neverquest/types/type-guards";
 import { GEAR_TYPES, type Gear } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -32,7 +32,7 @@ export function useApplyGem() {
             current
               .filter((current) => current.ID !== gem.ID)
               .map((current) => {
-                if (isGear(current) && current.ID === ID) {
+                if (isGearItem(current) && current.ID === ID) {
                   return { ...current, gems: [...current.gems, gem] };
                 }
 

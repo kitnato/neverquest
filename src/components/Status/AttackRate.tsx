@@ -6,8 +6,8 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { AttackMeter } from "@neverquest/components/Status/AttackMeter";
+import { WEAPON_NONE } from "@neverquest/data/gear";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
-import { WEAPON_NONE } from "@neverquest/data/inventory";
 import { useAttack } from "@neverquest/hooks/actions/useAttack";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -26,10 +26,12 @@ import {
 import { weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMonsterDead } from "@neverquest/state/monster";
-import { attackRate } from "@neverquest/state/statistics";
+import { attackRate, attackRateReduction } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function AttackRate() {
+  const attackRateReductionValue = useRecoilValue(attackRateReduction);
   const attributePowerBonusSpeed = useRecoilValue(attributePowerBonus("speed"));
   const attributeStatisticSpeed = useRecoilValue(attributeStatistic("speed"));
   const canAttackOrParryValue = useRecoilValue(canAttackOrParry);
@@ -39,7 +41,7 @@ export function AttackRate() {
   const isRecoveringValue = useRecoilValue(isRecovering);
   const isShowingAttackRate = useRecoilValue(isShowing("attackRate"));
   const isShowingAttackRateDetails = useRecoilValue(isShowing("attackRateDetails"));
-  const weaponValue = useRecoilValue(weapon);
+  const { name, rate: weaponAttackRate } = useRecoilValue(weapon);
   const setAttackDuration = useSetRecoilState(attackDuration);
 
   const attack = useAttack();
@@ -59,7 +61,7 @@ export function AttackRate() {
     delta: "attackRate",
     format: "time",
     state: attackRate,
-    stop: ({ current, previous }) => (previous ?? 0) - current < 10,
+    stop: ({ current, previous }) => Math.abs((previous ?? 0) - current) < 1,
   });
 
   if (!isShowingAttackRate) {
@@ -67,7 +69,11 @@ export function AttackRate() {
   }
 
   return (
-    <IconDisplay Icon={IconAttackRate} isAnimated tooltip="Total attack rate">
+    <IconDisplay
+      className={getAnimationClass({ name: "flipInX" })}
+      Icon={IconAttackRate}
+      tooltip="Total attack rate"
+    >
       <Stack className="w-100" direction="horizontal">
         <OverlayTrigger
           overlay={
@@ -78,14 +84,14 @@ export function AttackRate() {
                 <DetailsTable>
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>{`${
-                      weaponValue.name === WEAPON_NONE.name ? "Base" : "Weapon"
+                      name === WEAPON_NONE.name ? "Base" : "Weapon"
                     }:`}</td>
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconWeaponAttackRate} size="small" />
+                        <IconImage Icon={IconWeaponAttackRate} isSmall />
 
-                        {formatNumber({ format: "time", value: weaponValue.rate })}
+                        {formatNumber({ format: "time", value: weaponAttackRate })}
                       </Stack>
                     </td>
                   </tr>
@@ -93,7 +99,7 @@ export function AttackRate() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconWeaponSpeed} size="small" />
+                        <IconImage Icon={IconWeaponSpeed} isSmall />
                         Speed:
                       </Stack>
                     </td>
@@ -101,20 +107,19 @@ export function AttackRate() {
                     <td>
                       <Stack direction="horizontal" gap={1}>
                         {`-${formatNumber({
-                          decimals: 0,
                           format: "percentage",
-                          value: attributePowerBonusSpeed,
+                          value: attributeStatisticSpeed,
                         })}`}
 
-                        {attributeStatisticSpeed > 0 && (
+                        {attributePowerBonusSpeed > 0 && (
                           <>
                             <span>{LABEL_SEPARATOR}</span>
 
-                            <IconImage Icon={IconTomeOfPower} size="small" />
+                            <IconImage Icon={IconTomeOfPower} isSmall />
 
-                            {`+${formatNumber({
+                            {`-${formatNumber({
                               format: "percentage",
-                              value: attributeStatisticSpeed,
+                              value: attackRateReductionValue - attributeStatisticSpeed,
                             })}`}
                           </>
                         )}

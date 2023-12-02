@@ -11,6 +11,7 @@ import { blockChance } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Block() {
   const blockChanceValue = useRecoilValue(blockChance);
@@ -32,7 +33,11 @@ export function Block() {
 
   if (!isEmpty) {
     return (
-      <IconDisplay Icon={IconBlock} isAnimated tooltip="Block chance">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconBlock}
+        tooltip="Total block chance"
+      >
         <Stack direction="horizontal" gap={1}>
           <span>{formatNumber({ format: "percentage", value: blockChanceValue })}</span>
 

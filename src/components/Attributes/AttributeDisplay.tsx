@@ -11,31 +11,24 @@ import { useIncreaseAttribute } from "@neverquest/hooks/actions/useIncreaseAttri
 import IconWait from "@neverquest/icons/hourglass.svg?react";
 import IconIncrease from "@neverquest/icons/increase.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
-import {
-  areAttributesAffordable,
-  isAttributeAtMaximum,
-  isAttributeUnlocked,
-} from "@neverquest/state/attributes";
-import { isStageCompleted, isStageStarted, location } from "@neverquest/state/encounter";
+import { areAttributesAffordable, isAttributeAtMaximum } from "@neverquest/state/attributes";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Attribute } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
-  const isAttributeUnlockedValue = useRecoilValue(isAttributeUnlocked(attribute));
   const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable);
   const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(attribute));
-  const isStageCompletedValue = useRecoilValue(isStageCompleted);
-  const isStageStartedValue = useRecoilValue(isStageStarted);
-  const locationValue = useRecoilValue(location);
+  const isSkillAcquiredValue = useRecoilValue(
+    isSkillAcquired(ATTRIBUTES[attribute].requiredSkill ?? "none"),
+  );
 
   const increaseAttribute = useIncreaseAttribute();
 
   const { description, Icon } = ATTRIBUTES[attribute];
-  const isUnsafe = isStageStartedValue && !isStageCompletedValue && locationValue === "wilderness";
-  const canIncrease = areAttributesAffordableValue && !isUnsafe;
   const name = capitalizeAll(attribute);
 
-  if (isAttributeUnlockedValue) {
+  if (isSkillAcquiredValue) {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay description={description} Icon={Icon} tooltip="Attribute">
@@ -54,22 +47,21 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
                   <PopoverBody>
                     <Stack gap={1}>
                       <AttributeIncreaseDetails attribute={attribute} />
-
-                      {!areAttributesAffordableValue && "No attribute points."}
-
-                      {isUnsafe && "Cannot concentrate."}
                     </Stack>
                   </PopoverBody>
                 </Popover>
               }
+              placement="bottom"
             >
               <span>
                 <Button
-                  disabled={!canIncrease}
-                  onClick={() => increaseAttribute(attribute)}
+                  disabled={!areAttributesAffordableValue}
+                  onClick={() => {
+                    increaseAttribute(attribute);
+                  }}
                   variant="outline-dark"
                 >
-                  <IconImage Icon={canIncrease ? IconIncrease : IconWait} />
+                  <IconImage Icon={areAttributesAffordableValue ? IconIncrease : IconWait} />
                 </Button>
               </span>
             </OverlayTrigger>

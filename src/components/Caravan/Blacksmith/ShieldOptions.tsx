@@ -6,9 +6,9 @@ import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
 import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { SetGearLevel } from "@neverquest/components/Caravan/SetGearLevel";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { GEAR_LEVEL_MAXIMUM, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
-import { LABEL_UNKNOWN } from "@neverquest/data/general";
-import { SHIELD_SPECIFICATIONS } from "@neverquest/data/inventory";
+import { GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
+import { SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
+import { LABEL_UNKNOWN, LEVEL_MAXIMUM } from "@neverquest/data/general";
 import IconBlock from "@neverquest/icons/block.svg?react";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconStagger from "@neverquest/icons/stagger.svg?react";
@@ -17,7 +17,7 @@ import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { SHIELD_CLASS_TYPES, type ShieldClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
-import { allowNSFW } from "@neverquest/state/settings";
+import { allowProfanity } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateShield } from "@neverquest/utilities/generators";
@@ -29,16 +29,16 @@ import {
 } from "@neverquest/utilities/getters";
 
 export function ShieldOptions() {
-  const allowNSFWValue = useRecoilValue(allowNSFW);
+  const allowProfanityValue = useRecoilValue(allowProfanity);
   const [{ shield: craftedShield }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const shieldcraftValue = useRecoilValue(isSkillAcquired("shieldcraft"));
   const stageValue = useRecoilValue(stage);
 
   const [shieldClass, setShieldClass] = useState<ShieldClass>("small");
-  const [shieldLevel, setShieldLevel] = useState(stageValue);
+  const [shieldLevel, setShieldLevel] = useState(Math.min(stageValue, LEVEL_MAXIMUM));
 
   const factor = getGrowthSigmoid(shieldLevel);
-  const maximumShieldLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GEAR_LEVEL_MAXIMUM);
+  const maximumShieldLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, LEVEL_MAXIMUM);
   const { block, stagger, staminaCost, weight } = getShieldRanges({
     factor,
     gearClass: shieldClass,
@@ -47,7 +47,7 @@ export function ShieldOptions() {
   return (
     <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
-        <SetGearLevel state={[shieldLevel, setShieldLevel]} />
+        <SetGearLevel maximum={maximumShieldLevel} state={[shieldLevel, setShieldLevel]} />
 
         <IconDisplay
           Icon={SHIELD_SPECIFICATIONS[shieldClass].Icon}
@@ -55,7 +55,9 @@ export function ShieldOptions() {
           tooltip="Class"
         >
           <FormSelect
-            onChange={({ target: { value } }) => setShieldClass(value as ShieldClass)}
+            onChange={({ target: { value } }) => {
+              setShieldClass(value as ShieldClass);
+            }}
             value={shieldClass}
           >
             {SHIELD_CLASS_TYPES.map((current) => (
@@ -113,23 +115,23 @@ export function ShieldOptions() {
         <span className="text-center">Cannot use without training.</span>
       ) : craftedShield === undefined ? (
         <CraftGear
-          onCraft={() =>
+          onCraft={() => {
             setBlacksmithInventory((current) => ({
               ...current,
               shield: generateShield({
-                allowNSFW: allowNSFWValue,
+                allowProfanity: allowProfanityValue,
                 gearClass: shieldClass,
                 level: shieldLevel,
                 nameStructure: getNameStructure(),
                 prefixTags:
-                  shieldLevel <= stageValue - GEAR_LEVEL_RANGE_MAXIMUM
+                  shieldLevel <= maximumShieldLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
                     ? ["lowQuality"]
                     : shieldLevel === maximumShieldLevel
                       ? ["highQuality"]
                       : undefined,
               }),
-            }))
-          }
+            }));
+          }}
           price={getGearPrice({
             factor,
             ...SHIELD_SPECIFICATIONS[shieldClass],
@@ -138,9 +140,9 @@ export function ShieldOptions() {
       ) : (
         <CraftedGear
           gearItem={craftedShield}
-          onTransfer={() =>
-            setBlacksmithInventory((current) => ({ ...current, shield: undefined }))
-          }
+          onTransfer={() => {
+            setBlacksmithInventory((current) => ({ ...current, shield: undefined }));
+          }}
         />
       )}
     </Stack>

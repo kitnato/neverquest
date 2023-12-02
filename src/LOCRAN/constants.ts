@@ -1,4 +1,4 @@
-export const APOSTROPHE_CHANCE = 0.25;
+export const APOSTROPHE_CHANCE = 0.5;
 
 export const ARTICLE_CHANCE = 0.33;
 

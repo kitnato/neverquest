@@ -1,27 +1,35 @@
+import { nanoid } from "nanoid";
 import type { RecoilValue, Snapshot } from "recoil";
 
 import { formatNumber } from "./formatters";
 import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
 import { NAME_STRUCTURE, PROGRESS_REDUCTION } from "@neverquest/data/encounter";
 import {
-  CLASS_ANIMATED,
-  CLASS_ANIMATE_PREFIX,
-  GROWTH_MAXIMUM,
-  RETIREMENT_MINIMUM_LEVEL,
-  ROMAN_NUMERALS,
-  ROMAN_NUMERAL_MAXIMUM,
-} from "@neverquest/data/general";
-import {
   ARMOR_SPECIFICATIONS,
   SHIELD_SPECIFICATIONS,
   WEAPON_BASE,
   WEAPON_MODIFIER,
   WEAPON_SPECIFICATIONS,
-} from "@neverquest/data/inventory";
+} from "@neverquest/data/gear";
+import {
+  CLASS_ANIMATED,
+  CLASS_ANIMATE_PREFIX,
+  GROWTH_MAXIMUM,
+  MILLISECONDS_IN_SECOND,
+  RETIREMENT_MINIMUM_LEVEL,
+  ROMAN_NUMERALS,
+  ROMAN_NUMERAL_MAXIMUM,
+} from "@neverquest/data/general";
+import { GEM_BASE } from "@neverquest/data/items";
 import { QUESTS } from "@neverquest/data/quests";
 import type { ArmorClass, NameStructure, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
-import type { GeneratorRange, QuestData } from "@neverquest/types";
-import { isConquest, isGeneratorRanges, isRoutine } from "@neverquest/types/type-guards";
+import type { GeneratorRange, InventoryItem, QuestData } from "@neverquest/types";
+import {
+  isConquest,
+  isGearItem,
+  isGeneratorRanges,
+  isRoutine,
+} from "@neverquest/types/type-guards";
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
 import type { Grip, Quest } from "@neverquest/types/unions";
 
@@ -82,7 +90,7 @@ export function getDamagePerRate({
   const regular = damage * (1 - damageModifierChance);
   const critical = damage * damageModifierChance * damageModifier;
 
-  return (regular + critical) / (rate / 1000);
+  return (regular + critical) / (rate / MILLISECONDS_IN_SECOND);
 }
 
 export function getDamagePerTick({
@@ -242,8 +250,25 @@ export function getRomanNumeral(value: number) {
   return result;
 }
 
-export function getSellPrice({ price }: { price: number }) {
-  return Math.ceil(price / 2);
+export function getSellPrice(item: InventoryItem) {
+  const { price } = item;
+  let supplement = 0;
+
+  if (isGearItem(item)) {
+    const { gems } = item;
+    const { length } = gems;
+
+    if (length > 0) {
+      supplement +=
+        getSellPrice({
+          ...GEM_BASE,
+          ID: nanoid(),
+          name: "ruby",
+        }) * length;
+    }
+  }
+
+  return Math.ceil(price / 2) + supplement;
 }
 
 export function getShieldRanges({ factor, gearClass }: { factor: number; gearClass: ShieldClass }) {

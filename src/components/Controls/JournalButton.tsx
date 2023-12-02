@@ -41,14 +41,16 @@ export function JournalButton() {
                   : ""
               }`}
               disabled={isAttackingValue}
-              onClick={() => setIsJournalOpen(true)}
+              onClick={() => {
+                setIsJournalOpen(true);
+              }}
               variant="outline-dark"
             >
               <IconImage Icon={IconJournal} />
 
               {canCompleteQuest && (
                 <IconBadge alignToButton>
-                  <IconImage Icon={IconAttention} size="small" />
+                  <IconImage Icon={IconAttention} isSmall />
                 </IconBadge>
               )}
             </Button>
@@ -58,7 +60,9 @@ export function JournalButton() {
         <DismissableScreen
           hideOverflow
           isShowing={isJournalOpenValue}
-          onClose={() => setIsJournalOpen(false)}
+          onClose={() => {
+            setIsJournalOpen(false);
+          }}
           title="Journal"
         >
           <Journal />

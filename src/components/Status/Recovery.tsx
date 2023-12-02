@@ -14,13 +14,13 @@ import IconRecovery from "@neverquest/icons/recovery.svg?react";
 import IconResilience from "@neverquest/icons/resilience.svg?react";
 import { isRecovering, recoveryDuration } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
-import { isMasteryUnlocked, masteryStatistic } from "@neverquest/state/masteries";
+import { masteryStatistic } from "@neverquest/state/masteries";
 import { recoveryRate } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Recovery() {
   const isRecoveringValue = useRecoilValue(isRecovering);
-  const isMasteryUnlockedValue = useRecoilValue(isMasteryUnlocked("resilience"));
   const isShowingRecovery = useRecoilValue(isShowing("recovery"));
   const resilienceValue = useRecoilValue(masteryStatistic("resilience"));
   const setRecoveryDuration = useSetRecoilState(recoveryDuration);
@@ -41,7 +41,11 @@ export function Recovery() {
   }
 
   return (
-    <IconDisplay Icon={IconRecovery} isAnimated tooltip="Recovery rate">
+    <IconDisplay
+      className={getAnimationClass({ name: "flipInX" })}
+      Icon={IconRecovery}
+      tooltip="Recovery rate"
+    >
       <Stack className="w-100" direction="horizontal">
         <OverlayTrigger
           overlay={
@@ -59,13 +63,12 @@ export function Recovery() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconResilience} size="small" />
+                        <IconImage Icon={IconResilience} isSmall />
                         Resilience:
                       </Stack>
                     </td>
 
                     <td>{`-${formatNumber({
-                      decimals: 0,
                       format: "percentage",
                       value: resilienceValue,
                     })}`}</td>
@@ -74,7 +77,7 @@ export function Recovery() {
               </PopoverBody>
             </Popover>
           }
-          trigger={isMasteryUnlockedValue ? ["hover", "focus"] : []}
+          trigger={resilienceValue > 0 ? ["hover", "focus"] : []}
         >
           <span className="w-100">
             <RecoveryMeter />

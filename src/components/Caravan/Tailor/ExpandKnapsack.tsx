@@ -5,7 +5,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
 import { TAILORING_EXPANSION, TAILORING_PRICE_MAXIMUM } from "@neverquest/data/caravan";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/data/general";
-import { ENCUMBRANCE_CAPACITY } from "@neverquest/data/inventory";
+import { ENCUMBRANCE_CAPACITY } from "@neverquest/data/items";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
@@ -30,7 +30,6 @@ export function ExpandKnapsack() {
       TAILORING_PRICE_MAXIMUM.knapsack * getGrowthSigmoid(capacity - (ENCUMBRANCE_CAPACITY - 1)),
     );
     const isAffordable = price <= essenceValue;
-    const canExpand = isAffordable && ownedItemKnapsack !== undefined;
 
     return (
       <Stack gap={3}>
@@ -53,18 +52,12 @@ export function ExpandKnapsack() {
             </IconDisplay>
 
             <OverlayTrigger
-              overlay={
-                <Tooltip>
-                  {ownedItemKnapsack === undefined && <div>Knapsack required.</div>}
-
-                  {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
-                </Tooltip>
-              }
-              trigger={canExpand ? [] : ["hover", "focus"]}
+              overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
+              trigger={isAffordable ? [] : ["hover", "focus"]}
             >
               <span>
                 <Button
-                  disabled={!canExpand}
+                  disabled={!isAffordable}
                   onClick={() => {
                     transactEssence(-price);
                     setInventory((currentInventory) =>
@@ -79,6 +72,7 @@ export function ExpandKnapsack() {
                           : currentItem,
                       ),
                     );
+
                     progressQuest({
                       amount: TAILORING_EXPANSION.knapsack,
                       quest: "knapsackExpanding",

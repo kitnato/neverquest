@@ -27,5 +27,3 @@ export type DeltaReserveBase = {
 };
 
 export type UIAttachment = "above" | "below";
-
-export type UISize = "normal" | "small";

@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
-import { ELEMENTALS, GEM_ELEMENTALS } from "@neverquest/data/inventory";
+import { ELEMENTALS, GEM_ELEMENTALS } from "@neverquest/data/items";
 import { armor, totalElementalEffects, weapon } from "@neverquest/state/gear";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -31,7 +31,7 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
 
               {LABEL_SEPARATOR}
 
-              <IconImage Icon={ELEMENTALS[elemental].Icon} size="small" />
+              <IconImage Icon={ELEMENTALS[elemental].Icon} isSmall />
 
               {`${formatNumber({ format: "time", value: duration })}`}
             </Stack>

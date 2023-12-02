@@ -21,7 +21,9 @@ export function GameOver() {
 
   const restart = useRestart();
 
-  const onHide = () => setIsShowingGameOver(false);
+  const onHide = () => {
+    setIsShowingGameOver(false);
+  };
 
   return (
     <Modal onHide={onHide} show={isGameOverValue && isShowingGameOver}>
@@ -34,7 +36,7 @@ export function GameOver() {
         </ModalTitle>
       </ModalHeader>
 
-      <ModalBody>Darkness has erased all lineage across this world. Start anew?</ModalBody>
+      <ModalBody>All lineage has been erased. Start anew?</ModalBody>
 
       <ModalFooter>
         <Button

@@ -8,12 +8,12 @@ import { SelectGem } from "@neverquest/components/Caravan/Alchemist/SelectGem";
 import { IconImage } from "@neverquest/components/IconImage";
 import { TRANSMUTE_COST } from "@neverquest/data/caravan";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
-import { GEM_BASE } from "@neverquest/data/inventory";
+import { GEM_BASE } from "@neverquest/data/items";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconTransmute from "@neverquest/icons/transmute.svg?react";
 import { inventory } from "@neverquest/state/inventory";
-import { isGem } from "@neverquest/types/type-guards";
+import { isGemItem } from "@neverquest/types/type-guards";
 import { GEM_TYPES, type Gem } from "@neverquest/types/unions";
 import { stackItems } from "@neverquest/utilities/helpers";
 
@@ -28,7 +28,7 @@ export function TransmuteGems() {
 
   const gems = stackItems(
     inventoryValue
-      .filter(isGem)
+      .filter(isGemItem)
       .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
   );
   const transmutation = { ruby: 0, sapphire: 0, topaz: 0 };
@@ -39,8 +39,9 @@ export function TransmuteGems() {
 
   const isAffordable = transmutation[source] >= TRANSMUTE_COST;
 
-  const onSelect = (setSelection: (value: SetStateAction<Gem>) => void) => (gem: Gem) =>
+  const onSelect = (setSelection: (value: SetStateAction<Gem>) => void) => (gem: Gem) => {
     setSelection(gem);
+  };
 
   useEffect(() => {
     if (source === result) {
@@ -74,12 +75,12 @@ export function TransmuteGems() {
               if (isAffordable) {
                 const gemIDs = new Set(
                   inventoryValue
-                    .filter((current) => isGem(current) && current.name === source)
+                    .filter((current) => isGemItem(current) && current.name === source)
                     .map(({ ID }) => ID)
                     .slice(0, TRANSMUTE_COST),
                 );
 
-                setInventory(inventoryValue.filter(({ ID }) => !gemIDs.has(ID)));
+                setInventory((current) => current.filter(({ ID }) => !gemIDs.has(ID)));
 
                 acquireItem({
                   ...GEM_BASE,

@@ -29,7 +29,9 @@ export function RetireButton() {
         >
           <Button
             disabled={isGameOverValue || locationValue === "wilderness"}
-            onClick={() => setIsShowingRetire(true)}
+            onClick={() => {
+              setIsShowingRetire(true);
+            }}
             variant="outline-dark"
           >
             <IconImage Icon={IconRetire} />

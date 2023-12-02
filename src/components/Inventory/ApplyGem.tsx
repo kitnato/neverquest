@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_EMPTY } from "@neverquest/data/general";
-import { GEM_FITTING_COST } from "@neverquest/data/inventory";
+import { GEM_FITTING_COST } from "@neverquest/data/items";
 import { useApplyGem } from "@neverquest/hooks/actions/useApplyGem";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import { armor, canApplyGem, shield, weapon } from "@neverquest/state/gear";
@@ -30,7 +30,13 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
   const applyGem = useApplyGem();
 
   return (
-    <Dropdown onSelect={(slot) => slot !== undefined && applyGem({ gem, slot: slot as Gear })}>
+    <Dropdown
+      onSelect={(slot) => {
+        if (slot !== null) {
+          applyGem({ gem, slot: slot as Gear });
+        }
+      }}
+    >
       <Dropdown.Toggle variant="outline-dark">Apply</Dropdown.Toggle>
 
       <Dropdown.Menu>
@@ -44,7 +50,7 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
                 <span className="mr-2">{capitalizeAll(name)}</span>
 
                 <Stack direction="horizontal" gap={1}>
-                  <IconImage Icon={IconEssence} size="small" />
+                  <IconImage Icon={IconEssence} isSmall />
 
                   {GEM_FITTING_COST[gems.length] ?? LABEL_EMPTY}
                 </Stack>

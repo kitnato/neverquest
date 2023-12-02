@@ -9,8 +9,8 @@ import { inventory } from "@neverquest/state/inventory";
 import {
   isArmor,
   isConsumableItem,
-  isGear,
-  isGem,
+  isGearItem,
+  isGemItem,
   isShield,
   isUsable,
   isWeapon,
@@ -20,9 +20,11 @@ import { stackItems } from "@neverquest/utilities/helpers";
 export function SellItems() {
   const inventoryValue = useRecoilValue(inventory);
 
-  const equippedGear = inventoryValue.filter((current) => isGear(current) && current.isEquipped);
+  const equippedGear = inventoryValue.filter(
+    (current) => isGearItem(current) && current.isEquipped,
+  );
   const storedItems = inventoryValue.filter(
-    (current) => !isGear(current) || (isGear(current) && !current.isEquipped),
+    (current) => !isGearItem(current) || (isGearItem(current) && !current.isEquipped),
   );
 
   return (
@@ -34,7 +36,7 @@ export function SellItems() {
       ) : (
         <Stack gap={3}>
           {[equippedGear.find(isWeapon), equippedGear.find(isArmor), equippedGear.find(isShield)]
-            .filter(isGear)
+            .filter(isGearItem)
             .map((current) => {
               const { ID, isEquipped } = current;
 
@@ -43,8 +45,8 @@ export function SellItems() {
                   <Stack direction="horizontal" gap={1}>
                     <ItemDisplay
                       description={isEquipped ? "Equipped" : undefined}
+                      isInInventory
                       item={current}
-                      overlayPlacement="right"
                     />
                   </Stack>
 
@@ -54,11 +56,11 @@ export function SellItems() {
             })}
 
           {storedItems
-            .filter(isGear)
+            .filter(isGearItem)
             .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
             .map((current) => (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.ID}>
-                <ItemDisplay item={current} overlayPlacement="right" />
+                <ItemDisplay isInInventory item={current} />
 
                 <SellItem item={current} />
               </div>
@@ -83,7 +85,7 @@ export function SellItems() {
             ),
             ...stackItems(
               storedItems
-                .filter(isGem)
+                .filter(isGemItem)
                 .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
             ),
           ].map((current) => {

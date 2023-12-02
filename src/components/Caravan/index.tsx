@@ -1,5 +1,5 @@
 import { type FunctionComponent, useState } from "react";
-import { Card, Stack } from "react-bootstrap";
+import { Card, CardBody, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { Alchemist } from "@neverquest/components/Caravan/Alchemist";
@@ -14,11 +14,10 @@ import { Occultist } from "@neverquest/components/Caravan/Occultist";
 import { Tailor } from "@neverquest/components/Caravan/Tailor";
 import { Witch } from "@neverquest/components/Caravan/Witch";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
-import { CREW_ORDER } from "@neverquest/data/caravan";
 import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general";
 import { activeCrew, isCaravanHired } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
-import type { Crew } from "@neverquest/types/unions";
+import { CREW_TYPES, type Crew } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -49,16 +48,18 @@ export function Caravan() {
   return (
     <>
       <Card className={getAnimationClass({ name: "zoomIn", speed: "fast" })}>
-        <Card.Body>
+        <CardBody>
           <Stack gap={5}>
             <Stack gap={3}>
               {isShowingCrewHiring && <h6>Hired crew</h6>}
 
-              {CREW_ORDER.map((current, index) => (
+              {CREW_TYPES.map((current, index) => (
                 <CrewHired
                   crew={current}
                   key={index}
-                  setActive={() => toggleCrewActive(true, current)}
+                  setActive={() => {
+                    toggleCrewActive(true, current);
+                  }}
                 />
               ))}
             </Stack>
@@ -69,13 +70,13 @@ export function Caravan() {
 
                 {isCaravanHiredValue && <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>}
 
-                {CREW_ORDER.map((current, index) => (
+                {CREW_TYPES.map((current, index) => (
                   <CrewHirable crew={current} key={index} />
                 ))}
               </Stack>
             )}
           </Stack>
-        </Card.Body>
+        </CardBody>
       </Card>
 
       {activeCrewValue !== undefined &&
@@ -85,7 +86,9 @@ export function Caravan() {
           return (
             <DismissableScreen
               isShowing={isScreenShowing}
-              onClose={() => toggleCrewActive(false)}
+              onClose={() => {
+                toggleCrewActive(false);
+              }}
               title={capitalizeAll(activeCrewValue)}
             >
               <Component />

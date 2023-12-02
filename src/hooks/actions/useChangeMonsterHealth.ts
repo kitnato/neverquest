@@ -1,11 +1,12 @@
 import { useRecoilCallback } from "recoil";
 
-import { LOOTING_RATE } from "@neverquest/data/statistics";
+import { AILMENT_PENALTY, LOOTING_RATE } from "@neverquest/data/statistics";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { attackDuration, lootingDuration } from "@neverquest/state/character";
-import { isBoss } from "@neverquest/state/encounter";
+import { encounter } from "@neverquest/state/encounter";
 import {
+  isMonsterAiling,
   monsterAttackDuration,
   monsterHealth,
   monsterHealthMaximum,
@@ -30,11 +31,15 @@ export function useChangeMonsterHealth() {
       }) => {
         const get = getSnapshotGetter(snapshot);
 
-        const formattedValue = formatNumber({ value });
         const isPositive = value > 0;
+        const totalValue =
+          !isPositive && get(isMonsterAiling("staggered"))
+            ? value * AILMENT_PENALTY.staggered
+            : value;
+        const formattedValue = formatNumber({ value: totalValue });
         const monsterHealthValue = get(monsterHealth);
         const monsterHealthMaximumValue = get(monsterHealthMaximum);
-        const newHealth = Math.min(monsterHealthValue + value, monsterHealthMaximumValue);
+        const newHealth = Math.min(monsterHealthValue + totalValue, monsterHealthMaximumValue);
 
         addDelta({
           contents:
@@ -54,7 +59,27 @@ export function useChangeMonsterHealth() {
           reset(attackDuration);
           reset(monsterAttackDuration);
 
-          progressQuest({ quest: get(isBoss) ? "killingBoss" : "killing" });
+          switch (get(encounter)) {
+            case "boss": {
+              progressQuest({ quest: "killingBoss" });
+              break;
+            }
+
+            case "monster": {
+              progressQuest({ quest: "killing" });
+              break;
+            }
+
+            case "res cogitans": {
+              progressQuest({ quest: "killingResCogitans" });
+              break;
+            }
+
+            case "res dominus": {
+              progressQuest({ quest: "killingResDominus" });
+              break;
+            }
+          }
 
           switch (damageType) {
             case "bleed": {

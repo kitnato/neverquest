@@ -17,7 +17,7 @@ export function Elixir({ ID }: { ID: string }) {
 
   return (
     <OverlayTrigger
-      overlay={<Tooltip>Already at full stamina</Tooltip>}
+      overlay={<Tooltip>Already at full stamina.</Tooltip>}
       trigger={isStaminaAtMaximumValue ? ["hover", "focus"] : []}
     >
       <span>

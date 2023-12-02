@@ -1,4 +1,3 @@
-import { Container } from "react-bootstrap";
 import { RecoilRoot } from "recoil";
 
 import { CheatQuest } from "@neverquest/components/CheatQuest";
@@ -18,9 +17,7 @@ export function Core() {
 
           <Header />
 
-          <Container className="mb-4">
-            <Layout />
-          </Container>
+          <Layout />
         </Initializer>
       </RecoilRoot>
     </SeedContext.Provider>

@@ -12,11 +12,7 @@ import {
 import { isShowing } from "@neverquest/state/isShowing";
 import { questProgress } from "@neverquest/state/quests";
 import { ATTRIBUTE_TYPES, type Attribute } from "@neverquest/types/unions";
-import {
-  getAttributePointCost,
-  getComputedStatistic,
-  getSnapshotGetter,
-} from "@neverquest/utilities/getters";
+import { getAttributePointCost, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useIncreaseAttribute() {
   const progressQuest = useProgressQuest();
@@ -31,7 +27,7 @@ export function useIncreaseAttribute() {
           return;
         }
 
-        const { base, increment, maximum, shows } = ATTRIBUTES[attribute];
+        const { shows } = ATTRIBUTES[attribute];
         const newRank = get(attributeRank(attribute)) + 1;
 
         if (shows !== undefined) {
@@ -49,18 +45,11 @@ export function useIncreaseAttribute() {
         progressQuest({ quest: "powerLevelUltra" });
 
         if (
-          maximum !== undefined &&
-          getComputedStatistic({ amount: newRank, base, increment }) >= maximum
-        ) {
-          progressQuest({ quest: "attributesMaximum" });
-        }
-
-        if (
           ATTRIBUTE_TYPES.filter((current) => current !== attribute).every(
             (current) => get(attributeRank(current)) > 0,
           )
         ) {
-          progressQuest({ quest: "attributesAll" });
+          progressQuest({ quest: "attributesIncreasingAll" });
         }
 
         reset(questProgress("survivingNoAttributes"));

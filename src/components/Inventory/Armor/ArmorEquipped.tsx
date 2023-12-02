@@ -2,11 +2,12 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ArmorName } from "@neverquest/components/Inventory/Armor/ArmorName";
-import { ARMOR_NONE } from "@neverquest/data/inventory";
+import { ARMOR_NONE } from "@neverquest/data/gear";
 import IconArmorNone from "@neverquest/icons/armor-none.svg?react";
 import IconArmor from "@neverquest/icons/armor.svg?react";
 import { armor } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function ArmorEquipped() {
   const armorValue = useRecoilValue(armor);
@@ -15,8 +16,8 @@ export function ArmorEquipped() {
   if (isShowingArmor) {
     return (
       <IconDisplay
-        Icon={armorValue.name === ARMOR_NONE.name ? IconArmorNone : IconArmor}
-        isAnimated
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={armorValue.ID === ARMOR_NONE.ID ? IconArmorNone : IconArmor}
         tooltip="Equipped armor"
       >
         <ArmorName armor={armorValue} />

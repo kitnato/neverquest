@@ -28,7 +28,9 @@ export function Restart() {
 
   const restart = useRestart();
 
-  const onHide = () => setIsShowingRestart(false);
+  const onHide = () => {
+    setIsShowingRestart(false);
+  };
 
   return (
     <>
@@ -39,10 +41,12 @@ export function Restart() {
               ? getAnimationClass({ isInfinite: true, name: "pulse" })
               : undefined
           }
-          onClick={() => setIsShowingRestart(true)}
+          onClick={() => {
+            setIsShowingRestart(true);
+          }}
           variant="outline-light"
         >
-          <IconImage Icon={IconRestart} size="small" />
+          <IconImage Icon={IconRestart} isSmall />
         </Button>
       </OverlayTrigger>
 

@@ -1,4 +1,4 @@
-import { Button, Stack } from "react-bootstrap";
+import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { ApplyGem } from "@neverquest/components/Inventory/ApplyGem";
@@ -6,22 +6,21 @@ import { Antidote } from "@neverquest/components/Inventory/Consumable/Antidote";
 import { Bandages } from "@neverquest/components/Inventory/Consumable/Bandages";
 import { Elixir } from "@neverquest/components/Inventory/Consumable/Elixir";
 import { Salve } from "@neverquest/components/Inventory/Consumable/Salve";
+import { DiscardItem } from "@neverquest/components/Inventory/DiscardItem";
 import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
-import { StoredGear } from "@neverquest/components/Inventory/StoredGear";
 import { Usable } from "@neverquest/components/Inventory/Usable";
 import { CompassNavigate } from "@neverquest/components/Inventory/Usable/CompassNavigate";
 import { HearthstoneWarp } from "@neverquest/components/Inventory/Usable/HearthstoneWarp";
 import { InfusionInspect } from "@neverquest/components/Inventory/Usable/Infusion/InfusionInspect";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
-import { inventory } from "@neverquest/state/inventory";
-import type { GemItem } from "@neverquest/types";
+import { equippableItems, inventory } from "@neverquest/state/inventory";
 import {
   isArmor,
   isConsumableItem,
-  isGear,
-  isGem,
+  isGearItem,
+  isGemItem,
   isInfusableItem,
   isShield,
   isTrinketItem,
@@ -30,13 +29,18 @@ import {
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function Inventory() {
+  const equippableItemsValue = useRecoilValue(equippableItems);
   const inventoryValue = useRecoilValue(inventory);
 
   const toggleEquipGear = useToggleEquipGear();
 
-  const equippedGear = inventoryValue.filter((current) => isGear(current) && current.isEquipped);
+  const equippedGear = inventoryValue.filter(
+    (current) => isGearItem(current) && current.isEquipped,
+  );
   const equippedGearIDs = new Set(equippedGear.map(({ ID }) => ID));
-  const storedItems = inventoryValue.filter(({ ID }) => !equippedGearIDs.has(ID));
+  const storedItems = inventoryValue.filter(
+    ({ ID, name }) => !equippedGearIDs.has(ID) && name !== "knapsack",
+  );
 
   return (
     <Stack gap={5}>
@@ -50,15 +54,20 @@ export function Inventory() {
         {equippedGear.length === 0 && <span className="fst-italic">Nothing equipped.</span>}
 
         {[equippedGear.find(isWeapon), equippedGear.find(isArmor), equippedGear.find(isShield)]
-          .filter(isGear)
+          .filter(isGearItem)
           .map((current) => {
             const { ID } = current;
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                <ItemDisplay item={current} overlayPlacement="right" />
+                <ItemDisplay isInInventory item={current} />
 
-                <Button onClick={() => toggleEquipGear(current)} variant="outline-dark">
+                <Button
+                  onClick={() => {
+                    toggleEquipGear(current);
+                  }}
+                  variant="outline-dark"
+                >
                   Unequip
                 </Button>
               </div>
@@ -71,7 +80,40 @@ export function Inventory() {
 
         {storedItems.length === 0 && <span className="fst-italic">Nothing stored.</span>}
 
-        <StoredGear />
+        {storedItems
+          .filter(isGearItem)
+          .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
+          .map((current) => {
+            const { ID } = current;
+            const canEquipGear = equippableItemsValue[ID];
+
+            return (
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
+                <ItemDisplay isInInventory item={current} />
+
+                <Stack direction="horizontal" gap={3}>
+                  <OverlayTrigger
+                    overlay={<Tooltip>Skill required.</Tooltip>}
+                    trigger={canEquipGear ? [] : ["hover", "focus"]}
+                  >
+                    <span>
+                      <Button
+                        disabled={!canEquipGear}
+                        onClick={() => {
+                          toggleEquipGear(current);
+                        }}
+                        variant="outline-dark"
+                      >
+                        Equip
+                      </Button>
+                    </span>
+                  </OverlayTrigger>
+
+                  <DiscardItem ID={ID} />
+                </Stack>
+              </div>
+            );
+          })}
 
         {storedItems
           .filter(isTrinketItem)
@@ -79,29 +121,28 @@ export function Inventory() {
           .map((current) => {
             const { ID, name } = current;
 
-            if (name === "knapsack") {
-              return;
-            }
-
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
                 <Usable item={current} />
 
-                {(() => {
-                  switch (name) {
-                    case "compass": {
-                      return <CompassNavigate />;
-                    }
+                <Stack direction="horizontal" gap={3}>
+                  {(() => {
+                    switch (name) {
+                      case "compass": {
+                        return <CompassNavigate />;
+                      }
 
-                    case "hearthstone": {
-                      return <HearthstoneWarp />;
-                    }
+                      case "hearthstone": {
+                        return <HearthstoneWarp />;
+                      }
 
-                    default: {
-                      return;
+                      default: {
+                        return;
+                      }
                     }
-                  }
-                })()}
+                  })()}
+                  <DiscardItem ID={ID} />
+                </Stack>
               </div>
             );
           })}
@@ -116,7 +157,10 @@ export function Inventory() {
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
                 <Usable item={current} />
 
-                <InfusionInspect infusable={name} />
+                <Stack direction="horizontal" gap={3}>
+                  <InfusionInspect infusable={name} />
+                  <DiscardItem ID={ID} />
+                </Stack>
               </div>
             );
           })}
@@ -124,12 +168,12 @@ export function Inventory() {
         {[
           ...stackItems(
             storedItems
-              .filter((element) => isConsumableItem(element))
+              .filter(isConsumableItem)
               .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
           ),
           ...stackItems(
             storedItems
-              .filter((element) => isGem(element))
+              .filter(isGemItem)
               .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
           ),
         ].map(({ item, stack }) => {
@@ -137,30 +181,33 @@ export function Inventory() {
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-              <ItemDisplay item={item} overlayPlacement="right" stack={stack} />
+              <ItemDisplay item={item} stack={stack} />
 
-              {(() => {
-                switch (name) {
-                  case "antidote": {
-                    return <Antidote ID={ID} />;
+              <Stack direction="horizontal" gap={3}>
+                {(() => {
+                  switch (name) {
+                    case "antidote": {
+                      return <Antidote ID={ID} />;
+                    }
+                    case "bandages": {
+                      return <Bandages ID={ID} />;
+                    }
+                    case "elixir": {
+                      return <Elixir ID={ID} />;
+                    }
+                    case "salve": {
+                      return <Salve ID={ID} />;
+                    }
+                    case "phylactery": {
+                      return;
+                    }
+                    default: {
+                      return <ApplyGem gem={item} />;
+                    }
                   }
-                  case "bandages": {
-                    return <Bandages ID={ID} />;
-                  }
-                  case "elixir": {
-                    return <Elixir ID={ID} />;
-                  }
-                  case "salve": {
-                    return <Salve ID={ID} />;
-                  }
-                  case "phylactery": {
-                    return;
-                  }
-                  default: {
-                    return <ApplyGem gem={item as GemItem} />;
-                  }
-                }
-              })()}
+                })()}
+                <DiscardItem ID={ID} />
+              </Stack>
             </div>
           );
         })}

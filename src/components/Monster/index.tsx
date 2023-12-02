@@ -1,16 +1,14 @@
 import { useEffect, useRef } from "react";
-import { Card, Stack } from "react-bootstrap";
+import { Card, CardBody, Stack } from "react-bootstrap";
 import { useRecoilState, useResetRecoilState } from "recoil";
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterAilments } from "@neverquest/components/Monster/MonsterAilments";
-import { MonsterAttack } from "@neverquest/components/Monster/MonsterAttack";
+import { MonsterAttackRate } from "@neverquest/components/Monster/MonsterAttackRate";
 import { MonsterDistance } from "@neverquest/components/Monster/MonsterDistance";
-import { MonsterHealthMeter } from "@neverquest/components/Monster/MonsterHealthMeter";
+import { MonsterHealth } from "@neverquest/components/Monster/MonsterHealth";
 import { MonsterName } from "@neverquest/components/Monster/MonsterName";
 import { MonsterOffense } from "@neverquest/components/Monster/MonsterOffense";
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
-import IconHealth from "@neverquest/icons/health.svg?react";
 import { isMonsterNew, monsterElement } from "@neverquest/state/monster";
 import { animateElement } from "@neverquest/utilities/helpers";
 
@@ -48,19 +46,17 @@ export function Monster() {
   return (
     <Stack gap={3}>
       <Card ref={element}>
-        <Card.Body>
+        <CardBody>
           <Stack gap={3}>
             <MonsterName />
 
-            <IconDisplay Icon={IconHealth} tooltip="Monster health">
-              <MonsterHealthMeter />
-            </IconDisplay>
+            <MonsterHealth />
 
-            <MonsterAttack />
+            <MonsterAttackRate />
 
             <MonsterOffense />
           </Stack>
-        </Card.Body>
+        </CardBody>
       </Card>
 
       <MonsterDistance />

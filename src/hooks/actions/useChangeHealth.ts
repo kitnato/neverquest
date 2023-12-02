@@ -2,7 +2,8 @@ import { useRecoilCallback } from "recoil";
 
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { isGameOver } from "@neverquest/state/character";
+import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
+import { isAttacking, isGameOver } from "@neverquest/state/character";
 import { inventory, ownedItem } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import {
@@ -19,6 +20,7 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 export function useChangeHealth() {
   const addDelta = useAddDelta();
   const progressQuest = useProgressQuest();
+  const toggleAttacking = useToggleAttacking();
 
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
@@ -67,6 +69,10 @@ export function useChangeHealth() {
               delta: "health",
             });
 
+            if (get(isAttacking)) {
+              toggleAttacking();
+            }
+
             set(inventory, (current) => current.filter((item) => item.ID !== phylactery.ID));
 
             progressQuest({ quest: "resurrecting" });
@@ -82,6 +88,6 @@ export function useChangeHealth() {
           set(health, newHealth);
         }
       },
-    [addDelta, progressQuest],
+    [addDelta, progressQuest, toggleAttacking],
   );
 }

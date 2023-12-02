@@ -3,32 +3,22 @@ import { useRecoilValue } from "recoil";
 
 import { Skills } from "@neverquest/components/Skills";
 import { TrainableSkill } from "@neverquest/components/Skills/TrainableSkill";
-import { CREW } from "@neverquest/data/caravan";
 import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general";
-import { SKILLS } from "@neverquest/data/skills";
-import { trainedSkills } from "@neverquest/state/skills";
-import type { Skill } from "@neverquest/types/unions";
-
-const ALL_SKILLS = Object.entries(SKILLS)
-  .toSorted(([current1], [current2]) => current1.localeCompare(current2))
-  .toSorted(
-    ([, current1], [, current2]) =>
-      CREW[current1.requiredCrew].requiredStage - CREW[current2.requiredCrew].requiredStage,
-  )
-  .map(([current]) => current as Skill);
+import { acquiredSkills } from "@neverquest/state/skills";
+import { SKILL_TYPES } from "@neverquest/types/unions";
 
 export function Mercenary() {
-  const trainedSkillsValues = Object.values(useRecoilValue(trainedSkills));
+  const trainedSkillsValue = useRecoilValue(acquiredSkills);
 
   return (
     <Stack gap={5}>
       <Stack gap={3}>
         <h6>Acquire new skills</h6>
 
-        {trainedSkillsValues.every(Boolean) ? (
+        {Object.values(trainedSkillsValue).every(Boolean) ? (
           <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
         ) : (
-          ALL_SKILLS.map((current) => <TrainableSkill key={current} skill={current} />)
+          SKILL_TYPES.map((current) => <TrainableSkill key={current} skill={current} />)
         )}
       </Stack>
 

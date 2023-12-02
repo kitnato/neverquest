@@ -1,13 +1,14 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import { BLIGHT } from "@neverquest/data/monster";
+import { encounter, stage } from "./encounter";
+import { BLIGHT, POISON } from "@neverquest/data/monster";
 import { HEALTH_LOW_THRESHOLD, RESERVES, RESERVE_MINIMUM } from "@neverquest/data/reserves";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { poisonLength, poisonMagnitude } from "@neverquest/state/monster";
 import { questsBonus } from "@neverquest/state/quests";
 import type { BlightMagnitude } from "@neverquest/types";
 import type { Reserve } from "@neverquest/types/unions";
+import { getFromRange, getGrowthSigmoid, getLinearMapping } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -104,6 +105,85 @@ export const isStaminaAtMaximum = withStateKey("isStaminaAtMaximum", (key) =>
   }),
 );
 
+export const poisonChance = withStateKey("poisonChance", (key) =>
+  selector({
+    get: ({ get }) => {
+      const encounterValue = get(encounter);
+      const stageValue = get(stage);
+
+      const {
+        boss,
+        chance: { maximum, minimum },
+        finality,
+        requiredStage,
+      } = POISON;
+
+      if (stageValue < requiredStage) {
+        return 0;
+      }
+
+      if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
+        return finality;
+      }
+
+      return (
+        getFromRange({
+          factor: getGrowthSigmoid(getLinearMapping({ offset: requiredStage, stage: stageValue })),
+          maximum,
+          minimum,
+        }) * (encounterValue === "boss" ? boss : 1)
+      );
+    },
+    key,
+  }),
+);
+
+export const poisonLength = withStateKey("poisonLength", (key) =>
+  selector({
+    get: ({ get }) => {
+      const {
+        duration: { maximum, minimum },
+        requiredStage,
+      } = POISON;
+
+      return getFromRange({
+        factor: getGrowthSigmoid(
+          getLinearMapping({
+            offset: requiredStage,
+            stage: get(stage),
+          }),
+        ),
+        maximum,
+        minimum,
+      });
+    },
+    key,
+  }),
+);
+
+export const poisonMagnitude = withStateKey("poisonMagnitude", (key) =>
+  selector({
+    get: ({ get }) => {
+      const {
+        magnitude: { maximum, minimum },
+        requiredStage,
+      } = POISON;
+
+      return getFromRange({
+        factor: getGrowthSigmoid(
+          getLinearMapping({
+            offset: requiredStage,
+            stage: get(stage),
+          }),
+        ),
+        maximum,
+        minimum,
+      });
+    },
+    key,
+  }),
+);
+
 export const regenerationAmount = withStateKey("regenerationAmount", (key) =>
   selectorFamily<number, Reserve>({
     get:
@@ -122,7 +202,7 @@ export const regenerationRate = withStateKey("regenerationRate", (key) =>
         const { baseRegenerationRate } = RESERVES[parameter];
 
         return Math.round(
-          baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRate),
+          baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRateReduction),
         );
       },
     key,
@@ -139,11 +219,13 @@ export const reserveRegenerationAmount = withStateKey("reserveRegenerationAmount
   }),
 );
 
-export const reserveRegenerationRate = withStateKey("reserveRegenerationRate", (key) =>
-  selector({
-    get: ({ get }) => get(attributeStatistic("vigor")) * (1 + get(attributePowerBonus("vigor"))),
-    key,
-  }),
+export const reserveRegenerationRateReduction = withStateKey(
+  "reserveRegenerationRateReduction",
+  (key) =>
+    selector({
+      get: ({ get }) => get(attributeStatistic("vigor")) * (1 + get(attributePowerBonus("vigor"))),
+      key,
+    }),
 );
 
 export const staminaMaximum = withStateKey("staminaMaximum", (key) =>

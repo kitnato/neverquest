@@ -1,13 +1,15 @@
 import { useRecoilCallback } from "recoil";
 
+import { SHIELD_NONE } from "@neverquest/data/gear";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
-import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery";
 import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
+import { useTrainMastery } from "@neverquest/hooks/actions/useTrainMastery";
+import { staggerChance } from "@neverquest/state/ailments";
 import {
   canAttackOrParry,
   canBlock,
@@ -27,20 +29,23 @@ import {
   monsterAttackRate,
   monsterDamageAiling,
   monsterElement,
-  poisonChance,
-  poisonLength,
 } from "@neverquest/state/monster";
-import { blight, isPoisoned, poisonDuration } from "@neverquest/state/reserves";
+import {
+  blight,
+  isPoisoned,
+  poisonChance,
+  poisonDuration,
+  poisonLength,
+} from "@neverquest/state/reserves";
 import {
   blockChance,
   deflection,
   dodgeChance,
-  parry,
   parryAbsorption,
+  parryChance,
   parryDamage,
   protection,
   recoveryRate,
-  staggerChance,
   thorns,
 } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
@@ -54,7 +59,7 @@ export function useDefend() {
   const changeHealth = useChangeHealth();
   const changeMonsterHealth = useChangeMonsterHealth();
   const changeStamina = useChangeStamina();
-  const increaseMastery = useIncreaseMastery();
+  const trainMastery = useTrainMastery();
   const inflictElementalAilment = useInflictElementalAilment();
   const progressQuest = useProgressQuest();
 
@@ -71,28 +76,24 @@ export function useDefend() {
           speed: "fast",
         });
 
-        // If stunned, check if hit connects and decrease its duration.
-        if (get(isMonsterAiling("stunned"))) {
-          set(monsterAilmentDuration("stunned"), (current) => current - 1);
+        // If stunned, check if hit connects at all.
+        if (get(isMonsterAiling("stunned")) && Math.random() <= AILMENT_PENALTY.stunned) {
+          addDelta({
+            contents: {
+              color: "text-muted",
+              value: "MISS",
+            },
+            delta: "health",
+          });
 
-          if (Math.random() <= AILMENT_PENALTY.stunned) {
-            addDelta({
-              contents: {
-                color: "text-muted",
-                value: "MISS",
-              },
-              delta: "health",
-            });
-
-            return;
-          }
+          return;
         }
 
         const deltaHealth: DeltaDisplay[] = [];
         const deltaStamina: DeltaDisplay[] = [];
 
         // If attack is dodged, nothing else happens (all damage is negated).
-        if (Math.random() < get(dodgeChance)) {
+        if (Math.random() <= get(dodgeChance)) {
           const armorStaminaCost = get(armor).staminaCost;
 
           if (get(canDodge)) {
@@ -127,8 +128,9 @@ export function useDefend() {
           }
         }
 
-        const hasParried = Math.random() < get(parry);
-        const hasBlocked = !hasParried && Math.random() < get(blockChance);
+        const { ID: shieldID, staminaCost: shieldStaminaCost } = get(shield);
+        const hasParried = Math.random() <= get(parryChance);
+        const hasBlocked = !hasParried && Math.random() <= get(blockChance);
         const thornsValue = get(thorns);
         const hasInflictedThorns = !hasBlocked && thornsValue > 0;
 
@@ -146,7 +148,7 @@ export function useDefend() {
           if (get(canAttackOrParry)) {
             set(isShowing("monsterAilments"), true);
 
-            const parryReflected = -Math.round(monsterDamageAilingValue * get(parryDamage));
+            const parryReflected = Math.round(monsterDamageAilingValue * get(parryDamage));
 
             healthDamage -= Math.round(healthDamage * get(parryAbsorption));
             monsterHealthDamage += parryReflected;
@@ -160,7 +162,7 @@ export function useDefend() {
               },
               {
                 color: "text-danger",
-                value: `(${parryReflected})`,
+                value: `(-${parryReflected})`,
               },
             );
 
@@ -192,8 +194,6 @@ export function useDefend() {
 
         // If not parried and blocking occurs, check & apply stamina cost.
         if (hasBlocked) {
-          const shieldStaminaCost = get(shield).staminaCost;
-
           if (get(canBlock)) {
             healthDamage = 0;
 
@@ -206,9 +206,7 @@ export function useDefend() {
 
             changeStamina({ value: -shieldStaminaCost });
 
-            increaseMastery("stability");
-
-            if (Math.random() < get(staggerChance)) {
+            if (Math.random() <= get(staggerChance)) {
               set(isShowing("monsterAilments"), true);
               set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")));
 
@@ -236,9 +234,14 @@ export function useDefend() {
 
             progressQuest({ quest: "exhausting" });
           }
-        } else {
-          // If neither dodged, parried nor blocked, show damage with protection and increase resilience.
+        }
 
+        if (shieldID !== SHIELD_NONE.ID) {
+          trainMastery("stability");
+        }
+
+        // If neither dodged, parried nor blocked, show damage with protection and increase resilience.
+        if (!hasBlocked && !hasParried) {
           deltaHealth.push({
             color: "text-danger",
             value: healthDamage,
@@ -252,20 +255,20 @@ export function useDefend() {
             });
           }
 
-          increaseMastery("resilience");
+          trainMastery("resilience");
         }
 
         set(isShowing("recovery"), true);
         set(recoveryDuration, get(recoveryRate));
 
         // If already poisoned, check if blighting has occurred and if it's been deflected.
-        if (get(isPoisoned) && Math.random() < get(blightChance)) {
-          if (Math.random() < get(deflection)) {
+        if (get(isPoisoned) && Math.random() <= get(blightChance)) {
+          if (Math.random() <= get(deflection)) {
             progressQuest({ quest: "deflecting" });
 
             deltaStamina.push({
               color: "text-success",
-              value: "DEFLECTED BLIGHT",
+              value: "DEFLECTED",
             });
           } else {
             progressQuest({ quest: "blighting" });
@@ -280,13 +283,13 @@ export function useDefend() {
         }
 
         // If poisoning occurs, check if has been deflected, otherwise apply poison.
-        if (Math.random() < get(poisonChance)) {
-          if (Math.random() < get(deflection)) {
+        if (Math.random() <= get(poisonChance)) {
+          if (Math.random() <= get(deflection)) {
             progressQuest({ quest: "deflecting" });
 
             deltaHealth.push({
-              color: "text-muted",
-              value: "DEFLECTED POISON",
+              color: "text-success",
+              value: "DEFLECTED",
             });
           } else {
             progressQuest({ quest: "poisoning" });
@@ -350,6 +353,6 @@ export function useDefend() {
           set(monsterAttackDuration, get(monsterAttackRate));
         }
       },
-    [changeHealth, changeMonsterHealth, changeStamina, increaseMastery, progressQuest],
+    [changeHealth, changeMonsterHealth, changeStamina, trainMastery, progressQuest],
   );
 }

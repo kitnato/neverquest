@@ -86,14 +86,16 @@ export function CapabilitiesButton() {
                   : ""
               }`}
               disabled={isAttackingValue || isGameOverValue}
-              onClick={() => setScreenShowing(true)}
+              onClick={() => {
+                setScreenShowing(true);
+              }}
               variant="outline-dark"
             >
               <IconImage Icon={IconCapabilities} />
 
               {areAttributesIncreasableValue && (
                 <IconBadge alignToButton>
-                  <IconImage Icon={IconUpgrade} size="small" />
+                  <IconImage Icon={IconUpgrade} isSmall />
                 </IconBadge>
               )}
             </Button>
@@ -102,7 +104,9 @@ export function CapabilitiesButton() {
 
         <DismissableScreen
           isShowing={isScreenShowing}
-          onClose={() => setScreenShowing(false)}
+          onClose={() => {
+            setScreenShowing(false);
+          }}
           title={`${isShowingSkillsOrTraits ? "Capabilities" : "Attributes"}`}
         >
           {isShowingSkillsOrTraits ? <IconTabs tabs={tabs} /> : <Attributes />}

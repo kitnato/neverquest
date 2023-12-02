@@ -1,13 +1,14 @@
 import { useRecoilCallback } from "recoil";
 
-import { CREW, CREW_ORDER } from "@neverquest/data/caravan";
+import { CREW } from "@neverquest/data/caravan";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
 import { hireStatus } from "@neverquest/state/caravan";
 import { stage, wildernesses } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { questProgress } from "@neverquest/state/quests";
-import { allowNSFW } from "@neverquest/state/settings";
+import { allowProfanity } from "@neverquest/state/settings";
+import { CREW_TYPES } from "@neverquest/types/unions";
 import { getNameStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useIncreaseStage() {
@@ -21,7 +22,7 @@ export function useIncreaseStage() {
         const stageValue = get(stage);
         const nextStage = stageValue + 1;
 
-        for (const crew of CREW_ORDER) {
+        for (const crew of CREW_TYPES) {
           const hireStatusState = hireStatus(crew);
           const hireStatusCurrent = get(hireStatusState);
           const isShowingCrewHiring = isShowing("crewHiring");
@@ -37,7 +38,7 @@ export function useIncreaseStage() {
         set(wildernesses, (current) => [
           ...current,
           generateLocation({
-            allowNSFW: get(allowNSFW),
+            allowProfanity: get(allowProfanity),
             nameStructure: getNameStructure(),
           }),
         ]);

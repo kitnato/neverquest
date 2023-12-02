@@ -5,10 +5,9 @@ import { MonsterAilmentMeter } from "@neverquest/components/Monster/MonsterAilme
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
 import IconBleeding from "@neverquest/icons/bleeding.svg?react";
+import { bleed, canReceiveAilment } from "@neverquest/state/ailments";
 import {
-  bleed,
   bleedingDelta,
-  canReceiveAilment,
   isMonsterAiling,
   isMonsterDead,
   monsterAilmentDuration,
@@ -16,7 +15,7 @@ import {
 import { bleedDamage } from "@neverquest/state/statistics";
 
 export function MonsterBleeding() {
-  const bleedValue = useRecoilValue(bleed);
+  const { duration } = useRecoilValue(bleed);
   const bleedDamageValue = useRecoilValue(bleedDamage);
   const canReceiveBleeding = useRecoilValue(canReceiveAilment("bleeding"));
   const isMonsterBleedingValue = useRecoilValue(isMonsterAiling("bleeding"));
@@ -27,39 +26,31 @@ export function MonsterBleeding() {
 
   const changeMonsterHealth = useChangeMonsterHealth();
 
+  const hasStoppedBleeding = !isMonsterBleedingValue || isMonsterDeadValue;
+
   useAnimate({
     delta: setMonsterBleedingDelta,
     onDelta: () => {
       changeMonsterHealth({
         damageType: "bleed",
-        delta: [
-          {
-            color: "text-muted",
-            value: "BLEEDING",
-          },
-          {
-            color: "text-danger",
-            value: `-${bleedDamageValue}`,
-          },
-        ],
         value: -bleedDamageValue,
       });
 
       resetMonsterBleedingDelta();
     },
-    stop: !isMonsterBleedingValue || isMonsterDeadValue,
+    stop: hasStoppedBleeding,
   });
 
   useAnimate({
     delta: setMonsterBleedingDuration,
     onDelta: resetMonsterBleedingDelta,
-    stop: !isMonsterBleedingValue,
+    stop: hasStoppedBleeding,
   });
 
   if (canReceiveBleeding) {
     return (
       <IconDisplay Icon={IconBleeding} tooltip="Bleeding">
-        <MonsterAilmentMeter ailment="bleeding" totalDuration={bleedValue.duration} />
+        <MonsterAilmentMeter ailment="bleeding" totalDuration={duration} />
       </IconDisplay>
     );
   }

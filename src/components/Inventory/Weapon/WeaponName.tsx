@@ -1,5 +1,4 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
-import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -9,8 +8,8 @@ import { GearComparison } from "@neverquest/components/Inventory/GearComparison"
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Inventory/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
+import { WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
-import { WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/inventory";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import IconGrip from "@neverquest/icons/grip.svg?react";
@@ -27,10 +26,10 @@ import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { getDamagePerRate } from "@neverquest/utilities/getters";
 
 export function WeaponName({
-  placement,
+  isInInventory = false,
   weapon,
 }: {
-  placement?: Placement;
+  isInInventory?: boolean;
   weapon: Weapon | typeof WEAPON_NONE;
 }) {
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
@@ -59,9 +58,7 @@ export function WeaponName({
             <DetailsTable>
               <GearLevelDetail
                 comparison={
-                  showComparison
-                    ? { showing: "weapon", subtrahend: weaponEquippedValue.level }
-                    : undefined
+                  showComparison && { showing: "weapon", subtrahend: weaponEquippedValue.level }
                 }
                 level={level}
               />
@@ -71,7 +68,7 @@ export function WeaponName({
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconImage Icon={IconWeaponDamage} size="small" />
+                    <IconImage Icon={IconWeaponDamage} isSmall />
 
                     {formatNumber({ value: damage })}
 
@@ -92,7 +89,7 @@ export function WeaponName({
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconImage Icon={IconWeaponAttackRate} size="small" />
+                    <IconImage Icon={IconWeaponAttackRate} isSmall />
 
                     {formatNumber({ format: "time", value: rate })}
 
@@ -113,7 +110,7 @@ export function WeaponName({
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconWeaponDamagePerSecond} size="small" />
+                      <IconImage Icon={IconWeaponDamagePerSecond} isSmall />
 
                       {formatNumber({ format: "float", value: damagePerSecond })}
 
@@ -140,7 +137,7 @@ export function WeaponName({
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconGrip} size="small" />
+                      <IconImage Icon={IconGrip} isSmall />
 
                       {/* eslint-disable-next-line unicorn/consistent-destructuring */}
                       {capitalizeAll(weapon.grip)}
@@ -155,7 +152,7 @@ export function WeaponName({
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconAmmunition} size="small" />
+                      <IconImage Icon={IconAmmunition} isSmall />
 
                       {/* eslint-disable-next-line unicorn/consistent-destructuring */}
                       {formatNumber({ value: weapon.ammunitionCost })}
@@ -166,12 +163,10 @@ export function WeaponName({
 
               <StaminaCostDetail
                 comparison={
-                  showComparison
-                    ? {
-                        showing: "weapon",
-                        subtrahend: weaponEquippedValue.staminaCost,
-                      }
-                    : undefined
+                  showComparison && {
+                    showing: "weapon",
+                    subtrahend: weaponEquippedValue.staminaCost,
+                  }
                 }
                 cost={staminaCost}
               />
@@ -183,7 +178,7 @@ export function WeaponName({
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconGearClass} size="small" />
+                        <IconImage Icon={IconGearClass} isSmall />
 
                         {capitalizeAll(gearClass)}
                       </Stack>
@@ -201,7 +196,7 @@ export function WeaponName({
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconAbility} size="small" />
+                        <IconImage Icon={IconAbility} isSmall />
 
                         {formatNumber({ format: "percentage", value: abilityChance })}
 
@@ -222,9 +217,7 @@ export function WeaponName({
               {!isUnarmed && (
                 <WeightDetail
                   comparison={
-                    showComparison
-                      ? { showing: "weapon", subtrahend: weaponEquippedValue.weight }
-                      : undefined
+                    showComparison && { showing: "weapon", subtrahend: weaponEquippedValue.weight }
                   }
                   weight={weight}
                 />
@@ -233,7 +226,7 @@ export function WeaponName({
           </PopoverBody>
         </Popover>
       }
-      placement={placement}
+      placement={isInInventory ? "right" : "top"}
     >
       <span>{name}</span>
     </OverlayTrigger>

@@ -1,13 +1,13 @@
 import { atom, selector, selectorFamily } from "recoil";
 
-import { ENCUMBRANCE_CAPACITY } from "@neverquest/data/inventory";
+import { ENCUMBRANCE_CAPACITY } from "@neverquest/data/items";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { InventoryItem, KnapsackItem } from "@neverquest/types";
 import {
   isArmor,
   isConsumableItem,
-  isGear,
+  isGearItem,
   isInfusableItem,
   isMelee,
   isRanged,
@@ -18,16 +18,6 @@ import type { Consumable, Infusable, Trinket } from "@neverquest/types/unions";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
-
-export const canFit = withStateKey("canFit", (key) =>
-  selectorFamily<boolean, number>({
-    get:
-      (parameter) =>
-      ({ get }) =>
-        get(encumbrance) + parameter <= get(encumbranceMaximum),
-    key,
-  }),
-);
 
 export const encumbrance = withStateKey("encumbrance", (key) =>
   selector({
@@ -66,7 +56,7 @@ export const equippableItems = withStateKey("equippableItems", (key) =>
     get: ({ get }) =>
       // eslint-disable-next-line unicorn/no-array-reduce
       get(inventory).reduce((aggregator, { ID, ...current }) => {
-        let canEquip = isGear(current) ? !current.isEquipped : false;
+        let canEquip = isGearItem(current) ? !current.isEquipped : false;
 
         if (isArmor(current) && current.gearClass === "heavy") {
           canEquip = get(isSkillAcquired("armorcraft"));
@@ -93,6 +83,7 @@ export const equippableItems = withStateKey("equippableItems", (key) =>
   }),
 );
 
+// TODO - return the appropriate Item type.
 export const ownedItem = withStateKey("ownedItem", (key) =>
   selectorFamily<InventoryItem | undefined, Consumable | Infusable | Trinket>({
     get:
@@ -102,12 +93,20 @@ export const ownedItem = withStateKey("ownedItem", (key) =>
           (current) =>
             (isConsumableItem(current) || isInfusableItem(current) || isTrinketItem(current)) &&
             current.name === parameter,
-        ) ?? undefined,
+        ),
     key,
   }),
 );
 
 // ATOMS
+
+export const canInfuseMysteriousEgg = withStateKey("canInfuseMysteriousEgg", (key) =>
+  atom({
+    default: false,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
 
 export const inventory = withStateKey("inventory", (key) =>
   atom<InventoryItem[]>({

@@ -4,15 +4,17 @@ import { useRecoilValue } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
+import IconFinalTravel from "@neverquest/icons/final-travel.svg?react";
 import IconTravel from "@neverquest/icons/travel.svg?react";
 import { isGameOver } from "@neverquest/state/character";
-import { isStageCompleted, location } from "@neverquest/state/encounter";
+import { encounter, isStageCompleted, location } from "@neverquest/state/encounter";
 import { encumbranceExtent } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { hasLooted } from "@neverquest/state/resources";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function TravelButton() {
+  const encounterValue = useRecoilValue(encounter);
   const encumbranceExtentValue = useRecoilValue(encumbranceExtent);
   const hasLootedValue = useRecoilValue(hasLooted);
   const isGameOverValue = useRecoilValue(isGameOver);
@@ -26,7 +28,7 @@ export function TravelButton() {
   const isOverEncumbered =
     locationValue === "caravan" && encumbranceExtentValue === "over-encumbered";
 
-  if ((hasLootedValue && isStageCompletedValue) || !locationValue) {
+  if ((hasLootedValue && isStageCompletedValue) || locationValue === "caravan") {
     return (
       <OverlayTrigger
         overlay={
@@ -35,7 +37,11 @@ export function TravelButton() {
               ? "Over-encumbered - cannot move."
               : `${
                   locationValue === "wilderness"
-                    ? `Go to ${isShowingLocation ? "Caravan" : LABEL_UNKNOWN}`
+                    ? `Go to ${
+                        !isShowingLocation || encounterValue === "res cogitans"
+                          ? LABEL_UNKNOWN
+                          : "caravan"
+                      }`
                     : "Return to wilderness"
                 }`}
           </Tooltip>
@@ -52,7 +58,10 @@ export function TravelButton() {
             onClick={toggleLocation}
             variant="outline-dark"
           >
-            <IconImage Icon={IconTravel} isMirrored={locationValue === "caravan"} />
+            <IconImage
+              Icon={encounterValue === "res cogitans" ? IconFinalTravel : IconTravel}
+              isMirrored={locationValue === "caravan"}
+            />
           </Button>
         </span>
       </OverlayTrigger>

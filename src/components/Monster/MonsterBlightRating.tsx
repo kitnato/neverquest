@@ -4,12 +4,13 @@ import { useRecoilValue } from "recoil";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY, LABEL_MAXIMUM } from "@neverquest/data/general";
 import IconBlight from "@neverquest/icons/blight.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { blightChance } from "@neverquest/state/monster";
 import { blightAmount, isPoisoned } from "@neverquest/state/reserves";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function MonsterBlightRating() {
   const blightAmountValue = useRecoilValue(blightAmount);
@@ -18,7 +19,11 @@ export function MonsterBlightRating() {
 
   if (monsterBlightChanceValue > 0) {
     return (
-      <IconDisplay Icon={IconBlight} isAnimated tooltip="Blight rating">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconBlight}
+        tooltip="Blight rating"
+      >
         <OverlayTrigger
           overlay={
             <Popover>
@@ -39,9 +44,11 @@ export function MonsterBlightRating() {
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconStamina} size="small" />
+                        {-formatNumber({ value: blightAmountValue })}
 
-                        {`-${formatNumber({ value: blightAmountValue })} cumulative`}
+                        <IconImage Icon={IconStamina} isSmall />
+
+                        {LABEL_MAXIMUM}
                       </Stack>
                     </td>
                   </tr>

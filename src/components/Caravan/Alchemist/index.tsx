@@ -1,11 +1,12 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { LearnOvumInfusion } from "@neverquest/components/Caravan/Alchemist/LearnOvumInfusion";
 import { TransmuteGems } from "@neverquest/components/Caravan/Alchemist/TransmuteGems";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general";
 import { inventory } from "@neverquest/state/inventory";
-import { isGem } from "@neverquest/types/type-guards";
+import { isGemItem } from "@neverquest/types/type-guards";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function Alchemist() {
@@ -13,7 +14,7 @@ export function Alchemist() {
 
   const gemsInventory = stackItems(
     inventoryValue
-      .filter(isGem)
+      .filter(isGemItem)
       .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
   );
 
@@ -26,7 +27,7 @@ export function Alchemist() {
           <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
         ) : (
           gemsInventory.map(({ item, stack }) => (
-            <ItemDisplay item={item} key={item.ID} overlayPlacement="right" stack={stack} />
+            <ItemDisplay item={item} key={item.ID} stack={stack} />
           ))
         )}
       </Stack>
@@ -36,6 +37,8 @@ export function Alchemist() {
 
         <TransmuteGems />
       </Stack>
+
+      <LearnOvumInfusion />
     </Stack>
   );
 }

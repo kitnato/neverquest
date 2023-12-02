@@ -24,6 +24,15 @@ function formatFloat({ decimals = 2, value }: { decimals?: number; value: number
   return (Math.round(result) / multiplier).toFixed(decimals).toLocaleString();
 }
 
+export function formatKebabCase(words: string) {
+  return words
+    .replaceAll(/^\s+|\s+$/g, "")
+    .toLowerCase()
+    .replaceAll(/[^\d a-z-]/g, "")
+    .replaceAll(/\s+/g, "-")
+    .replaceAll(/-+/g, "-");
+}
+
 export function formatNumber({
   decimals,
   format = "integer",
@@ -53,6 +62,10 @@ export function formatNumber({
       return Math.round(value).toLocaleString();
     }
 
+    case "multiplier": {
+      return `×${formatFloat({ decimals, value: value + 1 })}`;
+    }
+
     case "time": {
       const absoluteValue = Math.abs(value);
       const hours = Math.floor(absoluteValue / MILLISECONDS_IN_HOUR);
@@ -70,11 +83,15 @@ export function formatNumber({
   }
 }
 
-export function formatSlug(string: string) {
-  return string
-    .replaceAll(/^\s+|\s+$/g, "")
+// Unused.
+export function formatPascalCase(words: string) {
+  return words
     .toLowerCase()
-    .replaceAll(/[^\d a-z-]/g, "")
-    .replaceAll(/\s+/g, "-")
-    .replaceAll(/-+/g, "-");
+    .replaceAll(/[_-]+/g, " ")
+    .replaceAll(/[^\s\w]/g, "")
+    .replaceAll(
+      /\s+(.)(\w*)/g,
+      (_, current2: string, current3: string) => `${current2.toUpperCase() + current3}`,
+    )
+    .replace(/\w/, (current) => current.toUpperCase());
 }

@@ -21,19 +21,19 @@ export function QuestNotifications() {
             autohide
             delay={QUEST_NOTIFICATION_DURATION}
             key={questNotificationOuterID}
-            onClose={() =>
+            onClose={() => {
               setQuestNotifications((currentQueue) =>
                 currentQueue.filter(
                   ({ ID: questNotificationInnerID }) =>
                     questNotificationOuterID !== questNotificationInnerID,
                 ),
-              )
-            }
+              );
+            }}
             show
           >
             <ToastHeader>
               <Stack className="me-auto" direction="horizontal" gap={1}>
-                <IconImage Icon={QUEST_CLASS_ICONS[questClass]} size="small" />
+                <IconImage Icon={QUEST_CLASS_ICONS[questClass]} isSmall />
 
                 {title}
               </Stack>

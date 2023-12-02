@@ -9,16 +9,15 @@ import IconStrength from "@neverquest/icons/strength.svg?react";
 import IconVigor from "@neverquest/icons/vigor.svg?react";
 import IconVitality from "@neverquest/icons/vitality.svg?react";
 import type { AttributeOrMasteryBaseData } from "@neverquest/types";
-import type { Attribute, Showing } from "@neverquest/types/unions";
+import type { Attribute, Showing, Skill } from "@neverquest/types/unions";
 
 export const ATTRIBUTE_COST_BASE = 2;
 
 export const ATTRIBUTES: Record<
   Attribute,
   AttributeOrMasteryBaseData & {
-    isUnlocked: boolean;
-    maximum?: number;
     powerBonus: number;
+    requiredSkill?: Skill;
     shows?: Showing[];
   }
 > = {
@@ -27,61 +26,54 @@ export const ATTRIBUTES: Record<
     description: "Increases chance to dodge an attack.",
     Icon: IconAgility,
     increment: 0.022,
-    isUnlocked: false,
-    maximum: 30, // 0.8
     powerBonus: 0.005,
+    requiredSkill: "evasion",
   },
   dexterity: {
     base: 0.03,
     description: "Increases critical strike chance.",
     Icon: IconDexterity,
-    increment: 0.014_25,
-    isUnlocked: false,
-    maximum: 40, // 0.6
-    powerBonus: 0.005,
+    increment: 0.0066,
+    powerBonus: 0.0025,
+    requiredSkill: "assassination",
   },
   endurance: {
     base: RESERVES.stamina.baseAmount,
     description: "Increases maximum stamina.",
     Icon: IconEndurance,
-    increment: 5,
-    isUnlocked: true,
-    powerBonus: 0.01,
+    increment: 8,
+    powerBonus: 0.02,
     shows: ["stamina", "staminaDetails"],
   },
   fortitude: {
     base: 0,
     description: "Increases health & stamina regeneration amount.",
     Icon: IconFortitude,
-    increment: 1,
-    isUnlocked: false,
-    maximum: 50,
+    increment: 2,
     powerBonus: 0.01,
+    requiredSkill: "calisthenics",
   },
   perception: {
-    base: 1.5,
+    base: 1.2,
     description: "Increases critical strike damage.",
     Icon: IconPerception,
-    increment: 0.05,
-    isUnlocked: false,
-    powerBonus: 0.003,
+    increment: 0.03,
+    powerBonus: 0.002,
+    requiredSkill: "assassination",
   },
   speed: {
     base: 0,
     description: "Reduces attack rate.",
     Icon: IconSpeed,
-    increment: 0.02,
-    isUnlocked: true,
-    maximum: 40, // 0.8
-    powerBonus: 0.005,
+    increment: 0.015,
+    powerBonus: 0.001,
     shows: ["attackRateDetails"],
   },
   strength: {
     base: 0,
-    description: "Increases attack damage.",
+    description: "Increases damage.",
     Icon: IconStrength,
     increment: 2,
-    isUnlocked: true,
     powerBonus: 0.01,
     shows: ["damageDetails"],
   },
@@ -90,17 +82,17 @@ export const ATTRIBUTES: Record<
     description: "Reduces health & stamina regeneration rate.",
     Icon: IconVigor,
     increment: 0.0225,
-    isUnlocked: false,
-    maximum: 40, // 0.9
-    powerBonus: 0.005,
+    powerBonus: 0.002,
+    requiredSkill: "calisthenics",
   },
   vitality: {
     base: RESERVES.health.baseAmount,
     description: "Increases maximum health.",
     Icon: IconVitality,
-    increment: 10,
-    isUnlocked: true,
+    increment: 15,
     powerBonus: 0.01,
     shows: ["healthDetails"],
   },
 };
+
+export const REDUCTION_MAXIMUM = 0.85;

@@ -10,11 +10,13 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconMarksmanship from "@neverquest/icons/marksmanship.svg?react";
 import IconRange from "@neverquest/icons/range.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
-import { range, weapon } from "@neverquest/state/gear";
+import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isSkillAcquired } from "@neverquest/state/skills";
+import { range } from "@neverquest/state/statistics";
 import { isRanged } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function CombatRange() {
   const marksmanshipValue = useRecoilValue(masteryStatistic("marksmanship"));
@@ -34,7 +36,11 @@ export function CombatRange() {
 
   if (!isEmpty) {
     return (
-      <IconDisplay Icon={IconRange} isAnimated tooltip="Range">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconRange}
+        tooltip="Range"
+      >
         <Stack direction="horizontal" gap={1}>
           <OverlayTrigger
             overlay={
@@ -48,11 +54,9 @@ export function CombatRange() {
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconRanged} size="small" />
+                          <IconImage Icon={IconRanged} isSmall />
 
-                          {isWeaponRanged
-                            ? formatNumber({ format: "time", value: weaponValue.range })
-                            : LABEL_EMPTY}
+                          {formatNumber({ format: "time", value: weaponValue.range })}
                         </Stack>
                       </td>
                     </tr>
@@ -60,7 +64,7 @@ export function CombatRange() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconMarksmanship} size="small" />
+                          <IconImage Icon={IconMarksmanship} isSmall />
                           Marksmanship:
                         </Stack>
                       </td>
@@ -74,14 +78,9 @@ export function CombatRange() {
                 </PopoverBody>
               </Popover>
             }
-            trigger={archeryValue ? ["hover", "focus"] : []}
           >
             <span>
-              {archeryValue
-                ? rangeValue === 0
-                  ? LABEL_EMPTY
-                  : formatNumber({ format: "time", value: rangeValue })
-                : LABEL_EMPTY}
+              {rangeValue === 0 ? LABEL_EMPTY : formatNumber({ format: "time", value: rangeValue })}
             </span>
           </OverlayTrigger>
 

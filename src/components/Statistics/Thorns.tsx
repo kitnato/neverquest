@@ -8,6 +8,7 @@ import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDet
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconThorns from "@neverquest/icons/thorns.svg?react";
 import { thorns } from "@neverquest/state/statistics";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Thorns() {
   const thornsValue = useRecoilValue(thorns);
@@ -20,7 +21,11 @@ export function Thorns() {
 
   if (thornsValue > 0) {
     return (
-      <IconDisplay Icon={IconThorns} tooltip="Thorns">
+      <IconDisplay
+        className={getAnimationClass({ name: "flipInX" })}
+        Icon={IconThorns}
+        tooltip="Thorns"
+      >
         <Stack direction="horizontal" gap={1}>
           <OverlayTrigger
             overlay={

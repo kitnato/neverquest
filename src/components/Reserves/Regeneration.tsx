@@ -25,6 +25,7 @@ import {
   isStaminaAtMaximum,
   regenerationDuration,
   regenerationRate,
+  reserveRegenerationRateReduction,
 } from "@neverquest/state/reserves";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Reserve } from "@neverquest/types/unions";
@@ -50,6 +51,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
   const isRegeneratingValue = useRecoilValue(isRegenerating(reserve));
   const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve));
   const regenerationRateValue = useRecoilValue(regenerateRateState);
+  const reserveRegenerationRateReductionValue = useRecoilValue(reserveRegenerationRateReduction);
   const calisthenicsValue = useRecoilValue(isSkillAcquired("calisthenics"));
 
   const {
@@ -64,7 +66,9 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
   useAnimate({
     delta: setRegenerationDuration,
-    onDelta: () => changeReserve({ isRegeneration: true }),
+    onDelta: () => {
+      changeReserve({ isRegeneration: true });
+    },
     stop: isRecoveringValue || isReserveAtMaximum,
   });
 
@@ -100,7 +104,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconRegenerationRate} size="small" />
+                      <IconImage Icon={IconRegenerationRate} isSmall />
 
                       {formatNumber({ format: "time", value: baseRegenerationRate })}
                     </Stack>
@@ -110,7 +114,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconVigor} size="small" />
+                      <IconImage Icon={IconVigor} isSmall />
                       Vigor:
                     </Stack>
                   </td>
@@ -118,7 +122,6 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                   <td>
                     <Stack direction="horizontal" gap={1}>
                       {`-${formatNumber({
-                        decimals: 0,
                         format: "percentage",
                         value: attributeStatisticVigor,
                       })}`}
@@ -127,11 +130,11 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                         <>
                           <span>{LABEL_SEPARATOR}</span>
 
-                          <IconImage Icon={IconTomeOfPower} size="small" />
+                          <IconImage Icon={IconTomeOfPower} isSmall />
 
-                          {`+${formatNumber({
+                          {`-${formatNumber({
                             format: "percentage",
-                            value: attributePowerBonusVigor,
+                            value: reserveRegenerationRateReductionValue - attributeStatisticVigor,
                           })}`}
                         </>
                       )}
@@ -144,7 +147,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconRegenerationAmount} size="small" />
+                      <IconImage Icon={IconRegenerationAmount} isSmall />
 
                       {baseRegenerationAmount}
                     </Stack>
@@ -154,7 +157,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconFortitude} size="small" />
+                      <IconImage Icon={IconFortitude} isSmall />
                       Fortitude:
                     </Stack>
                   </td>
@@ -167,12 +170,12 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                         <>
                           <span>{LABEL_SEPARATOR}</span>
 
-                          <IconImage Icon={IconTomeOfPower} size="small" />
+                          <IconImage Icon={IconTomeOfPower} isSmall />
 
-                          {`+${formatNumber({
-                            format: "percentage",
+                          {formatNumber({
+                            format: "multiplier",
                             value: attributePowerBonusFortitude,
-                          })}`}
+                          })}
                         </>
                       )}
                     </Stack>

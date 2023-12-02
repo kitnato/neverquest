@@ -1,6 +1,7 @@
 import { Stack } from "react-bootstrap";
+
 import { IconImage } from "@neverquest/components/IconImage";
-import { ELEMENTALS, GEM_ELEMENTALS } from "@neverquest/data/inventory";
+import { ELEMENTALS, GEM_ELEMENTALS } from "@neverquest/data/items";
 import type { Gem } from "@neverquest/types/unions";
 
 export function GemDescription({ name }: { name: Gem }) {
@@ -11,10 +12,10 @@ export function GemDescription({ name }: { name: Gem }) {
     <span>
       <Stack className="d-inline-flex text-center" direction="horizontal" gap={1}>
         Adds elemental
-        <IconImage Icon={Icon} size="small" />
+        <IconImage Icon={Icon} isSmall />
         <span className={color}>{elemental}</span>
       </Stack>{" "}
-      effect to a weapon, shield, or armor.
+      effect to a weapon, shield or armor.
     </span>
   );
 }

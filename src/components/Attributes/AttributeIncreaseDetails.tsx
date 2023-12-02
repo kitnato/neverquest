@@ -14,46 +14,46 @@ import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react"
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import { ownedItem } from "@neverquest/state/inventory";
-import type { SVGIcon } from "@neverquest/types/components";
+import { infusablePower } from "@neverquest/state/items";
 import type { Attribute } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-const STATISTIC_ICON: Record<Attribute, SVGIcon> = {
-  agility: IconDodge,
-  dexterity: IconCriticalChance,
-  endurance: IconStamina,
-  fortitude: IconRegenerationAmount,
-  perception: IconCriticalDamage,
-  speed: IconAttackRate,
-  strength: IconDamage,
-  vigor: IconRegenerationRate,
-  vitality: IconHealth,
-};
-
 export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }) {
+  const infusablePowerTomeOfPower = useRecoilValue(infusablePower("tome of power"));
   const hasTomeOfPower = Boolean(useRecoilValue(ownedItem("tome of power")));
 
   const { increment, powerBonus } = ATTRIBUTES[attribute];
-  const Icon = STATISTIC_ICON[attribute];
+  const Icon = {
+    agility: IconDodge,
+    dexterity: IconCriticalChance,
+    endurance: IconStamina,
+    fortitude: IconRegenerationAmount,
+    perception: IconCriticalDamage,
+    speed: IconAttackRate,
+    strength: IconDamage,
+    vigor: IconRegenerationRate,
+    vitality: IconHealth,
+  }[attribute];
   const operand = ["speed", "vigor"].includes(attribute) ? "-" : "+";
 
   return (
     <>
       <Stack className="justify-content-center" direction="horizontal" gap={1}>
-        <IconImage Icon={Icon} size="small" />
+        <IconImage Icon={Icon} isSmall />
 
         {`${operand}${
-          increment < 1
-            ? formatNumber({ decimals: 0, format: "percentage", value: increment })
-            : increment
+          increment < 1 ? formatNumber({ format: "percentage", value: increment }) : increment
         }`}
       </Stack>
 
       {hasTomeOfPower && (
         <Stack className="justify-content-center" direction="horizontal" gap={1}>
-          <IconImage Icon={IconTomeOfPower} size="small" />
+          <IconImage Icon={IconTomeOfPower} isSmall />
 
-          {`+${formatNumber({ format: "percentage", value: powerBonus })}`}
+          {`+${formatNumber({
+            format: "percentage",
+            value: powerBonus * (1 + infusablePowerTomeOfPower),
+          })}`}
         </Stack>
       )}
     </>

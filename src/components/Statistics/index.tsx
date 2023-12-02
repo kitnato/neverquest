@@ -1,4 +1,4 @@
-import { Card, Col, Row, Stack } from "react-bootstrap";
+import { Card, CardBody, Col, Row, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { BleedRating } from "@neverquest/components/Statistics/BleedRating";
@@ -7,7 +7,7 @@ import { CombatRange } from "@neverquest/components/Statistics/CombatRange";
 import { CriticalRating } from "@neverquest/components/Statistics/CriticalRating";
 import { Damage } from "@neverquest/components/Statistics/Damage";
 import { Deflection } from "@neverquest/components/Statistics/Deflection";
-import { Dodge } from "@neverquest/components/Statistics/Dodge";
+import { DodgeChance } from "@neverquest/components/Statistics/DodgeChance";
 import { ExecutionThreshold } from "@neverquest/components/Statistics/ExecutionThreshold";
 import { ParryRating } from "@neverquest/components/Statistics/ParryRating";
 import { Protection } from "@neverquest/components/Statistics/Protection";
@@ -23,7 +23,7 @@ export function Statistics() {
   if (isShowingStatistics) {
     return (
       <Card className={getAnimationClass({ name: "flipInX" })}>
-        <Card.Body>
+        <CardBody>
           <Row>
             <Col>
               <Stack gap={3}>
@@ -51,7 +51,7 @@ export function Statistics() {
 
                 <Deflection />
 
-                <Dodge />
+                <DodgeChance />
               </Stack>
             </Col>
 
@@ -63,7 +63,7 @@ export function Statistics() {
               </Stack>
             </Col>
           </Row>
-        </Card.Body>
+        </CardBody>
       </Card>
     );
   }

@@ -18,11 +18,10 @@ import { IconImage } from "@neverquest/components/IconImage";
 import IconSettings from "@neverquest/icons/settings.svg?react";
 import { ownedItem } from "@neverquest/state/inventory";
 import {
-  allowNSFW,
+  allowProfanity,
   autoEquip,
   lowHealthWarning,
   showDamagePerSecond,
-  showEssenceRequired,
   showGearComparison,
   showGearLevel,
 } from "@neverquest/state/settings";
@@ -30,17 +29,27 @@ import {
 export function Settings() {
   const ownedItemKnapsack = useRecoilValue(ownedItem("knapsack"));
 
-  const [isShowing, setIsShowing] = useState(false);
+  const [isShowingModal, setIsShowingModal] = useState(false);
 
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>Settings</Tooltip>} placement="bottom">
-        <Button onClick={() => setIsShowing(true)} variant="outline-light">
-          <IconImage Icon={IconSettings} size="small" />
+        <Button
+          onClick={() => {
+            setIsShowingModal(true);
+          }}
+          variant="outline-light"
+        >
+          <IconImage Icon={IconSettings} isSmall />
         </Button>
       </OverlayTrigger>
 
-      <Modal onHide={() => setIsShowing(false)} show={isShowing}>
+      <Modal
+        onHide={() => {
+          setIsShowingModal(false);
+        }}
+        show={isShowingModal}
+      >
         <ModalHeader closeButton>
           <ModalTitle>
             <Stack direction="horizontal" gap={3}>
@@ -67,12 +76,7 @@ export function Settings() {
 
               <SettingsSwitch label="Show gear level" state={showGearLevel} />
 
-              <SettingsSwitch
-                label="Show attribute point essence progress"
-                state={showEssenceRequired}
-              />
-
-              <SettingsSwitch label="NSFW mode (profanity)" state={allowNSFW} />
+              <SettingsSwitch label="Allow profanity" state={allowProfanity} />
 
               <ShowEverything />
             </Stack>

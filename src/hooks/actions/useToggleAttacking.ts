@@ -1,6 +1,5 @@
 import { useRecoilCallback } from "recoil";
 
-import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { attackDuration, isAttacking } from "@neverquest/state/character";
 import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
@@ -12,15 +11,11 @@ import {
   monsterAilmentDuration,
   monsterAttackDuration,
   monsterAttackRate,
-  monsterHealth,
-  monsterHealthMaximum,
 } from "@neverquest/state/monster";
 import { attackRate } from "@neverquest/state/statistics";
-import { isTraitAcquired } from "@neverquest/state/traits";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export function useToggleAttack() {
-  const changeHealth = useChangeHealth();
+export function useToggleAttacking() {
   const changeMonsterHealth = useChangeMonsterHealth();
 
   return useRecoilCallback(
@@ -37,34 +32,19 @@ export function useToggleAttack() {
         set(isAttacking, (current) => !current);
 
         set(isShowing("attackRate"), true);
+        set(isShowing("health"), true);
         set(isShowing("wildernessStatus"), true);
 
         if (isAttackingValue) {
           reset(attackDuration);
           reset(monsterAttackDuration);
 
-          if (!get(isMonsterDead) && !get(isTraitAcquired("tormentor"))) {
+          if (!get(isMonsterDead)) {
             reset(monsterAilmentDuration("bleeding"));
             reset(bleedingDelta);
             reset(distance);
 
-            const difference = get(monsterHealthMaximum) - get(monsterHealth);
-
-            if (difference > 0) {
-              changeMonsterHealth({
-                delta: [
-                  {
-                    color: "text-muted",
-                    value: "REGENERATE",
-                  },
-                  {
-                    color: "text-success",
-                    value: `+${difference}`,
-                  },
-                ],
-                value: difference,
-              });
-            }
+            // Regeneration is triggered in MonsterHealth.
           }
         } else {
           set(isStageStarted, true);
@@ -72,6 +52,6 @@ export function useToggleAttack() {
           set(monsterAttackDuration, get(monsterAttackRate));
         }
       },
-    [changeHealth, changeMonsterHealth],
+    [changeMonsterHealth],
   );
 }

@@ -1,7 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { isAttributeUnlocked } from "@neverquest/state/attributes";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { questProgress } from "@neverquest/state/quests";
@@ -10,7 +9,7 @@ import { isTraitAcquired } from "@neverquest/state/traits";
 import type { GearItem } from "@neverquest/types";
 import {
   isArmor,
-  isGear,
+  isGearItem,
   isMelee,
   isRanged,
   isShield,
@@ -68,7 +67,6 @@ export function useToggleEquipGear() {
 
           if (staminaCost > 0) {
             set(isShowing("stamina"), true);
-            set(isAttributeUnlocked("endurance"), true);
           }
 
           if (isWeaponRanged || isWeaponTwoHanded) {
@@ -86,7 +84,7 @@ export function useToggleEquipGear() {
 
         set(inventory, (currentInventory) =>
           currentInventory.map((currentItem) => {
-            if (isGear(currentItem)) {
+            if (isGearItem(currentItem)) {
               if (currentItem.ID === ID) {
                 return {
                   ...currentItem,

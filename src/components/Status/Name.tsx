@@ -52,7 +52,11 @@ export function Name() {
 
           setIsEditing(true);
         }}
-        onKeyDown={({ key }) => key === "Enter" && setIsEditing(false)}
+        onKeyDown={({ key }) => {
+          if (key === "Enter") {
+            setIsEditing(false);
+          }
+        }}
         plaintext={!isEditing}
         value={nameValue}
       />

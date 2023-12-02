@@ -6,15 +6,15 @@ import { generate } from "@neverquest/LOCRAN/generate";
 import type { GeneratorParameters } from "@neverquest/LOCRAN/types";
 
 export function generateLocation({
-  allowNSFW,
+  allowProfanity,
   nameStructure,
   prefixTags,
   suffixTags,
 }: GeneratorParameters) {
   const filteredLocations = LOCATIONS.filter((current) => {
-    const isNSFW = Boolean(current.isNSFW);
+    const isProfanity = Boolean(current.isProfanity);
 
-    return allowNSFW ? isNSFW || !isNSFW : !isNSFW;
+    return allowProfanity ? isProfanity || !isProfanity : !isProfanity;
   });
   const filteredLocation = filteredLocations[Math.floor(Math.random() * filteredLocations.length)];
 
@@ -25,7 +25,7 @@ export function generateLocation({
   const { canPluralize, name } = filteredLocation;
   const isPluralized = Math.random() <= PLURALIZE_CHANCE;
   const location = generate({
-    allowNSFW,
+    allowProfanity,
     category: "location",
     name,
     nameStructure,

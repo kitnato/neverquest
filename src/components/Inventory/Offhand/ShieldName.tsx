@@ -1,5 +1,4 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
-import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -9,8 +8,8 @@ import { GearComparison } from "@neverquest/components/Inventory/GearComparison"
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Inventory/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
+import { SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
-import { SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/inventory";
 import IconBlock from "@neverquest/icons/block.svg?react";
 import IconNone from "@neverquest/icons/none.svg?react";
 import IconStagger from "@neverquest/icons/stagger.svg?react";
@@ -21,10 +20,10 @@ import type { Shield } from "@neverquest/types";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ShieldName({
-  placement,
+  isInInventory = false,
   shield,
 }: {
-  placement?: Placement;
+  isInInventory?: boolean;
   shield: Shield | typeof SHIELD_NONE;
 }) {
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
@@ -44,9 +43,7 @@ export function ShieldName({
             <DetailsTable>
               <GearLevelDetail
                 comparison={
-                  showComparison
-                    ? { showing: "offhand", subtrahend: shieldEquippedValue.level }
-                    : undefined
+                  showComparison && { showing: "offhand", subtrahend: shieldEquippedValue.level }
                 }
                 level={level}
               />
@@ -58,7 +55,7 @@ export function ShieldName({
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconImage Icon={IconBlock} size="small" />
+                    <IconImage Icon={IconBlock} isSmall />
 
                     {formatNumber({ format: "percentage", value: block })}
 
@@ -74,12 +71,10 @@ export function ShieldName({
 
               <StaminaCostDetail
                 comparison={
-                  showComparison
-                    ? {
-                        showing: "offhand",
-                        subtrahend: shieldEquippedValue.staminaCost,
-                      }
-                    : undefined
+                  showComparison && {
+                    showing: "offhand",
+                    subtrahend: shieldEquippedValue.staminaCost,
+                  }
                 }
                 cost={staminaCost}
               />
@@ -92,14 +87,13 @@ export function ShieldName({
 
                       <td>
                         {(() => {
-                          const { gearClass } = shield;
-
-                          if (gearClass) {
+                          if ("gearClass" in shield) {
+                            const { gearClass } = shield;
                             const { Icon } = SHIELD_SPECIFICATIONS[gearClass];
 
                             return (
                               <Stack direction="horizontal" gap={1}>
-                                <IconImage Icon={Icon} size="small" />
+                                <IconImage Icon={Icon} isSmall />
 
                                 {capitalizeAll(gearClass)}
                               </Stack>
@@ -108,7 +102,7 @@ export function ShieldName({
 
                           return (
                             <Stack direction="horizontal" gap={1}>
-                              <IconImage Icon={IconNone} size="small" />
+                              <IconImage Icon={IconNone} isSmall />
                               None
                             </Stack>
                           );
@@ -129,7 +123,7 @@ export function ShieldName({
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconStagger} size="small" />
+                          <IconImage Icon={IconStagger} isSmall />
 
                           {formatNumber({ format: "percentage", value: stagger })}
 
@@ -151,9 +145,7 @@ export function ShieldName({
               {shield.name !== SHIELD_NONE.name && (
                 <WeightDetail
                   comparison={
-                    showComparison
-                      ? { showing: "offhand", subtrahend: shieldEquippedValue.weight }
-                      : undefined
+                    showComparison && { showing: "offhand", subtrahend: shieldEquippedValue.weight }
                   }
                   weight={weight}
                 />
@@ -162,7 +154,7 @@ export function ShieldName({
           </PopoverBody>
         </Popover>
       }
-      placement={placement}
+      placement={isInInventory ? "right" : "top"}
     >
       <span>{name}</span>
     </OverlayTrigger>

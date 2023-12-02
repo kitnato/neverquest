@@ -1,25 +1,22 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
-import type { Placement } from "react-bootstrap/esm/types";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { GemDescription } from "@neverquest/components/Inventory/GemDescription";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import type { ConsumableItem, GemItem, UsableItem } from "@neverquest/types";
-import { isGem } from "@neverquest/types/type-guards";
+import { isGemItem } from "@neverquest/types/type-guards";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ItemName({
   item,
-  placement,
   stack,
 }: {
   item: ConsumableItem | GemItem | UsableItem;
-  placement?: Placement;
   stack?: number;
 }) {
   const { name, weight } = item;
   // eslint-disable-next-line unicorn/consistent-destructuring
-  const description = isGem(item) ? <GemDescription name={item.name} /> : item.description;
+  const description = isGemItem(item) ? <GemDescription name={item.name} /> : item.description;
   const displayName = capitalizeAll(name);
 
   return (
@@ -39,10 +36,10 @@ export function ItemName({
           </PopoverBody>
         </Popover>
       }
-      placement={placement}
+      placement="right"
     >
-      <span style={{ width: "max-content" }}>{`${displayName}${
-        stack !== undefined && stack > 1 ? ` x${formatNumber({ value: stack })}` : ""
+      <span>{`${displayName}${
+        stack !== undefined && stack > 1 ? ` ×${formatNumber({ value: stack })}` : ""
       }`}</span>
     </OverlayTrigger>
   );

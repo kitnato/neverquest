@@ -7,23 +7,26 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
-export const skillPrice = withStateKey("skillPrice", (key) =>
+export const acquiredSkills = withStateKey("acquiredSkills", (key) =>
   selector({
-    get: ({ get }) =>
-      SKILL_PRICE_BASE *
-      Math.pow(SKILL_PRICE_FACTOR, Object.values(get(trainedSkills)).filter(Boolean).length),
+    get: ({ get }) => {
+      const result = {} as Record<Skill, boolean>;
+
+      for (const skill of SKILL_TYPES) {
+        result[skill] = get(isSkillAcquired(skill));
+      }
+
+      return result;
+    },
     key,
   }),
 );
 
-export const trainedSkills = withStateKey("trainedSkills", (key) =>
+export const skillPrice = withStateKey("skillPrice", (key) =>
   selector({
     get: ({ get }) =>
-      // eslint-disable-next-line unicorn/no-array-reduce
-      SKILL_TYPES.reduce(
-        (aggregator, current) => ({ ...aggregator, [current]: get(isSkillAcquired(current)) }),
-        {} as Record<Skill, boolean>,
-      ),
+      SKILL_PRICE_BASE *
+      Math.pow(SKILL_PRICE_FACTOR, Object.values(get(acquiredSkills)).filter(Boolean).length),
     key,
   }),
 );
@@ -31,7 +34,7 @@ export const trainedSkills = withStateKey("trainedSkills", (key) =>
 // ATOMS
 
 export const isSkillAcquired = withStateKey("isSkillAcquired", (key) =>
-  atomFamily<boolean, Skill>({
+  atomFamily<boolean, Skill | "none">({
     default: false,
     effects: (parameter) => [handleLocalStorage({ key, parameter })],
     key,

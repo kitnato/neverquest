@@ -28,11 +28,11 @@ export function WeightDetail({
 
           <td>
             <Stack direction="horizontal" gap={1}>
-              <IconImage Icon={IconEncumbrance} size="small" />
+              <IconImage Icon={IconEncumbrance} isSmall />
 
               {formatNumber({ value: weight })}
 
-              {comparison !== undefined && (
+              {comparison !== undefined && comparison !== false && (
                 <GearComparison
                   difference={weight - comparison.subtrahend}
                   isDownPositive

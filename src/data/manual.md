@@ -632,11 +632,11 @@ Requires the [anatomy](#anatomy) skill.
 
 #### Burning
 
-Inflicted by fire [elemental](#elemental-damage) damage. When burning, damage taken is increased.
+Inflicted by fire [elemental](#elemental-damage) damage. When burning, the monster cannot regenerate.
 
 #### Frozen
 
-Inflicted by ice [elemental](#elemental-damage) damage. When frozen, attack rate is reduced.
+Inflicted by ice [elemental](#elemental-damage) damage. When frozen, attack rate and movement speed (time to close [distance](#range)) is slowed.
 
 #### Shocked
 
@@ -644,7 +644,7 @@ Inflicted by lightning [elemental](#elemental-damage) damage. When shocked, dama
 
 #### Stagger
 
-When staggered, the monster's attack rate and movement speed (time to close [distance](#range)) is slowed. The extent of this is determined by the [stagger rating](#stagger-rating).
+When staggered, the monster takes more damage from all sources. The extent of this is determined by the [stagger rating](#stagger-rating).
 
 Requires the [shieldcraft](#shieldcraft) skill.
 
@@ -742,12 +742,6 @@ Toggles a popover warning to prompt a retreat when the character's [health](#hea
 
 Default: on.
 
-### Confirmation of risky choices
-
-Toggles between hiding and showing modals that confirm certain choices that are seen to be detrimental to gameplay for a beginner, such as leaving the [caravan](#caravan) when not purchasing anything from the [merchant](#merchant) in the first few levels.
-
-Default: on.
-
 ### Auto-equip new gear
 
 Toggles the automatic equipping of [weapons](#weapons), [armor](#armor) and [shields](#shields) once they are acquired. Cannot be set to off until the [knapsack](#knapsack) is acquired.
@@ -772,12 +766,72 @@ Toggles between showing and hiding the power level of the gear.
 
 Default: off.
 
-### NSFW mode
+### Allow profanity
 
-Toggles the generation of not-safe-for-work words when generating monster [wilderness](#wilderness) and [item](#item) names.
+Toggles the generation of not-safe-for-work words when generating [monster](#monster), [wilderness](#wilderness) and [item](#item) names.
 
 Default: off.
 
 ### Show everything
 
 Once toggled, all elements of the UI will be shown at once instead of being unlocked gradually as gameplay progresses and become relevant. Suitable for veteran players starting a new run.
+
+## Roadmap
+
+Neverquest is a work-in-progress. Several features are pending ideation, refinement and implementation.
+
+### Activated skills
+
+Once acquired, activating a skill requires [energy](#energy).
+
+#### Auras
+
+Cast spells that remain active until dispelled. Provides an effect in return for reserving a percentage of energy.
+
+#### Physical (activated)
+
+Combat skills that can be activated during combat. Acquired from the [Mercenary](#mercenary).
+
+#### Sorceries
+
+Cast spells with immediate and/or over-time effects. Acquired from the [sorcerer](#sorcerer).
+
+### Energy
+
+A [reserve](#reserves), Consumed when activating [skills](#skills), [auras](#auras) and [sorceries](#sorceries), regenerated over time.
+
+### New attributes
+
+#### Acumen
+
+Affects [sorcery](#sorceries) casting rate.
+
+#### Intellect
+
+Affects energy regeneration rate.
+
+#### Wisdom
+
+Affects total [energy](#energy).
+
+### New caravan crew
+
+Along with two more additional hires, the entire crew dialog system needs to be overhauled and expanded to allow for better storytelling and immersion.
+
+#### Cook
+
+Sells hot meals that restore all [energy](#energy) when used.
+
+Grants a Well Fed bonus for the next stage (+25% [mastery](#masteries) gain).
+
+#### Sorcerer
+
+Acquire [sorceries](#sorceries) and [auras](#auras).
+
+### Log
+
+A toggle-able UI element that displays all stateful activities in real-time, e.g. combat details, transactions etc.
+
+### Venom
+
+A [potion](#potions), that once applied to a weapon, it adds an effect with each strike, applying damage-over-time effects and potentially other ailments. Has a certain number of charges before it is used up.

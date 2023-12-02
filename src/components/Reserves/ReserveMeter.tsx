@@ -61,10 +61,10 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
 
   return (
     <LabelledProgressBar
-      attached="below"
+      attachment="below"
       sibling={
         isAiling ? (
-          <ProgressBar animated key={2} now={penalty} striped variant="secondary" />
+          <ProgressBar animated={isHealth} key={2} now={penalty} striped variant="secondary" />
         ) : undefined
       }
       value={(reserveValue / reserveMaximumAilingValue) * (100 - penalty)}
@@ -75,13 +75,11 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
           value: reserveMaximumAilingValue,
         })}`}
 
-        <DeltasDisplay delta={deltaReserveMaximum} />
-
         {isAiling && (
           <>
-            {`(${formatNumber({ value: reserveMaximumValue })})`}
+            {` (${formatNumber({ value: reserveMaximumValue })})`}
 
-            <IconImage Icon={isHealth ? IconPoison : IconBlight} isStencilled size="small" />
+            <IconImage Icon={isHealth ? IconPoison : IconBlight} isSmall isStencilled />
 
             {`${
               typeof ailmentValue === "number"
@@ -94,6 +92,8 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
             }`}
           </>
         )}
+
+        <DeltasDisplay delta={deltaReserveMaximum} />
       </Stack>
     </LabelledProgressBar>
   );

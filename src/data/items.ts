@@ -22,7 +22,6 @@ import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react";
 import type {
   AmmunitionPouchItem,
   ConsumableItem,
-  GeneratorRange,
   InfusableItem,
   KnapsackItem,
   TrinketItem,
@@ -98,11 +97,6 @@ export const DROP_CHANCES_OVERRIDE = {
   stage: 77,
 };
 
-export const ELEMENTAL_DURATION: Record<Elemental, GeneratorRange> = {
-  fire: { maximum: 2500, minimum: 1000 },
-  ice: { maximum: 1500, minimum: 500 },
-  lightning: { maximum: 3000, minimum: 1500 },
-};
 export const ELEMENTALS: Record<
   Elemental,
   { ailment: MonsterAilmentElemental; color: string; Icon: SVGIcon }

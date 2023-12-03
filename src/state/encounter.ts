@@ -1,10 +1,10 @@
 import { atom, selector } from "recoil";
 
-import { ownedItem } from "./inventory";
 import { PROGRESS } from "@neverquest/data/encounter";
 import { LEVEL_MAXIMUM } from "@neverquest/data/general";
 import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { ownedItem } from "@neverquest/state/inventory";
 import { getFromRange, getGrowthSigmoid } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 

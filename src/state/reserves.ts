@@ -1,10 +1,10 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import { encounter, stage } from "./encounter";
 import { BLIGHT, POISON } from "@neverquest/data/monster";
 import { HEALTH_LOW_THRESHOLD, RESERVES, RESERVE_MINIMUM } from "@neverquest/data/reserves";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { encounter, stage } from "@neverquest/state/encounter";
 import { questsBonus } from "@neverquest/state/quests";
 import type { BlightMagnitude } from "@neverquest/types";
 import type { Reserve } from "@neverquest/types/unions";

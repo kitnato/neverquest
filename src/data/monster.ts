@@ -86,7 +86,7 @@ export const POISON = {
   },
   finality: 0.7777,
   magnitude: {
-    maximum: 0.2,
+    maximum: 0.15,
     minimum: 0.03,
   },
   requiredStage: CREW.witch.requiredStage,

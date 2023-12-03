@@ -122,7 +122,7 @@ export const SHIELD_SPECIFICATIONS: Record<
     ],
     staminaCost: [
       { maximum: 4, minimum: 3 },
-      { maximum: 30, minimum: 25 },
+      { maximum: 35, minimum: 30 },
     ],
     weight: [
       { maximum: 5, minimum: 3 },
@@ -159,7 +159,7 @@ export const SHIELD_SPECIFICATIONS: Record<
     ],
     staminaCost: [
       { maximum: 7, minimum: 6 },
-      { maximum: 40, minimum: 35 },
+      { maximum: 45, minimum: 40 },
     ],
     weight: [
       { maximum: 8, minimum: 5 },
@@ -180,7 +180,7 @@ export const WEAPON_BASE: GearBase & {
   ],
   damage: [
     { maximum: 12, minimum: 11 },
-    { maximum: 1000, minimum: 950 },
+    { maximum: 1100, minimum: 1000 },
   ],
   price: { maximum: 7000, minimum: 1 },
   range: [
@@ -188,8 +188,8 @@ export const WEAPON_BASE: GearBase & {
     { maximum: 7000, minimum: 6800 },
   ],
   rate: [
-    { maximum: 2700, minimum: 2500 },
-    { maximum: 800, minimum: 700 },
+    { maximum: 2800, minimum: 2700 },
+    { maximum: 800, minimum: 750 },
   ],
   staminaCost: [
     { maximum: 2, minimum: 1 },

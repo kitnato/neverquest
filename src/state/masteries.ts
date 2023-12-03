@@ -1,11 +1,11 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
-import { isSkillAcquired } from "./skills";
 import { SHIELD_NONE } from "@neverquest/data/gear";
 import { LEVEL_MAXIMUM } from "@neverquest/data/general";
 import { MASTERIES, MASTERY_COST_BASE } from "@neverquest/data/masteries";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { shield, weapon } from "@neverquest/state/gear";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { MASTERY_TYPES, type Mastery } from "@neverquest/types/unions";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";

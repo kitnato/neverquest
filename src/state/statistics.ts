@@ -1,9 +1,9 @@
 import { selector } from "recoil";
 
-import { bleed, bleedChance, staggerChance, stunChance } from "./ailments";
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/statistics";
+import { bleed, bleedChance, staggerChance, stunChance } from "@neverquest/state/ailments";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import {
   armor,

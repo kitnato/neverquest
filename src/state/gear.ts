@@ -2,13 +2,13 @@ import { selector, selectorFamily } from "recoil";
 
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import {
-  ELEMENTAL_DURATION,
   GEMS_MAXIMUM,
   GEM_DAMAGE,
   GEM_ELEMENTALS,
   GEM_ENHANCEMENT,
   GEM_FITTING_COST,
 } from "@neverquest/data/items";
+import { ELEMENTAL_DURATION } from "@neverquest/data/statistics";
 import { inventory } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
 import type { Armor, Shield, Weapon } from "@neverquest/types";
@@ -89,7 +89,10 @@ export const elementalEffects = withStateKey("elementalEffects", (key) =>
 
         effects.armor[elemental] = {
           damage: Math.ceil(armorValue.protection * (GEM_DAMAGE[stack - 1] ?? 0)),
-          duration: getFromRange({ factor: 1 / stack, ...ELEMENTAL_DURATION[elemental] }),
+          duration: getFromRange({
+            factor: (stack - 1) / (GEMS_MAXIMUM - 1),
+            ...ELEMENTAL_DURATION[elemental],
+          }),
         };
       }
 
@@ -104,7 +107,10 @@ export const elementalEffects = withStateKey("elementalEffects", (key) =>
 
         effects.weapon[GEM_ELEMENTALS[item.name]] = {
           damage: Math.ceil(weaponValue.damage * (GEM_DAMAGE[stack - 1] ?? 0)),
-          duration: getFromRange({ factor: 1 / stack, ...ELEMENTAL_DURATION[elemental] }),
+          duration: getFromRange({
+            factor: (stack - 1) / (GEMS_MAXIMUM - 1),
+            ...ELEMENTAL_DURATION[elemental],
+          }),
         };
       }
 

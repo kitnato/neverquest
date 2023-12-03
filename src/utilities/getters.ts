@@ -1,7 +1,6 @@
 import { nanoid } from "nanoid";
 import type { RecoilValue, Snapshot } from "recoil";
 
-import { formatNumber } from "./formatters";
 import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
 import { NAME_STRUCTURE, PROGRESS_REDUCTION } from "@neverquest/data/encounter";
 import {
@@ -32,6 +31,7 @@ import {
 } from "@neverquest/types/type-guards";
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
 import type { Grip, Quest } from "@neverquest/types/unions";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function getAnimationClass({
   isInfinite,

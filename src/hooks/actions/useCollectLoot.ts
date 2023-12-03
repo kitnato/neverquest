@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
-import { useProgressQuest } from "./useProgressQuest";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { isShowing } from "@neverquest/state/isShowing";
 import { essenceLoot, itemsLoot } from "@neverquest/state/resources";

@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { ELEMENTALS } from "@neverquest/data/items";
-import { ELEMENTAL_AILMENT_DURATION_MAXIMUM } from "@neverquest/data/statistics";
+import { ELEMENTAL_AILMENT_DURATION_CAP } from "@neverquest/data/statistics";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { canReceiveAilment } from "@neverquest/state/ailments";
 import { totalElementalEffects } from "@neverquest/state/gear";
@@ -23,7 +23,7 @@ export function useInflictElementalAilment() {
         if (get(canReceiveAilment(ailment)) && duration > 0) {
           set(monsterAilmentDuration(ailment), (current) => {
             const newDuration = current + duration;
-            const maximumDuration = ELEMENTAL_AILMENT_DURATION_MAXIMUM[ailment];
+            const maximumDuration = ELEMENTAL_AILMENT_DURATION_CAP[ailment];
 
             if (newDuration > maximumDuration) {
               return maximumDuration;

@@ -20,7 +20,7 @@ export function WeaponEquipped() {
   if (isShowingWeapon) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={isUnarmed ? IconUnequipped : isMelee(weaponValue) ? IconMelee : IconRanged}
         iconProps={{ isMirrored: isUnarmed }}
         tooltip="Equipped weapon"

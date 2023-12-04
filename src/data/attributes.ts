@@ -16,6 +16,7 @@ export const ATTRIBUTE_COST_BASE = 2;
 export const ATTRIBUTES: Record<
   Attribute,
   AttributeOrMasteryBaseData & {
+    maximum?: number;
     powerBonus: number;
     requiredSkill?: Skill;
     shows?: Showing[];
@@ -26,6 +27,7 @@ export const ATTRIBUTES: Record<
     description: "Increases chance to dodge an attack.",
     Icon: IconAgility,
     increment: 0.022,
+    maximum: 0.7,
     powerBonus: 0.005,
     requiredSkill: "evasion",
   },
@@ -34,6 +36,7 @@ export const ATTRIBUTES: Record<
     description: "Increases critical strike chance.",
     Icon: IconDexterity,
     increment: 0.0066,
+    maximum: 0.5,
     powerBonus: 0.0025,
     requiredSkill: "assassination",
   },
@@ -50,6 +53,7 @@ export const ATTRIBUTES: Record<
     description: "Increases health & stamina regeneration amount.",
     Icon: IconFortitude,
     increment: 2,
+    maximum: 120,
     powerBonus: 0.01,
     requiredSkill: "calisthenics",
   },
@@ -58,6 +62,7 @@ export const ATTRIBUTES: Record<
     description: "Increases critical strike damage.",
     Icon: IconPerception,
     increment: 0.03,
+    maximum: 2.5,
     powerBonus: 0.002,
     requiredSkill: "assassination",
   },
@@ -66,6 +71,7 @@ export const ATTRIBUTES: Record<
     description: "Reduces attack rate.",
     Icon: IconSpeed,
     increment: 0.015,
+    maximum: 0.85,
     powerBonus: 0.001,
     shows: ["attackRateDetails"],
   },
@@ -82,6 +88,7 @@ export const ATTRIBUTES: Record<
     description: "Reduces health & stamina regeneration rate.",
     Icon: IconVigor,
     increment: 0.0225,
+    maximum: 0.85,
     powerBonus: 0.002,
     requiredSkill: "calisthenics",
   },
@@ -94,5 +101,3 @@ export const ATTRIBUTES: Record<
     shows: ["healthDetails"],
   },
 };
-
-export const REDUCTION_MAXIMUM = 0.85;

@@ -71,8 +71,8 @@ export function useDefend() {
         set(isShowing("monsterOffense"), true);
 
         animateElement({
+          animation: "headShake",
           element: get(statusElement),
-          name: "headShake",
           speed: "fast",
         });
 
@@ -343,8 +343,8 @@ export function useDefend() {
           });
 
           animateElement({
+            animation: "headShake",
             element: get(monsterElement),
-            name: "headShake",
             speed: "fast",
           });
         }

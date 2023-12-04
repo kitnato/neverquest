@@ -39,7 +39,7 @@ export function BleedRating() {
   if (!isEmpty) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconBleedRating}
         tooltip="Bleed rating"
       >

@@ -23,7 +23,7 @@ export function RetireButton() {
         <span
           className={`${
             stageMaximumValue >= RETIREMENT_MINIMUM_LEVEL
-              ? getAnimationClass({ name: "bounceIn" })
+              ? getAnimationClass({ animation: "bounceIn" })
               : "invisible"
           }`}
         >

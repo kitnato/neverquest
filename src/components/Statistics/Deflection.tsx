@@ -33,7 +33,7 @@ export function Deflection() {
   if (!isEmpty) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconDeflection}
         tooltip="Total deflection chance"
       >

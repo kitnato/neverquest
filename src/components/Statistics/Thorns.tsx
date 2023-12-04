@@ -22,7 +22,7 @@ export function Thorns() {
   if (thornsValue > 0) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconThorns}
         tooltip="Thorns"
       >

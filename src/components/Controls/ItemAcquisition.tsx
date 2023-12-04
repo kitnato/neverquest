@@ -32,7 +32,10 @@ export function ItemAcquisition() {
 
     return (
       <div
-        className={`position-absolute ${getAnimationClass({ name: "zoomOut", speed: "slower" })}`}
+        className={`position-absolute ${getAnimationClass({
+          animation: "zoomOut",
+          speed: "slower",
+        })}`}
         key={ID}
         onAnimationEnd={() => {
           setItemsAcquired((current) => current.filter(({ ID: currentID }) => currentID !== ID));

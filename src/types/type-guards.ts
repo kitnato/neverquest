@@ -48,6 +48,10 @@ export function isGearItem(thing: unknown): thing is GearItem {
   return isObject(thing) && (isArmor(thing) || isShield(thing) || isWeapon(thing));
 }
 
+export function isGem(thing: unknown): thing is Gem {
+  return typeof thing === "string" && new Set<string>(GEM_TYPES).has(thing);
+}
+
 export function isGemItem(thing: unknown): thing is GemItem {
   return isObject(thing) && GEM_TYPES.includes(thing.name as Gem);
 }

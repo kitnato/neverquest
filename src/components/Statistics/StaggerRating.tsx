@@ -42,7 +42,7 @@ export function StaggerRating() {
   if (!isEmpty) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconStaggerRating}
         tooltip="Stagger rating"
       >

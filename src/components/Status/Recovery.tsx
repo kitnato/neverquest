@@ -42,7 +42,7 @@ export function Recovery() {
 
   return (
     <IconDisplay
-      className={getAnimationClass({ name: "flipInX" })}
+      className={getAnimationClass({ animation: "flipInX" })}
       Icon={IconRecovery}
       tooltip="Recovery rate"
     >

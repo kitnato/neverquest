@@ -47,7 +47,7 @@ export function Caravan() {
 
   return (
     <>
-      <Card className={getAnimationClass({ name: "zoomIn", speed: "fast" })}>
+      <Card className={getAnimationClass({ animation: "zoomIn", speed: "fast" })}>
         <CardBody>
           <Stack gap={5}>
             <Stack gap={3}>

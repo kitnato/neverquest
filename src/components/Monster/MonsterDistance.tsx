@@ -33,7 +33,7 @@ export function MonsterDistance() {
   if (isRanged(weaponValue)) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconDistance}
         tooltip="Distance"
       >

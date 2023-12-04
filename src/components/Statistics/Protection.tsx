@@ -46,7 +46,7 @@ export function Protection() {
   if (isShowingProtection) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconProtection}
         tooltip="Total protection"
       >

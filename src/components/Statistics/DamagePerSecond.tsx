@@ -23,7 +23,7 @@ export function DamagePerSecond() {
   if (showDamagePerSecondValue) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconDamagePerSecond}
         iconProps={{ isSmall: true, overlayPlacement: "bottom" }}
         tooltip="Total damage per second"

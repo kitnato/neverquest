@@ -24,7 +24,7 @@ export function MonsterStaggered() {
   if (canReceiveAilmentStaggered) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconStaggered}
         tooltip="Staggered"
       >

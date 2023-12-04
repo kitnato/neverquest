@@ -37,7 +37,7 @@ export function CombatRange() {
   if (!isEmpty) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconRange}
         tooltip="Range"
       >

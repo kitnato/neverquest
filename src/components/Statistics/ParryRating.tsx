@@ -43,7 +43,7 @@ export function ParryRating() {
   if (!isEmpty) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconParryRating}
         tooltip="Parry rating"
       >

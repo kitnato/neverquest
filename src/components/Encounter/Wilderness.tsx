@@ -18,7 +18,7 @@ export function Wilderness() {
 
   if (isStageCompletedValue) {
     return (
-      <Card className={getAnimationClass({ name: "flipInX" })}>
+      <Card className={getAnimationClass({ animation: "flipInX" })}>
         <CardBody>
           <IconDisplay gap={5} Icon={IconRemains} tooltip="Remains">
             <span className="fst-italic">Everything is dead.</span>
@@ -33,7 +33,7 @@ export function Wilderness() {
   }
 
   return (
-    <Card className={getAnimationClass({ name: "zoomIn", speed: "fast" })}>
+    <Card className={getAnimationClass({ animation: "zoomIn", speed: "fast" })}>
       <CardBody>
         <IconDisplay
           gap={5}

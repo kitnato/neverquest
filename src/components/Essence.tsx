@@ -23,7 +23,7 @@ export function Essence() {
     <Card className="border-0 px-2 py-1 overlay-modal-backdrop">
       <Stack
         className={
-          isShowingEssence ? `visible ${getAnimationClass({ name: "flipInX" })}` : "invisible"
+          isShowingEssence ? `visible ${getAnimationClass({ animation: "flipInX" })}` : "invisible"
         }
         direction="horizontal"
         gap={1}

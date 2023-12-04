@@ -30,13 +30,13 @@ export function JournalButton() {
     return (
       <>
         <OverlayTrigger overlay={<Tooltip>Journal</Tooltip>}>
-          <span className={getAnimationClass({ name: "bounceIn" })}>
+          <span className={getAnimationClass({ animation: "bounceIn" })}>
             <Button
               className={`position-relative${
                 canCompleteQuest && !isStageStartedValue
                   ? ` ${getAnimationClass({
+                      animation: "pulse",
                       isInfinite: true,
-                      name: "pulse",
                     })}`
                   : ""
               }`}

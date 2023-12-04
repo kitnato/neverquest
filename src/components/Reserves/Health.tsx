@@ -39,7 +39,7 @@ export function Health() {
   if (isShowingHealth) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconHealth}
         tooltip="Health"
       >

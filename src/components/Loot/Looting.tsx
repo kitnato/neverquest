@@ -14,7 +14,7 @@ export function Looting() {
   if (isLootingValue) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconLooting}
         tooltip="Looting"
       >

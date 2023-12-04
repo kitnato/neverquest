@@ -30,7 +30,7 @@ export function Stamina() {
   if (isShowingStamina) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconStamina}
         tooltip="Stamina"
       >

@@ -4,13 +4,13 @@ import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
 import type { StateKey } from "@neverquest/types/unions";
 
 export function animateElement({
+  animation,
   element,
-  name,
   onEnd,
   speed,
 }: {
+  animation: Animation;
   element: HTMLElement | null;
-  name: Animation;
   onEnd?: () => void;
   speed?: AnimationSpeed;
 }) {
@@ -19,7 +19,7 @@ export function animateElement({
   }
 
   const { classList } = element;
-  const animationName = `${CLASS_ANIMATE_PREFIX}${name}`;
+  const animationName = `${CLASS_ANIMATE_PREFIX}${animation}`;
   const animationSpeedClass = speed ? `${CLASS_ANIMATE_PREFIX}${speed}` : undefined;
 
   if (classList.contains("d-none")) {

@@ -20,7 +20,7 @@ export function Status() {
     const { current } = element;
 
     setStatusElement(current);
-    animateElement({ element: current, name: "flipInX" });
+    animateElement({ animation: "flipInX", element: current });
 
     return resetStatusElement;
   }, [resetStatusElement, setStatusElement]);

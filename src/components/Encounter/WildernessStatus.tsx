@@ -14,7 +14,7 @@ export function WildernessStatus() {
     <Stack
       className={`my-1 ${
         isShowingWildernessStatus
-          ? `visible ${getAnimationClass({ name: "flipInX" })}`
+          ? `visible ${getAnimationClass({ animation: "flipInX" })}`
           : "invisible"
       }`}
       direction="horizontal"

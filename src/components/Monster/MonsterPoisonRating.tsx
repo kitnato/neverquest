@@ -19,7 +19,7 @@ export function MonsterPoisonRating() {
   if (poisonChanceValue > 0) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconPoison}
         tooltip="Poison rating"
       >

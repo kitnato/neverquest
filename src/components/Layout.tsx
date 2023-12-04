@@ -31,7 +31,7 @@ export function Layout() {
       return (
         <span
           className={`position-absolute top-50 start-50 translate-middle ${getAnimationClass({
-            name: "zoomIn",
+            animation: "zoomIn",
             speed: "slower",
           })}`}
         >

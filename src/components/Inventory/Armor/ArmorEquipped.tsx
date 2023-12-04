@@ -16,7 +16,7 @@ export function ArmorEquipped() {
   if (isShowingArmor) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={armorValue.ID === ARMOR_NONE.ID ? IconArmorNone : IconArmor}
         tooltip="Equipped armor"
       >

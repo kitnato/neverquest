@@ -22,6 +22,7 @@ import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react";
 import type {
   AmmunitionPouchItem,
   ConsumableItem,
+  GeneratorRange,
   InfusableItem,
   KnapsackItem,
   TrinketItem,
@@ -99,21 +100,37 @@ export const DROP_CHANCES_OVERRIDE = {
 
 export const ELEMENTALS: Record<
   Elemental,
-  { ailment: MonsterAilmentElemental; color: string; Icon: SVGIcon }
+  {
+    ailment: MonsterAilmentElemental;
+    color: string;
+    duration: GeneratorRange;
+    durationMaximum: number;
+    gem: Gem;
+    Icon: SVGIcon;
+  }
 > = {
   fire: {
     ailment: "burning",
     color: "text-orange",
+    duration: { maximum: 7000, minimum: 3000 },
+    durationMaximum: 15_000,
+    gem: "ruby",
     Icon: IconFire,
   },
   ice: {
     ailment: "frozen",
     color: "text-blue",
+    duration: { maximum: 2000, minimum: 800 },
+    durationMaximum: 4000,
+    gem: "sapphire",
     Icon: IconIce,
   },
   lightning: {
     ailment: "shocked",
     color: "text-yellow",
+    duration: { maximum: 3000, minimum: 1500 },
+    durationMaximum: 7000,
+    gem: "topaz",
     Icon: IconLightning,
   },
 };
@@ -128,16 +145,30 @@ export const GEM_BASE = {
   price: 100,
   weight: 1,
 };
-export const GEM_DAMAGE = [0.1, 0.2, 0.4, 0.7, 1];
-export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.33 };
-export const GEM_ELEMENTALS: Record<Gem, Elemental> = {
-  ruby: "fire",
-  sapphire: "ice",
-  topaz: "lightning",
-};
+export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.25 };
 export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
 export const GEM_FITTING_COST = [10, 30, 70, 150, 300];
-export const GEMS_MAXIMUM = GEM_DAMAGE.length;
+export const GEMS: Record<
+  Gem,
+  { damage: number[]; damageModification: string; elemental: Elemental }
+> = {
+  ruby: {
+    damage: [0.1, 0.2, 0.4, 0.66, 0.1],
+    damageModification: "high",
+    elemental: "fire",
+  },
+  sapphire: {
+    damage: [0.05, 0.1, 0.2, 0.35, 0.5],
+    damageModification: "low",
+    elemental: "ice",
+  },
+  topaz: {
+    damage: [0.075, 0.15, 0.3, 0.5, 0.8],
+    damageModification: "medium",
+    elemental: "lightning",
+  },
+};
+export const GEMS_MAXIMUM = 5;
 
 export const INFUSABLES: Record<
   Infusable,

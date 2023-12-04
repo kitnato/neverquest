@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
-import { ELEMENTALS, GEMS_MAXIMUM, GEM_ELEMENTALS } from "@neverquest/data/items";
+import { ELEMENTALS, GEMS, GEMS_MAXIMUM } from "@neverquest/data/items";
 import IconGem from "@neverquest/icons/gem.svg?react";
 import { elementalEffects } from "@neverquest/state/gear";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
@@ -27,7 +27,8 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
             gems.toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
           ).map(({ item, stack }) => {
             const { ID, name } = item;
-            const elemental = GEM_ELEMENTALS[name];
+            const { elemental } = GEMS[name];
+            const { color, Icon } = ELEMENTALS[elemental];
             const effect =
               elementalEffectsValue[
                 isArmor(gearItem) ? "armor" : isShield(gearItem) ? "shield" : "weapon"
@@ -35,7 +36,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 
             return (
               <Stack direction="horizontal" gap={1} key={ID}>
-                <span className={ELEMENTALS[elemental].color}>{`${
+                <span className={color}>{`${
                   typeof effect === "number"
                     ? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
                     : formatNumber({ value: effect.damage })
@@ -43,13 +44,13 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 
                 {LABEL_SEPARATOR}
 
-                <IconImage Icon={ELEMENTALS[elemental].Icon} isSmall />
+                <IconImage Icon={Icon} isSmall />
 
                 {`${
                   typeof effect === "number"
                     ? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
                     : formatNumber({ format: "time", value: effect.duration })
-                }`}
+                } `}
 
                 {LABEL_SEPARATOR}
 

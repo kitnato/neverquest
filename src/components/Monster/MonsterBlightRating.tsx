@@ -20,7 +20,7 @@ export function MonsterBlightRating() {
   if (monsterBlightChanceValue > 0) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconBlight}
         tooltip="Blight rating"
       >

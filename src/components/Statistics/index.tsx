@@ -22,7 +22,7 @@ export function Statistics() {
 
   if (isShowingStatistics) {
     return (
-      <Card className={getAnimationClass({ name: "flipInX" })}>
+      <Card className={getAnimationClass({ animation: "flipInX" })}>
         <CardBody>
           <Row>
             <Col>

@@ -20,7 +20,7 @@ export function DeltasDisplay({ delta }: { delta: Delta }) {
         <small className="position-absolute top-50 start-100 translate-middle-y" key={ID}>
           <Stack
             className={getAnimationClass({
-              name: "fadeOutUp",
+              animation: "fadeOutUp",
               speed: "slower",
             })}
             onAnimationEnd={() => {

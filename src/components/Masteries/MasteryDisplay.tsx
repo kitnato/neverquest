@@ -21,7 +21,7 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
   const { description, Icon } = MASTERIES[mastery];
 
   return (
-    <div className={`mastery ${getAnimationClass({ name: "flipInX" })}`}>
+    <div className={`mastery ${getAnimationClass({ animation: "flipInX" })}`}>
       {isSkillAcquiredValue ? (
         <IconDisplay
           className={`${canTrainMasteryValue ? "" : "opacity-50"}`}

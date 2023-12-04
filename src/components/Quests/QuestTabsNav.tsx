@@ -30,8 +30,8 @@ export function QuestTabsNav({ tabs }: { tabs: TabsData }) {
                   (label === "triumphs" && canCompleteTriumphs)) && (
                   <div
                     className={getAnimationClass({
+                      animation: "pulse",
                       isInfinite: true,
-                      name: "pulse",
                     })}
                   >
                     <IconBadge>

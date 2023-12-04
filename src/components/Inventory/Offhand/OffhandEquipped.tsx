@@ -27,7 +27,7 @@ export function OffhandEquipped() {
     if (!isTraitAcquiredColossus && weaponValue.grip === "two-handed") {
       return (
         <span className="opacity-50">
-          <IconDisplay className={getAnimationClass({ name: "flipInX" })} Icon={IconMelee}>
+          <IconDisplay className={getAnimationClass({ animation: "flipInX" })} Icon={IconMelee}>
             {weaponValue.name}
           </IconDisplay>
         </span>
@@ -36,7 +36,7 @@ export function OffhandEquipped() {
 
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={shieldValue.name === SHIELD_NONE.name ? IconFist : IconShield}
         tooltip="Equipped shield"
       >

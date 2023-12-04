@@ -34,8 +34,8 @@ export function AttackButton() {
   const toggleAttacking = useToggleAttacking();
 
   const pulseAnimation = getAnimationClass({
+    animation: "pulse",
     isInfinite: true,
-    name: "pulse",
   });
   const isResting = isGameOverValue || isStageCompletedValue || locationValue === "caravan";
   const showWarning =
@@ -78,7 +78,7 @@ export function AttackButton() {
       }
       show={showWarning || undefined}
     >
-      <span className={getAnimationClass({ name: "bounceIn" })}>
+      <span className={getAnimationClass({ animation: "bounceIn" })}>
         <Button
           className={animation}
           disabled={isResting || !hasEnoughAmmunitionValue}

@@ -34,7 +34,7 @@ export function StunRating() {
   if (!isEmpty) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconStunRating}
         tooltip="Stun rating"
       >

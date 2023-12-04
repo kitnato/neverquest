@@ -15,7 +15,7 @@ export function Awakening() {
 
   return (
     <Card>
-      <CardBody className={getAnimationClass({ name: "zoomIn" })}>
+      <CardBody className={getAnimationClass({ animation: "zoomIn" })}>
         <Stack className="align-items-center" gap={5}>
           <IconImage Icon={IconAwakening} />
 

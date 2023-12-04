@@ -70,7 +70,7 @@ export function AttackRate() {
 
   return (
     <IconDisplay
-      className={getAnimationClass({ name: "flipInX" })}
+      className={getAnimationClass({ animation: "flipInX" })}
       Icon={IconAttackRate}
       tooltip="Total attack rate"
     >

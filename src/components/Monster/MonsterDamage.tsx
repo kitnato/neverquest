@@ -13,7 +13,7 @@ export function MonsterDamage() {
 
   return (
     <IconDisplay
-      className={getAnimationClass({ name: "flipInX" })}
+      className={getAnimationClass({ animation: "flipInX" })}
       description={<MonsterDamagePerSecond />}
       Icon={IconMonsterDamage}
       tooltip="Monster damage"

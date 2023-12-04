@@ -72,8 +72,8 @@ export function useAttack() {
           }
 
           animateElement({
+            animation: "headShake",
             element: get(monsterElement),
-            name: "headShake",
             speed: "fast",
           });
 

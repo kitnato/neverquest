@@ -44,7 +44,7 @@ export const CREW: Record<
       100: "Nothing makes any sense.",
     },
     price: 400,
-    requiredStage: 30,
+    requiredStage: 32,
   },
   blacksmith: {
     description: "Crafts superior gear.",
@@ -60,7 +60,7 @@ export const CREW: Record<
     interaction: "Craft",
     monologues: { 1: "Tired of monster breath?", 100: "There's too many of them." },
     price: 300,
-    requiredStage: 23,
+    requiredStage: 25,
   },
   medic: {
     description: "Heals wounds and sells bandages.",
@@ -145,7 +145,7 @@ export const CREW: Record<
     interaction: "Brew",
     monologues: { 1: "Gaze into my cauldron ...", 100: "All is lost now." },
     price: 150,
-    requiredStage: 18,
+    requiredStage: 20,
   },
 };
 

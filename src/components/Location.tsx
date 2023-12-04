@@ -11,7 +11,9 @@ export function Location() {
   const locationNameValue = useRecoilValue(locationName);
 
   return (
-    <div className={`${isShowingLocation ? getAnimationClass({ name: "flipInX" }) : "invisible"}`}>
+    <div
+      className={`${isShowingLocation ? getAnimationClass({ animation: "flipInX" }) : "invisible"}`}
+    >
       <IconDisplay
         Icon={IconLocation}
         iconProps={{ overlayPlacement: "bottom" }}

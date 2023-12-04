@@ -47,7 +47,7 @@ export function CriticalRating() {
   if (isShowingCriticalRating) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconCriticalRating}
         tooltip="Critical rating"
       >

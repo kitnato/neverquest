@@ -24,7 +24,7 @@ export function MonsterStunned() {
   if (canReceiveAilmentStunned) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconStunned}
         tooltip="Stunned"
       >

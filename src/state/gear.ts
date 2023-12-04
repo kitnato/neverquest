@@ -2,13 +2,12 @@ import { selector, selectorFamily } from "recoil";
 
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import {
+  ELEMENTALS,
+  GEMS,
   GEMS_MAXIMUM,
-  GEM_DAMAGE,
-  GEM_ELEMENTALS,
   GEM_ENHANCEMENT,
   GEM_FITTING_COST,
 } from "@neverquest/data/items";
-import { ELEMENTAL_DURATION } from "@neverquest/data/statistics";
 import { inventory } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
 import type { Armor, Shield, Weapon } from "@neverquest/types";
@@ -85,31 +84,31 @@ export const elementalEffects = withStateKey("elementalEffects", (key) =>
       const armorValue = get(armor);
 
       for (const { item, stack } of stackItems(armorValue.gems)) {
-        const elemental = GEM_ELEMENTALS[item.name];
+        const { damage, elemental } = GEMS[item.name];
 
         effects.armor[elemental] = {
-          damage: Math.ceil(armorValue.protection * (GEM_DAMAGE[stack - 1] ?? 0)),
+          damage: Math.ceil(armorValue.protection * (damage[stack - 1] ?? 0)),
           duration: getFromRange({
             factor: (stack - 1) / (GEMS_MAXIMUM - 1),
-            ...ELEMENTAL_DURATION[elemental],
+            ...ELEMENTALS[elemental].duration,
           }),
         };
       }
 
       for (const { item, stack } of stackItems(get(shield).gems)) {
-        effects.shield[GEM_ELEMENTALS[item.name]] = GEM_ENHANCEMENT[stack - 1] ?? 0;
+        effects.shield[GEMS[item.name].elemental] = GEM_ENHANCEMENT[stack - 1] ?? 0;
       }
 
       const weaponValue = get(weapon);
 
       for (const { item, stack } of stackItems(weaponValue.gems)) {
-        const elemental = GEM_ELEMENTALS[item.name];
+        const { damage, elemental } = GEMS[item.name];
 
-        effects.weapon[GEM_ELEMENTALS[item.name]] = {
-          damage: Math.ceil(weaponValue.damage * (GEM_DAMAGE[stack - 1] ?? 0)),
+        effects.weapon[elemental] = {
+          damage: Math.ceil(weaponValue.damage * (damage[stack - 1] ?? 0)),
           duration: getFromRange({
             factor: (stack - 1) / (GEMS_MAXIMUM - 1),
-            ...ELEMENTAL_DURATION[elemental],
+            ...ELEMENTALS[elemental].duration,
           }),
         };
       }
@@ -148,14 +147,14 @@ export const totalElementalEffects = withStateKey("totalElementalEffects", (key)
 
       return {
         armor: {
-          fire: getElementalEffects({ base: armor.fire, modifier: shield.fire }),
-          ice: getElementalEffects({ base: armor.ice, modifier: shield.ice }),
-          lightning: getElementalEffects({ base: armor.lightning, modifier: shield.lightning }),
+          fire: getElementalEffects({ ...armor.fire, modifier: shield.fire }),
+          ice: getElementalEffects({ ...armor.ice, modifier: shield.ice }),
+          lightning: getElementalEffects({ ...armor.lightning, modifier: shield.lightning }),
         },
         weapon: {
-          fire: getElementalEffects({ base: weapon.fire, modifier: shield.fire }),
-          ice: getElementalEffects({ base: weapon.ice, modifier: shield.ice }),
-          lightning: getElementalEffects({ base: weapon.lightning, modifier: shield.lightning }),
+          fire: getElementalEffects({ ...weapon.fire, modifier: shield.fire }),
+          ice: getElementalEffects({ ...weapon.ice, modifier: shield.ice }),
+          lightning: getElementalEffects({ ...weapon.lightning, modifier: shield.lightning }),
         },
       };
     },

@@ -17,7 +17,7 @@ export function LootDisplay() {
 
   if (isLootAvailableValue) {
     return (
-      <Card className={getAnimationClass({ name: "flipInX" })}>
+      <Card className={getAnimationClass({ animation: "flipInX" })}>
         <CardBody>
           {hasLootedValue ? (
             <IconDisplay gap={5} Icon={IconLooted} tooltip="Loot">

@@ -34,8 +34,8 @@ export function InventoryButton() {
     const { current } = badgeElement;
 
     animateElement({
+      animation: "headShake",
       element: current,
-      name: "headShake",
       onEnd: resetNotifyEncumbranceValue,
     });
   }, [resetNotifyEncumbranceValue]);
@@ -44,7 +44,7 @@ export function InventoryButton() {
     return (
       <>
         <OverlayTrigger overlay={<Tooltip>Inventory</Tooltip>}>
-          <span className={getAnimationClass({ name: "bounceIn" })}>
+          <span className={getAnimationClass({ animation: "bounceIn" })}>
             <Button
               disabled={isAttackingValue || isGameOverValue}
               onClick={() => {

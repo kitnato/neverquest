@@ -34,7 +34,7 @@ export function Block() {
   if (!isEmpty) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconBlock}
         tooltip="Total block chance"
       >

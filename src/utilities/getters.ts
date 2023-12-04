@@ -34,15 +34,15 @@ import type { Grip, Quest } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function getAnimationClass({
+  animation,
   isInfinite,
-  name,
   speed,
 }: {
+  animation: Animation;
   isInfinite?: boolean;
-  name: Animation;
   speed?: AnimationSpeed;
 }) {
-  return `${CLASS_ANIMATED} ${CLASS_ANIMATE_PREFIX}${name}${
+  return `${CLASS_ANIMATED} ${CLASS_ANIMATE_PREFIX}${animation}${
     isInfinite ? ` ${CLASS_ANIMATE_PREFIX}infinite` : ""
   }${speed ? ` ${CLASS_ANIMATE_PREFIX}${speed}` : ""}`;
 }
@@ -106,15 +106,17 @@ export function getDamagePerTick({
 }
 
 export function getElementalEffects({
-  base,
+  damage,
+  duration,
   modifier,
 }: {
-  base: { damage: number; duration: number };
+  damage: number;
+  duration: number;
   modifier: number;
 }) {
   return {
-    damage: Math.round(base.damage + base.damage * modifier),
-    duration: Math.round(base.duration + base.duration * modifier),
+    damage: Math.round(damage + damage * modifier),
+    duration: Math.round(duration + duration * modifier),
   };
 }
 

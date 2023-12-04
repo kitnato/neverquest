@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
-import { ELEMENTALS, GEM_ELEMENTALS } from "@neverquest/data/items";
+import { ELEMENTALS, GEMS } from "@neverquest/data/items";
 import { armor, totalElementalEffects, weapon } from "@neverquest/state/gear";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -22,16 +22,17 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
           gems.toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
         ).map(({ item }) => {
           const { ID, name } = item;
-          const elemental = GEM_ELEMENTALS[name];
+          const { elemental } = GEMS[name];
+          const { color, Icon } = ELEMENTALS[elemental];
           const { damage, duration } = totalElementalEffectsValue[slot][elemental];
 
           return (
             <Stack direction="horizontal" gap={1} key={ID}>
-              <span className={ELEMENTALS[elemental].color}>{`+${damage}`}</span>
+              <span className={color}>{`+${damage}`}</span>
 
               {LABEL_SEPARATOR}
 
-              <IconImage Icon={ELEMENTALS[elemental].Icon} isSmall />
+              <IconImage Icon={Icon} isSmall />
 
               {`${formatNumber({ format: "time", value: duration })}`}
             </Stack>

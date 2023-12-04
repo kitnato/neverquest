@@ -1,6 +1,6 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
-import { ATTRIBUTES, REDUCTION_MAXIMUM } from "@neverquest/data/attributes";
+import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { infusablePower } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
@@ -82,8 +82,8 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =
     get:
       (parameter) =>
       ({ get }) =>
-        ATTRIBUTES[parameter].increment < 1 &&
-        get(attributeStatistic(parameter)) >= REDUCTION_MAXIMUM,
+        get(attributeStatistic(parameter)) >=
+        (ATTRIBUTES[parameter].maximum ?? Number.POSITIVE_INFINITY),
     key,
   }),
 );

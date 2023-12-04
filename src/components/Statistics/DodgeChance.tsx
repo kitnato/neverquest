@@ -49,7 +49,7 @@ export function DodgeChance() {
   if (isShowingDodgeChance) {
     return (
       <IconDisplay
-        className={getAnimationClass({ name: "flipInX" })}
+        className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconDodge}
         tooltip="Dodge chance"
       >

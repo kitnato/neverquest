@@ -34,8 +34,8 @@ export function Monster() {
       generateMonster();
 
       animateElement({
+        animation: "zoomInRight",
         element: monsterElementValue,
-        name: "zoomInRight",
         speed: "faster",
       });
 

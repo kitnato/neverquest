@@ -39,7 +39,9 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
           <AttributeRank attribute={attribute} />
 
           {isAttributeAtMaximumValue ? (
-            <Badge bg="secondary">{LABEL_MAXIMUM}</Badge>
+            <Button className="border-0" disabled variant="outline-dark">
+              <Badge bg="dark">{LABEL_MAXIMUM}</Badge>
+            </Button>
           ) : (
             <OverlayTrigger
               overlay={

@@ -56,7 +56,7 @@ export function MonsterBlightRating() {
               </PopoverBody>
             </Popover>
           }
-          trigger={isPoisonedValue ? ["hover", "focus"] : []}
+          trigger={isPoisonedValue ? ["focus", "hover"] : []}
         >
           <span>
             {isPoisonedValue

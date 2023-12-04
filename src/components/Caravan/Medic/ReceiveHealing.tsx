@@ -52,7 +52,7 @@ export function ReceiveHealing() {
                 {isHealthAtMaximumValue && <div>{LABEL_FULL_HEALTH}</div>}
               </Tooltip>
             }
-            trigger={isPurchasable ? [] : ["hover", "focus"]}
+            trigger={isPurchasable ? [] : ["focus", "hover"]}
           >
             <span>
               <Button

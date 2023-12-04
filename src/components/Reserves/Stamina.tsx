@@ -109,7 +109,7 @@ export function Stamina() {
                 </Popover>
               }
               placement="right"
-              trigger={isShowingStaminaDetails ? ["hover", "focus"] : []}
+              trigger={isShowingStaminaDetails ? ["focus", "hover"] : []}
             >
               <span className="w-100">
                 <ReserveMeter reserve="stamina" />

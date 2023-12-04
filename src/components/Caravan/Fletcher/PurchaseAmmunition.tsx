@@ -68,7 +68,7 @@ export function PurchaseAmmunition() {
                     {isFull && <div>Pouch is full.</div>}
                   </Tooltip>
                 }
-                trigger={canPurchase ? [] : ["hover", "focus"]}
+                trigger={canPurchase ? [] : ["focus", "hover"]}
               >
                 <span>
                   <Dropdown as={ButtonGroup}>

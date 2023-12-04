@@ -56,7 +56,7 @@ export function PurgeMemories() {
                 {price === 0 && <div>No completed quests to reset.</div>}
               </Tooltip>
             }
-            trigger={isPurchasable ? [] : ["hover", "focus"]}
+            trigger={isPurchasable ? [] : ["focus", "hover"]}
           >
             <span>
               <Button

@@ -32,7 +32,7 @@ export function PurchaseItemButton({
           {!canFitItem && <div>{LABEL_OVER_ENCUMBERED}</div>}
         </Tooltip>
       }
-      trigger={isPurchasable ? [] : ["hover", "focus"]}
+      trigger={isPurchasable ? [] : ["focus", "hover"]}
     >
       <span>
         <Button disabled={!isPurchasable} onClick={onPurchase} variant="outline-dark">

@@ -77,7 +77,7 @@ export function Recovery() {
               </PopoverBody>
             </Popover>
           }
-          trigger={resilienceValue > 0 ? ["hover", "focus"] : []}
+          trigger={resilienceValue > 0 ? ["focus", "hover"] : []}
         >
           <span className="w-100">
             <RecoveryMeter />

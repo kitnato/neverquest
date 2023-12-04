@@ -116,7 +116,7 @@ export function Health() {
                 </Popover>
               }
               placement="right"
-              trigger={isShowingHealthDetails ? ["hover", "focus"] : []}
+              trigger={isShowingHealthDetails ? ["focus", "hover"] : []}
             >
               <span className="w-100">
                 <ReserveMeter reserve="health" />

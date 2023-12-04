@@ -27,7 +27,7 @@ export function BuybackItems() {
 
           <AccordionCollapse eventKey={ACCORDION_EVENT_KEY}>
             <Stack gap={3}>
-              <PurchasableItems merchantItems={returnedItems} />
+              <PurchasableItems canEradicate merchantItems={returnedItems} />
             </Stack>
           </AccordionCollapse>
         </AccordionItem>

@@ -141,7 +141,7 @@ export function CriticalRating() {
                 </PopoverBody>
               </Popover>
             }
-            trigger={assassinationValue ? ["hover", "focus"] : []}
+            trigger={assassinationValue ? ["focus", "hover"] : []}
           >
             <span>{assassinationValue ? criticalRatingValue : LABEL_EMPTY}</span>
           </OverlayTrigger>

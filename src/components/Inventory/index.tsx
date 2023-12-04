@@ -92,7 +92,7 @@ export function Inventory() {
                 <Stack direction="horizontal" gap={3}>
                   <OverlayTrigger
                     overlay={<Tooltip>Skill required.</Tooltip>}
-                    trigger={canEquipGear ? [] : ["hover", "focus"]}
+                    trigger={canEquipGear ? [] : ["focus", "hover"]}
                   >
                     <span>
                       <Button

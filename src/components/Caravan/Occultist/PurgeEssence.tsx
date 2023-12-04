@@ -49,7 +49,7 @@ export function PurgeEssence() {
               {!isPurchasable && <div>No essence to purge.</div>}
             </Tooltip>
           }
-          trigger={isPurchasable ? [] : ["hover", "focus"]}
+          trigger={isPurchasable ? [] : ["focus", "hover"]}
         >
           <span>
             <Button

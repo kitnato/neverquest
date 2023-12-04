@@ -84,7 +84,7 @@ export function Protection() {
                 </PopoverBody>
               </Popover>
             }
-            trigger={showDetails ? ["hover", "focus"] : []}
+            trigger={showDetails ? ["focus", "hover"] : []}
           >
             <span>{formatNumber({ value: protectionValue })}</span>
           </OverlayTrigger>

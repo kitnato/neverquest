@@ -186,7 +186,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
           </Popover>
         }
         placement="right"
-        trigger={calisthenicsValue ? ["hover", "focus"] : []}
+        trigger={calisthenicsValue ? ["focus", "hover"] : []}
       >
         <span className="w-100">
           <RegenerationMeter reserve={reserve} />

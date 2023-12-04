@@ -66,7 +66,7 @@ export function TransmuteGems() {
       <OverlayTrigger
         overlay={<Tooltip>{`Insufficient ${plural(source)}.`}</Tooltip>}
         placement="bottom"
-        trigger={isAffordable ? [] : ["hover", "focus"]}
+        trigger={isAffordable ? [] : ["focus", "hover"]}
       >
         <span className="mx-auto">
           <Button

@@ -151,7 +151,7 @@ export function Damage() {
               </PopoverBody>
             </Popover>
           }
-          trigger={isShowingDamageDetails ? ["hover", "focus"] : []}
+          trigger={isShowingDamageDetails ? ["focus", "hover"] : []}
         >
           <span>{formatNumber({ value: damageValue })}</span>
         </OverlayTrigger>

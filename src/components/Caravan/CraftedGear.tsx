@@ -30,7 +30,7 @@ export function CraftedGear({
 
       <OverlayTrigger
         overlay={<Tooltip>{LABEL_OVER_ENCUMBERED}</Tooltip>}
-        trigger={canFitItem ? [] : ["hover", "focus"]}
+        trigger={canFitItem ? [] : ["focus", "hover"]}
       >
         <span>
           <Button

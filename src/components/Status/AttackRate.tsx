@@ -130,7 +130,7 @@ export function AttackRate() {
               </PopoverBody>
             </Popover>
           }
-          trigger={isShowingAttackRateDetails ? ["hover", "focus"] : []}
+          trigger={isShowingAttackRateDetails ? ["focus", "hover"] : []}
         >
           <span className="w-100">
             <AttackMeter />

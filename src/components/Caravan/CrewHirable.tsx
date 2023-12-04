@@ -40,7 +40,7 @@ export function CrewHirable({ crew }: { crew: Crew }) {
 
           <OverlayTrigger
             overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
-            trigger={isAffordable ? [] : ["hover", "focus"]}
+            trigger={isAffordable ? [] : ["focus", "hover"]}
           >
             <span>
               <Button

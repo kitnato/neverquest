@@ -48,7 +48,7 @@ export function CompassNavigate() {
     <>
       <OverlayTrigger
         overlay={<Tooltip>The needle is spinning.</Tooltip>}
-        trigger={canNavigate ? [] : ["hover", "focus"]}
+        trigger={canNavigate ? [] : ["focus", "hover"]}
       >
         <span>
           <Button

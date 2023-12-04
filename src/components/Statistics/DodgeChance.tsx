@@ -127,7 +127,7 @@ export function DodgeChance() {
             }
             trigger={
               isSkillAcquiredEvasion && (isShowingDodgePenalty || hasTomeOfPower)
-                ? ["hover", "focus"]
+                ? ["focus", "hover"]
                 : []
             }
           >

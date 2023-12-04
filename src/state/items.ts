@@ -115,10 +115,18 @@ export const infusionStep = withStateKey("infusionStep", (key) =>
 
 export const ownsInheritableItems = withStateKey("ownsInheritableItems", (key) =>
   selector({
-    get: ({ get }) =>
-      Object.fromEntries(
-        INHERITABLE_ITEMS.map((current) => [current, Boolean(get(ownedItem(current)))]),
-      ),
+    get: ({ get }) => {
+      const currentlyOwnedInheritableItems = {} as Record<
+        (typeof INHERITABLE_ITEMS)[number],
+        boolean
+      >;
+
+      for (const inheritableItem of INHERITABLE_ITEMS) {
+        currentlyOwnedInheritableItems[inheritableItem] = Boolean(get(ownedItem(inheritableItem)));
+      }
+
+      return currentlyOwnedInheritableItems;
+    },
     key,
   }),
 );

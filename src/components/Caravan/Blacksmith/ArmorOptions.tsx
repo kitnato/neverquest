@@ -66,9 +66,9 @@ export function ArmorOptions() {
             }}
             value={armorClass}
           >
-            {ARMOR_CLASS_TYPES.map((current) => (
-              <option key={current} value={current}>
-                {capitalizeAll(current)}
+            {ARMOR_CLASS_TYPES.map((currentArmorClass) => (
+              <option key={currentArmorClass} value={currentArmorClass}>
+                {capitalizeAll(currentArmorClass)}
               </option>
             ))}
           </FormSelect>
@@ -127,8 +127,8 @@ export function ArmorOptions() {
       ) : craftedArmor === undefined ? (
         <CraftGear
           onCraft={() => {
-            setBlacksmithInventory((current) => ({
-              ...current,
+            setBlacksmithInventory((currentBlacksmithInventory) => ({
+              ...currentBlacksmithInventory,
               armor: generateArmor({
                 allowProfanity: allowProfanityValue,
                 gearClass: armorClass,
@@ -154,7 +154,10 @@ export function ArmorOptions() {
         <CraftedGear
           gearItem={craftedArmor}
           onTransfer={() => {
-            setBlacksmithInventory((current) => ({ ...current, armor: undefined }));
+            setBlacksmithInventory((currentBlacksmithInventory) => ({
+              ...currentBlacksmithInventory,
+              armor: undefined,
+            }));
           }}
         />
       )}

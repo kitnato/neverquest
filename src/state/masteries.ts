@@ -93,13 +93,13 @@ export const masteryStatistic = withStateKey("masteryStatistic", (key) =>
 export const unlockedMasteries = withStateKey("unlockedMasteries", (key) =>
   selector({
     get: ({ get }) => {
-      const result = {} as Record<Mastery, boolean>;
+      const currentUnlockedMasteries = {} as Record<Mastery, boolean>;
 
       for (const mastery of MASTERY_TYPES) {
-        result[mastery] = get(isSkillAcquired(MASTERIES[mastery].requiredSkill));
+        currentUnlockedMasteries[mastery] = get(isSkillAcquired(MASTERIES[mastery].requiredSkill));
       }
 
-      return result;
+      return currentUnlockedMasteries;
     },
     key,
   }),

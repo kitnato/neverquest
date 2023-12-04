@@ -8,11 +8,11 @@ import { isGem, isGemItem } from "@neverquest/types/type-guards";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ItemName({
+  amount,
   item,
-  stack,
 }: {
+  amount?: number;
   item: ConsumableItem | GemItem | UsableItem;
-  stack?: number;
 }) {
   const { name, weight } = item;
   const description = isGem(name) ? (
@@ -35,7 +35,7 @@ export function ItemName({
               {description}
 
               <DetailsTable>
-                <WeightDetail stack={stack} weight={weight} />
+                <WeightDetail amount={amount} weight={weight} />
               </DetailsTable>
             </Stack>
           </PopoverBody>
@@ -44,7 +44,7 @@ export function ItemName({
       placement="right"
     >
       <span>{`${displayName}${
-        stack !== undefined && stack > 1 ? ` ×${formatNumber({ value: stack })}` : ""
+        amount !== undefined && amount > 1 ? ` ×${formatNumber({ value: amount })}` : ""
       }`}</span>
     </OverlayTrigger>
   );

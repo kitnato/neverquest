@@ -10,13 +10,13 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 export const acquiredSkills = withStateKey("acquiredSkills", (key) =>
   selector({
     get: ({ get }) => {
-      const result = {} as Record<Skill, boolean>;
+      const currentAcquiredSkills = {} as Record<Skill, boolean>;
 
       for (const skill of SKILL_TYPES) {
-        result[skill] = get(isSkillAcquired(skill));
+        currentAcquiredSkills[skill] = get(isSkillAcquired(skill));
       }
 
-      return result;
+      return currentAcquiredSkills;
     },
     key,
   }),

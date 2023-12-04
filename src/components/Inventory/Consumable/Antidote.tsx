@@ -33,7 +33,9 @@ export function Antidote({ ID }: { ID: string }) {
               value: 0,
             });
 
-            setInventory((current) => current.filter((current) => current.ID !== ID));
+            setInventory((currentInventory) =>
+              currentInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
+            );
 
             progressQuest({ quest: "potions" });
           }}

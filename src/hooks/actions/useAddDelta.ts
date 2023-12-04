@@ -9,8 +9,8 @@ export function useAddDelta() {
   return useRecoilCallback(
     ({ set }) =>
       ({ contents, delta }: { contents: DeltaDisplay | DeltaDisplay[]; delta: Delta }) => {
-        set(deltas(delta), (current) => [
-          ...current,
+        set(deltas(delta), (currentDelta) => [
+          ...currentDelta,
           { display: Array.isArray(contents) ? contents : [contents], ID: nanoid() },
         ]);
       },

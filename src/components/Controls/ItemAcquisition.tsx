@@ -9,7 +9,7 @@ import IconMelee from "@neverquest/icons/melee.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
 import IconShield from "@neverquest/icons/shield.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
-import { itemsAcquired } from "@neverquest/state/inventory";
+import { acquiredItems } from "@neverquest/state/inventory";
 import {
   isArmor,
   isConsumableItem,
@@ -22,13 +22,13 @@ import {
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function ItemAcquisition() {
-  const [itemsAcquiredValue, setItemsAcquired] = useRecoilState(itemsAcquired);
-  const resetItemsAcquired = useResetRecoilState(itemsAcquired);
+  const [acquiredItemsValue, setItemsAcquired] = useRecoilState(acquiredItems);
+  const resetItemsAcquired = useResetRecoilState(acquiredItems);
 
   useEffect(() => resetItemsAcquired);
 
-  return itemsAcquiredValue.map((current) => {
-    const { ID } = current;
+  return acquiredItemsValue.map((acquiredItem) => {
+    const { ID } = acquiredItem;
 
     return (
       <div
@@ -38,35 +38,37 @@ export function ItemAcquisition() {
         })}`}
         key={ID}
         onAnimationEnd={() => {
-          setItemsAcquired((current) => current.filter(({ ID: currentID }) => currentID !== ID));
+          setItemsAcquired((currentAcquiredItems) =>
+            currentAcquiredItems.filter(({ ID: acquiredItemID }) => acquiredItemID !== ID),
+          );
         }}
         // TODO - Bootstrap positioning utilities do not work with Animation.css zoomOut
         style={{ left: -10, top: 16 }}
       >
         <IconImage
           Icon={(() => {
-            if (isArmor(current)) {
+            if (isArmor(acquiredItem)) {
               return IconArmor;
             }
 
-            if (isConsumableItem(current)) {
-              return CONSUMABLES[current.name].Icon;
+            if (isConsumableItem(acquiredItem)) {
+              return CONSUMABLES[acquiredItem.name].Icon;
             }
 
-            if (isGemItem(current)) {
+            if (isGemItem(acquiredItem)) {
               return IconGem;
             }
 
-            if (isShield(current)) {
+            if (isShield(acquiredItem)) {
               return IconShield;
             }
 
-            if (isTrinketItem(current)) {
-              return TRINKETS[current.name].Icon;
+            if (isTrinketItem(acquiredItem)) {
+              return TRINKETS[acquiredItem.name].Icon;
             }
 
-            if (isWeapon(current)) {
-              if (isMelee(current)) {
+            if (isWeapon(acquiredItem)) {
+              if (isMelee(acquiredItem)) {
                 return IconMelee;
               }
 

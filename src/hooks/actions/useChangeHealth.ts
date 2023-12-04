@@ -73,7 +73,9 @@ export function useChangeHealth() {
               toggleAttacking();
             }
 
-            set(inventory, (current) => current.filter((item) => item.ID !== phylactery.ID));
+            set(inventory, (currentInventory) =>
+              currentInventory.filter(({ ID: itemID }) => itemID !== phylactery.ID),
+            );
 
             progressQuest({ quest: "resurrecting" });
           }

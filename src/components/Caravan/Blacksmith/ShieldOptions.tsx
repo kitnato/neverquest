@@ -60,9 +60,9 @@ export function ShieldOptions() {
             }}
             value={shieldClass}
           >
-            {SHIELD_CLASS_TYPES.map((current) => (
-              <option key={current} value={current}>
-                {capitalizeAll(current)}
+            {SHIELD_CLASS_TYPES.map((currentShieldClass) => (
+              <option key={currentShieldClass} value={currentShieldClass}>
+                {capitalizeAll(currentShieldClass)}
               </option>
             ))}
           </FormSelect>
@@ -116,8 +116,8 @@ export function ShieldOptions() {
       ) : craftedShield === undefined ? (
         <CraftGear
           onCraft={() => {
-            setBlacksmithInventory((current) => ({
-              ...current,
+            setBlacksmithInventory((currentBlacksmithInventory) => ({
+              ...currentBlacksmithInventory,
               shield: generateShield({
                 allowProfanity: allowProfanityValue,
                 gearClass: shieldClass,
@@ -141,7 +141,10 @@ export function ShieldOptions() {
         <CraftedGear
           gearItem={craftedShield}
           onTransfer={() => {
-            setBlacksmithInventory((current) => ({ ...current, shield: undefined }));
+            setBlacksmithInventory((currentBlacksmithInventory) => ({
+              ...currentBlacksmithInventory,
+              shield: undefined,
+            }));
           }}
         />
       )}

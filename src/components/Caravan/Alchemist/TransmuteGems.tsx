@@ -34,7 +34,7 @@ export function TransmuteGems() {
   const transmutation = { ruby: 0, sapphire: 0, topaz: 0 };
 
   for (const gem of GEM_TYPES) {
-    transmutation[gem] = gems.find(({ item: { name } }) => name === gem)?.stack ?? 0;
+    transmutation[gem] = gems.find(({ item: { name } }) => name === gem)?.amount ?? 0;
   }
 
   const isAffordable = transmutation[source] >= TRANSMUTE_COST;
@@ -75,12 +75,14 @@ export function TransmuteGems() {
               if (isAffordable) {
                 const gemIDs = new Set(
                   inventoryValue
-                    .filter((current) => isGemItem(current) && current.name === source)
+                    .filter((item) => isGemItem(item) && item.name === source)
                     .map(({ ID }) => ID)
                     .slice(0, TRANSMUTE_COST),
                 );
 
-                setInventory((current) => current.filter(({ ID }) => !gemIDs.has(ID)));
+                setInventory((currentInventory) =>
+                  currentInventory.filter(({ ID }) => !gemIDs.has(ID)),
+                );
 
                 acquireItem({
                   ...GEM_BASE,

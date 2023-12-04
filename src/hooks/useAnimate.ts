@@ -49,8 +49,8 @@ export function useAnimate({
       interval.current = setInterval(() => {
         const now = Date.now();
 
-        delta((current) => {
-          const newDelta = current - (now - (previousTime.current || now)) * factor;
+        delta((elapsed) => {
+          const newDelta = elapsed - (now - (previousTime.current || now)) * factor;
 
           if (newDelta <= 0) {
             setHasTicked(true);

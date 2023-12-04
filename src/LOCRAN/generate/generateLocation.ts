@@ -11,8 +11,8 @@ export function generateLocation({
   prefixTags,
   suffixTags,
 }: GeneratorParameters) {
-  const filteredLocations = LOCATIONS.filter((current) => {
-    const isProfanity = Boolean(current.isProfanity);
+  const filteredLocations = LOCATIONS.filter((location) => {
+    const isProfanity = Boolean(location.isProfanity);
 
     return allowProfanity ? isProfanity || !isProfanity : !isProfanity;
   });

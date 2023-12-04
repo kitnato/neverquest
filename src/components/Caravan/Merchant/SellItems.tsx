@@ -20,11 +20,9 @@ import { stackItems } from "@neverquest/utilities/helpers";
 export function SellItems() {
   const inventoryValue = useRecoilValue(inventory);
 
-  const equippedGear = inventoryValue.filter(
-    (current) => isGearItem(current) && current.isEquipped,
-  );
+  const equippedGear = inventoryValue.filter((item) => isGearItem(item) && item.isEquipped);
   const storedItems = inventoryValue.filter(
-    (current) => !isGearItem(current) || (isGearItem(current) && !current.isEquipped),
+    (item) => !isGearItem(item) || (isGearItem(item) && !item.isEquipped),
   );
 
   return (
@@ -37,8 +35,8 @@ export function SellItems() {
         <Stack gap={3}>
           {[equippedGear.find(isWeapon), equippedGear.find(isArmor), equippedGear.find(isShield)]
             .filter(isGearItem)
-            .map((current) => {
-              const { ID, isEquipped } = current;
+            .map((gearItem) => {
+              const { ID, isEquipped } = gearItem;
 
               return (
                 <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
@@ -46,34 +44,36 @@ export function SellItems() {
                     <ItemDisplay
                       description={isEquipped ? "Equipped" : undefined}
                       isInInventory
-                      item={current}
+                      item={gearItem}
                     />
                   </Stack>
 
-                  <SellItem item={current} />
+                  <SellItem item={gearItem} />
                 </div>
               );
             })}
 
           {storedItems
             .filter(isGearItem)
-            .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
-            .map((current) => (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.ID}>
-                <ItemDisplay isInInventory item={current} />
+            .toSorted((gearItem1, gearItem2) => gearItem1.name.localeCompare(gearItem2.name))
+            .map((gearItem) => (
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={gearItem.ID}>
+                <ItemDisplay isInInventory item={gearItem} />
 
-                <SellItem item={current} />
+                <SellItem item={gearItem} />
               </div>
             ))}
 
           {storedItems
             .filter(isUsable)
-            .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
-            .map((current) => (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={current.ID}>
-                <Usable item={current} />
+            .toSorted((usableItem1, usableItem2) =>
+              usableItem1.name.localeCompare(usableItem2.name),
+            )
+            .map((usableItem) => (
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={usableItem.ID}>
+                <Usable item={usableItem} />
 
-                <SellItem item={current} />
+                <SellItem item={usableItem} />
               </div>
             ))}
 
@@ -81,19 +81,21 @@ export function SellItems() {
             ...stackItems(
               storedItems
                 .filter(isConsumableItem)
-                .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
+                .toSorted((consumableItem1, consumableItem2) =>
+                  consumableItem1.name.localeCompare(consumableItem2.name),
+                ),
             ),
             ...stackItems(
               storedItems
                 .filter(isGemItem)
-                .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
+                .toSorted((gemItem1, gemItem2) => gemItem1.name.localeCompare(gemItem2.name)),
             ),
-          ].map((current) => {
-            const { item, stack } = current;
+          ].map((currentStack) => {
+            const { amount, item } = currentStack;
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={item.ID}>
-                <ItemDisplay item={item} stack={stack} />
+                <ItemDisplay amount={amount} item={item} />
 
                 <SellItem item={item} />
               </div>

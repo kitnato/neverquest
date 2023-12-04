@@ -34,9 +34,7 @@ export function Inventory() {
 
   const toggleEquipGear = useToggleEquipGear();
 
-  const equippedGear = inventoryValue.filter(
-    (current) => isGearItem(current) && current.isEquipped,
-  );
+  const equippedGear = inventoryValue.filter((item) => isGearItem(item) && item.isEquipped);
   const equippedGearIDs = new Set(equippedGear.map(({ ID }) => ID));
   const storedItems = inventoryValue.filter(
     ({ ID, name }) => !equippedGearIDs.has(ID) && name !== "knapsack",
@@ -55,16 +53,16 @@ export function Inventory() {
 
         {[equippedGear.find(isWeapon), equippedGear.find(isArmor), equippedGear.find(isShield)]
           .filter(isGearItem)
-          .map((current) => {
-            const { ID } = current;
+          .map((gearItem) => {
+            const { ID } = gearItem;
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                <ItemDisplay isInInventory item={current} />
+                <ItemDisplay isInInventory item={gearItem} />
 
                 <Button
                   onClick={() => {
-                    toggleEquipGear(current);
+                    toggleEquipGear(gearItem);
                   }}
                   variant="outline-dark"
                 >
@@ -82,14 +80,14 @@ export function Inventory() {
 
         {storedItems
           .filter(isGearItem)
-          .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
-          .map((current) => {
-            const { ID } = current;
+          .toSorted((gearItem1, gearItem2) => gearItem1.name.localeCompare(gearItem2.name))
+          .map((gearItem) => {
+            const { ID } = gearItem;
             const canEquipGear = equippableItemsValue[ID];
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                <ItemDisplay isInInventory item={current} />
+                <ItemDisplay isInInventory item={gearItem} />
 
                 <Stack direction="horizontal" gap={3}>
                   <OverlayTrigger
@@ -100,7 +98,7 @@ export function Inventory() {
                       <Button
                         disabled={!canEquipGear}
                         onClick={() => {
-                          toggleEquipGear(current);
+                          toggleEquipGear(gearItem);
                         }}
                         variant="outline-dark"
                       >
@@ -117,13 +115,15 @@ export function Inventory() {
 
         {storedItems
           .filter(isTrinketItem)
-          .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
-          .map((current) => {
-            const { ID, name } = current;
+          .toSorted((trinketItem1, trinketItem2) =>
+            trinketItem1.name.localeCompare(trinketItem2.name),
+          )
+          .map((trinketItem) => {
+            const { ID, name } = trinketItem;
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                <Usable item={current} />
+                <Usable item={trinketItem} />
 
                 <Stack direction="horizontal" gap={3}>
                   {(() => {
@@ -149,13 +149,15 @@ export function Inventory() {
 
         {storedItems
           .filter(isInfusableItem)
-          .toSorted((current1, current2) => current1.name.localeCompare(current2.name))
-          .map((current) => {
-            const { ID, name } = current;
+          .toSorted((infusableItem1, infusableItem2) =>
+            infusableItem1.name.localeCompare(infusableItem2.name),
+          )
+          .map((infusableItem) => {
+            const { ID, name } = infusableItem;
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                <Usable item={current} />
+                <Usable item={infusableItem} />
 
                 <Stack direction="horizontal" gap={3}>
                   <InfusionInspect infusable={name} />
@@ -169,19 +171,21 @@ export function Inventory() {
           ...stackItems(
             storedItems
               .filter(isConsumableItem)
-              .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
+              .toSorted((consumableItem1, consumableItem2) =>
+                consumableItem1.name.localeCompare(consumableItem2.name),
+              ),
           ),
           ...stackItems(
             storedItems
               .filter(isGemItem)
-              .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
+              .toSorted((gemItem1, gemItem2) => gemItem1.name.localeCompare(gemItem2.name)),
           ),
-        ].map(({ item, stack }) => {
+        ].map(({ amount, item }) => {
           const { ID, name } = item;
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-              <ItemDisplay item={item} stack={stack} />
+              <ItemDisplay amount={amount} item={item} />
 
               <Stack direction="horizontal" gap={3}>
                 {(() => {

@@ -28,15 +28,15 @@ export function useApplyGem() {
 
           const { gems, ID } = equippedGear[slot];
 
-          set(inventory, (current) =>
-            current
-              .filter((current) => current.ID !== gem.ID)
-              .map((current) => {
-                if (isGearItem(current) && current.ID === ID) {
-                  return { ...current, gems: [...current.gems, gem] };
+          set(inventory, (currentInventory) =>
+            currentInventory
+              .filter(({ ID: itemID }) => itemID !== gem.ID)
+              .map((item) => {
+                if (isGearItem(item) && item.ID === ID) {
+                  return { ...item, gems: [...item.gems, gem] };
                 }
 
-                return current;
+                return item;
               }),
           );
 
@@ -45,8 +45,8 @@ export function useApplyGem() {
           progressQuest({ quest: "gemsApplying" });
 
           if (
-            GEAR_TYPES.filter((current) => current !== slot).every(
-              (current) => equippedGear[current].gems.length > 0,
+            GEAR_TYPES.filter((gear) => gear !== slot).every(
+              (gear) => equippedGear[gear].gems.length > 0,
             )
           ) {
             progressQuest({ quest: "gemsApplyingAll" });

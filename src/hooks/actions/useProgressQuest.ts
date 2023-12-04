@@ -51,7 +51,10 @@ export function useProgressQuest() {
           }),
         );
 
-        set(questNotifications, (current) => [...achievedQuests, ...current]);
+        set(questNotifications, (currentQuestNotifications) => [
+          ...achievedQuests,
+          ...currentQuestNotifications,
+        ]);
       },
     [],
   );

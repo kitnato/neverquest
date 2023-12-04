@@ -29,7 +29,7 @@ export function useToggleAttacking() {
           return;
         }
 
-        set(isAttacking, (current) => !current);
+        set(isAttacking, (isAttackingCurrently) => !isAttackingCurrently);
 
         set(isShowing("attackRate"), true);
         set(isShowing("health"), true);

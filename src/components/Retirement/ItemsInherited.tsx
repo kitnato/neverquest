@@ -15,23 +15,28 @@ export function ItemsInherited() {
     <Stack gap={3}>
       <h6>Items inherited</h6>
 
-      {Object.values(ownsInheritableItemsValue).every((current) => !current) && (
-        <span className="fst-italic">{LABEL_NONE}</span>
-      )}
+      {Object.values(ownsInheritableItemsValue).every(
+        (ownsInheritableItem) => !ownsInheritableItem,
+      ) && <span className="fst-italic">{LABEL_NONE}</span>}
 
-      {Object.keys(ownsInheritableItemsValue).map((current) => {
-        if (isTrinket(current)) {
+      {Object.keys(ownsInheritableItemsValue).map((inheritableItem) => {
+        if (isTrinket(inheritableItem)) {
           return (
             <ItemDisplay
               isInInventory
-              item={TRINKETS[current].item}
-              key={TRINKETS[current].item.ID}
+              item={TRINKETS[inheritableItem].item}
+              key={TRINKETS[inheritableItem].item.ID}
             />
           );
         }
 
-        if (isInfusable(current)) {
-          return <Infusable item={INFUSABLES[current].item} key={INFUSABLES[current].item.ID} />;
+        if (isInfusable(inheritableItem)) {
+          return (
+            <Infusable
+              item={INFUSABLES[inheritableItem].item}
+              key={INFUSABLES[inheritableItem].item.ID}
+            />
+          );
         }
       })}
     </Stack>

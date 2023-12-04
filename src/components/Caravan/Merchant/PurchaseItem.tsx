@@ -41,7 +41,9 @@ export function PurchaseItem({ merchantItem }: { merchantItem: MerchantInventory
           toggleEquipGear(merchantItem);
         }
 
-        setMerchantInventory((current) => current.filter(({ ID: currentID }) => currentID !== ID));
+        setMerchantInventory((currentMerchantInventory) =>
+          currentMerchantInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
+        );
 
         if (isReturned) {
           progressQuest({ quest: "buyingBack" });

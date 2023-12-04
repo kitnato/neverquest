@@ -10,8 +10,8 @@ export function generateName({
   allowProfanity?: boolean;
   hasTitle?: boolean;
 }) {
-  const filteredNames = NAMES.filter((current) => {
-    const isProfanity = Boolean(current.isProfanity);
+  const filteredNames = NAMES.filter((name) => {
+    const isProfanity = Boolean(name.isProfanity);
 
     return allowProfanity ? isProfanity || !isProfanity : !isProfanity;
   });

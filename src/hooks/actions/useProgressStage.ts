@@ -22,7 +22,7 @@ export function useProgressStage() {
         const { essence, gems, trinket } = get(monsterLoot);
 
         if (essence > 0) {
-          set(essenceLoot, (current) => current + essence);
+          set(essenceLoot, (currentEssenceLoot) => currentEssenceLoot + essence);
         }
 
         const lootedItems: InventoryItem[] = [];

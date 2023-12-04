@@ -24,7 +24,9 @@ export function DeltasDisplay({ delta }: { delta: Delta }) {
               speed: "slower",
             })}
             onAnimationEnd={() => {
-              setDeltas((current) => current.filter(({ ID: currentID }) => currentID !== ID));
+              setDeltas((currentDeltas) =>
+                currentDeltas.filter(({ ID: currentDeltaID }) => currentDeltaID !== ID),
+              );
             }}
           >
             {display.map(({ color, value }) => (

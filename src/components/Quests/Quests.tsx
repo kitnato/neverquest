@@ -34,8 +34,8 @@ export function Quests({ questClass }: { questClass: QuestClass }) {
       </LabelledProgressBar>
 
       <Stack className="overflow-y-auto" gap={3}>
-        {QUEST_TYPES_BY_CLASS[questClass].map((current) => (
-          <QuestListing key={current} quest={current} questClass={questClass} />
+        {QUEST_TYPES_BY_CLASS[questClass].map((quest) => (
+          <QuestListing key={quest} quest={quest} questClass={questClass} />
         ))}
       </Stack>
     </Stack>

@@ -18,7 +18,7 @@ export function Mercenary() {
         {Object.values(acquiredSkillsValue).every(Boolean) ? (
           <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
         ) : (
-          SKILL_TYPES.map((current) => <TrainableSkill key={current} skill={current} />)
+          SKILL_TYPES.map((skill) => <TrainableSkill key={skill} skill={skill} />)
         )}
       </Stack>
 

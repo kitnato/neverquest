@@ -19,9 +19,10 @@ export function formatEnumeration(list: string[]) {
 // Correctly does the rounding as opposed to .toFixed().
 function formatFloat({ decimals = 2, value }: { decimals?: number; value: number }) {
   const multiplier = 10 ** decimals;
-  const result = Number.parseFloat((value * multiplier).toFixed(12));
 
-  return (Math.round(result) / multiplier).toFixed(decimals).toLocaleString();
+  return (Math.round(Number.parseFloat((value * multiplier).toFixed(12))) / multiplier)
+    .toFixed(decimals)
+    .toLocaleString();
 }
 
 export function formatKebabCase(words: string) {
@@ -91,7 +92,7 @@ export function formatPascalCase(words: string) {
     .replaceAll(/[^\s\w]/g, "")
     .replaceAll(
       /\s+(.)(\w*)/g,
-      (_, current2: string, current3: string) => `${current2.toUpperCase() + current3}`,
+      (_, word2: string, word3: string) => `${word2.toUpperCase() + word3}`,
     )
-    .replace(/\w/, (current) => current.toUpperCase());
+    .replace(/\w/, (word) => word.toUpperCase());
 }

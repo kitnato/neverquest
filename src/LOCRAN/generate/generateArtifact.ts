@@ -13,19 +13,19 @@ export function generateArtifact({
 }: GeneratorParameters & {
   query: ArtifactQuery;
 }) {
-  const filteredArtifacts = ARTIFACTS.filter((current) => {
-    const isProfanity = Boolean(current.isProfanity);
+  const filteredArtifacts = ARTIFACTS.filter((artifact) => {
+    const isProfanity = Boolean(artifact.isProfanity);
 
     return (
-      current.type === query.type &&
+      artifact.type === query.type &&
       ("subtype" in query
-        ? "subtype" in current
-          ? current.subtype === query.subtype
+        ? "subtype" in artifact
+          ? artifact.subtype === query.subtype
           : false
         : true) &&
       ("artifactClass" in query
-        ? "artifactClass" in current
-          ? current.artifactClass === query.artifactClass
+        ? "artifactClass" in artifact
+          ? artifact.artifactClass === query.artifactClass
           : false
         : true) &&
       (allowProfanity ? isProfanity || !isProfanity : !isProfanity)

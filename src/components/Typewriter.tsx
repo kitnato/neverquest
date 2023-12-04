@@ -23,7 +23,7 @@ export function Typewriter({ children, delay = TEXT_DELAY }: { children: string;
       deltaDelayReference.current += delta;
 
       if (index === children.length && deltaCursorReference.current >= CURSOR_DELAY) {
-        setCursor((current) => (current === CURSOR ? "" : CURSOR));
+        setCursor((currentCursor) => (currentCursor === CURSOR ? "" : CURSOR));
         deltaCursorReference.current = 0;
       }
 
@@ -31,8 +31,8 @@ export function Typewriter({ children, delay = TEXT_DELAY }: { children: string;
         index < children.length &&
         deltaDelayReference.current >= (children[index - 1] === SEPARATOR ? delay * 3 : delay)
       ) {
-        setText((current) => current + children[index]);
-        setIndex((current) => current + 1);
+        setText((currentText) => currentText + children[index]);
+        setIndex((currentIndex) => currentIndex + 1);
 
         deltaDelayReference.current = 0;
       }

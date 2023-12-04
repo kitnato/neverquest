@@ -63,8 +63,8 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
             const acquiredStatus = acquireItem(mysteriousEggItem);
 
             if (acquiredStatus === "success") {
-              setInventory((current) =>
-                current.filter(({ ID }) => ownedItemMysteriousEgg.ID !== ID),
+              setInventory((currentInventory) =>
+                currentInventory.filter(({ ID }) => ID !== ownedItemMysteriousEgg.ID),
               );
 
               progressQuest({ quest: "acquiringFamiliar" });

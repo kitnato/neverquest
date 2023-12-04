@@ -10,12 +10,12 @@ import type { Comparison } from "@neverquest/types/components";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function WeightDetail({
+  amount,
   comparison,
-  stack,
   weight,
 }: {
+  amount?: number;
   comparison?: Comparison;
-  stack?: number;
   weight: number;
 }) {
   const isShowingWeight = useRecoilValue(isShowing("weight"));
@@ -40,8 +40,8 @@ export function WeightDetail({
                 />
               )}
 
-              {stack !== undefined && stack > 1 && (
-                <>{`(${formatNumber({ value: weight * stack })})`}</>
+              {amount !== undefined && amount > 1 && (
+                <>{`(${formatNumber({ value: weight * amount })})`}</>
               )}
             </Stack>
           </td>

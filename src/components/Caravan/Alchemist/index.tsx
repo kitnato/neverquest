@@ -12,7 +12,7 @@ import { stackItems } from "@neverquest/utilities/helpers";
 export function Alchemist() {
   const inventoryValue = useRecoilValue(inventory);
 
-  const gemsInventory = stackItems(
+  const storedGemsStack = stackItems(
     inventoryValue
       .filter(isGemItem)
       .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
@@ -23,11 +23,11 @@ export function Alchemist() {
       <Stack gap={3}>
         <h6>Inventory</h6>
 
-        {gemsInventory.length === 0 ? (
+        {storedGemsStack.length === 0 ? (
           <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
         ) : (
-          gemsInventory.map(({ item, stack }) => (
-            <ItemDisplay item={item} key={item.ID} stack={stack} />
+          storedGemsStack.map(({ amount, item }) => (
+            <ItemDisplay amount={amount} item={item} key={item.ID} />
           ))
         )}
       </Stack>

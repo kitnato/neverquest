@@ -47,24 +47,20 @@ export function generate({
 
         // If we want a tagged prefix, check if the current affix has all of them, otherwise discard it.
         if (prefixTags.length > 0) {
-          return isValidPrefix && prefixTags.every((current) => tags?.includes(current));
+          return isValidPrefix && prefixTags.every((prefixTag) => tags?.includes(prefixTag));
         }
 
         // Otherwise, return any prefix.
         return isValidPrefix;
       },
-    ).map((current) => current.name);
+    ).map(({ name }) => name);
 
     // Artifacts and locations can also have a creature name prefix.
     if (canHaveCreatureAffix) {
       filteredCreatureNamePrefixes.push(
         ...CREATURES.filter(({ isProfanity }) =>
           allowProfanity ? Boolean(isProfanity) || !isProfanity : !isProfanity,
-        ).map((current) => {
-          const apostrophe = Math.random() <= APOSTROPHE_CHANCE;
-
-          return `${current.name}${apostrophe ? "'s" : ""}`;
-        }),
+        ).map(({ name }) => `${name}${Math.random() <= APOSTROPHE_CHANCE ? "'s" : ""}`),
       );
     }
 
@@ -90,7 +86,7 @@ export function generate({
 
         // If suffix is tagged, check if the current affix has all of them (with Profanity filter).
         if (suffixTags.length > 0) {
-          return isValidSuffix && suffixTags.every((current) => tags?.includes(current));
+          return isValidSuffix && suffixTags.every((suffixTag) => tags?.includes(suffixTag));
         }
 
         // Otherwise, return any valid suffix.
@@ -105,7 +101,7 @@ export function generate({
       filteredCreatureNameSuffixes.push(
         ...CREATURES.filter(({ isProfanity }) =>
           allowProfanity ? Boolean(isProfanity) || !isProfanity : !isProfanity,
-        ).map((current) => current.name),
+        ).map(({ name }) => name),
       );
     }
 

@@ -49,8 +49,8 @@ export function Journal() {
           <h6>Completion bonus</h6>
 
           <Stack className="mx-auto" direction="horizontal" gap={5}>
-            {QUEST_BONUS_TYPES.map((current) => (
-              <QuestBonusDisplay bonus={current} key={current} />
+            {QUEST_BONUS_TYPES.map((questBonus) => (
+              <QuestBonusDisplay bonus={questBonus} key={questBonus} />
             ))}
           </Stack>
         </>

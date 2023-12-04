@@ -56,7 +56,7 @@ export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
           case "frozen":
           case "shocked": {
             const elemental = ELEMENTAL_TYPES.find(
-              (current) => ELEMENTALS[current].ailment === parameter,
+              (currentElemental) => ELEMENTALS[currentElemental].ailment === parameter,
             );
             const { armor, weapon } = get(elementalEffects);
 
@@ -72,7 +72,7 @@ export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
 
 export const canReceiveAilments = withStateKey("canReceiveAilments", (key) =>
   selector({
-    get: ({ get }) => MONSTER_AILMENT_TYPES.some((current) => get(canReceiveAilment(current))),
+    get: ({ get }) => MONSTER_AILMENT_TYPES.some((ailment) => get(canReceiveAilment(ailment))),
     key,
   }),
 );

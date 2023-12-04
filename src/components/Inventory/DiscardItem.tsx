@@ -53,8 +53,8 @@ export function DiscardItem({ ID }: { ID: string }) {
         <ModalFooter>
           <Button
             onClick={() => {
-              setInventoryValue((current) =>
-                current.filter(({ ID: currentID }) => ID !== currentID),
+              setInventoryValue((currentInventory) =>
+                currentInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
               );
 
               onHide();

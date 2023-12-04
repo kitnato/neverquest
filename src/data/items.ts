@@ -150,7 +150,11 @@ export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
 export const GEM_FITTING_COST = [10, 30, 70, 150, 300];
 export const GEMS: Record<
   Gem,
-  { damage: number[]; damageModification: string; elemental: Elemental }
+  {
+    damage: [number, number, number, number, number];
+    damageModification: string;
+    elemental: Elemental;
+  }
 > = {
   ruby: {
     damage: [0.1, 0.2, 0.4, 0.66, 0.1],

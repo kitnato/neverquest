@@ -14,7 +14,7 @@ import { stackItems } from "@neverquest/utilities/helpers";
 export function PurchasableItems({ merchantItems }: { merchantItems: MerchantInventoryItem[] }) {
   return (
     <>
-      {stackItems(merchantItems).map(({ item, stack }) => {
+      {stackItems(merchantItems).map(({ amount, item }) => {
         const { ID, price } = item;
 
         return (
@@ -22,7 +22,7 @@ export function PurchasableItems({ merchantItems }: { merchantItems: MerchantInv
             {isUsable(item) ? (
               <Usable item={item} />
             ) : (
-              <ItemDisplay isInInventory={isGearItem(item)} item={item} stack={stack} />
+              <ItemDisplay amount={amount} isInInventory={isGearItem(item)} item={item} />
             )}
 
             <Stack direction="horizontal" gap={3}>

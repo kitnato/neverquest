@@ -7,8 +7,8 @@ export function useResetAttributes() {
   return useRecoilCallback(
     ({ reset }) =>
       () => {
-        for (const current of ATTRIBUTE_TYPES) {
-          reset(attributeRank(current));
+        for (const attribute of ATTRIBUTE_TYPES) {
+          reset(attributeRank(attribute));
         }
       },
     [],

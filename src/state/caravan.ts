@@ -9,7 +9,7 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 export const isCaravanHired = withStateKey("isCaravanHired", (key) =>
   selector({
-    get: ({ get }) => CREW_TYPES.every((current) => get(hireStatus(current)) === "hired"),
+    get: ({ get }) => CREW_TYPES.every((crew) => get(hireStatus(crew)) === "hired"),
     key,
   }),
 );

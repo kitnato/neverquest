@@ -32,19 +32,19 @@ export function TraitSelection() {
           />
 
           {TRAIT_TYPES.map(
-            (current) =>
-              !acquiredTraitsValue[current] && (
+            (trait) =>
+              !acquiredTraitsValue[trait] && (
                 <FormCheck
-                  checked={selectedTraitValue === current}
-                  id={current}
-                  key={current}
-                  label={<TraitDisplay key={current} trait={current} />}
+                  checked={selectedTraitValue === trait}
+                  id={trait}
+                  key={trait}
+                  label={<TraitDisplay key={trait} trait={trait} />}
                   name={FORM_NAME}
                   onChange={({ target: { value } }) => {
                     setSelectedTrait(value as Trait);
                   }}
                   type="radio"
-                  value={current}
+                  value={trait}
                 />
               ),
           )}

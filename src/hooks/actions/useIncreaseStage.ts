@@ -35,8 +35,8 @@ export function useIncreaseStage() {
           }
         }
 
-        set(wildernesses, (current) => [
-          ...current,
+        set(wildernesses, (currentWildernesses) => [
+          ...currentWildernesses,
           generateLocation({
             allowProfanity: get(allowProfanity),
             nameStructure: getNameStructure(),

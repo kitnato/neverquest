@@ -31,8 +31,8 @@ export function useIncreaseAttribute() {
         const newRank = get(attributeRank(attribute)) + 1;
 
         if (shows !== undefined) {
-          for (const current of shows) {
-            set(isShowing(current), true);
+          for (const show of shows) {
+            set(isShowing(show), true);
           }
         }
 
@@ -45,8 +45,8 @@ export function useIncreaseAttribute() {
         progressQuest({ quest: "powerLevelUltra" });
 
         if (
-          ATTRIBUTE_TYPES.filter((current) => current !== attribute).every(
-            (current) => get(attributeRank(current)) > 0,
+          ATTRIBUTE_TYPES.filter((currentAttribute) => currentAttribute !== attribute).every(
+            (currentAttribute) => get(attributeRank(currentAttribute)) > 0,
           )
         ) {
           progressQuest({ quest: "attributesIncreasingAll" });

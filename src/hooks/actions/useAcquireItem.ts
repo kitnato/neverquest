@@ -4,7 +4,7 @@ import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { armor, shield, weapon } from "@neverquest/state/gear";
-import { inventory, itemsAcquired, notifyOverEncumbrance } from "@neverquest/state/inventory";
+import { acquiredItems, inventory, notifyOverEncumbrance } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { autoEquip } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -39,7 +39,7 @@ export function useAcquireItem() {
         if (isTrinketItem(item) && item.name === "knapsack") {
           set(isShowing("weight"), true);
         } else {
-          set(itemsAcquired, (current) => [...current, item]);
+          set(acquiredItems, (currentAcquiredItems) => [...currentAcquiredItems, item]);
         }
 
         if (isGemItem(item)) {
@@ -50,7 +50,7 @@ export function useAcquireItem() {
           progressQuest({ quest: "acquiringAntiqueCoin" });
         }
 
-        set(inventory, (current) => [...current, item]);
+        set(inventory, (currentInventory) => [...currentInventory, item]);
 
         const isShieldUnequipped = get(shield).name === SHIELD_NONE.name;
         const weaponValue = get(weapon);

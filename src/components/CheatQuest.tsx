@@ -40,7 +40,7 @@ export function CheatQuest() {
       switch (state) {
         // Doom
         case "IDBEHOLDV": {
-          setIsImmortal((current) => !current);
+          setIsImmortal((isImmortal) => !isImmortal);
 
           break;
         }

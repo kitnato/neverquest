@@ -40,12 +40,12 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
       <Dropdown.Toggle variant="outline-dark">Apply</Dropdown.Toggle>
 
       <Dropdown.Menu>
-        {GEAR_TYPES.map((current) => {
-          const { canApply, gear } = gemFitting[current];
+        {GEAR_TYPES.map((currentGear) => {
+          const { canApply, gear } = gemFitting[currentGear];
           const { gems, name } = gear;
 
           return (
-            <Dropdown.Item disabled={!canApply} eventKey={current} key={current}>
+            <Dropdown.Item disabled={!canApply} eventKey={currentGear} key={currentGear}>
               <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
                 <span className="mr-2">{capitalizeAll(name)}</span>
 

@@ -138,13 +138,13 @@ export function getGearElementalEffects(gear: GearItem | GearItemUnequipped) {
     };
     const effector = isArmor(gear) ? gear.protection : gear.damage;
 
-    for (const { item, stack } of stackItems(gear.gems)) {
+    for (const { amount, item } of stackItems(gear.gems)) {
       const { damage, elemental } = GEMS[item.name];
 
       effects[elemental] = {
-        damage: Math.ceil(effector * (damage[stack - 1] ?? 0)),
+        damage: Math.ceil(effector * (damage[amount - 1] ?? 0)),
         duration: getFromRange({
-          factor: (stack - 1) / (GEMS_MAXIMUM - 1),
+          factor: (amount - 1) / (GEMS_MAXIMUM - 1),
           ...ELEMENTALS[elemental].duration,
         }),
       };
@@ -155,19 +155,19 @@ export function getGearElementalEffects(gear: GearItem | GearItemUnequipped) {
 
   const effects = { fire: 0, ice: 0, lightning: 0 };
 
-  for (const { item, stack } of stackItems(gear.gems)) {
+  for (const { amount, item } of stackItems(gear.gems)) {
     const { elemental } = GEMS[item.name];
 
-    effects[elemental] = GEM_ENHANCEMENT[stack - 1] ?? 0;
+    effects[elemental] = GEM_ENHANCEMENT[amount - 1] ?? 0;
   }
 
   return effects;
 }
 
 export function getFromRange({ factor, maximum, minimum }: GeneratorRange & { factor?: number }) {
-  const result = (factor ?? Math.random()) * (maximum - minimum) + minimum;
+  const value = (factor ?? Math.random()) * (maximum - minimum) + minimum;
 
-  return Number.isInteger(minimum) && Number.isInteger(maximum) ? Math.round(result) : result;
+  return Number.isInteger(minimum) && Number.isInteger(maximum) ? Math.round(value) : value;
 }
 
 export function getGearPrice({
@@ -238,11 +238,11 @@ export function getProgressReduction(stage: number) {
 export function getQuestsData(quest: Quest): QuestData[] {
   const { description, hidden, progression, title } = QUESTS[quest];
 
-  return progression.map((current, index) => ({
-    description: description.replace("@", formatNumber({ value: current })),
+  return progression.map((progress, index) => ({
+    description: description.replace("@", formatNumber({ value: progress })),
     hidden,
     progressionIndex: index,
-    progressionMaximum: current,
+    progressionMaximum: progress,
     questClass: isConquest(quest) ? "conquest" : isRoutine(quest) ? "routine" : "triumph",
     title: `${title}${progression.length > 1 ? ` ${getRomanNumeral(index + 1)}` : ""}`,
   }));
@@ -281,19 +281,19 @@ export function getRomanNumeral(value: number) {
 
   const digits = [...Math.round(value).toString()];
   let position = digits.length - 1;
-  let result = "";
+  let currentNumeral = "";
 
   for (const digit of digits) {
     const numeral = ROMAN_NUMERALS[position];
 
     if (numeral !== undefined && digit !== "0") {
-      result += numeral[Number.parseInt(digit) - 1];
+      currentNumeral += numeral[Number.parseInt(digit) - 1];
     }
 
     position -= 1;
   }
 
-  return result;
+  return currentNumeral;
 }
 
 export function getSellPrice(item: InventoryItem) {

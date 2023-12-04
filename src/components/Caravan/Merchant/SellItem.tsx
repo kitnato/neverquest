@@ -29,9 +29,11 @@ export function SellItem({ item }: { item: InventoryItem }) {
         onClick={() => {
           transactEssence(getSellPrice(item));
 
-          setInventory((current) => current.filter((current) => current.ID !== item.ID));
-          setMerchantInventory((current) => [
-            ...current,
+          setInventory((currentInventory) =>
+            currentInventory.filter((currentItem) => currentItem.ID !== item.ID),
+          );
+          setMerchantInventory((currentMerchantInventory) => [
+            ...currentMerchantInventory,
             isGearItem(item)
               ? { ...item, isEquipped: false, isReturned: true }
               : { ...item, isReturned: true },

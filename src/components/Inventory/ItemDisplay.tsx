@@ -24,18 +24,18 @@ import {
 } from "@neverquest/types/type-guards";
 
 export function ItemDisplay({
+  amount,
   description,
   iconProps,
   isInInventory,
   item,
-  stack,
 }: {
+  amount?: number;
   description?: ReactNode;
   extra?: string;
   iconProps?: IconImageDOMProperties;
   isInInventory?: boolean;
   item: InventoryItem;
-  stack?: number;
 }) {
   if (isArmor(item)) {
     return (
@@ -53,7 +53,7 @@ export function ItemDisplay({
         iconProps={iconProps}
         tooltip="Consumable"
       >
-        <ItemName item={item} stack={stack} />
+        <ItemName amount={amount} item={item} />
       </IconDisplay>
     );
   }
@@ -112,7 +112,7 @@ export function ItemDisplay({
 
   return (
     <IconDisplay description={description} Icon={IconGem} iconProps={iconProps} tooltip="Gem">
-      <ItemName item={item} stack={stack} />
+      <ItemName amount={amount} item={item} />
     </IconDisplay>
   );
 }

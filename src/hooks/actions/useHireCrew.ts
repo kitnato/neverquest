@@ -17,7 +17,7 @@ export function useHireCrew() {
         const get = getSnapshotGetter(snapshot);
 
         const otherHirableCrew = CREW_TYPES.filter(
-          (current) => current !== crew || current !== "merchant",
+          (currentCrew) => currentCrew !== crew || currentCrew !== "merchant",
         );
 
         set(hireStatus(crew), "hired");
@@ -30,7 +30,11 @@ export function useHireCrew() {
         progressQuest({ quest: "hiring" });
         progressQuest({ quest: "hiringAll" });
 
-        if (otherHirableCrew.every((current) => get(hireStatus(current)) !== "hired")) {
+        if (
+          otherHirableCrew.every(
+            (currentHirableCrew) => get(hireStatus(currentHirableCrew)) !== "hired",
+          )
+        ) {
           progressQuest({ quest: "hiringBlacksmithFirst" });
         }
       },

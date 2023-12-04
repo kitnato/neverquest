@@ -91,15 +91,23 @@ export const ownedItem = withStateKey("ownedItem", (key) =>
       (parameter) =>
       ({ get }) =>
         get(inventory).find(
-          (current) =>
-            (isConsumableItem(current) || isInfusableItem(current) || isTrinketItem(current)) &&
-            current.name === parameter,
+          (item) =>
+            (isConsumableItem(item) || isInfusableItem(item) || isTrinketItem(item)) &&
+            item.name === parameter,
         ),
     key,
   }),
 );
 
 // ATOMS
+
+export const acquiredItems = withStateKey("acquiredItems", (key) =>
+  atom<InventoryItem[]>({
+    default: [],
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
 
 export const canInfuseMysteriousEgg = withStateKey("canInfuseMysteriousEgg", (key) =>
   atom({
@@ -120,14 +128,6 @@ export const inventory = withStateKey("inventory", (key) =>
 export const isInventoryOpen = withStateKey("isInventoryOpen", (key) =>
   atom({
     default: false,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
-export const itemsAcquired = withStateKey("itemsAcquired", (key) =>
-  atom<InventoryItem[]>({
-    default: [],
     effects: [handleLocalStorage({ key })],
     key,
   }),

@@ -49,13 +49,15 @@ export const canCompleteQuests = withStateKey("canCompleteQuests", (key) =>
     get:
       (parameter) =>
       ({ get }) => {
-        let result = false;
+        let currentCanCompleteQuests = false;
 
         for (const quest of QUEST_TYPES_BY_CLASS[parameter]) {
-          result ||= Object.values(get(questStatuses(quest))).includes("achieved");
+          currentCanCompleteQuests ||= Object.values(get(questStatuses(quest))).includes(
+            "achieved",
+          );
         }
 
-        return result;
+        return currentCanCompleteQuests;
       },
     key,
   }),

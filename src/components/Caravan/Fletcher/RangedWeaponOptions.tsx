@@ -62,9 +62,11 @@ export function RangedWeaponOptions() {
             }}
             value={weaponClass}
           >
-            {WEAPON_CLASS_TYPES.filter((current) => current !== "slashing").map((current) => (
-              <option key={current} value={current}>
-                {capitalizeAll(current)}
+            {WEAPON_CLASS_TYPES.filter(
+              (currentWeaponClass) => currentWeaponClass !== "slashing",
+            ).map((currentWeaponClass) => (
+              <option key={currentWeaponClass} value={currentWeaponClass}>
+                {capitalizeAll(currentWeaponClass)}
               </option>
             ))}
           </FormSelect>

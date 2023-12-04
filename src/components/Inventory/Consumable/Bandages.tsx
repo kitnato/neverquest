@@ -24,7 +24,9 @@ export function Bandages({ ID }: { ID: string }) {
           disabled={isHealthAtMaximumValue}
           onClick={() => {
             heal();
-            setInventory((current) => current.filter((current) => current.ID !== ID));
+            setInventory((currentInventory) =>
+              currentInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
+            );
             progressQuest({ quest: "bandaging" });
           }}
           variant="outline-dark"

@@ -22,7 +22,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
         <td>
           {stackItems(
             gems.toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
-          ).map(({ item, stack }) => {
+          ).map(({ amount, item }) => {
             const { ID, name } = item;
             const { elemental } = GEMS[name];
             const { color, Icon } = ELEMENTALS[elemental];
@@ -50,7 +50,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 
                 <IconImage Icon={IconGem} isSmall />
 
-                {stack}
+                {amount}
               </Stack>
             );
           })}

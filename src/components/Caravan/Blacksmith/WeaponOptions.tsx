@@ -65,9 +65,9 @@ export function WeaponOptions() {
             }}
             value={weaponClass}
           >
-            {WEAPON_CLASS_TYPES.map((current) => (
-              <option key={current} value={current}>
-                {capitalizeAll(current)}
+            {WEAPON_CLASS_TYPES.map((currentWeaponClass) => (
+              <option key={currentWeaponClass} value={currentWeaponClass}>
+                {capitalizeAll(currentWeaponClass)}
               </option>
             ))}
           </FormSelect>
@@ -81,9 +81,9 @@ export function WeaponOptions() {
               }}
               value={weaponGrip}
             >
-              {GRIP_TYPES.map((current) => (
-                <option key={current} value={current}>
-                  {capitalizeAll(current)}
+              {GRIP_TYPES.map((grip) => (
+                <option key={grip} value={grip}>
+                  {capitalizeAll(grip)}
                 </option>
               ))}
             </FormSelect>
@@ -142,8 +142,8 @@ export function WeaponOptions() {
       {craftedWeapon === undefined ? (
         <CraftGear
           onCraft={() => {
-            setBlacksmithInventory((current) => ({
-              ...current,
+            setBlacksmithInventory((currentBlacksmithInventory) => ({
+              ...currentBlacksmithInventory,
               weapon: generateMeleeWeapon({
                 allowProfanity: allowProfanityValue,
                 gearClass: weaponClass,
@@ -169,7 +169,10 @@ export function WeaponOptions() {
         <CraftedGear
           gearItem={craftedWeapon}
           onTransfer={() => {
-            setBlacksmithInventory((current) => ({ ...current, weapon: undefined }));
+            setBlacksmithInventory((currentBlacksmithInventory) => ({
+              ...currentBlacksmithInventory,
+              weapon: undefined,
+            }));
           }}
         />
       )}

@@ -51,7 +51,7 @@ export function animateElement({
 }
 
 export function stackItems<ItemType>(items: ItemType[]) {
-  const stacker: { item: ItemType; stack: number }[] = [];
+  const stacker: { amount: number; item: ItemType }[] = [];
 
   for (const item of items) {
     if (isStackableItem(item)) {
@@ -60,15 +60,15 @@ export function stackItems<ItemType>(items: ItemType[]) {
       );
 
       if (existingStackIndex === -1) {
-        stacker.push({ item, stack: 1 });
+        stacker.push({ amount: 1, item });
       } else {
         stacker.splice(existingStackIndex, 1, {
+          amount: (stacker[existingStackIndex] ?? { amount: 1 }).amount + 1,
           item,
-          stack: (stacker[existingStackIndex] ?? { stack: 1 }).stack + 1,
         });
       }
     } else {
-      stacker.push({ item, stack: 1 });
+      stacker.push({ amount: 1, item });
     }
   }
 

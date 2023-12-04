@@ -53,12 +53,12 @@ export function Caravan() {
             <Stack gap={3}>
               {isShowingCrewHiring && <h6>Hired crew</h6>}
 
-              {CREW_TYPES.map((current, index) => (
+              {CREW_TYPES.map((crew, index) => (
                 <CrewHired
-                  crew={current}
+                  crew={crew}
                   key={index}
                   setActive={() => {
-                    toggleCrewActive(true, current);
+                    toggleCrewActive(true, crew);
                   }}
                 />
               ))}
@@ -70,8 +70,8 @@ export function Caravan() {
 
                 {isCaravanHiredValue && <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>}
 
-                {CREW_TYPES.map((current, index) => (
-                  <CrewHirable crew={current} key={index} />
+                {CREW_TYPES.map((crew, index) => (
+                  <CrewHirable crew={crew} key={index} />
                 ))}
               </Stack>
             )}

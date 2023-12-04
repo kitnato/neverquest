@@ -23,7 +23,7 @@ export function useAcquireSkill() {
         const acquiredSkillsValue = get(acquiredSkills);
         const newUnlockedMasteries = Object.entries(MASTERIES)
           .filter(([_, { requiredSkill }]) => requiredSkill === skill)
-          .map(([current]) => current as Mastery);
+          .map(([mastery]) => mastery as Mastery);
 
         set(isSkillAcquired(skill), true);
         set(isShowing("skills"), true);
@@ -44,7 +44,7 @@ export function useAcquireSkill() {
         }
 
         if (
-          Object.values(acquiredSkillsValue).every((current) => !current) &&
+          Object.values(acquiredSkillsValue).every((hasAcquiredSkill) => !hasAcquiredSkill) &&
           skill === "archery"
         ) {
           progressQuest({ quest: "acquiringArcheryFirst" });
@@ -53,16 +53,16 @@ export function useAcquireSkill() {
         if (
           [
             ...Object.entries(acquiredSkillsValue)
-              .filter(([_, current]) => current)
-              .map(([current]) => current),
+              .filter(([_, hasAcquiredSkill]) => hasAcquiredSkill)
+              .map(([currentSkill]) => currentSkill),
             skill,
           ]
-            .toSorted((current1, current2) => current1.localeCompare(current2))
+            .toSorted((skill1, skill2) => skill1.localeCompare(skill2))
             .toString() ===
           Object.values(ATTRIBUTES)
             .map(({ requiredSkill }) => requiredSkill)
-            .filter((current): current is Skill => current !== undefined)
-            .toSorted((current1, current2) => current1.localeCompare(current2))
+            .filter((currentSkill): currentSkill is Skill => currentSkill !== undefined)
+            .toSorted((skill1, skill2) => skill1.localeCompare(skill2))
             .toString()
         ) {
           progressQuest({ quest: "attributesUnlockingAll" });

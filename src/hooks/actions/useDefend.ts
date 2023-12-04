@@ -273,7 +273,7 @@ export function useDefend() {
           } else {
             progressQuest({ quest: "blighting" });
 
-            set(blight, (current) => current + 1);
+            set(blight, (currentBlight) => currentBlight + 1);
 
             deltaStamina.push({
               color: "text-muted",

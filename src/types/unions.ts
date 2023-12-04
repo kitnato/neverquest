@@ -266,6 +266,7 @@ export type Skill = (typeof SKILL_TYPES)[number];
 export type StateKey =
   | Gear
   | "absorbedEssence"
+  | "acquiredItems"
   | "acquiredSkills"
   | "acquiredTraits"
   | "activeCrew"
@@ -371,7 +372,6 @@ export type StateKey =
   | "isStageStarted"
   | "isStaminaAtMaximum"
   | "isTraitAcquired"
-  | "itemsAcquired"
   | "itemsLoot"
   | "level"
   | "location"

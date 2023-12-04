@@ -43,8 +43,8 @@ export function LootDisplay() {
                     .filter(isStackableItem)
                     .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
                 ),
-              ].map(({ item, stack }) => (
-                <ItemDisplay item={item} key={item.ID} stack={stack} />
+              ].map(({ amount, item }) => (
+                <ItemDisplay amount={amount} item={item} key={item.ID} />
               ))}
             </Stack>
           )}

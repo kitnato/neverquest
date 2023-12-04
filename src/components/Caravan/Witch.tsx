@@ -8,8 +8,8 @@ export function Witch() {
     <Stack gap={3}>
       <h6>Purchase potions</h6>
 
-      {WITCH_POTIONS.map((current) => (
-        <PurchaseConsumable consumable={current} key={current} />
+      {WITCH_POTIONS.map((potion) => (
+        <PurchaseConsumable consumable={potion} key={potion} />
       ))}
     </Stack>
   );

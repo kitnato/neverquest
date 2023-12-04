@@ -27,10 +27,10 @@ export function Masteries() {
           <Accordion.Body>
             <Stack gap={3}>
               {Object.entries(unlockedMasteriesValue)
-                .toSorted(([current1], [current2]) => current1.localeCompare(current2))
-                .toSorted(([, current1], [, current2]) => Number(current2) - Number(current1))
-                .map(([current]) => (
-                  <MasteryDisplay key={current} mastery={current as Mastery} />
+                .toSorted(([mastery1], [mastery2]) => mastery1.localeCompare(mastery2))
+                .toSorted(([, mastery1], [, mastery2]) => Number(mastery2) - Number(mastery1))
+                .map(([mastery]) => (
+                  <MasteryDisplay key={mastery} mastery={mastery as Mastery} />
                 ))}
             </Stack>
           </Accordion.Body>

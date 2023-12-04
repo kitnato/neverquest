@@ -14,7 +14,7 @@ export const isShowing = withStateKey("isShowing", (key) =>
 
 export const isShowingEverything = withStateKey("isShowingEverything", (key) =>
   selector({
-    get: ({ get }) => Object.values(SHOWING_TYPES).every((current) => get(isShowing(current))),
+    get: ({ get }) => Object.values(SHOWING_TYPES).every((showing) => get(isShowing(showing))),
     key,
   }),
 );

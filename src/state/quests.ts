@@ -69,9 +69,9 @@ export const completedQuestsCount = withStateKey("completedQuestsCount", (key) =
         const questBonusTypes = new Set<string>(QUEST_BONUS_TYPES);
 
         return QUEST_TYPES_BY_CLASS[parameter].reduce(
-          (accumulator, currentQuest) =>
-            accumulator +
-            Object.values(get(questStatuses(currentQuest))).filter((currentStatus) =>
+          (sum, quest) =>
+            sum +
+            Object.values(get(questStatuses(quest))).filter((currentStatus) =>
               questBonusTypes.has(currentStatus),
             ).length,
           0,
@@ -89,9 +89,9 @@ export const questsBonus = withStateKey("questsBonus", (key) =>
         !get(canUseJournal) || get(ownedItem("journal")) === undefined
           ? 0
           : QUEST_TYPES.reduce(
-              (accumulator, currentQuest) =>
-                accumulator +
-                Object.values(get(questStatuses(currentQuest))).filter(
+              (sum, quest) =>
+                sum +
+                Object.values(get(questStatuses(quest))).filter(
                   (currentStatus) => parameter === currentStatus,
                 ).length,
               0,

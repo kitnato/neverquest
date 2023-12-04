@@ -4,7 +4,7 @@ import { WEAPON_NONE } from "@neverquest/data/gear";
 import { ELEMENTALS } from "@neverquest/data/items";
 import { BLEED } from "@neverquest/data/statistics";
 import { BRUISER_STUN_CHANCE } from "@neverquest/data/traits";
-import { shield, totalElementalEffects, weapon } from "@neverquest/state/gear";
+import { elementalEffects, shield, weapon } from "@neverquest/state/gear";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import {
@@ -58,7 +58,7 @@ export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
             const elemental = ELEMENTAL_TYPES.find(
               (current) => ELEMENTALS[current].ailment === parameter,
             );
-            const { armor, weapon } = get(totalElementalEffects);
+            const { armor, weapon } = get(elementalEffects);
 
             return elemental === undefined
               ? false

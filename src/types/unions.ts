@@ -442,7 +442,6 @@ export type StateKey =
   | "stunChance"
   | "stunRating"
   | "thorns"
-  | "totalElementalEffects"
   | "trinketProperties"
   | "unlockedMasteries"
   | "wildernesses";

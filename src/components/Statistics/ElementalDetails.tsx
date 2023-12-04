@@ -4,14 +4,14 @@ import { useRecoilValue } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { ELEMENTALS, GEMS } from "@neverquest/data/items";
-import { armor, totalElementalEffects, weapon } from "@neverquest/state/gear";
+import { armor, elementalEffects, weapon } from "@neverquest/state/gear";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
   const { gems } = useRecoilValue<GearItem | GearItemUnequipped>(slot === "armor" ? armor : weapon);
-  const totalElementalEffectsValue = useRecoilValue(totalElementalEffects);
+  const elementalEffectsValue = useRecoilValue(elementalEffects);
 
   return (
     <tr>
@@ -24,7 +24,7 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
           const { ID, name } = item;
           const { elemental } = GEMS[name];
           const { color, Icon } = ELEMENTALS[elemental];
-          const { damage, duration } = totalElementalEffectsValue[slot][elemental];
+          const { damage, duration } = elementalEffectsValue[slot][elemental];
 
           return (
             <Stack direction="horizontal" gap={1} key={ID}>

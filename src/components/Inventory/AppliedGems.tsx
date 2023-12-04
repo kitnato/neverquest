@@ -1,21 +1,18 @@
 import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { ELEMENTALS, GEMS, GEMS_MAXIMUM } from "@neverquest/data/items";
 import IconGem from "@neverquest/icons/gem.svg?react";
-import { elementalEffects } from "@neverquest/state/gear";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
-import { isArmor, isShield } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getGearElementalEffects } from "@neverquest/utilities/getters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequipped }) {
-  const elementalEffectsValue = useRecoilValue(elementalEffects);
-
   const { gems } = gearItem;
   const appliedGems = gems.length;
+  const elementalEffects = getGearElementalEffects(gearItem);
 
   if (appliedGems > 0) {
     return (
@@ -29,10 +26,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
             const { ID, name } = item;
             const { elemental } = GEMS[name];
             const { color, Icon } = ELEMENTALS[elemental];
-            const effect =
-              elementalEffectsValue[
-                isArmor(gearItem) ? "armor" : isShield(gearItem) ? "shield" : "weapon"
-              ][elemental];
+            const effect = elementalEffects[elemental];
 
             return (
               <Stack direction="horizontal" gap={1} key={ID}>

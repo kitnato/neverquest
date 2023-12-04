@@ -9,7 +9,6 @@ import {
   CONQUEST_TYPES,
   CREW_TYPES,
   MASTERY_TYPES,
-  QUEST_CLASS_TYPES,
   type Quest,
   type QuestClass,
   ROUTINE_TYPES,
@@ -498,23 +497,21 @@ export const QUESTS: Record<
   },
 };
 
-// eslint-disable-next-line unicorn/no-array-reduce
-export const QUESTS_COUNT: Record<QuestClass, number> = QUEST_CLASS_TYPES.reduce(
-  (accumulatorClass, currentClass) => ({
-    ...accumulatorClass,
-    [currentClass]: QUEST_TYPES_BY_CLASS[currentClass].reduce(
-      (accumulatorQuest, currentQuest) =>
-        accumulatorQuest + QUESTS[currentQuest].progression.length,
-      0,
-    ),
-  }),
-  {
-    conquest: 0,
-    routine: 0,
-    triumph: 0,
-  },
-);
+export const QUESTS_COUNT = {
+  conquest: QUEST_TYPES_BY_CLASS.conquest.reduce(
+    (sum, quest) => sum + QUESTS[quest].progression.length,
+    0,
+  ),
+  routine: QUEST_TYPES_BY_CLASS.routine.reduce(
+    (sum, quest) => sum + QUESTS[quest].progression.length,
+    0,
+  ),
+  triumph: QUEST_TYPES_BY_CLASS.triumph.reduce(
+    (sum, quest) => sum + QUESTS[quest].progression.length,
+    0,
+  ),
+};
 
 QUESTS.completing.progression = [
-  Object.values(QUESTS_COUNT).reduce((accumulator, current) => accumulator + current, 0),
+  Object.values(QUESTS_COUNT).reduce((sum, questCount) => sum + questCount, 0),
 ];

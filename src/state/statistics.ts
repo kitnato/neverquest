@@ -5,13 +5,7 @@ import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/statistics";
 import { bleed, bleedChance, staggerChance, stunChance } from "@neverquest/state/ailments";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
-import {
-  armor,
-  elementalEffects,
-  shield,
-  totalElementalEffects,
-  weapon,
-} from "@neverquest/state/gear";
+import { armor, elementalEffects, shield, weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { questsBonus } from "@neverquest/state/quests";
 import { stamina } from "@neverquest/state/reserves";
@@ -112,10 +106,7 @@ export const damage = withStateKey("damage", (key) =>
             (1 + get(questsBonus("damageBonus"))),
         ) +
           weaponDamage +
-          Object.values(get(totalElementalEffects).weapon).reduce(
-            (aggregator, { damage }) => aggregator + damage,
-            0,
-          ) +
+          Object.values(get(elementalEffects).weapon).reduce((sum, { damage }) => sum + damage, 0) +
           (get(isTraitAcquired("bruiser")) && name === WEAPON_NONE.name ? get(stamina) : 0)) *
         (get(isTraitAcquired("brawler")) && get(shield).name === SHIELD_NONE.name ? 2 : 1)
       );
@@ -259,10 +250,7 @@ export const stunRating = withStateKey("stunRating", (key) =>
 export const thorns = withStateKey("thorns", (key) =>
   selector({
     get: ({ get }) =>
-      Object.values(get(elementalEffects).armor).reduce(
-        (aggregator, { damage }) => aggregator + damage,
-        0,
-      ),
+      Object.values(get(elementalEffects).armor).reduce((sum, { damage }) => sum + damage, 0),
     key,
   }),
 );

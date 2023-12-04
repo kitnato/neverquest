@@ -3,7 +3,7 @@ import { useRecoilCallback } from "recoil";
 import { ELEMENTALS } from "@neverquest/data/items";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { canReceiveAilment } from "@neverquest/state/ailments";
-import { totalElementalEffects } from "@neverquest/state/gear";
+import { elementalEffects } from "@neverquest/state/gear";
 import { monsterAilmentDuration } from "@neverquest/state/monster";
 import type { Elemental } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -17,7 +17,7 @@ export function useInflictElementalAilment() {
         const get = getSnapshotGetter(snapshot);
 
         const { ailment, durationMaximum } = ELEMENTALS[elemental];
-        const { duration } = get(totalElementalEffects)[slot][elemental];
+        const { duration } = get(elementalEffects)[slot][elemental];
 
         if (get(canReceiveAilment(ailment)) && duration > 0) {
           set(monsterAilmentDuration(ailment), (current) => {

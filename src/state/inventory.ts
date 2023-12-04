@@ -21,7 +21,7 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 export const encumbrance = withStateKey("encumbrance", (key) =>
   selector({
-    get: ({ get }) => get(inventory).reduce((aggregator, { weight }) => aggregator + weight, 0),
+    get: ({ get }) => get(inventory).reduce((sum, { weight }) => sum + weight, 0),
     key,
   }),
 );
@@ -52,33 +52,34 @@ export const encumbranceMaximum = withStateKey("encumbranceMaximum", (key) =>
 );
 
 export const equippableItems = withStateKey("equippableItems", (key) =>
-  selector<Record<string, boolean>>({
-    get: ({ get }) =>
-      // eslint-disable-next-line unicorn/no-array-reduce
-      get(inventory).reduce((aggregator, { ID, ...current }) => {
-        let canEquip = isGearItem(current) ? !current.isEquipped : false;
+  selector({
+    get: ({ get }) => {
+      const currentEquippableItems: Record<string, boolean> = {};
 
-        if (isArmor(current) && current.gearClass === "heavy") {
+      for (const item of get(inventory)) {
+        let canEquip = isGearItem(item) ? !item.isEquipped : false;
+
+        if (isArmor(item) && item.gearClass === "heavy") {
           canEquip = get(isSkillAcquired("armorcraft"));
         }
 
-        if (isMelee(current) && current.grip === "two-handed") {
+        if (isMelee(item) && item.grip === "two-handed") {
           canEquip = get(isSkillAcquired("siegecraft"));
         }
 
-        if (isRanged(current)) {
+        if (isRanged(item)) {
           canEquip = get(isSkillAcquired("archery"));
         }
 
-        if (isShield(current) && current.gearClass === "tower") {
+        if (isShield(item) && item.gearClass === "tower") {
           canEquip = get(isSkillAcquired("shieldcraft"));
         }
 
-        return {
-          ...aggregator,
-          [ID]: canEquip,
-        };
-      }, {}),
+        currentEquippableItems[item.ID] = canEquip;
+      }
+
+      return currentEquippableItems;
+    },
     key,
   }),
 );

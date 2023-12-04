@@ -103,6 +103,7 @@ export type Melee = WeaponBase & {
 
 export type MerchantInventoryItem = InventoryItem & {
   isReturned: boolean;
+  offerIndex?: number;
 };
 
 export type QuestData = {

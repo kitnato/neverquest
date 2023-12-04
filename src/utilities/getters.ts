@@ -1,13 +1,17 @@
 import { nanoid } from "nanoid";
 import type { RecoilValue, Snapshot } from "recoil";
 
+import { stackItems } from "./helpers";
 import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
 import { NAME_STRUCTURE, PROGRESS_REDUCTION } from "@neverquest/data/encounter";
 import {
+  type ARMOR_NONE,
   ARMOR_SPECIFICATIONS,
+  type SHIELD_NONE,
   SHIELD_SPECIFICATIONS,
   WEAPON_BASE,
   WEAPON_MODIFIER,
+  type WEAPON_NONE,
   WEAPON_SPECIFICATIONS,
 } from "@neverquest/data/gear";
 import {
@@ -19,18 +23,29 @@ import {
   ROMAN_NUMERALS,
   ROMAN_NUMERAL_MAXIMUM,
 } from "@neverquest/data/general";
-import { GEM_BASE } from "@neverquest/data/items";
+import { ELEMENTALS, GEMS, GEMS_MAXIMUM, GEM_BASE, GEM_ENHANCEMENT } from "@neverquest/data/items";
 import { QUESTS } from "@neverquest/data/quests";
 import type { ArmorClass, NameStructure, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
-import type { GeneratorRange, InventoryItem, QuestData } from "@neverquest/types";
+import type {
+  Armor,
+  GearItem,
+  GearItemUnequipped,
+  GeneratorRange,
+  InventoryItem,
+  QuestData,
+  Shield,
+  Weapon,
+} from "@neverquest/types";
 import {
+  isArmor,
   isConquest,
   isGearItem,
   isGeneratorRanges,
   isRoutine,
+  isWeapon,
 } from "@neverquest/types/type-guards";
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
-import type { Grip, Quest } from "@neverquest/types/unions";
+import type { Elemental, Grip, Quest } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function getAnimationClass({
@@ -105,19 +120,48 @@ export function getDamagePerTick({
   return Math.ceil((damage / duration) * (duration / ticks));
 }
 
-export function getElementalEffects({
-  damage,
-  duration,
-  modifier,
-}: {
-  damage: number;
-  duration: number;
-  modifier: number;
-}) {
-  return {
-    damage: Math.round(damage + damage * modifier),
-    duration: Math.round(duration + duration * modifier),
-  };
+export function getGearElementalEffects(
+  gear: Armor | Weapon | typeof ARMOR_NONE | typeof WEAPON_NONE,
+): Record<Elemental, { damage: number; duration: number }>;
+export function getGearElementalEffects(
+  gear: Shield | typeof SHIELD_NONE,
+): Record<Elemental, number>;
+export function getGearElementalEffects(
+  gear: GearItem | GearItemUnequipped,
+): Record<Elemental, { damage: number; duration: number }> | Record<Elemental, number>;
+export function getGearElementalEffects(gear: GearItem | GearItemUnequipped) {
+  if (isArmor(gear) || isWeapon(gear)) {
+    const effects = {
+      fire: { damage: 0, duration: 0 },
+      ice: { damage: 0, duration: 0 },
+      lightning: { damage: 0, duration: 0 },
+    };
+    const effector = isArmor(gear) ? gear.protection : gear.damage;
+
+    for (const { item, stack } of stackItems(gear.gems)) {
+      const { damage, elemental } = GEMS[item.name];
+
+      effects[elemental] = {
+        damage: Math.ceil(effector * (damage[stack - 1] ?? 0)),
+        duration: getFromRange({
+          factor: (stack - 1) / (GEMS_MAXIMUM - 1),
+          ...ELEMENTALS[elemental].duration,
+        }),
+      };
+    }
+
+    return effects;
+  }
+
+  const effects = { fire: 0, ice: 0, lightning: 0 };
+
+  for (const { item, stack } of stackItems(gear.gems)) {
+    const { elemental } = GEMS[item.name];
+
+    effects[elemental] = GEM_ENHANCEMENT[stack - 1] ?? 0;
+  }
+
+  return effects;
 }
 
 export function getFromRange({ factor, maximum, minimum }: GeneratorRange & { factor?: number }) {
@@ -335,5 +379,20 @@ export function getRangedRanges({ factor, gearClass }: { factor: number; gearCla
     rate: getRange({ factor, modifier: rateModifier, ranges: rate }),
     staminaCost: getRange({ factor, modifier: staminaModifier, ranges: staminaCost }),
     weight: getRange({ factor, modifier: weightModifier, ranges: weight }),
+  };
+}
+
+export function getTotalElementalEffects({
+  damage,
+  duration,
+  modifier,
+}: {
+  damage: number;
+  duration: number;
+  modifier: number;
+}) {
+  return {
+    damage: Math.round(damage + damage * modifier),
+    duration: Math.round(duration + duration * modifier),
   };
 }

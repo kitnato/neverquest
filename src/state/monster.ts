@@ -222,6 +222,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
       const { attenuation, base, bonus, boss } = ESSENCE;
 
       const encounterValue = get(encounter);
+      const ownedItemAntiqueCoin = get(ownedItem("antique coin"));
       const ownedItemMysteriousEgg = get(ownedItem("mysterious egg"));
       const stageValue = get(stage);
       const stageMaximumValue = get(stageMaximum);
@@ -231,20 +232,19 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
 
       const hasMysteriousEggDropped =
         stageValue >= RETIREMENT_MINIMUM_LEVEL &&
-        get(ownedItem("antique coin")) !== undefined &&
+        ownedItemAntiqueCoin !== undefined &&
         ownedItemMysteriousEgg === undefined &&
         Math.random() <=
-          (stageValue === dropChanceOverrideStage
-            ? DROP_CHANCES["mysterious egg"] * dropChanceOverrideFactor
-            : DROP_CHANCES["mysterious egg"]);
+          DROP_CHANCES["mysterious egg"] *
+            (stageValue === dropChanceOverrideStage ? dropChanceOverrideFactor : 1);
       const hasTornManuscriptDropped =
         stageValue >= RETIREMENT_MINIMUM_LEVEL &&
+        ownedItemAntiqueCoin !== undefined &&
         ownedItemMysteriousEgg !== undefined &&
         get(ownedItem("torn manuscript")) === undefined &&
         Math.random() <=
-          (stageValue === dropChanceOverrideStage
-            ? DROP_CHANCES["torn manuscript"] * dropChanceOverrideFactor
-            : DROP_CHANCES["torn manuscript"]);
+          DROP_CHANCES["torn manuscript"] *
+            (stageValue === dropChanceOverrideStage ? dropChanceOverrideFactor : 1);
 
       return {
         essence: Math.round(
@@ -264,7 +264,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
                     ? 1
                     : 0;
                 })
-                .reduce<number>((aggregated, current) => aggregated + current, 0)
+                .reduce<number>((sum, gemCount) => sum + gemCount, 0)
             : 0,
         trinket: hasMysteriousEggDropped
           ? INFUSABLES["mysterious egg"].item

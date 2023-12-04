@@ -1,20 +1,14 @@
 import { selector, selectorFamily } from "recoil";
 
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
-import {
-  ELEMENTALS,
-  GEMS,
-  GEMS_MAXIMUM,
-  GEM_ENHANCEMENT,
-  GEM_FITTING_COST,
-} from "@neverquest/data/items";
+import { GEMS_MAXIMUM, GEM_FITTING_COST } from "@neverquest/data/items";
 import { inventory } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
 import type { Armor, Shield, Weapon } from "@neverquest/types";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 import type { Gear } from "@neverquest/types/unions";
-import { getElementalEffects, getFromRange } from "@neverquest/utilities/getters";
-import { stackItems, withStateKey } from "@neverquest/utilities/helpers";
+import { getGearElementalEffects, getTotalElementalEffects } from "@neverquest/utilities/getters";
+import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
@@ -63,57 +57,28 @@ export const canApplyGem = withStateKey("canApplyGem", (key) =>
 export const elementalEffects = withStateKey("elementalEffects", (key) =>
   selector({
     get: ({ get }) => {
-      const effects = {
+      const armorEffects = getGearElementalEffects(get(armor));
+      const shieldEffects = getGearElementalEffects(get(shield));
+      const weaponEffects = getGearElementalEffects(get(weapon));
+
+      return {
         armor: {
-          fire: { damage: 0, duration: 0 },
-          ice: { damage: 0, duration: 0 },
-          lightning: { damage: 0, duration: 0 },
-        },
-        shield: {
-          fire: 0,
-          ice: 0,
-          lightning: 0,
+          fire: getTotalElementalEffects({ ...armorEffects.fire, modifier: shieldEffects.fire }),
+          ice: getTotalElementalEffects({ ...armorEffects.ice, modifier: shieldEffects.ice }),
+          lightning: getTotalElementalEffects({
+            ...armorEffects.lightning,
+            modifier: shieldEffects.lightning,
+          }),
         },
         weapon: {
-          fire: { damage: 0, duration: 0 },
-          ice: { damage: 0, duration: 0 },
-          lightning: { damage: 0, duration: 0 },
+          fire: getTotalElementalEffects({ ...weaponEffects.fire, modifier: shieldEffects.fire }),
+          ice: getTotalElementalEffects({ ...weaponEffects.ice, modifier: shieldEffects.ice }),
+          lightning: getTotalElementalEffects({
+            ...weaponEffects.lightning,
+            modifier: shieldEffects.lightning,
+          }),
         },
       };
-
-      const armorValue = get(armor);
-
-      for (const { item, stack } of stackItems(armorValue.gems)) {
-        const { damage, elemental } = GEMS[item.name];
-
-        effects.armor[elemental] = {
-          damage: Math.ceil(armorValue.protection * (damage[stack - 1] ?? 0)),
-          duration: getFromRange({
-            factor: (stack - 1) / (GEMS_MAXIMUM - 1),
-            ...ELEMENTALS[elemental].duration,
-          }),
-        };
-      }
-
-      for (const { item, stack } of stackItems(get(shield).gems)) {
-        effects.shield[GEMS[item.name].elemental] = GEM_ENHANCEMENT[stack - 1] ?? 0;
-      }
-
-      const weaponValue = get(weapon);
-
-      for (const { item, stack } of stackItems(weaponValue.gems)) {
-        const { damage, elemental } = GEMS[item.name];
-
-        effects.weapon[elemental] = {
-          damage: Math.ceil(weaponValue.damage * (damage[stack - 1] ?? 0)),
-          duration: getFromRange({
-            factor: (stack - 1) / (GEMS_MAXIMUM - 1),
-            ...ELEMENTALS[elemental].duration,
-          }),
-        };
-      }
-
-      return effects;
     },
     key,
   }),
@@ -135,28 +100,6 @@ export const shield = withStateKey("shield", (key) =>
       }
 
       return equippedShield as Shield;
-    },
-    key,
-  }),
-);
-
-export const totalElementalEffects = withStateKey("totalElementalEffects", (key) =>
-  selector({
-    get: ({ get }) => {
-      const { armor, shield, weapon } = get(elementalEffects);
-
-      return {
-        armor: {
-          fire: getElementalEffects({ ...armor.fire, modifier: shield.fire }),
-          ice: getElementalEffects({ ...armor.ice, modifier: shield.ice }),
-          lightning: getElementalEffects({ ...armor.lightning, modifier: shield.lightning }),
-        },
-        weapon: {
-          fire: getElementalEffects({ ...weapon.fire, modifier: shield.fire }),
-          ice: getElementalEffects({ ...weapon.ice, modifier: shield.ice }),
-          lightning: getElementalEffects({ ...weapon.lightning, modifier: shield.lightning }),
-        },
-      };
     },
     key,
   }),

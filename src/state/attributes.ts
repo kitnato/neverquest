@@ -12,11 +12,15 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 export const absorbedEssence = withStateKey("absorbedEssence", (key) =>
   selector({
-    get: ({ get }) =>
-      Array.from<undefined>({ length: get(level) }).reduce(
-        (aggregator, _, index) => aggregator + getAttributePointCost(index),
-        0,
-      ),
+    get: ({ get }) => {
+      let currentAbsorbedEssence = 0;
+
+      for (let index = 0; index < get(level); index++) {
+        currentAbsorbedEssence += getAttributePointCost(index);
+      }
+
+      return currentAbsorbedEssence;
+    },
     key,
   }),
 );
@@ -91,7 +95,7 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =
 export const level = withStateKey("level", (key) =>
   selector({
     get: ({ get }) =>
-      ATTRIBUTE_TYPES.reduce((aggregator, current) => aggregator + get(attributeRank(current)), 0),
+      ATTRIBUTE_TYPES.reduce((sum, attribute) => sum + get(attributeRank(attribute)), 0),
     key,
   }),
 );

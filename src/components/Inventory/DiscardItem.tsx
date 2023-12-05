@@ -15,8 +15,9 @@ import { useSetRecoilState } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import IconDiscard from "@neverquest/icons/discard.svg?react";
 import { inventory } from "@neverquest/state/inventory";
+import { capitalizeAll } from "@neverquest/utilities/formatters";
 
-export function DiscardItem({ ID }: { ID: string }) {
+export function DiscardItem({ ID, name }: { ID: string; name: string }) {
   const setInventoryValue = useSetRecoilState(inventory);
 
   const [isShowingModal, setIsShowingModal] = useState(false);
@@ -48,7 +49,7 @@ export function DiscardItem({ ID }: { ID: string }) {
           </ModalTitle>
         </ModalHeader>
 
-        <ModalBody>The item will be lost forever.</ModalBody>
+        <ModalBody>{`"${capitalizeAll(name)}" will be lost forever.`}</ModalBody>
 
         <ModalFooter>
           <Button

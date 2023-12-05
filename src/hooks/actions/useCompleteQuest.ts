@@ -23,6 +23,23 @@ export function useCompleteQuest() {
           );
           set(isShowing("questBonus"), true);
 
+          switch (bonus) {
+            case "damageBonus": {
+              set(isShowing("damageDetails"), true);
+              break;
+            }
+
+            case "healthBonus": {
+              set(isShowing("healthDetails"), true);
+              break;
+            }
+
+            case "staminaBonus": {
+              set(isShowing("staminaDetails"), true);
+              break;
+            }
+          }
+
           progressQuest({ quest: "completing" });
         }
       },

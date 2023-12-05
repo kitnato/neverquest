@@ -32,7 +32,7 @@ export function Layout() {
   const [screenSizeWarning, setScreenSizeWarning] = useState("");
 
   useLayoutEffect(() => {
-    const onResize = () => {
+    const checkWidth = () => {
       if (window.innerWidth <= SCREEN_WIDTH_MINIMUM) {
         setScreenSizeWarning(
           `Requires a screen width of minimum ${formatNumber({
@@ -44,10 +44,12 @@ export function Layout() {
       }
     };
 
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", checkWidth);
+
+    checkWidth();
 
     return () => {
-      window.removeEventListener("resize", onResize);
+      window.removeEventListener("resize", checkWidth);
     };
   }, []);
 

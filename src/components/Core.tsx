@@ -15,6 +15,11 @@ export function Core() {
     return <ScreenMessage>Requires browser localStorage to be enabled.</ScreenMessage>;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (window.Worker === undefined) {
+    return <ScreenMessage>Requires Web Workers to be enabled.</ScreenMessage>;
+  }
+
   return (
     <SeedContext.Provider value={resetSeed}>
       <RecoilRoot key={seed}>

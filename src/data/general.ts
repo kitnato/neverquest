@@ -43,3 +43,5 @@ export const ROMAN_NUMERALS = [
   ["C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"], // 100-900
   ["M", "MM", "MMM"], // 1000-3000
 ] as const;
+
+export const SCREEN_WIDTH_MINIMUM = 1200;

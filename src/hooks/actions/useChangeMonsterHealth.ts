@@ -3,8 +3,9 @@ import { useRecoilCallback } from "recoil";
 import { AILMENT_PENALTY, LOOTING_RATE } from "@neverquest/data/statistics";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
+import { level } from "@neverquest/state/attributes";
 import { attackDuration, lootingDuration } from "@neverquest/state/character";
-import { encounter } from "@neverquest/state/encounter";
+import { encounter, stage } from "@neverquest/state/encounter";
 import {
   isMonsterAiling,
   monsterAttackDuration,
@@ -108,7 +109,7 @@ export function useChangeMonsterHealth() {
             }
 
             default: {
-              if (monsterHealthValue === monsterHealthMaximumValue) {
+              if (monsterHealthValue === monsterHealthMaximumValue && get(level) <= get(stage)) {
                 progressQuest({ quest: "killingOneStrike" });
               }
             }

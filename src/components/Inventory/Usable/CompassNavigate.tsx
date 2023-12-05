@@ -18,20 +18,12 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import IconCompass from "@neverquest/icons/compass.svg?react";
 import IconNavigation from "@neverquest/icons/navigation.svg?react";
-import {
-  isStageCompleted,
-  isStageStarted,
-  location,
-  stage,
-  wildernesses,
-} from "@neverquest/state/encounter";
+import { location, stage, wildernesses } from "@neverquest/state/encounter";
 import { isInventoryOpen } from "@neverquest/state/inventory";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function CompassNavigate() {
   const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
-  const isStageCompletedValue = useRecoilValue(isStageCompleted);
-  const isStageStartedValue = useRecoilValue(isStageStarted);
   const locationValue = useRecoilValue(location);
   const [stageValue, setStage] = useRecoilState(stage);
   const wildernessesValue = useRecoilValue(wildernesses);
@@ -41,8 +33,7 @@ export function CompassNavigate() {
   const progressQuest = useProgressQuest();
   const resetWilderness = useResetWilderness();
 
-  const canNavigate =
-    (!isStageStartedValue || isStageCompletedValue) && locationValue === "wilderness";
+  const canNavigate = locationValue === "wilderness";
 
   return (
     <>

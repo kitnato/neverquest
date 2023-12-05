@@ -82,7 +82,8 @@ export const criticalDamage = withStateKey("criticalDamage", (key) =>
 
 export const criticalRating = withStateKey("criticalRating", (key) =>
   selector({
-    get: ({ get }) => Math.round(get(criticalChance) * PERCENTAGE_POINTS * get(criticalDamage)),
+    get: ({ get }) =>
+      Math.round(get(criticalChance) * PERCENTAGE_POINTS + get(criticalDamage) * PERCENTAGE_POINTS),
     key,
   }),
 );

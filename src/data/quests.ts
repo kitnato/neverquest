@@ -267,8 +267,9 @@ export const QUESTS: Record<
     title: "Giant killer",
   },
   killingOneStrike: {
-    description: "Kill a monster in one strike.",
-    progression: [1, 3, 10],
+    description:
+      "Kill a monster in one strike while at equal or lower power level than the current stage.",
+    progression: [1],
     title: "One Punch Person",
   },
   killingResCogitans: {

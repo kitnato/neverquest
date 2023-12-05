@@ -117,6 +117,10 @@ td.text-end > .hstack {
   width: max-content;
 }
 
+.offcanvas {
+  max-width: 700px;
+}
+
 .overlay-offcanvas {
   z-index: calc($zindex-offcanvas + 1);
 }

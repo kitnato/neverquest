@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { LABEL_UNKNOWN } from "@neverquest/data/general";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { QUEST_CLASS_ICONS, QUEST_COMPLETION_BONUS } from "@neverquest/data/quests";
 import { useCompleteQuest } from "@neverquest/hooks/actions/useCompleteQuest";
 import IconDamage from "@neverquest/icons/damage.svg?react";
@@ -46,27 +46,33 @@ export function QuestDisplay({
   const choiceID = `quest-completion-${quest}-${progressionMaximum}`;
 
   return (
-    <Stack className={hasCompletedQuest ? "opacity-50" : undefined} direction="horizontal" gap={3}>
-      <CircularProgressbar
-        maxValue={progressionMaximum}
-        text={`${formatNumber({ format: "abbreviated", value: cappedProgress })}/${formatNumber({
-          format: "abbreviated",
-          value: progressionMaximum,
-        })}`}
-        value={cappedProgress}
-      />
-
-      <IconDisplay
-        description={
-          hidden !== undefined && isQuestOver
-            ? description.replace(LABEL_UNKNOWN, hidden)
-            : description
-        }
-        Icon={QUEST_CLASS_ICONS[questClass]}
-        tooltip={capitalizeAll(questClass)}
+    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+      <Stack
+        className={hasCompletedQuest ? "opacity-50" : undefined}
+        direction="horizontal"
+        gap={3}
       >
-        {title}
-      </IconDisplay>
+        <CircularProgressbar
+          maxValue={progressionMaximum}
+          text={`${formatNumber({ format: "abbreviated", value: cappedProgress })}/${formatNumber({
+            format: "abbreviated",
+            value: progressionMaximum,
+          })}`}
+          value={cappedProgress}
+        />
+
+        <IconDisplay
+          description={
+            hidden !== undefined && isQuestOver
+              ? description.replace(LABEL_UNKNOWN, hidden)
+              : description
+          }
+          Icon={QUEST_CLASS_ICONS[questClass]}
+          tooltip={capitalizeAll(questClass)}
+        >
+          {title}
+        </IconDisplay>
+      </Stack>
 
       {questProgressValue >= progressionMaximum && (
         <ToggleButtonGroup
@@ -106,6 +112,6 @@ export function QuestDisplay({
           ))}
         </ToggleButtonGroup>
       )}
-    </Stack>
+    </div>
   );
 }

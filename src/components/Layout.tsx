@@ -1,3 +1,4 @@
+import { useLayoutEffect, useState } from "react";
 import { Col, Container, Row, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
@@ -19,12 +20,43 @@ import { Masteries } from "@neverquest/components/Masteries";
 import { QuestNotifications } from "@neverquest/components/Quests/QuestNotifications";
 import { Statistics } from "@neverquest/components/Statistics";
 import { Status } from "@neverquest/components/Status";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
+import { CLASS_FULL_WIDTH_JUSTIFIED, SCREEN_WIDTH_MINIMUM } from "@neverquest/data/general";
 import { consciousness } from "@neverquest/state/encounter";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Layout() {
   const consciousnessValue = useRecoilValue(consciousness);
+
+  const [screenSizeWarning, setScreenSizeWarning] = useState("");
+
+  useLayoutEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth <= SCREEN_WIDTH_MINIMUM) {
+        setScreenSizeWarning(
+          `Requires a screen width of minimum ${formatNumber({
+            value: SCREEN_WIDTH_MINIMUM,
+          })} pixels.`,
+        );
+      } else {
+        setScreenSizeWarning("");
+      }
+    };
+
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
+  if (screenSizeWarning !== "") {
+    return (
+      <span className="position-absolute top-50 start-50 translate-middle">
+        {screenSizeWarning}
+      </span>
+    );
+  }
 
   switch (consciousnessValue) {
     case "mors": {

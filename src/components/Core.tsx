@@ -4,10 +4,16 @@ import { CheatQuest } from "@neverquest/components/CheatQuest";
 import { Header } from "@neverquest/components/Header";
 import { Initializer } from "@neverquest/components/Initializer";
 import { Layout } from "@neverquest/components/Layout";
+import { ScreenMessage } from "@neverquest/components/ScreenMessage";
 import { SeedContext, useSeed } from "@neverquest/state/seed";
+import { isLocalStorageAvailable } from "@neverquest/utilities/helpers";
 
 export function Core() {
   const { resetSeed, seed } = useSeed();
+
+  if (!isLocalStorageAvailable()) {
+    return <ScreenMessage>Requires browser localStorage to be enabled.</ScreenMessage>;
+  }
 
   return (
     <SeedContext.Provider value={resetSeed}>

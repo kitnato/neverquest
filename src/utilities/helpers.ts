@@ -50,6 +50,25 @@ export function animateElement({
   );
 }
 
+export function isLocalStorageAvailable() {
+  const storage = window.localStorage;
+
+  if (storage.length === 0) {
+    return false;
+  }
+
+  try {
+    const test = "LOCAL_STORAGE_TEST";
+
+    storage.setItem(test, test);
+    storage.removeItem(test);
+
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export function stackItems<ItemType>(items: ItemType[]) {
   const stacker: { amount: number; item: ItemType }[] = [];
 

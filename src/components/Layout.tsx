@@ -18,6 +18,7 @@ import { Gear } from "@neverquest/components/Inventory/Gear";
 import { Location } from "@neverquest/components/Location";
 import { Masteries } from "@neverquest/components/Masteries";
 import { QuestNotifications } from "@neverquest/components/Quests/QuestNotifications";
+import { ScreenMessage } from "@neverquest/components/ScreenMessage";
 import { Statistics } from "@neverquest/components/Statistics";
 import { Status } from "@neverquest/components/Status";
 import { CLASS_FULL_WIDTH_JUSTIFIED, SCREEN_WIDTH_MINIMUM } from "@neverquest/data/general";
@@ -51,24 +52,20 @@ export function Layout() {
   }, []);
 
   if (screenSizeWarning !== "") {
-    return (
-      <span className="position-absolute top-50 start-50 translate-middle">
-        {screenSizeWarning}
-      </span>
-    );
+    return <ScreenMessage>{screenSizeWarning}</ScreenMessage>;
   }
 
   switch (consciousnessValue) {
     case "mors": {
       return (
-        <span
-          className={`position-absolute top-50 start-50 translate-middle ${getAnimationClass({
+        <ScreenMessage
+          className={getAnimationClass({
             animation: "zoomIn",
             speed: "slower",
-          })}`}
+          })}
         >
           Fin.
-        </span>
+        </ScreenMessage>
       );
     }
 

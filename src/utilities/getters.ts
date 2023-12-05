@@ -102,10 +102,10 @@ export function getDamagePerRate({
   damageModifierChance?: number;
   rate: number;
 }) {
-  const regular = damage * (1 - damageModifierChance);
-  const critical = damage * damageModifierChance * damageModifier;
-
-  return (regular + critical) / (rate / MILLISECONDS_IN_SECOND);
+  return (
+    (damage * (1 - damageModifierChance) + damage * damageModifierChance * damageModifier) /
+    (rate / MILLISECONDS_IN_SECOND)
+  );
 }
 
 export function getDamagePerTick({

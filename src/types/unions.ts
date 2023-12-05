@@ -389,7 +389,6 @@ export type StateKey =
   | "monsterDamage"
   | "monsterDamageAiling"
   | "monsterDamageAilingPerSecond"
-  | "monsterDamagePerSecond"
   | "monsterElement"
   | "monsterHealth"
   | "monsterHealthMaximum"

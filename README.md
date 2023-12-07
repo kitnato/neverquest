@@ -6,17 +6,9 @@ _An irreverent UI-based incremental action RPG._
 
 **For a full breakdown of gameplay, please consult the [manual](./src/data/manual.md).**
 
-## LOCRAN
-
-The LOCRAN (LOcation, CReature, Artifact, Name) system generates a pseudo-random variety of names for different irreverent fantasy-themed wildernesses, items and monsters.
-
-A JSON library of (loosely) fantasy-world-themed words is the basis for the generation and composition of (somewhat) coherent names for the three namesake types. Parameters for tags and affix composition can be passed to make the generation more specific. If [profanity](./src/data/manual.md#allow-profanity) is allowed, the names may also be pornographic or decidedly non-fantasy-themed.
-
-LOCRAN can be considered somewhat independent of Neverquest, as it can be used outside of the game's implementation. Nevertheless, it is bundled as part of the same codebase, accessible under `src/LOCRAN`.
-
 ## Local set up
 
-To run the app locally from source, you will need to use a command-line interface (CLI), as well as have [git](https://git-scm.com/downloads) and [NPM](https://docs.npmjs.com/cli/v8/configuring-npm/install) installed globally.
+To run the app locally from source, you will need to use a command-line interface (CLI).
 
 ### Installation
 

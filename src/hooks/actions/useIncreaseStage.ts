@@ -1,8 +1,8 @@
+import { generateLocation } from "@kitnato/locran";
 import { useRecoilCallback } from "recoil";
 
 import { CREW } from "@neverquest/data/caravan";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
 import { hireStatus } from "@neverquest/state/caravan";
 import { stage, wildernesses } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";

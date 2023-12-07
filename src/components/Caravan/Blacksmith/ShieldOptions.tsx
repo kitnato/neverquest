@@ -1,3 +1,4 @@
+import { SHIELD_CLASS_TYPES, type ShieldClass } from "@kitnato/locran/build/types";
 import { useState } from "react";
 import { FormSelect, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -14,7 +15,6 @@ import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconStagger from "@neverquest/icons/stagger.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
-import { SHIELD_CLASS_TYPES, type ShieldClass } from "@neverquest/LOCRAN/types";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { allowProfanity } from "@neverquest/state/settings";

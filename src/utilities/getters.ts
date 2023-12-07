@@ -1,3 +1,9 @@
+import type {
+  ArmorClass,
+  NameStructure,
+  ShieldClass,
+  WeaponClass,
+} from "@kitnato/locran/build/types";
 import { nanoid } from "nanoid";
 import type { RecoilValue, Snapshot } from "recoil";
 
@@ -25,7 +31,6 @@ import {
 } from "@neverquest/data/general";
 import { ELEMENTALS, GEMS, GEMS_MAXIMUM, GEM_BASE, GEM_ENHANCEMENT } from "@neverquest/data/items";
 import { QUESTS } from "@neverquest/data/quests";
-import type { ArmorClass, NameStructure, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type {
   Armor,
   GearItem,

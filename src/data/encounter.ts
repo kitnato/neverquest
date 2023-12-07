@@ -1,4 +1,4 @@
-import type { NameStructure } from "@neverquest/LOCRAN/types";
+import type { NameStructure } from "@kitnato/locran/build/types";
 
 export const NAME_STRUCTURE: Record<NameStructure, number> = {
   none: 0.05,

@@ -1,7 +1,6 @@
+import { generateCreature, generateName } from "@kitnato/locran";
 import { useRecoilCallback } from "recoil";
 
-import { generateCreature } from "@neverquest/LOCRAN/generate/generateCreature";
-import { generateName } from "@neverquest/LOCRAN/generate/generateName";
 import { isAttacking } from "@neverquest/state/character";
 import { encounter } from "@neverquest/state/encounter";
 import {

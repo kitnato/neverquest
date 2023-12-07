@@ -1,9 +1,9 @@
+import { generateLocation } from "@kitnato/locran";
 import ls from "localstorage-slim";
 import { useRecoilCallback } from "recoil";
 
 import { CREW } from "@neverquest/data/caravan";
 import { KEY_SESSION } from "@neverquest/data/general";
-import { generateLocation } from "@neverquest/LOCRAN/generate/generateLocation";
 import { hireStatus } from "@neverquest/state/caravan";
 import { wildernesses } from "@neverquest/state/encounter";
 import { allowProfanity } from "@neverquest/state/settings";

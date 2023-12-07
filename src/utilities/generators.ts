@@ -1,13 +1,13 @@
-import { nanoid } from "nanoid";
-
-import { ARMOR_SPECIFICATIONS, SHIELD_SPECIFICATIONS, WEAPON_BASE } from "@neverquest/data/gear";
-import { generateArtifact } from "@neverquest/LOCRAN/generate/generateArtifact";
+import { generateArtifact } from "@kitnato/locran";
 import type {
   ArmorClass,
   GeneratorParameters,
   ShieldClass,
   WeaponClass,
-} from "@neverquest/LOCRAN/types";
+} from "@kitnato/locran/build/types";
+import { nanoid } from "nanoid";
+
+import { ARMOR_SPECIFICATIONS, SHIELD_SPECIFICATIONS, WEAPON_BASE } from "@neverquest/data/gear";
 import type { Armor, Melee, Ranged, Shield } from "@neverquest/types";
 import { isGeneratorRange } from "@neverquest/types/type-guards";
 import type { Grip } from "@neverquest/types/unions";

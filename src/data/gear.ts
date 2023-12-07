@@ -1,3 +1,4 @@
+import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build/types";
 import { nanoid } from "nanoid";
 
 import IconArmorHeavy from "@neverquest/icons/armor-heavy.svg?react";
@@ -12,7 +13,6 @@ import IconShieldSmall from "@neverquest/icons/shield-small.svg?react";
 import IconShieldTower from "@neverquest/icons/shield-tower.svg?react";
 import IconSlashing from "@neverquest/icons/slashing.svg?react";
 import IconStun from "@neverquest/icons/stun.svg?react";
-import type { ArmorClass, ShieldClass, WeaponClass } from "@neverquest/LOCRAN/types";
 import type { Armor, GearBase, GeneratorRange, Melee, Shield } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
 import type { WeaponAbility } from "@neverquest/types/unions";

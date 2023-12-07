@@ -1,3 +1,10 @@
+import type {
+  ArmorClass,
+  ArtifactType,
+  ShieldClass,
+  WeaponClass,
+  WeaponModality,
+} from "@kitnato/locran/build/types";
 import { INFUSABLES, TRINKETS } from "@neverquest/data/items";
 import IconAlchemist from "@neverquest/icons/alchemist.svg?react";
 import IconBlacksmith from "@neverquest/icons/blacksmith.svg?react";
@@ -8,13 +15,6 @@ import IconMerchant from "@neverquest/icons/merchant.svg?react";
 import IconOccultist from "@neverquest/icons/occultist.svg?react";
 import IconTailor from "@neverquest/icons/tailor.svg?react";
 import IconWitch from "@neverquest/icons/witch.svg?react";
-import type {
-  ArmorClass,
-  ArtifactType,
-  ShieldClass,
-  WeaponClass,
-  WeaponModality,
-} from "@neverquest/LOCRAN/types";
 import type { UsableItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
 import type { Crew, Grip } from "@neverquest/types/unions";

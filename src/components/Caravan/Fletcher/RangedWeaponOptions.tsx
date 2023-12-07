@@ -1,3 +1,4 @@
+import { WEAPON_CLASS_TYPES, type WeaponClass } from "@kitnato/locran/build/types";
 import { useState } from "react";
 import { FormSelect, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
@@ -16,7 +17,6 @@ import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react";
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
-import { WEAPON_CLASS_TYPES, type WeaponClass } from "@neverquest/LOCRAN/types";
 import { fletcherInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
 import { allowProfanity } from "@neverquest/state/settings";

@@ -1,5 +1,4 @@
 import { nanoid } from "nanoid";
-import { plural } from "pluralize";
 import { type SetStateAction, useEffect, useState } from "react";
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilState } from "recoil";
@@ -64,7 +63,7 @@ export function TransmuteGems() {
       </div>
 
       <OverlayTrigger
-        overlay={<Tooltip>{`Insufficient ${plural(source)}.`}</Tooltip>}
+        overlay={<Tooltip>Insufficient source gems.</Tooltip>}
         placement="bottom"
         trigger={isAffordable ? [] : ["focus", "hover"]}
       >

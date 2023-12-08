@@ -7,13 +7,13 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconAttributePoints from "@neverquest/icons/attribute-points.svg?react";
 import IconEssence from "@neverquest/icons/essence.svg?react";
-import { attributePoints, level } from "@neverquest/state/attributes";
+import { attributePoints, powerLevel } from "@neverquest/state/attributes";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAttributePointCost } from "@neverquest/utilities/getters";
 
 export function AttributePoints() {
   const attributePointsValue = useRecoilValue(attributePoints);
-  const levelValue = useRecoilValue(level);
+  const powerLevelValue = useRecoilValue(powerLevel);
 
   useDeltaText({
     delta: "attributePoints",
@@ -35,7 +35,7 @@ export function AttributePoints() {
               <Stack className="justify-content-center" direction="horizontal" gap={1}>
                 <IconImage Icon={IconEssence} isSmall />
 
-                {formatNumber({ value: getAttributePointCost(levelValue) })}
+                {formatNumber({ value: getAttributePointCost(powerLevelValue) })}
               </Stack>
             </PopoverBody>
           </Popover>

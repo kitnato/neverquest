@@ -46,9 +46,9 @@ Primarily spent on acquiring attribute ranks. Also used to trade at the [caravan
 
 ### Attributes
 
-For each rank of its ranks, an attribute provides an increasingly powerful effect and raises your power level by 1.
+For each rank of its ranks, an attribute provides an increasingly powerful effect and raises your power powerLevel by 1.
 
-[Essence](#essence) is used to allocate attribute ranks. The cost of allocation is increased for every attribute based on your power level.
+[Essence](#essence) is used to allocate attribute ranks. The cost of allocation is increased for every attribute based on your power powerLevel.
 
 #### Agility
 
@@ -262,7 +262,7 @@ Purchase and sell [items](#item). The merchant's inventory of items will grow an
 
 #### Occultist
 
-Offers purging rituals, such as resetting your power level that refunds all spent essence. Also sells phylacteries that resurrect you upon death.
+Offers purging rituals, such as resetting your power powerLevel that refunds all spent essence. Also sells phylacteries that resurrect you upon death.
 
 #### Tailor
 
@@ -650,7 +650,7 @@ Requires the [traumatology](#traumatology) skill.
 
 ## Retirement
 
-When reaching a certain stage, retirement is unlocked. This restarts the quest from stage 1 with power level 0, no essence, no skills and no gear. However, all hired caravan crew are retained, and so are certain [trinkets](#trinkets). A [trait](#traits) can be also chosen that confers a permanent bonus.
+When reaching a certain stage, retirement is unlocked. This restarts the quest from stage 1 with power powerLevel 0, no essence, no skills and no gear. However, all hired caravan crew are retained, and so are certain [trinkets](#trinkets). A [trait](#traits) can be also chosen that confers a permanent bonus.
 
 ### Traits
 
@@ -752,9 +752,9 @@ Toggles icons in the [gear](#gear) details overlays that indicate upgrades or do
 
 Default: on.
 
-### Show gear level
+### Show gear powerLevel
 
-Toggles between showing and hiding the power level of the gear.
+Toggles between showing and hiding the power powerLevel of the gear.
 
 Default: off.
 

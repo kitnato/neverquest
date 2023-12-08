@@ -58,7 +58,10 @@ export function WeaponName({
             <DetailsTable>
               <GearLevelDetail
                 comparison={
-                  showComparison && { showing: "weapon", subtrahend: weaponEquippedValue.level }
+                  showComparison && {
+                    showing: "weapon",
+                    subtrahend: weaponEquippedValue.level,
+                  }
                 }
                 level={level}
               />

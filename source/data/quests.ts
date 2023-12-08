@@ -252,7 +252,7 @@ export const QUESTS: Record<
     title: "Shaman",
   },
   infusingMaximum: {
-    description: "Infuse an item to maximum level.",
+    description: "Infuse an item to maximum powerLevel.",
     progression: [1],
     title: "Witch doctor",
   },
@@ -268,7 +268,7 @@ export const QUESTS: Record<
   },
   killingOneStrike: {
     description:
-      "Kill a monster in one strike while at equal or lower power level than the current stage.",
+      "Kill a monster in one strike while at equal or lower power powerLevel than the current stage.",
     progression: [1],
     title: "One Punch Person",
   },
@@ -334,12 +334,12 @@ export const QUESTS: Record<
     title: "Intestinal discomfort",
   },
   powerLevel: {
-    description: "Reach power level @.",
+    description: "Reach power powerLevel @.",
     progression: [3, 10, 25, 50],
     title: "One up",
   },
   powerLevelUltra: {
-    description: `Reach power level ${formatNumber({
+    description: `Reach power powerLevel ${formatNumber({
       value: QUEST_REQUIREMENTS.powerLevelUltra,
     })}.`,
     progression: [QUEST_REQUIREMENTS.powerLevelUltra],
@@ -455,14 +455,14 @@ export const QUESTS: Record<
   survivingNoAttributes: {
     description: `Complete the first ${formatNumber({
       value: QUEST_REQUIREMENTS.survivingNoAttributes,
-    })} levels without spending any attribute points.`,
+    })} stages without spending any attribute points.`,
     progression: [QUEST_REQUIREMENTS.survivingNoAttributes],
     title: "Deep throat",
   },
   survivingNoGear: {
     description: `Complete the first ${formatNumber({
       value: QUEST_REQUIREMENTS.survivingNoGear,
-    })} levels without any gear equipped.`,
+    })} stages without any gear equipped.`,
     progression: [QUEST_REQUIREMENTS.survivingNoGear],
     title: "Going commando",
   },

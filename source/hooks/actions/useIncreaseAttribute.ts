@@ -7,7 +7,7 @@ import {
   areAttributesAffordable,
   attributeRank,
   isAttributeAtMaximum,
-  level,
+  powerLevel,
 } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
 import { questProgress } from "@neverquest/state/quests";
@@ -39,7 +39,7 @@ export function useIncreaseAttribute() {
         set(isShowing("statistics"), true);
         set(attributeRank(attribute), newRank);
 
-        transactEssence(-getAttributePointCost(get(level)));
+        transactEssence(-getAttributePointCost(get(powerLevel)));
 
         progressQuest({ quest: "powerLevel" });
         progressQuest({ quest: "powerLevelUltra" });

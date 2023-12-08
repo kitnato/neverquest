@@ -13,7 +13,11 @@ export function SetGearLevel({
   state: [number, Dispatch<SetStateAction<number>>];
 }) {
   return (
-    <IconDisplay Icon={IconGearLevel} iconProps={{ overlayPlacement: "left" }} tooltip="Gear level">
+    <IconDisplay
+      Icon={IconGearLevel}
+      iconProps={{ overlayPlacement: "left" }}
+      tooltip="Gear powerLevel"
+    >
       <FormControl
         max={maximum}
         min={1}

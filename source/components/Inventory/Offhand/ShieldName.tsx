@@ -43,7 +43,10 @@ export function ShieldName({
             <DetailsTable>
               <GearLevelDetail
                 comparison={
-                  showComparison && { showing: "offhand", subtrahend: shieldEquippedValue.level }
+                  showComparison && {
+                    showing: "offhand",
+                    subtrahend: shieldEquippedValue.level,
+                  }
                 }
                 level={level}
               />

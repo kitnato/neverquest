@@ -6,21 +6,21 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconEssence from "@neverquest/icons/essence.svg?react";
-import IconLevel from "@neverquest/icons/level.svg?react";
-import { absorbedEssence, level } from "@neverquest/state/attributes";
+import IconPowerLevel from "@neverquest/icons/power-level.svg?react";
+import { absorbedEssence, powerLevel } from "@neverquest/state/attributes";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export function Level() {
+export function PowerLevel() {
   const absorbedEssenceValue = useRecoilValue(absorbedEssence);
-  const levelValue = useRecoilValue(level);
+  const powerLevelValue = useRecoilValue(powerLevel);
 
   useDeltaText({
-    delta: "level",
-    state: level,
+    delta: "powerLevel",
+    state: powerLevel,
   });
 
   return (
-    <IconDisplay Icon={IconLevel} tooltip="Power level">
+    <IconDisplay Icon={IconPowerLevel} tooltip="Power level">
       <Stack direction="horizontal" gap={1}>
         <OverlayTrigger
           overlay={
@@ -38,10 +38,10 @@ export function Level() {
           }
           placement="right"
         >
-          <span>{levelValue}</span>
+          <span>{powerLevelValue}</span>
         </OverlayTrigger>
 
-        <DeltasDisplay delta="level" />
+        <DeltasDisplay delta="powerLevel" />
       </Stack>
     </IconDisplay>
   );

@@ -15,7 +15,7 @@ export const absorbedEssence = withStateKey("absorbedEssence", (key) =>
     get: ({ get }) => {
       let currentAbsorbedEssence = 0;
 
-      for (let index = 0; index < get(level); index++) {
+      for (let index = 0; index < get(powerLevel); index++) {
         currentAbsorbedEssence += getAttributePointCost(index);
       }
 
@@ -36,14 +36,14 @@ export const attributePoints = withStateKey("attributePoints", (key) =>
   selector({
     get: ({ get }) => {
       const essenceValue = get(essence);
-      const levelValue = get(level);
+      const powerLevelValue = get(powerLevel);
 
       let points = 0;
-      let requiredEssence = getAttributePointCost(levelValue);
+      let requiredEssence = getAttributePointCost(powerLevelValue);
 
       while (requiredEssence <= essenceValue) {
         points += 1;
-        requiredEssence += getAttributePointCost(levelValue + points);
+        requiredEssence += getAttributePointCost(powerLevelValue + points);
       }
 
       return points;
@@ -61,7 +61,7 @@ export const attributePowerBonus = withStateKey("attributePowerBonus", (key) =>
 
         return infusablePowerValue === 0
           ? 0
-          : get(level) * ATTRIBUTES[parameter].powerBonus * (1 + infusablePowerValue);
+          : get(powerLevel) * ATTRIBUTES[parameter].powerBonus * (1 + infusablePowerValue);
       },
     key,
   }),
@@ -92,7 +92,7 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =
   }),
 );
 
-export const level = withStateKey("level", (key) =>
+export const powerLevel = withStateKey("powerLevel", (key) =>
   selector({
     get: ({ get }) =>
       ATTRIBUTE_TYPES.reduce((sum, attribute) => sum + get(attributeRank(attribute)), 0),

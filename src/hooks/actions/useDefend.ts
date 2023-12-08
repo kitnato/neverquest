@@ -146,8 +146,6 @@ export function useDefend() {
         // If parrying occurs, check & apply stamina cost.
         if (hasParried) {
           if (get(canAttackOrParry)) {
-            set(isShowing("monsterAilments"), true);
-
             const parryReflected = Math.round(monsterDamageAilingValue * get(parryDamage));
 
             healthDamage -= Math.round(healthDamage * get(parryAbsorption));
@@ -207,7 +205,6 @@ export function useDefend() {
             changeStamina({ value: -shieldStaminaCost });
 
             if (Math.random() <= get(staggerChance)) {
-              set(isShowing("monsterAilments"), true);
               set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")));
 
               progressQuest({ quest: "staggering" });

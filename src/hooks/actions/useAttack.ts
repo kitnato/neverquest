@@ -122,7 +122,6 @@ export function useAttack() {
           const monsterDeltas: DeltaDisplay[] = [];
 
           if (get(monsterAilmentDuration("bleeding")) === 0 && Math.random() <= get(bleedChance)) {
-            set(isShowing("monsterAilments"), true);
             set(monsterAilmentDuration("bleeding"), get(bleed).duration);
 
             progressQuest({ quest: "bleeding" });
@@ -143,7 +142,6 @@ export function useAttack() {
           }
 
           if (Math.random() <= get(stunChance)) {
-            set(isShowing("monsterAilments"), true);
             set(monsterAilmentDuration("stunned"), get(masteryStatistic("might")));
 
             progressQuest({ quest: "stunning" });

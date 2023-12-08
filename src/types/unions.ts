@@ -226,9 +226,7 @@ export const SHOWING_TYPES = [
   "health",
   "healthDetails",
   "location",
-  "loot",
   "masteries",
-  "monsterAilments",
   "monsterOffense",
   "protection",
   "questBonus",
@@ -239,7 +237,6 @@ export const SHOWING_TYPES = [
   "staminaDetails",
   "statistics",
   "traits",
-  "thorns",
   "weapon",
   "weight",
   "wildernessStatus",
@@ -271,12 +268,10 @@ export type StateKey =
   | "allowProfanity"
   | "ammunition"
   | "ammunitionMaximum"
-  | "appliedGems"
   | "areAttributesAffordable"
   | "attackDuration"
   | "attackRate"
   | "attackRateReduction"
-  | "attributePointCost"
   | "attributePoints"
   | "attributePowerBonus"
   | "attributeRank"
@@ -294,7 +289,6 @@ export type StateKey =
   | "blightChance"
   | "blightMagnitude"
   | "blockChance"
-  | "canAffordInfusion"
   | "canApplyGem"
   | "canAttackOrParry"
   | "canBlock"
@@ -306,7 +300,6 @@ export type StateKey =
   | "canTrainMastery"
   | "canUseJournal"
   | "completedQuestsCount"
-  | "confirmationWarnings"
   | "consciousness"
   | "criticalChance"
   | "criticalDamage"
@@ -328,7 +321,6 @@ export type StateKey =
   | "essenceLoot"
   | "executionThreshold"
   | "fletcherInventory"
-  | "floatingTextQueues"
   | "hasEnoughAmmunition"
   | "hasLooted"
   | "hasMonsterClosed"
@@ -351,7 +343,6 @@ export type StateKey =
   | "isHealthAtMaximum"
   | "isHealthLow"
   | "isImmortal"
-  | "isInfusionAtMaximum"
   | "isInventoryOpen"
   | "isLootAvailable"
   | "isLooting"
@@ -392,7 +383,6 @@ export type StateKey =
   | "monsterLoot"
   | "monsterName"
   | "name"
-  | "nextAttributePoint"
   | "notifyOverEncumbrance"
   | "ownedItem"
   | "ownsInheritableItems"
@@ -421,7 +411,6 @@ export type StateKey =
   | "reserveRegenerationRateReduction"
   | "selectedTrait"
   | "showDamagePerSecond"
-  | "showEssenceRequired"
   | "showGearComparison"
   | "showGearLevel"
   | "skillPrice"
@@ -437,7 +426,6 @@ export type StateKey =
   | "stunChance"
   | "stunRating"
   | "thorns"
-  | "trinketProperties"
   | "unlockedMasteries"
   | "wildernesses";
 

@@ -10,7 +10,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconDeflection from "@neverquest/icons/deflection.svg?react";
 import IconInoculated from "@neverquest/icons/inoculated.svg?react";
 import { armor } from "@neverquest/state/gear";
-import { isSkillAcquired } from "@neverquest/state/skills";
+import { isShowing } from "@neverquest/state/isShowing";
 import { deflection } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -19,10 +19,8 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 export function Deflection() {
   const { deflection: armorDeflection } = useRecoilValue(armor);
   const deflectionValue = useRecoilValue(deflection);
-  const isSkillAcquiredArmorcraft = useRecoilValue(isSkillAcquired("armorcraft"));
+  const isShowingDeflection = useRecoilValue(isShowing("deflection"));
   const isTraitAcquiredInoculated = useRecoilValue(isTraitAcquired("inoculated"));
-
-  const isEmpty = !isSkillAcquiredArmorcraft || deflectionValue === 0;
 
   useDeltaText({
     delta: "deflection",
@@ -30,7 +28,7 @@ export function Deflection() {
     state: deflection,
   });
 
-  if (!isEmpty) {
+  if (isShowingDeflection) {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}
@@ -74,7 +72,7 @@ export function Deflection() {
             trigger={isTraitAcquiredInoculated ? ["focus", "hover"] : []}
           >
             <span>
-              {armorDeflection === 0
+              {deflectionValue === 0
                 ? LABEL_EMPTY
                 : formatNumber({ format: "percentage", value: deflectionValue })}
             </span>

@@ -8,7 +8,7 @@ import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/Dod
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
-import { ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
+import { type ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
 import IconDeflection from "@neverquest/icons/deflection.svg?react";
 import IconNone from "@neverquest/icons/none.svg?react";
@@ -16,6 +16,7 @@ import IconProtection from "@neverquest/icons/protection.svg?react";
 import { armor as armorEquipped } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import type { Armor } from "@neverquest/types";
+import { isUnarmored } from "@neverquest/types/type-guards";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ArmorName({
@@ -31,7 +32,7 @@ export function ArmorName({
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
 
   const { deflection, ID, level, name, protection, staminaCost, weight } = armor;
-  const isUnshielded = ID === ARMOR_NONE.ID;
+  const isArmorUnarmored = isUnarmored(armor);
   const showComparison = ID !== armorEquippedValue.ID;
 
   return (
@@ -70,7 +71,7 @@ export function ArmorName({
 
               <AppliedGems gearItem={armor} />
 
-              {!isUnshielded && (
+              {!isArmorUnarmored && (
                 <tr>
                   {isShowingGearClass ? (
                     <>
@@ -159,7 +160,7 @@ export function ArmorName({
                 </tr>
               )}
 
-              {!isUnshielded && (
+              {!isArmorUnarmored && (
                 <WeightDetail
                   comparison={
                     showComparison && { showing: "armor", subtrahend: armorEquippedValue.weight }

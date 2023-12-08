@@ -8,7 +8,7 @@ import { GearComparison } from "@neverquest/components/Inventory/GearComparison"
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Inventory/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
-import { WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
+import { type WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
@@ -21,7 +21,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { showDamagePerSecond } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Weapon } from "@neverquest/types";
-import { isMelee, isRanged } from "@neverquest/types/type-guards";
+import { isMelee, isRanged, isUnarmed } from "@neverquest/types/type-guards";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { getDamagePerRate } from "@neverquest/utilities/getters";
 
@@ -43,7 +43,6 @@ export function WeaponName({
     damage,
     rate,
   });
-  const isUnarmed = name === WEAPON_NONE.name;
   const showComparison = ID !== weaponEquippedValue.ID;
 
   const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
@@ -217,7 +216,7 @@ export function WeaponName({
                 )}
               </tr>
 
-              {!isUnarmed && (
+              {!isUnarmed(weapon) && (
                 <WeightDetail
                   comparison={
                     showComparison && { showing: "weapon", subtrahend: weaponEquippedValue.weight }

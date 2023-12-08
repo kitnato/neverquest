@@ -13,7 +13,7 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 // SELECTORS
 
 export const armor = withStateKey("armor", (key) =>
-  selector({
+  selector<Armor | typeof ARMOR_NONE>({
     get: ({ get }) => {
       const equippedArmor = get(inventory).find((item) => {
         if (isArmor(item)) {
@@ -85,7 +85,7 @@ export const elementalEffects = withStateKey("elementalEffects", (key) =>
 );
 
 export const shield = withStateKey("shield", (key) =>
-  selector({
+  selector<Shield | typeof SHIELD_NONE>({
     get: ({ get }) => {
       const equippedShield = get(inventory).find((item) => {
         if (isShield(item)) {

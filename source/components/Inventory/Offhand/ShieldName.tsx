@@ -145,7 +145,7 @@ export function ShieldName({
                 </tr>
               )}
 
-              {shield.name !== SHIELD_NONE.name && (
+              {shield.name !== SHIELD_NONE.ID && (
                 <WeightDetail
                   comparison={
                     showComparison && { showing: "offhand", subtrahend: shieldEquippedValue.weight }

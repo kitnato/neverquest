@@ -1,6 +1,5 @@
 import { useRecoilCallback } from "recoil";
 
-import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { armor, shield, weapon } from "@neverquest/state/gear";
@@ -18,6 +17,9 @@ import {
   isRanged,
   isShield,
   isTrinketItem,
+  isUnarmed,
+  isUnarmored,
+  isUnshielded,
 } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -52,7 +54,7 @@ export function useAcquireItem() {
 
         set(inventory, (currentInventory) => [...currentInventory, item]);
 
-        const isShieldUnequipped = get(shield).name === SHIELD_NONE.name;
+        const isShieldUnshielded = isUnshielded(get(shield));
         const weaponValue = get(weapon);
 
         if (isGearItem(item)) {
@@ -66,17 +68,17 @@ export function useAcquireItem() {
 
           if (
             get(autoEquip) &&
-            ((get(armor).ID === ARMOR_NONE.ID && isArmor(item)) ||
+            ((isUnarmored(get(armor)) && isArmor(item)) ||
               // Acquiring a shield while no shield equipped and not wielding a ranged or two-handed weapon (unless colossus).
-              (isShieldUnequipped && isShield(item) && !isRanged(weaponValue)) ||
+              (isShieldUnshielded && isShield(item) && !isRanged(weaponValue)) ||
               get(isTraitAcquired("colossus")) ||
               // Acquiring a weapon while no weapon equipped, and if ranged or two-handed, no shield equipped.
-              (weaponValue.ID === WEAPON_NONE.ID &&
+              (isUnarmed(weaponValue) &&
                 ((isMelee(item) && item.grip === "one-handed") ||
                   get(isTraitAcquired("colossus")) ||
                   (((isMelee(item) && item.grip === "two-handed") ||
                     (get(isSkillAcquired("archery")) && isRanged(item))) &&
-                    isShieldUnequipped))))
+                    isShieldUnshielded))))
           ) {
             return "autoEquip";
           }

@@ -8,7 +8,6 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSecond";
 import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDetails";
-import { SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -25,6 +24,7 @@ import { questProgress, questsBonus } from "@neverquest/state/quests";
 import { stamina } from "@neverquest/state/reserves";
 import { damage } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
+import { isUnarmed, isUnshielded } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Damage() {
@@ -35,12 +35,14 @@ export function Damage() {
   const isTraitAcquiredBrawler = useRecoilValue(isTraitAcquired("brawler"));
   const isTraitAcquiredBruiser = useRecoilValue(isTraitAcquired("bruiser"));
   const questsBonusDamage = useRecoilValue(questsBonus("damageBonus"));
-  const isUnshielded = useRecoilValue(shield).name === SHIELD_NONE.name;
+  const shieldValue = useRecoilValue(shield);
   const staminaValue = useRecoilValue(stamina);
-  const { damage: weaponDamage, gems, name } = useRecoilValue(weapon);
+  const weaponValue = useRecoilValue(weapon);
   const resetQuestProgressDamage = useResetRecoilState(questProgress("damage"));
 
   const progressQuest = useProgressQuest();
+
+  const { damage: weaponDamage, gems } = weaponValue;
 
   useDeltaText({
     delta: "damage",
@@ -122,7 +124,7 @@ export function Damage() {
                     </tr>
                   )}
 
-                  {isTraitAcquiredBruiser && name === WEAPON_NONE.name && (
+                  {isTraitAcquiredBruiser && isUnarmed(weaponValue) && (
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
@@ -135,7 +137,7 @@ export function Damage() {
                     </tr>
                   )}
 
-                  {isTraitAcquiredBrawler && isUnshielded && (
+                  {isTraitAcquiredBrawler && isUnshielded(shieldValue) && (
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>

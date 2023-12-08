@@ -1,3 +1,4 @@
+import type { ShieldClass } from "@kitnato/locran/build/types";
 import IconBrawler from "@neverquest/icons/brawler.svg?react";
 import IconBruiser from "@neverquest/icons/bruiser.svg?react";
 import IconColossus from "@neverquest/icons/colossus.svg?react";
@@ -14,6 +15,12 @@ import type { Trait } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export const BRUISER_STUN_CHANCE = 0.25;
+
+export const TANK_PROTECTION_BONUS: Record<ShieldClass, number> = {
+  medium: 1.25,
+  small: 1.1,
+  tower: 1.5,
+};
 
 export const TRAITS: Record<
   Trait,
@@ -67,7 +74,7 @@ export const TRAITS: Record<
     Icon: IconStalwart,
   },
   tank: {
-    description: "Having a shield equipped doubles total protection.",
+    description: "Having a shield equipped adds to total protection based on its size.",
     Icon: IconTank,
   },
 };

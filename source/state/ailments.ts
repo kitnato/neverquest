@@ -1,12 +1,12 @@
 import { selector, selectorFamily } from "recoil";
 
-import { WEAPON_NONE } from "@neverquest/data/gear";
 import { ELEMENTALS } from "@neverquest/data/items";
 import { BLEED } from "@neverquest/data/statistics";
 import { BRUISER_STUN_CHANCE } from "@neverquest/data/traits";
 import { elementalEffects, shield, weapon } from "@neverquest/state/gear";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
+import { isUnarmed } from "@neverquest/types/type-guards";
 import {
   ELEMENTAL_TYPES,
   MONSTER_AILMENT_TYPES,
@@ -87,10 +87,11 @@ export const staggerChance = withStateKey("staggerChance", (key) =>
 export const stunChance = withStateKey("stunChance", (key) =>
   selector({
     get: ({ get }) => {
-      const { abilityChance, gearClass, name } = get(weapon);
+      const weaponValue = get(weapon);
+      const { abilityChance, gearClass } = weaponValue;
 
       return get(isSkillAcquired("traumatology")) && gearClass === "blunt"
-        ? get(isTraitAcquired("bruiser")) && name === WEAPON_NONE.name
+        ? get(isTraitAcquired("bruiser")) && isUnarmed(weaponValue)
           ? BRUISER_STUN_CHANCE
           : abilityChance
         : 0;

@@ -6,7 +6,6 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { AttackMeter } from "@neverquest/components/Status/AttackMeter";
-import { WEAPON_NONE } from "@neverquest/data/gear";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { useAttack } from "@neverquest/hooks/actions/useAttack";
 import { useAnimate } from "@neverquest/hooks/useAnimate";
@@ -27,6 +26,7 @@ import { weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMonsterDead } from "@neverquest/state/monster";
 import { attackRate, attackRateReduction } from "@neverquest/state/statistics";
+import { isUnarmed } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -41,7 +41,7 @@ export function AttackRate() {
   const isRecoveringValue = useRecoilValue(isRecovering);
   const isShowingAttackRate = useRecoilValue(isShowing("attackRate"));
   const isShowingAttackRateDetails = useRecoilValue(isShowing("attackRateDetails"));
-  const { name, rate: weaponAttackRate } = useRecoilValue(weapon);
+  const weaponValue = useRecoilValue(weapon);
   const setAttackDuration = useSetRecoilState(attackDuration);
 
   const attack = useAttack();
@@ -84,14 +84,14 @@ export function AttackRate() {
                 <DetailsTable>
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>{`${
-                      name === WEAPON_NONE.name ? "Base" : "Weapon"
+                      isUnarmed(weaponValue) ? "Base" : "Weapon"
                     }:`}</td>
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
                         <IconImage Icon={IconWeaponAttackRate} isSmall />
 
-                        {formatNumber({ format: "time", value: weaponAttackRate })}
+                        {formatNumber({ format: "time", value: weaponValue.rate })}
                       </Stack>
                     </td>
                   </tr>

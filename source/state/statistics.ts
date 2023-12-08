@@ -1,8 +1,8 @@
 import { selector } from "recoil";
 
-import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/statistics";
+import { TANK_PROTECTION_BONUS } from "@neverquest/data/traits";
 import { bleed, bleedChance, staggerChance, stunChance } from "@neverquest/state/ailments";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { armor, elementalEffects, shield, weapon } from "@neverquest/state/gear";
@@ -11,7 +11,13 @@ import { questsBonus } from "@neverquest/state/quests";
 import { stamina } from "@neverquest/state/reserves";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
-import { isMelee, isRanged } from "@neverquest/types/type-guards";
+import {
+  isMelee,
+  isRanged,
+  isUnarmed,
+  isUnarmored,
+  isUnshielded,
+} from "@neverquest/types/type-guards";
 import { getDamagePerRate, getDamagePerTick } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
@@ -98,7 +104,7 @@ export const criticalStrike = withStateKey("criticalStrike", (key) =>
 export const damage = withStateKey("damage", (key) =>
   selector({
     get: ({ get }) => {
-      const { damage: weaponDamage, name } = get(weapon);
+      const weaponValue = get(weapon);
 
       return (
         (Math.round(
@@ -106,10 +112,10 @@ export const damage = withStateKey("damage", (key) =>
             (1 + get(attributePowerBonus("strength"))) *
             (1 + get(questsBonus("damageBonus"))),
         ) +
-          weaponDamage +
+          weaponValue.damage +
           Object.values(get(elementalEffects).weapon).reduce((sum, { damage }) => sum + damage, 0) +
-          (get(isTraitAcquired("bruiser")) && name === WEAPON_NONE.name ? get(stamina) : 0)) *
-        (get(isTraitAcquired("brawler")) && get(shield).name === SHIELD_NONE.name ? 2 : 1)
+          (get(isTraitAcquired("bruiser")) && isUnarmed(weaponValue) ? get(stamina) : 0)) *
+        (get(isTraitAcquired("brawler")) && isUnshielded(get(shield)) ? 2 : 1)
       );
     },
     key,
@@ -147,7 +153,7 @@ export const dodgeChance = withStateKey("dodgeChance", (key) =>
         ? 0
         : get(attributeStatistic("agility")) *
           (1 + get(attributePowerBonus("agility"))) *
-          (get(isTraitAcquired("nudist")) && get(armor).ID === ARMOR_NONE.ID ? 2 : 1),
+          (get(isTraitAcquired("nudist")) && isUnarmored(get(armor)) ? 2 : 1),
     key,
   }),
 );
@@ -206,9 +212,16 @@ export const parryRating = withStateKey("parryRating", (key) =>
 
 export const protection = withStateKey("protection", (key) =>
   selector({
-    get: ({ get }) =>
-      get(armor).protection *
-      (get(isTraitAcquired("tank")) && get(shield).name !== SHIELD_NONE.name ? 2 : 1),
+    get: ({ get }) => {
+      const { protection } = get(armor);
+      const shieldValue = get(shield);
+
+      if ("gearClass" in shieldValue && get(isTraitAcquired("tank"))) {
+        return protection * TANK_PROTECTION_BONUS[shieldValue.gearClass];
+      }
+
+      return protection;
+    },
     key,
   }),
 );

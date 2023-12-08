@@ -6,7 +6,6 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/DodgePenaltyContents";
-import { ARMOR_NONE } from "@neverquest/data/gear";
 import {
   CLASS_TABLE_CELL_ITALIC,
   LABEL_EMPTY,
@@ -26,11 +25,12 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { dodgeChance } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
+import { isUnarmored } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function DodgeChance() {
-  const { ID, staminaCost } = useRecoilValue(armor);
+  const armorValue = useRecoilValue(armor);
   const agilityPowerBonus = useRecoilValue(attributePowerBonus("agility"));
   const agility = useRecoilValue(attributeStatistic("agility"));
   const dodgeChanceValue = useRecoilValue(dodgeChance);
@@ -92,7 +92,7 @@ export function DodgeChance() {
                       </td>
                     </tr>
 
-                    {isTraitAcquiredNudist && ID === ARMOR_NONE.ID && (
+                    {isTraitAcquiredNudist && isUnarmored(armorValue) && (
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
                           <Stack direction="horizontal" gap={1}>
@@ -115,7 +115,7 @@ export function DodgeChance() {
                         </td>
 
                         <td>
-                          <DodgePenaltyContents staminaCost={staminaCost} />
+                          <DodgePenaltyContents staminaCost={armorValue.staminaCost} />
                         </td>
                       </tr>
                     ) : (

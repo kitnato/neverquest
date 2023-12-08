@@ -31,7 +31,7 @@ export function Protection() {
 
   const progressQuest = useProgressQuest();
 
-  const showDetails = isTraitAcquiredTank && shieldValue.name !== SHIELD_NONE.name;
+  const showDetails = isTraitAcquiredTank && shieldValue.name !== SHIELD_NONE.ID;
 
   useDeltaText({
     delta: "protection",

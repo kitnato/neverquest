@@ -20,7 +20,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "paths": {
-      "@neverquest/*": ["./src/*"],
+      "@neverquest/*": ["./source/*"],
       "@neverquest/config": ["./package.json"]
     },
     "resolveJsonModule": true,
@@ -32,5 +32,5 @@
     "verbatimModuleSyntax": true
   },
   "exclude": ["build", "node_modules"],
-  "include": ["./src", "./*.ts"]
+  "include": ["./source", "./*.ts"]
 }

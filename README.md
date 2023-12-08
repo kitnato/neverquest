@@ -4,7 +4,7 @@ _An irreverent UI-based incremental action RPG._
 
 `[SCREENSHOT]`
 
-**For a full breakdown of gameplay, please consult the [manual](./src/data/manual.md).**
+**For a full breakdown of gameplay, please consult the [manual](./source/data/manual.md).**
 
 ## Local set up
 

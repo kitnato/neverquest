@@ -1,12 +1,11 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
-import { SHIELD_NONE } from "@neverquest/data/gear";
 import { LEVEL_MAXIMUM } from "@neverquest/data/general";
 import { MASTERIES, MASTERY_COST_BASE } from "@neverquest/data/masteries";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { shield, weapon } from "@neverquest/state/gear";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import { isMelee, isRanged } from "@neverquest/types/type-guards";
+import { isMelee, isRanged, isUnshielded } from "@neverquest/types/type-guards";
 import { MASTERY_TYPES, type Mastery } from "@neverquest/types/unions";
 import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
@@ -48,7 +47,7 @@ export const canTrainMastery = withStateKey("canTrainMastery", (key) =>
           }
 
           case "stability": {
-            return hasRequiredSkill && get(shield).ID !== SHIELD_NONE.ID;
+            return hasRequiredSkill && !isUnshielded(get(shield));
           }
         }
       },

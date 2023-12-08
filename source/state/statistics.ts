@@ -217,7 +217,7 @@ export const protection = withStateKey("protection", (key) =>
       const shieldValue = get(shield);
 
       if ("gearClass" in shieldValue && get(isTraitAcquired("tank"))) {
-        return protection * TANK_PROTECTION_BONUS[shieldValue.gearClass];
+        return protection * (1 + TANK_PROTECTION_BONUS[shieldValue.gearClass]);
       }
 
       return protection;

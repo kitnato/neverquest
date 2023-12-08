@@ -1,6 +1,5 @@
 import { useRecoilCallback } from "recoil";
 
-import { SHIELD_NONE } from "@neverquest/data/gear";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
@@ -128,7 +127,7 @@ export function useDefend() {
           }
         }
 
-        const { ID: shieldID, staminaCost: shieldStaminaCost } = get(shield);
+        const { staminaCost: shieldStaminaCost } = get(shield);
         const hasParried = Math.random() <= get(parryChance);
         const hasBlocked = !hasParried && Math.random() <= get(blockChance);
         const thornsValue = get(thorns);
@@ -233,10 +232,6 @@ export function useDefend() {
           }
         }
 
-        if (shieldID !== SHIELD_NONE.ID) {
-          trainMastery("stability");
-        }
-
         // If neither dodged, parried nor blocked, show damage with protection and increase resilience.
         if (!hasBlocked && !hasParried) {
           deltaHealth.push({
@@ -251,8 +246,6 @@ export function useDefend() {
               value: `(${Math.max(protectionValue, healthDamage)})`,
             });
           }
-
-          trainMastery("resilience");
         }
 
         set(isShowing("recovery"), true);
@@ -325,6 +318,9 @@ export function useDefend() {
           contents: deltaStamina,
           delta: "stamina",
         });
+
+        trainMastery("resilience");
+        trainMastery("stability");
 
         // Inflict any armor elemental effects.
         for (const elemental of ELEMENTAL_TYPES) {

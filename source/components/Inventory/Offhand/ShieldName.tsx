@@ -8,7 +8,7 @@ import { GearComparison } from "@neverquest/components/Inventory/GearComparison"
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
 import { StaminaCostDetail } from "@neverquest/components/Inventory/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
-import { SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
+import { type SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
 import IconBlock from "@neverquest/icons/block.svg?react";
 import IconNone from "@neverquest/icons/none.svg?react";
@@ -17,6 +17,7 @@ import { shield as shieldEquipped } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Shield } from "@neverquest/types";
+import { isUnshielded } from "@neverquest/types/type-guards";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ShieldName({
@@ -145,7 +146,7 @@ export function ShieldName({
                 </tr>
               )}
 
-              {shield.name !== SHIELD_NONE.ID && (
+              {!isUnshielded(shield) && (
                 <WeightDetail
                   comparison={
                     showComparison && { showing: "offhand", subtrahend: shieldEquippedValue.weight }

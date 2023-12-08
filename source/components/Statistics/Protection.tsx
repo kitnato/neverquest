@@ -6,8 +6,8 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { SHIELD_NONE } from "@neverquest/data/gear";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
+import { TANK_PROTECTION_BONUS } from "@neverquest/data/traits";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconArmor from "@neverquest/icons/armor.svg?react";
@@ -30,8 +30,6 @@ export function Protection() {
   const resetQuestProgressProtection = useResetRecoilState(questProgress("protection"));
 
   const progressQuest = useProgressQuest();
-
-  const showDetails = isTraitAcquiredTank && shieldValue.name !== SHIELD_NONE.ID;
 
   useDeltaText({
     delta: "protection",
@@ -78,13 +76,20 @@ export function Protection() {
                         </Stack>
                       </td>
 
-                      <td>x2</td>
+                      <td>
+                        {"gearClass" in shieldValue
+                          ? `+${formatNumber({
+                              format: "percentage",
+                              value: TANK_PROTECTION_BONUS[shieldValue.gearClass],
+                            })}`
+                          : LABEL_EMPTY}
+                      </td>
                     </tr>
                   </DetailsTable>
                 </PopoverBody>
               </Popover>
             }
-            trigger={showDetails ? ["focus", "hover"] : []}
+            trigger={isTraitAcquiredTank ? ["focus", "hover"] : []}
           >
             <span>{formatNumber({ value: protectionValue })}</span>
           </OverlayTrigger>

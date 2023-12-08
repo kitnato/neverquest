@@ -702,7 +702,7 @@ There are no penalties when wearing armor.
 
 #### Tank
 
-Having a shield equipped doubles total [protection](#protection).
+Having a shield equipped increases total [protection](#protection) based on its class.
 
 ### Quests
 

@@ -17,9 +17,9 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 export const BRUISER_STUN_CHANCE = 0.25;
 
 export const TANK_PROTECTION_BONUS: Record<ShieldClass, number> = {
-  medium: 1.25,
-  small: 1.1,
-  tower: 1.5,
+  medium: 0.25,
+  small: 0.1,
+  tower: 0.5,
 };
 
 export const TRAITS: Record<
@@ -74,7 +74,7 @@ export const TRAITS: Record<
     Icon: IconStalwart,
   },
   tank: {
-    description: "Having a shield equipped adds to total protection based on its size.",
+    description: "Having a shield equipped increases total protection based on its class.",
     Icon: IconTank,
   },
 };

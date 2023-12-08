@@ -42,7 +42,7 @@ export function ItemAcquisition() {
             currentAcquiredItems.filter(({ ID: acquiredItemID }) => acquiredItemID !== ID),
           );
         }}
-        // TODO - Bootstrap positioning utilities do not work with Animation.css zoomOut
+        // Bootstrap positioning utilities do not work with Animation.css zoomOut.
         style={{ left: -10, top: 16 }}
       >
         <IconImage

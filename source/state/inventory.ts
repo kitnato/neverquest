@@ -84,7 +84,6 @@ export const equippableItems = withStateKey("equippableItems", (key) =>
   }),
 );
 
-// TODO - return the appropriate Item type.
 export const ownedItem = withStateKey("ownedItem", (key) =>
   selectorFamily<InventoryItem | undefined, Consumable | Infusable | Trinket>({
     get:

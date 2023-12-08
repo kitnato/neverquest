@@ -51,7 +51,6 @@ export function Typewriter({ children, delay = TEXT_DELAY }: { children: string;
     };
   }, [animate]);
 
-  // TODO - check if conditional needed.
   return (
     <strong style={{ fontFamily: "monospace" }}>
       {text}

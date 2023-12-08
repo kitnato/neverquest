@@ -7,8 +7,7 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 export const allowProfanity = withStateKey("allowProfanity", (key) =>
   atom({
-    // TODO - turn off for v1.0.0
-    default: true,
+    default: false,
     effects: [handleLocalStorage({ isSetting: true, key })],
     key,
   }),

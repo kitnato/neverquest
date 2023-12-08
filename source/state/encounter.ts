@@ -74,7 +74,7 @@ export const stageMaximum = withStateKey("stageMaximum", (key) =>
 
 export const consciousness = withStateKey("consciousness", (key) =>
   atom<"mors" | "somnium" | "vigilans">({
-    default: "somnium",
+    default: "vigilans",
     effects: [handleLocalStorage({ key })],
     key,
   }),

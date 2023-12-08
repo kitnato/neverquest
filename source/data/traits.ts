@@ -1,4 +1,3 @@
-import type { ShieldClass } from "@kitnato/locran/build/types";
 import IconBrawler from "@neverquest/icons/brawler.svg?react";
 import IconBruiser from "@neverquest/icons/bruiser.svg?react";
 import IconColossus from "@neverquest/icons/colossus.svg?react";
@@ -16,11 +15,7 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 
 export const BRUISER_STUN_CHANCE = 0.25;
 
-export const TANK_PROTECTION_BONUS: Record<ShieldClass, number> = {
-  medium: 0.25,
-  small: 0.1,
-  tower: 0.5,
-};
+export const TANK_PROTECTION_BONUS = 0.5;
 
 export const TRAITS: Record<
   Trait,

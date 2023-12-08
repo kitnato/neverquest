@@ -91,23 +91,23 @@ export function ShieldName({
 
                       <td>
                         {(() => {
-                          if ("gearClass" in shield) {
-                            const { gearClass } = shield;
-                            const { Icon } = SHIELD_SPECIFICATIONS[gearClass];
-
+                          if (isUnshielded(shield)) {
                             return (
                               <Stack direction="horizontal" gap={1}>
-                                <IconImage Icon={Icon} isSmall />
-
-                                {capitalizeAll(gearClass)}
+                                <IconImage Icon={IconNone} isSmall />
+                                None
                               </Stack>
                             );
                           }
 
+                          const { gearClass } = shield;
+                          const { Icon } = SHIELD_SPECIFICATIONS[gearClass];
+
                           return (
                             <Stack direction="horizontal" gap={1}>
-                              <IconImage Icon={IconNone} isSmall />
-                              None
+                              <IconImage Icon={Icon} isSmall />
+
+                              {capitalizeAll(gearClass)}
                             </Stack>
                           );
                         })()}

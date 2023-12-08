@@ -214,10 +214,9 @@ export const protection = withStateKey("protection", (key) =>
   selector({
     get: ({ get }) => {
       const { protection } = get(armor);
-      const shieldValue = get(shield);
 
-      if ("gearClass" in shieldValue && get(isTraitAcquired("tank"))) {
-        return protection * (1 + TANK_PROTECTION_BONUS[shieldValue.gearClass]);
+      if (!isUnshielded(get(shield)) && get(isTraitAcquired("tank"))) {
+        return Math.round(protection * (1 + TANK_PROTECTION_BONUS));
       }
 
       return protection;

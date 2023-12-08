@@ -18,6 +18,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { questProgress } from "@neverquest/state/quests";
 import { protection } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
+import { isUnshielded } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -77,12 +78,12 @@ export function Protection() {
                       </td>
 
                       <td>
-                        {"gearClass" in shieldValue
-                          ? `+${formatNumber({
+                        {isUnshielded(shieldValue)
+                          ? LABEL_EMPTY
+                          : `+${formatNumber({
                               format: "percentage",
-                              value: TANK_PROTECTION_BONUS[shieldValue.gearClass],
-                            })}`
-                          : LABEL_EMPTY}
+                              value: TANK_PROTECTION_BONUS,
+                            })}`}
                       </td>
                     </tr>
                   </DetailsTable>

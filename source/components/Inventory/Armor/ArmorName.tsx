@@ -79,23 +79,23 @@ export function ArmorName({
 
                       <td>
                         {(() => {
-                          if ("gearClass" in armor) {
-                            const { gearClass } = armor;
-                            const { Icon } = ARMOR_SPECIFICATIONS[gearClass];
-
+                          if (isUnarmored(armor)) {
                             return (
                               <Stack direction="horizontal" gap={1}>
-                                <IconImage Icon={Icon} isSmall />
-
-                                {capitalizeAll(gearClass)}
+                                <IconImage Icon={IconNone} isSmall />
+                                None
                               </Stack>
                             );
                           }
 
+                          const { gearClass } = armor;
+                          const { Icon } = ARMOR_SPECIFICATIONS[gearClass];
+
                           return (
                             <Stack direction="horizontal" gap={1}>
-                              <IconImage Icon={IconNone} isSmall />
-                              None
+                              <IconImage Icon={Icon} isSmall />
+
+                              {capitalizeAll(gearClass)}
                             </Stack>
                           );
                         })()}

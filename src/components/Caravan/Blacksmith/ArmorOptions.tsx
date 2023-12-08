@@ -25,10 +25,10 @@ import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateArmor } from "@neverquest/utilities/generators";
 import {
+  getAffixStructure,
   getArmorRanges,
   getGearPrice,
   getGrowthSigmoid,
-  getNameStructure,
 } from "@neverquest/utilities/getters";
 
 export function ArmorOptions() {
@@ -130,10 +130,10 @@ export function ArmorOptions() {
             setBlacksmithInventory((currentBlacksmithInventory) => ({
               ...currentBlacksmithInventory,
               armor: generateArmor({
+                affixStructure: getAffixStructure(),
                 allowProfanity: allowProfanityValue,
                 gearClass: armorClass,
                 level: armorLevel,
-                nameStructure: getNameStructure(),
                 prefixTags:
                   armorLevel <= maximumArmorLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
                     ? ["lowQuality"]

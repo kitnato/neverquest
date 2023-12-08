@@ -1,15 +1,14 @@
 import type {
+  AffixStructure,
   ArmorClass,
-  NameStructure,
   ShieldClass,
   WeaponClass,
 } from "@kitnato/locran/build/types";
 import { nanoid } from "nanoid";
 import type { RecoilValue, Snapshot } from "recoil";
 
-import { stackItems } from "./helpers";
 import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
-import { NAME_STRUCTURE, PROGRESS_REDUCTION } from "@neverquest/data/encounter";
+import { AFFIX_STRUCTURE, PROGRESS_REDUCTION } from "@neverquest/data/encounter";
 import {
   type ARMOR_NONE,
   ARMOR_SPECIFICATIONS,
@@ -52,6 +51,24 @@ import {
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
 import type { Elemental, Grip, Quest } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { stackItems } from "@neverquest/utilities/helpers";
+
+export function getAffixStructure(): AffixStructure {
+  const chance = Math.random();
+  let cumulativeProbability = 0;
+
+  for (const [key, probability] of Object.entries(AFFIX_STRUCTURE).toSorted(
+    ([, current1], [, current2]) => current1 - current2,
+  )) {
+    cumulativeProbability += probability;
+
+    if (chance <= cumulativeProbability) {
+      return key as AffixStructure;
+    }
+  }
+
+  return "none";
+}
 
 export function getAnimationClass({
   animation,
@@ -202,23 +219,6 @@ export function getGrowthSigmoid(x: number) {
 // https://en.wikipedia.org/wiki/Triangular_number
 export function getGrowthTriangular(x: number) {
   return (x * (x + 1)) / 2;
-}
-
-export function getNameStructure(): NameStructure {
-  const chance = Math.random();
-  let cumulativeProbability = 0;
-
-  for (const [key, probability] of Object.entries(NAME_STRUCTURE).toSorted(
-    ([, current1], [, current2]) => current1 - current2,
-  )) {
-    cumulativeProbability += probability;
-
-    if (chance <= cumulativeProbability) {
-      return key as NameStructure;
-    }
-  }
-
-  return "none";
 }
 
 export function getLinearMapping({ offset, stage }: { offset: number; stage: number }) {

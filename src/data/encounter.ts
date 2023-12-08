@@ -1,6 +1,6 @@
-import type { NameStructure } from "@kitnato/locran/build/types";
+import type { AffixStructure } from "@kitnato/locran/build/types";
 
-export const NAME_STRUCTURE: Record<NameStructure, number> = {
+export const AFFIX_STRUCTURE: Record<AffixStructure, number> = {
   none: 0.05,
   prefix: 0.65,
   prefixAndSuffix: 0.1,

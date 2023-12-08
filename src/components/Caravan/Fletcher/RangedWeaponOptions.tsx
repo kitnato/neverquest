@@ -24,9 +24,9 @@ import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateRangedWeapon } from "@neverquest/utilities/generators";
 import {
+  getAffixStructure,
   getGearPrice,
   getGrowthSigmoid,
-  getNameStructure,
   getRangedRanges,
 } from "@neverquest/utilities/getters";
 
@@ -135,10 +135,10 @@ export function RangedWeaponOptions() {
           onCraft={() => {
             setFletcherInventory(
               generateRangedWeapon({
+                affixStructure: getAffixStructure(),
                 allowProfanity: allowProfanityValue,
                 gearClass: weaponClass,
                 level: weaponLevel,
-                nameStructure: getNameStructure(),
                 prefixTags:
                   weaponLevel <= maximumWeaponLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
                     ? ["lowQuality"]

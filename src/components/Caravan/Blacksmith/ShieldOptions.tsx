@@ -22,9 +22,9 @@ import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateShield } from "@neverquest/utilities/generators";
 import {
+  getAffixStructure,
   getGearPrice,
   getGrowthSigmoid,
-  getNameStructure,
   getShieldRanges,
 } from "@neverquest/utilities/getters";
 
@@ -119,10 +119,10 @@ export function ShieldOptions() {
             setBlacksmithInventory((currentBlacksmithInventory) => ({
               ...currentBlacksmithInventory,
               shield: generateShield({
+                affixStructure: getAffixStructure(),
                 allowProfanity: allowProfanityValue,
                 gearClass: shieldClass,
                 level: shieldLevel,
-                nameStructure: getNameStructure(),
                 prefixTags:
                   shieldLevel <= maximumShieldLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
                     ? ["lowQuality"]

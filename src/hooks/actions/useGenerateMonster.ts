@@ -15,7 +15,7 @@ import {
 import { allowProfanity } from "@neverquest/state/settings";
 import { MONSTER_AILMENT_TYPES } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
-import { getNameStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
+import { getAffixStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useGenerateMonster() {
   return useRecoilCallback(
@@ -36,8 +36,8 @@ export function useGenerateMonster() {
             set(
               monsterName,
               generateCreature({
+                affixStructure: getAffixStructure(),
                 allowProfanity: allowProfanityValue,
-                nameStructure: getNameStructure(),
               }),
             );
             break;

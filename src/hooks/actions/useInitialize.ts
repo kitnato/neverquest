@@ -9,7 +9,7 @@ import { wildernesses } from "@neverquest/state/encounter";
 import { allowProfanity } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { CREW_TYPES } from "@neverquest/types/unions";
-import { getNameStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
+import { getAffixStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useInitialize() {
   return useRecoilCallback(
@@ -35,8 +35,8 @@ export function useInitialize() {
 
           const newWilderness = [
             generateLocation({
+              affixStructure: getAffixStructure(),
               allowProfanity: get(allowProfanity),
-              nameStructure: getNameStructure(),
             }),
           ];
 

@@ -9,7 +9,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { questProgress } from "@neverquest/state/quests";
 import { allowProfanity } from "@neverquest/state/settings";
 import { CREW_TYPES } from "@neverquest/types/unions";
-import { getNameStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
+import { getAffixStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useIncreaseStage() {
   const progressQuest = useProgressQuest();
@@ -38,8 +38,8 @@ export function useIncreaseStage() {
         set(wildernesses, (currentWildernesses) => [
           ...currentWildernesses,
           generateLocation({
+            affixStructure: getAffixStructure(),
             allowProfanity: get(allowProfanity),
-            nameStructure: getNameStructure(),
           }),
         ]);
 

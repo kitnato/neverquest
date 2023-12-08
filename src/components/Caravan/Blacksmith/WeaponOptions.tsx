@@ -25,10 +25,10 @@ import { GRIP_TYPES, type Grip } from "@neverquest/types/unions";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateMeleeWeapon } from "@neverquest/utilities/generators";
 import {
+  getAffixStructure,
   getGearPrice,
   getGrowthSigmoid,
   getMeleeRanges,
-  getNameStructure,
 } from "@neverquest/utilities/getters";
 
 export function WeaponOptions() {
@@ -145,11 +145,11 @@ export function WeaponOptions() {
             setBlacksmithInventory((currentBlacksmithInventory) => ({
               ...currentBlacksmithInventory,
               weapon: generateMeleeWeapon({
+                affixStructure: getAffixStructure(),
                 allowProfanity: allowProfanityValue,
                 gearClass: weaponClass,
                 grip: weaponGrip,
                 level: weaponLevel,
-                nameStructure: getNameStructure(),
                 prefixTags:
                   weaponLevel <= maximumWeaponLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
                     ? ["lowQuality"]

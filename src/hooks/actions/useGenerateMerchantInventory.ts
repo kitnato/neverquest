@@ -31,9 +31,9 @@ export function useGenerateMerchantInventory() {
           merchantInventoryCurrent.every(({ offerIndex }) => offerIndex !== stageValue)
         ) {
           const SETTINGS_GEAR: GeneratorParameters & { level: number } = {
+            affixStructure: "prefix",
             allowProfanity: allowProfanityValue,
             level: stageValue,
-            nameStructure: "prefix",
             prefixTags: ["lowQuality"],
           };
 

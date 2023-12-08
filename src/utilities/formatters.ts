@@ -83,16 +83,3 @@ export function formatNumber({
     }
   }
 }
-
-// Unused.
-export function formatPascalCase(words: string) {
-  return words
-    .toLowerCase()
-    .replaceAll(/[_-]+/g, " ")
-    .replaceAll(/[^\s\w]/g, "")
-    .replaceAll(
-      /\s+(.)(\w*)/g,
-      (_, word2: string, word3: string) => `${word2.toUpperCase() + word3}`,
-    )
-    .replace(/\w/, (word) => word.toUpperCase());
-}

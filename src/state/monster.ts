@@ -43,7 +43,7 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
-export const bleedingDeltaLength = withStateKey("bleedingDeltaLength", (key) =>
+const bleedingDeltaLength = withStateKey("bleedingDeltaLength", (key) =>
   selector({
     get: ({ get }) => {
       const { duration, ticks } = get(bleed);

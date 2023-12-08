@@ -139,8 +139,6 @@ export const ENCUMBRANCE_CAPACITY = 6;
 
 export const INHERITABLE_ITEMS = ["knapsack", "journal", ...INFUSABLE_TYPES] as const;
 
-export const KNAPSACK_CAPACITY = 12;
-
 export const GEM_BASE = {
   price: 100,
   weight: 1,
@@ -294,7 +292,7 @@ export const TRINKETS: Record<
   knapsack: {
     Icon: IconKnapsack,
     item: {
-      capacity: KNAPSACK_CAPACITY,
+      capacity: 12,
       description: "Carry more items and manage gear.",
       ID: nanoid(),
       name: "knapsack",

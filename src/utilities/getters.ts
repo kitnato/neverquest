@@ -253,7 +253,7 @@ export function getQuestsData(quest: Quest): QuestData[] {
   }));
 }
 
-export function getRange({
+function getRange({
   factor,
   modifier = 1,
   ranges,
@@ -279,7 +279,7 @@ export function getRange({
   };
 }
 
-export function getRomanNumeral(value: number) {
+function getRomanNumeral(value: number) {
   if (!Number.isInteger(value) || value < 1 || value > ROMAN_NUMERAL_MAXIMUM) {
     return value;
   }

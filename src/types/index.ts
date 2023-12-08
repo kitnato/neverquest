@@ -30,12 +30,6 @@ export type AttributeOrMasteryBaseData = {
   increment: number;
 };
 
-export type BlacksmithInventory = {
-  armor: Armor | undefined;
-  shield: Shield | undefined;
-  weapon: Weapon | undefined;
-};
-
 export type BlightMagnitude = {
   amount: number;
   percentage: number;
@@ -45,8 +39,6 @@ export type ConsumableItem = ItemBase & {
   description: string;
   name: Consumable;
 };
-
-export type FletcherInventory = Weapon | undefined;
 
 export type GearBase = {
   price: GeneratorRange;

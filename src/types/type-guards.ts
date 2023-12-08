@@ -27,9 +27,7 @@ import {
   ROUTINE_TYPES,
   type Routine,
   TRINKET_TYPES,
-  TRIUMPH_TYPES,
   type Trinket,
-  type Triumph,
 } from "@neverquest/types/unions";
 
 export function isArmor(thing: unknown): thing is Armor {
@@ -102,10 +100,6 @@ export function isTrinket(thing: unknown): thing is Trinket {
 
 export function isTrinketItem(thing: unknown): thing is TrinketItem {
   return isObject(thing) && isTrinket(thing.name);
-}
-
-export function isTriumph(thing: unknown): thing is Triumph {
-  return typeof thing === "string" && new Set<string>(TRIUMPH_TYPES).has(thing);
 }
 
 export function isUsable(thing: unknown): thing is UsableItem {

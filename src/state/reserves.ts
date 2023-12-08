@@ -189,7 +189,10 @@ export const regenerationAmount = withStateKey("regenerationAmount", (key) =>
     get:
       (parameter) =>
       ({ get }) =>
-        RESERVES[parameter].baseRegenerationAmount + get(reserveRegenerationAmount),
+        RESERVES[parameter].baseRegenerationAmount +
+        Math.round(
+          get(attributeStatistic("fortitude")) * (1 + get(attributePowerBonus("fortitude"))),
+        ),
     key,
   }),
 );
@@ -205,16 +208,6 @@ export const regenerationRate = withStateKey("regenerationRate", (key) =>
           baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRateReduction),
         );
       },
-    key,
-  }),
-);
-
-export const reserveRegenerationAmount = withStateKey("reserveRegenerationAmount", (key) =>
-  selector({
-    get: ({ get }) =>
-      Math.round(
-        get(attributeStatistic("fortitude")) * (1 + get(attributePowerBonus("fortitude"))),
-      ),
     key,
   }),
 );

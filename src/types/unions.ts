@@ -121,8 +121,6 @@ export type Grip = (typeof GRIP_TYPES)[number];
 export const INFUSABLE_TYPES = ["monkey paw", "mysterious egg", "tome of power"] as const;
 export type Infusable = (typeof INFUSABLE_TYPES)[number];
 
-export type Item = Consumable | Gear | Trinket;
-
 export const MASTERY_TYPES = [
   "butchery",
   "cruelty",
@@ -134,7 +132,7 @@ export const MASTERY_TYPES = [
 ] as const;
 export type Mastery = (typeof MASTERY_TYPES)[number];
 
-export const MONSTER_AILMENT_ELEMENTAL_TYPES = ["burning", "frozen", "shocked"] as const;
+const MONSTER_AILMENT_ELEMENTAL_TYPES = ["burning", "frozen", "shocked"] as const;
 export type MonsterAilmentElemental = (typeof MONSTER_AILMENT_ELEMENTAL_TYPES)[number];
 
 export const MONSTER_AILMENT_TYPES = [
@@ -159,8 +157,7 @@ export type Quest = Conquest | Routine | Triumph;
 export const QUEST_BONUS_TYPES = ["healthBonus", "staminaBonus", "damageBonus"] as const;
 export type QuestBonus = (typeof QUEST_BONUS_TYPES)[number];
 
-export const QUEST_CLASS_TYPES = ["conquest", "routine", "triumph"] as const;
-export type QuestClass = (typeof QUEST_CLASS_TYPES)[number];
+export type QuestClass = "conquest" | "routine" | "triumph";
 
 export type QuestStatus = QuestBonus | "achieved" | "incomplete";
 
@@ -421,7 +418,6 @@ export type StateKey =
   | "regenerationAmount"
   | "regenerationDuration"
   | "regenerationRate"
-  | "reserveRegenerationAmount"
   | "reserveRegenerationRateReduction"
   | "selectedTrait"
   | "showDamagePerSecond"
@@ -496,6 +492,6 @@ export const TRIUMPH_TYPES = [
   "deciding",
   "completing",
 ] as const;
-export type Triumph = (typeof TRIUMPH_TYPES)[number];
+type Triumph = (typeof TRIUMPH_TYPES)[number];
 
 export type WeaponAbility = "bleed" | "parry" | "stun";

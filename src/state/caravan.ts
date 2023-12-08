@@ -1,7 +1,7 @@
 import { atom, atomFamily, selector } from "recoil";
 
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import type { BlacksmithInventory, MerchantInventoryItem, Weapon } from "@neverquest/types";
+import type { Armor, MerchantInventoryItem, Shield, Weapon } from "@neverquest/types";
 import { CREW_TYPES, type Crew, type CrewStatus } from "@neverquest/types/unions";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
@@ -25,7 +25,11 @@ export const activeCrew = withStateKey("activeCrew", (key) =>
 );
 
 export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
-  atom<BlacksmithInventory>({
+  atom<{
+    armor: Armor | undefined;
+    shield: Shield | undefined;
+    weapon: Weapon | undefined;
+  }>({
     default: {
       armor: undefined,
       shield: undefined,

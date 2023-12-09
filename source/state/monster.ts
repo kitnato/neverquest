@@ -1,5 +1,6 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
+import { merchantInventory } from "./caravan";
 import { RETIREMENT_MINIMUM_LEVEL } from "@neverquest/data/general";
 import {
   DROP_CHANCES,
@@ -208,6 +209,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
       const { attenuation, base, bonus, boss } = ESSENCE;
 
       const encounterValue = get(encounter);
+      const merchantInventoryValue = get(merchantInventory);
       const ownedItemAntiqueCoin = get(ownedItem("antique coin"));
       const ownedItemMysteriousEgg = get(ownedItem("mysterious egg"));
       const stageValue = get(stage);
@@ -220,6 +222,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
         stageValue >= RETIREMENT_MINIMUM_LEVEL &&
         ownedItemAntiqueCoin !== undefined &&
         ownedItemMysteriousEgg === undefined &&
+        !merchantInventoryValue.some(({ ID }) => ID === INFUSABLES["mysterious egg"].item.ID) &&
         Math.random() <=
           DROP_CHANCES["mysterious egg"] *
             (stageValue === dropChanceOverrideStage ? dropChanceOverrideFactor : 1);
@@ -227,6 +230,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
         stageValue >= RETIREMENT_MINIMUM_LEVEL &&
         ownedItemAntiqueCoin !== undefined &&
         ownedItemMysteriousEgg !== undefined &&
+        !merchantInventoryValue.some(({ ID }) => ID === TRINKETS["torn manuscript"].item.ID) &&
         get(ownedItem("torn manuscript")) === undefined &&
         Math.random() <=
           DROP_CHANCES["torn manuscript"] *

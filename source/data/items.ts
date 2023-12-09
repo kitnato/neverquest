@@ -6,6 +6,7 @@ import IconAntiqueCoin from "@neverquest/icons/antique-coin.svg?react";
 import IconBandages from "@neverquest/icons/bandages.svg?react";
 import IconCompass from "@neverquest/icons/compass.svg?react";
 import IconElixir from "@neverquest/icons/elixir.svg?react";
+import IconEnderHook from "@neverquest/icons/ender-hook.svg?react";
 import IconFamiliar from "@neverquest/icons/familiar.svg?react";
 import IconFire from "@neverquest/icons/fire.svg?react";
 import IconStone from "@neverquest/icons/hearthstone.svg?react";
@@ -245,7 +246,7 @@ export const TRINKETS: Record<
       description: "The wielder is bestowed with extreme fortune.",
       ID: nanoid(),
       name: "antique coin",
-      price: 999,
+      price: 777,
       weight: 2,
     },
   },
@@ -257,6 +258,16 @@ export const TRINKETS: Record<
       name: "compass",
       price: 50,
       weight: 2,
+    },
+  },
+  "ender hook": {
+    Icon: IconEnderHook,
+    item: {
+      description: "Monsters are looted immediately upon death.",
+      ID: nanoid(),
+      name: "ender hook",
+      price: 1000,
+      weight: 15,
     },
   },
   familiar: {

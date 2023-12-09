@@ -676,10 +676,6 @@ Current stamina adds to unarmed damage & unarmed attacks have a chance to [stun]
 
 A [deflection](#deflection-chance) chance base value is added to the current deflection chance.
 
-#### Ninja
-
-Monsters are looted immediately.
-
 #### Nudist
 
 [Dodge](#dodge-chance) rate is doubled when not wearing any armor. This is capped out at the maximum possible dodge rate, effectively reducing the amount of attribute points required in [agility](#agility) to reach it.

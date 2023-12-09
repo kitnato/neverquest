@@ -6,13 +6,13 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { powerLevel } from "@neverquest/state/attributes";
 import { attackDuration, lootingDuration } from "@neverquest/state/character";
 import { encounter, stage } from "@neverquest/state/encounter";
+import { ownedItem } from "@neverquest/state/inventory";
 import {
   isMonsterAiling,
   monsterAttackDuration,
   monsterHealth,
   monsterHealthMaximum,
 } from "@neverquest/state/monster";
-import { isTraitAcquired } from "@neverquest/state/traits";
 import type { DeltaDisplay, DeltaReserveBase } from "@neverquest/types/ui";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -55,7 +55,7 @@ export function useChangeMonsterHealth() {
 
         if (newHealth <= 0) {
           set(monsterHealth, 0);
-          set(lootingDuration, get(isTraitAcquired("ninja")) ? 1 : LOOTING_RATE);
+          set(lootingDuration, get(ownedItem("ender hook")) === undefined ? LOOTING_RATE : 1);
 
           reset(attackDuration);
           reset(monsterAttackDuration);

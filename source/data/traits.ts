@@ -3,7 +3,6 @@ import IconBruiser from "@neverquest/icons/bruiser.svg?react";
 import IconColossus from "@neverquest/icons/colossus.svg?react";
 import IconExecutioner from "@neverquest/icons/executioner.svg?react";
 import IconInoculated from "@neverquest/icons/inoculated.svg?react";
-import IconNinja from "@neverquest/icons/ninja.svg?react";
 import IconNudist from "@neverquest/icons/nudist.svg?react";
 import IconSharpshooter from "@neverquest/icons/sharpshooter.svg?react";
 import IconShredder from "@neverquest/icons/shredder.svg?react";
@@ -57,10 +56,6 @@ export const TRAITS: Record<
       value: INOCULATED_DEFLECTION_BASE,
     })}.`,
     Icon: IconInoculated,
-  },
-  ninja: {
-    description: "Monsters are looted immediately.",
-    Icon: IconNinja,
   },
   nudist: {
     description: "Dodge rate is doubled while not wearing any armor.",

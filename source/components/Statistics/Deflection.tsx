@@ -6,26 +6,27 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
+import { INOCULATED_DEFLECTION_BASE } from "@neverquest/data/traits";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconDeflection from "@neverquest/icons/deflection.svg?react";
 import IconInoculated from "@neverquest/icons/inoculated.svg?react";
 import { armor } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
-import { deflection } from "@neverquest/state/statistics";
+import { deflectionChance } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Deflection() {
-  const { deflection: armorDeflection } = useRecoilValue(armor);
-  const deflectionValue = useRecoilValue(deflection);
+  const { deflection } = useRecoilValue(armor);
+  const deflectionChanceValue = useRecoilValue(deflectionChance);
   const isShowingDeflection = useRecoilValue(isShowing("deflection"));
   const isTraitAcquiredInoculated = useRecoilValue(isTraitAcquired("inoculated"));
 
   useDeltaText({
-    delta: "deflection",
+    delta: "deflectionChance",
     format: "percentage",
-    state: deflection,
+    state: deflectionChance,
   });
 
   if (isShowingDeflection) {
@@ -50,7 +51,7 @@ export function Deflection() {
                         <Stack direction="horizontal" gap={1}>
                           <IconImage Icon={IconDeflection} isSmall />
 
-                          {formatNumber({ format: "percentage", value: armorDeflection })}
+                          {formatNumber({ format: "percentage", value: deflection })}
                         </Stack>
                       </td>
                     </tr>
@@ -63,7 +64,10 @@ export function Deflection() {
                         </Stack>
                       </td>
 
-                      <td>x2</td>
+                      <td>{`+${formatNumber({
+                        format: "percentage",
+                        value: INOCULATED_DEFLECTION_BASE,
+                      })}`}</td>
                     </tr>
                   </DetailsTable>
                 </PopoverBody>
@@ -72,13 +76,13 @@ export function Deflection() {
             trigger={isTraitAcquiredInoculated ? ["focus", "hover"] : []}
           >
             <span>
-              {deflectionValue === 0
+              {deflectionChanceValue === 0
                 ? LABEL_EMPTY
-                : formatNumber({ format: "percentage", value: deflectionValue })}
+                : formatNumber({ format: "percentage", value: deflectionChanceValue })}
             </span>
           </OverlayTrigger>
 
-          <DeltasDisplay delta="deflection" />
+          <DeltasDisplay delta="deflectionChance" />
         </Stack>
       </IconDisplay>
     );

@@ -56,9 +56,13 @@ export function useAttack() {
         const weaponValue = get(weapon);
         const { staminaCost } = weaponValue;
         const isWeaponRanged = isRanged(weaponValue);
+        const criticalChanceValue = get(criticalChance);
         const hasInflictedCritical =
-          (isWeaponRanged && get(isTraitAcquired("sharpshooter")) && get(distance) > 0) ||
-          Math.random() <= get(criticalChance);
+          (criticalChanceValue > 0 &&
+            isWeaponRanged &&
+            get(isTraitAcquired("sharpshooter")) &&
+            get(distance) > 0) ||
+          Math.random() <= criticalChanceValue;
 
         set(isShowing("statistics"), true);
 

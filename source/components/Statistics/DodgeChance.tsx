@@ -12,6 +12,7 @@ import {
   LABEL_SEPARATOR,
   LABEL_UNKNOWN,
 } from "@neverquest/data/general";
+import { NUDIST_DODGE_BONUS } from "@neverquest/data/traits";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconAgility from "@neverquest/icons/agility.svg?react";
 import IconDodgePenalty from "@neverquest/icons/dodge-penalty.svg?react";
@@ -101,7 +102,7 @@ export function DodgeChance() {
                           </Stack>
                         </td>
 
-                        <td>x2</td>
+                        <td>x{NUDIST_DODGE_BONUS}</td>
                       </tr>
                     )}
 

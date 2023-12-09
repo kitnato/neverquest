@@ -51,6 +51,10 @@ export function useRetire() {
           set(isTraitAcquired(selectedTraitValue), true);
           reset(selectedTrait);
 
+          if (selectedTraitValue === "inoculated") {
+            set(isShowing("deflection"), true);
+          }
+
           progressQuest({ quest: "traits" });
           progressQuest({ quest: "traitsAll" });
         }

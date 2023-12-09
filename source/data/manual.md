@@ -658,27 +658,23 @@ Traits are permanent passive abilities acquired upon [retiring](#retirement) for
 
 #### Brawler
 
-Being unshielded doubles one-handed damage.
+Being unshielded increases one-handed melee damage.
 
 #### Bruiser
 
-Current stamina adds bonus damage while unarmed and unarmed attacks have a chance to [stun](#stun). Stunning requires the [traumatology](#traumatology) skill.
+Current stamina adds to unarmed damage & unarmed attacks have a chance to [stun](#stun). Stunning requires the [traumatology](#traumatology) skill.
 
 #### Colossus
 
-[Two-handed](#two-handed) weapons can be equipped alongside a [shield](#shields).
+[Two-handed](#two-handed) melee weapons are used as one-handed. This means a shield can be equipped alongside it and any effects applicable to one-handed weapons apply to two-handed weapons as well.
 
 #### Executioner
 
-[Critical](#critical-rating) strikes with a two-handed weapon always execute the monster (killing it outright).
-
-#### Field surgeon
-
-Health is fully restored when not in combat.
+[Critical](#critical-rating) strikes with a two-handed weapon always [execute](#execution-threshold) the monster. Critical strikes require the [assassination](#assassination) skill.
 
 #### Inoculated
 
-[Deflection](#deflection-chance) chance is doubled.
+A [deflection](#deflection-chance) chance base value is added to the current deflection chance.
 
 #### Ninja
 
@@ -686,11 +682,11 @@ Monsters are looted immediately.
 
 #### Nudist
 
-[Dodge](#dodge-chance) rate is doubled when not wearing any armor.
+[Dodge](#dodge-chance) rate is doubled when not wearing any armor. This is capped out at the maximum possible dodge rate, effectively reducing the amount of attribute points required in [agility](#agility) to reach it.
 
 #### Sharpshooter
 
-While [distant](#range), all attacks with a [ranged](#ranged-weapons) weapon are critical strikes.
+While at [range](#range), all attacks with a [ranged](#ranged-weapons) weapon are critical strikes.
 
 #### Shredder
 
@@ -698,11 +694,11 @@ While [distant](#range), all attacks with a [ranged](#ranged-weapons) weapon are
 
 #### Stalwart
 
-There are no penalties when wearing armor.
+There are no stamina penalties when wearing armor.
 
 #### Tank
 
-Having a shield equipped increases total [protection](#protection) based on its class.
+Total [protection](#protection) is increased by the equipped shield's block chance.
 
 ### Quests
 

@@ -27,7 +27,7 @@ export const ATTRIBUTES: Record<
     description: "Increases chance to dodge an attack.",
     Icon: IconAgility,
     increment: 0.022,
-    maximum: 0.7,
+    maximum: 0.75,
     powerBonus: 0.005,
     requiredSkill: "evasion",
   },

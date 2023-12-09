@@ -13,9 +13,13 @@ import type { SVGIcon } from "@neverquest/types/components";
 import type { Trait } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export const BRUISER_STUN_CHANCE = 0.25;
+export const BRAWLER_DAMAGE_BONUS = 0.5;
 
-export const TANK_PROTECTION_BONUS = 0.5;
+export const BRUISER_STUN_CHANCE = 0.3;
+
+export const INOCULATED_DEFLECTION_BASE = 0.25;
+
+export const NUDIST_DODGE_BONUS = 2;
 
 export const TRAITS: Record<
   Trait,
@@ -25,7 +29,10 @@ export const TRAITS: Record<
   }
 > = {
   brawler: {
-    description: "Being unshielded doubles one-handed damage.",
+    description: `Being unshielded increases one-handed melee damage by ${formatNumber({
+      format: "percentage",
+      value: BRAWLER_DAMAGE_BONUS,
+    })}.`,
     Icon: IconBrawler,
   },
   bruiser: {
@@ -37,7 +44,7 @@ export const TRAITS: Record<
     Icon: IconBruiser,
   },
   colossus: {
-    description: "A two-handed weapon can be equipped alongside a shield.",
+    description: "Two-handed melee weapons are used as one-handed.",
     Icon: IconColossus,
   },
   executioner: {
@@ -45,7 +52,10 @@ export const TRAITS: Record<
     Icon: IconExecutioner,
   },
   inoculated: {
-    description: "Deflection chance is doubled.",
+    description: `Base deflection chance is ${formatNumber({
+      format: "percentage",
+      value: INOCULATED_DEFLECTION_BASE,
+    })}.`,
     Icon: IconInoculated,
   },
   ninja: {
@@ -53,11 +63,11 @@ export const TRAITS: Record<
     Icon: IconNinja,
   },
   nudist: {
-    description: "Dodge rate is doubled when not wearing any armor.",
+    description: "Dodge rate is doubled while not wearing any armor.",
     Icon: IconNudist,
   },
   sharpshooter: {
-    description: "While distant, all attacks with a ranged weapon are critical hits.",
+    description: "While at range, all attacks with a ranged weapon are critical hits.",
     Icon: IconSharpshooter,
   },
   shredder: {
@@ -65,11 +75,11 @@ export const TRAITS: Record<
     Icon: IconShredder,
   },
   stalwart: {
-    description: "There are no penalties when wearing armor.",
+    description: "There are no stamina penalties when wearing armor.",
     Icon: IconStalwart,
   },
   tank: {
-    description: "Having a shield equipped increases total protection based on its class.",
+    description: "Total protection is increased by the equipped shield's block chance.",
     Icon: IconTank,
   },
 };

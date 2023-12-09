@@ -38,7 +38,7 @@ import {
 } from "@neverquest/state/reserves";
 import {
   blockChance,
-  deflection,
+  deflectionChance,
   dodgeChance,
   parryAbsorption,
   parryChance,
@@ -133,6 +133,7 @@ export function useDefend() {
         const thornsValue = get(thorns);
         const hasInflictedThorns = !hasBlocked && thornsValue > 0;
 
+        const deflectionChanceValue = get(deflectionChance);
         const monsterDamageAilingValue = get(monsterDamageAiling);
         const protectionValue = get(protection);
 
@@ -253,7 +254,7 @@ export function useDefend() {
 
         // If already poisoned, check if blighting has occurred and if it's been deflected.
         if (get(isPoisoned) && Math.random() <= get(blightChance)) {
-          if (Math.random() <= get(deflection)) {
+          if (Math.random() <= deflectionChanceValue) {
             progressQuest({ quest: "deflecting" });
 
             deltaStamina.push({
@@ -274,7 +275,7 @@ export function useDefend() {
 
         // If poisoning occurs, check if has been deflected, otherwise apply poison.
         if (Math.random() <= get(poisonChance)) {
-          if (Math.random() <= get(deflection)) {
+          if (Math.random() <= deflectionChanceValue) {
             progressQuest({ quest: "deflecting" });
 
             deltaHealth.push({

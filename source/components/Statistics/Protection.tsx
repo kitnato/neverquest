@@ -7,7 +7,6 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
-import { TANK_PROTECTION_BONUS } from "@neverquest/data/traits";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconArmor from "@neverquest/icons/armor.svg?react";
@@ -18,6 +17,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { questProgress } from "@neverquest/state/quests";
 import { protection } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
+import type { Shield } from "@neverquest/types";
 import { isUnshielded } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
@@ -82,7 +82,7 @@ export function Protection() {
                           ? LABEL_EMPTY
                           : `+${formatNumber({
                               format: "percentage",
-                              value: TANK_PROTECTION_BONUS,
+                              value: (shieldValue as Shield).block,
                             })}`}
                       </td>
                     </tr>

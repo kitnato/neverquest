@@ -40,6 +40,7 @@ export function AttributePoints() {
             </PopoverBody>
           </Popover>
         }
+        placement="left"
       >
         <span>{attributePointsValue}</span>
       </OverlayTrigger>

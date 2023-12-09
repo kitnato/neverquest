@@ -27,7 +27,7 @@ export function MonsterDamage() {
           <>
             {LABEL_SEPARATOR}
 
-            <span>{`(${formatNumber({ value: monsterDamageValue })}`}</span>
+            <span>{`(${formatNumber({ value: monsterDamageValue })})`}</span>
           </>
         )}
       </Stack>

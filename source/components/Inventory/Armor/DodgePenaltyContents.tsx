@@ -9,7 +9,7 @@ import { isTraitAcquired } from "@neverquest/state/traits";
 import type { GeneratorRange } from "@neverquest/types";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export function DodgePenaltyContents({ staminaCost }: { staminaCost: GeneratorRange | number }) {
+export function DodgePenaltyContents({ staminaCost }: { staminaCost?: GeneratorRange | number }) {
   const isTraitAcquiredStalwart = useRecoilValue(isTraitAcquired("stalwart"));
 
   return (
@@ -20,7 +20,7 @@ export function DodgePenaltyContents({ staminaCost }: { staminaCost: GeneratorRa
 
           {LABEL_NONE}
         </>
-      ) : staminaCost === Number.POSITIVE_INFINITY ? (
+      ) : staminaCost === undefined ? (
         <>Cannot dodge.</>
       ) : staminaCost === 0 ? (
         LABEL_NONE

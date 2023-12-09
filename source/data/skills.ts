@@ -11,7 +11,7 @@ import IconTraumatology from "@neverquest/icons/traumatology.svg?react";
 import type { SVGIcon } from "@neverquest/types/components";
 import type { Crew, Showing, Skill, WeaponAbility } from "@neverquest/types/unions";
 
-export const SKILL_PRICE_BASE = 100;
+export const SKILL_PRICE_BASE = 90;
 export const SKILL_PRICE_FACTOR = 2;
 
 export const SKILLS: Record<

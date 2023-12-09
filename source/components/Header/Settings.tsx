@@ -74,7 +74,7 @@ export function Settings() {
 
               <SettingsSwitch label="Show gear comparisons" state={showGearComparison} />
 
-              <SettingsSwitch label="Show gear powerLevel" state={showGearLevel} />
+              <SettingsSwitch label="Show gear level" state={showGearLevel} />
 
               <SettingsSwitch label="Allow profanity" state={allowProfanity} />
 

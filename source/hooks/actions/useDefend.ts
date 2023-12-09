@@ -75,6 +75,8 @@ export function useDefend() {
           speed: "fast",
         });
 
+        let isNegated = false;
+
         // If stunned, check if hit connects at all.
         if (get(isMonsterAiling("stunned")) && Math.random() <= AILMENT_PENALTY.stunned) {
           addDelta({
@@ -85,13 +87,13 @@ export function useDefend() {
             delta: "health",
           });
 
-          return;
+          isNegated = true;
         }
 
         const deltaHealth: DeltaDisplay[] = [];
         const deltaStamina: DeltaDisplay[] = [];
 
-        // If attack is dodged, nothing else happens (all damage is negated).
+        // If attack is dodged, all damage is negated.
         if (Math.random() <= get(dodgeChance)) {
           const armorStaminaCost = get(armor).staminaCost;
 
@@ -110,7 +112,7 @@ export function useDefend() {
               changeStamina({ value: -armorStaminaCost });
             }
 
-            return;
+            isNegated = true;
           } else {
             deltaStamina.push(
               {
@@ -127,220 +129,222 @@ export function useDefend() {
           }
         }
 
-        const { staminaCost: shieldStaminaCost } = get(shield);
-        const hasParried = Math.random() <= get(parryChance);
-        const hasBlocked = !hasParried && Math.random() <= get(blockChance);
-        const thornsValue = get(thorns);
-        const hasInflictedThorns = !hasBlocked && thornsValue > 0;
+        if (!isNegated) {
+          const { staminaCost: shieldStaminaCost } = get(shield);
+          const hasParried = Math.random() <= get(parryChance);
+          const hasBlocked = !hasParried && Math.random() <= get(blockChance);
+          const thornsValue = get(thorns);
+          const hasInflictedThorns = !hasBlocked && thornsValue > 0;
 
-        const deflectionChanceValue = get(deflectionChance);
-        const monsterDamageAilingValue = get(monsterDamageAiling);
-        const protectionValue = get(protection);
+          const deflectionChanceValue = get(deflectionChance);
+          const monsterDamageAilingValue = get(monsterDamageAiling);
+          const protectionValue = get(protection);
 
-        const deltaMonsterHealth: DeltaDisplay[] = [];
-        const totalDamage = protectionValue - monsterDamageAilingValue;
+          const deltaMonsterHealth: DeltaDisplay[] = [];
+          const totalDamage = protectionValue - monsterDamageAilingValue;
 
-        let healthDamage = totalDamage < 0 ? totalDamage : 0;
-        let monsterHealthDamage = 0;
+          let healthDamage = totalDamage < 0 ? totalDamage : 0;
+          let monsterHealthDamage = 0;
 
-        // If parrying occurs, check & apply stamina cost.
-        if (hasParried) {
-          if (get(canAttackOrParry)) {
-            const parryReflected = Math.round(monsterDamageAilingValue * get(parryDamage));
+          // If parrying occurs, check & apply stamina cost.
+          if (hasParried) {
+            if (get(canAttackOrParry)) {
+              const parryReflected = Math.round(monsterDamageAilingValue * get(parryDamage));
 
-            healthDamage -= Math.round(healthDamage * get(parryAbsorption));
-            monsterHealthDamage += parryReflected;
+              healthDamage -= Math.round(healthDamage * get(parryAbsorption));
+              monsterHealthDamage += parryReflected;
 
-            progressQuest({ quest: "parrying" });
+              progressQuest({ quest: "parrying" });
+
+              deltaMonsterHealth.push(
+                {
+                  color: "text-muted",
+                  value: "PARRY",
+                },
+                {
+                  color: "text-danger",
+                  value: `(-${parryReflected})`,
+                },
+              );
+
+              deltaHealth.push(
+                {
+                  color: "text-muted",
+                  value: "PARRIED",
+                },
+                {
+                  color: "text-danger",
+                  value: `(${healthDamage})`,
+                },
+              );
+            } else {
+              deltaStamina.push(
+                {
+                  color: "text-muted",
+                  value: "CANNOT PARRY",
+                },
+                {
+                  color: "text-danger",
+                  value: `(${get(weapon).staminaCost})`,
+                },
+              );
+
+              progressQuest({ quest: "exhausting" });
+            }
+          }
+
+          // If not parried and blocking occurs, check & apply stamina cost.
+          if (hasBlocked) {
+            if (get(canBlock)) {
+              healthDamage = 0;
+
+              progressQuest({ quest: "blocking" });
+
+              deltaHealth.push({
+                color: "text-muted",
+                value: "BLOCKED",
+              });
+
+              changeStamina({ value: -shieldStaminaCost });
+
+              if (Math.random() <= get(staggerChance)) {
+                set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")));
+
+                progressQuest({ quest: "staggering" });
+
+                changeMonsterHealth({
+                  delta: {
+                    color: "text-muted",
+                    value: "STAGGER",
+                  },
+                  value: 0,
+                });
+              }
+            } else {
+              deltaStamina.push(
+                {
+                  color: "text-muted",
+                  value: "CANNOT BLOCK",
+                },
+                {
+                  color: "text-danger",
+                  value: `(${shieldStaminaCost})`,
+                },
+              );
+
+              progressQuest({ quest: "exhausting" });
+            }
+          }
+
+          // If neither dodged, parried nor blocked, show damage with protection and increase resilience.
+          if (!hasBlocked && !hasParried) {
+            deltaHealth.push({
+              color: "text-danger",
+              value: healthDamage,
+            });
+
+            if (protectionValue > 0) {
+              deltaHealth.push({
+                color: "text-muted",
+                // In the case of 0 health damage, show only inflicted.
+                value: `(${Math.max(protectionValue, healthDamage)})`,
+              });
+            }
+          }
+
+          set(isShowing("recovery"), true);
+          set(recoveryDuration, get(recoveryRate));
+
+          // If already poisoned, check if blighting has occurred and if it's been deflected.
+          if (get(isPoisoned) && Math.random() <= get(blightChance)) {
+            if (Math.random() <= deflectionChanceValue) {
+              progressQuest({ quest: "deflecting" });
+
+              deltaStamina.push({
+                color: "text-success",
+                value: "DEFLECTED",
+              });
+            } else {
+              progressQuest({ quest: "blighting" });
+
+              set(blight, (currentBlight) => currentBlight + 1);
+
+              deltaStamina.push({
+                color: "text-muted",
+                value: "BLIGHTED",
+              });
+            }
+          }
+
+          // If poisoning occurs, check if has been deflected, otherwise apply poison.
+          if (Math.random() <= get(poisonChance)) {
+            if (Math.random() <= deflectionChanceValue) {
+              progressQuest({ quest: "deflecting" });
+
+              deltaHealth.push({
+                color: "text-success",
+                value: "DEFLECTED",
+              });
+            } else {
+              progressQuest({ quest: "poisoning" });
+
+              set(poisonDuration, get(poisonLength));
+
+              deltaHealth.push({
+                color: "text-muted",
+                value: "POISONED",
+              });
+            }
+          }
+
+          // Calculate & apply thorns damage.
+          if (hasInflictedThorns) {
+            progressQuest({ quest: "thorns" });
+
+            monsterHealthDamage += thornsValue;
 
             deltaMonsterHealth.push(
               {
                 color: "text-muted",
-                value: "PARRY",
+                value: "THORNS",
               },
               {
                 color: "text-danger",
-                value: `(-${parryReflected})`,
+                value: `(-${thornsValue})`,
               },
             );
-
-            deltaHealth.push(
-              {
-                color: "text-muted",
-                value: "PARRIED",
-              },
-              {
-                color: "text-danger",
-                value: `(${healthDamage})`,
-              },
-            );
-          } else {
-            deltaStamina.push(
-              {
-                color: "text-muted",
-                value: "CANNOT PARRY",
-              },
-              {
-                color: "text-danger",
-                value: `(${get(weapon).staminaCost})`,
-              },
-            );
-
-            progressQuest({ quest: "exhausting" });
           }
-        }
 
-        // If not parried and blocking occurs, check & apply stamina cost.
-        if (hasBlocked) {
-          if (get(canBlock)) {
-            healthDamage = 0;
+          // Take any damage and show any stamina costs.
+          changeHealth({ delta: deltaHealth, value: healthDamage });
 
-            progressQuest({ quest: "blocking" });
-
-            deltaHealth.push({
-              color: "text-muted",
-              value: "BLOCKED",
-            });
-
-            changeStamina({ value: -shieldStaminaCost });
-
-            if (Math.random() <= get(staggerChance)) {
-              set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")));
-
-              progressQuest({ quest: "staggering" });
-
-              changeMonsterHealth({
-                delta: {
-                  color: "text-muted",
-                  value: "STAGGER",
-                },
-                value: 0,
-              });
-            }
-          } else {
-            deltaStamina.push(
-              {
-                color: "text-muted",
-                value: "CANNOT BLOCK",
-              },
-              {
-                color: "text-danger",
-                value: `(${shieldStaminaCost})`,
-              },
-            );
-
-            progressQuest({ quest: "exhausting" });
-          }
-        }
-
-        // If neither dodged, parried nor blocked, show damage with protection and increase resilience.
-        if (!hasBlocked && !hasParried) {
-          deltaHealth.push({
-            color: "text-danger",
-            value: healthDamage,
+          addDelta({
+            contents: deltaStamina,
+            delta: "stamina",
           });
 
-          if (protectionValue > 0) {
-            deltaHealth.push({
-              color: "text-muted",
-              // In the case of 0 health damage, show only inflicted.
-              value: `(${Math.max(protectionValue, healthDamage)})`,
+          trainMastery("resilience");
+          trainMastery("stability");
+
+          // Inflict any armor elemental effects.
+          for (const elemental of ELEMENTAL_TYPES) {
+            inflictElementalAilment({ elemental, slot: "armor" });
+          }
+
+          // Inflict any parry and/or thorns damage.
+          if (monsterHealthDamage > 0) {
+            changeMonsterHealth({
+              damageType: hasInflictedThorns ? "thorns" : hasParried ? "parry" : undefined,
+              delta: deltaMonsterHealth,
+              value: -monsterHealthDamage,
+            });
+
+            animateElement({
+              animation: "headShake",
+              element: get(monsterElement),
+              speed: "fast",
             });
           }
-        }
-
-        set(isShowing("recovery"), true);
-        set(recoveryDuration, get(recoveryRate));
-
-        // If already poisoned, check if blighting has occurred and if it's been deflected.
-        if (get(isPoisoned) && Math.random() <= get(blightChance)) {
-          if (Math.random() <= deflectionChanceValue) {
-            progressQuest({ quest: "deflecting" });
-
-            deltaStamina.push({
-              color: "text-success",
-              value: "DEFLECTED",
-            });
-          } else {
-            progressQuest({ quest: "blighting" });
-
-            set(blight, (currentBlight) => currentBlight + 1);
-
-            deltaStamina.push({
-              color: "text-muted",
-              value: "BLIGHTED",
-            });
-          }
-        }
-
-        // If poisoning occurs, check if has been deflected, otherwise apply poison.
-        if (Math.random() <= get(poisonChance)) {
-          if (Math.random() <= deflectionChanceValue) {
-            progressQuest({ quest: "deflecting" });
-
-            deltaHealth.push({
-              color: "text-success",
-              value: "DEFLECTED",
-            });
-          } else {
-            progressQuest({ quest: "poisoning" });
-
-            set(poisonDuration, get(poisonLength));
-
-            deltaHealth.push({
-              color: "text-muted",
-              value: "POISONED",
-            });
-          }
-        }
-
-        // Calculate & apply thorns damage.
-        if (hasInflictedThorns) {
-          progressQuest({ quest: "thorns" });
-
-          monsterHealthDamage += thornsValue;
-
-          deltaMonsterHealth.push(
-            {
-              color: "text-muted",
-              value: "THORNS",
-            },
-            {
-              color: "text-danger",
-              value: `(-${thornsValue})`,
-            },
-          );
-        }
-
-        // Take any damage and show any stamina costs.
-        changeHealth({ delta: deltaHealth, value: healthDamage });
-
-        addDelta({
-          contents: deltaStamina,
-          delta: "stamina",
-        });
-
-        trainMastery("resilience");
-        trainMastery("stability");
-
-        // Inflict any armor elemental effects.
-        for (const elemental of ELEMENTAL_TYPES) {
-          inflictElementalAilment({ elemental, slot: "armor" });
-        }
-
-        // Inflict any parry and/or thorns damage.
-        if (monsterHealthDamage > 0) {
-          changeMonsterHealth({
-            damageType: hasInflictedThorns ? "thorns" : hasParried ? "parry" : undefined,
-            delta: deltaMonsterHealth,
-            value: -monsterHealthDamage,
-          });
-
-          animateElement({
-            animation: "headShake",
-            element: get(monsterElement),
-            speed: "fast",
-          });
         }
 
         if (get(isAttacking) && get(monsterAttackDuration) === 0) {

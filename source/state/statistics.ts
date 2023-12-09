@@ -232,7 +232,7 @@ export const protection = withStateKey("protection", (key) =>
       const shieldValue = get(shield);
 
       if (!isUnshielded(shieldValue) && get(isTraitAcquired("tank"))) {
-        return Math.round(protection * (1 + (shieldValue as Shield).block));
+        return Math.ceil(protection * (1 + (shieldValue as Shield).block));
       }
 
       return protection;

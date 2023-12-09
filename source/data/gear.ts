@@ -31,7 +31,7 @@ export const ARMOR_NONE: Omit<Armor, "gearClass" | "isEquipped" | "price"> = {
 export const ARMOR_SPECIFICATIONS: Record<
   ArmorClass,
   Omit<GearBase, "staminaCost"> & {
-    deflection: [GeneratorRange, GeneratorRange] | undefined;
+    deflection?: [GeneratorRange, GeneratorRange];
     Icon: SVGIcon;
     protection: [GeneratorRange, GeneratorRange];
     staminaCost: number | [GeneratorRange, GeneratorRange];
@@ -55,7 +55,6 @@ export const ARMOR_SPECIFICATIONS: Record<
     ],
   },
   light: {
-    deflection: undefined,
     Icon: IconArmorLight,
     price: { maximum: 5000, minimum: 1 },
     protection: [
@@ -106,7 +105,7 @@ export const SHIELD_SPECIFICATIONS: Record<
   GearBase & {
     block: [GeneratorRange, GeneratorRange];
     Icon: SVGIcon;
-    stagger: [GeneratorRange, GeneratorRange] | undefined;
+    stagger?: [GeneratorRange, GeneratorRange];
   }
 > = {
   medium: {
@@ -117,8 +116,8 @@ export const SHIELD_SPECIFICATIONS: Record<
     Icon: IconShieldMedium,
     price: { maximum: 4000, minimum: 4 },
     stagger: [
-      { maximum: 0.22, minimum: 0.2 },
-      { maximum: 0.35, minimum: 0.3 },
+      { maximum: 0.45, minimum: 0.4 },
+      { maximum: 0.55, minimum: 0.53 },
     ],
     staminaCost: [
       { maximum: 4, minimum: 3 },
@@ -136,7 +135,6 @@ export const SHIELD_SPECIFICATIONS: Record<
     ],
     Icon: IconShieldSmall,
     price: { maximum: 2000, minimum: 2 },
-    stagger: undefined,
     staminaCost: [
       { maximum: 2, minimum: 1 },
       { maximum: 20, minimum: 15 },
@@ -148,14 +146,14 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   tower: {
     block: [
-      { maximum: 0.33, minimum: 0.3 },
+      { maximum: 0.38, minimum: 0.35 },
       { maximum: 0.5, minimum: 0.48 },
     ],
     Icon: IconShieldTower,
     price: { maximum: 5500, minimum: 7 },
     stagger: [
-      { maximum: 0.32, minimum: 0.3 },
-      { maximum: 0.55, minimum: 0.5 },
+      { maximum: 0.65, minimum: 0.6 },
+      { maximum: 0.9, minimum: 0.88 },
     ],
     staminaCost: [
       { maximum: 7, minimum: 6 },

@@ -26,7 +26,7 @@ export function MonsterDistance() {
 
   useAnimate({
     delta: setMonsterDistance,
-    factor: isMonsterFrozen ? AILMENT_PENALTY.staggered : 1,
+    factor: isMonsterFrozen ? AILMENT_PENALTY.frozen : 1,
     stop: !isAttackingValue || isMonsterDeadValue || hasMonsterClosedValue,
   });
 

@@ -75,7 +75,7 @@ export const CREW: Record<
     Icon: IconMercenary,
     interaction: "Train",
     monologues: { 1: "Perhaps I can teach you something.", 100: "Overbearing darkness ..." },
-    price: 90,
+    price: 75,
     requiredStage: 15,
   },
   merchant: {

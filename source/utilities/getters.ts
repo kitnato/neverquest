@@ -211,9 +211,9 @@ export function getGrowthLogarithmic(x: number) {
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
-// f(1) = 0, f(50) = ~0.6, f(100) = ~1
+// f(1) = ~0, f(35) = ~0.36, f(50) = ~0.76, f(100) = ~1
 export function getGrowthSigmoid(x: number) {
-  return 1 / (1 + Math.pow(Math.E, -0.13 * (x - 47))) - 0.0026 * Math.pow(Math.E, -0.08 * x);
+  return 1 / (1 + Math.pow(Math.E, -0.12 * (x - 40)) - 0.008);
 }
 
 // https://en.wikipedia.org/wiki/Triangular_number

@@ -28,7 +28,7 @@ export function useChangeMonsterHealth() {
         delta,
         value,
       }: DeltaReserveBase & {
-        damageType?: "bleed" | "critical" | "execute" | "parry" | "thorns";
+        damageType?: "bleeding" | "critical" | "execution" | "parry" | "thorns";
       }) => {
         const get = getSnapshotGetter(snapshot);
 
@@ -83,7 +83,7 @@ export function useChangeMonsterHealth() {
           }
 
           switch (damageType) {
-            case "bleed": {
+            case "bleeding": {
               progressQuest({ quest: "bleedingKill" });
               break;
             }
@@ -93,7 +93,7 @@ export function useChangeMonsterHealth() {
               break;
             }
 
-            case "execute": {
+            case "execution": {
               progressQuest({ quest: "executing" });
               break;
             }

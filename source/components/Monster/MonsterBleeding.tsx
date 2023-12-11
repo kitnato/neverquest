@@ -32,7 +32,7 @@ export function MonsterBleeding() {
     delta: setMonsterBleedingDelta,
     onDelta: () => {
       changeMonsterHealth({
-        damageType: "bleed",
+        damageType: "bleeding",
         value: -bleedDamageValue,
       });
 

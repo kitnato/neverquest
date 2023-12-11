@@ -11,7 +11,7 @@ import {
 import { useHeal } from "@neverquest/hooks/actions/useHeal";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
-import IconSurgery from "@neverquest/icons/surgery.svg?react";
+import IconHealing from "@neverquest/icons/healing.svg?react";
 import { isHealthAtMaximum, isHealthLow } from "@neverquest/state/reserves";
 import { essence } from "@neverquest/state/resources";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -35,8 +35,8 @@ export function ReceiveHealing() {
       <h6>Receive healing</h6>
 
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        <IconDisplay Icon={IconSurgery} tooltip="Surgery">
-          Regain full health
+        <IconDisplay Icon={IconHealing} tooltip="Healing">
+          {isHealthLowValue ? "Emergency treatment" : "Minor surgery"}
         </IconDisplay>
 
         <Stack direction="horizontal" gap={3}>
@@ -64,7 +64,7 @@ export function ReceiveHealing() {
                 }}
                 variant="outline-dark"
               >
-                Heal
+                Operate
               </Button>
             </span>
           </OverlayTrigger>

@@ -54,7 +54,6 @@ export function useAttack() {
 
         const monsterHealthValue = get(monsterHealth);
         const weaponValue = get(weapon);
-        const { staminaCost } = weaponValue;
         const isWeaponRanged = isRanged(weaponValue);
         const criticalChanceValue = get(criticalChance);
         const hasInflictedCritical =
@@ -71,8 +70,8 @@ export function useAttack() {
         }
 
         if (get(canAttackOrParry) && get(hasEnoughAmmunition)) {
-          if (staminaCost > 0) {
-            changeStamina({ value: -staminaCost });
+          if (weaponValue.staminaCost > 0) {
+            changeStamina({ value: -weaponValue.staminaCost });
           }
 
           animateElement({
@@ -106,7 +105,7 @@ export function useAttack() {
             (hasInflictedCritical && get(isTraitAcquired("executioner")))
           ) {
             changeMonsterHealth({
-              damageType: "execute",
+              damageType: "execution",
               delta: [
                 {
                   color: "text-muted",
@@ -119,52 +118,63 @@ export function useAttack() {
               ],
               value: -monsterHealthValue,
             });
+          } else {
+            const monsterDeltas: DeltaDisplay[] = [];
 
-            return;
-          }
+            if (
+              get(monsterAilmentDuration("bleeding")) === 0 &&
+              Math.random() <= get(bleedChance)
+            ) {
+              set(monsterAilmentDuration("bleeding"), get(bleed).duration);
 
-          const monsterDeltas: DeltaDisplay[] = [];
+              progressQuest({ quest: "bleeding" });
 
-          if (get(monsterAilmentDuration("bleeding")) === 0 && Math.random() <= get(bleedChance)) {
-            set(monsterAilmentDuration("bleeding"), get(bleed).duration);
+              monsterDeltas.push({
+                color: "text-muted",
+                value: "BLEEDING",
+              });
+            }
 
-            progressQuest({ quest: "bleeding" });
+            if (hasInflictedCritical) {
+              progressQuest({ quest: "critical" });
 
-            monsterDeltas.push({
-              color: "text-muted",
-              value: "BLEEDING",
+              monsterDeltas.push({
+                color: "text-muted",
+                value: "CRITICAL",
+              });
+            }
+
+            if (Math.random() <= get(stunChance)) {
+              set(monsterAilmentDuration("stunned"), get(masteryStatistic("might")));
+
+              progressQuest({ quest: "stunning" });
+
+              monsterDeltas.push({
+                color: "text-muted",
+                value: "STUN",
+              });
+            }
+
+            for (const elemental of ELEMENTAL_TYPES) {
+              inflictElementalAilment({ elemental, slot: "weapon" });
+            }
+
+            const totalDamage = -Math.round(
+              hasInflictedCritical ? get(criticalStrike) : get(damage),
+            );
+
+            changeMonsterHealth({
+              damageType: hasInflictedCritical ? "critical" : undefined,
+              delta: [
+                ...monsterDeltas,
+                {
+                  color: "text-danger",
+                  value: totalDamage,
+                },
+              ],
+              value: totalDamage,
             });
           }
-
-          if (hasInflictedCritical) {
-            progressQuest({ quest: "critical" });
-
-            monsterDeltas.push({
-              color: "text-muted",
-              value: "CRITICAL",
-            });
-          }
-
-          if (Math.random() <= get(stunChance)) {
-            set(monsterAilmentDuration("stunned"), get(masteryStatistic("might")));
-
-            progressQuest({ quest: "stunning" });
-
-            monsterDeltas.push({
-              color: "text-muted",
-              value: "STUN",
-            });
-          }
-
-          for (const elemental of ELEMENTAL_TYPES) {
-            inflictElementalAilment({ elemental, slot: "weapon" });
-          }
-
-          changeMonsterHealth({
-            damageType: hasInflictedCritical ? "critical" : undefined,
-            delta: monsterDeltas,
-            value: -Math.round(hasInflictedCritical ? get(criticalStrike) : get(damage)),
-          });
 
           trainMastery("butchery");
           trainMastery("cruelty");
@@ -180,7 +190,7 @@ export function useAttack() {
               },
               {
                 color: "text-danger",
-                value: `(${staminaCost})`,
+                value: `(${weaponValue.staminaCost})`,
               },
             ],
             delta: "stamina",

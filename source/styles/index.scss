@@ -173,16 +173,6 @@ td.text-end > .hstack {
   }
 }
 
-.table-details {
-  tr > td:nth-child(1) {
-    vertical-align: middle;
-  }
-
-  tr > td:nth-child(2) {
-    vertical-align: bottom;
-  }
-}
-
 .text-blue {
   color: $blue;
 }

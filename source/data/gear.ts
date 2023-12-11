@@ -110,8 +110,8 @@ export const SHIELD_SPECIFICATIONS: Record<
 > = {
   medium: {
     block: [
-      { maximum: 0.21, minimum: 0.2 },
-      { maximum: 0.33, minimum: 0.31 },
+      { maximum: 0.11, minimum: 0.1 },
+      { maximum: 0.25, minimum: 0.245 },
     ],
     Icon: IconShieldMedium,
     price: { maximum: 4000, minimum: 4 },
@@ -121,7 +121,7 @@ export const SHIELD_SPECIFICATIONS: Record<
     ],
     staminaCost: [
       { maximum: 4, minimum: 3 },
-      { maximum: 35, minimum: 30 },
+      { maximum: 30, minimum: 25 },
     ],
     weight: [
       { maximum: 5, minimum: 3 },
@@ -130,8 +130,8 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   small: {
     block: [
-      { maximum: 0.12, minimum: 0.1 },
-      { maximum: 0.22, minimum: 0.2 },
+      { maximum: 0.08, minimum: 0.075 },
+      { maximum: 0.15, minimum: 0.14 },
     ],
     Icon: IconShieldSmall,
     price: { maximum: 2000, minimum: 2 },
@@ -146,8 +146,8 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   tower: {
     block: [
-      { maximum: 0.38, minimum: 0.35 },
-      { maximum: 0.5, minimum: 0.48 },
+      { maximum: 0.25, minimum: 0.23 },
+      { maximum: 0.4, minimum: 0.38 },
     ],
     Icon: IconShieldTower,
     price: { maximum: 5500, minimum: 7 },
@@ -157,11 +157,11 @@ export const SHIELD_SPECIFICATIONS: Record<
     ],
     staminaCost: [
       { maximum: 7, minimum: 6 },
-      { maximum: 45, minimum: 40 },
+      { maximum: 40, minimum: 35 },
     ],
     weight: [
-      { maximum: 8, minimum: 5 },
-      { maximum: 65, minimum: 60 },
+      { maximum: 9, minimum: 6 },
+      { maximum: 70, minimum: 65 },
     ],
   },
 };

@@ -113,7 +113,7 @@ export const ELEMENTALS: Record<
   fire: {
     ailment: "burning",
     color: "text-orange",
-    duration: { maximum: 7000, minimum: 3000 },
+    duration: { maximum: 6000, minimum: 3000 },
     durationMaximum: 15_000,
     gem: "ruby",
     Icon: IconFire,
@@ -121,7 +121,7 @@ export const ELEMENTALS: Record<
   ice: {
     ailment: "frozen",
     color: "text-blue",
-    duration: { maximum: 2000, minimum: 800 },
+    duration: { maximum: 2500, minimum: 1000 },
     durationMaximum: 4000,
     gem: "sapphire",
     Icon: IconIce,
@@ -129,7 +129,7 @@ export const ELEMENTALS: Record<
   lightning: {
     ailment: "shocked",
     color: "text-yellow",
-    duration: { maximum: 3000, minimum: 1500 },
+    duration: { maximum: 2000, minimum: 800 },
     durationMaximum: 7000,
     gem: "topaz",
     Icon: IconLightning,

@@ -14,7 +14,7 @@ export const AILMENT_DESCRIPTION: Record<MonsterAilment, string> = {
   shocked: `Dealing ${formatNumber({
     decimals: 0,
     format: "percentage",
-    value: AILMENT_PENALTY.shocked,
+    value: 1 - AILMENT_PENALTY.shocked,
   })} decreased damage.`,
   staggered: `Taking ${formatNumber({
     decimals: 0,

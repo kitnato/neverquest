@@ -20,40 +20,42 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
         <td className={CLASS_TABLE_CELL_ITALIC}>{`Gems (${appliedGems}/${GEMS_MAXIMUM}):`}</td>
 
         <td>
-          {stackItems(
-            gems.toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
-          ).map(({ amount, item }) => {
-            const { ID, name } = item;
-            const { elemental } = GEMS[name];
-            const { color, Icon } = ELEMENTALS[elemental];
-            const effect = elementalEffects[elemental];
+          <Stack gap={1}>
+            {stackItems(
+              gems.toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
+            ).map(({ amount, item }) => {
+              const { ID, name } = item;
+              const { elemental } = GEMS[name];
+              const { color, Icon } = ELEMENTALS[elemental];
+              const effect = elementalEffects[elemental];
 
-            return (
-              <Stack direction="horizontal" gap={1} key={ID}>
-                <span className={color}>{`${
-                  typeof effect === "number"
-                    ? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
-                    : formatNumber({ value: effect.damage })
-                }`}</span>
+              return (
+                <Stack direction="horizontal" gap={1} key={ID}>
+                  <span className={color}>{`${
+                    typeof effect === "number"
+                      ? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
+                      : formatNumber({ value: effect.damage })
+                  }`}</span>
 
-                {LABEL_SEPARATOR}
+                  {LABEL_SEPARATOR}
 
-                <IconImage Icon={Icon} isSmall />
+                  <IconImage Icon={Icon} isSmall />
 
-                {`${
-                  typeof effect === "number"
-                    ? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
-                    : formatNumber({ format: "time", value: effect.duration })
-                } `}
+                  {`${
+                    typeof effect === "number"
+                      ? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
+                      : formatNumber({ format: "time", value: effect.duration })
+                  } `}
 
-                {LABEL_SEPARATOR}
+                  {LABEL_SEPARATOR}
 
-                <IconImage Icon={IconGem} isSmall />
+                  <IconImage Icon={IconGem} isSmall />
 
-                {amount}
-              </Stack>
-            );
-          })}
+                  {amount}
+                </Stack>
+              );
+            })}
+          </Stack>
         </td>
       </tr>
     );

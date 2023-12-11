@@ -163,7 +163,7 @@ export function useDefend() {
                 },
                 {
                   color: "text-danger",
-                  value: `(-${parryReflected})`,
+                  value: `-${parryReflected}`,
                 },
               );
 
@@ -174,7 +174,7 @@ export function useDefend() {
                 },
                 {
                   color: "text-danger",
-                  value: `(${healthDamage})`,
+                  value: `${healthDamage}`,
                 },
               );
             } else {
@@ -310,7 +310,7 @@ export function useDefend() {
               },
               {
                 color: "text-danger",
-                value: `(-${thornsValue})`,
+                value: `-${thornsValue}`,
               },
             );
           }

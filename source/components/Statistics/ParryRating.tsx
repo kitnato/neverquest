@@ -5,7 +5,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
+import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { PARRY_ABSORPTION, PARRY_DAMAGE } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconFinesse from "@neverquest/icons/finesse.svg?react";
@@ -14,21 +14,14 @@ import IconParry from "@neverquest/icons/parry.svg?react";
 import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import {
-  parryAbsorption,
-  parryChance,
-  parryDamage,
-  parryRating,
-} from "@neverquest/state/statistics";
+import { parryChance, parryRating } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function ParryRating() {
   const escrimeValue = useRecoilValue(isSkillAcquired("escrime"));
   const finesseValue = useRecoilValue(masteryStatistic("finesse"));
-  const parryAbsorptionValue = useRecoilValue(parryAbsorption);
   const parryChanceValue = useRecoilValue(parryChance);
-  const parryDamageValue = useRecoilValue(parryDamage);
   const parryRatingValue = useRecoilValue(parryRating);
   const { gearClass } = useRecoilValue(weapon);
 
@@ -71,7 +64,18 @@ export function ParryRating() {
                       <td className={CLASS_TABLE_CELL_ITALIC}>Damage reflected:</td>
 
                       <td>
-                        {formatNumber({ decimals: 0, format: "percentage", value: PARRY_DAMAGE })}
+                        <Stack direction="horizontal" gap={1}>
+                          {formatNumber({ decimals: 0, format: "percentage", value: PARRY_DAMAGE })}
+
+                          <span>{LABEL_SEPARATOR}</span>
+
+                          <IconImage Icon={IconFinesse} isSmall />
+
+                          {`+${formatNumber({
+                            format: "percentage",
+                            value: finesseValue,
+                          })}`}
+                        </Stack>
                       </td>
                     </tr>
 
@@ -79,45 +83,24 @@ export function ParryRating() {
                       <td className={CLASS_TABLE_CELL_ITALIC}>Damage absorbed:</td>
 
                       <td>
-                        {formatNumber({
-                          decimals: 0,
-                          format: "percentage",
-                          value: PARRY_ABSORPTION,
-                        })}
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
+                          {formatNumber({
+                            decimals: 0,
+                            format: "percentage",
+                            value: PARRY_ABSORPTION,
+                          })}
+
+                          <span>{LABEL_SEPARATOR}</span>
+
                           <IconImage Icon={IconFinesse} isSmall />
-                          Finesse:
+
+                          {`+${formatNumber({
+                            format: "percentage",
+                            value: finesseValue,
+                          })}`}
                         </Stack>
                       </td>
-
-                      <td>{`+${formatNumber({
-                        format: "percentage",
-                        value: finesseValue,
-                      })}`}</td>
                     </tr>
-
-                    {finesseValue > 0 && (
-                      <>
-                        <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Total reflected:</td>
-
-                          <td>{formatNumber({ format: "percentage", value: parryDamageValue })}</td>
-                        </tr>
-
-                        <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Total absorbed:</td>
-
-                          <td>
-                            {formatNumber({ format: "percentage", value: parryAbsorptionValue })}
-                          </td>
-                        </tr>
-                      </>
-                    )}
                   </DetailsTable>
                 </PopoverBody>
               </Popover>

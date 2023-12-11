@@ -205,9 +205,9 @@ export function getGearPrice({
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
-// f(1) = ~0, f(35) = ~0.36, f(50) = ~0.76, f(GROWTH_MAXIMUM) = ~1
+// f(1) = ~0, f(38) = ~0.43, f(50) = ~0.78, f(GROWTH_MAXIMUM) = ~1
 export function getGrowthSigmoid(x: number) {
-  return 1 / (1 + Math.pow(Math.E, -0.12 * (x - 40))) - 0.008;
+  return 1 / (1 + Math.pow(Math.E, -0.13 * (x - 40))) - 0.006;
 }
 
 // https://en.wikipedia.org/wiki/Triangular_number

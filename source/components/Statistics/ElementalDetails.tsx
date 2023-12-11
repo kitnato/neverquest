@@ -18,26 +18,28 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
       <td className={CLASS_TABLE_CELL_ITALIC}>Elemental:</td>
 
       <td>
-        {stackItems(
-          gems.toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
-        ).map(({ item }) => {
-          const { ID, name } = item;
-          const { elemental } = GEMS[name];
-          const { color, Icon } = ELEMENTALS[elemental];
-          const { damage, duration } = elementalEffectsValue[slot][elemental];
+        <Stack gap={1}>
+          {stackItems(
+            gems.toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
+          ).map(({ item }) => {
+            const { ID, name } = item;
+            const { elemental } = GEMS[name];
+            const { color, Icon } = ELEMENTALS[elemental];
+            const { damage, duration } = elementalEffectsValue[slot][elemental];
 
-          return (
-            <Stack direction="horizontal" gap={1} key={ID}>
-              <span className={color}>{`+${damage}`}</span>
+            return (
+              <Stack direction="horizontal" gap={1} key={ID}>
+                <span className={color}>{`+${damage}`}</span>
 
-              {LABEL_SEPARATOR}
+                {LABEL_SEPARATOR}
 
-              <IconImage Icon={Icon} isSmall />
+                <IconImage Icon={Icon} isSmall />
 
-              {`${formatNumber({ format: "time", value: duration })}`}
-            </Stack>
-          );
-        })}
+                {`${formatNumber({ format: "time", value: duration })}`}
+              </Stack>
+            );
+          })}
+        </Stack>
       </td>
     </tr>
   );

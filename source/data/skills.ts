@@ -24,7 +24,7 @@ export const SKILLS: Record<
   }
 > = {
   anatomy: {
-    description: "Unlocks the ability to inflict bleeding.",
+    description: "Unlocks the ability to inflict bleeding with piercing weapons.",
     Icon: IconAnatomy,
     requiredCrew: "merchant",
   },
@@ -35,7 +35,7 @@ export const SKILLS: Record<
   },
   armorcraft: {
     description:
-      "Unlocks the use of heavy armor, the ability to deflect ailments and improves recovery.",
+      "Unlocks the use of heavy armor alongside the ability to deflect ailments & recovery improvement.",
     Icon: IconArmorcraft,
     requiredCrew: "blacksmith",
     shows: ["deflection"],
@@ -52,7 +52,8 @@ export const SKILLS: Record<
     requiredCrew: "merchant",
   },
   escrime: {
-    description: "Unlocks the ability to parry attacks, partially reflecting damage.",
+    description:
+      "Unlocks the ability to parry attacks with slashing weapons, partially reflecting damage.",
     Icon: IconEscrime,
     requiredCrew: "merchant",
   },
@@ -74,7 +75,7 @@ export const SKILLS: Record<
     shows: ["grip"],
   },
   traumatology: {
-    description: "Unlocks the ability to stun monsters.",
+    description: "Unlocks the ability to stun monsters with blunt weapons.",
     Icon: IconTraumatology,
     requiredCrew: "merchant",
   },

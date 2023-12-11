@@ -19,7 +19,7 @@ export function Awakening() {
         <Stack className="align-items-center" gap={5}>
           <IconImage Icon={IconAwakening} />
 
-          <Typewriter>... System failure. Patient has awoken. Protocol?</Typewriter>
+          <Typewriter>... System failure. Patient 7 has awoken. Protocol?</Typewriter>
 
           <Stack className="mx-auto" direction="horizontal" gap={3} style={{ width: 400 }}>
             <Button
@@ -30,7 +30,7 @@ export function Awakening() {
               }}
               variant="outline-dark"
             >
-              Keep grinding
+              Grind
             </Button>
 
             <Button
@@ -40,7 +40,7 @@ export function Awakening() {
               }}
               variant="outline-dark"
             >
-              Die forever
+              Die
             </Button>
           </Stack>
         </Stack>

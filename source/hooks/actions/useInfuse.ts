@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { LEVEL_MAXIMUM } from "@neverquest/data/general";
+import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { inventory, ownedItem } from "@neverquest/state/inventory";
@@ -31,7 +31,7 @@ export function useInfuse() {
           return;
         }
 
-        if (get(infusionLevel(infusable)) >= LEVEL_MAXIMUM) {
+        if (get(infusionLevel(infusable)) >= LEVELLING_MAXIMUM) {
           return;
         }
 
@@ -62,7 +62,7 @@ export function useInfuse() {
 
           progressQuest({ quest: "infusing" });
 
-          if (newLevel >= LEVEL_MAXIMUM) {
+          if (newLevel >= LEVELLING_MAXIMUM) {
             progressQuest({ quest: "infusingMaximum" });
           }
 

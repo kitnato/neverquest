@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil";
 
 import { PROGRESS } from "@neverquest/data/encounter";
-import { LEVEL_MAXIMUM } from "@neverquest/data/general";
+import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { ownedItem } from "@neverquest/state/inventory";
@@ -15,7 +15,7 @@ export const encounter = withStateKey("encounter", (key) =>
     get: ({ get }) => {
       const stageValue = get(stage);
 
-      return stageValue === LEVEL_MAXIMUM
+      return stageValue === LEVELLING_MAXIMUM
         ? get(ownedItem("familiar")) === undefined
           ? "res dominus"
           : "res cogitans"

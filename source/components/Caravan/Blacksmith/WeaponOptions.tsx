@@ -9,7 +9,7 @@ import { SetGearLevel } from "@neverquest/components/Caravan/SetGearLevel";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { WEAPON_BASE, WEAPON_MODIFIER, WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
-import { LABEL_UNKNOWN, LEVEL_MAXIMUM } from "@neverquest/data/general";
+import { GROWTH_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconGrip from "@neverquest/icons/grip.svg?react";
@@ -39,7 +39,7 @@ export function WeaponOptions() {
 
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
   const [weaponGrip, setWeaponGrip] = useState<Grip>("one-handed");
-  const [weaponLevel, setWeaponLevel] = useState(Math.min(stageValue, LEVEL_MAXIMUM));
+  const [weaponLevel, setWeaponLevel] = useState(Math.min(stageValue, GROWTH_MAXIMUM));
 
   const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[weaponClass];
 
@@ -51,7 +51,7 @@ export function WeaponOptions() {
     gearClass: weaponClass,
     grip: weaponGrip,
   });
-  const maximumWeaponLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, LEVEL_MAXIMUM);
+  const maximumWeaponLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GROWTH_MAXIMUM);
 
   return (
     <Stack className="mx-auto w-50">

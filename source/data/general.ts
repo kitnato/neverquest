@@ -28,13 +28,13 @@ export const LABEL_OVER_ENCUMBERED = "Too heavy.";
 export const LABEL_SEPARATOR = "·";
 export const LABEL_UNKNOWN = "???";
 
-export const LEVEL_MAXIMUM = 100;
+export const LEVELLING_MAXIMUM = 77;
 
 export const PERCENTAGE_POINTS = 100;
 
 export const QUEST_NOTIFICATION_DURATION = 5000;
 
-export const RETIREMENT_MINIMUM_LEVEL = 50;
+export const RETIREMENT_STAGE_MINIMUM = 40;
 
 export const ROMAN_NUMERAL_MAXIMUM = 3999;
 export const ROMAN_NUMERALS = [

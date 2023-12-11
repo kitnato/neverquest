@@ -90,13 +90,13 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
     },
   };
 
+export const DROP_CHANCE_OVERRIDE = {
+  chance: 0.07,
+  stageIncludes: "7",
+};
 export const DROP_CHANCES = {
   "mysterious egg": 0.03,
   "torn manuscript": 0.01,
-};
-export const DROP_CHANCES_OVERRIDE = {
-  factor: 15,
-  stage: 77,
 };
 
 export const ELEMENTALS: Record<
@@ -138,7 +138,11 @@ export const ELEMENTALS: Record<
 
 export const ENCUMBRANCE_CAPACITY = 6;
 
-export const INHERITABLE_ITEMS = ["knapsack", "journal", ...INFUSABLE_TYPES] as const;
+export const INHERITABLE_ITEMS: (Infusable | Trinket)[] = [
+  "knapsack",
+  "journal",
+  ...INFUSABLE_TYPES,
+] as const;
 
 export const GEM_BASE = {
   price: 100,

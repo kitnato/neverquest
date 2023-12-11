@@ -1,3 +1,4 @@
+import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import IconButchery from "@neverquest/icons/butchery.svg?react";
 import IconCruelty from "@neverquest/icons/cruelty.svg?react";
 import IconFinesse from "@neverquest/icons/finesse.svg?react";
@@ -19,7 +20,7 @@ export const MASTERIES: Record<
     base: 0.15,
     description: "Determines monster health threshold for execution.",
     Icon: IconButchery,
-    increment: 0.002, // maximum: 0.35
+    increment: 0.35 / LEVELLING_MAXIMUM,
     instructions: "Trains when dealing damage with a two-handed weapon.",
     requiredSkill: "siegecraft",
   },
@@ -27,7 +28,7 @@ export const MASTERIES: Record<
     base: 0.2,
     description: "Determines bleed damage.",
     Icon: IconCruelty,
-    increment: 0.0135, // maximum: 1.5
+    increment: 1.3 / LEVELLING_MAXIMUM,
     instructions: "Trains when dealing damage with a piercing weapon.",
     requiredSkill: "anatomy",
   },
@@ -35,7 +36,7 @@ export const MASTERIES: Record<
     base: 0,
     description: "Affects damage absorbed and reflected when parrying.",
     Icon: IconFinesse,
-    increment: 0.009, // maximum: 0.9
+    increment: 0.9 / LEVELLING_MAXIMUM,
     instructions: "Trains when dealing damage with a slashing weapon.",
     requiredSkill: "escrime",
   },
@@ -43,15 +44,15 @@ export const MASTERIES: Record<
     base: 0,
     description: "Affects the distance a monster must close before it can attack.",
     Icon: IconMarksmanship,
-    increment: 0.01, // maximum: 1
+    increment: 1 / LEVELLING_MAXIMUM,
     instructions: "Trains when dealing damage with a ranged weapon.",
     requiredSkill: "archery",
   },
   might: {
-    base: 2500,
+    base: 2000,
     description: "Affects stun length.",
     Icon: IconMight,
-    increment: 50, // maximum 7500
+    increment: Math.round(5000 / LEVELLING_MAXIMUM),
     instructions: "Trains when dealing damage with a blunt weapon.",
     requiredSkill: "traumatology",
   },
@@ -59,7 +60,7 @@ export const MASTERIES: Record<
     base: 0,
     description: "Affects recovery rate.",
     Icon: IconResilience,
-    increment: 0.01, // maximum: 1
+    increment: 1 / LEVELLING_MAXIMUM,
     instructions: "Trains when getting struck.",
     requiredSkill: "armorcraft",
   },
@@ -67,7 +68,7 @@ export const MASTERIES: Record<
     base: 1500,
     description: "Affects stagger duration.",
     Icon: IconStability,
-    increment: 50, // maximum: 5500
+    increment: Math.round(4500 / LEVELLING_MAXIMUM),
     instructions: "Trains when getting struck while having a shield equipped.",
     requiredSkill: "shieldcraft",
   },

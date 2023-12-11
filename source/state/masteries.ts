@@ -1,6 +1,6 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
-import { LEVEL_MAXIMUM } from "@neverquest/data/general";
+import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { MASTERIES, MASTERY_COST_BASE } from "@neverquest/data/masteries";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { shield, weapon } from "@neverquest/state/gear";
@@ -60,7 +60,7 @@ export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
     get:
       (parameter) =>
       ({ get }) =>
-        get(masteryRank(parameter)) === LEVEL_MAXIMUM,
+        get(masteryRank(parameter)) === LEVELLING_MAXIMUM,
     key,
   }),
 );

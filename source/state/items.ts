@@ -8,11 +8,7 @@ import { essence } from "@neverquest/state/resources";
 import type { AmmunitionPouchItem } from "@neverquest/types";
 import { isInfusableItem } from "@neverquest/types/type-guards";
 import type { Infusable } from "@neverquest/types/unions";
-import {
-  getFromRange,
-  getGrowthLogarithmic,
-  getGrowthTriangular,
-} from "@neverquest/utilities/getters";
+import { getFromRange, getGrowthSigmoid, getGrowthTriangular } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -57,7 +53,7 @@ export const infusablePower = withStateKey("infusablePower", (key) =>
         const { maximum, minimum } = INFUSABLES[parameter].item;
 
         return getFromRange({
-          factor: getGrowthLogarithmic(ownedItemValue.level),
+          factor: getGrowthSigmoid(ownedItemValue.level),
           maximum,
           minimum,
         });

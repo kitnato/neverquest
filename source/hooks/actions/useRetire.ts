@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { LABEL_UNKNOWN, RETIREMENT_MINIMUM_LEVEL } from "@neverquest/data/general";
+import { LABEL_UNKNOWN, RETIREMENT_STAGE_MINIMUM } from "@neverquest/data/general";
 import { INHERITABLE_ITEMS } from "@neverquest/data/items";
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
@@ -40,7 +40,7 @@ export function useRetire() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        if (get(stageMaximum) < RETIREMENT_MINIMUM_LEVEL) {
+        if (get(stageMaximum) < RETIREMENT_STAGE_MINIMUM) {
           return;
         }
 

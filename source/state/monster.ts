@@ -1,10 +1,8 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import { merchantInventory } from "./caravan";
-import { RETIREMENT_MINIMUM_LEVEL } from "@neverquest/data/general";
 import {
   DROP_CHANCES,
-  DROP_CHANCES_OVERRIDE,
+  DROP_CHANCE_OVERRIDE,
   GEM_DROP_CHANCE,
   INFUSABLES,
   TRINKETS,
@@ -20,6 +18,7 @@ import {
 } from "@neverquest/data/monster";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { bleed } from "@neverquest/state/ailments";
+import { merchantInventory } from "@neverquest/state/caravan";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import {
   encounter,
@@ -204,8 +203,7 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
 export const monsterLoot = withStateKey("monsterLoot", (key) =>
   selector({
     get: ({ get }) => {
-      const { factor: dropChanceOverrideFactor, stage: dropChanceOverrideStage } =
-        DROP_CHANCES_OVERRIDE;
+      const { chance, stageIncludes } = DROP_CHANCE_OVERRIDE;
       const { attenuation, base, bonus, boss } = ESSENCE;
 
       const encounterValue = get(encounter);
@@ -219,22 +217,22 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
       const maximumGems = 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL);
 
       const hasMysteriousEggDropped =
-        stageValue >= RETIREMENT_MINIMUM_LEVEL &&
         ownedItemAntiqueCoin !== undefined &&
         ownedItemMysteriousEgg === undefined &&
         !merchantInventoryValue.some(({ ID }) => ID === INFUSABLES["mysterious egg"].item.ID) &&
         Math.random() <=
-          DROP_CHANCES["mysterious egg"] *
-            (stageValue === dropChanceOverrideStage ? dropChanceOverrideFactor : 1);
+          (stageValue.toLocaleString().includes(stageIncludes)
+            ? chance
+            : DROP_CHANCES["mysterious egg"]);
       const hasTornManuscriptDropped =
-        stageValue >= RETIREMENT_MINIMUM_LEVEL &&
         ownedItemAntiqueCoin !== undefined &&
         ownedItemMysteriousEgg !== undefined &&
         !merchantInventoryValue.some(({ ID }) => ID === TRINKETS["torn manuscript"].item.ID) &&
         get(ownedItem("torn manuscript")) === undefined &&
         Math.random() <=
-          DROP_CHANCES["torn manuscript"] *
-            (stageValue === dropChanceOverrideStage ? dropChanceOverrideFactor : 1);
+          (stageValue.toLocaleString().includes(stageIncludes)
+            ? chance
+            : DROP_CHANCES["torn manuscript"]);
 
       return {
         essence: Math.round(

@@ -25,7 +25,8 @@
     "rogue-like",
     "rogue-lite",
     "role-playing",
-    "rpg"
+    "rpg",
+    "souls-like"
   ],
   "dependencies": {
     "@kitnato/locran": "0.4.0",

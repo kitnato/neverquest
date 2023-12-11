@@ -1,5 +1,4 @@
-import { LABEL_UNKNOWN } from "@neverquest/data/general";
-import { DROP_CHANCES_OVERRIDE } from "@neverquest/data/items";
+import { GROWTH_MAXIMUM, LABEL_UNKNOWN, LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import IconConquest from "@neverquest/icons/conquest.svg?react";
 import IconRoutine from "@neverquest/icons/routine.svg?react";
 import IconTriumph from "@neverquest/icons/triumph.svg?react";
@@ -30,12 +29,10 @@ export const QUEST_COMPLETION_BONUS = 0.01;
 export const QUEST_REQUIREMENTS = {
   damage: 1500,
   essenceCount: 777,
-  powerLevelUltra: 100,
   protection: 1000,
   skillsCraft: ["armorcraft", "shieldcraft", "siegecraft"] as Skill[],
-  stagesEnd: 100,
   survivingNoAttributes: 7,
-  survivingNoGear: 13,
+  survivingNoGear: 7,
 };
 
 export const QUEST_TYPES_BY_CLASS = {
@@ -334,15 +331,15 @@ export const QUESTS: Record<
     title: "Intestinal discomfort",
   },
   powerLevel: {
-    description: "Reach power powerLevel @.",
+    description: "Reach power level @.",
     progression: [3, 10, 25, 50],
     title: "One up",
   },
   powerLevelUltra: {
-    description: `Reach power powerLevel ${formatNumber({
-      value: QUEST_REQUIREMENTS.powerLevelUltra,
+    description: `Reach power level ${formatNumber({
+      value: GROWTH_MAXIMUM,
     })}.`,
-    progression: [QUEST_REQUIREMENTS.powerLevelUltra],
+    progression: [GROWTH_MAXIMUM],
     title: `It's over ${formatNumber({ value: 9000 })}!`,
   },
   protection: {
@@ -434,13 +431,13 @@ export const QUESTS: Record<
   },
   stages: {
     description: "Reach stage @.",
-    progression: [3, 10, 25, 50, DROP_CHANCES_OVERRIDE.stage],
+    progression: [3, 10, 25, 50, LEVELLING_MAXIMUM],
     title: "Sisyphean expedition",
   },
   stagesEnd: {
-    description: `Reach stage ${formatNumber({ value: QUEST_REQUIREMENTS.stagesEnd })}.`,
-    progression: [QUEST_REQUIREMENTS.stagesEnd],
-    title: "That's it?",
+    description: `Reach stage ${LABEL_UNKNOWN}${formatNumber({ value: GROWTH_MAXIMUM })}.`,
+    progression: [GROWTH_MAXIMUM],
+    title: "Where does it end?",
   },
   staggering: {
     description: "Stagger monsters @ times.",

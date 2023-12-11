@@ -24,7 +24,7 @@ import {
   CLASS_ANIMATE_PREFIX,
   GROWTH_MAXIMUM,
   MILLISECONDS_IN_SECOND,
-  RETIREMENT_MINIMUM_LEVEL,
+  RETIREMENT_STAGE_MINIMUM,
   ROMAN_NUMERALS,
   ROMAN_NUMERAL_MAXIMUM,
 } from "@neverquest/data/general";
@@ -204,16 +204,10 @@ export function getGearPrice({
   return Math.round((price.minimum + price.maximum * factor) * modifier);
 }
 
-// https://en.wikipedia.org/wiki/Natural_logarithm
-// f(1) = 0, f(50) = ~0.7, f(100) = ~1
-export function getGrowthLogarithmic(x: number) {
-  return Math.log(x / 20 + 1) / Math.log(6);
-}
-
 // https://en.wikipedia.org/wiki/Sigmoid_function
-// f(1) = ~0, f(35) = ~0.36, f(50) = ~0.76, f(100) = ~1
+// f(1) = ~0, f(35) = ~0.36, f(50) = ~0.76, f(GROWTH_MAXIMUM) = ~1
 export function getGrowthSigmoid(x: number) {
-  return 1 / (1 + Math.pow(Math.E, -0.12 * (x - 40)) - 0.008);
+  return 1 / (1 + Math.pow(Math.E, -0.12 * (x - 40))) - 0.008;
 }
 
 // https://en.wikipedia.org/wiki/Triangular_number
@@ -231,7 +225,7 @@ export function getProgressReduction(stage: number) {
   return getFromRange({
     factor: getGrowthSigmoid(
       getLinearMapping({
-        offset: RETIREMENT_MINIMUM_LEVEL,
+        offset: RETIREMENT_STAGE_MINIMUM,
         stage,
       }),
     ),

@@ -187,7 +187,7 @@ export const WEAPON_BASE: GearBase & {
   ],
   rate: [
     { maximum: 2800, minimum: 2700 },
-    { maximum: 800, minimum: 750 },
+    { maximum: 850, minimum: 800 },
   ],
   staminaCost: [
     { maximum: 2, minimum: 1 },

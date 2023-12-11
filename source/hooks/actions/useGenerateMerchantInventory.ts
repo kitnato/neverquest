@@ -30,7 +30,7 @@ export function useGenerateMerchantInventory() {
           stageValue === get(stageMaximum) &&
           merchantInventoryCurrent.every(({ offerIndex }) => offerIndex !== stageValue)
         ) {
-          const SETTINGS_GEAR: GeneratorParameters & { level: number } = {
+          const gearSettings: GeneratorParameters & { level: number } = {
             affixStructure: "prefix",
             allowProfanity: allowProfanityValue,
             level: stageValue,
@@ -45,21 +45,21 @@ export function useGenerateMerchantInventory() {
             switch (offer.type) {
               case "armor": {
                 return generateArmor({
-                  ...SETTINGS_GEAR,
+                  ...gearSettings,
                   ...offer,
                 });
               }
 
               case "shield": {
                 return generateShield({
-                  ...SETTINGS_GEAR,
+                  ...gearSettings,
                   ...offer,
                 });
               }
 
               case "weapon": {
                 return generateMeleeWeapon({
-                  ...SETTINGS_GEAR,
+                  ...gearSettings,
                   ...offer,
                 });
               }

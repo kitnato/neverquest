@@ -2,7 +2,11 @@ import { useState } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
-import { LABEL_NO_ESSENCE, LABEL_OVER_ENCUMBERED, LEVEL_MAXIMUM } from "@neverquest/data/general";
+import {
+  LABEL_NO_ESSENCE,
+  LABEL_OVER_ENCUMBERED,
+  LEVELLING_MAXIMUM,
+} from "@neverquest/data/general";
 import { TRINKETS } from "@neverquest/data/items";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
@@ -28,7 +32,7 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
   const infuse = useInfuse();
   const progressQuest = useProgressQuest();
 
-  const isInfusionAtMaximum = infusionLevelValue >= LEVEL_MAXIMUM;
+  const isInfusionAtMaximum = infusionLevelValue >= LEVELLING_MAXIMUM;
   const isInfusionPossible = infusionStepValue > 0;
   const canHatch =
     isInfusionAtMaximum && ownedItemMysteriousEgg !== undefined && infusable === "mysterious egg";

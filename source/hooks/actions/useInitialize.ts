@@ -26,7 +26,7 @@ export function useInitialize() {
           initialStore["isSkillAcquired-none"] = true;
 
           for (const crew of CREW_TYPES) {
-            const status = CREW[crew].requiredStage === 0 ? "hired" : "hidden";
+            const status = CREW[crew].requiredStage === 1 ? "hired" : "hidden";
 
             set(hireStatus(crew), status);
 

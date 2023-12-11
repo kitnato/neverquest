@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { LEVEL_MAXIMUM } from "@neverquest/data/general";
+import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import {
   canTrainMastery,
@@ -34,7 +34,7 @@ export function useTrainMastery() {
 
           progressQuest({ quest: "masteriesRank" });
 
-          if (newRank === LEVEL_MAXIMUM) {
+          if (newRank === LEVELLING_MAXIMUM) {
             progressQuest({ quest: "masteriesRankMaximum" });
           }
         } else {

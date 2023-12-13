@@ -5,7 +5,7 @@ import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { powerLevel } from "@neverquest/state/attributes";
 import { attackDuration, lootingDuration } from "@neverquest/state/character";
-import { encounter, stage } from "@neverquest/state/encounter";
+import { encounter, hasDefeatedFinality, stage } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
 import {
   isMonsterAiling,
@@ -72,11 +72,15 @@ export function useChangeMonsterHealth() {
             }
 
             case "res cogitans": {
+              set(hasDefeatedFinality, true);
+
               progressQuest({ quest: "killingResCogitans" });
               break;
             }
 
             case "res dominus": {
+              set(hasDefeatedFinality, true);
+
               progressQuest({ quest: "killingResDominus" });
               break;
             }

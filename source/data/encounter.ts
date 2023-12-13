@@ -8,11 +8,11 @@ export const AFFIX_STRUCTURE: Record<AffixStructure, number> = {
 };
 
 export const PROGRESS = {
-  maximum: 50,
+  maximum: 30,
   minimum: 3,
 };
 
 export const PROGRESS_REDUCTION = {
-  maximum: 0.8,
-  minimum: 0.33,
+  maximum: 0.85,
+  minimum: 0.3,
 };

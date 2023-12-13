@@ -15,7 +15,7 @@ export const encounter = withStateKey("encounter", (key) =>
     get: ({ get }) => {
       const stageValue = get(stage);
 
-      return stageValue === LEVELLING_MAXIMUM
+      return stageValue === LEVELLING_MAXIMUM && !get(hasDefeatedFinality)
         ? get(ownedItem("familiar")) === undefined
           ? "res dominus"
           : "res cogitans"
@@ -75,6 +75,14 @@ export const stageMaximum = withStateKey("stageMaximum", (key) =>
 export const consciousness = withStateKey("consciousness", (key) =>
   atom<"mors" | "somnium" | "vigilans">({
     default: "somnium",
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
+export const hasDefeatedFinality = withStateKey("hasDefeatedFinality", (key) =>
+  atom({
+    default: false,
     effects: [handleLocalStorage({ key })],
     key,
   }),

@@ -8,6 +8,7 @@ import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import { encumbrance, encumbranceMaximum } from "@neverquest/state/inventory";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Encumbrance() {
   const encumbranceValue = useRecoilValue(encumbrance);
@@ -25,7 +26,11 @@ export function Encumbrance() {
         variant="dark"
       >
         <Stack direction="horizontal" gap={1}>
-          <span>{`${encumbranceValue}/${encumbranceMaximumValue}`}</span>
+          <span>
+            {`${formatNumber({ value: encumbranceValue })}/${formatNumber({
+              value: encumbranceMaximumValue,
+            })}`}
+          </span>
 
           <DeltasDisplay delta="encumbranceMaximum" />
         </Stack>

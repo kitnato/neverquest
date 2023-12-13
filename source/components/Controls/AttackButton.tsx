@@ -59,7 +59,7 @@ export function AttackButton() {
         animation:
           areAttributesIncreasableValue || !hasEnoughAmmunitionValue ? undefined : pulseAnimation,
         Icon: IconAttack,
-        tooltip: hasEnoughAmmunitionValue ? "Attack" : "Insufficient ammunition.",
+        tooltip: "Attack",
       };
     })();
 
@@ -81,7 +81,7 @@ export function AttackButton() {
       <span className={getAnimationClass({ animation: "bounceIn" })}>
         <Button
           className={animation}
-          disabled={isResting || !hasEnoughAmmunitionValue}
+          disabled={isResting}
           onClick={toggleAttacking}
           variant="outline-dark"
         >

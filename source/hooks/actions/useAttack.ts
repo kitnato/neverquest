@@ -52,6 +52,8 @@ export function useAttack() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
+        const canAttackOrParryValue = get(canAttackOrParry);
+        const hasEnoughAmmunitionValue = get(hasEnoughAmmunition);
         const monsterHealthValue = get(monsterHealth);
         const weaponValue = get(weapon);
         const isWeaponRanged = isRanged(weaponValue);
@@ -69,7 +71,7 @@ export function useAttack() {
           set(attackDuration, get(attackRate));
         }
 
-        if (get(canAttackOrParry) && get(hasEnoughAmmunition)) {
+        if (canAttackOrParryValue && hasEnoughAmmunitionValue) {
           if (weaponValue.staminaCost > 0) {
             changeStamina({ value: -weaponValue.staminaCost });
           }
@@ -182,21 +184,39 @@ export function useAttack() {
           trainMastery("marksmanship");
           trainMastery("might");
         } else {
-          addDelta({
-            contents: [
-              {
-                color: "text-muted",
-                value: "CANNOT ATTACK",
-              },
-              {
-                color: "text-danger",
-                value: `(${weaponValue.staminaCost})`,
-              },
-            ],
-            delta: "stamina",
-          });
+          if (!canAttackOrParryValue) {
+            addDelta({
+              contents: [
+                {
+                  color: "text-muted",
+                  value: "CANNOT ATTACK",
+                },
+                {
+                  color: "text-danger",
+                  value: `(${weaponValue.staminaCost})`,
+                },
+              ],
+              delta: "stamina",
+            });
 
-          progressQuest({ quest: "exhausting" });
+            progressQuest({ quest: "exhausting" });
+          }
+
+          if (isWeaponRanged && !hasEnoughAmmunitionValue) {
+            addDelta({
+              contents: [
+                {
+                  color: "text-muted",
+                  value: "INSUFFICIENT AMMUNITION",
+                },
+                {
+                  color: "text-danger",
+                  value: `(${weaponValue.ammunitionCost})`,
+                },
+              ],
+              delta: "ammunition",
+            });
+          }
         }
       },
     [

@@ -2,6 +2,7 @@ import { FormCheck, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { TraitDisplay } from "@neverquest/components/Traits/TraitDisplay";
+import { LABEL_NONE } from "@neverquest/data/general";
 import { acquiredTraits, selectedTrait } from "@neverquest/state/traits";
 import { TRAIT_TYPES, type Trait } from "@neverquest/types/unions";
 
@@ -25,7 +26,7 @@ export function TraitSelection() {
           <FormCheck
             checked={selectedTraitValue === undefined}
             id="none"
-            label={<span className="fst-italic">None.</span>}
+            label={<span className="fst-italic">{LABEL_NONE}</span>}
             name={FORM_NAME}
             onChange={resetSelectedTrait}
             type="radio"

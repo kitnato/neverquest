@@ -24,7 +24,7 @@ import type { UsableItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
 import type { Crew, Grip } from "@neverquest/types/unions";
 
-export const AMMUNITION_PRICE = 10;
+export const AMMUNITION_PRICE = 5;
 
 export const GEAR_LEVEL_RANGE_MAXIMUM = 3;
 
@@ -164,8 +164,7 @@ export const CREW: Record<
       1: "Allow me to deepen your pockets.",
       [GROWTH_MAXIMUM]: "...",
       [LEVELLING_MAXIMUM]: "Fate has been mis-weaved.",
-      [RETIREMENT_STAGE_MINIMUM]:
-        "Never know what might be found out there. Make sure to have enough space!",
+      [RETIREMENT_STAGE_MINIMUM]: "Always leave some extra space for those unexpected finds.",
     },
     price: 35,
     requiredStage: 9,

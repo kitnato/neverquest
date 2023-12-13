@@ -31,7 +31,6 @@ export function useChangeHealth() {
         const value = deltaReserve.isRegeneration
           ? get(regenerationAmount("health"))
           : deltaReserve.value;
-
         const formattedValue = formatNumber({ value });
         const isPositive = value > 0;
 

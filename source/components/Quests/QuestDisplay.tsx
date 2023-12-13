@@ -80,7 +80,7 @@ export function QuestDisplay({
           onChange={(value) => {
             completeQuest({
               bonus: value as QuestBonus,
-              progress: progressionMaximum,
+              progression: progressionMaximum,
               quest,
             });
           }}

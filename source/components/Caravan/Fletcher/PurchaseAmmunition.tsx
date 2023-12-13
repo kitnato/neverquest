@@ -92,7 +92,7 @@ export function PurchaseAmmunition() {
                       }}
                       variant="outline-dark"
                     >
-                      Purchase {amount}
+                      Purchase {formatNumber({ value: amount })}
                     </Button>
 
                     <DropdownToggle split variant="outline-dark" />

@@ -321,6 +321,7 @@ export type StateKey =
   | "essenceLoot"
   | "executionThreshold"
   | "fletcherInventory"
+  | "hasDefeatedFinality"
   | "hasEnoughAmmunition"
   | "hasLooted"
   | "hasMonsterClosed"

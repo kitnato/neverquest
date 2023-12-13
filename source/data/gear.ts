@@ -46,7 +46,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     price: { maximum: 10_000, minimum: 8 },
     protection: [
       { maximum: 10, minimum: 8 },
-      { maximum: 1500, minimum: 1450 },
+      { maximum: 1400, minimum: 1350 },
     ],
     staminaCost: Number.POSITIVE_INFINITY,
     weight: [
@@ -59,7 +59,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     price: { maximum: 5000, minimum: 1 },
     protection: [
       { maximum: 2, minimum: 1 },
-      { maximum: 800, minimum: 700 },
+      { maximum: 700, minimum: 650 },
     ],
     staminaCost: 0,
     weight: [
@@ -76,7 +76,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     price: { maximum: 7500, minimum: 3 },
     protection: [
       { maximum: 6, minimum: 4 },
-      { maximum: 1000, minimum: 950 },
+      { maximum: 900, minimum: 850 },
     ],
     staminaCost: [
       { maximum: 3, minimum: 1 },
@@ -174,20 +174,20 @@ export const WEAPON_BASE: GearBase & {
 } = {
   ammunitionCost: [
     { maximum: 2, minimum: 1 },
-    { maximum: 50, minimum: 45 },
+    { maximum: 25, minimum: 22 },
   ],
   damage: [
     { maximum: 12, minimum: 11 },
-    { maximum: 1100, minimum: 1000 },
+    { maximum: 1000, minimum: 900 },
   ],
   price: { maximum: 7000, minimum: 1 },
   range: [
-    { maximum: 4000, minimum: 3500 },
-    { maximum: 7000, minimum: 6800 },
+    { maximum: 3000, minimum: 2500 },
+    { maximum: 5000, minimum: 4500 },
   ],
   rate: [
-    { maximum: 2800, minimum: 2700 },
-    { maximum: 850, minimum: 800 },
+    { maximum: 2900, minimum: 2800 },
+    { maximum: 1000, minimum: 900 },
   ],
   staminaCost: [
     { maximum: 2, minimum: 1 },
@@ -201,12 +201,12 @@ export const WEAPON_BASE: GearBase & {
 
 export const WEAPON_MODIFIER = {
   "one-handed": { ability: 1, damage: 1, price: 1, rate: 1, stamina: 1, weight: 1 },
-  ranged: { ability: 1, damage: 1.2, price: 1.1, rate: 1, stamina: 1.1, weight: 1.15 },
+  ranged: { ability: 1, damage: 1.2, price: 1.1, rate: 0.8, stamina: 1.05, weight: 1.15 },
   "two-handed": {
     ability: 1.1,
     damage: 1.25,
     price: 1.2,
-    rate: 1.3,
+    rate: 0.85,
     stamina: 1.15,
     weight: 1.2,
   },

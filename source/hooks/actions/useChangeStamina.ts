@@ -22,9 +22,8 @@ export function useChangeStamina() {
         const value = deltaReserve.isRegeneration
           ? get(regenerationAmount("stamina"))
           : deltaReserve.value;
-        const isPositive = value > 0;
         const formattedValue = formatNumber({ value });
-
+        const isPositive = value > 0;
         const newStamina = get(stamina) + value;
         const staminaMaximumBlightedValue = get(staminaMaximumBlighted);
 
@@ -41,7 +40,7 @@ export function useChangeStamina() {
           delta: "stamina",
         });
 
-        if (newStamina < 0) {
+        if (newStamina <= 0) {
           set(stamina, 0);
         }
 

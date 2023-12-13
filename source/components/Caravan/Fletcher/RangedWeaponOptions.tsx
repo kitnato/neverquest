@@ -11,6 +11,7 @@ import { GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { WEAPON_BASE, WEAPON_MODIFIER, WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
 import { GROWTH_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
+import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconRange from "@neverquest/icons/range.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
@@ -44,10 +45,11 @@ export function RangedWeaponOptions() {
   const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
   const factor = getGrowthSigmoid(weaponLevel);
-  const { abilityChance, damage, range, rate, staminaCost, weight } = getRangedRanges({
-    factor,
-    gearClass: weaponClass,
-  });
+  const { abilityChance, ammunitionCost, damage, range, rate, staminaCost, weight } =
+    getRangedRanges({
+      factor,
+      gearClass: weaponClass,
+    });
   const maximumWeaponLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GROWTH_MAXIMUM);
 
   return (
@@ -76,27 +78,39 @@ export function RangedWeaponOptions() {
           Icon={IconWeaponDamage}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Damage"
-        >{`${formatNumber({ value: damage.minimum })}-${formatNumber({
-          value: damage.maximum,
-        })}`}</IconDisplay>
+        >
+          {`${formatNumber({ value: damage.minimum })}-${formatNumber({
+            value: damage.maximum,
+          })}`}
+        </IconDisplay>
 
         <IconDisplay
           Icon={IconWeaponAttackRate}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Attack rate"
-        >{`${formatNumber({ format: "time", value: rate.minimum })}-${formatNumber({
-          format: "time",
-          value: rate.maximum,
-        })}`}</IconDisplay>
+        >
+          {`${formatNumber({ format: "time", value: rate.minimum })}-${formatNumber({
+            format: "time",
+            value: rate.maximum,
+          })}`}
+        </IconDisplay>
 
         <IconDisplay
-          Icon={IconRange}
+          Icon={IconAmmunition}
           iconProps={{ overlayPlacement: "left" }}
-          tooltip="Range"
-        >{`${formatNumber({ format: "time", value: range.minimum })}-${formatNumber({
-          format: "time",
-          value: range.maximum,
-        })}`}</IconDisplay>
+          tooltip="Ammunition cost"
+        >
+          {`${formatNumber({ value: ammunitionCost.minimum })}-${formatNumber({
+            value: ammunitionCost.maximum,
+          })}`}
+        </IconDisplay>
+
+        <IconDisplay Icon={IconRange} iconProps={{ overlayPlacement: "left" }} tooltip="Range">
+          {`${formatNumber({ format: "time", value: range.minimum })}-${formatNumber({
+            format: "time",
+            value: range.maximum,
+          })}`}
+        </IconDisplay>
 
         <IconDisplay
           Icon={skillValue ? IconAbility : IconUnknown}
@@ -115,17 +129,21 @@ export function RangedWeaponOptions() {
           Icon={IconStamina}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Stamina cost"
-        >{`${formatNumber({ value: staminaCost.minimum })}-${formatNumber({
-          value: staminaCost.maximum,
-        })}`}</IconDisplay>
+        >
+          {`${formatNumber({ value: staminaCost.minimum })}-${formatNumber({
+            value: staminaCost.maximum,
+          })}`}
+        </IconDisplay>
 
         <IconDisplay
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
-        >{`${formatNumber({ value: weight.minimum })}-${formatNumber({
-          value: weight.maximum,
-        })}`}</IconDisplay>
+        >
+          {`${formatNumber({ value: weight.minimum })}-${formatNumber({
+            value: weight.maximum,
+          })}`}
+        </IconDisplay>
       </Stack>
 
       <hr />

@@ -45,6 +45,7 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
     resetInfusionDelta();
   };
 
+  // TODO - replace with useAnimation.
   useTimerDelta({
     delta: setInfusionDelta,
     onDelta: () => {

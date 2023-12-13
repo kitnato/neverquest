@@ -8,6 +8,7 @@ import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
 import { ammunition, ammunitionMaximum } from "@neverquest/state/items";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function AmmunitionPouchCapacity() {
   const ammunitionValue = useRecoilValue(ammunition);
@@ -25,7 +26,11 @@ export function AmmunitionPouchCapacity() {
         variant="dark"
       >
         <Stack direction="horizontal" gap={1}>
-          <span>{`${ammunitionValue}/${ammunitionMaximumValue}`}</span>
+          <span>
+            {`${formatNumber({ value: ammunitionValue })}/${formatNumber({
+              value: ammunitionMaximumValue,
+            })}`}
+          </span>
 
           <DeltasDisplay delta="ammunitionMaximum" />
         </Stack>

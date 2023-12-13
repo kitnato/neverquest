@@ -17,7 +17,7 @@ const KEY_STORAGE_PREFIX = "neverquest";
 export const KEY_SESSION = `${KEY_STORAGE_PREFIX}-session`;
 export const KEY_SETTINGS = `${KEY_STORAGE_PREFIX}-settings`;
 
-export const INFUSION_DELTA = FRAMERATE * 3;
+export const INFUSION_DELTA = FRAMERATE * 2;
 export const INFUSION_DURATION = 2500;
 
 export const LABEL_EMPTY = "--";

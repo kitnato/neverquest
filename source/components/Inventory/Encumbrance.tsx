@@ -24,7 +24,7 @@ export function Encumbrance() {
         variant="dark"
       >
         <Stack direction="horizontal" gap={1}>
-          {`${encumbranceValue}/${encumbranceMaximumValue}`}
+          <span>{`${encumbranceValue}/${encumbranceMaximumValue}`}</span>
 
           <DeltasDisplay delta="encumbranceMaximum" />
         </Stack>

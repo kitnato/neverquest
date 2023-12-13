@@ -22,9 +22,11 @@ export function AttackMeter() {
       }
       variant="secondary"
     >
-      {canAttackOrParryValue
-        ? formatNumber({ format: "time", value: attackDurationValue || attackRateValue })
-        : "EXHAUSTED"}
+      <span>
+        {canAttackOrParryValue
+          ? formatNumber({ format: "time", value: attackDurationValue || attackRateValue })
+          : "EXHAUSTED"}
+      </span>
     </LabelledProgressBar>
   );
 }

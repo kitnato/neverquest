@@ -54,7 +54,7 @@ export function ReceiveHealing() {
             }
             trigger={isPurchasable ? [] : ["focus", "hover"]}
           >
-            <span>
+            <div>
               <Button
                 disabled={!isPurchasable}
                 onClick={() => {
@@ -66,7 +66,7 @@ export function ReceiveHealing() {
               >
                 Operate
               </Button>
-            </span>
+            </div>
           </OverlayTrigger>
         </Stack>
       </div>

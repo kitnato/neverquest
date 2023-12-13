@@ -58,7 +58,7 @@ export function PurgeMemories() {
             }
             trigger={isPurchasable ? [] : ["focus", "hover"]}
           >
-            <span>
+            <div>
               <Button
                 disabled={!isPurchasable}
                 onClick={() => {
@@ -70,7 +70,7 @@ export function PurgeMemories() {
               >
                 Purge
               </Button>
-            </span>
+            </div>
           </OverlayTrigger>
         </Stack>
       </div>

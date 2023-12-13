@@ -56,7 +56,7 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
           Icon={IconUnknown}
           tooltip="Mastery"
         >
-          {LABEL_UNKNOWN}
+          <span>{LABEL_UNKNOWN}</span>
         </IconDisplay>
       )}
     </div>

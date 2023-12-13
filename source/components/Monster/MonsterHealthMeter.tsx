@@ -16,9 +16,9 @@ export function MonsterHealthMeter() {
       variant="dark"
     >
       <Stack direction="horizontal" gap={1}>
-        {`${formatNumber({ value: monsterHealthValue })}/${formatNumber({
+        <span>{`${formatNumber({ value: monsterHealthValue })}/${formatNumber({
           value: monsterHealthMaximumValue,
-        })}`}
+        })}`}</span>
 
         <DeltasDisplay delta="monsterHealth" />
       </Stack>

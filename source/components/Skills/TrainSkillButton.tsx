@@ -22,7 +22,7 @@ export function TrainSkillButton({ skill }: { skill: Skill }) {
       overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
       trigger={isAffordable ? [] : ["focus", "hover"]}
     >
-      <span>
+      <div>
         <Button
           disabled={!isAffordable}
           onClick={() => {
@@ -33,7 +33,7 @@ export function TrainSkillButton({ skill }: { skill: Skill }) {
         >
           Train
         </Button>
-      </span>
+      </div>
     </OverlayTrigger>
   );
 }

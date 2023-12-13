@@ -30,7 +30,7 @@ export function IconDisplay({
       <Stack gap={1}>
         {children}
 
-        <small className="text-muted">{description}</small>
+        <div className="small text-muted">{description}</div>
       </Stack>
     </Stack>
   );

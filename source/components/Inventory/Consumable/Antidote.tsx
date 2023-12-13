@@ -19,7 +19,7 @@ export function Antidote({ ID }: { ID: string }) {
       overlay={<Tooltip>Not poisoned.</Tooltip>}
       trigger={isPoisonedValue ? [] : ["focus", "hover"]}
     >
-      <span>
+      <div>
         <Button
           disabled={!isPoisonedValue}
           onClick={() => {
@@ -43,7 +43,7 @@ export function Antidote({ ID }: { ID: string }) {
         >
           Drink
         </Button>
-      </span>
+      </div>
     </OverlayTrigger>
   );
 }

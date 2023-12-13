@@ -27,9 +27,9 @@ export function InfusionProgress({ infusable }: { infusable: Infusable }) {
       <Stack direction="horizontal" gap={1}>
         <IconImage Icon={IconEssence} isSmall isStencilled />
 
-        {`${formatNumber({ value: infusionCurrentValue })}/${formatNumber({
+        <span>{`${formatNumber({ value: infusionCurrentValue })}/${formatNumber({
           value: infusionMaximumValue,
-        })}`}
+        })}`}</span>
       </Stack>
     </LabelledProgressBar>
   );

@@ -44,9 +44,9 @@ export function LabelledProgressBar({
             {sibling}
           </ProgressBar>
 
-          <small className="position-absolute text-light top-50 start-50 translate-middle">
+          <div className="position-absolute small text-light top-50 start-50 translate-middle">
             {children}
-          </small>
+          </div>
         </>
       )}
     </div>

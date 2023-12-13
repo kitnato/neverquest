@@ -20,7 +20,7 @@ export function Elixir({ ID }: { ID: string }) {
       overlay={<Tooltip>Already at full stamina.</Tooltip>}
       trigger={isStaminaAtMaximumValue ? ["focus", "hover"] : []}
     >
-      <span>
+      <div>
         <Button
           disabled={isStaminaAtMaximumValue}
           onClick={() => {
@@ -50,7 +50,7 @@ export function Elixir({ ID }: { ID: string }) {
         >
           Drink
         </Button>
-      </span>
+      </div>
     </OverlayTrigger>
   );
 }

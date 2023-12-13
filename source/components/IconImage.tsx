@@ -17,14 +17,14 @@ export function IconImage({
       placement={overlayPlacement}
       trigger={tooltip === undefined ? [] : ["focus", "hover"]}
     >
-      <span>
+      <div>
         <Icon
           className={`icon-image${isSmall ? " small" : ""}${isStencilled ? " stencilled" : ""}`}
           style={{
             transform: `scaleX(${isMirrored ? -1 : 1}) scaleY(${isFlipped ? -1 : 1})`,
           }}
         />
-      </span>
+      </div>
     </OverlayTrigger>
   );
 }

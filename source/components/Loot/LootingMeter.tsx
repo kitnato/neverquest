@@ -16,7 +16,11 @@ export function LootingMeter() {
       value={isLootingValue ? ((LOOTING_RATE - lootingDurationValue) / LOOTING_RATE) * 100 : 0}
       variant="secondary"
     >
-      {isLootingValue ? formatNumber({ format: "time", value: lootingDurationValue }) : LABEL_EMPTY}
+      <span>
+        {isLootingValue
+          ? formatNumber({ format: "time", value: lootingDurationValue })
+          : LABEL_EMPTY}
+      </span>
     </LabelledProgressBar>
   );
 }

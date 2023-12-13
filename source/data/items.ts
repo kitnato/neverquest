@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
 
+import { GLITCH_NUMBER } from "@neverquest/data/general";
 import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
 import IconAntidote from "@neverquest/icons/antidote.svg?react";
 import IconAntiqueCoin from "@neverquest/icons/antique-coin.svg?react";
@@ -92,7 +93,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
 
 export const DROP_CHANCE_OVERRIDE = {
   chance: 0.07,
-  stageIncludes: "7",
+  stageIncludes: GLITCH_NUMBER,
 };
 export const DROP_CHANCES = {
   "mysterious egg": 0.03,

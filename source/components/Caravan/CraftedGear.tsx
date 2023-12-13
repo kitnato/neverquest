@@ -32,7 +32,7 @@ export function CraftedGear({
         overlay={<Tooltip>{LABEL_OVER_ENCUMBERED}</Tooltip>}
         trigger={canFitItem ? [] : ["focus", "hover"]}
       >
-        <span>
+        <div>
           <Button
             className="w-100"
             disabled={!canFitItem}
@@ -53,7 +53,7 @@ export function CraftedGear({
           >
             Acquire
           </Button>
-        </span>
+        </div>
       </OverlayTrigger>
     </Stack>
   );

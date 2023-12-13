@@ -27,10 +27,12 @@ export function MonsterAttackMeter() {
       }
       variant="secondary"
     >
-      {formatNumber({
-        format: "time",
-        value: monsterAttackDurationValue || monsterAttackRateValue,
-      })}
+      <span>
+        {formatNumber({
+          format: "time",
+          value: monsterAttackDurationValue || monsterAttackRateValue,
+        })}
+      </span>
     </LabelledProgressBar>
   );
 }

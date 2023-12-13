@@ -80,7 +80,7 @@ export function Inventory() {
 
         {storedItems
           .filter(isGearItem)
-          .toSorted((gearItem1, gearItem2) => gearItem1.name.localeCompare(gearItem2.name))
+          .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
           .map((gearItem) => {
             const { ID, name } = gearItem;
             const canEquipGear = equippableItemsValue[ID];
@@ -94,7 +94,7 @@ export function Inventory() {
                     overlay={<Tooltip>Skill required.</Tooltip>}
                     trigger={canEquipGear ? [] : ["focus", "hover"]}
                   >
-                    <span>
+                    <div>
                       <Button
                         disabled={!canEquipGear}
                         onClick={() => {
@@ -104,7 +104,7 @@ export function Inventory() {
                       >
                         Equip
                       </Button>
-                    </span>
+                    </div>
                   </OverlayTrigger>
 
                   <DiscardItem ID={ID} name={name} />
@@ -115,9 +115,7 @@ export function Inventory() {
 
         {storedItems
           .filter(isTrinketItem)
-          .toSorted((trinketItem1, trinketItem2) =>
-            trinketItem1.name.localeCompare(trinketItem2.name),
-          )
+          .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
           .map((trinketItem) => {
             const { ID, name } = trinketItem;
 
@@ -149,9 +147,7 @@ export function Inventory() {
 
         {storedItems
           .filter(isInfusableItem)
-          .toSorted((infusableItem1, infusableItem2) =>
-            infusableItem1.name.localeCompare(infusableItem2.name),
-          )
+          .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
           .map((infusableItem) => {
             const { ID, name } = infusableItem;
 
@@ -172,14 +168,12 @@ export function Inventory() {
           ...stackItems(
             storedItems
               .filter(isConsumableItem)
-              .toSorted((consumableItem1, consumableItem2) =>
-                consumableItem1.name.localeCompare(consumableItem2.name),
-              ),
+              .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
           ),
           ...stackItems(
             storedItems
               .filter(isGemItem)
-              .toSorted((gemItem1, gemItem2) => gemItem1.name.localeCompare(gemItem2.name)),
+              .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
           ),
         ].map(({ amount, item }) => {
           const { ID, name } = item;

@@ -31,17 +31,17 @@ export function LootDisplay() {
                 ...stackItems(
                   itemsLootValue
                     .filter(isGearItem)
-                    .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
+                    .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
                 ),
                 ...stackItems(
                   itemsLootValue
                     .filter(isTrinketItem)
-                    .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
+                    .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
                 ),
                 ...stackItems(
                   itemsLootValue
                     .filter(isStackableItem)
-                    .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
+                    .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
                 ),
               ].map(({ amount, item }) => (
                 <ItemDisplay amount={amount} item={item} key={item.ID} />

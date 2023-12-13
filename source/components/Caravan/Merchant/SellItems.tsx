@@ -55,7 +55,7 @@ export function SellItems() {
 
           {storedItems
             .filter(isGearItem)
-            .toSorted((gearItem1, gearItem2) => gearItem1.name.localeCompare(gearItem2.name))
+            .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
             .map((gearItem) => (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={gearItem.ID}>
                 <ItemDisplay isInInventory item={gearItem} />
@@ -66,9 +66,7 @@ export function SellItems() {
 
           {storedItems
             .filter(isUsable)
-            .toSorted((usableItem1, usableItem2) =>
-              usableItem1.name.localeCompare(usableItem2.name),
-            )
+            .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
             .map((usableItem) => (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={usableItem.ID}>
                 <Usable item={usableItem} />
@@ -81,14 +79,12 @@ export function SellItems() {
             ...stackItems(
               storedItems
                 .filter(isConsumableItem)
-                .toSorted((consumableItem1, consumableItem2) =>
-                  consumableItem1.name.localeCompare(consumableItem2.name),
-                ),
+                .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
             ),
             ...stackItems(
               storedItems
                 .filter(isGemItem)
-                .toSorted((gemItem1, gemItem2) => gemItem1.name.localeCompare(gemItem2.name)),
+                .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
             ),
           ].map((currentStack) => {
             const { amount, item } = currentStack;

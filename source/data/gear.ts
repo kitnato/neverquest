@@ -147,13 +147,13 @@ export const SHIELD_SPECIFICATIONS: Record<
   tower: {
     block: [
       { maximum: 0.25, minimum: 0.23 },
-      { maximum: 0.4, minimum: 0.38 },
+      { maximum: 0.45, minimum: 0.43 },
     ],
     Icon: IconShieldTower,
     price: { maximum: 5500, minimum: 7 },
     stagger: [
       { maximum: 0.65, minimum: 0.6 },
-      { maximum: 0.9, minimum: 0.88 },
+      { maximum: 0.95, minimum: 0.93 },
     ],
     staminaCost: [
       { maximum: 7, minimum: 6 },

@@ -17,7 +17,7 @@ export function DeltasDisplay({ delta }: { delta: Delta }) {
   return (
     <div className="d-flex flex-nowrap text-floating pe-none position-relative">
       {deltasValue.map(({ display, ID }) => (
-        <small className="position-absolute top-50 start-100 translate-middle-y" key={ID}>
+        <div className="position-absolute top-50 start-100 translate-middle-y" key={ID}>
           <Stack
             className={getAnimationClass({
               animation: "fadeOutUp",
@@ -30,12 +30,12 @@ export function DeltasDisplay({ delta }: { delta: Delta }) {
             }}
           >
             {display.map(({ color, value }) => (
-              <strong className={color} key={value}>
+              <strong className={`${color} small`} key={value}>
                 {value}
               </strong>
             ))}
           </Stack>
-        </small>
+        </div>
       ))}
     </div>
   );

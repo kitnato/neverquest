@@ -9,6 +9,8 @@ export const MILLISECONDS_IN_SECOND = 1000;
 
 export const FRAMERATE = MILLISECONDS_IN_SECOND / 60;
 
+export const GLITCH_NUMBER = "7";
+
 export const GROWTH_MAXIMUM = 100;
 
 const KEY_STORAGE_PREFIX = "neverquest";

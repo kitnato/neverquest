@@ -28,44 +28,6 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
   const regenerationProgress =
     regenerationDurationValue === 0 ? 0 : regenerationRateValue - regenerationDurationValue;
 
-  const details = (() => {
-    if (isRecoveringValue) {
-      return "Recovering ...";
-    }
-
-    if (regenerationProgress === 0) {
-      return (
-        <Stack>
-          {`${label} regeneration`}
-
-          <Stack direction="horizontal" gap={1}>
-            <IconImage Icon={ReserveIcon} isSmall />
-
-            {`${regenerationAmountValue} per ${formatNumber({
-              format: "time",
-              value: regenerationRateValue,
-            })}`}
-          </Stack>
-        </Stack>
-      );
-    }
-
-    return (
-      <Stack>
-        {`Regenerating ${reserve}`}
-
-        <Stack direction="horizontal" gap={1}>
-          <IconImage Icon={ReserveIcon} isSmall />
-
-          {`${regenerationAmountValue} in ${formatNumber({
-            format: "time",
-            value: regenerationRateValue - regenerationProgress,
-          })}`}
-        </Stack>
-      </Stack>
-    );
-  })();
-
   return (
     <LabelledProgressBar
       attachment="above"
@@ -74,7 +36,43 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
       value={(regenerationProgress / regenerationRateValue) * 100}
       variant="secondary"
     >
-      {details}
+      {(() => {
+        if (isRecoveringValue) {
+          return "Recovering ...";
+        }
+
+        if (regenerationProgress === 0) {
+          return (
+            <Stack>
+              <span>{`${label} regeneration`}</span>
+
+              <Stack direction="horizontal" gap={1}>
+                <IconImage Icon={ReserveIcon} isSmall />
+
+                <span>{`${regenerationAmountValue} per ${formatNumber({
+                  format: "time",
+                  value: regenerationRateValue,
+                })}`}</span>
+              </Stack>
+            </Stack>
+          );
+        }
+
+        return (
+          <Stack>
+            {`Regenerating ${reserve}`}
+
+            <Stack direction="horizontal" gap={1}>
+              <IconImage Icon={ReserveIcon} isSmall />
+
+              <span>{`${regenerationAmountValue} in ${formatNumber({
+                format: "time",
+                value: regenerationRateValue - regenerationProgress,
+              })}`}</span>
+            </Stack>
+          </Stack>
+        );
+      })()}
     </LabelledProgressBar>
   );
 }

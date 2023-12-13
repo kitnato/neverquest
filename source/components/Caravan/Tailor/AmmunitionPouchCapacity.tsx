@@ -21,7 +21,7 @@ export function AmmunitionPouchCapacity() {
     <IconDisplay Icon={IconAmmunitionPouch} tooltip="Ammunition capacity">
       <LabelledProgressBar value={(ammunitionValue / ammunitionMaximumValue) * 100} variant="dark">
         <Stack direction="horizontal" gap={1}>
-          {`${ammunitionValue}/${ammunitionMaximumValue}`}
+          <span>{`${ammunitionValue}/${ammunitionMaximumValue}`}</span>
 
           <DeltasDisplay delta="ammunitionMaximum" />
         </Stack>

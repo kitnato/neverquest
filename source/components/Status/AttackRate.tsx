@@ -8,8 +8,8 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { AttackMeter } from "@neverquest/components/Status/AttackMeter";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { useAttack } from "@neverquest/hooks/actions/useAttack";
-import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
+import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import IconAttackRate from "@neverquest/icons/attack-rate.svg?react";
 import IconWeaponSpeed from "@neverquest/icons/speed.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
@@ -46,7 +46,7 @@ export function AttackRate() {
 
   const attack = useAttack();
 
-  useAnimate({
+  useTimerDelta({
     delta: setAttackDuration,
     onDelta: attack,
     stop:
@@ -132,9 +132,9 @@ export function AttackRate() {
           }
           trigger={isShowingAttackRateDetails ? ["focus", "hover"] : []}
         >
-          <span className="w-100">
+          <div className="w-100">
             <AttackMeter />
-          </span>
+          </div>
         </OverlayTrigger>
 
         <DeltasDisplay delta="attackRate" />

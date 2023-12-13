@@ -27,7 +27,7 @@ export function AmmunitionPouchCurrent() {
           variant="dark"
         >
           <Stack direction="horizontal" gap={1}>
-            {`${ammunitionValue}/${ammunitionMaximumValue}`}
+            <span>{`${ammunitionValue}/${ammunitionMaximumValue}`}</span>
 
             <DeltasDisplay delta="ammunition" />
           </Stack>

@@ -9,7 +9,7 @@ import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
 import { ReserveMeter } from "@neverquest/components/Reserves/ReserveMeter";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
-import { useAnimate } from "@neverquest/hooks/useAnimate";
+import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import IconVitality from "@neverquest/icons/vitality.svg?react";
@@ -31,7 +31,7 @@ export function Health() {
 
   const { baseAmount } = RESERVES.health;
 
-  useAnimate({
+  useTimerDelta({
     delta: setPoisonDuration,
     stop: !isPoisonedValue,
   });
@@ -118,9 +118,9 @@ export function Health() {
               placement="right"
               trigger={isShowingHealthDetails ? ["focus", "hover"] : []}
             >
-              <span className="w-100">
+              <div className="w-100">
                 <ReserveMeter reserve="health" />
-              </span>
+              </div>
             </OverlayTrigger>
 
             <DeltasDisplay delta="health" />

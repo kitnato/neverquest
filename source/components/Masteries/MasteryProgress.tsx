@@ -32,16 +32,18 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
           </Popover>
         }
       >
-        <span className="w-100">
+        <div className="w-100">
           <LabelledProgressBar
             value={isMasteryAtMaximumValue ? 100 : (masteryProgressValue / masteryCostValue) * 100}
             variant="secondary"
           >
-            {isMasteryAtMaximumValue
-              ? LABEL_MAXIMUM
-              : `${masteryProgressValue}/${masteryCostValue}`}
+            <span>
+              {isMasteryAtMaximumValue
+                ? LABEL_MAXIMUM
+                : `${masteryProgressValue}/${masteryCostValue}`}
+            </span>
           </LabelledProgressBar>
-        </span>
+        </div>
       </OverlayTrigger>
 
       <DeltasDisplay delta={delta} />

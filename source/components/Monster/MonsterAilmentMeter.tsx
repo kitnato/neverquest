@@ -28,19 +28,21 @@ export function MonsterAilmentMeter({
         </Popover>
       }
     >
-      <span className="w-100">
+      <div className="w-100">
         <LabelledProgressBar
           disableTransitions
           value={isMonsterAilingValue ? (monsterAilmentDurationValue / totalDuration) * 100 : 0}
           variant="secondary"
         >
-          {isMonsterAilingValue
-            ? format === "time"
-              ? formatNumber({ format, value: monsterAilmentDurationValue })
-              : `${monsterAilmentDurationValue} hits`
-            : LABEL_EMPTY}
+          <span>
+            {isMonsterAilingValue
+              ? format === "time"
+                ? formatNumber({ format, value: monsterAilmentDurationValue })
+                : `${monsterAilmentDurationValue} hits`
+              : LABEL_EMPTY}
+          </span>
         </LabelledProgressBar>
-      </span>
+      </div>
     </OverlayTrigger>
   );
 }

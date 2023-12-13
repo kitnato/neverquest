@@ -9,13 +9,13 @@ export function GemDescription({ gem }: { gem: Gem }) {
   const { color, Icon } = ELEMENTALS[elemental];
 
   return (
-    <span>
+    <div>
       <Stack className="d-inline-flex text-center" direction="horizontal" gap={1}>
         Adds elemental
         <IconImage Icon={Icon} isSmall />
         <span className={color}>{elemental}</span>
       </Stack>{" "}
       effect & a {damageModification} damage bonus to gear.
-    </span>
+    </div>
   );
 }

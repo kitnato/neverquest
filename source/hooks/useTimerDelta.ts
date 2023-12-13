@@ -5,7 +5,7 @@ import { clearInterval, setInterval } from "worker-timers";
 import { FRAMERATE } from "@neverquest/data/general";
 import { isGameOver } from "@neverquest/state/character";
 
-export function useAnimate({
+export function useTimerDelta({
   delta,
   factor = 1,
   onDelta,

@@ -19,7 +19,7 @@ export function Location() {
         iconProps={{ overlayPlacement: "bottom" }}
         tooltip="Location"
       >
-        {locationNameValue}
+        <span>{locationNameValue}</span>
       </IconDisplay>
     </div>
   );

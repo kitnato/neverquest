@@ -2,7 +2,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterAilmentMeter } from "@neverquest/components/Monster/MonsterAilmentMeter";
-import { useAnimate } from "@neverquest/hooks/useAnimate";
+import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import IconStaggered from "@neverquest/icons/staggered.svg?react";
 import { canReceiveAilment } from "@neverquest/state/ailments";
 import { masteryStatistic } from "@neverquest/state/masteries";
@@ -16,7 +16,7 @@ export function MonsterStaggered() {
   const stabilityValue = useRecoilValue(masteryStatistic("stability"));
   const setMonsterStaggerDuration = useSetRecoilState(monsterAilmentDuration("staggered"));
 
-  useAnimate({
+  useTimerDelta({
     delta: setMonsterStaggerDuration,
     stop: !isMonsterStaggered || isMonsterDeadValue,
   });

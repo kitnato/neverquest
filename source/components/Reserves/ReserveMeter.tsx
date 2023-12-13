@@ -71,25 +71,27 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
       variant="dark"
     >
       <Stack direction="horizontal" gap={1}>
-        {`${formatNumber({ value: reserveValue })}/${formatNumber({
+        <span>{`${formatNumber({ value: reserveValue })}/${formatNumber({
           value: reserveMaximumAilingValue,
-        })}`}
+        })}`}</span>
 
         {isAiling && (
           <>
-            {` (${formatNumber({ value: reserveMaximumValue })})`}
+            <span>{` (${formatNumber({ value: reserveMaximumValue })})`}</span>
 
             <IconImage Icon={isHealth ? IconPoison : IconBlight} isSmall isStencilled />
 
-            {`${
-              typeof ailmentValue === "number"
-                ? formatNumber({ format: "time", value: ailmentValue })
-                : formatNumber({
-                    decimals: 0,
-                    format: "percentage",
-                    value: ailmentValue.percentage,
-                  })
-            }`}
+            <span>
+              {`${
+                typeof ailmentValue === "number"
+                  ? formatNumber({ format: "time", value: ailmentValue })
+                  : formatNumber({
+                      decimals: 0,
+                      format: "percentage",
+                      value: ailmentValue.percentage,
+                    })
+              }`}
+            </span>
           </>
         )}
 

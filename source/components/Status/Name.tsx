@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { FormControl } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -18,48 +18,53 @@ export function Name() {
 
   const progressQuest = useProgressQuest();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     new MutationObserver(() => {
-      setCanEdit(!document.body.classList.contains("modal-open"));
+      const isModalOpen = document.body.classList.contains("modal-open");
+
+      setCanEdit(!isModalOpen);
+      setIsEditing(false);
     }).observe(document.body, { attributes: true });
   }, []);
 
   return (
     <IconDisplay Icon={isGameOverValue ? IconDead : IconAlive} tooltip="Name">
-      <FormControl
-        className={canEdit ? "hover-grow" : undefined}
-        disabled={!canEdit}
-        onBlur={({ currentTarget: { value } }) => {
-          if (!value) {
-            setName(LABEL_UNKNOWN);
-          }
+      {isEditing ? (
+        <FormControl
+          onBlur={({ currentTarget: { value } }) => {
+            if (!value) {
+              setName(LABEL_UNKNOWN);
+            }
 
-          setIsEditing(false);
-        }}
-        onChange={({ target: { value } }) => {
-          if (!value) {
-            return;
-          }
-
-          setName(value);
-          progressQuest({ quest: "settingName" });
-        }}
-        onClick={({ currentTarget }) => {
-          if (currentTarget.value === LABEL_UNKNOWN) {
-            currentTarget.setSelectionRange(0, 0);
-            currentTarget.select();
-          }
-
-          setIsEditing(true);
-        }}
-        onKeyDown={({ key }) => {
-          if (key === "Enter") {
             setIsEditing(false);
-          }
-        }}
-        plaintext={!isEditing}
-        value={nameValue}
-      />
+          }}
+          onChange={({ target: { value } }) => {
+            if (!value) {
+              return;
+            }
+
+            setName(value);
+            progressQuest({ quest: "settingName" });
+          }}
+          onKeyDown={({ key }) => {
+            if (key === "Enter") {
+              setIsEditing(false);
+            }
+          }}
+          value={nameValue}
+        />
+      ) : (
+        <span
+          className={canEdit ? "hover-grow" : undefined}
+          onClick={() => {
+            if (canEdit) {
+              setIsEditing(true);
+            }
+          }}
+        >
+          {nameValue}
+        </span>
+      )}
     </IconDisplay>
   );
 }

@@ -22,7 +22,7 @@ export function HearthstoneWarp() {
       overlay={<Tooltip>The hearthstone is cold.</Tooltip>}
       trigger={canWarp ? [] : ["focus", "hover"]}
     >
-      <span>
+      <div>
         <Button
           disabled={!canWarp}
           onClick={() => {
@@ -34,7 +34,7 @@ export function HearthstoneWarp() {
         >
           Warp
         </Button>
-      </span>
+      </div>
     </OverlayTrigger>
   );
 }

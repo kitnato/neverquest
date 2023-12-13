@@ -56,7 +56,7 @@ export function MonsterName() {
 
   return (
     <IconDisplay Icon={Icon} tooltip={tooltip}>
-      {monsterNameValue}
+      <span>{monsterNameValue}</span>
     </IconDisplay>
   );
 }

@@ -15,7 +15,7 @@ export function Alchemist() {
   const storedGemsStack = stackItems(
     inventoryValue
       .filter(isGemItem)
-      .toSorted((current1, current2) => current1.name.localeCompare(current2.name)),
+      .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
   );
 
   return (

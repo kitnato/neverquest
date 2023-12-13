@@ -23,17 +23,17 @@ export function AttributePointProgress() {
 
   return (
     <OverlayTrigger overlay={<Tooltip>Essence required for next attribute point.</Tooltip>}>
-      <span className="w-100">
+      <div className="w-100">
         <LabelledProgressBar value={(essenceValue / nextTotalCost) * 100} variant="secondary">
           <Stack direction="horizontal" gap={1}>
             <IconImage Icon={IconEssence} isSmall isStencilled />
 
-            {`${formatNumber({ value: essenceValue })}/${formatNumber({
+            <span>{`${formatNumber({ value: essenceValue })}/${formatNumber({
               value: nextTotalCost,
-            })}`}
+            })}`}</span>
           </Stack>
         </LabelledProgressBar>
-      </span>
+      </div>
     </OverlayTrigger>
   );
 }

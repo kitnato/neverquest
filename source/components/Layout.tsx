@@ -2,6 +2,7 @@ import { useLayoutEffect, useState } from "react";
 import { Col, Container, Row, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { Glitch } from "./Glitch";
 import { Awakening } from "@neverquest/components/Awakening";
 import { AttackButton } from "@neverquest/components/Controls/AttackButton";
 import { CapabilitiesButton } from "@neverquest/components/Controls/CapabilitiesButton";
@@ -73,7 +74,9 @@ export function Layout() {
 
     case "somnium": {
       return (
-        <Container className="mb-4">
+        <Container className="somnium mb-4">
+          <Glitch />
+
           <Row>
             <Col>
               <Stack gap={3}>

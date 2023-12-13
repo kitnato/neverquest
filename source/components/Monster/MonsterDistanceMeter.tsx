@@ -17,7 +17,7 @@ export function MonsterDistanceMeter() {
       value={(distanceValue / rangeValue) * 100}
       variant="secondary"
     >
-      {formatNumber({ format: "time", value: distanceValue })}
+      <span>{formatNumber({ format: "time", value: distanceValue })}</span>
     </LabelledProgressBar>
   );
 }

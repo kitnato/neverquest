@@ -34,11 +34,11 @@ export function PurchaseItemButton({
       }
       trigger={isPurchasable ? [] : ["focus", "hover"]}
     >
-      <span>
+      <div>
         <Button disabled={!isPurchasable} onClick={onPurchase} variant="outline-dark">
           Buy
         </Button>
-      </span>
+      </div>
     </OverlayTrigger>
   );
 }

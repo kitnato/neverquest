@@ -19,7 +19,7 @@ export function Bandages({ ID }: { ID: string }) {
       overlay={<Tooltip>{LABEL_FULL_HEALTH}</Tooltip>}
       trigger={isHealthAtMaximumValue ? ["focus", "hover"] : []}
     >
-      <span>
+      <div>
         <Button
           disabled={isHealthAtMaximumValue}
           onClick={() => {
@@ -33,7 +33,7 @@ export function Bandages({ ID }: { ID: string }) {
         >
           Use
         </Button>
-      </span>
+      </div>
     </OverlayTrigger>
   );
 }

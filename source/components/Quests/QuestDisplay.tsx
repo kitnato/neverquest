@@ -70,7 +70,7 @@ export function QuestDisplay({
           Icon={QUEST_CLASS_ICONS[questClass]}
           tooltip={capitalizeAll(questClass)}
         >
-          {title}
+          <span>{title}</span>
         </IconDisplay>
       </Stack>
 

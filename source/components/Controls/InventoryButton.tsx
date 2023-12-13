@@ -31,11 +31,9 @@ export function InventoryButton() {
   const badgeElement = useRef(null);
 
   useEffect(() => {
-    const { current } = badgeElement;
-
     animateElement({
       animation: "headShake",
-      element: current,
+      element: badgeElement.current,
       onEnd: resetNotifyEncumbranceValue,
     });
   }, [resetNotifyEncumbranceValue]);

@@ -54,7 +54,7 @@ export function ExpandAmmunitionPouch() {
               overlay={<Tooltip> {LABEL_NO_ESSENCE}</Tooltip>}
               trigger={isAffordable ? [] : ["focus", "hover"]}
             >
-              <span>
+              <div>
                 <Button
                   disabled={!isAffordable}
                   onClick={() => {
@@ -76,7 +76,7 @@ export function ExpandAmmunitionPouch() {
                 >
                   Expand
                 </Button>
-              </span>
+              </div>
             </OverlayTrigger>
           </Stack>
         </div>

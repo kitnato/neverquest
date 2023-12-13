@@ -41,7 +41,7 @@ export function TrainableSkill({ skill }: { skill: Skill }) {
             Icon={IconUnknown}
             tooltip="Skill"
           >
-            {LABEL_UNKNOWN}
+            <span>{LABEL_UNKNOWN}</span>
           </IconDisplay>
         )}
       </div>

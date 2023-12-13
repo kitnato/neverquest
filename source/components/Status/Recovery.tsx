@@ -8,8 +8,8 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { RecoveryMeter } from "@neverquest/components/Status/RecoveryMeter";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
 import { RECOVERY_RATE } from "@neverquest/data/statistics";
-import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
+import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import IconRecovery from "@neverquest/icons/recovery.svg?react";
 import IconResilience from "@neverquest/icons/resilience.svg?react";
 import { isRecovering, recoveryDuration } from "@neverquest/state/character";
@@ -25,7 +25,7 @@ export function Recovery() {
   const resilienceValue = useRecoilValue(masteryStatistic("resilience"));
   const setRecoveryDuration = useSetRecoilState(recoveryDuration);
 
-  useAnimate({
+  useTimerDelta({
     delta: setRecoveryDuration,
     stop: !isRecoveringValue,
   });
@@ -79,9 +79,9 @@ export function Recovery() {
           }
           trigger={resilienceValue > 0 ? ["focus", "hover"] : []}
         >
-          <span className="w-100">
+          <div className="w-100">
             <RecoveryMeter />
-          </span>
+          </div>
         </OverlayTrigger>
 
         <DeltasDisplay delta="recoveryRate" />

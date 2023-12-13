@@ -51,7 +51,7 @@ export function PurgeEssence() {
           }
           trigger={isPurchasable ? [] : ["focus", "hover"]}
         >
-          <span>
+          <div>
             <Button
               disabled={!isPurchasable}
               onClick={() => {
@@ -66,7 +66,7 @@ export function PurgeEssence() {
             >
               Purge
             </Button>
-          </span>
+          </div>
         </OverlayTrigger>
       </Stack>
     </div>

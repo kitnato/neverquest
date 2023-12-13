@@ -25,7 +25,7 @@ export function CraftGear({ onCraft, price }: { onCraft: () => void; price: numb
         overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
         trigger={isAffordable ? [] : ["focus", "hover"]}
       >
-        <span>
+        <div>
           <Button
             className="w-100"
             disabled={!isAffordable}
@@ -37,7 +37,7 @@ export function CraftGear({ onCraft, price }: { onCraft: () => void; price: numb
           >
             Craft
           </Button>
-        </span>
+        </div>
       </OverlayTrigger>
     </Stack>
   );

@@ -16,19 +16,6 @@ h6 {
   font-variant: all-petite-caps;
 }
 
-input {
-  &.form-control-plaintext {
-    cursor: pointer;
-    outline: none;
-  }
-
-  &.hover-grow:hover:not(:focus) {
-    transform: scale(1.1);
-    transform-origin: center left;
-    transition: transform 0.5s;
-  }
-}
-
 select {
   cursor: pointer;
 }
@@ -103,6 +90,13 @@ td.text-end > .hstack {
   }
 }
 
+.hover-grow:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transform-origin: center left;
+  transition: transform 0.5s;
+}
+
 .hstack.gap-1 {
   gap: 0.35rem !important;
 }
@@ -115,6 +109,10 @@ td.text-end > .hstack {
 
 .mastery span {
   width: max-content;
+}
+
+.monospaced {
+  font-family: monospace;
 }
 
 .offcanvas {

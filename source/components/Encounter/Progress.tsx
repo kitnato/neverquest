@@ -34,9 +34,9 @@ export function Progress() {
             variant="secondary"
           >
             <Stack direction="horizontal" gap={1}>
-              {`${formatNumber({ value: progressValue })}/${formatNumber({
+              <span>{`${formatNumber({ value: progressValue })}/${formatNumber({
                 value: progressMaximumValue,
-              })}`}
+              })}`}</span>
 
               <DeltasDisplay delta="progress" />
             </Stack>

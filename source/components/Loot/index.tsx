@@ -4,7 +4,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { LootDisplay } from "@neverquest/components/Loot/LootDisplay";
 import { Looting } from "@neverquest/components/Loot/Looting";
 import { useProgressStage } from "@neverquest/hooks/actions/useProgressStage";
-import { useAnimate } from "@neverquest/hooks/useAnimate";
+import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import { isLooting, lootingDuration } from "@neverquest/state/character";
 
 export function Loot() {
@@ -13,7 +13,7 @@ export function Loot() {
 
   const progressStage = useProgressStage();
 
-  useAnimate({
+  useTimerDelta({
     delta: setLootingDuration,
     onDelta: progressStage,
     stop: !isLootingValue,

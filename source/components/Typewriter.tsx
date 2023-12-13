@@ -1,4 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+
+import { useAnimation } from "@neverquest/hooks/useAnimation";
 
 const CURSOR = "|";
 const CURSOR_DELAY = 500;
@@ -12,15 +14,11 @@ export function Typewriter({ children, delay = TEXT_DELAY }: { children: string;
 
   const deltaCursorReference = useRef(0);
   const deltaDelayReference = useRef(0);
-  const frameReference = useRef(-1);
-  const timeReference = useRef(0);
 
-  const animate = useCallback(
-    (time: number) => {
-      const delta = time - (timeReference.current || time);
-
-      deltaCursorReference.current += delta;
-      deltaDelayReference.current += delta;
+  useAnimation({
+    onFrame: (elapsed) => {
+      deltaCursorReference.current += elapsed;
+      deltaDelayReference.current += elapsed;
 
       if (index === children.length && deltaCursorReference.current >= CURSOR_DELAY) {
         setCursor((currentCursor) => (currentCursor === CURSOR ? "" : CURSOR));
@@ -36,23 +34,11 @@ export function Typewriter({ children, delay = TEXT_DELAY }: { children: string;
 
         deltaDelayReference.current = 0;
       }
-
-      frameReference.current = requestAnimationFrame(animate);
-      timeReference.current = time;
     },
-    [children, delay, index],
-  );
-
-  useEffect(() => {
-    frameReference.current = requestAnimationFrame(animate);
-
-    return () => {
-      cancelAnimationFrame(frameReference.current);
-    };
-  }, [animate]);
+  });
 
   return (
-    <strong style={{ fontFamily: "monospace" }}>
+    <strong className="monospaced">
       {text}
       {cursor === "" ? <>&nbsp;</> : cursor}
     </strong>

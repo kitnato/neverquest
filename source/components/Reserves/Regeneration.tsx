@@ -10,8 +10,8 @@ import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/gener
 import { RESERVES } from "@neverquest/data/reserves";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
-import { useAnimate } from "@neverquest/hooks/useAnimate";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
+import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import IconFortitude from "@neverquest/icons/fortitude.svg?react";
 import IconRegenerationAmount from "@neverquest/icons/regeneration-amount.svg?react";
 import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react";
@@ -64,7 +64,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
   const changeReserve = RESERVE_CHANGE[reserve]();
 
-  useAnimate({
+  useTimerDelta({
     delta: setRegenerationDuration,
     onDelta: () => {
       changeReserve({ isRegeneration: true });
@@ -188,9 +188,9 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
         placement="right"
         trigger={calisthenicsValue ? ["focus", "hover"] : []}
       >
-        <span className="w-100">
+        <div className="w-100">
           <RegenerationMeter reserve={reserve} />
-        </span>
+        </div>
       </OverlayTrigger>
 
       <DeltasDisplay delta={regenerationDeltaAmount} />

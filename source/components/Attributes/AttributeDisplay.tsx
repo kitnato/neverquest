@@ -55,7 +55,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
               }
               placement="bottom"
             >
-              <span>
+              <div>
                 <Button
                   disabled={!areAttributesAffordableValue}
                   onClick={() => {
@@ -65,7 +65,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
                 >
                   <IconImage Icon={areAttributesAffordableValue ? IconIncrease : IconWait} />
                 </Button>
-              </span>
+              </div>
             </OverlayTrigger>
           )}
         </Stack>
@@ -79,7 +79,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
       Icon={IconUnknown}
       tooltip="Attribute"
     >
-      {LABEL_UNKNOWN}
+      <span>{LABEL_UNKNOWN}</span>
     </IconDisplay>
   );
 }

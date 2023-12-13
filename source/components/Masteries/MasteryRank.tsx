@@ -25,7 +25,7 @@ export function MasteryRank({ mastery }: { mastery: Mastery }) {
         iconProps={{ isSmall: true, overlayPlacement: "bottom" }}
         tooltip="Rank"
       >
-        {formatNumber({ value: masteryRankValue })}
+        <span>{formatNumber({ value: masteryRankValue })}</span>
       </IconDisplay>
 
       <DeltasDisplay delta={mastery} />

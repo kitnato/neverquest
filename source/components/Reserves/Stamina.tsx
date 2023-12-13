@@ -111,9 +111,9 @@ export function Stamina() {
               placement="right"
               trigger={isShowingStaminaDetails ? ["focus", "hover"] : []}
             >
-              <span className="w-100">
+              <div className="w-100">
                 <ReserveMeter reserve="stamina" />
-              </span>
+              </div>
             </OverlayTrigger>
 
             <DeltasDisplay delta="stamina" />

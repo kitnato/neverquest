@@ -22,9 +22,7 @@ export function Monster() {
   const generateMonster = useGenerateMonster();
 
   useEffect(() => {
-    const { current } = element;
-
-    setMonsterElement(current);
+    setMonsterElement(element.current);
 
     return resetMonsterElement;
   }, [resetMonsterElement, setMonsterElement]);

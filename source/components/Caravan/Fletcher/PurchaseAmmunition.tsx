@@ -70,7 +70,7 @@ export function PurchaseAmmunition() {
                 }
                 trigger={canPurchase ? [] : ["focus", "hover"]}
               >
-                <span>
+                <div>
                   <Dropdown as={ButtonGroup}>
                     <Button
                       disabled={!canPurchase}
@@ -118,7 +118,7 @@ export function PurchaseAmmunition() {
                       ))}
                     </DropdownMenu>
                   </Dropdown>
-                </span>
+                </div>
               </OverlayTrigger>
             );
           })()}

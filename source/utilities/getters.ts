@@ -58,7 +58,7 @@ export function getAffixStructure(): AffixStructure {
   let cumulativeProbability = 0;
 
   for (const [key, probability] of Object.entries(AFFIX_STRUCTURE).toSorted(
-    ([, current1], [, current2]) => current1 - current2,
+    ([, probability1], [, probability2]) => probability1 - probability2,
   )) {
     cumulativeProbability += probability;
 
@@ -234,6 +234,34 @@ export function getProgressReduction(stage: number) {
   });
 }
 
+export function getMeleeRanges({
+  factor,
+  gearClass,
+  grip,
+}: {
+  factor: number;
+  gearClass: WeaponClass;
+  grip: Grip;
+}) {
+  const {
+    ability: abilityModifier,
+    damage: damageModifier,
+    rate: rateModifier,
+    stamina: staminaModifier,
+    weight: weightModifier,
+  } = WEAPON_MODIFIER[grip];
+  const { damage, rate, staminaCost, weight } = WEAPON_BASE;
+  const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
+
+  return {
+    abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
+    damage: getRange({ factor, modifier: damageModifier, ranges: damage }),
+    rate: getRange({ factor, modifier: rateModifier, ranges: rate }),
+    staminaCost: getRange({ factor, modifier: staminaModifier, ranges: staminaCost }),
+    weight: getRange({ factor, modifier: weightModifier, ranges: weight }),
+  };
+}
+
 export function getQuestsData(quest: Quest): QuestData[] {
   const { description, hidden, progression, title } = QUESTS[quest];
 
@@ -247,7 +275,7 @@ export function getQuestsData(quest: Quest): QuestData[] {
   }));
 }
 
-function getRange({
+export function getRange({
   factor,
   modifier = 1,
   ranges,
@@ -270,6 +298,28 @@ function getRange({
       Number.isInteger(ranges[0].minimum) && Number.isInteger(ranges[1].minimum)
         ? Math.round(minimumResult)
         : minimumResult,
+  };
+}
+
+export function getRangedRanges({ factor, gearClass }: { factor: number; gearClass: WeaponClass }) {
+  const {
+    ability: abilityModifier,
+    damage: damageModifier,
+    rate: rateModifier,
+    stamina: staminaModifier,
+    weight: weightModifier,
+  } = WEAPON_MODIFIER.ranged;
+  const { ammunitionCost, damage, range, rate, staminaCost, weight } = WEAPON_BASE;
+  const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
+
+  return {
+    abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
+    ammunitionCost: getRange({ factor, ranges: ammunitionCost }),
+    damage: getRange({ factor, modifier: damageModifier, ranges: damage }),
+    range: getRange({ factor, ranges: range }),
+    rate: getRange({ factor, modifier: rateModifier, ranges: rate }),
+    staminaCost: getRange({ factor, modifier: staminaModifier, ranges: staminaCost }),
+    weight: getRange({ factor, modifier: weightModifier, ranges: weight }),
   };
 }
 
@@ -329,56 +379,6 @@ export function getShieldRanges({ factor, gearClass }: { factor: number; gearCla
 
 export function getSnapshotGetter({ getLoadable }: Snapshot) {
   return <T>(state: RecoilValue<T>) => getLoadable(state).getValue();
-}
-
-export function getMeleeRanges({
-  factor,
-  gearClass,
-  grip,
-}: {
-  factor: number;
-  gearClass: WeaponClass;
-  grip: Grip;
-}) {
-  const {
-    ability: abilityModifier,
-    damage: damageModifier,
-    rate: rateModifier,
-    stamina: staminaModifier,
-    weight: weightModifier,
-  } = WEAPON_MODIFIER[grip];
-  const { damage, rate, staminaCost, weight } = WEAPON_BASE;
-  const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
-
-  return {
-    abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
-    damage: getRange({ factor, modifier: damageModifier, ranges: damage }),
-    rate: getRange({ factor, modifier: rateModifier, ranges: rate }),
-    staminaCost: getRange({ factor, modifier: staminaModifier, ranges: staminaCost }),
-    weight: getRange({ factor, modifier: weightModifier, ranges: weight }),
-  };
-}
-
-export function getRangedRanges({ factor, gearClass }: { factor: number; gearClass: WeaponClass }) {
-  const {
-    ability: abilityModifier,
-    damage: damageModifier,
-    rate: rateModifier,
-    stamina: staminaModifier,
-    weight: weightModifier,
-  } = WEAPON_MODIFIER.ranged;
-  const { ammunitionCost, damage, range, rate, staminaCost, weight } = WEAPON_BASE;
-  const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
-
-  return {
-    abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
-    ammunitionCost: getRange({ factor, ranges: ammunitionCost }),
-    damage: getRange({ factor, modifier: damageModifier, ranges: damage }),
-    range: getRange({ factor, ranges: range }),
-    rate: getRange({ factor, modifier: rateModifier, ranges: rate }),
-    staminaCost: getRange({ factor, modifier: staminaModifier, ranges: staminaCost }),
-    weight: getRange({ factor, modifier: weightModifier, ranges: weight }),
-  };
 }
 
 export function getTotalElementalEffects({

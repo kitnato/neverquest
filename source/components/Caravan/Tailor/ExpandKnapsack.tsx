@@ -55,7 +55,7 @@ export function ExpandKnapsack() {
               overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
               trigger={isAffordable ? [] : ["focus", "hover"]}
             >
-              <span>
+              <div>
                 <Button
                   disabled={!isAffordable}
                   onClick={() => {
@@ -82,7 +82,7 @@ export function ExpandKnapsack() {
                 >
                   Expand
                 </Button>
-              </span>
+              </div>
             </OverlayTrigger>
           </Stack>
         </div>

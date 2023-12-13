@@ -19,7 +19,7 @@ export function Salve({ ID }: { ID: string }) {
       overlay={<Tooltip>Not blighted.</Tooltip>}
       trigger={isBlightedValue ? [] : ["focus", "hover"]}
     >
-      <span>
+      <div>
         <Button
           disabled={!isBlightedValue}
           onClick={() => {
@@ -43,7 +43,7 @@ export function Salve({ ID }: { ID: string }) {
         >
           Apply
         </Button>
-      </span>
+      </div>
     </OverlayTrigger>
   );
 }

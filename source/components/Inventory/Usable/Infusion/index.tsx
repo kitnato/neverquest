@@ -12,7 +12,7 @@ import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
 import { useInfuse } from "@neverquest/hooks/actions/useInfuse";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { useAnimate } from "@neverquest/hooks/useAnimate";
+import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import { inventory, ownedItem } from "@neverquest/state/inventory";
 import { infusionDelta, infusionLevel, infusionStep } from "@neverquest/state/items";
 import type { Infusable } from "@neverquest/types/unions";
@@ -45,7 +45,7 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
     resetInfusionDelta();
   };
 
-  useAnimate({
+  useTimerDelta({
     delta: setInfusionDelta,
     onDelta: () => {
       infuse(infusable);
@@ -60,7 +60,7 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
       overlay={<Tooltip>{LABEL_OVER_ENCUMBERED}</Tooltip>}
       trigger={canFitMysteriousEgg ? [] : ["focus", "hover"]}
     >
-      <span>
+      <div>
         <Button
           disabled={!canFitMysteriousEgg}
           onClick={() => {
@@ -78,7 +78,7 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
         >
           Hatch
         </Button>
-      </span>
+      </div>
     </OverlayTrigger>
   ) : (
     <OverlayTrigger
@@ -91,7 +91,7 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
       }
       trigger={canInfuse ? [] : ["focus", "hover"]}
     >
-      <span>
+      <div>
         <Button
           disabled={!canInfuse}
           onMouseDown={() => {
@@ -103,7 +103,7 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
         >
           Infuse
         </Button>
-      </span>
+      </div>
     </OverlayTrigger>
   );
 }

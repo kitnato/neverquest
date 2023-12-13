@@ -27,7 +27,7 @@ export function Quests({ questClass }: { questClass: QuestClass }) {
 
       <LabelledProgressBar value={(completedQuestsValue / questCount) * 100} variant="dark">
         <Stack direction="horizontal" gap={1}>
-          {`${completedQuestsValue}/${questCount}`}
+          <span>{`${completedQuestsValue}/${questCount}`}</span>
 
           <DeltasDisplay delta={questClass} />
         </Stack>

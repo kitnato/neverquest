@@ -42,7 +42,7 @@ export function CrewHirable({ crew }: { crew: Crew }) {
             overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
             trigger={isAffordable ? [] : ["focus", "hover"]}
           >
-            <span>
+            <div>
               <Button
                 disabled={!isAffordable}
                 onClick={() => {
@@ -52,7 +52,7 @@ export function CrewHirable({ crew }: { crew: Crew }) {
               >
                 Hire
               </Button>
-            </span>
+            </div>
           </OverlayTrigger>
         </Stack>
       </div>
@@ -66,7 +66,7 @@ export function CrewHirable({ crew }: { crew: Crew }) {
         Icon={IconUnknown}
         tooltip="Caravan crew"
       >
-        {LABEL_UNKNOWN}
+        <span>{LABEL_UNKNOWN}</span>
       </IconDisplay>
     );
   }

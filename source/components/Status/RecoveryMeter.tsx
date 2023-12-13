@@ -20,7 +20,9 @@ export function RecoveryMeter() {
       }
       variant="secondary"
     >
-      {formatNumber({ format: "time", value: recoveryDurationValue || recoveryRateValue })}
+      <span>
+        {formatNumber({ format: "time", value: recoveryDurationValue || recoveryRateValue })}
+      </span>
     </LabelledProgressBar>
   );
 }

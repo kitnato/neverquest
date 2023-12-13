@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
+import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
@@ -33,7 +34,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
       attachment="above"
       disableTransitions
       isSmall
-      value={(regenerationProgress / regenerationRateValue) * 100}
+      value={(regenerationProgress / regenerationRateValue) * PERCENTAGE_POINTS}
       variant="secondary"
     >
       {(() => {

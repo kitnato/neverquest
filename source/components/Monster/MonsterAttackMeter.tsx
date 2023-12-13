@@ -1,6 +1,7 @@
 import { useRecoilValue } from "recoil";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
+import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import {
   isMonsterAiling,
   monsterAttackDuration,
@@ -23,7 +24,7 @@ export function MonsterAttackMeter() {
           ? 0
           : monsterAttackRateValue - monsterAttackDurationValue) /
           monsterAttackRateValue) *
-        100
+        PERCENTAGE_POINTS
       }
       variant="secondary"
     >

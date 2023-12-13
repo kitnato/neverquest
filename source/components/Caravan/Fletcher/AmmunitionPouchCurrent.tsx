@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
+import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
 import { ownedItem } from "@neverquest/state/inventory";
@@ -23,7 +24,7 @@ export function AmmunitionPouchCurrent() {
     return (
       <IconDisplay Icon={IconAmmunitionPouch} tooltip="Ammunition pouch">
         <LabelledProgressBar
-          value={(ammunitionValue / ammunitionMaximumValue) * 100}
+          value={(ammunitionValue / ammunitionMaximumValue) * PERCENTAGE_POINTS}
           variant="dark"
         >
           <Stack direction="horizontal" gap={1}>

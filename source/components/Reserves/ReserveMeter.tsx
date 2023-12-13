@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { ProgressBar, Stack } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 
-import { DeltasDisplay } from "../DeltasDisplay";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
+import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconBlight from "@neverquest/icons/blight.svg?react";
 import IconPoison from "@neverquest/icons/poison.svg?react";
@@ -43,7 +44,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
 
   const deltaReserveMaximum = isHealth ? "healthMaximum" : "staminaMaximum";
   const penalty = Math.round(
-    ((reserveMaximumValue - reserveMaximumAilingValue) / reserveMaximumValue) * 100,
+    ((reserveMaximumValue - reserveMaximumAilingValue) / reserveMaximumValue) * PERCENTAGE_POINTS,
   );
 
   useDeltaText({
@@ -67,7 +68,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
           <ProgressBar animated={isHealth} key={2} now={penalty} striped variant="secondary" />
         ) : undefined
       }
-      value={(reserveValue / reserveMaximumAilingValue) * (100 - penalty)}
+      value={(reserveValue / reserveMaximumAilingValue) * (PERCENTAGE_POINTS - penalty)}
       variant="dark"
     >
       <Stack direction="horizontal" gap={1}>

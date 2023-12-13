@@ -146,7 +146,7 @@ export const INHERITABLE_ITEMS: (Infusable | Trinket)[] = [
 ] as const;
 
 export const GEM_BASE = {
-  price: 100,
+  price: 250,
   weight: 1,
 };
 export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.25 };

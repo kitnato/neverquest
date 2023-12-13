@@ -4,6 +4,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { QuestListing } from "@neverquest/components/Quests/QuestListing";
+import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { QUESTS_COUNT, QUEST_TYPES_BY_CLASS } from "@neverquest/data/quests";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { completedQuestsCount } from "@neverquest/state/quests";
@@ -25,7 +26,10 @@ export function Quests({ questClass }: { questClass: QuestClass }) {
     <Stack className="overflow-y-hidden" gap={3}>
       <hr />
 
-      <LabelledProgressBar value={(completedQuestsValue / questCount) * 100} variant="dark">
+      <LabelledProgressBar
+        value={(completedQuestsValue / questCount) * PERCENTAGE_POINTS}
+        variant="dark"
+      >
         <Stack direction="horizontal" gap={1}>
           <span>{`${completedQuestsValue}/${questCount}`}</span>
 

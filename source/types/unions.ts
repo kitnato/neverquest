@@ -47,8 +47,8 @@ export const CREW_TYPES = [
   "tailor",
   "blacksmith",
   "mercenary",
-  "witch",
   "fletcher",
+  "witch",
   "alchemist",
   "occultist",
 ] as const;
@@ -342,8 +342,8 @@ export type StateKey =
   | "isGameOver"
   | "isHealthAtMaximum"
   | "isHealthLow"
-  | "isImmortal"
   | "isInventoryOpen"
+  | "isInvulnerable"
   | "isLootAvailable"
   | "isLooting"
   | "isMasteryAtMaximum"

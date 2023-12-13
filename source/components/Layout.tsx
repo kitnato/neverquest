@@ -2,7 +2,6 @@ import { useLayoutEffect, useState } from "react";
 import { Col, Container, Row, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { Glitch } from "./Glitch";
 import { Awakening } from "@neverquest/components/Awakening";
 import { AttackButton } from "@neverquest/components/Controls/AttackButton";
 import { CapabilitiesButton } from "@neverquest/components/Controls/CapabilitiesButton";
@@ -15,6 +14,7 @@ import { Encounter } from "@neverquest/components/Encounter";
 import { WildernessStatus } from "@neverquest/components/Encounter/WildernessStatus";
 import { Essence } from "@neverquest/components/Essence";
 import { GameOver } from "@neverquest/components/GameOver";
+import { Glitch } from "@neverquest/components/Glitch";
 import { Gear } from "@neverquest/components/Inventory/Gear";
 import { Location } from "@neverquest/components/Location";
 import { Masteries } from "@neverquest/components/Masteries";

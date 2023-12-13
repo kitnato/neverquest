@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
+import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconProgress from "@neverquest/icons/progress.svg?react";
 import { location, progress, progressMaximum } from "@neverquest/state/encounter";
@@ -30,7 +31,7 @@ export function Progress() {
       >
         <Stack direction="horizontal">
           <LabelledProgressBar
-            value={(progressValue / progressMaximumValue) * 100}
+            value={(progressValue / progressMaximumValue) * PERCENTAGE_POINTS}
             variant="secondary"
           >
             <Stack direction="horizontal" gap={1}>

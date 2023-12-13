@@ -1,4 +1,3 @@
-import { CREW } from "@neverquest/data/caravan";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import type { MonsterAilment } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -34,12 +33,12 @@ export const BOSS_STAGE_START = 10;
 export const BLIGHT = {
   boss: 1.2,
   chance: {
-    maximum: 0.25,
+    maximum: 0.3,
     minimum: 0.075,
   },
   finality: 0.7777,
   increment: 0.025,
-  requiredStage: CREW.witch.requiredStage + 5,
+  requiredStage: 55,
 };
 
 export const ESSENCE = {
@@ -51,11 +50,12 @@ export const ESSENCE = {
 };
 
 export const MONSTER_ATTACK_RATE = {
-  base: 3700,
+  attenuation: 4000,
+  base: 4000,
   bonus: 0.01,
   boss: 1.1,
-  finality: 770,
-  minimum: 1200,
+  finality: 1777,
+  minimum: 1800,
 };
 
 export const MONSTER_DAMAGE = {
@@ -77,17 +77,17 @@ export const MONSTER_HEALTH = {
 export const POISON = {
   boss: 1.25,
   chance: {
-    maximum: 0.33,
-    minimum: 0.1,
+    maximum: 0.35,
+    minimum: 0.05,
   },
   duration: {
     maximum: 250_000,
     minimum: 10_000,
   },
-  finality: 0.7777,
+  finality: 0.5777,
   magnitude: {
-    maximum: 0.15,
-    minimum: 0.03,
+    maximum: 0.16,
+    minimum: 0.02,
   },
-  requiredStage: CREW.witch.requiredStage,
+  requiredStage: 45,
 };

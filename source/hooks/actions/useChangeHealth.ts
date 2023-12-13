@@ -9,7 +9,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import {
   health,
   healthMaximumPoisoned,
-  isImmortal,
+  isInvulnerable,
   regenerationAmount,
   regenerationDuration,
 } from "@neverquest/state/reserves";
@@ -35,7 +35,7 @@ export function useChangeHealth() {
         const formattedValue = formatNumber({ value });
         const isPositive = value > 0;
 
-        let newHealth = get(health) + value;
+        let newHealth = get(health) + (get(isInvulnerable) ? (isPositive ? value : 0) : value);
 
         addDelta({
           contents:
@@ -86,9 +86,7 @@ export function useChangeHealth() {
           reset(regenerationDuration("health"));
         }
 
-        if (isPositive || !get(isImmortal)) {
-          set(health, newHealth);
-        }
+        set(health, newHealth);
       },
     [addDelta, progressQuest, toggleAttacking],
   );

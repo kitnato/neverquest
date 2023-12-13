@@ -53,7 +53,7 @@ export const CREW: Record<
     requiredStage: 30,
   },
   blacksmith: {
-    description: "Crafts superior gear.",
+    description: "Crafts superior armor, weapons and shields.",
     Icon: IconBlacksmith,
     interaction: "Craft",
     monologues: {
@@ -73,8 +73,8 @@ export const CREW: Record<
       [GROWTH_MAXIMUM]: "...",
       [LEVELLING_MAXIMUM]: "There's too many of them.",
     },
-    price: 300,
-    requiredStage: 25,
+    price: 150,
+    requiredStage: 20,
   },
   medic: {
     description: "Heals wounds and sells bandages.",
@@ -179,8 +179,8 @@ export const CREW: Record<
       [GROWTH_MAXIMUM]: "...",
       [LEVELLING_MAXIMUM]: "The spirits have gone silent.",
     },
-    price: 150,
-    requiredStage: 20,
+    price: 300,
+    requiredStage: 25,
   },
 };
 

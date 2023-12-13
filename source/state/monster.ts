@@ -15,6 +15,7 @@ import {
   MONSTER_ATTACK_RATE,
   MONSTER_DAMAGE,
   MONSTER_HEALTH,
+  POISON,
 } from "@neverquest/data/monster";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { bleed } from "@neverquest/state/ailments";
@@ -114,9 +115,9 @@ export const isMonsterDead = withStateKey("isMonsterDead", (key) =>
 export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   selector({
     get: ({ get }) => {
-      const { base, bonus, boss, finality, minimum } = MONSTER_ATTACK_RATE;
+      const { attenuation, base, bonus, boss, finality, minimum } = MONSTER_ATTACK_RATE;
       const encounterValue = get(encounter);
-      const factor = getGrowthSigmoid(get(stage));
+      const factor = getGrowthTriangular(get(stage)) / attenuation;
 
       if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
         return finality;
@@ -260,6 +261,39 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
             ? TRINKETS["torn manuscript"].item
             : undefined,
       };
+    },
+    key,
+  }),
+);
+
+export const poisonChance = withStateKey("poisonChance", (key) =>
+  selector({
+    get: ({ get }) => {
+      const encounterValue = get(encounter);
+      const stageValue = get(stage);
+
+      const {
+        boss,
+        chance: { maximum, minimum },
+        finality,
+        requiredStage,
+      } = POISON;
+
+      if (stageValue < requiredStage) {
+        return 0;
+      }
+
+      if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
+        return finality;
+      }
+
+      return (
+        getFromRange({
+          factor: getGrowthSigmoid(getLinearMapping({ offset: requiredStage, stage: stageValue })),
+          maximum,
+          minimum,
+        }) * (encounterValue === "boss" ? boss : 1)
+      );
     },
     key,
   }),

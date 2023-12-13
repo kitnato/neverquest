@@ -7,14 +7,14 @@ import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { stage } from "@neverquest/state/encounter";
 import { getFromRange, getLinearMapping, getRange } from "@neverquest/utilities/getters";
 
-const GLITCH_CHARACTERS = "!·$%&/()=?¿|@#~¬+^*[]{}-_.:<>";
+const CHARACTERS = "!·&=?¿|@#~¬+/\\^*[]{}-_<>";
 
-const LATENCY = 100;
+const LATENCY = 80;
 
 function getGlitchingElement() {
   const textElements = document.body
     .querySelector(".somnium")
-    ?.querySelectorAll("button, h6, small, span, strong");
+    ?.querySelectorAll("button, h6, span, strong");
 
   if (textElements === undefined) {
     return;
@@ -34,15 +34,19 @@ function glitchElementAt({ element, originalText }: { element: Element; original
   }
 
   element.textContent = [...textContent]
-    .map((character, index) =>
-      index === Math.floor(Math.random() * textContent.length)
-        ? Math.random() < 0.2
-          ? GLITCH_CHARACTERS[Math.floor(Math.random() * GLITCH_CHARACTERS.length)]
-          : GLITCH_NUMBER
-        : Math.random() < 0.35
-          ? character
-          : originalText[index],
-    )
+    .map((_, index) => {
+      const glitchChance = Math.random();
+
+      if (glitchChance <= 0.2) {
+        return CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
+      }
+
+      if (glitchChance <= 0.6) {
+        return GLITCH_NUMBER;
+      }
+
+      return originalText[index];
+    })
     .join("");
 }
 
@@ -92,7 +96,7 @@ export function Glitch() {
             setGlitchingElements((current) => ({
               ...current,
               [nanoid()]: {
-                duration: 2200,
+                duration: 1500,
                 element,
                 latency: LATENCY,
                 originalText: textContent,

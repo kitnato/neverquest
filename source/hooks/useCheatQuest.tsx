@@ -9,7 +9,7 @@ import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { isAttacking } from "@neverquest/state/character";
 import { location, progress, progressMaximum, stage } from "@neverquest/state/encounter";
-import { isImmortal } from "@neverquest/state/reserves";
+import { isInvulnerable } from "@neverquest/state/reserves";
 import { essenceLoot } from "@neverquest/state/resources";
 import { SKILL_TYPES } from "@neverquest/types/unions";
 
@@ -17,7 +17,7 @@ declare const window: Window & {
   cheatQuest: (state: string, value?: number) => void;
 };
 
-export function CheatQuest() {
+export function useCheatQuest() {
   const locationValue = useRecoilValue(location);
   const stageValue = useRecoilValue(stage);
   const progressMaximumValue = useRecoilValue(progressMaximum);
@@ -25,7 +25,7 @@ export function CheatQuest() {
   const resetEssenceLoot = useResetRecoilState(essenceLoot);
 
   const setIsAttacking = useSetRecoilState(isAttacking);
-  const setIsImmortal = useSetRecoilState(isImmortal);
+  const setIsInvulnerable = useSetRecoilState(isInvulnerable);
   const setProgress = useSetRecoilState(progress);
 
   const acquireSkill = useAcquireSkill();
@@ -40,7 +40,7 @@ export function CheatQuest() {
       switch (state) {
         // Doom
         case "IDBEHOLDV": {
-          setIsImmortal((isImmortal) => !isImmortal);
+          setIsInvulnerable((isCurrentlyInvulnerable) => !isCurrentlyInvulnerable);
 
           break;
         }
@@ -107,8 +107,6 @@ export function CheatQuest() {
     toggleLocation,
     transactEssence,
     setIsAttacking,
-    setIsImmortal,
+    setIsInvulnerable,
   ]);
-
-  return <></>;
 }

@@ -4,7 +4,7 @@ import { BLIGHT, POISON } from "@neverquest/data/monster";
 import { HEALTH_LOW_THRESHOLD, RESERVES, RESERVE_MINIMUM } from "@neverquest/data/reserves";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { encounter, stage } from "@neverquest/state/encounter";
+import { stage } from "@neverquest/state/encounter";
 import { questsBonus } from "@neverquest/state/quests";
 import type { BlightMagnitude } from "@neverquest/types";
 import type { Reserve } from "@neverquest/types/unions";
@@ -51,7 +51,7 @@ export const healthMaximumPoisoned = withStateKey("healthMaximumPoisoned", (key)
     get: ({ get }) =>
       Math.max(
         get(healthMaximum) -
-          Math.round(
+          Math.ceil(
             get(healthMaximum) * get(poisonMagnitude) * (get(poisonDuration) / get(poisonLength)),
           ),
         RESERVE_MINIMUM,
@@ -101,39 +101,6 @@ export const isRegenerating = withStateKey("isRegenerating", (key) =>
 export const isStaminaAtMaximum = withStateKey("isStaminaAtMaximum", (key) =>
   selector({
     get: ({ get }) => get(stamina) >= get(staminaMaximumBlighted),
-    key,
-  }),
-);
-
-export const poisonChance = withStateKey("poisonChance", (key) =>
-  selector({
-    get: ({ get }) => {
-      const encounterValue = get(encounter);
-      const stageValue = get(stage);
-
-      const {
-        boss,
-        chance: { maximum, minimum },
-        finality,
-        requiredStage,
-      } = POISON;
-
-      if (stageValue < requiredStage) {
-        return 0;
-      }
-
-      if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
-        return finality;
-      }
-
-      return (
-        getFromRange({
-          factor: getGrowthSigmoid(getLinearMapping({ offset: requiredStage, stage: stageValue })),
-          maximum,
-          minimum,
-        }) * (encounterValue === "boss" ? boss : 1)
-      );
-    },
     key,
   }),
 );
@@ -264,7 +231,7 @@ export const regenerationDuration = withStateKey("regenerationDuration", (key) =
   }),
 );
 
-export const isImmortal = withStateKey("isImmortal", (key) =>
+export const isInvulnerable = withStateKey("isInvulnerable", (key) =>
   atom({
     default: false,
     effects: [handleLocalStorage({ key })],

@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { LABEL_MAXIMUM, LEVELLING_MAXIMUM } from "@neverquest/data/general";
+import { LABEL_MAXIMUM, LEVELLING_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import { infusionCurrent, infusionLevel, infusionMaximum } from "@neverquest/state/items";
 import type { Infusable } from "@neverquest/types/unions";
@@ -21,7 +21,7 @@ export function InfusionProgress({ infusable }: { infusable: Infusable }) {
   return (
     <LabelledProgressBar
       disableTransitions
-      value={(infusionCurrentValue / infusionMaximumValue) * 100}
+      value={(infusionCurrentValue / infusionMaximumValue) * PERCENTAGE_POINTS}
       variant="secondary"
     >
       <Stack direction="horizontal" gap={1}>

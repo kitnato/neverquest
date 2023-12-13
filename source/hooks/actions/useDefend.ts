@@ -28,14 +28,9 @@ import {
   monsterAttackRate,
   monsterDamageAiling,
   monsterElement,
-} from "@neverquest/state/monster";
-import {
-  blight,
-  isPoisoned,
   poisonChance,
-  poisonDuration,
-  poisonLength,
-} from "@neverquest/state/reserves";
+} from "@neverquest/state/monster";
+import { blight, isPoisoned, poisonDuration, poisonLength } from "@neverquest/state/reserves";
 import {
   blockChance,
   deflectionChance,

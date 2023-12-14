@@ -50,7 +50,7 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
                 <span className="mr-2">{capitalizeAll(name)}</span>
 
                 <Stack direction="horizontal" gap={1}>
-                  <IconImage Icon={IconEssence} isSmall />
+                  <IconImage className="small" Icon={IconEssence} />
 
                   {GEM_FITTING_COST[gems.length] ?? LABEL_EMPTY}
                 </Stack>

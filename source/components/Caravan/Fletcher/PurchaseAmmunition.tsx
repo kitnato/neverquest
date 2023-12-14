@@ -110,7 +110,7 @@ export function PurchaseAmmunition() {
                           }}
                         >
                           <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconAmmunition} isSmall />
+                            <IconImage className="small" Icon={IconAmmunition} />
 
                             {label}
                           </Stack>

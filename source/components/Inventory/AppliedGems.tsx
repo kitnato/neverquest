@@ -17,7 +17,9 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
   if (appliedGems > 0) {
     return (
       <tr>
-        <td className={CLASS_TABLE_CELL_ITALIC}>{`Gems (${appliedGems}/${GEMS_MAXIMUM}):`}</td>
+        <td className={CLASS_TABLE_CELL_ITALIC}>
+          <span>{`Gems (${appliedGems}/${GEMS_MAXIMUM}):`}</span>
+        </td>
 
         <td>
           <Stack gap={1}>
@@ -39,19 +41,21 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 
                   {LABEL_SEPARATOR}
 
-                  <IconImage Icon={Icon} isSmall />
+                  <IconImage className="small" Icon={Icon} />
 
-                  {`${
-                    typeof effect === "number"
-                      ? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
-                      : formatNumber({ format: "time", value: effect.duration })
-                  } `}
+                  <span>
+                    {`${
+                      typeof effect === "number"
+                        ? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
+                        : formatNumber({ format: "time", value: effect.duration })
+                    } `}
+                  </span>
 
                   {LABEL_SEPARATOR}
 
-                  <IconImage Icon={IconGem} isSmall />
+                  <IconImage className="small" Icon={IconGem} />
 
-                  {amount}
+                  <span>{amount}</span>
                 </Stack>
               );
             })}

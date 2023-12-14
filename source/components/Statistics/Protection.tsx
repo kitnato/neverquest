@@ -53,18 +53,22 @@ export function Protection() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <PopoverHeader className="text-center">Protection details</PopoverHeader>
+                <PopoverHeader className="text-center">
+                  <span>Protection details</span>
+                </PopoverHeader>
 
                 <PopoverBody>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Armor:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <span>Armor:</span>
+                      </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconArmor} isSmall />
+                          <IconImage className="small" Icon={IconArmor} />
 
-                          {formatNumber({ value: armorValue.protection })}
+                          <span>{formatNumber({ value: armorValue.protection })}</span>
                         </Stack>
                       </td>
                     </tr>
@@ -72,18 +76,21 @@ export function Protection() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconTank} isSmall />
-                          Tank:
+                          <IconImage className="small" Icon={IconTank} />
+
+                          <span>Tank:</span>
                         </Stack>
                       </td>
 
                       <td>
-                        {isUnshielded(shieldValue)
-                          ? LABEL_EMPTY
-                          : `+${formatNumber({
-                              format: "percentage",
-                              value: (shieldValue as Shield).block,
-                            })}`}
+                        {isUnshielded(shieldValue) ? (
+                          <span>{LABEL_EMPTY}</span>
+                        ) : (
+                          <span>{`+${formatNumber({
+                            format: "percentage",
+                            value: (shieldValue as Shield).block,
+                          })}`}</span>
+                        )}
                       </td>
                     </tr>
                   </DetailsTable>

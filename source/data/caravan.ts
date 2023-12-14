@@ -164,7 +164,7 @@ export const CREW: Record<
       1: "Allow me to deepen your pockets.",
       [GROWTH_MAXIMUM]: "...",
       [LEVELLING_MAXIMUM]: "Fate has been mis-weaved.",
-      [RETIREMENT_STAGE_MINIMUM]: "Always leave some extra space for those unexpected finds.",
+      [RETIREMENT_STAGE_MINIMUM]: "Always leave some extra space for unexpected finds.",
     },
     price: 35,
     requiredStage: 9,

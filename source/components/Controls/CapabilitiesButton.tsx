@@ -75,7 +75,7 @@ export function CapabilitiesButton() {
     return (
       <>
         <OverlayTrigger overlay={<Tooltip>{formatEnumeration(tooltip)}</Tooltip>}>
-          <span className={getAnimationClass({ animation: "bounceIn" })}>
+          <div className={getAnimationClass({ animation: "bounceIn" })}>
             <Button
               className={`position-relative${
                 areAttributesIncreasableValue && !isStageStartedValue
@@ -95,11 +95,11 @@ export function CapabilitiesButton() {
 
               {areAttributesIncreasableValue && (
                 <IconBadge alignToButton>
-                  <IconImage Icon={IconUpgrade} isSmall />
+                  <IconImage className="small" Icon={IconUpgrade} />
                 </IconBadge>
               )}
             </Button>
-          </span>
+          </div>
         </OverlayTrigger>
 
         <DismissableScreen

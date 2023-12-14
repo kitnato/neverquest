@@ -46,7 +46,7 @@ export function Restart() {
           }}
           variant="outline-light"
         >
-          <IconImage Icon={IconRestart} isSmall />
+          <IconImage className="small" Icon={IconRestart} />
         </Button>
       </OverlayTrigger>
 

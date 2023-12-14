@@ -42,18 +42,24 @@ export function StunRating() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <PopoverHeader className="text-center">Stun rating details</PopoverHeader>
+                <PopoverHeader className="text-center">
+                  <span>Stun rating details</span>
+                </PopoverHeader>
 
                 <PopoverBody>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <span>Chance:</span>
+                      </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconStun} isSmall />
+                          <IconImage className="small" Icon={IconStun} />
 
-                          {formatNumber({ format: "percentage", value: abilityChance })}
+                          <span>
+                            {formatNumber({ format: "percentage", value: abilityChance })}
+                          </span>
                         </Stack>
                       </td>
                     </tr>
@@ -61,12 +67,15 @@ export function StunRating() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconMight} isSmall />
-                          Might:
+                          <IconImage className="small" Icon={IconMight} />
+
+                          <span>Might:</span>
                         </Stack>
                       </td>
 
-                      <td>{`${mightValue} hits`}</td>
+                      <td>
+                        <span>{`${mightValue} hits`}</span>
+                      </td>
                     </tr>
                   </DetailsTable>
                 </PopoverBody>

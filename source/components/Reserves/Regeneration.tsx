@@ -95,18 +95,22 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
       <OverlayTrigger
         overlay={
           <Popover>
-            <PopoverHeader className="text-center">{label} regeneration details</PopoverHeader>
+            <PopoverHeader className="text-center">
+              <span>{label} regeneration details</span>
+            </PopoverHeader>
 
             <PopoverBody>
               <DetailsTable>
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Base rate:</td>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>
+                    <span>Base rate:</span>
+                  </td>
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconRegenerationRate} isSmall />
+                      <IconImage className="small" Icon={IconRegenerationRate} />
 
-                      {formatNumber({ format: "time", value: baseRegenerationRate })}
+                      <span>{formatNumber({ format: "time", value: baseRegenerationRate })}</span>
                     </Stack>
                   </td>
                 </tr>
@@ -114,28 +118,34 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconVigor} isSmall />
-                      Vigor:
+                      <IconImage className="small" Icon={IconVigor} />
+
+                      <span>Vigor:</span>
                     </Stack>
                   </td>
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      {`-${formatNumber({
-                        format: "percentage",
-                        value: attributeStatisticVigor,
-                      })}`}
+                      <span>
+                        {`-${formatNumber({
+                          format: "percentage",
+                          value: attributeStatisticVigor,
+                        })}`}
+                      </span>
 
                       {attributePowerBonusVigor > 0 && (
                         <>
-                          <span>{LABEL_SEPARATOR}</span>
+                          {LABEL_SEPARATOR}
 
-                          <IconImage Icon={IconTomeOfPower} isSmall />
+                          <IconImage className="small" Icon={IconTomeOfPower} />
 
-                          {`-${formatNumber({
-                            format: "percentage",
-                            value: reserveRegenerationRateReductionValue - attributeStatisticVigor,
-                          })}`}
+                          <span>
+                            {`-${formatNumber({
+                              format: "percentage",
+                              value:
+                                reserveRegenerationRateReductionValue - attributeStatisticVigor,
+                            })}`}
+                          </span>
                         </>
                       )}
                     </Stack>
@@ -143,13 +153,15 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                 </tr>
 
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Base amount:</td>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>
+                    <span>Base amount:</span>
+                  </td>
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconRegenerationAmount} isSmall />
+                      <IconImage className="small" Icon={IconRegenerationAmount} />
 
-                      {baseRegenerationAmount}
+                      <span>{baseRegenerationAmount}</span>
                     </Stack>
                   </td>
                 </tr>
@@ -157,25 +169,28 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconFortitude} isSmall />
-                      Fortitude:
+                      <IconImage className="small" Icon={IconFortitude} />
+
+                      <span>Fortitude:</span>
                     </Stack>
                   </td>
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      {`+${attributeStatisticFortitude}`}
+                      <span>{`+${attributeStatisticFortitude}`}</span>
 
                       {attributePowerBonusFortitude > 0 && (
                         <>
-                          <span>{LABEL_SEPARATOR}</span>
+                          {LABEL_SEPARATOR}
 
-                          <IconImage Icon={IconTomeOfPower} isSmall />
+                          <IconImage className="small" Icon={IconTomeOfPower} />
 
-                          {formatNumber({
-                            format: "multiplier",
-                            value: attributePowerBonusFortitude,
-                          })}
+                          <span>
+                            {formatNumber({
+                              format: "multiplier",
+                              value: attributePowerBonusFortitude,
+                            })}
+                          </span>
                         </>
                       )}
                     </Stack>

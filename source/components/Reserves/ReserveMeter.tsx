@@ -80,7 +80,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
           <>
             <span>{` (${formatNumber({ value: reserveMaximumValue })})`}</span>
 
-            <IconImage Icon={isHealth ? IconPoison : IconBlight} isSmall isStencilled />
+            <IconImage className="small stencilled" Icon={isHealth ? IconPoison : IconBlight} />
 
             <span>
               {`${

@@ -27,37 +27,53 @@ export function MonsterPoisonRating() {
         <OverlayTrigger
           overlay={
             <Popover>
-              <PopoverHeader className="text-center">Poison rating details</PopoverHeader>
+              <PopoverHeader className="text-center">
+                <span>Poison rating details</span>
+              </PopoverHeader>
 
               <PopoverBody>
                 <DetailsTable>
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <span>Chance:</span>
+                    </td>
 
-                    <td>{formatNumber({ format: "percentage", value: poisonChanceValue })}</td>
+                    <td>
+                      <span>
+                        {formatNumber({ format: "percentage", value: poisonChanceValue })}
+                      </span>
+                    </td>
                   </tr>
 
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <span>Effect:</span>
+                    </td>
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        {`-${formatNumber({
-                          format: "percentage",
-                          value: poisonMagnitudeValue,
-                        })}`}
+                        <span>
+                          {`-${formatNumber({
+                            format: "percentage",
+                            value: poisonMagnitudeValue,
+                          })}`}
+                        </span>
 
-                        <IconImage Icon={IconHealth} isSmall />
+                        <IconImage className="small" Icon={IconHealth} />
 
-                        {LABEL_MAXIMUM}
+                        <span>{LABEL_MAXIMUM}</span>
                       </Stack>
                     </td>
                   </tr>
 
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Duration:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <span>Duration:</span>
+                    </td>
 
-                    <td>{formatNumber({ format: "time", value: poisonLengthValue })}</td>
+                    <td>
+                      <span>{formatNumber({ format: "time", value: poisonLengthValue })}</span>
+                    </td>
                   </tr>
                 </DetailsTable>
               </PopoverBody>

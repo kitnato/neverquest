@@ -50,28 +50,39 @@ export function Recovery() {
         <OverlayTrigger
           overlay={
             <Popover>
-              <PopoverHeader className="text-center">Recovery rate details</PopoverHeader>
+              <PopoverHeader className="text-center">
+                <span>Recovery rate details</span>
+              </PopoverHeader>
 
               <PopoverBody>
                 <DetailsTable>
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <span>Base:</span>
+                    </td>
 
-                    <td>{formatNumber({ format: "time", value: RECOVERY_RATE })}</td>
+                    <td>
+                      <span>{formatNumber({ format: "time", value: RECOVERY_RATE })}</span>
+                    </td>
                   </tr>
 
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconResilience} isSmall />
-                        Resilience:
+                        <IconImage className="small" Icon={IconResilience} />
+
+                        <span>Resilience:</span>
                       </Stack>
                     </td>
 
-                    <td>{`-${formatNumber({
-                      format: "percentage",
-                      value: resilienceValue,
-                    })}`}</td>
+                    <td>
+                      <span>
+                        {`-${formatNumber({
+                          format: "percentage",
+                          value: resilienceValue,
+                        })}`}
+                      </span>
+                    </td>
                   </tr>
                 </DetailsTable>
               </PopoverBody>

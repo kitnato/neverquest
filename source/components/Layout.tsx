@@ -14,7 +14,6 @@ import { Encounter } from "@neverquest/components/Encounter";
 import { WildernessStatus } from "@neverquest/components/Encounter/WildernessStatus";
 import { Essence } from "@neverquest/components/Essence";
 import { GameOver } from "@neverquest/components/GameOver";
-import { Glitch } from "@neverquest/components/Glitch";
 import { Gear } from "@neverquest/components/Inventory/Gear";
 import { Location } from "@neverquest/components/Location";
 import { Masteries } from "@neverquest/components/Masteries";
@@ -75,8 +74,6 @@ export function Layout() {
     case "somnium": {
       return (
         <Container className="somnium mb-4">
-          <Glitch />
-
           <Row>
             <Col>
               <Stack gap={3}>

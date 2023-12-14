@@ -25,11 +25,13 @@ export function PowerLevel() {
         <OverlayTrigger
           overlay={
             <Popover>
-              <PopoverHeader className="text-center">Absorbed essence</PopoverHeader>
+              <PopoverHeader className="text-center">
+                <span>Absorbed essence</span>
+              </PopoverHeader>
 
               <PopoverBody>
                 <Stack className="justify-content-center" direction="horizontal" gap={1}>
-                  <IconImage Icon={IconEssence} isSmall />
+                  <IconImage className="small" Icon={IconEssence} />
 
                   {formatNumber({ value: absorbedEssenceValue })}
                 </Stack>

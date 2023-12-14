@@ -47,7 +47,7 @@ export function TravelButton() {
           </Tooltip>
         }
       >
-        <span className={getAnimationClass({ animation: "bounceIn" })}>
+        <div className={getAnimationClass({ animation: "bounceIn" })}>
           <Button
             className={
               locationValue === "wilderness"
@@ -63,7 +63,7 @@ export function TravelButton() {
               isMirrored={locationValue === "caravan"}
             />
           </Button>
-        </span>
+        </div>
       </OverlayTrigger>
     );
   }

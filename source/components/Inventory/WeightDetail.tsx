@@ -24,13 +24,15 @@ export function WeightDetail({
     <tr>
       {isShowingWeight ? (
         <>
-          <td className={CLASS_TABLE_CELL_ITALIC}>Weight:</td>
+          <td className={CLASS_TABLE_CELL_ITALIC}>
+            <span>Weight:</span>
+          </td>
 
           <td>
             <Stack direction="horizontal" gap={1}>
-              <IconImage Icon={IconEncumbrance} isSmall />
+              <IconImage className="small" Icon={IconEncumbrance} />
 
-              {formatNumber({ value: weight })}
+              <span>{formatNumber({ value: weight })}</span>
 
               {comparison !== undefined && comparison !== false && (
                 <GearComparison
@@ -41,13 +43,15 @@ export function WeightDetail({
               )}
 
               {amount !== undefined && amount > 1 && (
-                <>{`(${formatNumber({ value: weight * amount })})`}</>
+                <span>{` (${formatNumber({ value: weight * amount })})`}</span>
               )}
             </Stack>
           </td>
         </>
       ) : (
-        <td className="text-end">{LABEL_UNKNOWN}</td>
+        <td className="text-end">
+          <span>{LABEL_UNKNOWN}</span>
+        </td>
       )}
     </tr>
   );

@@ -67,7 +67,7 @@ export function TransmuteGems() {
         placement="bottom"
         trigger={isAffordable ? [] : ["focus", "hover"]}
       >
-        <span className="mx-auto">
+        <div className="mx-auto">
           <Button
             disabled={!isAffordable}
             onClick={() => {
@@ -96,7 +96,7 @@ export function TransmuteGems() {
           >
             Transmute
           </Button>
-        </span>
+        </div>
       </OverlayTrigger>
     </Stack>
   );

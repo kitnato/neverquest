@@ -25,7 +25,7 @@ export function DamagePerSecond() {
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}
         Icon={IconDamagePerSecond}
-        iconProps={{ isSmall: true, overlayPlacement: "bottom" }}
+        iconProps={{ className: "small", overlayPlacement: "bottom" }}
         tooltip="Total damage per second"
       >
         <Stack direction="horizontal" gap={1}>

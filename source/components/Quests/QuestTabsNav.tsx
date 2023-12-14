@@ -35,7 +35,7 @@ export function QuestTabsNav({ tabs }: { tabs: TabsData }) {
                     })}
                   >
                     <IconBadge>
-                      <IconImage Icon={IconAttention} isSmall />
+                      <IconImage className="small" Icon={IconAttention} />
                     </IconBadge>
                   </div>
                 )}

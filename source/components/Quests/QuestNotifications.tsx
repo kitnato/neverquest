@@ -33,7 +33,7 @@ export function QuestNotifications() {
           >
             <ToastHeader>
               <Stack className="me-auto" direction="horizontal" gap={1}>
-                <IconImage Icon={QUEST_CLASS_ICONS[questClass]} isSmall />
+                <IconImage className="small" Icon={QUEST_CLASS_ICONS[questClass]} />
 
                 {title}
               </Stack>

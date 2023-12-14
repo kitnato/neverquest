@@ -25,7 +25,7 @@ export function CollectLootButton() {
   ) {
     return (
       <OverlayTrigger overlay={<Tooltip>Collect loot</Tooltip>}>
-        <span className={getAnimationClass({ animation: "bounceIn" })}>
+        <div className={getAnimationClass({ animation: "bounceIn" })}>
           <Button
             className={
               hasLootedValue
@@ -38,7 +38,7 @@ export function CollectLootButton() {
           >
             <IconImage Icon={IconLoot} />
           </Button>
-        </span>
+        </div>
       </OverlayTrigger>
     );
   }

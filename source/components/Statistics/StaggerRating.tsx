@@ -50,18 +50,22 @@ export function StaggerRating() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <PopoverHeader className="text-center">Stagger rating details</PopoverHeader>
+                <PopoverHeader className="text-center">
+                  <span>Stagger rating details</span>
+                </PopoverHeader>
 
                 <PopoverBody>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <span>Chance:</span>
+                      </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconStagger} isSmall />
+                          <IconImage className="small" Icon={IconStagger} />
 
-                          {formatNumber({ format: "percentage", value: stagger })}
+                          <span>{formatNumber({ format: "percentage", value: stagger })}</span>
                         </Stack>
                       </td>
                     </tr>
@@ -69,15 +73,20 @@ export function StaggerRating() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconStability} isSmall />
-                          Stability:
+                          <IconImage className="small" Icon={IconStability} />
+
+                          <span>Stability:</span>
                         </Stack>
                       </td>
 
-                      <td>{`${formatNumber({
-                        format: "time",
-                        value: stabilityValue,
-                      })} duration`}</td>
+                      <td>
+                        <span>
+                          {`${formatNumber({
+                            format: "time",
+                            value: stabilityValue,
+                          })} duration`}
+                        </span>
+                      </td>
                     </tr>
                   </DetailsTable>
                 </PopoverBody>

@@ -12,7 +12,7 @@ export function AmmunitionPouch({ item }: { item: AmmunitionPouchItem }) {
       description={
         <IconDisplay
           Icon={IconAmmunition}
-          iconProps={{ isSmall: true, overlayPlacement: "bottom" }}
+          iconProps={{ className: "small", overlayPlacement: "bottom" }}
           tooltip="Ammunition pouch"
         >{`${formatNumber({ value: current })}/${formatNumber({ value: maximum })}`}</IconDisplay>
       }

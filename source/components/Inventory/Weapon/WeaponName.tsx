@@ -51,7 +51,9 @@ export function WeaponName({
     <OverlayTrigger
       overlay={
         <Popover>
-          <PopoverHeader className="text-center">{name}</PopoverHeader>
+          <PopoverHeader className="text-center">
+            <span>{name}</span>
+          </PopoverHeader>
 
           <PopoverBody>
             <DetailsTable>
@@ -66,13 +68,15 @@ export function WeaponName({
               />
 
               <tr>
-                <td className={CLASS_TABLE_CELL_ITALIC}>Damage:</td>
+                <td className={CLASS_TABLE_CELL_ITALIC}>
+                  <span>Damage:</span>
+                </td>
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconImage Icon={IconWeaponDamage} isSmall />
+                    <IconImage className="small" Icon={IconWeaponDamage} />
 
-                    {formatNumber({ value: damage })}
+                    <span>{formatNumber({ value: damage })}</span>
 
                     {showComparison && (
                       <GearComparison
@@ -87,13 +91,15 @@ export function WeaponName({
               <AppliedGems gearItem={weapon} />
 
               <tr>
-                <td className={CLASS_TABLE_CELL_ITALIC}>Attack rate:</td>
+                <td className={CLASS_TABLE_CELL_ITALIC}>
+                  <span>Attack rate:</span>
+                </td>
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconImage Icon={IconWeaponAttackRate} isSmall />
+                    <IconImage className="small" Icon={IconWeaponAttackRate} />
 
-                    {formatNumber({ format: "time", value: rate })}
+                    <span>{formatNumber({ format: "time", value: rate })}</span>
 
                     {showComparison && (
                       <GearComparison
@@ -108,13 +114,15 @@ export function WeaponName({
 
               {showDamagePerSecondValue && (
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Damage per second:</td>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>
+                    <span>Damage per second:</span>
+                  </td>
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconWeaponDamagePerSecond} isSmall />
+                      <IconImage className="small" Icon={IconWeaponDamagePerSecond} />
 
-                      {formatNumber({ format: "float", value: damagePerSecond })}
+                      <span>{formatNumber({ format: "float", value: damagePerSecond })}</span>
 
                       {showComparison && (
                         <GearComparison
@@ -135,14 +143,16 @@ export function WeaponName({
 
               {isMelee(weapon) && isShowingGrip && (
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Grip:</td>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>
+                    <span>Grip:</span>
+                  </td>
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconGrip} isSmall />
+                      <IconImage className="small" Icon={IconGrip} />
 
                       {/* eslint-disable-next-line unicorn/consistent-destructuring */}
-                      {capitalizeAll(weapon.grip)}
+                      <span>{capitalizeAll(weapon.grip)}</span>
                     </Stack>
                   </td>
                 </tr>
@@ -150,14 +160,16 @@ export function WeaponName({
 
               {isRanged(weapon) && (
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>Ammunition cost:</td>
+                  <td className={CLASS_TABLE_CELL_ITALIC}>
+                    <span>Ammunition cost:</span>
+                  </td>
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage Icon={IconAmmunition} isSmall />
+                      <IconImage className="small" Icon={IconAmmunition} />
 
                       {/* eslint-disable-next-line unicorn/consistent-destructuring */}
-                      {formatNumber({ value: weapon.ammunitionCost })}
+                      <span>{formatNumber({ value: weapon.ammunitionCost })}</span>
                     </Stack>
                   </td>
                 </tr>
@@ -176,31 +188,37 @@ export function WeaponName({
               <tr>
                 {isShowingGearClass ? (
                   <>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <span>Class:</span>
+                    </td>
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconGearClass} isSmall />
+                        <IconImage className="small" Icon={IconGearClass} />
 
-                        {capitalizeAll(gearClass)}
+                        <span>{capitalizeAll(gearClass)}</span>
                       </Stack>
                     </td>
                   </>
                 ) : (
-                  <td className="text-end">{LABEL_UNKNOWN}</td>
+                  <td className="text-end">
+                    <span>{LABEL_UNKNOWN}</span>
+                  </td>
                 )}
               </tr>
 
               <tr>
                 {skillValue ? (
                   <>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>{capitalizeAll(ability)} chance:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <span>{capitalizeAll(ability)} chance:</span>
+                    </td>
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconAbility} isSmall />
+                        <IconImage className="small" Icon={IconAbility} />
 
-                        {formatNumber({ format: "percentage", value: abilityChance })}
+                        <span>{formatNumber({ format: "percentage", value: abilityChance })}</span>
 
                         {showComparison && gearClass === weaponEquippedValue.gearClass && (
                           <GearComparison
@@ -212,7 +230,9 @@ export function WeaponName({
                     </td>
                   </>
                 ) : (
-                  <td className="text-end">{LABEL_UNKNOWN}</td>
+                  <td className="text-end">
+                    <span>{LABEL_UNKNOWN}</span>
+                  </td>
                 )}
               </tr>
 

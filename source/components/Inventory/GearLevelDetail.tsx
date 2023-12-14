@@ -18,13 +18,15 @@ export function GearLevelDetail({ comparison, level }: { comparison: Comparison;
 
   return (
     <tr>
-      <td className={CLASS_TABLE_CELL_ITALIC}>Gear level:</td>
+      <td className={CLASS_TABLE_CELL_ITALIC}>
+        <span>Gear level:</span>
+      </td>
 
       <td>
         <Stack direction="horizontal" gap={1}>
-          <IconImage Icon={IconGearLevel} isSmall />
+          <IconImage className="small" Icon={IconGearLevel} />
 
-          {formatNumber({ value: level })}
+          <span>{formatNumber({ value: level })}</span>
 
           {comparison !== false && (
             <GearComparison

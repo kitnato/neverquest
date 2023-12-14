@@ -58,35 +58,42 @@ export function DodgeChance() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <PopoverHeader className="text-center">Dodge chance details</PopoverHeader>
+                <PopoverHeader className="text-center">
+                  <span>Dodge chance details</span>
+                </PopoverHeader>
 
                 <PopoverBody>
                   <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconAgility} isSmall />
-                          Agility:
+                          <IconImage className="small" Icon={IconAgility} />
+
+                          <span>Agility:</span>
                         </Stack>
                       </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          {`${formatNumber({
-                            format: "percentage",
-                            value: agility,
-                          })}`}
+                          <span>
+                            {`${formatNumber({
+                              format: "percentage",
+                              value: agility,
+                            })}`}
+                          </span>
 
                           {agilityPowerBonus > 0 && (
                             <>
-                              <span>{LABEL_SEPARATOR}</span>
+                              {LABEL_SEPARATOR}
 
-                              <IconImage Icon={IconTomeOfPower} isSmall />
+                              <IconImage className="small" Icon={IconTomeOfPower} />
 
-                              {formatNumber({
-                                format: "multiplier",
-                                value: agilityPowerBonus,
-                              })}
+                              <span>
+                                {formatNumber({
+                                  format: "multiplier",
+                                  value: agilityPowerBonus,
+                                })}
+                              </span>
                             </>
                           )}
                         </Stack>
@@ -97,12 +104,15 @@ export function DodgeChance() {
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
                           <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconNudist} isSmall />
-                            Nudist:
+                            <IconImage className="small" Icon={IconNudist} />
+
+                            <span>Nudist:</span>
                           </Stack>
                         </td>
 
-                        <td>x{NUDIST_DODGE_BONUS}</td>
+                        <td>
+                          <span>x{NUDIST_DODGE_BONUS}</span>
+                        </td>
                       </tr>
                     )}
 
@@ -110,8 +120,9 @@ export function DodgeChance() {
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
                           <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconDodgePenalty} isSmall />
-                            Armor penalty:
+                            <IconImage className="small" Icon={IconDodgePenalty} />
+
+                            <span>Armor penalty:</span>
                           </Stack>
                         </td>
 
@@ -120,7 +131,9 @@ export function DodgeChance() {
                         </td>
                       </tr>
                     ) : (
-                      <td className="text-end">{LABEL_UNKNOWN}</td>
+                      <td className="text-end">
+                        <span>{LABEL_UNKNOWN}</span>
+                      </td>
                     )}
                   </DetailsTable>
                 </PopoverBody>

@@ -25,15 +25,13 @@ export function GearComparison({
 
   if (isShowingGearComparison && showGearComparisonValue) {
     return (
-      <span
-        className={isDifferenceEqual ? "text-muted" : isPositive ? "text-success" : "text-danger"}
-      >
-        <IconImage
-          Icon={isDifferenceEqual ? IconEquals : IconIncrease}
-          isFlipped={difference < 0}
-          isSmall
-        />
-      </span>
+      <IconImage
+        className={`small ${
+          isDifferenceEqual ? "text-muted" : isPositive ? "text-success" : "text-danger"
+        }`}
+        Icon={isDifferenceEqual ? IconEquals : IconIncrease}
+        isFlipped={difference < 0}
+      />
     );
   }
 

@@ -35,7 +35,7 @@ export function DiscardItem({ ID, name }: { ID: string; name: string }) {
           }}
           variant="outline-dark"
         >
-          <IconImage Icon={IconDiscard} isSmall />
+          <IconImage className="small" Icon={IconDiscard} />
         </Button>
       </OverlayTrigger>
 

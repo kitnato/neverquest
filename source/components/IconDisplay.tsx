@@ -24,7 +24,11 @@ export function IconDisplay({
   tooltip?: string;
 }) {
   return (
-    <Stack className={className} direction="horizontal" gap={iconProps?.isSmall ? 1 : gap}>
+    <Stack
+      className={className}
+      direction="horizontal"
+      gap={iconProps?.className?.includes("small") ? 1 : gap}
+    >
       <IconImage Icon={Icon} tooltip={tooltip} {...iconProps} />
 
       <Stack gap={1}>

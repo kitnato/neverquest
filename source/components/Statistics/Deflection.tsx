@@ -40,18 +40,22 @@ export function Deflection() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <PopoverHeader className="text-center">Deflection details</PopoverHeader>
+                <PopoverHeader className="text-center">
+                  <span>Deflection details</span>
+                </PopoverHeader>
 
                 <PopoverBody>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Armor:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <span>Armor:</span>
+                      </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconDeflection} isSmall />
+                          <IconImage className="small" Icon={IconDeflection} />
 
-                          {formatNumber({ format: "percentage", value: deflection })}
+                          <span>{formatNumber({ format: "percentage", value: deflection })}</span>
                         </Stack>
                       </td>
                     </tr>
@@ -59,15 +63,20 @@ export function Deflection() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconInoculated} isSmall />
-                          Inoculated:
+                          <IconImage className="small" Icon={IconInoculated} />
+
+                          <span>Inoculated:</span>
                         </Stack>
                       </td>
 
-                      <td>{`+${formatNumber({
-                        format: "percentage",
-                        value: INOCULATED_DEFLECTION_BASE,
-                      })}`}</td>
+                      <td>
+                        <span>
+                          {`+${formatNumber({
+                            format: "percentage",
+                            value: INOCULATED_DEFLECTION_BASE,
+                          })}`}
+                        </span>
+                      </td>
                     </tr>
                   </DetailsTable>
                 </PopoverBody>

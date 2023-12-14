@@ -48,7 +48,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
               <span>{`${label} regeneration`}</span>
 
               <Stack direction="horizontal" gap={1}>
-                <IconImage Icon={ReserveIcon} isSmall />
+                <IconImage className="small" Icon={ReserveIcon} />
 
                 <span>{`${regenerationAmountValue} per ${formatNumber({
                   format: "time",
@@ -64,7 +64,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
             {`Regenerating ${reserve}`}
 
             <Stack direction="horizontal" gap={1}>
-              <IconImage Icon={ReserveIcon} isSmall />
+              <IconImage className="small" Icon={ReserveIcon} />
 
               <span>{`${regenerationAmountValue} in ${formatNumber({
                 format: "time",

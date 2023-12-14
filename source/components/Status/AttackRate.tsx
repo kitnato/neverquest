@@ -78,20 +78,22 @@ export function AttackRate() {
         <OverlayTrigger
           overlay={
             <Popover>
-              <PopoverHeader className="text-center">Attack rate details</PopoverHeader>
+              <PopoverHeader className="text-center">
+                <span>Attack rate details</span>
+              </PopoverHeader>
 
               <PopoverBody>
                 <DetailsTable>
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>{`${
-                      isUnarmed(weaponValue) ? "Base" : "Weapon"
-                    }:`}</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <span>{`${isUnarmed(weaponValue) ? "Base" : "Weapon"}:`}</span>
+                    </td>
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconWeaponAttackRate} isSmall />
+                        <IconImage className="small" Icon={IconWeaponAttackRate} />
 
-                        {formatNumber({ format: "time", value: weaponValue.rate })}
+                        <span>{formatNumber({ format: "time", value: weaponValue.rate })}</span>
                       </Stack>
                     </td>
                   </tr>
@@ -99,28 +101,33 @@ export function AttackRate() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconWeaponSpeed} isSmall />
-                        Speed:
+                        <IconImage className="small" Icon={IconWeaponSpeed} />
+
+                        <span>Speed:</span>
                       </Stack>
                     </td>
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        {`-${formatNumber({
-                          format: "percentage",
-                          value: attributeStatisticSpeed,
-                        })}`}
+                        <span>
+                          {`-${formatNumber({
+                            format: "percentage",
+                            value: attributeStatisticSpeed,
+                          })}`}
+                        </span>
 
                         {attributePowerBonusSpeed > 0 && (
                           <>
-                            <span>{LABEL_SEPARATOR}</span>
+                            {LABEL_SEPARATOR}
 
-                            <IconImage Icon={IconTomeOfPower} isSmall />
+                            <IconImage className="small" Icon={IconTomeOfPower} />
 
-                            {`-${formatNumber({
-                              format: "percentage",
-                              value: attackRateReductionValue - attributeStatisticSpeed,
-                            })}`}
+                            <span>
+                              {`-${formatNumber({
+                                format: "percentage",
+                                value: attackRateReductionValue - attributeStatisticSpeed,
+                              })}`}
+                            </span>
                           </>
                         )}
                       </Stack>

@@ -30,7 +30,9 @@ export function Thorns() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <PopoverHeader className="text-center">Thorns details</PopoverHeader>
+                <PopoverHeader className="text-center">
+                  <span>Thorns details</span>
+                </PopoverHeader>
 
                 <PopoverBody>
                   <DetailsTable>

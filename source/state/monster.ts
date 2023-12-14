@@ -1,11 +1,11 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import {
-  DROP_CHANCES,
-  DROP_CHANCE_OVERRIDE,
   GEM_DROP_CHANCE,
   INFUSABLES,
   TRINKETS,
+  TRINKET_DROP_CHANCES,
+  TRINKET_DROP_CHANCE_OVERRIDE,
 } from "@neverquest/data/items";
 import {
   BLIGHT,
@@ -204,7 +204,7 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
 export const monsterLoot = withStateKey("monsterLoot", (key) =>
   selector({
     get: ({ get }) => {
-      const { chance, stageIncludes } = DROP_CHANCE_OVERRIDE;
+      const { chance, stageIncludes } = TRINKET_DROP_CHANCE_OVERRIDE;
       const { attenuation, base, bonus, boss } = ESSENCE;
 
       const encounterValue = get(encounter);
@@ -224,7 +224,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
         Math.random() <=
           (stageValue.toLocaleString().includes(stageIncludes)
             ? chance
-            : DROP_CHANCES["mysterious egg"]);
+            : TRINKET_DROP_CHANCES["mysterious egg"]);
       const hasTornManuscriptDropped =
         ownedItemAntiqueCoin !== undefined &&
         ownedItemMysteriousEgg !== undefined &&
@@ -233,7 +233,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
         Math.random() <=
           (stageValue.toLocaleString().includes(stageIncludes)
             ? chance
-            : DROP_CHANCES["torn manuscript"]);
+            : TRINKET_DROP_CHANCES["torn manuscript"]);
 
       return {
         essence: Math.round(

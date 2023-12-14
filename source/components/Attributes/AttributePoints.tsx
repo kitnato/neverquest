@@ -29,13 +29,15 @@ export function AttributePoints() {
       <OverlayTrigger
         overlay={
           <Popover>
-            <PopoverHeader className="text-center">Attribute point cost</PopoverHeader>
+            <PopoverHeader className="text-center">
+              <span>Attribute point cost</span>
+            </PopoverHeader>
 
             <PopoverBody>
               <Stack className="justify-content-center" direction="horizontal" gap={1}>
-                <IconImage Icon={IconEssence} isSmall />
+                <IconImage className="small" Icon={IconEssence} />
 
-                {formatNumber({ value: getAttributePointCost(powerLevelValue) })}
+                <span>{formatNumber({ value: getAttributePointCost(powerLevelValue) })}</span>
               </Stack>
             </PopoverBody>
           </Popover>

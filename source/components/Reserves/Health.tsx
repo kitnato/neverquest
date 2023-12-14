@@ -48,18 +48,22 @@ export function Health() {
             <OverlayTrigger
               overlay={
                 <Popover>
-                  <PopoverHeader className="text-center">Health details</PopoverHeader>
+                  <PopoverHeader className="text-center">
+                    <span>Health details</span>
+                  </PopoverHeader>
 
                   <PopoverBody>
                     <DetailsTable>
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>Base:</td>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                          <span>Base:</span>
+                        </td>
 
                         <td>
                           <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconHealth} isSmall />
+                            <IconImage className="small" Icon={IconHealth} />
 
-                            {baseAmount}
+                            <span>{baseAmount}</span>
                           </Stack>
                         </td>
                       </tr>
@@ -67,27 +71,32 @@ export function Health() {
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
                           <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconVitality} isSmall />
-                            Vitality:
+                            <IconImage className="small" Icon={IconVitality} />
+
+                            <span>Vitality:</span>
                           </Stack>
                         </td>
 
                         <td>
                           <Stack direction="horizontal" gap={1}>
-                            <IconImage Icon={IconHealth} isSmall />
+                            <IconImage className="small" Icon={IconHealth} />
 
-                            {`+${formatNumber({ value: attributeStatisticVitality - baseAmount })}`}
+                            <span>{`+${formatNumber({
+                              value: attributeStatisticVitality - baseAmount,
+                            })}`}</span>
 
                             {attributePowerBonusVitality > 0 && (
                               <>
-                                <span>{LABEL_SEPARATOR}</span>
+                                {LABEL_SEPARATOR}
 
-                                <IconImage Icon={IconTomeOfPower} isSmall />
+                                <IconImage className="small" Icon={IconTomeOfPower} />
 
-                                {formatNumber({
-                                  format: "multiplier",
-                                  value: attributePowerBonusVitality,
-                                })}
+                                <span>
+                                  {formatNumber({
+                                    format: "multiplier",
+                                    value: attributePowerBonusVitality,
+                                  })}
+                                </span>
                               </>
                             )}
                           </Stack>
@@ -96,17 +105,21 @@ export function Health() {
 
                       {questsBonusHealth > 0 && (
                         <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>Quest bonus:</td>
+                          <td className={CLASS_TABLE_CELL_ITALIC}>
+                            <span>Quest bonus:</span>
+                          </td>
 
                           <td>
                             <Stack direction="horizontal" gap={1}>
-                              <IconImage Icon={IconHealth} isSmall />
+                              <IconImage className="small" Icon={IconHealth} />
 
-                              {`+${formatNumber({
-                                decimals: 0,
-                                format: "percentage",
-                                value: questsBonusHealth,
-                              })}`}
+                              <span>
+                                {`+${formatNumber({
+                                  decimals: 0,
+                                  format: "percentage",
+                                  value: questsBonusHealth,
+                                })}`}
+                              </span>
                             </Stack>
                           </td>
                         </tr>

@@ -30,7 +30,7 @@ export function AttributePointProgress() {
           variant="secondary"
         >
           <Stack direction="horizontal" gap={1}>
-            <IconImage Icon={IconEssence} isSmall isStencilled />
+            <IconImage className="small stencilled" Icon={IconEssence} />
 
             <span>{`${formatNumber({ value: essenceValue })}/${formatNumber({
               value: nextTotalCost,

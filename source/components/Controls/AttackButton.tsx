@@ -68,9 +68,13 @@ export function AttackButton() {
       overlay={
         showWarning ? (
           <Popover>
-            <PopoverHeader className="text-center">Low health</PopoverHeader>
+            <PopoverHeader className="text-center">
+              <span>Low health</span>
+            </PopoverHeader>
 
-            <PopoverBody>Retreat now!</PopoverBody>
+            <PopoverBody>
+              <span>Retreat now!</span>
+            </PopoverBody>
           </Popover>
         ) : (
           <Tooltip>{tooltip}</Tooltip>
@@ -78,7 +82,7 @@ export function AttackButton() {
       }
       show={showWarning || undefined}
     >
-      <span className={getAnimationClass({ animation: "bounceIn" })}>
+      <div className={getAnimationClass({ animation: "bounceIn" })}>
         <Button
           className={animation}
           disabled={isResting}
@@ -87,7 +91,7 @@ export function AttackButton() {
         >
           <IconImage Icon={Icon} />
         </Button>
-      </span>
+      </div>
     </OverlayTrigger>
   );
 }

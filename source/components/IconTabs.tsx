@@ -12,12 +12,14 @@ export function IconTabs({ tabs }: { tabs: TabsData }) {
           {tabs.map(({ Icon, label }) => (
             <NavItem key={label}>
               <NavLink eventKey={label}>
-                <Stack className="justify-content-center" direction="horizontal" gap={3}>
+                <Stack
+                  className="align-items-center justify-content-center"
+                  direction="horizontal"
+                  gap={3}
+                >
                   <IconImage Icon={Icon} />
 
-                  <Stack className="align-items-center" direction="horizontal" gap={2}>
-                    <span>{capitalizeAll(label)}</span>
-                  </Stack>
+                  <span>{capitalizeAll(label)}</span>
                 </Stack>
               </NavLink>
             </NavItem>

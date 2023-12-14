@@ -44,60 +44,82 @@ export function ParryRating() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <PopoverHeader className="text-center">Parry rating details</PopoverHeader>
+                <PopoverHeader className="text-center">
+                  <span>Parry rating details</span>
+                </PopoverHeader>
 
                 <PopoverBody>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <span>Chance on hit:</span>
+                      </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconParry} isSmall />
+                          <IconImage className="small" Icon={IconParry} />
 
-                          {formatNumber({ format: "percentage", value: parryChanceValue })}
+                          <span>
+                            {formatNumber({ format: "percentage", value: parryChanceValue })}
+                          </span>
                         </Stack>
                       </td>
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Damage reflected:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <span>Damage reflected:</span>
+                      </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          {formatNumber({ decimals: 0, format: "percentage", value: PARRY_DAMAGE })}
+                          <span>
+                            {formatNumber({
+                              decimals: 0,
+                              format: "percentage",
+                              value: PARRY_DAMAGE,
+                            })}
+                          </span>
 
-                          <span>{LABEL_SEPARATOR}</span>
+                          {LABEL_SEPARATOR}
 
-                          <IconImage Icon={IconFinesse} isSmall />
+                          <IconImage className="small" Icon={IconFinesse} />
 
-                          {`+${formatNumber({
-                            format: "percentage",
-                            value: finesseValue,
-                          })}`}
+                          <span>
+                            {`+${formatNumber({
+                              format: "percentage",
+                              value: finesseValue,
+                            })}`}
+                          </span>
                         </Stack>
                       </td>
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Damage absorbed:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <span>Damage absorbed:</span>
+                      </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          {formatNumber({
-                            decimals: 0,
-                            format: "percentage",
-                            value: PARRY_ABSORPTION,
-                          })}
+                          <span>
+                            {formatNumber({
+                              decimals: 0,
+                              format: "percentage",
+                              value: PARRY_ABSORPTION,
+                            })}
+                          </span>
 
-                          <span>{LABEL_SEPARATOR}</span>
+                          {LABEL_SEPARATOR}
 
-                          <IconImage Icon={IconFinesse} isSmall />
+                          <IconImage className="small" Icon={IconFinesse} />
 
-                          {`+${formatNumber({
-                            format: "percentage",
-                            value: finesseValue,
-                          })}`}
+                          <span>
+                            {`+${formatNumber({
+                              format: "percentage",
+                              value: finesseValue,
+                            })}`}
+                          </span>
                         </Stack>
                       </td>
                     </tr>

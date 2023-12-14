@@ -20,7 +20,7 @@ export function RetireButton() {
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>Retire</Tooltip>}>
-        <span
+        <div
           className={`${
             stageMaximumValue >= RETIREMENT_STAGE_MINIMUM
               ? getAnimationClass({ animation: "bounceIn" })
@@ -36,7 +36,7 @@ export function RetireButton() {
           >
             <IconImage Icon={IconRetire} />
           </Button>
-        </span>
+        </div>
       </OverlayTrigger>
 
       <Retirement state={[isShowingRetire, setIsShowingRetire]} />

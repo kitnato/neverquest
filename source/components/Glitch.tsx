@@ -2,19 +2,19 @@ import { nanoid } from "nanoid";
 import { useMemo, useState } from "react";
 import { useRecoilValue } from "recoil";
 
-import { GLITCH_NUMBER, LEVELLING_MAXIMUM } from "@neverquest/data/general";
+import { GLITCH_NUMBER, GLITCH_STAGE_MINIMUM } from "@neverquest/data/general";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { stage } from "@neverquest/state/encounter";
 import { getFromRange, getLinearMapping, getRange } from "@neverquest/utilities/getters";
 
 const CHARACTERS = "!·&=?¿|@#~¬+/\\^*[]{}-_<>";
 
-const LATENCY = 80;
+const LATENCY = 70;
 
 function getGlitchingElement() {
   const textElements = document.body
     .querySelector(".somnium")
-    ?.querySelectorAll("button, h6, span, strong");
+    ?.querySelectorAll("button, h6, span, strong, .tooltip-inner");
 
   if (textElements === undefined) {
     return;
@@ -67,18 +67,22 @@ export function Glitch() {
   >({});
   const [intervalElapsed, setIntervalElapsed] = useState(0);
 
+  const factor = useMemo(
+    () => getLinearMapping({ offset: GLITCH_STAGE_MINIMUM, stage: stageValue }) / 100,
+    [stageValue],
+  );
   const interval = useMemo(
     () =>
       getFromRange(
         getRange({
-          factor: getLinearMapping({ offset: LEVELLING_MAXIMUM, stage: stageValue }) / 100,
+          factor,
           ranges: [
             { maximum: 20_000, minimum: 18_000 },
             { maximum: 3000, minimum: 2500 },
           ],
         }),
       ),
-    [stageValue],
+    [factor],
   );
 
   useAnimation({
@@ -96,7 +100,15 @@ export function Glitch() {
             setGlitchingElements((current) => ({
               ...current,
               [nanoid()]: {
-                duration: 1500,
+                duration: getFromRange(
+                  getRange({
+                    factor,
+                    ranges: [
+                      { maximum: 600, minimum: 400 },
+                      { maximum: 3200, minimum: 2800 },
+                    ],
+                  }),
+                ),
                 element,
                 latency: LATENCY,
                 originalText: textContent,
@@ -137,7 +149,7 @@ export function Glitch() {
         }
       }
     },
-    stop: stageValue <= LEVELLING_MAXIMUM,
+    stop: stageValue < GLITCH_STAGE_MINIMUM,
   });
 
   return <></>;

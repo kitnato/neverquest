@@ -16,13 +16,15 @@ export function StaminaCostDetail({ comparison, cost }: { comparison: Comparison
     <tr>
       {isShowingStamina ? (
         <>
-          <td className={CLASS_TABLE_CELL_ITALIC}>Stamina cost:</td>
+          <td className={CLASS_TABLE_CELL_ITALIC}>
+            <span>Stamina cost:</span>
+          </td>
 
           <td>
             <Stack direction="horizontal" gap={1}>
-              <IconImage Icon={IconStamina} isSmall />
+              <IconImage className="small" Icon={IconStamina} />
 
-              {formatNumber({ value: cost })}
+              <span>{formatNumber({ value: cost })}</span>
 
               {comparison !== false && (
                 <GearComparison
@@ -35,7 +37,9 @@ export function StaminaCostDetail({ comparison, cost }: { comparison: Comparison
           </td>
         </>
       ) : (
-        <td className="text-end">{LABEL_UNKNOWN}</td>
+        <td className="text-end">
+          <span>{LABEL_UNKNOWN}</span>
+        </td>
       )}
     </tr>
   );

@@ -1,5 +1,7 @@
 import { RecoilRoot } from "recoil";
 
+import { CheatQuest } from "@neverquest/components/CheatQuest";
+import { Glitch } from "@neverquest/components/Glitch";
 import { Header } from "@neverquest/components/Header";
 import { Initializer } from "@neverquest/components/Initializer";
 import { Layout } from "@neverquest/components/Layout";
@@ -23,6 +25,10 @@ export function Core() {
     <SeedContext.Provider value={resetSeed}>
       <RecoilRoot key={seed}>
         <Initializer>
+          <CheatQuest />
+
+          <Glitch />
+
           <Header />
 
           <Layout />

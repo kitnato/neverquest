@@ -34,7 +34,7 @@ export function EradicateItem({ ID }: { ID: string }) {
           }}
           variant="outline-dark"
         >
-          <IconImage Icon={IconEradicate} isSmall />
+          <IconImage className="small" Icon={IconEradicate} />
         </Button>
       </OverlayTrigger>
 

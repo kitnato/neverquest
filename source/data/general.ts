@@ -10,6 +10,7 @@ export const MILLISECONDS_IN_SECOND = 1000;
 export const FRAMERATE = MILLISECONDS_IN_SECOND / 60;
 
 export const GLITCH_NUMBER = "7";
+export const GLITCH_STAGE_MINIMUM = 67;
 
 export const GROWTH_MAXIMUM = 100;
 

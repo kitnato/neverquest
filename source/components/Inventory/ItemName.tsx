@@ -28,11 +28,13 @@ export function ItemName({
     <OverlayTrigger
       overlay={
         <Popover>
-          <PopoverHeader className="text-center">{displayName}</PopoverHeader>
+          <PopoverHeader className="text-center">
+            <span>{displayName}</span>
+          </PopoverHeader>
 
           <PopoverBody className="text-center">
             <Stack gap={2}>
-              {description}
+              <span>{description}</span>
 
               <DetailsTable>
                 <WeightDetail amount={amount} weight={weight} />
@@ -43,9 +45,11 @@ export function ItemName({
       }
       placement="right"
     >
-      <span>{`${displayName}${
-        amount !== undefined && amount > 1 ? ` ×${formatNumber({ value: amount })}` : ""
-      }`}</span>
+      <span>
+        {`${displayName}${
+          amount !== undefined && amount > 1 ? ` ×${formatNumber({ value: amount })}` : ""
+        }`}
+      </span>
     </OverlayTrigger>
   );
 }

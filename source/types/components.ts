@@ -11,11 +11,10 @@ export type Comparison =
     };
 
 export type IconImageProperties = {
+  className?: string;
   Icon: SVGIcon;
   isFlipped?: boolean;
   isMirrored?: boolean;
-  isSmall?: boolean;
-  isStencilled?: boolean;
   onClick?: () => void;
   overlayPlacement?: Placement;
   tooltip?: ReactNode;

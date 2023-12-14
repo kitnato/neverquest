@@ -32,26 +32,36 @@ export function MonsterBlightRating() {
         <OverlayTrigger
           overlay={
             <Popover>
-              <PopoverHeader className="text-center">Blight rating details</PopoverHeader>
+              <PopoverHeader className="text-center">
+                <span>Blight rating details</span>
+              </PopoverHeader>
 
               <PopoverBody>
                 <DetailsTable>
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Chance:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <span>Chance:</span>
+                    </td>
 
-                    <td>{formatNumber({ format: "percentage", value: blightChanceValue })}</td>
+                    <td>
+                      <span>
+                        {formatNumber({ format: "percentage", value: blightChanceValue })}
+                      </span>
+                    </td>
                   </tr>
 
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Effect:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <span>Effect:</span>
+                    </td>
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        {-formatNumber({ value: blightAmountValue })}
+                        <span>{-formatNumber({ value: blightAmountValue })}</span>
 
-                        <IconImage Icon={IconStamina} isSmall />
+                        <IconImage className="small" Icon={IconStamina} />
 
-                        {LABEL_MAXIMUM}
+                        <span>{LABEL_MAXIMUM}</span>
                       </Stack>
                     </td>
                   </tr>

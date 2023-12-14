@@ -30,7 +30,7 @@ export function JournalButton() {
     return (
       <>
         <OverlayTrigger overlay={<Tooltip>Journal</Tooltip>}>
-          <span className={getAnimationClass({ animation: "bounceIn" })}>
+          <div className={getAnimationClass({ animation: "bounceIn" })}>
             <Button
               className={`position-relative${
                 canCompleteQuest && !isStageStartedValue
@@ -50,11 +50,11 @@ export function JournalButton() {
 
               {canCompleteQuest && (
                 <IconBadge alignToButton>
-                  <IconImage Icon={IconAttention} isSmall />
+                  <IconImage className="small" Icon={IconAttention} />
                 </IconBadge>
               )}
             </Button>
-          </span>
+          </div>
         </OverlayTrigger>
 
         <DismissableScreen

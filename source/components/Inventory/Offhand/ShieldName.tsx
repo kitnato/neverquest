@@ -38,7 +38,9 @@ export function ShieldName({
     <OverlayTrigger
       overlay={
         <Popover>
-          <PopoverHeader className="text-center">{name}</PopoverHeader>
+          <PopoverHeader className="text-center">
+            <span>{name}</span>
+          </PopoverHeader>
 
           <PopoverBody>
             <DetailsTable>
@@ -55,13 +57,15 @@ export function ShieldName({
               <AppliedGems gearItem={shield} />
 
               <tr>
-                <td className={CLASS_TABLE_CELL_ITALIC}>Block chance:</td>
+                <td className={CLASS_TABLE_CELL_ITALIC}>
+                  <span>Block chance:</span>
+                </td>
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconImage Icon={IconBlock} isSmall />
+                    <IconImage className="small" Icon={IconBlock} />
 
-                    {formatNumber({ format: "percentage", value: block })}
+                    <span>{formatNumber({ format: "percentage", value: block })}</span>
 
                     {showComparison && (
                       <GearComparison
@@ -87,15 +91,18 @@ export function ShieldName({
                 <tr>
                   {isShowingGearClass ? (
                     <>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <span>Class:</span>
+                      </td>
 
                       <td>
                         {(() => {
                           if (isUnshielded(shield)) {
                             return (
                               <Stack direction="horizontal" gap={1}>
-                                <IconImage Icon={IconNone} isSmall />
-                                None
+                                <IconImage className="small" Icon={IconNone} />
+
+                                <span>None</span>
                               </Stack>
                             );
                           }
@@ -105,16 +112,18 @@ export function ShieldName({
 
                           return (
                             <Stack direction="horizontal" gap={1}>
-                              <IconImage Icon={Icon} isSmall />
+                              <IconImage className="small" Icon={Icon} />
 
-                              {capitalizeAll(gearClass)}
+                              <span>{capitalizeAll(gearClass)}</span>
                             </Stack>
                           );
                         })()}
                       </td>
                     </>
                   ) : (
-                    <td className="text-end">{LABEL_UNKNOWN}</td>
+                    <td className="text-end">
+                      <span>{LABEL_UNKNOWN}</span>
+                    </td>
                   )}
                 </tr>
               )}
@@ -123,13 +132,15 @@ export function ShieldName({
                 <tr>
                   {shieldcraftSkill ? (
                     <>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Stagger chance:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <span>Stagger chance:</span>
+                      </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconStagger} isSmall />
+                          <IconImage className="small" Icon={IconStagger} />
 
-                          {formatNumber({ format: "percentage", value: stagger })}
+                          <span>{formatNumber({ format: "percentage", value: stagger })}</span>
 
                           {showComparison && (
                             <GearComparison
@@ -141,7 +152,9 @@ export function ShieldName({
                       </td>
                     </>
                   ) : (
-                    <td className="text-end">{LABEL_UNKNOWN}</td>
+                    <td className="text-end">
+                      <span>{LABEL_UNKNOWN}</span>
+                    </td>
                   )}
                 </tr>
               )}

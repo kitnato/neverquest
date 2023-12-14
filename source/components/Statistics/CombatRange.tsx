@@ -45,18 +45,22 @@ export function CombatRange() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <PopoverHeader className="text-center">Range details</PopoverHeader>
+                <PopoverHeader className="text-center">
+                  <span>Range details</span>
+                </PopoverHeader>
 
                 <PopoverBody>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <span>Weapon:</span>
+                      </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconRanged} isSmall />
+                          <IconImage className="small" Icon={IconRanged} />
 
-                          {formatNumber({ format: "time", value: weaponValue.range })}
+                          <span>{formatNumber({ format: "time", value: weaponValue.range })}</span>
                         </Stack>
                       </td>
                     </tr>
@@ -64,15 +68,20 @@ export function CombatRange() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconMarksmanship} isSmall />
-                          Marksmanship:
+                          <IconImage className="small" Icon={IconMarksmanship} />
+
+                          <span>Marksmanship:</span>
                         </Stack>
                       </td>
 
-                      <td>{`+${formatNumber({
-                        format: "percentage",
-                        value: marksmanshipValue,
-                      })}`}</td>
+                      <td>
+                        <span>
+                          {`+${formatNumber({
+                            format: "percentage",
+                            value: marksmanshipValue,
+                          })}`}
+                        </span>
+                      </td>
                     </tr>
                   </DetailsTable>
                 </PopoverBody>

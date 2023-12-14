@@ -55,37 +55,44 @@ export function CriticalRating() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <PopoverHeader className="text-center">Critical rating details</PopoverHeader>
+                <PopoverHeader className="text-center">
+                  <span>Critical rating details</span>
+                </PopoverHeader>
 
                 <PopoverBody>
                   <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconDexterity} isSmall />
-                          Dexterity:
+                          <IconImage className="small" Icon={IconDexterity} />
+
+                          <span>Dexterity:</span>
                         </Stack>
                       </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconCriticalChance} isSmall />
+                          <IconImage className="small" Icon={IconCriticalChance} />
 
-                          {`${formatNumber({
-                            format: "percentage",
-                            value: attributeStatisticDexterity,
-                          })} chance`}
+                          <span>
+                            {`${formatNumber({
+                              format: "percentage",
+                              value: attributeStatisticDexterity,
+                            })} chance`}
+                          </span>
 
                           {attributePowerBonusDexterity > 0 && (
                             <>
-                              <span>{LABEL_SEPARATOR}</span>
+                              {LABEL_SEPARATOR}
 
-                              <IconImage Icon={IconTomeOfPower} isSmall />
+                              <IconImage className="small" Icon={IconTomeOfPower} />
 
-                              {`+${formatNumber({
-                                format: "percentage",
-                                value: criticalChanceValue - attributeStatisticDexterity,
-                              })}`}
+                              <span>
+                                {`+${formatNumber({
+                                  format: "percentage",
+                                  value: criticalChanceValue - attributeStatisticDexterity,
+                                })}`}
+                              </span>
                             </>
                           )}
                         </Stack>
@@ -95,31 +102,36 @@ export function CriticalRating() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconPerception} isSmall />
-                          Perception:
+                          <IconImage className="small" Icon={IconPerception} />
+
+                          <span>Perception:</span>
                         </Stack>
                       </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconCriticalDamage} isSmall />
+                          <IconImage className="small" Icon={IconCriticalDamage} />
 
-                          {`${formatNumber({
-                            decimals: 0,
-                            format: "percentage",
-                            value: attributeStatisticPerception,
-                          })} damage`}
+                          <span>
+                            {`${formatNumber({
+                              decimals: 0,
+                              format: "percentage",
+                              value: attributeStatisticPerception,
+                            })} damage`}
+                          </span>
 
                           {attributePowerBonusPerception > 0 && (
                             <>
-                              <span>{LABEL_SEPARATOR}</span>
+                              {LABEL_SEPARATOR}
 
-                              <IconImage Icon={IconTomeOfPower} isSmall />
+                              <IconImage className="small" Icon={IconTomeOfPower} />
 
-                              {`+${formatNumber({
-                                format: "percentage",
-                                value: criticalDamageValue - attributeStatisticPerception,
-                              })}`}
+                              <span>
+                                {`+${formatNumber({
+                                  format: "percentage",
+                                  value: criticalDamageValue - attributeStatisticPerception,
+                                })}`}
+                              </span>
                             </>
                           )}
                         </Stack>
@@ -127,13 +139,15 @@ export function CriticalRating() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Critical strike damage:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <span>Critical strike damage:</span>
+                      </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconDamage} isSmall />
+                          <IconImage className="small" Icon={IconDamage} />
 
-                          {formatNumber({ value: criticalStrikeValue })}
+                          <span>{formatNumber({ value: criticalStrikeValue })}</span>
                         </Stack>
                       </td>
                     </tr>

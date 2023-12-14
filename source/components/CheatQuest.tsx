@@ -17,7 +17,7 @@ declare const window: Window & {
   cheatQuest: (state: string, value?: number) => void;
 };
 
-export function useCheatQuest() {
+export function CheatQuest() {
   const locationValue = useRecoilValue(location);
   const stageValue = useRecoilValue(stage);
   const progressMaximumValue = useRecoilValue(progressMaximum);
@@ -109,4 +109,6 @@ export function useCheatQuest() {
     setIsAttacking,
     setIsInvulnerable,
   ]);
+
+  return <></>;
 }

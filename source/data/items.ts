@@ -91,15 +91,6 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
     },
   };
 
-export const DROP_CHANCE_OVERRIDE = {
-  chance: 0.07,
-  stageIncludes: GLITCH_NUMBER,
-};
-export const DROP_CHANCES = {
-  "mysterious egg": 0.03,
-  "torn manuscript": 0.01,
-};
-
 export const ELEMENTALS: Record<
   Elemental,
   {
@@ -227,6 +218,15 @@ export const INFUSABLES: Record<
       weight: 10,
     },
   },
+};
+
+export const TRINKET_DROP_CHANCE_OVERRIDE = {
+  chance: 0.07,
+  stageIncludes: GLITCH_NUMBER,
+};
+export const TRINKET_DROP_CHANCES = {
+  "mysterious egg": 0.03,
+  "torn manuscript": 0.01,
 };
 
 export const TRINKETS: Record<

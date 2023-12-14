@@ -3,11 +3,10 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import type { IconImageProperties } from "@neverquest/types/components";
 
 export function IconImage({
+  className,
   Icon,
   isFlipped = false,
   isMirrored = false,
-  isSmall = false,
-  isStencilled = false,
   overlayPlacement,
   tooltip,
 }: IconImageProperties) {
@@ -19,7 +18,7 @@ export function IconImage({
     >
       <div>
         <Icon
-          className={`icon-image${isSmall ? " small" : ""}${isStencilled ? " stencilled" : ""}`}
+          className={`icon-image${className === undefined ? "" : ` ${className}`}`}
           style={{
             transform: `scaleX(${isMirrored ? -1 : 1}) scaleY(${isFlipped ? -1 : 1})`,
           }}

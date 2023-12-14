@@ -46,6 +46,7 @@ export function ItemAcquisition() {
         style={{ left: -10, top: 16 }}
       >
         <IconImage
+          className="small"
           Icon={(() => {
             if (isArmor(acquiredItem)) {
               return IconArmor;
@@ -77,7 +78,6 @@ export function ItemAcquisition() {
 
             return IconUnknown;
           })()}
-          isSmall
         />
       </div>
     );

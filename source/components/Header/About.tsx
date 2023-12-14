@@ -30,7 +30,7 @@ export function About() {
           }}
           variant="outline-light"
         >
-          <IconImage Icon={IconAbout} isSmall />
+          <IconImage className="small" Icon={IconAbout} />
         </Button>
       </OverlayTrigger>
 

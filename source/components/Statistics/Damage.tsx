@@ -9,6 +9,7 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSecond";
 import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDetails";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
+import { BRAWLER_DAMAGE_BONUS } from "@neverquest/data/traits";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconBrawler from "@neverquest/icons/brawler.svg?react";
@@ -60,18 +61,22 @@ export function Damage() {
         <OverlayTrigger
           overlay={
             <Popover>
-              <PopoverHeader className="text-center">Total damage details</PopoverHeader>
+              <PopoverHeader className="text-center">
+                <span>Total damage details</span>
+              </PopoverHeader>
 
               <PopoverBody>
                 <DetailsTable>
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>Weapon:</td>
+                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <span>Weapon:</span>
+                    </td>
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconWeaponDamage} isSmall />
+                        <IconImage className="small" Icon={IconWeaponDamage} />
 
-                        {formatNumber({ value: weaponDamage })}
+                        <span>{formatNumber({ value: weaponDamage })}</span>
                       </Stack>
                     </td>
                   </tr>
@@ -81,25 +86,28 @@ export function Damage() {
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage Icon={IconStrength} isSmall />
-                        Strength:
+                        <IconImage className="small" Icon={IconStrength} />
+
+                        <span>Strength:</span>
                       </Stack>
                     </td>
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        {`+${formatNumber({ value: attributeStatisticStrength })}`}
+                        <span>{`+${formatNumber({ value: attributeStatisticStrength })}`}</span>
 
                         {attributePowerBonusStrength > 0 && (
                           <>
-                            <span>{LABEL_SEPARATOR}</span>
+                            {LABEL_SEPARATOR}
 
-                            <IconImage Icon={IconTomeOfPower} isSmall />
+                            <IconImage className="small" Icon={IconTomeOfPower} />
 
-                            {formatNumber({
-                              format: "multiplier",
-                              value: attributePowerBonusStrength,
-                            })}
+                            <span>
+                              {formatNumber({
+                                format: "multiplier",
+                                value: attributePowerBonusStrength,
+                              })}
+                            </span>
                           </>
                         )}
                       </Stack>
@@ -108,17 +116,21 @@ export function Damage() {
 
                   {questsBonusDamage > 0 && (
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Quest bonus:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <span>Quest bonus:</span>
+                      </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconDamage} isSmall />
+                          <IconImage className="small" Icon={IconDamage} />
 
-                          {`+${formatNumber({
-                            decimals: 0,
-                            format: "percentage",
-                            value: questsBonusDamage,
-                          })}`}
+                          <span>
+                            {`+${formatNumber({
+                              decimals: 0,
+                              format: "percentage",
+                              value: questsBonusDamage,
+                            })}`}
+                          </span>
                         </Stack>
                       </td>
                     </tr>
@@ -128,12 +140,15 @@ export function Damage() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconBruiser} isSmall />
-                          Bruiser:
+                          <IconImage className="small" Icon={IconBruiser} />
+
+                          <span>Bruiser:</span>
                         </Stack>
                       </td>
 
-                      <td>{`+${staminaValue}`}</td>
+                      <td>
+                        <span>{`+${staminaValue}`}</span>
+                      </td>
                     </tr>
                   )}
 
@@ -141,12 +156,17 @@ export function Damage() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconBrawler} isSmall />
-                          Brawler:
+                          <IconImage className="small" Icon={IconBrawler} />
+
+                          <span>Brawler:</span>
                         </Stack>
                       </td>
 
-                      <td>x2</td>
+                      <td>
+                        <span>
+                          {formatNumber({ format: "percentage", value: BRAWLER_DAMAGE_BONUS })}
+                        </span>
+                      </td>
                     </tr>
                   )}
                 </DetailsTable>

@@ -15,7 +15,9 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
 
   return (
     <tr>
-      <td className={CLASS_TABLE_CELL_ITALIC}>Elemental:</td>
+      <td className={CLASS_TABLE_CELL_ITALIC}>
+        <span>Elemental:</span>
+      </td>
 
       <td>
         <Stack gap={1}>
@@ -33,9 +35,9 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
 
                 {LABEL_SEPARATOR}
 
-                <IconImage Icon={Icon} isSmall />
+                <IconImage className="small" Icon={Icon} />
 
-                {`${formatNumber({ format: "time", value: duration })}`}
+                <span>{`${formatNumber({ format: "time", value: duration })}`}</span>
               </Stack>
             );
           })}

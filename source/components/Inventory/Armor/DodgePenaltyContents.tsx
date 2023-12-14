@@ -16,23 +16,25 @@ export function DodgePenaltyContents({ staminaCost }: { staminaCost?: GeneratorR
     <Stack direction="horizontal" gap={1}>
       {isTraitAcquiredStalwart ? (
         <>
-          <IconImage Icon={IconStalwart} isSmall />
+          <IconImage className="small" Icon={IconStalwart} />
 
-          {LABEL_NONE}
+          <span>{LABEL_NONE}</span>
         </>
       ) : staminaCost === undefined ? (
-        <>Cannot dodge.</>
+        <span>Cannot dodge.</span>
       ) : staminaCost === 0 ? (
-        LABEL_NONE
+        <span>{LABEL_NONE}</span>
       ) : (
         <>
-          <IconImage Icon={IconStamina} isSmall />
+          <IconImage className="small" Icon={IconStamina} />
 
-          {typeof staminaCost === "number"
-            ? formatNumber({ value: staminaCost })
-            : `${formatNumber({ value: staminaCost.minimum })}-${formatNumber({
-                value: staminaCost.maximum,
-              })}`}
+          <span>
+            {typeof staminaCost === "number"
+              ? formatNumber({ value: staminaCost })
+              : `${formatNumber({ value: staminaCost.minimum })}-${formatNumber({
+                  value: staminaCost.maximum,
+                })}`}
+          </span>
         </>
       )}
     </Stack>

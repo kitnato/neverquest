@@ -47,16 +47,20 @@ export function BleedRating() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <PopoverHeader className="text-center">Bleed rating details</PopoverHeader>
+                <PopoverHeader className="text-center">
+                  <span>Bleed rating details</span>
+                </PopoverHeader>
 
                 <PopoverBody>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Chance on hit:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <span>Chance on hit:</span>
+                      </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconBleed} isSmall />
+                          <IconImage className="small" Icon={IconBleed} />
 
                           {`${
                             bleedChanceValue === 0
@@ -70,30 +74,39 @@ export function BleedRating() {
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconCruelty} isSmall />
-                          Cruelty:
+                          <IconImage className="small" Icon={IconCruelty} />
+
+                          <span>Cruelty:</span>
                         </Stack>
                       </td>
 
-                      <td>{`${formatNumber({
-                        format: "percentage",
-                        value: crueltyValue,
-                      })} of total damage`}</td>
+                      <td>
+                        <span>
+                          {`${formatNumber({
+                            format: "percentage",
+                            value: crueltyValue,
+                          })} of total damage`}
+                        </span>
+                      </td>
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Bleed damage:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <span>Bleed damage:</span>
+                      </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconBleeding} isSmall />
+                          <IconImage className="small" Icon={IconBleeding} />
 
-                          {`${formatNumber({
-                            value: damageValue * crueltyValue,
-                          })} over ${formatNumber({
-                            format: "time",
-                            value: duration,
-                          })}`}
+                          <span>
+                            {`${formatNumber({
+                              value: damageValue * crueltyValue,
+                            })} over ${formatNumber({
+                              format: "time",
+                              value: duration,
+                            })}`}
+                          </span>
                         </Stack>
                       </td>
                     </tr>

@@ -42,7 +42,7 @@ export function InventoryButton() {
     return (
       <>
         <OverlayTrigger overlay={<Tooltip>Inventory</Tooltip>}>
-          <span className={getAnimationClass({ animation: "bounceIn" })}>
+          <div className={getAnimationClass({ animation: "bounceIn" })}>
             <Button
               disabled={isAttackingValue || isGameOverValue}
               onClick={() => {
@@ -53,16 +53,16 @@ export function InventoryButton() {
               <IconImage Icon={IconInventory} />
 
               {(encumbranceExtentValue !== "none" || notifyOverEncumbranceValue) && (
-                <span ref={badgeElement}>
+                <div ref={badgeElement}>
                   <IconBadge alignToButton>
-                    <IconImage Icon={IconEncumbrance} isSmall />
+                    <IconImage className="small" Icon={IconEncumbrance} />
                   </IconBadge>
-                </span>
+                </div>
               )}
 
               <ItemAcquisition />
             </Button>
-          </span>
+          </div>
         </OverlayTrigger>
 
         <DismissableScreen

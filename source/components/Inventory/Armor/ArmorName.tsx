@@ -39,7 +39,9 @@ export function ArmorName({
     <OverlayTrigger
       overlay={
         <Popover>
-          <PopoverHeader className="text-center">{name}</PopoverHeader>
+          <PopoverHeader className="text-center">
+            <span>{name}</span>
+          </PopoverHeader>
 
           <PopoverBody>
             <DetailsTable>
@@ -51,13 +53,15 @@ export function ArmorName({
               />
 
               <tr>
-                <td className={CLASS_TABLE_CELL_ITALIC}>Protection:</td>
+                <td className={CLASS_TABLE_CELL_ITALIC}>
+                  <span>Protection:</span>
+                </td>
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconImage Icon={IconProtection} isSmall />
+                    <IconImage className="small" Icon={IconProtection} />
 
-                    {formatNumber({ value: protection })}
+                    <span>{formatNumber({ value: protection })}</span>
 
                     {showComparison && (
                       <GearComparison
@@ -75,15 +79,18 @@ export function ArmorName({
                 <tr>
                   {isShowingGearClass ? (
                     <>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Class:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <span>Class:</span>
+                      </td>
 
                       <td>
                         {(() => {
                           if (isUnarmored(armor)) {
                             return (
                               <Stack direction="horizontal" gap={1}>
-                                <IconImage Icon={IconNone} isSmall />
-                                None
+                                <IconImage className="small" Icon={IconNone} />
+
+                                <span>None</span>
                               </Stack>
                             );
                           }
@@ -93,16 +100,18 @@ export function ArmorName({
 
                           return (
                             <Stack direction="horizontal" gap={1}>
-                              <IconImage Icon={Icon} isSmall />
+                              <IconImage className="small" Icon={Icon} />
 
-                              {capitalizeAll(gearClass)}
+                              <span>{capitalizeAll(gearClass)}</span>
                             </Stack>
                           );
                         })()}
                       </td>
                     </>
                   ) : (
-                    <td className="text-end">{LABEL_UNKNOWN}</td>
+                    <td className="text-end">
+                      <span>{LABEL_UNKNOWN}</span>
+                    </td>
                   )}
                 </tr>
               )}
@@ -111,13 +120,15 @@ export function ArmorName({
                 <tr>
                   {isShowingDeflection ? (
                     <>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Deflection chance:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <span>Deflection chance:</span>
+                      </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage Icon={IconDeflection} isSmall />
+                          <IconImage className="small" Icon={IconDeflection} />
 
-                          {formatNumber({ format: "percentage", value: deflection })}
+                          <span>{formatNumber({ format: "percentage", value: deflection })}</span>
 
                           {showComparison && (
                             <GearComparison
@@ -129,7 +140,9 @@ export function ArmorName({
                       </td>
                     </>
                   ) : (
-                    <td className="text-end">{LABEL_UNKNOWN}</td>
+                    <td className="text-end">
+                      <span>{LABEL_UNKNOWN}</span>
+                    </td>
                   )}
                 </tr>
               )}
@@ -138,7 +151,9 @@ export function ArmorName({
                 <tr>
                   {isShowingDodgePenalty ? (
                     <>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>Dodge penalty:</td>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <span>Dodge penalty:</span>
+                      </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
@@ -155,7 +170,9 @@ export function ArmorName({
                       </td>
                     </>
                   ) : (
-                    <td className="text-end">{LABEL_UNKNOWN}</td>
+                    <td className="text-end">
+                      <span>{LABEL_UNKNOWN}</span>
+                    </td>
                   )}
                 </tr>
               )}

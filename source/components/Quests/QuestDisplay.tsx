@@ -100,13 +100,15 @@ export function QuestDisplay({
               variant="outline-dark"
             >
               <Stack direction="horizontal" gap={1}>
-                <IconImage Icon={Icon} isSmall />
+                <IconImage className="small" Icon={Icon} />
 
-                {`+${formatNumber({
-                  decimals: 0,
-                  format: "percentage",
-                  value: QUEST_COMPLETION_BONUS,
-                })}`}
+                <span>
+                  {`+${formatNumber({
+                    decimals: 0,
+                    format: "percentage",
+                    value: QUEST_COMPLETION_BONUS,
+                  })}`}
+                </span>
               </Stack>
             </ToggleButton>
           ))}

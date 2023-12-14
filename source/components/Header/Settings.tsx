@@ -40,7 +40,7 @@ export function Settings() {
           }}
           variant="outline-light"
         >
-          <IconImage Icon={IconSettings} isSmall />
+          <IconImage className="small" Icon={IconSettings} />
         </Button>
       </OverlayTrigger>
 

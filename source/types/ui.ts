@@ -3,6 +3,7 @@ export type Animation =
   | "fadeOutUp"
   | "flipInX"
   | "headShake"
+  | "heartBeat"
   | "pulse"
   | "zoomIn"
   | "zoomInRight"

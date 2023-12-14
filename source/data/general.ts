@@ -33,6 +33,8 @@ export const LABEL_UNKNOWN = "???";
 
 export const LEVELLING_MAXIMUM = 77;
 
+export const NAME_LENGTH_MAXIMUM = 50;
+
 export const PERCENTAGE_POINTS = 100;
 
 export const QUEST_NOTIFICATION_DURATION = 5000;

@@ -1,9 +1,9 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { FormControl } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_UNKNOWN } from "@neverquest/data/general";
+import { LABEL_UNKNOWN, NAME_LENGTH_MAXIMUM } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconDead from "@neverquest/icons/dead.svg?react";
 import IconAlive from "@neverquest/icons/name.svg?react";
@@ -16,7 +16,21 @@ export function Name() {
   const [canEdit, setCanEdit] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
 
+  const element = useRef<HTMLInputElement | null>(null);
+
   const progressQuest = useProgressQuest();
+
+  useEffect(() => {
+    const { current } = element;
+
+    if (current !== null && isEditing) {
+      if (nameValue === LABEL_UNKNOWN) {
+        current.select();
+      } else {
+        current.focus();
+      }
+    }
+  }, [isEditing, nameValue]);
 
   useLayoutEffect(() => {
     new MutationObserver(() => {
@@ -32,25 +46,30 @@ export function Name() {
       {isEditing ? (
         <FormControl
           onBlur={({ currentTarget: { value } }) => {
-            if (!value) {
+            const trimmedValue = value.trim().replaceAll(/\s+/g, " ");
+
+            if (trimmedValue === "") {
               setName(LABEL_UNKNOWN);
+            } else {
+              setName(trimmedValue);
+              progressQuest({ quest: "settingName" });
             }
 
             setIsEditing(false);
           }}
           onChange={({ target: { value } }) => {
-            if (!value) {
+            if (value.length >= NAME_LENGTH_MAXIMUM) {
               return;
             }
 
             setName(value);
-            progressQuest({ quest: "settingName" });
           }}
           onKeyDown={({ key }) => {
             if (key === "Enter") {
               setIsEditing(false);
             }
           }}
+          ref={element}
           value={nameValue}
         />
       ) : (

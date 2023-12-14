@@ -10,14 +10,10 @@ export function animateElement({
   speed,
 }: {
   animation: Animation;
-  element: HTMLElement | null;
+  element: HTMLElement;
   onEnd?: () => void;
   speed?: AnimationSpeed;
 }) {
-  if (element === null) {
-    return;
-  }
-
   const { classList } = element;
   const animationName = `${CLASS_ANIMATE_PREFIX}${animation}`;
   const animationSpeedClass = speed ? `${CLASS_ANIMATE_PREFIX}${speed}` : undefined;

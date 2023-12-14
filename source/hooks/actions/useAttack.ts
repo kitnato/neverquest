@@ -54,6 +54,7 @@ export function useAttack() {
 
         const canAttackOrParryValue = get(canAttackOrParry);
         const hasEnoughAmmunitionValue = get(hasEnoughAmmunition);
+        const monsterElementValue = get(monsterElement);
         const monsterHealthValue = get(monsterHealth);
         const weaponValue = get(weapon);
         const isWeaponRanged = isRanged(weaponValue);
@@ -76,11 +77,13 @@ export function useAttack() {
             changeStamina({ value: -weaponValue.staminaCost });
           }
 
-          animateElement({
-            animation: "headShake",
-            element: get(monsterElement),
-            speed: "fast",
-          });
+          if (monsterElementValue !== null) {
+            animateElement({
+              animation: "headShake",
+              element: monsterElementValue,
+              speed: "fast",
+            });
+          }
 
           if (isWeaponRanged) {
             const { ammunitionCost } = weaponValue;

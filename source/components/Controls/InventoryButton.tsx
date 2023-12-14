@@ -28,15 +28,19 @@ export function InventoryButton() {
   const resetNotifyEncumbranceValue = useResetRecoilState(notifyOverEncumbrance);
   const ownedItemKnapsack = useRecoilValue(ownedItem("knapsack"));
 
-  const badgeElement = useRef(null);
+  const badgeElement = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    animateElement({
-      animation: "headShake",
-      element: badgeElement.current,
-      onEnd: resetNotifyEncumbranceValue,
-    });
-  }, [resetNotifyEncumbranceValue]);
+    const { current } = badgeElement;
+
+    if (current !== null && notifyOverEncumbranceValue) {
+      animateElement({
+        animation: "heartBeat",
+        element: current,
+        onEnd: resetNotifyEncumbranceValue,
+      });
+    }
+  }, [notifyOverEncumbranceValue, resetNotifyEncumbranceValue]);
 
   if (ownedItemKnapsack !== undefined) {
     return (

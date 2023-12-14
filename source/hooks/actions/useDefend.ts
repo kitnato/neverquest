@@ -64,13 +64,19 @@ export function useDefend() {
 
         set(isShowing("monsterOffense"), true);
 
-        animateElement({
-          animation: "headShake",
-          element: get(statusElement),
-          speed: "fast",
-        });
+        const deltaHealth: DeltaDisplay[] = [];
+        const deltaStamina: DeltaDisplay[] = [];
+        const statusElementValue = get(statusElement);
 
         let isNegated = false;
+
+        if (statusElementValue !== null) {
+          animateElement({
+            animation: "headShake",
+            element: statusElementValue,
+            speed: "fast",
+          });
+        }
 
         // If stunned, check if hit connects at all.
         if (get(isMonsterAiling("stunned")) && Math.random() <= AILMENT_PENALTY.stunned) {
@@ -84,9 +90,6 @@ export function useDefend() {
 
           isNegated = true;
         }
-
-        const deltaHealth: DeltaDisplay[] = [];
-        const deltaStamina: DeltaDisplay[] = [];
 
         // If attack is dodged, all damage is negated.
         if (Math.random() <= get(dodgeChance)) {
@@ -334,11 +337,15 @@ export function useDefend() {
               value: -monsterHealthDamage,
             });
 
-            animateElement({
-              animation: "headShake",
-              element: get(monsterElement),
-              speed: "fast",
-            });
+            const monsterElementValue = get(monsterElement);
+
+            if (monsterElementValue !== null) {
+              animateElement({
+                animation: "headShake",
+                element: monsterElementValue,
+                speed: "fast",
+              });
+            }
           }
         }
 

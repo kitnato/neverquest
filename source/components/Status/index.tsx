@@ -14,13 +14,15 @@ export function Status() {
   const setStatusElement = useSetRecoilState(statusElement);
   const resetStatusElement = useResetRecoilState(statusElement);
 
-  const element = useRef(null);
+  const element = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const { current } = element;
 
-    setStatusElement(current);
-    animateElement({ animation: "flipInX", element: current });
+    if (current !== null) {
+      setStatusElement(current);
+      animateElement({ animation: "flipInX", element: current });
+    }
 
     return resetStatusElement;
   }, [resetStatusElement, setStatusElement]);

@@ -15,13 +15,17 @@ export const encounter = withStateKey("encounter", (key) =>
     get: ({ get }) => {
       const stageValue = get(stage);
 
-      return stageValue === LEVELLING_MAXIMUM && !get(hasDefeatedFinality)
-        ? get(ownedItem("familiar")) === undefined
-          ? "res dominus"
-          : "res cogitans"
-        : stageValue >= BOSS_STAGE_START && stageValue % BOSS_STAGE_INTERVAL === 0
-          ? "boss"
-          : "monster";
+      if (stageValue === LEVELLING_MAXIMUM) {
+        if (get(hasDefeatedFinality)) {
+          return "void";
+        }
+
+        return get(ownedItem("familiar")) === undefined ? "res dominus" : "res cogitans";
+      }
+
+      return stageValue >= BOSS_STAGE_START && stageValue % BOSS_STAGE_INTERVAL === 0
+        ? "boss"
+        : "monster";
     },
     key,
   }),
@@ -29,7 +33,7 @@ export const encounter = withStateKey("encounter", (key) =>
 
 export const isStageCompleted = withStateKey("isStageCompleted", (key) =>
   selector({
-    get: ({ get }) => get(progress) === get(progressMaximum),
+    get: ({ get }) => get(progress) === get(progressMaximum) || get(encounter) === "void",
     key,
   }),
 );
@@ -52,12 +56,24 @@ export const progressMaximum = withStateKey("progressMaximum", (key) =>
     get: ({ get }) => {
       const { maximum, minimum } = PROGRESS;
 
-      return get(encounter) === "monster"
-        ? Math.ceil(
+      switch (get(encounter)) {
+        case "boss":
+        case "res cogitans":
+        case "res dominus": {
+          return 1;
+        }
+
+        case "monster": {
+          return Math.ceil(
             getFromRange({ factor: getGrowthSigmoid(get(stage)), maximum, minimum }) *
               (1 - get(progressReduction)),
-          )
-        : 1;
+          );
+        }
+
+        case "void": {
+          return 0;
+        }
+      }
     },
     key,
   }),

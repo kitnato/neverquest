@@ -8,6 +8,7 @@ import IconBossHiding from "@neverquest/icons/boss-hiding.svg?react";
 import IconFinality from "@neverquest/icons/finality.svg?react";
 import IconMonsterHiding from "@neverquest/icons/monster-hiding.svg?react";
 import IconRemains from "@neverquest/icons/remains.svg?react";
+import IconVoid from "@neverquest/icons/void.svg?react";
 import { encounter, isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -15,6 +16,18 @@ export function Wilderness() {
   const encounterValue = useRecoilValue(encounter);
   const isStageStartedValue = useRecoilValue(isStageStarted);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
+
+  if (encounterValue === "void") {
+    return (
+      <Card className={getAnimationClass({ animation: "flipInX" })}>
+        <CardBody>
+          <IconDisplay gap={5} Icon={IconVoid} tooltip="Void">
+            <span className="fst-italic">A shattering emptiness lingers ...</span>
+          </IconDisplay>
+        </CardBody>
+      </Card>
+    );
+  }
 
   if (isStageCompletedValue) {
     return (

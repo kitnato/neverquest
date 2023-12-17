@@ -84,6 +84,10 @@ export function useChangeMonsterHealth() {
               progressQuest({ quest: "killingResDominus" });
               break;
             }
+
+            case "void": {
+              break;
+            }
           }
 
           switch (damageType) {

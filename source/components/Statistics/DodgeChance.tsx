@@ -39,7 +39,7 @@ export function DodgeChance() {
   const isShowingDodgePenalty = useRecoilValue(isShowing("dodgePenalty"));
   const isSkillAcquiredEvasion = useRecoilValue(isSkillAcquired("evasion"));
   const isTraitAcquiredNudist = useRecoilValue(isTraitAcquired("nudist"));
-  const hasTomeOfPower = Boolean(useRecoilValue(ownedItem("tome of power")));
+  const ownedItemTomeOfPower = useRecoilValue(ownedItem("tome of power"));
 
   useDeltaText({
     delta: "dodgeChance",
@@ -140,7 +140,8 @@ export function DodgeChance() {
               </Popover>
             }
             trigger={
-              isSkillAcquiredEvasion && (isShowingDodgePenalty || hasTomeOfPower)
+              isSkillAcquiredEvasion &&
+              (isShowingDodgePenalty || ownedItemTomeOfPower !== undefined)
                 ? ["focus", "hover"]
                 : []
             }

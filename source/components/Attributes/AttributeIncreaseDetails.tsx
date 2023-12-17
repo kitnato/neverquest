@@ -20,7 +20,7 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }) {
   const infusablePowerTomeOfPower = useRecoilValue(infusablePower("tome of power"));
-  const hasTomeOfPower = Boolean(useRecoilValue(ownedItem("tome of power")));
+  const ownedItemTomeOfPower = useRecoilValue(ownedItem("tome of power"));
 
   const { increment, powerBonus } = ATTRIBUTES[attribute];
   const Icon = {
@@ -46,7 +46,7 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
         }`}
       </Stack>
 
-      {hasTomeOfPower && (
+      {ownedItemTomeOfPower !== undefined && (
         <Stack className="justify-content-center" direction="horizontal" gap={1}>
           <IconImage className="small" Icon={IconTomeOfPower} />
 

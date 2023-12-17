@@ -220,13 +220,10 @@ export const INFUSABLES: Record<
   },
 };
 
-export const TRINKET_DROP_CHANCE_OVERRIDE = {
-  chance: 0.07,
+export const TORN_MANUSCRIPT_DROP_CHANCE = {
+  chance: 0.01,
+  chanceOverride: 0.07,
   stageIncludes: GLITCH_NUMBER,
-};
-export const TRINKET_DROP_CHANCES = {
-  "mysterious egg": 0.03,
-  "torn manuscript": 0.01,
 };
 
 export const TRINKETS: Record<
@@ -248,7 +245,7 @@ export const TRINKETS: Record<
   "antique coin": {
     Icon: IconAntiqueCoin,
     item: {
-      description: "The wielder is bestowed with extreme fortune.",
+      description: "The wielder is bestowed with lucky finds.",
       ID: nanoid(),
       name: "antique coin",
       price: 777,
@@ -258,7 +255,7 @@ export const TRINKETS: Record<
   compass: {
     Icon: IconCompass,
     item: {
-      description: "Navigate the wilderness to hunt in previous locations.",
+      description: "Navigate the wilderness to return to previous locations.",
       ID: nanoid(),
       name: "compass",
       price: 50,
@@ -278,7 +275,7 @@ export const TRINKETS: Record<
   familiar: {
     Icon: IconFamiliar,
     item: {
-      description: "Blessed with the ability to see beyond.",
+      description: "Blessed with the ability to see beyond the veil.",
       ID: nanoid(),
       name: "familiar",
       price: 1,

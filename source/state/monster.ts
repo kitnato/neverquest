@@ -3,9 +3,8 @@ import { atom, atomFamily, selector, selectorFamily } from "recoil";
 import {
   GEM_DROP_CHANCE,
   INFUSABLES,
+  TORN_MANUSCRIPT_DROP_CHANCE,
   TRINKETS,
-  TRINKET_DROP_CHANCES,
-  TRINKET_DROP_CHANCE_OVERRIDE,
 } from "@neverquest/data/items";
 import {
   BLIGHT,
@@ -204,40 +203,17 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
 export const monsterLoot = withStateKey("monsterLoot", (key) =>
   selector({
     get: ({ get }) => {
-      const { chance, stageIncludes } = TRINKET_DROP_CHANCE_OVERRIDE;
+      const { chance, chanceOverride, stageIncludes } = TORN_MANUSCRIPT_DROP_CHANCE;
       const { attenuation, base, bonus, boss } = ESSENCE;
 
       const encounterValue = get(encounter);
       const merchantInventoryValue = get(merchantInventory);
-      const ownedItemAntiqueCoin = get(ownedItem("antique coin"));
       const ownedItemMysteriousEgg = get(ownedItem("mysterious egg"));
       const stageValue = get(stage);
-      const stageMaximumValue = get(stageMaximum);
-
-      const factor = getGrowthTriangular(stageValue) / attenuation;
-      const maximumGems = 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL);
-
-      const hasMysteriousEggDropped =
-        ownedItemAntiqueCoin !== undefined &&
-        ownedItemMysteriousEgg === undefined &&
-        !merchantInventoryValue.some(({ ID }) => ID === INFUSABLES["mysterious egg"].item.ID) &&
-        Math.random() <=
-          (stageValue.toLocaleString().includes(stageIncludes)
-            ? chance
-            : TRINKET_DROP_CHANCES["mysterious egg"]);
-      const hasTornManuscriptDropped =
-        ownedItemAntiqueCoin !== undefined &&
-        ownedItemMysteriousEgg !== undefined &&
-        !merchantInventoryValue.some(({ ID }) => ID === TRINKETS["torn manuscript"].item.ID) &&
-        get(ownedItem("torn manuscript")) === undefined &&
-        Math.random() <=
-          (stageValue.toLocaleString().includes(stageIncludes)
-            ? chance
-            : TRINKET_DROP_CHANCES["torn manuscript"]);
 
       return {
         essence: Math.round(
-          (base + base * factor) * 1 +
+          (base + (base * getGrowthTriangular(stageValue)) / attenuation) * 1 +
             get(progress) *
               bonus *
               (encounterValue === "boss" ? boss : 1) *
@@ -245,21 +221,35 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
         ),
         gems:
           encounterValue === "boss"
-            ? Array.from({ length: maximumGems })
+            ? Array.from({
+                length: 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL),
+              })
                 .map(() => {
                   const { equalStage, lowerStage } = GEM_DROP_CHANCE;
 
-                  return Math.random() <= (stageValue < stageMaximumValue ? lowerStage : equalStage)
+                  return Math.random() <= (stageValue < get(stageMaximum) ? lowerStage : equalStage)
                     ? 1
                     : 0;
                 })
                 .reduce<number>((sum, gemCount) => sum + gemCount, 0)
             : 0,
-        trinket: hasMysteriousEggDropped
-          ? INFUSABLES["mysterious egg"].item
-          : hasTornManuscriptDropped
-            ? TRINKETS["torn manuscript"].item
-            : undefined,
+        trinket:
+          // Mysterious egg drops only if Res Dominus has just been defeated and if it's neither already carried nor sold.
+          encounterValue === "res dominus" &&
+          ownedItemMysteriousEgg === undefined &&
+          !merchantInventoryValue.some(({ ID }) => ID === INFUSABLES["mysterious egg"].item.ID)
+            ? INFUSABLES["mysterious egg"].item
+            : // Torn manuscript drops only if it's not currently carried or sold, the antique coin & mysterious egg are both carried, and if the drop chance is reached.
+              get(ownedItem("antique coin")) !== undefined &&
+                ownedItemMysteriousEgg !== undefined &&
+                !merchantInventoryValue.some(
+                  ({ ID }) => ID === TRINKETS["torn manuscript"].item.ID,
+                ) &&
+                get(ownedItem("torn manuscript")) === undefined &&
+                Math.random() <=
+                  (stageValue.toLocaleString().includes(stageIncludes) ? chanceOverride : chance)
+              ? TRINKETS["torn manuscript"].item
+              : undefined,
       };
     },
     key,

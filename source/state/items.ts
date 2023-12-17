@@ -118,7 +118,8 @@ export const ownsInheritableItems = withStateKey("ownsInheritableItems", (key) =
       >;
 
       for (const inheritableItem of INHERITABLE_ITEMS) {
-        currentlyOwnedInheritableItems[inheritableItem] = Boolean(get(ownedItem(inheritableItem)));
+        currentlyOwnedInheritableItems[inheritableItem] =
+          get(ownedItem(inheritableItem)) !== undefined;
       }
 
       return currentlyOwnedInheritableItems;

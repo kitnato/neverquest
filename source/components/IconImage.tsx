@@ -7,6 +7,7 @@ export function IconImage({
   Icon,
   isFlipped = false,
   isMirrored = false,
+  onClick,
   overlayPlacement,
   tooltip,
 }: IconImageProperties) {
@@ -16,7 +17,7 @@ export function IconImage({
       placement={overlayPlacement}
       trigger={tooltip === undefined ? [] : ["focus", "hover"]}
     >
-      <div>
+      <div onClick={onClick}>
         <Icon
           className={`icon-image${className === undefined ? "" : ` ${className}`}`}
           style={{

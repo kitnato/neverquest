@@ -9,7 +9,7 @@ import { SetGearLevel } from "@neverquest/components/Caravan/SetGearLevel";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { WEAPON_BASE, WEAPON_MODIFIER, WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
-import { GROWTH_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/data/general";
+import { GROWTH_MAXIMUM, LABEL_TRAINING_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
@@ -32,8 +32,9 @@ import {
 } from "@neverquest/utilities/getters";
 
 export function RangedWeaponOptions() {
-  const allowProfanityValue = useRecoilValue(allowProfanity);
   const [fletcherInventoryValue, setFletcherInventory] = useRecoilState(fletcherInventory);
+  const allowProfanityValue = useRecoilValue(allowProfanity);
+  const isSkillAcquiredArchery = useRecoilValue(isSkillAcquired("archery"));
   const stageValue = useRecoilValue(stage);
   const resetFletcherInventory = useResetRecoilState(fletcherInventory);
 
@@ -148,32 +149,36 @@ export function RangedWeaponOptions() {
 
       <hr />
 
-      {fletcherInventoryValue === undefined ? (
-        <CraftGear
-          onCraft={() => {
-            setFletcherInventory(
-              generateRangedWeapon({
-                affixStructure: getAffixStructure(),
-                allowProfanity: allowProfanityValue,
-                gearClass: weaponClass,
-                level: weaponLevel,
-                prefixTags:
-                  weaponLevel <= maximumWeaponLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
-                    ? ["lowQuality"]
-                    : weaponLevel === maximumWeaponLevel
-                      ? ["highQuality"]
-                      : undefined,
-              }),
-            );
-          }}
-          price={getGearPrice({
-            factor,
-            ...WEAPON_BASE,
-            modifier: WEAPON_MODIFIER.ranged.price,
-          })}
-        />
+      {isSkillAcquiredArchery ? (
+        fletcherInventoryValue === undefined ? (
+          <CraftGear
+            onCraft={() => {
+              setFletcherInventory(
+                generateRangedWeapon({
+                  affixStructure: getAffixStructure(),
+                  allowProfanity: allowProfanityValue,
+                  gearClass: weaponClass,
+                  level: weaponLevel,
+                  prefixTags:
+                    weaponLevel <= maximumWeaponLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
+                      ? ["lowQuality"]
+                      : weaponLevel === maximumWeaponLevel
+                        ? ["highQuality"]
+                        : undefined,
+                }),
+              );
+            }}
+            price={getGearPrice({
+              factor,
+              ...WEAPON_BASE,
+              modifier: WEAPON_MODIFIER.ranged.price,
+            })}
+          />
+        ) : (
+          <CraftedGear gearItem={fletcherInventoryValue} onTransfer={resetFletcherInventory} />
+        )
       ) : (
-        <CraftedGear gearItem={fletcherInventoryValue} onTransfer={resetFletcherInventory} />
+        <span className="fst-italic text-center">{LABEL_TRAINING_REQUIRED}</span>
       )}
     </Stack>
   );

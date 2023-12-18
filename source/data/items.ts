@@ -105,8 +105,8 @@ export const ELEMENTALS: Record<
   fire: {
     ailment: "burning",
     color: "text-orange",
-    duration: { maximum: 6000, minimum: 3000 },
-    durationMaximum: 15_000,
+    duration: { maximum: 8500, minimum: 5000 },
+    durationMaximum: 25_000,
     gem: "ruby",
     Icon: IconFire,
   },
@@ -305,7 +305,7 @@ export const TRINKETS: Record<
   knapsack: {
     Icon: IconKnapsack,
     item: {
-      capacity: 12,
+      capacity: 15,
       description: "Carry more items and manage gear.",
       ID: nanoid(),
       name: "knapsack",

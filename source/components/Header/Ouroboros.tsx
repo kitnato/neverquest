@@ -8,7 +8,7 @@ export function Ouroboros() {
 
   return (
     <IconImage
-      className={`text-light${isAttuned ? " stencilled" : ""}`}
+      className={`text-light${isAttuned ? " glowing" : ""}`}
       Icon={IconOuroboros}
       onClick={() => {
         setIsAttuned((current) => !current);

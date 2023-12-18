@@ -29,6 +29,7 @@ export const LABEL_NONE = "None.";
 export const LABEL_NONE_AVAILABLE = "None available.";
 export const LABEL_OVER_ENCUMBERED = "Too heavy.";
 export const LABEL_SEPARATOR = "·";
+export const LABEL_TRAINING_REQUIRED = "Cannot use without training.";
 export const LABEL_UNKNOWN = "???";
 
 export const LEVELLING_MAXIMUM = 77;

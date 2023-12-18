@@ -25,8 +25,10 @@ export const acquiredSkills = withStateKey("acquiredSkills", (key) =>
 export const skillPrice = withStateKey("skillPrice", (key) =>
   selector({
     get: ({ get }) =>
-      SKILL_PRICE_BASE *
-      Math.pow(SKILL_PRICE_FACTOR, Object.values(get(acquiredSkills)).filter(Boolean).length),
+      Math.round(
+        SKILL_PRICE_BASE *
+          Math.pow(SKILL_PRICE_FACTOR, Object.values(get(acquiredSkills)).filter(Boolean).length),
+      ),
     key,
   }),
 );

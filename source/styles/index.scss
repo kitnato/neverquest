@@ -57,12 +57,16 @@ svg {
     fill: currentcolor;
     width: 3rem;
 
+    &.glowing {
+      filter: drop-shadow(0 0 3px currentcolor);
+    }
+
     &.small {
       width: 1.5rem;
     }
 
     &.stencilled {
-      filter: drop-shadow(0 0 3px currentcolor);
+      filter: drop-shadow(0 0 2px $dark);
     }
   }
 }

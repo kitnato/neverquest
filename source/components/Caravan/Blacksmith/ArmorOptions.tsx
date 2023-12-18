@@ -10,7 +10,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/DodgePenaltyContents";
 import { GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
 import { ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
-import { GROWTH_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/data/general";
+import { GROWTH_MAXIMUM, LABEL_TRAINING_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconDeflection from "@neverquest/icons/deflection.svg?react";
 import IconDodgePenalty from "@neverquest/icons/dodge-penalty.svg?react";
@@ -123,7 +123,7 @@ export function ArmorOptions() {
       <hr />
 
       {!armorcraftValue && armorClass === "heavy" ? (
-        <span className="text-center">Cannot use without training.</span>
+        <span className="fst-italic text-center">{LABEL_TRAINING_REQUIRED}</span>
       ) : craftedArmor === undefined ? (
         <CraftGear
           onCraft={() => {

@@ -8,7 +8,7 @@ import { nanoid } from "nanoid";
 import type { RecoilValue, Snapshot } from "recoil";
 
 import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
-import { AFFIX_STRUCTURE, PROGRESS_REDUCTION } from "@neverquest/data/encounter";
+import { AFFIX_STRUCTURE_WEIGHTS, PROGRESS_REDUCTION } from "@neverquest/data/encounter";
 import {
   type ARMOR_NONE,
   ARMOR_SPECIFICATIONS,
@@ -54,20 +54,10 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function getAffixStructure(): AffixStructure {
-  const chance = Math.random();
-  let cumulativeProbability = 0;
+  let chance = Math.random();
+  const result = AFFIX_STRUCTURE_WEIGHTS.find(([_, probability]) => (chance -= probability) <= 0);
 
-  for (const [key, probability] of Object.entries(AFFIX_STRUCTURE).toSorted(
-    ([, probability1], [, probability2]) => probability1 - probability2,
-  )) {
-    cumulativeProbability += probability;
-
-    if (chance <= cumulativeProbability) {
-      return key as AffixStructure;
-    }
-  }
-
-  return "none";
+  return result === undefined ? "none" : result[0];
 }
 
 export function getAnimationClass({

@@ -24,7 +24,7 @@ export function MonsterAilmentMeter({
     <OverlayTrigger
       overlay={
         <Popover>
-          <PopoverBody>{AILMENT_DESCRIPTION[ailment]}</PopoverBody>
+          <PopoverBody className="text-center">{AILMENT_DESCRIPTION[ailment]}</PopoverBody>
         </Popover>
       }
     >

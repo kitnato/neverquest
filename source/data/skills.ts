@@ -11,8 +11,8 @@ import IconTraumatology from "@neverquest/icons/traumatology.svg?react";
 import type { SVGIcon } from "@neverquest/types/components";
 import type { Crew, Showing, Skill, WeaponAbility } from "@neverquest/types/unions";
 
-export const SKILL_PRICE_BASE = 90;
-export const SKILL_PRICE_FACTOR = 2;
+export const SKILL_PRICE_BASE = 60;
+export const SKILL_PRICE_FACTOR = 1.8;
 
 export const SKILLS: Record<
   Skill,
@@ -24,58 +24,58 @@ export const SKILLS: Record<
   }
 > = {
   anatomy: {
-    description: "Unlocks the ability to inflict bleeding with piercing weapons.",
+    description: "Grants the ability to inflict bleeding with piercing weapons.",
     Icon: IconAnatomy,
     requiredCrew: "merchant",
   },
   archery: {
-    description: "Unlocks the use of ranged weapons.",
+    description: "Grants the use of ranged weapons.",
     Icon: IconArchery,
     requiredCrew: "fletcher",
   },
   armorcraft: {
     description:
-      "Unlocks the use of heavy armor alongside the ability to deflect ailments & recovery improvement.",
+      "Grants the use of heavy armor alongside the ability to deflect ailments & recovery improvement.",
     Icon: IconArmorcraft,
     requiredCrew: "blacksmith",
     shows: ["deflection"],
   },
   assassination: {
-    description: "Unlocks the ability to deal critical strikes.",
+    description: "Grants the ability to deal critical strikes.",
     Icon: IconAssassination,
     requiredCrew: "merchant",
     shows: ["criticalRating"],
   },
   calisthenics: {
-    description: "Unlocks attributes that improve health & stamina regeneration.",
+    description: "Grants attributes that improve health & stamina regeneration.",
     Icon: IconCalisthenics,
     requiredCrew: "merchant",
   },
   escrime: {
     description:
-      "Unlocks the ability to parry attacks with slashing weapons, partially reflecting damage.",
+      "Grants the ability to parry attacks with slashing weapons, partially reflecting damage.",
     Icon: IconEscrime,
     requiredCrew: "merchant",
   },
   evasion: {
-    description: "Unlocks the ability to dodge attacks, negating all damage.",
+    description: "Grants the ability to dodge attacks, negating all damage.",
     Icon: IconEvasion,
     requiredCrew: "merchant",
     shows: ["dodgeChance", "dodgePenalty"],
   },
   shieldcraft: {
-    description: "Unlocks the use of tower shields & the ability to stagger monsters.",
+    description: "Grants the use of tower shields & the ability to stagger monsters.",
     Icon: IconShieldcraft,
     requiredCrew: "blacksmith",
   },
   siegecraft: {
-    description: "Unlocks the use of two-handed melee weapons that have a chance to execute.",
+    description: "Grants the use of two-handed melee weapons that have a chance to execute.",
     Icon: IconSiegecraft,
     requiredCrew: "blacksmith",
     shows: ["grip"],
   },
   traumatology: {
-    description: "Unlocks the ability to stun monsters with blunt weapons.",
+    description: "Grants the ability to stun monsters with blunt weapons.",
     Icon: IconTraumatology,
     requiredCrew: "merchant",
   },

@@ -5,7 +5,7 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 export const AILMENT_DESCRIPTION: Record<MonsterAilment, string> = {
   bleeding: "Suffering periodic damage.",
   burning: "Cannot regenerate.",
-  frozen: `Attack rate & movement speed slowed to ${formatNumber({
+  frozen: `Attack rate & movement speed slowed by ${formatNumber({
     decimals: 0,
     format: "percentage",
     value: AILMENT_PENALTY.frozen,
@@ -45,7 +45,7 @@ export const ESSENCE = {
   attenuation: 10,
   base: 5,
   bonus: 0.02,
-  boss: 1.5,
+  boss: 1.15,
   finality: 7777,
 };
 
@@ -59,8 +59,8 @@ export const MONSTER_ATTACK_RATE = {
 };
 
 export const MONSTER_DAMAGE = {
-  attenuation: 20,
-  base: 7,
+  attenuation: 24,
+  base: 6,
   bonus: 0.01,
   boss: 1.2,
   finality: 1777,
@@ -68,9 +68,9 @@ export const MONSTER_DAMAGE = {
 
 export const MONSTER_HEALTH = {
   attenuation: 25,
-  base: 20,
+  base: 15,
   bonus: 0.01,
-  boss: 1.85,
+  boss: 1.8,
   finality: 7777,
 };
 

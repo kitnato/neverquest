@@ -46,7 +46,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     price: { maximum: 10_000, minimum: 8 },
     protection: [
       { maximum: 10, minimum: 8 },
-      { maximum: 1400, minimum: 1350 },
+      { maximum: 1000, minimum: 950 },
     ],
     staminaCost: Number.POSITIVE_INFINITY,
     weight: [
@@ -59,7 +59,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     price: { maximum: 5000, minimum: 1 },
     protection: [
       { maximum: 2, minimum: 1 },
-      { maximum: 700, minimum: 650 },
+      { maximum: 500, minimum: 450 },
     ],
     staminaCost: 0,
     weight: [
@@ -76,7 +76,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     price: { maximum: 7500, minimum: 3 },
     protection: [
       { maximum: 6, minimum: 4 },
-      { maximum: 900, minimum: 850 },
+      { maximum: 700, minimum: 650 },
     ],
     staminaCost: [
       { maximum: 3, minimum: 1 },
@@ -110,8 +110,8 @@ export const SHIELD_SPECIFICATIONS: Record<
 > = {
   medium: {
     block: [
-      { maximum: 0.11, minimum: 0.1 },
-      { maximum: 0.25, minimum: 0.245 },
+      { maximum: 0.16, minimum: 0.15 },
+      { maximum: 0.3, minimum: 0.28 },
     ],
     Icon: IconShieldMedium,
     price: { maximum: 4000, minimum: 4 },
@@ -130,8 +130,8 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   small: {
     block: [
-      { maximum: 0.08, minimum: 0.075 },
-      { maximum: 0.15, minimum: 0.14 },
+      { maximum: 0.11, minimum: 0.1 },
+      { maximum: 0.2, minimum: 0.18 },
     ],
     Icon: IconShieldSmall,
     price: { maximum: 2000, minimum: 2 },
@@ -146,8 +146,8 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   tower: {
     block: [
-      { maximum: 0.25, minimum: 0.23 },
-      { maximum: 0.45, minimum: 0.43 },
+      { maximum: 0.3, minimum: 0.29 },
+      { maximum: 0.5, minimum: 0.48 },
     ],
     Icon: IconShieldTower,
     price: { maximum: 5500, minimum: 7 },

@@ -33,6 +33,17 @@ export function SellItems() {
         <span className="fst-italic">Nothing to sell.</span>
       ) : (
         <Stack gap={3}>
+          {storedItems
+            .filter(isGearItem)
+            .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
+            .map((gearItem) => (
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={gearItem.ID}>
+                <ItemDisplay isInInventory item={gearItem} />
+
+                <SellItem item={gearItem} />
+              </div>
+            ))}
+
           {[equippedGear.find(isWeapon), equippedGear.find(isArmor), equippedGear.find(isShield)]
             .filter(isGearItem)
             .map((gearItem) => {
@@ -52,17 +63,6 @@ export function SellItems() {
                 </div>
               );
             })}
-
-          {storedItems
-            .filter(isGearItem)
-            .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
-            .map((gearItem) => (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={gearItem.ID}>
-                <ItemDisplay isInInventory item={gearItem} />
-
-                <SellItem item={gearItem} />
-              </div>
-            ))}
 
           {storedItems
             .filter(isUsable)

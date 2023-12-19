@@ -97,8 +97,6 @@ export function Damage() {
                         <span>
                           +
                           {formatNumber({
-                            decimals: 0,
-                            format: "percentage",
                             value: attributeStatisticStrength,
                           })}
                         </span>

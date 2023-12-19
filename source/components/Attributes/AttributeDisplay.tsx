@@ -35,7 +35,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
           {name}
         </IconDisplay>
 
-        <Stack direction="horizontal" gap={5}>
+        <Stack direction="horizontal" style={{ gap: "7.5rem" }}>
           <AttributeRank attribute={attribute} />
 
           {isAttributeAtMaximumValue ? (
@@ -53,7 +53,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
                   </PopoverBody>
                 </Popover>
               }
-              placement="bottom"
+              placement="left"
             >
               <div>
                 <Button

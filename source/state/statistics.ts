@@ -108,8 +108,7 @@ export const damage = withStateKey("damage", (key) =>
       const weaponValue = get(weapon);
 
       return Math.ceil(
-        (weaponValue.damage *
-          (1 + get(attributeStatistic("strength"))) *
+        ((weaponValue.damage + get(attributeStatistic("strength"))) *
           (1 + get(attributePowerBonus("strength"))) +
           Object.values(get(elementalEffects).weapon).reduce((sum, { damage }) => sum + damage, 0) +
           (get(isTraitAcquired("bruiser")) && isUnarmed(weaponValue) ? get(stamina) : 0)) *

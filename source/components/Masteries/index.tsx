@@ -1,22 +1,28 @@
 import { Accordion, AccordionHeader, AccordionItem, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MasteryDisplay } from "@neverquest/components/Masteries/MasteryDisplay";
+import { ACCORDION_EVENT_KEY } from "@neverquest/data/general";
 import IconMasteries from "@neverquest/icons/masteries.svg?react";
 import { isShowing } from "@neverquest/state/isShowing";
 import { unlockedMasteries } from "@neverquest/state/masteries";
+import { expandedMasteries } from "@neverquest/state/settings";
 import type { Mastery } from "@neverquest/types/unions";
 
-const ACCORDION_EVENT_KEY = "0";
-
 export function Masteries() {
+  const [expandedMasteriesValue, setExpandedMasteries] = useRecoilState(expandedMasteries);
   const isShowingMasteries = useRecoilValue(isShowing("masteries"));
   const unlockedMasteriesValue = useRecoilValue(unlockedMasteries);
 
   if (isShowingMasteries) {
     return (
-      <Accordion defaultActiveKey={ACCORDION_EVENT_KEY}>
+      <Accordion
+        activeKey={expandedMasteriesValue ? ACCORDION_EVENT_KEY : undefined}
+        onClick={() => {
+          setExpandedMasteries((isExpanded) => !isExpanded);
+        }}
+      >
         <AccordionItem eventKey={ACCORDION_EVENT_KEY}>
           <AccordionHeader>
             <IconDisplay Icon={IconMasteries} tooltip="Masteries">

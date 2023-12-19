@@ -5,21 +5,27 @@ import {
   AccordionItem,
   Stack,
 } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { PurchasableItems } from "@neverquest/components/Caravan/Merchant/PurchasableItems";
+import { ACCORDION_EVENT_KEY } from "@neverquest/data/general";
 import { merchantInventory } from "@neverquest/state/caravan";
-
-const ACCORDION_EVENT_KEY = "0";
+import { expandedBuyback } from "@neverquest/state/settings";
 
 export function BuybackItems() {
+  const [expandedBuybackValue, setExpandBuyback] = useRecoilState(expandedBuyback);
   const merchantInventoryValue = useRecoilValue(merchantInventory);
 
   const returnedItems = merchantInventoryValue.filter(({ isReturned }) => isReturned);
 
   if (returnedItems.length > 0) {
     return (
-      <Accordion defaultActiveKey={ACCORDION_EVENT_KEY}>
+      <Accordion
+        activeKey={expandedBuybackValue ? ACCORDION_EVENT_KEY : undefined}
+        onClick={() => {
+          setExpandBuyback((isExpanded) => !isExpanded);
+        }}
+      >
         <AccordionItem className="border-0" eventKey={ACCORDION_EVENT_KEY}>
           <AccordionButton className="px-0">
             <h6>Buy back items</h6>

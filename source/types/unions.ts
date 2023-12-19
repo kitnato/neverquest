@@ -320,6 +320,8 @@ export type StateKey =
   | "essence"
   | "essenceLoot"
   | "executionThreshold"
+  | "expandedBuyback"
+  | "expandedMasteries"
   | "fletcherInventory"
   | "hasDefeatedFinality"
   | "hasEnoughAmmunition"

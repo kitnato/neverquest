@@ -86,10 +86,11 @@ export function ParryRating() {
                           <IconImage className="small" Icon={IconFinesse} />
 
                           <span>
-                            {`+${formatNumber({
+                            +
+                            {formatNumber({
                               format: "percentage",
                               value: finesseValue,
-                            })}`}
+                            })}
                           </span>
                         </Stack>
                       </td>
@@ -115,10 +116,11 @@ export function ParryRating() {
                           <IconImage className="small" Icon={IconFinesse} />
 
                           <span>
-                            {`+${formatNumber({
+                            +
+                            {formatNumber({
                               format: "percentage",
                               value: finesseValue,
-                            })}`}
+                            })}
                           </span>
                         </Stack>
                       </td>

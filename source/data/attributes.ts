@@ -79,8 +79,8 @@ export const ATTRIBUTES: Record<
     base: 0,
     description: "Increases damage.",
     Icon: IconStrength,
-    increment: 2,
-    powerBonus: 0.01,
+    increment: 0.07,
+    powerBonus: 0.005,
     shows: ["damageDetails"],
   },
   vigor: {

@@ -73,9 +73,10 @@ export function Stamina() {
                             <IconImage className="small" Icon={IconStamina} />
 
                             <span>
-                              {`+${formatNumber({
+                              +
+                              {formatNumber({
                                 value: attributeStatisticEndurance - baseAmount,
-                              })}`}
+                              })}
                             </span>
 
                             {attributePowerBonusEndurance > 0 && (
@@ -107,11 +108,12 @@ export function Stamina() {
                               <IconImage className="small" Icon={IconStamina} />
 
                               <span>
-                                {`+${formatNumber({
+                                +
+                                {formatNumber({
                                   decimals: 0,
                                   format: "percentage",
                                   value: questsBonusStamina,
-                                })}`}
+                                })}
                               </span>
                             </Stack>
                           </td>

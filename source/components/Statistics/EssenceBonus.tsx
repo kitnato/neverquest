@@ -22,10 +22,11 @@ export function EssenceBonus() {
   return (
     <Stack direction="horizontal" gap={1}>
       <IconDisplay Icon={IconEssenceBonus} tooltip="Essence loot bonus">
-        {`+${formatNumber({
+        +
+        {formatNumber({
           format: "percentage",
           value: infusablePowerValue,
-        })}`}
+        })}
       </IconDisplay>
 
       <DeltasDisplay delta="essenceBonus" />

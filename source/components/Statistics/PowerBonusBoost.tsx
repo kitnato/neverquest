@@ -21,10 +21,13 @@ export function PowerBonusBoost() {
 
   return (
     <Stack direction="horizontal" gap={1}>
-      <IconDisplay Icon={IconPowerBonusBoost} tooltip="Power bonus boost">{`+${formatNumber({
-        format: "percentage",
-        value: infusablePowerValue,
-      })}`}</IconDisplay>
+      <IconDisplay Icon={IconPowerBonusBoost} tooltip="Power bonus boost">
+        +
+        {formatNumber({
+          format: "percentage",
+          value: infusablePowerValue,
+        })}
+      </IconDisplay>
 
       <DeltasDisplay delta="powerBonusBoost" />
     </Stack>

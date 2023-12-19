@@ -94,7 +94,14 @@ export function Damage() {
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <span>{`+${formatNumber({ value: attributeStatisticStrength })}`}</span>
+                        <span>
+                          +
+                          {formatNumber({
+                            decimals: 0,
+                            format: "percentage",
+                            value: attributeStatisticStrength,
+                          })}
+                        </span>
 
                         {attributePowerBonusStrength > 0 && (
                           <>
@@ -125,11 +132,12 @@ export function Damage() {
                           <IconImage className="small" Icon={IconDamage} />
 
                           <span>
-                            {`+${formatNumber({
+                            +
+                            {formatNumber({
                               decimals: 0,
                               format: "percentage",
                               value: questsBonusDamage,
-                            })}`}
+                            })}
                           </span>
                         </Stack>
                       </td>
@@ -147,7 +155,7 @@ export function Damage() {
                       </td>
 
                       <td>
-                        <span>{`+${staminaValue}`}</span>
+                        <span>+{staminaValue}</span>
                       </td>
                     </tr>
                   )}
@@ -164,7 +172,7 @@ export function Damage() {
 
                       <td>
                         <span>
-                          {formatNumber({ format: "percentage", value: BRAWLER_DAMAGE_BONUS })}
+                          +{formatNumber({ format: "percentage", value: BRAWLER_DAMAGE_BONUS })}
                         </span>
                       </td>
                     </tr>

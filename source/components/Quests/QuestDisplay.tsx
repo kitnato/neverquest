@@ -103,11 +103,12 @@ export function QuestDisplay({
                 <IconImage className="small" Icon={Icon} />
 
                 <span>
-                  {`+${formatNumber({
+                  +
+                  {formatNumber({
                     decimals: 0,
                     format: "percentage",
                     value: QUEST_COMPLETION_BONUS,
-                  })}`}
+                  })}
                 </span>
               </Stack>
             </ToggleButton>

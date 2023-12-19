@@ -1,7 +1,7 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { BLIGHT, POISON } from "@neverquest/data/monster";
-import { HEALTH_LOW_THRESHOLD, RESERVES, RESERVE_MINIMUM } from "@neverquest/data/reserves";
+import { AILING_RESERVE_MINIMUM, HEALTH_LOW_THRESHOLD, RESERVES } from "@neverquest/data/reserves";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { stage } from "@neverquest/state/encounter";
@@ -48,14 +48,17 @@ export const healthMaximum = withStateKey("healthMaximum", (key) =>
 
 export const healthMaximumPoisoned = withStateKey("healthMaximumPoisoned", (key) =>
   selector({
-    get: ({ get }) =>
-      Math.max(
-        get(healthMaximum) -
+    get: ({ get }) => {
+      const healthMaximumValue = get(healthMaximum);
+
+      return Math.max(
+        healthMaximumValue -
           Math.ceil(
-            get(healthMaximum) * get(poisonMagnitude) * (get(poisonDuration) / get(poisonLength)),
+            healthMaximumValue * get(poisonMagnitude) * (get(poisonDuration) / get(poisonLength)),
           ),
-        RESERVE_MINIMUM,
-      ),
+        AILING_RESERVE_MINIMUM,
+      );
+    },
     key,
   }),
 );
@@ -200,7 +203,8 @@ export const staminaMaximum = withStateKey("staminaMaximum", (key) =>
 
 export const staminaMaximumBlighted = withStateKey("staminaMaximumBlighted", (key) =>
   selector({
-    get: ({ get }) => Math.max(get(staminaMaximum) - get(blightMagnitude).amount, RESERVE_MINIMUM),
+    get: ({ get }) =>
+      Math.max(get(staminaMaximum) - get(blightMagnitude).amount, AILING_RESERVE_MINIMUM),
     key,
   }),
 );

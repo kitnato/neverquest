@@ -76,10 +76,11 @@ export function CombatRange() {
 
                       <td>
                         <span>
-                          {`+${formatNumber({
+                          +
+                          {formatNumber({
                             format: "percentage",
                             value: marksmanshipValue,
-                          })}`}
+                          })}
                         </span>
                       </td>
                     </tr>

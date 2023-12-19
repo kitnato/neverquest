@@ -17,12 +17,7 @@ import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import {
-  criticalChance,
-  criticalDamage,
-  criticalRating,
-  criticalStrike,
-} from "@neverquest/state/statistics";
+import { criticalRating, criticalStrike } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -32,8 +27,6 @@ export function CriticalRating() {
   const attributeStatisticDexterity = useRecoilValue(attributeStatistic("dexterity"));
   const attributeStatisticPerception = useRecoilValue(attributeStatistic("perception"));
   const criticalRatingValue = useRecoilValue(criticalRating);
-  const criticalChanceValue = useRecoilValue(criticalChance);
-  const criticalDamageValue = useRecoilValue(criticalDamage);
   const criticalStrikeValue = useRecoilValue(criticalStrike);
   const isShowingCriticalRating = useRecoilValue(isShowing("criticalRating"));
   const assassinationValue = useRecoilValue(isSkillAcquired("assassination"));
@@ -88,10 +81,10 @@ export function CriticalRating() {
                               <IconImage className="small" Icon={IconTomeOfPower} />
 
                               <span>
-                                {`+${formatNumber({
-                                  format: "percentage",
-                                  value: criticalChanceValue - attributeStatisticDexterity,
-                                })}`}
+                                {formatNumber({
+                                  format: "multiplier",
+                                  value: attributePowerBonusDexterity,
+                                })}
                               </span>
                             </>
                           )}
@@ -127,10 +120,10 @@ export function CriticalRating() {
                               <IconImage className="small" Icon={IconTomeOfPower} />
 
                               <span>
-                                {`+${formatNumber({
-                                  format: "percentage",
-                                  value: criticalDamageValue - attributeStatisticPerception,
-                                })}`}
+                                {formatNumber({
+                                  format: "multiplier",
+                                  value: attributePowerBonusPerception,
+                                })}
                               </span>
                             </>
                           )}

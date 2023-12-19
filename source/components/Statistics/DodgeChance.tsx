@@ -32,7 +32,7 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function DodgeChance() {
   const armorValue = useRecoilValue(armor);
-  const agilityPowerBonus = useRecoilValue(attributePowerBonus("agility"));
+  const attributePowerBonusAgility = useRecoilValue(attributePowerBonus("agility"));
   const agility = useRecoilValue(attributeStatistic("agility"));
   const dodgeChanceValue = useRecoilValue(dodgeChance);
   const isShowingDodgeChance = useRecoilValue(isShowing("dodgeChance"));
@@ -82,7 +82,7 @@ export function DodgeChance() {
                             })}`}
                           </span>
 
-                          {agilityPowerBonus > 0 && (
+                          {attributePowerBonusAgility > 0 && (
                             <>
                               {LABEL_SEPARATOR}
 
@@ -91,7 +91,7 @@ export function DodgeChance() {
                               <span>
                                 {formatNumber({
                                   format: "multiplier",
-                                  value: agilityPowerBonus,
+                                  value: attributePowerBonusAgility,
                                 })}
                               </span>
                             </>

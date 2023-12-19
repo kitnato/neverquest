@@ -86,10 +86,13 @@ export function Protection() {
                         {isUnshielded(shieldValue) ? (
                           <span>{LABEL_EMPTY}</span>
                         ) : (
-                          <span>{`+${formatNumber({
-                            format: "percentage",
-                            value: (shieldValue as Shield).block,
-                          })}`}</span>
+                          <span>
+                            +
+                            {formatNumber({
+                              format: "percentage",
+                              value: (shieldValue as Shield).block,
+                            })}
+                          </span>
                         )}
                       </td>
                     </tr>

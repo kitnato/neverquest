@@ -31,11 +31,14 @@ export function QuestBonusDisplay({ bonus }: { bonus: QuestBonus }) {
   return (
     <IconDisplay Icon={Icon} key={bonus} tooltip={tooltip}>
       <Stack direction="horizontal" gap={1}>
-        {`+${formatNumber({
-          decimals: 0,
-          format: "percentage",
-          value: questsBonusValue,
-        })}`}
+        <span>
+          +
+          {formatNumber({
+            decimals: 0,
+            format: "percentage",
+            value: questsBonusValue,
+          })}
+        </span>
 
         <DeltasDisplay delta={bonus} />
       </Stack>

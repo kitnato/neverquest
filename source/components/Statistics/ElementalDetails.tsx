@@ -31,13 +31,13 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
 
             return (
               <Stack direction="horizontal" gap={1} key={ID}>
-                <span className={color}>{`+${damage}`}</span>
+                <span className={color}>+{damage}</span>
 
                 {LABEL_SEPARATOR}
 
                 <IconImage className="small" Icon={Icon} />
 
-                <span>{`${formatNumber({ format: "time", value: duration })}`}</span>
+                <span>{formatNumber({ format: "time", value: duration })}</span>
               </Stack>
             );
           })}

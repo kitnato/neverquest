@@ -33,22 +33,20 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 
               return (
                 <Stack direction="horizontal" gap={1} key={ID}>
-                  <span className={color}>{`${
-                    typeof effect === "number"
+                  <span className={color}>
+                    {typeof effect === "number"
                       ? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
-                      : formatNumber({ value: effect.damage })
-                  }`}</span>
+                      : formatNumber({ value: effect.damage })}
+                  </span>
 
                   {LABEL_SEPARATOR}
 
                   <IconImage className="small" Icon={Icon} />
 
                   <span>
-                    {`${
-                      typeof effect === "number"
-                        ? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
-                        : formatNumber({ format: "time", value: effect.duration })
-                    } `}
+                    {typeof effect === "number"
+                      ? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
+                      : formatNumber({ format: "time", value: effect.duration })}
                   </span>
 
                   {LABEL_SEPARATOR}

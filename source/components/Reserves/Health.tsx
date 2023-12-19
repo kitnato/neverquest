@@ -81,9 +81,12 @@ export function Health() {
                           <Stack direction="horizontal" gap={1}>
                             <IconImage className="small" Icon={IconHealth} />
 
-                            <span>{`+${formatNumber({
-                              value: attributeStatisticVitality - baseAmount,
-                            })}`}</span>
+                            <span>
+                              +
+                              {formatNumber({
+                                value: attributeStatisticVitality - baseAmount,
+                              })}
+                            </span>
 
                             {attributePowerBonusVitality > 0 && (
                               <>
@@ -114,11 +117,12 @@ export function Health() {
                               <IconImage className="small" Icon={IconHealth} />
 
                               <span>
-                                {`+${formatNumber({
+                                +
+                                {formatNumber({
                                   decimals: 0,
                                   format: "percentage",
                                   value: questsBonusHealth,
-                                })}`}
+                                })}
                               </span>
                             </Stack>
                           </td>

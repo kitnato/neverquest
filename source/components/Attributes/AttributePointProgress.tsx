@@ -18,7 +18,7 @@ export function AttributePointProgress() {
   const nextTotalCost =
     getAttributePointCost(powerLevelValue) +
     Array.from<undefined>({ length: attributePointsValue }).reduce(
-      (aggregator, _, index) => aggregator + getAttributePointCost(powerLevelValue + index + 1),
+      (sum, _, index) => sum + getAttributePointCost(powerLevelValue + index + 1),
       0,
     );
 
@@ -32,7 +32,7 @@ export function AttributePointProgress() {
           <Stack direction="horizontal" gap={1}>
             <IconImage className="small stencilled" Icon={IconEssence} />
 
-            <span>{`${formatNumber({ value: essenceValue })}/${formatNumber({
+            <span>{`${formatNumber({ value: essenceValue })} / ${formatNumber({
               value: nextTotalCost,
             })}`}</span>
           </Stack>

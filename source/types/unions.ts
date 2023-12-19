@@ -271,7 +271,6 @@ export type StateKey =
   | "areAttributesAffordable"
   | "attackDuration"
   | "attackRate"
-  | "attackRateReduction"
   | "attributePoints"
   | "attributePowerBonus"
   | "attributeRank"

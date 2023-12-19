@@ -31,14 +31,9 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 export const attackRate = withStateKey("attackRate", (key) =>
   selector({
-    get: ({ get }) => get(weapon).rate * (1 - get(attackRateReduction)),
-    key,
-  }),
-);
-
-export const attackRateReduction = withStateKey("attackRateReduction", (key) =>
-  selector({
-    get: ({ get }) => get(attributeStatistic("speed")) * (1 + get(attributePowerBonus("speed"))),
+    get: ({ get }) =>
+      get(weapon).rate *
+      (1 - get(attributeStatistic("speed")) * (1 + get(attributePowerBonus("speed")))),
     key,
   }),
 );
@@ -112,21 +107,19 @@ export const damage = withStateKey("damage", (key) =>
     get: ({ get }) => {
       const weaponValue = get(weapon);
 
-      return (
-        (Math.round(
-          get(attributeStatistic("strength")) *
-            (1 + get(attributePowerBonus("strength"))) *
-            (1 + get(questsBonus("damageBonus"))),
-        ) +
-          weaponValue.damage +
+      return Math.ceil(
+        (weaponValue.damage *
+          (1 + get(attributeStatistic("strength"))) *
+          (1 + get(attributePowerBonus("strength"))) +
           Object.values(get(elementalEffects).weapon).reduce((sum, { damage }) => sum + damage, 0) +
           (get(isTraitAcquired("bruiser")) && isUnarmed(weaponValue) ? get(stamina) : 0)) *
-        (get(isTraitAcquired("brawler")) &&
-        isUnshielded(get(shield)) &&
-        isMelee(weaponValue) &&
-        (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))
-          ? 1 + BRAWLER_DAMAGE_BONUS
-          : 1)
+          (get(isTraitAcquired("brawler")) &&
+          isUnshielded(get(shield)) &&
+          isMelee(weaponValue) &&
+          (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))
+            ? 1 + BRAWLER_DAMAGE_BONUS
+            : 1) *
+          (1 + get(questsBonus("damageBonus"))),
       );
     },
     key,

@@ -25,7 +25,6 @@ import {
   isStaminaAtMaximum,
   regenerationDuration,
   regenerationRate,
-  reserveRegenerationRateReduction,
 } from "@neverquest/state/reserves";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Reserve } from "@neverquest/types/unions";
@@ -49,10 +48,9 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
   );
   const isRecoveringValue = useRecoilValue(isRecovering);
   const isRegeneratingValue = useRecoilValue(isRegenerating(reserve));
+  const calisthenicsValue = useRecoilValue(isSkillAcquired("calisthenics"));
   const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve));
   const regenerationRateValue = useRecoilValue(regenerateRateState);
-  const reserveRegenerationRateReductionValue = useRecoilValue(reserveRegenerationRateReduction);
-  const calisthenicsValue = useRecoilValue(isSkillAcquired("calisthenics"));
 
   const {
     baseRegenerationAmount,
@@ -140,11 +138,10 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                           <IconImage className="small" Icon={IconTomeOfPower} />
 
                           <span>
-                            {`-${formatNumber({
-                              format: "percentage",
-                              value:
-                                reserveRegenerationRateReductionValue - attributeStatisticVigor,
-                            })}`}
+                            {formatNumber({
+                              format: "multiplier",
+                              value: attributePowerBonusVigor,
+                            })}
                           </span>
                         </>
                       )}
@@ -177,7 +174,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      <span>{`+${attributeStatisticFortitude}`}</span>
+                      <span>+{attributeStatisticFortitude}</span>
 
                       {attributePowerBonusFortitude > 0 && (
                         <>

@@ -41,19 +41,23 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
       <Stack className="justify-content-center" direction="horizontal" gap={1}>
         <IconImage className="small" Icon={Icon} />
 
-        {`${operand}${
-          increment < 1 ? formatNumber({ format: "percentage", value: increment }) : increment
-        }`}
+        <span>
+          {operand}
+          {increment < 1 ? formatNumber({ format: "percentage", value: increment }) : increment}
+        </span>
       </Stack>
 
       {ownedItemTomeOfPower !== undefined && (
         <Stack className="justify-content-center" direction="horizontal" gap={1}>
           <IconImage className="small" Icon={IconTomeOfPower} />
 
-          {`+${formatNumber({
-            format: "percentage",
-            value: powerBonus * (1 + infusablePowerTomeOfPower),
-          })}`}
+          <span>
+            +
+            {formatNumber({
+              format: "percentage",
+              value: powerBonus * (1 + infusablePowerTomeOfPower),
+            })}
+          </span>
         </Stack>
       )}
     </>

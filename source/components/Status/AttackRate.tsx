@@ -25,13 +25,12 @@ import {
 import { weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMonsterDead } from "@neverquest/state/monster";
-import { attackRate, attackRateReduction } from "@neverquest/state/statistics";
+import { attackRate } from "@neverquest/state/statistics";
 import { isUnarmed } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function AttackRate() {
-  const attackRateReductionValue = useRecoilValue(attackRateReduction);
   const attributePowerBonusSpeed = useRecoilValue(attributePowerBonus("speed"));
   const attributeStatisticSpeed = useRecoilValue(attributeStatistic("speed"));
   const canAttackOrParryValue = useRecoilValue(canAttackOrParry);
@@ -123,10 +122,10 @@ export function AttackRate() {
                             <IconImage className="small" Icon={IconTomeOfPower} />
 
                             <span>
-                              {`-${formatNumber({
-                                format: "percentage",
-                                value: attackRateReductionValue - attributeStatisticSpeed,
-                              })}`}
+                              {formatNumber({
+                                format: "multiplier",
+                                value: attributePowerBonusSpeed,
+                              })}
                             </span>
                           </>
                         )}

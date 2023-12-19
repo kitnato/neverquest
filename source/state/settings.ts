@@ -23,7 +23,7 @@ export const autoEquip = withStateKey("autoEquip", (key) =>
 
 export const expandedBuyback = withStateKey("expandedBuyback", (key) =>
   atom({
-    default: false,
+    default: true,
     effects: [handleLocalStorage({ isSetting: true, key })],
     key,
   }),
@@ -31,7 +31,7 @@ export const expandedBuyback = withStateKey("expandedBuyback", (key) =>
 
 export const expandedMasteries = withStateKey("expandedMasteries", (key) =>
   atom({
-    default: false,
+    default: true,
     effects: [handleLocalStorage({ isSetting: true, key })],
     key,
   }),

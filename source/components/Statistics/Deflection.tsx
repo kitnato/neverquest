@@ -71,10 +71,11 @@ export function Deflection() {
 
                       <td>
                         <span>
-                          {`+${formatNumber({
+                          +
+                          {formatNumber({
                             format: "percentage",
                             value: INOCULATED_DEFLECTION_BASE,
-                          })}`}
+                          })}
                         </span>
                       </td>
                     </tr>

@@ -26,8 +26,6 @@ import type { Crew, Grip } from "@neverquest/types/unions";
 
 export const AMMUNITION_PRICE = 5;
 
-export const GEAR_LEVEL_RANGE_MAXIMUM = 3;
-
 export const CREW: Record<
   Crew,
   {

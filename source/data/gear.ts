@@ -89,6 +89,8 @@ export const ARMOR_SPECIFICATIONS: Record<
   },
 };
 
+export const GEAR_LEVEL_RANGE_MAXIMUM = 3;
+
 export const SHIELD_NONE: Omit<Shield, "gearClass" | "isEquipped" | "price"> = {
   block: 0,
   gems: [],

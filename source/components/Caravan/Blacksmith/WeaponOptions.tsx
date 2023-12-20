@@ -7,8 +7,12 @@ import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
 import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { SetGearLevel } from "@neverquest/components/Caravan/SetGearLevel";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/caravan";
-import { WEAPON_BASE, WEAPON_MODIFIER, WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
+import {
+  GEAR_LEVEL_RANGE_MAXIMUM,
+  WEAPON_BASE,
+  WEAPON_MODIFIER,
+  WEAPON_SPECIFICATIONS,
+} from "@neverquest/data/gear";
 import { GROWTH_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";

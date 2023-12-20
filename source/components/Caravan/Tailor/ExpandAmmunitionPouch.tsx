@@ -60,15 +60,15 @@ export function ExpandAmmunitionPouch() {
                   onClick={() => {
                     transactEssence(-price);
                     setInventory((currentInventory) =>
-                      currentInventory.map((currentItem) =>
-                        currentItem.ID === ID
+                      currentInventory.map((item) =>
+                        item.ID === ID
                           ? {
-                              ...currentItem,
+                              ...item,
                               maximum:
-                                (currentItem as AmmunitionPouchItem).maximum +
+                                (item as AmmunitionPouchItem).maximum +
                                 TAILORING_EXPANSION.ammunitionPouch,
                             }
-                          : currentItem,
+                          : item,
                       ),
                     );
                   }}

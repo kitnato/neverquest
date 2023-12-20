@@ -56,7 +56,7 @@ export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
           case "frozen":
           case "shocked": {
             const elemental = ELEMENTAL_TYPES.find(
-              (currentElemental) => ELEMENTALS[currentElemental].ailment === parameter,
+              (elementalType) => ELEMENTALS[elementalType].ailment === parameter,
             );
             const { armor, weapon } = get(elementalEffects);
 

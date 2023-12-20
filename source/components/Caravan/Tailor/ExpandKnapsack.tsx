@@ -61,15 +61,14 @@ export function ExpandKnapsack() {
                   onClick={() => {
                     transactEssence(-price);
                     setInventory((currentInventory) =>
-                      currentInventory.map((currentItem) =>
-                        currentItem.ID === ID
+                      currentInventory.map((item) =>
+                        item.ID === ID
                           ? {
-                              ...currentItem,
+                              ...item,
                               capacity:
-                                (currentItem as KnapsackItem).capacity +
-                                TAILORING_EXPANSION.knapsack,
+                                (item as KnapsackItem).capacity + TAILORING_EXPANSION.knapsack,
                             }
-                          : currentItem,
+                          : item,
                       ),
                     );
 

@@ -30,14 +30,13 @@ import type {
   TrinketItem,
 } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
-import {
-  type Consumable,
-  type Elemental,
-  type Gem,
-  INFUSABLE_TYPES,
-  type Infusable,
-  type MonsterAilmentElemental,
-  type Trinket,
+import type {
+  Consumable,
+  Elemental,
+  Gem,
+  Infusable,
+  MonsterAilmentElemental,
+  Trinket,
 } from "@neverquest/types/unions";
 
 export const AMMUNITION_CAPACITY = 100;
@@ -129,12 +128,6 @@ export const ELEMENTALS: Record<
 };
 
 export const ENCUMBRANCE_CAPACITY = 6;
-
-export const INHERITABLE_ITEMS: (Infusable | Trinket)[] = [
-  "knapsack",
-  "journal",
-  ...INFUSABLE_TYPES,
-] as const;
 
 export const GEM_BASE = {
   price: 250,

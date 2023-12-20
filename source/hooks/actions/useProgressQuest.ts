@@ -33,13 +33,13 @@ export function useProgressQuest() {
 
         const achievedQuests: QuestNotification[] = [];
 
-        set(questStatusesState, (currentStatuses) =>
-          currentStatuses.map((currentStatus, index) => {
+        set(questStatusesState, (statuses) =>
+          statuses.map((status, index) => {
             const currentQuest = quests[index];
 
             if (
               currentQuest !== undefined &&
-              currentStatus === "incomplete" &&
+              status === "incomplete" &&
               newProgress >= currentQuest.progressionMaximum
             ) {
               achievedQuests.unshift({ ...currentQuest, ID: nanoid() });
@@ -47,7 +47,7 @@ export function useProgressQuest() {
               return "achieved";
             }
 
-            return currentStatus;
+            return status;
           }),
         );
 

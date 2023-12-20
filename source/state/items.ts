@@ -1,7 +1,7 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { INFUSION_DELTA, INFUSION_DURATION } from "@neverquest/data/general";
-import { INFUSABLES, INHERITABLE_ITEMS } from "@neverquest/data/items";
+import { INFUSABLES } from "@neverquest/data/items";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { ownedItem } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
@@ -105,25 +105,6 @@ export const infusionStep = withStateKey("infusionStep", (key) =>
           get(essence),
           Math.ceil((get(infusionMaximum(parameter)) / INFUSION_DURATION) * INFUSION_DELTA),
         ),
-    key,
-  }),
-);
-
-export const ownsInheritableItems = withStateKey("ownsInheritableItems", (key) =>
-  selector({
-    get: ({ get }) => {
-      const currentlyOwnedInheritableItems = {} as Record<
-        (typeof INHERITABLE_ITEMS)[number],
-        boolean
-      >;
-
-      for (const inheritableItem of INHERITABLE_ITEMS) {
-        currentlyOwnedInheritableItems[inheritableItem] =
-          get(ownedItem(inheritableItem)) !== undefined;
-      }
-
-      return currentlyOwnedInheritableItems;
-    },
     key,
   }),
 );

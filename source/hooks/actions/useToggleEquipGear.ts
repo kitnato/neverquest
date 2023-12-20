@@ -83,42 +83,42 @@ export function useToggleEquipGear() {
         reset(questProgress("survivingNoGear"));
 
         set(inventory, (currentInventory) =>
-          currentInventory.map((currentItem) => {
-            if (isGearItem(currentItem)) {
-              if (currentItem.ID === ID) {
+          currentInventory.map((item) => {
+            if (isGearItem(item)) {
+              if (item.ID === ID) {
                 return {
-                  ...currentItem,
-                  isEquipped: !currentItem.isEquipped,
+                  ...item,
+                  isEquipped: !item.isEquipped,
                 };
               } else if (
                 // Equipping a ranged or two-handed weapon while a shield is equipped.
                 ((isWeaponRanged || isWeaponTwoHanded) &&
                   !isEquipped &&
-                  isShield(currentItem) &&
-                  currentItem.isEquipped) ||
+                  isShield(item) &&
+                  item.isEquipped) ||
                 // Equipping a shield while a ranged or two-handed weapon is equipped.
                 (isShield(gearItem) &&
                   !isEquipped &&
-                  ((isMelee(currentItem) &&
-                    currentItem.grip === "two-handed" &&
+                  ((isMelee(item) &&
+                    item.grip === "two-handed" &&
                     !get(isTraitAcquired("colossus"))) ||
-                    isRanged(currentItem)) &&
-                  currentItem.isEquipped) ||
+                    isRanged(item)) &&
+                  item.isEquipped) ||
                 // Equipping in an already-occupied slot.
-                (currentItem.isEquipped &&
+                (item.isEquipped &&
                   !isEquipped &&
-                  ((isArmor(currentItem) && isArmor(gearItem)) ||
-                    (isShield(currentItem) && isShield(gearItem)) ||
-                    (isWeapon(currentItem) && isWeapon(gearItem))))
+                  ((isArmor(item) && isArmor(gearItem)) ||
+                    (isShield(item) && isShield(gearItem)) ||
+                    (isWeapon(item) && isWeapon(gearItem))))
               ) {
                 return {
-                  ...currentItem,
+                  ...item,
                   isEquipped: false,
                 };
               }
             }
 
-            return currentItem;
+            return item;
           }),
         );
       },

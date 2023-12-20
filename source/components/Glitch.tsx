@@ -97,8 +97,8 @@ export function Glitch() {
           if (textContent !== null) {
             classList.add("monospaced");
 
-            setGlitchingElements((currentElements) => ({
-              ...currentElements,
+            setGlitchingElements((elements) => ({
+              ...elements,
               [nanoid()]: {
                 duration: getFromRange(
                   getRange({
@@ -130,14 +130,14 @@ export function Glitch() {
           element.classList.remove("monospaced");
           element.textContent = originalText;
 
-          setGlitchingElements(({ [ID]: _, ...currentElements }) => ({ ...currentElements }));
+          setGlitchingElements(({ [ID]: _, ...elements }) => ({ ...elements }));
         } else {
           if (latency <= 0) {
             glitchElementAt({ element, originalText });
           }
 
-          setGlitchingElements((currentElements) => ({
-            ...currentElements,
+          setGlitchingElements((elements) => ({
+            ...elements,
             [ID]: {
               duration: duration - elapsed,
               element,

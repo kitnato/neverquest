@@ -386,7 +386,6 @@ export type StateKey =
   | "name"
   | "notifyOverEncumbrance"
   | "ownedItem"
-  | "ownsInheritableItems"
   | "parryAbsorption"
   | "parryChance"
   | "parryDamage"

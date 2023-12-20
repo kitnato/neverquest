@@ -22,8 +22,8 @@ export function QuestNotifications() {
             delay={QUEST_NOTIFICATION_DURATION}
             key={questNotificationOuterID}
             onClose={() => {
-              setQuestNotifications((currentQueue) =>
-                currentQueue.filter(
+              setQuestNotifications((queue) =>
+                queue.filter(
                   ({ ID: questNotificationInnerID }) =>
                     questNotificationOuterID !== questNotificationInnerID,
                 ),

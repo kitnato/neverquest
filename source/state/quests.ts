@@ -73,9 +73,8 @@ export const completedQuestsCount = withStateKey("completedQuestsCount", (key) =
         return QUEST_TYPES_BY_CLASS[parameter].reduce(
           (sum, quest) =>
             sum +
-            Object.values(get(questStatuses(quest))).filter((currentStatus) =>
-              questBonusTypes.has(currentStatus),
-            ).length,
+            Object.values(get(questStatuses(quest))).filter((status) => questBonusTypes.has(status))
+              .length,
           0,
         );
       },
@@ -93,9 +92,8 @@ export const questsBonus = withStateKey("questsBonus", (key) =>
           : QUEST_TYPES.reduce(
               (sum, quest) =>
                 sum +
-                Object.values(get(questStatuses(quest))).filter(
-                  (currentStatus) => parameter === currentStatus,
-                ).length,
+                Object.values(get(questStatuses(quest))).filter((status) => parameter === status)
+                  .length,
               0,
             ) * QUEST_COMPLETION_BONUS,
     key,

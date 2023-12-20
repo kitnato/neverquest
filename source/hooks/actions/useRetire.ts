@@ -1,7 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
 import { LABEL_UNKNOWN, RETIREMENT_STAGE_MINIMUM } from "@neverquest/data/general";
-import { INHERITABLE_ITEMS } from "@neverquest/data/items";
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
@@ -26,7 +25,7 @@ import { questProgress } from "@neverquest/state/quests";
 import { essence } from "@neverquest/state/resources";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits";
-import { isGearItem } from "@neverquest/types/type-guards";
+import { isUsableItem } from "@neverquest/types/type-guards";
 import { MASTERY_TYPES, SKILL_TYPES } from "@neverquest/types/unions";
 import { getProgressReduction, getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -44,7 +43,6 @@ export function useRetire() {
           return;
         }
 
-        const inheritableItems = new Set<string>(INHERITABLE_ITEMS);
         const selectedTraitValue = get(selectedTrait);
 
         if (selectedTraitValue !== undefined) {
@@ -101,13 +99,7 @@ export function useRetire() {
         }
 
         set(inventory, (currentInventory) =>
-          currentInventory.filter((currentItem) => {
-            if (isGearItem(currentItem)) {
-              return false;
-            }
-
-            return inheritableItems.has(currentItem.name);
-          }),
+          currentInventory.filter((currentItem) => isUsableItem(currentItem)),
         );
 
         if (get(name) !== LABEL_UNKNOWN) {

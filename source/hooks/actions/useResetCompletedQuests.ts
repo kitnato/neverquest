@@ -11,10 +11,8 @@ export function useResetCompletedQuests() {
         const questBonusTypes = new Set<string>(QUEST_BONUS_TYPES);
 
         for (const quest of QUEST_TYPES) {
-          set(questStatuses(quest), (currentStatuses) =>
-            currentStatuses.map((currentStatus) =>
-              questBonusTypes.has(currentStatus) ? "achieved" : currentStatus,
-            ),
+          set(questStatuses(quest), (statuses) =>
+            statuses.map((status) => (questBonusTypes.has(status) ? "achieved" : status)),
           );
         }
       },

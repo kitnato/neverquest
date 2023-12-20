@@ -45,8 +45,8 @@ export function useIncreaseAttribute() {
         progressQuest({ quest: "powerLevelUltra" });
 
         if (
-          ATTRIBUTE_TYPES.filter((currentAttribute) => currentAttribute !== attribute).every(
-            (currentAttribute) => get(attributeRank(currentAttribute)) > 0,
+          ATTRIBUTE_TYPES.filter((attributeType) => attributeType !== attribute).every(
+            (attributeType) => get(attributeRank(attributeType)) > 0,
           )
         ) {
           progressQuest({ quest: "attributesIncreasingAll" });

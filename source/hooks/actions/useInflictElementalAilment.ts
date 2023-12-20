@@ -20,8 +20,8 @@ export function useInflictElementalAilment() {
         const { duration } = get(elementalEffects)[slot][elemental];
 
         if (get(canReceiveAilment(ailment)) && duration > 0) {
-          set(monsterAilmentDuration(ailment), (currentDuration) => {
-            const newDuration = currentDuration + duration;
+          set(monsterAilmentDuration(ailment), (ailmentDuration) => {
+            const newDuration = ailmentDuration + duration;
 
             if (newDuration > durationMaximum) {
               return durationMaximum;

@@ -196,7 +196,7 @@ export const QUESTS: Record<
       value: QUEST_REQUIREMENTS.essenceCount,
     })} essence.`,
     progression: [1],
-    title: "Jackpot",
+    title: "Foggy memory",
   },
   executing: {
     description: "Execute @ monsters.",

@@ -234,7 +234,8 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
                 .reduce<number>((sum, gemCount) => sum + gemCount, 0)
             : 0,
         trinket:
-          // Mysterious egg drops only if Res Dominus has just been defeated and if it's neither already carried nor sold.
+          // Mysterious egg drops only if Res Dominus has just been defeated and if it's neither carried nor sold while carrying the antique coin.
+          get(ownedItem("antique coin")) !== undefined &&
           encounterValue === "res dominus" &&
           ownedItemMysteriousEgg === undefined &&
           !merchantInventoryValue.some(({ ID }) => ID === INFUSABLES["mysterious egg"].item.ID)

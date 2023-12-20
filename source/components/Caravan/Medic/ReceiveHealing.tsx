@@ -23,9 +23,7 @@ export function ReceiveHealing() {
 
   const transactEssence = useTransactEssence();
 
-  const { critical, normal } = MEDIC_PRICE_SURGERY;
-  const price = isHealthLowValue ? critical : normal;
-  const isAffordable = price <= essenceValue;
+  const isAffordable = MEDIC_PRICE_SURGERY <= essenceValue;
   const isPurchasable = isAffordable && !isHealthAtMaximumValue;
 
   const heal = useHeal();
@@ -41,7 +39,7 @@ export function ReceiveHealing() {
 
         <Stack direction="horizontal" gap={3}>
           <IconDisplay Icon={IconEssence} tooltip="Price">
-            {formatNumber({ value: price })}
+            {formatNumber({ value: MEDIC_PRICE_SURGERY })}
           </IconDisplay>
 
           <OverlayTrigger
@@ -60,7 +58,7 @@ export function ReceiveHealing() {
                 onClick={() => {
                   heal();
 
-                  transactEssence(-price);
+                  transactEssence(-MEDIC_PRICE_SURGERY);
                 }}
                 variant="outline-dark"
               >

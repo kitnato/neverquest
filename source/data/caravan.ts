@@ -123,15 +123,15 @@ export const CREW: Record<
       26: "Welcome back. Always a sight for sore eyes.",
       30: "A dark wanderer passed by and sold me a strange book ...",
       31: "Still you return for more?",
-      33: "Extraordinary discoveries reveal themselves only to the lucky few.",
-      36: "I've happened upon an artifact for your reaping burdens.",
-      37: "Your headway in the wilderness is helping business.",
+      35: "I've happened upon an artifact for your reaping burdens.",
+      36: "Your headway in the wilderness is helping business.",
       39: "You wouldn't be a scribe, would you?",
       51: "Still you press on. There must be an answer.",
-      70: "Gloomy portents signal that dark tides are coming.",
-      73: "I fear the end is imminent.",
+      70: "Extraordinary discoveries reveal themselves only to the lucky few.",
+      71: "Gloomy portents signal that dark tides are coming.",
+      74: "I fear the end is imminent.",
       [GROWTH_MAXIMUM]: "All is truly lost.",
-      [LEVELLING_MAXIMUM - 1]: "It's so cold ...",
+      [LEVELLING_MAXIMUM - 1]: "Something's wrong.",
       [LEVELLING_MAXIMUM]: "How are you still here?",
       [LEVELLING_MAXIMUM + 4]: "Please go back to where you came from.",
       [LEVELLING_MAXIMUM + 8]: "This is all wrong. I don't understand.",
@@ -153,7 +153,7 @@ export const CREW: Record<
       [GROWTH_MAXIMUM]: "...",
       [LEVELLING_MAXIMUM]: "I can't see any more.",
     },
-    price: 777,
+    price: 650,
     requiredStage: 35,
   },
   tailor: {
@@ -188,9 +188,9 @@ export const OCCULTIST_PURGE_PRICE_MULTIPLIER = {
   quests: 500,
 };
 
-export const OVUM_INFUSION_PRICE = 1313;
+export const OVUM_INFUSION_PRICE = 7171;
 
-export const MEDIC_PRICE_SURGERY = { critical: 100, normal: 20 };
+export const MEDIC_PRICE_SURGERY = 25;
 
 export const MERCHANT_OFFERS: Record<
   number,
@@ -247,9 +247,9 @@ export const MERCHANT_OFFERS: Record<
   20: INFUSABLES["monkey paw"].item,
   [CREW.fletcher.requiredStage]: TRINKETS["ammunition pouch"].item,
   30: INFUSABLES["tome of power"].item,
-  33: TRINKETS["antique coin"].item,
-  36: TRINKETS["ender hook"].item,
+  35: TRINKETS["ender hook"].item,
   39: TRINKETS.journal.item,
+  70: TRINKETS["antique coin"].item,
 };
 
 export const TAILORING_EXPANSION = {

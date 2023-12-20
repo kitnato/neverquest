@@ -55,7 +55,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
     bandages: {
       Icon: IconBandages,
       item: {
-        description: "Restores all health.",
+        description: "Fully restores health.",
         name: "bandages",
         price: 40,
         weight: 1,

@@ -1,5 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
+import { useSetMonologues } from "./useSetMonologues";
 import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGenerateMerchantInventory";
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
@@ -19,6 +20,7 @@ export function useToggleLocation() {
   const generateMerchantInventory = useGenerateMerchantInventory();
   const increaseStage = useIncreaseStage();
   const resetWilderness = useResetWilderness();
+  const setMonologues = useSetMonologues();
 
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
@@ -36,6 +38,7 @@ export function useToggleLocation() {
           set(location, "caravan");
 
           generateMerchantInventory();
+          setMonologues();
         } else {
           if (get(isStageCompleted) && get(stage) === get(stageMaximum)) {
             increaseStage();

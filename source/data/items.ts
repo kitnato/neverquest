@@ -1,5 +1,3 @@
-import { nanoid } from "nanoid";
-
 import { GLITCH_NUMBER } from "@neverquest/data/general";
 import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
 import IconAntidote from "@neverquest/icons/antidote.svg?react";
@@ -174,7 +172,7 @@ export const INFUSABLES: Record<
     item: {
       description: "Boosts amount of essence looted.",
       growthBase: 3,
-      ID: nanoid(),
+      ID: "",
       level: 0,
       maximum: 2,
       minimum: 0.025,
@@ -188,7 +186,7 @@ export const INFUSABLES: Record<
     item: {
       description: "A perplexing ovum emanating otherworldly energy.",
       growthBase: 2,
-      ID: nanoid(),
+      ID: "",
       level: 0,
       maximum: 1,
       minimum: 0,
@@ -202,7 +200,7 @@ export const INFUSABLES: Record<
     item: {
       description: "Boosts all attribute effects based on power level.",
       growthBase: 4,
-      ID: nanoid(),
+      ID: "",
       level: 0,
       maximum: 1.5,
       minimum: 0.05,
@@ -228,7 +226,7 @@ export const TRINKETS: Record<
     item: {
       current: 0,
       description: "Store ammunition for ranged weapons.",
-      ID: nanoid(),
+      ID: "",
       maximum: AMMUNITION_CAPACITY,
       name: "ammunition pouch",
       price: 250,
@@ -239,7 +237,7 @@ export const TRINKETS: Record<
     Icon: IconAntiqueCoin,
     item: {
       description: "The wielder is bestowed with lucky finds.",
-      ID: nanoid(),
+      ID: "",
       name: "antique coin",
       price: 777,
       weight: 2,
@@ -249,9 +247,9 @@ export const TRINKETS: Record<
     Icon: IconCompass,
     item: {
       description: "Navigate the wilderness to return to previous locations.",
-      ID: nanoid(),
+      ID: "",
       name: "compass",
-      price: 50,
+      price: 30,
       weight: 2,
     },
   },
@@ -259,7 +257,7 @@ export const TRINKETS: Record<
     Icon: IconEnderHook,
     item: {
       description: "Monsters are looted immediately upon death.",
-      ID: nanoid(),
+      ID: "",
       name: "ender hook",
       price: 1000,
       weight: 15,
@@ -269,7 +267,7 @@ export const TRINKETS: Record<
     Icon: IconFamiliar,
     item: {
       description: "Blessed with the ability to see beyond the veil.",
-      ID: nanoid(),
+      ID: "",
       name: "familiar",
       price: 1,
       weight: 17,
@@ -279,9 +277,9 @@ export const TRINKETS: Record<
     Icon: IconStone,
     item: {
       description: "Travel back to the caravan even when there are still lurking monsters.",
-      ID: nanoid(),
+      ID: "",
       name: "hearthstone",
-      price: 20,
+      price: 60,
       weight: 3,
     },
   },
@@ -289,7 +287,7 @@ export const TRINKETS: Record<
     Icon: IconJournal,
     item: {
       description: "A compendium of quests.",
-      ID: nanoid(),
+      ID: "",
       name: "journal",
       price: 500,
       weight: 5,
@@ -300,7 +298,7 @@ export const TRINKETS: Record<
     item: {
       capacity: 15,
       description: "Carry more items and manage gear.",
-      ID: nanoid(),
+      ID: "",
       name: "knapsack",
       price: 10,
       weight: 0,
@@ -310,7 +308,7 @@ export const TRINKETS: Record<
     Icon: IconTornManuscript,
     item: {
       description: "Alchemical methodologies beyond comprehension.",
-      ID: nanoid(),
+      ID: "",
       name: "torn manuscript",
       price: 5000,
       weight: 3,

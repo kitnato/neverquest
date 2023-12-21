@@ -96,8 +96,8 @@ export type Melee = WeaponBase & {
 };
 
 export type MerchantInventoryItem = InventoryItem & {
+  isEradicated: boolean;
   isReturned: boolean;
-  offerIndex?: number;
 };
 
 export type QuestData = {

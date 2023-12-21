@@ -22,7 +22,7 @@ export function PurchasableItems({
   return (
     <>
       {stackItems(merchantItems).map(({ amount, item }) => {
-        const { ID, price } = item;
+        const { ID, name, price } = item;
 
         return (
           <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
@@ -39,7 +39,7 @@ export function PurchasableItems({
 
               <PurchaseItem merchantItem={item} />
 
-              {canEradicate && <EradicateItem ID={ID} />}
+              {canEradicate && <EradicateItem ID={ID} name={name} />}
             </Stack>
           </div>
         );

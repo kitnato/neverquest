@@ -104,15 +104,15 @@ export function isTrinketItem(thing: unknown): thing is TrinketItem {
 }
 
 export function isUnarmed(thing: unknown): thing is typeof WEAPON_NONE {
-  return isObject(thing) && thing.ID === WEAPON_NONE.ID;
+  return isObject(thing) && thing.name === WEAPON_NONE.name;
 }
 
 export function isUnarmored(thing: unknown): thing is typeof ARMOR_NONE {
-  return isObject(thing) && thing.ID === ARMOR_NONE.ID;
+  return isObject(thing) && thing.name === ARMOR_NONE.name;
 }
 
 export function isUnshielded(thing: unknown): thing is typeof SHIELD_NONE {
-  return isObject(thing) && thing.ID === SHIELD_NONE.ID;
+  return isObject(thing) && thing.name === SHIELD_NONE.name;
 }
 
 export function isInheritableItem(thing: unknown): thing is InheritableItem {

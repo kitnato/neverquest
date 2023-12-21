@@ -35,8 +35,8 @@ export function SellItem({ item }: { item: InventoryItem }) {
           setMerchantInventory((currentMerchantInventory) => [
             ...currentMerchantInventory,
             isGearItem(item)
-              ? { ...item, isEquipped: false, isReturned: true }
-              : { ...item, isReturned: true },
+              ? { ...item, isEquipped: false, isEradicated: false, isReturned: true }
+              : { ...item, isEradicated: false, isReturned: true },
           ]);
 
           progressQuest({ quest: "selling" });

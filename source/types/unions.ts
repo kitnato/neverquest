@@ -372,6 +372,7 @@ export type StateKey =
   | "masteryRank"
   | "masteryStatistic"
   | "merchantInventory"
+  | "monologue"
   | "monsterAilmentDuration"
   | "monsterAttackDuration"
   | "monsterAttackRate"

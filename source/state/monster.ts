@@ -238,14 +238,12 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
           get(ownedItem("antique coin")) !== undefined &&
           encounterValue === "res dominus" &&
           ownedItemMysteriousEgg === undefined &&
-          !merchantInventoryValue.some(({ ID }) => ID === INFUSABLES["mysterious egg"].item.ID)
+          !merchantInventoryValue.some(({ name }) => name === "mysterious egg")
             ? INFUSABLES["mysterious egg"].item
             : // Torn manuscript drops only if it's not currently carried or sold, the antique coin & mysterious egg are both carried, and if the drop chance is reached.
               get(ownedItem("antique coin")) !== undefined &&
                 ownedItemMysteriousEgg !== undefined &&
-                !merchantInventoryValue.some(
-                  ({ ID }) => ID === TRINKETS["torn manuscript"].item.ID,
-                ) &&
+                !merchantInventoryValue.some(({ name }) => name === "torn manuscript") &&
                 get(ownedItem("torn manuscript")) === undefined &&
                 Math.random() <=
                   (stageValue.toLocaleString().includes(stageIncludes) ? chanceOverride : chance)

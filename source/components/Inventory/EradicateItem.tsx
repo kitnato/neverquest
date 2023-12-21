@@ -15,8 +15,9 @@ import { useSetRecoilState } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import IconEradicate from "@neverquest/icons/eradicate.svg?react";
 import { merchantInventory } from "@neverquest/state/caravan";
+import { capitalizeAll } from "@neverquest/utilities/formatters";
 
-export function EradicateItem({ ID }: { ID: string }) {
+export function EradicateItem({ ID, name }: { ID: string; name: string }) {
   const setMerchantInventoryValue = useSetRecoilState(merchantInventory);
 
   const [isShowingModal, setIsShowingModal] = useState(false);
@@ -48,13 +49,21 @@ export function EradicateItem({ ID }: { ID: string }) {
           </ModalTitle>
         </ModalHeader>
 
-        <ModalBody>The item will no longer be available for purchase.</ModalBody>
+        <ModalBody>{`"${capitalizeAll(
+          name,
+        )}" will no longer be available for purchase.`}</ModalBody>
 
         <ModalFooter>
           <Button
             onClick={() => {
               setMerchantInventoryValue((currentMerchantInventory) =>
-                currentMerchantInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
+                currentMerchantInventory.map((merchantItem) => {
+                  if (merchantItem.ID === ID) {
+                    return { ...merchantItem, isEradicated: true };
+                  }
+
+                  return merchantItem;
+                }),
               );
 
               onHide();

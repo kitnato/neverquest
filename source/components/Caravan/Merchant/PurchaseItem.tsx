@@ -27,18 +27,20 @@ export function PurchaseItem({ merchantItem }: { merchantItem: MerchantInventory
     <PurchaseItemButton
       item={merchantItem}
       onPurchase={() => {
-        const acquisitionStatus = acquireItem(merchantItem);
+        const { isEradicated: _, isReturned, ...item } = merchantItem;
+
+        const acquisitionStatus = acquireItem(item);
 
         if (acquisitionStatus === "noFit") {
           return;
         }
 
-        const { ID, isReturned, price } = merchantItem;
+        const { ID, price } = item;
 
         transactEssence(-price);
 
-        if (acquisitionStatus === "autoEquip" && isGearItem(merchantItem)) {
-          toggleEquipGear(merchantItem);
+        if (acquisitionStatus === "autoEquip" && isGearItem(item)) {
+          toggleEquipGear(item);
         }
 
         setMerchantInventory((currentMerchantInventory) =>
@@ -50,13 +52,13 @@ export function PurchaseItem({ merchantItem }: { merchantItem: MerchantInventory
         }
 
         progressQuest({
-          quest: isArmor(merchantItem)
+          quest: isArmor(item)
             ? "purchasingArmor"
-            : isShield(merchantItem)
+            : isShield(item)
               ? "purchasingShield"
-              : isWeapon(merchantItem)
+              : isWeapon(item)
                 ? "purchasingWeapon"
-                : isInfusableItem(merchantItem)
+                : isInfusableItem(item)
                   ? "purchasingInfusable"
                   : "purchasingTrinket",
         });

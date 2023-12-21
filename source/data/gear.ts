@@ -1,5 +1,4 @@
 import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build/types";
-import { nanoid } from "nanoid";
 
 import IconArmorHeavy from "@neverquest/icons/armor-heavy.svg?react";
 import IconArmorLight from "@neverquest/icons/armor-light.svg?react";
@@ -20,7 +19,7 @@ import type { WeaponAbility } from "@neverquest/types/unions";
 export const ARMOR_NONE: Omit<Armor, "gearClass" | "isEquipped" | "price"> = {
   deflection: 0,
   gems: [],
-  ID: nanoid(),
+  ID: "",
   level: 1,
   name: "Unarmored",
   protection: 0,
@@ -94,7 +93,7 @@ export const GEAR_LEVEL_RANGE_MAXIMUM = 3;
 export const SHIELD_NONE: Omit<Shield, "gearClass" | "isEquipped" | "price"> = {
   block: 0,
   gems: [],
-  ID: nanoid(),
+  ID: "",
   level: 1,
   name: "Unshielded",
   stagger: 0,
@@ -220,7 +219,7 @@ export const WEAPON_NONE: Omit<Melee, "isEquipped" | "price"> = {
   gearClass: "blunt",
   gems: [],
   grip: "one-handed",
-  ID: nanoid(),
+  ID: "",
   level: 1,
   name: "Unarmed",
   rate: 2000,

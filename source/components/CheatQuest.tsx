@@ -5,6 +5,7 @@ import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill";
 import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGenerateMerchantInventory";
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
+import { useSetMonologues } from "@neverquest/hooks/actions/useSetMonologues";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { isAttacking } from "@neverquest/state/character";
@@ -32,6 +33,7 @@ export function CheatQuest() {
   const generateMerchantInventory = useGenerateMerchantInventory();
   const increaseStage = useIncreaseStage();
   const resetWilderness = useResetWilderness();
+  const setMonologues = useSetMonologues();
   const toggleLocation = useToggleLocation();
   const transactEssence = useTransactEssence();
 
@@ -73,6 +75,7 @@ export function CheatQuest() {
 
             for (let step = 0; step < difference; step++) {
               generateMerchantInventory();
+              setMonologues();
               increaseStage();
             }
 
@@ -104,10 +107,11 @@ export function CheatQuest() {
     resetEssenceLoot,
     resetWilderness,
     setProgress,
-    toggleLocation,
-    transactEssence,
     setIsAttacking,
     setIsInvulnerable,
+    setMonologues,
+    toggleLocation,
+    transactEssence,
   ]);
 
   return <></>;

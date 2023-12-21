@@ -205,6 +205,7 @@ export function Inventory() {
                     }
                   }
                 })()}
+
                 <DiscardItem ID={ID} name={name} />
               </Stack>
             </div>

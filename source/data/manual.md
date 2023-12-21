@@ -800,7 +800,7 @@ Affects total [energy](#energy).
 
 ### New caravan crew
 
-Along with two more additional hires, the entire crew dialog system needs to be overhauled and expanded to allow for better storytelling and immersion.
+Along with two more additional hires, the entire crew dialog system needs to be overhauled and expanded to allow for better storytelling.
 
 #### Cook
 

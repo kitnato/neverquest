@@ -340,8 +340,9 @@ export function getSellPrice(item: InventoryItem) {
   let supplement = 0;
 
   if (isGearItem(item)) {
-    const { gems } = item;
-    const { length } = gems;
+    const {
+      gems: { length },
+    } = item;
 
     if (length > 0) {
       supplement +=

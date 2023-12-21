@@ -15,7 +15,7 @@ import type { Consumable } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
-  const [ID, setID] = useState(nanoid());
+  const [ID, setID] = useState("");
 
   const acquireItem = useAcquireItem();
   const transactEssence = useTransactEssence();

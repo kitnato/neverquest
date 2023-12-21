@@ -4,8 +4,9 @@ import { useRecoilCallback } from "recoil";
 import { MERCHANT_OFFERS } from "@neverquest/data/caravan";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { stage, stageMaximum } from "@neverquest/state/encounter";
+import { ownedItem } from "@neverquest/state/inventory";
 import { allowProfanity } from "@neverquest/state/settings";
-import { isInfusableItem, isTrinketItem } from "@neverquest/types/type-guards";
+import { isInheritableItem } from "@neverquest/types/type-guards";
 import {
   generateArmor,
   generateMeleeWeapon,
@@ -19,26 +20,29 @@ export function useGenerateMerchantInventory() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const allowProfanityValue = get(allowProfanity);
         const merchantInventoryCurrent = [...get(merchantInventory)];
         const stageValue = get(stage);
 
         const offer = MERCHANT_OFFERS[stageValue];
 
+        // Only add offer if it's the currently highest stage (to avoid regenerating older gear offers), and in the case of being a trinket or infusable, if it's not in any inventory.
         if (
           offer !== undefined &&
           stageValue === get(stageMaximum) &&
-          merchantInventoryCurrent.every(({ offerIndex }) => offerIndex !== stageValue)
+          (isInheritableItem(offer)
+            ? !merchantInventoryCurrent.some(({ name }) => name === offer.name) &&
+              get(ownedItem(offer.name)) === undefined
+            : true)
         ) {
           const gearSettings: GeneratorParameters & { level: number } = {
             affixStructure: "prefix",
-            allowProfanity: allowProfanityValue,
+            allowProfanity: get(allowProfanity),
             level: stageValue,
             prefixTags: ["lowQuality"],
           };
 
           const item = (() => {
-            if (isInfusableItem(offer) || isTrinketItem(offer)) {
+            if (isInheritableItem(offer)) {
               return offer;
             }
 
@@ -68,8 +72,8 @@ export function useGenerateMerchantInventory() {
 
           merchantInventoryCurrent.push({
             ...item,
+            isEradicated: false,
             isReturned: false,
-            offerIndex: stageValue,
           });
 
           set(merchantInventory, merchantInventoryCurrent);

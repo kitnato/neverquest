@@ -6,6 +6,7 @@ import type {
   WeaponModality,
 } from "@kitnato/locran/build/types";
 import {
+  EMPTY_MONOLOGUE,
   GROWTH_MAXIMUM,
   LEVELLING_MAXIMUM,
   RETIREMENT_STAGE_MINIMUM,
@@ -44,7 +45,7 @@ export const CREW: Record<
     monologues: {
       1: "Things are not always what they seem.",
       34: "Come across any arcane writs lately?",
-      [GROWTH_MAXIMUM]: "...",
+      [GROWTH_MAXIMUM]: EMPTY_MONOLOGUE,
       [LEVELLING_MAXIMUM]: "Nothing makes any sense.",
     },
     price: 400,
@@ -56,7 +57,7 @@ export const CREW: Record<
     interaction: "Craft",
     monologues: {
       1: "In need of better gear?",
-      [GROWTH_MAXIMUM]: "...",
+      [GROWTH_MAXIMUM]: EMPTY_MONOLOGUE,
       [LEVELLING_MAXIMUM]: "Doesn't make a difference.",
     },
     price: 50,
@@ -68,7 +69,7 @@ export const CREW: Record<
     interaction: "Craft",
     monologues: {
       1: "Tired of monster breath?",
-      [GROWTH_MAXIMUM]: "...",
+      [GROWTH_MAXIMUM]: EMPTY_MONOLOGUE,
       [LEVELLING_MAXIMUM]: "There's too many of them.",
     },
     price: 150,
@@ -80,7 +81,7 @@ export const CREW: Record<
     interaction: "Treat",
     monologues: {
       1: "Allow me to patch you up.",
-      [GROWTH_MAXIMUM]: "...",
+      [GROWTH_MAXIMUM]: EMPTY_MONOLOGUE,
       [LEVELLING_MAXIMUM]: "Never-ending madness. It hurts.",
     },
     price: 20,
@@ -92,7 +93,7 @@ export const CREW: Record<
     interaction: "Train",
     monologues: {
       1: "Perhaps I can teach you something.",
-      [GROWTH_MAXIMUM]: "...",
+      [GROWTH_MAXIMUM]: EMPTY_MONOLOGUE,
       [LEVELLING_MAXIMUM]: "Overbearing darkness ...",
     },
     price: 75,
@@ -107,14 +108,14 @@ export const CREW: Record<
       2: "Hello again. Some protection, perhaps?",
       3: "Ah, you're back. Care for an aegis?",
       4: "You must be over-burdened. I can help with that.",
-      5: "A trinket that allows safe passage. Would that be of interest?",
+      5: "Good to see you.",
       6: "Heard there are other travelers looking to sell their services.",
       7: "New gear for sale, if you care to peruse.",
+      8: "Wouldn't it be useful to retread old ground? I have just the thing.",
       9: "There is something dark looming on the horizon ...",
       10: "I can't believe you came out of that in one piece.",
       11: "Have you appraised all my offerings?",
-      13: "Wouldn't it be useful to retread old ground? I have just the thing.",
-      14: "Good to see you.",
+      15: "A trinket that allows safe passage. Would that be of interest?",
       20: "I recently came into possession of a fine curiosity.",
       21: "Can I interest you in anything else?",
       25: "I have something suitable for marksmen.",
@@ -148,7 +149,7 @@ export const CREW: Record<
     interaction: "Ritual",
     monologues: {
       1: "Prepared to transcend your mind?",
-      [GROWTH_MAXIMUM]: "...",
+      [GROWTH_MAXIMUM]: EMPTY_MONOLOGUE,
       [LEVELLING_MAXIMUM]: "I can't see any more.",
     },
     price: 650,
@@ -160,7 +161,7 @@ export const CREW: Record<
     interaction: "Tailoring",
     monologues: {
       1: "Allow me to deepen your pockets.",
-      [GROWTH_MAXIMUM]: "...",
+      [GROWTH_MAXIMUM]: EMPTY_MONOLOGUE,
       [LEVELLING_MAXIMUM]: "Fate has been mis-weaved.",
       [RETIREMENT_STAGE_MINIMUM]: "Always leave some extra space for unexpected finds.",
     },
@@ -173,7 +174,7 @@ export const CREW: Record<
     interaction: "Brew",
     monologues: {
       1: "Gaze into my cauldron ...",
-      [GROWTH_MAXIMUM]: "...",
+      [GROWTH_MAXIMUM]: EMPTY_MONOLOGUE,
       [LEVELLING_MAXIMUM]: "The spirits have gone silent.",
     },
     price: 300,
@@ -220,7 +221,6 @@ export const MERCHANT_OFFERS: Record<
     type: "shield",
   },
   4: TRINKETS.knapsack.item,
-  5: TRINKETS.hearthstone.item,
   6: {
     gearClass: "slashing",
     grip: "one-handed",
@@ -231,17 +231,18 @@ export const MERCHANT_OFFERS: Record<
     gearClass: "reinforced",
     type: "armor",
   },
-  8: {
+  8: TRINKETS.compass.item,
+  9: {
     gearClass: "medium",
     type: "shield",
   },
-  9: {
+  10: {
     gearClass: "blunt",
     grip: "one-handed",
     modality: "melee",
     type: "weapon",
   },
-  13: TRINKETS.compass.item,
+  14: TRINKETS.hearthstone.item,
   20: INFUSABLES["monkey paw"].item,
   [CREW.fletcher.requiredStage]: TRINKETS["ammunition pouch"].item,
   30: INFUSABLES["tome of power"].item,

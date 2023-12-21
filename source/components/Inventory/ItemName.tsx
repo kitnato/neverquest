@@ -3,7 +3,7 @@ import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "reac
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { GemDescription } from "@neverquest/components/Inventory/GemDescription";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
-import type { ConsumableItem, GemItem, UsableItem } from "@neverquest/types";
+import type { ConsumableItem, GemItem, InheritableItem } from "@neverquest/types";
 import { isGem, isGemItem } from "@neverquest/types/type-guards";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
@@ -12,7 +12,7 @@ export function ItemName({
   item,
 }: {
   amount?: number;
-  item: ConsumableItem | GemItem | UsableItem;
+  item: ConsumableItem | GemItem | InheritableItem;
 }) {
   const { name, weight } = item;
   const description = isGem(name) ? (

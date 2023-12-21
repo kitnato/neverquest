@@ -6,12 +6,12 @@ import type {
   GemItem,
   GeneratorRange,
   InfusableItem,
+  InheritableItem,
   Melee,
   Ranged,
   Shield,
   StackableItem,
   TrinketItem,
-  UsableItem,
   Weapon,
 } from "@neverquest/types";
 import {
@@ -115,7 +115,7 @@ export function isUnshielded(thing: unknown): thing is typeof SHIELD_NONE {
   return isObject(thing) && thing.ID === SHIELD_NONE.ID;
 }
 
-export function isUsableItem(thing: unknown): thing is UsableItem {
+export function isInheritableItem(thing: unknown): thing is InheritableItem {
   return isInfusableItem(thing) || isTrinketItem(thing);
 }
 

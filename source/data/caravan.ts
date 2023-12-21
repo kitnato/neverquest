@@ -20,7 +20,7 @@ import IconMerchant from "@neverquest/icons/merchant.svg?react";
 import IconOccultist from "@neverquest/icons/occultist.svg?react";
 import IconTailor from "@neverquest/icons/tailor.svg?react";
 import IconWitch from "@neverquest/icons/witch.svg?react";
-import type { UsableItem } from "@neverquest/types";
+import type { InheritableItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
 import type { Crew, Grip } from "@neverquest/types/unions";
 
@@ -192,7 +192,7 @@ export const MEDIC_PRICE_SURGERY = 25;
 
 export const MERCHANT_OFFERS: Record<
   number,
-  | UsableItem
+  | InheritableItem
   | (ArtifactType<"armor"> & {
       gearClass: ArmorClass;
     })

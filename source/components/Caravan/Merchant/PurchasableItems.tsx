@@ -8,7 +8,7 @@ import { Usable } from "@neverquest/components/Inventory/Usable";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import type { MerchantInventoryItem } from "@neverquest/types";
-import { isGearItem, isUsableItem } from "@neverquest/types/type-guards";
+import { isGearItem, isInheritableItem } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
@@ -26,7 +26,7 @@ export function PurchasableItems({
 
         return (
           <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-            {isUsableItem(item) ? (
+            {isInheritableItem(item) ? (
               <Usable item={item} />
             ) : (
               <ItemDisplay amount={amount} isInInventory={isGearItem(item)} item={item} />

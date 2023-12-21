@@ -76,7 +76,9 @@ export type InfusableItem = ItemBase & {
   name: Infusable;
 };
 
-export type InventoryItem = ConsumableItem | GearItem | GemItem | UsableItem;
+export type InheritableItem = AmmunitionPouchItem | InfusableItem | TrinketItem;
+
+export type InventoryItem = GearItem | InheritableItem | StackableItem;
 
 type ItemBase = {
   ID: string;
@@ -128,7 +130,7 @@ export type TrinketItem = ItemBase & {
   name: Trinket;
 };
 
-export type UsableItem = AmmunitionPouchItem | InfusableItem | TrinketItem;
+export type Weapon = Melee | Ranged;
 
 type WeaponBase = GearItemBase & {
   abilityChance: number;
@@ -137,5 +139,3 @@ type WeaponBase = GearItemBase & {
   rate: number;
   staminaCost: number;
 };
-
-export type Weapon = Melee | Ranged;

@@ -25,7 +25,7 @@ import { questProgress } from "@neverquest/state/quests";
 import { essence } from "@neverquest/state/resources";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits";
-import { isUsableItem } from "@neverquest/types/type-guards";
+import { isInheritableItem } from "@neverquest/types/type-guards";
 import { MASTERY_TYPES, SKILL_TYPES } from "@neverquest/types/unions";
 import { getProgressReduction, getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -99,7 +99,7 @@ export function useRetire() {
         }
 
         set(inventory, (currentInventory) =>
-          currentInventory.filter((currentItem) => isUsableItem(currentItem)),
+          currentInventory.filter((currentItem) => isInheritableItem(currentItem)),
         );
 
         if (get(name) !== LABEL_UNKNOWN) {

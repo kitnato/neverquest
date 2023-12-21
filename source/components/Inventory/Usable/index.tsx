@@ -1,10 +1,10 @@
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { AmmunitionPouch } from "@neverquest/components/Inventory/Usable/AmmunitionPouch";
 import { Infusable } from "@neverquest/components/Inventory/Usable/Infusable";
-import type { UsableItem } from "@neverquest/types";
+import type { InheritableItem } from "@neverquest/types";
 import { isInfusableItem, isTrinketItem } from "@neverquest/types/type-guards";
 
-export function Usable({ item }: { item: UsableItem }) {
+export function Usable({ item }: { item: InheritableItem }) {
   if (isInfusableItem(item)) {
     return <Infusable item={item} />;
   }

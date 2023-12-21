@@ -11,8 +11,8 @@ import {
   isConsumableItem,
   isGearItem,
   isGemItem,
+  isInheritableItem,
   isShield,
-  isUsableItem,
   isWeapon,
 } from "@neverquest/types/type-guards";
 import { stackItems } from "@neverquest/utilities/helpers";
@@ -65,7 +65,7 @@ export function SellItems() {
             })}
 
           {storedItems
-            .filter(isUsableItem)
+            .filter(isInheritableItem)
             .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
             .map((usableItem) => (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={usableItem.ID}>

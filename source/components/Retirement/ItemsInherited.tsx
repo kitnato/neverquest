@@ -6,21 +6,21 @@ import { Infusable } from "@neverquest/components/Inventory/Usable/Infusable";
 import { LABEL_NONE } from "@neverquest/data/general";
 import { INFUSABLES, TRINKETS } from "@neverquest/data/items";
 import { inventory } from "@neverquest/state/inventory";
-import { isInfusable, isTrinket, isUsableItem } from "@neverquest/types/type-guards";
+import { isInfusable, isInheritableItem, isTrinket } from "@neverquest/types/type-guards";
 
 export function ItemsInherited() {
   const inventoryValue = useRecoilValue(inventory);
 
-  const ownedUsableItems = inventoryValue.filter(isUsableItem);
+  const ownedInheritableItems = inventoryValue.filter(isInheritableItem);
 
   return (
     <Stack gap={3}>
       <h6>Items inherited</h6>
 
-      {ownedUsableItems.length === 0 ? (
+      {ownedInheritableItems.length === 0 ? (
         <span className="fst-italic">{LABEL_NONE}</span>
       ) : (
-        Object.keys(ownedUsableItems).map((usableItem) => {
+        Object.keys(ownedInheritableItems).map((usableItem) => {
           if (isTrinket(usableItem)) {
             return (
               <ItemDisplay

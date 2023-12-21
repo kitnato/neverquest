@@ -29,6 +29,7 @@ export const TRAITS: Record<
 > = {
   brawler: {
     description: `Being unshielded increases one-handed melee damage by ${formatNumber({
+      decimals: 0,
       format: "percentage",
       value: BRAWLER_DAMAGE_BONUS,
     })}.`,
@@ -52,6 +53,7 @@ export const TRAITS: Record<
   },
   inoculated: {
     description: `Base deflection chance is ${formatNumber({
+      decimals: 0,
       format: "percentage",
       value: INOCULATED_DEFLECTION_BASE,
     })}.`,

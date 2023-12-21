@@ -1,4 +1,5 @@
 import type { GeneratorParameters } from "@kitnato/locran/build/types";
+import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
 import { MERCHANT_OFFERS } from "@neverquest/data/caravan";
@@ -6,6 +7,7 @@ import { merchantInventory } from "@neverquest/state/caravan";
 import { stage, stageMaximum } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
 import { allowProfanity } from "@neverquest/state/settings";
+import type { InheritableItem } from "@neverquest/types";
 import { isInheritableItem } from "@neverquest/types/type-guards";
 import {
   generateArmor,
@@ -29,9 +31,9 @@ export function useGenerateMerchantInventory() {
         if (
           offer !== undefined &&
           stageValue === get(stageMaximum) &&
-          (isInheritableItem(offer)
-            ? !merchantInventoryCurrent.some(({ name }) => name === offer.name) &&
-              get(ownedItem(offer.name)) === undefined
+          ("item" in offer && isInheritableItem(offer.item)
+            ? !merchantInventoryCurrent.some(({ name }) => name === offer.item.name) &&
+              get(ownedItem(offer.item.name)) === undefined
             : true)
         ) {
           const gearSettings: GeneratorParameters & { level: number } = {
@@ -42,32 +44,32 @@ export function useGenerateMerchantInventory() {
           };
 
           const item = (() => {
-            if (isInheritableItem(offer)) {
-              return offer;
-            }
+            if ("type" in offer) {
+              switch (offer.type) {
+                case "armor": {
+                  return generateArmor({
+                    ...gearSettings,
+                    ...offer,
+                  });
+                }
 
-            switch (offer.type) {
-              case "armor": {
-                return generateArmor({
-                  ...gearSettings,
-                  ...offer,
-                });
-              }
+                case "shield": {
+                  return generateShield({
+                    ...gearSettings,
+                    ...offer,
+                  });
+                }
 
-              case "shield": {
-                return generateShield({
-                  ...gearSettings,
-                  ...offer,
-                });
-              }
-
-              case "weapon": {
-                return generateMeleeWeapon({
-                  ...gearSettings,
-                  ...offer,
-                });
+                case "weapon": {
+                  return generateMeleeWeapon({
+                    ...gearSettings,
+                    ...offer,
+                  });
+                }
               }
             }
+
+            return { ...offer.item, ID: nanoid() } as InheritableItem;
           })();
 
           merchantInventoryCurrent.push({

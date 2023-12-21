@@ -1,5 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
+import { useResetWilderness } from "./useResetWilderness";
 import { LABEL_UNKNOWN, RETIREMENT_STAGE_MINIMUM } from "@neverquest/data/general";
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
@@ -8,6 +9,7 @@ import {
   blacksmithInventory,
   fletcherInventory,
   merchantInventory,
+  monologue,
 } from "@neverquest/state/caravan";
 import { attackDuration, name } from "@neverquest/state/character";
 import {
@@ -26,13 +28,14 @@ import { essence } from "@neverquest/state/resources";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits";
 import { isInheritableItem } from "@neverquest/types/type-guards";
-import { MASTERY_TYPES, SKILL_TYPES } from "@neverquest/types/unions";
+import { CREW_TYPES, MASTERY_TYPES, SKILL_TYPES } from "@neverquest/types/unions";
 import { getProgressReduction, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useRetire() {
   const initialize = useInitialize();
   const progressQuest = useProgressQuest();
   const resetAttributes = useResetAttributes();
+  const resetWilderness = useResetWilderness();
 
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
@@ -89,6 +92,10 @@ export function useRetire() {
         reset(fletcherInventory);
         reset(merchantInventory);
 
+        for (const crew of CREW_TYPES) {
+          reset(monologue(crew));
+        }
+
         for (const mastery of MASTERY_TYPES) {
           reset(masteryProgress(mastery));
           reset(masteryRank(mastery));
@@ -108,8 +115,9 @@ export function useRetire() {
 
         progressQuest({ quest: "retiring" });
 
+        resetWilderness();
         initialize(true);
       },
-    [progressQuest],
+    [initialize, progressQuest, resetAttributes, resetWilderness],
   );
 }

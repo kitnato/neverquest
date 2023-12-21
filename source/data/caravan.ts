@@ -107,26 +107,18 @@ export const CREW: Record<
       1: "Greetings. I have what you're looking for.",
       2: "Hello again. Some protection, perhaps?",
       3: "Ah, you're back. Care for an aegis?",
-      4: "You must be over-burdened. I can help with that.",
-      5: "Good to see you.",
+      4: "Good to have you back.",
       6: "Heard there are other travelers looking to sell their services.",
       7: "New gear for sale, if you care to peruse.",
-      8: "Wouldn't it be useful to retread old ground? I have just the thing.",
       9: "There is something dark looming on the horizon ...",
       10: "I can't believe you came out of that in one piece.",
       11: "Have you appraised all my offerings?",
-      15: "A trinket that allows safe passage. Would that be of interest?",
-      20: "I recently came into possession of a fine curiosity.",
+      14: "There's more trouble ahead",
       21: "Can I interest you in anything else?",
-      25: "I have something suitable for marksmen.",
-      26: "Welcome back. Always a sight for sore eyes.",
-      30: "A dark wanderer passed by and sold me a strange book ...",
-      31: "Still you return for more?",
-      35: "I've happened upon an artifact for your reaping burdens.",
+      26: "Always a sight for sore eyes.",
+      31: "Yet you return for more punishment?",
       36: "Your headway in the wilderness is helping business.",
-      39: "You wouldn't be a scribe, would you?",
       51: "Still you press on. There must be an answer.",
-      70: "Extraordinary discoveries reveal themselves only to the lucky few.",
       71: "Gloomy portents signal that dark tides are coming.",
       74: "I fear the end is imminent.",
       [GROWTH_MAXIMUM]: "All is truly lost.",
@@ -193,7 +185,7 @@ export const MEDIC_PRICE_SURGERY = 25;
 
 export const MERCHANT_OFFERS: Record<
   number,
-  | InheritableItem
+  | { dialog: string; item: Omit<InheritableItem, "ID"> }
   | (ArtifactType<"armor"> & {
       gearClass: ArmorClass;
     })
@@ -220,7 +212,7 @@ export const MERCHANT_OFFERS: Record<
     gearClass: "small",
     type: "shield",
   },
-  4: TRINKETS.knapsack.item,
+  4: { dialog: "You must be over-burdened. I can help with that.", item: TRINKETS.knapsack.item },
   6: {
     gearClass: "slashing",
     grip: "one-handed",
@@ -231,7 +223,10 @@ export const MERCHANT_OFFERS: Record<
     gearClass: "reinforced",
     type: "armor",
   },
-  8: TRINKETS.compass.item,
+  8: {
+    dialog: "Wouldn't it be useful to retread old ground? I have just the thing.",
+    item: TRINKETS.compass.item,
+  },
   9: {
     gearClass: "medium",
     type: "shield",
@@ -242,13 +237,31 @@ export const MERCHANT_OFFERS: Record<
     modality: "melee",
     type: "weapon",
   },
-  14: TRINKETS.hearthstone.item,
-  20: INFUSABLES["monkey paw"].item,
-  [CREW.fletcher.requiredStage]: TRINKETS["ammunition pouch"].item,
-  30: INFUSABLES["tome of power"].item,
-  35: TRINKETS["ender hook"].item,
-  39: TRINKETS.journal.item,
-  70: TRINKETS["antique coin"].item,
+  14: {
+    dialog: "A trinket that allows safe passage. Would that be of interest?",
+    item: TRINKETS.hearthstone.item,
+  },
+  20: {
+    dialog: "I recently came into possession of a fine curiosity.",
+    item: INFUSABLES["monkey paw"].item,
+  },
+  [CREW.fletcher.requiredStage]: {
+    dialog: "I have something suitable for marksmen.",
+    item: TRINKETS["ammunition pouch"].item,
+  },
+  30: {
+    dialog: "A dark wanderer passed by and sold me a strange book ...",
+    item: INFUSABLES["tome of power"].item,
+  },
+  35: {
+    dialog: "I've happened upon an artifact for your reaping burdens.",
+    item: TRINKETS["ender hook"].item,
+  },
+  39: { dialog: "You wouldn't be a scribe, would you?", item: TRINKETS.journal.item },
+  70: {
+    dialog: "Extraordinary discoveries reveal themselves only to the lucky few.",
+    item: TRINKETS["antique coin"].item,
+  },
 };
 
 export const TAILORING_EXPANSION = {

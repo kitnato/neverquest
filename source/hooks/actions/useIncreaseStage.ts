@@ -2,9 +2,8 @@ import { generateLocation } from "@kitnato/locran";
 import { useRecoilCallback } from "recoil";
 
 import { CREW } from "@neverquest/data/caravan";
-import { EMPTY_MONOLOGUE } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { hireStatus, monologue } from "@neverquest/state/caravan";
+import { hireStatus } from "@neverquest/state/caravan";
 import { stage, wildernesses } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { questProgress } from "@neverquest/state/quests";
@@ -34,21 +33,6 @@ export function useIncreaseStage() {
             set(hireStatusState, "hirable");
             set(isShowingCrewHiring, true);
           }
-
-          const { monologues } = CREW[crew];
-
-          set(
-            monologue(crew),
-            monologues[nextStage] ??
-              (() => {
-                for (let index = stageValue; index > 0; index--) {
-                  if (monologues[index] !== undefined) {
-                    return monologues[index];
-                  }
-                }
-              })() ??
-              EMPTY_MONOLOGUE,
-          );
         }
 
         set(wildernesses, (currentWildernesses) => [

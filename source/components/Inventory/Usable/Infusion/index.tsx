@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { useState } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
@@ -37,8 +38,8 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
   const canHatch =
     isInfusionAtMaximum && ownedItemMysteriousEgg !== undefined && infusable === "mysterious egg";
   const canInfuse = isInfusionPossible && !isInfusionAtMaximum;
-  const mysteriousEggItem = TRINKETS.familiar.item;
-  const canFitMysteriousEgg = canFit(mysteriousEggItem.weight);
+  const { item: familiarItem } = TRINKETS.familiar;
+  const canFitFamiliar = canFit(familiarItem.weight);
 
   const onStop = () => {
     setIsInfusing(false);
@@ -58,13 +59,13 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
   return canHatch ? (
     <OverlayTrigger
       overlay={<Tooltip>{LABEL_OVER_ENCUMBERED}</Tooltip>}
-      trigger={canFitMysteriousEgg ? [] : ["focus", "hover"]}
+      trigger={canFitFamiliar ? [] : ["focus", "hover"]}
     >
       <div>
         <Button
-          disabled={!canFitMysteriousEgg}
+          disabled={!canFitFamiliar}
           onClick={() => {
-            const acquiredStatus = acquireItem(mysteriousEggItem);
+            const acquiredStatus = acquireItem({ ...familiarItem, ID: nanoid() });
 
             if (acquiredStatus === "success") {
               setInventory((currentInventory) =>

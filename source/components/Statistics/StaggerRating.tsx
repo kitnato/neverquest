@@ -93,7 +93,7 @@ export function StaggerRating() {
               </Popover>
             }
           >
-            <span>{staggerRatingValue}</span>
+            <span>{formatNumber({ value: staggerRatingValue })}</span>
           </OverlayTrigger>
 
           <DeltasDisplay delta="staggerRating" />

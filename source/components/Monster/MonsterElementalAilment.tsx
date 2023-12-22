@@ -11,7 +11,7 @@ import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function MonsterElementalAilment({ elemental }: { elemental: Elemental }) {
-  const { ailment, durationMaximum, Icon } = ELEMENTALS[elemental];
+  const { ailment, durationCap, Icon } = ELEMENTALS[elemental];
 
   const isMonsterAilingValue = useRecoilValue(isMonsterAiling(ailment));
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
@@ -30,7 +30,7 @@ export function MonsterElementalAilment({ elemental }: { elemental: Elemental })
         Icon={Icon}
         tooltip={capitalizeAll(ailment)}
       >
-        <MonsterAilmentMeter ailment={ailment} totalDuration={durationMaximum} />
+        <MonsterAilmentMeter ailment={ailment} totalDuration={durationCap} />
       </IconDisplay>
     );
   }

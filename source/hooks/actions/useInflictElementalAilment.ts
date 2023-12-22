@@ -16,15 +16,15 @@ export function useInflictElementalAilment() {
       ({ elemental, slot }: { elemental: Elemental; slot: "armor" | "weapon" }) => {
         const get = getSnapshotGetter(snapshot);
 
-        const { ailment, durationMaximum } = ELEMENTALS[elemental];
+        const { ailment, durationCap } = ELEMENTALS[elemental];
         const { duration } = get(elementalEffects)[slot][elemental];
 
         if (get(canReceiveAilment(ailment)) && duration > 0) {
           set(monsterAilmentDuration(ailment), (ailmentDuration) => {
             const newDuration = ailmentDuration + duration;
 
-            if (newDuration > durationMaximum) {
-              return durationMaximum;
+            if (newDuration > durationCap) {
+              return durationCap;
             }
 
             return newDuration;

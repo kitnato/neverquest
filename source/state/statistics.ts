@@ -263,8 +263,7 @@ export const staggerRating = withStateKey("staggerRating", (key) =>
 
 export const stunRating = withStateKey("stunRating", (key) =>
   selector({
-    get: ({ get }) =>
-      Math.round(get(stunChance) * get(masteryStatistic("might")) * PERCENTAGE_POINTS),
+    get: ({ get }) => Math.round(get(stunChance) * get(masteryStatistic("might"))),
     key,
   }),
 );

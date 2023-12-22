@@ -130,7 +130,7 @@ export function ParryRating() {
               </Popover>
             }
           >
-            <span>{parryRatingValue}</span>
+            <span>{formatNumber({ value: parryRatingValue })}</span>
           </OverlayTrigger>
 
           <DeltasDisplay delta="parryRating" />

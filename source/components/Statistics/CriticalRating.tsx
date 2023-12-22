@@ -150,7 +150,9 @@ export function CriticalRating() {
             }
             trigger={assassinationValue ? ["focus", "hover"] : []}
           >
-            <span>{assassinationValue ? criticalRatingValue : LABEL_EMPTY}</span>
+            <span>
+              {assassinationValue ? formatNumber({ value: criticalRatingValue }) : LABEL_EMPTY}
+            </span>
           </OverlayTrigger>
 
           <DeltasDisplay delta="criticalRating" />

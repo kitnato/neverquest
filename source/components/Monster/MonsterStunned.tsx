@@ -28,7 +28,7 @@ export function MonsterStunned() {
         Icon={IconStunned}
         tooltip="Stunned"
       >
-        <MonsterAilmentMeter ailment="stunned" format="integer" totalDuration={mightValue} />
+        <MonsterAilmentMeter ailment="stunned" totalDuration={mightValue} />
       </IconDisplay>
     );
   }

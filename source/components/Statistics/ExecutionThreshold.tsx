@@ -42,7 +42,7 @@ export function ExecutionThreshold() {
           <span>
             {executionValue === 0
               ? LABEL_EMPTY
-              : formatNumber({ decimals: 0, format: "percentage", value: executionValue })}
+              : formatNumber({ format: "percentage", value: executionValue })}
           </span>
 
           <DeltasDisplay delta="executionThreshold" />

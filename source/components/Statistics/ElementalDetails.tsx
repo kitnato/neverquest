@@ -25,7 +25,7 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
             gems.toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
           ).map(({ item }) => {
             const { ID, name } = item;
-            const { elemental } = GEMS[name];
+            const elemental = GEMS[name];
             const { color, Icon } = ELEMENTALS[elemental];
             const { damage, duration } = elementalEffectsValue[slot][elemental];
 

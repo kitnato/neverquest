@@ -74,7 +74,7 @@ export function StunRating() {
                       </td>
 
                       <td>
-                        <span>{`${mightValue} hits`}</span>
+                        <span>{formatNumber({ format: "time", value: mightValue })} duration</span>
                       </td>
                     </tr>
                   </DetailsTable>
@@ -82,7 +82,7 @@ export function StunRating() {
               </Popover>
             }
           >
-            <span>{stunRatingValue}</span>
+            <span>{formatNumber({ value: stunRatingValue })}</span>
           </OverlayTrigger>
 
           <DeltasDisplay delta="stunRating" />

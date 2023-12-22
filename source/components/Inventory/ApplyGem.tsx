@@ -2,14 +2,15 @@ import { Dropdown, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_EMPTY } from "@neverquest/data/general";
-import { GEM_FITTING_COST } from "@neverquest/data/items";
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
+import { GEMS_MAXIMUM, GEM_FITTING_COST_RANGE } from "@neverquest/data/items";
 import { useApplyGem } from "@neverquest/hooks/actions/useApplyGem";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import { armor, canApplyGem, shield, weapon } from "@neverquest/state/gear";
 import type { GemItem } from "@neverquest/types";
 import { GEAR_TYPES, type Gear } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
+import { getFromRange } from "@neverquest/utilities/getters";
 
 export function ApplyGem({ gem }: { gem: GemItem }) {
   const gemFitting = {
@@ -42,7 +43,10 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
       <Dropdown.Menu>
         {GEAR_TYPES.map((gearType) => {
           const { canApply, gear } = gemFitting[gearType];
-          const { gems, name } = gear;
+          const {
+            gems: { length },
+            name,
+          } = gear;
 
           return (
             <Dropdown.Item disabled={!canApply} eventKey={gearType} key={gearType}>
@@ -52,7 +56,10 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
                 <Stack direction="horizontal" gap={1}>
                   <IconImage className="small" Icon={IconEssence} />
 
-                  {GEM_FITTING_COST[gems.length] ?? LABEL_EMPTY}
+                  {getFromRange({
+                    factor: (length - 1) / (GEMS_MAXIMUM - 1),
+                    ...GEM_FITTING_COST_RANGE,
+                  })}
                 </Stack>
               </div>
             </Dropdown.Item>

@@ -27,7 +27,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
               gems.toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
             ).map(({ amount, item }) => {
               const { ID, name } = item;
-              const { elemental } = GEMS[name];
+              const elemental = GEMS[name];
               const { color, Icon } = ELEMENTALS[elemental];
               const effect = elementalEffects[elemental];
 

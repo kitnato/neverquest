@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { GEM_FITTING_COST } from "@neverquest/data/items";
+import { GEMS_MAXIMUM, GEM_FITTING_COST_RANGE } from "@neverquest/data/items";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { armor, canApplyGem, shield, weapon } from "@neverquest/state/gear";
@@ -8,7 +8,7 @@ import { inventory } from "@neverquest/state/inventory";
 import type { GemItem } from "@neverquest/types";
 import { isGearItem } from "@neverquest/types/type-guards";
 import { GEAR_TYPES, type Gear } from "@neverquest/types/unions";
-import { getSnapshotGetter } from "@neverquest/utilities/getters";
+import { getFromRange, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useApplyGem() {
   const progressQuest = useProgressQuest();
@@ -26,7 +26,10 @@ export function useApplyGem() {
             weapon: get(weapon),
           };
 
-          const { gems, ID } = equippedGear[slot];
+          const {
+            gems: { length },
+            ID,
+          } = equippedGear[slot];
 
           set(inventory, (currentInventory) =>
             currentInventory
@@ -40,7 +43,9 @@ export function useApplyGem() {
               }),
           );
 
-          transactEssence(-(GEM_FITTING_COST[gems.length] ?? 0));
+          transactEssence(
+            -getFromRange({ factor: (length - 1) / (GEMS_MAXIMUM - 1), ...GEM_FITTING_COST_RANGE }),
+          );
 
           progressQuest({ quest: "gemsApplying" });
 

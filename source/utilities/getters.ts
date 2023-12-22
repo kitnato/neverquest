@@ -28,7 +28,13 @@ import {
   ROMAN_NUMERALS,
   ROMAN_NUMERAL_MAXIMUM,
 } from "@neverquest/data/general";
-import { ELEMENTALS, GEMS, GEMS_MAXIMUM, GEM_BASE, GEM_ENHANCEMENT } from "@neverquest/data/items";
+import {
+  ELEMENTALS,
+  GEMS,
+  GEMS_MAXIMUM,
+  GEM_BASE,
+  GEM_ENHANCEMENT_RANGE,
+} from "@neverquest/data/items";
 import { QUESTS } from "@neverquest/data/quests";
 import type {
   Armor,
@@ -151,13 +157,16 @@ export function getGearElementalEffects(gear: GearItem | GearItemUnequipped) {
     const effector = isArmor(gear) ? gear.protection : gear.damage;
 
     for (const { amount, item } of stackItems(gear.gems)) {
-      const { damage, elemental } = GEMS[item.name];
+      const elemental = GEMS[item.name];
+      const { damage, duration } = ELEMENTALS[elemental];
 
       effects[elemental] = {
-        damage: Math.ceil(effector * (damage[amount - 1] ?? 0)),
+        damage: Math.round(
+          effector * getFromRange({ factor: (amount - 1) / (GEMS_MAXIMUM - 1), ...damage }),
+        ),
         duration: getFromRange({
           factor: (amount - 1) / (GEMS_MAXIMUM - 1),
-          ...ELEMENTALS[elemental].duration,
+          ...duration,
         }),
       };
     }
@@ -168,9 +177,12 @@ export function getGearElementalEffects(gear: GearItem | GearItemUnequipped) {
   const effects = { fire: 0, ice: 0, lightning: 0 };
 
   for (const { amount, item } of stackItems(gear.gems)) {
-    const { elemental } = GEMS[item.name];
+    const elemental = GEMS[item.name];
 
-    effects[elemental] = GEM_ENHANCEMENT[amount - 1] ?? 0;
+    effects[elemental] = getFromRange({
+      factor: (amount - 1) / (GEMS_MAXIMUM - 1),
+      ...GEM_ENHANCEMENT_RANGE,
+    });
   }
 
   return effects;

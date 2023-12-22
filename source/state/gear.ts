@@ -1,13 +1,17 @@
 import { selector, selectorFamily } from "recoil";
 
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
-import { GEMS_MAXIMUM, GEM_FITTING_COST } from "@neverquest/data/items";
+import { GEMS_MAXIMUM, GEM_FITTING_COST_RANGE } from "@neverquest/data/items";
 import { inventory } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
 import type { Armor, Shield, Weapon } from "@neverquest/types";
 import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 import type { Gear } from "@neverquest/types/unions";
-import { getGearElementalEffects, getTotalElementalEffects } from "@neverquest/utilities/getters";
+import {
+  getFromRange,
+  getGearElementalEffects,
+  getTotalElementalEffects,
+} from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -47,7 +51,8 @@ export const canApplyGem = withStateKey("canApplyGem", (key) =>
 
         return (
           length < GEMS_MAXIMUM &&
-          (GEM_FITTING_COST[length] ?? Number.POSITIVE_INFINITY) <= get(essence)
+          getFromRange({ factor: (length - 1) / (GEMS_MAXIMUM - 1), ...GEM_FITTING_COST_RANGE }) <=
+            get(essence)
         );
       },
     key,

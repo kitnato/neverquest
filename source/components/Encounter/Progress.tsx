@@ -40,13 +40,12 @@ export function Progress() {
           >
             <Stack direction="horizontal" gap={1}>
               <span>
-                {`${formatNumber({ value: progressValue })}/${
-                  progressMaximumValue === Number.POSITIVE_INFINITY
-                    ? LABEL_UNKNOWN
-                    : formatNumber({
-                        value: progressMaximumValue,
-                      })
-                }`}
+                {formatNumber({ value: progressValue })}/
+                {progressMaximumValue === Number.POSITIVE_INFINITY
+                  ? LABEL_UNKNOWN
+                  : formatNumber({
+                      value: progressMaximumValue,
+                    })}
               </span>
 
               <DeltasDisplay delta="progress" />

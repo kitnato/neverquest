@@ -173,7 +173,9 @@ export const monsterDamageAilingPerSecond = withStateKey("monsterDamageAilingPer
         value: getDamagePerRate({
           damage: get(monsterDamageAiling),
           damageModifier: 0,
-          damageModifierChance: get(isMonsterAiling("stunned")) ? AILMENT_PENALTY.stunned : 0,
+          damageModifierChance: get(isMonsterAiling("stunned"))
+            ? AILMENT_PENALTY.stunned
+            : undefined,
           rate: get(monsterAttackRate),
         }),
       }),

@@ -115,7 +115,7 @@ export function BleedRating() {
               </Popover>
             }
           >
-            <span>{bleedRatingValue}</span>
+            <span>{formatNumber({ value: bleedRatingValue })}</span>
           </OverlayTrigger>
 
           <DeltasDisplay delta="bleedRating" />

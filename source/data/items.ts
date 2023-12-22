@@ -93,8 +93,10 @@ export const ELEMENTALS: Record<
   {
     ailment: MonsterAilmentElemental;
     color: string;
+    damage: GeneratorRange;
+    damageModification: string;
     duration: GeneratorRange;
-    durationMaximum: number;
+    durationCap: number;
     gem: Gem;
     Icon: SVGIcon;
   }
@@ -102,24 +104,30 @@ export const ELEMENTALS: Record<
   fire: {
     ailment: "burning",
     color: "text-orange",
+    damage: { maximum: 1, minimum: 0.1 },
+    damageModification: "high",
     duration: { maximum: 8500, minimum: 5000 },
-    durationMaximum: 25_000,
+    durationCap: 25_000,
     gem: "ruby",
     Icon: IconFire,
   },
   ice: {
     ailment: "frozen",
     color: "text-blue",
+    damage: { maximum: 0.5, minimum: 0.05 },
+    damageModification: "low",
     duration: { maximum: 2500, minimum: 1000 },
-    durationMaximum: 4000,
+    durationCap: 4000,
     gem: "sapphire",
     Icon: IconIce,
   },
   lightning: {
     ailment: "shocked",
     color: "text-yellow",
+    damage: { maximum: 0.8, minimum: 0.075 },
+    damageModification: "medium",
     duration: { maximum: 2000, minimum: 800 },
-    durationMaximum: 7000,
+    durationCap: 7000,
     gem: "topaz",
     Icon: IconLightning,
   },
@@ -131,32 +139,13 @@ export const GEM_BASE = {
   price: 250,
   weight: 1,
 };
-export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.25 };
-export const GEM_ENHANCEMENT = [0.1, 0.25, 0.45, 0.7, 1];
-export const GEM_FITTING_COST = [10, 30, 70, 150, 300];
-export const GEMS: Record<
-  Gem,
-  {
-    damage: [number, number, number, number, number];
-    damageModification: string;
-    elemental: Elemental;
-  }
-> = {
-  ruby: {
-    damage: [0.1, 0.2, 0.4, 0.66, 0.1],
-    damageModification: "high",
-    elemental: "fire",
-  },
-  sapphire: {
-    damage: [0.05, 0.1, 0.2, 0.35, 0.5],
-    damageModification: "low",
-    elemental: "ice",
-  },
-  topaz: {
-    damage: [0.075, 0.15, 0.3, 0.5, 0.8],
-    damageModification: "medium",
-    elemental: "lightning",
-  },
+export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.5 };
+export const GEM_ENHANCEMENT_RANGE = { maximum: 1, minimum: 0.1 };
+export const GEM_FITTING_COST_RANGE = { maximum: 300, minimum: 10 };
+export const GEMS: Record<Gem, Elemental> = {
+  ruby: "fire",
+  sapphire: "ice",
+  topaz: "lightning",
 };
 export const GEMS_MAXIMUM = 5;
 

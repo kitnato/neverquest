@@ -4,7 +4,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { GemDescription } from "@neverquest/components/Inventory/GemDescription";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import type { ConsumableItem, GemItem, InheritableItem } from "@neverquest/types";
-import { isGem, isGemItem } from "@neverquest/types/type-guards";
+import { isGemItem } from "@neverquest/types/type-guards";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ItemName({
@@ -14,15 +14,8 @@ export function ItemName({
   amount?: number;
   item: ConsumableItem | GemItem | InheritableItem;
 }) {
-  const { name, weight } = item;
-  const description = isGem(name) ? (
-    <GemDescription gem={name} />
-  ) : isGemItem(item) ? (
-    ""
-  ) : (
-    item.description
-  );
-  const displayName = capitalizeAll(name);
+  const description = isGemItem(item) ? <GemDescription gem={item.name} /> : item.description;
+  const displayName = capitalizeAll(item.name);
 
   return (
     <OverlayTrigger
@@ -37,7 +30,7 @@ export function ItemName({
               <span>{description}</span>
 
               <DetailsTable>
-                <WeightDetail amount={amount} weight={weight} />
+                <WeightDetail amount={amount} weight={item.weight} />
               </DetailsTable>
             </Stack>
           </PopoverBody>

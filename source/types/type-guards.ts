@@ -18,17 +18,12 @@ import {
   CONQUEST_TYPES,
   CONSUMABLE_TYPES,
   type Conquest,
-  type Consumable,
   GEM_TYPES,
   GRIP_TYPES,
-  type Gem,
-  type Grip,
   INFUSABLE_TYPES,
-  type Infusable,
   ROUTINE_TYPES,
   type Routine,
   TRINKET_TYPES,
-  type Trinket,
 } from "@neverquest/types/unions";
 
 export function isArmor(thing: unknown): thing is Armor {
@@ -40,19 +35,21 @@ export function isConquest(thing: unknown): thing is Conquest {
 }
 
 export function isConsumableItem(thing: unknown): thing is ConsumableItem {
-  return isObject(thing) && CONSUMABLE_TYPES.includes(thing.name as Consumable);
+  return (
+    isObject(thing) &&
+    typeof thing.name === "string" &&
+    new Set<string>(CONSUMABLE_TYPES).has(thing.name)
+  );
 }
 
 export function isGearItem(thing: unknown): thing is GearItem {
   return isObject(thing) && (isArmor(thing) || isShield(thing) || isWeapon(thing));
 }
 
-export function isGem(thing: unknown): thing is Gem {
-  return typeof thing === "string" && new Set<string>(GEM_TYPES).has(thing);
-}
-
 export function isGemItem(thing: unknown): thing is GemItem {
-  return isObject(thing) && GEM_TYPES.includes(thing.name as Gem);
+  return (
+    isObject(thing) && typeof thing.name === "string" && new Set<string>(GEM_TYPES).has(thing.name)
+  );
 }
 
 export function isGeneratorRange(thing: unknown): thing is GeneratorRange {
@@ -63,12 +60,12 @@ export function isGeneratorRanges(thing: unknown): thing is [GeneratorRange, Gen
   return Array.isArray(thing) && isGeneratorRange(thing[0]) && isGeneratorRange(thing[1]);
 }
 
-export function isInfusable(thing: unknown): thing is Infusable {
-  return typeof thing === "string" && new Set<string>(INFUSABLE_TYPES).has(thing);
-}
-
 export function isInfusableItem(thing: unknown): thing is InfusableItem {
-  return isObject(thing) && isInfusable(thing.name);
+  return (
+    isObject(thing) &&
+    typeof thing.name === "string" &&
+    new Set<string>(INFUSABLE_TYPES).has(thing.name)
+  );
 }
 
 function isObject(thing: unknown): thing is Record<string, unknown> {
@@ -76,7 +73,9 @@ function isObject(thing: unknown): thing is Record<string, unknown> {
 }
 
 export function isMelee(thing: unknown): thing is Melee {
-  return isObject(thing) && GRIP_TYPES.includes(thing.grip as Grip);
+  return (
+    isObject(thing) && typeof thing.grip === "string" && new Set<string>(GRIP_TYPES).has(thing.grip)
+  );
 }
 
 export function isRanged(thing: unknown): thing is Ranged {
@@ -95,24 +94,24 @@ export function isStackableItem(thing: unknown): thing is StackableItem {
   return isConsumableItem(thing) || isGemItem(thing);
 }
 
-export function isTrinket(thing: unknown): thing is Trinket {
-  return typeof thing === "string" && new Set<string>(TRINKET_TYPES).has(thing);
-}
-
 export function isTrinketItem(thing: unknown): thing is TrinketItem {
-  return isObject(thing) && isTrinket(thing.name);
+  return (
+    isObject(thing) &&
+    typeof thing.name === "string" &&
+    new Set<string>(TRINKET_TYPES).has(thing.name)
+  );
 }
 
 export function isUnarmed(thing: unknown): thing is typeof WEAPON_NONE {
-  return isObject(thing) && thing.name === WEAPON_NONE.name;
+  return isGearItem(thing) && thing.ID === WEAPON_NONE.ID;
 }
 
 export function isUnarmored(thing: unknown): thing is typeof ARMOR_NONE {
-  return isObject(thing) && thing.name === ARMOR_NONE.name;
+  return isGearItem(thing) && thing.ID === ARMOR_NONE.ID;
 }
 
 export function isUnshielded(thing: unknown): thing is typeof SHIELD_NONE {
-  return isObject(thing) && thing.name === SHIELD_NONE.name;
+  return isGearItem(thing) && thing.ID === SHIELD_NONE.ID;
 }
 
 export function isInheritableItem(thing: unknown): thing is InheritableItem {

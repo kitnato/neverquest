@@ -244,7 +244,7 @@ export const TRINKETS: Record<
   compass: {
     Icon: IconCompass,
     item: {
-      description: "Navigate the wilderness to revisit previous locations.",
+      description: "Navigate the wilderness to freely explore previous locations.",
       name: "compass",
       price: 30,
       weight: 2,

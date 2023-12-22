@@ -33,7 +33,7 @@ export const encounter = withStateKey("encounter", (key) =>
 
 export const isStageCompleted = withStateKey("isStageCompleted", (key) =>
   selector({
-    get: ({ get }) => get(progress) === get(progressMaximum) || get(encounter) === "void",
+    get: ({ get }) => get(encounter) === "void" || get(progress) === get(progressMaximum),
     key,
   }),
 );
@@ -64,6 +64,10 @@ export const progressMaximum = withStateKey("progressMaximum", (key) =>
         }
 
         case "monster": {
+          if (get(stage) < get(stageMaximum)) {
+            return Number.POSITIVE_INFINITY;
+          }
+
           return Math.ceil(
             getFromRange({ factor: getGrowthSigmoid(get(stage)), maximum, minimum }) *
               (1 - get(progressReduction)),

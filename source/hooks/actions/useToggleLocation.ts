@@ -1,9 +1,9 @@
 import { useRecoilCallback } from "recoil";
 
-import { useSetMonologues } from "./useSetMonologues";
 import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGenerateMerchantInventory";
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
+import { useSetMonologues } from "@neverquest/hooks/actions/useSetMonologues";
 import {
   consciousness,
   encounter,

@@ -1,10 +1,10 @@
 import { useRecoilCallback } from "recoil";
 
-import { useResetWilderness } from "./useResetWilderness";
 import { LABEL_UNKNOWN, RETIREMENT_STAGE_MINIMUM } from "@neverquest/data/general";
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
+import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import {
   blacksmithInventory,
   fletcherInventory,

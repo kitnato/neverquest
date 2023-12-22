@@ -4,7 +4,7 @@ import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { isShowing } from "@neverquest/state/isShowing";
-import { essenceLoot, itemsLoot } from "@neverquest/state/resources";
+import { essenceLoot, hasLooted, itemsLoot } from "@neverquest/state/resources";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useCollectLoot() {
@@ -34,6 +34,7 @@ export function useCollectLoot() {
         }
 
         reset(essenceLoot);
+        set(hasLooted, true);
 
         progressQuest({ quest: "looting" });
       },

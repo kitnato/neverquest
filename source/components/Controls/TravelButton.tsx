@@ -6,8 +6,8 @@ import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import IconFinalTravel from "@neverquest/icons/final-travel.svg?react";
 import IconTravel from "@neverquest/icons/travel.svg?react";
-import { isGameOver } from "@neverquest/state/character";
-import { encounter, isStageCompleted, location } from "@neverquest/state/encounter";
+import { isAttacking, isGameOver } from "@neverquest/state/character";
+import { encounter, location } from "@neverquest/state/encounter";
 import { encumbranceExtent } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { hasLooted } from "@neverquest/state/resources";
@@ -17,9 +17,9 @@ export function TravelButton() {
   const encounterValue = useRecoilValue(encounter);
   const encumbranceExtentValue = useRecoilValue(encumbranceExtent);
   const hasLootedValue = useRecoilValue(hasLooted);
+  const isAttackingValue = useRecoilValue(isAttacking);
   const isGameOverValue = useRecoilValue(isGameOver);
   const isShowingLocation = useRecoilValue(isShowing("location"));
-  const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const locationValue = useRecoilValue(location);
 
   const toggleLocation = useToggleLocation();
@@ -28,7 +28,7 @@ export function TravelButton() {
   const isOverEncumbered =
     locationValue === "caravan" && encumbranceExtentValue === "over-encumbered";
 
-  if ((hasLootedValue && isStageCompletedValue) || locationValue === "caravan") {
+  if (hasLootedValue || locationValue === "caravan") {
     return (
       <OverlayTrigger
         overlay={
@@ -50,11 +50,11 @@ export function TravelButton() {
         <div className={getAnimationClass({ animation: "bounceIn" })}>
           <Button
             className={
-              locationValue === "wilderness"
+              !isAttackingValue && locationValue === "wilderness"
                 ? getAnimationClass({ animation: "pulse", isInfinite: true })
                 : undefined
             }
-            disabled={isGameOverValue || isOverEncumbered}
+            disabled={isAttackingValue || isGameOverValue || isOverEncumbered}
             onClick={toggleLocation}
             variant="outline-dark"
           >

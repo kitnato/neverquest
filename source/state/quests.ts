@@ -24,16 +24,16 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 export const activeQuests = withStateKey("activeQuests", (key) =>
   selectorFamily<QuestData[], Quest>({
     get:
-      (parameter) =>
+      (quest) =>
       ({ get }) => {
-        const questProgressValue = get(questProgress(parameter));
+        const questProgressValue = get(questProgress(quest));
 
         const quests = [];
 
-        for (const quest of getQuestsData(parameter)) {
-          quests.push(quest);
+        for (const questData of getQuestsData(quest)) {
+          quests.push(questData);
 
-          if (quest.progressionMaximum > questProgressValue) {
+          if (questData.progressionMaximum > questProgressValue) {
             break;
           }
         }
@@ -47,11 +47,11 @@ export const activeQuests = withStateKey("activeQuests", (key) =>
 export const canCompleteQuests = withStateKey("canCompleteQuests", (key) =>
   selectorFamily<boolean, QuestClass>({
     get:
-      (parameter) =>
+      (questClass) =>
       ({ get }) => {
         let currentCanCompleteQuests = false;
 
-        for (const quest of QUEST_TYPES_BY_CLASS[parameter]) {
+        for (const quest of QUEST_TYPES_BY_CLASS[questClass]) {
           currentCanCompleteQuests ||= Object.values(get(questStatuses(quest))).includes(
             "achieved",
           );
@@ -66,11 +66,11 @@ export const canCompleteQuests = withStateKey("canCompleteQuests", (key) =>
 export const completedQuestsCount = withStateKey("completedQuestsCount", (key) =>
   selectorFamily<number, QuestClass>({
     get:
-      (parameter) =>
+      (questClass) =>
       ({ get }) => {
         const questBonusTypes = new Set<string>(QUEST_BONUS_TYPES);
 
-        return QUEST_TYPES_BY_CLASS[parameter].reduce(
+        return QUEST_TYPES_BY_CLASS[questClass].reduce(
           (sum, quest) =>
             sum +
             Object.values(get(questStatuses(quest))).filter((status) => questBonusTypes.has(status))
@@ -85,14 +85,14 @@ export const completedQuestsCount = withStateKey("completedQuestsCount", (key) =
 export const questsBonus = withStateKey("questsBonus", (key) =>
   selectorFamily<number, QuestBonus>({
     get:
-      (parameter) =>
+      (questBonus) =>
       ({ get }) =>
         !get(canUseJournal) || get(ownedItem("journal")) === undefined
           ? 0
           : QUEST_TYPES.reduce(
               (sum, quest) =>
                 sum +
-                Object.values(get(questStatuses(quest))).filter((status) => parameter === status)
+                Object.values(get(questStatuses(quest))).filter((status) => questBonus === status)
                   .length,
               0,
             ) * QUEST_COMPLETION_BONUS,
@@ -121,15 +121,15 @@ export const questNotifications = withStateKey("questNotifications", (key) =>
 export const questProgress = withStateKey("questProgress", (key) =>
   atomFamily<number, Quest>({
     default: 0,
-    effects: (parameter) => [handleLocalStorage({ key, parameter })],
+    effects: (quest) => [handleLocalStorage({ key, parameter: quest })],
     key,
   }),
 );
 
 export const questStatuses = withStateKey("questStatuses", (key) =>
   atomFamily<QuestStatus[], Quest>({
-    default: (parameter) => Object.keys(QUESTS[parameter].progression).map(() => "incomplete"),
-    effects: (parameter) => [handleLocalStorage({ key, parameter })],
+    default: (quest) => Object.keys(QUESTS[quest].progression).map(() => "incomplete"),
+    effects: (quest) => [handleLocalStorage({ key, parameter: quest })],
     key,
   }),
 );

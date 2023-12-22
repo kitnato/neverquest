@@ -26,7 +26,7 @@ export const acquiredTraits = withStateKey("acquiredTraits", (key) =>
 export const isTraitAcquired = withStateKey("isTraitAcquired", (key) =>
   atomFamily<boolean, Trait>({
     default: false,
-    effects: (parameter) => [handleLocalStorage({ key, parameter })],
+    effects: (trait) => [handleLocalStorage({ key, parameter: trait })],
     key,
   }),
 );

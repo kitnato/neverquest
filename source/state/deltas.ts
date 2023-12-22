@@ -10,7 +10,7 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 export const deltas = withStateKey("deltas", (key) =>
   atomFamily<{ display: DeltaDisplay[]; ID: string }[], Delta>({
     default: [],
-    effects: (parameter) => [handleLocalStorage({ key, parameter })],
+    effects: (delta) => [handleLocalStorage({ key, parameter: delta })],
     key,
   }),
 );

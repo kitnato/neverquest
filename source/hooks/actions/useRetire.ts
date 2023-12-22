@@ -13,6 +13,7 @@ import {
 } from "@neverquest/state/caravan";
 import { attackDuration, name } from "@neverquest/state/character";
 import {
+  hasDefeatedFinality,
   isStageStarted,
   location,
   progress,
@@ -69,6 +70,7 @@ export function useRetire() {
         reset(location);
         reset(name);
         reset(stage);
+        reset(hasDefeatedFinality);
         reset(questProgress("attributesIncreasingAll"));
         reset(questProgress("attributesUnlockingAll"));
         reset(questProgress("hiringAll"));

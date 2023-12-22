@@ -7,7 +7,7 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 export const isShowing = withStateKey("isShowing", (key) =>
   atomFamily<boolean, Showing>({
     default: false,
-    effects: (parameter) => [handleLocalStorage({ key, parameter })],
+    effects: (showing) => [handleLocalStorage({ key, parameter: showing })],
     key,
   }),
 );

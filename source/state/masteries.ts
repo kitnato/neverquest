@@ -15,11 +15,11 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 export const canTrainMastery = withStateKey("canTrainMastery", (key) =>
   selectorFamily<boolean, Mastery>({
     get:
-      (parameter) =>
+      (mastery) =>
       ({ get }) => {
-        const hasRequiredSkill = get(isSkillAcquired(MASTERIES[parameter].requiredSkill));
+        const hasRequiredSkill = get(isSkillAcquired(MASTERIES[mastery].requiredSkill));
 
-        switch (parameter) {
+        switch (mastery) {
           case "butchery": {
             const weaponValue = get(weapon);
 
@@ -58,9 +58,9 @@ export const canTrainMastery = withStateKey("canTrainMastery", (key) =>
 export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
   selectorFamily<boolean, Mastery>({
     get:
-      (parameter) =>
+      (mastery) =>
       ({ get }) =>
-        get(masteryRank(parameter)) === LEVELLING_MAXIMUM,
+        get(masteryRank(mastery)) === LEVELLING_MAXIMUM,
     key,
   }),
 );
@@ -68,9 +68,9 @@ export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
 export const masteryCost = withStateKey("masteryCost", (key) =>
   selectorFamily<number, Mastery>({
     get:
-      (parameter) =>
+      (mastery) =>
       ({ get }) =>
-        getGrowthTriangular(get(masteryRank(parameter)) + MASTERY_COST_BASE),
+        getGrowthTriangular(get(masteryRank(mastery)) + MASTERY_COST_BASE),
     key,
   }),
 );
@@ -78,10 +78,10 @@ export const masteryCost = withStateKey("masteryCost", (key) =>
 export const masteryStatistic = withStateKey("masteryStatistic", (key) =>
   selectorFamily<number, Mastery>({
     get:
-      (parameter) =>
+      (mastery) =>
       ({ get }) => {
-        const { base, increment } = MASTERIES[parameter];
-        const masteryRankValue = get(masteryRank(parameter));
+        const { base, increment } = MASTERIES[mastery];
+        const masteryRankValue = get(masteryRank(mastery));
 
         return getComputedStatistic({ amount: masteryRankValue, base, increment });
       },
@@ -109,7 +109,7 @@ export const unlockedMasteries = withStateKey("unlockedMasteries", (key) =>
 export const masteryProgress = withStateKey("masteryProgress", (key) =>
   atomFamily<number, Mastery>({
     default: 0,
-    effects: (parameter) => [handleLocalStorage({ key, parameter })],
+    effects: (mastery) => [handleLocalStorage({ key, parameter: mastery })],
     key,
   }),
 );
@@ -117,7 +117,7 @@ export const masteryProgress = withStateKey("masteryProgress", (key) =>
 export const masteryRank = withStateKey("masteryRank", (key) =>
   atomFamily<number, Mastery>({
     default: 0,
-    effects: (parameter) => [handleLocalStorage({ key, parameter })],
+    effects: (mastery) => [handleLocalStorage({ key, parameter: mastery })],
     key,
   }),
 );

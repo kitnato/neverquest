@@ -60,13 +60,15 @@ export function Layout() {
   switch (consciousnessValue) {
     case "mors": {
       return (
-        <ScreenMessage
-          className={getAnimationClass({
-            animation: "zoomIn",
-            speed: "slower",
-          })}
-        >
-          Fin.
+        <ScreenMessage>
+          <h5
+            className={getAnimationClass({
+              animation: "zoomIn",
+              speed: "slower",
+            })}
+          >
+            Fin.
+          </h5>
         </ScreenMessage>
       );
     }

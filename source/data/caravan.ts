@@ -185,7 +185,7 @@ export const MEDIC_PRICE_SURGERY = 25;
 
 export const MERCHANT_OFFERS: Record<
   number,
-  | { dialog: string; item: Omit<InheritableItem, "ID"> }
+  | { item: Omit<InheritableItem, "ID">; monologue: string }
   | (ArtifactType<"armor"> & {
       gearClass: ArmorClass;
     })
@@ -212,7 +212,10 @@ export const MERCHANT_OFFERS: Record<
     gearClass: "small",
     type: "shield",
   },
-  4: { dialog: "You must be over-burdened. I can help with that.", item: TRINKETS.knapsack.item },
+  4: {
+    item: TRINKETS.knapsack.item,
+    monologue: "You must be over-burdened. I can help with that.",
+  },
   6: {
     gearClass: "slashing",
     grip: "one-handed",
@@ -224,8 +227,8 @@ export const MERCHANT_OFFERS: Record<
     type: "armor",
   },
   8: {
-    dialog: "Wouldn't it be useful to retread old ground? I have just the thing.",
     item: TRINKETS.compass.item,
+    monologue: "Wouldn't it be useful to retread old ground? I have just the thing.",
   },
   9: {
     gearClass: "medium",
@@ -238,29 +241,29 @@ export const MERCHANT_OFFERS: Record<
     type: "weapon",
   },
   14: {
-    dialog: "A trinket that allows safe passage. Would that be of interest?",
     item: TRINKETS.hearthstone.item,
+    monologue: "A trinket that allows safe passage. Would that be of interest?",
   },
   20: {
-    dialog: "I recently came into possession of a fine curiosity.",
     item: INFUSABLES["monkey paw"].item,
+    monologue: "I recently came into possession of a fine curiosity.",
   },
   [CREW.fletcher.requiredStage]: {
-    dialog: "I have something suitable for marksmen.",
     item: TRINKETS["ammunition pouch"].item,
+    monologue: "I have something suitable for marksmen.",
   },
   30: {
-    dialog: "A dark wanderer passed by and sold me a strange book ...",
     item: INFUSABLES["tome of power"].item,
+    monologue: "A dark wanderer passed by and sold me a strange book ...",
   },
   35: {
-    dialog: "I've happened upon an artifact for your reaping burdens.",
     item: TRINKETS["ender hook"].item,
+    monologue: "I've happened upon an artifact for your reaping burdens.",
   },
-  39: { dialog: "You wouldn't be a scribe, would you?", item: TRINKETS.journal.item },
+  39: { item: TRINKETS.journal.item, monologue: "You wouldn't be a scribe, would you?" },
   70: {
-    dialog: "Extraordinary discoveries reveal themselves only to the lucky few.",
     item: TRINKETS["antique coin"].item,
+    monologue: "Extraordinary discoveries reveal themselves only to the lucky few.",
   },
 };
 

@@ -36,12 +36,12 @@ export const armor = withStateKey("armor", (key) =>
 export const canApplyGem = withStateKey("canApplyGem", (key) =>
   selectorFamily<boolean, Gear>({
     get:
-      (parameter) =>
+      (gear) =>
       ({ get }) => {
         const { length } =
-          parameter === "armor"
+          gear === "armor"
             ? get(armor).gems
-            : parameter === "shield"
+            : gear === "shield"
               ? get(shield).gems
               : get(weapon).gems;
 

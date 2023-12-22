@@ -42,15 +42,15 @@ export const ammunitionMaximum = withStateKey("ammunitionMaximum", (key) =>
 export const infusablePower = withStateKey("infusablePower", (key) =>
   selectorFamily<number, Infusable>({
     get:
-      (parameter) =>
+      (infusable) =>
       ({ get }) => {
-        const ownedItemValue = get(ownedItem(parameter));
+        const ownedItemValue = get(ownedItem(infusable));
 
         if (ownedItemValue === undefined || !isInfusableItem(ownedItemValue)) {
           return 0;
         }
 
-        const { maximum, minimum } = INFUSABLES[parameter].item;
+        const { maximum, minimum } = INFUSABLES[infusable].item;
 
         return getFromRange({
           factor: getGrowthSigmoid(ownedItemValue.level),
@@ -65,15 +65,15 @@ export const infusablePower = withStateKey("infusablePower", (key) =>
 export const infusionLevel = withStateKey("infusionLevel", (key) =>
   selectorFamily<number, Infusable>({
     get:
-      (parameter) =>
+      (infusable) =>
       ({ get }) => {
-        const infusable = get(ownedItem(parameter));
+        const infusableItem = get(ownedItem(infusable));
 
-        if (infusable === undefined || !isInfusableItem(infusable)) {
+        if (infusableItem === undefined || !isInfusableItem(infusableItem)) {
           return 0;
         }
 
-        return infusable.level;
+        return infusableItem.level;
       },
     key,
   }),
@@ -82,15 +82,15 @@ export const infusionLevel = withStateKey("infusionLevel", (key) =>
 export const infusionMaximum = withStateKey("infusionMaximum", (key) =>
   selectorFamily<number, Infusable>({
     get:
-      (parameter) =>
+      (infusable) =>
       ({ get }) => {
-        const infusable = get(ownedItem(parameter));
+        const infusableItem = get(ownedItem(infusable));
 
-        if (infusable === undefined || !isInfusableItem(infusable)) {
+        if (infusableItem === undefined || !isInfusableItem(infusableItem)) {
           return 0;
         }
 
-        return getGrowthTriangular(infusable.level + INFUSABLES[parameter].item.growthBase);
+        return getGrowthTriangular(infusableItem.level + INFUSABLES[infusable].item.growthBase);
       },
     key,
   }),
@@ -99,11 +99,11 @@ export const infusionMaximum = withStateKey("infusionMaximum", (key) =>
 export const infusionStep = withStateKey("infusionStep", (key) =>
   selectorFamily<number, Infusable>({
     get:
-      (parameter) =>
+      (infusable) =>
       ({ get }) =>
         Math.min(
           get(essence),
-          Math.ceil((get(infusionMaximum(parameter)) / INFUSION_DURATION) * INFUSION_DELTA),
+          Math.ceil((get(infusionMaximum(infusable)) / INFUSION_DURATION) * INFUSION_DELTA),
         ),
     key,
   }),

@@ -23,12 +23,13 @@ export function useSetMonologues() {
           if (stageValue === get(stageMaximum)) {
             set(
               monologue(crew),
+              // If it's the merchant, only change their monologue to the item's if it was generated (i.e. not inherited), otherwise proceed to either set the stage's monologue or the most recent one.
               crew === "merchant" &&
                 offer !== undefined &&
                 "item" in offer &&
                 isInheritableItem(offer.item) &&
                 get(merchantInventory).some(({ name }) => name === offer.item.name)
-                ? offer.dialog
+                ? offer.monologue
                 : monologues[stageValue] ??
                     (() => {
                       for (let index = stageValue; index > 0; index--) {

@@ -98,9 +98,9 @@ export const hasMonsterClosed = withStateKey("hasMonsterClosed", (key) =>
 export const isMonsterAiling = withStateKey("isMonsterAiling", (key) =>
   selectorFamily<boolean, MonsterAilment>({
     get:
-      (parameter) =>
+      (ailment) =>
       ({ get }) =>
-        get(monsterAilmentDuration(parameter)) > 0,
+        get(monsterAilmentDuration(ailment)) > 0,
     key,
   }),
 );
@@ -318,7 +318,7 @@ export const isMonsterNew = withStateKey("isMonsterNew", (key) =>
 export const monsterAilmentDuration = withStateKey("monsterAilmentDuration", (key) =>
   atomFamily<number, MonsterAilment>({
     default: 0,
-    effects: (parameter) => [handleLocalStorage({ key, parameter })],
+    effects: (ailment) => [handleLocalStorage({ key, parameter: ailment })],
     key,
   }),
 );

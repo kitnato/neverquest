@@ -55,13 +55,13 @@ export const attributePoints = withStateKey("attributePoints", (key) =>
 export const attributePowerBonus = withStateKey("attributePowerBonus", (key) =>
   selectorFamily<number, Attribute>({
     get:
-      (parameter) =>
+      (attribute) =>
       ({ get }) => {
         const infusablePowerValue = get(infusablePower("tome of power"));
 
         return infusablePowerValue === 0
           ? 0
-          : get(powerLevel) * ATTRIBUTES[parameter].powerBonus * (1 + infusablePowerValue);
+          : get(powerLevel) * ATTRIBUTES[attribute].powerBonus * (1 + infusablePowerValue);
       },
     key,
   }),
@@ -70,10 +70,10 @@ export const attributePowerBonus = withStateKey("attributePowerBonus", (key) =>
 export const attributeStatistic = withStateKey("attributeStatistic", (key) =>
   selectorFamily<number, Attribute>({
     get:
-      (parameter) =>
+      (attribute) =>
       ({ get }) => {
-        const { base, increment } = ATTRIBUTES[parameter];
-        const attributeRankValue = get(attributeRank(parameter));
+        const { base, increment } = ATTRIBUTES[attribute];
+        const attributeRankValue = get(attributeRank(attribute));
 
         return getComputedStatistic({ amount: attributeRankValue, base, increment });
       },
@@ -84,10 +84,10 @@ export const attributeStatistic = withStateKey("attributeStatistic", (key) =>
 export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =>
   selectorFamily<boolean, Attribute>({
     get:
-      (parameter) =>
+      (attribute) =>
       ({ get }) =>
-        get(attributeStatistic(parameter)) >=
-        (ATTRIBUTES[parameter].maximum ?? Number.POSITIVE_INFINITY),
+        get(attributeStatistic(attribute)) >=
+        (ATTRIBUTES[attribute].maximum ?? Number.POSITIVE_INFINITY),
     key,
   }),
 );
@@ -105,7 +105,7 @@ export const powerLevel = withStateKey("powerLevel", (key) =>
 export const attributeRank = withStateKey("attributeRank", (key) =>
   atomFamily<number, Attribute>({
     default: 0,
-    effects: (parameter) => [handleLocalStorage({ key, parameter })],
+    effects: (attribute) => [handleLocalStorage({ key, parameter: attribute })],
     key,
   }),
 );

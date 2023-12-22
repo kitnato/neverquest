@@ -45,7 +45,7 @@ export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
 export const hireStatus = withStateKey("hireStatus", (key) =>
   atomFamily<CrewStatus, Crew>({
     default: "hidden",
-    effects: (parameter) => [handleLocalStorage({ key, parameter })],
+    effects: (crew) => [handleLocalStorage({ key, parameter: crew })],
     key,
   }),
 );
@@ -68,8 +68,8 @@ export const merchantInventory = withStateKey("merchantInventory", (key) =>
 
 export const monologue = withStateKey("monologue", (key) =>
   atomFamily<string, Crew>({
-    default: (parameter) => CREW[parameter].monologues[1] ?? EMPTY_MONOLOGUE,
-    effects: (parameter) => [handleLocalStorage({ key, parameter })],
+    default: (crew) => CREW[crew].monologues[1] ?? EMPTY_MONOLOGUE,
+    effects: (crew) => [handleLocalStorage({ key, parameter: crew })],
     key,
   }),
 );

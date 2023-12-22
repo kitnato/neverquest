@@ -87,12 +87,12 @@ export const equippableItems = withStateKey("equippableItems", (key) =>
 export const ownedItem = withStateKey("ownedItem", (key) =>
   selectorFamily<InventoryItem | undefined, Consumable | Infusable | Trinket>({
     get:
-      (parameter) =>
+      (itemName) =>
       ({ get }) =>
         get(inventory).find(
           (item) =>
             (isConsumableItem(item) || isInfusableItem(item) || isTrinketItem(item)) &&
-            item.name === parameter,
+            item.name === itemName,
         ),
     key,
   }),

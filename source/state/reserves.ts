@@ -94,9 +94,9 @@ export const isPoisoned = withStateKey("isPoisoned", (key) =>
 export const isRegenerating = withStateKey("isRegenerating", (key) =>
   selectorFamily<boolean, Reserve>({
     get:
-      (parameter) =>
+      (reserve) =>
       ({ get }) =>
-        get(regenerationDuration(parameter)) > 0,
+        get(regenerationDuration(reserve)) > 0,
     key,
   }),
 );
@@ -157,9 +157,9 @@ export const poisonMagnitude = withStateKey("poisonMagnitude", (key) =>
 export const regenerationAmount = withStateKey("regenerationAmount", (key) =>
   selectorFamily<number, Reserve>({
     get:
-      (parameter) =>
+      (reserve) =>
       ({ get }) =>
-        RESERVES[parameter].baseRegenerationAmount +
+        RESERVES[reserve].baseRegenerationAmount +
         Math.round(
           get(attributeStatistic("fortitude")) * (1 + get(attributePowerBonus("fortitude"))),
         ),
@@ -170,9 +170,9 @@ export const regenerationAmount = withStateKey("regenerationAmount", (key) =>
 export const regenerationRate = withStateKey("regenerationRate", (key) =>
   selectorFamily<number, Reserve>({
     get:
-      (parameter) =>
+      (reserve) =>
       ({ get }) => {
-        const { baseRegenerationRate } = RESERVES[parameter];
+        const { baseRegenerationRate } = RESERVES[reserve];
 
         return Math.round(
           baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRateReduction),
@@ -230,7 +230,7 @@ export const health = withStateKey("health", (key) =>
 export const regenerationDuration = withStateKey("regenerationDuration", (key) =>
   atomFamily<number, Reserve>({
     default: 0,
-    effects: (parameter) => [handleLocalStorage({ key, parameter })],
+    effects: (reserve) => [handleLocalStorage({ key, parameter: reserve })],
     key,
   }),
 );

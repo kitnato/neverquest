@@ -37,9 +37,9 @@ export const bleedChance = withStateKey("bleedChance", (key) =>
 export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
   selectorFamily<boolean, MonsterAilment>({
     get:
-      (parameter) =>
+      (ailment) =>
       ({ get }) => {
-        switch (parameter) {
+        switch (ailment) {
           case "bleeding": {
             return get(bleedChance) > 0;
           }
@@ -56,7 +56,7 @@ export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
           case "frozen":
           case "shocked": {
             const elemental = ELEMENTAL_TYPES.find(
-              (elementalType) => ELEMENTALS[elementalType].ailment === parameter,
+              (currentElemental) => ELEMENTALS[currentElemental].ailment === ailment,
             );
             const { armor, weapon } = get(elementalEffects);
 

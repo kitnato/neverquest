@@ -29,7 +29,7 @@
     "souls-like"
   ],
   "dependencies": {
-    "@kitnato/locran": "0.4.0",
+    "@kitnato/locran": "0.5.0",
     "animate.css": "4.1.1",
     "bootstrap": "5.3.2",
     "localstorage-slim": "2.7.0",

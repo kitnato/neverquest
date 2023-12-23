@@ -25,60 +25,59 @@ export function ItemAcquisition() {
   const [acquiredItemsValue, setItemsAcquired] = useRecoilState(acquiredItems);
   const resetItemsAcquired = useResetRecoilState(acquiredItems);
 
-  useEffect(() => resetItemsAcquired);
+  useEffect(resetItemsAcquired, [resetItemsAcquired]);
 
   return acquiredItemsValue.map((acquiredItem) => {
     const { ID } = acquiredItem;
 
     return (
-      <div
-        className={`position-absolute ${getAnimationClass({
-          animation: "zoomOut",
-          speed: "slower",
-        })}`}
-        key={ID}
-        onAnimationEnd={() => {
-          setItemsAcquired((currentAcquiredItems) =>
-            currentAcquiredItems.filter(({ ID: acquiredItemID }) => acquiredItemID !== ID),
-          );
-        }}
-        // Bootstrap positioning utilities do not work with Animation.css zoomOut.
-        style={{ left: -10, top: 16 }}
-      >
-        <IconImage
-          className="small"
-          Icon={(() => {
-            if (isArmor(acquiredItem)) {
-              return IconArmor;
-            }
-
-            if (isConsumableItem(acquiredItem)) {
-              return CONSUMABLES[acquiredItem.name].Icon;
-            }
-
-            if (isGemItem(acquiredItem)) {
-              return IconGem;
-            }
-
-            if (isShield(acquiredItem)) {
-              return IconShield;
-            }
-
-            if (isTrinketItem(acquiredItem)) {
-              return TRINKETS[acquiredItem.name].Icon;
-            }
-
-            if (isWeapon(acquiredItem)) {
-              if (isMelee(acquiredItem)) {
-                return IconMelee;
+      <div className="position-absolute top-50 start-0 translate-middle" key={ID}>
+        <div
+          className={getAnimationClass({
+            animation: "zoomOut",
+            speed: "slower",
+          })}
+          onAnimationEnd={() => {
+            setItemsAcquired((currentAcquiredItems) =>
+              currentAcquiredItems.filter(({ ID: acquiredItemID }) => acquiredItemID !== ID),
+            );
+          }}
+        >
+          <IconImage
+            className="small"
+            Icon={(() => {
+              if (isArmor(acquiredItem)) {
+                return IconArmor;
               }
 
-              return IconRanged;
-            }
+              if (isConsumableItem(acquiredItem)) {
+                return CONSUMABLES[acquiredItem.name].Icon;
+              }
 
-            return IconUnknown;
-          })()}
-        />
+              if (isGemItem(acquiredItem)) {
+                return IconGem;
+              }
+
+              if (isShield(acquiredItem)) {
+                return IconShield;
+              }
+
+              if (isTrinketItem(acquiredItem)) {
+                return TRINKETS[acquiredItem.name].Icon;
+              }
+
+              if (isWeapon(acquiredItem)) {
+                if (isMelee(acquiredItem)) {
+                  return IconMelee;
+                }
+
+                return IconRanged;
+              }
+
+              return IconUnknown;
+            })()}
+          />
+        </div>
       </div>
     );
   });

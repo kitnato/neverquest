@@ -42,18 +42,26 @@ export function Retirement({
         <ModalTitle>
           <Stack direction="horizontal" gap={3}>
             <IconImage Icon={IconRetire} />
-            Retirement
+
+            <span>Retirement</span>
           </Stack>
         </ModalTitle>
       </ModalHeader>
 
       <ModalBody>
         <Stack gap={5}>
-          Retiring starts a new quest with less monsters to fight per stage. A powerful trait can be
-          chosen, bestowing a permanent boon.
+          <span>
+            Retiring starts a new quest with reduced monster density per stage. A powerful trait can
+            also be chosen, bestowing a permanent boon. Certain items are inherited for the new
+            quest.
+          </span>
+
           <ResetDetails />
+
           <ProgressDiscount />
+
           <ItemsInherited />
+
           <TraitSelection />
         </Stack>
       </ModalBody>

@@ -12,9 +12,13 @@ export function ProgressDiscount() {
 
   return (
     <Stack gap={3}>
-      <h6>Progress discount</h6>
+      <h6>Monster density</h6>
 
-      <IconDisplay Icon={IconProgressDiscount} tooltip="Progress discount">{`-${formatNumber({
+      <IconDisplay
+        Icon={IconProgressDiscount}
+        iconProps={{ isFlipped: true }}
+        tooltip="Monster density"
+      >{`-${formatNumber({
         format: "percentage",
         value: getProgressReduction(stageMaximumValue),
       })}`}</IconDisplay>

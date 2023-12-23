@@ -21,7 +21,7 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
   const { description, Icon } = MASTERIES[mastery];
 
   return (
-    <div className={`mastery ${getAnimationClass({ animation: "flipInX" })}`}>
+    <div className={getAnimationClass({ animation: "flipInX" })}>
       {isSkillAcquiredValue ? (
         <IconDisplay
           className={`${canTrainMasteryValue ? "" : "opacity-50"}`}
@@ -47,7 +47,7 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
             }
             placement="right"
           >
-            <span>{capitalizeAll(mastery)}</span>
+            <span className="fitted">{capitalizeAll(mastery)}</span>
           </OverlayTrigger>
         </IconDisplay>
       ) : (

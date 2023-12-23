@@ -17,7 +17,7 @@ export function IconImage({
       placement={overlayPlacement}
       trigger={tooltip === undefined ? [] : ["focus", "hover"]}
     >
-      <div onClick={onClick}>
+      <div className="align-bottom d-inline-flex" onClick={onClick}>
         <Icon
           className={`icon-image${className === undefined ? "" : ` ${className}`}`}
           style={{

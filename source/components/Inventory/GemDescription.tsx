@@ -1,5 +1,3 @@
-import { Stack } from "react-bootstrap";
-
 import { IconImage } from "@neverquest/components/IconImage";
 import { ELEMENTALS, GEMS } from "@neverquest/data/items";
 import type { Gem } from "@neverquest/types/unions";
@@ -10,15 +8,17 @@ export function GemDescription({ gem }: { gem: Gem }) {
 
   return (
     <div>
-      <Stack className="d-inline-flex text-center" direction="horizontal" gap={1}>
-        <span>Adds elemental</span>
+      <span>Adds elemental&nbsp;</span>
 
-        <IconImage className="small" Icon={Icon} />
+      <IconImage className="small" Icon={Icon} />
 
-        <span className={color}>{elemental}</span>
-      </Stack>
+      <span className={color}>&nbsp;{elemental}&nbsp;</span>
 
-      <span>&nbsp;effect & a {damageModification} damage bonus to gear.</span>
+      <span>effect & a</span>
+
+      <span className="fst-italic">&nbsp;{damageModification}&nbsp;</span>
+
+      <span>damage bonus to gear.</span>
     </div>
   );
 }

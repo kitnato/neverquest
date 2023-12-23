@@ -3,6 +3,7 @@ import { useRecoilCallback } from "recoil";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
+import { acquiredItems } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { essenceLoot, hasLooted, itemsLoot } from "@neverquest/state/resources";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -31,6 +32,11 @@ export function useCollectLoot() {
           set(itemsLoot, (currentItemsLoot) =>
             currentItemsLoot.filter(({ ID }) => !acquiredItemIDs.has(ID)),
           );
+
+          set(acquiredItems, (currentAcquiredItems) => [
+            ...currentAcquiredItems,
+            ...itemsLootValue,
+          ]);
         }
 
         reset(essenceLoot);

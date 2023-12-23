@@ -20,7 +20,7 @@ export function ItemsInherited() {
         <span className="fst-italic">{LABEL_NONE}</span>
       ) : (
         ownedInheritableItems.map((inheritableItem) => (
-          <div key={inheritableItem.ID} style={{ width: "max-content" }}>
+          <div key={inheritableItem.ID}>
             {isTrinketItem(inheritableItem) ? (
               <ItemDisplay isInInventory item={inheritableItem} />
             ) : (

@@ -79,6 +79,10 @@ td.text-end > .hstack {
   box-shadow: none !important;
 }
 
+.fitted {
+  width: max-content;
+}
+
 .form-check {
   display: flex;
   gap: 0.8rem;
@@ -109,10 +113,6 @@ td.text-end > .hstack {
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
-}
-
-.mastery span {
-  width: max-content;
 }
 
 .monospaced {

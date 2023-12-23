@@ -213,6 +213,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
       const merchantInventoryValue = get(merchantInventory);
       const ownedItemMysteriousEgg = get(ownedItem("mysterious egg"));
       const stageValue = get(stage);
+      const stageMaximumValue = get(stageMaximum);
 
       return {
         essence: Math.round(
@@ -230,7 +231,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
                 .map(() => {
                   const { equalStage, lowerStage } = GEM_DROP_CHANCE;
 
-                  return Math.random() <= (stageValue < get(stageMaximum) ? lowerStage : equalStage)
+                  return Math.random() <= (stageValue < stageMaximumValue ? lowerStage : equalStage)
                     ? 1
                     : 0;
                 })

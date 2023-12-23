@@ -14,7 +14,11 @@ export function ItemName({
   amount?: number;
   item: ConsumableItem | GemItem | InheritableItem;
 }) {
-  const description = isGemItem(item) ? <GemDescription gem={item.name} /> : item.description;
+  const description = isGemItem(item) ? (
+    <GemDescription gem={item.name} />
+  ) : (
+    <span>{item.description}</span>
+  );
   const displayName = capitalizeAll(item.name);
 
   return (
@@ -27,7 +31,7 @@ export function ItemName({
 
           <PopoverBody className="text-center">
             <Stack gap={2}>
-              <span>{description}</span>
+              {description}
 
               <DetailsTable>
                 <WeightDetail amount={amount} weight={item.weight} />
@@ -38,7 +42,7 @@ export function ItemName({
       }
       placement="right"
     >
-      <span>
+      <span className="fitted">
         {`${displayName}${
           amount !== undefined && amount > 1 ? ` ×${formatNumber({ value: amount })}` : ""
         }`}

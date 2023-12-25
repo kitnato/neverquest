@@ -191,7 +191,7 @@ export function ArmorName({
       }
       placement={isInInventory ? "right" : "top"}
     >
-      <span>{name}</span>
+      <span>{name}&nbsp;</span>
     </OverlayTrigger>
   );
 }

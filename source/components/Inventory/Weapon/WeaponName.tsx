@@ -250,7 +250,7 @@ export function WeaponName({
       }
       placement={isInInventory ? "right" : "top"}
     >
-      <span>{name}</span>
+      <span>{name}&nbsp;</span>
     </OverlayTrigger>
   );
 }

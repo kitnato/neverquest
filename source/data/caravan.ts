@@ -106,7 +106,7 @@ export const CREW: Record<
     monologues: {
       1: "Greetings. I have what you're looking for.",
       2: "Hello again. Some protection, perhaps?",
-      3: "Ah, you're back. Care for an aegis?",
+      3: "Ah, you're back. Care for something to fend off attacks?",
       4: "Good to have you back.",
       6: "Heard there are other travelers looking to sell their services.",
       7: "New gear for sale, if you care to peruse.",

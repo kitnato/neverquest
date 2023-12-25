@@ -43,9 +43,9 @@ export function ItemName({
       placement="right"
     >
       <span className="fitted">
-        {`${displayName}${
-          amount !== undefined && amount > 1 ? ` ×${formatNumber({ value: amount })}` : ""
-        }`}
+        {displayName}
+        {amount !== undefined && amount > 1 ? ` ×${formatNumber({ value: amount })}` : ""}
+        &nbsp;
       </span>
     </OverlayTrigger>
   );

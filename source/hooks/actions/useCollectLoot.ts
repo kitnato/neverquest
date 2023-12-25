@@ -6,6 +6,7 @@ import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence
 import { acquiredItems } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { essenceLoot, hasLooted, itemsLoot } from "@neverquest/state/resources";
+import type { InventoryItem } from "@neverquest/types";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useCollectLoot() {
@@ -25,17 +26,18 @@ export function useCollectLoot() {
         set(isShowing("attributes"), true);
 
         if (itemsLootValue.length > 0) {
-          const acquiredItemIDs = new Set(
-            itemsLootValue.map((item) => (acquireItem(item) === "noFit" ? undefined : item.ID)),
-          );
+          const acquiredFittingItems = itemsLootValue
+            .map((item) => acquireItem(item) === "noFit" && item)
+            .filter(Boolean) as InventoryItem[];
+          const acquiredItemsIDs = new Set(acquiredFittingItems.map(({ ID }) => ID));
 
           set(itemsLoot, (currentItemsLoot) =>
-            currentItemsLoot.filter(({ ID }) => !acquiredItemIDs.has(ID)),
+            currentItemsLoot.filter(({ ID }) => !acquiredItemsIDs.has(ID)),
           );
 
           set(acquiredItems, (currentAcquiredItems) => [
             ...currentAcquiredItems,
-            ...itemsLootValue,
+            ...acquiredFittingItems,
           ]);
         }
 

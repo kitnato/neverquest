@@ -56,10 +56,12 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
                 <Stack direction="horizontal" gap={1}>
                   <IconImage className="small" Icon={IconEssence} />
 
-                  {getFromRange({
-                    factor: (length - 1) / (GEMS_MAXIMUM - 1),
-                    ...GEM_FITTING_COST_RANGE,
-                  })}
+                  <span>
+                    {getFromRange({
+                      factor: length / GEMS_MAXIMUM,
+                      ...GEM_FITTING_COST_RANGE,
+                    })}
+                  </span>
                 </Stack>
               </div>
             </Dropdown.Item>

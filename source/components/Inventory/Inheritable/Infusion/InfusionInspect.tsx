@@ -3,10 +3,10 @@ import { Button, Modal, ModalBody, ModalHeader, ModalTitle, Stack } from "react-
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { Infusion } from "@neverquest/components/Inventory/Usable/Infusion";
-import { HatchingProgress } from "@neverquest/components/Inventory/Usable/Infusion/HatchingProgress";
-import { InfusionLevel } from "@neverquest/components/Inventory/Usable/Infusion/InfusionLevel";
-import { InfusionProgress } from "@neverquest/components/Inventory/Usable/Infusion/InfusionProgress";
+import { Infusion } from "@neverquest/components/Inventory/Inheritable/Infusion";
+import { HatchingProgress } from "@neverquest/components/Inventory/Inheritable/Infusion/HatchingProgress";
+import { InfusionLevel } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionLevel";
+import { InfusionProgress } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionProgress";
 import { EssenceBonus } from "@neverquest/components/Statistics/EssenceBonus";
 import { PowerBonusBoost } from "@neverquest/components/Statistics/PowerBonusBoost";
 import { INFUSABLES } from "@neverquest/data/items";

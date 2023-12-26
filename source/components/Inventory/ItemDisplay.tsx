@@ -1,19 +1,20 @@
-import type { ReactNode } from "react";
-
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ArmorName } from "@neverquest/components/Inventory/Armor/ArmorName";
+import { InfusionLevelDisplay } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionLevelDisplay";
 import { ItemName } from "@neverquest/components/Inventory/ItemName";
 import { ShieldName } from "@neverquest/components/Inventory/Offhand/ShieldName";
 import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
 import { CONSUMABLES, INFUSABLES, TRINKETS } from "@neverquest/data/items";
+import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
+import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import IconArmor from "@neverquest/icons/armor.svg?react";
 import IconGem from "@neverquest/icons/gem.svg?react";
 import IconMelee from "@neverquest/icons/melee.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
 import IconShield from "@neverquest/icons/shield.svg?react";
 import type { InventoryItem } from "@neverquest/types";
-import type { IconImageDOMProperties } from "@neverquest/types/components";
 import {
+  isAmmunitionPouch,
   isArmor,
   isConsumableItem,
   isInfusableItem,
@@ -22,24 +23,45 @@ import {
   isTrinketItem,
   isWeapon,
 } from "@neverquest/types/type-guards";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function ItemDisplay({
   amount,
-  description,
-  iconProps,
+  isEquipped,
   isInInventory,
   item,
 }: {
   amount?: number;
-  description?: ReactNode;
-  extra?: string;
-  iconProps?: IconImageDOMProperties;
+  isEquipped?: boolean;
   isInInventory?: boolean;
   item: InventoryItem;
 }) {
+  if (isAmmunitionPouch(item)) {
+    const { current, maximum } = item;
+
+    return (
+      <IconDisplay
+        description={
+          <IconDisplay
+            Icon={IconAmmunition}
+            iconProps={{ className: "small", overlayPlacement: "bottom" }}
+            tooltip="Ammunition pouch"
+          >{`${formatNumber({ value: current })}/${formatNumber({ value: maximum })}`}</IconDisplay>
+        }
+        Icon={IconAmmunitionPouch}
+      >
+        <ItemName item={item} />
+      </IconDisplay>
+    );
+  }
+
   if (isArmor(item)) {
     return (
-      <IconDisplay description={description} Icon={IconArmor} iconProps={iconProps} tooltip="Armor">
+      <IconDisplay
+        description={isEquipped ? "Equipped" : undefined}
+        Icon={IconArmor}
+        tooltip="Armor"
+      >
         <ArmorName armor={item} isInInventory={isInInventory} />
       </IconDisplay>
     );
@@ -47,23 +69,19 @@ export function ItemDisplay({
 
   if (isConsumableItem(item)) {
     return (
-      <IconDisplay
-        description={description}
-        Icon={CONSUMABLES[item.name].Icon}
-        iconProps={iconProps}
-        tooltip="Consumable"
-      >
+      <IconDisplay Icon={CONSUMABLES[item.name].Icon} tooltip="Consumable">
         <ItemName amount={amount} item={item} />
       </IconDisplay>
     );
   }
 
   if (isInfusableItem(item)) {
+    const { level, name } = item;
+
     return (
       <IconDisplay
-        description={description}
-        Icon={INFUSABLES[item.name].Icon}
-        iconProps={iconProps}
+        description={<InfusionLevelDisplay level={level} />}
+        Icon={INFUSABLES[name].Icon}
         tooltip="Infusable trinket"
       >
         <ItemName item={item} />
@@ -74,9 +92,8 @@ export function ItemDisplay({
   if (isShield(item)) {
     return (
       <IconDisplay
-        description={description}
+        description={isEquipped ? "Equipped" : undefined}
         Icon={IconShield}
-        iconProps={iconProps}
         tooltip="Shield"
       >
         <ShieldName isInInventory={isInInventory} shield={item} />
@@ -86,12 +103,7 @@ export function ItemDisplay({
 
   if (isTrinketItem(item)) {
     return (
-      <IconDisplay
-        description={description}
-        Icon={TRINKETS[item.name].Icon}
-        iconProps={iconProps}
-        tooltip="Trinket"
-      >
+      <IconDisplay Icon={TRINKETS[item.name].Icon} tooltip="Trinket">
         <ItemName item={item} />
       </IconDisplay>
     );
@@ -100,9 +112,8 @@ export function ItemDisplay({
   if (isWeapon(item)) {
     return (
       <IconDisplay
-        description={description}
+        description={isEquipped ? "Equipped" : undefined}
         Icon={isMelee(item) ? IconMelee : IconRanged}
-        iconProps={iconProps}
         tooltip="Weapon"
       >
         <WeaponName isInInventory={isInInventory} weapon={item} />
@@ -111,7 +122,7 @@ export function ItemDisplay({
   }
 
   return (
-    <IconDisplay description={description} Icon={IconGem} iconProps={iconProps} tooltip="Gem">
+    <IconDisplay Icon={IconGem} tooltip="Gem">
       <ItemName amount={amount} item={item} />
     </IconDisplay>
   );

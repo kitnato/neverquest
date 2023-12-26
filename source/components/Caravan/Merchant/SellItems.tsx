@@ -3,7 +3,6 @@ import { useRecoilValue } from "recoil";
 
 import { SellItem } from "@neverquest/components/Caravan/Merchant/SellItem";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
-import { Usable } from "@neverquest/components/Inventory/Usable";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { inventory } from "@neverquest/state/inventory";
 import {
@@ -52,11 +51,7 @@ export function SellItems() {
               return (
                 <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
                   <Stack direction="horizontal" gap={1}>
-                    <ItemDisplay
-                      description={isEquipped ? "Equipped" : undefined}
-                      isInInventory
-                      item={gearItem}
-                    />
+                    <ItemDisplay isEquipped={isEquipped} isInInventory item={gearItem} />
                   </Stack>
 
                   <SellItem item={gearItem} />
@@ -67,11 +62,11 @@ export function SellItems() {
           {storedItems
             .filter(isInheritableItem)
             .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
-            .map((usableItem) => (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={usableItem.ID}>
-                <Usable item={usableItem} />
+            .map((inheritableItem) => (
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={inheritableItem.ID}>
+                <ItemDisplay item={inheritableItem} />
 
-                <SellItem item={usableItem} />
+                <SellItem item={inheritableItem} />
               </div>
             ))}
 

@@ -8,11 +8,10 @@ import { Elixir } from "@neverquest/components/Inventory/Consumable/Elixir";
 import { Salve } from "@neverquest/components/Inventory/Consumable/Salve";
 import { DiscardItem } from "@neverquest/components/Inventory/DiscardItem";
 import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
+import { CompassNavigate } from "@neverquest/components/Inventory/Inheritable/CompassNavigate";
+import { HearthstoneWarp } from "@neverquest/components/Inventory/Inheritable/HearthstoneWarp";
+import { InfusionInspect } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionInspect";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
-import { Usable } from "@neverquest/components/Inventory/Usable";
-import { CompassNavigate } from "@neverquest/components/Inventory/Usable/CompassNavigate";
-import { HearthstoneWarp } from "@neverquest/components/Inventory/Usable/HearthstoneWarp";
-import { InfusionInspect } from "@neverquest/components/Inventory/Usable/Infusion/InfusionInspect";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { equippableItems, inventory } from "@neverquest/state/inventory";
@@ -121,7 +120,7 @@ export function Inventory() {
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                <Usable item={trinketItem} />
+                <ItemDisplay isInInventory item={trinketItem} />
 
                 <Stack direction="horizontal" gap={3}>
                   {(() => {
@@ -139,6 +138,7 @@ export function Inventory() {
                       }
                     }
                   })()}
+
                   <DiscardItem ID={ID} name={name} />
                 </Stack>
               </div>
@@ -153,7 +153,7 @@ export function Inventory() {
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                <Usable item={infusableItem} />
+                <ItemDisplay isInInventory item={infusableItem} />
 
                 <Stack direction="horizontal" gap={3}>
                   <InfusionInspect infusable={name} />

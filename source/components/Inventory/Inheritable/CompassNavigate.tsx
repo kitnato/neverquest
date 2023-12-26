@@ -88,9 +88,11 @@ export function CompassNavigate() {
                 const stageIndex = index + 1;
 
                 return (
-                  <option key={name} value={stageIndex}>{`Stage ${formatNumber({
-                    value: stageIndex,
-                  })} - ${name}`}</option>
+                  <option key={name} value={stageIndex}>
+                    {`Stage ${formatNumber({
+                      value: stageIndex,
+                    })} - ${name}`}
+                  </option>
                 );
               })}
             </FormSelect>

@@ -2,7 +2,7 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
-import { InfusionLevelDisplay } from "@neverquest/components/Inventory/Usable/Infusion/InfusionLevelDisplay";
+import { InfusionLevelDisplay } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionLevelDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { infusionLevel } from "@neverquest/state/items";
 import type { Infusable } from "@neverquest/types/unions";

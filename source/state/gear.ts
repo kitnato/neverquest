@@ -38,9 +38,9 @@ export const armor = withStateKey("armor", (key) =>
 );
 
 export const canApplyGem = withStateKey("canApplyGem", (key) =>
-  selectorFamily<boolean, Gear>({
+  selectorFamily({
     get:
-      (gear) =>
+      (gear: Gear) =>
       ({ get }) => {
         const { length } =
           gear === "armor"

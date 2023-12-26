@@ -13,9 +13,9 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 // SELECTORS
 
 export const canTrainMastery = withStateKey("canTrainMastery", (key) =>
-  selectorFamily<boolean, Mastery>({
+  selectorFamily({
     get:
-      (mastery) =>
+      (mastery: Mastery) =>
       ({ get }) => {
         const hasRequiredSkill = get(isSkillAcquired(MASTERIES[mastery].requiredSkill));
 
@@ -56,9 +56,9 @@ export const canTrainMastery = withStateKey("canTrainMastery", (key) =>
 );
 
 export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
-  selectorFamily<boolean, Mastery>({
+  selectorFamily({
     get:
-      (mastery) =>
+      (mastery: Mastery) =>
       ({ get }) =>
         get(masteryRank(mastery)) === LEVELLING_MAXIMUM,
     key,
@@ -66,9 +66,9 @@ export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", (key) =>
 );
 
 export const masteryCost = withStateKey("masteryCost", (key) =>
-  selectorFamily<number, Mastery>({
+  selectorFamily({
     get:
-      (mastery) =>
+      (mastery: Mastery) =>
       ({ get }) =>
         getGrowthTriangular(get(masteryRank(mastery)) + MASTERY_COST_BASE),
     key,
@@ -76,9 +76,9 @@ export const masteryCost = withStateKey("masteryCost", (key) =>
 );
 
 export const masteryStatistic = withStateKey("masteryStatistic", (key) =>
-  selectorFamily<number, Mastery>({
+  selectorFamily({
     get:
-      (mastery) =>
+      (mastery: Mastery) =>
       ({ get }) => {
         const { base, increment } = MASTERIES[mastery];
         const masteryRankValue = get(masteryRank(mastery));

@@ -53,9 +53,9 @@ export const attributePoints = withStateKey("attributePoints", (key) =>
 );
 
 export const attributePowerBonus = withStateKey("attributePowerBonus", (key) =>
-  selectorFamily<number, Attribute>({
+  selectorFamily({
     get:
-      (attribute) =>
+      (attribute: Attribute) =>
       ({ get }) => {
         const infusablePowerValue = get(infusablePower("tome of power"));
 
@@ -68,9 +68,9 @@ export const attributePowerBonus = withStateKey("attributePowerBonus", (key) =>
 );
 
 export const attributeStatistic = withStateKey("attributeStatistic", (key) =>
-  selectorFamily<number, Attribute>({
+  selectorFamily({
     get:
-      (attribute) =>
+      (attribute: Attribute) =>
       ({ get }) => {
         const { base, increment } = ATTRIBUTES[attribute];
         const attributeRankValue = get(attributeRank(attribute));
@@ -82,9 +82,9 @@ export const attributeStatistic = withStateKey("attributeStatistic", (key) =>
 );
 
 export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", (key) =>
-  selectorFamily<boolean, Attribute>({
+  selectorFamily({
     get:
-      (attribute) =>
+      (attribute: Attribute) =>
       ({ get }) =>
         get(attributeStatistic(attribute)) >=
         (ATTRIBUTES[attribute].maximum ?? Number.POSITIVE_INFINITY),

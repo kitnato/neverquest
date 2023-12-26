@@ -35,9 +35,9 @@ export const bleedChance = withStateKey("bleedChance", (key) =>
 );
 
 export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
-  selectorFamily<boolean, MonsterAilment>({
+  selectorFamily({
     get:
-      (ailment) =>
+      (ailment: MonsterAilment) =>
       ({ get }) => {
         switch (ailment) {
           case "bleeding": {

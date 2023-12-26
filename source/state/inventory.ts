@@ -3,16 +3,20 @@ import { atom, selector, selectorFamily } from "recoil";
 import { ENCUMBRANCE_CAPACITY } from "@neverquest/data/items";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import type { InventoryItem, KnapsackItem } from "@neverquest/types";
+import type {
+  ConsumableItem,
+  InheritableItem,
+  InventoryItem,
+  KnapsackItem,
+} from "@neverquest/types";
 import {
   isArmor,
   isConsumableItem,
   isGearItem,
-  isInfusableItem,
+  isInheritableItem,
   isMelee,
   isRanged,
   isShield,
-  isTrinketItem,
 } from "@neverquest/types/type-guards";
 import type { Consumable, Infusable, Trinket } from "@neverquest/types/unions";
 import { withStateKey } from "@neverquest/utilities/helpers";
@@ -85,15 +89,17 @@ export const equippableItems = withStateKey("equippableItems", (key) =>
 );
 
 export const ownedItem = withStateKey("ownedItem", (key) =>
-  selectorFamily<InventoryItem | undefined, Consumable | Infusable | Trinket>({
+  selectorFamily({
     get:
-      (itemName) =>
-      ({ get }) =>
-        get(inventory).find(
-          (item) =>
-            (isConsumableItem(item) || isInfusableItem(item) || isTrinketItem(item)) &&
-            item.name === itemName,
-        ),
+      (itemName: Consumable | Infusable | Trinket) =>
+      ({ get }): ConsumableItem | InheritableItem | undefined => {
+        const inventoryValue = get(inventory);
+
+        return (
+          inventoryValue.filter(isConsumableItem).find(({ name }) => name === itemName) ??
+          inventoryValue.filter(isInheritableItem).find(({ name }) => name === itemName)
+        );
+      },
     key,
   }),
 );

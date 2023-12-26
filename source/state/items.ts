@@ -40,9 +40,9 @@ export const ammunitionMaximum = withStateKey("ammunitionMaximum", (key) =>
 );
 
 export const infusablePower = withStateKey("infusablePower", (key) =>
-  selectorFamily<number, Infusable>({
+  selectorFamily({
     get:
-      (infusable) =>
+      (infusable: Infusable) =>
       ({ get }) => {
         const ownedItemValue = get(ownedItem(infusable));
 
@@ -63,9 +63,9 @@ export const infusablePower = withStateKey("infusablePower", (key) =>
 );
 
 export const infusionLevel = withStateKey("infusionLevel", (key) =>
-  selectorFamily<number, Infusable>({
+  selectorFamily({
     get:
-      (infusable) =>
+      (infusable: Infusable) =>
       ({ get }) => {
         const infusableItem = get(ownedItem(infusable));
 
@@ -80,9 +80,9 @@ export const infusionLevel = withStateKey("infusionLevel", (key) =>
 );
 
 export const infusionMaximum = withStateKey("infusionMaximum", (key) =>
-  selectorFamily<number, Infusable>({
+  selectorFamily({
     get:
-      (infusable) =>
+      (infusable: Infusable) =>
       ({ get }) => {
         const infusableItem = get(ownedItem(infusable));
 
@@ -97,9 +97,9 @@ export const infusionMaximum = withStateKey("infusionMaximum", (key) =>
 );
 
 export const infusionStep = withStateKey("infusionStep", (key) =>
-  selectorFamily<number, Infusable>({
+  selectorFamily({
     get:
-      (infusable) =>
+      (infusable: Infusable) =>
       ({ get }) =>
         Math.min(
           get(essence),

@@ -8,7 +8,7 @@ import {
 } from "@neverquest/data/quests";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { ownedItem } from "@neverquest/state/inventory";
-import type { QuestData, QuestNotification } from "@neverquest/types";
+import type { QuestNotification } from "@neverquest/types";
 import {
   QUEST_BONUS_TYPES,
   type Quest,
@@ -22,9 +22,9 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 // SELECTORS
 
 export const activeQuests = withStateKey("activeQuests", (key) =>
-  selectorFamily<QuestData[], Quest>({
+  selectorFamily({
     get:
-      (quest) =>
+      (quest: Quest) =>
       ({ get }) => {
         const questProgressValue = get(questProgress(quest));
 
@@ -45,9 +45,9 @@ export const activeQuests = withStateKey("activeQuests", (key) =>
 );
 
 export const canCompleteQuests = withStateKey("canCompleteQuests", (key) =>
-  selectorFamily<boolean, QuestClass>({
+  selectorFamily({
     get:
-      (questClass) =>
+      (questClass: QuestClass) =>
       ({ get }) => {
         let currentCanCompleteQuests = false;
 
@@ -64,9 +64,9 @@ export const canCompleteQuests = withStateKey("canCompleteQuests", (key) =>
 );
 
 export const completedQuestsCount = withStateKey("completedQuestsCount", (key) =>
-  selectorFamily<number, QuestClass>({
+  selectorFamily({
     get:
-      (questClass) =>
+      (questClass: QuestClass) =>
       ({ get }) => {
         const questBonusTypes = new Set<string>(QUEST_BONUS_TYPES);
 
@@ -83,9 +83,9 @@ export const completedQuestsCount = withStateKey("completedQuestsCount", (key) =
 );
 
 export const questsBonus = withStateKey("questsBonus", (key) =>
-  selectorFamily<number, QuestBonus>({
+  selectorFamily({
     get:
-      (questBonus) =>
+      (questBonus: QuestBonus) =>
       ({ get }) =>
         !get(canUseJournal) || get(ownedItem("journal")) === undefined
           ? 0

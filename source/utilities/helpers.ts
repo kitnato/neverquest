@@ -62,28 +62,28 @@ export function isLocalStorageAvailable() {
 }
 
 export function stackItems<ItemType>(items: ItemType[]) {
-  const stacker: { amount: number; item: ItemType }[] = [];
+  const stackedItems: { amount: number; item: ItemType }[] = [];
 
   for (const item of items) {
     if (isStackableItem(item)) {
-      const existingStackIndex = stacker.findIndex(
+      const existingStackIndex = stackedItems.findIndex(
         ({ item: stackedItem }) => isStackableItem(stackedItem) && stackedItem.name === item.name,
       );
 
       if (existingStackIndex === -1) {
-        stacker.push({ amount: 1, item });
+        stackedItems.push({ amount: 1, item });
       } else {
-        stacker.splice(existingStackIndex, 1, {
-          amount: (stacker[existingStackIndex] ?? { amount: 1 }).amount + 1,
+        stackedItems.splice(existingStackIndex, 1, {
+          amount: (stackedItems[existingStackIndex] ?? { amount: 1 }).amount + 1,
           item,
         });
       }
     } else {
-      stacker.push({ amount: 1, item });
+      stackedItems.push({ amount: 1, item });
     }
   }
 
-  return stacker;
+  return stackedItems;
 }
 
 export function withStateKey<State>(key: StateKey, assign: (key: StateKey) => State) {

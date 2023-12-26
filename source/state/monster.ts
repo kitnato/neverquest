@@ -96,9 +96,9 @@ export const hasMonsterClosed = withStateKey("hasMonsterClosed", (key) =>
 );
 
 export const isMonsterAiling = withStateKey("isMonsterAiling", (key) =>
-  selectorFamily<boolean, MonsterAilment>({
+  selectorFamily({
     get:
-      (ailment) =>
+      (ailment: MonsterAilment) =>
       ({ get }) =>
         get(monsterAilmentDuration(ailment)) > 0,
     key,

@@ -92,9 +92,9 @@ export const isPoisoned = withStateKey("isPoisoned", (key) =>
 );
 
 export const isRegenerating = withStateKey("isRegenerating", (key) =>
-  selectorFamily<boolean, Reserve>({
+  selectorFamily({
     get:
-      (reserve) =>
+      (reserve: Reserve) =>
       ({ get }) =>
         get(regenerationDuration(reserve)) > 0,
     key,
@@ -155,9 +155,9 @@ export const poisonMagnitude = withStateKey("poisonMagnitude", (key) =>
 );
 
 export const regenerationAmount = withStateKey("regenerationAmount", (key) =>
-  selectorFamily<number, Reserve>({
+  selectorFamily({
     get:
-      (reserve) =>
+      (reserve: Reserve) =>
       ({ get }) =>
         RESERVES[reserve].baseRegenerationAmount +
         Math.round(
@@ -168,9 +168,9 @@ export const regenerationAmount = withStateKey("regenerationAmount", (key) =>
 );
 
 export const regenerationRate = withStateKey("regenerationRate", (key) =>
-  selectorFamily<number, Reserve>({
+  selectorFamily({
     get:
-      (reserve) =>
+      (reserve: Reserve) =>
       ({ get }) => {
         const { baseRegenerationRate } = RESERVES[reserve];
 

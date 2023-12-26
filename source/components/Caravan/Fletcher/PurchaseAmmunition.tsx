@@ -26,7 +26,7 @@ import IconEssence from "@neverquest/icons/essence.svg?react";
 import { inventory, ownedItem } from "@neverquest/state/inventory";
 import { ammunition, ammunitionMaximum } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
-import type { AmmunitionPouchItem } from "@neverquest/types";
+import { isAmmunitionPouch } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function PurchaseAmmunition() {
@@ -45,7 +45,7 @@ export function PurchaseAmmunition() {
   const isFull = ammunitionValue >= ammunitionMaximumValue;
   const canPurchase = isAffordable && !isFull;
 
-  if (ownedAmmunitionPouch !== undefined) {
+  if (ownedAmmunitionPouch !== undefined && isAmmunitionPouch(ownedAmmunitionPouch)) {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay Icon={IconAmmunition} tooltip="Ammunition">
@@ -57,7 +57,7 @@ export function PurchaseAmmunition() {
             {formatNumber({ value: totalPrice })}
           </IconDisplay>
           {(() => {
-            const { current, maximum } = ownedAmmunitionPouch as AmmunitionPouchItem;
+            const { current, ID, maximum } = ownedAmmunitionPouch;
 
             return (
               <OverlayTrigger
@@ -80,10 +80,10 @@ export function PurchaseAmmunition() {
 
                           setInventory((currentInventory) =>
                             currentInventory.map((currentItem) =>
-                              currentItem.ID === ownedAmmunitionPouch.ID
+                              currentItem.ID === ID && isAmmunitionPouch(currentItem)
                                 ? {
                                     ...currentItem,
-                                    current: (currentItem as AmmunitionPouchItem).current + amount,
+                                    current: currentItem.current + amount,
                                   }
                                 : currentItem,
                             ),

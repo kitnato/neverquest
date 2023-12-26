@@ -125,7 +125,7 @@ export function isUnshielded(thing: unknown): thing is typeof SHIELD_NONE {
 }
 
 export function isInheritableItem(thing: unknown): thing is InheritableItem {
-  return isInfusableItem(thing) || isTrinketItem(thing);
+  return isAmmunitionPouch(thing) || isInfusableItem(thing) || isTrinketItem(thing);
 }
 
 export function isWeapon(thing: unknown): thing is Weapon {

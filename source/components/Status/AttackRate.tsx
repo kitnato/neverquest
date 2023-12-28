@@ -110,6 +110,7 @@ export function AttackRate() {
                       <Stack direction="horizontal" gap={1}>
                         <span>
                           {`-${formatNumber({
+                            decimals: 0,
                             format: "percentage",
                             value: attributeStatisticSpeed,
                           })}`}

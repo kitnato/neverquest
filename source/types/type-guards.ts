@@ -1,6 +1,5 @@
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import type {
-  AmmunitionPouchItem,
   Armor,
   ConsumableItem,
   GearItem,
@@ -26,15 +25,6 @@ import {
   type Routine,
   TRINKET_TYPES,
 } from "@neverquest/types/unions";
-
-export function isAmmunitionPouch(thing: unknown): thing is AmmunitionPouchItem {
-  return (
-    isObject(thing) &&
-    thing.name === "ammunition pouch" &&
-    typeof thing.current === "number" &&
-    typeof thing.maximum === "number"
-  );
-}
 
 export function isArmor(thing: unknown): thing is Armor {
   return isObject(thing) && typeof thing.protection === "number";
@@ -125,7 +115,7 @@ export function isUnshielded(thing: unknown): thing is typeof SHIELD_NONE {
 }
 
 export function isInheritableItem(thing: unknown): thing is InheritableItem {
-  return isAmmunitionPouch(thing) || isInfusableItem(thing) || isTrinketItem(thing);
+  return isInfusableItem(thing) || isTrinketItem(thing);
 }
 
 export function isWeapon(thing: unknown): thing is Weapon {

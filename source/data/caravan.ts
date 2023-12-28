@@ -82,7 +82,7 @@ export const CREW: Record<
     monologues: {
       1: "Allow me to patch you up.",
       [GROWTH_MAXIMUM]: EMPTY_MONOLOGUE,
-      [LEVELLING_MAXIMUM]: "Never-ending madness. It hurts.",
+      [LEVELLING_MAXIMUM]: "Never-ending madness. Only pain.",
     },
     price: 20,
     requiredStage: 6,
@@ -268,13 +268,9 @@ export const MERCHANT_OFFERS: Record<
   },
 };
 
-export const TAILORING_EXPANSION = {
-  ammunitionPouch: 20,
-  knapsack: 3,
-};
-export const TAILORING_PRICE_MAXIMUM = {
-  ammunitionPouch: 200,
-  knapsack: 340,
+export const TAILORING = {
+  "ammunition pouch": { amount: 20, priceMaximum: 200 },
+  knapsack: { amount: 3, priceMaximum: 340 },
 };
 
 export const TRANSMUTE_COST = 3;

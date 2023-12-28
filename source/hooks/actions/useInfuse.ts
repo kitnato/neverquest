@@ -3,16 +3,8 @@ import { useRecoilCallback } from "recoil";
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
-import { inventory, ownedItem } from "@neverquest/state/inventory";
-import {
-  infusionCurrent,
-  infusionLevel,
-  infusionMaximum,
-  infusionStep,
-} from "@neverquest/state/items";
-
-import type { InfusableItem } from "@neverquest/types";
-import { isInfusableItem } from "@neverquest/types/type-guards";
+import { ownedItem } from "@neverquest/state/inventory";
+import { infusion, infusionLevel, infusionMaximum, infusionStep } from "@neverquest/state/items";
 import type { Infusable } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -41,24 +33,14 @@ export function useInfuse() {
           return;
         }
 
-        const infusionCurrentState = infusionCurrent(infusable);
-        const newInfusion = get(infusionCurrentState) + infusionStepValue;
+        const infusionState = infusion(infusable);
+        const infusionLevelState = infusionLevel(infusable);
+        const newInfusion = get(infusionState) + infusionStepValue;
 
         if (newInfusion >= get(infusionMaximum(infusable))) {
-          const newLevel = (ownedInfusable as InfusableItem).level + 1;
+          const newLevel = get(infusionLevelState) + 1;
 
-          set(inventory, (currentInventory) =>
-            currentInventory.map((currentItem) => {
-              if (currentItem.ID === ownedInfusable.ID && isInfusableItem(currentItem)) {
-                return {
-                  ...currentItem,
-                  level: newLevel,
-                };
-              }
-
-              return currentItem;
-            }),
-          );
+          set(infusionLevelState, newLevel);
 
           progressQuest({ quest: "infusing" });
 
@@ -66,13 +48,13 @@ export function useInfuse() {
             progressQuest({ quest: "infusingMaximum" });
           }
 
-          reset(infusionCurrentState);
+          reset(infusionState);
         } else {
-          set(infusionCurrentState, newInfusion);
+          set(infusionState, newInfusion);
         }
 
         transactEssence(-infusionStepValue);
       },
-    [transactEssence],
+    [progressQuest, transactEssence],
   );
 }

@@ -5,18 +5,18 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconPowerBonusBoost from "@neverquest/icons/power-bonus-boost.svg?react";
-import { infusablePower } from "@neverquest/state/items";
+import { infusionEffect } from "@neverquest/state/items";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function PowerBonusBoost() {
-  const infusablePowerState = infusablePower("tome of power");
+  const infusionEffectTomeOfPower = infusionEffect("tome of power");
 
-  const infusablePowerValue = useRecoilValue(infusablePowerState);
+  const infusionEffectValue = useRecoilValue(infusionEffectTomeOfPower);
 
   useDeltaText({
     delta: "powerBonusBoost",
     format: "percentage",
-    state: infusablePowerState,
+    state: infusionEffectTomeOfPower,
   });
 
   return (
@@ -25,7 +25,7 @@ export function PowerBonusBoost() {
         +
         {formatNumber({
           format: "percentage",
-          value: infusablePowerValue,
+          value: infusionEffectValue,
         })}
       </IconDisplay>
 

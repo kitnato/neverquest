@@ -2,13 +2,9 @@ import { atom, selector, selectorFamily } from "recoil";
 
 import { ENCUMBRANCE_CAPACITY } from "@neverquest/data/items";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { knapsackCapacity } from "@neverquest/state/items";
 import { isSkillAcquired } from "@neverquest/state/skills";
-import type {
-  ConsumableItem,
-  InheritableItem,
-  InventoryItem,
-  KnapsackItem,
-} from "@neverquest/types";
+import type { ConsumableItem, InheritableItem, InventoryItem } from "@neverquest/types";
 import {
   isArmor,
   isConsumableItem,
@@ -44,13 +40,8 @@ export const encumbranceExtent = withStateKey("encumbranceExtent", (key) =>
 
 export const encumbranceMaximum = withStateKey("encumbranceMaximum", (key) =>
   selector({
-    get: ({ get }) => {
-      const ownedItemKnapsack = get(ownedItem("knapsack"));
-
-      return ownedItemKnapsack === undefined
-        ? ENCUMBRANCE_CAPACITY
-        : (ownedItemKnapsack as KnapsackItem).capacity;
-    },
+    get: ({ get }) =>
+      get(ownedItem("knapsack")) === undefined ? ENCUMBRANCE_CAPACITY : get(knapsackCapacity),
     key,
   }),
 );

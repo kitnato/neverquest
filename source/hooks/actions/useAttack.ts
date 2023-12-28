@@ -14,8 +14,8 @@ import {
   isAttacking,
 } from "@neverquest/state/character";
 import { weapon } from "@neverquest/state/gear";
-import { inventory, ownedItem } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { ammunition } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
   distance,
@@ -32,7 +32,6 @@ import {
   executionThreshold,
 } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
-import type { AmmunitionPouchItem } from "@neverquest/types";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
@@ -86,21 +85,7 @@ export function useAttack() {
           }
 
           if (isWeaponRanged) {
-            const { ammunitionCost } = weaponValue;
-
-            set(inventory, (currentInventory) =>
-              currentInventory.map((currentItem) => {
-                const ownedAmmunitionPouch = get(ownedItem("ammunition pouch"));
-
-                return ownedAmmunitionPouch !== undefined &&
-                  currentItem.ID === ownedAmmunitionPouch.ID
-                  ? {
-                      ...currentItem,
-                      current: (currentItem as AmmunitionPouchItem).current - ammunitionCost,
-                    }
-                  : currentItem;
-              }),
-            );
+            set(ammunition, (currentAmmunition) => currentAmmunition - weaponValue.ammunitionCost);
           }
 
           if (

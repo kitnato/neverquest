@@ -1,12 +1,11 @@
 import { atom, selector } from "recoil";
 
+import { ammunition } from "./items";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { armor, shield, weapon } from "@neverquest/state/gear";
-import { ownedItem } from "@neverquest/state/inventory";
 import { stamina } from "@neverquest/state/reserves";
 import { isTraitAcquired } from "@neverquest/state/traits";
-import type { AmmunitionPouchItem } from "@neverquest/types";
 import { isRanged } from "@neverquest/types/type-guards";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
@@ -36,13 +35,9 @@ export const canDodge = withStateKey("canDodge", (key) =>
 export const hasEnoughAmmunition = withStateKey("hasEnoughAmmunition", (key) =>
   selector({
     get: ({ get }) => {
-      const ownedAmmunitionPouch = get(ownedItem("ammunition pouch"));
       const weaponValue = get(weapon);
 
-      return isRanged(weaponValue)
-        ? ownedAmmunitionPouch !== undefined &&
-            (ownedAmmunitionPouch as AmmunitionPouchItem).current >= weaponValue.ammunitionCost
-        : true;
+      return isRanged(weaponValue) ? get(ammunition) >= weaponValue.ammunitionCost : true;
     },
     key,
   }),

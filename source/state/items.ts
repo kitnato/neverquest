@@ -1,80 +1,29 @@
-import { atom, atomFamily, selector, selectorFamily } from "recoil";
+import { atom, atomFamily, selectorFamily } from "recoil";
 
 import { INFUSION_DELTA, INFUSION_DURATION } from "@neverquest/data/general";
-import { INFUSABLES } from "@neverquest/data/items";
+import {
+  AMMUNITION_CAPACITY,
+  INFUSABLES,
+  INFUSION_BASE,
+  KNAPSACK_CAPACITY,
+} from "@neverquest/data/items";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { ownedItem } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
-import type { AmmunitionPouchItem } from "@neverquest/types";
-import { isInfusableItem } from "@neverquest/types/type-guards";
 import type { Infusable } from "@neverquest/types/unions";
 import { getFromRange, getGrowthSigmoid, getGrowthTriangular } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
-export const ammunition = withStateKey("ammunition", (key) =>
-  selector({
-    get: ({ get }) => {
-      const ownedAmmunitionPouch = get(ownedItem("ammunition pouch"));
-
-      return ownedAmmunitionPouch === undefined
-        ? 0
-        : (ownedAmmunitionPouch as AmmunitionPouchItem).current;
-    },
-    key,
-  }),
-);
-
-export const ammunitionMaximum = withStateKey("ammunitionMaximum", (key) =>
-  selector({
-    get: ({ get }) => {
-      const ownedAmmunitionPouch = get(ownedItem("ammunition pouch"));
-
-      return ownedAmmunitionPouch === undefined
-        ? 0
-        : (ownedAmmunitionPouch as AmmunitionPouchItem).maximum;
-    },
-    key,
-  }),
-);
-
-export const infusablePower = withStateKey("infusablePower", (key) =>
+export const infusionEffect = withStateKey("infusionEffect", (key) =>
   selectorFamily({
     get:
       (infusable: Infusable) =>
-      ({ get }) => {
-        const ownedItemValue = get(ownedItem(infusable));
-
-        if (ownedItemValue === undefined || !isInfusableItem(ownedItemValue)) {
-          return 0;
-        }
-
-        const { maximum, minimum } = INFUSABLES[infusable].item;
-
-        return getFromRange({
-          factor: getGrowthSigmoid(ownedItemValue.level),
-          maximum,
-          minimum,
-        });
-      },
-    key,
-  }),
-);
-
-export const infusionLevel = withStateKey("infusionLevel", (key) =>
-  selectorFamily({
-    get:
-      (infusable: Infusable) =>
-      ({ get }) => {
-        const infusableItem = get(ownedItem(infusable));
-
-        if (infusableItem === undefined || !isInfusableItem(infusableItem)) {
-          return 0;
-        }
-
-        return infusableItem.level;
-      },
+      ({ get }) =>
+        getFromRange({
+          factor: getGrowthSigmoid(get(infusionLevel(infusable))),
+          ...INFUSABLES[infusable].item.effect,
+        }),
     key,
   }),
 );
@@ -83,15 +32,8 @@ export const infusionMaximum = withStateKey("infusionMaximum", (key) =>
   selectorFamily({
     get:
       (infusable: Infusable) =>
-      ({ get }) => {
-        const infusableItem = get(ownedItem(infusable));
-
-        if (infusableItem === undefined || !isInfusableItem(infusableItem)) {
-          return 0;
-        }
-
-        return getGrowthTriangular(infusableItem.level + INFUSABLES[infusable].item.growthBase);
-      },
+      ({ get }) =>
+        getGrowthTriangular(get(infusionLevel(infusable)) + INFUSION_BASE),
     key,
   }),
 );
@@ -111,16 +53,41 @@ export const infusionStep = withStateKey("infusionStep", (key) =>
 
 // ATOMS
 
-export const infusionCurrent = withStateKey("infusionCurrent", (key) =>
-  atomFamily<number, Infusable>({
+export const ammunition = withStateKey("ammunition", (key) =>
+  atom({
     default: 0,
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
 
-export const infusionDelta = withStateKey("infusionDelta", (key) =>
+export const ammunitionCapacity = withStateKey("ammunitionCapacity", (key) =>
   atom({
-    default: INFUSION_DELTA,
+    default: AMMUNITION_CAPACITY,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
+export const infusion = withStateKey("infusion", (key) =>
+  atomFamily<number, Infusable>({
+    default: 0,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
+export const infusionLevel = withStateKey("infusionLevel", (key) =>
+  atomFamily<number, Infusable>({
+    default: 0,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
+export const knapsackCapacity = withStateKey("knapsackCapacity", (key) =>
+  atom({
+    default: KNAPSACK_CAPACITY,
     effects: [handleLocalStorage({ key })],
     key,
   }),

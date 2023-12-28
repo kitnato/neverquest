@@ -14,12 +14,12 @@ import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react"
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import { ownedItem } from "@neverquest/state/inventory";
-import { infusablePower } from "@neverquest/state/items";
+import { infusionEffect } from "@neverquest/state/items";
 import type { Attribute } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }) {
-  const infusablePowerTomeOfPower = useRecoilValue(infusablePower("tome of power"));
+  const infusionEffectTomeOfPower = useRecoilValue(infusionEffect("tome of power"));
   const ownedItemTomeOfPower = useRecoilValue(ownedItem("tome of power"));
 
   const { increment, powerBonus } = ATTRIBUTES[attribute];
@@ -55,7 +55,7 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
             +
             {formatNumber({
               format: "percentage",
-              value: powerBonus * (1 + infusablePowerTomeOfPower),
+              value: powerBonus * (1 + infusionEffectTomeOfPower),
             })}
           </span>
         </Stack>

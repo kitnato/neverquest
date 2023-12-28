@@ -10,12 +10,6 @@ import type {
   Trinket,
 } from "@neverquest/types/unions";
 
-export type AmmunitionPouchItem = TrinketItem & {
-  current: number;
-  maximum: number;
-  name: "ammunition pouch";
-};
-
 export type Armor = GearItemBase & {
   deflection: number;
   gearClass: ArmorClass;
@@ -69,14 +63,11 @@ export type GeneratorRange = {
 
 export type InfusableItem = ItemBase & {
   description: string;
-  growthBase: number;
-  level: number;
-  maximum: number;
-  minimum: number;
+  effect: GeneratorRange;
   name: Infusable;
 };
 
-export type InheritableItem = AmmunitionPouchItem | InfusableItem | TrinketItem;
+export type InheritableItem = InfusableItem | TrinketItem;
 
 export type InventoryItem = GearItem | InheritableItem | StackableItem;
 
@@ -84,11 +75,6 @@ type ItemBase = {
   ID: string;
   price: number;
   weight: number;
-};
-
-export type KnapsackItem = TrinketItem & {
-  capacity: number;
-  name: "knapsack";
 };
 
 export type Melee = WeaponBase & {

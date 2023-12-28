@@ -10,17 +10,17 @@ import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
 import { ammunition, ammunitionCapacity } from "@neverquest/state/items";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export function AmmunitionPouchCapacity() {
+export function AmmunitionPouch() {
   const ammunitionValue = useRecoilValue(ammunition);
   const ammunitionCapacityValue = useRecoilValue(ammunitionCapacity);
 
   useDeltaText({
-    delta: "ammunitionCapacity",
-    state: ammunitionCapacity,
+    delta: "ammunition",
+    state: ammunition,
   });
 
   return (
-    <IconDisplay Icon={IconAmmunitionPouch} tooltip="Ammunition capacity">
+    <IconDisplay Icon={IconAmmunitionPouch} tooltip="Ammunition pouch">
       <LabelledProgressBar
         value={(ammunitionValue / ammunitionCapacityValue) * PERCENTAGE_POINTS}
         variant="dark"
@@ -33,7 +33,7 @@ export function AmmunitionPouchCapacity() {
             })}
           </span>
 
-          <DeltasDisplay delta="ammunitionCapacity" />
+          <DeltasDisplay delta="ammunition" />
         </Stack>
       </LabelledProgressBar>
     </IconDisplay>

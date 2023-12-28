@@ -34,6 +34,7 @@ export const essenceLoot = withStateKey("essenceLoot", (key) =>
 export const hasLooted = withStateKey("hasLooted", (key) =>
   atom({
     default: false,
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );

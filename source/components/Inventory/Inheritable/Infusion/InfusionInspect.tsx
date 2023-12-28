@@ -3,8 +3,8 @@ import { Button, Modal, ModalBody, ModalHeader, ModalTitle, Stack } from "react-
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { Infusion } from "@neverquest/components/Inventory/Inheritable/Infusion";
 import { HatchingProgress } from "@neverquest/components/Inventory/Inheritable/Infusion/HatchingProgress";
+import { Infuse } from "@neverquest/components/Inventory/Inheritable/Infusion/Infuse";
 import { InfusionLevel } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionLevel";
 import { InfusionProgress } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionProgress";
 import { EssenceBonus } from "@neverquest/components/Statistics/EssenceBonus";
@@ -64,7 +64,7 @@ export function InfusionInspect({ infusable }: { infusable: Infusable }) {
 
                 <InfusionProgress infusable={infusable} />
 
-                <Infusion infusable={infusable} />
+                <Infuse infusable={infusable} />
               </Stack>
             </Stack>
           </ModalBody>

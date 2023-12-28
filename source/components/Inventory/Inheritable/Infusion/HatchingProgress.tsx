@@ -5,18 +5,18 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconHatchingProgress from "@neverquest/icons/hatching-progress.svg?react";
-import { infusablePower } from "@neverquest/state/items";
+import { infusionEffect } from "@neverquest/state/items";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function HatchingProgress() {
-  const infusablePowerState = infusablePower("mysterious egg");
+  const infusionEffectMysteriousEgg = infusionEffect("mysterious egg");
 
-  const infusablePowerValue = useRecoilValue(infusablePowerState);
+  const infusionEffectValue = useRecoilValue(infusionEffectMysteriousEgg);
 
   useDeltaText({
     delta: "hatchingProgress",
     format: "percentage",
-    state: infusablePowerState,
+    state: infusionEffectMysteriousEgg,
   });
 
   return (
@@ -24,7 +24,7 @@ export function HatchingProgress() {
       <IconDisplay Icon={IconHatchingProgress} tooltip="Hatching progress">
         {formatNumber({
           format: "percentage",
-          value: infusablePowerValue,
+          value: infusionEffectValue,
         })}
       </IconDisplay>
 

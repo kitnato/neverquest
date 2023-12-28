@@ -19,14 +19,7 @@ import IconPhylactery from "@neverquest/icons/phylactery.svg?react";
 import IconSalve from "@neverquest/icons/salve.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react";
-import type {
-  AmmunitionPouchItem,
-  ConsumableItem,
-  GeneratorRange,
-  InfusableItem,
-  KnapsackItem,
-  TrinketItem,
-} from "@neverquest/types";
+import type { ConsumableItem, GeneratorRange, InfusableItem, TrinketItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
 import type {
   Consumable,
@@ -149,6 +142,8 @@ export const GEMS: Record<Gem, Elemental> = {
 };
 export const GEMS_MAXIMUM = 5;
 
+export const INFUSION_BASE = 2;
+
 export const INFUSABLES: Record<
   Infusable,
   {
@@ -160,10 +155,10 @@ export const INFUSABLES: Record<
     Icon: IconMonkeyPaw,
     item: {
       description: "Boosts amount of essence looted.",
-      growthBase: 3,
-      level: 0,
-      maximum: 2,
-      minimum: 0.025,
+      effect: {
+        maximum: 2,
+        minimum: 0.025,
+      },
       name: "monkey paw",
       price: 500,
       weight: 4,
@@ -173,10 +168,7 @@ export const INFUSABLES: Record<
     Icon: IconMysteriousEgg,
     item: {
       description: "A perplexing ovum emanating otherworldly energy.",
-      growthBase: 2,
-      level: 0,
-      maximum: 1,
-      minimum: 0,
+      effect: { maximum: 1, minimum: 0 },
       name: "mysterious egg",
       price: 1000,
       weight: 7,
@@ -186,16 +178,18 @@ export const INFUSABLES: Record<
     Icon: IconTomeOfPower,
     item: {
       description: "Boosts all attribute effects based on power level.",
-      growthBase: 4,
-      level: 0,
-      maximum: 1.5,
-      minimum: 0.05,
+      effect: {
+        maximum: 1.5,
+        minimum: 0.05,
+      },
       name: "tome of power",
       price: 2500,
       weight: 10,
     },
   },
 };
+
+export const KNAPSACK_CAPACITY = 15;
 
 export const TORN_MANUSCRIPT_DROP_CHANCE = {
   chance: 0.01,
@@ -207,15 +201,13 @@ export const TRINKETS: Record<
   Trinket,
   {
     Icon: SVGIcon;
-    item: Omit<AmmunitionPouchItem, "ID"> | Omit<KnapsackItem, "ID"> | Omit<TrinketItem, "ID">;
+    item: Omit<TrinketItem, "ID">;
   }
 > = {
   "ammunition pouch": {
     Icon: IconAmmunitionPouch,
     item: {
-      current: 0,
-      description: "Store ammunition for ranged weapons.",
-      maximum: AMMUNITION_CAPACITY,
+      description: "Stores ammunition for ranged weapons.",
       name: "ammunition pouch",
       price: 250,
       weight: 6,
@@ -251,7 +243,7 @@ export const TRINKETS: Record<
   familiar: {
     Icon: IconFamiliar,
     item: {
-      description: "Blessed with the ability to see beyond the veil.",
+      description: "Blessed with the ability to see beyond the grim entity.",
       name: "familiar",
       price: 1,
       weight: 17,
@@ -278,7 +270,6 @@ export const TRINKETS: Record<
   knapsack: {
     Icon: IconKnapsack,
     item: {
-      capacity: 15,
       description: "Carry more items and manage gear.",
       name: "knapsack",
       price: 10,
@@ -288,7 +279,7 @@ export const TRINKETS: Record<
   "torn manuscript": {
     Icon: IconTornManuscript,
     item: {
-      description: "Alchemical methodologies beyond comprehension.",
+      description: "Describes alchemical methodologies beyond comprehension.",
       name: "torn manuscript",
       price: 5000,
       weight: 3,

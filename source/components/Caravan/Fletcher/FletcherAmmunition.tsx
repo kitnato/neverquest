@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { AmmunitionPouchCurrent } from "@neverquest/components/Caravan/Fletcher/AmmunitionPouchCurrent";
+import { AmmunitionPouch } from "@neverquest/components/Caravan/Fletcher/AmmunitionPouch";
 import { PurchaseAmmunition } from "@neverquest/components/Caravan/Fletcher/PurchaseAmmunition";
 import { ownedItem } from "@neverquest/state/inventory";
 
@@ -17,7 +17,7 @@ export function FletcherAmmunition() {
       <Stack gap={3}>
         <h6>Current ammunition</h6>
 
-        <AmmunitionPouchCurrent />
+        <AmmunitionPouch />
       </Stack>
 
       <Stack gap={3}>

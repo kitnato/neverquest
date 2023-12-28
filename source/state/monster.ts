@@ -29,7 +29,7 @@ import {
   stageMaximum,
 } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
-import { infusablePower } from "@neverquest/state/items";
+import { infusionEffect } from "@neverquest/state/items";
 import { range } from "@neverquest/state/statistics";
 import type { MonsterAilment } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -221,7 +221,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
             get(progress) *
               bonus *
               (encounterValue === "boss" ? boss : 1) *
-              (1 + get(infusablePower("monkey paw"))),
+              (1 + get(infusionEffect("monkey paw"))),
         ),
         gems:
           encounterValue === "boss"

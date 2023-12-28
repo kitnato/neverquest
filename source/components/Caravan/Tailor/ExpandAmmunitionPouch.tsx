@@ -1,32 +1,31 @@
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { AmmunitionPouchCapacity } from "@neverquest/components/Caravan/Tailor/AmmunitionPouchCapacity";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { TAILORING_EXPANSION, TAILORING_PRICE_MAXIMUM } from "@neverquest/data/caravan";
+import { TAILORING } from "@neverquest/data/caravan";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/data/general";
 import { AMMUNITION_CAPACITY } from "@neverquest/data/items";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconTailoring from "@neverquest/icons/tailoring.svg?react";
-import { inventory, ownedItem } from "@neverquest/state/inventory";
+import { ownedItem } from "@neverquest/state/inventory";
+import { ammunitionCapacity } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
-import type { AmmunitionPouchItem } from "@neverquest/types";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getGrowthSigmoid } from "@neverquest/utilities/getters";
 
 export function ExpandAmmunitionPouch() {
+  const [ammunitionCapacityValue, setAmmunitionCapacity] = useRecoilState(ammunitionCapacity);
   const essenceValue = useRecoilValue(essence);
   const ownedAmmunitionPouch = useRecoilValue(ownedItem("ammunition pouch"));
-  const setInventory = useSetRecoilState(inventory);
 
   const transactEssence = useTransactEssence();
 
   if (ownedAmmunitionPouch !== undefined) {
-    const { ID, maximum } = ownedAmmunitionPouch as AmmunitionPouchItem;
+    const { amount, priceMaximum } = TAILORING["ammunition pouch"];
     const price = Math.ceil(
-      TAILORING_PRICE_MAXIMUM.ammunitionPouch *
-        getGrowthSigmoid(maximum - (AMMUNITION_CAPACITY - 1)),
+      priceMaximum * getGrowthSigmoid(ammunitionCapacityValue - (AMMUNITION_CAPACITY - 1)),
     );
     const isAffordable = price <= essenceValue;
 
@@ -38,7 +37,7 @@ export function ExpandAmmunitionPouch() {
 
         <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
           <IconDisplay
-            description={`Increases maximum ammunition by ${TAILORING_EXPANSION.ammunitionPouch}.`}
+            description={`Increases maximum ammunition by ${amount}.`}
             Icon={IconTailoring}
             tooltip="Tailoring"
           >
@@ -59,17 +58,8 @@ export function ExpandAmmunitionPouch() {
                   disabled={!isAffordable}
                   onClick={() => {
                     transactEssence(-price);
-                    setInventory((currentInventory) =>
-                      currentInventory.map((item) =>
-                        item.ID === ID
-                          ? {
-                              ...item,
-                              maximum:
-                                (item as AmmunitionPouchItem).maximum +
-                                TAILORING_EXPANSION.ammunitionPouch,
-                            }
-                          : item,
-                      ),
+                    setAmmunitionCapacity(
+                      (currentAmmunitionCapacity) => currentAmmunitionCapacity + amount,
                     );
                   }}
                   variant="outline-dark"

@@ -7,7 +7,7 @@ export function useAnimation({
   onFrame,
   stop,
 }: {
-  onFrame: (time: number) => void;
+  onFrame: (elapsed: number) => void;
   stop?: boolean;
 }) {
   const isGameOverValue = useRecoilValue(isGameOver);

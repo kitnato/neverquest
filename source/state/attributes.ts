@@ -2,7 +2,7 @@ import { atomFamily, selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { infusablePower } from "@neverquest/state/items";
+import { infusionEffect } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import { ATTRIBUTE_TYPES, type Attribute } from "@neverquest/types/unions";
 import { getAttributePointCost, getComputedStatistic } from "@neverquest/utilities/getters";
@@ -57,11 +57,11 @@ export const attributePowerBonus = withStateKey("attributePowerBonus", (key) =>
     get:
       (attribute: Attribute) =>
       ({ get }) => {
-        const infusablePowerValue = get(infusablePower("tome of power"));
+        const infusionEffectValue = get(infusionEffect("tome of power"));
 
-        return infusablePowerValue === 0
+        return infusionEffectValue === 0
           ? 0
-          : get(powerLevel) * ATTRIBUTES[attribute].powerBonus * (1 + infusablePowerValue);
+          : get(powerLevel) * ATTRIBUTES[attribute].powerBonus * (1 + infusionEffectValue);
       },
     key,
   }),

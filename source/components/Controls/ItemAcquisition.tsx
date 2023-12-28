@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRecoilState, useResetRecoilState } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { CONSUMABLES, TRINKETS } from "@neverquest/data/items";
+import { CONSUMABLES, INFUSABLES, TRINKETS } from "@neverquest/data/items";
 import IconArmor from "@neverquest/icons/armor.svg?react";
 import IconGem from "@neverquest/icons/gem.svg?react";
 import IconMelee from "@neverquest/icons/melee.svg?react";
@@ -14,6 +14,7 @@ import {
   isArmor,
   isConsumableItem,
   isGemItem,
+  isInfusableItem,
   isMelee,
   isShield,
   isTrinketItem,
@@ -22,10 +23,10 @@ import {
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function ItemAcquisition() {
-  const [acquiredItemsValue, setItemsAcquired] = useRecoilState(acquiredItems);
-  const resetItemsAcquired = useResetRecoilState(acquiredItems);
+  const [acquiredItemsValue, setAcquiredItems] = useRecoilState(acquiredItems);
+  const resetAcquiredItems = useResetRecoilState(acquiredItems);
 
-  useEffect(resetItemsAcquired, [resetItemsAcquired]);
+  useEffect(resetAcquiredItems, [resetAcquiredItems]);
 
   return acquiredItemsValue.map((acquiredItem) => {
     const { ID } = acquiredItem;
@@ -38,7 +39,7 @@ export function ItemAcquisition() {
             speed: "slower",
           })}
           onAnimationEnd={() => {
-            setItemsAcquired((currentAcquiredItems) =>
+            setAcquiredItems((currentAcquiredItems) =>
               currentAcquiredItems.filter(({ ID: acquiredItemID }) => acquiredItemID !== ID),
             );
           }}
@@ -56,6 +57,10 @@ export function ItemAcquisition() {
 
               if (isGemItem(acquiredItem)) {
                 return IconGem;
+              }
+
+              if (isInfusableItem(acquiredItem)) {
+                return INFUSABLES[acquiredItem.name].Icon;
               }
 
               if (isShield(acquiredItem)) {

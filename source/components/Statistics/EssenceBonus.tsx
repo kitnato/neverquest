@@ -5,18 +5,18 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconEssenceBonus from "@neverquest/icons/essence-bonus.svg?react";
-import { infusablePower } from "@neverquest/state/items";
+import { infusionEffect } from "@neverquest/state/items";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function EssenceBonus() {
-  const infusablePowerState = infusablePower("monkey paw");
+  const infusionEffectMonkeyPaw = infusionEffect("monkey paw");
 
-  const infusablePowerValue = useRecoilValue(infusablePowerState);
+  const infusionEffectValue = useRecoilValue(infusionEffectMonkeyPaw);
 
   useDeltaText({
     delta: "essenceBonus",
     format: "percentage",
-    state: infusablePowerState,
+    state: infusionEffectMonkeyPaw,
   });
 
   return (
@@ -25,7 +25,7 @@ export function EssenceBonus() {
         +
         {formatNumber({
           format: "percentage",
-          value: infusablePowerValue,
+          value: infusionEffectValue,
         })}
       </IconDisplay>
 

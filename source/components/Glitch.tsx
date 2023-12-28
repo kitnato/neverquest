@@ -120,7 +120,7 @@ export function Glitch() {
 
         setIntervalElapsed(0);
       } else {
-        setIntervalElapsed((interval) => interval + elapsed);
+        setIntervalElapsed(intervalElapsed + elapsed);
       }
 
       for (const [ID, { duration, element, latency, originalText, position }] of Object.entries(

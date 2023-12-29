@@ -157,7 +157,7 @@ export function getGearElementalEffects(gear: GearItem | GearItemUnequipped) {
     const effector = isArmor(gear) ? gear.protection : gear.damage;
 
     for (const { amount, item } of stackItems(gear.gems)) {
-      const elemental = GEMS[item.name];
+      const { elemental } = GEMS[item.name];
       const { damage, duration } = ELEMENTALS[elemental];
 
       effects[elemental] = {
@@ -177,7 +177,7 @@ export function getGearElementalEffects(gear: GearItem | GearItemUnequipped) {
   const effects = { fire: 0, ice: 0, lightning: 0 };
 
   for (const { amount, item } of stackItems(gear.gems)) {
-    const elemental = GEMS[item.name];
+    const { elemental } = GEMS[item.name];
 
     effects[elemental] = getFromRange({
       factor: (amount - 1) / (GEMS_MAXIMUM - 1),

@@ -16,8 +16,11 @@ import IconLightning from "@neverquest/icons/lightning.svg?react";
 import IconMonkeyPaw from "@neverquest/icons/monkey-paw.svg?react";
 import IconMysteriousEgg from "@neverquest/icons/mysterious-egg.svg?react";
 import IconPhylactery from "@neverquest/icons/phylactery.svg?react";
+import IconRuby from "@neverquest/icons/ruby.svg?react";
 import IconSalve from "@neverquest/icons/salve.svg?react";
+import IconSapphire from "@neverquest/icons/sapphire.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
+import IconTopaz from "@neverquest/icons/topaz.svg?react";
 import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react";
 import type { ConsumableItem, GeneratorRange, InfusableItem, TrinketItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
@@ -135,10 +138,10 @@ export const GEM_BASE = {
 export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.5 };
 export const GEM_ENHANCEMENT_RANGE = { maximum: 1, minimum: 0.1 };
 export const GEM_FITTING_COST_RANGE = { maximum: 300, minimum: 10 };
-export const GEMS: Record<Gem, Elemental> = {
-  ruby: "fire",
-  sapphire: "ice",
-  topaz: "lightning",
+export const GEMS: Record<Gem, { elemental: Elemental; Icon: SVGIcon }> = {
+  ruby: { elemental: "fire", Icon: IconRuby },
+  sapphire: { elemental: "ice", Icon: IconSapphire },
+  topaz: { elemental: "lightning", Icon: IconTopaz },
 };
 export const GEMS_MAXIMUM = 5;
 

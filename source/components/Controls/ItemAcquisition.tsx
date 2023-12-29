@@ -2,9 +2,8 @@ import { useEffect } from "react";
 import { useRecoilState, useResetRecoilState } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { CONSUMABLES, INFUSABLES, TRINKETS } from "@neverquest/data/items";
+import { CONSUMABLES, GEMS, INFUSABLES, TRINKETS } from "@neverquest/data/items";
 import IconArmor from "@neverquest/icons/armor.svg?react";
-import IconGem from "@neverquest/icons/gem.svg?react";
 import IconMelee from "@neverquest/icons/melee.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
 import IconShield from "@neverquest/icons/shield.svg?react";
@@ -56,7 +55,7 @@ export function ItemAcquisition() {
               }
 
               if (isGemItem(acquiredItem)) {
-                return IconGem;
+                return GEMS[acquiredItem.name].Icon;
               }
 
               if (isInfusableItem(acquiredItem)) {

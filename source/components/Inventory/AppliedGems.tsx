@@ -3,7 +3,6 @@ import { Stack } from "react-bootstrap";
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { ELEMENTALS, GEMS, GEMS_MAXIMUM } from "@neverquest/data/items";
-import IconGem from "@neverquest/icons/gem.svg?react";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getGearElementalEffects } from "@neverquest/utilities/getters";
@@ -27,8 +26,8 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
               gems.toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
             ).map(({ amount, item }) => {
               const { ID, name } = item;
-              const elemental = GEMS[name];
-              const { color, Icon } = ELEMENTALS[elemental];
+              const { elemental, Icon: GemIcon } = GEMS[name];
+              const { color, Icon: ElementalIcon } = ELEMENTALS[elemental];
               const effect = elementalEffects[elemental];
 
               return (
@@ -41,7 +40,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 
                   {LABEL_SEPARATOR}
 
-                  <IconImage className="small" Icon={Icon} />
+                  <IconImage className="small" Icon={ElementalIcon} />
 
                   <span>
                     {typeof effect === "number"
@@ -51,7 +50,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 
                   {LABEL_SEPARATOR}
 
-                  <IconImage className="small" Icon={IconGem} />
+                  <IconImage className="small" Icon={GemIcon} />
 
                   <span>{amount}</span>
                 </Stack>

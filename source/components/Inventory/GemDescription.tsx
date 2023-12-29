@@ -3,7 +3,7 @@ import { ELEMENTALS, GEMS } from "@neverquest/data/items";
 import type { Gem } from "@neverquest/types/unions";
 
 export function GemDescription({ gem }: { gem: Gem }) {
-  const elemental = GEMS[gem];
+  const { elemental } = GEMS[gem];
   const { color, damageModification, Icon } = ELEMENTALS[elemental];
 
   return (

@@ -5,9 +5,8 @@ import { ItemName } from "@neverquest/components/Inventory/ItemName";
 import { AmmunitionPouchStatus } from "@neverquest/components/Inventory/Offhand/AmmunitionPouchStatus";
 import { ShieldName } from "@neverquest/components/Inventory/Offhand/ShieldName";
 import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
-import { CONSUMABLES, INFUSABLES, TRINKETS } from "@neverquest/data/items";
+import { CONSUMABLES, GEMS, INFUSABLES, TRINKETS } from "@neverquest/data/items";
 import IconArmor from "@neverquest/icons/armor.svg?react";
-import IconGem from "@neverquest/icons/gem.svg?react";
 import IconMelee from "@neverquest/icons/melee.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
 import IconShield from "@neverquest/icons/shield.svg?react";
@@ -106,7 +105,7 @@ export function ItemDisplay({
   }
 
   return (
-    <IconDisplay Icon={IconGem} tooltip="Gem">
+    <IconDisplay Icon={GEMS[item.name].Icon} tooltip="Gem">
       <ItemName amount={amount} item={item} />
     </IconDisplay>
   );

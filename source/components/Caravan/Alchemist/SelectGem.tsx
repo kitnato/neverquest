@@ -2,7 +2,7 @@ import { FormSelect, Stack } from "react-bootstrap";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { TRANSMUTE_COST, TRANSMUTE_YIELD } from "@neverquest/data/caravan";
-import IconGem from "@neverquest/icons/gem.svg?react";
+import { GEMS } from "@neverquest/data/items";
 import { GEM_TYPES, type Gem } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
@@ -17,7 +17,7 @@ export function SelectGem({
 }) {
   return (
     <Stack direction="horizontal" gap={1}>
-      <IconDisplay Icon={IconGem} tooltip="Gem">
+      <IconDisplay Icon={GEMS[gem].Icon} tooltip="Gem">
         <FormSelect
           onChange={({ target: { value } }) => {
             onSelect(value as Gem);

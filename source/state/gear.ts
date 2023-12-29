@@ -1,11 +1,10 @@
-import { selector, selectorFamily } from "recoil";
+import { atom, selector, selectorFamily } from "recoil";
 
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import { GEMS_MAXIMUM, GEM_FITTING_COST_RANGE } from "@neverquest/data/items";
-import { inventory } from "@neverquest/state/inventory";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { essence } from "@neverquest/state/resources";
 import type { Armor, Shield, Weapon } from "@neverquest/types";
-import { isArmor, isShield, isWeapon } from "@neverquest/types/type-guards";
 import type { Gear } from "@neverquest/types/unions";
 import {
   getFromRange,
@@ -19,19 +18,13 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 export const armor = withStateKey("armor", (key) =>
   selector<Armor | typeof ARMOR_NONE>({
     get: ({ get }) => {
-      const equippedArmor = get(inventory).find((item) => {
-        if (isArmor(item)) {
-          return item.isEquipped;
-        }
+      const equippedArmorValue = get(equippedArmor);
 
-        return;
-      });
-
-      if (equippedArmor === undefined) {
+      if (equippedArmorValue === undefined) {
         return ARMOR_NONE;
       }
 
-      return equippedArmor as Armor;
+      return equippedArmorValue;
     },
     key,
   }),
@@ -92,19 +85,13 @@ export const elementalEffects = withStateKey("elementalEffects", (key) =>
 export const shield = withStateKey("shield", (key) =>
   selector<Shield | typeof SHIELD_NONE>({
     get: ({ get }) => {
-      const equippedShield = get(inventory).find((item) => {
-        if (isShield(item)) {
-          return item.isEquipped;
-        }
+      const equippedShieldValue = get(equippedShield);
 
-        return;
-      });
-
-      if (equippedShield === undefined) {
+      if (equippedShieldValue === undefined) {
         return SHIELD_NONE;
       }
 
-      return equippedShield as Shield;
+      return equippedShieldValue;
     },
     key,
   }),
@@ -113,20 +100,40 @@ export const shield = withStateKey("shield", (key) =>
 export const weapon = withStateKey("weapon", (key) =>
   selector<Weapon | typeof WEAPON_NONE>({
     get: ({ get }) => {
-      const equippedWeapon = get(inventory).find((item) => {
-        if (isWeapon(item)) {
-          return item.isEquipped;
-        }
+      const equippedWeaponValue = get(equippedWeapon);
 
-        return;
-      });
-
-      if (equippedWeapon === undefined) {
+      if (equippedWeaponValue === undefined) {
         return WEAPON_NONE;
       }
 
-      return equippedWeapon as Weapon;
+      return equippedWeaponValue;
     },
+    key,
+  }),
+);
+
+// ATOMS
+
+export const equippedArmor = withStateKey("equippedArmor", (key) =>
+  atom<Armor | undefined>({
+    default: undefined,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
+export const equippedShield = withStateKey("equippedShield", (key) =>
+  atom<Shield | undefined>({
+    default: undefined,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
+export const equippedWeapon = withStateKey("equippedWeapon", (key) =>
+  atom<Weapon | undefined>({
+    default: undefined,
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );

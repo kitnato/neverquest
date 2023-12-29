@@ -14,26 +14,30 @@ import { InfusionInspect } from "@neverquest/components/Inventory/Inheritable/In
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
+import { equippedArmor, equippedShield, equippedWeapon } from "@neverquest/state/gear";
 import { equippableItems, inventory } from "@neverquest/state/inventory";
+import type { Armor, Shield, Weapon } from "@neverquest/types";
 import {
-  isArmor,
   isConsumableItem,
   isGearItem,
   isGemItem,
   isInfusableItem,
-  isShield,
   isTrinketItem,
-  isWeapon,
 } from "@neverquest/types/type-guards";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function Inventory() {
   const equippableItemsValue = useRecoilValue(equippableItems);
+  const equippedArmorValue = useRecoilValue(equippedArmor);
+  const equippedShieldValue = useRecoilValue(equippedShield);
+  const equippedWeaponValue = useRecoilValue(equippedWeapon);
   const inventoryValue = useRecoilValue(inventory);
 
   const toggleEquipGear = useToggleEquipGear();
 
-  const equippedGear = inventoryValue.filter((item) => isGearItem(item) && item.isEquipped);
+  const equippedGear = [equippedWeaponValue, equippedArmorValue, equippedShieldValue].filter(
+    Boolean,
+  ) as (Armor | Shield | Weapon)[];
   const equippedGearIDs = new Set(equippedGear.map(({ ID }) => ID));
   const storedItems = inventoryValue.filter(
     ({ ID, name }) => !equippedGearIDs.has(ID) && name !== "knapsack",
@@ -50,27 +54,25 @@ export function Inventory() {
 
         {equippedGear.length === 0 && <span className="fst-italic">Nothing equipped.</span>}
 
-        {[equippedGear.find(isWeapon), equippedGear.find(isArmor), equippedGear.find(isShield)]
-          .filter(isGearItem)
-          .map((gearItem) => {
-            const { ID } = gearItem;
+        {equippedGear.map((gearItem) => {
+          const { ID } = gearItem;
 
-            return (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                <ItemDisplay isInInventory item={gearItem} />
+          return (
+            <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
+              <ItemDisplay isInInventory item={gearItem} />
 
-                <Button
-                  className="ms-2"
-                  onClick={() => {
-                    toggleEquipGear(gearItem);
-                  }}
-                  variant="outline-dark"
-                >
-                  Unequip
-                </Button>
-              </div>
-            );
-          })}
+              <Button
+                className="ms-2"
+                onClick={() => {
+                  toggleEquipGear(gearItem);
+                }}
+                variant="outline-dark"
+              >
+                Unequip
+              </Button>
+            </div>
+          );
+        })}
       </Stack>
 
       <Stack gap={3}>

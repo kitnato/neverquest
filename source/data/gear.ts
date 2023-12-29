@@ -16,7 +16,7 @@ import type { Armor, GearBase, GeneratorRange, Melee, Shield } from "@neverquest
 import type { SVGIcon } from "@neverquest/types/components";
 import type { WeaponAbility } from "@neverquest/types/unions";
 
-export const ARMOR_NONE: Omit<Armor, "gearClass" | "isEquipped" | "price"> = {
+export const ARMOR_NONE: Omit<Armor, "gearClass" | "price"> = {
   deflection: 0,
   gems: [],
   ID: "ARMOR_NONE",
@@ -90,7 +90,7 @@ export const ARMOR_SPECIFICATIONS: Record<
 
 export const GEAR_LEVEL_RANGE_MAXIMUM = 3;
 
-export const SHIELD_NONE: Omit<Shield, "gearClass" | "isEquipped" | "price"> = {
+export const SHIELD_NONE: Omit<Shield, "gearClass" | "price"> = {
   block: 0,
   gems: [],
   ID: "SHIELD_NONE",
@@ -178,7 +178,7 @@ export const WEAPON_BASE: GearBase & {
     { maximum: 25, minimum: 22 },
   ],
   damage: [
-    { maximum: 13, minimum: 12 },
+    { maximum: 15, minimum: 14 },
     { maximum: 800, minimum: 750 },
   ],
   price: { maximum: 7000, minimum: 1 },
@@ -213,7 +213,7 @@ export const WEAPON_MODIFIER = {
   },
 };
 
-export const WEAPON_NONE: Omit<Melee, "isEquipped" | "price"> = {
+export const WEAPON_NONE: Omit<Melee, "price"> = {
   abilityChance: 0,
   damage: 10,
   gearClass: "blunt",

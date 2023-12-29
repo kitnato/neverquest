@@ -40,7 +40,6 @@ export function generateArmor({
     gearClass,
     gems: [],
     ID: nanoid(),
-    isEquipped: false,
     level,
     name: generateArtifact({
       query: {
@@ -82,7 +81,6 @@ export function generateMeleeWeapon({
     gems: [],
     grip,
     ID: nanoid(),
-    isEquipped: false,
     level,
     name: generateArtifact({
       query: {
@@ -121,7 +119,6 @@ export function generateRangedWeapon({
     gearClass,
     gems: [],
     ID: nanoid(),
-    isEquipped: false,
     level,
     name: generateArtifact({
       query: {
@@ -158,7 +155,6 @@ export function generateShield({
     gearClass,
     gems: [],
     ID: nanoid(),
-    isEquipped: false,
     level,
     name: generateArtifact({
       query: {

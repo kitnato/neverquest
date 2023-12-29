@@ -4,25 +4,28 @@ import { useRecoilValue } from "recoil";
 import { SellItem } from "@neverquest/components/Caravan/Merchant/SellItem";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
+import { equippedArmor, equippedShield, equippedWeapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
+import type { Armor, Shield, Weapon } from "@neverquest/types";
 import {
-  isArmor,
   isConsumableItem,
   isGearItem,
   isGemItem,
   isInheritableItem,
-  isShield,
-  isWeapon,
 } from "@neverquest/types/type-guards";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function SellItems() {
+  const equippedArmorValue = useRecoilValue(equippedArmor);
+  const equippedShieldValue = useRecoilValue(equippedShield);
+  const equippedWeaponValue = useRecoilValue(equippedWeapon);
   const inventoryValue = useRecoilValue(inventory);
 
-  const equippedGear = inventoryValue.filter((item) => isGearItem(item) && item.isEquipped);
-  const storedItems = inventoryValue.filter(
-    (item) => !isGearItem(item) || (isGearItem(item) && !item.isEquipped),
-  );
+  const equippedGear = [equippedWeaponValue, equippedArmorValue, equippedShieldValue].filter(
+    Boolean,
+  ) as (Armor | Shield | Weapon)[];
+  const equippedGearIDs = new Set(equippedGear.map(({ ID }) => ID));
+  const storedItems = inventoryValue.filter((item) => !equippedGearIDs.has(item.ID));
 
   return (
     <Stack gap={3}>
@@ -43,21 +46,17 @@ export function SellItems() {
               </div>
             ))}
 
-          {[equippedGear.find(isWeapon), equippedGear.find(isArmor), equippedGear.find(isShield)]
-            .filter(isGearItem)
-            .map((gearItem) => {
-              const { ID, isEquipped } = gearItem;
+          {equippedGear.map((gearItem) => {
+            return (
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={gearItem.ID}>
+                <Stack direction="horizontal" gap={1}>
+                  <ItemDisplay isEquipped isInInventory item={gearItem} />
+                </Stack>
 
-              return (
-                <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                  <Stack direction="horizontal" gap={1}>
-                    <ItemDisplay isEquipped={isEquipped} isInInventory item={gearItem} />
-                  </Stack>
-
-                  <SellItem item={gearItem} />
-                </div>
-              );
-            })}
+                <SellItem item={gearItem} />
+              </div>
+            );
+          })}
 
           {storedItems
             .filter(isInheritableItem)

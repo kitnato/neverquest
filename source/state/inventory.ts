@@ -2,17 +2,18 @@ import { atom, selector, selectorFamily } from "recoil";
 
 import { ENCUMBRANCE_CAPACITY } from "@neverquest/data/items";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { armor, shield, weapon } from "@neverquest/state/gear";
 import { knapsackCapacity } from "@neverquest/state/items";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { ConsumableItem, InheritableItem, InventoryItem } from "@neverquest/types";
 import {
   isArmor,
   isConsumableItem,
-  isGearItem,
   isInheritableItem,
   isMelee,
   isRanged,
   isShield,
+  isWeapon,
 } from "@neverquest/types/type-guards";
 import type { Consumable, Infusable, Trinket } from "@neverquest/types/unions";
 import { withStateKey } from "@neverquest/utilities/helpers";
@@ -52,7 +53,10 @@ export const equippableItems = withStateKey("equippableItems", (key) =>
       const currentEquippableItems: Record<string, boolean> = {};
 
       for (const item of get(inventory)) {
-        let canEquip = isGearItem(item) ? !item.isEquipped : false;
+        let canEquip =
+          (isArmor(item) && get(armor).ID !== item.ID) ||
+          (isWeapon(item) && get(weapon).ID !== item.ID) ||
+          (isShield(item) && get(shield).ID !== item.ID);
 
         if (isArmor(item) && item.gearClass === "heavy") {
           canEquip = get(isSkillAcquired("armorcraft"));

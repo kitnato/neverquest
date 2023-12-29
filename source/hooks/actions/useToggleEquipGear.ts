@@ -1,7 +1,14 @@
 import { useRecoilCallback } from "recoil";
 
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { inventory } from "@neverquest/state/inventory";
+import {
+  armor,
+  equippedArmor,
+  equippedShield,
+  equippedWeapon,
+  shield,
+  weapon,
+} from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { questProgress } from "@neverquest/state/quests";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -9,10 +16,10 @@ import { isTraitAcquired } from "@neverquest/state/traits";
 import type { GearItem } from "@neverquest/types";
 import {
   isArmor,
-  isGearItem,
   isMelee,
   isRanged,
   isShield,
+  isUnshielded,
   isWeapon,
 } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -25,15 +32,17 @@ export function useToggleEquipGear() {
       (gearItem: GearItem) => {
         const get = getSnapshotGetter(snapshot);
 
-        const { gearClass, ID, isEquipped, staminaCost } = gearItem;
+        const shieldValue = get(shield);
+        const weaponValue = get(weapon);
 
+        const { gearClass, ID, staminaCost } = gearItem;
         const isWeaponRanged = isRanged(gearItem);
         // eslint-disable-next-line unicorn/consistent-destructuring
         const isWeaponTwoHanded = isMelee(gearItem) && gearItem.grip === "two-handed";
 
         set(isShowing("statistics"), true);
 
-        if (isArmor(gearItem) && !isEquipped) {
+        if (isArmor(gearItem)) {
           if (gearClass === "heavy" && !get(isSkillAcquired("armorcraft"))) {
             return;
           }
@@ -44,7 +53,7 @@ export function useToggleEquipGear() {
           progressQuest({ quest: "equippingArmor" });
         }
 
-        if (isShield(gearItem) && !isEquipped) {
+        if (isShield(gearItem)) {
           if (gearClass === "tower" && !get(isSkillAcquired("shieldcraft"))) {
             return;
           }
@@ -56,7 +65,7 @@ export function useToggleEquipGear() {
           progressQuest({ quest: "equippingShield" });
         }
 
-        if (isWeapon(gearItem) && !isEquipped) {
+        if (isWeapon(gearItem)) {
           if (isWeaponTwoHanded && !get(isSkillAcquired("siegecraft"))) {
             return;
           }
@@ -82,45 +91,44 @@ export function useToggleEquipGear() {
 
         reset(questProgress("survivingNoGear"));
 
-        set(inventory, (currentInventory) =>
-          currentInventory.map((item) => {
-            if (isGearItem(item)) {
-              if (item.ID === ID) {
-                return {
-                  ...item,
-                  isEquipped: !item.isEquipped,
-                };
-              } else if (
-                // Equipping a ranged or two-handed weapon while a shield is equipped.
-                ((isWeaponRanged || isWeaponTwoHanded) &&
-                  !isEquipped &&
-                  isShield(item) &&
-                  item.isEquipped) ||
-                // Equipping a shield while a ranged or two-handed weapon is equipped.
-                (isShield(gearItem) &&
-                  !isEquipped &&
-                  ((isMelee(item) &&
-                    item.grip === "two-handed" &&
-                    !get(isTraitAcquired("colossus"))) ||
-                    isRanged(item)) &&
-                  item.isEquipped) ||
-                // Equipping in an already-occupied slot.
-                (item.isEquipped &&
-                  !isEquipped &&
-                  ((isArmor(item) && isArmor(gearItem)) ||
-                    (isShield(item) && isShield(gearItem)) ||
-                    (isWeapon(item) && isWeapon(gearItem))))
-              ) {
-                return {
-                  ...item,
-                  isEquipped: false,
-                };
-              }
-            }
+        if (isArmor(gearItem)) {
+          if (ID === get(armor).ID) {
+            reset(equippedArmor);
+          } else {
+            set(equippedArmor, gearItem);
+          }
+        }
 
-            return item;
-          }),
-        );
+        if (isShield(gearItem)) {
+          if (ID === shieldValue.ID) {
+            reset(equippedShield);
+          } else {
+            set(equippedShield, gearItem);
+          }
+
+          // Equipping a shield while a ranged or two-handed weapon is equipped un-equips the weapon (unless it's two-handed and the colossus trait is acquired).
+          if (
+            (isMelee(weaponValue) &&
+              weaponValue.grip === "two-handed" &&
+              !get(isTraitAcquired("colossus"))) ||
+            isRanged(weaponValue)
+          ) {
+            reset(equippedWeapon);
+          }
+        }
+
+        if (isWeapon(gearItem)) {
+          if (ID === weaponValue.ID) {
+            reset(equippedWeapon);
+          } else {
+            set(equippedWeapon, gearItem);
+          }
+
+          // Equipping a ranged or two-handed weapon while a shield is equipped un-equips the shield.
+          if ((isWeaponRanged || isWeaponTwoHanded) && !isUnshielded(shieldValue)) {
+            reset(equippedShield);
+          }
+        }
       },
     [progressQuest],
   );

@@ -39,7 +39,7 @@ export function OffhandEquipped() {
         Icon={isUnshielded(shieldValue) ? IconFist : IconShield}
         tooltip="Equipped shield"
       >
-        <ShieldName shield={shieldValue} />
+        <ShieldName overlayPlacement="top" shield={shieldValue} />
       </IconDisplay>
     );
   }

@@ -40,7 +40,7 @@ export function SellItems() {
             .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
             .map((gearItem) => (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={gearItem.ID}>
-                <ItemDisplay isInInventory item={gearItem} />
+                <ItemDisplay item={gearItem} />
 
                 <SellItem item={gearItem} />
               </div>
@@ -50,7 +50,7 @@ export function SellItems() {
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={gearItem.ID}>
                 <Stack direction="horizontal" gap={1}>
-                  <ItemDisplay isEquipped isInInventory item={gearItem} />
+                  <ItemDisplay isEquipped item={gearItem} />
                 </Stack>
 
                 <SellItem item={gearItem} />

@@ -59,7 +59,7 @@ export function Inventory() {
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-              <ItemDisplay isInInventory item={gearItem} />
+              <ItemDisplay item={gearItem} />
 
               <Button
                 className="ms-2"
@@ -89,7 +89,7 @@ export function Inventory() {
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                <ItemDisplay isInInventory item={gearItem} />
+                <ItemDisplay item={gearItem} />
 
                 <Stack className="ms-2" direction="horizontal" gap={3}>
                   <OverlayTrigger
@@ -123,7 +123,7 @@ export function Inventory() {
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                <ItemDisplay isInInventory item={trinketItem} />
+                <ItemDisplay item={trinketItem} />
 
                 <Stack className="ms-2" direction="horizontal" gap={3}>
                   {(() => {
@@ -156,7 +156,7 @@ export function Inventory() {
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                <ItemDisplay isInInventory item={infusableItem} />
+                <ItemDisplay item={infusableItem} />
 
                 <Stack className="ms-2" direction="horizontal" gap={3}>
                   <InfusionInspect infusable={name} />

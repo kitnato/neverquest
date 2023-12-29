@@ -1,3 +1,5 @@
+import type { Placement } from "react-bootstrap/esm/types";
+
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ArmorName } from "@neverquest/components/Inventory/Armor/ArmorName";
 import { InfusionLevelDisplay } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionLevelDisplay";
@@ -24,13 +26,13 @@ import {
 export function ItemDisplay({
   amount,
   isEquipped,
-  isInInventory,
   item,
+  overlayPlacement = "right",
 }: {
   amount?: number;
   isEquipped?: boolean;
-  isInInventory?: boolean;
   item: InventoryItem;
+  overlayPlacement?: Placement;
 }) {
   if (isArmor(item)) {
     return (
@@ -39,7 +41,7 @@ export function ItemDisplay({
         Icon={IconArmor}
         tooltip="Armor"
       >
-        <ArmorName armor={item} isInInventory={isInInventory} />
+        <ArmorName armor={item} overlayPlacement={overlayPlacement} />
       </IconDisplay>
     );
   }
@@ -73,7 +75,7 @@ export function ItemDisplay({
         Icon={IconShield}
         tooltip="Shield"
       >
-        <ShieldName isInInventory={isInInventory} shield={item} />
+        <ShieldName overlayPlacement={overlayPlacement} shield={item} />
       </IconDisplay>
     );
   }
@@ -99,7 +101,7 @@ export function ItemDisplay({
         Icon={isMelee(item) ? IconMelee : IconRanged}
         tooltip="Weapon"
       >
-        <WeaponName isInInventory={isInInventory} weapon={item} />
+        <WeaponName overlayPlacement={overlayPlacement} weapon={item} />
       </IconDisplay>
     );
   }

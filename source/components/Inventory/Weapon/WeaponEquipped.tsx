@@ -24,7 +24,7 @@ export function WeaponEquipped() {
         iconProps={{ isMirrored: isWeaponUnarmed }}
         tooltip="Equipped weapon"
       >
-        <WeaponName weapon={weaponValue} />
+        <WeaponName overlayPlacement="top" weapon={weaponValue} />
       </IconDisplay>
     );
   }

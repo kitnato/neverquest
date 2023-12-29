@@ -19,7 +19,7 @@ export function ItemsInherited() {
         <span className="fst-italic">{LABEL_NONE}</span>
       ) : (
         ownedInheritableItems.map((inheritableItem) => (
-          <ItemDisplay isInInventory item={inheritableItem} key={inheritableItem.ID} />
+          <ItemDisplay item={inheritableItem} key={inheritableItem.ID} />
         ))
       )}
     </Stack>

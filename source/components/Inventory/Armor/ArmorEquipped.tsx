@@ -20,7 +20,7 @@ export function ArmorEquipped() {
         Icon={isUnarmored(armorValue) ? IconArmorNone : IconArmor}
         tooltip="Equipped armor"
       >
-        <ArmorName armor={armorValue} />
+        <ArmorName armor={armorValue} overlayPlacement="top" />
       </IconDisplay>
     );
   }

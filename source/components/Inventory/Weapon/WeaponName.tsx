@@ -1,4 +1,5 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
+import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -26,10 +27,10 @@ import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { getDamagePerRate } from "@neverquest/utilities/getters";
 
 export function WeaponName({
-  isInInventory = false,
+  overlayPlacement,
   weapon,
 }: {
-  isInInventory?: boolean;
+  overlayPlacement: Placement;
   weapon: Weapon | typeof WEAPON_NONE;
 }) {
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
@@ -248,7 +249,7 @@ export function WeaponName({
           </PopoverBody>
         </Popover>
       }
-      placement={isInInventory ? "right" : "top"}
+      placement={overlayPlacement}
     >
       <span>{name}&nbsp;</span>
     </OverlayTrigger>

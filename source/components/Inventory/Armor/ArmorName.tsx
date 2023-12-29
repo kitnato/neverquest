@@ -1,4 +1,5 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
+import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -21,10 +22,10 @@ import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ArmorName({
   armor,
-  isInInventory = false,
+  overlayPlacement,
 }: {
   armor: Armor | typeof ARMOR_NONE;
-  isInInventory?: boolean;
+  overlayPlacement: Placement;
 }) {
   const armorEquippedValue = useRecoilValue(armorEquipped);
   const isShowingDeflection = useRecoilValue(isShowing("deflection"));
@@ -189,7 +190,7 @@ export function ArmorName({
           </PopoverBody>
         </Popover>
       }
-      placement={isInInventory ? "right" : "top"}
+      placement={overlayPlacement}
     >
       <span>{name}&nbsp;</span>
     </OverlayTrigger>

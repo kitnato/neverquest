@@ -1,4 +1,5 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
+import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -21,10 +22,10 @@ import { isUnshielded } from "@neverquest/types/type-guards";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ShieldName({
-  isInInventory = false,
+  overlayPlacement,
   shield,
 }: {
-  isInInventory?: boolean;
+  overlayPlacement: Placement;
   shield: Shield | typeof SHIELD_NONE;
 }) {
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
@@ -171,7 +172,7 @@ export function ShieldName({
           </PopoverBody>
         </Popover>
       }
-      placement={isInInventory ? "right" : "top"}
+      placement={overlayPlacement}
     >
       <span>{name}&nbsp;</span>
     </OverlayTrigger>

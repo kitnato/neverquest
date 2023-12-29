@@ -24,7 +24,7 @@ export function BuybackItems() {
     return (
       <Accordion
         activeKey={expandedBuybackValue ? ACCORDION_EVENT_KEY : undefined}
-        onClick={() => {
+        onSelect={() => {
           setExpandBuyback((isExpanded) => !isExpanded);
         }}
       >

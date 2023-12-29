@@ -19,7 +19,7 @@ export function Masteries() {
     return (
       <Accordion
         activeKey={expandedMasteriesValue ? ACCORDION_EVENT_KEY : undefined}
-        onClick={() => {
+        onSelect={() => {
           setExpandedMasteries((isExpanded) => !isExpanded);
         }}
       >

@@ -38,14 +38,14 @@ export function SellItem({ item }: { item: InventoryItem }) {
   return (
     <Stack className="ms-2" direction="horizontal" gap={3}>
       <IconDisplay Icon={IconEssence} tooltip="Value">
-        {formatNumber({ value: getSellPrice(item) })}
+        {formatNumber({ value: getSellPrice({ item }) })}
       </IconDisplay>
 
       <Button
         onClick={() => {
           const { ID } = item;
 
-          transactEssence(getSellPrice(item));
+          transactEssence(getSellPrice({ item }));
 
           if (isGearItem(item) && equippedGearIDs.has(ID)) {
             toggleEquipGear(item);

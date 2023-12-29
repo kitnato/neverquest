@@ -38,7 +38,6 @@ export function generateArmor({
   return {
     deflection: deflection === undefined ? 0 : getFromRange(deflection),
     gearClass,
-    gems: [],
     ID: nanoid(),
     level,
     name: generateArtifact({
@@ -78,7 +77,6 @@ export function generateMeleeWeapon({
     abilityChance: getFromRange(abilityChance),
     damage: getFromRange(damage),
     gearClass,
-    gems: [],
     grip,
     ID: nanoid(),
     level,
@@ -117,7 +115,6 @@ export function generateRangedWeapon({
     ammunitionCost: getFromRange(ammunitionCost),
     damage: getFromRange(damage),
     gearClass,
-    gems: [],
     ID: nanoid(),
     level,
     name: generateArtifact({
@@ -153,7 +150,6 @@ export function generateShield({
   return {
     block: getFromRange(block),
     gearClass,
-    gems: [],
     ID: nanoid(),
     level,
     name: generateArtifact({

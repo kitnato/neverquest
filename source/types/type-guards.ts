@@ -18,8 +18,10 @@ import {
   CONQUEST_TYPES,
   CONSUMABLE_TYPES,
   type Conquest,
+  GEAR_TYPES,
   GEM_TYPES,
   GRIP_TYPES,
+  type Gear,
   INFUSABLE_TYPES,
   ROUTINE_TYPES,
   type Routine,
@@ -40,6 +42,10 @@ export function isConsumableItem(thing: unknown): thing is ConsumableItem {
     typeof thing.name === "string" &&
     new Set<string>(CONSUMABLE_TYPES).has(thing.name)
   );
+}
+
+export function isGear(thing: unknown): thing is Gear {
+  return typeof thing === "string" && new Set<string>(GEAR_TYPES).has(thing);
 }
 
 export function isGearItem(thing: unknown): thing is GearItem {

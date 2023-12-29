@@ -34,12 +34,14 @@ import {
   GEMS_MAXIMUM,
   GEM_BASE,
   GEM_ENHANCEMENT_RANGE,
+  GEM_FITTING_COST_RANGE,
 } from "@neverquest/data/items";
 import { QUESTS } from "@neverquest/data/quests";
 import type {
   Armor,
   GearItem,
   GearItemUnequipped,
+  GemItem,
   GeneratorRange,
   InventoryItem,
   QuestData,
@@ -138,16 +140,34 @@ export function getDamagePerTick({
   return Math.ceil((damage / duration) * (duration / ticks));
 }
 
-export function getGearElementalEffects(
-  gear: Armor | Weapon | typeof ARMOR_NONE | typeof WEAPON_NONE,
-): Record<Elemental, { damage: number; duration: number }>;
-export function getGearElementalEffects(
-  gear: Shield | typeof SHIELD_NONE,
-): Record<Elemental, number>;
-export function getGearElementalEffects(
-  gear: GearItem | GearItemUnequipped,
-): Record<Elemental, { damage: number; duration: number }> | Record<Elemental, number>;
-export function getGearElementalEffects(gear: GearItem | GearItemUnequipped) {
+export function getGearElementalEffects({
+  gear,
+  gems,
+}: {
+  gear: Armor | Weapon | typeof ARMOR_NONE | typeof WEAPON_NONE;
+  gems: GemItem[];
+}): Record<Elemental, { damage: number; duration: number }>;
+export function getGearElementalEffects({
+  gear,
+  gems,
+}: {
+  gear: Shield | typeof SHIELD_NONE;
+  gems: GemItem[];
+}): Record<Elemental, number>;
+export function getGearElementalEffects({
+  gear,
+  gems,
+}: {
+  gear: GearItem | GearItemUnequipped;
+  gems: GemItem[];
+}): Record<Elemental, { damage: number; duration: number }> | Record<Elemental, number>;
+export function getGearElementalEffects({
+  gear,
+  gems,
+}: {
+  gear: GearItem | GearItemUnequipped;
+  gems: GemItem[];
+}) {
   if (isArmor(gear) || isWeapon(gear)) {
     const effects = {
       fire: { damage: 0, duration: 0 },
@@ -156,7 +176,7 @@ export function getGearElementalEffects(gear: GearItem | GearItemUnequipped) {
     };
     const effector = isArmor(gear) ? gear.protection : gear.damage;
 
-    for (const { amount, item } of stackItems(gear.gems)) {
+    for (const { amount, item } of stackItems(gems)) {
       const { elemental } = GEMS[item.name];
       const { damage, duration } = ELEMENTALS[elemental];
 
@@ -176,7 +196,7 @@ export function getGearElementalEffects(gear: GearItem | GearItemUnequipped) {
 
   const effects = { fire: 0, ice: 0, lightning: 0 };
 
-  for (const { amount, item } of stackItems(gear.gems)) {
+  for (const { amount, item } of stackItems(gems)) {
     const { elemental } = GEMS[item.name];
 
     effects[elemental] = getFromRange({
@@ -204,6 +224,10 @@ export function getGearPrice({
   price: GeneratorRange;
 }) {
   return Math.round((price.minimum + price.maximum * factor) * modifier);
+}
+
+export function getGemFittingCost(fitted: number) {
+  return getFromRange({ factor: fitted / (GEMS_MAXIMUM - 1), ...GEM_FITTING_COST_RANGE });
 }
 
 export function getLinearMapping({ offset, stage }: { offset: number; stage: number }) {
@@ -336,23 +360,19 @@ function getRomanNumeral(value: number) {
   return currentNumeral;
 }
 
-export function getSellPrice(item: InventoryItem) {
+export function getSellPrice({ gemsFitted, item }: { gemsFitted?: number; item: InventoryItem }) {
   const { price } = item;
   let supplement = 0;
 
-  if (isGearItem(item)) {
-    const {
-      gems: { length },
-    } = item;
-
-    if (length > 0) {
-      supplement +=
-        getSellPrice({
+  if (isGearItem(item) && gemsFitted !== undefined && gemsFitted > 0) {
+    supplement +=
+      getSellPrice({
+        item: {
           ...GEM_BASE,
           ID: nanoid(),
           name: "ruby",
-        }) * length;
-    }
+        },
+      }) * gemsFitted;
   }
 
   return Math.ceil(price / 2) + supplement;

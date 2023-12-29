@@ -43,7 +43,7 @@ export function Damage() {
 
   const progressQuest = useProgressQuest();
 
-  const { damage: weaponDamage, gems } = weaponValue;
+  const { damage: weaponDamage } = weaponValue;
 
   useDeltaText({
     delta: "damage",
@@ -81,7 +81,7 @@ export function Damage() {
                     </td>
                   </tr>
 
-                  {gems.length > 0 && <ElementalDetails slot="weapon" />}
+                  <ElementalDetails slot="weapon" />
 
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>

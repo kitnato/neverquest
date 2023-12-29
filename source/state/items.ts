@@ -9,6 +9,7 @@ import {
 } from "@neverquest/data/items";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { essence } from "@neverquest/state/resources";
+import type { GemItem } from "@neverquest/types";
 import type { Infusable } from "@neverquest/types/unions";
 import { getFromRange, getSigmoid, getTriangular } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
@@ -64,6 +65,14 @@ export const ammunition = withStateKey("ammunition", (key) =>
 export const ammunitionCapacity = withStateKey("ammunitionCapacity", (key) =>
   atom({
     default: AMMUNITION_CAPACITY,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
+export const gems = withStateKey("gems", (key) =>
+  atomFamily<GemItem[], string>({
+    default: [],
     effects: [handleLocalStorage({ key })],
     key,
   }),

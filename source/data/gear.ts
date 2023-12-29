@@ -18,7 +18,6 @@ import type { WeaponAbility } from "@neverquest/types/unions";
 
 export const ARMOR_NONE: Omit<Armor, "gearClass" | "price"> = {
   deflection: 0,
-  gems: [],
   ID: "ARMOR_NONE",
   level: 1,
   name: "Unarmored",
@@ -92,7 +91,6 @@ export const GEAR_LEVEL_RANGE_MAXIMUM = 3;
 
 export const SHIELD_NONE: Omit<Shield, "gearClass" | "price"> = {
   block: 0,
-  gems: [],
   ID: "SHIELD_NONE",
   level: 1,
   name: "Unshielded",
@@ -217,7 +215,6 @@ export const WEAPON_NONE: Omit<Melee, "price"> = {
   abilityChance: 0,
   damage: 10,
   gearClass: "blunt",
-  gems: [],
   grip: "one-handed",
   ID: "WEAPON_NONE",
   level: 1,

@@ -1,16 +1,10 @@
-import { atom, selector, selectorFamily } from "recoil";
+import { atom, selector } from "recoil";
 
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
-import { GEMS_MAXIMUM, GEM_FITTING_COST_RANGE } from "@neverquest/data/items";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { essence } from "@neverquest/state/resources";
+import { gems } from "@neverquest/state/items";
 import type { Armor, Shield, Weapon } from "@neverquest/types";
-import type { Gear } from "@neverquest/types/unions";
-import {
-  getFromRange,
-  getGearElementalEffects,
-  getTotalElementalEffects,
-} from "@neverquest/utilities/getters";
+import { getGearElementalEffects, getTotalElementalEffects } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -30,34 +24,25 @@ export const armor = withStateKey("armor", (key) =>
   }),
 );
 
-export const canApplyGem = withStateKey("canApplyGem", (key) =>
-  selectorFamily({
-    get:
-      (gear: Gear) =>
-      ({ get }) => {
-        const { length } =
-          gear === "armor"
-            ? get(armor).gems
-            : gear === "shield"
-              ? get(shield).gems
-              : get(weapon).gems;
-
-        return (
-          length < GEMS_MAXIMUM &&
-          getFromRange({ factor: (length - 1) / (GEMS_MAXIMUM - 1), ...GEM_FITTING_COST_RANGE }) <=
-            get(essence)
-        );
-      },
-    key,
-  }),
-);
-
 export const elementalEffects = withStateKey("elementalEffects", (key) =>
   selector({
     get: ({ get }) => {
-      const armorEffects = getGearElementalEffects(get(armor));
-      const shieldEffects = getGearElementalEffects(get(shield));
-      const weaponEffects = getGearElementalEffects(get(weapon));
+      const armorValue = get(armor);
+      const shieldValue = get(shield);
+      const weaponValue = get(weapon);
+
+      const armorEffects = getGearElementalEffects({
+        gear: armorValue,
+        gems: get(gems(armorValue.ID)),
+      });
+      const shieldEffects = getGearElementalEffects({
+        gear: shieldValue,
+        gems: get(gems(shieldValue.ID)),
+      });
+      const weaponEffects = getGearElementalEffects({
+        gear: weaponValue,
+        gems: get(gems(weaponValue.ID)),
+      });
 
       return {
         armor: {

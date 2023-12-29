@@ -1,40 +1,84 @@
 import { Dropdown, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_MAXIMUM } from "@neverquest/data/general";
-import { GEMS_MAXIMUM, GEM_FITTING_COST_RANGE } from "@neverquest/data/items";
-import { useApplyGem } from "@neverquest/hooks/actions/useApplyGem";
+import { GEMS_MAXIMUM } from "@neverquest/data/items";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
-import { armor, canApplyGem, shield, weapon } from "@neverquest/state/gear";
+import { armor, shield, weapon } from "@neverquest/state/gear";
+import { inventory } from "@neverquest/state/inventory";
+import { gems } from "@neverquest/state/items";
+import { essence } from "@neverquest/state/resources";
 import type { GemItem } from "@neverquest/types";
-import { GEAR_TYPES, type Gear } from "@neverquest/types/unions";
+import { isGear } from "@neverquest/types/type-guards";
+import { GEAR_TYPES } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
-import { getFromRange } from "@neverquest/utilities/getters";
+import { getGemFittingCost } from "@neverquest/utilities/getters";
 
 export function ApplyGem({ gem }: { gem: GemItem }) {
+  const armorValue = useRecoilValue(armor);
+  const shieldValue = useRecoilValue(shield);
+  const weaponValue = useRecoilValue(weapon);
+  const essenceValue = useRecoilValue(essence);
+  const setInventory = useSetRecoilState(inventory);
+
+  const [armorGemsValue, setArmorGems] = useRecoilState(gems(armorValue.ID));
+  const [shieldGemsValue, setShieldGems] = useRecoilState(gems(shieldValue.ID));
+  const [weaponGemsValue, setWeaponGems] = useRecoilState(gems(weaponValue.ID));
+
   const gemFitting = {
     armor: {
-      canApply: useRecoilValue(canApplyGem("armor")),
-      gear: useRecoilValue(armor),
+      canApply:
+        armorGemsValue.length < GEMS_MAXIMUM &&
+        getGemFittingCost(armorGemsValue.length) <= essenceValue,
+      gear: armorValue,
+      gemsFitted: armorGemsValue.length,
+      setGems: setArmorGems,
     },
     shield: {
-      canApply: useRecoilValue(canApplyGem("shield")),
-      gear: useRecoilValue(shield),
+      canApply:
+        shieldGemsValue.length < GEMS_MAXIMUM &&
+        getGemFittingCost(shieldGemsValue.length) <= essenceValue,
+      gear: shieldValue,
+      gemsFitted: shieldGemsValue.length,
+      setGems: setShieldGems,
     },
     weapon: {
-      canApply: useRecoilValue(canApplyGem("weapon")),
-      gear: useRecoilValue(weapon),
+      canApply:
+        weaponGemsValue.length < GEMS_MAXIMUM &&
+        getGemFittingCost(weaponGemsValue.length) <= essenceValue,
+      gear: weaponValue,
+      gemsFitted: weaponGemsValue.length,
+      setGems: setWeaponGems,
     },
   };
 
-  const applyGem = useApplyGem();
+  const progressQuest = useProgressQuest();
+  const transactEssence = useTransactEssence();
 
   return (
     <Dropdown
       onSelect={(slot) => {
-        if (slot !== null) {
-          applyGem({ gem, slot: slot as Gear });
+        if (isGear(slot) && gemFitting[slot].canApply) {
+          const { gemsFitted, setGems } = gemFitting[slot];
+
+          setGems((currentGems) => [...currentGems, gem]);
+          setInventory((currentInventory) =>
+            currentInventory.filter(({ ID: itemID }) => itemID !== gem.ID),
+          );
+
+          transactEssence(-getGemFittingCost(gemsFitted));
+          progressQuest({ quest: "gemsApplying" });
+
+          if (
+            GEAR_TYPES.filter((gear) => gear !== slot).every(
+              (gear) => gemFitting[gear].gemsFitted > 0,
+            )
+          ) {
+            progressQuest({ quest: "gemsApplyingAll" });
+          }
         }
       }}
     >
@@ -42,11 +86,10 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
 
       <Dropdown.Menu>
         {GEAR_TYPES.map((gearType) => {
-          const { canApply, gear } = gemFitting[gearType];
           const {
-            gems: { length },
-            name,
-          } = gear;
+            canApply,
+            gear: { name },
+          } = gemFitting[gearType];
 
           return (
             <Dropdown.Item disabled={!canApply} eventKey={gearType} key={gearType}>
@@ -58,12 +101,7 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
                     <>
                       <IconImage className="small" Icon={IconEssence} />
 
-                      <span>
-                        {getFromRange({
-                          factor: length / (GEMS_MAXIMUM - 1),
-                          ...GEM_FITTING_COST_RANGE,
-                        })}
-                      </span>
+                      <span>{getGemFittingCost(length)}</span>
                     </>
                   ) : (
                     <span>{LABEL_MAXIMUM}</span>

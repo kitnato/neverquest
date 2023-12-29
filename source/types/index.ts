@@ -43,7 +43,6 @@ export type GearBase = {
 export type GearItem = Armor | Shield | Weapon;
 
 type GearItemBase = ItemBase & {
-  gems: GemItem[];
   level: number;
   name: string;
   price: number;

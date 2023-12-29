@@ -1,29 +1,32 @@
 import { Stack } from "react-bootstrap";
+import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { ELEMENTALS, GEMS, GEMS_MAXIMUM } from "@neverquest/data/items";
+import { gems } from "@neverquest/state/items";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getGearElementalEffects } from "@neverquest/utilities/getters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequipped }) {
-  const { gems } = gearItem;
-  const appliedGems = gems.length;
-  const elementalEffects = getGearElementalEffects(gearItem);
+  const gemsValue = useRecoilValue(gems(gearItem.ID));
 
-  if (appliedGems > 0) {
+  const { length } = gemsValue;
+  const elementalEffects = getGearElementalEffects({ gear: gearItem, gems: gemsValue });
+
+  if (length > 0) {
     return (
       <tr>
         <td className={CLASS_TABLE_CELL_ITALIC}>
-          <span>{`Gems (${appliedGems}/${GEMS_MAXIMUM}):`}</span>
+          <span>{`Gems (${length}/${GEMS_MAXIMUM}):`}</span>
         </td>
 
         <td>
           <Stack gap={1}>
             {stackItems(
-              gems.toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
+              gemsValue.toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
             ).map(({ amount, item }) => {
               const { ID, name } = item;
               const { elemental, Icon: GemIcon } = GEMS[name];

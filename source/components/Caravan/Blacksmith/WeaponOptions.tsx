@@ -31,8 +31,8 @@ import { generateMeleeWeapon } from "@neverquest/utilities/generators";
 import {
   getAffixStructure,
   getGearPrice,
-  getGrowthSigmoid,
   getMeleeRanges,
+  getSigmoid,
 } from "@neverquest/utilities/getters";
 
 export function WeaponOptions() {
@@ -49,7 +49,7 @@ export function WeaponOptions() {
 
   const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
-  const factor = getGrowthSigmoid(weaponLevel);
+  const factor = getSigmoid(weaponLevel);
   const { abilityChance, damage, rate, staminaCost, weight } = getMeleeRanges({
     factor,
     gearClass: weaponClass,

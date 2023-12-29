@@ -36,9 +36,9 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 import {
   getDamagePerRate,
   getFromRange,
-  getGrowthSigmoid,
-  getGrowthTriangular,
   getLinearMapping,
+  getSigmoid,
+  getTriangular,
 } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
@@ -78,7 +78,7 @@ export const blightChance = withStateKey("blightChance", (key) =>
 
       return (
         getFromRange({
-          factor: getGrowthSigmoid(getLinearMapping({ offset: requiredStage, stage: stageValue })),
+          factor: getSigmoid(getLinearMapping({ offset: requiredStage, stage: stageValue })),
           maximum,
           minimum,
         }) * (encounterValue === "boss" ? boss : 1)
@@ -117,7 +117,7 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
     get: ({ get }) => {
       const { attenuation, base, bonus, boss, finality, minimum } = MONSTER_ATTACK_RATE;
       const encounterValue = get(encounter);
-      const factor = getGrowthTriangular(get(stage)) / attenuation;
+      const factor = getTriangular(get(stage)) / attenuation;
 
       if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
         return finality;
@@ -140,7 +140,7 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
     get: ({ get }) => {
       const { attenuation, base, bonus, boss, finality } = MONSTER_DAMAGE;
       const encounterValue = get(encounter);
-      const factor = getGrowthTriangular(get(stage)) / attenuation;
+      const factor = getTriangular(get(stage)) / attenuation;
 
       if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
         return finality;
@@ -188,7 +188,7 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
     get: ({ get }) => {
       const { attenuation, base, bonus, boss, finality } = MONSTER_HEALTH;
       const encounterValue = get(encounter);
-      const factor = getGrowthTriangular(get(stage)) / attenuation;
+      const factor = getTriangular(get(stage)) / attenuation;
 
       if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
         return finality;
@@ -217,7 +217,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
 
       return {
         essence: Math.round(
-          (base + (base * getGrowthTriangular(stageValue)) / attenuation) * 1 +
+          (base + (base * getTriangular(stageValue)) / attenuation) * 1 +
             get(progress) *
               bonus *
               (encounterValue === "boss" ? boss : 1) *
@@ -282,7 +282,7 @@ export const poisonChance = withStateKey("poisonChance", (key) =>
 
       return (
         getFromRange({
-          factor: getGrowthSigmoid(getLinearMapping({ offset: requiredStage, stage: stageValue })),
+          factor: getSigmoid(getLinearMapping({ offset: requiredStage, stage: stageValue })),
           maximum,
           minimum,
         }) * (encounterValue === "boss" ? boss : 1)

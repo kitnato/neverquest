@@ -94,7 +94,7 @@ export function getArmorRanges({ factor, gearClass }: { factor: number; gearClas
 }
 
 export function getAttributePointCost(powerLevel: number) {
-  return getGrowthTriangular(ATTRIBUTE_COST_BASE + powerLevel);
+  return getTriangular(ATTRIBUTE_COST_BASE + powerLevel);
 }
 
 export function getComputedStatistic({
@@ -206,17 +206,6 @@ export function getGearPrice({
   return Math.round((price.minimum + price.maximum * factor) * modifier);
 }
 
-// https://en.wikipedia.org/wiki/Sigmoid_function
-// f(1) = ~0, f(38) = ~0.43, f(50) = ~0.78, f(GROWTH_MAXIMUM) = ~1
-export function getGrowthSigmoid(x: number) {
-  return 1 / (1 + Math.pow(Math.E, -0.13 * (x - 40))) - 0.006;
-}
-
-// https://en.wikipedia.org/wiki/Triangular_number
-export function getGrowthTriangular(x: number) {
-  return (x * (x + 1)) / 2;
-}
-
 export function getLinearMapping({ offset, stage }: { offset: number; stage: number }) {
   return ((stage - offset) * (GROWTH_MAXIMUM - 1)) / (GROWTH_MAXIMUM - offset - 1) + 1;
 }
@@ -225,7 +214,7 @@ export function getProgressReduction(stage: number) {
   const { maximum, minimum } = PROGRESS_REDUCTION;
 
   return getFromRange({
-    factor: getGrowthSigmoid(
+    factor: getSigmoid(
       getLinearMapping({
         offset: RETIREMENT_STAGE_MINIMUM,
         stage,
@@ -380,6 +369,12 @@ export function getShieldRanges({ factor, gearClass }: { factor: number; gearCla
   };
 }
 
+// https://en.wikipedia.org/wiki/Sigmoid_function
+// f(1) = ~0, f(38) = ~0.43, f(50) = ~0.78, f(GROWTH_MAXIMUM) = ~1
+export function getSigmoid(x: number) {
+  return 1 / (1 + Math.pow(Math.E, -0.13 * (x - 40))) - 0.006;
+}
+
 export function getSnapshotGetter({ getLoadable }: Snapshot) {
   return <T>(state: RecoilValue<T>) => getLoadable(state).getValue();
 }
@@ -397,4 +392,9 @@ export function getTotalElementalEffects({
     damage: Math.round(damage + damage * modifier),
     duration: Math.round(duration + duration * modifier),
   };
+}
+
+// https://en.wikipedia.org/wiki/Triangular_number
+export function getTriangular(x: number) {
+  return (x * (x + 1)) / 2;
 }

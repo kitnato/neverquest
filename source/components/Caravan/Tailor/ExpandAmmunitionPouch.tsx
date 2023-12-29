@@ -13,7 +13,7 @@ import { ownedItem } from "@neverquest/state/inventory";
 import { ammunitionCapacity } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import { formatNumber } from "@neverquest/utilities/formatters";
-import { getGrowthSigmoid } from "@neverquest/utilities/getters";
+import { getSigmoid } from "@neverquest/utilities/getters";
 
 export function ExpandAmmunitionPouch() {
   const [ammunitionCapacityValue, setAmmunitionCapacity] = useRecoilState(ammunitionCapacity);
@@ -25,7 +25,7 @@ export function ExpandAmmunitionPouch() {
   if (ownedAmmunitionPouch !== undefined) {
     const { amount, priceMaximum } = TAILORING["ammunition pouch"];
     const price = Math.ceil(
-      priceMaximum * getGrowthSigmoid(ammunitionCapacityValue - (AMMUNITION_CAPACITY - 1)),
+      priceMaximum * getSigmoid(ammunitionCapacityValue - (AMMUNITION_CAPACITY - 1)),
     );
     const isAffordable = price <= essenceValue;
 

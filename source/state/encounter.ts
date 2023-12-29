@@ -5,7 +5,7 @@ import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { ownedItem } from "@neverquest/state/inventory";
-import { getFromRange, getGrowthSigmoid } from "@neverquest/utilities/getters";
+import { getFromRange, getSigmoid } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -69,7 +69,7 @@ export const progressMaximum = withStateKey("progressMaximum", (key) =>
           }
 
           return Math.ceil(
-            getFromRange({ factor: getGrowthSigmoid(get(stage)), maximum, minimum }) *
+            getFromRange({ factor: getSigmoid(get(stage)), maximum, minimum }) *
               (1 - get(progressReduction)),
           );
         }

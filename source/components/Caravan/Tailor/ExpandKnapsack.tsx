@@ -14,7 +14,7 @@ import { ownedItem } from "@neverquest/state/inventory";
 import { knapsackCapacity } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import { formatNumber } from "@neverquest/utilities/formatters";
-import { getGrowthSigmoid } from "@neverquest/utilities/getters";
+import { getSigmoid } from "@neverquest/utilities/getters";
 
 export function ExpandKnapsack() {
   const [knapsackCapacityValue, setKnapsackCapacity] = useRecoilState(knapsackCapacity);
@@ -28,7 +28,7 @@ export function ExpandKnapsack() {
 
   if (ownedItemKnapsack !== undefined) {
     const price = Math.ceil(
-      priceMaximum * getGrowthSigmoid(knapsackCapacityValue - (KNAPSACK_CAPACITY - 1)),
+      priceMaximum * getSigmoid(knapsackCapacityValue - (KNAPSACK_CAPACITY - 1)),
     );
     const isAffordable = price <= essenceValue;
 

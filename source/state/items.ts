@@ -10,7 +10,7 @@ import {
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { essence } from "@neverquest/state/resources";
 import type { Infusable } from "@neverquest/types/unions";
-import { getFromRange, getGrowthSigmoid, getGrowthTriangular } from "@neverquest/utilities/getters";
+import { getFromRange, getSigmoid, getTriangular } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -21,7 +21,7 @@ export const infusionEffect = withStateKey("infusionEffect", (key) =>
       (infusable: Infusable) =>
       ({ get }) =>
         getFromRange({
-          factor: getGrowthSigmoid(get(infusionLevel(infusable))),
+          factor: getSigmoid(get(infusionLevel(infusable))),
           ...INFUSABLES[infusable].item.effect,
         }),
     key,
@@ -33,7 +33,7 @@ export const infusionMaximum = withStateKey("infusionMaximum", (key) =>
     get:
       (infusable: Infusable) =>
       ({ get }) =>
-        getGrowthTriangular(get(infusionLevel(infusable)) + INFUSION_BASE),
+        getTriangular(get(infusionLevel(infusable)) + INFUSION_BASE),
     key,
   }),
 );

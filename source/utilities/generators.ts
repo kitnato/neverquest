@@ -15,10 +15,10 @@ import {
   getArmorRanges,
   getFromRange,
   getGearPrice,
-  getGrowthSigmoid,
   getMeleeRanges,
   getRangedRanges,
   getShieldRanges,
+  getSigmoid,
 } from "@neverquest/utilities/getters";
 
 export function generateArmor({
@@ -29,7 +29,7 @@ export function generateArmor({
   gearClass: ArmorClass;
   level: number;
 }): Armor {
-  const factor = getGrowthSigmoid(level);
+  const factor = getSigmoid(level);
   const { deflection, protection, staminaCost, weight } = getArmorRanges({
     factor,
     gearClass,
@@ -68,7 +68,7 @@ export function generateMeleeWeapon({
   grip: Grip;
   level: number;
 }): Melee {
-  const factor = getGrowthSigmoid(level);
+  const factor = getSigmoid(level);
   const { abilityChance, damage, rate, staminaCost, weight } = getMeleeRanges({
     factor,
     gearClass,
@@ -107,7 +107,7 @@ export function generateRangedWeapon({
   gearClass: WeaponClass;
   level: number;
 }): Ranged {
-  const factor = getGrowthSigmoid(level);
+  const factor = getSigmoid(level);
   const { abilityChance, ammunitionCost, damage, range, rate, staminaCost, weight } =
     getRangedRanges({
       factor,
@@ -147,7 +147,7 @@ export function generateShield({
   gearClass: ShieldClass;
   level: number;
 }): Shield {
-  const factor = getGrowthSigmoid(level);
+  const factor = getSigmoid(level);
   const { block, stagger, staminaCost, weight } = getShieldRanges({
     factor,
     gearClass,

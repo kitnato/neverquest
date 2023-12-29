@@ -8,7 +8,7 @@ import { stage } from "@neverquest/state/encounter";
 import { questsBonus } from "@neverquest/state/quests";
 import type { BlightMagnitude } from "@neverquest/types";
 import type { Reserve } from "@neverquest/types/unions";
-import { getFromRange, getGrowthSigmoid, getLinearMapping } from "@neverquest/utilities/getters";
+import { getFromRange, getLinearMapping, getSigmoid } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -117,7 +117,7 @@ export const poisonLength = withStateKey("poisonLength", (key) =>
       } = POISON;
 
       return getFromRange({
-        factor: getGrowthSigmoid(
+        factor: getSigmoid(
           getLinearMapping({
             offset: requiredStage,
             stage: get(stage),
@@ -140,7 +140,7 @@ export const poisonMagnitude = withStateKey("poisonMagnitude", (key) =>
       } = POISON;
 
       return getFromRange({
-        factor: getGrowthSigmoid(
+        factor: getSigmoid(
           getLinearMapping({
             offset: requiredStage,
             stage: get(stage),

@@ -7,7 +7,7 @@ import { shield, weapon } from "@neverquest/state/gear";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isMelee, isRanged, isUnshielded } from "@neverquest/types/type-guards";
 import { MASTERY_TYPES, type Mastery } from "@neverquest/types/unions";
-import { getComputedStatistic, getGrowthTriangular } from "@neverquest/utilities/getters";
+import { getComputedStatistic, getTriangular } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -70,7 +70,7 @@ export const masteryCost = withStateKey("masteryCost", (key) =>
     get:
       (mastery: Mastery) =>
       ({ get }) =>
-        getGrowthTriangular(get(masteryRank(mastery)) + MASTERY_COST_BASE),
+        getTriangular(get(masteryRank(mastery)) + MASTERY_COST_BASE),
     key,
   }),
 );

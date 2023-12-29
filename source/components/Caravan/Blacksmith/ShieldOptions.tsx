@@ -23,8 +23,8 @@ import { generateShield } from "@neverquest/utilities/generators";
 import {
   getAffixStructure,
   getGearPrice,
-  getGrowthSigmoid,
   getShieldRanges,
+  getSigmoid,
 } from "@neverquest/utilities/getters";
 
 export function ShieldOptions() {
@@ -36,7 +36,7 @@ export function ShieldOptions() {
   const [shieldClass, setShieldClass] = useState<ShieldClass>("small");
   const [shieldLevel, setShieldLevel] = useState(Math.min(stageValue, GROWTH_MAXIMUM));
 
-  const factor = getGrowthSigmoid(shieldLevel);
+  const factor = getSigmoid(shieldLevel);
   const maximumShieldLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GROWTH_MAXIMUM);
   const { block, stagger, staminaCost, weight } = getShieldRanges({
     factor,

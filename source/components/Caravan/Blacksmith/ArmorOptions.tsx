@@ -27,7 +27,7 @@ import {
   getAffixStructure,
   getArmorRanges,
   getGearPrice,
-  getGrowthSigmoid,
+  getSigmoid,
 } from "@neverquest/utilities/getters";
 
 export function ArmorOptions() {
@@ -42,7 +42,7 @@ export function ArmorOptions() {
 
   const progressQuest = useProgressQuest();
 
-  const factor = getGrowthSigmoid(armorLevel);
+  const factor = getSigmoid(armorLevel);
   const { deflection, protection, staminaCost, weight } = getArmorRanges({
     factor,
     gearClass: armorClass,

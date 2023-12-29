@@ -31,8 +31,8 @@ import { generateRangedWeapon } from "@neverquest/utilities/generators";
 import {
   getAffixStructure,
   getGearPrice,
-  getGrowthSigmoid,
   getRangedRanges,
+  getSigmoid,
 } from "@neverquest/utilities/getters";
 
 export function RangedWeaponOptions() {
@@ -49,7 +49,7 @@ export function RangedWeaponOptions() {
 
   const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
-  const factor = getGrowthSigmoid(weaponLevel);
+  const factor = getSigmoid(weaponLevel);
   const { abilityChance, ammunitionCost, damage, range, rate, staminaCost, weight } =
     getRangedRanges({
       factor,

@@ -37,7 +37,7 @@ export function ReceiveHealing() {
           {isHealthLowValue ? "Emergency treatment" : "Minor surgery"}
         </IconDisplay>
 
-        <Stack direction="horizontal" gap={3}>
+        <Stack className="ms-2" direction="horizontal" gap={3}>
           <IconDisplay Icon={IconEssence} tooltip="Price">
             {formatNumber({ value: MEDIC_PRICE_SURGERY })}
           </IconDisplay>

@@ -76,6 +76,7 @@ export function QuestDisplay({
 
       {questProgressValue >= progressionMaximum && (
         <ToggleButtonGroup
+          className="ms-2"
           name={choiceID}
           onChange={(value) => {
             completeQuest({

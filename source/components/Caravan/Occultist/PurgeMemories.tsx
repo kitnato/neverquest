@@ -43,7 +43,7 @@ export function PurgeMemories() {
           Purge memories
         </IconDisplay>
 
-        <Stack direction="horizontal" gap={3}>
+        <Stack className="ms-2" direction="horizontal" gap={3}>
           <IconDisplay Icon={IconEssence} tooltip="Price">
             {formatNumber({ value: price })}
           </IconDisplay>

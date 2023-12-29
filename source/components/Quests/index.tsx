@@ -37,7 +37,7 @@ export function Journal() {
   if (!canUseJournalValue) {
     return (
       <span className="fst-italic">
-        This tome is undecipherable. Perhaps the progeny can make better use of it.
+        This tome is undecipherable. Perhaps the progeny can make better use of it ...
       </span>
     );
   }

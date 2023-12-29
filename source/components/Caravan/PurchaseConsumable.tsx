@@ -31,7 +31,7 @@ export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <ItemDisplay item={itemWithID} />
 
-      <Stack direction="horizontal" gap={3}>
+      <Stack className="ms-2" direction="horizontal" gap={3}>
         <IconDisplay Icon={IconEssence} tooltip="Price">
           {formatNumber({ value: price })}
         </IconDisplay>

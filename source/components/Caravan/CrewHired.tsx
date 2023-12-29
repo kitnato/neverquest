@@ -21,7 +21,7 @@ export function CrewHired({ crew, setActive }: { crew: Crew; setActive: () => vo
           {capitalizeAll(crew)}
         </IconDisplay>
 
-        <Button onClick={setActive} variant="outline-dark">
+        <Button className="ms-2" onClick={setActive} variant="outline-dark">
           {interaction}
         </Button>
       </div>

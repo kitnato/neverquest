@@ -179,7 +179,7 @@ export const WEAPON_BASE: GearBase & {
   ],
   damage: [
     { maximum: 13, minimum: 12 },
-    { maximum: 1000, minimum: 900 },
+    { maximum: 800, minimum: 750 },
   ],
   price: { maximum: 7000, minimum: 1 },
   range: [
@@ -188,7 +188,7 @@ export const WEAPON_BASE: GearBase & {
   ],
   rate: [
     { maximum: 3000, minimum: 2900 },
-    { maximum: 1200, minimum: 1100 },
+    { maximum: 1600, minimum: 1500 },
   ],
   staminaCost: [
     { maximum: 2, minimum: 1 },
@@ -202,12 +202,12 @@ export const WEAPON_BASE: GearBase & {
 
 export const WEAPON_MODIFIER = {
   "one-handed": { ability: 1, damage: 1, price: 1, rate: 1, stamina: 1, weight: 1 },
-  ranged: { ability: 1, damage: 1.2, price: 1.1, rate: 0.8, stamina: 1.05, weight: 1.15 },
+  ranged: { ability: 1, damage: 1.2, price: 1.1, rate: 1.3, stamina: 1.05, weight: 1.15 },
   "two-handed": {
     ability: 1.1,
     damage: 1.25,
     price: 1.2,
-    rate: 0.85,
+    rate: 1.2,
     stamina: 1.15,
     weight: 1.2,
   },

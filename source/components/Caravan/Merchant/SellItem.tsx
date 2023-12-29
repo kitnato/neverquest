@@ -20,7 +20,7 @@ export function SellItem({ item }: { item: InventoryItem }) {
   const transactEssence = useTransactEssence();
 
   return (
-    <Stack direction="horizontal" gap={3}>
+    <Stack className="ms-2" direction="horizontal" gap={3}>
       <IconDisplay Icon={IconEssence} tooltip="Value">
         {formatNumber({ value: getSellPrice(item) })}
       </IconDisplay>

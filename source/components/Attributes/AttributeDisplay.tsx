@@ -35,7 +35,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
           {name}
         </IconDisplay>
 
-        <Stack direction="horizontal" style={{ gap: "7.5rem" }}>
+        <Stack className="ms-2" direction="horizontal" style={{ gap: "7.5rem" }}>
           <AttributeRank attribute={attribute} />
 
           {isAttributeAtMaximumValue ? (

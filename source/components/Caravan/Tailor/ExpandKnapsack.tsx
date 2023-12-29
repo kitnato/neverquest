@@ -28,7 +28,8 @@ export function ExpandKnapsack() {
 
   if (ownedItemKnapsack !== undefined) {
     const price = Math.ceil(
-      priceMaximum * getSigmoid(knapsackCapacityValue - (KNAPSACK_CAPACITY - 1)),
+      priceMaximum *
+        getSigmoid(Math.ceil((knapsackCapacityValue - (KNAPSACK_CAPACITY - 1)) / amount)),
     );
     const isAffordable = price <= essenceValue;
 
@@ -47,7 +48,7 @@ export function ExpandKnapsack() {
             Add pockets
           </IconDisplay>
 
-          <Stack direction="horizontal" gap={3}>
+          <Stack className="ms-2" direction="horizontal" gap={3}>
             <IconDisplay Icon={IconEssence} tooltip="Price">
               {formatNumber({ value: price })}
             </IconDisplay>

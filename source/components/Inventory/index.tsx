@@ -60,6 +60,7 @@ export function Inventory() {
                 <ItemDisplay isInInventory item={gearItem} />
 
                 <Button
+                  className="ms-2"
                   onClick={() => {
                     toggleEquipGear(gearItem);
                   }}
@@ -88,7 +89,7 @@ export function Inventory() {
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
                 <ItemDisplay isInInventory item={gearItem} />
 
-                <Stack direction="horizontal" gap={3}>
+                <Stack className="ms-2" direction="horizontal" gap={3}>
                   <OverlayTrigger
                     overlay={<Tooltip>Skill required.</Tooltip>}
                     trigger={canEquipGear ? [] : ["focus", "hover"]}
@@ -122,7 +123,7 @@ export function Inventory() {
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
                 <ItemDisplay isInInventory item={trinketItem} />
 
-                <Stack direction="horizontal" gap={3}>
+                <Stack className="ms-2" direction="horizontal" gap={3}>
                   {(() => {
                     switch (name) {
                       case "compass": {
@@ -155,7 +156,7 @@ export function Inventory() {
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
                 <ItemDisplay isInInventory item={infusableItem} />
 
-                <Stack direction="horizontal" gap={3}>
+                <Stack className="ms-2" direction="horizontal" gap={3}>
                   <InfusionInspect infusable={name} />
 
                   <DiscardItem ID={ID} name={name} />
@@ -182,7 +183,7 @@ export function Inventory() {
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
               <ItemDisplay amount={amount} item={item} />
 
-              <Stack direction="horizontal" gap={3}>
+              <Stack className="ms-2" direction="horizontal" gap={3}>
                 {(() => {
                   switch (name) {
                     case "antidote": {

@@ -27,7 +27,7 @@ export function PurchasableItems({
           <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
             <ItemDisplay amount={amount} isInInventory={isGearItem(item)} item={item} />
 
-            <Stack direction="horizontal" gap={3}>
+            <Stack className="ms-2" direction="horizontal" gap={3}>
               <IconDisplay Icon={IconEssence} tooltip="Price">
                 {formatNumber({ value: price })}
               </IconDisplay>

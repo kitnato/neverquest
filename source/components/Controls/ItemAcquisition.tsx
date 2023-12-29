@@ -27,62 +27,65 @@ export function ItemAcquisition() {
 
   useEffect(resetAcquiredItems, [resetAcquiredItems]);
 
-  return acquiredItemsValue.map((acquiredItem) => {
-    const { ID } = acquiredItem;
+  return (
+    <div className="position-absolute top-50 start-0 translate-middle">
+      {acquiredItemsValue.map((acquiredItem) => {
+        const { ID } = acquiredItem;
 
-    return (
-      <div className="position-absolute top-50 start-0 translate-middle" key={ID}>
-        <div
-          className={getAnimationClass({
-            animation: "zoomOut",
-            speed: "slower",
-          })}
-          onAnimationEnd={() => {
-            setAcquiredItems((currentAcquiredItems) =>
-              currentAcquiredItems.filter(({ ID: acquiredItemID }) => acquiredItemID !== ID),
-            );
-          }}
-        >
-          <IconImage
-            className="small"
-            Icon={(() => {
-              if (isArmor(acquiredItem)) {
-                return IconArmor;
-              }
-
-              if (isConsumableItem(acquiredItem)) {
-                return CONSUMABLES[acquiredItem.name].Icon;
-              }
-
-              if (isGemItem(acquiredItem)) {
-                return GEMS[acquiredItem.name].Icon;
-              }
-
-              if (isInfusableItem(acquiredItem)) {
-                return INFUSABLES[acquiredItem.name].Icon;
-              }
-
-              if (isShield(acquiredItem)) {
-                return IconShield;
-              }
-
-              if (isTrinketItem(acquiredItem)) {
-                return TRINKETS[acquiredItem.name].Icon;
-              }
-
-              if (isWeapon(acquiredItem)) {
-                if (isMelee(acquiredItem)) {
-                  return IconMelee;
+        return (
+          <div
+            className={getAnimationClass({
+              animation: "zoomOut",
+              speed: "slower",
+            })}
+            key={ID}
+            onAnimationEnd={() => {
+              setAcquiredItems((currentAcquiredItems) =>
+                currentAcquiredItems.filter(({ ID: acquiredItemID }) => acquiredItemID !== ID),
+              );
+            }}
+          >
+            <IconImage
+              className="small"
+              Icon={(() => {
+                if (isArmor(acquiredItem)) {
+                  return IconArmor;
                 }
 
-                return IconRanged;
-              }
+                if (isConsumableItem(acquiredItem)) {
+                  return CONSUMABLES[acquiredItem.name].Icon;
+                }
 
-              return IconUnknown;
-            })()}
-          />
-        </div>
-      </div>
-    );
-  });
+                if (isGemItem(acquiredItem)) {
+                  return GEMS[acquiredItem.name].Icon;
+                }
+
+                if (isInfusableItem(acquiredItem)) {
+                  return INFUSABLES[acquiredItem.name].Icon;
+                }
+
+                if (isShield(acquiredItem)) {
+                  return IconShield;
+                }
+
+                if (isTrinketItem(acquiredItem)) {
+                  return TRINKETS[acquiredItem.name].Icon;
+                }
+
+                if (isWeapon(acquiredItem)) {
+                  if (isMelee(acquiredItem)) {
+                    return IconMelee;
+                  }
+
+                  return IconRanged;
+                }
+
+                return IconUnknown;
+              })()}
+            />
+          </div>
+        );
+      })}
+    </div>
+  );
 }

@@ -2,7 +2,7 @@ import { Dropdown, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_MAXIMUM } from "@neverquest/data/general";
 import { GEMS_MAXIMUM, GEM_FITTING_COST_RANGE } from "@neverquest/data/items";
 import { useApplyGem } from "@neverquest/hooks/actions/useApplyGem";
 import IconEssence from "@neverquest/icons/essence.svg?react";
@@ -51,17 +51,23 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
           return (
             <Dropdown.Item disabled={!canApply} eventKey={gearType} key={gearType}>
               <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-                <span className="mr-2">{capitalizeAll(name)}</span>
+                <span>{capitalizeAll(name)}</span>
 
-                <Stack direction="horizontal" gap={1}>
-                  <IconImage className="small" Icon={IconEssence} />
+                <Stack className="ms-2" direction="horizontal" gap={1}>
+                  {canApply ? (
+                    <>
+                      <IconImage className="small" Icon={IconEssence} />
 
-                  <span>
-                    {getFromRange({
-                      factor: length / GEMS_MAXIMUM,
-                      ...GEM_FITTING_COST_RANGE,
-                    })}
-                  </span>
+                      <span>
+                        {getFromRange({
+                          factor: length / (GEMS_MAXIMUM - 1),
+                          ...GEM_FITTING_COST_RANGE,
+                        })}
+                      </span>
+                    </>
+                  ) : (
+                    <span>{LABEL_MAXIMUM}</span>
+                  )}
                 </Stack>
               </div>
             </Dropdown.Item>

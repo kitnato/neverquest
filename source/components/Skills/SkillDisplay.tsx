@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { SKILLS } from "@neverquest/data/skills";
@@ -13,13 +14,13 @@ export function SkillDisplay({ skill }: { skill: Skill }) {
         const descriptionIcon = descriptionIcons[index];
 
         return descriptionIcon === undefined ? (
-          <span>{part}</span>
+          <span key={index}>{part}</span>
         ) : (
-          <>
+          <Fragment key={index}>
             <span>{part}</span>
 
             <IconImage className="small" Icon={descriptionIcon} />
-          </>
+          </Fragment>
         );
       })}
       Icon={Icon}

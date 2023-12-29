@@ -2,7 +2,7 @@ import { Stack, TabContainer, TabContent, TabPane } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { QuestBonusDisplay } from "@neverquest/components/Quests/QuestBonusDisplay";
-import { Quests } from "@neverquest/components/Quests/Quests";
+import { QuestTab } from "@neverquest/components/Quests/QuestTab";
 import { QuestTabsNav } from "@neverquest/components/Quests/QuestTabsNav";
 import IconConquest from "@neverquest/icons/conquest.svg?react";
 import IconRoutine from "@neverquest/icons/routine.svg?react";
@@ -14,23 +14,23 @@ import { QUEST_BONUS_TYPES } from "@neverquest/types/unions";
 
 const TABS: TabsData = [
   {
-    Component: () => <Quests questClass="conquest" />,
+    Component: () => <QuestTab questClass="conquest" />,
     Icon: IconConquest,
     label: "conquests",
   },
   {
-    Component: () => <Quests questClass="routine" />,
+    Component: () => <QuestTab questClass="routine" />,
     Icon: IconRoutine,
     label: "routines",
   },
   {
-    Component: () => <Quests questClass="triumph" />,
+    Component: () => <QuestTab questClass="triumph" />,
     Icon: IconTriumph,
     label: "triumphs",
   },
 ];
 
-export function Journal() {
+export function Quests() {
   const canUseJournalValue = useRecoilValue(canUseJournal);
   const isShowingQuestBonus = useRecoilValue(isShowing("questBonus"));
 

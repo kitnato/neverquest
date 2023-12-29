@@ -21,7 +21,7 @@ import { lowHealthWarning } from "@neverquest/state/settings";
 import type { SVGIcon } from "@neverquest/types/components";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function AttackButton() {
+export function Attack() {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesAffordable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isHealthLowValue = useRecoilValue(isHealthLow);

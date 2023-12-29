@@ -10,7 +10,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { completedQuestsCount } from "@neverquest/state/quests";
 import type { QuestClass } from "@neverquest/types/unions";
 
-export function Quests({ questClass }: { questClass: QuestClass }) {
+export function QuestTab({ questClass }: { questClass: QuestClass }) {
   const completedQuestsCountState = completedQuestsCount(questClass);
 
   const completedQuestsValue = useRecoilValue(completedQuestsCountState);

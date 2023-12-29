@@ -9,7 +9,7 @@ import { isStageCompleted, location, progressMaximum } from "@neverquest/state/e
 import { isLootAvailable } from "@neverquest/state/resources";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function CollectLootButton() {
+export function CollectLoot() {
   const isAttackingValue = useRecoilValue(isAttacking);
   const isGameOverValue = useRecoilValue(isGameOver);
   const isLootAvailableValue = useRecoilValue(isLootAvailable);

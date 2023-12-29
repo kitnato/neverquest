@@ -31,7 +31,7 @@ const BASE_TAB: TabsData = [
 ];
 const BASE_TOOLTIP = ["Attributes"];
 
-export function CapabilitiesButton() {
+export function Capabilities() {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesAffordable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isGameOverValue = useRecoilValue(isGameOver);

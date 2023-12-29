@@ -10,7 +10,7 @@ import { isGameOver } from "@neverquest/state/character";
 import { location, stageMaximum } from "@neverquest/state/encounter";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function RetireButton() {
+export function Retire() {
   const isGameOverValue = useRecoilValue(isGameOver);
   const locationValue = useRecoilValue(location);
   const stageMaximumValue = useRecoilValue(stageMaximum);

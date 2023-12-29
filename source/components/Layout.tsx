@@ -3,13 +3,13 @@ import { Col, Container, Row, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { Awakening } from "@neverquest/components/Awakening";
-import { AttackButton } from "@neverquest/components/Controls/AttackButton";
-import { CapabilitiesButton } from "@neverquest/components/Controls/CapabilitiesButton";
-import { CollectLootButton } from "@neverquest/components/Controls/CollectLootButton";
-import { InventoryButton } from "@neverquest/components/Controls/InventoryButton";
-import { JournalButton } from "@neverquest/components/Controls/JournalButton";
-import { RetireButton } from "@neverquest/components/Controls/RetireButton";
-import { TravelButton } from "@neverquest/components/Controls/TravelButton";
+import { Attack } from "@neverquest/components/Controls/Attack";
+import { Capabilities } from "@neverquest/components/Controls/Capabilities";
+import { CollectLoot } from "@neverquest/components/Controls/CollectLoot";
+import { Journal } from "@neverquest/components/Controls/Journal";
+import { Knapsack } from "@neverquest/components/Controls/Knapsack";
+import { Retire } from "@neverquest/components/Controls/Retire";
+import { Travel } from "@neverquest/components/Controls/Travel";
 import { Encounter } from "@neverquest/components/Encounter";
 import { WildernessStatus } from "@neverquest/components/Encounter/WildernessStatus";
 import { Essence } from "@neverquest/components/Essence";
@@ -99,19 +99,19 @@ export function Layout() {
 
             <Col xs="auto">
               <Stack gap={3}>
-                <RetireButton />
+                <Retire />
 
-                <AttackButton />
+                <Attack />
 
-                <CapabilitiesButton />
+                <Capabilities />
 
-                <InventoryButton />
+                <Knapsack />
 
-                <JournalButton />
+                <Journal />
 
-                <CollectLootButton />
+                <CollectLoot />
 
-                <TravelButton />
+                <Travel />
               </Stack>
             </Col>
 

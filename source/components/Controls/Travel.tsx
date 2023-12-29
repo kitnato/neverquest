@@ -13,7 +13,7 @@ import { isShowing } from "@neverquest/state/isShowing";
 import { hasLooted } from "@neverquest/state/resources";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function TravelButton() {
+export function Travel() {
   const encounterValue = useRecoilValue(encounter);
   const encumbranceExtentValue = useRecoilValue(encumbranceExtent);
   const hasLootedValue = useRecoilValue(hasLooted);

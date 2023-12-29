@@ -10,7 +10,7 @@ import type { Infusable } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function InfusionProgress({ infusable }: { infusable: Infusable }) {
-  const infusionValue = useRecoilValue(infusion(infusable));
+  const infusionValue = Math.round(useRecoilValue(infusion(infusable)));
   const infusionMaximumValue = useRecoilValue(infusionMaximum(infusable));
   const infusionLevelValue = useRecoilValue(infusionLevel(infusable));
 

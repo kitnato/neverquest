@@ -125,10 +125,11 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                   <td>
                     <Stack direction="horizontal" gap={1}>
                       <span>
-                        {`-${formatNumber({
+                        -
+                        {formatNumber({
                           format: "percentage",
                           value: attributeStatisticVigor,
-                        })}`}
+                        })}
                       </span>
 
                       {attributePowerBonusVigor > 0 && (

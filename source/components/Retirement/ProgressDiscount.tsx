@@ -18,10 +18,13 @@ export function ProgressDiscount() {
         Icon={IconProgressDiscount}
         iconProps={{ isFlipped: true }}
         tooltip="Monster density"
-      >{`-${formatNumber({
-        format: "percentage",
-        value: getProgressReduction(stageMaximumValue),
-      })}`}</IconDisplay>
+      >
+        -
+        {formatNumber({
+          format: "percentage",
+          value: getProgressReduction(stageMaximumValue),
+        })}
+      </IconDisplay>
     </Stack>
   );
 }

@@ -50,10 +50,13 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
               <Stack direction="horizontal" gap={1}>
                 <IconImage className="small" Icon={ReserveIcon} />
 
-                <span>{`${regenerationAmountValue} per ${formatNumber({
-                  format: "time",
-                  value: regenerationRateValue,
-                })}`}</span>
+                <span>
+                  {regenerationAmountValue}&nbsp;per&nbsp;
+                  {formatNumber({
+                    format: "time",
+                    value: regenerationRateValue,
+                  })}
+                </span>
               </Stack>
             </Stack>
           );
@@ -66,10 +69,13 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
             <Stack direction="horizontal" gap={1}>
               <IconImage className="small" Icon={ReserveIcon} />
 
-              <span>{`${regenerationAmountValue} in ${formatNumber({
-                format: "time",
-                value: regenerationRateValue - regenerationProgress,
-              })}`}</span>
+              <span>
+                {regenerationAmountValue}&nbsp;in&nbsp;
+                {formatNumber({
+                  format: "time",
+                  value: regenerationRateValue - regenerationProgress,
+                })}
+              </span>
             </Stack>
           </Stack>
         );

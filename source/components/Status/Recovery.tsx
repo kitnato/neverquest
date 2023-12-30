@@ -77,10 +77,11 @@ export function Recovery() {
 
                     <td>
                       <span>
-                        {`-${formatNumber({
+                        -
+                        {formatNumber({
                           format: "percentage",
                           value: resilienceValue,
-                        })}`}
+                        })}
                       </span>
                     </td>
                   </tr>

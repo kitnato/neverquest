@@ -14,6 +14,7 @@ import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
+import { LABEL_SEPARATOR } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import IconCompass from "@neverquest/icons/compass.svg?react";
@@ -89,9 +90,13 @@ export function CompassNavigate() {
 
                 return (
                   <option key={name} value={stageIndex}>
-                    {`Stage ${formatNumber({
+                    Stage&nbsp;
+                    {formatNumber({
                       value: stageIndex,
-                    })} - ${name}`}
+                    })}
+                    &nbsp;
+                    {LABEL_SEPARATOR}&nbsp;
+                    {name}
                   </option>
                 );
               })}

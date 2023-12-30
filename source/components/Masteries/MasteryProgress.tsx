@@ -44,7 +44,7 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
             <span>
               {isMasteryAtMaximumValue
                 ? LABEL_MAXIMUM
-                : `${masteryProgressValue}/${masteryCostValue}`}
+                : `${masteryProgressValue} / ${masteryCostValue}`}
             </span>
           </LabelledProgressBar>
         </div>

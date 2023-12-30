@@ -68,10 +68,11 @@ export function CriticalRating() {
                           <IconImage className="small" Icon={IconCriticalChance} />
 
                           <span>
-                            {`${formatNumber({
+                            {formatNumber({
                               format: "percentage",
                               value: attributeStatisticDexterity,
-                            })} chance`}
+                            })}
+                            &nbsp;chance
                           </span>
 
                           {attributePowerBonusDexterity > 0 && (
@@ -106,11 +107,12 @@ export function CriticalRating() {
                           <IconImage className="small" Icon={IconCriticalDamage} />
 
                           <span>
-                            {`${formatNumber({
+                            {formatNumber({
                               decimals: 0,
                               format: "percentage",
                               value: attributeStatisticPerception,
-                            })} damage`}
+                            })}
+                            &nbsp;damage
                           </span>
 
                           {attributePowerBonusPerception > 0 && (

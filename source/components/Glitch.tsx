@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 import { useMemo, useState } from "react";
 import { useRecoilValue } from "recoil";
 
-import { GLITCH_NUMBER, GLITCH_STAGE_MINIMUM } from "@neverquest/data/general";
+import { GLITCH_NUMBER, GLITCH_STAGE_MINIMUM, GROWTH_MAXIMUM } from "@neverquest/data/general";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { stage } from "@neverquest/state/encounter";
 import { getFromRange, getLinearMapping, getRange } from "@neverquest/utilities/getters";
@@ -14,7 +14,7 @@ const LATENCY = 70;
 function getGlitchingElement() {
   const textElements = document.body
     .querySelector(".somnium")
-    ?.querySelectorAll("button, h6, span, strong, .tooltip-inner");
+    ?.querySelectorAll("button, h6, option, span, strong, .tooltip-inner");
 
   if (textElements === undefined) {
     return;
@@ -68,7 +68,7 @@ export function Glitch() {
   const [intervalElapsed, setIntervalElapsed] = useState(0);
 
   const factor = useMemo(
-    () => getLinearMapping({ offset: GLITCH_STAGE_MINIMUM, stage: stageValue }) / 100,
+    () => getLinearMapping({ offset: GLITCH_STAGE_MINIMUM, stage: stageValue }) / GROWTH_MAXIMUM,
     [stageValue],
   );
   const interval = useMemo(

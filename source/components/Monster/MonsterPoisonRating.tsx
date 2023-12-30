@@ -53,10 +53,11 @@ export function MonsterPoisonRating() {
                     <td>
                       <Stack direction="horizontal" gap={1}>
                         <span>
-                          {`-${formatNumber({
+                          -
+                          {formatNumber({
                             format: "percentage",
                             value: poisonMagnitudeValue,
-                          })}`}
+                          })}
                         </span>
 
                         <IconImage className="small" Icon={IconHealth} />

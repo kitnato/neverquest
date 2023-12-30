@@ -109,11 +109,12 @@ export function AttackRate() {
                     <td>
                       <Stack direction="horizontal" gap={1}>
                         <span>
-                          {`-${formatNumber({
+                          -
+                          {formatNumber({
                             decimals: 0,
                             format: "percentage",
                             value: attributeStatisticSpeed,
-                          })}`}
+                          })}
                         </span>
 
                         {attributePowerBonusSpeed > 0 && (

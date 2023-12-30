@@ -27,9 +27,10 @@ export function Encumbrance() {
       >
         <Stack direction="horizontal" gap={1}>
           <span>
-            {`${formatNumber({ value: encumbranceValue })}/${formatNumber({
+            {formatNumber({ value: encumbranceValue })}&nbsp;/&nbsp;
+            {formatNumber({
               value: encumbranceMaximumValue,
-            })}`}
+            })}
           </span>
 
           <DeltasDisplay delta="encumbranceMaximum" />

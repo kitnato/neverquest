@@ -77,9 +77,12 @@ export function ArmorOptions() {
           Icon={IconArmorProtection}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Protection"
-        >{`${formatNumber({ value: protection.minimum })}-${formatNumber({
-          value: protection.maximum,
-        })}`}</IconDisplay>
+        >
+          {formatNumber({ value: protection.minimum })}&nbsp;-&nbsp;
+          {formatNumber({
+            value: protection.maximum,
+          })}
+        </IconDisplay>
 
         {deflection !== undefined && (
           <IconDisplay
@@ -91,7 +94,7 @@ export function ArmorOptions() {
               ? `${formatNumber({
                   format: "percentage",
                   value: deflection.minimum,
-                })}-${formatNumber({ format: "percentage", value: deflection.maximum })}`
+                })} - ${formatNumber({ format: "percentage", value: deflection.maximum })}`
               : LABEL_UNKNOWN}
           </IconDisplay>
         )}
@@ -114,9 +117,12 @@ export function ArmorOptions() {
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
-        >{`${formatNumber({ value: weight.minimum })}-${formatNumber({
-          value: weight.maximum,
-        })}`}</IconDisplay>
+        >
+          {formatNumber({ value: weight.minimum })}&nbsp;-&nbsp;
+          {formatNumber({
+            value: weight.maximum,
+          })}
+        </IconDisplay>
       </Stack>
 
       <hr />

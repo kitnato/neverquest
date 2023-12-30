@@ -84,9 +84,10 @@ export function RangedWeaponOptions() {
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Damage"
         >
-          {`${formatNumber({ value: damage.minimum })}-${formatNumber({
+          {formatNumber({ value: damage.minimum })}&nbsp;-&nbsp;
+          {formatNumber({
             value: damage.maximum,
-          })}`}
+          })}
         </IconDisplay>
 
         <IconDisplay
@@ -94,10 +95,11 @@ export function RangedWeaponOptions() {
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Attack rate"
         >
-          {`${formatNumber({ format: "time", value: rate.minimum })}-${formatNumber({
+          {formatNumber({ format: "time", value: rate.minimum })}&nbsp;-&nbsp;
+          {formatNumber({
             format: "time",
             value: rate.maximum,
-          })}`}
+          })}
         </IconDisplay>
 
         <IconDisplay
@@ -105,16 +107,18 @@ export function RangedWeaponOptions() {
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Ammunition cost"
         >
-          {`${formatNumber({ value: ammunitionCost.minimum })}-${formatNumber({
+          {formatNumber({ value: ammunitionCost.minimum })}&nbsp;-&nbsp;
+          {formatNumber({
             value: ammunitionCost.maximum,
-          })}`}
+          })}
         </IconDisplay>
 
         <IconDisplay Icon={IconRange} iconProps={{ overlayPlacement: "left" }} tooltip="Range">
-          {`${formatNumber({ format: "time", value: range.minimum })}-${formatNumber({
+          {formatNumber({ format: "time", value: range.minimum })}&nbsp;-&nbsp;
+          {formatNumber({
             format: "time",
             value: range.maximum,
-          })}`}
+          })}
         </IconDisplay>
 
         <IconDisplay
@@ -126,7 +130,7 @@ export function RangedWeaponOptions() {
             ? `${formatNumber({
                 format: "percentage",
                 value: abilityChance.minimum,
-              })}-${formatNumber({ format: "percentage", value: abilityChance.maximum })}`
+              })} - ${formatNumber({ format: "percentage", value: abilityChance.maximum })}`
             : LABEL_UNKNOWN}
         </IconDisplay>
 
@@ -135,9 +139,10 @@ export function RangedWeaponOptions() {
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Stamina cost"
         >
-          {`${formatNumber({ value: staminaCost.minimum })}-${formatNumber({
+          {formatNumber({ value: staminaCost.minimum })}&nbsp;-&nbsp;
+          {formatNumber({
             value: staminaCost.maximum,
-          })}`}
+          })}
         </IconDisplay>
 
         <IconDisplay
@@ -145,9 +150,10 @@ export function RangedWeaponOptions() {
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
         >
-          {`${formatNumber({ value: weight.minimum })}-${formatNumber({
+          {formatNumber({ value: weight.minimum })}&nbsp;-&nbsp;
+          {formatNumber({
             value: weight.maximum,
-          })}`}
+          })}
         </IconDisplay>
       </Stack>
 

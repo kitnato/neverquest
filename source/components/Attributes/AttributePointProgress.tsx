@@ -32,9 +32,12 @@ export function AttributePointProgress() {
           <Stack direction="horizontal" gap={1}>
             <IconImage className="small stencilled" Icon={IconEssence} />
 
-            <span>{`${formatNumber({ value: essenceValue })} / ${formatNumber({
-              value: nextTotalCost,
-            })}`}</span>
+            <span>
+              {formatNumber({ value: essenceValue })}&nbsp;/&nbsp;
+              {formatNumber({
+                value: nextTotalCost,
+              })}
+            </span>
           </Stack>
         </LabelledProgressBar>
       </div>

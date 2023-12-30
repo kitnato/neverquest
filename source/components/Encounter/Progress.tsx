@@ -40,7 +40,7 @@ export function Progress() {
           >
             <Stack direction="horizontal" gap={1}>
               <span>
-                {formatNumber({ value: progressValue })}/
+                {formatNumber({ value: progressValue })}&nbsp;/&nbsp;
                 {progressMaximumValue === Number.POSITIVE_INFINITY
                   ? LABEL_UNKNOWN
                   : formatNumber({

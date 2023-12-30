@@ -31,7 +31,7 @@ export function DodgePenaltyContents({ staminaCost }: { staminaCost?: GeneratorR
           <span>
             {typeof staminaCost === "number"
               ? formatNumber({ value: staminaCost })
-              : `${formatNumber({ value: staminaCost.minimum })}-${formatNumber({
+              : `${formatNumber({ value: staminaCost.minimum })} - ${formatNumber({
                   value: staminaCost.maximum,
                 })}`}
           </span>

@@ -71,10 +71,13 @@ export function ShieldOptions() {
           Icon={IconBlock}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Block chance"
-        >{`${formatNumber({ format: "percentage", value: block.minimum })}-${formatNumber({
-          format: "percentage",
-          value: block.maximum,
-        })}`}</IconDisplay>
+        >
+          {formatNumber({ format: "percentage", value: block.minimum })}&nbsp;-&nbsp;
+          {formatNumber({
+            format: "percentage",
+            value: block.maximum,
+          })}
+        </IconDisplay>
 
         {stagger !== undefined && (
           <IconDisplay
@@ -83,10 +86,12 @@ export function ShieldOptions() {
             tooltip={shieldcraftValue ? "Stagger chance" : LABEL_UNKNOWN}
           >
             {shieldcraftValue
-              ? `${formatNumber({ format: "percentage", value: stagger.minimum })}-${formatNumber({
-                  format: "percentage",
-                  value: stagger.maximum,
-                })}`
+              ? `${formatNumber({ format: "percentage", value: stagger.minimum })} - ${formatNumber(
+                  {
+                    format: "percentage",
+                    value: stagger.maximum,
+                  },
+                )}`
               : LABEL_UNKNOWN}
           </IconDisplay>
         )}
@@ -95,17 +100,23 @@ export function ShieldOptions() {
           Icon={IconStamina}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Stamina cost"
-        >{`${formatNumber({ value: staminaCost.minimum })}-${formatNumber({
-          value: staminaCost.maximum,
-        })}`}</IconDisplay>
+        >
+          {formatNumber({ value: staminaCost.minimum })}&nbsp;-&nbsp;
+          {formatNumber({
+            value: staminaCost.maximum,
+          })}
+        </IconDisplay>
 
         <IconDisplay
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
-        >{`${formatNumber({ value: weight.minimum })}-${formatNumber({
-          value: weight.maximum,
-        })}`}</IconDisplay>
+        >
+          {formatNumber({ value: weight.minimum })}&nbsp;-&nbsp;
+          {formatNumber({
+            value: weight.maximum,
+          })}
+        </IconDisplay>
       </Stack>
 
       <hr />

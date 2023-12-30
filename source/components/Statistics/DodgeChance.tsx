@@ -76,10 +76,10 @@ export function DodgeChance() {
                       <td>
                         <Stack direction="horizontal" gap={1}>
                           <span>
-                            {`${formatNumber({
+                            {formatNumber({
                               format: "percentage",
                               value: agility,
-                            })}`}
+                            })}
                           </span>
 
                           {attributePowerBonusAgility > 0 && (

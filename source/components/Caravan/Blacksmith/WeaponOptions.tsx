@@ -98,18 +98,24 @@ export function WeaponOptions() {
           Icon={IconWeaponDamage}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Damage"
-        >{`${formatNumber({ value: damage.minimum })}-${formatNumber({
-          value: damage.maximum,
-        })}`}</IconDisplay>
+        >
+          {formatNumber({ value: damage.minimum })}&nbsp;-&nbsp;
+          {formatNumber({
+            value: damage.maximum,
+          })}
+        </IconDisplay>
 
         <IconDisplay
           Icon={IconWeaponAttackRate}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Attack rate"
-        >{`${formatNumber({ format: "time", value: rate.minimum })}-${formatNumber({
-          format: "time",
-          value: rate.maximum,
-        })}`}</IconDisplay>
+        >
+          {formatNumber({ format: "time", value: rate.minimum })}&nbsp;-&nbsp;
+          {formatNumber({
+            format: "time",
+            value: rate.maximum,
+          })}
+        </IconDisplay>
 
         <IconDisplay
           Icon={skillValue ? IconAbility : IconUnknown}
@@ -120,7 +126,7 @@ export function WeaponOptions() {
             ? `${formatNumber({
                 format: "percentage",
                 value: abilityChance.minimum,
-              })}-${formatNumber({ format: "percentage", value: abilityChance.maximum })}`
+              })} - ${formatNumber({ format: "percentage", value: abilityChance.maximum })}`
             : LABEL_UNKNOWN}
         </IconDisplay>
 
@@ -128,17 +134,23 @@ export function WeaponOptions() {
           Icon={IconStamina}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Stamina cost"
-        >{`${formatNumber({ value: staminaCost.minimum })}-${formatNumber({
-          value: staminaCost.maximum,
-        })}`}</IconDisplay>
+        >
+          {formatNumber({ value: staminaCost.minimum })}&nbsp;-&nbsp;
+          {formatNumber({
+            value: staminaCost.maximum,
+          })}
+        </IconDisplay>
 
         <IconDisplay
           Icon={IconEncumbrance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
-        >{`${formatNumber({ value: weight.minimum })}-${formatNumber({
-          value: weight.maximum,
-        })}`}</IconDisplay>
+        >
+          {formatNumber({ value: weight.minimum })}&nbsp;-&nbsp;
+          {formatNumber({
+            value: weight.maximum,
+          })}
+        </IconDisplay>
       </Stack>
 
       <hr />

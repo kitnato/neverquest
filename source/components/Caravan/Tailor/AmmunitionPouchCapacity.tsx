@@ -27,7 +27,7 @@ export function AmmunitionPouchCapacity() {
       >
         <Stack direction="horizontal" gap={1}>
           <span>
-            {formatNumber({ value: ammunitionValue })}/
+            {formatNumber({ value: ammunitionValue })}&nbsp;/&nbsp;
             {formatNumber({
               value: ammunitionCapacityValue,
             })}

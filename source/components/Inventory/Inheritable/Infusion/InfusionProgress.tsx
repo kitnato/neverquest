@@ -28,7 +28,7 @@ export function InfusionProgress({ infusable }: { infusable: Infusable }) {
         <IconImage className="small stencilled" Icon={IconEssence} />
 
         <span>
-          {formatNumber({ value: infusionValue })}/
+          {formatNumber({ value: infusionValue })}&nbsp;/&nbsp;
           {formatNumber({
             value: infusionMaximumValue,
           })}

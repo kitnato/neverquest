@@ -82,10 +82,11 @@ export function BleedRating() {
 
                       <td>
                         <span>
-                          {`${formatNumber({
+                          {formatNumber({
                             format: "percentage",
                             value: crueltyValue,
-                          })} of total damage`}
+                          })}
+                          &nbsp;of total damage
                         </span>
                       </td>
                     </tr>
@@ -100,12 +101,14 @@ export function BleedRating() {
                           <IconImage className="small" Icon={IconBleeding} />
 
                           <span>
-                            {`${formatNumber({
+                            {formatNumber({
                               value: damageValue * crueltyValue,
-                            })} over ${formatNumber({
+                            })}
+                            &nbsp;over&nbsp;
+                            {formatNumber({
                               format: "time",
                               value: duration,
-                            })}`}
+                            })}
                           </span>
                         </Stack>
                       </td>

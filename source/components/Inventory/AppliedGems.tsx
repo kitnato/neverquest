@@ -20,7 +20,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
     return (
       <tr>
         <td className={CLASS_TABLE_CELL_ITALIC}>
-          <span>{`Gems (${length}/${GEMS_MAXIMUM}):`}</span>
+          <span>{`Gems (${length} / ${GEMS_MAXIMUM}):`}</span>
         </td>
 
         <td>

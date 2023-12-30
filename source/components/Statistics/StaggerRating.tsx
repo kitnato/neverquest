@@ -81,10 +81,11 @@ export function StaggerRating() {
 
                       <td>
                         <span>
-                          {`${formatNumber({
+                          {formatNumber({
                             format: "time",
                             value: stabilityValue,
-                          })} duration`}
+                          })}
+                          &nbsp;duration
                         </span>
                       </td>
                     </tr>

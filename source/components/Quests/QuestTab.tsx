@@ -31,7 +31,9 @@ export function QuestTab({ questClass }: { questClass: QuestClass }) {
         variant="dark"
       >
         <Stack direction="horizontal" gap={1}>
-          <span>{`${completedQuestsValue}/${questCount}`}</span>
+          <span>
+            {completedQuestsValue}&nbsp;/&nbsp;{questCount}
+          </span>
 
           <DeltasDisplay delta={questClass} />
         </Stack>

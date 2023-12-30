@@ -72,9 +72,12 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
       variant="dark"
     >
       <Stack direction="horizontal" gap={1}>
-        <span>{`${formatNumber({ value: reserveValue })}/${formatNumber({
-          value: reserveMaximumAilingValue,
-        })}`}</span>
+        <span>
+          {formatNumber({ value: reserveValue })}&nbsp;/&nbsp;
+          {formatNumber({
+            value: reserveMaximumAilingValue,
+          })}
+        </span>
 
         {isAiling && (
           <>

@@ -14,11 +14,13 @@ export function GemDescription({ gem }: { gem: Gem }) {
 
       <span className={color}>&nbsp;{elemental}&nbsp;</span>
 
-      <span>effect & a</span>
+      <span>effect to gear. Provides a</span>
 
       <span className="fst-italic">&nbsp;{damageModification}&nbsp;</span>
 
-      <span>damage bonus to gear.</span>
+      <span>
+        damage/thorns bonus to weapons/armor, and enhances the elemental effect in shields.
+      </span>
     </div>
   );
 }

@@ -15,7 +15,8 @@ import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { armor, shield, weapon } from "@neverquest/state/gear";
-import { equippableItems, inventory } from "@neverquest/state/inventory";
+import { inventory } from "@neverquest/state/inventory";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Armor, Shield, Weapon } from "@neverquest/types";
 import {
   isArmor,
@@ -23,20 +24,53 @@ import {
   isGearItem,
   isGemItem,
   isInfusableItem,
+  isMelee,
+  isRanged,
   isShield,
   isTrinketItem,
   isUnarmed,
   isUnarmored,
   isUnshielded,
+  isWeapon,
 } from "@neverquest/types/type-guards";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function Inventory() {
   const armorValue = useRecoilValue(armor);
-  const equippableItemsValue = useRecoilValue(equippableItems);
   const inventoryValue = useRecoilValue(inventory);
+  const isSkillAcquiredArchery = useRecoilValue(isSkillAcquired("archery"));
+  const isSkillAcquiredArmorcraft = useRecoilValue(isSkillAcquired("armorcraft"));
+  const isSkillAcquiredShieldcraft = useRecoilValue(isSkillAcquired("shieldcraft"));
+  const isSkillAcquiredSiegecraft = useRecoilValue(isSkillAcquired("siegecraft"));
   const shieldValue = useRecoilValue(shield);
   const weaponValue = useRecoilValue(weapon);
+
+  const equippableItems: Record<string, boolean> = {};
+
+  for (const item of inventoryValue) {
+    let canEquip =
+      (isArmor(item) && armorValue.ID !== item.ID) ||
+      (isWeapon(item) && weaponValue.ID !== item.ID) ||
+      (isShield(item) && shieldValue.ID !== item.ID);
+
+    if (isArmor(item) && item.gearClass === "heavy") {
+      canEquip = isSkillAcquiredArmorcraft;
+    }
+
+    if (isMelee(item) && item.grip === "two-handed") {
+      canEquip = isSkillAcquiredSiegecraft;
+    }
+
+    if (isRanged(item)) {
+      canEquip = isSkillAcquiredArchery;
+    }
+
+    if (isShield(item) && item.gearClass === "tower") {
+      canEquip = isSkillAcquiredShieldcraft;
+    }
+
+    equippableItems[item.ID] = canEquip;
+  }
 
   const toggleEquipGear = useToggleEquipGear();
 
@@ -94,7 +128,7 @@ export function Inventory() {
           .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
           .map((gearItem) => {
             const { ID, name } = gearItem;
-            const canEquipGear = equippableItemsValue[ID];
+            const canEquipGear = equippableItems[ID];
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>

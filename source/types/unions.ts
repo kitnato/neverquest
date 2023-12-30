@@ -314,7 +314,6 @@ export type StateKey =
   | "encumbrance"
   | "encumbranceExtent"
   | "encumbranceMaximum"
-  | "equippableItems"
   | "essence"
   | "essenceLoot"
   | "executionThreshold"

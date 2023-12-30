@@ -31,7 +31,7 @@ export function useDeltaText({
 
     const difference = currentValue - previousValue;
 
-    if (difference === 0) {
+    if (difference >= 0 && difference < 0.005) {
       return;
     }
 

@@ -1,13 +1,9 @@
 import { atom, atomFamily, selectorFamily } from "recoil";
 
 import { INFUSION_DELTA, INFUSION_DURATION } from "@neverquest/data/general";
-import {
-  AMMUNITION_CAPACITY,
-  INFUSABLES,
-  INFUSION_BASE,
-  KNAPSACK_CAPACITY,
-} from "@neverquest/data/items";
+import { AMMUNITION_CAPACITY, INFUSABLES, INFUSION_BASE } from "@neverquest/data/items";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { ownedItem } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
 import type { GemItem } from "@neverquest/types";
 import type { Infusable } from "@neverquest/types/unions";
@@ -21,10 +17,12 @@ export const infusionEffect = withStateKey("infusionEffect", (key) =>
     get:
       (infusable: Infusable) =>
       ({ get }) =>
-        getFromRange({
-          factor: getSigmoid(get(infusionLevel(infusable))),
-          ...INFUSABLES[infusable].item.effect,
-        }),
+        get(ownedItem(infusable)) === undefined
+          ? 0
+          : getFromRange({
+              factor: getSigmoid(get(infusionLevel(infusable))),
+              ...INFUSABLES[infusable].item.effect,
+            }),
     key,
   }),
 );
@@ -89,14 +87,6 @@ export const infusion = withStateKey("infusion", (key) =>
 export const infusionLevel = withStateKey("infusionLevel", (key) =>
   atomFamily<number, Infusable>({
     default: 0,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
-export const knapsackCapacity = withStateKey("knapsackCapacity", (key) =>
-  atom({
-    default: KNAPSACK_CAPACITY,
     effects: [handleLocalStorage({ key })],
     key,
   }),

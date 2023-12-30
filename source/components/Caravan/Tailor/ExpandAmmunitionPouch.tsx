@@ -25,7 +25,8 @@ export function ExpandAmmunitionPouch() {
   if (ownedAmmunitionPouch !== undefined) {
     const { amount, priceMaximum } = TAILORING["ammunition pouch"];
     const price = Math.ceil(
-      priceMaximum * getSigmoid(ammunitionCapacityValue - (AMMUNITION_CAPACITY - 1)),
+      priceMaximum *
+        getSigmoid(Math.ceil(ammunitionCapacityValue - (AMMUNITION_CAPACITY - 1)) / amount),
     );
     const isAffordable = price <= essenceValue;
 

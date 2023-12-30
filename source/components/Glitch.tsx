@@ -77,8 +77,8 @@ export function Glitch() {
         getRange({
           factor,
           ranges: [
-            { maximum: 20_000, minimum: 18_000 },
-            { maximum: 3000, minimum: 2500 },
+            { maximum: 60_000, minimum: 55_000 },
+            { maximum: 12_000, minimum: 10_000 },
           ],
         }),
       ),

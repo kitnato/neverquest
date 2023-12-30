@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { CREW, MERCHANT_OFFERS } from "@neverquest/data/caravan";
-import { EMPTY_MONOLOGUE } from "@neverquest/data/general";
+import { MONOLOGUE_EMPTY } from "@neverquest/data/general";
 import { merchantInventory, monologue } from "@neverquest/state/caravan";
 import { stage, stageMaximum } from "@neverquest/state/encounter";
 import { isInheritableItem } from "@neverquest/types/type-guards";
@@ -38,7 +38,7 @@ export function useSetMonologues() {
                         }
                       }
                     })() ??
-                    EMPTY_MONOLOGUE,
+                    MONOLOGUE_EMPTY,
             );
           }
         }

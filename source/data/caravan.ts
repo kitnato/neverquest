@@ -6,9 +6,9 @@ import type {
   WeaponModality,
 } from "@kitnato/locran/build/types";
 import {
-  EMPTY_MONOLOGUE,
   GROWTH_MAXIMUM,
   LEVELLING_MAXIMUM,
+  MONOLOGUE_EMPTY,
   RETIREMENT_STAGE_MINIMUM,
 } from "@neverquest/data/general";
 import { INFUSABLES, TRINKETS } from "@neverquest/data/items";
@@ -45,7 +45,7 @@ export const CREW: Record<
     monologues: {
       1: "Things are not always what they seem.",
       34: "Come across any arcane writs lately?",
-      [GROWTH_MAXIMUM]: EMPTY_MONOLOGUE,
+      [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Nothing makes any sense.",
     },
     price: 400,
@@ -57,7 +57,7 @@ export const CREW: Record<
     interaction: "Craft",
     monologues: {
       1: "In need of better gear?",
-      [GROWTH_MAXIMUM]: EMPTY_MONOLOGUE,
+      [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Doesn't make a difference.",
     },
     price: 50,
@@ -69,7 +69,7 @@ export const CREW: Record<
     interaction: "Craft",
     monologues: {
       1: "Tired of monster breath?",
-      [GROWTH_MAXIMUM]: EMPTY_MONOLOGUE,
+      [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "There's too many of them.",
     },
     price: 150,
@@ -81,7 +81,7 @@ export const CREW: Record<
     interaction: "Treat",
     monologues: {
       1: "Allow me to patch you up.",
-      [GROWTH_MAXIMUM]: EMPTY_MONOLOGUE,
+      [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Never-ending madness. Only pain.",
     },
     price: 20,
@@ -93,7 +93,7 @@ export const CREW: Record<
     interaction: "Train",
     monologues: {
       1: "Perhaps I can teach you something.",
-      [GROWTH_MAXIMUM]: EMPTY_MONOLOGUE,
+      [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Overbearing darkness ...",
     },
     price: 75,
@@ -142,7 +142,7 @@ export const CREW: Record<
     interaction: "Ritual",
     monologues: {
       1: "Prepared to transcend your mind?",
-      [GROWTH_MAXIMUM]: EMPTY_MONOLOGUE,
+      [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "I can't see any more.",
     },
     price: 650,
@@ -154,7 +154,7 @@ export const CREW: Record<
     interaction: "Tailoring",
     monologues: {
       1: "Allow me to deepen your pockets.",
-      [GROWTH_MAXIMUM]: EMPTY_MONOLOGUE,
+      [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Fate has been mis-weaved.",
       [RETIREMENT_STAGE_MINIMUM]: "Always leave some extra space for unexpected finds.",
     },
@@ -167,7 +167,7 @@ export const CREW: Record<
     interaction: "Brew",
     monologues: {
       1: "Gaze into my cauldron ...",
-      [GROWTH_MAXIMUM]: EMPTY_MONOLOGUE,
+      [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "The spirits have gone silent.",
     },
     price: 300,

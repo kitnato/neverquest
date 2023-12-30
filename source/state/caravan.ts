@@ -1,7 +1,7 @@
 import { atom, atomFamily, selector } from "recoil";
 
 import { CREW } from "@neverquest/data/caravan";
-import { EMPTY_MONOLOGUE } from "@neverquest/data/general";
+import { MONOLOGUE_EMPTY } from "@neverquest/data/general";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import type { Armor, Melee, MerchantInventoryItem, Ranged, Shield } from "@neverquest/types";
 import { CREW_TYPES, type Crew, type CrewStatus } from "@neverquest/types/unions";
@@ -68,7 +68,7 @@ export const merchantInventory = withStateKey("merchantInventory", (key) =>
 
 export const monologue = withStateKey("monologue", (key) =>
   atomFamily<string, Crew>({
-    default: (crew) => CREW[crew].monologues[1] ?? EMPTY_MONOLOGUE,
+    default: (crew) => CREW[crew].monologues[1] ?? MONOLOGUE_EMPTY,
     effects: (crew) => [handleLocalStorage({ key, parameter: crew })],
     key,
   }),

@@ -5,16 +5,14 @@ export const CLASS_ANIMATED = `${CLASS_ANIMATE_PREFIX}animated`;
 export const CLASS_FULL_WIDTH_JUSTIFIED = "align-items-center d-flex justify-content-between w-100";
 export const CLASS_TABLE_CELL_ITALIC = "fst-italic text-end";
 
-export const EMPTY_MONOLOGUE = "...";
-
 export const MILLISECONDS_IN_HOUR = 3_600_000;
 export const MILLISECONDS_IN_MINUTE = 60_000;
 export const MILLISECONDS_IN_SECOND = 1000;
 
 export const FRAMERATE = MILLISECONDS_IN_SECOND / 60;
 
-export const GLITCH_NUMBER = "7";
-export const GLITCH_STAGE_MINIMUM = 67;
+export const GLITCH_NUMBER = 7;
+export const GLITCH_STAGE_MINIMUM = 57;
 
 export const GROWTH_MAXIMUM = 100;
 
@@ -37,6 +35,8 @@ export const LABEL_TRAINING_REQUIRED = "Cannot use without training.";
 export const LABEL_UNKNOWN = "???";
 
 export const LEVELLING_MAXIMUM = 77;
+
+export const MONOLOGUE_EMPTY = "...";
 
 export const NAME_LENGTH_MAXIMUM = 50;
 

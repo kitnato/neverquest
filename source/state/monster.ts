@@ -206,8 +206,8 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
 export const monsterLoot = withStateKey("monsterLoot", (key) =>
   selector({
     get: ({ get }) => {
-      const { chance, chanceOverride, stageIncludes } = TORN_MANUSCRIPT_DROP_CHANCE;
-      const { attenuation, base, bonus, boss } = ESSENCE;
+      const { base: tornManuscriptDropChanceBase, increment } = TORN_MANUSCRIPT_DROP_CHANCE;
+      const { attenuation, base: essenceBase, bonus, boss } = ESSENCE;
 
       const encounterValue = get(encounter);
       const merchantInventoryValue = get(merchantInventory);
@@ -217,7 +217,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
 
       return {
         essence: Math.round(
-          (base + (base * getTriangular(stageValue)) / attenuation) * 1 +
+          (essenceBase + (essenceBase * getTriangular(stageValue)) / attenuation) * 1 +
             get(progress) *
               bonus *
               (encounterValue === "boss" ? boss : 1) *
@@ -249,8 +249,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
                 ownedItemMysteriousEgg !== undefined &&
                 !merchantInventoryValue.some(({ name }) => name === "torn manuscript") &&
                 get(ownedItem("torn manuscript")) === undefined &&
-                Math.random() <=
-                  (stageValue.toLocaleString().includes(stageIncludes) ? chanceOverride : chance)
+                Math.random() <= tornManuscriptDropChanceBase + increment * stageValue
               ? { ...TRINKETS["torn manuscript"].item, ID: nanoid() }
               : undefined,
       };

@@ -1,4 +1,3 @@
-import { GLITCH_NUMBER } from "@neverquest/data/general";
 import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
 import IconAntidote from "@neverquest/icons/antidote.svg?react";
 import IconAntiqueCoin from "@neverquest/icons/antique-coin.svg?react";
@@ -195,9 +194,8 @@ export const INFUSABLES: Record<
 export const KNAPSACK_CAPACITY = 15;
 
 export const TORN_MANUSCRIPT_DROP_CHANCE = {
-  chance: 0.01,
-  chanceOverride: 0.07,
-  stageIncludes: GLITCH_NUMBER,
+  base: 0.01,
+  increment: 0.0063,
 };
 
 export const TRINKETS: Record<

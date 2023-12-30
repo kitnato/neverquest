@@ -9,21 +9,6 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
-export const armor = withStateKey("armor", (key) =>
-  selector<Armor | typeof ARMOR_NONE>({
-    get: ({ get }) => {
-      const equippedArmorValue = get(equippedArmor);
-
-      if (equippedArmorValue === undefined) {
-        return ARMOR_NONE;
-      }
-
-      return equippedArmorValue;
-    },
-    key,
-  }),
-);
-
 export const elementalEffects = withStateKey("elementalEffects", (key) =>
   selector({
     get: ({ get }) => {
@@ -67,57 +52,27 @@ export const elementalEffects = withStateKey("elementalEffects", (key) =>
   }),
 );
 
+// ATOMS
+
+export const armor = withStateKey("armor", (key) =>
+  atom<Armor | typeof ARMOR_NONE>({
+    default: ARMOR_NONE,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
 export const shield = withStateKey("shield", (key) =>
-  selector<Shield | typeof SHIELD_NONE>({
-    get: ({ get }) => {
-      const equippedShieldValue = get(equippedShield);
-
-      if (equippedShieldValue === undefined) {
-        return SHIELD_NONE;
-      }
-
-      return equippedShieldValue;
-    },
+  atom<Shield | typeof SHIELD_NONE>({
+    default: SHIELD_NONE,
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
 
 export const weapon = withStateKey("weapon", (key) =>
-  selector<Weapon | typeof WEAPON_NONE>({
-    get: ({ get }) => {
-      const equippedWeaponValue = get(equippedWeapon);
-
-      if (equippedWeaponValue === undefined) {
-        return WEAPON_NONE;
-      }
-
-      return equippedWeaponValue;
-    },
-    key,
-  }),
-);
-
-// ATOMS
-
-export const equippedArmor = withStateKey("equippedArmor", (key) =>
-  atom<Armor | undefined>({
-    default: undefined,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
-export const equippedShield = withStateKey("equippedShield", (key) =>
-  atom<Shield | undefined>({
-    default: undefined,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
-export const equippedWeapon = withStateKey("equippedWeapon", (key) =>
-  atom<Weapon | undefined>({
-    default: undefined,
+  atom<Weapon | typeof WEAPON_NONE>({
+    default: WEAPON_NONE,
     effects: [handleLocalStorage({ key })],
     key,
   }),

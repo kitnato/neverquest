@@ -50,10 +50,11 @@ export function CollectLoot() {
               setIsShowingAttributes(true);
 
               if (itemsLootValue.length > 0) {
-                const acquiredItems = itemsLootValue.filter(
-                  (item) => acquireItem(item) === "success",
+                const acquiredItemIDs = new Set(
+                  itemsLootValue
+                    .filter((item) => acquireItem(item) === "success")
+                    .map(({ ID }) => ID),
                 );
-                const acquiredItemIDs = new Set(acquiredItems.map(({ ID }) => ID));
 
                 setItemsLoot((currentItemsLoot) =>
                   currentItemsLoot.filter(({ ID }) => !acquiredItemIDs.has(ID)),

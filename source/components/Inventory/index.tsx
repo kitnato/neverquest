@@ -14,29 +14,38 @@ import { InfusionInspect } from "@neverquest/components/Inventory/Inheritable/In
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
-import { equippedArmor, equippedShield, equippedWeapon } from "@neverquest/state/gear";
+import { armor, shield, weapon } from "@neverquest/state/gear";
 import { equippableItems, inventory } from "@neverquest/state/inventory";
 import type { Armor, Shield, Weapon } from "@neverquest/types";
 import {
+  isArmor,
   isConsumableItem,
   isGearItem,
   isGemItem,
   isInfusableItem,
+  isShield,
   isTrinketItem,
+  isUnarmed,
+  isUnarmored,
+  isUnshielded,
 } from "@neverquest/types/type-guards";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function Inventory() {
+  const armorValue = useRecoilValue(armor);
   const equippableItemsValue = useRecoilValue(equippableItems);
-  const equippedArmorValue = useRecoilValue(equippedArmor);
-  const equippedShieldValue = useRecoilValue(equippedShield);
-  const equippedWeaponValue = useRecoilValue(equippedWeapon);
   const inventoryValue = useRecoilValue(inventory);
+  const shieldValue = useRecoilValue(shield);
+  const weaponValue = useRecoilValue(weapon);
 
   const toggleEquipGear = useToggleEquipGear();
 
-  const equippedGear = [equippedWeaponValue, equippedArmorValue, equippedShieldValue].filter(
-    Boolean,
+  const equippedGear = [weaponValue, armorValue, shieldValue].filter((gearItem) =>
+    isArmor(gearItem)
+      ? !isUnarmored(gearItem)
+      : isShield(gearItem)
+        ? !isUnshielded(gearItem)
+        : !isUnarmed(gearItem),
   ) as (Armor | Shield | Weapon)[];
   const equippedGearIDs = new Set(equippedGear.map(({ ID }) => ID));
   const storedItems = inventoryValue.filter(

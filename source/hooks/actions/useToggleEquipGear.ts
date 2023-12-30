@@ -1,14 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import {
-  armor,
-  equippedArmor,
-  equippedShield,
-  equippedWeapon,
-  shield,
-  weapon,
-} from "@neverquest/state/gear";
+import { armor, shield, weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { questProgress } from "@neverquest/state/quests";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -93,17 +86,17 @@ export function useToggleEquipGear() {
 
         if (isArmor(gearItem)) {
           if (ID === get(armor).ID) {
-            reset(equippedArmor);
+            reset(armor);
           } else {
-            set(equippedArmor, gearItem);
+            set(armor, gearItem);
           }
         }
 
         if (isShield(gearItem)) {
           if (ID === shieldValue.ID) {
-            reset(equippedShield);
+            reset(shield);
           } else {
-            set(equippedShield, gearItem);
+            set(shield, gearItem);
           }
 
           // Equipping a shield while a ranged or two-handed weapon is equipped un-equips the weapon (unless it's two-handed and the colossus trait is acquired).
@@ -113,20 +106,20 @@ export function useToggleEquipGear() {
               !get(isTraitAcquired("colossus"))) ||
             isRanged(weaponValue)
           ) {
-            reset(equippedWeapon);
+            reset(weapon);
           }
         }
 
         if (isWeapon(gearItem)) {
           if (ID === weaponValue.ID) {
-            reset(equippedWeapon);
+            reset(weapon);
           } else {
-            set(equippedWeapon, gearItem);
+            set(weapon, gearItem);
           }
 
           // Equipping a ranged or two-handed weapon while a shield is equipped un-equips the shield.
           if ((isWeaponRanged || isWeaponTwoHanded) && !isUnshielded(shieldValue)) {
-            reset(equippedShield);
+            reset(shield);
           }
         }
       },

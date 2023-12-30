@@ -4,25 +4,34 @@ import { useRecoilValue } from "recoil";
 import { SellItem } from "@neverquest/components/Caravan/Merchant/SellItem";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
-import { equippedArmor, equippedShield, equippedWeapon } from "@neverquest/state/gear";
+import { armor, shield, weapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
 import type { Armor, Shield, Weapon } from "@neverquest/types";
 import {
+  isArmor,
   isConsumableItem,
   isGearItem,
   isGemItem,
   isInheritableItem,
+  isShield,
+  isUnarmed,
+  isUnarmored,
+  isUnshielded,
 } from "@neverquest/types/type-guards";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function SellItems() {
-  const equippedArmorValue = useRecoilValue(equippedArmor);
-  const equippedShieldValue = useRecoilValue(equippedShield);
-  const equippedWeaponValue = useRecoilValue(equippedWeapon);
+  const armorValue = useRecoilValue(armor);
   const inventoryValue = useRecoilValue(inventory);
+  const shieldValue = useRecoilValue(shield);
+  const weaponValue = useRecoilValue(weapon);
 
-  const equippedGear = [equippedWeaponValue, equippedArmorValue, equippedShieldValue].filter(
-    Boolean,
+  const equippedGear = [weaponValue, armorValue, shieldValue].filter((gearItem) =>
+    isArmor(gearItem)
+      ? !isUnarmored(gearItem)
+      : isShield(gearItem)
+        ? !isUnshielded(gearItem)
+        : !isUnarmed(gearItem),
   ) as (Armor | Shield | Weapon)[];
   const equippedGearIDs = new Set(equippedGear.map(({ ID }) => ID));
   const storedItems = inventoryValue.filter((item) => !equippedGearIDs.has(item.ID));

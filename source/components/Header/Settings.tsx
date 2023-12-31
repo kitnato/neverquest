@@ -12,9 +12,9 @@ import {
 } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconDisplay } from "../IconDisplay";
 import { SettingsSwitch } from "@neverquest/components/Header/SettingsSwitch";
 import { ShowEverything } from "@neverquest/components/Header/ShowEverything";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import IconSettings from "@neverquest/icons/settings.svg?react";
 import { ownedItem } from "@neverquest/state/inventory";

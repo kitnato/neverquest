@@ -37,7 +37,7 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
   const operand = ["speed", "vigor"].includes(attribute) ? "-" : "+";
 
   return (
-    <Stack className="justify-content-center" direction="horizontal" gap={1}>
+    <Stack gap={1}>
       <IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
         <span>
           {operand}

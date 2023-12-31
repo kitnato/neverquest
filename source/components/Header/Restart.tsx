@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconDisplay } from "../IconDisplay";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import IconRestart from "@neverquest/icons/restart.svg?react";
 import IconWarning from "@neverquest/icons/warning.svg?react";

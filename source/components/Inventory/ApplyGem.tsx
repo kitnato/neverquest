@@ -1,7 +1,7 @@
 import { Dropdown, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
-import { IconDisplay } from "../IconDisplay";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_MAXIMUM } from "@neverquest/data/general";
 import { GEMS_MAXIMUM } from "@neverquest/data/items";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";

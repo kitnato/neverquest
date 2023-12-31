@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { Hatch } from "./Hatch";
+import { Hatch } from "@neverquest/components/Inventory/Inheritable/Infusion/Hatch";
 import { INFUSION_DELTA, LABEL_NO_ESSENCE, LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { useInfuse } from "@neverquest/hooks/actions/useInfuse";
 import { useAnimation } from "@neverquest/hooks/useAnimation";

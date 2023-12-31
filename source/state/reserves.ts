@@ -195,7 +195,9 @@ export const staminaMaximum = withStateKey("staminaMaximum", (key) =>
   selector({
     get: ({ get }) =>
       Math.round(
-        get(attributeStatistic("endurance")) * (1 + get(attributePowerBonus("endurance"))),
+        get(attributeStatistic("endurance")) *
+          (1 + get(attributePowerBonus("endurance"))) *
+          (1 + get(questsBonus("staminaBonus"))),
       ),
     key,
   }),

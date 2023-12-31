@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 import { useSetRecoilState } from "recoil";
 
-import { IconDisplay } from "../IconDisplay";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import IconDiscard from "@neverquest/icons/discard.svg?react";
 import { inventory } from "@neverquest/state/inventory";

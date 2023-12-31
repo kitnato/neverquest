@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 
-import { IconDisplay } from "../IconDisplay";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import manual from "@neverquest/data/manual.md?raw";
 import IconAbout from "@neverquest/icons/about.svg?react";

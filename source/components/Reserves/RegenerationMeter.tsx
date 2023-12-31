@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconDisplay } from "../IconDisplay";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
@@ -25,7 +25,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
   const isRecoveringValue = useRecoilValue(isRecovering);
 
   const { label } = RESERVES[reserve];
-  const ReserveIcon = isHealth ? IconHealth : IconStamina;
+  const Icon = isHealth ? IconHealth : IconStamina;
   const regenerationProgress =
     regenerationDurationValue === 0 ? 0 : regenerationRateValue - regenerationDurationValue;
 
@@ -47,7 +47,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
             <Stack>
               <span>{`${label} regeneration`}</span>
 
-              <IconDisplay Icon={ReserveIcon} iconProps={{ className: "small" }}>
+              <IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
                 <span>
                   {regenerationAmountValue}&nbsp;per&nbsp;
                   {formatNumber({
@@ -64,9 +64,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
           <Stack>
             {`Regenerating ${reserve}`}
 
-            <Stack direction="horizontal" gap={1}>
-              <IconDisplay Icon={ReserveIcon} iconProps={{ className: "small" }} />
-
+            <IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
               <span>
                 {regenerationAmountValue}&nbsp;in&nbsp;
                 {formatNumber({
@@ -74,7 +72,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
                   value: regenerationRateValue - regenerationProgress,
                 })}
               </span>
-            </Stack>
+            </IconDisplay>
           </Stack>
         );
       })()}

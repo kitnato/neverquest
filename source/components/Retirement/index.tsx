@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import { IconDisplay } from "../IconDisplay";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ItemsInherited } from "@neverquest/components/Retirement/ItemsInherited";
 import { ProgressReduction } from "@neverquest/components/Retirement/ProgressReduction";
 import { ResetDetails } from "@neverquest/components/Retirement/ResetDetails";

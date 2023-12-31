@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconDisplay } from "../IconDisplay";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { ELEMENTALS, GEMS } from "@neverquest/data/items";
 import { armor, elementalEffects, weapon } from "@neverquest/state/gear";

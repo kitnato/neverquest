@@ -42,18 +42,18 @@ export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
   }),
 );
 
-export const hireStatus = withStateKey("hireStatus", (key) =>
-  atomFamily<CrewStatus, Crew>({
-    default: "hidden",
-    effects: (crew) => [handleLocalStorage({ key, parameter: crew })],
-    key,
-  }),
-);
-
 export const fletcherInventory = withStateKey("fletcherInventory", (key) =>
   atom<Ranged | undefined>({
     default: undefined,
     effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
+export const hireStatus = withStateKey("hireStatus", (key) =>
+  atomFamily<CrewStatus, Crew>({
+    default: "hidden",
+    effects: (crew) => [handleLocalStorage({ key, parameter: crew })],
     key,
   }),
 );

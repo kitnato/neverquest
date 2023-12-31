@@ -1,9 +1,9 @@
 import { atom, selector } from "recoil";
 
-import { ammunition } from "./items";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { armor, shield, weapon } from "@neverquest/state/gear";
+import { ammunition } from "@neverquest/state/items";
 import { stamina } from "@neverquest/state/reserves";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isRanged } from "@neverquest/types/type-guards";

@@ -1,8 +1,8 @@
 import { Nav, NavItem, NavLink, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconDisplay } from "../IconDisplay";
 import { IconBadge } from "@neverquest/components/IconBadge";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import IconAttention from "@neverquest/icons/attention.svg?react";
 import { canCompleteQuests } from "@neverquest/state/quests";

@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { IconDisplay } from "../IconDisplay";
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { RegenerationMeter } from "@neverquest/components/Reserves/RegenerationMeter";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";

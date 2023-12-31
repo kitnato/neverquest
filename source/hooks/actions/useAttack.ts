@@ -24,6 +24,7 @@ import {
   monsterHealth,
   monsterHealthMaximum,
 } from "@neverquest/state/monster";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import {
   attackRate,
   criticalChance,
@@ -57,13 +58,12 @@ export function useAttack() {
         const monsterHealthValue = get(monsterHealth);
         const weaponValue = get(weapon);
         const isWeaponRanged = isRanged(weaponValue);
-        const criticalChanceValue = get(criticalChance);
         const hasInflictedCritical =
-          (criticalChanceValue > 0 &&
+          (get(isSkillAcquired("assassination")) &&
             isWeaponRanged &&
             get(isTraitAcquired("sharpshooter")) &&
             get(distance) > 0) ||
-          Math.random() <= criticalChanceValue;
+          Math.random() <= get(criticalChance);
 
         set(isShowing("damage"), true);
 

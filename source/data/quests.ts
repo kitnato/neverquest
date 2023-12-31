@@ -416,7 +416,7 @@ export const QUESTS: Record<
     title: "Raiden",
   },
   skills: {
-    description: "Acquire skills @ times.",
+    description: "Acquire @ skills.",
     progression: [3, 10, 25],
     title: "Future prodigy",
   },

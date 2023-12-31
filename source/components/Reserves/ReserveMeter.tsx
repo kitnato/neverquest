@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { ProgressBar, Stack } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 
-import { IconDisplay } from "../IconDisplay";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";

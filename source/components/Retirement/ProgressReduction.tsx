@@ -2,12 +2,12 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import IconProgressDiscount from "@neverquest/icons/progress-discount.svg?react";
+import IconProgressReduction from "@neverquest/icons/progress-reduction.svg?react";
 import { stageMaximum } from "@neverquest/state/encounter";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getProgressReduction } from "@neverquest/utilities/getters";
 
-export function ProgressDiscount() {
+export function ProgressReduction() {
   const stageMaximumValue = useRecoilValue(stageMaximum);
 
   return (
@@ -15,7 +15,7 @@ export function ProgressDiscount() {
       <h6>Monster density</h6>
 
       <IconDisplay
-        Icon={IconProgressDiscount}
+        Icon={IconProgressReduction}
         iconProps={{ isFlipped: true }}
         tooltip="Monster density"
       >

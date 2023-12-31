@@ -13,6 +13,6 @@ export const PROGRESS = {
 };
 
 export const PROGRESS_REDUCTION = {
-  maximum: 0.85,
+  maximum: 0.75,
   minimum: 0.3,
 };

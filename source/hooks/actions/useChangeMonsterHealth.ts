@@ -68,6 +68,7 @@ export function useChangeMonsterHealth() {
 
             case "monster": {
               progressQuest({ quest: "killing" });
+              progressQuest({ quest: "killingStage" });
               break;
             }
 

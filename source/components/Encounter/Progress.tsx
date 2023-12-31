@@ -1,19 +1,17 @@
-import { Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
+import { ProgressMeter } from "@neverquest/components/Encounter/ProgressMeter";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { LABEL_UNKNOWN, PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
+import IconProgressReduction from "@neverquest/icons/progress-reduction.svg?react";
 import IconProgress from "@neverquest/icons/progress.svg?react";
-import { location, progress, progressMaximum } from "@neverquest/state/encounter";
+import { location, progress, progressReduction } from "@neverquest/state/encounter";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Progress() {
   const locationValue = useRecoilValue(location);
-  const progressValue = useRecoilValue(progress);
-  const progressMaximumValue = useRecoilValue(progressMaximum);
+  const progressReductionValue = useRecoilValue(progressReduction);
 
   useDeltaText({
     delta: "progress",
@@ -29,29 +27,35 @@ export function Progress() {
         iconProps={{ overlayPlacement: "bottom" }}
         tooltip="Progress"
       >
-        <Stack direction="horizontal">
-          <LabelledProgressBar
-            value={
-              progressMaximumValue === Number.POSITIVE_INFINITY
-                ? PERCENTAGE_POINTS
-                : (progressValue / progressMaximumValue) * PERCENTAGE_POINTS
-            }
-            variant="secondary"
-          >
-            <Stack direction="horizontal" gap={1}>
-              <span>
-                {formatNumber({ value: progressValue })}&nbsp;/&nbsp;
-                {progressMaximumValue === Number.POSITIVE_INFINITY
-                  ? LABEL_UNKNOWN
-                  : formatNumber({
-                      value: progressMaximumValue,
-                    })}
-              </span>
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">Monster density</PopoverHeader>
 
-              <DeltasDisplay delta="progress" />
-            </Stack>
-          </LabelledProgressBar>
-        </Stack>
+              <PopoverBody>
+                <Stack className="justify-content-center" direction="horizontal" gap={1}>
+                  <IconDisplay
+                    Icon={IconProgressReduction}
+                    iconProps={{ className: "small", isFlipped: true }}
+                    tooltip="Monster density"
+                  >
+                    -
+                    {formatNumber({
+                      format: "percentage",
+                      value: progressReductionValue,
+                    })}
+                  </IconDisplay>
+                </Stack>
+              </PopoverBody>
+            </Popover>
+          }
+          placement="bottom"
+          trigger={progressReductionValue > 0 ? ["focus", "hover"] : []}
+        >
+          <div>
+            <ProgressMeter />
+          </div>
+        </OverlayTrigger>
       </IconDisplay>
     );
   }

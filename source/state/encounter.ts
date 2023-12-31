@@ -68,10 +68,11 @@ export const progressMaximum = withStateKey("progressMaximum", (key) =>
             return Number.POSITIVE_INFINITY;
           }
 
-          return Math.ceil(
+          const reducedMaximum =
             getFromRange({ factor: getSigmoid(get(stage)), maximum, minimum }) *
-              (1 - get(progressReduction)),
-          );
+            (1 - get(progressReduction));
+
+          return reducedMaximum < 1 ? 1 : Math.round(reducedMaximum);
         }
 
         case "void": {

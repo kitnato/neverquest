@@ -68,9 +68,7 @@ export function Attack() {
       overlay={
         showWarning ? (
           <Popover>
-            <PopoverHeader className="text-center">
-              <span>Low health</span>
-            </PopoverHeader>
+            <PopoverHeader className="text-center">Low health</PopoverHeader>
 
             <PopoverBody>
               <span>Retreat now!</span>

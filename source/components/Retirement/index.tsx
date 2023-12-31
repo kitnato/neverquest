@@ -12,7 +12,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { ItemsInherited } from "@neverquest/components/Retirement/ItemsInherited";
-import { ProgressDiscount } from "@neverquest/components/Retirement/ProgressDiscount";
+import { ProgressReduction } from "@neverquest/components/Retirement/ProgressReduction";
 import { ResetDetails } from "@neverquest/components/Retirement/ResetDetails";
 import { TraitSelection } from "@neverquest/components/Retirement/TraitSelection";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
@@ -58,7 +58,7 @@ export function Retirement({
 
           <ResetDetails />
 
-          <ProgressDiscount />
+          <ProgressReduction />
 
           <ItemsInherited />
 

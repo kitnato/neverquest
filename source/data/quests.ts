@@ -29,6 +29,7 @@ export const QUEST_COMPLETION_BONUS = 0.01;
 export const QUEST_REQUIREMENTS = {
   damage: 1500,
   essenceCount: 777,
+  monstersKilled: 77,
   protection: 1000,
   skillsCraft: ["armorcraft", "shieldcraft", "siegecraft"] as Skill[],
   survivingNoAttributes: 7,
@@ -279,6 +280,11 @@ export const QUESTS: Record<
     description: "Defeat the dominant being.",
     progression: [1],
     title: "Come back to reality",
+  },
+  killingStage: {
+    description: "Kill @ monsters in one stage.",
+    progression: [QUEST_REQUIREMENTS.monstersKilled],
+    title: "Monstrocide",
   },
   knapsackExpanding: {
     description: "Expand knapsack capacity by @.",

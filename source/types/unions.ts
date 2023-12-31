@@ -464,6 +464,7 @@ export const TRIUMPH_TYPES = [
   "survivingNoGear",
   "survivingNoAttributes",
   "killingOneStrike",
+  "killingStage",
   "exhausting",
   "damage",
   "protection",
